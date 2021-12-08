@@ -1,5 +1,7 @@
 # 미션 - 자판기
 
+## **[📃구현할 기능 목록](https://github.com/RunaNam/java-vendingmachine-precourse/tree/RunaNam/docs)**
+
 ## 🔍 진행방식
 
 - 미션은 **기능 요구사항, 프로그래밍 요구사항, 과제 진행 요구사항** 세 가지로 구성되어 있다.
