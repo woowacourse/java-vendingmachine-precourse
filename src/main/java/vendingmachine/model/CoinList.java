@@ -25,6 +25,7 @@ public class CoinList {
 		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_100);
 		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_50);
 		hashMap.put(Coin.COIN_10, leftMoney / Coin.COIN_10.getAmount());
+		System.out.println(this);
 	}
 
 	private int addCoinsAndReturnAddedAmount(int money, Coin coin) {
