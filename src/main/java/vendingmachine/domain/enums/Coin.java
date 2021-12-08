@@ -12,6 +12,8 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
+    public static final String PRINT_WON = "원 - ";
+
     private final int amount;
 
     public int getAmount() {
@@ -36,4 +38,8 @@ public enum Coin {
                 .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_COIN_NOT_FOUND));
     }
 
+    @Override
+    public String toString() {
+        return amount + PRINT_WON;
+    }
 }
