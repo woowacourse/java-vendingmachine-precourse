@@ -1,9 +1,17 @@
 package vendingmachine.domain;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockedStatic;
+import org.mockito.Mockito;
+import vendingmachine.domain.enums.Coin;
+
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 
 class ChangesTest {
 
@@ -29,6 +37,44 @@ class ChangesTest {
     @Test
     void insertPrice_true(){
         assertDoesNotThrow(() -> new Changes(TRUE_PRICE));
+    }
+
+    @DisplayName("성공_무작위 동전 변환")
+    @Test
+    void createRandomCoin(){
+        Changes changes = new Changes(TRUE_PRICE);
+        try (MockedStatic<Randoms> mock = Mockito.mockStatic(Randoms.class)){
+            mock.when(() -> Randoms.pickNumberInList(any()))
+                    .thenReturn(Coin.COIN_100.getAmount(), Coin.COIN_50.getAmount(), Coin.COIN_50.getAmount());
+            changes.createRandomCoins();
+        }
+
+        Map<Coin, Integer> coinMap = changes.getCoinMap();
+        SoftAssertions.assertSoftly(soft -> {
+            soft.assertThat(coinMap.get(Coin.COIN_500).equals(0));
+            soft.assertThat(coinMap.get(Coin.COIN_100).equals(1));
+            soft.assertThat(coinMap.get(Coin.COIN_50).equals(2));
+            soft.assertThat(coinMap.get(Coin.COIN_10).equals(0));
+        });
+    }
+
+    @DisplayName("성공_무작위 동전시 초과 동전 변환")
+    @Test
+    void createRandomCoin_continue(){
+        Changes changes = new Changes(TRUE_PRICE);
+        try (MockedStatic<Randoms> mock = Mockito.mockStatic(Randoms.class)){
+            mock.when(() -> Randoms.pickNumberInList(any()))
+                    .thenReturn(Coin.COIN_100.getAmount(), Coin.COIN_500.getAmount(), Coin.COIN_100.getAmount());
+            changes.createRandomCoins();
+        }
+
+        Map<Coin, Integer> coinMap = changes.getCoinMap();
+        SoftAssertions.assertSoftly(soft -> {
+            soft.assertThat(coinMap.get(Coin.COIN_500).equals(0));
+            soft.assertThat(coinMap.get(Coin.COIN_100).equals(2));
+            soft.assertThat(coinMap.get(Coin.COIN_50).equals(0));
+            soft.assertThat(coinMap.get(Coin.COIN_10).equals(0));
+        });
     }
 
 }
