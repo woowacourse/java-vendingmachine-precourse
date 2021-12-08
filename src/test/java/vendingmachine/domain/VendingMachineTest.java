@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class VendingMachineTest {
     @ParameterizedTest
     @ValueSource(strings = {"", "qwe", "1413"})
-    public void 자판기_투입금액_예외테스트 (String input) {
+    public void 자판기_투입금액_예외테스트(String input) {
         assertThatThrownBy(() -> new MachineMoney(input)).isInstanceOf(IllegalArgumentException.class);
     }
 }

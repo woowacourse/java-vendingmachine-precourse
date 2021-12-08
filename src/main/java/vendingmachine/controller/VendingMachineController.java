@@ -11,9 +11,9 @@ public class VendingMachineController {
     }
 
     private void setMachineMoney(VendingMachine vendingMachine) {
-        try{
+        try {
             vendingMachine.setMachineMoney(InputView.printSetMachineMoney());
-        }catch (IllegalArgumentException exception) {
+        } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             setMachineMoney(vendingMachine);
         }
