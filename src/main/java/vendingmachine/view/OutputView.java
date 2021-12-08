@@ -9,7 +9,7 @@ public class OutputView {
 		System.out.println(ERROR_FORM + exception.getMessage());
 	}
 
-	public static void askInputMoneyOfVendingMachine() {
+	public void askInputMoneyOfVendingMachine() {
 		System.out.println(INPUT_MONEY_MESSAGE);
 	}
 

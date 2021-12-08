@@ -7,7 +7,6 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 	public int getMoneyOfVendingMachine() {
-		askInputMoneyOfVendingMachine();
 		String input = "";
 
 		boolean isValid = false;
