@@ -18,20 +18,25 @@ public class MachineController {
 		this.service = new VendingMachineService();
 	}
 
-	public void start(){
+	public void start() {
 		// initMachineStatus();
-		createAndSaveItem();
+		// createAndSaveItem();
+		buy();
 	}
 
-	private void initMachineStatus(){
+	private void initMachineStatus() {
 		int money = inputView.enterMachineMoney();
 		service.changeMoneyToCoin(money);
 		String currentSmallChange = service.getMachineSmallChange();
 		outputView.printMachineSmallChange(currentSmallChange);
 	}
 
-	private void createAndSaveItem(){
+	private void createAndSaveItem() {
 		String itemInfo = inputView.enterItemInfo();
 		service.saveItem(itemInfo);
+	}
+
+	private void buy() {
+		String payMoney = inputView.enterPayMoney();
 	}
 }

@@ -6,7 +6,7 @@ import vendingmachine.util.Symbol;
 
 public class MoneyValidator {
 
-	public void validateMachineMoney(String input) {
+	public void validateMoney(String input) {
 		validateNumber(input);
 		validateNotMinus(input);
 		validateDivideByTen(input);

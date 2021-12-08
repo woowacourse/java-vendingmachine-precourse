@@ -19,7 +19,7 @@ public class InputView {
 			try {
 				System.out.println(ViewMessage.INPUT_MACHINE_MONEY.getMessage());
 				String input = Console.readLine();
-				moneyValidator.validateMachineMoney(input);
+				moneyValidator.validateMoney(input);
 				return Integer.parseInt(input);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -27,13 +27,25 @@ public class InputView {
 		}
 	}
 
-	public String enterItemInfo(){
+	public String enterItemInfo() {
 		while (true) {
 			try {
-				System.out.println(ViewMessage.INPUT_MACHINE_MONEY.getMessage());
+				System.out.println(ViewMessage.INPUT_ITEM_INFO.getMessage());
 				String input = Console.readLine();
 				itemInfoValidator.validateItemInfo(input);
-				System.out.println(input);
+				return input;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	public String enterPayMoney() {
+		while (true) {
+			try {
+				System.out.println(ViewMessage.INPUT_PAY_MONEY.getMessage());
+				String input = Console.readLine();
+				moneyValidator.validateMoney(input);
 				return input;
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
