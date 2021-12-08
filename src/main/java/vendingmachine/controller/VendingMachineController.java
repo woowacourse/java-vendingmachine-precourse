@@ -13,10 +13,15 @@ public class VendingMachineController {
 	private void saveBalance(String balance) {
 		try {
 			vendingMachine.setBalance(balance);
+			saveCoins();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage() + "\n");
 			startVendingMachine();
 		}
+	}
+
+	private void saveCoins() {
+		vendingMachine.setCoins();
 	}
 
 }
