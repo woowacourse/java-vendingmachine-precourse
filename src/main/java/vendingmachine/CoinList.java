@@ -18,11 +18,11 @@ public class CoinList {
 	}
 
 	public String toString() {
-		return "자판기가 보유한 동전\n" +
-			Coin.COIN_500.getAmount() + "원 - " + hashMap.get(Coin.COIN_500) + "원\n" +
-			Coin.COIN_100.getAmount() + "원 - " + hashMap.get(Coin.COIN_100) + "원\n" +
-			Coin.COIN_50.getAmount() + "원 - " + hashMap.get(Coin.COIN_50) + "원\n" +
-			Coin.COIN_10.getAmount() + "원 - " + hashMap.get(Coin.COIN_10) + "원\n";
+		return "\n자판기가 보유한 동전\n" +
+			Coin.COIN_500.getAmount() + "원 - " + hashMap.get(Coin.COIN_500) + "개\n" +
+			Coin.COIN_100.getAmount() + "원 - " + hashMap.get(Coin.COIN_100) + "개\n" +
+			Coin.COIN_50.getAmount() + "원 - " + hashMap.get(Coin.COIN_50) + "개\n" +
+			Coin.COIN_10.getAmount() + "원 - " + hashMap.get(Coin.COIN_10) + "개\n";
 	}
 
 }
