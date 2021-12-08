@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.Model;
 
 public enum Coin {
     COIN_500(500),
