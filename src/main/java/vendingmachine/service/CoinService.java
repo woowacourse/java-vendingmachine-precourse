@@ -1,4 +1,4 @@
-package vendingmachine.repository;
+package vendingmachine.service;
 
 import static vendingmachine.NumberConstant.*;
 
@@ -7,11 +7,11 @@ import java.util.Map;
 
 import vendingmachine.domain.Coin;
 
-public class CoinRepository {
+public class CoinService {
 
 	private static final Map<Coin, Integer> coinRepository = new HashMap<>();
 
-	public CoinRepository() {
+	public CoinService() {
 		if (coinRepository.isEmpty()) {
 			coinRepository.put(Coin.COIN_10, ZERO);
 			coinRepository.put(Coin.COIN_50, ZERO);
