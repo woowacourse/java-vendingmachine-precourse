@@ -65,7 +65,8 @@ public class ProductValidator {
 	private static void checkArgumentsLength(int argumentsLength) {
 		if (argumentsLength != NUMBER_OF_ARGUMENTS) {
 			throw new IllegalArgumentException(
-				"상품 정보는 " + NUMBER_OF_ARGUMENTS + "개이어야 하고, " + ARGUMENT_CRITERIA + "로 구분 지어져야 합니다.");
+				"상품 정보는 " + NUMBER_OF_ARGUMENTS + "개이어야 하고, " +
+					"\"" + ARGUMENT_CRITERIA + "\"" + "로 구분 지어져야 합니다.");
 		}
 	}
 
