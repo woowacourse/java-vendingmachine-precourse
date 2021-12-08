@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class MachineController {
     private VendingMachine vendingMachine;
 
@@ -14,8 +16,7 @@ public class MachineController {
     private int inputAmount() {
         while (true) {
             try {
-                // validation
-                return 1;
+                return Validator.validateAmount(Console.readLine());
             } catch (IllegalArgumentException e) {
                 System.out.println("invalid amount");
             }
