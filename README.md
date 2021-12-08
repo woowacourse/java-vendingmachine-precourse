@@ -1,6 +1,6 @@
 # 미션 - 자판기
 ## 🛠 기능 구현 목록
-* 자판기가 보유하고 있는 금액을 입력받는다.
+* 자판기가 보유할 금액을 입력받는다.
     * 사용자가 입력한 값은 숫자로만 이루어져야 한다.
     * 사용자가 입력한 값은 10으로 나누어 떨어져야 한다.
     * 공백이 입력되서는 안된다.
@@ -171,7 +171,7 @@ public enum Coin {
 
 ### 프로그래밍 요구사항 - Randoms, Console
 
-- JDK에서 기본 제공하는 Random, Scanner API 대신 `camp.nextstep.edu.missionutils`에서 제공하는 `Randoms`, `Console` API를 활용해 구현해야 한다.
+- JDK에서 기본 제공하는 Random, Scanner API 대신 ` `에서 제공하는 `Randoms`, `Console` API를 활용해 구현해야 한다.
    - Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
    - 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
 - 프로그램 구현을 완료했을 때 `src/test/java` 디렉터리의 `ApplicationTest`에 있는 모든 테스트 케이스가 성공해야 한다. **테스트가 실패할 경우 0점 처리한다.**
