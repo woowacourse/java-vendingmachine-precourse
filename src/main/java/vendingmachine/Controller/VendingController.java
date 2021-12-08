@@ -1,6 +1,7 @@
 package vendingmachine.Controller;
 
 import vendingmachine.View.InputView;
+import vendingmachine.View.OutputView;
 import vendingmachine.Model.*;
 
 import java.util.ArrayList;
@@ -17,7 +18,8 @@ public class VendingController {
 
     public static void start() {
         int balance = getBalanceInput();
-        Coins coins = decideCoins(balance);
+        Coins coins=decideCoins(balance);
+        OutputView.showCoins(coins);
         List<Drink> drinks = getDrinkInput();
         VendingMachine vendingMachine = new VendingMachine(balance, coins, drinks);
 
@@ -48,14 +50,19 @@ public class VendingController {
     }
 
     private static Coins decideCoins(int balance) {
+        Coins coins= new Coins();
         int coin500Num = getCoinNum(balance, "COIN_500");
         balance -= coin500Num * Coin.valueOf("COIN_500").getAmount();
+        coins.addCoin(Coin.valueOf("COIN_500"), coin500Num);
         int coin100Num = getCoinNum(balance, "COIN_100");
         balance -= coin100Num * Coin.valueOf("COIN_100").getAmount();
+        coins.addCoin(Coin.valueOf("COIN_100"), coin100Num);
         int coin50Num = getCoinNum(balance, "COIN_50");
         balance -= coin50Num * Coin.valueOf("COIN_50").getAmount();
+        coins.addCoin(Coin.valueOf("COIN_50"), coin50Num);
         int coin10Num = getCoinNum(balance, "COIN_10");
-        return new Coins(coin500Num, coin100Num, coin50Num, coin10Num);
+        coins.addCoin(Coin.valueOf("COIN_10"), coin10Num);
+        return coins;
     }
 
     private static int getCoinNum(int balance, String coin) {

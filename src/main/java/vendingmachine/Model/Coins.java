@@ -1,15 +1,21 @@
 package vendingmachine.Model;
 
-public class Coins {
-    private static int coin500Num;
-    private static int coin100Num;
-    private static int coin50Num;
-    private static int coin10Num;
+import java.util.ArrayList;
+import java.util.List;
 
-    public Coins(int coin500Num, int coin100Num, int coin50Num, int coin10Num){
-        this.coin500Num=coin500Num;
-        this.coin100Num=coin100Num;
-        this.coin50Num=coin50Num;
-        this.coin10Num=coin10Num;
+public class Coins {
+    private static List<CoinPair> coins;
+
+    public Coins(){
+        coins=new ArrayList<>();
+    }
+
+    public static void addCoin(Coin coin, int number){
+        System.out.println(coin+" - "+number); //여기까진 잘되는데...
+        coins.add(new CoinPair(coin, number));
+    }
+
+    public static List<CoinPair> getCoins(){
+        return coins;
     }
 }

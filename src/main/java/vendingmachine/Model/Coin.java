@@ -13,7 +13,7 @@ public enum Coin {
     }
 
     public int getAmount(){
-        return amount;
+        return this.amount;
     }
 
     // 추가 기능 구현
