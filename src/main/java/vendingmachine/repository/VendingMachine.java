@@ -1,6 +1,5 @@
 package vendingmachine.repository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -10,12 +9,12 @@ import vendingmachine.util.Symbol;
 
 public class VendingMachine {
 	private final HashMap<Coin, Integer> coins;
-	private final ArrayList<Item> items;
+	private final HashMap<String,Item> items;
 
 	public VendingMachine(List<Integer> coin) {
 		this.coins = new HashMap<>();
 		initCoins(coin);
-		this.items = new ArrayList<>();
+		this.items = new HashMap<>();
 	}
 
 	private void initCoins(List<Integer> coin) {
@@ -36,16 +35,26 @@ public class VendingMachine {
 		return builder.toString();
 	}
 
-	public void addItem(Item item) {
-		items.add(item);
+	public void addItem(String itemName,Item item) {
+		items.put(itemName,item);
 	}
 
 	public int getMinItemPrice() {
-		return items.stream().mapToInt(i -> i.getPrice()).min().getAsInt();
+		return items.values().stream().mapToInt(i -> i.getPrice()).min().getAsInt();
 	}
 
+	public void printItems(){
+		for (Item item : items.values()) {
+			System.out.println(item);
+		}
+	}
+
+	// public boolean isItemSoldOut(String itemName){
+	// 	for(Item item)
+	// }
+
 	public boolean isAllItemSoldOut() {
-		for (Item item : items) {
+		for (Item item : items.values()) {
 			if(!item.isSoldOut()){
 				return false;
 			}
