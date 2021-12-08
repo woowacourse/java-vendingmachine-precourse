@@ -31,7 +31,8 @@ public class ProductValidator {
 
 	private static void checkProductInputForm(String product) {
 		checkBracketExistAndValid(product);
-		checkProductArguments(product);
+		String bracketRemovedInput = removeBracket(product);
+		checkProductArguments(bracketRemovedInput);
 	}
 
 	private static void checkBracketExistAndValid(String product) {
@@ -39,6 +40,11 @@ public class ProductValidator {
 			throw new IllegalArgumentException(
 				"각 상품은" + OPENING_BRACKET + CLOSING_BRACKET + "으로 감싸져야 합니다.");
 		}
+	}
+
+	private static String removeBracket(String product) {
+		return product.replace(OPENING_BRACKET, "")
+			.replace(CLOSING_BRACKET, "");
 	}
 
 	private static void checkProductArguments(String product) {
