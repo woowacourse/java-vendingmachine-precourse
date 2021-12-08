@@ -23,7 +23,10 @@ public class Beverages {
     public void addBeverage(String input) {
         String[] eachBeverageInput = input.split(";");
         for (int i = 0; i < eachBeverageInput.length; i++) {
-            beverageList.add(createBeverage(eachBeverageInput[i]));
+            Beverage beverage = createBeverage(eachBeverageInput[i]);
+            isBeverageDuplicate(beverage);
+            beverageList.add(beverage);
+
         }
     }
 
@@ -52,5 +55,9 @@ public class Beverages {
         return new Beverage(beverageInput[PRODUCT_NAME_IDX], price, count);
     }
 
-
+    private void isBeverageDuplicate(Beverage beverage) {
+        if(beverageList.contains(beverage)){
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_BEVERAGE_DUPLICATE);
+        }
+    }
 }
