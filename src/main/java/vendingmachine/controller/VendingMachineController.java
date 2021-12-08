@@ -2,8 +2,10 @@ package vendingmachine.controller;
 
 import static vendingmachine.view.InputView.*;
 
+import vendingmachine.domain.VendingMachine;
+
 public class VendingMachineController {
 	public void run() {
-		int holdingAmountMoney = inputHoldingAmountMoney();
+		VendingMachine vendingMachine = new VendingMachine(inputHoldingAmountMoney());
 	}
 }
