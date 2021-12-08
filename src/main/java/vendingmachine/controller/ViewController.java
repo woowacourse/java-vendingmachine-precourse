@@ -13,4 +13,9 @@ public class ViewController {
 		return inputView.getMoneyOfVendingMachine();
 	}
 
+	public String returnProductList() {
+		outputView.askProductInfo();
+		return inputView.getProductsInput();
+	}
+
 }
