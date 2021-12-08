@@ -2,16 +2,16 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.util.ViewMessage;
-import vendingmachine.util.validator.ItemInfoValidator;
+import vendingmachine.util.validator.ItemValidator;
 import vendingmachine.util.validator.MoneyValidator;
 
 public class InputView {
 	private final MoneyValidator moneyValidator;
-	private final ItemInfoValidator itemInfoValidator;
+	private final ItemValidator itemValidator;
 
 	public InputView() {
 		this.moneyValidator = new MoneyValidator();
-		this.itemInfoValidator = new ItemInfoValidator();
+		this.itemValidator = new ItemValidator();
 	}
 
 	public int enterMachineMoney() {
@@ -32,7 +32,7 @@ public class InputView {
 			try {
 				System.out.println(ViewMessage.INPUT_ITEM_INFO.getMessage());
 				String input = Console.readLine();
-				itemInfoValidator.validateItemInfo(input);
+				itemValidator.validateItemInfo(input);
 				return input;
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -46,6 +46,19 @@ public class InputView {
 				System.out.println(ViewMessage.INPUT_PAY_MONEY.getMessage());
 				String input = Console.readLine();
 				moneyValidator.validateMoney(input);
+				return input;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	public String enterItemToBuy() {
+		while (true) {
+			try {
+				System.out.println(ViewMessage.INPUT_ITEM_TO_BUY.getMessage());
+				String input = Console.readLine();
+				itemValidator.validateItemName(input);
 				return input;
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());

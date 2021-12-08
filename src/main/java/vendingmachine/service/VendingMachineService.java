@@ -42,13 +42,14 @@ public class VendingMachineService {
 			.forEach(s -> vendingMachine.addItem(new Item(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]))));
 	}
 
-	public int getMinItemPrice() {
-		return vendingMachine.getMinItemPrice();
+	public boolean canBuyAnything(int payMoney){
+		if(payMoney < vendingMachine.getMinItemPrice() || vendingMachine.isAllItemSoldOut()){
+			return false;
+		}
+		return true;
 	}
 
-	public boolean judgeSoldOut() {
-		return vendingMachine.isAllItemSoldOut();
-	}
+
 
 	private String[] decodeInput(String itemInfo) {
 		itemInfo = itemInfo.replaceAll(Symbol.OPEN_BRACES, Symbol.NULL);
