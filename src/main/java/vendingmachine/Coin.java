@@ -14,6 +14,10 @@ public enum Coin {
         this.count = 0;
     }
 
+    Coin(final int amount, int count) {
+        this.amount = amount;
+        this.count = count;
+    }
     // 추가 기능 구현
     public int getValue() {
         return amount;
@@ -24,5 +28,9 @@ public enum Coin {
 
     public int getCount() {
         return count;
+    }
+
+    public void subCount() {
+        count--;
     }
 }

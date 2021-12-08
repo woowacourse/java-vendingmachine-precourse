@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.Randoms.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class VendingMachine {
@@ -18,7 +19,7 @@ public class VendingMachine {
 		return pickNumberInList(coins);
 	}
 
-	public static List<Coin> generateRemainCoins(int remains) {
+	public void generateRemainCoins(int remains) {
 		List<Coin> coinList = Arrays.asList(Coin.values());
 		while (remains != 0) {
 			int newCoin = generateRandomCoin();
@@ -28,7 +29,7 @@ public class VendingMachine {
 			remains -= newCoin;
 			addCountInCoins(coinList, newCoin);
 		}
-		return coinList;
+		this.coins = coinList;
 	}
 
 	public static void addCountInCoins(List<Coin> coinList, int coinValue) {
@@ -46,5 +47,38 @@ public class VendingMachine {
 
 	public static boolean canNotBuyAnything(UserMoney userMoney, Items items) {
 		return userMoney.getMoney() < items.minPrice() || items.allOutOfStock();
+	}
+
+	public HashMap<Integer, Integer> returnChange(UserMoney userMoney) {
+		HashMap<Integer, Integer> change = new HashMap<>();
+		int coinCount;
+		for (Coin coin : this.coins) {
+			System.out.println(coin.getValue());
+			coinCount = 0;
+			while (coin.getCount() > 0) {
+				if (userMoney.getMoney() >= coin.getValue()) {
+					userMoney.subtractUserMoney(coin.getValue());
+					coin.subCount();
+					coinCount++;
+				} else {
+					break;
+				}
+			}
+			change.put(coin.getValue(), coinCount);
+		}
+		return change;
+	}
+
+	public static void main(String[] args) {
+		VendingMachine machine = new VendingMachine();
+		machine.generateRemainCoins(3000);
+		System.out.println(machine.coins.get(0).getCount());
+		System.out.println(machine.coins.get(1).getCount());
+		System.out.println(machine.coins.get(2).getCount());
+		System.out.println(machine.coins.get(3).getCount());
+		UserMoney userMoney = new UserMoney(1200);
+		HashMap<Integer, Integer> change;
+		change = machine.returnChange(userMoney);
+		System.out.println(change.entrySet());
 	}
 }
