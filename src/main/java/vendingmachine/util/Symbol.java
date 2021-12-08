@@ -8,4 +8,6 @@ public class Symbol {
 	public static final String COLON_SPACE = ": ";
 	public static final String HYPHEN_SPACE = " - ";
 
+	public static final String WON = "원";
+	public static final String COUNT = "개";
 }

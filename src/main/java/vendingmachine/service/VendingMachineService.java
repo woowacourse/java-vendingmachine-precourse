@@ -17,7 +17,7 @@ public class VendingMachineService {
 	private final VendingMachine vendingMachine;
 
 	public VendingMachineService() {
-		this.vendingMachine = new VendingMachine();
+		this.vendingMachine = new VendingMachine(coin_kind);
 	}
 
 	public void changeMoneyToCoin(int money) {
@@ -29,6 +29,11 @@ public class VendingMachineService {
 			}
 		}
 	}
+
+	public String getMachineSmallChange() {
+		return vendingMachine.currentSmallChange();
+	}
+
 
 	private boolean canChange(int money, int coin) {
 		if (money - coin >= ZERO) {
