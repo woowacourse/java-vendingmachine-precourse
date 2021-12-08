@@ -34,11 +34,12 @@ public class VendingMachineController {
 			Item item = inputService.readItemName(money);
 			item.subtractStockQuantity();
 			money = item.subtractMoneyAfterPurchase(money);
+			outputService.enter();
 		} while (!satisfyExitCondition());
 	}
 
 	private boolean satisfyExitCondition() {
-		if (money < itemService.getMinPrice() || itemService.isAllItemsOutOfStock()) {
+		if (money < itemService.getMinPrice() || !itemService.isAllItemsOutOfStock()) {
 			return true;
 		}
 
