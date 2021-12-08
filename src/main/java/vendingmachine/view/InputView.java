@@ -1,11 +1,13 @@
 package vendingmachine.view;
 
 import static vendingmachine.validator.MoneyValidator.*;
+import static vendingmachine.view.OutputView.*;
 
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 	public int getMoneyOfVendingMachine() {
+		askInputMoneyOfVendingMachine();
 		String input = "";
 
 		boolean isValid = false;
@@ -14,7 +16,7 @@ public class InputView {
 			try {
 				isValid = isValidMoney(input);
 			} catch (IllegalArgumentException exception) {
-				// TODO: 2021/12/08 에러 메시지 출력
+				printError(exception);
 			}
 		}
 
