@@ -7,11 +7,24 @@ public class InputFirstMoneyView implements View {
 	@Override
 	public void show() {
 		System.out.println(SystemMessage.INPUT_FIRST_MONEY);
-		int firstMoney = readFirstMoney();
+		int firstMoney;
+		try {
+			firstMoney = readFirstMoney();
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			show();
+			return;
+		}
 	}
 
 	private int readFirstMoney() {
 		String firstMoneyStr = Console.readLine();
-		return Integer.parseInt(firstMoneyStr);
+		int firstMoney;
+		try {
+			firstMoney = Integer.parseInt(firstMoneyStr);
+		} catch (Exception e) {
+			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_INTEGER);
+		}
+		return firstMoney;
 	}
 }
