@@ -3,13 +3,8 @@ package vendingmachine;
 import static camp.nextstep.edu.missionutils.Randoms.*;
 import static vendingmachine.Coin.*;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Random;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum RandomBox {
 	RANDOM_COIN_BOX;

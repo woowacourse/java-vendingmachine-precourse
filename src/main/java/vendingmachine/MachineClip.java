@@ -27,6 +27,22 @@ public enum MachineClip {
 		}
 	}
 
+	public void getChange(int amount){
+		for (int key : numOfCoins.keySet()) {
+			if(amount>0 && amount > key){
+				int c = amount/key;
+				if(c > numOfCoins.get(key)){
+					amount -= key*numOfCoins.get(key);
+					System.out.println(key +"원 - " + numOfCoins.get(key) +"개");
+					numOfCoins.put(key, 0);
+					continue;
+				}
+				amount -= c*key;
+				numOfCoins.put(key, numOfCoins.get(key)-c);
+				System.out.println(key +"원 - " + c +"개");
+			}
+		}
+	}
 
 	@Override
 	public String toString() {
