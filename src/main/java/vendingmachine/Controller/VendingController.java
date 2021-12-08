@@ -13,18 +13,38 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class VendingController {
 
     private static InputView inputView;
+    private static VendingMachine vendingMachine;
+    private static User user;
 
     public VendingController(InputView inputView) {
         this.inputView = inputView;
     }
 
     public static void start() {
+        setVendingMachine();
+        setUser();
+        while(!isEnd()){
+                
+        }
+    }
+
+    private static boolean isEnd(){
+        if(vendingMachine.isSoldOut() || !user.isBuyable(vendingMachine.getMinimumPrice())){
+            return false;
+        }
+        return true;
+    }
+
+    private static void setVendingMachine(){
         int balance = getBalanceInput();
         Coins coins=decideCoins(balance);
         OutputView.showCoins(coins);
         List<Drink> drinks = getDrinkInput();
-        VendingMachine vendingMachine = new VendingMachine(balance, coins, drinks);
-        User user=new User(getUserMoneyInput());
+        vendingMachine = new VendingMachine(balance, coins, drinks);
+    }
+
+    private static void setUser(){
+        user=new User(getUserMoneyInput());
     }
 
     private static int getUserMoneyInput(){

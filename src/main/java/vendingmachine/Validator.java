@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import vendingmachine.Model.VendingMachine;
+
 public class Validator {
 
     public static boolean isValidateMoney(String input) {
@@ -124,4 +126,15 @@ public class Validator {
         return true;
     }
 
+    public static boolean isValidateChoice(String input, VendingMachine vendingMachine){
+        try{
+            if(vendingMachine.isDrinkInList(input)){
+                throw new IllegalArgumentException();
+            }
+        } catch (IllegalArgumentException e){
+            System.out.println("존재하지 없는 상품입니다.");
+            return false;
+        }
+        return true;
+    }
 }

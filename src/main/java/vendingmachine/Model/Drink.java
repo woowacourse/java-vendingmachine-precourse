@@ -10,4 +10,19 @@ public class Drink {
         this.price=price;
         this.stock=stock;
     }
+
+    public int isSameDrink(String drinkName){
+        if(drinkName.equals(name)){
+            return 1;
+        }
+        return 0;
+    }
+
+    public int getPrice(){
+        return price;
+    }
+
+    public int getStock(){
+        return stock;
+    }
 }
