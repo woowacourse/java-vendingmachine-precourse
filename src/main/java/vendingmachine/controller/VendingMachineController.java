@@ -22,10 +22,12 @@ public class VendingMachineController {
         OutputView.printVendingMachineChanges(vendingMachine);
         OutputView.breakLine();
         requestBeverageInfo();
+        OutputView.breakLine();
         requestInsertMoney();
-
+        OutputView.breakLine();
         while (checker == VendingMachineChecker.OPEN) {
             checker = requestInsertBuyBeverageName(checker);
+            OutputView.breakLine();
         }
         OutputView.printInsertMoney(vendingMachine);
         OutputView.printVendingMachineReturnChanges(vendingMachine);
@@ -40,8 +42,6 @@ public class VendingMachineController {
             OutputView.breakLine();
             OutputView.printSystemMessage(e.getMessage());
             return requestInsertBuyBeverageName(checker);
-        } finally {
-            OutputView.breakLine();
         }
         return checker;
     }
@@ -54,8 +54,6 @@ public class VendingMachineController {
             OutputView.breakLine();
             OutputView.printSystemMessage(e.getMessage());
             requestInsertMoney();
-        } finally {
-            OutputView.breakLine();
         }
     }
 
@@ -67,8 +65,6 @@ public class VendingMachineController {
             OutputView.breakLine();
             OutputView.printSystemMessage(e.getMessage());
             requestBeverageInfo();
-        } finally {
-            OutputView.breakLine();
         }
     }
 
@@ -80,8 +76,6 @@ public class VendingMachineController {
             OutputView.breakLine();
             OutputView.printSystemMessage(e.getMessage());
             requestVendingMachineChange();
-        } finally {
-            OutputView.breakLine();
         }
     }
 }

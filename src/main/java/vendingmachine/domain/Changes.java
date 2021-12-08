@@ -50,17 +50,28 @@ public class Changes {
     private Map<Coin, Integer> calculateChanges(int money, Map<Coin, Integer> restChanges, List<Coin> restCoins) {
         Map<Coin, Integer> calChangeMap = new TreeMap<>();
         for (Coin coin : restCoins) {
-            int tempCount = money / coin.getAmount();
-            if(tempCount > restChanges.get(coin)) {
-                tempCount = restChanges.get(coin);
-            }
-            money -= tempCount * coin.getAmount();
-            calChangeMap.put(coin, tempCount);
+            int tempQuotient = getTempQuotientCompareWithRestChanges(restChanges, money, coin);
+            money -= tempQuotient * coin.getAmount();
+            putQuotientOnMap(calChangeMap, coin, tempQuotient);
             if(money == DEFAULT_VALUE){
                 return calChangeMap;
             }
         }
         return calChangeMap;
+    }
+
+    private void putQuotientOnMap(Map<Coin, Integer> calChangeMap, Coin coin, int tempQuotient) {
+        if(tempQuotient != DEFAULT_VALUE){
+            calChangeMap.put(coin, tempQuotient);
+        }
+    }
+
+    private int getTempQuotientCompareWithRestChanges(Map<Coin, Integer> restChanges, int money, Coin coin) {
+        int tempQuotient = money / coin.getAmount();
+        if(tempQuotient > restChanges.get(coin)) {
+            tempQuotient = restChanges.get(coin);
+        }
+        return tempQuotient;
     }
 
     private Map<Coin, Integer> getRestChanges(){
