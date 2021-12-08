@@ -2,6 +2,12 @@ package vendingmachine.validator;
 
 public class MoneyValidator {
 
+	public static boolean isValidDeposit(String input) {
+		checkNumber(input);
+
+		return true;
+	}
+
 	public static boolean isValidMoney(String input) {
 		checkNumber(input);
 

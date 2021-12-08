@@ -23,6 +23,22 @@ public class InputView {
 		return Integer.parseInt(input);
 	}
 
+	public int getDepositInput() {
+		String input = "";
+
+		boolean isValid = false;
+		while (!isValid) {
+			input = readLine();
+			try {
+				isValid = isValidDeposit(input);
+			} catch (IllegalArgumentException exception) {
+				printError(exception);
+			}
+		}
+
+		return Integer.parseInt(input);
+	}
+
 	public String getProductsInput() {
 		String input = "";
 
