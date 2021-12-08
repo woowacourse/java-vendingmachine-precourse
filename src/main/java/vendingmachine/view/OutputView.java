@@ -22,7 +22,7 @@ public class OutputView {
 	}
 
 	public void askDepositAmount() {
-		System.out.println(ASK_DEPOSIT_AMOUNT_MESSAGE);
+		System.out.println("\n" + ASK_DEPOSIT_AMOUNT_MESSAGE);
 	}
 
 	public void printRemainingDeposit(int deposit) {
