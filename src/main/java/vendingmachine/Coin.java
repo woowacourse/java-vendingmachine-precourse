@@ -17,19 +17,36 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public void setCoinCountRandom(int amount){
+    public int setCoinCount(int amount){
+        if(this.amount>10){
+            return setCoinCountRandom(amount);
+        }
+        return setCoin10Count(amount);
+    }
+
+    private int setCoinCountRandom(int amount){
         List<Integer> numberList=new ArrayList<Integer>();
         int maxNumber=amount/this.amount;
-
         for(int i=0;i<maxNumber;++i){
             numberList.add(i);
         }
 
         int number=pickNumberInList(numberList);
         setCoinCountAs(number);
+
+        return getLeftAmount(amount);
     }
 
-    public void setCoinCountAs(int number) {
+    private int setCoin10Count(int amount){
+        this.number=amount/10;
+    }
+
+    private int getLeftAmount(int amount){
+        int leftAmount=amount-this.amount*this.number;
+        return leftAmount;
+    }
+
+    private void setCoinCountAs(int number) {
         this.number = number;
     }
 
@@ -41,5 +58,17 @@ public enum Coin {
         int maxCount = amount / this.amount;
         if (maxCount > this.number) maxCount = this.number;
         return maxCount;
+    }
+
+    public void printCoinInfo(){
+        System.out.println(this.amount+"원 - "+this.number+"개");
+    }
+
+    public int getAmount(){
+        return this.amount;
+    }
+
+    public int getNumber(){
+        return this.number;
     }
 }

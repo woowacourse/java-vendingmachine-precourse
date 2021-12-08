@@ -9,11 +9,10 @@ public class Machine {
 
     public Machine() {}
 
-
-
-    public void setHeldAmountInMachine() {
+    public void setCoinsInMachine() {
         int heldAmount=getHeldAmountInMachine();
-
+        makeCoins(heldAmount);
+        printCoins();
     }
 
     private int getHeldAmountInMachine(){
@@ -30,4 +29,15 @@ public class Machine {
         }
     }
 
+    private void makeCoins(int heldAmount){
+        for (Coin c:coins){
+            heldAmount=c.setCoinCount(heldAmount);
+        }
+    }
+
+    private void printCoins(){
+        for(Coin c:coins){
+            c.printCoinInfo();
+        }
+    }
 }
