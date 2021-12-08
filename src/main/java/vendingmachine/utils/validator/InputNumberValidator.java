@@ -7,9 +7,9 @@ public class InputNumberValidator {
     public static final int RESULT = 0;
 
     public static int validateInput(String input) {
-        int change = isNumber(input);
-        isDivideByTen(change);
-        return change;
+        int inputValue = isNumber(input);
+        isDivideByTen(inputValue);
+        return inputValue;
     }
 
     private static void isDivideByTen(int change) {
