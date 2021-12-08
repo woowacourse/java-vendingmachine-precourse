@@ -16,7 +16,7 @@ public class Verification {
 
 		int money = Integer.parseInt(input);
 
-		if (money % TEN != ZERO) {
+		if (money <= ZERO || money % TEN != ZERO) {
 			throw new IllegalArgumentException(NOT_MULTIPLE_OF_TEN_ERROR);
 		}
 
