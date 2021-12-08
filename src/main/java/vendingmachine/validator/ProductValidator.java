@@ -98,6 +98,10 @@ public class ProductValidator {
 				throw new IllegalArgumentException("상품 수량은 자연수만 허용됩니다.");
 			}
 		}
+
+		if (Integer.parseInt(numberOfProducts) == 0) {
+			throw new IllegalArgumentException("상품 수량은 1개 이상이어야합니다.");
+		}
 	}
 
 }
