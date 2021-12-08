@@ -11,6 +11,9 @@ public class VendingMachine {
 	private List<Coin> coins;
 	private Items items;
 
+	public List<Coin> getCoins() {
+		return this.coins;
+	}
 	public static int generateRandomCoin() {
 		List<Integer> coins = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
