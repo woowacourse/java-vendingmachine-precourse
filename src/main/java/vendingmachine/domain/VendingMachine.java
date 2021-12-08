@@ -1,9 +1,11 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.validator.BeverageValidator;
+import vendingmachine.utils.validator.ChangesValidator;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import static vendingmachine.utils.validator.BeverageValidator.validateInput;
 
 public class VendingMachine {
     private static final int PRODUCT_NAME_IDX = 0;
@@ -26,6 +28,12 @@ public class VendingMachine {
         return money;
     }
 
+    public void createChanges(String input){
+        int totalChanges = ChangesValidator.validateChange(input);
+        changes = new Changes(totalChanges);
+        changes.createRandomCoins();
+    }
+
     public void addBeverage(String input){
         String[] eachBeverageInput = input.split(";");
         for(int i = 0 ; i < eachBeverageInput.length; i++){
@@ -34,7 +42,7 @@ public class VendingMachine {
     }
 
     private Beverage createBeverage(String eachBeverage) {
-        String[] beverageInput = validateInput(eachBeverage);
+        String[] beverageInput = BeverageValidator.validateInput(eachBeverage);
         int price = Integer.parseInt(beverageInput[PRICE_IDX]);
         int count = Integer.parseInt(beverageInput[COUNT_IDX]);
         return new Beverage(beverageInput[PRODUCT_NAME_IDX], price, count);

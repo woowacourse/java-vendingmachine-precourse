@@ -5,8 +5,6 @@ import vendingmachine.domain.enums.Coin;
 
 import java.util.*;
 
-import static vendingmachine.utils.validator.ChangesValidator.validateChange;
-
 class Changes {
     private final static int DEFAULT_VALUE = 0;
     private final static int ADD_VALUE = 1;
@@ -14,10 +12,9 @@ class Changes {
     private Map<Coin, Integer> coinMap = new HashMap<>();
     private int totalChange;
 
-    public Changes(String input) {
-        this.totalChange = validateChange(input);
+     public Changes(int totalChange) {
+        this.totalChange = totalChange;
         initCoinMap();
-
     }
 
     public void createRandomCoins(){
