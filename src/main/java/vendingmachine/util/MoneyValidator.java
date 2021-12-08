@@ -6,6 +6,8 @@ public class MoneyValidator {
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_INTEGER);
 
 		int result = Integer.parseInt(moneyStr);
+		if(!isPositive(result))
+			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_POSITIVE);
 
 		return result;
 	}
@@ -18,5 +20,9 @@ public class MoneyValidator {
 		}
 
 		return true;
+	}
+
+	private static boolean isPositive(int number) {
+		return number > 0;
 	}
 }
