@@ -67,7 +67,7 @@ class BeverageTest extends DomainTest {
                 vendingMachine.addBeverage("[콜라,1000,0]"));
     }
 
-    @DisplayName("음료 생성 성공")
+    @DisplayName("성공_음료 생성")
     @Test
     void createBeverage_true() {
         vendingMachine.addBeverage("[콜라,1000,1]");
@@ -80,22 +80,39 @@ class BeverageTest extends DomainTest {
         });
     }
 
-    @DisplayName("음료 개수 감소 성공")
+    @DisplayName("성공_음료 개수 감소")
     @Test
     void sellBeverage_true() {
         vendingMachine.addBeverage("[콜라,1000,1]");
         Beverage beverage = vendingMachine.getBeverages().get(0);
 
-        beverage.reduceCount(1);
+        beverage.reduceCount();
         assertThat(beverage.getCount()).isEqualTo(0);
     }
 
-    @DisplayName("음료 개수 감소 실패")
+    @DisplayName("성공_음료수 찾기")
     @Test
-    void sellBeverage_false() {
+    void findBeverage_true() {
         vendingMachine.addBeverage("[콜라,1000,1]");
-        Beverage beverage = vendingMachine.getBeverages().get(0);
-        assertThrows(IllegalArgumentException.class, () -> beverage.reduceCount(2));
+        Beverage beverage = vendingMachine.getBeverageByName("콜라");
+
+        assertThat(beverage.getProductName()).isEqualTo("콜라");
+    }
+
+    @DisplayName("실패_음료수 찾기")
+    @Test
+    void findBeverage_false() {
+        vendingMachine.addBeverage("[콜라,1000,1]");
+        assertThrows(IllegalArgumentException.class, () -> vendingMachine.getBeverageByName("사이다"));
+    }
+
+    @DisplayName("성공_음료수 목록에서 제거")
+    @Test
+    void removeBeverage_true() {
+        vendingMachine.addBeverage("[콜라,1000,1]");
+        vendingMachine.removeBeverage(vendingMachine.getBeverageByName("콜라"));
+
+        assertThat(vendingMachine.getBeverages().size()).isEqualTo(0);
     }
 
 }
