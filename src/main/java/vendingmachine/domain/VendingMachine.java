@@ -6,4 +6,8 @@ public class VendingMachine {
 	public VendingMachine(int money) {
 		coinStore = new CoinStore(money);
 	}
+
+	public String getHoldingAmountCoins() {
+		return coinStore.toString();
+	}
 }
