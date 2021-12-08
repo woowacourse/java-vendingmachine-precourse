@@ -12,16 +12,16 @@ class Changes {
     private Map<Coin, Integer> coinMap = new HashMap<>();
     private int totalChange;
 
-     public Changes(int totalChange) {
+    public Changes(int totalChange) {
         this.totalChange = totalChange;
         initCoinMap();
     }
 
-    public void createRandomCoins(){
+    public void createRandomCoins() {
         int tempChange = 0;
-        while (tempChange != totalChange){
+        while (tempChange != totalChange) {
             int randomCoin = Randoms.pickNumberInList(Coin.getCoinAmountList());
-            if(!isRandomCoinUnderTotalChange(tempChange, randomCoin)){
+            if (!isRandomCoinUnderTotalChange(tempChange, randomCoin)) {
                 continue;
             }
             tempChange += randomCoin;
