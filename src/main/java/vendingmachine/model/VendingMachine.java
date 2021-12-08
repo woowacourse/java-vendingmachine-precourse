@@ -24,4 +24,8 @@ public class VendingMachine {
 	public void setCoins() {
 		this.coins = new CoinController().setCoinsByBalance(balance);
 	}
+
+	public Map<Coin, Integer> getCoins() {
+		return coins;
+	}
 }

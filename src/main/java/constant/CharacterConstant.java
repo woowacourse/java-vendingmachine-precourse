@@ -6,6 +6,8 @@ public class CharacterConstant {
 
 	public static String PRODUCT_WRAPPER_LEFT = "[";
 	public static String PRODUCT_WRAPPER_RIGHT = "]";
-	public static String COIN_AMOUNT_CONNECTION = "-";
+	public static String COIN_AMOUNT_CONNECTION = " - ";
+
+	public static String LINE_STAMP = "\n";
 
 }

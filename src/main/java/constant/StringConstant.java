@@ -9,5 +9,9 @@ public class StringConstant {
 	public static String PRICE_NOT_COIN_VALUE = "금액은 10원으로 나누어 떨어져야 합니다.";
 
 	public static String COIN_ENUM_PREFIX = "COIN_";
+	public static String PRICE_UNIT = "원";
+	public static String COIN_QUANTITY_UNIT = "개";
+
+	public static String COIN_CONTAIN_MESSAGE = "자판기가 보유한 동전";
 }
 
