@@ -8,7 +8,7 @@ import vendingmachine.validator.NumberValidator;
 public class InputView {
 	public static int getVendingMachineMoney() {
 		while (true) {
-			System.out.println(VENDING_MACHINE_MONEY_MESSAGE);
+			System.out.println(VENDING_MACHINE_MONEY_INPUT_MESSAGE);
 			String inputMachineMoney = Console.readLine();
 			try {
 				NumberValidator.checkNumber(inputMachineMoney);

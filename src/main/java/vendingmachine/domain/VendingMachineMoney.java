@@ -2,8 +2,8 @@ package vendingmachine.domain;
 
 import static constants.VendingMachineConstants.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -29,5 +29,9 @@ public class VendingMachineMoney {
 				coins.get(idx).increaseCount();
 			}
 		}
+	}
+
+	public List<Coin> getCoins() {
+		return Collections.unmodifiableList(coins);
 	}
 }

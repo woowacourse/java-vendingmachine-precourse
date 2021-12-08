@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static constants.VendingMachineConstants.*;
+
 public enum Coin {
 	COIN_500(500, 0),
 	COIN_100(100, 0),
@@ -16,5 +18,10 @@ public enum Coin {
 
 	public void increaseCount() {
 		count++;
+	}
+
+	@Override
+	public String toString() {
+		return amount + KOR_MONETARY_UNIT + DASH_WITH_SPACE + count + KOR_ITEM_UNIT;
 	}
 }
