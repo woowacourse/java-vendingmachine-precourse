@@ -25,4 +25,9 @@ public enum Coin {
     public void plusCoin() {
         this.counts++;
     }
+
+    @Override
+    public String toString() {
+        return amount + "원 - " + counts + "개";
+    }
 }
