@@ -5,7 +5,9 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Item;
 import vendingmachine.repository.VendingMachine;
+import vendingmachine.util.Symbol;
 
 public class VendingMachineService {
 	private static final int ZERO = 0;
@@ -34,6 +36,18 @@ public class VendingMachineService {
 		return vendingMachine.currentSmallChange();
 	}
 
+	public void saveItem(String itemInfo) {
+		List<String> listOfInfo = Arrays.asList(decodeInput(itemInfo));
+		listOfInfo.stream().map(s -> s.split(","))
+			.forEach(s -> vendingMachine.addItem(new Item(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]))));
+		vendingMachine.printItems();
+	}
+
+	private String[] decodeInput(String itemInfo) {
+		itemInfo = itemInfo.replaceAll(Symbol.OPEN_BRACES, Symbol.NULL);
+		itemInfo = itemInfo.replaceAll(Symbol.CLOSE_BRACES, Symbol.NULL);
+		return itemInfo.split(";");
+	}
 
 	private boolean canChange(int money, int coin) {
 		if (money - coin >= ZERO) {

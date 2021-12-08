@@ -30,6 +30,12 @@ public class VendingMachine {
 		items.add(item);
 	}
 
+	public void printItems(){
+		for(Item item : items){
+			System.out.print(item.getItemInfo());;
+		}
+	}
+
 	public String currentSmallChange() {
 		StringBuilder builder = new StringBuilder();
 		coins.keySet().stream()

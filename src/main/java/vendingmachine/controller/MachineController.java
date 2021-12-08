@@ -32,5 +32,6 @@ public class MachineController {
 
 	private void createAndSaveItem(){
 		String itemInfo = inputView.enterItemInfo();
+		service.saveItem(itemInfo);
 	}
 }
