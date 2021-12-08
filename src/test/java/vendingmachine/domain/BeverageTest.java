@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class BeverageTest extends DomainTest {
-    
+
     @DisplayName("실패_;로 구분하지 않음")
     @Test
     void delimiterNotSemiColon_false() {

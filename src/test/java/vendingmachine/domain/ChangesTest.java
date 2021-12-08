@@ -82,14 +82,13 @@ class ChangesTest extends DomainTest {
     @DisplayName("성공_잔돈변환잔돈부족")
     @Test
     void getCoinChanges_notEnough_true() {
-        vendingMachine.createChanges(TRUE_PRICE);
-        Changes changes = vendingMachine.getChanges();
         try (MockedStatic<Randoms> mock = Mockito.mockStatic(Randoms.class)) {
             mock.when(() -> Randoms.pickNumberInList(any()))
                     .thenReturn(Coin.COIN_100.getAmount(), Coin.COIN_500.getAmount(), Coin.COIN_50.getAmount(), Coin.COIN_50.getAmount());
-            changes.createRandomCoins();
+            vendingMachine.createChanges(TRUE_PRICE);
         }
 
+        Changes changes = vendingMachine.getChanges();
         Map<Coin, Integer> changesMap = changes.returnChanges(200);
         SoftAssertions.assertSoftly(soft -> {
             soft.assertThat(changesMap.get(Coin.COIN_50).equals(2));
@@ -100,17 +99,14 @@ class ChangesTest extends DomainTest {
     @DisplayName("성공_잔돈변환")
     @Test
     void getCoinChanges_true() {
-        vendingMachine.createChanges(TRUE_PRICE);
-        Changes changes = vendingMachine.getChanges();
         try (MockedStatic<Randoms> mock = Mockito.mockStatic(Randoms.class)) {
             mock.when(() -> Randoms.pickNumberInList(any()))
                     .thenReturn(Coin.COIN_100.getAmount(), Coin.COIN_500.getAmount(), Coin.COIN_50.getAmount(), Coin.COIN_50.getAmount());
-            changes.createRandomCoins();
+            vendingMachine.createChanges(TRUE_PRICE);
         }
-
+        Changes changes = vendingMachine.getChanges();
         Map<Coin, Integer> changesMap = changes.returnChanges(100);
         SoftAssertions.assertSoftly(soft -> {
-            soft.assertThat(changesMap.get(Coin.COIN_50).equals(0));
             soft.assertThat(changesMap.get(Coin.COIN_100).equals(1));
         });
     }

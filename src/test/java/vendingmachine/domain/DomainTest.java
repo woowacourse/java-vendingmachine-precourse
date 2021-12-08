@@ -7,7 +7,7 @@ public abstract class DomainTest {
     protected VendingMachine vendingMachine;
 
     @BeforeEach
-    void setUp(){
+    void setUp() {
         vendingMachine = new VendingMachine();
     }
 }
