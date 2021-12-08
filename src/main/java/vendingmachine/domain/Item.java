@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-public class Item {
+public class Item implements Comparable<Item>{
 
 	private String name;
 	private int price;
@@ -12,6 +12,10 @@ public class Item {
 		this.stockQuantity = stockQuantity;
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
 	@Override
 	public String toString() {
 		return "Item{" +
@@ -19,5 +23,10 @@ public class Item {
 			", price=" + price +
 			", stockQuantity=" + stockQuantity +
 			'}';
+	}
+
+	@Override
+	public int compareTo(Item other) {
+		return this.price - other.price;
 	}
 }

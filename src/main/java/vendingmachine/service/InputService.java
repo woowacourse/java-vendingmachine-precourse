@@ -38,7 +38,7 @@ public class InputService {
 		while (true) {
 			try {
 				System.out.println(INPUT_USER_MONEY_MESSAGE);
-				return Verification.ofMoney(Console.readLine());
+				return Verification.ofUserMoney(Console.readLine());
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}

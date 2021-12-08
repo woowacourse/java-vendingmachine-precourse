@@ -7,15 +7,19 @@ import java.util.List;
 import java.util.stream.Stream;
 
 import vendingmachine.domain.Item;
+import vendingmachine.service.ItemService;
 
 public class Verification {
+
+	private static final ItemService itemService = new ItemService();
 
 	private static final String NOT_INTEGER_ERROR = "[ERROR] 입력값이 숫자여야 합니다.\n";
 	private static final String NOT_MULTIPLE_OF_TEN_ERROR = "[ERROR] 금액은 10원 단위여야 합니다.\n";
 	private static final String NOT_IN_SQUARE_BRACKET_ERROR = "[ERROR] 상품은 대괄호 안에서 입력해야 합니다.\n";
 	private static final String NOT_MATCH_NUMBER_ERROR = "[ERROR] 상품 속성은 3개여야 합니다.\n";
 	private static final String PRICE__ERROR = "[ERROR] 가격은 100원 이상이고 10원 단위여야 합니다..\n";
-	private static final String STOCK_QUANTITY__ERROR = "[ERROR] 수량은 1개 이상이어야 합니다..\n";
+	private static final String STOCK_QUANTITY__ERROR = "[ERROR] 수량은 1개 이상이어야 합니다.\n";
+	private static final String NOT_SUFFICIENT_MONEY_ERROR = "[ERROR] 투입 금액은 상품 최저 금액보다 같거나 커야 합니다.\n";
 
 	private static final String INTEGER = "-?\\d+";
 
@@ -35,6 +39,16 @@ public class Verification {
 		}
 
 		return Integer.parseInt(input);
+	}
+
+	public static int ofUserMoney(String input) {
+		int money = ofMoney(input);
+
+		if (money < itemService.getMinPrice()) {
+			throw new IllegalArgumentException(NOT_SUFFICIENT_MONEY_ERROR);
+		}
+
+		return money;
 	}
 
 	public static List<Item> ofItems(String input) {
