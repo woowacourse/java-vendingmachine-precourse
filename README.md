@@ -3,6 +3,9 @@
 - **coin**
   - **Coin** 클래스
     - 보유 금액에 따른 `동전 개수`에 대한 정보를 보유한다.
+  - **CoinService** 클래스
+    - 보유 금액에 따른 동전 개수 `생성 로직`을 담당한다.
+    - `pickNumberInList()`메소드를 사용한다.
   - **CoinController** 클래스
     - 자판기 `보유 금액` 정보를 입력받는다. 
   - **CoinValidator** 클래스
