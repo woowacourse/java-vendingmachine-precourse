@@ -13,6 +13,13 @@ public class Item {
 		this.count = count;
 	}
 
+	public Item(String itemString) {
+		String[] itemToAdd = itemString.substring(1, itemString.length()-1).split(",");
+		this.name = itemToAdd[0];
+		this.price = Integer.parseInt(itemToAdd[1]);
+		this.count = Integer.parseInt(itemToAdd[2]);
+	}
+
 	public static boolean validName(String name) {
 		return !isBlank(name);
 	}
@@ -41,6 +48,9 @@ public class Item {
 		return this.count;
 	}
 
+	public String getStatus() {
+		return this.name + this.getPrice() + this.getCount();
+	}
 	public boolean isOutOfStock() {
 		return this.count == 0;
 	}

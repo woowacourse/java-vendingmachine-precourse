@@ -48,4 +48,11 @@ public class ItemTest {
 		int count = 3;
 		assertThat(Item.validItemStatus(name, price, count)).isFalse();
 	}
+
+	@Test
+	@DisplayName("상태 얻기 테스트")
+	void getStatusTest() {
+		Item item = new Item("콜라", 1000, 10);
+		assertThat(item.getStatus()).startsWith("콜라");
+	}
 }
