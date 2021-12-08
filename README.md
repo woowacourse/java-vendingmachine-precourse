@@ -1,6 +1,11 @@
 # 미션 - 자판기
 
 ## ✍️ 구현할 기능
+
+### Domain
+
+------------
+
 ### ✅ VendingMachine
 #### package java.vendingmachine.domain
 
@@ -63,6 +68,36 @@
 
 
 - 구매시 금액 감소
+
+### ✅ Coin
+#### package java.vendingmachine.domain.enums
+- 코인 리스트 숫자로 가져오기
+- 존재하는 코인인지 검증하기
+
+### View
+
+------------
+
+### ✅ InputView
+#### package java.vendingmachine.view
+- 자판기 보유 금액 입력
+- 상품명, 가격, 수량 입력
+- 투입 금액 입력
+- 구매할 상품 입력
+
+
+### ✅ OutputView
+#### package java.vendingmachine.view
+- 자판기가 보유한 동전 출력
+- 남은 투입 금액 출력
+- 잔돈 출력
+- 개행 출력
+
+
+### Validator
+
+------------
+
 
 ### ✅ BeverageValidator
 #### package java.vendingmachine.utils.validator
