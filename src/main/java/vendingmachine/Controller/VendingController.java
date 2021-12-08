@@ -25,11 +25,12 @@ public class VendingController {
         setUser();
         while (!isEnd()) {
             tryPurchase();
-            System.out.println("투입금액: "+user.getRemainMoney());
+            System.out.println("투입 금액: "+user.getRemainMoney()+"원");
         }
         returnChange();
     }
     private static void returnChange(){
+        System.out.println("잔돈");
         vendingMachine.getCoins().calculateChange(user.getRemainMoney());
     }
 
@@ -69,6 +70,7 @@ public class VendingController {
 
     private static void setUser() {
         user = new User(getUserMoneyInput());
+        System.out.println("투입 금액: "+user.getRemainMoney()+"원");
     }
 
     private static int getUserMoneyInput() {
@@ -124,7 +126,7 @@ public class VendingController {
         int coin50Num = getCoinNum(balance, "COIN_50");
         balance -= coin50Num * Coin.valueOf("COIN_50").getAmount();
         coins.addCoin(Coin.valueOf("COIN_50"), coin50Num);
-        int coin10Num = getCoinNum(balance, "COIN_10");
+        int coin10Num = balance/Coin.valueOf("COIN_10").getAmount();
         coins.addCoin(Coin.valueOf("COIN_10"), coin10Num);
         return coins;
     }
