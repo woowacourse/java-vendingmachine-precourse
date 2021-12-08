@@ -17,6 +17,7 @@ public class VendingMachineController {
 
 	public void start() {
 		coinService.register(inputService.readMoneyOfVendingMachine());
+		outputService.enter();
 
 		outputService.printAllCoinCount();
 		outputService.enter();
@@ -29,9 +30,19 @@ public class VendingMachineController {
 		money = inputService.readMoneyOfUser();
 		outputService.enter();
 
-		Item item = inputService.readItemName(money);
-		item.subtractStockQuantity();
-		money = item.subtractMoneyAfterPurchase(money);
+		do {
+			Item item = inputService.readItemName(money);
+			item.subtractStockQuantity();
+			money = item.subtractMoneyAfterPurchase(money);
+		} while (!satisfyExitCondition());
+	}
+
+	private boolean satisfyExitCondition() {
+		if (money < itemService.getMinPrice() || itemService.isAllItemsOutOfStock()) {
+			return true;
+		}
+
+		return false;
 	}
 
 	public static void main(String[] args) {
