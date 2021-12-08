@@ -2,10 +2,10 @@ package vendingmachine.validator;
 
 public class ProductValidator {
 
-	private static final String OPENING_BRACKET = "[";
-	private static final String CLOSING_BRACKET = "]";
-	private static final String PRODUCT_CRITERIA = ";";
-	private static final String ARGUMENT_CRITERIA = ",";
+	public static final String OPENING_BRACKET = "[";
+	public static final String CLOSING_BRACKET = "]";
+	public static final String PRODUCT_CRITERIA = ";";
+	public static final String ARGUMENT_CRITERIA = ",";
 	private static final int NUMBER_OF_ARGUMENTS = 3;
 	private static final String KOREAN_REGEX = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
 	private static final int PRICE_MINIMUM_LIMIT = 100;
