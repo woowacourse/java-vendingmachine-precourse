@@ -10,6 +10,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingController {
+
     private static InputView inputView;
 
     public VendingController(InputView inputView) {
