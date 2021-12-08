@@ -3,7 +3,7 @@ package vendingmachine.domain;
 
 import vendingmachine.utils.ExceptionMessage;
 
-class Beverage {
+public class Beverage {
 
     private String productName;
     private int price;
@@ -27,15 +27,9 @@ class Beverage {
         return count;
     }
 
-    public int reduceCount(int numberOfSold) {
-        isProductCountEnough(numberOfSold);
-        count -= numberOfSold;
+    public int reduceCount() {
+        count--;
         return count;
     }
 
-    private void isProductCountEnough(int numberOfSold) {
-        if (numberOfSold > count) {
-            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_BEVERAGE_COUNT_OVERFLOW);
-        }
-    }
 }

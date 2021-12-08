@@ -5,7 +5,7 @@ import vendingmachine.domain.enums.Coin;
 
 import java.util.*;
 
-class Changes {
+public class Changes {
     private final static int DEFAULT_VALUE = 0;
     private final static int ADD_VALUE = 1;
 
@@ -47,7 +47,6 @@ class Changes {
 
     private boolean isRandomCoinUnderTotalChange(int tempChange, int randomCoin) {
         return randomCoin + tempChange <= totalChange;
-
     }
 
 }
