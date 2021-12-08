@@ -5,7 +5,15 @@ import camp.nextstep.edu.missionutils.Console;
 public class CoinController {
     private static final String COINS_AMOUNT_INIT_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 
-    public void initCoinsAmount() {
+    private final CoinService coinService;
+
+    public CoinController() {
+        int amount = initCoinsAmount();
+        coinService = new CoinService(amount);
+        coinService.initCoins();
+    }
+
+    public int initCoinsAmount() {
         int amount = 0;
         try {
             System.out.println(COINS_AMOUNT_INIT_MESSAGE);
@@ -15,5 +23,6 @@ public class CoinController {
         } catch (IllegalArgumentException e) {
             initCoinsAmount();
         }
+        return amount;
     }
 }
