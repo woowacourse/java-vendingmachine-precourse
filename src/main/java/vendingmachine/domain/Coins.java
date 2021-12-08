@@ -14,22 +14,23 @@ public class Coins {
 		this.coins = new HashMap<>();
 	}
 
-	private void addCoin(Coin coin,int count) {
+	public void addCoin(Coin coin, int count) {
 		coins.put(coin, count);
 	}
 
 	public void makeCoins(int money) {
-		int count500 = makeRandomCoin(money / 500);
-		money -= count500 * 500;
-		int count100 = makeRandomCoin(money / 100);
-		money -= count100 * 100;
-		int count50 = makeRandomCoin(money / 50);
-		money -= count50 * 50;
-		int count10 = money / 10;
-		addCoin(Coin.COIN_500, count500);
-		addCoin(Coin.COIN_100, count100);
-		addCoin(Coin.COIN_50, count50);
-		addCoin(Coin.COIN_10, count10);
+		for (Coin coin : Coin.values()) {
+			int coinCount = makeRandomCoin(money / coin.getAmount());
+			addCoin(coin, coinCount);
+			money -= coin.getAmount() * coinCount;
+		}
+		if (money > 0) {
+			convertRestTo10(money);
+		}
+	}
+
+	private void convertRestTo10(int money) {
+		coins.put(Coin.COIN_10, coins.get(Coin.COIN_10) + money / Coin.COIN_10.getAmount());
 	}
 
 	public int makeRandomCoin(int maxValue) {

@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.Coin;
+
 public class Machine {
 	private final int money;
 	private Coins coins;
