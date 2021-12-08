@@ -44,7 +44,18 @@ public class VendingMachine {
         }
     }
 
-    public void createMoney(String input) {
+    public Beverage getBeverageByName(String beverageName){
+        return beverages.stream()
+                    .filter(beverage -> beverage.getProductName().equals(beverageName))
+                    .findFirst()
+                    .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_BEVERAGE_NAME));
+    }
+
+    public void removeBeverage(Beverage beverage){
+        beverages.remove(beverage);
+    }
+
+    public void insertMoney(String input) {
         int price = InputNumberValidator.validateInput(input);
         if (getMinBeveragePrice() > price) {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_INSERT_MONEY_NOT_ENOUGH);
