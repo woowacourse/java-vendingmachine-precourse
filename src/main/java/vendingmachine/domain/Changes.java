@@ -11,7 +11,7 @@ public class Changes {
     private final static int ADD_VALUE = 1;
     private final static int NO_COIN = 0;
 
-    private Map<Coin, Integer> coinMap = new HashMap<>();
+    private Map<Coin, Integer> coinMap = new TreeMap<>();
     private int totalChange;
 
     public Changes(int totalChange) {
@@ -40,8 +40,6 @@ public class Changes {
         Map<Coin, Integer> restChanges = getRestChanges();
         List<Coin> restCoins = new ArrayList<>(restChanges.keySet());
 
-        Collections.sort(restCoins);
-
         calculateChanges(money, restChanges, restCoins);
         return restChanges;
     }
@@ -57,7 +55,7 @@ public class Changes {
     }
 
     private Map<Coin, Integer> getRestChanges(){
-        Map<Coin, Integer> tempCoinMap = new HashMap<>();
+        Map<Coin, Integer> tempCoinMap = new TreeMap<>();
         for (Entry<Coin, Integer> coinEntry : coinMap.entrySet()) {
             if (coinEntry.getValue() > NO_COIN){
                 tempCoinMap.put(coinEntry.getKey(), coinEntry.getValue());
