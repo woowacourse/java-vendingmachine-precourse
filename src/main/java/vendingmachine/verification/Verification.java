@@ -19,7 +19,7 @@ public class Verification {
 
 	private static final String INTEGER = "-?\\d+";
 
-	public static int ofMoney(String input) throws IllegalArgumentException{
+	public static int ofMoney(String input) {
 		int money = isInteger(input);
 
 		if (money <= ZERO || money % TEN != ZERO) {
