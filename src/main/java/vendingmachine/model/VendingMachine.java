@@ -33,4 +33,8 @@ public class VendingMachine {
 
         return coins;
     }
+
+    public Map<Integer, Integer> getCoins() {
+        return coins;
+    }
 }
