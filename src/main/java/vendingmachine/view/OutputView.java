@@ -20,7 +20,7 @@ public class OutputView {
     public static void printVendingMachineChanges(VendingMachine vendingMachine) {
         System.out.println(PRINT_LEFT_COINS);
         Map<Coin, Integer> coinMap = vendingMachine.getChanges().getCoinMap();
-        printChange(coinMap);
+        printChanges(coinMap);
     }
 
     public static void printInsertMoney(VendingMachine vendingMachine) {
@@ -34,10 +34,10 @@ public class OutputView {
             System.out.println(PRINT_NO_CHANGES);
             return;
         }
-        printChange(returnChanges);
+        printChanges(returnChanges);
     }
 
-    private static void printChange(Map<Coin, Integer> returnChanges) {
+    private static void printChanges(Map<Coin, Integer> returnChanges) {
         new ArrayList<>(returnChanges.keySet())
                 .forEach(coin ->
                         System.out.println(coin.toString() + returnChanges.get(coin) + PRINT_COUNT_UNIT));

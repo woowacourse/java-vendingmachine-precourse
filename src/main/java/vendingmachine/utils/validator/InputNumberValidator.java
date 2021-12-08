@@ -12,8 +12,8 @@ public class InputNumberValidator {
         return inputValue;
     }
 
-    private static void isDivideByTen(int change) {
-        if (change % Coin.COIN_10.getAmount() != RESULT) {
+    private static void isDivideByTen(int inputValue) {
+        if (inputValue % Coin.COIN_10.getAmount() != RESULT) {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_PRICE_NOT_DIVIDE_BY_TEN);
         }
     }

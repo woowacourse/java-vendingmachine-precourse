@@ -18,7 +18,7 @@ public class VendingMachineController {
 
     public void run() {
         VendingMachineChecker checker = VendingMachineChecker.OPEN;
-        requestVendingMachineChange();
+        requestVendingMachineChanges();
         OutputView.printVendingMachineChanges(vendingMachine);
         OutputView.breakLine();
         requestBeverageInfo();
@@ -68,14 +68,14 @@ public class VendingMachineController {
         }
     }
 
-    private void requestVendingMachineChange() {
+    private void requestVendingMachineChanges() {
         String inputChanges = InputView.insertVendingMachineChange();
         try {
             vendingMachine.createChanges(inputChanges);
         } catch (IllegalArgumentException e) {
             OutputView.breakLine();
             OutputView.printSystemMessage(e.getMessage());
-            requestVendingMachineChange();
+            requestVendingMachineChanges();
         }
     }
 }

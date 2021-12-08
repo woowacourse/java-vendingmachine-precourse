@@ -12,21 +12,21 @@ public class Changes {
     private final static int NO_COIN = 0;
 
     private Map<Coin, Integer> coinMap = new TreeMap<>();
-    private int totalChange;
+    private int totalChanges;
 
-    public Changes(int totalChange) {
-        this.totalChange = totalChange;
+    public Changes(int totalChanges) {
+        this.totalChanges = totalChanges;
         initCoinMap();
     }
 
     public void createRandomCoins() {
-        int tempChange = DEFAULT_VALUE;
-        while (tempChange != totalChange) {
+        int tempChanges = DEFAULT_VALUE;
+        while (tempChanges != totalChanges) {
             int randomCoin = Randoms.pickNumberInList(Coin.getCoinAmountList());
-            if (!isRandomCoinUnderTotalChange(tempChange, randomCoin)) {
+            if (!isRandomCoinUnderTotalChange(tempChanges, randomCoin)) {
                 continue;
             }
-            tempChange += randomCoin;
+            tempChanges += randomCoin;
             Coin findCoin = Coin.getCoinByNumber(randomCoin);
             coinMap.put(findCoin, coinMap.get(findCoin) + ADD_VALUE);
         }
@@ -47,21 +47,21 @@ public class Changes {
     }
 
     private Map<Coin, Integer> calculateChanges(int money, Map<Coin, Integer> restChanges, List<Coin> restCoins) {
-        Map<Coin, Integer> calChangeMap = new TreeMap<>();
+        Map<Coin, Integer> calChangesMap = new TreeMap<>();
         for (Coin coin : restCoins) {
             int tempQuotient = getTempQuotientCompareWithRestChanges(restChanges, money, coin);
             money -= tempQuotient * coin.getAmount();
-            putQuotientOnMap(calChangeMap, coin, tempQuotient);
+            putQuotientOnMap(calChangesMap, coin, tempQuotient);
             if(money == DEFAULT_VALUE){
-                return calChangeMap;
+                return calChangesMap;
             }
         }
-        return calChangeMap;
+        return calChangesMap;
     }
 
-    private void putQuotientOnMap(Map<Coin, Integer> calChangeMap, Coin coin, int tempQuotient) {
+    private void putQuotientOnMap(Map<Coin, Integer> calChangesMap, Coin coin, int tempQuotient) {
         if(tempQuotient != DEFAULT_VALUE){
-            calChangeMap.put(coin, tempQuotient);
+            calChangesMap.put(coin, tempQuotient);
         }
     }
 
@@ -90,8 +90,8 @@ public class Changes {
         coinMap.put(Coin.COIN_10, DEFAULT_VALUE);
     }
 
-    private boolean isRandomCoinUnderTotalChange(int tempChange, int randomCoin) {
-        return randomCoin + tempChange <= totalChange;
+    private boolean isRandomCoinUnderTotalChange(int tempChanges, int randomCoin) {
+        return randomCoin + tempChanges <= totalChanges;
     }
 
 }
