@@ -20,10 +20,6 @@ public enum Coin {
         this.counts = 0;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     public void initCoins() {
         int currentAmount = 0;
         while (currentAmount < amount) {
