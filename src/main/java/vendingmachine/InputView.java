@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static camp.nextstep.edu.missionutils.Console.*;
+
 public class InputView {
 	private static final String GET_REMAINS = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String GET_ITEM_STATUS = "상품명과 가격, 수량을 입력해 주세요.";
@@ -21,5 +23,9 @@ public class InputView {
 	public static void printGetItemToBuy(UserMoney userMoney) {
 		System.out.println("투입 금액: " + userMoney.getMoney() + "원");
 		System.out.println(GET_ITEM_TO_BUY);
+	}
+
+	public static String getItemStatuses() {
+		return readLine();
 	}
 }
