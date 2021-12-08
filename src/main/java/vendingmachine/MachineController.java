@@ -8,6 +8,17 @@ public class MachineController {
     }
 
     private void initMachine() {
-        vendingMachine = new VendingMachine(0);
+        vendingMachine = new VendingMachine(inputAmount());
+    }
+
+    private int inputAmount() {
+        while (true) {
+            try {
+                // validation
+                return 1;
+            } catch (IllegalArgumentException e) {
+                System.out.println("invalid amount");
+            }
+        }
     }
 }
