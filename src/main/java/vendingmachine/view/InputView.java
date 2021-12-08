@@ -6,6 +6,7 @@ import static vendingmachine.view.OutputView.*;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
+
 	public int getMoneyOfVendingMachine() {
 		String input = "";
 
