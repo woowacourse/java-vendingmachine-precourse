@@ -9,4 +9,17 @@ public class Money {
 		Validator.validateMoney(money);
 		this.money = money;
 	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public int decideCoinCount(int money, Coin coinValue) {
+		int coinCount = 0;
+		if (coinValue.getAmount() <= money) {
+			coinCount = money / coinValue.getAmount();
+		}
+		return coinCount;
+	}
+
 }
