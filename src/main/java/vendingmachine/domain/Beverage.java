@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
 
+import vendingmachine.utils.ExceptionMessage;
+
 import static vendingmachine.utils.validator.BeverageValidator.validateInput;
 
 class Beverage {
@@ -19,4 +21,27 @@ class Beverage {
         this.count = Integer.parseInt(beverageInput[COUNT_IDX]);
     }
 
+    public String getProductName() {
+        return productName;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public int reduceCount(int numberOfSold){
+        isProductCountEnough(numberOfSold);
+        count -= numberOfSold;
+        return count;
+    }
+
+    private void isProductCountEnough(int numberOfSold) {
+        if(numberOfSold > count){
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_BEVERAGE_COUNT_OVERFLOW);
+        }
+    }
 }
