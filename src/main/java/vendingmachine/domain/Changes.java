@@ -4,10 +4,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
 
 import java.util.*;
+import java.util.Map.Entry;
 
 public class Changes {
     private final static int DEFAULT_VALUE = 0;
     private final static int ADD_VALUE = 1;
+    private final static int NO_COIN = 0;
 
     private Map<Coin, Integer> coinMap = new HashMap<>();
     private int totalChange;
@@ -34,8 +36,34 @@ public class Changes {
         return coinMap;
     }
 
-    public int getTotalChange() {
-        return totalChange;
+    public Map<Coin, Integer> returnChanges(int money){
+        Map<Coin, Integer> restChanges = getRestChanges();
+        List<Coin> restCoins = new ArrayList<>(restChanges.keySet());
+
+        Collections.sort(restCoins);
+
+        calculateChanges(money, restChanges, restCoins);
+        return restChanges;
+    }
+
+    private void calculateChanges(int money, Map<Coin, Integer> restChanges, List<Coin> restCoins) {
+        for (Coin coin : restCoins) {
+            int tempCount = money / coin.getAmount();
+            if(tempCount > restChanges.get(coin)) {
+                tempCount = restChanges.get(coin);
+            }
+            restChanges.replace(coin, tempCount);
+        }
+    }
+
+    private Map<Coin, Integer> getRestChanges(){
+        Map<Coin, Integer> tempCoinMap = new HashMap<>();
+        for (Entry<Coin, Integer> coinEntry : coinMap.entrySet()) {
+            if (coinEntry.getValue() > NO_COIN){
+                tempCoinMap.put(coinEntry.getKey(), coinEntry.getValue());
+            }
+        }
+        return tempCoinMap;
     }
 
     private void initCoinMap() {
