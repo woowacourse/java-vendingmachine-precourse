@@ -25,7 +25,7 @@ public class ProductValidator {
 	private static void checkProductExist(int numberOfProducts) {
 		if (numberOfProducts == 0) {
 			throw new IllegalArgumentException(
-				"각 상품은 " + PRODUCT_CRITERIA + "로 구분 지어져야하고, 상품은 1개 이상이어야 합니다.");
+				"각 상품은 " + PRODUCT_CRITERIA + "로 구분 지어져야 하고, 상품은 1개 이상이어야 합니다.");
 		}
 	}
 
@@ -84,7 +84,7 @@ public class ProductValidator {
 		}
 
 		if (!productPrice.endsWith("0")) {
-			throw new IllegalArgumentException("상품 가격은 10으로 나누어 떨어져야 합니다.");
+			throw new IllegalArgumentException("상품 가격은 10으로 나누어떨어져야 합니다.");
 		}
 
 		if (Integer.parseInt(productPrice) < PRICE_MINIMUM_LIMIT) {
@@ -100,7 +100,7 @@ public class ProductValidator {
 		}
 
 		if (Integer.parseInt(numberOfProducts) == 0) {
-			throw new IllegalArgumentException("상품 수량은 1개 이상이어야합니다.");
+			throw new IllegalArgumentException("상품 수량은 1개 이상이어야 합니다.");
 		}
 	}
 

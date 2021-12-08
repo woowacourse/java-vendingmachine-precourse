@@ -20,7 +20,7 @@ public class MoneyValidator {
 
 	private static void checkMultipleOfTen(String input) {
 		if (input.charAt(input.length() - 1) != '0') {
-			throw new IllegalArgumentException("금액은 10으로 나누어 떨어져야 합니다.");
+			throw new IllegalArgumentException("금액은 10으로 나누어떨어져야 합니다.");
 		}
 	}
 
