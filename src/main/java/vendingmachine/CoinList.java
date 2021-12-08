@@ -6,8 +6,10 @@ import java.util.HashMap;
 public class CoinList {
 
 	private final HashMap<Coin, Integer> hashMap;
+	private final int totalMoney;
 
-	public CoinList() {
+	public CoinList(int totalMoney) {
+		this.totalMoney = totalMoney;
 		this.hashMap = new HashMap<>();
 		hashMap.put(Coin.COIN_500, 0);
 		hashMap.put(Coin.COIN_100, 0);
