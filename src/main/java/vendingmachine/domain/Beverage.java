@@ -1,8 +1,6 @@
 package vendingmachine.domain;
 
 
-import vendingmachine.utils.ExceptionMessage;
-
 public class Beverage {
 
     private String productName;
