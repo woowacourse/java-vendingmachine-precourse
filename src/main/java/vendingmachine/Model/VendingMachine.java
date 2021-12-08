@@ -3,9 +3,9 @@ package vendingmachine.Model;
 import java.util.List;
 
 public class VendingMachine {
-    private static int balance;
-    private static Coins coins;
-    private static List<Drink> drinks;
+    private int balance;
+    private Coins coins;
+    private List<Drink> drinks;
 
     public VendingMachine(int balance, Coins coins, List<Drink> drinks){
         this.balance=balance;

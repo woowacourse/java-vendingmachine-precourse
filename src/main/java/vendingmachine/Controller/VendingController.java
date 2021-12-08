@@ -1,5 +1,6 @@
 package vendingmachine.Controller;
 
+import vendingmachine.Validator;
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
 import vendingmachine.Model.*;
@@ -23,12 +24,26 @@ public class VendingController {
         OutputView.showCoins(coins);
         List<Drink> drinks = getDrinkInput();
         VendingMachine vendingMachine = new VendingMachine(balance, coins, drinks);
+        User user=new User(getUserMoneyInput());
+    }
 
+    private static int getUserMoneyInput(){
+        String input;
+        System.out.println("투입 금액을 입력해 주세요.");
+        do {
+            input = inputView.getInput();
+        }while(!Validator.isValidateMoney(input));
+        return Integer.parseInt(input);
     }
 
     private static List<Drink> getDrinkInput() {
         List<Drink> drinkList = new ArrayList<>();
-        String[] drinks = inputView.getInput().split(";");
+        String input;
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        do {
+            input = inputView.getInput();
+        }while(!Validator.isValidateDrinkList(input));
+        String[] drinks=input.split(";");
         for (String drink : drinks) {
             drinkList.add(getParsedDrinkInfo(drink));
         }
@@ -46,8 +61,12 @@ public class VendingController {
     }
 
     private static int getBalanceInput() {
+        String input;
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        return Integer.parseInt(inputView.getInput());
+        do {
+            input = inputView.getInput();
+        }while(!Validator.isValidateMoney(input));
+        return Integer.parseInt(input);
     }
 
     private static Coins decideCoins(int balance) {
