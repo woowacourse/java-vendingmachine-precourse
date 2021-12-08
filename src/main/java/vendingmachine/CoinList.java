@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static vendingmachine.util.RandomNumberGenerator.*;
+
 import java.util.HashMap;
 
 // TODO: 2021/12/08 더 좋은 이름
@@ -15,6 +17,26 @@ public class CoinList {
 		hashMap.put(Coin.COIN_100, 0);
 		hashMap.put(Coin.COIN_50, 0);
 		hashMap.put(Coin.COIN_10, 0);
+	}
+
+	public void init() {
+		int leftMoney = totalMoney;
+		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_500);
+		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_100);
+		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_50);
+		hashMap.put(Coin.COIN_10, leftMoney / Coin.COIN_10.getAmount());
+	}
+
+	private int addCoinsAndReturnAddedAmount(int money, Coin coin) {
+		if (money < coin.getAmount()) {
+			return 0;
+		}
+
+		int maxNumberOfCoins = money / coin.getAmount();
+		int numberOfCoins = generateNumberOfCoins(maxNumberOfCoins);
+		hashMap.put(coin, numberOfCoins);
+
+		return coin.getAmount() * numberOfCoins;
 	}
 
 	public String toString() {
