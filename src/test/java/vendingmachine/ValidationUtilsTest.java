@@ -11,8 +11,16 @@ public class ValidationUtilsTest {
 	void validUnitMoneyTest() {
 		int testMoney1 = 30;
 		int testMoney2 = 411;
-
 		assertThat(ValidationUtils.validUnitMoney(testMoney1)).isTrue();
 		assertThat(ValidationUtils.validUnitMoney(testMoney2)).isFalse();
+	}
+
+	@Test
+	@DisplayName("숫자가 아님 테스트")
+	void validNumberFormatTest() {
+		String testStr1 = "a1";
+		String testStr2 = "500";
+		assertThat(ValidationUtils.validNumberFormat(testStr1)).isFalse();
+		assertThat(ValidationUtils.validNumberFormat(testStr2)).isTrue();
 	}
 }
