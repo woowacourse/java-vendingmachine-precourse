@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.util.MoneyValidator;
 import vendingmachine.util.SystemMessage;
 
 public class InputFirstMoneyView implements View {
@@ -19,12 +20,8 @@ public class InputFirstMoneyView implements View {
 
 	private int readFirstMoney() {
 		String firstMoneyStr = Console.readLine();
-		int firstMoney;
-		try {
-			firstMoney = Integer.parseInt(firstMoneyStr);
-		} catch (Exception e) {
-			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_INTEGER);
-		}
-		return firstMoney;
+		MoneyValidator.validate(firstMoneyStr);
+
+		return MoneyValidator.validate(firstMoneyStr);
 	}
 }
