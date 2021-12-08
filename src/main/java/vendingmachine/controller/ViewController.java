@@ -13,6 +13,14 @@ public class ViewController {
 		return inputView.getMoneyOfVendingMachine();
 	}
 
+	public int returnDepositAmount() {
+		outputView.askDepositAmount();
+		int depositAmount = inputView.getDepositAmount();
+		outputView.printRemainingDeposit(depositAmount);
+
+		return depositAmount;
+	}
+
 	public String returnProductList() {
 		outputView.askProductInfo();
 		return inputView.getProductsInput();

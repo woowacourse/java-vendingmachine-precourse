@@ -23,7 +23,7 @@ public class InputView {
 		return Integer.parseInt(input);
 	}
 
-	public int getDepositInput() {
+	public int getDepositAmount() {
 		String input = "";
 
 		boolean isValid = false;
