@@ -7,5 +7,7 @@ public class StringConstant {
 	public static String PRICE_NOT_NUMBER = "금액은 숫자여야 합니다.";
 	public static String PRICE_NOT_POSITIVE = "금액은 0보다 커야 합니다.";
 	public static String PRICE_NOT_COIN_VALUE = "금액은 10원으로 나누어 떨어져야 합니다.";
+
+	public static String COIN_ENUM_PREFIX = "COIN_";
 }
 

@@ -1,5 +1,8 @@
 package vendingmachine.controller;
 
+import static constant.NumberConstant.*;
+import static constant.StringConstant.*;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -16,9 +19,9 @@ public class CoinController {
 		List<Integer> coinList = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
 			coinList.add(coin.getAmount());
-			coins.put(coin, 0);
+			coins.put(coin, ZERO);
 		}
-		while(balance > 0) {
+		while(balance > ZERO) {
 			int coinUnit = gatherCoin(balance, coinList);
 			updateCoinQuantity(coinUnit);
 			balance -= coinUnit;
@@ -28,15 +31,15 @@ public class CoinController {
 
 	private int gatherCoin(int balance, List<Integer> coinList) {
 		if (balance < Collections.max(coinList)) {
-			coinList.remove(0);
+			coinList.remove(ZERO);
 		}
 		return Randoms.pickNumberInList(coinList);
 	}
 
 	private void updateCoinQuantity(int coinUnit) {
-		Coin coin = Coin.valueOf("COIN_" + coinUnit);
+		Coin coin = Coin.valueOf(COIN_ENUM_PREFIX + coinUnit);
 		int previousQuantity = coins.get(coin);
-		coins.put(coin, previousQuantity + 1);
+		coins.put(coin, ++previousQuantity);
 	}
 
 }
