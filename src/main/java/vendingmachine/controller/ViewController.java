@@ -8,7 +8,7 @@ public class ViewController {
 	public static InputView inputView = new InputView();
 	public static OutputView outputView = new OutputView();
 
-	public int returnMoney() {
+	public int returnMoneyOfVendingMachine() {
 		outputView.askInputMoneyOfVendingMachine();
 		return inputView.getMoneyOfVendingMachine();
 	}
