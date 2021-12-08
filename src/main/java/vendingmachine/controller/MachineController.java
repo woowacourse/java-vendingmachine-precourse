@@ -1,8 +1,5 @@
 package vendingmachine.controller;
 
-import java.util.HashMap;
-
-import vendingmachine.domain.Coin;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -37,6 +34,9 @@ public class MachineController {
 	}
 
 	private void buy() {
-		String payMoney = inputView.enterPayMoney();
+		int payMoney = Integer.parseInt(inputView.enterPayMoney());
+		if (payMoney > service.getMinItemPrice() || service.judgeSoldOut()) {
+			
+		}
 	}
 }

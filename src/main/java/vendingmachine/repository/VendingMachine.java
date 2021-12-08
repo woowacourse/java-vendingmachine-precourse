@@ -26,16 +26,6 @@ public class VendingMachine {
 		coins.put(coin, coins.getOrDefault(coin, 0) + 1);
 	}
 
-	public void addItem(Item item){
-		items.add(item);
-	}
-
-	public void printItems(){
-		for(Item item : items){
-			System.out.print(item.getItemInfo());;
-		}
-	}
-
 	public String currentSmallChange() {
 		StringBuilder builder = new StringBuilder();
 		coins.keySet().stream()
@@ -44,6 +34,23 @@ public class VendingMachine {
 				c -> builder.append(
 					c.getAmount() + Symbol.WON + Symbol.HYPHEN_SPACE + coins.get(c) + Symbol.COUNT + Symbol.MEW_LINE));
 		return builder.toString();
+	}
+
+	public void addItem(Item item) {
+		items.add(item);
+	}
+
+	public int getMinItemPrice() {
+		return items.stream().mapToInt(i -> i.getPrice()).min().getAsInt();
+	}
+
+	public boolean isAllItemSoldOut() {
+		for (Item item : items) {
+			if(!item.isSoldOut()){
+				return false;
+			}
+		}
+		return true;
 	}
 
 }

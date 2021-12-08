@@ -40,7 +40,14 @@ public class VendingMachineService {
 		List<String> listOfInfo = Arrays.asList(decodeInput(itemInfo));
 		listOfInfo.stream().map(s -> s.split(","))
 			.forEach(s -> vendingMachine.addItem(new Item(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]))));
-		vendingMachine.printItems();
+	}
+
+	public int getMinItemPrice() {
+		return vendingMachine.getMinItemPrice();
+	}
+
+	public boolean judgeSoldOut() {
+		return vendingMachine.isAllItemSoldOut();
 	}
 
 	private String[] decodeInput(String itemInfo) {

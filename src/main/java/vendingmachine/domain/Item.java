@@ -18,4 +18,12 @@ public class Item {
 		builder.append(name + Symbol.SPACE).append(price + Symbol.SPACE).append(quantity + Symbol.MEW_LINE);
 		return builder.toString();
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public boolean isSoldOut(){
+		return quantity == 0;
+	}
 }
