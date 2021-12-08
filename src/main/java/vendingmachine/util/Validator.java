@@ -32,11 +32,8 @@ public class Validator {
         return Integer.parseInt(input);
     }
 
-    public static String validateProductInput(String input) {
-        List<String> productList = validateProductList(input);
-        validateEachProduct(productList);
-
-        return "";
+    public static List<List<String>> validateProductInput(String input) {
+        return validateEachProduct(validateProductList(input));
     }
 
     private static List<String> validateProductList(String input) {

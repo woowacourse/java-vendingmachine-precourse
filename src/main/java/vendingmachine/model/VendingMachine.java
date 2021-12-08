@@ -3,7 +3,6 @@ package vendingmachine.model;
 import vendingmachine.util.RandomNumberGenerator;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -13,7 +12,7 @@ public class VendingMachine {
     public static final int INCREMENT_BY_ONE = 1;
 
     private Map<Integer, Integer> coins;
-    private List<Product> products;
+    private Products products;
 
     public VendingMachine(int amount) {
         this.coins = createCoins(amount);
@@ -38,5 +37,9 @@ public class VendingMachine {
 
     public Map<Integer, Integer> getCoins() {
         return coins;
+    }
+
+    public void setProducts(Products products) {
+        this.products = products;
     }
 }

@@ -1,13 +1,19 @@
 package vendingmachine.model;
 
+import java.util.List;
+
 public class Product {
+    private static final int NAME_INDEX = 0;
+    private static final int PRICE_INDEX = 1;
+    private static final int QUANTITY_INDEX = 2;
+
     private final String name;
     private final int price;
-    private int remaining;
+    private int quantity;
 
-    public Product(String name, int price, int remaining) {
-        this.name = name;
-        this.price = price;
-        this.remaining = remaining;
+    public Product(List<String> list) {
+        name = list.get(NAME_INDEX);
+        price = Integer.parseInt(list.get(PRICE_INDEX));
+        quantity = Integer.parseInt(list.get(QUANTITY_INDEX));
     }
 }

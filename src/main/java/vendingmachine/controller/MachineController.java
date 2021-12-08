@@ -1,13 +1,19 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.model.Product;
+import vendingmachine.model.Products;
 import vendingmachine.util.Validator;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class MachineController {
     private VendingMachine vendingMachine;
+    private Products products;
 
     public void run() {
         initMachine();
@@ -35,18 +41,20 @@ public class MachineController {
         }
     }
 
-
     private void createProducts() {
-        inputProducts();
+        products = new Products(inputProducts().stream()
+                .map(Product::new)
+                .collect(Collectors.toList()));
+
+        vendingMachine.setProducts(products);
     }
 
-    private void inputProducts() {
+    private List<List<String>> inputProducts() {
         InputView.printInputProductMessage();
 
         while (true) {
             try {
-                String str = Validator.validateProductInput(Console.readLine());
-                break;
+                return Validator.validateProductInput(Console.readLine());
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
