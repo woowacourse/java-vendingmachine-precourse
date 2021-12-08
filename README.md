@@ -1,4 +1,5 @@
 # 미션 - 자판기
+[3주차 정리와 회고](https://github.com/jayjaehunchoi/woowafreecourse_study/tree/main/3%EC%A3%BC%EC%B0%A8)
 
 ## ✍️ 구현할 기능
 
