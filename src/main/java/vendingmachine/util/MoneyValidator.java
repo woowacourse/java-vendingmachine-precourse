@@ -8,7 +8,8 @@ public class MoneyValidator {
 		int result = Integer.parseInt(moneyStr);
 		if(!isPositive(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_POSITIVE);
-
+		if(!isMultipleOf10(result))
+			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_MULTIPLE_OF_10);
 		return result;
 	}
 
@@ -24,5 +25,9 @@ public class MoneyValidator {
 
 	private static boolean isPositive(int number) {
 		return number > 0;
+	}
+
+	private static boolean isMultipleOf10(int number) {
+		return number % 10 == 0;
 	}
 }
