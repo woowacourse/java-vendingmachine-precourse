@@ -6,7 +6,6 @@ import vendingmachine.utils.ExceptionMessage;
 public class InputNumberValidator {
     public static final int RESULT = 0;
 
-
     public static int validateInput(String input) {
         int change = isNumber(input);
         isDivideByTen(change);

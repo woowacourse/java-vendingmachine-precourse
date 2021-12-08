@@ -19,7 +19,6 @@ public class Beverages {
         return beverageList;
     }
 
-
     public void addBeverage(String input) {
         String[] eachBeverageInput = input.split(";");
         for (int i = 0; i < eachBeverageInput.length; i++) {

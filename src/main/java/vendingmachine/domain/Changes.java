@@ -40,7 +40,6 @@ public class Changes {
         if(money == DEFAULT_VALUE){
             return null;
         }
-
         Map<Coin, Integer> restChanges = getRestChanges();
         List<Coin> restCoins = new ArrayList<>(restChanges.keySet());
 
