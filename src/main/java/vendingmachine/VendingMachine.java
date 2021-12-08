@@ -26,7 +26,8 @@ public class VendingMachine {
 			}
 			remains -= newCoin;
 			addCountInCoins(coinList, newCoin);
-		} return coinList;
+		}
+		return coinList;
 	}
 
 	public static void addCountInCoins(List<Coin> coinList, int coinValue) {
@@ -36,6 +37,9 @@ public class VendingMachine {
 			}
 		}
 	}
-	public static void main(String[] args) {
+
+	public static void buyItem(Item item, UserMoney userMoney) {
+		item.sellItem();
+		userMoney.subtractUserMoney(item.getPrice());
 	}
 }

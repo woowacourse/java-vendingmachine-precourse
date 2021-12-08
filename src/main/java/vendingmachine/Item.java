@@ -13,8 +13,6 @@ public class Item {
 		this.count = count;
 	}
 
-
-
 	public static boolean validName(String name) {
 		return !isBlank(name);
 	}
@@ -29,5 +27,17 @@ public class Item {
 
 	public static boolean validItemStatus(String name, int price, int count) {
 		return validName(name) && validPrice(price) && validCount(count);
+	}
+
+	public void sellItem() {
+		count--;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public int getCount() {
+		return this.count;
 	}
 }
