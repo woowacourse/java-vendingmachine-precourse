@@ -23,4 +23,15 @@ public class ValidationUtilsTest {
 		assertThat(ValidationUtils.validNumberFormat(testStr1)).isFalse();
 		assertThat(ValidationUtils.validNumberFormat(testStr2)).isTrue();
 	}
+
+	@Test
+	@DisplayName("자연수가 아닌 경우")
+	void isPositiveTest() {
+		int testNum1 = -1;
+		int testNum2 = 0;
+		int testNum3 = 3;
+		assertThat(ValidationUtils.isPositive(testNum1)).isFalse();
+		assertThat(ValidationUtils.isPositive(testNum2)).isFalse();
+		assertThat(ValidationUtils.isPositive(testNum3)).isTrue();
+	}
 }
