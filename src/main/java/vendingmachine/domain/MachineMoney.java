@@ -8,6 +8,10 @@ public class MachineMoney {
 
     private int money;
 
+    public int getMoney() {
+        return money;
+    }
+
     public MachineMoney(String money) throws IllegalArgumentException {
         machineMoneyValidation(money);
         this.money = Integer.parseInt(money);

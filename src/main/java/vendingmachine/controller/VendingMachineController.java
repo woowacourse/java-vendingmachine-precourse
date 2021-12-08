@@ -8,6 +8,8 @@ public class VendingMachineController {
     public void run() {
         VendingMachine vendingMachine = new VendingMachine();
         setMachineMoney(vendingMachine);
+
+        makeRandomCoin(vendingMachine);
     }
 
     private void setMachineMoney(VendingMachine vendingMachine) {
@@ -17,5 +19,10 @@ public class VendingMachineController {
             OutputView.printErrorMessage(exception);
             setMachineMoney(vendingMachine);
         }
+    }
+
+    private void makeRandomCoin(VendingMachine vendingMachine) {
+        vendingMachine.makeRandomCoin();
+        OutputView.printCoinStatus(vendingMachine.getCoinCount());
     }
 }
