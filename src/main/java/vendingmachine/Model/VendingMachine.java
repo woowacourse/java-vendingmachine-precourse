@@ -7,9 +7,9 @@ public class VendingMachine {
     private static Coins coins;
     private static List<Drink> drinks;
 
-    public VendingMachine(int balance, Coins coins){
+    public VendingMachine(int balance, Coins coins, List<Drink> drinks){
         this.balance=balance;
         this.coins=coins;
+        this.drinks=drinks;
     }
-
 }
