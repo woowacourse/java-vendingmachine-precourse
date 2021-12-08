@@ -84,7 +84,7 @@ public class Verification {
 		int stockQuantity = isInteger(stockQuantityInput);
 
 		if (stockQuantity <= ZERO) {
-			throw new IllegalArgumentException(stockQuantityInput);
+			throw new IllegalArgumentException(STOCK_QUANTITY__ERROR);
 		}
 
 		return stockQuantity;
