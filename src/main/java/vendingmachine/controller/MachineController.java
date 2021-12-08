@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -21,6 +22,6 @@ public class MachineController {
 
 	private void initMachineStatus(){
 		int money = inputView.enterMachineMoney();
-		System.out.println(money);
+		service.changeMoneyToCoin(money);
 	}
 }

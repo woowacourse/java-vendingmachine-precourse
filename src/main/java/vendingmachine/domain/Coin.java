@@ -13,4 +13,17 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+
+	public int getAmount() {
+		return amount;
+	}
+
+	public static Coin fromMoney(int money) {
+		for (Coin type : values()) {
+			if (type.getAmount() == money) {
+				return type;
+			}
+		}
+		return null;
+	}
 }
