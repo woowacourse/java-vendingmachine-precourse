@@ -2,9 +2,10 @@ package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
-import vendingmachine.utils.ExceptionMessage;
 
 import java.util.*;
+
+import static vendingmachine.utils.validator.ChangesValidator.validateChange;
 
 class Changes {
     private final static int DEFAULT_VALUE = 0;
@@ -41,16 +42,10 @@ class Changes {
     }
 
     private void initCoinMap() {
-        coinMap.put(Coin.COIN_500, 0);
-        coinMap.put(Coin.COIN_100, 0);
-        coinMap.put(Coin.COIN_50, 0);
-        coinMap.put(Coin.COIN_10, 0);
-    }
-
-    private int validateChange(String input){
-        int change = isNumber(input);
-        isDivideByTen(change);
-        return change;
+        coinMap.put(Coin.COIN_500, DEFAULT_VALUE);
+        coinMap.put(Coin.COIN_100, DEFAULT_VALUE);
+        coinMap.put(Coin.COIN_50, DEFAULT_VALUE);
+        coinMap.put(Coin.COIN_10, DEFAULT_VALUE);
     }
 
     private boolean isRandomCoinUnderTotalChange(int tempChange, int randomCoin) {
@@ -58,17 +53,4 @@ class Changes {
 
     }
 
-    private void isDivideByTen(int change) {
-        if(change % Coin.COIN_10.getAmount() != 0){
-            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_PRICE_NOT_DIVIDE_BY_TEN);
-        }
-    }
-
-    private int isNumber(String input) {
-        try{
-           return Integer.parseInt(input);
-        }catch (NumberFormatException e){
-            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_PRICE_NOT_NUMBER);
-        }
-    }
 }
