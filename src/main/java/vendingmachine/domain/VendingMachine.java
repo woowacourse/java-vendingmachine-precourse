@@ -1,7 +1,10 @@
 package vendingmachine.domain;
 
+import vendingmachine.domain.enums.Coin;
 import vendingmachine.utils.ExceptionMessage;
 import vendingmachine.utils.validator.InputNumberValidator;
+
+import java.util.Map;
 
 public class VendingMachine {
     private Changes changes;
@@ -26,12 +29,28 @@ public class VendingMachine {
         changes.createRandomCoins();
     }
 
+    public Map<Coin, Integer> getReturnChanges() {
+        return changes.returnChanges(money.getPrice());
+    }
+
+    public void createBeverages(String input){
+        beverages = new Beverages();
+        beverages.addBeverage(input);
+    }
+
     public void insertMoney(String input) {
         int price = InputNumberValidator.validateInput(input);
         if (beverages.getMinBeveragePrice() > price) {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_INSERT_MONEY_NOT_ENOUGH);
         }
         money = new Money(price);
+    }
+
+    public boolean isInsertMoneyUnderThanMinBeveragePrice(){
+        if (beverages.getMinBeveragePrice() > money.getPrice()){
+            return true;
+        }
+        return false;
     }
 
 }
