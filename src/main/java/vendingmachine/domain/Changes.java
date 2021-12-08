@@ -20,7 +20,7 @@ public class Changes {
     }
 
     public void createRandomCoins() {
-        int tempChange = 0;
+        int tempChange = DEFAULT_VALUE;
         while (tempChange != totalChange) {
             int randomCoin = Randoms.pickNumberInList(Coin.getCoinAmountList());
             if (!isRandomCoinUnderTotalChange(tempChange, randomCoin)) {
@@ -37,21 +37,30 @@ public class Changes {
     }
 
     public Map<Coin, Integer> returnChanges(int money){
+        if(money == DEFAULT_VALUE){
+            return null;
+        }
+
         Map<Coin, Integer> restChanges = getRestChanges();
         List<Coin> restCoins = new ArrayList<>(restChanges.keySet());
 
-        calculateChanges(money, restChanges, restCoins);
-        return restChanges;
+        return calculateChanges(money, restChanges, restCoins);
     }
 
-    private void calculateChanges(int money, Map<Coin, Integer> restChanges, List<Coin> restCoins) {
+    private Map<Coin, Integer> calculateChanges(int money, Map<Coin, Integer> restChanges, List<Coin> restCoins) {
+        Map<Coin, Integer> calChangeMap = new TreeMap<>();
         for (Coin coin : restCoins) {
             int tempCount = money / coin.getAmount();
             if(tempCount > restChanges.get(coin)) {
                 tempCount = restChanges.get(coin);
             }
-            restChanges.replace(coin, tempCount);
+            money -= tempCount * coin.getAmount();
+            calChangeMap.put(coin, tempCount);
+            if(money == DEFAULT_VALUE){
+                return calChangeMap;
+            }
         }
+        return calChangeMap;
     }
 
     private Map<Coin, Integer> getRestChanges(){
