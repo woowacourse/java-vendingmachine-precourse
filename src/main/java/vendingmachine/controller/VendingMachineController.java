@@ -14,9 +14,9 @@ public class VendingMachineController {
 		try {
 			vendingMachine.setBalance(balance);
 		} catch (IllegalArgumentException e) {
-
+			System.out.println(e.getMessage() + "\n");
+			startVendingMachine();
 		}
-
 	}
 
 }
