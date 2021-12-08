@@ -12,7 +12,7 @@ class BeverageTest extends DomainTest {
 
     @DisplayName("실패_;로 구분하지 않음")
     @Test
-    void DelimiterNotSemiColon_false() {
+    void delimiterNotSemiColon_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,1500,20],[사이다,1000,20]"));
     }
@@ -20,56 +20,56 @@ class BeverageTest extends DomainTest {
 
     @DisplayName("실패_[로 시작하지 않음")
     @Test
-    void NotStartWithSquareBracket_false() {
+    void notStartWithSquareBracket_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("{콜라,1500,20]"));
     }
 
     @DisplayName("실패_]로 끝나지 않음")
     @Test
-    void NotEndWithSquareBracket_false() {
+    void notEndWithSquareBracket_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,1500,20}"));
     }
 
     @DisplayName("실패_가격이 숫자가 아님")
     @Test
-    void PriceNotNumber_false() {
+    void priceNotNumber_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,a,20]"));
     }
 
     @DisplayName("실패_가격이 100원 이하")
     @Test
-    void PriceUnder100_false() {
+    void priceUnder100_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,99,20]"));
     }
 
     @DisplayName("실패_가격이 10으로 안나눠짐")
     @Test
-    void PriceNotDivideBy10_false() {
+    void priceNotDivideBy10_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,101,20]"));
     }
 
     @DisplayName("실패_수량이 숫자가 아님")
     @Test
-    void CountNotNumber_false() {
+    void countNotNumber_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,1000,a}"));
     }
 
     @DisplayName("실패_수량이 0 초과가 아님")
     @Test
-    void CountUnder0_false() {
+    void countUnder0_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.addBeverage("[콜라,1000,0]"));
     }
 
     @DisplayName("음료 생성 성공")
     @Test
-    void CreateBeverage_true() {
+    void createBeverage_true() {
         vendingMachine.addBeverage("[콜라,1000,1]");
         Beverage beverage = vendingMachine.getBeverages().get(0);
 
@@ -82,7 +82,7 @@ class BeverageTest extends DomainTest {
 
     @DisplayName("음료 개수 감소 성공")
     @Test
-    void SellBeverage_true() {
+    void sellBeverage_true() {
         vendingMachine.addBeverage("[콜라,1000,1]");
         Beverage beverage = vendingMachine.getBeverages().get(0);
 
@@ -92,7 +92,7 @@ class BeverageTest extends DomainTest {
 
     @DisplayName("음료 개수 감소 실패")
     @Test
-    void SellBeverage_false() {
+    void sellBeverage_false() {
         vendingMachine.addBeverage("[콜라,1000,1]");
         Beverage beverage = vendingMachine.getBeverages().get(0);
         assertThrows(IllegalArgumentException.class, () -> beverage.reduceCount(2));
