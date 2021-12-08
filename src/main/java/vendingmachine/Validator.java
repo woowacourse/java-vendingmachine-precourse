@@ -1,6 +1,6 @@
 package vendingmachine;
 
-import vendingmachine.Model.VendingMachine;
+import vendingmachine.Model.*;
 
 public class Validator {
 
@@ -28,7 +28,7 @@ public class Validator {
         input = input.substring(1, input.length() - 1);
         String[] drinkInfo = input.split(",");
         if(!isValidateInfoFormat(drinkInfo)){
-
+            return 0;
         }
         if(!isValidatePrice(drinkInfo[1]) || !isValidateAmount(drinkInfo[2])){
             return 0;
@@ -41,7 +41,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         }catch(IllegalArgumentException e){
-            System.out.println("잘못된 입력 형식입니다.");
+            System.out.println("[ERROR] 잘못된 입력 형식입니다.");
             return false;
         }
         return true;
@@ -75,7 +75,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("금액은 숫자여야 합니다.");
+            System.out.println("[ERROR] 금액은 숫자여야 합니다.");
             return false;
         }
         return true;
@@ -96,7 +96,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("금액의 최소단위는 10원입니다.");
+            System.out.println("[ERROR] 금액의 최소단위는 10원입니다.");
             return false;
         }
         return true;
@@ -108,7 +108,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("금액은 음수일 수 없습니다.");
+            System.out.println("[ERROR] 금액은 음수일 수 없습니다.");
             return false;
         }
         return true;
@@ -120,7 +120,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("상품가격은 100원 이상이어야 합니다.");
+            System.out.println("[ERROR] 상품가격은 100원 이상이어야 합니다.");
             return false;
         }
         return true;
@@ -133,6 +133,18 @@ public class Validator {
             }
         } catch (IllegalArgumentException e){
             System.out.println("존재하지 없는 상품입니다.");
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean isRemained(Drink chosenDrink){
+        try{
+            if(chosenDrink.isSoldOut()){
+                throw new IllegalArgumentException();
+            }
+        }catch(IllegalArgumentException e){
+            System.out.println("매진된 상품입니다.");
             return false;
         }
         return true;

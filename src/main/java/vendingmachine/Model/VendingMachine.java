@@ -21,7 +21,7 @@ public class VendingMachine {
         return (flag == 1);
     }
 
-    public boolean isSoldOut() {
+    public boolean isEmpty() {
         int totalStock = 0;
         for (Drink drink : drinks) {
             totalStock += drink.getStock();
@@ -42,5 +42,18 @@ public class VendingMachine {
             return drink.getPrice();
         }
         return currentMinimum;
+    }
+
+    public Drink findDrinkWithName(String userChoice) {
+        for (Drink drink : drinks) {
+            if(drink.isSameDrink(userChoice) == 1){
+                return drink;
+            }
+        }
+        return null;
+    }
+
+    public Coins getCoins(){
+        return coins;
     }
 }

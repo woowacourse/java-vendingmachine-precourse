@@ -18,6 +18,14 @@ public class Drink {
         return 0;
     }
 
+    public void subtractStock(){
+        stock--;
+    }
+
+    public boolean isSoldOut(){
+        return (stock==0);
+    }
+
     public int getPrice(){
         return price;
     }

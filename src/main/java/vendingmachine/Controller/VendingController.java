@@ -23,36 +23,60 @@ public class VendingController {
     public static void start() {
         setVendingMachine();
         setUser();
-        while(!isEnd()){
-                
+        while (!isEnd()) {
+            tryPurchase();
+            System.out.println("투입금액: "+user.getRemainMoney());
         }
+        returnChange();
+    }
+    private static void returnChange(){
+        vendingMachine.getCoins().calculateChange(user.getRemainMoney());
     }
 
-    private static boolean isEnd(){
-        if(vendingMachine.isSoldOut() || !user.isBuyable(vendingMachine.getMinimumPrice())){
-            return false;
-        }
-        return true;
+    private static void tryPurchase() {
+        Drink chosenDrink;
+        System.out.println("구매할 상품명을 입력해주세요.");
+        do {
+            chosenDrink = getUserChoice();
+        }while(!Validator.isRemained(chosenDrink));
+
+        chosenDrink.subtractStock();
+        user.pay(chosenDrink);
     }
 
-    private static void setVendingMachine(){
+    private static Drink getUserChoice() {
+        String userChoice;
+        do {
+            userChoice = inputView.getInput();
+        } while (!Validator.isValidateChoice(userChoice, vendingMachine));
+        return vendingMachine.findDrinkWithName(userChoice);
+    }
+
+    private static boolean isEnd() {
+        if (vendingMachine.isEmpty() || !user.isPurchasable(vendingMachine.getMinimumPrice())) {
+            return true;
+        }
+        return false;
+    }
+
+    private static void setVendingMachine() {
         int balance = getBalanceInput();
-        Coins coins=decideCoins(balance);
+        Coins coins = decideCoins(balance);
         OutputView.showCoins(coins);
         List<Drink> drinks = getDrinkInput();
         vendingMachine = new VendingMachine(balance, coins, drinks);
     }
 
-    private static void setUser(){
-        user=new User(getUserMoneyInput());
+    private static void setUser() {
+        user = new User(getUserMoneyInput());
     }
 
-    private static int getUserMoneyInput(){
+    private static int getUserMoneyInput() {
         String input;
         System.out.println("투입 금액을 입력해 주세요.");
         do {
             input = inputView.getInput();
-        }while(!Validator.isValidateMoney(input));
+        } while (!Validator.isValidateMoney(input));
         return Integer.parseInt(input);
     }
 
@@ -62,8 +86,8 @@ public class VendingController {
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         do {
             input = inputView.getInput();
-        }while(!Validator.isValidateDrinkList(input));
-        String[] drinks=input.split(";");
+        } while (!Validator.isValidateDrinkList(input));
+        String[] drinks = input.split(";");
         for (String drink : drinks) {
             drinkList.add(getParsedDrinkInfo(drink));
         }
@@ -85,12 +109,12 @@ public class VendingController {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
         do {
             input = inputView.getInput();
-        }while(!Validator.isValidateMoney(input));
+        } while (!Validator.isValidateMoney(input));
         return Integer.parseInt(input);
     }
 
     private static Coins decideCoins(int balance) {
-        Coins coins= new Coins();
+        Coins coins = new Coins();
         int coin500Num = getCoinNum(balance, "COIN_500");
         balance -= coin500Num * Coin.valueOf("COIN_500").getAmount();
         coins.addCoin(Coin.valueOf("COIN_500"), coin500Num);
