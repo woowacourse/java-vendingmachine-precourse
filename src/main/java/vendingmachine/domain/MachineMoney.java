@@ -1,5 +1,8 @@
 package vendingmachine.domain;
 
+import vendingmachine.View.OutputView;
+import vendingmachine.constant.ErrorMessage;
+
 public class MachineMoney {
     final static int MIN_COIN_UNIT = 10;
 
@@ -11,9 +14,9 @@ public class MachineMoney {
     }
 
     private void machineMoneyValidation(String money) throws IllegalArgumentException {
-        isCorrectAmount(money);
         isDigitString(money);
         isBlank(money);
+        isCorrectAmount(money);
     }
 
     private void isDigitString(String money) throws IllegalArgumentException {
@@ -24,19 +27,19 @@ public class MachineMoney {
 
     private void isDigit(char c) throws IllegalArgumentException {
         if (!Character.isDigit(c)) {
-            throw new IllegalArgumentException("[ERROR] 입력값은 숫자로만 이루어져야 합니다.");
+            throw new IllegalArgumentException(ErrorMessage.NOT_DIGIT_MESSAGE.print());
         }
     }
 
     private void isBlank(String money) throws IllegalArgumentException {
         if (money.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 값이 비어있습니다.");
+            throw new IllegalArgumentException(ErrorMessage.NULL_ERROR_MESSAGE.print());
         }
     }
 
     private void isCorrectAmount(String money) throws IllegalArgumentException {
         if (Integer.parseInt(money) % MIN_COIN_UNIT > 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ErrorMessage.BIGGER_THAN_MIN_COIN_UNIT.print());
         }
     }
 }
