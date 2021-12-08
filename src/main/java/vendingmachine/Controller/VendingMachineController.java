@@ -1,15 +1,18 @@
 package vendingmachine.Controller;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import vendingmachine.Model.Coin;
+import vendingmachine.View.OutputView;
 
 public class VendingMachineController {
 	private int machineMoney;
-	private HashMap<Coin, Integer> machineCoins = new HashMap<>();
+	private LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
 
 	public VendingMachineController() {
 		set();
+		OutputView.printCoin(machineCoins);
 	}
 
 	private void set() {
