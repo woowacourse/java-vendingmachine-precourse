@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.ExceptionMessage;
+
 class Money {
     private int price;
 
@@ -12,7 +14,14 @@ class Money {
     }
 
     public int reducePrice(int paidMoney) {
+        isPriceUnderPaidMoney(paidMoney);
         price -= paidMoney;
         return price;
+    }
+
+    private void isPriceUnderPaidMoney(int paidMoney) {
+        if(paidMoney > price){
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_INSERT_MONEY_NOT_ENOUGH);
+        }
     }
 }
