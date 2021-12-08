@@ -7,7 +7,7 @@ public class OutputService {
 	private static final CoinService coinService = new CoinService();
 
 	private static final String MONEY_OF_VENDING_MACHINE = "자판기가 보유한 동전";
-	private static final String WON = "원";
+	public static final String WON = "원";
 	private static final String STICK = " - ";
 	private static final String UNIT = "개";
 

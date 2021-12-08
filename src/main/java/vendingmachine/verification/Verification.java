@@ -17,9 +17,12 @@ public class Verification {
 	private static final String NOT_MULTIPLE_OF_TEN_ERROR = "[ERROR] 금액은 10원 단위여야 합니다.\n";
 	private static final String NOT_IN_SQUARE_BRACKET_ERROR = "[ERROR] 상품은 대괄호 안에서 입력해야 합니다.\n";
 	private static final String NOT_MATCH_NUMBER_ERROR = "[ERROR] 상품 속성은 3개여야 합니다.\n";
-	private static final String PRICE__ERROR = "[ERROR] 가격은 100원 이상이고 10원 단위여야 합니다..\n";
+	private static final String PRICE__ERROR = "[ERROR] 가격은 100원 이상이고 10원 단위여야 합니다.\n";
 	private static final String STOCK_QUANTITY__ERROR = "[ERROR] 수량은 1개 이상이어야 합니다.\n";
 	private static final String NOT_SUFFICIENT_MONEY_ERROR = "[ERROR] 투입 금액은 상품 최저 금액보다 같거나 커야 합니다.\n";
+	private static final String NOT_EXIST_ITEM_ERROR = "[ERROR] 등록된 상품만 구매 가능합니다.\n";
+	private static final String NO_SUFFICIENT_QUANTITY_ERROR = "[ERROR] 상품 수량이 없습니다.\n";
+	private static final String NO_SUFFICIENT_MONEY_THEN_PRICE_ERROR = "[ERROR] 남아 있는 투입 금액부족합니다.\n";
 
 	private static final String INTEGER = "-?\\d+";
 
@@ -102,5 +105,23 @@ public class Verification {
 		}
 
 		return stockQuantity;
+	}
+
+	public static Item ofItemName(String input, int money) {
+		Item item = itemService.findByName(input);
+
+		if (item == null) {
+			throw new IllegalArgumentException(NOT_EXIST_ITEM_ERROR);
+		}
+
+		if (!item.isAvailableToBuy()) {
+			throw new IllegalArgumentException(NO_SUFFICIENT_QUANTITY_ERROR);
+		}
+
+		if (!item.isAvailableToBuy(money)) {
+			throw new IllegalArgumentException(NO_SUFFICIENT_MONEY_THEN_PRICE_ERROR);
+		}
+
+		return item;
 	}
 }

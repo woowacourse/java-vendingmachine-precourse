@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Item;
 import vendingmachine.service.CoinService;
 import vendingmachine.service.InputService;
 import vendingmachine.service.ItemService;
@@ -12,11 +13,10 @@ public class VendingMachineController {
 	private final CoinService coinService = new CoinService();
 	private final ItemService itemService = new ItemService();
 
-	public void start() {
-		int moneyOfVendingMachine = inputService.readMoneyOfVendingMachine();
-		outputService.enter();
+	private static int money;
 
-		coinService.register(moneyOfVendingMachine);
+	public void start() {
+		coinService.register(inputService.readMoneyOfVendingMachine());
 
 		outputService.printAllCoinCount();
 		outputService.enter();
@@ -26,8 +26,12 @@ public class VendingMachineController {
 			.forEach(item -> itemService.register(item));
 		outputService.enter();
 
-		int moneyOfUser = inputService.readMoneyOfUser();
+		money = inputService.readMoneyOfUser();
+		outputService.enter();
 
+		Item item = inputService.readItemName(money);
+		item.subtractStockQuantity();
+		money = item.subtractMoneyAfterPurchase(money);
 	}
 
 	public static void main(String[] args) {

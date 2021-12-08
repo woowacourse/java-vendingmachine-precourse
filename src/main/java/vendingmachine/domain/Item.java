@@ -16,6 +16,28 @@ public class Item implements Comparable<Item>{
 		return price;
 	}
 
+	public boolean isName(String name) {
+		return this.name.equals(name);
+	}
+
+	public boolean isAvailableToBuy() {
+		return this.stockQuantity > 0;
+	}
+
+	public boolean isAvailableToBuy(int money) {
+		return this.price <= money;
+	}
+
+	public void subtractStockQuantity() {
+		if (stockQuantity > 0) {
+			stockQuantity--;
+		}
+	}
+
+	public int subtractMoneyAfterPurchase(int money) {
+		return money - price;
+	}
+
 	@Override
 	public String toString() {
 		return "Item{" +

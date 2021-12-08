@@ -20,4 +20,11 @@ public class ItemService {
 	public int getMinPrice() {
 		return itemRepository.peek().getPrice();
 	}
+
+	public Item findByName(String name) {
+		return itemRepository.stream()
+			.filter(item -> item.isName(name))
+			.findFirst()
+			.orElse(null);
+	}
 }
