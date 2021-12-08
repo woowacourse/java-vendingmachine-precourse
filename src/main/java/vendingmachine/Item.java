@@ -40,4 +40,8 @@ public class Item {
 	public int getCount() {
 		return this.count;
 	}
+
+	public boolean isOutOfStock() {
+		return this.count == 0;
+	}
 }

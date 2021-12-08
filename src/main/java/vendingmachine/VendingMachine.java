@@ -8,6 +8,7 @@ import java.util.List;
 
 public class VendingMachine {
 	private List<Coin> coins;
+	private Items items;
 
 	public static int generateRandomCoin() {
 		List<Integer> coins = new ArrayList<>();
@@ -41,5 +42,9 @@ public class VendingMachine {
 	public static void buyItem(Item item, UserMoney userMoney) {
 		item.sellItem();
 		userMoney.subtractUserMoney(item.getPrice());
+	}
+
+	public static boolean canNotBuyAnything(UserMoney userMoney, Items items) {
+		return userMoney.getMoney() < items.minPrice() || items.allOutOfStock();
 	}
 }
