@@ -13,7 +13,7 @@ public class VendingMachineChangeValidator {
 	private static final String HAS_BLANK_ERROR_MESSAGE = "[ERROR] 입력한 자판기 잔돈에 공백이 있다.";
 	private static final String NOT_RIGHT_NUMBER_ERROR_MESSAGE = "[ERROR] 입력한 자판기 잔돈이 올바른수(양수)가 아니다.";
 	private static final String START_NUMBER_ERROR_MESSAGE = "[ERROR] 입력한 자판기 잔돈이 0으로 시작한다.";
-	private static final String MONEY_UNIT_ERROR_MESSAGE = "[ERROR] 입력한 자판기 잔돈이 10으로 나누어 떨어지지 않는다.";
+	private static final String NOT_RIGHT_MONEY_UNIT_ERROR_MESSAGE = "[ERROR] 입력한 자판기 잔돈이 10으로 나누어 떨어지지 않는다.";
 
 	private VendingMachineChangeValidator() {
 	}
@@ -52,7 +52,7 @@ public class VendingMachineChangeValidator {
 
 	private static boolean isDivisibleByMinimumMoneyUnit(String vendingMachineChange) {
 		if (Integer.parseInt(vendingMachineChange) % MINIMUM_MONEY_UNIT != RIGHT_NUMBER) {
-			throw new IllegalArgumentException(MONEY_UNIT_ERROR_MESSAGE);
+			throw new IllegalArgumentException(NOT_RIGHT_MONEY_UNIT_ERROR_MESSAGE);
 		}
 		return true;
 	}
