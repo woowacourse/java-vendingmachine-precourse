@@ -15,6 +15,16 @@ public class VendingMachine {
 		makeHoldingMoneyAmount();
 		showHoldingCoins();
 		makeProducts();
+		sellProducts();
+	}
+
+	private void sellProducts() {
+		OutputView.printInputMoneyRequestMessage();
+		int inputMoney = getInputMoneyFromInput();
+	}
+
+	private int getInputMoneyFromInput() {
+		return Integer.parseInt(InputView.getInputMoneyInput());
 	}
 
 	private void makeProducts() {
