@@ -40,4 +40,13 @@ public class ProductRepository {
 		}
 		return false;
 	}
+
+	public boolean isOutOfProductQuantity() {
+		for (Product product: productList) {
+			if (product.isNotOutOfQuantity()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }
