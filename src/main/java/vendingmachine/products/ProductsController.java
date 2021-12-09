@@ -29,7 +29,7 @@ public class ProductsController {
         String[] productsInfo = productsListInput.split(PRODUCTS_SEPARATE_UNIT);
         List<String> productsList = new ArrayList<>();
         for (String productInfo : productsInfo) {
-            productsList.add(productInfo.substring(1, productInfo.length() - 2));
+            productsList.add(productInfo.substring(1, productInfo.length() - 1));
         }
         return productsList;
     }
