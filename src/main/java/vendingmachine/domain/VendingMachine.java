@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.utils.CoinGenerator;
+import vendingmachine.utils.ProductValidator;
 
 public class VendingMachine {
     private CoinRepository coinRepository;
