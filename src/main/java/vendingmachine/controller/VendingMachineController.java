@@ -9,6 +9,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.Merchandise;
 import vendingmachine.domain.Merchandises;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -19,13 +20,14 @@ public class VendingMachineController {
 
 	private Money vendingMachineMoney;
 	private VendingMachine vendingMachine;
+	private User user;
 
 	public void play() {
 		vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
 		vendingMachine = new VendingMachine(vendingMachineMoney);
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
-		OutputView.showInputMoneyStatus(Integer.parseInt(InputView.inputMoney()));
+		user = new User(new Money(castingStringMoneyToInt(InputView.inputMoney())));
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
