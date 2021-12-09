@@ -31,4 +31,12 @@ public class Coins {
 	public Stream<Coin> stream() {
 		return coins.keySet().stream();
 	}
+
+	public int getTotalAmount() {
+		return stream().mapToInt(this::getEachAmount).sum();
+	}
+
+	private int getEachAmount(Coin coin) {
+		return coin.getAmount() * getCount(coin);
+	}
 }

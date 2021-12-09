@@ -2,7 +2,6 @@ package vendingmachine.model.machine;
 
 import vendingmachine.model.coin.Coins;
 import vendingmachine.model.item.Item;
-import vendingmachine.model.item.ItemRepository;
 
 public class VendingMachine {
 	private final Coins coins;
@@ -27,6 +26,10 @@ public class VendingMachine {
 	}
 
 	public Coins getRemainInputMoney() {
-		return coins;
+		if (coins.getTotalAmount() <= inputMoney) {
+			return coins;
+		}
+
+		return null;
 	}
 }
