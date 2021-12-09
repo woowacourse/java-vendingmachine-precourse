@@ -2,6 +2,9 @@ package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.jupiter.api.Test;
 
 class CoinTest {
@@ -30,5 +33,19 @@ class CoinTest {
 		assertThat(Coin.getMaxQuantity(Coin.COIN_100, 220)).isEqualTo(2);
 		assertThat(Coin.getMaxQuantity(Coin.COIN_50, 54)).isEqualTo(1);
 		assertThat(Coin.getMaxQuantity(Coin.COIN_10, 53)).isEqualTo(5);
+	}
+
+	@Test
+	void 보유_금액_랜덤() {
+		Map<Coin, Integer> coinMap = Coin.decideCoinRandomly(new HashMap<>(), Coin.values(), 10000);
+
+		assertThat(coinMap.size()).isEqualTo(Coin.values().length);
+
+		int[] coin = {500, 100, 50, 10};
+		int sum = 0;
+		for (int i = 0; i < 4; i++) {
+			sum += coin[i] * coinMap.get(Coin.values()[i]);
+		}
+		assertThat(sum).isEqualTo(10000);
 	}
 }
