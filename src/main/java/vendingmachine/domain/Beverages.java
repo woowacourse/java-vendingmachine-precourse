@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Beverages {
+    private static final String INPUT_DELIMITER = ";";
+
     private static final int PRODUCT_NAME_IDX = 0;
     private static final int PRICE_IDX = 1;
     private static final int COUNT_IDX = 2;
@@ -20,7 +22,7 @@ public class Beverages {
     }
 
     public void addBeverage(String input) {
-        String[] eachBeverageInput = input.split(";");
+        String[] eachBeverageInput = input.split(INPUT_DELIMITER);
         for (int i = 0; i < eachBeverageInput.length; i++) {
             Beverage beverage = createBeverage(eachBeverageInput[i]);
             isBeverageDuplicate(beverage);
