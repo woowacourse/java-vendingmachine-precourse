@@ -10,6 +10,7 @@ import vendingmachine.Coin;
 public class VendingMachine {
 
 	private Map<Integer,Integer> coinMap;
+	private List<Product> products;
 
 	public VendingMachine() {
 		this.coinMap = new TreeMap<>(Collections.reverseOrder());
@@ -21,6 +22,10 @@ public class VendingMachine {
 
 	public void addCoin(int coin){
 		coinMap.put(coin,coinMap.get(coin)+1);
+	}
+
+	public void addProduct(Product product){
+		products.add(product);
 	}
 
 	public Map<Integer, Integer> getCoinMap() {

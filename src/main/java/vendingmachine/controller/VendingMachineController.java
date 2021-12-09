@@ -26,6 +26,14 @@ public class VendingMachineController {
 	}
 
 	public void postProductInfo(){
+		ResponseMessage.of(Message.ENTER_PRODUCT.getMessage());
+
+		try{
+			vendingMachineService.postProductInfo(Console.readLine());
+		} catch (IllegalArgumentException e){
+			ErrorResponse.of(e.getMessage());
+			postProductInfo();
+		}
 	}
 
 	public void postInputCosts(){
