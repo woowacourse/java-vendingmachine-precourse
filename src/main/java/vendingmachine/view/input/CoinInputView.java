@@ -1,10 +1,10 @@
-package vendingmachine.view;
+package vendingmachine.view.input;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Input;
 
-public class InputView {
+public class CoinInputView {
 
     public int inputMoneyForMakeCoin() {
         while (true) {

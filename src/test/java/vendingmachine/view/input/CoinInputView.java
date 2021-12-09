@@ -1,11 +1,11 @@
-package vendingmachine.view;
+package vendingmachine.view.input;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 import vendingmachine.constant.Condition;
 
-class InputViewTest {
+class CoinInputView {
 
     private void validateDigit(String Money) {
         for (int m = 0; m < Money.length(); m++) {

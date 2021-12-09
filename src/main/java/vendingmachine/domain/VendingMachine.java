@@ -2,13 +2,13 @@ package vendingmachine.domain;
 
 import java.util.HashMap;
 
-import vendingmachine.view.InputView;
+import vendingmachine.view.input.CoinInputView;
 
 public class VendingMachine {
 
     public void start() {
-        InputView inputView = new InputView();
-        Integer money = inputView.inputMoneyForMakeCoin();
+        CoinInputView coinInputView = new CoinInputView();
+        Integer money = coinInputView.inputMoneyForMakeCoin();
 
         RandomCoinMaker randomCoinMaker = RandomCoinMaker.getInstance();
         HashMap<Integer, Integer> coinMap = randomCoinMaker.makeCoin(money);
