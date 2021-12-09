@@ -6,7 +6,7 @@ public enum Message {
 	PRINT_COIN_IN_MACHINE("자판기가 보유한 동전"),
 	ENTER_PRODUCT("상품명과 가격, 수량을 입력해 주세요."),
 	ENTER_INPUT_COSTS("투입 금액을 입력해 주세요."),
-	PRINT_INPUT_COSTS("투입 금액:"),
+	PRINT_INPUT_COSTS("투입 금액: "),
 	ENTER_PRODUCT_GOING_TO_PURCHASE("구매할 상품명을 입력해 주세요."),
 	PRINT_BALANCE("잔돈");
 

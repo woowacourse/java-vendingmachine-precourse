@@ -9,5 +9,7 @@ public class VendingMachineClient {
 	public void start(){
 		vendingMachineController.postVendingMachineCosts();
 		vendingMachineController.postProductInfo();
+		vendingMachineController.postInputCosts();
+		vendingMachineController.postProductName();
 	}
 }

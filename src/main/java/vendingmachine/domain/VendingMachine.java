@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -14,6 +15,7 @@ public class VendingMachine {
 
 	public VendingMachine() {
 		this.coinMap = new TreeMap<>(Collections.reverseOrder());
+		this.products = new ArrayList<>();
 		coinMap.put(Coin.COIN_500.getAmount(), 0);
 		coinMap.put(Coin.COIN_100.getAmount(), 0);
 		coinMap.put(Coin.COIN_50.getAmount(), 0);

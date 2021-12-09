@@ -20,15 +20,15 @@ public class VendingMachineService {
 		vendingMachine = new VendingMachine();
 	}
 
-	public String postVendingMachineCosts(String cost) {
-		Validation.validateNull(cost);
-		Validation.validateCostIsNumber(cost);
+	public String postVendingMachineCosts(String inputStr) {
+		Validation.validateNull(inputStr);
+		Validation.validateCostIsNumber(inputStr);
 
 		result = new StringBuilder();
 		result.append(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
 
 		initVendingMachine();
-		makeCoin(Integer.parseInt(cost));
+		makeCoin(Integer.parseInt(inputStr));
 		getCoinInVendingMachine();
 		return result.toString();
 	}
@@ -38,8 +38,15 @@ public class VendingMachineService {
 		addProducts(inputStr);
 	}
 
-	public void postInputCosts(){
+	public String postInputCosts(String inputStr){
+		//TODO: Validation 들 처리(inputStr)
+		Validation.validateNull(inputStr);
+		Validation.validateCostIsNumber(inputStr);
 
+		result = new StringBuilder();
+		result.append(inputStr+"원");
+
+		return result.toString();
 	}
 
 	public void postProductName(){
@@ -73,16 +80,15 @@ public class VendingMachineService {
 		});
 	}
 
-	private void addProducts(String inputStr){
+	private void addProducts(String inputStr) {
 		String[] products= inputStr.replaceAll("\\[","").replaceAll("\\]","").split(";");
-
-		for(String rowProduct: products){
-			//TODO: Validation 처리(product)
-			// 1. 이름, 가격, 수량 이상의 정보가 들어왔을 떄
-			// 2. 문자열, 숫자 확인
-			String[] product = rowProduct.split(",");
-			//TODO: Validation 처리
-			vendingMachine.addProduct(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
-		}
+			for(String rowProduct: products){
+				//TODO: Validation 처리(product)
+				// 1. 이름, 가격, 수량 이상의 정보가 들어왔을 떄
+				// 2. 문자열, 숫자 확인
+				String[] product = rowProduct.split(",");
+				// //TODO: Validation 처리
+				vendingMachine.addProduct(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+			}
 	}
 }
