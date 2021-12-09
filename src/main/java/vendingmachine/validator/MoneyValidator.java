@@ -5,6 +5,8 @@ public class MoneyValidator {
 	public static boolean isValidDeposit(String input) {
 		checkNumber(input);
 
+		checkMultipleOfTen(input);
+
 		return true;
 	}
 
