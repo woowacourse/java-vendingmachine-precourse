@@ -13,10 +13,6 @@ public class ItemService {
 		itemRepository.add(item);
 	}
 
-	public Queue<Item> findAll() {
-		return itemRepository;
-	}
-
 	public int getMinPrice() {
 		return itemRepository.peek().getPrice();
 	}
