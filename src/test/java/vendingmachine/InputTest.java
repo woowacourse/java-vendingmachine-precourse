@@ -11,7 +11,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class InputTest extends NsTest {
 	private static final String ERROR_MESSAGE = "[ERROR]";
 
-
 	@Test
 	void 자판기_보유금액_입력_받기_예외_a() {
 		assertSimpleTest(() -> {
@@ -68,25 +67,158 @@ class InputTest extends NsTest {
 	}
 
 	@Test
-	void 보유금액을_보유동전개수로_변환_450() {
-		assertSimpleTest(() -> {
-			runException("450");
-			assertThat(output()).contains(
-				"자판기가 보유하고 있는 금액을 입력해 주세요.",
-				ERROR_MESSAGE
-			);
-		});
-	}
-
-	@Test
-	void 자판기_보유금액_입력_받기() {
+	void 자판기_보유동전_출력() {
 		assertSimpleTest(
 			() -> {
-				run("450");
+				runException("450");
 				assertThat(output()).contains(
 					"자판기가 보유하고 있는 금액을 입력해 주세요.",
 					"자판기가 보유한 동전",
 					"500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개"
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_특수문자() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,1500,20];-[사이다,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_대괄호노() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "콜라,1500,20];[사이다,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_세미콜론_이외() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,1500,20]a[사이다,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_문자쉼표숫자이외() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라;,1500,20];[사이다,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_쉼표2개노() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,150020];[사이다,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_물건3개이상() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,1500,20];[사이다,1000,10];[환타,1000,10]");
+				assertThat(output()).doesNotContain(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_이름중복() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,1500,20];[사이다,1000,10];[콜라,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_빈이름() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[,1500,20];[사이다,1000,10];[환타,1000,10]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_금액에러() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,1501,20]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_금액에러2() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,90,20]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_수량에러() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,90,0]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_수량에러2() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,90,01]");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
 				);
 			}
 		);
