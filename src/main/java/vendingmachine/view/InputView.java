@@ -24,8 +24,14 @@ public class InputView {
 
 	private static List<String> splitProduct(List<String> productList) {
 		return productList.stream()
-			.map(i -> i.substring(FIRST_INDEX_FOR_SLICE_PRODUCT_STRING, i.length()-1))
+			.map(i -> i.substring(FIRST_INDEX_FOR_SLICE_PRODUCT_STRING, i.length() - 1))
 			.collect(Collectors.toList());
+	}
+
+	public static int inputUserAmount() {
+		System.out.println("투입 금액을 입력해 주세요.");
+		String input = Console.readLine();
+		return Integer.parseInt(input);
 	}
 
 	private static void printEmptyLine() {
