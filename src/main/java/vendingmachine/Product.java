@@ -21,8 +21,20 @@ public class Product {
         return price;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     public void reduce() {
         this.quantity--;
+    }
+
+    public boolean isOutOfStock() {
+        return quantity == 0;
+    }
+
+    public boolean isLessThan(InputAmount inputAmount) {
+        return price <= Integer.parseInt(inputAmount.toString());
     }
 
     @Override

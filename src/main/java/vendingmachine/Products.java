@@ -23,4 +23,16 @@ public class Products {
     public int getPriceByName(String productName) {
         return products.stream().filter(product -> product.equals(productName)).findFirst().get().getPrice();
     }
+
+    public boolean isValidAmount(InputAmount inputAmount) {
+        return !isOutOfStock() && canBuy(inputAmount);
+    }
+
+    private boolean canBuy(InputAmount inputAmount) {
+        return products.stream().anyMatch(product -> product.isLessThan(inputAmount));
+    }
+
+    private boolean isOutOfStock() {
+        return products.stream().allMatch(Product::isOutOfStock);
+    }
 }

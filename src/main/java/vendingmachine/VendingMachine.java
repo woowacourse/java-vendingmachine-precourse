@@ -30,4 +30,7 @@ public class VendingMachine {
         inputAmount.reduce(products.getPriceByName(productName));
     }
 
+    public boolean checkUserBalance() {
+        return products.isValidAmount(inputAmount);
+    }
 }
