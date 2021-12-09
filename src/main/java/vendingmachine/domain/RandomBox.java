@@ -16,10 +16,9 @@ public enum RandomBox {
 		coins = new TreeMap<>();
 		this.amount = amount;
 
-		while (amount > 0) {
+		while (this.amount > 0) {
 			isAmountMoreThanCoin(pickNumberInList(COIN_LIST));
 		}
-
 		return coins;
 	}
 

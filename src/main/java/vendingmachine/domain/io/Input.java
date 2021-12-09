@@ -9,27 +9,29 @@ import static vendingmachine.utils.Printer.*;
 
 import java.util.Map;
 
+import vendingmachine.domain.Machine;
 import vendingmachine.domain.MachineClip;
 import vendingmachine.domain.ProductFactory;
 import vendingmachine.domain.RandomBox;
 import vendingmachine.utils.Printer;
 
 public enum Input {
-	INPUT(PRINTER, RANDOM_COIN_BOX, MACHINE_CLIP, PRODUCT_FACTORY);
+	INPUT(PRINTER, RANDOM_COIN_BOX, MACHINE, MACHINE_CLIP, PRODUCT_FACTORY);
 
 	private final Printer printer;
 	private final RandomBox randomBox;
+	private final Machine machine;
 	private final MachineClip machineClip;
 	private final ProductFactory productFactory;
 
-	Input(Printer printer, RandomBox randomBox, MachineClip machineClip, ProductFactory productFactory){
+	Input(Printer printer, RandomBox randomBox, Machine machine, MachineClip machineClip, ProductFactory productFactory){
 		this.printer = printer;
 		this.randomBox = randomBox;
+		this.machine = machine;
 		this.machineClip = machineClip;
 		this.productFactory = productFactory;
 	}
 
-	// 자판기 보유 금액 입력
 	public void inputMachineAmount() {
 		printer.printMachineAmountNotice();
 
@@ -49,16 +51,15 @@ public enum Input {
 		}
 	}
 
-	// 투입 금액 입력
 	public int inputCustomerAmount() {
 		printer.printCustomerAmountNotice();
-		MACHINE.insertCoinToMachine(Integer.parseInt(readLine()));
+		machine.insertCoinToMachine(Integer.parseInt(readLine()));
 
 		return productFactory.getProductMinPrice();
 	}
 
 	public void inputCustomerBuyProduct() {
-		printer.printCustomerAmountNotice();
+		printer.printCustomerBuyProductNotice();
 
 		String name = readLine();
 		if (productFactory.isProductExisted(name)) {

@@ -1,6 +1,5 @@
 package vendingmachine.application;
 
-import static vendingmachine.domain.Machine.*;
 import static vendingmachine.domain.io.Input.*;
 import static vendingmachine.domain.io.Output.*;
 
@@ -23,11 +22,10 @@ public enum MachineLauncher {
 		output.outputMachineNumOfCoins();
 
 		input.inputProducts();
-		int min = input.inputCustomerAmount();
+		int minPriceOfProducts = input.inputCustomerAmount();
 
 		while(true){
-			output.outputCustomerAmount();
-			if(MACHINE.isAmountLessThanProductMinPrice(min)) break;
+			if(output.outputCustomerAmount(minPriceOfProducts)) break;
 			input.inputCustomerBuyProduct();
 		}
 

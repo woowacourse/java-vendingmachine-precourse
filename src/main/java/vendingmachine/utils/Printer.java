@@ -4,16 +4,12 @@ import static vendingmachine.domain.Machine.*;
 import static vendingmachine.domain.MachineClip.*;
 import static vendingmachine.utils.Constant.*;
 
+import java.util.Map;
+
 import vendingmachine.domain.Machine;
 
 public enum Printer {
 	PRINTER;
-
-	private Machine machine;
-
-	Printer() {
-		machine = MACHINE;
-	}
 
 	public void printMachineAmountNotice(){
 		System.out.println(INPUT_MACHINE_AMOUNT);
@@ -36,11 +32,13 @@ public enum Printer {
 		System.out.println(MACHINE_CLIP);
 	}
 
-	public void printCustomerCurrentAmount() {
-		System.out.printf(OUTPUT_CUSTOMER_AMOUNT, machine.getAmount());
+	public void printCustomerCurrentAmount(int amount) {
+		System.out.printf(OUTPUT_CUSTOMER_AMOUNT, amount);
 	}
 
-	public void printCustomerChange() {
+	public void printCustomerChange(Map<Integer, Integer> amountToChanges) {
 		System.out.println(OUTPUT_CUSTOMER_CHANGE);
+		amountToChanges.keySet().stream()
+			.forEach(k -> System.out.printf(OUTPUT_CUSTOMER_NUN_OF_CHANGES, k, amountToChanges.get(k)));
 	}
 }
