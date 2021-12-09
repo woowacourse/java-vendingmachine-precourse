@@ -8,6 +8,7 @@ public class OutputView {
 	private static final String ASK_DEPOSIT_AMOUNT_MESSAGE = "투입 금액을 입력해 주세요.";
 	private static final String REMAINING_DEPOSIT_MESSAGE = "투입 금액: ";
 	private static final String MONETARY_UNIT = "원";
+	private static final String ASK_PRODUCT_WANT_TO_BUY = "구매할 상품명을 입력해 주세요.";
 
 	public static void printError(Exception exception) {
 		System.out.println(ERROR_FORM + exception.getMessage());
@@ -27,6 +28,10 @@ public class OutputView {
 
 	public void printRemainingDeposit(int deposit) {
 		System.out.println("\n" + REMAINING_DEPOSIT_MESSAGE + deposit + MONETARY_UNIT);
+	}
+
+	public void askProductWantToBuy() {
+		System.out.println(ASK_PRODUCT_WANT_TO_BUY);
 	}
 
 }
