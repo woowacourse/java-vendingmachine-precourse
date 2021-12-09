@@ -22,4 +22,17 @@ public class VendingMachine {
 	public void insertUserInputAmount(int inputAmount) {
 		this.inputAmount = inputAmount;
 	}
+
+	public int getInputAmount() {
+		return inputAmount;
+	}
+
+	public void purchaseProduct(String productName) {
+		inputAmount = productRepository.findProductByName(productName)
+			.getChangePrice(inputAmount);
+	}
+
+	public boolean isPossibleRepurchase() {
+		return productRepository.isOutOfProductQuantity() && productRepository.isWhetherPurchasePossible(inputAmount);
+	}
 }

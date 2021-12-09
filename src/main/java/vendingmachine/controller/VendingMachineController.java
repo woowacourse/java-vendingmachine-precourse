@@ -12,11 +12,18 @@ public class VendingMachineController {
 		printHoldingAmountCoin(vendingMachine.getHoldingAmountCoins());
 		vendingMachine.insertProductListInProductRepository(inputProductList());
 		vendingMachine.insertUserInputAmount(inputUserAmount());
-		purchaseProduct(vendingMachine);
+		purchaseIsPossible(vendingMachine);
+	}
+
+	private void purchaseIsPossible(VendingMachine vendingMachine) {
+		while (vendingMachine.isPossibleRepurchase()) {
+			purchaseProduct(vendingMachine);
+		}
 	}
 
 	private void purchaseProduct(VendingMachine vendingMachine) {
 		printInputAmount(vendingMachine.getInputAmount());
 		vendingMachine.purchaseProduct(inputPurchaseProductName());
 	}
+
 }
