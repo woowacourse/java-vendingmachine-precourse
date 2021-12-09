@@ -7,7 +7,7 @@ public class CoinValidator {
 
     public static void validateAmount(String amount) {
         if (!isNumber(amount)) {
-            throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_POSITIVE_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_NUMBER_MESSAGE);
         }
         if (!isPositiveNumber(amount)) {
             throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_NATURAL_NUMBER_MESSAGE);
