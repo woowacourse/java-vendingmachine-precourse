@@ -41,12 +41,12 @@ public class ProductRepository {
 		return false;
 	}
 
-	public boolean isOutOfProductQuantity() {
+	public boolean isCheckStock() {
 		for (Product product: productList) {
 			if (product.isNotOutOfQuantity()) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 }
