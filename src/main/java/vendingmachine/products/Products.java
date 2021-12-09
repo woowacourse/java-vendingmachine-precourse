@@ -43,7 +43,7 @@ public class Products {
         return products.stream()
                 .min(Comparator.comparing(Product::getPrice))
                 .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
-                        + ProductsValidator.NULL_PRODUCT_MESSAGE))
+                        + ValidatorMessage.NULL_PRODUCT_MESSAGE))
                 .getPrice();
     }
 
@@ -51,7 +51,7 @@ public class Products {
         return products.stream()
                 .min(Comparator.comparing(Product::getCounts))
                 .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
-                        + ProductsValidator.NULL_PRODUCT_MESSAGE))
+                        + ValidatorMessage.NULL_PRODUCT_MESSAGE))
                 .getCounts();
     }
 
