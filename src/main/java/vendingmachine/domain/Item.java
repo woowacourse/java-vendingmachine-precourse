@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.NumberConstant.*;
+
 public class Item implements Comparable<Item>{
 
 	private String name;
@@ -21,7 +23,7 @@ public class Item implements Comparable<Item>{
 	}
 
 	public boolean isAvailableToBuy() {
-		return this.stockQuantity > 0;
+		return this.stockQuantity > ZERO;
 	}
 
 	public boolean isAvailableToBuy(int money) {
@@ -29,7 +31,7 @@ public class Item implements Comparable<Item>{
 	}
 
 	public void subtractStockQuantity() {
-		if (stockQuantity > 0) {
+		if (stockQuantity > ZERO) {
 			stockQuantity--;
 		}
 	}
