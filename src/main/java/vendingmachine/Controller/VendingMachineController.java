@@ -9,6 +9,7 @@ import vendingmachine.View.OutputView;
 
 public class VendingMachineController {
 	private int machineMoney;
+	private int userMoney;
 	private LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
 	private ArrayList<Product> products = new ArrayList<>();
 
@@ -17,10 +18,12 @@ public class VendingMachineController {
 		OutputView.printCoin(machineCoins);
 
 		setMachineProduct();
+		setUserMoney();
+		OutputView.printUserMoney(userMoney);
 	}
 
 	private void setMachineMoney() {
-		machineMoney = InputController.setMoney();
+		machineMoney = InputController.setMachineMoney();
 
 		for (Coin coin : Coin.values()) {
 			int divisor = coin.getAmount();
@@ -36,5 +39,9 @@ public class VendingMachineController {
 			products.add(
 				new Product(productValue[0], Integer.parseInt(productValue[1]), Integer.parseInt(productValue[2])));
 		}
+	}
+
+	private void setUserMoney() {
+		userMoney = InputController.setUserMoney();
 	}
 }

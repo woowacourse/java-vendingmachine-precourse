@@ -6,13 +6,29 @@ import vendingmachine.View.InputView;
 
 public class InputController {
 
-	public static int setMoney() {
+	public static int setMachineMoney() {
+		int machineMoney;
+		do {
+			machineMoney = setMoney(InputView.machineMoneyInput());
+		} while (machineMoney == -1);
+		return machineMoney;
+	}
+
+	public static int setUserMoney() {
+		int userMoney;
+		do {
+			userMoney = setMoney(InputView.userMoneyInput());
+		} while (userMoney == -1);
+		return userMoney;
+	}
+
+	public static int setMoney(String money) {
 		try {
-			MoneyValidator validation = new MoneyValidator(InputView.machineMoneyInput());
+			MoneyValidator validation = new MoneyValidator(money);
 			return validation.MONEY;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setMoney();
+			return -1;
 		}
 	}
 
