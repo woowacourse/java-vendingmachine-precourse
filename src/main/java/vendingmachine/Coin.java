@@ -9,6 +9,8 @@ public enum Coin {
     COIN_10(10);
 
     private static final int START_OF_RANGE = 0;
+    private static final String PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX = "원 - ";
+    private static final String PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX = "개";
     private final int amount;
 
     Coin(final int amount) {
@@ -28,6 +30,6 @@ public enum Coin {
     }
 
     public void printNumberOfCoin(int number) {
-        System.out.println(this.amount + "원 - " + number + "개");
+        System.out.println(this.amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + number + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
     }
 }
