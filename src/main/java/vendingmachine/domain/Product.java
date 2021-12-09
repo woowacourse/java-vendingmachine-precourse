@@ -14,4 +14,8 @@ public class Product {
     public static Product registerProduct(String name, Price price, Quantity quantity) {
         return new Product(name, price, quantity);
     }
+
+    public String getName() {
+        return name;
+    }
 }

@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import vendingmachine.repository.CoinRepository;
+import vendingmachine.repository.ProductRepository;
 import vendingmachine.utils.CoinGenerator;
 import vendingmachine.utils.ProductValidator;
 
 public class VendingMachine {
     private CoinRepository coinRepository;
+    private ProductRepository productRepository = new ProductRepository();
 
     private VendingMachine(int initializeMoney) {
         putInitialAmount(initializeMoney);
@@ -33,10 +35,9 @@ public class VendingMachine {
 
     public void putProducts(ArrayList<String> productsInfo) {
         for (String productInfoInput : productsInfo) {
-            // [콜라,1500,20]  //productInfo를 진짜 product에 넣어서 검증한다.
-            ProductValidator.validateForm(productInfoInput);
-            System.out.println(productInfoInput);
+            Product product = ProductValidator.validateForm(productInfoInput);
+            productRepository.add(product);
         }
-
+        productRepository.showProductRepository();
     }
 }
