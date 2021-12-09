@@ -26,4 +26,8 @@ public class Item {
 	public boolean isSoldOut() {
 		return quantity == 0;
 	}
+
+	public void decreaseQuantity() {
+		quantity -= 1;
+	}
 }

@@ -39,21 +39,29 @@ public class VendingMachineService {
 	public void saveItem(String itemInfo) {
 		List<String> listOfInfo = Arrays.asList(decodeInput(itemInfo));
 		listOfInfo.stream().map(s -> s.split(","))
-			.forEach(s -> vendingMachine.addItem(s[0],new Item(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]))));
-		vendingMachine.printItems();
+			.forEach(s -> vendingMachine.addItem(s[0], new Item(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2]))));
 	}
 
 	public boolean canBuyAnything(int payMoney) {
+		System.out.println(vendingMachine.getMinItemPrice());
 		if (payMoney < vendingMachine.getMinItemPrice() || vendingMachine.isAllItemSoldOut()) {
 			return false;
 		}
 		return true;
 	}
 
-	public void buyItem(int payMoney, String itemName) {
-		if(vendingMachine.isItemSoldOut(itemName)){
-
+	public int buyItem(int payMoney, String itemName) {
+		if (!vendingMachine.isItemSoldOut(itemName)) {
+			return payMoney - vendingMachine.buyItemAndGetPrice(itemName);
 		}
+		return payMoney;
+	}
+
+	public int calculateSmallChange(int remainMoney, String itemName) {
+		if (!vendingMachine.isItemSoldOut(itemName)) {
+			return vendingMachine.subtractCoins(remainMoney);
+		}
+		return remainMoney;
 	}
 
 	private String[] decodeInput(String itemInfo) {
@@ -68,4 +76,9 @@ public class VendingMachineService {
 		}
 		return false;
 	}
+
+	public void printCoins() {
+		vendingMachine.printCoins();
+	}
+
 }

@@ -16,8 +16,8 @@ public class MachineController {
 	}
 
 	public void start() {
-		// initMachineStatus();
-		// createAndSaveItem();
+		initMachineStatus();
+		createAndSaveItem();
 		buy();
 	}
 
@@ -35,9 +35,10 @@ public class MachineController {
 
 	private void buy() {
 		int payMoney = Integer.parseInt(inputView.enterPayMoney());
-		if (service.canBuyAnything(payMoney)) {
+		while (service.canBuyAnything(payMoney)) {
+			outputView.printPuttedMoney(payMoney);
 			String itemToBuy = inputView.enterItemToBuy();
-			service.buyItem(payMoney, itemToBuy);
+			payMoney = service.buyItem(payMoney, itemToBuy);
 
 		}
 	}
