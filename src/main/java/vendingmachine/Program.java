@@ -40,7 +40,7 @@ public class Program {
 		String productEntriesInString = Console.readLine();
 		List<String> productEntries = Arrays.asList(productEntriesInString.split(PRODUCT_ENTRY_DIVIDER));
 		productEntries.forEach(entry -> {
-			String[] elements = entry.substring(1, entry.length() - 2).split(PRODUCT_ENTRY_ELEMENT_DIVIDER);
+			String[] elements = entry.substring(1, entry.length() - 1).split(PRODUCT_ENTRY_ELEMENT_DIVIDER);
 			table.push(elements[0], new ProductEntry(Integer.parseInt(elements[1]), Integer.parseInt(elements[2])));
 		});
 	}
