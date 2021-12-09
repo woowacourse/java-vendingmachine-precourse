@@ -14,9 +14,16 @@ public class ItemsInventoryInputValue {
     }
 
     public ItemsInventoryInfo toItemsInventoryInfo() {
+        String[] itemsInventoryInputValue = divideIntoItems();
         ItemsInventoryInfo itemsInventoryInfo = new ItemsInventoryInfo();
-        itemsInventoryInfo = addInfoToItemsInventoryInfo(itemsInventoryInfo, input);
+        for (String itemInventoryInputValue : itemsInventoryInputValue) {
+            itemsInventoryInfo = addInfoToItemsInventoryInfo(itemsInventoryInfo, itemInventoryInputValue);
+        }
         return itemsInventoryInfo;
+    }
+
+    private String[] divideIntoItems() {
+        return input.split(";");
     }
 
     private ItemsInventoryInfo addInfoToItemsInventoryInfo(ItemsInventoryInfo itemsInventoryInfo, String itemInventoryInputValue) {
@@ -31,16 +38,16 @@ public class ItemsInventoryInputValue {
     }
 
     private void validate(List<String> dividedInfoValue) {
-        if(dividedInfoValue.size() != 3) {
+        if (dividedInfoValue.size() != 3) {
             throw new IllegalArgumentException();
         }
     }
 
     private String removeBraces(String itemInventoryInputValue) {
-        if(!(itemInventoryInputValue.startsWith("[") || itemInventoryInputValue.endsWith("]"))) {
+        if (!(itemInventoryInputValue.startsWith("[") || itemInventoryInputValue.endsWith("]"))) {
             throw new IllegalArgumentException();
         }
-        return itemInventoryInputValue.substring(1, itemInventoryInputValue.length()-1);
+        return itemInventoryInputValue.substring(1, itemInventoryInputValue.length() - 1);
     }
 
     private String[] splitByComma(String itemInventoryInfoValue) {
