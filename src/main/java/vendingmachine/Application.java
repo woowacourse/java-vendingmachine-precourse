@@ -4,7 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import vendingmachine.reader.ExchangeAmountReader;
+import static java.util.stream.Collectors.toList;
 
 public class Application {
 	public static void main(String[] args) {
@@ -42,10 +45,20 @@ public class Application {
 	private static List<Item> inputItemList() {
 		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
 		String value = Console.readLine();
-		String[] items = value.split(";");
+		List<String> items = removeBracket(splitBySemicolon(value));
+
 		for (String item : items) {
 			System.out.println(item);
 		}
+
 		return null;
+	}
+
+	private static List<String> removeBracket(String[] items) {
+		return Stream.of(items).map(item -> item.substring(1, item.length() - 1)).collect(toList());
+	}
+
+	private static String[] splitBySemicolon(String value) {
+		return value.split(";");
 	}
 }
