@@ -6,7 +6,7 @@ public enum ErrorMessage {
 	NOT_MINUS_NUMBER("양수인 숫자를 입력해야 합니다,"),
 	NOT_DIVIDED_BY_TEN("10원 단위의 돈을 입력해야 합니다"),
 	INVALID_ITEM_INFO_FORMAT("[item,price,count] 형식으로 입력해야 합니다."),
-	INVALID_ITEM_PRICE_AMOUNT("아이템의 금액은 100월 이상이어야 합니다.");
+	INVALID_ITEM_PRICE("잘못된 아이템의 금액을 입력하셨습니다.");
 
 	private final String message;
 

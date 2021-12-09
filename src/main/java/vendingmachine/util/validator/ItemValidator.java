@@ -23,13 +23,9 @@ public class ItemValidator {
 		for (String itemInfo : itemInfos) {
 			String[] info = itemInfo.split(Symbol.COMMA);
 			int price = Integer.parseInt(info[1]);
-			if (price < InputCondition.MIN_MONEY_AMOUNT) {
+			if (price < InputCondition.MIN_MONEY_AMOUNT || price % InputCondition.MIN_MONEY_UNIT != InputCondition.ZERO) {
 				throw new IllegalArgumentException(
-					ErrorMessage.ERROR.getMessage() + ErrorMessage.INVALID_ITEM_PRICE_AMOUNT + Symbol.MEW_LINE);
-			}
-			if (price % InputCondition.MIN_MONEY_UNIT != InputCondition.ZERO) {
-				throw new IllegalArgumentException(
-					ErrorMessage.ERROR.getMessage() + ErrorMessage.NOT_DIVIDED_BY_TEN + Symbol.MEW_LINE);
+					ErrorMessage.ERROR.getMessage() + ErrorMessage.INVALID_ITEM_PRICE + Symbol.MEW_LINE);
 			}
 		}
 	}
