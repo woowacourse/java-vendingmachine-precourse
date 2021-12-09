@@ -3,6 +3,7 @@ package vendingmachine;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -23,20 +24,12 @@ public enum Coin {
 	public static Coin random(final int money) {
 		List<Coin> randomPool = getRandomPool(money);
 		List<Integer> randomPoolIndices = getRandomPoolIndices(randomPool.size());
-
 		return randomPool.get(Randoms.pickNumberInList(randomPoolIndices));
 	}
 
 	private static List<Coin> getRandomPool(int money) {
-		List<Coin> randomPool = new ArrayList<>();
 		List<Coin> coins = Arrays.asList(Coin.values());
-		coins.forEach(coin -> {
-			if (coin.amount <= money) {
-				randomPool.add(coin);
-			}
-		});
-
-		return randomPool;
+		return coins.stream().filter(coin -> coin.amount <= money).collect(Collectors.toList());
 	}
 
 	private static List<Integer> getRandomPoolIndices(int length) {

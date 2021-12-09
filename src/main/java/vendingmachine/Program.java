@@ -16,7 +16,6 @@ public class Program {
 		table = new ProductTable();
 		int initialMoney = setInitialMoney();
 		makeRandomCoins(initialMoney);
-		Message.printCoinPocket(pocket);
 		setProductList();
 	}
 
@@ -32,6 +31,8 @@ public class Program {
 			pocket.push(coin);
 			money = coin.subtract(money);
 		}
+
+		Message.printCoinPocket(pocket);
 	}
 
 	private void setProductList() {

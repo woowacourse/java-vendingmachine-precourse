@@ -14,6 +14,7 @@ public enum Message {
 	LEFT_MONEY_SHOW("투입 금액:"),
 	USER_CHANGE_SHOW("잔돈");
 
+	public static final String NUMBER = "개";
 	private final String message;
 
 	Message(final String message) {
@@ -24,7 +25,7 @@ public enum Message {
 		List<String> wordBag = new ArrayList<>();
 		wordBag.add(entry.getKey().message);
 		wordBag.add(Constants.HYPHEN);
-		wordBag.add(entry.getValue().toString() + Constants.NUMBER);
+		wordBag.add(entry.getValue().toString() + NUMBER);
 		return String.join(" ", wordBag);
 	}
 
