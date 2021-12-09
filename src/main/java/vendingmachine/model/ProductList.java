@@ -34,4 +34,25 @@ public class ProductList {
 		return bracketRemovedInput.split(ARGUMENT_CRITERIA, -1);
 	}
 
+	public boolean isAbleToBuy(String productName) {
+		if (!isExistProduct(productName)) {
+			return false;
+		}
+
+		if (!isQuantitySufficient(productName)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private boolean isExistProduct(String productName) {
+		return hashMap.containsKey(productName);
+	}
+
+	private boolean isQuantitySufficient(String productName) {
+		Product product = hashMap.get(productName);
+		return product.getQuantity() > 0;
+	}
+
 }
