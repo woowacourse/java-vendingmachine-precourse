@@ -3,14 +3,14 @@ package vendingmachine.reader.validator;
 import java.util.List;
 import vendingmachine.reader.ItemLineParser;
 
-public class ItemLineValidator implements Validator {
+public class ItemPriceAndQuantityValidator implements Validator {
 	private static final int BOUNDARY_VALUE = 100;
 	private final NumberFormatValidator numberFormatValidator = new NumberFormatValidator();
 	private final TenTimesNumberValidator tenTimesNumberValidator = new TenTimesNumberValidator();
 	private final OverBoundaryValidator overBoundaryValidator = new OverBoundaryValidator(BOUNDARY_VALUE);
 	private final ItemLineParser parser;
 
-	public ItemLineValidator(ItemLineParser parser) {
+	public ItemPriceAndQuantityValidator(ItemLineParser parser) {
 		this.parser = parser;
 	}
 
@@ -46,6 +46,6 @@ public class ItemLineValidator implements Validator {
 
 	@Override
 	public String getErrorMessage(String value, String inputValueName) {
-		return "[ERROR] 상품명, 가격, 수량 입력 포맷이 잘못됐습니다.";
+		return "[ERROR] 가격 또는 수량이 잘못됐습니다.";
 	}
 }

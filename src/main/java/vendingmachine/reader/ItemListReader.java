@@ -2,12 +2,13 @@ package vendingmachine.reader;
 
 import static java.util.stream.Collectors.toList;
 import java.util.List;
-import java.util.stream.Stream;
 import vendingmachine.Item;
-import vendingmachine.reader.validator.ItemLineValidator;
+import vendingmachine.reader.validator.CompositeValidator;
+import vendingmachine.reader.validator.CountOfItemInformationValidator;
+import vendingmachine.reader.validator.ItemPriceAndQuantityValidator;
 import vendingmachine.reader.validator.Validator;
 
-public class ItemListReader extends Reader<List<Item>>{
+public class ItemListReader extends Reader<List<Item>> {
 	private final ItemLineParser parser;
 
 	public ItemListReader(Validator validator) {
@@ -31,10 +32,13 @@ public class ItemListReader extends Reader<List<Item>>{
 	}
 
 	private List<Item> convertToItemList(List<String[]> splitByComma) {
-		return splitByComma.stream().map(item -> Item.of(item[0], Integer.parseInt(item[1]), Integer.parseInt(item[2]))).collect(toList());
+		return splitByComma.stream().map(item -> Item.of(item[0], Integer.parseInt(item[1]), Integer.parseInt(item[2])))
+			.collect(toList());
 	}
 
 	public static Reader<List<Item>> create() {
-		return new ItemListReader(new ItemLineValidator(new ItemLineParser()));
+		return new ItemListReader(
+			new CompositeValidator(new CountOfItemInformationValidator(new ItemLineParser()),
+				new ItemPriceAndQuantityValidator(new ItemLineParser())));
 	}
 }
