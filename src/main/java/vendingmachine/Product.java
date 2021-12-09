@@ -14,5 +14,8 @@ public class Product {
         this.stockQuantity = stockQuantity;
     }
 
+    public void sell() {
+        this.stockQuantity--;
+    }
 
 }
