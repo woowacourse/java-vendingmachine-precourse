@@ -8,5 +8,6 @@ public class ExceptionMessage {
     public static final String NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE = "금액은 양의 정수여야 합니다.";
     public static final String NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE = "금액의 최소 단위는 10원입니다.";
 
-
+    // Location : model/item/vo/Quantity
+    public static final String NOT_POSITIVE_INTEGER_QUANTITY_EXCEPTION_MESSAGE = "상품 수량은 양의 정수여야 합니다.";
 }
