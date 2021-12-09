@@ -3,6 +3,7 @@ package vendingmachine.domain.coins;
 import vendingmachine.exception.NotAMultipleException;
 import vendingmachine.exception.NotNaturalNumberException;
 import vendingmachine.exception.NotNumericException;
+import vendingmachine.utils.NumberUtils;
 import vendingmachine.utils.StringUtils;
 
 public class CoinsValidator {
@@ -23,7 +24,7 @@ public class CoinsValidator {
 
 	private static void validateNaturalNumber(String input) {
 		int parsedNumber = Integer.parseInt(input);
-		if (!StringUtils.isNaturalNumber(parsedNumber)) {
+		if (!NumberUtils.isNaturalNumber(parsedNumber)) {
 			throw new NotNaturalNumberException();
 		}
 	}
