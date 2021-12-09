@@ -1,94 +1,75 @@
 package vendingmachine.repository;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.TreeMap;
-import java.util.stream.Collectors;
+import static vendingmachine.util.InputCondition.*;
 
+import java.util.Arrays;
+import java.util.List;
+
+import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Coins;
 import vendingmachine.domain.Item;
-import vendingmachine.util.InputCondition;
-import vendingmachine.util.Symbol;
-import vendingmachine.util.comparator.CoinComparator;
+import vendingmachine.domain.Items;
 
 public class VendingMachine {
-	private final TreeMap<Coin, Integer> coins;
-	private final HashMap<String, Item> items;
+	private static final List<Integer> coin_kind = Arrays.asList(Coin.COIN_10.getAmount(),
+		Coin.COIN_50.getAmount(),
+		Coin.COIN_100.getAmount(),
+		Coin.COIN_500.getAmount());
 
-	public VendingMachine(List<Integer> coin) {
-		this.coins = new TreeMap<>();
-		initCoinKind(coin);
-		this.items = new HashMap<>();
+	private final Coins coins;
+	private final Items items;
+
+	public VendingMachine() {
+		coins = new Coins(coin_kind);
+		items = new Items();
+
 	}
 
-	private void initCoinKind(List<Integer> coin) {
-		coin.stream().map(Coin::fromMoney).forEach(c -> coins.put(c, 0));
+	public void changeToCoin(int money) {
+		while (money > ZERO) {
+			int coin = Randoms.pickNumberInList(coin_kind);
+			if (canChange(money, coin)) {
+				coins.addCoin(Coin.fromMoney(coin));
+				money -= coin;
+			}
+		}
 	}
 
-	public void addCoin(Coin coin) {
-		coins.put(coin, coins.getOrDefault(coin, 0) + 1);
-	}
-
-	public String getCurrentMachineCoin() {
-		return getCurrentCoin(coins);
-	}
-
-	private String getCurrentCoin(TreeMap<Coin, Integer> coins) {
-		StringBuilder builder = new StringBuilder();
-		coins.keySet().stream()
-			.forEach(
-				c -> builder.append(
-					c.getAmount() + Symbol.WON + Symbol.HYPHEN_SPACE + coins.get(c) + Symbol.COUNT + Symbol.MEW_LINE));
-		return builder.toString();
-	}
-
-	public void addItem(String itemName, Item item) {
-		items.put(itemName, item);
-	}
-
-	public int getMinItemPrice() {
-		return items.values().stream().mapToInt(i -> i.getPrice()).min().getAsInt();
-	}
-
-	public boolean isItemSoldOut(String itemName) {
-		if (items.get(itemName).isSoldOut()) {
+	private boolean canChange(int money, int coin) {
+		if (money - coin >= ZERO) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean isAllItemSoldOut() {
-		for (Item item : items.values()) {
-			if (!item.isSoldOut()) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public int buyItemAndGetPrice(String itemName) {
-		Item item = items.get(itemName);
-		item.decreaseQuantity();
-		return item.getPrice();
+	public String getCurrentMachineCoin() {
+		return coins.getMachineCoin();
 	}
 
 	public String subtractCoins(int payMoney) {
-		TreeMap<Coin, Integer> smallChange = new TreeMap<>(new CoinComparator());
-		List<Coin> reverseSortedList = coins.keySet()
-			.stream().collect(Collectors.toList());
-		for (Coin coin : reverseSortedList) {
-			payMoney = subtract(coin, payMoney, smallChange);
-		}
-		return getCurrentCoin(smallChange);
+		return coins.subtract(payMoney);
 	}
 
-	private int subtract(Coin coin, int payMoney, TreeMap<Coin, Integer> smallChange) {
-		while (payMoney >= coin.getAmount() && coins.get(coin) > InputCondition.ZERO) {
-			smallChange.put(coin, smallChange.getOrDefault(coin, 0) + 1);
-			coins.put(coin, coins.get(coin) - 1);
-			payMoney -= coin.getAmount();
-		}
-		return payMoney;
+	public void addItem(String itemName, Item item) {
+		items.addItem(itemName, item);
+	}
+
+	public int getMinItemPrice() {
+		return items.getMinItemPrice();
+	}
+
+	public boolean isAllItemSoldOut() {
+		return items.getAllItemsSoldOut();
+	}
+
+	public boolean isItemSoldOut(String itemName) {
+		return items.getItemSoldOut(itemName);
+	}
+
+	public int buyItemAndGetPrice(String item) {
+		items.buyItem(item);
+		return items.getItemPrice(item);
 	}
 
 }
