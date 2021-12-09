@@ -24,4 +24,40 @@ public class VendingMachine {
 		this.deposit -= price;
 	}
 
+	public boolean isContinueToSell() {
+		int minimumPrice = getMinimumPrice();
+		if (minimumPrice > deposit) {
+			return false;
+		}
+
+		if (isOutOfStock()) {
+			return false;
+		}
+
+		return true;
+	}
+
+	private int getMinimumPrice() {
+		int minimumPrice = Integer.MAX_VALUE;
+		for (Product product : productList.getHashMap().values()) {
+			if (product.getQuantity() == 0) {
+				continue;
+			}
+
+			minimumPrice = Math.min(minimumPrice, product.getPrice());
+		}
+
+		return minimumPrice;
+	}
+
+	private boolean isOutOfStock() {
+		for (Product product : productList.getHashMap().values()) {
+			if (product.getQuantity() > 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

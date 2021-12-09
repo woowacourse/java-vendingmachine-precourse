@@ -13,6 +13,10 @@ public class ProductList {
 		this.hashMap = new HashMap<>();
 	}
 
+	public HashMap<String, Product> getHashMap() {
+		return hashMap;
+	}
+
 	public void init(String rawInput) {
 		String[] productRawInputList = rawInput.split(PRODUCT_CRITERIA, -1);
 		for (String productRawInput : productRawInputList) {
@@ -61,42 +65,6 @@ public class ProductList {
 
 	private Product findProduct(String productName) {
 		return hashMap.get(productName);
-	}
-
-	public boolean isContinueToSell(int deposit) {
-		int minimumPrice = getMinimumPrice();
-		if (minimumPrice > deposit) {
-			return false;
-		}
-
-		if (isOutOfStock()) {
-			return false;
-		}
-
-		return true;
-	}
-
-	private int getMinimumPrice() {
-		int minimumPrice = Integer.MAX_VALUE;
-		for (Product product : hashMap.values()) {
-			if (product.getQuantity() == 0) {
-				continue;
-			}
-
-			minimumPrice = Math.min(minimumPrice, product.getPrice());
-		}
-
-		return minimumPrice;
-	}
-
-	private boolean isOutOfStock() {
-		for (Product product : hashMap.values()) {
-			if (product.getQuantity() > 0) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 
 }
