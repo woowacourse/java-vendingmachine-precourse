@@ -1,4 +1,4 @@
-package vendingmachine.domain.coinamount;
+package vendingmachine.domain.coin;
 
 public class CoinAmount {
 	private final int coinAmount;
