@@ -18,4 +18,8 @@ public class ItemRepository {
 	public void saveAll(List<Item> items) {
 		items.stream().forEach(this::save);
 	}
+
+	public Item findByName(String name) {
+		return map.get(name);
+	}
 }

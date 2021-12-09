@@ -15,16 +15,15 @@ public class Item {
 		return new Item(name, price, quantity);
 	}
 
-	@Override
-	public String toString() {
-		return "Item{" +
-			"name='" + name + '\'' +
-			", price=" + price +
-			", quantity=" + quantity +
-			'}';
-	}
-
 	public String getName() {
 		return name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void sell() {
+		quantity--;
 	}
 }

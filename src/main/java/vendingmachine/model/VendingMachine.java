@@ -11,5 +11,12 @@ public class VendingMachine {
 		this.inputMoney = inputMoney;
 	}
 
+	public void sell(Item item) {
+		inputMoney -= item.getPrice();
+		item.sell();
+	}
 
+	public int getInputMoney() {
+		return inputMoney;
+	}
 }

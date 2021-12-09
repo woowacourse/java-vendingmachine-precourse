@@ -26,18 +26,15 @@ public class VendingMachineController {
 	}
 
 	private void init() {
-		int exchangeAmount = exchangeAmountReader.read();
-		Coins coins = generateCoins(exchangeAmount);
-		saveItems();
-
-		int inputMoney = inputMoneyReader.read();
-		printInputMoney(inputMoney);
-
+		Coins coins = generateCoins();
+		saveItemsToRepository();
+		int inputMoney = inputMoney();
 		vendingMachine = new VendingMachine(coins, itemRepository, inputMoney);
 	}
 
-	private Coins generateCoins(int amount) {
-		Coins coins = new CoinsGenerator().generate(amount);
+	private Coins generateCoins() {
+		int exchangeAmount = exchangeAmountReader.read();
+		Coins coins = new CoinsGenerator().generate(exchangeAmount);
 		printExchangeCoins(coins);
 		return coins;
 	}
@@ -47,18 +44,22 @@ public class VendingMachineController {
 		coins.stream().forEach(coin -> System.out.println(coin.getAmount() + "원 - " + coins.getCount(coin) + "개"));
 	}
 
-	private void saveItems() {
+	private void saveItemsToRepository() {
 		itemRepository.saveAll(itemListReader.read());
 	}
 
-	private void printInputMoney(int inputMoney) {
+	private int inputMoney() {
+		int inputMoney = inputMoneyReader.read();
 		System.out.println("투입 금액: " + inputMoney);
+		return inputMoney;
 	}
 
 	private void service() {
 		while(true) {
 			String name = purchaseItemNameReader.read();
-			System.out.println(name);
+			Item item = itemRepository.findByName(name);
+			vendingMachine.sell(item);
+			System.out.println("투입 금액: " + vendingMachine.getInputMoney());
 		}
 	}
 }
