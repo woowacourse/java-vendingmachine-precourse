@@ -28,8 +28,7 @@ public class Beverage {
     }
 
     public int reduceCount() {
-        count--;
-        return count;
+        return --count;
     }
 
     @Override

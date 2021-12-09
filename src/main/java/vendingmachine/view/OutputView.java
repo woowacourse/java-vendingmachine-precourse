@@ -37,10 +37,10 @@ public class OutputView {
         printChanges(returnChanges);
     }
 
-    private static void printChanges(Map<Coin, Integer> returnChanges) {
-        new ArrayList<>(returnChanges.keySet())
+    private static void printChanges(Map<Coin, Integer> changes) {
+        new ArrayList<>(changes.keySet())
                 .forEach(coin ->
-                        System.out.println(coin.toString() + returnChanges.get(coin) + PRINT_COUNT_UNIT));
+                        System.out.println(coin.toString() + changes.get(coin) + PRINT_COUNT_UNIT));
     }
 
     public static void breakLine() {
