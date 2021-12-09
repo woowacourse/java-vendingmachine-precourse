@@ -13,7 +13,7 @@ public class VendingMachine {
 
     private Map<Coin, Integer> coins;
     private Products products;
-    private int userInputAmount;
+    private int userInsertAmount;
 
     public VendingMachine(int amount) {
         this.coins = createCoins(amount);
@@ -48,5 +48,9 @@ public class VendingMachine {
 
     public void setProducts(Products products) {
         this.products = products;
+    }
+
+    public void setUserInsertAmount(int userInsertAmount) {
+        this.userInsertAmount = userInsertAmount;
     }
 }

@@ -58,8 +58,15 @@ public class MachineController {
     }
 
     private void userInsertAmount() {
-        InputView.printUserInputAmountMessage();
+        InputView.printUserInsertAmountMessage();
 
-
+        while (true) {
+            try {
+                vendingMachine.setUserInsertAmount(Validator.validateAmountInput(Console.readLine()));
+                break;
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e);
+            }
+        }
     }
 }
