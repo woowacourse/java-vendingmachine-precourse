@@ -1,19 +1,20 @@
 package vendingmachine.Controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import vendingmachine.Model.Coin;
 import vendingmachine.Model.Product;
+import vendingmachine.Util;
 import vendingmachine.View.OutputView;
 
 public class VendingMachineController {
-	private int machineMoney;
 	private int userMoney;
 	private String nameInput;
-	private LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
-	private LinkedHashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
-	private ArrayList<Product> products = new ArrayList<>();
+	private final LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
+	private final LinkedHashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
+	private final ArrayList<Product> products = new ArrayList<>();
 
 	public VendingMachineController() {
 		set();
@@ -22,7 +23,7 @@ public class VendingMachineController {
 	}
 
 	private void set() {
-		setMachineMoney();
+		setMachineCoins();
 		OutputView.printCoin(machineCoins);
 		setMachineProduct();
 	}
@@ -48,14 +49,18 @@ public class VendingMachineController {
 		OutputView.printChange(changeCoins);
 	}
 
-	private void setMachineMoney() {
-		machineMoney = InputController.setMachineMoney();
+	private void setMachineCoins() {
+		int machineMoney = InputController.setMachineMoney();
+		Arrays.stream(Coin.values()).forEach(coin -> machineCoins.put(coin, 0));
 
-		for (Coin coin : Coin.values()) {
-			int divisor = coin.getAmount();
-			machineCoins.put(coin, machineMoney / divisor);
-			machineMoney %= divisor;
+		while (machineMoney != 0) {
+			Coin coin = Util.randomCoin();
+			if (machineMoney >= coin.getAmount()) {
+				machineCoins.replace(coin, machineCoins.get(coin) + 1);
+				machineMoney -= coin.getAmount();
+			}
 		}
+
 		OutputView.printEmpty();
 	}
 
@@ -104,7 +109,7 @@ public class VendingMachineController {
 
 	private Product find(ArrayList<Product> products, String name) {
 		return products.stream()
-			.filter(product -> product.NAME.equals(nameInput))
+			.filter(product -> product.NAME.equals(name))
 			.findAny().get();
 	}
 

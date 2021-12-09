@@ -68,7 +68,7 @@ class InputTest extends NsTest {
 
 	@Test
 	void 자판기_보유동전_출력() {
-		assertSimpleTest(
+		assertRandomNumberInListTest(
 			() -> {
 				runException("450");
 				assertThat(output()).contains(
@@ -76,7 +76,8 @@ class InputTest extends NsTest {
 					"자판기가 보유한 동전",
 					"500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개"
 				);
-			}
+			},
+			100, 100, 100, 100, 50
 		);
 	}
 
@@ -360,24 +361,26 @@ class InputTest extends NsTest {
 
 	@Test
 	void 잔돈_개수확인() {
-		assertSimpleTest(() -> {
-			runException("9980", "[콜라,900,1];[사이다,2000,1]", "3200", "콜라", "사이다");
+		assertRandomNumberInListTest(() -> {
+			runException("990", "[콜라,100,1];[사이다,200,1]", "360", "콜라", "사이다");
 			assertThat(output()).contains(
 				"잔돈",
-				"100원 - 3개"
+				"50원 - 1개", "10원 - 1개"
 			);
-		});
+		}, 500, 100, 100, 100, 100, 50, 10, 10, 10, 10
+		);
 	}
 
 	@Test
 	void 잔돈_개수확인2() {
-		assertSimpleTest(() -> {
-			runException("9780", "[콜라,900,1];[사이다,2000,1]", "3200", "콜라", "사이다");
+		assertRandomNumberInListTest(() -> {
+			runException("300", "[콜라,900,1];[사이다,2000,1]", "3200", "콜라", "사이다");
 			assertThat(output()).contains(
 				"잔돈",
-				"100원 - 2개", "50원 - 1개", "10원 - 3개"
+				"100원 - 3개"
 			);
-		});
+		}, 100, 100, 100
+		);
 	}
 
 	@Override
