@@ -11,4 +11,8 @@ public class Products {
                 .map(Product::new)
                 .collect(Collectors.toList());
     }
+
+    public boolean findProduct(String productName) {
+        return products.stream().anyMatch(product -> product.getName().equals(productName));
+    }
 }

@@ -16,4 +16,8 @@ public class Product {
         price = Integer.parseInt(list.get(PRICE_INDEX));
         quantity = Integer.parseInt(list.get(QUANTITY_INDEX));
     }
+
+    public String getName() {
+        return name;
+    }
 }

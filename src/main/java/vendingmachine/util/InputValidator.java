@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Validator {
+public class InputValidator {
     private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String RETRY_MESSAGE = " 다시 입력해주세요.";
     private static final String ALLOWED_AMOUNT_INPUT_FORMAT = "^[1-9][0-9]*[0]$";

@@ -42,8 +42,16 @@ public class VendingMachine {
         return amount;
     }
 
+    public boolean hasProduct(String productName) {
+        return products.findProduct(productName);
+    }
+
     public Map<Coin, Integer> getCoins() {
         return coins;
+    }
+
+    public int getUserInsertAmount() {
+        return userInsertAmount;
     }
 
     public void setProducts(Products products) {
