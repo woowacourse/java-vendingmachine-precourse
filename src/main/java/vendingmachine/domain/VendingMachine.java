@@ -16,7 +16,7 @@ public class VendingMachine {
         return coin;
     }
 
-    public void makeRandomCoinList() {
+    public void makeRandomAllCoin() {
         for (Coin c : coin.values()) {
             makeRandomCoin(c);
         }
@@ -31,5 +31,5 @@ public class VendingMachine {
         machineMoney.minusMoney(coin.getAmount() * number);
         coin.setCount(number);
     }
-
 }
+
