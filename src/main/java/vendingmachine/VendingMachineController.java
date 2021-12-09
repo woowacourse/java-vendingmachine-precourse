@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.model.coin.Coins;
 import vendingmachine.model.item.Item;
 import vendingmachine.model.item.ItemRepository;
 import vendingmachine.model.machine.VendingMachine;
@@ -22,11 +23,26 @@ public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = vendingMachineRepository.find();
 
-		while(true) {
-			System.out.println("투입 금액: " + vendingMachine.getInputMoney());
-			String name = purchaseItemNameReader.read();
-			Item item = itemRepository.findByName(name);
-			vendingMachine.sell(item);
+		while(!itemRepository.isAllSoldOut()) {
+			printRemainInputMoney(vendingMachine);
+			vendingMachine.sell(purchaseItem());
 		}
+
+		printRemainInputMoney(vendingMachine);
+		printExchangeByCoin(vendingMachine.getRemainInputMoney());
+	}
+
+	private void printRemainInputMoney(VendingMachine vendingMachine) {
+		System.out.println("투입 금액: " + vendingMachine.getInputMoney());
+	}
+
+	private Item purchaseItem() {
+		String name = purchaseItemNameReader.read();
+		return itemRepository.findByName(name);
+	}
+
+	private void printExchangeByCoin(Coins coins) {
+		System.out.println("잔돈");
+		coins.stream().forEach(coin -> System.out.println(coin.getAmount() + "원 - " + coins.getCount(coin) + "개"));
 	}
 }

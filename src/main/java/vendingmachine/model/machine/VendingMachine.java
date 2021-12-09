@@ -25,4 +25,8 @@ public class VendingMachine {
 	public boolean isOverAndEqualMoney(Item item) {
 		return item.isOverAndEqualPrice(inputMoney);
 	}
+
+	public Coins getRemainInputMoney() {
+		return coins;
+	}
 }

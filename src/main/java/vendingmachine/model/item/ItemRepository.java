@@ -22,4 +22,8 @@ public class ItemRepository {
 	public Item findByName(String name) {
 		return map.get(name);
 	}
+
+	public boolean isAllSoldOut() {
+		return map.values().stream().allMatch(Item::isSoldOut);
+	}
 }
