@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import vendingmachine.controller.VendingMachineController;
+import vendingmachine.domain.MerchandiseList;
 
 public class Application {
     public static void main(String[] args) {

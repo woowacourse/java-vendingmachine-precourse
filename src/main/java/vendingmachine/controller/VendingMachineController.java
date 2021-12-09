@@ -10,11 +10,12 @@ public class VendingMachineController {
         setMachineMoney(vendingMachine);
 
         makeRandomCoin(vendingMachine);
+        setMerchandise(vendingMachine);
     }
 
     private void setMachineMoney(VendingMachine vendingMachine) {
         try {
-            vendingMachine.setMachineMoney(InputView.printSetMachineMoney());
+            vendingMachine.setMachineMoney(InputView.printSetMachineMoneyMessage());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             setMachineMoney(vendingMachine);
@@ -24,5 +25,14 @@ public class VendingMachineController {
     private void makeRandomCoin(VendingMachine vendingMachine) {
         vendingMachine.makeRandomAllCoin();
         OutputView.printCoinStatus(vendingMachine.getCoin());
+    }
+
+    private void setMerchandise(VendingMachine vendingMachine) {
+        try {
+            vendingMachine.addMerchandise(InputView.printSetMerchandiseMessage());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            setMerchandise(vendingMachine);
+        }
     }
 }

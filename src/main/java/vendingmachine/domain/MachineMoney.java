@@ -1,9 +1,9 @@
 package vendingmachine.domain;
 
-import vendingmachine.View.OutputView;
 import vendingmachine.constant.ErrorMessage;
+import vendingmachine.util.NumberValidation;
 
-public class MachineMoney {
+public class MachineMoney extends NumberValidation {
     final static int MIN_COIN_UNIT = 10;
 
     private int money;
@@ -12,37 +12,10 @@ public class MachineMoney {
         return money;
     }
 
-    public void setMoney(int money) {
-        this.money = money;
-    }
-
     public MachineMoney(String money) throws IllegalArgumentException {
-        machineMoneyValidation(money);
-        this.money = Integer.parseInt(money);
-    }
-
-    private void machineMoneyValidation(String money) throws IllegalArgumentException {
-        isDigitString(money);
-        isBlank(money);
+        numberValidation(money);
         isCorrectAmount(money);
-    }
-
-    private void isDigitString(String money) throws IllegalArgumentException {
-        for (char c : money.toCharArray()) {
-            isDigit(c);
-        }
-    }
-
-    private void isDigit(char c) throws IllegalArgumentException {
-        if (!Character.isDigit(c)) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_DIGIT_MESSAGE.print());
-        }
-    }
-
-    private void isBlank(String money) throws IllegalArgumentException {
-        if (money.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_ERROR_MESSAGE.print());
-        }
+        this.money = Integer.parseInt(money);
     }
 
     private void isCorrectAmount(String money) throws IllegalArgumentException {

@@ -2,11 +2,14 @@ package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.ArrayList;
-
 public class VendingMachine {
     MachineMoney machineMoney;
     Coin coin;
+    MerchandiseList merchandiseList;
+
+    public VendingMachine() {
+        merchandiseList = new MerchandiseList();
+    }
 
     public void setMachineMoney(String money) throws IllegalArgumentException {
         machineMoney = new MachineMoney(money);
@@ -30,6 +33,14 @@ public class VendingMachine {
         int number = Randoms.pickNumberInRange(0, machineMoney.getMoney() / coin.getAmount());
         machineMoney.minusMoney(coin.getAmount() * number);
         coin.setCount(number);
+    }
+
+    public void addMerchandise(String merchandise) {
+        merchandiseList.addAllMerchandise(merchandise);
+    }
+
+    public String getAllMerchandiseInfo() {
+        return merchandiseList.getAllMerchandiseInfo();
     }
 }
 
