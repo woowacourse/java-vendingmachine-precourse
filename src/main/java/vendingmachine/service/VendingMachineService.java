@@ -38,25 +38,45 @@ public class VendingMachineService {
 		addProducts(inputStr);
 	}
 
-	public String postInputCosts(String inputStr){
+	public String postInputCosts(String inputStr) {
 		//TODO: Validation 들 처리(inputStr)
 		Validation.validateNull(inputStr);
 		Validation.validateCostIsNumber(inputStr);
 
+
 		result = new StringBuilder();
-		result.append(inputStr+"원");
+		vendingMachine.setInputCost(Integer.parseInt(inputStr));
+		printInputCost();
 
 		return result.toString();
 	}
 
-	public void postProductName(){
+	public boolean postProductName(String inputStr) {
+		//TODO: Validation 들 처리
+		// 1. 문자열 아닐 때
+		// 2. 상품 목록에 없을 때
+
+		result = new StringBuilder();
+		vendingMachine.subtractInputCostAndProductAmount(inputStr);
+		printInputCost();
+
+	/*	if(vendingMachine.checkGetBalance()){
+			return true;
+		}*/
+		return false;
+	}
+
+	public String getBalance(){
+		result = new StringBuilder();
+		result.append(Message.PRINT_BALANCE.getMessage()+'\n');
+
+		return result.toString();
 
 	}
 
-	public void getBalance(){
-
+	private void printInputCost(){
+		ResponseMessage.of('\n'+Message.PRINT_INPUT_COSTS.getMessage()+vendingMachine.getInputCost()+"원");
 	}
-
 
 	private void makeCoin(int cost) {
 		while (cost > 0) {

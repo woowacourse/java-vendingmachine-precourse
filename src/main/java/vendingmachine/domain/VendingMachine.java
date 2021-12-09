@@ -10,8 +10,9 @@ import vendingmachine.Coin;
 
 public class VendingMachine {
 
-	private Map<Integer,Integer> coinMap;
+	private Map<Integer, Integer> coinMap;
 	private List<Product> products;
+	private int inputCost;
 
 	public VendingMachine() {
 		this.coinMap = new TreeMap<>(Collections.reverseOrder());
@@ -22,15 +23,62 @@ public class VendingMachine {
 		coinMap.put(Coin.COIN_10.getAmount(), 0);
 	}
 
-	public void addCoin(int coin){
-		coinMap.put(coin,coinMap.get(coin)+1);
+	public void addCoin(int coin) {
+		coinMap.put(coin, coinMap.get(coin) + 1);
 	}
 
-	public void addProduct(Product product){
+	public void addProduct(Product product) {
 		products.add(product);
+	}
+
+	public void subtractInputCostAndProductAmount(String productName) {
+		for (Product product : products) {
+			if (productName.equals(product.getName())) {
+				inputCost -= product.getPrice();
+				product.subtractAmount();
+				break;
+			}
+		}
+	}
+
+	public boolean checkGetBalance() {
+		if (compareLowPriceAndInputCost() || checkAllProductAmount()) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean compareLowPriceAndInputCost() {
+		Collections.sort(products);
+		if (products.get(0).getPrice() > inputCost) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean checkAllProductAmount() {
+		for (Product product : products) {
+			if (product.getAmount() > 0) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public Map<Integer, Integer> getCoinMap() {
 		return coinMap;
+	}
+
+	public int getInputCost() {
+		return inputCost;
+	}
+
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setInputCost(int inputCost) {
+		this.inputCost = inputCost;
 	}
 }

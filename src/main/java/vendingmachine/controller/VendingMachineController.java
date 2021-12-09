@@ -37,10 +37,9 @@ public class VendingMachineController {
 	}
 
 	public void postInputCosts(){
-		ResponseMessage.of('\n'+Message.ENTER_INPUT_COSTS.getMessage());
-
 		try{
-			ResponseMessage.of('\n'+Message.PRINT_INPUT_COSTS.getMessage()+vendingMachineService.postInputCosts(Console.readLine()));
+			ResponseMessage.of('\n'+Message.ENTER_INPUT_COSTS.getMessage());
+			vendingMachineService.postInputCosts(Console.readLine());
 		}catch (IllegalArgumentException e){
 			ErrorResponse.of(e.getMessage());
 			postInputCosts();
@@ -48,9 +47,14 @@ public class VendingMachineController {
 	}
 
 	public void postProductName(){
+		boolean check = false;
+		while(!check){
+			ResponseMessage.of(Message.ENTER_PRODUCT_GOING_TO_PURCHASE.getMessage());
+			check = vendingMachineService.postProductName(Console.readLine());
+		}
 	}
 
-	public void getBalance(){
-
+	public void getBalance() {
+		ResponseMessage.of(vendingMachineService.getBalance());
 	}
 }
