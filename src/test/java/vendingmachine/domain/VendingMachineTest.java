@@ -21,8 +21,16 @@ class VendingMachineTest {
     @ParameterizedTest
     @DisplayName("초기 금액으로 10원 밑으로 입력받으면 에러를 반환한다.")
     @ValueSource(ints = {-1, -10, -100, -87, -240, -900, -10000})
-    void 자판기_초기_금액_입력_0보다_적은_경우_오류() {
+    void 자판기_초기_금액_입력_0보다_적은_경우_오류(int inputMoney) {
         VendingMachine vm = new VendingMachine();
         Assertions.assertThatThrownBy(() -> vm.putInitialAmount(inputMoney)).isInstanceOf(IllegalArgumentException.class); //TODO: 문구는 나중에 생성
+    }
+
+    @ParameterizedTest
+    @DisplayName("10으로 나눠떨어지지 않는 금액을 입력받으면 에러를 반환한다.")
+    @ValueSource(ints = {1, 2, 9, 11, 23, 2006, 10007, 40009})
+    void 자판기_초기_금액_최소_동전으로_만들수_없음(int inputMoney) {
+        VendingMachine vm = new VendingMachine();
+        vm.putInitialAmount(inputMoney);
     }
 }
