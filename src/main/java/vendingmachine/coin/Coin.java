@@ -1,5 +1,6 @@
 package vendingmachine.coin;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -39,6 +40,10 @@ public enum Coin {
 			.filter(money::isSpendable)
 			.map(Money::getAmount)
 			.collect(Collectors.toList());
+	}
+
+	public static List<Coin> getCoins() {
+		return new ArrayList<>(BY_MONEY.values());
 	}
 
 	public Money getMoney() {

@@ -10,13 +10,21 @@ import vendingmachine.Money;
 public class RandomCoinGenerator implements CoinGenerator {
 	@Override
 	public Coins generate(Money money) {
-		Map<Coin, Integer> coins = new EnumMap<>(Coin.class);
+		Map<Coin, Integer> coins = initializeCoins();
 		while(!money.isZero()) {
 			Coin coin = generateCoin(money);
-			coins.merge(coin, 1, (originCount,newCount) -> originCount+1);
+			coins.computeIfPresent(coin, (key, value) -> value+1);
 			money.spend(coin.getMoney());
 		}
 		return new Coins(coins);
+	}
+
+	private Map<Coin, Integer> initializeCoins() {
+		Map<Coin, Integer> coins = new EnumMap<>(Coin.class);
+		for (Coin coin : Coin.getCoins()) {
+			coins.put(coin,0);
+		}
+		return coins;
 	}
 
 	private Coin generateCoin(final Money money) {
