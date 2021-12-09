@@ -1,13 +1,14 @@
 package vendingmachine.repository;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
 
 public class CoinRepository { // 1급 콜렉션
-    private HashMap<Coin, Integer> coinRepository;
+    private LinkedHashMap<Coin, Integer> coinRepository;
 
-    public CoinRepository(HashMap<Coin, Integer> coinRepository) {
+    public CoinRepository(LinkedHashMap<Coin, Integer> coinRepository) {
         this.coinRepository = coinRepository;
     }
 
