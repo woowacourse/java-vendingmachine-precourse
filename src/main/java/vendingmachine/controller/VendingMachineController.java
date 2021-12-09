@@ -27,4 +27,8 @@ public class VendingMachineController {
 		this.vendingMachine = new VendingMachine(deposit, productList, coinList);
 	}
 
+	public VendingMachine getVendingMachine() {
+		return vendingMachine;
+	}
+	
 }

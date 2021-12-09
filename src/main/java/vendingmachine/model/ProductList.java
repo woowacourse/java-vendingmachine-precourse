@@ -46,13 +46,18 @@ public class ProductList {
 		return true;
 	}
 
-	private boolean isExistProduct(String productName) {
+	public boolean isExistProduct(String productName) {
 		return hashMap.containsKey(productName);
 	}
 
-	private boolean isQuantitySufficient(String productName) {
+	public boolean isQuantitySufficient(String productName) {
 		Product product = hashMap.get(productName);
 		return product.getQuantity() > 0;
+	}
+
+	public boolean isTooExpensive(String productName, int currentDeposit) {
+		Product product = hashMap.get(productName);
+		return product.getPrice() > currentDeposit;
 	}
 
 }

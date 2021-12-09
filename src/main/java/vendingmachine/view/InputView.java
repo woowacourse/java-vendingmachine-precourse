@@ -5,6 +5,8 @@ import static vendingmachine.validator.MoneyValidator.*;
 import static vendingmachine.validator.ProductValidator.*;
 import static vendingmachine.view.OutputView.*;
 
+import vendingmachine.model.VendingMachine;
+
 public class InputView {
 
 	public int getMoneyOfVendingMachine() {
@@ -55,14 +57,14 @@ public class InputView {
 		return input;
 	}
 
-	public String getProductWantToBuy() {
+	public String getProductWantToBuy(VendingMachine vendingMachine) {
 		String input = "";
 
 		boolean isValid = false;
 		while (!isValid) {
 			input = readLine();
 			try {
-				isValid = isValidProductName(input);
+				isValid = isAvailableForBuy(input, vendingMachine);
 			} catch (IllegalArgumentException exception) {
 				printError(exception);
 			}

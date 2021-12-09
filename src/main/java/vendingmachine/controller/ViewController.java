@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -24,6 +25,11 @@ public class ViewController {
 	public String returnProductList() {
 		outputView.askProductInfo();
 		return inputView.getProductsInput();
+	}
+
+	public String returnProductWantToBuy(VendingMachine vendingMachine) {
+		outputView.askProductWantToBuy();
+		return inputView.getProductWantToBuy(vendingMachine);
 	}
 
 }

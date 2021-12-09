@@ -11,5 +11,13 @@ public class VendingMachine {
 		this.productList = productList;
 		this.coinList = coinList;
 	}
+
+	public ProductList getProductList() {
+		return productList;
+	}
+
+	public int getDeposit() {
+		return deposit;
+	}
 	
 }
