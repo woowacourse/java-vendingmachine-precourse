@@ -19,22 +19,27 @@ public class VendingMachine {
     }
 
     public void run() {
-        while(productsController.canBuyAnyProduct(machineController.nowInputAmount())){
+        int nowAmount = machineController.nowInputAmount();
+        while (productsController.canBuyAnyProduct(nowAmount)) {
             machineController.nowInputAmountInfo();
-            if (!buyProduct()) {
-                // 잔액 반환
-                break;
-            }
+            buyProduct();
+            nowAmount = machineController.nowInputAmount();
         }
+        coinController.repayCoinsPrint(nowAmount);
     }
 
-    public boolean buyProduct() {
-        String buyProductName = machineController.buyWhichProduct();
-        Product product = productsController.findProduct(buyProductName);
-        if (!machineController.buyProduct(product.getPrice())) {
-            return false;
+    public void buyProduct() {
+        try {
+            String buyProductName = machineController.buyWhichProduct();
+            Product product = productsController.findProduct(buyProductName);
+            if (!machineController.buyProduct(product.getPrice())) {
+                throw new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
+                        + ValidatorMessage.NOT_ENOUGH_AMOUNT);
+            }
+            productsController.buyProduct(product);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            buyProduct();
         }
-        productsController.buyProduct(product);
-        return true;
     }
 }
