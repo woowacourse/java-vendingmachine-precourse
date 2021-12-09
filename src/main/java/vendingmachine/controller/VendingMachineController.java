@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.exception.dto.ErrorResponse;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
 import vendingmachine.service.VendingMachineService;
@@ -15,11 +16,16 @@ public class VendingMachineController {
 
 	public void postVendingMachineCosts() {
 		ResponseMessage.of(Message.ENTER_COSTS_GOING_TO_HAS_MACHINE.getMessage());
-		vendingMachineService.postVendingMachineCosts(Console.readLine());
+
+		try{
+			ResponseMessage.of('\n'+vendingMachineService.postVendingMachineCosts(Console.readLine()));
+		} catch(IllegalArgumentException e){
+			ErrorResponse.of(e.getMessage());
+			postVendingMachineCosts();
+		}
 	}
 
 	public void postProductInfo(){
-		ResponseMessage.of(Message.PRINT_COIN_IN_MACHINE.getMessage());
 	}
 
 	public void postInputCosts(){
