@@ -8,7 +8,7 @@ public class OutputView {
 	}
 
 	public static void printInputAmount(int inputAmount) {
-		System.out.println("투입 금액: " + inputAmount);
+		System.out.println("투입 금액: " + inputAmount + "원");
 	}
 
 	public static void printChangeAmount(String changeAmountToString) {
