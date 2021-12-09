@@ -2,23 +2,23 @@ package vendingmachine;
 
 import java.util.Objects;
 
-public class Amount {
+public class Money {
 	private static final int MINIMUM_UNIT = 10;
 	private int amount;
 
-	private Amount(int amount) {
+	private Money(int amount) {
 		validateRange(amount);
 		validateMinimumUnit(amount);
 		this.amount = amount;
 	}
 
-	public static Amount of(String amount) {
+	public static Money of(String amount) {
 		int convertAmount = convert(amount);
-		return new Amount(convertAmount);
+		return new Money(convertAmount);
 	}
 
-	public static Amount of(int amount) {
-		return new Amount(amount);
+	public static Money of(int amount) {
+		return new Money(amount);
 	}
 
 	private static int convert(String amount) {
@@ -33,15 +33,15 @@ public class Amount {
 		return amount == 0;
 	}
 
-	public void spend(Amount amount) {
-		if (isSpendable(amount)) {
-			this.amount -= amount.amount;
+	public void spend(Money money) {
+		if (isSpendable(money)) {
+			this.amount -= money.amount;
 		}
 		// 소비할 수 없을 때 알려야한다.
 	}
 
-	public boolean isSpendable(Amount amount) {
-		return this.amount >= amount.amount;
+	public boolean isSpendable(Money money) {
+		return this.amount >= money.amount;
 	}
 
 	public int getAmount() {
@@ -67,8 +67,8 @@ public class Amount {
 		} if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Amount amount1 = (Amount)o;
-		return amount == amount1.amount;
+		Money money1 = (Money)o;
+		return amount == money1.amount;
 	}
 
 	@Override

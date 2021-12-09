@@ -6,43 +6,43 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import vendingmachine.Amount;
+import vendingmachine.Money;
 
 public enum Coin {
 
-	COIN_500(Amount.of(500)),
-	COIN_100(Amount.of(100)),
-	COIN_50(Amount.of(50)),
-	COIN_10(Amount.of(10));
+	COIN_500(Money.of(500)),
+	COIN_100(Money.of(100)),
+	COIN_50(Money.of(50)),
+	COIN_10(Money.of(10));
 
-	private static final Map<Amount, Coin> BY_AMOUNT = new HashMap<>();
+	private static final Map<Money, Coin> BY_MONEY = new HashMap<>();
 
 	static {
 		for (Coin coin : values()) {
-			BY_AMOUNT.put(coin.amount, coin);
+			BY_MONEY.put(coin.money, coin);
 		}
 	}
 
-	private final Amount amount;
+	private final Money money;
 
-	Coin(final Amount amount) {
-		this.amount = amount;
+	Coin(final Money money) {
+		this.money = money;
 	}
 
-	public static Coin valueOf(Amount amount) {
-		return BY_AMOUNT.get(amount);
+	public static Coin valueOf(Money money) {
+		return BY_MONEY.get(money);
 	}
 
-	public static List<Integer> getPossibleAmounts(Amount amount) {
-		Set<Amount> coinAmounts = BY_AMOUNT.keySet();
-		return coinAmounts.stream()
-			.filter(amount::isSpendable)
-			.map(Amount::getAmount)
+	public static List<Integer> getPossibleCoinAmounts(Money money) {
+		Set<Money> coinMonies = BY_MONEY.keySet();
+		return coinMonies.stream()
+			.filter(money::isSpendable)
+			.map(Money::getAmount)
 			.collect(Collectors.toList());
 	}
 
-	public Amount getAmount() {
-		return amount;
+	public Money getMoney() {
+		return money;
 	}
 
 }

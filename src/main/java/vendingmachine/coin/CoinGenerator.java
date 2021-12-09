@@ -2,8 +2,8 @@ package vendingmachine.coin;
 
 import java.util.Map;
 
-import vendingmachine.Amount;
+import vendingmachine.Money;
 
 public interface CoinGenerator {
-	Map<Coin, Integer> generate(Amount amount);
+	Map<Coin, Integer> generate(Money money);
 }
