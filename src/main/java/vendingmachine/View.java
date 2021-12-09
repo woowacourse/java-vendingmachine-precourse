@@ -2,6 +2,8 @@ package vendingmachine;
 
 import java.util.Map;
 
+import camp.nextstep.edu.missionutils.Console;
+
 public class View {
     public static void printInitialCoin(Map coins) {
         System.out.println("자판기가 보유한 동전");
@@ -18,5 +20,10 @@ public class View {
     public static void printCoins(Map<Coin, Integer> coins) {
         System.out.println("잔돈");
         coins.forEach((coin, count) -> System.out.println(coin.getAmount() + "원 - " + count + "개"));
+    }
+
+    public static String printIndexPage() {
+        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        return Console.readLine().replace(" ", "");
     }
 }
