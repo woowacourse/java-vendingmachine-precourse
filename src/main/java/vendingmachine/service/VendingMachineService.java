@@ -33,7 +33,7 @@ public class VendingMachineService {
 	}
 
 	public String getMachineSmallChange() {
-		return vendingMachine.currentSmallChange();
+		return vendingMachine.getCurrentMachineCoin();
 	}
 
 	public void saveItem(String itemInfo) {
@@ -43,7 +43,6 @@ public class VendingMachineService {
 	}
 
 	public boolean canBuyAnything(int payMoney) {
-		System.out.println(vendingMachine.getMinItemPrice());
 		if (payMoney < vendingMachine.getMinItemPrice() || vendingMachine.isAllItemSoldOut()) {
 			return false;
 		}
@@ -57,11 +56,8 @@ public class VendingMachineService {
 		return payMoney;
 	}
 
-	public int calculateSmallChange(int remainMoney, String itemName) {
-		if (!vendingMachine.isItemSoldOut(itemName)) {
-			return vendingMachine.subtractCoins(remainMoney);
-		}
-		return remainMoney;
+	public String calculateSmallChange(int remainMoney) {
+		return vendingMachine.subtractCoins(remainMoney);
 	}
 
 	private String[] decodeInput(String itemInfo) {

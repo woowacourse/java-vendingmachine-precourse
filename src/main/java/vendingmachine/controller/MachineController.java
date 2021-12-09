@@ -39,7 +39,9 @@ public class MachineController {
 			outputView.printPuttedMoney(payMoney);
 			String itemToBuy = inputView.enterItemToBuy();
 			payMoney = service.buyItem(payMoney, itemToBuy);
-
 		}
+		outputView.printPuttedMoney(payMoney);
+		String smallChangeResult = service.calculateSmallChange(payMoney);
+		outputView.printRemainingSmallChange(smallChangeResult);
 	}
 }

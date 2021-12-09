@@ -27,7 +27,11 @@ public class VendingMachine {
 		coins.put(coin, coins.getOrDefault(coin, 0) + 1);
 	}
 
-	public String currentSmallChange() {
+	public String getCurrentMachineCoin(){
+		return getCurrentCoin(coins);
+	}
+
+	private String getCurrentCoin(HashMap<Coin,Integer> coins) {
 		StringBuilder builder = new StringBuilder();
 		coins.keySet().stream()
 			.sorted((c1, c2) -> -1 * Integer.compare(c1.getAmount(), c2.getAmount()))
@@ -67,19 +71,21 @@ public class VendingMachine {
 		return item.getPrice();
 	}
 
-	public int subtractCoins(int payMoney) {
+	public String subtractCoins(int payMoney) {
+		HashMap<Coin, Integer> smallChange = new HashMap<>();
 		List<Coin> reverseSortedList = coins.keySet()
 			.stream()
 			.sorted((c1, c2) -> -1 * Integer.compare(c1.getAmount(), c2.getAmount()))
 			.collect(Collectors.toList());
 		for (Coin coin : reverseSortedList) {
-			payMoney = subtract(coin, payMoney);
+			payMoney = subtract(coin, payMoney,smallChange);
 		}
-		return payMoney;
+		return getCurrentCoin(smallChange);
 	}
 
-	private int subtract(Coin coin, int payMoney) {
+	private int subtract(Coin coin, int payMoney, HashMap<Coin, Integer> smallChange) {
 		while (payMoney >= coin.getAmount() && coins.get(coin) > InputCondition.ZERO) {
+			smallChange.put(coin,smallChange.getOrDefault(coin,0) + 1);
 			coins.put(coin, coins.get(coin) - 1);
 			payMoney -= coin.getAmount();
 		}
