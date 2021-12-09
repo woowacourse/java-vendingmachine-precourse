@@ -11,4 +11,14 @@ public class ProductRepository {
 		products.add(product);
 		productHashMap.put(product, number);
 	}
+
+	public int getProductCost(String productName) {
+		for (Product product : products) {
+			if (product.isSame(productName)) {
+				return product.getCost();
+			}
+		}
+		return 0;
+	}
+
 }

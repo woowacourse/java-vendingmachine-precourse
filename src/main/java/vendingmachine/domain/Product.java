@@ -11,6 +11,14 @@ public class Product {
 		this.cost = cost;
 	}
 
+	public int getCost() {
+		return cost;
+	}
+
+	public boolean isSame(String name) {
+		return this.name.equals(name);
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);

@@ -21,6 +21,17 @@ public class VendingMachine {
 	private void sellProducts() {
 		OutputView.printInputMoneyRequestMessage();
 		int inputMoney = getInputMoneyFromInput();
+		Customer customer = new Customer(inputMoney);
+		tradeWithCustomer(customer);
+	}
+
+	private void tradeWithCustomer(Customer customer) {
+		while (true) {
+			customer.showChanges();
+			String productName = InputView.getProductNameToBuyInput();
+			int productCost = productRepository.getProductCost(productName);
+			customer.purchaseProducts(productCost);
+		}
 	}
 
 	private int getInputMoneyFromInput() {

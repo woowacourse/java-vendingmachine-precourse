@@ -30,6 +30,15 @@ public class OutputView {
 		System.out.println(INPUT_MONEY_INPUT_REQUEST_MESSAGE);
 	}
 
+	public static void printProductNameToBuyRequestMessage() {
+		System.out.println(PRODUCT_TO_BUY_INPUT_REQUEST_MESSAGE);
+	}
+
+	public static void printCustomerChanges(int changes) {
+		printEmptyLine();
+		System.out.println("투입 금액: " + changes + "원");
+	}
+
 	public static void printEmptyLine() {
 		System.out.println();
 	}
