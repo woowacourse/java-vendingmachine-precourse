@@ -22,4 +22,5 @@ public class ExceptionMessage {
 
     // Location : model/item/Items
     public static final String WRONG_ITEM_DELIMITER_EXCEPTION_MESSAGE = "상품을 구분하는 구분자(;) 앞 뒤에 상품 정보가 없습니다.";
+    public static final String ITEMS_OVERLAP_EXCEPTION_MESSAGE = "상품에 중복이 있습니다.";
 }

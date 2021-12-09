@@ -3,6 +3,8 @@ package vendingmachine.model.item.vo;
 import static vendingmachine.exception.ExceptionMessage.*;
 import static vendingmachine.validation.NumberValidator.isNotPositiveInteger;
 
+import java.util.Objects;
+
 public class Price {
     private static final int MIN_VALUE = 100;
     private final int value;
@@ -31,5 +33,18 @@ public class Price {
         if (value < MIN_VALUE) {
             throw new IllegalArgumentException(PRICE_MIN_VALUE_EXCEPTION_MESSAGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Price price = (Price) o;
+        return value == price.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

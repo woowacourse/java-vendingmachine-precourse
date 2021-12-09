@@ -3,6 +3,8 @@ package vendingmachine.model.item;
 import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_BRACKET_EXCEPTION_MESSAGE;
 import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE;
 
+import java.util.Objects;
+
 import vendingmachine.model.item.vo.Price;
 import vendingmachine.model.item.vo.Quantity;
 
@@ -43,5 +45,18 @@ public class Item {
         if (itemProperties.length != NUMBER_OF_ITEM_PROPERTIES) {
             throw new IllegalArgumentException(ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Item item = (Item) o;
+        return Objects.equals(name, item.name) && Objects.equals(price, item.price);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, price);
     }
 }
