@@ -57,7 +57,7 @@ vendingmachine
   - model
     - Coin
     - Product
-    - VendingMachine도
+    - VendingMachine
     
   - utils
     - ExceptionUtils
