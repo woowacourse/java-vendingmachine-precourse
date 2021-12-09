@@ -26,7 +26,7 @@ public class CoinsCase {
 
 	private CoinCase makeCoinCase(Coin coin) {
 		CoinCase coinCase = new CoinCase(coin, currentAmount);
-		currentAmount -= coinCase.getVendingMachineAmount();
+		currentAmount = coinCase.getVendingMachineAmount();
 		return coinCase;
 	}
 }
