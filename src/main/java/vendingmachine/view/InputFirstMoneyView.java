@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
+import vendingmachine.controller.ViewMappingKey;
 import vendingmachine.util.MoneyValidator;
 import vendingmachine.util.SystemMessage;
 
@@ -18,6 +19,7 @@ public class InputFirstMoneyView implements View {
 			return;
 		}
 		Application.controller.createFirstCoins(firstMoney);
+		Application.controller.view(ViewMappingKey.SHOW_FIRST_MONEY);
 	}
 
 	private int readFirstMoney() {

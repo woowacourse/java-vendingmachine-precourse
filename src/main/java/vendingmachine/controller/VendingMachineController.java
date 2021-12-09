@@ -3,8 +3,10 @@ package vendingmachine.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.service.CoinService;
 import vendingmachine.view.InputFirstMoneyView;
+import vendingmachine.view.ShowFirstMoneyView;
 import vendingmachine.view.View;
 
 public class VendingMachineController {
@@ -13,7 +15,7 @@ public class VendingMachineController {
 
 	public VendingMachineController() {
 		viewMapper.put(ViewMappingKey.INPUT_FIRST_MONEY, new InputFirstMoneyView());
-
+		viewMapper.put(ViewMappingKey.SHOW_FIRST_MONEY, new ShowFirstMoneyView());
 	}
 
 	public void view(ViewMappingKey key) {
@@ -22,5 +24,9 @@ public class VendingMachineController {
 
 	public void createFirstCoins(int firstMoney) {
 		coinService.createFirstCoins(firstMoney);
+	}
+
+	public Map<Coin, Integer> getCoins() {
+		return coinService.getCoins();
 	}
 }

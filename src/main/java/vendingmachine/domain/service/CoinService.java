@@ -2,6 +2,7 @@ package vendingmachine.domain.service;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
@@ -28,6 +29,10 @@ public class CoinService {
 			addCoin(coin);
 			firstMoney -= coin;
 		}
+	}
+
+	public Map<Coin, Integer> getCoins() {
+		return coinRepository.getCoins();
 	}
 
 	private void addCoin(int coin) {
