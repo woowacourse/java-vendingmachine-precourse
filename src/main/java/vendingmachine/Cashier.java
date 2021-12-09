@@ -13,11 +13,12 @@ import camp.nextstep.edu.missionutils.Randoms;
  */
 public class Cashier {
 	public void makeCoins(int holdingAmount) {
-		int coinAmount = Randoms.pickNumberInList(Coin.getAmounts());
-		if (coinAmount <= holdingAmount) {
-			Coin.findByAmount(coinAmount).add();
-			holdingAmount = holdingAmount - coinAmount;
-		}
-		// TODO: 보유 금액이 0이 될때까지 반복한다
+		do {
+			int coinAmount = Randoms.pickNumberInList(Coin.getAmounts());
+			if (coinAmount <= holdingAmount) {
+				Coin.findByAmount(coinAmount).add();
+				holdingAmount = holdingAmount - coinAmount;
+			}
+		} while (holdingAmount > 0);
 	}
 }
