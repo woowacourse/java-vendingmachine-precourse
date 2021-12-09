@@ -1,16 +1,17 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.inputvalue.CoinBalanceInputValue;
-import vendingmachine.inputvalue.ItemsInventoryInputValue;
+import vendingmachine.dto.ItemsInventoryInfo;
+import vendingmachine.dto.request.CoinBalanceRequest;
+import vendingmachine.dto.request.ItemsInventoryRequest;
 
 public class VendingMachineConsole {
     public int inputCoinBalance() {
-        return new CoinBalanceInputValue(input()).toCoinBalance();
+        return new CoinBalanceRequest(input()).toCoinBalance();
     }
 
     public ItemsInventoryInfo inputItemInventoryInfo() {
-        return new ItemsInventoryInputValue(input()).toItemsInventoryInfo();
+        return new ItemsInventoryRequest(input()).toItemsInventoryInfo();
     }
 
     private String input() {

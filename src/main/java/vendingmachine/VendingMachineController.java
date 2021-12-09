@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import vendingmachine.dto.ItemsInventoryInfo;
+
 public class VendingMachineController {
     private final VendingMachineConsole console = new VendingMachineConsole();
 
