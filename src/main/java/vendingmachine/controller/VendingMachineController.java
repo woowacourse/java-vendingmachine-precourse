@@ -28,6 +28,18 @@ public class VendingMachineController {
 		this.vendingMachine = new VendingMachine(deposit, productList, coinList);
 	}
 
+	public void run() {
+		while (vendingMachine.isContinueToSell()) {
+			String productName = viewController.returnProductWantToBuy(vendingMachine);
+			sell(productName);
+
+			int remainingDeposit = vendingMachine.getDeposit();
+			viewController.printRemainingDeposit(remainingDeposit);
+		}
+
+		returnChanges();
+	}
+
 	private void sell(String productName) {
 		ProductList productList = vendingMachine.getProductList();
 
