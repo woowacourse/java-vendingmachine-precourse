@@ -28,7 +28,7 @@ public class VendingMachineProcessor {
             return VendingMachineChecker.CLOSE;
         }
 
-        if(vendingMachine.isInsertMoneyUnderThanMinBeveragePrice()){
+        if(vendingMachine.isInsertMoneyUnderMinBeveragePrice()){
             return VendingMachineChecker.CLOSE;
         }
         return VendingMachineChecker.OPEN;

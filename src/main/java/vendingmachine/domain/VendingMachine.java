@@ -46,7 +46,7 @@ public class VendingMachine {
         money = new Money(price);
     }
 
-    public boolean isInsertMoneyUnderThanMinBeveragePrice(){
+    public boolean isInsertMoneyUnderMinBeveragePrice(){
         if (beverages.getMinBeveragePrice() > money.getPrice()){
             return true;
         }
