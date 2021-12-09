@@ -20,15 +20,16 @@ public class MachineController {
     private void initMachine() {
         createVendingMachine();
         createProducts();
+        userInsertAmount();
     }
 
     private void createVendingMachine() {
-        vendingMachine = new VendingMachine(inputAmount());
+        vendingMachine = new VendingMachine(inputInitialAmount());
         OutputView.printRemainingCoins(vendingMachine.getCoins());
     }
 
-    private int inputAmount() {
-        InputView.printInputAmountMessage();
+    private int inputInitialAmount() {
+        InputView.printInputInitialAmountMessage();
 
         while (true) {
             try {
@@ -54,5 +55,11 @@ public class MachineController {
                 OutputView.printErrorMessage(e);
             }
         }
+    }
+
+    private void userInsertAmount() {
+        InputView.printUserInputAmountMessage();
+
+
     }
 }

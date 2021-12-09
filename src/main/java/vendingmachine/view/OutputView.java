@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import vendingmachine.model.Coin;
+
 import java.util.Map;
 
 public class OutputView {
@@ -8,10 +10,10 @@ public class OutputView {
     private static final String PRICE_MESSAGE = "원 - ";
     private static final String NUMBER_OF_MESSAGE = "개";
 
-    public static void printRemainingCoins(Map<Integer, Integer> coins) {
+    public static void printRemainingCoins(Map<Coin, Integer> coins) {
         System.out.println(NEW_LINE + REMAINING_COINS_MESSAGE);
-        for (int coin : coins.keySet()) {
-            System.out.println(coin + PRICE_MESSAGE + coins.get(coin) + NUMBER_OF_MESSAGE);
+        for (Coin coin : coins.keySet()) {
+            System.out.println(coin.getAmount() + PRICE_MESSAGE + coins.get(coin) + NUMBER_OF_MESSAGE);
         }
         System.out.println();
     }

@@ -11,15 +11,16 @@ public class VendingMachine {
     public static final int DEFAULT_VALUE = 0;
     public static final int INCREMENT_BY_ONE = 1;
 
-    private Map<Integer, Integer> coins;
+    private Map<Coin, Integer> coins;
     private Products products;
+    private int userInputAmount;
 
     public VendingMachine(int amount) {
         this.coins = createCoins(amount);
     }
 
-    private Map<Integer, Integer> createCoins(int amount) {
-        Map<Integer, Integer> coins = new HashMap<>();
+    private Map<Coin, Integer> createCoins(int amount) {
+        Map<Coin, Integer> coins = new HashMap<>();
         while (amount != DEFAULT_VALUE) {
             int randomCoin = RandomNumberGenerator.generateRandomCoins(
                     Stream.of(Coin.values())
@@ -31,16 +32,17 @@ public class VendingMachine {
         return coins;
     }
 
-    private int addCoin(Map<Integer, Integer> coins, int randomCoin, int amount) {
+    private int addCoin(Map<Coin, Integer> coins, int randomCoin, int amount) {
         if (amount >= randomCoin) {
-            coins.put(randomCoin, coins.getOrDefault(randomCoin, DEFAULT_VALUE) + INCREMENT_BY_ONE);
+            Coin coin = Coin.findCoin(randomCoin);
+            coins.put(coin, coins.getOrDefault(coin, DEFAULT_VALUE) + INCREMENT_BY_ONE);
             amount -= randomCoin;
         }
 
         return amount;
     }
 
-    public Map<Integer, Integer> getCoins() {
+    public Map<Coin, Integer> getCoins() {
         return coins;
     }
 
