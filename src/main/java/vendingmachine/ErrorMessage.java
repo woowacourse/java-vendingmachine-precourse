@@ -5,10 +5,10 @@ public enum ErrorMessage {
     AMOUNT_FORMAT_ERROR_MESSAGE("[ERROR] 금액은 숫자여야 합니다."),
     AMOUNT_UNIT_ERROR_MESSAGE("[ERROR] 금액은 10원 단위로 나누어 떨어져야 합니다."),
     AMOUNT_NEGATIVE_ERROR_MESSAGE("[ERROR] 금액은 음수가 될 수 없습니다."),
-    OBJECT_DUPLICATE_ERROR_MESSAGE("[ERROR] 중복된 상품명을 사용하실 수 없습니다."),
-    OBJECT_AMOUNT_ERROR_MESSAGE("[ERROR] 수량은 1개 이상 입력하셔야합니다."),
-    OBJECT_PRICE_ERROR_MESSAGE("[ERROR] 가격은 100원 이상 입력하셔야합니다."),
-    OBJECT_SOLD_OUT_ERROR_MESSAGE("[ERROR] 해당 상품은 현재 없는 상품입니다.");
+    PRODUCT_DUPLICATE_ERROR_MESSAGE("[ERROR] 중복된 상품명을 사용하실 수 없습니다."),
+    PRODUCT_AMOUNT_ERROR_MESSAGE("[ERROR] 수량은 1개 이상 입력하셔야합니다."),
+    PRODUCT_PRICE_ERROR_MESSAGE("[ERROR] 가격은 100원 이상 입력하셔야합니다."),
+    PRODUCT_SOLD_OUT_ERROR_MESSAGE("[ERROR] 해당 상품은 현재 없는 상품입니다.");
 
     private String message;
 
