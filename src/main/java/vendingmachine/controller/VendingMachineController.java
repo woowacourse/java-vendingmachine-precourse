@@ -36,6 +36,8 @@ public class VendingMachineController {
 			money = item.subtractMoneyAfterPurchase(money);
 			outputService.enter();
 		} while (!satisfyExitCondition());
+
+		outputService.printChange(coinService.returnChange(money));
 	}
 
 	private boolean satisfyExitCondition() {

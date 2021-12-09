@@ -51,4 +51,16 @@ public enum Coin {
         }
         return amount - this.amount;
     }
+
+    public int getChangeCount(int amount) {
+        if (amount < this.amount) {
+            return ZERO;
+        }
+
+        return amount / this.amount;
+    }
+
+    public int multiplyCount(int count) {
+        return this.amount * count;
+    }
 }

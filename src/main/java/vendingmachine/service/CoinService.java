@@ -2,7 +2,10 @@ package vendingmachine.service;
 
 import static vendingmachine.NumberConstant.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
@@ -38,5 +41,41 @@ public class CoinService {
 
 	public int getCoinCount(int amount) {
 		return coinRepository.get(Coin.getByAmount(amount));
+	}
+
+	public Map<Coin, Integer> returnChange(int money) {
+		Map<Coin, Integer> change = new HashMap<>();
+		Iterator<Coin> iter = Arrays.stream(Coin.values()).iterator();
+
+		while (money > ZERO && iter.hasNext()) {
+			Coin coin = iter.next();
+			int changeCount = getMaxChangeCount(money, coin);
+			change.put(coin, changeCount);
+			subtractCoinCount(coin, changeCount);
+
+			money -= coin.multiplyCount(changeCount);
+		}
+
+		return change;
+	}
+
+	private void subtractCoinCount(Coin coin, int count) {
+		int coinCount = coinRepository.get(coin);
+		coinRepository.put(coin, coinCount - count);
+
+		if (coinCount < count) {
+			coinRepository.put(coin, ZERO);
+		}
+	}
+
+	public int getMaxChangeCount(int money, Coin coin) {
+		int changeCount = coin.getChangeCount(money);
+		int coinCount = coinRepository.get(coin);
+
+		if (coinCount >= changeCount) {
+			return changeCount;
+		}
+
+		return coinCount;
 	}
 }
