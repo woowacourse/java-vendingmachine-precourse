@@ -43,13 +43,13 @@ public class InputController {
 		}
 	}
 
-	public static String setBuyProduct(String[] names) {
+	public static String setWantedProduct(String[] names) {
 		try {
 			NameValidator validation = new NameValidator(InputView.buyProductNameInput(), names);
 			return validation.NAME;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setBuyProduct(names);
+			return setWantedProduct(names);
 		}
 	}
 }

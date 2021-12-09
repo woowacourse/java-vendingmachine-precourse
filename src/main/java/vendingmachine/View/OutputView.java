@@ -20,4 +20,9 @@ public class OutputView {
 	public static void printEmpty() {
 		System.out.println();
 	}
+
+	public static void printChange() {
+		System.out.println("잔돈");
+		System.out.println("블라블라");
+	}
 }

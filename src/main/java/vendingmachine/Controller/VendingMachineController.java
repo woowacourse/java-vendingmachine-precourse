@@ -17,19 +17,32 @@ public class VendingMachineController {
 	public VendingMachineController() {
 		set();
 		activate();
+		giveChanges();
 	}
 
 	private void set() {
 		setMachineMoney();
 		OutputView.printCoin(machineCoins);
 		setMachineProduct();
-		setUserMoney();
 	}
 
 	private void activate() {
-		OutputView.printUserMoney(userMoney);
-		setBuyProduct();
-		OutputView.printEmpty();
+		setUserMoney();
+		do {
+			OutputView.printUserMoney(userMoney);
+			setWantedProduct();
+			Product resultProduct = find(products, nameInput);
+			if (resultProduct.PRICE > userMoney || resultProduct.stock == 0) {
+				break;
+			}
+			//팔렸다
+			userMoney -= resultProduct.PRICE;
+			resultProduct.sell();
+		} while (!isActivateEnd());
+	}
+
+	private void giveChanges() {
+		OutputView.printChange();
 	}
 
 	private void setMachineMoney() {
@@ -59,14 +72,36 @@ public class VendingMachineController {
 		OutputView.printEmpty();
 	}
 
-	private void setBuyProduct() {
-		String[] names = setNames();
-		nameInput = InputController.setBuyProduct(names);
+	private void setWantedProduct() {
+		String[] names = getNames();
+		nameInput = InputController.setWantedProduct(names);
+		OutputView.printEmpty();
 	}
 
-	private String[] setNames() {
+	private String[] getNames() {
 		return products.stream()
 			.map(product -> product.NAME)
 			.toArray(String[]::new);
+	}
+
+	private Product find(ArrayList<Product> products, String name) {
+		return products.stream()
+			.filter(product -> product.NAME.equals(nameInput))
+			.findAny().get();
+	}
+
+	private boolean isActivateEnd() {
+		return userMoney < getMinPrice(products) || allSoldOut(products);
+	}
+
+	private int getMinPrice(ArrayList<Product> products) {
+		return products.stream()
+			.map(product -> product.PRICE)
+			.max(Integer::compare).get();
+	}
+
+	private boolean allSoldOut(ArrayList<Product> products) {
+		return products.stream()
+			.allMatch(product -> product.stock == 0);
 	}
 }

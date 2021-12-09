@@ -310,14 +310,52 @@ class InputTest extends NsTest {
 
 	@Test
 	void 구매상품명_받기() {
-		assertSimpleTest(
-			() -> {
-				runException("450", "[콜라,900,10]", "1000", "콜라");
-				assertThat(output()).doesNotContain(
-					ERROR_MESSAGE
-				);
-			}
-		);
+		assertSimpleTest(() -> {
+			runException("450", "[콜라,900,10]", "1000", "콜라");
+			assertThat(output()).doesNotContain(
+				ERROR_MESSAGE
+			);
+		});
+	}
+
+	@Test
+	void 잔돈_상품금액이_투입금액보다_많은_경우() {
+		assertSimpleTest(() -> {
+			runException("450", "[콜라,900,10]", "800", "콜라");
+			assertThat(output()).contains(
+				"잔돈"
+			);
+		});
+	}
+
+	@Test
+	void 잔돈_소진() {
+		assertSimpleTest(() -> {
+			runException("450", "[콜라,900,1]", "8000", "콜라");
+			assertThat(output()).contains(
+				"잔돈"
+			);
+		});
+	}
+
+	@Test
+	void 잔돈_남은금액_암것도못삼() {
+		assertSimpleTest(() -> {
+			runException("450", "[콜라,900,10];[사이다,2000,10]", "1000", "콜라");
+			assertThat(output()).contains(
+				"잔돈"
+			);
+		});
+	}
+
+	@Test
+	void 잔돈_재고없음() {
+		assertSimpleTest(() -> {
+			runException("450", "[콜라,900,1];[사이다,2000,1]", "10000", "콜라", "사이다");
+			assertThat(output()).contains(
+				"잔돈"
+			);
+		});
 	}
 
 	@Override
