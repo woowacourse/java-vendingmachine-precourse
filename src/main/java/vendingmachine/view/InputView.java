@@ -36,7 +36,9 @@ public class InputView {
 
 	public static String inputPurchaseProductName() {
 		System.out.println("구매할 상품명을 입력해 주세요.");
-		return Console.readLine();
+		String input = Console.readLine();
+		printEmptyLine();
+		return input;
 	}
 
 	private static void printEmptyLine() {
