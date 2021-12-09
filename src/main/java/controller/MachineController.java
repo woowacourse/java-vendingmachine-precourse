@@ -1,6 +1,6 @@
 package controller;
 
-import view.Display;
+import view.InputDisplay;
 
 public class MachineController {
 
@@ -8,7 +8,7 @@ public class MachineController {
 	}
 
 	public static void turnOnMachine() {
-		Display.askInputVendingMachineChange();
+		InputDisplay.askInputVendingMachineChange();
 		InputController.inputVendingMachineChange();
 	}
 
