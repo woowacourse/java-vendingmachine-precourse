@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.Validator;
 
 import vendingmachine.Model.*;
+import vendingmachine.SystemMessage.SystemMessage;
 
 public class Validator {
 
@@ -27,21 +28,22 @@ public class Validator {
     public static int isValidateDrinkInfo(String input) {
         input = input.substring(1, input.length() - 1);
         String[] drinkInfo = input.split(",");
-        if(!isValidateInfoFormat(drinkInfo)){
+        if (!isValidateInfoFormat(drinkInfo)) {
             return 0;
         }
-        if(!isValidatePrice(drinkInfo[1]) || !isValidateAmount(drinkInfo[2])){
+        if (!isValidatePrice(drinkInfo[1]) || !isValidateAmount(drinkInfo[2])) {
             return 0;
         }
         return 1;
     }
-    public static boolean isValidateInfoFormat(String[] input){
-        try{
-            if(input.length!=3){
+
+    public static boolean isValidateInfoFormat(String[] input) {
+        try {
+            if (input.length != 3) {
                 throw new IllegalArgumentException();
             }
-        }catch(IllegalArgumentException e){
-            System.out.println("[ERROR] 잘못된 입력 형식입니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(SystemMessage.WRONG_FORMAT_MESSAGE);
             return false;
         }
         return true;
@@ -75,7 +77,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 금액은 숫자여야 합니다.");
+            System.out.println(SystemMessage.NOT_NUMBER_MESSAGE);
             return false;
         }
         return true;
@@ -96,7 +98,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 금액의 최소단위는 10원입니다.");
+            System.out.println(SystemMessage.NOT_MULTIPLE_OF_10_MESSAGE);
             return false;
         }
         return true;
@@ -108,7 +110,7 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 금액은 음수일 수 없습니다.");
+            System.out.println(SystemMessage.NOT_POSITIVE_MESSAGE);
             return false;
         }
         return true;
@@ -120,31 +122,31 @@ public class Validator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 상품가격은 100원 이상이어야 합니다.");
+            System.out.println(SystemMessage.LESS_THAN_100_MESSAGE);
             return false;
         }
         return true;
     }
 
-    public static boolean isValidateChoice(String input, VendingMachine vendingMachine){
-        try{
-            if(vendingMachine.isDrinkInList(input)){
+    public static boolean isValidateChoice(String input, VendingMachine vendingMachine) {
+        try {
+            if (vendingMachine.isDrinkInList(input)) {
                 throw new IllegalArgumentException();
             }
-        } catch (IllegalArgumentException e){
-            System.out.println("존재하지 없는 상품입니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(SystemMessage.NO_SUCH_DRINK_MESSAGE);
             return false;
         }
         return true;
     }
 
-    public static boolean isRemained(Drink chosenDrink){
-        try{
-            if(chosenDrink.isSoldOut()){
+    public static boolean isRemained(Drink chosenDrink) {
+        try {
+            if (chosenDrink.isSoldOut()) {
                 throw new IllegalArgumentException();
             }
-        }catch(IllegalArgumentException e){
-            System.out.println("매진된 상품입니다.");
+        } catch (IllegalArgumentException e) {
+            System.out.println(SystemMessage.SOLD_OUT_MESSAGE);
             return false;
         }
         return true;

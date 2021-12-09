@@ -1,6 +1,6 @@
 package vendingmachine.Controller;
 
-import vendingmachine.Validator;
+import vendingmachine.Validator.Validator;
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
 import vendingmachine.Model.*;
@@ -13,11 +13,13 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class VendingController {
 
     private static InputView inputView;
+    private static OutputView outputView;
     private static VendingMachine vendingMachine;
     private static User user;
 
-    public VendingController(InputView inputView) {
+    public VendingController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
+        this.outputView = outputView;
     }
 
     public static void start() {
@@ -25,13 +27,35 @@ public class VendingController {
         setUser();
         while (!isEnd()) {
             tryPurchase();
-            System.out.println("투입 금액: "+user.getRemainMoney()+"원");
+            outputView.print("투입 금액: " + user.getRemainMoney() + "원");
         }
         returnChange();
     }
-    private static void returnChange(){
-        System.out.println("잔돈");
-        vendingMachine.getCoins().calculateChange(user.getRemainMoney());
+
+    private static void returnChange() {
+        outputView.print("잔돈");
+        calculateChange(vendingMachine.getCoins().getCoins(), user.getRemainMoney());
+    }
+
+    public static void calculateChange(List<CoinPair> coins, int remainMoney) {
+        for (CoinPair coinPair : coins) {
+            remainMoney -= payCoin(coinPair, remainMoney);
+        }
+    }
+
+    private static int payCoin(CoinPair coinPair, int remainMoney) {
+        String coinName = coinPair.getCoin().name();
+        coinName = coinName.substring(5) + "원";
+        int requiredCoins = remainMoney / coinPair.getCoin().getAmount();
+        if (coinPair.getNumber() == 0 || requiredCoins == 0) {
+            return 0;
+        }
+        if (requiredCoins >= coinPair.getNumber()) {
+            outputView.print(coinName + " - " + coinPair.getNumber() + "개");
+            return coinPair.getNumber() * coinPair.getCoin().getAmount();
+        }
+        outputView.print(coinName + " - " + requiredCoins + "개");
+        return requiredCoins * coinPair.getCoin().getAmount();
     }
 
     private static void tryPurchase() {
@@ -39,7 +63,7 @@ public class VendingController {
         System.out.println("구매할 상품명을 입력해주세요.");
         do {
             chosenDrink = getUserChoice();
-        }while(!Validator.isRemained(chosenDrink));
+        } while (!Validator.isRemained(chosenDrink));
 
         chosenDrink.subtractStock();
         user.pay(chosenDrink);
@@ -63,19 +87,28 @@ public class VendingController {
     private static void setVendingMachine() {
         int balance = getBalanceInput();
         Coins coins = decideCoins(balance);
-        OutputView.showCoins(coins);
+        showCoins(coins);
         List<Drink> drinks = getDrinkInput();
         vendingMachine = new VendingMachine(balance, coins, drinks);
     }
 
+    public static void showCoins(Coins coins) {
+        outputView.print("자판기가 보유한 동전");
+        for (CoinPair coin : coins.getCoins()) {
+            String coinName = coin.getCoin().name();
+            coinName = coinName.substring(5, coinName.length()) + "원";
+            outputView.print(coinName + " - " + coin.getNumber() + "개");
+        }
+    }
+
     private static void setUser() {
         user = new User(getUserMoneyInput());
-        System.out.println("투입 금액: "+user.getRemainMoney()+"원");
+        outputView.print("투입 금액: " + user.getRemainMoney() + "원");
     }
 
     private static int getUserMoneyInput() {
         String input;
-        System.out.println("투입 금액을 입력해 주세요.");
+        outputView.print("투입 금액을 입력해 주세요.");
         do {
             input = inputView.getInput();
         } while (!Validator.isValidateMoney(input));
@@ -85,7 +118,7 @@ public class VendingController {
     private static List<Drink> getDrinkInput() {
         List<Drink> drinkList = new ArrayList<>();
         String input;
-        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        outputView.print("상품명과 가격, 수량을 입력해 주세요.");
         do {
             input = inputView.getInput();
         } while (!Validator.isValidateDrinkList(input));
@@ -108,7 +141,7 @@ public class VendingController {
 
     private static int getBalanceInput() {
         String input;
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        outputView.print("자판기가 보유하고 있는 금액을 입력해 주세요.");
         do {
             input = inputView.getInput();
         } while (!Validator.isValidateMoney(input));
@@ -116,22 +149,24 @@ public class VendingController {
     }
 
     private static Coins decideCoins(int balance) {
-        Coins coins = new Coins();
-        int coin500Num = getCoinNum(balance, "COIN_500");
-        balance -= coin500Num * Coin.valueOf("COIN_500").getAmount();
-        coins.addCoin(Coin.valueOf("COIN_500"), coin500Num);
-        int coin100Num = getCoinNum(balance, "COIN_100");
-        balance -= coin100Num * Coin.valueOf("COIN_100").getAmount();
-        coins.addCoin(Coin.valueOf("COIN_100"), coin100Num);
-        int coin50Num = getCoinNum(balance, "COIN_50");
-        balance -= coin50Num * Coin.valueOf("COIN_50").getAmount();
-        coins.addCoin(Coin.valueOf("COIN_50"), coin50Num);
-        int coin10Num = balance/Coin.valueOf("COIN_10").getAmount();
-        coins.addCoin(Coin.valueOf("COIN_10"), coin10Num);
-        return coins;
+        List<Integer> coinList = new ArrayList<>();
+        List<CoinPair> coinPairs = new ArrayList<>();
+        for (Coin coin : Coin.values()) {
+            coinList.add(coin.getAmount());
+            coinPairs.add(new CoinPair(coin, 0));
+        }
+        while (balance > 0) {
+            balance -= pickCoinInList(coinList, coinPairs, balance);
+        }
+        return new Coins(coinPairs);
     }
 
-    private static int getCoinNum(int balance, String coin) {
-        return Randoms.pickNumberInRange(0, balance / Coin.valueOf(coin).getAmount());
+    private static int pickCoinInList(List<Integer> coinList, List<CoinPair> coinPairs, int balance) {
+        int select;
+        do {
+            select = Randoms.pickNumberInList(coinList);
+        } while (select > balance);
+        coinPairs.get(coinList.indexOf(select)).addCoinNumber();
+        return select;
     }
 }

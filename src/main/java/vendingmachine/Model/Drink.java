@@ -5,32 +5,32 @@ public class Drink {
     private int price;
     private int stock;
 
-    public Drink(String name, int price, int stock){
-        this.name=name;
-        this.price=price;
-        this.stock=stock;
+    public Drink(String name, int price, int stock) {
+        this.name = name;
+        this.price = price;
+        this.stock = stock;
     }
 
-    public int isSameDrink(String drinkName){
-        if(drinkName.equals(name)){
+    public int isSameDrink(String drinkName) {
+        if (drinkName.equals(name)) {
             return 1;
         }
         return 0;
     }
 
-    public void subtractStock(){
+    public void subtractStock() {
         stock--;
     }
 
-    public boolean isSoldOut(){
-        return (stock==0);
+    public boolean isSoldOut() {
+        return (stock == 0);
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 
-    public int getStock(){
+    public int getStock() {
         return stock;
     }
 }

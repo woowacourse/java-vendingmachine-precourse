@@ -9,6 +9,10 @@ public class CoinPair {
         this.number = number;
     }
 
+    public void addCoinNumber() {
+        number++;
+    }
+
     public Coin getCoin() {
         return coin;
     }
@@ -16,5 +20,4 @@ public class CoinPair {
     public int getNumber() {
         return number;
     }
-
 }

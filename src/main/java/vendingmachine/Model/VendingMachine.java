@@ -46,14 +46,14 @@ public class VendingMachine {
 
     public Drink findDrinkWithName(String userChoice) {
         for (Drink drink : drinks) {
-            if(drink.isSameDrink(userChoice) == 1){
+            if (drink.isSameDrink(userChoice) == 1) {
                 return drink;
             }
         }
         return null;
     }
 
-    public Coins getCoins(){
+    public Coins getCoins() {
         return coins;
     }
 }
