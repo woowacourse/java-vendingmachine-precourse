@@ -5,16 +5,16 @@ import java.util.Map;
 
 public class VendingMachine {
 
-    private final Changes changes;
+    private final Coins coins;
     private final Map<Product, Integer> products = new HashMap<>();
     private int inputMoney = 0;
 
     public VendingMachine(int seedMoney) {
-        changes = new Changes(seedMoney);
+        coins = new Coins(seedMoney);
     }
 
-    public Changes getChanges() {
-        return changes;
+    public Coins getCoins() {
+        return coins;
     }
 
     public void addProduct(Product product, int quantity) {

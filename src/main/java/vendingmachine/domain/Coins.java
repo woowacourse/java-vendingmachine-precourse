@@ -7,12 +7,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Changes {
+public class Coins {
 
     private final List<Integer> coinAmounts = Collections.unmodifiableList(Coin.amounts());
     private final Map<Coin, Integer> coins;
 
-    public Changes(int seedMoney) {
+    public Coins(int seedMoney) {
         coins = generateRandomCoins(seedMoney);
     }
 

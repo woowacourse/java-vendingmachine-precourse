@@ -2,7 +2,7 @@ package vendingmachine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import vendingmachine.domain.Changes;
+import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
@@ -25,8 +25,8 @@ class VendingMachineTest {
 
     @Test
     void 보유금액을_입력받아_무작위로_잔돈을_생성한다() {
-        Changes changes = vendingMachine.getChanges();
-        assertThat(changes.sum()).isEqualTo(seedMoney);
+        Coins coins = vendingMachine.getCoins();
+        assertThat(coins.sum()).isEqualTo(seedMoney);
     }
 
     @Test
