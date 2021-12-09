@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
@@ -16,9 +17,12 @@ public class Application {
         // TODO: 프로그램 구현
 
         int seedMoney = getSeedMoneyFromUser();
-        List<ProductInfo> productInfos = getProductInfosFromUser();
-
         VendingMachine vendingMachine = new VendingMachine(seedMoney);
+        vendingMachine.printCoins();
+        lineFeed();
+
+
+        List<ProductInfo> productInfos = getProductInfosFromUser();
         for (ProductInfo productInfo : productInfos) {
             vendingMachine.addProduct(new Product(productInfo.getName(), productInfo.getPrice()), productInfo.getCount());
         }
@@ -27,8 +31,32 @@ public class Application {
         int inputMoney = getInputMoneyFromUser();
         vendingMachine.inputMoney(inputMoney);
 
+        while (vendingMachine.isProvidable()) {
+            System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
+            buyProduct(vendingMachine);
+        }
+
+        Coins changes = vendingMachine.getChanges();
+        System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
+        System.out.println("잔돈");
+        changes.printCoins();
+
 
     }
+
+
+    private static void buyProduct(VendingMachine vendingMachine) {
+        try {
+            System.out.println("구매할 상품명을 입력해 주세요.");
+            Product product = vendingMachine.findProduct(Console.readLine());
+            lineFeed();
+            vendingMachine.get(product);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            buyProduct(vendingMachine);
+        }
+    }
+
 
     private static int getInputMoneyFromUser() {
         while (true) {
@@ -69,7 +97,9 @@ public class Application {
 
     private static String[] getProductNamesFromUser() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-        return Console.readLine().split(";");
+        String[] result = Console.readLine().split(";");
+        lineFeed();
+        return result;
     }
 
     private static int getSeedMoneyFromUser() {
@@ -77,6 +107,7 @@ public class Application {
             try {
                 System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
                 String input = Console.readLine();
+                lineFeed();
                 assertNumberFormat(input);
                 int number = Integer.parseInt(input);
                 assertPositiveGreaterThanZero(number);
@@ -103,4 +134,7 @@ public class Application {
     }
 
 
+    private static void lineFeed() {
+        System.out.println();
+    }
 }

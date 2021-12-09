@@ -63,4 +63,24 @@ public class VendingMachine {
         inputMoney -= changes.sum();
         return changes;
     }
+
+    public boolean isProvidable() {
+        // 현재 투입 금액보다 가격이 같거나 작은 제품이 하나라도 남아있는 경우
+        return products.keySet()
+                .stream()
+                .anyMatch(product -> products.get(product) > 0 && product.getPrice() <= inputMoney);
+    }
+
+    public Product findProduct(String productName) {
+        return products.keySet()
+                .stream()
+                .filter(product -> product.getName().equals(productName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 이름의 상품이 존재하지 않습니다. 상품명 = " + productName));
+    }
+
+    public void printCoins() {
+        System.out.println("자판기가 보유한 동전");
+        coins.printCoinsContainsZero();
+    }
 }

@@ -2,10 +2,7 @@ package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Coins {
 
@@ -21,7 +18,7 @@ public class Coins {
     }
 
     public static Coins getGreedyChanges(int inputMoney, Coins remains) {
-        Map<Coin, Integer> result = new HashMap<>();
+        Map<Coin, Integer> result = new TreeMap<>();
         while (remains.hasAnyCoinToChange(inputMoney)) {
             Coin coin = remains.getChangeableCoin(inputMoney);
 
@@ -71,7 +68,7 @@ public class Coins {
     }
 
     private Map<Coin, Integer> initCoinCountMap() {
-        Map<Coin, Integer> result = new HashMap<>();
+        Map<Coin, Integer> result = new TreeMap<>();
         for (Coin coin : Coin.values()) {
             result.put(coin, 0);
         }
@@ -84,5 +81,24 @@ public class Coins {
             sum += entry.getKey().getAmount() * entry.getValue();
         }
         return sum;
+    }
+
+    public void printCoinsContainsZero() {
+        counter.forEach((key, value) -> {
+            int amount = key.getAmount();
+            int count = value;
+            System.out.println(amount + "원 - " + count + "개");
+        });
+    }
+
+    public void printCoins() {
+        counter.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 0)
+                .forEach(entry -> {
+                    int amount = entry.getKey().getAmount();
+                    int count = entry.getValue();
+                    System.out.println(amount + "원 - " + count + "개");
+                });
     }
 }
