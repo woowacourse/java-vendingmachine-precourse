@@ -50,4 +50,8 @@ public enum Coin {
 		return money;
 	}
 
+	@Override
+	public String toString() {
+		return money.toString();
+	}
 }

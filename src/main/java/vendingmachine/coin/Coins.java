@@ -14,7 +14,7 @@ public class Coins {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Map.Entry<Coin, Integer> coin : coins.entrySet()) {
 			stringBuilder
-				.append(coin.getKey()).append("원 - ")
+				.append(coin.getKey()).append(" - ")
 				.append(coin.getValue()).append("개\n");
 		}
 		return stringBuilder.toString();
