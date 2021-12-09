@@ -7,6 +7,7 @@ import vendingmachine.reader.validator.CompositeValidator;
 import vendingmachine.reader.validator.CountOfItemInformationValidator;
 import vendingmachine.reader.validator.ItemPriceAndQuantityValidator;
 import vendingmachine.reader.validator.Validator;
+import vendingmachine.reader.validator.WrappedEachItemWithBracketValidator;
 
 public class ItemListReader extends Reader<List<Item>> {
 	private final ItemLineParser parser;
@@ -37,8 +38,10 @@ public class ItemListReader extends Reader<List<Item>> {
 	}
 
 	public static Reader<List<Item>> create() {
+		ItemLineParser parser = new ItemLineParser();
 		return new ItemListReader(
-			new CompositeValidator(new CountOfItemInformationValidator(new ItemLineParser()),
-				new ItemPriceAndQuantityValidator(new ItemLineParser())));
+			new CompositeValidator(new CountOfItemInformationValidator(parser),
+				new WrappedEachItemWithBracketValidator(parser),
+				new ItemPriceAndQuantityValidator(parser)));
 	}
 }
