@@ -1,4 +1,4 @@
-package vendingmachine.Model;
+package vendingmachine.Model.Validator;
 
 import vendingmachine.Constants;
 
