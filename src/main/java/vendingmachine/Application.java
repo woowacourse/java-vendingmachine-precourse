@@ -24,6 +24,25 @@ public class Application {
         }
 
 
+        int inputMoney = getInputMoneyFromUser();
+        vendingMachine.inputMoney(inputMoney);
+
+
+    }
+
+    private static int getInputMoneyFromUser() {
+        while (true) {
+            try {
+                System.out.println("투입 금액을 입력해 주세요.");
+                String input = Console.readLine();
+                assertNumberFormat(input);
+                int number = Integer.parseInt(input);
+                assertPositiveGreaterThanZero(number);
+                return number;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private static List<ProductInfo> getProductInfosFromUser() {
