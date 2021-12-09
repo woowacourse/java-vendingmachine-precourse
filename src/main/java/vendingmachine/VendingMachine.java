@@ -9,6 +9,10 @@ public class VendingMachine {
         coins = new Coins(amount);
     }
 
+    public void getBalance() {
+        View.printBalance(inputAmount);
+    }
+
     public void createProduct(String specification) {
         products = new Products(specification);
     }
@@ -21,4 +25,5 @@ public class VendingMachine {
         products.reduce(productName);
         inputAmount.reduce(products.getPriceByName(productName));
     }
+
 }

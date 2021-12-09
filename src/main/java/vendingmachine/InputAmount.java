@@ -10,4 +10,9 @@ public class InputAmount {
     public void reduce(int price) {
         this.amount -= price;
     }
+
+    @Override
+    public String toString() {
+        return Integer.toString(amount);
+    }
 }

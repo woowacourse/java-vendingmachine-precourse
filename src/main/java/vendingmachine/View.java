@@ -10,4 +10,8 @@ public class View {
         System.out.println("50원 - " + coins.getOrDefault(Coin.COIN_50, 0) + "개");
         System.out.println("10원 - " + coins.getOrDefault(Coin.COIN_10, 0) + "개");
     }
+
+    public static void printBalance(InputAmount inputAmount) {
+        System.out.println("투입 금액: " + inputAmount.toString() + "원");
+    }
 }
