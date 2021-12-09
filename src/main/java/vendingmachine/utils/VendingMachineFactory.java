@@ -9,7 +9,6 @@ public class VendingMachineFactory {
 	}
 
 	public static VendingMachine makeVendingMachine() {
-		int amount = InputView.writeVendingMachineAmount();
-		return new VendingMachine(amount);
+		return new VendingMachine(InputView.writeVendingMachineAmount());
 	}
 }

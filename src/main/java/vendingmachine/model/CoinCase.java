@@ -36,11 +36,10 @@ public class CoinCase {
 		if (maxNumber == INITIAL_VALUE) {
 			return maxNumber;
 		}
-		int numberOfCoin = Randoms.pickNumberInList(makeRandomNumberRange(maxNumber));
 		if (coin.getAmount() == Coin.COIN_10.getAmount()) {
-			numberOfCoin = maxNumber;
+			return maxNumber;
 		}
-		return numberOfCoin;
+		return Randoms.pickNumberInList(makeRandomNumberRange(maxNumber));
 	}
 
 	private List<Integer> makeRandomNumberRange(int maxNumber) {
