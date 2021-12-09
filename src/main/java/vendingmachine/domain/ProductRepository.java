@@ -31,4 +31,13 @@ public class ProductRepository {
 	private void addProductByString(List<String> productString) {
 		productList.add(new Product(productString));
 	}
+
+	public boolean isWhetherPurchasePossible(int remainingInputAmount) {
+		for (Product product: productList) {
+			if (product.isPurchaseProduct(remainingInputAmount)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

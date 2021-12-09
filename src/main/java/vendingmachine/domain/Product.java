@@ -26,7 +26,7 @@ public class Product {
 		return this.price - inputAmount;
 	}
 
-	private boolean isPurchaseProduct(int inputAmount) {
+	public boolean isPurchaseProduct(int inputAmount) {
 		return price <= inputAmount;
 	}
 }
