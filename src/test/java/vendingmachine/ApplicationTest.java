@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
@@ -46,6 +47,12 @@ class ApplicationTest extends NsTest {
         ItemParser itemParser = new ItemParser();
         Map<String, Item> items = itemParser.stringToItems("[콜라,1000,10];[사이다,1200,15]");
         assertThat(items.get("콜라")).isInstanceOf(Item.class);
+    }
+
+    @Test
+    void 상품_목록_형식_검사_테스트() {
+        Validator validator = new Validator();
+        assertThrows(IllegalArgumentException.class, () -> validator.validateItemFormat("[콜라,1000,1"));
     }
 
     @Override
