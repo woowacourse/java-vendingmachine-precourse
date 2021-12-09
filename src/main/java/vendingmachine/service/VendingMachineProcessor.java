@@ -41,10 +41,10 @@ public class VendingMachineProcessor {
     }
 
     private void reduceBeverageAndMoney(Beverage findBeverage, Money currentMoney) {
-        int restBeverageCount = findBeverage.reduceCount();
+        int restBeverageAmount = findBeverage.reduceAmount();
         currentMoney.reducePrice(findBeverage.getPrice());
 
-        if(restBeverageCount == OUT_OF_STOCK){
+        if(restBeverageAmount == OUT_OF_STOCK){
             vendingMachine.getBeverages().removeBeverage(findBeverage);
         }
     }

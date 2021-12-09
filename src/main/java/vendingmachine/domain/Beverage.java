@@ -7,12 +7,12 @@ public class Beverage {
 
     private String productName;
     private int price;
-    private int count;
+    private int amount;
 
-    Beverage(String productName, int price, int count) {
+    Beverage(String productName, int price, int amount) {
         this.productName = productName;
         this.price = price;
-        this.count = count;
+        this.amount = amount;
     }
 
     public String getProductName() {
@@ -23,12 +23,12 @@ public class Beverage {
         return price;
     }
 
-    public int getCount() {
-        return count;
+    public int getAmount() {
+        return amount;
     }
 
-    public int reduceCount() {
-        return --count;
+    public int reduceAmount() {
+        return --amount;
     }
 
     @Override

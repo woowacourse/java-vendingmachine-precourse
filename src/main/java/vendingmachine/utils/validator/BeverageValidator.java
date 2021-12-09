@@ -16,7 +16,7 @@ public class BeverageValidator {
     private static final int FALSE_NUMBER = 0;
     private static final int DIVIDE_STANDARD = 10;
     private static final int PRICE_IDX = 1;
-    private static final int COUNT_IDX = 2;
+    private static final int AMOUNT_IDX = 2;
 
     public static String[] validateInput(String input) {
         isFirstAndLastCharRight(input);
@@ -26,7 +26,7 @@ public class BeverageValidator {
 
         String[] tempBeverage = removedInput.split(DELIMITER);
         isPriceNotDivideByTen(tempBeverage[PRICE_IDX]);
-        isCountUnderZero(tempBeverage[COUNT_IDX]);
+        isAmountUnderZero(tempBeverage[AMOUNT_IDX]);
 
         return tempBeverage;
     }
@@ -49,7 +49,7 @@ public class BeverageValidator {
         }
     }
 
-    private static void isCountUnderZero(String input) {
+    private static void isAmountUnderZero(String input) {
         if (Integer.parseInt(input) <= FALSE_NUMBER) {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_BEVERAGE_FORMAT);
         }

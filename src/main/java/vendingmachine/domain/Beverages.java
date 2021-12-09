@@ -11,7 +11,7 @@ public class Beverages {
 
     private static final int PRODUCT_NAME_IDX = 0;
     private static final int PRICE_IDX = 1;
-    private static final int COUNT_IDX = 2;
+    private static final int AMOUNT_IDX = 2;
 
     private static final int NO_BEVERAGE_PRICE = 0;
 
@@ -55,8 +55,8 @@ public class Beverages {
     private Beverage createBeverage(String eachBeverage) {
         String[] beverageInput = BeverageValidator.validateInput(eachBeverage);
         int price = Integer.parseInt(beverageInput[PRICE_IDX]);
-        int count = Integer.parseInt(beverageInput[COUNT_IDX]);
-        return new Beverage(beverageInput[PRODUCT_NAME_IDX], price, count);
+        int amount = Integer.parseInt(beverageInput[AMOUNT_IDX]);
+        return new Beverage(beverageInput[PRODUCT_NAME_IDX], price, amount);
     }
 
     private void isBeverageDuplicate(Beverage beverage) {

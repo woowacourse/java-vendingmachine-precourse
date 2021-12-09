@@ -54,14 +54,14 @@ class BeverageTest extends DomainTest {
 
     @DisplayName("실패_수량이 숫자가 아님")
     @Test
-    void countNotNumber_false() {
+    void amountNotNumber_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.createBeverages("[콜라,1000,a}"));
     }
 
     @DisplayName("실패_수량이 0 초과가 아님")
     @Test
-    void countUnder0_false() {
+    void amountUnder0_false() {
         assertThrows(IllegalArgumentException.class, () ->
                 vendingMachine.createBeverages("[콜라,1000,0]"));
     }
@@ -75,7 +75,7 @@ class BeverageTest extends DomainTest {
 
         SoftAssertions.assertSoftly(soft -> {
             soft.assertThat(beverage.getProductName()).isEqualTo("콜라");
-            soft.assertThat(beverage.getCount()).isEqualTo(10);
+            soft.assertThat(beverage.getAmount()).isEqualTo(10);
             soft.assertThat(beverage.getPrice()).isEqualTo(2000);
         });
     }
@@ -87,8 +87,8 @@ class BeverageTest extends DomainTest {
         Beverages beverages = vendingMachine.getBeverages();
         Beverage beverage = beverages.getBeverageList().get(0);
 
-        beverage.reduceCount();
-        assertThat(beverage.getCount()).isEqualTo(9);
+        beverage.reduceAmount();
+        assertThat(beverage.getAmount()).isEqualTo(9);
     }
 
     @DisplayName("성공_음료수 찾기")

@@ -11,7 +11,7 @@ public class OutputView {
     public static final String PRINT_NO_CHANGES = "잔돈이 존재하지 않습니다.";
     public static final String PRINT_LEFT_INSERT_MONEY = "투입 금액: ";
     public static final String PRINT_CHANGE_COINS = "잔돈";
-    public static final String PRINT_COUNT_UNIT = "개";
+    public static final String PRINT_AMOUNT_UNIT = "개";
 
     public static void printSystemMessage(String message) {
         System.out.println(message);
@@ -40,7 +40,7 @@ public class OutputView {
     private static void printChanges(Map<Coin, Integer> changes) {
         new ArrayList<>(changes.keySet())
                 .forEach(coin ->
-                        System.out.println(coin.toString() + changes.get(coin) + PRINT_COUNT_UNIT));
+                        System.out.println(coin.toString() + changes.get(coin) + PRINT_AMOUNT_UNIT));
     }
 
     public static void breakLine() {
