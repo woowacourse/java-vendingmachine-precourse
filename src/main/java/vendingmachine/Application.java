@@ -16,6 +16,6 @@ public class Application {
         vendingMachine.putProducts(productsInfo);
         String userMoneyInput = InputView.inputUserMoney();
         vendingMachine.putUserMoney(userMoneyInput);
-
+        // vendingMachine.sellProduct(InputView.inputBuyingProduct());
     }
 }

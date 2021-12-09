@@ -7,14 +7,17 @@ import vendingmachine.utils.CoinGenerator;
 import vendingmachine.utils.StringUtil;
 
 public class Price {
+    private int price;
+
     public Price(String priceInput) {
-        validate(priceInput);
+        this.price = validate(priceInput);
     }
 
-    public void validate(String priceInput) {
+    public int validate(String priceInput) {
         int price = validateItIsNumber(priceInput);
         validateItIsPositive(price);
         validateUnitIsCorrect(price);
+        return price;
     }
 
     private void validateUnitIsCorrect(int price) {
@@ -34,5 +37,10 @@ public class Price {
             throw new IllegalArgumentException("금액은 숫자여야 합니다.");
         }
         return Integer.parseInt(priceInput);
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(price);
     }
 }

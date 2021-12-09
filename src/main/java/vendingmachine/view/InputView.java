@@ -17,4 +17,9 @@ public class InputView {
         System.out.println("투입 금액을 입력해 주세요.");
         return Console.readLine().trim();
     }
+
+    // public static String inputBuyingProduct() {
+    //     투입 금액 보여줌.
+        // System.out.println();
+    // }
 }

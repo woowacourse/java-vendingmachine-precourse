@@ -9,6 +9,8 @@ import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.utils.CoinGenerator;
 import vendingmachine.utils.ProductValidator;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachine {
     private CoinRepository coinRepository;
@@ -44,5 +46,9 @@ public class VendingMachine {
 
     public void putUserMoney(String userMoneyInput) {
         userMoney = new Price(userMoneyInput);
+        OutputView.showUserMoney(userMoney);
+    }
+
+    public void sellProduct() {
     }
 }
