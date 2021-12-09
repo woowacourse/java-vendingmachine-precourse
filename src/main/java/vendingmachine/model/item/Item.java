@@ -17,11 +17,11 @@ public class Item {
 
     public Item(final String itemInfo) {
         validateBracket(itemInfo);
-        String[] itemInfoTokens = itemInfo.split(INFO_DELIMITER);
-        validateNumberOfInfo(itemInfoTokens);
-        name = itemInfoTokens[0];
-        price = new Price(itemInfoTokens[1]);
-        remainingQuantity = new Quantity(itemInfoTokens[2]);
+        String[] itemProperties = itemInfo.split(INFO_DELIMITER);
+        validateNumberOfInfo(itemProperties);
+        name = itemProperties[0];
+        price = new Price(itemProperties[1]);
+        remainingQuantity = new Quantity(itemProperties[2]);
     }
 
     private void validateBracket(final String itemInfo) {
