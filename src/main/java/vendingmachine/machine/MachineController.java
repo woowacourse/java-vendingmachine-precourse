@@ -29,4 +29,16 @@ public class MachineController {
         }
         return buyProductName;
     }
+
+    public boolean buyProduct(int price) {
+        if (machine.getAmountByClient() > price) {
+            return false;
+        }
+        machine.buyProduct(price);
+        return true;
+    }
+
+    public String nowInputAmount() {
+        return machine.toString();
+    }
 }
