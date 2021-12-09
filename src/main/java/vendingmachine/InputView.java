@@ -8,5 +8,8 @@ public class InputView {
         return Console.readLine();
     }
 
-
+    public static String inputProductionInformation() {
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        return Console.readLine();
+    }
 }
