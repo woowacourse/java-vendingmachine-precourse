@@ -18,11 +18,18 @@ public class VendingMachine {
 	}
 
 	private void sellProduct(String productName, int amountPaid) {
-		if (!canSell()) {
+		if (!canSell(productName, amountPaid)) {
 			return;
 		}
 		productStocks.put(productName, productStocks.get(productName) - 1);
 		giveChange(amountPaid);
+	}
+
+	private boolean canSell(String productName, int amountPaid) {
+		if (!isExistProductStocks) {
+			return false;
+		}
+		return productPrice.get(productName) < amountPaid;
 	}
 
 }
