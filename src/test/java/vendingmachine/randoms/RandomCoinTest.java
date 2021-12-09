@@ -13,19 +13,18 @@ import vendingmachine.controller.CoinController;
 public class RandomCoinTest {
 
 	@RepeatedTest(20)
-	@Test
 	void coinAmountTest() {
 		//given
 		CoinController coinController = new CoinController();
 
 		//when
-		Map<Coin, Integer> coinIntegerMap = coinController.setCoinsByBalance(1000);
+		Map<Coin, Integer> coinIntegerMap = coinController.setCoinsByBalance(1200);
 
 		//then
 		assertThat(coinIntegerMap.get(Coin.COIN_10) * 10 +
 			coinIntegerMap.get(Coin.COIN_50) * 50 +
 			coinIntegerMap.get(Coin.COIN_100) * 100 +
 			coinIntegerMap.get(Coin.COIN_500) * 500
-		).isEqualTo(1000);
+		).isEqualTo(1200);
 	}
 }

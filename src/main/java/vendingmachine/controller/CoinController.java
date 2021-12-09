@@ -16,13 +16,13 @@ public class CoinController {
 	private Map<Coin, Integer> coins = new HashMap<>();
 
 	public Map<Coin, Integer> setCoinsByBalance(int balance) {
-		List<Integer> coinList = new ArrayList<>();
+		List<Integer> coinUnitList = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
-			coinList.add(coin.getAmount());
+			coinUnitList.add(coin.getAmount());
 			coins.put(coin, ZERO);
 		}
 		while(balance > ZERO) {
-			int coinUnit = gatherCoin(balance, coinList);
+			int coinUnit = gatherCoin(balance, coinUnitList);
 			updateCoinQuantity(coinUnit);
 			balance -= coinUnit;
 		}
@@ -30,7 +30,7 @@ public class CoinController {
 	}
 
 	private int gatherCoin(int balance, List<Integer> coinList) {
-		if (balance < Collections.max(coinList)) {
+		while (balance < Collections.max(coinList)) {
 			coinList.remove(ZERO);
 		}
 		return Randoms.pickNumberInList(coinList);
