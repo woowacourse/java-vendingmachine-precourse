@@ -29,16 +29,17 @@ public class Coins {
 	// TODO: 리팩토링 필요
 	private Map<Coin, CoinAmount> generateRandomCoins(int vendingMachineBalance) {
 		Map<Coin, CoinAmount> coins = new HashMap<>();
+		int remainingBalance = vendingMachineBalance;
 
 		for (int i = 0; i < 3; i++) {
 			Coin coin = Coin.values()[i];
-			int maxAmount = getMaxCoinAmount(vendingMachineBalance, coin);
+			int maxAmount = getMaxCoinAmount(remainingBalance, coin);
 			int amount = Randoms.pickNumberInRange(0, maxAmount);
 			coins.put(coin, CoinAmount.from(amount));
-			vendingMachineBalance -= coin.getAmount() * amount;
+			remainingBalance -= coin.getAmount() * amount;
 		}
 
-		coins.put(Coin.COIN_10, CoinAmount.from(getMaxCoinAmount(vendingMachineBalance, Coin.COIN_10)));
+		coins.put(Coin.COIN_10, CoinAmount.from(getMaxCoinAmount(remainingBalance, Coin.COIN_10)));
 		return coins;
 	}
 
