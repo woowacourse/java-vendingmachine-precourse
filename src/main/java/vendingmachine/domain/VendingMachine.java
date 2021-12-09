@@ -54,7 +54,16 @@ public class VendingMachine {
 	}
 
 	private void giveChange(int amountPaid) {
+		if (canGiveChange(amountPaid)) {
 
+		}
 	}
 
+	private boolean canGiveChange(int amountPaid) {
+		int totalMoney = 0;
+		for (int coin : coinsOwned.values()) {
+			totalMoney += coin;
+		}
+		return totalMoney >= amountPaid;
+	}
 }
