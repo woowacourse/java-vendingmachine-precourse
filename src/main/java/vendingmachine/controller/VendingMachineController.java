@@ -12,7 +12,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-	private VendingMachineMoney vendingMachineMoney;
+	private final VendingMachineMoney vendingMachineMoney = new VendingMachineMoney();
 	private VendingMachineProducts vendingMachineProducts;
 
 	public void start() {
@@ -37,8 +37,7 @@ public class VendingMachineController {
 
 	private void saveVendingMachineMoney() {
 		int vendingMachineInputMoney = InputView.getVendingMachineMoney();
-		vendingMachineMoney = new VendingMachineMoney(vendingMachineInputMoney);
-		vendingMachineMoney.moneyToCoins();
+		vendingMachineMoney.moneyToCoins(vendingMachineInputMoney);
 		OutputView.printNewLine();
 	}
 }
