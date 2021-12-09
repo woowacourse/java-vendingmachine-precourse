@@ -46,6 +46,10 @@ public class VendingMachine {
         return products.findProduct(productName);
     }
 
+    public boolean hasEnoughAmount() {
+        return userInsertAmount >= products.getCheapest();
+    }
+
     public Map<Coin, Integer> getCoins() {
         return coins;
     }

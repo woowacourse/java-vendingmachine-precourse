@@ -22,7 +22,6 @@ public class InputValidator {
     private static final String EMPTY_PRODUCT_NAME = "상품명이 비어있습니다.";
     private static final String EMPTY_PRODUCT_PRICE = "상품 가격이 비어있습니다.";
     private static final String EMPTY_PRODUCT_QUANTITY = "상품 수량이 비어있습니다.";
-    // private static final String ALLOWED_PRODUCT_INPUT_FORMAT = "^(\\[[가-힣]+,[1-9]+[0]+,[1-9]+[0-9]*\\])(;\\[[가-힣]+,[1-9]+[0]+,[1-9]+[0-9]*\\])*$";
 
     public static int validateAmountInput(String input) {
         if (!input.matches(ALLOWED_AMOUNT_INPUT_FORMAT)) {
@@ -52,14 +51,14 @@ public class InputValidator {
     private static List<List<String>> validateEachProduct(List<String> productList) {
         List<List<String>> products = new ArrayList<>();
         for (String product : productList) {
-            products.add(validateProductDetails(product.substring(1, product.length()-1)));
+            products.add(validateProductDetails(product.substring(1, product.length() - 1)));
         }
 
         return products;
     }
 
     private static List<String> validateProductDetails(String productDetails) {
-        if(productDetails.endsWith(",")) {
+        if (productDetails.endsWith(",")) {
             throw new IllegalArgumentException(ERROR_MESSAGE + INVALID_EACH_PRODUCT_INPUT_MESSAGE + RETRY_MESSAGE);
         }
 
@@ -105,7 +104,7 @@ public class InputValidator {
             throw new IllegalArgumentException(ERROR_MESSAGE + EMPTY_PRODUCT_QUANTITY + RETRY_MESSAGE);
         }
 
-        if(!quantity.matches(ALLOWED_PRODUCT_QUANTITY_FORMAT)) {
+        if (!quantity.matches(ALLOWED_PRODUCT_QUANTITY_FORMAT)) {
             throw new IllegalArgumentException(ERROR_MESSAGE + INVALID_PRODUCT_QUANTITY + RETRY_MESSAGE);
         }
 

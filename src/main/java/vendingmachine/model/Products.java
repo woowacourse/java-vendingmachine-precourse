@@ -15,4 +15,11 @@ public class Products {
     public boolean findProduct(String productName) {
         return products.stream().anyMatch(product -> product.getName().equals(productName));
     }
+
+    public int getCheapest() {
+        return products.stream()
+                .mapToInt(Product::getPrice)
+                .min()
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }

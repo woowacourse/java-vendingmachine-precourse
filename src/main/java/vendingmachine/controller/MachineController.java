@@ -25,11 +25,6 @@ public class MachineController {
         createUserInsertAmount();
     }
 
-    private void useMachine() {
-        OutputView.printRemainingInsertAmount(vendingMachine.getUserInsertAmount());
-        buyProduct();
-    }
-
     private void createVendingMachine() {
         InputView.printInputInitialAmountMessage();
         vendingMachine = new VendingMachine(inputInitialAmount());
@@ -75,6 +70,25 @@ public class MachineController {
                 OutputView.printErrorMessage(e);
             }
         }
+    }
+
+    private void useMachine() {
+        while(shouldContinueBuying()) {
+            buyProduct();
+        }
+    }
+
+    private boolean shouldContinueBuying() {
+        return checkRemainingInsertAmount() && checkRemainingQuantity();
+    }
+
+    private boolean checkRemainingInsertAmount() {
+        OutputView.printRemainingInsertAmount(vendingMachine.getUserInsertAmount());
+        return vendingMachine.hasEnoughAmount();
+    }
+
+    private boolean checkRemainingQuantity() {
+        return true;
     }
 
     private void buyProduct() {
