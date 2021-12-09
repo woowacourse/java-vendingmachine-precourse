@@ -13,7 +13,6 @@ public class ItemsInventoryInfo {
         itemInventoryInfo.put(itemInfo, quantity);
     }
 
-    //test를 위한 getter
     public Map<ItemInfo, Integer> getInfo() {
         return new HashMap<>(itemInventoryInfo);
     }

@@ -1,8 +1,5 @@
 package vendingmachine;
 
-import vendingmachine.inputvalue.CoinBalanceInputValue;
-import vendingmachine.inputvalue.ItemsInventoryInputValue;
-
 public class VendingMachineController {
     private final VendingMachineConsole console = new VendingMachineConsole();
 
@@ -17,7 +14,15 @@ public class VendingMachineController {
             }
         }
 
-
+        boolean isItemsInventoryInfoEntered = false;
+        while (!isItemsInventoryInfoEntered) {
+            try {
+                inputItemsInventoryInfo();
+                isItemsInventoryInfoEntered = true;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private int inputCoinBalance() {
