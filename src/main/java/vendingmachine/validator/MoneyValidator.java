@@ -2,7 +2,7 @@ package vendingmachine.validator;
 
 import static constants.VendingMachineConstants.*;
 
-public class NumberValidator {
+public class MoneyValidator {
 	public static void checkNumber(String input) {
 		isNumber(input);
 		isUpperZero(input);

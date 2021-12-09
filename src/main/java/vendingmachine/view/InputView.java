@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.validator.NumberValidator;
+import vendingmachine.validator.MoneyValidator;
 import vendingmachine.validator.ProductValidator;
 
 public class InputView {
@@ -45,7 +45,7 @@ public class InputView {
 			System.out.println(Message);
 			String money = Console.readLine();
 			try {
-				NumberValidator.checkNumber(money);
+				MoneyValidator.checkNumber(money);
 				return Integer.parseInt(money);
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());

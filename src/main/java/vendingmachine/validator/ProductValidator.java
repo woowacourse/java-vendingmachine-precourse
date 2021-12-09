@@ -15,7 +15,7 @@ public class ProductValidator {
 		isMatchRegex(inputContent);
 
 		List<String> productInfo = Arrays.asList(inputContent.split(PRODUCT_DELIMITER));
-		NumberValidator.checkNumber(productInfo.get(PRICE_IDX));
+		MoneyValidator.checkNumber(productInfo.get(PRICE_IDX));
 		checkAmount(productInfo.get(AMOUNT_IDX));
 		return productInfo;
 	}
