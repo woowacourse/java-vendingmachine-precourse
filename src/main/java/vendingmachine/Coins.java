@@ -1,26 +1,44 @@
 package vendingmachine;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
     private final Map<Coin, Integer> coins = new HashMap<>();
 
-    private Coins(String value) {
-        List<Integer> counts = value.chars().mapToObj(Character::getNumericValue).collect(Collectors.toList());
-        for (int i = 0; i < counts.size(); i++) {
-            coins.put(Coin.indexOf(i), counts.get(i));
+    public Coins(String value) {
+        int amount = Integer.parseInt(value);
+        do {
+            int coinAmount = Randoms.pickNumberInList(makeList(amount));
+            amount -= coinAmount;
+            Coin coin = Coin.mapCoin(coinAmount);
+            coins.put(coin, coins.getOrDefault(coin, 0) + 1);
+        } while (amount != 0);
+    }
+
+    private List<Integer> makeList(int amount) {
+        if (amount >= 500) {
+            return Arrays.asList(500, 100, 50, 10);
         }
+        if (amount >= 100) {
+            return Arrays.asList(100, 50, 10);
+        }
+        if (amount >= 50) {
+            return Arrays.asList(50, 10);
+        }
+        return Collections.singletonList(10);
     }
 
-    public static Coins of(String value) {
-        return new Coins(value);
-    }
-
-    public Integer sum() {
-        return coins.entrySet().stream()
-            .map(entry -> entry.getKey().calculate(entry.getValue())).reduce(Integer::sum).get();
+    void getCoin() {
+        coins.entrySet().stream().forEach(e -> {
+            System.out.println(e.getKey());
+            System.out.println(e.getValue());
+            System.out.println();
+        });
     }
 }

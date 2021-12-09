@@ -19,8 +19,8 @@ public enum Coin {
         this.unaryOperator = unaryOperator;
     }
 
-    public static Coin indexOf(int i) {
-        return Arrays.stream(Coin.values()).filter(coin -> coin.isSameIndex(i)).findFirst().get();
+    public static Coin mapCoin(int coinAmount) {
+        return Arrays.stream(Coin.values()).filter(coin -> coin.amount == coinAmount).findFirst().get();
     }
 
     private boolean isSameIndex(int i) {
