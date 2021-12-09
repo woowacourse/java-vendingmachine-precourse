@@ -5,6 +5,7 @@ import static constants.ProductConstants.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachineMoney;
 import vendingmachine.domain.VendingMachineProduct;
 import vendingmachine.domain.VendingMachineProducts;
@@ -14,11 +15,18 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
 	private final VendingMachineMoney vendingMachineMoney = new VendingMachineMoney();
 	private VendingMachineProducts vendingMachineProducts;
+	private User user;
 
 	public void start() {
 		saveVendingMachineMoney();
 		OutputView.printVendingMachineMoney(vendingMachineMoney.getCoins());
 		saveProducts();
+		saveUser();
+	}
+
+	private void saveUser() {
+		Integer userMoney = InputView.getUserMoney();
+		user = new User(userMoney);
 	}
 
 	private void saveProducts() {

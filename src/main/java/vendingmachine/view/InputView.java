@@ -44,4 +44,17 @@ public class InputView {
 		}
 		return products;
 	}
+
+	public static Integer getUserMoney() {
+		while (true) {
+			System.out.println(USER_MONEY_MESSAGE);
+			String userMoney = Console.readLine();
+			try {
+				NumberValidator.checkNumber(userMoney);
+				return Integer.parseInt(userMoney);
+			} catch (IllegalArgumentException e) {
+				OutputView.printError(e.getMessage());
+			}
+		}
+	}
 }
