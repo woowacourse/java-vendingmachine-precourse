@@ -13,7 +13,7 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public String getItemInfo(){
+	public String getItemInfo() {
 		StringBuilder builder = new StringBuilder();
 		builder.append(name + Symbol.SPACE).append(price + Symbol.SPACE).append(quantity + Symbol.MEW_LINE);
 		return builder.toString();
@@ -23,7 +23,7 @@ public class Item {
 		return price;
 	}
 
-	public boolean isSoldOut(){
+	public boolean isSoldOut() {
 		return quantity == 0;
 	}
 }

@@ -21,7 +21,6 @@ public class MachineController {
 		buy();
 	}
 
-
 	private void initMachineStatus() {
 		int money = inputView.enterMachineMoney();
 		service.changeMoneyToCoin(money);
@@ -38,6 +37,7 @@ public class MachineController {
 		int payMoney = Integer.parseInt(inputView.enterPayMoney());
 		if (service.canBuyAnything(payMoney)) {
 			String itemToBuy = inputView.enterItemToBuy();
+			service.buyItem(payMoney, itemToBuy);
 
 		}
 	}

@@ -5,6 +5,7 @@ public class Symbol {
 	public static final String OPEN_BRACES = "\\[";
 	public static final String CLOSE_BRACES = "\\]";
 	public static final String COMMA = ",";
+	public static final String SEMICOLON = ";";
 	public static final String SPACE = " ";
 	public static final String HYPHEN = "-";
 	public static final String MEW_LINE = "\n";

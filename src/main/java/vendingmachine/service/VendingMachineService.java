@@ -50,16 +50,16 @@ public class VendingMachineService {
 		return true;
 	}
 
-	// public int buyItem(int payMoney, String itemName) {
-	// 	if(vendingMachine.isItemSoldOut()){
-	//
-	// 	}
-	// }
+	public void buyItem(int payMoney, String itemName) {
+		if(vendingMachine.isItemSoldOut(itemName)){
+
+		}
+	}
 
 	private String[] decodeInput(String itemInfo) {
 		itemInfo = itemInfo.replaceAll(Symbol.OPEN_BRACES, Symbol.NULL);
 		itemInfo = itemInfo.replaceAll(Symbol.CLOSE_BRACES, Symbol.NULL);
-		return itemInfo.split(";");
+		return itemInfo.split(Symbol.SEMICOLON);
 	}
 
 	private boolean canChange(int money, int coin) {

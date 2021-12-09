@@ -9,7 +9,7 @@ import vendingmachine.util.Symbol;
 
 public class VendingMachine {
 	private final HashMap<Coin, Integer> coins;
-	private final HashMap<String,Item> items;
+	private final HashMap<String, Item> items;
 
 	public VendingMachine(List<Integer> coin) {
 		this.coins = new HashMap<>();
@@ -35,27 +35,30 @@ public class VendingMachine {
 		return builder.toString();
 	}
 
-	public void addItem(String itemName,Item item) {
-		items.put(itemName,item);
+	public void addItem(String itemName, Item item) {
+		items.put(itemName, item);
 	}
 
 	public int getMinItemPrice() {
 		return items.values().stream().mapToInt(i -> i.getPrice()).min().getAsInt();
 	}
 
-	public void printItems(){
+	public void printItems() {
 		for (Item item : items.values()) {
 			System.out.println(item);
 		}
 	}
 
-	// public boolean isItemSoldOut(String itemName){
-	// 	for(Item item)
-	// }
+	public boolean isItemSoldOut(String itemName) {
+		if (items.get(itemName).isSoldOut()) {
+			return true;
+		}
+		return false;
+	}
 
 	public boolean isAllItemSoldOut() {
 		for (Item item : items.values()) {
-			if(!item.isSoldOut()){
+			if (!item.isSoldOut()) {
 				return false;
 			}
 		}
