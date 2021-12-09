@@ -10,6 +10,7 @@ import java.util.List;
 public class VendingMachine {
 	private List<Coin> coins;
 	private Items items;
+	private boolean nextStep = true;
 
 	public List<Coin> getCoins() {
 		return this.coins;
@@ -22,7 +23,7 @@ public class VendingMachine {
 		return pickNumberInList(coins);
 	}
 
-	public void generateRemainCoins(int remains) {
+	public List<Coin> generateRemainCoins(int remains) {
 		List<Coin> coinList = Arrays.asList(Coin.values());
 		while (remains != 0) {
 			int newCoin = generateRandomCoin();
@@ -32,7 +33,7 @@ public class VendingMachine {
 			remains -= newCoin;
 			addCountInCoins(coinList, newCoin);
 		}
-		this.coins = coinList;
+		return coinList;
 	}
 
 	public static void addCountInCoins(List<Coin> coinList, int coinValue) {
@@ -83,5 +84,9 @@ public class VendingMachine {
 		HashMap<Integer, Integer> change;
 		change = machine.returnChange(userMoney);
 		System.out.println(change.entrySet());
+	}
+
+	public boolean hasNextStep() {
+		return this.nextStep;
 	}
 }

@@ -3,7 +3,7 @@ package vendingmachine;
 import java.util.List;
 
 public class ResultView {
-	private static final String REMAINS_MESSAGE = "자판기가 보유한 동전";
+	private static final String REMAINS_MESSAGE = "\n자판기가 보유한 동전";
 
 	public static void printRemains(List<Coin> coinList) {
 		System.out.println(REMAINS_MESSAGE);
