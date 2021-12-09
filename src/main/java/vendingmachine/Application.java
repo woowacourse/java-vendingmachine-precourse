@@ -1,9 +1,6 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import java.util.Arrays;
 import java.util.List;
-import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
 import vendingmachine.model.CoinsGenerator;
 import vendingmachine.model.Item;
@@ -14,11 +11,16 @@ import vendingmachine.reader.ItemListReader;
 public class Application {
 	public static void main(String[] args) {
 		int amount = ExchangeAmountReader.create().read();
-		Coins coins = new CoinsGenerator().generate(amount);
-		printExchangeCoins(coins);
+		Coins coins = generateCoins(amount);
 		List<Item> items = ItemListReader.create().read();
 		int inputMoney = InputMoneyReader.create().read();
 		printInputMoney(inputMoney);
+	}
+
+	private static Coins generateCoins(int amount) {
+		Coins coins = new CoinsGenerator().generate(amount);
+		printExchangeCoins(coins);
+		return coins;
 	}
 
 	private static void printExchangeCoins(Coins coins) {
