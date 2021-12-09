@@ -22,6 +22,7 @@ public class Machine {
 
 	public void run() {
 		prepareCoins();
+		prepareItems();
 	}
 
 	private void prepareCoins() {
@@ -29,6 +30,10 @@ public class Machine {
 		display.printBlankLine();
 		display.printAllCoin();
 		display.printBlankLine();
+	}
+
+	private void prepareItems() {
+		askItems();
 	}
 
 	private int askHoldingAmount() {
@@ -39,5 +44,11 @@ public class Machine {
 			display.printError(e);
 			return askHoldingAmount();
 		}
+	}
+
+	private String askItems() {
+		display.askItems();
+		//TODO: 입력값을 ';' 기준으로 분리한다
+		return Console.readLine();
 	}
 }
