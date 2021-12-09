@@ -21,7 +21,7 @@ public class HoldingSum {
 
 	private void checkInput(String input) {
 		Checker checker = new Checker();
-		checker.isPositiveNumber(input);
+		checker.isPositiveInteger(input);
 		checker.isDivisibleNumber(input, Coin.minAmount());
 	}
 
