@@ -18,6 +18,14 @@ public class CoinStore {
 			put(Coin.findCoin(10), 0);
 		}
 	};
+	private final EnumMap<Coin, Integer> changeCoins = new EnumMap<Coin, Integer>(Coin.class) {
+		{
+			put(Coin.findCoin(500), 0);
+			put(Coin.findCoin(100), 0);
+			put(Coin.findCoin(50), 0);
+			put(Coin.findCoin(10), 0);
+		}
+	};
 
 	public CoinStore(int money) {
 		createRandomCoins(money);
@@ -58,5 +66,13 @@ public class CoinStore {
 		return Arrays.stream(Coin.values())
 			.map(Coin::getAmount)
 			.collect(Collectors.toList());
+	}
+
+	public void makeChangeCoins(int amount) {
+		while (Coin.checkIsAtLeastCoin(amount)) {
+			Coin biggestChangeCoin = Coin.findBiggestChangeCoin(amount);
+			amount -= biggestChangeCoin.getAmount();
+			changeCoins.put(biggestChangeCoin, changeCoins.get(biggestChangeCoin) + 1);
+		}
 	}
 }

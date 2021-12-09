@@ -38,4 +38,16 @@ public enum Coin {
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 값입니다."));
 	}
+
+	public static Coin findBiggestChangeCoin(int amount) {
+		return Arrays.stream(values())
+			.filter(i -> i.amount < amount)
+			.findFirst()
+			.get();
+	}
+
+	public static List<Coin> getCoinList() {
+		return Arrays.stream(values())
+			.collect(Collectors.toList());
+	}
 }
