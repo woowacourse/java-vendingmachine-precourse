@@ -9,11 +9,21 @@ public class CoinCase {
 	private final Coin coin;
 	private final int number;
 	private int vendingMachineAmount;
+	private static final int INITIAL_VALUE = 0;
+	private static final int MINIMUM_RANGE = 1;
 
 	public CoinCase(Coin coin, int vendingMachineAmount) {
 		this.coin = coin;
 		this.vendingMachineAmount = vendingMachineAmount;
 		this.number = calculateNumberOfCoin();
+	}
+
+	public Coin getCoin() {
+		return coin;
+	}
+
+	public int getNumber() {
+		return number;
 	}
 
 	public int getVendingMachineAmount() {
@@ -23,7 +33,7 @@ public class CoinCase {
 
 	private int calculateNumberOfCoin() {
 		int maxNumber = vendingMachineAmount / coin.getAmount();
-		if (vendingMachineAmount < coin.getAmount()) {
+		if (maxNumber == INITIAL_VALUE) {
 			return maxNumber;
 		}
 		int numberOfCoin = Randoms.pickNumberInList(makeRandomNumberRange(maxNumber));
@@ -35,8 +45,8 @@ public class CoinCase {
 
 	private List<Integer> makeRandomNumberRange(int maxNumber) {
 		List<Integer> randomNumberRange = new ArrayList<>();
-		randomNumberRange.add(0);
-		for (int i = 1; i <= maxNumber; i++) {
+		randomNumberRange.add(INITIAL_VALUE);
+		for (int i = MINIMUM_RANGE; i <= maxNumber; i++) {
 			randomNumberRange.add(i);
 		}
 		return randomNumberRange;

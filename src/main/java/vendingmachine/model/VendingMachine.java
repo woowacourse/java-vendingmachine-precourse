@@ -9,4 +9,8 @@ public class VendingMachine {
 		this.amount = amount;
 		this.coinsCase = new CoinsCase(amount);
 	}
+
+	public CoinsCase getCoinsCase() {
+		return coinsCase;
+	}
 }

@@ -1,8 +1,18 @@
 package vendingmachine.view;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import vendingmachine.model.Coin;
+import vendingmachine.model.CoinCase;
+import vendingmachine.model.CoinsCase;
+
 public class OutputView {
 
+	private static final int INITIAL_VALUE = 0;
 	private static final String ASK_VENDING_MACHINE_AMOUNT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+	private static final String VENDING_MACHINE_COIN_STATUS = "자판기가 보유한 동전";
+	private static final String KOREAN_CURRENCY = "원";
+	private static final String DELIMITER_COIN_AND_NUMBER = " - ";
 
 	private OutputView() {
 	}
@@ -13,5 +23,19 @@ public class OutputView {
 
 	public static void askVendingMachineAmount() {
 		System.out.println(ASK_VENDING_MACHINE_AMOUNT);
+	}
+
+	public static void printVendingMachineCoinStatus(CoinsCase coinsCase) {
+		System.out.println(VENDING_MACHINE_COIN_STATUS);
+		List<Integer> coinTypes = coinsCase.getCoinsCase().stream().map(CoinCase::getCoin)
+			.map(Coin::getAmount).collect(
+				Collectors.toList());
+		List<Integer> numberOfCoins = coinsCase.getCoinsCase().stream().map(CoinCase::getNumber)
+			.collect(
+				Collectors.toList());
+		for (int i = INITIAL_VALUE; i < coinTypes.size(); i++) {
+			System.out.println(coinTypes.get(i) + KOREAN_CURRENCY + DELIMITER_COIN_AND_NUMBER
+				+ numberOfCoins.get(i));
+		}
 	}
 }

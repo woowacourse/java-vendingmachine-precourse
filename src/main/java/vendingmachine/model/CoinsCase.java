@@ -15,6 +15,10 @@ public class CoinsCase {
 		this.coinsCase = makeCoinsCase();
 	}
 
+	public List<CoinCase> getCoinsCase() {
+		return coinsCase;
+	}
+
 	private List<CoinCase> makeCoinsCase() {
 		List<CoinCase> coinsCase = new ArrayList<>();
 		List<Coin> coinTypes = Arrays.stream(Coin.values()).collect(Collectors.toList());
