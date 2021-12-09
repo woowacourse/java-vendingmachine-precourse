@@ -24,4 +24,15 @@ public class Changes {
 		}
 	}
 
+	public String toString() {
+		StringBuilder message = new StringBuilder("잔돈\n");
+
+		for (Map.Entry<Coin, Integer> entry : hashMap.entrySet()) {
+			message.append(entry.getKey().getAmount()).append("원 - ")
+				.append(entry.getValue()).append("개\n");
+		}
+
+		return message.toString();
+	}
+
 }
