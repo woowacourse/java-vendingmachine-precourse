@@ -12,13 +12,17 @@ public class Input {
         String input = Console.readLine();
 
         try {
-            validateVendingMachineInputIsPositiveNumber(input);
-            validateVendingMachineInputIsMultipleOf10(input);
+            validateVendingMachineInput(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readVendingMachineHold();
         }
         return Integer.parseInt(input);
+    }
+
+    private void validateVendingMachineInput(String input) throws IllegalArgumentException {
+        validateVendingMachineInputIsPositiveNumber(input);
+        validateVendingMachineInputIsMultipleOf10(input);
     }
 
     private void validateVendingMachineAmountIsNumber(String input) throws IllegalArgumentException {
