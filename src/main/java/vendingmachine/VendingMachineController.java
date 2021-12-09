@@ -13,7 +13,7 @@ public class VendingMachineController {
 	private ProductStorage productStorage;
 
 	public void setUpInitialVendingMachine() {
-		InputView.showInitialMoneySettingMessage();
+		InputView.printInitialMoneySettingMessage();
 		InitialMoney initialMoney = new InitialMoney();
 		requestInitialMoney(initialMoney);
 		OutputView.printVendingMachineOwnCoins(coins);
@@ -25,6 +25,8 @@ public class VendingMachineController {
 		InputView.printInsertMoneyMessage();
 		vendingMachine = new VendingMachine(coins, productStorage);
 		requestInsertMoney();
+
+		repeatRequestTrading();
 	}
 
 	private void requestInitialMoney(InitialMoney initialMoney) {
@@ -52,6 +54,18 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 			requestInsertMoney();
+		}
+	}
+
+	private void repeatRequestTrading() {
+		while (true) {
+			try {
+				OutputView.printRemainMoney(vendingMachine.calculateRemainMoney());
+				InputView.printProductForBuyingMessage();
+				vendingMachine.trade(Console.readLine());
+			} catch (IllegalArgumentException illegalArgumentException) {
+				ErrorView.showMessage(illegalArgumentException);
+			}
 		}
 	}
 }

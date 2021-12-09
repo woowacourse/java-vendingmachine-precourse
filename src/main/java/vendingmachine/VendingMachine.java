@@ -17,4 +17,11 @@ public class VendingMachine {
 		moneySlot.insert(money);
 	}
 
+	public int calculateRemainMoney() {
+		return moneySlot.getRemainMoney();
+	}
+
+	public void trade(String product) {
+		moneySlot.payProductValue(productStorage.sellProduct(product));
+	}
 }

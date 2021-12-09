@@ -10,6 +10,7 @@ public class OutputView {
 	private static final String MONETARY_UNIT = "원";
 	private static final String COINS_FORMAT = " - ";
 	private static final String COUNTING_UNIT = "개";
+	private static final String REMAIN_MONEY_FORMAT = "투입 금액: ";
 
 	private static void printLineBreak() {
 		System.out.println();
@@ -28,5 +29,10 @@ public class OutputView {
 			System.out.println(
 				money + MONETARY_UNIT + COINS_FORMAT + Collections.frequency(coins, money) + COUNTING_UNIT);
 		}
+	}
+
+	public static void printRemainMoney(int money) {
+		printLineBreak();
+		System.out.println(REMAIN_MONEY_FORMAT + money + MONETARY_UNIT);
 	}
 }

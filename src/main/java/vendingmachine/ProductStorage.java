@@ -14,6 +14,7 @@ public class ProductStorage {
 	private static final String ERROR_INPUT_FORMAT = "상품은 상품명, 가격, 수량을 쉼표로 구분하여 입력해야 합니다.";
 	private static final String ERROR_NAME_EMPTY = "상품명은 공백일 수 없습니다.";
 	private static final String ERROR_NAME_DUPLICATE = "상품명은 중복될 수 없습니다.";
+	private static final String ERROR_NOT_FOUND = "해당 상품은 자판기에서 판매하지 않습니다.";
 
 	HashMap<String, Product> storage;
 
@@ -64,5 +65,16 @@ public class ProductStorage {
 		String price = productInformation[PRICE];
 		String quantity = productInformation[QUANTITY];
 		storage.put(name, new Product(price, quantity));
+	}
+
+	public int sellProduct(String name) {
+		isStoredProduct(name);
+		return storage.get(name).sell();
+	}
+
+	private void isStoredProduct(String name) {
+		if (!storage.containsKey(name)) {
+			throw new IllegalArgumentException(ERROR_NOT_FOUND);
+		}
 	}
 }

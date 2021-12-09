@@ -9,6 +9,7 @@ public class Product {
 	private static final String ERROR_PRICE_DIVISIBLE = "자판기가 보유하는 금액은 10원으로 나누어떨어져야 합니다.";
 	private static final String ERROR_QUANTITY_NOT_INTEGER = "상품 수량은 숫자만 입력이 가능합니다.";
 	private static final String ERROR_QUANTITY_RANGE = "상품 수량은 0보다 커야 합니다.";
+	private static final String ERROR_NOT_LEFT = "해당 상품의 재고가 부족하여 구매할 수 없습니다.";
 
 	private int price;
 	private int quantity;
@@ -62,4 +63,17 @@ public class Product {
 			throw new IllegalArgumentException(ERROR_QUANTITY_RANGE);
 		}
 	}
+
+	public int sell() {
+		validateOutOfStock();
+		quantity--;
+		return price;
+	}
+
+	private void validateOutOfStock() {
+		if (quantity == NONE) {
+			throw new IllegalArgumentException(ERROR_NOT_LEFT);
+		}
+	}
+
 }

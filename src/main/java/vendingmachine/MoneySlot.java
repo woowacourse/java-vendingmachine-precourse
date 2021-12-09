@@ -6,6 +6,7 @@ public class MoneySlot {
 	private static final String NOT_INTEGER = "자판기에 투입하는 금액은 숫자만 입력이 가능합니다.";
 	private static final String NOT_POSITIVE = "자판기에 투입하는 금액은 0보다 커야합니다.";
 	private static final String NOT_DIVISIBLE = "자판기에 투입하는 금액은 10원으로 나누어떨어져야 합니다.";
+	private static final String NOT_ENOUGH_MONEY = "잔액 부족으로 해당 상품을 구매할 수 없습니다.";
 
 	private int money;
 
@@ -36,6 +37,21 @@ public class MoneySlot {
 	private void validateDivisible() {
 		if (Math.floorMod(money, MINIMUM_DIVISIBLE_NUMBER) != ZERO) {
 			throw new IllegalArgumentException(NOT_DIVISIBLE);
+		}
+	}
+
+	public int getRemainMoney() {
+		return money;
+	}
+
+	public void payProductValue(int value) {
+		validateEnoughMoney(value);
+		money -= value;
+	}
+
+	private void validateEnoughMoney(int value) {
+		if (money < value) {
+			throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
 		}
 	}
 }
