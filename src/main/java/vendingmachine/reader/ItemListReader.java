@@ -2,7 +2,7 @@ package vendingmachine.reader;
 
 import static java.util.stream.Collectors.toList;
 import java.util.List;
-import vendingmachine.Item;
+import vendingmachine.model.Item;
 import vendingmachine.reader.validator.CompositeValidator;
 import vendingmachine.reader.validator.CountOfItemInformationValidator;
 import vendingmachine.reader.validator.ItemPriceAndQuantityValidator;
