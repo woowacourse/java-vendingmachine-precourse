@@ -20,15 +20,4 @@ public class Validator {
 			throw new IllegalArgumentException(ERROR_MSG_LESS_THAN_MIN);
 		}
 	}
-
-	public static boolean moneyCheck(String input) {
-		try {
-			isNumeric(input);
-			minimumCheck(input);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
 }

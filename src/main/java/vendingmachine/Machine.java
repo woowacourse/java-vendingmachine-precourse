@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -14,12 +16,15 @@ public class Machine {
 	}
 
 	public void inputMachineMoney() {
-		String userInput;
-		do {
-			System.out.println(REQUEST_MSG_MACHINE_MONEY);
-			userInput = Console.readLine();
-		} while (!Validator.moneyCheck(userInput));
-		this.money = Integer.parseInt(userInput);
+		System.out.println(REQUEST_MSG_MACHINE_MONEY);
+		String userInput = Console.readLine();
+		try {
+			Validator.isNumeric(userInput);
+			Validator.minimumCheck(userInput);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			inputMachineMoney();
+		}
 	}
 
 }
