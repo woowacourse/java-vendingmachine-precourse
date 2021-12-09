@@ -5,14 +5,18 @@ import static vendingmachine.constant.Constant.*;
 import static vendingmachine.domain.Coin.*;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class VendingMachine {
 	private final HashMap<String, Integer> productPrice = new HashMap<>();
 	private final HashMap<String, Integer> productStocks = new HashMap<>();
-	private final HashMap<Integer, Integer> coinsOwned = new HashMap<>();
+	private final LinkedHashMap<Integer, Integer> coinsOwned = new LinkedHashMap<>();
 
 	public VendingMachine(int startMoney) {
-		while (startMoney > 0) {
+		for (int coin : getCoinList()) {
+			coinsOwned.put(coin, INITIAL_VALUE);
+		}
+		while (startMoney > INITIAL_VALUE) {
 			int coinPicked = pickNumberInList(getCoinList());
 			if (coinPicked <= startMoney) {
 				coinsOwned.put(coinPicked, coinsOwned.get(coinPicked) + 1);
