@@ -2,19 +2,21 @@ package vendingmachine.repository;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
 import vendingmachine.util.InputCondition;
 import vendingmachine.util.Symbol;
+import vendingmachine.util.comparator.CoinComparator;
 
 public class VendingMachine {
-	private final HashMap<Coin, Integer> coins;
+	private final TreeMap<Coin, Integer> coins;
 	private final HashMap<String, Item> items;
 
 	public VendingMachine(List<Integer> coin) {
-		this.coins = new HashMap<>();
+		this.coins = new TreeMap<>();
 		initCoinKind(coin);
 		this.items = new HashMap<>();
 	}
@@ -31,10 +33,9 @@ public class VendingMachine {
 		return getCurrentCoin(coins);
 	}
 
-	private String getCurrentCoin(HashMap<Coin, Integer> coins) {
+	private String getCurrentCoin(TreeMap<Coin, Integer> coins) {
 		StringBuilder builder = new StringBuilder();
 		coins.keySet().stream()
-			.sorted((c1, c2) -> -1 * Integer.compare(c1.getAmount(), c2.getAmount()))
 			.forEach(
 				c -> builder.append(
 					c.getAmount() + Symbol.WON + Symbol.HYPHEN_SPACE + coins.get(c) + Symbol.COUNT + Symbol.MEW_LINE));
@@ -72,18 +73,16 @@ public class VendingMachine {
 	}
 
 	public String subtractCoins(int payMoney) {
-		HashMap<Coin, Integer> smallChange = new HashMap<>();
+		TreeMap<Coin, Integer> smallChange = new TreeMap<>(new CoinComparator());
 		List<Coin> reverseSortedList = coins.keySet()
-			.stream()
-			.sorted((c1, c2) -> -1 * Integer.compare(c1.getAmount(), c2.getAmount()))
-			.collect(Collectors.toList());
+			.stream().collect(Collectors.toList());
 		for (Coin coin : reverseSortedList) {
 			payMoney = subtract(coin, payMoney, smallChange);
 		}
 		return getCurrentCoin(smallChange);
 	}
 
-	private int subtract(Coin coin, int payMoney, HashMap<Coin, Integer> smallChange) {
+	private int subtract(Coin coin, int payMoney, TreeMap<Coin, Integer> smallChange) {
 		while (payMoney >= coin.getAmount() && coins.get(coin) > InputCondition.ZERO) {
 			smallChange.put(coin, smallChange.getOrDefault(coin, 0) + 1);
 			coins.put(coin, coins.get(coin) - 1);
