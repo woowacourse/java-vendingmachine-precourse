@@ -23,4 +23,8 @@ public class ProductRepository {
             System.out.println(key + ": " + productRepository.get(key));
         }
     }
+
+    public boolean has(String productName) {
+        return productRepository.containsKey(productName);
+    }
 }

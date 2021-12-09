@@ -49,6 +49,14 @@ public class VendingMachine {
         OutputView.showUserMoney(userMoney);
     }
 
-    public void sellProduct() {
+    public void sellProduct(String productName) {
+        if (!productRepository.has(productName)) {
+            throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
+        }
+        //productRepo 에서 해당 상품을 찾는다.
+        // 없으면 에러
+
+        // 있으면 -> 개수가 있나 찾는다.
+        // 없으면 에러
     }
 }
