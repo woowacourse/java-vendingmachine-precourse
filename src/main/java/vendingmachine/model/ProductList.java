@@ -76,4 +76,14 @@ public class ProductList {
 		return minimumPrice;
 	}
 
+	private boolean isOutOfStock() {
+		for (Product product : hashMap.values()) {
+			if (product.getQuantity() > 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }
