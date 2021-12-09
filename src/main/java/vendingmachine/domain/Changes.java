@@ -37,13 +37,17 @@ public class Changes {
     }
 
     public Map<Coin, Integer> returnChanges(int money){
-        if(money == DEFAULT_VALUE){
+        if(isNoNeedToReturnChange(money)){
             return null;
         }
         Map<Coin, Integer> restChanges = getRestChanges();
         List<Coin> restCoins = new ArrayList<>(restChanges.keySet());
 
         return calculateChanges(money, restChanges, restCoins);
+    }
+
+    private boolean isNoNeedToReturnChange(int money) {
+        return money == DEFAULT_VALUE || totalChanges == DEFAULT_VALUE;
     }
 
     private Map<Coin, Integer> calculateChanges(int money, Map<Coin, Integer> restChanges, List<Coin> restCoins) {
