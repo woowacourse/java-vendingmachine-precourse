@@ -31,14 +31,18 @@ public class MachineController {
     }
 
     public boolean buyProduct(int price) {
-        if (machine.getAmountByClient() > price) {
+        if (machine.getAmountByClient() < price) {
             return false;
         }
         machine.buyProduct(price);
         return true;
     }
 
-    public void nowInputAmount() {
+    public int nowInputAmount(){
+        return machine.getAmountByClient();
+    }
+
+    public void nowInputAmountInfo() {
         MachineOutputView.printInputAmount(machine.toString());
     }
 }
