@@ -41,7 +41,7 @@ public enum Coin {
 
 	public static Coin findBiggestChangeCoin(int amount) {
 		return Arrays.stream(values())
-			.filter(i -> i.amount < amount)
+			.filter(i -> i.amount <= amount)
 			.findFirst()
 			.get();
 	}
