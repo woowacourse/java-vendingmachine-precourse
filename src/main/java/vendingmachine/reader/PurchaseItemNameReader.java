@@ -6,6 +6,7 @@ import vendingmachine.reader.validator.CompositeValidator;
 import vendingmachine.reader.validator.Validator;
 import vendingmachine.reader.validator.item.NotEnoughMoneyValidator;
 import vendingmachine.reader.validator.item.NotFoundItemValidator;
+import vendingmachine.reader.validator.item.SoldOutItemValidator;
 
 public class PurchaseItemNameReader extends Reader<String> {
 	public PurchaseItemNameReader(Validator validator) {
@@ -29,7 +30,11 @@ public class PurchaseItemNameReader extends Reader<String> {
 
 	public static RecursiveReader<String> recursiveReader(ItemRepository itemRepository,
 	                                                      VendingMachineRepository vendingMachineRepository) {
-		return new RecursiveReader<>(new PurchaseItemNameReader(new CompositeValidator(new NotFoundItemValidator(itemRepository),
-			new NotEnoughMoneyValidator(itemRepository, vendingMachineRepository))));
+		return new RecursiveReader<>(
+			new PurchaseItemNameReader(
+				new CompositeValidator(
+					new NotFoundItemValidator(itemRepository),
+					new NotEnoughMoneyValidator(itemRepository, vendingMachineRepository),
+					new SoldOutItemValidator(itemRepository))));
 	}
 }

@@ -27,15 +27,11 @@ public class Item {
 		quantity--;
 	}
 
-	public boolean isSalable(int money) {
-		return !isSoldOut() && isUnderAndEqualPrice(money);
-	}
-
-	private boolean isSoldOut() {
+	public boolean isSoldOut() {
 		return quantity == 0;
 	}
 
-	private boolean isUnderAndEqualPrice(int amount) {
-		return price <= amount;
+	public boolean isOverAndEqualPrice(int money) {
+		return price <= money;
 	}
 }

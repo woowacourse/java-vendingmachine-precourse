@@ -22,7 +22,7 @@ public class VendingMachine {
 		return inputMoney;
 	}
 
-	public boolean isSalable(Item item) {
-		return item.isSalable(inputMoney);
+	public boolean isOverAndEqualMoney(Item item) {
+		return item.isOverAndEqualPrice(inputMoney);
 	}
 }
