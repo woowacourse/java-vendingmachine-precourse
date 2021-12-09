@@ -13,6 +13,7 @@ public class VendingMachineController {
 		vendingMachine.insertProductListInProductRepository(inputProductList());
 		vendingMachine.insertUserInputAmount(inputUserAmount());
 		purchaseIsPossible(vendingMachine);
+		callPrintChangeAmount(vendingMachine);
 	}
 
 	private void purchaseIsPossible(VendingMachine vendingMachine) {
@@ -24,6 +25,11 @@ public class VendingMachineController {
 	private void purchaseProduct(VendingMachine vendingMachine) {
 		printInputAmount(vendingMachine.getInputAmount());
 		vendingMachine.purchaseProduct(inputPurchaseProductName());
+	}
+
+	private void callPrintChangeAmount(VendingMachine vendingMachine) {
+		printInputAmount(vendingMachine.getInputAmount());
+		printChangeAmount(vendingMachine.getChangeAmountToString());
 	}
 
 }

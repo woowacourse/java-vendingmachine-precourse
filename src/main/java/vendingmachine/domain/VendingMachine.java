@@ -35,4 +35,8 @@ public class VendingMachine {
 	public boolean isPossibleRepurchase() {
 		return productRepository.isOutOfProductQuantity() && productRepository.isWhetherPurchasePossible(inputAmount);
 	}
+
+	public String getChangeAmountToString() {
+		return coinStore.changeCoinsToString(inputAmount);
+	}
 }

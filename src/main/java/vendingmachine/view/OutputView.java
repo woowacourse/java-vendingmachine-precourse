@@ -11,6 +11,11 @@ public class OutputView {
 		System.out.println("투입 금액: " + inputAmount);
 	}
 
+	public static void printChangeAmount(String changeAmountToString) {
+		System.out.println("잔돈");
+		System.out.println(changeAmountToString);
+	}
+
 	private static void printEmptyLine() {
 		System.out.println();
 	}

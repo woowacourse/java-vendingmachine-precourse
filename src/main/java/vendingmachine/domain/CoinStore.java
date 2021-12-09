@@ -68,7 +68,7 @@ public class CoinStore {
 			.collect(Collectors.toList());
 	}
 
-	public void makeChangeCoins(int amount) {
+	private void makeChangeCoins(int amount) {
 		while (Coin.checkIsAtLeastCoin(amount)) {
 			Coin biggestChangeCoin = Coin.findBiggestChangeCoin(amount);
 			amount -= biggestChangeCoin.getAmount();
@@ -76,7 +76,8 @@ public class CoinStore {
 		}
 	}
 
-	public String changeCoinsToString() {
+	public String changeCoinsToString(int amount) {
+		makeChangeCoins(amount);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Coin amountOfCoin: Coin.getCoinList()) {
 			if (changeCoins.get(amountOfCoin) > 0) {
