@@ -34,9 +34,9 @@ public class CoinRepository { // 1급 콜렉션
             } else if(coinRepository.get(coin) > maxCntWithoutCondition) { //else인데 이거 나중에 함수로 뺄거.
                 givenCoinCnt = maxCntWithoutCondition;
             }
-            if (givenCoinCnt == 0) {
-                continue;
-            }
+            // if (givenCoinCnt == 0) {
+            //     continue;
+            // }
             coinMachineGiveUser.put(coin, givenCoinCnt);
             remainingAmount -= (givenCoinCnt * coin.getAmount());
         }

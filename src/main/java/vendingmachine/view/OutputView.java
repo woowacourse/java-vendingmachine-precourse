@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Price;
+import vendingmachine.repository.CoinRepository;
 
 public class OutputView {
     public static void showUserMoney(Price userMoney) {
@@ -15,5 +16,10 @@ public class OutputView {
         giveChange.keySet()
             .stream()
             .forEach(coin -> System.out.println(coin.getAmount() + "원 - " + giveChange.get(coin) + "개"));
+    }
+
+    public static void showAllCoinsMachineHave(CoinRepository coinRepository) {
+        System.out.println("자판기가 보유한 동전");
+        System.out.println(coinRepository);
     }
 }
