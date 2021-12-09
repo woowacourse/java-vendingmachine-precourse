@@ -9,11 +9,47 @@ import java.util.Map;
 
 public class Coins {
 
-    private final List<Integer> coinAmounts = Collections.unmodifiableList(Coin.amounts());
-    private final Map<Coin, Integer> coins;
+    private static final List<Integer> coinAmounts = Collections.unmodifiableList(Coin.amounts());
+    private final Map<Coin, Integer> counter;
 
     public Coins(int seedMoney) {
-        coins = generateRandomCoins(seedMoney);
+        counter = generateRandomCoins(seedMoney);
+    }
+
+    public Coins(Map<Coin, Integer> counter) {
+        this.counter = counter;
+    }
+
+    public static Coins getGreedyChanges(int inputMoney, Coins remains) {
+        Map<Coin, Integer> result = new HashMap<>();
+        while (remains.hasAnyCoinToChange(inputMoney)) {
+            Coin coin = remains.getChangeableCoin(inputMoney);
+
+            inputMoney -= coin.getAmount();
+            remains.counter.put(coin, remains.counter.get(coin) - 1);
+
+            result.put(coin, result.getOrDefault(coin, 0) + 1);
+        }
+        return new Coins(result);
+    }
+
+    private boolean hasAnyCoinToChange(int inputMoney) {
+        // inputMoney보다 가치가 같거나 작은 코인이 존재하면 아직 동전을 더 교체할 수 있음
+        return counter.keySet()
+                .stream()
+                .anyMatch(key -> counter.get(key) > 0 && inputMoney >= key.getAmount());
+    }
+
+    private Coin getChangeableCoin(int inputMoney) {
+        return coinAmounts.stream()
+                .filter(amount -> isChangeableAmount(inputMoney, amount))
+                .map(Coin::getCoinWithValue)
+                .findFirst()
+                .orElseThrow(() -> new RuntimeException("No coin to change"));
+    }
+
+    private boolean isChangeableAmount(int inputMoney, Integer amount) {
+        return this.counter.get(Coin.getCoinWithValue(amount)) > 0 && amount <= inputMoney;
     }
 
     private Map<Coin, Integer> generateRandomCoins(int seedMoney) {
@@ -44,7 +80,7 @@ public class Coins {
 
     public int sum() {
         int sum = 0;
-        for (Map.Entry<Coin, Integer> entry : coins.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : counter.entrySet()) {
             sum += entry.getKey().getAmount() * entry.getValue();
         }
         return sum;

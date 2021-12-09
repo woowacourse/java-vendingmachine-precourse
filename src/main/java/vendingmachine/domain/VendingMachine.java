@@ -13,6 +13,10 @@ public class VendingMachine {
         coins = new Coins(seedMoney);
     }
 
+    public VendingMachine(Coins coins) {
+        this.coins = coins;
+    }
+
     public Coins getCoins() {
         return coins;
     }
@@ -52,5 +56,11 @@ public class VendingMachine {
 
     public int getInputMoney() {
         return inputMoney;
+    }
+
+    public Coins getChanges() {
+        Coins changes = Coins.getGreedyChanges(inputMoney, coins);
+        inputMoney -= changes.sum();
+        return changes;
     }
 }

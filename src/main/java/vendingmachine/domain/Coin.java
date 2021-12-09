@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +21,7 @@ public enum Coin {
     public static List<Integer> amounts() {
         return Arrays.stream(Coin.values())
                 .map(Coin::getAmount)
+                .sorted(Comparator.reverseOrder())
                 .collect(Collectors.toList());
     }
 
