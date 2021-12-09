@@ -1,6 +1,7 @@
 package controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import utils.validator.VendingMachineChangeValidator;
 
 public class InputController {
 
@@ -8,6 +9,12 @@ public class InputController {
 	}
 
 	public static int inputVendingMachineChange() {
-		return Integer.parseInt(Console.readLine());
+		while (true) {
+			try {
+				return VendingMachineChangeValidator.checkValidVendingMachineChange(Console.readLine());
+			} catch (IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
+		}
 	}
 }
