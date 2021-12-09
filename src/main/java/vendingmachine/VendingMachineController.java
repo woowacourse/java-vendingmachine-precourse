@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -10,7 +9,7 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private List<Integer> coins;
-	private List<Product> products = new ArrayList<>();
+	private ProductStorage productStorage;
 
 	public void setUpInitialVendingMachine() {
 		InputView.showInitialMoneySettingMessage();
@@ -19,8 +18,8 @@ public class VendingMachineController {
 		OutputView.printVendingMachineOwnCoins(coins);
 
 		InputView.printInitialProductSettingMessage();
-		ProductFactory productFactory = new ProductFactory();
-		products = productFactory.createProducts(Console.readLine());
+		productStorage = new ProductStorage();
+		requestInitialProducts();
 	}
 
 	private void requestInitialMoney(InitialMoney initialMoney) {
@@ -30,6 +29,15 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 			requestInitialMoney(initialMoney);
+		}
+	}
+
+	private void requestInitialProducts() {
+		try {
+			productStorage.createProducts(Console.readLine());
+		} catch (IllegalArgumentException illegalArgumentException) {
+			ErrorView.showMessage(illegalArgumentException);
+			requestInitialProducts();
 		}
 	}
 }

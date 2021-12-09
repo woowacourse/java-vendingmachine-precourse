@@ -1,26 +1,65 @@
 package vendingmachine;
 
 public class Product {
-	private static final String DELIMITER = ",";
-	private static final int STARTING_NUMBER_OF_PRODUCT = 1;
-	private static final int ENDING_NUMBER_OF_PRODUCT = 1;
-	private static final int NAME_INDEX = 0;
-	private static final int PRICE_INDEX = 1;
-	private static final int QUANTITY_INDEX = 2;
+	private static final int MINIMUM_PRICE = 100;
+	private static final int MINIMUM_DIVISIBLE_NUMBER = 10;
+	private static final int NONE = 0;
+	private static final String ERROR_PRICE_NOT_INTEGER = "상품 가격은 숫자만 입력이 가능합니다.";
+	private static final String ERROR_PRICE_RANGE = "상품 가격은 100원 이상이어야 합니다.";
+	private static final String ERROR_PRICE_DIVISIBLE = "자판기가 보유하는 금액은 10원으로 나누어떨어져야 합니다.";
+	private static final String ERROR_QUANTITY_NOT_INTEGER = "상품 수량은 숫자만 입력이 가능합니다.";
+	private static final String ERROR_QUANTITY_RANGE = "상품 수량은 0보다 커야 합니다.";
 
-	private String name;
 	private int price;
 	private int quantity;
 
-	public Product(String produceRequest) {
-		produceRequest = removeProductDelimiter(produceRequest);
-		String[] productInformationArray = produceRequest.split(DELIMITER);
-		name = productInformationArray[NAME_INDEX];
-		price = Integer.parseInt(productInformationArray[PRICE_INDEX]);
-		quantity = Integer.parseInt(productInformationArray[QUANTITY_INDEX]);
+	public Product(String price, String quantity) {
+		validatePrice(price);
+		validateQuantity(quantity);
 	}
 
-	private String removeProductDelimiter(String produceRequest) {
-		return produceRequest.substring(STARTING_NUMBER_OF_PRODUCT, produceRequest.length() - ENDING_NUMBER_OF_PRODUCT);
+	private void validatePrice(String price) {
+		validatePriceInteger(price);
+		validatePriceMinimum();
+		validatePriceDivisible();
+	}
+
+	private void validatePriceInteger(String price) {
+		try {
+			this.price = Integer.parseInt(price);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new IllegalArgumentException(ERROR_PRICE_NOT_INTEGER);
+		}
+	}
+
+	private void validatePriceMinimum() {
+		if (price < MINIMUM_PRICE) {
+			throw new IllegalArgumentException(ERROR_PRICE_RANGE);
+		}
+	}
+
+	private void validatePriceDivisible() {
+		if (Math.floorMod(price, MINIMUM_DIVISIBLE_NUMBER) != NONE) {
+			throw new IllegalArgumentException(ERROR_PRICE_DIVISIBLE);
+		}
+	}
+
+	private void validateQuantity(String quantity) {
+		validateQuantityInteger(quantity);
+		validateQuantityRange();
+	}
+
+	private void validateQuantityInteger(String quantity) {
+		try {
+			this.quantity = Integer.parseInt(quantity);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			throw new IllegalArgumentException(ERROR_QUANTITY_NOT_INTEGER);
+		}
+	}
+
+	private void validateQuantityRange() {
+		if (quantity <= NONE) {
+			throw new IllegalArgumentException(ERROR_QUANTITY_RANGE);
+		}
 	}
 }
