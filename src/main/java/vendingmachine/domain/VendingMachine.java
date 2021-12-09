@@ -20,6 +20,10 @@ public class VendingMachine {
         generateCoins(totalMoney);
     }
 
+    public HashMap<Integer, Integer> getCoins() {
+        return this.coins;
+    }
+
     private void generateCoins(int totalMoney) {
         while (totalMoney > 0) {
             int randomCoin = Randoms.pickNumberInList(CoinConstants.getCoinValues());

@@ -7,6 +7,6 @@ import java.util.stream.Stream;
 public class CoinConstants {
 
     public static List<Integer> getCoinValues() {
-        return Stream.of(10, 50, 100, 500).collect(Collectors.toList());
+        return Stream.of(500, 100, 50, 10).collect(Collectors.toList());
     }
 }
