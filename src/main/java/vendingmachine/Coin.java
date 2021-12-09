@@ -49,7 +49,7 @@ public enum Coin {
 		return randomPoolIndices;
 	}
 
-	public static boolean isSwappbleForCoin(int money) {
+	public static boolean isSwappableForCoin(int money) {
 		return COIN_10.amount <= money;
 	}
 

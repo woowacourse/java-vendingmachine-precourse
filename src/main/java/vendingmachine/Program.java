@@ -19,7 +19,7 @@ public class Program {
 	}
 
 	private void makeRandomCoins(int money) {
-		while (Coin.isSwappbleForCoin(money)) {
+		while (Coin.isSwappableForCoin(money)) {
 			Coin coin = Coin.random(money);
 			pocket.push(coin);
 			money = coin.subtract(money);
