@@ -7,6 +7,10 @@ public class OutputView {
 		printEmptyLine();
 	}
 
+	public static void printInputAmount(int inputAmount) {
+		System.out.println("투입 금액: " + inputAmount);
+	}
+
 	private static void printEmptyLine() {
 		System.out.println();
 	}
