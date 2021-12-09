@@ -11,19 +11,6 @@ import vendingmachine.validator.NumberValidator;
 import vendingmachine.validator.ProductValidator;
 
 public class InputView {
-	public static int getVendingMachineMoney() {
-		while (true) {
-			System.out.println(VENDING_MACHINE_MONEY_INPUT_MESSAGE);
-			String inputMachineMoney = Console.readLine();
-			try {
-				NumberValidator.checkNumber(inputMachineMoney);
-				return Integer.parseInt(inputMachineMoney);
-			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
-			}
-		}
-	}
-
 	public static List<List<String>> getProducts() {
 		while (true) {
 			System.out.println(PRODUCTS_INPUT_MESSAGE);
@@ -45,13 +32,21 @@ public class InputView {
 		return products;
 	}
 
+	public static int getVendingMachineMoney() {
+		return getMoney(VENDING_MACHINE_MONEY_INPUT_MESSAGE);
+	}
+
 	public static Integer getUserMoney() {
+		return getMoney(USER_MONEY_MESSAGE);
+	}
+
+	private static Integer getMoney(String Message) {
 		while (true) {
-			System.out.println(USER_MONEY_MESSAGE);
-			String userMoney = Console.readLine();
+			System.out.println(Message);
+			String money = Console.readLine();
 			try {
-				NumberValidator.checkNumber(userMoney);
-				return Integer.parseInt(userMoney);
+				NumberValidator.checkNumber(money);
+				return Integer.parseInt(money);
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
 			}
