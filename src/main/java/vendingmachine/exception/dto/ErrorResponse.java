@@ -1,7 +1,7 @@
 package vendingmachine.exception.dto;
 
 public class ErrorResponse {
-	public static String of(String message) {
-		return "[ERROR] " + message;
+	public static void of(String message) {
+		System.out.println("[ERROR] " + message);
 	}
 }
