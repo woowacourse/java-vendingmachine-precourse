@@ -1,6 +1,9 @@
 package vendingmachine.products;
 
+import vendingmachine.ValidatorMessage;
+
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class Products {
@@ -34,6 +37,20 @@ public class Products {
                 .filter(product->product.getName().equals(productName))
                 .findAny()
                 .orElse(null);
+    }
+
+    public int findMinPriceProduct(){
+        return products.stream()
+                .min(Comparator.comparing(Product::getPrice))
+                .orElse(null)
+                .getPrice();
+    }
+
+    public int findMinCountsProduct(){
+        return products.stream()
+                .min(Comparator.comparing(Product::getCounts))
+                .orElse(null)
+                .getCounts();
     }
 
     public void buyProduct(Product product){
