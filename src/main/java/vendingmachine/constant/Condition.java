@@ -1,7 +1,9 @@
 package vendingmachine.constant;
 
 public enum Condition {
-    LENGTH_0(0);
+    LENGTH_0(0),
+    MONEY_0(0),
+    ONE_COIN(1);
 
     private int number;
 
