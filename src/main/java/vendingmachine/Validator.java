@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.Map;
+import java.util.regex.Pattern;
 
 /**
  * 사용자의 입력값에 대한 검증을 수행하는 model class
@@ -14,9 +15,14 @@ public class Validator {
 	private static final int MIN_PRICE = 100;
 	private static final int MIN_COUNT = 1;
 
-	private static final String NOT_NUMBER_ERROR = "금액 또는 수량은 숫자로만 입력해야 합니다.";
+	// 정규식으로 더 자세한 검증을 할 수도 있지만, 사용자에게 각각의 예외 경우에 대한 자세한 안내를 주기 위해 최소한의 형식만 검사
+	// 상품명 공백, 가격과 수량 범위까지 검사하는 정규식 : "^\\[\\S+,[1-9][0-9]{3,},[1-9][0-9]*]$"
+	private static final String ITEM_REGEX = "^\\[\\S+,[0-9]+,[0-9]+]$";
+
+	private static final String NOT_NUMBER_ERROR = "숫자로만 입력해야 합니다.";
 	private static final String CAN_NOT_BE_DIVIDED_BY_10_ERROR = "금액은 10원 단위로 입력해야 합니다.";
 	private static final String MINUS_ERROR = "음수는 입력할 수 없습니다.";
+	private static final String ITEM_FORMAT_ERROR = "형식에 맞게 입력하세요([상품명,가격,수량];[]...)";
 	private static final String BLANK_ERROR = "상품명은 공백일 수 없습니다.";
 	private static final String DUPLICATE_ITEM_ERROR = "상품명이 중복됩니다.";
 	private static final String PRICE_RANGE_ERROR = "상품 가격은 100 이상이어야 합니다.";
@@ -27,6 +33,13 @@ public class Validator {
 		checkMinus(amount);
 		checkUnit(amount);
 		return amount;
+	}
+
+	public void validateItemFormat(String input) {
+		if (Pattern.matches(ITEM_REGEX, input)) {
+			return;
+		}
+		throw new IllegalArgumentException(ITEM_FORMAT_ERROR);
 	}
 
 	public String validateNewItemName(Map<String, Item> items, String name) {

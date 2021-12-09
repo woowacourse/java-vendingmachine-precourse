@@ -28,6 +28,7 @@ public class ItemParser {
 		Map<String, Item> items = new HashMap<>();
 		String[] stringItems = string.split(ITEM_SEPARATOR);
 		for (String stringItem : stringItems) {
+			validator.validateItemFormat(stringItem);
 			String[] properties = removeSquareBracket(stringItem).split(PROPERTY_SEPARATOR);
 			Item item = propertiesToItem(properties);
 			items.put(validator.validateNewItemName(items, properties[NAME_INDEX]), item);
