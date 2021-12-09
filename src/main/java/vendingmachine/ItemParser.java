@@ -11,7 +11,7 @@ import java.util.Map;
  * @since 1.0
  */
 public class ItemParser {
-	private Validator validator;
+	private final Validator validator;
 
 	private static final String ITEM_SEPARATOR = ";";
 	private static final String PROPERTY_SEPARATOR = ",";

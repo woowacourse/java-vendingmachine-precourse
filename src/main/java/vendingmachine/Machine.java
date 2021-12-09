@@ -12,10 +12,10 @@ import camp.nextstep.edu.missionutils.Console;
  * @since 1.0
  */
 public class Machine {
-	private Display display;
-	private Validator validator;
-	private Cashier cashier;
-	private ItemParser itemParser;
+	private final Display display;
+	private final Validator validator;
+	private final Cashier cashier;
+	private final ItemParser itemParser;
 
 	public Machine() {
 		this.display = new Display();
