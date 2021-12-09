@@ -8,10 +8,10 @@ import vendingmachine.reader.ItemListReader;
 
 public class Application {
 	public static void main(String[] args) {
-		int amount = new ExchangeAmountReader().read();
+		int amount = ExchangeAmountReader.create().read();
 		Coins coins = generateCoins(amount);
 		printExchangeCoins(coins);
-		List<Item> items = new ItemListReader().read();
+		List<Item> items = ItemListReader.create().read();
 		System.out.println(items);
 	}
 

@@ -1,35 +1,31 @@
 package vendingmachine.reader;
 
-import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.reader.validator.CompositeValidator;
+import vendingmachine.reader.validator.NumberFormatValidator;
+import vendingmachine.reader.validator.TenTimesNumberValidator;
+import vendingmachine.reader.validator.Validator;
 
-public class ExchangeAmountReader implements Reader<Integer>{
-	public Integer read() {
-		printInputMessage();
-		String value = Console.readLine();
-		checkIsValid(value);
-		return Integer.valueOf(value);
+public class ExchangeAmountReader extends Reader<Integer>{
+	public ExchangeAmountReader(Validator validator) {
+		super(validator);
 	}
 
-	private void printInputMessage() {
+	@Override
+	protected void printInputMessage() {
 		System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
 	}
 
-	private void checkIsValid(String value) {
-		checkIsNumber(value);
-		checkIsTenTimesNumber(value);
+	@Override
+	protected Integer parse(String value) {
+		return Integer.valueOf(value);
 	}
 
-	private void checkIsTenTimesNumber(String value) {
-		Integer amount = Integer.valueOf(value);
-
-		if (amount % 10 != 0) {
-			throw new IllegalArgumentException("[ERROR] 자판기가 보유할 금액은 10원으로 나눠어 떨어져야 합니다.");
-		}
+	@Override
+	protected String getInputValueName() {
+		return "금액";
 	}
 
-	private void checkIsNumber(String value) {
-		if (!value.matches("[0-9]*")) {
-			throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
-		}
+	public static Reader<Integer> create() {
+		return new ExchangeAmountReader(new CompositeValidator(new NumberFormatValidator(), new TenTimesNumberValidator()));
 	}
 }
