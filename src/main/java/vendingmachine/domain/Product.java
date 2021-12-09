@@ -10,9 +10,9 @@ public class Product {
 	private int quantity;
 
 	public Product(List<String> productToString) {
-		this.name = productToString.get(0);
-		this.price = Integer.parseInt(productToString.get(1));
-		this.quantity = Integer.parseInt(productToString.get(2));
+		this.name = productToString.get(INDEX_OF_PRODUCT_NAME);
+		this.price = Integer.parseInt(productToString.get(INDEX_OF_PRODUCT_PRICE));
+		this.quantity = Integer.parseInt(productToString.get(INDEX_OF_PRODUCT_QUANTITY));
 	}
 
 	public boolean isSameName(String name) {
