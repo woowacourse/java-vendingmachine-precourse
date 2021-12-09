@@ -14,7 +14,7 @@ class ApplicationTest extends NsTest {
     void 기능_테스트() {
         assertRandomNumberInListTest(
             () -> {
-                run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라");
+                run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
                 assertThat(output()).contains(
                     "자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
                     "투입 금액: 3000원", "투입 금액: 1500원"
