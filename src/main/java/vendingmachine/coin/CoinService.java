@@ -9,7 +9,7 @@ import java.util.List;
 import static vendingmachine.coin.Coin.*;
 
 public class CoinService {
-    private int amount;
+    private final int amount;
 
     public CoinService(int amount) {
         this.amount = amount;
@@ -61,5 +61,16 @@ public class CoinService {
             return COIN_50;
         }
         return COIN_10;
+    }
+
+    public List<Integer> repayCoinsByBalance(int balance) {
+        List<Coin> coins = Arrays.asList(COIN_500, COIN_100, COIN_50, COIN_10);
+        List<Integer> repayCounts = new ArrayList<>();
+        for (Coin coin : coins) {
+            int counts = Math.min(coin.getCounts(), balance / coin.getAmount());
+            repayCounts.add(counts);
+            balance -= coin.getAmount() * counts;
+        }
+        return repayCounts;
     }
 }
