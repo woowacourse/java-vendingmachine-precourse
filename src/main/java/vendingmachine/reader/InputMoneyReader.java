@@ -23,7 +23,7 @@ public class InputMoneyReader extends Reader<Integer>{
 		return "투입 금액";
 	}
 
-	public static Reader<Integer> create() {
+	public static InputMoneyReader create() {
 		return new InputMoneyReader(new NumberFormatValidator());
 	}
 }

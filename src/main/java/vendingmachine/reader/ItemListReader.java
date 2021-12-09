@@ -37,7 +37,7 @@ public class ItemListReader extends Reader<List<Item>> {
 			.collect(toList());
 	}
 
-	public static Reader<List<Item>> create() {
+	public static ItemListReader create() {
 		ItemLineParser parser = new ItemLineParser();
 		return new ItemListReader(
 			new CompositeValidator(new CountOfItemInformationValidator(parser),

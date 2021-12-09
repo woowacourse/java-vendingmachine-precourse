@@ -24,7 +24,7 @@ public class PurchaseItemNameReader extends Reader<String> {
 		return "상품명";
 	}
 
-	public static Reader<String> create(ItemRepository itemRepository) {
+	public static PurchaseItemNameReader create(ItemRepository itemRepository) {
 		return new PurchaseItemNameReader(new NotFoundItemValidator(itemRepository));
 	}
 }
