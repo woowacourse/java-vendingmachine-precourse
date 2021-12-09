@@ -34,6 +34,11 @@ class ApplicationTest extends NsTest {
         );
     }
 
+    @Test
+    void 값으로_코인_찾기_테스트() {
+        assertThat(Coin.findByAmount(500)).isEqualTo(Coin.COIN_500);
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
