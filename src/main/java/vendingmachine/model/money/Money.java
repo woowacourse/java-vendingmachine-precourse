@@ -2,9 +2,9 @@ package vendingmachine.model.money;
 
 import static vendingmachine.exception.ExceptionMessage.NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE;
 import static vendingmachine.exception.ExceptionMessage.NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE;
+import static vendingmachine.validation.NumberValidator.isNotPositiveInteger;
 
 public class Money {
-    private static final String NOT_NEGATIVE_INTEGER_REGEX = "[0-9]+";
     private int value;
 
     public Money(final String value) {
@@ -15,7 +15,7 @@ public class Money {
     }
 
     private void validatePositiveInteger(final String value) {
-        if (!value.matches(NOT_NEGATIVE_INTEGER_REGEX) || value.equals("0")) {
+        if (isNotPositiveInteger(value)) {
             throw new IllegalArgumentException(NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE);
         }
     }
