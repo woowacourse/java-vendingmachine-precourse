@@ -63,6 +63,19 @@ public class ProductList {
 		return hashMap.get(productName);
 	}
 
+	public boolean isContinueToSell(int deposit) {
+		int minimumPrice = getMinimumPrice();
+		if (minimumPrice > deposit) {
+			return false;
+		}
+
+		if (isOutOfStock()) {
+			return false;
+		}
+
+		return true;
+	}
+
 	private int getMinimumPrice() {
 		int minimumPrice = Integer.MAX_VALUE;
 		for (Product product : hashMap.values()) {
