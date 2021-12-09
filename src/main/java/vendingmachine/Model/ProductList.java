@@ -3,7 +3,7 @@ package vendingmachine.Model;
 import java.util.ArrayList;
 
 public class ProductList {
-	private static final ArrayList<Product> products = new ArrayList<>();
+	private final ArrayList<Product> products = new ArrayList<>();
 
 	public void add(Product product) {
 		products.add(product);

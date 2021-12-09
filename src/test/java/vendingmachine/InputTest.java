@@ -331,12 +331,13 @@ class InputTest extends NsTest {
 
 	@Test
 	void 잔돈_소진() {
-		assertSimpleTest(() -> {
+		assertRandomNumberInListTest(() -> {
 			runException("450", "[콜라,900,1]", "8000", "콜라");
 			assertThat(output()).contains(
 				"잔돈"
 			);
-		});
+		},100, 100, 100, 100, 50
+		);
 	}
 
 	@Test
@@ -351,12 +352,13 @@ class InputTest extends NsTest {
 
 	@Test
 	void 잔돈_재고없음() {
-		assertSimpleTest(() -> {
+		assertRandomNumberInListTest(() -> {
 			runException("450", "[콜라,900,1];[사이다,2000,1]", "10000", "콜라", "사이다");
 			assertThat(output()).contains(
 				"잔돈"
 			);
-		});
+		},100, 100, 100, 100, 50
+		);
 	}
 
 	@Test
