@@ -27,16 +27,16 @@ public class OutputService {
 
 	public void printChange(Map<Coin, Integer> change) {
 		System.out.println(CHANGE);
-		if (change.get(Coin.COIN_500) > ZERO) {
+		if (change.containsKey(Coin.COIN_500) && change.get(Coin.COIN_500) > ZERO) {
 			System.out.println(FIVE_HUNDRED + WON + STICK + change.get(Coin.COIN_500) + UNIT);
 		}
-		if (change.get(Coin.COIN_100) > ZERO) {
+		if (change.containsKey(Coin.COIN_100) &&change.get(Coin.COIN_100) > ZERO) {
 			System.out.println(HUNDRED + WON + STICK + change.get(Coin.COIN_100) + UNIT);
 		}
-		if (change.get(Coin.COIN_50) > ZERO) {
+		if (change.containsKey(Coin.COIN_50) &&change.get(Coin.COIN_50) > ZERO) {
 			System.out.println(FIFTY + WON + STICK + change.get(Coin.COIN_50) + UNIT);
 		}
-		if (change.get(Coin.COIN_10) > ZERO) {
+		if (change.containsKey(Coin.COIN_10) &&change.get(Coin.COIN_10) > ZERO) {
 			System.out.println(TEN + WON + STICK + change.get(Coin.COIN_10) + UNIT);
 		}
 	}
