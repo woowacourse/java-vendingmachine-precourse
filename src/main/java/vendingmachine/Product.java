@@ -18,4 +18,8 @@ public class Product {
         this.stockQuantity--;
     }
 
+    public boolean isSoldOut() {
+        return stockQuantity == 0;
+    }
+
 }
