@@ -33,7 +33,7 @@ public class VendingMachine {
 	}
 
 	public boolean isPossibleRepurchase() {
-		return productRepository.isOutOfProductQuantity() && productRepository.isWhetherPurchasePossible(inputAmount);
+		return (productRepository.isCheckStock() && productRepository.isWhetherPurchasePossible(inputAmount));
 	}
 
 	public String getChangeAmountToString() {
