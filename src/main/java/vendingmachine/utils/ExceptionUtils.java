@@ -21,7 +21,7 @@ public class ExceptionUtils {
 		if (!validateSpace(money)) {
 			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
 		}
-		if (!validateNumber(money) && !validatePositiveNumber(money)) {
+		if (!validateNumber(money) || !validatePositiveNumber(money)) {
 			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 		if (!validateMultiplicationOfTen(money)) {
