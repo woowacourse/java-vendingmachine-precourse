@@ -13,6 +13,7 @@ import vendingmachine.utils.ProductValidator;
 public class VendingMachine {
     private CoinRepository coinRepository;
     private ProductRepository productRepository = new ProductRepository();
+    private Price userMoney;
 
     private VendingMachine(int initializeMoney) {
         putInitialAmount(initializeMoney);
@@ -39,5 +40,9 @@ public class VendingMachine {
             productRepository.add(product);
         }
         productRepository.showProductRepository();
+    }
+
+    public void putUserMoney(String userMoneyInput) {
+        userMoney = new Price(userMoneyInput);
     }
 }

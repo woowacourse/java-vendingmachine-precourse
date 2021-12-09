@@ -14,6 +14,8 @@ public class Application {
         //상품명들을 입력. -> VendingMachine의 ProductRepository
         ArrayList<String> productsInfo = StringUtil.splitUsingSemiColon(InputView.inputProductsInfo());
         vendingMachine.putProducts(productsInfo);
+        String userMoneyInput = InputView.inputUserMoney();
+        vendingMachine.putUserMoney(userMoneyInput);
 
     }
 }
