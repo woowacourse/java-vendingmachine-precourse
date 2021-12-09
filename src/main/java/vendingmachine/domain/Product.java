@@ -19,6 +19,10 @@ public class Product {
 		return this.name.equals(name);
 	}
 
+	public boolean isChipperThanMoney(int money) {
+		return cost <= money;
+	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);

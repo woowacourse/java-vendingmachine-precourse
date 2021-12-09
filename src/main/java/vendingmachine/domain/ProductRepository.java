@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class ProductRepository {
+	private final static int LAST_NUMBER = 1;
+
 	private final ArrayList<Product> products = new ArrayList<>();
 	private final HashMap<Product, Integer> productHashMap = new HashMap<>();
 
@@ -13,12 +15,38 @@ public class ProductRepository {
 	}
 
 	public int getProductCost(String productName) {
-		for (Product product : products) {
-			if (product.isSame(productName)) {
-				return product.getCost();
-			}
-		}
-		return 0;
+		return findProduct(productName).getCost();
 	}
 
+	public boolean isOutOfStock() {
+		return productHashMap.isEmpty();
+	}
+
+	public boolean isNoProductForCustomer(int customerMoney) {
+		for (Product product : products) {
+			if (product.isChipperThanMoney(customerMoney)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public void sellProduct(String productName) {
+		Product product = findProduct(productName);
+		int beforeNumberOfProduct = productHashMap.get(product);
+		if (beforeNumberOfProduct == LAST_NUMBER) {
+			productHashMap.remove(product);
+			return;
+		}
+		productHashMap.replace(product, beforeNumberOfProduct - 1);
+	}
+
+	private Product findProduct(String productName) {
+		for (Product product : products) {
+			if (product.isSame(productName)) {
+				return product;
+			}
+		}
+		throw new IllegalArgumentException("해당 상품이 존재히자 않습니다.");
+	}
 }

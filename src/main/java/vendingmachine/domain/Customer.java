@@ -9,6 +9,10 @@ public class Customer {
 		this.money = money;
 	}
 
+	public int getMoney() {
+		return money;
+	}
+
 	public void showChanges() {
 		OutputView.printCustomerChanges(money);
 	}
@@ -16,4 +20,9 @@ public class Customer {
 	public void purchaseProducts(int productCost) {
 		this.money -= productCost;
 	}
+
+	public boolean isNoMoney() {
+		return money == 0;
+	}
+
 }

@@ -28,10 +28,19 @@ public class VendingMachine {
 	private void tradeWithCustomer(Customer customer) {
 		while (true) {
 			customer.showChanges();
+			if (!canTrade(customer)) {
+				return;
+			}
 			String productName = InputView.getProductNameToBuyInput();
 			int productCost = productRepository.getProductCost(productName);
 			customer.purchaseProducts(productCost);
+			productRepository.sellProduct(productName);
 		}
+	}
+
+	private boolean canTrade(Customer customer) {
+		return !productRepository.isOutOfStock() && !customer.isNoMoney() && !productRepository.isNoProductForCustomer(
+			customer.getMoney());
 	}
 
 	private int getInputMoneyFromInput() {
