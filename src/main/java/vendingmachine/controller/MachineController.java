@@ -1,7 +1,6 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.util.Validator;
 import vendingmachine.model.VendingMachine;
@@ -9,7 +8,6 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class MachineController {
     private VendingMachine vendingMachine;
@@ -42,10 +40,7 @@ public class MachineController {
     }
 
     private void createProducts() {
-        products = new Products(inputProducts().stream()
-                .map(Product::new)
-                .collect(Collectors.toList()));
-
+        products = new Products(inputProducts());
         vendingMachine.setProducts(products);
     }
 

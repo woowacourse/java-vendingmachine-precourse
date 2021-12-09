@@ -25,14 +25,19 @@ public class VendingMachine {
                     Stream.of(Coin.values())
                             .map(Coin::getAmount)
                             .collect(Collectors.toList()));
-
-            if (amount >= randomCoin) {
-                coins.put(randomCoin, coins.getOrDefault(randomCoin, DEFAULT_VALUE) + INCREMENT_BY_ONE);
-                amount -= randomCoin;
-            }
+            amount = addCoin(coins, randomCoin, amount);
         }
 
         return coins;
+    }
+
+    private int addCoin(Map<Integer, Integer> coins, int randomCoin, int amount) {
+        if (amount >= randomCoin) {
+            coins.put(randomCoin, coins.getOrDefault(randomCoin, DEFAULT_VALUE) + INCREMENT_BY_ONE);
+            amount -= randomCoin;
+        }
+
+        return amount;
     }
 
     public Map<Integer, Integer> getCoins() {
