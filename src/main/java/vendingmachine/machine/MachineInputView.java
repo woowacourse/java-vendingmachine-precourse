@@ -13,7 +13,6 @@ public class MachineInputView {
     }
 
     public static String buyWhichProductByClient() {
-        System.out.println();
         System.out.println(BUY_WHICH_PRODUCT_MESSAGE);
         return Console.readLine();
     }
