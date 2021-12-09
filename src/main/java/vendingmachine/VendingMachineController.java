@@ -5,6 +5,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private List<Integer> coins;
@@ -13,6 +14,7 @@ public class VendingMachineController {
 		InputView.showInitialMoneySettingMessage();
 		InitialMoney initialMoney = new InitialMoney();
 		requestInitialMoney(initialMoney);
+		OutputView.printVendingMachineOwnCoins(coins);
 	}
 
 	private void requestInitialMoney(InitialMoney initialMoney) {
