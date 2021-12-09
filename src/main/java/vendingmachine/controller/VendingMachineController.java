@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
-import vendingmachine.view.InputView;
+import vendingmachine.model.VendingMachine;
+import vendingmachine.utils.VendingMachineFactory;
 
 public class VendingMachineController {
 
@@ -8,6 +9,6 @@ public class VendingMachineController {
 	}
 
 	public static void useVendingMachine() {
-		InputView.writeVendingMachineAmount();
+		VendingMachine vendingMachine = VendingMachineFactory.makeVendingMachine();
 	}
 }
