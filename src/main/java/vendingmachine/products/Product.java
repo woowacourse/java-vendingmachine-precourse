@@ -1,8 +1,8 @@
 package vendingmachine.products;
 
 public class Product {
-    private String name;
-    private int price;
+    private final String name;
+    private final int price;
     private int counts;
 
     public Product(String name, int price, int counts) {
@@ -21,5 +21,9 @@ public class Product {
 
     public int getCounts() {
         return counts;
+    }
+
+    public void minusCount() {
+        --this.counts;
     }
 }

@@ -35,7 +35,11 @@ public class ProductsController {
         return productsList;
     }
 
-    public int findProductPrice(String productName){
-        return products.findProduct(productName).getPrice();
+    public Product findProduct(String productName){
+        return products.findProduct(productName);
+    }
+
+    public void buyProduct(Product product){
+        products.buyProduct(product);
     }
 }

@@ -35,4 +35,8 @@ public class Products {
                 .findAny()
                 .orElse(null);
     }
+
+    public void buyProduct(Product product){
+        product.minusCount();
+    }
 }
