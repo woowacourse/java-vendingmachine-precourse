@@ -1,4 +1,4 @@
-package vendingmachine.model;
+package vendingmachine.model.item;
 
 public class Item {
 	private final String name;

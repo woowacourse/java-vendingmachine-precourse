@@ -1,4 +1,4 @@
-package vendingmachine.model;
+package vendingmachine.model.item;
 
 import java.util.HashMap;
 import java.util.List;

@@ -1,4 +1,8 @@
-package vendingmachine.model;
+package vendingmachine.model.machine;
+
+import vendingmachine.model.coin.Coins;
+import vendingmachine.model.item.Item;
+import vendingmachine.model.item.ItemRepository;
 
 public class VendingMachine {
 	private final Coins coins;

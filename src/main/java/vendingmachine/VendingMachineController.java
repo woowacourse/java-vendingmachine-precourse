@@ -1,11 +1,11 @@
 package vendingmachine;
 
 import java.util.List;
-import vendingmachine.model.Coins;
-import vendingmachine.model.CoinsGenerator;
-import vendingmachine.model.Item;
-import vendingmachine.model.ItemRepository;
-import vendingmachine.model.VendingMachine;
+import vendingmachine.model.coin.Coins;
+import vendingmachine.model.coin.CoinsGenerator;
+import vendingmachine.model.item.Item;
+import vendingmachine.model.item.ItemRepository;
+import vendingmachine.model.machine.VendingMachine;
 import vendingmachine.reader.ExchangeAmountReader;
 import vendingmachine.reader.InputMoneyReader;
 import vendingmachine.reader.ItemListReader;

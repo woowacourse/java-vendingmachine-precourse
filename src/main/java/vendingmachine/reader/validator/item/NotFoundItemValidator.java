@@ -1,6 +1,6 @@
 package vendingmachine.reader.validator.item;
 
-import vendingmachine.model.ItemRepository;
+import vendingmachine.model.item.ItemRepository;
 import vendingmachine.reader.validator.Validator;
 
 public class NotFoundItemValidator implements Validator {
