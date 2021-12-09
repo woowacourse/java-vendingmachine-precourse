@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.Constant.*;
+
 import java.util.List;
 
 public class Product {
@@ -15,6 +17,13 @@ public class Product {
 
 	public boolean isSameName(String name) {
 		return this.name.equals(name);
+	}
+
+	public int getChangePrice(int inputAmount) {
+		if (!isPurchaseProduct(inputAmount)) {
+			throw new IllegalArgumentException(ERROR_MESSAGE + "남은 투입 금액 부족으로 구매할 수 없습니다.");
+		}
+		return this.price - inputAmount;
 	}
 
 	private boolean isPurchaseProduct(int inputAmount) {
