@@ -18,7 +18,7 @@ public class VendingMachineController {
 			vendingMachine.setBalance(balance);
 			saveCoins();
 		} catch (IllegalArgumentException e) {
-			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
+			System.out.println(ERROR_PREFIX + BALANCE_PRICE_PREFIX + e.getMessage() + LINE_STAMP);
 			startVendingMachine();
 		}
 	}

@@ -26,7 +26,7 @@ public class ProductException {
 	private static Product isWrapped(String userProduct) {
 		if (userProduct.startsWith(PRODUCT_WRAPPER_LEFT)
 				&& userProduct.endsWith(PRODUCT_WRAPPER_RIGHT)) {
-			userProduct.substring(1, userProduct.length() - 1);
+			userProduct = userProduct.substring(1, userProduct.length() - 1);
 			return isProduct(userProduct);
 		}
 		throw new IllegalArgumentException(PRODUCT_WRAPPER_NULL);
@@ -42,15 +42,27 @@ public class ProductException {
 
 	private static Product createProduct(List<String> productDetail) {
 		String productName = productDetail.get(0);
-		int productPrice;
-		int productQuantity;
+		int productPrice = isValidPrice(productDetail.get(1));
+		int productQuantity = isValidQuantity(productDetail.get(2));
+		return new Product(productName, productPrice, productQuantity);
+	}
+
+	private static int isValidPrice(String productPrice) {
 		try {
-			productPrice = PriceException.isValidPrice(productDetail.get(1));
-			productQuantity = QuantityException.isValidQuantity(productDetail.get(2));
+			int price = PriceException.isValidPrice(productPrice);
+			return price;
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(PRODUCT_PRICE_PREFIX + e.getMessage());
 		}
-		return new Product(productName, productPrice, productQuantity);
+	}
+
+	private static int isValidQuantity(String productQuantity) {
+		try {
+			int quantity = QuantityException.isValidQuantity(productQuantity);
+			return quantity;
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(PRODUCT_QUANTITY_PREFIX + e.getMessage());
+		}
 	}
 
 	private static void isDuplicated(List<Product> productList) {
@@ -58,10 +70,11 @@ public class ProductException {
 		for (Product product : productList) {
 			productNames.add(product.getName());
 		}
-		int distinctSize = productNames.stream()
-				.map(productName -> productName.trim())
-				.distinct()
-				.collect(Collectors.toList()).size();
+		int distinctSize =
+			productNames.stream()
+			.map(productName -> productName.trim())
+			.distinct()
+			.collect(Collectors.toList()).size();
 		if (productNames.size() != distinctSize) {
 			throw new IllegalArgumentException(PRODUCT_NAME_DUPLICATED);
 		}

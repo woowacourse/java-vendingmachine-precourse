@@ -13,7 +13,7 @@ public class StringConstant {
 	public static String PRODUCT_QUANTITY_PREFIX = "상품 수량은 ";
 	public static String PRODUCT_WRAPPER_NULL = "개별 상품은 대괄호([])로 묶여있어야 합니다.";
 	public static String PRODUCT_DETAIL_UNMATCHED = "개별 상품은 상품명, 가격, 수량만 존재해야 합니다.";
-	public static String PRODUCT_NAME_DUPLICATED = "동일한 상품을 이중으로 등록 할 수 없습니다.";
+	public static String PRODUCT_NAME_DUPLICATED = "동일한 상품을 등록 할 수 없습니다.";
 
 	public static String COIN_ENUM_PREFIX = "COIN_";
 	public static String PRICE_UNIT = "원";

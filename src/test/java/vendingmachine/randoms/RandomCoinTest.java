@@ -4,12 +4,15 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Map;
 
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.Coin;
 import vendingmachine.controller.CoinController;
 
 public class RandomCoinTest {
+
+	@RepeatedTest(20)
 	@Test
 	void coinAmountTest() {
 		//given

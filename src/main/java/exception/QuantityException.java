@@ -10,7 +10,7 @@ public class QuantityException {
 			isPositive(quantity);
 			return quantity;
 		} catch (NumberFormatException e){
-			throw new IllegalArgumentException(PRODUCT_QUANTITY_PREFIX + NOT_NUMBER);
+			throw new IllegalArgumentException(NOT_NUMBER);
 		}
 	}
 
@@ -18,6 +18,6 @@ public class QuantityException {
 		if (quantity > ZERO) {
 			return;
 		}
-		throw new IllegalArgumentException(PRODUCT_QUANTITY_PREFIX + NOT_POSITIVE);
+		throw new IllegalArgumentException(NOT_POSITIVE);
 	}
 }

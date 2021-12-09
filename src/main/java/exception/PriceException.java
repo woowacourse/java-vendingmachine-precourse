@@ -10,7 +10,7 @@ public class PriceException {
 			isPositive(price);
 			return price;
 		} catch (NumberFormatException e){
-			throw new IllegalArgumentException(BALANCE_PRICE_PREFIX + NOT_NUMBER);
+			throw new IllegalArgumentException(NOT_NUMBER);
 		}
 	}
 
@@ -19,12 +19,12 @@ public class PriceException {
 			isCoinValue(price);
 			return;
 		}
-		throw new IllegalArgumentException(BALANCE_PRICE_PREFIX + NOT_POSITIVE);
+		throw new IllegalArgumentException(NOT_POSITIVE);
 	}
 
 	private static void isCoinValue(int price) {
 		if (price % MIN_COIN_UNIT != ZERO) {
-			throw new IllegalArgumentException(BALANCE_PRICE_PREFIX + NOT_COIN_VALUE);
+			throw new IllegalArgumentException(NOT_COIN_VALUE);
 		}
 	}
 }
