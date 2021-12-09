@@ -26,10 +26,14 @@ public class VendingMachine {
 	}
 
 	private boolean canSell(String productName, int amountPaid) {
-		if (!isExistProductStocks) {
+		if (!isExistProductStocks(productName)) {
 			return false;
 		}
 		return productPrice.get(productName) < amountPaid;
+	}
+
+	private boolean isExistProductStocks(String productName) {
+		return productStocks.get(productName) >= MINIMUM_STOCKS;
 	}
 
 }
