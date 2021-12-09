@@ -10,5 +10,7 @@ public class MachineController {
 		int machineMoney = inputView.enterMachineMoney();
 		Machine machine = new Machine(machineMoney);
 		machine.makeCoins();
+		machine.printCoins();
+		inputView.enterItems();
 	}
 }
