@@ -22,10 +22,11 @@ public class VendingMachineController {
 	Merchandises merchandises;
 
 	public void play() {
-		vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachieInput()));
+		vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
 		vendingMachine = new VendingMachine(vendingMachineMoney);
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		merchandises = new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation())));
+
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
@@ -52,9 +53,8 @@ public class VendingMachineController {
 	public List<Merchandise> constructMerchandises(List<String> merchandiseInformations) {
 		List<Merchandise> merchandiseList = new ArrayList<>();
 		for (String merchandiseInformation : merchandiseInformations) {
-			merchandiseInformation.replace("[", "");
-			merchandiseInformation.replace("]", "");
-			merchandiseList.add(constructMerchandise(merchandiseInformation));
+			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1);
+			merchandiseList.add(constructMerchandise(merchandise));
 		}
 		return merchandiseList;
 	}
