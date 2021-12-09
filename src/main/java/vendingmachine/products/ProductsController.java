@@ -1,5 +1,7 @@
 package vendingmachine.products;
 
+import vendingmachine.ValidatorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,9 +19,11 @@ public class ProductsController {
         List<String> productList = new ArrayList<>();
         try {
             String productsListInput = ProductsInputView.inputProductsInitInfo();
-            // 검증로직
+            ProductsValidator.validateProductInfo(productsListInput);
+            ProductsValidator.validateRightInfo(productsListInput);
             productList = separateProductsInfo(productsListInput);
         } catch (IllegalArgumentException e) {
+            ValidatorMessage.printError(e.getMessage());
             initProducts();
         }
         products.setProducts(productList);
