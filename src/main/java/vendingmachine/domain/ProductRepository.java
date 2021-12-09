@@ -8,12 +8,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ProductRepository {
-	private static final List<Product> productList = new ArrayList<>();
+	private final List<Product> productList = new ArrayList<>();
 
 	public void createProducts(List<String> productListString) {
 		for (String productString: productListString) {
 			addProductByString(splitProductStringByDelimiter(productString));
 		}
+	}
+
+	public Product findProductByName(String productName) {
+		return productList.stream()
+			.filter(i->i.isSameName(productName))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE + "입력한 이름의 제품이 없습니다."));
 	}
 
 	private List<String> splitProductStringByDelimiter(String productToString) {
