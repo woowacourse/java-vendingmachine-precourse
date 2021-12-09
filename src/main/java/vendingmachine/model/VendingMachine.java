@@ -43,13 +43,30 @@ public class VendingMachine {
     }
 
     public boolean hasProduct(String productName) {
-        return products.findProduct(productName);
+        return products.exist(productName);
     }
 
     public boolean hasEnoughAmount() {
         return userInsertAmount >= products.getCheapest();
     }
 
+    public boolean hasAnyProduct() {
+        return products.getSize() > 0;
+    }
+
+    public void checkProductQuantity(String product) {
+        if (!products.isQuantityEnough(product)) {
+            throw new IllegalArgumentException("상품 수량이 부족합니다. 다시 선택해 골라주세요.");
+        }
+    }
+
+    public void buyProduct(String product) {
+        if (!products.isAffordable(userInsertAmount, product)) {
+            throw new IllegalArgumentException("잔액이 부족합니다. 다시 선택해 주세요.");
+        }
+        userInsertAmount -= products.reduceQuantity(product);
+    }
+    
     public Map<Coin, Integer> getCoins() {
         return coins;
     }

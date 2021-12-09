@@ -73,31 +73,37 @@ public class MachineController {
     }
 
     private void useMachine() {
-        while(shouldContinueBuying()) {
-            buyProduct();
+        while (shouldContinue()) {
+            try {
+                String product = checkProductName();
+                vendingMachine.checkProductQuantity(product);
+                vendingMachine.buyProduct(product);
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e);
+            }
         }
     }
 
-    private boolean shouldContinueBuying() {
-        return checkRemainingInsertAmount() && checkRemainingQuantity();
+    private boolean shouldContinue() {
+        return hasEnoughInsertAmount() && hasRemainingProducts();
     }
 
-    private boolean checkRemainingInsertAmount() {
+    private boolean hasEnoughInsertAmount() {
         OutputView.printRemainingInsertAmount(vendingMachine.getUserInsertAmount());
         return vendingMachine.hasEnoughAmount();
     }
 
-    private boolean checkRemainingQuantity() {
-        return true;
+    private boolean hasRemainingProducts() {
+        return vendingMachine.hasAnyProduct();
     }
 
-    private void buyProduct() {
+    private String checkProductName() {
         InputView.printProductToBuyMessage();
         String productName = Console.readLine();
         while(true) {
             try {
                 ProductValidator.validateProduct(vendingMachine, productName);
-                return;
+                return productName;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
                 productName = Console.readLine();

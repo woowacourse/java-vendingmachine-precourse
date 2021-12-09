@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Products {
@@ -12,7 +13,7 @@ public class Products {
                 .collect(Collectors.toList());
     }
 
-    public boolean findProduct(String productName) {
+    public boolean exist(String productName) {
         return products.stream().anyMatch(product -> product.getName().equals(productName));
     }
 
@@ -21,5 +22,33 @@ public class Products {
                 .mapToInt(Product::getPrice)
                 .min()
                 .orElseThrow(IllegalArgumentException::new);
+    }
+
+
+    public boolean isQuantityEnough(String product) {
+        return products.stream()
+                .filter(p -> p.getName().equals(product))
+                .mapToInt(Product::getQuantity)
+                .findAny().orElse(0) != 0;
+
+    }
+
+    public boolean isAffordable(int amount, String product) {
+        return amount >= products.stream()
+                .filter(p -> p.getName().equals(product))
+                .mapToInt(Product::getPrice)
+                .findAny().orElse(0);
+    }
+
+    public int reduceQuantity(String productName) {
+        return Objects.requireNonNull(products.stream()
+                .filter(p -> p.getName().equals(productName))
+                .findAny().orElse(null)).pop();
+    }
+
+    public int getSize() {
+        return products.stream()
+                .mapToInt(Product::getQuantity)
+                .sum();
     }
 }

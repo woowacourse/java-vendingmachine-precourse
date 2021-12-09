@@ -6,6 +6,7 @@ public class Product {
     private static final int NAME_INDEX = 0;
     private static final int PRICE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
+    private static final int REDUCE_BY_ONE = 1;
 
     private final String name;
     private final int price;
@@ -22,6 +23,16 @@ public class Product {
     }
 
     public int getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public int pop() {
+        quantity -= REDUCE_BY_ONE;
+        System.out.println(quantity + "개 남음");
         return price;
     }
 }
