@@ -14,11 +14,9 @@ public class View {
         System.out.println("10원 - " + coins.getOrDefault(Coin.COIN_10, 0) + "개");
     }
 
-    public static void printUserBalance(InputAmount inputAmount) {
-        System.out.println("투입 금액: " + inputAmount.toString() + "원");
-    }
-
-    public static void printCoins(Map<Coin, Integer> coins) {
+    public static void printCoins(InputAmount inputAmount, Map<Coin, Integer> coins) {
+        System.out.println();
+        System.out.println("투입 금액: " + inputAmount + "원");
         System.out.println("잔돈");
         coins.forEach((coin, count) -> System.out.println(coin.getAmount() + "원 - " + count + "개"));
     }
@@ -37,6 +35,13 @@ public class View {
     public static String inputAmount() {
         System.out.println();
         System.out.println("투입 금액을 입력해 주세요.");
+        return Console.readLine().replace(" ", "");
+    }
+
+    public static String buyProduct(InputAmount userBalance) {
+        System.out.println();
+        System.out.println("투입 금액: " + userBalance + "원");
+        System.out.println("구매할 상품명을 입력해 주세요.");
         return Console.readLine().replace(" ", "");
     }
 }
