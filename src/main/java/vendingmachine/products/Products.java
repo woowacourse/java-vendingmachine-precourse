@@ -32,28 +32,30 @@ public class Products {
         return new Product(name, price, counts);
     }
 
-    public Product findProduct(String productName){
+    public Product findProduct(String productName) {
         return products.stream()
-                .filter(product->product.getName().equals(productName))
+                .filter(product -> product.getName().equals(productName))
                 .findAny()
                 .orElse(null);
     }
 
-    public int findMinPriceProduct(){
+    public int findMinPriceProduct() {
         return products.stream()
                 .min(Comparator.comparing(Product::getPrice))
-                .orElse(null)
+                .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
+                        + ProductsValidator.NULL_PRODUCT_MESSAGE))
                 .getPrice();
     }
 
-    public int findMinCountsProduct(){
+    public int findMinCountsProduct() {
         return products.stream()
                 .min(Comparator.comparing(Product::getCounts))
-                .orElse(null)
+                .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
+                        + ProductsValidator.NULL_PRODUCT_MESSAGE))
                 .getCounts();
     }
 
-    public void buyProduct(Product product){
+    public void buyProduct(Product product) {
         product.minusCount();
     }
 }
