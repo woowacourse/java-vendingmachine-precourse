@@ -11,6 +11,6 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = new VendingMachine(inputHoldingAmountMoney());
 		printHoldingAmountCoin(vendingMachine.getHoldingAmountCoins());
 		vendingMachine.insertProductListInProductRepository(inputProductList());
-
+		vendingMachine.insertUserInputAmount(inputUserAmount());
 	}
 }
