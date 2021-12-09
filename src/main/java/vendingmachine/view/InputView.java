@@ -9,11 +9,13 @@ public class InputView {
 	}
 
 	public static String writeVendingMachineAmount() {
+		OutputView.askVendingMachineAmount();
 		String inputMoney = Console.readLine();
 		try {
 			ExceptionUtils.validateMoney(inputMoney);
 			return inputMoney;
 		} catch (IllegalArgumentException IAE) {
+			OutputView.printError(IAE);
 			return writeVendingMachineAmount();
 		}
 	}
