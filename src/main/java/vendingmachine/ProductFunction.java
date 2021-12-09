@@ -10,7 +10,9 @@ public class ProductFunction {
         return productList;
     }
 
-    
+    public void addProductList(String userInput) {
+        String[] ProductInput = userInput.split(";");
+    }
 
 
 }
