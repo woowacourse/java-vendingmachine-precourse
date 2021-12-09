@@ -63,4 +63,17 @@ public class ProductList {
 		return hashMap.get(productName);
 	}
 
+	private int getMinimumPrice() {
+		int minimumPrice = Integer.MAX_VALUE;
+		for (Product product : hashMap.values()) {
+			if (product.getQuantity() == 0) {
+				continue;
+			}
+
+			minimumPrice = Math.min(minimumPrice, product.getPrice());
+		}
+
+		return minimumPrice;
+	}
+
 }
