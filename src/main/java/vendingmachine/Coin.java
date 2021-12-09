@@ -26,6 +26,10 @@ public enum Coin {
 		return this.amount;
 	}
 
+	public int getCount() {
+		return this.count;
+	}
+
 	public static List<Integer> getAmounts() {
 		return amounts;
 	}

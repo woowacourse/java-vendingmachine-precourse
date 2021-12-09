@@ -26,6 +26,9 @@ public class Machine {
 
 	private void prepareCoins() {
 		cashier.makeCoins(askHoldingAmount());
+		display.printBlankLine();
+		display.printAllCoin();
+		display.printBlankLine();
 	}
 
 	private int askHoldingAmount() {

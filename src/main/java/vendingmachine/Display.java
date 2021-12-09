@@ -9,10 +9,27 @@ package vendingmachine;
  */
 public class Display {
 	private static final String HOLDING_AMOUNT_QUESTION = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+	private static final String COIN_FORMAT = "%d원 - %d개%n";
+	private static final String ALL_COIN_TITLE = "자판기가 보유한 동전";
 	private static final String ERROR_HEADER = "[ERROR]";
 
 	public void askHoldingAmount() {
 		System.out.println(HOLDING_AMOUNT_QUESTION);
+	}
+
+	public void printCoin(Coin coin) {
+		System.out.printf(COIN_FORMAT, coin.getAmount(), coin.getCount());
+	}
+
+	public void printAllCoin() {
+		System.out.println(ALL_COIN_TITLE);
+		for(Coin coin : Coin.values()) {
+			printCoin(coin);
+		}
+	}
+
+	public void printBlankLine() {
+		System.out.println();
 	}
 
 	public void printError(Exception e) {
