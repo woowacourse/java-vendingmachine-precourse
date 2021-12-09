@@ -61,8 +61,9 @@ public class VendingMachine {
             return false;
         }
         return true;
-
-
     }
 
+    public void giveChange() {
+        OutputView.showChange(coinRepository.giveChange(userMoney));
+    }
 }

@@ -20,5 +20,6 @@ public class Application {
         while (isOperate) {
             isOperate = vendingMachine.sellProduct();
         }
+        vendingMachine.giveChange();
     }
 }
