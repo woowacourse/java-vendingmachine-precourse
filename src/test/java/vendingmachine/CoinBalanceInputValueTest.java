@@ -13,4 +13,20 @@ class CoinBalanceInputValueTest {
 
         Assertions.assertThat(coinBalanceInputValue.toCoinBalance()).isEqualTo(expectedCoinBalance);
     }
+
+    @Test
+    void 숫자가_아닌_입력시_예외_발생() {
+        String notDigitInput = "!";
+        CoinBalanceInputValue coinBalanceInputValue = new CoinBalanceInputValue(notDigitInput);
+
+        Assertions.assertThatThrownBy(coinBalanceInputValue::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 조건인_10원으로_나누어_떨어지지_않는_금액_입력시_예외_발생() {
+        String notDigitInput = "123";
+        CoinBalanceInputValue coinBalanceInputValue = new CoinBalanceInputValue(notDigitInput);
+
+        Assertions.assertThatThrownBy(coinBalanceInputValue::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
+    }
 }
