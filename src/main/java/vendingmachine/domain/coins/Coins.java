@@ -6,6 +6,7 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinAmount;
+import vendingmachine.validator.CoinsValidator;
 
 public class Coins {
 	private final Map<Coin, CoinAmount> coins;
