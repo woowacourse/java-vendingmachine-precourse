@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 public class VendingMachine {
 	private Money money;
 	private LinkedHashMap<Coin, Integer> coinCounts;
+	private Merchandises merchandises;
 
 	public VendingMachine(Money money) {
 		this.money = money;
@@ -19,5 +20,9 @@ public class VendingMachine {
 			tempMoney -= coinCounts.get(coinValue) * coinValue.getAmount();
 		}
 		return coinCounts;
+	}
+
+	public void stockMerchandises(Merchandises merchandises) {
+		this.merchandises = merchandises;
 	}
 }

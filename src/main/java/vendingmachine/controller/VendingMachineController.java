@@ -17,16 +17,14 @@ public class VendingMachineController {
 	public static String MERCHANDISE_PARSER = ";";
 	public static String MERCHANDISE_INFORMATION_PARSER = ",";
 
-	Money vendingMachineMoney;
-	VendingMachine vendingMachine;
-	Merchandises merchandises;
+	private Money vendingMachineMoney;
+	private VendingMachine vendingMachine;
 
 	public void play() {
 		vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
 		vendingMachine = new VendingMachine(vendingMachineMoney);
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
-		merchandises = new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation())));
-
+		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
