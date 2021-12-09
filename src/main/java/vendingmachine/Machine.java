@@ -12,10 +12,12 @@ import camp.nextstep.edu.missionutils.Console;
 public class Machine {
 	private Display display;
 	private Validator validator;
+	private Cashier cashier;
 
 	public Machine() {
 		this.display = new Display();
 		this.validator = new Validator();
+		this.cashier = new Cashier();
 	}
 
 	public void run() {
@@ -23,7 +25,7 @@ public class Machine {
 	}
 
 	private void prepareCoins() {
-		int holdingAmount = askHoldingAmount();
+		cashier.makeCoins(askHoldingAmount());
 	}
 
 	private int askHoldingAmount() {
