@@ -32,4 +32,7 @@ public class ViewController {
 		return inputView.getProductWantToBuy(vendingMachine);
 	}
 
+	public void printRemainingDeposit(int deposit) {
+		outputView.printRemainingDeposit(deposit);
+	}
 }
