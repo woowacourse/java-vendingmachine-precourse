@@ -75,4 +75,17 @@ public class CoinStore {
 			changeCoins.put(biggestChangeCoin, changeCoins.get(biggestChangeCoin) + 1);
 		}
 	}
+
+	public String changeCoinsToString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Coin amountOfCoin: Coin.getCoinList()) {
+			if (changeCoins.get(amountOfCoin) > 0) {
+				stringBuilder.append(amountOfCoin.getAmount()).append("원");
+				stringBuilder.append(DELIMITER_OF_COIN_STORE_STATUS_REPRESENT);
+				stringBuilder.append(changeCoins.get(amountOfCoin)).append("개");
+				stringBuilder.append("\n");
+			}
+		}
+		return stringBuilder.toString();
+	}
 }
