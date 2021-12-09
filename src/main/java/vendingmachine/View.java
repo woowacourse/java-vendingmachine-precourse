@@ -21,7 +21,7 @@ public class View {
         coins.forEach((coin, count) -> System.out.println(coin.getAmount() + "원 - " + count + "개"));
     }
 
-    public static String putCoinIntoVendingmachine() {
+    public static String putCoinIntoVendingMachine() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
         return Console.readLine().replace(" ", "");
     }

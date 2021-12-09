@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public class VendingMachine {
     private Coins coins;
     private Products products;
@@ -7,14 +9,19 @@ public class VendingMachine {
 
     public VendingMachine(String amount) {
         coins = new Coins(amount);
+        getInitialCoins();
     }
 
-    public void getUserBalance() {
-        View.printUserBalance(inputAmount);
+    public void getInitialCoins() {
+        View.printVendingMachineCoin(coins.getCoins());
+    }
+
+    public InputAmount getUserBalance() {
+        return inputAmount;
     }
 
     public void getCoins() {
-        View.printCoins(coins.exchange(inputAmount));
+        View.printCoins(inputAmount, coins.exchange(inputAmount));
     }
 
     public void createProduct(String specification) {

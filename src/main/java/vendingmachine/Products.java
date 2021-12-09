@@ -17,11 +17,11 @@ public class Products {
     }
 
     public void reduce(String productName) {
-        products.stream().filter(product -> product.equals(productName)).findFirst().get().reduce();
+        products.stream().filter(product -> product.isSameName(productName)).findFirst().get().reduce();
     }
 
     public int getPriceByName(String productName) {
-        return products.stream().filter(product -> product.equals(productName)).findFirst().get().getPrice();
+        return products.stream().filter(product -> product.isSameName(productName)).findFirst().get().getPrice();
     }
 
     public boolean isValidAmount(InputAmount inputAmount) {
