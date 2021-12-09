@@ -23,13 +23,26 @@ public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = vendingMachineRepository.find();
 
-		while(!itemRepository.isAllSoldOut()) {
+		while(isSalable(vendingMachine)) {
 			printRemainInputMoney(vendingMachine);
 			vendingMachine.sell(purchaseItem());
 		}
 
 		printRemainInputMoney(vendingMachine);
 		printExchangeByCoin(vendingMachine.getRemainInputMoney());
+	}
+
+	private boolean isSalable(VendingMachine vendingMachine) {
+		return !isAllSoldOut() && isOverAndEqualMoney(vendingMachine);
+	}
+
+	private boolean isOverAndEqualMoney(VendingMachine vendingMachine) {
+		Item lowestPriceItem = itemRepository.findLowestPriceItem();
+		return vendingMachine.isOverAndEqualMoney(lowestPriceItem);
+	}
+
+	private boolean isAllSoldOut() {
+		return itemRepository.isAllSoldOut();
 	}
 
 	private void printRemainInputMoney(VendingMachine vendingMachine) {
