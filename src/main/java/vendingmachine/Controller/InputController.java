@@ -1,8 +1,8 @@
 package vendingmachine.Controller;
 
-import vendingmachine.Model.MoneyValidator;
-import vendingmachine.Model.NameValidator;
-import vendingmachine.Model.ProductValidator;
+import vendingmachine.Model.Validator.MoneyValidator;
+import vendingmachine.Model.Validator.NameValidator;
+import vendingmachine.Model.Validator.ProductValidator;
 import vendingmachine.View.InputView;
 
 public class InputController {

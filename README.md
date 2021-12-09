@@ -131,9 +131,10 @@
 
 ## TODO
 
-- Product.stock 클래스화 하기
-- InputController 속 메소드 반복 줄이고 구조화 하기
-- 상품 구매 시 인풋값 파트를 예외처리 및 재실행으로 변환
+- [x] Product.stock 클래스화 하기
+- [ ] VendingMachineController 속 변수 및 메소드 클래스로 분리
+- [ ] InputController 속 메소드 반복 줄이고 구조화 하기
+- [ ] 상품 구매 시 인풋값 파트를 예외처리 및 재실행으로 변환
 
 ---
 

@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.Model.Coin;
 import vendingmachine.Model.Product;
+import vendingmachine.Model.ProductList;
 import vendingmachine.Util;
 import vendingmachine.View.OutputView;
 
@@ -14,7 +15,7 @@ public class VendingMachineController {
 	private String nameInput;
 	private final LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
 	private final LinkedHashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
-	private final ArrayList<Product> products = new ArrayList<>();
+	private final ProductList products = new ProductList();
 
 	public VendingMachineController() {
 		set();
@@ -33,7 +34,7 @@ public class VendingMachineController {
 		do {
 			OutputView.printUserMoney(userMoney);
 			setWantedProduct();
-			Product resultProduct = find(products, nameInput);
+			Product resultProduct = products.find(nameInput);
 			if (resultProduct.PRICE > userMoney || resultProduct.stock == 0) {
 				break;
 			}
@@ -96,35 +97,11 @@ public class VendingMachineController {
 	}
 
 	private void setWantedProduct() {
-		String[] names = getNames();
-		nameInput = InputController.setWantedProduct(names);
+		nameInput = InputController.setWantedProduct(products.getNames());
 		OutputView.printEmpty();
 	}
 
-	private String[] getNames() {
-		return products.stream()
-			.map(product -> product.NAME)
-			.toArray(String[]::new);
-	}
-
-	private Product find(ArrayList<Product> products, String name) {
-		return products.stream()
-			.filter(product -> product.NAME.equals(name))
-			.findAny().get();
-	}
-
 	private boolean isActivateEnd() {
-		return userMoney < getMinPrice(products) || allSoldOut(products);
-	}
-
-	private int getMinPrice(ArrayList<Product> products) {
-		return products.stream()
-			.map(product -> product.PRICE)
-			.max(Integer::compare).get();
-	}
-
-	private boolean allSoldOut(ArrayList<Product> products) {
-		return products.stream()
-			.allMatch(product -> product.stock == 0);
+		return userMoney < products.getMinPrice() || products.allSoldOut();
 	}
 }
