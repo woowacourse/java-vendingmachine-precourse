@@ -11,6 +11,9 @@ public class Machine {
 
 	public void makeCoins() {
 		coins.makeCoins(money);
+		if (coins == null) {
+			System.out.println("1");
+		}
 	}
 
 	public void printCoins() {

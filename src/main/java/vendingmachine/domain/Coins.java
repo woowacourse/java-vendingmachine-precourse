@@ -7,50 +7,46 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
+	public static final String CURRENT_MACHINE_COIN = "자판기가 보유한 동전";
 	private HashMap<Coin, Integer> coins;
 
-	public Coins() {
-		this.coins = new HashMap<>();
-	}
-
-	public void addCoin(Coin coin, int count) {
-		coins.put(coin, count);
-	}
-
 	public void makeCoins(int money) {
+		List<Integer> coinType = getCoinType();
+		setCoinsMap();
+		while (money != 0) {
+			int randomCoin = Randoms.pickNumberInList(coinType);
+			if (money - randomCoin >= 0) {
+				money -= randomCoin;
+				addCoin(randomCoin);
+			}
+		}
+	}
+
+	private void setCoinsMap() {
+		coins = new HashMap<>();
 		for (Coin coin : Coin.values()) {
-			int coinCount = makeRandomCoin(money / coin.getAmount());
-			addCoin(coin, coinCount);
-			money -= coin.getAmount() * coinCount;
-		}
-		if (money > 0) {
-			convertRestTo10(money);
+			coins.put(coin, 0);
 		}
 	}
 
-	private void convertRestTo10(int money) {
-		coins.put(Coin.COIN_10, coins.get(Coin.COIN_10) + money / Coin.COIN_10.getAmount());
+	private void addCoin(int money) {
+		coins.put(Coin.valueOf(money), coins.get(Coin.valueOf(money)) + 1);
 	}
 
-	public int makeRandomCoin(int maxValue) {
-		List<Integer> list = makeRandomCondition(maxValue);
-		int count = Randoms.pickNumberInList(list);
-		return count;
-	}
-
-	public List<Integer> makeRandomCondition(int maxValue) {
-		List<Integer> numberList = new ArrayList<>();
-		for (int i = 0; i <= maxValue; i++) {
-			numberList.add(i);
+	private List<Integer> getCoinType() {
+		List<Integer> coinType = new ArrayList<>();
+		for (Coin coin : Coin.values()) {
+			coinType.add(coin.getAmount());
 		}
-		return numberList;
+		return coinType;
 	}
 
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (Coin coin : coins.keySet()) {
-			stringBuilder.append(coin).append(" - ").append(coin.getAmount()).append("개");
+		stringBuilder.append(CURRENT_MACHINE_COIN).append("\n");
+		for (Coin coin : Coin.values()) {
+			stringBuilder.append(Coin.getKoreanValue(coin)).append(" - ").append(coins.get(coin)).append("개");
 			stringBuilder.append("\n");
 		}
 		return stringBuilder.toString();
