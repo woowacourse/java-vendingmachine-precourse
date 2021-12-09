@@ -11,23 +11,26 @@ import vendingmachine.validator.CoinsValidator;
 public class Coins {
 	private final Map<Coin, CoinAmount> coins;
 
-	private Coins(int vendingMachineBalance) {
-		this.coins = generateRandomCoins(vendingMachineBalance);
+	private Coins(Map<Coin, CoinAmount> coins) {
+		this.coins = coins;
 	}
 
 	public static Coins create() {
-		return new Coins(0);
+		Map<Coin, CoinAmount> coins = new HashMap<>();
+		return new Coins(coins);
 	}
 
 	public static Coins from(String vendingMachineBalance) {
 		CoinsValidator.validateVendingMachineBalance(vendingMachineBalance);
 
 		int parsedBalance = Integer.parseInt(vendingMachineBalance);
-		return new Coins(parsedBalance);
+		Map<Coin, CoinAmount> coins = generateRandomCoins(parsedBalance);
+
+		return new Coins(coins);
 	}
 
 	// TODO: 리팩토링 필요
-	private Map<Coin, CoinAmount> generateRandomCoins(int vendingMachineBalance) {
+	private static Map<Coin, CoinAmount> generateRandomCoins(int vendingMachineBalance) {
 		Map<Coin, CoinAmount> coins = new HashMap<>();
 		int remainingBalance = vendingMachineBalance;
 
@@ -43,7 +46,7 @@ public class Coins {
 		return coins;
 	}
 
-	private int getMaxCoinAmount(int remainingBalance, Coin coin) {
+	private static int getMaxCoinAmount(int remainingBalance, Coin coin) {
 		return remainingBalance / coin.getAmount();
 	}
 
