@@ -7,16 +7,17 @@ import vendingmachine.model.item.vo.Price;
 import vendingmachine.model.item.vo.Quantity;
 
 public class Item {
-    private static final char LEFT_BRACKET = '[';
-    private static final char RIGHT_BRACKET = ']';
+    private static final String LEFT_BRACKET = "[";
+    private static final String RIGHT_BRACKET = "]";
     private static final String INFO_DELIMITER = ",";
     private static final int NUMBER_OF_ITEM_PROPERTIES = 3;
     private final String name;
     private final Price price;
     private final Quantity remainingQuantity;
 
-    public Item(final String itemInfo) {
+    public Item(String itemInfo) {
         validateBracket(itemInfo);
+        itemInfo = removeBracket(itemInfo);
         String[] itemProperties = itemInfo.split(INFO_DELIMITER);
         validateNumberOfInfo(itemProperties);
         name = itemProperties[0];
@@ -25,11 +26,17 @@ public class Item {
     }
 
     private void validateBracket(final String itemInfo) {
-        char firstLetter = itemInfo.charAt(0);
-        char lastLetter = itemInfo.charAt(itemInfo.length() - 1);
-        if (firstLetter != LEFT_BRACKET || lastLetter != RIGHT_BRACKET) {
+        String firstLetter = String.valueOf(itemInfo.charAt(0));
+        String lastLetter = String.valueOf(itemInfo.charAt(itemInfo.length() - 1));
+        if (!firstLetter.equals(LEFT_BRACKET) || !lastLetter.equals(RIGHT_BRACKET)) {
             throw new IllegalArgumentException(ITEM_INFO_BRACKET_EXCEPTION_MESSAGE);
         }
+    }
+
+    private String removeBracket(String itemInfo) {
+        itemInfo = itemInfo.replace(LEFT_BRACKET, "");
+        itemInfo = itemInfo.replace(RIGHT_BRACKET, "");
+        return itemInfo;
     }
 
     private void validateNumberOfInfo(final String[] itemProperties) {
