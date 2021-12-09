@@ -24,6 +24,10 @@ public class Changes {
 		}
 	}
 
+	public void addCoin(Coin coin, int numberOfCoins) {
+		hashMap.put(coin, numberOfCoins);
+	}
+
 	public String toString() {
 		StringBuilder message = new StringBuilder("잔돈\n");
 

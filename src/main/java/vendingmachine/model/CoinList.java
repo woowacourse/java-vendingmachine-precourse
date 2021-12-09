@@ -19,6 +19,14 @@ public class CoinList {
 		hashMap.put(Coin.COIN_10, 0);
 	}
 
+	public int getTotalMoney() {
+		return totalMoney;
+	}
+
+	public LinkedHashMap<Coin, Integer> getHashMap() {
+		return hashMap;
+	}
+
 	public void init() {
 		int leftMoney = totalMoney;
 		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_500);
@@ -38,6 +46,10 @@ public class CoinList {
 		hashMap.put(coin, numberOfCoins);
 
 		return coin.getAmount() * numberOfCoins;
+	}
+
+	public void subtractCoin(Coin coin, int remainingCoins) {
+		hashMap.replace(coin, remainingCoins);
 	}
 
 	public String toString() {

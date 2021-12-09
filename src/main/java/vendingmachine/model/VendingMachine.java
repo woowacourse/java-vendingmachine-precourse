@@ -1,5 +1,8 @@
 package vendingmachine.model;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class VendingMachine {
 
 	private int deposit;
@@ -58,6 +61,40 @@ public class VendingMachine {
 		}
 
 		return true;
+	}
+
+	public Changes createChanges() {
+		if (coinList.getTotalMoney() <= deposit) {
+			return new Changes(coinList);
+		}
+
+		Changes changes = new Changes();
+		LinkedHashMap<Coin, Integer> hashMap = coinList.getHashMap();
+		for (Map.Entry<Coin, Integer> entry : hashMap.entrySet()) {
+			if (deposit == 0) {
+				break;
+			}
+
+			if (entry.getValue() == 0) {
+				continue;
+			}
+
+			int numberOfCoins = 0;
+			for (int i = entry.getValue(); i >= 0; i--) {
+				if (deposit >= (i * entry.getKey().getAmount())) {
+					numberOfCoins = i;
+					deposit -= (i * entry.getKey().getAmount());
+					break;
+				}
+			}
+
+			changes.addCoin(entry.getKey(), numberOfCoins);
+			coinList.subtractCoin(entry.getKey(), entry.getValue() - numberOfCoins);
+		}
+
+		System.out.println(coinList);
+
+		return changes;
 	}
 
 }
