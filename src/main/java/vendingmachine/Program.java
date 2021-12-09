@@ -15,6 +15,9 @@ public class Program {
 	public Program() {
 		pocket = new CoinPocket();
 		table = new ProductTable();
+	}
+
+	public void start() {
 		int initialMoney = setInitialMoney();
 		makeRandomCoins(initialMoney);
 		setProductList();
