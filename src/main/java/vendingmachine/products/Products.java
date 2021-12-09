@@ -28,4 +28,11 @@ public class Products {
         int counts = Integer.parseInt(productInfos[PRODUCT_COUNTS_INFO_INDEX]);
         return new Product(name, price, counts);
     }
+
+    public Product findProduct(String productName){
+        return products.stream()
+                .filter(product->product.getName().equals(productName))
+                .findAny()
+                .orElse(null);
+    }
 }

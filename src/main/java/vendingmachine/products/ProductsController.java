@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsController {
-    private static final String PRODUCTS_INIT_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
     private static final String PRODUCTS_SEPARATE_UNIT = ";";
 
     private final Products products;
@@ -16,15 +15,15 @@ public class ProductsController {
     }
 
     public void initProducts() {
-        List<String> productsList = new ArrayList<>();
+        List<String> productList = new ArrayList<>();
         try {
-            System.out.println(PRODUCTS_INIT_MESSAGE);
-            String productsListInput = Console.readLine();
+            String productsListInput = ProductsInputView.inputProductsInitInfo();
             // 검증로직
-            productsList = separateProductsInfo(productsListInput);
+            productList = separateProductsInfo(productsListInput);
         } catch (IllegalArgumentException e) {
             initProducts();
         }
+        products.setProducts(productList);
     }
 
     public List<String> separateProductsInfo(String productsListInput) {
@@ -34,5 +33,9 @@ public class ProductsController {
             productsList.add(productInfo.substring(1, productInfo.length() - 2));
         }
         return productsList;
+    }
+
+    public int findProductPrice(String productName){
+        return products.findProduct(productName).getPrice();
     }
 }
