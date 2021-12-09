@@ -18,4 +18,8 @@ public class ExceptionMessage {
 
     // Location : model/item/Item
     public static final String ITEM_INFO_BRACKET_EXCEPTION_MESSAGE = "상품 정보를 [ ] 괄호에 담아 입력하셔야 합니다.";
+    public static final String ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE = "상품에 대한 정보가 불충분 합니다. [상품명, 가격, 수량]";
+
+    // Location : model/item/Items
+    public static final String WRONG_ITEM_DELIMITER_EXCEPTION_MESSAGE = "상품을 구분하는 구분자(;) 앞 뒤에 상품 정보가 없습니다.";
 }

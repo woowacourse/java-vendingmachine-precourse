@@ -1,9 +1,10 @@
 package vendingmachine.model.item;
 
+import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_BRACKET_EXCEPTION_MESSAGE;
+import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE;
+
 import vendingmachine.model.item.vo.Price;
 import vendingmachine.model.item.vo.Quantity;
-
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_BRACKET_EXCEPTION_MESSAGE;
 
 public class Item {
     private static final char LEFT_BRACKET = '[';
@@ -17,6 +18,7 @@ public class Item {
     public Item(final String itemInfo) {
         validateBracket(itemInfo);
         String[] itemInfoTokens = itemInfo.split(INFO_DELIMITER);
+        validateNumberOfInfo(itemInfoTokens);
         name = itemInfoTokens[0];
         price = new Price(itemInfoTokens[1]);
         remainingQuantity = new Quantity(itemInfoTokens[2]);
@@ -27,6 +29,12 @@ public class Item {
         char lastLetter = itemInfo.charAt(itemInfo.length() - 1);
         if (firstLetter != LEFT_BRACKET || lastLetter != RIGHT_BRACKET) {
             throw new IllegalArgumentException(ITEM_INFO_BRACKET_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private void validateNumberOfInfo(final String[] itemProperties) {
+        if (itemProperties.length != NUMBER_OF_ITEM_PROPERTIES) {
+            throw new IllegalArgumentException(ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE);
         }
     }
 }
