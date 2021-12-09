@@ -9,7 +9,7 @@ public class MachineController {
 
 	public static void turnOnMachine() {
 		Display.askInputVendingMachineChange();
+		InputController.inputVendingMachineChange();
 	}
-
 
 }
