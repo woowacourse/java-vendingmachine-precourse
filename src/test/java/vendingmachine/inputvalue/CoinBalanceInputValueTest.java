@@ -1,7 +1,9 @@
-package vendingmachine;
+package vendingmachine.inputvalue;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import vendingmachine.inputvalue.CoinBalanceInputValue;
 
 class CoinBalanceInputValueTest {
 
