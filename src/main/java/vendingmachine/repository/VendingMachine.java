@@ -15,11 +15,11 @@ public class VendingMachine {
 
 	public VendingMachine(List<Integer> coin) {
 		this.coins = new HashMap<>();
-		initCoins(coin);
+		initCoinKind(coin);
 		this.items = new HashMap<>();
 	}
 
-	private void initCoins(List<Integer> coin) {
+	private void initCoinKind(List<Integer> coin) {
 		coin.stream().map(Coin::fromMoney).forEach(c -> coins.put(c, 0));
 	}
 
@@ -27,11 +27,11 @@ public class VendingMachine {
 		coins.put(coin, coins.getOrDefault(coin, 0) + 1);
 	}
 
-	public String getCurrentMachineCoin(){
+	public String getCurrentMachineCoin() {
 		return getCurrentCoin(coins);
 	}
 
-	private String getCurrentCoin(HashMap<Coin,Integer> coins) {
+	private String getCurrentCoin(HashMap<Coin, Integer> coins) {
 		StringBuilder builder = new StringBuilder();
 		coins.keySet().stream()
 			.sorted((c1, c2) -> -1 * Integer.compare(c1.getAmount(), c2.getAmount()))
@@ -78,24 +78,18 @@ public class VendingMachine {
 			.sorted((c1, c2) -> -1 * Integer.compare(c1.getAmount(), c2.getAmount()))
 			.collect(Collectors.toList());
 		for (Coin coin : reverseSortedList) {
-			payMoney = subtract(coin, payMoney,smallChange);
+			payMoney = subtract(coin, payMoney, smallChange);
 		}
 		return getCurrentCoin(smallChange);
 	}
 
 	private int subtract(Coin coin, int payMoney, HashMap<Coin, Integer> smallChange) {
 		while (payMoney >= coin.getAmount() && coins.get(coin) > InputCondition.ZERO) {
-			smallChange.put(coin,smallChange.getOrDefault(coin,0) + 1);
+			smallChange.put(coin, smallChange.getOrDefault(coin, 0) + 1);
 			coins.put(coin, coins.get(coin) - 1);
 			payMoney -= coin.getAmount();
 		}
 		return payMoney;
-	}
-
-	public void printCoins() {
-		for (Coin coin : coins.keySet()) {
-			System.out.printf("%s : %s\n", coin, coins.get(coin));
-		}
 	}
 
 }

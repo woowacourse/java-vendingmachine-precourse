@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import vendingmachine.util.Symbol;
-
 public class Item {
 	private String name;
 	private int price;
@@ -13,21 +11,15 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public String getItemInfo() {
-		StringBuilder builder = new StringBuilder();
-		builder.append(name + Symbol.SPACE).append(price + Symbol.SPACE).append(quantity + Symbol.MEW_LINE);
-		return builder.toString();
-	}
-
 	public int getPrice() {
-		return price;
+		return this.price;
 	}
 
 	public boolean isSoldOut() {
-		return quantity == 0;
+		return this.quantity == 0;
 	}
 
 	public void decreaseQuantity() {
-		quantity -= 1;
+		this.quantity -= 1;
 	}
 }
