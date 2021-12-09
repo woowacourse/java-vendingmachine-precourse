@@ -6,8 +6,12 @@ import vendingmachine.model.VendingMachine;
 
 public class VendingMachineController {
 
-	private final ViewController viewController = new ViewController();
+	private final ViewController viewController;
 	private VendingMachine vendingMachine;
+
+	public VendingMachineController(ViewController viewController) {
+		this.viewController = viewController;
+	}
 
 	public void init() {
 		int moneyOfVendingMachine = viewController.returnMoneyOfVendingMachine();
