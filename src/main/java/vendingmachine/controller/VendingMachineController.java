@@ -30,5 +30,14 @@ public class VendingMachineController {
 	public VendingMachine getVendingMachine() {
 		return vendingMachine;
 	}
-	
+
+	private void sell(String productName) {
+		ProductList productList = vendingMachine.getProductList();
+
+		productList.subtractQuantity(productName);
+
+		int price = productList.getPrice(productName);
+		vendingMachine.subtractDeposit(price);
+	}
+
 }

@@ -19,5 +19,9 @@ public class VendingMachine {
 	public int getDeposit() {
 		return deposit;
 	}
-	
+
+	public void subtractDeposit(int price) {
+		this.deposit -= price;
+	}
+
 }

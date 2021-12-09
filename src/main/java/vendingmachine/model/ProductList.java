@@ -60,4 +60,15 @@ public class ProductList {
 		return product.getPrice() > currentDeposit;
 	}
 
+	public void subtractQuantity(String productName) {
+		Product product = hashMap.get(productName);
+		product.subtractQuantity();
+		hashMap.replace(productName, product);
+	}
+
+	public int getPrice(String productName) {
+		Product product = hashMap.get(productName);
+		return product.getPrice();
+	}
+
 }
