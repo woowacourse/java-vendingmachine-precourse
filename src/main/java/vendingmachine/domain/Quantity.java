@@ -3,13 +3,16 @@ package vendingmachine.domain;
 import static vendingmachine.Constant.*;
 
 public class Quantity {
+    private int quantity;
+
     public Quantity(String quantityInput) {
-        validate(quantityInput);
+        this.quantity = validate(quantityInput);
     }
 
-    public void validate(String quantityInput) {
+    public int validate(String quantityInput) {
         int quantity = validateItIsNumber(quantityInput);
         validateItIsPositive(quantity);
+        return quantity;
     }
 
     private void validateItIsPositive(int quantity) {
@@ -23,5 +26,13 @@ public class Quantity {
             throw new IllegalArgumentException("상품의 수량은 숫자여야 합니다.");
         }
         return Integer.parseInt(quantityInput);
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void takeOutInWarehouse() {
+        this.quantity -= 1;
     }
 }

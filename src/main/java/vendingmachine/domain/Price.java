@@ -39,8 +39,17 @@ public class Price {
         return Integer.parseInt(priceInput);
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void use(int productPrice) {
+        this.price -= productPrice;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(price);
     }
+
 }

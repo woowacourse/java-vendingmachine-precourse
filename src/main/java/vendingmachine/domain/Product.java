@@ -18,4 +18,19 @@ public class Product {
     public String getName() {
         return name;
     }
+
+    public boolean hasStock() {
+        if (quantity.getQuantity() == 0) {
+            throw new IllegalArgumentException("해당 상품의 재고가 없습니다.");
+        }
+        return true;
+    }
+
+    public void takeOutInWarehouse() {
+        quantity.takeOutInWarehouse();
+    }
+
+    public int getPrice() {
+        return price.getPrice();
+    }
 }

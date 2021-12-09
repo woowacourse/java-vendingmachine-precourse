@@ -27,4 +27,12 @@ public class ProductRepository {
     public boolean has(String productName) {
         return productRepository.containsKey(productName);
     }
+
+    public int takeout(String productName) {
+        Product productUserWantBuying = productRepository.get(productName);
+        if (productUserWantBuying.hasStock()) {
+            productUserWantBuying.takeOutInWarehouse();
+        }
+        return productUserWantBuying.getPrice();
+    }
 }
