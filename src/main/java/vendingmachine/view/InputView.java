@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import static vendingmachine.utils.Constant.*;
+import static vendingmachine.utils.Validate.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,8 +13,14 @@ public class InputView {
 	public static int inputHoldingAmountMoney() {
 		System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
 		String input = Console.readLine();
-		printEmptyLine();
-		return Integer.parseInt(input);
+		try {
+			validateInputHoldingAmountMoney(input);
+			printEmptyLine();
+			return Integer.parseInt(input);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			return inputHoldingAmountMoney();
+		}
 	}
 
 	public static List<String> inputProductList() {
