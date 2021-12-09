@@ -2,8 +2,8 @@ package vendingmachine.reader;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class ExchangeAmountReader {
-	public int read() {
+public class ExchangeAmountReader implements Reader<Integer>{
+	public Integer read() {
 		printInputMessage();
 		String value = Console.readLine();
 		checkIsValid(value);
