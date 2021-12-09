@@ -19,6 +19,7 @@ public class OutputView {
 		printLineBreak();
 		System.out.println(VENDING_MACHINE_OWN_COINS);
 		countCoins(coins);
+		printLineBreak();
 	}
 
 	private static void countCoins(List<Integer> coins) {
