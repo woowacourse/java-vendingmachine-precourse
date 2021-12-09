@@ -23,14 +23,20 @@ public class View {
         coins.forEach((coin, count) -> System.out.println(coin.getAmount() + "원 - " + count + "개"));
     }
 
-    public static String printIndexPage() {
+    public static String putCoinIntoVendingmachine() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
         return Console.readLine().replace(" ", "");
     }
 
-    public static String printRegisterProductPage() {
+    public static String registerProduct() {
         System.out.println();
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        return Console.readLine().replace(" ", "");
+    }
+
+    public static String inputAmount() {
+        System.out.println();
+        System.out.println("투입 금액을 입력해 주세요.");
         return Console.readLine().replace(" ", "");
     }
 }
