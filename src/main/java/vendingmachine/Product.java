@@ -22,4 +22,16 @@ public class Product {
         return stockQuantity == 0;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    public int getStockQuantity() {
+        return this.stockQuantity;
+    }
+
 }
