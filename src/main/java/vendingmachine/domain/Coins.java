@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
 
 public class Coins {
 	private HashMap<Coin, Integer> coins;
@@ -49,8 +48,11 @@ public class Coins {
 
 	@Override
 	public String toString() {
-		return "Coins{" +
-			"coins=" + coins +
-			'}';
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Coin coin : coins.keySet()) {
+			stringBuilder.append(coin).append(" - ").append(coin.getAmount()).append("개");
+			stringBuilder.append("\n");
+		}
+		return stringBuilder.toString();
 	}
 }

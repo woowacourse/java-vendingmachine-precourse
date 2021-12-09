@@ -1,10 +1,4 @@
-package vendingmachine;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.Coins;
+package vendingmachine.domain;
 
 public enum Coin {
 	COIN_500(500),
