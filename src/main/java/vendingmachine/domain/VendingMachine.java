@@ -8,6 +8,12 @@ public class VendingMachine {
 
 	public void start() {
 		makeHoldingMoney();
+		showHoldingCoins();
+	}
+
+	private void showHoldingCoins() {
+		OutputView.printHoldingCoinMessage();
+		coinBox.showCoins();
 	}
 
 	private void makeHoldingMoney() {

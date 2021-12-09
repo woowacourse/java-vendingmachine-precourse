@@ -21,6 +21,11 @@ public class CoinBox {
 		makeCoins();
 	}
 
+	public void showCoins() {
+		coinIntegerEnumMap
+			.forEach((coin, numberOfCoin) -> OutputView.printCoinInfo(coin.toString(), numberOfCoin));
+	}
+
 	private void makeCoins() {
 		int money = holdingMoney;
 		while (money > 0) {
