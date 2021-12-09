@@ -8,7 +8,6 @@ import vendingmachine.utils.StringUtils;
 
 public class CoinsValidator {
 	private static final int MULTIPLE = 10;
-	private static final int REMAINDER = 0;
 
 	public static void validateVendingMachineBalance(String vendingMachineBalance) {
 		validateNumeric(vendingMachineBalance);
@@ -31,7 +30,7 @@ public class CoinsValidator {
 
 	private static void validateMultiple(String input) {
 		int parsedNumber = Integer.parseInt(input);
-		if (parsedNumber % MULTIPLE != REMAINDER) {
+		if (NumberUtils.isMultipleOf(parsedNumber, MULTIPLE)) {
 			throw new NotAMultipleException(MULTIPLE);
 		}
 	}
