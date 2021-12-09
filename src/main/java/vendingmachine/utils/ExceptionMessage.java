@@ -12,4 +12,5 @@ public class ExceptionMessage {
     public static final String ERROR_BEVERAGE_DUPLICATE = "중복된 상품 이름입니다.";
 
     public static final String ERROR_INSERT_MONEY_NOT_ENOUGH = "투입 금액이 부족합니다.";
+    public static final String ERROR_INPUT_NUMBER_BIGGER_THAN_ZERO = "금액은 0원 이상이어야 합니다.";
 }

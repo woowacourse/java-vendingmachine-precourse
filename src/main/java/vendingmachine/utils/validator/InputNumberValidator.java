@@ -8,6 +8,7 @@ public class InputNumberValidator {
 
     public static int validateInput(String input) {
         int inputValue = isNumber(input);
+        isBiggerThanZero(inputValue);
         isDivideByTen(inputValue);
         return inputValue;
     }
@@ -15,6 +16,12 @@ public class InputNumberValidator {
     private static void isDivideByTen(int inputValue) {
         if (inputValue % Coin.COIN_10.getAmount() != RESULT) {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_PRICE_NOT_DIVIDE_BY_TEN);
+        }
+    }
+
+    private static void isBiggerThanZero(int inputValue){
+        if (inputValue < RESULT) {
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PREFIX + ExceptionMessage.ERROR_INPUT_NUMBER_BIGGER_THAN_ZERO);
         }
     }
 
