@@ -16,6 +16,7 @@ public class OutputView {
 		for (Coin coin : coins) {
 			System.out.println(coin);
 		}
+		printNewLine();
 	}
 
 	public static void printNewLine() {
