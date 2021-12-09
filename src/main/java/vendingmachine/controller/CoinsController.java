@@ -2,17 +2,21 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.coins.Coins;
 import vendingmachine.dto.VendingMachineBalanceDto;
+import vendingmachine.service.CoinsService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class CoinsController {
-	public Coins generateCoins() {
+	private final CoinsService coinsService = CoinsService.getInstance();
+
+	public void generateCoins() {
 		VendingMachineBalanceDto vendingMachineBalanceDto = InputView.inputVendingMachineBalance();
 		try {
-			return vendingMachineBalanceDto.toCoinsEntity();
+			Coins coins = vendingMachineBalanceDto.toCoinsEntity();
+			coinsService.initCoins(coins);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
-			return generateCoins();
+			generateCoins();
 		}
 	}
 }

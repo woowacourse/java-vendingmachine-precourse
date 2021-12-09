@@ -14,6 +14,10 @@ public class Coins {
 		this.coins = generateRandomCoins(vendingMachineBalance);
 	}
 
+	public static Coins create() {
+		return new Coins(0);
+	}
+
 	public static Coins from(String vendingMachineBalance) {
 		CoinsValidator.validateVendingMachineBalance(vendingMachineBalance);
 
