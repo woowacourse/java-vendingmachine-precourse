@@ -17,4 +17,8 @@ public class Item {
 		this.price = price;
 		this.count = count;
 	}
+
+	public boolean isName(String name) {
+		return this.name.equals(name);
+	}
 }
