@@ -8,6 +8,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+	private VendingMachine vendingMachine;
 	private List<Integer> coins;
 	private ProductStorage productStorage;
 
@@ -20,6 +21,10 @@ public class VendingMachineController {
 		InputView.printInitialProductSettingMessage();
 		productStorage = new ProductStorage();
 		requestInitialProducts();
+
+		InputView.printInsertMoneyMessage();
+		vendingMachine = new VendingMachine(coins, productStorage);
+		requestInsertMoney();
 	}
 
 	private void requestInitialMoney(InitialMoney initialMoney) {
@@ -38,6 +43,15 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 			requestInitialProducts();
+		}
+	}
+
+	private void requestInsertMoney() {
+		try {
+			vendingMachine.insertMoney(Console.readLine());
+		} catch (IllegalArgumentException illegalArgumentException) {
+			ErrorView.showMessage(illegalArgumentException);
+			requestInsertMoney();
 		}
 	}
 }

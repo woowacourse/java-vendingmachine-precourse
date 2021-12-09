@@ -1,0 +1,20 @@
+package vendingmachine;
+
+import java.util.List;
+
+public class VendingMachine {
+	private List<Integer> coinsForChange;
+	private ProductStorage productStorage;
+	private MoneySlot moneySlot;
+
+	public VendingMachine(List<Integer> coinsForChange, ProductStorage productStorage) {
+		this.coinsForChange = coinsForChange;
+		this.productStorage = productStorage;
+		this.moneySlot = new MoneySlot();
+	}
+
+	public void insertMoney(String money) {
+		moneySlot.insert(money);
+	}
+
+}
