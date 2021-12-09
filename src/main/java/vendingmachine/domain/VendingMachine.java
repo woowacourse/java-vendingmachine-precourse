@@ -29,4 +29,13 @@ public class VendingMachine {
         coinRepository = new CoinRepository(CoinGenerator.makeCoins(inputMoney));
         System.out.println(coinRepository);
     }
+
+    public void putProducts(ArrayList<String> productsInfo) {
+        for (String productInfoInput : productsInfo) {
+            // [콜라,1500,20]  //productInfo를 진짜 product에 넣어서 검증한다.
+            ProductValidator.validateForm(productInfoInput);
+            System.out.println(productInfoInput);
+        }
+
+    }
 }
