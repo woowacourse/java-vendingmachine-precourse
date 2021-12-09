@@ -55,4 +55,20 @@ public class InputView {
 		return input;
 	}
 
+	public String getProductWantToBuy() {
+		String input = "";
+
+		boolean isValid = false;
+		while (!isValid) {
+			input = readLine();
+			try {
+				isValid = isValidProductName(input);
+			} catch (IllegalArgumentException exception) {
+				printError(exception);
+			}
+		}
+
+		return input;
+	}
+
 }

@@ -10,6 +10,12 @@ public class ProductValidator {
 	private static final String KOREAN_REGEX = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
 	private static final int PRICE_MINIMUM_LIMIT = 100;
 
+	public static boolean isValidProductName(String input) {
+		checkProductName(input);
+
+		return true;
+	}
+
 	public static boolean isValidProducts(String input) {
 		String[] products = input.split(PRODUCT_CRITERIA, -1);
 
