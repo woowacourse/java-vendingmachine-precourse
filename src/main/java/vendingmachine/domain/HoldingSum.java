@@ -1,15 +1,40 @@
 package vendingmachine.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.util.Checker;
+
 public class HoldingSum {
 
-	private int holdingSum;
+	private Map<String, Integer> coinMap;
 
 	public void set(String input) {
-		//예외 처리 로직 추가하기
-		this.holdingSum = Integer.valueOf(input);
+		checkInput(input);
+		coinMap = generateCoinsRandomly(input);
 	}
 
-	public String toString() {
-		return String.valueOf(holdingSum);
+	private void checkInput(String input) {
+		Checker checker = new Checker();
+		checker.isPositiveNumber(input);
+		checker.isDivisibleNumber(input, Coin.minAmount());
+	}
+
+	private Map<String, Integer> generateCoinsRandomly(String input) {
+		Map<String, Integer> coinMap = new HashMap<>();
+		int restMoney = Integer.valueOf(input);
+
+		while (restMoney != 0) {
+			int randomCoinAmount = Randoms.pickNumberInList(Coin.getAmountList());
+
+			if (restMoney >= randomCoinAmount) {
+				restMoney -= randomCoinAmount;
+				String coinName = Coin.getName(randomCoinAmount);
+				coinMap.put(coinName, coinMap.getOrDefault(coinName, 0) + 1);
+			}
+		}
+
+		return coinMap;
 	}
 }

@@ -9,8 +9,8 @@ public class VendingmachineController {
 	HoldingSumInputView holdingSumInputView;
 
 	public VendingmachineController() {
-		holdingSumInputView = new HoldingSumInputView();
 		vendingmachine = new Vendingmachine();
+		holdingSumInputView = new HoldingSumInputView();
 	}
 
 	public void operate() {
@@ -19,6 +19,6 @@ public class VendingmachineController {
 
 	private void setHoldingSum() {
 		holdingSumInputView.setInput();
-		System.out.println(holdingSumInputView.getInput());
+		vendingmachine.setHoldingSum(holdingSumInputView.getInput());
 	}
 }

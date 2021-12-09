@@ -12,9 +12,8 @@ public class HoldingSumInputView implements InputView {
 		holdingSum = new HoldingSum();
 	}
 
-	@Override
-	public String getInput() {
-		return holdingSum.toString();
+	public HoldingSum getInput() {
+		return this.holdingSum;
 	}
 
 	@Override
