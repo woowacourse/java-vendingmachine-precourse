@@ -5,10 +5,11 @@ import static vendingmachine.Constant.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import vendingmachine.repository.CoinRepository;
 import vendingmachine.utils.CoinGenerator;
 
 public class VendingMachine {
-    private HashMap<Coin, Integer> coinRepository = new HashMap<>();
+    private CoinRepository coinRepository;
 
     private VendingMachine(int initializeMoney) {
         putInitialAmount(initializeMoney);
@@ -25,6 +26,6 @@ public class VendingMachine {
         if (inputMoney % MINIMUM_COIN_VALUE != 0) {
             throw new IllegalArgumentException("해당 금액은 동전으로 만들 수 없는 단위의 숫자입니다.");
         }
-        coinRepository = CoinGenerator.makeCoins(inputMoney);
+        coinRepository = new CoinRepository(CoinGenerator.makeCoins(inputMoney));
     }
 }
