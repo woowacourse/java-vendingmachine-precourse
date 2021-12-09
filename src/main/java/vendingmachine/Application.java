@@ -8,7 +8,8 @@ import vendingmachine.view.InputView;
 
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        boolean isOperate = true;
+
         int initializeMoney = StringUtil.parseStringToInt(InputView.inputInitialAmount());
         VendingMachine vendingMachine = VendingMachine.makeVendingMachineHasMoney(initializeMoney);
         //상품명들을 입력. -> VendingMachine의 ProductRepository
@@ -16,6 +17,8 @@ public class Application {
         vendingMachine.putProducts(productsInfo);
         String userMoneyInput = InputView.inputUserMoney();
         vendingMachine.putUserMoney(userMoneyInput);
-        vendingMachine.sellProduct(InputView.inputBuyingProduct());
+        while (isOperate) {
+            isOperate = vendingMachine.sellProduct();
+        }
     }
 }

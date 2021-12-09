@@ -33,4 +33,8 @@ public class Product {
     public int getPrice() {
         return price.getPrice();
     }
+
+    public int getQuantity() {
+        return quantity.getQuantity();
+    }
 }

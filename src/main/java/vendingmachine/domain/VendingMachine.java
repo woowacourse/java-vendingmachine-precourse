@@ -49,12 +49,20 @@ public class VendingMachine {
         OutputView.showUserMoney(userMoney);
     }
 
-    public void sellProduct(String productName) {
+    public boolean sellProduct() {
+        String productName = InputView.inputBuyingProduct();
         if (!productRepository.has(productName)) {
             throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
         }
         int productPrice = productRepository.takeout(productName);
         userMoney.use(productPrice);
         OutputView.showUserMoney(userMoney);
+        if (productRepository.cantBuyBecauseOfNoMoney(userMoney) || productRepository.hasNoQuantity()) {
+            return false;
+        }
+        return true;
+
+
     }
+
 }
