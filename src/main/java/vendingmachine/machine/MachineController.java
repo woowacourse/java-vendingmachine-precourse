@@ -38,7 +38,7 @@ public class MachineController {
         return true;
     }
 
-    public String nowInputAmount() {
-        return machine.toString();
+    public void nowInputAmount() {
+        MachineOutputView.printInputAmount(machine.toString());
     }
 }
