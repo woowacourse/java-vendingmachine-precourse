@@ -45,13 +45,20 @@ public class Application {
 	private static List<Item> inputItemList() {
 		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
 		String value = Console.readLine();
-		List<String> items = removeBracket(splitBySemicolon(value));
+		List<String[]> items = splitByComma(removeBracket(splitBySemicolon(value)));
 
-		for (String item : items) {
-			System.out.println(item);
+		for (String[] item : items) {
+			for (String info : item) {
+				System.out.print(info + " ");
+			}
+			System.out.println();
 		}
 
 		return null;
+	}
+
+	private static List<String[]> splitByComma(List<String> removeBracket) {
+		return removeBracket.stream().map(item -> item.split(",")).collect(toList());
 	}
 
 	private static List<String> removeBracket(String[] items) {
