@@ -3,10 +3,13 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 
 public class InputView {
 
+    private static final String MONEY_INPUT_INSTRUCTION = "자판기가 보유하고 있는 금액을 입력해 주세요. ";
+    private static final String PRODUCT_INPUT_INSTRUCTION = "상품명과 가격, 수량을 입력해 주세요.";
     private static final String ERROR_HEADER = "[ERROR] ";
     private static final String INCLUDE_SPACE_ERROR = "입력에 공백이 있습니다. 공백없이 입력해주세요. ";
     private static final String NOT_VALID_TYPE_MESSAGE = "올바른 숫자 형식이 아닙니다. 숫자를 입력해주세요. ";
@@ -17,6 +20,7 @@ public class InputView {
     public int inputMoney() {
         while (true) {
             try {
+                System.out.println(MONEY_INPUT_INSTRUCTION);
                 String inputMoney = Console.readLine();
                 return checkValidMoney(inputMoney);
             } catch (IllegalArgumentException e) {
@@ -30,6 +34,7 @@ public class InputView {
     public Collection<Product> inputProduct() {
         while (true) {
             try {
+                System.out.println(PRODUCT_INPUT_INSTRUCTION);
                 String inputProducts = Console.readLine();
                 return checkValidProducts(inputProducts);
             } catch (IllegalArgumentException e) {
@@ -79,12 +84,15 @@ public class InputView {
     }
 
     private Product checkValidOneProduct(String productString) {
-        productString.replace("[", "");
-        productString.replace("]", "");
+        String productName;
+        int proudctCount;
+        int productPrice;
+        productString = productString.replace("[", "");
+        productString = productString.replace("]", "");
         String[] productInfo = productString.split(",");
-        String productName = productInfo[0];
-        int productPrice = checkValidMoney(productInfo[1]);
-        int proudctCount = checkValidMoney(productInfo[2]);
+        productName = productInfo[0];
+        productPrice = checkValidMoney(productInfo[1]);
+        proudctCount = Integer.valueOf(productInfo[2]);
         return new Product(productName, productPrice, proudctCount);
     }
 }
