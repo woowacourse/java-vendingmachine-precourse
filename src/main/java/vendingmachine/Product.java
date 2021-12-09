@@ -1,9 +1,11 @@
 package vendingmachine;
 
+import java.util.Objects;
+
 public class Product {
-     final String name;
-     final int price;
-     int quantity;
+    private final String name;
+    private final int price;
+    private int quantity;
 
     private Product(String name, int price, int quantity) {
         this.name = name;
@@ -15,4 +17,26 @@ public class Product {
         return new Product(name, price, quantity);
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void reduce() {
+        this.quantity--;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (o == null || getClass() != o.getClass())
+            return false;
+        Product product = (Product)o;
+        return Objects.equals(name, product.name);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name);
+    }
 }

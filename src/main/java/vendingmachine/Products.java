@@ -15,4 +15,12 @@ public class Products {
             }
         );
     }
+
+    public void reduce(String productName) {
+        products.stream().filter(product -> product.equals(productName)).findFirst().get().reduce();
+    }
+
+    public int getPriceByName(String productName) {
+        return products.stream().filter(product -> product.equals(productName)).findFirst().get().getPrice();
+    }
 }
