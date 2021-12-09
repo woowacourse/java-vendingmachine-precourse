@@ -5,7 +5,8 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Console;
 
 public class View {
-    public static void printInitialCoin(Map coins) {
+    public static void printVendingMachineCoin(Map coins) {
+        System.out.println();
         System.out.println("자판기가 보유한 동전");
         System.out.println("500원 - " + coins.getOrDefault(Coin.COIN_500, 0) + "개");
         System.out.println("100원 - " + coins.getOrDefault(Coin.COIN_100, 0) + "개");
@@ -24,6 +25,12 @@ public class View {
 
     public static String printIndexPage() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        return Console.readLine().replace(" ", "");
+    }
+
+    public static String printRegisterProductPage() {
+        System.out.println();
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         return Console.readLine().replace(" ", "");
     }
 }
