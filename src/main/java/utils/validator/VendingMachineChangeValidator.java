@@ -19,21 +19,21 @@ public class VendingMachineChangeValidator {
 	}
 
 	public static int checkValidVendingMachineChange(String vendingMachineChange) {
-		if (isValidVendingMachineChangeLength(vendingMachineChange) && !hasBlankInVendingMachineChange(
-			vendingMachineChange) && isRightNumber(vendingMachineChange) && isDivisibleByTen(vendingMachineChange)) {
+		if (isValidInputLength(vendingMachineChange) && !hasBlankInInput(vendingMachineChange) && isRightNumber(
+			vendingMachineChange) && isDivisibleByMinimumMoneyUnit(vendingMachineChange)) {
 			return Integer.parseInt(vendingMachineChange);
 		}
 		throw new IllegalArgumentException();
 	}
 
-	private static boolean isValidVendingMachineChangeLength(String vendingMachineChange) {
+	private static boolean isValidInputLength(String vendingMachineChange) {
 		if (vendingMachineChange.length() < MIN_VENDING_MACHINE_CHANGE_INPUT_LENGTH) {
 			throw new IllegalArgumentException(INPUT_NOTHING_ERROR_MESSAGE);
 		}
 		return true;
 	}
 
-	private static boolean hasBlankInVendingMachineChange(String vendingMachineChange) {
+	private static boolean hasBlankInInput(String vendingMachineChange) {
 		if (vendingMachineChange.contains(BLANK)) {
 			throw new IllegalArgumentException(HAS_BLANK_ERROR_MESSAGE);
 		}
@@ -50,7 +50,7 @@ public class VendingMachineChangeValidator {
 		return true;
 	}
 
-	private static boolean isDivisibleByTen(String vendingMachineChange) {
+	private static boolean isDivisibleByMinimumMoneyUnit(String vendingMachineChange) {
 		if (Integer.parseInt(vendingMachineChange) % MINIMUM_MONEY_UNIT != RIGHT_NUMBER) {
 			throw new IllegalArgumentException(MONEY_UNIT_ERROR_MESSAGE);
 		}
