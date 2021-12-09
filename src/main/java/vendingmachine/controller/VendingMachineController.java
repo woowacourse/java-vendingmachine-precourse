@@ -25,6 +25,7 @@ public class VendingMachineController {
 		vendingMachine = new VendingMachine(vendingMachineMoney);
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
+		OutputView.showInputMoneyStatus(Integer.parseInt(InputView.inputMoney()));
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
