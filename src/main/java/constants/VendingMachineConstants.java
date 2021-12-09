@@ -5,6 +5,7 @@ public class VendingMachineConstants {
 	public static String VENDING_MACHINE_MONEY_OUTPUT_MESSAGE = "자판기가 보유한 동전";
 	public static String PRODUCTS_INPUT_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	public static String USER_MONEY_MESSAGE = "투입 금액을 입력해 주세요.";
+	public static String USER_INPUT_MONEY_MESSAGE = "투입 금액: ";
 
 	public static String ERROR_PREFIX = "[ERROR] ";
 	public static String MONEY_NOT_DIGIT_ERROR = "금액은 숫자여야 합니다.";

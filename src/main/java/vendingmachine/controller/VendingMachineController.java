@@ -22,6 +22,7 @@ public class VendingMachineController {
 		OutputView.printVendingMachineMoney(vendingMachineMoney.getCoins());
 		saveProducts();
 		saveUser();
+		OutputView.printUserInputMoney(user);
 	}
 
 	private void saveUser() {

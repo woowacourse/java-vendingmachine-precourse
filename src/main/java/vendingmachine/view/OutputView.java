@@ -5,6 +5,7 @@ import static constants.VendingMachineConstants.*;
 import java.util.List;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.User;
 
 public class OutputView {
 	public static void printError(String message) {
@@ -21,5 +22,9 @@ public class OutputView {
 
 	public static void printNewLine() {
 		System.out.println();
+	}
+
+	public static void printUserInputMoney(User user) {
+		System.out.println(user);
 	}
 }
