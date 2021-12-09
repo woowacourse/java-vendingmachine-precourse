@@ -7,7 +7,7 @@ import java.util.HashMap;
 // TODO: 2021/12/08 더 좋은 이름
 public class ProductList {
 
-	private final HashMap<Product, Integer> hashMap;
+	private final HashMap<String, Product> hashMap;
 
 	public ProductList() {
 		this.hashMap = new HashMap<>();
@@ -18,8 +18,12 @@ public class ProductList {
 		for (String productRawInput : productRawInputList) {
 			String[] arguments = createProductArguments(productRawInput);
 
-			Product product = new Product(arguments[0], Integer.parseInt(arguments[1]));
-			hashMap.put(product, Integer.parseInt(arguments[2]));
+			String name = arguments[0];
+			int price = Integer.parseInt(arguments[1]);
+			int quantity = Integer.parseInt(arguments[2]);
+
+			Product product = new Product(name, price, quantity);
+			hashMap.put(name, product);
 		}
 	}
 
