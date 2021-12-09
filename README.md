@@ -5,6 +5,8 @@
 
 - 자판기 보유 금액 입력
   - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용
+  - [예외] 입력값이 음수인 경우
+  - [예외] 입력값이 숫자가 아닌 경우
 
 - 자판기 보유 동전 생성
   - `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()` 활용
