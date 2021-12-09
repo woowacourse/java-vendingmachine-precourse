@@ -41,6 +41,7 @@ public enum Coin {
 
 			if (coin.getAmount() == amount) {
 				name = coin.name();
+				break;
 			}
 
 		}

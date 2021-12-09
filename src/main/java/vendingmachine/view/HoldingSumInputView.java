@@ -24,7 +24,9 @@ public class HoldingSumInputView {
 		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_MESSAGE_HOLDING_SUM);
 
 		for (Coin coin : Coin.values()) {
-			stringBuilder.append("\n" + coin.getAmount() + "원 - " + holdingSum.getCoinCount(coin.name()) + "개");
+			int coinAmount = coin.getAmount();
+			int coinCount = holdingSum.getCoinCount(coin.name());
+			stringBuilder.append("\n" + Message.toString(coinAmount, coinCount));
 		}
 
 		System.out.println(stringBuilder);

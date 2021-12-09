@@ -12,4 +12,8 @@ public class Message {
 	public static final String ERROR_MESSAGE_POSITIVE_NUMBER = Coin.minAmount() + "원 이상의 정수를 입력해 주세요.";
 	public static final String ERROR_MESSAGE_EXCEED_INTEGER = Integer.MAX_VALUE + "이하의 정수를 입력해 주세요.";
 	public static final String ERROR_MESSAGE_DIVISIBLE_NUMBER = Coin.minAmount() + "원 단위의 정수를 입력해 주세요.";
+
+	public static String toString(int amount, int count) {
+		return amount + "원 - " + count + "개";
+	}
 }
