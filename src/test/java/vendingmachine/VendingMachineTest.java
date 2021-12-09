@@ -2,10 +2,12 @@ package vendingmachine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import static org.assertj.core.api.Assertions.*;
@@ -61,5 +63,32 @@ class VendingMachineTest {
         vendingMachine.get(coke);
 
         assertThatThrownBy(() -> vendingMachine.get(coke)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 잔돈을_반환한다() {
+        int money = 450;
+        vendingMachine.inputMoney(money);
+
+        Coins changes = vendingMachine.getChanges();
+        assertThat(changes.sum()).isEqualTo(money);
+        assertThat(vendingMachine.getInputMoney()).isEqualTo(0);
+    }
+
+    @Test
+    void 잔돈을_반환할_수_없는_경우_반환_가능한_금액만_반환한다() {
+        Map<Coin, Integer> counter = new HashMap<>();
+        counter.put(Coin.COIN_500, 1);
+        counter.put(Coin.COIN_100, 0);
+        counter.put(Coin.COIN_50, 1);
+        counter.put(Coin.COIN_10, 0);
+        Coins coins = new Coins(counter);
+
+        VendingMachine vendingMachine = new VendingMachine(coins);
+        vendingMachine.inputMoney(450);
+
+        Coins changes = vendingMachine.getChanges();
+        assertThat(changes.sum()).isEqualTo(50);
+        assertThat(vendingMachine.getInputMoney()).isEqualTo(400);
     }
 }
