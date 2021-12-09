@@ -34,41 +34,33 @@ public class ProductList {
 		return bracketRemovedInput.split(ARGUMENT_CRITERIA, -1);
 	}
 
-	public boolean isAbleToBuy(String productName) {
-		if (!isExistProduct(productName)) {
-			return false;
-		}
-
-		if (!isQuantitySufficient(productName)) {
-			return false;
-		}
-
-		return true;
-	}
-
 	public boolean isExistProduct(String productName) {
 		return hashMap.containsKey(productName);
 	}
 
 	public boolean isQuantitySufficient(String productName) {
-		Product product = hashMap.get(productName);
+		Product product = findProduct(productName);
 		return product.getQuantity() > 0;
 	}
 
 	public boolean isTooExpensive(String productName, int currentDeposit) {
-		Product product = hashMap.get(productName);
+		Product product = findProduct(productName);
 		return product.getPrice() > currentDeposit;
 	}
 
 	public void subtractQuantity(String productName) {
-		Product product = hashMap.get(productName);
+		Product product = findProduct(productName);
 		product.subtractQuantity();
 		hashMap.replace(productName, product);
 	}
 
 	public int getPrice(String productName) {
-		Product product = hashMap.get(productName);
+		Product product = findProduct(productName);
 		return product.getPrice();
+	}
+
+	private Product findProduct(String productName) {
+		return hashMap.get(productName);
 	}
 
 }
