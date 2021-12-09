@@ -358,6 +358,28 @@ class InputTest extends NsTest {
 		});
 	}
 
+	@Test
+	void 잔돈_개수확인() {
+		assertSimpleTest(() -> {
+			runException("9980", "[콜라,900,1];[사이다,2000,1]", "3200", "콜라", "사이다");
+			assertThat(output()).contains(
+				"잔돈",
+				"100원 - 3개"
+			);
+		});
+	}
+
+	@Test
+	void 잔돈_개수확인2() {
+		assertSimpleTest(() -> {
+			runException("9780", "[콜라,900,1];[사이다,2000,1]", "3200", "콜라", "사이다");
+			assertThat(output()).contains(
+				"잔돈",
+				"100원 - 2개", "50원 - 1개", "10원 - 3개"
+			);
+		});
+	}
+
 	@Override
 	protected void runMain() {
 		Application.main(new String[] {});

@@ -12,6 +12,7 @@ public class VendingMachineController {
 	private int userMoney;
 	private String nameInput;
 	private LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
+	private LinkedHashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
 	private ArrayList<Product> products = new ArrayList<>();
 
 	public VendingMachineController() {
@@ -42,7 +43,9 @@ public class VendingMachineController {
 	}
 
 	private void giveChanges() {
-		OutputView.printChange();
+		OutputView.printUserMoney(userMoney);
+		setChangeCoins();
+		OutputView.printChange(changeCoins);
 	}
 
 	private void setMachineMoney() {
@@ -54,6 +57,21 @@ public class VendingMachineController {
 			machineMoney %= divisor;
 		}
 		OutputView.printEmpty();
+	}
+
+	private void setChangeCoins() {
+		for (Coin coin : Coin.values()) {
+			int divisor = coin.getAmount();
+			int coinAmount = machineCoins.get(coin);
+
+			if ((userMoney / divisor) > coinAmount) {
+				changeCoins.put(coin, coinAmount);
+				userMoney -= coinAmount * divisor;
+				continue;
+			}
+			changeCoins.put(coin, userMoney / divisor);
+			userMoney %= divisor;
+		}
 	}
 
 	private void setMachineProduct() {

@@ -21,8 +21,13 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printChange() {
+	public static void printChange(LinkedHashMap<Coin, Integer> coins) {
 		System.out.println("잔돈");
-		System.out.println("블라블라");
+		for (Coin coin : coins.keySet()) {
+			if (coins.get(coin) != 0) {
+				System.out.printf("%s원 - %d개%n", coin.getAmount(), coins.get(coin));
+			}
+
+		}
 	}
 }
