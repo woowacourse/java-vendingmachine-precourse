@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
 
 /**
@@ -13,11 +15,13 @@ public class Machine {
 	private Display display;
 	private Validator validator;
 	private Cashier cashier;
+	private ItemParser itemParser;
 
 	public Machine() {
 		this.display = new Display();
 		this.validator = new Validator();
 		this.cashier = new Cashier();
+		this.itemParser = new ItemParser();
 	}
 
 	public void run() {
@@ -46,9 +50,8 @@ public class Machine {
 		}
 	}
 
-	private String askItems() {
+	private List<Item> askItems() {
 		display.askItems();
-		//TODO: 입력값을 ';' 기준으로 분리한다
-		return Console.readLine();
+		return itemParser.stringToItemList(Console.readLine());
 	}
 }
