@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.Vendingmachine;
+import vendingmachine.model.Vendingmachine;
 import vendingmachine.view.HoldingSumInputView;
 
 public class VendingmachineController {
@@ -14,11 +14,7 @@ public class VendingmachineController {
 	}
 
 	public void operate() {
-		setHoldingSum();
-	}
-
-	private void setHoldingSum() {
-		holdingSumInputView.setInput();
 		vendingmachine.setHoldingSum(holdingSumInputView.getInput());
+		holdingSumInputView.print(vendingmachine.getHoldingSum());
 	}
 }

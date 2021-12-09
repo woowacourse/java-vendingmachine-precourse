@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
 public class Vendingmachine {
 
@@ -6,6 +6,10 @@ public class Vendingmachine {
 
 	public Vendingmachine() {
 		holdingSum = new HoldingSum();
+	}
+
+	public HoldingSum getHoldingSum() {
+		return holdingSum;
 	}
 
 	public void setHoldingSum(HoldingSum holdingSum) {

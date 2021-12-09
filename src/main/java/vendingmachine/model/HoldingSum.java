@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -9,6 +9,10 @@ import vendingmachine.util.Checker;
 public class HoldingSum {
 
 	private Map<String, Integer> coinMap;
+
+	public int getCoinCount(String coinName) {
+		return coinMap.getOrDefault(coinName, 0);
+	}
 
 	public void set(String input) {
 		checkInput(input);
@@ -34,7 +38,6 @@ public class HoldingSum {
 				coinMap.put(coinName, coinMap.getOrDefault(coinName, 0) + 1);
 			}
 		}
-
 		return coinMap;
 	}
 }
