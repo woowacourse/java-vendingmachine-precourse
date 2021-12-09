@@ -5,5 +5,5 @@ import java.util.Map;
 import vendingmachine.Money;
 
 public interface CoinGenerator {
-	Map<Coin, Integer> generate(Money money);
+	Coins generate(Money money);
 }

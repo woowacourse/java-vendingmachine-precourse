@@ -8,16 +8,15 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Money;
 
 public class RandomCoinGenerator implements CoinGenerator {
-
 	@Override
-	public Map<Coin, Integer> generate(Money money) {
+	public Coins generate(Money money) {
 		Map<Coin, Integer> coins = new EnumMap<>(Coin.class);
 		while(!money.isZero()) {
 			Coin coin = generateCoin(money);
 			coins.merge(coin, 1, (originCount,newCount) -> originCount+1);
 			money.spend(coin.getMoney());
 		}
-		return coins;
+		return new Coins(coins);
 	}
 
 	private Coin generateCoin(final Money money) {
@@ -26,5 +25,4 @@ public class RandomCoinGenerator implements CoinGenerator {
 		Money randomMoney = Money.of(randomNumber);
 		return Coin.valueOf(randomMoney);
 	}
-
 }
