@@ -22,6 +22,7 @@ public class OutputService {
 		System.out.println(HUNDRED + WON + STICK + coinService.getCoinCount(HUNDRED) + UNIT);
 		System.out.println(FIFTY + WON + STICK + coinService.getCoinCount(FIFTY) + UNIT);
 		System.out.println(TEN + WON + STICK + coinService.getCoinCount(TEN) + UNIT);
+		enter();
 	}
 
 	public void printChange(Map<Coin, Integer> change) {

@@ -20,24 +20,26 @@ public class VendingMachineController {
 		outputService.enter();
 
 		outputService.printAllCoinCount();
-		outputService.enter();
 
-		inputService.readItems()
-			.stream()
+		inputService.readItems().stream()
 			.forEach(item -> itemService.register(item));
 		outputService.enter();
 
 		money = inputService.readMoneyOfUser();
 		outputService.enter();
 
+		purchase();
+
+		outputService.printChange(coinService.returnChange(money));
+	}
+
+	private void purchase() {
 		do {
 			Item item = inputService.readItemName(money);
 			item.subtractStockQuantity();
 			money = item.subtractMoneyAfterPurchase(money);
 			outputService.enter();
 		} while (!satisfyExitCondition());
-
-		outputService.printChange(coinService.returnChange(money));
 	}
 
 	private boolean satisfyExitCondition() {
@@ -46,10 +48,5 @@ public class VendingMachineController {
 		}
 
 		return false;
-	}
-
-	public static void main(String[] args) {
-		VendingMachineController controller = new VendingMachineController();
-		controller.start();
 	}
 }
