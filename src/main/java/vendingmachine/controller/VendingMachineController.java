@@ -28,6 +28,7 @@ public class VendingMachineController {
 	private void saveUser() {
 		Integer userMoney = InputView.getUserMoney();
 		user = new User(userMoney);
+		OutputView.printNewLine();
 	}
 
 	private void saveProducts() {
