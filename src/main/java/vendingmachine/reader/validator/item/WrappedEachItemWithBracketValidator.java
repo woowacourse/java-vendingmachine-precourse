@@ -1,9 +1,10 @@
-package vendingmachine.reader.validator;
+package vendingmachine.reader.validator.item;
 
 import java.util.stream.Stream;
 import vendingmachine.reader.ItemLineParser;
+import vendingmachine.reader.validator.Validator;
 
-public class WrappedEachItemWithBracketValidator implements Validator{
+public class WrappedEachItemWithBracketValidator implements Validator {
 	private final ItemLineParser parser;
 
 	public WrappedEachItemWithBracketValidator(ItemLineParser parser) {

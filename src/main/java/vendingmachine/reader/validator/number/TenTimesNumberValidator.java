@@ -1,6 +1,8 @@
-package vendingmachine.reader.validator;
+package vendingmachine.reader.validator.number;
 
-public class TenTimesNumberValidator implements Validator{
+import vendingmachine.reader.validator.Validator;
+
+public class TenTimesNumberValidator implements Validator {
 	@Override
 	public boolean validate(String value) {
 		return Integer.valueOf(value) % 10 == 0;

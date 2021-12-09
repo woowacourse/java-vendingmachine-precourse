@@ -1,9 +1,10 @@
-package vendingmachine.reader.validator;
+package vendingmachine.reader.validator.item;
 
 import java.util.List;
 import vendingmachine.reader.ItemLineParser;
+import vendingmachine.reader.validator.Validator;
 
-public class CountOfItemInformationValidator implements Validator{
+public class CountOfItemInformationValidator implements Validator {
 	private final ItemLineParser parser;
 
 	public CountOfItemInformationValidator(ItemLineParser parser) {

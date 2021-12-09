@@ -1,8 +1,8 @@
 package vendingmachine.reader;
 
 import vendingmachine.reader.validator.CompositeValidator;
-import vendingmachine.reader.validator.NumberFormatValidator;
-import vendingmachine.reader.validator.TenTimesNumberValidator;
+import vendingmachine.reader.validator.number.NumberFormatValidator;
+import vendingmachine.reader.validator.number.TenTimesNumberValidator;
 import vendingmachine.reader.validator.Validator;
 
 public class ExchangeAmountReader extends Reader<Integer>{

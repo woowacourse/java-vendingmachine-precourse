@@ -4,10 +4,10 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import vendingmachine.model.Item;
 import vendingmachine.reader.validator.CompositeValidator;
-import vendingmachine.reader.validator.CountOfItemInformationValidator;
-import vendingmachine.reader.validator.ItemPriceAndQuantityValidator;
+import vendingmachine.reader.validator.item.CountOfItemInformationValidator;
+import vendingmachine.reader.validator.item.ItemPriceAndQuantityValidator;
 import vendingmachine.reader.validator.Validator;
-import vendingmachine.reader.validator.WrappedEachItemWithBracketValidator;
+import vendingmachine.reader.validator.item.WrappedEachItemWithBracketValidator;
 
 public class ItemListReader extends Reader<List<Item>> {
 	private final ItemLineParser parser;

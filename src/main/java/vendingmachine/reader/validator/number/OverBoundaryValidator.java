@@ -1,6 +1,8 @@
-package vendingmachine.reader.validator;
+package vendingmachine.reader.validator.number;
 
-public class OverBoundaryValidator implements Validator{
+import vendingmachine.reader.validator.Validator;
+
+public class OverBoundaryValidator implements Validator {
 	private final int boundaryValue;
 
 	public OverBoundaryValidator(int boundaryValue) {
