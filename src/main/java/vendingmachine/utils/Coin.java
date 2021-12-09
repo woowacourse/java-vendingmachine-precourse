@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 public enum Coin {
     COIN_500(500),
@@ -11,6 +11,5 @@ public enum Coin {
     Coin(final int amount) {
         this.amount = amount;
     }
-
     // 추가 기능 구현
 }
