@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public enum Coin {
@@ -11,7 +9,6 @@ public enum Coin {
     COIN_10(10);
 
     private final int amount;
-    public static final List<Integer> COIN_LIST = getCoinStream().map(c-> c.getValue()).collect(Collectors.toList());
 
     Coin(final int amount) {
         this.amount = amount;

@@ -16,4 +16,8 @@ public enum Machine {
 	public void changeAmount(int productPrice){
 		amount -= productPrice;
 	}
+
+	public boolean isAmountLessThanProductMinPrice(int min) {
+		return amount < min;
+	}
 }

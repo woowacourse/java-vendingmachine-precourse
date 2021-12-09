@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import vendingmachine.utils.RandomBox;
 
 class RandomBoxTest {
 
