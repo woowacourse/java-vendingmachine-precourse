@@ -10,6 +10,7 @@ public class Program {
 	public static final String PRODUCT_ENTRY_ELEMENT_DIVIDER = ",";
 	public final CoinPocket pocket;
 	public final ProductTable table;
+	public int userMoney;
 
 	public Program() {
 		pocket = new CoinPocket();
@@ -17,6 +18,7 @@ public class Program {
 		int initialMoney = setInitialMoney();
 		makeRandomCoins(initialMoney);
 		setProductList();
+		setUserMoney();
 	}
 
 	private int setInitialMoney() {
@@ -43,5 +45,11 @@ public class Program {
 			String[] elements = entry.substring(1, entry.length() - 1).split(PRODUCT_ENTRY_ELEMENT_DIVIDER);
 			table.push(elements[0], new ProductEntry(Integer.parseInt(elements[1]), Integer.parseInt(elements[2])));
 		});
+	}
+
+	private void setUserMoney() {
+		Message.USER_MONEY_REQUEST.println();
+		String userMoneyInString = Console.readLine();
+		userMoney = Integer.parseInt(userMoneyInString);
 	}
 }
