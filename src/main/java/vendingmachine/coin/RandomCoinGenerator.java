@@ -14,7 +14,7 @@ public class RandomCoinGenerator implements CoinGenerator {
 		Map<Coin, Integer> coins = new EnumMap<>(Coin.class);
 		while(!money.isZero()) {
 			Coin coin = generateCoin(money);
-			coins.merge(coin, 0, (k,v) -> v++);
+			coins.merge(coin, 1, (originCount,newCount) -> originCount+1);
 			money.spend(coin.getMoney());
 		}
 		return coins;
