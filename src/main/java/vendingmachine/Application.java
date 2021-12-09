@@ -15,6 +15,7 @@ public class Application {
 		Coins coins = generateCoins(amount);
 		printExchangeCoins(coins);
 		List<Item> items = inputItemList();
+		System.out.println(items);
 	}
 
 	private static Coins generateCoins(int amount) {
@@ -45,16 +46,11 @@ public class Application {
 	private static List<Item> inputItemList() {
 		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
 		String value = Console.readLine();
-		List<String[]> items = splitByComma(removeBracket(splitBySemicolon(value)));
+		return convertToItemList(splitByComma(removeBracket(splitBySemicolon(value))));
+	}
 
-		for (String[] item : items) {
-			for (String info : item) {
-				System.out.print(info + " ");
-			}
-			System.out.println();
-		}
-
-		return null;
+	private static List<Item> convertToItemList(List<String[]> splitByComma) {
+		return splitByComma.stream().map(item -> Item.of(item[0], Integer.parseInt(item[1]), Integer.parseInt(item[2]))).collect(toList());
 	}
 
 	private static List<String[]> splitByComma(List<String> removeBracket) {
