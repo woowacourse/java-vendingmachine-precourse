@@ -31,7 +31,19 @@ public class VendingMachineController {
 	}
 
 	private void getProducts() {
+		String userProducts = InputView.getVendingMachineProducts();
+		saveProducts(userProducts);
+	}
 
+	private void saveProducts(String userProducts) {
+		try {
+			vendingMachine.setProductList(userProducts);
+
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			getProducts();
+
+		}
 	}
 
 }

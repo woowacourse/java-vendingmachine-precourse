@@ -21,7 +21,7 @@ public class PriceTest {
 		assertThatThrownBy(() -> {
 			vendingMachine.setBalance(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining(PRICE_NOT_NUMBER);
+			.hasMessageContaining(NOT_NUMBER);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class PriceTest {
 		assertThatThrownBy(() -> {
 			vendingMachine.setBalance(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining(PRICE_NOT_POSITIVE);
+			.hasMessageContaining(NOT_POSITIVE);
 	}
 
 	@Test
@@ -51,7 +51,7 @@ public class PriceTest {
 		assertThatThrownBy(() -> {
 			vendingMachine.setBalance(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
-			.hasMessageContaining(PRICE_NOT_COIN_VALUE);
+			.hasMessageContaining(NOT_COIN_VALUE);
 	}
 
 }

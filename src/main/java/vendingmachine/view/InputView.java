@@ -11,7 +11,10 @@ public class InputView {
 		return balance;
 	}
 
-	public static void getVendingMachineProducts() {
+	public static String getVendingMachineProducts() {
+		System.out.println(INPUT_VENDING_MACHINE_PRODUCT);
+		String products = Console.readLine();
+		return products;
 	}
 
 	public static void getOrderedProduct() {

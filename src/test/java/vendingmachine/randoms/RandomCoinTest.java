@@ -10,7 +10,6 @@ import vendingmachine.Coin;
 import vendingmachine.controller.CoinController;
 
 public class RandomCoinTest {
-
 	@Test
 	void coinAmountTest() {
 		//given

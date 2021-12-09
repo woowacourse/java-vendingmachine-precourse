@@ -4,12 +4,13 @@ import java.util.List;
 import java.util.Map;
 
 import exception.PriceException;
+import exception.ProductException;
 import vendingmachine.Coin;
 import vendingmachine.controller.CoinController;
 
 public class VendingMachine {
 	private Map<Coin, Integer> coins;
-	private ProductRepository productRepository;
+	private List<Product> productList;
 	private int balance;
 
 	public void setBalance(String  rawBalance) throws IllegalArgumentException {
@@ -27,5 +28,10 @@ public class VendingMachine {
 
 	public Map<Coin, Integer> getCoins() {
 		return coins;
+	}
+
+	public void setProductList(String userProducts) {
+		List<Product> productList = ProductException.isValidProduct(userProducts);
+		this.productList = productList;
 	}
 }
