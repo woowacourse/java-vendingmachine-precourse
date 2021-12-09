@@ -1,12 +1,11 @@
 package vendingmachine.products;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProductsController {
     private static final String PRODUCTS_SEPARATE_UNIT = ";";
+    private static final int EMPTY_STOCK = 0;
 
     private final Products products;
 
@@ -35,11 +34,16 @@ public class ProductsController {
         return productsList;
     }
 
-    public Product findProduct(String productName){
+    public Product findProduct(String productName) {
         return products.findProduct(productName);
     }
 
-    public void buyProduct(Product product){
+    public boolean canBuyAnyProduct(int amount) {
+        return products.findMinCountsProduct() != EMPTY_STOCK
+                && products.findMinPriceProduct() <= amount;
+    }
+
+    public void buyProduct(Product product) {
         products.buyProduct(product);
     }
 }
