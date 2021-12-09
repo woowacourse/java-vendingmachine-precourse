@@ -34,9 +34,7 @@ public enum Input {
 
 	public void inputMachineAmount() {
 		printer.printMachineAmountNotice();
-
-		Map<Integer, Integer> map = randomBox.getNumOfCoins(Integer.parseInt(readLine()));
-		machineClip.initMachine(map);
+		machineClip.initMachine(randomBox.getNumOfCoins(Integer.parseInt(readLine())));
 	}
 
 	public void inputProducts() {

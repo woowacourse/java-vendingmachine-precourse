@@ -6,7 +6,7 @@ import static vendingmachine.utils.Constant.*;
 
 import java.util.Map;
 
-import vendingmachine.domain.Machine;
+import vendingmachine.domain.MachineClip;
 
 public enum Printer {
 	PRINTER;
@@ -20,25 +20,25 @@ public enum Printer {
 	}
 
 	public void printCustomerAmountNotice(){
-		System.out.println(INPUT_CUSTOMER_AMOUNT);
+		System.out.println(LINE_SEPARATOR + INPUT_CUSTOMER_AMOUNT);
 	}
 
 	public void printCustomerBuyProductNotice(){
 		System.out.println(INPUT_CUSTOMER_BUY_PRODUCT);
 	}
 
-	public void printMachineNumOfCoins() {
-		System.out.println(OUTPUT_MACHINE_NUM_OF_COINS);
-		System.out.println(MACHINE_CLIP);
+	public void printMachineNumOfCoinsNotice(MachineClip machineClip) {
+		System.out.println(LINE_SEPARATOR + OUTPUT_MACHINE_NUM_OF_COINS);
+		System.out.println(machineClip);
 	}
 
 	public void printCustomerCurrentAmount(int amount) {
-		System.out.printf(OUTPUT_CUSTOMER_AMOUNT, amount);
+		System.out.printf(LINE_SEPARATOR + OUTPUT_CUSTOMER_AMOUNT + LINE_SEPARATOR, amount);
 	}
 
 	public void printCustomerChange(Map<Integer, Integer> amountToChanges) {
 		System.out.println(OUTPUT_CUSTOMER_CHANGE);
 		amountToChanges.keySet().stream()
-			.forEach(k -> System.out.printf(OUTPUT_CUSTOMER_NUN_OF_CHANGES, k, amountToChanges.get(k)));
+			.forEach(k -> System.out.printf(OUTPUT_CUSTOMER_NUN_OF_CHANGES + LINE_SEPARATOR, k, amountToChanges.get(k)));
 	}
 }

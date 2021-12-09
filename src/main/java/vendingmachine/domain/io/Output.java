@@ -4,8 +4,6 @@ import static vendingmachine.domain.Machine.*;
 import static vendingmachine.domain.MachineClip.*;
 import static vendingmachine.utils.Printer.*;
 
-import java.util.Map;
-
 import vendingmachine.domain.Machine;
 import vendingmachine.domain.MachineClip;
 import vendingmachine.utils.Printer;
@@ -24,13 +22,13 @@ public enum Output {
 	}
 
 	public void outputMachineNumOfCoins() {
-		printer.printMachineNumOfCoins();
+		printer.printMachineNumOfCoinsNotice(machineClip);
 	}
 
 	public boolean outputCustomerAmount(int min) {
 		printer.printCustomerCurrentAmount(machine.getAmount());
 
-		if(MACHINE.isAmountLessThanProductMinPrice(min)) {
+		if(machine.isAmountLessThanProductMinPrice(min)) {
 			return true;
 		}
 		return false;

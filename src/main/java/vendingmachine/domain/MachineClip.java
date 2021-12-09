@@ -13,43 +13,38 @@ public enum MachineClip {
 	private Map<Integer, Integer> amountToChanges;
 	private int amount;
 
-	MachineClip(){
+	MachineClip() {
 		this.amountToChanges = new HashMap<>();
-		this.numOfCoins = new TreeMap<>((o1,o2)->o2-o1);
+		this.numOfCoins = new TreeMap<>((o1, o2) -> o2 - o1);
 	}
 
-	public void initMachine(Map<Integer, Integer> input) {
-		getCoinStream().forEach(c -> numOfCoins.put(c.getValue(), 0));
-
-		for (int key : input.keySet()) {
-			numOfCoins.put(key, input.get(key));
-		}
+	public void initMachine(Map<Integer, Integer> numOfCoins) {
+		getCoinStream().forEach(c -> this.numOfCoins.put(c.getValue(), 0));
+		numOfCoins.keySet().stream().forEach(k -> this.numOfCoins.put(k, numOfCoins.get(k)));
 	}
 
-	public Map<Integer,Integer> getAmountToChanges(int amount){
+	public Map<Integer, Integer> getAmountToChanges(int amount) {
 		this.amount = amount;
-
-		for (int key : numOfCoins.keySet()) {
-			exchangeAmountToChanges(key);
-		}
+		numOfCoins.keySet().stream().forEach(k -> exchangeAmountToChanges(k));
 		return amountToChanges;
 	}
 
-	private void exchangeAmountToChanges(int key) {
-		if(amount>0 && amount >= key){
-			int c = amount/key;
-			if(c > numOfCoins.get(key)){
-				getAmountToChanges(key, numOfCoins.get(key), numOfCoins.get(key));
+	private void exchangeAmountToChanges(int coinType) {
+		int numOfCoin = numOfCoins.get(coinType);
+		if (amount > 0 && amount >= coinType) {
+			int numOfChangeCoin = amount / coinType;
+			if (numOfChangeCoin > numOfCoin) { // 잔돈으로 반환해야하는 수(numOfChangeCoin)보다 현재 보유코인 갯수(numOfCoin)가 부족할 때
+				getAmountToChanges(coinType, numOfCoin, numOfCoin);
 				return;
 			}
-			getAmountToChanges(key, numOfCoins.get(key), c);
+			getAmountToChanges(coinType, numOfCoin, numOfChangeCoin);
 		}
 	}
 
 	private void getAmountToChanges(int key, int total, int numOfCoin) {
-		amount -= key*numOfCoin;
+		amount -= key * numOfCoin;
 		amountToChanges.put(key, numOfCoin);
-		numOfCoins.put(key, total-numOfCoin);
+		numOfCoins.put(key, total - numOfCoin);
 	}
 
 	@Override
