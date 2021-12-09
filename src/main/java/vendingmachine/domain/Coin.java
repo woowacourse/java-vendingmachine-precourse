@@ -1,17 +1,19 @@
 package vendingmachine.domain;
 
 public enum Coin {
-    COIN_500(500, "500원"),
-    COIN_100(100, "100원"),
-    COIN_50(50, "50원"),
-    COIN_10(10, "10원");
+    COIN_500(500,0),
+    COIN_100(100, 0),
+    COIN_50(50, 0),
+    COIN_10(10, 0);
 
     private final int amount;
-    private final String name;
+    private final String coinUnit = "원 - ";
+    private int count;
+    private final String countUnit = "개";
 
-    Coin(final int amount, final String name) {
+    Coin(final int amount, int count) {
         this.amount = amount;
-        this.name = name;
+        this.count = count;
     }
     // 추가 기능 구현
 
@@ -19,7 +21,12 @@ public enum Coin {
         return amount;
     }
 
-    public String getName() {
-        return name;
+    public void setCount(int count) {
+        this.count = count;
+    }
+
+    @Override
+    public String toString() {
+        return amount + coinUnit + count + countUnit;
     }
 }

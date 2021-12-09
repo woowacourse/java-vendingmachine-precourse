@@ -12,6 +12,10 @@ public class MachineMoney {
         return money;
     }
 
+    public void setMoney(int money) {
+        this.money = money;
+    }
+
     public MachineMoney(String money) throws IllegalArgumentException {
         machineMoneyValidation(money);
         this.money = Integer.parseInt(money);
@@ -45,5 +49,9 @@ public class MachineMoney {
         if (Integer.parseInt(money) % MIN_COIN_UNIT > 0) {
             throw new IllegalArgumentException(ErrorMessage.BIGGER_THAN_MIN_COIN_UNIT.print());
         }
+    }
+
+    public void minusMoney(int num) {
+        money -= num;
     }
 }

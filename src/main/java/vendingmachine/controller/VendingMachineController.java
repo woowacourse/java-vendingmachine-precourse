@@ -22,7 +22,7 @@ public class VendingMachineController {
     }
 
     private void makeRandomCoin(VendingMachine vendingMachine) {
-        vendingMachine.makeRandomCoin();
-        OutputView.printCoinStatus(vendingMachine.getCoinCount());
+        vendingMachine.makeRandomCoinList();
+        OutputView.printCoinStatus(vendingMachine.getCoin());
     }
 }

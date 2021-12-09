@@ -10,11 +10,9 @@ public class OutputView {
         System.out.println(exception.getMessage());
     }
 
-    public static void printCoinStatus(ArrayList<Integer> coinCount) {
-        int i = 0;
-        for (Coin coin : Coin.values()) {
-            System.out.println(coin.getName() + " - " + coinCount.get(i) + "개");
-            i++;
+    public static void printCoinStatus(Coin coin) {
+        for (Coin c : coin.values()) {
+            System.out.println(c.toString());
         }
     }
 }
