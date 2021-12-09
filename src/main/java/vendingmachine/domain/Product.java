@@ -24,7 +24,7 @@ public class Product {
 			throw new IllegalArgumentException(ERROR_MESSAGE + "남은 투입 금액 부족으로 구매할 수 없습니다.");
 		}
 		minusOneForQuantity();
-		return this.price - inputAmount;
+		return inputAmount - this.price;
 	}
 
 	public boolean isNotOutOfQuantity() {
