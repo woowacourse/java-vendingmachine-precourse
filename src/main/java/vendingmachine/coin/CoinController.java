@@ -1,6 +1,8 @@
 package vendingmachine.coin;
 
 
+import vendingmachine.ValidatorMessage;
+
 import java.util.List;
 
 public class CoinController {
@@ -12,13 +14,14 @@ public class CoinController {
     }
 
     public int initCoinsAmount() {
-        int amount = 0;
+        int amount;
         try {
             String inputAmount = CoinInputView.inputAmountByClient();
-            // 검증로직
+            CoinValidator.validateAmount(inputAmount);
             amount = Integer.parseInt(inputAmount);
         } catch (IllegalArgumentException e) {
-            initCoinsAmount();
+            ValidatorMessage.printError(e.getMessage());
+            amount = initCoinsAmount();
         }
         return amount;
     }
