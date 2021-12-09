@@ -23,6 +23,14 @@ public class VendingMachine {
 		coinMap.put(Coin.COIN_10.getAmount(), 0);
 	}
 
+	public int getSumCoinAmount() {
+		int sum = 0;
+		for (Integer i : coinMap.keySet()) {
+			sum += i * coinMap.get(i);
+		}
+		return sum;
+	}
+
 	public void addCoin(int coin) {
 		coinMap.put(coin, coinMap.get(coin) + 1);
 	}
@@ -59,11 +67,10 @@ public class VendingMachine {
 	public boolean checkAllProductAmount() {
 		for (Product product : products) {
 			if (product.getAmount() > 0) {
-				return true;
+				return false;
 			}
 		}
-
-		return false;
+		return true;
 	}
 
 	public Map<Integer, Integer> getCoinMap() {
@@ -72,10 +79,6 @@ public class VendingMachine {
 
 	public int getInputCost() {
 		return inputCost;
-	}
-
-	public List<Product> getProducts() {
-		return products;
 	}
 
 	public void setInputCost(int inputCost) {

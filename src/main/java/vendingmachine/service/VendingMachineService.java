@@ -1,7 +1,9 @@
 package vendingmachine.service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Map;
+import java.util.TreeMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
@@ -15,6 +17,7 @@ public class VendingMachineService {
 
 	private StringBuilder result;
 	private VendingMachine vendingMachine;
+	private int balance;
 
 	private void initVendingMachine() {
 		vendingMachine = new VendingMachine();
@@ -29,7 +32,8 @@ public class VendingMachineService {
 
 		initVendingMachine();
 		makeCoin(Integer.parseInt(inputStr));
-		getCoinInVendingMachine();
+
+		getCoinCount(vendingMachine.getCoinMap());
 		return result.toString();
 	}
 
@@ -42,7 +46,6 @@ public class VendingMachineService {
 		//TODO: Validation 들 처리(inputStr)
 		Validation.validateNull(inputStr);
 		Validation.validateCostIsNumber(inputStr);
-
 
 		result = new StringBuilder();
 		vendingMachine.setInputCost(Integer.parseInt(inputStr));
@@ -60,22 +63,59 @@ public class VendingMachineService {
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
 		printInputCost();
 
-	/*	if(vendingMachine.checkGetBalance()){
+		if (vendingMachine.checkGetBalance()) {
 			return true;
-		}*/
+		}
 		return false;
 	}
 
-	public String getBalance(){
+	public String getBalance() {
 		result = new StringBuilder();
-		result.append(Message.PRINT_BALANCE.getMessage()+'\n');
+		result.append(Message.PRINT_BALANCE.getMessage() + '\n');
+		getMinimumBalance();
 
 		return result.toString();
-
 	}
 
-	private void printInputCost(){
-		ResponseMessage.of('\n'+Message.PRINT_INPUT_COSTS.getMessage()+vendingMachine.getInputCost()+"원");
+	private void getMinimumBalance() {
+		balance = compareInputCostAndCoin();
+
+		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
+		Map<Integer, Integer> balanceMap = new TreeMap<>(Collections.reverseOrder());
+
+		for (Integer i : coinMap.keySet()) {
+			balanceMap = addBalanceMapToValue(i,coinMap.get(i),balanceMap);
+		}
+
+		getCoinCount(balanceMap);
+	}
+
+	private Map<Integer,Integer> addBalanceMapToValue(int key, int value, Map<Integer,Integer> map) {
+		for (int j = 0; j < value; j++) {
+
+			if (balance >= key) {
+				map.put(key, map.getOrDefault(key, 0) + 1);
+				balance -= key;
+			}
+
+			if (balance < key || balance <= 0) {
+				break;
+			}
+		}
+
+		return map;
+	}
+
+	private int compareInputCostAndCoin() {
+		if (vendingMachine.getInputCost() < vendingMachine.getSumCoinAmount()) {
+			return vendingMachine.getSumCoinAmount() - vendingMachine.getInputCost();
+		}
+
+		return vendingMachine.getSumCoinAmount();
+	}
+
+	private void printInputCost() {
+		ResponseMessage.of('\n' + Message.PRINT_INPUT_COSTS.getMessage() + vendingMachine.getInputCost() + "원");
 	}
 
 	private void makeCoin(int cost) {
@@ -93,10 +133,9 @@ public class VendingMachineService {
 		}
 	}
 
-	private void getCoinInVendingMachine(){
-		Map<Integer,Integer> map = vendingMachine.getCoinMap();
+	private void getCoinCount(Map<Integer,Integer> map) {
 		map.keySet().forEach(key -> {
-			result.append(key+"원" + " - " + map.get(key)+"개"+'\n');
+			result.append(key + "원" + " - " + map.get(key) + "개" + '\n');
 		});
 	}
 

@@ -11,5 +11,6 @@ public class VendingMachineClient {
 		vendingMachineController.postProductInfo();
 		vendingMachineController.postInputCosts();
 		vendingMachineController.postProductName();
+		vendingMachineController.getBalance();
 	}
 }
