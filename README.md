@@ -45,6 +45,32 @@
   - 공백이 있는 경우
   - 자판기에 없는 상품을 입력한 경우
 
+
+<br>
+
+### 프로그램 구조도
+```
+vendingmachine
+  - controller
+    - VendingMachineController
+
+  - model
+    - Coin
+    - Product
+    - VendingMachine도
+    
+  - utils
+    - ExceptionUtils
+    - ProductFactory
+    - VendingMachineFactory
+    
+  - view
+    - InputView
+    - OutputView
+
+  - Application
+```
+
 <br>
 
 ### 미션 설명
