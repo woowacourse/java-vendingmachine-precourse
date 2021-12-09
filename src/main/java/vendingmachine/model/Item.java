@@ -23,4 +23,8 @@ public class Item {
 			", quantity=" + quantity +
 			'}';
 	}
+
+	public String getName() {
+		return name;
+	}
 }

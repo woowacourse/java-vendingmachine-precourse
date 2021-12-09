@@ -4,17 +4,28 @@ import java.util.List;
 import vendingmachine.model.Coins;
 import vendingmachine.model.CoinsGenerator;
 import vendingmachine.model.Item;
+import vendingmachine.model.ItemRepository;
 import vendingmachine.reader.ExchangeAmountReader;
 import vendingmachine.reader.InputMoneyReader;
 import vendingmachine.reader.ItemListReader;
+import vendingmachine.reader.PurchaseItemNameReader;
+import vendingmachine.reader.validator.NoopValidator;
 
 public class Application {
 	public static void main(String[] args) {
+		ItemRepository itemRepository = new ItemRepository();
+
 		int amount = ExchangeAmountReader.create().read();
 		Coins coins = generateCoins(amount);
+
 		List<Item> items = ItemListReader.create().read();
+		itemRepository.saveAll(items);
+
 		int inputMoney = InputMoneyReader.create().read();
 		printInputMoney(inputMoney);
+
+		String name = PurchaseItemNameReader.create(itemRepository).read();
+		System.out.println(name);
 	}
 
 	private static Coins generateCoins(int amount) {
