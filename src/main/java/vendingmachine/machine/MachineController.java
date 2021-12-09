@@ -1,7 +1,6 @@
 package vendingmachine.machine;
 
 public class MachineController {
-
     private final Machine machine;
 
     public MachineController() {
@@ -18,5 +17,16 @@ public class MachineController {
             initInputMoney();
         }
         return inputMoney;
+    }
+
+    public String buyWhichProduct() {
+        String buyProductName = "";
+        try {
+            buyProductName = MachineInputView.buyWhichProductByClient();
+            // 검증로직
+        } catch (IllegalArgumentException e) {
+            buyWhichProduct();
+        }
+        return buyProductName;
     }
 }
