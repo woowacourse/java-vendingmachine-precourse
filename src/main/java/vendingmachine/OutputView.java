@@ -1,5 +1,7 @@
 package vendingmachine;
 
 public class OutputView {
-    public static void
+    public static void printResult() {
+
+    }
 }
