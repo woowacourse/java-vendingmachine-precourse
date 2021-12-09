@@ -9,8 +9,12 @@ public class VendingMachine {
         coins = new Coins(amount);
     }
 
-    public void getBalance() {
-        View.printBalance(inputAmount);
+    public void getUserBalance() {
+        View.printUserBalance(inputAmount);
+    }
+
+    public void getCoins() {
+        View.printCoins(coins.exchange(inputAmount));
     }
 
     public void createProduct(String specification) {

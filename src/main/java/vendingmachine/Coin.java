@@ -19,6 +19,10 @@ public enum Coin {
         this.unaryOperator = unaryOperator;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public static Coin mapCoin(int coinAmount) {
         return Arrays.stream(Coin.values()).filter(coin -> coin.amount == coinAmount).findFirst().get();
     }
@@ -29,5 +33,9 @@ public enum Coin {
 
     public Integer calculate(int number) {
         return unaryOperator.apply(number);
+    }
+
+    public boolean isLessThan(int inputAmount) {
+        return this.amount <= inputAmount;
     }
 }

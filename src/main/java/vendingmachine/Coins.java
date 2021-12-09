@@ -5,11 +5,13 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.IntStream;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
-    private final Map<Coin, Integer> coins = new HashMap<>();
+    private final Map<Coin, Integer> coins = new TreeMap<>();
 
     public Coins(String value) {
         int amount = Integer.parseInt(value);
@@ -38,4 +40,21 @@ public class Coins {
         return coins;
     }
 
+    public Map exchange(InputAmount amount) {
+        Map<Coin, Integer> userCoins = new TreeMap<>();
+        final int[] inputAmount = {Integer.parseInt(amount.toString())};
+
+        coins.forEach((coin, count) -> {
+            for (int i = 0; i < count; i++) {
+                if (!coin.isLessThan(inputAmount[0])) {
+                    break;
+                }
+                if (coin.isLessThan(inputAmount[0])) {
+                    inputAmount[0] -= coin.getAmount();
+                    userCoins.put(coin, userCoins.getOrDefault(coin, 0) + 1);
+                }
+            }
+        });
+        return userCoins;
+    }
 }
