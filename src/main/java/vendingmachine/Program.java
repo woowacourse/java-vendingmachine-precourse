@@ -19,9 +19,10 @@ public class Program {
 
 	public void start() {
 		int initialMoney = setInitialMoney();
-		makeRandomCoins(initialMoney);
+		setRandomCoins(initialMoney);
 		setProductList();
 		setUserMoney();
+		buyProduct();
 	}
 
 	private int setInitialMoney() {
@@ -30,7 +31,7 @@ public class Program {
 		return Integer.parseInt(moneyInString);
 	}
 
-	private void makeRandomCoins(int money) {
+	private void setRandomCoins(int money) {
 		while (Coin.isSwappableForCoin(money)) {
 			Coin coin = Coin.random(money);
 			pocket.push(coin);
@@ -54,5 +55,17 @@ public class Program {
 		Message.USER_MONEY_REQUEST.println();
 		String userMoneyInString = Console.readLine();
 		userMoney = Integer.parseInt(userMoneyInString);
+	}
+
+	private void buyProduct() {
+		Message.printLeftMoney(userMoney);
+		Message.PURCHASE_REQUEST.println();
+		String name = Console.readLine();
+		userMoney = table.buy(name, userMoney);
+		if (!table.isAnythingToBuy(userMoney)) {
+			return;
+		}
+
+		buyProduct();
 	}
 }

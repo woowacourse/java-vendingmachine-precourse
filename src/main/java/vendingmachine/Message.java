@@ -7,14 +7,15 @@ import java.util.Set;
 
 public enum Message {
 	INITIAL_MONEY_REQUEST("자판기가 보유하고 있는 금액을 입력해 주세요."),
-	ITEM_REQUEST("상품명과 가격, 수량을 입력해 주세요."),
-	USER_MONEY_REQUEST("투입 금액을 입력해 주세요."),
+	ITEM_REQUEST("\n상품명과 가격, 수량을 입력해 주세요."),
+	USER_MONEY_REQUEST("\n투입 금액을 입력해 주세요."),
 	PURCHASE_REQUEST("구매할 상품명을 입력해 주세요."),
-	INITIAL_COIN_CHANGE_SHOW("자판기가 보유한 동전"),
-	LEFT_MONEY_SHOW("투입 금액:"),
+	INITIAL_COIN_CHANGE_SHOW("\n자판기가 보유한 동전"),
+	LEFT_MONEY_SHOW("\n투입 금액: "),
 	USER_CHANGE_SHOW("잔돈");
 
 	public static final String NUMBER = "개";
+	public static final String LEFT_MONEY_FORMAT = "%s원\n";
 	private final String message;
 
 	Message(final String message) {
@@ -32,10 +33,13 @@ public enum Message {
 	public static void printCoinPocket(CoinPocket pocket) {
 		Set<Map.Entry<Coin, Integer>> pocketInSet = pocket.randomCoins.entrySet();
 		List<String> messageBag = new ArrayList<>();
-
 		pocketInSet.forEach(entry -> messageBag.add(makeCoinMessage(entry)));
-
 		System.out.println(String.join(Constants.LINE_FEED, messageBag));
+	}
+
+	public static void printLeftMoney(int money) {
+		LEFT_MONEY_SHOW.print();
+		System.out.printf(LEFT_MONEY_FORMAT, money);
 	}
 
 	public void print() {

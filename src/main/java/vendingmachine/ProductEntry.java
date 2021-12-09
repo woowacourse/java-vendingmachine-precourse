@@ -9,7 +9,16 @@ public class ProductEntry {
 		this.number = number;
 	}
 
+	public int getPrice() {
+		return this.price;
+	}
+
 	public void decrementNumber() {
 		number--;
 	}
+
+	public boolean isAffordable(int money) {
+		return money >= price;
+	}
+
 }
