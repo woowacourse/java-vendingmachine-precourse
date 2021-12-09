@@ -16,17 +16,17 @@ public class VendingMachineController {
 	                                VendingMachineRepository vendingMachineRepository) {
 		this.itemRepository = itemRepository;
 		this.vendingMachineRepository = vendingMachineRepository;
-		purchaseItemNameReader = PurchaseItemNameReader.recursiveReader(itemRepository);
+		purchaseItemNameReader = PurchaseItemNameReader.recursiveReader(itemRepository, vendingMachineRepository);
 	}
 
 	public void run() {
 		VendingMachine vendingMachine = vendingMachineRepository.find();
 
 		while(true) {
+			System.out.println("투입 금액: " + vendingMachine.getInputMoney());
 			String name = purchaseItemNameReader.read();
 			Item item = itemRepository.findByName(name);
 			vendingMachine.sell(item);
-			System.out.println("투입 금액: " + vendingMachine.getInputMoney());
 		}
 	}
 }

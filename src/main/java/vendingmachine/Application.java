@@ -19,9 +19,11 @@ public class Application {
 	}
 
 	private static VendingMachineController createVendingMachineController() {
-		vendingMachineRepository = createVendingMachineRepository(generateCoins(), createItemRepository(), inputMoney());
-		VendingMachineController controller = new VendingMachineController(itemRepository, vendingMachineRepository);
-		return controller;
+		Coins coins = generateCoins();
+		itemRepository = createItemRepository();
+		int inputMoney = inputMoney();
+		vendingMachineRepository = createVendingMachineRepository(coins, inputMoney);
+		return new VendingMachineController(itemRepository, vendingMachineRepository);
 	}
 
 	private static Coins generateCoins() {
@@ -42,9 +44,9 @@ public class Application {
 		return inputMoney;
 	}
 
-	private static VendingMachineRepository createVendingMachineRepository(Coins coins, ItemRepository itemRepository, int inputMoney) {
+	private static VendingMachineRepository createVendingMachineRepository(Coins coins, int inputMoney) {
 		vendingMachineRepository = new VendingMachineRepository();
-		vendingMachineRepository.save(new VendingMachine(coins, itemRepository, inputMoney));
+		vendingMachineRepository.save(new VendingMachine(coins, inputMoney));
 		return vendingMachineRepository;
 	}
 }

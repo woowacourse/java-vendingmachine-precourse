@@ -6,12 +6,10 @@ import vendingmachine.model.item.ItemRepository;
 
 public class VendingMachine {
 	private final Coins coins;
-	private final ItemRepository itemRepository;
 	private int inputMoney;
 
-	public VendingMachine(Coins coins, ItemRepository itemRepository, int inputMoney) {
+	public VendingMachine(Coins coins, int inputMoney) {
 		this.coins = coins;
-		this.itemRepository = itemRepository;
 		this.inputMoney = inputMoney;
 	}
 
@@ -22,5 +20,9 @@ public class VendingMachine {
 
 	public int getInputMoney() {
 		return inputMoney;
+	}
+
+	public boolean isSalable(Item item) {
+		return item.isSalable(inputMoney);
 	}
 }

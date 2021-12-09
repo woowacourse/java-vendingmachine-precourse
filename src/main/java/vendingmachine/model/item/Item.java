@@ -26,4 +26,16 @@ public class Item {
 	public void sell() {
 		quantity--;
 	}
+
+	public boolean isSalable(int money) {
+		return !isSoldOut() && isUnderAndEqualPrice(money);
+	}
+
+	private boolean isSoldOut() {
+		return quantity == 0;
+	}
+
+	private boolean isUnderAndEqualPrice(int amount) {
+		return price <= amount;
+	}
 }

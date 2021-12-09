@@ -1,7 +1,10 @@
 package vendingmachine.reader;
 
 import vendingmachine.model.item.ItemRepository;
+import vendingmachine.model.machine.VendingMachineRepository;
+import vendingmachine.reader.validator.CompositeValidator;
 import vendingmachine.reader.validator.Validator;
+import vendingmachine.reader.validator.item.NotEnoughMoneyValidator;
 import vendingmachine.reader.validator.item.NotFoundItemValidator;
 
 public class PurchaseItemNameReader extends Reader<String> {
@@ -24,7 +27,9 @@ public class PurchaseItemNameReader extends Reader<String> {
 		return "상품명";
 	}
 
-	public static RecursiveReader<String> recursiveReader(ItemRepository itemRepository) {
-		return new RecursiveReader<>(new PurchaseItemNameReader(new NotFoundItemValidator(itemRepository)));
+	public static RecursiveReader<String> recursiveReader(ItemRepository itemRepository,
+	                                                      VendingMachineRepository vendingMachineRepository) {
+		return new RecursiveReader<>(new PurchaseItemNameReader(new CompositeValidator(new NotFoundItemValidator(itemRepository),
+			new NotEnoughMoneyValidator(itemRepository, vendingMachineRepository))));
 	}
 }
