@@ -13,6 +13,7 @@ public class Input {
 
         try {
             validateVendingMachineAmountIsPositiveNumber(input);
+            validateVendingMachineAmountIsMultipleOf10(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return readVendingMachineHoldingAmount();
@@ -32,6 +33,13 @@ public class Input {
         validateVendingMachineAmountIsNumber(input);
         if (Integer.parseInt(input) < 0) {
             throw new IllegalArgumentException(Constant.VENDING_MACHINE_REQUEST_IS_NOT_POSITIVE_NUMBER_ERROR_STRING);
+        }
+    }
+
+    private void validateVendingMachineAmountIsMultipleOf10(String input) throws IllegalArgumentException {
+        validateVendingMachineAmountIsNumber(input);
+        if (Integer.parseInt(input) % 10 != 0) {
+            throw new IllegalArgumentException(Constant.VENDING_MACHINE_REQUEST_IS_NOT_MULTIPLE_OF_10);
         }
     }
 }
