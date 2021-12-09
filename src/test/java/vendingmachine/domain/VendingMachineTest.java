@@ -8,6 +8,8 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import vendingmachine.utils.CoinGenerator;
+
 class VendingMachineTest {
 
     @ParameterizedTest
@@ -15,6 +17,7 @@ class VendingMachineTest {
     @ValueSource(ints = {0, 10, 100, 180, 20, 2000, 10000, 40000})
     void 자판기_초기_금액_입력_정상(int inputMoney) {
         VendingMachine vm = VendingMachine.makeVendingMachineHasMoney(inputMoney);
+
     }
 
     @ParameterizedTest
