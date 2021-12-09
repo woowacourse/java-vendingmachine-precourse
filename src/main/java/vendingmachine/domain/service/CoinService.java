@@ -1,6 +1,6 @@
 package vendingmachine.domain.service;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -11,13 +11,14 @@ public class CoinService {
 	private static final int ADD_COIN_COUNT = 1;
 	private static final int FIRST_MONEY_END = 0;
 	private final CoinRepository coinRepository = new CoinRepository();
+	private final List<Integer> coinUnit = Arrays.asList(
+		Coin.COIN_500.getAmount(),
+		Coin.COIN_100.getAmount(),
+		Coin.COIN_50.getAmount(),
+		Coin.COIN_10.getAmount()
+	);
 
 	public void createFirstCoins(int firstMoney) {
-		List<Integer> coinUnit = new ArrayList<>();
-		coinUnit.add(Coin.COIN_10.getAmount());
-		coinUnit.add(Coin.COIN_50.getAmount());
-		coinUnit.add(Coin.COIN_100.getAmount());
-		coinUnit.add(Coin.COIN_500.getAmount());
 		while(firstMoney != FIRST_MONEY_END) {
 			int coin = Randoms.pickNumberInList(coinUnit);
 
@@ -30,20 +31,6 @@ public class CoinService {
 	}
 
 	private void addCoin(int coin) {
-		if(coin == Coin.COIN_500.getAmount()) {
-			coinRepository.addCoin(Coin.COIN_500, ADD_COIN_COUNT);
-			return;
-		}
-		if(coin == Coin.COIN_100.getAmount()) {
-			coinRepository.addCoin(Coin.COIN_100, ADD_COIN_COUNT);
-			return;
-		}
-		if(coin == Coin.COIN_50.getAmount()) {
-			coinRepository.addCoin(Coin.COIN_50, ADD_COIN_COUNT);
-			return;
-		}
-		if(coin == Coin.COIN_10.getAmount()) {
-			coinRepository.addCoin(Coin.COIN_10, ADD_COIN_COUNT);
-		}
+		coinRepository.addCoin(Coin.getCoin(coin), ADD_COIN_COUNT);
 	}
 }

@@ -13,6 +13,7 @@ public class VendingMachineController {
 
 	public VendingMachineController() {
 		viewMapper.put(ViewMappingKey.INPUT_FIRST_MONEY, new InputFirstMoneyView());
+
 	}
 
 	public void view(ViewMappingKey key) {

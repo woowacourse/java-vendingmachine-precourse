@@ -16,4 +16,17 @@ public enum Coin {
     public int getAmount() {
         return amount;
     }
+
+    public static Coin getCoin(int coinUnit) {
+        if(coinUnit == COIN_500.getAmount())
+            return COIN_500;
+        if(coinUnit == COIN_100.getAmount())
+            return COIN_100;
+        if(coinUnit == COIN_50.getAmount())
+            return COIN_50;
+        if(coinUnit == COIN_10.getAmount())
+            return COIN_10;
+
+        return null;
+    }
 }
