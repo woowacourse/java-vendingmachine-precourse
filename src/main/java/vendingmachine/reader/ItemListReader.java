@@ -37,11 +37,11 @@ public class ItemListReader extends Reader<List<Item>> {
 			.collect(toList());
 	}
 
-	public static ItemListReader create() {
+	public static RecursiveReader<List<Item>> recursiveReader() {
 		ItemLineParser parser = new ItemLineParser();
-		return new ItemListReader(
+		return new RecursiveReader<>(new ItemListReader(
 			new CompositeValidator(new CountOfItemInformationValidator(parser),
 				new WrappedEachItemWithBracketValidator(parser),
-				new ItemPriceAndQuantityValidator(parser)));
+				new ItemPriceAndQuantityValidator(parser))));
 	}
 }

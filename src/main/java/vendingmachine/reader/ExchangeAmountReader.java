@@ -25,7 +25,7 @@ public class ExchangeAmountReader extends Reader<Integer>{
 		return "금액";
 	}
 
-	public static ExchangeAmountReader create() {
-		return new ExchangeAmountReader(new CompositeValidator(new NumberFormatValidator(), new TenTimesNumberValidator()));
+	public static RecursiveReader<Integer> recursiveReader() {
+		return new RecursiveReader<>(new ExchangeAmountReader(new CompositeValidator(new NumberFormatValidator(), new TenTimesNumberValidator())));
 	}
 }

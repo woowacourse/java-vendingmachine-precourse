@@ -10,14 +10,14 @@ import vendingmachine.reader.ExchangeAmountReader;
 import vendingmachine.reader.InputMoneyReader;
 import vendingmachine.reader.ItemListReader;
 import vendingmachine.reader.PurchaseItemNameReader;
-import vendingmachine.reader.Reader;
+import vendingmachine.reader.RecursiveReader;
 
 public class VendingMachineController {
 	private final ItemRepository itemRepository = new ItemRepository();
-	private final Reader<Integer> exchangeAmountReader = ExchangeAmountReader.create();
-	private final Reader<List<Item>> itemListReader = ItemListReader.create();
-	private final Reader<Integer> inputMoneyReader = InputMoneyReader.create();
-	private final Reader<String> purchaseItemNameReader = PurchaseItemNameReader.create(itemRepository);
+	private final RecursiveReader<Integer> exchangeAmountReader = ExchangeAmountReader.recursiveReader();
+	private final RecursiveReader<List<Item>> itemListReader = ItemListReader.recursiveReader();
+	private final RecursiveReader<Integer> inputMoneyReader = InputMoneyReader.recursiveReader();
+	private final RecursiveReader<String> purchaseItemNameReader = PurchaseItemNameReader.recursiveReader(itemRepository);
 	private VendingMachine vendingMachine;
 
 	public void run() {
@@ -26,23 +26,14 @@ public class VendingMachineController {
 	}
 
 	private void init() {
-		int exchangeAmount = inputExchangeAmount();
+		int exchangeAmount = exchangeAmountReader.read();
 		Coins coins = generateCoins(exchangeAmount);
 		saveItems();
 
-		int inputMoney = inputMoney();
+		int inputMoney = inputMoneyReader.read();
 		printInputMoney(inputMoney);
 
 		vendingMachine = new VendingMachine(coins, itemRepository, inputMoney);
-	}
-
-	private int inputExchangeAmount() {
-		try {
-			return exchangeAmountReader.read();
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return inputExchangeAmount();
-		}
 	}
 
 	private Coins generateCoins(int amount) {
@@ -57,25 +48,7 @@ public class VendingMachineController {
 	}
 
 	private void saveItems() {
-		itemRepository.saveAll(inputItems());
-	}
-
-	private List<Item> inputItems() {
-		try {
-			return itemListReader.read();
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return inputItems();
-		}
-	}
-
-	private int inputMoney() {
-		try {
-			return inputMoneyReader.read();
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return inputMoney();
-		}
+		itemRepository.saveAll(itemListReader.read());
 	}
 
 	private void printInputMoney(int inputMoney) {
