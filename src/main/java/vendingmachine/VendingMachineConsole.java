@@ -5,12 +5,12 @@ import vendingmachine.inputvalue.CoinBalanceInputValue;
 import vendingmachine.inputvalue.ItemsInventoryInputValue;
 
 public class VendingMachineConsole {
-    public CoinBalanceInputValue inputCoinBalance() {
-        return new CoinBalanceInputValue(input());
+    public int inputCoinBalance() {
+        return new CoinBalanceInputValue(input()).toCoinBalance();
     }
 
-    public ItemsInventoryInputValue inputItemInventoryList() {
-        return new ItemsInventoryInputValue(input());
+    public ItemsInventoryInfo inputItemInventoryInfo() {
+        return new ItemsInventoryInputValue(input()).toItemsInventoryInfo();
     }
 
     private String input() {

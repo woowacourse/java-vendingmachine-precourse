@@ -7,26 +7,24 @@ public class VendingMachineController {
     private final VendingMachineConsole console = new VendingMachineConsole();
 
     public void on() {
-        boolean isAllInputEntered = false;
-        while (!isAllInputEntered) {
+        boolean isCoinBalanceInputEntered = false;
+        while (!isCoinBalanceInputEntered) {
             try {
                 inputCoinBalance();
-                isAllInputEntered = true;
+                isCoinBalanceInputEntered = true;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
+
+
     }
 
     private int inputCoinBalance() {
-        return inputCoinBalanceInputValue().toCoinBalance();
-    }
-
-    private CoinBalanceInputValue inputCoinBalanceInputValue() {
         return console.inputCoinBalance();
     }
 
-    private ItemsInventoryInputValue inputItemInfoInputValue() {
-        return console.inputItemInventoryList();
+    private ItemsInventoryInfo inputItemsInventoryInfo() {
+        return console.inputItemInventoryInfo();
     }
 }
