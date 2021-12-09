@@ -11,9 +11,11 @@ import camp.nextstep.edu.missionutils.Console;
  */
 public class Machine {
 	private Display display;
+	private Validator validator;
 
 	public Machine() {
 		this.display = new Display();
+		this.validator = new Validator();
 	}
 
 	public void run() {
@@ -21,7 +23,16 @@ public class Machine {
 	}
 
 	private void prepareCoins() {
+		int holdingAmount = askHoldingAmount();
+	}
+
+	private int askHoldingAmount() {
 		display.askHoldingAmount();
-		Console.readLine();
+		try {
+			return validator.validateAmountInput(Console.readLine());
+		} catch (IllegalArgumentException e) {
+			display.printError(e);
+			return askHoldingAmount();
+		}
 	}
 }
