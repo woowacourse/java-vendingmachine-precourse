@@ -12,6 +12,10 @@ public class VendingMachine {
 		coinCounts = new LinkedHashMap<>();
 	}
 
+	public Merchandises getMerchandises() {
+		return merchandises;
+	}
+
 	public LinkedHashMap<Coin,Integer> saveCoinStatus() {
 		int tempMoney = money.getMoney();
 		for (Coin coinValue : Coin.values()) {

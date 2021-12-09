@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Objects;
+
 public class Merchandise {
 	private String name;
 	private Money money;
@@ -9,5 +11,13 @@ public class Merchandise {
 		this.name = name;
 		this.money = money;
 		this.quantity = quantity;
+	}
+
+	public Money getMoney() {
+		return money;
+	}
+
+	public String getName() {
+		return name;
 	}
 }

@@ -12,4 +12,13 @@ public class Merchandises {
 	public List<Merchandise> getMerchandiseList() {
 		return merchandiseList;
 	}
+
+	public Merchandise selectMerchandise(String merchandiseName) {
+		for (Merchandise merchandise : merchandiseList) {
+			if (merchandise.getName().equals(merchandiseName)) {
+				return merchandise;
+			}
+		}
+		return null;
+	}
 }
