@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 public enum Machine {
 	MACHINE;
@@ -9,11 +9,11 @@ public enum Machine {
 		this.amount = amount;
 	}
 
-	public int getMachineAmount(){
+	public int getAmount(){
 		return amount;
 	}
 
-	public void changeMachineAmount(int productPrice){
+	public void changeAmount(int productPrice){
 		amount -= productPrice;
 	}
 }

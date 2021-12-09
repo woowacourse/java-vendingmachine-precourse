@@ -1,7 +1,7 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 import static camp.nextstep.edu.missionutils.Randoms.*;
-import static vendingmachine.Coin.*;
+import static vendingmachine.domain.Coin.*;
 
 import java.util.Map;
 import java.util.TreeMap;
@@ -15,15 +15,10 @@ public enum RandomBox {
 			int num = pickNumberInList(COIN_LIST);
 			if (amount >= num) {
 				amount -= num;
-				// System.out.println(num+" -- " + amount);
 				coins.put(num, coins.getOrDefault(num,0)+1);
 			}
 		}
 
-		// System.out.println("----");
-		// for(int key : coins.keySet()){
-		// 	System.out.println(key +" - " + coins.get(key));
-		// }
 		return coins;
 	}
 }

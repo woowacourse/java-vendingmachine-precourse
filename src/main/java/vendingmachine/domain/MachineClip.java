@@ -1,13 +1,13 @@
-package vendingmachine;
+package vendingmachine.domain;
 
-import static vendingmachine.Coin.*;
+import static vendingmachine.domain.Coin.*;
 
 import java.util.Map;
 import java.util.TreeMap;
 
 public enum MachineClip {
 	MACHINE_CLIP;
-	private static Map<Integer, Integer> numOfCoins;
+	private Map<Integer, Integer> numOfCoins;
 
 	public void initMachine(Map<Integer, Integer> input) {
 		numOfCoins = new TreeMap<Integer, Integer>((o1,o2)->o2-o1) {
@@ -29,7 +29,7 @@ public enum MachineClip {
 
 	public void getChange(int amount){
 		for (int key : numOfCoins.keySet()) {
-			if(amount>0 && amount > key){
+			if(amount>0 && amount >= key){
 				int c = amount/key;
 				if(c > numOfCoins.get(key)){
 					amount -= key*numOfCoins.get(key);
