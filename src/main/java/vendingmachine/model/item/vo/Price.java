@@ -1,6 +1,7 @@
 package vendingmachine.model.item.vo;
 
 import static vendingmachine.exception.ExceptionMessage.*;
+import static vendingmachine.validation.NumberValidator.isNotMultipleOfTen;
 import static vendingmachine.validation.NumberValidator.isNotPositiveInteger;
 
 import java.util.Objects;
@@ -24,7 +25,7 @@ public class Price {
     }
 
     private void validateMultipleOfTen(final int value) {
-        if (value % 10 != 0) {
+        if (isNotMultipleOfTen(value)) {
             throw new IllegalArgumentException(NOT_MULTIPLE_OF_TEN_PRICE_EXCEPTION_MESSAGE);
         }
     }

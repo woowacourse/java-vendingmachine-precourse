@@ -14,4 +14,12 @@ class NumberValidatorTest {
         boolean actual = NumberValidator.isNotPositiveInteger(given);
         assertThat(actual).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @DisplayName("10의 배수가 아니면 true, 10의 배수면 false를 반환한다.")
+    @CsvSource({"21, true", "30, false"})
+    void isNotMultipleOfTen(final int value, final boolean expected) {
+        boolean actual = NumberValidator.isNotMultipleOfTen(value);
+        assertThat(actual).isEqualTo(expected);
+    }
 }

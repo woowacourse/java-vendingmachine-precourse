@@ -9,4 +9,8 @@ public class NumberValidator {
     public static boolean isNotPositiveInteger(String value) {
         return !value.matches(NOT_NEGATIVE_INTEGER_REGEX) || value.equals("0");
     }
+
+    public static boolean isNotMultipleOfTen(int value) {
+        return value % 10 != 0;
+    }
 }
