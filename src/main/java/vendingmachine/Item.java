@@ -8,17 +8,11 @@ package vendingmachine;
  * @since 1.0
  */
 public class Item {
-	private final String name;
 	private final int price;
 	private int count;
 
-	public Item(String name, int price, int count) {
-		this.name = name;
+	public Item(int price, int count) {
 		this.price = price;
 		this.count = count;
-	}
-
-	public boolean isName(String name) {
-		return this.name.equals(name);
 	}
 }

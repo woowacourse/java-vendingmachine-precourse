@@ -7,7 +7,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberI
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
+import java.util.Map;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -44,8 +44,8 @@ class ApplicationTest extends NsTest {
     @Test
     void 아이템_목록_생성_테스트() {
         ItemParser itemParser = new ItemParser();
-        List<Item> itemList = itemParser.stringToItemList("[콜라,1000,10];[사이다,1200,15]");
-        assertThat(itemList.get(0).isName("콜라")).isEqualTo(true);
+        Map<String, Item> items = itemParser.stringToItems("[콜라,1000,10];[사이다,1200,15]");
+        assertThat(items.get("콜라")).isInstanceOf(Item.class);
     }
 
     @Override

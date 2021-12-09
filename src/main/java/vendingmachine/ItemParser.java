@@ -1,7 +1,7 @@
 package vendingmachine;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 값을 분석해서 Item 객체를 만드는 model class
@@ -11,21 +11,33 @@ import java.util.List;
  * @since 1.0
  */
 public class ItemParser {
-	public Item stringToItem(String string) {
-		String[] itemProperties = removeSquareBracket(string).split(",");
-		//TODO: 입력값에 대한 예외 검사
-		return new Item(itemProperties[0],
-			Integer.parseInt(itemProperties[1]),
-			Integer.parseInt(itemProperties[2]));
+	private Validator validator;
+
+	private static final String ITEM_SEPARATOR = ";";
+	private static final String PROPERTY_SEPARATOR = ",";
+
+	private static final int NAME_INDEX = 0;
+	private static final int PRICE_INDEX = 1;
+	private static final int COUNT_INDEX = 2;
+
+	public ItemParser() {
+		this.validator = new Validator();
 	}
 
-	public List<Item> stringToItemList(String string) {
-		List<Item> itemList = new ArrayList<>();
-		String[] stringItems = string.split(";");
+	public Map<String, Item> stringToItems(String string) {
+		Map<String, Item> items = new HashMap<>();
+		String[] stringItems = string.split(ITEM_SEPARATOR);
 		for (String stringItem : stringItems) {
-			itemList.add(stringToItem(stringItem));
+			String[] properties = removeSquareBracket(stringItem).split(PROPERTY_SEPARATOR);
+			Item item = propertiesToItem(properties);
+			items.put(validator.validateNewItemName(items, properties[NAME_INDEX]), item);
 		}
-		return itemList;
+		return items;
+	}
+
+	private Item propertiesToItem(String[] properties) {
+		return new Item(validator.validateItemPrice(properties[PRICE_INDEX]),
+			validator.validateItemCount(properties[COUNT_INDEX]));
 	}
 
 	private String removeSquareBracket(String stringItem) {
