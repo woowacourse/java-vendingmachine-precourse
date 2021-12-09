@@ -1,7 +1,6 @@
 package vendingmachine.Model;
 
 import java.util.Arrays;
-import java.util.stream.Stream;
 
 import vendingmachine.Constants;
 
@@ -28,6 +27,7 @@ public class ProductValidator {
 		String[] productNames = Arrays
 			.stream(PRODUCT_STRING.split(";"))
 			.map(product -> product.split(",")[0]).toArray(String[]::new);
+
 		if (productNames.length != Arrays.stream(productNames).distinct().count()) {
 			throw new IllegalArgumentException(Constants.ERROR);
 		}

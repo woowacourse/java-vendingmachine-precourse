@@ -228,7 +228,7 @@ class InputTest extends NsTest {
 	void 투입금액_받기_예외0() {
 		assertSimpleTest(
 			() -> {
-				runException("450", "[콜라,900,10]","0");
+				runException("450", "[콜라,900,10]", "0");
 				assertThat(output()).contains(
 					ERROR_MESSAGE
 				);
@@ -240,7 +240,7 @@ class InputTest extends NsTest {
 	void 투입금액_받기_예외01() {
 		assertSimpleTest(
 			() -> {
-				runException("450", "[콜라,900,10]","01");
+				runException("450", "[콜라,900,10]", "01");
 				assertThat(output()).contains(
 					ERROR_MESSAGE
 				);
@@ -252,7 +252,7 @@ class InputTest extends NsTest {
 	void 투입금액_받기_예외90() {
 		assertSimpleTest(
 			() -> {
-				runException("450", "[콜라,900,10]","90");
+				runException("450", "[콜라,900,10]", "90");
 				assertThat(output()).contains(
 					ERROR_MESSAGE
 				);
@@ -264,7 +264,7 @@ class InputTest extends NsTest {
 	void 투입금액_받기_예외101() {
 		assertSimpleTest(
 			() -> {
-				runException("450", "[콜라,900,10]","101");
+				runException("450", "[콜라,900,10]", "101");
 				assertThat(output()).contains(
 					ERROR_MESSAGE
 				);
@@ -276,10 +276,46 @@ class InputTest extends NsTest {
 	void 투입금액_받기_100() {
 		assertSimpleTest(
 			() -> {
-				runException("450", "[콜라,900,10]","100");
+				runException("450", "[콜라,900,10]", "100");
 				assertThat(output()).doesNotContain(
 					ERROR_MESSAGE
 				).contains("투입 금액: 100원");
+			}
+		);
+	}
+
+	@Test
+	void 구매상품명_받기_예외_안에없음() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,900,10]", "1000", "환타");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 구매상품명_받기_예외_특수문자() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,900,10]", "1000", ",");
+				assertThat(output()).contains(
+					ERROR_MESSAGE
+				);
+			}
+		);
+	}
+
+	@Test
+	void 구매상품명_받기() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,900,10]", "1000", "콜라");
+				assertThat(output()).doesNotContain(
+					ERROR_MESSAGE
+				);
 			}
 		);
 	}

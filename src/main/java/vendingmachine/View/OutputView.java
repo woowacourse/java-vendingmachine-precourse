@@ -10,9 +10,14 @@ public class OutputView {
 		for (Coin coin : coins.keySet()) {
 			System.out.printf("%s원 - %d개%n", coin.getAmount(), coins.get(coin));
 		}
+		System.out.println();
 	}
 
 	public static void printUserMoney(int money) {
-		System.out.printf("투입 금액: %d원", money);
+		System.out.printf("투입 금액: %d원%n", money);
+	}
+
+	public static void printEmpty() {
+		System.out.println();
 	}
 }

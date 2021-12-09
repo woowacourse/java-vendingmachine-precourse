@@ -15,6 +15,7 @@ public class Constants {
 		NAME_REGEX + DELIMITER_PRODUCT + MONEY_REGEX + DELIMITER_PRODUCT + NUMBER_REGEX;
 
 	public static final Pattern MONEY_PATTERN = Pattern.compile("^" + MONEY_REGEX + "$");
+	public static final Pattern NAME_PATTERN = Pattern.compile("^" + NAME_REGEX + "$");
 	public static final Pattern PRODUCT_PATTERN = Pattern.compile(
 		"^" + "(" + DELIMITER_PRODUCT_BOXER[0] + PRODUCT_REGEX + DELIMITER_PRODUCT_BOXER[1] + ")"
 			+ "(" + DELIMITER_PRODUCTS

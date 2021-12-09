@@ -1,7 +1,7 @@
 package vendingmachine.Model;
 
 public class Product {
-	private final String NAME;
+	public final String NAME;
 	private final int PRICE;
 	private final int STOCK;
 
