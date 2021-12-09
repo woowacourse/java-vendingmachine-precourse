@@ -2,10 +2,12 @@ package vendingmachine;
 
 public class ValidatorMessage {
     public static final String ERROR_MESSAGE = "[ERROR] ";
+    public static final String NUMBER_REGEX="^(0|[1-9][0-9]*)$";
+    public static final String NATURAL_NUMBER_REGEX="^[1-9][0-9]*$";
 
     public static final String NULL_PRODUCT_MESSAGE = "존재하지 않는 상품입니다.";
     public static final String NOT_ENOUGH_AMOUNT = "잔액이 부족합니다.";
-    public static final String IS_POSITIVE_NUMBER_MESSAGE="숫자를 입력해주세요.";
+    public static final String IS_POSITIVE_NUMBER_MESSAGE="음수나 소수점, 단위가 없는 숫자로만 입력해주세요.";
     public static final String IS_NATURAL_NUMBER_MESSAGE="자연수로 입력해주세요.";
 
     public static final String AMOUNT_TENFOLD_NUMBER_MESSAGE="보유 금액은 0을 제외한 10의 배수여야 합니다.";
