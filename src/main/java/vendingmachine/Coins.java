@@ -34,11 +34,8 @@ public class Coins {
         return Collections.singletonList(10);
     }
 
-    void getCoin() {
-        coins.entrySet().stream().forEach(e -> {
-            System.out.println(e.getKey());
-            System.out.println(e.getValue());
-            System.out.println();
-        });
+    public Map getCoins() {
+        return coins;
     }
+
 }
