@@ -17,6 +17,9 @@ public class Beverages {
 
     private List<Beverage> beverageList = new ArrayList<>();
 
+    Beverages() {
+    }
+
     public List<Beverage> getBeverageList() {
         return beverageList;
     }

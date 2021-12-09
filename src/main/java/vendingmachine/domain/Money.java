@@ -6,7 +6,7 @@ public class Money {
     public static final String PRINT_WON = "원";
     private int price;
 
-    public Money(int price) {
+    Money(int price) {
         this.price = price;
     }
 

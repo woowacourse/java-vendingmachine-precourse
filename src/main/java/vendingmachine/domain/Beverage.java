@@ -9,7 +9,7 @@ public class Beverage {
     private int price;
     private int count;
 
-    public Beverage(String productName, int price, int count) {
+    Beverage(String productName, int price, int count) {
         this.productName = productName;
         this.price = price;
         this.count = count;

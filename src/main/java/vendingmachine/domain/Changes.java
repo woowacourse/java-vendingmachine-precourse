@@ -14,7 +14,7 @@ public class Changes {
     private Map<Coin, Integer> coinMap = new TreeMap<>();
     private int totalChanges;
 
-    public Changes(int totalChanges) {
+    Changes(int totalChanges) {
         this.totalChanges = totalChanges;
         initCoinMap();
     }
