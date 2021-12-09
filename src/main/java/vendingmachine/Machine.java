@@ -17,6 +17,9 @@ public class Machine {
 	private final Cashier cashier;
 	private final ItemParser itemParser;
 
+	private Map<String, Item> items;
+	private int insertAmount;
+
 	public Machine() {
 		this.display = new Display();
 		this.validator = new Validator();
@@ -27,6 +30,8 @@ public class Machine {
 	public void run() {
 		prepareCoins();
 		prepareItems();
+		prepareInsertAmount();
+		//TODO: 투입 금액이 상품의 최저가격보다 적으면 잔돈을 반환한다
 	}
 
 	private void prepareCoins() {
@@ -37,7 +42,23 @@ public class Machine {
 	}
 
 	private void prepareItems() {
-		askItems();
+		this.items = askItems();
+		display.printBlankLine();
+	}
+
+	private void prepareInsertAmount() {
+		this.insertAmount = askInsertAmount();
+		display.printBlankLine();
+	}
+
+	private int askInsertAmount() {
+		display.askInsertAmount();
+		try {
+			return validator.validateAmount(Console.readLine());
+		} catch (IllegalArgumentException e) {
+			display.printError(e);
+			return askInsertAmount();
+		}
 	}
 
 	private int askHoldingAmount() {
