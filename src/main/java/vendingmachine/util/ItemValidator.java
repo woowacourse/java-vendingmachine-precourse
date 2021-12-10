@@ -49,7 +49,8 @@ public class ItemValidator {
 		int price = validatePrice((String)result.get(PRICE_INDEX));
 		result.set(PRICE_INDEX, price);
 
-		result.set(AMOUNT_INDEX, Integer.parseInt((String)result.get(AMOUNT_INDEX)));
+		int amount = validateAmount((String)result.get(AMOUNT_INDEX));
+		result.set(AMOUNT_INDEX, amount);
 
 		return result;
 	}
@@ -87,5 +88,13 @@ public class ItemValidator {
 
 	private static boolean isMultipleOf10(int number) {
 		return number % 10 == 0;
+	}
+
+	private static int validateAmount(String amountStr) {
+		if(!isInteger(amountStr))
+			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_INTEGER);
+		int amount = Integer.parseInt(amountStr);
+
+		return amount;
 	}
 }

@@ -14,4 +14,5 @@ public class SystemMessage {
 	public static final String ERROR_PRICE_IS_NOT_INTEGER = ERROR + " 상품가격은 숫자로 입력해야 합니다.";
 	public static final String ERROR_PRICE_MIN = ERROR + " 상품가격은 최소 100 이상을 입력해야 합니다.";
 	public static final String ERROR_PRICE_IS_NOT_MULTIPLE_OF_10 = ERROR + " 상품가격은 10의 배수를 입력해야 합니다.";
+	public static final String ERROR_AMOUNT_IS_NOT_INTEGER = ERROR + " 상품 수량은 숫자로 입력해야 합니다.";
 }
