@@ -14,8 +14,7 @@ public class InputView {
 
 	public static Money getHavingMoney() {
 		System.out.println(INPUT_HAVING_MONEY);
-		int money = InputValidator.checkNumberForm(Console.readLine(), PRICE);
-		return new Money(money);
+		return new Money(InputValidator.checkNumberForm(Console.readLine(), PRICE));
 
 	}
 
