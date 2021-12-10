@@ -17,7 +17,7 @@ public class CoinRepository { // 1급 콜렉션
         StringBuffer sb = new StringBuffer();
         coinRepository.keySet()
             .stream()
-            .forEach(coin -> sb.append(coin.getAmount() + "원 - " + coinRepository.get(coin) + "개"));
+            .forEach(coin -> sb.append(coin.getAmount() + "원 - " + coinRepository.get(coin) + "개\n"));
         return sb.toString();
     }
 
