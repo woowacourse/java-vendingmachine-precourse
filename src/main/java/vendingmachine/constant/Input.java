@@ -6,9 +6,9 @@ public enum Input {
     CLOSE_BRACKET("]"),
     COMMA(","),
 
-    MONEY_GUIDE_MESSAGE("자판기가 보유하고 있는 금액을 입력해 주세요."),
-    MONEY_DIGIT_ERROR_MESSAGE("[ERROR] 금액은 숫자만 입력하실 수 있습니다."),
-    MONEY_LENGTH_0_ERROR_MESSAGE("[ERROR] 1자리 이상의 숫자를 입력해주세요."),
+    COIN_MONEY_GUIDE_MESSAGE("자판기가 보유하고 있는 금액을 입력해 주세요."),
+    COIN_MONEY_DIGIT_ERROR_MESSAGE("[ERROR] 금액은 숫자만 입력하실 수 있습니다."),
+    COIN_MONEY_LENGTH_0_ERROR_MESSAGE("[ERROR] 1자리 이상의 숫자를 입력해주세요."),
 
     PRODUCT_GUIDE_MESSAGE("상품명과 가격, 수량을 입력해 주세요."),
     ONLY_SEMICOLON_ERROR_MESSAGE("[ERROR] 세미콜론(;)만 입력하실 수 없습니다. 상품을 추가해주세요."),
@@ -23,7 +23,11 @@ public enum Input {
     PRODUCT_MINIMUM_COST_ERROR_MESSAGE("[ERROR] 상품가격은 10의 배수이어야 합니다."),
     PRODUCTS_SEMICOLON_ERROR_MESSAGE("[ERROR] 각 상품은 세미콜론(;)으로 구분해서 입력해주세요."),
     PRODUCT_AMOUNT_BLANK_ERROR_MESSAGE("[ERROR] 상품 가격을 입력해주세요."),
-    PRODUCT_AMOUNT_DIGIT_ERROR_MESSAGE("[ERROR] 상품가격은 숫자만 입력하셔야 합니다.");
+    PRODUCT_AMOUNT_DIGIT_ERROR_MESSAGE("[ERROR] 상품가격은 숫자만 입력하셔야 합니다."),
+
+    PURCHASE_MONEY_GUIDE_MESSAGE("투입 금액을 입력해 주세요."),
+    PURCHASE_MONEY_DIGIT_ERROR_MESSAGE("[ERROR] 금액은 숫자만 입력하실 수 있습니다."),
+    PURCHASE_MONEY_LENGTH_0_ERROR_MESSAGE("[ERROR] 1자리 이상의 숫자를 입력해주세요.");
 
     private final String text;
 

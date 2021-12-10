@@ -9,11 +9,13 @@ public class VendingMachine {
 
     public void start() {
         MoneyInputView moneyInputView = new MoneyInputView();
-        Integer money = moneyInputView.inputMoneyForMakeCoin();
+        Integer moneyForCoin = moneyInputView.inputMoneyForMakeCoin();
         RandomCoinMaker randomCoinMaker = RandomCoinMaker.getInstance();
-        HashMap<Integer, Integer> coinMap = randomCoinMaker.makeCoin(money);
+        HashMap<Integer, Integer> coinMap = randomCoinMaker.makeCoin(moneyForCoin);
 
         ProductInputView productInputView = new ProductInputView();
         productInputView.inputProducts();
+
+        Integer moneyForPurchase = moneyInputView.inputMoneyForPurchase();
     }
 }
