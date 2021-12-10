@@ -81,5 +81,23 @@ class ItemsTest {
         assertThat(items.findLowestPriceInStock()).isEqualTo(targetPrice);
     }
 
+    @Test
+    void 모든_상품이_재고가_없는_것을_확인() {
+        Items items = new Items();
+        items.add(new Item("itemNotInStock", 0), 0);
+        items.add(new Item("itemMoreExpensive", 15), 0);
+
+        assertThat(items.isEmptyItems()).isTrue();
+    }
+
+    @Test
+    void 재고가_하나라도_있음을_확인() {
+        Items items = new Items();
+        items.add(new Item("itemNotInStock", 0), 1);
+        items.add(new Item("itemMoreExpensive", 15), 0);
+
+        assertThat(items.isEmptyItems()).isFalse();
+    }
+
 
 }

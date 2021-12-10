@@ -42,4 +42,11 @@ public class Items {
                 .orElse(0);
     }
 
+    public boolean isEmptyItems() {
+        Optional<Integer> itemsInStock = items.values().stream().filter(quantity -> quantity > 0).findAny();
+        if(itemsInStock.isPresent()) {
+            return false;
+        }
+        return true;
+    }
 }

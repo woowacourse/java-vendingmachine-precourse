@@ -43,8 +43,7 @@ public class VendingMachine {
     }
 
     public boolean isPurchaseAvailable() {
-        int minimumPrice = items.findLowestPriceInStock();
-        if (moneyAvailable < minimumPrice) {
+        if(!isMoreMoneyThanLowestPriceInStock() || isAllItemsSoldOut()) {
             return false;
         }
         return true;
@@ -59,6 +58,18 @@ public class VendingMachine {
     private void purchase(Item item) {
         items.reduce(item);
         moneyAvailable -= item.getPrice();
+    }
+
+    private boolean isMoreMoneyThanLowestPriceInStock() {
+        int minimumPrice = items.findLowestPriceInStock();
+        if (moneyAvailable < minimumPrice) {
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isAllItemsSoldOut() {
+        return items.isEmptyItems();
     }
 
     private Item findItem(String itemName) {
@@ -78,5 +89,4 @@ public class VendingMachine {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE);
         }
     }
-
 }
