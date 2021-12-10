@@ -67,4 +67,19 @@ class ItemsTest {
 
         assertThat(items.countItems(item)).isEqualTo(quantity-1);
     }
+
+    @Test
+    void 재고가_있는_상품_중_가장_낮은_가격을_찾아낼_수_있다() {
+        Items items = new Items();
+        int targetPrice = 10;
+        Item item = new Item("item", targetPrice);
+        int quantity = 5;
+        items.add(item, quantity);
+        items.add(new Item("itemNotInStock", 0), 0);
+        items.add(new Item("itemMoreExpensive", 15), 1);
+
+        assertThat(items.findLowestPriceInStock()).isEqualTo(targetPrice);
+    }
+
+
 }

@@ -32,4 +32,14 @@ public class Items {
     public void reduce(Item itemToReduce) {
         items.computeIfPresent(itemToReduce, (item, quantity) -> --quantity);
     }
+
+    public int findLowestPriceInStock() {
+        return items.keySet().stream()
+                .filter(item -> items.get(item) > 0)
+                .map(Item::getPrice)
+                .sorted()
+                .findFirst()
+                .orElse(0);
+    }
+
 }

@@ -15,6 +15,10 @@ public class Item {
         return name;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public boolean isMoreExpensiveItemThanMoneyLeft(int moneyAvailable) {
         if(price > moneyAvailable) {
             return true;
