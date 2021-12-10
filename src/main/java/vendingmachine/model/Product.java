@@ -16,5 +16,7 @@ public class Product {
 
 		name = NameException.checkNameException(productInfo[0]);
 		price = NumberException.checkMoneyException(productInfo[1]);
+		quantity = NumberException.checkQuantityException(productInfo[2]);
 	}
+	
 }

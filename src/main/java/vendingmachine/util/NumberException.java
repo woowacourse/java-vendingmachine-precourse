@@ -57,4 +57,17 @@ public class NumberException {
 		return price;
 	}
 
+	public static int checkQuantityException(String quantityStr) {
+		int quantity;
+		try {
+			quantity = Integer.parseInt(quantityStr);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(ErrorMessage.NOT_NUMBER_QUANTITY_MESSAGE);
+		}
+
+		if (!checkPositiveNumberMoneyException(quantity)) {
+			throw new IllegalArgumentException(ErrorMessage.NOT_POSITIVE_NUMBER_QUANTITY_MESSAGE);
+		}
+	}
+
 }
