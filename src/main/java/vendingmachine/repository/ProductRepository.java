@@ -13,6 +13,7 @@ public class ProductRepository {
     public void clear() {
         productRepository.clear();
     }
+
     public void add(Product product) {
         validateAlreadyHave(product);
         productRepository.put(product.getName(), product);
@@ -31,7 +32,6 @@ public class ProductRepository {
     public int takeout(String productName, Price userMoney) {
         Product productUserWantBuying = productRepository.get(productName);
         int priceUserWantBuying = validateUserHaveMoneyToBuy(userMoney, productUserWantBuying);
-
         validateWarehouseHaveStock(productUserWantBuying);
         return priceUserWantBuying;
     }
@@ -51,8 +51,6 @@ public class ProductRepository {
         return priceUserWantBuying;
     }
 
-    //userRepository 돌면서 가장 저렴한 userMoney 를 찾는다.
-    //userMoney가 가장 저렴한 제품의 가격보다 적거나,
     public boolean cantBuyBecauseOfNoMoney(Price userMoney) {
         int userPrice = userMoney.getPrice();
         int cheapestPrice = productRepository.keySet()

@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Price;
 
 public class CoinGenerator {
     private static LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
@@ -17,9 +18,9 @@ public class CoinGenerator {
         coins.put(Coin.COIN_10, 0);
     }
 
-    public static LinkedHashMap<Coin, Integer> makeCoins(int inputMoney) {
+    public static LinkedHashMap<Coin, Integer> makeCoins(Price inputMoney) {
         initialize();
-        makeCoinsUntilInputMoneyIsZero(inputMoney);
+        makeCoinsUntilInputMoneyIsZero(inputMoney.getPrice());
         return coins;
     }
 
@@ -38,5 +39,4 @@ public class CoinGenerator {
         }
         return 0;
     }
-
 }

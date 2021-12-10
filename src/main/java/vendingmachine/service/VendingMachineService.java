@@ -26,14 +26,8 @@ public class VendingMachineService {
         return new VendingMachineService(initializeMoney);
     }
 
-    public void putInitialAmount(int inputMoney) { //TODO 금액 검증 로직 만들었으니 그걸 사용하기.
-        if (inputMoney < ZERO) {
-            throw new IllegalArgumentException(PRICE_RANGE_ERROR_MESSAGE);
-        }
-        if (inputMoney % MINIMUM_COIN_VALUE != 0) {
-            throw new IllegalArgumentException(PRICE_UNIT_ERROR_MESSAGE);
-        }
-        coinRepository = new CoinRepository(CoinGenerator.makeCoins(inputMoney));
+    public void putInitialAmount(int inputMoney) {
+        coinRepository = new CoinRepository(CoinGenerator.makeCoins(new Price(inputMoney)));
         OutputView.showAllCoinsMachineHave(coinRepository);
 
     }

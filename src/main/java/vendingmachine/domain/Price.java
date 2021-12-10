@@ -10,6 +10,12 @@ public class Price {
         this.price = validate(priceInput);
     }
 
+    public Price(int price) {
+        validateItIsPositive(price);
+        validateUnitIsCorrect(price);
+        this.price = price;
+    }
+
     public int validate(String priceInput) {
         int price = validateItIsNumber(priceInput);
         validateItIsPositive(price);

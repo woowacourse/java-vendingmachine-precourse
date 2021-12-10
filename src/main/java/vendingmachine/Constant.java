@@ -16,5 +16,4 @@ public abstract class Constant {
     public static char INPUT_WRAP_START = '[';
     public static char INPUT_WRAP_END = ']';
 
-
 }
