@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.InputValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -12,7 +13,7 @@ public class VendingMachine {
 	private CoinBox coinBox;
 
 	public void start() {
-		makeHoldingMoneyAmount();
+		makeHoldingAmount();
 		showHoldingCoins();
 		makeProducts();
 		sellProducts();
@@ -74,13 +75,19 @@ public class VendingMachine {
 		coinBox.showCoins();
 	}
 
-	private void makeHoldingMoneyAmount() {
-		OutputView.printHoldingMoneyRequestMessage();
-		int holdingMoney = getHoldingMoneyAmountFromInput();
-		coinBox = new CoinBox(holdingMoney);
+	private void makeHoldingAmount() {
+		int holdingAmount = getHoldingAmountFromInput();
+		coinBox = new CoinBox(holdingAmount);
 	}
 
-	private int getHoldingMoneyAmountFromInput() {
-		return Integer.parseInt(InputView.getHoldingMoneyInput());
+	private int getHoldingAmountFromInput() {
+		String holdingAmountInput = InputView.getHoldingAmountInput();
+		try {
+			InputValidator.checkIsValidHoldingAmount(holdingAmountInput);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printErrorMessage(exception.getMessage());
+			return getHoldingAmountFromInput();
+		}
+		return Integer.parseInt(holdingAmountInput);
 	}
 }

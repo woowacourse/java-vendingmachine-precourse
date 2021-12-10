@@ -7,6 +7,8 @@ public class OutputView {
 	static final String INPUT_MONEY_INPUT_REQUEST_MESSAGE = "투입 금액을 입력해 주세요.";
 	static final String PRODUCT_TO_BUY_INPUT_REQUEST_MESSAGE = "구매할 상품명을 입력해 주세요.";
 	static final String CHANGES_MESSAGE = "잔돈";
+	static final String ERROR = "[ERROR]";
+	static final String SPACE = " ";
 
 	public static void printHoldingMoneyRequestMessage() {
 		System.out.println(HOLDING_MONEY_REQUEST_MESSAGE);
@@ -46,5 +48,9 @@ public class OutputView {
 
 	public static void printEmptyLine() {
 		System.out.println();
+	}
+
+	public static void printErrorMessage(String message) {
+		System.out.println(ERROR + SPACE + message);
 	}
 }
