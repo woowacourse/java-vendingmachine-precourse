@@ -59,7 +59,7 @@ public class VendingMachineController {
 		}
 	}
 
-	public void getBalance() {
-		ResponseMessage.of(vendingMachineService.getBalance());
+	public void getChange() {
+		ResponseMessage.of(vendingMachineService.getChange());
 	}
 }

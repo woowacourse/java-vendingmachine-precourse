@@ -15,7 +15,7 @@ public class VendingMachineService {
 
 	private ResponseMessage result;
 	private VendingMachine vendingMachine;
-	private int balance;
+	private int change;
 
 	public VendingMachineService() {
 		this.vendingMachine = new VendingMachine();
@@ -59,16 +59,16 @@ public class VendingMachineService {
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
-		if (vendingMachine.checkGetBalance()) {
+		if (vendingMachine.checkGetChange()) {
 			return true;
 		}
 		return false;
 	}
 
-	public String getBalance() {
+	public String getChange() {
 		result.init();
 		result.addMessage(Message.PRINT_BALANCE.getMessage() + '\n');
-		getMinimumBalance();
+		getMinimumChange();
 
 		return result.getResult();
 	}
@@ -85,29 +85,29 @@ public class VendingMachineService {
 	}
 
 	// TODO: 비즈니스 로직
-	private void getMinimumBalance() {
-		balance = vendingMachine.compareInputCostAndCoinToBalance();
+	private void getMinimumChange() {
+		change = vendingMachine.compareInputCostAndCoinToChange();
 
 		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
-		Map<Integer, Integer> balanceMap = new TreeMap<>(Collections.reverseOrder());
+		Map<Integer, Integer> changeMap = new TreeMap<>(Collections.reverseOrder());
 
 		for (Integer i : coinMap.keySet()) {
-			balanceMap = addBalanceMapToValue(i, coinMap.get(i), balanceMap);
+			changeMap = addChangeMapToValue(i, coinMap.get(i), changeMap);
 		}
 
-		result.addCoinCountMessage(balanceMap);
+		result.addCoinCountMessage(changeMap);
 	}
 
 	// TODO: 비즈니스 로직
-	private Map<Integer, Integer> addBalanceMapToValue(int key, int value, Map<Integer, Integer> map) {
+	private Map<Integer, Integer> addChangeMapToValue(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
 
-			if (balance >= key) {
+			if (change >= key) {
 				map.put(key, map.getOrDefault(key, 0) + 1);
-				balance -= key;
+				change -= key;
 			}
 
-			if (balance < key || balance <= 0) {
+			if (change < key || change <= 0) {
 				break;
 			}
 		}

@@ -3,7 +3,7 @@ package vendingmachine.utils;
 import java.util.Arrays;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.Coin;
+import vendingmachine.domain.enumclass.Coin;
 import vendingmachine.domain.VendingMachine;
 
 public class CoinUtil {

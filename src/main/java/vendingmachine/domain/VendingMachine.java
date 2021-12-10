@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import vendingmachine.domain.enumclass.Coin;
+
 public class VendingMachine {
 
 	private Map<Integer, Integer> coinMap;
@@ -53,7 +55,7 @@ public class VendingMachine {
 		}
 	}
 
-	public boolean checkGetBalance() {
+	public boolean checkGetChange() {
 		if (compareLowPriceAndInputCost() || checkAllProductAmount()) {
 			return true;
 		}
@@ -77,7 +79,7 @@ public class VendingMachine {
 		return true;
 	}
 
-	public int compareInputCostAndCoinToBalance() {
+	public int compareInputCostAndCoinToChange() {
 		if (inputCost < getSumCoinAmount()) {
 			return inputCost;
 		}
