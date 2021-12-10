@@ -44,7 +44,8 @@ public class VendingMachine {
 		}
 	}
 
-	public static void buyItem(Item item, UserMoney userMoney) {
+	public void buyItem(String itemName, Items items, UserMoney userMoney) {
+		Item item =  items.hasItem(itemName);
 		item.sellItem();
 		userMoney.subtractUserMoney(item.getPrice());
 	}

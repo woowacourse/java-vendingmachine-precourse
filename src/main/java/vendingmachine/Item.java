@@ -14,7 +14,7 @@ public class Item {
 	}
 
 	public Item(String itemString) {
-		String[] itemToAdd = itemString.substring(1, itemString.length()-1).split(",");
+		String[] itemToAdd = itemString.substring(1, itemString.length() - 1).split(",");
 		this.name = itemToAdd[0];
 		this.price = Integer.parseInt(itemToAdd[1]);
 		this.count = Integer.parseInt(itemToAdd[2]);
@@ -48,9 +48,14 @@ public class Item {
 		return this.count;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
 	public String getStatus() {
 		return this.name + this.getPrice() + this.getCount();
 	}
+
 	public boolean isOutOfStock() {
 		return this.count == 0;
 	}

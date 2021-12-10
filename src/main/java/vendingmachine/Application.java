@@ -8,7 +8,7 @@ public class Application {
         Items items = getItems();
         UserMoney userMoney = new UserMoney(InputView.GetUserMoney());
         while(machine.hasNextStep()) {
-            InputView.GetItemToBuy(userMoney);
+            machine.buyItem(InputView.GetItemToBuy(userMoney),items, userMoney);
         }
     }
     public static Items getItems() {

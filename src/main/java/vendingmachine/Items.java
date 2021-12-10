@@ -10,6 +10,16 @@ public class Items {
 		String[] itemToAdd = itemsInput.substring(1, itemsInput.length()-1).split(",");
 		return Item.validItemStatus(itemToAdd[0], Integer.parseInt(itemToAdd[1]), Integer.parseInt(itemToAdd[2]));
 	}
+
+	public Item hasItem(String itemName) {
+		for (Item item : this.itemList) {
+			if (itemName.equals(item.getName())) {
+				return item;
+			}
+		}
+		return null;
+	}
+
 	public void addItem(String itemString) {
 		this.itemList.add(new Item(itemString));
 	}
