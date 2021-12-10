@@ -17,11 +17,15 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int getRandomAmount() {
+    public int getAmount() {
+        return amount;
+    }
+
+    public static int getRandomAmount() {
         return Randoms.pickNumberInList(coinValueList());
     }
 
-    private List<Integer> coinValueList() {
+    private static List<Integer> coinValueList() {
         List<Integer> coinList = new ArrayList<>();
         for (Coin coin : Coin.values()) {
             coinList.add(coin.amount);
