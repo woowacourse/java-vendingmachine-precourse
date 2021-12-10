@@ -13,8 +13,8 @@ public class CoinsRepository {
 		return instance;
 	}
 
-	public void setCoins(Coins initCoins) {
-		coins = initCoins;
+	public void setCoins(Coins coins) {
+		this.coins = coins;
 	}
 
 }
