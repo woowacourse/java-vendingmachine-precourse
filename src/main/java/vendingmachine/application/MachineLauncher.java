@@ -1,10 +1,10 @@
 package vendingmachine.application;
 
-import static vendingmachine.domain.io.Input.*;
-import static vendingmachine.domain.io.Output.*;
+import static vendingmachine.io.Input.*;
+import static vendingmachine.io.Output.*;
 
-import vendingmachine.domain.io.Input;
-import vendingmachine.domain.io.Output;
+import vendingmachine.io.Input;
+import vendingmachine.io.Output;
 
 public enum MachineLauncher {
 	MACHINE_LAUNCHER(INPUT, OUTPUT);

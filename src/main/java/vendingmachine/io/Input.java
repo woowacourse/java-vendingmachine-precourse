@@ -1,9 +1,10 @@
-package vendingmachine.domain.io;
+package vendingmachine.io;
 
 import static camp.nextstep.edu.missionutils.Console.*;
 import static vendingmachine.domain.Machine.*;
 import static vendingmachine.domain.MachineClip.*;
-import static vendingmachine.domain.ProductFactory.*;
+import static vendingmachine.domain.product.ProductFactory.*;
+import static vendingmachine.domain.product.Products.*;
 import static vendingmachine.domain.RandomBox.*;
 import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.Printer.*;
@@ -11,30 +12,34 @@ import static vendingmachine.utils.Validator.*;
 
 import vendingmachine.domain.Machine;
 import vendingmachine.domain.MachineClip;
-import vendingmachine.domain.ProductFactory;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.ProductFactory;
+import vendingmachine.domain.product.Products;
 import vendingmachine.domain.RandomBox;
 import vendingmachine.utils.Printer;
 import vendingmachine.utils.Validator;
 
 public enum Input {
-	INPUT(PRINTER, RANDOM_COIN_BOX, MACHINE, MACHINE_CLIP, PRODUCT_FACTORY, VALIDATOR);
+	INPUT(PRINTER, RANDOM_COIN_BOX, MACHINE, MACHINE_CLIP, PRODUCT_FACTORY, PRODUCTS,VALIDATOR);
 
 	private final Printer printer;
 	private final RandomBox randomBox;
 	private final Machine machine;
 	private final MachineClip machineClip;
 	private final ProductFactory productFactory;
+	private final Products products;
 	private final Validator validator;
 
 	private String input;
 	private String[] inputs;
 
 	Input(Printer printer, RandomBox randomBox, Machine machine,
-			MachineClip machineClip, ProductFactory productFactory, Validator validator){
+			MachineClip machineClip, ProductFactory productFactory, Products products, Validator validator){
 		this.printer = printer;
 		this.randomBox = randomBox;
 		this.machine = machine;
 		this.machineClip = machineClip;
+		this.products = products;
 		this.productFactory = productFactory;
 		this.validator = validator;
 	}
@@ -59,11 +64,9 @@ public enum Input {
 		inputs = input.split(SEMICOLON);
 		for (int i = 0; i < inputs.length; i++) {
 			String[] data = inputs[i].substring(1, inputs[i].length() - 1).split(COMMA);
-			productFactory.createProduct(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2]));
+			products.insertProductToList(productFactory.createProduct(data[0], Integer.parseInt(data[1]), Integer.parseInt(data[2])));
 		}
 	}
-
-
 
 	public int inputCustomerAmount() {
 		printer.printCustomerAmountNotice();
@@ -74,17 +77,18 @@ public enum Input {
 
 		machine.insertCoinToMachine(Integer.parseInt(input));
 
-		return productFactory.getProductMinPrice();
+		return products.getMinPriceOfProducts();
 	}
 
 	public void inputCustomerBuyProduct() {
 		printer.printCustomerBuyProductNotice();
 
-		// TODO: Product 리팩토링 후 상품이 존재하는지 예외처리
-
-		String name = readLine();
-		if (productFactory.isProductExisted(name)) {
-			productFactory.buyProduct(name);
+		Product product = null;
+		while(product == null){
+			product = validator.validateProductExisted(input=readLine());
 		}
+		products.buyProduct(product);
+
 	}
+
 }

@@ -1,12 +1,12 @@
 package vendingmachine.domain;
 
-import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import vendingmachine.domain.product.Product;
 
 class ProductTest extends NsTest {
 
@@ -15,18 +15,17 @@ class ProductTest extends NsTest {
 
 	@BeforeEach
 	void beforeEach(){
+		product = new Product("콜라",1000,10);
 	}
 
 	@Test
 	void 상품_입력_테스트(){
-		product = new Product("콜라",1000,10);
 		assertEquals(product.getPrice(), 1000);
 		assertEquals(product.getAmount(), 10);
 	}
 
 	@Test
-	void 상품_판매_테스트(){
-		product = new Product("콜라",1000,10);
+	synchronized void 상품_판매_테스트(){
 		assertEquals(product.getAmount(), 10);
 		product.sellProduct();
 		assertEquals(product.getAmount(), 9);

@@ -14,6 +14,7 @@ public enum Machine {
 	}
 
 	public void changeAmount(int productPrice){
+		System.out.println(productPrice);
 		amount -= productPrice;
 	}
 

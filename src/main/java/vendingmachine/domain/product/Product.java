@@ -1,5 +1,4 @@
-package vendingmachine.domain;
-
+package vendingmachine.domain.product;
 
 public class Product {
 	private String name;
@@ -12,15 +11,19 @@ public class Product {
 		this.amount = amount;
 	}
 
-	public int getPrice(){
+	public String getName() {
+		return name;
+	}
+
+	public int getPrice() {
 		return price;
 	}
 
-	public int getAmount(){
+	public int getAmount() {
 		return amount;
 	}
 
-	public void sellProduct(){
+	public void sellProduct() {
 		amount--;
 	}
 

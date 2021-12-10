@@ -1,18 +1,27 @@
 package vendingmachine.utils;
 
+import static vendingmachine.domain.product.Products.*;
 import static vendingmachine.utils.Constant.*;
 
 import java.util.regex.Matcher;
 
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
 import vendingmachine.exception.AmountIsNotRangedException;
 import vendingmachine.exception.AmountNumberFormatException;
 import vendingmachine.exception.ProductInputFormatException;
 import vendingmachine.exception.ProductInputSemicolonException;
+import vendingmachine.exception.ProductIsNotExistedException;
 
 public enum Validator {
-	VALIDATOR;
+	VALIDATOR(PRODUCTS);
 
 	private boolean flag;
+	private Products products;
+
+	Validator(Products products){
+		this.products = products;
+	}
 
 	public boolean validateNumberFormat(String amount) {
 		flag = true;
@@ -78,5 +87,18 @@ public enum Validator {
 				throw new ProductInputSemicolonException();
 			}
 		}
+	}
+
+	public Product validateProductExisted(String productName){
+		try{
+			return isProductExisted(productName);
+		}catch (IllegalArgumentException e){
+			return null;
+		}
+	}
+
+	private Product isProductExisted(String productName) {
+		return products.getProductList().stream().filter(p -> p.getName().equalsIgnoreCase(productName)).findFirst()
+			.orElseThrow(ProductIsNotExistedException::new);
 	}
 }

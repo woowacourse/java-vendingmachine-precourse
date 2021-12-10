@@ -11,7 +11,7 @@ class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    void 기능_테스트() {
+    synchronized void 기능_테스트() {
         assertRandomNumberInListTest(
             () -> {
                 run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
