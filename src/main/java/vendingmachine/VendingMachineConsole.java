@@ -45,7 +45,18 @@ public class VendingMachineConsole {
     }
 
     public int inputMoneyToInsert() {
-       return new MoneyToInsertRequest(input()).toMoneyToInsert();
+        int initialMoneyToInsert = 0;
+        int moneyToInsert = initialMoneyToInsert;
+        boolean isMoneyToInsertEntered = false;
+        while (!isMoneyToInsertEntered) {
+            try {
+                moneyToInsert = new MoneyToInsertRequest(input()).toMoneyToInsert();
+                isMoneyToInsertEntered = true;
+            } catch (IllegalArgumentException error) {
+                printErrorMessage(error.getMessage());
+            }
+        }
+        return moneyToInsert;
     }
 
     private String input() {
