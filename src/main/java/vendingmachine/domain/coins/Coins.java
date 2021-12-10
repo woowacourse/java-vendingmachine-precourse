@@ -30,7 +30,7 @@ public class Coins {
 			if (!isAbleToAddChange(randomCoin, remainingBalance)) {
 				continue;
 			}
-			coins.computeIfAbsent(randomCoin, coin -> CoinQuantity.from(0));
+			coins.putIfAbsent(randomCoin, CoinQuantity.from(0));
 			coins.put(randomCoin, CoinQuantity.from(coins.get(randomCoin).toInt() + 1));
 			remainingBalance = remainingBalance - randomCoin.getAmount();
 		}
