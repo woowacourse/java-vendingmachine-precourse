@@ -19,6 +19,7 @@ public class Changes {
 
 	public void setCoinList() {
 		changes = setChanges();
+		coinList = Coin.getRandomCoinList(changes);
 	}
 
 	public int setChanges() {
