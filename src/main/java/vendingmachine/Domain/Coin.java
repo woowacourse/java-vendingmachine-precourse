@@ -24,7 +24,7 @@ public enum Coin {
 
     public static List<Integer> getAmountList() {
         return Stream.of(values())
-                .map(c -> c.getAmount())
+                .map(c -> c.amount)
                 .collect(Collectors.toList());
     }
 
