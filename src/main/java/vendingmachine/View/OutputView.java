@@ -4,6 +4,8 @@ import vendingmachine.constant.SystemMessage;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 
+import java.util.ArrayList;
+
 public class OutputView {
     final static String INPUT_MONEY_MESSAGE = "투입 금액: ";
 
@@ -20,5 +22,10 @@ public class OutputView {
 
     public static void printMoneyStatus(VendingMachine vendingMachine) {
         System.out.println(INPUT_MONEY_MESSAGE + vendingMachine.getInputMoney());
+    }
+
+    public static void printChange(ArrayList<String> changeList) {
+        changeList.stream()
+                .forEach(System.out::println);
     }
 }

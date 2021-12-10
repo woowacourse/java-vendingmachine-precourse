@@ -61,6 +61,6 @@ public class VendingMachineController {
 
     private void printChange(VendingMachine vendingMachine) {
         OutputView.printMoneyStatus(vendingMachine);
-        vendingMachine.getChange();
+        OutputView.printChange(vendingMachine.getChange());
     }
 }

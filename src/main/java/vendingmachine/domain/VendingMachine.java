@@ -1,10 +1,8 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.View.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class VendingMachine {
     MachineMoney machineMoney;
@@ -68,7 +66,7 @@ public class VendingMachine {
         return false;
     }
 
-    public void getChange() {
+    public ArrayList<String> getChange() {
         int money = inputMoney.getInputMoney();
         ArrayList<String> changeList = new ArrayList<String>();
 
@@ -76,13 +74,12 @@ public class VendingMachine {
             if (money / coin.getAmount() < coin.getCount()) {
                 coin.setCount(money / coin.getAmount());
                 changeList.add(coin.toString());
-                System.out.println("잔돈");
-                changeList.stream().forEach(System.out::println);
-                return;
+                return changeList;
             }
             changeList.add(coin.toString());
             money = money - coin.getCount() * coin.getAmount();
         }
+        return changeList;
     }
 }
 
