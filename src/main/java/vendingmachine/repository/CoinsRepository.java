@@ -6,6 +6,7 @@ import vendingmachine.domain.coins.Coins;
 public class CoinsRepository {
 	private static CoinsRepository coinsRepository = new CoinsRepository();
 	private Coins coins = Coins.create();
+	// TODO: repository 생성 최초에는 null 이어도 될지 고민 필요
 
 	private CoinsRepository() {
 	}
