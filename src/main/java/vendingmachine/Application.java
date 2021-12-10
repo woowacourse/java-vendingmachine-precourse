@@ -2,7 +2,7 @@ package vendingmachine;
 
 public class Application {
     public static void main(String[] args) {
-        VendingMachineController vendingMachineController = new VendingMachineController();
+        VendingMachineController vendingMachineController = new VendingMachineController(new VendingMachineService());
         vendingMachineController.on();
     }
 }
