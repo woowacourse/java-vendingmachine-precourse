@@ -14,9 +14,9 @@ public class InputValidator {
 		return inputValidator;
 	}
 
-	public boolean checkInitialAmountInputExceptions(String amount) {
+	public boolean checkInitialAmountInputExceptions(String initialAmount) {
 		try {
-			checkAllInitialAmountInputExceptions(amount);
+			checkAllInitialAmountInputExceptions(initialAmount);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -34,14 +34,24 @@ public class InputValidator {
 		return true;
 	}
 
-	private void checkAllInitialAmountInputExceptions(String amount) {
-		checkEmptyMoneyInputExceptions(amount);
-		checkNotNaturalNumberExceptions(amount);
-		checkNotMultiplicationOfTenExceptions(amount);
+	public boolean checkInputAmountInputExceptions(String inputAmount) {
+		try {
+			checkAllInputAmountInputExceptions(inputAmount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	private void checkAllInitialAmountInputExceptions(String initialAmount) {
+		checkEmptyInputExceptions(initialAmount);
+		checkNotNaturalNumberExceptions(initialAmount);
+		checkNotMultiplicationOfTenExceptions(initialAmount);
 	}
 
 	private void checkAllInitialItemsInputExceptions(String items) {
-		checkEmptyStringExceptions(items);
+		checkEmptyInputExceptions(items);
 		checkNotSatisfiedInputFormatExceptions(items);
 		checkArgumentLackExceptions(items);
 		checkPriceNotNaturalNumberExceptions(items);
@@ -49,9 +59,15 @@ public class InputValidator {
 		checkQuantityNotNaturalNumberExceptions(items);
 	}
 
-	private void checkEmptyMoneyInputExceptions(String string) {
+	private void checkAllInputAmountInputExceptions(String inputAmount) {
+		checkEmptyInputExceptions(inputAmount);
+		checkInputAmountNotNaturalNumberExceptions(inputAmount);
+		checkInputAmountNotMultiplicationOfTenExceptions(inputAmount);
+	}
+
+	private void checkEmptyInputExceptions(String string) {
 		if (string.length() == 0){
-			throw new IllegalArgumentException(EMPTY_MONEY_INPUT_ERROR_MESSAGE);
+			throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
 		}
 	}
 
@@ -65,12 +81,6 @@ public class InputValidator {
 		int number = Integer.parseInt(string);
 		if (number % 10 != 0) {
 			throw new IllegalArgumentException(MONEY_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
-		}
-	}
-
-	private void checkEmptyStringExceptions(String string) {
-		if (string.length() == 0) {
-			throw new IllegalArgumentException(EMPTY_ITEM_INPUT_ERROR_MESSAGE);
 		}
 	}
 
@@ -115,6 +125,19 @@ public class InputValidator {
 			.flatMapToInt(CharSequence::chars)
 			.anyMatch(number -> !Character.isDigit(number))) {
 			throw new IllegalArgumentException(QUANTITY_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
+		}
+	}
+
+	private void checkInputAmountNotNaturalNumberExceptions(String string) {
+		if (string.chars().anyMatch(number -> !Character.isDigit(number))) {
+			throw new IllegalArgumentException(INPUT_AMOUNT_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
+		}
+	}
+
+	private void checkInputAmountNotMultiplicationOfTenExceptions(String string) {
+		int number = Integer.parseInt(string);
+		if (number % 10 != 0) {
+			throw new IllegalArgumentException(INPUT_AMOUNT_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
 		}
 	}
 }

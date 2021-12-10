@@ -35,4 +35,8 @@ public class VendingMachineOutputView {
 		}
 		System.out.println();
 	}
+
+	public void printUserInputAmountMessage(){
+		System.out.println(USER_INPUT_AMOUNT_MESSAGE);
+	}
 }
