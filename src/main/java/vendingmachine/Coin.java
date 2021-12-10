@@ -25,7 +25,7 @@ public enum Coin {
     }
 
     private int setCoinCountRandom(int amount){
-        List<Integer> numberList=new ArrayList<Integer>();
+        List<Integer> numberList=new ArrayList<>();
         int maxNumber=amount/this.amount;
         for(int i=0;i<maxNumber;++i){
             numberList.add(i);
