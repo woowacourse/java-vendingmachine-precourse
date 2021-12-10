@@ -12,7 +12,7 @@ public class Product {
         this.amount = amount;
     }
 
-    public static Product from(String name, int price, int amount) {
+    public static Product of(String name, int price, int amount) {
         return new Product(name, price, amount);
     }
 

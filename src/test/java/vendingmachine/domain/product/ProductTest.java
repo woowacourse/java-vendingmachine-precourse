@@ -11,7 +11,7 @@ public class ProductTest {
 
     @Test
     void 상품_생성() {
-        Product product = Product.from(COLA_NAME, COLA_PRICE, COLA_AMOUNT);
+        Product product = Product.of(COLA_NAME, COLA_PRICE, COLA_AMOUNT);
         assertThat(product.verifyName(COLA_NAME)).isTrue();
     }
 }
