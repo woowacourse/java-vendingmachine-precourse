@@ -9,7 +9,7 @@ public class VendingMachineTest {
 
     @Test
     void 자판기_초기잔액_설정() {
-        VendingMachine machine = new VendingMachine(balance);
+        VendingMachine machine = VendingMachine.of(balance);
         assertThat(machine.isEqualBalance(balance)).isTrue();
     }
 }
