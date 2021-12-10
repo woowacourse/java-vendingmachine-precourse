@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.coins.Coins;
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsOutputDto;
@@ -24,8 +23,7 @@ public class CoinsController {
 
 		try {
 			VendingMachineBalance vendingMachineBalance = VendingMachineBalance.from(Integer.parseInt(input));
-			Coins coins = Coins.from(vendingMachineBalance);
-			coinsService.initCoins(coins);
+			coinsService.generateRandomCoins(vendingMachineBalance);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			generateCoins();
@@ -33,17 +31,13 @@ public class CoinsController {
 	}
 
 	public void printGeneratedCoins() {
-		Coins coins = coinsService.getCurrentCoins();
-		OutputView.printVendingMachineHoldingCoins(
-			CoinsOutputDto.from(coins)
-		);
+		CoinsOutputDto coinsOutputDto = coinsService.getCurrentCoins();
+		OutputView.printVendingMachineHoldingCoins(coinsOutputDto);
 	}
 
 	public void printChange() {
 		UserBalance userBalance = userBalanceService.getUserBalance();
-		Coins change = coinsService.getChange(userBalance);
-		OutputView.printChange(
-			CoinsOutputDto.from(change)
-		);
+		CoinsOutputDto coinsOutputDto = coinsService.getChange(userBalance);
+		OutputView.printChange(coinsOutputDto);
 	}
 }
