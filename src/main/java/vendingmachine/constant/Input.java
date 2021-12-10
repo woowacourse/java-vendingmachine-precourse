@@ -5,13 +5,13 @@ public enum Input {
     MONEY_DIGIT_ERROR_MESSAGE("[ERROR] 금액은 숫자만 입력하실 수 있습니다."),
     MONEY_LENGTH_0_ERROR_MESSAGE("[ERROR] 1자리 이상의 숫자를 입력해주세요.");
 
-    private final String message;
+    private final String text;
 
-    Input(final String message) {
-        this.message = message;
+    Input(final String text) {
+        this.text = text;
     }
 
-    public String getMessage() {
-        return message;
+    public String getText() {
+        return text;
     }
 }

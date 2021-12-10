@@ -8,7 +8,7 @@ public class MoneyInputView {
 
     public int inputMoneyForMakeCoin() {
         while (true) {
-            print(Input.MONEY_GUIDE_MESSAGE.getMessage());
+            print(Input.MONEY_GUIDE_MESSAGE.getText());
             String money = Console.readLine();
             try {
                 tryToInputMoneyForMakeCoin(money);
@@ -26,7 +26,7 @@ public class MoneyInputView {
     private void validateDigit(String money) {
         for (int m = 0; m < money.length(); m++) {
             if (!Character.isDigit(money.charAt(m))) {
-                print(Input.MONEY_DIGIT_ERROR_MESSAGE.getMessage());
+                print(Input.MONEY_DIGIT_ERROR_MESSAGE.getText());
                 throw new IllegalArgumentException();
             }
         }
@@ -34,7 +34,7 @@ public class MoneyInputView {
 
     private void validateBlank(String money) {
         if (money.length() == Condition.LENGTH_0.getNumber()) {
-            print(Input.MONEY_LENGTH_0_ERROR_MESSAGE.getMessage());
+            print(Input.MONEY_LENGTH_0_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
         }
     }
