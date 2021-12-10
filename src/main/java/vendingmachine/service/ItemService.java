@@ -30,7 +30,7 @@ public class ItemService {
 			splitItemList = Arrays.asList(itemInput.split(ITEM_DELIMITER));
 			isValid = splitItemList.stream()
 				.map(itemInputString -> itemInputValidator.validateItemInput(itemInputString))
-				.anyMatch(Boolean::booleanValue);
+				.allMatch(bool -> bool == true);
 		} while(!isValid);
 
 		return splitItemList.stream()
