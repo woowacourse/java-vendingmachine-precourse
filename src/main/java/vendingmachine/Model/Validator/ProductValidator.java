@@ -26,7 +26,8 @@ public class ProductValidator {
 	private void isNoDuplicate() {
 		String[] productNames = Arrays
 			.stream(PRODUCT_STRING.split(Constants.DELIMITER_PRODUCTS))
-			.map(product -> product.split(Constants.DELIMITER_PRODUCT)[0]).toArray(String[]::new);
+			.map(product -> product.split(Constants.DELIMITER_PRODUCT)[0])
+			.toArray(String[]::new);
 
 		if (productNames.length != Arrays.stream(productNames).distinct().count()) {
 			throw new IllegalArgumentException(Constants.ERROR_PRODUCT_DUPLICATED);

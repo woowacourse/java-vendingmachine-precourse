@@ -8,23 +8,17 @@ import vendingmachine.Model.ProductList;
 import vendingmachine.View.OutputView;
 
 public class Init {
-	public static CoinWallet machineCoins;
-	public static final ProductList products = new ProductList();
-	public static int userMoney;
+	public CoinWallet machineCoins;
+	public final ProductList products = new ProductList();
 
-	public static void init() {
+	public Init() {
 		machineCoins = new CoinWallet(InputController.setMachineMoney());
-
 		OutputView.printCoin(machineCoins.coins);
-
 		setMachineProduct();
-		OutputView.printEmpty();
-
-		setUserMoney();
 		OutputView.printEmpty();
 	}
 
-	public static void setMachineProduct() {
+	public void setMachineProduct() {
 		for (String product : InputController.setProducts().split(Constants.DELIMITER_PRODUCTS)) {
 			String[] values = product.substring(1, product.length() - 1).split(Constants.DELIMITER_PRODUCT);
 			products.add(new Product(
@@ -33,9 +27,5 @@ public class Init {
 				Integer.parseInt(values[2])
 			));
 		}
-	}
-
-	public static void setUserMoney() {
-		userMoney = InputController.setUserMoney();
 	}
 }

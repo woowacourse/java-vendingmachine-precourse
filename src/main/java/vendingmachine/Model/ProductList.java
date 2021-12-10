@@ -13,14 +13,14 @@ public class ProductList {
 		return products.stream()
 			.filter(product -> product.NAME.equals(name))
 			.findAny()
-			.get();
+			.orElse(null);
 	}
 
 	public int getMinPrice() {
 		return products.stream()
 			.map(product -> product.PRICE)
 			.max(Integer::compare)
-			.get();
+			.orElse(0);
 	}
 
 	public String[] getNames() {
@@ -31,6 +31,6 @@ public class ProductList {
 
 	public boolean allSoldOut() {
 		return products.stream()
-			.allMatch(product -> product.stock == 0);
+			.allMatch(Product::isSoldOut);
 	}
 }

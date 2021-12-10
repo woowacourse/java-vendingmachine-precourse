@@ -1,14 +1,14 @@
 package vendingmachine.Model.Validator;
 
 import vendingmachine.Constants;
-import vendingmachine.Controller.Run.Init;
+import vendingmachine.Controller.MachineController;
 import vendingmachine.Model.Product;
 
 public class SellValidator {
 	public Product product;
 
 	public SellValidator(String name) {
-		this.product = Init.products.find(name);
+		this.product = MachineController.init.products.find(name);
 		validate();
 	}
 
@@ -18,13 +18,13 @@ public class SellValidator {
 	}
 
 	private void isUserRich() {
-		if (product.PRICE > Init.userMoney) {
+		if (product.PRICE > MachineController.userMoney) {
 			throw new IllegalArgumentException(Constants.ERROR_USER_POOR);
 		}
 	}
 
 	private void isNoStock() {
-		if (product.stock == 0) {
+		if (product.isSoldOut()) {
 			throw new IllegalArgumentException(Constants.ERROR_NO_STOCK);
 		}
 	}

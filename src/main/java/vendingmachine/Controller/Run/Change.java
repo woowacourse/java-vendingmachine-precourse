@@ -1,5 +1,6 @@
 package vendingmachine.Controller.Run;
 
+import vendingmachine.Controller.MachineController;
 import vendingmachine.Model.Coin;
 import vendingmachine.Model.CoinWallet;
 import vendingmachine.View.OutputView;
@@ -11,9 +12,7 @@ public class Change {
 	public Change(CoinWallet machineCoins, int userMoney) {
 		this.machineCoins = machineCoins;
 		OutputView.printUserMoney(userMoney);
-
 		setChangeCoins();
-
 		OutputView.printChange(changeCoins);
 	}
 
@@ -28,15 +27,15 @@ public class Change {
 			setOneCoin(coin, machineCoins.getNum(coin));
 			return;
 		}
-		setOneCoin(coin, Init.userMoney / coin.getAmount());
+		setOneCoin(coin, MachineController.userMoney / coin.getAmount());
 	}
 
 	private boolean isNoMaxCount(Coin coin) {
-		return (Init.userMoney / coin.getAmount()) > machineCoins.getNum(coin);
+		return (MachineController.userMoney / coin.getAmount()) > machineCoins.getNum(coin);
 	}
 
 	private void setOneCoin(Coin coin, int coinCount) {
 		changeCoins.set(coin, coinCount);
-		Init.userMoney -= coin.getAmount() * coinCount;
+		MachineController.userMoney -= coin.getAmount() * coinCount;
 	}
 }

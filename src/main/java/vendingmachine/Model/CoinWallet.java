@@ -24,7 +24,7 @@ public class CoinWallet {
 	}
 
 	public void set(Coin coin, int coinCount) {
-		coins.put(coin,coinCount);
+		coins.put(coin, coinCount);
 	}
 
 	private void coinInit() {

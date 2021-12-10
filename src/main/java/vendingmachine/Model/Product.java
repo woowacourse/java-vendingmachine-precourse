@@ -3,7 +3,7 @@ package vendingmachine.Model;
 public class Product {
 	public final String NAME;
 	public final int PRICE;
-	public int stock;
+	private int stock;
 
 	public Product(String name, int price, int stock) {
 		NAME = name;
@@ -13,5 +13,9 @@ public class Product {
 
 	public void sell() {
 		stock--;
+	}
+
+	public boolean isSoldOut() {
+		return stock == 0;
 	}
 }
