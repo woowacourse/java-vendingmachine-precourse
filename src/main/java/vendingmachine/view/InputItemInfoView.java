@@ -4,6 +4,7 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
+import vendingmachine.controller.ViewMappingKey;
 import vendingmachine.domain.Item;
 import vendingmachine.util.ItemParser;
 import vendingmachine.util.SystemMessage;
@@ -21,6 +22,7 @@ public class InputItemInfoView implements View {
 			return;
 		}
 		Application.controller.addItems(items);
+		Application.controller.view(ViewMappingKey.INPUT_MONEY);
 	}
 
 	private List<Item> readItems() {
