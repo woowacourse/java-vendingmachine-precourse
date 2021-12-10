@@ -53,4 +53,20 @@ public class VendingMachine {
             productMap.put(product.getName(), product);
         }
     }
+
+    public void sellProduct(String productName) {
+        Product product;
+
+        if (!productMap.keySet().contains(productName)) {
+            throw new NoSuchElementException(ErrorMessage.NO_PRODUCT_MATCH.getCompleteMessage());
+        }
+        product = productMap.get(productName);
+
+        if (insertedPrice < product.getPrice()) {
+            throw new NoSuchElementException(ErrorMessage.NOT_ENOUTH_BALANCE.getCompleteMessage());
+        }
+        insertedPrice -= product.getPrice();
+        product.sell();
+        productMap.put(product.getName(), product);
+    }
 }
