@@ -1,23 +1,26 @@
 package vendingmachine.validator;
 
-import vendingmachine.exception.ItemInputFormatException;
+import java.util.Arrays;
+
+import vendingmachine.exception.DataDuplicatedException;
 import vendingmachine.exception.SoldOutException;
 
 public class ItemValidator extends Validator {
-	private static final String ITEM_SPLIT_DELIMITER = ",";
-	private static final int ITEM_SPLIT_COUNT = 3;
+	private static final String ITEMS_DELIMITER = ";";
+	private static final String ITEM_DELIMITER = ",";
 
 	private static final int MULTIPLE = 10;
 	private static final int MIN_PRICE = 100;
 
-	public static void validateItemInputFormat(String input) {
-		if (input.split(ITEM_SPLIT_DELIMITER).length != ITEM_SPLIT_COUNT) {
-			throw new ItemInputFormatException();
-		}
+	public static void validateItemsDuplication(String input) {
+		int originalCount = input.split(ITEMS_DELIMITER).length;
+		boolean duplicated = Arrays.stream(input.split(ITEMS_DELIMITER))
+			.map(item -> item.split(ITEM_DELIMITER)[0])
+			.distinct()
+			.count() != originalCount;
 
-		// TODO: 상수로 분리 필요
-		if (!input.contains("[") || !input.contains("]")) {
-			throw new ItemInputFormatException();
+		if (duplicated) {
+			throw new DataDuplicatedException();
 		}
 	}
 
@@ -25,20 +28,14 @@ public class ItemValidator extends Validator {
 		validateNotBlank(name);
 	}
 
-	public static void validateItemPrice(String price) {
-		validateNumeric(price);
-
-		int parsedNumber = Integer.parseInt(price);
-		validateNaturalNumber(parsedNumber);
-		validateMultiple(parsedNumber, MULTIPLE);
-		validateGreaterThanOrEqual(parsedNumber, MIN_PRICE);
+	public static void validateItemPrice(int price) {
+		validateNaturalNumber(price);
+		validateMultiple(price, MULTIPLE);
+		validateGreaterThanOrEqual(price, MIN_PRICE);
 	}
 
-	public static void validateItemQuantity(String price) {
-		validateNumeric(price);
-
-		int parsedNumber = Integer.parseInt(price);
-		validateNaturalNumber(parsedNumber);
+	public static void validateItemQuantity(int price) {
+		validateNaturalNumber(price);
 	}
 
 	public static void validateAbleToSubtractItemQuantity(int itemQuantity) {

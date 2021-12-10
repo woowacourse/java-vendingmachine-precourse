@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.domain.userbalance.UserBalance;
-import vendingmachine.validator.ItemValidator;
 
 public class Item {
 	private static final String SPLIT_DELIMITER = ",";
@@ -24,16 +23,12 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public static Item from(String input) {
-		ItemValidator.validateItemInputFormat(input);
+	public static Item of(String name, int price, int quantity) {
+		ItemName itemName = ItemName.from(name);
+		ItemPrice itemPrice = ItemPrice.from(price);
+		ItemQuantity itemQuantity = ItemQuantity.from(quantity);
 
-		List<String> elements = parseInput(removeBracket(input));
-
-		ItemName name = ItemName.from(elements.get(0));
-		ItemPrice price = ItemPrice.from(elements.get(1));
-		ItemQuantity quantity = ItemQuantity.from(elements.get(2));
-
-		return new Item(name, price, quantity);
+		return new Item(itemName, itemPrice, itemQuantity);
 	}
 
 	private static String removeBracket(String input) {

@@ -1,15 +1,23 @@
 package vendingmachine.service;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import vendingmachine.domain.item.Item;
 import vendingmachine.domain.item.ItemName;
 import vendingmachine.domain.item.ItemPrice;
-import vendingmachine.domain.items.Items;
 import vendingmachine.domain.userbalance.UserBalance;
+import vendingmachine.dto.ItemDto;
+import vendingmachine.dto.ItemNameDto;
+import vendingmachine.exception.NotEnoughBalanceException;
 import vendingmachine.repository.ItemsRepository;
+import vendingmachine.repository.UserBalanceRepository;
 
 public class ItemsService {
 	private static ItemsService itemsService = new ItemsService();
 	private final ItemsRepository itemsRepository = ItemsRepository.getInstance();
+	private final UserBalanceRepository userBalanceRepository = UserBalanceRepository.getInstance();
 
 	private ItemsService() {
 	}
@@ -18,26 +26,37 @@ public class ItemsService {
 		return itemsService;
 	}
 
-	public void initItems(Items items) {
-		itemsRepository.setItems(items);
+	public void createItem(ItemDto itemDto) {
+		Item item = itemDto.toEntity();
+		itemsRepository.create(item);
 	}
 
-	public boolean checkSoldOut() {
-		Items items = itemsRepository.findAll();
-		return items.isAllSoldOut();
+	public void buyItem(ItemNameDto itemNameDto) {
+		ItemName itemName = itemNameDto.toEntity();
+		Item item = itemsRepository.findByItemName(itemName);
+
+		UserBalance userBalance = userBalanceRepository.getUserBalance();
+		if (userBalance.toInt() < item.getItemPrice().toInt()) {
+			throw new NotEnoughBalanceException();
+		}
+
+		Item purchasedItem = item.buy();
+
+		userBalanceRepository.setUserBalance(userBalance.subtract(item.getItemPrice()));
+		itemsRepository.updateByItemName(itemName, purchasedItem);
+	}
+
+	public boolean checkAllItemsSoldOut() {
+		List<Item> items = itemsRepository.findAll();
+		return items.stream().allMatch(Item::isSoldOut);
 	}
 
 	public ItemPrice getMinItemPrice() {
-		Items items = itemsRepository.findAll();
-		return items.getMinItemPrice();
-	}
+		List<Item> items = itemsRepository.findAll();
+		List<ItemPrice> itemPrices = items.stream()
+			.map(Item::getItemPrice)
+			.collect(Collectors.toList());
 
-	public void buyItem(Item item, UserBalance userBalance) {
-		Items items = itemsRepository.findAll().buyItem(item, userBalance);
-		itemsRepository.setItems(items);
-	}
-
-	public Item findByItemName(ItemName itemName) {
-		return itemsRepository.findByItemName(itemName);
+		return Collections.min(itemPrices);
 	}
 }

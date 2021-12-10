@@ -11,11 +11,9 @@ public class ItemQuantity {
 		this.itemQuantity = itemQuantity;
 	}
 
-	public static ItemQuantity from(String itemQuantity) {
+	public static ItemQuantity from(int itemQuantity) {
 		ItemValidator.validateItemQuantity(itemQuantity);
-
-		int parsedNumber = Integer.parseInt(itemQuantity);
-		return new ItemQuantity(parsedNumber);
+		return new ItemQuantity(itemQuantity);
 	}
 
 	public ItemQuantity subtract() {
