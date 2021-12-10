@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.repository.InputAmount;
+
 public class Products {
     private final List<Product> products;
 
@@ -26,7 +28,7 @@ public class Products {
     }
 
     private void checkForm(String value) {
-        if (value.indexOf(0) != '[' || value.indexOf(value.length() - 1) != ']') {
+        if (value.charAt(0) != '[' || value.charAt(value.length() - 1) != ']') {
             throw new IllegalArgumentException("[ERROR] 한 상품의 내용은 '[' 으로 시작해서 ']' 로 끝나야 합니다.");
         }
     }
@@ -55,5 +57,11 @@ public class Products {
 
     private boolean isOutOfStock() {
         return products.stream().allMatch(Product::isOutOfStock);
+    }
+
+    public void checkIsValidName(String name) {
+        products.stream()
+            .filter(product -> product.isSameName(name))
+            .findFirst().orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다."));
     }
 }

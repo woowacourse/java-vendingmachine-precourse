@@ -2,13 +2,12 @@ package vendingmachine;
 
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.IntStream;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.Coin;
 
 public class Coins {
     private final Map<Coin, Integer> coins = new TreeMap<>();
@@ -18,7 +17,7 @@ public class Coins {
         do {
             int coinAmount = Randoms.pickNumberInList(makeList(amount));
             amount -= coinAmount;
-            Coin coin = Coin.mapCoin(coinAmount);
+            Coin coin = Coin.mapToCoin(coinAmount);
             coins.put(coin, coins.getOrDefault(coin, 0) + 1);
         } while (amount != 0);
     }
@@ -46,10 +45,10 @@ public class Coins {
 
         coins.forEach((coin, count) -> {
             for (int i = 0; i < count; i++) {
-                if (!coin.isLessThan(inputAmount[0])) {
+                if (!coin.isOrLess(inputAmount[0])) {
                     break;
                 }
-                if (coin.isLessThan(inputAmount[0])) {
+                if (coin.isOrLess(inputAmount[0])) {
                     inputAmount[0] -= coin.getAmount();
                     userCoins.put(coin, userCoins.getOrDefault(coin, 0) + 1);
                 }

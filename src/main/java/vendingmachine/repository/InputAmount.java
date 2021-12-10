@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.repository;
 
 public class InputAmount {
     private int amount;
