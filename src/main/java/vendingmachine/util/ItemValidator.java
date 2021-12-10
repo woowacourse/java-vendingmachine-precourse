@@ -95,6 +95,13 @@ public class ItemValidator {
 			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_INTEGER);
 		int amount = Integer.parseInt(amountStr);
 
+		if(!isPositive(amount))
+			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_POSITIVE);
+
 		return amount;
+	}
+
+	private static boolean isPositive(int number) {
+		return number > 0;
 	}
 }
