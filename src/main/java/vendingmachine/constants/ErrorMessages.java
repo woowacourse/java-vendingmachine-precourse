@@ -11,5 +11,6 @@ public class ErrorMessages {
 	public static final String QUANTITY_NOT_NATURAL_NUMBER_ERROR_MESSAGE = "[ERROR] 상품의 수량은 자연수여야 합니다.";
 	public static final String INPUT_AMOUNT_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE = "[ERROR] 투입금액은 10의 배수여야 합니다.";
 	public static final String INPUT_AMOUNT_NOT_NATURAL_NUMBER_ERROR_MESSAGE = "[ERROR] 투입금액은 자연수여야 합니다.";
-
+	public static final String DONT_EXISTING_ITEM_ERROR_MESSAGE = "[ERROR] 존재하지 않는 상품명입니다.";
+	public static final String DONT_HAVE_ENOUGH_MONEY_ERROR_MESSAGE = "[ERROR] 돈이 부족합니다.";
 }

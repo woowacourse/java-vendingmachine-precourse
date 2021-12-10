@@ -19,7 +19,8 @@ public class CoinModel {
 		return coinModel;
 	}
 
-	public void generateCoins(int amount) {
+	public void generateCoins(String stringAmount) {
+		int amount = Integer.parseInt(stringAmount);
 		while (amount > 0) {
 			List<Integer> possibleMonetaryUnit = getPossibleMonetaryUnit(amount);
 			int pickedAmount = Randoms.pickNumberInList(possibleMonetaryUnit);

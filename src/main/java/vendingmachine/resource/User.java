@@ -3,10 +3,10 @@ package vendingmachine.resource;
 public class User {
 	private static final User user = new User();
 
-	int inputAmount;
+	int money;
 
 	private User() {
-		inputAmount = 0;
+		money = 0;
 	}
 
 	public static User getUser() {
@@ -14,6 +14,14 @@ public class User {
 	}
 
 	public void putMoney(int money) {
-		inputAmount += money;
+		this.money += money;
+	}
+
+	public int getRemainingMoney() {
+		return money;
+	}
+
+	public void reduceMoney(int money) {
+		this.money -= money;
 	}
 }

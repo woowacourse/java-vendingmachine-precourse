@@ -1,26 +1,29 @@
 package vendingmachine.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.model.ItemModel;
 import vendingmachine.model.CoinModel;
-import vendingmachine.model.VendingMachineModel;
+import vendingmachine.model.ItemModel;
+import vendingmachine.model.UserModel;
 import vendingmachine.validator.InputValidator;
+import vendingmachine.validator.QueryValidator;
 import vendingmachine.view.VendingMachineOutputView;
 
 public class VendingMachineController {
 	private final static VendingMachineController vendingMachineController = new VendingMachineController();
 	private final VendingMachineOutputView vendingMachineOutputView;
 	private final InputValidator inputValidator;
-	private VendingMachineModel vendingMachineModel;
+	private QueryValidator queryValidator;
+	private final CoinModel coinModel;
+	private final ItemModel itemModel;
+	private final UserModel userModel;
 
 	private VendingMachineController() {
 		vendingMachineOutputView = VendingMachineOutputView.getVendingMachineOutputView();
 		inputValidator = InputValidator.getInputValidator();
-		vendingMachineModel = VendingMachineModel.getVendingMachineModel();
+		coinModel = CoinModel.getCoinModel();
+		itemModel = ItemModel.getItemModel();
+		userModel = UserModel.getUserModel();
+		queryValidator = QueryValidator.getQueryValidator();
 	}
 
 	public static VendingMachineController getVendingMachineController() {
@@ -28,11 +31,28 @@ public class VendingMachineController {
 	}
 
 	public void run() {
-		vendingMachineModel.generateCoins(getInitialAmount());
+		coinModel.generateCoins(getInitialAmount());
 		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
-		vendingMachineOutputView.printVendingMachineInitialCoins(vendingMachineModel.getNumberOfCoins());
-		vendingMachineModel.createItems(getInitialItems());
-		vendingMachineModel.putMoney(getInputAmount());
+		vendingMachineOutputView.printVendingMachineInitialCoins(coinModel.getNumberOfCoins());
+		itemModel.createItems(getInitialItems());
+		userModel.putMoney(getInputAmount());
+		buyItems();
+	}
+
+	private void buyItems() {
+		while (!canBuyItem()) {
+			vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
+			vendingMachineOutputView.printPurchasingInputMessage();
+			String item = Console.readLine();
+			if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney())) {
+				continue;
+			}
+			userModel.reduceMoney(itemModel.getPriceByName(item));
+		}
+	}
+
+	private boolean canBuyItem() {
+		return itemModel.getMinimumPrice() > userModel.getRemainingMoney() && itemModel.hasExtraQuantity();
 	}
 
 	private String getInitialAmount() {
@@ -56,7 +76,7 @@ public class VendingMachineController {
 	private String getInputAmount() {
 		String inputAmount;
 		do {
-			vendingMachineOutputView.printUserInputAmountMessage();
+			vendingMachineOutputView.printUserInputAmountInputMessage();
 			inputAmount = Console.readLine();
 		} while (!inputValidator.checkInputAmountInputExceptions(inputAmount));
 		return inputAmount;
