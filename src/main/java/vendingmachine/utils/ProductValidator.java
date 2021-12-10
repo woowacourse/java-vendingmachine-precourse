@@ -17,12 +17,10 @@ public class ProductValidator {
         return product;
     }
 
-    private static Product validateProductInfo(String productInfoInput) {
-        String[] split = productInfoInput.split(",", -1);
-        String name = validateProductName(split);
-        Price price = new Price(split[1]);
-        Quantity quantity = new Quantity(split[2]);
-        return Product.registerProduct(name, price, quantity);
+    private static void validateInputIsEmpty(String productInfoInput) {
+        if (isEmpty(productInfoInput)) {
+            throw new IllegalArgumentException("공백은 입력될 수 없습니다.");
+        }
     }
 
     private static String removeBracket(String productInfoInput) {
@@ -34,24 +32,30 @@ public class ProductValidator {
     }
 
     private static void validateInputWrapBracket(StringBuffer sb) {
-        if (!((sb.charAt(0) == '[') && (sb.charAt(sb.length() - 1) == ']'))) {
+        if (!((sb.charAt(0) == INPUT_WRAP_START) && (sb.charAt(sb.length() - 1) == INPUT_WRAP_END))) {
             throw new IllegalArgumentException("상품의 상태는 []로 감싸져야 합니다.");
         }
     }
 
-    private static void validateInputIsEmpty(String productInfoInput) {
-        if (isEmpty(productInfoInput)) {
-            throw new IllegalArgumentException("공백은 입력될 수 없습니다.");
+    private static Product validateProductInfo(String productInfoInput) {
+        String[] split = productInfoInput.split(PRODUCT_INFO_DELIMETER, -1);
+        validateInfoCnt(split);
+        String name = validateProductName(split[PRODUCT_NAME_IDX]);
+        Price price = new Price(split[PRODUCT_PRICE_IDX]);
+        Quantity quantity = new Quantity(split[PRODUCT_QUANTITY_IDX]);
+        return Product.registerProduct(name, price, quantity);
+    }
+
+    private static void validateInfoCnt(String[] split) {
+        if (split.length != PRODUCT_INFO_CNT) {
+            throw new IllegalArgumentException("상품명, 가격, 수량이 제대로 입력되지 않았습니다.");
         }
     }
 
-    private static String validateProductName(String[] split) {
-        if (split.length != 3) {
-            throw new IllegalArgumentException("상품명, 가격, 수량이 제대로 입력되지 않았습니다.");
-        }
-        if (isEmpty(split[0])) {
+    private static String validateProductName(String productName) {
+        if (isEmpty(productName)) {
             throw new IllegalArgumentException("이름이 제대로 입력되지 않은 상품이 있습니다.");
         }
-        return split[0];
+        return productName;
     }
 }

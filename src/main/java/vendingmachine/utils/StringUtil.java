@@ -20,6 +20,6 @@ public class StringUtil {
     }
 
     public static ArrayList<String> splitUsingSemiColon(String inputProductsInfo) {
-        return new ArrayList<>(Arrays.asList(inputProductsInfo.split(";", -1)));
+        return new ArrayList<>(Arrays.asList(inputProductsInfo.split(PRODUCT_DELIMETER, -1)));
     }
 }
