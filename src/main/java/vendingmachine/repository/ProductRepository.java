@@ -43,15 +43,23 @@ public class ProductRepository {
         int userPrice = userMoney.getPrice();
         int cheapestPrice = productRepository.keySet()
             .stream()
-            .mapToInt(productName -> productRepository.get(productName).getPrice())
+            .mapToInt(this::getPrice)
             .min()
             .orElseThrow(() -> new IllegalArgumentException("최소값이 없습니다. 로직오류"));
         return userPrice < cheapestPrice; //아무것도 살 수 없는 돈
     }
 
+    private int getPrice(String productName) {
+        return productRepository.get(productName).getPrice();
+    }
+
     public boolean hasNoQuantity() {
-        return !productRepository.keySet()
+        return productRepository.keySet()
             .stream()
-            .anyMatch(productName -> productRepository.get(productName).getQuantity() != 0);
+            .noneMatch(productName -> getQuantity(productName) != 0);
+    }
+
+    private int getQuantity(String productName) {
+        return productRepository.get(productName).getQuantity();
     }
 }
