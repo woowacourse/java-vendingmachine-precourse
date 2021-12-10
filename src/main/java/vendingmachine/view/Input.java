@@ -8,4 +8,10 @@ public class Input {
         String inputMoney = Console.readLine();
         return Integer.parseInt(inputMoney);
     }
+
+    public static String InputProductInfo(){
+        System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
+        String productInfo = Console.readLine();
+        return productInfo;
+    }
 }

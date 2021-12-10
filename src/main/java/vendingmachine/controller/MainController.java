@@ -15,5 +15,7 @@ public class MainController {
         vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
         MakeCoinController.makeCoin(vendingMachineMoney);
         Output.printVendingMachineCoin(vendingMachineMoney);
+
+        String productInfo = Input.InputProductInfo();
     }
 }
