@@ -33,6 +33,7 @@ public class VendingMachine {
 			remains -= newCoin;
 			addCountInCoins(coinList, newCoin);
 		}
+		this.coins = coinList;
 		return coinList;
 	}
 
@@ -69,7 +70,9 @@ public class VendingMachine {
 					break;
 				}
 			}
-			change.put(coin.getValue(), coinCount);
+			if (coinCount > 0) {
+				change.put(coin.getValue(), coinCount);
+			}
 		}
 		return change;
 	}
@@ -85,9 +88,5 @@ public class VendingMachine {
 		HashMap<Integer, Integer> change;
 		change = machine.returnChange(userMoney);
 		System.out.println(change.entrySet());
-	}
-
-	public boolean hasNextStep() {
-		return this.nextStep;
 	}
 }
