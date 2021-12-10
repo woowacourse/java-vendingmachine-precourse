@@ -13,4 +13,10 @@ public class MachineValidator {
             throw new IllegalArgumentException(PREFIX + ValidatorMessage.INPUT_MONEY_NATURAL_NUMBER_MESSAGE);
         }
     }
+
+    public static void validateMoneyEnough(int money, int price) {
+        if (money < price) {
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.NOT_ENOUGH_AMOUNT);
+        }
+    }
 }

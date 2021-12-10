@@ -23,23 +23,12 @@ public class MachineController {
     }
 
     public String buyWhichProduct() {
-        String buyProductName = "";
-        try {
-            buyProductName = MachineInputView.buyWhichProductByClient();
-            // 검증로직
-        } catch (IllegalArgumentException e) {
-            buyWhichProduct();
-        }
-        return buyProductName;
+        return MachineInputView.buyWhichProductByClient();
     }
 
-    public boolean buyProduct(int price) {
-        if (machine.getAmountByClient() < price) {
-            // 검증 로직 (상품 구매 불가)
-            return false;
-        }
+    public void buyProduct(int price) {
+        MachineValidator.validateMoneyEnough(machine.getAmountByClient(), price);
         machine.buyProduct(price);
-        return true;
     }
 
     public int nowInputAmount() {
