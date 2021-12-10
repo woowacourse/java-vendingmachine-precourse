@@ -2,7 +2,6 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.exception.NotEnoughBalanceException;
-
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -18,6 +17,10 @@ public class VendingMachine {
         put(Coin.COIN_100, 0);
         put(Coin.COIN_500, 0);
     }};
+
+    public void addBalance(int balance) {
+        this.balance += balance;
+    }
 
     public void generateCoin(int holdingAmount) {
         Coin pickedCoin;
