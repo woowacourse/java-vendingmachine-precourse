@@ -12,7 +12,7 @@ public class VendingMachine {
     public VendingMachine() {
     }
 
-    public void inputMoeny(Money money) {
+    public void inputMoney(Money money) {
         this.money = money;
     }
 
