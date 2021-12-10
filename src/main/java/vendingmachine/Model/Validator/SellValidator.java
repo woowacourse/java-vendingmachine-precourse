@@ -19,13 +19,13 @@ public class SellValidator {
 
 	private void isUserRich() {
 		if (product.PRICE > Init.userMoney) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_USER_POOR);
 		}
 	}
 
 	private void isNoStock() {
 		if (product.stock == 0) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_NO_STOCK);
 		}
 	}
 }

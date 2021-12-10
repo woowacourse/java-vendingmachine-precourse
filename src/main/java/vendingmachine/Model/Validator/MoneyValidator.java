@@ -20,19 +20,19 @@ public class MoneyValidator {
 
 	private void isRightString() {
 		if (!Constants.MONEY_PATTERN.matcher(MONEY_STRING).matches()) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_MONEY_PATTERN);
 		}
 	}
 
 	private void isRightRange() {
 		if (Integer.parseInt(MONEY_STRING) < 100) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_MONEY_RANGE);
 		}
 	}
 
 	private void isRightUnit() {
 		if (Integer.parseInt(MONEY_STRING) % 10 != 0) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_MONEY_UNIT);
 		}
 	}
 }

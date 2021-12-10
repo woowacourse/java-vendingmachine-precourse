@@ -19,7 +19,7 @@ public class ProductValidator {
 
 	private void isRightString() {
 		if (!Constants.PRODUCT_PATTERN.matcher(PRODUCT_STRING).matches()) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_PRODUCT_STRING);
 		}
 	}
 
@@ -29,7 +29,7 @@ public class ProductValidator {
 			.map(product -> product.split(",")[0]).toArray(String[]::new);
 
 		if (productNames.length != Arrays.stream(productNames).distinct().count()) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_PRODUCT_DUPLICATED);
 		}
 	}
 }

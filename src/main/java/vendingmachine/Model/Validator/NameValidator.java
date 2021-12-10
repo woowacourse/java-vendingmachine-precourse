@@ -22,13 +22,13 @@ public class NameValidator {
 
 	private void isRightString() {
 		if (!Constants.NAME_PATTERN.matcher(NAME).matches()) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_NAME_STRING);
 		}
 	}
 
 	private void isInNames() {
 		if (Arrays.stream(NAMES).noneMatch(name -> Objects.equals(name, NAME))) {
-			throw new IllegalArgumentException(Constants.ERROR);
+			throw new IllegalArgumentException(Constants.ERROR_NAME_IN_NAMES);
 		}
 	}
 }
