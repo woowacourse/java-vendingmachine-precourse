@@ -13,7 +13,7 @@ public class MainController {
     public void playGame(){
         int vendingMachineChange = Input.InputVendingMachineChange();
         vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
-        MakeCoinController.makeCoin(vendingMachineMoney);
+        CoinController.makeCoin(vendingMachineMoney);
         Output.printVendingMachineCoin(vendingMachineMoney);
 
         String productInfo = Input.InputProductInfo();

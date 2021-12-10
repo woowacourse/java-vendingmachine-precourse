@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachineMoney;
 
-public class MakeCoinController {
+public class CoinController {
     public static void makeCoin(VendingMachineMoney vendingMachineMoney){
         int remainChange = vendingMachineMoney.getTotalMoney();
 
