@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Coins {
     private static final int initialNumberOfCoin = 0;
-    public Map<Coin, Integer> coins;
+    private Map<Coin, Integer> coins;
 
     public Coins() {
         this.coins = new HashMap<>();

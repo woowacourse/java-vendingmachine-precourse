@@ -9,7 +9,6 @@ public class ItemInfo {
         this.price = price;
     }
 
-    //test를 위한 getter 2개
     public String getName() {
         return name;
     }

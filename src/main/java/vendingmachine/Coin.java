@@ -32,5 +32,4 @@ public enum Coin {
         return amount;
     }
 
-
 }

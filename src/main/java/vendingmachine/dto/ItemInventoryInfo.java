@@ -9,7 +9,6 @@ public class ItemInventoryInfo {
         this.quantity = quantity;
     }
 
-    //테스트를 위한 getter
     public ItemInfo getItemInfo() {
         return itemInfo;
     }
