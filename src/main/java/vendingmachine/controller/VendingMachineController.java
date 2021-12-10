@@ -24,7 +24,12 @@ public class VendingMachineController {
 
 	private void purchaseProduct(VendingMachine vendingMachine) {
 		printInputAmount(vendingMachine.getInputAmount());
-		vendingMachine.purchaseProduct(inputPurchaseProductName());
+		try{
+			vendingMachine.purchaseProduct(inputPurchaseProductName());
+		}catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			purchaseIsPossible(vendingMachine);
+		}
 	}
 
 	private void callPrintChangeAmount(VendingMachine vendingMachine) {
