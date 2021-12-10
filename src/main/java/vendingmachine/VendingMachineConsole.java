@@ -6,6 +6,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.dto.ItemsInventoryInfo;
 import vendingmachine.dto.request.CurrentBalanceRequest;
 import vendingmachine.dto.request.ItemsInventoryRequest;
+import vendingmachine.dto.request.MoneyToInsertRequest;
 import vendingmachine.dto.response.CurrentBalanceResponse;
 
 public class VendingMachineConsole {
@@ -25,7 +26,6 @@ public class VendingMachineConsole {
         return currentBalance;
     }
 
-
     public ItemsInventoryInfo inputItemInventoryInfo() {
         ItemsInventoryInfo itemInventoryInfo = new ItemsInventoryInfo();
         boolean isItemsInventoryInfoEntered = false;
@@ -42,6 +42,10 @@ public class VendingMachineConsole {
 
     public void printCurrentBalance(Coins currentBalance) {
         System.out.println(new CurrentBalanceResponse(currentBalance).toPrint());
+    }
+
+    public int inputMoneyToInsert() {
+       return new MoneyToInsertRequest(input()).toMoneyToInsert();
     }
 
     private String input() {
