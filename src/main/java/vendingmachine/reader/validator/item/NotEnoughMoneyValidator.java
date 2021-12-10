@@ -7,19 +7,10 @@ import vendingmachine.model.machine.VendingMachineRepository;
 import vendingmachine.reader.validator.Validator;
 
 public class NotEnoughMoneyValidator implements Validator {
-	private final ItemRepository itemRepository;
-	private final VendingMachineRepository vendingMachineRepository;
-
-	public NotEnoughMoneyValidator(ItemRepository itemRepository,
-	                               VendingMachineRepository vendingMachineRepository) {
-		this.itemRepository = itemRepository;
-		this.vendingMachineRepository = vendingMachineRepository;
-	}
-
 	@Override
 	public boolean validate(String value) {
-		Item item = itemRepository.findByName(value);
-		VendingMachine vendingMachine = vendingMachineRepository.find();
+		Item item = ItemRepository.findByName(value);
+		VendingMachine vendingMachine = VendingMachineRepository.find();
 		return vendingMachine.isOverAndEqualMoney(item);
 	}
 

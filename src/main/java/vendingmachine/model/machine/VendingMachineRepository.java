@@ -1,13 +1,13 @@
 package vendingmachine.model.machine;
 
 public class VendingMachineRepository {
-	private VendingMachine vendingMachine;
+	private static VendingMachine vendingMachine = null;
 
-	public void save(VendingMachine vendingMachine) {
-		this.vendingMachine = vendingMachine;
+	public static void save(VendingMachine machine) {
+		vendingMachine = machine;
 	}
 
-	public VendingMachine find() {
+	public static VendingMachine find() {
 		return vendingMachine;
 	}
 }

@@ -4,15 +4,9 @@ import vendingmachine.model.item.ItemRepository;
 import vendingmachine.reader.validator.Validator;
 
 public class NotFoundItemValidator implements Validator {
-	private final ItemRepository itemRepository;
-
-	public NotFoundItemValidator(ItemRepository itemRepository) {
-		this.itemRepository = itemRepository;
-	}
-
 	@Override
 	public boolean validate(String value) {
-		return itemRepository.existsByName(value);
+		return ItemRepository.existsByName(value);
 	}
 
 	@Override

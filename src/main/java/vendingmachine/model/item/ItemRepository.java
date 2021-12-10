@@ -1,35 +1,34 @@
 package vendingmachine.model.item;
 
-import java.util.Comparator;
+import static java.util.Comparator.comparingInt;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import static java.util.Comparator.comparingInt;
 
 public class ItemRepository {
-	private Map<String, Item> map = new HashMap<>();
+	private static Map<String, Item> map = new HashMap<>();
 
-	public boolean existsByName(String name) {
+	public static boolean existsByName(String name) {
 		return map.containsKey(name);
 	}
 
-	public void save(Item item) {
+	public static void save(Item item) {
 		map.put(item.getName(), item);
 	}
 
-	public void saveAll(List<Item> items) {
-		items.stream().forEach(this::save);
+	public static void saveAll(List<Item> items) {
+		items.stream().forEach(ItemRepository::save);
 	}
 
-	public Item findByName(String name) {
+	public static Item findByName(String name) {
 		return map.get(name);
 	}
 
-	public boolean isAllSoldOut() {
+	public static boolean isAllSoldOut() {
 		return map.values().stream().allMatch(Item::isSoldOut);
 	}
 
-	public Item findLowestPriceItem() {
+	public static Item findLowestPriceItem() {
 		return map.values().stream()
 			.sorted(comparingInt(Item::getPrice))
 			.findFirst()

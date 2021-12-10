@@ -9,19 +9,14 @@ import vendingmachine.reader.PurchaseItemNameReader;
 import vendingmachine.reader.RecursiveReader;
 
 public class VendingMachineController {
-	private final ItemRepository itemRepository;
-	private final VendingMachineRepository vendingMachineRepository;
 	private final RecursiveReader<String> purchaseItemNameReader;;
 
-	public VendingMachineController(ItemRepository itemRepository,
-	                                VendingMachineRepository vendingMachineRepository) {
-		this.itemRepository = itemRepository;
-		this.vendingMachineRepository = vendingMachineRepository;
-		purchaseItemNameReader = PurchaseItemNameReader.recursiveReader(itemRepository, vendingMachineRepository);
+	public VendingMachineController() {
+		purchaseItemNameReader = PurchaseItemNameReader.recursiveReader();
 	}
 
 	public void run() {
-		VendingMachine vendingMachine = vendingMachineRepository.find();
+		VendingMachine vendingMachine = VendingMachineRepository.find();
 
 		while(isSalable(vendingMachine)) {
 			printRemainInputMoney(vendingMachine);
@@ -37,12 +32,12 @@ public class VendingMachineController {
 	}
 
 	private boolean isOverAndEqualMoney(VendingMachine vendingMachine) {
-		Item lowestPriceItem = itemRepository.findLowestPriceItem();
+		Item lowestPriceItem = ItemRepository.findLowestPriceItem();
 		return vendingMachine.isOverAndEqualMoney(lowestPriceItem);
 	}
 
 	private boolean isAllSoldOut() {
-		return itemRepository.isAllSoldOut();
+		return ItemRepository.isAllSoldOut();
 	}
 
 	private void printRemainInputMoney(VendingMachine vendingMachine) {
@@ -51,7 +46,7 @@ public class VendingMachineController {
 
 	private Item purchaseItem() {
 		String name = purchaseItemNameReader.read();
-		return itemRepository.findByName(name);
+		return ItemRepository.findByName(name);
 	}
 
 	private void printExchangeByCoin(Coins coins) {

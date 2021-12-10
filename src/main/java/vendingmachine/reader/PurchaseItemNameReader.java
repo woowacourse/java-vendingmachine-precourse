@@ -28,13 +28,12 @@ public class PurchaseItemNameReader extends Reader<String> {
 		return "상품명";
 	}
 
-	public static RecursiveReader<String> recursiveReader(ItemRepository itemRepository,
-	                                                      VendingMachineRepository vendingMachineRepository) {
+	public static RecursiveReader<String> recursiveReader() {
 		return new RecursiveReader<>(
 			new PurchaseItemNameReader(
 				new CompositeValidator(
-					new NotFoundItemValidator(itemRepository),
-					new NotEnoughMoneyValidator(itemRepository, vendingMachineRepository),
-					new SoldOutItemValidator(itemRepository))));
+					new NotFoundItemValidator(),
+					new NotEnoughMoneyValidator(),
+					new SoldOutItemValidator())));
 	}
 }

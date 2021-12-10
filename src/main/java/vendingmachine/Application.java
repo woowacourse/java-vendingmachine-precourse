@@ -10,9 +10,6 @@ import vendingmachine.reader.InputMoneyReader;
 import vendingmachine.reader.ItemListReader;
 
 public class Application {
-	private static ItemRepository itemRepository;
-	private static VendingMachineRepository vendingMachineRepository;
-
 	public static void main(String[] args) {
 		VendingMachineController controller = createVendingMachineController();
 		controller.run();
@@ -20,10 +17,10 @@ public class Application {
 
 	private static VendingMachineController createVendingMachineController() {
 		Coins coins = generateCoins();
-		itemRepository = createItemRepository();
+		saveItemsToRepository();
 		int inputMoney = inputMoney();
-		vendingMachineRepository = createVendingMachineRepository(coins, inputMoney);
-		return new VendingMachineController(itemRepository, vendingMachineRepository);
+		saveVendingMachineToRepository(coins, inputMoney);
+		return new VendingMachineController();
 	}
 
 	private static Coins generateCoins() {
@@ -33,10 +30,8 @@ public class Application {
 		return coins;
 	}
 
-	private static ItemRepository createItemRepository() {
-		itemRepository = new ItemRepository();
-		itemRepository.saveAll(ItemListReader.recursiveReader().read());
-		return itemRepository;
+	private static void saveItemsToRepository() {
+		ItemRepository.saveAll(ItemListReader.recursiveReader().read());
 	}
 
 	private static int inputMoney() {
@@ -44,9 +39,7 @@ public class Application {
 		return inputMoney;
 	}
 
-	private static VendingMachineRepository createVendingMachineRepository(Coins coins, int inputMoney) {
-		vendingMachineRepository = new VendingMachineRepository();
-		vendingMachineRepository.save(new VendingMachine(coins, inputMoney));
-		return vendingMachineRepository;
+	private static void saveVendingMachineToRepository(Coins coins, int inputMoney) {
+		VendingMachineRepository.save(new VendingMachine(coins, inputMoney));
 	}
 }
