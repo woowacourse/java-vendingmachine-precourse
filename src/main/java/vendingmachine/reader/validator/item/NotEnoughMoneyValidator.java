@@ -11,7 +11,7 @@ public class NotEnoughMoneyValidator implements Validator {
 	public boolean validate(String value) {
 		Item item = ItemRepository.findByName(value);
 		VendingMachine vendingMachine = VendingMachineRepository.find();
-		return vendingMachine.hasEnoughMoney(item);
+		return vendingMachine.hasEnoughMoney(item.getPrice());
 	}
 
 	@Override

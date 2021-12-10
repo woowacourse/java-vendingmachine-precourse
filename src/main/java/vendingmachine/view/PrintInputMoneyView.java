@@ -9,7 +9,7 @@ public class PrintInputMoneyView extends View {
 	public void update(Observable o, Object arg) {
 		Event event = convertToEvent(arg);
 
-		if (event.isTypeOf(EventType.INPUT_MONEY_CHANGED)) {
+		if (event.isTypeOf(EventType.REMAIN_MONEY_CHANGED)) {
 			Integer inputMoney = convertToData(event.getData(), Integer.class);
 			System.out.println("투입 금액: " + inputMoney + "원");
 		}

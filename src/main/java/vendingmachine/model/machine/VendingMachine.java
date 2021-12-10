@@ -1,14 +1,13 @@
 package vendingmachine.model.machine;
 
+import static vendingmachine.model.event.EventType.*;
 import java.util.Observable;
 import vendingmachine.model.coin.Coins;
 import vendingmachine.model.event.Event;
-import vendingmachine.model.item.Item;
-import static vendingmachine.model.event.EventType.*;
 
 public class VendingMachine extends Observable {
 	private Coins coins;
-	private int inputMoney;
+	private int remainMoney;
 
 	public void initExchangeCoins(Coins coins) {
 		this.coins = coins;
@@ -17,29 +16,28 @@ public class VendingMachine extends Observable {
 	}
 
 	public void inputMoney(int inputMoney) {
-		this.inputMoney = inputMoney;
+		this.remainMoney = inputMoney;
 		setChanged();
-		notifyObservers(Event.of(INPUT_MONEY_CHANGED, inputMoney));
+		notifyObservers(Event.of(REMAIN_MONEY_CHANGED, remainMoney));
 	}
 
-	public void sell(Item item) {
-		inputMoney -= item.getPrice();
-		item.sell();
+	public void pay(int price) {
+		remainMoney -= price;
 		setChanged();
-		notifyObservers(Event.of(INPUT_MONEY_CHANGED, inputMoney));
+		notifyObservers(Event.of(REMAIN_MONEY_CHANGED, remainMoney));
 	}
 
 	public void close() {
 		setChanged();
-		notifyObservers(Event.of(CLOSE_VENDING_MACHINE, getRemainInputMoney()));
+		notifyObservers(Event.of(CLOSE_VENDING_MACHINE, getRemainCoins()));
 	}
 
-	public boolean hasEnoughMoney(Item item) {
-		return item.getPrice() <= inputMoney;
+	public boolean hasEnoughMoney(int price) {
+		return price <= remainMoney;
 	}
 
-	private Coins getRemainInputMoney() {
-		if (coins.getTotalAmount() <= inputMoney) {
+	private Coins getRemainCoins() {
+		if (coins.getTotalAmount() <= remainMoney) {
 			return coins;
 		}
 

@@ -18,13 +18,15 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = VendingMachineRepository.find();
 
 		while (isSalable(vendingMachine)) {
-			vendingMachine.sell(purchaseItem());
+			Item purchaseItem = getPurchaseItem();
+			purchaseItem.sell();
+			vendingMachine.pay(purchaseItem.getPrice());
 		}
 
 		vendingMachine.close();
 	}
 
-	private Item purchaseItem() {
+	private Item getPurchaseItem() {
 		String name = purchaseItemNameReader.read();
 		return ItemRepository.findByName(name);
 	}
@@ -39,6 +41,6 @@ public class VendingMachineController {
 
 	private boolean hasEnoughMoney(VendingMachine vendingMachine) {
 		Item lowestPriceItem = ItemRepository.findLowestPriceItem();
-		return vendingMachine.hasEnoughMoney(lowestPriceItem);
+		return vendingMachine.hasEnoughMoney(lowestPriceItem.getPrice());
 	}
 }
