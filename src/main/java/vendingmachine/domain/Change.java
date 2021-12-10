@@ -6,10 +6,10 @@ import java.util.TreeMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
-	private int money;
+	private Money money;
 	private static final Map<Coin, Integer> changes = new TreeMap<>();
 
-	public Change(int money) {
+	public Change(Money money) {
 		initChanges();
 		this.money = money;
 	}
@@ -20,9 +20,9 @@ public class Change {
 
 	public Map<Coin, Integer> generateChanges() {
 		int tmpMoney = 0;
-		while (tmpMoney != money) {
+		while (!money.isSame(tmpMoney)) {
 			int random = Randoms.pickNumberInList(Coin.getList());
-			if (money < tmpMoney + random) {
+			if (money.isSmaller(tmpMoney + random)) {
 				continue;
 			}
 			tmpMoney += random;

@@ -7,6 +7,7 @@ import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Money;
 import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -18,18 +19,30 @@ public class MachineController {
 	private static final String PRICE = "금액";
 	private static final String STOCK = "수량";
 
-	Beverages beverages = new Beverages();
+	private Beverages beverages = new Beverages();
+	private Map<Coin, Integer> changes;
+	private Money inputMoney = new Money();
 
 	public void run() {
-		Change change = new Change(InputView.getHavingMoney());
-		Map<Coin, Integer> changes = change.generateChanges();
-		OutputView.printHavingMoney();
-		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
-		splitItem(itemPriceStock);
-		int userInputMoney = InputView.getUserInputMoney();
+		setting();
+		progress();
 	}
 
-	private void splitItem(ArrayList<String> itemPriceStock) {
+	private void setting() {
+		Change change = new Change(InputView.getHavingMoney());
+		changes = change.generateChanges();
+		OutputView.printHavingMoney();
+		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
+		beverages = splitItem(itemPriceStock);
+		inputMoney = InputView.getUserInputMoney();
+	}
+
+	private void progress() {
+		//상품 구매가 진행되는 매서드
+	}
+
+	private Beverages splitItem(ArrayList<String> itemPriceStock) {
+
 		for (String s : itemPriceStock) {
 			String[] itemInfo = s.split(",");
 			String name = itemInfo[itemIndex];
@@ -38,6 +51,7 @@ public class MachineController {
 			beverages.add(new Beverage(name, price, stock));
 
 		}
+		return beverages;
 	}
 
 }

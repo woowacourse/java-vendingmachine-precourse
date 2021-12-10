@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.ArrayList;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Money;
 import vendingmachine.validator.InputValidator;
 
 public class InputView {
@@ -11,9 +12,10 @@ public class InputView {
 	private static final String USER_INPUT_MONEY = "투입 금액을 입력해 주세요.";
 	private static final String PRICE = "금액";
 
-	public static int getHavingMoney() {
+	public static Money getHavingMoney() {
 		System.out.println(INPUT_HAVING_MONEY);
-		return InputValidator.checkNumberForm(Console.readLine(), PRICE);
+		int money = InputValidator.checkNumberForm(Console.readLine(), PRICE);
+		return new Money(money);
 
 	}
 
@@ -23,8 +25,8 @@ public class InputView {
 		return InputValidator.checkInputForm(input);
 	}
 
-	public static int getUserInputMoney() {
+	public static Money getUserInputMoney() {
 		System.out.println(USER_INPUT_MONEY);
-		return InputValidator.checkNumberForm(Console.readLine(), PRICE);
+		return new Money(InputValidator.checkNumberForm(Console.readLine(), PRICE));
 	}
 }
