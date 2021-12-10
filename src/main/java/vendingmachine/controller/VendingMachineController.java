@@ -22,4 +22,19 @@ public class VendingMachineController {
 		OutputView.addProductAndNumbers();
 		vendingMachine.addProduct(InputView.readLineString());
 	}
+
+	public void buyProduct() {
+		OutputView.enterInputMoney();
+		int money = InputView.readLineInt();
+		while (checkCanBuyProduct(money)) {
+			OutputView.showRemainingMoney(money);
+			OutputView.enterWantProduct();
+			String product = InputView.readLineString();
+			money = vendingMachine.getProduct(product, money);
+		}
+	}
+
+	private boolean checkCanBuyProduct(int money) {
+		return money >= vendingMachine.getNeedMinimumMoney();
+	}
 }
