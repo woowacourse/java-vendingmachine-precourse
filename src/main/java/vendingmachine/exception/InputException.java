@@ -6,19 +6,15 @@ public class InputException {
 	private static final String INPUT_HAVE_BRACKET = "[ERROR] 개별 상품은 [](대괄호)로 묶어야 합니다.";
 	private static final String INPUT_IS_NUMBER = "[ERROR] 올바른 금액 형식이 아닙니다.";
 
-	public static void checkSemicolon(String input) {
-		if (!input.contains(";")) {
-			throw new IllegalArgumentException(INPUT_HAVE_SEMICOLON);
-		}
+	public static void printNotFoundSemicolonError() {
+		throw new IllegalArgumentException(INPUT_HAVE_SEMICOLON);
 	}
 
-	public static void checkBracket(String input) {
-		if (input.charAt(0) != '[' || input.charAt(input.length() - 1) != ']') {
-			throw new IllegalArgumentException(INPUT_HAVE_BRACKET);
-		}
+	public static void printNotFoundBracketError() {
+		throw new IllegalArgumentException(INPUT_HAVE_BRACKET);
 	}
 
-	public static void printInputIsNumber() {
+	public static void printNotNumberError() {
 		throw new IllegalArgumentException(INPUT_IS_NUMBER);
 	}
 

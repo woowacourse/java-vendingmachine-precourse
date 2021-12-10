@@ -10,11 +10,11 @@ public class InputValidator {
 
 	public static ArrayList<String> checkInputForm(String input) {
 		ArrayList<String> items = new ArrayList<>();
-		InputException.checkSemicolon(input);
+		checkSemicolon(input);
 
 		String[] itemList = input.split(";");
 		for (String item : itemList) {
-			InputException.checkBracket(item);
+			checkBracket(item);
 			item = item.substring(1, item.length() - 1);
 			items.add(item);
 		}
@@ -23,9 +23,21 @@ public class InputValidator {
 
 	public static int checkNumberForm(String input) {
 		if (!input.matches(REGEX)) {
-			InputException.printInputIsNumber();
+			InputException.printNotNumberError();
 		}
 		return Integer.parseInt(input);
+	}
+
+	private static void checkSemicolon(String input) {
+		if (!input.contains(";")) {
+			InputException.printNotFoundSemicolonError();
+		}
+	}
+
+	private static void checkBracket(String input) {
+		if (input.charAt(0) != '[' || input.charAt(input.length() - 1) != ']') {
+			InputException.printNotFoundBracketError();
+		}
 	}
 
 }
