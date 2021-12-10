@@ -5,6 +5,8 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 
 public class OutputView {
+    final static String INPUT_MONEY_MESSAGE = "투입 금액: ";
+
     public static void printErrorMessage(IllegalArgumentException exception) {
         System.out.println(exception.getMessage());
     }
@@ -17,6 +19,6 @@ public class OutputView {
     }
 
     public static void printMoneyStatus(VendingMachine vendingMachine) {
-        System.out.println("투입 금액: " + vendingMachine.getInputMoney());
+        System.out.println(INPUT_MONEY_MESSAGE + vendingMachine.getInputMoney());
     }
 }

@@ -15,7 +15,7 @@ public class VendingMachineController {
 
         getInputMoney(vendingMachine);
 
-        do{
+        do {
             purchase(vendingMachine);
         } while (!vendingMachine.canPurchase());
 

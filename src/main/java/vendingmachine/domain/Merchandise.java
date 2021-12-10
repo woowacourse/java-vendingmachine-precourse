@@ -28,7 +28,7 @@ public class Merchandise extends NumberValidation {
     }
 
     public int getPrice(String merchandiseName) {
-        if (isSameName(merchandiseName)){
+        if (isSameName(merchandiseName)) {
             return price;
         }
         return NOT_SAME_NAME_PRICE;
@@ -62,9 +62,9 @@ public class Merchandise extends NumberValidation {
         return false;
     }
 
-    public boolean isSoldOut() throws IllegalArgumentException{
+    public boolean isSoldOut() throws IllegalArgumentException {
         if (quantity <= SOLD_OUT_QUANTITY) {
-           throw new IllegalArgumentException();
+            throw new IllegalArgumentException();
         }
         return false;
     }

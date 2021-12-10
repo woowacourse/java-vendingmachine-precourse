@@ -39,9 +39,9 @@ public class VendingMachine {
     }
 
     private void makeRandomCoin(Coin coin) {
-        while (machineMoney.getMoney() != 0){
+        while (machineMoney.getMoney() != 0) {
             int number = Randoms.pickNumberInList(coin.getAmountList());
-            if (number <= machineMoney.getMoney()){
+            if (number <= machineMoney.getMoney()) {
                 machineMoney.minusMoney(number);
                 coin.randomCoinCount(number);
             }
@@ -62,7 +62,7 @@ public class VendingMachine {
     }
 
     public boolean canPurchase() {
-        if (merchandiseList.cantBuyAllMerchandise(inputMoney.getInputMoney()) || merchandiseList.AllMerchandiseSoldOut()){
+        if (merchandiseList.cantBuyAllMerchandise(inputMoney.getInputMoney()) || merchandiseList.AllMerchandiseSoldOut()) {
             return true;
         }
         return false;
@@ -72,8 +72,8 @@ public class VendingMachine {
         int money = inputMoney.getInputMoney();
         ArrayList<String> changeList = new ArrayList<String>();
 
-        for (Coin coin : Coin.values()){
-            if (money / coin.getAmount() < coin.getCount()){
+        for (Coin coin : Coin.values()) {
+            if (money / coin.getAmount() < coin.getCount()) {
                 coin.setCount(money / coin.getAmount());
                 changeList.add(coin.toString());
                 System.out.println("잔돈");
@@ -84,14 +84,5 @@ public class VendingMachine {
             money = money - coin.getCount() * coin.getAmount();
         }
     }
-
-    public boolean coinLessThanMoney(int money) {
-        int coinSum =  Arrays.stream(Coin.values())
-                .map(coin -> coin.getAmount() * coin.getCount())
-                .reduce(Integer :: sum)
-                .orElse(0);
-        return coinSum <= money;
-    }
-
 }
 

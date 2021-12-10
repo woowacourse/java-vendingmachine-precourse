@@ -45,7 +45,7 @@ public enum Coin {
 
     public void randomCoinCount(int number) {
         for (Coin coin : Coin.values()) {
-            if (coin.getAmount() == number){
+            if (coin.getAmount() == number) {
                 addCount(coin);
             }
         }

@@ -29,7 +29,7 @@ public class MerchandiseList {
     public int getPrice(String merchandiseName) {
         return merchandiseList.stream()
                 .map(merchandise -> merchandise.getPrice(merchandiseName))
-                .reduce(Integer :: sum)
+                .reduce(Integer::sum)
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NOT_EXIST_MERCHANDISE.print()));
     }
 
@@ -95,11 +95,10 @@ public class MerchandiseList {
 
     public boolean AllMerchandiseSoldOut() {
         for (Merchandise merchandise : merchandiseList) {
-            try{
+            try {
                 merchandise.isSoldOut();
                 return false;
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
 
             }
         }
@@ -108,11 +107,10 @@ public class MerchandiseList {
 
     public boolean cantBuyAllMerchandise(int money) {
         for (Merchandise merchandise : merchandiseList) {
-            try{
+            try {
                 merchandise.isExpensive(money);
                 return false;
-            }
-            catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
 
             }
         }
