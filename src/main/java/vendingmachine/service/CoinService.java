@@ -1,4 +1,4 @@
-package vendingmachine.controller;
+package vendingmachine.service;
 
 import static constant.NumberConstant.*;
 import static constant.StringConstant.*;
@@ -10,12 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
+import vendingmachine.model.Coin;
 
-public class CoinController {
+public class CoinService {
 	private Map<Coin, Integer> coins = new HashMap<>();
 
-	public Map<Coin, Integer> setCoinsByBalance(int balance) {
+	public Map<Coin, Integer> getCoinsByBalance(int balance) {
 		List<Integer> coinUnitList = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
 			coinUnitList.add(coin.getAmount());

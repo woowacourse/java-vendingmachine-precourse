@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.model.VendingMachine;
+import vendingmachine.service.VendingMachineService;
 
 public class PriceTest {
 
@@ -16,10 +17,11 @@ public class PriceTest {
 
 		//when
 		VendingMachine vendingMachine = new VendingMachine();
+		VendingMachineService vendingMachineService = new VendingMachineService(vendingMachine);
 
 		//then
 		assertThatThrownBy(() -> {
-			vendingMachine.setBalance(userInput);})
+			vendingMachineService.saveBalance(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_NUMBER);
 	}
@@ -31,10 +33,11 @@ public class PriceTest {
 
 		//when
 		VendingMachine vendingMachine = new VendingMachine();
+		VendingMachineService vendingMachineService = new VendingMachineService(vendingMachine);
 
 		//then
 		assertThatThrownBy(() -> {
-			vendingMachine.setBalance(userInput);})
+			vendingMachineService.saveBalance(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_POSITIVE);
 	}
@@ -46,10 +49,11 @@ public class PriceTest {
 
 		//when
 		VendingMachine vendingMachine = new VendingMachine();
+		VendingMachineService vendingMachineService = new VendingMachineService(vendingMachine);
 
 		//then
 		assertThatThrownBy(() -> {
-			vendingMachine.setBalance(userInput);})
+			vendingMachineService.saveBalance(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_COIN_VALUE);
 	}

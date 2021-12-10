@@ -1,10 +1,13 @@
 package vendingmachine.app;
 
-import vendingmachine.model.ProductRepository;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.service.VendingMachineService;
 
 public class ObjectContainer {
-	public final static VendingMachine vendingMachine = new VendingMachine();
-	public final static ProductRepository productRepository = new ProductRepository();
+	private static final VendingMachine vendingMachine = new VendingMachine();
+
+	public static VendingMachineService getVendingMachineService() {
+		return new VendingMachineService(vendingMachine);
+	}
 }
 

@@ -5,20 +5,19 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Map;
 
 import org.junit.jupiter.api.RepeatedTest;
-import org.junit.jupiter.api.Test;
 
-import vendingmachine.Coin;
-import vendingmachine.controller.CoinController;
+import vendingmachine.model.Coin;
+import vendingmachine.service.CoinService;
 
 public class RandomCoinTest {
 
 	@RepeatedTest(20)
 	void coinAmountTest() {
 		//given
-		CoinController coinController = new CoinController();
+		CoinService coinController = new CoinService();
 
 		//when
-		Map<Coin, Integer> coinIntegerMap = coinController.setCoinsByBalance(1200);
+		Map<Coin, Integer> coinIntegerMap = coinController.getCoinsByBalance(1200);
 
 		//then
 		assertThat(coinIntegerMap.get(Coin.COIN_10) * 10 +

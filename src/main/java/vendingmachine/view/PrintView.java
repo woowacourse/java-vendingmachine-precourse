@@ -5,7 +5,7 @@ import static constant.StringConstant.*;
 
 import java.util.Map;
 
-import vendingmachine.Coin;
+import vendingmachine.model.Coin;
 
 public class PrintView {
 	public static void printVendingMachineCoins(Map<Coin,Integer> coins) {

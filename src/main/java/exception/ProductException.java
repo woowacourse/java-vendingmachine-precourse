@@ -49,7 +49,8 @@ public class ProductException {
 
 	private static int isValidPrice(String productPrice) {
 		try {
-			int price = PriceException.isValidPrice(productPrice);
+			PriceException.isValidPrice(productPrice);
+			int price = Integer.parseInt(productPrice);
 			return price;
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(PRODUCT_PRICE_PREFIX + e.getMessage());
@@ -58,7 +59,8 @@ public class ProductException {
 
 	private static int isValidQuantity(String productQuantity) {
 		try {
-			int quantity = QuantityException.isValidQuantity(productQuantity);
+			QuantityException.isValidQuantity(productQuantity);
+			int quantity = Integer.parseInt(productQuantity);
 			return quantity;
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(PRODUCT_QUANTITY_PREFIX + e.getMessage());

@@ -4,25 +4,32 @@ import static constant.NumberConstant.*;
 import static constant.StringConstant.*;
 
 public class PriceException {
-	public static int isValidPrice(String rawPrice) {
+	public static void isValidPrice(String rawPrice) {
 		try {
-			int price = Integer.parseInt(rawPrice);
+			int price = isNumber(rawPrice);
 			isPositive(price);
-			return price;
+			isCoinValue(price);
+		} catch (NumberFormatException e){
+			throw new IllegalArgumentException(e.getMessage());
+		}
+	}
+
+	public static int isNumber(String rawPrice) {
+		try {
+			return Integer.parseInt(rawPrice);
 		} catch (NumberFormatException e){
 			throw new IllegalArgumentException(NOT_NUMBER);
 		}
 	}
 
-	private static void isPositive(int price) {
+	public static void isPositive(int price) {
 		if (price > ZERO) {
-			isCoinValue(price);
 			return;
 		}
 		throw new IllegalArgumentException(NOT_POSITIVE);
 	}
 
-	private static void isCoinValue(int price) {
+	public static void isCoinValue(int price) {
 		if (price % MIN_COIN_UNIT != ZERO) {
 			throw new IllegalArgumentException(NOT_COIN_VALUE);
 		}
