@@ -1,8 +1,5 @@
 package vendingmachine.controller;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.CoinCaseFactory;
 import vendingmachine.utils.ProductFactory;
@@ -17,7 +14,7 @@ public class VendingMachineController {
 
 	public static void controlVendingMachine() {
 		VendingMachine vendingMachine = initVendingMachine();
-		while (!vendingMachine.isReturnChangeCondition()){
+		while (!vendingMachine.isReturnChangeCondition()) {
 			runVendingMachine(vendingMachine);
 		}
 		// 잔돈을 반환 받는다.
