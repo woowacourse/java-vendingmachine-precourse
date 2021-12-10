@@ -1,8 +1,9 @@
 package vendingmachine.model;
 
-import static vendingmachine.util.RandomNumberGenerator.*;
-
 import java.util.LinkedHashMap;
+import java.util.List;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 // TODO: 2021/12/08 더 좋은 이름
 public class CoinList {
@@ -29,23 +30,23 @@ public class CoinList {
 
 	public void init() {
 		int leftMoney = totalMoney;
-		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_500);
-		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_100);
-		leftMoney -= addCoinsAndReturnAddedAmount(leftMoney, Coin.COIN_50);
-		hashMap.put(Coin.COIN_10, leftMoney / Coin.COIN_10.getAmount());
+		List<Integer> coinAmountList = Coin.toList();
+		while (leftMoney > 0) {
+			int pickedCoinAmount = Randoms.pickNumberInList(coinAmountList);
+			if (leftMoney < pickedCoinAmount) {
+				continue;
+			}
+			leftMoney -= pickedCoinAmount;
+			Coin coin = Coin.of(pickedCoinAmount);
+			addCoin(coin);
+		}
+
 		System.out.println(this);
 	}
 
-	private int addCoinsAndReturnAddedAmount(int money, Coin coin) {
-		if (money < coin.getAmount()) {
-			return 0;
-		}
-
-		int maxNumberOfCoins = money / coin.getAmount();
-		int numberOfCoins = generateNumberOfCoins(maxNumberOfCoins);
-		hashMap.put(coin, numberOfCoins);
-
-		return coin.getAmount() * numberOfCoins;
+	private void addCoin(Coin coin) {
+		Integer oldValue = hashMap.get(coin);
+		hashMap.replace(coin, oldValue + 1);
 	}
 
 	public void subtractCoin(Coin coin, int remainingCoins) {
