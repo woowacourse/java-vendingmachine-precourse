@@ -71,4 +71,8 @@ public class VendingMachine {
 		}
 		return remainingChange == 0;
 	}
+
+	public LinkedHashMap<Integer, Integer> getCoinsOwned() {
+		return coinsOwned;
+	}
 }
