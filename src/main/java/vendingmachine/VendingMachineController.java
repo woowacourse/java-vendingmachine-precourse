@@ -5,12 +5,15 @@ import vendingmachine.dto.ItemsInventoryInfo;
 public class VendingMachineController {
     private final VendingMachineConsole console = new VendingMachineConsole();
 
+    public VendingMachineController() {
+    }
+
     public void on() {
-        boolean isCoinBalanceInputEntered = false;
-        while (!isCoinBalanceInputEntered) {
+        boolean isCurrentBalanceInputEntered = false;
+        while (!isCurrentBalanceInputEntered) {
             try {
-                inputCoinBalance();
-                isCoinBalanceInputEntered = true;
+                inputCurrentBalance();
+                isCurrentBalanceInputEntered = true;
             } catch (IllegalArgumentException error) {
                 System.out.println(error.getMessage());
             }
@@ -27,8 +30,8 @@ public class VendingMachineController {
         }
     }
 
-    private int inputCoinBalance() {
-        return console.inputCoinBalance();
+    private int inputCurrentBalance() {
+        return console.inputCurrentBalance();
     }
 
     private ItemsInventoryInfo inputItemsInventoryInfo() {
