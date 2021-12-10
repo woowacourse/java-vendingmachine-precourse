@@ -3,6 +3,7 @@ package vendingmachine.model;
 public class VendingMachine {
 	private int insertedMoney;
 	private Changes changes;
+	private Menu menu;
 
 	public VendingMachine() {
 		insertedMoney = 0;
@@ -15,5 +16,9 @@ public class VendingMachine {
 
 	public int countCoin(int idx) {
 		return changes.countCoin(idx);
+	}
+
+	public void setMenu() {
+		menu.setProductList();
 	}
 }
