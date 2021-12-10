@@ -3,7 +3,7 @@ package vendingmachine.domain;
 import static vendingmachine.utils.Random.*;
 
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Coins {
@@ -15,7 +15,7 @@ public class Coins {
 	}
 
 	private Map<Coin, Integer> initializeCoins() {
-		list = new HashMap<>();
+		list = new LinkedHashMap<>();
 
 		Arrays.stream(Coin.values())
 			.forEach(coin -> list.put(coin, 0));
