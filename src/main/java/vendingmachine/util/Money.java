@@ -9,7 +9,7 @@ public class Money {
 		try {
 			String moneyStr = Console.readLine();
 			money = NumberException.checkMoneyException(moneyStr);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(ErrorMessage.ERROR + e.getMessage());
 			return setMoney();
 		}
