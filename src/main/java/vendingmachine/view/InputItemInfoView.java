@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.Application;
 import vendingmachine.domain.Item;
 import vendingmachine.util.ItemParser;
 import vendingmachine.util.SystemMessage;
@@ -12,6 +13,7 @@ public class InputItemInfoView implements View {
 	public void show() {
 		System.out.println(SystemMessage.INPUT_ITEM_INFO);
 		List<Item> items = readItems();
+		Application.controller.addItems(items);
 	}
 
 	private List<Item> readItems() {
