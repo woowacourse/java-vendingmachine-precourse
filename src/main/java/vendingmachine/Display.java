@@ -55,7 +55,7 @@ public class Display {
 
 	public void printChanges(Map<Coin, Integer> changes) {
 		System.out.println(CHANGES_TITLE);
-		for(Coin coin : changes.keySet()) {
+		for (Coin coin : changes.keySet()) {
 			System.out.printf(COIN_FORMAT, coin.getAmount(), changes.get(coin));
 		}
 	}

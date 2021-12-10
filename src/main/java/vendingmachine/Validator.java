@@ -63,7 +63,7 @@ public class Validator {
 	}
 
 	public String validateBuyingItem(String name, ItemManager itemManager) {
-		if(itemManager.hasItem(name)) {
+		if (itemManager.hasItem(name)) {
 			return name;
 		}
 		throw new IllegalArgumentException(NO_SUCH_ITEM_ERROR);
