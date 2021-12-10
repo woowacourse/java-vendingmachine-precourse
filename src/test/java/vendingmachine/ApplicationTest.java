@@ -3,6 +3,10 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
+import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -37,5 +41,17 @@ class ApplicationTest extends NsTest {
     @Override
     protected void runMain() {
         Application.main(new String[]{});
+    }
+
+    @Test
+    public void pickNumberInListTest() throws Exception {
+        //given
+        List<Integer> numberList = Arrays.asList(1,2,3,4);
+
+        //when
+        int result = pickNumberInList(numberList);
+
+        //then
+        assertThat(result).isGreaterThan(0).isLessThanOrEqualTo(4);
     }
 }
