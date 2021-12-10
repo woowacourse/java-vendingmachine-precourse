@@ -7,7 +7,7 @@ public class Application {
         ResultView.printRemains(machine.generateRemainCoins(remains));
         Items items = getItems();
         UserMoney userMoney = new UserMoney(InputView.GetUserMoney());
-        while(machine.hasNextStep()) {
+        while(!machine.canNotBuyAnything(userMoney, items)) {
             machine.buyItem(InputView.GetItemToBuy(userMoney),items, userMoney);
         }
     }

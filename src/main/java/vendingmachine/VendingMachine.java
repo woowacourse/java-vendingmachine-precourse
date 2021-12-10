@@ -50,7 +50,7 @@ public class VendingMachine {
 		userMoney.subtractUserMoney(item.getPrice());
 	}
 
-	public static boolean canNotBuyAnything(UserMoney userMoney, Items items) {
+	public boolean canNotBuyAnything(UserMoney userMoney, Items items) {
 		return userMoney.getMoney() < items.minPrice() || items.allOutOfStock();
 	}
 

@@ -29,7 +29,7 @@ public class Items {
 	}
 
 	public int minPrice() {
-		int minPrice = 0;
+		int minPrice = Integer.MAX_VALUE;
 		for (Item item : this.itemList) {
 			if (minPrice > item.getPrice()) {
 				minPrice = item.getPrice();
