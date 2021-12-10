@@ -22,21 +22,22 @@ public class CoinRepository { // 1급 콜렉션
     }
 
     public LinkedHashMap<Coin, Integer> giveChange(Price userMoney) {
-        LinkedHashMap<Coin, Integer> coinMachineGiveUser = new LinkedHashMap<>();
+        LinkedHashMap<Coin, Integer> tempCoinRepository = new LinkedHashMap<>();
         int remainingAmount = userMoney.getPrice();
 
-        //coinRepository를 돌면서 큰 거 부터 하나씩 뺀다.
         for (Coin coin : Coin.values()) {
-            int givenCoinCnt = 0;
-            int maxCntWithoutCondition = remainingAmount / coin.getAmount();
-            if (coinRepository.get(coin) <= maxCntWithoutCondition) {
-                givenCoinCnt = coinRepository.get(coin);
-            } else if(coinRepository.get(coin) > maxCntWithoutCondition) { //else인데 이거 나중에 함수로 뺄거.
-                givenCoinCnt = maxCntWithoutCondition;
-            }
-            coinMachineGiveUser.put(coin, givenCoinCnt);
+            int givenCoinCnt = determineGivenCoinCnt(remainingAmount, coin);
+            tempCoinRepository.put(coin, givenCoinCnt);
             remainingAmount -= (givenCoinCnt * coin.getAmount());
         }
-        return coinMachineGiveUser;
+        return tempCoinRepository;
+    }
+
+    private int determineGivenCoinCnt(int remainingAmount, Coin coin) {
+        int maxCntWithoutCondition = remainingAmount / coin.getAmount();
+        if (coinRepository.get(coin) <= maxCntWithoutCondition) {
+            return coinRepository.get(coin);
+        }
+        return maxCntWithoutCondition;
     }
 }
