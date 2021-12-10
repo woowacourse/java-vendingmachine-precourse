@@ -36,7 +36,8 @@ public class Products {
         return products.stream()
                 .filter(product -> product.getName().equals(productName))
                 .findAny()
-                .orElse(null);
+                .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
+                        + ValidatorMessage.NULL_PRODUCT_MESSAGE));
     }
 
     public int findMinPriceProduct() {
