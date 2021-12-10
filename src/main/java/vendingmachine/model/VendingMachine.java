@@ -65,6 +65,10 @@ public class VendingMachine {
 				}
 			}
 
+			if (numberOfCoins == 0) {
+				continue;
+			}
+
 			changes.addCoin(entry.getKey(), numberOfCoins);
 			coinList.subtractCoin(entry.getKey(), entry.getValue() - numberOfCoins);
 		}
