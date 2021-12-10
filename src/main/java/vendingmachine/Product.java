@@ -64,6 +64,27 @@ public class Product {
 		}
 	}
 
+	public boolean isPurchasable(int money) {
+		if (isEnoughMoney(money) && isRemainStock()) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean isEnoughMoney(int money) {
+		if (price > money) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isRemainStock() {
+		if (quantity == NONE) {
+			return false;
+		}
+		return true;
+	}
+
 	public int sell() {
 		validateOutOfStock();
 		quantity--;
@@ -75,5 +96,4 @@ public class Product {
 			throw new IllegalArgumentException(ERROR_NOT_LEFT);
 		}
 	}
-
 }

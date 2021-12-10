@@ -58,14 +58,18 @@ public class VendingMachineController {
 	}
 
 	private void repeatRequestTrading() {
-		while (true) {
-			try {
-				OutputView.printRemainMoney(vendingMachine.calculateRemainMoney());
-				InputView.printProductForBuyingMessage();
-				vendingMachine.trade(Console.readLine());
-			} catch (IllegalArgumentException illegalArgumentException) {
-				ErrorView.showMessage(illegalArgumentException);
-			}
+		while (vendingMachine.isUsable()) {
+			requestTrading();
+		}
+	}
+
+	private void requestTrading() {
+		try {
+			OutputView.printRemainMoney(vendingMachine.calculateRemainMoney());
+			InputView.printProductForBuyingMessage();
+			vendingMachine.trade(Console.readLine());
+		} catch (IllegalArgumentException illegalArgumentException) {
+			ErrorView.showMessage(illegalArgumentException);
 		}
 	}
 }

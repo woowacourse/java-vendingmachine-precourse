@@ -56,15 +56,16 @@
 
 #### 입력
 
-사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
+- 사용자가 입력하는 값은 camp.nextstep.edu.missionutils.Console의 readLine()을 활용한다.
 
 #### 랜덤 값 출출
 
-camp.nextstep.edu.missionutils.Randoms의 pickNumberInList()를 활용한다.
+- camp.nextstep.edu.missionutils.Randoms의 pickNumberInList()를 활용한다.
 
 #### 잔돈
 
-잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환한다.
+- 사용자가 더이상 물품을 구매할 수 없는 경우 잔돈을 반환한다.
+- 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환한다.
 
 #### 입력에 대한 예외 처리
 

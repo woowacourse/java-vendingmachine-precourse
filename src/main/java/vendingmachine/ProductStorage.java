@@ -67,6 +67,14 @@ public class ProductStorage {
 		storage.put(name, new Product(price, quantity));
 	}
 
+	public boolean isSellable(int money) {
+		boolean sellable = false;
+		for (Product each : storage.values()) {
+			sellable = each.isPurchasable(money);
+		}
+		return sellable;
+	}
+
 	public int sellProduct(String name) {
 		isStoredProduct(name);
 		return storage.get(name).sell();

@@ -13,6 +13,10 @@ public class VendingMachine {
 		this.moneySlot = new MoneySlot();
 	}
 
+	public boolean isUsable() {
+		return productStorage.isSellable(moneySlot.getRemainMoney());
+	}
+
 	public void insertMoney(String money) {
 		moneySlot.insert(money);
 	}
