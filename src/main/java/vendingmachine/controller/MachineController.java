@@ -13,6 +13,7 @@ public class MachineController {
 		Change change = new Change(InputView.getHavingMoney());
 		Map<Coin, Integer> changes = change.generateChanges();
 		OutputView.printHavingMoney();
+		String itemPriceStock = InputView.getItemPriceStock();
 	}
 
 }
