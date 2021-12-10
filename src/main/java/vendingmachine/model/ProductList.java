@@ -13,10 +13,6 @@ public class ProductList {
 		this.hashMap = new HashMap<>();
 	}
 
-	public HashMap<String, Product> getHashMap() {
-		return hashMap;
-	}
-
 	public void init(String rawInput) {
 		String[] productRawInputList = rawInput.split(PRODUCT_CRITERIA, -1);
 		for (String productRawInput : productRawInputList) {
@@ -52,18 +48,7 @@ public class ProductList {
 		return product.getPrice() > currentDeposit;
 	}
 
-	public void subtractQuantity(String productName) {
-		Product product = findProduct(productName);
-		product.subtractQuantity();
-		hashMap.replace(productName, product);
-	}
-
-	public int getPrice(String productName) {
-		Product product = findProduct(productName);
-		return product.getPrice();
-	}
-
-	private Product findProduct(String productName) {
+	public Product findProduct(String productName) {
 		return hashMap.get(productName);
 	}
 

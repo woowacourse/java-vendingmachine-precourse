@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.model.Changes;
 import vendingmachine.model.CoinList;
+import vendingmachine.model.Product;
 import vendingmachine.model.ProductList;
 import vendingmachine.model.VendingMachine;
 
@@ -43,9 +44,10 @@ public class VendingMachineController {
 	private void sell(String productName) {
 		ProductList productList = vendingMachine.getProductList();
 
-		productList.subtractQuantity(productName);
+		Product product = productList.findProduct(productName);
+		product.subtractQuantity();
 
-		int price = productList.getPrice(productName);
+		int price = product.getPrice();
 		vendingMachine.subtractDeposit(price);
 	}
 

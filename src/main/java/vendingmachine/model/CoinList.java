@@ -20,10 +20,6 @@ public class CoinList {
 		hashMap.put(Coin.COIN_10, 0);
 	}
 
-	public int getTotalMoney() {
-		return totalMoney;
-	}
-
 	public LinkedHashMap<Coin, Integer> getHashMap() {
 		return hashMap;
 	}
