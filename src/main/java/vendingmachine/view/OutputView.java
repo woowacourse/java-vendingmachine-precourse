@@ -26,6 +26,17 @@ public class OutputView {
 	}
 
 	public static void showRemainingMoney(int money) {
-		System.out.println(money + WON);
+		System.out.println(INPUT_MONEY + money + WON);
+	}
+
+	public static void enterWantProduct() {
+		System.out.println(ENTER_WANT_TO_BUY_PRODUCT);
+	}
+
+	public static void showRemainingMoney(LinkedHashMap<Integer, Integer> coins) {
+		System.out.println(REMAINING_MONEY);
+		coins.entrySet().stream()
+			.filter(key -> key.getValue() > 0)
+			.forEach(key -> System.out.println(key + RULES_TO_SHOW + NUMBER));
 	}
 }
