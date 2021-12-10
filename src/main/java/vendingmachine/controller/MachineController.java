@@ -6,6 +6,7 @@ import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -17,9 +18,7 @@ public class MachineController {
 	private static final String PRICE = "금액";
 	private static final String STOCK = "수량";
 
-	private Beverages beverages = new Beverages();
-	private Change changes = new Change();
-	private Money inputMoney = new Money();
+	private VendingMachine vendingMachine;
 
 	public void run() {
 		setting();
@@ -27,28 +26,26 @@ public class MachineController {
 	}
 
 	private void setting() {
-		changes = changes.generateChanges(InputView.getHavingMoney());
+		Change changes = Change.generateChanges(InputView.getHavingMoney());
 		OutputView.printHavingMachineCoin();
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
-		beverages = splitItem(itemPriceStock);
-		inputMoney = InputView.getUserInputMoney();
+		Beverages beverages = splitItem(itemPriceStock);
+		Money inputMoney = InputView.getUserInputMoney();
+
+		vendingMachine = new VendingMachine(beverages, changes, inputMoney);
 	}
 
 	private void progress() {
-		while (canSell()) {
-			OutputView.printInputMoney(inputMoney);
+		while (vendingMachine.canSell()) {
+			OutputView.printInputMoney(vendingMachine.getMoney());
 			String itemName = InputView.getItemName();
-			Beverage beverage = beverages.findByName(itemName);
-			inputMoney.spend(beverage.getPrice());
-			beverages.sell(beverage);
+			Beverage beverage = vendingMachine.findBeverageByName(itemName);
+			vendingMachine.sell(beverage);
 		}
 	}
 
-	private boolean canSell() {
-		return !inputMoney.isSmaller(beverages.getMinimumBeveragePrice()) && !beverages.isAllSoldOut();
-	}
-
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
+		Beverages beverages = new Beverages();
 		for (String itemInfoList : itemPriceStock) {
 			String[] itemInfo = itemInfoList.split(",");
 			String name = itemInfo[itemIndex];

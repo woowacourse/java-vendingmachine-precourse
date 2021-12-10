@@ -7,17 +7,19 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
 
-	private static final Map<Coin, Integer> changes = new TreeMap<>();
+	private static Map<Coin, Integer> changes = new TreeMap<>();
 
-	public Change() {
-		initChanges();
+	public Change(Map<Coin, Integer> changes) {
+		Change.changes = changes;
 	}
 
 	public static Map<Coin, Integer> getChanges() {
 		return changes;
 	}
 
-	public Change generateChanges(Money money) {
+	public static Change generateChanges(Money money) {
+		initChanges();
+
 		int tmpMoney = 0;
 		while (!money.isSame(tmpMoney)) {
 			int random = Randoms.pickNumberInList(Coin.getList());
@@ -28,10 +30,10 @@ public class Change {
 			Coin coin = Coin.getCoin(random);
 			changes.put(coin, changes.get(coin) + 1);
 		}
-		return this;
+		return new Change(changes);
 	}
 
-	private void initChanges() {
+	private static void initChanges() {
 		changes.put(Coin.COIN_500, 0);
 		changes.put(Coin.COIN_100, 0);
 		changes.put(Coin.COIN_50, 0);

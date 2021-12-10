@@ -13,7 +13,6 @@ public class OutputView {
 
 	public static void printHavingMachineCoin() {
 		System.out.println(PRINT_HAVING_COIN);
-
 		Map<Coin, Integer> changes = Change.getChanges();
 
 		for (Coin coin : changes.keySet()) {
