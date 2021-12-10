@@ -1,7 +1,5 @@
 package vendingmachine.reader;
 
-import vendingmachine.model.item.ItemRepository;
-import vendingmachine.model.machine.VendingMachineRepository;
 import vendingmachine.reader.validator.CompositeValidator;
 import vendingmachine.reader.validator.Validator;
 import vendingmachine.reader.validator.item.NotEnoughMoneyValidator;
