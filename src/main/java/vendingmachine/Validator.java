@@ -27,6 +27,7 @@ public class Validator {
 	private static final String DUPLICATE_ITEM_ERROR = "상품명이 중복됩니다.";
 	private static final String PRICE_RANGE_ERROR = "상품 가격은 100 이상이어야 합니다.";
 	private static final String COUNT_RANGE_ERROR = "상품 수량은 1 이상이어야 합니다.";
+	private static final String NO_SUCH_ITEM_ERROR = "존재하지 않거나 품절된 상품입니다.";
 
 	public int validateAmount(String input) {
 		int amount = stringToInteger(input);
@@ -59,6 +60,13 @@ public class Validator {
 		int count = stringToInteger(input);
 		checkCountRange(count);
 		return count;
+	}
+
+	public Item validateBuyingItem(String name, ItemManager itemManager) {
+		if(itemManager.hasItem(name)) {
+			return itemManager.findItemByName(name);
+		}
+		throw new IllegalArgumentException(NO_SUCH_ITEM_ERROR);
 	}
 
 	private int stringToInteger(String string) {

@@ -30,10 +30,9 @@ public class Machine {
 		prepareItems();
 		prepareInsertAmount();
 		display.printInsertAmount(cashier);
-		/*
-		* while (cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
-		* }
-		*/
+		// while (cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
+			askWhatToBuy();
+		// }
 		// TODO: 잔돈 반환
 	}
 
@@ -84,7 +83,13 @@ public class Machine {
 		}
 	}
 
-	private void askWhatToBuy() {
+	private Item askWhatToBuy() {
 		display.askWhatToBuy();
+		try{
+			return validator.validateBuyingItem(Console.readLine(), itemManager);
+		} catch (IllegalArgumentException e) {
+			display.printError(e);
+			return askWhatToBuy();
+		}
 	}
 }

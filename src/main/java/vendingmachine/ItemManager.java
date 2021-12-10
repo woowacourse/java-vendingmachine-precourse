@@ -22,4 +22,12 @@ public class ItemManager {
 			.min(Comparator.comparingInt(Item::getPrice)).get();
 		return cheapestItem.getPrice();
 	}
+
+	public boolean hasItem(String name) {
+		return items.containsKey(name);
+	}
+
+	public Item findItemByName(String name) {
+		return items.get(name);
+	}
 }
