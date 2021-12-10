@@ -16,6 +16,7 @@ public class OutputView {
 	private static final String INPUT_USER_BALANCE_MESSAGE = "\n투입 금액을 입력해 주세요.";
 	private static final String CURRENT_USER_BALANCE_FORMAT = "\n투입 금액: %d원";
 	private static final String INPUT_ITEM_TO_BUY_MESSAGE = "구매할 상품명을 입력해 주세요.";
+	private static final String CHANGE_MESSAGE = "잔돈";
 	private static final String COIN_OUTPUT_FORMAT = "%s - %s개";
 
 	public static void printError(String message) {
@@ -28,22 +29,30 @@ public class OutputView {
 
 	public static void printVendingMachineHoldingCoins(CoinsOutputDto coinsOutputDto) {
 		System.out.println(VENDING_MACHINE_HOLDING_COINS_MESSAGE);
-		printCoins(coinsOutputDto);
-	}
-
-	public static void printInputItems() {
-		System.out.println(INPUT_ITEMS_MESSAGE);
-	}
-
-	private static void printCoins(CoinsOutputDto coinsOutputDto) {
 		printCoin(COIN_500, coinsOutputDto.getCoin500Amount());
 		printCoin(COIN_100, coinsOutputDto.getCoin100Amount());
 		printCoin(COIN_50, coinsOutputDto.getCoin50Amount());
 		printCoin(COIN_10, coinsOutputDto.getCoin10Amount());
 	}
 
+	public static void printChange(CoinsOutputDto coinsOutputDto) {
+		System.out.println(CHANGE_MESSAGE);
+		printCoinIgnoringZero(COIN_500, coinsOutputDto.getCoin500Amount());
+		printCoinIgnoringZero(COIN_100, coinsOutputDto.getCoin100Amount());
+		printCoinIgnoringZero(COIN_50, coinsOutputDto.getCoin50Amount());
+		printCoinIgnoringZero(COIN_10, coinsOutputDto.getCoin10Amount());
+	}
+
+	public static void printInputItems() {
+		System.out.println(INPUT_ITEMS_MESSAGE);
+	}
+
 	// TODO: DTO 를 전달받아 출력하는 방법 고민
 	private static void printCoin(String type, int amount) {
+		System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
+	}
+
+	private static void printCoinIgnoringZero(String type, int amount) {
 		if (amount > 0) {
 			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
 		}

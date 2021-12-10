@@ -6,6 +6,7 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinAmount;
+import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.validator.CoinsValidator;
 
 public class Coins {
@@ -43,6 +44,36 @@ public class Coins {
 
 	private static int getMaxCoinAmount(int remainingBalance, Coin coin) {
 		return remainingBalance / coin.getAmount();
+	}
+
+	// TODO: 리팩토링 필요
+	public Coins getChange(UserBalance userBalance) {
+		Map<Coin, CoinAmount> coins = new HashMap<>();
+		int remainingBalance = userBalance.toInt();
+
+		for (int i = 0; i < Coin.values().length; i++) {
+			Coin coin = Coin.values()[i];
+			int quantity = getCoinQuantityForChange(coin, remainingBalance);
+			coins.put(coin, CoinAmount.from(quantity));
+			remainingBalance = remainingBalance - (coin.getAmount() * quantity);
+		}
+
+		return new Coins(coins);
+	}
+
+	private int getCoinQuantityForChange(Coin coin, int balance) {
+		int maxCoinQuantityForChange = getMaxCoinQuantityForChange(coin, balance);
+		int holdingQuantity = getCoinAmount(coin).toInt();
+
+		if (maxCoinQuantityForChange < holdingQuantity) {
+			return maxCoinQuantityForChange;
+		}
+
+		return holdingQuantity;
+	}
+
+	private int getMaxCoinQuantityForChange(Coin coin, int balance) {
+		return balance / coin.getAmount();
 	}
 
 	public CoinAmount getCoinAmount(Coin coin) {

@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.coins.Coins;
+import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.repository.CoinsRepository;
 
 public class CoinsService {
@@ -20,5 +21,9 @@ public class CoinsService {
 
 	public Coins getCurrentCoins() {
 		return coinsRepository.getCoins();
+	}
+
+	public Coins getChange(UserBalance userBalance) {
+		return coinsRepository.getCoins().getChange(userBalance);
 	}
 }

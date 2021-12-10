@@ -12,6 +12,7 @@ public class Application {
 	public static void main(String[] args) {
 		init();
 		purchaseRoutine();
+		coinsController.printChange();
 	}
 
 	private static void init() {
