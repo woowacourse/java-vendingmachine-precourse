@@ -27,8 +27,13 @@ public class Product {
 		return quantity > 0;
 	}
 
-	public boolean comparePrice(int insertedMoney) {
-		return price >= insertedMoney;
+	public int comparePrice(int insertedMoney) {
+
+		if (price >= insertedMoney) {
+			return price;
+		}
+
+		return 0;
 	}
 
 }

@@ -41,7 +41,7 @@ public class VendingMachine {
 		return menu.findQuantity(order);
 	}
 
-	public boolean comparePrice(String order) {
+	public int comparePrice(String order) {
 		return menu.comparePrice(order, insertedMoney);
 	}
 }

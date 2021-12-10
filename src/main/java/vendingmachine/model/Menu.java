@@ -53,7 +53,8 @@ public class Menu {
 		return menuList.get(nameList.get(order)).findQuantity();
 	}
 
-	public boolean comparePrice(String order, int insertedMoney) {
+	public int comparePrice(String order, int insertedMoney) {
 		return menuList.get(nameList.get(order)).comparePrice(insertedMoney);
 	}
+
 }

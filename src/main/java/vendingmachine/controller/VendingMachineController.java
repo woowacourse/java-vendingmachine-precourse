@@ -28,7 +28,11 @@ public class VendingMachineController {
 
 		while (true) {
 			userView.orderMenu();
-			vendingMachine.takeOrder();
+			
+			if (vendingMachine.takeOrder()) {
+
+			}
+
 		}
 
 	}
