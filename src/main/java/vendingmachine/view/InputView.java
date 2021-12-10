@@ -3,8 +3,8 @@ package vendingmachine.view;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class InputView {
-    public static String inputVendingMachinePrice(){
-       String price = readLine();
-       return price;
+    public static String input(){
+       String input = readLine();
+       return input;
     }
 }
