@@ -9,12 +9,12 @@ public class Product {
 
 	private Name name;
 	private Price price;
-	private Number number;
+	private TheNumber theNumber;
 
 	public Product() {
 		name = new Name();
 		price = new Price();
-		number = new Number();
+		theNumber = new TheNumber();
 	}
 
 	public void set(String input) {
@@ -23,7 +23,7 @@ public class Product {
 		List<String> productInfo = Arrays.asList(input.split(Rule.DELIMETER_PRODUCT_INFO));
 		name.set(productInfo.get(0));
 		price.set(productInfo.get(1));
-		number.set(productInfo.get(2));
+		theNumber.set(productInfo.get(2));
 	}
 
 	private void checkInput(String input) {

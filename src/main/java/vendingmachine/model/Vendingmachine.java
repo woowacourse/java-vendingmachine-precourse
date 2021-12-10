@@ -2,8 +2,8 @@ package vendingmachine.model;
 
 public class Vendingmachine {
 
-	HoldingSum holdingSum;
-	Stock stock;
+	private HoldingSum holdingSum;
+	private Stock stock;
 
 	public Vendingmachine() {
 		holdingSum = new HoldingSum();

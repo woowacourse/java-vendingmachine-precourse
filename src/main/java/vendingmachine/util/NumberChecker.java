@@ -2,7 +2,7 @@ package vendingmachine.util;
 
 import vendingmachine.constant.Message;
 
-public class Checker {
+public class NumberChecker {
 
 	public void isPositiveInteger(String input) {
 		isPositiveNumberOrZero(input);

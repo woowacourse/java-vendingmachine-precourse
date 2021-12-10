@@ -6,9 +6,9 @@ import vendingmachine.view.StockView;
 
 public class VendingmachineController {
 
-	Vendingmachine vendingmachine;
-	HoldingSumView holdingSumView;
-	StockView stockView;
+	private Vendingmachine vendingmachine;
+	private HoldingSumView holdingSumView;
+	private StockView stockView;
 
 	public VendingmachineController() {
 		vendingmachine = new Vendingmachine();

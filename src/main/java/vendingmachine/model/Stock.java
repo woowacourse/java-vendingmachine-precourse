@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import vendingmachine.constant.Rule;
+import vendingmachine.util.SplitChecker;
 
 public class Stock {
 
@@ -30,6 +31,8 @@ public class Stock {
 	}
 
 	private void checkInput(String input) {
-
+		SplitChecker splitChecker = new SplitChecker();
+		splitChecker.containSpace(input);
+		splitChecker.containTap(input);
 	}
 }

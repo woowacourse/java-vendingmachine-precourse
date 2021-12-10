@@ -2,7 +2,7 @@ package vendingmachine.model;
 
 public class Name {
 
-	String name;
+	private String name;
 
 	public void set(String input) {
 		checkInput(input);

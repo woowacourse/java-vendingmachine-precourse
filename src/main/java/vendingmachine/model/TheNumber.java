@@ -1,12 +1,12 @@
 package vendingmachine.model;
 
-public class Number {
+public class TheNumber {
 
-	private int number;
+	private int theNumber;
 
 	public void set(String input) {
 		checkInput(input);
-		number = Integer.valueOf(input);
+		theNumber = Integer.valueOf(input);
 	}
 
 	private void checkInput(String input) {
