@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import vendingmachine.view.input.MoneyInputView;
 import vendingmachine.view.input.ProductInputView;
@@ -11,7 +11,7 @@ public class VendingMachine {
         MoneyInputView moneyInputView = new MoneyInputView();
         Integer moneyForCoin = moneyInputView.inputMoneyForMakeCoin();
         RandomCoinMaker randomCoinMaker = RandomCoinMaker.getInstance();
-        HashMap<Integer, Integer> coinMap = randomCoinMaker.makeCoin(moneyForCoin);
+        LinkedHashMap<Integer, Integer> coinMap = randomCoinMaker.makeCoin(moneyForCoin);
 
         ProductInputView productInputView = new ProductInputView();
         productInputView.inputProducts();

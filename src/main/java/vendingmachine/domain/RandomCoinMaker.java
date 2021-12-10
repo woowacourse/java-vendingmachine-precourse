@@ -1,14 +1,15 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Comparator;
+import java.util.LinkedHashMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.constant.Condition;
 
 public class RandomCoinMaker {
     private static final RandomCoinMaker instance = new RandomCoinMaker();
-    private HashMap<Integer, Integer> coinMap = new HashMap<>();
+    private LinkedHashMap<Integer, Integer> coinMap = new LinkedHashMap<>();
 
     private RandomCoinMaker() {
     }
@@ -17,7 +18,17 @@ public class RandomCoinMaker {
         return instance;
     }
 
-    public HashMap<Integer, Integer> makeCoin(Integer money) {
+    private void init() {
+        ArrayList<Integer> coins = Coin.getCoins();
+        coins.sort(Comparator.reverseOrder());
+
+        for (Integer coin : coins) {
+            coinMap.put(coin, 0);
+        }
+    }
+
+    public LinkedHashMap<Integer, Integer> makeCoin(Integer money) {
+        init();
         ArrayList<Integer> coins = Coin.getCoins();
         while (money > Condition.MONEY_0.getNumber()) {
             int coin = Randoms.pickNumberInList(coins);
@@ -30,10 +41,6 @@ public class RandomCoinMaker {
     }
 
     private void storeCoin(int coin) {
-        if (!coinMap.containsKey(coin)) {
-            coinMap.put(coin, Condition.ONE_COIN.getNumber());
-            return;
-        }
         coinMap.put(coin, coinMap.get(coin) + Condition.ONE_COIN.getNumber());
     }
 }
