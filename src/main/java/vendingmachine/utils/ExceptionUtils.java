@@ -12,8 +12,10 @@ public class ExceptionUtils {
 	private static final int APPROPRIATE_REMAINDER = 0;
 	private static final int MAXIMUM_INT_VALUE = 2147483647;
 	private static final int MINIMUM_PRICE = 100;
+	private static final String SPACE = " ";
 	private static final String REGULAR_EXPRESSION_ONLY_NUMBER = "^\\d*$";
 	private static final String ERROR_HEADER = "[ERROR] ";
+	private static final String SPACE_ERROR_MESSAGE = "공백이 입력되었습니다.";
 	private static final String NATURAL_NUMBER_ERROR_MESSAGE = "자연수만 입력 가능합니다.";
 	private static final String UNIT_ERROR_MESSAGE = "최소 단위 금액은 10원입니다. 10의 배수로 입력해주세요.";
 	private static final String OVER_RANGE_ERROR_MESSAGE = "최대 허용하는 정수값을 초과했습니다.";
@@ -22,6 +24,9 @@ public class ExceptionUtils {
 	private static final String INVALID_PRICE_ERROR_MESSAGE = "상품의 가격은 100원 이상부터 입니다.";
 
 	public static void validateInputMoney(String inputMoney) {
+		if (!validateSpace(inputMoney)) {
+			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
+		}
 		if (!validateNumber(inputMoney)) {
 			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
 		}
@@ -60,6 +65,10 @@ public class ExceptionUtils {
 			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 		return number;
+	}
+
+	private static boolean validateSpace(String inputMoney) {
+		return (!(inputMoney.contains(SPACE) || inputMoney.isEmpty()));
 	}
 
 	private static boolean validateNumber(String inputMoney) {
