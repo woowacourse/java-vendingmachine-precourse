@@ -11,10 +11,6 @@ public class VendingMachine {
 	public void createChanges(int inputMoney) {
 		changes = new Changes(inputMoney);
 		changes.createRandomCoin();
-		changes.getCoinMap().forEach((key, value) -> {
-			System.out.println(key + ":" + value);
-		});
-
 	}
 
 }

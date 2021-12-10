@@ -4,6 +4,7 @@ import static vendingmachine.view.InputView.*;
 
 
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private final VendingMachine vendingMachine;
@@ -16,5 +17,6 @@ public class VendingMachineController {
 		printMessageToGetAmountMoneyOfVendingMachine();
 		int inputMoney = inputTotalAmountMoneyOfVendingMachine();
 		vendingMachine.createChanges(inputMoney);
+		OutputView.printChangesVendingMachine(vendingMachine);
 	}
 }
