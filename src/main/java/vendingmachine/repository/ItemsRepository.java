@@ -16,4 +16,9 @@ public class ItemsRepository {
 	public void setItems(Items items) {
 		this.items = items;
 	}
+
+	public Items findAll() {
+		return items;
+	}
+
 }

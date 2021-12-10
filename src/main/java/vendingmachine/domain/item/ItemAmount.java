@@ -18,6 +18,10 @@ public class ItemAmount {
 		return new ItemAmount(parsedNumber);
 	}
 
+	public int toInt() {
+		return this.amount;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object) {

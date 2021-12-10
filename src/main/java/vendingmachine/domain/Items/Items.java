@@ -29,6 +29,11 @@ public class Items {
 			.collect(Collectors.toList());
 	}
 
+	public boolean isAllSoldOut() {
+		return this.items.stream()
+			.allMatch(Item::isSoldOut);
+	}
+
 	@Override
 	public String toString() {
 		return items.toString();

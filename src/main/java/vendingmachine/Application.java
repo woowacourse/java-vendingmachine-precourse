@@ -5,15 +5,27 @@ import vendingmachine.controller.ItemsController;
 import vendingmachine.controller.UserBalanceController;
 
 public class Application {
+	private static final CoinsController coinsController = new CoinsController();
+	private static final ItemsController itemsController = new ItemsController();
+	private static final UserBalanceController userBalanceController = new UserBalanceController();
+
 	public static void main(String[] args) {
-		CoinsController coinsController = new CoinsController();
+		init();
+		purchaseRoutine();
+	}
+
+	private static void init() {
 		coinsController.generateCoins();
 		coinsController.printGeneratedCoins();
 
-		ItemsController itemsController = new ItemsController();
 		itemsController.generateItems();
 
-		UserBalanceController userBalanceController = new UserBalanceController();
 		userBalanceController.generateUserBalance();
+	}
+
+	private static void purchaseRoutine() {
+		while (itemsController.checkAvailablePurchasing()) {
+			// TODO: 상품 구매 로직 추가
+		}
 	}
 }

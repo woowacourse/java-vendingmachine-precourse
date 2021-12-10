@@ -17,4 +17,9 @@ public class ItemsService {
 	public void initItems(Items items) {
 		itemsRepository.setItems(items);
 	}
+
+	public boolean checkSoldOut() {
+		Items items = itemsRepository.findAll();
+		return items.isAllSoldOut();
+	}
 }

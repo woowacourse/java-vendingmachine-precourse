@@ -18,4 +18,10 @@ public class ItemsController {
 			generateItems();
 		}
 	}
+
+	public boolean checkAvailablePurchasing() {
+		// TODO: 자판기 잔여금액이 상품의 최저 가격보다 적음을 판단하는 로직 추가
+		boolean soldOut = itemsService.checkSoldOut();
+		return !soldOut;
+	}
 }

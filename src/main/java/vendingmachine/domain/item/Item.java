@@ -48,6 +48,10 @@ public class Item {
 		return this.name;
 	}
 
+	public boolean isSoldOut() {
+		return this.amount.toInt() <= 0;
+	}
+
 	@Override
 	public String toString() {
 		return String.format(TO_STRING_FORMAT, this.name.toString(), this.price.toString(), this.amount.toString());
