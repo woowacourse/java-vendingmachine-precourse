@@ -20,7 +20,8 @@ public class ManagementService {
             }
             
             deposit -= tmp;
-       
+            Coin coinType = Coin.findByAmount(tmp);
+            Coin.addNumber(coinType);
         }
     }
 }
