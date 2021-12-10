@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import vendingmachine.exception.NotFoundBeverageException;
 
@@ -9,7 +9,7 @@ public class Beverages {
 	private final Map<Beverage, Integer> beverages;
 
 	public Beverages() {
-		beverages = new TreeMap<>();
+		beverages = new HashMap<>();
 	}
 
 	public Map<Beverage, Integer> getBeverages() {
@@ -29,4 +29,8 @@ public class Beverages {
 		throw new NotFoundBeverageException();
 	}
 
+	public void sell(Beverage beverage) {
+		beverages.put(beverage, beverages.get(beverage) - 1);
+
+	}
 }

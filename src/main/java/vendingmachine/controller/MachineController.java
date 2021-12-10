@@ -49,7 +49,7 @@ public class MachineController {
 	private void calculate(Beverage beverage) {
 		//구매한 음료에 따른 계산
 		inputMoney.spend(beverage.getPrice());
-
+		beverages.sell(beverage);
 
 	}
 
