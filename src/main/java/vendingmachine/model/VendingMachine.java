@@ -2,7 +2,7 @@ package vendingmachine.model;
 
 import vendingmachine.util.RandomNumberGenerator;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
@@ -21,22 +21,29 @@ public class VendingMachine {
     }
 
     private Map<Coin, Integer> createCoins(int amount) {
-        Map<Coin, Integer> coins = new HashMap<>();
-        while (amount != DEFAULT_VALUE) {
-            int randomCoin = RandomNumberGenerator.generateRandomCoins(
-                    Stream.of(Coin.values())
-                            .map(Coin::getAmount)
-                            .collect(Collectors.toList()));
-            amount = addCoin(coins, randomCoin, amount);
-        }
+        Map<Coin, Integer> coins = new TreeMap<>();
+        initialize(coins);
+        createRandom(coins, amount);
 
         return coins;
+    }
+
+    private void initialize(Map<Coin, Integer> coins) {
+        Arrays.stream(Coin.values()).forEach(coin -> coins.put(coin, 0));
+    }
+
+    private void createRandom(Map<Coin, Integer> coins, int amount) {
+        while (amount != DEFAULT_VALUE) {
+            int randomCoin = RandomNumberGenerator.generateRandomCoins(
+                    Stream.of(Coin.values()).map(Coin::getAmount).collect(Collectors.toList()));
+            amount = addCoin(coins, randomCoin, amount);
+        }
     }
 
     private int addCoin(Map<Coin, Integer> coins, int randomCoin, int amount) {
         if (amount >= randomCoin) {
             Coin coin = Coin.findCoin(randomCoin);
-            coins.put(coin, coins.getOrDefault(coin, DEFAULT_VALUE) + INCREMENT_BY_ONE);
+            coins.put(coin, coins.get(coin) + INCREMENT_BY_ONE);
             amount -= randomCoin;
         }
 
