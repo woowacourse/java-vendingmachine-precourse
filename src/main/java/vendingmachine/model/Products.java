@@ -5,6 +5,8 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Products {
+    private static final int DEFAULT_VALUE = 0;
+
     private final List<Product> products;
 
     public Products(List<List<String>> products) {
@@ -29,7 +31,7 @@ public class Products {
         return products.stream()
                 .filter(p -> p.getName().equals(product))
                 .mapToInt(Product::getQuantity)
-                .findAny().orElse(0) != 0;
+                .findAny().orElse(DEFAULT_VALUE) != DEFAULT_VALUE;
 
     }
 
@@ -37,7 +39,7 @@ public class Products {
         return amount >= products.stream()
                 .filter(p -> p.getName().equals(product))
                 .mapToInt(Product::getPrice)
-                .findAny().orElse(0);
+                .findAny().orElse(DEFAULT_VALUE);
     }
 
     public int reduceQuantity(String productName) {
