@@ -31,7 +31,6 @@ public class VendingMachineController {
 		int savedMoney = moneyService.getSavedMoney();
 		coins = Coin.init();
 		HashMap<Coin, Integer> savedCoins = coinService.getRandomCoins(coins, savedMoney);
-		String itemString = inputView.getItemInput();
-		List<Item> items = itemService.getItems(itemString);
+		List<Item> items = itemService.getItems();
 	}
 }

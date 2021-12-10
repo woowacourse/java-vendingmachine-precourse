@@ -10,7 +10,7 @@ public class ItemInputValidator {
 	private static final int QUANTITY_MIN = 1;
 	private static final int MINIMUM_PRICE = 100;
 
-	public void validateItemInput(String itemString) {
+	public boolean validateItemInput(String itemString) {
 		try {
 			validateBrackets(itemString);
 			String itemWithoutBrackets = deleteBrackets(itemString);
@@ -20,7 +20,9 @@ public class ItemInputValidator {
 			validateQuantity(itemElements);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
+			return false;
 		}
+		return true;
 	}
 
 	private void validateBrackets(String itemString) {
