@@ -13,6 +13,7 @@ public class OutputView {
 	private static final String ASK_PRODUCT_INFORMATION = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String KOREAN_CURRENCY = "원";
 	private static final String DELIMITER_COIN_AND_NUMBER = " - ";
+	private static final String ASK_INSERT_MONEY = "투입 금액을 입력해 주세요.";
 
 	private OutputView() {
 	}
@@ -47,6 +48,11 @@ public class OutputView {
 	private static void printCoinStatus() {
 		printNewLine();
 		System.out.println(VENDING_MACHINE_COIN_STATUS);
+	}
+
+	public static void askInsertMoney() {
+		printNewLine();
+		System.out.println(ASK_INSERT_MONEY);
 	}
 
 	private static void printNewLine() {

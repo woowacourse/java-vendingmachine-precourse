@@ -31,4 +31,18 @@ public class InputView {
 			return writeProductsInfo();
 		}
 	}
+
+	public static int writeInsertMoney() {
+		OutputView.askInsertMoney();
+		String inputMoney = Console.readLine();
+		try {
+			ExceptionUtils.validateInputMoney(inputMoney);
+			int money = Integer.parseInt(inputMoney);
+			ExceptionUtils.validateMoney(money);
+			return money;
+		} catch (IllegalArgumentException IAE) {
+			OutputView.printError(IAE);
+			return writeInsertMoney();
+		}
+	}
 }

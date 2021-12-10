@@ -17,6 +17,7 @@ public class VendingMachineController {
 	public static void useVendingMachine() {
 		VendingMachine vendingMachine = VendingMachineFactory
 			.makeVendingMachine(putMoneyInVendingMachine(), putProductInVendingMachine());
+		InputView.writeInsertMoney();
 	}
 
 	private static List<CoinCase> putMoneyInVendingMachine() {
