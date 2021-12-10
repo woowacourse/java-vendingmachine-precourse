@@ -3,6 +3,7 @@ package vendingmachine.View;
 import java.util.LinkedHashMap;
 
 import vendingmachine.Model.Coin;
+import vendingmachine.Model.CoinWallet;
 
 public class OutputView {
 	public static void printCoin(LinkedHashMap<Coin, Integer> coins) {
@@ -21,12 +22,12 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printChange(LinkedHashMap<Coin, Integer> coins) {
+	public static void printChange(CoinWallet coinWallet) {
 		System.out.println("잔돈");
-		coins
+		coinWallet.coins
 			.keySet()
 			.stream()
-			.filter(coin -> coins.get(coin) != 0)
-			.forEach(coin -> System.out.printf("%s원 - %d개%n", coin.getAmount(), coins.get(coin)));
+			.filter(coin -> coinWallet.getNum(coin) != 0)
+			.forEach(coin -> System.out.printf("%s원 - %d개%n", coin.getAmount(), coinWallet.getNum(coin)));
 	}
 }

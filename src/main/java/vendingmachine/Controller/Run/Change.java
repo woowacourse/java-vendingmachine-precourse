@@ -1,15 +1,16 @@
 package vendingmachine.Controller.Run;
 
-import java.util.LinkedHashMap;
-
 import vendingmachine.Model.Coin;
+import vendingmachine.Model.CoinWallet;
 import vendingmachine.View.OutputView;
 
 public class Change {
-	private final LinkedHashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
+	private final CoinWallet changeCoins = new CoinWallet();
+	private final CoinWallet machineCoins;
 
-	public Change() {
-		OutputView.printUserMoney(Init.userMoney);
+	public Change(CoinWallet machineCoins, int userMoney) {
+		this.machineCoins = machineCoins;
+		OutputView.printUserMoney(userMoney);
 		setChangeCoins();
 		OutputView.printChange(changeCoins);
 	}
@@ -22,18 +23,18 @@ public class Change {
 
 	private void setCoin(Coin coin) {
 		if (isNoMaxCount(coin)) {
-			setOneCoin(coin, Init.machineCoins.get(coin));
+			setOneCoin(coin, machineCoins.getNum(coin));
 			return;
 		}
 		setOneCoin(coin, Init.userMoney / coin.getAmount());
 	}
 
 	private boolean isNoMaxCount(Coin coin) {
-		return (Init.userMoney / coin.getAmount()) > Init.machineCoins.get(coin);
+		return (Init.userMoney / coin.getAmount()) > machineCoins.getNum(coin);
 	}
 
 	private void setOneCoin(Coin coin, int coinCount) {
-		changeCoins.put(coin, coinCount);
+		changeCoins.set(coin, coinCount);
 		Init.userMoney -= coin.getAmount() * coinCount;
 	}
 }
