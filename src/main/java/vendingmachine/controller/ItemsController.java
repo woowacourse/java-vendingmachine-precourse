@@ -33,12 +33,11 @@ public class ItemsController {
 		String input = InputView.inputItems();
 		try {
 			ItemValidator.validateItemsDuplication(input);
+			createItemsByInput(input);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			generateItems();
 		}
-
-		createItemsByInput(input);
 	}
 
 	private void createItemsByInput(String input) {
