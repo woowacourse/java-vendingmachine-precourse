@@ -5,8 +5,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.model.VendingMachine;
-import vendingmachine.service.VendingMachineService;
+import exception.PriceException;
 
 public class PriceTest {
 
@@ -16,12 +15,10 @@ public class PriceTest {
 		String userInput = "백원";
 
 		//when
-		VendingMachine vendingMachine = new VendingMachine();
-		VendingMachineService vendingMachineService = new VendingMachineService(vendingMachine);
 
 		//then
 		assertThatThrownBy(() -> {
-			vendingMachineService.saveBalance(userInput);})
+			PriceException.isValidPrice(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_NUMBER);
 	}
@@ -32,12 +29,10 @@ public class PriceTest {
 		String userInput = "-1";
 
 		//when
-		VendingMachine vendingMachine = new VendingMachine();
-		VendingMachineService vendingMachineService = new VendingMachineService(vendingMachine);
 
 		//then
 		assertThatThrownBy(() -> {
-			vendingMachineService.saveBalance(userInput);})
+			PriceException.isValidPrice(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_POSITIVE);
 	}
@@ -48,12 +43,10 @@ public class PriceTest {
 		String userInput = "111";
 
 		//when
-		VendingMachine vendingMachine = new VendingMachine();
-		VendingMachineService vendingMachineService = new VendingMachineService(vendingMachine);
 
 		//then
 		assertThatThrownBy(() -> {
-			vendingMachineService.saveBalance(userInput);})
+			PriceException.isValidPrice(userInput);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_COIN_VALUE);
 	}

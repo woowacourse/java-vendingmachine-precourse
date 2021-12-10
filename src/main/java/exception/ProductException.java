@@ -12,39 +12,39 @@ import java.util.stream.Collectors;
 import vendingmachine.model.Product;
 
 public class ProductException {
-	public static List<Product> isValidProduct(String userProducts) {
+	public static void isValidProduct(String userProducts) {
 		List<String> products = Arrays.asList(userProducts.split(PRODUCT_DIVIDER));
 		List<Product> productList = new ArrayList<>();
 		for (String product : products) {
-			Product normalProduct = isWrapped(product);
-			productList.add(normalProduct);
+			isWrapped(product);
 		}
 		isDuplicated(productList);
-		return productList;
 	}
 
-	private static Product isWrapped(String userProduct) {
-		if (userProduct.startsWith(PRODUCT_WRAPPER_LEFT)
-				&& userProduct.endsWith(PRODUCT_WRAPPER_RIGHT)) {
-			userProduct = userProduct.substring(1, userProduct.length() - 1);
-			return isProduct(userProduct);
+	private static void isWrapped(String userProduct) {
+		if (!userProduct.startsWith(PRODUCT_WRAPPER_LEFT)
+				|| !userProduct.endsWith(PRODUCT_WRAPPER_RIGHT)) {
+			throw new IllegalArgumentException(PRODUCT_WRAPPER_NULL);
 		}
-		throw new IllegalArgumentException(PRODUCT_WRAPPER_NULL);
+		userProduct = userProduct.substring(1, userProduct.length() - 1);
+		isDivided(userProduct);
 	}
 
-	private static Product isProduct(String userProduct) {
+	private static void isDivided(String userProduct) {
+		if (userProduct.contains(PRODUCT_WRAPPER_LEFT)
+			&& userProduct.contains(PRODUCT_WRAPPER_RIGHT)) {
+			throw new IllegalArgumentException(PRODUCT_NOT_DIVIDED);
+		}
+		isProduct(userProduct);
+	}
+
+	private static void isProduct(String userProduct) {
 		List<String> productDetail = Arrays.asList(userProduct.split(PRODUCT_DETAIL_DIVIDER));
-		if (productDetail.size() == PRODUCT_DETAIL_AMOUNT) {
-			return createProduct(productDetail);
+		if (productDetail.size() != PRODUCT_DETAIL_AMOUNT) {
+			throw new IllegalArgumentException(PRODUCT_DETAIL_UNMATCHED);
 		}
-		throw new IllegalArgumentException(PRODUCT_DETAIL_UNMATCHED);
-	}
-
-	private static Product createProduct(List<String> productDetail) {
-		String productName = productDetail.get(0);
-		int productPrice = isValidPrice(productDetail.get(1));
-		int productQuantity = isValidQuantity(productDetail.get(2));
-		return new Product(productName, productPrice, productQuantity);
+		isValidPrice(productDetail.get(1));
+		isValidQuantity(productDetail.get(2));
 	}
 
 	private static int isValidPrice(String productPrice) {
