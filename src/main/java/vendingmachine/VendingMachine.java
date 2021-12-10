@@ -70,12 +70,13 @@ public class VendingMachine {
 	public HashMap<Integer, Integer> returnChange(UserMoney userMoney) {
 		HashMap<Integer, Integer> change = new HashMap<>();
 		int coinCount;
+		int money = userMoney.getMoney();
 		for (Coin coin : this.coins) {
-			System.out.println(coin.getValue());
+			// System.out.println(coin.getValue());
 			coinCount = 0;
 			while (coin.getCount() > 0) {
-				if (userMoney.getMoney() >= coin.getValue()) {
-					userMoney.subtractUserMoney(coin.getValue());
+				if (money >= coin.getValue()) {
+					money -= coin.getValue();
 					coin.subCount();
 					coinCount++;
 				} else {

@@ -9,8 +9,9 @@ public class UserMoney {
 		this.money = money;
 	}
 
-	public static boolean valid(int money) {
-		return validUnitMoney(money) && isPositive(money);
+	public static void valid(int money) {
+		validUnitMoney(money);
+		isPositive(money);
 	}
 
 	public void subtractUserMoney(int price) {

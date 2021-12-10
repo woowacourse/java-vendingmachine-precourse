@@ -6,9 +6,9 @@ import java.util.List;
 public class Items {
 	private List<Item> itemList = new ArrayList<>();
 
-	public static boolean isAddable(String itemsInput) {
+	public static void isAddable(String itemsInput) {
 		String[] itemToAdd = itemsInput.substring(1, itemsInput.length() - 1).split(",");
-		return Item.validItemStatus(itemToAdd[0], Integer.parseInt(itemToAdd[1]), Integer.parseInt(itemToAdd[2]));
+		Item.validItemStatus(itemToAdd[0], Integer.parseInt(itemToAdd[1]), Integer.parseInt(itemToAdd[2]));
 	}
 
 	public static void main(String[] args) {

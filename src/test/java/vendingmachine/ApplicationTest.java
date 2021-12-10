@@ -29,6 +29,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(
             () -> {
                 runException("-1");
+                runException("a");
                 assertThat(output()).contains(ERROR_MESSAGE);
             }
         );

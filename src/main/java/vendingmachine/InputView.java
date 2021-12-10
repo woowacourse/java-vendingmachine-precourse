@@ -7,14 +7,22 @@ public class InputView {
 	private static final String GET_ITEM_STATUS = "\n상품명과 가격, 수량을 입력해 주세요.";
 	private static final String GET_USER_MONEY = "\n투입 금액을 입력해 주세요.";
 	private static final String GET_ITEM_TO_BUY = "구매할 상품명을 입력해 주세요.";
+	private static final String ERROR_NOT_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
 
 	public static int GetRemains() {
 		int remains;
-		do {
-			System.out.println(GET_REMAINS);
-			remains = Integer.parseInt(readLine());
-		} while (!UserMoney.valid(remains));
-		return remains;
+		while (true) {
+			try {
+				System.out.println(GET_REMAINS);
+				String userInput = readLine();
+				remains = Integer.parseInt(userInput);
+				UserMoney.valid(remains);
+				return remains;
+			} catch (NumberFormatException e) {
+				System.out.println(ERROR_NOT_NUMBER);
+			} catch (IllegalArgumentException e) {
+			}
+		}
 	}
 
 	public static void printGetItemStatus() {
@@ -23,11 +31,18 @@ public class InputView {
 
 	public static int GetUserMoney() {
 		int userMoney;
-		do {
-			System.out.println(GET_USER_MONEY);
-			userMoney = Integer.parseInt(readLine());
-		} while (!UserMoney.valid(userMoney));
-		return userMoney;
+		while (true) {
+			try {
+				System.out.println(GET_USER_MONEY);
+				String userInput = readLine();
+				userMoney = Integer.parseInt(userInput);
+				UserMoney.valid(userMoney);
+				return userMoney;
+			} catch (NumberFormatException e) {
+				System.out.println(ERROR_NOT_NUMBER);
+			} catch (IllegalArgumentException e) {
+			}
+		}
 	}
 
 	public static String GetItemToBuy(UserMoney userMoney) {

@@ -24,16 +24,19 @@ public class Item {
 		return !isBlank(name);
 	}
 
-	public static boolean validPrice(int price) {
-		return validUnitMoney(price) && isPositive(price);
+	public static void validPrice(int price) {
+		validUnitMoney(price);
+		isPositive(price);
 	}
 
-	public static boolean validCount(int count) {
-		return isPositive(count);
+	public static void validCount(int count) {
+		isPositive(count);
 	}
 
-	public static boolean validItemStatus(String name, int price, int count) {
-		return validName(name) && validPrice(price) && validCount(count);
+	public static void validItemStatus(String name, int price, int count) {
+		validName(name) ;
+		validPrice(price);
+		validCount(count);
 	}
 
 	public void sellItem() {
