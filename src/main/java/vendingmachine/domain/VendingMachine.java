@@ -1,16 +1,17 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import org.assertj.core.util.Arrays;
 import vendingmachine.Coin;
 import vendingmachine.constants.CoinConstants;
 import vendingmachine.view.InputView;
 
 import java.util.HashMap;
+import java.util.List;
 
 public class VendingMachine {
 
     private final HashMap<Integer, Integer> coins = new HashMap<>();
+    private HashMap<String, List<Integer>> merchandiseInfo;
 
     public VendingMachine() {
         int totalMoney = InputView.getVendingMachineTotalMoneyInput();
@@ -22,6 +23,10 @@ public class VendingMachine {
 
     public HashMap<Integer, Integer> getCoins() {
         return this.coins;
+    }
+
+    public void setMerchandiseInfo(HashMap<String, List<Integer>> merchandiseInfo) {
+        this.merchandiseInfo = merchandiseInfo;
     }
 
     private void generateCoins(int totalMoney) {
