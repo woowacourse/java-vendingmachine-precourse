@@ -13,6 +13,7 @@ public class OutputView {
 	private static final String INPUT_VENDING_MACHINE_BALANCE_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String VENDING_MACHINE_HOLDING_COINS_MESSAGE = "\n자판기가 보유한 동전";
 	private static final String INPUT_ITEMS_MESSAGE = "\n상품명과 가격, 수량을 입력해 주세요.";
+	private static final String INPUT_USER_BALANCE_MESSAGE = "\n투입 금액을 입력해 주세요.";
 	private static final String COIN_OUTPUT_FORMAT = "%s - %s개";
 
 	public static void printError(String message) {
@@ -43,5 +44,9 @@ public class OutputView {
 		if (amount > 0) {
 			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
 		}
+	}
+
+	public static void printInputUserBalance() {
+		System.out.println(INPUT_USER_BALANCE_MESSAGE);
 	}
 }

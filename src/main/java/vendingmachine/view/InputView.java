@@ -16,4 +16,9 @@ public class InputView {
 		OutputView.printInputItems();
 		return Console.readLine();
 	}
+
+	public static String inputUserBalance() {
+		OutputView.printInputUserBalance();
+		return Console.readLine();
+	}
 }
