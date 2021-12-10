@@ -1,10 +1,12 @@
 package vendingmachine.service;
 
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
 import vendingmachine.utils.Validation;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -20,11 +22,41 @@ public class VendingMachineService {
     }
 
     public void setVendingMachine(){
-        int coins = amountValidation();
+        int amount = amountValidation();
+        int[] coins = makeRandomCoins(amount);
+        OutputView.printVendingMachineCoins(coins);
         List<String> products = productValidation();
-        VendingMachine vendingMachine = new VendingMachine(coins,products);
-        this.vendingMachine = vendingMachine;
+        this.vendingMachine = new VendingMachine(coins,products);
     }
+
+    private int[] makeRandomCoins(int amount){
+        int nowPrice = amount;
+        int[] coinList = new int[4];
+        while(nowPrice > 0){
+            for(Coin coin : Coin.values()) {
+                int quantity = coin.convertPriceToCoins(coin, nowPrice);
+                coinList[coin.ordinal()] += quantity;
+                nowPrice -= coin.calculate(quantity);
+            }
+        }
+        return coinList;
+    }
+
+
+
+    private int amountValidation(){
+        while(true){
+            System.out.println(Message.VENDINGMACHINE_INPUT);
+            String input = InputView.input();
+            try{
+                validation.vendingMachinePriceValidation(input);
+                return Integer.valueOf(input);
+            }catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
 
     public List<String> productValidation(){
         while(true){
@@ -41,19 +73,5 @@ public class VendingMachineService {
             }
         }
     }
-
-    private int amountValidation(){
-        while(true){
-            System.out.println(Message.VENDINGMACHINE_INPUT);
-            String input = InputView.input();
-            try{
-                validation.vendingMachinePriceValidation(input);
-                return Integer.valueOf(input);
-            }catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
 
 }
