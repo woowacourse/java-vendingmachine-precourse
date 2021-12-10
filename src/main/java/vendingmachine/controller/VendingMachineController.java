@@ -9,7 +9,7 @@ public class VendingMachineController {
 		String initialLeftMoney = InputView.getNoticeInputInitialLeftMoney();
 		try {
 			VendingMachine vendingMachine = new VendingMachine(initialLeftMoney);
-		} catch (IllegalArgumentException e) {
+		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			init();
 		}
