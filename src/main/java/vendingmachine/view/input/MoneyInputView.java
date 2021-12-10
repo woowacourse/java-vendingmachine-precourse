@@ -4,36 +4,36 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Input;
 
-public class CoinInputView {
+public class MoneyInputView {
 
     public int inputMoneyForMakeCoin() {
         while (true) {
             print(Input.MONEY_GUIDE_MESSAGE.getMessage());
-            String Money = Console.readLine();
+            String money = Console.readLine();
             try {
-                tryToInputMoneyForMakeCoin(Money);
-                return Integer.parseInt(Money);
+                tryToInputMoneyForMakeCoin(money);
+                return Integer.parseInt(money);
             } catch (IllegalArgumentException e) {
             }
         }
     }
 
-    public void tryToInputMoneyForMakeCoin(String Money) throws IllegalArgumentException {
-        validateDigit(Money);
-        validateNull(Money);
+    public void tryToInputMoneyForMakeCoin(String money) throws IllegalArgumentException {
+        validateDigit(money);
+        validateBlank(money);
     }
 
-    private void validateDigit(String Money) {
-        for (int m = 0; m < Money.length(); m++) {
-            if (!Character.isDigit(Money.charAt(m))) {
+    private void validateDigit(String money) {
+        for (int m = 0; m < money.length(); m++) {
+            if (!Character.isDigit(money.charAt(m))) {
                 print(Input.MONEY_DIGIT_ERROR_MESSAGE.getMessage());
-                throw  new IllegalArgumentException();
+                throw new IllegalArgumentException();
             }
         }
     }
 
-    private void validateNull(String Money) {
-        if (Money.length() == Condition.LENGTH_0.getNumber()) {
+    private void validateBlank(String money) {
+        if (money.length() == Condition.LENGTH_0.getNumber()) {
             print(Input.MONEY_LENGTH_0_ERROR_MESSAGE.getMessage());
             throw new IllegalArgumentException();
         }
