@@ -4,12 +4,13 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Product;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 public class InputView {
 
     private static final String MONEY_TO_VENDING_MACHINE_INPUT_INSTRUCTION = "투입 금액을 입력해 주세요. ";
     private static final String MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION = "자판기가 보유하고 있는 금액을 입력해 주세요. ";
+    private static final String INPUT_TO_SELECT_PRODUCT_INSTRUCTION = "구매할 상품명을 입력해 주세요. ";
     private static final String PRODUCT_INPUT_INSTRUCTION = "상품명과 가격, 수량을 입력해 주세요.";
     private static final String ERROR_HEADER = "[ERROR] ";
     private static final String INCLUDE_SPACE_ERROR = "입력에 공백이 있습니다. 공백없이 입력해주세요. ";
@@ -38,7 +39,7 @@ public class InputView {
     }
 
 
-    public Collection<Product> inputProduct() {
+    public List<Product> inputProduct() {
         while (true) {
             try {
                 System.out.println(PRODUCT_INPUT_INSTRUCTION);
@@ -50,6 +51,13 @@ public class InputView {
         }
 
     }
+
+    public String inputToSelectProduct() {
+        System.out.println(INPUT_TO_SELECT_PRODUCT_INSTRUCTION);
+        String inputProduct = Console.readLine();
+        return inputProduct;
+    }
+
 
 
     private int checkValidMoney(String inputValue) {
@@ -74,8 +82,8 @@ public class InputView {
         return false;
     }
 
-    private Collection<Product> checkValidProducts(String inputProducts) {
-        Collection<Product> productList = new ArrayList<>();
+    private List<Product> checkValidProducts(String inputProducts) {
+        List<Product> productList = new ArrayList<>();
         if (inputProducts.contains(" ")) {
             throw new IllegalArgumentException(ERROR_HEADER + INCLUDE_SPACE_ERROR);
         }
