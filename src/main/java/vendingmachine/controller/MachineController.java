@@ -40,6 +40,7 @@ public class MachineController {
 	private void progress() {
 		while (!inputMoney.isSame(0)) {
 			OutputView.printInputMoney(inputMoney);
+			String itemName = InputView.getItemName();
 		}
 	}
 
