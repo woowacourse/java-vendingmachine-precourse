@@ -23,17 +23,22 @@ public class VendingMachineService {
 		vendingMachine = new VendingMachine();
 	}
 
+	private void initResult() {
+		result = new StringBuilder();
+	}
+
 	public String postVendingMachineCosts(String inputStr) {
 		Validation.validateNull(inputStr);
 		Validation.validateCostIsNumber(inputStr);
+		Validation.validateDivideTen(Integer.parseInt(inputStr));
 
-		result = new StringBuilder();
+		initResult();
 		result.append(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
 
 		initVendingMachine();
 		makeCoin(Integer.parseInt(inputStr));
 
-		getCoinCount(vendingMachine.getCoinMap());
+		printCoinCount(vendingMachine.getCoinMap());
 		return result.toString();
 	}
 
@@ -77,6 +82,34 @@ public class VendingMachineService {
 		return result.toString();
 	}
 
+	private void makeCoin(int cost) {
+		while (cost > 0) {
+			int randomCoin = Randoms.pickNumberInList(
+				Arrays.asList(Coin.COIN_500.getAmount(), Coin.COIN_100.getAmount(),
+					Coin.COIN_50.getAmount(), Coin.COIN_10.getAmount()));
+
+			if (randomCoin > cost) {
+				continue;
+			}
+
+			vendingMachine.addCoin(randomCoin);
+			cost -= randomCoin;
+		}
+	}
+
+	private void addProducts(String inputStr) {
+		String[] products = inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";");
+		for (String rowProduct : products) {
+			//TODO: Validation 처리(product)
+			// 1. 이름, 가격, 수량 이상의 정보가 들어왔을 떄
+			// 2. 문자열, 숫자 확인
+			String[] product = rowProduct.split(",");
+			// //TODO: Validation 처리
+			vendingMachine.addProduct(
+				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+		}
+	}
+
 	private void getMinimumBalance() {
 		balance = compareInputCostAndCoin();
 
@@ -84,13 +117,13 @@ public class VendingMachineService {
 		Map<Integer, Integer> balanceMap = new TreeMap<>(Collections.reverseOrder());
 
 		for (Integer i : coinMap.keySet()) {
-			balanceMap = addBalanceMapToValue(i,coinMap.get(i),balanceMap);
+			balanceMap = addBalanceMapToValue(i, coinMap.get(i), balanceMap);
 		}
 
-		getCoinCount(balanceMap);
+		printCoinCount(balanceMap);
 	}
 
-	private Map<Integer,Integer> addBalanceMapToValue(int key, int value, Map<Integer,Integer> map) {
+	private Map<Integer, Integer> addBalanceMapToValue(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
 
 			if (balance >= key) {
@@ -114,40 +147,19 @@ public class VendingMachineService {
 		return vendingMachine.getSumCoinAmount();
 	}
 
+
+
+
 	private void printInputCost() {
 		ResponseMessage.of('\n' + Message.PRINT_INPUT_COSTS.getMessage() + vendingMachine.getInputCost() + "원");
 	}
 
-	private void makeCoin(int cost) {
-		while (cost > 0) {
-			int randomCoin = Randoms.pickNumberInList(
-				Arrays.asList(Coin.COIN_500.getAmount(), Coin.COIN_100.getAmount(),
-					Coin.COIN_50.getAmount(), Coin.COIN_10.getAmount()));
-
-			if (randomCoin > cost) {
-				continue;
-			}
-
-			vendingMachine.addCoin(randomCoin);
-			cost -= randomCoin;
-		}
-	}
-
-	private void getCoinCount(Map<Integer,Integer> map) {
+	private void printCoinCount(Map<Integer, Integer> map) {
 		map.keySet().forEach(key -> {
 			result.append(key + "원" + " - " + map.get(key) + "개" + '\n');
 		});
 	}
-
-	private void addProducts(String inputStr) {
-		String[] products= inputStr.replaceAll("\\[","").replaceAll("\\]","").split(";");
-			for(String rowProduct: products){
-				//TODO: Validation 처리(product)
-				// 1. 이름, 가격, 수량 이상의 정보가 들어왔을 떄
-				// 2. 문자열, 숫자 확인
-				String[] product = rowProduct.split(",");
-				// //TODO: Validation 처리
-				vendingMachine.addProduct(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
-			}
-	}
 }
+
+
+
