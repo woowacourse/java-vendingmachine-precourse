@@ -15,6 +15,7 @@ public class ItemValidator {
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int AMOUNT_INDEX = 2;
+	private static final int PRICE_MIN = 100;
 
 	public static Item validate(String itemStr) {
 		if (!isWrapped(itemStr))
@@ -23,9 +24,9 @@ public class ItemValidator {
 
 		List<Object> itemParameters = parameterStringToList(itemParameterStr);
 
-		return new Item((String)itemParameters.get(0)
-			, (Integer)itemParameters.get(1)
-			, (Integer)itemParameters.get(2));
+		return new Item((String)itemParameters.get(NAME_INDEX)
+			, (Integer)itemParameters.get(PRICE_INDEX)
+			, (Integer)itemParameters.get(AMOUNT_INDEX));
 	}
 
 	private static boolean isWrapped(String itemStr) {
@@ -45,7 +46,8 @@ public class ItemValidator {
 		if (isRightParameterCount(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_ITEM_DELIMITER);
 
-		result.set(PRICE_INDEX, Integer.parseInt((String)result.get(PRICE_INDEX)));
+		int price = Integer.parseInt((String)result.get(PRICE_INDEX));
+		result.set(PRICE_INDEX, price);
 
 		result.set(AMOUNT_INDEX, Integer.parseInt((String)result.get(AMOUNT_INDEX)));
 
@@ -56,4 +58,20 @@ public class ItemValidator {
 		return parameters.size() != PARAMETER_COUNT;
 	}
 
+	private static int validatePrice(String priceStr) {
+		if(!isInteger(priceStr))
+			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_INTEGER);
+		int price = Integer.parseInt(priceStr);
+
+		return price;
+	}
+
+	private static boolean isInteger(String numberStr) {
+		try {
+			Integer.parseInt(numberStr);
+		} catch (Exception e) {
+			return false;
+		}
+		return true;
+	}
 }
