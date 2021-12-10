@@ -41,4 +41,20 @@ public class NumberException {
 		return true;
 	}
 
+	public static int checkPriceException(String priceStr) {
+		int price;
+		try {
+			price = checkMoneyException(priceStr);
+
+			if (price < 100) {
+				throw new IllegalArgumentException(ErrorMessage.UNDER_THAN_PRICE_LIMIT_MESSAGE;
+			}
+
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage());
+		}
+
+		return price;
+	}
+
 }
