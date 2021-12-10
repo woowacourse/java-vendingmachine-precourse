@@ -8,7 +8,6 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.dto.ItemInventoryInfo;
-import vendingmachine.dto.request.ItemsInventoryRequest;
 
 class ItemsInventoryRequestTest {
 

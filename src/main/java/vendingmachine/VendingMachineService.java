@@ -14,4 +14,8 @@ public class VendingMachineService {
     public Items createItems(ItemsInventoryInfo inputItemInventoryInfo) {
         return vendingMachine.storeItems(itemFactory.createByInventoryList(inputItemInventoryInfo));
     }
+
+    public void insertMoney(int money) {
+        vendingMachine.insertMoney(money);
+    }
 }
