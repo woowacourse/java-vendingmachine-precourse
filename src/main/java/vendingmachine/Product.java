@@ -1,6 +1,10 @@
 package vendingmachine;
 
+import vendingmachine.exception.NotEnoughStockException;
+
 public class Product {
+
+    public static final int MINIMUM_SELLABLE_STOCK = 1;
 
     private String name;
 
@@ -15,6 +19,9 @@ public class Product {
     }
 
     public void sell() {
+        if (stockQuantity < MINIMUM_SELLABLE_STOCK) {
+            throw new NotEnoughStockException(ErrorMessage.NOT_ENOUGH_STOCK.getCompleteMessage());
+        }
         this.stockQuantity--;
     }
 
