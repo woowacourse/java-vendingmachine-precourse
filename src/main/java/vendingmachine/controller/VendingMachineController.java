@@ -44,11 +44,17 @@ public class VendingMachineController {
             Product product = ProductValidator.validateForm(productInfoInput);
             productRepository.add(product);
         }
+        if (productRepository.hasNoQuantity()) {
+            throw new IllegalArgumentException("자판기에는 최소 한 개의 물건은 들어가야 합니다.");
+        }
         // productRepository.showProductRepository();
     }
 
     public void putUserMoney(String userMoneyInput) {
         userMoney = new Price(userMoneyInput);
+        if (productRepository.cantBuyBecauseOfNoMoney(userMoney)) {
+            throw new IllegalArgumentException("투입한 금액으로 살 수 있는 물건은 존재하지 않습니다.");
+        }
         OutputView.showUserMoney(userMoney);
     }
 
