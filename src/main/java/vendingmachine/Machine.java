@@ -30,7 +30,7 @@ public class Machine {
 		prepareItems();
 		prepareInsertAmount();
 		sellItems();
-		// TODO: 잔돈 반환
+		cashier.returnChanges();
 	}
 
 	private void prepareCoins() {

@@ -48,4 +48,8 @@ public enum Coin {
 	public void add() {
 		this.count++;
 	}
+
+	public int divideByAmount(int dividend) {
+		return dividend / this.amount;
+	}
 }

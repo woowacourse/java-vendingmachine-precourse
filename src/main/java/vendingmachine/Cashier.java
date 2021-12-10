@@ -32,6 +32,12 @@ public class Cashier {
 		return insertAmount >= required;
 	}
 
+	public void returnChanges() {
+		for(Coin coin : Coin.values()) {
+			coin.divideByAmount(insertAmount);
+		}
+	}
+
 	private void makeCoins(int holdingAmount) {
 		do {
 			int coinAmount = Randoms.pickNumberInList(Coin.getAmounts());
