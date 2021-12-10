@@ -7,12 +7,13 @@ import vendingmachine.view.outputView.ManagementView;
 public class ManagementController {
     
     public static void runManagement(InputView inputView) {
-    
         ManagementView.askDepositAmout();
         int deposit = doValidation(inputView.depositAmout());
+        ManagementService.generateCoins(deposit);
         
        
     }
+    
     private static int doValidation(String input) {
         int n = 0;
         
@@ -25,4 +26,5 @@ public class ManagementController {
         
         return n;
     }
+    
 }
