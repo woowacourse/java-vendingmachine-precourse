@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Map;
 
 import vendingmachine.domain.Beverage;
+import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Coin;
 import vendingmachine.view.InputView;
@@ -14,7 +15,7 @@ public class MachineController {
 	private static final int priceIndex = 1;
 	private static final int stockIndex = 2;
 
-	Beverage beverage;
+	Beverages beverages;
 
 	public void run() {
 		Change change = new Change(InputView.getHavingMoney());
@@ -31,7 +32,7 @@ public class MachineController {
 			String name = itemInfo[itemIndex];
 			int price = Integer.parseInt(itemInfo[priceIndex]);
 			int stock = Integer.parseInt(itemInfo[stockIndex]);
-			beverage = new Beverage(name, price, stock);
+			beverages.add(new Beverage(name, price, stock));
 
 		}
 	}
