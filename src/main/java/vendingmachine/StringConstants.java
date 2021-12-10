@@ -10,6 +10,8 @@ public class StringConstants {
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT = "상품 가격은 100원 이상의 정수이며 10원 단위로 나눠 떨어져야 합니다";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT = "상품 명은 최소 한 글자 이상이어야 합니다";
 
+    public static final String NEW_LINE = System.lineSeparator();
+
     private StringConstants() {
     }
 }

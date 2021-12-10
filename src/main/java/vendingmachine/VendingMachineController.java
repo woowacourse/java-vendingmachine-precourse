@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.io.Console;
+
 import vendingmachine.dto.ItemsInventoryInfo;
 
 public class VendingMachineController {
@@ -23,7 +25,7 @@ public class VendingMachineController {
             }
         }
 
-        vendingMachineService.createCurrentBalance(currentBalance);
+        console.printCurrentBalance(vendingMachineService.createCurrentBalance(currentBalance));
 
 
 

@@ -18,7 +18,7 @@ public class Coins {
 
     //TEST를 위한 메서드
     public int getAmount() {
-        return getCoin500() + getCoin100() + getCoin50() + getCoin10();
+        return getAmountWithCoin500() + getAmountWithCoin100() + getAmountWithCoin50() + getAmountWithCoin10();
     }
 
     private void initialize() {
@@ -28,21 +28,38 @@ public class Coins {
         coins.put(Coin.COIN_10, initialNumberOfCoin);
     }
 
-    private int getCoin500() {
+    public int countCoin500() {
+        return coins.get(Coin.COIN_500);
+    }
+
+    public int countCoin100() {
+        return coins.get(Coin.COIN_100);
+    }
+
+    public int countCoin50() {
+        return coins.get(Coin.COIN_50);
+    }
+
+    public int countCoin10() {
+        return coins.get(Coin.COIN_10);
+    }
+
+    private int getAmountWithCoin500() {
         return coins.get(Coin.COIN_500) * Coin.COIN_500.getAmount();
     }
 
-    private int getCoin100() {
+    private int getAmountWithCoin100() {
         return coins.get(Coin.COIN_100) * Coin.COIN_100.getAmount();
     }
 
-    private int getCoin50() {
+    private int getAmountWithCoin50() {
         return coins.get(Coin.COIN_50) * Coin.COIN_50.getAmount();
     }
 
-    private int getCoin10() {
+    private int getAmountWithCoin10() {
         return coins.get(Coin.COIN_10) * Coin.COIN_10.getAmount();
     }
+
 
     //test위해. 삭제 예정
     @Override

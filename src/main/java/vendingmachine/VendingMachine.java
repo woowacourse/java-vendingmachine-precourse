@@ -1,9 +1,10 @@
 package vendingmachine;
 
 public class VendingMachine {
-    public Coins currentBalance;
+    private Coins currentBalance;
 
-    public void depositCurrentBalance(Coins currentBalance) {
+    public Coins depositCurrentBalance(Coins currentBalance) {
         this.currentBalance = currentBalance;
+        return this.currentBalance;
     }
 }
