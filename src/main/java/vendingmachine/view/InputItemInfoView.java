@@ -24,7 +24,7 @@ public class InputItemInfoView implements View {
 	}
 
 	private List<Item> readItems() {
-		String itemListStr = Console.readLine();
+		String itemListStr = Console.readLine().replaceAll("\\s+", "");
 		return ItemParser.parseList(itemListStr);
 	}
 }

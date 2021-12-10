@@ -11,12 +11,7 @@ public class ItemParser {
 
 	public static List<Item> parseList(String itemListStr) {
 		List<String> itemStrs = Arrays.asList(itemListStr.split(OBJECT_SEPARATOR));
-		List<Item> items = itemStrs.stream().map(itemStr -> {
-			itemStr = itemStr.trim();
-			return parse(itemStr);
-		}).collect(Collectors.toList());
-
-		return items;
+		return itemStrs.stream().map(ItemParser::parse).collect(Collectors.toList());
 	}
 
 	private static Item parse(String itemStr) {

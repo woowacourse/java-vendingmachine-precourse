@@ -23,7 +23,7 @@ public class InputFirstMoneyView implements View {
 	}
 
 	private int readFirstMoney() {
-		String firstMoneyStr = Console.readLine();
+		String firstMoneyStr = Console.readLine().replaceAll("\\s+", "");
 		MoneyValidator.validate(firstMoneyStr);
 
 		return MoneyValidator.validate(firstMoneyStr);
