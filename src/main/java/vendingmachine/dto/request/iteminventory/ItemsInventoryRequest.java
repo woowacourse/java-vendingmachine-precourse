@@ -1,4 +1,4 @@
-package vendingmachine.dto.request;
+package vendingmachine.dto.request.iteminventory;
 
 import static org.assertj.core.util.Arrays.isNullOrEmpty;
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_DUPLICATED_ITEM_NAMES_IN;
@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import vendingmachine.dto.ItemInfo;
 import vendingmachine.dto.ItemInventoryInfo;
 import vendingmachine.dto.ItemsInventoryInfo;
+import vendingmachine.dto.request.iteminventory.ItemInventoryRequest;
 
 public class ItemsInventoryRequest {
     private static final String SEMICOLON_DELIMITER_BETWEEN_ITEM_INVENTORY_INFO = ";";

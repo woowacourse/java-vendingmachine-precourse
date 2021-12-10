@@ -1,4 +1,4 @@
-package vendingmachine.dto.request;
+package vendingmachine.dto.request.iteminventory;
 
 import static vendingmachine.StringConstants.*;
 

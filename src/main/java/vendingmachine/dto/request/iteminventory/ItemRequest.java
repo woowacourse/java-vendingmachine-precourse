@@ -1,4 +1,4 @@
-package vendingmachine.dto.request;
+package vendingmachine.dto.request.iteminventory;
 
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT;
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT;

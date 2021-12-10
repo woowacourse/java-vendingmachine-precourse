@@ -5,7 +5,7 @@ import static vendingmachine.StringConstants.PREFIX_OF_ERROR_MESSAGE;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.dto.ItemsInventoryInfo;
 import vendingmachine.dto.request.CoinBalanceRequest;
-import vendingmachine.dto.request.ItemsInventoryRequest;
+import vendingmachine.dto.request.iteminventory.ItemsInventoryRequest;
 import vendingmachine.dto.request.MoneyToInsertRequest;
 import vendingmachine.dto.response.CurrentBalanceResponse;
 import vendingmachine.dto.response.MoneyAvailableResponse;
