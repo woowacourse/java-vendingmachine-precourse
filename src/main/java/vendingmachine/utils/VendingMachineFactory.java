@@ -11,7 +11,7 @@ public class VendingMachineFactory {
 	}
 
 	public static VendingMachine makeVendingMachine(List<CoinCase> coinCases,
-		List<Product> products) {
-		return new VendingMachine(coinCases, products);
+		List<Product> products, int insertMoney) {
+		return new VendingMachine(coinCases, products, insertMoney);
 	}
 }

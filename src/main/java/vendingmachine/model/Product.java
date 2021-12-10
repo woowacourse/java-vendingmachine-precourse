@@ -24,6 +24,10 @@ public class Product {
 			Integer.parseInt(info[NUMBER_INDEX]));
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	private String removeBrackets(String productInfo) {
 		return productInfo
 			.replace(PRODUCT_BRACKET_LEFT, "")
