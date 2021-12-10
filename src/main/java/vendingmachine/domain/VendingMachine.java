@@ -27,6 +27,9 @@ public class VendingMachine {
     public int buy(int balance, Product product){
         this.balance = balance;
         this.balance -= product.getPrice();
+        if(this.balance - product.getPrice() < 0){
+            throw new IllegalArgumentException(Message.IS_OVER_BALANCE);
+        }
         product.subQuantity();
         return this.balance;
     }
