@@ -24,10 +24,12 @@ public class UserBalance {
 
 	@Override
 	public boolean equals(Object object) {
-		if (this == object)
+		if (this == object) {
 			return true;
-		if (object == null || getClass() != object.getClass())
+		}
+		if (object == null || getClass() != object.getClass()) {
 			return false;
+		}
 		UserBalance that = (UserBalance)object;
 		return userBalance == that.userBalance;
 	}
