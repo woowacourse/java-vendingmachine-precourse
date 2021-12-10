@@ -34,8 +34,8 @@ public class VendingMachine extends Observable {
 		notifyObservers(Event.of(CLOSE_VENDING_MACHINE, getRemainInputMoney()));
 	}
 
-	public boolean isOverAndEqualMoney(Item item) {
-		return item.isOverAndEqualPrice(inputMoney);
+	public boolean hasEnoughMoney(Item item) {
+		return item.getPrice() <= inputMoney;
 	}
 
 	private Coins getRemainInputMoney() {

@@ -30,8 +30,4 @@ public class Item {
 	public boolean isSoldOut() {
 		return quantity == 0;
 	}
-
-	public boolean isOverAndEqualPrice(int money) {
-		return price <= money;
-	}
 }

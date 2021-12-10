@@ -30,15 +30,15 @@ public class VendingMachineController {
 	}
 
 	private boolean isSalable(VendingMachine vendingMachine) {
-		return !isAllSoldOut() && isOverAndEqualMoney(vendingMachine);
+		return !isAllSoldOut() && hasEnoughMoney(vendingMachine);
 	}
 
 	private boolean isAllSoldOut() {
 		return ItemRepository.isAllSoldOut();
 	}
 
-	private boolean isOverAndEqualMoney(VendingMachine vendingMachine) {
+	private boolean hasEnoughMoney(VendingMachine vendingMachine) {
 		Item lowestPriceItem = ItemRepository.findLowestPriceItem();
-		return vendingMachine.isOverAndEqualMoney(lowestPriceItem);
+		return vendingMachine.hasEnoughMoney(lowestPriceItem);
 	}
 }
