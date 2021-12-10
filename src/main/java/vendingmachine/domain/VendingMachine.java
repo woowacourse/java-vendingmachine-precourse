@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.Message;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -8,7 +10,7 @@ import java.util.stream.Collectors;
 
 public class VendingMachine {
     private int change;
-    private int amount;
+    private int balance;
     private List<Integer> coins;
     private List<Product> products;
 
@@ -22,11 +24,11 @@ public class VendingMachine {
         return products;
     }
 
-    public int buy(int amount, Product product){
-        this.amount = amount;
-        this.amount -= product.getPrice();
+    public int buy(int balance, Product product){
+        this.balance = balance;
+        this.balance -= product.getPrice();
         product.subQuantity();
-        return this.amount;
+        return this.balance;
     }
 
     private List<Integer> setCoins(int[] coinList){

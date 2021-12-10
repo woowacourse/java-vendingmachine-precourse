@@ -51,13 +51,13 @@ public class VendingMachineService {
 
 
     public void start(){
-        int amount = vendingMachineValidation.inputAmountValidation();
-        while(amount > 0){
+        int balance = vendingMachineValidation.inputAmountValidation();
+        while(balance > 0){
             try{
-                System.out.println("투입금액 : " + amount);
+                System.out.println("투입금액 : " + balance);
                 System.out.println("구매할 상품명을 입력하세요");
                 String order = InputView.input();
-                amount = buyProduct(amount, order);
+                balance = buyProduct(balance, order);
             }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
