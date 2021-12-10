@@ -25,8 +25,7 @@ public class InputView {
 	public static String writeProductsInfo() {
 		OutputView.askProductInfo();
 		try {
-			// 예외 만들기
-			return Console.readLine();
+			return ExceptionUtils.validateInputProductsInfo(Console.readLine());
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
 			return writeProductsInfo();
