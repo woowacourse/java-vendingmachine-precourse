@@ -21,9 +21,9 @@ public class InputValidator {
 		return items;
 	}
 
-	public static int checkNumberForm(String input) {
+	public static int checkNumberForm(String input, String target) {
 		if (!input.matches(REGEX)) {
-			InputException.printNotNumberError();
+			InputException.printNotNumberError(target);
 		}
 		return Integer.parseInt(input);
 	}

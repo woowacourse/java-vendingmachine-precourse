@@ -7,6 +7,7 @@ import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Coin;
+import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -14,6 +15,8 @@ public class MachineController {
 	private static final int itemIndex = 0;
 	private static final int priceIndex = 1;
 	private static final int stockIndex = 2;
+	private static final String PRICE = "금액";
+	private static final String STOCK = "수량";
 
 	Beverages beverages = new Beverages();
 
@@ -30,8 +33,8 @@ public class MachineController {
 		for (String s : itemPriceStock) {
 			String[] itemInfo = s.split(",");
 			String name = itemInfo[itemIndex];
-			int price = Integer.parseInt(itemInfo[priceIndex]);
-			int stock = Integer.parseInt(itemInfo[stockIndex]);
+			int price = InputValidator.checkNumberForm(itemInfo[priceIndex], PRICE);
+			int stock = InputValidator.checkNumberForm(itemInfo[stockIndex], STOCK);
 			beverages.add(new Beverage(name, price, stock));
 
 		}
