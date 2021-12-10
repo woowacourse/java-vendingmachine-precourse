@@ -4,12 +4,13 @@ import static constants.ProductConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachineMoney;
 import vendingmachine.domain.VendingMachineProduct;
 import vendingmachine.domain.VendingMachineProducts;
-import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -57,6 +58,7 @@ public class VendingMachineController {
 			OutputView.printUserInputMoney(user);
 			buyProduct();
 		}
+		getChange();
 	}
 
 	private void buyProduct() {
@@ -74,4 +76,9 @@ public class VendingMachineController {
 		return user.isEnoughMoney(vendingMachineProducts.getLowestPrice()) && vendingMachineProducts.hasProduct();
 	}
 
+	private void getChange() {
+		OutputView.printUserInputMoney(user);
+		Map<Coin, Integer> changes = vendingMachineMoney.getChanges(user.getMoney());
+		OutputView.printChanges(changes);
+	}
 }

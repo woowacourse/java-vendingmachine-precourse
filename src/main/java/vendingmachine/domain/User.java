@@ -20,6 +20,10 @@ public class User {
 		return money - price >= 0;
 	}
 
+	public int getMoney() {
+		return money;
+	}
+
 	@Override
 	public String toString() {
 		return USER_INPUT_MONEY_MESSAGE + money + KOR_MONETARY_UNIT;

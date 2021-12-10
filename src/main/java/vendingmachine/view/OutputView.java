@@ -15,11 +15,20 @@ public class OutputView {
 
 	public static void printVendingMachineMoney(Map<Coin, Integer> coins) {
 		System.out.println(VENDING_MACHINE_MONEY_OUTPUT_MESSAGE);
+		printCoins(coins);
+		printNewLine();
+	}
+
+	public static void printChanges(Map<Coin, Integer> coins) {
+		System.out.println(CHANGES_MESSAGE);
+		printCoins(coins);
+	}
+
+	public static void printCoins(Map<Coin, Integer> coins) {
 		for (Coin coin : coins.keySet()) {
 			System.out.print(coin);
 			System.out.println(coins.get(coin) + KOR_ITEM_UNIT);
 		}
-		printNewLine();
 	}
 
 	public static void printNewLine() {

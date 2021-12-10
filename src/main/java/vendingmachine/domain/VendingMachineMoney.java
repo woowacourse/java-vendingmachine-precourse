@@ -33,4 +33,19 @@ public class VendingMachineMoney {
 	public Map<Coin, Integer> getCoins() {
 		return Collections.unmodifiableMap(coins);
 	}
+
+	public Map<Coin, Integer> getChanges(int money) {
+		Map<Coin, Integer> changes = new LinkedHashMap<>();
+		List<Integer> tmpCoins = Arrays.asList(COIN_500_NUM, COIN_100_NUM, COIN_50_NUM, COIN_10_NUM);
+		for (Integer changeAmount : tmpCoins) {
+			Coin coin = Coin.findByAmount(changeAmount);
+			int count = Math.min(money / changeAmount, coins.get(coin));
+			if (count != 0) {
+				changes.put(Coin.findByAmount(changeAmount), count);
+				money -= count * changeAmount;
+				coins.put(coin, coins.get(coin) - changeAmount);
+			}
+		}
+		return changes;
+	}
 }
