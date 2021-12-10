@@ -12,6 +12,7 @@ public class VendingMachine {
 
     private final HashMap<Integer, Integer> coins = new HashMap<>();
     private HashMap<String, List<Integer>> merchandiseInfo;
+    private int moneyLeft = 0;
 
     public VendingMachine() {
         int totalMoney = InputView.getVendingMachineTotalMoneyInput();
@@ -27,6 +28,10 @@ public class VendingMachine {
 
     public void setMerchandiseInfo(HashMap<String, List<Integer>> merchandiseInfo) {
         this.merchandiseInfo = merchandiseInfo;
+    }
+
+    public void setMoneyLeft(int moneyInput) {
+        this.moneyLeft = moneyInput;
     }
 
     private void generateCoins(int totalMoney) {

@@ -11,5 +11,6 @@ public class Application {
         OutputView.printCoinsInfo(machine.getCoins());
 
         machine.setMerchandiseInfo(InputView.getMerchandiseInput());
+        machine.setMoneyLeft(InputView.getCustomerMoneyInput());
     }
 }
