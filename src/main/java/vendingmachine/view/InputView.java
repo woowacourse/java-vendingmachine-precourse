@@ -10,6 +10,7 @@ public class InputView {
 	}
 
 	public static String getProductsInput() {
+		OutputView.printProductInputRequestMessage();
 		String input = Console.readLine();
 		return input;
 	}

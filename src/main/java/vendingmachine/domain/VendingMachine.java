@@ -55,7 +55,6 @@ public class VendingMachine {
 	}
 
 	private void makeProducts() {
-		OutputView.printProductInputRequestMessage();
 		List<String> productList = getProductListFromInput();
 		productList.forEach((productInfo) -> {
 			String[] info = productInfo.split(",");
@@ -64,9 +63,16 @@ public class VendingMachine {
 	}
 
 	private List<String> getProductListFromInput() {
-		String[] productArray = InputView.getProductsInput().split(";");
+		String productsInput = InputView.getProductsInput();
+		try {
+			InputValidator.checkIsValidProductsInput(productsInput);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printErrorMessage(exception.getMessage());
+			return getProductListFromInput();
+		}
+		String[] productArray = productsInput.split(";");
 		return Arrays.stream(productArray)
-			.map(productInfo -> productInfo = productInfo.substring(1, productInfo.length() - 2))
+			.map(productInfo -> productInfo = productInfo.substring(1, productInfo.length() - 1))
 			.collect(Collectors.toList());
 	}
 
@@ -83,7 +89,7 @@ public class VendingMachine {
 	private int getHoldingAmountFromInput() {
 		String holdingAmountInput = InputView.getHoldingAmountInput();
 		try {
-			InputValidator.checkIsValidHoldingAmount(holdingAmountInput);
+			InputValidator.checkIsValidHoldingAmountInput(holdingAmountInput);
 		} catch (IllegalArgumentException exception) {
 			OutputView.printErrorMessage(exception.getMessage());
 			return getHoldingAmountFromInput();
