@@ -35,14 +35,14 @@ public class ItemsService {
 		ItemName itemName = itemNameDto.toEntity();
 		Item item = itemsRepository.findByItemName(itemName);
 
-		UserBalance userBalance = userBalanceRepository.getUserBalance();
+		UserBalance userBalance = userBalanceRepository.get();
 		if (userBalance.toInt() < item.getItemPrice().toInt()) {
 			throw new NotEnoughBalanceException();
 		}
 
 		Item purchasedItem = item.buy();
 
-		userBalanceRepository.setUserBalance(userBalance.subtract(item.getItemPrice()));
+		userBalanceRepository.update(userBalance.subtract(item.getItemPrice()));
 		itemsRepository.updateByItemName(itemName, purchasedItem);
 	}
 

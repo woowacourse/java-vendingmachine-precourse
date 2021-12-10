@@ -1,7 +1,9 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.userbalance.UserBalance;
+import vendingmachine.exception.NotNaturalNumberException;
 import vendingmachine.service.UserBalanceService;
+import vendingmachine.utils.StringUtils;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -10,13 +12,22 @@ public class UserBalanceController {
 
 	public void generateUserBalance() {
 		String input = InputView.inputUserBalance();
+
 		try {
-			UserBalance userBalance = UserBalance.from(input);
-			userBalanceService.initUserBalance(userBalance);
-			OutputView.printCurrentUserBalance(userBalance.toInt());
+			initUserBalance(input);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			generateUserBalance();
 		}
+	}
+
+	private void initUserBalance(String input) {
+		if (!StringUtils.isNumeric(input)) {
+			throw new NotNaturalNumberException();
+		}
+
+		UserBalance userBalance = UserBalance.from(Integer.parseInt(input));
+		userBalanceService.initUserBalance(userBalance);
+		OutputView.printCurrentUserBalance(userBalance.toInt());
 	}
 }

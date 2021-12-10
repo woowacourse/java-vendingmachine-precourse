@@ -12,11 +12,9 @@ public class UserBalance {
 		this.userBalance = userBalance;
 	}
 
-	public static UserBalance from(String userBalance) {
+	public static UserBalance from(int userBalance) {
 		BalanceValidator.validateUserBalance(userBalance);
-
-		int parsedNumber = Integer.parseInt(userBalance);
-		return new UserBalance(parsedNumber);
+		return new UserBalance(userBalance);
 	}
 
 	public UserBalance subtract(ItemPrice itemPrice) {

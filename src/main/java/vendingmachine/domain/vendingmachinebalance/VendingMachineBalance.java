@@ -11,11 +11,9 @@ public class VendingMachineBalance {
 		this.vendingMachineBalance = vendingMachineBalance;
 	}
 
-	public static VendingMachineBalance from(String vendingMachineBalance) {
+	public static VendingMachineBalance from(int vendingMachineBalance) {
 		BalanceValidator.validateVendingMachineBalance(vendingMachineBalance);
-
-		int parsedNumber = Integer.parseInt(vendingMachineBalance);
-		return new VendingMachineBalance(parsedNumber);
+		return new VendingMachineBalance(vendingMachineBalance);
 	}
 
 	public int toInt() {

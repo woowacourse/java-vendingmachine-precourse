@@ -13,13 +13,11 @@ public class UserBalanceRepository {
 		return userBalanceRepository;
 	}
 
-	// TODO: find, get 등으로 간략하게 네이밍 변경
-	public UserBalance getUserBalance() {
-		return this.userBalance;
+	public void update(UserBalance userBalance) {
+		this.userBalance = userBalance;
 	}
 
-	// TODO: update 등으로 네이밍 변경
-	public void setUserBalance(UserBalance userBalance) {
-		this.userBalance = userBalance;
+	public UserBalance get() {
+		return this.userBalance;
 	}
 }
