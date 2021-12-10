@@ -16,22 +16,12 @@ public class ProductList {
 	public void init(String rawInput) {
 		String[] productRawInputList = rawInput.split(PRODUCT_CRITERIA, -1);
 		for (String productRawInput : productRawInputList) {
-			String[] arguments = createProductArguments(productRawInput);
+			Product product = new Product();
+			product.init(productRawInput);
 
-			String name = arguments[0];
-			int price = Integer.parseInt(arguments[1]);
-			int quantity = Integer.parseInt(arguments[2]);
-
-			Product product = new Product(name, price, quantity);
+			String name = product.getName();
 			hashMap.put(name, product);
 		}
-	}
-
-	private String[] createProductArguments(String productRawInput) {
-		String bracketRemovedInput = productRawInput.replace(OPENING_BRACKET, "")
-			.replace(CLOSING_BRACKET, "");
-
-		return bracketRemovedInput.split(ARGUMENT_CRITERIA, -1);
 	}
 
 	public boolean isExistProduct(String productName) {

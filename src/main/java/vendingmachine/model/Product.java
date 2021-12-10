@@ -1,15 +1,30 @@
 package vendingmachine.model;
 
+import static vendingmachine.validator.ProductValidator.*;
+
 public class Product {
 
-	private final String name;
-	private final int price;
+	private String name;
+	private int price;
 	private int quantity;
 
-	public Product(String name, int price, int quantity) {
-		this.name = name;
-		this.price = price;
-		this.quantity = quantity;
+	public void init(String rawInfo) {
+		String[] arguments = createProductArguments(rawInfo);
+
+		this.name = arguments[0];
+		this.price = Integer.parseInt(arguments[1]);
+		this.quantity = Integer.parseInt(arguments[2]);
+	}
+
+	private String[] createProductArguments(String productRawInput) {
+		String bracketRemovedInput = productRawInput.replace(OPENING_BRACKET, "")
+			.replace(CLOSING_BRACKET, "");
+
+		return bracketRemovedInput.split(ARGUMENT_CRITERIA, -1);
+	}
+
+	public String getName() {
+		return this.name;
 	}
 
 	public int getPrice() {
