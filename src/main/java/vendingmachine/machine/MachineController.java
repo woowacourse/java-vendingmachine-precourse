@@ -26,8 +26,11 @@ public class MachineController {
         return MachineInputView.buyWhichProductByClient();
     }
 
+    public void canHaveMoney(int productPrice) {
+        MachineValidator.validateMoneyEnough(machine.getAmountByClient(), productPrice);
+    }
+
     public void buyProduct(int price) {
-        MachineValidator.validateMoneyEnough(machine.getAmountByClient(), price);
         machine.buyProduct(price);
     }
 

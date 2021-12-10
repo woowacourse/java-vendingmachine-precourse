@@ -32,13 +32,10 @@ public class VendingMachine {
         try {
             String buyProductName = machineController.buyWhichProduct();
             Product product = productsController.findProduct(buyProductName);
-            if (!machineController.buyProduct(product.getPrice())) {
-                throw new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
-                        + ValidatorMessage.NOT_ENOUGH_AMOUNT);
-            }
+            machineController.buyProduct(product.getPrice());
             productsController.buyProduct(product);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            ValidatorMessage.printError(e.getMessage());
             buyProduct();
         }
     }
