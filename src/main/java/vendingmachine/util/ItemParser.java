@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.Item;
 
 public class ItemParser {
-	private static final String PARAMETER_SEPARATOR = ",";
 	private static final String OBJECT_SEPARATOR = ";";
 
 	public static List<Item> parseList(String itemListStr) {
@@ -21,6 +20,6 @@ public class ItemParser {
 	}
 
 	private static Item parse(String itemStr) {
-		return null;
+		return ItemValidator.validate(itemStr);
 	}
 }

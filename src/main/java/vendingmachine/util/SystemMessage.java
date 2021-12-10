@@ -10,4 +10,5 @@ public class SystemMessage {
 	public static final String SHOW_FIRST_MONEY = "자판기가 보유한 동전";
 	public static final String INPUT_ITEM_INFO = "상품명과 가격, 수량을 입력해 주세요.";
 	public static final String ERROR_IS_NOT_WRAPPED = ERROR + " []로 상품을 감싸서 입력해야 합니다.";
+	public static final String ERROR_ITEM_DELIMITER = ERROR + " 상품명, 가격, 수량을 ','로 구분해야 합니다.";
 }
