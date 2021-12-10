@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 public class ProductContainer {
 
@@ -24,5 +25,12 @@ public class ProductContainer {
         return (int) productMap.values().stream()
                                         .filter(product -> product.getStockQuantity() == 0)
                                         .count();
+    }
+
+    public boolean isAllSoldOut() {
+        return !productMap.values().stream()
+                                    .filter(product -> product.getStockQuantity() != 0)
+                                    .collect(Collectors.toList())
+                                    .isEmpty();
     }
 }
