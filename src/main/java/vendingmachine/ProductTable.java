@@ -28,14 +28,12 @@ public class ProductTable {
 
 	public boolean isAnythingToBuy(int money) {
 		Iterator<ProductEntry> iterator = products.values().iterator();
-
 		while (iterator.hasNext()) {
 			ProductEntry entry = iterator.next();
 			if (entry.isAffordable(money)) {
 				return true;
 			}
 		}
-
 		return false;
 	}
 }

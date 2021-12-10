@@ -37,7 +37,6 @@ public class Program {
 			pocket.push(coin);
 			money = coin.subtract(money);
 		}
-
 		Message.printCoinPocket(pocket);
 	}
 
@@ -65,7 +64,6 @@ public class Program {
 		if (!table.isAnythingToBuy(userMoney)) {
 			return;
 		}
-
 		buyProduct();
 	}
 }
