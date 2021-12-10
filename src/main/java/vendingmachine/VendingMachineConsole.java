@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static vendingmachine.StringConstants.PREFIX_OF_ERROR_MESSAGE;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.dto.ItemsInventoryInfo;
 import vendingmachine.dto.request.CurrentBalanceRequest;
@@ -17,7 +19,7 @@ public class VendingMachineConsole {
                 currentBalance = new CurrentBalanceRequest(input()).toCurrentBalance();
                 isInputEntered = true;
             } catch (IllegalArgumentException error) {
-                System.out.println(error.getMessage());
+                printErrorMessage(error.getMessage());
             }
         }
         return currentBalance;
@@ -32,7 +34,7 @@ public class VendingMachineConsole {
                 itemInventoryInfo = new ItemsInventoryRequest(input()).toItemsInventoryInfo();
                 isItemsInventoryInfoEntered = true;
             } catch (IllegalArgumentException error) {
-                System.out.println(error.getMessage());
+                printErrorMessage(error.getMessage());
             }
         }
         return itemInventoryInfo;
@@ -44,5 +46,10 @@ public class VendingMachineConsole {
 
     private String input() {
         return Console.readLine();
+    }
+
+    private void printErrorMessage(String errorMessage) {
+        System.out.print(PREFIX_OF_ERROR_MESSAGE);
+        System.out.println(errorMessage);
     }
 }
