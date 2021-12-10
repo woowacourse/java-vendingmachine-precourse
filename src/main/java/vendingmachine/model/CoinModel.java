@@ -1,24 +1,22 @@
 package vendingmachine.model;
 
-import static vendingmachine.constants.ProgramConstants.*;
-
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.resource.Coin;
 import vendingmachine.resource.CoinStorage;
 
-public class VendingMachineModel {
-	private final static VendingMachineModel vendingMachineModel = new VendingMachineModel();
+public class CoinModel {
+	private final static CoinModel coinModel = new CoinModel();
 
 	private final CoinStorage coinStorage;
 
-	private VendingMachineModel() {
+	private CoinModel() {
 		coinStorage = CoinStorage.getCoinStorage();
 	}
 
-	public static VendingMachineModel getVendingMachineModel() {
-		return vendingMachineModel;
+	public static CoinModel getCoinModel() {
+		return coinModel;
 	}
 
 	public void generateCoins(int amount) {

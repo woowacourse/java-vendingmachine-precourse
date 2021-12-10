@@ -6,21 +6,20 @@ import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.ItemModel;
-import vendingmachine.model.VendingMachineModel;
-import vendingmachine.resource.ItemStorage;
+import vendingmachine.model.CoinModel;
 import vendingmachine.validator.InputValidator;
 import vendingmachine.view.VendingMachineOutputView;
 
 public class VendingMachineController {
 	private final static VendingMachineController vendingMachineController = new VendingMachineController();
 	private final VendingMachineOutputView vendingMachineOutputView;
-	private final VendingMachineModel vendingMachineModel;
+	private final CoinModel coinModel;
 	private final InputValidator inputValidator;
 	private final ItemModel itemModel;
 
 	private VendingMachineController() {
 		vendingMachineOutputView = VendingMachineOutputView.getVendingMachineOutputView();
-		vendingMachineModel = VendingMachineModel.getVendingMachineModel();
+		coinModel = CoinModel.getCoinModel();
 		inputValidator = InputValidator.getInputValidator();
 		itemModel = ItemModel.getItemModel();
 	}
@@ -30,9 +29,9 @@ public class VendingMachineController {
 	}
 
 	public void run() {
-		vendingMachineModel.generateCoins(getInitialAmount());
+		coinModel.generateCoins(getInitialAmount());
 		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
-		vendingMachineOutputView.printVendingMachineInitialCoins(vendingMachineModel.getNumberOfCoins());
+		vendingMachineOutputView.printVendingMachineInitialCoins(coinModel.getNumberOfCoins());
 		itemModel.createItems(getInitialItems());
 	}
 
