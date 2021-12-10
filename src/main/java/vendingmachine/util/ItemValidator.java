@@ -46,7 +46,7 @@ public class ItemValidator {
 		if (isRightParameterCount(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_ITEM_DELIMITER);
 
-		int price = Integer.parseInt((String)result.get(PRICE_INDEX));
+		int price = validatePrice((String)result.get(PRICE_INDEX));
 		result.set(PRICE_INDEX, price);
 
 		result.set(AMOUNT_INDEX, Integer.parseInt((String)result.get(AMOUNT_INDEX)));
@@ -63,8 +63,11 @@ public class ItemValidator {
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_INTEGER);
 		int price = Integer.parseInt(priceStr);
 
-		if(price < PRICE_MIN)
+		if(isMoreThanMin(price))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_MIN);
+
+		if(isMultipleOf10(price))
+			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_MULTIPLE_OF_10);
 
 		return price;
 	}
@@ -76,5 +79,13 @@ public class ItemValidator {
 			return false;
 		}
 		return true;
+	}
+
+	private static boolean isMoreThanMin(int number) {
+		return number < PRICE_MIN;
+	}
+
+	private static boolean isMultipleOf10(int number) {
+		return number % 10 == 0;
 	}
 }
