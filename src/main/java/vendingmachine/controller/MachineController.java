@@ -31,14 +31,16 @@ public class MachineController {
 	private void setting() {
 		Change change = new Change(InputView.getHavingMoney());
 		changes = change.generateChanges();
-		OutputView.printHavingMoney();
+		OutputView.printHavingMachineCoin();
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
 		beverages = splitItem(itemPriceStock);
 		inputMoney = InputView.getUserInputMoney();
 	}
 
 	private void progress() {
-		//상품 구매가 진행되는 매서드
+		while (!inputMoney.isSame(0)) {
+			OutputView.printInputMoney(inputMoney);
+		}
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
