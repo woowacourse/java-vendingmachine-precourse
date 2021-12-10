@@ -17,6 +17,10 @@ public enum Coin {
 		this.amount = amount;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
 	public static List<Integer> getList() {
 		return Arrays.asList(10, 50, 100, 500);
 	}

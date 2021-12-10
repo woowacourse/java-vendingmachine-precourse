@@ -7,11 +7,15 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
 	private int money;
-	private final Map<Coin, Integer> changes = new TreeMap<>();
+	private static final Map<Coin, Integer> changes = new TreeMap<>();
 
 	public Change(int money) {
-		this.money = money;
 		initChanges();
+		this.money = money;
+	}
+
+	public static Map<Coin, Integer> getChanges() {
+		return changes;
 	}
 
 	public Map<Coin, Integer> generateChanges() {
