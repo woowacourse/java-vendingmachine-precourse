@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.Randoms.*;
 import static vendingmachine.constant.Constant.*;
 import static vendingmachine.domain.Coin.*;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
@@ -34,12 +35,13 @@ public class VendingMachine {
 		}
 	}
 
-	private void sellProduct(String productName, int amountPaid) {
+	public int getProduct(String productName, int amountPaid) {
 		if (!canSell(productName, amountPaid)) {
 			throw new IllegalArgumentException(NO_STOCKS_MESSAGE);
 		}
 		productStocks.put(productName, productStocks.get(productName) - 1);
 		giveChange(amountPaid - productPrice.get(productName));
+		return 1;
 	}
 
 	private boolean canSell(String productName, int amountPaid) {
@@ -74,5 +76,9 @@ public class VendingMachine {
 
 	public LinkedHashMap<Integer, Integer> getCoinsOwned() {
 		return coinsOwned;
+	}
+
+	public int getMinimumMoney() {
+		return Collections.min(productPrice.values());
 	}
 }
