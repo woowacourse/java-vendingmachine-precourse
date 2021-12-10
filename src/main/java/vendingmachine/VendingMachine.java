@@ -36,8 +36,10 @@ public class VendingMachine {
         };
     }
 
-    public void giveChange() {
-        changeAccountant.change(moneyAvailable, coinBalance);
+    public Coins giveChange() {
+        Coins change = changeAccountant.change(moneyAvailable, coinBalance);
+        moneyAvailable = changeAccountant.getRestAfterCalculation();
+        return change;
     }
 
     private Item findItemToPurchase(String itemNameToPurchase) {
