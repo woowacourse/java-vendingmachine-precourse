@@ -6,7 +6,7 @@ public class MachineValidator {
     public static final String PREFIX = ValidatorMessage.ERROR_MESSAGE;
 
     public static void validateAmountNaturalNumber(String money) {
-        if (money.matches(ValidatorMessage.NUMBER_REGEX)) {
+        if (!money.matches(ValidatorMessage.NUMBER_REGEX)) {
             throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_NUMBER_MESSAGE);
         }
         if (Integer.parseInt(money) <= 0) {
