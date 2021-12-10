@@ -1,10 +1,15 @@
 package vendingmachine.view;
 
+import java.util.ArrayList;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.controller.ExceptionController;
+import vendingmachine.model.Products;
 import vendingmachine.util.Constant;
 
 public class InputView {
+	public static ArrayList<Products> products;
+
 	public static void askHoldingAmount() {
 		System.out.println(Constant.ASK_HOLDING_AMOUNT);
 		String input = Console.readLine();
@@ -12,9 +17,7 @@ public class InputView {
 	}
 
 	private static void checkHoldingAmount(String input) {
-		ExceptionController.isInteger(input);
-		int holdingAmount = Integer.parseInt(input);
-		ExceptionController.isPositive(holdingAmount);
+		int holdingAmount = ExceptionController.isValidNumber(input);
 		ExceptionController.isMultipleOfTen(holdingAmount);
 	}
 
@@ -23,6 +26,7 @@ public class InputView {
 		String[] products = splitProducts(Console.readLine());
 		checkProducts(products);
 		String[][] information = checkInfoFormat(products);
+		inputProduct(information);
 	}
 
 
@@ -40,6 +44,15 @@ public class InputView {
 			ExceptionController.isNumberOfInfo3(information[i]);
 		}
 		return information;
+	}
+
+	private static void inputProduct(String[][] information) {
+		products = new ArrayList<>();
+		for (String[] info : information) {
+			int price = ExceptionController.isValidNumber(info[1]);
+			int count = ExceptionController.isValidNumber(info[2]);
+			products.add(new Products(info[0], price, count));
+		}
 	}
 
 	private static String[] splitProducts(String input) {
