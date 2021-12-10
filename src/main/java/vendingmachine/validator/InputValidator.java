@@ -35,6 +35,7 @@ public class InputValidator {
 	}
 
 	private void checkAllInitialAmountInputExceptions(String amount) {
+		checkEmptyMoneyInputExceptions(amount);
 		checkNotNaturalNumberExceptions(amount);
 		checkNotMultiplicationOfTenExceptions(amount);
 	}
@@ -46,6 +47,12 @@ public class InputValidator {
 		checkPriceNotNaturalNumberExceptions(items);
 		checkPriceNotMultiplicationOfTenExceptions(items);
 		checkQuantityNotNaturalNumberExceptions(items);
+	}
+
+	private void checkEmptyMoneyInputExceptions(String string) {
+		if (string.length() == 0){
+			throw new IllegalArgumentException(EMPTY_MONEY_INPUT_ERROR_MESSAGE);
+		}
 	}
 
 	private void checkNotNaturalNumberExceptions(String string) {
