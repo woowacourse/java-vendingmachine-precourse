@@ -167,3 +167,4 @@ public enum Coin {
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출 문서](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 를 참고한다.
 
 - 💻 구현할 목록
+    - 난수를 생성하는 클래스 구현(branch: feature/random-number)
