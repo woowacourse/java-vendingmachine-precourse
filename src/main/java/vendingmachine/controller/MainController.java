@@ -1,9 +1,17 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.VendingMachineMoney;
 import vendingmachine.view.Input;
 
 public class MainController {
+    VendingMachineMoney vendingMachineMoney;
+
+    public MainController() {
+    }
+
     public void playGame(){
-        Input.InputVendingMachineChange();
+        int vendingMachineChange = Input.InputVendingMachineChange();
+        vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
+        MakeCoinController.makeCoin(vendingMachineMoney);
     }
 }
