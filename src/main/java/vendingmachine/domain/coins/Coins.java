@@ -3,7 +3,6 @@ package vendingmachine.domain.coins;
 import java.util.HashMap;
 import java.util.Map;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinAmount;
 import vendingmachine.domain.userbalance.UserBalance;
@@ -30,20 +29,21 @@ public class Coins {
 		Map<Coin, CoinAmount> coins = new HashMap<>();
 		int remainingBalance = vendingMachineBalance;
 
-		for (int i = 0; i < 3; i++) {
-			Coin coin = Coin.values()[i];
-			int maxAmount = getMaxCoinAmount(remainingBalance, coin);
-			int amount = Randoms.pickNumberInRange(0, maxAmount);
-			coins.put(coin, CoinAmount.from(amount));
-			remainingBalance -= coin.getAmount() * amount;
+		while (remainingBalance > 0) {
+			Coin randomCoin = Coin.pickRandom();
+			if (!isAbleToAddChange(randomCoin, remainingBalance)) {
+				continue;
+			}
+			coins.computeIfAbsent(randomCoin, coin -> CoinAmount.from(0));
+			coins.put(randomCoin, CoinAmount.from(coins.get(randomCoin).toInt() + 1));
+			remainingBalance = remainingBalance - randomCoin.getAmount();
 		}
 
-		coins.put(Coin.COIN_10, CoinAmount.from(getMaxCoinAmount(remainingBalance, Coin.COIN_10)));
 		return coins;
 	}
 
-	private static int getMaxCoinAmount(int remainingBalance, Coin coin) {
-		return remainingBalance / coin.getAmount();
+	private static boolean isAbleToAddChange(Coin coin, int balance) {
+		return coin.getAmount() <= balance;
 	}
 
 	// TODO: 리팩토링 필요
