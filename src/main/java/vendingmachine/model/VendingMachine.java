@@ -40,4 +40,8 @@ public class VendingMachine {
 	public boolean findQuantityOfOrder(String order) {
 		return menu.findQuantity(order);
 	}
+
+	public boolean comparePrice(String order) {
+		return menu.comparePrice(order, insertedMoney);
+	}
 }

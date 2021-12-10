@@ -7,6 +7,7 @@ public class OrderException {
 	public static void checkCanTakeThisOrder(String order, VendingMachine vendingMachine) {
 		try {
 			isThereThisMenu(order, vendingMachine);
+			isThereAnyQuantity(order, vendingMachine);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
@@ -24,6 +25,14 @@ public class OrderException {
 
 		if (!vendingMachine.findQuantityOfOrder(order)) {
 			throw new IllegalArgumentException(ErrorMessage.NO_QUANTITY_MESSAGE);
+		}
+
+	}
+
+	public static void checkCanBuyThisProductWithRemainMoney(String order, VendingMachine vendingMachine) {
+
+		if (vendingMachine.comparePrice(order)) {
+			throw new IllegalArgumentException(ErrorMessage.CANNOT_BUY_WITH_REMAIN_MESSAGE);
 		}
 
 	}
