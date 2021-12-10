@@ -55,8 +55,8 @@ public class ProductValidator {
 		String productPrice = productArguments[1];
 		checkProductPrice(productPrice);
 
-		String numberOfProducts = productArguments[2];
-		checkNumberOfProducts(numberOfProducts);
+		String productQuantity = productArguments[2];
+		checkProductQuantity(productQuantity);
 	}
 
 	private static void checkArgumentsLength(int argumentsLength) {
@@ -67,14 +67,14 @@ public class ProductValidator {
 		}
 	}
 
-	private static void checkNumberOfProducts(String numberOfProducts) {
-		for (int i = 0; i < numberOfProducts.length(); i++) {
-			if (!Character.isDigit(numberOfProducts.charAt(i))) {
+	private static void checkProductQuantity(String productQuantity) {
+		for (int i = 0; i < productQuantity.length(); i++) {
+			if (!Character.isDigit(productQuantity.charAt(i))) {
 				throw new IllegalArgumentException("상품 수량은 자연수만 허용됩니다.");
 			}
 		}
 
-		if (Integer.parseInt(numberOfProducts) == 0) {
+		if (Integer.parseInt(productQuantity) == 0) {
 			throw new IllegalArgumentException("상품 수량은 1개 이상이어야 합니다.");
 		}
 	}
