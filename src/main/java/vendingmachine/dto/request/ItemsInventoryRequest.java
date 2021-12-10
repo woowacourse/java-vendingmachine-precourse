@@ -30,9 +30,18 @@ public class ItemsInventoryRequest {
     }
 
     private void checkInputEmpty(String[] input) {
-        if (isNullOrEmpty(input)) {
+        if (isNullOrEmpty(input) || checkEachStringNotEmpty(input)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEMS_INVENTORY_INPUT);
         }
+    }
+
+    private boolean checkEachStringNotEmpty(String[] input) {
+        for (String string : input) {
+            if (string.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private ItemsInventoryInfo toItemsInventoryInfo(String[] inputDividedByItem) {

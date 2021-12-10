@@ -2,6 +2,7 @@ package vendingmachine.dto.request;
 
 import static vendingmachine.StringConstants.*;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -13,7 +14,8 @@ public class ItemInventoryRequest {
     private static final String COMMA_DELIMITER_BETWEEN_KINDS_OF_ITEM_INFO = ",";
     private static final String OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO = "[";
     private static final String CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO = "]";
-    private static final int LENGTH_OF_BRACKET = 1;
+    private static final int LENGTH_OF_OPENING_BRACKET = 1;
+    private static final int LENGTH_OF_CLOSING_BRACKET = 1;
     private static final int NUMBER_OF_INFO_ITEM_INVENTORY_INPUT_TO_HAS = 3;
     private static final int INDEX_OF_ITEM_NAME = 0;
     private static final int INDEX_OF_ITEM_PRICE = 1;
@@ -26,17 +28,37 @@ public class ItemInventoryRequest {
 
     public ItemInventoryInfo toItemInventoryInfo() {
         List<String> input = divideByKindOfInfo();
-        validate(input);
         return new ItemInventoryInfo(extractItemInfo(input), extractItemQuantity(input));
     }
 
     private List<String> divideByKindOfInfo() {
-        return Arrays.asList(splitByComma(removeBracket()));
+        List<String> itemInventoryInfo = new ArrayList<>();
+        validateInfoInBrackets();
+        try {
+            validateNoEmptyInfo();
+            itemInventoryInfo = Arrays.asList(splitByComma(removeBracket()));
+            validateNumberOfInfo(itemInventoryInfo);
+        } catch (IllegalArgumentException exception) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT);
+        }
+        return itemInventoryInfo;
     }
 
-    private void validate(List<String> dividedInfoValue) {
+    private void validateInfoInBrackets() {
+        if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) || input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT_FORMAT);
+        }
+    }
+
+    private void validateNoEmptyInfo() {
+        if(input.length() <= LENGTH_OF_OPENING_BRACKET + LENGTH_OF_CLOSING_BRACKET) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void validateNumberOfInfo(List<String> dividedInfoValue) {
         if (dividedInfoValue.size() != NUMBER_OF_INFO_ITEM_INVENTORY_INPUT_TO_HAS) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT);
+            throw new IllegalArgumentException();
         }
     }
 
@@ -56,10 +78,7 @@ public class ItemInventoryRequest {
     }
 
     private String removeBracket() {
-        if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) || input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT_FORMAT);
-        }
-        return input.substring(LENGTH_OF_BRACKET, input.length() - LENGTH_OF_BRACKET);
+        return input.substring(LENGTH_OF_OPENING_BRACKET, input.length() - LENGTH_OF_CLOSING_BRACKET);
     }
 
     private String[] splitByComma(String itemInventoryInfoValue) {

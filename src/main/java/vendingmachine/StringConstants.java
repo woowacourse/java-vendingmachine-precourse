@@ -6,7 +6,7 @@ public class StringConstants {
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEMS_INVENTORY_INPUT = "하나 이상의 상품에 대한 정보를 입력해 주세요";
     public static final String ERROR_MESSAGE_ABOUT_DUPLICATED_ITEM_NAMES_IN = "상품명은 중복될 수 없습니다";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT_FORMAT = "아이템 정보는 대괄호('[]')로 묶여 있어야 합니다";
-    public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT = "상품명, 가격, 수량에 대한 정보를 모두 입력해 주세요";
+    public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT = "상품명, 가격, 수량에 대한 정보를 쉼표(,)로 구분하여 모두 입력해 주세요";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_QUANTITY_INPUT = "수량은 정수로 변환할 수 있어야 하며 1보다 커야 합니다";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT = "상품 가격은 100원 이상의 정수이며 10원 단위로 나눠 떨어져야 합니다";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT = "상품 명은 최소 한 글자 이상이어야 합니다";
