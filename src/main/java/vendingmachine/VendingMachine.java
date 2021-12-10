@@ -12,46 +12,12 @@ public class VendingMachine {
 
     private ProductContainer productContainer;
 
-    private Map<Coin, Integer> remainingCoin = new HashMap<Coin, Integer>(){{
-        put(Coin.COIN_10, 0);
-        put(Coin.COIN_50, 0);
-        put(Coin.COIN_100, 0);
-        put(Coin.COIN_500, 0);
-    }};
+    private CoinContainer coinContainer;
 
-    public VendingMachine(ProductContainer productContainer, int balance) {
-        this.productContainer = productContainer;
+    public VendingMachine(int balance, ProductContainer productContainer, CoinContainer coinContainer) {
         this.balance = balance;
-    }
-
-    public void generateCoin(int holdingAmount) {
-        Coin pickedCoin;
-        List<Integer> pickableCoinAmountList = Coin.coinAmountList;
-
-        while (holdingAmount > 0) {
-            pickableCoinAmountList = updatePickableCoinAmountList(pickableCoinAmountList, holdingAmount);
-
-            pickedCoin = pickCoin(pickableCoinAmountList);
-            addRemainingCoin(pickedCoin);
-            holdingAmount -= pickedCoin.getAmount();
-        }
-    }
-
-    private List<Integer> updatePickableCoinAmountList(List<Integer> pickableCoinAmountList, int upperBoundAmount) {
-        return pickableCoinAmountList.stream()
-                                        .filter(amount -> amount <= upperBoundAmount)
-                                        .collect(Collectors.toList());
-    }
-
-    private Coin pickCoin(List<Integer> pickableCoinAmountList) {
-        int pickedAmount = Randoms.pickNumberInList(pickableCoinAmountList);
-
-        return Coin.of(pickedAmount);
-    }
-
-    private void addRemainingCoin(Coin coin) {
-        int remainingStock = remainingCoin.get(coin);
-        remainingCoin.put(coin, remainingStock + 1);
+        this.productContainer = productContainer;
+        this.coinContainer = coinContainer;
     }
 
     public void sellProduct(String productName) {
@@ -62,6 +28,7 @@ public class VendingMachine {
         if (balance < product.getPrice()) {
             throw new NotEnoughBalanceException(ErrorMessage.NOT_ENOUGH_BALANCE.getCompleteMessage());
         }
+
         balance -= product.getPrice();
         product.sell();
     }
