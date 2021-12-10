@@ -30,7 +30,7 @@ public class VendingMachine {
 	}
 
 	public void takeOrder() {
-		Order.takeOrder(this);
+		insertedMoney -= Order.takeOrder(this);
 	}
 
 	public boolean findMenu(String order) {
@@ -44,4 +44,9 @@ public class VendingMachine {
 	public int comparePrice(String order) {
 		return menu.comparePrice(order, insertedMoney);
 	}
+
+	public int getRemainMoney() {
+		return insertedMoney;
+	}
+
 }

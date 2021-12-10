@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import vendingmachine.constants.InputMessage;
+import vendingmachine.constants.OutputMessage;
 
 public class UserView {
 	public void askVendingMachineCoins() {
@@ -16,6 +17,10 @@ public class UserView {
 	}
 
 	public void orderMenu() {
-		System.out.println("\n" + InputMessage.ORDER_MENU_NAME);
+		System.out.println(InputMessage.ORDER_MENU_NAME);
+	}
+
+	public void printRemainOfInsertedMoney(int remainMoney) {
+		System.out.println("\n" + OutputMessage.PRINT_USER_MONEY + remainMoney);
 	}
 }

@@ -27,12 +27,9 @@ public class VendingMachineController {
 		vendingMachine.insertMoney();
 
 		while (true) {
+			userView.printRemainOfInsertedMoney(vendingMachine.getRemainMoney());
 			userView.orderMenu();
-			
-			if (vendingMachine.takeOrder()) {
-
-			}
-
+			vendingMachine.takeOrder();
 		}
 
 	}

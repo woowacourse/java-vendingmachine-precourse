@@ -29,7 +29,7 @@ public class Product {
 
 	public int comparePrice(int insertedMoney) {
 
-		if (price >= insertedMoney) {
+		if (price <= insertedMoney) {
 			return price;
 		}
 
