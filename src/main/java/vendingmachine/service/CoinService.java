@@ -15,10 +15,8 @@ public class CoinService {
 
 	public CoinService() {
 		if (coinRepository.isEmpty()) {
-			coinRepository.put(Coin.COIN_10, ZERO);
-			coinRepository.put(Coin.COIN_50, ZERO);
-			coinRepository.put(Coin.COIN_100, ZERO);
-			coinRepository.put(Coin.COIN_500, ZERO);
+			Arrays.stream(Coin.values())
+					.forEach(coin -> coinRepository.put(coin, ZERO));
 		}
 	}
 

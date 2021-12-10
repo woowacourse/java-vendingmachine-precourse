@@ -1,14 +1,11 @@
 package vendingmachine.util;
 
-import static vendingmachine.NumberConstant.*;
-
-import java.util.Arrays;
-
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.Coin;
 
 public class Random {
 
 	public static int generateAmount() {
-		return Randoms.pickNumberInList(Arrays.asList(TEN, FIFTY, HUNDRED, FIVE_HUNDRED));
+		return Randoms.pickNumberInList(Coin.amountList);
 	}
 }

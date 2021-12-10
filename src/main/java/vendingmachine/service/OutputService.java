@@ -18,26 +18,23 @@ public class OutputService {
 
 	public void printAllCoinCount() {
 		System.out.println(MONEY_OF_VENDING_MACHINE);
-		System.out.println(FIVE_HUNDRED + WON + STICK + coinService.getCoinCount(FIVE_HUNDRED) + UNIT);
-		System.out.println(HUNDRED + WON + STICK + coinService.getCoinCount(HUNDRED) + UNIT);
-		System.out.println(FIFTY + WON + STICK + coinService.getCoinCount(FIFTY) + UNIT);
-		System.out.println(TEN + WON + STICK + coinService.getCoinCount(TEN) + UNIT);
+		Coin.amountList
+			.stream()
+			.forEach(amount ->
+				System.out.println(amount + WON + STICK + coinService.getCoinCount(amount) + UNIT));
 		enter();
 	}
 
 	public void printChange(Map<Coin, Integer> change) {
 		System.out.println(CHANGE);
-		if (change.containsKey(Coin.COIN_500) && change.get(Coin.COIN_500) > ZERO) {
-			System.out.println(FIVE_HUNDRED + WON + STICK + change.get(Coin.COIN_500) + UNIT);
-		}
-		if (change.containsKey(Coin.COIN_100) &&change.get(Coin.COIN_100) > ZERO) {
-			System.out.println(HUNDRED + WON + STICK + change.get(Coin.COIN_100) + UNIT);
-		}
-		if (change.containsKey(Coin.COIN_50) &&change.get(Coin.COIN_50) > ZERO) {
-			System.out.println(FIFTY + WON + STICK + change.get(Coin.COIN_50) + UNIT);
-		}
-		if (change.containsKey(Coin.COIN_10) &&change.get(Coin.COIN_10) > ZERO) {
-			System.out.println(TEN + WON + STICK + change.get(Coin.COIN_10) + UNIT);
+		Coin.amountList
+			.stream()
+			.forEach(amount -> printChangeOfOneCoin(change, amount));
+	}
+
+	private void printChangeOfOneCoin(Map<Coin, Integer> change, int amount) {
+		if (change.containsKey(Coin.getByAmount(amount)) && change.get(Coin.getByAmount(amount)) > ZERO) {
+			System.out.println(amount + WON + STICK + change.get(Coin.getByAmount(amount)) + UNIT);
 		}
 	}
 

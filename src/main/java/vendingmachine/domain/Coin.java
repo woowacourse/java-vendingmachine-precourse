@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import static vendingmachine.NumberConstant.*;
 
 import java.util.Arrays;
+import java.util.List;
 
 import vendingmachine.util.Random;
 
@@ -13,6 +14,8 @@ public enum Coin {
     COIN_10(TEN);
 
     private final int amount;
+
+    public static final List<Integer> amountList = Arrays.asList(FIVE_HUNDRED, HUNDRED, FIFTY, TEN);
 
     Coin(final int amount) {
         this.amount = amount;
