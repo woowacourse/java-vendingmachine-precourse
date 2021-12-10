@@ -1,5 +1,7 @@
 package vendingmachine.domain.consumer;
 
+import vendingmachine.domain.product.Product;
+
 public class Consumer {
     private int balance;
 
@@ -24,4 +26,7 @@ public class Consumer {
         return this.balance == targetBalance;
     }
 
+    public boolean possibleToBuy(Product product) {
+        return product.verifyEnough(balance);
+    }
 }

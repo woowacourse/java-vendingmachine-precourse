@@ -1,5 +1,7 @@
 package vendingmachine.domain.product;
 
+import vendingmachine.domain.consumer.Consumer;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +18,10 @@ public class ProductStore {
 
     public void putProduct(String name, Product product) {
         productStore.put(name, product);
+    }
+
+    public boolean verifyEnoughBalance(Consumer consumer) {
+        return productStore.values().stream().anyMatch((product) -> consumer.possibleToBuy(product));
     }
 
     // for test

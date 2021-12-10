@@ -18,12 +18,17 @@ public class Product {
         return new Product(name, price, amount);
     }
 
+    public boolean orderBy(Consumer consumer) {
+        return consumer.possibleToPay(price);
+    }
+
+    public boolean verifyEnough(int balance) {
+        return price <= balance;
+    }
+
     // for test
     public boolean verifyName(String name) {
         return this.name.equals(name);
     }
 
-    public boolean orderBy(Consumer consumer) {
-        return consumer.possibleToPay(price);
-    }
 }
