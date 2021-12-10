@@ -19,9 +19,13 @@ public class ProductList {
 			Product product = new Product();
 			product.init(productRawInput);
 
-			String name = product.getName();
-			hashMap.put(name, product);
+			registerProduct(product);
 		}
+	}
+
+	private void registerProduct(Product product) {
+		String name = product.getName();
+		hashMap.put(name, product);
 	}
 
 	public boolean isExistProduct(String productName) {
