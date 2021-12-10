@@ -22,7 +22,7 @@ public class MachineController {
 		OutputView.printHavingMoney();
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
 		splitItem(itemPriceStock);
-
+		String userInputMoney = InputView.getUserInputMoney();
 	}
 
 	private void splitItem(ArrayList<String> itemPriceStock) {
