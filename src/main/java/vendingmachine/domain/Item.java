@@ -18,6 +18,10 @@ public class Item implements Comparable<Item>{
 		return this.name.equals(name);
 	}
 
+	public boolean isName(Item item) {
+		return this.name.equals(item.name);
+	}
+
 	public boolean isAvailableToBuy() {
 		return this.stockQuantity > ZERO;
 	}

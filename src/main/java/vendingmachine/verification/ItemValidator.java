@@ -3,6 +3,9 @@ package vendingmachine.verification;
 import static vendingmachine.NumberConstant.*;
 import static vendingmachine.verification.Verification.*;
 
+import java.util.List;
+import java.util.Optional;
+
 import vendingmachine.domain.Item;
 import vendingmachine.service.ItemService;
 
@@ -18,6 +21,7 @@ public class ItemValidator {
 	private static final String NOT_EXIST_ITEM_ERROR = "[ERROR] 등록된 상품만 구매 가능합니다.\n";
 	private static final String NO_SUFFICIENT_QUANTITY_ERROR = "[ERROR] 상품 수량이 없습니다.\n";
 	private static final String NO_SUFFICIENT_MONEY_THEN_PRICE_ERROR = "[ERROR] 남아 있는 투입 금액부족합니다.\n";
+	private static final String SAME_NAME_INPUT_ERROR = "[ERROR] 같은 이름의 상품을 여러개 등록할 수 없습니다.\n";
 
 	public void validateMoneyByItemMinPrice(int money) {
 		if (!itemService.haveAnyItemToBuy(money)) {
@@ -46,6 +50,18 @@ public class ItemValidator {
 		int stockQuantity = validateStockQuantity(attributes[TWO]);
 
 		return new Item(name, price, stockQuantity);
+	}
+
+	public Item validateName(Item item, List<Item> items) {
+		Optional<Item> findItem = items.stream()
+			.filter(i -> i.isName(item))
+			.findFirst();
+
+		if (findItem.isPresent()) {
+			throw new IllegalArgumentException(SAME_NAME_INPUT_ERROR);
+		}
+
+		return item;
 	}
 
 	private int validatePrice(String priceInput) {

@@ -48,7 +48,9 @@ public class Verification {
 
 		Stream.of(input.split(";"))
 			.forEach(item ->
-				items.add(itemValidator.isRightFormalOfItem(itemValidator.isInSquareBracket(item))));
+				items.add(itemValidator.validateName(
+					itemValidator.isRightFormalOfItem(
+						itemValidator.isInSquareBracket(item)), items)));
 
 		return items;
 	}
