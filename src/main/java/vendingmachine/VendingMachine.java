@@ -6,6 +6,7 @@ import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_I
 import java.util.Optional;
 
 public class VendingMachine {
+    private final ChangeAccountant changeAccountant = new ChangeAccountant();
     private Coins coinBalance;
     private Items items;
     private int moneyAvailable;
@@ -33,6 +34,10 @@ public class VendingMachine {
         if(items.isInStock(item)) {
             purchase(item);
         };
+    }
+
+    public void giveChange() {
+        changeAccountant.change(moneyAvailable, coinBalance);
     }
 
     private Item findItemToPurchase(String itemNameToPurchase) {

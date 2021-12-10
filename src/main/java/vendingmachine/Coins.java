@@ -16,6 +16,10 @@ public class Coins {
         coins.computeIfPresent(coinToAdd, (coin, number) ->  number + 1);
     }
 
+    public void add(Coin coinToAdd, int numberOfCoin) {
+        coins.computeIfPresent(coinToAdd, (coin, number) ->  number + numberOfCoin);
+    }
+
     //TEST를 위한 메서드
     public int getAmount() {
         return getAmountWithCoin500() + getAmountWithCoin100() + getAmountWithCoin50() + getAmountWithCoin10();
@@ -26,6 +30,10 @@ public class Coins {
         coins.put(Coin.COIN_100, initialNumberOfCoin);
         coins.put(Coin.COIN_50, initialNumberOfCoin);
         coins.put(Coin.COIN_10, initialNumberOfCoin);
+    }
+
+    public int count(Coin coin) {
+        return coins.get(coin);
     }
 
     public int countCoin500() {
@@ -60,7 +68,6 @@ public class Coins {
         return coins.get(Coin.COIN_10) * Coin.COIN_10.getAmount();
     }
 
-
     //test위해. 삭제 예정
     @Override
     public String toString() {
@@ -68,4 +75,5 @@ public class Coins {
                 "coins=" + coins +
                 '}';
     }
+
 }
