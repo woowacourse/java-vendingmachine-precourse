@@ -32,8 +32,7 @@ public class ProductValidator {
 
 	private static void checkProductInputForm(String product) {
 		checkBracketExistAndValid(product);
-		String bracketRemovedInput = removeBracket(product);
-		checkProductArguments(bracketRemovedInput);
+		checkProductArguments(product);
 	}
 
 	private static void checkBracketExistAndValid(String product) {
@@ -43,13 +42,10 @@ public class ProductValidator {
 		}
 	}
 
-	private static String removeBracket(String product) {
-		return product.replace(OPENING_BRACKET, "")
-			.replace(CLOSING_BRACKET, "");
-	}
-
 	private static void checkProductArguments(String product) {
-		String[] productArguments = product.split(ARGUMENT_CRITERIA, -1);
+		String bracketRemovedInput = product.replace(OPENING_BRACKET, "")
+			.replace(CLOSING_BRACKET, "");
+		String[] productArguments = bracketRemovedInput.split(ARGUMENT_CRITERIA, -1);
 
 		checkArgumentsLength(productArguments.length);
 
