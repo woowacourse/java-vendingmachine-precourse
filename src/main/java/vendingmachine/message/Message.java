@@ -8,7 +8,9 @@ public enum Message {
 	ENTER_INPUT_COSTS("투입 금액을 입력해 주세요."),
 	PRINT_INPUT_COSTS("투입 금액: "),
 	ENTER_PRODUCT_GOING_TO_PURCHASE("구매할 상품명을 입력해 주세요."),
-	PRINT_BALANCE("잔돈");
+	PRINT_BALANCE("잔돈"),
+	PRINT_AMOUNT_UNIT("개"),
+	PRINT_MONEY_UNIT("원");
 
 
 	private String message;

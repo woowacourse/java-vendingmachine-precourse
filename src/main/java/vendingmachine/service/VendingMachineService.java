@@ -1,30 +1,25 @@
 package vendingmachine.service;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
+import vendingmachine.utils.CoinUtil;
 import vendingmachine.validation.Validation;
 
 public class VendingMachineService {
 
-	private StringBuilder result;
+	private ResponseMessage result;
 	private VendingMachine vendingMachine;
 	private int balance;
 
-	private void initVendingMachine() {
-		vendingMachine = new VendingMachine();
-	}
-
-	private void initResult() {
-		result = new StringBuilder();
+	public VendingMachineService() {
+		this.vendingMachine = new VendingMachine();
+		this.result = new ResponseMessage();
 	}
 
 	public String postVendingMachineCosts(String inputStr) {
@@ -32,18 +27,17 @@ public class VendingMachineService {
 		Validation.validateCostIsNaturalNumber(inputStr);
 		Validation.validateDivideTen(Integer.parseInt(inputStr));
 
-		initResult();
-		result.append(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
+		result.init();
+		result.addMessage(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
 
-		initVendingMachine();
-		makeCoin(Integer.parseInt(inputStr));
+		vendingMachine = CoinUtil.makeCoin(Integer.parseInt(inputStr), vendingMachine);
 
-		printCoinCount(vendingMachine.getCoinMap());
-		return result.toString();
+		result.addCoinCountMessage(vendingMachine.getCoinMap());
+		return result.getResult();
 	}
 
 	public void postProductInfo(String inputStr) {
-		//TODO: Validation 들 처리(inputStr)
+		//TODO: Validation 들 처리
 		addProducts(inputStr);
 	}
 
@@ -52,21 +46,18 @@ public class VendingMachineService {
 		Validation.validateCostIsNaturalNumber(inputStr);
 		Validation.validateDivideTen(Integer.parseInt(inputStr));
 
-		result = new StringBuilder();
+		result.init();
 		vendingMachine.setInputCost(Integer.parseInt(inputStr));
-		printInputCost();
+		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
-		return result.toString();
+		return result.getResult();
 	}
 
 	public boolean postProductName(String inputStr) {
 		//TODO: Validation 들 처리
-		// 1. 문자열 아닐 때
-		// 2. 상품 목록에 없을 때
-
-		result = new StringBuilder();
+		result.init();
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
-		printInputCost();
+		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
 		if (vendingMachine.checkGetBalance()) {
 			return true;
@@ -75,43 +66,27 @@ public class VendingMachineService {
 	}
 
 	public String getBalance() {
-		result = new StringBuilder();
-		result.append(Message.PRINT_BALANCE.getMessage() + '\n');
+		result.init();
+		result.addMessage(Message.PRINT_BALANCE.getMessage() + '\n');
 		getMinimumBalance();
 
-		return result.toString();
+		return result.getResult();
 	}
 
-	private void makeCoin(int cost) {
-		while (cost > 0) {
-			int randomCoin = Randoms.pickNumberInList(
-				Arrays.asList(Coin.COIN_500.getAmount(), Coin.COIN_100.getAmount(),
-					Coin.COIN_50.getAmount(), Coin.COIN_10.getAmount()));
-
-			if (randomCoin > cost) {
-				continue;
-			}
-
-			vendingMachine.addCoin(randomCoin);
-			cost -= randomCoin;
-		}
-	}
-
+	// TODO: 비즈니스 로직
 	private void addProducts(String inputStr) {
 		String[] products = inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";");
 		for (String rowProduct : products) {
-			//TODO: Validation 처리(product)
-			// 1. 이름, 가격, 수량 이상의 정보가 들어왔을 떄
-			// 2. 문자열, 숫자 확인
+			//TODO: Validation 처리
 			String[] product = rowProduct.split(",");
-			// //TODO: Validation 처리
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
 		}
 	}
 
+	// TODO: 비즈니스 로직
 	private void getMinimumBalance() {
-		balance = compareInputCostAndCoin();
+		balance = vendingMachine.compareInputCostAndCoinToBalance();
 
 		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
 		Map<Integer, Integer> balanceMap = new TreeMap<>(Collections.reverseOrder());
@@ -120,17 +95,10 @@ public class VendingMachineService {
 			balanceMap = addBalanceMapToValue(i, coinMap.get(i), balanceMap);
 		}
 
-		printCoinCount(balanceMap);
+		result.addCoinCountMessage(balanceMap);
 	}
 
-	private int compareInputCostAndCoin() {
-		if (vendingMachine.getInputCost() < vendingMachine.getSumCoinAmount()) {
-			return vendingMachine.getInputCost();
-		}
-
-		return vendingMachine.getSumCoinAmount();
-	}
-
+	// TODO: 비즈니스 로직
 	private Map<Integer, Integer> addBalanceMapToValue(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
 
@@ -145,18 +113,6 @@ public class VendingMachineService {
 		}
 
 		return map;
-	}
-
-
-
-	private void printInputCost() {
-		ResponseMessage.of('\n' + Message.PRINT_INPUT_COSTS.getMessage() + vendingMachine.getInputCost() + "원");
-	}
-
-	private void printCoinCount(Map<Integer, Integer> map) {
-		map.keySet().forEach(key -> {
-			result.append(key + "원" + " - " + map.get(key) + "개" + '\n');
-		});
 	}
 }
 

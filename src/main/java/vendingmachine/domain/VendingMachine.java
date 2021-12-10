@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import vendingmachine.Coin;
-
 public class VendingMachine {
 
 	private Map<Integer, Integer> coinMap;
@@ -77,6 +75,14 @@ public class VendingMachine {
 			}
 		}
 		return true;
+	}
+
+	public int compareInputCostAndCoinToBalance() {
+		if (inputCost < getSumCoinAmount()) {
+			return inputCost;
+		}
+
+		return getSumCoinAmount();
 	}
 
 	public Map<Integer, Integer> getCoinMap() {
