@@ -1,10 +1,15 @@
 package vendingmachine.View;
 
+import vendingmachine.Constant.ErrorConstant;
 import vendingmachine.Constant.OutputConstant;
 import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
 
-public class CoinOutputView {
+public class OutputView {
+
+    public static void printError(String message) {
+        System.out.println(ErrorConstant.ERROR_OCCURRED + message);
+    }
 
     public static void printHoldingCoins() {
         System.out.println(OutputConstant.PRINT_COIN);

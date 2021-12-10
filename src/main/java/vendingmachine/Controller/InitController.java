@@ -2,9 +2,8 @@ package vendingmachine.Controller;
 
 import vendingmachine.Service.InitHoldingCoinsService;
 import vendingmachine.Service.ValidatorService;
-import vendingmachine.View.CoinOutputView;
-import vendingmachine.View.ErrorOutputView;
-import vendingmachine.View.InitView;
+import vendingmachine.View.InputView;
+import vendingmachine.View.OutputView;
 
 public class InitController {
     ValidatorService validatorService = new ValidatorService();
@@ -16,12 +15,12 @@ public class InitController {
 
     private void initHoldingCoins() {
         try {
-            String holdingAmount = InitView.getHoldingAmount();
+            String holdingAmount = InputView.getHoldingAmount();
             validatorService.isValidHoldingAmount(holdingAmount);
             holdingCoinsService.setHoldingCoins(Integer.parseInt(holdingAmount));
-            CoinOutputView.printHoldingCoins();
+            OutputView.printHoldingCoins();
         } catch (IllegalArgumentException e) {
-            ErrorOutputView.printError(e.getMessage());
+            OutputView.printError(e.getMessage());
             initHoldingCoins();
         }
     }
