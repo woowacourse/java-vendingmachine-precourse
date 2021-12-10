@@ -6,6 +6,8 @@ import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Money;
+import vendingmachine.Notification;
+import vendingmachine.exception.VendingMachineException;
 
 public class RandomCoinGenerator implements CoinGenerator {
 	@Override
@@ -31,6 +33,7 @@ public class RandomCoinGenerator implements CoinGenerator {
 		List<Integer> possibleCoinAmounts = Coin.getPossibleCoinAmounts(money);
 		int randomNumber = Randoms.pickNumberInList(possibleCoinAmounts);
 		Money randomMoney = Money.of(randomNumber);
-		return Coin.valueOf(randomMoney);
+		return Coin.valueOf(randomMoney)
+			.orElseThrow(() -> new VendingMachineException(Notification.COIN_NOT_FOUND.getMessage()));
 	}
 }

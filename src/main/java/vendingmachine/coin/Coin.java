@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,8 +31,8 @@ public enum Coin {
 		this.money = money;
 	}
 
-	public static Coin valueOf(Money money) {
-		return BY_MONEY.get(money);
+	public static Optional<Coin> valueOf(Money money) {
+		return Optional.ofNullable(BY_MONEY.get(money));
 	}
 
 	public static List<Integer> getPossibleCoinAmounts(Money money) {
