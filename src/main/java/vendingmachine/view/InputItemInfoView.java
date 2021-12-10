@@ -7,6 +7,7 @@ import vendingmachine.Application;
 import vendingmachine.controller.ViewMappingKey;
 import vendingmachine.domain.Item;
 import vendingmachine.util.ItemParser;
+import vendingmachine.util.PublicConst;
 import vendingmachine.util.SystemMessage;
 
 public class InputItemInfoView implements View {
@@ -26,7 +27,7 @@ public class InputItemInfoView implements View {
 	}
 
 	private List<Item> readItems() {
-		String itemListStr = Console.readLine().replaceAll("\\s+", "");
+		String itemListStr = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
 		return ItemParser.parseList(itemListStr);
 	}
 }

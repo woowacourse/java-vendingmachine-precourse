@@ -3,6 +3,7 @@ package vendingmachine.view;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
 import vendingmachine.util.MoneyValidator;
+import vendingmachine.util.PublicConst;
 import vendingmachine.util.SystemMessage;
 
 public class InputMoneyView implements View {
@@ -22,7 +23,7 @@ public class InputMoneyView implements View {
 	}
 
 	private int readMoney() {
-		String moneyStr = Console.readLine().replaceAll("\\s+", "");
+		String moneyStr = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
 		return MoneyValidator.validate(moneyStr);
 	}
 }

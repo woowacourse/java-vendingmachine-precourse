@@ -9,8 +9,6 @@ public class ItemValidator {
 	private static final String OBJECT_WRAP_LEFT = "[";
 	private static final String OBJECT_WRAP_RIGHT = "]";
 	private static final String PARAMETER_SEPARATOR = ",";
-	private static final int FIRST_INDEX = 0;
-	private static final int INDEX_GAP = 1;
 	private static final int PARAMETER_COUNT = 3;
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
@@ -31,13 +29,14 @@ public class ItemValidator {
 
 	private static boolean isWrapped(String itemStr) {
 		return OBJECT_WRAP_LEFT
-			.equals(Character.toString(itemStr.charAt(FIRST_INDEX)))
+			.equals(Character.toString(itemStr.charAt(PublicConst.FIRST_INDEX)))
 			&& OBJECT_WRAP_RIGHT
-			.equals(Character.toString(itemStr.charAt(itemStr.length() - INDEX_GAP)));
+			.equals(Character.toString(itemStr.charAt(itemStr.length() - PublicConst.INDEX_GAP)));
 	}
 
 	private static String unwrap(String itemStr) {
-		return itemStr.substring(FIRST_INDEX + INDEX_GAP, itemStr.length() - INDEX_GAP);
+		return itemStr.substring(PublicConst.FIRST_INDEX + PublicConst.INDEX_GAP
+			, itemStr.length() - PublicConst.INDEX_GAP);
 	}
 
 	private static List<String> parameterStringToList(String parameterStr) {

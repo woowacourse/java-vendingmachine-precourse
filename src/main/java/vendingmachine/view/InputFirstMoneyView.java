@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
 import vendingmachine.controller.ViewMappingKey;
 import vendingmachine.util.MoneyValidator;
+import vendingmachine.util.PublicConst;
 import vendingmachine.util.SystemMessage;
 
 public class InputFirstMoneyView implements View {
@@ -23,7 +24,7 @@ public class InputFirstMoneyView implements View {
 	}
 
 	private int readFirstMoney() {
-		String firstMoneyStr = Console.readLine().replaceAll("\\s+", "");
+		String firstMoneyStr = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
 		MoneyValidator.validate(firstMoneyStr);
 
 		return MoneyValidator.validate(firstMoneyStr);
