@@ -13,9 +13,15 @@ public class MoneyValidator {
 	}
 
 	private void validate() {
+		isRightUnit();
 		isRightString();
 		isRightRange();
-		isRightUnit();
+	}
+
+	private void isRightUnit() {
+		if (MONEY_STRING.charAt(MONEY_STRING.length() - 1) != Constants.MONEY_UNIT) {
+			throw new IllegalArgumentException(Constants.ERROR_MONEY_UNIT);
+		}
 	}
 
 	private void isRightString() {
@@ -25,14 +31,8 @@ public class MoneyValidator {
 	}
 
 	private void isRightRange() {
-		if (Integer.parseInt(MONEY_STRING) < 100) {
+		if (Integer.parseInt(MONEY_STRING) < Constants.MIN_MONEY) {
 			throw new IllegalArgumentException(Constants.ERROR_MONEY_RANGE);
-		}
-	}
-
-	private void isRightUnit() {
-		if (Integer.parseInt(MONEY_STRING) % 10 != 0) {
-			throw new IllegalArgumentException(Constants.ERROR_MONEY_UNIT);
 		}
 	}
 }

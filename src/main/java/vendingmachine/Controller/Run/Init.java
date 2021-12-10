@@ -1,5 +1,6 @@
 package vendingmachine.Controller.Run;
 
+import vendingmachine.Constants;
 import vendingmachine.Controller.InputController;
 import vendingmachine.Model.CoinWallet;
 import vendingmachine.Model.Product;
@@ -24,8 +25,8 @@ public class Init {
 	}
 
 	public static void setMachineProduct() {
-		for (String product : InputController.setProducts().split(";")) {
-			String[] values = product.substring(1, product.length() - 1).split(",");
+		for (String product : InputController.setProducts().split(Constants.DELIMITER_PRODUCTS)) {
+			String[] values = product.substring(1, product.length() - 1).split(Constants.DELIMITER_PRODUCT);
 			products.add(new Product(
 				values[0],
 				Integer.parseInt(values[1]),

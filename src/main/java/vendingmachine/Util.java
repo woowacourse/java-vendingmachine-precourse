@@ -8,7 +8,7 @@ import vendingmachine.Model.Coin;
 
 public class Util {
 	public static Coin randomCoin() {
-		int value = Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10));
+		int value = Randoms.pickNumberInList(Arrays.asList(Constants.COIN_NUMS));
 		return Coin.getCoin(value);
 	}
 }

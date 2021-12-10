@@ -1,5 +1,7 @@
 package vendingmachine.Model;
 
+import vendingmachine.Constants;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -18,6 +20,6 @@ public enum Coin {
 	}
 
 	public static Coin getCoin(int amount) {
-		return Coin.valueOf("COIN_" + amount);
+		return Coin.valueOf(Constants.COIN_NAME + amount);
 	}
 }
