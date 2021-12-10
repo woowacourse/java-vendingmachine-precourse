@@ -7,6 +7,7 @@ import java.util.Set;
 
 import vendingmachine.constant.Rule;
 import vendingmachine.util.SplitChecker;
+import vendingmachine.util.StringChecker;
 
 public class Stock {
 
@@ -31,8 +32,12 @@ public class Stock {
 	}
 
 	private void checkInput(String input) {
+		StringChecker stringChecker = new StringChecker();
+		stringChecker.isEmpty(input);
+		stringChecker.containSpace(input);
+		stringChecker.containTap(input);
+
 		SplitChecker splitChecker = new SplitChecker();
-		splitChecker.containSpace(input);
-		splitChecker.containTap(input);
+		splitChecker.hasZeroLength(input, Rule.DELIMETER_PRODUCT);
 	}
 }
