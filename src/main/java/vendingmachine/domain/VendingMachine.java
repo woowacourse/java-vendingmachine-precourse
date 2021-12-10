@@ -1,12 +1,10 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.Constant.*;
-
 import java.util.List;
 
 public class VendingMachine {
 	private final CoinStore coinStore;
-	private final ProductRepository productRepository =  new ProductRepository();
+	private final ProductRepository productRepository = new ProductRepository();
 	private int inputAmount = 0;
 
 	public VendingMachine(int money) {
@@ -30,11 +28,7 @@ public class VendingMachine {
 	}
 
 	public void purchaseProduct(String productName) {
-		Product product = productRepository.findProductByName(productName);
-		if (!product.isNotOutOfQuantity()) {
-			throw new IllegalArgumentException(ERROR_MESSAGE + "선택한 제품의 재고가 없습니다.");
-		}
-		inputAmount = product.getChangePrice(inputAmount);
+		inputAmount = productRepository.getChangeMoney(productName, inputAmount);
 	}
 
 	public boolean isPossibleRepurchase() {

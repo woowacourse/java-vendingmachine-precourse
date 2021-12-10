@@ -16,7 +16,15 @@ public class ProductRepository {
 		}
 	}
 
-	public Product findProductByName(String productName) {
+	public int getChangeMoney(String productName, int inputAmount) {
+		Product product = findProductByName(productName);
+		if (!product.isNotOutOfQuantity()) {
+			throw new IllegalArgumentException(ERROR_MESSAGE + "선택한 제품의 재고가 없습니다.");
+		}
+		return product.getChangePrice(inputAmount);
+	}
+
+	private Product findProductByName(String productName) {
 		return productList.stream()
 			.filter(i->i.isSameName(productName))
 			.findFirst()
