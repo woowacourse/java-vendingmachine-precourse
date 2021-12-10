@@ -13,7 +13,9 @@ public class Application {
         machine.setMerchandiseInfo(InputView.getMerchandiseInput());
         machine.setMoneyLeft(InputView.getCustomerMoneyInput());
 
-        while (machine.canBuyMore()) {
+        while (true) {
+            OutputView.printMoneyLeft(machine.getMoneyLeft());
+            if (!machine.canBuyMore()) break;
             machine.sellMerchandise();
         }
     }

@@ -17,4 +17,8 @@ public class OutputView {
 
         System.out.println(sb);
     }
+
+    public static void printMoneyLeft(int moneyLeft) {
+        System.out.println("\n투입 금액: " + moneyLeft + "원\n");
+    }
 }

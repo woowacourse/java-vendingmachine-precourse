@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
 import vendingmachine.constants.CoinConstants;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -31,12 +32,16 @@ public class VendingMachine {
         this.merchandiseInfo = merchandiseInfo;
     }
 
+    public int getMoneyLeft() {
+        return this.moneyLeft;
+    }
+
     public void setMoneyLeft(int moneyInput) {
         this.moneyLeft = moneyInput;
     }
 
     public void sellMerchandise() {
-        String name = InputView.getMerchandiseNameInput(moneyLeft);
+        String name = InputView.getMerchandiseNameInput();
 
         List<Integer> info = merchandiseInfo.get(name);
         int price = info.get(0);
