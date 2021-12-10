@@ -6,7 +6,7 @@ import java.util.TreeMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
-	private Money money;
+	private final Money money;
 	private static final Map<Coin, Integer> changes = new TreeMap<>();
 
 	public Change(Money money) {

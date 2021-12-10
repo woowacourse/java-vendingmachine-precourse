@@ -1,7 +1,9 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
@@ -20,7 +22,7 @@ public class MachineController {
 	private static final String STOCK = "수량";
 
 	private Beverages beverages = new Beverages();
-	private Map<Coin, Integer> changes;
+	private Map<Coin, Integer> changes = new HashMap<>();
 	private Money inputMoney = new Money();
 
 	public void run() {
@@ -58,7 +60,6 @@ public class MachineController {
 			int price = InputValidator.checkNumberForm(itemInfo[priceIndex], PRICE);
 			int stock = InputValidator.checkNumberForm(itemInfo[stockIndex], STOCK);
 			beverages.add(new Beverage(name, price), stock);
-
 		}
 		return beverages;
 	}

@@ -9,7 +9,7 @@ import vendingmachine.validator.InputValidator;
 public class InputView {
 	private static final String INPUT_HAVING_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String INPUT_ITEM_PRICE_STOCK = "\n상품명과 가격, 수량을 입력해 주세요.";
-	private static final String USER_INPUT_MONEY = "투입 금액을 입력해 주세요.";
+	private static final String USER_INPUT_MONEY = "\n투입 금액을 입력해 주세요.";
 	private static final String INPUT_PURCHASE_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 	private static final String PRICE = "금액";
 
