@@ -18,7 +18,7 @@ public class Price {
     }
 
     private void validateUnitIsCorrect(int price) {
-        if (price % MINIMUM_COIN_VALUE != 0) {
+        if (price % MINIMUM_COIN_VALUE != ZERO) {
             throw new IllegalArgumentException(PRICE_UNIT_ERROR_MESSAGE);
         }
     }
