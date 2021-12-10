@@ -1,5 +1,6 @@
 package vendingmachine.model;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -20,6 +21,13 @@ public enum Coin {
 		return Stream.of(Coin.values())
 			.map(Coin::getAmount)
 			.collect(Collectors.toList());
+	}
+
+	public static Coin of(int amount) {
+		return Arrays.stream(values())
+			.filter(coin -> coin.getAmount() == amount)
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("Coin을 찾을 수 없습니다."));
 	}
 
 	public int getAmount() {
