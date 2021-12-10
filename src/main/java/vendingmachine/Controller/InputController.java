@@ -3,6 +3,7 @@ package vendingmachine.Controller;
 import vendingmachine.Model.Validator.MoneyValidator;
 import vendingmachine.Model.Validator.NameValidator;
 import vendingmachine.Model.Validator.ProductValidator;
+import vendingmachine.Model.Validator.SellValidator;
 import vendingmachine.View.InputView;
 
 public class InputController {
@@ -45,8 +46,10 @@ public class InputController {
 
 	public static String setWantedProduct(String[] names) {
 		try {
-			NameValidator validation = new NameValidator(InputView.buyProductNameInput(), names);
-			return validation.NAME;
+			String name = InputView.buyProductNameInput();
+			new NameValidator(name, names);
+			new SellValidator(name);
+			return name;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return setWantedProduct(names);

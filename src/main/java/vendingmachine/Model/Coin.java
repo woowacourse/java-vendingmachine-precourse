@@ -17,8 +17,6 @@ public enum Coin {
 		return amount;
 	}
 
-	private static final Coin[] coins = Coin.values();
-
 	public static Coin getCoin(int amount) {
 		return Coin.valueOf("COIN_" + amount);
 	}

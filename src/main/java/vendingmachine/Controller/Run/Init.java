@@ -1,6 +1,5 @@
 package vendingmachine.Controller.Run;
 
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import vendingmachine.Controller.InputController;
@@ -11,6 +10,7 @@ import vendingmachine.Util;
 import vendingmachine.View.OutputView;
 
 public class Init {
+	public static int machineMoney;
 	public static final LinkedHashMap<Coin, Integer> machineCoins = new LinkedHashMap<>();
 	public static final ProductList products = new ProductList();
 	public static int userMoney;
@@ -23,17 +23,26 @@ public class Init {
 	}
 
 	public static void setMachineCoins() {
-		int machineMoney = InputController.setMachineMoney();
-		Arrays.stream(Coin.values()).forEach(coin -> machineCoins.put(coin, 0));
-
+		coinInit();
 		while (machineMoney != 0) {
-			Coin coin = Util.randomCoin();
-			if (machineMoney >= coin.getAmount()) {
-				machineCoins.replace(coin, machineCoins.get(coin) + 1);
-				machineMoney -= coin.getAmount();
-			}
+			coinRandomAdd();
 		}
 		OutputView.printEmpty();
+	}
+
+	private static void coinInit() {
+		machineMoney = InputController.setMachineMoney();
+		for (Coin coin : Coin.values()) {
+			machineCoins.put(coin, 0);
+		}
+	}
+
+	private static void coinRandomAdd() {
+		Coin coin = Util.randomCoin();
+		if (machineMoney >= coin.getAmount()) {
+			machineCoins.replace(coin, machineCoins.get(coin) + 1);
+			machineMoney -= coin.getAmount();
+		}
 	}
 
 	public static void setMachineProduct() {

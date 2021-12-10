@@ -7,23 +7,43 @@ import vendingmachine.View.OutputView;
 public class Activate {
 	private String nameInput;
 
+	// public Activate() {
+	// 	do {
+	// 		OutputView.printUserMoney(Init.userMoney);
+	// 		setInputProduct();
+	//
+	// 		Product product = Init.products.find(nameInput);
+	// 		if (product.PRICE > Init.userMoney || product.stock == 0) {
+	// 			break;
+	// 		}
+	//
+	// 		//팔렸다
+	// 		sell(product);
+	// 	} while (!isActivateEnd());
+	// }
+
 	public Activate() {
-		do {
-			OutputView.printUserMoney(Init.userMoney);
-			setWantedProduct();
-
-			Product product = Init.products.find(nameInput);
-			if (product.PRICE > Init.userMoney || product.stock == 0) {
-				break;
-			}
-
-			//팔렸다
-			Init.userMoney -= product.PRICE;
-			product.sell();
-		} while (!isActivateEnd());
+		repeatSell();
 	}
 
-	private void setWantedProduct() {
+	public void repeatSell() {
+		OutputView.printUserMoney(Init.userMoney);
+		setInputProduct();
+		Product product = Init.products.find(nameInput);
+
+		//팔렸다
+		sell(product);
+		if (!isActivateEnd()) {
+			repeatSell();
+		}
+	}
+
+	private void sell(Product product) {
+		Init.userMoney -= product.PRICE;
+		product.sell();
+	}
+
+	private void setInputProduct() {
 		nameInput = InputController.setWantedProduct(Init.products.getNames());
 		OutputView.printEmpty();
 	}

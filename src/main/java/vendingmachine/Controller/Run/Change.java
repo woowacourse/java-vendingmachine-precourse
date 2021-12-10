@@ -16,16 +16,24 @@ public class Change {
 
 	private void setChangeCoins() {
 		for (Coin coin : Coin.values()) {
-			int divisor = coin.getAmount();
-			int coinCount = Init.machineCoins.get(coin);
-
-			if ((Init.userMoney / divisor) > coinCount) {
-				changeCoins.put(coin, coinCount);
-				Init.userMoney -= coinCount * divisor;
-				continue;
-			}
-			changeCoins.put(coin, Init.userMoney / divisor);
-			Init.userMoney %= divisor;
+			setCoin(coin);
 		}
+	}
+
+	private void setCoin(Coin coin) {
+		if (isNoMaxCount(coin)) {
+			setOneCoin(coin, Init.machineCoins.get(coin));
+			return;
+		}
+		setOneCoin(coin, Init.userMoney / coin.getAmount());
+	}
+
+	private boolean isNoMaxCount(Coin coin) {
+		return (Init.userMoney / coin.getAmount()) > Init.machineCoins.get(coin);
+	}
+
+	private void setOneCoin(Coin coin, int coinCount) {
+		changeCoins.put(coin, coinCount);
+		Init.userMoney -= coin.getAmount() * coinCount;
 	}
 }

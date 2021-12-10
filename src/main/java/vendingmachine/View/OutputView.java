@@ -23,11 +23,10 @@ public class OutputView {
 
 	public static void printChange(LinkedHashMap<Coin, Integer> coins) {
 		System.out.println("잔돈");
-		for (Coin coin : coins.keySet()) {
-			if (coins.get(coin) != 0) {
-				System.out.printf("%s원 - %d개%n", coin.getAmount(), coins.get(coin));
-			}
-
-		}
+		coins
+			.keySet()
+			.stream()
+			.filter(coin -> coins.get(coin) != 0)
+			.forEach(coin -> System.out.printf("%s원 - %d개%n", coin.getAmount(), coins.get(coin)));
 	}
 }
