@@ -23,12 +23,16 @@ public class VendingMachineController {
         try {
             String userMoneyInput = InputView.inputUserMoney();
             vendingMachineService.putUserMoney(userMoneyInput);
-            while (isContinue) {
-                buyProduct();
-            }
+            buyProductsUntilEnd();
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             useVendingMachine();
+        }
+    }
+
+    private void buyProductsUntilEnd() {
+        while (isContinue) {
+            buyProduct();
         }
     }
 
