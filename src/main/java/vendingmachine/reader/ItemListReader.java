@@ -4,10 +4,9 @@ import static java.util.stream.Collectors.toList;
 import java.util.List;
 import vendingmachine.model.item.Item;
 import vendingmachine.reader.validator.CompositeValidator;
-import vendingmachine.reader.validator.item.CountOfItemInformationValidator;
-import vendingmachine.reader.validator.item.ItemPriceAndQuantityValidator;
+import vendingmachine.reader.validator.item.ItemLineValidator;
+import vendingmachine.reader.validator.item.ItemPriceValidator;
 import vendingmachine.reader.validator.Validator;
-import vendingmachine.reader.validator.item.WrappedEachItemWithBracketValidator;
 
 public class ItemListReader extends Reader<List<Item>> {
 	private final ItemLineParser parser;
@@ -39,9 +38,10 @@ public class ItemListReader extends Reader<List<Item>> {
 
 	public static RecursiveReader<List<Item>> recursiveReader() {
 		ItemLineParser parser = new ItemLineParser();
-		return new RecursiveReader<>(new ItemListReader(
-			new CompositeValidator(new CountOfItemInformationValidator(parser),
-				new WrappedEachItemWithBracketValidator(parser),
-				new ItemPriceAndQuantityValidator(parser))));
+		return new RecursiveReader<>(
+			new ItemListReader(
+				new CompositeValidator(
+					new ItemLineValidator(),
+					new ItemPriceValidator(parser))));
 	}
 }

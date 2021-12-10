@@ -26,7 +26,10 @@ public class ExchangeAmountReader extends Reader<Integer> {
 	}
 
 	public static RecursiveReader<Integer> recursiveReader() {
-		return new RecursiveReader<>(new ExchangeAmountReader(
-			new CompositeValidator(new NumberFormatValidator(), new TenTimesNumberValidator())));
+		return new RecursiveReader<>(
+			new ExchangeAmountReader(
+				new CompositeValidator(
+					new NumberFormatValidator(),
+					new TenTimesNumberValidator())));
 	}
 }

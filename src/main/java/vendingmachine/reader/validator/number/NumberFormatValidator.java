@@ -5,7 +5,7 @@ import vendingmachine.reader.validator.Validator;
 public class NumberFormatValidator implements Validator {
 	@Override
 	public boolean validate(String value) {
-		return value.matches("[0-9]*");
+		return value.matches("[0-9]+");
 	}
 
 	@Override

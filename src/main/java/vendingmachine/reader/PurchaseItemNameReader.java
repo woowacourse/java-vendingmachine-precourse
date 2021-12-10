@@ -2,9 +2,9 @@ package vendingmachine.reader;
 
 import vendingmachine.reader.validator.CompositeValidator;
 import vendingmachine.reader.validator.Validator;
-import vendingmachine.reader.validator.item.NotEnoughMoneyValidator;
-import vendingmachine.reader.validator.item.NotFoundItemValidator;
-import vendingmachine.reader.validator.item.SoldOutItemValidator;
+import vendingmachine.reader.validator.item.HasEnoughMoneyValidator;
+import vendingmachine.reader.validator.item.ExistsItemValidator;
+import vendingmachine.reader.validator.item.HasQuantityItemValidator;
 
 public class PurchaseItemNameReader extends Reader<String> {
 	public PurchaseItemNameReader(Validator validator) {
@@ -30,8 +30,8 @@ public class PurchaseItemNameReader extends Reader<String> {
 		return new RecursiveReader<>(
 			new PurchaseItemNameReader(
 				new CompositeValidator(
-					new NotFoundItemValidator(),
-					new NotEnoughMoneyValidator(),
-					new SoldOutItemValidator())));
+					new ExistsItemValidator(),
+					new HasEnoughMoneyValidator(),
+					new HasQuantityItemValidator())));
 	}
 }

@@ -6,7 +6,7 @@ import vendingmachine.model.machine.VendingMachine;
 import vendingmachine.model.machine.VendingMachineRepository;
 import vendingmachine.reader.validator.Validator;
 
-public class NotEnoughMoneyValidator implements Validator {
+public class HasEnoughMoneyValidator implements Validator {
 	@Override
 	public boolean validate(String value) {
 		Item item = ItemRepository.findByName(value);

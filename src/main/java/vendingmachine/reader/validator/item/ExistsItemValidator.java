@@ -3,7 +3,7 @@ package vendingmachine.reader.validator.item;
 import vendingmachine.model.item.ItemRepository;
 import vendingmachine.reader.validator.Validator;
 
-public class NotFoundItemValidator implements Validator {
+public class ExistsItemValidator implements Validator {
 	@Override
 	public boolean validate(String value) {
 		return ItemRepository.existsByName(value);

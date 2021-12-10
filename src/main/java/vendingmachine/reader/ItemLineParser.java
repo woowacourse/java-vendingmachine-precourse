@@ -9,7 +9,7 @@ public class ItemLineParser {
 		return splitByComma(removeBracket(splitBySemicolon(value)));
 	}
 
-	public String[] splitBySemicolon(String value) {
+	private String[] splitBySemicolon(String value) {
 		return value.split(";");
 	}
 
