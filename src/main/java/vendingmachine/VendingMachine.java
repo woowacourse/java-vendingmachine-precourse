@@ -1,13 +1,13 @@
 package vendingmachine;
 
 public class VendingMachine {
-    private Coins currentBalance;
+    private Coins coinBalance;
     private Items items;
     private int moneyAvailable;
 
-    public Coins depositCurrentBalance(Coins currentBalance) {
-        this.currentBalance = currentBalance;
-        return this.currentBalance;
+    public Coins depositCoinBalance(Coins coinBalance) {
+        this.coinBalance = coinBalance;
+        return this.coinBalance;
     }
 
     public Items storeItems(Items items) {

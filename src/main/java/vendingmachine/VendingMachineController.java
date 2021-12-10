@@ -11,7 +11,7 @@ public class VendingMachineController {
     }
 
     public void on() {
-        console.printCurrentBalance(vendingMachineService.createCurrentBalance(console.inputCurrentBalance()));
+        console.printCurrentBalance(vendingMachineService.createCoinBalance(console.inputCoinBalance()));
         vendingMachineService.createItems(console.inputItemInventoryInfo());
         vendingMachineService.insertMoney(console.inputMoneyToInsert());
     }

@@ -2,20 +2,20 @@ package vendingmachine.dto.request;
 
 import static vendingmachine.StringConstants.*;
 
-public class CurrentBalanceRequest {
+public class CoinBalanceRequest {
     private static final int MINIMUM_VALUE_OF_CURRENT_BALANCE = 10;
     private static final int MINIMUM_CURRENCY_UNIT = 10;
     public final String input;
 
-    public CurrentBalanceRequest(String input) {
+    public CoinBalanceRequest(String input) {
         this.input = input;
     }
 
-    public int toCurrentBalance() {
+    public int toCoinBalance() {
         try {
-            int currentBalance = Integer.parseInt(input);
-            validate(currentBalance);
-            return currentBalance;
+            int coinBalance = Integer.parseInt(input);
+            validate(coinBalance);
+            return coinBalance;
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_CURRENT_BALANCE_INPUT);
         }

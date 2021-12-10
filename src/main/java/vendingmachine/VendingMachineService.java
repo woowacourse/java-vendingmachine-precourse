@@ -7,8 +7,8 @@ public class VendingMachineService {
     private final CoinExchangeMachine coinExchangeMachine = new CoinExchangeMachine();
     private final ItemFactory itemFactory = new ItemFactory();
 
-    public Coins createCurrentBalance(int currentBalance) {
-        return vendingMachine.depositCurrentBalance(coinExchangeMachine.changeIntoCoins(currentBalance));
+    public Coins createCoinBalance(int coinBalance) {
+        return vendingMachine.depositCoinBalance(coinExchangeMachine.changeIntoCoins(coinBalance));
     }
 
     public Items createItems(ItemsInventoryInfo inputItemInventoryInfo) {

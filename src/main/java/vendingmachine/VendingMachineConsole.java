@@ -4,26 +4,26 @@ import static vendingmachine.StringConstants.PREFIX_OF_ERROR_MESSAGE;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.dto.ItemsInventoryInfo;
-import vendingmachine.dto.request.CurrentBalanceRequest;
+import vendingmachine.dto.request.CoinBalanceRequest;
 import vendingmachine.dto.request.ItemsInventoryRequest;
 import vendingmachine.dto.request.MoneyToInsertRequest;
 import vendingmachine.dto.response.CurrentBalanceResponse;
 
 public class VendingMachineConsole {
 
-    public int inputCurrentBalance() {
-        int initialCurrentBalance = 0;
-        int currentBalance = initialCurrentBalance;
+    public int inputCoinBalance() {
+        int initialCoinBalance = 0;
+        int coinBalance = initialCoinBalance;
         boolean isInputEntered = false;
         while (!isInputEntered) {
             try {
-                currentBalance = new CurrentBalanceRequest(input()).toCurrentBalance();
+                coinBalance = new CoinBalanceRequest(input()).toCoinBalance();
                 isInputEntered = true;
             } catch (IllegalArgumentException error) {
                 printErrorMessage(error.getMessage());
             }
         }
-        return currentBalance;
+        return coinBalance;
     }
 
     public ItemsInventoryInfo inputItemInventoryInfo() {
