@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
+import vendingmachine.model.VendingMachine;
 
 public class OutputView {
 
@@ -14,6 +15,8 @@ public class OutputView {
 	private static final String KOREAN_CURRENCY = "원";
 	private static final String DELIMITER_COIN_AND_NUMBER = " - ";
 	private static final String ASK_INSERT_MONEY = "투입 금액을 입력해 주세요.";
+	private static final String NOTICE_INSERTED_MONEY = "투입 금액: ";
+	private static final String ASK_PRODUCT_NAME = "구매할 상품명을 입력해 주세요.";
 
 	private OutputView() {
 	}
@@ -53,6 +56,15 @@ public class OutputView {
 	public static void askInsertMoney() {
 		printNewLine();
 		System.out.println(ASK_INSERT_MONEY);
+	}
+
+	public static void printInsertedMoney(VendingMachine vendingMachine) {
+		System.out.println(
+			NOTICE_INSERTED_MONEY + vendingMachine.getInsertMoney() + KOREAN_CURRENCY);
+	}
+
+	public static void askProductToBuy() {
+		System.out.println(ASK_PRODUCT_NAME);
 	}
 
 	private static void printNewLine() {
