@@ -1,30 +1,32 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import vendingmachine.exception.NotFoundBeverageException;
 
 public class Beverages {
-	private final List<Beverage> beverages;
+	private final Map<Beverage, Integer> beverages;
 
 	public Beverages() {
-		beverages = new ArrayList<>();
+		beverages = new TreeMap<>();
 	}
 
-	public List<Beverage> getBeverages() {
+	public Map<Beverage, Integer> getBeverages() {
 		return beverages;
 	}
 
-	public void add(Beverage beverage) {
-		beverages.add(beverage);
+	public void add(Beverage beverage, int stock) {
+		beverages.put(beverage, stock);
 	}
 
 	public Beverage findByName(String name) {
-		return beverages.stream()
-			.filter(beverage -> beverage.getName().equals(name))
-			.findAny()
-			.orElseThrow(NotFoundBeverageException::new);
+		for (Beverage beverage : beverages.keySet()) {
+			if (beverage.isSameName(name)) {
+				return beverage;
+			}
+		}
+		throw new NotFoundBeverageException();
 	}
 
 }

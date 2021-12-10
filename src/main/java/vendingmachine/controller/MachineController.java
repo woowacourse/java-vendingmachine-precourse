@@ -50,6 +50,7 @@ public class MachineController {
 		//구매한 음료에 따른 계산
 		inputMoney.spend(beverage.getPrice());
 
+
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
@@ -59,7 +60,7 @@ public class MachineController {
 			String name = itemInfo[itemIndex];
 			int price = InputValidator.checkNumberForm(itemInfo[priceIndex], PRICE);
 			int stock = InputValidator.checkNumberForm(itemInfo[stockIndex], STOCK);
-			beverages.add(new Beverage(name, price, stock));
+			beverages.add(new Beverage(name, price), stock);
 
 		}
 		return beverages;

@@ -3,23 +3,21 @@ package vendingmachine.domain;
 public class Beverage {
 	private String name;
 	private int price;
-	private int stock;
 
-	public Beverage(String name, int price, int stock) {
+	public Beverage(String name, int price) {
 		this.name = name;
 		this.price = price;
-		this.stock = stock;
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
-	public int getPrice(){
+	public int getPrice() {
 		return price;
 	}
 
-	public int getStock(){
-		return stock;
+	public boolean isSameName(String name) {
+		return this.name.equals(name);
 	}
 }
