@@ -43,8 +43,7 @@ public class ProductsController {
     }
 
     public boolean canBuyAnyProduct(int amount) {
-        return products.findMinCountsProduct() != EMPTY_STOCK
-                && products.findMinPriceProduct() <= amount;
+        return products.findCanBuyProducts(amount);
     }
 
     public void canHaveStock(Product product) {

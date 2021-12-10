@@ -3,7 +3,6 @@ package vendingmachine.products;
 import vendingmachine.ValidatorMessage;
 
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.List;
 
 public class Products {
@@ -40,20 +39,9 @@ public class Products {
                         + ValidatorMessage.NULL_PRODUCT_MESSAGE));
     }
 
-    public int findMinPriceProduct() {
+    public boolean findCanBuyProducts(int amount) {
         return products.stream()
-                .min(Comparator.comparing(Product::getPrice))
-                .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
-                        + ValidatorMessage.NULL_PRODUCT_MESSAGE))
-                .getPrice();
-    }
-
-    public int findMinCountsProduct() {
-        return products.stream()
-                .min(Comparator.comparing(Product::getCounts))
-                .orElseThrow(() -> new IllegalArgumentException(ValidatorMessage.ERROR_MESSAGE
-                        + ValidatorMessage.NULL_PRODUCT_MESSAGE))
-                .getCounts();
+                .anyMatch(product -> product.getPrice() <= amount && product.getCounts() > 0);
     }
 
     public void buyProduct(Product product) {
