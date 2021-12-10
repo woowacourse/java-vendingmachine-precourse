@@ -45,6 +45,10 @@ public enum Coin {
 		return this.amount == amount;
 	}
 
+	public boolean remainLessThen(int count) {
+		return this.count < count;
+	}
+
 	public void add() {
 		this.count++;
 	}

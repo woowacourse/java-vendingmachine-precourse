@@ -32,9 +32,13 @@ public class Cashier {
 		return insertAmount >= required;
 	}
 
-	public void returnChanges() {
-		for(Coin coin : Coin.values()) {
-			coin.divideByAmount(insertAmount);
+	public void giveChanges() {
+		for (Coin coin : Coin.values()) {
+			int required = coin.divideByAmount(insertAmount);
+			if (coin.remainLessThen(required)) {
+				// 남은 코인 모두 give
+			}
+			// required 만큼 give
 		}
 	}
 
