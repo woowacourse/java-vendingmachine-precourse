@@ -17,13 +17,8 @@ public class Items {
         return items.getOrDefault(item, 0);
     }
 
-    public boolean isOnItemList(String itemNameToPurchase) {
-        Optional<String> foundItemName = items.keySet().stream()
-                .map(Item::getName)
-                .filter(itemName -> itemName.equals(itemNameToPurchase)).findAny();
-        if(foundItemName.isPresent()) {
-            return true;
-        }
-        return false;
+    public Optional<Item> findByItemByItemName(String name) {
+        return items.keySet().stream()
+                .filter(item -> item.getName().equals(name)).findAny();
     }
 }

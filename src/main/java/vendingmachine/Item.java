@@ -15,6 +15,13 @@ public class Item {
         return name;
     }
 
+    public boolean isMoreExpensiveItemThanMoneyLeft(int moneyAvailable) {
+        if(price > moneyAvailable) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

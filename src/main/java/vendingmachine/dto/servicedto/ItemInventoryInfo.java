@@ -1,7 +1,5 @@
 package vendingmachine.dto.servicedto;
 
-import vendingmachine.dto.servicedto.ItemInfo;
-
 public class ItemInventoryInfo {
     private ItemInfo itemInfo;
     private int quantity;
