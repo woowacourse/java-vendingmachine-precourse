@@ -30,6 +30,10 @@ public class VendingMachineModel {
 		}
 	}
 
+	public List<Integer> getNumberOfCoins(){
+		return coinStorage.getNumberOfCoins();
+	}
+
 	private List<Integer> getPossibleMonetaryUnit(int amount) {
 		List<Integer> monetaryUnit = Coin.getMonetaryUnitList();
 		for (int oneUnit : Coin.getMonetaryUnitList()) {

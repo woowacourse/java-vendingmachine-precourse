@@ -31,5 +31,7 @@ public class VendingMachineController {
 		vendingMachineOutputView.printAmountInputMessage();
 		int amount = vendingMachineInputView.getInitialAmount();
 		vendingMachineModel.generateCoins(amount);
+		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
+		vendingMachineOutputView.printVendingMachineInitialCoins(vendingMachineModel.getNumberOfCoins());
 	}
 }
