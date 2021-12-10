@@ -7,10 +7,10 @@ public class MachineValidator {
 
     public static void validateAmountNaturalNumber(String money) {
         if (money.matches(ValidatorMessage.NUMBER_REGEX)) {
-            throw new IllegalArgumentException(ValidatorMessage.IS_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_NUMBER_MESSAGE);
         }
         if (Integer.parseInt(money) <= 0) {
-            throw new IllegalArgumentException(ValidatorMessage.INPUT_MONEY_NATURAL_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.INPUT_MONEY_NATURAL_NUMBER_MESSAGE);
         }
     }
 }

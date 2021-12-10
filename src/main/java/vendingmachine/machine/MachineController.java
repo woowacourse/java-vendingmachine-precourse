@@ -1,5 +1,7 @@
 package vendingmachine.machine;
 
+import vendingmachine.ValidatorMessage;
+
 public class MachineController {
     private final Machine machine;
 
@@ -14,6 +16,7 @@ public class MachineController {
             MachineValidator.validateAmountNaturalNumber(clientInput);
             inputMoney = Integer.parseInt(clientInput);
         } catch (IllegalArgumentException e) {
+            ValidatorMessage.printError(e.getMessage());
             inputMoney = initInputMoney();
         }
         return inputMoney;
