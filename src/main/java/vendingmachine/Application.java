@@ -2,7 +2,7 @@ package vendingmachine;
 
 import java.util.ArrayList;
 
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.controller.VendingMachineController;
 import vendingmachine.utils.StringUtil;
 import vendingmachine.view.InputView;
 
@@ -11,15 +11,15 @@ public class Application {
         boolean isOperate = true;
 
         int initializeMoney = StringUtil.parseStringToInt(InputView.inputInitialAmount());
-        VendingMachine vendingMachine = VendingMachine.makeVendingMachineHasMoney(initializeMoney);
+        VendingMachineController vendingMachineController = VendingMachineController.makeVendingMachineHasMoney(initializeMoney);
         //상품명들을 입력. -> VendingMachine의 ProductRepository
         ArrayList<String> productsInfo = StringUtil.splitUsingSemiColon(InputView.inputProductsInfo());
-        vendingMachine.putProducts(productsInfo);
+        vendingMachineController.putProducts(productsInfo);
         String userMoneyInput = InputView.inputUserMoney();
-        vendingMachine.putUserMoney(userMoneyInput);
+        vendingMachineController.putUserMoney(userMoneyInput);
         while (isOperate) {
-            isOperate = vendingMachine.sellProduct();
+            isOperate = vendingMachineController.sellProduct();
         }
-        vendingMachine.giveChange();
+        vendingMachineController.giveChange();
     }
 }

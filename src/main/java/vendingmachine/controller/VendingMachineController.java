@@ -1,10 +1,11 @@
-package vendingmachine.domain;
+package vendingmachine.controller;
 
 import static vendingmachine.Constant.*;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
+import vendingmachine.domain.Price;
+import vendingmachine.domain.Product;
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.utils.CoinGenerator;
@@ -12,17 +13,17 @@ import vendingmachine.utils.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-public class VendingMachine {
+public class VendingMachineController {
     private CoinRepository coinRepository;
     private ProductRepository productRepository = new ProductRepository();
     private Price userMoney;
 
-    private VendingMachine(int initializeMoney) {
+    private VendingMachineController(int initializeMoney) {
         putInitialAmount(initializeMoney);
     }
 
-    public static VendingMachine makeVendingMachineHasMoney(int initializeMoney) {
-        return new VendingMachine(initializeMoney);
+    public static VendingMachineController makeVendingMachineHasMoney(int initializeMoney) {
+        return new VendingMachineController(initializeMoney);
     }
 
     public void putInitialAmount(int inputMoney) { //금액 검증 로직 만들었으니 그걸 사용하기.
