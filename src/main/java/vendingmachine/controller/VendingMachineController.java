@@ -43,7 +43,7 @@ public class VendingMachineController {
 	}
 
 	private boolean satisfyExitCondition() {
-		if (money < itemService.getMinPrice() || !itemService.isAllItemsOutOfStock()) {
+		if (money < itemService.getMinPrice() || itemService.isAllItemsOutOfStock()) {
 			return true;
 		}
 

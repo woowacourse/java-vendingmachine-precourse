@@ -28,6 +28,6 @@ public class ItemService {
 		return itemRepository.stream()
 			.filter(item -> item.isAvailableToBuy())
 			.findFirst()
-			.orElse(null) != null;
+			.orElse(null) == null;
 	}
 }
