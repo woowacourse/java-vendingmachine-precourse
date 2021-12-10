@@ -18,6 +18,10 @@ public class UserBalance {
 		return new UserBalance(parsedNumber);
 	}
 
+	public int toInt() {
+		return this.userBalance;
+	}
+
 	@Override
 	public boolean equals(Object object) {
 		if (this == object)

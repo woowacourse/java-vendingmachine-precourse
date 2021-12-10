@@ -13,6 +13,10 @@ public class UserBalanceRepository {
 		return userBalanceRepository;
 	}
 
+	public UserBalance getUserBalance() {
+		return this.userBalance;
+	}
+
 	public void setUserBalance(UserBalance userBalance) {
 		this.userBalance = userBalance;
 	}

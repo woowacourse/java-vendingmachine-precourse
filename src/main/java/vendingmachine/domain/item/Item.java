@@ -48,6 +48,10 @@ public class Item {
 		return this.name;
 	}
 
+	public ItemPrice getItemPrice() {
+		return this.price;
+	}
+
 	public boolean isSoldOut() {
 		return this.amount.toInt() <= 0;
 	}

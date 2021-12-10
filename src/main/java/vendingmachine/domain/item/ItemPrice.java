@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import vendingmachine.validator.ItemValidator;
 
-public class ItemPrice {
+public class ItemPrice implements Comparable<ItemPrice> {
 	private final int price;
 
 	private ItemPrice(int price) {
@@ -16,6 +16,23 @@ public class ItemPrice {
 
 		int parsedNumber = Integer.parseInt(price);
 		return new ItemPrice(parsedNumber);
+	}
+
+	public int toInt() {
+		return this.price;
+	}
+
+	@Override
+	public int compareTo(ItemPrice itemPrice) {
+		if (this.price > itemPrice.toInt()) {
+			return 1;
+		}
+
+		if (this.price > itemPrice.toInt()) {
+			return -1;
+		}
+
+		return 0;
 	}
 
 	@Override

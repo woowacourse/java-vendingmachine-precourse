@@ -17,4 +17,8 @@ public class UserBalanceService {
 	public void initUserBalance(UserBalance userBalance) {
 		userBalanceRepository.setUserBalance(userBalance);
 	}
+
+	public UserBalance getUserBalance() {
+		return userBalanceRepository.getUserBalance();
+	}
 }

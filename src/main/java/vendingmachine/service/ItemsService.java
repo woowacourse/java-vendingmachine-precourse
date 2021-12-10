@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.Items.Items;
+import vendingmachine.domain.item.ItemPrice;
 import vendingmachine.repository.ItemsRepository;
 
 public class ItemsService {
@@ -21,5 +22,10 @@ public class ItemsService {
 	public boolean checkSoldOut() {
 		Items items = itemsRepository.findAll();
 		return items.isAllSoldOut();
+	}
+
+	public ItemPrice getMinItemPrice() {
+		Items items = itemsRepository.findAll();
+		return items.getMinItemPrice();
 	}
 }
