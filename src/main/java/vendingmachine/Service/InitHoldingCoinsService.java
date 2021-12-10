@@ -1,6 +1,7 @@
 package vendingmachine.Service;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.Constant.DomainConstant;
 import vendingmachine.Constant.ErrorConstant;
 import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
@@ -29,7 +30,7 @@ public class InitHoldingCoinsService {
     }
 
     private boolean isInRange(int holdingAmount) {
-        return (holdingAmount >= 0 && holdingAmount % 10 == 0);
+        return (holdingAmount >= DomainConstant.MINIMUM_NUMBER_OF_HOLDING_AMOUNT && holdingAmount % DomainConstant.HOLDING_AMOUNT_MUST_BE_DIVIDED == 0);
     }
 
     private void addPickedCoin(int amount) {
