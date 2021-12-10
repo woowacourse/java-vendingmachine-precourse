@@ -41,7 +41,7 @@ public class VendingMachineController {
 	}
 
 	private void printRemainInputMoney(VendingMachine vendingMachine) {
-		System.out.println("투입 금액: " + vendingMachine.getInputMoney());
+		System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
 	}
 
 	private Item purchaseItem() {
