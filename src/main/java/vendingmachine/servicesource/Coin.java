@@ -1,4 +1,4 @@
-package vendingmachine.serivesource;
+package vendingmachine.servicesource;
 
 public enum Coin {
     COIN_500(500),
