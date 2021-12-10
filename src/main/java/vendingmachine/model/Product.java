@@ -36,4 +36,13 @@ public class Product {
 		return 0;
 	}
 
+	public boolean canBuyThisProduct(int remainMoney) {
+
+		if (price <= remainMoney && quantity > 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 }

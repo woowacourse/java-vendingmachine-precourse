@@ -22,4 +22,15 @@ public class Changes {
 	public int countCoin(int idx) {
 		return coinList.get(idx);
 	}
+
+	public int giveChanges(Coin coin) {
+		int givingCoin = changes / coin.getAmount();
+
+		if (givingCoin > coinList.get(coin.ordinal())) {
+			givingCoin = coinList.get(coin.ordinal());
+		}
+
+		changes -= givingCoin * coin.getAmount();
+		return givingCoin;
+	}
 }

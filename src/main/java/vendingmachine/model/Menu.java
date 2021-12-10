@@ -57,4 +57,17 @@ public class Menu {
 		return menuList.get(nameList.get(order)).comparePrice(insertedMoney);
 	}
 
+	public boolean stopOrdering(int remainMoney) {
+
+		for (Product product : menuList) {
+
+			if (product.canBuyThisProduct(remainMoney)) {
+				return false;
+			}
+
+		}
+
+		return true;
+	}
+
 }

@@ -49,4 +49,11 @@ public class VendingMachine {
 		return insertedMoney;
 	}
 
+	public boolean stopMachine() {
+		return menu.stopOrdering(insertedMoney);
+	}
+
+	public int giveChanges(Coin coin) {
+		return changes.giveChanges(coin);
+	}
 }
