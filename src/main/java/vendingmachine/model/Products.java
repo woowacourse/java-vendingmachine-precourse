@@ -26,7 +26,6 @@ public class Products {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-
     public boolean isQuantityEnough(String product) {
         return products.stream()
                 .filter(p -> p.getName().equals(product))
