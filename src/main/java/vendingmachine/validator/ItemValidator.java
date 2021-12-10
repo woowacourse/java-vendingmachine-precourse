@@ -34,15 +34,15 @@ public class ItemValidator extends Validator {
 		validateGreaterThanOrEqual(parsedNumber, MIN_PRICE);
 	}
 
-	public static void validateItemAmount(String price) {
+	public static void validateItemQuantity(String price) {
 		validateNumeric(price);
 
 		int parsedNumber = Integer.parseInt(price);
 		validateNaturalNumber(parsedNumber);
 	}
 
-	public static void validateAbleToSubtractItemAmount(int itemAmount) {
-		if (itemAmount <= 0) {
+	public static void validateAbleToSubtractItemQuantity(int itemQuantity) {
+		if (itemQuantity <= 0) {
 			throw new SoldOutException();
 		}
 	}

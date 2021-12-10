@@ -4,25 +4,25 @@ import java.util.HashMap;
 import java.util.Map;
 
 import vendingmachine.domain.coin.Coin;
-import vendingmachine.domain.coin.CoinAmount;
+import vendingmachine.domain.coin.CoinQuantity;
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 
 public class Coins {
-	private final Map<Coin, CoinAmount> coins;
+	private final Map<Coin, CoinQuantity> coins;
 
-	private Coins(Map<Coin, CoinAmount> coins) {
+	private Coins(Map<Coin, CoinQuantity> coins) {
 		this.coins = coins;
 	}
 
 	public static Coins from(VendingMachineBalance vendingMachineBalance) {
-		Map<Coin, CoinAmount> coins = generateRandomCoins(vendingMachineBalance);
+		Map<Coin, CoinQuantity> coins = generateRandomCoins(vendingMachineBalance);
 		return new Coins(coins);
 	}
 
 	// TODO: 리팩토링 필요
-	private static Map<Coin, CoinAmount> generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
-		Map<Coin, CoinAmount> coins = new HashMap<>();
+	private static Map<Coin, CoinQuantity> generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
+		Map<Coin, CoinQuantity> coins = new HashMap<>();
 		int remainingBalance = vendingMachineBalance.toInt();
 
 		while (remainingBalance > 0) {
@@ -30,8 +30,8 @@ public class Coins {
 			if (!isAbleToAddChange(randomCoin, remainingBalance)) {
 				continue;
 			}
-			coins.computeIfAbsent(randomCoin, coin -> CoinAmount.from(0));
-			coins.put(randomCoin, CoinAmount.from(coins.get(randomCoin).toInt() + 1));
+			coins.computeIfAbsent(randomCoin, coin -> CoinQuantity.from(0));
+			coins.put(randomCoin, CoinQuantity.from(coins.get(randomCoin).toInt() + 1));
 			remainingBalance = remainingBalance - randomCoin.getAmount();
 		}
 
@@ -44,13 +44,13 @@ public class Coins {
 
 	// TODO: 리팩토링 필요
 	public Coins getChange(UserBalance userBalance) {
-		Map<Coin, CoinAmount> coins = new HashMap<>();
+		Map<Coin, CoinQuantity> coins = new HashMap<>();
 		int remainingBalance = userBalance.toInt();
 
 		for (int i = 0; i < Coin.values().length; i++) {
 			Coin coin = Coin.values()[i];
 			int quantity = getCoinQuantityForChange(coin, remainingBalance);
-			coins.put(coin, CoinAmount.from(quantity));
+			coins.put(coin, CoinQuantity.from(quantity));
 			remainingBalance = remainingBalance - (coin.getAmount() * quantity);
 		}
 
@@ -59,7 +59,7 @@ public class Coins {
 
 	private int getCoinQuantityForChange(Coin coin, int balance) {
 		int maxCoinQuantityForChange = getMaxCoinQuantityForChange(coin, balance);
-		int holdingQuantity = getCoinAmount(coin).toInt();
+		int holdingQuantity = getCoinQuantity(coin).toInt();
 
 		if (maxCoinQuantityForChange < holdingQuantity) {
 			return maxCoinQuantityForChange;
@@ -72,13 +72,13 @@ public class Coins {
 		return balance / coin.getAmount();
 	}
 
-	public CoinAmount getCoinAmount(Coin coin) {
-		CoinAmount coinAmount = coins.get(coin);
-		if (coinAmount != null) {
-			return coinAmount;
+	public CoinQuantity getCoinQuantity(Coin coin) {
+		CoinQuantity coinQuantity = coins.get(coin);
+		if (coinQuantity != null) {
+			return coinQuantity;
 		}
 
-		return CoinAmount.from(0);
+		return CoinQuantity.from(0);
 	}
 
 	@Override

@@ -29,18 +29,18 @@ public class OutputView {
 
 	public static void printVendingMachineHoldingCoins(CoinsOutputDto coinsOutputDto) {
 		System.out.println(VENDING_MACHINE_HOLDING_COINS_MESSAGE);
-		printCoin(COIN_500, coinsOutputDto.getCoin500Amount());
-		printCoin(COIN_100, coinsOutputDto.getCoin100Amount());
-		printCoin(COIN_50, coinsOutputDto.getCoin50Amount());
-		printCoin(COIN_10, coinsOutputDto.getCoin10Amount());
+		printCoin(COIN_500, coinsOutputDto.getCoin500Quantity());
+		printCoin(COIN_100, coinsOutputDto.getCoin100Quantity());
+		printCoin(COIN_50, coinsOutputDto.getCoin50Quantity());
+		printCoin(COIN_10, coinsOutputDto.getCoin10Quantity());
 	}
 
 	public static void printChange(CoinsOutputDto coinsOutputDto) {
 		System.out.println(CHANGE_MESSAGE);
-		printCoinIgnoringZero(COIN_500, coinsOutputDto.getCoin500Amount());
-		printCoinIgnoringZero(COIN_100, coinsOutputDto.getCoin100Amount());
-		printCoinIgnoringZero(COIN_50, coinsOutputDto.getCoin50Amount());
-		printCoinIgnoringZero(COIN_10, coinsOutputDto.getCoin10Amount());
+		printCoinIgnoringZero(COIN_500, coinsOutputDto.getCoin500Quantity());
+		printCoinIgnoringZero(COIN_100, coinsOutputDto.getCoin100Quantity());
+		printCoinIgnoringZero(COIN_50, coinsOutputDto.getCoin50Quantity());
+		printCoinIgnoringZero(COIN_10, coinsOutputDto.getCoin10Quantity());
 	}
 
 	public static void printInputItems() {
@@ -48,13 +48,13 @@ public class OutputView {
 	}
 
 	// TODO: DTO 를 전달받아 출력하는 방법 고민
-	private static void printCoin(String type, int amount) {
-		System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
+	private static void printCoin(String type, int coinQuantity) {
+		System.out.println(String.format(COIN_OUTPUT_FORMAT, type, coinQuantity));
 	}
 
-	private static void printCoinIgnoringZero(String type, int amount) {
-		if (amount > 0) {
-			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
+	private static void printCoinIgnoringZero(String type, int coinQuantity) {
+		if (coinQuantity > 0) {
+			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, coinQuantity));
 		}
 	}
 

@@ -12,16 +12,16 @@ public class Item {
 	private static final String OPEN_BRACKET = "[";
 	private static final String CLOSE_BRACKET = "]";
 	private static final String BLANK_CHAR = "";
-	private static final String TO_STRING_FORMAT = "{ItemName=%s, ItemPrice=%s, ItemAmount=%s}";
+	private static final String TO_STRING_FORMAT = "{ItemName=%s, ItemPrice=%s, ItemQuantity=%s}";
 
 	private final ItemName name;
 	private final ItemPrice price;
-	private final ItemAmount amount;
+	private final ItemQuantity quantity;
 
-	private Item(ItemName name, ItemPrice price, ItemAmount amount) {
+	private Item(ItemName name, ItemPrice price, ItemQuantity quantity) {
 		this.name = name;
 		this.price = price;
-		this.amount = amount;
+		this.quantity = quantity;
 	}
 
 	public static Item from(String input) {
@@ -31,9 +31,9 @@ public class Item {
 
 		ItemName name = ItemName.from(elements.get(0));
 		ItemPrice price = ItemPrice.from(elements.get(1));
-		ItemAmount amount = ItemAmount.from(elements.get(2));
+		ItemQuantity quantity = ItemQuantity.from(elements.get(2));
 
-		return new Item(name, price, amount);
+		return new Item(name, price, quantity);
 	}
 
 	private static String removeBracket(String input) {
@@ -54,7 +54,7 @@ public class Item {
 	}
 
 	public boolean isSoldOut() {
-		return this.amount.toInt() <= 0;
+		return this.quantity.toInt() <= 0;
 	}
 
 	public boolean isEnoughBalance(UserBalance userBalance) {
@@ -62,12 +62,12 @@ public class Item {
 	}
 
 	public Item sell() {
-		ItemAmount subtractedAmount = this.amount.subtract();
-		return new Item(this.name, this.price, subtractedAmount);
+		ItemQuantity subtractedQuantity = this.quantity.subtract();
+		return new Item(this.name, this.price, subtractedQuantity);
 	}
 
 	@Override
 	public String toString() {
-		return String.format(TO_STRING_FORMAT, this.name.toString(), this.price.toString(), this.amount.toString());
+		return String.format(TO_STRING_FORMAT, this.name.toString(), this.price.toString(), this.quantity.toString());
 	}
 }
