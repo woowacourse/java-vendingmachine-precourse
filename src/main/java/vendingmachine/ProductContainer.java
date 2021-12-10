@@ -12,4 +12,11 @@ public class ProductContainer {
     public ProductContainer(List<Product> productList) {
         productList.forEach(product -> productMap.put(product.getName(), product));
     }
+
+    public Product getProduct(String productName) {
+        if (!productMap.keySet().contains(productName)) {
+            throw new NoSuchElementException(ErrorMessage.NO_PRODUCT_MATCH.getCompleteMessage());
+        }
+        return productMap.get(productName);
+    }
 }
