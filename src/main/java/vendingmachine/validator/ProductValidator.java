@@ -1,5 +1,7 @@
 package vendingmachine.validator;
 
+import static vendingmachine.validator.NameValidator.*;
+
 public class ProductValidator {
 
 	public static final String OPENING_BRACKET = "[";
@@ -7,7 +9,6 @@ public class ProductValidator {
 	public static final String PRODUCT_CRITERIA = ";";
 	public static final String ARGUMENT_CRITERIA = ",";
 	private static final int NUMBER_OF_ARGUMENTS = 3;
-	private static final String KOREAN_REGEX = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
 	private static final int PRICE_MINIMUM_LIMIT = 100;
 
 	public static boolean isValidProducts(String input) {
@@ -67,12 +68,6 @@ public class ProductValidator {
 			throw new IllegalArgumentException(
 				"상품 정보는 " + NUMBER_OF_ARGUMENTS + "개이어야 하고, " +
 					"\"" + ARGUMENT_CRITERIA + "\"" + "로 구분 지어져야 합니다.");
-		}
-	}
-
-	public static void checkProductName(String productName) {
-		if (!productName.matches(KOREAN_REGEX)) {
-			throw new IllegalArgumentException("상품명은 한글만 허용됩니다.");
 		}
 	}
 

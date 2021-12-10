@@ -1,6 +1,6 @@
 package vendingmachine.validator;
 
-import static vendingmachine.validator.ProductValidator.*;
+import static vendingmachine.validator.NameValidator.*;
 
 import vendingmachine.model.ProductList;
 import vendingmachine.model.VendingMachine;
