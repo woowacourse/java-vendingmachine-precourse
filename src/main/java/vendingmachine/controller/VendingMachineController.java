@@ -2,27 +2,25 @@ package vendingmachine.controller;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
-import vendingmachine.constant.ErrorMessage;
-import vendingmachine.constant.SystemMessage;
 import vendingmachine.domain.VendingMachine;
 
 public class VendingMachineController {
     public void run() {
         VendingMachine vendingMachine = new VendingMachine();
-        setMachineMoney(vendingMachine);
+        getMachineMoney(vendingMachine);
 
         makeRandomCoin(vendingMachine);
-        setMerchandise(vendingMachine);
+        getMerchandiseInfo(vendingMachine);
 
-        setInputMoney(vendingMachine);
+        getInputMoney(vendingMachine);
     }
 
-    private void setMachineMoney(VendingMachine vendingMachine) {
+    private void getMachineMoney(VendingMachine vendingMachine) {
         try {
             vendingMachine.setMachineMoney(InputView.printSetMachineMoneyMessage());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            setMachineMoney(vendingMachine);
+            getMachineMoney(vendingMachine);
         }
     }
 
@@ -31,16 +29,16 @@ public class VendingMachineController {
         OutputView.printCoinStatus(vendingMachine.getCoin());
     }
 
-    private void setMerchandise(VendingMachine vendingMachine) {
+    private void getMerchandiseInfo(VendingMachine vendingMachine) {
         try {
             vendingMachine.addMerchandise(InputView.printSetMerchandiseMessage());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
-            setMerchandise(vendingMachine);
+            getMerchandiseInfo(vendingMachine);
         }
     }
 
-    private void setInputMoney(VendingMachine vendingMachine) {
+    private void getInputMoney(VendingMachine vendingMachine) {
         vendingMachine.setInputMoney(InputView.printSetInputMoneyMessage());
     }
 }
