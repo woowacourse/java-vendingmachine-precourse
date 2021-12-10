@@ -6,6 +6,10 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
+    private static final String MONETARY_UNIT = "원";
+    private static final String COIN_DELIMITER = " - ";
+    private static final String COUNT_LITERAL = "개";
+
     private final int amount;
 
     Coin(final int amount) {
@@ -28,5 +32,14 @@ public enum Coin {
             return COIN_10;
 
         return null;
+    }
+
+    public void printCoinAndCount(int count) {
+        String str = getAmount()
+            + MONETARY_UNIT
+            + COIN_DELIMITER
+            + count
+            + COUNT_LITERAL;
+        System.out.println(str);
     }
 }

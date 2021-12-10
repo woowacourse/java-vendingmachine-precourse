@@ -6,6 +6,7 @@ import java.util.Map;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.service.CoinService;
 import vendingmachine.view.InputFirstMoneyView;
+import vendingmachine.view.InputItemInfoView;
 import vendingmachine.view.ShowFirstMoneyView;
 import vendingmachine.view.View;
 
@@ -16,6 +17,7 @@ public class VendingMachineController {
 	public VendingMachineController() {
 		viewMapper.put(ViewMappingKey.INPUT_FIRST_MONEY, new InputFirstMoneyView());
 		viewMapper.put(ViewMappingKey.SHOW_FIRST_MONEY, new ShowFirstMoneyView());
+		viewMapper.put(ViewMappingKey.INPUT_ITEM_INFO, new InputItemInfoView());
 	}
 
 	public void view(ViewMappingKey key) {
