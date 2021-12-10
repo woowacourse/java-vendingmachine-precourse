@@ -1,5 +1,9 @@
 package vendingmachine.utils;
 
+import java.util.List;
+
+import camp.nextstep.edu.missionutils.Randoms;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -11,5 +15,9 @@ public enum Coin {
     Coin(final int amount) {
         this.amount = amount;
     }
-    // 추가 기능 구현
+
+    public int inputCoinCountRandomly(List<Integer> coins) {
+        return Randoms.pickNumberInList(coins);
+    }
+
 }
