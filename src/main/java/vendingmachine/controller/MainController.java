@@ -18,10 +18,22 @@ public class MainController {
         CoinController.makeCoin(vendingMachineMoney);
         Output.printVendingMachineCoin(vendingMachineMoney);
 
-        String productInfo = Input.InputProductInfo();
-        ProductController.saveProduct(product, productInfo);
+        playInputProduct();
         String inputMoney = Input.InputMoney();
         PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
+    }
+
+    private void playInputProduct() {
+        while (true){
+            String productInfo = Input.InputProductInfo();
+            try {
+                ValidationController.productValidation(productInfo);
+                ProductController.saveProduct(product, productInfo);
+                return;
+            }catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void playInputVendingMachine(){

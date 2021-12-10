@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import java.util.Arrays;
+
 public class ValidationController {
     public static void vendingMachineValidation(String input) {
         isNumValidation(input);
@@ -26,6 +28,57 @@ public class ValidationController {
             Integer.parseInt(input);
         } catch (Exception e) {
             throw new IllegalArgumentException("[ERROR] 숫자가 아닙니다.");
+        }
+    }
+
+    public static void productValidation(String productInfo) {
+        String[] productData = productInfo.split(";");
+        bracketsValidation(productData);
+        removeBrackets(productData);
+        commaValidation(productData);
+        blankValidation(productData);
+    }
+
+    private static void removeBrackets(String[] productData) {
+        for (int i = 0; i<productData.length; i++){
+            productData[i] = productData[i].substring(1, productData[i].length()-1);
+        }
+    }
+
+    private static void commaValidation(String[] productData) {
+        for (String productDatum : productData) {
+            if (countChar(productDatum, ',') != 2){
+                throw new IllegalArgumentException("[ERROR] 두 개의 콤마가 아닙니다.");
+            }
+        }
+    }
+
+    private static int countChar(String str, char checkChar) {
+        int count = 0;
+
+        for (int i = 0; i < str.length(); i++) {
+            if (str.charAt(i) == checkChar) {
+                count++;
+            }
+        }
+        return count;
+    }
+
+
+    private static void bracketsValidation(String[] productData) {
+        for (String productDatum : productData) {
+            if (!(productDatum.charAt(0) == '[' && productDatum.charAt(productDatum.length()-1) == ']')){
+                throw new IllegalArgumentException("[ERROR] 양 끝이 대괄호가 아닙니다.");
+            }
+        }
+    }
+
+    private static void blankValidation(String[] productData) {
+        for (String productDatum : productData) {
+            String[] splitData = productDatum.split(",");
+            if (splitData.length != 3){
+                throw new IllegalArgumentException("[ERROR] 잘못된 구조의 입력입니다.");
+            }
         }
     }
 }
