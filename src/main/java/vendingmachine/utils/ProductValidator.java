@@ -3,8 +3,6 @@ package vendingmachine.utils;
 import static vendingmachine.Constant.*;
 import static vendingmachine.utils.StringUtil.*;
 
-import java.util.ArrayList;
-
 import vendingmachine.domain.Price;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Quantity;

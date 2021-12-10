@@ -22,12 +22,6 @@ public class ProductRepository {
         }
     }
 
-    public void showProductRepository() {
-        for (String key : productRepository.keySet()) {
-            System.out.println(key + ": " + productRepository.get(key));
-        }
-    }
-
     public boolean has(String productName) {
         return productRepository.containsKey(productName);
     }

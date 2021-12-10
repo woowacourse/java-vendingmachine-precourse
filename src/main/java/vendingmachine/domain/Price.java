@@ -2,10 +2,6 @@ package vendingmachine.domain;
 
 import static vendingmachine.Constant.*;
 
-import vendingmachine.repository.CoinRepository;
-import vendingmachine.utils.CoinGenerator;
-import vendingmachine.utils.StringUtil;
-
 public class Price {
     private int price;
 
