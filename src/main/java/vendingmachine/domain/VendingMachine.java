@@ -37,11 +37,19 @@ public class VendingMachine {
 			if (!canTrade(customer)) {
 				return;
 			}
-			String productName = InputView.getProductNameToBuyInput();
-			int productCost = productRepository.getProductCost(productName);
-			customer.purchaseProducts(productCost);
-			productRepository.sellProduct(productName);
+			try {
+				String productName = getProductNameToByFromInput();
+				int productCost = productRepository.getProductCost(productName);
+				customer.purchaseProducts(productCost);
+				productRepository.sellProduct(productName);
+			} catch (IllegalArgumentException exception) {
+				OutputView.printErrorMessage(exception.getMessage());
+			}
 		}
+	}
+
+	private String getProductNameToByFromInput() {
+		return InputView.getProductNameToBuyInput();
 	}
 
 	private boolean canTrade(Customer customer) {

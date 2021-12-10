@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 public class ProductRepository {
 	private final static int LAST_NUMBER = 1;
+	private final static String INVALID_PRODUCT_MESSAGE = "해당 상품이 존재히자 않습니다.";
 
 	private final ArrayList<Product> products = new ArrayList<>();
 	private final HashMap<Product, Integer> productHashMap = new HashMap<>();
@@ -47,6 +48,6 @@ public class ProductRepository {
 				return product;
 			}
 		}
-		throw new IllegalArgumentException("해당 상품이 존재히자 않습니다.");
+		throw new IllegalArgumentException(INVALID_PRODUCT_MESSAGE);
 	}
 }
