@@ -41,39 +41,41 @@ public class VendingMachine {
 	}
 
 	public Changes createChanges() {
-		if (coinList.getTotalMoney() <= deposit) {
-			return new Changes(coinList);
-		}
-
 		Changes changes = new Changes();
 		LinkedHashMap<Coin, Integer> hashMap = coinList.getHashMap();
 		for (Map.Entry<Coin, Integer> entry : hashMap.entrySet()) {
+			Coin coin = entry.getKey();
+			int availableNumberOfCoins = entry.getValue();
+
 			if (deposit == 0) {
 				break;
 			}
 
-			if (entry.getValue() == 0) {
+			if (availableNumberOfCoins == 0) {
 				continue;
 			}
 
-			int numberOfCoins = 0;
-			for (int i = entry.getValue(); i >= 0; i--) {
-				if (deposit >= (i * entry.getKey().getAmount())) {
-					numberOfCoins = i;
-					deposit -= (i * entry.getKey().getAmount());
-					break;
-				}
-			}
-
-			if (numberOfCoins == 0) {
+			int numberOfChange = getNumberOfChange(coin, availableNumberOfCoins);
+			if (numberOfChange == 0) {
 				continue;
 			}
 
-			changes.addCoin(entry.getKey(), numberOfCoins);
-			coinList.subtractCoin(entry.getKey(), entry.getValue() - numberOfCoins);
+			changes.addCoin(coin, numberOfChange);
+			coinList.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
 		}
 
 		return changes;
+	}
+
+	private int getNumberOfChange(Coin coin, int maxNumberOfCoins) {
+		for (int i = maxNumberOfCoins; i >= 0; i--) {
+			if (deposit >= (i * coin.getAmount())) {
+				deposit -= (i * coin.getAmount());
+				return i;
+			}
+		}
+
+		return 0;
 	}
 
 }
