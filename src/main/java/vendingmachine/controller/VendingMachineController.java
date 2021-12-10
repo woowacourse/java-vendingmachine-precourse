@@ -10,7 +10,6 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-    private boolean isContinue = true;
     private VendingMachineService vendingMachineService;
 
     public void start() {
@@ -31,31 +30,22 @@ public class VendingMachineController {
     }
 
     private void buyProductsUntilEnd() {
-        while (isContinue) {
-            buyProduct();
-        }
-    }
-
-    private void buyProduct() {
-        try {
-            String productName = inputBuyingProduct();
-            if (!isContinue) {
+        do {
+            String productName = InputView.inputBuyingProduct();
+            if (productName.equals(EXIT_CODE)) {
                 return;
             }
-            vendingMachineService.sellProduct(productName);
-            isContinue = vendingMachineService.isContinue();
-        } catch (IllegalArgumentException e) {
-            OutputView.showErrorMessage(e);
-            buyProduct();
-        }
+            buyProduct(productName);
+        } while (vendingMachineService.isContinue());
     }
 
-    private String inputBuyingProduct() {
-        String productName = InputView.inputBuyingProduct();
-        if (productName.equals(EXIT_CODE)) {
-            isContinue = false;
+    private void buyProduct(String productName) {
+        try {
+            vendingMachineService.sellProduct(productName);
+        } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
+            buyProductsUntilEnd();
         }
-        return productName;
     }
 
     private void initializeByAdmin() {
