@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.exception.NotEnoughBalanceException;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -63,12 +64,11 @@ public class VendingMachine {
         product = productMap.get(productName);
 
         if (balance < product.getPrice()) {
-            throw new NoSuchElementException(ErrorMessage.NOT_ENOUTH_BALANCE.getCompleteMessage());
+            throw new NotEnoughBalanceException(ErrorMessage.NOT_ENOUGH_BALANCE.getCompleteMessage());
         }
         balance -= product.getPrice();
         product.sell();
         productMap.put(product.getName(), product);
     }
-
 
 }
