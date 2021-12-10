@@ -23,20 +23,6 @@ public class MainController {
         PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
     }
 
-    private void playInputProduct() {
-        while (true){
-            String productInfo = Input.InputProductInfo();
-            try {
-                ValidationController.productValidation(productInfo);
-                ValidationController.duplicateValidation(productInfo);
-                ProductController.saveProduct(product, productInfo);
-                return;
-            }catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
     private void playInputVendingMachine(){
         int vendingMachineChange = 0;
         while (true) {
@@ -46,6 +32,21 @@ public class MainController {
                 ValidationController.vendingMachineValidation(inputMoney);
                 vendingMachineChange = Integer.parseInt(inputMoney);
                 vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
+                return;
+            }catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void playInputProduct() {
+        while (true){
+            String productInfo = Input.InputProductInfo();
+            try {
+                ValidationController.productValidation(productInfo);
+                ValidationController.duplicateValidation(productInfo);
+                ValidationController.productAmountValidation(productInfo);
+                ProductController.saveProduct(product, productInfo);
                 return;
             }catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

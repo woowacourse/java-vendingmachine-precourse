@@ -96,4 +96,22 @@ public class ValidationController {
             throw new IllegalArgumentException("[ERROR] 중복된 상품명 입력이 있습니다.");
         }
     }
+
+    public static void productAmountValidation(String productInfo) {
+        String[] productData = productInfo.split(";");
+
+        for (String productDatum : productData) {
+            String[] productSplitData = productDatum.split(",");
+            positiveIntegerValidation(productSplitData[1]);
+            divided10Validation(productSplitData[1]);
+            under100Validation(productSplitData[1]);
+        }
+    }
+
+    private static void under100Validation(String input) {
+        int checkNum = Integer.parseInt(input);
+        if (checkNum < 100){
+            throw new IllegalArgumentException("[ERROR] 100 미만의 수 입니다.");
+        }
+    }
 }
