@@ -7,11 +7,16 @@ import vendingmachine.Domain.HoldingCoins;
 
 public class InitHoldingCoinsService {
 
-    public void isValidHoldingAmount(String holdingAmount) {
-        if (isInteger(holdingAmount) && isInRange(Integer.parseInt(holdingAmount))) {
-            return;
+    public void setHoldingCoins(String holdingAmount) {
+        if (!isValidHoldingAmount(holdingAmount)) {
+            throw new IllegalArgumentException(ErrorConstant.WrongHoldingAmount);
         }
-        throw new IllegalArgumentException(ErrorConstant.WrongHoldingAmount);
+
+        addPickedCoin(Integer.parseInt(holdingAmount));
+    }
+
+    private boolean isValidHoldingAmount(String holdingAmount) {
+        return (isInteger(holdingAmount) && isInRange(Integer.parseInt(holdingAmount)));
     }
 
     private boolean isInteger(String holdingAmount) {
@@ -27,10 +32,10 @@ public class InitHoldingCoinsService {
         return (holdingAmount >= 0 && holdingAmount % 10 == 0);
     }
 
-    public void setHoldingCoins(int holdingAmount) {
-        while (holdingAmount > 0) {
-            int pickedAmount = pickRandomCoin(holdingAmount);
-            holdingAmount -= pickedAmount;
+    private void addPickedCoin(int amount) {
+        while (amount > 0) {
+            int pickedAmount = pickRandomCoin(amount);
+            amount -= pickedAmount;
             HoldingCoins.addCoin(pickedAmount);
         }
     }
