@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import static vendingmachine.Constant.*;
+
 import java.util.ArrayList;
 
 import vendingmachine.service.VendingMachineService;
@@ -8,7 +10,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-    private boolean isOperate = true;
+    private boolean isContinue = true;
     private VendingMachineService vendingMachineService;
 
     public void start() {
@@ -21,7 +23,7 @@ public class VendingMachineController {
         try {
             String userMoneyInput = InputView.inputUserMoney();
             vendingMachineService.putUserMoney(userMoneyInput);
-            while (isOperate) {
+            while (isContinue) {
                 buyProduct();
             }
         } catch (IllegalArgumentException e) {
@@ -32,12 +34,24 @@ public class VendingMachineController {
 
     private void buyProduct() {
         try {
-            String productName = InputView.inputBuyingProduct();
-            isOperate = vendingMachineService.sellProduct(productName);
+            String productName = inputBuyingProduct();
+            if (!isContinue) {
+                return;
+            }
+            vendingMachineService.sellProduct(productName);
+            isContinue = vendingMachineService.isContinue();
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             buyProduct();
         }
+    }
+
+    private String inputBuyingProduct() {
+        String productName = InputView.inputBuyingProduct();
+        if (productName.equals(EXIT_CODE)) {
+            isContinue = false;
+        }
+        return productName;
     }
 
     private void initializeByAdmin() {

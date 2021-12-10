@@ -56,23 +56,28 @@ public class VendingMachineService {
         OutputView.showUserMoney(userMoney);
     }
 
-    public boolean sellProduct(String productName) {
-        if (productName.equals(EXIT_CODE)) {
-            return false;
-        }
-        if (!productRepository.has(productName)) {
-            throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
-        }
+    public void sellProduct(String productName) {
+        validateProductExist(productName);
         int productPrice = productRepository.takeout(productName,userMoney);
         userMoney.use(productPrice);
         OutputView.showUserMoney(userMoney);
+    }
+
+    public boolean isContinue() {
         if (productRepository.cantBuyBecauseOfNoMoney(userMoney) || productRepository.hasNoQuantity()) {
             return false;
         }
         return true;
     }
 
+    private void validateProductExist(String productName) {
+        if (!productRepository.has(productName)) {
+            throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
+        }
+    }
+
     public void giveChange() {
         OutputView.showChange(coinRepository.giveChange(userMoney));
     }
+
 }
