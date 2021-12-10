@@ -3,7 +3,7 @@ package vendingmachine.domain.userbalance;
 import java.util.Objects;
 
 import vendingmachine.domain.item.ItemPrice;
-import vendingmachine.validator.UserBalanceValidator;
+import vendingmachine.validator.BalanceValidator;
 
 public class UserBalance {
 	private final int userBalance;
@@ -13,7 +13,7 @@ public class UserBalance {
 	}
 
 	public static UserBalance from(String userBalance) {
-		UserBalanceValidator.validateUserBalance(userBalance);
+		BalanceValidator.validateUserBalance(userBalance);
 
 		int parsedNumber = Integer.parseInt(userBalance);
 		return new UserBalance(parsedNumber);

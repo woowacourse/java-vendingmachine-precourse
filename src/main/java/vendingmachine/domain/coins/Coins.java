@@ -6,7 +6,7 @@ import java.util.Map;
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinAmount;
 import vendingmachine.domain.userbalance.UserBalance;
-import vendingmachine.validator.CoinsValidator;
+import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 
 public class Coins {
 	private final Map<Coin, CoinAmount> coins;
@@ -15,19 +15,15 @@ public class Coins {
 		this.coins = coins;
 	}
 
-	public static Coins from(String vendingMachineBalance) {
-		CoinsValidator.validateVendingMachineBalance(vendingMachineBalance);
-
-		int parsedBalance = Integer.parseInt(vendingMachineBalance);
-		Map<Coin, CoinAmount> coins = generateRandomCoins(parsedBalance);
-
+	public static Coins from(VendingMachineBalance vendingMachineBalance) {
+		Map<Coin, CoinAmount> coins = generateRandomCoins(vendingMachineBalance);
 		return new Coins(coins);
 	}
 
 	// TODO: 리팩토링 필요
-	private static Map<Coin, CoinAmount> generateRandomCoins(int vendingMachineBalance) {
+	private static Map<Coin, CoinAmount> generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
 		Map<Coin, CoinAmount> coins = new HashMap<>();
-		int remainingBalance = vendingMachineBalance;
+		int remainingBalance = vendingMachineBalance.toInt();
 
 		while (remainingBalance > 0) {
 			Coin randomCoin = Coin.pickRandom();

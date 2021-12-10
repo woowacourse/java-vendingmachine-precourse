@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.coins.Coins;
 import vendingmachine.domain.userbalance.UserBalance;
+import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsOutputDto;
 import vendingmachine.service.CoinsService;
 import vendingmachine.service.UserBalanceService;
@@ -15,7 +16,7 @@ public class CoinsController {
 	public void generateCoins() {
 		String input = InputView.inputVendingMachineBalance();
 		try {
-			Coins coins = Coins.from(input);
+			Coins coins = Coins.from(VendingMachineBalance.from(input));
 			coinsService.initCoins(coins);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
