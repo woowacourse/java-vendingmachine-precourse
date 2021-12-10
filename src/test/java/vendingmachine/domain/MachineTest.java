@@ -2,7 +2,6 @@ package vendingmachine.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,7 +13,7 @@ class MachineTest{
 	@BeforeEach
 	void beforeEach(){
 		machine = Machine.MACHINE;
-		machine.insertCoinToMachine(100);
+		machine.insertCoin(100);
 	}
 
 	@Test

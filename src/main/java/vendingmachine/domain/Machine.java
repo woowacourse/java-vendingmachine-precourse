@@ -5,7 +5,7 @@ public enum Machine {
 
 	private int amount;
 
-	public void insertCoinToMachine(int amount){
+	public void insertCoin(int amount){
 		this.amount = amount;
 	}
 
@@ -14,11 +14,10 @@ public enum Machine {
 	}
 
 	public void changeAmount(int productPrice){
-		System.out.println(productPrice);
 		amount -= productPrice;
 	}
 
-	public boolean isAmountLessThanProductMinPrice(int min) {
-		return amount < min;
+	public boolean isAmountLessThanProductMinPrice(int minPrice) {
+		return amount < minPrice;
 	}
 }

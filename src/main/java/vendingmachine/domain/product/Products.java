@@ -8,28 +8,20 @@ import java.util.List;
 import vendingmachine.domain.Machine;
 
 public enum Products {
-	PRODUCTS(MACHINE);
+	PRODUCTS;
 
 	private List<Product> productList;
-	private Machine machine;
 
-	Products(Machine machine){
+	Products(){
 		productList = new ArrayList<>();
-		this.machine = machine;
 	}
 
-	public void insertProductToList(Product product) {
+	public void insertProduct(Product product) {
 		productList.add(product);
 	}
 
 	public List<Product> getProductList() {
 		return productList;
-	}
-
-	public void buyProduct(Product product){
-		product.sellProduct();
-		machine.changeAmount(product.getPrice());
-		// System.out.println("sell :" + name + ", rest amount "+product.getAmount());
 	}
 
 	public int getMinPriceOfProducts() {

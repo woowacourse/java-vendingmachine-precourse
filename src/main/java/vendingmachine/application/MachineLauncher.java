@@ -22,10 +22,10 @@ public enum MachineLauncher {
 		output.outputMachineNumOfCoins();
 
 		input.inputProducts();
-		int minPriceOfProducts = input.inputCustomerAmount();
+		input.inputCustomerAmount();
 
 		while(true){
-			if(output.outputCustomerAmount(minPriceOfProducts)) break;
+			if(output.outputCustomerAmount()) break;
 			input.inputCustomerBuyProduct();
 		}
 

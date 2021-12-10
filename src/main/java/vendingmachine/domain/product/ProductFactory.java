@@ -8,9 +8,9 @@ public enum ProductFactory {
 
 	private final Map<String, Product> PRODUCT_INSTANCE = new HashMap<>();
 
-	public Product createProduct(String name, int price, int amount){
+	public Product createProduct(String name, int price, int amount) {
 		Product product = PRODUCT_INSTANCE.get(name);
-		if(product==null){
+		if (product == null) {
 			product = new Product(name, price, amount);
 			PRODUCT_INSTANCE.put(name, product);
 		}

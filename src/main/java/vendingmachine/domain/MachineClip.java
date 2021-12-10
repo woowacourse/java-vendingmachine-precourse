@@ -2,26 +2,24 @@ package vendingmachine.domain;
 
 import static vendingmachine.domain.Coin.*;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 public enum MachineClip {
 	MACHINE_CLIP;
 
-	private Map<Integer, Integer> numOfCoins;
-	private Map<Integer, Integer> amountToChanges;
+	private Map<Integer, Integer> numOfCoins; // 기계가 지닌 코인 수
+	private Map<Integer, Integer> amountToChanges; // 잔돈으로 반환할 코인 수
 	private int amount;
 
 	MachineClip() {
-		this.amountToChanges = new HashMap<>();
+		this.amountToChanges = new TreeMap<>((o1, o2) -> o2 - o1);
 		this.numOfCoins = new TreeMap<>((o1, o2) -> o2 - o1);
 	}
 
-	public MachineClip createMachineClip(Map<Integer, Integer> numOfCoins) {
+	public void init(Map<Integer, Integer> numOfCoins) {
 		getCoinStream().forEach(c -> this.numOfCoins.put(c.getValue(), 0));
 		numOfCoins.keySet().stream().forEach(k -> this.numOfCoins.put(k, numOfCoins.get(k)));
-		return MACHINE_CLIP;
 	}
 
 	public Map<Integer, Integer> getAmountToChanges(int amount) {

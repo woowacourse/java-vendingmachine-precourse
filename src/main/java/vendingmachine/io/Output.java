@@ -2,45 +2,42 @@ package vendingmachine.io;
 
 import static vendingmachine.domain.Machine.*;
 import static vendingmachine.domain.MachineClip.*;
+import static vendingmachine.domain.RandomBox.*;
+import static vendingmachine.domain.product.ProductFactory.*;
 import static vendingmachine.domain.product.Products.*;
 import static vendingmachine.utils.Printer.*;
 
-import vendingmachine.domain.Machine;
-import vendingmachine.domain.MachineClip;
-import vendingmachine.domain.product.Products;
+import vendingmachine.service.MachineClipService;
+import vendingmachine.service.VendingMachineService;
 import vendingmachine.utils.Printer;
 
 public enum Output {
-	OUTPUT(PRINTER, MACHINE, PRODUCTS, MACHINE_CLIP);
+	OUTPUT(PRINTER,
+		new MachineClipService(MACHINE_CLIP, RANDOM_COIN_BOX, MACHINE),
+		new VendingMachineService(PRODUCTS, MACHINE, PRODUCT_FACTORY));
 
 	private Printer printer;
-	private Machine machine;
-	private Products products;
-	private MachineClip machineClip;
+	private final MachineClipService machineClipService;
+	private final VendingMachineService vendingMachineService;
 
-	Output(Printer printer, Machine machine, Products products, MachineClip machineClip) {
+	Output(Printer printer, MachineClipService machineClipService, VendingMachineService vendingMachineService) {
 		this.printer = printer;
-		this.machine = machine;
-		this.products = products;
-		this.machineClip = machineClip;
+		this.machineClipService = machineClipService;
+		this.vendingMachineService = vendingMachineService;
 	}
 
 	public void outputMachineNumOfCoins() {
-		printer.printMachineNumOfCoinsNotice(machineClip);
+		printer.printMachineNumOfCoinsNotice(machineClipService
+			.sendMachineClipStat());
 	}
 
-	public boolean outputCustomerAmount(int min) {
-		printer.printCustomerCurrentAmount(machine.getAmount());
-
-		if(machine.isAmountLessThanProductMinPrice(min) || !products.isProductExisted()) {
-			return true;
-		}
-		return false;
+	public boolean outputCustomerAmount() {
+		printer.printCustomerCurrentAmount(vendingMachineService.sendMachineAmount());
+		return vendingMachineService.checkMachineIsWorking();
 	}
 
 	public void outputCustomerChange() {
-		printer.printCustomerChange(machineClip.getAmountToChanges(machine.getAmount()));
-
+		printer.printCustomerChange(machineClipService.sendChanges());
 	}
 
 }

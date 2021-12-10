@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -24,14 +23,14 @@ class MachineClipTest extends NsTest {
 
 	@Test
 	void 머신_동전상태_출력_테스트(){
-		machineClip = machineClip.createMachineClip(randomBox.getNumOfCoins(100));
+		machineClip.init(randomBox.getNumOfCoins(100));
 		System.out.println(machineClip.toString());
 		assertThat(output()).contains("10원", "50원", "100원", "500원");
 	}
 
 	@Test
 	void 머신_잔돈반환_테스트_잔돈일치(){
-		machineClip = machineClip.createMachineClip(randomBox.getNumOfCoins(1000));
+		machineClip.init(randomBox.getNumOfCoins(1000));
 		assertEquals(getAmountOfChangesSum(1000), 1000);
 	}
 

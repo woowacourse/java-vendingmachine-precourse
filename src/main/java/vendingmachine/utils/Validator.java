@@ -89,16 +89,19 @@ public enum Validator {
 		}
 	}
 
-	public Product validateProductExisted(String productName){
+	public boolean validateProductExisted(String productName){
+		flag = true;
 		try{
-			return isProductExisted(productName);
+			isProductExisted(productName);
 		}catch (IllegalArgumentException e){
-			return null;
+			flag = false;
 		}
+		return flag;
 	}
 
-	private Product isProductExisted(String productName) {
-		return products.getProductList().stream().filter(p -> p.getName().equalsIgnoreCase(productName)).findFirst()
-			.orElseThrow(ProductIsNotExistedException::new);
+	private void isProductExisted(String productName) {
+		if(!products.getProductList().stream().anyMatch(p -> p.getName().equalsIgnoreCase(productName))){
+			throw new ProductIsNotExistedException();
+		}
 	}
 }

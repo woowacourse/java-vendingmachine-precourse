@@ -5,19 +5,25 @@ import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.utils.Constant.*;
 
 import java.util.Arrays;
+import java.util.List;
 
+import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
 
 class ValidatorTest extends NsTest {
 
 	private Validator validator;
+	private Products products;
 
 	@BeforeEach
 	void beforeEach(){
 		validator = Validator.VALIDATOR;
+		products = Products.PRODUCTS;
 	}
 
 	@Test
@@ -106,6 +112,16 @@ class ValidatorTest extends NsTest {
 		String product = "[사이다,1000,삼]";
 		validator.validateProductInputFormat(product);
 		assertThat(output()).contains(PRODUCT_INPUT_FORMAT_EXCEPTION);
+	}
+
+	@Test
+	void 상품_존재여부_예외테스트(){
+		List<Product> productList = Lists.list(new Product("콜라", 1000, 10),
+			new Product("사이다", 800, 10));
+		productList.stream().forEach(s -> products.insertProduct(s));
+		validator.validateProductExisted("콜라라라");
+		assertThat(output()).contains(PRODUCT_IS_NOT_EXISTED_EXCEPTION_MESSAGE);
+
 	}
 
 

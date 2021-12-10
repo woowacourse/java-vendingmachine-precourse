@@ -9,19 +9,19 @@ import vendingmachine.domain.MachineClip;
 public enum Printer {
 	PRINTER;
 
-	public void printMachineAmountNotice(){
+	public void printMachineAmountNotice() {
 		System.out.println(INPUT_MACHINE_AMOUNT);
 	}
 
-	public void printProductsNotice(){
+	public void printProductsNotice() {
 		System.out.println(INPUT_PRODUCTS);
 	}
 
-	public void printCustomerAmountNotice(){
+	public void printCustomerAmountNotice() {
 		System.out.println(LINE_SEPARATOR + INPUT_CUSTOMER_AMOUNT);
 	}
 
-	public void printCustomerBuyProductNotice(){
+	public void printCustomerBuyProductNotice() {
 		System.out.println(INPUT_CUSTOMER_BUY_PRODUCT);
 	}
 
@@ -37,6 +37,8 @@ public enum Printer {
 	public void printCustomerChange(Map<Integer, Integer> amountToChanges) {
 		System.out.println(OUTPUT_CUSTOMER_CHANGE);
 		amountToChanges.keySet().stream()
-			.forEach(k -> System.out.printf(OUTPUT_CUSTOMER_NUN_OF_CHANGES + LINE_SEPARATOR, k, amountToChanges.get(k)));
+			.filter(k -> amountToChanges.get(k) != 0)
+			.forEach(
+				k -> System.out.printf(OUTPUT_CUSTOMER_NUN_OF_CHANGES + LINE_SEPARATOR, k, amountToChanges.get(k)));
 	}
 }
