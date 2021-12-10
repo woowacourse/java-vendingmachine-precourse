@@ -1,26 +1,21 @@
 package vendingmachine.controller;
 
-import static vendingmachine.constants.ProgramConstants.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.VendingMachineModel;
-import vendingmachine.resource.CoinStorage;
-import vendingmachine.view.VendingMachineInputView;
+import vendingmachine.validator.InputValidator;
 import vendingmachine.view.VendingMachineOutputView;
 
 public class VendingMachineController {
 	private final static VendingMachineController vendingMachineController = new VendingMachineController();
-	private final VendingMachineInputView vendingMachineInputView;
 	private final VendingMachineOutputView vendingMachineOutputView;
 	private final VendingMachineModel vendingMachineModel;
+	private final InputValidator inputValidator;
+
 
 	private VendingMachineController() {
-		vendingMachineInputView = VendingMachineInputView.getVendingMachineInputView();
 		vendingMachineOutputView = VendingMachineOutputView.getVendingMachineOutputView();
 		vendingMachineModel = VendingMachineModel.getVendingMachineModel();
+		inputValidator = InputValidator.getInputValidator();
 	}
 
 	public static VendingMachineController getVendingMachineController(){
@@ -28,10 +23,18 @@ public class VendingMachineController {
 	}
 
 	public void run(){
-		vendingMachineOutputView.printAmountInputMessage();
-		int amount = vendingMachineInputView.getInitialAmount();
-		vendingMachineModel.generateCoins(amount);
+		vendingMachineModel.generateCoins(getInitialAmount());
 		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
 		vendingMachineOutputView.printVendingMachineInitialCoins(vendingMachineModel.getNumberOfCoins());
+	}
+
+	private int getInitialAmount() {
+		String amount;
+		do {
+			vendingMachineOutputView.printAmountInputMessage();
+			amount = Console.readLine();
+		}
+		while (!inputValidator.checkInitialAmountInputExceptions(amount));
+		return Integer.parseInt(amount);
 	}
 }
