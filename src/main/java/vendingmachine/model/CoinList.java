@@ -4,6 +4,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.view.OutputView;
 
 // TODO: 2021/12/08 더 좋은 이름
 public class CoinList {
@@ -51,10 +52,10 @@ public class CoinList {
 
 	public String toString() {
 		return "\n자판기가 보유한 동전\n" +
-			Coin.COIN_500.getAmount() + "원 - " + hashMap.get(Coin.COIN_500) + "개\n" +
-			Coin.COIN_100.getAmount() + "원 - " + hashMap.get(Coin.COIN_100) + "개\n" +
-			Coin.COIN_50.getAmount() + "원 - " + hashMap.get(Coin.COIN_50) + "개\n" +
-			Coin.COIN_10.getAmount() + "원 - " + hashMap.get(Coin.COIN_10) + "개\n";
+			Coin.COIN_500.getAmount() + OutputView.MONETARY_UNIT + " - " + hashMap.get(Coin.COIN_500) + "개\n" +
+			Coin.COIN_100.getAmount() + OutputView.MONETARY_UNIT + " - " + hashMap.get(Coin.COIN_100) + "개\n" +
+			Coin.COIN_50.getAmount() + OutputView.MONETARY_UNIT + " - " + hashMap.get(Coin.COIN_50) + "개\n" +
+			Coin.COIN_10.getAmount() + OutputView.MONETARY_UNIT + " - " + hashMap.get(Coin.COIN_10) + "개\n";
 	}
 
 }
