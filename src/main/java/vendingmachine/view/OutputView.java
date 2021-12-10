@@ -60,7 +60,7 @@ public class OutputView {
 
 	public static void printInsertedMoney(VendingMachine vendingMachine) {
 		System.out.println(
-			NOTICE_INSERTED_MONEY + vendingMachine.getInsertMoney() + KOREAN_CURRENCY);
+			NOTICE_INSERTED_MONEY + vendingMachine.getRemain() + KOREAN_CURRENCY);
 	}
 
 	public static void askProductToBuy() {

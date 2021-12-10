@@ -6,7 +6,7 @@ public class Product {
 
 	private final String name;
 	private final int price;
-	private final int number;
+	private int number;
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int NUMBER_INDEX = 2;
@@ -26,6 +26,18 @@ public class Product {
 
 	public String getName() {
 		return name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getNumber() {
+		return number;
+	}
+
+	public void sellProduct() {
+		number--;
 	}
 
 	private String removeBrackets(String productInfo) {

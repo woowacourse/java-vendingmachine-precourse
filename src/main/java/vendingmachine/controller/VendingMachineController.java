@@ -1,5 +1,8 @@
 package vendingmachine.controller;
 
+import java.util.List;
+import java.util.stream.Collectors;
+import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.CoinCaseFactory;
 import vendingmachine.utils.ProductFactory;
@@ -13,7 +16,11 @@ public class VendingMachineController {
 	}
 
 	public static void controlVendingMachine() {
-		runVendingMachine(initVendingMachine());
+		VendingMachine vendingMachine = initVendingMachine();
+		while (!vendingMachine.isReturnChangeCondition()){
+			runVendingMachine(vendingMachine);
+		}
+		// 잔돈을 반환 받는다.
 	}
 
 	private static VendingMachine initVendingMachine() {
@@ -26,6 +33,7 @@ public class VendingMachineController {
 
 	private static void runVendingMachine(VendingMachine vendingMachine) {
 		OutputView.printInsertedMoney(vendingMachine);
-		InputView.writeProductNameToBuy(vendingMachine.getProducts());
+		String selectedProduct = InputView.writeProductNameToBuy(vendingMachine.getProducts());
+		vendingMachine.readyToSellProduct(selectedProduct);
 	}
 }
