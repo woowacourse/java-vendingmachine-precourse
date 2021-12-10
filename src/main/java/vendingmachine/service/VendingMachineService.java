@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import static vendingmachine.Constant.*;
+import static vendingmachine.ErrorMessage.*;
 
 import java.util.ArrayList;
 
@@ -27,10 +28,10 @@ public class VendingMachineService {
 
     public void putInitialAmount(int inputMoney) { //TODO 금액 검증 로직 만들었으니 그걸 사용하기.
         if (inputMoney < ZERO) {
-            throw new IllegalArgumentException("0 이상의 금액을 입력해주세요.");
+            throw new IllegalArgumentException(PRICE_RANGE_ERROR_MESSAGE);
         }
         if (inputMoney % MINIMUM_COIN_VALUE != 0) {
-            throw new IllegalArgumentException("해당 금액은 동전으로 만들 수 없는 단위의 숫자입니다.");
+            throw new IllegalArgumentException(PRICE_UNIT_ERROR_MESSAGE);
         }
         coinRepository = new CoinRepository(CoinGenerator.makeCoins(inputMoney));
         OutputView.showAllCoinsMachineHave(coinRepository);
@@ -44,14 +45,14 @@ public class VendingMachineService {
             productRepository.add(product);
         }
         if (productRepository.hasNoQuantity()) {
-            throw new IllegalArgumentException("자판기에는 최소 한 개의 물건은 들어가야 합니다.");
+            throw new IllegalArgumentException(VENDING_MACHINE_NO_INITIAL_ERROR_MESSAGE);
         }
     }
 
     public void putUserMoney(String userMoneyInput) {
         userMoney = new Price(userMoneyInput);
         if (productRepository.cantBuyBecauseOfNoMoney(userMoney)) {
-            throw new IllegalArgumentException("투입한 금액으로 살 수 있는 물건은 존재하지 않습니다.");
+            throw new IllegalArgumentException(MONEY_LACK_ERROR_MESSAGE);
         }
         OutputView.showUserMoney(userMoney);
     }
@@ -72,7 +73,7 @@ public class VendingMachineService {
 
     private void validateProductExist(String productName) {
         if (!productRepository.has(productName)) {
-            throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
+            throw new IllegalArgumentException(NO_PRODUCT_ERROR_MESSAGE);
         }
     }
 

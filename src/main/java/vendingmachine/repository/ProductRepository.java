@@ -1,5 +1,7 @@
 package vendingmachine.repository;
 
+import static vendingmachine.ErrorMessage.*;
+
 import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Price;
@@ -18,7 +20,7 @@ public class ProductRepository {
 
     private void validateAlreadyHave(Product product) {
         if (productRepository.containsKey(product.getName())) {
-            throw new IllegalArgumentException("같은 상품을 여러 번 입력할 수 없습니다.");
+            throw new IllegalArgumentException(HAVE_SAME_PRODUCT_ERROR_MESSAGE);
         }
     }
 
@@ -36,7 +38,7 @@ public class ProductRepository {
 
     private void validateWarehouseHaveStock(Product productUserWantBuying) {
         if (!productUserWantBuying.hasStock()) {
-            throw new IllegalArgumentException("해당 상품은 재고가 남아있지 않습니다.");
+            throw new IllegalArgumentException(NO_STOCK_ERROR_MESSAGE);
         }
         productUserWantBuying.takeOutInWarehouse();
     }
@@ -44,7 +46,7 @@ public class ProductRepository {
     private int validateUserHaveMoneyToBuy(Price userMoney, Product productUserWantBuying) {
         int priceUserWantBuying = productUserWantBuying.getPrice();
         if (userMoney.getPrice() < priceUserWantBuying) {
-            throw new IllegalArgumentException("남아있는 금액으로는 해당 제품을 구매할 수 없습니다.");
+            throw new IllegalArgumentException(MONEY_LACK_ERROR_MESSAGE);
         }
         return priceUserWantBuying;
     }
@@ -57,7 +59,7 @@ public class ProductRepository {
             .stream()
             .mapToInt(this::getPrice)
             .min()
-            .orElseThrow(() -> new IllegalArgumentException("최소값이 없습니다. 로직오류"));
+            .orElseThrow(() -> new IllegalArgumentException(LOGIC_ERROR_MESSAGE));
         return userPrice < cheapestPrice; //아무것도 살 수 없는 돈
     }
 

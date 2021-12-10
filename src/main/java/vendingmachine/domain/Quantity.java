@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.Constant.*;
+import static vendingmachine.ErrorMessage.*;
 
 public class Quantity {
     private int quantity;
@@ -17,13 +18,13 @@ public class Quantity {
 
     private void validateItIsPositive(int quantity) {
         if (quantity < ZERO) {
-            throw new IllegalArgumentException("상품의 수량은 0 이상이어야 합니다.");
+            throw new IllegalArgumentException(QUANTITY_RANGE_ERROR_MESSAGE);
         }
     }
 
     private int validateItIsNumber(String quantityInput) {
         if (!quantityInput.matches(NUMBER_REGEX)) {
-            throw new IllegalArgumentException("상품의 수량은 숫자여야 합니다.");
+            throw new IllegalArgumentException(QUANTITY_NOT_NUMBER_ERROR_MESSAGE);
         }
         return Integer.parseInt(quantityInput);
     }

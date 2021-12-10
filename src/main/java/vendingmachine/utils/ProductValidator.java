@@ -1,6 +1,7 @@
 package vendingmachine.utils;
 
 import static vendingmachine.Constant.*;
+import static vendingmachine.ErrorMessage.*;
 import static vendingmachine.utils.StringUtil.*;
 
 import vendingmachine.domain.Price;
@@ -17,7 +18,7 @@ public class ProductValidator {
 
     private static void validateInputIsEmpty(String productInfoInput) {
         if (isEmpty(productInfoInput)) {
-            throw new IllegalArgumentException("공백은 입력될 수 없습니다.");
+            throw new IllegalArgumentException(NO_BLANK_ERROR_MESSAGE);
         }
     }
 
@@ -31,7 +32,7 @@ public class ProductValidator {
 
     private static void validateInputWrapBracket(StringBuffer sb) {
         if (!((sb.charAt(0) == INPUT_WRAP_START) && (sb.charAt(sb.length() - 1) == INPUT_WRAP_END))) {
-            throw new IllegalArgumentException("상품의 상태는 []로 감싸져야 합니다.");
+            throw new IllegalArgumentException(NO_WRAP_ERROR_MESSAGE);
         }
     }
 
@@ -46,13 +47,13 @@ public class ProductValidator {
 
     private static void validateInfoCnt(String[] split) {
         if (split.length != PRODUCT_INFO_CNT) {
-            throw new IllegalArgumentException("상품명, 가격, 수량이 제대로 입력되지 않았습니다.");
+            throw new IllegalArgumentException(INVALID_PRODUCT_INFO_CNT_ERROR_MESSAGE);
         }
     }
 
     private static String validateProductName(String productName) {
         if (isEmpty(productName)) {
-            throw new IllegalArgumentException("이름이 제대로 입력되지 않은 상품이 있습니다.");
+            throw new IllegalArgumentException(NAME_EMPTY_ERROR_MESSAGE);
         }
         return productName;
     }

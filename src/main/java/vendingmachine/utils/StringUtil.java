@@ -1,6 +1,7 @@
 package vendingmachine.utils;
 
 import static vendingmachine.Constant.*;
+import static vendingmachine.ErrorMessage.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +16,7 @@ public class StringUtil {
         if (inputInitialAmount.matches(NUMBER_REGEX)) {
             return Integer.parseInt(inputInitialAmount);
         }
-        throw new IllegalArgumentException("숫자를 입력해주세요.");
+        throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
     }
 
     public static ArrayList<String> splitUsingSemiColon(String inputProductsInfo) {

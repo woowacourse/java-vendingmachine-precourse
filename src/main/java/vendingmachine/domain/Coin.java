@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.ErrorMessage.*;
+
 import java.util.Arrays;
 
 public enum Coin {
@@ -21,7 +23,7 @@ public enum Coin {
     public static Coin valueOf(int amount) {
         return Arrays.stream(Coin.values())
             .filter(coin -> coin.getAmount() == amount)
-            .findAny().orElseThrow(() -> new IllegalArgumentException("존재하지 않는 동전입니다."));
+            .findAny().orElseThrow(() -> new IllegalArgumentException(LOGIC_ERROR_MESSAGE));
     }
 
 }
