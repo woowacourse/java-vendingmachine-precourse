@@ -29,18 +29,18 @@ public class Product {
         productCount.replace(name, count);
     }
 
-    public int getPrice(String name){
+    public int getPrice(String name) {
         return productPrice.get(name);
     }
 
-    public int getCount(String name){
+    public int getCount(String name) {
         return productCount.get(name);
     }
 
-    public void setMinPrice(){
+    public void setMinPrice() {
         minPrice = Integer.MAX_VALUE;
         for (Integer price : productPrice.values()) {
-            if (minPrice > price){
+            if (minPrice > price) {
                 minPrice = price;
             }
         }
@@ -50,7 +50,7 @@ public class Product {
         return minPrice;
     }
 
-    public void setSumCount(){
+    public void setSumCount() {
         sumCount = 0;
         for (Integer count : productCount.values()) {
             sumCount += count;
@@ -61,8 +61,8 @@ public class Product {
         return sumCount;
     }
 
-    public boolean hasInProduct(String name){
-        if (productPrice.keySet().contains(name)){
+    public boolean hasInProduct(String name) {
+        if (productPrice.keySet().contains(name)) {
             return true;
         }
         return false;

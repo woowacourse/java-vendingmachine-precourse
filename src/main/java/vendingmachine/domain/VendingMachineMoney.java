@@ -51,17 +51,17 @@ public class VendingMachineMoney {
         this.moneyCount10 = moneyCount10;
     }
 
-    public void coinUpdate(int price){
-        if (price == 500){
+    public void coinUpdate(int price) {
+        if (price == 500) {
             moneyCount500 += 1;
         }
-        if (price == 100){
+        if (price == 100) {
             moneyCount100 += 1;
         }
-        if (price == 50){
+        if (price == 50) {
             moneyCount50 += 1;
         }
-        if (price == 10){
+        if (price == 10) {
             moneyCount10 += 1;
         }
     }

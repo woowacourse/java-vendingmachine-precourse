@@ -13,7 +13,7 @@ public class MainController {
         product = new Product();
     }
 
-    public void playGame(){
+    public void playGame() {
         playInputVendingMachine();
         CoinController.makeCoin(vendingMachineMoney);
         Output.printVendingMachineCoin(vendingMachineMoney);
@@ -22,7 +22,7 @@ public class MainController {
         playInputMoney();
     }
 
-    private void playInputVendingMachine(){
+    private void playInputVendingMachine() {
         int vendingMachineChange = 0;
         while (true) {
             String inputMoney = Input.InputVendingMachineChange();
@@ -32,14 +32,14 @@ public class MainController {
                 vendingMachineChange = Integer.parseInt(inputMoney);
                 vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
                 return;
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
     private void playInputProduct() {
-        while (true){
+        while (true) {
             String productInfo = Input.InputProductInfo();
             try {
                 ValidationController.productValidation(productInfo);
@@ -48,20 +48,20 @@ public class MainController {
                 ValidationController.quantityValidation(productInfo);
                 ProductController.saveProduct(product, productInfo);
                 return;
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
     private void playInputMoney() {
-        while (true){
+        while (true) {
             String inputMoney = Input.InputMoney();
             try {
                 ValidationController.vendingMachineValidation(inputMoney);
                 PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
                 return;
-            }catch (IllegalArgumentException e) {
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }

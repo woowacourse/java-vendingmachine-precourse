@@ -14,14 +14,14 @@ public class ValidationController {
 
     private static void divided10Validation(String input) {
         int checkNum = Integer.parseInt(input);
-        if (checkNum % 10 != 0){
+        if (checkNum % 10 != 0) {
             throw new IllegalArgumentException("[ERROR] 10으로 나눠지지 않습니다.");
         }
     }
 
     private static void positiveIntegerValidation(String input) {
         int checkNum = Integer.parseInt(input);
-        if (checkNum <= 0){
+        if (checkNum <= 0) {
             throw new IllegalArgumentException("[ERROR] 양의 정수가 아닙니다.");
         }
     }
@@ -43,14 +43,14 @@ public class ValidationController {
     }
 
     private static void removeBrackets(String[] productData) {
-        for (int i = 0; i<productData.length; i++){
-            productData[i] = productData[i].substring(1, productData[i].length()-1);
+        for (int i = 0; i < productData.length; i++) {
+            productData[i] = productData[i].substring(1, productData[i].length() - 1);
         }
     }
 
     private static void commaValidation(String[] productData) {
         for (String productDatum : productData) {
-            if (countChar(productDatum, ',') != 2){
+            if (countChar(productDatum, ',') != 2) {
                 throw new IllegalArgumentException("[ERROR] 두 개의 콤마가 아닙니다.");
             }
         }
@@ -70,7 +70,7 @@ public class ValidationController {
 
     private static void bracketsValidation(String[] productData) {
         for (String productDatum : productData) {
-            if (!(productDatum.charAt(0) == '[' && productDatum.charAt(productDatum.length()-1) == ']')){
+            if (!(productDatum.charAt(0) == '[' && productDatum.charAt(productDatum.length() - 1) == ']')) {
                 throw new IllegalArgumentException("[ERROR] 양 끝이 대괄호가 아닙니다.");
             }
         }
@@ -79,7 +79,7 @@ public class ValidationController {
     private static void blankValidation(String[] productData) {
         for (String productDatum : productData) {
             String[] splitData = productDatum.split(",");
-            if (splitData.length != 3){
+            if (splitData.length != 3) {
                 throw new IllegalArgumentException("[ERROR] 잘못된 구조의 입력입니다.");
             }
         }
@@ -91,10 +91,10 @@ public class ValidationController {
 
         for (String productDatum : productData) {
             String[] productSplitData = productDatum.split(",");
-            checkProductName.add(productSplitData[0].substring(1,productSplitData[0].length()));
+            checkProductName.add(productSplitData[0].substring(1, productSplitData[0].length()));
         }
 
-        if (productData.length != checkProductName.size()){
+        if (productData.length != checkProductName.size()) {
             throw new IllegalArgumentException("[ERROR] 중복된 상품명 입력이 있습니다.");
         }
     }
@@ -113,7 +113,7 @@ public class ValidationController {
 
     private static void under100Validation(String input) {
         int checkNum = Integer.parseInt(input);
-        if (checkNum < 100){
+        if (checkNum < 100) {
             throw new IllegalArgumentException("[ERROR] 100 미만의 수 입니다.");
         }
     }
@@ -123,14 +123,14 @@ public class ValidationController {
 
         for (String productDatum : productData) {
             String[] productSplitData = productDatum.split(",");
-            String checkStr = productSplitData[2].substring(0, productSplitData[2].length()-1);
+            String checkStr = productSplitData[2].substring(0, productSplitData[2].length() - 1);
             isNumValidation(checkStr);
             positiveIntegerValidation(checkStr);
         }
     }
 
     public static void purchaseValidation(Product product, String productName) {
-        if (!product.hasInProduct(productName)){
+        if (!product.hasInProduct(productName)) {
             throw new IllegalArgumentException("[ERROR] 없는 상품명입니다.");
         }
     }
