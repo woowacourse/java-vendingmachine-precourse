@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE;
+
 public class VendingMachine {
     private Coins coinBalance;
     private Items items;
@@ -21,5 +23,11 @@ public class VendingMachine {
 
     public int showAvailableMoney() {
         return moneyAvailable;
+    }
+
+    public void purchaseItem(String inputItemsToPurchase) {
+        if (!items.isOnItemList(inputItemsToPurchase)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE);
+        }
     }
 }

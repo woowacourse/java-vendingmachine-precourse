@@ -14,4 +14,12 @@ class ItemsTest {
 
         Assertions.assertThat(items.countItems(item)).isEqualTo(quantity);
     }
+
+    @Test
+    void 목록에_있는_상품인지_아닌지_구별_가능() {
+        Items items = new Items();
+        String notExistItemName = "GHOST";
+
+        Assertions.assertThat(items.isOnItemList(notExistItemName)).isFalse();
+    }
 }
