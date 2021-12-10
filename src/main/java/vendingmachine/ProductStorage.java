@@ -68,11 +68,12 @@ public class ProductStorage {
 	}
 
 	public boolean isSellable(int money) {
-		boolean sellable = false;
 		for (Product each : storage.values()) {
-			sellable = each.isPurchasable(money);
+			if (each.isPurchasable(money)) {
+				return true;
+			}
 		}
-		return sellable;
+		return false;
 	}
 
 	public int sellProduct(String name) {
