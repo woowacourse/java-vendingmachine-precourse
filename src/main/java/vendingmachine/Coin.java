@@ -12,8 +12,9 @@ public enum Coin {
 
     private final int amount;
 
-    public static List<Integer> coinAmountList = Arrays.stream(Coin.values())
+    public static final List<Integer> coinAmountList = Arrays.stream(Coin.values())
                                                         .map(Coin::getAmount)
+                                                        .sorted(Comparator.reverseOrder())
                                                         .collect(Collectors.toList());
 
     public static final Map<Integer, String> AmountMap = Collections.unmodifiableMap(
