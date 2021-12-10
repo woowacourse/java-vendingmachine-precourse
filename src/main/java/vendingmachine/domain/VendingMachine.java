@@ -5,6 +5,7 @@ import vendingmachine.Coin;
 import vendingmachine.constants.CoinConstants;
 import vendingmachine.view.InputView;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,11 +35,23 @@ public class VendingMachine {
         this.moneyLeft = moneyInput;
     }
 
+    public void sellMerchandise() {
+        String name = InputView.getMerchandiseNameInput(moneyLeft);
+
+        List<Integer> info = merchandiseInfo.get(name);
+        int price = info.get(0);
+        int number = info.get(1);
+
+        moneyLeft -= price;
+
+        merchandiseInfo.put(name, Arrays.asList(price, number-1));
+    }
+
     private void generateCoins(int totalMoney) {
         while (totalMoney > 0) {
             int randomCoin = Randoms.pickNumberInList(CoinConstants.getCoinValues());
             if (totalMoney >= randomCoin) {
-                coins.put(randomCoin, coins.get(randomCoin)+1);
+                coins.put(randomCoin, coins.get(randomCoin) + 1);
                 totalMoney -= randomCoin;
             }
         }

@@ -37,4 +37,12 @@ public class InputView {
         String input = Console.readLine();
         return Integer.parseInt(input);
     }
+
+    public static String getMerchandiseNameInput(int moneyLeft) {
+        String message = "\n투입 금액: " + moneyLeft + "원\n" +
+                "구매할 상품명을 입력해 주세요.";
+        System.out.println(message);
+
+        return Console.readLine();
+    }
 }
