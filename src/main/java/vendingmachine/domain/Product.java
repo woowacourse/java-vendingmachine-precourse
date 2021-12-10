@@ -1,15 +1,33 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.ExceptionMessages;
+
 public class Product {
 
-    private final String merchandiseName;
-    private final int price;
-    private final int numberOfProducts;
+    public static final int BASED_PRICE = 100;
 
-    public Product(final String merchandiseName, final int price, final int numberOfProducts) {
-        this.merchandiseName = merchandiseName;
+    private final String name;
+    private final int price;
+    private final int count;
+
+    public Product(final String name, final int price, final int count) {
+        validateProduct(price);
+        this.name = name;
         this.price = price;
-        this.numberOfProducts = numberOfProducts;
+        this.count = count;
     }
 
+    protected void validateProduct(final int price) {
+        validatePrice(price);
+    }
+
+    protected void validatePrice(final int price) {
+        if (!isFollowingPriceRule(price)) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_PRICE_FORMAT.getErrorMessage());
+        }
+    }
+
+    protected boolean isFollowingPriceRule(final int price) {
+        return (price > BASED_PRICE) && ((price % 10) == 0);
+    }
 }
