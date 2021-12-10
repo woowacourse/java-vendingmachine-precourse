@@ -10,6 +10,8 @@ import camp.nextstep.edu.missionutils.Randoms;
  * @since 1.0
  */
 public class Cashier {
+	private static final int MIN_AMOUNT = 10;
+
 	private int insertAmount;
 
 	public Cashier(int holdingAmount) {
@@ -38,7 +40,7 @@ public class Cashier {
 			if (count > 0) {
 				payMoney(coin.take(count));
 			}
-			if (insertAmount < 10) {
+			if (!isInsertAmountEnough(MIN_AMOUNT)) {
 				break;
 			}
 		}
