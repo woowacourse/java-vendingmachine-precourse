@@ -17,6 +17,7 @@ public class MachineController {
     public void run() {
         initMachine();
         useMachine();
+        endMachine();
     }
 
     private void initMachine() {
@@ -109,5 +110,9 @@ public class MachineController {
                 productName = Console.readLine();
             }
         }
+    }
+
+    private void endMachine() {
+        OutputView.printChanges(vendingMachine.getChanges());
     }
 }

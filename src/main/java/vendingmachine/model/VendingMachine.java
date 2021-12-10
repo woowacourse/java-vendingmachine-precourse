@@ -4,6 +4,7 @@ import vendingmachine.util.RandomNumberGenerator;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -66,9 +67,30 @@ public class VendingMachine {
         }
         userInsertAmount -= products.reduceQuantity(product);
     }
-    
+
+    public void calculateChanges(Map<Coin, Integer> changes) {
+        coins.keySet().forEach(coin -> {
+            int count = 0;
+            while (coin.getAmount() <= userInsertAmount && coins.getOrDefault(coin, 0) > 0) {
+                coins.merge(coin, -1, Integer::sum);
+                userInsertAmount -= coin.getAmount();
+                count++;
+            }
+            if (count > 0) {
+                changes.put(coin, count);
+            }
+        });
+    }
+
     public Map<Coin, Integer> getCoins() {
         return coins;
+    }
+
+    public Map<Coin, Integer> getChanges() {
+        Map<Coin, Integer> changes = new TreeMap<>();
+        calculateChanges(changes);
+
+        return changes;
     }
 
     public int getUserInsertAmount() {

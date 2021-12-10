@@ -7,6 +7,7 @@ import java.util.Map;
 public class OutputView {
     private static final String REMAINING_COINS_MESSAGE = "자판기가 보유한 동전";
     private static final String INSERT_AMOUNT_MESSAGE = "투입 금액: ";
+    private static final String CHANGES_MESSAGE = "잔돈";
     private static final String NEW_LINE = "\n";
     private static final String DASH = " - ";
     private static final String PRICE_MESSAGE = "원";
@@ -26,5 +27,13 @@ public class OutputView {
 
     public static void printErrorMessage(IllegalArgumentException e) {
         System.out.println(e.getMessage());
+    }
+
+    public static void printChanges(Map<Coin, Integer> changes) {
+        System.out.println(CHANGES_MESSAGE);
+        for (Coin change : changes.keySet()) {
+            System.out.println(change.getAmount() + PRICE_MESSAGE + DASH + changes.get(change) + NUMBER_OF_MESSAGE);
+        }
+        System.out.println();
     }
 }
