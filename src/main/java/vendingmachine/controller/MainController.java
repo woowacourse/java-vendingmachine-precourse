@@ -19,8 +19,7 @@ public class MainController {
         Output.printVendingMachineCoin(vendingMachineMoney);
 
         playInputProduct();
-        String inputMoney = Input.InputMoney();
-        PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
+        playInputMoney();
     }
 
     private void playInputVendingMachine(){
@@ -48,6 +47,19 @@ public class MainController {
                 ValidationController.productAmountValidation(productInfo);
                 ValidationController.quantityValidation(productInfo);
                 ProductController.saveProduct(product, productInfo);
+                return;
+            }catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void playInputMoney() {
+        while (true){
+            String inputMoney = Input.InputMoney();
+            try {
+                ValidationController.vendingMachineValidation(inputMoney);
+                PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
                 return;
             }catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
