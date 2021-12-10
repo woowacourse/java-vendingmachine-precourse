@@ -16,6 +16,22 @@ public enum Coin {
         this.amount = amount;
     }
 
+    public static Coin create(int amount) {
+        if (amount == COIN_500.getAmount()) {
+            return COIN_500;
+        }
+
+        if (amount == COIN_100.getAmount()) {
+            return COIN_100;
+        }
+
+        if (amount == COIN_50.getAmount()) {
+            return COIN_50;
+        }
+
+        return COIN_10;
+    }
+
     public int getAmount() {
         return amount;
     }
