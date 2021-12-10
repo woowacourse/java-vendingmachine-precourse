@@ -27,7 +27,7 @@ public class ItemManager {
 		return items.containsKey(name);
 	}
 
-	public Item findItemByName(String name) {
-		return items.get(name);
+	public void sellItem(String name) {
+		items.get(name).takeOne();
 	}
 }

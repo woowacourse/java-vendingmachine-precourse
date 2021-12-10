@@ -31,7 +31,7 @@ public class Machine {
 		prepareInsertAmount();
 		display.printInsertAmount(cashier);
 		// while (cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
-			askWhatToBuy();
+			itemManager.sellItem(askWhatToBuy());
 		// }
 		// TODO: 잔돈 반환
 	}
@@ -83,9 +83,9 @@ public class Machine {
 		}
 	}
 
-	private Item askWhatToBuy() {
+	private String askWhatToBuy() {
 		display.askWhatToBuy();
-		try{
+		try {
 			return validator.validateBuyingItem(Console.readLine(), itemManager);
 		} catch (IllegalArgumentException e) {
 			display.printError(e);

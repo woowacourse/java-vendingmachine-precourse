@@ -62,9 +62,9 @@ public class Validator {
 		return count;
 	}
 
-	public Item validateBuyingItem(String name, ItemManager itemManager) {
+	public String validateBuyingItem(String name, ItemManager itemManager) {
 		if(itemManager.hasItem(name)) {
-			return itemManager.findItemByName(name);
+			return name;
 		}
 		throw new IllegalArgumentException(NO_SUCH_ITEM_ERROR);
 	}
