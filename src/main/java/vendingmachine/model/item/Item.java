@@ -1,7 +1,6 @@
 package vendingmachine.model.item;
 
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_BRACKET_EXCEPTION_MESSAGE;
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE;
+import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_FORMAT_EXCEPTION_MESSAGE;
 
 import java.util.Objects;
 
@@ -31,7 +30,7 @@ public class Item {
         String firstLetter = String.valueOf(itemInfo.charAt(0));
         String lastLetter = String.valueOf(itemInfo.charAt(itemInfo.length() - 1));
         if (!firstLetter.equals(LEFT_BRACKET) || !lastLetter.equals(RIGHT_BRACKET)) {
-            throw new IllegalArgumentException(ITEM_INFO_BRACKET_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ITEM_INFO_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 
@@ -43,7 +42,7 @@ public class Item {
 
     private void validateNumberOfInfo(final String[] itemProperties) {
         if (itemProperties.length != NUMBER_OF_ITEM_PROPERTIES) {
-            throw new IllegalArgumentException(ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE);
+            throw new IllegalArgumentException(ITEM_INFO_FORMAT_EXCEPTION_MESSAGE);
         }
     }
 

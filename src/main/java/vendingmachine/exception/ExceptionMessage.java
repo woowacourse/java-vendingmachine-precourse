@@ -17,8 +17,7 @@ public class ExceptionMessage {
     public static final String NOT_MULTIPLE_OF_TEN_PRICE_EXCEPTION_MESSAGE = "상품 가격의 최소 단위는 10원입니다.";
 
     // Location : model/item/Item
-    public static final String ITEM_INFO_BRACKET_EXCEPTION_MESSAGE = "상품 정보를 [ ] 괄호에 담아 입력하셔야 합니다.";
-    public static final String ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE = "상품에 대한 정보가 불충분 합니다. [상품명, 가격, 수량]";
+    public static final String ITEM_INFO_FORMAT_EXCEPTION_MESSAGE = "상품 정보가 잘못되었습니다. Format : [상품명,가격,수량]";
 
     // Location : model/item/Items
     public static final String WRONG_ITEM_DELIMITER_EXCEPTION_MESSAGE = "상품을 구분하는 구분자(;) 앞 뒤에 상품 정보가 없습니다.";

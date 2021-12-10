@@ -2,8 +2,7 @@ package vendingmachine.model.item;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_BRACKET_EXCEPTION_MESSAGE;
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE;
+import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_FORMAT_EXCEPTION_MESSAGE;
 
 import java.util.stream.Stream;
 
@@ -38,7 +37,7 @@ class ItemTest {
     @ValueSource(strings = {"물, 1000, 3", "[물, 1000, 3", "물, 1000, 3]"})
     void evokeExceptionByWrongBracket(final String wrongBracketItemInfo) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Item(wrongBracketItemInfo))
-                .withMessage(ITEM_INFO_BRACKET_EXCEPTION_MESSAGE);
+                .withMessage(ITEM_INFO_FORMAT_EXCEPTION_MESSAGE);
     }
 
     @ParameterizedTest
@@ -46,6 +45,6 @@ class ItemTest {
     @ValueSource(strings = {"[물]", "[물, 1000]"})
     void evokeExceptionByNotEnoughItemInfo(final String notEnoughItemInfo) {
         assertThatIllegalArgumentException().isThrownBy(() -> new Item(notEnoughItemInfo))
-                .withMessage(ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE);
+                .withMessage(ITEM_INFO_FORMAT_EXCEPTION_MESSAGE);
     }
 }
