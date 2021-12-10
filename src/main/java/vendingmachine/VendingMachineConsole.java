@@ -7,12 +7,35 @@ import vendingmachine.dto.request.ItemsInventoryRequest;
 import vendingmachine.dto.response.CurrentBalanceResponse;
 
 public class VendingMachineConsole {
+
     public int inputCurrentBalance() {
-        return new CurrentBalanceRequest(input()).toCurrentBalance();
+        int initialCurrentBalance = 0;
+        int currentBalance = initialCurrentBalance;
+        boolean isInputEntered = false;
+        while (!isInputEntered) {
+            try {
+                currentBalance = new CurrentBalanceRequest(input()).toCurrentBalance();
+                isInputEntered = true;
+            } catch (IllegalArgumentException error) {
+                System.out.println(error.getMessage());
+            }
+        }
+        return currentBalance;
     }
 
+
     public ItemsInventoryInfo inputItemInventoryInfo() {
-        return new ItemsInventoryRequest(input()).toItemsInventoryInfo();
+        ItemsInventoryInfo itemInventoryInfo = new ItemsInventoryInfo();
+        boolean isItemsInventoryInfoEntered = false;
+        while (!isItemsInventoryInfoEntered) {
+            try {
+                itemInventoryInfo = new ItemsInventoryRequest(input()).toItemsInventoryInfo();
+                isItemsInventoryInfoEntered = true;
+            } catch (IllegalArgumentException error) {
+                System.out.println(error.getMessage());
+            }
+        }
+        return itemInventoryInfo;
     }
 
     public void printCurrentBalance(Coins currentBalance) {
