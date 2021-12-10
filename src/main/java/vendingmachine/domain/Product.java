@@ -10,4 +10,17 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void subQuantity() {
+        this.quantity -= 1;
+        System.out.println(this.quantity);
+    }
 }

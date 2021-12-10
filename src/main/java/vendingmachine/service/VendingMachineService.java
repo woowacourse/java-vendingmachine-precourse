@@ -2,7 +2,9 @@ package vendingmachine.service;
 
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.repository.VendingMachineRepository;
 import vendingmachine.utils.Message;
 import vendingmachine.utils.Validation;
 import vendingmachine.view.InputView;
@@ -14,19 +16,23 @@ import java.util.stream.Collectors;
 
 public class VendingMachineService {
 
-    private final Validation validation;
+    private final VendingMachineValidation vendingMachineValidation;
+    private final VendingMachineRepository vendingMachineRepository;
     private VendingMachine vendingMachine;
 
     public VendingMachineService() {
-        this.validation = new Validation();
+        this.vendingMachineValidation = new VendingMachineValidation();
+        setVendingMachine();
+        this.vendingMachineRepository = new VendingMachineRepository(this.vendingMachine);
     }
 
     public void setVendingMachine(){
-        int amount = amountValidation();
+        int amount = vendingMachineValidation.changeValidation();
         int[] coins = makeRandomCoins(amount);
         OutputView.printVendingMachineCoins(coins);
-        List<String> products = productValidation();
-        this.vendingMachine = new VendingMachine(coins,products);
+
+        List<String> products = vendingMachineValidation.productValidation();
+        this.vendingMachine = new VendingMachine(amount,coins,products);
     }
 
     private int[] makeRandomCoins(int amount){
@@ -44,34 +50,23 @@ public class VendingMachineService {
 
 
 
-    private int amountValidation(){
-        while(true){
-            System.out.println(Message.VENDINGMACHINE_INPUT);
-            String input = InputView.input();
+    public void start(){
+        int amount = vendingMachineValidation.inputAmountValidation();
+        while(amount > 0){
             try{
-                validation.vendingMachinePriceValidation(input);
-                return Integer.valueOf(input);
-            }catch (IllegalArgumentException e) {
+                System.out.println("투입금액 : " + amount);
+                System.out.println("구매할 상품명을 입력하세요");
+                String order = InputView.input();
+                amount = buyProduct(amount, order);
+            }catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
         }
     }
 
-
-    public List<String> productValidation(){
-        while(true){
-            System.out.println(Message.PRODUCTS_INPUT);
-            String input = InputView.input();
-            try{
-                validation.productPriceValidation(input);
-                return Arrays.stream(input.split(";"))
-                        .map(product -> product.replaceAll("[\\[\\]]",""))
-                        .flatMap(product->Arrays.stream(product.split(",")))
-                        .collect(Collectors.toList());
-            }catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+    public int buyProduct(int amount, String name){
+        Product product = vendingMachineRepository.findByName(name);
+        return vendingMachine.buy(amount,product);
     }
 
 }

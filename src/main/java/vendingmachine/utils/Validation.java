@@ -1,5 +1,8 @@
 package vendingmachine.utils;
 
+import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachine;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -84,4 +87,13 @@ public class Validation {
         }
     }
 
+    public void orderValidation(VendingMachine vendingMachine,String order) {
+        boolean isPresent = vendingMachine.getProducts().stream()
+                .map(Product::getName)
+                .collect(Collectors.toList())
+                .contains(order);
+        if (!isPresent){
+            throw new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT);
+        }
+    }
 }

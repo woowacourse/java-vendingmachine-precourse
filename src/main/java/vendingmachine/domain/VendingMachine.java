@@ -7,12 +7,26 @@ import java.util.stream.Collectors;
 
 
 public class VendingMachine {
+    private int change;
+    private int amount;
     private List<Integer> coins;
     private List<Product> products;
 
-    public VendingMachine(int[] coinList, List<String> productList){
+    public VendingMachine(int change, int[] coinList, List<String> productList){
+        this.change = change;
         this.coins = setCoins(coinList);
         this.products = setProducts(productList);
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public int buy(int amount, Product product){
+        this.amount = amount;
+        this.amount -= product.getPrice();
+        product.subQuantity();
+        return this.amount;
     }
 
     private List<Integer> setCoins(int[] coinList){
@@ -30,7 +44,6 @@ public class VendingMachine {
             Product product = new Product(name,price,quantity);
             products.add(product);
         }
-        System.out.println(products);
         return products;
     }
 

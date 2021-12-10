@@ -9,8 +9,8 @@ public class VendingMachineController {
         this.vendingMachineService = new VendingMachineService();
     }
 
-    public void setVendingMachine(){
-        vendingMachineService.setVendingMachine();
+    public void start(){
+        vendingMachineService.start();
     }
 
 }
