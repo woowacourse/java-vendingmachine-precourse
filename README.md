@@ -54,10 +54,12 @@ vendingmachine
 
   - model
     - Coin
+    - CoinCase
     - Product
     - VendingMachine
     
   - utils
+    - CoinCaseFactory
     - ExceptionUtils
     - ProductFactory
     - VendingMachineFactory
