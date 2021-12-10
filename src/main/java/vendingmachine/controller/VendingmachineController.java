@@ -1,20 +1,25 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.Vendingmachine;
-import vendingmachine.view.HoldingSumInputView;
+import vendingmachine.view.HoldingSumView;
+import vendingmachine.view.StockView;
 
 public class VendingmachineController {
 
 	Vendingmachine vendingmachine;
-	HoldingSumInputView holdingSumInputView;
+	HoldingSumView holdingSumView;
+	StockView stockView;
 
 	public VendingmachineController() {
 		vendingmachine = new Vendingmachine();
-		holdingSumInputView = new HoldingSumInputView();
+		holdingSumView = new HoldingSumView();
+		stockView = new StockView();
 	}
 
 	public void operate() {
-		vendingmachine.setHoldingSum(holdingSumInputView.getInput());
-		holdingSumInputView.print(vendingmachine.getHoldingSum());
+		vendingmachine.setHoldingSum(holdingSumView.getInput());
+		holdingSumView.print(vendingmachine.getHoldingSum());
+
+		vendingmachine.setStock(stockView.getInput());
 	}
 }

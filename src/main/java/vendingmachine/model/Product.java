@@ -1,0 +1,32 @@
+package vendingmachine.model;
+
+import java.util.Arrays;
+import java.util.List;
+
+import vendingmachine.constant.Rule;
+
+public class Product {
+
+	private Name name;
+	private Price price;
+	private Number number;
+
+	public Product() {
+		name = new Name();
+		price = new Price();
+		number = new Number();
+	}
+
+	public void set(String input) {
+		checkInput(input);
+		input = input.substring(1, input.length() - 1);
+		List<String> productInfo = Arrays.asList(input.split(Rule.DELIMETER_PRODUCT_INFO));
+		name.set(productInfo.get(0));
+		price.set(productInfo.get(1));
+		number.set(productInfo.get(2));
+	}
+
+	private void checkInput(String input) {
+
+	}
+}

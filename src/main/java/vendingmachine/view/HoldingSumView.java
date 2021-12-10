@@ -5,7 +5,7 @@ import vendingmachine.constant.Message;
 import vendingmachine.model.Coin;
 import vendingmachine.model.HoldingSum;
 
-public class HoldingSumInputView {
+public class HoldingSumView {
 
 	public HoldingSum getInput() {
 		System.out.println(Message.INPUT_MESSAGE_HOlDING_SUM);
