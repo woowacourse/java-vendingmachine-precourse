@@ -1,4 +1,4 @@
-package vendingmachine.model.money;
+package vendingmachine.model.vo;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
