@@ -52,8 +52,7 @@ public class VendingMachineController {
         OutputView.showUserMoney(userMoney);
     }
 
-    public boolean sellProduct() {
-        String productName = InputView.inputBuyingProduct();
+    public boolean sellProduct(String productName) {
         if (!productRepository.has(productName)) {
             throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
         }

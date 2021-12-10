@@ -22,7 +22,8 @@ public class VendingMachine {
             String userMoneyInput = InputView.inputUserMoney();
             vendingMachineController.putUserMoney(userMoneyInput);
             while (isOperate) {
-                isOperate = vendingMachineController.sellProduct();
+                String productName = InputView.inputBuyingProduct();
+                isOperate = vendingMachineController.sellProduct(productName);
             }
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
