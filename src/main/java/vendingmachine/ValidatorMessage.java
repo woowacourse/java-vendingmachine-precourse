@@ -18,8 +18,10 @@ public class ValidatorMessage {
     public static final String PRODUCT_INFO_INVALID_MESSAGE = "상품 정보를 올바른 형식으로 입력해주세요.";
     public static final String PRODUCT_MIN_PRICE_MESSAGE = "상품 금액은 100원 이상이어야 합니다.";
     public static final String PRODUCT_PRICE_TENFOLD_MESSAGE = "상품 금액은 10의 배수여야 합니다.";
-    public static final String PRODUCT_PRICE_NUMBER_MESSAGE="상품 가격은 숫자여야 합니다.";
-    public static final String PRODUCT_COUNTS_NUMBER_MESSAGE="상품 수량은 자연수여야 합니다.";
+    public static final String PRODUCT_PRICE_NUMBER_MESSAGE = "상품 가격은 숫자여야 합니다.";
+    public static final String PRODUCT_COUNTS_NUMBER_MESSAGE = "상품 수량은 자연수여야 합니다.";
+
+    public static final String INPUT_MONEY_NATURAL_NUMBER_MESSAGE = "투입 금액을 넣지 않으셨습니다. 0원보다 크게 입력해주세요.";
 
     public static void printError(String errorMessage) {
         System.out.println(errorMessage);

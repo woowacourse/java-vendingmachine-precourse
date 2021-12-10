@@ -1,0 +1,16 @@
+package vendingmachine.machine;
+
+import vendingmachine.ValidatorMessage;
+
+public class MachineValidator {
+    public static final String PREFIX = ValidatorMessage.ERROR_MESSAGE;
+
+    public static void validateAmountNaturalNumber(String money) {
+        if (money.matches(ValidatorMessage.NUMBER_REGEX)) {
+            throw new IllegalArgumentException(ValidatorMessage.IS_NUMBER_MESSAGE);
+        }
+        if (Integer.parseInt(money) <= 0) {
+            throw new IllegalArgumentException(ValidatorMessage.INPUT_MONEY_NATURAL_NUMBER_MESSAGE);
+        }
+    }
+}
