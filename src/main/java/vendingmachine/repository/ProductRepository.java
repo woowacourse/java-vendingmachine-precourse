@@ -8,6 +8,9 @@ import vendingmachine.domain.Product;
 public class ProductRepository {
     LinkedHashMap<String, Product> productRepository = new LinkedHashMap<>(); // String key는 상품의 이름이다.
 
+    public void clear() {
+        productRepository.clear();
+    }
     public void add(Product product) {
         validateAlreadyHave(product);
         productRepository.put(product.getName(), product);

@@ -40,6 +40,7 @@ public class VendingMachineController {
     }
 
     public void putProducts(ArrayList<String> productsInfo) {
+        productRepository.clear();
         for (String productInfoInput : productsInfo) {
             Product product = ProductValidator.validateForm(productInfoInput);
             productRepository.add(product);
