@@ -30,12 +30,19 @@ public class VendingMachine {
 
     public void purchase(String itemNameToPurchase) {
         Item item = findItemToPurchase(itemNameToPurchase);
+        if(items.isInStock(item)) {
+            purchase(item);
+        };
     }
 
     private Item findItemToPurchase(String itemNameToPurchase) {
         Item itemToPurchase = findItem(itemNameToPurchase);
         validateAvailableItem(itemToPurchase);
         return itemToPurchase;
+    }
+
+    private void purchase(Item item) {
+        items.reduce(item);
     }
 
     private Item findItem(String itemName) {

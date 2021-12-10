@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,7 +14,7 @@ class ItemsTest {
         int quantity = 5;
         items.add(item, quantity);
 
-        Assertions.assertThat(items.countItems(item)).isEqualTo(quantity);
+        assertThat(items.countItems(item)).isEqualTo(quantity);
     }
 
     @Test
@@ -20,7 +22,7 @@ class ItemsTest {
         Items items = new Items();
         String notExistItemName = "GHOST";
 
-        Assertions.assertThat(items.findItemByItemName(notExistItemName)).isEmpty();
+        assertThat(items.findItemByItemName(notExistItemName)).isEmpty();
     }
 
     @Test
@@ -31,6 +33,38 @@ class ItemsTest {
         items.add(item, quantity);
         String existItemName = "item1";
 
-        Assertions.assertThat(items.findItemByItemName(existItemName).get().getName()).isEqualTo(existItemName);
+        assertThat(items.findItemByItemName(existItemName).get().getName()).isEqualTo(existItemName);
+    }
+
+    @Test
+    void 재고가_0_이상인_것을_확인_가능() {
+        Items items = new Items();
+        Item item = new Item("item", 10000);
+        int quantity = 5;
+        items.add(item, quantity);
+
+        assertThat(items.isInStock(item)).isTrue();
+    }
+
+    @Test
+    void 재고가_0인_것을_확인_가능() {
+        Items items = new Items();
+        Item item = new Item("item", 10000);
+        int quantity = 0;
+        items.add(item, quantity);
+
+        assertThat(items.isInStock(item)).isFalse();
+    }
+
+    @Test
+    void 아이템의_개수_1_감소_가능() {
+        Items items = new Items();
+        Item item = new Item("item", 10000);
+        int quantity = 5;
+        items.add(item, quantity);
+
+        items.reduce(item);
+
+        assertThat(items.countItems(item)).isEqualTo(quantity-1);
     }
 }

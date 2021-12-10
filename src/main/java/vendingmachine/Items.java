@@ -21,4 +21,15 @@ public class Items {
         return items.keySet().stream()
                 .filter(item -> item.getName().equals(name)).findAny();
     }
+
+    public boolean isInStock(Item item) {
+        if(items.get(item) > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    public void reduce(Item itemToReduce) {
+        items.computeIfPresent(itemToReduce, (item, quantity) -> --quantity);
+    }
 }
