@@ -14,14 +14,14 @@ public class MainController {
     }
 
     public void playGame(){
-//        int vendingMachineChange = Input.InputVendingMachineChange();
-//        vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
-//        CoinController.makeCoin(vendingMachineMoney);
-//        Output.printVendingMachineCoin(vendingMachineMoney);
+        int vendingMachineChange = Input.InputVendingMachineChange();
+        vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
+        CoinController.makeCoin(vendingMachineMoney);
+        Output.printVendingMachineCoin(vendingMachineMoney);
 
         String productInfo = Input.InputProductInfo();
         ProductController.saveProduct(product, productInfo);
         String inputMoney = Input.InputMoney();
-        String productName = Input.InputPurchase(Integer.parseInt(inputMoney));
+        PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
     }
 }

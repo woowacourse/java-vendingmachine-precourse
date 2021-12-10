@@ -7,7 +7,6 @@ public class VendingMachineMoney {
     int moneyCount50 = 0;
     int moneyCount10 = 0;
 
-
     public VendingMachineMoney(int inputMoney) {
         this.totalMoney = inputMoney;
     }
