@@ -15,11 +15,6 @@ public class Coins {
 		this.coins = coins;
 	}
 
-	public static Coins create() {
-		Map<Coin, CoinAmount> coins = new HashMap<>();
-		return new Coins(coins);
-	}
-
 	public static Coins from(String vendingMachineBalance) {
 		CoinsValidator.validateVendingMachineBalance(vendingMachineBalance);
 
