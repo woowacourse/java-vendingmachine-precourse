@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.domain.Coin.*;
+import static vendingmachine.utils.Constant.*;
 
 import java.util.List;
 
@@ -23,5 +24,10 @@ class CoinTest {
 		assertEquals(getCoinStream().allMatch(s -> coins.contains(s)), true);
 	}
 
+	@Test
+	void 코인_리스트_테스트(){
+		List<Integer> list = COIN_LIST;
+		assertEquals(coins.stream().map(s -> s.getValue()).allMatch(s -> list.contains(s)), true);
+	}
 
 }

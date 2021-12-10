@@ -40,6 +40,7 @@ public enum Validator {
 	public boolean validateProductInputFormat(String input){
 		flag = true;
 		Matcher matcher = PRODUCT_INPUT_FRAME_FORMAT.matcher(input);
+
 		try {
 			validateSemicolonFormat(input);
 			isProductInputFormat(matcher);
@@ -50,10 +51,19 @@ public enum Validator {
 	}
 
 	private void isProductInputFormat(Matcher matcher) {
-		while(matcher.find()){
+		isBoundedSquareBrackets(matcher);
+
+		int index = 0;
+		while(matcher.find(index++)){
 			if(!matcher.group(1).matches(PRODUCT_INPUT_FORMAT)){
 				throw new ProductInputFormatException();
 			}
+		}
+	}
+
+	private void isBoundedSquareBrackets(Matcher matcher){
+		if(!matcher.find()) {
+			throw new ProductInputFormatException();
 		}
 	}
 

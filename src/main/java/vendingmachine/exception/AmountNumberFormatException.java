@@ -1,14 +1,14 @@
 package vendingmachine.exception;
 
+import static vendingmachine.utils.Constant.*;
+
 public class AmountNumberFormatException extends CustomException {
-	private final String message = "[ERROR] 금액은 숫자여야 합니다.";
 
 	public AmountNumberFormatException() {
-		getMessage(message);
+		getMessage(AMOUNT_NUMBER_FORMAT_EXCEPTION_MESSAGE);
 	}
 
-	@Override
-	public void getMessage(String message) {
+	@Override public void getMessage(String message) {
 		System.out.println(message);
 	}
 }
