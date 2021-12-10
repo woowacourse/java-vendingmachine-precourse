@@ -8,13 +8,13 @@ public class MachineController {
     }
 
     public int initInputMoney() {
-        int inputMoney = 0;
+        int inputMoney;
         try {
             String clientInput = MachineInputView.initInputMoneyByClient();
-            // 검증 로직
+            MachineValidator.validateAmountNaturalNumber(clientInput);
             inputMoney = Integer.parseInt(clientInput);
         } catch (IllegalArgumentException e) {
-            initInputMoney();
+            inputMoney = initInputMoney();
         }
         return inputMoney;
     }
@@ -32,13 +32,14 @@ public class MachineController {
 
     public boolean buyProduct(int price) {
         if (machine.getAmountByClient() < price) {
+            // 검증 로직 (상품 구매 불가)
             return false;
         }
         machine.buyProduct(price);
         return true;
     }
 
-    public int nowInputAmount(){
+    public int nowInputAmount() {
         return machine.getAmountByClient();
     }
 
