@@ -13,7 +13,8 @@ public enum Coin {
 
 	private final int amount;
 	private int count = 0;
-	private static List<Integer> amounts = Stream.of(Coin.values())
+
+	private static final List<Integer> AMOUNTS = Stream.of(Coin.values())
 		.map(Coin::getAmount)
 		.collect(Collectors.toList());
 
@@ -31,7 +32,7 @@ public enum Coin {
 	}
 
 	public static List<Integer> getAmounts() {
-		return amounts;
+		return AMOUNTS;
 	}
 
 	public static Coin findByAmount(int amount) {
@@ -54,6 +55,11 @@ public enum Coin {
 	}
 
 	public int divideByAmount(int dividend) {
-		return dividend / this.amount;
+		return (dividend / this.amount);
+	}
+
+	public int take(int count) {
+		this.count = this.count - count;
+		return (count * this.amount);
 	}
 }

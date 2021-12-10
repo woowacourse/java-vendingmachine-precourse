@@ -25,7 +25,7 @@ public class Cashier {
 	}
 
 	public void payItem(Item item) {
-		insertAmount = insertAmount - item.getPrice();
+		payMoney(item.getPrice());
 	}
 
 	public boolean isInsertAmountEnough(int required) {
@@ -34,11 +34,13 @@ public class Cashier {
 
 	public void giveChanges() {
 		for (Coin coin : Coin.values()) {
-			int required = coin.divideByAmount(insertAmount);
-			if (coin.remainLessThen(required)) {
-				// 남은 코인 모두 give
+			int count = countCoinForChange(coin);
+			if (count > 0) {
+				payMoney(coin.take(count));
 			}
-			// required 만큼 give
+			if (insertAmount < 10) {
+				break;
+			}
 		}
 	}
 
@@ -50,5 +52,18 @@ public class Cashier {
 				holdingAmount = holdingAmount - coinAmount;
 			}
 		} while (holdingAmount > 0);
+	}
+
+	private void payMoney(int amount) {
+		insertAmount = insertAmount - amount;
+	}
+
+	private int countCoinForChange(Coin coin) {
+		int required = coin.divideByAmount(insertAmount);
+		int count = required;
+		if (coin.remainLessThen(required)) {
+			count = coin.getCount();
+		}
+		return count;
 	}
 }
