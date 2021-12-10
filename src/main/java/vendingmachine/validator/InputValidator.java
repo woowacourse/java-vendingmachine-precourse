@@ -6,6 +6,8 @@ import vendingmachine.exception.InputException;
 
 public class InputValidator {
 
+	private static final String REGEX = "-?\\d+";
+
 	public static ArrayList<String> checkInputForm(String input) {
 		ArrayList<String> items = new ArrayList<>();
 		InputException.checkSemicolon(input);
@@ -17,6 +19,13 @@ public class InputValidator {
 			items.add(item);
 		}
 		return items;
+	}
+
+	public static int checkNumberForm(String input) {
+		if (!input.matches(REGEX)) {
+			InputException.printInputIsNumber();
+		}
+		return Integer.parseInt(input);
 	}
 
 }

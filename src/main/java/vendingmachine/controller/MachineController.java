@@ -15,7 +15,7 @@ public class MachineController {
 	private static final int priceIndex = 1;
 	private static final int stockIndex = 2;
 
-	Beverages beverages;
+	Beverages beverages = new Beverages();
 
 	public void run() {
 		Change change = new Change(InputView.getHavingMoney());
@@ -23,7 +23,7 @@ public class MachineController {
 		OutputView.printHavingMoney();
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
 		splitItem(itemPriceStock);
-		String userInputMoney = InputView.getUserInputMoney();
+		int userInputMoney = InputView.getUserInputMoney();
 	}
 
 	private void splitItem(ArrayList<String> itemPriceStock) {

@@ -12,8 +12,8 @@ public class InputView {
 
 	public static int getHavingMoney() {
 		System.out.println(INPUT_HAVING_MONEY);
-		String input = Console.readLine();
-		return Integer.parseInt(input);
+		return InputValidator.checkNumberForm(Console.readLine());
+
 	}
 
 	public static ArrayList<String> getItemPriceStock() {
@@ -22,8 +22,8 @@ public class InputView {
 		return InputValidator.checkInputForm(input);
 	}
 
-	public static String getUserInputMoney() {
+	public static int getUserInputMoney() {
 		System.out.println(USER_INPUT_MONEY);
-		return Console.readLine();
+		return InputValidator.checkNumberForm(Console.readLine());
 	}
 }
