@@ -1,8 +1,5 @@
 package vendingmachine.controller;
 
-import java.util.List;
-import vendingmachine.model.CoinCase;
-import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.CoinCaseFactory;
 import vendingmachine.utils.ProductFactory;
@@ -15,23 +12,20 @@ public class VendingMachineController {
 	private VendingMachineController() {
 	}
 
-	public static void useVendingMachine() {
-		VendingMachine vendingMachine = VendingMachineFactory
-			.makeVendingMachine(putMoneyInVendingMachine(), putProductInVendingMachine(), putMoneyToVendingMachine());
+	public static void controlVendingMachine() {
+		runVendingMachine(initVendingMachine());
+	}
+
+	private static VendingMachine initVendingMachine() {
+		int amount = InputView.writeVendingMachineAmount();
+		return VendingMachineFactory.makeVendingMachine(
+			CoinCaseFactory.makeCoinsCase(amount),
+			ProductFactory.makeProducts(),
+			InputView.writeInsertMoney());
+	}
+
+	private static void runVendingMachine(VendingMachine vendingMachine) {
 		OutputView.printInsertedMoney(vendingMachine);
 		InputView.writeProductNameToBuy(vendingMachine.getProducts());
-	}
-
-	private static List<CoinCase> putMoneyInVendingMachine() {
-		int amount = InputView.writeVendingMachineAmount();
-		return CoinCaseFactory.makeCoinsCase(amount);
-	}
-
-	private static List<Product> putProductInVendingMachine() {
-		return ProductFactory.makeProducts();
-	}
-
-	private static int putMoneyToVendingMachine() {
-		return InputView.writeInsertMoney();
 	}
 }
