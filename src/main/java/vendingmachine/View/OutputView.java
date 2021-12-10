@@ -2,6 +2,7 @@ package vendingmachine.View;
 
 import vendingmachine.constant.SystemMessage;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.VendingMachine;
 
 public class OutputView {
     public static void printErrorMessage(IllegalArgumentException exception) {
@@ -13,5 +14,9 @@ public class OutputView {
         for (Coin c : coin.values()) {
             System.out.println(c.toString());
         }
+    }
+
+    public static void printMoneyStatus(VendingMachine vendingMachine) {
+        System.out.println("투입 금액 : " + vendingMachine.getInputMoney());
     }
 }

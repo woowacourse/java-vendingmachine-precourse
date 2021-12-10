@@ -13,11 +13,16 @@ public class VendingMachineController {
         getMerchandiseInfo(vendingMachine);
 
         getInputMoney(vendingMachine);
+
+        do{
+            purchase(vendingMachine);
+        } while (!vendingMachine.canPurchase());
+
     }
 
     private void getMachineMoney(VendingMachine vendingMachine) {
         try {
-            vendingMachine.setMachineMoney(InputView.printSetMachineMoneyMessage());
+            vendingMachine.setMachineMoney(InputView.printGetMachineMoneyMessage());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             getMachineMoney(vendingMachine);
@@ -31,7 +36,7 @@ public class VendingMachineController {
 
     private void getMerchandiseInfo(VendingMachine vendingMachine) {
         try {
-            vendingMachine.addMerchandise(InputView.printSetMerchandiseMessage());
+            vendingMachine.addMerchandise(InputView.printGetMerchandiseMessage());
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception);
             getMerchandiseInfo(vendingMachine);
@@ -39,6 +44,21 @@ public class VendingMachineController {
     }
 
     private void getInputMoney(VendingMachine vendingMachine) {
-        vendingMachine.setInputMoney(InputView.printSetInputMoneyMessage());
+        vendingMachine.setInputMoney(InputView.printGetInputMoneyMessage());
+    }
+
+    private void purchase(VendingMachine vendingMachine) {
+        try {
+            OutputView.printMoneyStatus(vendingMachine);
+            vendingMachine.purchase(InputView.printPurchaseMessage());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception);
+            purchase(vendingMachine);
+        }
+    }
+
+    private void printChange(VendingMachine vendingMachine) {
+        OutputView.printMoneyStatus(vendingMachine);
+
     }
 }

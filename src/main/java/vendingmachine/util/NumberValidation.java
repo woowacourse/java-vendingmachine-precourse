@@ -16,13 +16,13 @@ public class NumberValidation {
 
     protected void isDigit(char c) throws IllegalArgumentException {
         if (!Character.isDigit(c)) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_DIGIT_MESSAGE.print() + "잘못들어온 문자 : " + c);
+            throw new IllegalArgumentException(ErrorMessage.NOT_DIGIT.print() + "잘못들어온 문자 : " + c);
         }
     }
 
     protected void isBlank(String number) throws IllegalArgumentException {
         if (number.isEmpty()) {
-            throw new IllegalArgumentException(ErrorMessage.NULL_ERROR_MESSAGE.print());
+            throw new IllegalArgumentException(ErrorMessage.NULL.print());
         }
     }
 }

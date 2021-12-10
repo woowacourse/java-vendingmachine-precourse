@@ -4,18 +4,23 @@ import vendingmachine.constant.SystemMessage;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public static String printSetMachineMoneyMessage() {
-        System.out.println(SystemMessage.SET_MACHINE_MONEY_MESSAGE.print());
+    public static String printGetMachineMoneyMessage() {
+        System.out.println(SystemMessage.GET_MACHINE_MONEY_MESSAGE.print());
         return Console.readLine();
     }
 
-    public static String printSetMerchandiseMessage() {
-        System.out.println(SystemMessage.SET_MERCHANDISE_MESSAGE.print());
+    public static String printGetMerchandiseMessage() {
+        System.out.println(SystemMessage.GET_MERCHANDISE_MESSAGE.print());
         return Console.readLine();
     }
 
-    public static String printSetInputMoneyMessage() {
-        System.out.println(SystemMessage.SET_INPUT_MONEY_MESSAGE.print());
+    public static String printGetInputMoneyMessage() {
+        System.out.println(SystemMessage.GET_INPUT_MONEY_MESSAGE.print());
+        return Console.readLine();
+    }
+
+    public static String printPurchaseMessage() {
+        System.out.println(SystemMessage.CHOICE_MERCHANDISE_MESSAGE.print());
         return Console.readLine();
     }
 }

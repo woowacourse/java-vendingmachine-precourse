@@ -20,6 +20,14 @@ public class VendingMachine {
         return coin;
     }
 
+    public void setInputMoney(String inputMoney) {
+        this.inputMoney = new InputMoney(inputMoney);
+    }
+
+    public String getInputMoney() {
+        return inputMoney.toString();
+    }
+
     public void makeRandomAllCoin() {
         for (Coin c : coin.values()) {
             makeRandomCoin(c);
@@ -44,8 +52,16 @@ public class VendingMachine {
         return merchandiseList.getAllMerchandiseInfo();
     }
 
-    public void setInputMoney(String inputMoney) {
-        new InputMoney(inputMoney);
+    public void purchase(String merchandiseName) {
+        merchandiseList.purchase(merchandiseName, inputMoney.getInputMoney());
+        inputMoney.use(merchandiseList.getPrice(merchandiseName));
+    }
+
+    public boolean canPurchase() {
+        if (merchandiseList.cantBuyAllMerchandise(inputMoney.getInputMoney()) || merchandiseList.AllMerchandiseSoldOut()){
+            return true;
+        }
+        return false;
     }
 }
 
