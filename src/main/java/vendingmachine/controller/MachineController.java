@@ -1,14 +1,10 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.TreeMap;
 
 import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
-import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
 import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
@@ -22,7 +18,7 @@ public class MachineController {
 	private static final String STOCK = "수량";
 
 	private Beverages beverages = new Beverages();
-	private Map<Coin, Integer> changes = new HashMap<>();
+	private Change changes = new Change();
 	private Money inputMoney = new Money();
 
 	public void run() {
@@ -31,8 +27,7 @@ public class MachineController {
 	}
 
 	private void setting() {
-		Change change = new Change(InputView.getHavingMoney());
-		changes = change.generateChanges();
+		changes = changes.generateChanges(InputView.getHavingMoney());
 		OutputView.printHavingMachineCoin();
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
 		beverages = splitItem(itemPriceStock);

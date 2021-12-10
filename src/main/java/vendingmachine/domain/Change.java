@@ -6,19 +6,18 @@ import java.util.TreeMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
-	private final Money money;
+
 	private static final Map<Coin, Integer> changes = new TreeMap<>();
 
-	public Change(Money money) {
+	public Change() {
 		initChanges();
-		this.money = money;
 	}
 
 	public static Map<Coin, Integer> getChanges() {
 		return changes;
 	}
 
-	public Map<Coin, Integer> generateChanges() {
+	public Change generateChanges(Money money) {
 		int tmpMoney = 0;
 		while (!money.isSame(tmpMoney)) {
 			int random = Randoms.pickNumberInList(Coin.getList());
@@ -29,7 +28,7 @@ public class Change {
 			Coin coin = Coin.getCoin(random);
 			changes.put(coin, changes.get(coin) + 1);
 		}
-		return changes;
+		return this;
 	}
 
 	private void initChanges() {
