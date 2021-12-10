@@ -23,4 +23,18 @@ public class ExceptionController {
 			throw new IllegalArgumentException(Constant.ERROR_IS_NOT_MULTIPLE_OF_TEN);
 		}
 	}
+
+	public static void isInfoFormatValidate(String input) {
+		if (input.charAt(0) != '[' || input.charAt(input.length() - 1) != ']') {
+			throw new IllegalArgumentException(Constant.ERROR_IS_NOT_VALIDATE_INFO_FORMAT);
+		}
+	}
+
+	public static void isNumberOfInfo3(String[] input) {
+		if (input.length > 3) {
+			throw new IllegalArgumentException(Constant.Error_IS_NOT_3_INFO);
+		}
+	}
+
+
 }
