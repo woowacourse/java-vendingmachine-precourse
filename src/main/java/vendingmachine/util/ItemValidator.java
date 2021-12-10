@@ -63,6 +63,9 @@ public class ItemValidator {
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_INTEGER);
 		int price = Integer.parseInt(priceStr);
 
+		if(price < PRICE_MIN)
+			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_MIN);
+
 		return price;
 	}
 
