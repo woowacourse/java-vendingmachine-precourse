@@ -1,18 +1,13 @@
 package vendingmachine.domain.product;
 
-import static vendingmachine.domain.Machine.*;
-
 import java.util.ArrayList;
 import java.util.List;
 
-import vendingmachine.domain.Machine;
-
-public enum Products {
-	PRODUCTS;
+public class Products {
 
 	private List<Product> productList;
 
-	Products(){
+	public Products(){
 		productList = new ArrayList<>();
 	}
 

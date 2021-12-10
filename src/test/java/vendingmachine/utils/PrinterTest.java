@@ -2,7 +2,6 @@ package vendingmachine.utils;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.domain.MachineClip.*;
 import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.Printer.*;
 
@@ -13,21 +12,21 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import vendingmachine.domain.MachineClip;
+import vendingmachine.domain.MachineWallet;
 import vendingmachine.domain.RandomBox;
 
 class PrinterTest extends NsTest {
 
 	private Printer printer;
 	private RandomBox randomBox;
-	private MachineClip machineClip;
+	private MachineWallet machineClip;
 
 	@BeforeEach
 	void beforeEach(){
 		this.printer = PRINTER;
-		this.machineClip = MACHINE_CLIP;
-		randomBox = RandomBox.RANDOM_COIN_BOX;
-		machineClip.init(randomBox.getNumOfCoins(100000000));
+		this.machineClip = new MachineWallet();
+		randomBox = RandomBox.RANDOM_BOX;
+		machineClip.save(randomBox.getCoins(100000000));
 	}
 
 	@Test
@@ -56,7 +55,7 @@ class PrinterTest extends NsTest {
 
 	@Test
 	void 머신_동전_종류별출력_알림_테스트(){
-		printer.printMachineNumOfCoinsNotice(machineClip);
+		printer.printMachineNumOfCoinsNotice(machineClip.toString());
 		assertThat(output()).contains(OUTPUT_MACHINE_NUM_OF_COINS, "원 -", "개");
 	}
 

@@ -3,9 +3,7 @@ package vendingmachine.domain.product;
 import java.util.HashMap;
 import java.util.Map;
 
-public enum ProductFactory {
-	PRODUCT_FACTORY;
-
+public class ProductFactory {
 	private final Map<String, Product> PRODUCT_INSTANCE = new HashMap<>();
 
 	public Product createProduct(String name, int price, int amount) {

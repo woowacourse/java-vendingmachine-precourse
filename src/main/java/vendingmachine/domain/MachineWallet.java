@@ -5,44 +5,42 @@ import static vendingmachine.domain.Coin.*;
 import java.util.Map;
 import java.util.TreeMap;
 
-public enum MachineClip {
-	MACHINE_CLIP;
+public class MachineWallet {
+	private Map<Integer, Integer> numOfCoins;
+	private Map<Integer, Integer> numOfChanges;
+	private int customerAmount;
 
-	private Map<Integer, Integer> numOfCoins; // 기계가 지닌 코인 수
-	private Map<Integer, Integer> amountToChanges; // 잔돈으로 반환할 코인 수
-	private int amount;
-
-	MachineClip() {
-		this.amountToChanges = new TreeMap<>((o1, o2) -> o2 - o1);
+	public MachineWallet() {
+		this.numOfChanges = new TreeMap<>((o1, o2) -> o2 - o1);
 		this.numOfCoins = new TreeMap<>((o1, o2) -> o2 - o1);
 	}
 
-	public void init(Map<Integer, Integer> numOfCoins) {
+	public void save(Map<Integer, Integer> numOfCoins) {
 		getCoinStream().forEach(c -> this.numOfCoins.put(c.getValue(), 0));
 		numOfCoins.keySet().stream().forEach(k -> this.numOfCoins.put(k, numOfCoins.get(k)));
 	}
 
-	public Map<Integer, Integer> getAmountToChanges(int amount) {
-		this.amount = amount;
+	public Map<Integer, Integer> saveChangesByAmount(int amount) {
+		this.customerAmount = amount;
 		numOfCoins.keySet().stream().forEach(k -> exchangeAmountToChanges(k));
-		return amountToChanges;
+		return numOfChanges;
 	}
 
 	private void exchangeAmountToChanges(int coinType) {
 		int numOfCoin = numOfCoins.get(coinType);
-		if (amount > 0 && amount >= coinType) {
-			int numOfChangeCoin = amount / coinType;
+		if (customerAmount > 0 && customerAmount >= coinType) {
+			int numOfChangeCoin = customerAmount / coinType;
 			if (numOfChangeCoin > numOfCoin) { // 잔돈으로 반환해야하는 수(numOfChangeCoin)보다 현재 보유코인 갯수(numOfCoin)가 부족할 때
-				getAmountToChanges(coinType, numOfCoin, numOfCoin);
+				getChange(coinType, numOfCoin, numOfCoin);
 				return;
 			}
-			getAmountToChanges(coinType, numOfCoin, numOfChangeCoin);
+			getChange(coinType, numOfCoin, numOfChangeCoin);
 		}
 	}
 
-	private void getAmountToChanges(int key, int total, int numOfCoin) {
-		amount -= key * numOfCoin;
-		amountToChanges.put(key, numOfCoin);
+	private void getChange(int key, int total, int numOfCoin) {
+		customerAmount -= (key * numOfCoin);
+		numOfChanges.put(key, numOfCoin);
 		numOfCoins.put(key, total - numOfCoin);
 	}
 

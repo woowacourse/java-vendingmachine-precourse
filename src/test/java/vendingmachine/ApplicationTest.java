@@ -1,17 +1,17 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
+import static camp.nextstep.edu.missionutils.test.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+import static vendingmachine.utils.Constant.*;
+
 import org.junit.jupiter.api.Test;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
+import camp.nextstep.edu.missionutils.test.NsTest;
 
 class ApplicationTest extends NsTest {
-    private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
-    synchronized void 기능_테스트() {
+    void 기능_테스트() {
         assertRandomNumberInListTest(
             () -> {
                 run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
@@ -25,16 +25,16 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    synchronized void 기능_테스트2() {
+    void 기능_테스트2_잔돈부족() {
         assertRandomNumberInListTest(
             () -> {
-                run("450", "[콜라,1500,1]", "3000", "콜라");
+                run("300", "[치킨,9500,1]", "10000", "치킨");
                 assertThat(output()).contains(
-                    "자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
-                    "투입 금액: 3000원", "투입 금액: 1500원"
+                    "자판기가 보유한 동전", "500원 - 0개", "100원 - 3개", "50원 - 0개", "10원 - 0개",
+                    "투입 금액: 10000원", "투입 금액: 500원", "잔돈\n100원 - 3개"
                 );
             },
-            100, 100, 100, 100, 50
+            100, 100, 100
         );
     }
 
@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
         assertSimpleTest(
             () -> {
                 runException("-1");
-                assertThat(output()).contains(ERROR_MESSAGE);
+                assertThat(output()).contains(AMOUNT_NUMBER_FORMAT_EXCEPTION_MESSAGE);
             }
         );
     }

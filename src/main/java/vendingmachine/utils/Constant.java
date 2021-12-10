@@ -31,7 +31,7 @@ public final class Constant {
 	public static final Pattern PRODUCT_INPUT_SEMICOLON_FRAME_FORMAT = Pattern.compile("\\](.*?)\\[");
 	public static final String PRODUCT_INPUT_SEMICOLON_FORMAT = SEMICOLON + "+";
 	public static final Pattern PRODUCT_INPUT_FRAME_FORMAT = Pattern.compile("\\[(.*?)\\]");
-	public static final String PRODUCT_INPUT_FORMAT = "^[가-힣A-z0-9]+" + COMMA + "[1-9]\\d*0+" + COMMA + "[1-9]\\d*$";
+	public static final String PRODUCT_INPUT_FORMAT = "^[가-힣a-zA-Z0-9]+" + COMMA + "[1-9]\\d*0+" + COMMA + "[1-9]\\d*$";
 
 	public static final String AMOUNT_IS_NOT_RANGED_EXCEPTION_MESSAGE =
 		ERROR + " 금액의 최소 단위는 " + COIN_MIN + "원 이상이어야 합니다.";

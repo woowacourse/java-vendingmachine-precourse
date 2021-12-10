@@ -1,8 +1,8 @@
 package vendingmachine.domain.product;
 
 public class Product {
-	private String name;
-	private int price;
+	private final String name;
+	private final int price;
 	private int amount;
 
 	public Product(String name, int price, int amount) {
@@ -23,8 +23,11 @@ public class Product {
 		return amount;
 	}
 
+	public boolean isExistedProduct(){
+		return amount > 0;
+	}
 	public void sellProduct() {
-		amount--;
+			amount--;
 	}
 
 	@Override

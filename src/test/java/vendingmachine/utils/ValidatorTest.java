@@ -13,17 +13,14 @@ import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.product.Product;
-import vendingmachine.domain.product.Products;
 
 class ValidatorTest extends NsTest {
 
 	private Validator validator;
-	private Products products;
 
 	@BeforeEach
 	void beforeEach(){
-		validator = Validator.VALIDATOR;
-		products = Products.PRODUCTS;
+		this.validator = Validator.VALIDATOR;
 	}
 
 	@Test
@@ -115,19 +112,23 @@ class ValidatorTest extends NsTest {
 	}
 
 	@Test
-	void 상품_존재여부_예외테스트(){
-		List<Product> productList = Lists.list(new Product("콜라", 1000, 10),
-			new Product("사이다", 800, 10));
-		productList.stream().forEach(s -> products.insertProduct(s));
-		validator.validateProductExisted("콜라라라");
-		assertThat(output()).contains(PRODUCT_IS_NOT_EXISTED_EXCEPTION_MESSAGE);
+	void 상품입력_포맷_예외테스트_입력값오류4_대괄호중복(){
+		String product = "[[사이다,1000,10]]";
+		validator.validateProductInputFormat(product);
+		assertThat(output()).contains(PRODUCT_INPUT_FORMAT_EXCEPTION);
+	}
 
+	@Test
+	void 상품_존재여부_예외테스트(){
+		validator.addDependency(Lists.list(new Product("치킨",100,10)));
+		assertEquals(validator.validateProductExisted("치킨"), true);
+		assertEquals(validator.validateProductExisted("치킨1"), false);
+		assertThat(output()).contains(PRODUCT_IS_NOT_EXISTED_EXCEPTION_MESSAGE);
 	}
 
 
 
 	@Override
 	protected void runMain() {
-
 	}
 }

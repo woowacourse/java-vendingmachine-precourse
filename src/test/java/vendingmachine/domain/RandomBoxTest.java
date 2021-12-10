@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Map;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,15 +13,15 @@ class RandomBoxTest {
 
 	@BeforeEach
 	void beforeEach(){
-		randomBox = RandomBox.RANDOM_COIN_BOX;
+		randomBox = RandomBox.RANDOM_BOX;
 	}
 
 	@Test
 	void 랜덤으로_동전_나누기_테스트(){
-		Map<Integer, Integer> clip_10 =  randomBox.getNumOfCoins(10);
+		Map<Integer, Integer> clip_10 =  randomBox.getCoins(10);
 		assertEquals(clip_10.containsKey(10), true);
 
-		Map<Integer, Integer> clip_1000 =  randomBox.getNumOfCoins(1000);
+		Map<Integer, Integer> clip_1000 =  randomBox.getCoins(1000);
 		assertEquals(clip_1000.keySet().stream()
 				.mapToInt(k -> k*clip_1000.get(k)).sum(), 1000);
 	}

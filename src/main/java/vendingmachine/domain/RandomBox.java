@@ -7,22 +7,22 @@ import java.util.Map;
 import java.util.TreeMap;
 
 public enum RandomBox {
-	RANDOM_COIN_BOX;
+	RANDOM_BOX;
 
 	private Map<Integer, Integer> coins;
 	private int amount;
 
-	public Map<Integer, Integer> getNumOfCoins(int amount) {
+	public Map<Integer, Integer> getCoins(int amount) {
 		coins = new TreeMap<>();
 		this.amount = amount;
 
 		while (this.amount > 0) {
-			isAmountMoreThanCoin(pickNumberInList(COIN_LIST));
+			separateAmountToCoin(pickNumberInList(COIN_LIST));
 		}
 		return coins;
 	}
 
-	private void isAmountMoreThanCoin(int randomCoin) {
+	private void separateAmountToCoin(int randomCoin) {
 		if (amount >= randomCoin) {
 			amount -= randomCoin;
 			coins.put(randomCoin, coins.getOrDefault(randomCoin, 0) + 1);

@@ -4,8 +4,6 @@ import static vendingmachine.utils.Constant.*;
 
 import java.util.Map;
 
-import vendingmachine.domain.MachineClip;
-
 public enum Printer {
 	PRINTER;
 
@@ -25,9 +23,9 @@ public enum Printer {
 		System.out.println(INPUT_CUSTOMER_BUY_PRODUCT);
 	}
 
-	public void printMachineNumOfCoinsNotice(MachineClip machineClip) {
+	public void printMachineNumOfCoinsNotice(String machineClipStatus) {
 		System.out.println(LINE_SEPARATOR + OUTPUT_MACHINE_NUM_OF_COINS);
-		System.out.println(machineClip);
+		System.out.println(machineClipStatus);
 	}
 
 	public void printCustomerCurrentAmount(int amount) {

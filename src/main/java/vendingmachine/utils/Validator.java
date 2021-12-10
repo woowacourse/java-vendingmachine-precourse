@@ -1,12 +1,11 @@
 package vendingmachine.utils;
 
-import static vendingmachine.domain.product.Products.*;
 import static vendingmachine.utils.Constant.*;
 
+import java.util.List;
 import java.util.regex.Matcher;
 
 import vendingmachine.domain.product.Product;
-import vendingmachine.domain.product.Products;
 import vendingmachine.exception.AmountIsNotRangedException;
 import vendingmachine.exception.AmountNumberFormatException;
 import vendingmachine.exception.ProductInputFormatException;
@@ -14,13 +13,13 @@ import vendingmachine.exception.ProductInputSemicolonException;
 import vendingmachine.exception.ProductIsNotExistedException;
 
 public enum Validator {
-	VALIDATOR(PRODUCTS);
+	VALIDATOR;
 
 	private boolean flag;
-	private Products products;
+	private List<Product> productList;
 
-	Validator(Products products){
-		this.products = products;
+	public void addDependency(List<Product> productList){
+		this.productList = productList;
 	}
 
 	public boolean validateNumberFormat(String amount) {
@@ -49,7 +48,6 @@ public enum Validator {
 	public boolean validateProductInputFormat(String input){
 		flag = true;
 		Matcher matcher = PRODUCT_INPUT_FRAME_FORMAT.matcher(input);
-
 		try {
 			validateSemicolonFormat(input);
 			isProductInputFormat(matcher);
@@ -61,9 +59,9 @@ public enum Validator {
 
 	private void isProductInputFormat(Matcher matcher) {
 		isBoundedSquareBrackets(matcher);
-
 		int index = 0;
 		while(matcher.find(index++)){
+			System.out.println(matcher.group(1));
 			if(!matcher.group(1).matches(PRODUCT_INPUT_FORMAT)){
 				throw new ProductInputFormatException();
 			}
@@ -100,7 +98,7 @@ public enum Validator {
 	}
 
 	private void isProductExisted(String productName) {
-		if(!products.getProductList().stream().anyMatch(p -> p.getName().equalsIgnoreCase(productName))){
+		if(!productList.stream().anyMatch(p -> p.getName().equalsIgnoreCase(productName) && p.isExistedProduct())){
 			throw new ProductIsNotExistedException();
 		}
 	}

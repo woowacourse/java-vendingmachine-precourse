@@ -1,11 +1,9 @@
 package vendingmachine.domain;
 
-public enum Machine {
-	MACHINE;
-
+public class Machine {
 	private int amount;
 
-	public void insertCoin(int amount){
+	public void save(int amount){
 		this.amount = amount;
 	}
 
