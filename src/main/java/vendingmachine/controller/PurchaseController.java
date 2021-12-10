@@ -11,14 +11,25 @@ public class PurchaseController {
         product.setSumCount();
 
         while (checkChange(inputMoney, product.getMinPrice()) && checkCount(product.getSumCount())){
-            String productName = Input.InputPurchase(inputMoney);
+            String productName = purchaseRepetition(vendingMachineMoney, product, inputMoney);
             inputMoney -= product.getPrice(productName);
             product.replaceProductCount(productName, product.getCount(productName)-1);
-
             product.setSumCount();
         }
 
         printReturnChange(vendingMachineMoney, inputMoney);
+    }
+
+    public static String purchaseRepetition(VendingMachineMoney vendingMachineMoney, Product product, int inputMoney){
+        while(true){
+            String productName = Input.InputPurchase(inputMoney);
+            try{
+                ValidationController.purchaseValidation(product, productName);
+                return productName;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private static void printReturnChange(VendingMachineMoney vendingMachineMoney, int inputMoney) {

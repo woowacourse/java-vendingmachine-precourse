@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Product;
+
 import java.util.Arrays;
 import java.util.HashSet;
 
@@ -124,6 +126,12 @@ public class ValidationController {
             String checkStr = productSplitData[2].substring(0, productSplitData[2].length()-1);
             isNumValidation(checkStr);
             positiveIntegerValidation(checkStr);
+        }
+    }
+
+    public static void purchaseValidation(Product product, String productName) {
+        if (!product.hasInProduct(productName)){
+            throw new IllegalArgumentException("[ERROR] 없는 상품명입니다.");
         }
     }
 }

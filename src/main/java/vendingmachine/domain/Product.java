@@ -60,4 +60,11 @@ public class Product {
     public int getSumCount() {
         return sumCount;
     }
+
+    public boolean hasInProduct(String name){
+        if (productPrice.keySet().contains(name)){
+            return true;
+        }
+        return false;
+    }
 }
