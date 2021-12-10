@@ -11,6 +11,7 @@ public class Display {
 	private static final String HOLDING_AMOUNT_QUESTION = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String ITEM_QUESTION = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INSERT_AMOUNT_QUESTION = "투입 금액을 입력해 주세요.";
+	private static final String WHAT_TO_BUY_QUESTION = "구매할 상품명을 입력해 주세요.";
 
 	private static final String ALL_COIN_TITLE = "자판기가 보유한 동전";
 
@@ -28,6 +29,10 @@ public class Display {
 
 	public void askInsertAmount() {
 		System.out.println(INSERT_AMOUNT_QUESTION);
+	}
+
+	public void askWhatToBuy() {
+		System.out.println(WHAT_TO_BUY_QUESTION);
 	}
 
 	public void printCoin(Coin coin) {

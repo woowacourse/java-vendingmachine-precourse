@@ -83,4 +83,8 @@ public class Machine {
 			return askItems();
 		}
 	}
+
+	private void askWhatToBuy() {
+		display.askWhatToBuy();
+	}
 }
