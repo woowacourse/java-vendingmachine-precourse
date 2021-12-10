@@ -47,6 +47,10 @@ public class ProductsController {
                 && products.findMinPriceProduct() <= amount;
     }
 
+    public void canHaveStock(Product product) {
+        ProductsValidator.checkEnoughCounts(product);
+    }
+
     public void buyProduct(Product product) {
         products.buyProduct(product);
     }

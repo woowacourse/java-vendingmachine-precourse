@@ -34,11 +34,17 @@ public class ProductsValidator {
         checkCountsValid(collectOnlyInfos(infoList, PRODUCT_COUNTS_INFO_INDEX));
     }
 
-    public static boolean checkAnyInput(String productInfo) {
+    public static void checkEnoughCounts(Product product) {
+        if (product.getCounts() <= 0) {
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.NOT_ENOUGH_STOCK);
+        }
+    }
+
+    private static boolean checkAnyInput(String productInfo) {
         return !productInfo.isEmpty();
     }
 
-    public static boolean checkForm(String productInfo) {
+    private static boolean checkForm(String productInfo) {
         return checkSemiColonAndBracket(productInfo) && checkRestMarkCounts(productInfo);
     }
 
@@ -95,7 +101,7 @@ public class ProductsValidator {
         return infos;
     }
 
-    public static List<String> eliminateSemiColonAndBracket(String productInfo) {
+    private static List<String> eliminateSemiColonAndBracket(String productInfo) {
         return Arrays.asList(productInfo.replace(";", ",")
                 .replace("[", "")
                 .replace("]", "")
