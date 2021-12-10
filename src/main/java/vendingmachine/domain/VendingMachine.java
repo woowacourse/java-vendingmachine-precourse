@@ -3,13 +3,14 @@ package vendingmachine.domain;
 import java.util.LinkedHashMap;
 
 public class VendingMachine {
-	private Money money;
+	private Money vendingMachineMoney;
 	private LinkedHashMap<Coin, Integer> coinCounts;
 	private Merchandises merchandises;
 	private LinkedHashMap<Coin, Integer> changeCoinCounts;
+	private int vendingMoney;
 
-	public VendingMachine(Money money) {
-		this.money = money;
+	public VendingMachine(Money vendingMachineMoney) {
+		this.vendingMachineMoney = vendingMachineMoney;
 		coinCounts = new LinkedHashMap<>();
 		changeCoinCounts = new LinkedHashMap<>();
 	}
@@ -18,10 +19,14 @@ public class VendingMachine {
 		return merchandises;
 	}
 
+	public Money getVendingMachineMoney() {
+		return vendingMachineMoney;
+	}
+
 	public LinkedHashMap<Coin,Integer> saveCoinStatus() {
-		int tempMoney = money.getMoney();
+		int tempMoney = vendingMachineMoney.getMoney();
 		for (Coin coinValue : Coin.values()) {
-			int coinCount = money.decideCoinCount(tempMoney, coinValue);
+			int coinCount = vendingMachineMoney.decideCoinCount(tempMoney, coinValue);
 			coinCounts.put(coinValue, coinCount);
 			tempMoney -= coinCounts.get(coinValue) * coinValue.getAmount();
 		}
@@ -32,14 +37,10 @@ public class VendingMachine {
 		this.merchandises = merchandises;
 	}
 
-	public Money getMoney() {
-		return money;
-	}
-
 	public LinkedHashMap<Coin,Integer> changeCoinStatus(Money lastMoney) {
 		int changeMoney = lastMoney.getMoney();
 		for (Coin coinValue : Coin.values()) {
-			int coinCount = money.decideCoinCount(changeMoney, coinValue);
+			int coinCount = vendingMachineMoney.decideCoinCount(changeMoney, coinValue);
 			if (coinCount != 0) {
 				changeCoinCounts.put(coinValue, coinCount);
 				changeMoney -= changeCoinCounts.get(coinValue) * coinValue.getAmount();

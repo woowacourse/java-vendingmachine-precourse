@@ -28,13 +28,13 @@ public class VendingMachineController {
 		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
 		inputMoneyWithErrorHandling();
 		while (true) {
-			OutputView.showInputMoneyStatus(user.getMoney().getMoney());
+			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
 			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
 			if (!isUserBuyMerchandise(vendingMachine, user)) {
 				break;
 			}
 		}
-		OutputView.showChangeMoneyStatus(user.getMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(vendingMachineChange(user, vendingMachine))));
+		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(vendingMachineChange(user, vendingMachine))));
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
@@ -71,7 +71,7 @@ public class VendingMachineController {
 	public boolean isUserBuyMerchandise(VendingMachine vendingMachine, User user) {
 		Merchandises merchandises = vendingMachine.getMerchandises();
 		for (Merchandise merchandise : merchandises.getMerchandiseList()) {
-			if (merchandise.getMoney().getMoney() <= user.getMoney().getMoney()) {
+			if (merchandise.getMoney().getMoney() <= user.getUserMoney().getMoney()) {
 				return true;
 			}
 		}
@@ -79,10 +79,10 @@ public class VendingMachineController {
 	}
 
 	public Money vendingMachineChange(User user, VendingMachine vendingMachine) {
-		if (user.getMoney().getMoney() <= vendingMachine.getMoney().getMoney()) {
-			return user.getMoney();
+		if (user.getUserMoney().getMoney() <= vendingMachine.getVendingMachineMoney().getMoney()) {
+			return user.getUserMoney();
 		}
-		return vendingMachine.getMoney();
+		return vendingMachine.getVendingMachineMoney();
 	}
 
 	public void vendingMahchineMoneyWithErrorHandling() {
@@ -109,7 +109,4 @@ public class VendingMachineController {
 			inputMoneyWithErrorHandling();
 		}
 	}
-
-
-
 }
