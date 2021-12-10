@@ -33,5 +33,9 @@ public enum Coin {
              .findAny()
              .orElse(null);
     }
+    
+    public static void addNumber(Coin coin) {
+        coin.number++;
+    }
 
 }
