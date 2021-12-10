@@ -91,9 +91,7 @@ public class VendingMachine {
 			changes.addCoin(entry.getKey(), numberOfCoins);
 			coinList.subtractCoin(entry.getKey(), entry.getValue() - numberOfCoins);
 		}
-
-		System.out.println(coinList);
-
+		
 		return changes;
 	}
 
