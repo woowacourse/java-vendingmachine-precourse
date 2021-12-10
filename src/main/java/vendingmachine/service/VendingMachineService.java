@@ -29,7 +29,7 @@ public class VendingMachineService {
 
 	public String postVendingMachineCosts(String inputStr) {
 		Validation.validateNull(inputStr);
-		Validation.validateCostIsNumber(inputStr);
+		Validation.validateCostIsNaturalNumber(inputStr);
 		Validation.validateDivideTen(Integer.parseInt(inputStr));
 
 		initResult();
@@ -48,9 +48,9 @@ public class VendingMachineService {
 	}
 
 	public String postInputCosts(String inputStr) {
-		//TODO: Validation 들 처리(inputStr)
 		Validation.validateNull(inputStr);
-		Validation.validateCostIsNumber(inputStr);
+		Validation.validateCostIsNaturalNumber(inputStr);
+		Validation.validateDivideTen(Integer.parseInt(inputStr));
 
 		result = new StringBuilder();
 		vendingMachine.setInputCost(Integer.parseInt(inputStr));
