@@ -15,19 +15,15 @@ public class InitController {
     }
 
     private void initHoldingCoins() {
-        holdingCoinsService.setHoldingCoins(getHoldingAmount()); // 자판기 보유금액 입력받아 자판기 동전 초기설정
-        CoinOutputView.printHoldingCoins(); // 자판기 동전 출력
-    }
-
-    private int getHoldingAmount() {
-        String holdingAmount = InitView.getHoldingAmount();
         try {
+            String holdingAmount = InitView.getHoldingAmount();
             validatorService.isValidHoldingAmount(holdingAmount);
+            holdingCoinsService.setHoldingCoins(Integer.parseInt(holdingAmount));
+            CoinOutputView.printHoldingCoins();
         } catch (IllegalArgumentException e) {
             ErrorOutputView.printError(e.getMessage());
-            getHoldingAmount();
+            initHoldingCoins();
         }
-        return Integer.parseInt(holdingAmount);
     }
 
 }
