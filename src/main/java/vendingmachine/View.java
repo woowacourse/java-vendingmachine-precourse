@@ -25,23 +25,47 @@ public class View {
     public static String putCoinIntoVendingMachine() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
         String inputValue = Console.readLine().replace(" ", "");
-        if (ValidationUtil.isValidAmount(inputValue)) {
+        if (isValidAmount(inputValue)) {
             return inputValue;
         }
         return putCoinIntoVendingMachine();
     }
 
+    private static boolean isValidAmount(String inputValue) {
+        try {
+            ValidationUtil.checkAmount(inputValue);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+        return true;
+    }
+
     public static String registerProduct() {
         System.out.println();
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-        return Console.readLine().replace(" ", "");
+        String value = Console.readLine().replace(" ", "");
+        // if(isValidProductContent(value)) {
+        //     return value;
+        // }
+        // return registerProduct();
     }
+
+    // private static boolean isValidProductContent(String value) {
+    //     try {
+    //         ValidationUtil.checkProductContent(value);
+    //     } catch (IllegalArgumentException e) {
+    //         System.out.println(e.getMessage());
+    //         return false;
+    //     }
+    //     return true;
+    // }
 
     public static String inputAmount() {
         System.out.println();
         System.out.println("투입 금액을 입력해 주세요.");
         String inputValue = Console.readLine().replace(" ", "");
-        if (ValidationUtil.isValidAmount(inputValue)) {
+        if (isValidAmount(inputValue)) {
             return inputValue;
         }
         return inputAmount();
