@@ -14,4 +14,10 @@ public class Input {
         String productInfo = Console.readLine();
         return productInfo;
     }
+
+    public static String InputMoney(){
+        System.out.println("\n투입 금액을 입력해주세요.");
+        String money = Console.readLine();
+        return money;
+    }
 }
