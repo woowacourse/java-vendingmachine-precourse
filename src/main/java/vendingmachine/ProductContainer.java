@@ -19,4 +19,10 @@ public class ProductContainer {
         }
         return productMap.get(productName);
     }
+
+    public int getMinimumPrice() {
+        return (int) productMap.values().stream()
+                                        .filter(product -> product.getStockQuantity() == 0)
+                                        .count();
+    }
 }
