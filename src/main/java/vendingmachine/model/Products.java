@@ -43,7 +43,7 @@ public class Products {
     public int reduceQuantity(String productName) {
         return Objects.requireNonNull(products.stream()
                 .filter(p -> p.getName().equals(productName))
-                .findAny().orElse(null)).pop();
+                .findAny().orElse(null)).popProduct();
     }
 
     public int getSize() {

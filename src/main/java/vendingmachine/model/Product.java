@@ -30,9 +30,8 @@ public class Product {
         return quantity;
     }
 
-    public int pop() {
+    public int popProduct() {
         quantity -= REDUCE_BY_ONE;
-        System.out.println(quantity + "개 남음");
         return price;
     }
 }

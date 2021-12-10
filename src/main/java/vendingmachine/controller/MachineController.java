@@ -101,7 +101,7 @@ public class MachineController {
     private String checkProductName() {
         InputView.printProductToBuyMessage();
         String productName = Console.readLine();
-        while(true) {
+        while (true) {
             try {
                 ProductValidator.validateProduct(vendingMachine, productName);
                 return productName;

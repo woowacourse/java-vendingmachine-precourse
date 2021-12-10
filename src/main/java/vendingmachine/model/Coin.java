@@ -14,7 +14,7 @@ public enum Coin {
     private final int amount;
 
     static {
-        Arrays.stream(Coin.values()).forEach(coin-> coinMap.put(coin.getAmount(), coin));
+        Arrays.stream(Coin.values()).forEach(coin -> coinMap.put(coin.getAmount(), coin));
     }
 
     Coin(final int amount) {
