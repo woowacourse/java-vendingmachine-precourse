@@ -10,6 +10,10 @@ import static vendingmachine.coin.Coin.*;
 
 public class CoinService {
     private final int amount;
+    private final List<Coin> coins = Arrays.asList(COIN_500, COIN_100, COIN_50, COIN_10);
+    private final List<Integer> coinsAmountList
+            = Arrays.asList(COIN_500.getAmount(), COIN_100.getAmount(),
+            COIN_50.getAmount(), COIN_10.getAmount());
 
     public CoinService(int amount) {
         this.amount = amount;
@@ -26,11 +30,8 @@ public class CoinService {
     }
 
     public int pickRandomCoin(int balance) {
-        List<Integer> coinList
-                = Arrays.asList(COIN_500.getAmount(), COIN_100.getAmount(),
-                COIN_50.getAmount(), COIN_10.getAmount());
         List<Integer> coinSubList
-                = new ArrayList<>(coinList.subList(findFirstIndex(balance), coinList.size()));
+                = new ArrayList<>(coinsAmountList.subList(findFirstIndex(balance), coinsAmountList.size()));
         return Randoms.pickNumberInList(coinSubList);
     }
 
@@ -38,33 +39,19 @@ public class CoinService {
     잔액에 따른 pickNumberInList() 메소드의 첫번째 인자를 결정짓는 메소드.
      */
     public int findFirstIndex(int balance) {
-        if (balance >= COIN_500.getAmount()) {
-            return 0;
-        }
-        if (balance >= COIN_100.getAmount()) {
-            return 1;
-        }
-        if (balance >= COIN_50.getAmount()) {
-            return 2;
-        }
-        return 3;
+        return coinsAmountList.indexOf(coinsAmountList.stream()
+                .filter(coinAmount -> coinAmount <= balance)
+                .findFirst().orElse(COIN_10.getAmount()));
     }
 
     public Coin getCoin(int price) {
-        if (price == COIN_500.getAmount()) {
-            return COIN_500;
-        }
-        if (price == COIN_100.getAmount()) {
-            return COIN_100;
-        }
-        if (price == COIN_50.getAmount()) {
-            return COIN_50;
-        }
-        return COIN_10;
+        return coins.stream()
+                .filter(coin -> coin.getAmount() == price)
+                .findAny()
+                .orElse(COIN_10);
     }
 
     public List<Integer> repayCoinsByBalance(int balance) {
-        List<Coin> coins = Arrays.asList(COIN_500, COIN_100, COIN_50, COIN_10);
         List<Integer> repayCounts = new ArrayList<>();
         for (Coin coin : coins) {
             int counts = Math.min(coin.getCounts(), balance / coin.getAmount());
