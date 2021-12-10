@@ -44,22 +44,22 @@ public class View {
     public static String registerProduct() {
         System.out.println();
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-        String value = Console.readLine().replace(" ", "");
-        // if(isValidProductContent(value)) {
-        //     return value;
-        // }
-        // return registerProduct();
+        String value =  Console.readLine().replace(" ", "");
+        if (isEmpty(value)) {
+            return registerProduct();
+        }
+        return value;
     }
 
-    // private static boolean isValidProductContent(String value) {
-    //     try {
-    //         ValidationUtil.checkProductContent(value);
-    //     } catch (IllegalArgumentException e) {
-    //         System.out.println(e.getMessage());
-    //         return false;
-    //     }
-    //     return true;
-    // }
+    private static boolean isEmpty(String value) {
+        try {
+            ValidationUtil.checkIsEmpty(value);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return true;
+        }
+        return false;
+    }
 
     public static String inputAmount() {
         System.out.println();
@@ -75,6 +75,10 @@ public class View {
         System.out.println();
         System.out.println("투입 금액: " + userBalance + "원");
         System.out.println("구매할 상품명을 입력해 주세요.");
-        return Console.readLine().replace(" ", "");
+        String value = Console.readLine().replace(" ", "");
+        if (isEmpty(value)) {
+            return buyProduct(userBalance);
+        }
+        return value;
     }
 }
