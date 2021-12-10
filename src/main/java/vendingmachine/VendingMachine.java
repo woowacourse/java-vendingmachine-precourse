@@ -9,18 +9,38 @@ import java.util.List;
 
 public class VendingMachine {
 	private List<Coin> coins;
-	private Items items;
-	private boolean nextStep = true;
 
-	public List<Coin> getCoins() {
-		return this.coins;
-	}
 	public static int generateRandomCoin() {
 		List<Integer> coins = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
 			coins.add(coin.getValue());
 		}
 		return pickNumberInList(coins);
+	}
+
+	public static void addCountInCoins(List<Coin> coinList, int coinValue) {
+		for (Coin coin : coinList) {
+			if (coin.getValue() == coinValue) {
+				coin.addCount();
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		VendingMachine machine = new VendingMachine();
+		machine.generateRemainCoins(3000);
+		System.out.println(machine.coins.get(0).getCount());
+		System.out.println(machine.coins.get(1).getCount());
+		System.out.println(machine.coins.get(2).getCount());
+		System.out.println(machine.coins.get(3).getCount());
+		UserMoney userMoney = new UserMoney(1200);
+		HashMap<Integer, Integer> change;
+		change = machine.returnChange(userMoney);
+		System.out.println(change.entrySet());
+	}
+
+	public List<Coin> getCoins() {
+		return this.coins;
 	}
 
 	public List<Coin> generateRemainCoins(int remains) {
@@ -37,16 +57,8 @@ public class VendingMachine {
 		return coinList;
 	}
 
-	public static void addCountInCoins(List<Coin> coinList, int coinValue) {
-		for (Coin coin : coinList) {
-			if (coin.getValue() == coinValue) {
-				coin.addCount();
-			}
-		}
-	}
-
 	public void buyItem(String itemName, Items items, UserMoney userMoney) {
-		Item item =  items.hasItem(itemName);
+		Item item = items.hasItem(itemName);
 		item.sellItem();
 		userMoney.subtractUserMoney(item.getPrice());
 	}
@@ -75,18 +87,5 @@ public class VendingMachine {
 			}
 		}
 		return change;
-	}
-
-	public static void main(String[] args) {
-		VendingMachine machine = new VendingMachine();
-		machine.generateRemainCoins(3000);
-		System.out.println(machine.coins.get(0).getCount());
-		System.out.println(machine.coins.get(1).getCount());
-		System.out.println(machine.coins.get(2).getCount());
-		System.out.println(machine.coins.get(3).getCount());
-		UserMoney userMoney = new UserMoney(1200);
-		HashMap<Integer, Integer> change;
-		change = machine.returnChange(userMoney);
-		System.out.println(change.entrySet());
 	}
 }
