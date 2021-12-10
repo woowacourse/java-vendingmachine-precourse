@@ -58,7 +58,7 @@ public class ProductsValidator {
 
     private static void checkPriceValid(List<String> productsPrice) {
         if (productsPrice.stream().anyMatch(price -> !price.matches(ValidatorMessage.NUMBER_REGEX))) {
-            throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.PRODUCT_PRICE_NUMBER_MESSAGE);
         }
         if (productsPrice.stream().anyMatch(price -> Integer.parseInt(price) < 100)) {
             throw new IllegalArgumentException(PREFIX + ValidatorMessage.PRODUCT_MIN_PRICE_MESSAGE);
@@ -71,7 +71,7 @@ public class ProductsValidator {
     private static void checkCountsValid(List<String> productsCounts) {
         if (productsCounts.stream().filter(counts -> counts.matches(ValidatorMessage.NATURAL_NUMBER_REGEX))
                 .count() != productsCounts.size()) {
-            throw new IllegalArgumentException(PREFIX + ValidatorMessage.IS_NATURAL_NUMBER_MESSAGE);
+            throw new IllegalArgumentException(PREFIX + ValidatorMessage.PRODUCT_COUNTS_NUMBER_MESSAGE);
         }
     }
 
