@@ -43,6 +43,7 @@ public class VendingMachine {
 
     private void purchase(Item item) {
         items.reduce(item);
+        moneyAvailable -= item.getPrice();
     }
 
     private Item findItem(String itemName) {
