@@ -7,6 +7,7 @@ public class ValidatorMessage {
 
     public static final String NULL_PRODUCT_MESSAGE = "존재하지 않는 상품입니다.";
     public static final String NOT_ENOUGH_AMOUNT = "잔액이 부족합니다.";
+    public static final String NOT_ENOUGH_STOCK = "재고가 부족합니다. 다른 상품을 구매해주세요.";
     public static final String IS_NUMBER_MESSAGE = "음수나 소수점, 단위가 없는 숫자로만 입력해주세요.";
     public static final String IS_NATURAL_NUMBER_MESSAGE = "자연수로 입력해주세요.";
     public static final String NULL_MESSAGE = "비어있는 입력이 존재합니다.";
