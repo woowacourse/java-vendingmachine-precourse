@@ -65,16 +65,16 @@ public class VendingMachineConsole {
         System.out.println(new MoneyAvailableResponse(moneyAvailable).toPrint());
     }
 
-    public void inputItemsToPurchase() {
-        new ItemPurchaseRequest(input()).toItemNameToPurchase();
+    public String inputItemsToPurchase() {
+        return new ItemPurchaseRequest(input()).toItemNameToPurchase();
+    }
+
+    public void printErrorMessage(String errorMessage) {
+        System.out.print(PREFIX_OF_ERROR_MESSAGE);
+        System.out.println(errorMessage);
     }
 
     private String input() {
         return Console.readLine();
-    }
-
-    private void printErrorMessage(String errorMessage) {
-        System.out.print(PREFIX_OF_ERROR_MESSAGE);
-        System.out.println(errorMessage);
     }
 }

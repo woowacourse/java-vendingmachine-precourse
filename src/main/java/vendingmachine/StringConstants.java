@@ -11,6 +11,7 @@ public class StringConstants {
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT = "상품 가격은 100원 이상의 정수이며 10원 단위로 나눠 떨어져야 합니다";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT = "상품 명은 최소 한 글자 이상이어야 합니다";
     public static final String ERROR_MESSAGE_ABOUT_WRONG_MONEY_TO_INSERT_INPUT = "투입금액은 0이상의 정수여야 합니다";
+    public static final String ERROR_MESSAGE_ABOUT_EMPTY_ITEM_TO_PURCHASE_INPUT = "상품명을 한 글자 이상 입력해 주세요";
 
     public static final String NEW_LINE = System.lineSeparator();
 

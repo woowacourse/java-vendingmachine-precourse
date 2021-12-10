@@ -22,4 +22,8 @@ public class VendingMachineService {
     public int checkAvailableMoney() {
         return vendingMachine.showAvailableMoney();
     }
+
+    public void purchaseByItemName(String inputItemsToPurchase) {
+
+    }
 }

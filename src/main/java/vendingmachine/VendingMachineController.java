@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import vendingmachine.dto.servicedto.ItemsInventoryInfo;
-
 public class VendingMachineController {
     private final VendingMachineService vendingMachineService;
     private final VendingMachineConsole console = new VendingMachineConsole();
@@ -15,10 +13,18 @@ public class VendingMachineController {
         vendingMachineService.createItems(console.inputItemInventoryInfo());
         vendingMachineService.insertMoney(console.inputMoneyToInsert());
         console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
-        console.inputItemsToPurchase();
+        purchaseItem();
     }
 
-    private ItemsInventoryInfo inputItemsInventoryInfo() {
-        return console.inputItemInventoryInfo();
+    private void purchaseItem() {
+        boolean isItemAvailable = false;
+        while (!isItemAvailable) {
+            try {
+                vendingMachineService.purchaseByItemName(console.inputItemsToPurchase());
+                isItemAvailable = true;
+            } catch (IllegalArgumentException error) {
+                console.printErrorMessage(error.getMessage());
+            }
+        }
     }
 }
