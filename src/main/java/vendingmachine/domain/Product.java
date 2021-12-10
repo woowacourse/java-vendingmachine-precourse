@@ -29,6 +29,14 @@ public class Product {
         productCount.replace(name, count);
     }
 
+    public int getPrice(String name){
+        return productPrice.get(name);
+    }
+
+    public int getCount(String name){
+        return productCount.get(name);
+    }
+
     public void setMinPrice(){
         minPrice = Integer.MAX_VALUE;
         for (Integer price : productPrice.values()) {
