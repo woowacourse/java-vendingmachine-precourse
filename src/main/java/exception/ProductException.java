@@ -18,7 +18,6 @@ public class ProductException {
 		for (String product : products) {
 			isWrapped(product);
 		}
-		isDuplicated(productList);
 	}
 
 	private static void isWrapped(String userProduct) {
@@ -67,7 +66,7 @@ public class ProductException {
 		}
 	}
 
-	private static void isDuplicated(List<Product> productList) {
+	public static void isDuplicated(List<Product> productList) {
 		List<String> productNames = new ArrayList<>();
 		for (Product product : productList) {
 			productNames.add(product.getName());

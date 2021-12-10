@@ -35,6 +35,7 @@ public class VendingMachineService {
 	public void saveProductList(String userProducts) {
 		ProductException.isValidProduct(userProducts);
 		List<Product> productList = ProductService.stringToProductList(userProducts);
+		ProductException.isDuplicated(productList);
 		vendingMachine.setProductList(productList);
 	}
 
