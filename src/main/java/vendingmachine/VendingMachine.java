@@ -8,9 +8,9 @@ import java.util.stream.Collectors;
 
 public class VendingMachine {
 
-    private int balance = 0;
+    private int balance;
 
-    private Map<String, Product> productMap = new HashMap<>();
+    private ProductContainer productContainer;
 
     private Map<Coin, Integer> remainingCoin = new HashMap<Coin, Integer>(){{
         put(Coin.COIN_10, 0);
@@ -19,8 +19,9 @@ public class VendingMachine {
         put(Coin.COIN_500, 0);
     }};
 
-    public void addBalance(int balance) {
-        this.balance += balance;
+    public VendingMachine(ProductContainer productContainer, int balance) {
+        this.productContainer = productContainer;
+        this.balance = balance;
     }
 
     public void generateCoin(int holdingAmount) {
@@ -38,8 +39,8 @@ public class VendingMachine {
 
     private List<Integer> updatePickableCoinAmountList(List<Integer> pickableCoinAmountList, int upperBoundAmount) {
         return pickableCoinAmountList.stream()
-                .filter(amount -> amount <= upperBoundAmount)
-                .collect(Collectors.toList());
+                                        .filter(amount -> amount <= upperBoundAmount)
+                                        .collect(Collectors.toList());
     }
 
     private Coin pickCoin(List<Integer> pickableCoinAmountList) {
@@ -53,34 +54,15 @@ public class VendingMachine {
         remainingCoin.put(coin, remainingStock + 1);
     }
 
-    public void setProductMap(List<Product> productList) {
-        for (Product product : productList) {
-            productMap.put(product.getName(), product);
-        }
-    }
-
     public void sellProduct(String productName) {
         Product product;
 
-        if (!productMap.keySet().contains(productName)) {
-            throw new NoSuchElementException(ErrorMessage.NO_PRODUCT_MATCH.getCompleteMessage());
-        }
-        product = productMap.get(productName);
+        product = productContainer.getProduct(productName);
 
         if (balance < product.getPrice()) {
             throw new NotEnoughBalanceException(ErrorMessage.NOT_ENOUGH_BALANCE.getCompleteMessage());
         }
         balance -= product.getPrice();
         product.sell();
-        productMap.put(product.getName(), product);
     }
-
-    public boolean isEntireSoldOut() {
-        int productCount = productMap.size();
-        int soldOutProductCount = (int) productMap.values().stream()
-                                                            .filter(product -> product.getStockQuantity() == 0)
-                                                            .count();
-        return productCount == soldOutProductCount;
-    }
-
 }
