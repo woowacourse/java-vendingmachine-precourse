@@ -21,7 +21,8 @@ public class ItemPriceAndQuantityValidator implements Validator {
 	@Override
 	public boolean validate(String value) {
 		List<String[]> itemInfo = parser.parse(value);
-		return isPriceAndQuantityNumberFormat(itemInfo) && isPriceOverBoundary(itemInfo) && isPriceTenTimesNumber(itemInfo);
+		return isPriceAndQuantityNumberFormat(itemInfo) && isPriceOverBoundary(itemInfo) &&
+			isPriceTenTimesNumber(itemInfo);
 	}
 
 	private boolean isPriceTenTimesNumber(List<String[]> itemInfo) {

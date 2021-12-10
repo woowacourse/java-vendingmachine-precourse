@@ -3,7 +3,7 @@ package vendingmachine.reader.validator;
 import java.util.Arrays;
 import java.util.List;
 
-public class CompositeValidator implements Validator{
+public class CompositeValidator implements Validator {
 	private final List<Validator> validators;
 
 	public CompositeValidator(Validator... validators) {

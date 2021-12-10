@@ -5,7 +5,7 @@ import vendingmachine.reader.validator.number.NumberFormatValidator;
 import vendingmachine.reader.validator.number.TenTimesNumberValidator;
 import vendingmachine.reader.validator.Validator;
 
-public class ExchangeAmountReader extends Reader<Integer>{
+public class ExchangeAmountReader extends Reader<Integer> {
 	public ExchangeAmountReader(Validator validator) {
 		super(validator);
 	}
@@ -26,6 +26,7 @@ public class ExchangeAmountReader extends Reader<Integer>{
 	}
 
 	public static RecursiveReader<Integer> recursiveReader() {
-		return new RecursiveReader<>(new ExchangeAmountReader(new CompositeValidator(new NumberFormatValidator(), new TenTimesNumberValidator())));
+		return new RecursiveReader<>(new ExchangeAmountReader(
+			new CompositeValidator(new NumberFormatValidator(), new TenTimesNumberValidator())));
 	}
 }

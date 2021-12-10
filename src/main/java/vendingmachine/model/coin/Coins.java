@@ -1,8 +1,11 @@
 package vendingmachine.model.coin;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
+import static java.util.Collections.reverseOrder;
+import static java.util.Comparator.comparingInt;
 
 public class Coins {
 	private final Map<Coin, Integer> coins;
@@ -29,7 +32,7 @@ public class Coins {
 	}
 
 	public Stream<Coin> stream() {
-		return coins.keySet().stream();
+		return coins.keySet().stream().sorted(comparingInt(Coin::getAmount).reversed());
 	}
 
 	public int getTotalAmount() {

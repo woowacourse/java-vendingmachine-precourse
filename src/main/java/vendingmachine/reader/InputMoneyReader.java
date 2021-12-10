@@ -3,7 +3,7 @@ package vendingmachine.reader;
 import vendingmachine.reader.validator.number.NumberFormatValidator;
 import vendingmachine.reader.validator.Validator;
 
-public class InputMoneyReader extends Reader<Integer>{
+public class InputMoneyReader extends Reader<Integer> {
 	public InputMoneyReader(Validator validator) {
 		super(validator);
 	}

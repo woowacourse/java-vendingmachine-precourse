@@ -22,6 +22,8 @@ public abstract class Reader<T> {
 	}
 
 	protected abstract void printInputMessage();
+
 	protected abstract T parse(String value);
+
 	protected abstract String getInputValueName();
 }
