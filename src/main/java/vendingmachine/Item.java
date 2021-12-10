@@ -15,4 +15,8 @@ public class Item {
 		this.price = price;
 		this.count = count;
 	}
+
+	public int getPrice() {
+		return price;
+	}
 }

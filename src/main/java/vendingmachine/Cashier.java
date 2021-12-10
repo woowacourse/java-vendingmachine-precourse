@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.ArrayList;
-
 import camp.nextstep.edu.missionutils.Randoms;
 
 /**
@@ -12,7 +10,21 @@ import camp.nextstep.edu.missionutils.Randoms;
  * @since 1.0
  */
 public class Cashier {
-	public void makeCoins(int holdingAmount) {
+	private int insertAmount;
+
+	public Cashier(int holdingAmount) {
+		makeCoins(holdingAmount);
+	}
+
+	public void insertMoney(int insertAmount) {
+		this.insertAmount = insertAmount;
+	}
+
+	public boolean isInsertAmountEnough(int required) {
+		return insertAmount >= required;
+	}
+
+	private void makeCoins(int holdingAmount) {
 		do {
 			int coinAmount = Randoms.pickNumberInList(Coin.getAmounts());
 			if (coinAmount <= holdingAmount) {

@@ -14,16 +14,14 @@ import camp.nextstep.edu.missionutils.Console;
 public class Machine {
 	private final Display display;
 	private final Validator validator;
-	private final Cashier cashier;
 	private final ItemParser itemParser;
 
-	private Map<String, Item> items;
-	private int insertAmount;
+	private Cashier cashier;
+	private ItemManager itemManager;
 
 	public Machine() {
 		this.display = new Display();
 		this.validator = new Validator();
-		this.cashier = new Cashier();
 		this.itemParser = new ItemParser();
 	}
 
@@ -31,23 +29,26 @@ public class Machine {
 		prepareCoins();
 		prepareItems();
 		prepareInsertAmount();
-		//TODO: 투입 금액이 상품의 최저가격보다 적으면 잔돈을 반환한다
+		while (cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
+			// TODO: 상품 판매
+		}
+		// TODO: 잔돈 반환
 	}
 
 	private void prepareCoins() {
-		cashier.makeCoins(askHoldingAmount());
+		this.cashier = new Cashier(askHoldingAmount());
 		display.printBlankLine();
 		display.printAllCoin();
 		display.printBlankLine();
 	}
 
 	private void prepareItems() {
-		this.items = askItems();
+		this.itemManager = new ItemManager(askItems());
 		display.printBlankLine();
 	}
 
 	private void prepareInsertAmount() {
-		this.insertAmount = askInsertAmount();
+		cashier.insertMoney(askInsertAmount());
 		display.printBlankLine();
 	}
 
