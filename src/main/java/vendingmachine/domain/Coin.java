@@ -1,5 +1,9 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Coin {
     COIN_500(500, 0),
     COIN_100(100, 0),
@@ -21,8 +25,30 @@ public enum Coin {
         return amount;
     }
 
+    public List<Integer> getAmountList() {
+        return Arrays.stream(Coin.values())
+                .map(coin -> coin.getAmount())
+                .collect(Collectors.toList());
+    }
+
+    public int getCount() {
+        return count;
+    }
+
     public void setCount(int count) {
         this.count = count;
+    }
+
+    public void addCount(Coin coin) {
+        coin.count++;
+    }
+
+    public void randomCoinCount(int number) {
+        for (Coin coin : Coin.values()) {
+            if (coin.getAmount() == number){
+                addCount(coin);
+            }
+        }
     }
 
     @Override

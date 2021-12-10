@@ -17,6 +17,6 @@ public class OutputView {
     }
 
     public static void printMoneyStatus(VendingMachine vendingMachine) {
-        System.out.println("투입 금액 : " + vendingMachine.getInputMoney());
+        System.out.println("투입 금액: " + vendingMachine.getInputMoney());
     }
 }

@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 
 public class VendingMachineController {
@@ -18,6 +19,7 @@ public class VendingMachineController {
             purchase(vendingMachine);
         } while (!vendingMachine.canPurchase());
 
+        printChange(vendingMachine);
     }
 
     private void getMachineMoney(VendingMachine vendingMachine) {
@@ -59,6 +61,6 @@ public class VendingMachineController {
 
     private void printChange(VendingMachine vendingMachine) {
         OutputView.printMoneyStatus(vendingMachine);
-
+        vendingMachine.getChange();
     }
 }

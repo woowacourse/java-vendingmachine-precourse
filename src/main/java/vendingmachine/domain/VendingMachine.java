@@ -1,6 +1,10 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.View.OutputView;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class VendingMachine {
     MachineMoney machineMoney;
@@ -35,13 +39,13 @@ public class VendingMachine {
     }
 
     private void makeRandomCoin(Coin coin) {
-        if (coin == Coin.COIN_10) {
-            coin.setCount(machineMoney.getMoney() / coin.getAmount());
-            return;
+        while (machineMoney.getMoney() != 0){
+            int number = Randoms.pickNumberInList(coin.getAmountList());
+            if (number <= machineMoney.getMoney()){
+                machineMoney.minusMoney(number);
+                coin.randomCoinCount(number);
+            }
         }
-        int number = Randoms.pickNumberInRange(0, machineMoney.getMoney() / coin.getAmount());
-        machineMoney.minusMoney(coin.getAmount() * number);
-        coin.setCount(number);
     }
 
     public void addMerchandise(String merchandise) {
@@ -63,5 +67,31 @@ public class VendingMachine {
         }
         return false;
     }
+
+    public void getChange() {
+        int money = inputMoney.getInputMoney();
+        ArrayList<String> changeList = new ArrayList<String>();
+
+        for (Coin coin : Coin.values()){
+            if (money / coin.getAmount() < coin.getCount()){
+                coin.setCount(money / coin.getAmount());
+                changeList.add(coin.toString());
+                System.out.println("잔돈");
+                changeList.stream().forEach(System.out::println);
+                return;
+            }
+            changeList.add(coin.toString());
+            money = money - coin.getCount() * coin.getAmount();
+        }
+    }
+
+    public boolean coinLessThanMoney(int money) {
+        int coinSum =  Arrays.stream(Coin.values())
+                .map(coin -> coin.getAmount() * coin.getCount())
+                .reduce(Integer :: sum)
+                .orElse(0);
+        return coinSum <= money;
+    }
+
 }
 
