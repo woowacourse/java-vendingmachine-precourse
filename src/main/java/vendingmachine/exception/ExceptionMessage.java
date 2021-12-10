@@ -18,6 +18,7 @@ public class ExceptionMessage {
 
     // Location : model/item/Item
     public static final String ITEM_INFO_FORMAT_EXCEPTION_MESSAGE = "상품 정보가 잘못되었습니다. Format : [상품명,가격,수량]";
+    public static final String ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE = "상품 정보에 누락이 있습니다.";
 
     // Location : model/item/Items
     public static final String WRONG_ITEM_DELIMITER_EXCEPTION_MESSAGE = "상품을 구분하는 구분자(;) 앞 뒤에 상품 정보가 없습니다.";
