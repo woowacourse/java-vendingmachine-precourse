@@ -54,6 +54,8 @@ public class Machine {
 		display.printInsertAmount(cashier);
 		while (!itemManager.isAllSoldOut() && cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
 			cashier.payItem(itemManager.takeOne(askWhatToBuy()));
+			display.printBlankLine();
+			display.printInsertAmount(cashier);
 		}
 	}
 
