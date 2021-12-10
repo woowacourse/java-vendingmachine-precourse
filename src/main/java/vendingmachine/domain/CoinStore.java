@@ -18,14 +18,7 @@ public class CoinStore {
 			put(Coin.findCoin(10), 0);
 		}
 	};
-	private final EnumMap<Coin, Integer> changeCoins = new EnumMap<Coin, Integer>(Coin.class) {
-		{
-			put(Coin.findCoin(500), 0);
-			put(Coin.findCoin(100), 0);
-			put(Coin.findCoin(50), 0);
-			put(Coin.findCoin(10), 0);
-		}
-	};
+	private final EnumMap<Coin, Integer> changeCoins = new EnumMap<>(coins);
 
 	public CoinStore(int money) {
 		createRandomCoins(money);
