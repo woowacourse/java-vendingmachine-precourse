@@ -10,6 +10,9 @@ public class User {
 	}
 
 	public void buyProduct(int price) {
+		if(!isEnoughMoney(price)){
+			throw new IllegalArgumentException(PRODUCT_EXPENSIVE_ERROR);
+		}
 		money -= price;
 	}
 

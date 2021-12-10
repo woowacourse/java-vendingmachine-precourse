@@ -9,6 +9,7 @@ import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachineMoney;
 import vendingmachine.domain.VendingMachineProduct;
 import vendingmachine.domain.VendingMachineProducts;
+import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -22,7 +23,7 @@ public class VendingMachineController {
 		OutputView.printVendingMachineMoney(vendingMachineMoney.getCoins());
 		saveProducts();
 		saveUser();
-		OutputView.printUserInputMoney(user);
+		vendingMachineWork();
 	}
 
 	private void saveUser() {
@@ -50,4 +51,27 @@ public class VendingMachineController {
 		vendingMachineMoney.moneyToCoins(vendingMachineInputMoney);
 		OutputView.printNewLine();
 	}
+
+	private void vendingMachineWork() {
+		while (canBuyProduct()) {
+			OutputView.printUserInputMoney(user);
+			buyProduct();
+		}
+	}
+
+	private void buyProduct() {
+		String productName = InputView.getProductName();
+		try {
+			VendingMachineProduct product = vendingMachineProducts.findName(productName);
+			vendingMachineProducts.buyProduct(productName);
+			user.buyProduct(product.getPrice());
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
+		}
+	}
+
+	private boolean canBuyProduct() {
+		return user.isEnoughMoney(vendingMachineProducts.getLowestPrice()) && vendingMachineProducts.hasProduct();
+	}
+
 }
