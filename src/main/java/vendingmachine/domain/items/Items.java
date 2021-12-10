@@ -49,14 +49,14 @@ public class Items {
 	}
 
 	// TODO: 리팩토링 필요
-	public Items sellItem(Item item, UserBalance userBalance) {
+	public Items buyItem(Item item, UserBalance userBalance) {
 		if (!item.isEnoughBalance(userBalance)) {
 			throw new NotEnoughBalanceException();
 		}
 
 		List<Item> soldItems = items.stream().map(singleItem -> {
 			if (singleItem.getItemName().equals(item.getItemName())) {
-				return singleItem.sell();
+				return singleItem.buy();
 			}
 			return singleItem;
 		}).collect(Collectors.toList());

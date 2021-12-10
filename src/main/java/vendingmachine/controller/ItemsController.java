@@ -31,7 +31,7 @@ public class ItemsController {
 			ItemName itemName = ItemName.from(input);
 			Item item = itemsService.findByItemName(itemName);
 			UserBalance userBalance = userBalanceService.getUserBalance();
-			itemsService.sellItem(item, userBalance);
+			itemsService.buyItem(item, userBalance);
 			userBalanceService.subtractUserBalance(item.getItemPrice());
 			userBalance = userBalanceService.getUserBalance();
 			OutputView.printCurrentUserBalance(userBalance.toInt());

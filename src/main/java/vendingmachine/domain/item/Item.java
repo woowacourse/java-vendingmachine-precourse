@@ -61,7 +61,7 @@ public class Item {
 		return this.price.toInt() <= userBalance.toInt();
 	}
 
-	public Item sell() {
+	public Item buy() {
 		ItemQuantity subtractedQuantity = this.quantity.subtract();
 		return new Item(this.name, this.price, subtractedQuantity);
 	}

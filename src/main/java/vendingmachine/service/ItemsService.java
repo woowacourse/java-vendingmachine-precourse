@@ -32,8 +32,8 @@ public class ItemsService {
 		return items.getMinItemPrice();
 	}
 
-	public void sellItem(Item item, UserBalance userBalance) {
-		Items items = itemsRepository.findAll().sellItem(item, userBalance);
+	public void buyItem(Item item, UserBalance userBalance) {
+		Items items = itemsRepository.findAll().buyItem(item, userBalance);
 		itemsRepository.setItems(items);
 	}
 
