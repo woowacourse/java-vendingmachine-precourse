@@ -26,7 +26,14 @@ public class InputView {
 	public static List<String> inputProductList() {
 		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
 		String input = Console.readLine();
-		return splitProduct(Arrays.asList(input.split(DELIMITER_OF_PRODUCT_LIST)));
+		try {
+			List<String> productList = Arrays.asList(input.split(DELIMITER_OF_PRODUCT_LIST));
+			validateInputProductList(productList);
+			return splitProduct(productList);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			return inputProductList();
+		}
 	}
 
 	private static List<String> splitProduct(List<String> productList) {

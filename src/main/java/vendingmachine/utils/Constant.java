@@ -11,4 +11,5 @@ public class Constant {
 	public static int INDEX_OF_PRODUCT_NAME = 0;
 	public static int INDEX_OF_PRODUCT_PRICE = 1;
 	public static int INDEX_OF_PRODUCT_QUANTITY = 2;
+	public static final String REGEX_OF_PRODUCT_INPUT = "\\[.+,\\d{3,},\\d+]";
 }
