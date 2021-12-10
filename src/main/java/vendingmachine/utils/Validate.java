@@ -34,4 +34,8 @@ public class Validate {
 			}
 		}
 	}
+
+	public static void validateInputUserAmount(String input) {
+		validateInputStringToInteger(input);
+	}
 }

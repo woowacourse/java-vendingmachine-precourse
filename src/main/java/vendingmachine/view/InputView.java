@@ -45,7 +45,13 @@ public class InputView {
 	public static int inputUserAmount() {
 		System.out.println("투입 금액을 입력해 주세요.");
 		String input = Console.readLine();
-		return Integer.parseInt(input);
+		try{
+			validateInputUserAmount(input);
+			return Integer.parseInt(input);
+		}catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			return inputUserAmount();
+		}
 	}
 
 	public static String inputPurchaseProductName() {
