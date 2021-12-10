@@ -11,9 +11,15 @@ public class VendingMachineController {
 	public VendingMachineController() {
 		OutputView.setVendingMachineMoney();
 		vendingMachine = new VendingMachine(InputView.readLineInt());
+		showVendingMachineCoins();
 	}
 
 	private void showVendingMachineCoins() {
 		OutputView.showCoins(vendingMachine.getCoinsOwned());
+	}
+
+	public void addProduct() {
+		OutputView.addProductAndNumbers();
+		vendingMachine.addProduct(InputView.readLineString());
 	}
 }

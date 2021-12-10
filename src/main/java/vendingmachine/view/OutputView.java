@@ -14,5 +14,10 @@ public class OutputView {
 		for (int coin : coins.keySet()) {
 			System.out.println(coin + RULES_TO_SHOW + coins.get(coin) + NUMBER);
 		}
+		System.out.println();
+	}
+
+	public static void addProductAndNumbers() {
+		System.out.println(ENTER_PRODUCT_AND_NUMBER_MESSAGE);
 	}
 }
