@@ -11,5 +11,19 @@ public class Product {
         this.count = count;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void buyOneProduct() {
+        count--;
+    }
 }
