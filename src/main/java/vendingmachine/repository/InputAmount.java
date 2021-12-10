@@ -11,8 +11,7 @@ public class InputAmount {
         this.amount -= price;
     }
 
-    @Override
-    public String toString() {
-        return Integer.toString(amount);
+    public int getAmount() {
+        return amount;
     }
 }

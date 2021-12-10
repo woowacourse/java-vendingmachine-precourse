@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import vendingmachine.controller.VendingMachine;
+import view.View;
+
 public class Adapter {
     private VendingMachine vendingMachine;
 
@@ -13,7 +16,7 @@ public class Adapter {
 
     private void mapToUserAmountInputPage() {
         String value = View.inputAmount();
-        vendingMachine.createInputAmount(value);
+        vendingMachine.receiveInputAmount(value);
     }
 
     private void mapToVendingMachineAmountInputPage() {
@@ -24,7 +27,7 @@ public class Adapter {
     private void mapToProductRegistrationPage() {
         String value = View.registerProduct();
         try {
-            vendingMachine.createProduct(value);
+            vendingMachine.registerProduct(value);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             mapToProductRegistrationPage();
@@ -32,11 +35,11 @@ public class Adapter {
     }
 
     private void mapToPurchasePage() {
-        boolean canBuy = vendingMachine.checkUserBalance();
+        boolean canBuy = vendingMachine.canBuyProduct();
         while (canBuy) {
             String value = checkValidProductName();
             vendingMachine.sell(value);
-            canBuy = vendingMachine.checkUserBalance();
+            canBuy = vendingMachine.canBuyProduct();
         }
     }
 

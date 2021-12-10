@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.Coins;
+import vendingmachine.repository.Coins;
 import vendingmachine.repository.InputAmount;
 import vendingmachine.repository.Products;
 import view.View;
@@ -19,12 +19,12 @@ public class VendingMachine {
         View.printInitialCoins(coins.getCoins());
     }
 
-    public InputAmount getUserBalance() {
-        return inputAmount;
+    public int getUserBalance() {
+        return inputAmount.getAmount();
     }
 
     public void getCoins() {
-        View.printCoins(inputAmount, coins.exchange(inputAmount));
+        View.printCoins(inputAmount.getAmount(), coins.exchange(inputAmount.getAmount()));
     }
 
     public void registerProduct(String specification) {
@@ -41,7 +41,7 @@ public class VendingMachine {
     }
 
     public boolean canBuyProduct() {
-        return products.isValidAmount(inputAmount);
+        return products.isValidAmount(inputAmount.getAmount());
     }
 
     public void checkIsValidProductName(String name) {
