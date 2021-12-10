@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
 import vendingmachine.constants.CoinConstants;
 import vendingmachine.view.InputView;
-import vendingmachine.view.OutputView;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -66,9 +65,25 @@ public class VendingMachine {
         return isEnoughMoney;
     }
 
+    public HashMap<Integer, Integer> calculateCoinChanges() {
+        HashMap<Integer, Integer> coinChanges = new HashMap<>();
+        for (Integer coinValue : CoinConstants.getCoinValuesDesc()) {
+            if (this.coins.get(coinValue) == 0) continue;
+            if (this.moneyLeft < coinValue) continue;
+            int amount = this.moneyLeft/coinValue;
+            if (amount > this.coins.get(coinValue)) {
+                amount = this.coins.get(coinValue);
+            }
+            coinChanges.put(coinValue, amount);
+            this.coins.put(coinValue, this.coins.get(coinValue)-amount);
+            this.moneyLeft -= coinValue * amount;
+        }
+        return coinChanges;
+    }
+
     private void generateCoins(int totalMoney) {
         while (totalMoney > 0) {
-            int randomCoin = Randoms.pickNumberInList(CoinConstants.getCoinValues());
+            int randomCoin = Randoms.pickNumberInList(CoinConstants.getCoinValuesDesc());
             if (totalMoney >= randomCoin) {
                 coins.put(randomCoin, coins.get(randomCoin) + 1);
                 totalMoney -= randomCoin;

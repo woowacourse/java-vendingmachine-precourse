@@ -18,5 +18,7 @@ public class Application {
             if (!machine.canBuyMore()) break;
             machine.sellMerchandise();
         }
+
+        OutputView.printCoinChanges(machine.calculateCoinChanges());
     }
 }
