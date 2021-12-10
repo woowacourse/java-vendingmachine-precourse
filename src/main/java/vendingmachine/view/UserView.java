@@ -10,4 +10,8 @@ public class UserView {
 	public void askProductsInfo() {
 		System.out.println("\n" + InputMessage.INPUT_MENU_MESSAGE);
 	}
+
+	public void askInsertMoney() {
+		System.out.println("\n" + InputMessage.INSERT_MONEY_MESSAGE);
+	}
 }

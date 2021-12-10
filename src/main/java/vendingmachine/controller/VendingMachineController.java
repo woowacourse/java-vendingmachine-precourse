@@ -19,7 +19,11 @@ public class VendingMachineController {
 		userView.askVendingMachineCoins();
 		vendingMachine.setCoins();
 		vendingMachineView.printCoinsOfVendingMachine(vendingMachine);
+
 		userView.askProductsInfo();
 		vendingMachine.setMenu();
+
+		userView.askInsertMoney();
+		vendingMachine.insertMoney();
 	}
 }

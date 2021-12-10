@@ -3,9 +3,7 @@ package vendingmachine.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.constants.ErrorMessage;
-import vendingmachine.util.NumberException;
+import vendingmachine.util.Money;
 
 public class Changes {
 	private List<Integer> coinList;
@@ -17,20 +15,8 @@ public class Changes {
 	}
 
 	public void setCoinList() {
-		changes = setChanges();
+		changes = Money.setMoney();
 		coinList = Coin.getRandomCoinList(changes);
-	}
-
-	public int setChanges() {
-		int money;
-		try {
-			String moneyStr = Console.readLine();
-			money = NumberException.checkMoneyException(moneyStr);
-		} catch (Exception e) {
-			System.out.println(ErrorMessage.ERROR + e.getMessage());
-			return setChanges();
-		}
-		return money;
 	}
 
 	public int countCoin(int idx) {

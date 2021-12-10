@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import vendingmachine.util.Money;
+
 public class VendingMachine {
 	private int insertedMoney;
 	private Changes changes;
@@ -22,4 +24,9 @@ public class VendingMachine {
 	public void setMenu() {
 		menu.setProductList();
 	}
+
+	public void insertMoney() {
+		insertedMoney = Money.setMoney();
+	}
+
 }
