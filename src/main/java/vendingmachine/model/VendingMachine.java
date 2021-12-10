@@ -8,6 +8,7 @@ public class VendingMachine {
 	public VendingMachine() {
 		insertedMoney = 0;
 		changes = new Changes();
+		menu = new Menu();
 	}
 
 	public void setCoins() {

@@ -8,6 +8,6 @@ public class UserView {
 	}
 
 	public void askProductsInfo() {
-		System.out.println(InputMessage.INPUT_MENU_MESSAGE);
+		System.out.println("\n" + InputMessage.INPUT_MENU_MESSAGE);
 	}
 }

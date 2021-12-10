@@ -29,11 +29,12 @@ public class Menu {
 			String[] productStrList = productListStr.split(";", -1);
 
 			for (int i = 0; i < productStrList.length; i++) {
-				productList.add(new Product(productStrList[i]));
+				productList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
 				ProductException.checkProductReDuplication(productList.get(i).getName(), nameList);
 			}
 
 		} catch (IllegalArgumentException e) {
+			nameList.clear();
 			System.out.println(ErrorMessage.ERROR + e.getMessage());
 			return makeProductList();
 		}

@@ -20,5 +20,6 @@ public class VendingMachineController {
 		vendingMachine.setCoins();
 		vendingMachineView.printCoinsOfVendingMachine(vendingMachine);
 		userView.askProductsInfo();
+		vendingMachine.setMenu();
 	}
 }
