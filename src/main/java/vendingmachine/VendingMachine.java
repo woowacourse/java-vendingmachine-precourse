@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.HashMap;
+
 public class VendingMachine {
 	private ChangeSlot changeSlot;
 	private ProductStorage productStorage;
@@ -25,5 +27,9 @@ public class VendingMachine {
 
 	public void trade(String product) {
 		moneySlot.payProductValue(productStorage.sellProduct(product));
+	}
+
+	public HashMap<Coin, Integer> returnChange() {
+		return changeSlot.calculateChange(moneySlot.getRemainMoney());
 	}
 }

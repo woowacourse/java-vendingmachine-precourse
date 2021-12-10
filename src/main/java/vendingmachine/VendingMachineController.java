@@ -19,9 +19,6 @@ public class VendingMachineController {
 
 		InputView.printInsertMoneyMessage();
 		vendingMachine = new VendingMachine(changeSlot, productStorage);
-		requestInsertMoney();
-
-		repeatRequestTrading();
 	}
 
 	private void requestInitialMoney(ChangeSlot changeSlot) {
@@ -43,6 +40,12 @@ public class VendingMachineController {
 		}
 	}
 
+	public void use() {
+		requestInsertMoney();
+		repeatRequestTrading();
+		returnChangeCoins();
+	}
+	
 	private void requestInsertMoney() {
 		try {
 			vendingMachine.insertMoney(Console.readLine());
@@ -66,5 +69,10 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 		}
+	}
+
+	private void returnChangeCoins() {
+		OutputView.printRemainMoney(vendingMachine.calculateRemainMoney());
+		OutputView.printChange(vendingMachine.returnChange());
 	}
 }

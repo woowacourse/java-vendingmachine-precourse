@@ -10,6 +10,7 @@ public class OutputView {
 	private static final String COINS_FORMAT = " - ";
 	private static final String COUNTING_UNIT = "개";
 	private static final String REMAIN_MONEY_FORMAT = "투입 금액: ";
+	private static final String CHANGE = "잔돈";
 
 	private static void printLineBreak() {
 		System.out.println();
@@ -31,5 +32,12 @@ public class OutputView {
 	public static void printRemainMoney(int money) {
 		printLineBreak();
 		System.out.println(REMAIN_MONEY_FORMAT + money + MONETARY_UNIT);
+	}
+
+	public static void printChange(HashMap<Coin, Integer> coins) {
+		System.out.println(CHANGE);
+		for (Coin coin : coins.keySet()) {
+			System.out.println(coin.getAmount() + MONETARY_UNIT + COINS_FORMAT + coins.get(coin) + COUNTING_UNIT);
+		}
 	}
 }
