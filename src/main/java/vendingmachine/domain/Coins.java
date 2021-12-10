@@ -42,10 +42,4 @@ public class Coins {
 		int amount = pickRandomCoin(Coin.getAmounts());
 		return Coin.getCoin(amount);
 	}
-
-	public void print() {
-		list.forEach(((coin, integer) -> System.out.println(coin + "  " + integer)));
-	}
-
-
 }
