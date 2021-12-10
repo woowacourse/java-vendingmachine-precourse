@@ -1,17 +1,19 @@
 package vendingmachine.model;
 
+import java.util.List;
+import vendingmachine.utils.CoinCaseFactory;
 import vendingmachine.utils.ExceptionUtils;
 
 public class VendingMachine {
 
-	private final CoinsCase coinsCase;
+	private final List<CoinCase> coinsCase;
 
 	public VendingMachine(int amount) {
 		ExceptionUtils.validateMoney(amount);
-		this.coinsCase = new CoinsCase(amount);
+		this.coinsCase = CoinCaseFactory.makeCoinsCase(amount);
 	}
 
-	public CoinsCase getCoinsCase() {
+	public List<CoinCase> getCoinsCase() {
 		return coinsCase;
 	}
 }

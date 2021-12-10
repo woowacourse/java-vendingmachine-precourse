@@ -9,14 +9,14 @@ public class CoinCase {
 
 	private final Coin coin;
 	private final int number;
-	private int vendingMachineAmount;
+	private int currentAmount;
 	private static final int INITIAL_VALUE = 0;
 	private static final int MINIMUM_RANGE = 1;
 
-	public CoinCase(Coin coin, int vendingMachineAmount) {
-		ExceptionUtils.validateMoney(vendingMachineAmount);
+	public CoinCase(Coin coin, int currentAmount) {
+		ExceptionUtils.validateMoney(currentAmount);
 		this.coin = coin;
-		this.vendingMachineAmount = vendingMachineAmount;
+		this.currentAmount = currentAmount;
 		this.number = calculateNumberOfCoin();
 	}
 
@@ -28,13 +28,13 @@ public class CoinCase {
 		return number;
 	}
 
-	public int getVendingMachineAmount() {
-		vendingMachineAmount -= number * coin.getAmount();
-		return vendingMachineAmount;
+	public int getCurrentAmount() {
+		currentAmount -= number * coin.getAmount();
+		return currentAmount;
 	}
 
 	private int calculateNumberOfCoin() {
-		int maxNumber = vendingMachineAmount / coin.getAmount();
+		int maxNumber = currentAmount / coin.getAmount();
 		if (maxNumber == INITIAL_VALUE) {
 			return maxNumber;
 		}

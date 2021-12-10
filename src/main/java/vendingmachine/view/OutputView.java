@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
-import vendingmachine.model.CoinsCase;
 
 public class OutputView {
 
@@ -25,12 +24,12 @@ public class OutputView {
 		System.out.println(ASK_VENDING_MACHINE_AMOUNT);
 	}
 
-	public static void printVendingMachineCoinStatus(CoinsCase coinsCase) {
+	public static void printVendingMachineCoinStatus(List<CoinCase> coinsCase) {
 		System.out.println(VENDING_MACHINE_COIN_STATUS);
-		List<Integer> coinTypes = coinsCase.getCoinsCase().stream().map(CoinCase::getCoin)
+		List<Integer> coinTypes = coinsCase.stream().map(CoinCase::getCoin)
 			.map(Coin::getAmount).collect(
 				Collectors.toList());
-		List<Integer> numberOfCoins = coinsCase.getCoinsCase().stream().map(CoinCase::getNumber)
+		List<Integer> numberOfCoins = coinsCase.stream().map(CoinCase::getNumber)
 			.collect(
 				Collectors.toList());
 		for (int i = INITIAL_VALUE; i < coinTypes.size(); i++) {
