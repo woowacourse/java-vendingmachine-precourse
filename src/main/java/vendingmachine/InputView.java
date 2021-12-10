@@ -1,14 +1,15 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Product;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 
 public class InputView {
 
-    private static final String MONEY_INPUT_INSTRUCTION = "자판기가 보유하고 있는 금액을 입력해 주세요. ";
+    private static final String MONEY_TO_VENDING_MACHINE_INPUT_INSTRUCTION = "투입 금액을 입력해 주세요. ";
+    private static final String MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION = "자판기가 보유하고 있는 금액을 입력해 주세요. ";
     private static final String PRODUCT_INPUT_INSTRUCTION = "상품명과 가격, 수량을 입력해 주세요.";
     private static final String ERROR_HEADER = "[ERROR] ";
     private static final String INCLUDE_SPACE_ERROR = "입력에 공백이 있습니다. 공백없이 입력해주세요. ";
@@ -16,20 +17,26 @@ public class InputView {
     private static final String NOT_VALID_NUMBER_MESSAGE = "10원으로 나누어 떨어지는 금액을 입력해주세요. ";
     private static final String NOT_VALID_FORMAT_MESSAGE = "올바른 상품 입력 형식이 아닙니다. [상품명,가격,수량] 형식으로 입력해주세요.";
 
+    public int inputMoneyToVendingMachine() {
+        return inputMoney(MONEY_TO_VENDING_MACHINE_INPUT_INSTRUCTION);
+    }
 
-    public int inputMoney() {
+    public int inputMoneyOfVendingMachine() {
+        return inputMoney(MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION);
+    }
+
+    private int inputMoney(String message) {
         while (true) {
             try {
-                System.out.println(MONEY_INPUT_INSTRUCTION);
+                System.out.println(message);
                 String inputMoney = Console.readLine();
                 return checkValidMoney(inputMoney);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            } catch (Exception e) {
-                System.out.println(ERROR_HEADER + e.getMessage());
             }
         }
     }
+
 
     public Collection<Product> inputProduct() {
         while (true) {
@@ -39,8 +46,6 @@ public class InputView {
                 return checkValidProducts(inputProducts);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
-            } catch (Exception e) {
-                System.out.println(ERROR_HEADER + e.getMessage());
             }
         }
 
