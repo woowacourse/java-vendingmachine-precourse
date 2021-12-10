@@ -1,7 +1,7 @@
 package vendingmachine.service;
 
-import vendingmachine.domain.Items.Items;
 import vendingmachine.domain.item.ItemPrice;
+import vendingmachine.domain.items.Items;
 import vendingmachine.repository.ItemsRepository;
 
 public class ItemsService {

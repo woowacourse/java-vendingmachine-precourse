@@ -1,6 +1,6 @@
 package vendingmachine.repository;
 
-import vendingmachine.domain.Items.Items;
+import vendingmachine.domain.items.Items;
 
 public class ItemsRepository {
 	private static ItemsRepository instance = new ItemsRepository();

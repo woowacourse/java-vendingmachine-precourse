@@ -1,4 +1,4 @@
-package vendingmachine.domain.Items;
+package vendingmachine.domain.items;
 
 import java.util.Arrays;
 import java.util.Collections;
