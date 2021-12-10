@@ -8,6 +8,7 @@ public class VendingMachine {
 	private int deposit;
 	private ProductList productList;
 	private CoinList coinList;
+	private Changes changes = new Changes();
 
 	public VendingMachine(int deposit, ProductList productList, CoinList coinList) {
 		this.deposit = deposit;
@@ -41,7 +42,6 @@ public class VendingMachine {
 	}
 
 	public Changes createChanges() {
-		Changes changes = new Changes();
 		LinkedHashMap<Coin, Integer> hashMap = coinList.getHashMap();
 		for (Map.Entry<Coin, Integer> entry : hashMap.entrySet()) {
 			if (deposit == 0) {
@@ -52,13 +52,13 @@ public class VendingMachine {
 				continue;
 			}
 
-			subtractFromCoinListAndAddChange(changes, entry.getKey(), entry.getValue());
+			subtractFromCoinListAndAddChange(entry.getKey(), entry.getValue());
 		}
 
 		return changes;
 	}
 
-	private void subtractFromCoinListAndAddChange(Changes changes, Coin coin, int availableNumberOfCoins) {
+	private void subtractFromCoinListAndAddChange(Coin coin, int availableNumberOfCoins) {
 		int numberOfChange = getNumberOfChange(coin, availableNumberOfCoins);
 		if (numberOfChange == 0) {
 			return;
