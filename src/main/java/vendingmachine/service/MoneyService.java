@@ -14,8 +14,12 @@ public class MoneyService {
 	}
 
 	public int getSavedMoney(){
-		String savedMoneyString = inputView.inputSavedMoney();
-		moneyInputValidator.validateMoneyInput(savedMoneyString);
+		String savedMoneyString;
+		boolean isValidMoney;
+		do {
+			savedMoneyString = inputView.inputSavedMoney();
+			isValidMoney = moneyInputValidator.validateMoneyInput(savedMoneyString);
+		}while(!isValidMoney);
 		return Integer.parseInt(savedMoneyString);
 	}
 }

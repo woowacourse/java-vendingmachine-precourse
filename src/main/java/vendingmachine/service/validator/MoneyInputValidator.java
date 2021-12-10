@@ -4,13 +4,15 @@ public class MoneyInputValidator {
 
 	private static final int MINIMUM_MONEY = 0;
 
-	public void validateMoneyInput(String savedMoneyInput) {
+	public boolean validateMoneyInput(String savedMoneyInput) {
 		try {
 			validateDigit(savedMoneyInput);
 			validateMinimumMoney(savedMoneyInput);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
+			return false;
 		}
+		return true;
 	}
 
 	private void validateDigit(String savedMoneyInput) {
