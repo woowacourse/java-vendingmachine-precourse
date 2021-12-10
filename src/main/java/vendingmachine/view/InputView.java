@@ -31,7 +31,7 @@ public class InputView {
 
 	private static List<String> splitProduct(List<String> productList) {
 		return productList.stream()
-			.map(i -> i.substring(FIRST_INDEX_FOR_SLICE_PRODUCT_STRING, i.length() - 1))
+			.map(i -> i.substring(INDEX_OF_PRODUCT_SUBSTRING, i.length() - INDEX_OF_PRODUCT_SUBSTRING))
 			.collect(Collectors.toList());
 	}
 

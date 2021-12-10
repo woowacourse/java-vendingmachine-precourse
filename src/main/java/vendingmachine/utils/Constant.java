@@ -6,7 +6,7 @@ public class Constant {
 	public static int PLUS_COIN_ELEMENT = 1;
 	public static String DELIMITER_OF_COIN_STORE_STATUS_REPRESENT = " - ";
 	public static String DELIMITER_OF_PRODUCT_LIST = ";";
-	public static int FIRST_INDEX_FOR_SLICE_PRODUCT_STRING = 1;
+	public static int INDEX_OF_PRODUCT_SUBSTRING = 1;
 	public static String DELIMITER_PRODUCT_STRING = ",";
 	public static int INDEX_OF_PRODUCT_NAME = 0;
 	public static int INDEX_OF_PRODUCT_PRICE = 1;
