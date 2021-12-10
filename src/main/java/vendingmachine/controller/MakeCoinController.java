@@ -6,15 +6,12 @@ import vendingmachine.domain.VendingMachineMoney;
 
 public class MakeCoinController {
     public static void makeCoin(VendingMachineMoney vendingMachineMoney){
-        int totalMoney = vendingMachineMoney.getTotalMoney();
-        totalMoney -= makeCoin500(vendingMachineMoney, totalMoney);
-        totalMoney -= makeCoin100(vendingMachineMoney, totalMoney);
-        totalMoney -= makeCoin50(vendingMachineMoney, totalMoney);
-        totalMoney -= makeCoin10(vendingMachineMoney, totalMoney);
-        System.out.println(vendingMachineMoney.getMoneyCount500());
-        System.out.println(vendingMachineMoney.getMoneyCount100());
-        System.out.println(vendingMachineMoney.getMoneyCount50());
-        System.out.println(vendingMachineMoney.getMoneyCount10());
+        int remainChange = vendingMachineMoney.getTotalMoney();
+
+        remainChange = remainChange - makeCoin500(vendingMachineMoney, remainChange);
+        remainChange = remainChange - makeCoin100(vendingMachineMoney, remainChange);
+        remainChange = remainChange - makeCoin50(vendingMachineMoney, remainChange);
+        makeCoin10(vendingMachineMoney, remainChange);
     }
 
     private static int makeCoin500(VendingMachineMoney vendingMachineMoney, int remainChange) {
@@ -50,10 +47,8 @@ public class MakeCoinController {
         return Coin.COIN_50.getAmount()*randomCount;
     }
 
-    private static int makeCoin10(VendingMachineMoney vendingMachineMoney, int remainChange) {
+    private static void makeCoin10(VendingMachineMoney vendingMachineMoney, int remainChange) {
         int count = remainChange/Coin.COIN_10.getAmount();
         vendingMachineMoney.setMoneyCount10(count);
-
-        return Coin.COIN_10.getAmount()*count;
     }
 }
