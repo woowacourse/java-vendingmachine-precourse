@@ -32,6 +32,8 @@ public class VendingMachine {
         try {
             String buyProductName = machineController.buyWhichProduct();
             Product product = productsController.findProduct(buyProductName);
+            machineController.canHaveMoney(product.getPrice());
+            productsController.canHaveStock(product);
             machineController.buyProduct(product.getPrice());
             productsController.buyProduct(product);
         } catch (IllegalArgumentException e) {
