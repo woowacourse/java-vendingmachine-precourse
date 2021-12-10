@@ -26,12 +26,27 @@ public class ProductRepository {
         return productRepository.containsKey(productName);
     }
 
-    public int takeout(String productName) {
+    public int takeout(String productName, Price userMoney) {
         Product productUserWantBuying = productRepository.get(productName);
-        if (productUserWantBuying.hasStock()) {
-            productUserWantBuying.takeOutInWarehouse();
+        int priceUserWantBuying = validateUserHaveMoneyToBuy(userMoney, productUserWantBuying);
+
+        validateWarehouseHaveStock(productUserWantBuying);
+        return priceUserWantBuying;
+    }
+
+    private void validateWarehouseHaveStock(Product productUserWantBuying) {
+        if (!productUserWantBuying.hasStock()) {
+            throw new IllegalArgumentException("해당 상품은 재고가 남아있지 않습니다.");
         }
-        return productUserWantBuying.getPrice();
+        productUserWantBuying.takeOutInWarehouse();
+    }
+
+    private int validateUserHaveMoneyToBuy(Price userMoney, Product productUserWantBuying) {
+        int priceUserWantBuying = productUserWantBuying.getPrice();
+        if (userMoney.getPrice() < priceUserWantBuying) {
+            throw new IllegalArgumentException("남아있는 금액으로는 해당 제품을 구매할 수 없습니다.");
+        }
+        return priceUserWantBuying;
     }
 
     //userRepository 돌면서 가장 저렴한 userMoney 를 찾는다.

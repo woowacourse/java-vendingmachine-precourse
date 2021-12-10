@@ -21,7 +21,7 @@ public class Product {
 
     public boolean hasStock() {
         if (quantity.getQuantity() == 0) {
-            throw new IllegalArgumentException("해당 상품의 재고가 없습니다.");
+            return false;
         }
         return true;
     }

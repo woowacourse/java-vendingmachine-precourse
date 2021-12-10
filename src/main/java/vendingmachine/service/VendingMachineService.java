@@ -60,7 +60,7 @@ public class VendingMachineService {
         if (!productRepository.has(productName)) {
             throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
         }
-        int productPrice = productRepository.takeout(productName);
+        int productPrice = productRepository.takeout(productName,userMoney);
         userMoney.use(productPrice);
         OutputView.showUserMoney(userMoney);
         if (productRepository.cantBuyBecauseOfNoMoney(userMoney) || productRepository.hasNoQuantity()) {
