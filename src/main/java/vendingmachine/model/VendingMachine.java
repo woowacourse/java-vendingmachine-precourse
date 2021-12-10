@@ -44,27 +44,28 @@ public class VendingMachine {
 		Changes changes = new Changes();
 		LinkedHashMap<Coin, Integer> hashMap = coinList.getHashMap();
 		for (Map.Entry<Coin, Integer> entry : hashMap.entrySet()) {
-			Coin coin = entry.getKey();
-			int availableNumberOfCoins = entry.getValue();
-
 			if (deposit == 0) {
 				break;
 			}
 
-			if (availableNumberOfCoins == 0) {
+			if (entry.getValue() == 0) {
 				continue;
 			}
 
-			int numberOfChange = getNumberOfChange(coin, availableNumberOfCoins);
-			if (numberOfChange == 0) {
-				continue;
-			}
-
-			changes.addCoin(coin, numberOfChange);
-			coinList.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
+			subtractFromCoinListAndAddChange(changes, entry.getKey(), entry.getValue());
 		}
 
 		return changes;
+	}
+
+	private void subtractFromCoinListAndAddChange(Changes changes, Coin coin, int availableNumberOfCoins) {
+		int numberOfChange = getNumberOfChange(coin, availableNumberOfCoins);
+		if (numberOfChange == 0) {
+			return;
+		}
+
+		coinList.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
+		changes.addCoin(coin, numberOfChange);
 	}
 
 	private int getNumberOfChange(Coin coin, int maxNumberOfCoins) {
