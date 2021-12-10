@@ -3,15 +3,29 @@ package vendingmachine.domain;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class CoinCount {
+public class CoinCountMap {
     private final Map<Coin, Integer> coinCount = new TreeMap<>();
 
-    public CoinCount(int inputMoneyOfVendingMachine) {
+    public CoinCountMap(int inputMoneyOfVendingMachine) {
         createRandomCoinList(inputMoneyOfVendingMachine);
+    }
+
+    public CoinCountMap() {
+        for (Coin coinName : Coin.values()) {
+            coinCount.put(coinName, 0);
+        }
     }
 
     public Map<Coin, Integer> getCoinCount() {
         return coinCount;
+    }
+
+    public int getCoinSum() {
+        int sum = 0;
+        for (Coin coin : coinCount.keySet()) {
+            sum += coin.getAmount() * coinCount.get(coin);
+        }
+        return sum;
     }
 
     private void createRandomCoinList(int vendingMachineMoney) {

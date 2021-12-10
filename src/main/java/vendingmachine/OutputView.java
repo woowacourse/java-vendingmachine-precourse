@@ -1,31 +1,42 @@
 package vendingmachine;
 
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.CoinCount;
-
-import java.util.Arrays;
-import java.util.Map;
+import vendingmachine.domain.CoinCountMap;
 
 public class OutputView {
     private static final String VENDING_MACHINE_OF_COIN_INSTRUCTION = "자판기가 보유한 동전 ";
     private static final String MONEY_TO_COUNT_MAPPER = " - ";
-    private static final String UNIT_OF_COIN_COUNT = "개 ";
-    private static final String UNIT_OF_COIN = "원 ";
+    private static final String UNIT_OF_COIN_COUNT = "개";
+    private static final String UNIT_OF_COIN = "원";
     private static final String INPUT_MONEY_OF_VENDING_MACHINE_INSTRUCTION = "투입 금액: ";
+    private static final String LEFTOVER_MONEY_OF_VENDING_MACHINE_INSTRUCTION = "잔돈 ";
 
 
 
-    public void printVeningMachineCoin(CoinCount coinCount) {
+    public void printVeningMachineCoin(CoinCountMap coinCountMap) {
         System.out.println(VENDING_MACHINE_OF_COIN_INSTRUCTION);
-        coinCount.getCoinCount().forEach((key, value) -> {
-            System.out.println(key.getAmount() + UNIT_OF_COIN + MONEY_TO_COUNT_MAPPER + value + UNIT_OF_COIN_COUNT);
+        coinCountMap.getCoinCount().forEach((key, value) -> {
+            printCoinInformation(key.getAmount(), value);
         });
         System.out.println();
     }
 
     public void printMoneyInputToVendingMachine(int inputMoney) {
         System.out.println();
-        System.out.println(INPUT_MONEY_OF_VENDING_MACHINE_INSTRUCTION + inputMoney);
+        System.out.println(INPUT_MONEY_OF_VENDING_MACHINE_INSTRUCTION + inputMoney + UNIT_OF_COIN);
+    }
+
+    public void printLeftoverCoinCount(CoinCountMap coinCountMap) {
+        System.out.println(LEFTOVER_MONEY_OF_VENDING_MACHINE_INSTRUCTION);
+        coinCountMap.getCoinCount().forEach((key, value) -> {
+            if (value != 0) {
+                printCoinInformation(key.getAmount(), value);
+            }
+        });
+        System.out.println();
+    }
+
+    private void printCoinInformation(int coinAmount, int coinCount) {
+        System.out.println(coinAmount + UNIT_OF_COIN + MONEY_TO_COUNT_MAPPER + coinCount + UNIT_OF_COIN_COUNT);
     }
 
 }

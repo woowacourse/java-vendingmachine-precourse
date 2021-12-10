@@ -1,7 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.CoinCount;
+import vendingmachine.domain.CoinCountMap;
 import vendingmachine.domain.Product;
 
 import java.util.ArrayList;
@@ -23,8 +23,8 @@ public class InputView {
         return inputMoney(MONEY_TO_VENDING_MACHINE_INPUT_INSTRUCTION);
     }
 
-    public CoinCount inputMoneyOfVendingMachine() {
-        return new CoinCount(inputMoney(MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION));
+    public CoinCountMap inputMoneyOfVendingMachine() {
+        return new CoinCountMap(inputMoney(MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION));
     }
 
     private int inputMoney(String message) {
