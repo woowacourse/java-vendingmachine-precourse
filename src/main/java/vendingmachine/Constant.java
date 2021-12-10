@@ -11,7 +11,9 @@ public abstract class Constant {
     public static String NUMBER_REGEX = "^[0-9]*$";
     public static String PRODUCT_DELIMETER = ";";
     public static String PRODUCT_INFO_DELIMETER = ",";
+    public static String EXIT_CODE = "반환;";
     public static char INPUT_WRAP_START = '[';
     public static char INPUT_WRAP_END = ']';
+
 
 }

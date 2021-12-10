@@ -19,7 +19,7 @@ public class InputView {
     }
 
     public static String inputBuyingProduct() {
-        System.out.println("구매할 상품명을 입력해 주세요.");
+        System.out.println("구매할 상품명을 입력해 주세요. 반환을 원하시면 \"반환;\"을 입력해주세요.");
         return Console.readLine().trim();
     }
 }

@@ -57,6 +57,9 @@ public class VendingMachineService {
     }
 
     public boolean sellProduct(String productName) {
+        if (productName.equals(EXIT_CODE)) {
+            return false;
+        }
         if (!productRepository.has(productName)) {
             throw new IllegalArgumentException("해당 상품은 존재하지 않습니다.");
         }
