@@ -15,6 +15,7 @@ public class Display {
 	private static final String ALL_COIN_TITLE = "자판기가 보유한 동전";
 
 	private static final String COIN_FORMAT = "%d원 - %d개%n";
+	private static final String INSERT_AMOUNT_FORMAT = "투입 금액: %d원%n";
 	private static final String ERROR_FORMAT = "[ERROR] %s%n";
 
 	public void askHoldingAmount() {
@@ -38,6 +39,10 @@ public class Display {
 		for (Coin coin : Coin.values()) {
 			printCoin(coin);
 		}
+	}
+
+	public void printInsertAmount(Cashier cashier) {
+		System.out.printf(INSERT_AMOUNT_FORMAT, cashier.getInsertAmount());
 	}
 
 	public void printBlankLine() {

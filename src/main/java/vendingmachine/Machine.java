@@ -29,9 +29,11 @@ public class Machine {
 		prepareCoins();
 		prepareItems();
 		prepareInsertAmount();
-		while (cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
-			// TODO: 상품 판매
-		}
+		display.printInsertAmount(cashier);
+		/*
+		* while (cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
+		* }
+		*/
 		// TODO: 잔돈 반환
 	}
 

@@ -16,6 +16,10 @@ public class Cashier {
 		makeCoins(holdingAmount);
 	}
 
+	public int getInsertAmount() {
+		return insertAmount;
+	}
+
 	public void insertMoney(int insertAmount) {
 		this.insertAmount = insertAmount;
 	}
