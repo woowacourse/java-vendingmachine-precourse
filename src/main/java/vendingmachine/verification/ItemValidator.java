@@ -20,7 +20,7 @@ public class ItemValidator {
 	private static final String NO_SUFFICIENT_MONEY_THEN_PRICE_ERROR = "[ERROR] 남아 있는 투입 금액부족합니다.\n";
 
 	public void validateMoneyByItemMinPrice(int money) {
-		if (money < itemService.getMinPrice()) {
+		if (!itemService.haveAnyItemToBuy(money)) {
 			throw new IllegalArgumentException(NOT_SUFFICIENT_MONEY_ERROR);
 		}
 	}

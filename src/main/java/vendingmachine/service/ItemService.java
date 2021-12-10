@@ -13,8 +13,9 @@ public class ItemService {
 		itemRepository.add(item);
 	}
 
-	public int getMinPrice() {
-		return itemRepository.peek().getPrice();
+	public boolean haveAnyItemToBuy(int money) {
+		return itemRepository.peek()
+			.isAvailableToBuy(money);
 	}
 
 	public Item findByName(String name) {

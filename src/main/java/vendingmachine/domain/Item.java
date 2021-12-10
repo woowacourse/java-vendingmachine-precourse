@@ -14,10 +14,6 @@ public class Item implements Comparable<Item>{
 		this.stockQuantity = stockQuantity;
 	}
 
-	public int getPrice() {
-		return price;
-	}
-
 	public boolean isName(String name) {
 		return this.name.equals(name);
 	}
