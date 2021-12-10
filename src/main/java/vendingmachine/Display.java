@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 /**
  * 자판기의 출력창 역할을 하는 view class
  *
@@ -14,6 +16,7 @@ public class Display {
 	private static final String WHAT_TO_BUY_QUESTION = "구매할 상품명을 입력해 주세요.";
 
 	private static final String ALL_COIN_TITLE = "자판기가 보유한 동전";
+	private static final String CHANGES_TITLE = "잔돈";
 
 	private static final String COIN_FORMAT = "%d원 - %d개%n";
 	private static final String INSERT_AMOUNT_FORMAT = "투입 금액: %d원%n";
@@ -48,6 +51,13 @@ public class Display {
 
 	public void printInsertAmount(Cashier cashier) {
 		System.out.printf(INSERT_AMOUNT_FORMAT, cashier.getInsertAmount());
+	}
+
+	public void printChanges(Map<Coin, Integer> changes) {
+		System.out.println(CHANGES_TITLE);
+		for(Coin coin : changes.keySet()) {
+			System.out.printf(COIN_FORMAT, coin.getAmount(), changes.get(coin));
+		}
 	}
 
 	public void printBlankLine() {

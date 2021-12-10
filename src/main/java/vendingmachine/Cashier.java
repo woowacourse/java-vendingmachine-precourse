@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import camp.nextstep.edu.missionutils.Randoms;
 
 /**
@@ -34,16 +37,19 @@ public class Cashier {
 		return insertAmount >= required;
 	}
 
-	public void giveChanges() {
+	public Map<Coin, Integer> getChanges() {
+		Map<Coin, Integer> changes = new HashMap<>();
 		for (Coin coin : Coin.values()) {
 			int count = countCoinForChange(coin);
 			if (count > 0) {
 				payMoney(coin.take(count));
+				changes.put(coin, count);
 			}
 			if (!isInsertAmountEnough(MIN_AMOUNT)) {
 				break;
 			}
 		}
+		return changes;
 	}
 
 	private void makeCoins(int holdingAmount) {
