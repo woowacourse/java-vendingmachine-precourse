@@ -37,7 +37,7 @@ public class VendingMachine extends Observable {
 	}
 
 	private Coins getRemainCoins() {
-		if (coins.getTotalAmount() <= remainMoney) {
+		if (coins.isLessOrEquals(remainMoney)) {
 			return coins;
 		}
 

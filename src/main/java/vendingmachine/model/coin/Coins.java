@@ -33,7 +33,11 @@ public class Coins {
 		return coins.keySet().stream().sorted(comparingInt(Coin::getAmount).reversed());
 	}
 
-	public int getTotalAmount() {
+	public boolean isLessOrEquals(int money) {
+		return getTotalAmount() <= money;
+	}
+
+	private int getTotalAmount() {
 		return stream().mapToInt(this::getEachAmount).sum();
 	}
 
