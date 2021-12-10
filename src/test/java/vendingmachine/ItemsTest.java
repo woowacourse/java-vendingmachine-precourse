@@ -1,7 +1,6 @@
 package vendingmachine;
 
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ItemsTest {
@@ -11,7 +10,7 @@ class ItemsTest {
         Items items = new Items();
         Item item = new Item("item1", 10000);
         int quantity = 5;
-        items.addItem(item, quantity);
+        items.add(item, quantity);
 
         Assertions.assertThat(items.countItems(item)).isEqualTo(quantity);
     }
@@ -21,7 +20,7 @@ class ItemsTest {
         Items items = new Items();
         String notExistItemName = "GHOST";
 
-        Assertions.assertThat(items.findByItemByItemName(notExistItemName)).isEmpty();
+        Assertions.assertThat(items.findItemByItemName(notExistItemName)).isEmpty();
     }
 
     @Test
@@ -29,9 +28,9 @@ class ItemsTest {
         Items items = new Items();
         Item item = new Item("item1", 10000);
         int quantity = 5;
-        items.addItem(item, quantity);
+        items.add(item, quantity);
         String existItemName = "item1";
 
-        Assertions.assertThat(items.findByItemByItemName(existItemName).get().getName()).isEqualTo(existItemName);
+        Assertions.assertThat(items.findItemByItemName(existItemName).get().getName()).isEqualTo(existItemName);
     }
 }

@@ -24,6 +24,6 @@ public class VendingMachineService {
     }
 
     public void purchaseByItemName(String inputItemsToPurchase) {
-        vendingMachine.purchaseItem(inputItemsToPurchase);
+        vendingMachine.purchase(inputItemsToPurchase);
     }
 }

@@ -17,6 +17,6 @@ public class ItemFactory {
 
     private void createItem(ItemInventoryInfo itemInventoryInfo) {
         ItemInfo itemInfo = itemInventoryInfo.getItemInfo();
-        items.addItem(new Item(itemInfo.getName(), itemInfo.getPrice()), itemInventoryInfo.getQuantity());
+        items.add(new Item(itemInfo.getName(), itemInfo.getPrice()), itemInventoryInfo.getQuantity());
     }
 }

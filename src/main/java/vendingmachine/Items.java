@@ -7,7 +7,7 @@ import java.util.Optional;
 public class Items {
     private Map<Item, Integer> items = new HashMap<>();;
 
-    public void addItem(Item itemToAdd, int numberOfItemsToAdd) {
+    public void add(Item itemToAdd, int numberOfItemsToAdd) {
         items.computeIfPresent(itemToAdd, (item, numberOfItem) -> numberOfItem + numberOfItemsToAdd);
         items.computeIfAbsent(itemToAdd, numberOfItem -> numberOfItemsToAdd);
     }
@@ -17,7 +17,7 @@ public class Items {
         return items.getOrDefault(item, 0);
     }
 
-    public Optional<Item> findByItemByItemName(String name) {
+    public Optional<Item> findItemByItemName(String name) {
         return items.keySet().stream()
                 .filter(item -> item.getName().equals(name)).findAny();
     }
