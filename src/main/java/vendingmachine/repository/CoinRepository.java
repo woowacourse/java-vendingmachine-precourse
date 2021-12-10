@@ -28,6 +28,7 @@ public class CoinRepository { // 1급 콜렉션
         for (Coin coin : Coin.values()) {
             int givenCoinCnt = determineGivenCoinCnt(remainingAmount, coin);
             tempCoinRepository.put(coin, givenCoinCnt);
+            coinRepository.put(coin, coinRepository.get(coin) - givenCoinCnt);
             remainingAmount -= (givenCoinCnt * coin.getAmount());
         }
         return tempCoinRepository;
