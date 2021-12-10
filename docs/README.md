@@ -3,11 +3,18 @@
 
 ## 📈데이터 스트럭처 구조
 ```
-vendingmachine
- ├─ Application.java
- │    └─ Coin.java
- │
- └─ ApplicationTest
+project
+├─ vendingmachine
+│    ├─ Application.java
+│    │    
+│    ├─ Coin.java
+│    │
+│    ├─ VendingMachine.java	   
+│    │
+│    └─ ChagePrint.java(out 함수)
+│ 
+└─test
+       └─ApplicationTest
 ```
 
 
@@ -21,5 +28,6 @@ vendingmachine
 #### ✍입력값 
 
 #### 🖥출력값
+ - 자판기가 보유하고있는 금액과 각각의 동전 갯수
 
 ## 🔍예외처리
