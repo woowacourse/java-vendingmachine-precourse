@@ -46,6 +46,7 @@ public class MainController {
                 ValidationController.productValidation(productInfo);
                 ValidationController.duplicateValidation(productInfo);
                 ValidationController.productAmountValidation(productInfo);
+                ValidationController.quantityValidation(productInfo);
                 ProductController.saveProduct(product, productInfo);
                 return;
             }catch (IllegalArgumentException e) {

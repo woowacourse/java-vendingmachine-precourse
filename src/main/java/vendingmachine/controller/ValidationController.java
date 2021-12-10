@@ -19,7 +19,7 @@ public class ValidationController {
 
     private static void positiveIntegerValidation(String input) {
         int checkNum = Integer.parseInt(input);
-        if (checkNum < 0){
+        if (checkNum <= 0){
             throw new IllegalArgumentException("[ERROR] 양의 정수가 아닙니다.");
         }
     }
@@ -102,6 +102,7 @@ public class ValidationController {
 
         for (String productDatum : productData) {
             String[] productSplitData = productDatum.split(",");
+            isNumValidation(productSplitData[1]);
             positiveIntegerValidation(productSplitData[1]);
             divided10Validation(productSplitData[1]);
             under100Validation(productSplitData[1]);
@@ -112,6 +113,17 @@ public class ValidationController {
         int checkNum = Integer.parseInt(input);
         if (checkNum < 100){
             throw new IllegalArgumentException("[ERROR] 100 미만의 수 입니다.");
+        }
+    }
+
+    public static void quantityValidation(String productInfo) {
+        String[] productData = productInfo.split(";");
+
+        for (String productDatum : productData) {
+            String[] productSplitData = productDatum.split(",");
+            String checkStr = productSplitData[2].substring(0, productSplitData[2].length()-1);
+            isNumValidation(checkStr);
+            positiveIntegerValidation(checkStr);
         }
     }
 }
