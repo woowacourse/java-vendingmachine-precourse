@@ -8,9 +8,12 @@ public class ErrorMessage {
 	public static final String NOT_DIVIDED_TEN_NUMBER_MESSAGE = " 1 단위의 금액은 투입할 수 없습니다.";
 
 	public static final String ARRAY_SIZE_MESSAGE = " 상품 정보가 잘못되었습니다.";
+	public static final String REDUPLICATION_NAME_MESSAGE = " 상품 이름이 중복입니다.";
+
 	public static final String SPACE_IN_PRODUCT_NAME_MESSAGE = " 상품 이름에 공백이 있으면 안됩니다.";
 	public static final String TAB_IN_PRODUCT_NAME_MESSAGE = " 상품 이름에 탭이 있으면 안됩니다.";
-	public static final String REDUPLICATION_NAME_MESSAGE = " 상품 이름이 중복입니다.";
+	public static final String BLANK_PRODUCT_NAME_MESSAGE = " 상품 이름은 필수입니다.";
+
 	public static final String UNDER_THAN_PRICE_LIMIT_MESSAGE = " 상품의 가격은 100원을 넘어야합니다.";
 
 	public static final String NOT_NUMBER_QUANTITY_MESSAGE = " 수량은 숫자만 입력할 수 있습니다.";

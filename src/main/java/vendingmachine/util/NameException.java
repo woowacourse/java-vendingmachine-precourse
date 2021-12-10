@@ -6,6 +6,7 @@ public class NameException {
 
 	public static String checkNameException(String productName) {
 		try {
+			checkNameIsBlank(productName);
 			checkSpaceInProductName(productName);
 			checkTabInProductName(productName);
 		} catch (IllegalArgumentException e) {
@@ -13,6 +14,12 @@ public class NameException {
 		}
 
 		return productName;
+	}
+
+	public static void checkNameIsBlank(String name) {
+		if (name.equals("")) {
+			throw new IllegalArgumentException(ErrorMessage.BLANK_PRODUCT_NAME_MESSAGE);
+		}
 	}
 
 	public static void checkSpaceInProductName(String name) {
