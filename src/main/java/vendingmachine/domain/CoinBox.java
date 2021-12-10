@@ -10,20 +10,30 @@ import vendingmachine.view.OutputView;
 
 public class CoinBox {
 	private int holdingMoney;
-	private EnumMap<Coin, Integer> coinIntegerEnumMap = new EnumMap<Coin, Integer>(Coin.class);
+	private EnumMap<Coin, Integer> coinEnumMap = new EnumMap<Coin, Integer>(Coin.class);
 
 	CoinBox(int holdingMoney) {
 		this.holdingMoney = holdingMoney;
-		coinIntegerEnumMap.put(Coin.COIN_500, 0);
-		coinIntegerEnumMap.put(Coin.COIN_100, 0);
-		coinIntegerEnumMap.put(Coin.COIN_50, 0);
-		coinIntegerEnumMap.put(Coin.COIN_10, 0);
+		coinEnumMap.put(Coin.COIN_500, 0);
+		coinEnumMap.put(Coin.COIN_100, 0);
+		coinEnumMap.put(Coin.COIN_50, 0);
+		coinEnumMap.put(Coin.COIN_10, 0);
 		makeCoins();
 	}
 
 	public void showCoins() {
-		coinIntegerEnumMap
-			.forEach((coin, numberOfCoin) -> OutputView.printCoinInfo(coin.toString(), numberOfCoin));
+		coinEnumMap.forEach((coin, numberOfCoin) -> OutputView.printCoinInfo(coin.toString(), numberOfCoin));
+	}
+
+	public void returnChanges(int amount) {
+		Coin[] coins = Coin.values();
+		for (Coin coin : coins) {
+			int number = Math.min(amount / coin.getAmount(), coinEnumMap.get(coin));
+			if (number > 0) {
+				OutputView.printCoinInfo(coin.toString(), number);
+				amount -= coin.getAmount() * number;
+			}
+		}
 	}
 
 	private void makeCoins() {
@@ -32,8 +42,8 @@ public class CoinBox {
 			int randomCoinAmount = pickRandomCoinAmount(money);
 			money -= randomCoinAmount;
 			Coin coin = Coin.getCoinByAmount(randomCoinAmount);
-			int beforeCoinAmount = coinIntegerEnumMap.get(coin);
-			coinIntegerEnumMap.replace(coin, beforeCoinAmount + 1);
+			int beforeCoinAmount = coinEnumMap.get(coin);
+			coinEnumMap.replace(coin, beforeCoinAmount + 1);
 		}
 	}
 

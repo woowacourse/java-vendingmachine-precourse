@@ -6,6 +6,7 @@ public class OutputView {
 	static final String PRODUCT_INPUT_REQUEST_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	static final String INPUT_MONEY_INPUT_REQUEST_MESSAGE = "투입 금액을 입력해 주세요.";
 	static final String PRODUCT_TO_BUY_INPUT_REQUEST_MESSAGE = "구매할 상품명을 입력해 주세요.";
+	static final String CHANGES_MESSAGE = "잔돈";
 
 	public static void printHoldingMoneyRequestMessage() {
 		System.out.println(HOLDING_MONEY_REQUEST_MESSAGE);
@@ -37,6 +38,10 @@ public class OutputView {
 	public static void printCustomerChanges(int changes) {
 		printEmptyLine();
 		System.out.println("투입 금액: " + changes + "원");
+	}
+
+	public static void printChangesMessage() {
+		System.out.println(CHANGES_MESSAGE);
 	}
 
 	public static void printEmptyLine() {

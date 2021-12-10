@@ -18,6 +18,10 @@ public enum Coin {
 		this.amount = amount;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
 	public static Coin getCoinByAmount(int amount) {
 		return Arrays.stream(Coin.values())
 			.filter(coin -> coin.amount == amount)
@@ -29,4 +33,5 @@ public enum Coin {
 	public String toString() {
 		return amount + "원";
 	}
+
 }

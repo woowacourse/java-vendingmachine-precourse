@@ -23,6 +23,12 @@ public class VendingMachine {
 		int inputMoney = getInputMoneyFromInput();
 		Customer customer = new Customer(inputMoney);
 		tradeWithCustomer(customer);
+		returnCustomerChanges(customer);
+	}
+
+	private void returnCustomerChanges(Customer customer) {
+		OutputView.printChangesMessage();
+		coinBox.returnChanges(customer.getMoney());
 	}
 
 	private void tradeWithCustomer(Customer customer) {
