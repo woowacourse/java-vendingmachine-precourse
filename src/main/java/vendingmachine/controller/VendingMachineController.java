@@ -18,19 +18,20 @@ public class VendingMachineController {
 	public static String MERCHANDISE_PARSER = ";";
 	public static String MERCHANDISE_INFORMATION_PARSER = ",";
 
-	private Money vendingMachineMoney;
-	private VendingMachine vendingMachine;
-	private User user;
-
 	public void play() {
-		vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
-		vendingMachine = new VendingMachine(vendingMachineMoney);
+		Money vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
+		VendingMachine vendingMachine = new VendingMachine(vendingMachineMoney);
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
-		user = new User(new Money(castingStringMoneyToInt(InputView.inputMoney())));
-		while (isUserBuyMerchandise()) {
-			user.buyMerchandise(showMoneyInputMerchandise(user.getMoney().getMoney()), vendingMachine.getMerchandises());
+		User user = new User(new Money(castingStringMoneyToInt(InputView.inputMoney())));
+		while (true) {
+			OutputView.showInputMoneyStatus(user.getMoney().getMoney());
+			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
+			if (!isUserBuyMerchandise(vendingMachine, user)) {
+				break;
+			}
 		}
+		OutputView.showChangeMoneyStatus(user.getMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(vendingMachineChange(user, vendingMachine))));
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
@@ -39,7 +40,7 @@ public class VendingMachineController {
 
 	public LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
 		LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
-		for (Coin coin : coinStatus.keySet() ) {
+		for (Coin coin : coinStatus.keySet()) {
 			intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
 		}
 		return intCoinStatus;
@@ -51,7 +52,8 @@ public class VendingMachineController {
 
 	public Merchandise constructMerchandise(String merchandiseInforamtion) {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
-		return new Merchandise(informations[0], new Money(Integer.parseInt(informations[1])), Integer.parseInt(informations[2]));
+		return new Merchandise(informations[0], new Money(Integer.parseInt(informations[1])),
+			Integer.parseInt(informations[2]));
 	}
 
 	public List<Merchandise> constructMerchandises(List<String> merchandiseInformations) {
@@ -63,12 +65,7 @@ public class VendingMachineController {
 		return merchandiseList;
 	}
 
-	public String showMoneyInputMerchandise(int money) {
-		OutputView.showInputMoneyStatus(money);
-		return InputView.inputMerchandiseName();
-	}
-
-	public boolean isUserBuyMerchandise() {
+	public boolean isUserBuyMerchandise(VendingMachine vendingMachine, User user) {
 		Merchandises merchandises = vendingMachine.getMerchandises();
 		for (Merchandise merchandise : merchandises.getMerchandiseList()) {
 			if (merchandise.getMoney().getMoney() <= user.getMoney().getMoney()) {
@@ -78,5 +75,11 @@ public class VendingMachineController {
 		return false;
 	}
 
+	public Money vendingMachineChange(User user, VendingMachine vendingMachine) {
+		if (user.getMoney().getMoney() <= vendingMachine.getMoney().getMoney()) {
+			return user.getMoney();
+		}
+		return vendingMachine.getMoney();
+	}
 
 }
