@@ -1,9 +1,9 @@
 package vendingmachine;
 
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.controller.VendingMachineController;
 
 public class Application {
     public static void main(String[] args) {
-        new VendingMachine().start();
+        new VendingMachineController().start();
     }
 }

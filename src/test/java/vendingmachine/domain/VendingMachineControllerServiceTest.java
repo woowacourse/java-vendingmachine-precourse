@@ -5,15 +5,15 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import vendingmachine.controller.VendingMachineController;
+import vendingmachine.service.VendingMachineService;
 
-class VendingMachineControllerTest {
+class VendingMachineControllerServiceTest {
 
     @ParameterizedTest
     @DisplayName("10으로 나눠떨어지는 정상적인 금액을 입력받는다.")
     @ValueSource(ints = {0, 10, 100, 180, 20, 2000, 10000, 40000})
     void 자판기_초기_금액_입력_정상(int inputMoney) {
-        VendingMachineController vm = VendingMachineController.makeVendingMachineHasMoney(inputMoney);
+        VendingMachineService vm = VendingMachineService.makeVendingMachineHasMoney(inputMoney);
 
     }
 
@@ -21,13 +21,13 @@ class VendingMachineControllerTest {
     @DisplayName("초기 금액으로 10원 밑으로 입력받으면 에러를 반환한다.")
     @ValueSource(ints = {-1, -10, -100, -87, -240, -900, -10000})
     void 자판기_초기_금액_입력_0보다_적은_경우_오류(int inputMoney) {
-        Assertions.assertThatThrownBy(() -> VendingMachineController.makeVendingMachineHasMoney(inputMoney)).isInstanceOf(IllegalArgumentException.class); //TODO: 문구는 나중에 생성
+        Assertions.assertThatThrownBy(() -> VendingMachineService.makeVendingMachineHasMoney(inputMoney)).isInstanceOf(IllegalArgumentException.class); //TODO: 문구는 나중에 생성
     }
 
     @ParameterizedTest
     @DisplayName("10으로 나눠떨어지지 않는 금액을 입력받으면 에러를 반환한다.")
     @ValueSource(ints = {1, 2, 9, 11, 23, 2006, 10007, 40009})
     void 자판기_초기_금액_최소_동전으로_만들수_없음(int inputMoney) {
-        Assertions.assertThatThrownBy(() -> VendingMachineController.makeVendingMachineHasMoney(inputMoney)).isInstanceOf(IllegalArgumentException.class);
+        Assertions.assertThatThrownBy(() -> VendingMachineService.makeVendingMachineHasMoney(inputMoney)).isInstanceOf(IllegalArgumentException.class);
     }
 }
