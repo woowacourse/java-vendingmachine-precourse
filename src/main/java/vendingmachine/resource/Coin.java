@@ -1,12 +1,14 @@
 package vendingmachine.resource;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
 	COIN_50(50),
-	COIN_10(10),
-	COIN_ERROR(0);
-
+	COIN_10(10),;
 
 	private final int amount;
 
@@ -25,9 +27,12 @@ public enum Coin {
 		if (amount == 50) {
 			return COIN_50;
 		}
-		if (amount == 10) {
-			return COIN_10;
-		}
-		return COIN_ERROR;
+		return COIN_10;
+	}
+
+	public static List<Integer> getMonetaryUnitList() {
+		return Arrays.stream(Coin.values())
+			.map(x -> x.amount)
+			.collect(Collectors.toList());
 	}
 }
