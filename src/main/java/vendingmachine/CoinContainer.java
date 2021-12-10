@@ -9,6 +9,8 @@ import java.util.stream.Collectors;
 
 public class CoinContainer {
 
+    int totalAmount = 0;
+
     private Map<Coin, Integer> remainingCoin = new HashMap<Coin, Integer>(){{
         put(Coin.COIN_10, 0);
         put(Coin.COIN_50, 0);
@@ -46,6 +48,11 @@ public class CoinContainer {
 
     private void addRemainingCoin(Coin coin) {
         int remainingStock = remainingCoin.get(coin);
+        totalAmount += coin.getAmount();
         remainingCoin.put(coin, remainingStock + 1);
+    }
+
+    public int getTotalAmount() {
+        return totalAmount;
     }
 }
