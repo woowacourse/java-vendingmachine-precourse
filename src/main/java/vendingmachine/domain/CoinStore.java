@@ -72,7 +72,7 @@ public class CoinStore {
 	public String changeCoinsToString(int amount) {
 		makeChangeCoins(amount);
 		StringBuilder stringBuilder = new StringBuilder();
-		for (Coin amountOfCoin: Coin.getCoinList()) {
+		for (Coin amountOfCoin: changeCoins.keySet()) {
 			if (changeCoins.get(amountOfCoin) > 0) {
 				stringBuilder.append(amountOfCoin.getAmount()).append("원");
 				stringBuilder.append(DELIMITER_OF_COIN_STORE_STATUS_REPRESENT);

@@ -45,9 +45,4 @@ public enum Coin {
 			.findFirst()
 			.get();
 	}
-
-	public static List<Coin> getCoinList() {
-		return Arrays.stream(values())
-			.collect(Collectors.toList());
-	}
 }
