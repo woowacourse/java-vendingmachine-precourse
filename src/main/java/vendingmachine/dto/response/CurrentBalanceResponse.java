@@ -6,7 +6,7 @@ import vendingmachine.Coins;
 
 public class CurrentBalanceResponse {
     private static final String CURRENT_BALANCE_NOTICE_PHRASE = "자판기가 보유한 동전";
-    private static final String DELIMETER = " - ";
+    private static final String DELIMITER = " - ";
     private static final String UNIT_OF_NUMBER_OF_COIN = "개";
     private static final String COIN500_KOREAN = "500원";
     private static final String COIN100_KOREAN = "100원";
@@ -14,7 +14,7 @@ public class CurrentBalanceResponse {
     private static final String COIN10_KOREAN = "10원";
 
     private final Coins currentBalance;
-    private StringBuilder response = new StringBuilder();
+    private final StringBuilder response = new StringBuilder();
 
     public CurrentBalanceResponse(Coins currentBalance) {
         this.currentBalance = currentBalance;
@@ -37,7 +37,7 @@ public class CurrentBalanceResponse {
     private StringBuilder addCoinResult(String coinToKorean, int numberOfCoin) {
         StringBuilder coin500Response = new StringBuilder();
         coin500Response.append(coinToKorean);
-        coin500Response.append(DELIMETER);
+        coin500Response.append(DELIMITER);
         coin500Response.append(numberOfCoin);
         coin500Response.append(UNIT_OF_NUMBER_OF_COIN);
         return coin500Response;
