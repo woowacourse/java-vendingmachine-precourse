@@ -25,7 +25,7 @@ public class Application {
 
 	private static void purchaseRoutine() {
 		while (itemsController.checkAvailableToPurchase()) {
-			// TODO: 상품 구매 로직 추가
+			itemsController.buyItem();
 		}
 	}
 }

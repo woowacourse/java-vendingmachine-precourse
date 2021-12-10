@@ -6,7 +6,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.domain.item.Item;
+import vendingmachine.domain.item.ItemName;
 import vendingmachine.domain.item.ItemPrice;
+import vendingmachine.domain.userbalance.UserBalance;
+import vendingmachine.exception.ItemNotFoundException;
+import vendingmachine.exception.NotEnoughBalanceException;
 import vendingmachine.validator.ItemsValidator;
 
 public class Items {
@@ -42,6 +46,34 @@ public class Items {
 			.collect(Collectors.toList());
 
 		return Collections.min(itemPrices);
+	}
+
+	// TODO: 리팩토링 필요
+	public Items sellItem(Item item, UserBalance userBalance) {
+		if (!item.isEnoughBalance(userBalance)) {
+			throw new NotEnoughBalanceException();
+		}
+
+		List<Item> soldItems = items.stream().map(singleItem -> {
+			if (singleItem.getItemName().equals(item.getItemName())) {
+				return singleItem.sell();
+			}
+			return singleItem;
+		}).collect(Collectors.toList());
+
+		return new Items(soldItems);
+	}
+
+	public Item findByItemName(ItemName itemName) {
+		List<Item> foundItems = items.stream()
+			.filter(item -> item.getItemName().equals(itemName))
+			.collect(Collectors.toList());
+
+		if (foundItems.size() != 1) {
+			throw new ItemNotFoundException();
+		}
+
+		return foundItems.get(0);
 	}
 
 	@Override

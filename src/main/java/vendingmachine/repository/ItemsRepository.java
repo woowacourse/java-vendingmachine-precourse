@@ -1,5 +1,7 @@
 package vendingmachine.repository;
 
+import vendingmachine.domain.item.Item;
+import vendingmachine.domain.item.ItemName;
 import vendingmachine.domain.items.Items;
 
 public class ItemsRepository {
@@ -21,4 +23,7 @@ public class ItemsRepository {
 		return items;
 	}
 
+	public Item findByItemName(ItemName itemName) {
+		return items.findByItemName(itemName);
+	}
 }

@@ -2,6 +2,7 @@ package vendingmachine.domain.userbalance;
 
 import java.util.Objects;
 
+import vendingmachine.domain.item.ItemPrice;
 import vendingmachine.validator.UserBalanceValidator;
 
 public class UserBalance {
@@ -16,6 +17,10 @@ public class UserBalance {
 
 		int parsedNumber = Integer.parseInt(userBalance);
 		return new UserBalance(parsedNumber);
+	}
+
+	public UserBalance subtract(ItemPrice itemPrice) {
+		return new UserBalance(userBalance - itemPrice.toInt());
 	}
 
 	public int toInt() {

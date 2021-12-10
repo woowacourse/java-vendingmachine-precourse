@@ -21,4 +21,9 @@ public class InputView {
 		OutputView.printInputUserBalance();
 		return Console.readLine();
 	}
+
+	public static String inputItemToBuy() {
+		OutputView.printInputItemToBuy();
+		return Console.readLine();
+	}
 }

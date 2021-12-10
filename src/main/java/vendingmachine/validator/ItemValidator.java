@@ -1,6 +1,7 @@
 package vendingmachine.validator;
 
 import vendingmachine.exception.ItemInputFormatException;
+import vendingmachine.exception.SoldOutException;
 
 public class ItemValidator extends Validator {
 	private static final String ITEM_SPLIT_DELIMITER = ",";
@@ -14,6 +15,7 @@ public class ItemValidator extends Validator {
 			throw new ItemInputFormatException();
 		}
 
+		// TODO: 상수로 분리 필요
 		if (!input.contains("[") || !input.contains("]")) {
 			throw new ItemInputFormatException();
 		}
@@ -37,5 +39,11 @@ public class ItemValidator extends Validator {
 
 		int parsedNumber = Integer.parseInt(price);
 		validateNaturalNumber(parsedNumber);
+	}
+
+	public static void validateAbleToSubtractItemAmount(int itemAmount) {
+		if (itemAmount <= 0) {
+			throw new SoldOutException();
+		}
 	}
 }

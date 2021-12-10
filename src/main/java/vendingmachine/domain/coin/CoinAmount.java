@@ -2,6 +2,7 @@ package vendingmachine.domain.coin;
 
 import java.util.Objects;
 
+// TODO: amount 네이밍을 quantity 로 변경
 public class CoinAmount {
 	private final int coinAmount;
 

@@ -1,5 +1,6 @@
 package vendingmachine.service;
 
+import vendingmachine.domain.item.ItemPrice;
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.repository.UserBalanceRepository;
 
@@ -20,5 +21,10 @@ public class UserBalanceService {
 
 	public UserBalance getUserBalance() {
 		return userBalanceRepository.getUserBalance();
+	}
+
+	public void subtractUserBalance(ItemPrice itemPrice) {
+		UserBalance subtractedUserBalance = userBalanceRepository.getUserBalance().subtract(itemPrice);
+		userBalanceRepository.setUserBalance(subtractedUserBalance);
 	}
 }

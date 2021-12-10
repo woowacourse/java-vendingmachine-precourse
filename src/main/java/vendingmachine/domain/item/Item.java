@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.validator.ItemValidator;
 
 public class Item {
@@ -15,7 +16,7 @@ public class Item {
 
 	private final ItemName name;
 	private final ItemPrice price;
-	private ItemAmount amount;
+	private final ItemAmount amount;
 
 	private Item(ItemName name, ItemPrice price, ItemAmount amount) {
 		this.name = name;
@@ -54,6 +55,15 @@ public class Item {
 
 	public boolean isSoldOut() {
 		return this.amount.toInt() <= 0;
+	}
+
+	public boolean isEnoughBalance(UserBalance userBalance) {
+		return this.price.toInt() <= userBalance.toInt();
+	}
+
+	public Item sell() {
+		ItemAmount subtractedAmount = this.amount.subtract();
+		return new Item(this.name, this.price, subtractedAmount);
 	}
 
 	@Override

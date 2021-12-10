@@ -14,6 +14,8 @@ public class OutputView {
 	private static final String VENDING_MACHINE_HOLDING_COINS_MESSAGE = "\n자판기가 보유한 동전";
 	private static final String INPUT_ITEMS_MESSAGE = "\n상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_USER_BALANCE_MESSAGE = "\n투입 금액을 입력해 주세요.";
+	private static final String CURRENT_USER_BALANCE_FORMAT = "\n투입 금액: %d원";
+	private static final String INPUT_ITEM_TO_BUY_MESSAGE = "구매할 상품명을 입력해 주세요.";
 	private static final String COIN_OUTPUT_FORMAT = "%s - %s개";
 
 	public static void printError(String message) {
@@ -40,6 +42,7 @@ public class OutputView {
 		printCoin(COIN_10, coinsOutputDto.getCoin10Amount());
 	}
 
+	// TODO: DTO 를 전달받아 출력하는 방법 고민
 	private static void printCoin(String type, int amount) {
 		if (amount > 0) {
 			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
@@ -48,5 +51,14 @@ public class OutputView {
 
 	public static void printInputUserBalance() {
 		System.out.println(INPUT_USER_BALANCE_MESSAGE);
+	}
+
+	// TODO: DTO 를 전달받아 출력하는 방법 고민
+	public static void printCurrentUserBalance(int userBalance) {
+		System.out.println(String.format(CURRENT_USER_BALANCE_FORMAT, userBalance));
+	}
+
+	public static void printInputItemToBuy() {
+		System.out.println(INPUT_ITEM_TO_BUY_MESSAGE);
 	}
 }

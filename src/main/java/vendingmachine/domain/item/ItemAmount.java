@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import vendingmachine.validator.ItemValidator;
 
+// TODO: amount 네이밍을 quantity 로 변경
 public class ItemAmount {
 	private final int amount;
 
@@ -16,6 +17,11 @@ public class ItemAmount {
 
 		int parsedNumber = Integer.parseInt(amount);
 		return new ItemAmount(parsedNumber);
+	}
+
+	public ItemAmount subtract() {
+		ItemValidator.validateAbleToSubtractItemAmount(this.amount);
+		return new ItemAmount(this.amount - 1);
 	}
 
 	public int toInt() {

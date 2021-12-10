@@ -13,6 +13,7 @@ public class UserBalanceController {
 		try {
 			UserBalance userBalance = UserBalance.from(input);
 			userBalanceService.initUserBalance(userBalance);
+			OutputView.printCurrentUserBalance(userBalance.toInt());
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			generateUserBalance();

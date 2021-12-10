@@ -1,7 +1,10 @@
 package vendingmachine.service;
 
+import vendingmachine.domain.item.Item;
+import vendingmachine.domain.item.ItemName;
 import vendingmachine.domain.item.ItemPrice;
 import vendingmachine.domain.items.Items;
+import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.repository.ItemsRepository;
 
 public class ItemsService {
@@ -27,5 +30,14 @@ public class ItemsService {
 	public ItemPrice getMinItemPrice() {
 		Items items = itemsRepository.findAll();
 		return items.getMinItemPrice();
+	}
+
+	public void sellItem(Item item, UserBalance userBalance) {
+		Items items = itemsRepository.findAll().sellItem(item, userBalance);
+		itemsRepository.setItems(items);
+	}
+
+	public Item findByItemName(ItemName itemName) {
+		return itemsRepository.findByItemName(itemName);
 	}
 }
