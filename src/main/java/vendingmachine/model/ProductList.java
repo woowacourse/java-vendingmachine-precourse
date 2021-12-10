@@ -67,4 +67,27 @@ public class ProductList {
 		return hashMap.get(productName);
 	}
 
+	public int getMinimumPrice() {
+		int minimumPrice = Integer.MAX_VALUE;
+		for (Product product : hashMap.values()) {
+			if (product.getQuantity() == 0) {
+				continue;
+			}
+
+			minimumPrice = Math.min(minimumPrice, product.getPrice());
+		}
+
+		return minimumPrice;
+	}
+
+	public boolean isOutOfStock() {
+		for (Product product : hashMap.values()) {
+			if (product.getQuantity() > 0) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 }

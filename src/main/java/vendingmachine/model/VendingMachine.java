@@ -28,36 +28,13 @@ public class VendingMachine {
 	}
 
 	public boolean isContinueToSell() {
-		int minimumPrice = getMinimumPrice();
+		int minimumPrice = productList.getMinimumPrice();
 		if (minimumPrice > deposit) {
 			return false;
 		}
 
-		if (isOutOfStock()) {
+		if (productList.isOutOfStock()) {
 			return false;
-		}
-
-		return true;
-	}
-
-	private int getMinimumPrice() {
-		int minimumPrice = Integer.MAX_VALUE;
-		for (Product product : productList.getHashMap().values()) {
-			if (product.getQuantity() == 0) {
-				continue;
-			}
-
-			minimumPrice = Math.min(minimumPrice, product.getPrice());
-		}
-
-		return minimumPrice;
-	}
-
-	private boolean isOutOfStock() {
-		for (Product product : productList.getHashMap().values()) {
-			if (product.getQuantity() > 0) {
-				return false;
-			}
 		}
 
 		return true;
@@ -91,7 +68,7 @@ public class VendingMachine {
 			changes.addCoin(entry.getKey(), numberOfCoins);
 			coinList.subtractCoin(entry.getKey(), entry.getValue() - numberOfCoins);
 		}
-		
+
 		return changes;
 	}
 
