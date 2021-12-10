@@ -1,83 +1,71 @@
-package vendingmachine;
-
-import vendingmachine.repository.InputAmount;
+package vendingmachine.domain;
 
 public class Product {
-    private final String name;
-    private final int price;
-    private int quantity;
+    public static final int NAME_INDEX = 0;
+    public static final int PRICE_INDEX = 1;
+    public static final int QUANTITY_INDEX = 2;
+    public static final int CHECK_FORM_INDEX = 0;
+    public static final int CHANGE_TO_INDEX = 1;
+    public static final char FORM_START_CHAR = '[';
+    public static final char FORM_END_CHAR = ']';
+    public static final int PRODUCT_ELEMENT_COUNT = 3;
+    public static final String PRODUCT_ELEMENTS_REPLACEMENT = "";
+    public static final String PRODUCT_ELEMENTS_REGEX = "[\\[\\]]";
+    public static final String PRODUCT_DELIMITER = ",";
+    public static final String ERROR_PREFIX = "[ERROR] ";
+    public static final String ERROR_PRODUCT_FORM_MESSAGE = "한 상품의 내용은 "
+        + FORM_START_CHAR + " 으로 시작해서 " + FORM_END_CHAR + " 으로 끝나야 합니다.";
+    public static final String ERROR_PRODUCTS_FORM_MESSAGE = "양식에 맞게 다시 입력주세요. 예) [콜라,1500,20];[사이다,1000,10]";
 
-    private Product(String name, int price, int quantity) {
-        this.name = name;
-        this.price = price;
-        this.quantity = quantity;
+    private final ProductName name;
+    private final ProductPrice price;
+    private final ProductQuantity quantity;
+
+    public Product(String specification) {
+        checkForm(specification);
+        String[] elements = convertToElements(specification);
+        this.name = new ProductName(elements[NAME_INDEX]);
+        this.price = new ProductPrice(elements[PRICE_INDEX]);
+        this.quantity = new ProductQuantity(elements[QUANTITY_INDEX]);
     }
 
-    public static Product of(String name, String price, String quantity) {
-        checkName(name);
-        checkPrice(price);
-        checkQuantity(quantity);
-        return new Product(name, Integer.parseInt(price), Integer.parseInt(quantity));
+    private String[] convertToElements(String specification) {
+        String[] elements = specification
+            .replaceAll(PRODUCT_ELEMENTS_REGEX, PRODUCT_ELEMENTS_REPLACEMENT).split(PRODUCT_DELIMITER);
+        checkElementCount(elements);
+        return elements;
     }
 
-    private static void checkQuantity(String quantity) {
-        checkIsDigit(quantity);
-        checkIsLessThanThresholdOfQuantity(quantity);
-    }
-
-    private static void checkIsLessThanThresholdOfQuantity(String quantity) {
-        if (Integer.parseInt(quantity) < 1) {
-            throw new IllegalArgumentException("[ERROR] 상품 수량은 1이상의 숫자로 입력해주세요.");
+    private void checkForm(String specification) {
+        if (specification.charAt(CHECK_FORM_INDEX) != FORM_START_CHAR
+            || specification.charAt(specification.length() - CHANGE_TO_INDEX) != FORM_END_CHAR) {
+            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_PRODUCT_FORM_MESSAGE);
         }
     }
 
-    private static void checkPrice(String price) {
-        checkIsDigit(price);
-        checkIsLessThanThresholdOfPrice(price);
-        checkIsMultipleOfStandard(price);
-    }
-
-    private static void checkIsMultipleOfStandard(String price) {
-        if (Integer.parseInt(price) % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격은 10원 단위이어야 합니다.");
-        }
-    }
-
-    private static void checkIsLessThanThresholdOfPrice(String price) {
-        if (Integer.parseInt(price) < 100) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격은 100원 이상이어야 합니다.");
-        }
-    }
-
-    private static void checkIsDigit(String price) {
-        if (!price.chars().allMatch(Character::isDigit)) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격과 수량은 숫자로 입력해주세요.");
-        }
-    }
-
-    private static void checkName(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException("[ERROR] 상품 이름은 최소 한 글자 이상 입력해주세요.");
+    private void checkElementCount(String[] elements) {
+        if (elements.length != PRODUCT_ELEMENT_COUNT) {
+            throw new IllegalArgumentException(ERROR_PREFIX + ERROR_PRODUCTS_FORM_MESSAGE);
         }
     }
 
     public int getPrice() {
-        return price;
+        return price.get();
     }
 
     public void reduceQuantity() {
-        this.quantity--;
+        quantity.reduce();
     }
 
     public boolean isOutOfStock() {
-        return quantity == 0;
+        return quantity.isLessThanThreshold();
     }
 
-    public boolean isOrLess(InputAmount inputAmount) {
-        return price <= Integer.parseInt(inputAmount.toString());
+    public boolean isOrLess(int amount) {
+        return price.isOrLess(amount);
     }
 
     public boolean isSameName(String productName) {
-        return name.equals(productName);
+        return name.isSame(productName);
     }
 }

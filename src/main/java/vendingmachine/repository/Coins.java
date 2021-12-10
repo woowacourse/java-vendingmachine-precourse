@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.Coin;
+import vendingmachine.repository.InputAmount;
 
 public class Coins {
     private final Map<Coin, Integer> coins = new TreeMap<>();
@@ -35,11 +35,11 @@ public class Coins {
         return Collections.singletonList(10);
     }
 
-    public Map getCoins() {
+    public Map<Coin, Integer> getCoins() {
         return coins;
     }
 
-    public Map exchange(InputAmount amount) {
+    public Map<Coin, Integer> exchange(InputAmount amount) {
         Map<Coin, Integer> userCoins = new TreeMap<>();
         final int[] inputAmount = {Integer.parseInt(amount.toString())};
 
