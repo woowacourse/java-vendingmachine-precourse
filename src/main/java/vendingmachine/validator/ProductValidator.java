@@ -1,8 +1,5 @@
 package vendingmachine.validator;
 
-import vendingmachine.model.ProductList;
-import vendingmachine.model.VendingMachine;
-
 public class ProductValidator {
 
 	public static final String OPENING_BRACKET = "[";
@@ -12,29 +9,6 @@ public class ProductValidator {
 	private static final int NUMBER_OF_ARGUMENTS = 3;
 	private static final String KOREAN_REGEX = ".*[ㄱ-ㅎㅏ-ㅣ가-힣]+.*";
 	private static final int PRICE_MINIMUM_LIMIT = 100;
-
-	public static boolean isAvailableForBuy(String input, VendingMachine vendingMachine) {
-		checkProductName(input);
-		checkProductAvailability(input, vendingMachine.getProductList());
-		checkRemainingDeposit(input, vendingMachine.getProductList(), vendingMachine.getDeposit());
-		return true;
-	}
-
-	private static void checkProductAvailability(String productName, ProductList productList) {
-		if (!productList.isExistProduct(productName)) {
-			throw new IllegalArgumentException("상품이 존재하지 않습니다.");
-		}
-
-		if (!productList.isQuantitySufficient(productName)) {
-			throw new IllegalArgumentException("상품이 매진되었습니다.");
-		}
-	}
-
-	private static void checkRemainingDeposit(String productName, ProductList productList, int deposit) {
-		if (productList.isTooExpensive(productName, deposit)) {
-			throw new IllegalArgumentException("상품이 남은 금액보다 비쌉니다.");
-		}
-	}
 
 	public static boolean isValidProducts(String input) {
 		String[] products = input.split(PRODUCT_CRITERIA, -1);
@@ -96,7 +70,7 @@ public class ProductValidator {
 		}
 	}
 
-	private static void checkProductName(String productName) {
+	public static void checkProductName(String productName) {
 		if (!productName.matches(KOREAN_REGEX)) {
 			throw new IllegalArgumentException("상품명은 한글만 허용됩니다.");
 		}
