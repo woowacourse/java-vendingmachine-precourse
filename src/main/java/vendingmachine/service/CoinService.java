@@ -71,10 +71,6 @@ public class CoinService {
 		int changeCount = coin.getChangeCount(money);
 		int coinCount = coinRepository.get(coin);
 
-		if (coinCount >= changeCount) {
-			return changeCount;
-		}
-
-		return coinCount;
+		return Math.min(changeCount, coinCount);
 	}
 }
