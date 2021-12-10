@@ -22,12 +22,21 @@ public class VendingMachineController {
             String userMoneyInput = InputView.inputUserMoney();
             vendingMachineService.putUserMoney(userMoneyInput);
             while (isOperate) {
-                String productName = InputView.inputBuyingProduct();
-                isOperate = vendingMachineService.sellProduct(productName);
+                buyProduct();
             }
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             useClient();
+        }
+    }
+
+    private void buyProduct() {
+        try {
+            String productName = InputView.inputBuyingProduct();
+            isOperate = vendingMachineService.sellProduct(productName);
+        } catch (IllegalArgumentException e) {
+            OutputView.showErrorMessage(e);
+            buyProduct();
         }
     }
 

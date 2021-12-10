@@ -25,7 +25,7 @@ public class VendingMachineService {
         return new VendingMachineService(initializeMoney);
     }
 
-    public void putInitialAmount(int inputMoney) { //금액 검증 로직 만들었으니 그걸 사용하기.
+    public void putInitialAmount(int inputMoney) { //TODO 금액 검증 로직 만들었으니 그걸 사용하기.
         if (inputMoney < ZERO) {
             throw new IllegalArgumentException("0 이상의 금액을 입력해주세요.");
         }
