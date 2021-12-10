@@ -9,6 +9,6 @@ public class MachineController {
 	public MachineController() {
 		Init.init();
 		new Activate();
-		new Change(Init.coinWallet, Init.userMoney);
+		new Change(Init.machineCoins, Init.userMoney);
 	}
 }

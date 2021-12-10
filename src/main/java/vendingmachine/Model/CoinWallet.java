@@ -5,16 +5,16 @@ import java.util.LinkedHashMap;
 import vendingmachine.Util;
 
 public class CoinWallet {
-	public int machineMoney;
+	public int money;
 	public final LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
 
 	public CoinWallet() {
 	}
 
-	public CoinWallet(int machineMoney) {
-		this.machineMoney = machineMoney;
+	public CoinWallet(int money) {
+		this.money = money;
 		coinInit();
-		while (this.machineMoney != 0) {
+		while (this.money != 0) {
 			coinRandomAdd();
 		}
 	}
@@ -35,9 +35,9 @@ public class CoinWallet {
 
 	private void coinRandomAdd() {
 		Coin coin = Util.randomCoin();
-		if (machineMoney >= coin.getAmount()) {
+		if (money >= coin.getAmount()) {
 			coins.replace(coin, coins.get(coin) + 1);
-			machineMoney -= coin.getAmount();
+			money -= coin.getAmount();
 		}
 	}
 }

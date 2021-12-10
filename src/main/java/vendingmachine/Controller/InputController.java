@@ -34,13 +34,13 @@ public class InputController {
 		}
 	}
 
-	public static String setProduct() {
+	public static String setProducts() {
 		try {
 			ProductValidator validation = new ProductValidator(InputView.machineProductInput());
 			return validation.PRODUCT_STRING;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setProduct();
+			return setProducts();
 		}
 	}
 

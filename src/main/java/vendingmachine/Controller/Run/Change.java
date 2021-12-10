@@ -11,7 +11,9 @@ public class Change {
 	public Change(CoinWallet machineCoins, int userMoney) {
 		this.machineCoins = machineCoins;
 		OutputView.printUserMoney(userMoney);
+
 		setChangeCoins();
+
 		OutputView.printChange(changeCoins);
 	}
 
