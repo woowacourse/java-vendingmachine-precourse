@@ -6,6 +6,10 @@ import vendingmachine.domain.VendingMachineMoney;
 import vendingmachine.view.Input;
 
 public class PurchaseController {
+    private static final String BASE_INPUT_MONEY = "\n투입 금액: ";
+    private static final String BASE_WON = "원";
+    private static final String BASE_CHANGE = "잔돈";
+
     public static void purchase(VendingMachineMoney vendingMachineMoney, Product product, int inputMoney) {
         product.setMinPrice();
         product.setSumCount();
@@ -33,7 +37,7 @@ public class PurchaseController {
     }
 
     private static void printReturnChange(VendingMachineMoney vendingMachineMoney, int inputMoney) {
-        System.out.println("\n투입 금액: " + inputMoney + "원");
+        System.out.println(BASE_INPUT_MONEY + inputMoney + BASE_WON);
         inputMoney = Math.min(inputMoney, vendingMachineMoney.getTotalMoney());
 
         int count500 = getCount500(vendingMachineMoney.getMoneyCount500(), inputMoney);
@@ -44,7 +48,7 @@ public class PurchaseController {
         inputMoney = inputMoney - Coin.COIN_50.getAmount() * count50;
         int count10 = inputMoney / Coin.COIN_10.getAmount();
 
-        System.out.println("잔돈");
+        System.out.println(BASE_CHANGE);
         printWon(Coin.COIN_500.getAmount(), count500);
         printWon(Coin.COIN_100.getAmount(), count100);
         printWon(Coin.COIN_50.getAmount(), count50);
@@ -53,7 +57,7 @@ public class PurchaseController {
 
     private static void printWon(int won, int count) {
         if (count > 0) {
-            System.out.println(won + "원 - " + count + "개");
+            System.out.println(won + BASE_WON + " - " + count + "개");
         }
     }
 

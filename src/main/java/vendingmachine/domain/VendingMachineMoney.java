@@ -52,16 +52,16 @@ public class VendingMachineMoney {
     }
 
     public void coinUpdate(int price) {
-        if (price == 500) {
+        if (price == Coin.COIN_500.getAmount()) {
             moneyCount500 += 1;
         }
-        if (price == 100) {
+        if (price == Coin.COIN_100.getAmount()) {
             moneyCount100 += 1;
         }
-        if (price == 50) {
+        if (price == Coin.COIN_50.getAmount()) {
             moneyCount50 += 1;
         }
-        if (price == 10) {
+        if (price == Coin.COIN_10.getAmount()) {
             moneyCount10 += 1;
         }
     }
