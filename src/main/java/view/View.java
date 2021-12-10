@@ -3,6 +3,8 @@ package vendingmachine;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Coin;
+import vendingmachine.repository.InputAmount;
 import vendingmachine.utils.ValidationUtil;
 
 public class View {
