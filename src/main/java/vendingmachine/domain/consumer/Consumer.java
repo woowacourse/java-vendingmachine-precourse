@@ -14,8 +14,14 @@ public class Consumer {
     public boolean possibleToPay(int price) {
         return this.balance >= price;
     }
+
+    public void reduceBalance(int price) {
+        balance -= price;
+    }
+
     // for test
     public boolean hasBalance(int targetBalance) {
         return this.balance == targetBalance;
     }
+
 }
