@@ -29,7 +29,7 @@ class VendingMachineTest {
     }
 
     @ParameterizedTest
-    @ValueSource(strings = {"", "[],[]", "[]", "[asd,d,10]", "[asd,20],[사이다,2000,20][콜라,2000,20]"})
+    @ValueSource(strings = {"", "[],[]", "[]", "[asd,d,10]", "[asd,20],[사이다,2000,20][콜라,2000,20]", "[사이다,2000,20];[사이다,2000,20]"})
     public void 자판기_상품등록_예외_테스트(String input) {
         assertThatThrownBy(() -> vendingMachine.addMerchandise(input)).isInstanceOf(IllegalArgumentException.class);
     }
@@ -38,5 +38,13 @@ class VendingMachineTest {
     @ValueSource(strings = {"", "qwe"})
     public void 자판기_투입금액_예외_테스트(String input) {
         assertThatThrownBy(() -> vendingMachine.setInputMoney(input)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void 물건_구매_테스트() {
+        vendingMachine.addMerchandise("[사이다,2000,20]");
+        vendingMachine.setInputMoney("2000");
+        vendingMachine.purchase("사이다");
+        assertThat(vendingMachine.getAllMerchandiseInfo()).isEqualTo("사이다200019");
     }
 }
