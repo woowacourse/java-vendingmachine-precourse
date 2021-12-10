@@ -123,6 +123,14 @@ public class VendingMachineService {
 		printCoinCount(balanceMap);
 	}
 
+	private int compareInputCostAndCoin() {
+		if (vendingMachine.getInputCost() < vendingMachine.getSumCoinAmount()) {
+			return vendingMachine.getInputCost();
+		}
+
+		return vendingMachine.getSumCoinAmount();
+	}
+
 	private Map<Integer, Integer> addBalanceMapToValue(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
 
@@ -138,15 +146,6 @@ public class VendingMachineService {
 
 		return map;
 	}
-
-	private int compareInputCostAndCoin() {
-		if (vendingMachine.getInputCost() < vendingMachine.getSumCoinAmount()) {
-			return vendingMachine.getSumCoinAmount() - vendingMachine.getInputCost();
-		}
-
-		return vendingMachine.getSumCoinAmount();
-	}
-
 
 
 

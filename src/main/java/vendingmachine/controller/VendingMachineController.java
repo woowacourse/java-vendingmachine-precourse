@@ -46,11 +46,16 @@ public class VendingMachineController {
 		}
 	}
 
-	public void postProductName(){
-		boolean check = false;
-		while(!check){
-			ResponseMessage.of(Message.ENTER_PRODUCT_GOING_TO_PURCHASE.getMessage());
-			check = vendingMachineService.postProductName(Console.readLine());
+	public void postProductName() {
+		try {
+			boolean check = false;
+			while (!check) {
+				ResponseMessage.of(Message.ENTER_PRODUCT_GOING_TO_PURCHASE.getMessage());
+				check = vendingMachineService.postProductName(Console.readLine());
+			}
+		} catch (IllegalArgumentException e) {
+			ErrorResponse.of(e.getMessage());
+			postProductName();
 		}
 	}
 

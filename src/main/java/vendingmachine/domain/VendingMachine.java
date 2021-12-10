@@ -42,10 +42,16 @@ public class VendingMachine {
 	public void subtractInputCostAndProductAmount(String productName) {
 		for (Product product : products) {
 			if (productName.equals(product.getName())) {
-				inputCost -= product.getPrice();
+				subtractInputCost(product);
 				product.subtractAmount();
 				break;
 			}
+		}
+	}
+
+	private void subtractInputCost(Product product) {
+		if (inputCost - product.getPrice() > 0) {
+			inputCost -= product.getPrice();
 		}
 	}
 
