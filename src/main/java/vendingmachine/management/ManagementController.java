@@ -8,13 +8,13 @@ public class ManagementController {
     
     public static void runManagement(InputView inputView) {
         ManagementView.askDepositAmout();
-        int deposit = doValidation(inputView.depositAmout());
+        int deposit = doDepositValidation(inputView.depositAmout());
         ManagementService.generateCoins(deposit);
-        
+        ManagementView.showCoinStatus();
        
     }
     
-    private static int doValidation(String input) {
+    private static int doDepositValidation(String input) {
         int n = 0;
         
         try {
