@@ -7,11 +7,9 @@ import java.util.List;
 public class User {
 	private Money userMoney;
 	private List<Merchandise> buyingMerchandiseList;
-	private LinkedHashMap<Coin, Integer> changeCoinCounts;
 
 	public User(Money userMoney) {
 		this.userMoney = userMoney;
-		changeCoinCounts = new LinkedHashMap<>();
 	}
 
 	public Money getUserMoney() {
@@ -29,17 +27,5 @@ public class User {
 			buyingMerchandiseList.add(buyingMerchandise);
 			setUserMoney(new Money(userMoney.getMoney()-buyingMerchandise.getMoney().getMoney()));
 		}
-	}
-
-	public LinkedHashMap<Coin,Integer> saveCoinStatus() {
-		int changeMoney = userMoney.getMoney();
-		for (Coin coinValue : Coin.values()) {
-			int coinCount = userMoney.decideCoinCount(changeMoney, coinValue);
-			if (coinCount != 0) {
-				changeCoinCounts.put(coinValue, coinCount);
-				changeMoney -= changeCoinCounts.get(coinValue) * coinValue.getAmount();
-			}
-		}
-		return changeCoinCounts;
 	}
 }

@@ -7,7 +7,6 @@ public class VendingMachine {
 	private LinkedHashMap<Coin, Integer> coinCounts;
 	private Merchandises merchandises;
 	private LinkedHashMap<Coin, Integer> changeCoinCounts;
-	private int vendingMoney;
 
 	public VendingMachine(Money vendingMachineMoney) {
 		this.vendingMachineMoney = vendingMachineMoney;
