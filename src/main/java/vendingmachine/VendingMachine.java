@@ -18,4 +18,8 @@ public class VendingMachine {
     public void insertMoney(int money) {
         this.moneyAvailable = money;
     }
+
+    public int showAvailableMoney() {
+        return moneyAvailable;
+    }
 }

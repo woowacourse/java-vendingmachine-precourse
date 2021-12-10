@@ -14,6 +14,7 @@ public class VendingMachineController {
         console.printCurrentBalance(vendingMachineService.createCoinBalance(console.inputCoinBalance()));
         vendingMachineService.createItems(console.inputItemInventoryInfo());
         vendingMachineService.insertMoney(console.inputMoneyToInsert());
+        console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
     }
 
     private ItemsInventoryInfo inputItemsInventoryInfo() {

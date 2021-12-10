@@ -18,4 +18,8 @@ public class VendingMachineService {
     public void insertMoney(int money) {
         vendingMachine.insertMoney(money);
     }
+
+    public int checkAvailableMoney() {
+        return vendingMachine.showAvailableMoney();
+    }
 }

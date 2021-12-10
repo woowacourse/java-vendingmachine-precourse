@@ -8,6 +8,7 @@ import vendingmachine.dto.request.CoinBalanceRequest;
 import vendingmachine.dto.request.ItemsInventoryRequest;
 import vendingmachine.dto.request.MoneyToInsertRequest;
 import vendingmachine.dto.response.CurrentBalanceResponse;
+import vendingmachine.dto.response.MoneyAvailableResponse;
 
 public class VendingMachineConsole {
 
@@ -66,5 +67,9 @@ public class VendingMachineConsole {
     private void printErrorMessage(String errorMessage) {
         System.out.print(PREFIX_OF_ERROR_MESSAGE);
         System.out.println(errorMessage);
+    }
+
+    public void printAvailableMoney(int moneyAvailable) {
+        System.out.println(new MoneyAvailableResponse(moneyAvailable).toPrint());
     }
 }
