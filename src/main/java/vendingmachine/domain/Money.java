@@ -23,4 +23,7 @@ public class Money {
 		return total < money;
 	}
 
+	public void spend(int money) {
+		total -= money;
+	}
 }

@@ -41,7 +41,15 @@ public class MachineController {
 		while (!inputMoney.isSame(0)) {
 			OutputView.printInputMoney(inputMoney);
 			String itemName = InputView.getItemName();
+			Beverage beverage = beverages.findByName(itemName);
+			calculate(beverage);
 		}
+	}
+
+	private void calculate(Beverage beverage) {
+		//구매한 음료에 따른 계산
+		inputMoney.spend(beverage.getPrice());
+
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
