@@ -1,13 +1,12 @@
 package vendingmachine.model.item;
 
-import static vendingmachine.exception.ExceptionMessage.ITEMS_OVERLAP_EXCEPTION_MESSAGE;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.dto.InputItemDTO;
 
 public class Items {
+    private static final String ITEMS_OVERLAP_EXCEPTION_MESSAGE = "상품에 중복이 있습니다.";
     private final List<Item> values;
 
     public Items(final List<InputItemDTO> inputItems) {

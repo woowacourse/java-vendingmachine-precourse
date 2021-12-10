@@ -1,9 +1,6 @@
 package vendingmachine.model.money;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static vendingmachine.exception.ExceptionMessage.NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE;
-import static vendingmachine.exception.ExceptionMessage.NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE;
-
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,15 +12,17 @@ class MoneyTest {
     @DisplayName("양의 정수가 아닌 값으로 Money 객체를 생성하면 예외를 발생시킨다.")
     @ValueSource(strings = {"?", "1.2", "0", "-1"})
     void evokeExceptionByNotInteger(final String notIntegerValue) {
+        String expectedExceptionMessage = "금액은 양의 정수여야 합니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> new Money(notIntegerValue))
-                .withMessage(NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE);
+                .withMessage(expectedExceptionMessage);
     }
 
     @Test
     @DisplayName("10의 배수가 아닌 값으로 Money 객체를 생성하면 예외를 발생시킨다.")
     void evokeExceptionByNotMultipleOfTen() {
         String notMultipleOfTen = "1001";
+        String expectedExceptionMessage = "금액의 최소 단위는 10원입니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> new Money(notMultipleOfTen))
-                .withMessage(NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE);
+                .withMessage(expectedExceptionMessage);
     }
 }

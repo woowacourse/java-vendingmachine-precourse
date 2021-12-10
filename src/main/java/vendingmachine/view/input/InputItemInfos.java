@@ -1,8 +1,5 @@
 package vendingmachine.view.input;
 
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_FORMAT_EXCEPTION_MESSAGE;
-import static vendingmachine.exception.ExceptionMessage.WRONG_ITEM_DELIMITER_EXCEPTION_MESSAGE;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,6 +7,9 @@ import java.util.stream.Collectors;
 import vendingmachine.dto.InputItemDTO;
 
 public class InputItemInfos {
+    private static final String WRONG_ITEM_DELIMITER_EXCEPTION_MESSAGE = "상품을 구분하는 구분자(;) 앞 뒤에 상품 정보가 없습니다.";
+    private static final String ITEM_INFO_FORMAT_EXCEPTION_MESSAGE = "상품 정보가 잘못되었습니다. Format : [상품명,가격,수량]";
+
     private static final String ITEM_DELIMITER = ";";
     private static final String ITEM_PROPERTY_DELIMITER = ",";
     private static final String LEFT_ITEM_PROPERTIES_BRACKET = "[";

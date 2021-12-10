@@ -1,11 +1,11 @@
 package vendingmachine.model.money;
 
-import static vendingmachine.exception.ExceptionMessage.NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE;
-import static vendingmachine.exception.ExceptionMessage.NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE;
 import static vendingmachine.validation.NumberValidator.isNotMultipleOfTen;
 import static vendingmachine.validation.NumberValidator.isNotPositiveInteger;
 
 public class Money {
+    private static final String NOT_POSITIVE_INTEGER_EXCEPTION_MESSAGE = "금액은 양의 정수여야 합니다.";
+    private static final String NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE = "금액의 최소 단위는 10원입니다.";
     private int value;
 
     public Money(final String value) {

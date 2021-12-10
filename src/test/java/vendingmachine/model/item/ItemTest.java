@@ -2,7 +2,6 @@ package vendingmachine.model.item;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -52,7 +51,8 @@ class ItemTest {
     @DisplayName("상품 속성들 중 누락이 있으면 예외를 발생시킨다.")
     void evokeExceptionByNotEnoughItemInfo() {
         InputItemDTO NotEnoughInputItemDTO = new InputItemDTO(Arrays.asList("물", "2000"));
+        String expectedExceptionMessage = "상품 정보에 누락이 있습니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> new Item(NotEnoughInputItemDTO))
-                .withMessage(ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE);
+                .withMessage(expectedExceptionMessage);
     }
 }

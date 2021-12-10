@@ -1,7 +1,5 @@
 package vendingmachine.model.item;
 
-import static vendingmachine.exception.ExceptionMessage.ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE;
-
 import java.util.Objects;
 
 import vendingmachine.dto.InputItemDTO;
@@ -9,7 +7,9 @@ import vendingmachine.model.item.vo.Price;
 import vendingmachine.model.item.vo.Quantity;
 
 public class Item {
+    private static final String ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE = "상품 정보에 누락이 있습니다.";
     private static final int NUMBER_OF_ITEM_PROPERTIES = 3;
+
     private final String name;
     private final Price price;
     private final Quantity remainingQuantity;
