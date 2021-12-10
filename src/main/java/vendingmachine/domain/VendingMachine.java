@@ -6,6 +6,7 @@ public class VendingMachine {
     MachineMoney machineMoney;
     Coin coin;
     MerchandiseList merchandiseList;
+    InputMoney inputMoney;
 
     public VendingMachine() {
         merchandiseList = new MerchandiseList();
@@ -41,6 +42,10 @@ public class VendingMachine {
 
     public String getAllMerchandiseInfo() {
         return merchandiseList.getAllMerchandiseInfo();
+    }
+
+    public void setInputMoney(String inputMoney) {
+        new InputMoney(inputMoney);
     }
 }
 

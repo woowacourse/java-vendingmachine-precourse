@@ -2,6 +2,8 @@ package vendingmachine.controller;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
+import vendingmachine.constant.ErrorMessage;
+import vendingmachine.constant.SystemMessage;
 import vendingmachine.domain.VendingMachine;
 
 public class VendingMachineController {
@@ -11,6 +13,8 @@ public class VendingMachineController {
 
         makeRandomCoin(vendingMachine);
         setMerchandise(vendingMachine);
+
+        setInputMoney(vendingMachine);
     }
 
     private void setMachineMoney(VendingMachine vendingMachine) {
@@ -34,5 +38,9 @@ public class VendingMachineController {
             OutputView.printErrorMessage(exception);
             setMerchandise(vendingMachine);
         }
+    }
+
+    private void setInputMoney(VendingMachine vendingMachine) {
+        vendingMachine.setInputMoney(InputView.printSetInputMoneyMessage());
     }
 }
