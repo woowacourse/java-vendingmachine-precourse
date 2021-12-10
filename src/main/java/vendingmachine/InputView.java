@@ -9,8 +9,12 @@ public class InputView {
 	private static final String GET_ITEM_TO_BUY = "구매할 상품명을 입력해 주세요.";
 
 	public static int GetRemains() {
-		System.out.println(GET_REMAINS);
-		return Integer.parseInt(readLine());
+		int remains;
+		do {
+			System.out.println(GET_REMAINS);
+			remains = Integer.parseInt(readLine());
+		} while (!UserMoney.valid(remains));
+		return remains;
 	}
 
 	public static void printGetItemStatus() {
@@ -18,8 +22,12 @@ public class InputView {
 	}
 
 	public static int GetUserMoney() {
-		System.out.println(GET_USER_MONEY);
-		return Integer.parseInt(readLine());
+		int userMoney;
+		do {
+			System.out.println(GET_USER_MONEY);
+			userMoney = Integer.parseInt(readLine());
+		} while (!UserMoney.valid(userMoney));
+		return userMoney;
 	}
 
 	public static String GetItemToBuy(UserMoney userMoney) {
