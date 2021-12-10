@@ -111,7 +111,7 @@ public class InputValidator {
 
 	private void checkQuantityNotNaturalNumberExceptions(String string) {
 		if (Arrays.stream(string.split(";"))
-			.map(item -> item.split(",")[2])
+			.map(item -> item.split(",")[2].replace("]", ""))
 			.flatMapToInt(CharSequence::chars)
 			.anyMatch(number -> !Character.isDigit(number))) {
 			throw new IllegalArgumentException(QUANTITY_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
