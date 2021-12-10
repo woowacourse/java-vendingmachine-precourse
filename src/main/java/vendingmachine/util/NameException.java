@@ -24,7 +24,7 @@ public class NameException {
 
 	}
 
-	public static boolean checkTabInProductName(String name) {
+	public static void checkTabInProductName(String name) {
 		String[] tmp = name.split("\t", -1);
 
 		if (tmp.length != 1) {

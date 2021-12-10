@@ -68,6 +68,8 @@ public class NumberException {
 		if (!checkPositiveNumberMoneyException(quantity)) {
 			throw new IllegalArgumentException(ErrorMessage.NOT_POSITIVE_NUMBER_QUANTITY_MESSAGE);
 		}
+
+		return quantity;
 	}
 
 }
