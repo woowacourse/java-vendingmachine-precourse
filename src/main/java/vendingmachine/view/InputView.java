@@ -12,8 +12,10 @@ public class InputView {
 		OutputView.askVendingMachineAmount();
 		String inputMoney = Console.readLine();
 		try {
-			ExceptionUtils.validateMoney(inputMoney);
-			return Integer.parseInt(inputMoney);
+			ExceptionUtils.validateInputMoney(inputMoney);
+			int money = Integer.parseInt(inputMoney);
+			ExceptionUtils.validateMoney(money);
+			return money;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
 			return writeVendingMachineAmount();

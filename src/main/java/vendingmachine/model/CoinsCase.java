@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import vendingmachine.utils.ExceptionUtils;
 
 public class CoinsCase {
 
@@ -11,6 +12,7 @@ public class CoinsCase {
 	private int currentAmount;
 
 	public CoinsCase(int vendingMachineAmount) {
+		ExceptionUtils.validateMoney(vendingMachineAmount);
 		this.currentAmount = vendingMachineAmount;
 		this.coinsCase = makeCoinsCase();
 	}

@@ -3,6 +3,7 @@ package vendingmachine.model;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import vendingmachine.utils.ExceptionUtils;
 
 public class CoinCase {
 
@@ -13,6 +14,7 @@ public class CoinCase {
 	private static final int MINIMUM_RANGE = 1;
 
 	public CoinCase(Coin coin, int vendingMachineAmount) {
+		ExceptionUtils.validateMoney(vendingMachineAmount);
 		this.coin = coin;
 		this.vendingMachineAmount = vendingMachineAmount;
 		this.number = calculateNumberOfCoin();
