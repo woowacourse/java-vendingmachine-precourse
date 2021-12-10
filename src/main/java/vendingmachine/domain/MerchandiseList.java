@@ -33,6 +33,12 @@ public class MerchandiseList {
         }
     }
 
+    public void isCorrectBracket(String merchandise) throws IllegalArgumentException {
+        if (!merchandise.startsWith("[") || !merchandise.endsWith("]")) {
+            throw new IllegalArgumentException(ErrorMessage.NOT_CORRECT_BRACKET.print());
+        }
+    }
+
     public void addMerchandise(String merchandise) throws IllegalArgumentException {
         ArrayList<String> array = new ArrayList<String>(Arrays.asList(merchandise.split(",")));
 
@@ -47,12 +53,6 @@ public class MerchandiseList {
     private void isBlank(String merchandise) throws IllegalArgumentException {
         if (merchandise.isEmpty()) {
             throw new IllegalArgumentException(ErrorMessage.NULL_ERROR_MESSAGE.print());
-        }
-    }
-
-    public void isCorrectBracket(String merchandise) throws IllegalArgumentException {
-        if (!merchandise.startsWith("[") || !merchandise.endsWith("]")) {
-            throw new IllegalArgumentException(ErrorMessage.NOT_CORRECT_BRACKET.print());
         }
     }
 
