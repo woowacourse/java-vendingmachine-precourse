@@ -28,6 +28,7 @@ public class MainController {
             String productInfo = Input.InputProductInfo();
             try {
                 ValidationController.productValidation(productInfo);
+                ValidationController.duplicateValidation(productInfo);
                 ProductController.saveProduct(product, productInfo);
                 return;
             }catch (IllegalArgumentException e) {

@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class ValidationController {
     public static void vendingMachineValidation(String input) {
@@ -79,6 +80,20 @@ public class ValidationController {
             if (splitData.length != 3){
                 throw new IllegalArgumentException("[ERROR] 잘못된 구조의 입력입니다.");
             }
+        }
+    }
+
+    public static void duplicateValidation(String productInfo) {
+        String[] productData = productInfo.split(";");
+        HashSet<String> checkProductName = new HashSet<>();
+
+        for (String productDatum : productData) {
+            String[] productSplitData = productDatum.split(",");
+            checkProductName.add(productSplitData[0].substring(1,productSplitData[0].length()));
+        }
+
+        if (productData.length != checkProductName.size()){
+            throw new IllegalArgumentException("[ERROR] 중복된 상품명 입력이 있습니다.");
         }
     }
 }
