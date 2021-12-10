@@ -9,7 +9,7 @@ public class VendingMachine {
 
     private int insertedPrice = 0;
 
-    private List<Product> productList = new ArrayList<>();
+    private Map<String, Product> productMap = new HashMap<>();
 
     private Map<Coin, Integer> remainingCoin = new HashMap<Coin, Integer>(){{
         put(Coin.COIN_10, 0);
@@ -48,5 +48,9 @@ public class VendingMachine {
         remainingCoin.put(coin, remainingStock + 1);
     }
 
-
+    public void setProductMap(List<Product> productList) {
+        for (Product product : productList) {
+            productMap.put(product.getName(), product);
+        }
+    }
 }
