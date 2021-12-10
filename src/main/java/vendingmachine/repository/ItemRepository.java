@@ -1,11 +1,13 @@
-package vendingmachine.domain;
+package vendingmachine.repository;
 
 import java.util.HashMap;
 
-public class Items {
+import vendingmachine.domain.Item;
+
+public class ItemRepository {
 	private final HashMap<String, Item> itemMap;
 
-	public Items() {
+	public ItemRepository() {
 		this.itemMap = new HashMap<>();
 	}
 
@@ -17,14 +19,14 @@ public class Items {
 		return itemMap.values().stream().mapToInt(i -> i.getPrice()).min().getAsInt();
 	}
 
-	public boolean getItemSoldOut(String itemName) {
+	public boolean isItemSoldOut(String itemName) {
 		if (itemMap.get(itemName).isSoldOut()) {
 			return true;
 		}
 		return false;
 	}
 
-	public boolean getAllItemsSoldOut() {
+	public boolean isAllItemSoldOut() {
 		for (Item item : itemMap.values()) {
 			if (!item.isSoldOut()) {
 				return false;
@@ -33,12 +35,9 @@ public class Items {
 		return true;
 	}
 
-	public void buyItem(String itemName) {
+	public int buyItemAndGetPrice(String itemName) {
 		Item item = itemMap.get(itemName);
 		item.decreaseQuantity();
-	}
-
-	public int getItemPrice(String itemName) {
 		return itemMap.get(itemName).getPrice();
 	}
 
