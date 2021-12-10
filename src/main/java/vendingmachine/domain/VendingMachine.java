@@ -47,6 +47,20 @@ public class VendingMachine {
         merchandiseInfo.put(name, Arrays.asList(price, number-1));
     }
 
+    public boolean canBuyMore() {
+        boolean isEnoughMoney = false;
+        for (List<Integer> info : merchandiseInfo.values()) {
+            int price = info.get(0);
+            int number = info.get(1);
+            if (number == 0) continue;
+            if (moneyLeft >= price) {
+                isEnoughMoney = true;
+                break;
+            }
+        }
+        return isEnoughMoney;
+    }
+
     private void generateCoins(int totalMoney) {
         while (totalMoney > 0) {
             int randomCoin = Randoms.pickNumberInList(CoinConstants.getCoinValues());
