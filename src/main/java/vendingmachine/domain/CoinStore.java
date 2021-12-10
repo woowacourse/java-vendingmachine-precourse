@@ -7,12 +7,13 @@ import java.util.EnumMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class CoinStore {
+	private static final int INITIAL_VALUE = 0;
 	private final EnumMap<Coin, Integer> coins = new EnumMap<Coin, Integer>(Coin.class) {
 		{
-			put(Coin.findCoin(500), 0);
-			put(Coin.findCoin(100), 0);
-			put(Coin.findCoin(50), 0);
-			put(Coin.findCoin(10), 0);
+			put(Coin.COIN_500, INITIAL_VALUE);
+			put(Coin.COIN_100, INITIAL_VALUE);
+			put(Coin.COIN_50, INITIAL_VALUE);
+			put(Coin.COIN_10, INITIAL_VALUE);
 		}
 	};
 	private final EnumMap<Coin, Integer> changeCoins = new EnumMap<>(coins);
