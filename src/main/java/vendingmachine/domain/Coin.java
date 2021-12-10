@@ -45,4 +45,10 @@ public enum Coin {
 			.findFirst()
 			.get();
 	}
+
+	public static List<Integer> getAmountListOfCoin() {
+		return Arrays.stream(Coin.values())
+			.map(Coin::getAmount)
+			.collect(Collectors.toList());
+	}
 }

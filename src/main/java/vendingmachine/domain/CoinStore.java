@@ -2,10 +2,7 @@ package vendingmachine.domain;
 
 import static vendingmachine.utils.Constant.*;
 
-import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -46,19 +43,13 @@ public class CoinStore {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (int amountOfCoin: getAmountOfCoinsList()) {
+		for (int amountOfCoin: Coin.getAmountListOfCoin()) {
 			stringBuilder.append(amountOfCoin).append("원");
 			stringBuilder.append(DELIMITER_OF_COIN_STORE_STATUS_REPRESENT);
 			stringBuilder.append(coins.get(Coin.findCoin(amountOfCoin))).append("개");
 			stringBuilder.append("\n");
 		}
 		return stringBuilder.toString();
-	}
-
-	private List<Integer> getAmountOfCoinsList() {
-		return Arrays.stream(Coin.values())
-			.map(Coin::getAmount)
-			.collect(Collectors.toList());
 	}
 
 	private void makeChangeCoins(int amount) {
