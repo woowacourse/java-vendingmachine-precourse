@@ -19,7 +19,7 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	private int getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 
