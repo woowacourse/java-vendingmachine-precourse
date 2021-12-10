@@ -1,6 +1,6 @@
 package vendingmachine.util;
 
-import java.util.Set;
+import java.util.Map;
 
 import vendingmachine.constants.ErrorMessage;
 
@@ -13,13 +13,14 @@ public class ProductException {
 
 	}
 
-	public static void checkProductReDuplication(String productName, Set<String> nameList) {
+	public static void checkProductReDuplication(String productName, Map<String, Integer> nameList, int idx) {
 
-		if (nameList.contains(productName)) {
+		if (nameList.containsKey(productName)) {
+			nameList.clear();
 			throw new IllegalArgumentException(ErrorMessage.REDUPLICATION_NAME_MESSAGE);
 		}
 
-		nameList.add(productName);
+		nameList.put(productName, idx);
 	}
 
 }

@@ -36,4 +36,8 @@ public class VendingMachine {
 	public boolean findMenu(String order) {
 		return menu.findMenu(order);
 	}
+
+	public boolean findQuantityOfOrder(String order) {
+		return menu.findQuantity(order);
+	}
 }

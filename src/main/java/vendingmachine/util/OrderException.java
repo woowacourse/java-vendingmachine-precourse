@@ -20,4 +20,11 @@ public class OrderException {
 
 	}
 
+	public static void isThereAnyQuantity(String order, VendingMachine vendingMachine) {
+
+		if (!vendingMachine.findQuantityOfOrder(order)) {
+			throw new IllegalArgumentException(ErrorMessage.NO_QUANTITY_MESSAGE);
+		}
+
+	}
 }

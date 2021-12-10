@@ -1,20 +1,20 @@
 package vendingmachine.model;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constants.ErrorMessage;
 import vendingmachine.util.ProductException;
 
 public class Menu {
-	public Set<String> nameList;
+	public Map<String, Integer> nameList;
 	public List<Product> menuList;
 
 	public Menu() {
-		nameList = new HashSet<String>();
+		nameList = new HashMap<String, Integer>();
 		menuList = new ArrayList<Product>();
 	}
 
@@ -30,11 +30,10 @@ public class Menu {
 
 			for (int i = 0; i < productStrList.length; i++) {
 				productList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
-				ProductException.checkProductReDuplication(productList.get(i).getName(), nameList);
+				ProductException.checkProductReDuplication(productList.get(i).getName(), nameList, i);
 			}
 
 		} catch (IllegalArgumentException e) {
-			nameList.clear();
 			System.out.println(ErrorMessage.ERROR + e.getMessage());
 			return makeProductList();
 		}
@@ -43,10 +42,14 @@ public class Menu {
 
 	public boolean findMenu(String order) {
 
-		if (nameList.contains(order)) {
+		if (nameList.containsKey(order)) {
 			return true;
 		}
 
 		return false;
+	}
+
+	public boolean findQuantity(String order) {
+		return menuList.get(nameList.get(order)).findQuantity();
 	}
 }

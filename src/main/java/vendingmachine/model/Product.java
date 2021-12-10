@@ -23,4 +23,8 @@ public class Product {
 		return name;
 	}
 
+	public boolean findQuantity() {
+		return quantity > 0;
+	}
+
 }
