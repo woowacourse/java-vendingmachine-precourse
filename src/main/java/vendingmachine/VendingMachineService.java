@@ -26,4 +26,12 @@ public class VendingMachineService {
     public void purchaseByItemName(String inputItemsToPurchase) {
         vendingMachine.purchase(inputItemsToPurchase);
     }
+
+    public boolean isPurchaseAvailable() {
+        return vendingMachine.isPurchaseAvailable();
+    }
+
+    public void giveChange() {
+        vendingMachine.giveChange();
+    }
 }

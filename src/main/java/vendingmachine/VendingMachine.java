@@ -42,6 +42,14 @@ public class VendingMachine {
         return change;
     }
 
+    public boolean isPurchaseAvailable() {
+        int minimumPrice = items.findLowestPriceInStock();
+        if (moneyAvailable < minimumPrice) {
+            return false;
+        }
+        return true;
+    }
+
     private Item findItemToPurchase(String itemNameToPurchase) {
         Item itemToPurchase = findItem(itemNameToPurchase);
         validateAvailableItem(itemToPurchase);
