@@ -10,4 +10,9 @@ public class Input {
 		System.out.println(HOLDING_AMOUNT_INPUT_MESSAGE);
 		return Integer.parseInt(Console.readLine());
 	}
+
+	public static String item() {
+		System.out.println(ITEM_INPUT_MESSAGE);
+		return Console.readLine();
+	}
 }

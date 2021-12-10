@@ -7,4 +7,7 @@ public class Message {
 	public static String HOLDING_COINS_OUTPUT_MESSAGE = "\n자판기가 보유한 동전";
 	public static String COIN_PRINT_FORMAT = "원 - ";
 	public static String COIN_COUNT = "개";
+
+	public static String ITEM_INPUT_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
+
 }

@@ -14,11 +14,17 @@ public class VendingMachineController {
 
 	public void run() {
 		chargeHoldingAmount();
+		addItem();
 	}
 
 	private void chargeHoldingAmount() {
 		int holdingAmount = Input.holdingAmount();
 		vendingMachine.insertCoins(holdingAmount);
 		Output.holdingAmount(vendingMachine.getCoins());
+	}
+
+	private void addItem() {
+		String itemList = Input.item();
+		vendingMachine.insertItems(itemList);
 	}
 }
