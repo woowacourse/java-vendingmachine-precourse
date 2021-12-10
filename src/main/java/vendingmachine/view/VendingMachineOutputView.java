@@ -24,6 +24,10 @@ public class VendingMachineOutputView {
 		System.out.println(VENDING_MACHINE_INITIAL_COINS_OUTPUT_MESSAGE);
 	}
 
+	public void printInitialItemsInputMessage(){
+		System.out.println(INITIAL_ITEMS_INPUT_MESSAGE);
+	}
+
 	public void printVendingMachineInitialCoins(List<Integer> numberOfCoins){
 		List<Integer> monetaryUnitList = Coin.getMonetaryUnitList();
 		for (int i = 0; i < numberOfCoins.size(); i++) {
