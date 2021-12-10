@@ -19,6 +19,14 @@ public class Coins {
 		}
 	}
 
+	public void showExists() {
+		for (Coin coin : coins.keySet()) {
+			if (coins.get(coin) > 0) {
+				System.out.println(coin.getUnit() + " - " + coins.get(coin) + "개");
+			}
+		}
+	}
+
 	public void generate(int amount) {
 		while (amount > 0) {
 			int value = Coin.pickRandom();
