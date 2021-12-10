@@ -53,8 +53,7 @@ public class Machine {
 	private void sellItems() {
 		display.printInsertAmount(cashier);
 		while (!itemManager.isAllSoldOut() && cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
-			itemManager.sellItem(askWhatToBuy());
-			// TODO: 투입 금액에서 해당 상품의 가격을 뺀다
+			cashier.payItem(itemManager.takeOne(askWhatToBuy()));
 		}
 	}
 

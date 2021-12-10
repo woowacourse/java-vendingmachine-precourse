@@ -31,11 +31,12 @@ public class ItemManager {
 		return items.isEmpty();
 	}
 
-	public void sellItem(String name) {
+	public Item takeOne(String name) {
 		Item item = items.get(name);
 		item.takeOne();
 		if (item.isSoldOut()) {
 			items.remove(name);
 		}
+		return item;
 	}
 }

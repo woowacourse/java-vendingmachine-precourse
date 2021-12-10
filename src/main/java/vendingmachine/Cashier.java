@@ -24,6 +24,10 @@ public class Cashier {
 		this.insertAmount = insertAmount;
 	}
 
+	public void payItem(Item item) {
+		insertAmount = insertAmount - item.getPrice();
+	}
+
 	public boolean isInsertAmountEnough(int required) {
 		return insertAmount >= required;
 	}
