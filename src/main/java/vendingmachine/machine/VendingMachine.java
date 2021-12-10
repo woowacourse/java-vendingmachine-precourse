@@ -2,39 +2,39 @@ package vendingmachine.machine;
 
 import java.util.HashMap;
 
-import vendingmachine.money.ChangeSlot;
 import vendingmachine.money.Coin;
-import vendingmachine.money.MoneySlot;
 import vendingmachine.product.ProductStorage;
+import vendingmachine.slot.ChangeSlot;
+import vendingmachine.slot.InsertSlot;
 
 public class VendingMachine {
 	private ChangeSlot changeSlot;
 	private ProductStorage productStorage;
-	private MoneySlot moneySlot;
+	private InsertSlot insertSlot;
 
 	public VendingMachine(ChangeSlot changeSlot, ProductStorage productStorage) {
 		this.changeSlot = changeSlot;
 		this.productStorage = productStorage;
-		this.moneySlot = new MoneySlot();
+		this.insertSlot = new InsertSlot();
 	}
 
 	public boolean isUsable() {
-		return productStorage.isSellable(moneySlot.getRemainMoney());
+		return productStorage.isSellable(insertSlot.getRemainMoney());
 	}
 
 	public void insertMoney(String money) {
-		moneySlot.insert(money);
+		insertSlot.insert(money);
 	}
 
 	public int calculateRemainMoney() {
-		return moneySlot.getRemainMoney();
+		return insertSlot.getRemainMoney();
 	}
 
 	public void trade(String product) {
-		moneySlot.payProductValue(productStorage.sellProduct(product));
+		insertSlot.payProductValue(productStorage.sellProduct(product));
 	}
 
 	public HashMap<Coin, Integer> returnChange() {
-		return changeSlot.calculateChange(moneySlot.getRemainMoney());
+		return changeSlot.calculateChange(insertSlot.getRemainMoney());
 	}
 }

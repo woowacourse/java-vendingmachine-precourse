@@ -1,8 +1,8 @@
 package vendingmachine.machine;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.money.ChangeSlot;
 import vendingmachine.product.ProductStorage;
+import vendingmachine.slot.ChangeSlot;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
