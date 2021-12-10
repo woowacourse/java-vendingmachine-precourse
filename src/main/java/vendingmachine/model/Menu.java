@@ -7,6 +7,7 @@ import java.util.Set;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constants.ErrorMessage;
+import vendingmachine.util.ProductException;
 
 public class Menu {
 	public Set<String> nameList;
@@ -29,11 +30,13 @@ public class Menu {
 
 			for (int i = 0; i < productStrList.length; i++) {
 				productList.add(new Product(productStrList[i]));
+				ProductException.checkProductReDuplication(productList.get(i).getName(), nameList);
 			}
 
 		} catch (IllegalArgumentException e) {
 			System.out.println(ErrorMessage.ERROR + e.getMessage());
 			return makeProductList();
 		}
+		return productList;
 	}
 }

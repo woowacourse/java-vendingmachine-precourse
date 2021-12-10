@@ -12,11 +12,15 @@ public class Product {
 	public Product(String productStr) {
 		String[] productInfo = productStr.split(",", -1);
 
-		ProductException.ProductInfoSize(productInfo);
+		ProductException.checkProductInfoSize(productInfo);
 
 		name = NameException.checkNameException(productInfo[0]);
 		price = NumberException.checkPriceException(productInfo[1]);
 		quantity = NumberException.checkQuantityException(productInfo[2]);
+	}
+
+	public String getName() {
+		return name;
 	}
 
 }
