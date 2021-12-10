@@ -20,4 +20,10 @@ public class MoneyInputValidator {
 			}
 		}
 	}
+
+	private void validateMinimumMoney(String savedMoneyInput) {
+		if (Integer.parseInt(savedMoneyInput) < MINIMUM_MONEY) {
+			throw new IllegalArgumentException("보유 금액은 0원 이상이어야 합니다.");
+		}
+	}
 }
