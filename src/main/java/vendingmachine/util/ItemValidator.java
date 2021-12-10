@@ -22,11 +22,11 @@ public class ItemValidator {
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_WRAPPED);
 		String itemParameterStr = unwrap(itemStr);
 
-		List<Object> itemParameters = parameterStringToList(itemParameterStr);
+		List<String> itemParameters = parameterStringToList(itemParameterStr);
 
-		return new Item((String)itemParameters.get(NAME_INDEX)
-			, (Integer)itemParameters.get(PRICE_INDEX)
-			, (Integer)itemParameters.get(AMOUNT_INDEX));
+		return new Item(itemParameters.get(NAME_INDEX)
+			, Integer.parseInt(itemParameters.get(PRICE_INDEX))
+			, Integer.parseInt(itemParameters.get(AMOUNT_INDEX)));
 	}
 
 	private static boolean isWrapped(String itemStr) {
@@ -40,65 +40,58 @@ public class ItemValidator {
 		return itemStr.substring(FIRST_INDEX + INDEX_GAP, itemStr.length() - INDEX_GAP);
 	}
 
-	private static List<Object> parameterStringToList(String parameterStr) {
-		List<Object> result = Arrays.asList(parameterStr.split(PARAMETER_SEPARATOR));
+	private static List<String> parameterStringToList(String parameterStr) {
+		List<String> result = Arrays.asList(parameterStr.split(PARAMETER_SEPARATOR));
 
 		if (isRightParameterCount(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_ITEM_DELIMITER);
 
-		int price = validatePrice((String)result.get(PRICE_INDEX));
-		result.set(PRICE_INDEX, price);
-
-		int amount = validateAmount((String)result.get(AMOUNT_INDEX));
-		result.set(AMOUNT_INDEX, amount);
+		validatePrice(result.get(PRICE_INDEX));
+		validateAmount(result.get(AMOUNT_INDEX));
 
 		return result;
 	}
 
-	private static boolean isRightParameterCount(List<Object> parameters) {
+	private static boolean isRightParameterCount(List<String> parameters) {
 		return parameters.size() != PARAMETER_COUNT;
 	}
 
-	private static int validatePrice(String priceStr) {
-		if(!isInteger(priceStr))
+	private static void validatePrice(String priceStr) {
+		if(isNotInteger(priceStr))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_INTEGER);
 		int price = Integer.parseInt(priceStr);
 
-		if(isMoreThanMin(price))
+		if(!isMoreThanMin(price))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_MIN);
 
-		if(isMultipleOf10(price))
+		if(!isMultipleOf10(price))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_MULTIPLE_OF_10);
-
-		return price;
 	}
 
-	private static boolean isInteger(String numberStr) {
+	private static boolean isNotInteger(String numberStr) {
 		try {
 			Integer.parseInt(numberStr);
 		} catch (Exception e) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private static boolean isMoreThanMin(int number) {
-		return number < PRICE_MIN;
+		return number > PRICE_MIN;
 	}
 
 	private static boolean isMultipleOf10(int number) {
 		return number % 10 == 0;
 	}
 
-	private static int validateAmount(String amountStr) {
-		if(!isInteger(amountStr))
+	private static void validateAmount(String amountStr) {
+		if(isNotInteger(amountStr))
 			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_INTEGER);
 		int amount = Integer.parseInt(amountStr);
 
 		if(!isPositive(amount))
 			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_POSITIVE);
-
-		return amount;
 	}
 
 	private static boolean isPositive(int number) {

@@ -12,7 +12,14 @@ public class InputItemInfoView implements View {
 	@Override
 	public void show() {
 		System.out.println(SystemMessage.INPUT_ITEM_INFO);
-		List<Item> items = readItems();
+		List<Item> items;
+		try {
+			items = readItems();
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			show();
+			return;
+		}
 		Application.controller.addItems(items);
 	}
 
