@@ -78,7 +78,7 @@ public class ItemValidator {
 	}
 
 	private static boolean isMoreThanMin(int number) {
-		return number > PRICE_MIN;
+		return number >= PRICE_MIN;
 	}
 
 	private static boolean isMultipleOf10(int number) {
