@@ -70,7 +70,7 @@ public class ProductList {
 	public int getMinimumPrice() {
 		int minimumPrice = Integer.MAX_VALUE;
 		for (Product product : hashMap.values()) {
-			if (product.getQuantity() == 0) {
+			if (product.isEmpty()) {
 				continue;
 			}
 
@@ -82,7 +82,7 @@ public class ProductList {
 
 	public boolean isOutOfStock() {
 		for (Product product : hashMap.values()) {
-			if (product.getQuantity() > 0) {
+			if (!product.isEmpty()) {
 				return false;
 			}
 		}

@@ -28,4 +28,8 @@ public class Product {
 		this.quantity--;
 	}
 
+	public boolean isEmpty() {
+		return this.quantity == 0;
+	}
+
 }
