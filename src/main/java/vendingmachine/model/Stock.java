@@ -38,6 +38,7 @@ public class Stock {
 		stringChecker.containTap(input);
 
 		SplitChecker splitChecker = new SplitChecker();
+		splitChecker.exceedMaxSplit(input, Rule.DELIMETER_PRODUCT);
 		splitChecker.hasZeroLength(input, Rule.DELIMETER_PRODUCT);
 	}
 }

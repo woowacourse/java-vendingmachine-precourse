@@ -15,12 +15,14 @@ public class Message {
 
 	public static final String ERROR = "[ERROR]";
 	public static final String ERROR_MESSAGE_POSITIVE_NUMBER = Coin.minAmount() + "원 이상의 정수를 입력해 주세요.";
-	public static final String ERROR_MESSAGE_EXCEED_INTEGER = Integer.MAX_VALUE + "이하의 정수를 입력해 주세요.";
+	public static final String ERROR_MESSAGE_EXCEED_INTEGER = Integer.MAX_VALUE + "이하를 입력해 주세요.";
 	public static final String ERROR_MESSAGE_DIVISIBLE_NUMBER = Coin.minAmount() + "원 단위의 정수를 입력해 주세요.";
 	public static final String ERROR_MESSAGE_INPUT_IS_EMPTY = "아무것도 입력되지 않았습니다.";
 	public static final String ERROR_MESSAGE_CONTAINS_SPACE = "공백이 포함될 수 없습니다.";
 	public static final String ERROR_MESSAGE_CONTAINS_TAP = "탭이 포함될 수 없습니다.";
 	public static final String ERROR_MESSAGE_LENGTH_ZERO = "1자 이상을 입력해주세요";
+	public static final String ERROR_MESSAGE_THE_NUMBER_OF = "개를 입력해주세요.";
+	public static final String ERROR_MESSAGE_NOT_BRACKET = "개별 상품은 " + Rule.BRACKET + "로 묶어야합니다.";
 
 	public static String toString(int amount, int count) {
 		return amount + "원 - " + count + "개";
