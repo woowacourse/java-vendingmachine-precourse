@@ -11,12 +11,12 @@ public class ViewController {
 
 	public int returnMoneyOfVendingMachine() {
 		outputView.askInputMoneyOfVendingMachine();
-		return inputView.getMoneyOfVendingMachine();
+		return inputView.getValidMoney();
 	}
 
 	public int returnDepositAmount() {
 		outputView.askDepositAmount();
-		int depositAmount = inputView.getDepositAmount();
+		int depositAmount = inputView.getValidMoney();
 		outputView.printRemainingDeposit(depositAmount);
 
 		return depositAmount;
