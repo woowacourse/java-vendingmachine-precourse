@@ -1,8 +1,8 @@
 package vendingmachine;
 
-import vendingmachine.dto.ItemInfo;
-import vendingmachine.dto.ItemInventoryInfo;
-import vendingmachine.dto.ItemsInventoryInfo;
+import vendingmachine.dto.servicedto.ItemInfo;
+import vendingmachine.dto.servicedto.ItemInventoryInfo;
+import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
 public class ItemFactory {
     private Items items;

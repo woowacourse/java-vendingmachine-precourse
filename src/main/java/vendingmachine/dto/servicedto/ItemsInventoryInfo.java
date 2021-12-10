@@ -1,7 +1,9 @@
-package vendingmachine.dto;
+package vendingmachine.dto.servicedto;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import vendingmachine.dto.servicedto.ItemInventoryInfo;
 
 public class ItemsInventoryInfo {
     List<ItemInventoryInfo> itemsInventoryInfo = new ArrayList<>();

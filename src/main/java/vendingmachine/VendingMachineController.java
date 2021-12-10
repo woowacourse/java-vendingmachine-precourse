@@ -1,6 +1,6 @@
 package vendingmachine;
 
-import vendingmachine.dto.ItemsInventoryInfo;
+import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
 public class VendingMachineController {
     private final VendingMachineService vendingMachineService;
@@ -15,6 +15,7 @@ public class VendingMachineController {
         vendingMachineService.createItems(console.inputItemInventoryInfo());
         vendingMachineService.insertMoney(console.inputMoneyToInsert());
         console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
+        console.inputItemsToPurchase();
     }
 
     private ItemsInventoryInfo inputItemsInventoryInfo() {

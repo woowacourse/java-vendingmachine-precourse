@@ -9,10 +9,9 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import vendingmachine.dto.ItemInfo;
-import vendingmachine.dto.ItemInventoryInfo;
-import vendingmachine.dto.ItemsInventoryInfo;
-import vendingmachine.dto.request.iteminventory.ItemInventoryRequest;
+import vendingmachine.dto.servicedto.ItemInfo;
+import vendingmachine.dto.servicedto.ItemInventoryInfo;
+import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
 public class ItemsInventoryRequest {
     private static final String SEMICOLON_DELIMITER_BETWEEN_ITEM_INVENTORY_INFO = ";";

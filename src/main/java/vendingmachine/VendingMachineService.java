@@ -1,6 +1,6 @@
 package vendingmachine;
 
-import vendingmachine.dto.ItemsInventoryInfo;
+import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
 public class VendingMachineService {
     private final VendingMachine vendingMachine = new VendingMachine();

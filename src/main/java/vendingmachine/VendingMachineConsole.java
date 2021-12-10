@@ -3,12 +3,13 @@ package vendingmachine;
 import static vendingmachine.StringConstants.PREFIX_OF_ERROR_MESSAGE;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.dto.ItemsInventoryInfo;
 import vendingmachine.dto.request.CoinBalanceRequest;
+import vendingmachine.dto.request.ItemPurchaseRequest;
 import vendingmachine.dto.request.iteminventory.ItemsInventoryRequest;
 import vendingmachine.dto.request.MoneyToInsertRequest;
 import vendingmachine.dto.response.CurrentBalanceResponse;
 import vendingmachine.dto.response.MoneyAvailableResponse;
+import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
 public class VendingMachineConsole {
 
@@ -60,6 +61,14 @@ public class VendingMachineConsole {
         return moneyToInsert;
     }
 
+    public void printAvailableMoney(int moneyAvailable) {
+        System.out.println(new MoneyAvailableResponse(moneyAvailable).toPrint());
+    }
+
+    public void inputItemsToPurchase() {
+        new ItemPurchaseRequest(input()).toItemNameToPurchase();
+    }
+
     private String input() {
         return Console.readLine();
     }
@@ -67,9 +76,5 @@ public class VendingMachineConsole {
     private void printErrorMessage(String errorMessage) {
         System.out.print(PREFIX_OF_ERROR_MESSAGE);
         System.out.println(errorMessage);
-    }
-
-    public void printAvailableMoney(int moneyAvailable) {
-        System.out.println(new MoneyAvailableResponse(moneyAvailable).toPrint());
     }
 }

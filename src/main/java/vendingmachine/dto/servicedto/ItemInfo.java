@@ -1,4 +1,4 @@
-package vendingmachine.dto;
+package vendingmachine.dto.servicedto;
 
 public class ItemInfo {
     private final String name;

@@ -1,13 +1,7 @@
 package vendingmachine;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import vendingmachine.dto.ItemInfo;
-import vendingmachine.dto.ItemInventoryInfo;
-import vendingmachine.dto.ItemsInventoryInfo;
 
 class ItemsTest {
 

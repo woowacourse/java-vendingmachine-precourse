@@ -6,8 +6,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import vendingmachine.dto.ItemInfo;
-import vendingmachine.dto.ItemInventoryInfo;
+import vendingmachine.dto.servicedto.ItemInfo;
+import vendingmachine.dto.servicedto.ItemInventoryInfo;
 
 public class ItemInventoryRequest {
     private static final int MINIMUM_VALUE_OF_ITEM_QUANTITY = 1;

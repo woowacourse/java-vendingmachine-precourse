@@ -3,7 +3,7 @@ package vendingmachine.dto.request.iteminventory;
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT;
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT;
 
-import vendingmachine.dto.ItemInfo;
+import vendingmachine.dto.servicedto.ItemInfo;
 
 public class ItemRequest {
     private static final int MINIMUM_VALUE_OF_ITEM_PRICE = 100;
