@@ -18,6 +18,14 @@ public class OutputView {
 	}
 
 	public static void addProductAndNumbers() {
-		System.out.println(ENTER_PRODUCT_AND_NUMBER_MESSAGE);
+		System.out.println(ENTER_PRODUCT_AND_NUMBER);
+	}
+
+	public static void enterInputMoney() {
+		System.out.println(ENTER_INPUT_MONEY);
+	}
+
+	public static void showRemainingMoney(int money) {
+		System.out.println(money + WON);
 	}
 }
