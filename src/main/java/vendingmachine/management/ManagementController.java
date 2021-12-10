@@ -5,26 +5,27 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.outputView.ManagementView;
 
 public class ManagementController {
+    protected static int deposit;
     
     public static void runManagement(InputView inputView) {
         ManagementView.askDepositAmout();
-        int deposit = doDepositValidation(inputView.depositAmout());
+        doDepositValidation(inputView);
         ManagementService.generateCoins(deposit);
         ManagementView.showCoinStatus();
        
     }
     
-    private static int doDepositValidation(String input) {
-        int n = 0;
-        
-        try {
-            n = CheckDepositFigure.validationFigure(input);
-            CheckDepositFigure.validationPositiveNumber(n);
-            } catch(Exception e) {
+    private static void doDepositValidation(InputView inputView) {
+        while(true) {
+            String input = inputView.depositAmout();
+            
+            try {
+                CheckDepositFigure.validationFigure(input);
+                deposit = Integer.parseInt(input);
+                CheckDepositFigure.validationPositiveNumber(deposit);
+            } catch(IllegalArgumentException e) {
                 System.out.println(e.getMessage());
+            }
         }
-        
-        return n;
     }
-    
 }
