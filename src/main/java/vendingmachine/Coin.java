@@ -1,5 +1,9 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -14,5 +18,21 @@ public enum Coin {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	public static List<Integer> getAllCoins() {
+		List<Integer> possibleCoins = new ArrayList<>();
+		for (Coin each : Coin.values()) {
+			possibleCoins.add(each.getAmount());
+		}
+		return possibleCoins;
+	}
+
+	public static Coin issue(int amount) {
+		HashMap<Integer, Coin> coinMap = new HashMap<>();
+		for (Coin each : Coin.values()) {
+			coinMap.put(each.getAmount(), each);
+		}
+		return coinMap.get(amount);
 	}
 }

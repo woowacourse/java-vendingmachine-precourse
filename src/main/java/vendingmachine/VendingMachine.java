@@ -1,14 +1,12 @@
 package vendingmachine;
 
-import java.util.List;
-
 public class VendingMachine {
-	private List<Integer> coinsForChange;
+	private ChangeSlot changeSlot;
 	private ProductStorage productStorage;
 	private MoneySlot moneySlot;
 
-	public VendingMachine(List<Integer> coinsForChange, ProductStorage productStorage) {
-		this.coinsForChange = coinsForChange;
+	public VendingMachine(ChangeSlot changeSlot, ProductStorage productStorage) {
+		this.changeSlot = changeSlot;
 		this.productStorage = productStorage;
 		this.moneySlot = new MoneySlot();
 	}

@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.List;
-
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
@@ -9,42 +7,39 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private VendingMachine vendingMachine;
-	private List<Integer> coins;
-	private ProductStorage productStorage;
 
 	public void setUpInitialVendingMachine() {
 		InputView.printInitialMoneySettingMessage();
-		InitialMoney initialMoney = new InitialMoney();
-		requestInitialMoney(initialMoney);
-		OutputView.printVendingMachineOwnCoins(coins);
+		ChangeSlot changeSlot = new ChangeSlot();
+		requestInitialMoney(changeSlot);
 
 		InputView.printInitialProductSettingMessage();
-		productStorage = new ProductStorage();
-		requestInitialProducts();
+		ProductStorage productStorage = new ProductStorage();
+		requestInitialProducts(productStorage);
 
 		InputView.printInsertMoneyMessage();
-		vendingMachine = new VendingMachine(coins, productStorage);
+		vendingMachine = new VendingMachine(changeSlot, productStorage);
 		requestInsertMoney();
 
 		repeatRequestTrading();
 	}
 
-	private void requestInitialMoney(InitialMoney initialMoney) {
+	private void requestInitialMoney(ChangeSlot changeSlot) {
 		try {
-			initialMoney.input(Console.readLine());
-			coins = initialMoney.createRandomCoins();
+			changeSlot.input(Console.readLine());
+			OutputView.printVendingMachineOwnCoins(changeSlot.createRandomCoins());
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
-			requestInitialMoney(initialMoney);
+			requestInitialMoney(changeSlot);
 		}
 	}
 
-	private void requestInitialProducts() {
+	private void requestInitialProducts(ProductStorage productStorage) {
 		try {
 			productStorage.createProducts(Console.readLine());
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
-			requestInitialProducts();
+			requestInitialProducts(productStorage);
 		}
 	}
 

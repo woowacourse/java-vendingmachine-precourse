@@ -1,7 +1,6 @@
 package vendingmachine.view;
 
-import java.util.Collections;
-import java.util.List;
+import java.util.HashMap;
 
 import vendingmachine.Coin;
 
@@ -16,18 +15,16 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printVendingMachineOwnCoins(List<Integer> coins) {
+	public static void printVendingMachineOwnCoins(HashMap<Coin, Integer> coins) {
 		printLineBreak();
 		System.out.println(VENDING_MACHINE_OWN_COINS);
-		countCoins(coins);
+		printAllCoins(coins);
 		printLineBreak();
 	}
 
-	private static void countCoins(List<Integer> coins) {
+	private static void printAllCoins(HashMap<Coin, Integer> coins) {
 		for (Coin coin : Coin.values()) {
-			int money = coin.getAmount();
-			System.out.println(
-				money + MONETARY_UNIT + COINS_FORMAT + Collections.frequency(coins, money) + COUNTING_UNIT);
+			System.out.println(coin.getAmount() + MONETARY_UNIT + COINS_FORMAT + coins.get(coin) + COUNTING_UNIT);
 		}
 	}
 
