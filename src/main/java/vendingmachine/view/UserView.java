@@ -14,4 +14,8 @@ public class UserView {
 	public void askInsertMoney() {
 		System.out.println("\n" + InputMessage.INSERT_MONEY_MESSAGE);
 	}
+
+	public void orderMenu() {
+		System.out.println("\n" + InputMessage.ORDER_MENU_NAME);
+	}
 }

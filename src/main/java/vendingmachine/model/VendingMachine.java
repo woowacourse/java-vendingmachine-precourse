@@ -29,4 +29,11 @@ public class VendingMachine {
 		insertedMoney = Money.setMoney();
 	}
 
+	public void takeOrder() {
+		Order.takeOrder(this);
+	}
+
+	public boolean findMenu(String order) {
+		return menu.findMenu(order);
+	}
 }

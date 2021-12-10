@@ -25,5 +25,11 @@ public class VendingMachineController {
 
 		userView.askInsertMoney();
 		vendingMachine.insertMoney();
+
+		while (true) {
+			userView.orderMenu();
+			vendingMachine.takeOrder();
+		}
+
 	}
 }

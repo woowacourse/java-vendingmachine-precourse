@@ -40,4 +40,13 @@ public class Menu {
 		}
 		return productList;
 	}
+
+	public boolean findMenu(String order) {
+
+		if (nameList.contains(order)) {
+			return true;
+		}
+
+		return false;
+	}
 }
