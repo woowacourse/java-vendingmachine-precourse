@@ -8,7 +8,6 @@ import java.util.TreeMap;
 public class VendingMachine {
     public static final int DEFAULT_VALUE = 0;
     public static final int INCREMENT_BY_ONE = 1;
-    public static final int DECREMENT_BY_ONE = -1;
     private static final String ERROR_MESSAGE = "[ERROR] ";
     private static final String NOT_ENOUGH_QUANTITY_MESSAGE = "상품 수량이 부족합니다.";
     private static final String NOT_ENOUGH_MONEY_MESSAGE = "잔액이 부족합니다.";
@@ -76,24 +75,18 @@ public class VendingMachine {
     }
 
     public Map<Coin, Integer> getChanges() {
-        Map<Coin, Integer> changes = new TreeMap<>();
-        calculateChanges(changes);
-
-        return changes;
+        return calculateChanges();
     }
 
-    public void calculateChanges(Map<Coin, Integer> changes) {
+    public Map<Coin, Integer> calculateChanges() {
+        Map<Coin, Integer> changes = new TreeMap<>();
         coins.keySet().forEach(coin -> {
-            int count = DEFAULT_VALUE;
-            while (coin.getAmount() <= userInsertAmount && coins.getOrDefault(coin, DEFAULT_VALUE) > DEFAULT_VALUE) {
-                coins.merge(coin, DECREMENT_BY_ONE, Integer::sum);
-                userInsertAmount -= coin.getAmount();
-                count++;
-            }
-            if (count > DEFAULT_VALUE) {
-                changes.put(coin, count);
-            }
+            int changesCount = userInsertAmount / coin.getAmount();
+            changes.put(coin, changesCount);
+            userInsertAmount -= changesCount;
         });
+
+        return changes;
     }
 
     public int getUserInsertAmount() {
