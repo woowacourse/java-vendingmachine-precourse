@@ -15,7 +15,7 @@ public class CoinPocketTest {
 
     @BeforeEach
     void init() {
-        coinPocket = new CoinPocket();
+        coinPocket = CoinPocket.getInstance();
         machineBalance = 450;
     }
 

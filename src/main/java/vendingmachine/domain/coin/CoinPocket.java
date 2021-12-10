@@ -9,7 +9,10 @@ import java.util.Map;
 public class CoinPocket {
     private Map<Coin, Integer> coins;
 
-    public CoinPocket() {
+    public static CoinPocket getInstance() {
+        return new CoinPocket();
+    }
+    private CoinPocket() {
         coins = new HashMap<>();
     }
 
