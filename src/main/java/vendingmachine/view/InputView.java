@@ -12,4 +12,12 @@ public class InputView {
 	public static int inputTotalAmountMoneyOfVendingMachine() {
 		return Integer.parseInt(Console.readLine());
 	}
+
+	public static void printMessageToGetInformationOfProducts() {
+		System.out.println(Message.GET_INFORMATION_OF_PRODUCTS.getText());
+	}
+
+	public static String inputInformationOfProducts() {
+		return Console.readLine();
+	}
 }
