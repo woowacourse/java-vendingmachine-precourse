@@ -22,5 +22,6 @@ public class MainController {
         String productInfo = Input.InputProductInfo();
         ProductController.saveProduct(product, productInfo);
         String inputMoney = Input.InputMoney();
+        String productName = Input.InputPurchase(Integer.parseInt(inputMoney));
     }
 }

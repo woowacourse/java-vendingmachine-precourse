@@ -20,4 +20,11 @@ public class Input {
         String money = Console.readLine();
         return money;
     }
+
+    public static String InputPurchase(int money){
+        System.out.println("\n투입 금액: " + money +"원");
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        String productName = Console.readLine();
+        return productName;
+    }
 }
