@@ -20,10 +20,11 @@ public class VendingMachine {
 
     public void run() {
         int nowAmount = machineController.nowInputAmount();
+        machineController.nowInputAmountInfo();
         while (productsController.canBuyAnyProduct(nowAmount)) {
-            machineController.nowInputAmountInfo();
             buyProduct();
             nowAmount = machineController.nowInputAmount();
+            machineController.nowInputAmountInfo();
         }
         coinController.repayCoinsPrint(nowAmount);
     }
