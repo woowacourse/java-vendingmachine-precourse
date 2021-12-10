@@ -8,8 +8,8 @@ public class Product {
 	private int price;
 	private int quantity;
 
-	public void init(String rawInfo) {
-		String[] arguments = createProductArguments(rawInfo);
+	public void init(String rawProduct) {
+		String[] arguments = createProductArguments(rawProduct);
 
 		this.name = arguments[0];
 		this.price = Integer.parseInt(arguments[1]);

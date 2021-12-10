@@ -22,9 +22,9 @@ public class ViewController {
 		return depositAmount;
 	}
 
-	public String returnProductList() {
-		outputView.askProductInfo();
-		return inputView.getProductsInput();
+	public String returnRawProductsInput() {
+		outputView.askProductToRegister();
+		return inputView.getRawProductsInput();
 	}
 
 	public String returnProductWantToBuy(VendingMachine vendingMachine) {

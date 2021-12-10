@@ -26,7 +26,7 @@ public class InputView {
 		return Integer.parseInt(input);
 	}
 
-	public String getProductsInput() {
+	public String getRawProductsInput() {
 		String input = "";
 
 		boolean isValid = false;

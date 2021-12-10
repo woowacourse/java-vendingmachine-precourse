@@ -13,11 +13,11 @@ public class ProductList {
 		this.hashMap = new HashMap<>();
 	}
 
-	public void init(String rawInput) {
-		String[] productRawInputList = rawInput.split(PRODUCT_CRITERIA, -1);
-		for (String productRawInput : productRawInputList) {
+	public void init(String rawProductsInput) {
+		String[] rawProductList = rawProductsInput.split(PRODUCT_CRITERIA, -1);
+		for (String rawProduct : rawProductList) {
 			Product product = new Product();
-			product.init(productRawInput);
+			product.init(rawProduct);
 
 			registerProduct(product);
 		}

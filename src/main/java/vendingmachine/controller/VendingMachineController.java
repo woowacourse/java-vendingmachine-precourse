@@ -21,8 +21,8 @@ public class VendingMachineController {
 		coinList.init();
 
 		ProductList productList = new ProductList();
-		String productListRawInput = viewController.returnProductList();
-		productList.init(productListRawInput);
+		String rawProductsInput = viewController.returnRawProductsInput();
+		productList.init(rawProductsInput);
 
 		int deposit = viewController.returnDepositAmount();
 
