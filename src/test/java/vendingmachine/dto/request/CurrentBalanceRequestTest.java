@@ -1,4 +1,4 @@
-package vendingmachine.dto;
+package vendingmachine.dto.request;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

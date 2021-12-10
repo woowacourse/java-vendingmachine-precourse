@@ -1,4 +1,4 @@
-package vendingmachine.dto;
+package vendingmachine.dto.request;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,6 +7,7 @@ import java.util.List;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.dto.ItemInventoryInfo;
 import vendingmachine.dto.request.ItemsInventoryRequest;
 
 class ItemsInventoryRequestTest {
