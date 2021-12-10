@@ -2,10 +2,8 @@ package vendingmachine.domain;
 
 import static constants.VendingMachineConstants.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -19,9 +17,8 @@ public class VendingMachineMoney {
 	}};
 
 	public void moneyToCoins(Integer money) {
-		List<Integer> tmpCoins = Arrays.asList(COIN_500_NUM, COIN_100_NUM, COIN_50_NUM, COIN_10_NUM);
 		while (money != 0) {
-			int coinAmount = Randoms.pickNumberInList(tmpCoins);
+			int coinAmount = Randoms.pickNumberInList(COIN_VALUES);
 			Coin coin = Coin.findByAmount(coinAmount);
 			if (money - coinAmount >= 0) {
 				money -= coinAmount;
@@ -36,14 +33,13 @@ public class VendingMachineMoney {
 
 	public Map<Coin, Integer> getChanges(int money) {
 		Map<Coin, Integer> changes = new LinkedHashMap<>();
-		List<Integer> tmpCoins = Arrays.asList(COIN_500_NUM, COIN_100_NUM, COIN_50_NUM, COIN_10_NUM);
-		for (Integer changeAmount : tmpCoins) {
+		for (Integer changeAmount : COIN_VALUES) {
 			Coin coin = Coin.findByAmount(changeAmount);
-			int count = Math.min(money / changeAmount, coins.get(coin));
-			if (count != 0) {
-				changes.put(Coin.findByAmount(changeAmount), count);
-				money -= count * changeAmount;
-				coins.put(coin, coins.get(coin) - changeAmount);
+			int changeCount = Math.min(money / changeAmount, coins.get(coin));
+			if (changeCount != 0) {
+				changes.put(Coin.findByAmount(changeAmount), changeCount);
+				money -= changeCount * changeAmount;
+				coins.put(coin, coins.get(coin) - changeCount);
 			}
 		}
 		return changes;

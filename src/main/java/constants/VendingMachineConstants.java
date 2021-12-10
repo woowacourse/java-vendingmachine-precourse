@@ -1,5 +1,8 @@
 package constants;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class VendingMachineConstants {
 	public static String VENDING_MACHINE_MONEY_INPUT_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	public static String VENDING_MACHINE_MONEY_OUTPUT_MESSAGE = "자판기가 보유한 동전";
@@ -22,10 +25,7 @@ public class VendingMachineConstants {
 	public static String PRODUCT_EXPENSIVE_ERROR = "투입한 금액보다 높은 가격의 제품은 구매할 수 없습니다.";
 	public static String COIN_NOT_FOUND_ERROR = "코인을 찾을 수 없습니다.";
 
-	public static Integer COIN_500_NUM = 500;
-	public static Integer COIN_100_NUM = 100;
-	public static Integer COIN_50_NUM = 50;
-	public static Integer COIN_10_NUM = 10;
+	public static List<Integer> COIN_VALUES = Arrays.asList(500, 100, 50, 10);
 
 	public static String KOR_MONETARY_UNIT = "원";
 	public static String DASH_WITH_SPACE = " - ";
