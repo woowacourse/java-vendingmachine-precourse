@@ -22,4 +22,8 @@ public class OutputView {
         System.out.println("\n자판기가 보유한 동전");
         System.out.println(coinRepository);
     }
+
+    public static void showErrorMessage(IllegalArgumentException e) {
+        System.out.println("[ERROR] " + e.getMessage());
+    }
 }
