@@ -13,10 +13,16 @@ public class ItemParser {
 	private static final String OBJECT_WRAP_RIGHT = "]";
 
 	public static List<Item> parseList(String itemListStr) {
+		List<String> itemStrs = Arrays.asList(itemListStr.split(OBJECT_SEPARATOR));
+		List<Item> items = itemStrs.stream().map(itemStr -> {
+			itemStr = itemStr.trim();
+			return parse(itemStr);
+		}).collect(Collectors.toList());
 
+		return items;
 	}
 
 	private static Item parse(String itemStr) {
-		
+		return null;
 	}
 }
