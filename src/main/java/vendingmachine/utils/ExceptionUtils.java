@@ -1,6 +1,9 @@
 package vendingmachine.utils;
 
+import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+import vendingmachine.model.Product;
 
 public class ExceptionUtils {
 
@@ -22,6 +25,7 @@ public class ExceptionUtils {
 	private static final String REGULAR_EXPRESSION_PRODUCT_INFO = "^(\\[[0-9a-zA-Z가-힣]+,\\d+,\\d+])(;\\[[0-9a-zA-Z가-힣]+,\\d+,\\d+])*$";
 	private static final String INVALID_PRODUCT_EXPRESSION_ERROR_MESSAGE = "알맞은 형태로 입력해주세요.";
 	private static final String INVALID_PRICE_ERROR_MESSAGE = "상품의 가격은 100원 이상부터 입니다.";
+	private static final String NOT_IN_VENDING_MACHINE = "해당 상품은 자판기에 없는 상품입니다.";
 
 	public static void validateInputMoney(String inputMoney) {
 		if (!validateSpace(inputMoney)) {
@@ -50,6 +54,15 @@ public class ExceptionUtils {
 				ERROR_HEADER + INVALID_PRODUCT_EXPRESSION_ERROR_MESSAGE);
 		}
 		return inputProductsInfo;
+	}
+
+	public static void validateNameOfProduct(String name, List<Product> products) {
+		if (!validateSpace(name)) {
+			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
+		}
+		if (!validateProductInVendingMachine(name, products)) {
+			throw new IllegalArgumentException((ERROR_HEADER + NOT_IN_VENDING_MACHINE));
+		}
 	}
 
 	public static int validatePriceOfProductsInfo(int price) {
@@ -89,5 +102,11 @@ public class ExceptionUtils {
 
 	private static boolean validateOver100(int money) {
 		return money >= MINIMUM_PRICE;
+	}
+
+	private static boolean validateProductInVendingMachine(String inputProduct,
+		List<Product> products) {
+		return products.stream().map(Product::getName).collect(Collectors.toList())
+			.contains(inputProduct);
 	}
 }

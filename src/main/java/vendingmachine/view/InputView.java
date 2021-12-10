@@ -52,7 +52,7 @@ public class InputView {
 		OutputView.askProductToBuy();
 		String inputName = Console.readLine();
 		try {
-			// 예외처리
+			ExceptionUtils.validateNameOfProduct(inputName, products);
 			return inputName;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
