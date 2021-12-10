@@ -52,7 +52,7 @@ class MachineClipTest extends NsTest {
 	}
 
 	private void initMachineClip(int amount) {
-		machineClip.initMachine(randomBox.getNumOfCoins(amount));
+		machineClip.createMachineClip(randomBox.getNumOfCoins(amount));
 	}
 
 

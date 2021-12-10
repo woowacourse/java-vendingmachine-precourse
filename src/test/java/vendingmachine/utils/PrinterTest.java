@@ -27,7 +27,7 @@ class PrinterTest extends NsTest {
 		this.printer = PRINTER;
 		this.machineClip = MACHINE_CLIP;
 		randomBox = RandomBox.RANDOM_COIN_BOX;
-		machineClip.initMachine(randomBox.getNumOfCoins(100000000));
+		machineClip.createMachineClip(randomBox.getNumOfCoins(100000000));
 	}
 
 	@Test

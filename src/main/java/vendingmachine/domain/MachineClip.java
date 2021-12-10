@@ -18,7 +18,7 @@ public enum MachineClip {
 		this.numOfCoins = new TreeMap<>((o1, o2) -> o2 - o1);
 	}
 
-	public void initMachine(Map<Integer, Integer> numOfCoins) {
+	public void createMachineClip(Map<Integer, Integer> numOfCoins) {
 		getCoinStream().forEach(c -> this.numOfCoins.put(c.getValue(), 0));
 		numOfCoins.keySet().stream().forEach(k -> this.numOfCoins.put(k, numOfCoins.get(k)));
 	}

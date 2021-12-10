@@ -1,7 +1,5 @@
 package vendingmachine.utils;
 
-import static vendingmachine.domain.Machine.*;
-import static vendingmachine.domain.MachineClip.*;
 import static vendingmachine.utils.Constant.*;
 
 import java.util.Map;
