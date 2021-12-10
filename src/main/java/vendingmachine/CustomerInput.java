@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.message.Ask;
 
 public class CustomerInput {
-	public String getTotalMachineChanges() {
+	public int getTotalMachineChanges() {
 		System.out.println(Ask.ENTER_MACHINE_CHANGES);
 		String input = Console.readLine();
 		try {
@@ -13,7 +13,7 @@ public class CustomerInput {
 			System.out.println(e.getMessage());
 			getTotalMachineChanges();
 		}
-		return input;
+		return Integer.parseInt(input);
 	}
 
 	private void validateMachineChangesInput(String input) {
