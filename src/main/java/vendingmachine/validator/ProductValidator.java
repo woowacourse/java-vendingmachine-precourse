@@ -1,5 +1,6 @@
 package vendingmachine.validator;
 
+import static vendingmachine.validator.MoneyValidator.*;
 import static vendingmachine.validator.NameValidator.*;
 
 public class ProductValidator {
@@ -9,7 +10,6 @@ public class ProductValidator {
 	public static final String PRODUCT_CRITERIA = ";";
 	public static final String ARGUMENT_CRITERIA = ",";
 	private static final int NUMBER_OF_ARGUMENTS = 3;
-	private static final int PRICE_MINIMUM_LIMIT = 100;
 
 	public static boolean isValidProducts(String input) {
 		String[] products = input.split(PRODUCT_CRITERIA, -1);
@@ -68,22 +68,6 @@ public class ProductValidator {
 			throw new IllegalArgumentException(
 				"상품 정보는 " + NUMBER_OF_ARGUMENTS + "개이어야 하고, " +
 					"\"" + ARGUMENT_CRITERIA + "\"" + "로 구분 지어져야 합니다.");
-		}
-	}
-
-	private static void checkProductPrice(String productPrice) {
-		for (int i = 0; i < productPrice.length(); i++) {
-			if (!Character.isDigit(productPrice.charAt(i))) {
-				throw new IllegalArgumentException("상품 가격은 자연수만 허용됩니다.");
-			}
-		}
-
-		if (!productPrice.endsWith("0")) {
-			throw new IllegalArgumentException("상품 가격은 10으로 나누어떨어져야 합니다.");
-		}
-
-		if (Integer.parseInt(productPrice) < PRICE_MINIMUM_LIMIT) {
-			throw new IllegalArgumentException("상품 가격은 " + PRICE_MINIMUM_LIMIT + "원 이상 이어야합니다.");
 		}
 	}
 
