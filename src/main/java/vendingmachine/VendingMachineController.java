@@ -11,8 +11,8 @@ public class VendingMachineController {
             try {
                 inputCoinBalance();
                 isCoinBalanceInputEntered = true;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException error) {
+                System.out.println(error.getMessage());
             }
         }
 
@@ -21,8 +21,8 @@ public class VendingMachineController {
             try {
                 inputItemsInventoryInfo();
                 isItemsInventoryInfoEntered = true;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+            } catch (IllegalArgumentException error) {
+                System.out.println(error.getMessage());
             }
         }
     }

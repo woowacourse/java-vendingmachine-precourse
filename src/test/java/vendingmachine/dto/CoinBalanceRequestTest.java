@@ -31,4 +31,12 @@ class CoinBalanceRequestTest {
 
         Assertions.assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 조건인_10원보다_적은_금액_입력시_예외_발생() {
+        String lessThanTenWonInput = "9";
+        CoinBalanceRequest coinBalanceRequest = new CoinBalanceRequest(lessThanTenWonInput);
+
+        Assertions.assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
+    }
 }

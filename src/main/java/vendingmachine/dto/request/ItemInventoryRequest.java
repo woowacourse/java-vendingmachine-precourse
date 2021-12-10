@@ -1,5 +1,7 @@
 package vendingmachine.dto.request;
 
+import static vendingmachine.StringConstants.*;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,8 +9,16 @@ import vendingmachine.dto.ItemInfo;
 import vendingmachine.dto.ItemInventoryInfo;
 
 public class ItemInventoryRequest {
+    private static final int MINIMUM_VALUE_OF_ITEM_QUANTITY = 1;
+    private static final String COMMA_DELIMITER_BETWEEN_KINDS_OF_ITEM_INFO = ",";
+    private static final String OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO = "[";
+    private static final String CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO = "]";
+    private static final int LENGTH_OF_BRACKET = 1;
+    private static final int NUMBER_OF_INFO_ITEM_INVENTORY_INPUT_TO_HAS = 3;
+    private static final int INDEX_OF_ITEM_NAME = 0;
+    private static final int INDEX_OF_ITEM_PRICE = 1;
+    private static final int INDEX_OF_ITEM_QUANTITY = 2;
     private final String input;
-    public ItemInventoryInfo toItemInventoryDto;
 
     public ItemInventoryRequest(String input) {
         this.input = input;
@@ -21,43 +31,43 @@ public class ItemInventoryRequest {
     }
 
     private List<String> divideByKindOfInfo() {
-        return Arrays.asList(splitByComma(removeBraces()));
+        return Arrays.asList(splitByComma(removeBracket()));
     }
 
     private void validate(List<String> dividedInfoValue) {
-        if (dividedInfoValue.size() != 3) {
-            throw new IllegalArgumentException("상품명, 가격, 수량에 대한 정보를 모두 입력해 주세요");
+        if (dividedInfoValue.size() != NUMBER_OF_INFO_ITEM_INVENTORY_INPUT_TO_HAS) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT);
         }
     }
 
     private ItemInfo extractItemInfo(List<String> infoToAdd) {
-        ItemRequest itemRequest = new ItemRequest(infoToAdd.get(0), infoToAdd.get(1));
+        ItemRequest itemRequest = new ItemRequest(infoToAdd.get(INDEX_OF_ITEM_NAME), infoToAdd.get(INDEX_OF_ITEM_PRICE));
         return itemRequest.toItemInfo();
     }
 
     private int extractItemQuantity(List<String> infoToAdd) {
         try {
-            int quantity = Integer.parseInt(infoToAdd.get(2));
+            int quantity = Integer.parseInt(infoToAdd.get(INDEX_OF_ITEM_QUANTITY));
             validateItemQuantity(quantity);
             return quantity;
         } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException("수량은 정수로 변환할 수 있어야 하며 1보다 커야 합니다");
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_QUANTITY_INPUT);
         }
     }
 
-    private String removeBraces() {
-        if (!(input.startsWith("[") || input.endsWith("]"))) {
-            throw new IllegalArgumentException("아이템 정보는 대괄호('[]')로 묶여 있어야 합니다");
+    private String removeBracket() {
+        if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) || input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT_FORMAT);
         }
-        return input.substring(1, input.length() - 1);
+        return input.substring(LENGTH_OF_BRACKET, input.length() - LENGTH_OF_BRACKET);
     }
 
     private String[] splitByComma(String itemInventoryInfoValue) {
-        return itemInventoryInfoValue.split(",");
+        return itemInventoryInfoValue.split(COMMA_DELIMITER_BETWEEN_KINDS_OF_ITEM_INFO);
     }
 
     private void validateItemQuantity(int quantity) {
-        if (quantity < 1) {
+        if (quantity < MINIMUM_VALUE_OF_ITEM_QUANTITY) {
             throw new IllegalArgumentException();
         }
     }

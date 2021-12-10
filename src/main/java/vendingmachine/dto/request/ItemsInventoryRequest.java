@@ -1,6 +1,8 @@
 package vendingmachine.dto.request;
 
 import static org.assertj.core.util.Arrays.isNullOrEmpty;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_DUPLICATED_ITEM_NAMES_IN;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEMS_INVENTORY_INPUT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,6 +14,7 @@ import vendingmachine.dto.ItemInventoryInfo;
 import vendingmachine.dto.ItemsInventoryInfo;
 
 public class ItemsInventoryRequest {
+    private static final String SEMICOLON_DELIMITER_BETWEEN_ITEM_INVENTORY_INFO = ";";
     private final String input;
 
     public ItemsInventoryRequest(String input) {
@@ -28,7 +31,7 @@ public class ItemsInventoryRequest {
 
     private void checkInputEmpty(String[] input) {
         if (isNullOrEmpty(input)) {
-            throw new IllegalArgumentException("하나 이상의 상품에 대한 정보를 입력해 주세요");
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEMS_INVENTORY_INPUT);
         }
     }
 
@@ -41,14 +44,14 @@ public class ItemsInventoryRequest {
     }
 
     private String[] divideByItem() {
-        return input.split(";");
+        return input.split(SEMICOLON_DELIMITER_BETWEEN_ITEM_INVENTORY_INFO);
     }
 
     private void checkDuplicatedNames(ItemsInventoryInfo itemsInventoryInfo) {
         List<ItemInventoryInfo> info = itemsInventoryInfo.getInfo();
         Set<String> collectedItemNames = info.stream().map(ItemInventoryInfo::getItemInfo).map(ItemInfo::getName).collect(Collectors.toSet());
         if (collectedItemNames.size() != info.size()) {
-            throw new IllegalArgumentException("상품명은 중복될 수 없습니다");
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_DUPLICATED_ITEM_NAMES_IN);
         }
     }
 }

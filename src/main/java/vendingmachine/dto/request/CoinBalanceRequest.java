@@ -1,9 +1,10 @@
 package vendingmachine.dto.request;
 
-import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_COIN_BALANCE_INPUT;
-import static vendingmachine.StringConstants.MINIMUM_VALUE_OF_COIN_BALANCE;
+import static vendingmachine.StringConstants.*;
 
 public class CoinBalanceRequest {
+    private static final int MINIMUM_VALUE_OF_COIN_BALANCE = 10;
+    private static final int MINIMUM_CURRENCY_UNIT = 10;
     public final String input;
 
     public CoinBalanceRequest(String input) {
@@ -21,7 +22,7 @@ public class CoinBalanceRequest {
     }
 
     private void validate(int coinBalance) {
-        if (coinBalance < MINIMUM_VALUE_OF_COIN_BALANCE || coinBalance % MINIMUM_VALUE_OF_COIN_BALANCE != 0) {
+        if (coinBalance < MINIMUM_VALUE_OF_COIN_BALANCE || coinBalance % MINIMUM_CURRENCY_UNIT != 0) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_COIN_BALANCE_INPUT);
         }
     }

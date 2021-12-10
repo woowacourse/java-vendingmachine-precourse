@@ -1,8 +1,13 @@
 package vendingmachine.dto.request;
 
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT;
+
 import vendingmachine.dto.ItemInfo;
 
 public class ItemRequest {
+    private static final int MINIMUM_VALUE_OF_ITEM_PRICE = 100;
+    private static final int MINIMUM_CURRENCY_UNIT = 10;
     private final String nameInput;
     private final String priceInput;
 
@@ -26,19 +31,19 @@ public class ItemRequest {
             price = Integer.parseInt(priceInput);
             validatePrice(price);
         } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException("상품 가격은 100원 이상의 정수이며 10원 단위로 나눠 떨어져야 합니다");
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_PRICE_INPUT);
         }
         return price;
     }
 
     private void validateName(String name) {
         if (name.isEmpty()) {
-            throw new IllegalArgumentException("상품 명은 최소 한 글자 이상이어야 합니다");
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_NAME_INPUT);
         }
     }
 
     private void validatePrice(int price) {
-        if (price < 100 || price % 10 != 0) {
+        if (price < MINIMUM_VALUE_OF_ITEM_PRICE || price % MINIMUM_CURRENCY_UNIT != 0) {
             throw new IllegalArgumentException();
         }
     }
