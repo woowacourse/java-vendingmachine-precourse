@@ -14,8 +14,7 @@ public class MainController {
     }
 
     public void playGame(){
-        int vendingMachineChange = Input.InputVendingMachineChange();
-        vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
+        playInputVendingMachine();
         CoinController.makeCoin(vendingMachineMoney);
         Output.printVendingMachineCoin(vendingMachineMoney);
 
@@ -23,5 +22,21 @@ public class MainController {
         ProductController.saveProduct(product, productInfo);
         String inputMoney = Input.InputMoney();
         PurchaseController.purchase(vendingMachineMoney, product, Integer.parseInt(inputMoney));
+    }
+
+    private void playInputVendingMachine(){
+        int vendingMachineChange = 0;
+        while (true) {
+            String inputMoney = Input.InputVendingMachineChange();
+
+            try {
+                ValidationController.vendingMachineValidation(inputMoney);
+                vendingMachineChange = Integer.parseInt(inputMoney);
+                vendingMachineMoney = new VendingMachineMoney(vendingMachineChange);
+                return;
+            }catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
