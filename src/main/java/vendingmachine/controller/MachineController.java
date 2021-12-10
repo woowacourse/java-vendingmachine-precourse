@@ -52,9 +52,8 @@ public class MachineController {
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
-
-		for (String s : itemPriceStock) {
-			String[] itemInfo = s.split(",");
+		for (String itemInfoList : itemPriceStock) {
+			String[] itemInfo = itemInfoList.split(",");
 			String name = itemInfo[itemIndex];
 			int price = InputValidator.checkNumberForm(itemInfo[priceIndex], PRICE);
 			int stock = InputValidator.checkNumberForm(itemInfo[stockIndex], STOCK);
