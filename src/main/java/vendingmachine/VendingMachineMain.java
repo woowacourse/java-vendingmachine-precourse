@@ -1,19 +1,29 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import inputcontroller.InputGenerator;
+import models.Coin;
+import models.Product;
 
 import java.util.HashMap;
 
-import static vendingmachine.Coin.*;
-
 public class VendingMachineMain {
-    public static int TotalCoin;
-    public static HashMap<Coin, Integer> Coin2Num;
+    public static int totalCoin;
+    public static HashMap<Coin, Integer> coin2Num;
+    public static HashMap<String, Product> name2Product;
 
-    public static void initMachine(int amount) {
-        TotalCoin = amount;
-        Coin2Num = new HashMap<Coin, Integer>();
+    public static void makeInitialCoins() {
+        int amount = InputGenerator.inputInitMoney();
+
+        totalCoin = amount;
+        coin2Num = new HashMap<Coin, Integer>();
         VendingMachineDistribution.distributeRandomly();
+
         VendingMachineUI.printCoins();
+    }
+
+    public static void makeInitialProducts() {
+        name2Product = new HashMap<String, Product>();
+        InputGenerator.inputInitProducts();
+        System.out.println(name2Product);
     }
 }
