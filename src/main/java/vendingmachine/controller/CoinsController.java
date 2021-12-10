@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.coins.Coins;
+import vendingmachine.dto.CoinsOutputDto;
 import vendingmachine.dto.VendingMachineBalanceDto;
 import vendingmachine.service.CoinsService;
 import vendingmachine.view.InputView;
@@ -18,5 +19,12 @@ public class CoinsController {
 			OutputView.printError(e.getMessage());
 			generateCoins();
 		}
+	}
+
+	public void printGeneratedCoins() {
+		Coins coins = coinsService.getCurrentCoins();
+		OutputView.printVendingMachineHoldingCoins(
+			CoinsOutputDto.from(coins)
+		);
 	}
 }

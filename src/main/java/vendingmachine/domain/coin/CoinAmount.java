@@ -13,6 +13,10 @@ public class CoinAmount {
 		return new CoinAmount(coinAmount);
 	}
 
+	public int toInt() {
+		return this.coinAmount;
+	}
+
 	@Override
 	public String toString() {
 		return Integer.toString(coinAmount);

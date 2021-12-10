@@ -17,4 +17,8 @@ public class CoinsService {
 	public void initCoins(Coins coins) {
 		coinsRepository.setCoins(coins);
 	}
+
+	public Coins getCurrentCoins() {
+		return coinsRepository.getCoins();
+	}
 }
