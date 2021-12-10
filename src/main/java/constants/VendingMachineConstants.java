@@ -19,16 +19,12 @@ public class VendingMachineConstants {
 	public static String PRODUCT_NAME_NOT_EXIST_ERROR = "자판기에 없는 상품명입니다.";
 	public static String PRODUCT_NOT_EXIST_ERROR = "이미 모두 팔린 제품입니다.";
 	public static String PRODUCT_EXPENSIVE_ERROR = "투입한 금액보다 높은 가격의 제품은 구매할 수 없습니다.";
+	public static String COIN_NOT_FOUND_ERROR = "코인을 찾을 수 없습니다.";
 
 	public static Integer COIN_500_NUM = 500;
 	public static Integer COIN_100_NUM = 100;
 	public static Integer COIN_50_NUM = 50;
 	public static Integer COIN_10_NUM = 10;
-
-	public static Integer COIN_500_IDX = 0;
-	public static Integer COIN_100_IDX = 1;
-	public static Integer COIN_50_IDX = 2;
-	public static Integer COIN_10_IDX = 3;
 
 	public static String KOR_MONETARY_UNIT = "원";
 	public static String DASH_WITH_SPACE = " - ";
