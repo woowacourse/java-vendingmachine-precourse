@@ -1,5 +1,7 @@
 package vendingmachine.domain.product;
 
+import vendingmachine.domain.consumer.Consumer;
+
 public class Product {
 
     private final String name;
@@ -21,4 +23,7 @@ public class Product {
         return this.name.equals(name);
     }
 
+    public boolean orderBy(Consumer consumer) {
+        return consumer.possibleToPay(price);
+    }
 }

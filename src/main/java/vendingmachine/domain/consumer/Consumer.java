@@ -10,6 +10,10 @@ public class Consumer {
     public static Consumer from(int balance) {
         return new Consumer(balance);
     }
+
+    public boolean possibleToPay(int price) {
+        return this.balance >= price;
+    }
     // for test
     public boolean hasBalance(int targetBalance) {
         return this.balance == targetBalance;
