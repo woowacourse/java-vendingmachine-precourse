@@ -23,4 +23,8 @@ public class Item {
 	public void takeOne() {
 		count--;
 	}
+
+	public boolean isSoldOut() {
+		return count == 0;
+	}
 }

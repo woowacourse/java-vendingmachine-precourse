@@ -27,7 +27,15 @@ public class ItemManager {
 		return items.containsKey(name);
 	}
 
+	public boolean isAllSoldOut() {
+		return items.isEmpty();
+	}
+
 	public void sellItem(String name) {
-		items.get(name).takeOne();
+		Item item = items.get(name);
+		item.takeOne();
+		if (item.isSoldOut()) {
+			items.remove(name);
+		}
 	}
 }
