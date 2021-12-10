@@ -41,6 +41,6 @@ public class VendingMachine extends Observable {
 			return coins;
 		}
 
-		return null;
+		return coins.getCloseAmountCoins(remainMoney);
 	}
 }

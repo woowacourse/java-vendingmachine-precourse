@@ -13,7 +13,7 @@ public class PrintRemainInputMoneyCoinsView extends View {
 		if (event.isTypeOf(EventType.CLOSE_VENDING_MACHINE)) {
 			Coins coins = convertToData(event.getData(), Coins.class);
 			System.out.println("잔돈");
-			coins.stream().forEach(coin -> System.out.println(coin.getAmount() + "원 - " + coins.getCount(coin) + "개"));
+			coins.stream().forEach(coin -> System.out.println(coin.getAmount() + "원 - " + coins.getNumberOf(coin) + "개"));
 		}
 	}
 }

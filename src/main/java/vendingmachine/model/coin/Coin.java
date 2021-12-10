@@ -1,5 +1,10 @@
 package vendingmachine.model.coin;
 
+import java.util.List;
+import java.util.stream.Stream;
+import static java.util.Comparator.comparingInt;
+import static java.util.stream.Collectors.toList;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -21,6 +26,10 @@ public enum Coin {
 			return COIN_50;
 		}
 		return COIN_10;
+	}
+
+	public static List<Coin> valuesByPriceDesc() {
+		return Stream.of(values()).sorted(comparingInt(Coin::getAmount).reversed()).collect(toList());
 	}
 
 	public int getAmount() {

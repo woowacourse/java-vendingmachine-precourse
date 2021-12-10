@@ -3,6 +3,7 @@ package vendingmachine.model.coin;
 import static java.util.Comparator.comparingInt;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class Coins {
@@ -25,7 +26,7 @@ public class Coins {
 		coins.put(coin, coins.get(coin) + 1);
 	}
 
-	public int getCount(Coin coin) {
+	public int getNumberOf(Coin coin) {
 		return coins.get(coin);
 	}
 
@@ -42,6 +43,32 @@ public class Coins {
 	}
 
 	private int getEachAmount(Coin coin) {
-		return coin.getAmount() * getCount(coin);
+		return coin.getAmount() * getNumberOf(coin);
+	}
+
+	public Coins getCloseAmountCoins(int remainMoney) {
+		Coins result = new Coins();
+
+		for (Coin coin : Coin.valuesByPriceDesc()) {
+			int usingNumberOfCoin = getUsingNumberOfCoin(coin, remainMoney);
+			putCoins(result, coin, usingNumberOfCoin);
+			remainMoney -= usingNumberOfCoin * coin.getAmount();
+		}
+
+		return result;
+	}
+
+	private int getUsingNumberOfCoin(Coin coin, int remainMoney) {
+		int needed = remainMoney / coin.getAmount();
+
+		if (needed <= getNumberOf(coin)) {
+			return needed;
+		}
+
+		return getNumberOf(coin);
+	}
+
+	private void putCoins(Coins coins, Coin coin, int usingNumberOfCoin) {
+		IntStream.range(0, usingNumberOfCoin).forEach(i -> coins.put(coin));
 	}
 }
