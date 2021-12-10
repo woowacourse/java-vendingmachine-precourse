@@ -21,4 +21,15 @@ public class InputView {
 			return writeVendingMachineAmount();
 		}
 	}
+
+	public static String writeProductsInfo() {
+		OutputView.askProductInfo();
+		try {
+			// 예외 만들기
+			return Console.readLine();
+		} catch (IllegalArgumentException IAE) {
+			OutputView.printError(IAE);
+			return writeProductsInfo();
+		}
+	}
 }
