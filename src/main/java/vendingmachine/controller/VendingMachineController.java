@@ -28,15 +28,15 @@ public class VendingMachineController {
 		vendingMachine.insertMoney();
 
 		while (!vendingMachine.stopMachine()) {
-			userView.printRemainOfInsertedMoney(vendingMachine.getRemainMoney());
+			vendingMachineView.printRemainOfInsertedMoney(vendingMachine.getRemainMoney());
 			userView.orderMenu();
 			vendingMachine.takeOrder();
 		}
 
-		userView.printChangesComment(vendingMachine.getRemainMoney());
+		vendingMachineView.printChangesComment(vendingMachine.getRemainMoney());
 
 		for (Coin coin : Coin.values()) {
-			userView.printChanges(vendingMachine.giveChanges(coin), coin);
+			vendingMachineView.printChanges(vendingMachine.giveChanges(coin), coin);
 		}
 	}
 }
