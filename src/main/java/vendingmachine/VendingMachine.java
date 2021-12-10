@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class VendingMachine {
 
-    private int insertedPrice = 0;
+    private int balance = 0;
 
     private Map<String, Product> productMap = new HashMap<>();
 
@@ -62,11 +62,13 @@ public class VendingMachine {
         }
         product = productMap.get(productName);
 
-        if (insertedPrice < product.getPrice()) {
+        if (balance < product.getPrice()) {
             throw new NoSuchElementException(ErrorMessage.NOT_ENOUTH_BALANCE.getCompleteMessage());
         }
-        insertedPrice -= product.getPrice();
+        balance -= product.getPrice();
         product.sell();
         productMap.put(product.getName(), product);
     }
+
+
 }
