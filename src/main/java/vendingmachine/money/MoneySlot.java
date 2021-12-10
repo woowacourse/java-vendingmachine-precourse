@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.money;
 
 public class MoneySlot {
 	private static final int MINIMUM_DIVISIBLE_NUMBER = 10;

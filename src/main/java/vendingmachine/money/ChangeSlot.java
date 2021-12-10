@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.money;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

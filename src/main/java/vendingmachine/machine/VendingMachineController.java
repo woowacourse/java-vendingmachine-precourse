@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.machine;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.view.ErrorView;
@@ -8,44 +8,17 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
 	private VendingMachine vendingMachine;
 
-	public void setUpInitialVendingMachine() {
-		InputView.printInitialMoneySettingMessage();
-		ChangeSlot changeSlot = new ChangeSlot();
-		requestInitialMoney(changeSlot);
-
-		InputView.printInitialProductSettingMessage();
-		ProductStorage productStorage = new ProductStorage();
-		requestInitialProducts(productStorage);
-
-		InputView.printInsertMoneyMessage();
-		vendingMachine = new VendingMachine(changeSlot, productStorage);
-	}
-
-	private void requestInitialMoney(ChangeSlot changeSlot) {
-		try {
-			changeSlot.input(Console.readLine());
-			OutputView.printVendingMachineOwnCoins(changeSlot.createRandomCoins());
-		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
-			requestInitialMoney(changeSlot);
-		}
-	}
-
-	private void requestInitialProducts(ProductStorage productStorage) {
-		try {
-			productStorage.createProducts(Console.readLine());
-		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
-			requestInitialProducts(productStorage);
-		}
+	public VendingMachineController(VendingMachine vendingMachine) {
+		this.vendingMachine = vendingMachine;
 	}
 
 	public void use() {
+		InputView.printInsertMoneyMessage();
 		requestInsertMoney();
 		repeatRequestTrading();
 		returnChangeCoins();
 	}
-	
+
 	private void requestInsertMoney() {
 		try {
 			vendingMachine.insertMoney(Console.readLine());

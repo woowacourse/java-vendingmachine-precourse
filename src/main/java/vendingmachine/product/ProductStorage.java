@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.product;
 
 import java.util.HashMap;
 

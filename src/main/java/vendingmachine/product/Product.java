@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.product;
 
 public class Product {
 	private static final int MINIMUM_PRICE = 100;

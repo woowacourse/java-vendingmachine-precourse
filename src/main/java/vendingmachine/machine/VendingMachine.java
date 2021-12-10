@@ -1,6 +1,11 @@
-package vendingmachine;
+package vendingmachine.machine;
 
 import java.util.HashMap;
+
+import vendingmachine.money.ChangeSlot;
+import vendingmachine.money.Coin;
+import vendingmachine.money.MoneySlot;
+import vendingmachine.product.ProductStorage;
 
 public class VendingMachine {
 	private ChangeSlot changeSlot;
