@@ -38,19 +38,17 @@ public class MachineController {
 	}
 
 	private void progress() {
-		while (!inputMoney.isSame(0)) {
+		while (canSell()) {
 			OutputView.printInputMoney(inputMoney);
 			String itemName = InputView.getItemName();
 			Beverage beverage = beverages.findByName(itemName);
-			calculate(beverage);
+			inputMoney.spend(beverage.getPrice());
+			beverages.sell(beverage);
 		}
 	}
 
-	private void calculate(Beverage beverage) {
-		//구매한 음료에 따른 계산
-		inputMoney.spend(beverage.getPrice());
-		beverages.sell(beverage);
-
+	private boolean canSell() {
+		return !inputMoney.isSmaller(beverages.getMinimumBeveragePrice()) && !beverages.isAllSoldOut();
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
