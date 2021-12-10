@@ -15,7 +15,8 @@ public class InputView {
 		return input;
 	}
 
-	public static String getInputMoneyInput() {
+	public static String getInputAmountInput() {
+		OutputView.printInputMoneyRequestMessage();
 		String input = Console.readLine();
 		return input;
 	}

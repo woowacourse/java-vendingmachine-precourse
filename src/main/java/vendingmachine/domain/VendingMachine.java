@@ -20,8 +20,7 @@ public class VendingMachine {
 	}
 
 	private void sellProducts() {
-		OutputView.printInputMoneyRequestMessage();
-		int inputMoney = getInputMoneyFromInput();
+		int inputMoney = getInputAmountFromInput();
 		Customer customer = new Customer(inputMoney);
 		tradeWithCustomer(customer);
 		returnCustomerChanges(customer);
@@ -50,8 +49,15 @@ public class VendingMachine {
 			customer.getMoney());
 	}
 
-	private int getInputMoneyFromInput() {
-		return Integer.parseInt(InputView.getInputMoneyInput());
+	private int getInputAmountFromInput() {
+		String inputAmountInput = InputView.getInputAmountInput();
+		try {
+			InputValidator.checkIsValidInputAmountInput(inputAmountInput);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printErrorMessage(exception.getMessage());
+			return getHoldingAmountFromInput();
+		}
+		return Integer.parseInt(inputAmountInput);
 	}
 
 	private void makeProducts() {

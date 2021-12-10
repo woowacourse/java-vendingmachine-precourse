@@ -10,6 +10,7 @@ public class InputValidator {
 	private static final String INVALID_UNIT_OF_PRODUCT_AMOUNT_MESSAGE = "상품 가격은 10으로 나누어 떨어져야 합니다.";
 	private static final String INVALID_RANGE_OF_PRODUCT_AMOUNT_MESSAGE = "상품 가격은 100원 이상이어야 합니다.";
 	private static final String INVALID_NUMBER_OF_PRODUCT_AMOUNT_MESSAGE = "상품 수량은 1개 이상이어야 합니다.";
+	private static final String INVALID_TYPE_OF_INPUT_AMOUNT_MESSAGE = "투입 금액은 숫자여야 합니다.";
 	private static final int UNIT_OF_MONEY = 10;
 	private static final int MINIMUM_AMOUNT_OF_PRODUCT = 100;
 	private static final int ZERO = 0;
@@ -51,6 +52,14 @@ public class InputValidator {
 		int numberOfProduct = Integer.parseInt(info[2]);
 		if (numberOfProduct <= ZERO) {
 			throw new IllegalArgumentException(INVALID_NUMBER_OF_PRODUCT_AMOUNT_MESSAGE);
+		}
+	}
+
+	public static void checkIsValidInputAmountInput(String inputAmount) {
+		for (int i = 0; i < inputAmount.length(); i++) {
+			if(!Character.isDigit(inputAmount.charAt(i))) {
+				throw new IllegalArgumentException(INVALID_TYPE_OF_INPUT_AMOUNT_MESSAGE);
+			}
 		}
 	}
 }
