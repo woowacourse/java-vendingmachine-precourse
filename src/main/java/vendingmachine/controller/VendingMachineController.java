@@ -11,6 +11,7 @@ import vendingmachine.domain.Merchandises;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.utils.ErrorMessage;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -18,12 +19,14 @@ public class VendingMachineController {
 	public static String MERCHANDISE_PARSER = ";";
 	public static String MERCHANDISE_INFORMATION_PARSER = ",";
 
+	private VendingMachine vendingMachine;
+	private User user;
+
 	public void play() {
-		Money vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
-		VendingMachine vendingMachine = new VendingMachine(vendingMachineMoney);
+		vendingMahchineMoneyWithErrorHandling();
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
-		User user = new User(new Money(castingStringMoneyToInt(InputView.inputMoney())));
+		inputMoneyWithErrorHandling();
 		while (true) {
 			OutputView.showInputMoneyStatus(user.getMoney().getMoney());
 			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
@@ -81,5 +84,32 @@ public class VendingMachineController {
 		}
 		return vendingMachine.getMoney();
 	}
+
+	public void vendingMahchineMoneyWithErrorHandling() {
+		try {
+			Money vendingMachineMoney = new Money(castingStringMoneyToInt(InputView.inputVendingMachineMoney()));
+			vendingMachine = new VendingMachine(vendingMachineMoney);
+		} catch (NumberFormatException numberFormatException) {
+			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
+			vendingMahchineMoneyWithErrorHandling();
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			vendingMahchineMoneyWithErrorHandling();
+		}
+	}
+
+	public void inputMoneyWithErrorHandling() {
+		try {
+			user = new User(new Money(castingStringMoneyToInt(InputView.inputMoney())));
+		} catch (NumberFormatException numberFormatException) {
+			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
+			inputMoneyWithErrorHandling();
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			inputMoneyWithErrorHandling();
+		}
+	}
+
+
 
 }
