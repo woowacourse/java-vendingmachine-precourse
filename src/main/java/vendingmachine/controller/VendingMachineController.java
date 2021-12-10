@@ -27,16 +27,27 @@ public class VendingMachineController {
 		userView.askInsertMoney();
 		vendingMachine.insertMoney();
 
+		order();
+		printResult();
+	}
+
+	public void order() {
+
 		while (!vendingMachine.stopMachine()) {
 			vendingMachineView.printRemainOfInsertedMoney(vendingMachine.getRemainMoney());
 			userView.orderMenu();
 			vendingMachine.takeOrder();
 		}
 
+	}
+
+	public void printResult() {
 		vendingMachineView.printChangesComment(vendingMachine.getRemainMoney());
 
 		for (Coin coin : Coin.values()) {
 			vendingMachineView.printChanges(vendingMachine.giveChanges(coin), coin);
 		}
+
 	}
+	
 }
