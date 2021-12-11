@@ -7,7 +7,9 @@ public enum ErrorMessage {
     NOT_ENOUGH_STOCK("수량이 부족합니다."),
     NOT_ENOUGH_COIN("동전 수량이 부족합니다."),
     INVALID_INSERTED_AMOUNT("입력한 보유금액이 정수가 아닙니다"),
-    NOT_DIVIDED_BY_10("입력한 값은 10원 단위여야 합니다.")
+    NOT_DIVIDED_BY_10("입력한 값은 10원 단위여야 합니다."),
+    INVALID_PRODUCT_INFO_FORMAT("올바른 상품 정보 입력 형식이 아닙니다."),
+    INVALID_PRODUCT_PRICE("상품 가격은 100원 이상, 10원 단위이어야 합니다.")
     ;
 
     public static final String ERROR_PREFIX = "[ERROR]";

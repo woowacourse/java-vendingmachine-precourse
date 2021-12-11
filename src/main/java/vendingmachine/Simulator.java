@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -11,12 +12,15 @@ public class Simulator {
 
     public static final String WON = "원";
     public static final String COUNT = "개";
+    public static final String PRODUCT_INFO_DELIMITER = ";";
 
     public void start() {
         int holdingAmount = inputHoldingAmount();
         CoinContainer coinContainer = new CoinContainer();
         coinContainer.init(holdingAmount);
         printHoldingCoins(coinContainer);
+
+        List<Product> productList = inputProductInfo();
     }
 
     public int inputHoldingAmount() {
@@ -37,5 +41,35 @@ public class Simulator {
         }
 
         System.out.println(result);
+    }
+
+    public List<Product> inputProductInfo() {
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        String productInfoInput = Console.readLine().trim();
+        InputValidator.validateProductInfoInput(productInfoInput);
+
+        List<String> productInfoList = convertProductInfoInput2ProductInfoList(productInfoInput);
+        List<Product> productList = convertProductInfoList2ProductList(productInfoList);
+
+        return productList;
+    }
+
+    private List<String> convertProductInfoInput2ProductInfoList(String productInfoInput) {
+        return Arrays.asList(productInfoInput.split(PRODUCT_INFO_DELIMITER));
+    }
+
+    private List<Product> convertProductInfoList2ProductList(List<String> productInfoList) {
+        List<Product> productList = new ArrayList<>();
+        for (String productInfo : productInfoList) {
+            String[] productInfos = productInfo.substring(1, productInfo.length()-1).split(",");
+            String productName = productInfos[0];
+            int productPrice = Integer.parseInt(productInfos[1]);
+            int productCount = Integer.parseInt(productInfos[2]);
+            InputValidator.validateProductPrice(productPrice);
+
+            productList.add(new Product(productName, productPrice, productCount));
+        }
+
+        return productList;
     }
 }
