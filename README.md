@@ -3,7 +3,10 @@
 - [ ] VendingMachine   
     - [ ] constructor
     - [ ] run thread   
-    - [ ] buy
+    - [ ] buy   
+  
+- [ ] Product
+  
 - [ ] ProductManager   
     - [x] constructor   
     - [x] addProduct
