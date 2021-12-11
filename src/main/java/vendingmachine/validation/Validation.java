@@ -58,7 +58,6 @@ public class Validation {
 
 	// 상품 가격이 10으로 나누어 떨어지지 않는 경우, 상품명, 가격, 수량이 빈 값으로 들어오는 경우
 
-
 	// 상품 수량이 자연수가 아닐 경우
 	public static void validateProductAmount(String amount) {
 		validateCharIsInt(ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR,amount);
@@ -80,6 +79,13 @@ public class Validation {
 	public static void validateProductIsNotInProducts(String name, List<Product> products) {
 		if(!products.contains(new Product(name,0,0))) {
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_NAME_IS_NOT_IN_PRODUCTS.getErrorMessage());
+		}
+	}
+
+	// 구매할 상품의 수량이 0인 경우
+	public static void validateProductAmountIsZero(Product product) {
+		if(product.getAmount() == 0) {
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_AMOUNT_IS_ZERO_ERROR.getErrorMessage());
 		}
 	}
 

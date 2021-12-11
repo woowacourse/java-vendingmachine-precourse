@@ -1,5 +1,7 @@
 package vendingmachine.exception;
 
+import vendingmachine.domain.Product;
+
 public enum ErrorMessage {
 
 	COST_IS_NOT_NUMBER_ERROR("금액은 자연수여야 합니다."),
@@ -10,7 +12,8 @@ public enum ErrorMessage {
 	PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR("상품 가격은 100이상의 자연수 여야 합니다."),
 	PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR("상품 수량은 자연수여야 합니다."),
 	PRODUCT_IS_DISTINCT_ERROR("상품은 중복돼서 들어올 수 없습니다."),
-	PRODUCT_NAME_IS_NOT_IN_PRODUCTS("상품 목록에 없는 상품입니다.");
+	PRODUCT_NAME_IS_NOT_IN_PRODUCTS("상품 목록에 없는 상품입니다."),
+	PRODUCT_AMOUNT_IS_ZERO_ERROR("상품이 매진되었습니다.");
 
 	private String errorMessage;
 

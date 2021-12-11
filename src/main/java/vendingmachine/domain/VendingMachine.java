@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import vendingmachine.domain.enumclass.Coin;
+import vendingmachine.validation.Validation;
 
 public class VendingMachine {
 
@@ -54,13 +55,15 @@ public class VendingMachine {
 	}
 
 	private void subtractInputCost(Product product) {
-		if (inputCost - product.getPrice() > 0) {
+		Validation.validateProductAmountIsZero(product);
+
+		if (inputCost - product.getPrice() >= 0) {
 			inputCost -= product.getPrice();
 		}
 	}
 
 	public boolean checkGetChange() {
-		if (compareLowPriceAndInputCost() || checkAllProductAmount()) {
+		if (compareLowPriceAndInputCost()) {
 			return true;
 		}
 		return false;
@@ -68,20 +71,21 @@ public class VendingMachine {
 
 	public boolean compareLowPriceAndInputCost() {
 		Collections.sort(products);
-		if (products.get(0).getPrice() > inputCost) {
-			return true;
+		if (products.get(0).getPrice() <= inputCost && products.get(0).getAmount() > 0) {
+			return false;
 		}
-		return false;
+
+		return true;
 	}
 
-	public boolean checkAllProductAmount() {
+/*	public boolean checkAllProductAmount() {
 		for (Product product : products) {
 			if (product.getAmount() > 0) {
 				return false;
 			}
 		}
 		return true;
-	}
+	}*/
 
 	public int compareInputCostAndCoinToChange() {
 		if (inputCost < getSumCoinAmount()) {

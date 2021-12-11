@@ -58,7 +58,6 @@ public class VendingMachineService {
 	}
 
 	public boolean postProductName(String inputStr) {
-
 		Validation.validateNull(inputStr);
 		Validation.validateProductIsNotInProducts(inputStr, vendingMachine.getProducts());
 
@@ -69,6 +68,7 @@ public class VendingMachineService {
 		if (vendingMachine.checkGetChange()) {
 			return true;
 		}
+
 		return false;
 	}
 
