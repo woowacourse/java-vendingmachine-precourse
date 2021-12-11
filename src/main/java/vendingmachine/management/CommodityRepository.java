@@ -10,5 +10,7 @@ public class CommodityRepository {
         return commodities;
     }
     
-    
+    public static void addCommodity(Commodity commodity) {
+        commodities.add(commodity);
+    }
 }
