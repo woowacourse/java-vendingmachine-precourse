@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.Validation;
+
 public class VendingMachine {
 	private Coins coins;
 
