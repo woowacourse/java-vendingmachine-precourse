@@ -72,7 +72,9 @@ public class VendingMachineController {
 			vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
 			vendingMachineOutputView.printPurchasingInputMessage();
 			String item = Console.readLine();
-			if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney())) {
+			if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney(),
+				itemModel.getNameList(), itemModel.getPriceByName(item))) {
+
 				continue;
 			}
 			userModel.reduceMoney(itemModel.getPriceByName(item));

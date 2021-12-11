@@ -46,6 +46,10 @@ public class ItemModel {
 		return itemStorage.getPriceByName(name);
 	}
 
+	public List<String> getNameList() {
+		return itemStorage.getNameList();
+	}
+
 	private List<String> parseItemStringIntoItemList(String items) {
 		return Arrays.stream(items.split(";"))
 			.map(item -> item.substring(1, item.length() - 1))

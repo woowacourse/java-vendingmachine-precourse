@@ -2,26 +2,23 @@ package vendingmachine.validator;
 
 import static vendingmachine.constants.ErrorMessages.*;
 
+import java.util.List;
 import java.util.Objects;
-
-import vendingmachine.resource.ItemStorage;
 
 public class QueryValidator {
 	private static final QueryValidator queryValidator = new QueryValidator();
 
-	private final ItemStorage itemStorage;
-
 	private QueryValidator() {
-		itemStorage = ItemStorage.getItemStorage();
 	}
 
 	public static QueryValidator getQueryValidator() {
 		return queryValidator;
 	}
 
-	public boolean checkBuyItemErrorExceptions(String purchasingItem, int remainingMoney) {
+	public boolean checkBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList,
+			int price) {
 		try {
-			checkAllBuyItemErrorExceptions(purchasingItem, remainingMoney);
+			checkAllBuyItemErrorExceptions(itemName, remainingMoney, nameList, price);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -29,25 +26,26 @@ public class QueryValidator {
 		return true;
 	}
 
-	private void checkAllBuyItemErrorExceptions(String purchasingItem, int remainingMoney) {
-		checkDontExistingItemExceptions(purchasingItem);
-		checkNotEnoughMoneyExceptions(purchasingItem, remainingMoney);
+	private void checkAllBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList,
+			int price) {
+		checkDontExistingItemExceptions(itemName, nameList);
+		checkNotEnoughMoneyExceptions(remainingMoney, price);
 	}
 
-	private void checkNotEnoughMoneyExceptions(String purchasingItem, int remainingMoney) {
-		if (itemStorage.getPriceByName(purchasingItem) > remainingMoney) {
+	private void checkNotEnoughMoneyExceptions(int remainingMoney, int price) {
+		if (price > remainingMoney) {
 			throw new IllegalArgumentException(DONT_HAVE_ENOUGH_MONEY_ERROR_MESSAGE);
 		}
 	}
 
-	private void checkDontExistingItemExceptions(String purchasingItem) {
-		if (!hasItemNamed(purchasingItem)) {
+	private void checkDontExistingItemExceptions(String itemName, List<String> nameList) {
+		if (nameList.contains(itemName)) {
 			throw new IllegalArgumentException(DONT_EXISTING_ITEM_ERROR_MESSAGE);
 		}
 	}
 
-	private boolean hasItemNamed(String purchasingItem) {
-		return itemStorage.getNameList().stream()
-			.anyMatch(item -> Objects.equals(item, purchasingItem));
+	private boolean hasItemNamed(String itemName, List<String> nameList) {
+		return nameList.stream()
+				.anyMatch(item -> Objects.equals(item, itemName));
 	}
 }
