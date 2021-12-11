@@ -22,4 +22,13 @@ public class ProductService {
 			productRepository.getProductRepository().add(product);
 		}
 	}
+
+	public int getMinPrice() {
+		int minPrice = Integer.MAX_VALUE;
+		for (Product product : productRepository.getProductRepository()) {
+			minPrice = Math.min(minPrice, product.getPrice());
+		}
+
+		return minPrice;
+	}
 }

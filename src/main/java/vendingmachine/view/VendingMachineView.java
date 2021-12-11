@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.HashMap;
 
 import vendingmachine.model.Coin;
+import vendingmachine.model.Customer;
 import vendingmachine.model.repository.CoinRepository;
 
 public class VendingMachineView {
@@ -14,6 +15,8 @@ public class VendingMachineView {
 	public static final String HYPHEN = " - ";
 	public static final String INPUT_PRODUCT_INFO_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	public static final String INPUT_MONEY_FOR_BUY_MESSAGE = "투입 금액을 입력해 주세요.";
+	public static final String MONEY_FOR_BUY_AVAILABLE_PREFIX = "투입 금액: ";
+	public static final String INPUT_NAME_FOR_BUY = "구매할 상품명을 입력해 주세요.";
 
 	public void inputMoneyForChange() {
 		System.out.println(INPUT_MONEY_FOR_CHANGE_MESSAGE);
@@ -36,6 +39,11 @@ public class VendingMachineView {
 
 	public void inputMoneyForBuy() {
 		System.out.println(INPUT_MONEY_FOR_BUY_MESSAGE);
+	}
+
+	public void buyProduct(Customer customer) {
+		System.out.println(MONEY_FOR_BUY_AVAILABLE_PREFIX + customer.getMoney() + MONEY_COUNT_UNIT);
+		System.out.println(INPUT_NAME_FOR_BUY);
 	}
 
 	public void makeEmptyLine() {

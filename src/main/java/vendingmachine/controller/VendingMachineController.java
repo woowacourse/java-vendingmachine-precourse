@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import vendingmachine.model.Customer;
 import vendingmachine.model.receiver.MoneyReceiver;
+import vendingmachine.model.receiver.NameForBuyReceiver;
 import vendingmachine.model.receiver.ProductInfoReceiver;
 import vendingmachine.model.service.CoinService;
 import vendingmachine.model.service.ProductService;
@@ -14,6 +15,7 @@ public class VendingMachineController {
 	VendingMachineView vendingMachineView = new VendingMachineView();
 	MoneyReceiver moneyReceiver = new MoneyReceiver();
 	ProductInfoReceiver productInfoReceiver = new ProductInfoReceiver();
+	NameForBuyReceiver nameForBuyReceiver = new NameForBuyReceiver();
 	CoinService coinService = new CoinService();
 	ProductService productService = new ProductService();
 
@@ -26,8 +28,8 @@ public class VendingMachineController {
 
 		Customer customer = inputMoneyForBuy();
 
-		// int restMoney = buyProduct(customer);
-		//
+		int restMoney = buyProduct(customer);
+
 		// giveChange(restMoney);
 	}
 
@@ -61,5 +63,20 @@ public class VendingMachineController {
 		vendingMachineView.makeEmptyLine();
 
 		return new Customer(moneyForBuy);
+	}
+
+	private int buyProduct(Customer customer) {
+		while (customer.getMoney() >= productService.getMinPrice()) {
+			vendingMachineView.buyProduct(customer);
+
+			String name = nameForBuyReceiver.receive();
+			// if (!customerService.buyProduct(customer, name)) {
+			// 	vendingMachineView.makeEmptyLine();
+			// 	break;
+			// }
+			vendingMachineView.makeEmptyLine();
+		}
+
+		return customer.getMoney();
 	}
 }
