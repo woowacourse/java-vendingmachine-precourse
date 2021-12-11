@@ -44,7 +44,7 @@ public class VendingMachineMain {
         }
     }
 
-    public static void buy() {
+    public static void giveAnOrder() {
         String productToBuy = InputGenerator.inputProductToBuy();
         if (!name2Product.containsKey(productToBuy)) {
             throw new IllegalArgumentException("[ERROR] 상품명 입력 오류");

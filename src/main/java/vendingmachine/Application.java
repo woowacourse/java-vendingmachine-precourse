@@ -14,7 +14,7 @@ public class Application {
 
         InputGenerator.inputUserMoney();
         while (true) {
-            buy();
+            giveAnOrder();
             if (userInputMoney < minCost || totalRemains == 0) {
                 int[] numOfCoin = makeChange();
                 VendingMachineUI.printChange(numOfCoin);
