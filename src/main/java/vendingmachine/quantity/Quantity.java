@@ -35,7 +35,7 @@ public class Quantity {
 
 	public Quantity up() {
 		if (isMaximum()) {
-			throw new ArithmeticException(Notification.QUANTITY_INVALID_RANGE.getMessage());
+			throw new ArithmeticException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
 		}
 		count++;
 		return this;
@@ -43,7 +43,7 @@ public class Quantity {
 
 	public Quantity down() {
 		if (isZero()) {
-			throw new ArithmeticException(Notification.QUANTITY_INVALID_RANGE.getMessage());
+			throw new ArithmeticException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
 		}
 		count--;
 		return this;
