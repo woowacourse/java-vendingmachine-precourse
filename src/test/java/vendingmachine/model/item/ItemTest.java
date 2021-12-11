@@ -16,12 +16,13 @@ import vendingmachine.dto.InputItemDTO;
 import vendingmachine.model.vo.Money;
 
 class ItemTest {
+    private final InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
+    private final Item item = new Item(inputItemDTO);
+
     @ParameterizedTest
     @DisplayName("이름과 가격을 기준으로 동등성을 반환한다.")
     @MethodSource("provideAnotherItemAndExpected")
     void equals(final InputItemDTO anotherInputItemDTO, final boolean expected) {
-        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
-        Item item = new Item(inputItemDTO);
         Item another = new Item(anotherInputItemDTO);
         boolean actual = item.equals(another);
         assertThat(actual).isEqualTo(expected);
@@ -31,8 +32,6 @@ class ItemTest {
     @DisplayName("이름과 가격을 기준으로 해시코드를 반환한다.")
     @MethodSource("provideAnotherItemAndExpected")
     void hashCode(final InputItemDTO anotherInputItemDTO, final boolean expected) {
-        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
-        Item item = new Item(inputItemDTO);
         Item another = new Item(anotherInputItemDTO);
         int itemHashCode = item.hashCode();
         int anotherItemHashCode = another.hashCode();
@@ -52,8 +51,6 @@ class ItemTest {
     @DisplayName("사용자 구매 희망 상품 이름을 받아 자신의 이름과 같은지 반환한다.")
     @CsvSource({"물, true", "콜라, false"})
     void hasName(final String userWantedItemName, final boolean expected) {
-        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
-        Item item = new Item(inputItemDTO);
         boolean actual = item.hasName(userWantedItemName);
         assertThat(actual).isEqualTo(expected);
     }
@@ -61,8 +58,6 @@ class ItemTest {
     @Test
     @DisplayName("수량이 0인(품절된) 상품을 구매하려고 하면 예외를 발생시킨다.")
     void evokeExceptionByTryingToBuySoldOutItem() {
-        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
-        Item item = new Item(inputItemDTO);
         Money remainingInputMoney = new Money("3000");
         item.sell(remainingInputMoney);
         item.sell(remainingInputMoney);
@@ -74,8 +69,6 @@ class ItemTest {
     @Test
     @DisplayName("남은 투입 금액보다 구매하려는 상품 가격이 비싸면 예외를 발생시킨다.")
     void evokeExceptionByMoreExpensivePrice() {
-        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
-        Item item = new Item(inputItemDTO);
         Money remainingInputMoney = new Money("900");
         String expectedExceptionMessage = "남은 투입 금액으로 해당 상품을 구매할 수 없습니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> item.sell(remainingInputMoney))
