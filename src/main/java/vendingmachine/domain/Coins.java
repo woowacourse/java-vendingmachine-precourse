@@ -33,4 +33,8 @@ public class Coins {
 			changeCoins.replace(coinName, changeCoins.get(coinName) + QUANTITY);
 		}
 	}
+
+	public Map<Coin, Integer> getCoins() {
+		return changeCoins;
+	}
 }
