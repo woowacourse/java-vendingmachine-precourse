@@ -53,5 +53,8 @@ public class Validate {
 		if (productPrice < MINIMUM_PRODUCT_PRICE) {
 			throw new IllegalArgumentException(ERROR_MINIMUM_CONDITION_PRODUCT_PRICE);
 		}
+		if (productPrice % CAN_DIVISIBLE_COIN_STANDARD != 0) {
+			throw new IllegalArgumentException(ERROR_CONDITION_PRODUCT_PRICE);
+		}
 	}
 }
