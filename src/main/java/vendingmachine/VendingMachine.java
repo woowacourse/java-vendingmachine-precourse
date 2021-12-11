@@ -51,7 +51,8 @@ public class VendingMachine {
         }
 
         System.out.println("잔돈");
-
+        CashManager change = this.cashManager.getChanges();
+        System.out.println(change.getVaultStatus());
     }
 
     private void initVault() {

@@ -57,19 +57,21 @@ public class CashManager {
         remainCash += amount;
     }
 
-//    public String getChangesStatus() {
-//        StringBuilder sb = new StringBuilder();
-//
-//        for (Coin coin : Coin.values()) {
-//            if (this.vault.get(coin) < 1 || this.remainCash < coin.getAmount()) {
-//                continue;
-//            }
-//
-//            this.vault.put(coin, this.vault.get(coin) - this.remainCash / coin.getAmount());
-//            ret.put(coin, this.remainCash / coin.getAmount());
-//            this.remainCash -= (this.remainCash / coin.getAmount()) * coin.getAmount();
-//        }
-//
-//        return ret;
-//    }
+    public CashManager getChanges() {
+        HashMap<Coin, Integer> coins = new HashMap<>();
+
+        for (Coin coin : Coin.values()) {
+            if (this.vault.get(coin) < 1 || this.remainCash < coin.getAmount()) {
+                continue;
+            }
+
+            this.vault.put(coin, this.vault.get(coin) - this.remainCash / coin.getAmount());
+            coins.put(coin, this.remainCash / coin.getAmount());
+            this.remainCash -= (this.remainCash / coin.getAmount()) * coin.getAmount();
+        }
+
+        CashManager ret = new CashManager();
+        ret.vault = coins;
+        return ret;
+    }
 }

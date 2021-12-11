@@ -62,7 +62,7 @@ public class Validator {
     }
 
     public static void validateProductTypes(int productTypes) {
-        if (productTypes > MAX_PRODUCT_PRICE) {
+        if (productTypes > MAX_PRODUCTS_TYPES) {
             throw new MyIllegalArgumentException(
                     String.format("Product types shouldn't be larger than %d", MAX_PRODUCTS_TYPES)
             );

@@ -14,10 +14,7 @@ public class ProductManager {
         return priceByName.get(productName);
     }
 
-    public void addProduct(String productName, int productPrice, int amount) throws MyIllegalArgumentException {
-        if (amount < 100) {
-            throw new MyIllegalArgumentException("Price of product must be positive integer equal or higher than 100");
-        }
+    public void addProduct(String productName, int productPrice, int amount) {
 
         if (!products.containsKey(productName)) {
             products.put(productName, 0);
