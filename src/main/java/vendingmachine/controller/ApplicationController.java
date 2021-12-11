@@ -4,18 +4,30 @@ import static constant.CharacterConstant.*;
 import static constant.StringConstant.*;
 
 import exception.PriceException;
+import vendingmachine.repository.ProductRepository;
+import vendingmachine.service.ProductRepositoryService;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.PrintView;
 
 public class ApplicationController {
 	private VendingMachineService vendingMachineService;
+	private ProductRepositoryService productRepositoryService;
 
-	public ApplicationController(VendingMachineService vendingMachineService) {
+	public ApplicationController(VendingMachineService vendingMachineService,
+		ProductRepositoryService productRepositoryService) {
 		this.vendingMachineService = vendingMachineService;
+		this.productRepositoryService = productRepositoryService;
 	}
 
 	public void startVendingMachine() {
+		ProductRepository productRepository = productRepositoryService.getProductRepository();
+		vendingMachineService.saveProductRepository(productRepository);
+
+		getBalance();
+	}
+
+	private void getBalance() {
 		String vendingMachineBalance = InputView.getVendingMachineBalance();
 		saveBalance(vendingMachineBalance);
 	}
@@ -44,7 +56,7 @@ public class ApplicationController {
 
 	private void saveProducts(String userProducts) {
 		try {
-			vendingMachineService.saveProductList(userProducts);
+			productRepositoryService.saveProductRepository(userProducts);
 			getMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
@@ -66,18 +78,28 @@ public class ApplicationController {
 
 	private void getOrder(int money) {
 		while (shouldChange(money)) {
+			String orderedProduct = InputView.getOrderedProduct();
+			updateByOrder(orderedProduct, money);
 		}
 		returnChange();
 	}
 
 	private boolean shouldChange(int money) {
-		int minProductPrice = vendingMachineService.getMinProductPrice();
-		int productStock = vendingMachineService.getProductStock();
+		int minProductPrice = productRepositoryService.getMinProductPrice();
+		int productStock = productRepositoryService.getProductStock();
 		if (minProductPrice > money
 				|| productStock == 0) {
 			return false;
 		}
 		return true;
+	}
+
+	private void updateByOrder(String orderedProduct, int money) {
+		try {
+			productRepositoryService.update(orderedProduct, money);
+		} catch (IllegalArgumentException e) {
+			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
+		}
 	}
 
 	private void returnChange() {

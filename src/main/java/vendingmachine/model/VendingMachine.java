@@ -1,11 +1,12 @@
 package vendingmachine.model;
 
-import java.util.List;
 import java.util.Map;
+
+import vendingmachine.repository.ProductRepository;
 
 public class VendingMachine {
 	private Map<Coin, Integer> coinMap;
-	private List<Product> productList;
+	private ProductRepository productRepository;
 	private int balance;
 
 	public void setBalance(int balance) {
@@ -24,11 +25,11 @@ public class VendingMachine {
 		return coinMap;
 	}
 
-	public void setProductList(List<Product> productList) {
-		this.productList = productList;
+	public void setProductRepository(ProductRepository productRepository) {
+		this.productRepository = productRepository;
 	}
 
-	public List<Product> getProductList() {
-		return productList;
+	public ProductRepository getProductRepository() {
+		return productRepository;
 	}
 }

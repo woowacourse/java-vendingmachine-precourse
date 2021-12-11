@@ -26,5 +26,9 @@ public class StringConstant {
 	public static String INSERT_MONEY_MESSAGE = "투입 금액을 입력해 주세요.";
 	public static String INSERT_MONEY_STATE = "투입 금액: ";
 	public static String ORDER_PRODUCT_MESSAGE = "구매할 상품명을 입력해 주세요.";
+
+	public static String ORDER_NOT_EXIST = "존재하지 않는 상품입니다.";
+	public static String ORDER_NOT_LEFT = "해당 상품이 품절 되었습니다.";
+	public static String NOT_ENOUGH_MONEY = "잔액이 부족합니다";
 }
 

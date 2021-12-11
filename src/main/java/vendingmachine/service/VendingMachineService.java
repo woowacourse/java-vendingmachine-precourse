@@ -1,15 +1,11 @@
 package vendingmachine.service;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import exception.PriceException;
-import exception.ProductException;
 import vendingmachine.model.Coin;
-import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.repository.ProductRepository;
 
 public class VendingMachineService {
 	VendingMachine vendingMachine;
@@ -34,26 +30,7 @@ public class VendingMachineService {
 		return vendingMachine.getCoinMap();
 	}
 
-	public void saveProductList(String userProducts) {
-		ProductException.isValidProduct(userProducts);
-		List<Product> productList = ProductService.stringToProductList(userProducts);
-		ProductException.isDuplicated(productList);
-		vendingMachine.setProductList(productList);
-	}
-
-	public int getMinProductPrice() {
-		List<Integer> productPriceList = vendingMachine.getProductList()
-			.stream()
-			.map(Product::getPrice)
-			.collect(Collectors.toList());
-		return Collections.min(productPriceList);
-	}
-
-	public int getProductStock() {
-		int productStocks = vendingMachine.getProductList()
-			.stream()
-			.mapToInt(Product::getQuantity)
-			.sum();
-		return productStocks;
+	public void saveProductRepository(ProductRepository productRepository) {
+		vendingMachine.setProductRepository(productRepository);
 	}
 }
