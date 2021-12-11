@@ -7,11 +7,11 @@ import java.util.EnumMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class CoinStore {
-	private static final int INITIAL_VALUE = 0;
-	public static int PLUS_COIN_ELEMENT = 1;
-	public static String DELIMITER_OF_COIN_STORE_STATUS_REPRESENT = " - ";
+	public static final int INITIAL_VALUE = 0;
+	public static final int PLUS_COIN_ELEMENT = 1;
 	public static final int NO_COIN = 0;
 	public static final int ONE_COIN = 1;
+	public static final String DELIMITER_OF_COIN_STORE_STATUS_REPRESENT = " - ";
 
 	private final EnumMap<Coin, Integer> coins = new EnumMap<Coin, Integer>(Coin.class) {
 		{

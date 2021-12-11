@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 public class ProductRepository {
 	public static String DELIMITER_PRODUCT_STRING = ",";
+
 	private final List<Product> productList = new ArrayList<>();
 
 	public void createProducts(List<String> productListString) {

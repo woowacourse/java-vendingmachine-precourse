@@ -13,9 +13,10 @@ public enum Coin {
 	COIN_10(10);
 
 	public static int MINIMUM_COIN = 10;
-	private final int amount;
 	public static final String WON_REPRESENT_UNIT = "원";
 	public static final String COIN_REPRESENT_UNIT = "개";
+
+	private final int amount;
 
 	Coin(final int amount) {
 		this.amount = amount;

@@ -9,12 +9,12 @@ import java.util.stream.Collectors;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-	public static int INDEX_OF_PRODUCT_SUBSTRING = 1;
-	public static String DELIMITER_OF_PRODUCT_LIST = ";";
-	public static String PRINT_SCREEN_INPUT_HOLDING_AMOUNT_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-	public static String PRINT_SCREEN_INPUT_PRODUCT_LIST = "상품명과 가격, 수량을 입력해 주세요.";
-	public static String PRINT_SCREEN_INPUT_USER_AMOUNT = "투입 금액을 입력해 주세요.";
-	public static String PRINT_SCREEN_INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
+	public static final int INDEX_OF_PRODUCT_SUBSTRING = 1;
+	public static final String DELIMITER_OF_PRODUCT_LIST = ";";
+	public static final String PRINT_SCREEN_INPUT_HOLDING_AMOUNT_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+	public static final String PRINT_SCREEN_INPUT_PRODUCT_LIST = "상품명과 가격, 수량을 입력해 주세요.";
+	public static final String PRINT_SCREEN_INPUT_USER_AMOUNT = "투입 금액을 입력해 주세요.";
+	public static final String PRINT_SCREEN_INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
 
 	public static int inputHoldingAmountMoney() {
 		System.out.println(PRINT_SCREEN_INPUT_HOLDING_AMOUNT_MONEY);

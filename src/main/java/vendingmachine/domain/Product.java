@@ -10,8 +10,8 @@ public class Product {
 	public static int INDEX_OF_PRODUCT_QUANTITY = 2;
 	public static final int ZERO_PRODUCT_QUANTITY = 0;
 
-	private String name;
-	private int price;
+	private final String name;
+	private final int price;
 	private int quantity;
 
 	public Product(List<String> productToString) {
