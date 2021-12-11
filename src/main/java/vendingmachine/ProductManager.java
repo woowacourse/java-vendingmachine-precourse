@@ -8,7 +8,11 @@ public class ProductManager {
     public ProductManager() {
     }
 
-    public void addProduct(Product product, int amount) {
+    public void addProduct(Product product, int amount) throws MyIllegalArgumentException{
+        if(amount < 100) {
+            throw new MyIllegalArgumentException("Price of product must be positive integer equal or higher than 100");
+        }
+
         if (!products.containsKey(product.getName())) {
             products.put(product.getName(), 0);
         }
