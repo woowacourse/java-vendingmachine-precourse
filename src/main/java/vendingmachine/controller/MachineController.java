@@ -5,6 +5,7 @@ import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.exception.InputException;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -31,10 +32,17 @@ public class MachineController {
 			OutputView.printInputMoney(vendingMachine.getMoney());
 			try {
 				Beverage beverage = vendingMachine.findBeverageByName(InputView.getItemName());
+				validationCanBuy(beverage);
 				vendingMachine.sell(beverage);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
+		}
+	}
+
+	private void validationCanBuy(Beverage beverage) {
+		if (vendingMachine.canNotSellOne(beverage)) {
+			InputException.printNotEnoughMoney();
 		}
 	}
 

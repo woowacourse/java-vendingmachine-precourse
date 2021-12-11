@@ -62,4 +62,8 @@ public class VendingMachine {
 	public boolean canSell() {
 		return !inputMoney.isSmaller(beverages.getMinimumBeveragePrice()) && !beverages.isAllSoldOut();
 	}
+
+	public boolean canNotSellOne(Beverage beverage) {
+		return inputMoney.isSmaller(beverage.getPrice());
+	}
 }
