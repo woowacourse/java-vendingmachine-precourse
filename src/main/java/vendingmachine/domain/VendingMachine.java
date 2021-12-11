@@ -67,17 +67,17 @@ public class VendingMachine {
     }
 
     public ArrayList<String> getChange() {
-        int money = inputMoney.getInputMoney();
         ArrayList<String> changeList = new ArrayList<String>();
-
         for (Coin coin : Coin.values()) {
-            if (money / coin.getAmount() < coin.getCount()) {
-                coin.setCount(money / coin.getAmount());
+            int moneyToCoin = inputMoney.getInputMoney() / coin.getAmount();
+
+            if (moneyToCoin < coin.getCount()) {
+                coin.setCount(moneyToCoin);
                 changeList.add(coin.toString());
                 return changeList;
             }
             changeList.add(coin.toString());
-            money = money - coin.getCount() * coin.getAmount();
+            inputMoney.subtractMoney(moneyToCoin * coin.getAmount());
         }
         return changeList;
     }

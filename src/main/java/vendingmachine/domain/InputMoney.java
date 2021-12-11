@@ -17,6 +17,10 @@ public class InputMoney extends NumberValidation {
         return inputMoney;
     }
 
+    public void subtractMoney(int money) {
+        this.inputMoney -= money;
+    }
+
     public String toString() {
         return inputMoney + MONEY_UNIT;
     }
