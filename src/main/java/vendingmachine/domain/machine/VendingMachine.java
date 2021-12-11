@@ -30,7 +30,6 @@ public class VendingMachine {
 
     public void fillCoinsAsBalanceAmount(CoinProvider coinProvider) {
         while(balanceForPutCoin > 0) {
-            System.out.println(balanceForPutCoin);
             reduceBalance(coinPocket.putCoinAndAddCount(balanceForPutCoin, coinProvider));
         }
     }
