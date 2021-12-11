@@ -39,13 +39,11 @@ public class ProductRepository {
         return allAmount;
     }
 
-    public int purchaseProduct(String productName, int money) {
+    public void purchaseProduct(String productName) {
         for (Product product : products) {
             if (product.getName().equals(productName)) {
-                money -= product.getCost();
                 product.sellProduct();
             }
         }
-        return money;
     }
 }

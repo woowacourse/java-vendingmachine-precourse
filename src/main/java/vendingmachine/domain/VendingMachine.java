@@ -19,9 +19,9 @@ public class VendingMachine {
 
         ProductInputView productInputView = new ProductInputView();
         productInputView.inputProducts();
-
-        Integer moneyForPurchase = moneyInputView.inputMoneyForPurchase();
-        PurchaseInputView purchaseInputView = new PurchaseInputView(moneyForPurchase);
+        int moneyForPurchase = moneyInputView.inputMoneyForPurchase();
+        Money.getInstance().storeMoney(moneyForPurchase);
+        PurchaseInputView purchaseInputView = new PurchaseInputView();
         purchaseInputView.inputProductForPurchase();
     }
 }
