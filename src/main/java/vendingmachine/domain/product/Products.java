@@ -11,7 +11,7 @@ public class Products {
 		productList = new ArrayList<>();
 	}
 
-	public void insertProduct(Product product) {
+	public void insert(Product product) {
 		productList.add(product);
 	}
 

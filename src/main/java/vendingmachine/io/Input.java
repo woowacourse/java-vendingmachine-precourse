@@ -23,7 +23,7 @@ public class Input {
 		this.machineWalletService = machineWalletService;
 		this.machineService = machineService;
 		this.productService = productService;
-		VALIDATOR.addDependency(productService.getProductList());
+		VALIDATOR.addDependency(productService);
 	}
 
 	public void inputMachineAmount() {
@@ -42,7 +42,7 @@ public class Input {
 		while (!VALIDATOR.validateProductInputFormat(input = readLine())) {
 			// validateProductInputFormat, validateSemicolonFormat
 		}
-		productService.save(input.split(SEMICOLON));
+		productService.saveAll(input.split(SEMICOLON));
 	}
 
 	public void inputCustomerAmount() {

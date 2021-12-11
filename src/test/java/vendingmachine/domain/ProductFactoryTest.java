@@ -26,7 +26,7 @@ class ProductFactoryTest {
 			String[] data = productData[i].substring(1, productData[i].length() - 1).split(",");
 			int price = Integer.parseInt(data[1]);
 			int amount = Integer.parseInt(data[2]);
-			Product product = productFactory.createProduct(data[0], price, amount);
+			Product product = productFactory.create(data[0], price, amount);
 			assertEquals(product.getPrice(), price);
 			assertEquals(product.getAmount(), amount);
 		}

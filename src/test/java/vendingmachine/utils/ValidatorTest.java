@@ -5,22 +5,38 @@ import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.utils.Constant.*;
 
 import java.util.Arrays;
-import java.util.List;
 
-import org.assertj.core.util.Lists;
+import javax.crypto.Mac;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import vendingmachine.domain.product.Product;
+import vendingmachine.domain.Machine;
+import vendingmachine.domain.product.ProductFactory;
+import vendingmachine.domain.product.ProductRepository;
+import vendingmachine.domain.product.Products;
+import vendingmachine.service.ProductService;
 
 class ValidatorTest extends NsTest {
 
 	private Validator validator;
+	private ProductFactory productFactory;
+	private Products products;
+	private ProductRepository productRepository;
+	private ProductService productService;
+	private Machine machine;
+
 
 	@BeforeEach
 	void beforeEach(){
 		this.validator = Validator.VALIDATOR;
+		this.productFactory = new ProductFactory();
+		this.products = new Products();
+		this.machine = new Machine();
+		machine.save(5000);
+		this.productRepository = new ProductRepository(products, productFactory);
+		this.productService = new ProductService(machine, productRepository);
 	}
 
 	@Test
@@ -118,12 +134,23 @@ class ValidatorTest extends NsTest {
 		assertThat(output()).contains(PRODUCT_INPUT_FORMAT_EXCEPTION);
 	}
 
+
 	@Test
 	void 상품_존재여부_예외테스트(){
-		validator.addDependency(Lists.list(new Product("치킨",100,10)));
+		productService.saveAll(new String[]{"[치킨,1000,10]"});
+		validator.addDependency(productService);
 		assertEquals(validator.validateProductExisted("치킨"), true);
 		assertEquals(validator.validateProductExisted("치킨1"), false);
 		assertThat(output()).contains(PRODUCT_IS_NOT_EXISTED_EXCEPTION_MESSAGE);
+	}
+
+
+	@Test
+	void 구매금액부족_예외테스트(){
+		productService.saveAll(new String[]{"[치킨,10000,10]","[바나나,300,10]"});
+		validator.addDependency(productService);
+		assertEquals(validator.validateProductExisted("치킨"), false);
+		assertThat(output()).contains(CUSTOMER_LEAK_MONEY_EXCEPTION_MESSAGE);
 	}
 
 

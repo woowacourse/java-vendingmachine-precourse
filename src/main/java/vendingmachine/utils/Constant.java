@@ -41,4 +41,5 @@ public final class Constant {
 	public static final String PRODUCT_INPUT_SEMICOLON_EXCEPTION_MESSAGE =
 		ERROR + " 상품 입력 사이에 '" + SEMICOLON + "'가 존재해야 합니다.";
 	public static final String PRODUCT_IS_NOT_EXISTED_EXCEPTION_MESSAGE = ERROR + " 해당 상품은 존재하지 않습니다.";
+	public static final String CUSTOMER_LEAK_MONEY_EXCEPTION_MESSAGE = ERROR + " 돈이 부족하여 해당 상품은 구매할 수 없습니다.";
 }

@@ -6,46 +6,50 @@ import java.util.List;
 
 import vendingmachine.domain.Machine;
 import vendingmachine.domain.product.Product;
-import vendingmachine.domain.product.ProductFactory;
-import vendingmachine.domain.product.Products;
-import vendingmachine.exception.ProductIsNotExistedException;
+import vendingmachine.domain.product.ProductRepository;
+import vendingmachine.exception.CustomerLeakMoneyException;
 
 public class ProductService {
 
 	private final Machine machine;
-	private final Products products;
-	private final ProductFactory productFactory;
+	private final ProductRepository productRepository;
 
-	public ProductService(Machine machine, Products products, ProductFactory productFactory) {
+	public ProductService(Machine machine, ProductRepository productRepository) {
 		this.machine = machine;
-		this.products = products;
-		this.productFactory = productFactory;
+		this.productRepository = productRepository;
 	}
 
 	public void sellProduct(String name) {
-		Product productItem = products.getProductList()
-			.stream()
-			.filter(p -> p.getName().equalsIgnoreCase(name))
-			.findFirst()
-			.orElseThrow(ProductIsNotExistedException::new);
-
-		productItem.sellProduct();
-		machine.changeAmount(productItem.getPrice());
+		Product findItem = productRepository.findByName(name);
+		findItem.sellProduct();
+		machine.changeAmount(findItem.getPrice());
 	}
 
-	public List<Product> getProductList(){
-		return products.getProductList();
-	}
-
-	public void save(String[] productArray) {
+	public void saveAll(String[] productArray) {
 		for (int i = 0; i < productArray.length; i++) {
 			String[] productData = productArray[i].substring(1, productArray[i].length() - 1).split(COMMA);
-			products.insertProduct(
-				productFactory.createProduct(
-					productData[0],
-					Integer.parseInt(productData[1]),
-					Integer.parseInt(productData[2])));
+			productRepository.save(
+				productData[0],
+				Integer.parseInt(productData[1]),
+				Integer.parseInt(productData[2])
+			);
 		}
+	}
+
+	public boolean checkProductIsExistedByName(String name){
+		Product findItem = productRepository.findByName(name);
+		if(findItem == null || !findItem.isExistedProduct()){
+			return false;
+		}
+
+		if(!checkCustomerIsAvailableBuyProduct(findItem)){
+			throw new CustomerLeakMoneyException();
+		}
+		return true;
+	}
+
+	private boolean checkCustomerIsAvailableBuyProduct(Product findItem){
+		return findItem.getPrice() <= machine.getAmount();
 	}
 
 }
