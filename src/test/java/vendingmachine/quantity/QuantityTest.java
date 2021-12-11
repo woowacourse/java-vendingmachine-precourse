@@ -6,19 +6,21 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.exception.OutOfBoundException;
+
 class QuantityTest {
 	@Test
 	@DisplayName("개수가 최소에서 더 줄어들 수 없다.")
 	public void decreaseCountAtMinimum() {
 		Quantity quantity = Quantity.from();
-		Assertions.assertThrows(ArithmeticException.class, quantity::down);
+		Assertions.assertThrows(OutOfBoundException.class, quantity::down);
 	}
 
 	@Test
-	@DisplayName("개수가 초대에서 더 증가할 수 없다.")
+	@DisplayName("개수가 최대에서 더 증가할 수 없다.")
 	public void increaseCountAtMaximum() {
 		Quantity quantity = Quantity.of(String.valueOf(Integer.MAX_VALUE));
-		Assertions.assertThrows(ArithmeticException.class, quantity::up);
+		Assertions.assertThrows(OutOfBoundException.class, quantity::up);
 	}
 
 	@Test

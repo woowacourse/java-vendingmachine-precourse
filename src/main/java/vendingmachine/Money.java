@@ -36,16 +36,17 @@ public class Money {
 	}
 
 	public void spend(Money money) {
-		if (isSpendable(money)) {
-			this.amount -= money.amount;
+		if (!isSpendable(money)) {
+			throw new OutOfBoundException(Notification.AMOUNT_NOT_SPEND.getMessage());
 		}
-		// 소비할 수 없을 때 알려야한다.
+		this.amount -= money.amount;
 	}
 
 	public void earn(Money money) {
-		if(isAddable(money)) {
-			this.amount += money.amount;
+		if(!isAddable(money)) {
+			throw new OutOfBoundException(Notification.AMOUNT_NOT_EARN.getMessage());
 		}
+		this.amount += money.amount;
 	}
 
 	private boolean isAddable(Money money) {
@@ -53,7 +54,7 @@ public class Money {
 			Math.addExact(this.amount, money.amount);
 			return true;
 		} catch (ArithmeticException e) {
-			throw new OutOfBoundException(Notification.AMOUNT_NOT_EARN.getMessage());
+			return false;
 		}
 	}
 

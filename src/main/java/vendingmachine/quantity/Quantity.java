@@ -1,6 +1,7 @@
 package vendingmachine.quantity;
 
 import vendingmachine.Notification;
+import vendingmachine.exception.OutOfBoundException;
 
 public class Quantity {
 	private static final int MINIMUM_QUANTITY = 0;
@@ -35,7 +36,7 @@ public class Quantity {
 
 	public Quantity up() {
 		if (isMaximum()) {
-			throw new ArithmeticException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
+			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
 		}
 		count++;
 		return this;
@@ -43,7 +44,7 @@ public class Quantity {
 
 	public Quantity down() {
 		if (isZero()) {
-			throw new ArithmeticException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
+			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
 		}
 		count--;
 		return this;
