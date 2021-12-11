@@ -22,5 +22,6 @@ public class StringConstant {
 
 	public static String COIN_CONTAIN_MESSAGE = "자판기가 보유한 동전";
 	public static String INPUT_VENDING_MACHINE_PRODUCT = "상품명과 가격, 수량을 입력해 주세요.";
+	public static String INSERT_PRICE_MESSAGE = "투입 금액을 입력해 주세요.";
 }
 

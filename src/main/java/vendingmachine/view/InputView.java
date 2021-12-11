@@ -7,14 +7,17 @@ import camp.nextstep.edu.missionutils.Console;
 public class InputView {
 	public static String getVendingMachineBalance() {
 		System.out.println(INPUT_VENDING_MACHINE_BALANCE);
-		String balance = Console.readLine();
-		return balance;
+		return Console.readLine();
 	}
 
 	public static String getVendingMachineProducts() {
 		System.out.println(INPUT_VENDING_MACHINE_PRODUCT);
-		String products = Console.readLine();
-		return products;
+		return Console.readLine();
+	}
+
+	public static String getInsertPrice() {
+		System.out.println(INSERT_PRICE_MESSAGE);
+		return Console.readLine();
 	}
 
 	public static void getOrderedProduct() {

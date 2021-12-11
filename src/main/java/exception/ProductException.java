@@ -14,7 +14,6 @@ import vendingmachine.model.Product;
 public class ProductException {
 	public static void isValidProduct(String userProducts) {
 		List<String> products = Arrays.asList(userProducts.split(PRODUCT_DIVIDER));
-		List<Product> productList = new ArrayList<>();
 		for (String product : products) {
 			isWrapped(product);
 		}
