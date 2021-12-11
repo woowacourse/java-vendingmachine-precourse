@@ -12,14 +12,18 @@ public interface InputValidator {
             throw new IllegalArgumentException(ErrorMessage.INVALID_INSERTED_AMOUNT.getCompleteMessage());
         }
 
-        for (int i = 0 ; i < insertedAmount.length() ; i++ ) {
-            if(!Character.isDigit(insertedAmount.charAt(i))) {
-                throw new IllegalArgumentException(ErrorMessage.INVALID_INSERTED_AMOUNT.getCompleteMessage());
-            }
-        }
+        validateInteger(insertedAmount);
 
         if (Integer.parseInt(insertedAmount) % 10 != 0) {
             throw new IllegalArgumentException(ErrorMessage.NOT_DIVIDED_BY_10.getCompleteMessage());
+        }
+    }
+
+    static void validateInteger(String inputInteger) {
+        for (int i = 0 ; i < inputInteger.length() ; i++ ) {
+            if(!Character.isDigit(inputInteger.charAt(i))) {
+                throw new IllegalArgumentException(ErrorMessage.INVALID_INSERTED_AMOUNT.getCompleteMessage());
+            }
         }
     }
 

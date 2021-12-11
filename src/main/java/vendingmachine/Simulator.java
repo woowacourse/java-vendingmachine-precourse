@@ -21,6 +21,7 @@ public class Simulator {
         printHoldingCoins(coinContainer);
 
         List<Product> productList = inputProductInfo();
+        int balance = inputBalance();
     }
 
     public int inputHoldingAmount() {
@@ -71,5 +72,13 @@ public class Simulator {
         }
 
         return productList;
+    }
+
+    public int inputBalance() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        String balance = Console.readLine().trim();
+        InputValidator.validateInteger(balance);
+
+        return Integer.parseInt(balance);
     }
 }
