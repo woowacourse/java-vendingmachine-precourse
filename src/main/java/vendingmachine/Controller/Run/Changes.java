@@ -3,22 +3,22 @@ package vendingmachine.Controller.Run;
 import vendingmachine.Model.Coin;
 import vendingmachine.Model.CoinWallet;
 import vendingmachine.Model.VendingMachine;
-import vendingmachine.View.OutputView;
 
-public class Change {
+public class Changes {
 	private final CoinWallet changeCoins = new CoinWallet();
 	private final CoinWallet machineCoins;
 	private int userMoney;
 
-	public Change(VendingMachine vendingMachine) {
+	public Changes(VendingMachine vendingMachine) {
 		this.machineCoins = vendingMachine.machineCoins;
 		this.userMoney = vendingMachine.userMoney;
-		OutputView.printUserMoney(userMoney);
-		setChangeCoins();
-		OutputView.printChange(changeCoins);
 	}
 
-	private void setChangeCoins() {
+	public CoinWallet getChangeCoins() {
+		return changeCoins;
+	}
+
+	public void setChangeCoins() {
 		for (Coin coin : Coin.values()) {
 			setCoin(coin);
 		}
