@@ -32,20 +32,19 @@ public class CoinsService {
 	}
 
 	public CoinsDto getChange(UserBalance userBalance) {
-		Map<Coin, CoinQuantity> coins = new HashMap<>();
+		Map<Coin, CoinQuantity> changeCoins = new HashMap<>();
 		int remainingBalance = userBalance.toInt();
 
-		for (int i = 0; i < Coin.values().length; i++) {
-			Coin coin = Coin.values()[i];
+		for (Coin coin : Coin.values()) {
 			int quantity = getCoinQuantityForChange(coin, remainingBalance);
-			coins.put(coin, CoinQuantity.from(quantity));
+			changeCoins.put(coin, CoinQuantity.from(quantity));
+
 			remainingBalance = remainingBalance - (coin.getAmount() * quantity);
 		}
 
-		return CoinsDto.from(coins);
+		return CoinsDto.from(changeCoins);
 	}
 
-	// TODO: 리팩토링 필요
 	private int getCoinQuantityForChange(Coin coin, int balance) {
 		int maxCoinQuantityForChange = getMaxCoinQuantityForChange(coin, balance);
 		int holdingQuantity = coinsRepository.findByCoin(coin).toInt();
