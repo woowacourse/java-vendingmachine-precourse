@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.Validation;
 
 import vendingmachine.Constant.DomainConstant;
 import vendingmachine.Constant.ErrorConstant;

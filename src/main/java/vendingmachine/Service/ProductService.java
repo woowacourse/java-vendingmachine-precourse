@@ -3,7 +3,7 @@ package vendingmachine.Service;
 import vendingmachine.Constant.DomainConstant;
 import vendingmachine.Domain.Product;
 import vendingmachine.Domain.ProductList;
-import vendingmachine.utils.ProductValidation;
+import vendingmachine.Validation.ProductValidation;
 
 public class ProductService {
     ProductValidation validation = new ProductValidation();

@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.Validation;
 
 public class CommonValidation {
     public boolean isExist(String input) {

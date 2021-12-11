@@ -3,7 +3,7 @@ package vendingmachine.Service;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
-import vendingmachine.utils.HoldingAmountValidation;
+import vendingmachine.Validation.HoldingAmountValidation;
 
 public class InitHoldingCoinsService {
     HoldingAmountValidation validation = new HoldingAmountValidation();
