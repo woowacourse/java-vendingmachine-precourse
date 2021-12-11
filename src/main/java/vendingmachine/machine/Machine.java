@@ -21,6 +21,10 @@ public class Machine {
         return coins;
     }
 
+    public List<Product> getProductList() {
+        return productList;
+    }
+
     private void initCoins(){
         Map<Coin, Integer> coins = new HashMap<>();
         for (Coin coin: Coin.values()) {

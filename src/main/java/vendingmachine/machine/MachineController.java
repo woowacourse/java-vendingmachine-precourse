@@ -2,7 +2,10 @@ package vendingmachine.machine;
 
 import vendingmachine.coin.Coin;
 import vendingmachine.coin.CoinController;
+import vendingmachine.product.Product;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 public class MachineController {
@@ -16,6 +19,26 @@ public class MachineController {
             money-=coin.getAmount();
         }
     }
+
+    public void makeProductList(Machine machine,String infoList){
+        List<Product> productList = machine.getProductList();
+
+        Arrays.stream(infoList.split(";"))
+                .forEach(info->{
+                    productList.add(makeProduct(info));
+                });
+    }
+
+    private Product makeProduct(String product){
+        String[] infos = makeProductInfo(product);
+        return new Product(infos[0],Integer.valueOf(infos[1]),Integer.valueOf(infos[2]));
+    }
+
+    private String[] makeProductInfo(String product){
+        return product.split(",");
+    }
+
+
 
 
 }
