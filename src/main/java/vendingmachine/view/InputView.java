@@ -3,6 +3,7 @@ package vendingmachine.view;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import vendingmachine.model.Product;
+import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.ExceptionUtils;
 
 public class InputView {
@@ -48,15 +49,15 @@ public class InputView {
 		}
 	}
 
-	public static String writeProductNameToBuy(List<Product> products) {
+	public static String writeProductNameToBuy(VendingMachine vendingMachine) {
 		OutputView.askProductToBuy();
 		String inputName = Console.readLine();
 		try {
-			ExceptionUtils.validateNameOfProduct(inputName, products);
+			ExceptionUtils.validateNameOfProduct(inputName, vendingMachine);
 			return inputName;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
-			return writeProductNameToBuy(products);
+			return writeProductNameToBuy(vendingMachine);
 		}
 	}
 }

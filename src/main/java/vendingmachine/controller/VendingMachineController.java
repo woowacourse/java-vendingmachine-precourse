@@ -31,7 +31,7 @@ public class VendingMachineController {
 
 	private static void runVendingMachine(VendingMachine vendingMachine) {
 		OutputView.printInsertedMoney(vendingMachine);
-		String selectedProduct = InputView.writeProductNameToBuy(vendingMachine.getProducts());
+		String selectedProduct = InputView.writeProductNameToBuy(vendingMachine);
 		vendingMachine.readyToSellProduct(selectedProduct);
 	}
 }

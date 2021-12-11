@@ -1,9 +1,11 @@
 package vendingmachine.utils;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import vendingmachine.model.Product;
+import vendingmachine.model.VendingMachine;
 
 public class ExceptionUtils {
 
@@ -26,6 +28,7 @@ public class ExceptionUtils {
 	private static final String INVALID_PRODUCT_EXPRESSION_ERROR_MESSAGE = "알맞은 형태로 입력해주세요.";
 	private static final String INVALID_PRICE_ERROR_MESSAGE = "상품의 가격은 100원 이상부터 입니다.";
 	private static final String NOT_IN_VENDING_MACHINE = "해당 상품은 자판기에 없는 상품입니다.";
+	private static final String INVALID_EXPENSIVE_PRODUCT = "남은 금액 보다 비싼 상품입니다.";
 
 	public static void validateInputMoney(String inputMoney) {
 		if (!validateSpace(inputMoney)) {
@@ -56,12 +59,16 @@ public class ExceptionUtils {
 		return inputProductsInfo;
 	}
 
-	public static void validateNameOfProduct(String name, List<Product> products) {
+	public static void validateNameOfProduct(String name, VendingMachine vendingMachine) {
+		List<Product> products = vendingMachine.getProducts();
 		if (!validateSpace(name)) {
 			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
 		}
 		if (!validateProductInVendingMachine(name, products)) {
 			throw new IllegalArgumentException((ERROR_HEADER + NOT_IN_VENDING_MACHINE));
+		}
+		if (!validateExpensiveProduct(name, vendingMachine.getRemainInsertMoney(), products)) {
+			throw new IllegalArgumentException(ERROR_HEADER + INVALID_EXPENSIVE_PRODUCT);
 		}
 	}
 
@@ -108,5 +115,17 @@ public class ExceptionUtils {
 		List<Product> products) {
 		return products.stream().map(Product::getName).collect(Collectors.toList())
 			.contains(inputProduct);
+	}
+
+	private static boolean validateExpensiveProduct(String inputProduct, int remainInsertMoney,
+		List<Product> products) {
+		for (Product product : products) {
+			if (Objects.equals(product.getName(), inputProduct)) {
+				if (product.getPrice() <= remainInsertMoney) {
+					return true;
+				}
+			}
+		}
+		return false;
 	}
 }
