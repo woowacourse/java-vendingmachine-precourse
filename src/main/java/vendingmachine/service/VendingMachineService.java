@@ -42,7 +42,7 @@ public class VendingMachineService {
             for(Coin coin : Coin.values()) {
                 int quantity = coin.convertPriceToCoins(coin, nowPrice);
                 coinList[coin.ordinal()] += quantity;
-                nowPrice -= coin.calculate(quantity);
+                nowPrice -= coin.calculateBalance(quantity);
             }
         }
         return coinList;
@@ -53,10 +53,10 @@ public class VendingMachineService {
     public void start(){
         int balance = vendingMachineValidation.inputAmountValidation();
         while(true){
-            System.out.println("투입금액 : " + balance);
+            System.out.println("투입 금액: " + balance + "원");
             try{
                 if(!balanceCheck(balance)) {
-                    //잔돈출력 메소드
+                    printChange(balance);
                     break;
                 }
                 System.out.println("구매할 상품명을 입력하세요");
@@ -66,6 +66,30 @@ public class VendingMachineService {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private void printChange(int balance){
+        int change = vendingMachineRepository.findChange();
+        List<Integer> vendingMachineCoins = vendingMachineRepository.findCoins();
+        if(balance > change){
+            OutputView.printVendingMachineCoins(vendingMachineCoins.stream().mapToInt(i->i).toArray());
+            return;
+        }
+
+        int[] changeCoinList = new int[4];
+        int i = 0;
+        for(Coin coin : Coin.values()){
+            int coinNum = coin.calculateChange(balance);
+            if(coinNum > vendingMachineCoins.get(i)){
+                coinNum = vendingMachineCoins.get(i);
+            }
+            changeCoinList[i] = coinNum;
+            balance -= coin.getAmount() * coinNum;
+            if(balance == 0){
+                break;
+            }
+        }
+        OutputView.printChangeCoins(changeCoinList);
     }
 
     private boolean balanceCheck(int balance){

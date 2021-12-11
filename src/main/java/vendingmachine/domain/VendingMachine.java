@@ -20,8 +20,16 @@ public class VendingMachine {
         this.products = setProducts(productList);
     }
 
+    public List<Integer> getCoins() {
+        return coins;
+    }
+
     public List<Product> getProducts() {
         return products;
+    }
+
+    public int getChange() {
+        return change;
     }
 
     public int buy(int balance, Product product){

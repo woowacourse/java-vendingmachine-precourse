@@ -3,8 +3,6 @@ package vendingmachine.repository;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
-
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -42,5 +40,13 @@ public class VendingMachineRepository {
         return products.stream()
                 .map(Product::getPrice)
                 .collect(Collectors.toList());
+    }
+
+    public int findChange(){
+        return vendingMachine.getChange();
+    }
+
+    public List<Integer> findCoins(){
+        return vendingMachine.getCoins();
     }
 }
