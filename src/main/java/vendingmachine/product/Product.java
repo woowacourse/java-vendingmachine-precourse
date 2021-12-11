@@ -1,10 +1,10 @@
 package vendingmachine.product;
 
 import vendingmachine.money.Money;
+import vendingmachine.payments.Payments;
 
 public class Product {
 	private static final String ERROR_NAME_DUPLICATE = "상품명은 중복될 수 없습니다.";
-	private static final String ERROR_NOT_LEFT = "해당 상품의 재고가 부족하여 구매할 수 없습니다.";
 	private static final int NONE = 0;
 
 	private String name;
@@ -30,29 +30,22 @@ public class Product {
 		return false;
 	}
 
-	public boolean isPurchasable(Money money) {
-		if (money.isEnough(price) && isRemainStock()) {
+	public boolean isEnoughMoney(Money money) {
+		if (money.isEnough(price)) {
 			return true;
 		}
 		return false;
 	}
 
-	private boolean isRemainStock() {
+	public boolean isRemainStock() {
 		if (quantity == NONE) {
 			return false;
 		}
 		return true;
 	}
 
-	public int sell() {
-		validateOutOfStock();
+	public void buyWith(Payments payments) {
 		quantity--;
-		return price;
-	}
-
-	private void validateOutOfStock() {
-		if (quantity == NONE) {
-			throw new IllegalArgumentException(ERROR_NOT_LEFT);
-		}
+		payments.pay(price);
 	}
 }

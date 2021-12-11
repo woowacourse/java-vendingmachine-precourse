@@ -5,6 +5,7 @@ import java.util.HashMap;
 import vendingmachine.changes.Changes;
 import vendingmachine.money.Coin;
 import vendingmachine.money.Money;
+import vendingmachine.product.Product;
 import vendingmachine.product.ProductStorage;
 
 public class VendingMachine {
@@ -20,8 +21,8 @@ public class VendingMachine {
 		return productStorage.isSellable(money);
 	}
 
-	public Integer trade(String product) {
-		return productStorage.sellProduct(product);
+	public Product findProductByName(String product) {
+		return productStorage.findProductByName(product);
 	}
 
 	public HashMap<Coin, Integer> returnChange(Money money) {

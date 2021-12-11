@@ -27,18 +27,14 @@ public class ProductStorage {
 
 	public boolean isSellable(Money money) {
 		for (Product each : storage) {
-			if (each.isPurchasable(money)) {
+			if (each.isEnoughMoney(money) && each.isRemainStock()) {
 				return true;
 			}
 		}
 		return false;
 	}
 
-	public int sellProduct(String name) {
-		return findProductByName(name).sell();
-	}
-
-	private Product findProductByName(String name) {
+	public Product findProductByName(String name) {
 		return storage.stream().filter(each -> each.isSameName(name)).findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FOUND));
 	}
