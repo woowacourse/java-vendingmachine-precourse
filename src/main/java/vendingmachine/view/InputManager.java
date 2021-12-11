@@ -3,7 +3,7 @@ package vendingmachine.view;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.constants.InputConstants;
+import vendingmachine.constants.ViewConstants;
 import vendingmachine.domain.Product;
 
 public class InputManager {
@@ -14,11 +14,11 @@ public class InputManager {
 	}
 
 	public int getStorageMoney() {
-		return getMoneyNumber(InputConstants.ASK_STORAGE_MONEY);
+		return getMoneyNumber(ViewConstants.ASK_STORAGE_MONEY);
 	}
 
 	public int getUserBalance() {
-		return getMoneyNumber(InputConstants.ASK_USER_BALANCE);
+		return getMoneyNumber(ViewConstants.ASK_USER_BALANCE);
 	}
 
 	public int getMoneyNumber(String askMessage) {
@@ -35,7 +35,7 @@ public class InputManager {
 
 	public List<Product> getProductList() {
 		while(true) {
-			print(InputConstants.ASK_PRODUCT_LIST);
+			print(ViewConstants.ASK_PRODUCT_LIST);
 			String inputString = Console.readLine();
 			try {
 				return converter.convertToProductList(inputString);
@@ -46,7 +46,7 @@ public class InputManager {
 	}
 
 	public String getProductName() {
-		print(InputConstants.ASK_PRODUCT_NAME_FOR_BUY);
+		print(ViewConstants.ASK_PRODUCT_NAME_FOR_BUY);
 		return Console.readLine();
 	}
 

@@ -42,10 +42,14 @@ public class CoinStorage {
 	public EnumMap<Coin, Integer> getChange(int remainedMoney) {
 		EnumMap<Coin, Integer> changeMap = new EnumMap<Coin, Integer>(Coin.class);
 		for(Coin coin : coinMap.keySet()) {
+			if(remainedMoney <= 0) {
+				break;
+			}
 			int changeQuantity = calculateChangeQuantity(coin, remainedMoney);
 			if(changeQuantity > 0) {
 				changeMap.put(coin, changeQuantity);
 				coinMap.put(coin, getCoinQuantity(coin) - changeQuantity);
+				remainedMoney -= coin.getAmount() * changeQuantity;
 			}
 		}
 		return changeMap;
