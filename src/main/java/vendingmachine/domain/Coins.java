@@ -10,6 +10,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
 	private static final int ZERO = 0;
+	private static final int MIN_COIN = 10;
 
 	private final EnumMap<Coin, Integer> coinRepository;
 
@@ -27,6 +28,9 @@ public class Coins {
 	}
 
 	private int createCoin(int changes, int value) {
+		if (value == MIN_COIN) {
+			return changes / value;
+		}
 		return Randoms.pickNumberInList(
 			IntStream.rangeClosed(ZERO, changes / value).boxed().collect(Collectors.toList()));
 	}
