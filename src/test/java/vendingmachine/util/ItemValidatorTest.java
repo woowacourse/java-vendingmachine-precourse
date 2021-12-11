@@ -25,5 +25,9 @@ class ItemValidatorTest {
 		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜라,15,00, 20]"));
 		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜 라,1500, 20]"));
 		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜라,15 00, 20]"));
+		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜라,1501, 20]"));
+		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜라,050, 20]"));
+		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜라,150, 02]"));
+		assertThrows(IllegalArgumentException.class, () -> ItemValidator.validate("[콜라,10, 2]"));
 	}
 }
