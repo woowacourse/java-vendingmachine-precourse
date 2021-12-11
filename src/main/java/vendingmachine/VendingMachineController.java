@@ -29,12 +29,10 @@ public class VendingMachineController {
     }
 
     private void purchaseItem() {
-        boolean isPurchaseAvailable = true;
-        while (isPurchaseAvailable) {
+        while (vendingMachineService.isPurchaseAvailable()) {
             try {
                 console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
                 vendingMachineService.purchaseByItemName(console.inputItemsToPurchase());
-                isPurchaseAvailable = vendingMachineService.isPurchaseAvailable();
             } catch (IllegalArgumentException error) {
                 console.printErrorMessage(error.getMessage());
             }
