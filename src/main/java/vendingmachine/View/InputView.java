@@ -8,4 +8,9 @@ public class InputView {
         System.out.println(InputConstant.PLEASE_INPUT_HAVING_AMOUNT);
         return Console.readLine();
     }
+
+    public static String getProductInfo() {
+        System.out.println(InputConstant.PLEASE_INPUT_PRODUCTS);
+        return Console.readLine();
+    }
 }

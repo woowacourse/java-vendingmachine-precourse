@@ -11,6 +11,7 @@ public class InitController {
 
     public void initVendingMachine() {
         initHoldingCoins();
+        initProducts();
     }
 
     private void initHoldingCoins() {
@@ -20,6 +21,15 @@ public class InitController {
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             initHoldingCoins();
+        }
+    }
+
+    private void initProducts() {
+        try {
+            productService.setProducts(InputView.getProductInfo());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e.getMessage());
+            initProducts();
         }
     }
 
