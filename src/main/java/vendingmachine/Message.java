@@ -19,6 +19,9 @@ public class Message {
     public static final String WON = "원";
     public static final String ERROR_GOODS_NO_FIND = "[ERROR] 해당하는 상품이 없습니다.";
     public static final String ERROR_GOODS_NO_INVENTORY = "[ERROR] 해당하는 상품의 재고가 없습니다.";
+    public static final String RETURN_BALANCE = "잔돈";
+    public static final String WON_SPACE_BAR_SPACE = "원 - ";
+    public static final String QUANTITY = "개";
 
 
 

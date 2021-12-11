@@ -58,11 +58,11 @@ public class Machine {
         }
     }
     private void showMachineCoins() {
-        System.out.println("\n"+Message.SHOW_MACHINE_COINS);
-        System.out.println(Coin.COIN_500.getAmount() + "원 - " + coinsMap.get(Coin.COIN_500) + "개");
-        System.out.println(Coin.COIN_100.getAmount() + "원 - " + coinsMap.get(Coin.COIN_100) + "개");
-        System.out.println(Coin.COIN_50.getAmount() + "원 - " + coinsMap.get(Coin.COIN_50) + "개");
-        System.out.println(Coin.COIN_10.getAmount() + "원 - " + coinsMap.get(Coin.COIN_10) + "개");
+        System.out.println("\n" + Message.SHOW_MACHINE_COINS);
+        System.out.println(Coin.COIN_500.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_500) + Message.QUANTITY);
+        System.out.println(Coin.COIN_100.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_100) + Message.QUANTITY);
+        System.out.println(Coin.COIN_50.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_50) + Message.QUANTITY);
+        System.out.println(Coin.COIN_10.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_10) + Message.QUANTITY);
     }
     private void amountInput() {
         boolean check = false;
@@ -90,6 +90,7 @@ public class Machine {
             }
         }
         returnBalance();
+        showReturnBalance();
     }
     private void returnBalance() {
         userAmount = user.getUserAmount();
@@ -102,5 +103,20 @@ public class Machine {
         int count = Math.min(userAmount / coin.getAmount(), coinsMap.get(coin));
         coinsMap.put(coin, count);
         userAmount -= count * coin.getAmount();
+    }
+    private void showReturnBalance() {
+        System.out.println(Message.RETURN_BALANCE);
+        if (!(coinsMap.get(Coin.COIN_500) == 0)) {
+            System.out.println(Coin.COIN_500.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_500) + Message.QUANTITY);
+        }
+        if (!(coinsMap.get(Coin.COIN_100) == 0)) {
+            System.out.println(Coin.COIN_100.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_100) + Message.QUANTITY);
+        }
+        if (!(coinsMap.get(Coin.COIN_50) == 0)) {
+            System.out.println(Coin.COIN_50.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_50) + Message.QUANTITY);
+        }
+        if (!(coinsMap.get(Coin.COIN_10) == 0)) {
+            System.out.println(Coin.COIN_10.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_10) + Message.QUANTITY);
+        }
     }
 }
