@@ -58,9 +58,10 @@ public class ProductRepositoryService {
 		return productStocks;
 	}
 
-	public void update(String order, int money) {
+	public void updateProductByOrder(String order, int money) {
 		Product orderedProduct = productRepository.findByName(order);
 		OrderException.isProductLeft(orderedProduct);
 		OrderException.isEnoughToOrder(orderedProduct, money);
+		orderedProduct.afterOrdered();
 	}
 }

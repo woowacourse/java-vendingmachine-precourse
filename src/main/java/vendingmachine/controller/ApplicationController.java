@@ -96,7 +96,7 @@ public class ApplicationController {
 
 	private void updateByOrder(String orderedProduct, int money) {
 		try {
-			productRepositoryService.update(orderedProduct, money);
+			productRepositoryService.updateProductByOrder(orderedProduct, money);
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
 		}
