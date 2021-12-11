@@ -9,7 +9,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberI
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ChangeTest extends NsTest {
+class ChangesTest extends NsTest {
 	private static final String ERROR_MESSAGE = "[ERROR]";
 
 	@Test

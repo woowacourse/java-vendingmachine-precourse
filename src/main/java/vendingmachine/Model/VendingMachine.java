@@ -1,47 +1,31 @@
 package vendingmachine.Model;
 
-import vendingmachine.Controller.InputController;
-import vendingmachine.Utils.Converter;
-import vendingmachine.View.OutputView;
+import java.util.ArrayList;
 
 public class VendingMachine {
 	public CoinWallet machineCoins;
-	public final ProductList productList = new ProductList();
+	public final Products products = new Products();
 	public int userMoney;
 
-	public void init() {
-		setMachineCoins();
-		OutputView.printEmpty();
-
-		OutputView.printCoin(machineCoins.coins);
-		OutputView.printEmpty();
-
-		setMachineProduct();
-		OutputView.printEmpty();
-
-		setUserMoney();
-		OutputView.printEmpty();
+	public void initCoins(int money) {
+		machineCoins = new CoinWallet(money);
 	}
 
-	public void setMachineCoins() {
-		machineCoins = new CoinWallet(Converter.moneyConverter(InputController.initMachineMoney()));
-	}
-
-	public void setMachineProduct() {
-		for (Object[] values : Converter.productConverter(InputController.setProducts())) {
-			productList.add(new Product(values));
+	public void initProduct(ArrayList<Object[]> products) {
+		for (Object[] values : products) {
+			this.products.add(new Product(values));
 		}
 	}
 
-	public void setUserMoney() {
-		userMoney = Converter.moneyConverter(InputController.setUserMoney());
+	public void initUserMoney(int money) {
+		userMoney = money;
 	}
 
 	public boolean isUserPoor() {
-		return userMoney < productList.getMinPrice();
+		return userMoney < products.getMinPrice();
 	}
 
 	public boolean allSoldOut() {
-		return productList.allSoldOut();
+		return products.allSoldOut();
 	}
 }

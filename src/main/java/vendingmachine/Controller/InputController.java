@@ -8,48 +8,48 @@ import vendingmachine.Utils.Validator.SellValidator;
 import vendingmachine.View.InputView;
 
 public class InputController {
-	public static String initMachineMoney() {
+	public static String getMachineMoneyInput() {
 		try {
 			String input = InputView.machineMoneyInput();
 			new MoneyValidator(input);
 			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return initMachineMoney();
+			return getMachineMoneyInput();
 		}
 	}
 
-	public static String setUserMoney() {
+	public static String getUserMoneyInput() {
 		try {
 			String input = InputView.userMoneyInput();
 			new MoneyValidator(input);
 			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return initMachineMoney();
+			return getMachineMoneyInput();
 		}
 	}
 
-	public static String setProducts() {
+	public static String getProductsInput() {
 		try {
 			String input = InputView.machineProductInput();
 			new ProductValidator(input);
 			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setProducts();
+			return getProductsInput();
 		}
 	}
 
-	public static String setWantedProduct(VendingMachine vendingMachine) {
+	public static String getProductNameInput(VendingMachine vendingMachine) {
 		try {
 			String input = InputView.buyProductNameInput();
-			new NameValidator(input, vendingMachine.productList.getNames());
-			new SellValidator(vendingMachine.productList.find(input), vendingMachine.userMoney);
+			new NameValidator(input, vendingMachine.products.getNames());
+			new SellValidator(vendingMachine.products.getProduct(input), vendingMachine.userMoney);
 			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setWantedProduct(vendingMachine);
+			return getProductNameInput(vendingMachine);
 		}
 	}
 }

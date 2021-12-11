@@ -27,6 +27,14 @@ public class CoinWallet {
 		coins.put(coin, coinCount);
 	}
 
+	public LinkedHashMap<Coin, Integer> getNotEmptyCoins() {
+		LinkedHashMap<Coin, Integer> emptyCoins = new LinkedHashMap<>(coins);
+		coins.keySet().stream()
+			.filter(coin -> coins.get(coin) == 0)
+			.forEach(emptyCoins::remove);
+		return emptyCoins;
+	}
+
 	private void coinInit() {
 		for (Coin coin : Coin.values()) {
 			coins.put(coin, 0);

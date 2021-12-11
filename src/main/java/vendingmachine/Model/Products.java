@@ -2,14 +2,14 @@ package vendingmachine.Model;
 
 import java.util.ArrayList;
 
-public class ProductList {
+public class Products {
 	private final ArrayList<Product> products = new ArrayList<>();
 
 	public void add(Product product) {
 		products.add(product);
 	}
 
-	public Product find(String name) {
+	public Product getProduct(String name) {
 		return products.stream()
 			.filter(product -> product.NAME.equals(name))
 			.findAny()
