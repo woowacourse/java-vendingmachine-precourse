@@ -48,11 +48,11 @@ public class ItemsController {
 	}
 
 	public boolean checkAvailableToPurchase() {
-		int userBalance = userBalanceService.getUserBalance().toInt();
+		UserBalance userBalance = userBalanceService.getUserBalance();
 
-		boolean soldOut = itemsService.checkAllItemsSoldOut();
-		boolean isUserBalanceNotEnough = userBalance < itemsService.getMinItemPrice().toInt();
+		boolean isSoldOutOfItemAvailableForBuy = itemsService.checkSoldOutOfItemAvailableForBuy(userBalance);
+		boolean isUserBalanceNotEnough = userBalance.toInt() < itemsService.getMinItemPrice().toInt();
 
-		return !soldOut && !isUserBalanceNotEnough;
+		return !isSoldOutOfItemAvailableForBuy && !isUserBalanceNotEnough;
 	}
 }

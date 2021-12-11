@@ -38,9 +38,12 @@ public class ItemsService {
 		itemsRepository.updateByItemName(itemName, purchasedItem);
 	}
 
-	public boolean checkAllItemsSoldOut() {
+	// TODO: UserBalance 를 DTO 로 전달받기
+	public boolean checkSoldOutOfItemAvailableForBuy(UserBalance userBalance) {
 		List<Item> items = itemsRepository.findAll();
-		return items.stream().allMatch(Item::isSoldOut);
+		return items.stream()
+			.filter(item -> item.getItemPrice().toInt() <= userBalance.toInt())
+			.allMatch(Item::isSoldOut);
 	}
 
 	public ItemPrice getMinItemPrice() {
