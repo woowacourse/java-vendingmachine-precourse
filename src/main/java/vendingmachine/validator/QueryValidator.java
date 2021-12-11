@@ -43,9 +43,4 @@ public class QueryValidator {
 			throw new IllegalArgumentException(DONT_EXISTING_ITEM_ERROR_MESSAGE);
 		}
 	}
-
-	private boolean hasItemNamed(String itemName, List<String> nameList) {
-		return nameList.stream()
-				.anyMatch(item -> Objects.equals(item, itemName));
-	}
 }
