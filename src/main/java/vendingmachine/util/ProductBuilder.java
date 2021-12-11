@@ -1,5 +1,6 @@
 package vendingmachine.util;
 
+import vendingmachine.message.Error;
 import vendingmachine.model.Product;
 
 public class ProductBuilder {
@@ -12,8 +13,13 @@ public class ProductBuilder {
 
 	public Product makeProductFromInfo(String rawInfo) {
 		String[] info = rawInfo.replace(LEFT_BRACKET, "")
-				.replace(RIGHT_BRACKET, "")
-				.split(INFO_DELIM);
+				.replace(RIGHT_BRACKET, "").split(INFO_DELIM);
+		if (!Validator.isOnlyNums(info[INFO_PRICE_INDEX])) {
+			throw new IllegalArgumentException(Error.NOT_ONLY_NUMS_IN_PRICE);
+		}
+		if (!Validator.isOnlyNums(info[INFO_STOCK_INDEX])) {
+			throw new IllegalArgumentException(Error.NOT_ONLY_NUMS_IN_STOCK);
+		}
 		return new Product(info[INFO_NAME_INDEX], Integer.parseInt(info[INFO_PRICE_INDEX]), Integer.parseInt(info[INFO_STOCK_INDEX]));
 	}
 }
