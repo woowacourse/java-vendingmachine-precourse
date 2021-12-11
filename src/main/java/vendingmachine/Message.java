@@ -31,7 +31,7 @@ public enum Message {
 	}
 
 	public static void printCoinPocket(CoinPocket pocket) {
-		Set<Map.Entry<Coin, Integer>> pocketInSet = pocket.randomCoins.entrySet();
+		Set<Map.Entry<Coin, Integer>> pocketInSet = pocket.getEntries();
 		List<String> messageBag = new ArrayList<>();
 		pocketInSet.forEach(entry -> messageBag.add(makeCoinMessage(entry)));
 		System.out.println(String.join(Constants.LINE_FEED, messageBag));

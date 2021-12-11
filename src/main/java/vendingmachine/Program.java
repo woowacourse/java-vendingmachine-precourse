@@ -23,6 +23,7 @@ public class Program {
 		setProductList();
 		setUserMoney();
 		buyProduct();
+		giveChange();
 	}
 
 	private int setInitialMoney() {
@@ -34,7 +35,7 @@ public class Program {
 	private void setRandomCoins(int money) {
 		while (Coin.isSwappableForCoin(money)) {
 			Coin coin = Coin.random(money);
-			pocket.push(coin);
+			pocket.push(coin, 1);
 			money = coin.subtract(money);
 		}
 		Message.printCoinPocket(pocket);
@@ -65,5 +66,24 @@ public class Program {
 			return;
 		}
 		buyProduct();
+	}
+
+	private CoinPocket calculateChange() {
+		CoinPocket change = new CoinPocket();
+		for (Coin coin : Coin.values()) {
+			int numberOfPoppedCoins = pocket.pop(coin, coin.divide(userMoney));
+			change.push(coin, numberOfPoppedCoins);
+		}
+		change.removeZeros();
+
+		return change;
+	}
+
+	private void giveChange() {
+		Message.printLeftMoney(userMoney);
+		Message.USER_CHANGE_SHOW.println();
+
+		CoinPocket change = calculateChange();
+		Message.printCoinPocket(change);
 	}
 }

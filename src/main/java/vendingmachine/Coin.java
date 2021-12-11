@@ -34,7 +34,6 @@ public enum Coin {
 
 	private static List<Integer> getRandomPoolIndices(int length) {
 		List<Integer> randomPoolIndices = new ArrayList<>();
-
 		for (int i = 0; i < length; i++) {
 			randomPoolIndices.add(i);
 		}
@@ -50,4 +49,7 @@ public enum Coin {
 		return money - this.amount;
 	}
 
+	public int divide(int money) {
+		return money / this.amount;
+	}
 }
