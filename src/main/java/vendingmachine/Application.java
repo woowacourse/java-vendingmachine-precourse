@@ -1,12 +1,14 @@
 package vendingmachine;
 
 import vendingmachine.controller.VendingMachineInputController;
+import vendingmachine.domain.VendingMachineAccount;
 
 public class Application {
+
+	private static VendingMachineAccount vendingMachineAccount;
+
 	public static void main(String[] args) {
 		// TODO: 프로그램 구현
-		int vendingMachineAccount = VendingMachineInputController.getAccount();
-		System.out.println("vendingMachineAccount = " + vendingMachineAccount);
-
+		vendingMachineAccount = new VendingMachineAccount(VendingMachineInputController.getAccountInput());
 	}
 }
