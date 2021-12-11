@@ -69,5 +69,12 @@ public class Machine {
             check = user.inputUserAmount();
         }
     }
+    private void buyGoods() {
+        boolean check = false;
+        while (!check) {
+            System.out.println(Message.INPUT_BUY_PRODUCT);
+            check = user.inputUserAmount();
+        }
+    }
 
 }

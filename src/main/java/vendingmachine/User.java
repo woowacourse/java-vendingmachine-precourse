@@ -142,4 +142,8 @@ public class User {
     private void checkCorrectAmount() throws IllegalArgumentException {
         checkCorrectBalance();
     }
+    public void showRemainingAmount() {
+        System.out.println();
+        System.out.println(Message.REMAINING_AMOUNT + machineBalance + Message.WON);
+    }
 }

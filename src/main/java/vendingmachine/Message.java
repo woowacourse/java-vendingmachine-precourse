@@ -14,6 +14,10 @@ public class Message {
     public static final String ERROR_MACHINE_Goods_INVAILD_PRICE = "[ERROR] 잘못된 입력입니다. 상품의 가격은 100원 이상이여야 합니다.";
     public static final String ERROR_MACHINE_Goods_INVAILD_QUANTITY = "[ERROR] 잘못된 입력입니다. 상품의 수량은 0개 이상이여야 합니다.";
     public static final String INPUT_USER_AMOUNT = "투입 금액을 입력해 주세요.";
+    public static final String INPUT_BUY_PRODUCT = "구매할 상품명을 입력해 주세요.";
+    public static final String REMAINING_AMOUNT = "투입 금액: ";
+    public static final String WON = "원";
+
 
 
 }
