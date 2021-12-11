@@ -1,5 +1,7 @@
 package vendingmachine.model.item.vo;
 
+import vendingmachine.model.vo.Money;
+
 import static vendingmachine.validation.NumberValidator.isNotMultipleOfTen;
 import static vendingmachine.validation.NumberValidator.isNotPositiveInteger;
 
@@ -37,6 +39,10 @@ public class Price {
         if (value < MIN_VALUE) {
             throw new IllegalArgumentException(PRICE_MIN_VALUE_EXCEPTION_MESSAGE);
         }
+    }
+
+    public void payWith(final Money remainingInputMoney) {
+        remainingInputMoney.decreaseBy(value);
     }
 
     @Override

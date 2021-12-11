@@ -26,4 +26,8 @@ public class Money {
             throw new IllegalArgumentException(NOT_MULTIPLE_OF_TEN_EXCEPTION_MESSAGE);
         }
     }
+
+    public void decreaseBy(final int itemPrice) {
+        value -= itemPrice;
+    }
 }

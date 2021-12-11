@@ -1,7 +1,6 @@
 package vendingmachine.model.item;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
+import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.stream.Stream;
@@ -10,6 +9,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import vendingmachine.dto.InputItemDTO;
@@ -45,6 +45,16 @@ class ItemTest {
                 Arguments.of(new InputItemDTO(Arrays.asList("콜라", "1000", "2")), false),
                 Arguments.of(new InputItemDTO(Arrays.asList("콜라", "2000", "2")), false)
         );
+    }
+
+    @ParameterizedTest
+    @DisplayName("사용자 구매 희망 상품 이름을 받아 자신의 이름과 같은지 반환한다.")
+    @CsvSource({"물, true", "콜라, false"})
+    void hasName(final String userWantedItemName, final boolean expected) {
+        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
+        Item item = new Item(inputItemDTO);
+        boolean actual = item.hasName(userWantedItemName);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @Test

@@ -16,4 +16,8 @@ public class Quantity {
             throw new IllegalArgumentException(NOT_POSITIVE_INTEGER_QUANTITY_EXCEPTION_MESSAGE);
         }
     }
+
+    public void decrease() {
+        value--;
+    }
 }

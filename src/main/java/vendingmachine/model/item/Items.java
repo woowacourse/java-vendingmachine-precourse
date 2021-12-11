@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.dto.InputItemDTO;
+import vendingmachine.model.vo.Money;
 
 public class Items {
     private static final String ITEMS_OVERLAP_EXCEPTION_MESSAGE = "상품에 중복이 있습니다.";
@@ -21,5 +22,11 @@ public class Items {
         if (values.size() != distinctCountOfItems) {
             throw new IllegalArgumentException(ITEMS_OVERLAP_EXCEPTION_MESSAGE);
         }
+    }
+
+    public void sell(final String userWantedItemName, final Money remainingInputMoney) {
+        values.stream()
+                .filter(item -> item.hasName(userWantedItemName))
+                .forEach(item -> item.sell(remainingInputMoney));
     }
 }
