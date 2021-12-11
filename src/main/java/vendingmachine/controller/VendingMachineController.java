@@ -37,17 +37,22 @@ public class VendingMachineController {
     private VendingMachineChecker buyProductsUntilEnd(VendingMachineChecker checker) {
         while (checker == VendingMachineChecker.START) {
             String productName = InputView.inputBuyingProduct();
-            if (productName.equals(EXIT_CODE)) {
-                return buyProductsUntilEnd(VendingMachineChecker.END);
-            }
             try {
                 checker = vendingMachineService.sellProduct(productName);
             } catch (IllegalArgumentException e) {
-                OutputView.showErrorMessage(e);
-                return buyProductsUntilEnd(checker);
+                return checkShutDown(checker, productName, e);
             }
         }
         return checker;
+    }
+
+    private VendingMachineChecker checkShutDown(VendingMachineChecker checker, String productName,
+        IllegalArgumentException e) {
+        if (productName.equals(EXIT_CODE)) {
+            return buyProductsUntilEnd(VendingMachineChecker.END);
+        }
+        OutputView.showErrorMessage(e);
+        return buyProductsUntilEnd(checker);
     }
 
     private void initializeByAdmin() {
