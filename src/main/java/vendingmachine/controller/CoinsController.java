@@ -3,7 +3,7 @@ package vendingmachine.controller;
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsDto;
-import vendingmachine.exception.NotNaturalNumberException;
+import vendingmachine.exception.NotNumericException;
 import vendingmachine.service.CoinsService;
 import vendingmachine.service.UserBalanceService;
 import vendingmachine.utils.StringUtils;
@@ -18,7 +18,7 @@ public class CoinsController {
 		String input = InputView.inputVendingMachineBalance();
 
 		if (!StringUtils.isNumeric(input)) {
-			throw new NotNaturalNumberException();
+			throw new NotNumericException();
 		}
 
 		try {

@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.dto.ItemDto;
 import vendingmachine.dto.ItemNameDto;
-import vendingmachine.exception.ItemInputFormatException;
+import vendingmachine.exception.NotNumericException;
 import vendingmachine.service.ItemsService;
 import vendingmachine.service.UserBalanceService;
 import vendingmachine.utils.StringUtils;
@@ -62,7 +62,7 @@ public class ItemsController {
 		String itemQuantity = elements[ITEM_QUANTITY_INDEX];
 
 		if (!StringUtils.isNumeric(itemPrice) || !StringUtils.isNumeric(itemQuantity)) {
-			throw new ItemInputFormatException();
+			throw new NotNumericException();
 		}
 
 		return ItemDto.of(itemName, Integer.parseInt(itemPrice), Integer.parseInt(itemQuantity));
