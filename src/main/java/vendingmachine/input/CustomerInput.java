@@ -12,6 +12,12 @@ public class CustomerInput {
 		return Integer.parseInt(input);
 	}
 
+	public String getPurchaseName() {
+		System.out.println(Ask.PURCHASE_NAME);
+		String input = Console.readLine();
+		return input;
+	}
+
 	private void validateMoneyInput(String input) {
 		Validator.onlyNums(input);
 	}

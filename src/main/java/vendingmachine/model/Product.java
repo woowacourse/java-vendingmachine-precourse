@@ -14,6 +14,11 @@ public class Product {
 		this.stock = stock;
 	}
 
+	public int purchaseOne(int money) {
+		stock -= 1;
+		return money - price;
+	}
+
 	public String getName() {
 		return name;
 	}

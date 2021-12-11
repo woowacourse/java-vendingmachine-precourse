@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static vendingmachine.message.Error.DUPLICATED_PRODUCT_NAME;
+import static vendingmachine.message.Error.NO_SUCH_PRODUCT_EXIST;
 
 public class MachineController {
 
@@ -32,7 +33,28 @@ public class MachineController {
 	}
 
 	public void sell() {
-		viewer.showRemainMoney(money);
+		Product product = getProductByName(getPurchaseName());
+		money = product.purchaseOne(money);
+	}
+
+	private String getPurchaseName() {
+		String name = "";
+		try {
+			viewer.showRemainMoney(money);
+			name = customerInput.getPurchaseName();
+			checkProductIsExist(name);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			getPurchaseName();
+		}
+		return name;
+	}
+
+	private Product getProductByName(String name) {
+		return products.stream()
+				.filter(product -> product.getName().equals(name))
+				.findAny()
+				.orElseThrow(() -> new IllegalArgumentException());
 	}
 
 	private void setupChangeCoins() {
@@ -67,6 +89,14 @@ public class MachineController {
 				.count() != products.size();
 		if (duplicate) {
 			throw new IllegalArgumentException(DUPLICATED_PRODUCT_NAME);
+		}
+	}
+
+	private void checkProductIsExist(String name) {
+		boolean exist = products.stream()
+				.anyMatch(p -> p.getName().equals(name));
+		if (!exist) {
+			throw new IllegalArgumentException(NO_SUCH_PRODUCT_EXIST);
 		}
 	}
 }
