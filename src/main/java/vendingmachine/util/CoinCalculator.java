@@ -1,6 +1,5 @@
 package vendingmachine.util;
 
-import vendingmachine.model.Coin;
 import vendingmachine.model.CoinStock;
 
 import java.util.*;

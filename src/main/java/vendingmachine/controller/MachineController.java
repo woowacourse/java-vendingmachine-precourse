@@ -10,7 +10,6 @@ import vendingmachine.util.RandomCoinSelector;
 import vendingmachine.view.MachineViewer;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -106,20 +105,12 @@ public class MachineController {
 	}
 
 	private void checkNoDuplication() {
-		boolean duplicate =  products.stream()
+		boolean duplicate = products.stream()
 				.map(Product::getName)
 				.distinct()
 				.count() != products.size();
 		if (duplicate) {
 			throw new IllegalArgumentException(DUPLICATED_PRODUCT_NAME);
-		}
-	}
-
-	private void checkProductIsExist(String name) {
-		boolean exist = products.stream()
-				.anyMatch(p -> p.getName().equals(name));
-		if (!exist) {
-			throw new IllegalArgumentException(NO_SUCH_PRODUCT_EXIST);
 		}
 	}
 

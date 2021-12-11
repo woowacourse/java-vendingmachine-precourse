@@ -1,14 +1,10 @@
 package vendingmachine.view;
 
-import vendingmachine.model.Coin;
 import vendingmachine.model.CoinStock;
 
-import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 public class MachineViewer {
-
 	public void showCoinBoxStatus(List<CoinStock> coins) {
 		System.out.println("\n자판기가 보유한 동전");
 		coins.stream().forEach(System.out::println);

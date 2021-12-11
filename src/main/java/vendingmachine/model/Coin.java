@@ -36,9 +36,4 @@ public enum Coin {
 	public int getAmount() {
 		return amount;
 	}
-
-	@Override
-	public String toString() {
-		return amount + "원 - ";
-	}
 }

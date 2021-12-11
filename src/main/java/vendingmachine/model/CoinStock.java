@@ -9,25 +9,6 @@ public class CoinStock {
 		this.stock = stock;
 	}
 
-	public void addCoin() {
-		stock += 1;
-	}
-
-	public void useCoin(int count) {
-		stock -= count;
-	}
-
-	public Coin findCoinMatchAmount() {
-		return Coin.getCoinByAmount(amount);
-	}
-
-	public boolean isEmpty() {
-		if (stock == 0) {
-			return true;
-		}
-		return false;
-	}
-
 	public int getTotal() {
 		return amount * stock;
 	}
