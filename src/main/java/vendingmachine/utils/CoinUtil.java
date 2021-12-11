@@ -10,9 +10,7 @@ public class CoinUtil {
 
 	public static VendingMachine makeCoin(int cost, VendingMachine vendingMachine) {
 		while (cost > 0) {
-			int randomCoin = Randoms.pickNumberInList(
-				Arrays.asList(Coin.COIN_500.getAmount(), Coin.COIN_100.getAmount(),
-					Coin.COIN_50.getAmount(), Coin.COIN_10.getAmount()));
+			int randomCoin = generateRandomCoin();
 
 			if (randomCoin > cost) {
 				continue;
@@ -23,6 +21,12 @@ public class CoinUtil {
 		}
 
 		return vendingMachine;
+	}
+
+	private static int generateRandomCoin() {
+		return Randoms.pickNumberInList(
+			Arrays.asList(Coin.COIN_500.getAmount(), Coin.COIN_100.getAmount(),
+				Coin.COIN_50.getAmount(), Coin.COIN_10.getAmount()));
 	}
 
 }
