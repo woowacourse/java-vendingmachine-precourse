@@ -78,7 +78,7 @@ public class MachineController {
     }
 
     private boolean shouldContinue() {
-        return hasEnoughInsertAmount() && hasRemainingProducts();
+        return hasEnoughInsertAmount() && hasRemainingProducts() && canBuySomething();
     }
 
     private boolean hasEnoughInsertAmount() {
@@ -88,6 +88,10 @@ public class MachineController {
 
     private boolean hasRemainingProducts() {
         return vendingMachine.hasAnyProduct();
+    }
+
+    private boolean canBuySomething() {
+        return vendingMachine.existProductToBuy();
     }
 
     private void buyProduct() {

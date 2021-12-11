@@ -45,7 +45,7 @@ public class VendingMachine {
     }
 
     public boolean hasProduct(String productName) {
-        return products.exist(productName);
+        return products.existProductName(productName);
     }
 
     public boolean hasEnoughAmount() {
@@ -54,6 +54,10 @@ public class VendingMachine {
 
     public boolean hasAnyProduct() {
         return products.getSize() > DEFAULT_VALUE;
+    }
+
+    public boolean existProductToBuy() {
+        return products.existsAffordableProduct(userInsertAmount);
     }
 
     public void checkProductQuantity(String product) {

@@ -23,14 +23,14 @@ public class Products {
     private List<List<String>> processProductsInput(String products) {
         List<List<String>> processedProducts = new ArrayList<>();
         for (String product : products.split(SEMI_COLON)) {
-            processedProducts.add(Arrays.asList(product.substring(START_INDEX, product.length()-START_INDEX).split(COMMA)));
+            processedProducts.add(Arrays.asList(product.substring(START_INDEX, product.length() - START_INDEX).split(COMMA)));
         }
 
         return processedProducts;
     }
 
 
-    public boolean exist(String productName) {
+    public boolean existProductName(String productName) {
         return products.stream().anyMatch(product -> product.getName().equals(productName));
     }
 
@@ -54,6 +54,14 @@ public class Products {
                 .filter(p -> p.getName().equals(product))
                 .mapToInt(Product::getPrice)
                 .findAny().orElse(DEFAULT_VALUE);
+    }
+
+    public boolean existsAffordableProduct(int amount) {
+        return DEFAULT_VALUE < products.stream()
+                .filter(p -> p.getQuantity() > DEFAULT_VALUE)
+                .filter(p -> p.getPrice() <= amount)
+                .mapToInt(Product::getQuantity)
+                .sum();
     }
 
     public int reduceQuantity(String productName) {
