@@ -8,30 +8,33 @@ import vendingmachine.Utils.Validator.SellValidator;
 import vendingmachine.View.InputView;
 
 public class InputController {
-	public static int setMachineMoney() {
+	public static String initMachineMoney() {
 		try {
-			MoneyValidator validation = new MoneyValidator(InputView.machineMoneyInput());
-			return validation.MONEY;
+			String input = InputView.machineMoneyInput();
+			new MoneyValidator(input);
+			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setMachineMoney();
+			return initMachineMoney();
 		}
 	}
 
-	public static int setUserMoney() {
+	public static String setUserMoney() {
 		try {
-			MoneyValidator validation = new MoneyValidator(InputView.userMoneyInput());
-			return validation.MONEY;
+			String input = InputView.userMoneyInput();
+			new MoneyValidator(input);
+			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setMachineMoney();
+			return initMachineMoney();
 		}
 	}
 
 	public static String setProducts() {
 		try {
-			ProductValidator validation = new ProductValidator(InputView.machineProductInput());
-			return validation.PRODUCT_STRING;
+			String input = InputView.machineProductInput();
+			new ProductValidator(input);
+			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return setProducts();
@@ -40,10 +43,10 @@ public class InputController {
 
 	public static String setWantedProduct(VendingMachine vendingMachine) {
 		try {
-			String name = InputView.buyProductNameInput();
-			new NameValidator(name, vendingMachine.productList.getNames());
-			new SellValidator(vendingMachine.productList.find(name), vendingMachine.userMoney);
-			return name;
+			String input = InputView.buyProductNameInput();
+			new NameValidator(input, vendingMachine.productList.getNames());
+			new SellValidator(vendingMachine.productList.find(input), vendingMachine.userMoney);
+			return input;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return setWantedProduct(vendingMachine);

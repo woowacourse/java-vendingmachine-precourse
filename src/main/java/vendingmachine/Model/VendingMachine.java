@@ -24,7 +24,7 @@ public class VendingMachine {
 	}
 
 	public void setMachineCoins() {
-		machineCoins = new CoinWallet(InputController.setMachineMoney());
+		machineCoins = new CoinWallet(Converter.moneyConverter(InputController.initMachineMoney()));
 	}
 
 	public void setMachineProduct() {
@@ -34,7 +34,7 @@ public class VendingMachine {
 	}
 
 	public void setUserMoney() {
-		userMoney = InputController.setUserMoney();
+		userMoney = Converter.moneyConverter(InputController.setUserMoney());
 	}
 
 	public boolean isUserPoor() {
