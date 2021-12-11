@@ -17,8 +17,16 @@ public class CashManager {
         }
     }
 
-    public HashMap<Coin, Integer> getVault() {
-        return vault;
+    public String getVaultStatus() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("자판기가 보유한 동전").append(System.lineSeparator());
+
+        for (Coin coin : Coin.values()) {
+            sb.append(coin.getAmount()).append("원 - ");
+            sb.append(this.vault.get(coin)).append("개").append(System.lineSeparator());
+        }
+
+        return sb.toString();
     }
 
     public int getRemainCash() {
