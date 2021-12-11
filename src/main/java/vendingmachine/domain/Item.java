@@ -31,4 +31,8 @@ public class Item {
 		return this.price <= remainingMoney;
 	}
 
+	public void reduceQuantity() {
+		this.quantity -= 1;
+	}
+
 }
