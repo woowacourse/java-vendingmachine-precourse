@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.constant.Condition;
+
 public class Product {
     private String name;
     private int cost;
@@ -21,5 +23,9 @@ public class Product {
 
     public int getAmount() {
         return amount;
+    }
+
+    public void sellProduct() {
+        amount -= Condition.ONE_SELL.getNumber();
     }
 }

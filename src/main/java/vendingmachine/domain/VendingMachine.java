@@ -1,10 +1,10 @@
 package vendingmachine.domain;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 
 import vendingmachine.view.input.MoneyInputView;
 import vendingmachine.view.input.ProductInputView;
+import vendingmachine.view.input.PurchaseInputView;
 import vendingmachine.view.output.OutputView;
 
 public class VendingMachine {
@@ -21,5 +21,7 @@ public class VendingMachine {
         productInputView.inputProducts();
 
         Integer moneyForPurchase = moneyInputView.inputMoneyForPurchase();
+        PurchaseInputView purchaseInputView = new PurchaseInputView(moneyForPurchase);
+        purchaseInputView.inputProductForPurchase();
     }
 }

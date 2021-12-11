@@ -27,7 +27,12 @@ public enum Input {
 
     PURCHASE_MONEY_GUIDE_MESSAGE("투입 금액을 입력해 주세요."),
     PURCHASE_MONEY_DIGIT_ERROR_MESSAGE("[ERROR] 금액은 숫자만 입력하실 수 있습니다."),
-    PURCHASE_MONEY_LENGTH_0_ERROR_MESSAGE("[ERROR] 1자리 이상의 숫자를 입력해주세요.");
+    PURCHASE_MONEY_LENGTH_0_ERROR_MESSAGE("[ERROR] 1자리 이상의 숫자를 입력해주세요."),
+
+    PRODUCT_PURCHASE_GUIDE_MESSAGE("구매할 상품명을 입력해 주세요."),
+    PRODUCT_EXIST_ERROR_MESSAGE("[ERROR] 존재하지 않는 상품입니다."),
+    PRODUCT_AMOUNT_LACK_ERROR_MESSAGE("[ERROR] 해당 상품은 품절되었습니다."),
+    PRODUCT_PURCHASE_LACK_MONEY_ERROR_MESSAGE("[ERROR] 남아있는 금액보다 비싼 상품입니다.");
 
     private final String text;
 

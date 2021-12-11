@@ -14,7 +14,8 @@ public enum Condition {
     REMAINDER(0),
     DIVIDE_NUMBER(10),
     MINIMUM_COST(100),
-    BRACKETS_NUMBER(2);
+    BRACKETS_NUMBER(2),
+    ONE_SELL(1);
 
     private int number;
 
