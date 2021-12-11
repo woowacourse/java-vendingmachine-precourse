@@ -34,6 +34,10 @@ public class ManagementService {
         }
     }
     
+    public static void addCommodityInList(Commodity commodity) {
+        CommodityRepository.addCommodity(commodity);
+    }
+    
     public static Commodity toCommodity(String input) {
         String [] components = input.split(",");
         String name = components[COMMODITY_NAME];
