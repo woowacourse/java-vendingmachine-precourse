@@ -39,7 +39,7 @@ public class CoinModel {
 
 	public Map<Integer, Integer> getMinimumNumberCoins(int remainingMoney) {
 		Map<Integer, Integer> numberOfMonetaryUnit = makeMonetaryUnitMap(
-			coinStorage.getNumberOfCoins());
+				coinStorage.getNumberOfCoins());
 		Map<Integer, Integer> change = makeMonetaryUnitMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
 		for (int monetaryUnit : numberOfMonetaryUnit.keySet()) {
 			if (remainingMoney < monetaryUnit || numberOfMonetaryUnit.get(monetaryUnit) <= 0) {

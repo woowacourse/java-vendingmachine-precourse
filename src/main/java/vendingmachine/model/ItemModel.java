@@ -31,15 +31,15 @@ public class ItemModel {
 
 	public int getMinimumPrice() {
 		return itemStorage.getPriceList().stream()
-			.mapToInt(Integer::intValue)
-			.min()
-			.getAsInt();
+				.mapToInt(Integer::intValue)
+				.min()
+				.getAsInt();
 	}
 
 	public boolean hasExtraQuantity() {
 		return itemStorage.getQuantityList().stream()
-			.mapToInt(Integer::intValue)
-			.sum() > 0;
+				.mapToInt(Integer::intValue)
+				.sum() > 0;
 	}
 
 	public int getPriceByName(String name) {
@@ -52,9 +52,9 @@ public class ItemModel {
 
 	private List<String> parseItemStringIntoItemList(String items) {
 		return Arrays.stream(items.split(";"))
-			.map(item -> item.substring(1, item.length() - 1))
-			.map(itemElement -> itemElement.split(","))
-			.flatMap(Arrays::stream)
-			.collect(Collectors.toList());
+				.map(item -> item.substring(1, item.length() - 1))
+				.map(itemElement -> itemElement.split(","))
+				.flatMap(Arrays::stream)
+				.collect(Collectors.toList());
 	}
 }

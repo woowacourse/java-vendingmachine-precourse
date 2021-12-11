@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 
 public class CoinStorage {
 	public static final List<Integer> MONETARY_UNIT_LIST = Arrays.stream(Coin.values())
-		.map(Coin::getAmount)
-		.collect(Collectors.toList());
+			.map(Coin::getAmount)
+			.collect(Collectors.toList());
 
 	private static final CoinStorage coinStorage = new CoinStorage();
 
@@ -28,8 +28,8 @@ public class CoinStorage {
 
 	public List<Integer> getNumberOfCoins() {
 		return Arrays.stream(Coin.values())
-			.map(this::getNumberOfCoin)
-			.collect(Collectors.toList());
+				.map(this::getNumberOfCoin)
+				.collect(Collectors.toList());
 	}
 
 	public int getNumberOfMonetaryUnitType() {

@@ -87,9 +87,9 @@ public class InputValidator {
 
 	private void checkNotSatisfiedInputFormatExceptions(String string) {
 		long wrongFormatItemCount = Arrays.stream(string.split(";"))
-			.filter(item ->
-				item.charAt(0) != '[' || item.charAt(item.length() - 1) != ']')
-			.count();
+				.filter(item ->
+						item.charAt(0) != '[' || item.charAt(item.length() - 1) != ']')
+				.count();
 		if (wrongFormatItemCount > 0) {
 			throw new IllegalArgumentException(NOT_SATISFIED_INPUT_FORMAT_ERROR_MESSAGE);
 		}
@@ -97,43 +97,43 @@ public class InputValidator {
 
 	private void checkArgumentLackExceptions(String string) {
 		if (Arrays.stream(string.split(";"))
-			.anyMatch(item -> item.split(",").length != 3)) {
+				.anyMatch(item -> item.split(",").length != 3)) {
 			throw new IllegalArgumentException(ITEM_ARGUMENT_LACK_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkPriceNotNaturalNumberExceptions(String string) {
 		if (Arrays.stream(string.split(";"))
-			.map(item -> item.split(",")[1])
-			.flatMapToInt(CharSequence::chars)
-			.anyMatch(number -> !Character.isDigit(number))) {
+				.map(item -> item.split(",")[1])
+				.flatMapToInt(CharSequence::chars)
+				.anyMatch(number -> !Character.isDigit(number))) {
 			throw new IllegalArgumentException(PRICE_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkPriceNotMultiplicationOfTenExceptions(String string) {
 		if (Arrays.stream(string.split(";"))
-			.map(item -> item.split(",")[1])
-			.map(Integer::parseInt)
-			.anyMatch(price -> price % 10 != 0)) {
+				.map(item -> item.split(",")[1])
+				.map(Integer::parseInt)
+				.anyMatch(price -> price % 10 != 0)) {
 			throw new IllegalArgumentException(PRICE_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkPriceUnder100Exceptions(String string) {
 		if (Arrays.stream(string.split(";"))
-			.map(item -> item.split(",")[1])
-			.map(Integer::parseInt)
-			.anyMatch(price -> price < 100)) {
+				.map(item -> item.split(",")[1])
+				.map(Integer::parseInt)
+				.anyMatch(price -> price < 100)) {
 			throw new IllegalArgumentException(PRICE_UNDER_100_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkQuantityNotNaturalNumberExceptions(String string) {
 		if (Arrays.stream(string.split(";"))
-			.map(item -> item.split(",")[2].replace("]", ""))
-			.flatMapToInt(CharSequence::chars)
-			.anyMatch(number -> !Character.isDigit(number))) {
+				.map(item -> item.split(",")[2].replace("]", ""))
+				.flatMapToInt(CharSequence::chars)
+				.anyMatch(number -> !Character.isDigit(number))) {
 			throw new IllegalArgumentException(QUANTITY_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 	}

@@ -73,7 +73,7 @@ public class VendingMachineController {
 			vendingMachineOutputView.printPurchasingInputMessage();
 			String item = Console.readLine();
 			if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney(),
-				itemModel.getNameList(), itemModel.getPriceByName(item))) {
+					itemModel.getNameList(), itemModel.getPriceByName(item))) {
 
 				continue;
 			}
@@ -89,6 +89,6 @@ public class VendingMachineController {
 		vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
 		vendingMachineOutputView.printChangeOutputMessage();
 		vendingMachineOutputView.printVendingMachineCoins(
-			coinModel.getMinimumNumberCoins(userModel.getRemainingMoney()));
+				coinModel.getMinimumNumberCoins(userModel.getRemainingMoney()));
 	}
 }
