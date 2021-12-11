@@ -18,6 +18,10 @@ public class VendingMachine {
 		return inputMoney;
 	}
 
+	public void findMinPriceProduct() {
+
+	}
+
 	public void createChanges(int totalChanges) {
 		changes = new Changes(totalChanges);
 		changes.createRandomCoin();

@@ -13,6 +13,7 @@ public class Products {
 	private static final String PRODUCT_SPLIT_DELIMITER = ",";
 
 	private static final int OUT_OF_STOCK = 0;
+	private static final int NO_PRICE = 0;
 
 	private List<Product> productList = new ArrayList<>();
 
@@ -21,6 +22,10 @@ public class Products {
 
 	public List<Product> getProductList() {
 		return productList;
+	}
+
+	public int getMinPriceProduct() {
+		return productList.stream().mapToInt(Product::getPrice).min().orElse(NO_PRICE);
 	}
 
 	public boolean checkStockAndSellProduct(String productName) {
@@ -36,7 +41,7 @@ public class Products {
 		return productList.stream()
 			.filter(product -> product.getName().equals(productName))
 			.findFirst()
-			.orElseThrow(IllegalArgumentException::new);
+			.orElseThrow(() -> new IllegalArgumentException());
 	}
 
 	public void createProductList(String input) {

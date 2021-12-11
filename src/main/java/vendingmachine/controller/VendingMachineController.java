@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import static vendingmachine.utils.Validator.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
@@ -26,10 +27,24 @@ public class VendingMachineController {
 
 		String tempInputMoney = inputMoneyToPutInVendingMachine();
 		vendingMachine.createInputMoney(Integer.parseInt(tempInputMoney));
-		printCurrentInputMoney(vendingMachine);
 
-		String productName = inputProductNameToBuy();
-		vendingMachine.sellProduct(productName);
-
+		buyProducts();
+		showRemainChanges();
 	}
+
+	public void buyProducts() {
+		while (isValidToBuyProduct(vendingMachine)) {
+			printCurrentInputMoney(vendingMachine);
+			String productName = inputProductNameToBuy();
+			vendingMachine.sellProduct(productName);
+		}
+	}
+
+	public void showRemainChanges() {
+		printCurrentInputMoney(vendingMachine);
+	}
+
+
+
+
 }
