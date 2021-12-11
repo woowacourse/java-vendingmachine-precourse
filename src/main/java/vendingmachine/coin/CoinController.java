@@ -7,10 +7,6 @@ import java.util.stream.Collectors;
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 public class CoinController {
 
-    public CoinController(){
-    }
-
-
     private List<Integer> getPossibleAmountList(int money){
         return Arrays.stream(Coin.values())
                 .map(Coin::getAmount)

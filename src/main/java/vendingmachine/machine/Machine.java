@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 
 public class Machine {
     private Map<Coin, Integer> coins;

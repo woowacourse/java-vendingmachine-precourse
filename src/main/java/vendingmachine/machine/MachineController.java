@@ -8,7 +8,7 @@ import java.util.Map;
 public class MachineController {
     private final CoinController coinController = new CoinController();
 
-    private void makeCoins(Machine machine,int money) {
+    public void makeCoins(Machine machine,int money) {
         Map<Coin, Integer> coins = machine.getCoins();
         while( money > 0 ){
             Coin coin = coinController.pickPossibleRandomCoin(money);
@@ -16,4 +16,6 @@ public class MachineController {
             money-=coin.getAmount();
         }
     }
+
+
 }
