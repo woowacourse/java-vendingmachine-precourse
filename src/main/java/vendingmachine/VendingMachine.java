@@ -38,8 +38,6 @@ public class VendingMachine {
                 System.out.println();
                 System.out.println(String.format("투입 금액: %d", this.cashManager.getRemainCash()));
 
-                System.out.println("Remiancahs: " + this.cashManager.getRemainCash());
-                System.out.println("minprice: " + this.productManager.getMinPrice());
                 if (!this.productManager.isProductAvailable() || this.cashManager.getRemainCash() < this.productManager.getMinPrice()) {
                     break;
                 }
