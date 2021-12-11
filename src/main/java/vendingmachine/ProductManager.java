@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class ProductManager {
     private HashMap<String, Integer> products = new HashMap<>();
@@ -8,8 +9,8 @@ public class ProductManager {
     public ProductManager() {
     }
 
-    public void addProduct(Product product, int amount) throws MyIllegalArgumentException{
-        if(amount < 100) {
+    public void addProduct(Product product, int amount) throws MyIllegalArgumentException {
+        if (amount < 100) {
             throw new MyIllegalArgumentException("Price of product must be positive integer equal or higher than 100");
         }
 
@@ -34,5 +35,15 @@ public class ProductManager {
         }
 
         products.put(productName, Integer.max(0, products.get(productName) - 1));
+    }
+
+    public int getMinPrice() {
+        int ret = Integer.MAX_VALUE;
+
+        for (Map.Entry<String, Integer> entry : products.entrySet()) {
+            ret = Integer.min(ret, entry.getValue());
+        }
+
+        return ret;
     }
 }
