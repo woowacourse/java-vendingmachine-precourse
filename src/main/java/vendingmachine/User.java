@@ -3,9 +3,9 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 
 public class User {
-    String input;
-    String ERROR_MESSAGE;
-    int machineBalance;
+    private String input;
+    private String ERROR_MESSAGE;
+    private int machineBalance;
 
     public boolean inputMachineBalance() {
         try {
@@ -52,6 +52,9 @@ public class User {
             ERROR_MESSAGE = Message.ERROR_MACHINE_BALANCE_MULTIPLE_OF_TEN;
             throw new IllegalArgumentException();
         }
+    }
+    public int getMachineBalance() {
+        return machineBalance;
     }
 
 
