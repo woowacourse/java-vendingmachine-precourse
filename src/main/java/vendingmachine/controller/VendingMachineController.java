@@ -19,6 +19,7 @@ public class VendingMachineController {
 	private ItemService itemService;
 	private MoneyService moneyService;
 	private List<Coin> coins;
+	private List<Item> items;
 
 	public VendingMachineController() {
 		inputView = new InputView();
@@ -31,7 +32,7 @@ public class VendingMachineController {
 		int savedMoney = moneyService.getSavedMoney();
 		coins = Coin.init();
 		HashMap<Coin, Integer> savedCoins = coinService.getRandomCoins(coins, savedMoney);
-		List<Item> items = itemService.getItems();
+		items = itemService.getItems();
 		int customerMoney = moneyService.getCustomerMoney();
 	}
 }
