@@ -2,26 +2,18 @@ package vendingmachine.Controller;
 
 import vendingmachine.Controller.Run.Activate;
 import vendingmachine.Controller.Run.Change;
-import vendingmachine.Controller.Run.Init;
-import vendingmachine.View.OutputView;
+import vendingmachine.Model.VendingMachine;
 
 public class MachineController {
-	public static int userMoney;
-	public static Init init;
+	public VendingMachine vendingMachine;
 
-	public static void operate() {
-		init = new Init();
-
-		setUserMoney();
-		OutputView.printEmpty();
-
-		Activate activate = new Activate(userMoney);
-		userMoney = activate.getUserMoney();
-
-		new Change(init.machineCoins, userMoney);
+	public MachineController(VendingMachine vendingMachine) {
+		this.vendingMachine = vendingMachine;
 	}
 
-	public static void setUserMoney() {
-		userMoney = InputController.setUserMoney();
+	public void operate() {
+		vendingMachine.init();
+		new Activate(vendingMachine);
+		new Change(vendingMachine);
 	}
 }

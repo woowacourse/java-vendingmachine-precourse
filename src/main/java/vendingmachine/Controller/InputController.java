@@ -1,9 +1,10 @@
 package vendingmachine.Controller;
 
-import vendingmachine.Model.Validator.MoneyValidator;
-import vendingmachine.Model.Validator.NameValidator;
-import vendingmachine.Model.Validator.ProductValidator;
-import vendingmachine.Model.Validator.SellValidator;
+import vendingmachine.Model.VendingMachine;
+import vendingmachine.Utils.Validator.MoneyValidator;
+import vendingmachine.Utils.Validator.NameValidator;
+import vendingmachine.Utils.Validator.ProductValidator;
+import vendingmachine.Utils.Validator.SellValidator;
 import vendingmachine.View.InputView;
 
 public class InputController {
@@ -37,15 +38,15 @@ public class InputController {
 		}
 	}
 
-	public static String setWantedProduct(String[] names) {
+	public static String setWantedProduct(VendingMachine vendingMachine) {
 		try {
 			String name = InputView.buyProductNameInput();
-			new NameValidator(name, names);
-			new SellValidator(name);
+			new NameValidator(name, vendingMachine.productList.getNames());
+			new SellValidator(vendingMachine.productList.find(name), vendingMachine.userMoney);
 			return name;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return setWantedProduct(names);
+			return setWantedProduct(vendingMachine);
 		}
 	}
 }

@@ -1,10 +1,12 @@
 package vendingmachine;
 
 import vendingmachine.Controller.MachineController;
+import vendingmachine.Model.VendingMachine;
 
 public class Application {
 	public static void main(String[] args) {
-		// TODO: 프로그램 구현
-		MachineController.operate();
+		VendingMachine vendingMachine = new VendingMachine();
+		MachineController machineController = new MachineController(vendingMachine);
+		machineController.operate();
 	}
 }
