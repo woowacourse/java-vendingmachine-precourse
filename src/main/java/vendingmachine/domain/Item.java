@@ -30,4 +30,5 @@ public class Item {
 	public boolean isEnoughMoneyForPurchasing(int remainingMoney) {
 		return this.price <= remainingMoney;
 	}
+
 }

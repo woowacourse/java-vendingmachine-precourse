@@ -7,14 +7,16 @@ import vendingmachine.domain.Item;
 
 public class PurchaseInputValidator {
 
-	public void validateItem(Item selectedItem, int remainingMoney) {
+	public boolean validateItem(Item selectedItem, int remainingMoney) {
 		try {
 			isExistsItem(selectedItem);
 			isEnoughItem(selectedItem);
 			isEnoughMoney(selectedItem, remainingMoney);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
+			return false;
 		}
+		return true;
 	}
 
 	private void isExistsItem(Item selectedItem) {

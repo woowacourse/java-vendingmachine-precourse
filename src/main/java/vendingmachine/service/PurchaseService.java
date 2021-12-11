@@ -18,12 +18,23 @@ public class PurchaseService {
 	}
 
 	public int purchaseItem(List<Item> items, int remainingMoney) {
-		String itemName = inputView.inputItemName();
-		Item selectedItem = items.stream()
-			.filter(item -> item.getName().equals(itemName))
-			.findAny()
-			.orElse(null);
-		purchaseInputValidator.validateItem(selectedItem, remainingMoney);
+		Item item = getItem(items, remainingMoney);
+	}
+
+	private Item getItem(List<Item> items, int remainingMoney) {
+		boolean isValidItem;
+		String itemName;
+		Item selectedItem;
+		do {
+			itemName = inputView.inputItemName();
+			String finalItemName = itemName;
+			selectedItem = items.stream()
+				.filter(item -> item.getName().equals(finalItemName))
+				.findAny()
+				.orElse(null);
+			isValidItem = purchaseInputValidator.validateItem(selectedItem, remainingMoney);
+		} while (!isValidItem);
+		return selectedItem;
 	}
 
 }
