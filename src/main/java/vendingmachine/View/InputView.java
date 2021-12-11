@@ -13,4 +13,9 @@ public class InputView {
         System.out.println(InputConstant.PLEASE_INPUT_PRODUCTS);
         return Console.readLine();
     }
+
+    public static String getInputAmount() {
+        System.out.println(InputConstant.PLEASE_INPUT_INPUT_AMOUNT);
+        return Console.readLine();
+    }
 }

@@ -13,4 +13,6 @@ public class DomainConstant {
     public static final int COST_MUST_BE_DIVIDED = 10;
 
     public static final int MINIMUM_NUMBER_OF_COUNT = 0;
+
+    public static final int MINIMUM_NUMBER_OF_INPUT_AMOUNT = 0;
 }
