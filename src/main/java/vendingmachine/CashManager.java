@@ -22,6 +22,9 @@ public class CashManager {
         sb.append("자판기가 보유한 동전").append(System.lineSeparator());
 
         for (Coin coin : Coin.values()) {
+            if (!this.vault.containsKey(coin)) {
+                continue;
+            }
             sb.append(coin.getAmount()).append("원 - ");
             sb.append(this.vault.get(coin)).append("개").append(System.lineSeparator());
         }
@@ -61,13 +64,15 @@ public class CashManager {
         HashMap<Coin, Integer> coins = new HashMap<>();
 
         for (Coin coin : Coin.values()) {
-            if (this.vault.get(coin) < 1 || this.remainCash < coin.getAmount()) {
-                continue;
-            }
+            while (this.vault.get(coin) > 0 && this.remainCash >= coin.getAmount()) {
+                if(!coins.containsKey(coin)) {
+                    coins.put(coin, 0);
+                }
 
-            this.vault.put(coin, this.vault.get(coin) - this.remainCash / coin.getAmount());
-            coins.put(coin, this.remainCash / coin.getAmount());
-            this.remainCash -= (this.remainCash / coin.getAmount()) * coin.getAmount();
+                this.vault.put(coin, this.vault.get(coin) - 1);
+                coins.put(coin, coins.get(coin) + 1);
+                this.remainCash -= coin.getAmount();
+            }
         }
 
         CashManager ret = new CashManager();
