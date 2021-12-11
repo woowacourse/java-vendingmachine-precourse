@@ -11,6 +11,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.EnumMap;
+import java.util.StringTokenizer;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -61,11 +62,25 @@ class ApplicationTest extends NsTest {
         System.out.println("maxQuantity : " + maxQuantity);
     }
 
-    @Test
+    // @Test
     void 잔돈을_받는다() {
         CoinStorage coinStorage = 동전을_랜덤으로_생성한다();
         EnumMap<Coin, Integer> map = coinStorage.getChange(REMAIN_MONEY);
         System.out.println("잔돈 동전 목록");
         System.out.println(map.toString());
+    }
+
+    @Test
+    void 구분자_테스트() {
+        String input = "[콜라,1500,20];[사이다,1000,10]";
+        String [] splited = input.split(";");
+        for(String product : splited) {
+            System.out.println("product");
+            String [] productSplited = product.split(",");
+            for(String s : productSplited) {
+                s = s.replaceAll("\\[", "").replaceAll("\\]","");
+                System.out.println(s);
+            }
+        }
     }
 }

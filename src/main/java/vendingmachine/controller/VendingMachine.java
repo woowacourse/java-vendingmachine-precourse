@@ -23,7 +23,7 @@ public class VendingMachine {
 
 	private void init() {
 		initCoinStorage();
-		// TODO : 상품 입력 받기
+		initProductList();
 		// TODO : 투입 금액 입력 받기
 	}
 
@@ -40,6 +40,10 @@ public class VendingMachine {
 			int quantity = vendingService.getCoinStorageQuantity(coin);
 			outputManager.notifyStorageCoinInLine(coin, quantity);
 		}
+	}
+
+	private void initProductList() {
+		vendingService.initProducts(inputManager.getProductList());
 	}
 
 }

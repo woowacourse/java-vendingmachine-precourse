@@ -1,23 +1,32 @@
 package vendingmachine.view;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constants.InputConstants;
+import vendingmachine.domain.Product;
 
 public class InputManager {
-	private final Validator validator;
 	private final Converter converter;
 
 	public InputManager() {
-		this.validator = new Validator();
 		this.converter = new Converter();
 	}
 
 	public int getStorageMoney() {
+		return getMoneyNumber(InputConstants.ASK_STORAGE_MONEY);
+	}
+
+	public int getUserMoney() {
+		return getMoneyNumber(InputConstants.ASK_USER_MONEY);
+	}
+
+	public int getMoneyNumber(String askMessage) {
 		int money = -1;
 		while(true) {
-			print(InputConstants.ASK_STORAGE_MONEY);
+			print(askMessage);
 			String inputString = Console.readLine();
-			money = validateAndReturnNumber(inputString);
+			money = validateMoneyAndReturn(inputString);
 			if(money != -1) {
 				break;
 			}
@@ -25,20 +34,20 @@ public class InputManager {
 		return money;
 	}
 
-	private int validateAndReturnNumber(String inputString) {
-		if(checkErrorWithStorageMoneySize(inputString)) {
+	private int validateMoneyAndReturn(String inputString) {
+		if(checkErrorWithMoneyNumber(inputString)) {
 			return -1;
 		}
 		int money = converter.convertToInt(inputString);
-		if(checkErrorWithStorageMoneyFormat(money)) {
+		if(checkErrorWithMoneyFormat(money)) {
 			return -1;
 		}
 		return money;
 	}
 
-	private boolean checkErrorWithStorageMoneySize(String inputString) {
+	private boolean checkErrorWithMoneyNumber(String inputString) {
 		try {
-			validator.checkNumberString(inputString);
+			converter.checkNumberString(inputString);
 		}catch(IllegalArgumentException e) {
 			print(getErrorMessage(InputConstants.ERROR_STORAGE_MONEY));
 			return true;
@@ -46,14 +55,38 @@ public class InputManager {
 		return false;
 	}
 
-	private boolean checkErrorWithStorageMoneyFormat(int number) {
+	private boolean checkErrorWithMoneyFormat(int number) {
 		try {
-			validator.checkDivisionByTen(number);
+			converter.checkDivisionByTen(number);
 		}catch (IllegalArgumentException e) {
-			print(getErrorMessage(InputConstants.ERROR_STORAGE_MONEY_DIVISION));
+			print(getErrorMessage(InputConstants.ERROR_MONEY_DIVISION));
 			return true;
 		}
 		return false;
+	}
+
+	public List<Product> getProductList() {
+		List<Product> productList = null;
+		while(true) {
+			print(InputConstants.ASK_PRODUCT_LIST);
+			String inputString = Console.readLine();
+			productList = convertToProductList(inputString);
+			if(productList != null) {
+				break;
+			}
+		}
+		return productList;
+	}
+
+	private List<Product> convertToProductList(String inputString) {
+		List<Product> productList;
+		try {
+			productList = converter.convertToProductList(inputString);
+		}catch (IllegalArgumentException e) {
+			print(getErrorMessage(InputConstants.ERROR_PRODUCT_LIST));
+			return null;
+		}
+		return productList;
 	}
 
 	private void print(String message) {
