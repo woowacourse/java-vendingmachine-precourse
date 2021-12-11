@@ -6,6 +6,7 @@
   - missionutils.Console의 readLine()을 활용한다.
   - 금액이 숫자인지 검증해야한다.
   - 동전의 최소값은 10원이기에 10원보다 큰지 검증해야 한다.
+  - 동전의 최소값은 10원이기에 10원으로 나누어떨어지는지 검증해야 한다.
   
 - 입력받은 금액으로 자판기가 보유하고 있는 동전을 무작위로 생성하는 기능.
   - Random 값 추출은 missionutils.Randoms의 pickNumberinList()를 활용한다.
