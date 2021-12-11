@@ -10,6 +10,24 @@ public class VendingMachineController {
 
     public void run() {
         prepareChange();
+        prepareMerchandise();
+        preparePurchaseAmount();
+        buyMerchandise();
+        OutputView.returnChanges(vendingMachine.calculateChangeToCustomer());
+    }
+
+    private void preparePurchaseAmount() {
+        vendingMachine.putMoney(InputView.requireMoney());
+    }
+
+    private void prepareMerchandise() {
+        try {
+            vendingMachine.setMerchandise(InputView.requireVendingMachineMerchandiseInfo());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            prepareMerchandise();
+            return;
+        }
     }
 
     private void prepareChange() {
@@ -21,5 +39,23 @@ public class VendingMachineController {
             return;
         }
         OutputView.printChangesState(vendingMachine.getChanges());
+    }
+
+    private void buyMerchandise() {
+        while (vendingMachine.canBuySomething() && !vendingMachine.soldOut()) {
+            OutputView.printExistMoney(vendingMachine.money());
+            buyTargetMerchandise();
+        }
+        OutputView.printExistMoney(vendingMachine.money());
+    }
+
+    private void buyTargetMerchandise() {
+        try {
+            vendingMachine.buyMerchandise(InputView.requireMerchandise());
+        } catch (IllegalArgumentException exception) {
+            OutputView.printErrorMessage(exception.getMessage());
+            buyTargetMerchandise();
+            return;
+        }
     }
 }
