@@ -2,7 +2,7 @@ package vendingmachine.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -53,7 +53,7 @@ public class CoinModel {
 	}
 
 	private Map<Integer, Integer> makeMonetaryUnitMap(List<Integer> numberOfCoins) {
-		Map<Integer, Integer> numberOfMonetaryUnit = new HashMap<>();
+		Map<Integer, Integer> numberOfMonetaryUnit = new LinkedHashMap<>();
 		for (int i = 0; i < coinStorage.getNumberOfMonetaryUnitType(); i++) {
 			numberOfMonetaryUnit.put(CoinStorage.MONETARY_UNIT_LIST.get(i), numberOfCoins.get(i));
 		}
