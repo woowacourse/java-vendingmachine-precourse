@@ -106,4 +106,15 @@ public class Menu {
 	public int getCount() {
 		return count;
 	}
+
+	public void sold() {
+		if (isSoldOut()) {
+			throw new IllegalArgumentException("[ERROR] 품절 상품입니다.");
+		}
+		count--;
+	}
+
+	private boolean isSoldOut() {
+		return count == 0;
+	}
 }
