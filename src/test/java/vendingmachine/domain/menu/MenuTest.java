@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.menu;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import vendingmachine.domain.menu.Menu;
 import vendingmachine.exceptions.NotDivisibleByMinPriceCoinException;
 
 class MenuTest {

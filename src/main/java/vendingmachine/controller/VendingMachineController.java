@@ -11,15 +11,25 @@ public class VendingMachineController {
 	public void init() {
 		String initialLeftMoney = InputView.getInitialLeftMoney();
 		try {
-			VendingMachine vendingMachine = VendingMachine.from(initialLeftMoney);
-			Coins leftCoins = vendingMachine.getLeftCoins();
+			Coins leftCoins = Coins.generateCoinsRandomlyFromTotalAmount(initialLeftMoney);
 			OutputView.showInitialLeftCoins(leftCoins);
 
-			String menuInfos = InputView.getMenuInfo();
-			Menus menus = Menus.from(menuInfos);
+			Menus menus = initMenus();
+
+			VendingMachine vendingMachine = new VendingMachine(leftCoins, menus);
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			init();
+		}
+	}
+
+	private Menus initMenus() {
+		try {
+			String menuInfos = InputView.getMenuInfo();
+			return Menus.from(menuInfos);
+		} catch (Exception e) {
+			ErrorView.printErrorMesasge(e.getMessage());
+			return initMenus();
 		}
 	}
 }

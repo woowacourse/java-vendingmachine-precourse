@@ -1,12 +1,10 @@
-package vendingmachine.domain;
+package vendingmachine.domain.coin;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
-
-import vendingmachine.domain.coin.Coin;
 
 class CoinTest {
 
