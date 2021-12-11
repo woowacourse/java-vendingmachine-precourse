@@ -19,7 +19,7 @@ public class MachineController {
 		machine.makeCoins();
 		outputView.printMachineCoins(machine);
 		Items items = getItems();
-		machine.enrollItems(items);
+		machine.setItems(items);
 		activateMachine(machine);
 	}
 

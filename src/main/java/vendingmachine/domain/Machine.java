@@ -12,12 +12,18 @@ public class Machine {
 
 	public void makeCoins() {
 		coins.makeCoins(money);
-		if (coins == null) {
-			System.out.println("1");
-		}
 	}
 
-	public void enrollItems(Items items) {
+	public void sellItem(String buyItem) {
+		items.sell(buyItem);
+	}
+
+	public Coins calculateChange(int change) {
+		Coins changeCoin = this.coins.calculateChange(change);
+		return changeCoin;
+	}
+
+	public void setItems(Items items) {
 		this.items = items;
 	}
 
@@ -46,18 +52,5 @@ public class Machine {
 
 	public int getPrice(String itemName) {
 		return items.getPrice(itemName);
-	}
-
-	public void sellItem(String buyItem) {
-		items.sell(buyItem);
-	}
-
-	public void printItems() {
-		System.out.println(items.toString());
-	}
-
-	public Coins calculateChange(int change) {
-		Coins changeCoin = this.coins.calculateChange(change);
-		return changeCoin;
 	}
 }

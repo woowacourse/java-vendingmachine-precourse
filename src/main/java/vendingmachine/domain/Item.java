@@ -26,13 +26,4 @@ public class Item {
 	public void sellItem() {
 		this.quantity--;
 	}
-
-	@Override
-	public String toString() {
-		return "Item{" +
-			"itemName='" + itemName + '\'' +
-			", price=" + price +
-			", quantity=" + quantity +
-			'}';
-	}
 }

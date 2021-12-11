@@ -28,6 +28,14 @@ public class Items {
 		return true;
 	}
 
+	public void sell(String buyItem) {
+		for (Item item : items) {
+			if (item.getItemName().equals(buyItem)) {
+				item.sellItem();
+			}
+		}
+	}
+
 	public boolean contains(String itemName) {
 		for (Item item : items) {
 			if (item.getItemName().equals(itemName)) {
@@ -55,18 +63,5 @@ public class Items {
 		return -1;
 	}
 
-	@Override
-	public String toString() {
-		return "Items{" +
-			"items=" + items +
-			'}';
-	}
 
-	public void sell(String buyItem) {
-		for (Item item : items) {
-			if (item.getItemName().equals(buyItem)) {
-				item.sellItem();
-			}
-		}
-	}
 }
