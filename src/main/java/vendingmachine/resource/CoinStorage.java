@@ -13,9 +13,11 @@ public class CoinStorage {
 
 	private static final CoinStorage coinStorage = new CoinStorage();
 
-	private final List<Coin> coins = new ArrayList<>();
+	private final List<Coin> coins;
 
-	private CoinStorage() {}
+	private CoinStorage() {
+		coins = new ArrayList<>();
+	}
 
 	public static CoinStorage getCoinStorage() {
 		return coinStorage;

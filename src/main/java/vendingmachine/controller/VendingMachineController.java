@@ -10,6 +10,7 @@ import vendingmachine.view.VendingMachineOutputView;
 
 public class VendingMachineController {
 	private final static VendingMachineController vendingMachineController = new VendingMachineController();
+
 	private final VendingMachineOutputView vendingMachineOutputView;
 	private final InputValidator inputValidator;
 	private final QueryValidator queryValidator;

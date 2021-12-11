@@ -1,6 +1,5 @@
 package vendingmachine.model;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -39,7 +38,7 @@ public class CoinModel {
 
 	public Map<Integer, Integer> getMinimumNumberCoins(int remainingMoney) {
 		Map<Integer, Integer> numberOfEachCoin = makeCoinTypeMap(coinStorage.getNumberOfCoins());
-		Map<Integer, Integer> change = makeCoinTypeMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
+		Map<Integer, Integer> change = makeCoinTypeMap(Arrays.asList(0, 0, 0, 0));
 		for (int coinType : numberOfEachCoin.keySet()) {
 			remainingMoney = makeChangeForEachCoin(remainingMoney, numberOfEachCoin, change, coinType);
 		}
