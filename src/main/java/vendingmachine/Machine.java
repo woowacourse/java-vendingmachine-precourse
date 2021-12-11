@@ -16,6 +16,7 @@ public class Machine {
         showMachineCoins();
         goods();
         amountInput();
+        purchase();
     }
     private void balance() {
         boolean check = false;
@@ -75,15 +76,17 @@ public class Machine {
             System.out.println(Message.INPUT_BUY_PRODUCT);
             check = user.inputUserGoods();
         }
+        user.userPurchase();
     }
-    private void availablePurchase() {
+    private void purchase() {
         boolean check = false;
         while (!check) {
+            user.showRemainingAmount();
             check = user.availablePurchase();
             if (!check) {
                 buyGoods();
             }
         }
-    }
 
+    }
 }

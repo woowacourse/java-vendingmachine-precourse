@@ -183,4 +183,8 @@ public class User {
             throw new IllegalArgumentException();
         }
     }
+    public void userPurchase() {
+        productQuantities.put(input, productQuantities.get(input) - 1);
+        userAmount -= productPrices.get(input);
+    }
 }
