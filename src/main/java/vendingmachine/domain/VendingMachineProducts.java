@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import static constants.VendingMachineConstants.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class VendingMachineProducts {
@@ -19,11 +20,11 @@ public class VendingMachineProducts {
 	}
 
 	public Integer getLowestPrice() {
-		int lowPrice = Integer.MAX_VALUE;
-		for (VendingMachineProduct product : products) {
-			lowPrice = Math.min(product.getPrice(), lowPrice);
-		}
-		return lowPrice;
+		return products.stream()
+			.filter(VendingMachineProduct::isExist)
+			.map(VendingMachineProduct::getPrice)
+			.min(Comparator.naturalOrder())
+			.orElse(0);
 	}
 
 	public boolean hasProduct() {

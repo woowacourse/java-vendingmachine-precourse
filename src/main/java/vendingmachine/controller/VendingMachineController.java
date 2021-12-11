@@ -73,7 +73,7 @@ public class VendingMachineController {
 	}
 
 	private boolean canBuyProduct() {
-		return user.isEnoughMoney(vendingMachineProducts.getLowestPrice()) && vendingMachineProducts.hasProduct();
+		return vendingMachineProducts.hasProduct() && user.isEnoughMoney(vendingMachineProducts.getLowestPrice());
 	}
 
 	private void getChange() {
