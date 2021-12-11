@@ -2,6 +2,8 @@ package vendingmachine.model;
 
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.view.OutputView;
@@ -21,8 +23,8 @@ public class CoinList {
 		hashMap.put(Coin.COIN_10, 0);
 	}
 
-	public LinkedHashMap<Coin, Integer> getHashMap() {
-		return hashMap;
+	public Set<Map.Entry<Coin, Integer>> getHashMap() {
+		return hashMap.entrySet();
 	}
 
 	public void init() {

@@ -1,6 +1,5 @@
 package vendingmachine.model;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class VendingMachine {
@@ -42,8 +41,7 @@ public class VendingMachine {
 	}
 
 	public Changes createChanges() {
-		LinkedHashMap<Coin, Integer> hashMap = coinList.getHashMap();
-		for (Map.Entry<Coin, Integer> entry : hashMap.entrySet()) {
+		for (Map.Entry<Coin, Integer> entry : coinList.getHashMap()) {
 			if (deposit == 0) {
 				break;
 			}
