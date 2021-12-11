@@ -21,7 +21,10 @@ public class Simulator {
         printHoldingCoins(coinContainer);
 
         List<Product> productList = inputProductInfo();
+        ProductContainer productContainer = new ProductContainer(productList);
         int balance = inputBalance();
+
+        VendingMachine vendingMachine = new VendingMachine(balance, productContainer, coinContainer);
     }
 
     public int inputHoldingAmount() {
@@ -80,5 +83,9 @@ public class Simulator {
         InputValidator.validateInteger(balance);
 
         return Integer.parseInt(balance);
+    }
+
+    public void printBalance(VendingMachine vendingMachine) {
+        System.out.println("투입 금액: " + vendingMachine.getBalance() + WON);
     }
 }
