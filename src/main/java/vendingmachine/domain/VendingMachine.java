@@ -16,8 +16,8 @@ public class VendingMachine {
         this.money = money;
     }
 
-    public void createChange() {
-        //랜덤하게 생성하는 코드 필요
+    public void createChange(Change change) {
+        this.change = change;
     }
 
     public void inputProducts(List<Product> productList) {
