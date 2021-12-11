@@ -32,4 +32,8 @@ public class VendingMachine {
 	public Money getInsertMoney() {
 		return insertMoney;
 	}
+
+	public void purchase(String productName) {
+		products.purchaseProduct(productName);
+	}
 }

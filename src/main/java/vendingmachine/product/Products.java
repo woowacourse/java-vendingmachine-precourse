@@ -6,6 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 
 import vendingmachine.Notification;
+import vendingmachine.exception.DomainNotFoundException;
 
 public class Products {
 	private final Map<String, Product> products;
@@ -46,5 +47,15 @@ public class Products {
 	// 필요없다면 최종에 제거하기
 	public Map<String, Product> getProducts() {
 		return products;
+	}
+
+	public void purchaseProduct(String productName) {
+		validateProductName(productName);
+	}
+
+	public void validateProductName(String productName) {
+		if(!products.containsKey(productName)) {
+			throw new DomainNotFoundException(Notification.PRODUCT_NOT_FOUND.getMessage());
+		}
 	}
 }
