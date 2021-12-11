@@ -14,24 +14,24 @@ class ValidatorTest {
     @Test
     void 자판기_문자_입력_예외_발생() {
         assertThrows(IllegalArgumentException.class,
-                () -> validator.isValidVendingmachineChange("a100"));
+                () -> validator.isValidMoney("a100"));
     }
 
     @Test
     void 자판기_음수_입력_예외_발생() {
         assertThrows(IllegalArgumentException.class,
-                () -> validator.isValidVendingmachineChange("-1"));
+                () -> validator.isValidMoney("-1"));
     }
 
     @Test
     void 자판기_나눠지지_않는_수_입력_예외_발생() {
         assertThrows(IllegalArgumentException.class,
-                () -> validator.isValidVendingmachineChange("11"));
+                () -> validator.isValidMoney("11"));
     }
 
     @Test
     void 자판기_올바른_입력() {
-        assertThat(validator.isValidVendingmachineChange("1530"));
+        assertThat(validator.isValidMoney("1530"));
     }
 
     @Test

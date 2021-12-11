@@ -5,8 +5,8 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Validator {
-    private static final String ERROR_VENDINGMACHINE_SENETENCE = "[ERROR] 올바른 금액이 아닙니다.";
-    private static final String ERROR_PRODUCT_SENETENCE = "[ERROR] 올바른 상품 정보를 입력해주십시오.";
+    private static final String MONEY_ERROR_SENETENCE = "[ERROR] 금액은 숫자여야 합니다.";
+    private static final String PRODUCT_ERROR_SENETENCE = "[ERROR] 올바른 상품 정보를 입력해주십시오.";
     private static final String DIVISOR_PRODUCT_LIST = ";";
     private static final String DIVISOR_PRODUCT = ",";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
@@ -16,18 +16,18 @@ public class Validator {
     private static final int CLOSE_BRACKET = ']';
     private static final int NEGATIVE_NUMBER = -1;
 
-    public boolean isValidVendingmachineChange(String input) {
+    public boolean isValidMoney(String input) {
         if (!isNumber(input)
                 || !isNaturalNumber(input)
                 || !isDivideByDivisor(input)) {
-            throw new IllegalArgumentException(ERROR_VENDINGMACHINE_SENETENCE);
+            throw new IllegalArgumentException(MONEY_ERROR_SENETENCE);
         }
         return true;
     }
 
     public boolean isValidProduct(String input) {
         if (!isValidProductList(input)) {
-            throw new IllegalArgumentException(ERROR_PRODUCT_SENETENCE);
+            throw new IllegalArgumentException(PRODUCT_ERROR_SENETENCE);
         }
         return true;
     }
