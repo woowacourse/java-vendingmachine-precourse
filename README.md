@@ -10,5 +10,5 @@
     - [ ] removeProduct
 - [ ] CashManager   
     - [ ] return changes
-- [ ] Coin   
+- [x] Coin   
 - [ ] MyIllegalArgumentException
