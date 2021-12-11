@@ -16,4 +16,6 @@ public class Message {
 	public static String AMOUNT_OUTPUT_FORMAT = "원";
 
 	public static String PURCHASE_ITEM_NAME_INPUT_MESSAGE = "구매할 상품명을 입력해 주세요.";
+
+	public static String CHANGE_MESSAGE = "잔돈";
 }

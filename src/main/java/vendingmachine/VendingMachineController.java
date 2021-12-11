@@ -3,6 +3,7 @@ package vendingmachine;
 import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.validator.AmountValidator.*;
 
+import vendingmachine.domain.Coins;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.Input;
 import vendingmachine.view.Output;
@@ -61,6 +62,8 @@ public class VendingMachineController {
 			String itemName = inputItemName();
 			amount -= vendingMachine.purchaseItem(itemName);
 		}
+
+		returnChange(amount);
 	}
 
 	private String inputItemName() {
@@ -73,5 +76,11 @@ public class VendingMachineController {
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+
+	private void returnChange(int amount) {
+		Output.inputAmount(amount);
+		Coins change = vendingMachine.returnCoins(amount);
+		Output.change(change);
 	}
 }
