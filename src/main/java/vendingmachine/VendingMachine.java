@@ -41,4 +41,8 @@ public class VendingMachine {
     public boolean isAllSoldOut() {
         return productContainer.isAllSoldOut();
     }
+
+    public boolean isHavingBalanceToBuy() {
+        return balance >= productContainer.getMinimumPrice();
+    }
 }
