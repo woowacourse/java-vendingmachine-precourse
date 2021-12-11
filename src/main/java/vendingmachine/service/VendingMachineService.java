@@ -38,6 +38,8 @@ public class VendingMachineService {
 
 	public void postProductInfo(String inputStr) {
 		//TODO: Validation 들 처리
+
+		vendingMachine.initProducts();
 		Validation.validateNull(inputStr);
 		Validation.validateProductFormat(inputStr);
 		addProducts(inputStr);
@@ -58,7 +60,6 @@ public class VendingMachineService {
 	public boolean postProductName(String inputStr) {
 		//TODO: Validation 들 처리
 		Validation.validateNull(inputStr);
-
 
 		result.init();
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);

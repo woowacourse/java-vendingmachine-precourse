@@ -23,6 +23,10 @@ public class VendingMachine {
 		coinMap.put(Coin.COIN_10.getAmount(), 0);
 	}
 
+	public void initProducts() {
+		products = new ArrayList<>();
+	}
+
 	public int getSumCoinAmount() {
 		int sum = 0;
 		for (Integer i : coinMap.keySet()) {
