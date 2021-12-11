@@ -1,4 +1,6 @@
-package vendingmachine.money;
+package vendingmachine.payments;
+
+import vendingmachine.money.Money;
 
 public class Payments {
 	private static final String PREFIX = "자판기에 투입하는 ";
