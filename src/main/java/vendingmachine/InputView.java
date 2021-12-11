@@ -21,4 +21,9 @@ public class InputView {
             products.add(new Product(str.split(",")[0], Integer.parseInt(str.split(",")[1]), Integer.parseInt(str.split(",")[2])));
         }
     }
+
+    public int inputMoney() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        return Integer.parseInt(Console.readLine());
+    }
 }
