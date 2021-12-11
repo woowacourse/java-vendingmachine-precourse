@@ -20,4 +20,8 @@ public class OutputView {
 		System.out.println(holdingCoinStatus);
 	}
 
+	public static void printItemsRequest() {
+		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+	}
+
 }
