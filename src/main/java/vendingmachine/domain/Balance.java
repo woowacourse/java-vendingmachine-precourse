@@ -7,6 +7,10 @@ public class Balance {
 		this.balance = balance;
 	}
 
+	public void reduceBalance(int price) {
+		balance -= price;
+	}
+
 	public int getBalance() {
 		return balance;
 	}

@@ -4,6 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+import vendingmachine.domain.Balance;
+import vendingmachine.domain.Items;
+
 public class Validation {
 	private static final String ERROR = "[ERROR] ";
 	private static final String NOT_NUMBER_ERROR = "금액은 숫자여야 합니다.";
@@ -15,8 +18,11 @@ public class Validation {
 	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,},\\d+\\]";
 	private static final String NOT_VALID_FORMAT = "입력 형식이 잘못되었습니다.";
 	private static final String INFO_DIVIDER = ",";
-	private static final String NOT_VALID_PRICE = "상품가격은 10원 단위로 나누어져야 합니다.";
-	private static final String NOT_ENOUGH_QUANTITY = "해당 상품이 부족합니다.";
+	private static final String NOT_VALID_PRICE = "상품 가격은 10원 단위로 나누어져야 합니다.";
+	private static final String NOT_VALID_QUANTITY = "상품 수량은 1개 이상이어야 합니다.";
+	private static final String NO_SUCH_ITEMS = "존재하지 않는 상품입니다.";
+	private static final String SOLD_OUT = "해당 상품은 품절입니다.";
+	private static final String NOT_ENOUGH_BALANCE = "잔액이 부족합니다.";
 
 	private static final int TEN_WON = 10;
 	private static final int ZERO_WON = 0;
@@ -93,7 +99,31 @@ public class Validation {
 
 	private static void isEnough(List<String> item) {
 		if (Integer.parseInt(item.get(QUANTITY)) <= EMPTY) {
-			throw new IllegalArgumentException(ERROR + NOT_ENOUGH_QUANTITY);
+			throw new IllegalArgumentException(ERROR + NOT_VALID_QUANTITY);
+		}
+	}
+
+	public static void isValidPurchase(String itemName, Items items, Balance balance) {
+		noSuchItem(itemName, items);
+		isSoldOut(itemName, items);
+		notEnoughBalance(itemName, items, balance);
+	}
+
+	private static void noSuchItem(String itemName, Items items) {
+		if (items.noSuchItem(itemName)) {
+			throw new IllegalArgumentException(ERROR + NO_SUCH_ITEMS);
+		}
+	}
+
+	private static void isSoldOut(String itemName, Items items) {
+		if (items.notEnoughItem(itemName)) {
+			throw new IllegalArgumentException(ERROR + SOLD_OUT);
+		}
+	}
+
+	private static void notEnoughBalance(String itemName, Items items, Balance balance) {
+		if (items.notEnoughBalance(itemName, balance)) {
+			throw new IllegalArgumentException(ERROR + NOT_ENOUGH_BALANCE);
 		}
 	}
 }

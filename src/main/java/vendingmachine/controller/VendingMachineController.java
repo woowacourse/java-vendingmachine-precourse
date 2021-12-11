@@ -50,4 +50,14 @@ public class VendingMachineController {
 			initializeBalance(vendingMachine);
 		}
 	}
+
+	private void executePurchase(VendingMachine vendingMachine) {
+		String item = InputView.purchaseItem();
+		try {
+			vendingMachine.executePurchase(item);
+		} catch (IllegalArgumentException e) {
+			OutputView.showError(e.getMessage());
+			executePurchase(vendingMachine);
+		}
+	}
 }

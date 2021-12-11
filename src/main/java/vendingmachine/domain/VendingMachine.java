@@ -34,11 +34,29 @@ public class VendingMachine {
 		this.balance = new Balance(balance);
 	}
 
+	public boolean isAvailable() {
+		return balance.getBalance() >= items.getExistingCheapest();
+	}
+
+	public void executePurchase(String itemName) {
+		Validation.isValidPurchase(itemName, items, balance);
+		for (Item item : items.getItemList()) {
+			returnItem(item, itemName);
+		}
+	}
+
+	private void returnItem(Item item, String itemName) {
+		if (item.getName().equals(itemName) && item.exists()) {
+			item.reduceQuantity();
+			balance.reduceBalance(item.getPrice());
+		}
+	}
+
 	public Map<Coin, Integer> getCoins() {
 		return coins.getCoins();
 	}
 
-	public boolean isAvailable() {
-		return balance.getBalance() >= items.getExistingCheapest();
+	public int getBalance() {
+		return balance.getBalance();
 	}
 }
