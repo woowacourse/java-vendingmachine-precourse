@@ -17,6 +17,10 @@ public class CashManager {
         }
     }
 
+    public HashMap<Coin, Integer> getVault() {
+        return vault;
+    }
+
     public int getRemainCash() {
         return remainCash;
     }
