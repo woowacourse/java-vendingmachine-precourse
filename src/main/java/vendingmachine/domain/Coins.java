@@ -17,7 +17,7 @@ public class Coins {
 		return Collections.unmodifiableMap(coins);
 	}
 
-	public String toString(){
+	public String getHoldingCoinsAsText(){
 		String holdingStatus = "";
 		for (Integer amount : getReverseSortedCoinAmountKey()) {
 			holdingStatus += String.format(HOLDING_COIN_AMOUNT_TEXT, amount, coins.get(amount));
@@ -31,7 +31,7 @@ public class Coins {
 		return keys;
 	}
 
-	public String getChanges() {
+	public String getChangesAsText() {
 		String status = "";
 		for (Integer amount : getReverseSortedCoinAmountKey()) {
 			if (coins.get(amount) <= 0) {
