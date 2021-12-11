@@ -1,10 +1,7 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.exception.NotEnoughBalanceException;
 
-import java.util.*;
-import java.util.stream.Collectors;
 
 public class VendingMachine {
 
@@ -31,5 +28,9 @@ public class VendingMachine {
 
         balance -= product.getPrice();
         product.sell();
+    }
+
+    public Coins returnBalance() {
+        return coinContainer.returnBalance(balance);
     }
 }
