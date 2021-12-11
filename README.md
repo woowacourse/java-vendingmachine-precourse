@@ -2,7 +2,6 @@
    
 - [ ] VendingMachine   
     - [ ] constructor
-    - [ ] run thread   
     - [ ] buy   
   
 - [x] Product   
@@ -12,7 +11,7 @@
     - [x] constructor   
     - [x] addProduct
     - [x] removeProduct
-- [ ] CashManager   
-    - [ ] return changes
+- [x] CashManager   
+    - [x] return changes
 - [x] Coin   
 - [x] MyIllegalArgumentException
