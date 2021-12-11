@@ -10,7 +10,7 @@ import vendingmachine.view.OutputView;
 
 public class CoinBox {
 	private int holdingMoney;
-	private EnumMap<Coin, Integer> coinEnumMap = new EnumMap<Coin, Integer>(Coin.class);
+	private EnumMap<Coin, Integer> coinEnumMap = new EnumMap<>(Coin.class);
 
 	CoinBox(int holdingMoney) {
 		this.holdingMoney = holdingMoney;
@@ -48,10 +48,6 @@ public class CoinBox {
 	}
 
 	private int pickRandomCoinAmount(int money) {
-		List<Integer> coinAmountList = Arrays.asList(10, 50, 100, 500);
-		int randomCoinAmount = Randoms.pickNumberInList(coinAmountList.stream()
-			.filter(coinAmount -> coinAmount <= money)
-			.collect(Collectors.toList()));
-		return randomCoinAmount;
+		return Randoms.pickNumberInList(Coin.getAmountList(money));
 	}
 }
