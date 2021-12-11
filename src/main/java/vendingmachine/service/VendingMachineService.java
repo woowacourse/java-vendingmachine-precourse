@@ -45,7 +45,7 @@ public class VendingMachineService {
 
     public void putUserMoney(String userMoneyInput) {
         userMoney = new Price(userMoneyInput);
-        if (productRepository.cantBuyBecauseOfNoMoney(userMoney)) {
+        if (!productRepository.canBuyProduct(userMoney)) {
             throw new IllegalArgumentException(MONEY_LACK_ERROR_MESSAGE);
         }
         OutputView.showUserMoney(userMoney);
@@ -60,9 +60,10 @@ public class VendingMachineService {
     }
 
     public VendingMachineChecker isContinue() {
-        if (productRepository.cantBuyBecauseOfNoMoney(userMoney) || productRepository.hasNoQuantity()) {
+        if (!productRepository.canBuyProduct(userMoney) || productRepository.hasNoQuantity()) {
             return VendingMachineChecker.END;
         }
+        // 가지고 있는 금액으로 살 수 있는 물건이 한 개도 없다. - > end
         return VendingMachineChecker.START;
     }
 

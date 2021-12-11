@@ -51,18 +51,12 @@ public class ProductRepository {
         return priceUserWantBuying;
     }
 
-    public boolean cantBuyBecauseOfNoMoney(Price userMoney) {
+    public boolean canBuyProduct(Price userMoney) {
         int userPrice = userMoney.getPrice();
-        int cheapestPrice = productRepository.keySet()
+        return productRepository.values()
             .stream()
-            .mapToInt(this::getPrice)
-            .min()
-            .orElseThrow(() -> new IllegalArgumentException(LOGIC_ERROR_MESSAGE));
-        return userPrice < cheapestPrice; //아무것도 살 수 없는 돈
-    }
-
-    private int getPrice(String productName) {
-        return productRepository.get(productName).getPrice();
+            .filter(product -> product.getPrice() <= userPrice)
+            .anyMatch(product -> product.hasStock());
     }
 
     public boolean hasNoQuantity() {
