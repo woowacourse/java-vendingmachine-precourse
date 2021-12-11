@@ -10,6 +10,7 @@ public class ProductService {
 	public static final int INDEX_OF_NAME = 0;
 	public static final int INDEX_OF_PRICE = 1;
 	public static final int INDEX_OF_STOCK = 2;
+	public static final String FAIL_TO_FIND_MESSAGE_THROUGH_PRODUCT_NAME = "FailToFind";
 
 	private ProductRepository productRepository = ProductRepository.instance;
 
@@ -21,6 +22,16 @@ public class ProductService {
 
 			productRepository.getProductRepository().add(product);
 		}
+	}
+
+	public Product getByName(String name) {
+		for (Product product : productRepository.getProductRepository()) {
+			if (product.getName().equals(name)) {
+				return product;
+			}
+		}
+
+		return new Product(FAIL_TO_FIND_MESSAGE_THROUGH_PRODUCT_NAME, 100, 1);
 	}
 
 	public int getMinPrice() {

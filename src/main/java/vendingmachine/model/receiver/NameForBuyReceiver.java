@@ -1,6 +1,7 @@
 package vendingmachine.model.receiver;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.model.validator.NameForBuyValidator;
 
 public class NameForBuyReceiver {
 
@@ -11,7 +12,7 @@ public class NameForBuyReceiver {
 		while (rewindSwitch) {
 			name = Console.readLine();
 
-			// rewindSwitch = new NameForBuyValidator().validate(name);
+			rewindSwitch = new NameForBuyValidator().validate(name);
 		}
 
 		return name;
