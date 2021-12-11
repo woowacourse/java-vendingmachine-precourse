@@ -1,5 +1,7 @@
 package vendingmachine.utils;
 
+import static vendingmachine.utils.Constant.*;
+
 import java.util.StringTokenizer;
 
 public class ItemValidator {
@@ -11,7 +13,7 @@ public class ItemValidator {
 	public static final String ERROR_PRICE_NOT_DIVIDE_BY_10 = "[ERROR] 상품 가격은 10원으로 나누어떨어져야 합니다.";
 
 	public void validateItems(String inputValue) {
-		StringTokenizer stringTokenizer = new StringTokenizer(inputValue, ";");
+		StringTokenizer stringTokenizer = new StringTokenizer(inputValue, ITEMS_DELIMITER);
 		if (stringTokenizer.countTokens() == 0) {
 			throw new IllegalArgumentException(ERROR_EMPTY_ITEM);
 		}
@@ -21,8 +23,8 @@ public class ItemValidator {
 	}
 
 	private void validateItem(String item) {
-		item = item.replaceAll("\\[", "").replaceAll("\\]", "");
-		StringTokenizer stringTokenizer = new StringTokenizer(item, ",");
+		item = item.replaceAll(START_BRACKET, "").replaceAll(END_BRACKET, "");
+		StringTokenizer stringTokenizer = new StringTokenizer(item, ITEM_DELIMITER);
 		checkProperties(stringTokenizer);
 		String itemName = stringTokenizer.nextToken().trim();
 		String itemPrice = stringTokenizer.nextToken().trim();
@@ -32,7 +34,7 @@ public class ItemValidator {
 	}
 
 	private void checkProperties(StringTokenizer stringTokenizer) {
-		if (stringTokenizer.countTokens() != 3) {
+		if (stringTokenizer.countTokens() != NUMBER_OF_ITEM_PROPERTIES) {
 			throw new IllegalArgumentException(ERROR_NUMBER_OF_PROPERTIES);
 		}
 	}
@@ -40,7 +42,7 @@ public class ItemValidator {
 	private void checkItemPrice(String itemPrice) {
 		try {
 			int price = Integer.parseInt(itemPrice);
-			if (price < 100) {
+			if (price < MINIMUM_PRICE) {
 				throw new IllegalArgumentException(ERROR_PRICE_UNDER_100);
 			}
 			if (price % 10 != 0) {

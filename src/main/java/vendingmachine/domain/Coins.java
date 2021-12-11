@@ -1,13 +1,15 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.Constant.*;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.utils.Constant;
 
 public class Coins {
-	public static final String COIN_UNIT = "개";
 	private LinkedHashMap<Coin, Integer> coins;
 
 	public Coins() {
@@ -65,7 +67,7 @@ public class Coins {
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Coin coin : coins.keySet()) {
-			stringBuilder.append(Coin.getKoreanValue(coin)).append(" - ").append(coins.get(coin)).append(COIN_UNIT);
+			stringBuilder.append(coin.getAmount()+ WON).append(" - ").append(coins.get(coin)).append(COIN_UNIT);
 			stringBuilder.append("\n");
 		}
 		return stringBuilder.toString();
