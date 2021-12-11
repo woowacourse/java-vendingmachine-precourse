@@ -3,7 +3,6 @@ package vendingmachine.validator;
 import static vendingmachine.constants.ErrorMessages.*;
 
 import java.util.List;
-import java.util.Objects;
 
 public class QueryValidator {
 	private static final QueryValidator queryValidator = new QueryValidator();
@@ -15,8 +14,7 @@ public class QueryValidator {
 		return queryValidator;
 	}
 
-	public boolean checkBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList,
-			int price) {
+	public boolean checkBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList, int price) {
 		try {
 			checkAllBuyItemErrorExceptions(itemName, remainingMoney, nameList, price);
 		} catch (Exception e) {
@@ -26,8 +24,7 @@ public class QueryValidator {
 		return true;
 	}
 
-	private void checkAllBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList,
-			int price) {
+	private void checkAllBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList, int price) {
 		checkDontExistingItemExceptions(itemName, nameList);
 		checkNotEnoughMoneyExceptions(remainingMoney, price);
 	}

@@ -13,7 +13,7 @@ public class CoinStorage {
 
 	private static final CoinStorage coinStorage = new CoinStorage();
 
-	private List<Coin> coins = new ArrayList<>();
+	private final List<Coin> coins = new ArrayList<>();
 
 	private CoinStorage() {
 	}

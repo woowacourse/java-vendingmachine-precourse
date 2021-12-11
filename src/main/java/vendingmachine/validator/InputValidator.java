@@ -87,8 +87,7 @@ public class InputValidator {
 
 	private void checkNotSatisfiedInputFormatExceptions(String string) {
 		long wrongFormatItemCount = Arrays.stream(string.split(";"))
-				.filter(item ->
-						item.charAt(0) != '[' || item.charAt(item.length() - 1) != ']')
+				.filter(item -> item.charAt(0) != '[' || item.charAt(item.length() - 1) != ']')
 				.count();
 		if (wrongFormatItemCount > 0) {
 			throw new IllegalArgumentException(NOT_SATISFIED_INPUT_FORMAT_ERROR_MESSAGE);
