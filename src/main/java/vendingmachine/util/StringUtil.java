@@ -9,8 +9,6 @@ public class StringUtil {
     private static final String DIVISOR_PRODUCT_LIST = ";";
     private static final String DIVISOR_PRODUCT = ",";
     private static final int NEGATIVE_NUMBER = -1;
-    private static final char OPEN_BRACKET = '[';
-    private static final char CLOSE_BRACKET = ']';
 
     public boolean isStringEmpty(String str) {
         return str == null || str.isEmpty();
@@ -25,6 +23,11 @@ public class StringUtil {
     }
 
     public List<Product> convertStringToProductList(String input) {
-        return new ArrayList<>();
+        List<Product> list = new ArrayList<>();
+        for (String info : splitProductList(input)) {
+            Product product = new Product(splitProductInfo(info));
+            list.add(product);
+        }
+        return list;
     }
 }
