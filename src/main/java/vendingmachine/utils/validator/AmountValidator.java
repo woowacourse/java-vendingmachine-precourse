@@ -3,7 +3,7 @@ package vendingmachine.utils.validator;
 import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.Error.*;
 
-public class HoldingAmountValidator {
+public class AmountValidator {
 
 	public static int validateAmount(String amount, int condition) {
 		try {
