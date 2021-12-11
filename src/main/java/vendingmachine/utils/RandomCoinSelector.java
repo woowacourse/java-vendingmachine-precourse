@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
+import vendingmachine.domain.Coin;
 
 public class RandomCoinSelector {
 
