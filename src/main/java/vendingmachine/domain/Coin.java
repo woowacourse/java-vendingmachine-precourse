@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.view.ErrorMessage;
 
 public enum Coin {
 	COIN_500(500),
@@ -14,7 +15,6 @@ public enum Coin {
 	COIN_50(50),
 	COIN_10(10);
 
-	public static final int[] COIN_ARRAY = {500, 100, 50, 10};
 	private final int amount;
 
 	Coin(final int amount) {
@@ -37,22 +37,36 @@ public enum Coin {
 		return balance / amount;
 	}
 
-	public static List<Integer> getCoinList() {
-		return Arrays.stream(COIN_ARRAY)
-			.boxed()
-			.collect(Collectors.toList());
+	public static Map<Coin, Integer> decideCoinRandomly(int balance, Map<Coin, Integer> balanceMap) {
+		initializeValue(balanceMap);
+		while (balance > 0) {
+			int pickCoin = Randoms.pickNumberInList(
+				Arrays.stream(Coin.values())
+					.map(Coin::getAmount)
+						.collect(Collectors.toList())
+					);
+			if (pickCoin <= balance) {
+				balanceMap.put(Coin.getCoin(pickCoin), balanceMap.get(Coin.getCoin(pickCoin)) + 1);
+				balance -= pickCoin;
+			}
+		}
+		return balanceMap;
 	}
 
-	public static Map<Integer, Integer> decideCoinRandomly(Map<Integer, Integer> coinMap, int balance) {
-		List<Integer> coinList = getCoinList();
-		for (Integer coin : coinList) {
-			List<Integer> possibleQuantity = Coin.getPossibleQuantity(coin, balance);
-			coinMap.put(coin, Randoms.pickNumberInList(possibleQuantity));
-			balance = Coin.calculateResidue(coin, balance, coinMap.get(coin));
+	private static void initializeValue(Map<Coin, Integer> balanceMap) {
+		for (Coin coin : Coin.values()) {
+			balanceMap.put(coin, 0);
 		}
+	}
 
-		Integer lastCoin = coinList.get(coinList.size() - 1);
-		coinMap.put(lastCoin, Coin.getMaxQuantity(lastCoin, balance));
-		return coinMap;
+	public int getAmount() {
+		return amount;
+	}
+
+	public static Coin getCoin(int amount) {
+		return Arrays.stream(values())
+			.filter(coin -> coin.getAmount() == amount)
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_COIN_AMOUNT));
 	}
 }

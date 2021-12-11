@@ -18,12 +18,12 @@ public class Operation {
 		BalanceMessage.printInputMessage();
 		int balance = BalanceController.getInitialMoney();
 
-		Map<Integer, Integer> coinMap = Coin.decideCoinRandomly(new LinkedHashMap<>(), balance);
-		BalanceMessage.printCoinList(coinMap);
+		Map<Coin, Integer> balanceMap = Coin.decideCoinRandomly(balance, new LinkedHashMap<>());
+		BalanceMessage.printCoinList(balanceMap);
 
 		ItemMessage.printSettingMessage();
 		List<Item> itemList = Item.createList(ItemController.getInputItemForm());
 
-		return VendingMachine.create(coinMap, itemList);
+		return VendingMachine.create(balanceMap, itemList);
 	}
 }

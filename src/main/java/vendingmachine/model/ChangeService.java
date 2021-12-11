@@ -1,10 +1,9 @@
 package vendingmachine.model;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Consumer;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.ChangeMessage;
@@ -15,18 +14,18 @@ public class ChangeService {
 		ConsumerMessage.printCurrentStatusMessage(consumer);
 		ChangeMessage.printInProgress();
 
-		List<Integer> changeCount = makeChanges(vendingMachine.getBalanceMap(), consumer.getMoney());
-		ChangeMessage.printChanges(changeCount);
+		Map<Coin, Integer> changeMap = makeChanges(vendingMachine.getBalanceMap(), consumer.getMoney(),
+			new LinkedHashMap<>());
+		ChangeMessage.printChanges(changeMap);
 	}
 
-	private static List<Integer> makeChanges(Map<Integer, Integer> balanceMap, int money) {
-		List<Integer> coinList = Arrays.asList(500, 100, 50, 10);
-		List<Integer> changeCount = new ArrayList<>();
-		for (Integer coin : coinList) {
-			int possibleCoinNumber = Math.min(money / coin, balanceMap.get(coin));
-			changeCount.add(possibleCoinNumber);
-			money -= coin * possibleCoinNumber;
+	private static Map<Coin, Integer> makeChanges(Map<Coin, Integer> balanceMap, int money,
+		Map<Coin, Integer> changeMap) {
+		for (Map.Entry<Coin, Integer> entry : balanceMap.entrySet()) {
+			int possibleCoinNumber = Math.min(money / entry.getKey().getAmount(), entry.getValue());
+			changeMap.put(entry.getKey(), possibleCoinNumber);
+			money -= entry.getKey().getAmount() * possibleCoinNumber;
 		}
-		return changeCount;
+		return changeMap;
 	}
 }

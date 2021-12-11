@@ -37,13 +37,13 @@ class CoinTest {
 
 	@Test
 	void 보유_금액_랜덤() {
-		Map<Integer, Integer> coinMap = Coin.decideCoinRandomly(new LinkedHashMap<>(), 10000);
+		Map<Coin, Integer> balanceMap = Coin.decideCoinRandomly(10000, new LinkedHashMap<>());
 
-		assertThat(coinMap.size()).isEqualTo(Coin.values().length);
+		assertThat(balanceMap.size()).isEqualTo(Coin.values().length);
 
 		int sum = 0;
-		for (Map.Entry<Integer, Integer> entry : coinMap.entrySet()) {
-			sum += entry.getKey() * entry.getValue();
+		for (Map.Entry<Coin, Integer> entry : balanceMap.entrySet()) {
+			sum += entry.getKey().getAmount() * entry.getValue();
 		}
 		assertThat(sum).isEqualTo(10000);
 	}

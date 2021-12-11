@@ -1,7 +1,8 @@
 package vendingmachine.view;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
+
+import vendingmachine.domain.Coin;
 
 public class ChangeMessage {
 
@@ -13,14 +14,13 @@ public class ChangeMessage {
 		System.out.println(IN_PROGRESS);
 	}
 
-	public static void printChanges(List<Integer> changeCount) {
-		List<Integer> coinList = Arrays.asList(500, 100, 50, 10);
+	public static void printChanges(Map<Coin, Integer> changeMap) {
 		StringBuilder builder = new StringBuilder();
-		for (int i = 0; i < coinList.size(); i++) {
-			if (changeCount.get(i) != 0) {
-				builder.append(coinList.get(i))
+		for (Map.Entry<Coin, Integer> entry : changeMap.entrySet()) {
+			if (entry.getValue() != 0) {
+				builder.append(entry.getKey().getAmount())
 					.append(MONEY_UNIT)
-					.append(changeCount.get(i))
+					.append(entry.getValue())
 					.append(COIN_UNIT);
 			}
 		}

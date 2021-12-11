@@ -6,4 +6,5 @@ public class ErrorMessage {
 	public static final String CANNOT_FIND_ITEM = "[ERROR] 해당 상품을 찾을 수 없습니다.";
 	public static final String SOLD_OUT = "[ERROR] 해당 상품이 매진되었습니다.";
 	public static final String NOT_ENOUGH_MONEY = "[ERROR] 투입 금액이 부족합니다";
+	public static final String INVALID_COIN_AMOUNT = "[ERROR] 존재하지 않는 동전입니다.";
 }
