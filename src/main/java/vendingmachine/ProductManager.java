@@ -10,6 +10,10 @@ public class ProductManager {
     public ProductManager() {
     }
 
+    public boolean isProductExist(String name) {
+        return this.products.containsKey(name);
+    }
+
     public int getProductPrice(String productName) {
         return priceByName.get(productName);
     }
@@ -46,12 +50,13 @@ public class ProductManager {
     public int getMinPrice() {
         int ret = Integer.MAX_VALUE;
 
-        for (Map.Entry<String, Integer> entry : products.entrySet()) {
+        for (Map.Entry<String, Integer> entry : priceByName.entrySet()) {
             if (entry.getValue() < 1) {
                 continue;
             }
             ret = Integer.min(ret, entry.getValue());
         }
+
 
         return ret;
     }
