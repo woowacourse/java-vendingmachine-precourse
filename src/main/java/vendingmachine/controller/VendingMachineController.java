@@ -15,18 +15,18 @@ public class VendingMachineController {
 
     public void start() {
         initializeByAdmin();
-        useVendingMachine();
+        inputMoneyByUser();
+        buyProductsUntilEnd(VendingMachineChecker.START);
         vendingMachineService.giveChange();
     }
 
-    private void useVendingMachine() {
+    private void inputMoneyByUser() {
         try {
             String userMoneyInput = InputView.inputUserMoney();
             vendingMachineService.putUserMoney(userMoneyInput);
-            buyProductsUntilEnd(VendingMachineChecker.START);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
-            useVendingMachine();
+            inputMoneyByUser();
         }
     }
 
