@@ -13,8 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static vendingmachine.message.Error.DUPLICATED_PRODUCT_NAME;
-import static vendingmachine.message.Error.NO_SUCH_PRODUCT_EXIST;
+import static vendingmachine.message.Error.*;
 
 public class MachineController {
 
@@ -34,12 +33,19 @@ public class MachineController {
 
 	public void operate() {
 		while (checkAnyProductRemain() && checkCanBuyCheapest()) {
-			sell();
+			try {
+				sell();
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 
 	public void sell() {
 		Product product = getProductByName(getPurchaseName());
+		if (!product.enoughMoneyToBuy(money)) {
+			throw new IllegalArgumentException(NOT_ENOUGH_TO_BUY);
+		}
 		money = product.purchaseOne(money);
 	}
 

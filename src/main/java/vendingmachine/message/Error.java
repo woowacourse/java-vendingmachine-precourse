@@ -10,4 +10,5 @@ public class Error {
 	public static final String WRONG_PRICE_UNIT = "[ERROR] 가격은 " + Product.MINIMUM_PRICE_UNIT + "원 단위여야 합니다.";
 	public static final String DUPLICATED_PRODUCT_NAME = "[ERROR] 중복된 상품 이름이 있습니다";
 	public static final String NO_SUCH_PRODUCT_EXIST = "[ERROR] 존재하지 않는 상품명입니다.";
+	public static final String NOT_ENOUGH_TO_BUY = "[ERROR] 현재 돈으로 구매할 수 없습니다. 다른 상품을 선택하세요.";
 }
