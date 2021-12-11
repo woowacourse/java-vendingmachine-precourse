@@ -73,20 +73,23 @@ public class VendingMachineController {
 
 	private void buyItems() {
 		while (canBuyItem()) {
-			vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
-			vendingMachineOutputView.printPurchasingInputMessage();
-			String item = Console.readLine();
-			if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney(),
-					itemModel.getNameList(), itemModel.getPriceByName(item))) {
-
-				continue;
-			}
-			userModel.reduceMoney(itemModel.getPriceByName(item));
+			buyItem();
 		}
 	}
 
 	private boolean canBuyItem() {
 		return itemModel.getMinimumPrice() <= userModel.getRemainingMoney() && itemModel.hasExtraQuantity();
+	}
+
+	private void buyItem() {
+		vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
+		vendingMachineOutputView.printPurchasingInputMessage();
+		String item = Console.readLine();
+		if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney(),
+				itemModel.getNameList(), itemModel.getPriceByName(item))) {
+			return;
+		}
+		userModel.reduceMoney(itemModel.getPriceByName(item));
 	}
 
 	private void giveChange() {
