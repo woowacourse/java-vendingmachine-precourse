@@ -24,9 +24,9 @@ public class ItemSeparator {
 
 	private static Item separateItem(String itemValue) {
 		StringTokenizer stringTokenizer = new StringTokenizer(itemValue, ITEM_DELIMITER);
-		String itemName = stringTokenizer.nextToken();
-		int price = Integer.parseInt(stringTokenizer.nextToken());
-		int quantity = Integer.parseInt(stringTokenizer.nextToken());
+		String itemName = stringTokenizer.nextToken().trim();
+		int price = Integer.parseInt(stringTokenizer.nextToken().trim());
+		int quantity = Integer.parseInt(stringTokenizer.nextToken().trim());
 		return new Item(itemName, price, quantity);
 	}
 }
