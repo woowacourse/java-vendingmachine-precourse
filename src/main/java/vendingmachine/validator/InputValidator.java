@@ -10,6 +10,7 @@ public class InputValidator {
 	private static final int nameIndex = 0;
 	private static final int priceIndex = 1;
 	private static final int stockIndex = 2;
+	private static final int INFO_SIZE = 3;
 	private static final int MINIMUM_MONEY_SIZE = 100;
 	private static final String MONEY_REGEX = "\\d+0";
 	private static final String STOCK_REGEX = "[1-9]+[0-9]*";
@@ -21,7 +22,6 @@ public class InputValidator {
 	public static Beverages checkInputForm(String input) {
 		ArrayList<String> items = new ArrayList<>();
 		checkSemicolon(input);
-
 		String[] itemList = input.split(";");
 		for (String item : itemList) {
 			String itemInfo = eraseBracket(item);
@@ -34,12 +34,19 @@ public class InputValidator {
 		Beverages beverages = new Beverages();
 		for (String beveragesInfoList : itemPriceStock) {
 			String[] beverageInfo = beveragesInfoList.split(",");
+			validationInfoForm(beverageInfo);
 			String name = checkNameForm(beverageInfo[nameIndex]);
 			int price = checkPriceForm(beverageInfo[priceIndex]);
 			int stock = checkStockForm(beverageInfo[stockIndex]);
 			beverages.add(new Beverage(name, price), stock);
 		}
 		return beverages;
+	}
+
+	private static void validationInfoForm(String[] itemList) {
+		if (itemList.length != INFO_SIZE) {
+			InputException.printNotEnoughInforror();
+		}
 	}
 
 	public static int checkMoneyForm(String input) {
