@@ -12,7 +12,7 @@ class VendingMachineTest {
 	@ValueSource(strings = {"", "낫정수"})
 	void validateEmptyOrNotInteger(String input) {
 		Throwable exception = assertThrows(IllegalArgumentException.class, () ->
-			VendingMachine.of(input)
+			VendingMachine.from(input)
 		);
 
 		assertEquals("[ERROR] 보유 금액은 정수입니다.", exception.getMessage());
@@ -22,7 +22,7 @@ class VendingMachineTest {
 	@ValueSource(strings = {"1", "3"})
 	void validateLessThanMinPriceCoin(String input) {
 		Throwable exception = assertThrows(IllegalArgumentException.class, () ->
-			VendingMachine.of(input)
+			VendingMachine.from(input)
 		);
 
 		assertEquals("[ERROR] 보유 금액은 10원 이상입니다.", exception.getMessage());
@@ -32,7 +32,7 @@ class VendingMachineTest {
 	@ValueSource(strings = {"11", "113"})
 	void validateNotDivisibleByMinPriceCoin(String input) {
 		Throwable exception = assertThrows(NotDivisibleByMinPriceCoinException.class, () ->
-			VendingMachine.of(input)
+			VendingMachine.from(input)
 		);
 
 		assertEquals("[ERROR] 보유 금액은 10원의 배수입니다.", exception.getMessage());
