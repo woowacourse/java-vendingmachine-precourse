@@ -13,8 +13,8 @@ public class VendingMachineController {
 	public void run() {
 		inputMoneyForChange();
 
-		// showCoinInVendingMachine();
-		//
+		showCoinInVendingMachine();
+
 		// inputProductInfo();
 		//
 		// Customer customer = inputMoneyForBuy();
@@ -30,6 +30,11 @@ public class VendingMachineController {
 		int change = moneyReceiver.receive();
 		coinService.fillCoin(change);
 
+		vendingMachineView.makeEmptyLine();
+	}
+
+	private void showCoinInVendingMachine() {
+		vendingMachineView.showCoinsInVendingMachine();
 		vendingMachineView.makeEmptyLine();
 	}
 }
