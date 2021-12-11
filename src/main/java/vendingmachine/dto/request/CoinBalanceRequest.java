@@ -16,14 +16,14 @@ public class CoinBalanceRequest {
             int coinBalance = Integer.parseInt(input);
             validate(coinBalance);
             return coinBalance;
-        } catch (NumberFormatException e) {
+        } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_CURRENT_BALANCE_INPUT);
         }
     }
 
     private void validate(int coinBalance) {
         if (coinBalance < MINIMUM_VALUE_OF_CURRENT_BALANCE || coinBalance % MINIMUM_CURRENCY_UNIT != 0) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_CURRENT_BALANCE_INPUT);
+            throw new IllegalArgumentException();
         }
     }
 }

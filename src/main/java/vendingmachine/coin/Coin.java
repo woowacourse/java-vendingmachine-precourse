@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.coin;
 
 import java.util.*;
 
@@ -31,5 +31,4 @@ public enum Coin {
     public int getAmount() {
         return amount;
     }
-
 }

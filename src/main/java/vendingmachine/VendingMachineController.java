@@ -9,11 +9,23 @@ public class VendingMachineController {
     }
 
     public void on() {
-        console.printCurrentBalance(vendingMachineService.createCoinBalance(console.inputCoinBalance()));
-        vendingMachineService.createItems(console.inputItemInventoryInfo());
-        vendingMachineService.insertMoney(console.inputMoneyToInsert());
+        createCoinBalance();
+        createItems();
+        createAvailableMoney();
         purchaseItem();
         vendingMachineService.giveChange();
+    }
+    
+    private void createCoinBalance() {
+        console.printCoinBalance(vendingMachineService.createCoinBalance(console.inputCoinBalance()));
+    }
+    
+    private void createItems() {
+        vendingMachineService.createItems(console.inputItemInventoryInfo());
+    }
+
+    private void createAvailableMoney() {
+        vendingMachineService.insertMoney(console.inputAvailableMoney());
     }
 
     private void purchaseItem() {

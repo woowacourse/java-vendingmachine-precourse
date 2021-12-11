@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.coin;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -11,7 +12,7 @@ public class CoinExchangeMachine {
 
     public Coins changeIntoCoins(int amountToChange) {
         initialize(amountToChange);
-        while(isMoreThanOrEqualToMinAmountOfCoin(amount)) {
+        while (isMoreThanOrEqualToMinAmountOfCoin(amount)) {
             int pickedAmount = Randoms.pickNumberInList(amountsToPick);
             if (pickedAmount > amount) {
                 amountsToPick.remove(new Integer(pickedAmount));
@@ -34,9 +35,9 @@ public class CoinExchangeMachine {
         amount -= coin.getAmount();
     }
 
-    private static boolean isMoreThanOrEqualToMinAmountOfCoin(int amount) {
+    private boolean isMoreThanOrEqualToMinAmountOfCoin(int amount) {
         int minAccountOfCoin = Coin.COIN_10.getAmount();
-        if ( amount >= minAccountOfCoin) {
+        if (amount >= minAccountOfCoin) {
             return true;
         }
         return false;

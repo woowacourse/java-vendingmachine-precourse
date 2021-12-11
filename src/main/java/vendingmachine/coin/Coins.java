@@ -1,7 +1,9 @@
-package vendingmachine;
+package vendingmachine.coin;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import vendingmachine.coin.Coin;
 
 public class Coins {
     private static final int initialNumberOfCoin = 0;
@@ -67,13 +69,4 @@ public class Coins {
     private int getAmountWithCoin10() {
         return coins.get(Coin.COIN_10) * Coin.COIN_10.getAmount();
     }
-
-    //test위해. 삭제 예정
-    @Override
-    public String toString() {
-        return "Coins{" +
-                "coins=" + coins +
-                '}';
-    }
-
 }

@@ -1,5 +1,7 @@
 package vendingmachine.dto.request;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +13,7 @@ class CoinBalanceRequestTest {
         int expectedCoinBalance = 10000;
         CoinBalanceRequest coinBalanceRequest = new CoinBalanceRequest(input);
 
-        Assertions.assertThat(coinBalanceRequest.toCoinBalance()).isEqualTo(expectedCoinBalance);
+        assertThat(coinBalanceRequest.toCoinBalance()).isEqualTo(expectedCoinBalance);
     }
 
     @Test
@@ -19,7 +21,7 @@ class CoinBalanceRequestTest {
         String notDigitInput = "!";
         CoinBalanceRequest coinBalanceRequest = new CoinBalanceRequest(notDigitInput);
 
-        Assertions.assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -27,7 +29,7 @@ class CoinBalanceRequestTest {
         String notDigitInput = "123";
         CoinBalanceRequest coinBalanceRequest = new CoinBalanceRequest(notDigitInput);
 
-        Assertions.assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -35,6 +37,6 @@ class CoinBalanceRequestTest {
         String lessThanTenWonInput = "9";
         CoinBalanceRequest coinBalanceRequest = new CoinBalanceRequest(lessThanTenWonInput);
 
-        Assertions.assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(coinBalanceRequest::toCoinBalance).isInstanceOf(IllegalArgumentException.class);
     }
 }

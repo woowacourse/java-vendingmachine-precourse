@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.item;
 
 import vendingmachine.dto.servicedto.ItemInfo;
 import vendingmachine.dto.servicedto.ItemInventoryInfo;

@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.item;
 
 import java.util.Objects;
 

@@ -2,9 +2,9 @@ package vendingmachine.dto.response;
 
 import static vendingmachine.StringConstants.NEW_LINE;
 
-import vendingmachine.Coins;
+import vendingmachine.coin.Coins;
 
-public class CurrentBalanceResponse {
+public class CoinBalanceResponse {
     private static final String CURRENT_BALANCE_NOTICE_PHRASE = "자판기가 보유한 동전";
     private static final String DELIMITER = " - ";
     private static final String UNIT_OF_NUMBER_OF_COIN = "개";
@@ -16,8 +16,8 @@ public class CurrentBalanceResponse {
     private final Coins currentBalance;
     private final StringBuilder response = new StringBuilder();
 
-    public CurrentBalanceResponse(Coins currentBalance) {
-        this.currentBalance = currentBalance;
+    public CoinBalanceResponse(Coins coinBalance) {
+        this.currentBalance = coinBalance;
     }
 
     public StringBuilder toPrint() {

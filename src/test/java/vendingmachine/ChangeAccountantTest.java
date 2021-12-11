@@ -4,6 +4,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.coin.Coin;
+import vendingmachine.coin.Coins;
+
 class ChangeAccountantTest {
 
     @Test

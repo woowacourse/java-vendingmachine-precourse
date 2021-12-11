@@ -3,11 +3,12 @@ package vendingmachine;
 import static vendingmachine.StringConstants.PREFIX_OF_ERROR_MESSAGE;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.coin.Coins;
 import vendingmachine.dto.request.CoinBalanceRequest;
 import vendingmachine.dto.request.ItemPurchaseRequest;
 import vendingmachine.dto.request.iteminventory.ItemsInventoryRequest;
-import vendingmachine.dto.request.MoneyToInsertRequest;
-import vendingmachine.dto.response.CurrentBalanceResponse;
+import vendingmachine.dto.request.AvailableMoneyRequest;
+import vendingmachine.dto.response.CoinBalanceResponse;
 import vendingmachine.dto.response.MoneyAvailableResponse;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
@@ -42,23 +43,23 @@ public class VendingMachineConsole {
         return itemInventoryInfo;
     }
 
-    public void printCurrentBalance(Coins currentBalance) {
-        System.out.println(new CurrentBalanceResponse(currentBalance).toPrint());
+    public void printCoinBalance(Coins coinBalance) {
+        System.out.println(new CoinBalanceResponse(coinBalance).toPrint());
     }
 
-    public int inputMoneyToInsert() {
-        int initialMoneyToInsert = 0;
-        int moneyToInsert = initialMoneyToInsert;
-        boolean isMoneyToInsertEntered = false;
-        while (!isMoneyToInsertEntered) {
+    public int inputAvailableMoney() {
+        int initialAvailableMoney = 0;
+        int availableMoney = initialAvailableMoney;
+        boolean isAvailableMoneyEntered = false;
+        while (!isAvailableMoneyEntered) {
             try {
-                moneyToInsert = new MoneyToInsertRequest(input()).toMoneyToInsert();
-                isMoneyToInsertEntered = true;
+                availableMoney = new AvailableMoneyRequest(input()).toAvailableMoney();
+                isAvailableMoneyEntered = true;
             } catch (IllegalArgumentException error) {
                 printErrorMessage(error.getMessage());
             }
         }
-        return moneyToInsert;
+        return availableMoney;
     }
 
     public void printAvailableMoney(int moneyAvailable) {

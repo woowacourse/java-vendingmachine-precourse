@@ -1,8 +1,10 @@
-package vendingmachine;
+package vendingmachine.item;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+
+import vendingmachine.item.Item;
 
 public class Items {
     private Map<Item, Integer> items = new HashMap<>();;

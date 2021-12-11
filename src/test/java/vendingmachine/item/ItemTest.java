@@ -1,10 +1,10 @@
-package vendingmachine;
+package vendingmachine.item;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import vendingmachine.item.Item;
 
 class ItemTest {
 

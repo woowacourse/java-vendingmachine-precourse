@@ -1,11 +1,10 @@
-package vendingmachine;
-
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.List;
+package vendingmachine.coin;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import vendingmachine.coin.Coin;
+import vendingmachine.coin.Coins;
 
 class CoinsTest {
 

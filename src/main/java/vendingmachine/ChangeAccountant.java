@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import vendingmachine.coin.Coin;
+import vendingmachine.coin.Coins;
+
 public class ChangeAccountant {
     private Coins changes;
     private int amountToChange;

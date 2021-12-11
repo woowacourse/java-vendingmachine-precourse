@@ -33,8 +33,8 @@ public class ItemInventoryRequest {
 
     private List<String> divideByKindOfInfo() {
         List<String> itemInventoryInfo = new ArrayList<>();
-        validateInfoInBrackets();
         try {
+            validateInfoInBrackets();
             validateNoEmptyInfo();
             itemInventoryInfo = Arrays.asList(splitByComma(removeBracket()));
             validateNumberOfInfo(itemInventoryInfo);
@@ -46,7 +46,7 @@ public class ItemInventoryRequest {
 
     private void validateInfoInBrackets() {
         if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) || input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT_FORMAT);
+            throw new IllegalArgumentException();
         }
     }
 

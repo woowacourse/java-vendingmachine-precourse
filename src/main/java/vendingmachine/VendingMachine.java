@@ -5,6 +5,10 @@ import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_I
 
 import java.util.Optional;
 
+import vendingmachine.coin.Coins;
+import vendingmachine.item.Item;
+import vendingmachine.item.Items;
+
 public class VendingMachine {
     private final ChangeAccountant changeAccountant = new ChangeAccountant();
     private Coins coinBalance;
