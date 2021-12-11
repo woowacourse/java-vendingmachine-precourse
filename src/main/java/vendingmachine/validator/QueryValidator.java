@@ -39,7 +39,7 @@ public class QueryValidator {
 	}
 
 	private void checkDontExistingItemExceptions(String itemName, List<String> nameList) {
-		if (nameList.contains(itemName)) {
+		if (!nameList.contains(itemName)) {
 			throw new IllegalArgumentException(DONT_EXISTING_ITEM_ERROR_MESSAGE);
 		}
 	}
