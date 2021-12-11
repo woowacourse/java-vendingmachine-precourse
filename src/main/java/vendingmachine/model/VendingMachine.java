@@ -1,27 +1,42 @@
 package vendingmachine.model;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class VendingMachine {
 
-	private final List<CoinCase> coinsCase;
+	private final List<CoinCase> coinCases;
 	private final List<Product> products;
-	private final int insertMoney;
-	private int remain;
+	private int remainInsertMoney;
+	private static final int INITIAL_VALUE = 0;
 
 	public VendingMachine(List<CoinCase> coinCases, List<Product> products, int insertMoney) {
-		this.coinsCase = coinCases;
+		this.coinCases = coinCases;
 		this.products = products;
-		this.insertMoney = insertMoney;
-		this.remain = insertMoney;
+		this.remainInsertMoney = insertMoney;
 	}
 
-	public int getRemain() {
-		return remain;
+	public int getRemainInsertMoney() {
+		return remainInsertMoney;
 	}
 
 	public List<Product> getProducts() {
 		return products;
+	}
+
+	public Map<Integer, Integer> getChanges() {
+		Map<Integer, Integer> change = new HashMap<>();
+		for (CoinCase coinCase : coinCases) {
+			if (remainInsertMoney == INITIAL_VALUE) {
+				break;
+			}
+			int coinType = coinCase.getCoin().getAmount();
+			int changeCount = coinCase.returnChange(remainInsertMoney / coinType);
+			remainInsertMoney -= changeCount * coinType;
+			change.put(coinType, changeCount);
+		}
+		return change;
 	}
 
 	public void readyToSellProduct(String selectedProduct) {
@@ -34,10 +49,7 @@ public class VendingMachine {
 	}
 
 	public boolean isReturnChangeCondition() {
-		if (getLowestProductPrice() > remain || isSoldOut()) {
-			return true;
-		}
-		return false;
+		return getLowestProductPrice() > remainInsertMoney || isSoldOut();
 	}
 
 	private boolean isSoldOut() {
@@ -55,6 +67,6 @@ public class VendingMachine {
 	}
 
 	private void useMoneyToBuy(Product product) {
-		remain -= product.getPrice();
+		remainInsertMoney -= product.getPrice();
 	}
 }

@@ -3,21 +3,19 @@ package vendingmachine.model;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
-import vendingmachine.utils.ExceptionUtils;
 
 public class CoinCase {
 
 	private final Coin coin;
-	private final int number;
+	private int count;
 	private int currentAmount;
 	private static final int INITIAL_VALUE = 0;
 	private static final int MINIMUM_RANGE = 1;
 
 	public CoinCase(Coin coin, int currentAmount) {
-		ExceptionUtils.validateMoney(currentAmount);
 		this.coin = coin;
 		this.currentAmount = currentAmount;
-		this.number = calculateNumberOfCoin();
+		this.count = calculateCountOfCoin();
 	}
 
 	public Coin getCoin() {
@@ -25,31 +23,40 @@ public class CoinCase {
 	}
 
 	public int getNumber() {
-		return number;
+		return count;
 	}
 
 	public int getCurrentAmount() {
-		currentAmount -= number * coin.getAmount();
+		currentAmount -= count * coin.getAmount();
 		return currentAmount;
 	}
 
-	private int calculateNumberOfCoin() {
-		int maxNumber = currentAmount / coin.getAmount();
-		if (maxNumber == INITIAL_VALUE) {
-			return maxNumber;
+	public int returnChange(int changeUserWant) {
+		if (count < changeUserWant) {
+			count = 0;
+			return count;
 		}
-		if (coin.getAmount() == Coin.COIN_10.getAmount()) {
-			return maxNumber;
-		}
-		return Randoms.pickNumberInList(makeRandomNumberRange(maxNumber));
+		count -= changeUserWant;
+		return changeUserWant;
 	}
 
-	private List<Integer> makeRandomNumberRange(int maxNumber) {
-		List<Integer> randomNumberRange = new ArrayList<>();
-		randomNumberRange.add(INITIAL_VALUE);
-		for (int i = MINIMUM_RANGE; i <= maxNumber; i++) {
-			randomNumberRange.add(i);
+	private int calculateCountOfCoin() {
+		int maxCount = currentAmount / coin.getAmount();
+		if (maxCount == INITIAL_VALUE) {
+			return maxCount;
 		}
-		return randomNumberRange;
+		if (coin.getAmount() == Coin.COIN_10.getAmount()) {
+			return maxCount;
+		}
+		return Randoms.pickNumberInList(makeRandomNumberRange(maxCount));
+	}
+
+	private List<Integer> makeRandomNumberRange(int maxCount) {
+		List<Integer> randomCountRange = new ArrayList<>();
+		randomCountRange.add(INITIAL_VALUE);
+		for (int i = MINIMUM_RANGE; i <= maxCount; i++) {
+			randomCountRange.add(i);
+		}
+		return randomCountRange;
 	}
 }

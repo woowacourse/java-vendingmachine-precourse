@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
@@ -17,6 +19,7 @@ public class OutputView {
 	private static final String ASK_INSERT_MONEY = "투입 금액을 입력해 주세요.";
 	private static final String NOTICE_INSERTED_MONEY = "투입 금액: ";
 	private static final String ASK_PRODUCT_NAME = "구매할 상품명을 입력해 주세요.";
+	private static final String CHANGE = "잔돈";
 
 	private OutputView() {
 	}
@@ -59,12 +62,26 @@ public class OutputView {
 	}
 
 	public static void printInsertedMoney(VendingMachine vendingMachine) {
+		printNewLine();
 		System.out.println(
-			NOTICE_INSERTED_MONEY + vendingMachine.getRemain() + KOREAN_CURRENCY);
+			NOTICE_INSERTED_MONEY + vendingMachine.getRemainInsertMoney() + KOREAN_CURRENCY);
 	}
 
 	public static void askProductToBuy() {
 		System.out.println(ASK_PRODUCT_NAME);
+	}
+
+	public static void printChanges(Map<Integer, Integer> changes) {
+		System.out.println(CHANGE);
+		changes.entrySet()
+			.stream()
+			.filter(coin -> coin.getValue() > INITIAL_VALUE)
+			.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+			.forEach(entry ->
+				System.out.println(entry.getKey()
+					+ KOREAN_CURRENCY
+					+ DELIMITER_COIN_AND_NUMBER
+					+ entry.getValue()));
 	}
 
 	private static void printNewLine() {

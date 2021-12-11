@@ -17,7 +17,8 @@ public class VendingMachineController {
 		while (!vendingMachine.isReturnChangeCondition()) {
 			runVendingMachine(vendingMachine);
 		}
-		// 잔돈을 반환 받는다.
+		OutputView.printInsertedMoney(vendingMachine);
+		OutputView.printChanges(vendingMachine.getChanges());
 	}
 
 	private static VendingMachine initVendingMachine() {
