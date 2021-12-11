@@ -38,4 +38,14 @@ public class ProductRepository {
         }
         return allAmount;
     }
+
+    public int purchaseProduct(String productName, int money) {
+        for (Product product : products) {
+            if (product.getName().equals(productName)) {
+                money -= product.getCost();
+                product.sellProduct();
+            }
+        }
+        return money;
+    }
 }

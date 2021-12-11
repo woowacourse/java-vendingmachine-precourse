@@ -33,7 +33,7 @@ public class PurchaseInputView {
             String productName = inputInit();
             try {
                 tryToInputProductForPurchase(productName);
-                purchaseProduct(productName);
+                money = ProductRepository.getInstance().purchaseProduct(productName, money);
             } catch (IllegalArgumentException e) {
             }
         }
@@ -75,16 +75,6 @@ public class PurchaseInputView {
         if (findProduct.get(Condition.INDEX_0.getNumber()).getCost() > money) {
             System.out.println(Input.PRODUCT_PURCHASE_LACK_MONEY_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
-        }
-    }
-
-    private void purchaseProduct(String productName) {
-        List<Product> products = ProductRepository.getInstance().getProducts();
-        for (Product product : products) {
-            if (product.getName().equals(productName)) {
-                money -= product.getCost();
-                product.sellProduct();
-            }
         }
     }
 }
