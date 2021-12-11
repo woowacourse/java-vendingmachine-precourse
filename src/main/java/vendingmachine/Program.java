@@ -39,7 +39,8 @@ public class Program {
 			coinPocket.pushSingle(randomCoin);
 			money = randomCoin.subtract(money);
 		}
-		Message.printCoinPocket(pocket);
+		Message.INITIAL_COIN_CHANGE_SHOW.println();
+		Message.printCoinPocket(coinPocket);
 	}
 
 	private void setProductTable() {
