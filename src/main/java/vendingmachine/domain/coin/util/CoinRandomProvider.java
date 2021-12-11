@@ -6,11 +6,11 @@ import java.util.Arrays;
 
 public class CoinRandomProvider implements CoinProvider {
     @Override
-    public int drawCoinLessThanBalance(int balance) {
+    public int drawCoinLessThanBalance(int machineBalance) {
         while (true) {
-            int num = Randoms.pickNumberInList(Arrays.asList(10, 50, 100, 500));
-            if (num <= balance)
-                return num;
+            int randomNum = Randoms.pickNumberInList(Arrays.asList(10, 50, 100, 500));
+            if (randomNum <= machineBalance)
+                return randomNum;
         }
     }
 }

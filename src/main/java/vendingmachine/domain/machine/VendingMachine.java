@@ -2,7 +2,6 @@ package vendingmachine.domain.machine;
 
 import vendingmachine.domain.coin.CoinPocket;
 import vendingmachine.domain.coin.util.CoinProvider;
-import vendingmachine.domain.consumer.Consumer;
 import vendingmachine.domain.product.ProductStore;
 import vendingmachine.util.RegexSeparator;
 
@@ -25,11 +24,14 @@ public class VendingMachine {
         this.coinPocket = CoinPocket.getInstance();
     }
 
-    public void fillCoinsBalanceAmount(CoinProvider coinProvider) {
-        int balanceForPutCoin = balance;
-        while(balanceForPutCoin > 0) {
-            balanceForPutCoin -= coinPocket.putCoinAndAddCount(balanceForPutCoin, coinProvider);
+    public void fillCoinsAsBalanceAmount(CoinProvider coinProvider) {
+        while(balance > 0) {
+            reduceBalance(coinPocket.putCoinAndAddCount(balance, coinProvider));
         }
+    }
+
+    private void reduceBalance(int coinAmount) {
+        balance -= coinAmount;
     }
 
     public void splitInfoAndFillProduct(String allProductInfo) {
