@@ -3,40 +3,42 @@ package vendingmachine.domain.coin;
 import vendingmachine.Coin;
 import vendingmachine.domain.coin.util.CoinProvider;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CoinPocket {
-    private Map<Coin, Integer> coins;
+    private Set<Coin> coins;
 
     public static CoinPocket getInstance() {
         return new CoinPocket();
     }
     private CoinPocket() {
-        coins = new HashMap<>();
+        coins = new HashSet<>();
     }
 
     public int putCoinAndAddCount(int machineBalance, CoinProvider coinProvider) {
         int amount = coinProvider.drawCoinLessThanBalance(machineBalance);
         Coin coin = Coin.getCoinWithAmountInput(amount);
 
-        coins.put(coin, coins.getOrDefault(coin, 0) + 1);
+        if(isNoCoinInPocket(coin)) {
+            coins.add(coin);
+        }
 
+        coin.addCount();
         return amount;
+    }
+
+    private boolean isNoCoinInPocket(Coin coin) {
+        return !coins.contains(coin);
     }
 
     // for test
     public int countEachCoin(Coin coin) {
-        return coins.get(coin);
+        return coin.getCount();
     }
 
     // for test
     protected int getAllCoinsSum() {
-        int sum = 0;
-        for (Coin coin : coins.keySet()) {
-            System.out.println(coin.getAmount());
-            sum += coin.getAmountSum(coins.get(coin));
-        }
-        return sum;
+        return coins.stream().mapToInt(coin -> coin.multiplyAmountAndCount()).sum();
     }
 }

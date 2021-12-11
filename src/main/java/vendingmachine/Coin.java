@@ -7,6 +7,7 @@ public enum Coin {
     COIN_10(10);
 
     private final int amount;
+    private int count;
 
     Coin(final int amount) {
         this.amount = amount;
@@ -42,11 +43,12 @@ public enum Coin {
         return amountInput == 10;
     }
 
-    public int getAmountSum(int count) {
+    public int getCount() {return count;}
+    public int multiplyAmountAndCount() {
         return amount * count;
     }
 
-    public int getAmount() {
-        return amount;
+    public void addCount() {
+        count++;
     }
 }
