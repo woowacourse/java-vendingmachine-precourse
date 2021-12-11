@@ -1,9 +1,14 @@
 package vendingmachine.dto;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import vendingmachine.Notification;
 import vendingmachine.product.Product;
+import vendingmachine.product.Products;
 
 public class ProductDto {
 	private static final int PRODUCT_COMPOSITION_SIZE = 3;
@@ -15,11 +20,13 @@ public class ProductDto {
 		this.input = input;
 	}
 
-	public void convertProducts() {
-		String[] products = input.split(";");
-		for (String product : products) {
-			convertProduct(product);
+	public Products convertProducts() {
+		String[] productArray = input.split(";");
+		Products products = Products.from();
+		for (String product : productArray) {
+			products.add(convertProduct(product));
 		}
+		return products;
 	}
 
 	private Product convertProduct(String product) {

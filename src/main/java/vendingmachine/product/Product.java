@@ -33,4 +33,8 @@ public class Product {
 			throw new IllegalArgumentException(Notification.PRODUCT_NAME_INVALID.getMessage());
 		}
 	}
+
+	public String getName() {
+		return name;
+	}
 }
