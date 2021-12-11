@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -52,5 +53,15 @@ class ProductRepositoryTest {
 		// when
 		// then
 		assertThat(productRepository.findAll().size()).isEqualTo(productList.size());
+	}
+
+	@Test
+	void decreaseQuantity() {
+		// given
+		// when
+		IntStream.range(0, productList.get(0).getQuantity())
+			.forEach(i -> productRepository.decreaseQuantity(productList.get(0).getName()));
+		// then
+		assertThat(productRepository.findAll()).hasSize(productList.size() - 1);
 	}
 }

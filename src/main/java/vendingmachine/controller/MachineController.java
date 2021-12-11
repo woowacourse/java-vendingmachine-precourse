@@ -33,4 +33,9 @@ public class MachineController {
 		String input = inputMoney();
 		machineService.setMoney(input);
 	}
+
+	public void purchase() {
+		String input = inputProductName();
+		machineService.purchaseProduct(input);
+	}
 }

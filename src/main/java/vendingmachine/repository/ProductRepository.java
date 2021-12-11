@@ -27,4 +27,10 @@ public class ProductRepository {
 	public List<Product> findAll() {
 		return new ArrayList<>(productMap.values());
 	}
+
+	public void decreaseQuantity(String productName) {
+		if (productMap.get(productName).decreaseQuantity() == 0) {
+			productMap.remove(productName);
+		}
+	}
 }

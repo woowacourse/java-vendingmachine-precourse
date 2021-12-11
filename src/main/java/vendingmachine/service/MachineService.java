@@ -84,4 +84,10 @@ public class MachineService {
 			.filter(product -> product.getPrice() <= machine.getUserMoney())
 			.collect(Collectors.toList());
 	}
+
+	public void purchaseProduct(String productName) {
+		Product product = productRepository.findByName(productName).orElseThrow(IllegalArgumentException::new);
+		machine.decreaseUserMoney(product.getPrice());
+		productRepository.decreaseQuantity(productName);
+	}
 }

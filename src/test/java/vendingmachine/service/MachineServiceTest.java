@@ -4,11 +4,13 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.domain.Machine;
+import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
 
@@ -28,6 +30,7 @@ class MachineServiceTest {
 		machine = new Machine();
 		machineService = new MachineService(depositRepository, productRepository, machine);
 		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
+		machineService.setProducts(productList);
 	}
 
 	@Test
@@ -61,5 +64,18 @@ class MachineServiceTest {
 		machine.setUserMoney(500);
 		// then
 		assertThat(machineService.getAffordableList()).hasSize(1);
+	}
+
+	@Test
+	void purchaseProduct() {
+		// given
+		Product target = productRepository.findByName("콜라").get();
+		machine.setUserMoney(target.getPrice() * target.getQuantity());
+		// when
+		IntStream.range(0, target.getQuantity()).forEach(i ->
+			machineService.purchaseProduct(target.getName())
+		);
+		// then
+		assertThat(productRepository.findAll()).hasSize(productList.size() - 1);
 	}
 }
