@@ -1,10 +1,10 @@
 package validator;
 
 public class InputNumberValidator {
-    public static int validateInput(String userInput) {
+    public static int validateVendingMachineMoney(String userInput) {
         int inputValue = isNumber(userInput);
         isPositiveNumber(inputValue);
-        isMultiplicationOfTen(inputValue);
+        isBlank(userInput);
         return inputValue;
     }
 
@@ -28,4 +28,9 @@ public class InputNumberValidator {
         }
     }
 
+    public static void isBlank(String userInput) {
+        if (userInput.equals("") || userInput.equals(" ")) {
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE + ExceptionMessage.ERROR_INPUT_NUMBER);
+        }
+    }
 }

@@ -5,7 +5,4 @@ public class Change {
     private int price;
     private int count;
 
-    public int getChange() {
-
-    }
 }

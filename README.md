@@ -2,10 +2,12 @@
 
 ## 기능목록
 
-###1. InputView
- - inputHowMuch
- - inputProductInformation
- - inputMoney
- - inputProductToBuy
-
-###2. OutputView
+- 자판기가 보유할 금액을 입력받아서 저장한다.
+    - 예외
+        - 0보다 큰 정수가 아닌 경우
+        - 문자인 경우
+        - 공백인 경우
+    
+- 입력받은 금액으로 자판기가 보유한 동전을 랜덤 생성한다.
+    - Randoms 에 받을 매개변수(List)를
+    
