@@ -2,7 +2,7 @@ package vendingmachine.model.validator;
 
 public class MoneyValidator {
 
-	public static final String IS_ALL_DIGIT_ERROR_MESSAGE = "[ERROR] 자판기 보유 금액은 단 하나의 자연수만 가능합니다.";
+	public static final String IS_ALL_DIGIT_ERROR_MESSAGE = "[ERROR] 0과 자연수만 입력 가능합니다.";
 	public static final String IS_MIN_UNIT_TEN_ERROR_MESSAGE = "[ERROR] 금액의 최소단위는 10원 입니다.";
 	public static final int MIN_UNIT_OF_MONEY = 10;
 
