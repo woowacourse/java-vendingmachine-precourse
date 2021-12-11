@@ -27,37 +27,31 @@ public class VendingMachine {
 	}
 
 	public void addProduct(String products) {
+		products = products.replaceAll(LEFT_SQUARE_BRACKETS, "").replaceAll(RIGHT_SQUARE_BRACKETS, "");
 		for (String productPriceAndStock : products.split(DISTINGUISH_BETWEEN_PRODUCTS)) {
 			String[] product = productPriceAndStock.split(DISTINGUISH_BETWEEN_PRODUCT_INFORMATION);
 			// validateProduct(product);
 			productPrice.put(product[NAME], Integer.parseInt(product[PRICE]));
 			productStocks.put(product[NAME], Integer.parseInt(product[STOCKS]));
 		}
-	}
-
-	public int getProduct(String productName, int amountPaid) {
-		if (!canSell(productName, amountPaid)) {
-			throw new IllegalArgumentException(NO_STOCKS_MESSAGE);
-		}
-		productStocks.put(productName, productStocks.get(productName) - 1);
-		giveChange(amountPaid - productPrice.get(productName));
-		return 1;
+		System.out.println(productPrice);
+		System.out.println(productStocks);
 	}
 
 	private boolean canSell(String productName, int amountPaid) {
 		if (!isExistProductStocks(productName)) {
 			return false;
 		}
-		return productPrice.get(productName) < amountPaid;
+		return productPrice.get(productName) <= amountPaid;
 	}
 
 	private boolean isExistProductStocks(String productName) {
 		return productStocks.get(productName) >= MINIMUM_STOCKS;
 	}
 
-	private void giveChange(int changeCoin) {
+	private int giveChange(int changeCoin) {
 		if (!canGiveChange(changeCoin)) {
-			return;
+			return changeCoin;
 		}
 		for (int coin : coinsOwned.keySet()) {
 			int coinNumberToPay = Math.min(coinsOwned.get(coin), changeCoin / coin);
@@ -65,6 +59,7 @@ public class VendingMachine {
 				- coinNumberToPay);
 			changeCoin -= coin * coinNumberToPay;
 		}
+		return changeCoin;
 	}
 
 	private boolean canGiveChange(int remainingChange) {
@@ -78,7 +73,15 @@ public class VendingMachine {
 		return coinsOwned;
 	}
 
-	public int getMinimumMoney() {
+	public int getNeedMinimumMoney() {
 		return Collections.min(productPrice.values());
+	}
+
+	public int getProduct(String productName, int amountPaid) {
+		if (!canSell(productName, amountPaid)) {
+			throw new IllegalArgumentException(NO_STOCKS_MESSAGE);
+		}
+		productStocks.put(productName, productStocks.get(productName) - 1);
+		return giveChange(amountPaid - productPrice.get(productName));
 	}
 }
