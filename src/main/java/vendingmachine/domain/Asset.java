@@ -1,19 +1,18 @@
 package vendingmachine.domain;
 
-import vendingmachine.util.Validator;
+import camp.nextstep.edu.missionutils.Randoms;
+
+import java.util.Arrays;
+
+import vendingmachine.domain.enums.Coin;
 
 public class Asset {
-    public static final String NOT_POSITIVE_NUMBER_EXCEPTION = "[ERROR] 0이상의 숫자를 입력해주세요.";
 
-    private final Integer amount;
+    private MoneyBill moneyBill;
+    private final Coins coins;
 
     public Asset(int amount) {
-        validateNonNegative(amount);
-        this.amount = amount;
-    }
-    public static void validateNonNegative(int input) {
-        if (input < 0) {
-            throw new IllegalArgumentException(NOT_POSITIVE_NUMBER_EXCEPTION);
-        }
+        this.moneyBill = new MoneyBill(amount);
+        this.coins = new Coins();
     }
 }
