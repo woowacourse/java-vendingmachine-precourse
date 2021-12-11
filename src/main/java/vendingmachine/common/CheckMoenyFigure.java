@@ -13,14 +13,14 @@ public class CheckMoenyFigure {
         }
     }
     
-    public static void validationPositiveNumber(int deposit) {
-        if(deposit < 10) {
+    public static void validationPositiveNumber(int money) {
+        if(money < 10) {
             throw new IllegalArgumentException(ERROR_MESSAGE_POSITIVE_NUMBER);
         }
     }
     
-    public static void validationUnit(int deposit) {
-        if(deposit%10 != 0) {
+    public static void validationUnit(int money) {
+        if(money%10 != 0) {
             throw new IllegalArgumentException(ERROR_MESSAGE_UNIT);
         }
     }
