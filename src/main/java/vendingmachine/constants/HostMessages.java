@@ -7,4 +7,5 @@ public class HostMessages {
 	public static final String USER_INPUT_AMOUNT_INPUT_MESSAGE = "투입 금액을 입력해 주세요.";
 	public static final String REMAINING_AMOUNT_OUTPUT_START_MESSAGE = "투입 금액: ";
 	public static final String PURCHASING_INPUT_MESSAGE = "구매할 상품명을 입력해 주세요.";
+	public static final String CHANGE_OUTPUT_MESSAGE = "잔돈";
 }

@@ -1,6 +1,10 @@
 package vendingmachine.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.resource.Coin;
@@ -29,8 +33,31 @@ public class CoinModel {
 		}
 	}
 
-	public List<Integer> getNumberOfCoins(){
-		return coinStorage.getNumberOfCoins();
+	public Map<Integer, Integer> getNumberOfCoins() {
+		return makeMap(Coin.getMonetaryUnitList(), coinStorage.getNumberOfCoins());
+	}
+
+	public Map<Integer, Integer> getMinimumNumberCoins(int remainingMoney) {
+		Map<Integer, Integer> numberOfMonetaryUnit = makeMap(Coin.getMonetaryUnitList(),
+			coinStorage.getNumberOfCoins());
+		Map<Integer, Integer> change = makeMap(Coin.getMonetaryUnitList(), new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
+		for (int monetaryUnit : numberOfMonetaryUnit.keySet()) {
+			if (remainingMoney < monetaryUnit || numberOfMonetaryUnit.get(monetaryUnit) <= 0) {
+				continue;
+			}
+			remainingMoney -= monetaryUnit;
+			numberOfMonetaryUnit.put(monetaryUnit, numberOfMonetaryUnit.get(monetaryUnit) - 1);
+			change.put(monetaryUnit, change.get(monetaryUnit) + 1);
+		}
+		return change;
+	}
+
+	private Map<Integer, Integer> makeMap(List<Integer> monetaryUnitList, List<Integer> numberOfCoins) {
+		Map<Integer, Integer> numberOfMonetaryUnit = new HashMap<>();
+		for (int i = 0; i < coinStorage.getNumberOfMonetaryUnitType(); i++) {
+			numberOfMonetaryUnit.put(monetaryUnitList.get(i), numberOfCoins.get(i));
+		}
+		return numberOfMonetaryUnit;
 	}
 
 	private List<Integer> getPossibleMonetaryUnit(int amount) {

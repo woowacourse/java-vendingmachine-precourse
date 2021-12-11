@@ -4,6 +4,7 @@ import static vendingmachine.constants.HostMessages.*;
 import static vendingmachine.constants.ProgramConstants.*;
 
 import java.util.List;
+import java.util.Map;
 
 import vendingmachine.resource.Coin;
 
@@ -29,10 +30,9 @@ public class VendingMachineOutputView {
 		System.out.println(INITIAL_ITEMS_INPUT_MESSAGE);
 	}
 
-	public void printVendingMachineInitialCoins(List<Integer> numberOfCoins) {
-		List<Integer> monetaryUnitList = Coin.getMonetaryUnitList();
-		for (int i = 0; i < numberOfCoins.size(); i++) {
-			System.out.println(monetaryUnitList.get(i) + "원 - " + numberOfCoins.get(i));
+	public void printVendingMachineCoins(Map<Integer, Integer> numberOfCoins) {
+		for (int monetaryUnit : numberOfCoins.keySet()) {
+			System.out.println(monetaryUnit+"원 - " + numberOfCoins.get(monetaryUnit)+"개");
 		}
 		System.out.println();
 	}
@@ -42,10 +42,14 @@ public class VendingMachineOutputView {
 	}
 
 	public void printRemainingAmount(int remainingAmount) {
-		System.out.println(REMAINING_AMOUNT_OUTPUT_START_MESSAGE+remainingAmount+CURRENCY);
+		System.out.println(REMAINING_AMOUNT_OUTPUT_START_MESSAGE + remainingAmount + CURRENCY);
 	}
 
-	public void printPurchasingInputMessage (){
+	public void printPurchasingInputMessage() {
 		System.out.println(PURCHASING_INPUT_MESSAGE);
+	}
+
+	public void printChangeOutputMessage() {
+		System.out.println(CHANGE_OUTPUT_MESSAGE);
 	}
 }

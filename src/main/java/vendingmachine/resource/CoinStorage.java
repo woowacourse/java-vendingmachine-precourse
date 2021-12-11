@@ -28,6 +28,10 @@ public class CoinStorage {
 			.collect(Collectors.toList());
 	}
 
+	public int getNumberOfMonetaryUnitType(){
+		return Coin.getMonetaryUnitList().size();
+	}
+
 	private int getNumberOfCoin(Coin coin){
 		return Collections.frequency(coins, coin);
 	}

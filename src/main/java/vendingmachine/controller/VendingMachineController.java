@@ -33,14 +33,22 @@ public class VendingMachineController {
 	public void run() {
 		coinModel.generateCoins(getInitialAmount());
 		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
-		vendingMachineOutputView.printVendingMachineInitialCoins(coinModel.getNumberOfCoins());
+		vendingMachineOutputView.printVendingMachineCoins(coinModel.getNumberOfCoins());
 		itemModel.createItems(getInitialItems());
 		userModel.putMoney(getInputAmount());
 		buyItems();
+		giveChange();
+	}
+
+	private void giveChange() {
+		vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
+		vendingMachineOutputView.printChangeOutputMessage();
+		vendingMachineOutputView.printVendingMachineCoins(coinModel.getMinimumNumberCoins(userModel.getRemainingMoney()));
+
 	}
 
 	private void buyItems() {
-		while (!canBuyItem()) {
+		while (canBuyItem()) {
 			vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
 			vendingMachineOutputView.printPurchasingInputMessage();
 			String item = Console.readLine();
@@ -52,7 +60,7 @@ public class VendingMachineController {
 	}
 
 	private boolean canBuyItem() {
-		return itemModel.getMinimumPrice() > userModel.getRemainingMoney() && itemModel.hasExtraQuantity();
+		return itemModel.getMinimumPrice() <= userModel.getRemainingMoney() && itemModel.hasExtraQuantity();
 	}
 
 	private String getInitialAmount() {

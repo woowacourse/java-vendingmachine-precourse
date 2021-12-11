@@ -22,7 +22,7 @@ public class ItemModel {
 
 	public void createItems(String stringItemList) {
 		List<String> itemList = parseItemStringIntoItemList(stringItemList);
-		for (int i = 0; i < itemList.size() % 3 + 1; i++) {
+		for (int i = 0; i < itemList.size() / 3; i++) {
 			String name = itemList.get(i * 3);
 			int price = Integer.parseInt(itemList.get(i * 3 + 1));
 			int quantity = Integer.parseInt(itemList.get(i * 3 + 2));
