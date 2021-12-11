@@ -56,6 +56,7 @@ public class InputValidator {
 		checkArgumentLackExceptions(items);
 		checkPriceNotNaturalNumberExceptions(items);
 		checkPriceNotMultiplicationOfTenExceptions(items);
+		checkPriceUnder100Exceptions(items);
 		checkQuantityNotNaturalNumberExceptions(items);
 	}
 
@@ -116,6 +117,15 @@ public class InputValidator {
 			.map(Integer::parseInt)
 			.anyMatch(price -> price % 10 != 0)) {
 			throw new IllegalArgumentException(PRICE_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
+		}
+	}
+
+	private void checkPriceUnder100Exceptions(String string) {
+		if (Arrays.stream(string.split(";"))
+			.map(item -> item.split(",")[1])
+			.map(Integer::parseInt)
+			.anyMatch(price -> price < 100)) {
+			throw new IllegalArgumentException(PRICE_UNDER_100_ERROR_MESSAGE);
 		}
 	}
 
