@@ -2,6 +2,7 @@ package vendingmachine.domain.userbalance;
 
 import java.util.Objects;
 
+import vendingmachine.domain.item.Item;
 import vendingmachine.domain.item.ItemPrice;
 import vendingmachine.validator.BalanceValidator;
 
@@ -19,6 +20,10 @@ public class UserBalance {
 
 	public UserBalance subtract(ItemPrice itemPrice) {
 		return new UserBalance(userBalance - itemPrice.toInt());
+	}
+
+	public boolean canBuy(Item item) {
+		return userBalance >= item.getItemPrice().toInt();
 	}
 
 	public int toInt() {

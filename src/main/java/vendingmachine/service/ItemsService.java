@@ -28,7 +28,7 @@ public class ItemsService {
 		Item item = itemsRepository.findByItemName(itemName);
 
 		UserBalance userBalance = userBalanceRepository.get();
-		if (userBalance.toInt() < item.getItemPrice().toInt()) {
+		if (!userBalance.canBuy(item)) {
 			throw new NotEnoughBalanceException();
 		}
 
