@@ -1,7 +1,9 @@
 package vendingmachine.machine;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.product.ProductMapper;
 import vendingmachine.product.ProductStorage;
+import vendingmachine.product.ProductValidator;
 import vendingmachine.slot.ChangeSlot;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
@@ -10,10 +12,14 @@ import vendingmachine.view.OutputView;
 public class VendingMachineMaker {
 	private ChangeSlot changeSlot;
 	private ProductStorage productStorage;
+	private ProductMapper productMapper;
+	private ProductValidator productValidator;
 
 	public VendingMachineMaker() {
 		this.changeSlot = new ChangeSlot();
 		this.productStorage = new ProductStorage();
+		this.productMapper = new ProductMapper();
+		this.productValidator = new ProductValidator();
 	}
 
 	public VendingMachine setUp() {
@@ -44,7 +50,7 @@ public class VendingMachineMaker {
 
 	private void requestInitialProducts() {
 		try {
-			productStorage.createProducts(Console.readLine());
+			productStorage.storeProducts(Console.readLine(), productMapper, productValidator);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 			requestInitialProducts();
