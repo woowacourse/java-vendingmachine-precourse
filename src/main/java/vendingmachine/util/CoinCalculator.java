@@ -8,14 +8,14 @@ import java.util.HashMap;
 import java.util.List;
 
 public class CoinCalculator {
-	public HashMap<Coin, Integer> combineCoinsByGreedy(HashMap<Coin, Integer> coins, int remainMoney) {
-		HashMap<Coin, Integer> returnCoins = new HashMap<>(Coin.getCoinTypes());
+	public HashMap<Integer, Integer> combineCoinsByGreedy(HashMap<Coin, Integer> coins, int remainMoney) {
+		HashMap<Integer, Integer> returnCoins = new HashMap<>(Coin.getCoinTypes());
 		List<Integer> coinAmounts = Coin.getCoinAmounts();
 		for (int amount : coinAmounts) {
 			Coin coin = Coin.getCoinByAmount(amount);
 			int count = getMaxCoinCount(coin, coins.get(coin), remainMoney);
 			if (count != 0) {
-				returnCoins.put(coin, count);
+				returnCoins.put(coin.getAmount(), count);
 			}
 			remainMoney -= coin.getAmount() * count;
 		}
