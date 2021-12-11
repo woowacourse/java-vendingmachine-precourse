@@ -19,11 +19,15 @@ public class Coins {
 
 	public String toString(){
 		String holdingStatus = "";
-		List<Integer> keys = new ArrayList<>(coins.keySet());
-		keys.sort(Collections.reverseOrder());
-		for (Integer amount : keys){
+		for (Integer amount : getReverseSortedCoinAmountKey()) {
 			holdingStatus += String.format(HOLDING_COIN_AMOUNT_TEXT, amount, coins.get(amount));
 		}
 		return holdingStatus;
+	}
+
+	private List<Integer> getReverseSortedCoinAmountKey() {
+		List<Integer> keys = new ArrayList<>(coins.keySet());
+		keys.sort(Collections.reverseOrder());
+		return keys;
 	}
 }
