@@ -9,6 +9,5 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.holdingMoney = InputView.holdingMoneyInput();
 
-
 	}
 }

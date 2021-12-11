@@ -1,0 +1,43 @@
+package vendingmachine.domain;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
+import camp.nextstep.edu.missionutils.Randoms;
+
+public class Coins {
+	public final List<Integer> coinsValueList = Arrays.asList(10, 50, 100, 500);
+
+	public HashMap<Coin, Integer> coins;
+	public int holdingMoney = 0;
+
+	public Coins(int holdingMoney) {
+		coins = initializeCoins();
+		this.holdingMoney = holdingMoney;
+	}
+
+	public HashMap<Coin, Integer> initializeCoins() {
+		coins.put(Coin.COIN_10, 0);
+		coins.put(Coin.COIN_50, 0);
+		coins.put(Coin.COIN_100, 0);
+		coins.put(Coin.COIN_500, 0);
+		generateCoins(holdingMoney);
+		return coins;
+	}
+
+	public void generateCoins(int holdingMoney) {
+		while (holdingMoney != 0) {
+			Coin coin = pickRandomCoinValue();
+			if (holdingMoney >= coin.getAmount()) {
+				holdingMoney -= coin.getAmount();
+				coins.put(coin, coins.get(coin) + 1);
+			}
+		}
+	}
+
+	public Coin pickRandomCoinValue() {
+		int amount = Randoms.pickNumberInList(coinsValueList);
+		return Coin.valueOf(amount);
+	}
+}
