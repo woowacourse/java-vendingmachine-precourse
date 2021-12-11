@@ -30,4 +30,15 @@ public class Coins {
 		keys.sort(Collections.reverseOrder());
 		return keys;
 	}
+
+	public String getChanges() {
+		String status = "";
+		for (Integer amount : getReverseSortedCoinAmountKey()) {
+			if (coins.get(amount) <= 0) {
+				continue;
+			}
+			status += String.format(HOLDING_COIN_AMOUNT_TEXT, amount, coins.get(amount));
+		}
+		return status;
+	}
 }

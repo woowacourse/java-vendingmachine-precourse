@@ -21,6 +21,8 @@ public class VendingMachineController {
 		Money money = giveMoney();
 		perChaseItem(items, money);
 
+		System.out.println(money.toString());
+		OutputView.printChanges(coins.getChanges());
 	}
 
 	private Money giveMoney() {
