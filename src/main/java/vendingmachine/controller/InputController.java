@@ -13,6 +13,11 @@ public class InputController {
 	public static final int ITEM_PRICE_INDEX = 1;
 	public static final int ITEM_COUNT_INDEX = 2;
 	public static final int TO_ELIMINATE_FIRST_BRACKET = 1;
+	public static final int HOLDING_MONEY_RANGE = 10;
+	public static final int INPUT_MONEY_RANGE = 1;
+
+	public static final String COLON_SIGN = ";";
+	public static final String COMMA_SIGN = ",";
 
 	public int scanHoldingMoney() {
 		while (true) {
@@ -20,7 +25,7 @@ public class InputController {
 				InputView.askHoldingMoney();
 				String holdingMoney = Console.readLine();
 				int money = InputValidator.isNumber(holdingMoney);
-				InputValidator.checkValidRange(money, 10);
+				InputValidator.checkValidRange(money, HOLDING_MONEY_RANGE);
 				return money;
 			} catch (IllegalArgumentException e) {
 				OutputView.printMoneyError();
@@ -34,7 +39,7 @@ public class InputController {
 			try {
 				InputView.askItemInform();
 				String itemInform = Console.readLine();
-				String[] eachItemInform = itemInform.split(";");
+				String[] eachItemInform = itemInform.split(COLON_SIGN);
 				splitItem = splitItemInform(eachItemInform);
 				return splitItem;
 			} catch (IllegalArgumentException e) {
@@ -47,7 +52,7 @@ public class InputController {
 		List<Item> itemList = new ArrayList<>();
 		for (String inform : eachItemInform) {
 			InputValidator.checkValidFormat(inform);
-			String[] itemInform = inform.split(",");
+			String[] itemInform = inform.split(COMMA_SIGN);
 			itemInform[ITEM_NAME_INDEX] = itemInform[ITEM_NAME_INDEX].substring(TO_ELIMINATE_FIRST_BRACKET);
 			itemInform[ITEM_COUNT_INDEX] = itemInform[ITEM_COUNT_INDEX].substring(0,
 				itemInform[ITEM_COUNT_INDEX].length() - 1);
@@ -64,7 +69,7 @@ public class InputController {
 				InputView.askInputMoney();
 				String inputMoney = Console.readLine();
 				int money = InputValidator.isNumber(inputMoney);
-				InputValidator.checkValidRange(money, 1);
+				InputValidator.checkValidRange(money, INPUT_MONEY_RANGE);
 				return money;
 			} catch (IllegalArgumentException e) {
 				OutputView.printInputMoneyError();

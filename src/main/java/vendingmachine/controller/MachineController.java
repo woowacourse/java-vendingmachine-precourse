@@ -22,7 +22,8 @@ public class MachineController {
 
 	public void buyItem() {
 		InputController inputController = new InputController();
-		while(!InputValidator.checkEmptyItemList(vendingMachine.itemList) && InputValidator.checkBuyingPossible(vendingMachine.itemList, vendingMachine.inputMoney)) {
+		while (!InputValidator.checkEmptyItemList(vendingMachine.itemList) && InputValidator.checkBuyingPossible(
+			vendingMachine.itemList, vendingMachine.inputMoney)) {
 			OutputView.printInputMoney(vendingMachine.inputMoney);
 			int itemIndex = inputController.scanBuyingItem(vendingMachine.itemList);
 			updateItemList(itemIndex);
@@ -49,6 +50,4 @@ public class MachineController {
 			OutputView.printMoneyExcessError();
 		}
 	}
-
-
 }
