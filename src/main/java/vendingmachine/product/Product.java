@@ -37,4 +37,14 @@ public class Product {
 	public String getName() {
 		return name;
 	}
+
+	// 필요없다면 최종에 제거하기
+	public Money getPrice() {
+		return price;
+	}
+
+	// 필요없다면 최종에 제거하기
+	public Quantity getQuantity() {
+		return quantity;
+	}
 }

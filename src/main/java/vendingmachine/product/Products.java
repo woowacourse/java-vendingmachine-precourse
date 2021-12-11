@@ -38,4 +38,9 @@ public class Products {
 			throw new IllegalArgumentException(Notification.PRODUCT_ALREADY_EXIST.getMessage());
 		}
 	}
+
+	// 필요없다면 최종에 제거하기
+	public Map<String, Product> getProducts() {
+		return products;
+	}
 }
