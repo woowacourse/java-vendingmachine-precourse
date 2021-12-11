@@ -6,22 +6,30 @@ public class VendingMachine {
 
 	int totalCoin;
 
-	public VendingMachine(int cash) {
-		if (ValidTotalCoin(cash)){
-		this.totalCoin = cash;
-		}
+	public VendingMachine(String cash) {
+		int totalcoin = ValidTotalCoin(cash);
+		this.totalCoin = totalcoin;
 	}
 	
 
 
-	
+
+
 	//예외처리 
-	private boolean ValidTotalCoin(int cash) {
-		if(cash % 10 == 0) {return true;}
-		return false;
+	private int ValidTotalCoin(String cash){
+		if(!cash.chars().allMatch(Character::isDigit)) {
+			throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+		}
+		int totalCoin = Integer.parseInt(cash);
+		DivideTen(totalCoin);
+		return totalCoin;
 	}
 	
-	
+	private void DivideTen(int totalCoin){
+		if(totalCoin % 10 != 0 ) {
+			throw new IllegalArgumentException("[ERROR] 금액은 10원으로 나눠져야 합니다.");	
+		}	
+	}
 	
 	
 	/* 구현전 내용 */
