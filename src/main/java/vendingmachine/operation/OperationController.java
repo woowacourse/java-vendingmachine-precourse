@@ -11,6 +11,8 @@ public class OperationController {
         OperationView.askInsertionAmount();
         doBalanceValidation(inputView);
         OperationView.showBalance(balance);
+        OperationView.askCommodity();
+        
         
     }
     
