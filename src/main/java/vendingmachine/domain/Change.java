@@ -17,7 +17,9 @@ public class Change {
     }
 
     public void createCoin() {
-        while (totalMoney > 0) {
+        int auxiliaryMoney = this.totalMoney;
+
+        while (auxiliaryMoney > 0) {
             int index = pickNumberInList(getCoinEnumValueList()) - 1;
 
             Coin coin = getCoin(index);
@@ -26,6 +28,7 @@ public class Change {
 
             if (checkValidCoin(coin.getAmount())) {
                 coinMap.put(coin, count++);
+                auxiliaryMoney = auxiliaryMoney - coin.getAmount();
             }
         }
     }
