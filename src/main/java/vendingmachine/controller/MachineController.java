@@ -15,8 +15,6 @@ public class MachineController {
 	private static final int itemIndex = 0;
 	private static final int priceIndex = 1;
 	private static final int stockIndex = 2;
-	private static final String PRICE = "금액";
-	private static final String STOCK = "수량";
 
 	private VendingMachine vendingMachine;
 
@@ -55,8 +53,8 @@ public class MachineController {
 		for (String itemInfoList : itemPriceStock) {
 			String[] itemInfo = itemInfoList.split(",");
 			String name = itemInfo[itemIndex];
-			int price = InputValidator.checkNumberForm(itemInfo[priceIndex], PRICE);
-			int stock = InputValidator.checkNumberForm(itemInfo[stockIndex], STOCK);
+			int price = InputValidator.checkPriceForm(itemInfo[priceIndex]);
+			int stock = InputValidator.checkStockForm(itemInfo[stockIndex]);
 			beverages.add(new Beverage(name, price), stock);
 		}
 		return beverages;

@@ -6,7 +6,9 @@ import vendingmachine.exception.InputException;
 
 public class InputValidator {
 
-	private static final String REGEX = "-?\\d+";
+	private static final String MONEY_REGEX = "\\d+0";
+	private static final String STOCK_REGEX = "[1-9]+[0-9]*";
+	private static final int MINIMUM_MONEY_SIZE = 100;
 
 	public static ArrayList<String> checkInputForm(String input) {
 		ArrayList<String> items = new ArrayList<>();
@@ -21,10 +23,22 @@ public class InputValidator {
 		return items;
 	}
 
-	public static int checkNumberForm(String input, String target) {
-		if (!input.matches(REGEX)) {
-			InputException.printNotNumberError(target);
+	public static int checkMoneyForm(String input) {
+		if (!input.matches(MONEY_REGEX)) {
+			InputException.printNotMoneyFormError();
 		}
+		return Integer.parseInt(input);
+	}
+
+	public static int checkPriceForm(String input) {
+		int money = checkMoneyForm(input);
+		if (money < MINIMUM_MONEY_SIZE) {
+			InputException.printLessThanHundredError();
+		}
+		return money;
+	}
+
+	public static int checkStockForm(String input) {
 		return Integer.parseInt(input);
 	}
 

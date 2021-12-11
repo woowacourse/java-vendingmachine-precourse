@@ -11,11 +11,10 @@ public class InputView {
 	private static final String INPUT_ITEM_PRICE_STOCK = "\n상품명과 가격, 수량을 입력해 주세요.";
 	private static final String USER_INPUT_MONEY = "\n투입 금액을 입력해 주세요.";
 	private static final String INPUT_PURCHASE_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
-	private static final String PRICE = "금액";
 
 	public static Money getHavingMoney() {
 		System.out.println(INPUT_HAVING_MONEY);
-		return new Money(InputValidator.checkNumberForm(Console.readLine(), PRICE));
+		return new Money(InputValidator.checkMoneyForm(Console.readLine()));
 
 	}
 
@@ -27,7 +26,7 @@ public class InputView {
 
 	public static Money getUserInputMoney() {
 		System.out.println(USER_INPUT_MONEY);
-		return new Money(InputValidator.checkNumberForm(Console.readLine(), PRICE));
+		return new Money(InputValidator.checkMoneyForm(Console.readLine()));
 	}
 
 	public static String getItemName() {

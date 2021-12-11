@@ -4,8 +4,9 @@ public class InputException {
 
 	private static final String NOT_HAVE_SEMICOLON = "[ERROR] ;(세미콜론)을 이용해서 상품을 구별해야 합니다.";
 	private static final String NOT_HAVE_BRACKET = "[ERROR] 개별 상품은 [](대괄호)로 묶어야 합니다.";
-	private static final String PREFIX = "[ERROR] 올바른 ";
-	private static final String NOT_NUMBER = " 형식이 아닙니다.";
+	private static final String NOT_STOCK_FORM = "[ERROR] 수량은 1이상의 정수여야 합니다.";
+	private static final String NOT_MONEY_FORM = "[ERROR] 금액은 10원으로 나누어 떨어져야 합니다.";
+	private static final String LESS_THAN_100 = "[ERROR] 상품 가격은 100원부터 시작해야 합니다.";
 
 	public static void printNotFoundSemicolonError() {
 		throw new IllegalArgumentException(NOT_HAVE_SEMICOLON);
@@ -15,8 +16,16 @@ public class InputException {
 		throw new IllegalArgumentException(NOT_HAVE_BRACKET);
 	}
 
-	public static void printNotNumberError(String target) {
-		throw new IllegalArgumentException(PREFIX + target + NOT_NUMBER);
+	public static void printNotStockFormError() {
+		throw new IllegalArgumentException(NOT_STOCK_FORM);
+	}
+
+	public static void printNotMoneyFormError() {
+		throw new IllegalArgumentException(NOT_MONEY_FORM);
+	}
+
+	public static void printLessThanHundredError() {
+		throw new IllegalArgumentException(LESS_THAN_100);
 	}
 
 }
