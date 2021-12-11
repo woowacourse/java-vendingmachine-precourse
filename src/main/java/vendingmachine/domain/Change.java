@@ -36,14 +36,6 @@ public class Change {
 		return new Change(changes);
 	}
 
-	public Money getTotalChange() {
-		int total = 0;
-		for (Coin coin : changes.keySet()) {
-			total += coin.getAmount() * changes.get(coin);
-		}
-		return new Money(total);
-	}
-
 	private static void initChanges() {
 		changes.put(Coin.COIN_500, 0);
 		changes.put(Coin.COIN_100, 0);

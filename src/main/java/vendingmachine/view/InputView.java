@@ -47,14 +47,7 @@ public class InputView {
 	}
 
 	public static String getItemName() {
-		while (true) {
-			try {
-				System.out.println(INPUT_PURCHASE_ITEM_NAME);
-				return Console.readLine();
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			}
-		}
-
+		System.out.println(INPUT_PURCHASE_ITEM_NAME);
+		return Console.readLine();
 	}
 }

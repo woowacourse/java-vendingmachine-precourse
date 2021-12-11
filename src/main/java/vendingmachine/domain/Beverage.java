@@ -1,8 +1,8 @@
 package vendingmachine.domain;
 
 public class Beverage {
-	private String name;
-	private int price;
+	private final String name;
+	private final int price;
 
 	public Beverage(String name, int price) {
 		this.name = name;
