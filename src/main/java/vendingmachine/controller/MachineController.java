@@ -45,9 +45,9 @@ public class MachineController {
 	}
 
 	private void finishWithReturn() {
-		Change calculate = vendingMachine.calculate();
+		Change calculatedChange = vendingMachine.calculateChange();
 		OutputView.printInputMoney(vendingMachine.getMoney());
-		OutputView.printExtraMoneyAndChange(calculate);
+		OutputView.printExtraMoneyAndChange(calculatedChange);
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
