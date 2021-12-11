@@ -46,14 +46,6 @@ public class VendingMachineController {
 			item.subtractStockQuantity();
 			money = item.subtractMoneyAfterPurchase(money);
 			outputService.enter();
-		} while (!satisfyExitCondition());
-	}
-
-	private boolean satisfyExitCondition() {
-		if (!itemService.haveAnyItemToBuy(money) || itemService.isAllItemsOutOfStock()) {
-			return true;
-		}
-
-		return false;
+		} while (itemService.haveAnyItemToBuy(money));
 	}
 }

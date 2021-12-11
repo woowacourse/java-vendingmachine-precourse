@@ -26,11 +26,4 @@ public class ItemService {
 			.findFirst()
 			.orElse(null);
 	}
-
-	public boolean isAllItemsOutOfStock() {
-		return itemRepository.stream()
-			.filter(item -> item.isAvailableToBuy())
-			.findFirst()
-			.orElse(null) == null;
-	}
 }
