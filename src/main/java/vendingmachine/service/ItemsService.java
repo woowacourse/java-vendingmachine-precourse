@@ -38,8 +38,8 @@ public class ItemsService {
 		itemsRepository.updateByItemName(itemName, purchasedItem);
 	}
 
-	// TODO: UserBalance 를 DTO 로 전달받기
-	public boolean checkSoldOutOfItemAvailableForBuy(UserBalance userBalance) {
+	public boolean checkSoldOutOfItemAvailableForBuy() {
+		UserBalance userBalance = userBalanceRepository.get();
 		List<Item> items = itemsRepository.findAll();
 		return items.stream()
 			.filter(item -> item.getItemPrice().toInt() <= userBalance.toInt())

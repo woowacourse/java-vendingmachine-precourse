@@ -50,7 +50,7 @@ public class ItemsController {
 	public boolean checkAvailableToPurchase() {
 		UserBalance userBalance = userBalanceService.getUserBalance();
 
-		boolean isSoldOutOfItemAvailableForBuy = itemsService.checkSoldOutOfItemAvailableForBuy(userBalance);
+		boolean isSoldOutOfItemAvailableForBuy = itemsService.checkSoldOutOfItemAvailableForBuy();
 		boolean isUserBalanceNotEnough = userBalance.toInt() < itemsService.getMinItemPrice().toInt();
 
 		return !isSoldOutOfItemAvailableForBuy && !isUserBalanceNotEnough;

@@ -1,18 +1,15 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsDto;
 import vendingmachine.exception.NotNumericException;
 import vendingmachine.service.CoinsService;
-import vendingmachine.service.UserBalanceService;
 import vendingmachine.utils.StringUtils;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class CoinsController {
 	private final CoinsService coinsService = new CoinsService();
-	private final UserBalanceService userBalanceService = new UserBalanceService();
 
 	public void generateCoins() {
 		String input = InputView.inputVendingMachineBalance();
@@ -36,8 +33,7 @@ public class CoinsController {
 	}
 
 	public void printChange() {
-		UserBalance userBalance = userBalanceService.getUserBalance();
-		CoinsDto coinsDto = coinsService.getChange(userBalance);
+		CoinsDto coinsDto = coinsService.getChange();
 		OutputView.printChange(coinsDto);
 	}
 }

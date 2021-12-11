@@ -5,13 +5,14 @@ import java.util.Map;
 
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinQuantity;
-import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsDto;
 import vendingmachine.repository.CoinsRepository;
+import vendingmachine.repository.UserBalanceRepository;
 
 public class CoinsService {
 	private final CoinsRepository coinsRepository = CoinsRepository.getInstance();
+	private final UserBalanceRepository userBalanceRepository = UserBalanceRepository.getInstance();
 
 	public void generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
 		int remainingBalance = vendingMachineBalance.toInt();
@@ -31,9 +32,9 @@ public class CoinsService {
 		return CoinsDto.from(coins);
 	}
 
-	public CoinsDto getChange(UserBalance userBalance) {
+	public CoinsDto getChange() {
 		Map<Coin, CoinQuantity> changeCoins = new HashMap<>();
-		int remainingBalance = userBalance.toInt();
+		int remainingBalance = userBalanceRepository.get().toInt();
 
 		for (Coin coin : Coin.values()) {
 			int quantity = getCoinQuantityForChange(coin, remainingBalance);
