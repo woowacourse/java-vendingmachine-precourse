@@ -9,15 +9,21 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 public class Machine {
     public NumberManager numberManager = new NumberManager();
 
-    private CoinMap coinMap=new CoinMap();
-    private final List<Integer> amountList= new ArrayList<>(Arrays.asList(500,100,50,10));
+    private CoinMap coinMap = new CoinMap();
+    private final List<Integer> amountList = new ArrayList<>(Arrays.asList(500, 100, 50, 10));
     public ProductMap productMap = new ProductMap();
     public int userAmount = 0;
 
     public Machine() {
     }
 
-    public void setCoinsInMachine() {
+    public void workVendingMachine() {
+        setCoinsInMachine();
+        setProductMap();
+        setUserAmount();
+    }
+
+    private void setCoinsInMachine() {
         int heldAmount = getHeldAmountInMachine();
         makeCoins(heldAmount);
     }
@@ -29,24 +35,38 @@ public class Machine {
             try {
                 int heldAmount = numberManager.toNumber(heldAmountString, NumberManager.TYPE_AMOUNT);
                 return heldAmount;
-            } catch (IllegalArgumentException e) {}
+            } catch (IllegalArgumentException e) {
+            }
         }
     }
 
-    private void makeCoins(int amount){
+    private void makeCoins(int amount) {
         coinMap.makeCoins(amount);
         coinMap.printCoins(coinMap.ALL_PRINT);
     }
 
-    public void setProductMap() {
+    private void setProductMap() {
+        System.out.println("상품명과 가격, 수량을 입력해주세요.");
         while (true) {
             String productListString;
             try {
                 productListString = readLine();
                 productMap.toProductMap(productListString);
                 return;
-            } catch (IllegalArgumentException e) {}
+            } catch (IllegalArgumentException e) {
+            }
         }
     }
 
+    private void setUserAmount() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        while (true) {
+            String userAmountString = readLine();
+            try {
+                userAmount = numberManager.toNumber(userAmountString, NumberManager.TYPE_AMOUNT);
+                return;
+            } catch (IllegalArgumentException e) {
+            }
+        }
+    }
 }
