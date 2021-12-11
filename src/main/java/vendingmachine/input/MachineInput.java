@@ -4,6 +4,10 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.util.Validator;
 import vendingmachine.message.Ask;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class MachineInput {
 	private static final String PRODUCT_INFO_DELIM = ";";
 
@@ -23,16 +27,18 @@ public class MachineInput {
 		Validator.isOnlyNums(input);
 	}
 
-	public void getProductsInfo() {
+	public List<String> getProductsInfo() {
 		System.out.println(Ask.ENTER_MACHINE_PRODUCTS);
 		String input = Console.readLine();
-		validateProductsInfoInput(input);
+		try {
+//			validateProductsInfoInput(input);
+		} catch(IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			getProductsInfo();
+		}
+		return Arrays.stream(input.split(PRODUCT_INFO_DELIM)).collect(Collectors.toList());
 	}
 
 	private void validateProductsInfoInput(String input) {
-		String[] rawProductInfos = input.split(PRODUCT_INFO_DELIM);
-		for(String rawInfo : rawProductInfos) {
-
-		}
 	}
 }
