@@ -31,4 +31,8 @@ public class VendingMachineController {
 	public void printHoldingCoins(final Map<Coin, Count> coins) {
 		OutputView.printHoldingCoins(coins);
 	}
+
+	public void printInputMoney(String inputMoney) {
+		OutputView.printInputMoney(inputMoney);
+	}
 }
