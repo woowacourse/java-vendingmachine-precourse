@@ -17,7 +17,7 @@ public class MachineController {
 		int machineMoney = inputView.enterMachineMoney();
 		Machine machine = new Machine(machineMoney);
 		machine.makeCoins();
-		machine.printCoins();
+		outputView.printMachineCoins(machine);
 		Items items = getItems();
 		machine.enrollItems(items);
 		activateMachine(machine);
@@ -31,17 +31,17 @@ public class MachineController {
 
 	private void activateMachine(Machine machine) {
 		int inputMoney = inputView.enterInputMoney();
-		sellItems(machine, inputMoney);
+		inputMoney = sellItems(machine, inputMoney);
 		outputView.printChanges(machine, inputMoney);
-
 	}
 
-	private void sellItems(Machine machine, int inputMoney) {
+	private int sellItems(Machine machine, int inputMoney) {
 		while (inputMoney > machine.getMinPrice() && machine.isStockNotEmpty()) {
 			String buyItem = inputView.enterBuyItem(machine, inputMoney);
 			machine.sellItem(buyItem);
 			inputMoney -= machine.getPrice(buyItem);
 		}
+		return inputMoney;
 	}
 
 }

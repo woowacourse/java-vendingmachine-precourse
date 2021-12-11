@@ -21,8 +21,8 @@ public class Machine {
 		this.items = items;
 	}
 
-	public void printCoins() {
-		System.out.println(coins.toString());
+	public String getCoinsList() {
+		return coins.toString();
 	}
 
 	public int getMinPrice() {
@@ -54,5 +54,10 @@ public class Machine {
 
 	public void printItems() {
 		System.out.println(items.toString());
+	}
+
+	public Coins calculateChange(int change) {
+		Coins changeCoin = this.coins.calculateChange(change);
+		return changeCoin;
 	}
 }

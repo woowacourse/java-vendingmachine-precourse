@@ -12,7 +12,9 @@ public class Items {
 	public int getMinPrice() {
 		int minPrice = Integer.MAX_VALUE;
 		for (Item item : items) {
-			minPrice = Math.min(minPrice, item.getPrice());
+			if (item.getQuantity() != 0) {
+				minPrice = Math.min(minPrice, item.getPrice());
+			}
 		}
 		return minPrice;
 	}
