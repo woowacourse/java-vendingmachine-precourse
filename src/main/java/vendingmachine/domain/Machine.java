@@ -3,6 +3,7 @@ package vendingmachine.domain;
 public class Machine {
 	private final int money;
 	private Coins coins;
+	private Items items;
 
 	public Machine(int money) {
 		this.money = money;
@@ -16,7 +17,42 @@ public class Machine {
 		}
 	}
 
+	public void enrollItems(Items items) {
+		this.items = items;
+	}
+
 	public void printCoins() {
 		System.out.println(coins.toString());
+	}
+
+	public int getMinPrice() {
+		return items.getMinPrice();
+	}
+
+	public boolean isStockNotEmpty() {
+		if (items.isStockEmpty()) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean contains(String itemName) {
+		return items.contains(itemName);
+	}
+
+	public int getQuantity(String itemName) {
+		return items.getQuantity(itemName);
+	}
+
+	public int getPrice(String itemName) {
+		return items.getPrice(itemName);
+	}
+
+	public void sellItem(String buyItem) {
+		items.sell(buyItem);
+	}
+
+	public void printItems() {
+		System.out.println(items.toString());
 	}
 }

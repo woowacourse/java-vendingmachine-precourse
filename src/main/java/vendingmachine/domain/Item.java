@@ -11,6 +11,22 @@ public class Item {
 		this.quantity = quantity;
 	}
 
+	public String getItemName() {
+		return itemName;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void sellItem() {
+		this.quantity--;
+	}
+
 	@Override
 	public String toString() {
 		return "Item{" +

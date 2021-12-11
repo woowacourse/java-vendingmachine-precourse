@@ -29,9 +29,11 @@ public class MachineController {
 
 	private void activateMachine(Machine machine) {
 		int inputMoney = inputView.enterInputMoney();
-		while (inputMoney > machine.getMinPrice() && machine.getStock() > 0) {
-
+		while (inputMoney > machine.getMinPrice() && machine.isStockNotEmpty()) {
+			String buyItem = inputView.enterBuyItem(machine, inputMoney);
+			machine.sellItem(buyItem);
 		}
 	}
+
 
 }
