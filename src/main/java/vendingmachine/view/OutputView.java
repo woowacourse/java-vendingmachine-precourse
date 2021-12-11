@@ -31,8 +31,4 @@ public class OutputView {
 	public static void printItemPerChaseRequest() {
 		System.out.println("구매할 상품명을 입력해 주세요.");
 	}
-
-	public static void printCurrentRemainingInsertedMoney(int money) {
-		System.out.println(String.format("투입 금액 : %s", money));
-	}
 }
