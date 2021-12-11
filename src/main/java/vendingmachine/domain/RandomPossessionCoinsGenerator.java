@@ -50,8 +50,7 @@ public class RandomPossessionCoinsGenerator implements PossessionCoinsGenerator 
     }
 
     private List<PossessionCoin> toPossessionCoinList(Map<Coin, Integer> possessionCoins) {
-        return possessionCoins.keySet()
-            .stream()
+        return Coin.COINS.stream()
             .map(coin -> new PossessionCoin(coin, possessionCoins.get(coin)))
             .collect(toList());
     }
