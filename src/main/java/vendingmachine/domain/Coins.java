@@ -44,7 +44,7 @@ public class Coins {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(CURRENT_MACHINE_COIN).append("\n");
+		stringBuilder.append("\n").append(CURRENT_MACHINE_COIN).append("\n");
 		for (Coin coin : Coin.values()) {
 			stringBuilder.append(Coin.getKoreanValue(coin)).append(" - ").append(coins.get(coin)).append("개");
 			stringBuilder.append("\n");
