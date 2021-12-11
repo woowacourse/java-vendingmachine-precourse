@@ -32,4 +32,23 @@ public enum Coin {
     public void printNumberOfCoin(int number) {
         System.out.println(this.amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + number + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
     }
+
+    public int calcChangePrice(int amount){
+        return this.amount*amount;
+    }
+
+    public int returnChange(int customerMoney, int amount) {
+        if (customerMoney < this.amount * amount) { // 2500원일 때  500원짜리 4개
+            amount = customerMoney / this.amount;
+        }
+        printReturnChange(amount);
+        return amount;
+    }
+
+    private void printReturnChange(int amount) {
+        if(amount == 0){
+            return;
+        }
+        System.out.println(this.amount + "원 - " + amount + "개");
+    }
 }

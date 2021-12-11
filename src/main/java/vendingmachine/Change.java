@@ -21,6 +21,15 @@ public class Change {
         return change;
     }
 
+    public void returnChange(int customerMoney) {
+        for (Coin coin : Coin.values()) {
+            int amount = coinMap.get(coin); // amount
+            int returnAmount = coin.returnChange(customerMoney, amount);
+            coinMap.put(coin, amount - returnAmount);
+            customerMoney -= coin.calcChangePrice(returnAmount);
+        }
+    }
+
     public void createInitialChanges(int change) {
         int randomNumber;
         for (Coin coin : Coin.values()) {

@@ -20,6 +20,11 @@ public class VendingMachine {
         while (checkAvailableSellState()) {
             sellProduct();
         }
+        returnChange();
+    }
+
+    private void returnChange() {
+        change.returnChange(customerMoney);
     }
 
     private boolean checkAvailableSellState() {
