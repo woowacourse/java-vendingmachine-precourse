@@ -8,8 +8,6 @@ public class Application {
         int machineMoney = new Input().requestMachineMoney();
         List<Coin> coins = Coin.generateCoinsBy(machineMoney);
 
-        for (Coin coin : coins) {
-            System.out.println(coin);
-        }
+        System.out.println(new CoinCollection(coins));
     }
 }
