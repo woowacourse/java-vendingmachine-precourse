@@ -5,6 +5,11 @@ import java.util.List;
 import vendingmachine.view.OutputView;
 
 public class VendingMachine {
+	private static final String SPLITTER_OF_PRODUCT_INFO = ",";
+	private static final int PRODUCT_NAME_INDEX = 0;
+	private static final int PRODUCT_COST_INDEX = 1;
+	private static final int NUMBER_OF_PRODUCT_INDEX = 2;
+
 	private final ProductRepository productRepository = new ProductRepository();
 	private CoinBox coinBox;
 
@@ -27,8 +32,11 @@ public class VendingMachine {
 
 	public void addProducts(List<String> productList) {
 		productList.forEach((productInfo) -> {
-			String[] info = productInfo.split(",");
-			productRepository.addProduct(new Product(info[0], Integer.parseInt(info[1])), Integer.parseInt(info[2]));
+			String[] info = productInfo.split(SPLITTER_OF_PRODUCT_INFO);
+			String productName = info[PRODUCT_NAME_INDEX];
+			int productCost = Integer.parseInt(info[PRODUCT_COST_INDEX]);
+			int numberOfProduct = Integer.parseInt(info[NUMBER_OF_PRODUCT_INDEX]);
+			productRepository.addProduct(new Product(productName, productCost), numberOfProduct);
 		});
 	}
 
