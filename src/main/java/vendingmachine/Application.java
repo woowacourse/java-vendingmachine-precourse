@@ -5,7 +5,6 @@ import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -13,93 +12,22 @@ import java.util.stream.Collectors;
 public class Application {
 
 
+    private static final String PRODUCT_INFO_SEPARATOR = ";";
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        VendingMachine vendingMachine = new VendingMachine(getSeedMoneyFromUser());
 
-        int seedMoney = getSeedMoneyFromUser();
-        VendingMachine vendingMachine = new VendingMachine(seedMoney);
-        vendingMachine.printCoins();
-        lineFeed();
-
-
-        List<ProductInfo> productInfos = getProductInfosFromUser();
-        for (ProductInfo productInfo : productInfos) {
-            vendingMachine.addProduct(new Product(productInfo.getName(), productInfo.getPrice()), productInfo.getCount());
-        }
-
-
-        int inputMoney = getInputMoneyFromUser();
-        vendingMachine.inputMoney(inputMoney);
+        printSeedMoneyInVendingMachine(vendingMachine);
+        registerProductsInVendingMachine(vendingMachine);
+        vendingMachine.inputMoney(getInputMoneyFromUser());
 
         while (vendingMachine.isProvidable()) {
-            System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
+            printInputMoneyInVendingMachine(vendingMachine);
             buyProduct(vendingMachine);
         }
 
         Coins changes = vendingMachine.getChanges();
-        System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
-        System.out.println("잔돈");
-        changes.printCoins();
-
-
-    }
-
-
-    private static void buyProduct(VendingMachine vendingMachine) {
-        try {
-            System.out.println("구매할 상품명을 입력해 주세요.");
-            Product product = vendingMachine.findProduct(Console.readLine());
-            lineFeed();
-            vendingMachine.get(product);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            buyProduct(vendingMachine);
-        }
-    }
-
-
-    private static int getInputMoneyFromUser() {
-        while (true) {
-            try {
-                System.out.println("투입 금액을 입력해 주세요.");
-                String input = Console.readLine();
-                assertNumberFormat(input);
-                int number = Integer.parseInt(input);
-                assertPositiveGreaterThanZero(number);
-                return number;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private static List<ProductInfo> getProductInfosFromUser() {
-        while(true) {
-            try {
-                String[] productNames = getProductNamesFromUser();
-                return Arrays.stream(productNames)
-                        .map(rawString -> new ProductInfo(rawString))
-                        .collect(Collectors.toList());
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
-    private static List<String> toList(String[] arguments) {
-        List<String> result = new ArrayList<>();
-        for (String argument : arguments) {
-            result.add(argument);
-        }
-        return result;
-    }
-
-
-    private static String[] getProductNamesFromUser() {
-        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-        String[] result = Console.readLine().split(";");
-        lineFeed();
-        return result;
+        printChanges(vendingMachine, changes);
     }
 
     private static int getSeedMoneyFromUser() {
@@ -117,6 +45,77 @@ public class Application {
             }
         }
     }
+
+    private static void printSeedMoneyInVendingMachine(VendingMachine vendingMachine) {
+        vendingMachine.printCoins();
+        lineFeed();
+    }
+
+    private static void registerProductsInVendingMachine(VendingMachine vendingMachine) {
+        List<ProductInfo> productInfos = getProductInfosFromUser();
+        productInfos.forEach(productInfo ->
+                vendingMachine.addProduct(new Product(productInfo.getName(), productInfo.getPrice()), productInfo.getCount()));
+    }
+
+    private static List<ProductInfo> getProductInfosFromUser() {
+        while(true) {
+            try {
+                String[] productNames = getProductNamesFromUser();
+                return Arrays.stream(productNames)
+                        .map(ProductInfo::new)
+                        .collect(Collectors.toList());
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private static String[] getProductNamesFromUser() {
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        String[] result = Console.readLine().split(PRODUCT_INFO_SEPARATOR);
+        lineFeed();
+        return result;
+    }
+
+    private static int getInputMoneyFromUser() {
+        while (true) {
+            try {
+                System.out.println("투입 금액을 입력해 주세요.");
+                String input = Console.readLine();
+                assertNumberFormat(input);
+                int number = Integer.parseInt(input);
+                assertPositiveGreaterThanZero(number);
+                return number;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private static void printChanges(VendingMachine vendingMachine, Coins changes) {
+        printInputMoneyInVendingMachine(vendingMachine);
+        System.out.println("잔돈");
+        changes.printCoins();
+    }
+
+    private static void printInputMoneyInVendingMachine(VendingMachine vendingMachine) {
+        System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
+    }
+
+
+    private static void buyProduct(VendingMachine vendingMachine) {
+        try {
+            System.out.println("구매할 상품명을 입력해 주세요.");
+            Product product = vendingMachine.findProduct(Console.readLine());
+            lineFeed();
+            vendingMachine.get(product);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            buyProduct(vendingMachine);
+        }
+    }
+
+
 
     private static void assertPositiveGreaterThanZero(int number) {
         if (number <= 0) {
