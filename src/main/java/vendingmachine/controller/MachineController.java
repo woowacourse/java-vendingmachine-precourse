@@ -2,7 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.input.CustomerInput;
 import vendingmachine.input.MachineInput;
-import vendingmachine.model.Coin;
+import vendingmachine.model.CoinStock;
 import vendingmachine.model.Product;
 import vendingmachine.util.CoinCalculator;
 import vendingmachine.util.ProductBuilder;
@@ -10,7 +10,6 @@ import vendingmachine.util.RandomCoinSelector;
 import vendingmachine.view.MachineViewer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -24,7 +23,7 @@ public class MachineController {
 	private MachineInput machineInput = new MachineInput();
 	private CustomerInput customerInput = new CustomerInput();
 	private MachineViewer viewer = new MachineViewer();
-	private HashMap<Coin, Integer> coins = new HashMap<>(Coin.getCoinTypes());
+	private List<CoinStock> coins = new ArrayList<>();
 	private List<Product> products = new ArrayList<>();
 	private int money = 0;
 
@@ -51,7 +50,7 @@ public class MachineController {
 
 	public void returnMoney() {
 		CoinCalculator coinCalculator = new CoinCalculator();
-		HashMap<Integer, Integer> returnCoins = coinCalculator.combineCoinsByGreedy(coins, money);
+		List<CoinStock> returnCoins = coinCalculator.combineCoinsByGreedy(coins, money);
 		viewer.showReturnCoins(returnCoins);
 	}
 
