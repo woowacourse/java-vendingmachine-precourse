@@ -1,35 +1,30 @@
-package vendingmachine;
+package vendingmachine.coin;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public enum Coin {
-    COIN_500(500),
-    COIN_100(100),
-    COIN_50(50),
-    COIN_10(10);
+import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
+public class CoinController {
 
-    private final int amount;
-
-    Coin(final int amount) {
-        this.amount = amount;
+    public CoinController(){
     }
 
-    public int getAmount(){
-        return amount;
-    }
 
-    public static List<Integer> getPossibleAmountList(int money){
+    private List<Integer> getPossibleAmountList(int money){
         return Arrays.stream(Coin.values())
                 .map(Coin::getAmount)
                 .filter(amount -> amount<= money)
                 .collect(Collectors.toList());
     }
-    public static Coin findCoinByPrice(int price){
+    private Coin findCoinByPrice(int price){
         return Arrays.stream(Coin.values())
                 .filter(coin ->price==coin.getAmount())
                 .collect(Collectors.toList())
                 .get(0);
+    }
+
+    public Coin pickPossibleRandomCoin(int money){
+        return findCoinByPrice(pickNumberInList(getPossibleAmountList(money)));
     }
 }
