@@ -14,6 +14,9 @@ public class Products {
 
 	private List<Product> productList = new ArrayList<>();
 
+	public Products() {
+	}
+
 	public List<Product> getProductList() {
 		return productList;
 	}
