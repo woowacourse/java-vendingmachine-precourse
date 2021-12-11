@@ -22,6 +22,7 @@ public class Change {
     }
 
     public void returnChange(int customerMoney) {
+        System.out.println("잔돈");
         for (Coin coin : Coin.values()) {
             int amount = coinMap.get(coin); // amount
             int returnAmount = coin.returnChange(customerMoney, amount);

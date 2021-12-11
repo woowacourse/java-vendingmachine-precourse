@@ -18,4 +18,8 @@ public class Product {
         amount--;
         return this.price;
     }
+
+    public boolean isAvailable(){
+        return this.amount>0;
+    }
 }

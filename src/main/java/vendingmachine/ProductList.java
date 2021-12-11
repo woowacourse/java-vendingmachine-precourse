@@ -39,7 +39,19 @@ public class ProductList {
     }
 
     public boolean checkAvailableState(int customerMoney) {
+        return checkProductAmount() && checkAvailableBuyProduct(customerMoney);
+    }
+    private boolean checkAvailableBuyProduct(int customerMoney){
         return customerMoney > MINIMUM_PRICE;
+    }
+    private boolean checkProductAmount(){
+        for(String name : productMap.keySet()){
+            Product product = productMap.get(name);
+            if(product.isAvailable()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public int sellProduct(String product) {
