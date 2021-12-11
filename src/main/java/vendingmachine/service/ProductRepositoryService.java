@@ -64,4 +64,9 @@ public class ProductRepositoryService {
 		OrderException.isEnoughToOrder(orderedProduct, money);
 		orderedProduct.afterOrdered();
 	}
+
+	public int getPriceByOrder(String order) {
+		Product orderedProduct = productRepository.findByName(order);
+		return orderedProduct.getPrice();
+	}
 }
