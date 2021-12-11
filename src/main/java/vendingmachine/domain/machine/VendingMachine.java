@@ -55,9 +55,4 @@ public class VendingMachine {
         return productNameList.stream()
                 .allMatch((productName) -> productStore.hasProduct(productName));
     }
-
-    public int returnChangeAmount(Consumer consumer) {
-        return consumer.getHowMuchBalance(balance);
-    }
-
 }
