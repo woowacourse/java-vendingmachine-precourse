@@ -10,5 +10,6 @@ public class MachineController {
 		vendingMachine.holdingMoney = inputController.scanHoldingMoney();
 		vendingMachine.coinCount = RandomCoinMaker.makeRandomCoin(vendingMachine.holdingMoney);
 		OutputView.printHoldingCoins(vendingMachine.coinCount);
+		vendingMachine.itemList = inputController.scanItemInform();
 	}
 }
