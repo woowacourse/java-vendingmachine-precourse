@@ -16,7 +16,7 @@ public class VendingMachine {
     }
 
     public void run() {
-        inputMoney();
+        inputCustomerMoney();
         while (checkAvailableSellState()) {
             sellProduct();
         }
@@ -30,13 +30,43 @@ public class VendingMachine {
     private boolean checkAvailableSellState() {
         return productList.checkAvailableState(customerMoney);
     }
-
+    public void inputCustomerMoney() {
+        while (true) {
+            try {
+                inputMoney();
+                break;
+            } catch (IllegalArgumentException exception) {
+                System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
+            }
+        }
+    }
     private void inputMoney() {
         System.out.println("투입 금액을 입력해주세요.");
         String money = Console.readLine();
-        customerMoney = Integer.parseInt(money);
+        customerMoney = this.validateCustomerMoney(money);
         printInputMoney();
     }
+
+    private int validateCustomerMoney(String money) {
+        int inputMoney = this.validateOnlyNumber(money);
+        this.validateGreaterThanMinimumPrice(inputMoney);
+        return inputMoney;
+    }
+
+    private void validateGreaterThanMinimumPrice(int money) {
+        if (!productList.compareMinimumPrice(money)) {
+            throw new IllegalArgumentException("투입 금액보다 저렴한 상품이 없습니다.");
+        }
+    }
+
+    private int validateOnlyNumber(String money) {
+        try {
+            return Integer.parseInt(money);
+        } catch (NumberFormatException exception) {
+            throw new IllegalArgumentException("투입 금액은 숫자만 입력할 수 있습니다.");
+        }
+    }
+
 
     public void sellProduct() {
         System.out.println("구매할 상품명을 입력해 주세요.");

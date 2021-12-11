@@ -29,13 +29,12 @@ public class ProductList {
     public void insertProduct() {
         System.out.println(PRODUCT_INSERT_MESSAGE);
         String productsInformation = Console.readLine();
-//        String productsInformation = "[콜라,1200,10];[콜라,1100,100];[사이다,200,100]";
         initProductMap();
         String[] productInformationList = validateSplitRegex(productsInformation);
         setNumberOfProducts(productInformationList);
-//        for (String product : productMap.keySet()) {
-//            System.out.println(product + ", " + productMap.get(product).price + ", " + productMap.get(product).amount);
-//        }
+    }
+    public boolean compareMinimumPrice(int customerMoney){
+        return customerMoney>=MINIMUM_PRICE;
     }
 
     public boolean checkAvailableState(int customerMoney) {
