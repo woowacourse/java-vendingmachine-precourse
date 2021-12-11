@@ -28,6 +28,12 @@ public class VendingMachineController {
         String fillMachineMoney = fillMachineMoney();
         VendingMachine vendingMachine = new VendingMachine(fillMachineMoney);
 
+        List<Integer> coins = vendingMachine.createCoinList();
+        List<Integer> machineCoins = vendingMachine.calculateCoins(fillMachineMoney, coins);
+
+        final String machineCoinPrintFormat = createMachineCoinPrintFormat(machineCoins, coins);
+        outputView.printMachineHaveCoin(machineCoinPrintFormat);
+
         List<Product> products = fillProducts();
 
         outputView.printNewLine();
@@ -38,8 +44,6 @@ public class VendingMachineController {
 
         inputView.inputPurchasingProductName();
     }
-
-
 
     protected String fillMachineMoney() {
         try {
@@ -68,6 +72,23 @@ public class VendingMachineController {
 
             return fillProducts();
         }
+    }
+
+    public String createMachineCoinPrintFormat(final List<Integer> machineCoins, final List<Integer> coins) {
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < machineCoins.size(); i++) {
+            stringBuilder.append(coins.get(i))
+                    .append(Symbol.WON.getSymbol())
+                    .append(Symbol.SPACE.getSymbol())
+                    .append(Symbol.DASH.getSymbol())
+                    .append(Symbol.SPACE.getSymbol())
+                    .append(machineCoins.get(i))
+                    .append(Symbol.EA.getSymbol())
+                    .append(Symbol.NEW_LINE.getSymbol());
+        }
+
+        return stringBuilder.toString();
     }
 
     protected int inputPurchasingCost() {

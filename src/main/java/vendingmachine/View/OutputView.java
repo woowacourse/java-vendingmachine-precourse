@@ -17,4 +17,10 @@ public class OutputView {
         System.out.println(Messages.INPUT_PURCHASING_COST.getInputMessage() + purchasingCost + Symbol.WON.getSymbol());
     }
 
+    public void printMachineHaveCoin(final String machineHaveCoinPrintFormat) {
+        printNewLine();
+        System.out.println(Messages.MACHINE_HAVE_COINS.getInputMessage());
+        System.out.println(machineHaveCoinPrintFormat);
+    }
+
 }
