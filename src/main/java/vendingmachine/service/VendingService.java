@@ -35,6 +35,10 @@ public class VendingService {
 		return coinStorage.getCoinQuantity(coin);
 	}
 
+	public int getUserBalance() {
+		return userBalance.getUserBalance();
+	}
+
 	public boolean checkProductExist(String name) {
 		try {
 			productManager.checkProductExist(name);
@@ -46,9 +50,7 @@ public class VendingService {
 
 	public boolean buyProduct(String name) {
 		Product product = productManager.searchProduct(name);
-		if(!product.compareToPrice(userBalance.getUserBalance()) || !product.checkHaveStock()) {
-			return false;
-		}
+
 		product.reduceQuantity(1);
 		userBalance.deductBalance(product.getPrice());
 		return true;

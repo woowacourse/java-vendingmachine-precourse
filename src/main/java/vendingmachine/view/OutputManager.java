@@ -16,6 +16,16 @@ public class OutputManager {
 		print(line);
 	}
 
+	public void notifyUserBalance(int userBalance) {
+		print(String.format(OutputConstants.USER_BALANCE_STATEMENT, userBalance));
+	}
+
+	public void notifyChange(EnumMap<Coin, Integer> changeMap) {
+		for(Coin coin : changeMap.keySet()) {
+			notifyStorageCoinInLine(coin, changeMap.get(coin));
+		}
+	}
+
 	private void print(String message) {
 		System.out.println(message);
 	}
