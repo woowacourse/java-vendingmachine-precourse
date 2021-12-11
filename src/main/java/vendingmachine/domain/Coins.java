@@ -83,22 +83,8 @@ public class Coins {
         return sum;
     }
 
-    public void printCoinsContainsZero() {
-        counter.forEach((key, value) -> {
-            int amount = key.getAmount();
-            int count = value;
-            System.out.println(amount + "원 - " + count + "개");
-        });
-    }
 
-    public void printCoins() {
-        counter.entrySet()
-                .stream()
-                .filter(entry -> entry.getValue() > 0)
-                .forEach(entry -> {
-                    int amount = entry.getKey().getAmount();
-                    int count = entry.getValue();
-                    System.out.println(amount + "원 - " + count + "개");
-                });
+    public Map<Coin, Integer> getCounter() {
+        return counter;
     }
 }

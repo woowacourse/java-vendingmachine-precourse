@@ -78,9 +78,4 @@ public class VendingMachine {
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 이름의 상품이 존재하지 않습니다. 상품명 = " + productName));
     }
-
-    public void printCoins() {
-        System.out.println("자판기가 보유한 동전");
-        coins.printCoinsContainsZero();
-    }
 }

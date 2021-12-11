@@ -48,7 +48,14 @@ public class Application {
     }
 
     private static void printSeedMoneyInVendingMachine(VendingMachine vendingMachine) {
-        vendingMachine.printCoins();
+        System.out.println("자판기가 보유한 동전");
+        vendingMachine.getCoins()
+                .getCounter()
+                .forEach((key, value) -> {
+                    int amount = key.getAmount();
+                    int count = value;
+                    System.out.println(amount + "원 - " + count + "개");
+                });
         lineFeed();
     }
 
@@ -59,7 +66,7 @@ public class Application {
     }
 
     private static List<ProductInfo> getProductInfosFromUser() {
-        while(true) {
+        while (true) {
             try {
                 String[] productNames = getProductNamesFromUser();
                 return Arrays.stream(productNames)
@@ -96,7 +103,14 @@ public class Application {
     private static void printChanges(VendingMachine vendingMachine, Coins changes) {
         printInputMoneyInVendingMachine(vendingMachine);
         System.out.println("잔돈");
-        changes.printCoins();
+        changes.getCounter().entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 0)
+                .forEach(entry -> {
+                    int amount = entry.getKey().getAmount();
+                    int count = entry.getValue();
+                    System.out.println(amount + "원 - " + count + "개");
+                });
     }
 
     private static void printInputMoneyInVendingMachine(VendingMachine vendingMachine) {
