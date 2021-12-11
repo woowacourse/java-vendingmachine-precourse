@@ -21,9 +21,9 @@ public class StringChecker {
         return parsedStrings;
     }
 
-    public static void checkStringLength(String name, String contentType) throws IllegalArgumentException{
+    public static void checkStringLength(String content, String contentType) throws IllegalArgumentException{
 
-        if(name.length() == 0){
+        if(content.length() == 0){
             throw new IllegalArgumentException("[ERROR]: " + contentType + "은 빈칸이 될수 없습니다.");
         }
 
