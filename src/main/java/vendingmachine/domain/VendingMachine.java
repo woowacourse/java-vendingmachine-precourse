@@ -31,6 +31,7 @@ public class VendingMachine {
 
 	public void initializeBalance(String input) {
 		int balance = Validation.isValidBalance(input);
+		Validation.isEnoughBalance(balance, items);
 		this.balance = new Balance(balance);
 	}
 

@@ -20,6 +20,7 @@ public class Validation {
 	private static final String INFO_DIVIDER = ",";
 	private static final String NOT_VALID_PRICE = "상품 가격은 10원 단위로 나누어져야 합니다.";
 	private static final String NOT_VALID_QUANTITY = "상품 수량은 1개 이상이어야 합니다.";
+	private static final String NOTHING_TO_BUY = "투입하신 금액이 부족합니다.";
 	private static final String NO_SUCH_ITEMS = "존재하지 않는 상품입니다.";
 	private static final String SOLD_OUT = "해당 상품은 품절입니다.";
 	private static final String NOT_ENOUGH_BALANCE = "잔액이 부족합니다.";
@@ -100,6 +101,12 @@ public class Validation {
 	private static void isEnough(List<String> item) {
 		if (Integer.parseInt(item.get(QUANTITY)) <= EMPTY) {
 			throw new IllegalArgumentException(ERROR + NOT_VALID_QUANTITY);
+		}
+	}
+
+	public static void isEnoughBalance(int balance, Items items) {
+		if (balance < items.getExistingCheapest()) {
+			throw new IllegalArgumentException(ERROR + NOTHING_TO_BUY);
 		}
 	}
 
