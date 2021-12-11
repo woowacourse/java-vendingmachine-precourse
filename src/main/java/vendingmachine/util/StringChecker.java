@@ -31,8 +31,8 @@ public class StringChecker {
 
 	public void inBracket(String input) {
 
-		if (input.length() <= 2 || !(input.charAt(0) == Rule.BRACKET.charAt(0) &&
-			input.charAt(input.length() - 1) == Rule.BRACKET.charAt(1))) {
+		if (input.length() <= 2 || input.charAt(0) != Rule.BRACKET.charAt(0) ||
+			input.charAt(input.length() - 1) != Rule.BRACKET.charAt(1)) {
 			throw new IllegalArgumentException(Message.ERROR_MESSAGE_NOT_BRACKET);
 		}
 

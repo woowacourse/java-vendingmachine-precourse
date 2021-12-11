@@ -31,10 +31,11 @@ public class Product {
 	private void checkInput(String input) {
 		StringChecker stringChecker = new StringChecker();
 		stringChecker.inBracket(input);
+		String inputWithoutBracket = input.substring(1, input.length() - 1);
 
 		SplitChecker splitChecker = new SplitChecker();
-		splitChecker.exceedMaxSplit(input, Rule.DELIMETER_PRODUCT_INFO);
-		splitChecker.hasZeroLength(input, Rule.DELIMETER_PRODUCT_INFO);
-		splitChecker.isCorrectTheNumber(input, Rule.DELIMETER_PRODUCT_INFO, Rule.NUMBER_OF_PRODUCT_INFO);
+		splitChecker.exceedMaxSplit(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO);
+		splitChecker.hasZeroLength(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO);
+		splitChecker.isCorrectTheNumber(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO, Rule.NUMBER_OF_PRODUCT_INFO);
 	}
 }

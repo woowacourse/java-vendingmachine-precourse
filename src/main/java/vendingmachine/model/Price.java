@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import vendingmachine.util.NumberChecker;
+
 public class Price {
 
 	private int price;
@@ -10,6 +12,8 @@ public class Price {
 	}
 
 	private void checkInput(String input) {
-
+		NumberChecker numberChecker = new NumberChecker();
+		numberChecker.isPositiveInteger(input);
+		numberChecker.isDivisibleNumber(input, Coin.minAmount());
 	}
 }

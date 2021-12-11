@@ -10,8 +10,8 @@ public class VendingmachineController {
 	private HoldingSumView holdingSumView;
 	private StockView stockView;
 
-	public VendingmachineController() {
-		vendingmachine = new Vendingmachine();
+	public VendingmachineController(Vendingmachine vendingmachine) {
+		this.vendingmachine = vendingmachine;
 		holdingSumView = new HoldingSumView();
 		stockView = new StockView();
 	}
