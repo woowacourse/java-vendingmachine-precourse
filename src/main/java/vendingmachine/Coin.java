@@ -8,6 +8,7 @@ public enum Coin {
 
     private final int amount;
     private int count;
+    private int countForChange;
 
     Coin(final int amount) {
         this.amount = amount;
@@ -50,5 +51,39 @@ public enum Coin {
 
     public void addCount() {
         count++;
+    }
+
+    private void reduceCount() {
+        count--;
+    }
+
+    private void addChangeCount() {
+        countForChange++;
+    }
+
+    public int reduceChangeAsCoinAmount(int changeAmount) {
+        return changeAmount - amount;
+    }
+
+    public boolean isPossible(int changeAmount) {
+        if (hasCoin() && isLessThanChangeAmount(changeAmount)) {
+            addChangeCount();
+            reduceCount();
+            return true;
+        }
+        return false;
+    }
+
+    private boolean isLessThanChangeAmount(int changeAmount) {
+        return amount <= changeAmount;
+    }
+
+    private boolean hasCoin() {
+        return count > 0;
+    }
+
+    // for test
+    public boolean isChangeCount(int targetCount) {
+        return countForChange == targetCount;
     }
 }
