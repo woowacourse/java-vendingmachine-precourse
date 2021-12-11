@@ -1,6 +1,7 @@
 package vendingmachine.validator;
 
 import static vendingmachine.constants.ErrorMessages.*;
+import static vendingmachine.constants.ProgramConstants.*;
 
 import java.util.Arrays;
 
@@ -47,7 +48,7 @@ public class InputValidator {
 	private void checkAllInitialAmountInputExceptions(String initialAmount) {
 		checkEmptyInputExceptions(initialAmount);
 		checkNotNaturalNumberExceptions(initialAmount);
-		checkNotMultiplicationOfTenExceptions(initialAmount);
+		checkNotMultiplicationOfMinimumCoinTypeExceptions(initialAmount);
 	}
 
 	private void checkAllInitialItemsInputExceptions(String items) {
@@ -55,15 +56,15 @@ public class InputValidator {
 		checkNotSatisfiedInputFormatExceptions(items);
 		checkArgumentLackExceptions(items);
 		checkPriceNotNaturalNumberExceptions(items);
-		checkPriceNotMultiplicationOfTenExceptions(items);
-		checkPriceUnder100Exceptions(items);
+		checkPriceNotMultiplicationOfMinimumCoinTypeExceptions(items);
+		checkPriceUnderMinimumItemPriceExceptions(items);
 		checkQuantityNotNaturalNumberExceptions(items);
 	}
 
 	private void checkAllInputAmountInputExceptions(String inputAmount) {
 		checkEmptyInputExceptions(inputAmount);
 		checkInputAmountNotNaturalNumberExceptions(inputAmount);
-		checkInputAmountNotMultiplicationOfTenExceptions(inputAmount);
+		checkInputAmountNotMultiplicationOfMinimumCoinTypeExceptions(inputAmount);
 	}
 
 	private void checkEmptyInputExceptions(String string) {
@@ -78,16 +79,17 @@ public class InputValidator {
 		}
 	}
 
-	private void checkNotMultiplicationOfTenExceptions(String string) {
+	private void checkNotMultiplicationOfMinimumCoinTypeExceptions(String string) {
 		int number = Integer.parseInt(string);
-		if (number % 10 != 0) {
-			throw new IllegalArgumentException(MONEY_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
+		if (number % MINIMUM_COIN_TYPE != 0) {
+			throw new IllegalArgumentException(MONEY_NOT_MULTIPLICATION_OF_MINIMUM_COIN_TYPE_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkNotSatisfiedInputFormatExceptions(String string) {
-		long wrongFormatItemCount = Arrays.stream(string.split(";"))
-				.filter(item -> item.charAt(0) != '[' || item.charAt(item.length() - 1) != ']')
+		long wrongFormatItemCount = Arrays.stream(string.split(ITEMS_SPLITTER))
+				.filter(item -> item.charAt(0) != ONE_ITEM_INPUT_START_CHAR
+						|| item.charAt(item.length() - 1) != ONE_ITEM_INPUT_END_CHAR)
 				.count();
 		if (wrongFormatItemCount > 0) {
 			throw new IllegalArgumentException(NOT_SATISFIED_INPUT_FORMAT_ERROR_MESSAGE);
@@ -95,44 +97,48 @@ public class InputValidator {
 	}
 
 	private void checkArgumentLackExceptions(String string) {
-		if (Arrays.stream(string.split(";"))
-				.anyMatch(item -> item.split(",").length != 3)) {
+		if (Arrays.stream(string.split(ITEMS_SPLITTER))
+				.anyMatch(item -> item.split(ITEM_ELEMENT_SPLITTER).length != ITEM_ELEMENT_LENGTH)) {
 			throw new IllegalArgumentException(ITEM_ARGUMENT_LACK_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkPriceNotNaturalNumberExceptions(String string) {
-		if (Arrays.stream(string.split(";"))
-				.map(item -> item.split(",")[1])
+		if (!Arrays.stream(string.split(ITEMS_SPLITTER))
+				.map(item -> item.substring(1, item.length() - 1))
+				.map(item -> item.split(ITEM_ELEMENT_SPLITTER)[PRICE_INDEX])
 				.flatMapToInt(CharSequence::chars)
-				.anyMatch(number -> !Character.isDigit(number))) {
+				.allMatch(Character::isDigit)) {
 			throw new IllegalArgumentException(PRICE_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 	}
 
-	private void checkPriceNotMultiplicationOfTenExceptions(String string) {
-		if (Arrays.stream(string.split(";"))
-				.map(item -> item.split(",")[1])
+	private void checkPriceNotMultiplicationOfMinimumCoinTypeExceptions(String string) {
+		if (Arrays.stream(string.split(ITEMS_SPLITTER))
+				.map(item -> item.substring(1, item.length() - 2))
+				.map(item -> item.split(ITEM_ELEMENT_SPLITTER)[vendingmachine.constants.ProgramConstants.PRICE_INDEX])
 				.map(Integer::parseInt)
-				.anyMatch(price -> price % 10 != 0)) {
-			throw new IllegalArgumentException(PRICE_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
+				.anyMatch(price -> price % MINIMUM_COIN_TYPE != 0)) {
+			throw new IllegalArgumentException(PRICE_NOT_MULTIPLICATION_OF_MINIMUM_COIN_TYPE_ERROR_MESSAGE);
 		}
 	}
 
-	private void checkPriceUnder100Exceptions(String string) {
-		if (Arrays.stream(string.split(";"))
-				.map(item -> item.split(",")[1])
+	private void checkPriceUnderMinimumItemPriceExceptions(String string) {
+		if (Arrays.stream(string.split(ITEMS_SPLITTER))
+				.map(item -> item.substring(1, item.length() - 2))
+				.map(item -> item.split(ITEM_ELEMENT_SPLITTER)[vendingmachine.constants.ProgramConstants.PRICE_INDEX])
 				.map(Integer::parseInt)
-				.anyMatch(price -> price < 100)) {
-			throw new IllegalArgumentException(PRICE_UNDER_100_ERROR_MESSAGE);
+				.anyMatch(price -> price < MINIMUM_ITEM_PRICE)) {
+			throw new IllegalArgumentException(PRICE_UNDER_MINIMUM_ITEM_PRICE_ERROR_MESSAGE);
 		}
 	}
 
 	private void checkQuantityNotNaturalNumberExceptions(String string) {
-		if (Arrays.stream(string.split(";"))
-				.map(item -> item.split(",")[2].replace("]", ""))
+		if (!Arrays.stream(string.split(ITEMS_SPLITTER))
+				.map(item -> item.substring(1, item.length() - 1))
+				.map(item -> item.split(ITEM_ELEMENT_SPLITTER)[QUANTITY_INDEX])
 				.flatMapToInt(CharSequence::chars)
-				.anyMatch(number -> !Character.isDigit(number))) {
+				.allMatch(Character::isDigit)) {
 			throw new IllegalArgumentException(QUANTITY_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 	}
@@ -143,10 +149,10 @@ public class InputValidator {
 		}
 	}
 
-	private void checkInputAmountNotMultiplicationOfTenExceptions(String string) {
+	private void checkInputAmountNotMultiplicationOfMinimumCoinTypeExceptions(String string) {
 		int number = Integer.parseInt(string);
-		if (number % 10 != 0) {
-			throw new IllegalArgumentException(INPUT_AMOUNT_NOT_MULTIPLICATION_OF_TEN_ERROR_MESSAGE);
+		if (number % MINIMUM_COIN_TYPE != 0) {
+			throw new IllegalArgumentException(INPUT_AMOUNT_NOT_MULTIPLICATION_OF_MINIMUM_COIN_TYPE_ERROR_MESSAGE);
 		}
 	}
 }
