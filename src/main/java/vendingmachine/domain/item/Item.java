@@ -3,6 +3,8 @@ package vendingmachine.domain.item;
 public class Item {
 	private static final String TO_STRING_FORMAT = "{ItemName=%s, ItemPrice=%s, ItemQuantity=%s}";
 
+	private static final int SOLD_OUT_QUANTITY = 0;
+
 	private final ItemName name;
 	private final ItemPrice price;
 	private final ItemQuantity quantity;
@@ -30,7 +32,7 @@ public class Item {
 	}
 
 	public boolean isSoldOut() {
-		return this.quantity.toInt() <= 0;
+		return this.quantity.toInt() <= SOLD_OUT_QUANTITY;
 	}
 
 	public Item decreaseQuantity() {

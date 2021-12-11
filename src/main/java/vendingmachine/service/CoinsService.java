@@ -11,13 +11,15 @@ import vendingmachine.repository.CoinsRepository;
 import vendingmachine.repository.UserBalanceRepository;
 
 public class CoinsService {
+	private static final int REMAINING_BALANCE_WHEN_ALL_COINS_GENERATED = 0;
+
 	private final CoinsRepository coinsRepository = CoinsRepository.getInstance();
 	private final UserBalanceRepository userBalanceRepository = UserBalanceRepository.getInstance();
 
 	public void generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
 		int remainingBalance = vendingMachineBalance.toInt();
 
-		while (remainingBalance > 0) {
+		while (remainingBalance > REMAINING_BALANCE_WHEN_ALL_COINS_GENERATED) {
 			Coin randomCoin = Coin.pickRandomWithLimit(remainingBalance);
 
 			CoinQuantity originalCoinQuantity = coinsRepository.findByCoin(randomCoin);

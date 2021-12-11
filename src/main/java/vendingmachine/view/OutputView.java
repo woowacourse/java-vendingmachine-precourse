@@ -60,7 +60,7 @@ public class OutputView {
 	}
 
 	private static void printCoinIgnoringZero(String type, int coinQuantity) {
-		if (coinQuantity > 0) {
+		if (coinQuantity > EMPTY_COIN_QUANTITY) {
 			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, coinQuantity));
 		}
 	}

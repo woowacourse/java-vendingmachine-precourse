@@ -5,6 +5,8 @@ import java.util.Objects;
 import vendingmachine.validator.ItemValidator;
 
 public class ItemQuantity {
+	private static final int SUBTRACT_QUANTITY = 1;
+
 	private final int itemQuantity;
 
 	private ItemQuantity(int itemQuantity) {
@@ -18,7 +20,7 @@ public class ItemQuantity {
 
 	public ItemQuantity subtract() {
 		ItemValidator.validateAbleToSubtractItemQuantity(this.itemQuantity);
-		return new ItemQuantity(this.itemQuantity - 1);
+		return new ItemQuantity(this.itemQuantity - SUBTRACT_QUANTITY);
 	}
 
 	public int toInt() {
