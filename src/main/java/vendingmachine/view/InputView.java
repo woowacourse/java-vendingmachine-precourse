@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.Product;
+import vendingmachine.util.StringUtil;
 import vendingmachine.util.Validator;
 
 import java.util.ArrayList;
@@ -14,9 +15,11 @@ public class InputView {
     private static final String INPUT_PURCHASE_SENETENCE = "구매할 상품명을 입력해 주세요.";
 
     private final Validator validator;
+    private final StringUtil stringUtil;
 
     public InputView() {
         this.validator = new Validator();
+        this.stringUtil = new StringUtil();
     }
 
     public int inputVendingmachineChange() {
@@ -37,7 +40,7 @@ public class InputView {
         String input = Console.readLine();
         try {
             validator.isValidProduct(input);
-            return convertStringToProductList(input);
+            return stringUtil.convertStringToProductList(input);
 
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -61,9 +64,5 @@ public class InputView {
     public String inputPurchase(int payMoney) {
         System.out.println(INPUT_PURCHASE_SENETENCE);
         return Console.readLine();
-    }
-
-    private List<Product> convertStringToProductList(String input) {
-        return new ArrayList<>();
     }
 }

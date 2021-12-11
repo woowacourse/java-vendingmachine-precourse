@@ -13,8 +13,9 @@ public class Validator {
     private static final int DIVISOR_PRICE = 10;
     private static final int MIN_PRICE = 100;
     private static final char OPEN_BRACKET = '[';
-    private static final int CLOSE_BRACKET = ']';
+    private static final char CLOSE_BRACKET = ']';
     private static final int NEGATIVE_NUMBER = -1;
+    private static final StringUtil stringUtil = new StringUtil();
 
     public boolean isValidMoney(String input) {
         if (!isNumber(input)
@@ -40,14 +41,12 @@ public class Validator {
     private boolean isValidProductList(String input) {
         List<String> names = new ArrayList<>();
 
-        for (String product : input.split(DIVISOR_PRODUCT_LIST, NEGATIVE_NUMBER)) {
-            if (isStringEmpty(product) || !isValidBracket(product)) {
+        for (String product : stringUtil.splitProductList(input)) {
+            if (stringUtil.isStringEmpty(product) || !isValidBracket(product)) {
                 return false;
             }
-            String[] productInfo = splitProductInfo(product);
-            if (isDuplicateName(names, productInfo[0])
-                    || !isValidPrice(productInfo[1])
-                    || !isValidStock(productInfo[2])) {
+            String[] productInfo = stringUtil.splitProductInfo(product);
+            if (!isValidProductInfo(productInfo, names)) {
                 return false;
             }
             names.add(productInfo[0]);
@@ -55,12 +54,10 @@ public class Validator {
         return true;
     }
 
-    private boolean isStringEmpty(String str) {
-        return str == null || str.isEmpty();
-    }
-
-    private String[] splitProductInfo (String input) {
-        return input.substring(1, input.length() - 1).split(DIVISOR_PRODUCT);
+    private boolean isValidProductInfo(String[] productInfo, List<String> names) {
+        return !isDuplicateName(names, productInfo[0])
+                && isValidPrice(productInfo[1])
+                && isValidStock(productInfo[2]);
     }
 
     private boolean isValidPrice(String input) {
