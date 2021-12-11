@@ -27,7 +27,7 @@ public class UserBalance {
 	}
 
 	public int toInt() {
-		return this.userBalance;
+		return userBalance;
 	}
 
 	@Override
@@ -49,6 +49,6 @@ public class UserBalance {
 
 	@Override
 	public String toString() {
-		return Integer.toString(this.userBalance);
+		return Integer.toString(userBalance);
 	}
 }

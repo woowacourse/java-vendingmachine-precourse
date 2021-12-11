@@ -28,19 +28,19 @@ public class CoinsDto {
 	}
 
 	public int getCoin500Quantity() {
-		return this.coin500Quantity;
+		return coin500Quantity;
 	}
 
 	public int getCoin100Quantity() {
-		return this.coin100Quantity;
+		return coin100Quantity;
 	}
 
 	public int getCoin50Quantity() {
-		return this.coin50Quantity;
+		return coin50Quantity;
 	}
 
 	public int getCoin10Quantity() {
-		return this.coin10Quantity;
+		return coin10Quantity;
 	}
 
 	public int getAllCoinQuantity() {

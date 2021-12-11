@@ -18,6 +18,6 @@ public class UserBalanceRepository {
 	}
 
 	public UserBalance get() {
-		return this.userBalance;
+		return userBalance;
 	}
 }

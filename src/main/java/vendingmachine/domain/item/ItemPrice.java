@@ -17,16 +17,16 @@ public class ItemPrice implements Comparable<ItemPrice> {
 	}
 
 	public int toInt() {
-		return this.price;
+		return price;
 	}
 
 	@Override
 	public int compareTo(ItemPrice itemPrice) {
-		if (this.price > itemPrice.toInt()) {
+		if (price > itemPrice.toInt()) {
 			return 1;
 		}
 
-		if (this.price > itemPrice.toInt()) {
+		if (price > itemPrice.toInt()) {
 			return -1;
 		}
 
@@ -52,6 +52,6 @@ public class ItemPrice implements Comparable<ItemPrice> {
 
 	@Override
 	public String toString() {
-		return Integer.toString(this.price);
+		return Integer.toString(price);
 	}
 }

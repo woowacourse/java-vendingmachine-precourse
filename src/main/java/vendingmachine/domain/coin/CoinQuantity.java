@@ -18,7 +18,7 @@ public class CoinQuantity {
 	}
 
 	public int toInt() {
-		return this.coinQuantity;
+		return coinQuantity;
 	}
 
 	@Override

@@ -24,24 +24,24 @@ public class Item {
 	}
 
 	public ItemName getItemName() {
-		return this.name;
+		return name;
 	}
 
 	public ItemPrice getItemPrice() {
-		return this.price;
+		return price;
 	}
 
 	public boolean isSoldOut() {
-		return this.quantity.toInt() <= SOLD_OUT_QUANTITY;
+		return quantity.toInt() <= SOLD_OUT_QUANTITY;
 	}
 
 	public Item decreaseQuantity() {
-		ItemQuantity subtractedQuantity = this.quantity.subtract();
-		return new Item(this.name, this.price, subtractedQuantity);
+		ItemQuantity subtractedQuantity = quantity.subtract();
+		return new Item(name, price, subtractedQuantity);
 	}
 
 	@Override
 	public String toString() {
-		return String.format(TO_STRING_FORMAT, this.name.toString(), this.price.toString(), this.quantity.toString());
+		return String.format(TO_STRING_FORMAT, name.toString(), price.toString(), quantity.toString());
 	}
 }

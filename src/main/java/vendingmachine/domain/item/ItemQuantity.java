@@ -19,12 +19,12 @@ public class ItemQuantity {
 	}
 
 	public ItemQuantity subtract() {
-		ItemValidator.validateAbleToSubtractItemQuantity(this.itemQuantity);
-		return new ItemQuantity(this.itemQuantity - SUBTRACT_QUANTITY);
+		ItemValidator.validateAbleToSubtractItemQuantity(itemQuantity);
+		return new ItemQuantity(itemQuantity - SUBTRACT_QUANTITY);
 	}
 
 	public int toInt() {
-		return this.itemQuantity;
+		return itemQuantity;
 	}
 
 	@Override
@@ -46,6 +46,6 @@ public class ItemQuantity {
 
 	@Override
 	public String toString() {
-		return Integer.toString(this.itemQuantity);
+		return Integer.toString(itemQuantity);
 	}
 }

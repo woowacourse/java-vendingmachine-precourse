@@ -32,6 +32,6 @@ public class CoinsRepository {
 	}
 
 	public Map<Coin, CoinQuantity> findAll() {
-		return this.coins;
+		return coins;
 	}
 }
