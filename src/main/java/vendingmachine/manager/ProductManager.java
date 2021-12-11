@@ -23,24 +23,10 @@ public class ProductManager {
 		}
 	}
 
-	public boolean checkCanBuyProduct(String name, int userBalance) {
-		Product product = searchProduct(name);
-		if(product.compareToPrice(userBalance) && product.checkHaveStock()) {
-			return true;
-		}
-		return false;
-	}
-
-	public void deductQuantityOfProduct(String name, int reduceValue) {
-		Product product = searchProduct(name);
-		product.reduceQuantity(reduceValue);
-	}
-
 	public Product searchProduct(String name) {
 		return productList.stream()
 			.filter(product -> name.equals(product.getName()))
 			.findAny()
 			.orElse(null);
 	}
-
 }

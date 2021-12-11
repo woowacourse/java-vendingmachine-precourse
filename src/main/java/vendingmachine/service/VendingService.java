@@ -1,5 +1,6 @@
 package vendingmachine.service;
 
+import java.util.EnumMap;
 import java.util.List;
 
 import vendingmachine.constants.OutputConstants;
@@ -34,10 +35,6 @@ public class VendingService {
 		return coinStorage.getCoinQuantity(coin);
 	}
 
-	private String makeCoinQuantityStringFormat(int amount, int quantity) {
-		return String.format(OutputConstants.COIN_QUANTITY_STATEMENT, amount, quantity);
-	}
-
 	public boolean checkProductExist(String name) {
 		try {
 			productManager.checkProductExist(name);
@@ -57,4 +54,7 @@ public class VendingService {
 		return true;
 	}
 
+	public EnumMap<Coin, Integer> makeChange() {
+		return coinStorage.getChange(userBalance.getUserBalance());
+	}
 }
