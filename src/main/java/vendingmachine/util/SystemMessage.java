@@ -21,4 +21,5 @@ public class SystemMessage {
 	public static final String SHOW_INPUT_MONEY = "투입 금액: ";
 	public static final String INPUT_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 	public static final String ERROR_NOT_EXIST_ITEM = ERROR + " 존재하지 않는 상품명입니다.";
+	public static final String ERROR_IS_NOT_IN_STOCK = ERROR + " 상품 재고가 남아있지 않습니다.";
 }

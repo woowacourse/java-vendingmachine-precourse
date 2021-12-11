@@ -14,4 +14,16 @@ public class Item {
 	public String getName() {
 		return name;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public boolean isInStock() {
+		return this.amount > 0;
+	}
+
+	public void deductAmount() {
+		this.amount--;
+	}
 }

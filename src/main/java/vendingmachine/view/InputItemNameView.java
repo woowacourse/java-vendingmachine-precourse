@@ -21,7 +21,7 @@ public class InputItemNameView implements View {
 			show();
 			return;
 		}
-
+		Application.controller.purchase(item);
 	}
 
 	private void printMoneyAndMessage(int money) {
@@ -38,6 +38,9 @@ public class InputItemNameView implements View {
 		if(item == null) {
 			throw new IllegalArgumentException(SystemMessage.ERROR_NOT_EXIST_ITEM);
 		}
+		if(!item.isInStock())
+			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_IN_STOCK);
+
 		return item;
 	}
 }

@@ -57,4 +57,9 @@ public class VendingMachineController {
 	public Item searchItem(String itemName) {
 		return itemService.searchItem(itemName);
 	}
+
+	public void purchase(Item item) {
+		itemService.deductItemAmount(item.getName());
+		moneyService.useMoney(item.getPrice());
+	}
 }

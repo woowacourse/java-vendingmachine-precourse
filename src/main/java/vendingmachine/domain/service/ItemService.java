@@ -15,4 +15,8 @@ public class ItemService {
 	public Item searchItem(String itemName) {
 		return itemRepository.getItemByName(itemName);
 	}
+
+	public void deductItemAmount(String itemName) {
+		itemRepository.deductItemAmount(itemName);
+	}
 }
