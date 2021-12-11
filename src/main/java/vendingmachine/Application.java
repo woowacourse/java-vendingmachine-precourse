@@ -12,7 +12,42 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         MACHINE_OWN_MONEY = inputMachineOwnMoney();
+        setVendingMachineOwnCoins();
+        printCurrentMachineCoin();
     }
+
+    public static void setVendingMachineOwnCoins(){
+        Coin[] eachCoin = Coin.values();
+        for(Coin c: eachCoin){
+            setRandomCountToEachCoin(c);
+        }
+    }
+
+    public static void printCurrentMachineCoin(){
+        System.out.println("자판기가 보유한 동전");
+        Coin[] eachCoin = Coin.values();
+        for(Coin c: eachCoin){
+            System.out.println(c.getAmount()+"원 - " + c.getCount()+"개");
+        }
+    }
+
+    public static void setRandomCountToEachCoin(Coin coin){
+        int maxCount = MACHINE_OWN_MONEY / coin.getAmount();
+        List<Integer> possibleMoneyList = new ArrayList<>();
+
+        if(maxCount <= 0) return;
+        if(coin.getAmount() == 10){
+            coin.setCount(maxCount);
+            return;
+        }
+
+        for(int i = 0; i <= maxCount; i++){
+            possibleMoneyList.add(i);
+        }
+        coin.setCount(Randoms.pickNumberInList(possibleMoneyList));
+        MACHINE_OWN_MONEY -= coin.getCount() * coin.getAmount();
+    }
+
     public static int inputMachineOwnMoney(){
         String machineOwnMoney = "";
         while(machineOwnMoney.isEmpty()) {
