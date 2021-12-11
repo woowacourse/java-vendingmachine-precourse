@@ -7,7 +7,6 @@ import models.Product;
 import java.util.HashMap;
 
 import static models.Coin.*;
-import static models.Product.totalRemains;
 
 public class VendingMachineMain {
     public static int totalAmount;
@@ -39,19 +38,33 @@ public class VendingMachineMain {
 
                 name2Product.put(productName, new Product(productName, price, remains));
                 minCost = Math.min(minCost, price);
-                totalRemains += remains;
+                //totalRemains += remains;
             }
         }
     }
 
-    public static void giveAnOrder() {
+    public static boolean giveAnOrder() {
         String productToBuy = InputGenerator.inputProductToBuy();
         if (!name2Product.containsKey(productToBuy)) {
             throw new IllegalArgumentException("[ERROR] 상품명 입력 오류");
         }
-        if (!name2Product.get(productToBuy).provide()) {
-            throw new IllegalArgumentException("[ERROR] 구매 불가");
+
+        if (soldOutCheck(productToBuy)) {
+            return false;
         }
+        name2Product.get(productToBuy).provide();
+        if (soldOutCheck(productToBuy)) {
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean soldOutCheck(String productToBuy) {
+        boolean soldOut = false;
+        if (name2Product.get(productToBuy).isSoldOut()) {
+            soldOut = true;
+        }
+        return soldOut;
     }
 
     public static int[] makeChange() {  // 거스름돈 생성
