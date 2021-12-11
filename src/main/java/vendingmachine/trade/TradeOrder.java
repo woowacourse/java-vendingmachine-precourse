@@ -26,6 +26,6 @@ public class TradeOrder {
 	}
 
 	public void complete() {
-		product.buyWith(payments);
+		payments.payFor(product.release());
 	}
 }

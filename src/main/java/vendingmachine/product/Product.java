@@ -1,7 +1,6 @@
 package vendingmachine.product;
 
 import vendingmachine.billing.Money;
-import vendingmachine.billing.Payments;
 
 public class Product {
 	private static final String ERROR_NAME_DUPLICATE = "상품명은 중복될 수 없습니다.";
@@ -44,8 +43,8 @@ public class Product {
 		return true;
 	}
 
-	public void buyWith(Payments payments) {
+	public int release() {
 		quantity--;
-		payments.pay(price);
+		return price;
 	}
 }

@@ -11,7 +11,7 @@ public class Payments {
 		return moneyForBuying;
 	}
 
-	public void pay(int productValue) {
+	public void payFor(int productValue) {
 		moneyForBuying.pay(productValue);
 	}
 }
