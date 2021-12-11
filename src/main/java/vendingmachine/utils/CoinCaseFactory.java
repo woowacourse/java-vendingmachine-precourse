@@ -14,7 +14,7 @@ public class CoinCaseFactory {
 	private CoinCaseFactory() {
 	}
 
-	public static List<CoinCase> makeCoinsCase(int totalAmount) {
+	public static List<CoinCase> makeCoinCases(int totalAmount) {
 		currentAmount = totalAmount;
 		List<Coin> coinTypes = Arrays.stream(Coin.values()).collect(Collectors.toList());
 		List<CoinCase> coinCases = coinTypes.stream()
