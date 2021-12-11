@@ -17,6 +17,8 @@ import static vendingmachine.message.Error.*;
 
 public class MachineController {
 
+	private static final String END_OPTION = "잔돈";
+
 	private MachineInput machineInput = new MachineInput();
 	private CustomerInput customerInput = new CustomerInput();
 	private MachineViewer viewer = new MachineViewer();
@@ -33,40 +35,33 @@ public class MachineController {
 
 	public void operate() {
 		while (checkAnyProductRemain() && checkCanBuyCheapest()) {
+			String customerInput = getCustomerInput();
+			if (customerInput.equals(END_OPTION)) {
+				break;
+			}
 			try {
-				sell();
+				sell(customerInput);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
 		}
 	}
 
-	public void sell() {
-		Product product = getProductByName(getPurchaseName());
-		if (!product.enoughMoneyToBuy(money)) {
-			throw new IllegalArgumentException(NOT_ENOUGH_TO_BUY);
-		}
-		money = product.purchaseOne(money);
+	public void sell(String name) {
+		Product product = getProductByName(name);
+		purchaseProduct(product);
 	}
 
-	private String getPurchaseName() {
-		String name = "";
-		try {
-			viewer.showRemainMoney(money);
-			name = customerInput.getPurchaseName();
-			checkProductIsExist(name);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			getPurchaseName();
-		}
-		return name;
+	private String getCustomerInput() {
+		viewer.showRemainMoney(money);
+		return customerInput.getPurchaseName();
 	}
 
 	private Product getProductByName(String name) {
 		return products.stream()
 				.filter(product -> product.getName().equals(name))
 				.findAny()
-				.orElseThrow(() -> new IllegalArgumentException());
+				.orElseThrow(() -> new IllegalArgumentException(NO_SUCH_PRODUCT_EXIST));
 	}
 
 	private void setupChangeCoins() {
@@ -120,5 +115,12 @@ public class MachineController {
 	private boolean checkCanBuyCheapest() {
 		return products.stream()
 				.anyMatch(p -> p.enoughMoneyToBuy(money));
+	}
+
+	private void purchaseProduct(Product product) {
+		if (!product.enoughMoneyToBuy(money)) {
+			throw new IllegalArgumentException(NOT_ENOUGH_TO_BUY);
+		}
+		money = product.purchaseOne(money);
 	}
 }
