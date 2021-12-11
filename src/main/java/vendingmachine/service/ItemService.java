@@ -14,8 +14,10 @@ public class ItemService {
 	}
 
 	public boolean haveAnyItemToBuy(int money) {
-		return itemRepository.peek()
-			.isAvailableToBuy(money);
+		return itemRepository.stream()
+			.filter(item -> item.isAvailableToBuy(money))
+			.findFirst()
+			.isPresent();
 	}
 
 	public Item findByName(String name) {

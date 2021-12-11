@@ -27,7 +27,7 @@ public class Item implements Comparable<Item>{
 	}
 
 	public boolean isAvailableToBuy(int money) {
-		return this.price <= money;
+		return this.price <= money && this.isAvailableToBuy();
 	}
 
 	public void subtractStockQuantity() {
