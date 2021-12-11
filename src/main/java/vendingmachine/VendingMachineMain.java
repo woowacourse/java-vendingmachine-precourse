@@ -21,8 +21,10 @@ public class VendingMachineMain {
         totalAmount = InputGenerator.inputInitMoney();
 
         coin2Num = new HashMap<Coin, Integer>();
+        for (Coin coin: Coin.values()) {
+            coin2Num.put(coin, 0);
+        }
         VendingMachineDistribution.distributeRandomly();
-
         VendingMachineUI.printCoins();
     }
 
@@ -38,33 +40,24 @@ public class VendingMachineMain {
 
                 name2Product.put(productName, new Product(productName, price, remains));
                 minCost = Math.min(minCost, price);
-                //totalRemains += remains;
             }
         }
     }
 
-    public static boolean giveAnOrder() {
+    public static void giveAnOrder() {
         String productToBuy = InputGenerator.inputProductToBuy();
         if (!name2Product.containsKey(productToBuy)) {
             throw new IllegalArgumentException("[ERROR] 상품명 입력 오류");
         }
 
         if (soldOutCheck(productToBuy)) {
-            return false;
+            throw new IllegalArgumentException("[ERROR] 해당 상품 재고 없음");
         }
         name2Product.get(productToBuy).provide();
-        if (soldOutCheck(productToBuy)) {
-            return false;
-        }
-        return true;
     }
 
     public static boolean soldOutCheck(String productToBuy) {
-        boolean soldOut = false;
-        if (name2Product.get(productToBuy).isSoldOut()) {
-            soldOut = true;
-        }
-        return soldOut;
+        return name2Product.get(productToBuy).isSoldOut();
     }
 
     public static int[] makeChange() {  // 거스름돈 생성
