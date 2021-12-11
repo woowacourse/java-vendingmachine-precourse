@@ -3,7 +3,7 @@ package vendingmachine.domain;
 import static vendingmachine.Constant.*;
 import static vendingmachine.ErrorMessage.*;
 
-public class Price {
+public class Price extends Number {
     private int price;
 
     public Price(String priceInput) {
@@ -55,4 +55,35 @@ public class Price {
         return Integer.toString(price);
     }
 
+    @Override
+    public int intValue() {
+        return price;
+    }
+
+    @Override
+    public long longValue() {
+        return (long)price;
+    }
+
+    @Override
+    public float floatValue() {
+        return (float)price;
+    }
+
+    @Override
+    public double doubleValue() {
+        return (double)price;
+    }
+
+    public boolean equals(Object obj) {
+        if (obj instanceof Price) {
+            return price == ((Price)obj).intValue();
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return Integer.hashCode(price);
+    }
 }
