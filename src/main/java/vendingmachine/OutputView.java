@@ -13,8 +13,14 @@ public class OutputView {
         System.out.println("투입 금액: " + money + "원");
     }
 
-    public static void printChanges(int money) {
+    public static void printChanges() {
         System.out.println("잔돈");
-        Machine.makeChanges();
+        for (Coin coin : Coin.values()) {
+            int changes = Machine.makeChanges(coin);
+            if (changes != 0) {
+               System.out.println(coin.getAmount() + "원 - " + changes);
+            }
+        }
+
     }
 }

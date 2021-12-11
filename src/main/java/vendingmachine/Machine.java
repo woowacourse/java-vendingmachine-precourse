@@ -3,7 +3,7 @@ package vendingmachine;
 import java.util.ArrayList;
 
 public class Machine {
-    private int money;
+    private static int money;
     private ArrayList<Product> products;
     private boolean purchasable = true;
     //private Coin coins;
@@ -17,7 +17,7 @@ public class Machine {
             OutputView.printMoney(money);
             this.purchasable = isPurchasable(InputView.inputProduct());
         }
-        OutputView.printChanges(money);
+        OutputView.printChanges();
     }
 
     public boolean isPurchasable(String productName) {
@@ -35,7 +35,16 @@ public class Machine {
         this.money -= reduceMoney;
     }
 
-    public static void makeChanges() {
-
+    public static int makeChanges(Coin coin) {
+        int changes = money/coin.getAmount();
+        if (changes != 0) {
+            if (coin.getCount() - changes >= 0) {
+                return changes;
+            }
+            if (coin.getCount() -changes < 0) {
+                return coin.getCount();
+            }
+        }
+        return 0;
     }
 }
