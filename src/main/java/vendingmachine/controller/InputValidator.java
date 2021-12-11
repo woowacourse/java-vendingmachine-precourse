@@ -14,11 +14,36 @@ public class InputValidator {
 		return Integer.parseInt(input);
 	}
 
-	public static boolean checkValidItem(List<Item> itemList, String buyingItem) {
+	public static int checkValidItem(List<Item> itemList, String buyingItem) {
+		int index = 0;
 		for (Item item : itemList) {
 			if ((item.name).equals(buyingItem)) {
+				return index;
+			}
+			index++;
+		}
+		throw new IllegalArgumentException();
+	}
+
+	public static boolean checkEmptyItemList(List<Item> itemsList) {
+		if (itemsList.size() == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public static boolean checkBuyingPossible(List<Item> itemList, int inputMoney) {
+		for (Item item : itemList) {
+			if (inputMoney >= item.price) {
 				return true;
 			}
+		}
+		return false;
+	}
+
+	public static boolean checkExcessMoney(int inputMoney, int itemPrice) {
+		if (inputMoney - itemPrice >= 0) {
+			return true;
 		}
 		throw new IllegalArgumentException();
 	}

@@ -18,4 +18,8 @@ public class Item {
 		this.price = price;
 		this.count = count;
 	}
+
+	public void minusCount() {
+		count -= 1;
+	}
 }

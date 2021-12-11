@@ -68,13 +68,13 @@ public class InputController {
 		}
 	}
 
-	public String scanBuyingItem(List<Item> itemList) {
+	public int scanBuyingItem(List<Item> itemList) {
 		while (true) {
 			try {
 				InputView.askBuyingItem();
 				String buyingItem = Console.readLine();
-				InputValidator.checkValidItem(itemList, buyingItem);
-				return buyingItem;
+				int itemIndex = InputValidator.checkValidItem(itemList, buyingItem);
+				return itemIndex;
 			} catch (IllegalArgumentException e) {
 				OutputView.printNotExistingItemError();
 			}

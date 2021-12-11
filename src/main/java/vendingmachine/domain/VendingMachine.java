@@ -8,4 +8,8 @@ public class VendingMachine {
 	public int inputMoney;
 	public List<Item> itemList;
 	public HashMap<Coin, Integer> coinCount;
+
+	public void minusInputMoney(int itemPrice) {
+		inputMoney -= itemPrice;
+	}
 }
