@@ -1,6 +1,5 @@
 package vendingmachine.Controller.Run;
 
-import vendingmachine.Controller.MachineController;
 import vendingmachine.Model.Coin;
 import vendingmachine.Model.CoinWallet;
 import vendingmachine.Model.VendingMachine;

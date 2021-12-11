@@ -1,7 +1,6 @@
 package vendingmachine.Controller.Run;
 
 import vendingmachine.Controller.InputController;
-import vendingmachine.Controller.MachineController;
 import vendingmachine.Model.Product;
 import vendingmachine.Model.VendingMachine;
 import vendingmachine.View.OutputView;

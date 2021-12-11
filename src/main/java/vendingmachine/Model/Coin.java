@@ -1,6 +1,6 @@
 package vendingmachine.Model;
 
-import vendingmachine.Constants;
+import vendingmachine.Utils.Constants;
 
 public enum Coin {
 	COIN_500(500),

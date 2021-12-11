@@ -1,9 +1,9 @@
-package vendingmachine.Model.Validator;
+package vendingmachine.Utils.Validator;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import vendingmachine.Constants;
+import vendingmachine.Utils.Constants;
 
 public class NameValidator {
 	public final String NAME;

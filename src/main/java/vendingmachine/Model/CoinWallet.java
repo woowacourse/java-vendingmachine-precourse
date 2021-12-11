@@ -2,7 +2,7 @@ package vendingmachine.Model;
 
 import java.util.LinkedHashMap;
 
-import vendingmachine.Util;
+import vendingmachine.Utils.Util;
 
 public class CoinWallet {
 	public int money;
