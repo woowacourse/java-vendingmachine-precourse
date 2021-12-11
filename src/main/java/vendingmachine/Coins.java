@@ -43,4 +43,11 @@ public class Coins {
         this.removeCoin(coin, count);
         destCoins.addCoin(coin, count);
     }
+
+    public Coins getAllCoin() {
+        Coins allCoins = new Coins();
+        remainingCoin.keySet().forEach(coin -> this.moveCoin(coin, this.getCoinCount(coin), allCoins));
+
+        return allCoins;
+    }
 }

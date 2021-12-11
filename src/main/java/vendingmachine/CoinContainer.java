@@ -2,9 +2,8 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 
 public class CoinContainer {
@@ -39,8 +38,38 @@ public class CoinContainer {
         return Coin.of(pickedAmount);
     }
 
-    private void addRemainingCoin(Coin coin) {
-        coins.addCoin(coin, 1);
+    public Coins returnBalance(int balance) {
+        if (balance >= coins.getTotalAmount()) {
+            return coins.getAllCoin();
+        }
+
+        return getChangeCoins(balance);
+    }
+
+    private Coins getChangeCoins(int balance) {
+        Coins changes = new Coins();
+        Coin changedCoin;
+
+        while (true) {
+            changedCoin = getMaximumChangeableRemainingCoin(balance);
+            if (changedCoin == null) {
+                break;
+            }
+
+            balance -= changedCoin.getAmount();
+            coins.moveCoin(changedCoin, 1, changes);
+        }
+
+        return changes;
+    }
+
+    private Coin getMaximumChangeableRemainingCoin(int amount) {
+        return Arrays.stream(Coin.values())
+                        .filter(coin -> coins.getCoinCount(coin) != 0)
+                        .filter(coin -> amount >= coin.getAmount())
+                        .findFirst()
+                        .orElse(null);
+
     }
 
     public int getTotalAmount() {
