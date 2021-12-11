@@ -1,5 +1,6 @@
 package vendingmachine.model.vo;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
 import org.junit.jupiter.api.DisplayName;
@@ -8,6 +9,17 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
+    @Test
+    @DisplayName("금액을 감소시킨다.")
+    void decrease() {
+        Money money = new Money("2000");
+        int decreasingValue = 1000;
+        money.decreaseBy(decreasingValue);
+        Money another = new Money("1000");
+        boolean actual = money.equals(another);
+        assertThat(actual).isTrue();
+    }
+
     @ParameterizedTest
     @DisplayName("양의 정수가 아닌 값으로 Money 객체를 생성하면 예외를 발생시킨다.")
     @ValueSource(strings = {"?", "1.2", "0", "-1"})
