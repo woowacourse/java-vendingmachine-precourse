@@ -8,8 +8,11 @@ public class User {
     private String input;
     private String ERROR_MESSAGE;
     private int machineBalance;
+    private int userAmount;
     private int price;
     private int quantity;
+    private int allInventory = 0;
+    private int minProduct = 999999999;
     ArrayList<String> goods = new ArrayList<>();
     HashMap<String, Integer> productPrices = new HashMap<>();
     HashMap<String, Integer> productQuantities = new HashMap<>();
@@ -137,6 +140,7 @@ public class User {
             System.out.println(ERROR_MESSAGE);
             return false;
         }
+        userAmount = machineBalance;
         return true;
     }
     private void checkCorrectAmount() throws IllegalArgumentException {
@@ -147,7 +151,16 @@ public class User {
         System.out.println(Message.REMAINING_AMOUNT + machineBalance + Message.WON);
     }
     public boolean availablePurchase() {
-
+        for(String product : productQuantities.keySet()) {
+            if (productPrices.get(product) <= minProduct && productQuantities.get(product) >= 1) {
+                minProduct = productPrices.get(product);
+            }
+            allInventory += productQuantities.get(product);
+        }
+        if (allInventory == 0 || userAmount < minProduct) {
+            return true;
+        }
+        return false;
     }
     public boolean inputUserGoods() {
         try {
