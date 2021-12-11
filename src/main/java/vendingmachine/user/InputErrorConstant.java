@@ -1,6 +1,8 @@
 package vendingmachine.user;
 
 public class InputErrorConstant {
+    public static final String EMPTY_SPACE = " ";
+
     public static final String ERROR_PREFIX = "[ERROR]";
     public static final String ERROR_IS_NOT_NUMBER = ERROR_PREFIX + "금액은 숫자여야 합니다.";
     public static final String ERROR_IS_NOT_POSITIVE = ERROR_PREFIX + "금액은 양수여야 합니다.";
