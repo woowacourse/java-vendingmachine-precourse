@@ -2,6 +2,9 @@ package vendingmachine.controller;
 
 import static vendingmachine.view.InputView.*;
 
+import java.util.Arrays;
+import java.util.List;
+
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.service.MachineService;
 
@@ -19,5 +22,10 @@ public class MachineController {
 		String input = inputDeposit();
 		int deposit = Integer.parseInt(input);
 		machineService.setDepositsRandomized(deposit);
+	}
+
+	public void setProductList() {
+		String input = inputProductList();
+		List<String> inputList = Arrays.asList(input.split(";", -1));
 	}
 }
