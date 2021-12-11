@@ -26,14 +26,13 @@ public class InputView {
 		try {
 			nonNumericHoldingMoneyError(stringHoldingMoney);
 			zeroHoldingMoneyError(stringHoldingMoney);
+			dividedByTenHoldingMoneyError(stringHoldingMoney);
 		} catch (IllegalArgumentException e){
 			System.out.println(e.getMessage());
 			isRightHoldingMoney = false;
 		}
 		return isRightHoldingMoney;
 	}
-
-
 
 	public static void nonNumericHoldingMoneyError(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
@@ -44,9 +43,15 @@ public class InputView {
 		}
 	}
 
-	public static void zeroHoldingMoneyError(String stringGameCount) {
-		if (stringGameCount.equals(ZERO_HOLDING_MONEY)) {
+	public static void zeroHoldingMoneyError(String stringHoldingMoney) {
+		if (stringHoldingMoney.equals(ZERO_HOLDING_MONEY)) {
 			throw new IllegalArgumentException(Message.ZERO_HOLDING_MONEY_ERROR);
+		}
+	}
+
+	public static void dividedByTenHoldingMoneyError(String stringHoldingMoney){
+		if(Integer.parseInt(stringHoldingMoney) % 10 != 0){
+			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
 		}
 	}
 }
