@@ -8,7 +8,7 @@
 - [x] Product   
   - [x] hashCode, equals
   
-- [ ] ProductManager   
+- [x] ProductManager   
     - [x] constructor   
     - [x] addProduct
     - [x] removeProduct
