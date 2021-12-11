@@ -11,6 +11,7 @@ public class InputView {
     private static final String INPUT_VENDINGMACHINE_SENETENCE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
     private static final String INPUT_PRODUCT_SENETENCE = "상품명과 가격, 수량을 입력해 주세요.";
     private static final String INPUT_USER_PAY_SENETENCE = "투입 금액을 입력해 주세요.";
+    private static final String INPUT_PURCHASE_SENETENCE = "구매할 상품명을 입력해 주세요.";
 
     private final Validator validator;
 
@@ -55,6 +56,11 @@ public class InputView {
             System.out.println(e.getMessage());
             return inputUserPay();
         }
+    }
+
+    public String inputPurchase(int payMoney) {
+        System.out.println(INPUT_PURCHASE_SENETENCE);
+        return Console.readLine();
     }
 
     private List<Product> convertStringToProductList(String input) {
