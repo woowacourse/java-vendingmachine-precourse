@@ -17,13 +17,21 @@ public class MachineController {
 		machine.makeCoins();
 		machine.printCoins();
 		Items items = getItems();
-		System.out.println(items);
+		machine.enrollItems(items);
+		activateMachine(machine);
 	}
 
 	private Items getItems() {
 		String itemValues = inputView.enterItems();
 		List<Item> items = ItemSeparator.separateItems(itemValues);
 		return new Items(items);
+	}
+
+	private void activateMachine(Machine machine) {
+		int inputMoney = inputView.enterInputMoney();
+		while (inputMoney > machine.getMinPrice() && machine.getStock() > 0) {
+
+		}
 	}
 
 }
