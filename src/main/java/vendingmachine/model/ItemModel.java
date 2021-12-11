@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.resource.ItemStorage;
-import vendingmachine.validator.QueryValidator;
 
 public class ItemModel {
 	private final static ItemModel itemModel = new ItemModel();

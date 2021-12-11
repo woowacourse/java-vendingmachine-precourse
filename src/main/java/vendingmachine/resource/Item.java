@@ -3,7 +3,7 @@ package vendingmachine.resource;
 public class Item {
 	private final String name;
 	private final int price;
-	private int quantity;
+	private final int quantity;
 
 	public Item(String name, int price, int quantity) {
 		this.name = name;
@@ -11,15 +11,15 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public int getPrice(){
+	public String getName() {
+		return name;
+	}
+
+	public int getPrice() {
 		return price;
 	}
 
 	public int getQuantity() {
 		return quantity;
-	}
-
-	public String getName(){
-		return name;
 	}
 }

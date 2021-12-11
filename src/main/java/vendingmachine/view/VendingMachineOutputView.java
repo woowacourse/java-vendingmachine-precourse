@@ -3,10 +3,7 @@ package vendingmachine.view;
 import static vendingmachine.constants.HostMessages.*;
 import static vendingmachine.constants.ProgramConstants.*;
 
-import java.util.List;
 import java.util.Map;
-
-import vendingmachine.resource.Coin;
 
 public class VendingMachineOutputView {
 	private static final VendingMachineOutputView vendingMachineOutputView = new VendingMachineOutputView();
@@ -32,7 +29,7 @@ public class VendingMachineOutputView {
 
 	public void printVendingMachineCoins(Map<Integer, Integer> numberOfCoins) {
 		for (int monetaryUnit : numberOfCoins.keySet()) {
-			System.out.println(monetaryUnit+"원 - " + numberOfCoins.get(monetaryUnit)+"개");
+			System.out.println(monetaryUnit + "원 - " + numberOfCoins.get(monetaryUnit) + "개");
 		}
 		System.out.println();
 	}

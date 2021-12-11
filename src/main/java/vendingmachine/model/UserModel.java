@@ -23,7 +23,7 @@ public class UserModel {
 		return user.getRemainingMoney();
 	}
 
-	public void reduceMoney(int money){
+	public void reduceMoney(int money) {
 		user.reduceMoney(money);
 	}
 }

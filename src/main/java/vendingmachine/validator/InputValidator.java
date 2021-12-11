@@ -66,7 +66,7 @@ public class InputValidator {
 	}
 
 	private void checkEmptyInputExceptions(String string) {
-		if (string.length() == 0){
+		if (string.length() == 0) {
 			throw new IllegalArgumentException(EMPTY_INPUT_ERROR_MESSAGE);
 		}
 	}
