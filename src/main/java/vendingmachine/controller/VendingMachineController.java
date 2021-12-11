@@ -12,7 +12,7 @@ public class VendingMachineController {
 	private final static VendingMachineController vendingMachineController = new VendingMachineController();
 	private final VendingMachineOutputView vendingMachineOutputView;
 	private final InputValidator inputValidator;
-	private QueryValidator queryValidator;
+	private final QueryValidator queryValidator;
 	private final CoinModel coinModel;
 	private final ItemModel itemModel;
 	private final UserModel userModel;
