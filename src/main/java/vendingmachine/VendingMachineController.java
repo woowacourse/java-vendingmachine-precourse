@@ -1,7 +1,7 @@
 package vendingmachine;
 
 import static vendingmachine.utils.Constant.*;
-import static vendingmachine.utils.validator.HoldingAmountValidator.*;
+import static vendingmachine.utils.validator.AmountValidator.*;
 
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.Input;
@@ -19,6 +19,7 @@ public class VendingMachineController {
 		chargeHoldingAmount();
 		addItem();
 		int amount = inputAmount();
+		purchaseItems(amount);
 	}
 
 	private void chargeHoldingAmount() {
@@ -48,6 +49,26 @@ public class VendingMachineController {
 			try {
 				String amount = Input.inputAmount();
 				return validateAmount(amount, AMOUNT);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+	}
+
+	private void purchaseItems(int amount) {
+		while (vendingMachine.availablePurchase(amount)) {
+			Output.inputAmount(amount);
+			String itemName = inputItemName();
+			amount -= vendingMachine.purchaseItem(itemName);
+		}
+	}
+
+	private String inputItemName() {
+		while (true) {
+			try {
+				String itemName = Input.itemName();
+				vendingMachine.checkItem(itemName);
+				return itemName;
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}

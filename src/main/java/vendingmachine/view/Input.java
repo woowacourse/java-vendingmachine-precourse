@@ -20,4 +20,9 @@ public class Input {
 		System.out.println(INPUT_AMOUNT_INPUT_MESSAGE);
 		return Console.readLine();
 	}
+
+	public static String itemName() {
+		System.out.println(PURCHASE_ITEM_NAME_INPUT_MESSAGE);
+		return Console.readLine();
+	}
 }

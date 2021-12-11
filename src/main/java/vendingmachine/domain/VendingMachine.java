@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.validator.PurchaseItemValidator.*;
+
 public class VendingMachine {
 
 	private Coins coins;
@@ -20,5 +22,19 @@ public class VendingMachine {
 
 	public void insertItems(String itemList) {
 		items.insertItems(itemList);
+	}
+
+	public boolean availablePurchase(int amount) {
+		return items.check(amount);
+	}
+
+	public void checkItem(String itemName) {
+		validateItem(items, itemName);
+	}
+
+	public int purchaseItem(String itemName) {
+		Item item = items.findByName(itemName);
+		item.purchase();
+		return item.getPrice();
 	}
 }

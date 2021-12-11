@@ -18,4 +18,12 @@ public class Output {
 
 		System.out.println(message);
 	}
+
+	public static void inputAmount(int amount) {
+		String message = INPUT_AMOUNT_OUTPUT_MESSAGE
+			+ amount
+			+ AMOUNT_OUTPUT_FORMAT;
+
+		System.out.println(message);
+	}
 }
