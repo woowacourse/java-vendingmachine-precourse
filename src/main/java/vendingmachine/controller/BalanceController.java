@@ -1,7 +1,7 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.util.BalanceValidator;
+import vendingmachine.util.MoneyValidator;
 
 public class BalanceController {
 
@@ -9,7 +9,7 @@ public class BalanceController {
 		String inputString = Console.readLine();
 
 		try {
-			BalanceValidator.validate(inputString);
+			MoneyValidator.validate(inputString);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
 			return getInputValue();
