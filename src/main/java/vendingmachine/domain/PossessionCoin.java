@@ -8,4 +8,9 @@ public class PossessionCoin {
         this.coin = coin;
         this.quantity = quantity;
     }
+
+    @Override
+    public String toString() {
+        return coin.getAmount() + "원 - " + quantity + "개";
+    }
 }

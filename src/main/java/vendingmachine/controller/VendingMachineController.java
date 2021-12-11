@@ -4,6 +4,7 @@ import vendingmachine.domain.PossessionCoins;
 import vendingmachine.domain.PossessionCoinsGenerator;
 import vendingmachine.domain.PossessionMoney;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     private final PossessionCoinsGenerator possessionCoinsGenerator;
@@ -15,5 +16,7 @@ public class VendingMachineController {
     public void run() {
         PossessionMoney possessionMoney = InputView.getPossessionMoney();
         PossessionCoins possessionCoins = possessionCoinsGenerator.generate(possessionMoney);
+
+        OutputView.printPossessionCoins(possessionCoins);
     }
 }

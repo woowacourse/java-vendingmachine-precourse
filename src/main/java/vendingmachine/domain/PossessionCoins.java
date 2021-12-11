@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PossessionCoins {
@@ -7,5 +8,9 @@ public class PossessionCoins {
 
     public PossessionCoins(List<PossessionCoin> possessionCoins) {
         this.possessionCoins = possessionCoins;
+    }
+
+    public List<PossessionCoin> getPossessionCoins() {
+        return Collections.unmodifiableList(possessionCoins);
     }
 }
