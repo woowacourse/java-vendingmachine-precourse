@@ -31,7 +31,7 @@ public class MachineController {
 		setupChangeCoins();
 		viewer.showCoinBoxStatus(coins);
 		setupSellingProducts();
-		money = customerInput.getInsertedMoney();
+		setupMoney();
 	}
 
 	public void operate() {
@@ -86,6 +86,15 @@ public class MachineController {
 			setupSellingProducts();
 		}
 		return products;
+	}
+
+	public void setupMoney() {
+		try {
+			money = customerInput.getInsertedMoney();
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			setupMoney();
+		}
 	}
 
 	private void makeProductsFromInfo(List<String> productsInfo) {
