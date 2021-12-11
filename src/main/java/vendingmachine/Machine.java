@@ -73,7 +73,16 @@ public class Machine {
         boolean check = false;
         while (!check) {
             System.out.println(Message.INPUT_BUY_PRODUCT);
-            check = user.inputUserAmount();
+            check = user.inputUserGoods();
+        }
+    }
+    private void availablePurchase() {
+        boolean check = false;
+        while (!check) {
+            check = user.availablePurchase();
+            if (!check) {
+                buyGoods();
+            }
         }
     }
 

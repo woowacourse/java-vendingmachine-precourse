@@ -146,4 +146,28 @@ public class User {
         System.out.println();
         System.out.println(Message.REMAINING_AMOUNT + machineBalance + Message.WON);
     }
+    public boolean availablePurchase() {
+
+    }
+    public boolean inputUserGoods() {
+        try {
+            input();
+            checkCorrectUserGoods();
+        } catch (Exception e){
+            System.out.println(ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    private void checkCorrectUserGoods() throws IllegalArgumentException {
+        checkBlank(input);
+        if (!productPrices.containsKey(input)) {
+            ERROR_MESSAGE = Message.ERROR_GOODS_NO_FIND;
+            throw new IllegalArgumentException();
+        }
+        if (productQuantities.get(input) == 0) {
+            ERROR_MESSAGE = Message.ERROR_GOODS_NO_INVENTORY;
+            throw new IllegalArgumentException();
+        }
+    }
 }

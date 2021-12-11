@@ -17,6 +17,9 @@ public class Message {
     public static final String INPUT_BUY_PRODUCT = "구매할 상품명을 입력해 주세요.";
     public static final String REMAINING_AMOUNT = "투입 금액: ";
     public static final String WON = "원";
+    public static final String ERROR_GOODS_NO_FIND = "[ERROR] 해당하는 상품이 없습니다.";
+    public static final String ERROR_GOODS_NO_INVENTORY = "[ERROR] 해당하는 상품의 재고가 없습니다.";
+
 
 
 
