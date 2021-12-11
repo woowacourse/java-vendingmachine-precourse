@@ -3,8 +3,10 @@ package vendingmachine.domain.coin;
 import static vendingmachine.utils.ArithmeticValidator.*;
 import static vendingmachine.utils.StringValidator.*;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.NoSuchElementException;
 
 import vendingmachine.utils.RandomCoinSelector;
 
@@ -64,6 +66,21 @@ public class Coins {
 		return coinMap.entrySet().stream()
 			.map(entry -> entry.getKey().getAmount() * entry.getValue())
 			.reduce(0, Integer::sum);
+	}
+
+	public Coin popMaxPriceCoin() {
+		Coin maxPriceCoin = peekMaxPriceCoin();
+		coinMap.put(maxPriceCoin, coinMap.get(maxPriceCoin) - 1);
+
+		return maxPriceCoin;
+	}
+
+	public Coin peekMaxPriceCoin() {
+		return coinMap.entrySet().stream()
+			.filter(entry -> entry.getValue() > 0)
+			.map(entry -> entry.getKey())
+			.max(Comparator.comparing(Coin::getAmount))
+			.orElseThrow(NoSuchElementException::new);
 	}
 
 	public Map<Coin, Integer> getCoins() {
