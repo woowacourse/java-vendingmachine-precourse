@@ -9,7 +9,7 @@ import vendingmachine.resource.ItemStorage;
 public class ItemModel {
 	private final static ItemModel itemModel = new ItemModel();
 
-	private ItemStorage itemStorage;
+	private final ItemStorage itemStorage;
 
 	private ItemModel() {
 		itemStorage = ItemStorage.getItemStorage();
