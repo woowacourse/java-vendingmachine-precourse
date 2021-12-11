@@ -54,4 +54,17 @@ public class InputController {
 		}
 		return itemList;
 	}
+
+	public int scanInputMoney() {
+		while (true) {
+			try {
+				InputView.askInputMoney();
+				String inputMoney = Console.readLine();
+				int money = InputValidator.isNumber(inputMoney);
+				return money;
+			} catch (IllegalArgumentException e) {
+				OutputView.printInputMoneyError();
+			}
+		}
+	}
 }
