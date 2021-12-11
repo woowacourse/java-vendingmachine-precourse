@@ -4,11 +4,12 @@ import vendingmachine.coin.Coin;
 import vendingmachine.coin.CoinController;
 import vendingmachine.product.Product;
 import vendingmachine.product.ProductController;
-import vendingmachine.product.ProductService;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+
+import static vendingmachine.constant.Constant.PRODUCT_SPLITTER;
 
 public class MachineController {
     private final CoinController coinController = new CoinController();
@@ -26,7 +27,7 @@ public class MachineController {
     public void makeProductList(Machine machine,String infoList){
         List<Product> productList = machine.getProductList();
 
-        Arrays.stream(infoList.split(";"))
+        Arrays.stream(infoList.split(PRODUCT_SPLITTER))
                 .forEach(info->{
                     productList.add(productController.makeProduct(info));
                 });
