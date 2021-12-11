@@ -45,21 +45,43 @@ public class ApplicationController {
 	private void saveProducts(String userProducts) {
 		try {
 			vendingMachineService.saveProductList(userProducts);
-			getInsertPrice();
+			getMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
 			getProducts();
 		}
 	}
 
-	private void getInsertPrice() {
-		String userInsertPrice = InputView.getVendingMachineBalance();
+	private void getMoney() {
+		String money = InputView.getMoney();
 		try {
-			PriceException.isValidPrice(userInsertPrice);
+			PriceException.isValidPrice(money);
+			int validMoney = Integer.parseInt(money);
+			getOrder(validMoney);
 		} catch (IllegalArgumentException e) {
-			System.out.println(ERROR_PREFIX + BALANCE_PRICE_PREFIX + e.getMessage() + LINE_STAMP);
-			getInsertPrice();
+			System.out.println(ERROR_PREFIX + INSERT_MONEY_PREFIX + e.getMessage() + LINE_STAMP);
+			getMoney();
 		}
+	}
+
+	private void getOrder(int money) {
+		while (shouldChange(money)) {
+		}
+		returnChange();
+	}
+
+	private boolean shouldChange(int money) {
+		int minProductPrice = vendingMachineService.getMinProductPrice();
+		int productStock = vendingMachineService.getProductStock();
+		if (minProductPrice > money
+				|| productStock == 0) {
+			return false;
+		}
+		return true;
+	}
+
+	private void returnChange() {
+
 	}
 
 }

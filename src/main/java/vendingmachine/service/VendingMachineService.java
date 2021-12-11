@@ -1,7 +1,9 @@
 package vendingmachine.service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import exception.PriceException;
 import exception.ProductException;
@@ -39,4 +41,19 @@ public class VendingMachineService {
 		vendingMachine.setProductList(productList);
 	}
 
+	public int getMinProductPrice() {
+		List<Integer> productPriceList = vendingMachine.getProductList()
+			.stream()
+			.map(Product::getPrice)
+			.collect(Collectors.toList());
+		return Collections.min(productPriceList);
+	}
+
+	public int getProductStock() {
+		int productStocks = vendingMachine.getProductList()
+			.stream()
+			.mapToInt(Product::getQuantity)
+			.sum();
+		return productStocks;
+	}
 }

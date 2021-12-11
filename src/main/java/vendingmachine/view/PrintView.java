@@ -18,8 +18,8 @@ public class PrintView {
 		}
 	}
 
-	public static void printVendingMachineBalance() {
-
+	public static void printMoneyState(int balance) {
+		System.out.println(INSERT_MONEY_STATE + balance + PRICE_UNIT);
 	}
 
 	public static void printChange() {
