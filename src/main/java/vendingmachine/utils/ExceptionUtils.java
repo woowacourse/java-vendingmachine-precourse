@@ -30,6 +30,7 @@ public class ExceptionUtils {
 	private static final String NOT_IN_VENDING_MACHINE = "해당 상품은 자판기에 없는 상품입니다.";
 	private static final String INVALID_EXPENSIVE_PRODUCT = "남은 금액 보다 비싼 상품입니다.";
 	private static final String NAME_DUPLICATED_ERROR = "상품 이름이 중복되었습니다.";
+	private static final String SOLD_OUT_ERROR = "해당 상품은 매진입니다.";
 
 	public static void validateInputMoney(String inputMoney) {
 		if (!validateSpace(inputMoney)) {
@@ -118,7 +119,8 @@ public class ExceptionUtils {
 			.contains(inputProduct);
 	}
 
-	private static void validateExpensiveProduct(String inputProduct, Product product,  int remainInsertMoney) {
+	private static void validateExpensiveProduct(String inputProduct, Product product,
+		int remainInsertMoney) {
 		if (Objects.equals(product.getName(), inputProduct)) {
 			if (product.getPrice() > remainInsertMoney) {
 				throw new IllegalArgumentException(ERROR_HEADER + INVALID_EXPENSIVE_PRODUCT);
@@ -129,6 +131,13 @@ public class ExceptionUtils {
 	public static void validateDuplicatedName(List<Product> products) {
 		if (products.stream().map(Product::getName).distinct().count() != products.size()) {
 			throw new IllegalArgumentException(ERROR_HEADER + NAME_DUPLICATED_ERROR);
+		}
+	}
+
+	public static void validateProductSoldOut(String inputProduct, List<Product> products) {
+		if (products.stream().filter(product -> product.getName().equals(inputProduct))
+			.anyMatch(Product::isSoldOut)) {
+			throw new IllegalArgumentException(ERROR_HEADER + SOLD_OUT_ERROR);
 		}
 	}
 }

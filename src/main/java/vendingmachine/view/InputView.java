@@ -1,8 +1,6 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import java.util.List;
-import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.ExceptionUtils;
 
@@ -54,6 +52,7 @@ public class InputView {
 		String inputName = Console.readLine();
 		try {
 			ExceptionUtils.validateNameOfProduct(inputName, vendingMachine);
+			ExceptionUtils.validateProductSoldOut(inputName, vendingMachine.getProducts());
 			return inputName;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);

@@ -10,6 +10,7 @@ public class Product {
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int NUMBER_INDEX = 2;
+	private static final int SOLD_OUT_COUNT = 0;
 	private static final String PRODUCT_INFO_DELIMITER = ",";
 	private static final String PRODUCT_BRACKET_LEFT = "[";
 	private static final String PRODUCT_BRACKET_RIGHT = "]";
@@ -34,6 +35,10 @@ public class Product {
 
 	public int getNumber() {
 		return number;
+	}
+
+	public boolean isSoldOut() {
+		return number == SOLD_OUT_COUNT;
 	}
 
 	public void sellProduct() {

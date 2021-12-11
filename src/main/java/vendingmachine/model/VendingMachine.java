@@ -3,8 +3,6 @@ package vendingmachine.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import vendingmachine.utils.ExceptionUtils;
 
 public class VendingMachine {
 
@@ -44,18 +42,24 @@ public class VendingMachine {
 	public void readyToSellProduct(String selectedProduct) {
 		for (Product product : products) {
 			if (product.getName().equals(selectedProduct)) {
-				product.sellProduct();
-				useMoneyToBuy(product);
+				sellProduct(product);
 			}
 		}
 	}
 
-	public boolean isReturnChangeCondition() {
-		System.out.println(products.stream().map(Product::getNumber).collect(Collectors.toList()));
-		return getLowestProductPrice() > remainInsertMoney || isSoldOut() || !hasProductsUserCanBuy();
+	public void sellProduct(Product product) {
+		if (!product.isSoldOut()) {
+			product.sellProduct();
+			useMoneyToBuy(product);
+		}
 	}
 
-	private boolean isSoldOut() {
+	public boolean isReturnChangeCondition() {
+		return getLowestProductPrice() > remainInsertMoney || isSoldOutAllProducts()
+			|| !hasProductsUserCanBuy();
+	}
+
+	private boolean isSoldOutAllProducts() {
 		return products.stream()
 			.mapToInt(Product::getNumber)
 			.max()
