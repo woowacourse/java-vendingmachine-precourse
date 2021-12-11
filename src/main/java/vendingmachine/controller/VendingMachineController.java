@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import static constants.ProductConstants.*;
+import static constants.VendingMachineConstants.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,17 +35,31 @@ public class VendingMachineController {
 	}
 
 	private void saveProducts() {
-		List<List<String>> inputProducts = InputView.getProducts();
-		List<VendingMachineProduct> products = new ArrayList<>();
-
-		for (List<String> product : inputProducts) {
-			String name = product.get(NAME_IDX);
-			Integer price = Integer.parseInt(product.get(PRICE_IDX));
-			Integer amount = Integer.parseInt(product.get(AMOUNT_IDX));
-			products.add(new VendingMachineProduct(name, price, amount));
+		try {
+			vendingMachineProducts = new VendingMachineProducts(getProducts());
+			OutputView.printNewLine();
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
 		}
-		vendingMachineProducts = new VendingMachineProducts(products);
-		OutputView.printNewLine();
+	}
+
+	private List<VendingMachineProduct> getProducts() {
+		List<VendingMachineProduct> products = new ArrayList<>();
+		for (List<String> productInfo : InputView.getProducts()) {
+			VendingMachineProduct product = getProduct(productInfo);
+			if (products.contains(product)) {
+				throw new IllegalArgumentException(DUPLICATE_PRODUCT_ERROR);
+			}
+			products.add(product);
+		}
+		return products;
+	}
+
+	private VendingMachineProduct getProduct(List<String> productInfo) {
+		String name = productInfo.get(NAME_IDX);
+		Integer price = Integer.parseInt(productInfo.get(PRICE_IDX));
+		Integer amount = Integer.parseInt(productInfo.get(AMOUNT_IDX));
+		return new VendingMachineProduct(name, price, amount);
 	}
 
 	private void saveVendingMachineMoney() {

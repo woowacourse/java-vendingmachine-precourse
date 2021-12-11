@@ -31,4 +31,13 @@ public class VendingMachineProduct {
 	public boolean isExist() {
 		return amount != 0;
 	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (!(o instanceof VendingMachineProduct) || o.getClass() != getClass()) {
+			return false;
+		}
+		VendingMachineProduct vendingMachineProduct = (VendingMachineProduct)o;
+		return vendingMachineProduct.isSameName(name);
+	}
 }
