@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
+import vendingmachine.domain.Item;
 import vendingmachine.util.PublicConst;
 import vendingmachine.util.SystemMessage;
 
@@ -12,6 +13,15 @@ public class InputItemNameView implements View {
 		int money = Application.controller.getMoney();
 		printMoneyAndMessage(money);
 		String itemName  = readItemName();
+		Item item;
+		try {
+			item = getItem(itemName);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			show();
+			return;
+		}
+
 	}
 
 	private void printMoneyAndMessage(int money) {
@@ -20,8 +30,14 @@ public class InputItemNameView implements View {
 	}
 
 	private String readItemName() {
-		String itemName = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
+		return Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
+	}
 
-		return itemName;
+	private Item getItem(String itemName) {
+		Item item = Application.controller.searchItem(itemName);
+		if(item == null) {
+			throw new IllegalArgumentException(SystemMessage.ERROR_NOT_EXIST_ITEM);
+		}
+		return item;
 	}
 }

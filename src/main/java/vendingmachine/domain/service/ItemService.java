@@ -11,4 +11,8 @@ public class ItemService {
 	public void addItems(List<Item> items) {
 		items.forEach(itemRepository::addItem);
 	}
+
+	public Item searchItem(String itemName) {
+		return itemRepository.getItemByName(itemName);
+	}
 }
