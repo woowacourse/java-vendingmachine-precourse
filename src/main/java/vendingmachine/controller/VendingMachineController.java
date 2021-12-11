@@ -24,6 +24,10 @@ public class VendingMachineController {
 		return inputView.scanProductNameAndPriceAndCnt();
 	}
 
+	public String scanInputMoney() {
+		return inputView.scanInputMoney();
+	}
+
 	public void printHoldingCoins(final Map<Coin, Count> coins) {
 		OutputView.printHoldingCoins(coins);
 	}

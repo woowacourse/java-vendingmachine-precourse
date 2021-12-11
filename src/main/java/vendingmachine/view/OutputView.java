@@ -13,6 +13,7 @@ public class OutputView {
 	private static final String HOLDING_COINS_GUIDE_MESSEAGE_SUFFIX = "개";
 
 	public static void printHoldingCoins(Map<Coin, Count> coins) {
+		System.out.println();
 		System.out.println(HOLDING_COINS_GUIDE_MESSEAGE);
 		for (Coin coin : coins.keySet()) {
 			System.out.print(coin.getAmount());

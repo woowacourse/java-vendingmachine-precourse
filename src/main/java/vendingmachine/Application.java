@@ -20,5 +20,6 @@ public class Application {
 		vendingMachineController.printHoldingCoins(coins);
 		String[] productNameAndPriceAndCnt = vendingMachineController.scanProductNameAndPriceAndCnt();
 		Products products = Products.save(productNameAndPriceAndCnt);
+		String inputMoney = vendingMachineController.scanInputMoney();
 	}
 }
