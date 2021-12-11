@@ -99,6 +99,10 @@ public class Menu {
 		return Integer.parseInt(price) >= MIN_MENU_PRICE;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public int getPrice() {
 		return price;
 	}

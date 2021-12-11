@@ -42,4 +42,16 @@ public class Menus {
 	public boolean isAnyMenuLeft() {
 		return menuList.stream().anyMatch(menu -> menu.getCount() > 0);
 	}
+
+	public void updateMenuToBuy(String menuName) {
+		Menu menuToBuy = findMenuByName(menuName);
+		menuToBuy.sold();
+	}
+
+	public Menu findMenuByName(String menuName) {
+		return menuList.stream()
+			.filter(menu -> menu.getName().equals(menuName))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다."));
+	}
 }
