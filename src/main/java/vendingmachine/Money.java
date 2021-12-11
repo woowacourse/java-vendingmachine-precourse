@@ -2,6 +2,8 @@ package vendingmachine;
 
 import java.util.Objects;
 
+import vendingmachine.exception.OutOfBoundException;
+
 public class Money {
 	private static final int MINIMUM_UNIT = 10;
 	private int amount;
@@ -38,6 +40,21 @@ public class Money {
 			this.amount -= money.amount;
 		}
 		// 소비할 수 없을 때 알려야한다.
+	}
+
+	public void earn(Money money) {
+		if(isAddable(money)) {
+			this.amount += money.amount;
+		}
+	}
+
+	private boolean isAddable(Money money) {
+		try {
+			Math.addExact(this.amount, money.amount);
+			return true;
+		} catch (ArithmeticException e) {
+			throw new OutOfBoundException(Notification.AMOUNT_NOT_EARN.getMessage());
+		}
 	}
 
 	public boolean isSpendable(Money money) {

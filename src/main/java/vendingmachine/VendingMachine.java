@@ -7,6 +7,7 @@ import vendingmachine.product.Products;
 public class VendingMachine {
 	private final Coins coins;
 	private final Products products;
+	private final Money insertMoney = Money.of(0);
 
 	private VendingMachine(Coins coins, Products products) {
 		validateEmpty(coins, products);
@@ -24,7 +25,8 @@ public class VendingMachine {
 		return new VendingMachine(coins, products);
 	}
 
-
-
+	public void insert(Money money) {
+		insertMoney.earn(money);
+	}
 
 }
