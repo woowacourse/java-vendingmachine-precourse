@@ -1,6 +1,6 @@
 package vendingmachine.constants;
 
-public class ProgramConstants {
+public final class ProgramConstants {
 	public static final String CURRENCY = "원";
 	public static final int MINIMUM_COIN_TYPE = 10;
 	public static final int MINIMUM_ITEM_PRICE = 100;

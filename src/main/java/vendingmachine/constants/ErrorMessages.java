@@ -1,6 +1,6 @@
 package vendingmachine.constants;
 
-public class ErrorMessages {
+public final class ErrorMessages {
 	public static final String EMPTY_INPUT_ERROR_MESSAGE = "[ERROR] 빈칸을 입력하실 수 없습니다.";
 	public static final String MONEY_NOT_NATURAL_NUMBER_ERROR_MESSAGE = "[ERROR] 금액은 자연수여야 합니다.";
 	public static final String MONEY_NOT_MULTIPLICATION_OF_MINIMUM_COIN_TYPE_ERROR_MESSAGE = "[ERROR] 보유한 금액은 10의 배수여야 합니다.";
