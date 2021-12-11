@@ -14,6 +14,12 @@ public class InputValidator {
 		return Integer.parseInt(input);
 	}
 
+	public static void isZero(int input) {
+		if (input < 10) {
+			throw new IllegalArgumentException();
+		}
+	}
+
 	public static int checkValidItem(List<Item> itemList, String buyingItem) {
 		int index = 0;
 		for (Item item : itemList) {

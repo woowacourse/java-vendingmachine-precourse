@@ -20,6 +20,7 @@ public class InputController {
 				InputView.askHoldingMoney();
 				String holdingMoney = Console.readLine();
 				int money = InputValidator.isNumber(holdingMoney);
+				InputValidator.isZero(money);
 				return money;
 			} catch (IllegalArgumentException e) {
 				OutputView.printMoneyError();
