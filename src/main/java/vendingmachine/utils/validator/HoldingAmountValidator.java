@@ -25,7 +25,7 @@ public class HoldingAmountValidator {
 	}
 
 	private static void validateMinimum(int amount, int condition) {
-		if (condition == AMOUNT && amount < 100) {
+		if (condition == PRICE && amount < 100) {
 			throw new IllegalArgumentException(AMOUNT_MINIMUM_ERROR);
 		}
 	}

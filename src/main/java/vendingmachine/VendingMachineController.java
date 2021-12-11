@@ -31,7 +31,7 @@ public class VendingMachineController {
 		while (true) {
 			try {
 				String amount = Input.holdingAmount();
-				return validateAmount(amount, HOLDING_AMOUNT);
+				return validateAmount(amount, AMOUNT);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
