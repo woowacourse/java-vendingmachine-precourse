@@ -1,9 +1,10 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.ArithmeticValidator.*;
+
 import java.util.HashMap;
 import java.util.Map;
 
-import vendingmachine.exceptions.NotDivisibleByMinPriceCoinException;
 import vendingmachine.utils.RandomCoinSelector;
 
 public class VendingMachine {
@@ -28,7 +29,7 @@ public class VendingMachine {
 		int leftMoney = Integer.parseInt(initialLeftMoney);
 
 		validateGreaterThanOrEqualToMinPriceCoin(leftMoney);
-		validateDividingByMinPriceCoin(leftMoney);
+		validateDividingByMinPriceCoin(leftMoney, ERROR_NOT_DIVISIBLE_BY_MIN_PRICE_COIN);
 	}
 
 	private static void validateInteger(String initialLeftMoney) {
@@ -40,12 +41,6 @@ public class VendingMachine {
 	private static void validateGreaterThanOrEqualToMinPriceCoin(int leftMoney) {
 		if (leftMoney < Coin.getMinPriceCoin().getAmount()) {
 			throw new IllegalArgumentException(ERROR_LT_MIN_PRICE_COIN);
-		}
-	}
-
-	private static void validateDividingByMinPriceCoin(int leftMoney) {
-		if (leftMoney % Coin.getMinPriceCoin().getAmount() != 0) {
-			throw new NotDivisibleByMinPriceCoinException(ERROR_NOT_DIVISIBLE_BY_MIN_PRICE_COIN);
 		}
 	}
 
