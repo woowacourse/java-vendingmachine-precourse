@@ -21,7 +21,7 @@ public enum Coin {
 		this.message = message;
 	}
 
-	public static Coin random(final int money) {
+	public static Coin pickRandom(final int money) {
 		List<Coin> randomPool = getRandomPool(money);
 		List<Integer> randomPoolIndices = getRandomPoolIndices(randomPool.size());
 		return randomPool.get(Randoms.pickNumberInList(randomPoolIndices));

@@ -11,22 +11,25 @@ public class ProductTable {
 		products = new HashMap<>();
 	}
 
-	public void push(String name, ProductEntry entry) {
+	public void push(final String name, final ProductEntry entry) {
 		products.put(name, entry);
 	}
 
-	public int buy(String name, int money) {
+	public int getLeftMoney(final String name, final int money) {
 		ProductEntry entry = products.get(name);
 		int productPrice = entry.getPrice();
 		if (productPrice > money) {
 			return money;
 		}
-
-		entry.decrementNumber();
 		return money - productPrice;
 	}
 
-	public boolean isAnythingToBuy(int money) {
+	public void buy(final String name) {
+		ProductEntry entry = products.get(name);
+		entry.decrementNumber();
+	}
+
+	public boolean isAnythingToBuy(final int money) {
 		Iterator<ProductEntry> iterator = products.values().iterator();
 		while (iterator.hasNext()) {
 			ProductEntry entry = iterator.next();

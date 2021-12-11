@@ -8,46 +8,48 @@ import camp.nextstep.edu.missionutils.Console;
 public class Program {
 	public static final String PRODUCT_ENTRY_DIVIDER = ";";
 	public static final String PRODUCT_ENTRY_ELEMENT_DIVIDER = ",";
-	public final CoinPocket pocket;
-	public final ProductTable table;
+
+	public final CoinPocket coinPocket;
+	public final ProductTable productTable;
 	public int userMoney;
 
 	public Program() {
-		pocket = new CoinPocket();
-		table = new ProductTable();
+		coinPocket = new CoinPocket();
+		productTable = new ProductTable();
 	}
 
 	public void start() {
-		int initialMoney = setInitialMoney();
-		setRandomCoins(initialMoney);
-		setProductList();
+		int initialMoneyInMachine = setInitialMoneyInMachine();
+		setRandomCoinsInPocketWithMoney(initialMoneyInMachine);
+		setProductTable();
 		setUserMoney();
-		buyProduct();
+		buyProductUntilFailure();
 		giveChange();
 	}
 
-	private int setInitialMoney() {
+	private int setInitialMoneyInMachine() {
 		Message.INITIAL_MONEY_REQUEST.println();
 		String moneyInString = Console.readLine();
 		return Integer.parseInt(moneyInString);
 	}
 
-	private void setRandomCoins(int money) {
+	private void setRandomCoinsInPocketWithMoney(int money) {
 		while (Coin.isSwappableForCoin(money)) {
-			Coin coin = Coin.random(money);
-			pocket.push(coin, 1);
-			money = coin.subtract(money);
+			Coin randomCoin = Coin.pickRandom(money);
+			coinPocket.pushSingle(randomCoin);
+			money = randomCoin.subtract(money);
 		}
 		Message.printCoinPocket(pocket);
 	}
 
-	private void setProductList() {
+	private void setProductTable() {
 		Message.ITEM_REQUEST.println();
 		String productEntriesInString = Console.readLine();
 		List<String> productEntries = Arrays.asList(productEntriesInString.split(PRODUCT_ENTRY_DIVIDER));
 		productEntries.forEach(entry -> {
 			String[] elements = entry.substring(1, entry.length() - 1).split(PRODUCT_ENTRY_ELEMENT_DIVIDER);
-			table.push(elements[0], new ProductEntry(Integer.parseInt(elements[1]), Integer.parseInt(elements[2])));
+			productTable.push(elements[0],
+				new ProductEntry(Integer.parseInt(elements[1]), Integer.parseInt(elements[2])));
 		});
 	}
 
@@ -57,24 +59,28 @@ public class Program {
 		userMoney = Integer.parseInt(userMoneyInString);
 	}
 
-	private void buyProduct() {
+	private String getProductName() {
+		return Console.readLine();
+	}
+
+	private void buyProductUntilFailure() {
 		Message.printLeftMoney(userMoney);
 		Message.PURCHASE_REQUEST.println();
-		String name = Console.readLine();
-		userMoney = table.buy(name, userMoney);
-		if (!table.isAnythingToBuy(userMoney)) {
+		String name = getProductName();
+		productTable.buy(name);
+		userMoney = productTable.getLeftMoney(name, userMoney);
+		if (!productTable.isAnythingToBuy(userMoney)) {
 			return;
 		}
-		buyProduct();
+		buyProductUntilFailure();
 	}
 
 	private CoinPocket calculateChange() {
 		CoinPocket change = new CoinPocket();
 		for (Coin coin : Coin.values()) {
-			int numberOfPoppedCoins = pocket.pop(coin, coin.divide(userMoney));
+			int numberOfPoppedCoins = coinPocket.pop(coin, coin.divide(userMoney));
 			change.push(coin, numberOfPoppedCoins);
 		}
-		change.removeZeros();
 
 		return change;
 	}
@@ -82,8 +88,8 @@ public class Program {
 	private void giveChange() {
 		Message.printLeftMoney(userMoney);
 		Message.USER_CHANGE_SHOW.println();
-
 		CoinPocket change = calculateChange();
+		change.removeCoinsOfZeroNumber();
 		Message.printCoinPocket(change);
 	}
 }
