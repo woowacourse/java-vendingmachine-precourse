@@ -33,7 +33,16 @@ public enum Coin {
 		return COIN_10;
 	}
 
-	public static Coin pickRandom() {
+	public static Coin pickRandomWithLimit(int balanceLimit) {
+		Coin randomCoin = Coin.pickRandom();
+		if (randomCoin.getAmount() > balanceLimit) {
+			return pickRandomWithLimit(balanceLimit);
+		}
+
+		return randomCoin;
+	}
+
+	private static Coin pickRandom() {
 		int pickedAmount = Randoms.pickNumberInList(
 			Arrays.stream(values())
 				.map(Coin::getAmount)

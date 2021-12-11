@@ -17,19 +17,13 @@ public class CoinsService {
 		int remainingBalance = vendingMachineBalance.toInt();
 
 		while (remainingBalance > 0) {
-			Coin randomCoin = Coin.pickRandom();
-			if (!isAbleToAddChange(randomCoin, remainingBalance)) {
-				continue;
-			}
+			Coin randomCoin = Coin.pickRandomWithLimit(remainingBalance);
 
 			CoinQuantity originalCoinQuantity = coinsRepository.findByCoin(randomCoin);
-			coinsRepository.updateByCoin(randomCoin, CoinQuantity.from(originalCoinQuantity.toInt() + 1));
+			coinsRepository.updateByCoin(randomCoin, originalCoinQuantity.increaseQuantity());
+
 			remainingBalance = remainingBalance - randomCoin.getAmount();
 		}
-	}
-
-	private boolean isAbleToAddChange(Coin coin, int balance) {
-		return coin.getAmount() <= balance;
 	}
 
 	public CoinsDto getCurrentCoins() {
@@ -51,6 +45,7 @@ public class CoinsService {
 		return CoinsDto.from(coins);
 	}
 
+	// TODO: 리팩토링 필요
 	private int getCoinQuantityForChange(Coin coin, int balance) {
 		int maxCoinQuantityForChange = getMaxCoinQuantityForChange(coin, balance);
 		int holdingQuantity = coinsRepository.findByCoin(coin).toInt();

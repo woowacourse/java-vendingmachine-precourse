@@ -13,6 +13,10 @@ public class CoinQuantity {
 		return new CoinQuantity(coinQuantity);
 	}
 
+	public CoinQuantity increaseQuantity() {
+		return new CoinQuantity(coinQuantity + 1);
+	}
+
 	public int toInt() {
 		return this.coinQuantity;
 	}
