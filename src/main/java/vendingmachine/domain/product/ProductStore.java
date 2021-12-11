@@ -30,9 +30,9 @@ public class ProductStore {
     }
 
     public Product getProduct(String productName) {
-        if(hasProduct(productName)) {
-            return productStore.get(productName);
+        if(!hasProduct(productName)) {
+            throw new IllegalArgumentException("[ERROR] 해당 이름의 상품이 존재하지 않습니다.");
         }
-        throw new IllegalArgumentException("[ERROR] 해당 이름의 상품이 존재하지 않습니다.");
+        return productStore.get(productName);
     }
 }

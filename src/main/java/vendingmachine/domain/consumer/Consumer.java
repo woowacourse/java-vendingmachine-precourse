@@ -38,10 +38,9 @@ public class Consumer {
     }
 
     public void buy(Product product) {
-        if(possibleToBuy(product)) {
-            product.isPurchasedBy(this);
+        if(! possibleToBuy(product)) {
+            throw new IllegalArgumentException("[ERROR] 구매자의 잔액이 부족하여 해당 제품을 구매하지 못합니다.");
         }
-
-        throw new IllegalArgumentException("[ERROR] 구매자의 잔액이 부족하여 해당 제품을 구매하지 못합니다.");
+        product.isPurchasedBy(this);
     }
 }
