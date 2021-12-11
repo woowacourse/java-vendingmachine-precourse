@@ -15,10 +15,10 @@ public class Product {
 	}
 
 	public boolean compareToPrice(int money) {
-		if (price > money) {
-			return false;
+		if (this.price <= money) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	public boolean checkHaveStock() {

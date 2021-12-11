@@ -3,14 +3,10 @@ package vendingmachine.view;
 import java.util.ArrayList;
 import java.util.List;
 
-import vendingmachine.constants.InputConstants;
 import vendingmachine.domain.Product;
 
 public class Converter {
-	private static final int DIVISION_VALUE = 10;
-	private static final int NAME_INDEX = 0;
-	private static final int PRICE_INDEX = 1;
-	private static final int QUANTITY_INDEX = 2;
+	private static String PRODUCT_DELIMITER = ";";
 
 	private final Validator validator;
 
@@ -18,20 +14,20 @@ public class Converter {
 		this.validator = new Validator();
 	}
 
-	public int convertToInt(String inputString) {
-		return Integer.valueOf(inputString);
+	public int convertMoney(String inputString) {
+		return validator.validateMoney(inputString);
 	}
 
 	public List<Product> convertToProductList(String inputString) {
-		String [] splits = validator.splitWithDelimiter(inputString, InputConstants.PRODUCT_DELIMITER);
+		String [] splits = validator.splitWithDelimiter(inputString, PRODUCT_DELIMITER);
 		List<Product> products = new ArrayList<>();
 		for(String productString : splits) {
-			products.add(validator.validateProduct(productString));
+			Product product = validator.validateProduct(productString);
+			validator.validateProductExist(products, product.getName());
+			products.add(product);
 		}
 		return products;
 	}
 
-	public int convertStorageMoney(String inputString) {
-		return validator.validateStorageMoney(inputString);
-	}
+
 }

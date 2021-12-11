@@ -1,12 +1,19 @@
 package vendingmachine.view;
 
+import java.util.List;
+
 import vendingmachine.constants.ErrorConstants;
-import vendingmachine.constants.InputConstants;
 import vendingmachine.domain.Product;
 
 public class Validator {
+	private static final int DIVISION_VALUE = 10;
+	private static final int PRODUCT_CONTENT_SIZE = 3;
+	private static String PRODUCT_CONTENT_DELIMITER = ",";
+	private static final int NAME_INDEX = 0;
+	private static final int PRICE_INDEX = 1;
+	private static final int QUANTITY_INDEX = 2;
 
-	public int validateStorageMoney(String inputString) {
+	public int validateMoney(String inputString) {
 		int number = checkNumber(inputString);
 		checkOverZero(number);
 		checkDivisionByTen(number);
@@ -15,7 +22,7 @@ public class Validator {
 
 	public Product validateProduct(String productString) {
 		productString = removeDelimiters(productString);
-		String [] splits = splitWithDelimiter(productString, ",");
+		String [] splits = splitWithDelimiter(productString, PRODUCT_CONTENT_DELIMITER);
 		return checkProductFormat(splits);
 	}
 
@@ -27,20 +34,32 @@ public class Validator {
 		if(!productString.startsWith("[") || !productString.endsWith("]")) {
 			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_FORMAT);
 		}
-		return productString.replace("\\[", "").replace("]", "");
+		return productString.replace("[", "").replace("]", "");
 	}
 
 	private Product checkProductFormat(String [] splits) {
-		if(splits.length < 3) {
-			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_CONTENT_SIZE);
-		}
-		String name = splits[0];
-		int price = validatePrice(splits[1]);
-		int quantity = validateQuantity(splits[2]);
+		checkProductContentSize(splits.length);
+		String name = splits[NAME_INDEX];
+		int price = validatePrice(splits[PRICE_INDEX]);
+		int quantity = validateQuantity(splits[QUANTITY_INDEX]);
 		return new Product(name, price, quantity);
 	}
 
-	// TODO : 상품명이 중복인가?
+	private void checkProductContentSize(int length) {
+		if(length < PRODUCT_CONTENT_SIZE) {
+			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_CONTENT_SIZE);
+		}
+	}
+
+	public void validateProductExist(List<Product> productList, String name) {
+		Product found =  productList.stream()
+			.filter(product -> name.equals(product.getName()))
+			.findAny()
+			.orElse(null);
+		if(found != null) {
+			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_NAME_REDUNDANT);
+		}
+	}
 
 	private int validatePrice(String price) {
 		int number = checkNumber(price);
@@ -76,13 +95,13 @@ public class Validator {
 	}
 
 	private void checkOverZero(int number) {
-		if(number < 10) {
-			throw new IllegalArgumentException(ErrorConstants.ERROR_STORAGE_NUMBER_RANGE);
+		if(number < DIVISION_VALUE) {
+			throw new IllegalArgumentException(ErrorConstants.ERROR_MONEY_RANGE);
 		}
 	}
 
 	private void checkDivisionByTen(int number) {
-		if(number % 10 != 0) {
+		if(number % DIVISION_VALUE != 0) {
 			throw new IllegalArgumentException(ErrorConstants.ERROR_MONEY_DIVISION);
 		}
 	}

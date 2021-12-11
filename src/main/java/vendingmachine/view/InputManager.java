@@ -26,7 +26,7 @@ public class InputManager {
 			print(askMessage);
 			String inputString = Console.readLine();
 			try {
-				return converter.convertStorageMoney(inputString);
+				return converter.convertMoney(inputString);
 			}catch (IllegalArgumentException e) {
 				print(e.getMessage());
 			}
@@ -50,7 +50,7 @@ public class InputManager {
 		return Console.readLine();
 	}
 
-	private void print(String message) {
+	public void print(String message) {
 		System.out.println(message);
 	}
 
