@@ -32,6 +32,12 @@ public class MachineController {
 		money = customerInput.getInsertedMoney();
 	}
 
+	public void operate() {
+		while (checkAnyProductRemain()) {
+			sell();
+		}
+	}
+
 	public void sell() {
 		Product product = getProductByName(getPurchaseName());
 		money = product.purchaseOne(money);
@@ -98,5 +104,14 @@ public class MachineController {
 		if (!exist) {
 			throw new IllegalArgumentException(NO_SUCH_PRODUCT_EXIST);
 		}
+	}
+
+	private boolean checkAnyProductRemain() {
+		boolean remain = products.stream()
+				.anyMatch(p -> p.isStockRemain() == true);
+		if (remain) {
+			return true;
+		}
+		return false;
 	}
 }

@@ -19,6 +19,13 @@ public class Product {
 		return money - price;
 	}
 
+	public boolean isStockRemain() {
+		if (stock > 0) {
+			return true;
+		}
+		return false;
+	}
+
 	public String getName() {
 		return name;
 	}
