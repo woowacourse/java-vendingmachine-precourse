@@ -1,6 +1,6 @@
 package vendingmachine;
 
-import static vendingmachine.StringConstants.PREFIX_OF_ERROR_MESSAGE;
+import static vendingmachine.StringConstants.*;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.coin.Coins;
@@ -15,6 +15,7 @@ import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 public class VendingMachineConsole {
 
     public int inputCoinBalance() {
+        printCoinBalanceRequestMessage();
         int initialCoinBalance = 0;
         int coinBalance = initialCoinBalance;
         boolean isInputEntered = false;
@@ -29,7 +30,14 @@ public class VendingMachineConsole {
         return coinBalance;
     }
 
+    public void printCoinBalance(Coins coinBalance) {
+        System.out.println();
+        System.out.println(NOTICE_PHRASE_FOR_COIN_BALANCE);
+        System.out.println(new CoinsResponse(coinBalance).convertCoinBalanceToPrint());
+    }
+
     public ItemsInventoryInfo inputItemInventoryInfo() {
+        printItemInventoryInfoRequestMessage();
         ItemsInventoryInfo itemInventoryInfo = new ItemsInventoryInfo();
         boolean isItemsInventoryInfoEntered = false;
         while (!isItemsInventoryInfoEntered) {
@@ -43,11 +51,8 @@ public class VendingMachineConsole {
         return itemInventoryInfo;
     }
 
-    public void printCoinBalance(Coins coinBalance) {
-        System.out.println(new CoinsResponse(coinBalance).toPrint());
-    }
-
     public int inputAvailableMoney() {
+        printAvailableMoneyRequestMessage();
         int initialAvailableMoney = 0;
         int availableMoney = initialAvailableMoney;
         boolean isAvailableMoneyEntered = false;
@@ -67,6 +72,7 @@ public class VendingMachineConsole {
     }
 
     public String inputItemsToPurchase() {
+        System.out.println(REQUEST_MESSAGE_ABOUT_PURCHASING_ITEM);
         return new ItemPurchaseRequest(input()).toItemNameToPurchase();
     }
 
@@ -76,10 +82,26 @@ public class VendingMachineConsole {
     }
 
     public void printChange(Coins change) {
-        System.out.println(new CoinsResponse(change).toPrint());
+        System.out.println(NOTICE_PHRASE_FOR_CHANGE);
+        System.out.println(new CoinsResponse(change).convertChangeToPrint());
+    }
+
+    private void printCoinBalanceRequestMessage() {
+        System.out.println(REQUEST_MESSAGE_ABOUT_COIN_BALANCE);
+    }
+
+    private void printItemInventoryInfoRequestMessage() {
+        System.out.println();
+        System.out.println(REQUEST_MESSAGE_ABOUT_ITEM_INVENTORY_INFO);
+    }
+
+    private void printAvailableMoneyRequestMessage() {
+        System.out.println();
+        System.out.println(REQUEST_MESSAGE_ABOUT_AVAILABLE_MONEY);
     }
 
     private String input() {
         return Console.readLine();
     }
+
 }

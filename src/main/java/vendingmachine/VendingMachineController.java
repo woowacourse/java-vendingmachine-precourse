@@ -12,8 +12,8 @@ public class VendingMachineController {
         createCoinBalance();
         createItems();
         createAvailableMoney();
-        purchaseItem();
-        console.printChange(vendingMachineService.giveChange());
+        updateItems();
+        getChanges();
     }
     
     private void createCoinBalance() {
@@ -28,7 +28,7 @@ public class VendingMachineController {
         vendingMachineService.insertMoney(console.inputAvailableMoney());
     }
 
-    private void purchaseItem() {
+    private void updateItems() {
         while (vendingMachineService.isPurchaseAvailable()) {
             try {
                 console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
@@ -37,5 +37,10 @@ public class VendingMachineController {
                 console.printErrorMessage(error.getMessage());
             }
         }
+    }
+
+    private void getChanges() {
+        console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
+        console.printChange(vendingMachineService.giveChange());
     }
 }
