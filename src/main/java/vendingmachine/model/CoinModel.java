@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.resource.CoinStorage;
@@ -60,12 +61,8 @@ public class CoinModel {
 	}
 
 	private List<Integer> getPossibleMonetaryUnit(int amount) {
-		List<Integer> monetaryUnit = CoinStorage.MONETARY_UNIT_LIST;
-		for (int oneUnit : CoinStorage.MONETARY_UNIT_LIST) {
-			if (amount < oneUnit) {
-				monetaryUnit.remove(0);
-			}
-		}
-		return monetaryUnit;
+		return CoinStorage.MONETARY_UNIT_LIST.stream()
+				.filter(monetaryUnit -> amount >= monetaryUnit)
+				.collect(Collectors.toList());
 	}
 }
