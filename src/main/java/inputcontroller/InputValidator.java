@@ -9,10 +9,6 @@ public class InputValidator {
         isDigit(moneyValue);
         // 예외2. 10원 단위가 아님
         isMultOf10(moneyValue);
-        // 입력 금액이 상품의 최소 판매가격보다 낮음
-        if (Integer.parseInt(moneyValue) < minCost) {
-            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.\n");
-        }
     }
 
     public static void isDigit(String moneyValue) {
@@ -28,6 +24,13 @@ public class InputValidator {
         int number = Integer.parseInt(moneyValue);
         if (number % 10 != 0) {
             throw new IllegalArgumentException("[ERROR] 10원 단위의 정수를 입력하세요.\n");
+        }
+    }
+
+    public static void enough(String moneyValue) {
+        // 입력 금액이 상품의 최소 판매가격보다 낮음
+        if (Integer.parseInt(moneyValue) < minCost) {
+            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.\n");
         }
     }
 

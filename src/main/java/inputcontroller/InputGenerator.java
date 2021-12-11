@@ -44,6 +44,7 @@ public class InputGenerator {
                 System.out.println("\n투입 금액을 입력해 주세요.");
                 String inputText = Console.readLine();
                 InputValidator.isVaildMoney(inputText);
+                InputValidator.enough(inputText);
 
                 userInputMoney = Integer.parseInt(inputText);
                 break;
