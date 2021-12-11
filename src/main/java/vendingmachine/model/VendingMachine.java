@@ -17,9 +17,8 @@ public class VendingMachine {
     private Products products;
     private int userInsertAmount;
 
-    public VendingMachine(int amount) {
+    public VendingMachine() {
         coins = initializeCoins();
-        createRandom(amount);
     }
 
     private Map<Coin, Integer> initializeCoins() {
@@ -91,6 +90,10 @@ public class VendingMachine {
 
     public int getUserInsertAmount() {
         return userInsertAmount;
+    }
+
+    public void setInitialAmount(int initialAmount) {
+        createRandom(initialAmount);
     }
 
     public void setProducts(Products products) {

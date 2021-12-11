@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.Products;
 import vendingmachine.util.ProductValidator;
 import vendingmachine.util.InputValidator;
@@ -11,8 +10,11 @@ import vendingmachine.view.OutputView;
 import java.util.List;
 
 public class MachineController {
-    private VendingMachine vendingMachine;
-    private Products products;
+    private final VendingMachine vendingMachine;
+
+    public MachineController(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
+    }
 
     public void run() {
         initMachine();
@@ -21,52 +23,52 @@ public class MachineController {
     }
 
     private void initMachine() {
-        createVendingMachine();
-        createProducts();
-        createUserInsertAmount();
+        insertInitialAmount();
+        insertProducts();
+        insertUserInsertAmount();
     }
 
-    private void createVendingMachine() {
+    private void insertInitialAmount() {
         InputView.printInputInitialAmountMessage();
-        vendingMachine = new VendingMachine(inputInitialAmount());
+        vendingMachine.setInitialAmount(inputInitialAmount(InputView.getInput()));
         OutputView.printRemainingCoins(vendingMachine.getCoins());
     }
 
-    private int inputInitialAmount() {
+    private int inputInitialAmount(String input) {
         while (true) {
             try {
-                return InputValidator.validateAmountInput(Console.readLine());
+                return InputValidator.validateAmountInput(input);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
     }
 
-    private void createProducts() {
+    private void insertProducts() {
         InputView.printInputProductMessage();
-        products = new Products(inputProducts());
+        Products products = new Products(inputProducts(InputView.getInput()));
         vendingMachine.setProducts(products);
     }
 
-    private List<List<String>> inputProducts() {
+    private List<List<String>> inputProducts(String input) {
         while (true) {
             try {
-                return InputValidator.validateProductInput(Console.readLine());
+                return InputValidator.validateProductInput(input);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
     }
 
-    private void createUserInsertAmount() {
+    private void insertUserInsertAmount() {
         InputView.printUserInsertAmountMessage();
-        vendingMachine.setUserInsertAmount(userInsertAmount());
+        vendingMachine.setUserInsertAmount(userInsertAmount(InputView.getInput()));
     }
 
-    private int userInsertAmount() {
+    private int userInsertAmount(String input) {
         while (true) {
             try {
-                return InputValidator.validateAmountInput(Console.readLine());
+                return InputValidator.validateAmountInput(input);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
@@ -100,14 +102,14 @@ public class MachineController {
 
     private String checkProductName() {
         InputView.printProductToBuyMessage();
-        String productName = Console.readLine();
+        String productName = InputView.getInput();
         while (true) {
             try {
                 ProductValidator.validateProduct(vendingMachine, productName);
                 return productName;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
-                productName = Console.readLine();
+                productName = InputView.getInput();
             }
         }
     }
