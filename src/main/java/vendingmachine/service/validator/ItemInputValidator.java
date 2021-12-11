@@ -82,7 +82,7 @@ public class ItemInputValidator {
 	}
 
 	private void isQuantityPositive(String quantityString) {
-		if (Integer.parseInt(quantityString) <= QUANTITY_MIN) {
+		if (Integer.parseInt(quantityString) < QUANTITY_MIN) {
 			throw new IllegalArgumentException("상품의 수량은 1 이상이어야 합니다.");
 		}
 	}
