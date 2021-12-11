@@ -33,7 +33,7 @@ class ItemsTest {
         Items items = new Items(itemInfos);
         String nameNotForSale = "사이다";
         Money remainingInputMoney = new Money("3000");
-        String expectedMessage = "구매하시려는 상품이 상품들 중에 없습니다.";
+        String expectedMessage = "구매하시려는 상품이 상품 목록에 없습니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> items.sell(nameNotForSale, remainingInputMoney))
                 .withMessage(expectedMessage);
     }
