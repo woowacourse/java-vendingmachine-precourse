@@ -18,7 +18,7 @@ public class Validate {
 		try {
 			Integer.parseInt(input);
 		} catch (Exception exception) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ERROR_INPUT_HOLDING_AMOUNT_MONEY);
 		}
 	}
 

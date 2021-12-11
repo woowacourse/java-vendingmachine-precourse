@@ -36,5 +36,4 @@ public class VendingMachineController {
 		printInputAmount(vendingMachine.getInputAmount());
 		printChangeAmount(vendingMachine.getChangeAmountToString());
 	}
-
 }
