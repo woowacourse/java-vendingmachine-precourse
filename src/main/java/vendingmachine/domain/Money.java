@@ -34,4 +34,8 @@ public class Money {
 	private boolean greaterThanZero(int amount) {
 		return amount > ZERO;
 	}
+
+	public int getAmount() {
+		return amount;
+	}
 }

@@ -13,16 +13,17 @@ public class VendingMachineController {
 	}
 
 	public void run() {
-		inputChanges();
+		insertChanges();
+		vendingMachine.printCoins();
 	}
 
-	private void inputChanges() {
+	private void insertChanges() {
 		try {
 			String changesString = InputView.inputChanges();
 			vendingMachine.inputChanges(new Money(changesString));
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
-			inputChanges();
+			insertChanges();
 		}
 	}
 }

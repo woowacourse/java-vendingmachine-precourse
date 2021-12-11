@@ -1,9 +1,19 @@
 package vendingmachine.domain;
 
+import vendingmachine.views.OutputView;
+
 public class VendingMachine {
-	private Money changes;
+	private Coins coins;
 
 	public void inputChanges(Money changes) {
-		this.changes = changes;
+		createCoins(changes.getAmount());
+	}
+
+	private void createCoins(int changes) {
+		coins = new Coins(changes);
+	}
+
+	public void printCoins() {
+		OutputView.printCoins(coins);
 	}
 }
