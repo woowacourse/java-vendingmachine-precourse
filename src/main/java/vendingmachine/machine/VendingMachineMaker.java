@@ -1,60 +1,18 @@
 package vendingmachine.machine;
 
-import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.money.Changes;
-import vendingmachine.product.ProductMapper;
-import vendingmachine.product.ProductStorage;
-import vendingmachine.product.ProductValidator;
-import vendingmachine.view.ErrorView;
-import vendingmachine.view.InputView;
-import vendingmachine.view.OutputView;
+import vendingmachine.changes.ChangesController;
+import vendingmachine.product.ProductController;
 
 public class VendingMachineMaker {
-	private Changes changes;
-	private ProductStorage productStorage;
-	private ProductMapper productMapper;
-	private ProductValidator productValidator;
+	private ChangesController changesController;
+	private ProductController productController;
 
 	public VendingMachineMaker() {
-		this.changes = new Changes();
-		this.productStorage = new ProductStorage();
-		this.productMapper = new ProductMapper();
-		this.productValidator = new ProductValidator();
+		this.changesController = new ChangesController();
+		this.productController = new ProductController();
 	}
 
-	public VendingMachine setUp() {
-		setUpChanges();
-		setUpProductStorage();
-		return new VendingMachine(changes, productStorage);
-	}
-
-	private void setUpChanges() {
-		InputView.printInitialMoneySettingMessage();
-		requestInitialMoney();
-	}
-
-	private void requestInitialMoney() {
-		try {
-			changes.input(Console.readLine());
-			changes.createRandomCoins();
-			OutputView.printVendingMachineOwnCoins(changes.getCoins());
-		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
-			requestInitialMoney();
-		}
-	}
-
-	private void setUpProductStorage() {
-		InputView.printInitialProductSettingMessage();
-		requestInitialProducts();
-	}
-
-	private void requestInitialProducts() {
-		try {
-			productStorage.storeProducts(Console.readLine(), productMapper, productValidator);
-		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
-			requestInitialProducts();
-		}
+	public VendingMachine readyToService() {
+		return new VendingMachine(changesController.readyToChanges(), productController.readyToProductStorage());
 	}
 }

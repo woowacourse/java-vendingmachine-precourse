@@ -17,7 +17,7 @@ public class Application {
 
 	public static VendingMachine readyToService() {
 		VendingMachineMaker vendingMachineMaker = new VendingMachineMaker();
-		return vendingMachineMaker.setUp();
+		return vendingMachineMaker.readyToService();
 	}
 
 	public static Payments insertMoney() {

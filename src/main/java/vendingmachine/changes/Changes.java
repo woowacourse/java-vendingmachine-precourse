@@ -1,10 +1,12 @@
-package vendingmachine.money;
+package vendingmachine.changes;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.money.Coin;
+import vendingmachine.money.Money;
 
 public class Changes {
 	private static final String PREFIX = "자판기가 보유하는 ";

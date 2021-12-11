@@ -2,7 +2,7 @@ package vendingmachine.machine;
 
 import java.util.HashMap;
 
-import vendingmachine.money.Changes;
+import vendingmachine.changes.Changes;
 import vendingmachine.money.Coin;
 import vendingmachine.money.Money;
 import vendingmachine.product.ProductStorage;
