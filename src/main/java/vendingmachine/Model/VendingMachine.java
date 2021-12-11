@@ -3,17 +3,17 @@ package vendingmachine.Model;
 import java.util.ArrayList;
 
 public class VendingMachine {
-	public CoinWallet machineCoins;
-	public final Products products = new Products();
-	public int userMoney;
+	private CoinGroup coins;
+	private final BeverageGroup beverageGroup = new BeverageGroup();
+	private int userMoney;
 
 	public void initCoins(int money) {
-		machineCoins = new CoinWallet(money);
+		coins = new CoinGroup(money);
 	}
 
-	public void initProduct(ArrayList<Object[]> products) {
-		for (Object[] values : products) {
-			this.products.add(new Product(values));
+	public void initBeverage(ArrayList<Object[]> beverages) {
+		for (Object[] values : beverages) {
+			this.beverageGroup.add(new Beverage(values));
 		}
 	}
 
@@ -21,11 +21,28 @@ public class VendingMachine {
 		userMoney = money;
 	}
 
-	public boolean isUserPoor() {
-		return userMoney < products.getMinPrice();
+	public CoinGroup getCoins() {
+		return coins;
 	}
 
-	public boolean allSoldOut() {
-		return products.allSoldOut();
+	public String[] getNames() {
+		return beverageGroup.getNames();
+	}
+
+	public Beverage getBeverage(String name) {
+		return beverageGroup.getBeverages(name);
+	}
+
+	public int getUserMoney() {
+		return userMoney;
+	}
+
+	public void sell(String name) {
+		userMoney -= beverageGroup.getBeverages(name).price;
+		beverageGroup.getBeverages(name).sell();
+	}
+
+	public boolean isActivateEnd() {
+		return userMoney < beverageGroup.getMinPrice() || beverageGroup.isAllSoldOut();
 	}
 }

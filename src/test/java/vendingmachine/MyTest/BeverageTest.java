@@ -10,7 +10,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class ProductTest extends NsTest {
+public class BeverageTest extends NsTest {
 	private static final String ERROR_MESSAGE = "[ERROR]";
 
 	@Test

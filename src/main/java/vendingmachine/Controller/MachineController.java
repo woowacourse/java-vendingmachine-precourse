@@ -2,56 +2,54 @@ package vendingmachine.Controller;
 
 import static vendingmachine.View.OutputView.printBreak;
 
-import vendingmachine.Controller.Run.Activator;
-import vendingmachine.Controller.Run.Changes;
+import vendingmachine.Model.ChangesCoinGroup;
 import vendingmachine.Model.Converter;
 import vendingmachine.Model.VendingMachine;
 import vendingmachine.View.OutputView;
 
 public class MachineController {
-	public VendingMachine vendingMachine;
+	private final VendingMachine vendingMachine;
 
-	public MachineController(VendingMachine vendingMachine) {
-		this.vendingMachine = vendingMachine;
+	public MachineController() {
+		this.vendingMachine = new VendingMachine();
 	}
 
 	public void operate() {
-		init();
+		initiate();
 		activate();
 		giveChanges();
 	}
 
-	public void init() {
-		vendingMachine.initCoins(Converter.convertToInt(InputController.getMachineMoneyInput()));
+	private void initiate() {
+		vendingMachine.initCoins(Converter.getInt(InputController.getMachineMoney()));
 		printBreak();
 
-		OutputView.printCoin(vendingMachine.machineCoins.coins);
+		OutputView.printCoin(vendingMachine.getCoins().getMap());
 		printBreak();
 
-		vendingMachine.initProduct(Converter.convertToProducts(InputController.getProductsInput()));
+		vendingMachine.initBeverage(Converter.getBeverages(InputController.getBeverages()));
 		printBreak();
 
-		vendingMachine.initUserMoney(Converter.convertToInt(InputController.getUserMoneyInput()));
+		vendingMachine.initUserMoney(Converter.getInt(InputController.getUserMoney()));
 		printBreak();
 	}
 
-	public void activate() {
-		OutputView.printUserMoney(vendingMachine.userMoney);
-		String productNameInput = InputController.getProductNameInput(vendingMachine);
+	private void activate() {
+		OutputView.printUserMoney(vendingMachine.getUserMoney());
+		String beverageNameInput = InputController.getBeverageName(vendingMachine);
 		printBreak();
 
-		Activator activator = new Activator(vendingMachine);
-		activator.sell(vendingMachine.products.getProduct(productNameInput));
-		if (!activator.isActivateEnd()) {
+		vendingMachine.sell(beverageNameInput);
+		if (!vendingMachine.isActivateEnd()) {
 			activate();
 		}
 	}
 
-	public void giveChanges() {
-		OutputView.printUserMoney(vendingMachine.userMoney);
+	private void giveChanges() {
+		OutputView.printUserMoney(vendingMachine.getUserMoney());
 
-		Changes changes = new Changes(vendingMachine);
-		changes.setChangeCoins();
-		OutputView.printChange(changes.getChangeCoins().getNotEmptyCoins());
+		ChangesCoinGroup changesCoinGroup = new ChangesCoinGroup(vendingMachine);
+		changesCoinGroup.setRepeat();
+		OutputView.printChange(changesCoinGroup.getNotEmptyMap());
 	}
 }

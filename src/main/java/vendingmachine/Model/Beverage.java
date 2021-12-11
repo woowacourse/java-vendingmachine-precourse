@@ -1,13 +1,13 @@
 package vendingmachine.Model;
 
-public class Product {
-	public final String NAME;
-	public final int PRICE;
+public class Beverage {
+	public final String name;
+	public final int price;
 	private int stock;
 
-	public Product(Object[] values) {
-		NAME = (String)values[0];
-		PRICE = (int)values[1];
+	public Beverage(Object[] values) {
+		name = (String)values[0];
+		price = (int)values[1];
 		this.stock = (int)values[2];
 	}
 

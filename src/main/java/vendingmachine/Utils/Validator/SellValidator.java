@@ -1,25 +1,25 @@
 package vendingmachine.Utils.Validator;
 
-import vendingmachine.Model.Product;
+import vendingmachine.Model.Beverage;
 import vendingmachine.Utils.Constants;
 
 public class SellValidator {
-	public Product product;
+	public Beverage beverage;
 
-	public SellValidator(Product product, int userMoney) {
-		this.product = product;
+	public SellValidator(Beverage beverage, int userMoney) {
+		this.beverage = beverage;
 		isUserRich(userMoney);
 		isNoStock();
 	}
 
 	private void isUserRich(int userMoney) {
-		if (product.PRICE > userMoney) {
+		if (beverage.price > userMoney) {
 			throw new IllegalArgumentException(Constants.ERROR_USER_POOR);
 		}
 	}
 
 	private void isNoStock() {
-		if (product.isSoldOut()) {
+		if (beverage.isSoldOut()) {
 			throw new IllegalArgumentException(Constants.ERROR_NO_STOCK);
 		}
 	}
