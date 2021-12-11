@@ -33,20 +33,31 @@ public class ProductList {
         String[] productInformationList = validateSplitRegex(productsInformation);
         setNumberOfProducts(productInformationList);
     }
-    public boolean compareMinimumPrice(int customerMoney){
-        return customerMoney>=MINIMUM_PRICE;
+
+    public boolean findProductByName(String name) {
+        return productMap.containsKey(name);
+    }
+
+    public boolean isAvailableProduct(String name){
+        Product product  = productMap.get(name);
+        return product.isAvailable();
+    }
+    public boolean compareMinimumPrice(int customerMoney) {
+        return customerMoney >= MINIMUM_PRICE;
     }
 
     public boolean checkAvailableState(int customerMoney) {
         return checkProductAmount() && checkAvailableBuyProduct(customerMoney);
     }
-    private boolean checkAvailableBuyProduct(int customerMoney){
+
+    private boolean checkAvailableBuyProduct(int customerMoney) {
         return customerMoney > MINIMUM_PRICE;
     }
-    private boolean checkProductAmount(){
-        for(String name : productMap.keySet()){
+
+    private boolean checkProductAmount() {
+        for (String name : productMap.keySet()) {
             Product product = productMap.get(name);
-            if(product.isAvailable()){
+            if (product.isAvailable()) {
                 return true;
             }
         }

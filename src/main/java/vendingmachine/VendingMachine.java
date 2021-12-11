@@ -18,7 +18,7 @@ public class VendingMachine {
     public void run() {
         inputCustomerMoney();
         while (checkAvailableSellState()) {
-            sellProduct();
+            inputSellProduct();
         }
         returnChange();
     }
@@ -30,6 +30,7 @@ public class VendingMachine {
     private boolean checkAvailableSellState() {
         return productList.checkAvailableState(customerMoney);
     }
+
     public void inputCustomerMoney() {
         while (true) {
             try {
@@ -40,6 +41,7 @@ public class VendingMachine {
             }
         }
     }
+
     private void inputMoney() {
         System.out.println("투입 금액을 입력해주세요.");
         String money = Console.readLine();
@@ -71,9 +73,27 @@ public class VendingMachine {
     public void sellProduct() {
         System.out.println("구매할 상품명을 입력해 주세요.");
         String product = Console.readLine();
+        this.validateSellProduct(product);
         int pay = productList.sellProduct(product);
         customerMoney -= pay;
         printInputMoney();
+    }
+
+    private void validateSellProduct(String product) {
+        this.validateExistedProduct(product);
+        this.validateProductIsAvailable(product);
+    }
+
+    private void validateExistedProduct(String product) {
+        if (!productList.findProductByName(product)) {
+            throw new IllegalArgumentException("입력한 상품이 존재하지 않습니다.");
+        }
+    }
+
+    private void validateProductIsAvailable(String product) {
+        if (!productList.isAvailableProduct(product)) {
+            throw new IllegalArgumentException("입력한 상품의 재고가 없습니다.");
+        }
     }
 
     public void printInputMoney() {
@@ -96,7 +116,16 @@ public class VendingMachine {
             }
         }
     }
-
+    public void inputSellProduct() {
+        while (true) {
+            try {
+                this.sellProduct();
+                break;
+            } catch (IllegalArgumentException exception) {
+                System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
+            }
+        }
+    }
     public void inputInitialProduct() {
         while (true) {
             try {
