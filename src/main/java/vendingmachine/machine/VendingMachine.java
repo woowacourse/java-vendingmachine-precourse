@@ -2,39 +2,40 @@ package vendingmachine.machine;
 
 import java.util.HashMap;
 
+import vendingmachine.money.Changes;
 import vendingmachine.money.Coin;
+import vendingmachine.money.Money;
+import vendingmachine.money.Payments;
 import vendingmachine.product.ProductStorage;
-import vendingmachine.slot.ChangeSlot;
-import vendingmachine.slot.InsertSlot;
 
 public class VendingMachine {
-	private ChangeSlot changeSlot;
+	private Changes changes;
 	private ProductStorage productStorage;
-	private InsertSlot insertSlot;
+	private Payments payments;
 
-	public VendingMachine(ChangeSlot changeSlot, ProductStorage productStorage) {
-		this.changeSlot = changeSlot;
+	public VendingMachine(Changes changes, ProductStorage productStorage) {
+		this.changes = changes;
 		this.productStorage = productStorage;
-		this.insertSlot = new InsertSlot();
-	}
-
-	public boolean isUsable() {
-		return productStorage.isSellable(insertSlot.getRemainMoney());
+		this.payments = new Payments();
 	}
 
 	public void insertMoney(String money) {
-		insertSlot.insert(money);
+		payments.insert(money);
 	}
 
-	public int calculateRemainMoney() {
-		return insertSlot.getRemainMoney();
+	public boolean isUsable() {
+		return productStorage.isSellable(payments.getRemainMoney());
+	}
+
+	public Money calculateRemainMoney() {
+		return payments.getRemainMoney();
 	}
 
 	public void trade(String product) {
-		insertSlot.payProductValue(productStorage.sellProduct(product));
+		payments.payProductValue(productStorage.sellProduct(product));
 	}
 
 	public HashMap<Coin, Integer> returnChange() {
-		return changeSlot.calculateChange(insertSlot.getRemainMoney());
+		return changes.calculateChange(payments.getRemainMoney());
 	}
 }

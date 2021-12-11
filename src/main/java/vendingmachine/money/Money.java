@@ -29,10 +29,6 @@ public class Money {
 		amount -= coinValue;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
-
 	public void pay(int productValue) {
 		amount -= productValue;
 	}
@@ -42,5 +38,16 @@ public class Money {
 			return true;
 		}
 		return false;
+	}
+
+	public boolean isEnough(int productValue) {
+		if (amount >= productValue) {
+			return true;
+		}
+		return false;
+	}
+
+	public String toString() {
+		return String.valueOf(amount);
 	}
 }

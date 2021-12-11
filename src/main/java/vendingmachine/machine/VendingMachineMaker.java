@@ -1,42 +1,43 @@
 package vendingmachine.machine;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.money.Changes;
 import vendingmachine.product.ProductMapper;
 import vendingmachine.product.ProductStorage;
 import vendingmachine.product.ProductValidator;
-import vendingmachine.slot.ChangeSlot;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineMaker {
-	private ChangeSlot changeSlot;
+	private Changes changes;
 	private ProductStorage productStorage;
 	private ProductMapper productMapper;
 	private ProductValidator productValidator;
 
 	public VendingMachineMaker() {
-		this.changeSlot = new ChangeSlot();
+		this.changes = new Changes();
 		this.productStorage = new ProductStorage();
 		this.productMapper = new ProductMapper();
 		this.productValidator = new ProductValidator();
 	}
 
 	public VendingMachine setUp() {
-		setUpChangeSlot();
+		setUpChanges();
 		setUpProductStorage();
-		return new VendingMachine(changeSlot, productStorage);
+		return new VendingMachine(changes, productStorage);
 	}
 
-	private void setUpChangeSlot() {
+	private void setUpChanges() {
 		InputView.printInitialMoneySettingMessage();
 		requestInitialMoney();
 	}
 
 	private void requestInitialMoney() {
 		try {
-			changeSlot.input(Console.readLine());
-			OutputView.printVendingMachineOwnCoins(changeSlot.createRandomCoins());
+			changes.input(Console.readLine());
+			changes.createRandomCoins();
+			OutputView.printVendingMachineOwnCoins(changes.getCoins());
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 			requestInitialMoney();

@@ -36,14 +36,11 @@ public enum Coin {
 		return coinMap.get(amount);
 	}
 
-	public int change(int remainMoney) {
-		return remainMoney - amount;
+	public void change(Money money) {
+		money.change(amount);
 	}
 
-	public boolean isChangeable(int remainMoney) {
-		if (remainMoney >= amount) {
-			return true;
-		}
-		return false;
+	public boolean isChangeable(Money money) {
+		return money.isChangeable(amount);
 	}
 }

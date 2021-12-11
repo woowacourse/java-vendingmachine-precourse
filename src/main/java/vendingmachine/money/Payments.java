@@ -1,8 +1,6 @@
-package vendingmachine.slot;
+package vendingmachine.money;
 
-import vendingmachine.money.Money;
-
-public class InsertSlot {
+public class Payments {
 	private static final String PREFIX = "자판기에 투입하는 ";
 	private static final String NOT_ENOUGH_MONEY = "잔액 부족으로 해당 상품을 구매할 수 없습니다.";
 
@@ -12,8 +10,8 @@ public class InsertSlot {
 		this.moneyForBuying = new Money(money, PREFIX);
 	}
 
-	public int getRemainMoney() {
-		return moneyForBuying.getAmount();
+	public Money getRemainMoney() {
+		return moneyForBuying;
 	}
 
 	public void payProductValue(int productValue) {

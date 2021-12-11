@@ -1,14 +1,12 @@
-package vendingmachine.slot;
+package vendingmachine.money;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.money.Coin;
-import vendingmachine.money.Money;
 
-public class ChangeSlot {
+public class Changes {
 	private static final String PREFIX = "자판기가 보유하는 ";
 	private static final int ZERO = 0;
 	private static final int PLUS_ONE = 1;
@@ -21,13 +19,12 @@ public class ChangeSlot {
 		this.moneyForChange = new Money(money, PREFIX);
 	}
 
-	public HashMap<Coin, Integer> createRandomCoins() {
+	public void createRandomCoins() {
 		initialCoins();
 		List<Integer> possibleCoins = Coin.getAllCoins();
 		while (moneyForChange.isLeft()) {
 			addRandomCoin(possibleCoins);
 		}
-		return coins;
 	}
 
 	private void initialCoins() {
@@ -45,20 +42,23 @@ public class ChangeSlot {
 		}
 	}
 
-	public HashMap<Coin, Integer> calculateChange(int remainMoney) {
+	public HashMap<Coin, Integer> getCoins() {
+		return coins;
+	}
+
+	public HashMap<Coin, Integer> calculateChange(Money money) {
 		HashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
-			remainMoney = changeCoinAsPossible(coin, remainMoney, changeCoins);
+			changeCoinAsPossible(coin, money, changeCoins);
 		}
 		return changeCoins;
 	}
 
-	private int changeCoinAsPossible(Coin coin, int remainMoney, HashMap<Coin, Integer> changeCoins) {
-		while (coins.get(coin) > ZERO && coin.isChangeable(remainMoney)) {
-			remainMoney = coin.change(remainMoney);
+	private void changeCoinAsPossible(Coin coin, Money money, HashMap<Coin, Integer> changeCoins) {
+		while (coins.get(coin) > ZERO && coin.isChangeable(money)) {
+			coin.change(money);
 			coins.merge(coin, MINUS_ONE, Integer::sum);
 			changeCoins.merge(coin, PLUS_ONE, Integer::sum);
 		}
-		return remainMoney;
 	}
 }

@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.HashMap;
 
 import vendingmachine.money.Coin;
+import vendingmachine.money.Money;
 
 public class OutputView {
 	private static final String VENDING_MACHINE_OWN_COINS = "자판기가 보유한 동전";
@@ -29,9 +30,9 @@ public class OutputView {
 		}
 	}
 
-	public static void printRemainMoney(int money) {
+	public static void printRemainMoney(Money money) {
 		printLineBreak();
-		System.out.println(REMAIN_MONEY_FORMAT + money + MONETARY_UNIT);
+		System.out.println(REMAIN_MONEY_FORMAT + money.toString() + MONETARY_UNIT);
 	}
 
 	public static void printChange(HashMap<Coin, Integer> coins) {
