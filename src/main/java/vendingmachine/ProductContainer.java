@@ -28,7 +28,7 @@ public class ProductContainer {
     }
 
     public boolean isAllSoldOut() {
-        return !productMap.values().stream()
+        return productMap.values().stream()
                                     .filter(product -> product.getStockQuantity() != 0)
                                     .collect(Collectors.toList())
                                     .isEmpty();
