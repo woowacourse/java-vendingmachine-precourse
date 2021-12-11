@@ -8,6 +8,7 @@ public class Validation {
             isSpace(input);
             isNumber(input);
             isPositive(input);
+            isDivisibleByTen(input);
             return true;
         } catch (IllegalArgumentException e) {
             message.printInputNumber();
@@ -33,6 +34,12 @@ public class Validation {
 
     private void isPositive(String input) throws IllegalArgumentException {
         if (Integer.parseInt(input) < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private void isDivisibleByTen(String input) throws IllegalArgumentException {
+        if (Integer.parseInt(input) % 10 != 0) {
             throw new IllegalArgumentException();
         }
     }
