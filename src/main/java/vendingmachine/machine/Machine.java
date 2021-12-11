@@ -19,14 +19,21 @@ public class Machine {
 
     public Machine(int money){
         initCoins();
-//        this.coins=makeCoins(money);
-
+        makeCoins(money);
     }
 
     public Map<Coin, Integer> getCoins() {
         return coins;
     }
 
+    private void makeCoins(int money) {
+        while( money > 0 ){
+            int coinPrice= pickNumberInList(Coin.getPossibleAmountList(money));
+            Coin coin = Coin.findCoinByPrice(coinPrice);
+            coins.put(coin ,coins.get(coin)+1); //선택된 코인 1개 증가
+            money-=coinPrice;
+        }
+    }
 
     private void initCoins(){
         Map<Coin, Integer> coins = new HashMap<>();
