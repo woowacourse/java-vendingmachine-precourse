@@ -5,6 +5,7 @@
   - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용한다.
   - ⚠　금액은 0이상의 숫자여야 한다.
   - ⚠　숫자가 아닌 값을 입력할 경우 `IllegalArgumentException`를 발생시키고, [ERROR]로 시작하는 메시지를 출력 후 다시 입력받는다.
+  - ⚠　보유 금액은 10으로 나누어 떨어져야 한다.
 - 보유 금액만큼 랜덤으로 동전 생성하기 
   - `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()` 활용한다.
   - ⚠　동전의 개수는 0개 이상이어야 한다.
