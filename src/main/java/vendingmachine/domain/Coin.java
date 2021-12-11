@@ -1,5 +1,9 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -16,4 +20,9 @@ public enum Coin {
         return amount;
     }
 
+    public static List<Integer> generateCoinAmountList() {
+        return Arrays.stream(values())
+            .map(coin -> coin.getAmount())
+            .collect(Collectors.toList());
+    }
 }
