@@ -5,7 +5,8 @@
     - [ ] run thread   
     - [ ] buy   
   
-- [ ] Product
+- [ ] Product   
+  - [ ] hashCode, equals
   
 - [ ] ProductManager   
     - [x] constructor   
