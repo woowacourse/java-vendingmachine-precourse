@@ -14,20 +14,24 @@ public class VendingMachine {
 	}
 
 	public HashMap<Coin, Integer> calculateChange() {
-		Coin[] coinArray = Coin.getCoinArray();
 		int money = inputMoney;
-		HashMap<Coin, Integer> change = new HashMap<>();
-		for (Coin coin : coinArray) {
-			change.put(coin, 0);
-		}
-		for (Coin coin : coinArray) {
+		HashMap<Coin, Integer> change = initChange();
+		for (Coin coin : Coin.getCoinArray()) {
 			if (money / coin.getAmount() > 0 && money / coin.getAmount() <= coinCount.get(coin)) {
 				change.put(coin, money / coin.getAmount());
 				money %= coin.getAmount();
-			} else if (money / coin.getAmount() > 0 && money / coin.getAmount() > coinCount.get(coin)){
-				change.put(coin,coinCount.get(coin));
+			} else if (money / coin.getAmount() > 0 && money / coin.getAmount() > coinCount.get(coin)) {
+				change.put(coin, coinCount.get(coin));
 				money -= coin.getAmount() * coinCount.get(coin);
 			}
+		}
+		return change;
+	}
+
+	public HashMap<Coin, Integer> initChange() {
+		HashMap<Coin, Integer> change = new HashMap<>();
+		for (Coin coin : Coin.getCoinArray()) {
+			change.put(coin, 0);
 		}
 		return change;
 	}
