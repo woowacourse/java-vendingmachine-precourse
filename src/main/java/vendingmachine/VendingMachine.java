@@ -5,13 +5,13 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class VendingMachine {
     HashMap<Integer, Coin> coinCount = new HashMap<Integer, Coin>();
 
-    public void initCoinCount() {
+    private void initCoinCount() {
         for (Coin coin: Coin.values()) {
             coinCount.put(coin.getAmount(), coin);
         }
     }
 
-    public void generateCoinCount(int amount) {
+    private void generateCoinCount(int amount) {
         int remainder = amount;
         for (Coin coin : Coin.values()) {
             if (coin == Coin.COIN_10) {
