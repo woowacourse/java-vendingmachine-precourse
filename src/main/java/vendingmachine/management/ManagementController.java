@@ -45,6 +45,7 @@ public class ManagementController {
             try {
                 String [] commodityInfo = input.split(";");
                 CheckCommodityFormat.validation(commodityInfo);
+                Arrays.stream(commodityInfo).forEach(s -> s.substring(1, s.length()-1));
             } catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
