@@ -19,6 +19,7 @@ public class PurchaseService {
 
 	public int purchaseItem(List<Item> items, int remainingMoney) {
 		Item item = getItem(items, remainingMoney);
+		return remainingMoney - item.getPrice();
 	}
 
 	private Item getItem(List<Item> items, int remainingMoney) {
