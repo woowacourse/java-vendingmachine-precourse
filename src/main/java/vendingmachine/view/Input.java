@@ -22,6 +22,17 @@ public class Input {
             }
         }
     }
-
+    public String inputProducts(){
+        while (true) {
+            String input = readLine();
+            try {
+                validateSplitProduct(input);
+                validateSplitInfos(input.split(PRODUCT_SPLITTER));
+                return input;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
 }
