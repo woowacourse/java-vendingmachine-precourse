@@ -45,8 +45,15 @@ public class Machine {
 			Coin coin = Coin.pickRandomCoin();
 			if (Coin.hasEnoughMoney(target,coin)) {
 				target -= coin.getAmount();
-				wallet.put(coin, wallet.get(coin) + 1);
+				this.wallet.put(coin, wallet.get(coin) + 1);
 			}
+		}
+		openWallet();
+	}
+
+	public void openWallet() {
+		for (Coin coin : Arrays.stream(Coin.values()).collect(Collectors.toList())) {
+			System.out.println(coin.getAmount() + "원 - " + this.wallet.get(coin) + "개");
 		}
 	}
 
