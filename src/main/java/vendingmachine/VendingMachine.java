@@ -32,6 +32,8 @@ public class VendingMachine {
             }
         }
 
+        System.out.println();
+
         while (true) {
             try {
                 System.out.println(String.format("투입 금액: %d", this.cashManager.getRemainCash()));
@@ -43,7 +45,7 @@ public class VendingMachine {
                 System.out.println("구매할 상품명을 입력해 주세요.");
                 String buffer = Console.readLine();
                 Validator.validateProductName(buffer);
-                this.cashManager.deposit(this.productManager.getProductPrice(buffer));
+                this.cashManager.withdraw(this.productManager.getProductPrice(buffer));
 
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
