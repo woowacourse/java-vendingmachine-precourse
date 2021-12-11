@@ -1,8 +1,8 @@
 package vendingmachine.View;
 
 import vendingmachine.constant.SystemMessage;
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.enums.Coin;
+import vendingmachine.domain.vendingMachine.VendingMachine;
 
 import java.util.ArrayList;
 

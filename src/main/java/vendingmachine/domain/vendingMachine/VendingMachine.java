@@ -1,6 +1,10 @@
-package vendingmachine.domain;
+package vendingmachine.domain.vendingMachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.enums.Coin;
+import vendingmachine.domain.vendingMachine.InputMoney;
+import vendingmachine.domain.vendingMachine.MachineMoney;
+import vendingmachine.domain.vendingMachine.MerchandiseList;
 
 import java.util.ArrayList;
 

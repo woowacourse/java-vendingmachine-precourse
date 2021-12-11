@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.vendingMachine;
 
 import vendingmachine.constant.ErrorMessage;
 import vendingmachine.util.NumberValidation;

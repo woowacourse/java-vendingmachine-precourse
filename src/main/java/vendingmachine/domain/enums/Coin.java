@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.enums;
 
 import java.util.Arrays;
 import java.util.List;

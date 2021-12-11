@@ -1,6 +1,7 @@
-package vendingmachine.domain;
+package vendingmachine.domain.vendingMachine;
 
 import vendingmachine.constant.ErrorMessage;
+import vendingmachine.domain.vendingMachine.Merchandise;
 
 import java.util.ArrayList;
 import java.util.Arrays;

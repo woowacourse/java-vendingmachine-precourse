@@ -2,8 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.vendingMachine.VendingMachine;
 
 public class VendingMachineController {
     public void run() {
