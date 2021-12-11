@@ -170,3 +170,4 @@ public enum Coin {
     - 난수를 생성하는 클래스 구현(branch: feature/random-number)
     - 난수를 통해 각 코인 종류 별로 알맞는 코인 갯수를 만드는 클래스 구현(branch: feature/coin-type-amount-generator)
     - 각 제품의 정보를 저장하는 클래스 구현(branch: feature/products)
+    - 자판기를 가동하기 위해 필요한 데이터를 관리하는 클래스 구현(branch: feature/vending-machine)
