@@ -6,4 +6,7 @@ public class Message {
     public static final String ERROR_MACHINE_BALANCE_CHARACTER = "[ERROR] 실수 혹은 (숫자가 아닌 문자)는 입력이 불가능합니다.";
     public static final String ERROR_MACHINE_BALANCE_NEGATIVE_NUMBER = "[ERROR] 음수는 입력이 불가능합니다.";
     public static final String ERROR_MACHINE_BALANCE_MULTIPLE_OF_TEN = "[ERROR] 10의 배수가 아닌 수는 입력이 불가능합니다.";
+    public static final String SHOW_MACHINE_COINS = "자판기가 보유한 동전";
+
+
 }

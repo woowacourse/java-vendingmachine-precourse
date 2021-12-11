@@ -6,13 +6,14 @@ import java.util.Collections;
 
 public class Machine {
     User user = new User();
-    ArrayList<Integer> coins = new ArrayList<Integer>();
-    HashMap<String, Integer> balance = new HashMap<String, Integer>();
+    ArrayList<Integer> coins = new ArrayList<>();
+    HashMap<Coin, Integer> coinsMap = new HashMap<>();
 
     public void start() {
         Balance();
         coinsInMachine();
         coinHashMap();
+        showMachineCoins();
     }
 
     private void Balance() {
@@ -43,8 +44,16 @@ public class Machine {
     }
 
     private void coinHashMap() {
-        for(Coin coin: Coin.values()) {
-            balance.put(String.valueOf(coin), Collections.frequency(coins, coin.getAmount()));
+        for(Coin coin : Coin.values()) {
+            coinsMap.put(coin, Collections.frequency(coins, coin.getAmount()));
         }
+    }
+
+    private void showMachineCoins() {
+        System.out.println("\n"+Message.SHOW_MACHINE_COINS);
+        System.out.println(Coin.COIN_500.getAmount() + "원 - " + coinsMap.get(Coin.COIN_500) + "개");
+        System.out.println(Coin.COIN_100.getAmount() + "원 - " + coinsMap.get(Coin.COIN_100) + "개");
+        System.out.println(Coin.COIN_50.getAmount() + "원 - " + coinsMap.get(Coin.COIN_50) + "개");
+        System.out.println(Coin.COIN_10.getAmount() + "원 - " + coinsMap.get(Coin.COIN_10) + "개");
     }
 }
