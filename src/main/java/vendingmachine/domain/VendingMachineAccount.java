@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.Map;
 
 import vendingmachine.service.VendingMachineAccountService;
+import vendingmachine.view.VendingMachineAccountView;
 
 public class VendingMachineAccount {
 	private static Map<Coin, Integer> coinCount;
@@ -15,7 +16,7 @@ public class VendingMachineAccount {
 
 	public void printCoinCount() {
 		for (Coin coin : coinCount.keySet()) {
-			System.out.println(coin.getAmount() + "원 - " + coinCount.get(coin) + "개");
+			VendingMachineAccountView.printCoinList(coin.getAmount(), coinCount.get(coin));
 		}
 	}
 }

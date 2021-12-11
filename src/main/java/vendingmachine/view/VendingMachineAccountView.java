@@ -6,4 +6,8 @@ public class VendingMachineAccountView {
 	public static void printInputGuide() {
 		System.out.println(INPUT_MESSAGE);
 	}
+
+	public static void printCoinList(int coinUnit, Integer amount) {
+		System.out.println(coinUnit + "원 - " + amount + "개");
+	}
 }
