@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MachineInput {
-	private static final String PRODUCT_INFO_DELIM = ";";
+	public static final String PRODUCT_INFO_DELIM = ";";
 
 	public int getTotalMachineChanges() {
 		System.out.println(Ask.ENTER_MACHINE_CHANGES);
@@ -37,8 +37,5 @@ public class MachineInput {
 			getProductsInfo();
 		}
 		return Arrays.stream(input.split(PRODUCT_INFO_DELIM)).collect(Collectors.toList());
-	}
-
-	private void validateProductsInfoInput(String input) {
 	}
 }
