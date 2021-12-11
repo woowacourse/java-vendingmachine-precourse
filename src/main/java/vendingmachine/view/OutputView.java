@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import vendingmachine.domain.Coin;
 
@@ -15,6 +17,7 @@ public class OutputView {
 	public static final String COIN_100_STRING = "100원";
 	public static final String COIN_50_STRING = "50원";
 	public static final String COIN_10_STRING = "10원";
+	public static final String[] COIN_STRING_LIST = {COIN_500_STRING, COIN_100_STRING, COIN_50_STRING, COIN_10_STRING};
 
 	public static final String MACHINE_OWN_COINS = "자판기가 보유한 동전";
 	public static final String DASH_SIGN = " - ";
@@ -22,6 +25,8 @@ public class OutputView {
 
 	public static final String INPUT_MONEY = "투입 금액: ";
 	public static final String WON_SIGN = "원";
+
+	public static final String CHANGE = "잔돈";
 
 	public static void printMoneyError() {
 		System.out.println(HOLDING_MONEY_ERROR);
@@ -56,4 +61,15 @@ public class OutputView {
 	public static void printMoneyExcessError() {
 		System.out.println(MONEY_EXCESS_ERROR);
 	}
+
+	public static void printChange(HashMap<Coin, Integer> coinCount) {
+		System.out.println(CHANGE);
+		for (Coin coin : Coin.getCoinArray()) {
+			if (coinCount.get(coin) != 0) {
+				System.out.println(
+					coin.getAmount() + WON_SIGN + DASH_SIGN + coinCount.get(coin) + COUNT_SIGN);
+			}
+		}
+	}
+
 }

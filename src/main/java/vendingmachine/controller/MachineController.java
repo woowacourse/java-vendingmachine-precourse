@@ -17,6 +17,7 @@ public class MachineController {
 		vendingMachine.itemList = inputController.scanItemInform();
 		vendingMachine.inputMoney = inputController.scanInputMoney();
 		buyItem();
+		OutputView.printChange(vendingMachine.calculateChange());
 	}
 
 	public void buyItem() {
@@ -48,4 +49,6 @@ public class MachineController {
 			OutputView.printMoneyExcessError();
 		}
 	}
+
+
 }
