@@ -2,7 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
-import vendingmachine.dto.CoinsOutputDto;
+import vendingmachine.dto.CoinsDto;
 import vendingmachine.exception.NotNaturalNumberException;
 import vendingmachine.service.CoinsService;
 import vendingmachine.service.UserBalanceService;
@@ -31,13 +31,13 @@ public class CoinsController {
 	}
 
 	public void printGeneratedCoins() {
-		CoinsOutputDto coinsOutputDto = coinsService.getCurrentCoins();
-		OutputView.printVendingMachineHoldingCoins(coinsOutputDto);
+		CoinsDto coinsDto = coinsService.getCurrentCoins();
+		OutputView.printVendingMachineHoldingCoins(coinsDto);
 	}
 
 	public void printChange() {
 		UserBalance userBalance = userBalanceService.getUserBalance();
-		CoinsOutputDto coinsOutputDto = coinsService.getChange(userBalance);
-		OutputView.printChange(coinsOutputDto);
+		CoinsDto coinsDto = coinsService.getChange(userBalance);
+		OutputView.printChange(coinsDto);
 	}
 }

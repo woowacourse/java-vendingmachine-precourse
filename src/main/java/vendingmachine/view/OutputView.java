@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.dto.CoinsOutputDto;
+import vendingmachine.dto.CoinsDto;
 
 public class OutputView {
 	private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
@@ -27,20 +27,20 @@ public class OutputView {
 		System.out.println(INPUT_VENDING_MACHINE_BALANCE_MESSAGE);
 	}
 
-	public static void printVendingMachineHoldingCoins(CoinsOutputDto coinsOutputDto) {
+	public static void printVendingMachineHoldingCoins(CoinsDto coinsDto) {
 		System.out.println(VENDING_MACHINE_HOLDING_COINS_MESSAGE);
-		printCoin(COIN_500, coinsOutputDto.getCoin500Quantity());
-		printCoin(COIN_100, coinsOutputDto.getCoin100Quantity());
-		printCoin(COIN_50, coinsOutputDto.getCoin50Quantity());
-		printCoin(COIN_10, coinsOutputDto.getCoin10Quantity());
+		printCoin(COIN_500, coinsDto.getCoin500Quantity());
+		printCoin(COIN_100, coinsDto.getCoin100Quantity());
+		printCoin(COIN_50, coinsDto.getCoin50Quantity());
+		printCoin(COIN_10, coinsDto.getCoin10Quantity());
 	}
 
-	public static void printChange(CoinsOutputDto coinsOutputDto) {
+	public static void printChange(CoinsDto coinsDto) {
 		System.out.println(CHANGE_MESSAGE);
-		printCoinIgnoringZero(COIN_500, coinsOutputDto.getCoin500Quantity());
-		printCoinIgnoringZero(COIN_100, coinsOutputDto.getCoin100Quantity());
-		printCoinIgnoringZero(COIN_50, coinsOutputDto.getCoin50Quantity());
-		printCoinIgnoringZero(COIN_10, coinsOutputDto.getCoin10Quantity());
+		printCoinIgnoringZero(COIN_500, coinsDto.getCoin500Quantity());
+		printCoinIgnoringZero(COIN_100, coinsDto.getCoin100Quantity());
+		printCoinIgnoringZero(COIN_50, coinsDto.getCoin50Quantity());
+		printCoinIgnoringZero(COIN_10, coinsDto.getCoin10Quantity());
 	}
 
 	public static void printInputItems() {

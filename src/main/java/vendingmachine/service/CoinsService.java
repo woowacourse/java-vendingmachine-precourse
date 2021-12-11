@@ -7,7 +7,7 @@ import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinQuantity;
 import vendingmachine.domain.userbalance.UserBalance;
 import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
-import vendingmachine.dto.CoinsOutputDto;
+import vendingmachine.dto.CoinsDto;
 import vendingmachine.repository.CoinsRepository;
 
 public class CoinsService {
@@ -40,12 +40,12 @@ public class CoinsService {
 		return coin.getAmount() <= balance;
 	}
 
-	public CoinsOutputDto getCurrentCoins() {
+	public CoinsDto getCurrentCoins() {
 		Map<Coin, CoinQuantity> coins = coinsRepository.findAll();
-		return CoinsOutputDto.from(coins);
+		return CoinsDto.from(coins);
 	}
 
-	public CoinsOutputDto getChange(UserBalance userBalance) {
+	public CoinsDto getChange(UserBalance userBalance) {
 		Map<Coin, CoinQuantity> coins = new HashMap<>();
 		int remainingBalance = userBalance.toInt();
 
@@ -56,7 +56,7 @@ public class CoinsService {
 			remainingBalance = remainingBalance - (coin.getAmount() * quantity);
 		}
 
-		return CoinsOutputDto.from(coins);
+		return CoinsDto.from(coins);
 	}
 
 	private int getCoinQuantityForChange(Coin coin, int balance) {
