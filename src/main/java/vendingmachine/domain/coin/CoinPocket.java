@@ -3,8 +3,8 @@ package vendingmachine.domain.coin;
 import vendingmachine.Coin;
 import vendingmachine.domain.coin.util.CoinProvider;
 
-import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeSet;
 
 public class CoinPocket {
     private Set<Coin> coins;
@@ -13,7 +13,7 @@ public class CoinPocket {
         return new CoinPocket();
     }
     private CoinPocket() {
-        coins = new HashSet<>();
+        coins = new TreeSet<>();
     }
 
     public int putCoinAndAddCount(int machineBalance, CoinProvider coinProvider) {
