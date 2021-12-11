@@ -5,8 +5,8 @@ import java.util.List;
 
 public class Item {
 	public static final String ITEM_ATTRIBUTE_SEPARATOR = ",";
-	private String itemName;
-	private Integer price;
+	private final String itemName;
+	private final Integer price;
 	private Integer quantity;
 
 	private Item(String itemName, String price, String quantity) {
@@ -25,5 +25,21 @@ public class Item {
 		});
 
 		return itemList;
+	}
+
+	public void sold() {
+		this.quantity--;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
 	}
 }
