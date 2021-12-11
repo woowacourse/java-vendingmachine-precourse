@@ -3,11 +3,13 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.lang.Math;
 
 public class Machine {
     User user = new User();
     ArrayList<Integer> coins = new ArrayList<>();
     HashMap<Coin, Integer> coinsMap = new HashMap<>();
+    private int userAmount;
 
     public void start() {
         balance();
@@ -87,6 +89,18 @@ public class Machine {
                 buyGoods();
             }
         }
-
+        returnBalance();
+    }
+    private void returnBalance() {
+        userAmount = user.getUserAmount();
+        eachBalance(Coin.COIN_500);
+        eachBalance(Coin.COIN_100);
+        eachBalance(Coin.COIN_50);
+        eachBalance(Coin.COIN_10);
+    }
+    private void eachBalance(Coin coin) {
+        int count = Math.min(userAmount / coin.getAmount(), coinsMap.get(coin));
+        coinsMap.put(coin, count);
+        userAmount -= count * coin.getAmount();
     }
 }

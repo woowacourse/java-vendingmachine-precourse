@@ -187,4 +187,7 @@ public class User {
         productQuantities.put(input, productQuantities.get(input) - 1);
         userAmount -= productPrices.get(input);
     }
+    public int getUserAmount() {
+        return userAmount;
+    }
 }
