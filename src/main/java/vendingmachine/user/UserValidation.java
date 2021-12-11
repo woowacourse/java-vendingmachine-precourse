@@ -1,6 +1,12 @@
 package vendingmachine.user;
 
 public class UserValidation {
+    public static void isEmpty(String money) {
+        if (money.length() == 0) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NULL);
+        }
+    }
+
     public static void isNumber(String money) {
         if (!money.matches("-?\\d+")) {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_NUMBER);
