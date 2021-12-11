@@ -1,16 +1,6 @@
 package vendingmachine.domain.item;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
-import vendingmachine.domain.userbalance.UserBalance;
-
 public class Item {
-	private static final String SPLIT_DELIMITER = ",";
-	private static final String OPEN_BRACKET = "[";
-	private static final String CLOSE_BRACKET = "]";
-	private static final String BLANK_CHAR = "";
 	private static final String TO_STRING_FORMAT = "{ItemName=%s, ItemPrice=%s, ItemQuantity=%s}";
 
 	private final ItemName name;
@@ -31,15 +21,6 @@ public class Item {
 		return new Item(itemName, itemPrice, itemQuantity);
 	}
 
-	private static String removeBracket(String input) {
-		return input.replace(OPEN_BRACKET, BLANK_CHAR).replace(CLOSE_BRACKET, BLANK_CHAR);
-	}
-
-	private static List<String> parseInput(String input) {
-		return Arrays.stream(input.split(SPLIT_DELIMITER))
-			.collect(Collectors.toList());
-	}
-
 	public ItemName getItemName() {
 		return this.name;
 	}
@@ -52,10 +33,7 @@ public class Item {
 		return this.quantity.toInt() <= 0;
 	}
 
-	public boolean isEnoughBalance(UserBalance userBalance) {
-		return this.price.toInt() <= userBalance.toInt();
-	}
-
+	// TODO: decreaseQuantity 로 변경 필요
 	public Item buy() {
 		ItemQuantity subtractedQuantity = this.quantity.subtract();
 		return new Item(this.name, this.price, subtractedQuantity);
