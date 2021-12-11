@@ -11,8 +11,8 @@ public class Money {
 		reduce(moneyAmount);
 	}
 
-	public boolean checkPayable(int moneyAmount) {
-		return money >= moneyAmount;
+	public int getRemainingMoney() {
+		return money;
 	}
 
 	private void reduce(int moneyAmount) {
