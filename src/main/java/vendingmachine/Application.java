@@ -37,9 +37,9 @@ public class Application {
                 System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
                 String input = Console.readLine();
                 lineFeed();
-                Validator.assertNumberFormat(input);
+                Validator.checkNumberFormat(input);
                 int number = Integer.parseInt(input);
-                Validator.assertPositive(number);
+                Validator.checkPositive(number);
                 return number;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -83,9 +83,9 @@ public class Application {
             try {
                 System.out.println("투입 금액을 입력해 주세요.");
                 String input = Console.readLine();
-                Validator.assertNumberFormat(input);
+                Validator.checkNumberFormat(input);
                 int number = Integer.parseInt(input);
-                Validator.assertPositive(number);
+                Validator.checkPositive(number);
                 return number;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());

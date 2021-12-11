@@ -5,7 +5,7 @@ public class Validator {
     private static final String NUMBER_FORMAT_ERROR_MSG = "[ERROR] 금액(수량)은 숫자여야 합니다.";
     private static final String NON_POSITIVE_ERROR_MSG = "[ERROR] 금액(수량)은 0 이상이어야 합니다.";
 
-    public static void assertNumberFormat(String input) {
+    public static void checkNumberFormat(String input) {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -13,7 +13,7 @@ public class Validator {
         }
     }
 
-    public static void assertPositive(int number) {
+    public static void checkPositive(int number) {
         if (number <= 0) {
             throw new IllegalArgumentException(NON_POSITIVE_ERROR_MSG);
         }

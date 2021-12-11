@@ -16,7 +16,7 @@ public class ProductInfo {
     private final int count;
 
     public ProductInfo(String rawString) {
-        assertNameFormat(rawString);
+        checkNameFormat(rawString);
         String noParenthesis = stripParenthesis(rawString);
         String[] arguments = noParenthesis.split(ARGUMENT_SEPARATOR);
 
@@ -26,7 +26,7 @@ public class ProductInfo {
         count = Integer.parseInt(arguments[COUNT_INDEX]);
     }
 
-    private void assertNameFormat(String productName) {
+    private void checkNameFormat(String productName) {
         if (productName.length() < MIN_NAME_LENGTH && !hasParenthesis(productName)) {
             throw new IllegalArgumentException("[ERROR] 상품 입력 형식이 올바르지 않습니다.");
         }
@@ -43,19 +43,19 @@ public class ProductInfo {
     }
 
     private void validateNumberArguments(String[] arguments) {
-        assertArgumentsSize(arguments);
-        Validator.assertNumberFormat(arguments[PRICE_INDEX]);
-        assertPriceConstraints(arguments[PRICE_INDEX]);
-        Validator.assertNumberFormat(arguments[COUNT_INDEX]);
+        checkArgumentsSize(arguments);
+        Validator.checkNumberFormat(arguments[PRICE_INDEX]);
+        checkPriceConstraints(arguments[PRICE_INDEX]);
+        Validator.checkNumberFormat(arguments[COUNT_INDEX]);
     }
 
-    private void assertArgumentsSize(String[] arguments) {
+    private void checkArgumentsSize(String[] arguments) {
         if (arguments.length < 3) {
             throw new IllegalArgumentException("[ERROR] 상품 입력 형식이 올바르지 않습니다.");
         }
     }
 
-    private void assertPriceConstraints(String input) {
+    private void checkPriceConstraints(String input) {
         int price = Integer.parseInt(input);
         if (price < 100 || price % 10 != 0) {
             throw new IllegalArgumentException("[ERROR] 상품 가격은 100원부터 시작하며 10으로 나누어떨어져야 합니다. 현재 가격 = " + price);
