@@ -17,13 +17,13 @@ public class PurchaseService {
 		purchaseInputValidator = new PurchaseInputValidator();
 	}
 
-	public int purchaseItem(List<Item> items) {
+	public int purchaseItem(List<Item> items, int remainingMoney) {
 		String itemName = inputView.inputItemName();
 		Item selectedItem = items.stream()
 			.filter(item -> item.getName().equals(itemName))
 			.findAny()
 			.orElse(null);
-		purchaseInputValidator.validateItem(selectedItem);
+		purchaseInputValidator.validateItem(selectedItem, remainingMoney);
 	}
 
 }

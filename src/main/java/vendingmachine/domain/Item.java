@@ -26,4 +26,8 @@ public class Item {
 	public boolean isEnoughQuantity() {
 		return this.quantity > 0;
 	}
+
+	public boolean isEnoughMoneyForPurchasing(int remainingMoney) {
+		return this.price <= remainingMoney;
+	}
 }

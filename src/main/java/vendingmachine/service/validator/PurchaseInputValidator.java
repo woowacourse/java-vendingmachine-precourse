@@ -7,10 +7,11 @@ import vendingmachine.domain.Item;
 
 public class PurchaseInputValidator {
 
-	public void validateItem(Item selectedItem) {
+	public void validateItem(Item selectedItem, int remainingMoney) {
 		try {
 			isExistsItem(selectedItem);
 			isEnoughItem(selectedItem);
+			isEnoughMoney(selectedItem, remainingMoney);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
 		}
@@ -25,6 +26,12 @@ public class PurchaseInputValidator {
 	private void isEnoughItem(Item selectedItem) {
 		if (!selectedItem.isEnoughQuantity()) {
 			throw new IllegalArgumentException("상품의 재고가 부족합니다.");
+		}
+	}
+
+	private void isEnoughMoney(Item selectedItem, int remainingMoney) {
+		if (!selectedItem.isEnoughMoneyForPurchasing(remainingMoney)) {
+			throw new IllegalArgumentException("이 상품을 사기에는 금액이 부족합니다.");
 		}
 	}
 }
