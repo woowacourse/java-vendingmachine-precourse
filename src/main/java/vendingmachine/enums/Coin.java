@@ -1,5 +1,6 @@
 package vendingmachine.enums;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,6 +30,7 @@ public enum Coin {
     }
 
     public static List<Integer> getAmountList() {
-        return Arrays.asList(COIN_500.amount, COIN_100.amount, COIN_50.amount, COIN_10.amount);
+        List<Integer> amountList = Arrays.asList(COIN_500.amount, COIN_100.amount, COIN_50.amount, COIN_10.amount);
+        return new ArrayList<>(amountList);
     }
 }
