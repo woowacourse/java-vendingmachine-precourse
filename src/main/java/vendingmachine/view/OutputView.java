@@ -37,6 +37,6 @@ public class OutputView {
 		System.out.println(REMAINING_MONEY);
 		coins.entrySet().stream()
 			.filter(key -> key.getValue() > 0)
-			.forEach(key -> System.out.println(key + RULES_TO_SHOW + NUMBER));
+			.forEach(key -> System.out.println(key.getKey() + RULES_TO_SHOW + key.getValue() + NUMBER));
 	}
 }
