@@ -15,4 +15,4 @@
 - [ ] CashManager   
     - [ ] return changes
 - [x] Coin   
-- [ ] MyIllegalArgumentException
+- [x] MyIllegalArgumentException
