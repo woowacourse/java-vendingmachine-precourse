@@ -33,7 +33,7 @@ public class Validation {
     }
 
     private void isPositive(String input) throws IllegalArgumentException {
-        if (Integer.parseInt(input) < 0) {
+        if (Integer.parseInt(input) <= 0) {
             throw new IllegalArgumentException();
         }
     }
