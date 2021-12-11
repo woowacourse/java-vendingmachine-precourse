@@ -2,6 +2,8 @@ package vendingmachine;
 
 import static vendingmachine.StringConstants.*;
 
+import java.util.function.Supplier;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.coin.Coins;
 import vendingmachine.dto.request.CoinBalanceRequest;
@@ -16,18 +18,7 @@ public class VendingMachineConsole {
 
     public int inputCoinBalance() {
         printCoinBalanceRequestMessage();
-        int initialCoinBalance = 0;
-        int coinBalance = initialCoinBalance;
-        boolean isInputEntered = false;
-        while (!isInputEntered) {
-            try {
-                coinBalance = new CoinBalanceRequest(input()).toCoinBalance();
-                isInputEntered = true;
-            } catch (IllegalArgumentException error) {
-                printErrorMessage(error.getMessage());
-            }
-        }
-        return coinBalance;
+        return inputUntilSucceed(() -> new CoinBalanceRequest(input()).toCoinBalance());
     }
 
     public void printCoinBalance(Coins coinBalance) {
@@ -38,33 +29,12 @@ public class VendingMachineConsole {
 
     public ItemsInventoryInfo inputItemInventoryInfo() {
         printItemInventoryInfoRequestMessage();
-        ItemsInventoryInfo itemInventoryInfo = new ItemsInventoryInfo();
-        boolean isItemsInventoryInfoEntered = false;
-        while (!isItemsInventoryInfoEntered) {
-            try {
-                itemInventoryInfo = new ItemsInventoryRequest(input()).toItemsInventoryInfo();
-                isItemsInventoryInfoEntered = true;
-            } catch (IllegalArgumentException error) {
-                printErrorMessage(error.getMessage());
-            }
-        }
-        return itemInventoryInfo;
+        return inputUntilSucceed(() -> new ItemsInventoryRequest(input()).toItemsInventoryInfo());
     }
 
     public int inputAvailableMoney() {
         printAvailableMoneyRequestMessage();
-        int initialAvailableMoney = 0;
-        int availableMoney = initialAvailableMoney;
-        boolean isAvailableMoneyEntered = false;
-        while (!isAvailableMoneyEntered) {
-            try {
-                availableMoney = new AvailableMoneyRequest(input()).toAvailableMoney();
-                isAvailableMoneyEntered = true;
-            } catch (IllegalArgumentException error) {
-                printErrorMessage(error.getMessage());
-            }
-        }
-        return availableMoney;
+        return inputUntilSucceed(() -> new AvailableMoneyRequest(input()).toAvailableMoney());
     }
 
     public void printAvailableMoney(int moneyAvailable) {
@@ -104,4 +74,16 @@ public class VendingMachineConsole {
         return Console.readLine();
     }
 
+    private <T> T inputUntilSucceed(Supplier<T> input) {
+        T inputValue = null;
+        while (true) {
+            try {
+                inputValue = input.get();
+                break;
+            } catch (IllegalArgumentException error) {
+                printErrorMessage(error.getMessage());
+            }
+        }
+        return inputValue;
+    }
 }
