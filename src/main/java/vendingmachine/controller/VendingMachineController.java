@@ -13,10 +13,6 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
     private VendingMachineService vendingMachineService;
 
-    public VendingMachineController(VendingMachineService vendingMachineService) {
-        this.vendingMachineService = vendingMachineService;
-    }
-
     public void start() {
         initializeByAdmin();
         useVendingMachine();
@@ -73,7 +69,7 @@ public class VendingMachineController {
     private void makeCoinsUsingEnteredAmount() {
         try {
             int initializeMoney = StringUtil.parseStringToInt(InputView.inputInitialAmount());
-            vendingMachineService.putInitialAmount(initializeMoney);
+            vendingMachineService = VendingMachineService.makeVendingMachineHasMoney(initializeMoney);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             makeCoinsUsingEnteredAmount();
