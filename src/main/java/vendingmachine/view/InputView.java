@@ -13,24 +13,50 @@ public class InputView {
 	private static final String INPUT_PURCHASE_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 
 	public static Money getHavingMoney() {
-		System.out.println(INPUT_HAVING_MONEY);
-		return new Money(InputValidator.checkMoneyForm(Console.readLine()));
-
+		while (true) {
+			try {
+				System.out.println(INPUT_HAVING_MONEY);
+				return new Money(InputValidator.checkMoneyForm(Console.readLine()));
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public static ArrayList<String> getItemPriceStock() {
-		System.out.println(INPUT_ITEM_PRICE_STOCK);
-		String input = Console.readLine();
-		return InputValidator.checkInputForm(input);
+		while (true) {
+			try {
+				System.out.println(INPUT_ITEM_PRICE_STOCK);
+				String input = Console.readLine();
+				return InputValidator.checkInputForm(input);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
 	}
 
 	public static Money getUserInputMoney() {
-		System.out.println(USER_INPUT_MONEY);
-		return new Money(InputValidator.checkMoneyForm(Console.readLine()));
+		while (true) {
+			try {
+				System.out.println(USER_INPUT_MONEY);
+				return new Money(InputValidator.checkMoneyForm(Console.readLine()));
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
 	}
 
 	public static String getItemName() {
-		System.out.println(INPUT_PURCHASE_ITEM_NAME);
-		return Console.readLine();
+		while (true) {
+			try {
+				System.out.println(INPUT_PURCHASE_ITEM_NAME);
+				return Console.readLine();
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+
 	}
 }
