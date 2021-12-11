@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.view.OutputView;
 
 public class MainController {
 	public void run() {
@@ -10,5 +11,6 @@ public class MainController {
 		VendingMachine vendingMachine = new VendingMachine(changeAmount);
 
 		vendingMachine.generateCoins();
+		OutputView.printCoins();
 	}
 }
