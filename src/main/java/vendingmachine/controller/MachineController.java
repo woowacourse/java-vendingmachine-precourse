@@ -107,20 +107,12 @@ public class MachineController {
 	}
 
 	private boolean checkAnyProductRemain() {
-		boolean remain = products.stream()
+		return products.stream()
 				.anyMatch(p -> p.isStockRemain() == true);
-		if (remain) {
-			return true;
-		}
-		return false;
 	}
 
 	private boolean checkCanBuyCheapest() {
-		boolean can = products.stream()
+		return products.stream()
 				.anyMatch(p -> p.enoughMoneyToBuy(money));
-		if (can) {
-			return true;
-		}
-		return false;
 	}
 }
