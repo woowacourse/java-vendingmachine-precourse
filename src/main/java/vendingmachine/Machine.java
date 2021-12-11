@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Machine {
     private int money;
     private ArrayList<Product> products;
+    private boolean purchasable = true;
     //private Coin coins;
 
     Machine() {
@@ -12,17 +13,17 @@ public class Machine {
         OutputView.printMachineCoin();
         this.products = InputView.inputProductList();
         this.money = InputView.inputMoney();
-        while (true) {
+        while (purchasable) {
             OutputView.printMoney(money);
-            if (isPurchasable(InputView.inputProduct())) {
-                //reduceMoney(money);
-            }
+            this.purchasable = isPurchasable(InputView.inputProduct());
         }
     }
 
     public boolean isPurchasable(String productName) {
         for (Product product : this.products) {
             if (product.getName().equals(productName) && product.getPrice() >= money && product.getCount() > 0) {
+                reduceMoney(product.getPrice());
+                product.reduceCount();
                 return true;
             }
         }
