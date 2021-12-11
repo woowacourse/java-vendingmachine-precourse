@@ -14,10 +14,19 @@ public class InputView {
 	}
 
 	public static void printMessageToGetInformationOfProducts() {
+		System.out.println();
 		System.out.println(Message.GET_INFORMATION_OF_PRODUCTS.getText());
 	}
 
 	public static String inputInformationOfProducts() {
+		return Console.readLine();
+	}
+
+	public static void printMessageToGetInputMoney() {
+		System.out.println(Message.GET_INPUT_MONEY.getText());
+	}
+
+	public static String inputMoneyToPutInVendingMachine() {
 		return Console.readLine();
 	}
 }

@@ -20,4 +20,8 @@ public class OutputView {
 			System.out.println(coin.getAmount() + MONEY_UNIT + DASH_DELIMITER + coinMap.get(coin) + AMOUNT_UNIT);
 		}
 	}
+
+	public static void printCurrentInputMoney() {
+
+	}
 }

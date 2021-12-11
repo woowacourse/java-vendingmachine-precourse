@@ -17,12 +17,16 @@ public class VendingMachineController {
 
 	public void run() {
 		printMessageToGetAmountMoneyOfVendingMachine();
-		int inputMoney = inputTotalAmountMoneyOfVendingMachine();
-		vendingMachine.createChanges(inputMoney);
+		int totalChanges = inputTotalAmountMoneyOfVendingMachine();
+		vendingMachine.createChanges(totalChanges);
 		OutputView.printChangesVendingMachine(vendingMachine);
 
 		printMessageToGetInformationOfProducts();
 		String informationOfProducts = inputInformationOfProducts();
 		products.createProductList(informationOfProducts);
+
+		printMessageToGetInputMoney();
+		String inputMoney = inputMoneyToPutInVendingMachine();
+
 	}
 }
