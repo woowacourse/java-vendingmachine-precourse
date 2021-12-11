@@ -1,6 +1,8 @@
 package vendingmachine.validator;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
@@ -41,7 +43,18 @@ public class InputValidator {
 			int stock = checkStockForm(beverageInfo[stockIndex]);
 			beverages.add(new Beverage(name, price), stock);
 		}
+		validateDuplicateBeverage(beverages);
 		return beverages;
+	}
+
+	private static void validateDuplicateBeverage(Beverages beverages) {
+		Set<String> compareToName = new HashSet<>();
+		for (Beverage beverage : beverages.getBeverages().keySet()) {
+			compareToName.add(beverage.getName());
+		}
+		if (compareToName.size() != beverages.size()) {
+			InputException.printDuplicatedBeverage();
+		}
 	}
 
 	private static void validationInfoForm(String[] itemList) {

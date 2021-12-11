@@ -24,6 +24,10 @@ public class Beverages {
 		return Collections.min(beverages.keySet(), Comparator.comparingInt(Beverage::getPrice)).getPrice();
 	}
 
+	public int size() {
+		return beverages.size();
+	}
+
 	public boolean isAllSoldOut() {
 		for (Integer stock : beverages.values()) {
 			if (stock > 0) {
