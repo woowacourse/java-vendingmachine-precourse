@@ -30,4 +30,12 @@ public class InputView {
 	public static String inputMoneyToPutInVendingMachine() {
 		return Console.readLine();
 	}
+
+	public static void printMessageToGetProductNameToBuy() {
+		System.out.println(Message.GET_PRODUCT_NAME_TO_BUY.getText());
+	}
+
+	public static String inputProductNameToBuy() {
+		return Console.readLine();
+	}
 }

@@ -10,4 +10,8 @@ public class InputMoney {
 	public int getCurrentMoney() {
 		return currentMoney;
 	}
+
+	public void reduceMoney(int productPrice) {
+		currentMoney -= productPrice;
+	}
 }

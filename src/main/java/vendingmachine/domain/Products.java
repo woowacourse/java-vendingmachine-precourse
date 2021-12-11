@@ -12,6 +12,8 @@ public class Products {
 	private static final String INPUT_SPLIT_DELIMITER = ";";
 	private static final String PRODUCT_SPLIT_DELIMITER = ",";
 
+	private static final int OUT_OF_STOCK = 0;
+
 	private List<Product> productList = new ArrayList<>();
 
 	public Products() {
@@ -19,6 +21,22 @@ public class Products {
 
 	public List<Product> getProductList() {
 		return productList;
+	}
+
+	public boolean checkStockAndSellProduct(String productName) {
+		Product productToSell = getProductByName(productName);
+		if (productToSell.getQuantity() != OUT_OF_STOCK) {
+			productToSell.reduceQuantity();
+			return true;
+		}
+		return false;
+	}
+
+	public Product getProductByName(String productName) {
+		return productList.stream()
+			.filter(product -> product.getName().equals(productName))
+			.findFirst()
+			.orElseThrow(IllegalArgumentException::new);
 	}
 
 	public void createProductList(String input) {
@@ -36,4 +54,5 @@ public class Products {
 		int quantity = Integer.parseInt(productInfo.get(QUANTITY_INDEX));
 		productList.add(new Product(name, price, quantity));
 	}
+
 }

@@ -30,5 +30,9 @@ public class VendingMachineController {
 		String tempInputMoney = inputMoneyToPutInVendingMachine();
 		vendingMachine.createInputMoney(Integer.parseInt(tempInputMoney));
 		printCurrentInputMoney(vendingMachine);
+
+		printMessageToGetProductNameToBuy();
+		String productName = inputProductNameToBuy();
+		vendingMachine.sellProduct(productName);
 	}
 }

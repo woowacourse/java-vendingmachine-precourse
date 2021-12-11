@@ -32,5 +32,12 @@ public class VendingMachine {
 		inputMoney = new InputMoney(tempInputMoney);
 	}
 
+	public boolean sellProduct(String productName) {
+		if (products.checkStockAndSellProduct(productName)) {
+			inputMoney.reduceMoney(products.getProductByName(productName).getPrice());
+			return true;
+		}
+		return false;
+	}
 
 }
