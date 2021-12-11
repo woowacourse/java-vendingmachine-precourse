@@ -17,6 +17,7 @@ public class Machine {
             OutputView.printMoney(money);
             this.purchasable = isPurchasable(InputView.inputProduct());
         }
+        OutputView.printChanges(money);
     }
 
     public boolean isPurchasable(String productName) {
@@ -32,5 +33,9 @@ public class Machine {
 
     public void reduceMoney(int reduceMoney) {
         this.money -= reduceMoney;
+    }
+
+    public static void makeChanges() {
+
     }
 }

@@ -12,4 +12,9 @@ public class OutputView {
     public static void printMoney(int money) {
         System.out.println("투입 금액: " + money + "원");
     }
+
+    public static void printChanges(int money) {
+        System.out.println("잔돈");
+        Machine.makeChanges();
+    }
 }
