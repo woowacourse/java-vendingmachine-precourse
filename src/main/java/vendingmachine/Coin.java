@@ -16,12 +16,4 @@ public enum Coin {
     public int getAmount() {
         return this.amount;
     }
-
-    public void setCount(int count) {
-        this.count = count;
-    }
-
-    public int getCount() {
-        return this.count;
-    }
 }

@@ -3,11 +3,11 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
-    HashMap<Integer, Coin> coinCount = new HashMap<Integer, Coin>();
+    private HashMap<Coin, Integer> coinCount = new HashMap<Coin, Integer>();
 
     private void initCoinCount() {
         for (Coin coin: Coin.values()) {
-            coinCount.put(coin.getAmount(), coin);
+            coinCount.put(coin, 0);
         }
     }
 
@@ -15,13 +15,13 @@ public class VendingMachine {
         int remainder = amount;
         for (Coin coin : Coin.values()) {
             if (coin == Coin.COIN_10) {
-                coin.setCount(remainder / coin.getAmount());
+                coinCount.replace(coin, remainder / coin.getAmount());
                 break;
             }
             int minCoinCount = 0;
             int maxCoinCount = remainder / coin.getAmount();
             int pickCount = Randoms.pickNumberInRange(minCoinCount, maxCoinCount);
-            coin.setCount(pickCount);
+            coinCount.replace(coin, pickCount);
             remainder -= coin.getAmount() * pickCount;
         }
     }
