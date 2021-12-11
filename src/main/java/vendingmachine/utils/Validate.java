@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Validate {
+	public static final String REGEX_OF_PRODUCT_INPUT = "\\[.+,\\d{3,},\\d+]";
 
 	public static void validateInputHoldingAmountMoney(String input) {
 		validateInputStringToInteger(input);

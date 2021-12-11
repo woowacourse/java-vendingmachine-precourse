@@ -5,6 +5,11 @@ import static vendingmachine.utils.Constant.*;
 import java.util.List;
 
 public class Product {
+	public static int INDEX_OF_PRODUCT_NAME = 0;
+	public static int INDEX_OF_PRODUCT_PRICE = 1;
+	public static int INDEX_OF_PRODUCT_QUANTITY = 2;
+	public static final int ZERO_PRODUCT_QUANTITY = 0;
+
 	private String name;
 	private int price;
 	private int quantity;
@@ -28,7 +33,7 @@ public class Product {
 	}
 
 	public boolean isNotOutOfQuantity() {
-		return this.quantity > 0;
+		return this.quantity > ZERO_PRODUCT_QUANTITY;
 	}
 
 	private void minusOneForQuantity() {

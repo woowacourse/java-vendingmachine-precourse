@@ -12,6 +12,7 @@ public enum Coin {
 	COIN_50(50),
 	COIN_10(10);
 
+	public static int MINIMUM_COIN = 10;
 	private final int amount;
 
 	Coin(final int amount) {
