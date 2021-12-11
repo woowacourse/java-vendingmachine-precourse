@@ -1,4 +1,4 @@
-package vendingmachine.message;
+package vendingmachine.constant;
 
 public class ErrorMessage {
 	public static final String NUMBER_EMPTY_ERROR_MASSAGE = "값이 입력되지 않았습니다!";

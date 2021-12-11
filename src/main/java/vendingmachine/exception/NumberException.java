@@ -1,6 +1,6 @@
 package vendingmachine.exception;
 
-import static vendingmachine.message.ErrorMessage.*;
+import static vendingmachine.constant.ErrorMessage.*;
 
 public class NumberException {
 
@@ -20,7 +20,7 @@ public class NumberException {
 	}
 
 	private static void checkNumberIsInteger(String number) {
-		if (number.chars().allMatch(Character::isDigit)) {
+		if (!number.chars().allMatch(Character::isDigit)) {
 			throw new IllegalArgumentException(NUMBER_NOT_INTEGER_ERROR_MESSAGE);
 		}
 	}
