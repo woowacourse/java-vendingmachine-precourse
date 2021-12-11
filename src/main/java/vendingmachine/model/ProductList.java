@@ -34,12 +34,12 @@ public class ProductList {
 
 	public boolean isQuantitySufficient(String productName) {
 		Product product = findProduct(productName);
-		return product.getQuantity() > 0;
+		return product.isInStock();
 	}
 
 	public boolean isTooExpensive(String productName, int currentDeposit) {
 		Product product = findProduct(productName);
-		return product.getPrice() > currentDeposit;
+		return product.isExpensiveThan(currentDeposit);
 	}
 
 	public Product findProduct(String productName) {
@@ -53,7 +53,11 @@ public class ProductList {
 				continue;
 			}
 
-			minimumPrice = Math.min(minimumPrice, product.getPrice());
+			if (product.isExpensiveThan(minimumPrice)) {
+				continue;
+			}
+
+			minimumPrice = product.getPrice();
 		}
 
 		return minimumPrice;

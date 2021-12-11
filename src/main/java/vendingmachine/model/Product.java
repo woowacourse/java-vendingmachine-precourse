@@ -31,8 +31,12 @@ public class Product {
 		return price;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public boolean isExpensiveThan(int money) {
+		return this.price > money;
+	}
+	
+	public boolean isInStock() {
+		return this.quantity > 0;
 	}
 
 	public void subtractQuantity() {
