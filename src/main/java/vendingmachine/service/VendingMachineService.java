@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.View.InputView;
-import vendingmachine.View.OutputView;
 import vendingmachine.domain.Product;
 import vendingmachine.utils.ExceptionMessages;
 import vendingmachine.utils.RegularExpressions;
@@ -18,52 +15,48 @@ public class VendingMachineService {
     public static final int PRODUCT_INFORMATION_PRICE_INDEX = 1;
     public static final int PRODUCT_INFORMATION_COUNT_INDEX = 2;
 
-    private final InputView inputView;
-    private final OutputView outputView;
-
-    public VendingMachineService(final InputView inputView, final OutputView outputView) {
-        this.inputView = inputView;
-        this.outputView = outputView;
-    }
-
-    public List<Product> createProductList() {
-        try {
-            inputView.printInputProductInformation();
-            String inputProducts = inputValue();
-
-            validateInputProducts(Arrays.asList(splitInputProducts(inputProducts)));
-            List<String> inputProductList = Arrays.asList(splitInputProducts(deleteSquareBrackets(inputProducts)));
-
-            return addProduct(inputProductList);
-        } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.printErrorMessage(illegalArgumentException);
-
-            return createProductList();
-        }
-    }
-
-    protected void validateInputProducts(final List<String> inputProducts) {
+    public void isFollowingProductsFormat(final List<String> inputProducts) {
         for (String inputProduct : inputProducts) {
-            if (!isFollowingProductsInformationFormat(inputProduct)) {
+
+            if (!isMatches(inputProduct)) {
                 throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_INFORMATION_FORMAT.getErrorMessage());
             }
+
         }
     }
 
-    private boolean isFollowingProductsInformationFormat(final String inputProducts) {
-        return inputProducts.matches(RegularExpressions.INPUT_PRODUCT_INFORMATION_REGULAR_EXPRESSION.getRegularExpression());
+    protected boolean isMatches(final String inputProduct) {
+        return inputProduct.matches(RegularExpressions.INPUT_PRODUCT_INFORMATION_REGULAR_EXPRESSION.getRegularExpression());
     }
 
-    protected String deleteSquareBrackets(final String inputProducts) {
+    public void validateMachineMoney(final String inputMachineMoney) {
+        if(isNaturalNumber(inputMachineMoney)){
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_NUMBER.getErrorMessage());
+        }
+
+        if (!isMultiplyTen(inputMachineMoney)) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_UNIT.getErrorMessage());
+        }
+    }
+
+    protected boolean isMultiplyTen(final String inputMachineMoney) {
+        return (Integer.parseInt(inputMachineMoney) % 10) == 0;
+    }
+
+    protected boolean isNaturalNumber(final String inputNumber) {
+        return !inputNumber.matches(RegularExpressions.INPUT_NUMBER_REGULAR_EXPRESSION.getRegularExpression());
+    }
+
+    public String deleteSquareBrackets(final String inputProducts) {
         return inputProducts.replaceAll(Symbol.FRONT_SQUARE_BRACKET.getSymbol(), Symbol.BLANK.getSymbol())
                 .replaceAll(Symbol.REAR_SQUARE_BRACKET.getSymbol(), Symbol.BLANK.getSymbol());
     }
 
-    protected String[] splitInputProducts(final String inputProducts) {
+    public String[] splitInputProducts(final String inputProducts) {
         return inputProducts.split(Symbol.SEMI_COLON.getSymbol());
     }
 
-    protected List<Product> addProduct(final List<String> inputProductList) {
+    public List<Product> addProduct(final List<String> inputProductList) {
         final List<Product> productList = new ArrayList<>();
 
         for (String inputProduct : inputProductList) {
@@ -84,32 +77,10 @@ public class VendingMachineService {
         return new Product(name, price, count);
     }
 
-    public int inputMachineHaveMoney() {
-        try {
-            inputView.printInputMachineHaveMoney();
-            String inputMachineHaveMoney = inputValue();
-            validateMoney(inputMachineHaveMoney);
-
-            return Integer.parseInt(inputMachineHaveMoney);
-        } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.printErrorMessage(illegalArgumentException);
-
-            return inputMachineHaveMoney();
+    public void validateInputPurchasingCost(final String inputPurchasingCost) {
+        if (isNaturalNumber(inputPurchasingCost)) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_PURCHASING_COST.getErrorMessage());
         }
-    }
-
-    protected void validateMoney(final String inputMachineMoney) {
-        if (!isNaturalNumber(inputMachineMoney)) {
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_NUMBER.getErrorMessage());
-        }
-    }
-
-    protected boolean isNaturalNumber(final String inputMachineMoney) {
-        return inputMachineMoney.matches(RegularExpressions.INPUT_NUMBER_REGULAR_EXPRESSION.getRegularExpression());
-    }
-
-    public String inputValue() {
-        return Console.readLine();
     }
 
 }

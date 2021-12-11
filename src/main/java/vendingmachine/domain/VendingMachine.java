@@ -2,10 +2,16 @@ package vendingmachine.domain;
 
 public class VendingMachine {
 
-    private String money;
+    private final int machineMoney;
 
-    public VendingMachine(final String inputMachineMoney) {
-        this.money = inputMachineMoney;
+    public VendingMachine(final String fillMachineMoney) {
+        this.machineMoney = Integer.parseInt(fillMachineMoney);
     }
+
+
+
+
+
+
 
 }

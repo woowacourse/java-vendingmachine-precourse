@@ -1,19 +1,22 @@
 package vendingmachine.View;
 
+import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utils.Messages;
 
 public class InputView {
 
-    public void printInputMachineHaveMoney() {
-        System.out.println(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
+    public String inputMoney(final String message) {
+        System.out.println(message);
+        return inputValue();
     }
 
-    public void printInputProductInformation() {
+    public String inputProducts() {
         System.out.println(Messages.INPUT_PRODUCT_INFORMATION_MESSAGE.getInputMessage());
+        return inputValue();
     }
 
-    public void printInputPurchasingCost() {
-        System.out.println(Messages.INPUT_USED_PURCHASING_MONEY_MESSAGE.getInputMessage());
+    public String inputValue() {
+        return Console.readLine();
     }
 
 }

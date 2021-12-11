@@ -20,4 +20,11 @@ public enum Coin {
         return Randoms.pickNumberInList(coins);
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
 }
+
+// 보유 : 1150
+//

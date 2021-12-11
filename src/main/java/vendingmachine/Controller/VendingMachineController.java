@@ -1,14 +1,15 @@
 package vendingmachine.Controller;
 
+import java.util.Arrays;
 import java.util.List;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.service.VendingMachineService;
-import vendingmachine.utils.Coin;
-import vendingmachine.utils.ExceptionMessages;
-import vendingmachine.utils.RegularExpressions;
+import vendingmachine.utils.Messages;
+import vendingmachine.utils.Symbol;
 
 public class VendingMachineController {
 
@@ -22,23 +23,56 @@ public class VendingMachineController {
     }
 
     public void run() {
-        vendingMachineService = new VendingMachineService(inputView, outputView);
-        int machineHaveMoney = vendingMachineService.inputMachineHaveMoney();
+        vendingMachineService = new VendingMachineService();
 
-//        outputView.printCoinCountMessage();
-//        calculateCoins(machineHaveMoney);
-        System.out.println(Coin.COIN_500);
+        String fillMachineMoney = fillMachineMoney();
+        VendingMachine vendingMachine = new VendingMachine(fillMachineMoney);
 
-        List<Product> productInformation = vendingMachineService.createProductList();
+        List<Product> products = fillProducts();
+
+        outputView.printNewLine();
         int purchasingCost = inputPurchasingCost();
+
+        outputView.printNewLine();
+        outputView.printPurChasingCost(purchasingCost);
 
     }
 
-    private int inputPurchasingCost() {
+
+
+    protected String fillMachineMoney() {
         try {
-            inputView.printInputPurchasingCost();
-            String inputPurchasingCost = vendingMachineService.inputValue();
-            validateInputPurchasingCost(inputPurchasingCost);
+            String inputMachineMoney = inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
+            vendingMachineService.validateMachineMoney(inputMachineMoney);
+
+            return inputMachineMoney;
+        } catch (IllegalArgumentException illegalArgumentException) {
+            outputView.printErrorMessage(illegalArgumentException);
+
+            return fillMachineMoney();
+        }
+    }
+
+    protected List<Product> fillProducts() {
+        try {
+            String inputProducts = inputView.inputProducts();
+            vendingMachineService.isFollowingProductsFormat(Arrays.asList(vendingMachineService.splitInputProducts(inputProducts)));
+
+            String noSquareBracketsProducts = vendingMachineService.deleteSquareBrackets(inputProducts);
+            List<String> inputProductList = Arrays.asList(vendingMachineService.splitInputProducts(noSquareBracketsProducts));
+
+            return vendingMachineService.addProduct(inputProductList);
+        } catch (IllegalArgumentException illegalArgumentException) {
+            outputView.printErrorMessage(illegalArgumentException);
+
+            return fillProducts();
+        }
+    }
+
+    protected int inputPurchasingCost() {
+        try {
+            String inputPurchasingCost = inputView.inputMoney(Messages.INPUT_USED_PURCHASING_MONEY_MESSAGE.getInputMessage());
+            vendingMachineService.validateInputPurchasingCost(inputPurchasingCost);
 
             return Integer.parseInt(inputPurchasingCost);
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -46,16 +80,6 @@ public class VendingMachineController {
 
             return inputPurchasingCost();
         }
-    }
-
-    protected void validateInputPurchasingCost(final String inputPurchasingCost) {
-        if (!isNaturalNumber(inputPurchasingCost)) {
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_PURCHASING_COST.getErrorMessage());
-        }
-    }
-
-    protected boolean isNaturalNumber(final String inputPurchasingCost) {
-        return inputPurchasingCost.matches(RegularExpressions.INPUT_NUMBER_REGULAR_EXPRESSION.getRegularExpression());
     }
 
 }

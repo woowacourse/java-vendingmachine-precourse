@@ -5,8 +5,12 @@ public enum Symbol {
     SEMI_COLON(";"),
     NEW_LINE("\n"),
     BLANK(""),
+    SPACE(" "),
+    DASH("-"),
     FRONT_SQUARE_BRACKET("\\["),
-    REAR_SQUARE_BRACKET("]");
+    REAR_SQUARE_BRACKET("]"),
+    WON("원"),
+    EA("개");
 
     private final String symbol;
 

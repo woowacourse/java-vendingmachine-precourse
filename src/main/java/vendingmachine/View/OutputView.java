@@ -5,16 +5,16 @@ import vendingmachine.utils.Symbol;
 
 public class OutputView {
 
-    public void printErrorMessage(IllegalArgumentException illegalArgumentException){
+    public void printErrorMessage(IllegalArgumentException illegalArgumentException) {
         System.out.println(illegalArgumentException.getMessage());
     }
 
-    public void printCoinCountMessage(){
-        System.out.println(Messages.MACHINE_HAVE_COINS.getInputMessage());
+    public void printNewLine() {
+        System.out.println();
     }
 
-    public void printNewLine() {
-        System.out.println(Symbol.NEW_LINE.getSymbol());
+    public void printPurChasingCost(int purchasingCost) {
+        System.out.println(Messages.INPUT_PURCHASING_COST.getInputMessage() + purchasingCost + Symbol.WON.getSymbol());
     }
 
 }

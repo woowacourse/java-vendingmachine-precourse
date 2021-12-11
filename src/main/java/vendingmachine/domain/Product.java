@@ -30,4 +30,5 @@ public class Product {
     protected boolean isFollowingPriceRule(final int price) {
         return (price >= BASED_PRICE) && ((price % 10) == 0);
     }
+
 }
