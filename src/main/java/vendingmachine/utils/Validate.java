@@ -24,7 +24,7 @@ public class Validate {
 
 	private static void validateIsNotNegative(String input) {
 		if (Integer.parseInt(input) < 0) {
-			throw new IllegalArgumentException(ERROR_ONLY_CAN_INPUT_NUMBER);
+			throw new IllegalArgumentException(ERROR_ONLY_CAN_INPUT_POSITIVE_MONEY);
 		}
 	}
 
@@ -38,5 +38,12 @@ public class Validate {
 
 	public static void validateInputUserAmount(String input) {
 		validateInputStringToInteger(input);
+		validateInputUserAmountIsPositive(input);
+	}
+
+	private static void validateInputUserAmountIsPositive(String input) {
+		if (Integer.parseInt(input) < 0) {
+			throw new IllegalArgumentException(ERROR_ONLY_CAN_INPUT_POSITIVE_MONEY);
+		}
 	}
 }
