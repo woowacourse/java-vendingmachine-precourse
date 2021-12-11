@@ -2,11 +2,14 @@ package vendingmachine.domain;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 public class Items {
 	private final List<Item> items;
 
 	public Items(List<Item> items) {
+		validateDuplication(items);
 		this.items = items;
 	}
 
@@ -24,5 +27,14 @@ public class Items {
 		return items.stream()
 			.map(Item::getAmount)
 			.allMatch((amount) -> amount == 0);
+	}
+
+	private void validateDuplication(List<Item> items) {
+		Set<String> nonDuplicatedItems = items.stream()
+			.map(Item::getName)
+			.collect(Collectors.toSet());
+		if (nonDuplicatedItems.size() < items.size()) {
+			throw new IllegalArgumentException("상품명이 중복되지 않아야 합니다.");
+		}
 	}
 }
