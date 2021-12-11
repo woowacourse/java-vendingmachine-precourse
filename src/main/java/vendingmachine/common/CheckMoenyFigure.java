@@ -1,6 +1,6 @@
-package vendingmachine.management.validation;
+package vendingmachine.common;
 
-public class CheckDepositFigure {
+public class CheckMoenyFigure {
     private static final String ERROR_MESSAGE_FIGURE = "[ERROR] 금액은 숫자여야 합니다.";
     private static final String ERROR_MESSAGE_POSITIVE_NUMBER = "[ERROR] 금액은 10원 이상이어야 합니다.";
     private static final String ERROR_MESSAGE_UNIT = "[ERROR] 금액은 10으로 나누어 떨어져야 합니다.";

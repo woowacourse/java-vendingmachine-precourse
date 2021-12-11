@@ -2,8 +2,8 @@ package vendingmachine.management;
 
 import java.util.Arrays;
 
+import vendingmachine.common.CheckMoenyFigure;
 import vendingmachine.management.validation.CheckCommodityFormat;
-import vendingmachine.management.validation.CheckDepositFigure;
 import vendingmachine.view.InputView;
 import vendingmachine.view.outputView.ManagementView;
 
@@ -25,10 +25,10 @@ public class ManagementController {
             String input = inputView.depositAmout();
             
             try {
-                CheckDepositFigure.validationFigure(input);
+                CheckMoenyFigure.validationFigure(input);
                 deposit = Integer.parseInt(input);
-                CheckDepositFigure.validationPositiveNumber(deposit);
-                CheckDepositFigure.validationUnit(deposit);
+                CheckMoenyFigure.validationPositiveNumber(deposit);
+                CheckMoenyFigure.validationUnit(deposit);
             } catch(IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
