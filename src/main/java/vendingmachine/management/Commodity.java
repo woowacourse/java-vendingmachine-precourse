@@ -10,6 +10,9 @@ public class Commodity {
     private int quantity;
     
     public Commodity(String name, int price, int quantity) {
+        validCommodityName(name);
+        validCommodityPrice(price);
+        validCommodityQuantity(quantity);
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -26,4 +29,18 @@ public class Commodity {
     public int getQuantity() {
         return quantity;
     }
+    
+    private void validCommodityName(String name) {
+        CheckCommodityName.validation(CommodityRepository.getList(), name);
+    }
+
+    private void validCommodityPrice(int price) {
+        CheckCommodityPrice.validationRange(price);
+        CheckCommodityPrice.validationUnit(price);
+    }
+
+    private void validCommodityQuantity(int quantity) {
+        CheckCommodityQuantity.validationRange(quantity);
+    }
+
 }
