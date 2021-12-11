@@ -10,6 +10,10 @@ public class Coins {
 	public static final String COIN_UNIT = "개";
 	private LinkedHashMap<Coin, Integer> coins;
 
+	public Coins() {
+		this.coins = new LinkedHashMap<>();
+	}
+
 	public void makeCoins(int money) {
 		List<Integer> coinType = getCoinType();
 		setCoinsMap();
@@ -22,8 +26,15 @@ public class Coins {
 		}
 	}
 
+	private List<Integer> getCoinType() {
+		List<Integer> coinType = new ArrayList<>();
+		for (Coin coin : Coin.values()) {
+			coinType.add(coin.getAmount());
+		}
+		return coinType;
+	}
+
 	private void setCoinsMap() {
-		coins = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			coins.put(coin, 0);
 		}
@@ -37,29 +48,17 @@ public class Coins {
 		coins.put(Coin.valueOf(money), coins.get(Coin.valueOf(money)) + 1);
 	}
 
-	private List<Integer> getCoinType() {
-		List<Integer> coinType = new ArrayList<>();
-		for (Coin coin : Coin.values()) {
-			coinType.add(coin.getAmount());
-		}
-		return coinType;
-	}
-
 	public Coins calculateChange(int change) {
 		Coins changes = new Coins();
-		changes.initCoin();
 		for (Coin coin : Coin.values()) {
-			int maxCoin = Math.min(change / coin.getAmount(), coins.get(coin));;
+			int maxCoin = Math.min(change / coin.getAmount(), coins.get(coin));
+			;
 			change -= maxCoin * coin.getAmount();
 			if (maxCoin > 0) {
-				changes.putCoin(coin,maxCoin);
+				changes.putCoin(coin, maxCoin);
 			}
 		}
 		return changes;
-	}
-
-	private void initCoin() {
-		coins = new LinkedHashMap<>();
 	}
 
 	@Override
