@@ -20,6 +20,13 @@ public class VendingMachineController {
 
 			String inputMoney = InputView.getMoney();
 			vendingMachine.putMoney(inputMoney);
+
+			while (vendingMachine.canBuy()) {
+				int leftInputMoney = vendingMachine.getInputMoney();
+				String menuToBuy = InputView.getMenuToBuy(leftInputMoney);
+
+				vendingMachine.buy(menuToBuy);
+			}
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			init();

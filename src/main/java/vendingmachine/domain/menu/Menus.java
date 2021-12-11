@@ -43,11 +43,6 @@ public class Menus {
 		return menuList.stream().anyMatch(menu -> menu.getCount() > 0);
 	}
 
-	public void updateMenuToBuy(String menuName) {
-		Menu menuToBuy = findMenuByName(menuName);
-		menuToBuy.sold();
-	}
-
 	public Menu findMenuByName(String menuName) {
 		return menuList.stream()
 			.filter(menu -> menu.getName().equals(menuName))

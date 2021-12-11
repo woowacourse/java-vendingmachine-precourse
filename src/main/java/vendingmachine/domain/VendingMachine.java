@@ -24,20 +24,36 @@ public class VendingMachine {
 		inputMoney = Integer.parseInt(money);
 	}
 
-	public void validateMoney(String money) {
+	private void validateMoney(String money) {
 		validateNumber(money, ERROR_INPUT_MONEY_NUMBER);
 	}
 
-	public Menu buy(String menuName) {
-		return null;
+	public void buy(String menuName) {
+		Menu menu = menus.findMenuByName(menuName);
+		if (isLessThanInputMoney(menu)) {
+			useInputMoney(menu);
+			menu.sold();
+		}
+	}
+
+	private void useInputMoney(Menu menu) {
+		inputMoney -= menu.getPrice();
+	}
+
+	private boolean isLessThanInputMoney(Menu menu) {
+		return menu.getPrice() <= inputMoney;
 	}
 
 	public boolean canBuy() {
-		return isInputMoneyGreaterThanOrEqualToMinMenuPrice() && menus.isAnyMenuLeft();
+		return menus.isAnyMenuLeft() && isInputMoneyGreaterThanOrEqualToMinMenuPrice();
 	}
 
 	private boolean isInputMoneyGreaterThanOrEqualToMinMenuPrice() {
 		return inputMoney >= menus.getMinMenuPrice();
+	}
+
+	public int getInputMoney() {
+		return inputMoney;
 	}
 
 	public Coins getLeftCoins() {
