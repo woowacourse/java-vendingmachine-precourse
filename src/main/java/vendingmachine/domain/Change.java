@@ -33,7 +33,7 @@ public class Change {
 		return new Change(changes);
 	}
 
-	public Money totalChange() {
+	public Money getTotalChange() {
 		int total = 0;
 		for (Coin coin : changes.keySet()) {
 			total += coin.getAmount() * changes.get(coin);

@@ -16,19 +16,12 @@ public class VendingMachine {
 	}
 
 	public Change calculate() {
-		Money totalChange = change.totalChange();
+		Money totalChange = change.getTotalChange();
 		if (totalChange.isSmaller(this.inputMoney.getTotal())) {
 			return change;
 		}
-		return change;
-	}
+		// 잔돈을 돌려줄때 보유한 최소 개수의 동전으로 돌려주는 기능 구현
 
-	public Beverages getBeverages() {
-		return beverages;
-	}
-
-	public Change getChange() {
-		return change;
 	}
 
 	public Money getMoney() {
