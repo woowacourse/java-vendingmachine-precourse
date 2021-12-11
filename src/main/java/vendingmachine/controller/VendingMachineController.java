@@ -1,12 +1,14 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.receiver.MoneyReceiver;
+import vendingmachine.model.service.CoinService;
 import vendingmachine.view.VendingMachineView;
 
 public class VendingMachineController {
 
 	VendingMachineView vendingMachineView = new VendingMachineView();
 	MoneyReceiver moneyReceiver = new MoneyReceiver();
+	CoinService coinService = new CoinService();
 
 	public void run() {
 		inputMoneyForChange();
@@ -26,7 +28,7 @@ public class VendingMachineController {
 		vendingMachineView.inputMoneyForChange();
 
 		int change = moneyReceiver.receive();
-		// coinService.fillCoin(change);
+		coinService.fillCoin(change);
 
 		vendingMachineView.makeEmptyLine();
 	}
