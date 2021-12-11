@@ -1,9 +1,9 @@
 package vendingmachine.controller;
 
-import vendingmachine.model.Products;
-import vendingmachine.util.ProductValidator;
+import vendingmachine.service.MachineService;
 import vendingmachine.util.InputValidator;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.util.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -11,9 +11,11 @@ import java.util.List;
 
 public class MachineController {
     private final VendingMachine vendingMachine;
+    private final MachineService machineService;
 
     public MachineController(VendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
+        this.machineService = new MachineService(vendingMachine);
     }
 
     public void run() {
@@ -23,68 +25,63 @@ public class MachineController {
     }
 
     private void initMachine() {
-        insertInitialAmount();
-        insertProducts();
-        insertUserInsertAmount();
-    }
-
-    private void insertInitialAmount() {
-        InputView.printInputInitialAmountMessage();
-        vendingMachine.setInitialAmount(inputInitialAmount(InputView.getInput()));
-        OutputView.printRemainingCoins(vendingMachine.getCoins());
-    }
-
-    private int inputInitialAmount(String input) {
-        while (true) {
-            try {
-                return InputValidator.validateAmountInput(input);
-            } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e);
-            }
-        }
-    }
-
-    private void insertProducts() {
-        InputView.printInputProductMessage();
-        Products products = new Products(inputProducts(InputView.getInput()));
-        vendingMachine.setProducts(products);
-    }
-
-    private List<List<String>> inputProducts(String input) {
-        while (true) {
-            try {
-                return InputValidator.validateProductInput(input);
-            } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e);
-            }
-        }
-    }
-
-    private void insertUserInsertAmount() {
-        InputView.printUserInsertAmountMessage();
-        vendingMachine.setUserInsertAmount(userInsertAmount(InputView.getInput()));
-    }
-
-    private int userInsertAmount(String input) {
-        while (true) {
-            try {
-                return InputValidator.validateAmountInput(input);
-            } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e);
-            }
-        }
+        requestInsertInitialAmount();
+        requestInsertProduct();
+        requestInsertUserAmount();
     }
 
     private void useMachine() {
+        InputView.printProductToBuyMessage();
         while (shouldContinue()) {
+            buyProduct();
+        }
+    }
+
+    private void endMachine() {
+        OutputView.printChanges(vendingMachine.getChanges());
+    }
+
+    private void requestInsertInitialAmount() {
+        InputView.printInputInitialAmountMessage();
+        int amount;
+        while (true) {
             try {
-                String product = checkProductName();
-                vendingMachine.checkProductQuantity(product);
-                vendingMachine.buyProduct(product);
+                amount = InputValidator.validateAmountInput(InputView.getInput());
+                break;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
+        machineService.saveAmount(amount);
+        OutputView.printRemainingCoins(vendingMachine.getCoins());
+    }
+
+    private void requestInsertProduct() {
+        InputView.printInputProductMessage();
+        List<List<String>> productList;
+        while (true) {
+            try {
+                productList = InputValidator.validateProductInput(InputView.getInput());
+                break;
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e);
+            }
+        }
+        machineService.saveProducts(productList);
+    }
+
+    private void requestInsertUserAmount() {
+        InputView.printUserInsertAmountMessage();
+        int userAmount;
+        while (true) {
+            try {
+                userAmount = InputValidator.validateAmountInput(InputView.getInput());
+                break;
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e);
+            }
+        }
+        machineService.saveUserInsertAmount(userAmount);
     }
 
     private boolean shouldContinue() {
@@ -100,21 +97,20 @@ public class MachineController {
         return vendingMachine.hasAnyProduct();
     }
 
-    private String checkProductName() {
-        InputView.printProductToBuyMessage();
-        String productName = InputView.getInput();
+    private void buyProduct() {
         while (true) {
             try {
-                ProductValidator.validateProduct(vendingMachine, productName);
-                return productName;
+                String productName = InputView.getInput();
+                checkProductName(productName);
+                machineService.buyProduct(productName);
+                break;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
-                productName = InputView.getInput();
             }
         }
     }
 
-    private void endMachine() {
-        OutputView.printChanges(vendingMachine.getChanges());
+    private void checkProductName(String productName) {
+        ProductValidator.isProductInVendingMachine(vendingMachine, productName);
     }
 }

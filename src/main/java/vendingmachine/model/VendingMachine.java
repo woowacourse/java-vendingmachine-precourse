@@ -62,7 +62,7 @@ public class VendingMachine {
         }
     }
 
-    public void buyProduct(String product) {
+    public void popProduct(String product) {
         if (!products.isAffordable(userInsertAmount, product)) {
             throw new IllegalArgumentException(ERROR_MESSAGE + NOT_ENOUGH_MONEY_MESSAGE + TRY_AGAIN_MESSAGE);
         }
