@@ -20,7 +20,7 @@ public class InputController {
 				InputView.askHoldingMoney();
 				String holdingMoney = Console.readLine();
 				int money = InputValidator.isNumber(holdingMoney);
-				InputValidator.isZeroMoney(money);
+				InputValidator.checkValidRange(money, 10);
 				return money;
 			} catch (IllegalArgumentException e) {
 				OutputView.printMoneyError();
@@ -64,6 +64,7 @@ public class InputController {
 				InputView.askInputMoney();
 				String inputMoney = Console.readLine();
 				int money = InputValidator.isNumber(inputMoney);
+				InputValidator.checkValidRange(money, 1);
 				return money;
 			} catch (IllegalArgumentException e) {
 				OutputView.printInputMoneyError();
