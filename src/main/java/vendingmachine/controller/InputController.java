@@ -5,15 +5,12 @@ import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
 
 public class InputController {
-	public void inputInitialValue() {
-		inputVendingMachinePrice();
-	}
-
-	private void inputVendingMachinePrice() {
+	public String inputVendingMachinePrice() {
 		String vendingMachinePrice;
 		do {
 			vendingMachinePrice = InputView.inputVendingMachinePrice();
 		} while (!validateVendingMachinePrice(vendingMachinePrice));
+		return vendingMachinePrice;
 	}
 
 	private void handleInputError(boolean isValid, String errorMessage) {
