@@ -10,9 +10,9 @@ public class InputValidator {
 	private static final int nameIndex = 0;
 	private static final int priceIndex = 1;
 	private static final int stockIndex = 2;
+	private static final int MINIMUM_MONEY_SIZE = 100;
 	private static final String MONEY_REGEX = "\\d+0";
 	private static final String STOCK_REGEX = "[1-9]+[0-9]*";
-	private static final int MINIMUM_MONEY_SIZE = 100;
 	private static final String BRACKET_REGEX = "\\[(.*)\\]";
 	private static final String OPEN_BRACKET_REGEX = "\\[";
 	private static final String CLOSE_BRACKET_REGEX = "\\]";
