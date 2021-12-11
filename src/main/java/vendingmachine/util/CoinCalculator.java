@@ -10,9 +10,11 @@ public class CoinCalculator {
 		List<CoinStock> returnCoins = new ArrayList<>();
 		for (CoinStock coinStock : coins) {
 			int count = getMaxCoinCount(coinStock, remainMoney);
-			CoinStock returnCoin = new CoinStock(coinStock.getAmount(), count);
-			returnCoins.add(returnCoin);
-			remainMoney -= returnCoin.getTotal();
+			if (count != 0) {
+				CoinStock returnCoin = new CoinStock(coinStock.getAmount(), count);
+				returnCoins.add(returnCoin);
+				remainMoney -= returnCoin.getTotal();
+			}
 		}
 		return returnCoins;
 	}
