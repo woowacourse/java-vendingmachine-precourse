@@ -44,8 +44,7 @@ public class Menu {
 	}
 
 	private static void validateDelimiters(String menuInfo) {
-		if (!menuInfo.matches(".+[,(.*)]{2}")) {
-			// regex: 공백이 아닌 문자열 & 콤마 정확히 두 개
+		if (!menuInfo.matches("[^,]+,[^,]+,[^,]+")) {
 			throw new IllegalArgumentException(ERROR_DELIMITERS);
 		}
 	}
