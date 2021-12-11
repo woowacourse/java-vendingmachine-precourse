@@ -16,7 +16,7 @@ public class VendingMachine {
 		this.leftCoins = leftCoins;
 	}
 
-	public static VendingMachine of(String initalLeftMoney) {
+	public static VendingMachine from(String initalLeftMoney) {
 		validateInitialLeftMoney(initalLeftMoney);
 		int leftMoney = Integer.parseInt(initalLeftMoney);
 		Coins coins = generateCoinsAccordingToRule(leftMoney);
