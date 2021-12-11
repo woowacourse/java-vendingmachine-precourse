@@ -33,13 +33,13 @@ public class VendingMachine {
 	}
 
 	private static void validateGreaterThanOrEqualToMinPriceCoin(int leftMoney) {
-		if (leftMoney < 10) {
+		if (leftMoney < Coin.getMinPriceCoin().getAmount()) {
 			throw new IllegalArgumentException(ERROR_LT_MIN_PRICE_COIN);
 		}
 	}
 
 	private static void validateDividingByMinPriceCoin(int leftMoney) {
-		if (leftMoney % 10 != 0) {
+		if (leftMoney % Coin.getMinPriceCoin().getAmount() != 0) {
 			throw new NotDivisibleByMinPriceCoinException(ERROR_NOT_DIVISIBLE_BY_MIN_PRICE_COIN);
 		}
 	}

@@ -1,6 +1,9 @@
 package vendingmachine.domain;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Coin {
 	COIN_500(500),
@@ -24,6 +27,14 @@ public enum Coin {
 			.filter(coin -> coin.getAmount() == amount)
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException("해당 가격의 코인은 존재하지 않습니다."));
+	}
+
+	public static Coin getMinPriceCoin() {
+		List<Integer> amountList = Arrays.stream(values())
+			.map(Coin::getAmount)
+			.collect(Collectors.toList());
+		int minPrice = Collections.min(amountList);
+		return valueOf(minPrice);
 	}
 
 }
