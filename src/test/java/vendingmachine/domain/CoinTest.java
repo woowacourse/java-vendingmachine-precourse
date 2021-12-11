@@ -20,4 +20,13 @@ class CoinTest {
 		});
 	}
 
+	@Test
+	void getMinPriceCoin() {
+		Coin minPriceCoin = Coin.getMinPriceCoin();
+		Arrays.stream(Coin.values())
+			.forEach(coin -> {
+				assertTrue(minPriceCoin.getAmount() <= coin.getAmount());
+			});
+	}
+
 }
