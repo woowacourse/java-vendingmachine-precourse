@@ -15,7 +15,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import vendingmachine.Coin;
+import vendingmachine.models.Coin;
 
 @DisplayName("CoinTypeAmountGenerator 클래스")
 @ExtendWith(MockitoExtension.class)
