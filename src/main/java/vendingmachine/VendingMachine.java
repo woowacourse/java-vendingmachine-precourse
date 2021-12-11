@@ -26,6 +26,10 @@ public class VendingMachine {
         }
     }
 
+    public int getCoinCount(Coin coin) {
+        return coinCount.get(coin);
+    }
+
     public VendingMachine(int amount) {
         initCoinCount();
         generateCoinCount(amount);

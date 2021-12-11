@@ -16,4 +16,8 @@ public enum Coin {
     public int getAmount() {
         return this.amount;
     }
+
+    public String toString() {
+        return this.amount+"원";
+    }
 }

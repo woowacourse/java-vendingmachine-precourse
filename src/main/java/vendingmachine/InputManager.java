@@ -9,6 +9,7 @@ public class InputManager {
         while(true) {
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
             String inputData = Console.readLine();
+            System.out.println();
             try {
                 return new VendingMachine(Validators.validateAmount(inputData));
             } catch (IllegalArgumentException e) {
