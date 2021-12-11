@@ -5,7 +5,6 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import lombok.Getter;
 import vendingmachine.enums.Coin;
 
 public class CoinStorage {
@@ -21,7 +20,7 @@ public class CoinStorage {
 	private void init() {
 		this.coinMap = new EnumMap<Coin, Integer>(Coin.class);
 		for(Coin coin : Coin.values()) {
-			putCoinQuantity(coin, DEFAULT_QUANTITY);
+			coinMap.put(coin, DEFAULT_QUANTITY);
 		}
 	}
 
@@ -29,10 +28,10 @@ public class CoinStorage {
 		List<Integer> coinPool = Coin.getAmountList();
 		while(coinMoney > 0) {
 			int randomCoin = getRandomCoin(coinPool);
-			int maxQuantity = calculateMaxQuantity(coinMoney, randomCoin);
-			putCoinQuantity(Coin.searchWithAmount(randomCoin), maxQuantity);
-			coinMoney -= randomCoin * maxQuantity;
-			coinPool.remove((Integer) randomCoin);
+			if(randomCoin <= coinMoney) {
+				increaseCoinQuantity(Coin.searchWithAmount(randomCoin));
+				coinMoney -= randomCoin;
+			}
 		}
 	}
 
@@ -46,7 +45,7 @@ public class CoinStorage {
 			int changeQuantity = calculateChangeQuantity(coin, remainedMoney);
 			if(changeQuantity > 0) {
 				changeMap.put(coin, changeQuantity);
-				putCoinQuantity(coin, getCoinQuantity(coin) - changeQuantity);
+				coinMap.put(coin, getCoinQuantity(coin) - changeQuantity);
 			}
 		}
 		return changeMap;
@@ -62,8 +61,8 @@ public class CoinStorage {
 		return coinMoney / randomCoin;
 	}
 
-	private void putCoinQuantity(Coin coin, int maxQuantity) {
-		coinMap.put(coin, maxQuantity);
+	private void increaseCoinQuantity(Coin coin) {
+		coinMap.put(coin, coinMap.get(coin) + 1);
 	}
 
 	public int getCoinQuantity(Coin coin) {

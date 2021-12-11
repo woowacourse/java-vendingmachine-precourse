@@ -62,14 +62,21 @@ public class VendingMachine {
 				return;
 			}
 			String productName = inputManager.getProductName();
-			try {
-				productManager.checkProductExist(productName);
-			} catch (IllegalArgumentException e) {
-				inputManager.print(e.getMessage());
+			if(checkProductExist(productName)) {
 				continue;
 			}
 			buy(productName);
 		}
+	}
+
+	private boolean checkProductExist(String productName) {
+		try {
+			productManager.checkProductExist(productName);
+		} catch (IllegalArgumentException e) {
+			inputManager.print(e.getMessage());
+			return true;
+		}
+		return false;
 	}
 
 	private void buy(String name) {
@@ -80,6 +87,7 @@ public class VendingMachine {
 	}
 
 	private void getChange() {
+		outputManager.notifyChangeStart();
 		EnumMap<Coin, Integer> changeMap = coinStorage.getChange(userBalance.getUserBalance());
 		outputManager.notifyChange(changeMap);
 	}

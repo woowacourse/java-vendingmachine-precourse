@@ -19,7 +19,7 @@ class ApplicationTest extends NsTest {
     private static final int COIN = 500;
     private static final int REMAIN_MONEY = 450;
 
-    // @Test
+    @Test
     void 기능_테스트() {
         assertRandomNumberInListTest(
             () -> {
@@ -33,7 +33,7 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    // @Test
+    @Test
     void 예외_테스트() {
         assertSimpleTest(
             () -> {
@@ -43,7 +43,7 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    // @Override
+    @Override
     protected void runMain() {
         Application.main(new String[]{});
     }
@@ -60,27 +60,5 @@ class ApplicationTest extends NsTest {
     void 나누기를_테스트한다() {
         int maxQuantity = MONEY / COIN;
         System.out.println("maxQuantity : " + maxQuantity);
-    }
-
-    // @Test
-    void 잔돈을_받는다() {
-        CoinStorage coinStorage = 동전을_랜덤으로_생성한다();
-        EnumMap<Coin, Integer> map = coinStorage.getChange(REMAIN_MONEY);
-        System.out.println("잔돈 동전 목록");
-        System.out.println(map.toString());
-    }
-
-    @Test
-    void 구분자_테스트() {
-        String input = "[콜라,1500,20];[사이다,1000,10]";
-        String [] splited = input.split(";");
-        for(String product : splited) {
-            System.out.println("product");
-            String [] productSplited = product.split(",");
-            for(String s : productSplited) {
-                s = s.replaceAll("\\[", "").replaceAll("\\]","");
-                System.out.println(s);
-            }
-        }
     }
 }

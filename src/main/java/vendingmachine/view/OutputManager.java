@@ -20,6 +20,10 @@ public class OutputManager {
 		print(String.format(OutputConstants.USER_BALANCE_STATEMENT, userBalance));
 	}
 
+	public void notifyChangeStart() {
+		print(OutputConstants.COIN_CHANGE);
+	}
+
 	public void notifyChange(EnumMap<Coin, Integer> changeMap) {
 		for(Coin coin : changeMap.keySet()) {
 			notifyStorageCoinInLine(coin, changeMap.get(coin));
