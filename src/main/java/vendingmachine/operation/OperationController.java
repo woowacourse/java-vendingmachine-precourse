@@ -10,6 +10,7 @@ public class OperationController {
     public static void runOperation(InputView inputView) {
         OperationView.askInsertionAmount();
         doBalanceValidation(inputView);
+        OperationView.showBalance(balance);
         
     }
     
