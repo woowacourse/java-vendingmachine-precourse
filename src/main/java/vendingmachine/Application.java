@@ -7,6 +7,7 @@ import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Count;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
 
@@ -20,6 +21,9 @@ public class Application {
 		vendingMachineController.printHoldingCoins(coins);
 		String[] productNameAndPriceAndCnt = vendingMachineController.scanProductNameAndPriceAndCnt();
 		Products products = Products.save(productNameAndPriceAndCnt);
-		String inputMoney = vendingMachineController.scanInputMoney();
+		Money inputMoney = new Money(Integer.parseInt(vendingMachineController.scanInputMoney()));
+		while (true) {
+			vendingMachineController.printInputMoney(inputMoney.getMoney());
+		}
 	}
 }

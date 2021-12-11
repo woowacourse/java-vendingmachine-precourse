@@ -32,7 +32,7 @@ public class VendingMachineController {
 		OutputView.printHoldingCoins(coins);
 	}
 
-	public void printInputMoney(String inputMoney) {
+	public void printInputMoney(int inputMoney) {
 		OutputView.printInputMoney(inputMoney);
 	}
 }
