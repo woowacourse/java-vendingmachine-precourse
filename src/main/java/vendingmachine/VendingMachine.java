@@ -7,5 +7,7 @@ public class VendingMachine {
 
 	public void run() {
 		machineController.setupVendingMachine();
+		machineController.operate();
+		machineController.returnMoney();
 	}
 }
