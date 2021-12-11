@@ -12,6 +12,7 @@ public class Machine {
     private Map<Coin, Integer> coins;
     private List<Product> productList;
     private boolean isRun;
+    private int money;
 
     public Machine(){
         initCoins();
@@ -33,4 +34,7 @@ public class Machine {
         this.coins=coins;
     }
 
+    public void insertMoney(int money){
+        this.money=money;
+    }
 }

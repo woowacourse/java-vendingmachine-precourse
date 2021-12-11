@@ -9,7 +9,5 @@ public class CoinController {
 
     private final CoinService coinService = new CoinService();
 
-    public Coin pickPossibleRandomCoin(int money){
-        return coinService.findCoinByPrice(money);
-    }
+
 }
