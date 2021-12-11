@@ -32,4 +32,8 @@ public class Beverages {
 		}
 		return true;
 	}
+
+	public void sell(Beverage beverage) {
+		beverages.put(beverage, beverages.get(beverage) - 1);
+	}
 }

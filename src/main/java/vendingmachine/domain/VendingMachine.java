@@ -38,9 +38,8 @@ public class VendingMachine {
 	}
 
 	public void sell(Beverage beverage) {
-		Map<Beverage, Integer> beverages = this.beverages.getBeverages();
 		inputMoney.spend(beverage.getPrice());
-		beverages.put(beverage, beverages.get(beverage) - 1);
+		beverages.sell(beverage);
 	}
 
 	public boolean canSell() {
