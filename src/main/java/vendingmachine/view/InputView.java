@@ -43,7 +43,7 @@ public class InputView {
 
 	public int enterInputMoney() {
 		try {
-			System.out.println(REQUEST_INPUT_MONEY);
+			System.out.println("\n" + REQUEST_INPUT_MONEY);
 			String inputValue = Console.readLine();
 			moneyValidator.validateMoney(inputValue);
 			return Integer.parseInt(inputValue);
@@ -55,14 +55,14 @@ public class InputView {
 
 	public String enterBuyItem(Machine machine, int inputMoney) {
 		try {
-			System.out.println(CURRENT_INPUT_MONEY + inputMoney + WON);
+			System.out.println("\n" + CURRENT_INPUT_MONEY + inputMoney + WON);
 			System.out.println(REQUEST_BUY_ITEM);
 			String inputValue = Console.readLine();
 			BuyItemValidator.validateBuyItem(machine, inputValue, inputMoney);
 			return inputValue;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			return enterBuyItem(machine,inputMoney);
+			return enterBuyItem(machine, inputMoney);
 		}
 	}
 }

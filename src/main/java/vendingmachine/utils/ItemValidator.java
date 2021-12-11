@@ -56,9 +56,9 @@ public class ItemValidator {
 		isPositive(itemQuantity);
 	}
 
-	private void isInteger(String itemPrice) {
+	private void isInteger(String inputValue) {
 		try {
-			Integer.parseInt(itemPrice);
+			Integer.parseInt(inputValue);
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_NOT_INTEGER);
 		}
