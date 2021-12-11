@@ -20,4 +20,8 @@ public class Quantity {
     public void decrease() {
         value--;
     }
+
+    public boolean isZero() {
+        return value == 0;
+    }
 }

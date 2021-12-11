@@ -13,6 +13,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import vendingmachine.dto.InputItemDTO;
+import vendingmachine.model.vo.Money;
 
 class ItemTest {
     @ParameterizedTest
@@ -55,6 +56,19 @@ class ItemTest {
         Item item = new Item(inputItemDTO);
         boolean actual = item.hasName(userWantedItemName);
         assertThat(actual).isEqualTo(expected);
+    }
+
+    @Test
+    @DisplayName("수량이 0인(품절된) 상품을 구매하려고 하면 예외를 발생시킨다.")
+    void evokeExceptionByTryingToBuySoldOutItem() {
+        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
+        Item item = new Item(inputItemDTO);
+        Money remainingInputMoney = new Money("3000");
+        item.sell(remainingInputMoney);
+        item.sell(remainingInputMoney);
+        String expectedExceptionMessage = "구입하려는 상품은 품절입니다.";
+        assertThatIllegalArgumentException().isThrownBy(() -> item.sell(remainingInputMoney))
+                .withMessage(expectedExceptionMessage);
     }
 
     @Test
