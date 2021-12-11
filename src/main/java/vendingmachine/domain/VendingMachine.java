@@ -37,4 +37,8 @@ public class VendingMachine {
 	public Map<Coin, Integer> getCoins() {
 		return coins.getCoins();
 	}
+
+	public boolean isAvailable() {
+		return balance.getBalance() >= items.getExistingCheapest();
+	}
 }
