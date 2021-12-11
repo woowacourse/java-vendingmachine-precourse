@@ -1,0 +1,35 @@
+package vendingmachine.model.validator;
+
+public class MoneyValidator {
+
+	public static final String IS_ALL_DIGIT_ERROR_MESSAGE = "[ERROR] 자판기 보유 금액은 단 하나의 자연수만 가능합니다.";
+	public static final String IS_MIN_UNIT_TEN_ERROR_MESSAGE = "[ERROR] 금액의 최소단위는 10원 입니다.";
+	public static final int MIN_UNIT_OF_MONEY = 10;
+
+	public boolean validate(String input) {
+		try {
+			isAllDigit(input);
+			isMinUnitTen(input);
+
+			return false;
+		} catch (IllegalArgumentException illegalArgumentException) {
+			return true;
+		}
+	}
+
+	private void isAllDigit(String input) throws IllegalArgumentException {
+		for (char c : input.toCharArray()) {
+			if (!Character.isDigit(c)) {
+				System.out.println(IS_ALL_DIGIT_ERROR_MESSAGE);
+				throw new IllegalArgumentException();
+			}
+		}
+	}
+
+	private void isMinUnitTen(String input) {
+		if (Integer.parseInt(input) % MIN_UNIT_OF_MONEY != 0) {
+			System.out.println(IS_MIN_UNIT_TEN_ERROR_MESSAGE);
+			throw new IllegalArgumentException();
+		}
+	}
+}
