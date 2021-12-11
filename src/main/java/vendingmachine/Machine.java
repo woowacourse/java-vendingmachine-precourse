@@ -1,15 +1,18 @@
 package vendingmachine;
 
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.List;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Machine {
-    private StringManager stringManager = new StringManager();
+    public NumberManager numberManager = new NumberManager();
 
-    private Coin[] coins = Coin.values();
-    private ProductMap productMap = new ProductMap();
+    private CoinMap coinMap=new CoinMap();
+    private final List<Integer> amountList= new ArrayList<>(Arrays.asList(500,100,50,10));
+    public ProductMap productMap = new ProductMap();
+    public int userAmount = 0;
 
     public Machine() {
     }
@@ -17,7 +20,6 @@ public class Machine {
     public void setCoinsInMachine() {
         int heldAmount = getHeldAmountInMachine();
         makeCoins(heldAmount);
-        printCoins();
     }
 
     private int getHeldAmountInMachine() {
@@ -25,36 +27,26 @@ public class Machine {
         while (true) {
             String heldAmountString = readLine();
             try {
-                int heldAmount = stringManager.toAmount(heldAmountString);
+                int heldAmount = numberManager.toNumber(heldAmountString, NumberManager.TYPE_AMOUNT);
                 return heldAmount;
-            } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 금액은 10으로 나누어 떨어지는 자연수여야 합니다.");
-            }
+            } catch (IllegalArgumentException e) {}
         }
     }
 
-    private void makeCoins(int heldAmount) {
-        for (Coin c : coins) {
-            heldAmount = c.setCoinCount(heldAmount);
-        }
-    }
-
-    private void printCoins() {
-        for (Coin c : coins) {
-            c.printCoinInfo();
-        }
+    private void makeCoins(int amount){
+        coinMap.makeCoins(amount);
+        coinMap.printCoins(coinMap.ALL_PRINT);
     }
 
     public void setProductMap() {
         while (true) {
-            String productListString = readLine();
+            String productListString;
             try {
                 productListString = readLine();
                 productMap.toProductMap(productListString);
                 return;
-            } catch (IllegalArgumentException e) {
-                System.out.println("[ERROR] 상품을 다시 입력해주세요.");
-            }
+            } catch (IllegalArgumentException e) {}
         }
     }
+
 }

@@ -3,6 +3,8 @@ package vendingmachine;
 import java.util.HashMap;
 
 public class ProductMap {
+    public NumberManager numberManager = new NumberManager();
+
     public HashMap<String, ProductInfo> productMap = new HashMap<>();
 
     public static class ProductInfo {
@@ -18,101 +20,67 @@ public class ProductMap {
     public ProductMap() {
     }
 
-    private static final String firstParser = ";";
-    private static final String secondParser = ",";
-
-    private static final boolean ERROR = true;
-    private static final boolean NON_ERROR = false;
+    private static final String PARSER_LIST = ";";
+    private static final String PARSER_INFO = ",";
 
     private static final int PRODUCT_INFO_SIZE = 3;
+    private static final int MIN_PRODUCT_SIZE = 8;
     private static final int MIN_NAME_SIZE = 1;
+
     private static final int INDEX_NAME = 0;
     private static final int INDEX_AMOUNT = 1;
     private static final int INDEX_COUNT = 2;
-    private static final int NUMBER_ERROR_VALUE = -1;
-    private static final int AMOUNT_UNIT = 10;
 
     public void toProductMap(String productListString) {
-        String[] productStrings = productListString.split(firstParser);
+        String[] productStrings = productListString.split(PARSER_LIST);
         for (String p : productStrings) {
-            try {
-                parseProductString(p);
-            } catch (IllegalArgumentException e) {
-                throw new IllegalArgumentException();
-            }
+            parseProductString(p);
         }
     }
 
     private void parseProductString(String productString) {
-        int productStringLength = productString.length();
+        int INDEX_FIRST = 0;
+        int INDEX_LAST = productString.length();
 
-        if (productString.charAt(0) != '[' || productString.charAt(productStringLength) != ']') {
+        if (productString.length()<MIN_PRODUCT_SIZE
+            || productString.charAt(INDEX_FIRST) != '['
+            || productString.charAt(INDEX_LAST) != ']') {
+            System.out.println("[ERROR] 상품 입력 형식에 맞게 입력해주세요.");
             throw new IllegalArgumentException();
         }
-        try {
-            String productInfoString = productString.substring(1, productStringLength - 1);
-            parseProductInfoString(productInfoString);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException();
-        }
+
+        String productInfoString = productString.substring(INDEX_FIRST + 1, INDEX_LAST - 1);
+        parseProductInfoString(productInfoString);
     }
 
     private void parseProductInfoString(String productInfoString) {
-        String[] productInfoArray = productInfoString.split(secondParser);
+        String[] productInfoArray = productInfoString.split(PARSER_INFO);
 
         if (productInfoArray.length != PRODUCT_INFO_SIZE) {
+            System.out.println("[ERROR] 상품 입력 형식에 맞게 입력해주세요.");
             throw new IllegalArgumentException();
         }
-
-        try {
-            addProductToMap(productInfoArray);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException();
-        }
+        addProductToMap(productInfoArray);
     }
 
     private void addProductToMap(String[] productInfoArray) {
-        String name = productInfoArray[INDEX_NAME];
-        int amount = getAmount(productInfoArray[INDEX_AMOUNT]);
-        int count = getCount(productInfoArray[INDEX_COUNT]);
+        String name = toName(productInfoArray[INDEX_NAME]);
+        int amount = numberManager.toNumber(productInfoArray[INDEX_AMOUNT], numberManager.TYPE_AMOUNT);
+        int count = numberManager.toNumber(productInfoArray[INDEX_COUNT], numberManager.TYPE_COUNT);
 
-        if (isProductError(name, amount, count)) {
-            throw new IllegalArgumentException();
-        }
         ProductInfo info = new ProductInfo(amount, count);
         productMap.put(name, info);
     }
 
-    private int getAmount(String amountString) {
-        int amount;
-        try {
-            amount = Integer.parseInt(amountString);
-            return amount;
-        } catch (NumberFormatException e) {
-            return NUMBER_ERROR_VALUE;
+    private String toName(String name) {
+        if (name.length() < MIN_NAME_SIZE) {
+            System.out.println("[ERROR] 상품 이름은 한 글자 이상으로 입력해주세요.");
+            throw new IllegalArgumentException();
         }
-    }
-
-    private int getCount(String countString) {
-        int count;
-        try {
-            count = Integer.parseInt(countString);
-            return count;
-        } catch (NumberFormatException e) {
-            return NUMBER_ERROR_VALUE;
+        if (productMap.containsKey(name)) {
+            System.out.println("[ERROR] 상품 이름은 모두 다르게 입력해주세요.");
+            throw new IllegalArgumentException();
         }
-    }
-
-    private boolean isProductError(String name, int amount, int count) {
-        if (name.length() < MIN_NAME_SIZE || productMap.containsKey(name)) {
-            return ERROR;
-        }
-        if (amount < 0 || amount % AMOUNT_UNIT > 0) {
-            return ERROR;
-        }
-        if (count < 0) {
-            return ERROR;
-        }
-        return NON_ERROR;
+        return name;
     }
 }
