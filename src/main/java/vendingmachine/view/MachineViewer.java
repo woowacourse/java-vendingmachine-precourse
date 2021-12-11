@@ -16,7 +16,7 @@ public class MachineViewer {
 	}
 
 	public void showRemainMoney(int money) {
-		System.out.println("\n투입 금액 : " + money + "원");
+		System.out.println("\n투입 금액: " + money + "원");
 	}
 
 	public void showReturnCoins(HashMap<Integer, Integer> coins) {
