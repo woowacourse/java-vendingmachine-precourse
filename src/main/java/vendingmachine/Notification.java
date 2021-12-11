@@ -11,7 +11,8 @@ public enum Notification {
 	PRODUCT_NAME_INVALID("[ERROR] 상품명이 올바르지 않습니다."),
 	PRODUCT_INSUFFICIENCY_PRICE("[ERROR] 상품명은 최소 100원 이상이여야합니다."),
 	PRODUCT_ALREADY_EXIST("[ERROR] 동일한 상품명이 존재합니다."),
-	PRODUCT_IS_NULL("[ERROR] 상품을 올바르게 입력해주세요.");
+	PRODUCT_IS_NULL("[ERROR] 상품을 올바르게 입력해주세요."),
+	PRODUCTS_SIZE_INSUFFICIENT("[ERROR] 상품은 최소 1개 이상 입력해야합니다.");
 
 	private final String message;
 

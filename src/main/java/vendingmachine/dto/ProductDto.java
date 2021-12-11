@@ -13,6 +13,7 @@ import vendingmachine.product.Products;
 public class ProductDto {
 	private static final int PRODUCT_COMPOSITION_SIZE = 3;
 	private static final int PRODUCT_START_INDEX = 1;
+	private static final int PRODUCT_MINIMUM_SIZE = 1;
 
 	private final String input;
 
@@ -22,11 +23,18 @@ public class ProductDto {
 
 	public Products convertProducts() {
 		String[] productArray = input.split(";");
+		validProductSize(productArray);
 		Products products = Products.from();
 		for (String product : productArray) {
 			products.add(convertProduct(product));
 		}
 		return products;
+	}
+
+	private void validProductSize(String[] productArray) {
+		if(productArray.length < PRODUCT_MINIMUM_SIZE) {
+			throw new IllegalArgumentException(Notification.PRODUCTS_SIZE_INSUFFICIENT.getMessage());
+		}
 	}
 
 	private Product convertProduct(String product) {
