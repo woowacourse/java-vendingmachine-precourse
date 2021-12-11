@@ -62,7 +62,7 @@ public class InputValidator {
 	}
 
 	private static void checkSemicolon(String input) {
-		if (!input.contains(";")) {
+		if (input.contains("][")) {
 			InputException.printNotFoundSemicolonError();
 		}
 	}
