@@ -9,8 +9,7 @@ import java.util.stream.Stream;
 public class InputValidator {
 	private static final InputValidator inputValidator = new InputValidator();
 
-	private InputValidator() {
-	}
+	private InputValidator() {}
 
 	public static InputValidator getInputValidator() {
 		return inputValidator;
@@ -145,7 +144,7 @@ public class InputValidator {
 
 	private boolean isNotNaturalNumber(String string, int elementIndex) {
 		return !Arrays.stream(string.split(ITEMS_SPLITTER))
-				.map(item -> item.substring(1, item.length()-1))
+				.map(item -> item.substring(1, item.length() - 1))
 				.map(item -> item.split(ITEM_ELEMENT_SPLITTER)[elementIndex])
 				.flatMapToInt(CharSequence::chars)
 				.allMatch(Character::isDigit);
@@ -153,7 +152,7 @@ public class InputValidator {
 
 	private Stream<Integer> getElementIntegerStream(String string, int elementIndex) {
 		return Arrays.stream(string.split(ITEMS_SPLITTER))
-				.map(item -> item.substring(1, item.length()-2))
+				.map(item -> item.substring(1, item.length() - 2))
 				.map(item -> item.split(ITEM_ELEMENT_SPLITTER)[elementIndex])
 				.map(Integer::parseInt);
 	}

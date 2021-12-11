@@ -3,9 +3,7 @@ package vendingmachine.resource;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class ItemStorage {
 	private static final ItemStorage itemStorage = new ItemStorage();
@@ -25,38 +23,30 @@ public class ItemStorage {
 	}
 
 	public List<Integer> getPriceList() {
-		return itemList.stream()
-				.map(Item::getPrice)
-				.collect(Collectors.toList());
+		return itemList.stream().map(Item::getPrice).collect(Collectors.toList());
 	}
 
 	public List<Integer> getQuantityList() {
-		return itemList.stream()
-				.map(Item::getQuantity)
-				.collect(Collectors.toList());
+		return itemList.stream().map(Item::getQuantity).collect(Collectors.toList());
 	}
 
 	public List<String> getNameList() {
-		return itemList.stream()
-				.map(Item::getName)
-				.collect(Collectors.toList());
+		return itemList.stream().map(Item::getName).collect(Collectors.toList());
 	}
 
 	public int getPriceByName(String name) {
 		return itemList.stream()
 				.filter(item -> Objects.equals(item.getName(), name))
 				.map(Item::getPrice)
-				.collect(Collectors.toList()).get(0);
+				.collect(Collectors.toList())
+				.get(0);
 	}
 
-	public void reduceItemQuantity(String name){
+	public void reduceItemQuantity(String name) {
 		gitItemByName(name).reduceQuantity();
 	}
 
 	private Item gitItemByName(String name) {
-		return itemList.stream()
-				.filter(item -> Objects.equals(item.getName(), name))
-				.findFirst()
-				.get();
+		return itemList.stream().filter(item -> Objects.equals(item.getName(), name)).findFirst().get();
 	}
 }
