@@ -43,16 +43,7 @@ public class MachineController {
 
     private void requestInsertInitialAmount() {
         InputView.printInputInitialAmountMessage();
-        int amount;
-        while (true) {
-            try {
-                amount = InputValidator.validateAmountInput(InputView.getInput());
-                break;
-            } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e);
-            }
-        }
-        machineService.saveAmount(amount);
+        machineService.saveAmount(inputValidAmount());
         OutputView.printRemainingCoins(vendingMachine.getCoins());
     }
 
@@ -72,16 +63,17 @@ public class MachineController {
 
     private void requestInsertUserAmount() {
         InputView.printUserInsertAmountMessage();
-        int userAmount;
+        machineService.saveUserInsertAmount(inputValidAmount());
+    }
+
+    private int inputValidAmount() {
         while (true) {
             try {
-                userAmount = InputValidator.validateAmountInput(InputView.getInput());
-                break;
+                return InputValidator.validateAmountInput(InputView.getInput());
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
-        machineService.saveUserInsertAmount(userAmount);
     }
 
     private boolean shouldContinue() {
