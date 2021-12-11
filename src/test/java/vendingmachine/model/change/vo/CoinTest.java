@@ -1,10 +1,9 @@
-package vendingmachine.model.change.coingenerator.vo;
+package vendingmachine.model.change.vo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import vendingmachine.model.change.vo.Coin;
 
 class CoinTest {
     @Test
