@@ -12,38 +12,35 @@ public class ProductManager {
 		this.productList = new ArrayList<>();
 	}
 
-	public void addProduct(Product product) {
-		productList.add(product);
+	public void addAllProduct(List<Product> products) {
+		productList.addAll(products);
 	}
 
-	public int searchProductPrice(String name) {
+	public void checkProductExist(String name) throws IllegalArgumentException{
 		Product product = searchProduct(name);
-		checkProductIsNull(product);
-		return product.getPrice();
+		if(product == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public boolean checkCanBuyProduct(String name, int userBalance) {
+		Product product = searchProduct(name);
+		if(product.compareToPrice(userBalance) && product.checkHaveStock()) {
+			return true;
+		}
+		return false;
 	}
 
 	public void deductQuantityOfProduct(String name, int reduceValue) {
 		Product product = searchProduct(name);
-		checkProductIsNull(product);
 		product.reduceQuantity(reduceValue);
 	}
 
-	public boolean checkProductHaveStock(String name) {
-		Product product = searchProduct(name);
-		checkProductIsNull(product);
-		return product.getPrice() > 0;
-	}
-
-	private Product searchProduct(String name) {
+	public Product searchProduct(String name) {
 		return productList.stream()
 			.filter(product -> name.equals(product.getName()))
 			.findAny()
 			.orElse(null);
 	}
 
-	private void checkProductIsNull(Product product) {
-		if(product == null) {
-			throw new IllegalArgumentException();
-		}
-	}
 }

@@ -13,4 +13,15 @@ public class Product {
 	public void reduceQuantity(int reduceValue) {
 		this.quantity -= reduceValue;
 	}
+
+	public boolean compareToPrice(int money) {
+		if (price > money) {
+			return false;
+		}
+		return true;
+	}
+
+	public boolean checkHaveStock() {
+		return quantity > 0;
+	}
 }
