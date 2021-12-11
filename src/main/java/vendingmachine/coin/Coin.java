@@ -22,6 +22,11 @@ public enum Coin {
         return amount;
     }
 
+    public boolean isSameAmount(int price){
+        return amount==price;
+    }
 
-
+    public boolean lessThanEqual(int price){
+        return amount<=price;
+    }
 }

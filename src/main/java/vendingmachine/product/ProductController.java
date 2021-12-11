@@ -1,7 +1,11 @@
 package vendingmachine.product;
 
+import vendingmachine.exception.ProductValidator;
+
 public class ProductController {
-    public Product makeProduct(String[] infos){
-        return new Product(infos[0],Integer.valueOf(infos[1]),Integer.valueOf(infos[2]));
+    private final ProductService productService = new ProductService();
+
+    public Product makeProduct(String product){
+        return productService.makeProduct(product);
     }
 }

@@ -4,7 +4,7 @@ public class ProductService {
     ProductController productController = new ProductController();
 
     public Product makeProduct(String product){
-        return productController.makeProduct(product.split(","));
+        String[] infos = product.split(",");
+        return new Product(infos[0],Integer.valueOf(infos[1]),Integer.valueOf(infos[2]));
     }
-
 }
