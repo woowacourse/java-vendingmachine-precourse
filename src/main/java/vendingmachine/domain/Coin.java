@@ -34,4 +34,8 @@ public enum Coin {
         //예외처리 필요
         return coins.get(amount);
     }
+
+	public int getAmount() {
+		return amount;
+	}
 }

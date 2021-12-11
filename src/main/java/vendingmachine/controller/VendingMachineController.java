@@ -1,9 +1,13 @@
 package vendingmachine.controller;
 
+import java.util.Map;
 import java.util.Scanner;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
+import vendingmachine.domain.Count;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private final InputView inputView;
@@ -14,5 +18,9 @@ public class VendingMachineController {
 
 	public String scanHoldingMoney() {
 		return inputView.scanHoldingMoney();
+	}
+
+	public void printHoldingCoins(final Map<Coin, Count> coins) {
+		OutputView.printHoldingCoins(coins);
 	}
 }

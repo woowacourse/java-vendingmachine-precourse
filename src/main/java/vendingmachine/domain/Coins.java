@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,11 +20,11 @@ public class Coins {
 	private static final Map<Coin, Count> coinsCount;
 
 	static {
-		coinsCount = new HashMap<>();
-		coinsCount.put(Coin.COIN_10, new Count(ZERO));
-		coinsCount.put(Coin.COIN_50, new Count(ZERO));
-		coinsCount.put(Coin.COIN_100, new Count(ZERO));
+		coinsCount = new LinkedHashMap<>();
 		coinsCount.put(Coin.COIN_500, new Count(ZERO));
+		coinsCount.put(Coin.COIN_100, new Count(ZERO));
+		coinsCount.put(Coin.COIN_50, new Count(ZERO));
+		coinsCount.put(Coin.COIN_10, new Count(ZERO));
 	}
 
 	public static Map<Coin, Count> moneyToCoins(String holdingMoney) {
