@@ -32,5 +32,6 @@ public class VendingMachineController {
 		coins = Coin.init();
 		HashMap<Coin, Integer> savedCoins = coinService.getRandomCoins(coins, savedMoney);
 		List<Item> items = itemService.getItems();
+		int customerMoney = moneyService.getCustomerMoney();
 	}
 }

@@ -18,8 +18,18 @@ public class MoneyService {
 		boolean isValidMoney;
 		do {
 			savedMoneyString = inputView.inputSavedMoney();
-			isValidMoney = moneyInputValidator.validateMoneyInput(savedMoneyString);
+			isValidMoney = moneyInputValidator.validateSavedMoneyInput(savedMoneyString);
 		}while(!isValidMoney);
 		return Integer.parseInt(savedMoneyString);
+	}
+
+	public int getCustomerMoney() {
+		String customerMoneyString;
+		boolean isValidMoney;
+		do {
+			customerMoneyString = inputView.inputSavedMoney();
+			isValidMoney = moneyInputValidator.validateCustomerMoneyInput(customerMoneyString);
+		}while(!isValidMoney);
+		return Integer.parseInt(customerMoneyString);
 	}
 }
