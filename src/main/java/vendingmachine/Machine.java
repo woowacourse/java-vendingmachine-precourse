@@ -32,7 +32,8 @@ public class Machine {
 		String userInput = Console.readLine();
 		try {
 			Validator.isNumeric(userInput);
-			Validator.minimumCheck(userInput);
+			Validator.coinMinimumCheck(userInput);
+			Validator.multipleOfTen(userInput);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			inputMachineMoney();
