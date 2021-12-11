@@ -45,6 +45,10 @@ public class Price {
         remainingInputMoney.decreaseBy(value);
     }
 
+    public boolean isMoreExpensiveThan(final Money remainingInputMoney) {
+        return remainingInputMoney.isLowerThan(value);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

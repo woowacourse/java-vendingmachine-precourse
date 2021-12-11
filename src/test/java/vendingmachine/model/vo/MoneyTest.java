@@ -6,6 +6,7 @@ import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 class MoneyTest {
@@ -18,6 +19,15 @@ class MoneyTest {
         Money another = new Money("1000");
         boolean actual = money.equals(another);
         assertThat(actual).isTrue();
+    }
+
+    @ParameterizedTest
+    @DisplayName("상품 가격을 받아, 금액이 상품 가격보다 낮은지 반환한다.")
+    @CsvSource({"3000, true", "2000, false", "1900, false"})
+    void isLowerThan(final int itemPrice, final boolean expected) {
+        Money money = new Money("2000");
+        boolean actual = money.isLowerThan(itemPrice);
+        assertThat(actual).isEqualTo(expected);
     }
 
     @ParameterizedTest

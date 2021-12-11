@@ -10,6 +10,7 @@ import vendingmachine.model.vo.Money;
 public class Item {
     private static final String ITEM_INFO_NOT_ENOUGH_EXCEPTION_MESSAGE = "상품 정보에 누락이 있습니다.";
     private static final String WANTED_ITEM_SOLD_OUT_EXCEPTION_MESSAGE = "구입하려는 상품은 품절입니다.";
+    private static final String PRICE_MORE_EXPENSIVE_EXCEPTION_MESSAGE = "남은 투입 금액으로 해당 상품을 구매할 수 없습니다.";
     private static final int NUMBER_OF_ITEM_PROPERTIES = 3;
 
     private final String name;
@@ -35,6 +36,7 @@ public class Item {
 
     public void sell(final Money remainingInputMoney) {
         checkRemainingQuantity();
+        checkPossibleToPayWith(remainingInputMoney);
         remainingQuantity.decrease();
         price.payWith(remainingInputMoney);
     }
@@ -42,6 +44,12 @@ public class Item {
     private void checkRemainingQuantity() {
         if (remainingQuantity.isZero()) {
             throw new IllegalArgumentException(WANTED_ITEM_SOLD_OUT_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private void checkPossibleToPayWith(final Money remainingInputMoney) {
+        if(price.isMoreExpensiveThan(remainingInputMoney)) {
+            throw new IllegalArgumentException(PRICE_MORE_EXPENSIVE_EXCEPTION_MESSAGE);
         }
     }
 

@@ -33,6 +33,10 @@ public class Money {
         value -= itemPrice;
     }
 
+    public boolean isLowerThan(final int itemPrice) {
+        return value < itemPrice;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -72,6 +72,17 @@ class ItemTest {
     }
 
     @Test
+    @DisplayName("남은 투입 금액보다 구매하려는 상품 가격이 비싸면 예외를 발생시킨다.")
+    void evokeExceptionByMoreExpensivePrice() {
+        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "1000", "2"));
+        Item item = new Item(inputItemDTO);
+        Money remainingInputMoney = new Money("900");
+        String expectedExceptionMessage = "남은 투입 금액으로 해당 상품을 구매할 수 없습니다.";
+        assertThatIllegalArgumentException().isThrownBy(() -> item.sell(remainingInputMoney))
+                .withMessage(expectedExceptionMessage);
+    }
+
+    @Test
     @DisplayName("상품 속성들 중 누락이 있으면 예외를 발생시킨다.")
     void evokeExceptionByNotEnoughItemInfo() {
         InputItemDTO NotEnoughInputItemDTO = new InputItemDTO(Arrays.asList("물", "2000"));

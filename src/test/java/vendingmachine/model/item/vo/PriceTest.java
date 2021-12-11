@@ -1,6 +1,5 @@
 package vendingmachine.model.item.vo;
 
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
@@ -10,11 +9,23 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import vendingmachine.model.vo.Money;
+
 class PriceTest {
     private final Price price = new Price("1000");
+
+    @ParameterizedTest
+    @DisplayName("Money 객체를 받아, 상품 가격이 Money의 금액보다 높은지 반환한다.")
+    @CsvSource({"2000, false", "1000, false", "900, true"})
+    void isExpensiveThan(final String moneyValue, final boolean expected) {
+        Money remainingInputMoney = new Money(moneyValue);
+        boolean actual = price.isMoreExpensiveThan(remainingInputMoney);
+        assertThat(actual).isEqualTo(expected);
+    }
 
     @ParameterizedTest
     @DisplayName("필드 값을 기준으로 동등성을 반환한다.")
@@ -32,7 +43,6 @@ class PriceTest {
         int hashCodeOfAnotherPrice = another.hashCode();
         assertThat(hashCodeOfPrice == hashCodeOfAnotherPrice).isEqualTo(expected);
     }
-
 
     private static Stream<Arguments> provideAnotherPriceAndExpected() {
         return Stream.of(
