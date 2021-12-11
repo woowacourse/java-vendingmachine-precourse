@@ -19,4 +19,8 @@ public class OutputManager {
 	private void print(String message) {
 		System.out.println(message);
 	}
+
+	public void printLine() {
+		System.out.println();
+	}
 }

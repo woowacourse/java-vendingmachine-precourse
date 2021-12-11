@@ -18,19 +18,17 @@ public class VendingMachine {
 
 	public void start() {
 		init();
-		// TODO : 상품 구매하기
+		buyProduct();
 	}
 
 	private void init() {
 		initCoinStorage();
 		initProductList();
-		// TODO : 투입 금액 입력 받기
+		initUserBalance();
 	}
 
 	private void initCoinStorage() {
-		// TODO : 자판기 보유 금액 입력받기
 		vendingService.initCoinStorage(inputManager.getStorageMoney());
-		// TODO : 자판기 보유 동전 알려주기
 		notifyStorageCoin();
 	}
 
@@ -40,10 +38,19 @@ public class VendingMachine {
 			int quantity = vendingService.getCoinStorageQuantity(coin);
 			outputManager.notifyStorageCoinInLine(coin, quantity);
 		}
+		outputManager.printLine();
 	}
 
 	private void initProductList() {
 		vendingService.initProducts(inputManager.getProductList());
+	}
+
+	private void initUserBalance() {
+		vendingService.initUserBalance(inputManager.getUserBalance());
+	}
+
+	private void buyProduct() {
+
 	}
 
 }

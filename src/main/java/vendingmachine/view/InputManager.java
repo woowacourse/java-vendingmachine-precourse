@@ -17,8 +17,8 @@ public class InputManager {
 		return getMoneyNumber(InputConstants.ASK_STORAGE_MONEY);
 	}
 
-	public int getUserMoney() {
-		return getMoneyNumber(InputConstants.ASK_USER_MONEY);
+	public int getUserBalance() {
+		return getMoneyNumber(InputConstants.ASK_USER_BALANCE);
 	}
 
 	public int getMoneyNumber(String askMessage) {
@@ -49,7 +49,7 @@ public class InputManager {
 		try {
 			converter.checkNumberString(inputString);
 		}catch(IllegalArgumentException e) {
-			print(getErrorMessage(InputConstants.ERROR_STORAGE_MONEY));
+			print(getErrorMessage(InputConstants.ERROR_MONEY_NUMBER));
 			return true;
 		}
 		return false;
