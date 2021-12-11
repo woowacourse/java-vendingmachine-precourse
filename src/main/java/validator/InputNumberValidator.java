@@ -14,4 +14,11 @@ public class InputNumberValidator {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE + ExceptionMessage.ERROR_INPUT_NUMBER);
         }
     }
+
+    public static void isPositiveNumber(int inputValue) {
+        if (inputValue < 1) {
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE + ExceptionMessage.ERROR_INPUT_POSITIVE_NUMBER);
+        }
+    }
+
 }
