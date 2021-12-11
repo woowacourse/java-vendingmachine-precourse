@@ -2,7 +2,7 @@ package vendingmachine;
 
 import inputcontroller.InputGenerator;
 
-import static models.Product.totalRemains;
+//import static models.Product.totalRemains;
 import static vendingmachine.VendingMachineMain.*;
 
 public class Application {
@@ -14,8 +14,8 @@ public class Application {
 
         InputGenerator.inputUserMoney();
         while (true) {
-            giveAnOrder();
-            if (userInputMoney < minCost || totalRemains == 0) {
+            boolean notEmpty = giveAnOrder();
+            if (userInputMoney < minCost || !notEmpty) {
                 int[] numOfCoin = makeChange();
                 VendingMachineUI.printChange(numOfCoin);
                 break;
