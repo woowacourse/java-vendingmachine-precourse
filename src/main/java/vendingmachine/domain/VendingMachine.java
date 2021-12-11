@@ -3,7 +3,9 @@ package vendingmachine.domain;
 import java.util.List;
 import java.util.Map;
 
-import vendingmachine.Validation;
+import vendingmachine.util.BalanceValidator;
+import vendingmachine.util.ItemValidator;
+import vendingmachine.util.PurchaseValidator;
 
 public class VendingMachine {
 	private static final int NAME = 0;
@@ -15,23 +17,23 @@ public class VendingMachine {
 	private Balance balance;
 
 	public void initializeCoins(String input) {
-		int coinBalance = Validation.isValidBalance(input);
+		int coinBalance = BalanceValidator.isValidBalance(input);
 		this.coins = new Coins(coinBalance);
 		coins.createRandomCoins();
 	}
 
 	public void initializeItems(String input) {
 		this.items = new Items();
-		List<String> itemsInfo = Validation.isValidItems(input);
+		List<String> itemsInfo = ItemValidator.isValidItems(input);
 		for (String itemInfo : itemsInfo) {
-			List<String> detail = Validation.isValidItem(itemInfo);
+			List<String> detail = ItemValidator.isValidItem(itemInfo);
 			items.add(new Item(detail.get(NAME), detail.get(PRICE), detail.get(QUANTITY)));
 		}
 	}
 
 	public void initializeBalance(String input) {
-		int balance = Validation.isValidBalance(input);
-		Validation.isEnoughBalance(balance, items);
+		int balance = BalanceValidator.isValidBalance(input);
+		BalanceValidator.isEnoughBalance(balance, items);
 		this.balance = new Balance(balance);
 	}
 
@@ -40,7 +42,7 @@ public class VendingMachine {
 	}
 
 	public void executePurchase(String itemName) {
-		Validation.isValidPurchase(itemName, items, balance);
+		PurchaseValidator.isValidPurchase(itemName, items, balance);
 		for (Item item : items.getItemList()) {
 			returnItem(item, itemName);
 		}
