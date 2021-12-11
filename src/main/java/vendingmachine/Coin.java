@@ -94,4 +94,8 @@ public enum Coin {
     public String getCountForChangeMessage() {
         return amount + "원 - " + countForChange + "개";
     }
+
+    public String getCountForMessage() {
+        return amount + "원 - " + count + "개";
+    }
 }

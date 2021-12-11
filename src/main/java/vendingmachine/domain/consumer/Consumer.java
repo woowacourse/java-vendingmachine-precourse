@@ -43,4 +43,8 @@ public class Consumer {
         }
         product.isPurchasedBy(this);
     }
+
+    public String getCurrentBalanceMessage() {
+        return "투입 금액: " + balance + "원";
+    }
 }

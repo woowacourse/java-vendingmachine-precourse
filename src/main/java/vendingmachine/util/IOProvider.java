@@ -2,6 +2,9 @@ package vendingmachine.util;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Coin;
+import vendingmachine.domain.machine.VendingMachine;
+
+import java.util.EnumSet;
 
 public class IOProvider {
     private static final String ASK_MACHINE_BALANCE_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
@@ -35,5 +38,17 @@ public class IOProvider {
 
     public static void printChangeEachCoin(Coin coin) {
         System.out.println(coin.getCountForChangeMessage());
+    }
+
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void addNewLine() {
+        System.out.println();
+    }
+
+    public static void printVendingMachineCoins(Coin coin) {
+        System.out.println(coin.getCountForMessage());
     }
 }
