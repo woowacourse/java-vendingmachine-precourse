@@ -37,7 +37,9 @@ public class ManagementService {
     public static Commodity toCommodity(String input) {
         String [] components = input.split(",");
         String name = components[COMMODITY_NAME];
+        CheckCommodityPrice.validationFigure(components[COMMODITY_PRICE]);
         int price = Integer.parseInt(components[COMMODITY_PRICE]);
+        CheckCommodityQuantity.validationFigure(components[COMMODITY_QUANTITY]);
         int quantity = Integer.parseInt(components[COMMODITY_QUANTITY]);
         
         return new Commodity(name,price,quantity);
