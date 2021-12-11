@@ -26,6 +26,10 @@ public class Quantity {
 		return new Quantity(intValue(count));
 	}
 
+	public static Quantity of(int count) {
+		return new Quantity(count);
+	}
+
 	private static int intValue(String count) {
 		try {
 			return Integer.parseInt(count);
@@ -62,6 +66,10 @@ public class Quantity {
 		if (count < MINIMUM_QUANTITY) {
 			throw new IllegalArgumentException(Notification.QUANTITY_INVALID_RANGE.getMessage());
 		}
+	}
+
+	public int getCount() {
+		return count;
 	}
 
 	@Override

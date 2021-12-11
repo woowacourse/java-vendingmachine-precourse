@@ -42,13 +42,11 @@ public class Product {
 		stock.down();
 	}
 
-	// 필요없다면 최종에 제거하기
 	public Money getPrice() {
-		return price;
+		return Money.of(price.getAmount());
 	}
 
-	// 필요없다면 최종에 제거하기
 	public Quantity getStock() {
-		return stock;
+		return Quantity.of(stock.getCount());
 	}
 }
