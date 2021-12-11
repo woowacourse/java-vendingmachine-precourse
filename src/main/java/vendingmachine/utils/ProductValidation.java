@@ -14,7 +14,7 @@ public class ProductValidation {
             return;
         }
 
-        throw new IllegalArgumentException(ErrorConstant.WrongInputFormat);
+        throw new IllegalArgumentException(ErrorConstant.WRONG_INPUT_FORMAT);
     }
 
     private boolean checkArrayFormat(String input) {
