@@ -22,9 +22,11 @@ public class ProductContainer {
     }
 
     public int getMinimumPrice() {
-        return (int) productMap.values().stream()
-                                        .filter(product -> product.getStockQuantity() == 0)
-                                        .count();
+        return productMap.values().stream()
+                                    .filter(product -> product.getStockQuantity() != 0)
+                                    .mapToInt(Product::getPrice)
+                                    .min()
+                                    .orElse(Integer.MAX_VALUE);
     }
 
     public boolean isAllSoldOut() {
