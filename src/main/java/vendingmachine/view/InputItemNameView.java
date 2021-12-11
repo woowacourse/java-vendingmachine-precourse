@@ -17,22 +17,25 @@ public class InputItemNameView implements View {
 			return;
 		}
 		printMoneyAndMessage(money);
-		String itemName  = readItemName();
-		Item item;
-		try {
-			item = getItem(itemName);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			show();
-			return;
-		}
-		Application.controller.purchase(item);
+		purchase();
 		show();
 	}
 
 	private void printMoneyAndMessage(int money) {
 		System.out.println(SystemMessage.SHOW_INPUT_MONEY + money + PublicConst.MONETARY_UNIT);
 		System.out.println(SystemMessage.INPUT_ITEM_NAME);
+	}
+
+	private void purchase() {
+		String itemName = readItemName();
+		Item item;
+		try {
+			item = getItem(itemName);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return;
+		}
+		Application.controller.purchase(item);
 	}
 
 	private String readItemName() {
