@@ -14,5 +14,6 @@ public class Application {
 		final Scanner scanner = new Scanner(System.in);
 		VendingMachineController vendingMachineController = new VendingMachineController(scanner);
 		String holdingMoney = vendingMachineController.scanHoldingMoney();
+		Map<Coin, Count> coins = Coins.moneyToCoins(holdingMoney);
 	}
 }
