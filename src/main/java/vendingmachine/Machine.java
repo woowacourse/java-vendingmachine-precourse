@@ -10,20 +10,20 @@ public class Machine {
     HashMap<Coin, Integer> coinsMap = new HashMap<>();
 
     public void start() {
-        Balance();
+        balance();
         coinsInMachine();
         coinHashMap();
         showMachineCoins();
-        Goods();
+        goods();
     }
-    private void Balance() {
+    private void balance() {
         boolean check = false;
         while (!check) {
             System.out.println(Message.INPUT_MACHINE_BALANCE);
             check = user.inputMachineBalance();
         }
     }
-    private void Goods() {
+    private void goods() {
         boolean check = false;
         System.out.println();
         while (!check) {
@@ -60,5 +60,6 @@ public class Machine {
         System.out.println(Coin.COIN_50.getAmount() + "원 - " + coinsMap.get(Coin.COIN_50) + "개");
         System.out.println(Coin.COIN_10.getAmount() + "원 - " + coinsMap.get(Coin.COIN_10) + "개");
     }
+
 
 }
