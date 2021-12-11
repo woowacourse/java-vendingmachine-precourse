@@ -13,7 +13,7 @@ public class StringConstants {
     public static final String ERROR_MESSAGE_ABOUT_EMPTY_ITEM_TO_PURCHASE_INPUT = "상품명을 한 글자 이상 입력해 주세요";
     public static final String ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE = "등록된 상품이 아닙니다";
     public static final String ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE = "구매하려는 상품이 잔액보다 비쌉니다";
-
+    public static final String ERROR_MESSAGE_ABOUT_OUT_OF_STOCK = "구매하시려는 상품의 재고가 없습니다";
 
     public static final String NEW_LINE = System.lineSeparator();
 

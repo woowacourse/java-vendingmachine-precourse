@@ -1,7 +1,6 @@
 package vendingmachine;
 
-import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE;
-import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE;
+import static vendingmachine.StringConstants.*;
 
 import java.util.Optional;
 
@@ -35,9 +34,10 @@ public class VendingMachine {
 
     public void purchase(String itemNameToPurchase) {
         Item item = findItemToPurchase(itemNameToPurchase);
-        if(items.isInStock(item)) {
-            purchase(item);
-        };
+        if(!items.isInStock(item)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_OUT_OF_STOCK);
+        }
+        purchase(item);
     }
 
     public Coins giveChange() {
