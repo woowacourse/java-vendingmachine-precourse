@@ -1,8 +1,7 @@
 package vendingmachine.view;
 
-import java.util.ArrayList;
-
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Money;
 import vendingmachine.validator.InputValidator;
 
@@ -23,7 +22,7 @@ public class InputView {
 		}
 	}
 
-	public static ArrayList<String> getItemPriceStock() {
+	public static Beverages getItemPriceStock() {
 		while (true) {
 			try {
 				System.out.println(INPUT_ITEM_PRICE_STOCK);
@@ -33,7 +32,6 @@ public class InputView {
 				System.out.println(e.getMessage());
 			}
 		}
-
 	}
 
 	public static Money getUserInputMoney() {

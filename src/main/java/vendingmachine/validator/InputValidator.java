@@ -2,15 +2,19 @@ package vendingmachine.validator;
 
 import java.util.ArrayList;
 
+import vendingmachine.domain.Beverage;
+import vendingmachine.domain.Beverages;
 import vendingmachine.exception.InputException;
 
 public class InputValidator {
-
+	private static final int itemIndex = 0;
+	private static final int priceIndex = 1;
+	private static final int stockIndex = 2;
 	private static final String MONEY_REGEX = "\\d+0";
 	private static final String STOCK_REGEX = "[1-9]+[0-9]*";
 	private static final int MINIMUM_MONEY_SIZE = 100;
 
-	public static ArrayList<String> checkInputForm(String input) {
+	public static Beverages checkInputForm(String input) {
 		ArrayList<String> items = new ArrayList<>();
 		checkSemicolon(input);
 
@@ -20,7 +24,19 @@ public class InputValidator {
 			item = item.substring(1, item.length() - 1);
 			items.add(item);
 		}
-		return items;
+		return splitItem(items);
+	}
+
+	private static Beverages splitItem(ArrayList<String> itemPriceStock) {
+		Beverages beverages = new Beverages();
+		for (String itemInfoList : itemPriceStock) {
+			String[] itemInfo = itemInfoList.split(",");
+			String name = itemInfo[itemIndex];
+			int price = InputValidator.checkPriceForm(itemInfo[priceIndex]);
+			int stock = InputValidator.checkStockForm(itemInfo[stockIndex]);
+			beverages.add(new Beverage(name, price), stock);
+		}
+		return beverages;
 	}
 
 	public static int checkMoneyForm(String input) {
