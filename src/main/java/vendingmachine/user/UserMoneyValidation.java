@@ -1,6 +1,6 @@
 package vendingmachine.user;
 
-public class UserValidation {
+public class UserMoneyValidation {
     public static void isEmpty(String money) {
         if (money.length() == 0) {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NULL);
