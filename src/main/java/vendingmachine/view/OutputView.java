@@ -25,6 +25,7 @@ public class OutputView {
 	}
 
 	public static void printInsertingMoneyRequest() {
+		printNewLine();
 		System.out.println("투입 금액을 입력해 주세요.");
 	}
 

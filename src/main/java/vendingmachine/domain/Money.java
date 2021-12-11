@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 public class Money {
 	private static final String COLON = ":";
-	private static final String INSERTED_REMAINING_AMOUNT = "투입 금액%s %s원";
+	private static final String INSERTED_REMAINING_AMOUNT = "%n투입 금액%s %s원";
 	private int money;
 
 	public Money(int money) {
