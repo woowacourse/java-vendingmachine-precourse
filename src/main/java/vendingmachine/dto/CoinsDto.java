@@ -42,4 +42,8 @@ public class CoinsDto {
 	public int getCoin10Quantity() {
 		return this.coin10Quantity;
 	}
+
+	public int getAllCoinQuantity() {
+		return coin500Quantity + coin100Quantity + coin50Quantity + coin10Quantity;
+	}
 }

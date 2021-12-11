@@ -5,6 +5,8 @@ import vendingmachine.dto.CoinsDto;
 public class OutputView {
 	private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
 
+	private static final int EMPTY_COIN_QUANTITY = 0;
+
 	private static final String COIN_500 = "500원";
 	private static final String COIN_100 = "100원";
 	private static final String COIN_50 = "50원";
@@ -18,6 +20,7 @@ public class OutputView {
 	private static final String INPUT_ITEM_TO_BUY_MESSAGE = "구매할 상품명을 입력해 주세요.";
 	private static final String CHANGE_MESSAGE = "잔돈";
 	private static final String COIN_OUTPUT_FORMAT = "%s - %s개";
+	private static final String NO_CHANGE_MESSAGE = "반환할 잔돈이 없습니다.";
 
 	public static void printError(String message) {
 		System.out.println(ERROR_MESSAGE_PREFIX + message);
@@ -37,10 +40,15 @@ public class OutputView {
 
 	public static void printChange(CoinsDto coinsDto) {
 		System.out.println(CHANGE_MESSAGE);
+
 		printCoinIgnoringZero(COIN_500, coinsDto.getCoin500Quantity());
 		printCoinIgnoringZero(COIN_100, coinsDto.getCoin100Quantity());
 		printCoinIgnoringZero(COIN_50, coinsDto.getCoin50Quantity());
 		printCoinIgnoringZero(COIN_10, coinsDto.getCoin10Quantity());
+
+		if (coinsDto.getAllCoinQuantity() == EMPTY_COIN_QUANTITY) {
+			System.out.println(NO_CHANGE_MESSAGE);
+		}
 	}
 
 	public static void printInputItems() {
