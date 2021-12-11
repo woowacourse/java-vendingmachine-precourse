@@ -3,15 +3,15 @@ package vendingmachine.Service;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
+import vendingmachine.utils.HoldingAmountValidation;
 
 public class InitHoldingCoinsService {
-    ValidationService validationService = new ValidationService();
+    HoldingAmountValidation validation = new HoldingAmountValidation();
 
     public void setHoldingCoins(String holdingAmount) {
-        validationService.isValidHoldingAmount(holdingAmount);
+        validation.isValidHoldingAmount(holdingAmount);
         addPickedCoin(Integer.parseInt(holdingAmount));
     }
-
 
     private void addPickedCoin(int amount) {
         while (amount > 0) {
