@@ -43,11 +43,30 @@ public class Validation {
 		}
 	}
 
-	// 상품 가격이 100 이상 자연수지 않는 경우
+	// 상품의 길이가 3(상품명, 가격, 수량)이 아닌 경우
+	public static void validateProductLength(String[] product) {
+		if(product.length!=3){
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_LENGTH_ERROR.getErrorMessage());
+		}
+	}
 
-	// 상품명이 중복되어 들어오는 경우
+	// 상품 가격이 100 이상 자연수가 아닐 경우
+	public static void validateProductPrice(String price) {
+		for(char c: price.toCharArray()){
+			if(!Character.isDigit(c)) {
+				throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100.getErrorMessage());
+			}
+		}
+
+		if(Integer.parseInt(price) < 100) {
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100.getErrorMessage());
+		}
+	}
 
 	// 상품 수량이 자연수가 아닐 경우
+
+
+	// 상품명이 중복되어 들어오는 경우
 
 	// 구매할 상품명이 목록에 없을 경우
 
