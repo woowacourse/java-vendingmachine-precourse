@@ -14,6 +14,6 @@ public enum Coin {
 
     // 추가 기능 구현
     public int value() {
-        return amount;
+        return this.amount;
     }
 }

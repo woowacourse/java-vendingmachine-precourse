@@ -4,11 +4,15 @@ import static vendingmachine.VendingMachineMain.*;
 
 public class InputValidator {
 
-    public static void isVaildMoney(String moneyValue) {
+    public static void isValidMoney(String moneyValue) {
         // 예외1. 숫자 외의 문자 포함된 경우
         isDigit(moneyValue);
         // 예외2. 10원 단위가 아님
         isMultOf10(moneyValue);
+        // 예외3. 0원 입력
+        if (Integer.parseInt(moneyValue) == 0) {
+            throw new IllegalArgumentException("[ERROR] 0원 입력 에러\n");
+        }
     }
 
     public static void isDigit(String moneyValue) {
@@ -49,7 +53,7 @@ public class InputValidator {
         }
 
         if (i % 5 == 2) { // 가격
-            isVaildMoney(content);
+            isValidMoney(content);
         }
         if (i % 5 == 3) { // 수량
             isDigit(content);
@@ -60,9 +64,6 @@ public class InputValidator {
         if (!name2Product.containsKey(productToBuy)) {
             throw new IllegalArgumentException("[ERROR] 상품의 이름을 확인하세요.");
         }
-//        if (name2Product.get(productToBuy).isSoldOut()) {
-//            throw new IllegalArgumentException("[ERROR] 재고가 없습니다.");
-//        }
         if (userInputMoney < name2Product.get(productToBuy).value()) {
             throw new IllegalArgumentException("[ERROR] 금액이 모자랍니다.");
         }

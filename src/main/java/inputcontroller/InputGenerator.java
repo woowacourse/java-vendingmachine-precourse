@@ -12,7 +12,7 @@ public class InputGenerator {
             try {
                 System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
                 inputText = Console.readLine();
-                InputValidator.isVaildMoney(inputText);
+                InputValidator.isValidMoney(inputText);
                 break;
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
@@ -43,7 +43,7 @@ public class InputGenerator {
             try {
                 System.out.println("\n투입 금액을 입력해 주세요.");
                 String inputText = Console.readLine();
-                InputValidator.isVaildMoney(inputText);
+                InputValidator.isValidMoney(inputText);
                 InputValidator.enough(inputText);
 
                 userInputMoney = Integer.parseInt(inputText);
