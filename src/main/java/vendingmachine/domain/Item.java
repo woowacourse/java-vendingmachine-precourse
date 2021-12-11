@@ -1,14 +1,16 @@
 package vendingmachine.domain;
 
+import static vendingmachine.controller.InputController.*;
+
 public class Item {
 	public String name;
 	public int price;
 	public int count;
 
 	public Item(String[] itemInform) {
-		this.name = itemInform[0];
-		this.price = Integer.parseInt(itemInform[1]);
-		this.count = Integer.parseInt(itemInform[2]);
+		this.name = itemInform[ITEM_NAME_INDEX];
+		this.price = Integer.parseInt(itemInform[ITEM_PRICE_INDEX]);
+		this.count = Integer.parseInt(itemInform[ITEM_COUNT_INDEX]);
 	}
 	public Item(String name, int price, int count) {
 		this.name = name;
