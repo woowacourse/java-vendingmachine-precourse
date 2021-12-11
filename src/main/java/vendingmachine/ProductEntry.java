@@ -4,7 +4,7 @@ public class ProductEntry {
 	private final int price;
 	private int number;
 
-	public ProductEntry(int price, int number) {
+	public ProductEntry(final int price, final int number) {
 		this.price = price;
 		this.number = number;
 	}
@@ -17,7 +17,7 @@ public class ProductEntry {
 		number--;
 	}
 
-	public boolean isAffordable(int money) {
+	public boolean isAffordable(final int money) {
 		return money >= price;
 	}
 

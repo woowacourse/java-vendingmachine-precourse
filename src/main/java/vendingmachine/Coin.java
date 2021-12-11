@@ -27,29 +27,28 @@ public enum Coin {
 		return randomPool.get(Randoms.pickNumberInList(randomPoolIndices));
 	}
 
-	private static List<Coin> getRandomPool(int money) {
+	private static List<Coin> getRandomPool(final int money) {
 		List<Coin> coins = Arrays.asList(Coin.values());
 		return coins.stream().filter(coin -> coin.amount <= money).collect(Collectors.toList());
 	}
 
-	private static List<Integer> getRandomPoolIndices(int length) {
+	private static List<Integer> getRandomPoolIndices(final int length) {
 		List<Integer> randomPoolIndices = new ArrayList<>();
 		for (int i = 0; i < length; i++) {
 			randomPoolIndices.add(i);
 		}
-
 		return randomPoolIndices;
 	}
 
-	public static boolean isSwappableForCoin(int money) {
+	public static boolean isSwappableForCoin(final int money) {
 		return COIN_10.amount <= money;
 	}
 
-	public int subtract(int money) {
+	public int subtract(final int money) {
 		return money - this.amount;
 	}
 
-	public int divide(int money) {
+	public int divide(final int money) {
 		return money / this.amount;
 	}
 }
