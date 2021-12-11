@@ -37,7 +37,7 @@ public class Items {
 
 	public int getQuantity(String itemName) {
 		for (Item item : items) {
-			if (item.getItemName() == itemName) {
+			if (item.getItemName().equals(itemName)) {
 				return item.getQuantity();
 			}
 		}
@@ -46,7 +46,7 @@ public class Items {
 
 	public int getPrice(String itemName) {
 		for (Item item : items) {
-			if (item.getItemName() == itemName) {
+			if (item.getItemName().equals(itemName)) {
 				return item.getPrice();
 			}
 		}

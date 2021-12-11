@@ -7,9 +7,11 @@ import vendingmachine.domain.Items;
 import vendingmachine.domain.Machine;
 import vendingmachine.utils.ItemSeparator;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class MachineController {
 	private InputView inputView = new InputView();
+	private OutputView outputView = new OutputView();
 
 	public void run() {
 		int machineMoney = inputView.enterMachineMoney();
@@ -29,11 +31,17 @@ public class MachineController {
 
 	private void activateMachine(Machine machine) {
 		int inputMoney = inputView.enterInputMoney();
+		sellItems(machine, inputMoney);
+		outputView.printChanges(machine, inputMoney);
+
+	}
+
+	private void sellItems(Machine machine, int inputMoney) {
 		while (inputMoney > machine.getMinPrice() && machine.isStockNotEmpty()) {
 			String buyItem = inputView.enterBuyItem(machine, inputMoney);
 			machine.sellItem(buyItem);
+			inputMoney -= machine.getPrice(buyItem);
 		}
 	}
-
 
 }
