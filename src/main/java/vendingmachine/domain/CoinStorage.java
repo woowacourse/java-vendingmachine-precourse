@@ -3,8 +3,10 @@ package vendingmachine.domain;
 import java.util.EnumMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
+import lombok.Getter;
 import vendingmachine.enums.Coin;
 
+@Getter
 public class CoinStorage {
 	private static final int DEFAULT_QUANTITY = 0;
 

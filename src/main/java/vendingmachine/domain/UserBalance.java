@@ -7,7 +7,7 @@ public class UserBalance {
 		this.userBalance = userBalance;
 	}
 
-	public void deductMoney(int deductValue) {
+	public void deductBalance(int deductValue) {
 		this.userBalance -= deductValue;
 	}
 

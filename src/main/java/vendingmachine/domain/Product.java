@@ -9,4 +9,8 @@ public class Product {
 	private String name;
 	private int price;
 	private int quantity;
+
+	public void reduceQuantity(int reduceValue) {
+		this.quantity -= reduceValue;
+	}
 }
