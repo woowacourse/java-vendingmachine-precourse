@@ -13,6 +13,16 @@ import java.util.stream.Collectors;
 public class Application {
 
     public static void main(String[] args) {
+//        MachineController machineController = new MachineController();
+//        Input input = new Input();
+//        Machine machine = new Machine();
+//        machineController.makeCoins(machine,input.inputMoney());
+//        machineController.makeProductList((machine,"!"));
+//        machine.getCoins().forEach((coin, integer) -> {
+//            System.out.println(coin.getAmount());
+//            System.out.println(integer);
+//        });
+
 
 
     }
