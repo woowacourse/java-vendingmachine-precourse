@@ -8,4 +8,9 @@ public class InputView {
 		System.out.println(Constants.INPUT_MESSAGE_VENDING_MACHINE_PRICE);
 		return Console.readLine();
 	}
+
+	public static String inputProduct() {
+		System.out.println(Constants.INPUT_MESSAGE_PRODUCT);
+		return Console.readLine();
+	}
 }
