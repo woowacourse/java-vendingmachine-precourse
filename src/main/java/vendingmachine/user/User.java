@@ -1,5 +1,9 @@
 package vendingmachine.user;
 
-public class User {
+import camp.nextstep.edu.missionutils.Console;
 
+public class User {
+    public String inputMoney() {
+        return Console.readLine();
+    }
 }
