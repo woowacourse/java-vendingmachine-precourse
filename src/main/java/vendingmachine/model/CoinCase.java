@@ -33,8 +33,9 @@ public class CoinCase {
 
 	public int returnChange(int changeUserWant) {
 		if (count < changeUserWant) {
+			changeUserWant = count;
 			count = 0;
-			return count;
+			return changeUserWant;
 		}
 		count -= changeUserWant;
 		return changeUserWant;
