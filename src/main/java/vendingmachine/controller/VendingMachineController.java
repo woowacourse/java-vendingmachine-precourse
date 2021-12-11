@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Items;
+import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -16,6 +17,17 @@ public class VendingMachineController {
 		OutputView.printHoldingCoinStatus(coins.toString());
 
 		Items items = itemcontroller.giveItems();
+		Money money = giveMoney();
+
 	}
 
+	private Money giveMoney() {
+		try {
+			OutputView.printInsertingMoneyRequest();
+			return new Money(inputView.scanPrice());
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
+			return giveMoney();
+		}
+	}
 }
