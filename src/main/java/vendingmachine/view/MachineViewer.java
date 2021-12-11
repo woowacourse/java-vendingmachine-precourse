@@ -16,6 +16,13 @@ public class MachineViewer {
 	}
 
 	public void showRemainMoney(int money) {
-		System.out.println("\n투입 금액 : " + money);
+		System.out.println("\n투입 금액 : " + money + "원");
+	}
+
+	public void showReturnCoins(HashMap<Integer, Integer> coins) {
+		Arrays.sort(coins.keySet().toArray());
+		for (int coinAmount : coins.keySet()) {
+			System.out.println(Coin.getCoinByAmount(coinAmount).toString() + coins.get(coinAmount) + "개");
+		}
 	}
 }

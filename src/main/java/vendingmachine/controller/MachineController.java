@@ -4,11 +4,13 @@ import vendingmachine.input.CustomerInput;
 import vendingmachine.input.MachineInput;
 import vendingmachine.model.Coin;
 import vendingmachine.model.Product;
+import vendingmachine.util.CoinCalculator;
 import vendingmachine.util.ProductBuilder;
 import vendingmachine.util.RandomCoinSelector;
 import vendingmachine.view.MachineViewer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -45,6 +47,12 @@ public class MachineController {
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+
+	public void returnMoney() {
+		CoinCalculator coinCalculator = new CoinCalculator();
+		HashMap<Integer, Integer> returnCoins = coinCalculator.combineCoinsByGreedy(coins, money);
+		viewer.showReturnCoins(returnCoins);
 	}
 
 	public void sell(String name) {
