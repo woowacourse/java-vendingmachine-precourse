@@ -1,6 +1,7 @@
 package vendingmachine.domain.machine;
 
 import vendingmachine.domain.coin.CoinPocket;
+import vendingmachine.domain.consumer.Consumer;
 import vendingmachine.domain.product.ProductStore;
 import vendingmachine.util.RegexSeparator;
 
@@ -46,4 +47,9 @@ public class VendingMachine {
         return productNameList.stream()
                 .allMatch((productName) -> productStore.hasProduct(productName));
     }
+
+    public int returnChangeAmount(Consumer consumer) {
+        return consumer.getHowMuchBalance(balance);
+    }
+
 }

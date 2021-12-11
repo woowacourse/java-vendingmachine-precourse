@@ -29,4 +29,15 @@ public class Consumer {
     public boolean possibleToBuy(Product product) {
         return product.verifyEnough(balance);
     }
+
+    public int getHowMuchBalance(int machineBalance) {
+        if(isLessThanConsumerBalance(machineBalance)) {
+            return machineBalance;
+        }
+        return balance;
+    }
+
+    private boolean isLessThanConsumerBalance(int machineBalance) {
+        return machineBalance < balance;
+    }
 }
