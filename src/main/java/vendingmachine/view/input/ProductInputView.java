@@ -2,19 +2,18 @@ package vendingmachine.view.input;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Input;
+import vendingmachine.domain.Product;
+import vendingmachine.domain.ProductRepository;
 
 import static vendingmachine.constant.Condition.INDEX_0;
 import static vendingmachine.constant.Condition.LENGTH_1;
 
 public class ProductInputView {
-    private HashMap<String, Integer> productCostMapByName = new HashMap<>();
-    private HashMap<String, Integer> productAmountMapByName = new HashMap<>();
 
     public void inputProducts() {
         while (true) {
@@ -111,9 +110,12 @@ public class ProductInputView {
             throw new IllegalArgumentException();
         }
 
-        if (productAmountMapByName.containsKey(productName)) {
-            print(Input.PRODUCTS_SAME_NAME_ERROR_MESSAGE.getText());
-            throw new IllegalArgumentException();
+        List<Product> products = ProductRepository.getInstance().getProducts();
+        for (Product product : products) {
+            if (product.getName().equals(productName)) {
+                print(Input.PRODUCTS_SAME_NAME_ERROR_MESSAGE.getText());
+                throw new IllegalArgumentException();
+            }
         }
     }
 
@@ -156,10 +158,12 @@ public class ProductInputView {
     }
 
     private void storeProductMap(ArrayList<String> productList) {
-        productAmountMapByName.put(productList.get(Condition.INDEX_PRODUCT_NAME.getNumber()),
-                Integer.parseInt(productList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber())));
-        productCostMapByName.put(productList.get(Condition.INDEX_PRODUCT_NAME.getNumber()),
-                Integer.parseInt(productList.get(Condition.INDEX_PRODUCT_COST.getNumber())));
+        Product product = new Product(productList.get(Condition.INDEX_PRODUCT_NAME.getNumber()),
+                Integer.parseInt(productList.get(Condition.INDEX_PRODUCT_COST.getNumber())),
+                        Integer.parseInt(productList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber())));
+
+        ProductRepository productRepository = ProductRepository.getInstance();
+        productRepository.addProduct(product);
     }
 
     private ArrayList<String> convertProductToList(String[] product) {
