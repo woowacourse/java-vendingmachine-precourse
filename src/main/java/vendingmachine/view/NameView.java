@@ -2,22 +2,21 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constant.Message;
-import vendingmachine.model.Stock;
+import vendingmachine.model.Name;
 
-public class StockView {
+public class NameView {
 
-	public Stock getInput() {
-		System.out.println(Message.INPUT_MESSAGE_STOCK);
-		Stock stock = new Stock();
+	public Name getInput() {
+		System.out.println(Message.INPUT_MESSAGE_NAME);
+		Name name = new Name();
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			stock.set(input);
+			name.set(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());
 			return getInput();
 		}
-		return stock;
+		return name;
 	}
-
 }
