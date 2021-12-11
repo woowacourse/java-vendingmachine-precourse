@@ -22,10 +22,25 @@ public class Coins {
         return totalAmount;
     }
 
+    public void addCoin(Coin coin, int count) {
+        totalAmount += coin.getAmount() * count;
+        remainingCoin.replace(coin, remainingCoin.get(coin) + count);
+    }
 
+    public void removeCoin(Coin coin, int count) {
+        if (count > this.getCoinCount(coin)) {
+            throw new NotEnoughStockException(ErrorMessage.NOT_ENOUGH_STOCK.getCompleteMessage());
+        }
+        totalAmount -= coin.getAmount() * count;
+        remainingCoin.replace(coin, remainingCoin.get(coin) - count);
+    }
 
     public int getCoinCount(Coin coin) {
         return remainingCoin.get(coin);
     }
 
+    public void moveCoin(Coin coin, int count, Coins destCoins) {
+        this.removeCoin(coin, count);
+        destCoins.addCoin(coin, count);
+    }
 }

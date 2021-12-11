@@ -5,6 +5,7 @@ public enum ErrorMessage {
     NO_PRODUCT_MATCH("해당 이름의 상품이 없습니다."),
     NOT_ENOUGH_BALANCE("잔액이 부족합니다."),
     NOT_ENOUGH_STOCK("수량이 부족합니다."),
+    NOT_ENOUGH_COIN("동전 수량이 부족합니다.")
     ;
 
     public static final String ERROR_PREFIX = "[ERROR]";
