@@ -17,10 +17,10 @@ public class ProductRepository {
 		productList.add(product);
 	}
 
-	// public Product findByName(String name) {
-	// 	OrderException.isExistOrder(name, productList);
-	// 	return productList.stream()
-	// 		.filter(product -> name.equals(product.getName()))
-	// 		.findAny().get();
-	// }
+	public Product findByName(String name) {
+		OrderException.isExistOrder(name, productList);
+		return productList.stream()
+			.filter(product -> name.equals(product.getName()))
+			.findAny().get();
+	}
 }

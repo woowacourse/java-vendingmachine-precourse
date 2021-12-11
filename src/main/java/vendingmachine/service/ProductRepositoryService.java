@@ -59,8 +59,8 @@ public class ProductRepositoryService {
 	}
 
 	public void update(String order, int money) {
-		// Product orderedProduct = productRepository.findByName(order);
-		// OrderException.isProductLeft(orderedProduct);
-		// OrderException.isEnoughToOrder(orderedProduct, money);
+		Product orderedProduct = productRepository.findByName(order);
+		OrderException.isProductLeft(orderedProduct);
+		OrderException.isEnoughToOrder(orderedProduct, money);
 	}
 }
