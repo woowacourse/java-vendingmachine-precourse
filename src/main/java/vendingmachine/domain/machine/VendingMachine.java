@@ -59,6 +59,11 @@ public class VendingMachine {
                 .allMatch((productName) -> productStore.hasProduct(productName));
     }
 
+    public int returnChangeAmount(Consumer consumer) {
+        return consumer.getHowMuchBalance(balance);
+    }
+
+
     public void makeChange(int changeAmount) {
         coinPocket.makeCoinCountMin(changeAmount);
     }
