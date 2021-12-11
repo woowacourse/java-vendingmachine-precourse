@@ -1,11 +1,15 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.ArrayList;
 
 public class User {
     private String input;
     private String ERROR_MESSAGE;
     private int machineBalance;
+    private int price;
+    private int quantity;
+    ArrayList<String> goods = new ArrayList<>();
 
     public boolean inputMachineBalance() {
         try {
@@ -56,6 +60,68 @@ public class User {
     public int getMachineBalance() {
         return machineBalance;
     }
+    public boolean inputGoods() {
+        try {
+            input();
+            checkCorrectGoods();
+        } catch (Exception e){
+            System.out.println(ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    private void checkCorrectGoods() throws IllegalArgumentException {
+        checkBlank(input);
+        goods.clear();
+        for (String temp : input.split(String.valueOf(';'))) {
+            goods.add(temp);
+        }
+        for (String temp : goods) {
+            checkCorrectProduct(temp);
+        }
 
-
+    }
+    private void checkCorrectProduct(String temp) throws IllegalArgumentException {
+        checkSquareBrackets(temp);
+        temp = temp.substring(1,temp.length()-1);
+        String[] product = temp.split(",");
+        checkProductElement(product);
+        checkGoodsPrice(product[1]);
+        checkGoodsQuantity(product[2]);
+    }
+    private void checkSquareBrackets(String temp) throws IllegalArgumentException {
+        if (!(temp.charAt(0) == '[' || temp.charAt(temp.length()-1) == ']')) {
+            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_INPUT_SQUARE_BRACKETS;
+            throw new IllegalArgumentException();
+        }
+    }
+    private void checkProductElement(String[] temps) throws IllegalArgumentException {
+        if (temps.length != 3) {
+            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_INPUT_COMMA;
+            throw new IllegalArgumentException();
+        }
+        for (int i = 0; i < 3; i++) {
+            if (temps[i].equals("")) {
+                ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD;
+                throw new IllegalArgumentException();
+            }
+        }
+    }
+    private void checkGoodsPrice(String temp) throws IllegalArgumentException {
+        checkCharacter(temp);
+        price = Integer.parseInt(temp);
+        if (price < 100) {
+            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_PRICE;
+            throw new IllegalArgumentException();
+        }
+        checkMultipleOfTen(price);
+    }
+    private void checkGoodsQuantity(String temp) throws IllegalArgumentException {
+        checkCharacter(temp);
+        quantity = Integer.parseInt(temp);
+        if (quantity < 0) {
+            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_QUANTITY;
+            throw new IllegalArgumentException();
+        }
+    }
 }

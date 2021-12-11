@@ -14,6 +14,7 @@ public class Machine {
         coinsInMachine();
         coinHashMap();
         showMachineCoins();
+        Goods();
     }
 
     private void Balance() {
@@ -21,6 +22,15 @@ public class Machine {
         while (!check) {
             System.out.println(Message.INPUT_MACHINE_BALANCE);
             check = user.inputMachineBalance();
+        }
+    }
+
+    private void Goods() {
+        boolean check = false;
+        System.out.println();
+        while (!check) {
+            System.out.println(Message.INPUT_MACHINE_Goods);
+            check = user.inputGoods();
         }
     }
 

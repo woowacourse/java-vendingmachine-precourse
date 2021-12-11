@@ -7,6 +7,12 @@ public class Message {
     public static final String ERROR_MACHINE_BALANCE_NEGATIVE_NUMBER = "[ERROR] 음수는 입력이 불가능합니다.";
     public static final String ERROR_MACHINE_BALANCE_MULTIPLE_OF_TEN = "[ERROR] 10의 배수가 아닌 수는 입력이 불가능합니다.";
     public static final String SHOW_MACHINE_COINS = "자판기가 보유한 동전";
+    public static final String INPUT_MACHINE_Goods = "상품명과 가격, 수량을 입력해 주세요.";
+    public static final String ERROR_MACHINE_Goods_INVAILD_INPUT_SQUARE_BRACKETS = "[ERROR] 잘못된 입력입니다. 상품정보는 대괄호로 시작하고 끝나야 합니다. (eg. [상품명,가격,수량])";
+    public static final String ERROR_MACHINE_Goods_INVAILD_INPUT_COMMA = "[ERROR] 잘못된 입력입니다. 상품명, 가격, 수량은 쉼표로 구분되어야 합니다. (eg. [상품명,가격,수량])";
+    public static final String ERROR_MACHINE_Goods_INVAILD = "[ERROR] 잘못된 입력입니다. (eg. [상품명,가격,수량])";
+    public static final String ERROR_MACHINE_Goods_INVAILD_PRICE = "[ERROR] 잘못된 입력입니다. 상품의 가격은 100원 이상이여야 합니다.";
+    public static final String ERROR_MACHINE_Goods_INVAILD_QUANTITY = "[ERROR] 잘못된 입력입니다. 상품의 수량은 0개 이상이여야 합니다.";
 
 
 }
