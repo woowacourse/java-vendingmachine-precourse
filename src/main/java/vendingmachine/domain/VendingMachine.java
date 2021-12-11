@@ -30,14 +30,16 @@ public class VendingMachine {
 
 	public void buy(String menuName) {
 		Menu menu = menus.findMenuByName(menuName);
-		if (isLessThanInputMoney(menu)) {
-			useInputMoney(menu);
-			menu.sold();
-		}
+		validateMenuPrice(menu);
+
+		useInputMoney(menu);
+		menu.sold();
 	}
 
-	private void useInputMoney(Menu menu) {
-		inputMoney -= menu.getPrice();
+	private void validateMenuPrice(Menu menu) {
+		if (!isLessThanInputMoney(menu)) {
+			throw new IllegalArgumentException("[ERROR] 투입 금액 이하의 메뉴를 선택해주세요.");
+		}
 	}
 
 	private boolean isLessThanInputMoney(Menu menu) {
@@ -46,6 +48,10 @@ public class VendingMachine {
 
 	public boolean canBuy() {
 		return menus.isAnyMenuLeft() && isInputMoneyGreaterThanOrEqualToMinMenuPrice();
+	}
+
+	private void useInputMoney(Menu menu) {
+		inputMoney -= menu.getPrice();
 	}
 
 	private boolean isInputMoneyGreaterThanOrEqualToMinMenuPrice() {
