@@ -1,15 +1,11 @@
 package vendingmachine.management;
 
-import java.util.Arrays;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
-import vendingmachine.management.validation.CheckCommodityFormat;
-import vendingmachine.management.validation.CheckCommodityName;
 import vendingmachine.management.validation.CheckCommodityPrice;
 import vendingmachine.management.validation.CheckCommodityQuantity;
 
