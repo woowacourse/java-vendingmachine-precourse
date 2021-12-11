@@ -16,7 +16,7 @@ public enum Coin {
         return amount;
     }
 
-    public Coin getType(int amount) throws MyIllegalArgumentException {
+    public static Coin getType(int amount) throws MyIllegalArgumentException {
         switch (amount) {
             case 10:
                 return COIN_10;
