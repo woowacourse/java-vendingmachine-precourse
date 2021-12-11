@@ -3,7 +3,7 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.message.Ask;
 
-public class CustomerInput {
+public class MachineInput {
 	public int getTotalMachineChanges() {
 		System.out.println(Ask.ENTER_MACHINE_CHANGES);
 		String input = Console.readLine();
