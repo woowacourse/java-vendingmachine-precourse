@@ -1,6 +1,5 @@
 package vendingmachine.util;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -32,16 +31,15 @@ public class InputValidator {
     private static final String EMPTY_PRODUCT_PRICE = "상품 가격이 비어있습니다.";
     private static final String EMPTY_PRODUCT_QUANTITY = "상품 수량이 비어있습니다.";
 
-    public static int validateAmountInput(String input) {
+    public static void validateAmountInput(String input) {
         if (!input.matches(ALLOWED_AMOUNT_INPUT_FORMAT)) {
             throw new IllegalArgumentException(ERROR_MESSAGE + INVALID_AMOUNT_INPUT_MESSAGE + RETRY_MESSAGE);
         }
-
-        return Integer.parseInt(input);
     }
 
-    public static List<List<String>> validateProductInput(String input) {
-        return validateEachProduct(validateProductList(input));
+    public static void validateProductInput(String input) {
+        List<String> productList = validateProductList(input);
+        validateEachProduct(productList);
     }
 
     private static List<String> validateProductList(String input) {
@@ -62,39 +60,32 @@ public class InputValidator {
         return Arrays.asList(input.split(lastCharacter));
     }
 
-    private static List<List<String>> validateEachProduct(List<String> productList) {
-        List<List<String>> products = new ArrayList<>();
+    private static void validateEachProduct(List<String> productList) {
         for (String product : productList) {
-            products.add(validateProductDetails(product.substring(INDEX_ONE, product.length() - INDEX_ONE)));
+            validateProductDetails(product.substring(INDEX_ONE, product.length() - INDEX_ONE));
         }
-
-        return products;
     }
 
-    private static List<String> validateProductDetails(String productDetails) {
+    private static void validateProductDetails(String productDetails) {
         List<String> productDetailList = validateLastCharacter(productDetails, COMMA, INVALID_EACH_PRODUCT_INPUT_MESSAGE);
         if (productDetailList.size() != PRODUCT_DETAIL_SIZE) {
             throw new IllegalArgumentException(ERROR_MESSAGE + INVALID_PRODUCT_COMPONENT_SIZE_MESSAGE + RETRY_MESSAGE);
         }
-        return validateEachDetail(productDetailList);
+        validateEachDetail(productDetailList);
     }
 
-    private static List<String> validateEachDetail(List<String> productDetailList) {
-        List<String> product = new ArrayList<>();
-        product.add(validateEachDetail(productDetailList.get(INDEX_ZERO), EMPTY_PRODUCT_NAME,
-                ALLOWED_PRODUCT_NAME_FORMAT, INVALID_PRODUCT_NAME));
-        product.add(validateEachDetail(productDetailList.get(INDEX_ONE), EMPTY_PRODUCT_PRICE,
-                ALLOWED_PRODUCT_PRICE_FORMAT, INVALID_PRODUCT_PRICE));
-        product.add(validateEachDetail(productDetailList.get(INDEX_TWO), EMPTY_PRODUCT_QUANTITY,
-                ALLOWED_PRODUCT_QUANTITY_FORMAT, INVALID_PRODUCT_QUANTITY));
-
-        return product;
+    private static void validateEachDetail(List<String> productDetailList) {
+        validateEachDetail(productDetailList.get(INDEX_ZERO), EMPTY_PRODUCT_NAME,
+                ALLOWED_PRODUCT_NAME_FORMAT, INVALID_PRODUCT_NAME);
+        validateEachDetail(productDetailList.get(INDEX_ONE), EMPTY_PRODUCT_PRICE,
+                ALLOWED_PRODUCT_PRICE_FORMAT, INVALID_PRODUCT_PRICE);
+        validateEachDetail(productDetailList.get(INDEX_TWO), EMPTY_PRODUCT_QUANTITY,
+                ALLOWED_PRODUCT_QUANTITY_FORMAT, INVALID_PRODUCT_QUANTITY);
     }
 
-    private static String validateEachDetail(String name, String emptyMessage, String format, String invalidMessage) {
+    private static void validateEachDetail(String name, String emptyMessage, String format, String invalidMessage) {
         validateEmpty(name, emptyMessage);
         validateRegex(name, format, invalidMessage);
-        return name;
     }
 
     public static void validateEmpty(String detail, String givenMessage) {

@@ -7,8 +7,6 @@ import vendingmachine.util.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import java.util.List;
-
 public class MachineController {
     private final VendingMachine vendingMachine;
     private final MachineService machineService;
@@ -49,16 +47,17 @@ public class MachineController {
 
     private void requestInsertProduct() {
         InputView.printInputProductMessage();
-        List<List<String>> productList;
+        String inputProducts;
         while (true) {
             try {
-                productList = InputValidator.validateProductInput(InputView.getInput());
+                inputProducts = InputView.getInput();
+                InputValidator.validateProductInput(inputProducts);
                 break;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
-        machineService.saveProducts(productList);
+        machineService.saveProducts(inputProducts);
     }
 
     private void requestInsertUserAmount() {
@@ -69,7 +68,9 @@ public class MachineController {
     private int inputValidAmount() {
         while (true) {
             try {
-                return InputValidator.validateAmountInput(InputView.getInput());
+                String input = InputView.getInput();
+                InputValidator.validateAmountInput(input);
+                return Integer.parseInt(input);
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }

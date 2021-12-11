@@ -3,8 +3,6 @@ package vendingmachine.service;
 import vendingmachine.model.Products;
 import vendingmachine.model.VendingMachine;
 
-import java.util.List;
-
 public class MachineService {
     private final VendingMachine vendingMachine;
 
@@ -21,8 +19,8 @@ public class MachineService {
         vendingMachine.setInitialAmount(amount);
     }
 
-    public void saveProducts(List<List<String>> productList) {
-        Products products = new Products(productList);
+    public void saveProducts(String inputProducts) {
+        Products products = new Products(inputProducts);
         vendingMachine.setProducts(products);
     }
 

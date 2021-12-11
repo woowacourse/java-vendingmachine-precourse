@@ -1,19 +1,34 @@
 package vendingmachine.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Products {
     private static final int DEFAULT_VALUE = 0;
+    private static final int START_INDEX = 1;
+    private static final String SEMI_COLON = ";";
+    private static final String COMMA = ",";
 
     private final List<Product> products;
 
-    public Products(List<List<String>> products) {
-        this.products = products.stream()
+    public Products(String products) {
+        this.products = processProductsInput(products).stream()
                 .map(Product::new)
                 .collect(Collectors.toList());
     }
+
+    private List<List<String>> processProductsInput(String products) {
+        List<List<String>> processedProducts = new ArrayList<>();
+        for (String product : products.split(SEMI_COLON)) {
+            processedProducts.add(Arrays.asList(product.substring(START_INDEX, product.length()-START_INDEX).split(COMMA)));
+        }
+
+        return processedProducts;
+    }
+
 
     public boolean exist(String productName) {
         return products.stream().anyMatch(product -> product.getName().equals(productName));
