@@ -17,7 +17,7 @@ public class RandomCoinSelector {
 		return Coin.valueOf(randomAmount);
 	}
 
-	public static Coin selectCoinCheaperThanValue(int value) {
+	public static Coin selectCoinCheaperThanOrEqualToValue(int value) {
 		List<Coin> coinListCheaperThanValue = getCoinListCheaperThanOrEqualToValue(value);
 		int randomAmout = Randoms.pickNumberInList(getAmountList(coinListCheaperThanValue));
 		return Coin.valueOf(randomAmout);

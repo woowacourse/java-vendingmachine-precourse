@@ -1,6 +1,10 @@
 package vendingmachine.domain;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import vendingmachine.exceptions.NotDivisibleByMinPriceCoinException;
+import vendingmachine.utils.RandomCoinSelector;
 
 public class VendingMachine {
 	private static final String ERROR_NOT_INTEGER = "[ERROR] 보유 금액은 정수입니다.";
@@ -14,7 +18,8 @@ public class VendingMachine {
 
 	public static VendingMachine of(String initalLeftMoney) {
 		validateInitialLeftMoney(initalLeftMoney);
-		Coins coins = null;
+		int leftMoney = Integer.parseInt(initalLeftMoney);
+		Coins coins = generateCoinsAccordingToRule(leftMoney);
 		return new VendingMachine(coins);
 	}
 
@@ -43,5 +48,27 @@ public class VendingMachine {
 			throw new NotDivisibleByMinPriceCoinException(ERROR_NOT_DIVISIBLE_BY_MIN_PRICE_COIN);
 		}
 	}
+
+	private static Coins generateCoinsAccordingToRule(int leftMoney) {
+		Map<Coin, Integer> coinMap = initCoinMap();
+
+		while (leftMoney != 0) {
+			Coin coin = RandomCoinSelector.selectCoinCheaperThanOrEqualToValue(leftMoney);
+			coinMap.put(coin, coinMap.get(coin) + 1);
+
+			leftMoney -= coin.getAmount();
+		}
+
+		return new Coins(coinMap);
+	}
+
+	private static Map<Coin, Integer> initCoinMap() {
+		Map<Coin, Integer> coinMap = new HashMap<>();
+		for (Coin coin : Coin.values()) {
+			coinMap.put(coin, 0);
+		}
+		return coinMap;
+	}
+
 }
 
