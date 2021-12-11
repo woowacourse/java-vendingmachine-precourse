@@ -6,4 +6,8 @@ public class User {
     public String inputMoney() {
         return Console.readLine();
     }
+
+    public String inputGoods() {
+        return Console.readLine();
+    }
 }
