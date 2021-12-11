@@ -20,7 +20,6 @@ public class ProductInfo {
         String noParenthesis = stripParenthesis(rawString);
         String[] arguments = noParenthesis.split(ARGUMENT_SEPARATOR);
 
-
         validateNumberArguments(arguments);
         name = arguments[NAME_INDEX];
         price = Integer.parseInt(arguments[PRICE_INDEX]);
@@ -46,6 +45,7 @@ public class ProductInfo {
     private void validateNumberArguments(String[] arguments) {
         assertArgumentsSize(arguments);
         Validator.assertNumberFormat(arguments[PRICE_INDEX]);
+        assertPriceConstraints(arguments[PRICE_INDEX]);
         Validator.assertNumberFormat(arguments[COUNT_INDEX]);
     }
 
@@ -57,11 +57,9 @@ public class ProductInfo {
 
     private void assertPriceConstraints(String input) {
         int price = Integer.parseInt(input);
-
         if (price < 100 || price % 10 != 0) {
             throw new IllegalArgumentException("[ERROR] 상품 가격은 100원부터 시작하며 10으로 나누어떨어져야 합니다. 현재 가격 = " + price);
         }
-
     }
 
     public String getName() {
