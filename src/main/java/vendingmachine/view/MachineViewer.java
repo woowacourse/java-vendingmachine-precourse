@@ -14,4 +14,8 @@ public class MachineViewer {
 				.sorted(Comparator.comparing(Enum::ordinal))
 				.forEach(coin -> System.out.println(coin.toString() + coinBox.get(coin) + "개"));
 	}
+
+	public void showRemainMoney(int money) {
+		System.out.println("\n투입 금액 : " + money);
+	}
 }

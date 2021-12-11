@@ -6,7 +6,6 @@ import vendingmachine.model.Coin;
 import vendingmachine.model.Product;
 import vendingmachine.util.ProductBuilder;
 import vendingmachine.util.RandomCoinSelector;
-import vendingmachine.util.Validator;
 import vendingmachine.view.MachineViewer;
 
 import java.util.ArrayList;
@@ -30,6 +29,10 @@ public class MachineController {
 		viewer.showCoinBoxStatus(coins);
 		setupSellingProducts();
 		money = customerInput.getInsertedMoney();
+	}
+
+	public void sell() {
+		viewer.showRemainMoney(money);
 	}
 
 	private void setupChangeCoins() {
