@@ -36,7 +36,10 @@ public class ManagementService {
     
     public static Commodity toCommodity(String input) {
         String [] components = input.split(",");
+        String name = components[COMMODITY_NAME];
+        int price = Integer.parseInt(components[COMMODITY_PRICE]);
+        int quantity = Integer.parseInt(components[COMMODITY_QUANTITY]);
         
-        return new Commodity(components[COMMODITY_NAME],Integer.parseInt(components[COMMODITY_PRICE]),Integer.parseInt(components[COMMODITY_QUANTITY]));
+        return new Commodity(name,price,quantity);
     }   
 }
