@@ -1,6 +1,9 @@
 package vendingmachine.dto;
 
+import java.util.Optional;
+
 import vendingmachine.Notification;
+import vendingmachine.product.Product;
 
 public class ProductDto {
 	private static final int PRODUCT_COMPOSITION_SIZE = 3;
@@ -19,17 +22,18 @@ public class ProductDto {
 		}
 	}
 
-	private void convertProduct(String product) {
+	private Product convertProduct(String product) {
 		product = removePattern(product);
 		String[] productElements = product.split(",");
 		validateSize(productElements.length);
-		createProduct(productElements);
+		return createProduct(productElements);
 	}
 
-	private void createProduct(String[] productElements) {
+	private Product createProduct(String[] productElements) {
 		String name = productElements[0];
 		String price = productElements[1];
 		String quantity = productElements[2];
+		return Product.of(name, price, quantity);
 	}
 
 	private String removePattern(String product) {
