@@ -12,4 +12,8 @@ public class Constant {
 	public static int INDEX_OF_PRODUCT_PRICE = 1;
 	public static int INDEX_OF_PRODUCT_QUANTITY = 2;
 	public static final String REGEX_OF_PRODUCT_INPUT = "\\[.+,\\d{3,},\\d+]";
+	public static final String WON_REPRESENT_UNIT = "원";
+	public static final String COIN_REPRESENT_UNIT = "개";
+	public static final int NO_COIN = 0;
+	public static final int ONE_COIN = 1;
 }

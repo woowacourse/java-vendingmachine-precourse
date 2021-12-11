@@ -45,9 +45,9 @@ public class CoinStore {
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (int amountOfCoin : Coin.getAmountListOfCoin()) {
-			stringBuilder.append(amountOfCoin).append("원");
+			stringBuilder.append(amountOfCoin).append(WON_REPRESENT_UNIT);
 			stringBuilder.append(DELIMITER_OF_COIN_STORE_STATUS_REPRESENT);
-			stringBuilder.append(coins.get(Coin.findCoin(amountOfCoin))).append("개");
+			stringBuilder.append(coins.get(Coin.findCoin(amountOfCoin))).append(COIN_REPRESENT_UNIT);
 			stringBuilder.append("\n");
 		}
 		return stringBuilder.toString();
@@ -60,14 +60,14 @@ public class CoinStore {
 				return;
 			}
 			amount = biggestChangeCoin.getChangeAmount(amount);
-			changeCoins.put(biggestChangeCoin, changeCoins.get(biggestChangeCoin) + 1);
+			changeCoins.put(biggestChangeCoin, changeCoins.get(biggestChangeCoin) + ONE_COIN);
 		}
 	}
 
 	private Coin findBiggestPossibleChangeCoin() {
 		for (Coin coin : coins.keySet()) {
-			if (coins.get(coin) > 0) {
-				coins.put(coin, coins.get(coin) - 1);
+			if (coins.get(coin) > NO_COIN) {
+				coins.put(coin, coins.get(coin) - ONE_COIN);
 				return coin;
 			}
 		}
@@ -78,10 +78,10 @@ public class CoinStore {
 		makeChangeCoins(amount);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Coin amountOfCoin : changeCoins.keySet()) {
-			if (changeCoins.get(amountOfCoin) > 0) {
-				stringBuilder.append(amountOfCoin.getAmount()).append("원");
+			if (changeCoins.get(amountOfCoin) > NO_COIN) {
+				stringBuilder.append(amountOfCoin.toString());
 				stringBuilder.append(DELIMITER_OF_COIN_STORE_STATUS_REPRESENT);
-				stringBuilder.append(changeCoins.get(amountOfCoin)).append("개");
+				stringBuilder.append(changeCoins.get(amountOfCoin)).append(COIN_REPRESENT_UNIT);
 				stringBuilder.append("\n");
 			}
 		}

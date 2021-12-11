@@ -48,4 +48,9 @@ public enum Coin {
 	public int getChangeAmount(int amount) {
 		return amount - getAmount();
 	}
+
+	@Override
+	public String toString() {
+		return getAmount() + WON_REPRESENT_UNIT;
+	}
 }
