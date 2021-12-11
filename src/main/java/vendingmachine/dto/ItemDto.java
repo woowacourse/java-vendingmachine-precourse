@@ -3,9 +3,9 @@ package vendingmachine.dto;
 import vendingmachine.domain.item.Item;
 
 public class ItemDto {
-	private String itemName;
-	private int itemPrice;
-	private int itemQuantity;
+	private final String itemName;
+	private final int itemPrice;
+	private final int itemQuantity;
 
 	private ItemDto(String itemName, int itemPrice, int itemQuantity) {
 		this.itemName = itemName;

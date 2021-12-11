@@ -1,7 +1,7 @@
 package vendingmachine.utils;
 
 public class NumberUtils {
-	private final static int NATURAL_NUMBER_STANDARD = 0;
+	private static final int NATURAL_NUMBER_STANDARD = 0;
 	private static final int REMAINDER = 0;
 
 	public static boolean isNaturalNumber(int number) {

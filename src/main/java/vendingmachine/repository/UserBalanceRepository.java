@@ -3,7 +3,7 @@ package vendingmachine.repository;
 import vendingmachine.domain.userbalance.UserBalance;
 
 public class UserBalanceRepository {
-	private static UserBalanceRepository userBalanceRepository = new UserBalanceRepository();
+	private static final UserBalanceRepository userBalanceRepository = new UserBalanceRepository();
 	private UserBalance userBalance;
 
 	private UserBalanceRepository() {

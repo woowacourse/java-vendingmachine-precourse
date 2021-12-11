@@ -15,7 +15,7 @@ import vendingmachine.repository.ItemsRepository;
 import vendingmachine.repository.UserBalanceRepository;
 
 public class ItemsService {
-	private static ItemsService itemsService = new ItemsService();
+	private static final ItemsService itemsService = new ItemsService();
 	private final ItemsRepository itemsRepository = ItemsRepository.getInstance();
 	private final UserBalanceRepository userBalanceRepository = UserBalanceRepository.getInstance();
 

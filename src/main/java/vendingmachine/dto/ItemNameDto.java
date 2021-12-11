@@ -3,7 +3,7 @@ package vendingmachine.dto;
 import vendingmachine.domain.item.ItemName;
 
 public class ItemNameDto {
-	private String itemName;
+	private final String itemName;
 
 	private ItemNameDto(String itemName) {
 		this.itemName = itemName;
