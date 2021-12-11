@@ -29,4 +29,9 @@ public class ProductManager {
 		// TODO : 이름으로 상품을 찾고 해당 상품의 재고가 1이상인지 확인한다.
 		return false;
 	}
+
+	private Product searchProduct(String name) {
+		// TODO : 이름으로 상품을 찾고 반환한다.
+		return null;
+	}
 }

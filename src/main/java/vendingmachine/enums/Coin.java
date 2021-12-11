@@ -1,5 +1,8 @@
 package vendingmachine.enums;
 
+import java.util.Arrays;
+import java.util.List;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -14,5 +17,18 @@ public enum Coin {
 
     public int getAmount() {
         return this.amount;
+    }
+
+    public static Coin searchWithAmount(int amount) {
+        for (Coin coin : Coin.values()) {
+            if(coin.amount == amount) {
+                return coin;
+            }
+        }
+        throw new IllegalArgumentException();
+    }
+
+    public static List<Integer> getAmountList() {
+        return Arrays.asList(COIN_500.amount, COIN_100.amount, COIN_50.amount, COIN_10.amount);
     }
 }

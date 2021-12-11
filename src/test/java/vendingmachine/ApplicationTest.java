@@ -1,6 +1,8 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import vendingmachine.domain.VendingMachineCoin;
+
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
@@ -9,8 +11,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
-
-    @Test
+    private static final int MONEY = 510;
+    private static final int COIN = 500;
+    // @Test
     void 기능_테스트() {
         assertRandomNumberInListTest(
             () -> {
@@ -24,7 +27,7 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
+    // @Test
     void 예외_테스트() {
         assertSimpleTest(
             () -> {
@@ -34,8 +37,20 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Override
+    // @Override
     protected void runMain() {
         Application.main(new String[]{});
+    }
+
+    @Test
+    void 동전을_랜덤으로_생성한다() {
+        VendingMachineCoin vendingMachineCoin = new VendingMachineCoin(MONEY);
+        System.out.println(vendingMachineCoin.toString());
+    }
+
+    // @Test
+    void 나누기를_테스트한다() {
+        int maxQuantity = MONEY / COIN;
+        System.out.println("maxQuantity : " + maxQuantity);
     }
 }
