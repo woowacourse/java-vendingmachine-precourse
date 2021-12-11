@@ -3,6 +3,7 @@ package vendingmachine.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VendingMachine {
 
@@ -49,7 +50,8 @@ public class VendingMachine {
 	}
 
 	public boolean isReturnChangeCondition() {
-		return getLowestProductPrice() > remainInsertMoney || isSoldOut();
+		System.out.println(products.stream().map(Product::getNumber).collect(Collectors.toList()));
+		return getLowestProductPrice() > remainInsertMoney || isSoldOut() || !hasProductsUserCanBuy();
 	}
 
 	private boolean isSoldOut() {
@@ -64,6 +66,13 @@ public class VendingMachine {
 			.mapToInt(Product::getPrice)
 			.min()
 			.getAsInt();
+	}
+
+	private boolean hasProductsUserCanBuy() {
+		return products.stream()
+			.filter(product -> product.getNumber() > INITIAL_VALUE)
+			.filter(product -> product.getPrice() < remainInsertMoney)
+			.count() != INITIAL_VALUE;
 	}
 
 	private void useMoneyToBuy(Product product) {
