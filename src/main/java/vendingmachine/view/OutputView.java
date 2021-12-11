@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.dto.CoinsOutputDto;
+import vendingmachine.dto.CoinsDto;
 
 public class OutputView {
 	private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
@@ -27,34 +27,33 @@ public class OutputView {
 		System.out.println(INPUT_VENDING_MACHINE_BALANCE_MESSAGE);
 	}
 
-	public static void printVendingMachineHoldingCoins(CoinsOutputDto coinsOutputDto) {
+	public static void printVendingMachineHoldingCoins(CoinsDto coinsDto) {
 		System.out.println(VENDING_MACHINE_HOLDING_COINS_MESSAGE);
-		printCoin(COIN_500, coinsOutputDto.getCoin500Amount());
-		printCoin(COIN_100, coinsOutputDto.getCoin100Amount());
-		printCoin(COIN_50, coinsOutputDto.getCoin50Amount());
-		printCoin(COIN_10, coinsOutputDto.getCoin10Amount());
+		printCoin(COIN_500, coinsDto.getCoin500Quantity());
+		printCoin(COIN_100, coinsDto.getCoin100Quantity());
+		printCoin(COIN_50, coinsDto.getCoin50Quantity());
+		printCoin(COIN_10, coinsDto.getCoin10Quantity());
 	}
 
-	public static void printChange(CoinsOutputDto coinsOutputDto) {
+	public static void printChange(CoinsDto coinsDto) {
 		System.out.println(CHANGE_MESSAGE);
-		printCoinIgnoringZero(COIN_500, coinsOutputDto.getCoin500Amount());
-		printCoinIgnoringZero(COIN_100, coinsOutputDto.getCoin100Amount());
-		printCoinIgnoringZero(COIN_50, coinsOutputDto.getCoin50Amount());
-		printCoinIgnoringZero(COIN_10, coinsOutputDto.getCoin10Amount());
+		printCoinIgnoringZero(COIN_500, coinsDto.getCoin500Quantity());
+		printCoinIgnoringZero(COIN_100, coinsDto.getCoin100Quantity());
+		printCoinIgnoringZero(COIN_50, coinsDto.getCoin50Quantity());
+		printCoinIgnoringZero(COIN_10, coinsDto.getCoin10Quantity());
 	}
 
 	public static void printInputItems() {
 		System.out.println(INPUT_ITEMS_MESSAGE);
 	}
 
-	// TODO: DTO 를 전달받아 출력하는 방법 고민
-	private static void printCoin(String type, int amount) {
-		System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
+	private static void printCoin(String type, int coinQuantity) {
+		System.out.println(String.format(COIN_OUTPUT_FORMAT, type, coinQuantity));
 	}
 
-	private static void printCoinIgnoringZero(String type, int amount) {
-		if (amount > 0) {
-			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, amount));
+	private static void printCoinIgnoringZero(String type, int coinQuantity) {
+		if (coinQuantity > 0) {
+			System.out.println(String.format(COIN_OUTPUT_FORMAT, type, coinQuantity));
 		}
 	}
 
@@ -62,7 +61,6 @@ public class OutputView {
 		System.out.println(INPUT_USER_BALANCE_MESSAGE);
 	}
 
-	// TODO: DTO 를 전달받아 출력하는 방법 고민
 	public static void printCurrentUserBalance(int userBalance) {
 		System.out.println(String.format(CURRENT_USER_BALANCE_FORMAT, userBalance));
 	}

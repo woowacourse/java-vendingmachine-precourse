@@ -11,11 +11,9 @@ public class ItemPrice implements Comparable<ItemPrice> {
 		this.price = price;
 	}
 
-	public static ItemPrice from(String price) {
+	public static ItemPrice from(int price) {
 		ItemValidator.validateItemPrice(price);
-
-		int parsedNumber = Integer.parseInt(price);
-		return new ItemPrice(parsedNumber);
+		return new ItemPrice(price);
 	}
 
 	public int toInt() {

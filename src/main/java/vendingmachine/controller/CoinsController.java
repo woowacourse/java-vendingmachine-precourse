@@ -1,23 +1,29 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.coins.Coins;
 import vendingmachine.domain.userbalance.UserBalance;
-import vendingmachine.dto.CoinsOutputDto;
-import vendingmachine.dto.VendingMachineBalanceDto;
+import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
+import vendingmachine.dto.CoinsDto;
+import vendingmachine.exception.NotNumericException;
 import vendingmachine.service.CoinsService;
 import vendingmachine.service.UserBalanceService;
+import vendingmachine.utils.StringUtils;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class CoinsController {
-	private final CoinsService coinsService = CoinsService.getInstance();
-	private final UserBalanceService userBalanceService = UserBalanceService.getInstance();
+	private final CoinsService coinsService = new CoinsService();
+	private final UserBalanceService userBalanceService = new UserBalanceService();
 
 	public void generateCoins() {
-		VendingMachineBalanceDto vendingMachineBalanceDto = InputView.inputVendingMachineBalance();
+		String input = InputView.inputVendingMachineBalance();
+
+		if (!StringUtils.isNumeric(input)) {
+			throw new NotNumericException();
+		}
+
 		try {
-			Coins coins = vendingMachineBalanceDto.toCoinsEntity();
-			coinsService.initCoins(coins);
+			VendingMachineBalance vendingMachineBalance = VendingMachineBalance.from(Integer.parseInt(input));
+			coinsService.generateRandomCoins(vendingMachineBalance);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			generateCoins();
@@ -25,17 +31,13 @@ public class CoinsController {
 	}
 
 	public void printGeneratedCoins() {
-		Coins coins = coinsService.getCurrentCoins();
-		OutputView.printVendingMachineHoldingCoins(
-			CoinsOutputDto.from(coins)
-		);
+		CoinsDto coinsDto = coinsService.getCurrentCoins();
+		OutputView.printVendingMachineHoldingCoins(coinsDto);
 	}
 
 	public void printChange() {
 		UserBalance userBalance = userBalanceService.getUserBalance();
-		Coins change = coinsService.getChange(userBalance);
-		OutputView.printChange(
-			CoinsOutputDto.from(change)
-		);
+		CoinsDto coinsDto = coinsService.getChange(userBalance);
+		OutputView.printChange(coinsDto);
 	}
 }
