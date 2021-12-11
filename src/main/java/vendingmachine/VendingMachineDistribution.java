@@ -4,22 +4,22 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import static models.Coin.*;
 import static vendingmachine.VendingMachineMain.coin2Num;
-import static vendingmachine.VendingMachineMain.totalCoin;
+import static vendingmachine.VendingMachineMain.totalAmount;
 
 public class VendingMachineDistribution {
     public static void distributeRandomly() {
-        int remains = totalCoin;
+        int remains = totalAmount;
 
-        if (COIN_500.value() != totalCoin) {
+        if (COIN_500.value() != totalAmount) {
             remains = allocTo500(remains);
         }
-        if (COIN_100.value() != totalCoin) {
+        if (COIN_100.value() != totalAmount) {
             remains = allocTo100(remains);
         }
-        if (COIN_50.value() != totalCoin) {
+        if (COIN_50.value() != totalAmount) {
             remains = allocTo50(remains);
         }
-        if (COIN_10.value() != totalCoin) {
+        if (COIN_10.value() != totalAmount) {
             allocTo10(remains);
         }
     }
