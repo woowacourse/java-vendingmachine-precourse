@@ -13,5 +13,6 @@ public class VendingMachineController {
 
     private void setupVendingMachine() {
         this.asset = InputView.getInitialAsset();
+        asset.generateRandomCoins();
     }
 }

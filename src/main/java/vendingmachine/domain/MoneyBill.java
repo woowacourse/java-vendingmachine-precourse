@@ -17,4 +17,8 @@ public class MoneyBill {
             System.out.println(e.getMessage());
         }
     }
+
+    public boolean isZero() {
+        return this.amount == 0;
+    }
 }

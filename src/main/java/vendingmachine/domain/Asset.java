@@ -15,4 +15,10 @@ public class Asset {
         this.moneyBill = new MoneyBill(amount);
         this.coins = new Coins();
     }
+
+    public void generateRandomCoins() {
+        while (!moneyBill.isZero()) {
+
+        }
+    }
 }
