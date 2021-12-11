@@ -3,7 +3,6 @@ package vendingmachine.model;
 import java.util.Arrays;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.util.Constant;
 
 public enum Coin {
 	COIN_500("500원", 500),
@@ -38,6 +37,7 @@ public enum Coin {
 	public String getUnit() {
 		return this.unit;
 	}
+
 	public int getAmount() {
 		return this.amount;
 	}
