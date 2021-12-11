@@ -6,7 +6,7 @@ public class InputValidator {
         // 예외1. 숫자 외의 문자 포함된 경우
         isDigit(moneyValue);
         // 예외2. 10원 단위가 아님
-        isMult10(moneyValue);
+        isMultOf10(moneyValue);
     }
 
     public static void isDigit(String moneyValue) {
@@ -18,7 +18,7 @@ public class InputValidator {
         }
     }
 
-    public static void isMult10(String moneyValue) {
+    public static void isMultOf10(String moneyValue) {
         int number = Integer.parseInt(moneyValue);
         if (number % 10 != 0) {
             throw new IllegalArgumentException("[ERROR] 10원 단위의 정수를 입력하세요.");
