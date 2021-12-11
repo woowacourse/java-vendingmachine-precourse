@@ -19,6 +19,8 @@ public class MachineService {
 	private List<Coin> coinList;
 	private ProductRepository productRepository;
 
+	private int userMoney;
+
 	public MachineService(DepositRepository depositRepository, ProductRepository productRepository) {
 		this.depositRepository = depositRepository;
 		this.productRepository = productRepository;
@@ -69,5 +71,9 @@ public class MachineService {
 		int quantity = Integer.parseInt(infoList.get(2));
 
 		return new Product(name, price, quantity);
+	}
+
+	public void setMoney(String inputMoney){
+		this.userMoney = Integer.parseInt(inputMoney);
 	}
 }

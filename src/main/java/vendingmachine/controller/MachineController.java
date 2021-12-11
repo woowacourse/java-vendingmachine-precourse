@@ -28,4 +28,9 @@ public class MachineController {
 		String input = inputProductList();
 		List<String> inputList = Arrays.asList(input.split(";", -1));
 	}
+
+	public void setMoney() {
+		String input = inputMoney();
+		machineService.setMoney(input);
+	}
 }
