@@ -1,7 +1,5 @@
 package vendingmachine.view;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 import vendingmachine.Coin;
 
