@@ -36,6 +36,7 @@ public class VendingMachineController {
         outputView.printNewLine();
         outputView.printPurChasingCost(purchasingCost);
 
+        inputView.inputPurchasingProductName();
     }
 
 

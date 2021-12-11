@@ -19,4 +19,9 @@ public class InputView {
         return Console.readLine();
     }
 
+    public String inputPurchasingProductName(){
+        System.out.println(Messages.INPUT_PURCHASING_PRODUCT_NAME.getInputMessage());
+        return inputValue();
+    }
+
 }
