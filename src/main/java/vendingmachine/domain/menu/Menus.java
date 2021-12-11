@@ -25,7 +25,7 @@ public class Menus {
 	}
 
 	private static void validateMenuInfos(String menuInfos) {
-		if (!menuInfos.matches("([^;];)*[^;]")) {
+		if (!menuInfos.matches("([^;]+;)*[^;]+")) {
 			throw new IllegalArgumentException(ERROR_DELIMITERS);
 		}
 	}
