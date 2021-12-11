@@ -44,6 +44,10 @@ public class Money {
 		return this.amount >= money.amount;
 	}
 
+	public boolean isSpendable(int amount) {
+		return this.amount >= amount;
+	}
+
 	public int getAmount() {
 		return this.amount;
 	}
