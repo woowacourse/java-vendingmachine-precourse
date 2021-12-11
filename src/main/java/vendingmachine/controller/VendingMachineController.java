@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import java.util.ArrayList;
 
+import vendingmachine.model.Customer;
 import vendingmachine.model.receiver.MoneyReceiver;
 import vendingmachine.model.receiver.ProductInfoReceiver;
 import vendingmachine.model.service.CoinService;
@@ -23,8 +24,8 @@ public class VendingMachineController {
 
 		inputProductInfo();
 
-		// Customer customer = inputMoneyForBuy();
-		//
+		Customer customer = inputMoneyForBuy();
+
 		// int restMoney = buyProduct(customer);
 		//
 		// giveChange(restMoney);
@@ -51,5 +52,14 @@ public class VendingMachineController {
 		productService.addProducts(splitInfoArrList);
 
 		vendingMachineView.makeEmptyLine();
+	}
+
+	private Customer inputMoneyForBuy() {
+		vendingMachineView.inputMoneyForBuy();
+
+		int moneyForBuy = moneyReceiver.receive();
+		vendingMachineView.makeEmptyLine();
+
+		return new Customer(moneyForBuy);
 	}
 }

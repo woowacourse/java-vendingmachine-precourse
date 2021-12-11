@@ -13,6 +13,7 @@ public class VendingMachineView {
 	public static final String COIN_COUNT_UNIT = "개";
 	public static final String HYPHEN = " - ";
 	public static final String INPUT_PRODUCT_INFO_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
+	public static final String INPUT_MONEY_FOR_BUY_MESSAGE = "투입 금액을 입력해 주세요.";
 
 	public void inputMoneyForChange() {
 		System.out.println(INPUT_MONEY_FOR_CHANGE_MESSAGE);
@@ -31,6 +32,10 @@ public class VendingMachineView {
 
 	public void inputProductInfo() {
 		System.out.println(INPUT_PRODUCT_INFO_MESSAGE);
+	}
+
+	public void inputMoneyForBuy() {
+		System.out.println(INPUT_MONEY_FOR_BUY_MESSAGE);
 	}
 
 	public void makeEmptyLine() {
