@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public enum Coin {
     COIN_500(500),
@@ -24,5 +25,12 @@ public enum Coin {
         return Arrays.stream(values())
             .map(coin -> coin.getAmount())
             .collect(Collectors.toList());
+    }
+
+    public static Coin findCoinByAmount(int coinAmount) {
+        return Arrays.stream(values())
+            .filter(coin -> coin.getAmount() == coinAmount)
+            .findFirst()
+            .get();
     }
 }
