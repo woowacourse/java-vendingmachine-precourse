@@ -3,6 +3,7 @@ package vendingmachine.domain.machine;
 import vendingmachine.domain.machine.coin.storage.CoinStorage;
 import vendingmachine.domain.machine.product.Product;
 import vendingmachine.domain.machine.product.storage.ProductStorage;
+import vendingmachine.domain.user.Balance;
 
 public class Machine {
 
@@ -11,6 +12,11 @@ public class Machine {
 
 	public void saveProduct(Product product) {
 		productStorage.save(product);
+	}
+
+	public void purchaseProduct(Balance balance, String productName) {
+		Product product = productStorage.findOne(productName);
+		product.sell(balance);
 	}
 
 }

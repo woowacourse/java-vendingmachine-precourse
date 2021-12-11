@@ -16,15 +16,25 @@ public class Product {
 		this.quantity = quantity;
 	}
 
-	public void checkSellable(Balance balance) {
-		checkMoneyIsEnough(balance.getMoney());
+	public void sell(Balance balance) {
+		checkSellable(balance.getMoney());
+		decreaseQuantity();
+		balance.withdraw(this.price);
+	}
+
+	public void checkSellable(int money) {
+		checkMoneyIsEnough(money);
 		checkProductIsSoldOut();
 	}
 
 	private void checkMoneyIsEnough(int money) {
-		if (this.price > money) {
+		if (isNotEnoughMoney(money)) {
 			throw new MoneyIsNotEnoughMessageException();
 		}
+	}
+
+	private boolean isNotEnoughMoney(int money) {
+		return (this.price > money);
 	}
 
 	private void checkProductIsSoldOut() {
@@ -34,19 +44,15 @@ public class Product {
 	}
 
 	public boolean isSoldOut() {
-		return !isNotSoldOut();
+		return (this.quantity == 0);
 	}
 
-	public boolean isNotSoldOut() {
-		return (this.quantity > 0);
+	private void decreaseQuantity() {
+		this.quantity--;
 	}
 
 	public String getName() {
 		return this.name;
-	}
-
-	public int getPrice() {
-		return this.price;
 	}
 
 }
