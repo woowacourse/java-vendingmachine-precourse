@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.utils.ExceptionMessage.*;
+import static vendingmachine.utils.Validate.*;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ public class Product {
 	private int quantity;
 
 	public Product(List<String> productToString) {
+		validateProductPrice(Integer.parseInt(productToString.get(INDEX_OF_PRODUCT_PRICE)));
 		this.name = productToString.get(INDEX_OF_PRODUCT_NAME);
 		this.price = Integer.parseInt(productToString.get(INDEX_OF_PRODUCT_PRICE));
 		this.quantity = Integer.parseInt(productToString.get(INDEX_OF_PRODUCT_QUANTITY));
