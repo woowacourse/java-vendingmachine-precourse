@@ -5,8 +5,8 @@
     - [ ] run thread   
     - [ ] buy
 - [ ] ProductManager   
-    - [ ] constructor   
-    - [ ] addProduct
+    - [x] constructor   
+    - [x] addProduct
     - [ ] removeProduct
 - [ ] CashManager   
     - [ ] return changes
