@@ -14,7 +14,7 @@ public class InputValidator {
 		return Integer.parseInt(input);
 	}
 
-	public static void isZero(int input) {
+	public static void isZeroMoney(int input) {
 		if (input < 10) {
 			throw new IllegalArgumentException();
 		}
