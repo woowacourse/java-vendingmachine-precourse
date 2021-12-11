@@ -33,6 +33,10 @@ public class CashManager {
         return remainCash;
     }
 
+    public void setRemainCash(int remainCash) {
+        this.remainCash = remainCash;
+    }
+
     public void withdraw(int amount) throws MyIllegalArgumentException {
         if (remainCash < amount) {
             throw new MyIllegalArgumentException(
