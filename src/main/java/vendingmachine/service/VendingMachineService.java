@@ -52,16 +52,31 @@ public class VendingMachineService {
 
     public void start(){
         int balance = vendingMachineValidation.inputAmountValidation();
-        while(balance > 0){
+        while(true){
+            System.out.println("투입금액 : " + balance);
             try{
-                System.out.println("투입금액 : " + balance);
+                if(!balanceCheck(balance)) {
+                    //잔돈출력 메소드
+                    break;
+                }
                 System.out.println("구매할 상품명을 입력하세요");
                 String order = InputView.input();
                 balance = buyProduct(balance, order);
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    private boolean balanceCheck(int balance){
+        if(balance < vendingMachineRepository.findMinPrice()){
+            return false;
+        }
+        List<Integer> quantities = vendingMachineRepository.findAllQuantity();
+        if(quantities.stream().mapToInt(Integer::intValue).sum() == 0){
+            return false;
+        }
+        return true;
     }
 
     public int buyProduct(int amount, String name){

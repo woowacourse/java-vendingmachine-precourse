@@ -20,7 +20,7 @@ public class Product {
     }
 
     public void subQuantity() {
+        // quantity가 0일경우 예외
         this.quantity -= 1;
-        System.out.println(this.quantity);
     }
 }

@@ -4,6 +4,7 @@ import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,5 +23,24 @@ public class VendingMachineRepository {
                 .findAny()
                 .orElseThrow(()->new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT));
         return findProduct;
+    }
+
+    public int findMinPrice(){
+        List<Product> products = vendingMachine.getProducts();
+        return products.stream()
+                .mapToInt(product -> product.getPrice())
+                .min()
+                .getAsInt();
+    }
+
+    public List<Product> findAll(){
+       return vendingMachine.getProducts();
+    }
+
+    public List<Integer> findAllQuantity(){
+        List<Product> products = vendingMachine.getProducts();
+        return products.stream()
+                .map(Product::getPrice)
+                .collect(Collectors.toList());
     }
 }
