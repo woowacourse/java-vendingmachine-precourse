@@ -6,7 +6,6 @@ import static vendingmachine.view.OutputView.*;
 
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private final VendingMachine vendingMachine;
@@ -17,22 +16,20 @@ public class VendingMachineController {
 	}
 
 	public void run() {
-		printMessageToGetAmountMoneyOfVendingMachine();
+
 		int totalChanges = inputTotalAmountMoneyOfVendingMachine();
 		vendingMachine.createChanges(totalChanges);
 		printChangesVendingMachine(vendingMachine);
 
-		printMessageToGetInformationOfProducts();
 		String productInfo = inputInformationOfProducts();
 		vendingMachine.createProductList(productInfo);
 
-		printMessageToGetInputMoney();
 		String tempInputMoney = inputMoneyToPutInVendingMachine();
 		vendingMachine.createInputMoney(Integer.parseInt(tempInputMoney));
 		printCurrentInputMoney(vendingMachine);
 
-		printMessageToGetProductNameToBuy();
 		String productName = inputProductNameToBuy();
 		vendingMachine.sellProduct(productName);
+
 	}
 }
