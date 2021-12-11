@@ -1,5 +1,6 @@
 HELP.md
 .gradle
+
 build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
@@ -30,3 +31,6 @@ out/
 
 ### VS Code ###
 .vscode/
+
+### MAC ###
+.DS_Store
