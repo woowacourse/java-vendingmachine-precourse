@@ -4,6 +4,7 @@ import static vendingmachine.Constant.*;
 
 import java.util.ArrayList;
 
+import vendingmachine.domain.VendingMachineChecker;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.utils.StringUtil;
 import vendingmachine.view.InputView;
@@ -26,32 +27,27 @@ public class VendingMachineController {
         try {
             String userMoneyInput = InputView.inputUserMoney();
             vendingMachineService.putUserMoney(userMoneyInput);
-            buyProductsUntilEnd();
+            buyProductsUntilEnd(VendingMachineChecker.START);
         } catch (IllegalArgumentException e) {
             OutputView.showErrorMessage(e);
             useVendingMachine();
         }
     }
 
-    private void buyProductsUntilEnd() {
-        do {
+    private VendingMachineChecker buyProductsUntilEnd(VendingMachineChecker checker) {
+        while (checker == VendingMachineChecker.START) {
             String productName = InputView.inputBuyingProduct();
-            System.out.println(productName);
-            System.out.println(productName.equals(EXIT_CODE));
             if (productName.equals(EXIT_CODE)) {
-                return;
+                return buyProductsUntilEnd(VendingMachineChecker.END);
             }
-            buyProduct(productName);
-        } while (vendingMachineService.isContinue());
-    }
-
-    private void buyProduct(String productName) {
-        try {
-            vendingMachineService.sellProduct(productName);
-        } catch (IllegalArgumentException e) {
-            OutputView.showErrorMessage(e);
-            buyProductsUntilEnd();
+            try {
+                checker = vendingMachineService.sellProduct(productName);
+            } catch (IllegalArgumentException e) {
+                OutputView.showErrorMessage(e);
+                return buyProductsUntilEnd(checker);
+            }
         }
+        return checker;
     }
 
     private void initializeByAdmin() {

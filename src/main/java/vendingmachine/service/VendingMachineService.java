@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import vendingmachine.domain.Price;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachineChecker;
 import vendingmachine.repository.CoinRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.utils.CoinGenerator;
@@ -55,18 +56,19 @@ public class VendingMachineService {
         OutputView.showUserMoney(userMoney);
     }
 
-    public void sellProduct(String productName) {
+    public VendingMachineChecker sellProduct(String productName) {
         validateProductExist(productName);
         int productPrice = productRepository.takeout(productName,userMoney);
         userMoney.use(productPrice);
         OutputView.showUserMoney(userMoney);
+        return isContinue();
     }
 
-    public boolean isContinue() {
+    public VendingMachineChecker isContinue() {
         if (productRepository.cantBuyBecauseOfNoMoney(userMoney) || productRepository.hasNoQuantity()) {
-            return false;
+            return VendingMachineChecker.END;
         }
-        return true;
+        return VendingMachineChecker.START;
     }
 
     private void validateProductExist(String productName) {
