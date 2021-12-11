@@ -13,4 +13,9 @@ public class VendingMachineAccount {
 		coinCount = VendingMachineAccountService.setRandomCoins(account);
 	}
 
+	public void printCoinCount() {
+		for (Coin coin : coinCount.keySet()) {
+			System.out.println(coin.getAmount() + "원 - " + coinCount.get(coin) + "개");
+		}
+	}
 }
