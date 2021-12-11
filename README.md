@@ -15,3 +15,4 @@
     - [x] return changes
 - [x] Coin   
 - [x] MyIllegalArgumentException
+- [ ] Validator
