@@ -14,12 +14,21 @@ public class ProductBuilder {
 	public Product makeProductFromInfo(String rawInfo) {
 		String[] info = rawInfo.replace(LEFT_BRACKET, "")
 				.replace(RIGHT_BRACKET, "").split(INFO_DELIM);
-		if (!Validator.isOnlyNums(info[INFO_PRICE_INDEX])) {
+		validatePrice(info[INFO_PRICE_INDEX]);
+		validateStock(info[INFO_STOCK_INDEX]);
+		return new Product(info[INFO_NAME_INDEX], Integer.parseInt(info[INFO_PRICE_INDEX]), Integer.parseInt(info[INFO_STOCK_INDEX]));
+	}
+
+	private void validatePrice(String priceString) {
+		if (!Validator.isOnlyNums(priceString)) {
 			throw new IllegalArgumentException(Error.NOT_ONLY_NUMS_IN_PRICE);
 		}
-		if (!Validator.isOnlyNums(info[INFO_STOCK_INDEX])) {
+		Validator.rightPrice(priceString);
+	}
+
+	private void validateStock(String stockString) {
+		if (!Validator.isOnlyNums(stockString)) {
 			throw new IllegalArgumentException(Error.NOT_ONLY_NUMS_IN_STOCK);
 		}
-		return new Product(info[INFO_NAME_INDEX], Integer.parseInt(info[INFO_PRICE_INDEX]), Integer.parseInt(info[INFO_STOCK_INDEX]));
 	}
 }
