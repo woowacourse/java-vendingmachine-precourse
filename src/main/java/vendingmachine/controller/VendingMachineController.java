@@ -1,10 +1,13 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.VendingMachine;
+import vendingmachine.utils.RandomGenerator;
 import vendingmachine.view.InputView;
 
 public class VendingMachineController {
 
 	public static void run() {
-		InputView.getHoldingAmount();
+		VendingMachine vendingMachine = new VendingMachine(
+			RandomGenerator.getHoldingCoin((InputView.getHoldingAmount())));
 	}
 }
