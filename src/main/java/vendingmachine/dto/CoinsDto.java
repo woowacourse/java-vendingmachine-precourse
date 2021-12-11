@@ -7,10 +7,10 @@ import vendingmachine.domain.coin.CoinQuantity;
 
 // TODO: 장황한 변수 선언과 사용을 개선할 방법이 있을지 고민 필요
 public class CoinsDto {
-	int coin500Quantity = 0;
-	int coin100Quantity = 0;
-	int coin50Quantity = 0;
-	int coin10Quantity = 0;
+	int coin500Quantity;
+	int coin100Quantity;
+	int coin50Quantity;
+	int coin10Quantity;
 
 	private CoinsDto(int coin500Quantity, int coin100Quantity, int coin50Quantity, int coin10Quantity) {
 		this.coin500Quantity = coin500Quantity;
