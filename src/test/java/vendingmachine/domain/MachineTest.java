@@ -8,6 +8,6 @@ class MachineTest {
 	@Test
 	void 잔돈_생성_테스트() {
 		machine.setCoins(450);
-		System.out.println(machine.getCoinCount());
+		System.out.println(machine.getSortedCoinCount());
 	}
 }

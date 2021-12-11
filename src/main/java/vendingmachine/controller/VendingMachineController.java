@@ -14,8 +14,10 @@ public class VendingMachineController {
 			String changes = view.inputChanges();
 			if (validator.isValidChanges(changes)) {
 				machine.setCoins(Integer.parseInt(changes));
-				return;
+				break;
 			}
 		}
+		view.printChanges(machine.getSortedCoinCount());
 	}
+
 }

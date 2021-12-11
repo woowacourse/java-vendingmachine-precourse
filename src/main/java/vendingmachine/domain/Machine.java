@@ -1,11 +1,21 @@
 package vendingmachine.domain;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Machine {
-	private HashMap<Integer, Integer> coinCount = new HashMap<>();
+	private Map<Integer, Integer> coinCount = new HashMap<>();
+
+	public Machine() {
+		for (Integer i : Coin.getCoinList()) {
+			coinCount.put(i, 0);
+		}
+	}
 
 	public void setCoins(int changes) {
 		while (changes != 0) {
@@ -13,20 +23,15 @@ public class Machine {
 			if (changes - pick < 0) {
 				continue;
 			}
-			addCoin(pick);
+			coinCount.put(pick, coinCount.get(pick) + 1);
 			changes -= pick;
 		}
 	}
 
-	private void addCoin(int pick) {
-		if (coinCount.containsKey(pick)) {
-			coinCount.put(pick, coinCount.get(pick) + 1);
-			return;
-		}
-		coinCount.put(pick, 1);
-	}
-
-	public HashMap<Integer, Integer> getCoinCount() {
-		return coinCount;
+	public Map<Integer, Integer> getSortedCoinCount() {
+		Map<Integer, Integer> sortedCoinCount = coinCount.entrySet().stream()
+			.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
+		return sortedCoinCount;
 	}
 }

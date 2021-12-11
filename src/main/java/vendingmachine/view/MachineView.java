@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import java.util.Map;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class MachineView {
@@ -9,4 +11,13 @@ public class MachineView {
 		System.out.println(INPUT_CHANGES_MESSAGE);
 		return Console.readLine();
 	}
+
+	public void printChanges(Map<Integer, Integer> changesInfo) {
+		System.out.println();
+		System.out.println("자판기가 보유한 동전");
+		for (int coin : changesInfo.keySet()) {
+			System.out.println(coin + "원 - " + changesInfo.get(coin) + "개");
+		}
+	}
+
 }
