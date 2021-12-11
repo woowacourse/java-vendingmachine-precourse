@@ -7,6 +7,7 @@ import vendingmachine.model.receiver.MoneyReceiver;
 import vendingmachine.model.receiver.NameForBuyReceiver;
 import vendingmachine.model.receiver.ProductInfoReceiver;
 import vendingmachine.model.service.CoinService;
+import vendingmachine.model.service.CustomerService;
 import vendingmachine.model.service.ProductService;
 import vendingmachine.view.VendingMachineView;
 
@@ -18,6 +19,7 @@ public class VendingMachineController {
 	NameForBuyReceiver nameForBuyReceiver = new NameForBuyReceiver();
 	CoinService coinService = new CoinService();
 	ProductService productService = new ProductService();
+	CustomerService customerService = new CustomerService();
 
 	public void run() {
 		inputMoneyForChange();
@@ -70,10 +72,10 @@ public class VendingMachineController {
 			vendingMachineView.buyProduct(customer);
 
 			String name = nameForBuyReceiver.receive();
-			// if (!customerService.buyProduct(customer, name)) {
-			// 	vendingMachineView.makeEmptyLine();
-			// 	break;
-			// }
+			if (!customerService.buyProduct(customer, name)) {
+				vendingMachineView.makeEmptyLine();
+				break;
+			}
 			vendingMachineView.makeEmptyLine();
 		}
 
