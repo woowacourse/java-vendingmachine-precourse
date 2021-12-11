@@ -25,10 +25,12 @@ public class OutputView {
 	}
 
 	public static void printError(IllegalArgumentException IAE) {
-		System.out.println(IAE.getMessage());
+		printNewLine();
+		System.out.print(IAE.getMessage());
 	}
 
 	public static void askVendingMachineAmount() {
+		printNewLine();
 		System.out.println(ASK_VENDING_MACHINE_AMOUNT);
 	}
 
@@ -63,15 +65,17 @@ public class OutputView {
 
 	public static void printInsertedMoney(VendingMachine vendingMachine) {
 		printNewLine();
-		System.out.println(
+		System.out.print(
 			NOTICE_INSERTED_MONEY + vendingMachine.getRemainInsertMoney() + KOREAN_CURRENCY);
 	}
 
 	public static void askProductToBuy() {
+		printNewLine();
 		System.out.println(ASK_PRODUCT_NAME);
 	}
 
 	public static void printChanges(Map<Integer, Integer> changes) {
+		printNewLine();
 		System.out.println(CHANGE);
 		changes.entrySet()
 			.stream()

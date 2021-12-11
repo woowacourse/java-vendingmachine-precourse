@@ -67,8 +67,8 @@ public class ExceptionUtils {
 		if (!validateProductInVendingMachine(name, products)) {
 			throw new IllegalArgumentException((ERROR_HEADER + NOT_IN_VENDING_MACHINE));
 		}
-		if (!validateExpensiveProduct(name, vendingMachine.getRemainInsertMoney(), products)) {
-			throw new IllegalArgumentException(ERROR_HEADER + INVALID_EXPENSIVE_PRODUCT);
+		for (Product product : products) {
+			validateExpensiveProduct(name, product, vendingMachine.getRemainInsertMoney());
 		}
 	}
 
@@ -117,15 +117,11 @@ public class ExceptionUtils {
 			.contains(inputProduct);
 	}
 
-	private static boolean validateExpensiveProduct(String inputProduct, int remainInsertMoney,
-		List<Product> products) {
-		for (Product product : products) {
-			if (Objects.equals(product.getName(), inputProduct)) {
-				if (product.getPrice() <= remainInsertMoney) {
-					return true;
-				}
+	private static void validateExpensiveProduct(String inputProduct, Product product,  int remainInsertMoney) {
+		if (Objects.equals(product.getName(), inputProduct)) {
+			if (product.getPrice() > remainInsertMoney) {
+				throw new IllegalArgumentException(ERROR_HEADER + INVALID_EXPENSIVE_PRODUCT);
 			}
 		}
-		return false;
 	}
 }
