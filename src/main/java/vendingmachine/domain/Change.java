@@ -23,6 +23,9 @@ public class Change {
 
 		while (!money.isSame(tmpMoney)) {
 			int random = Randoms.pickNumberInList(Coin.getList());
+			if (random == money.getTotal()) {
+				continue;
+			}
 			if (money.isSmaller(tmpMoney + random)) {
 				continue;
 			}
