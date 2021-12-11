@@ -39,7 +39,7 @@ public class ExceptionController {
 
 	public static void isNumberOfInfo3(String[] input) {
 		if (input.length != 3) {
-			throw new IllegalArgumentException(Constant.Error_IS_NOT_3_INFO);
+			throw new IllegalArgumentException(Constant.ERROR_IS_NOT_3_INFO);
 		}
 	}
 }
