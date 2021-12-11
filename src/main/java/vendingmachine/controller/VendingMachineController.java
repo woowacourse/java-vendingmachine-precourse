@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import vendingmachine.model.receiver.MoneyReceiver;
 import vendingmachine.model.receiver.ProductInfoReceiver;
 import vendingmachine.model.service.CoinService;
+import vendingmachine.model.service.ProductService;
 import vendingmachine.view.VendingMachineView;
 
 public class VendingMachineController {
@@ -13,6 +14,7 @@ public class VendingMachineController {
 	MoneyReceiver moneyReceiver = new MoneyReceiver();
 	ProductInfoReceiver productInfoReceiver = new ProductInfoReceiver();
 	CoinService coinService = new CoinService();
+	ProductService productService = new ProductService();
 
 	public void run() {
 		inputMoneyForChange();
@@ -46,7 +48,7 @@ public class VendingMachineController {
 		vendingMachineView.inputProductInfo();
 
 		ArrayList<String[]> splitInfoArrList = productInfoReceiver.receive();
-		// productService.addProducts(splitInfoArrList);
+		productService.addProducts(splitInfoArrList);
 
 		vendingMachineView.makeEmptyLine();
 	}
