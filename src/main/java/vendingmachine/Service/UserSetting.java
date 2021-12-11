@@ -2,7 +2,7 @@ package vendingmachine.Service;
 
 import vendingmachine.Model.User;
 import vendingmachine.SystemMessage.NoticeMessage;
-import vendingmachine.Validator.Validator;
+import vendingmachine.Validator.*;
 import vendingmachine.View.*;
 
 public class UserSetting {
@@ -24,7 +24,7 @@ public class UserSetting {
         outputView.print(NoticeMessage.ASK_MONEY_INPUT_MESSAGE);
         do {
             input = inputView.getInput();
-        } while (!Validator.isValidateMoney(input));
+        } while (!MoneyValidator.isValidateMoney(input));
         return Integer.parseInt(input);
     }
 }

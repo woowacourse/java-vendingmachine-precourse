@@ -2,7 +2,7 @@ package vendingmachine.Service;
 
 import vendingmachine.Model.*;
 import vendingmachine.SystemMessage.NoticeMessage;
-import vendingmachine.Validator.Validator;
+import vendingmachine.Validator.*;
 import vendingmachine.View.*;
 
 public class Transaction {
@@ -31,7 +31,7 @@ public class Transaction {
         System.out.println(NoticeMessage.ASK_DRINK_NAME_MESSAGE);
         do {
             chosenDrink = getUserChoice();
-        } while (!Validator.isRemained(chosenDrink));
+        } while (!TransactionValidator.isRemained(chosenDrink));
 
         chosenDrink.subtractStock();
         user.pay(chosenDrink);
@@ -41,7 +41,7 @@ public class Transaction {
         String userChoice;
         do {
             userChoice = inputView.getInput();
-        } while (!Validator.isValidateChoice(userChoice, vendingMachine));
+        } while (!TransactionValidator.isValidateChoice(userChoice, vendingMachine));
         return vendingMachine.findDrinkWithName(userChoice);
     }
 

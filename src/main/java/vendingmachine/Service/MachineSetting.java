@@ -3,7 +3,7 @@ package vendingmachine.Service;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Model.*;
 import vendingmachine.SystemMessage.NoticeMessage;
-import vendingmachine.Validator.Validator;
+import vendingmachine.Validator.*;
 import vendingmachine.View.*;
 
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class MachineSetting {
         outputView.print(NoticeMessage.ASK_BALANCE_INPUT_MESSAGE);
         do {
             input = inputView.getInput();
-        } while (!Validator.isValidateMoney(input));
+        } while (!MoneyValidator.isValidateMoney(input));
         return Integer.parseInt(input);
     }
 
@@ -72,7 +72,7 @@ public class MachineSetting {
         outputView.print(NoticeMessage.ASK_DRINK_LIST_MESSAGE);
         do {
             input = inputView.getInput();
-        } while (!Validator.isValidateDrinkList(input));
+        } while (!DrinkListValidator.isValidateDrinkList(input));
         String[] drinks = input.split(";");
         for (String drink : drinks) {
             drinkList.add(getParsedDrinkInfo(drink));
