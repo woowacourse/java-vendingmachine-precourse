@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.Coin;
+import vendingmachine.domain.coin.util.CoinRandomProvider;
 import vendingmachine.domain.consumer.Consumer;
 import vendingmachine.domain.machine.VendingMachine;
 import vendingmachine.util.IOProvider;
@@ -19,6 +20,7 @@ public class OrderController {
 
     public static void doShopping() {
         boolean keepShopping = true;
+        vendingMachine.fillCoinsAsBalanceAmount(new CoinRandomProvider());
 
         while (keepShopping) {
             consumer.buy(vendingMachine.getProduct(IOProvider.readProductName()));
@@ -30,11 +32,12 @@ public class OrderController {
 
     private static void returnChange() {
         EnumSet<Coin> coinEnumSet = EnumSet.of(Coin.COIN_10, Coin.COIN_50, Coin.COIN_100, Coin.COIN_500);
-        vendingMachine.makeChange();
+
+        vendingMachine.makeChange(vendingMachine.returnChangeAmount(consumer));
+
         coinEnumSet.stream()
                 .filter((coin) -> coin.hasCountForChange())
                 .forEach((coin) -> {
-                    System.out.println("in");
                     IOProvider.printChangeEachCoin(coin);
                 });
     }
