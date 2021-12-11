@@ -34,7 +34,7 @@ public enum Coin {
 		return null;
 	}
 
-	private int getAmount() {
+	public int getAmount() {
 		return amount;
 	}
 }

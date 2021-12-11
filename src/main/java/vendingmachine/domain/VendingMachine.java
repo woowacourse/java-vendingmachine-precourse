@@ -56,6 +56,10 @@ public class VendingMachine {
 		return coins.getCoins();
 	}
 
+	public Map<Coin, Integer> getChangeable() {
+		return coins.getChangeableCoins(balance);
+	}
+
 	public int getBalance() {
 		return balance.getBalance();
 	}
