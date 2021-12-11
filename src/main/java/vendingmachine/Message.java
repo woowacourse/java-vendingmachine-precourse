@@ -6,6 +6,6 @@ public class Message {
     }
 
     public void printInputNumber() {
-        System.out.println("[ERROR] 0 이상의 숫자를 입력해주세요.");
+        System.out.println("[ERROR] 10으로 나누어 떨어지는 0 이상의 숫자를 입력해주세요.");
     }
 }
