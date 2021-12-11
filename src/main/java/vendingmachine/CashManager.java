@@ -64,7 +64,7 @@ public class CashManager {
 
         for (Coin coin : Coin.values()) {
             while (this.vault.get(coin) > 0 && this.remainCash >= coin.getAmount()) {
-                if(!coins.containsKey(coin)) {
+                if (!coins.containsKey(coin)) {
                     coins.put(coin, 0);
                 }
 

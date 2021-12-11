@@ -1,6 +1,6 @@
 package vendingmachine;
 
-public class MyIllegalArgumentException extends IllegalArgumentException{
+public class MyIllegalArgumentException extends IllegalArgumentException {
     private static final String MESSAGE_BASE = "[ERROR] %s";
 
     public MyIllegalArgumentException(String message) {
