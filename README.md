@@ -12,8 +12,8 @@
  
 
  - 자판기의 상품을 추가하는 기능
-   - 상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분
-   - 상품명은 빈칸이 될수 없게 제한(예외처리를 의미)
+   - 상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분하도록 제한
+   - 상품명,가격,수량은 빈칸이 될수 없게 제한(예외처리를 의미)
    - 가격과 수량은 문자가 아닌 양의 정수로 제한
    - 상품 가격은 최소 100원으로 제한
    - 상품 가격은 10원으로 나누어 떨어지게 제한
@@ -34,6 +34,28 @@
    - 잔돈 반환이 불가능하면 반환 가능한 금액만 반환
  
 <br>
+
+## vendingmachine 패키기 구성
+
+```
+ servicesource
+  - Coin.java
+  - Product.java
+  - VendingMachine.java
+  - Wallet.java
+  
+ utils
+  - datatypechecker
+    - IntegerChecker.java
+    - StringChecker.java
+  
+  - productchecker
+    - InputChecker.java
+    - NameChecker.java
+    - PriceChecker.java
+    - StockChecker.java
+    
+```
 
 
 ## 기능별 클래스 할당
@@ -59,6 +81,23 @@
   - 잔돈을 반환하는 함수
     - 최소 개수로 반환하는 알고리즘 구현
 
-- InputCheck class
-  - 입력받고 예외처리하는 클래스
+- StringChecker class
+  - 문자열관련 확인 기능을 담당하는 클래스
+  - parse 기능 함수
+
+- IntegerChecker class
+  - 정수관련 확인 기능을 담당하는 클래스
+
+- InputChecker class
+  - 상품을 입력 받고 올바른 예외처리
+  - 세미콜론, 쉼표로 parse한 문자열을 각 형식에 맞게 검사를 진행
+
+- NameChecker class
+  - 상품의 이름이 올바른지 확인하는 함수
+
+- PriceChecker class
+  - 상품의 가격이 올바른지 확인하는 함수
+
+- StockChecker class
+  - 상품의 수량이 올바른지 확인하는 함수
 
