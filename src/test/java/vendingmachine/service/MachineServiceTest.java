@@ -8,6 +8,7 @@ import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.domain.Machine;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
 
@@ -16,6 +17,7 @@ class MachineServiceTest {
 	MachineService machineService;
 	DepositRepository depositRepository;
 	ProductRepository productRepository;
+	Machine machine;
 
 	List<String> productList;
 
@@ -23,7 +25,8 @@ class MachineServiceTest {
 	void setUp() {
 		depositRepository = new DepositRepository();
 		productRepository = new ProductRepository();
-		machineService = new MachineService(depositRepository, productRepository);
+		machine = new Machine();
+		machineService = new MachineService(depositRepository, productRepository, machine);
 		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
 	}
 
@@ -48,5 +51,15 @@ class MachineServiceTest {
 			assertThat(p.getPrice()).isEqualTo(300);
 			assertThat(p.getQuantity()).isEqualTo(20);
 		});
+	}
+
+	@Test
+	void getAffordableList() {
+		// given
+		machineService.setProducts(productList);
+		// when
+		machine.setUserMoney(500);
+		// then
+		assertThat(machineService.getAffordableList()).hasSize(1);
 	}
 }

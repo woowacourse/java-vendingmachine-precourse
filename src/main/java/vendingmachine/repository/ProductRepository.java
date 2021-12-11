@@ -1,5 +1,6 @@
 package vendingmachine.repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,5 +22,9 @@ public class ProductRepository {
 
 	public Optional<Product> findByName(String name) {
 		return Optional.ofNullable(productMap.get(name));
+	}
+
+	public List<Product> findAll() {
+		return new ArrayList<>(productMap.values());
 	}
 }

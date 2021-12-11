@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.constant.Coin;
 import vendingmachine.domain.Deposit;
+import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
@@ -18,12 +19,12 @@ public class MachineService {
 	private final DepositRepository depositRepository;
 	private List<Coin> coinList;
 	private ProductRepository productRepository;
+	private Machine machine;
 
-	private int userMoney;
-
-	public MachineService(DepositRepository depositRepository, ProductRepository productRepository) {
+	public MachineService(DepositRepository depositRepository, ProductRepository productRepository, Machine machine) {
 		this.depositRepository = depositRepository;
 		this.productRepository = productRepository;
+		this.machine = machine;
 	}
 
 	public void setDepositsRandomized(int deposit) {
@@ -73,7 +74,14 @@ public class MachineService {
 		return new Product(name, price, quantity);
 	}
 
-	public void setMoney(String inputMoney){
-		this.userMoney = Integer.parseInt(inputMoney);
+	public void setMoney(String inputMoney) {
+		machine.setUserMoney(Integer.parseInt(inputMoney));
+	}
+
+	public List<Product> getAffordableList() {
+		return productRepository.findAll()
+			.stream()
+			.filter(product -> product.getPrice() <= machine.getUserMoney())
+			.collect(Collectors.toList());
 	}
 }

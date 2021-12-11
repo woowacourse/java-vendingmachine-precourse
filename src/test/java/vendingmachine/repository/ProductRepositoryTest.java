@@ -45,4 +45,12 @@ class ProductRepositoryTest {
 			assertThat(p.getQuantity()).isEqualTo(productList.get(1).getQuantity());
 		});
 	}
+
+	@Test
+	void findAll() {
+		// given
+		// when
+		// then
+		assertThat(productRepository.findAll().size()).isEqualTo(productList.size());
+	}
 }
