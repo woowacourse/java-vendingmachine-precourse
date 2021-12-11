@@ -3,7 +3,6 @@ package models;
 import static vendingmachine.VendingMachineMain.userInputMoney;
 
 public class Product {
-    public static int totalRemains;
     private String productName;
     private int price;
     private int remains;
@@ -14,18 +13,18 @@ public class Product {
         this.remains = remains;
     }
 
-    public boolean provide() {
-        if (this.remains >= 1) {
-            this.remains--;
-            totalRemains--;
-            userInputMoney -= this.price;
-            return true;
-        }
-        return false;
+    public void provide() {
+        this.remains--;
+        //totalRemains--;
+        userInputMoney -= this.price;
     }
 
     public int value() {
         return this.price;
+    }
+
+    public boolean isSoldOut() {
+        return this.remains == 0;
     }
 
     @Override

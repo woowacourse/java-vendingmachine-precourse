@@ -30,7 +30,7 @@ public class InputValidator {
     public static void enough(String moneyValue) {
         // 입력 금액이 상품의 최소 판매가격보다 낮음
         if (Integer.parseInt(moneyValue) < minCost) {
-            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.\n");
+            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.");
         }
     }
 
@@ -60,9 +60,9 @@ public class InputValidator {
         if (!name2Product.containsKey(productToBuy)) {
             throw new IllegalArgumentException("[ERROR] 상품의 이름을 확인하세요.");
         }
-        if (!name2Product.get(productToBuy).provide()) {
-            throw new IllegalArgumentException("[ERROR] 재고가 없습니다.");
-        }
+//        if (name2Product.get(productToBuy).isSoldOut()) {
+//            throw new IllegalArgumentException("[ERROR] 재고가 없습니다.");
+//        }
         if (userInputMoney < name2Product.get(productToBuy).value()) {
             throw new IllegalArgumentException("[ERROR] 금액이 모자랍니다.");
         }
