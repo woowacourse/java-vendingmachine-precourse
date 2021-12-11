@@ -1,9 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.view.OutputView;
