@@ -9,7 +9,7 @@ public class ItemValidator {
 	private static final String BLANK = "";
 	private static final String NO_ITEMS_ERROR = "상품이 입력되지 않았습니다.";
 	private static final String ITEM_DIVIDER = ";";
-	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,},\\d+\\]";
+	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,},\\d+]";
 	private static final String NOT_VALID_FORMAT = "입력 형식이 잘못되었습니다.";
 	private static final String INFO_DIVIDER = ",";
 	private static final String NOT_VALID_PRICE = "상품 가격은 10원 단위로 나누어져야 합니다.";
