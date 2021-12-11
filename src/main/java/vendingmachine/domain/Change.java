@@ -13,14 +13,14 @@ public class Change {
 		Change.changes = changes;
 	}
 
-	public static Map<Coin, Integer> getChanges() {
+	public Map<Coin, Integer> getChanges() {
 		return changes;
 	}
 
 	public static Change generateChanges(Money money) {
 		initChanges();
-
 		int tmpMoney = 0;
+
 		while (!money.isSame(tmpMoney)) {
 			int random = Randoms.pickNumberInList(Coin.getList());
 			if (money.isSmaller(tmpMoney + random)) {

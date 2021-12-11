@@ -28,7 +28,7 @@ public class MachineController {
 
 	private void setting() {
 		Change changes = Change.generateChanges(InputView.getHavingMoney());
-		OutputView.printHavingMachineCoin();
+		OutputView.printHavingMachineCoin(changes);
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
 		Beverages beverages = splitItem(itemPriceStock);
 		Money inputMoney = InputView.getUserInputMoney();
@@ -46,6 +46,8 @@ public class MachineController {
 
 	private void finishWithReturn() {
 		Change calculate = vendingMachine.calculate();
+		OutputView.printInputMoney(vendingMachine.getMoney());
+		OutputView.printExtraMoneyAndChange(calculate);
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {
