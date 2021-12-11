@@ -1,37 +1,17 @@
 package vendingmachine.Service;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Constant.DomainConstant;
-import vendingmachine.Constant.ErrorConstant;
 import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
 
 public class InitHoldingCoinsService {
+    ValidationService validationService = new ValidationService();
 
     public void setHoldingCoins(String holdingAmount) {
-        if (!isValidHoldingAmount(holdingAmount)) {
-            throw new IllegalArgumentException(ErrorConstant.WrongHoldingAmount);
-        }
-
+        validationService.isValidHoldingAmount(holdingAmount);
         addPickedCoin(Integer.parseInt(holdingAmount));
     }
 
-    private boolean isValidHoldingAmount(String holdingAmount) {
-        return (isInteger(holdingAmount) && isInRange(Integer.parseInt(holdingAmount)));
-    }
-
-    private boolean isInteger(String holdingAmount) {
-        try {
-            Integer.parseInt(holdingAmount);
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-
-    private boolean isInRange(int holdingAmount) {
-        return (holdingAmount >= DomainConstant.MINIMUM_NUMBER_OF_HOLDING_AMOUNT && holdingAmount % DomainConstant.HOLDING_AMOUNT_MUST_BE_DIVIDED == 0);
-    }
 
     private void addPickedCoin(int amount) {
         while (amount > 0) {
