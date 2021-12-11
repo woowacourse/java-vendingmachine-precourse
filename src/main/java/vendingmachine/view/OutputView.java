@@ -47,7 +47,6 @@ public class OutputView {
 		System.out.println(INPUT_ITEMS_MESSAGE);
 	}
 
-	// TODO: DTO 를 전달받아 출력하는 방법 고민
 	private static void printCoin(String type, int coinQuantity) {
 		System.out.println(String.format(COIN_OUTPUT_FORMAT, type, coinQuantity));
 	}
@@ -62,7 +61,6 @@ public class OutputView {
 		System.out.println(INPUT_USER_BALANCE_MESSAGE);
 	}
 
-	// TODO: DTO 를 전달받아 출력하는 방법 고민
 	public static void printCurrentUserBalance(int userBalance) {
 		System.out.println(String.format(CURRENT_USER_BALANCE_FORMAT, userBalance));
 	}

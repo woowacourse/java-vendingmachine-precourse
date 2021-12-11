@@ -5,7 +5,6 @@ import java.util.Map;
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinQuantity;
 
-// TODO: Output 을 Response 으로 변경
 // TODO: 장황한 변수 선언과 사용을 개선할 방법이 있을지 고민 필요
 public class CoinsDto {
 	int coin500Quantity = 0;
