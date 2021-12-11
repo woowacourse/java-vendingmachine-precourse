@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.view.OutputView;
 
 public class MachineController {
 	public void work() {
@@ -8,6 +9,6 @@ public class MachineController {
 		InputController inputController = new InputController();
 		vendingMachine.holdingMoney = inputController.scanHoldingMoney();
 		vendingMachine.coinCount = RandomCoinMaker.makeRandomCoin(vendingMachine.holdingMoney);
-		System.out.println(vendingMachine.coinCount);
+		OutputView.printHoldingCoins(vendingMachine.coinCount);
 	}
 }
