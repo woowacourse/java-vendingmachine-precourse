@@ -2,12 +2,18 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utils.Message;
+import vendingmachine.utils.Validator;
 
 public class InputView {
 
 	public static int inputTotalAmountMoneyOfVendingMachine() {
 		System.out.println(Message.GET_AMOUNT_HOLDING_BY_VENDING_MACHINE.getText());
-		return Integer.parseInt(Console.readLine());
+		while (true) {
+			String inputMoney = Console.readLine();
+			if (Validator.checkIsValidInputMoney(inputMoney)) {
+				return Integer.parseInt(inputMoney);
+			}
+		}
 	}
 
 	public static String inputInformationOfProducts() {

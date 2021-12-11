@@ -18,8 +18,8 @@ public class VendingMachineController {
 
 	public void run() {
 
-		int totalChanges = inputTotalAmountMoneyOfVendingMachine();
-		vendingMachine.createChanges(totalChanges);
+		int totalAmount = inputTotalAmountMoneyOfVendingMachine();
+		vendingMachine.createChanges(totalAmount);
 		printChangesVendingMachine(vendingMachine);
 
 		String productInfo = inputInformationOfProducts();
