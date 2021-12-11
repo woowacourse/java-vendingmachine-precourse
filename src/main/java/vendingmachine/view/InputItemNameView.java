@@ -12,6 +12,11 @@ public class InputItemNameView implements View {
 	public void show() {
 		int money = Application.controller.getMoney();
 		printMoneyAndMessage(money);
+		if(!canPurchase(money)) {
+			// 잔돈 반환 뷰 이동
+			return;
+		}
+
 		String itemName  = readItemName();
 		Item item;
 		try {
@@ -22,6 +27,7 @@ public class InputItemNameView implements View {
 			return;
 		}
 		Application.controller.purchase(item);
+		show();
 	}
 
 	private void printMoneyAndMessage(int money) {
@@ -42,5 +48,9 @@ public class InputItemNameView implements View {
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_IN_STOCK);
 
 		return item;
+	}
+
+	private boolean canPurchase(int money) {
+		return Application.controller.canPurchaseByMoney(money);
 	}
 }

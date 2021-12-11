@@ -31,4 +31,8 @@ public class ItemRepository {
 				item.deductAmount();
 		});
 	}
+
+	public List<Item> getAll() {
+		return items;
+	}
 }

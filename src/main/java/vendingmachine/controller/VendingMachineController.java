@@ -62,4 +62,8 @@ public class VendingMachineController {
 		itemService.deductItemAmount(item.getName());
 		moneyService.useMoney(item.getPrice());
 	}
+
+	public boolean canPurchaseByMoney(int money) {
+		return itemService.canPurchaseByMoney(money);
+	}
 }
