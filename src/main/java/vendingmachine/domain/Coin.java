@@ -20,10 +20,10 @@ public enum Coin {
 
 	// 추가 기능 구현
 	public static List<Coin> init() {
-		coins.add(COIN_10);
-		coins.add(COIN_50);
-		coins.add(COIN_100);
 		coins.add(COIN_500);
+		coins.add(COIN_100);
+		coins.add(COIN_50);
+		coins.add(COIN_10);
 		return coins;
 	}
 

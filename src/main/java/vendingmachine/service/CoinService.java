@@ -16,6 +16,7 @@ public class CoinService {
 				.findAny()
 				.orElse(null);
 			pickedCoin.addCoin();
+			savedMoney -= pickedCoin.getAmount();
 		}
 	}
 
