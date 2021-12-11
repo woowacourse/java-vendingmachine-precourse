@@ -12,7 +12,7 @@ public class InputView {
         return Integer.parseInt(Console.readLine());
     }
 
-    public void inputProduct() {
+    public void inputProductList() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         String inputString = Console.readLine();
         ArrayList<String> strings = Utils.splitString(inputString);
@@ -25,5 +25,10 @@ public class InputView {
     public int inputMoney() {
         System.out.println("투입 금액을 입력해 주세요.");
         return Integer.parseInt(Console.readLine());
+    }
+
+    public String inputProduct() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return Console.readLine();
     }
 }
