@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.Random.*;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -21,13 +23,18 @@ public enum Coin {
     	return amount;
 	}
 
-	public static List<Integer> getAmounts() {
+	public static Coin pickRandom() {
+		int amount = pickRandomCoin(getAmounts());
+		return getCoinByAmount(amount);
+	}
+
+	private static List<Integer> getAmounts() {
     	return Stream.of(Coin.values())
 			.map(Coin::getAmount)
 			.collect(Collectors.toList());
 	}
 
-	public static Coin getCoin(int amount) {
+	private static Coin getCoinByAmount(int amount) {
     	return Stream.of(Coin.values())
 			.filter(coin -> coin.amount == amount)
 			.findFirst()

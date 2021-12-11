@@ -14,7 +14,7 @@ public class PurchaseItemValidator {
 	}
 
 	private static void validateStatus(Items items, String itemName) {
-		List<String> names = items.toNames();
+		List<String> names = items.getNames();
 
 		if (!names.contains(itemName)) {
 			throw new IllegalArgumentException(ITEM_NOT_EXIST_ERROR);

@@ -1,10 +1,10 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.Random.*;
-
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import static vendingmachine.utils.Constant.*;
 
 public class Coins {
 
@@ -14,32 +14,27 @@ public class Coins {
 		list = initializeCoins();
 	}
 
-	private Map<Coin, Integer> initializeCoins() {
-		list = new LinkedHashMap<>();
-
-		Arrays.stream(Coin.values())
-			.forEach(coin -> list.put(coin, 0));
-
-		return list;
-	}
-
 	public Map<Coin, Integer> getList() {
 		return list;
 	}
 
 	public void insertRandomCoins(int totalAmount) {
-		while (totalAmount != 0) {
-			Coin coin = pickCoin();
+		while (totalAmount != ZERO) {
+			Coin coin = Coin.pickRandom();
 
 			if (totalAmount >= coin.getAmount()) {
 				totalAmount -= coin.getAmount();
-				list.put(coin, list.get(coin) + 1);
+				list.put(coin, list.get(coin) + ONE);
 			}
 		}
 	}
 
-	private Coin pickCoin() {
-		int amount = pickRandomCoin(Coin.getAmounts());
-		return Coin.getCoin(amount);
+	private Map<Coin, Integer> initializeCoins() {
+		list = new LinkedHashMap<>();
+
+		Arrays.stream(Coin.values())
+			.forEach(coin -> list.put(coin, DEFAULT_QUANTITY));
+
+		return list;
 	}
 }

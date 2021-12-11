@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static vendingmachine.utils.Message.*;
+import static vendingmachine.utils.Constant.*;
+
 public class Items {
 
 	private List<Item> list;
@@ -21,41 +24,11 @@ public class Items {
 		}
 	}
 
-	private List<String> separateItems(String itemList) {
-		return Arrays.asList(itemList.split(";"));
-	}
-
-	private String processItem(String item) {
-		return item.substring(1, item.length() - 1);
-	}
-
-	private Item createItem(String item) {
-		String[] separateItem = item.split(",");
-		return new Item(separateItem[0], Integer.parseInt(separateItem[1]), Integer.parseInt(separateItem[2]));
-	}
-
 	public boolean check(int amount) {
 		return checkLowestPrice(amount) && checkQuantity();
 	}
 
-	private boolean checkLowestPrice(int amount) {
-		int lowestPrice = list.stream()
-			.mapToInt(Item::getPrice)
-			.findFirst()
-			.orElse(0);
-
-		return amount >= lowestPrice;
-	}
-
-	private boolean checkQuantity() {
-		long count = list.stream()
-			.filter(item -> item.getQuantity() != 0)
-			.count();
-
-		return count != 0;
-	}
-
-	public List<String> toNames() {
+	public List<String> getNames() {
 		return list.stream()
 			.map(Item::getName)
 			.collect(Collectors.toList());
@@ -73,5 +46,39 @@ public class Items {
 			.filter(item -> item.getName().equals(itemName))
 			.findFirst()
 			.orElse(null);
+	}
+
+	private List<String> separateItems(String itemList) {
+		return Arrays.asList(itemList.split(ITEM_SEPARATOR));
+	}
+
+	private String processItem(String item) {
+		return item.substring(1, item.length() - 1);
+	}
+
+	private Item createItem(String item) {
+		String[] separateItem = item.split(ITEM_ELEMENT_SEPARATOR);
+		return new Item(
+			separateItem[NAME],
+			Integer.parseInt(separateItem[PRICE]),
+			Integer.parseInt(separateItem[QUANTITY])
+		);
+	}
+
+	private boolean checkLowestPrice(int amount) {
+		int lowestPrice = list.stream()
+			.mapToInt(Item::getPrice)
+			.findFirst()
+			.orElse(0);
+
+		return amount >= lowestPrice;
+	}
+
+	private boolean checkQuantity() {
+		long count = list.stream()
+			.filter(item -> item.getQuantity() != OUT_OF_STOCK)
+			.count();
+
+		return count != 0;
 	}
 }

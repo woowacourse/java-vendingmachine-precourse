@@ -9,6 +9,8 @@ public class Message {
 	public static String COIN_COUNT = "개";
 
 	public static String ITEM_INPUT_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
+	public static String ITEM_SEPARATOR = ";";
+	public static String ITEM_ELEMENT_SEPARATOR = ",";
 
 	public static String INPUT_AMOUNT_INPUT_MESSAGE = "\n투입 금액을 입력해 주세요.";
 
