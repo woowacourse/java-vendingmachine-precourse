@@ -1,5 +1,7 @@
 package vendingmachine.validation;
 
+import java.util.Arrays;
+
 import vendingmachine.exception.ErrorMessage;
 
 public class Validation {
@@ -17,23 +19,29 @@ public class Validation {
 		}
 	}
 
-	// 금액이 빈 값인지 확인
+	// 입력 값이 빈 값인지 확인
 	public static void validateNull(String cost){
 		if(cost.replaceAll(" ","").length()==0){
-			throw new IllegalArgumentException(ErrorMessage.COST_IS_BLANK_ERROR.getErrorMessage());
+			throw new IllegalArgumentException(ErrorMessage.INPUT_IS_BLANK_ERROR.getErrorMessage());
 		}
 	}
 
 	// 금액이 10으로 나누어 떨어지지 않는 경우
 	public static void validateDivideTen(int cost){
 		if(cost%10!=0){
-			throw new IllegalArgumentException(ErrorMessage.COST_IS_NOT_DIVIDE_TEN.getErrorMessage());
+			throw new IllegalArgumentException(ErrorMessage.COST_IS_NOT_DIVIDE_TEN_ERROR.getErrorMessage());
 		}
 	}
 
-	// 상품이 빈 값으로 들어오는 경우
+	// 상품이 형식에 맞게 들어오지 않는 경우
+	public static void validateProductFormat(String inputStr){
 
-	// 상품이 하나도 들어오지 않는 경우
+		for(String product: inputStr.split(";")) {
+			if(!product.contains("[") || !product.contains("]")) {
+				throw  new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR.getErrorMessage());
+			}
+		}
+	}
 
 	// 상품 가격이 100 이상 자연수지 않는 경우
 

@@ -38,6 +38,8 @@ public class VendingMachineService {
 
 	public void postProductInfo(String inputStr) {
 		//TODO: Validation 들 처리
+		Validation.validateNull(inputStr);
+		Validation.validateProductFormat(inputStr);
 		addProducts(inputStr);
 	}
 
