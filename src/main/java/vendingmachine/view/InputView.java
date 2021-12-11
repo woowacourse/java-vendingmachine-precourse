@@ -35,6 +35,10 @@ public class InputView {
 		}
 		return items;
 	}
+
+	public String scanItemName() {
+		return Console.readLine();
+	}
 }
 
 

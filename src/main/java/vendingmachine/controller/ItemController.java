@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.base.Splitter;
@@ -29,6 +30,14 @@ public class ItemController {
 			OutputView.printError(e.getMessage());
 			return giveItems();
 		}
+	}
+
+	public int getLeastItemCost(Items items) {
+		return items.getItems()
+			.stream()
+			.min(Comparator.comparing(Item::getCost))
+			.get()
+			.getCost();
 	}
 
 	private Items initializeItems(List<String> itemDetails) {
