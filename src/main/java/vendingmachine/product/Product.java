@@ -8,14 +8,14 @@ public class Product {
 	private static final int MINIMUM_PRICE = 100;
 	private final String name;
 	private final Money price;
-	private final Quantity quantity;
+	private final Quantity stock;
 
 	public Product(String name, Money price, Quantity quantity) {
 		validateNameEmpty(name);
 		validateMinimumPrice(price);
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
+		this.stock = quantity;
 	}
 
 	private void validateMinimumPrice(Money price) {
@@ -38,13 +38,17 @@ public class Product {
 		return name;
 	}
 
+	public void decreaseStock() {
+		stock.down();
+	}
+
 	// 필요없다면 최종에 제거하기
 	public Money getPrice() {
 		return price;
 	}
 
 	// 필요없다면 최종에 제거하기
-	public Quantity getQuantity() {
-		return quantity;
+	public Quantity getStock() {
+		return stock;
 	}
 }

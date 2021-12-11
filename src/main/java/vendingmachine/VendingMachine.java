@@ -33,6 +33,7 @@ public class VendingMachine {
 	}
 
 	public void purchase(String productName) {
-		products.purchaseProduct(productName);
+		Money productPrice = products.purchaseProduct(productName);
+		insertMoney.spend(productPrice);
 	}
 }

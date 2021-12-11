@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
+import vendingmachine.Money;
 import vendingmachine.Notification;
 import vendingmachine.exception.DomainNotFoundException;
 
@@ -49,8 +50,11 @@ public class Products {
 		return products;
 	}
 
-	public void purchaseProduct(String productName) {
+	public Money purchaseProduct(String productName) {
 		validateProductName(productName);
+		Product product = products.get(productName);
+		product.decreaseStock();
+		return product.getPrice();
 	}
 
 	public void validateProductName(String productName) {

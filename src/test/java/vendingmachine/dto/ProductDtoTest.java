@@ -1,15 +1,11 @@
 package vendingmachine.dto;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.Map;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.Money;
-import vendingmachine.Notification;
 import vendingmachine.product.Product;
 import vendingmachine.product.Products;
 
@@ -34,7 +30,7 @@ class ProductDtoTest {
 		for (Product product : productMap.values()) {
 			System.out.println(product.getName());
 			System.out.println(product.getPrice());
-			System.out.println(product.getQuantity());
+			System.out.println(product.getStock());
 		}
 	}
 
