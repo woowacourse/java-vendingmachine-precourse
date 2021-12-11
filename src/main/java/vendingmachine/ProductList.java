@@ -5,7 +5,6 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Console;
 
 public class ProductList {
-    private static final String PRODUCT_INSERT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
     private static final String ERROR_MESSAGE_PRICE_PREFIX = "상품 가격이 ";
     private static final String ERROR_MESSAGE_AMOUNT_PREFIX = "수량이 ";
     private static final String ERROR_NOT_DUPLICATE = "상품명은 중복될 수 없습니다.";
@@ -25,9 +24,10 @@ public class ProductList {
     private static final int HUNDRED = 100;
     private static int MINIMUM_PRICE = Integer.MAX_VALUE;
     private static final HashMap<String, Product> productMap = new HashMap<>();
+    private static final InputMessage inputMessage = new InputMessage();
 
     public void insertProduct() {
-        System.out.println(PRODUCT_INSERT_MESSAGE);
+        inputMessage.printInsertProductMessage();
         String productsInformation = Console.readLine();
         initProductMap();
         String[] productInformationList = validateSplitRegex(productsInformation);
@@ -38,10 +38,11 @@ public class ProductList {
         return productMap.containsKey(name);
     }
 
-    public boolean isAvailableProduct(String name){
-        Product product  = productMap.get(name);
+    public boolean isAvailableProduct(String name) {
+        Product product = productMap.get(name);
         return product.isAvailable();
     }
+
     public boolean compareMinimumPrice(int customerMoney) {
         return customerMoney >= MINIMUM_PRICE;
     }

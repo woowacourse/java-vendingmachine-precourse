@@ -5,15 +5,14 @@ import camp.nextstep.edu.missionutils.Console;
 import java.util.HashMap;
 
 public class Change {
-    private static final String COIN_INSERT_MESSAGE = "자판기가 보유하고 있는 금액을 입력해주세요.";
     private static final String ERROR_MULTIPLE_OF_TEN = "1원 단위는 허용되지 않습니다.";
     private static final String ERROR_GREATER_THAN_ZERO = "0 이하의 숫자를 입력할 수 없습니다.";
     private static final String ERROR_ONLY_INTEGER = "금액은 숫자만 입력 가능합니다.";
-    private static final String COIN_NUMBER_PRINT_MESSAGE = "자판기가 보유한 동전";
     private static HashMap<Coin, Integer> coinMap = new HashMap<>();
+    private static InputMessage inputMessage = new InputMessage();
 
     public int insertChange() {
-        System.out.println(COIN_INSERT_MESSAGE);
+        inputMessage.printInsertCoinMessage();
         String changeInVendingMachine = Console.readLine();
         int change = this.validateOnlyInteger(changeInVendingMachine);
         isGreatThanZero(change);
@@ -22,7 +21,7 @@ public class Change {
     }
 
     public void returnChange(int customerMoney) {
-        System.out.println("잔돈");
+        inputMessage.printChangeMessage();
         for (Coin coin : Coin.values()) {
             int amount = coinMap.get(coin); // amount
             int returnAmount = coin.returnChange(customerMoney, amount);
@@ -42,7 +41,7 @@ public class Change {
     }
 
     private void printNumberOfCoin() {
-        System.out.println(COIN_NUMBER_PRINT_MESSAGE);
+        inputMessage.printHaveCoinMessage();
         for (Coin coin : Coin.values()) {
             coin.printNumberOfCoin(coinMap.get(coin));
         }

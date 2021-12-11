@@ -2,12 +2,11 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import java.util.HashMap;
-
 public class VendingMachine {
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
     private static final Change change = new Change();
     private static ProductList productList = new ProductList();
+    private static InputMessage inputMessage = new InputMessage();
     private static int InitialTotalChange;
     private static int customerMoney;
 
@@ -43,7 +42,7 @@ public class VendingMachine {
     }
 
     private void inputMoney() {
-        System.out.println("투입 금액을 입력해주세요.");
+        inputMessage.printInputMoneyMessage();
         String money = Console.readLine();
         customerMoney = this.validateCustomerMoney(money);
         printInputMoney();
@@ -71,7 +70,7 @@ public class VendingMachine {
 
 
     public void sellProduct() {
-        System.out.println("구매할 상품명을 입력해 주세요.");
+        inputMessage.printBuyProductMessage();
         String product = Console.readLine();
         this.validateSellProduct(product);
         int pay = productList.sellProduct(product);
@@ -116,6 +115,7 @@ public class VendingMachine {
             }
         }
     }
+
     public void inputSellProduct() {
         while (true) {
             try {
@@ -126,6 +126,7 @@ public class VendingMachine {
             }
         }
     }
+
     public void inputInitialProduct() {
         while (true) {
             try {
