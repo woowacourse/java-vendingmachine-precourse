@@ -3,7 +3,7 @@ package vendingmachine.exception;
 public class InputException {
 
 	private static final String NOT_HAVE_SEMICOLON = "[ERROR] ;(세미콜론)을 이용해서 상품을 구별해야 합니다.";
-	private static final String NOT_HAVE_BRACKET = "[ERROR] 개별 상품은 [](대괄호)로 묶어야 합니다.";
+	private static final String NOT_HAVE_BRACKET = "[ERROR] 입력 형식이 [콜라,1500,20];[사이다,1000,10] 또는 [콜라,1500,20] 이어야 합니다.";
 	private static final String NOT_STOCK_FORM = "[ERROR] 수량은 1이상의 정수여야 합니다.";
 	private static final String NOT_MONEY_FORM = "[ERROR] 금액은 10원으로 나누어 떨어져야 합니다.";
 	private static final String NOT_NAME_FORM = "[ERROR] 상품 이름이 입력되지 않았습니다.";

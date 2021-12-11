@@ -22,6 +22,7 @@ public class InputValidator {
 	public static Beverages checkInputForm(String input) {
 		ArrayList<String> items = new ArrayList<>();
 		checkSemicolon(input);
+		checkBracket(input);
 		String[] itemList = input.split(";");
 		for (String item : itemList) {
 			String itemInfo = eraseBracket(item);
@@ -78,11 +79,13 @@ public class InputValidator {
 	}
 
 	private static String eraseBracket(String input) {
+		return input.replaceAll(OPEN_BRACKET_REGEX, "").replaceAll(CLOSE_BRACKET_REGEX, "");
+	}
 
+	private static void checkBracket(String input) {
 		if (!input.matches(BRACKET_REGEX)) {
 			InputException.printNotFoundBracketError();
 		}
-		return input.replaceAll(OPEN_BRACKET_REGEX, "").replaceAll(CLOSE_BRACKET_REGEX, "");
 	}
 
 	private static String checkNameForm(String input) {
