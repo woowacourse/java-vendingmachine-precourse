@@ -42,6 +42,7 @@ public class VendingMachineController {
 
 	public void showRemainChanges() {
 		printCurrentInputMoney(vendingMachine);
+		printRemainChanges(vendingMachine);
 	}
 
 

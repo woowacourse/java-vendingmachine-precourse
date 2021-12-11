@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -15,6 +17,16 @@ public class Changes {
 	Changes(int inputMoney) {
 		this.inputMoney = inputMoney;
 		initCoinMap();
+	}
+
+	public List<Coin> getRemainChanges() {
+		List<Coin> remainCoinList = new ArrayList<>();
+		for (Coin coin : Coin.values()) {
+			if (coinMap.get(coin) != START_NUMBER_ZERO) {
+				remainCoinList.add(coin);
+			}
+		}
+		return remainCoinList;
 	}
 
 	public HashMap<Coin, Integer> getCoinMap() {

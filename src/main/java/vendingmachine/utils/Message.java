@@ -9,6 +9,7 @@ public enum Message {
 	CURRENT_INPUT_MONEY("투입 금액: "),
 	MONEY_UNIT_WON("원"),
 	GET_PRODUCT_NAME_TO_BUY("구매할 상품명을 입력해 주세요."),
+	REMAIN_CHANGES("잔돈"),
 	;
 
 	private final String text;

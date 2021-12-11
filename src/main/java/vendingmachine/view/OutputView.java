@@ -28,4 +28,15 @@ public class OutputView {
 		System.out.print(vendingMachine.getInputMoney().getCurrentMoney());
 		System.out.println(Message.MONEY_UNIT_WON.getText());
 	}
+
+	public static void printRemainChanges(VendingMachine vendingMachine) {
+		System.out.println(Message.REMAIN_CHANGES.getText());
+		for (Coin coin : vendingMachine.getChanges().getRemainChanges()) {
+			System.out.print(coin.getAmount() + MONEY_UNIT + DASH_DELIMITER);
+			System.out.println(vendingMachine.getChanges().getCoinMap().get(coin) + AMOUNT_UNIT);
+		}
+
+	}
+
+
 }
