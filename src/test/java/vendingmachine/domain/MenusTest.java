@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
+import vendingmachine.domain.menu.Menus;
+
 class MenusTest {
 	@ParameterizedTest
 	@ValueSource(strings = {"", ";", "상품정보1;상품정보2;", ";상품정보1;상품정보2"})

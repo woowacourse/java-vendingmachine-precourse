@@ -1,6 +1,6 @@
 package vendingmachine.utils;
 
-import vendingmachine.domain.Coin;
+import vendingmachine.domain.coin.Coin;
 import vendingmachine.exceptions.NotDivisibleByMinPriceCoinException;
 
 public class ArithmeticValidator {

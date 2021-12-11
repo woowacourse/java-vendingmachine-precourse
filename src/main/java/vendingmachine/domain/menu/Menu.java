@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.menu;
 
 import static vendingmachine.utils.ArithmeticValidator.*;
 import static vendingmachine.utils.StringValidator.*;

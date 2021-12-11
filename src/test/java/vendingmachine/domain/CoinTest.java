@@ -6,6 +6,8 @@ import java.util.Arrays;
 
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.domain.coin.Coin;
+
 class CoinTest {
 
 	@Test

@@ -2,8 +2,8 @@ package vendingmachine.view;
 
 import java.util.Map;
 
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.Coins;
+import vendingmachine.domain.coin.Coin;
+import vendingmachine.domain.coin.Coins;
 
 public class OutputView {
 	private static final String NOTICE_INIT_LEFT_COINS = "자판기가 보유한 동전";

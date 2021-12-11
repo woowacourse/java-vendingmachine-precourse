@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.menu;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -23,7 +23,7 @@ public class Menus {
 
 		return new Menus(menuList);
 	}
-	
+
 	private static void validateMenuInfos(String menuInfos) {
 		if (!menuInfos.matches("([^;];)*[^;]")) {
 			throw new IllegalArgumentException(ERROR_DELIMITERS);

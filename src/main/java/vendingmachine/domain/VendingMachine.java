@@ -5,6 +5,8 @@ import static vendingmachine.utils.ArithmeticValidator.*;
 import java.util.HashMap;
 import java.util.Map;
 
+import vendingmachine.domain.coin.Coin;
+import vendingmachine.domain.coin.Coins;
 import vendingmachine.utils.RandomCoinSelector;
 
 public class VendingMachine {
