@@ -39,6 +39,9 @@ public class InputValidator {
 	}
 
 	public static int checkStockForm(String input) {
+		if (!input.matches(STOCK_REGEX)) {
+			InputException.printNotStockFormError();
+		}
 		return Integer.parseInt(input);
 	}
 
