@@ -12,7 +12,8 @@ public enum Notification {
 	PRODUCT_INSUFFICIENCY_PRICE("[ERROR] 상품명은 최소 100원 이상이여야합니다."),
 	PRODUCT_ALREADY_EXIST("[ERROR] 동일한 상품명이 존재합니다."),
 	PRODUCT_IS_NULL("[ERROR] 상품을 올바르게 입력해주세요."),
-	PRODUCTS_SIZE_INSUFFICIENT("[ERROR] 상품은 최소 1개 이상 입력해야합니다.");
+	PRODUCTS_SIZE_INSUFFICIENT("[ERROR] 상품은 최소 1개 이상 입력해야합니다."),
+	VENDING_MACHINE_INITIALIZE_FAIL("[ERROR] 자동판매기에는 상품들과 잔돈들이 있어야합니다.");
 
 	private final String message;
 

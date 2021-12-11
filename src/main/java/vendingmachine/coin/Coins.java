@@ -11,6 +11,10 @@ public class Coins {
 		this.coins = coins;
 	}
 
+	public boolean isEmpty() {
+		return coins.isEmpty();
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();

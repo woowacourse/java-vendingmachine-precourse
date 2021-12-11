@@ -39,6 +39,10 @@ public class Products {
 		}
 	}
 
+	public boolean isEmpty() {
+		return products.isEmpty();
+	}
+
 	// 필요없다면 최종에 제거하기
 	public Map<String, Product> getProducts() {
 		return products;
