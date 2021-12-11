@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
+import vendingmachine.controller.ViewMappingKey;
 import vendingmachine.domain.Item;
 import vendingmachine.util.PublicConst;
 import vendingmachine.util.SystemMessage;
@@ -11,12 +12,11 @@ public class InputItemNameView implements View {
 	@Override
 	public void show() {
 		int money = Application.controller.getMoney();
-		printMoneyAndMessage(money);
 		if(!canPurchase(money)) {
-			// 잔돈 반환 뷰 이동
+			Application.controller.view(ViewMappingKey.RETURN_CHANGES);
 			return;
 		}
-
+		printMoneyAndMessage(money);
 		String itemName  = readItemName();
 		Item item;
 		try {

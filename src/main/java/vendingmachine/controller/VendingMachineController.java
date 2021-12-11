@@ -13,6 +13,7 @@ import vendingmachine.view.InputFirstMoneyView;
 import vendingmachine.view.InputItemInfoView;
 import vendingmachine.view.InputItemNameView;
 import vendingmachine.view.InputMoneyView;
+import vendingmachine.view.ReturnChangesView;
 import vendingmachine.view.ShowFirstMoneyView;
 import vendingmachine.view.View;
 
@@ -28,6 +29,7 @@ public class VendingMachineController {
 		viewMapper.put(ViewMappingKey.INPUT_ITEM_INFO, new InputItemInfoView());
 		viewMapper.put(ViewMappingKey.INPUT_MONEY, new InputMoneyView());
 		viewMapper.put(ViewMappingKey.INPUT_ITEM_NAME, new InputItemNameView());
+		viewMapper.put(ViewMappingKey.RETURN_CHANGES, new ReturnChangesView());
 	}
 
 	public void view(ViewMappingKey key) {
