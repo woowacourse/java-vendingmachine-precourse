@@ -15,6 +15,7 @@ import vendingmachine.domain.ReturnCoin;
 public class PurchaseInputView {
 
     private String inputInit() {
+        divisionLine();
         System.out.println(Output.PURCHASE_MONEY.getText() + Money.getInstance().getMoney() + Output.WON.getText());
         System.out.println(Input.PRODUCT_PURCHASE_GUIDE_MESSAGE.getText());
         return Console.readLine();
@@ -73,5 +74,9 @@ public class PurchaseInputView {
             System.out.println(Input.PRODUCT_PURCHASE_LACK_MONEY_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
         }
+    }
+
+    private void divisionLine() {
+        System.out.println();
     }
 }

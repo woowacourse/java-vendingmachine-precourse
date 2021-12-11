@@ -133,7 +133,7 @@ public class ProductInputView {
     }
 
     private void validateLimitOfProductCost(String productCost) {
-        if (Integer.parseInt(productCost) % Condition.DIVIDE_NUMBER.getNumber() != Condition.REMAINDER.getNumber()) {
+        if (Integer.parseInt(productCost) % Condition.DIVIDE_NUMBER.getNumber() != Condition.REMAINDER_0.getNumber()) {
             print(Input.PRODUCT_COST_DIVIDE_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
         }

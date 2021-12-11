@@ -20,6 +20,7 @@ public class MoneyInputView {
 
     public int inputMoneyForPurchase() {
         while (true) {
+            divisionLine();
             print(Input.PURCHASE_MONEY_GUIDE_MESSAGE.getText());
             String money = Console.readLine();
             try {
@@ -74,5 +75,9 @@ public class MoneyInputView {
 
     private void print(String message) {
         System.out.println(message);
+    }
+
+    private void divisionLine() {
+        System.out.println();
     }
 }

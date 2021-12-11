@@ -5,7 +5,8 @@ public enum Output {
     DELIMITER(" - "),
     UNIT("개"),
     VENDING_MACHINE_HAS_COIN_GUIDE_MESSAGE("자판기가 보유한 동전"),
-    PURCHASE_MONEY("투입 금액: ");
+    PURCHASE_MONEY("투입 금액: "),
+    CHANGE("잔돈");
 
     private final String text;
 

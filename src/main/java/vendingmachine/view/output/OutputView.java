@@ -4,6 +4,8 @@ import java.util.LinkedHashMap;
 import java.util.Set;
 
 import vendingmachine.constant.Output;
+import vendingmachine.domain.Money;
+import vendingmachine.domain.ReturnCoin;
 
 public class OutputView {
 
@@ -23,5 +25,17 @@ public class OutputView {
 
     private void print(String message) {
         System.out.println(message);
+    }
+
+    public void showChange() {
+        divisionLine();
+        print(Output.PURCHASE_MONEY.getText() + Money.getInstance().getMoney());
+        print(Output.CHANGE.getText());
+        LinkedHashMap<Integer, Integer> coinMap =
+                ReturnCoin.getInstance().calcReturnChangeToCoin(Money.getInstance().getMoney());
+
+        for (Integer coin : coinMap.keySet()) {
+            print(coin + Output.WON.getText()+ Output.DELIMITER.getText() + coinMap.get(coin) + Output.UNIT.getText());
+        }
     }
 }

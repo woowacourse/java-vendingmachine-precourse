@@ -28,11 +28,17 @@ public class ProductRepository {
     public int getMinCost() {
         List<Product> productCollect = products.stream()
                 .sorted().collect(Collectors.toList());
-        return productCollect.get(Condition.INDEX_0.getNumber()).getCost();
+
+        for (Product product : productCollect) {
+            if (product.getQuantity() > Condition.QUANTITY_0.getNumber()) {
+                return product.getCost();
+            }
+        }
+        return Condition.NOTHING.getNumber();
     }
 
     public int getAllAmount() {
-        int allAmount = 0;
+        int allAmount = Condition.QUANTITY_0.getNumber();
         for (Product product : products) {
             allAmount += product.getQuantity();
         }

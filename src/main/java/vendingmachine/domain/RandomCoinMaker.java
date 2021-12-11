@@ -27,7 +27,7 @@ public class RandomCoinMaker {
         }
     }
 
-    public LinkedHashMap<Integer, Integer> makeCoin(Integer money) {
+    public void makeCoin(Integer money) {
         init();
         ArrayList<Integer> coins = Coin.getCoins();
         while (money > Condition.MONEY_0.getNumber()) {
@@ -37,6 +37,9 @@ public class RandomCoinMaker {
                 storeCoin(coin);
             }
         }
+    }
+
+    public LinkedHashMap<Integer, Integer> getCoinMap() {
         return coinMap;
     }
 
