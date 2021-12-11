@@ -70,5 +70,9 @@ public class VendingMachine {
 		return coinMap;
 	}
 
+	public Coins getLeftCoins() {
+		return leftCoins;
+	}
+
 }
 

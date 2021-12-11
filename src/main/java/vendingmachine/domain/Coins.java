@@ -8,4 +8,8 @@ public class Coins {
 	public Coins(Map<Coin, Integer> coinMap) {
 		this.coinMap = coinMap;
 	}
+
+	public Map<Coin, Integer> getCoins() {
+		return coinMap;
+	}
 }
