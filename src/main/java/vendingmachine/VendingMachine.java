@@ -1,7 +1,6 @@
 package vendingmachine;
 
 import vendingmachine.coin.Coins;
-import vendingmachine.exception.VendingMachineException;
 import vendingmachine.product.Products;
 
 public class VendingMachine {
@@ -17,7 +16,7 @@ public class VendingMachine {
 
 	private void validateEmpty(Coins coins, Products products) {
 		if(coins.isEmpty() || products.isEmpty()) {
-			throw new VendingMachineException(Notification.VENDING_MACHINE_INITIALIZE_FAIL.getMessage());
+			throw new IllegalArgumentException(Notification.VENDING_MACHINE_INITIALIZE_FAIL.getMessage());
 		}
 	}
 

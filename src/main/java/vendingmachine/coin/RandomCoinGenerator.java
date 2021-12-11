@@ -7,7 +7,7 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Money;
 import vendingmachine.Notification;
-import vendingmachine.exception.VendingMachineException;
+import vendingmachine.exception.DomainNotFoundException;
 import vendingmachine.quantity.Quantity;
 
 public class RandomCoinGenerator implements CoinGenerator {
@@ -35,6 +35,6 @@ public class RandomCoinGenerator implements CoinGenerator {
 		int randomNumber = Randoms.pickNumberInList(possibleCoinAmounts);
 		Money randomMoney = Money.of(randomNumber);
 		return Coin.valueOf(randomMoney)
-			.orElseThrow(() -> new VendingMachineException(Notification.COIN_NOT_FOUND.getMessage()));
+			.orElseThrow(() -> new DomainNotFoundException(Notification.COIN_NOT_FOUND.getMessage()));
 	}
 }
