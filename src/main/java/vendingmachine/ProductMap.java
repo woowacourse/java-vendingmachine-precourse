@@ -38,6 +38,13 @@ public class ProductMap {
         }
     }
 
+    public int sellProduct(String productName){
+        ProductInfo soldProductInfo=productMap.get(productName);
+        soldProductInfo.count--;
+        productMap.put(productName,soldProductInfo);
+        return soldProductInfo.amount;
+    }
+
     private void parseProductString(String productString) {
         int INDEX_FIRST = 0;
         int INDEX_LAST = productString.length();
@@ -82,5 +89,48 @@ public class ProductMap {
             throw new IllegalArgumentException();
         }
         return name;
+    }
+
+    public int getMinAmount(){
+        int minAmount=-1;
+        for(ProductInfo p:productMap.values()){
+            if(p.count>0 && (minAmount<0 || minAmount>p.amount)){
+                minAmount=p.amount;
+            }
+        }
+        return minAmount;
+    }
+
+    private static final boolean SELLABLE=true;
+    private static final boolean NON_SELLABLE=false;
+
+    public void checkProductExistence(String name){
+        if(productMap.containsKey(name)==NON_SELLABLE){
+            System.out.println("[ERROR] 존재하는 상품만 입력해주세요.");
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public boolean isSellable(String name,int userAmount){
+        if(outOfStock(name) || excessAmount(name,userAmount)){
+            return NON_SELLABLE;
+        }
+        return SELLABLE;
+    }
+
+    private boolean outOfStock(String name){
+        if(productMap.get(name).count==0){
+            System.out.println("해당 상품 재고가 없습니다!");
+            return true;
+        }
+        return false;
+    }
+
+    private boolean excessAmount(String name,int userAmount){
+        if(productMap.get(name).amount>userAmount){
+            System.out.println("금액이 부족합니다!");
+            return true;
+        }
+        return false;
     }
 }

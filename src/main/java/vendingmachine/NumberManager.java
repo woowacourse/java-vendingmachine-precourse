@@ -35,14 +35,14 @@ public class NumberManager {
     }
 
     private boolean isAmountError(int amount) {
-        if (amount < 0 || amount % AMOUNT_UNIT > 0) {
+        if (amount <= 0 || amount % AMOUNT_UNIT > 0) {
             return ERROR;
         }
         return NON_ERROR;
     }
 
     private boolean isCountError(int count) {
-        if (count < 0) {
+        if (count <= 0) {
             return ERROR;
         }
         return NON_ERROR;
