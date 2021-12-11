@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import inputcontroller.InputGenerator;
 import models.Coin;
 
 import static models.Coin.*;
@@ -23,7 +22,7 @@ public class VendingMachineUI {
         Coin[] coinList = {COIN_500, COIN_100, COIN_50, COIN_10};
 
         for (int i = 0; i < numOfCoin.length; i++) {
-            if (coin2Num.get(coinList[i]) != 0) {
+            if (numOfCoin[i] != 0) {
                 System.out.printf("%d원 - %d개\n", coinList[i].value(), numOfCoin[i]);
             }
         }
