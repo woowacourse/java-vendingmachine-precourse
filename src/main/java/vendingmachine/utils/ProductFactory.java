@@ -15,9 +15,11 @@ public class ProductFactory {
 		String inputProductsInfo = InputView.writeProductsInfo();
 		List<String> productsInfo = Arrays.asList(inputProductsInfo.split(PRODUCTS_DELIMITER));
 		try {
-			return productsInfo.stream()
+			List<Product> products = productsInfo.stream()
 				.map(Product::new)
 				.collect(Collectors.toList());
+			ExceptionUtils.validateDuplicatedName(products);
+			return products;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
 			return makeProducts();
