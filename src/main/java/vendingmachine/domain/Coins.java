@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public class Coins {
-	public static final String HOLDING_STATUS = "%s원 - %s개%n";
+	public static final String HOLDING_COIN_AMOUNT_TEXT = "%s원 - %s개%n";
 	private final Map<Integer, Integer> coins;
 
 	public Coins(Map<Integer, Integer> coins) {
@@ -22,7 +22,7 @@ public class Coins {
 		List<Integer> keys = new ArrayList<>(coins.keySet());
 		keys.sort(Collections.reverseOrder());
 		for (Integer amount : keys){
-			holdingStatus += String.format(HOLDING_STATUS, amount, coins.get(amount));
+			holdingStatus += String.format(HOLDING_COIN_AMOUNT_TEXT, amount, coins.get(amount));
 		}
 		return holdingStatus;
 	}
