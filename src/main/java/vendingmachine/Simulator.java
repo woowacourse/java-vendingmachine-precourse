@@ -48,7 +48,7 @@ public class Simulator {
     }
 
     public void printHoldingCoins(CoinContainer coinContainer) {
-        String result = "";
+        String result = "자판기가 보유한 동전\n";
         List<Coin> coinList = Arrays.stream(Coin.values())
                                     .sorted(Comparator.comparing(Coin::getAmount).reversed())
                                     .collect(Collectors.toList());
