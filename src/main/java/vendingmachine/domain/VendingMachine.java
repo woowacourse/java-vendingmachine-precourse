@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.List;
+
 public class VendingMachine {
 
 	private Changes changes;
@@ -23,9 +25,9 @@ public class VendingMachine {
 		changes.createRandomCoin();
 	}
 
-	public void createProductList(String productInfo) {
+	public void createProductList(List<String> productInfoList) {
 		products = new Products();
-		products.createProductList(productInfo);
+		products.createProductList(productInfoList);
 	}
 
 	public void createInputMoney(int tempInputMoney) {

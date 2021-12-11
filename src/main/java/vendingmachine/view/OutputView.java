@@ -3,7 +3,6 @@ package vendingmachine.view;
 import java.util.HashMap;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.InputMoney;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
 

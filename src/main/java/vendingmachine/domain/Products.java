@@ -9,7 +9,6 @@ public class Products {
 	private static final int PRICE_INDEX = 1;
 	private static final int QUANTITY_INDEX = 2;
 
-	private static final String INPUT_SPLIT_DELIMITER = ";";
 	private static final String PRODUCT_SPLIT_DELIMITER = ",";
 
 	private static final int OUT_OF_STOCK = 0;
@@ -44,10 +43,9 @@ public class Products {
 			.orElseThrow(() -> new IllegalArgumentException());
 	}
 
-	public void createProductList(String input) {
-		List<String> inputList = Arrays.asList(input.split(INPUT_SPLIT_DELIMITER));
+	public void createProductList(List<String> productInfoList) {
 
-		for (String product : inputList) {
+		for (String product : productInfoList) {
 			String productInfo = product.substring(1, product.length() - 1);
 			addProduct(Arrays.asList(productInfo.split(PRODUCT_SPLIT_DELIMITER)));
 		}

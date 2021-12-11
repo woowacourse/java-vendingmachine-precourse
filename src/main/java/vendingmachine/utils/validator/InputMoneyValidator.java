@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.utils.validator;
 
 import static vendingmachine.utils.ErrorType.*;
 
@@ -8,11 +8,10 @@ import java.util.regex.Pattern;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 
-public class Validator {
+public class InputMoneyValidator {
 	private static final int EXPECTED_VALUE_WHEN_DIVIDING = 0;
 	private static final int ZERO_NUMBER = 0;
 
-	// 자판기 보유 금액 입력 관련 예외 처리
 	public static boolean checkIsValidInputMoney(String inputMoney) {
 		try {
 			isNotBlank(inputMoney);
@@ -41,7 +40,7 @@ public class Validator {
 	}
 
 	public static boolean isDigit(String input) {
-		if (!Pattern.matches("^[0-9]*$", input)) {
+		if (!Pattern.matches("^[0-9]+$", input)) {
 			throw new IllegalArgumentException(ERROR_MONEY_IS_NOT_NUMBER.getText());
 		}
 		return true;

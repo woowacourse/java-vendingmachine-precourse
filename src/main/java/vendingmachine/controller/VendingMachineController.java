@@ -1,9 +1,11 @@
 package vendingmachine.controller;
 
-import static vendingmachine.utils.Validator.*;
+import static vendingmachine.utils.validator.InputMoneyValidator.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
+
+import java.util.List;
 
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
@@ -22,8 +24,8 @@ public class VendingMachineController {
 		vendingMachine.createChanges(totalAmount);
 		printChangesVendingMachine(vendingMachine);
 
-		String productInfo = inputInformationOfProducts();
-		vendingMachine.createProductList(productInfo);
+		List<String> productInfoList = inputInformationOfProducts();
+		vendingMachine.createProductList(productInfoList);
 
 		String tempInputMoney = inputMoneyToPutInVendingMachine();
 		vendingMachine.createInputMoney(Integer.parseInt(tempInputMoney));
