@@ -148,7 +148,7 @@ public class User {
     }
     public void showRemainingAmount() {
         System.out.println();
-        System.out.println(Message.REMAINING_AMOUNT + machineBalance + Message.WON);
+        System.out.println(Message.REMAINING_AMOUNT + userAmount + Message.WON);
     }
     public boolean availablePurchase() {
         for(String product : productQuantities.keySet()) {
