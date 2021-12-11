@@ -16,7 +16,42 @@ public class VendingMachine {
 
     public void run() {
         initVault();
+        System.out.println(this.cashManager.getVaultStatus());
         initProducts();
+
+        while (true) {
+            try {
+                System.out.println("투입 급액을 입력해 주세요.");
+                String buffer = Console.readLine();
+                Validator.validateCashInput(buffer);
+                this.cashManager.setRemainCash(Integer.parseInt(buffer));
+
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        while (true) {
+            try {
+                System.out.println(String.format("투입 금액: %d", this.cashManager.getRemainCash()));
+
+                if (!this.productManager.isProductAvailable() || this.cashManager.getRemainCash() < this.productManager.getMinPrice()) {
+                    break;
+                }
+
+                System.out.println("구매할 상품명을 입력해 주세요.");
+                String buffer = Console.readLine();
+                Validator.validateProductName(buffer);
+                this.cashManager.deposit(this.productManager.getProductPrice(buffer));
+
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        System.out.println("잔돈");
+
     }
 
     private void initVault() {
@@ -24,7 +59,7 @@ public class VendingMachine {
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
             try {
                 String buffer = Console.readLine();
-                Validator.validateInputCash(buffer);
+                Validator.validateCashInput(buffer);
                 int amount = Integer.parseInt(buffer);
                 this.cashManager.initVault(amount);
 
@@ -41,6 +76,7 @@ public class VendingMachine {
             try {
                 String buffer = Console.readLine();
                 parseProductsInput(buffer);
+                System.out.println();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -51,14 +87,16 @@ public class VendingMachine {
     private void parseProductsInput(String buffer) throws MyIllegalArgumentException {
         String[] productSpecs = buffer.split(";");
 
+        Validator.validateProductTypes(productSpecs.length);
+
         for (String productSpec : productSpecs) {
-            String[] token = productSpec
-                    .replaceAll("\\[\\|\\]", "")
+            String[] tokens = productSpec
+                    .replaceAll("[\\[\\]]", "")
                     .split(",");
 
-            for (String tmp : token) {
-                System.out.println(tmp);
-            }
+            Validator.validateProductInput(tokens);
+
+            this.productManager.addProduct(tokens[0], Integer.parseInt(tokens[1]), Integer.parseInt(tokens[2]));
         }
     }
 }

@@ -5,20 +5,29 @@ import java.util.Map;
 
 public class ProductManager {
     private HashMap<String, Integer> products = new HashMap<>();
+    private HashMap<String, Integer> priceByName = new HashMap<>();
 
     public ProductManager() {
     }
 
-    public void addProduct(Product product, int amount) throws MyIllegalArgumentException {
+    public int getProductPrice(String productName) {
+        return priceByName.get(productName);
+    }
+
+    public void addProduct(String productName, int productPrice, int amount) throws MyIllegalArgumentException {
         if (amount < 100) {
             throw new MyIllegalArgumentException("Price of product must be positive integer equal or higher than 100");
         }
 
-        if (!products.containsKey(product.getName())) {
-            products.put(product.getName(), 0);
+        if (!products.containsKey(productName)) {
+            products.put(productName, 0);
         }
 
-        products.put(product.getName(), products.get(product.getName()) + amount);
+        if (!priceByName.containsKey(productName)) {
+            priceByName.put(productName, productPrice);
+        }
+
+        products.put(productName, products.get(productName) + amount);
     }
 
     public void popProduct(String productName) throws MyIllegalArgumentException {
@@ -41,9 +50,22 @@ public class ProductManager {
         int ret = Integer.MAX_VALUE;
 
         for (Map.Entry<String, Integer> entry : products.entrySet()) {
+            if (entry.getValue() < 1) {
+                continue;
+            }
             ret = Integer.min(ret, entry.getValue());
         }
 
         return ret;
+    }
+
+    public boolean isProductAvailable() {
+        for (Map.Entry<String, Integer> entry : products.entrySet()) {
+            if (entry.getValue() > 0) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
