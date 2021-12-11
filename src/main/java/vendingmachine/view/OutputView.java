@@ -18,6 +18,9 @@ public class OutputView {
 	public static final String DASH_SIGN = " - ";
 	public static final String COUNT_SIGN = "개";
 
+	public static final String INPUT_MONEY = "투입 금액: ";
+	public static final String WON_SIGN = "원";
+
 	public static void printMoneyError() {
 		System.out.println(HOLDING_MONEY_ERROR);
 	}
@@ -38,5 +41,9 @@ public class OutputView {
 
 	public static void printInputMoneyError() {
 		System.out.println(INPUT_MONEY_ERROR);
+	}
+
+	public static void printInputMoney(int money) {
+		System.out.println(INPUT_MONEY + money + WON_SIGN);
 	}
 }

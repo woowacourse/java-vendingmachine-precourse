@@ -14,7 +14,6 @@ public class InputView {
 	}
 
 	public static void askInputMoney() {
-		System.out.println();
 		System.out.println(ASK_INPUT_MONEY);
 	}
 }

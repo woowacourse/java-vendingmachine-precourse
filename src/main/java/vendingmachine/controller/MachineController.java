@@ -12,5 +12,6 @@ public class MachineController {
 		OutputView.printHoldingCoins(vendingMachine.coinCount);
 		vendingMachine.itemList = inputController.scanItemInform();
 		vendingMachine.inputMoney = inputController.scanInputMoney();
+		OutputView.printInputMoney(vendingMachine.inputMoney);
 	}
 }
