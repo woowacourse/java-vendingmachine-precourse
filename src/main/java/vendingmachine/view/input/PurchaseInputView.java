@@ -9,6 +9,7 @@ import vendingmachine.constant.Input;
 import vendingmachine.constant.Output;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductRepository;
+import vendingmachine.domain.ReturnCoin;
 
 public class PurchaseInputView {
     private Integer money;
@@ -17,12 +18,19 @@ public class PurchaseInputView {
         this.money = money;
     }
 
+    private String inputInit() {
+        System.out.println(Output.PURCHASE_MONEY.getText() + money + Output.WON.getText());
+        System.out.println(Input.PRODUCT_PURCHASE_GUIDE_MESSAGE.getText());
+        return Console.readLine();
+    }
+
     public void inputProductForPurchase() {
         while (true) {
-            System.out.println(Output.PURCHASE_MONEY.getText() + money + Output.WON.getText());
-            System.out.println(Input.PRODUCT_PURCHASE_GUIDE_MESSAGE.getText());
-            String productName = Console.readLine();
+            if (!ReturnCoin.getInstance().canReturn(money)) {
+                return;
+            }
 
+            String productName = inputInit();
             try {
                 tryToInputProductForPurchase(productName);
                 purchaseProduct(productName);
@@ -42,7 +50,7 @@ public class PurchaseInputView {
         List<Product> findProduct = products.stream().
                 filter(product -> product.getName().equals(productName)).collect(Collectors.toList());
 
-        if (findProduct.get(Condition.INDEX_0.getNumber()).getAmount() == 0) {
+        if (findProduct.get(Condition.INDEX_0.getNumber()).getQuantity() == 0) {
             System.out.println(Input.PRODUCT_AMOUNT_LACK_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
         }

@@ -4,6 +4,7 @@ public enum Condition {
     LENGTH_0(0),
     LENGTH_1(1),
     MONEY_0(0),
+    QUANTITY_0(0),
     ONE_COIN(1),
     INDEX_0(0),
     INDEX_1(1),
