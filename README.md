@@ -38,5 +38,6 @@
 4. 상품 등록 시, `[,],;` 등등 형식을 잘 지켰는지 확인
 5. 상품 가격이 100원 이상이고, 10원 단위로 나눠서 떨어지는지 확인. 그렇지 않다면 `IllegalArgumentException`
 6. 투입금액은 최소한 1개의 물건은 살 수 있어야 할 정도의 금액이어야 한다. 그렇지 않다면 `IllegalArgumentException`
+7. 상품 등록 시, **중복된 이름**의 상품이 있으면 `IllegalArgumentException`
 
 <br>
