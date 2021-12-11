@@ -30,11 +30,11 @@ public class VendingMachine {
     private void createRandom(int amount) {
         while (amount != DEFAULT_VALUE) {
             int randomCoin = RandomNumberGenerator.generateRandomCoins(Coin.getCoinValues());
-            amount = addCoin(coins, randomCoin, amount);
+            amount = addCoin(randomCoin, amount);
         }
     }
 
-    private int addCoin(Map<Coin, Integer> coins, int randomCoin, int amount) {
+    private int addCoin(int randomCoin, int amount) {
         if (amount >= randomCoin) {
             Coin coin = Coin.findCoin(randomCoin);
             coins.put(coin, coins.get(coin) + INCREMENT_BY_ONE);
@@ -81,8 +81,11 @@ public class VendingMachine {
         Map<Coin, Integer> changes = new TreeMap<>();
         coins.keySet().forEach(coin -> {
             int changesCount = userInsertAmount / coin.getAmount();
-            changes.put(coin, changesCount);
-            userInsertAmount -= changesCount;
+            changesCount = Math.min(changesCount, coins.get(coin));
+            if (changesCount > 0) {
+                changes.put(coin, changesCount);
+            }
+            userInsertAmount -= changesCount * coin.getAmount();
         });
 
         return changes;
