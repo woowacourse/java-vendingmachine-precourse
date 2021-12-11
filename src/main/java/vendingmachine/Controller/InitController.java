@@ -2,14 +2,14 @@ package vendingmachine.Controller;
 
 import vendingmachine.Service.InitHoldingCoinsService;
 import vendingmachine.Service.InitInputAmountService;
-import vendingmachine.Service.ProductService;
+import vendingmachine.Service.InitProductListService;
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
 
 public class InitController {
     InitHoldingCoinsService holdingCoinsService = new InitHoldingCoinsService();
-    ProductService productService = new ProductService();
-    InitInputAmountService initInputAmountService = new InitInputAmountService();
+    InitProductListService productListService = new InitProductListService();
+    InitInputAmountService inputAmountService = new InitInputAmountService();
 
     public void initVendingMachine() {
         initHoldingCoins();
@@ -29,7 +29,7 @@ public class InitController {
 
     private void initProducts() {
         try {
-            productService.setProducts(InputView.getProductInfo());
+            productListService.setProducts(InputView.getProductInfo());
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             initProducts();
@@ -38,7 +38,7 @@ public class InitController {
 
     private void initInputAmount() {
         try {
-            initInputAmountService.setInputAmount(InputView.getInputAmount());
+            inputAmountService.setInputAmount(InputView.getInputAmount());
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             initInputAmount();

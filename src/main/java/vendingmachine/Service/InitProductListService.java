@@ -5,7 +5,7 @@ import vendingmachine.Domain.Product;
 import vendingmachine.Domain.ProductList;
 import vendingmachine.Validation.ProductValidation;
 
-public class ProductService {
+public class InitProductListService {
     ProductValidation validation = new ProductValidation();
 
     public void setProducts(String input) {
