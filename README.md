@@ -11,7 +11,7 @@
 - [ ] ProductManager   
     - [x] constructor   
     - [x] addProduct
-    - [ ] removeProduct
+    - [x] removeProduct
 - [ ] CashManager   
     - [ ] return changes
 - [x] Coin   
