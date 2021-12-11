@@ -1,14 +1,8 @@
 package vendingmachine.io;
 
-import static vendingmachine.domain.Machine.*;
-import static vendingmachine.domain.MachineWallet.*;
-import static vendingmachine.domain.RandomBox.*;
-import static vendingmachine.domain.product.Products.*;
-import static vendingmachine.utils.Printer.*;
-
 import vendingmachine.service.MachineService;
 import vendingmachine.service.MachineWalletService;
-import vendingmachine.utils.Printer;
+import vendingmachine.config.utils.Printer;
 
 public class Output {
 	private final Printer printer;
@@ -22,12 +16,12 @@ public class Output {
 	}
 
 	public void outputMachineNumOfCoins() {
-		printer.printMachineNumOfCoinsNotice(machineWalletService.getMachineClipStatus());
+		printer.printMachineNumOfCoinsNotice(machineWalletService.getMachineWalletStatus());
 	}
 
 	public boolean outputCustomerAmount() {
-		printer.printCustomerCurrentAmount(machineService.getAmount());
-		return machineService.checkMachineIsWorking();
+		printer.printCustomerCurrentAmount(machineService.getCustomerAmount());
+		return machineService.checkIsMachineAvailable();
 	}
 
 	public void outputCustomerChange() {

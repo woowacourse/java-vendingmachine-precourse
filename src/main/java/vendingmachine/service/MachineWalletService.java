@@ -26,7 +26,7 @@ public class MachineWalletService {
 		return machineWallet.saveChangesByAmount(machine.getAmount());
 	}
 
-	public String getMachineClipStatus(){
+	public String getMachineWalletStatus(){
 		return machineWallet.toString();
 	}
 

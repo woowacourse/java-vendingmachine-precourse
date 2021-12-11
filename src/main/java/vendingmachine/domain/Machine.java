@@ -15,7 +15,7 @@ public class Machine {
 		amount -= productPrice;
 	}
 
-	public boolean isAmountLessThanProductMinPrice(int minPrice) {
-		return amount < minPrice;
+	public boolean isAmountLessThanMinOfProductsPrice(int minOfProductsPrice) {
+		return amount < minOfProductsPrice;
 	}
 }

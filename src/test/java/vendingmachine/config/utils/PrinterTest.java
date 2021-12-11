@@ -1,9 +1,9 @@
-package vendingmachine.utils;
+package vendingmachine.config.utils;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.utils.Constant.*;
-import static vendingmachine.utils.Printer.*;
+import static vendingmachine.config.ConstantConfig.*;
+import static vendingmachine.config.utils.Printer.*;
 
 import java.util.Map;
 import java.util.TreeMap;

@@ -1,6 +1,6 @@
 package vendingmachine.exception;
 
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.config.ConstantConfig.*;
 
 public class ProductInputSemicolonException extends CustomException {
 

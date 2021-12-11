@@ -19,16 +19,6 @@ public class Products {
 		return productList;
 	}
 
-	public int getMinPriceOfProducts() {
-		return productList.stream().mapToInt(p -> p.getPrice()).min().orElseThrow(NumberFormatException::new);
-	}
-
-	public boolean isProductExisted() {
-		if(productList.stream().mapToInt(p -> p.getAmount()).sum() ==0){
-			return false;
-		}
-		return true;
-	}
 
 	@Override
 	public String toString() {

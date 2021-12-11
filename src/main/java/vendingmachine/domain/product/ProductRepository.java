@@ -29,4 +29,12 @@ public class ProductRepository {
 			.orElse(null);
 	}
 
+	public int findOneByPriceDesc(){
+		return findAll().stream().mapToInt(p -> p.getPrice()).min().orElse(-1);
+	}
+
+	public int getSumOfProductsAmount(){
+		return findAll().stream().mapToInt(p -> p.getAmount()).sum();
+	}
+
 }

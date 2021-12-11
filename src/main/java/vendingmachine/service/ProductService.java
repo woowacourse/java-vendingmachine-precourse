@@ -1,8 +1,6 @@
 package vendingmachine.service;
 
-import static vendingmachine.utils.Constant.*;
-
-import java.util.List;
+import static vendingmachine.config.ConstantConfig.*;
 
 import vendingmachine.domain.Machine;
 import vendingmachine.domain.product.Product;

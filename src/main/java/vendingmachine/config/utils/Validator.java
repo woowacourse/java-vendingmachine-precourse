@@ -1,6 +1,6 @@
-package vendingmachine.utils;
+package vendingmachine.config.utils;
 
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.config.ConstantConfig.*;
 
 import java.util.regex.Matcher;
 
@@ -99,11 +99,5 @@ public enum Validator {
 		if(!productService.checkProductIsExistedByName(productName)){
 			throw new ProductIsNotExistedException();
 		}
-	}
-
-	private void isAvailableBuyProduct(String productName) {
-		// if(!productService.checkProductIsExistedByName(productName)){
-		// 	throw new ProductIsNotExistedException();
-		// }
 	}
 }

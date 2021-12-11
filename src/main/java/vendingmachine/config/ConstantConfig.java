@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.config;
 
 import static vendingmachine.domain.Coin.*;
 
@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public final class Constant {
+public final class ConstantConfig {
 	public static final String LINE_SEPARATOR = System.lineSeparator();
 	public static final String SEMICOLON = ";";
 	public static final String COMMA = ",";

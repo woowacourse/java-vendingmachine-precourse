@@ -2,7 +2,7 @@ package vendingmachine;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.config.ConstantConfig.*;
 
 import org.junit.jupiter.api.Test;
 

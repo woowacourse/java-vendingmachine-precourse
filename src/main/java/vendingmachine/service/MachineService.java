@@ -2,30 +2,33 @@ package vendingmachine.service;
 
 
 import vendingmachine.domain.Machine;
-import vendingmachine.domain.product.Products;
+import vendingmachine.domain.product.ProductRepository;
 
 public class MachineService {
 
 	private final Machine machine;
-	private final Products products;
+	private final ProductRepository productRepository;
 
-	public MachineService(Machine machine, Products products) {
+	public MachineService(Machine machine, ProductRepository productRepository) {
 		this.machine = machine;
-		this.products = products;
+		this.productRepository = productRepository;
 	}
 
-	public void save(int amount) {
+	public void saveCustomerAmount(int amount) {
 		machine.save(amount);
 	}
 
-	public int getAmount(){
+	public int getCustomerAmount() {
 		return machine.getAmount();
 	}
 
-	public boolean checkMachineIsWorking() {
-		if (machine.isAmountLessThanProductMinPrice(products.getMinPriceOfProducts()) || !products.isProductExisted()) {
-			return true;
+	public boolean checkIsMachineAvailable() {
+		int minOfProductsPrice = productRepository.findOneByPriceDesc();
+		int sumOfProductsAmount = productRepository.getSumOfProductsAmount();
+
+		if (machine.isAmountLessThanMinOfProductsPrice(minOfProductsPrice) || sumOfProductsAmount == 0) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 }

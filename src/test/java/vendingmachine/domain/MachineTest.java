@@ -1,11 +1,9 @@
 package vendingmachine.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.domain.Machine.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 
 class MachineTest{
 

@@ -1,12 +1,10 @@
-package vendingmachine.utils;
+package vendingmachine.config.utils;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.config.ConstantConfig.*;
 
 import java.util.Arrays;
-
-import javax.crypto.Mac;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

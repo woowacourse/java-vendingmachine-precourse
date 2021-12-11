@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.domain.Coin.*;
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.config.ConstantConfig.*;
 
 import java.util.List;
 

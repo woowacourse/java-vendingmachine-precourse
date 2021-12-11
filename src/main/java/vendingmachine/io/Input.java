@@ -1,13 +1,13 @@
 package vendingmachine.io;
 
 import static camp.nextstep.edu.missionutils.Console.*;
-import static vendingmachine.utils.Constant.*;
-import static vendingmachine.utils.Validator.*;
+import static vendingmachine.config.ConstantConfig.*;
+import static vendingmachine.config.utils.Validator.*;
 
 import vendingmachine.service.MachineService;
 import vendingmachine.service.MachineWalletService;
 import vendingmachine.service.ProductService;
-import vendingmachine.utils.Printer;
+import vendingmachine.config.utils.Printer;
 
 public class Input {
 	private final Printer printer;
@@ -51,7 +51,7 @@ public class Input {
 		while (!VALIDATOR.validateNumberFormat(input = readLine())) {
 			// validateNumberFormat
 		}
-		machineService.save(Integer.parseInt(input));
+		machineService.saveCustomerAmount(Integer.parseInt(input));
 	}
 
 	public void inputCustomerBuyProduct() {

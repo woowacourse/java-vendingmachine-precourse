@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
 import static camp.nextstep.edu.missionutils.Randoms.*;
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.config.ConstantConfig.*;
 
 import java.util.Map;
 import java.util.TreeMap;
