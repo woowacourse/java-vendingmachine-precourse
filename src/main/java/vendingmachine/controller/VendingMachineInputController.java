@@ -7,7 +7,7 @@ import vendingmachine.view.VendingMachineAccountInputView;
 public class VendingMachineInputController {
 	public static final int INVALID_INPUT = -1;
 
-	public static int getAccount() {
+	public static int getAccountInput() {
 		VendingMachineAccountInputView.print();
 
 		int machineAccount = INVALID_INPUT;
