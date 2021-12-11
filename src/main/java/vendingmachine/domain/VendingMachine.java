@@ -95,6 +95,10 @@ public class VendingMachine {
 		return inputCost;
 	}
 
+	public List<Product> getProducts() {
+		return products;
+	}
+
 	public void setInputCost(int inputCost) {
 		this.inputCost = inputCost;
 	}

@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
-public class Product implements Comparable<Product>{
+import java.util.Objects;
+
+public class Product implements Comparable<Product> {
 
 	private String name;
 	private int price;
@@ -14,10 +16,25 @@ public class Product implements Comparable<Product>{
 
 	@Override
 	public int compareTo(Product o) {
-		return this.price-o.getPrice();
+		return this.price - o.getPrice();
 	}
 
-	public void subtractAmount(){
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Product product = (Product)o;
+		return Objects.equals(name, product.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
+	}
+
+	public void subtractAmount() {
 		amount--;
 	}
 

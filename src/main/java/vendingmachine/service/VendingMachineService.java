@@ -57,6 +57,9 @@ public class VendingMachineService {
 
 	public boolean postProductName(String inputStr) {
 		//TODO: Validation 들 처리
+		Validation.validateNull(inputStr);
+
+
 		result.init();
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
@@ -79,12 +82,12 @@ public class VendingMachineService {
 	private void addProducts(String inputStr) {
 		String[] products = inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";");
 		for (String rowProduct : products) {
-			//TODO: Validation 처리
 			String[] product = rowProduct.split(",");
 
 			Validation.validateProductLength(product);
 			Validation.validateProductPrice(product[1]);
 			Validation.validateProductAmount(product[2]);
+			Validation.validateProductIsDistinct(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])), vendingMachine.getProducts());
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
 		}
