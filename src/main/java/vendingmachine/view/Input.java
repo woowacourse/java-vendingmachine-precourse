@@ -6,13 +6,18 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
 
-	public static int holdingAmount() {
+	public static String holdingAmount() {
 		System.out.println(HOLDING_AMOUNT_INPUT_MESSAGE);
-		return Integer.parseInt(Console.readLine());
+		return Console.readLine();
 	}
 
 	public static String item() {
 		System.out.println(ITEM_INPUT_MESSAGE);
+		return Console.readLine();
+	}
+
+	public static String inputAmount() {
+		System.out.println(INPUT_AMOUNT_INPUT_MESSAGE);
 		return Console.readLine();
 	}
 }
