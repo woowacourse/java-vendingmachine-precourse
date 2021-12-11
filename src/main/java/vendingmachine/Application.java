@@ -22,8 +22,9 @@ public class Application {
 		String[] productNameAndPriceAndCnt = vendingMachineController.scanProductNameAndPriceAndCnt();
 		Products products = Products.save(productNameAndPriceAndCnt);
 		Money inputMoney = new Money(Integer.parseInt(vendingMachineController.scanInputMoney()));
-		while (true) {
+		while (inputMoney.isRemain()) {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());
+			String buyProductName = vendingMachineController.scanBuyProductName();
 		}
 	}
 }
