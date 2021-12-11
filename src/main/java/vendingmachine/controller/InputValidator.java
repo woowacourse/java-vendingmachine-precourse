@@ -62,12 +62,19 @@ public class InputValidator {
 		throw new IllegalArgumentException();
 	}
 
-	public static boolean checkValidSplitFormat(String[] itemList) {
-		int price = isNumber(itemList[InputController.ITEM_PRICE_INDEX]);
-		int count = isNumber(itemList[InputController.ITEM_COUNT_INDEX]);
+	public static boolean checkValidSplitFormat(String[] itemInform) {
+		int price = isNumber(itemInform[InputController.ITEM_PRICE_INDEX]);
+		int count = isNumber(itemInform[InputController.ITEM_COUNT_INDEX]);
 		if (price % 10 != 0 || count < 1) {
 			throw new IllegalArgumentException();
 		}
 		return true;
+	}
+
+	public static void checkDuplicateName(List<String> itemNameList, String name) {
+		if (itemNameList.contains(name)) {
+			throw new IllegalArgumentException();
+		}
+		itemNameList.add(name);
 	}
 }
