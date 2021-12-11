@@ -5,28 +5,25 @@ import java.util.List;
 import java.util.Map;
 
 import vendingmachine.controller.BalanceController;
-import vendingmachine.controller.ConsumerController;
 import vendingmachine.controller.ItemController;
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Consumer;
 import vendingmachine.domain.Item;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.BalanceMessage;
-import vendingmachine.view.ConsumerMessage;
 import vendingmachine.view.ItemMessage;
 
 public class Operation {
 
-	public static void turnOn() {
+	public static VendingMachine turnOn() {
 		BalanceMessage.printInputMessage();
-		int balance = BalanceController.getInputValue();
+		int balance = BalanceController.getInitialMoney();
 
-		Map<Coin, Integer> coinMap = Coin.decideCoinRandomly(new LinkedHashMap<>(), Coin.values(), balance);
+		Map<Integer, Integer> coinMap = Coin.decideCoinRandomly(new LinkedHashMap<>(), balance);
 		BalanceMessage.printCoinList(coinMap);
 
-		ItemMessage.printInputMessage();
-		List<Item> itemList = Item.createList(ItemController.getInputValue());
+		ItemMessage.printSettingMessage();
+		List<Item> itemList = Item.createList(ItemController.getInputItemForm());
 
-		ConsumerMessage.printInputMessage();
-		Consumer consumer = Consumer.create(ConsumerController.getInputValue());
+		return VendingMachine.create(coinMap, itemList);
 	}
 }
