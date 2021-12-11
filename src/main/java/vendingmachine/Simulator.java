@@ -88,4 +88,9 @@ public class Simulator {
     public void printBalance(VendingMachine vendingMachine) {
         System.out.println("투입 금액: " + vendingMachine.getBalance() + WON);
     }
+
+    public String inputProductToBuy() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return Console.readLine().trim();
+    }
 }
