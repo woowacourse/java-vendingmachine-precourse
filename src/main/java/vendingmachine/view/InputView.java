@@ -12,6 +12,11 @@ public class InputView {
 		return Integer.parseInt(requestMoney());
 	}
 
+	public static int requestInputMoney() {
+		System.out.println(INPUT_MONEY_REQUEST_MESSAGE);
+		return Integer.parseInt(requestMoney());
+	}
+
 	public static String requestMoney() {
 		while (true) {
 			String money = readLine();
