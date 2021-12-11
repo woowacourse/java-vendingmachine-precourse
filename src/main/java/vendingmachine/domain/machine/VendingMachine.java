@@ -13,8 +13,9 @@ public class VendingMachine {
     private final ProductStore productStore;
     private final CoinPocket coinPocket;
     private final String BY = ";";
+    private final int balance;
 
-    private int balance;
+    private int balanceForPutCoin;
 
     public static VendingMachine of(int balance) {
         return new VendingMachine(balance);
@@ -22,18 +23,20 @@ public class VendingMachine {
 
     private VendingMachine(int balance) {
         this.balance = balance;
+        balanceForPutCoin = balance;
         this.productStore = ProductStore.getInstance();
         this.coinPocket = CoinPocket.getInstance();
     }
 
     public void fillCoinsAsBalanceAmount(CoinProvider coinProvider) {
-        while(balance > 0) {
-            reduceBalance(coinPocket.putCoinAndAddCount(balance, coinProvider));
+        while(balanceForPutCoin > 0) {
+            System.out.println(balanceForPutCoin);
+            reduceBalance(coinPocket.putCoinAndAddCount(balanceForPutCoin, coinProvider));
         }
     }
 
     private void reduceBalance(int coinAmount) {
-        balance -= coinAmount;
+        balanceForPutCoin -= coinAmount;
     }
 
     public void splitInfoAndFillProduct(String allProductInfo) {
