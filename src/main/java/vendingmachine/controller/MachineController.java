@@ -23,6 +23,7 @@ public class MachineController {
 	public void run() {
 		setting();
 		progress();
+		finishWithReturn();
 	}
 
 	private void setting() {
@@ -31,7 +32,6 @@ public class MachineController {
 		ArrayList<String> itemPriceStock = InputView.getItemPriceStock();
 		Beverages beverages = splitItem(itemPriceStock);
 		Money inputMoney = InputView.getUserInputMoney();
-
 		vendingMachine = new VendingMachine(beverages, changes, inputMoney);
 	}
 
@@ -42,6 +42,10 @@ public class MachineController {
 			Beverage beverage = vendingMachine.findBeverageByName(itemName);
 			vendingMachine.sell(beverage);
 		}
+	}
+
+	private void finishWithReturn() {
+		Change calculate = vendingMachine.calculate();
 	}
 
 	private Beverages splitItem(ArrayList<String> itemPriceStock) {

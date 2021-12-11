@@ -7,16 +7,17 @@ import vendingmachine.exception.NotFoundBeverageException;
 public class VendingMachine {
 	private final Beverages beverages;
 	private final Change change;
-	private final Money money;
+	private final Money inputMoney;
 
 	public VendingMachine(Beverages beverages, Change change, Money money) {
 		this.beverages = beverages;
 		this.change = change;
-		this.money = money;
+		this.inputMoney = money;
 	}
 
-	public Change calculate(Money inputMoney) {
-		if (money.isSmaller(inputMoney.getTotal())) {
+	public Change calculate() {
+		Money totalChange = change.totalChange();
+		if (totalChange.isSmaller(this.inputMoney.getTotal())) {
 			return change;
 		}
 		return change;
@@ -31,7 +32,7 @@ public class VendingMachine {
 	}
 
 	public Money getMoney() {
-		return money;
+		return inputMoney;
 	}
 
 	public Beverage findBeverageByName(String name) {
@@ -45,11 +46,11 @@ public class VendingMachine {
 
 	public void sell(Beverage beverage) {
 		Map<Beverage, Integer> beverages = this.beverages.getBeverages();
-		money.spend(beverage.getPrice());
+		inputMoney.spend(beverage.getPrice());
 		beverages.put(beverage, beverages.get(beverage) - 1);
 	}
 
 	public boolean canSell() {
-		return !money.isSmaller(beverages.getMinimumBeveragePrice()) && !beverages.isAllSoldOut();
+		return !inputMoney.isSmaller(beverages.getMinimumBeveragePrice()) && !beverages.isAllSoldOut();
 	}
 }
