@@ -11,24 +11,26 @@ public enum Coin {
 
 	private final int amount;
 	private int numberOfCoin;
-	public static List<Coin> coins = new ArrayList<>();
+	private int remainingNumber;
 
 	Coin(final int amount) {
 		this.amount = amount;
 		this.numberOfCoin = 0;
+		this.remainingNumber = 0;
 	}
 
 	// 추가 기능 구현
-	public static List<Coin> init() {
-		coins.add(COIN_500);
-		coins.add(COIN_100);
-		coins.add(COIN_50);
-		coins.add(COIN_10);
-		return coins;
-	}
 
 	public void addCoin() {
 		this.numberOfCoin += 1;
+	}
+
+	public void addRemainingNumber() {
+		this.remainingNumber += 1;
+	}
+
+	public void reduceCoin() {
+		this.numberOfCoin -= 1;
 	}
 
 	public int getAmount() {
@@ -37,5 +39,9 @@ public enum Coin {
 
 	public int getNumberOfCoin() {
 		return numberOfCoin;
+	}
+
+	public int getRemainingNumber() {
+		return remainingNumber;
 	}
 }
