@@ -17,6 +17,9 @@ public class VendingMachineController {
 			Menus menus = initMenus();
 
 			VendingMachine vendingMachine = new VendingMachine(leftCoins, menus);
+
+			String inputMoney = InputView.getMoney();
+			vendingMachine.putMoney(inputMoney);
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			init();
