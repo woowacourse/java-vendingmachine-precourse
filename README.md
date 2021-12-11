@@ -173,3 +173,4 @@ public enum Coin {
     - 자판기를 가동하기 위해 필요한 데이터를 관리하는 클래스 구현(branch: feature/vending-machine)
     - 자판기 view에서 필요한 메시지를 담당하는 클래스 구현(branch: feature/vending-machine-message)
         1. 자판기에 입력할 데이터를 안내하는 메시지
+        2. 자판기에서 처리된 결과를 출력하는 메시지
