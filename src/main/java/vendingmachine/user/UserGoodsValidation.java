@@ -6,4 +6,10 @@ public class UserGoodsValidation {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_100WON_MORE);
         }
     }
+
+    public static void dividedBy10Won(String price) {
+        if (Integer.parseInt(price) % InputErrorConstant.GOODS_PRICE_RULE == 0) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_PRICE_RULE);
+        }
+    }
 }
