@@ -34,19 +34,19 @@ public class ProductService {
 		}
 	}
 
-	public boolean checkProductIsExistedByName(String name){
+	public boolean checkProductIsExistedByName(String name) {
 		Product findItem = productRepository.findByName(name);
-		if(findItem == null || !findItem.isExistedProduct()){
+		if (findItem == null || !findItem.isExistedProduct()) {
 			return false;
 		}
 
-		if(!checkCustomerIsAvailableBuyProduct(findItem)){
+		if (!checkCustomerIsAvailableBuyProduct(findItem)) {
 			throw new CustomerLeakMoneyException();
 		}
 		return true;
 	}
 
-	private boolean checkCustomerIsAvailableBuyProduct(Product findItem){
+	private boolean checkCustomerIsAvailableBuyProduct(Product findItem) {
 		return findItem.getPrice() <= machine.getAmount();
 	}
 

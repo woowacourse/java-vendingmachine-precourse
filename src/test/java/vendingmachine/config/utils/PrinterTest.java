@@ -22,7 +22,7 @@ class PrinterTest extends NsTest {
 	private MachineWallet machineClip;
 
 	@BeforeEach
-	void beforeEach(){
+	void beforeEach() {
 		this.printer = PRINTER;
 		this.machineClip = new MachineWallet();
 		randomBox = RandomBox.RANDOM_BOX;
@@ -30,45 +30,45 @@ class PrinterTest extends NsTest {
 	}
 
 	@Test
-	void 머신_보유금액입력_알림_테스트(){
+	void 머신_보유금액입력_알림_테스트() {
 		printer.printMachineAmountNotice();
 		assertEquals(output().contains(INPUT_MACHINE_AMOUNT), true);
 	}
 
 	@Test
-	void 머신_상품입력_알림_테스트(){
+	void 머신_상품입력_알림_테스트() {
 		printer.printProductsNotice();
 		assertEquals(output().contains(INPUT_PRODUCTS), true);
 	}
 
 	@Test
-	void 고객_투입금액입력_알림_테스트(){
+	void 고객_투입금액입력_알림_테스트() {
 		printer.printCustomerAmountNotice();
 		assertEquals(output().contains(INPUT_CUSTOMER_AMOUNT), true);
 	}
 
 	@Test
-	void 고객_상품구매입력_알림_테스트(){
+	void 고객_상품구매입력_알림_테스트() {
 		printer.printCustomerBuyProductNotice();
 		assertEquals(output().contains(INPUT_CUSTOMER_BUY_PRODUCT), true);
 	}
 
 	@Test
-	void 머신_동전_종류별출력_알림_테스트(){
+	void 머신_동전_종류별출력_알림_테스트() {
 		printer.printMachineNumOfCoinsNotice(machineClip.toString());
 		assertThat(output()).contains(OUTPUT_MACHINE_NUM_OF_COINS, "원 -", "개");
 	}
 
 	@Test
-	void 머신_고객_현재투입금액출력_알림_테스트(){
+	void 머신_고객_현재투입금액출력_알림_테스트() {
 		int amount = 100000;
 		printer.printCustomerCurrentAmount(amount);
 		assertEquals(output().contains(String.format(OUTPUT_CUSTOMER_AMOUNT, amount)), true);
 	}
 
 	@Test
-	void 고객_잔돈반환출력_알림_테스트(){
-		Map<Integer, Integer> amountToChanges = new TreeMap<>((o1,o2)->o2-o1);
+	void 고객_잔돈반환출력_알림_테스트() {
+		Map<Integer, Integer> amountToChanges = new TreeMap<>((o1, o2) -> o2 - o1);
 		amountToChanges.put(10, 10);
 		amountToChanges.put(100, 3);
 		amountToChanges.put(500, 5);

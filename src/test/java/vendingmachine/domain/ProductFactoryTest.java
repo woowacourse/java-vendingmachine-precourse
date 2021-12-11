@@ -10,16 +10,15 @@ import vendingmachine.domain.product.ProductFactory;
 
 class ProductFactoryTest {
 
-
 	private ProductFactory productFactory;
 
 	@BeforeEach
-	void beforeEach(){
+	void beforeEach() {
 		productFactory = new ProductFactory();
 	}
 
 	@Test
-	void 상품_생성_테스트(){
+	void 상품_생성_테스트() {
 		String[] productData = "[콜라,1500,20];[사이다,1000,10];[환타,800,10]".split(";");
 
 		for (int i = 0; i < productData.length; i++) {

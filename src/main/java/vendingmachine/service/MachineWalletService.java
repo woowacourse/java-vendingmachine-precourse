@@ -18,15 +18,15 @@ public class MachineWalletService {
 		this.randomBox = randomBox;
 	}
 
-	public void save(int amount){
+	public void save(int amount) {
 		machineWallet.save(randomBox.getCoins(amount));
 	}
 
-	public Map<Integer, Integer> getChanges(){
+	public Map<Integer, Integer> getChanges() {
 		return machineWallet.saveChangesByAmount(machine.getAmount());
 	}
 
-	public String getMachineWalletStatus(){
+	public String getMachineWalletStatus() {
 		return machineWallet.toString();
 	}
 

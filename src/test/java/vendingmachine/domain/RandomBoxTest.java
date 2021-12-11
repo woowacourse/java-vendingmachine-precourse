@@ -12,18 +12,18 @@ class RandomBoxTest {
 	private RandomBox randomBox;
 
 	@BeforeEach
-	void beforeEach(){
+	void beforeEach() {
 		randomBox = RandomBox.RANDOM_BOX;
 	}
 
 	@Test
-	void 랜덤으로_동전_나누기_테스트(){
-		Map<Integer, Integer> clip_10 =  randomBox.getCoins(10);
+	void 랜덤으로_동전_나누기_테스트() {
+		Map<Integer, Integer> clip_10 = randomBox.getCoins(10);
 		assertEquals(clip_10.containsKey(10), true);
 
-		Map<Integer, Integer> clip_1000 =  randomBox.getCoins(1000);
+		Map<Integer, Integer> clip_1000 = randomBox.getCoins(1000);
 		assertEquals(clip_1000.keySet().stream()
-				.mapToInt(k -> k*clip_1000.get(k)).sum(), 1000);
+			.mapToInt(k -> k * clip_1000.get(k)).sum(), 1000);
 	}
 
 }

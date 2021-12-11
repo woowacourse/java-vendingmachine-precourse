@@ -16,35 +16,34 @@ class MachineClipTest extends NsTest {
 	private RandomBox randomBox;
 
 	@BeforeEach
-	void beforeEach(){
+	void beforeEach() {
 		machineClip = new MachineWallet();
 		randomBox = RandomBox.RANDOM_BOX;
 	}
 
 	@Test
-	void 머신_동전상태_출력_테스트(){
+	void 머신_동전상태_출력_테스트() {
 		machineClip.save(randomBox.getCoins(100));
 		System.out.println(machineClip.toString());
 		assertThat(output()).contains("10원", "50원", "100원", "500원");
 	}
 
 	@Test
-	void 머신_잔돈반환_테스트_잔돈일치(){
+	void 머신_잔돈반환_테스트_잔돈일치() {
 		machineClip.save(randomBox.getCoins(1000));
 		assertEquals(getAmountOfChangesSum(1000), 1000);
 	}
 
-	// 기능테스트와 충돌 init 중복
 	@Test
-	void 머신_잔돈반환_테스트_잔돈부족(){
+	void 머신_잔돈반환_테스트_잔돈부족() {
 		machineClip.save(randomBox.getCoins(500));
 		assertEquals(getAmountOfChangesSum(1000), 500);
 	}
 
 	@Test
-	void 머신_잔돈반환_테스트_잔돈많음(){
-		// machineClip.init(randomBox.getNumOfCoins(1500));
-		// assertEquals(getAmountOfChangesSum(1000), 1000);
+	void 머신_잔돈반환_테스트_잔돈많음() {
+		machineClip.save(randomBox.getCoins(1500));
+		assertEquals(getAmountOfChangesSum(1000), 1000);
 	}
 
 	private int getAmountOfChangesSum(int amount) {
