@@ -84,6 +84,7 @@ public class VendingMachineService {
 
 			Validation.validateProductLength(product);
 			Validation.validateProductPrice(product[1]);
+			Validation.validateProductAmount(product[2]);
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
 		}

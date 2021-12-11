@@ -1,7 +1,5 @@
 package vendingmachine.validation;
 
-import java.util.Arrays;
-
 import vendingmachine.exception.ErrorMessage;
 
 public class Validation {
@@ -54,17 +52,27 @@ public class Validation {
 	public static void validateProductPrice(String price) {
 		for(char c: price.toCharArray()){
 			if(!Character.isDigit(c)) {
-				throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100.getErrorMessage());
+				throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR.getErrorMessage());
 			}
 		}
 
 		if(Integer.parseInt(price) < 100) {
-			throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100.getErrorMessage());
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR.getErrorMessage());
 		}
 	}
 
 	// 상품 수량이 자연수가 아닐 경우
+	public static void validateProductAmount(String amount) {
+		for(char c: amount.toCharArray()){
+			if(!Character.isDigit(c)) {
+				throw new IllegalArgumentException(ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR.getErrorMessage());
+			}
+		}
 
+		if(Integer.parseInt(amount) == 0) {
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR.getErrorMessage());
+		}
+	}
 
 	// 상품명이 중복되어 들어오는 경우
 
