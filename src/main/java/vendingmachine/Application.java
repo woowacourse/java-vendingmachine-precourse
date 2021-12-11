@@ -1,17 +1,20 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
+import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Pattern;
 
 public class Application {
+    static int MACHINE_OWN_MONEY = 0;
     public static void main(String[] args) {
         // TODO: 프로그램 구현
-        String machineOwnMoney = "";
-        inputMachineOwnMoney(machineOwnMoney);
+        MACHINE_OWN_MONEY = inputMachineOwnMoney();
     }
-
-    public static void inputMachineOwnMoney(String machineOwnMoney){
+    public static int inputMachineOwnMoney(){
+        String machineOwnMoney = "";
         while(machineOwnMoney.isEmpty()) {
             try {
                 machineOwnMoney = inputMachineOwnMoneyAndValidation();
@@ -19,6 +22,7 @@ public class Application {
                 System.out.println("[ERROR] 금액은 숫자여야 합니다.");
             }
         }
+        return Integer.parseInt(machineOwnMoney);
     }
 
     public static String inputMachineOwnMoneyAndValidation(){
