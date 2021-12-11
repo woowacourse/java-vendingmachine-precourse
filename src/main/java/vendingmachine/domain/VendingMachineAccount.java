@@ -1,22 +1,32 @@
 package vendingmachine.domain;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import vendingmachine.service.VendingMachineAccountService;
-import vendingmachine.view.VendingMachineAccountView;
-
 public class VendingMachineAccount {
-	private static Map<Coin, Integer> coinCount;
+	private static final Map<Coin, Integer> coinCount = new HashMap<>();
 	private static int account;
 
-	public VendingMachineAccount(int account) {
+	public VendingMachineAccount() {
+	}
+
+	public void addCoinCount(Coin coin, Integer amount) {
+		coinCount.put(coin, amount);
+	}
+
+	public int getAccount() {
+		return account;
+	}
+
+	public void setAccount(int account) {
 		this.account = account;
-		coinCount = VendingMachineAccountService.setRandomCoins(account);
+	}
+
+	public Integer getCoinCount(Coin coin) {
+		return coinCount.get(coin);
 	}
 
 	public void printCoinCount() {
-		for (Coin coin : coinCount.keySet()) {
-			VendingMachineAccountView.printCoinList(coin.getAmount(), coinCount.get(coin));
-		}
+
 	}
 }

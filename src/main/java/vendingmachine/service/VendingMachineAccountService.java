@@ -1,25 +1,25 @@
 package vendingmachine.service;
 
-import static vendingmachine.controller.VendingMachineAccountController.*;
 import static vendingmachine.domain.Coin.*;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.VendingMachineAccount;
 import vendingmachine.view.ErrorMessage;
 
 public class VendingMachineAccountService {
+	public static final int INVALID_INPUT = -1;
 
-	public static Map<Coin, Integer> setRandomCoins(int amount) {
-		Map<Coin, Integer> coinCount = new HashMap<>();
+	private static final VendingMachineAccount vendingMachineAccount = new VendingMachineAccount();
+
+	public static void setRandomCoins() {
+		int account = vendingMachineAccount.getAccount();
 		for (Coin coin : Coin.values()) {
-			int randomCount = getRandomCount(amount, coin.getAmount());
-			coinCount.put(coin, randomCount);
-			amount -= randomCount * coin.getAmount();
+			int randomCount = getRandomCount(account, coin.getAmount());
+			account -= randomCount * coin.getAmount();
+			vendingMachineAccount.addCoinCount(coin, randomCount);
 		}
-		return coinCount;
 	}
 
 	private static int getRandomCount(int remainAmount, int coinUnit) {
@@ -31,8 +31,9 @@ public class VendingMachineAccountService {
 		return Randoms.pickNumberInRange(min, max);
 	}
 
-	public static int validateInput(String stringInput) {
+	public static int getValidInput() {
 		try {
+			String stringInput = Console.readLine();
 			int input = InputExceptionService.parseToInt(stringInput);
 			InputExceptionService.checkZeroOrPositiveInt(input);
 			InputExceptionService.checkModTen(input);
@@ -41,6 +42,13 @@ public class VendingMachineAccountService {
 			ErrorMessage.print(e.getMessage());
 			return INVALID_INPUT;
 		}
+	}
 
+	public static void setAccountByInput() {
+		int machineAccount = INVALID_INPUT;
+		while (machineAccount == INVALID_INPUT) {
+			machineAccount = VendingMachineAccountService.getValidInput();
+		}
+		vendingMachineAccount.setAccount(machineAccount);
 	}
 }
