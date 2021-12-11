@@ -6,9 +6,11 @@ public class CashManager {
     private int remainCash = 0;
     private HashMap<Coin, Integer> vault;
 
-    public CashManager(int amount) {
+    public CashManager() {
         this.vault = new HashMap<>();
+    }
 
+    public void initVault(int amount) {
         for (Coin coin : Coin.values()) {
             this.vault.put(coin, amount / coin.getAmount());
             amount -= (amount / coin.getAmount()) * coin.getAmount();
