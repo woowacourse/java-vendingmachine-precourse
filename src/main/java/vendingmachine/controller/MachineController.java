@@ -33,7 +33,7 @@ public class MachineController {
 	}
 
 	public void operate() {
-		while (checkAnyProductRemain()) {
+		while (checkAnyProductRemain() && checkCanBuyCheapest()) {
 			sell();
 		}
 	}
@@ -110,6 +110,15 @@ public class MachineController {
 		boolean remain = products.stream()
 				.anyMatch(p -> p.isStockRemain() == true);
 		if (remain) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean checkCanBuyCheapest() {
+		boolean can = products.stream()
+				.anyMatch(p -> p.enoughMoneyToBuy(money));
+		if (can) {
 			return true;
 		}
 		return false;

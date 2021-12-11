@@ -26,6 +26,13 @@ public class Product {
 		return false;
 	}
 
+	public boolean enoughMoneyToBuy(int money) {
+		if (money >= price) {
+			return true;
+		}
+		return false;
+	}
+
 	public String getName() {
 		return name;
 	}
