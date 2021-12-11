@@ -45,7 +45,7 @@ public class MachineController {
 	}
 
 	private void finishWithReturn() {
-		Change calculatedChange = vendingMachine.calculateChange();
+		Change calculatedChange = vendingMachine.returnChange();
 		OutputView.printInputMoney(vendingMachine.getMoney());
 		OutputView.printExtraMoneyAndChange(calculatedChange);
 	}

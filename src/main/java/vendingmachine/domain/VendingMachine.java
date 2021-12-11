@@ -1,10 +1,12 @@
 package vendingmachine.domain;
 
 import java.util.Map;
+import java.util.TreeMap;
 
 import vendingmachine.exception.NotFoundBeverageException;
 
 public class VendingMachine {
+	private static final int NONE = 0;
 	private final Beverages beverages;
 	private final Change change;
 	private final Money inputMoney;
@@ -15,12 +17,28 @@ public class VendingMachine {
 		this.inputMoney = money;
 	}
 
-	public Change calculateChange() {
-		Money totalChange = change.getTotalChange();
-		if (totalChange.isSmaller(this.inputMoney.getTotal())) {
-			return change;
+	public Change returnChange() {
+		int money = inputMoney.getTotal();
+		Map<Coin, Integer> changes = change.getChanges();
+		Map<Coin, Integer> calculatedChange = new TreeMap<>();
+		for (Coin coin : changes.keySet()) {
+			money = makeChangeWithMoney(money, changes, calculatedChange, coin);
+			if (money == NONE) {
+				return new Change(calculatedChange);
+			}
 		}
-		// 잔돈을 돌려줄때 보유한 최소 개수의 동전으로 돌려주는 기능 구현
+		return new Change(calculatedChange);
+	}
+
+	private int makeChangeWithMoney(int money, Map<Coin, Integer> changes, Map<Coin, Integer> calculatedChange,
+		Coin coin) {
+		int count = money / coin.getAmount();
+		if (count > changes.get(coin)) {
+			count = changes.get(coin);
+		}
+		money -= count * coin.getAmount();
+		calculatedChange.put(coin, count);
+		return money;
 	}
 
 	public Money getMoney() {
