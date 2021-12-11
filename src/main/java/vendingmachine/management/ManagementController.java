@@ -44,6 +44,7 @@ public class ManagementController {
             
             try {
                 String [] commodityInfo = input.split(";");
+                CheckCommodityFormat.validation(commodityInfo);
             } catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
