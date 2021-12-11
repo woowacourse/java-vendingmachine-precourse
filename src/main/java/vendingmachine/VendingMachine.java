@@ -29,4 +29,7 @@ public class VendingMachine {
 		insertMoney.earn(money);
 	}
 
+	public Money getInsertMoney() {
+		return insertMoney;
+	}
 }
