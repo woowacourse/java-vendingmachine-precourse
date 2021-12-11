@@ -20,7 +20,7 @@ public enum Coin {
 
     public static List<Coin> generateCoinsBy(int money) {
         List<Coin> result = new ArrayList<>();
-        while (money > getMinAmount()) {
+        while (money >= getMinAmount()) {
             int randomAmount = Randoms.pickNumberInList(Coin.getListOfAmountLessThen(money));
             Coin randomCoin = Coin.byAmount(randomAmount);
             if (randomCoin != null) {
@@ -41,7 +41,7 @@ public enum Coin {
     private static List<Integer> getListOfAmountLessThen(int money) {
         Integer[] amounts = Arrays.stream(Coin.values())
                 .map(c -> c.amount)
-                .filter(i -> i < money)
+                .filter(i -> i <= money)
                 .toArray(Integer[]::new);
 
         return new ArrayList<>(Arrays.asList(amounts));
