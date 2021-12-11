@@ -10,4 +10,8 @@ public class OutputHandler {
 		System.out.print(message);
 	}
 
+	public void printErrorMEssage(Exception exception) {
+		printMessage(exception.getMessage());
+	}
+
 }

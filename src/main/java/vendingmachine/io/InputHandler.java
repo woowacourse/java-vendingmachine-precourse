@@ -5,8 +5,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
-
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.data.VendingMachineData;
 import vendingmachine.io.validator.InputValidator;
@@ -26,12 +24,24 @@ public class InputHandler {
 
 	public int getValidMoney() {
 		outputHandler.printMessage(VendingMachineData.INPUT_VENDING_MACHINE_MONEY_MESSAGE);
-		return getMoney();
+		while (true) {
+			try {
+				return getMoney();
+			} catch (IllegalArgumentException iae) {
+				outputHandler.printErrorMEssage(iae);
+			}
+		}
 	}
 
 	public List<Product> getValidProductList() {
 		outputHandler.printMessage(VendingMachineData.INPUT_PRODUCT_INFO_MESSAGE);
-		return getProductList();
+		while (true) {
+			try {
+				return getProductList();
+			} catch (IllegalArgumentException iae) {
+				outputHandler.printErrorMEssage(iae);
+			}
+		}
 	}
 
 	private int getMoney() {
