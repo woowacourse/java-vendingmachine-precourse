@@ -1,7 +1,7 @@
 package vendingmachine.validator;
 
 public class Validator {
-	public static boolean checkHeldMoney(String moneyInVendingMachine) {
+	public static boolean checkMoneyInMachine(String moneyInVendingMachine) {
 		try {
 			NumberValidator.isInteger(moneyInVendingMachine);
 			int intMoneyInVendingMachine = Integer.parseInt(moneyInVendingMachine);
