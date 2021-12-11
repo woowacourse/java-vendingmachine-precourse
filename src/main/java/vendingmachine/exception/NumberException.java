@@ -1,15 +1,15 @@
 package vendingmachine.exception;
 
+import static vendingmachine.constant.Constant.*;
 import static vendingmachine.constant.ErrorMessage.*;
 
 public class NumberException {
-
-	static final int DISCRIMINATION_NEGATIVE_NUMBER = 0;
 
 	public static void checkNumberException(String number) {
 		checkNumberEmpty(number);
 		checkNumberIsInteger(number);
 		checkNegativeNumber(number);
+		checkDivisionMinimumCoinAmount(number);
 
 	}
 
@@ -28,6 +28,12 @@ public class NumberException {
 	private static void checkNegativeNumber(String number) {
 		if (Integer.parseInt(number) < DISCRIMINATION_NEGATIVE_NUMBER) {
 			throw new IllegalArgumentException(NUMBER_IS_NEGATIVE_ERROR_MESSAGE);
+		}
+	}
+
+	private static void checkDivisionMinimumCoinAmount(String number) {
+		if (Integer.parseInt(number) % MINIMUM_COIN_AMOUNT != 0) {
+			throw new IllegalArgumentException(NUMBER_NOT_DIVIDE_MINIMUM_COIN_AMOUNT);
 		}
 	}
 }
