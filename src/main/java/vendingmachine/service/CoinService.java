@@ -32,7 +32,7 @@ public class CoinService {
 
 	public void getRemainingCoins(List<Coin> coins, int remainingMoney) {
 		int coinIndex = 0;
-		while (remainingMoney > MINIMUM_COIN_AMOUNT && coinIndex < TOTAL_NUM_COIN) {
+		while (remainingMoney >= MINIMUM_COIN_AMOUNT && coinIndex < TOTAL_NUM_COIN) {
 			Coin coin = coins.get(coinIndex);
 			if (coin.getAmount() > remainingMoney) {
 				coinIndex += 1;
