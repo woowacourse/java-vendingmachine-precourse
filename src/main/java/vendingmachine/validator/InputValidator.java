@@ -13,6 +13,7 @@ public class InputValidator {
 	private static final int MINIMUM_MONEY_SIZE = 100;
 	private static final String MONEY_REGEX = "\\d+0";
 	private static final String STOCK_REGEX = "[1-9]+[0-9]*";
+	private static final String NAME_REGEX = "[a-zA-Z0-9가-힣]+";
 	private static final String BRACKET_REGEX = "\\[(.*)\\]";
 	private static final String OPEN_BRACKET_REGEX = "\\[";
 	private static final String CLOSE_BRACKET_REGEX = "\\]";
@@ -33,9 +34,9 @@ public class InputValidator {
 		Beverages beverages = new Beverages();
 		for (String beveragesInfoList : itemPriceStock) {
 			String[] beverageInfo = beveragesInfoList.split(",");
-			String name = beverageInfo[nameIndex];
-			int price = InputValidator.checkPriceForm(beverageInfo[priceIndex]);
-			int stock = InputValidator.checkStockForm(beverageInfo[stockIndex]);
+			String name = checkNameForm(beverageInfo[nameIndex]);
+			int price = checkPriceForm(beverageInfo[priceIndex]);
+			int stock = checkStockForm(beverageInfo[stockIndex]);
 			beverages.add(new Beverage(name, price), stock);
 		}
 		return beverages;
@@ -75,6 +76,13 @@ public class InputValidator {
 			InputException.printNotFoundBracketError();
 		}
 		return input.replaceAll(OPEN_BRACKET_REGEX, "").replaceAll(CLOSE_BRACKET_REGEX, "");
+	}
+
+	private static String checkNameForm(String input) {
+		if (!input.matches(NAME_REGEX)) {
+			InputException.printNotNameFormError();
+		}
+		return input;
 	}
 
 }
