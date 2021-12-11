@@ -168,3 +168,4 @@ public enum Coin {
 
 - 💻 구현할 목록
     - 난수를 생성하는 클래스 구현(branch: feature/random-number)
+    - 난수를 통해 각 코인 종류 별로 알맞는 코인 갯수를 만드는 클래스 구현(branch: feature/coin-type-amount-generator)
