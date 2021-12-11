@@ -12,7 +12,6 @@ public class ProductPrice {
         this.price = 0;
     }
 
-
     // 메서드: 접근제어자, 반환 데이터타입, 이름, 매개변수
     public int getPrice() {
         return this.price;
