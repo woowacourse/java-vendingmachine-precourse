@@ -14,12 +14,28 @@ public class Application {
 
         InputGenerator.inputUserMoney();
         while (true) {
-            boolean notEmpty = giveAnOrder();
-            if (userInputMoney < minCost || !notEmpty) {
+            giveAnOrder();
+            if (!canBuy()) {
                 int[] numOfCoin = makeChange();
                 VendingMachineUI.printChange(numOfCoin);
                 break;
             }
         }
+    }
+
+    public static boolean canBuy() {
+        if (userInputMoney < minCost) {
+            return false;
+        }
+
+        boolean ret = false;
+        for (String name: name2Product.keySet()) {
+            if (!name2Product.get(name).isSoldOut() && name2Product.get(name).value() <= userInputMoney) {
+                ret = true;
+                break;
+            }
+        }
+
+        return ret;
     }
 }
