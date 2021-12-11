@@ -33,7 +33,7 @@ public class ItemController {
 	}
 
 	public int getLeastItemCost(Items items) {
-		return items.getItems()
+		return items.findAll()
 			.stream()
 			.min(Comparator.comparing(Item::getCost))
 			.get()

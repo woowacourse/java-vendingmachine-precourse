@@ -10,7 +10,7 @@ public class Items {
 		this.items = items;
 	}
 
-	public List<Item> getItems() {
+	public List<Item> findAll() {
 		return Collections.unmodifiableList(items);
 	}
 

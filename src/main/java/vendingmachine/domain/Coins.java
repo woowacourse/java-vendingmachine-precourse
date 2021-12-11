@@ -13,7 +13,7 @@ public class Coins {
 		this.coins = coins;
 	}
 
-	public Map<Integer, Integer> getCoins() {
+	public Map<Integer, Integer> findAll() {
 		return Collections.unmodifiableMap(coins);
 	}
 
