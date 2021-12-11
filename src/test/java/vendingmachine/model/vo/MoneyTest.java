@@ -47,4 +47,13 @@ class MoneyTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Money(notMultipleOfTen))
                 .withMessage(expectedExceptionMessage);
     }
+
+    @Test
+    @DisplayName("금액을 반환한다.")
+    void getValue() {
+        Money money = new Money("2000");
+        int actual = money.getValue();
+        int expected = 2000;
+        assertThat(actual).isEqualTo(expected);
+    }
 }

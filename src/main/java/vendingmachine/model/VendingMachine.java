@@ -1,10 +1,10 @@
 package vendingmachine.model;
 
+import java.util.List;
+
 import vendingmachine.dto.InputItemDTO;
 import vendingmachine.model.item.Items;
 import vendingmachine.model.vo.Money;
-
-import java.util.List;
 
 public class VendingMachine {
     private final Money remainingInputMoney;
@@ -17,5 +17,9 @@ public class VendingMachine {
 
     public void sell(final String userWantedItemName) {
         items.sell(userWantedItemName, remainingInputMoney);
+    }
+
+    public int getRemainingInputMoney() {
+        return remainingInputMoney.getValue();
     }
 }
