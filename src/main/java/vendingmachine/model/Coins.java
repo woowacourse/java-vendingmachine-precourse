@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import java.util.LinkedHashMap;
+import java.util.Set;
 
 public class Coins {
 	private final LinkedHashMap<Coin, Integer> coins;
@@ -11,6 +12,10 @@ public class Coins {
 		coins.put(Coin.COIN_100, 0);
 		coins.put(Coin.COIN_50, 0);
 		coins.put(Coin.COIN_10, 0);
+	}
+
+	public Set<Coin> keySet() {
+		return coins.keySet();
 	}
 
 	public void showAll() {
@@ -36,5 +41,13 @@ public class Coins {
 				this.coins.replace(coin, this.coins.get(coin) + 1);
 			}
 		}
+	}
+
+	public int getAmount(Coin coin) {
+		return coins.get(coin);
+	}
+
+	public void replace(Coin coin, int count) {
+		this.coins.replace(coin, count);
 	}
 }
