@@ -1,4 +1,4 @@
-package vendingmachine.money;
+package vendingmachine.billing;
 
 import java.util.ArrayList;
 import java.util.HashMap;

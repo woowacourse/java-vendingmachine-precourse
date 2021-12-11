@@ -1,27 +1,22 @@
 package vendingmachine;
 
-import vendingmachine.machine.VendingMachine;
-import vendingmachine.machine.VendingMachineMaker;
-import vendingmachine.payments.Payments;
-import vendingmachine.payments.PaymentsController;
+import vendingmachine.billing.BillingController;
+import vendingmachine.billing.Payments;
+import vendingmachine.product.ProductController;
+import vendingmachine.product.ProductStorage;
 import vendingmachine.trade.Trade;
 
 public class Application {
 	public static void main(String[] args) {
-		VendingMachine vendingMachine = readyToService();
-		Payments payments = insertMoney();
-		Trade trade = new Trade(vendingMachine, payments);
-		trade.start();
-		trade.returnChangeCoins();
-	}
+		BillingController billingController = new BillingController();
+		ProductController productController = new ProductController();
+		billingController.readyToChanges();
+		ProductStorage productStorage = productController.readyToProductStorage();
 
-	public static VendingMachine readyToService() {
-		VendingMachineMaker vendingMachineMaker = new VendingMachineMaker();
-		return vendingMachineMaker.readyToService();
-	}
+		Payments payments = billingController.insertMoney();
+		Trade trade = new Trade(productStorage, payments);
+		trade.repeat();
 
-	public static Payments insertMoney() {
-		PaymentsController paymentsController = new PaymentsController();
-		return paymentsController.insertMoney();
+		billingController.returnChangeCoins();
 	}
 }

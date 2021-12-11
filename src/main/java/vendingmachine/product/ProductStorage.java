@@ -3,7 +3,7 @@ package vendingmachine.product;
 import java.util.ArrayList;
 import java.util.List;
 
-import vendingmachine.money.Money;
+import vendingmachine.billing.Money;
 
 public class ProductStorage {
 	private static final String ERROR_NOT_FOUND = "해당 상품은 자판기에서 판매하지 않습니다.";

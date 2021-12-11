@@ -1,24 +1,24 @@
 package vendingmachine.trade;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.machine.VendingMachine;
-import vendingmachine.payments.Payments;
+import vendingmachine.billing.Payments;
 import vendingmachine.product.Product;
+import vendingmachine.product.ProductStorage;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class Trade {
-	private VendingMachine vendingMachine;
+	private ProductStorage productStorage;
 	private Payments payments;
 
-	public Trade(VendingMachine vendingMachine, Payments payments) {
-		this.vendingMachine = vendingMachine;
+	public Trade(ProductStorage productStorage, Payments payments) {
+		this.productStorage = productStorage;
 		this.payments = payments;
 	}
 
-	public void start() {
-		while (vendingMachine.isUsable(payments.getRemainMoney())) {
+	public void repeat() {
+		while (productStorage.isSellable(payments.getRemainMoney())) {
 			requestTrading();
 		}
 	}
@@ -34,14 +34,9 @@ public class Trade {
 	}
 
 	private void orderProduct() {
-		Product product = vendingMachine.findProductByName(Console.readLine());
+		Product product = productStorage.findProductByName(Console.readLine());
 		TradeOrder tradeOrder = new TradeOrder(product, payments);
 		tradeOrder.complete();
-	}
-
-	public void returnChangeCoins() {
-		OutputView.printRemainMoney(payments.getRemainMoney());
-		OutputView.printChange(vendingMachine.returnChange(payments.getRemainMoney()));
 	}
 }
 

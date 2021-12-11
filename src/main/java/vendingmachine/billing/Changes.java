@@ -1,15 +1,12 @@
-package vendingmachine.changes;
+package vendingmachine.billing;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.money.Coin;
-import vendingmachine.money.Money;
 
 public class Changes {
-	private static final String PREFIX = "자판기가 보유하는 ";
 	private static final int ZERO = 0;
 	private static final int PLUS_ONE = 1;
 	private static final int MINUS_ONE = -1;
@@ -17,8 +14,8 @@ public class Changes {
 	private HashMap<Coin, Integer> coins;
 	private Money moneyForChange;
 
-	public void input(String money) {
-		this.moneyForChange = new Money(money, PREFIX);
+	public void input(Money moneyForChange) {
+		this.moneyForChange = moneyForChange;
 	}
 
 	public void createRandomCoins() {

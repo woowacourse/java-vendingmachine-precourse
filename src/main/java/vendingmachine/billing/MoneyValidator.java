@@ -1,4 +1,4 @@
-package vendingmachine.money;
+package vendingmachine.billing;
 
 public class MoneyValidator {
 	private static final String NOT_INTEGER = "금액은 숫자만 입력이 가능합니다.";

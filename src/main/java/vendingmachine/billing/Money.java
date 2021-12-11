@@ -1,13 +1,11 @@
-package vendingmachine.money;
+package vendingmachine.billing;
 
 public class Money {
 	private static final int ZERO = 0;
 
 	private int amount;
 
-	public Money(String money, String prefix) {
-		MoneyValidator moneyValidator = new MoneyValidator();
-		moneyValidator.validate(money, prefix);
+	public Money(String money) {
 		this.amount = Integer.parseInt(money);
 	}
 
@@ -31,13 +29,6 @@ public class Money {
 
 	public void pay(int productValue) {
 		amount -= productValue;
-	}
-
-	public boolean isNotEnough(int productValue) {
-		if (amount < productValue) {
-			return true;
-		}
-		return false;
 	}
 
 	public boolean isEnough(int productValue) {

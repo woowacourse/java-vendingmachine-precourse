@@ -1,6 +1,6 @@
 package vendingmachine.trade;
 
-import vendingmachine.payments.Payments;
+import vendingmachine.billing.Payments;
 import vendingmachine.product.Product;
 
 public class TradeOrder {
