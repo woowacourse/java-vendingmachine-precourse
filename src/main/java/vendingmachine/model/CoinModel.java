@@ -42,15 +42,21 @@ public class CoinModel {
 				coinStorage.getNumberOfCoins());
 		Map<Integer, Integer> change = makeMonetaryUnitMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
 		for (int monetaryUnit : numberOfMonetaryUnit.keySet()) {
-			if (remainingMoney <= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit)) {
-				change.put(monetaryUnit, remainingMoney / monetaryUnit);
-				remainingMoney %= monetaryUnit;
-				continue;
-			}
-			change.put(monetaryUnit, numberOfMonetaryUnit.get(monetaryUnit));
-			remainingMoney -= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit);
+			remainingMoney = makeChangeForEachCoin(remainingMoney, numberOfMonetaryUnit, change, monetaryUnit);
 		}
 		return change;
+	}
+
+	private int makeChangeForEachCoin(int remainingMoney, Map<Integer, Integer> numberOfMonetaryUnit,
+			Map<Integer, Integer> change, int monetaryUnit) {
+		if (remainingMoney <= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit)) {
+			change.put(monetaryUnit, remainingMoney / monetaryUnit);
+			remainingMoney %= monetaryUnit;
+			return remainingMoney;
+		}
+		change.put(monetaryUnit, numberOfMonetaryUnit.get(monetaryUnit));
+		remainingMoney -= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit);
+		return remainingMoney;
 	}
 
 	private Map<Integer, Integer> makeMonetaryUnitMap(List<Integer> numberOfCoins) {
