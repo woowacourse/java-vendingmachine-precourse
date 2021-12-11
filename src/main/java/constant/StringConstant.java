@@ -12,6 +12,7 @@ public class StringConstant {
 
 	public static String PRODUCT_PRICE_PREFIX = "상품 가격은 ";
 	public static String PRODUCT_QUANTITY_PREFIX = "상품 수량은 ";
+	public static String PRODUCT_NAME_NULL = "하나 이상의 상품을 입력해야 합니다.";
 	public static String PRODUCT_WRAPPER_NULL = "개별 상품은 대괄호([])로 묶여있어야 합니다.";
 	public static String PRODUCT_NOT_DIVIDED = "개별 상품은 세미콜론(;)으로 구분되어야 합니다.";
 	public static String PRODUCT_DETAIL_UNMATCHED = "개별 상품은 상품명, 가격, 수량만 존재해야 합니다.";

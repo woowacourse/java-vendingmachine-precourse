@@ -12,6 +12,21 @@ import exception.ProductException;
 import vendingmachine.model.Product;
 
 public class ProductTest {
+
+	@Test
+	void isProductEmptyTest() {
+		//given
+		String userInput = "";
+
+		//when
+
+		//then
+		assertThatThrownBy(() -> {
+			ProductException.isValidProduct(userInput);})
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining(PRODUCT_NAME_NULL);
+	}
+
 	@Test
 	void isProductWrappedTest() {
 		//given

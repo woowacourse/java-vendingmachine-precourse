@@ -13,9 +13,16 @@ import vendingmachine.model.Product;
 
 public class ProductException {
 	public static void isValidProduct(String userProducts) {
+		isEmpty(userProducts);
 		List<String> products = Arrays.asList(userProducts.split(PRODUCT_DIVIDER));
 		for (String product : products) {
 			isWrapped(product);
+		}
+	}
+
+	private static void isEmpty(String userProducts) {
+		if (userProducts.trim().length() == 0) {
+			throw new IllegalArgumentException(PRODUCT_NAME_NULL);
 		}
 	}
 
