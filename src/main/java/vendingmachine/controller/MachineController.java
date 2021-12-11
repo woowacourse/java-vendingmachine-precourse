@@ -13,6 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static vendingmachine.message.Error.DUPLICATED_PRODUCT_NAME;
+
 public class MachineController {
 
 	private MachineInput machineInput = new MachineInput();
@@ -35,7 +37,7 @@ public class MachineController {
 	public List<Product> setupSellingProducts() {
 		try {
 			List<String> productsInfo = machineInput.getProductsInfo();
-			products = makeProductsFromInfo(productsInfo);
+			makeProductsFromInfo(productsInfo);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setupSellingProducts();
@@ -43,11 +45,21 @@ public class MachineController {
 		return products;
 	}
 
-	private List<Product> makeProductsFromInfo(List<String> productsInfo) {
+	private void makeProductsFromInfo(List<String> productsInfo) {
 		ProductBuilder productBuilder = new ProductBuilder();
-		List<Product> products = productsInfo.stream()
+		products = productsInfo.stream()
 				.map(p -> productBuilder.makeProductFromInfo(p))
 				.collect(Collectors.toList());
-		return products;
+		checkNoDuplication();
+	}
+
+	private void checkNoDuplication() {
+		boolean duplicate =  products.stream()
+				.map(Product::getName)
+				.distinct()
+				.count() != products.size();
+		if (duplicate) {
+			throw new IllegalArgumentException(DUPLICATED_PRODUCT_NAME);
+		}
 	}
 }

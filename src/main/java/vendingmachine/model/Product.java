@@ -13,4 +13,8 @@ public class Product {
 		this.price = price;
 		this.stock = stock;
 	}
+
+	public String getName() {
+		return name;
+	}
 }
