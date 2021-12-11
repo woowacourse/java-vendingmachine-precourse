@@ -18,9 +18,10 @@ public class OutputView {
 
 	public void printChanges(Machine machine, int inputMoney) {
 		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(CURRENT_MONEY).append("\n");
+		stringBuilder.append(CURRENT_MONEY + inputMoney).append("\n");
 		stringBuilder.append(CHANGES).append("\n");
 		Coins changes = machine.calculateChange(inputMoney);
-		System.out.println(changes.toString());
+		stringBuilder.append(changes.toString());
+		System.out.println(stringBuilder);
 	}
 }

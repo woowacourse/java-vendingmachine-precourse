@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -50,7 +49,7 @@ public class Coins {
 		Coins changes = new Coins();
 		changes.initCoin();
 		for (Coin coin : Coin.values()) {
-			int maxCoin = countMaxCoin(change, coin);
+			int maxCoin = Math.min(change / coin.getAmount(), coins.get(coin));;
 			change -= maxCoin * coin.getAmount();
 			if (maxCoin > 0) {
 				changes.putCoin(coin,maxCoin);
@@ -61,10 +60,6 @@ public class Coins {
 
 	private void initCoin() {
 		coins = new LinkedHashMap<>();
-	}
-
-	private int countMaxCoin(int change, Coin coin) {
-		return Math.min(change / coin.getAmount(), coins.get(coin));
 	}
 
 	@Override
