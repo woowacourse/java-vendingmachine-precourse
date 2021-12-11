@@ -15,4 +15,6 @@ public class ProductManager {
 
         products.put(productName, products.get(productName) + amount);
     }
+
+    public
 }
