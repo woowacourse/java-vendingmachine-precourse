@@ -9,14 +9,7 @@ import java.util.stream.Collectors;
 
 public class CoinContainer {
 
-    int totalAmount = 0;
-
-    private Map<Coin, Integer> remainingCoin = new HashMap<Coin, Integer>(){{
-        put(Coin.COIN_10, 0);
-        put(Coin.COIN_50, 0);
-        put(Coin.COIN_100, 0);
-        put(Coin.COIN_500, 0);
-    }};
+    private Coins coins = new Coins();
 
     public CoinContainer() {};
 
@@ -29,15 +22,15 @@ public class CoinContainer {
             pickableCoinAmountList = updatePickableCoinAmountList(pickableCoinAmountList, holdingAmount);
 
             pickedCoin = pickCoin(pickableCoinAmountList);
-            addRemainingCoin(pickedCoin);
+            coins.addCoin(pickedCoin, 1);
             holdingAmount -= pickedCoin.getAmount();
         }
     }
 
     private List<Integer> updatePickableCoinAmountList(List<Integer> pickableCoinAmountList, int upperBoundAmount) {
         return pickableCoinAmountList.stream()
-                .filter(amount -> amount <= upperBoundAmount)
-                .collect(Collectors.toList());
+                                        .filter(amount -> amount <= upperBoundAmount)
+                                        .collect(Collectors.toList());
     }
 
     private Coin pickCoin(List<Integer> pickableCoinAmountList) {
@@ -47,12 +40,10 @@ public class CoinContainer {
     }
 
     private void addRemainingCoin(Coin coin) {
-        int remainingStock = remainingCoin.get(coin);
-        totalAmount += coin.getAmount();
-        remainingCoin.put(coin, remainingStock + 1);
+        coins.addCoin(coin, 1);
     }
 
     public int getTotalAmount() {
-        return totalAmount;
+        return coins.getTotalAmount();
     }
 }
