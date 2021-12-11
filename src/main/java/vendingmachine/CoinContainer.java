@@ -71,6 +71,10 @@ public class CoinContainer {
 
     }
 
+    public int getCoinCount(Coin coin) {
+        return coins.getCoinCount(coin);
+    }
+
     public int getTotalAmount() {
         return coins.getTotalAmount();
     }
