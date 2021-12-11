@@ -5,18 +5,20 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import vendingmachine.enums.Coin;
 
-public class VendingMachineCoin {
-	private EnumMap<Coin, Integer> coinStorage;
+public class CoinStorage {
+	private static final int DEFAULT_QUANTITY = 0;
 
-	public VendingMachineCoin(int coinMoney) {
+	private EnumMap<Coin, Integer> coinMap;
+
+	public CoinStorage(int coinMoney) {
 		init();
 		randomGenerate(coinMoney);
 	}
 
 	private void init() {
-		this.coinStorage = new EnumMap<Coin, Integer>(Coin.class);
+		this.coinMap = new EnumMap<Coin, Integer>(Coin.class);
 		for(Coin coin : Coin.values()) {
-			coinStorage.put(coin, 0);
+			coinMap.put(coin, DEFAULT_QUANTITY);
 		}
 	}
 
@@ -38,10 +40,10 @@ public class VendingMachineCoin {
 	}
 
 	private void storeCoin(int randomCoin, int maxQuantity) {
-		coinStorage.put(Coin.searchWithAmount(randomCoin), maxQuantity);
+		coinMap.put(Coin.searchWithAmount(randomCoin), maxQuantity);
 	}
 
 	public String toString() {
-		return coinStorage.toString();
+		return coinMap.toString();
 	}
 }

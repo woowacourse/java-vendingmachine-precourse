@@ -1,7 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import vendingmachine.domain.VendingMachineCoin;
+import vendingmachine.domain.CoinStorage;
 
 import org.junit.jupiter.api.Test;
 
@@ -44,7 +44,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 동전을_랜덤으로_생성한다() {
-        VendingMachineCoin vendingMachineCoin = new VendingMachineCoin(MONEY);
+        CoinStorage vendingMachineCoin = new CoinStorage(MONEY);
         System.out.println(vendingMachineCoin.toString());
     }
 
