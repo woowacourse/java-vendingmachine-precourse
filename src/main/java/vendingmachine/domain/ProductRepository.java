@@ -19,17 +19,16 @@ public class ProductRepository {
 		return findProduct(productName).getCost();
 	}
 
-	public boolean isOutOfStock() {
-		return productHashMap.isEmpty();
-	}
-
-	public boolean isNoProductForCustomer(int customerMoney) {
+	public boolean canSellProduct(int customerMoney) {
+		if (productHashMap.isEmpty()) {
+			return false;
+		}
 		for (Product product : products) {
 			if (product.isChipperThanMoney(customerMoney)) {
-				return false;
+				return true;
 			}
 		}
-		return true;
+		return false;
 	}
 
 	public void sellProduct(String productName) {

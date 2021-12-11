@@ -18,15 +18,15 @@ public class Customer {
 		OutputView.printCustomerChanges(money);
 	}
 
-	public void purchaseProducts(int productCost) {
+	public void purchaseProduct(int productCost) {
 		if (productCost > money) {
 			throw new IllegalArgumentException(CAN_NOT_BUY_PRODUCT_MESSAGE);
 		}
 		this.money -= productCost;
 	}
 
-	public boolean isNoMoney() {
-		return money == 0;
+	public boolean hasMoney() {
+		return money > 0;
 	}
 
 }
