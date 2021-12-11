@@ -33,6 +33,14 @@ public class Change {
         }
     }
 
+    public Map<Coin, Integer> getCoinMap() {
+        return coinMap;
+    }
+
+    public int getTotalMoney() {
+        return totalMoney;
+    }
+
     private boolean checkValidCoin (int coinAmount) {
         if (coinAmount <= totalMoney) {
             return true;
