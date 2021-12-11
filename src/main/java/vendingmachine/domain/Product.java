@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.utils.ExceptionMessage.*;
 
 import java.util.List;
 
@@ -26,7 +26,7 @@ public class Product {
 
 	public int getChangePrice(int inputAmount) {
 		if (!isPurchaseProduct(inputAmount)) {
-			throw new IllegalArgumentException(ERROR_MESSAGE + "남은 투입 금액 부족으로 구매할 수 없습니다.");
+			throw new IllegalArgumentException(ERROR_INSUFFICIENT_INPUT_AMOUNT);
 		}
 		minusOneForQuantity();
 		return inputAmount - this.price;

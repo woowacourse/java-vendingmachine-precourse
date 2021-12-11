@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.utils.ExceptionMessage.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,7 +12,7 @@ public class ProductRepository {
 	private final List<Product> productList = new ArrayList<>();
 
 	public void createProducts(List<String> productListString) {
-		for (String productString: productListString) {
+		for (String productString : productListString) {
 			addProductByString(splitProductStringByDelimiter(productString));
 		}
 	}
@@ -20,16 +20,16 @@ public class ProductRepository {
 	public int getChangeMoney(String productName, int inputAmount) {
 		Product product = findProductByName(productName);
 		if (!product.isNotOutOfQuantity()) {
-			throw new IllegalArgumentException(ERROR_MESSAGE + "선택한 제품의 재고가 없습니다.");
+			throw new IllegalArgumentException(ERROR_OUT_OF_STOCK);
 		}
 		return product.getChangePrice(inputAmount);
 	}
 
 	private Product findProductByName(String productName) {
 		return productList.stream()
-			.filter(i->i.isSameName(productName))
+			.filter(i -> i.isSameName(productName))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE + "입력한 이름의 제품이 없습니다."));
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_DO_NOT_HAVE_PRODUCT));
 	}
 
 	private List<String> splitProductStringByDelimiter(String productToString) {
@@ -42,7 +42,7 @@ public class ProductRepository {
 	}
 
 	public boolean isWhetherPurchasePossible(int remainingInputAmount) {
-		for (Product product: productList) {
+		for (Product product : productList) {
 			if (product.isPurchaseProduct(remainingInputAmount)) {
 				return true;
 			}
@@ -51,7 +51,7 @@ public class ProductRepository {
 	}
 
 	public boolean isCheckStock() {
-		for (Product product: productList) {
+		for (Product product : productList) {
 			if (product.isNotOutOfQuantity()) {
 				return true;
 			}

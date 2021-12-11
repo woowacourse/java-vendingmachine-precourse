@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.domain.Coin.*;
 
 import java.util.EnumMap;
 

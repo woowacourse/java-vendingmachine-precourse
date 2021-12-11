@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.Constant.*;
+import static vendingmachine.utils.ExceptionMessage.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +14,8 @@ public enum Coin {
 
 	public static int MINIMUM_COIN = 10;
 	private final int amount;
+	public static final String WON_REPRESENT_UNIT = "원";
+	public static final String COIN_REPRESENT_UNIT = "개";
 
 	Coin(final int amount) {
 		this.amount = amount;
@@ -37,7 +39,7 @@ public enum Coin {
 		return Arrays.stream(values())
 			.filter(i -> i.amount == coin)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(ERROR_MESSAGE + "올바르지 않은 값입니다."));
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_INPUT_AMOUNT));
 	}
 
 	public static List<Integer> getAmountListOfCoin() {
