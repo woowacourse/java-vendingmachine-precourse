@@ -47,4 +47,21 @@ public class InputValidator {
 		}
 		throw new IllegalArgumentException();
 	}
+
+	public static boolean checkValidFormat(String itemInform) {
+		String regex = "\\[[a-zA-z0-9가-힣]+,\\d{3,},\\d+]";
+		if (itemInform.matches(regex)) {
+			return true;
+		}
+		throw new IllegalArgumentException();
+	}
+
+	public static boolean checkValidSplitFormat(String[] itemList) {
+		int price = isNumber(itemList[InputController.ITEM_PRICE_INDEX]);
+		int count = isNumber(itemList[InputController.ITEM_COUNT_INDEX]);
+		if (price % 10 != 0 || count < 1){
+			throw new IllegalArgumentException();
+		}
+		return true;
+	}
 }

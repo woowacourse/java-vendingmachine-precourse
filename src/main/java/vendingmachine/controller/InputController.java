@@ -45,10 +45,12 @@ public class InputController {
 	public List<Item> splitItemInform(String[] eachItemInform) {
 		List<Item> itemList = new ArrayList<>();
 		for (String inform : eachItemInform) {
+			InputValidator.checkValidFormat(inform);
 			String[] itemInform = inform.split(",");
 			itemInform[ITEM_NAME_INDEX] = itemInform[ITEM_NAME_INDEX].substring(TO_ELIMINATE_FIRST_BRACKET);
 			itemInform[ITEM_COUNT_INDEX] = itemInform[ITEM_COUNT_INDEX].substring(0,
 				itemInform[ITEM_COUNT_INDEX].length() - 1);
+			InputValidator.checkValidSplitFormat(itemInform);
 			Item item = new Item(itemInform);
 			itemList.add(item);
 		}
