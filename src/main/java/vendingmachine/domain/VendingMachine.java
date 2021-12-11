@@ -12,6 +12,7 @@ public class VendingMachine {
 
 	private Coins coins;
 	private Items items;
+	private Balance balance;
 
 	public void initializeCoins(String input) {
 		int coinBalance = Validation.isValidBalance(input);
@@ -26,6 +27,11 @@ public class VendingMachine {
 			List<String> detail = Validation.isValidItem(itemInfo);
 			items.add(new Item(detail.get(NAME), detail.get(PRICE), detail.get(QUANTITY)));
 		}
+	}
+
+	public void initializeBalance(String input) {
+		int balance = Validation.isValidBalance(input);
+		this.balance = new Balance(balance);
 	}
 
 	public Map<Coin, Integer> getCoins() {

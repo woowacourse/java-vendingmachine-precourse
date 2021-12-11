@@ -40,4 +40,14 @@ public class VendingMachineController {
 			initializeItems(vendingMachine);
 		}
 	}
+
+	private void initializeBalance(VendingMachine vendingMachine) {
+		String balance = InputView.setBalance();
+		try {
+			vendingMachine.initializeBalance(balance);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			initializeBalance(vendingMachine);
+		}
+	}
 }
