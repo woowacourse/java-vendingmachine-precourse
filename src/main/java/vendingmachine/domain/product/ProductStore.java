@@ -20,7 +20,7 @@ public class ProductStore {
         productStore.put(name, product);
     }
 
-    public boolean verifyEnoughBalance(Consumer consumer) {
+    public boolean verifyEnoughConsumerBalance(Consumer consumer) {
         return productStore.values().stream().anyMatch((product) -> consumer.possibleToBuy(product));
     }
 

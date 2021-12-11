@@ -23,7 +23,7 @@ public class ProductStoreTest {
         ProductStore productStore = ProductStore.getInstance();
         productStore.putProduct("콜라", Product.of("콜라", 1500, 10));
 
-        assertThat(productStore.verifyEnoughBalance(consumer)).isTrue();
+        assertThat(productStore.verifyEnoughConsumerBalance(consumer)).isTrue();
     }
 
     @Test
@@ -32,6 +32,6 @@ public class ProductStoreTest {
         ProductStore productStore = ProductStore.getInstance();
         productStore.putProduct("콜라", Product.of("콜라", 3500, 10));
 
-        assertThat(productStore.verifyEnoughBalance(consumer)).isFalse();
+        assertThat(productStore.verifyEnoughConsumerBalance(consumer)).isFalse();
     }
 }

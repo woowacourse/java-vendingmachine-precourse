@@ -17,9 +17,9 @@ public class OrderController {
     public void doShopping() {
         boolean keepShopping = true;
 
-        while(keepShopping) {
+        while (keepShopping) {
             consumer.buy(vendingMachine.getProduct(IOProvider.readProductName()));
-
+            keepShopping = vendingMachine.verifyConsumerCanBuyAnyProduct(consumer);
         }
     }
 }
