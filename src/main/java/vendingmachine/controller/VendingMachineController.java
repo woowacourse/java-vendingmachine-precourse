@@ -32,8 +32,7 @@ public class VendingMachineController {
 
 	public void run() {
 		coinModel.generateCoins(getInitialAmount());
-		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
-		vendingMachineOutputView.printVendingMachineCoins(coinModel.getNumberOfCoins());
+		showCoinsVendingMachineHave();
 		itemModel.createItems(getInitialItems());
 		userModel.putMoney(getInputAmount());
 		buyItems();
@@ -47,6 +46,11 @@ public class VendingMachineController {
 			amount = Console.readLine();
 		} while (!inputValidator.checkInitialAmountInputExceptions(amount));
 		return amount;
+	}
+
+	private void showCoinsVendingMachineHave() {
+		vendingMachineOutputView.printVendingMachineInitialCoinsOutputMessage();
+		vendingMachineOutputView.printVendingMachineCoins(coinModel.getNumberOfCoins());
 	}
 
 	private String getInitialItems() {
