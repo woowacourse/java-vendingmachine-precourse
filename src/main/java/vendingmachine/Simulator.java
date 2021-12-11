@@ -25,12 +25,17 @@ public class Simulator {
         int balance = inputBalance();
 
         VendingMachine vendingMachine = new VendingMachine(balance, productContainer, coinContainer);
-        while (!vendingMachine.isAllSoldOut() && vendingMachine.isHavingBalanceToBuy()) {
+        while (true) {
             printBalance(vendingMachine);
+
+            if (vendingMachine.isAllSoldOut() || !vendingMachine.isHavingBalanceToBuy()) {
+                break;
+            }
+
             vendingMachine.sellProduct(inputProductToBuy());
             System.out.println();
         }
-
+        printChangeCoins(vendingMachine.returnBalance());
 
     }
 
@@ -99,5 +104,19 @@ public class Simulator {
     public String inputProductToBuy() {
         System.out.println("구매할 상품명을 입력해 주세요.");
         return Console.readLine().trim();
+    }
+
+    public void printChangeCoins(Coins coins) {
+        String result = "잔돈\n";
+        List<Coin> coinList = Arrays.stream(Coin.values())
+                                    .sorted(Comparator.comparing(Coin::getAmount).reversed())
+                                    .collect(Collectors.toList());
+        for (Coin coin : coinList) {
+            if (coins.getCoinCount(coin) != 0) {
+                result += coin.getAmount() + WON + " - " + coins.getCoinCount(coin) + COUNT + "\n";
+            }
+        }
+
+        System.out.println(result);
     }
 }
