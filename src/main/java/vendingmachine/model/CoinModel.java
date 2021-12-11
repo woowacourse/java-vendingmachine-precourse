@@ -26,50 +26,50 @@ public class CoinModel {
 	public void generateCoins(String stringAmount) {
 		int amount = Integer.parseInt(stringAmount);
 		while (amount > 0) {
-			List<Integer> possibleMonetaryUnit = getPossibleMonetaryUnit(amount);
-			int pickedAmount = Randoms.pickNumberInList(possibleMonetaryUnit);
+			List<Integer> possibleCoinType = getPossibleCoinType(amount);
+			int pickedAmount = Randoms.pickNumberInList(possibleCoinType);
 			coinStorage.createCoin(pickedAmount);
 			amount -= pickedAmount;
 		}
 	}
 
 	public Map<Integer, Integer> getNumberOfCoins() {
-		return makeMonetaryUnitMap(coinStorage.getNumberOfCoins());
+		return makeCoinTypeMap(coinStorage.getNumberOfCoins());
 	}
 
 	public Map<Integer, Integer> getMinimumNumberCoins(int remainingMoney) {
-		Map<Integer, Integer> numberOfMonetaryUnit = makeMonetaryUnitMap(
+		Map<Integer, Integer> numberOfEachCoin = makeCoinTypeMap(
 				coinStorage.getNumberOfCoins());
-		Map<Integer, Integer> change = makeMonetaryUnitMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
-		for (int monetaryUnit : numberOfMonetaryUnit.keySet()) {
-			remainingMoney = makeChangeForEachCoin(remainingMoney, numberOfMonetaryUnit, change, monetaryUnit);
+		Map<Integer, Integer> change = makeCoinTypeMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
+		for (int coinType : numberOfEachCoin.keySet()) {
+			remainingMoney = makeChangeForEachCoin(remainingMoney, numberOfEachCoin, change, coinType);
 		}
 		return change;
 	}
 
-	private int makeChangeForEachCoin(int remainingMoney, Map<Integer, Integer> numberOfMonetaryUnit,
-			Map<Integer, Integer> change, int monetaryUnit) {
-		if (remainingMoney <= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit)) {
-			change.put(monetaryUnit, remainingMoney / monetaryUnit);
-			remainingMoney %= monetaryUnit;
+	private int makeChangeForEachCoin(int remainingMoney, Map<Integer, Integer> numberOfEachCoin,
+			Map<Integer, Integer> change, int coinType) {
+		if (remainingMoney <= coinType * numberOfEachCoin.get(coinType)) {
+			change.put(coinType, remainingMoney / coinType);
+			remainingMoney %= coinType;
 			return remainingMoney;
 		}
-		change.put(monetaryUnit, numberOfMonetaryUnit.get(monetaryUnit));
-		remainingMoney -= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit);
+		change.put(coinType, numberOfEachCoin.get(coinType));
+		remainingMoney -= coinType * numberOfEachCoin.get(coinType);
 		return remainingMoney;
 	}
 
-	private Map<Integer, Integer> makeMonetaryUnitMap(List<Integer> numberOfCoins) {
-		Map<Integer, Integer> numberOfMonetaryUnit = new LinkedHashMap<>();
-		for (int i = 0; i < coinStorage.getNumberOfMonetaryUnitType(); i++) {
-			numberOfMonetaryUnit.put(CoinStorage.MONETARY_UNIT_LIST.get(i), numberOfCoins.get(i));
+	private Map<Integer, Integer> makeCoinTypeMap(List<Integer> numberOfCoins) {
+		Map<Integer, Integer> numberOfEachCoin = new LinkedHashMap<>();
+		for (int i = 0; i < coinStorage.getNumberOfCoinType(); i++) {
+			numberOfEachCoin.put(CoinStorage.COIN_TYPES_LIST.get(i), numberOfCoins.get(i));
 		}
-		return numberOfMonetaryUnit;
+		return numberOfEachCoin;
 	}
 
-	private List<Integer> getPossibleMonetaryUnit(int amount) {
-		return CoinStorage.MONETARY_UNIT_LIST.stream()
-				.filter(monetaryUnit -> amount >= monetaryUnit)
+	private List<Integer> getPossibleCoinType(int amount) {
+		return CoinStorage.COIN_TYPES_LIST.stream()
+				.filter(CoinType -> amount >= CoinType)
 				.collect(Collectors.toList());
 	}
 }

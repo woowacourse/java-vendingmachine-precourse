@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class CoinStorage {
-	public static final List<Integer> MONETARY_UNIT_LIST = Arrays.stream(Coin.values())
+	public static final List<Integer> COIN_TYPES_LIST = Arrays.stream(Coin.values())
 			.map(Coin::getAmount)
 			.collect(Collectors.toList());
 
@@ -32,8 +32,8 @@ public class CoinStorage {
 				.collect(Collectors.toList());
 	}
 
-	public int getNumberOfMonetaryUnitType() {
-		return MONETARY_UNIT_LIST.size();
+	public int getNumberOfCoinType() {
+		return COIN_TYPES_LIST.size();
 	}
 
 	private int getNumberOfCoin(Coin coin) {
