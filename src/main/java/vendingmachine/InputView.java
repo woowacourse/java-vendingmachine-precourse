@@ -10,19 +10,7 @@ public class InputView {
 	private static final String ERROR_NOT_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
 
 	public static int GetRemains() {
-		int remains;
-		while (true) {
-			try {
-				System.out.println(GET_REMAINS);
-				String userInput = readLine();
-				remains = Integer.parseInt(userInput);
-				UserMoney.valid(remains);
-				return remains;
-			} catch (NumberFormatException e) {
-				System.out.println(ERROR_NOT_NUMBER);
-			} catch (IllegalArgumentException e) {
-			}
-		}
+		return getUserInput(GET_REMAINS);
 	}
 
 	public static void printGetItemStatus() {
@@ -30,14 +18,18 @@ public class InputView {
 	}
 
 	public static int GetUserMoney() {
-		int userMoney;
+		return getUserInput(GET_USER_MONEY);
+	}
+
+	private static int getUserInput(String getUserInput) {
+		int UserInput;
 		while (true) {
 			try {
-				System.out.println(GET_USER_MONEY);
+				System.out.println(getUserInput);
 				String userInput = readLine();
-				userMoney = Integer.parseInt(userInput);
-				UserMoney.valid(userMoney);
-				return userMoney;
+				UserInput = Integer.parseInt(userInput);
+				UserMoney.valid(UserInput);
+				return UserInput;
 			} catch (NumberFormatException e) {
 				System.out.println(ERROR_NOT_NUMBER);
 			} catch (IllegalArgumentException e) {

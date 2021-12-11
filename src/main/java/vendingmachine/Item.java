@@ -20,8 +20,8 @@ public class Item {
 		this.count = Integer.parseInt(itemToAdd[2]);
 	}
 
-	public static boolean validName(String name) {
-		return !isBlank(name);
+	public static void validName(String name) {
+		isBlank(name);
 	}
 
 	public static void validPrice(int price) {
@@ -34,32 +34,25 @@ public class Item {
 	}
 
 	public static void validItemStatus(String name, int price, int count) {
-		validName(name) ;
+		validName(name);
 		validPrice(price);
 		validCount(count);
 	}
 
-	public void sellItem() {
+	public void sellItem(UserMoney userMoney) {
+		userMoney.subtract(price);
 		count--;
 	}
 
-	public int getPrice() {
-		return this.price;
-	}
-
-	public int getCount() {
-		return this.count;
-	}
-
-	public String getName() {
-		return this.name;
-	}
-
-	public String getStatus() {
-		return this.name + this.getPrice() + this.getCount();
-	}
-
 	public boolean isOutOfStock() {
-		return this.count == 0;
+		return count == 0;
+	}
+
+	public int isMinPrice(int minPrice) {
+		return Math.min(price, minPrice);
+	}
+
+	public boolean sameName(String itemName) {
+		return name.equals(itemName);
 	}
 }

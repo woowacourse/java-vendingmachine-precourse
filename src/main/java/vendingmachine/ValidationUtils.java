@@ -8,8 +8,7 @@ public class ValidationUtils {
 
 	public static void validUnitMoney(int money) {
 		if (money % 10 != 0) {
-			System.out.println(ERROR_NOT_MATCH_UNIT_MONEY);
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ERROR_NOT_MATCH_UNIT_MONEY);
 		}
 	}
 
@@ -25,16 +24,13 @@ public class ValidationUtils {
 
 	public static void isPositive(int num) {
 		if (num <= 0) {
-			System.out.println(ERROR_NOT_POSITIVE);
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ERROR_NOT_POSITIVE);
 		}
 	}
 
-	public static boolean isBlank(String testStr) {
+	public static void isBlank(String testStr) {
 		if (testStr.isEmpty()) {
-			System.out.println(ERROR_IS_BLANK);
-			return true;
+			throw new IllegalArgumentException(ERROR_IS_BLANK);
 		}
-		return false;
 	}
 }

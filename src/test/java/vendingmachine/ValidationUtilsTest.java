@@ -35,10 +35,10 @@ public class ValidationUtilsTest {
 	// 	assertThat(ValidationUtils.isPositive(testNum3)).isTrue();
 	// }
 
-	@Test
-	@DisplayName("공백인 경우 테스트")
-	void isBlankTest() {
-		String testStr = "";
-		assertThat(ValidationUtils.isBlank(testStr)).isTrue();
-	}
+	// @Test
+	// @DisplayName("공백인 경우 테스트")
+	// void isBlankTest() {
+	// 	String testStr = "";
+	// 	assertThat(ValidationUtils.isBlank(testStr)).isTrue();
+	// }
 }

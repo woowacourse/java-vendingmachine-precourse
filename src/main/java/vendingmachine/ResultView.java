@@ -20,10 +20,4 @@ public class ResultView {
 			System.out.println(entrySet.getKey() + "원 - " + entrySet.getValue() + "개");
 		}
 	}
-
-	public static void main(String[] args) {
-		VendingMachine machine = new VendingMachine();
-		machine.generateRemainCoins(3000);
-		printRemains(machine.getCoins());
-	}
 }

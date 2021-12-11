@@ -6,41 +6,26 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VendingMachine {
-	private List<Coin> coins;
+	private List<Coin> coins = new ArrayList<>();
 
-	public static int generateRandomCoin() {
-		List<Integer> coins = new ArrayList<>();
-		for (Coin coin : Coin.values()) {
-			coins.add(coin.getValue());
-		}
-		return pickNumberInList(coins);
-	}
-
-	public static void addCountInCoins(List<Coin> coinList, int coinValue) {
+	private void addCountInCoins(List<Coin> coinList, int coinValue) {
 		for (Coin coin : coinList) {
-			if (coin.getValue() == coinValue) {
-				coin.addCount();
+			if (coin.sameValue(coinValue)) {
+				coin.addCount(1);
 			}
 		}
 	}
 
-	public static void main(String[] args) {
-		VendingMachine machine = new VendingMachine();
-		machine.generateRemainCoins(3000);
-		System.out.println(machine.coins.get(0).getCount());
-		System.out.println(machine.coins.get(1).getCount());
-		System.out.println(machine.coins.get(2).getCount());
-		System.out.println(machine.coins.get(3).getCount());
-		UserMoney userMoney = new UserMoney(1200);
-		HashMap<Integer, Integer> change;
-		change = machine.returnChange(userMoney);
-		System.out.println(change.entrySet());
-	}
+	private int generateRandomCoin() {
+		List<Integer> coins = Stream.of(Coin.values())
+			.map(coin -> coin.getValue())
+			.collect(Collectors.toList());
 
-	public List<Coin> getCoins() {
-		return this.coins;
+		return pickNumberInList(coins);
 	}
 
 	public List<Coin> generateRemainCoins(int remains) {
@@ -53,36 +38,26 @@ public class VendingMachine {
 			remains -= newCoin;
 			addCountInCoins(coinList, newCoin);
 		}
-		this.coins = coinList;
-		return coinList;
+		coins = coinList;
+		return coins;
 	}
 
 	public void buyItem(String itemName, Items items, UserMoney userMoney) {
-		Item item = items.hasItem(itemName);
-		item.sellItem();
-		userMoney.subtractUserMoney(item.getPrice());
+		try {
+			Item item = items.hasItem(itemName);
+			item.sellItem(userMoney);
+		} catch (IllegalArgumentException e) {}
 	}
 
 	public boolean canNotBuyAnything(UserMoney userMoney, Items items) {
-		return userMoney.getMoney() < items.minPrice() || items.allOutOfStock();
+		return userMoney.canNotBuy(items.minPrice()) || items.allOutOfStock();
 	}
 
 	public HashMap<Integer, Integer> returnChange(UserMoney userMoney) {
 		HashMap<Integer, Integer> change = new HashMap<>();
 		int coinCount;
-		int money = userMoney.getMoney();
 		for (Coin coin : this.coins) {
-			// System.out.println(coin.getValue());
-			coinCount = 0;
-			while (coin.getCount() > 0) {
-				if (money >= coin.getValue()) {
-					money -= coin.getValue();
-					coin.subCount();
-					coinCount++;
-				} else {
-					break;
-				}
-			}
+			coinCount = coin.toChange(userMoney);
 			if (coinCount > 0) {
 				change.put(coin.getValue(), coinCount);
 			}

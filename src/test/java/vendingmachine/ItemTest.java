@@ -7,14 +7,14 @@ import org.junit.jupiter.api.Test;
 
 public class ItemTest {
 
-	@Test
-	@DisplayName("상품명 검증")
-	void validNameTest() {
-		String nameInput1 = "콜라";
-		String nameInput2 = "";
-		assertThat(Item.validName(nameInput1)).isTrue();
-		assertThat(Item.validName(nameInput2)).isFalse();
-	}
+	// @Test
+	// @DisplayName("상품명 검증")
+	// void validNameTest() {
+	// 	String nameInput1 = "콜라";
+	// 	String nameInput2 = "";
+	// 	assertThat(Item.validName(nameInput1)).isTrue();
+	// 	assertThat(Item.validName(nameInput2)).isFalse();
+	// }
 
 	// @Test
 	// @DisplayName("가격 검증")
@@ -48,11 +48,11 @@ public class ItemTest {
 	// 	int count = 3;
 	// 	assertThat(Item.validItemStatus(name, price, count)).isFalse();
 	// }
-
-	@Test
-	@DisplayName("상태 얻기 테스트")
-	void getStatusTest() {
-		Item item = new Item("콜라", 1000, 10);
-		assertThat(item.getStatus()).startsWith("콜라");
-	}
+	//
+	// @Test
+	// @DisplayName("상태 얻기 테스트")
+	// void getStatusTest() {
+	// 	Item item = new Item("콜라", 1000, 10);
+	// 	assertThat(item.getStatus()).startsWith("콜라");
+	// }
 }

@@ -6,49 +6,38 @@ import java.util.List;
 public class Items {
 	private List<Item> itemList = new ArrayList<>();
 
-	public static void isAddable(String itemsInput) {
+	public void isAddable(String itemsInput) {
 		String[] itemToAdd = itemsInput.substring(1, itemsInput.length() - 1).split(",");
 		Item.validItemStatus(itemToAdd[0], Integer.parseInt(itemToAdd[1]), Integer.parseInt(itemToAdd[2]));
 	}
 
-	public static void main(String[] args) {
-		String testStr1 = "[콜라,1000,20]";
-		String testStr2 = "[사이다,2000,30]";
-		Items items = new Items();
-		items.addItem(testStr1);
-		items.addItem(testStr2);
-		System.out.println(items.showItems());
-	}
-
 	public Item hasItem(String itemName) {
-		for (Item item : this.itemList) {
-			if (itemName.equals(item.getName())) {
+		for (Item item : itemList) {
+			if (item.sameName(itemName)) {
 				return item;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException("[ERROR] 해당 상품이 없습니다.");
 	}
 
 	public void addItem(String itemString) {
-		this.itemList.add(new Item(itemString));
-	}
+		try {
+			isAddable(itemString);
+			itemList.add(new Item(itemString));
+		} catch (Exception e) {}
 
-	public void add(Item item) {
-		this.itemList.add(item);
 	}
 
 	public int minPrice() {
 		int minPrice = Integer.MAX_VALUE;
-		for (Item item : this.itemList) {
-			if (minPrice > item.getPrice()) {
-				minPrice = item.getPrice();
-			}
+		for (Item item : itemList) {
+			minPrice = item.isMinPrice(minPrice);
 		}
 		return minPrice;
 	}
 
 	public boolean allOutOfStock() {
-		for (Item item : this.itemList) {
+		for (Item item : itemList) {
 			if (!item.isOutOfStock()) {
 				return false;
 			}
@@ -56,12 +45,4 @@ public class Items {
 		return true;
 	}
 
-	public String showItems() {
-		String itemsStatus = "";
-		for (Item item : this.itemList) {
-			itemsStatus = itemsStatus.concat(item.getStatus());
-			itemsStatus = itemsStatus.concat("\n");
-		}
-		return itemsStatus;
-	}
 }

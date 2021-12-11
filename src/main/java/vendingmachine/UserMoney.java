@@ -14,11 +14,21 @@ public class UserMoney {
 		isPositive(money);
 	}
 
-	public void subtractUserMoney(int price) {
-		this.money -= price;
+	public void subtract(int price) {
+		if (money >= price) {
+			this.money -= price;
+		}
 	}
 
 	public int getMoney() {
 		return this.money;
+	}
+
+	public boolean canNotBuy(int minPrice) {
+		return this.money < minPrice;
+	}
+
+	public int getNumOfChange(int amount) {
+		return this.money % amount;
 	}
 }

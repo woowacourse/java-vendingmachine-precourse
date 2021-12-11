@@ -7,16 +7,10 @@ public enum Coin {
 	COIN_10(10);
 
 	private final int amount;
-	private int count;
+	private int count = 0;
 
 	Coin(final int amount) {
 		this.amount = amount;
-		this.count = 0;
-	}
-
-	Coin(final int amount, int count) {
-		this.amount = amount;
-		this.count = count;
 	}
 
 	// 추가 기능 구현
@@ -24,15 +18,26 @@ public enum Coin {
 		return amount;
 	}
 
-	public void addCount() {
-		count++;
+	public void addCount(int addCount) {
+		count += addCount;
 	}
 
 	public int getCount() {
 		return count;
 	}
 
-	public void subCount() {
-		count--;
+	public void subCount(int subCount) {
+		count -= subCount;
+	}
+
+	public int toChange(UserMoney userMoney) {
+		int coinCount = userMoney.getNumOfChange(amount);
+		userMoney.subtract(coinCount * amount);
+		subCount(coinCount);
+		return coinCount;
+	}
+
+	public boolean sameValue(int coinValue) {
+		return amount == coinValue;
 	}
 }
