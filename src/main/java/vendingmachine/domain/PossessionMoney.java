@@ -4,7 +4,7 @@ public class PossessionMoney {
     private static final int ZERO = 0;
     private static final int QUOTIENT = 10;
 
-    private final int possessionMoney;
+    private int possessionMoney;
 
     public PossessionMoney(String inputPossessionMoney) {
         validateNumberFormat(inputPossessionMoney);
@@ -33,5 +33,23 @@ public class PossessionMoney {
         if (possessionMoney % QUOTIENT != ZERO) {
             throw new IllegalArgumentException();
         }
+    }
+
+    public boolean isZero() {
+        if (possessionMoney == ZERO) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isCalculate(int amount) {
+        if (possessionMoney >= amount) {
+            return true;
+        }
+        return false;
+    }
+
+    public void calculate(int randomCoinAmount) {
+        possessionMoney -= randomCoinAmount;
     }
 }
