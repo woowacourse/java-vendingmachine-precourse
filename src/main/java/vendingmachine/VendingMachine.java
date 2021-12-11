@@ -37,4 +37,8 @@ public class VendingMachine {
     public Coins returnBalance() {
         return coinContainer.returnBalance(balance);
     }
+
+    public boolean isAllSoldOut() {
+        return productContainer.isAllSoldOut();
+    }
 }

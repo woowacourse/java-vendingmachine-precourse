@@ -25,6 +25,13 @@ public class Simulator {
         int balance = inputBalance();
 
         VendingMachine vendingMachine = new VendingMachine(balance, productContainer, coinContainer);
+        while (!vendingMachine.isAllSoldOut()) {
+            printBalance(vendingMachine);
+            vendingMachine.sellProduct(inputProductToBuy());
+            System.out.println();
+        }
+
+
     }
 
     public int inputHoldingAmount() {
