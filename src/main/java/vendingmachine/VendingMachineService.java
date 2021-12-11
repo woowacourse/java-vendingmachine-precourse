@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.coin.Coin;
 import vendingmachine.coin.CoinExchangeMachine;
 import vendingmachine.coin.Coins;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
@@ -35,7 +36,7 @@ public class VendingMachineService {
         return vendingMachine.isPurchaseAvailable();
     }
 
-    public void giveChange() {
-        vendingMachine.giveChange();
+    public Coins giveChange() {
+        return vendingMachine.giveChange();
     }
 }

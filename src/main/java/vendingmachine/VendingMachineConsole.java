@@ -8,7 +8,7 @@ import vendingmachine.dto.request.CoinBalanceRequest;
 import vendingmachine.dto.request.ItemPurchaseRequest;
 import vendingmachine.dto.request.iteminventory.ItemsInventoryRequest;
 import vendingmachine.dto.request.AvailableMoneyRequest;
-import vendingmachine.dto.response.CoinBalanceResponse;
+import vendingmachine.dto.response.CoinsResponse;
 import vendingmachine.dto.response.MoneyAvailableResponse;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
@@ -44,7 +44,7 @@ public class VendingMachineConsole {
     }
 
     public void printCoinBalance(Coins coinBalance) {
-        System.out.println(new CoinBalanceResponse(coinBalance).toPrint());
+        System.out.println(new CoinsResponse(coinBalance).toPrint());
     }
 
     public int inputAvailableMoney() {
@@ -73,6 +73,10 @@ public class VendingMachineConsole {
     public void printErrorMessage(String errorMessage) {
         System.out.print(PREFIX_OF_ERROR_MESSAGE);
         System.out.println(errorMessage);
+    }
+
+    public void printChange(Coins change) {
+        System.out.println(new CoinsResponse(change).toPrint());
     }
 
     private String input() {

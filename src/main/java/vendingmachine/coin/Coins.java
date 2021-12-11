@@ -38,22 +38,6 @@ public class Coins {
         return coins.get(coin);
     }
 
-    public int countCoin500() {
-        return coins.get(Coin.COIN_500);
-    }
-
-    public int countCoin100() {
-        return coins.get(Coin.COIN_100);
-    }
-
-    public int countCoin50() {
-        return coins.get(Coin.COIN_50);
-    }
-
-    public int countCoin10() {
-        return coins.get(Coin.COIN_10);
-    }
-
     private int getAmountWithCoin500() {
         return coins.get(Coin.COIN_500) * Coin.COIN_500.getAmount();
     }

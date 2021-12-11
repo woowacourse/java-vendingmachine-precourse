@@ -13,7 +13,7 @@ public class VendingMachineController {
         createItems();
         createAvailableMoney();
         purchaseItem();
-        vendingMachineService.giveChange();
+        console.printChange(vendingMachineService.giveChange());
     }
     
     private void createCoinBalance() {
