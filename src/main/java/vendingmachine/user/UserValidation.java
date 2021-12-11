@@ -12,4 +12,10 @@ public class UserValidation {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_POSITIVE);
         }
     }
+
+    public static void hasEmpty(String money) {
+        if (money.contains(InputErrorConstant.EMPTY_SPACE)) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_HAS_SPACE);
+        }
+    }
 }
