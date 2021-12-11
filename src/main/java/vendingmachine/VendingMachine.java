@@ -36,7 +36,7 @@ public class VendingMachine {
         while (true) {
             try {
                 System.out.println();
-                System.out.println(String.format("투입 금액: %d", this.cashManager.getRemainCash()));
+                System.out.println(String.format("투입 금액: %d원", this.cashManager.getRemainCash()));
 
                 if (!this.productManager.isProductAvailable() || this.cashManager.getRemainCash() < this.productManager.getMinPrice()) {
                     break;
