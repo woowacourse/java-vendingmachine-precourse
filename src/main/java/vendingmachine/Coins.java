@@ -18,6 +18,12 @@ public class Coins {
 
     public Coins() {}
 
+    public int getTotalAmount() {
+        return totalAmount;
+    }
+
+
+
     public int getCoinCount(Coin coin) {
         return remainingCoin.get(coin);
     }
