@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import static vendingmachine.utils.StringValidator.*;
 
 import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.menu.Menu;
 import vendingmachine.domain.menu.Menus;
 
 public class VendingMachine {
@@ -25,6 +26,18 @@ public class VendingMachine {
 
 	public void validateMoney(String money) {
 		validateNumber(money, ERROR_INPUT_MONEY_NUMBER);
+	}
+
+	public Menu buy(String menuName) {
+		return null;
+	}
+
+	public boolean canBuy() {
+		return isInputMoneyGreaterThanOrEqualToMinMenuPrice() && menus.isAnyMenuLeft();
+	}
+
+	private boolean isInputMoneyGreaterThanOrEqualToMinMenuPrice() {
+		return inputMoney >= menus.getMinMenuPrice();
 	}
 
 	public Coins getLeftCoins() {

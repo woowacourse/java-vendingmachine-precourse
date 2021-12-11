@@ -98,4 +98,12 @@ public class Menu {
 	private static boolean isGreaterThanOrEqualToMinMenuPrice(String price) {
 		return Integer.parseInt(price) >= MIN_MENU_PRICE;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int getCount() {
+		return count;
+	}
 }
