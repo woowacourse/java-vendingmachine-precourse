@@ -34,6 +34,10 @@ public class VendingMachineController {
 		}
 	}
 
+	public void showChange() {
+		OutputView.showRemainingMoney(vendingMachine.getCoinsOwned());
+	}
+
 	private boolean checkCanBuyProduct(int money) {
 		return money >= vendingMachine.getNeedMinimumMoney();
 	}
