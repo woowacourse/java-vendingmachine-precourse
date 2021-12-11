@@ -1,6 +1,7 @@
 package vendingmachine.model.service;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -30,6 +31,23 @@ public class CoinService {
 				change -= coin;
 			}
 		}
+	}
+
+	public HashMap<String, Integer> calculateCoinForChange(int restMoney) {
+		HashMap<String, Integer> coinForChange = new HashMap<>();
+		for (int amount : getCoinAmountList()) {
+			int availableCount = restMoney / amount;
+			Integer maxCount = coinRepository.getCoinRepository().get(String.valueOf(amount));
+			if (maxCount < availableCount) {
+				coinForChange.put(String.valueOf(amount), maxCount);
+				restMoney -= maxCount * amount;
+				continue;
+			}
+			coinForChange.put(String.valueOf(amount), availableCount);
+			restMoney -= availableCount * amount;
+		}
+
+		return coinForChange;
 	}
 
 	public List<Integer> getCoinAmountList() {

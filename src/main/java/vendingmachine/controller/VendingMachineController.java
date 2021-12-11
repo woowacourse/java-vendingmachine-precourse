@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import vendingmachine.model.Customer;
 import vendingmachine.model.receiver.MoneyReceiver;
@@ -32,7 +33,7 @@ public class VendingMachineController {
 
 		int restMoney = buyProduct(customer);
 
-		// giveChange(restMoney);
+		giveChange(restMoney);
 	}
 
 	private void inputMoneyForChange() {
@@ -80,5 +81,11 @@ public class VendingMachineController {
 		}
 
 		return customer.getMoney();
+	}
+
+	private void giveChange(int restMoney) {
+		HashMap<String, Integer> coinForChange = coinService.calculateCoinForChange(restMoney);
+
+		// vendingMachineView.giveChange(restMoney, coinForChange);
 	}
 }
