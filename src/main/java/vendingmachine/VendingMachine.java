@@ -17,6 +17,10 @@ public class VendingMachine {
         this.coinContainer = coinContainer;
     }
 
+    public int getBalance() {
+        return balance;
+    }
+
     public void sellProduct(String productName) {
         Product product;
 
