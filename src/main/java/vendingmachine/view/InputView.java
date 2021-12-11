@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
 
-	public String inputSavedMoney() {
+	public String inputMoney() {
 		return Console.readLine();
 	}
 
@@ -12,4 +12,7 @@ public class InputView {
 		return Console.readLine();
 	}
 
+	public String inputItemName() {
+		return Console.readLine();
+	}
 }
