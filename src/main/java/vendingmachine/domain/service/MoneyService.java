@@ -12,4 +12,8 @@ public class MoneyService {
 	public void useMoney(int money) {
 		this.money.deductAmount(money);
 	}
+
+	public int getMoney() {
+		return money.getAmount();
+	}
 }

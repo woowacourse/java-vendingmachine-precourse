@@ -11,6 +11,7 @@ import vendingmachine.domain.service.ItemService;
 import vendingmachine.domain.service.MoneyService;
 import vendingmachine.view.InputFirstMoneyView;
 import vendingmachine.view.InputItemInfoView;
+import vendingmachine.view.InputItemNameView;
 import vendingmachine.view.InputMoneyView;
 import vendingmachine.view.ShowFirstMoneyView;
 import vendingmachine.view.View;
@@ -26,6 +27,7 @@ public class VendingMachineController {
 		viewMapper.put(ViewMappingKey.SHOW_FIRST_MONEY, new ShowFirstMoneyView());
 		viewMapper.put(ViewMappingKey.INPUT_ITEM_INFO, new InputItemInfoView());
 		viewMapper.put(ViewMappingKey.INPUT_MONEY, new InputMoneyView());
+		viewMapper.put(ViewMappingKey.INPUT_ITEM_NAME, new InputItemNameView());
 	}
 
 	public void view(ViewMappingKey key) {
@@ -46,5 +48,9 @@ public class VendingMachineController {
 
 	public void inputMoney(int money) {
 		moneyService.inputMoney(money);
+	}
+
+	public int getMoney() {
+		return moneyService.getMoney();
 	}
 }

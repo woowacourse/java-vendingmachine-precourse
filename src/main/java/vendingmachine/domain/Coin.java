@@ -1,14 +1,12 @@
 package vendingmachine.domain;
 
+import vendingmachine.util.PublicConst;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
     COIN_50(50),
     COIN_10(10);
-
-    private static final String MONETARY_UNIT = "원";
-    private static final String COIN_DELIMITER = " - ";
-    private static final String COUNT_LITERAL = "개";
 
     private final int amount;
 
@@ -36,10 +34,10 @@ public enum Coin {
 
     public void printCoinAndCount(int count) {
         String str = getAmount()
-            + MONETARY_UNIT
-            + COIN_DELIMITER
+            + PublicConst.MONETARY_UNIT
+            + PublicConst.COIN_DELIMITER
             + count
-            + COUNT_LITERAL;
+            + PublicConst.COUNT_LITERAL;
         System.out.println(str);
     }
 }
