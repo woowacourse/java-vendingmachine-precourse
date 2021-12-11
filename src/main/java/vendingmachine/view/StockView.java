@@ -11,6 +11,7 @@ public class StockView {
 		Stock stock = new Stock();
 		try {
 			String input = Console.readLine();
+			System.out.println();
 			stock.set(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());

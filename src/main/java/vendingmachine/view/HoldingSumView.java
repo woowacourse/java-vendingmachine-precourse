@@ -12,6 +12,7 @@ public class HoldingSumView {
 		HoldingSum holdingSum = new HoldingSum();
 		try {
 			String input = Console.readLine();
+			System.out.println();
 			holdingSum.set(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());
@@ -30,5 +31,6 @@ public class HoldingSumView {
 		}
 
 		System.out.println(stringBuilder);
+		System.out.println();
 	}
 }
