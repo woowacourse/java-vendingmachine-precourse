@@ -11,8 +11,8 @@ public class User {
     private int userAmount;
     private int price;
     private int quantity;
-    private int allInventory = 0;
-    private int minProduct = 999999999;
+    private int allInventory;
+    private int minProduct;
     ArrayList<String> goods = new ArrayList<>();
     HashMap<String, Integer> productPrices = new HashMap<>();
     HashMap<String, Integer> productQuantities = new HashMap<>();
@@ -151,6 +151,8 @@ public class User {
         System.out.println(Message.REMAINING_AMOUNT + userAmount + Message.WON);
     }
     public boolean availablePurchase() {
+        allInventory = 0;
+        minProduct = 999999999;
         for(String product : productQuantities.keySet()) {
             if (productPrices.get(product) <= minProduct && productQuantities.get(product) >= 1) {
                 minProduct = productPrices.get(product);
