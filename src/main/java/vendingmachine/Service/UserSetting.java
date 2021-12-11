@@ -16,7 +16,6 @@ public class UserSetting {
 
     public static User execute() {
         return new User(getUserMoneyInput());
-
     }
 
     private static int getUserMoneyInput() {

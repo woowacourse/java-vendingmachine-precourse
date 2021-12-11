@@ -1,5 +1,6 @@
 package vendingmachine.Validator;
 
+import vendingmachine.Constant.Constant;
 import vendingmachine.SystemMessage.SystemMessage;
 
 public class NumberValidator {
@@ -26,7 +27,7 @@ public class NumberValidator {
 
     public static boolean isMultipleOfTen(int input) {
         try {
-            if ((input % 10) != 0) {
+            if ((input % Constant.TEN) != Constant.ZERO) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
@@ -38,7 +39,7 @@ public class NumberValidator {
 
     public static boolean isPositiveNumber(int input) {
         try {
-            if (input < 0) {
+            if (input < Constant.ZERO) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
@@ -50,7 +51,7 @@ public class NumberValidator {
 
     public static boolean isBiggerThan100(int input) {
         try {
-            if (input < 100) {
+            if (input < Constant.HUNDRED) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {

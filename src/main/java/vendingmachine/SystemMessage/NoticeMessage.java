@@ -10,4 +10,5 @@ public class NoticeMessage {
     public static final String INPUT_MONEY_MESSAGE = "투입 금액: ";
     public static final String WON_MESSAGE = "원";
     public static final String EA_MESSAGE = "개";
+    public static final String BAR_SEPARATOR_MESSAGE = " - ";
 }

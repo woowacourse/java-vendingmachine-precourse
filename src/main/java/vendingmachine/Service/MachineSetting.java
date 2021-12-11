@@ -1,6 +1,7 @@
 package vendingmachine.Service;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.Constant.Constant;
 import vendingmachine.Model.*;
 import vendingmachine.SystemMessage.NoticeMessage;
 import vendingmachine.Validator.*;
@@ -21,9 +22,9 @@ public class MachineSetting {
     public static VendingMachine execute() {
         int balance = getBalanceInput();
         Coins coins = decideCoins(balance);
-        showCoins(coins);
+        coins.showCoins(outputView);
         List<Drink> drinks = getDrinkInput();
-        return new VendingMachine(balance, coins, drinks);
+        return new VendingMachine(coins, drinks);
     }
 
     private static int getBalanceInput() {
@@ -36,34 +37,25 @@ public class MachineSetting {
     }
 
     private static Coins decideCoins(int balance) {
-        List<Integer> coinList = new ArrayList<>();
+        List<Integer> coinAmountList = new ArrayList<>();
         List<CoinPair> coinPairs = new ArrayList<>();
         for (Coin coin : Coin.values()) {
-            coinList.add(coin.getAmount());
-            coinPairs.add(new CoinPair(coin, 0));
+            coinAmountList = coin.addAmountToList(coinAmountList);
+            coinPairs.add(new CoinPair(coin, Constant.ZERO));
         }
-        while (balance > 0) {
-            balance -= pickCoinInList(coinList, coinPairs, balance);
+        while (balance > Constant.ZERO) {
+            balance -= pickCoinInList(coinAmountList, coinPairs, balance);
         }
         return new Coins(coinPairs);
     }
 
-    private static int pickCoinInList(List<Integer> coinList, List<CoinPair> coinPairs, int balance) {
+    private static int pickCoinInList(List<Integer> coinAmountList, List<CoinPair> coinPairs, int balance) {
         int select;
         do {
-            select = Randoms.pickNumberInList(coinList);
+            select = Randoms.pickNumberInList(coinAmountList);
         } while (select > balance);
-        coinPairs.get(coinList.indexOf(select)).addCoinNumber();
+        coinPairs.get(coinAmountList.indexOf(select)).addCoinNumber();
         return select;
-    }
-
-    private static void showCoins(Coins coins) {
-        outputView.print(NoticeMessage.BALANCE_COIN_MESSAGE);
-        for (CoinPair coin : coins.getCoins()) {
-            String coinName = coin.getCoin().name();
-            coinName = coinName.substring(5, coinName.length()) + NoticeMessage.WON_MESSAGE;
-            outputView.print(coinName + " - " + coin.getNumber() + NoticeMessage.EA_MESSAGE);
-        }
     }
 
     private static List<Drink> getDrinkInput() {
@@ -73,22 +65,20 @@ public class MachineSetting {
         do {
             input = inputView.getInput();
         } while (!DrinkListValidator.isValidateDrinkList(input));
-        String[] drinks = input.split(";");
+        String[] drinks = input.split(Constant.SEMICOLON);
         for (String drink : drinks) {
-            drinkList.add(getParsedDrinkInfo(drink));
+            drinkList.add(getParsedDrinkInfo(drink.trim()));
         }
         return drinkList;
     }
 
     private static Drink getParsedDrinkInfo(String drink) {
         drink = drink.substring(1, drink.length() - 1);
-        String[] drinkInfo = drink.split(",");
-        String drinkName = drinkInfo[0];
-        int drinkPrice = Integer.parseInt(drinkInfo[1]);
-        int drinkStock = Integer.parseInt(drinkInfo[2]);
+        String[] drinkInfo = drink.split(Constant.COMMA);
+        String drinkName = drinkInfo[Constant.NAME_INDEX].trim();
+        int drinkPrice = Integer.parseInt(drinkInfo[Constant.PRICE_INDEX].trim());
+        int drinkStock = Integer.parseInt(drinkInfo[Constant.STOCK_INDEX].trim());
 
         return new Drink(drinkName, drinkPrice, drinkStock);
     }
-
-
 }

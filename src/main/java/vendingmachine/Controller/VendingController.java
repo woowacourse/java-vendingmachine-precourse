@@ -3,7 +3,6 @@ package vendingmachine.Controller;
 import vendingmachine.Service.*;
 import vendingmachine.View.*;
 import vendingmachine.Model.*;
-import vendingmachine.SystemMessage.*;
 
 public class VendingController {
 
@@ -22,10 +21,11 @@ public class VendingController {
         vendingMachine = machineSetting.execute();
         UserSetting userSetting = new UserSetting(inputView, outputView);
         user = userSetting.execute();
-        outputView.print(NoticeMessage.INPUT_MONEY_MESSAGE + user.getRemainMoney() + NoticeMessage.WON_MESSAGE);
+        user.showRemainMoney(outputView);
         Transaction transaction = new Transaction(user, vendingMachine, inputView, outputView);
         user = transaction.execute();
-        ReturnChange returnChange = new ReturnChange(user, vendingMachine, inputView, outputView);
+        ReturnChange returnChange = new ReturnChange(user, vendingMachine, outputView);
         returnChange.execute();
     }
+
 }

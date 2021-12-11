@@ -1,27 +1,28 @@
 package vendingmachine.Validator;
 
+import vendingmachine.Constant.Constant;
 import vendingmachine.SystemMessage.SystemMessage;
 
 public class DrinkListValidator {
     public static boolean isValidateDrinkList(String input) {
-        int flag = 1;
-        String[] drinks = input.split(";");
+        int flag = Constant.TRUE;
+        String[] drinks = input.split(Constant.SEMICOLON);
         for (String drink : drinks) {
-            flag *= isValidateDrinkInfo(drink);
+            flag *= isValidateDrinkInfo(drink.trim());
         }
-        return (flag == 1);
+        return (flag == Constant.TRUE);
     }
 
     private static int isValidateDrinkInfo(String input) {
         input = input.substring(1, input.length() - 1);
-        String[] drinkInfo = input.split(",");
+        String[] drinkInfo = input.split(Constant.COMMA);
         if (!isValidateInfoFormat(drinkInfo)) {
-            return 0;
+            return Constant.FALSE;
         }
-        if (!isValidatePrice(drinkInfo[1]) || !isValidateAmount(drinkInfo[2])) {
-            return 0;
+        if (!isValidatePrice(drinkInfo[Constant.PRICE_INDEX].trim()) || !isValidateAmount(drinkInfo[Constant.STOCK_INDEX].trim())) {
+            return Constant.FALSE;
         }
-        return 1;
+        return Constant.TRUE;
     }
 
     private static boolean isValidateInfoFormat(String[] input) {

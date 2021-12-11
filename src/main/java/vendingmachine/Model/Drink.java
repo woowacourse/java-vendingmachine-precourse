@@ -1,5 +1,7 @@
 package vendingmachine.Model;
 
+import vendingmachine.Constant.Constant;
+
 public class Drink {
     private String name;
     private int price;
@@ -13,24 +15,33 @@ public class Drink {
 
     public int isSameDrink(String drinkName) {
         if (drinkName.equals(name)) {
-            return 1;
+            return Constant.TRUE;
         }
-        return 0;
+        return Constant.FALSE;
     }
 
     public void subtractStock() {
         stock--;
     }
 
+    public int isEmpty() {
+        if (isSoldOut()) {
+            return Constant.TRUE;
+        } else return Constant.FALSE;
+    }
+
     public boolean isSoldOut() {
-        return (stock == 0);
+        return (stock == Constant.ZERO);
     }
 
-    public int getPrice() {
-        return price;
+    public int isPaid(int inputMoney) {
+        return inputMoney - price;
     }
 
-    public int getStock() {
-        return stock;
+    public boolean isCheaperThan(int comparedPrice) {
+        if (price < comparedPrice) {
+            return true;
+        }
+        return false;
     }
 }

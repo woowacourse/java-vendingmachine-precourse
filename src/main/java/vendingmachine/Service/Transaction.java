@@ -21,20 +21,20 @@ public class Transaction {
     public static User execute() {
         while (!isEnd()) {
             tryPurchase();
-            outputView.print(NoticeMessage.INPUT_MONEY_MESSAGE + user.getRemainMoney() + NoticeMessage.WON_MESSAGE);
+            user.showRemainMoney(outputView);
         }
         return user;
     }
 
     private static void tryPurchase() {
-        Drink chosenDrink;
+        Drink selectedDrink;
         System.out.println(NoticeMessage.ASK_DRINK_NAME_MESSAGE);
         do {
-            chosenDrink = getUserChoice();
-        } while (!TransactionValidator.isRemained(chosenDrink));
+            selectedDrink = getUserChoice();
+        } while (!TransactionValidator.isRemained(selectedDrink));
 
-        chosenDrink.subtractStock();
-        user.pay(chosenDrink);
+        selectedDrink.subtractStock();
+        user.pay(selectedDrink);
     }
 
     private static Drink getUserChoice() {
@@ -46,7 +46,7 @@ public class Transaction {
     }
 
     private static boolean isEnd() {
-        if (vendingMachine.isEmpty() || !user.isPurchasable(vendingMachine.getMinimumPrice())) {
+        if (vendingMachine.isEmpty() || !user.canPurchase(vendingMachine)) {
             return true;
         }
         return false;

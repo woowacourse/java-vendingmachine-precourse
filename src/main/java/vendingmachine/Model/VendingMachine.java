@@ -1,59 +1,54 @@
 package vendingmachine.Model;
 
+import vendingmachine.Constant.Constant;
+import vendingmachine.View.OutputView;
+
 import java.util.List;
 
 public class VendingMachine {
-    private int balance;
     private Coins coins;
     private List<Drink> drinks;
 
-    public VendingMachine(int balance, Coins coins, List<Drink> drinks) {
-        this.balance = balance;
+    public VendingMachine(Coins coins, List<Drink> drinks) {
         this.coins = coins;
         this.drinks = drinks;
     }
 
     public boolean isDrinkInList(String drinkName) {
-        int flag = 1;
+        int isDrinkFound = Constant.TRUE;
         for (Drink drink : drinks) {
-            flag *= drink.isSameDrink(drinkName);
+            isDrinkFound *= drink.isSameDrink(drinkName);
         }
-        return (flag == 1);
+        return (isDrinkFound == Constant.TRUE);
     }
 
     public boolean isEmpty() {
-        int totalStock = 0;
+        int isEmpty = Constant.TRUE;
         for (Drink drink : drinks) {
-            totalStock += drink.getStock();
+            isEmpty *= drink.isEmpty();
         }
-        return (totalStock == 0);
+        return (isEmpty == Constant.TRUE);
     }
 
-    public int getMinimumPrice() {
-        int minimumPrice = Integer.MAX_VALUE;
+    public boolean isExistDrinkBelow(int remainMoney) {
         for (Drink drink : drinks) {
-            minimumPrice = comparePrice(minimumPrice, drink);
+            if (drink.isCheaperThan(remainMoney) && !drink.isSoldOut()) {
+                return true;
+            }
         }
-        return minimumPrice;
-    }
-
-    public int comparePrice(int currentMinimum, Drink drink) {
-        if (drink.getPrice() < currentMinimum && drink.getStock() > 0) {
-            return drink.getPrice();
-        }
-        return currentMinimum;
+        return false;
     }
 
     public Drink findDrinkWithName(String userChoice) {
         for (Drink drink : drinks) {
-            if (drink.isSameDrink(userChoice) == 1) {
+            if (drink.isSameDrink(userChoice) == Constant.TRUE) {
                 return drink;
             }
         }
         return null;
     }
 
-    public Coins getCoins() {
-        return coins;
+    public void calculateChange(User user, OutputView outputView) {
+        user.requestChange(coins, outputView);
     }
 }

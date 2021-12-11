@@ -1,5 +1,7 @@
 package vendingmachine.Model;
 
+import java.util.List;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -12,7 +14,16 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return this.amount;
+    public int requiredNumber(int money) {
+        return money / this.amount;
+    }
+
+    public int totalAmount(int number) {
+        return number * this.amount;
+    }
+
+    public List<Integer> addAmountToList(List<Integer> coinAmountList) {
+        coinAmountList.add(this.amount);
+        return coinAmountList;
     }
 }
