@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.input.CustomerInput;
 import vendingmachine.input.MachineInput;
 import vendingmachine.model.Coin;
 import vendingmachine.model.Product;
@@ -18,14 +19,17 @@ import static vendingmachine.message.Error.DUPLICATED_PRODUCT_NAME;
 public class MachineController {
 
 	private MachineInput machineInput = new MachineInput();
+	private CustomerInput customerInput = new CustomerInput();
 	private MachineViewer viewer = new MachineViewer();
 	private HashMap<Coin, Integer> coins = new HashMap<>(Coin.getCoinTypes());
 	private List<Product> products = new ArrayList<>();
+	private int money = 0;
 
 	public void setupVendingMachine() {
 		setupChangeCoins();
 		viewer.showCoinBoxStatus(coins);
 		setupSellingProducts();
+		money = customerInput.getInsertedMoney();
 	}
 
 	private void setupChangeCoins() {
