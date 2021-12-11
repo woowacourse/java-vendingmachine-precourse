@@ -13,4 +13,13 @@ public class OrderController {
         vendingMachine.splitInfoAndFillProduct(IOProvider.readAllProductInfo());
         consumer = Consumer.from(IOProvider.initConsumerBalance());
     }
+
+    public void doShopping() {
+        boolean keepShopping = true;
+
+        while(keepShopping) {
+            consumer.buy(vendingMachine.getProduct(IOProvider.readProductName()));
+
+        }
+    }
 }

@@ -23,7 +23,7 @@ public class ProductTest {
         Consumer consumer = Consumer.from(CONSUMER_BALANCE_POSSIBLE);
         Product product = Product.of(COLA_NAME, COLA_PRICE, COLA_AMOUNT);
 
-        assertThat(product.orderBy(consumer)).isTrue();
+        assertThat(consumer.possibleToBuy(product)).isTrue();
     }
 
     @Test
@@ -31,6 +31,6 @@ public class ProductTest {
         Consumer consumer = Consumer.from(CONSUMER_BALANCE_IMPOSSIBLE);
         Product product = Product.of(COLA_NAME, COLA_PRICE, COLA_AMOUNT);
 
-        assertThat(product.orderBy(consumer)).isFalse();
+        assertThat(consumer.possibleToBuy(product)).isFalse();
     }
 }

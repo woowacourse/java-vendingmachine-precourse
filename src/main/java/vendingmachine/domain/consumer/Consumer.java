@@ -13,10 +13,6 @@ public class Consumer {
         return new Consumer(balance);
     }
 
-    public boolean possibleToPay(int price) {
-        return this.balance >= price;
-    }
-
     public void reduceBalance(int price) {
         balance -= price;
     }
@@ -39,5 +35,13 @@ public class Consumer {
 
     private boolean isLessThanConsumerBalance(int machineBalance) {
         return machineBalance < balance;
+    }
+
+    public void buy(Product product) {
+        if(possibleToBuy(product)) {
+            product.isPurchasedBy(this);
+        }
+
+        throw new IllegalArgumentException("[ERROR] 구매자의 잔액이 부족하여 해당 제품을 구매하지 못합니다.");
     }
 }

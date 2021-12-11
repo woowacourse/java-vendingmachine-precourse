@@ -2,6 +2,7 @@ package vendingmachine.domain.machine;
 
 import vendingmachine.domain.coin.CoinPocket;
 import vendingmachine.domain.coin.util.CoinProvider;
+import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.ProductStore;
 import vendingmachine.util.RegexSeparator;
 
@@ -59,5 +60,9 @@ public class VendingMachine {
 
     public void makeChange(int changeAmount) {
         coinPocket.makeCoinCountMin(changeAmount);
+    }
+
+    public Product getProduct(String readProductName) {
+        return productStore.getProduct(readProductName);
     }
 }

@@ -28,4 +28,11 @@ public class ProductStore {
     public boolean hasProduct(String productName) {
         return productStore.containsKey(productName);
     }
+
+    public Product getProduct(String productName) {
+        if(hasProduct(productName)) {
+            return productStore.get(productName);
+        }
+        throw new IllegalArgumentException("[ERROR] 해당 이름의 상품이 존재하지 않습니다.");
+    }
 }
