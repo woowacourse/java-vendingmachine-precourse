@@ -19,4 +19,9 @@ public class Input {
         }
         return Integer.parseInt(input);
     }
+
+    public void requestMachineProduct() {
+        System.out.println(Constant.MACHINE_PRODUCT_INPUT_REQUEST_STRING);
+        Console.readLine();
+    }
 }
