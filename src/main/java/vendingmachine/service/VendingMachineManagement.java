@@ -1,15 +1,28 @@
 package vendingmachine.service;
 
+import static vendingmachine.view.Print.*;
+
 import vendingmachine.domain.VendingMachine;
 
 public class VendingMachineManagement {
 	private VendingMachine vendingMachine;
 
-	// 자판기 정보 등록 관련
+	public VendingMachineManagement(VendingMachine vendingMachine) {
+		this.vendingMachine = vendingMachine;
+	}
 
-	// 자판기가 보유하는 금액 검증
+	public void noticeInsertMoneyOfChanges() {
+		printInsertMoneyOfChanges();
+	}
 
-	// 금액 정보 자판기에 전달
+	public void insertMoneyOfChanges(int money) {
+		vendingMachine.setChanges(money);
+	}
+
+	public void noticeCountOfCoins() {
+		printCountOfCoinsTitle();
+		vendingMachine.noticeCountOfCoins();
+	}
 
 	// 자판기가 가지는 상품 정보 검증
 
