@@ -1,9 +1,9 @@
 package vendingmachine.Controller;
 
 import vendingmachine.Validator.Validator;
-import vendingmachine.View.InputView;
-import vendingmachine.View.OutputView;
+import vendingmachine.View.*;
 import vendingmachine.Model.*;
+import vendingmachine.SystemMessage.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,13 +27,13 @@ public class VendingController {
         setUser();
         while (!isEnd()) {
             tryPurchase();
-            outputView.print("투입 금액: " + user.getRemainMoney() + "원");
+            outputView.print(NoticeMessage.INPUT_MONEY_MESSAGE + user.getRemainMoney() + NoticeMessage.WON_MESSAGE);
         }
         returnChange();
     }
 
     private static void returnChange() {
-        outputView.print("잔돈");
+        outputView.print(NoticeMessage.CHANGE_MESSAGE);
         calculateChange(vendingMachine.getCoins().getCoins(), user.getRemainMoney());
     }
 
@@ -45,22 +45,22 @@ public class VendingController {
 
     private static int payCoin(CoinPair coinPair, int remainMoney) {
         String coinName = coinPair.getCoin().name();
-        coinName = coinName.substring(5) + "원";
+        coinName = coinName.substring(5) + NoticeMessage.WON_MESSAGE;
         int requiredCoins = remainMoney / coinPair.getCoin().getAmount();
         if (coinPair.getNumber() == 0 || requiredCoins == 0) {
             return 0;
         }
         if (requiredCoins >= coinPair.getNumber()) {
-            outputView.print(coinName + " - " + coinPair.getNumber() + "개");
+            outputView.print(coinName + " - " + coinPair.getNumber() + NoticeMessage.EA_MESSAGE);
             return coinPair.getNumber() * coinPair.getCoin().getAmount();
         }
-        outputView.print(coinName + " - " + requiredCoins + "개");
+        outputView.print(coinName + " - " + requiredCoins + NoticeMessage.EA_MESSAGE);
         return requiredCoins * coinPair.getCoin().getAmount();
     }
 
     private static void tryPurchase() {
         Drink chosenDrink;
-        System.out.println("구매할 상품명을 입력해주세요.");
+        System.out.println(NoticeMessage.ASK_DRINK_NAME_MESSAGE);
         do {
             chosenDrink = getUserChoice();
         } while (!Validator.isRemained(chosenDrink));
@@ -93,22 +93,22 @@ public class VendingController {
     }
 
     public static void showCoins(Coins coins) {
-        outputView.print("자판기가 보유한 동전");
+        outputView.print(NoticeMessage.BALANCE_COIN_MESSAGE);
         for (CoinPair coin : coins.getCoins()) {
             String coinName = coin.getCoin().name();
-            coinName = coinName.substring(5, coinName.length()) + "원";
-            outputView.print(coinName + " - " + coin.getNumber() + "개");
+            coinName = coinName.substring(5, coinName.length()) + NoticeMessage.WON_MESSAGE;
+            outputView.print(coinName + " - " + coin.getNumber() + NoticeMessage.EA_MESSAGE);
         }
     }
 
     private static void setUser() {
         user = new User(getUserMoneyInput());
-        outputView.print("투입 금액: " + user.getRemainMoney() + "원");
+        outputView.print(NoticeMessage.INPUT_MONEY_MESSAGE + user.getRemainMoney() + NoticeMessage.WON_MESSAGE);
     }
 
     private static int getUserMoneyInput() {
         String input;
-        outputView.print("투입 금액을 입력해 주세요.");
+        outputView.print(NoticeMessage.ASK_MONEY_INPUT_MESSAGE);
         do {
             input = inputView.getInput();
         } while (!Validator.isValidateMoney(input));
@@ -118,7 +118,7 @@ public class VendingController {
     private static List<Drink> getDrinkInput() {
         List<Drink> drinkList = new ArrayList<>();
         String input;
-        outputView.print("상품명과 가격, 수량을 입력해 주세요.");
+        outputView.print(NoticeMessage.ASK_DRINK_LIST_MESSAGE);
         do {
             input = inputView.getInput();
         } while (!Validator.isValidateDrinkList(input));
@@ -141,7 +141,7 @@ public class VendingController {
 
     private static int getBalanceInput() {
         String input;
-        outputView.print("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        outputView.print(NoticeMessage.ASK_BALANCE_INPUT_MESSAGE);
         do {
             input = inputView.getInput();
         } while (!Validator.isValidateMoney(input));
