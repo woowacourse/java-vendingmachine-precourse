@@ -9,4 +9,8 @@ public class VendingMachine {
 	public VendingMachine(Map<Coin, Integer> holdingCoin) {
 		this.holdingCoin = holdingCoin;
 	}
+
+	public Map<Coin, Integer> getHoldingCoin() {
+		return this.holdingCoin;
+	}
 }

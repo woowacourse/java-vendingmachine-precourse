@@ -10,6 +10,7 @@ public class InputView {
 	public static int getHoldingAmount() {
 		System.out.println(INPUT_HOLDING_AMOUNT);
 		String holdingAmount = Console.readLine();
+		System.out.println();
 
 		try {
 			Validation.isHoldingAmount(holdingAmount);
