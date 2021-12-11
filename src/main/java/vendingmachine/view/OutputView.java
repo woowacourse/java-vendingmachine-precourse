@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.HashMap;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.InputMoney;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
 
@@ -21,7 +22,10 @@ public class OutputView {
 		}
 	}
 
-	public static void printCurrentInputMoney() {
-
+	public static void printCurrentInputMoney(VendingMachine vendingMachine) {
+		System.out.println();
+		System.out.print(Message.CURRENT_INPUT_MONEY.getText());
+		System.out.print(vendingMachine.getInputMoney().getCurrentMoney());
+		System.out.println(Message.MONEY_UNIT_WON.getText());
 	}
 }

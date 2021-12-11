@@ -4,6 +4,7 @@ public class VendingMachine {
 
 	private Changes changes;
 	private Products products;
+	private InputMoney inputMoney;
 
 	public Changes getChanges() {
 		return changes;
@@ -13,8 +14,12 @@ public class VendingMachine {
 		return products;
 	}
 
-	public void createChanges(int inputMoney) {
-		changes = new Changes(inputMoney);
+	public InputMoney getInputMoney() {
+		return inputMoney;
+	}
+
+	public void createChanges(int totalChanges) {
+		changes = new Changes(totalChanges);
 		changes.createRandomCoin();
 	}
 
@@ -22,5 +27,10 @@ public class VendingMachine {
 		products = new Products();
 		products.createProductList(productInfo);
 	}
+
+	public void createInputMoney(int tempInputMoney) {
+		inputMoney = new InputMoney(tempInputMoney);
+	}
+
 
 }

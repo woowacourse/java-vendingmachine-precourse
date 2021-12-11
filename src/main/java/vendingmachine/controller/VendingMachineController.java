@@ -1,9 +1,9 @@
 package vendingmachine.controller;
 
 import static vendingmachine.view.InputView.*;
+import static vendingmachine.view.OutputView.*;
 
 
-import vendingmachine.domain.Money;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.OutputView;
@@ -20,11 +20,15 @@ public class VendingMachineController {
 		printMessageToGetAmountMoneyOfVendingMachine();
 		int totalChanges = inputTotalAmountMoneyOfVendingMachine();
 		vendingMachine.createChanges(totalChanges);
-		OutputView.printChangesVendingMachine(vendingMachine);
+		printChangesVendingMachine(vendingMachine);
 
 		printMessageToGetInformationOfProducts();
 		String productInfo = inputInformationOfProducts();
 		vendingMachine.createProductList(productInfo);
 
+		printMessageToGetInputMoney();
+		String tempInputMoney = inputMoneyToPutInVendingMachine();
+		vendingMachine.createInputMoney(Integer.parseInt(tempInputMoney));
+		printCurrentInputMoney(vendingMachine);
 	}
 }

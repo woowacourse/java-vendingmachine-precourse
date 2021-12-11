@@ -23,6 +23,7 @@ public class InputView {
 	}
 
 	public static void printMessageToGetInputMoney() {
+		System.out.println();
 		System.out.println(Message.GET_INPUT_MONEY.getText());
 	}
 
