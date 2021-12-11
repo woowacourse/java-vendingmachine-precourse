@@ -9,7 +9,8 @@ public enum ErrorMessage {
 	PRODUCT_INPUT_LENGTH_ERROR("상품명, 가격, 수량은 쉼표로, 구분하여 상품명, 가격, 수량이 모두 입력되어야 합니다."),
 	PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR("상품 가격은 100이상의 자연수 여야 합니다."),
 	PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR("상품 수량은 자연수여야 합니다."),
-	PRODUCT_IS_DISTINCT_ERROR("상품은 중복돼서 들어올 수 없습니다.");
+	PRODUCT_IS_DISTINCT_ERROR("상품은 중복돼서 들어올 수 없습니다."),
+	PRODUCT_NAME_IS_NOT_IN_PRODUCTS("상품 목록에 없는 상품입니다.");
 
 	private String errorMessage;
 

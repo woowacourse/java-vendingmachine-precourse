@@ -75,7 +75,7 @@ public class Validation {
 	// 구매할 상품명이 목록에 없을 경우
 	public static void validateProductIsNotInProducts(String name, List<Product> products) {
 		if(!products.contains(new Product(name,0,0))) {
-			throw new IllegalArgumentException(ErrorMessage.PRODUCT_IS_DISTINCT_ERROR.getErrorMessage());
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_NAME_IS_NOT_IN_PRODUCTS.getErrorMessage());
 		}
 	}
 

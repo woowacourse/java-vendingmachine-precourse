@@ -37,11 +37,11 @@ public class VendingMachineService {
 	}
 
 	public void postProductInfo(String inputStr) {
-		//TODO: Validation 들 처리
-
 		vendingMachine.initProducts();
+
 		Validation.validateNull(inputStr);
 		Validation.validateProductFormat(inputStr);
+
 		addProducts(inputStr);
 	}
 
@@ -58,8 +58,9 @@ public class VendingMachineService {
 	}
 
 	public boolean postProductName(String inputStr) {
-		//TODO: Validation 들 처리
+
 		Validation.validateNull(inputStr);
+		Validation.validateProductIsNotInProducts(inputStr, vendingMachine.getProducts());
 
 		result.init();
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
@@ -89,6 +90,7 @@ public class VendingMachineService {
 			Validation.validateProductPrice(product[1]);
 			Validation.validateProductAmount(product[2]);
 			Validation.validateProductIsDistinct(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])), vendingMachine.getProducts());
+
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
 		}
@@ -111,17 +113,14 @@ public class VendingMachineService {
 	// TODO: 비즈니스 로직
 	private Map<Integer, Integer> addChangeMapToValue(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
-
 			if (change >= key) {
 				map.put(key, map.getOrDefault(key, 0) + 1);
 				change -= key;
 			}
-
 			if (change < key || change <= 0) {
 				break;
 			}
 		}
-
 		return map;
 	}
 }
