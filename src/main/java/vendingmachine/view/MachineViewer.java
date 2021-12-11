@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.view;
+
+import vendingmachine.model.Coin;
 
 import java.util.Arrays;
 import java.util.Comparator;

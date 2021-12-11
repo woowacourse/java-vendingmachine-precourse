@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.util;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.model.Coin;
 
 import java.util.Arrays;
 import java.util.HashMap;
