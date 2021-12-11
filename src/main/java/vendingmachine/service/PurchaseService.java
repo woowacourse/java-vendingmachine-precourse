@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import vendingmachine.domain.Item;
 import vendingmachine.service.validator.PurchaseInputValidator;
@@ -18,7 +19,11 @@ public class PurchaseService {
 
 	public int purchaseItem(List<Item> items) {
 		String itemName = inputView.inputItemName();
-		purchaseInputValidator.validateItemName(itemName, items);
+		Item selectedItem = items.stream()
+			.filter(item -> item.getName().equals(itemName))
+			.findAny()
+			.orElse(null);
+		purchaseInputValidator.validateItem(selectedItem);
 	}
 
 }

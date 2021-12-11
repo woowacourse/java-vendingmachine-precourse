@@ -1,25 +1,22 @@
 package vendingmachine.service.validator;
 
 import java.util.List;
+import java.util.Objects;
 
 import vendingmachine.domain.Item;
 
 public class PurchaseInputValidator {
 
-	public void validateItemName(String itemName, List<Item> items) {
+	public void validateItem(Item selectedItem) {
 		try {
-			isExistsItem(itemName, items);
+			isExistsItem(selectedItem);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
 		}
-
 	}
 
-	private void isExistsItem(String itemName, List<Item> items) {
-		boolean isContainItem = items.stream()
-			.map(Item::getName)
-			.anyMatch(name -> name.equals(itemName));
-		if (!isContainItem) {
+	private void isExistsItem(Item selectedItem) {
+		if (Objects.isNull(selectedItem)) {
 			throw new IllegalArgumentException("존재하지 않는 상품명입니다.");
 		}
 	}
