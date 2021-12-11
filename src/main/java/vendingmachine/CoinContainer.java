@@ -12,8 +12,7 @@ public class CoinContainer {
 
     public CoinContainer() {};
 
-    public void init(int insertedAmount) {
-        int holdingAmount = insertedAmount;
+    public void init(int holdingAmount) {
         Coin pickedCoin;
         List<Integer> pickableCoinAmountList = Coin.coinAmountList;
 
