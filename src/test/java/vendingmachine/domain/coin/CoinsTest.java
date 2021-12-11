@@ -37,4 +37,12 @@ class CoinsTest {
 
 		assertEquals("[ERROR] 보유 금액은 10원의 배수입니다.", exception.getMessage());
 	}
+
+	@ParameterizedTest
+	@ValueSource(strings = {"1000", "1110", "540", "1500"})
+	void validateTotalAmount(String input) {
+		Coins coins = Coins.generateCoinsRandomlyFromTotalAmount(input);
+
+		assertEquals(coins.getTotalAmount(), Integer.parseInt(input));
+	}
 }

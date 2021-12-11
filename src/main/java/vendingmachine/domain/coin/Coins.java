@@ -60,6 +60,12 @@ public class Coins {
 		return coinMap;
 	}
 
+	public int getTotalAmount() {
+		return coinMap.entrySet().stream()
+			.map(entry -> entry.getKey().getAmount() * entry.getValue())
+			.reduce(0, Integer::sum);
+	}
+
 	public Map<Coin, Integer> getCoins() {
 		return coinMap;
 	}
