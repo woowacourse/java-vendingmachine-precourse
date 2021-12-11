@@ -16,21 +16,28 @@ public class VendingMachineController {
 	private static int money;
 
 	public void start() {
-		coinService.register(inputService.readMoneyOfVendingMachine());
-		outputService.enter();
-
+		fillCoinsOfVendingMachine();
 		outputService.printAllCoinCount();
+		registerItems();
+		putMoney();
+		purchase();
+		outputService.printChange(coinService.returnChange(money));
+	}
 
+	private void putMoney() {
+		money = inputService.readMoneyOfUser();
+		outputService.enter();
+	}
+
+	private void registerItems() {
 		inputService.readItems().stream()
 			.forEach(item -> itemService.register(item));
 		outputService.enter();
+	}
 
-		money = inputService.readMoneyOfUser();
+	private void fillCoinsOfVendingMachine() {
+		coinService.register(inputService.readMoneyOfVendingMachine());
 		outputService.enter();
-
-		purchase();
-
-		outputService.printChange(coinService.returnChange(money));
 	}
 
 	private void purchase() {
