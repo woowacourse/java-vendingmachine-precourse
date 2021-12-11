@@ -32,12 +32,25 @@ public class Validator {
 
     public static void validateMachineProductInput(String input) throws IllegalArgumentException {
         String[] products = input.split(";");
-        Arrays.stream(products)
-                .forEach(Validator::validateMachineProductInputBracket);
+
+        for (String product : products) {
+            validateMachineProductInputBracket(product);
+            validateMachineProductInputDividedByComma(product);
+        }
     }
 
     private static void validateMachineProductInputBracket(String product) throws IllegalArgumentException {
         if (!product.startsWith("[") || !product.endsWith("]")) {
+            throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_IS_NOT_RIGHT_FORM_ERROR_STRING);
+        }
+    }
+
+    private static void validateMachineProductInputDividedByComma(String product) throws IllegalArgumentException {
+        product = product.replaceAll("[]\\[]", "");
+        String[] str = Arrays.stream(product.split(","))
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
+        if (str.length != 3) {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_IS_NOT_RIGHT_FORM_ERROR_STRING);
         }
     }
