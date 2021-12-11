@@ -19,7 +19,6 @@ public class CashManager {
 
     public String getVaultStatus() {
         StringBuilder sb = new StringBuilder();
-        sb.append("자판기가 보유한 동전").append(System.lineSeparator());
 
         for (Coin coin : Coin.values()) {
             if (!this.vault.containsKey(coin)) {

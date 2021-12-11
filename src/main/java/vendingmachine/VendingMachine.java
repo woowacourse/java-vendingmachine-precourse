@@ -16,6 +16,7 @@ public class VendingMachine {
 
     public void run() {
         initVault();
+        System.out.println("자판기가 보유한 동전");
         System.out.println(this.cashManager.getVaultStatus());
         initProducts();
 
@@ -32,12 +33,13 @@ public class VendingMachine {
             }
         }
 
-        System.out.println();
-
         while (true) {
             try {
+                System.out.println();
                 System.out.println(String.format("투입 금액: %d", this.cashManager.getRemainCash()));
 
+                System.out.println("Remiancahs: " + this.cashManager.getRemainCash());
+                System.out.println("minprice: " + this.productManager.getMinPrice());
                 if (!this.productManager.isProductAvailable() || this.cashManager.getRemainCash() < this.productManager.getMinPrice()) {
                     break;
                 }
@@ -45,6 +47,13 @@ public class VendingMachine {
                 System.out.println("구매할 상품명을 입력해 주세요.");
                 String buffer = Console.readLine();
                 Validator.validateProductName(buffer);
+
+                if (!this.productManager.isProductExist(buffer)) {
+                    throw new MyIllegalArgumentException(
+                            String.format("Product [%s] doesn't exist", buffer)
+                    );
+                }
+
                 this.cashManager.withdraw(this.productManager.getProductPrice(buffer));
 
             } catch (IllegalArgumentException e) {
