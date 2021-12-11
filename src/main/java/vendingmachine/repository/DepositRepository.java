@@ -1,5 +1,6 @@
 package vendingmachine.repository;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -16,6 +17,14 @@ public class DepositRepository {
 		depositMap = new TreeMap<>();
 	}
 
+	public DepositRepository(DepositRepository depositRepository) {
+		this.depositMap = new HashMap<>();
+		depositRepository.depositMap.values()
+			.stream()
+			.map(deposit -> new Deposit(deposit.getCoin(), deposit.getCount()))
+			.forEach(nd -> depositMap.put(nd.getCoin(), nd));
+	}
+
 	public void save(List<Deposit> depositList) {
 		depositList.forEach(deposit -> depositMap.put(deposit.getCoin(), deposit));
 	}
@@ -27,6 +36,7 @@ public class DepositRepository {
 	public int getDepositTotal() {
 		return depositMap.values()
 			.stream()
-			.mapToInt(deposit -> deposit.getCoin().getAmount() * deposit.getCount()).sum();
+			.mapToInt(deposit -> deposit.getCoin().getAmount() * deposit.getCount())
+			.sum();
 	}
 }

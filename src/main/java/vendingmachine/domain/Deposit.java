@@ -24,6 +24,10 @@ public class Deposit implements Comparable<Deposit> {
 		return count;
 	}
 
+	public void decreaseBy(int count) {
+		this.count -= count;
+	}
+
 	@Override
 	public int compareTo(Deposit o) {
 		if (coin.getAmount() == o.getCoin().getAmount())

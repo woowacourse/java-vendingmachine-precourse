@@ -90,4 +90,25 @@ public class MachineService {
 		machine.decreaseUserMoney(product.getPrice());
 		productRepository.decreaseQuantity(productName);
 	}
+
+	public boolean isSpitable() {
+		return isSpitableRecursive(0, machine.getUserMoney(),
+			new DepositRepository(depositRepository));
+	}
+
+	private boolean isSpitableRecursive(int coinIndex, int moneySum, DepositRepository clonedDR) {
+		if (moneySum == 0)
+			return true;
+		if (coinIndex >= Coin.values().length) {
+			return false;
+		}
+		Coin coin = Coin.values()[coinIndex];
+		int amount = coin.getAmount();
+		Deposit deposit = clonedDR.findByCoin(coin).orElse(new Deposit(Coin.COIN_10,0));
+		int count = Math.min(moneySum / amount, deposit.getCount());
+
+		moneySum -= amount * count;
+		deposit.decreaseBy(count);
+		return isSpitableRecursive(coinIndex + 1, moneySum, clonedDR);
+	}
 }
