@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import vendingmachine.dto.ItemDto;
 import vendingmachine.exception.NotNumericException;
+import vendingmachine.validator.ItemValidator;
 
 public class ItemsInputParser {
 	private static final String ITEM_DELIMITER = ";";
@@ -29,17 +30,31 @@ public class ItemsInputParser {
 	}
 
 	private static ItemDto parseItemInput(String itemInput) {
-		String parsedItemInput = itemInput.replace(OPEN_BRACKET, BLANK_CHAR).replace(CLOSE_BRACKET, BLANK_CHAR);
-		String[] elements = parsedItemInput.split(ELEMENT_DELIMITER);
+		ItemValidator.validateItemInputFormat(itemInput);
 
-		String itemName = elements[ITEM_NAME_INDEX];
-		String itemPrice = elements[ITEM_PRICE_INDEX];
-		String itemQuantity = elements[ITEM_QUANTITY_INDEX];
+		List<String> elements = getElementsFromItemInput(itemInput);
+		validateItemElements(elements);
 
-		if (!StringUtils.isNumeric(itemPrice) || !StringUtils.isNumeric(itemQuantity)) {
+		return ItemDto.of(
+			elements.get(ITEM_NAME_INDEX),
+			Integer.parseInt(elements.get(ITEM_PRICE_INDEX)),
+			Integer.parseInt(elements.get(ITEM_QUANTITY_INDEX))
+		);
+	}
+
+	private static List<String> getElementsFromItemInput(String itemInput) {
+		return Arrays.asList(
+			itemInput.replace(OPEN_BRACKET, BLANK_CHAR)
+				.replace(CLOSE_BRACKET, BLANK_CHAR)
+				.split(ELEMENT_DELIMITER)
+		);
+	}
+
+	private static void validateItemElements(List<String> elements) {
+		boolean isItemPriceNumeric = StringUtils.isNumeric(elements.get(ITEM_PRICE_INDEX));
+		boolean isItemQuantityNumeric = StringUtils.isNumeric(elements.get(ITEM_QUANTITY_INDEX));
+		if (!isItemPriceNumeric || !isItemQuantityNumeric) {
 			throw new NotNumericException();
 		}
-
-		return ItemDto.of(itemName, Integer.parseInt(itemPrice), Integer.parseInt(itemQuantity));
 	}
 }

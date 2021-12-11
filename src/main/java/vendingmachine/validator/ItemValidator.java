@@ -1,13 +1,16 @@
 package vendingmachine.validator;
 
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 import vendingmachine.exception.DataDuplicatedException;
+import vendingmachine.exception.ItemInputFormatException;
 import vendingmachine.exception.SoldOutException;
 
 public class ItemValidator extends Validator {
 	private static final String ITEMS_DELIMITER = ";";
 	private static final String ITEM_DELIMITER = ",";
+	private static final String ITEM_FORMAT_REGEX_PATTERN = "\\[[a-zA-Z가-힣ㄱ-ㅎㅏ-ㅣ0-9]+,[0-9]+,[0-9]+]";
 
 	private static final int MULTIPLE = 10;
 	private static final int MIN_PRICE = 100;
@@ -21,6 +24,14 @@ public class ItemValidator extends Validator {
 
 		if (duplicated) {
 			throw new DataDuplicatedException();
+		}
+	}
+
+	public static void validateItemInputFormat(String itemInput) {
+		boolean isFormatValid = Pattern.matches(ITEM_FORMAT_REGEX_PATTERN, itemInput);
+
+		if (!isFormatValid) {
+			throw new ItemInputFormatException();
 		}
 	}
 
