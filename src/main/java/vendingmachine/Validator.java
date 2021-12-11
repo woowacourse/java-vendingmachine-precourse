@@ -31,7 +31,7 @@ public class Validator {
             }
         }
 
-        if (tokens[1].length() > MAX_PRODUCT_PRICE) {
+        if (Integer.parseInt(tokens[1]) > MAX_PRODUCT_PRICE) {
             throw new MyIllegalArgumentException(
                     String.format("Product price shouldn't be higher than %d", MAX_PRODUCT_PRICE)
             );
@@ -43,7 +43,7 @@ public class Validator {
             }
         }
 
-        if (tokens[2].length() > MAX_PRODUCT_AMOUNT) {
+        if (Integer.parseInt(tokens[2]) > MAX_PRODUCT_AMOUNT) {
             throw new MyIllegalArgumentException(
                     String.format("Product amount shouldn't be larger than %d", MAX_PRODUCT_AMOUNT)
             );
