@@ -61,6 +61,10 @@ public enum Coin {
         countForChange++;
     }
 
+    public boolean hasCountForChange() {
+        return countForChange > 0;
+    }
+
     public int reduceChangeAsCoinAmount(int changeAmount) {
         return changeAmount - amount;
     }
@@ -85,5 +89,9 @@ public enum Coin {
     // for test
     public boolean isChangeCount(int targetCount) {
         return countForChange == targetCount;
+    }
+
+    public String getCountForChangeMessage() {
+        return amount + "원 - " + countForChange + "개";
     }
 }
