@@ -6,6 +6,7 @@ import vendingmachine.view.OutputView;
 
 public class MachineController {
 	private static int inputAmount;
+
 	public static void runMachine() {
 		int holdingAmount = askHoldingAmount();
 		OutputView.showHoldingCoins(holdingAmount);
@@ -14,6 +15,7 @@ public class MachineController {
 		purchase();
 		OutputView.showChanges(inputAmount);
 	}
+
 	private static int askHoldingAmount() {
 		try {
 			return InputView.askHoldingAmount();
