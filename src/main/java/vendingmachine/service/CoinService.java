@@ -42,4 +42,40 @@ public class CoinService {
 		coins.put(coin, ++previousQuantity);
 	}
 
+	public Map<Coin,Integer> getMinCoinSet(Map<Coin, Integer> coinState, int left) {
+		for (Coin coin : coinState.keySet()) {
+			left = changeCoin(coin, left, coinState);
+		}
+		return coins;
+	}
+
+	private int changeCoin(Coin coin, int left, Map<Coin,Integer> coinState) {
+		int coinStateQuantity = coinState.get(coin);
+		int coinAmount = coin.getAmount();
+		int changeCoinQuantity = 0;
+		while (shouldChange(coinStateQuantity, coinAmount, left)
+			&& getAllCoinQuantity(coinState) != 0) {
+			left -= coinAmount;
+			coinState.put(coin, --coinStateQuantity);
+			coins.put(coin, ++changeCoinQuantity);
+		}
+		return left;
+	}
+
+	private boolean shouldChange(int coinQuantity, int coinAmount, int left) {
+		if (coinQuantity == 0
+			|| coinAmount > left) {
+			return false;
+		}
+		return true;
+	}
+
+	private int getAllCoinQuantity(Map<Coin, Integer> coins) {
+		int coinQuantity = 0;
+		for (Integer value : coins.values()) {
+			coinQuantity += value;
+		}
+		return coinQuantity;
+	}
+
 }

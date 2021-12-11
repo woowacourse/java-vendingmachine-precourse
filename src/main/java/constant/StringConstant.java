@@ -31,5 +31,7 @@ public class StringConstant {
 	public static String ORDER_NOT_EXIST = "존재하지 않는 상품입니다.";
 	public static String ORDER_NOT_LEFT = "해당 상품이 품절 되었습니다.";
 	public static String NOT_ENOUGH_MONEY = "잔액이 부족합니다";
+
+	public static String CHANGE = "잔돈";
 }
 

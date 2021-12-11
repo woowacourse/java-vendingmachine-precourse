@@ -1,5 +1,7 @@
 package vendingmachine.service;
 
+import static constant.NumberConstant.*;
+
 import java.util.Map;
 
 import exception.PriceException;
@@ -32,5 +34,12 @@ public class VendingMachineService {
 
 	public void saveProductRepository(ProductRepository productRepository) {
 		vendingMachine.setProductRepository(productRepository);
+	}
+
+	public Map<Coin, Integer> getChangeCoinSet(int money) {
+		money %= MIN_BILL_UNIT;
+		Map<Coin, Integer> coinState = vendingMachine.getCoinMap();
+		return new CoinService().getMinCoinSet(coinState, money);
+
 	}
 }

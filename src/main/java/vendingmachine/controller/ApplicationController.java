@@ -3,7 +3,10 @@ package vendingmachine.controller;
 import static constant.CharacterConstant.*;
 import static constant.StringConstant.*;
 
+import java.util.Map;
+
 import exception.PriceException;
+import vendingmachine.model.Coin;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.service.ProductRepositoryService;
 import vendingmachine.service.VendingMachineService;
@@ -106,6 +109,8 @@ public class ApplicationController {
 
 	private void returnChange(int money) {
 		PrintView.printMoneyState(money);
+		Map<Coin, Integer> changeCoinSet = vendingMachineService.getChangeCoinSet(money);
+		PrintView.printVendingMachineCoins(changeCoinSet);
 	}
 
 }
