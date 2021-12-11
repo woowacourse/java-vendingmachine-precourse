@@ -20,7 +20,7 @@
 - camp.nextstep.edu.missionutils에서 제공하는 Console API를 활용한다.
 - **예외**가 발생하면 IllegalArgumentException을 발생시키고 [ERROR]로 시작하는 문구를 출력한다.
 - **[예외]** 숫자가 아닌 경우
-- **[예외]** 0보다 작은 경우
+- **[예외]** 10보다 작은 경우 (10보다 작은 경우, 잔돈이 없으므로)
 
 <br>
 
