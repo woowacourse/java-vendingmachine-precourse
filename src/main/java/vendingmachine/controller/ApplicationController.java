@@ -4,7 +4,6 @@ import static constant.CharacterConstant.*;
 import static constant.StringConstant.*;
 
 import exception.PriceException;
-import sun.jvm.hotspot.HelloWorld;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.service.ProductRepositoryService;
 import vendingmachine.service.VendingMachineService;
@@ -79,11 +78,12 @@ public class ApplicationController {
 
 	private void getOrder(int money) {
 		while (shouldChange(money)) {
+			PrintView.printMoneyState(money);
 			String orderedProduct = InputView.getOrderedProduct();
 			updateByOrder(orderedProduct, money);
 			money -= productRepositoryService.getPriceByOrder(orderedProduct);
 		}
-		returnChange();
+		returnChange(money);
 	}
 
 	private boolean shouldChange(int money) {
@@ -104,8 +104,8 @@ public class ApplicationController {
 		}
 	}
 
-	private void returnChange() {
-		System.out.println("Hello, World");
+	private void returnChange(int money) {
+		PrintView.printMoneyState(money);
 	}
 
 }
