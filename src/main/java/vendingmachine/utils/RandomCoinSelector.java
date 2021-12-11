@@ -18,7 +18,7 @@ public class RandomCoinSelector {
 	}
 
 	public static Coin selectCoinCheaperThanValue(int value) {
-		List<Coin> coinListCheaperThanValue = getCoinListCheaperThanValue(value);
+		List<Coin> coinListCheaperThanValue = getCoinListCheaperThanOrEqualToValue(value);
 		int randomAmout = Randoms.pickNumberInList(getAmountList(coinListCheaperThanValue));
 		return Coin.valueOf(randomAmout);
 	}
@@ -27,10 +27,10 @@ public class RandomCoinSelector {
 		return Arrays.asList(Coin.values());
 	}
 
-	private static List<Coin> getCoinListCheaperThanValue(int value) {
+	private static List<Coin> getCoinListCheaperThanOrEqualToValue(int value) {
 		List<Coin> allCoins = getAllCoinList();
 		return allCoins.stream()
-			.filter(coin -> coin.getAmount() < value)
+			.filter(coin -> coin.getAmount() <= value)
 			.collect(toList());
 	}
 
