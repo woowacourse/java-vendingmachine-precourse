@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.Message;
+
 public class Product {
     private String name;
     private int price;
@@ -20,7 +22,9 @@ public class Product {
     }
 
     public void subQuantity() {
-        // quantity가 0일경우 예외
+        if(this.quantity == 0){
+            throw new IllegalArgumentException(Message.IS_OUT_OF_STOCK);
+        }
         this.quantity -= 1;
     }
 }

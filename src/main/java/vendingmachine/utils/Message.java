@@ -16,4 +16,5 @@ public class Message {
 
     public static String IS_NOT_FOUNDED_PRODUCT = "존재하지 않는 상품입니다";
     public static String IS_OVER_BALANCE = "잔액이 부족합니다";
+    public static String IS_OUT_OF_STOCK = "재고가 부족합니다";
 }
