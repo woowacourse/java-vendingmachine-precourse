@@ -23,6 +23,13 @@ public class InputController {
 		} while (!validateProduct(products));
 	}
 
+	public void inputInputAmount() {
+		String inputAmount;
+		do {
+			inputAmount = InputView.inputInputAmount();
+		} while (!validateInputAmount(inputAmount));
+	}
+
 	private void handleInputError(boolean isValid, String errorMessage) {
 		try {
 			if (!isValid) {
@@ -72,5 +79,13 @@ public class InputController {
 	private boolean validateProductCount(String count) {
 		return InputValidator.isDigit(count)
 			&& InputValidator.isGreaterThan(Constants.PRODUCT_COUNT_MIN_VALUE, count);
+	}
+
+	private boolean validateInputAmount(String inputAmount) {
+		boolean isValid = InputValidator.isNotEmpty(inputAmount)
+			&& InputValidator.isDigit(inputAmount)
+			&& InputValidator.isGreaterThan(Constants.INPUT_AMOUNT_MIN_VALUE, inputAmount);
+		handleInputError(isValid, Constants.ERROR_MESSAGE_INPUT_INPUT_AMOUNT);
+		return isValid;
 	}
 }

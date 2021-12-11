@@ -13,5 +13,6 @@ public class MainController {
 		vendingMachine.generateCoins();
 		OutputView.printCoins();
 		inputController.inputProduct();
+		inputController.inputInputAmount();
 	}
 }
