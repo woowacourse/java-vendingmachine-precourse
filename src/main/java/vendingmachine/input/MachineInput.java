@@ -24,7 +24,7 @@ public class MachineInput {
 	}
 
 	private void validateMachineChangesInput(String input) {
-		Validator.isOnlyNums(input);
+		Validator.onlyNums(input);
 	}
 
 	public List<String> getProductsInfo() {
