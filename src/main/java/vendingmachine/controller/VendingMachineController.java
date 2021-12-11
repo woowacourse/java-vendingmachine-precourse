@@ -89,6 +89,7 @@ public class VendingMachineController {
 				itemModel.getNameList(), itemModel.getPriceByName(item))) {
 			return;
 		}
+		itemModel.sellItem(item);
 		userModel.reduceMoney(itemModel.getPriceByName(item));
 	}
 

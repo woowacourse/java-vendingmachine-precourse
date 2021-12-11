@@ -42,6 +42,10 @@ public class ItemModel {
 				.sum() > 0;
 	}
 
+	public void sellItem(String item) {
+		itemStorage.reduceItemQuantity(item);
+	}
+
 	public int getPriceByName(String name) {
 		return itemStorage.getPriceByName(name);
 	}
