@@ -13,6 +13,7 @@ class ApplicationTest extends NsTest {
     @Test
     void 기능_테스트() {
         assertRandomNumberInListTest(
+<<<<<<< HEAD
                 () -> {
                     run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
                     assertThat(output()).contains(
@@ -21,6 +22,16 @@ class ApplicationTest extends NsTest {
                     );
                 },
                 100, 100, 100, 100, 50
+=======
+            () -> {
+                run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
+                assertThat(output()).contains(
+                    "자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
+                    "투입 금액: 3000원", "투입 금액: 1500원"
+                );
+            },
+            100, 100, 100, 100, 50
+>>>>>>> 6e84fc395067d7ec95396b515d863a452f66b337
         );
     }
 
