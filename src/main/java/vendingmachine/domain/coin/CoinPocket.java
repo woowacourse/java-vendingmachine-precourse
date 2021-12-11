@@ -2,6 +2,7 @@ package vendingmachine.domain.coin;
 
 import vendingmachine.Coin;
 import vendingmachine.domain.coin.util.CoinProvider;
+import vendingmachine.util.CoinChange;
 
 import java.util.Set;
 import java.util.TreeSet;
@@ -40,5 +41,9 @@ public class CoinPocket {
     // for test
     protected int getAllCoinsSum() {
         return coins.stream().mapToInt(coin -> coin.multiplyAmountAndCount()).sum();
+    }
+
+    public void makeCoinCountMin(int changeAmount) {
+        CoinChange.makeCoinsCountMin(coins, changeAmount);
     }
 }

@@ -49,10 +49,13 @@ public class VendingMachine {
         return this.balance == balance;
     }
 
-
     // for test
     public boolean hasProduct(List<String> productNameList) {
         return productNameList.stream()
                 .allMatch((productName) -> productStore.hasProduct(productName));
+    }
+
+    public void makeChange(int changeAmount) {
+        coinPocket.makeCoinCountMin(changeAmount);
     }
 }
