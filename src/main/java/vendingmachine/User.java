@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class User {
     private String input;
@@ -10,6 +11,8 @@ public class User {
     private int price;
     private int quantity;
     ArrayList<String> goods = new ArrayList<>();
+    HashMap<String, Integer> productPrices = new HashMap<>();
+    HashMap<String, Integer> productQuantities = new HashMap<>();
 
     public boolean inputMachineBalance() {
         try {
@@ -88,6 +91,8 @@ public class User {
         checkProductElement(product);
         checkGoodsPrice(product[1]);
         checkGoodsQuantity(product[2]);
+        productPrices.put(product[0], price);
+        productQuantities.put(product[0], quantity);
     }
     private void checkSquareBrackets(String temp) throws IllegalArgumentException {
         if (!(temp.charAt(0) == '[' || temp.charAt(temp.length()-1) == ']')) {

@@ -16,7 +16,6 @@ public class Machine {
         showMachineCoins();
         Goods();
     }
-
     private void Balance() {
         boolean check = false;
         while (!check) {
@@ -24,7 +23,6 @@ public class Machine {
             check = user.inputMachineBalance();
         }
     }
-
     private void Goods() {
         boolean check = false;
         System.out.println();
@@ -33,7 +31,6 @@ public class Machine {
             check = user.inputGoods();
         }
     }
-
     private void coinsInMachine() {
         int balance = user.getMachineBalance();
         int coin;
@@ -48,17 +45,14 @@ public class Machine {
             }
         }
     }
-
     private int randomCoin() {
         return Randoms.pickNumberInList(Coin.getCoinsList());
     }
-
     private void coinHashMap() {
         for(Coin coin : Coin.values()) {
             coinsMap.put(coin, Collections.frequency(coins, coin.getAmount()));
         }
     }
-
     private void showMachineCoins() {
         System.out.println("\n"+Message.SHOW_MACHINE_COINS);
         System.out.println(Coin.COIN_500.getAmount() + "원 - " + coinsMap.get(Coin.COIN_500) + "개");
@@ -66,4 +60,5 @@ public class Machine {
         System.out.println(Coin.COIN_50.getAmount() + "원 - " + coinsMap.get(Coin.COIN_50) + "개");
         System.out.println(Coin.COIN_10.getAmount() + "원 - " + coinsMap.get(Coin.COIN_10) + "개");
     }
+
 }
