@@ -60,7 +60,7 @@ public class InputGenerator {
                 System.out.printf("\n투입 금액: %d원", userInputMoney);
                 System.out.println("\n구매할 상품을 입력해 주세요.");
                 productToBuy = Console.readLine();
-                InputValidator.isInInventory(productToBuy);
+                InputValidator.isValidProduct(productToBuy);
                 break;
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());

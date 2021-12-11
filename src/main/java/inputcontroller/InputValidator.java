@@ -1,6 +1,6 @@
 package inputcontroller;
 
-import static vendingmachine.VendingMachineMain.name2Product;
+import static vendingmachine.VendingMachineMain.*;
 
 public class InputValidator {
 
@@ -9,13 +9,17 @@ public class InputValidator {
         isDigit(moneyValue);
         // 예외2. 10원 단위가 아님
         isMultOf10(moneyValue);
+        // 입력 금액이 상품의 최소 판매가격보다 낮음
+        if (Integer.parseInt(moneyValue) < minCost) {
+            throw new IllegalArgumentException("[ERROR] 금액이 부족합니다.\n");
+        }
     }
 
     public static void isDigit(String moneyValue) {
         for (int i = 0; i < moneyValue.length(); i++) {
             char digitCh = moneyValue.charAt(i);
             if (digitCh - '0' < 0 || digitCh - '0' > 9) {
-                throw new IllegalArgumentException("[ERROR] 10원 단위의 정수를 입력하세요.");
+                throw new IllegalArgumentException("[ERROR] 10원 단위의 정수를 입력하세요.\n");
             }
         }
     }
@@ -23,7 +27,7 @@ public class InputValidator {
     public static void isMultOf10(String moneyValue) {
         int number = Integer.parseInt(moneyValue);
         if (number % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] 10원 단위의 정수를 입력하세요.");
+            throw new IllegalArgumentException("[ERROR] 10원 단위의 정수를 입력하세요.\n");
         }
     }
 
@@ -49,12 +53,15 @@ public class InputValidator {
         }
     }
 
-    public static void isInInventory(String productToBuy) {
+    public static void isValidProduct(String productToBuy) {
         if (!name2Product.containsKey(productToBuy)) {
-            throw new IllegalArgumentException("[ERROR] 상품명 입력 오류");
+            throw new IllegalArgumentException("[ERROR] 상품의 이름을 확인하세요.");
         }
         if (!name2Product.get(productToBuy).provide()) {
-            throw new IllegalArgumentException("[ERROR] 구매 불가");
+            throw new IllegalArgumentException("[ERROR] 재고가 없습니다.");
+        }
+        if (userInputMoney < name2Product.get(productToBuy).value()) {
+            throw new IllegalArgumentException("[ERROR] 금액이 모자랍니다.");
         }
     }
 }

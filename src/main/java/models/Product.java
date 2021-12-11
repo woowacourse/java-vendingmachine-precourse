@@ -15,13 +15,17 @@ public class Product {
     }
 
     public boolean provide() {
-        if (this.remains >= 1 && userInputMoney - this.price >= 0) {
+        if (this.remains >= 1) {
             this.remains--;
             totalRemains--;
             userInputMoney -= this.price;
             return true;
         }
         return false;
+    }
+
+    public int value() {
+        return this.price;
     }
 
     @Override
