@@ -42,12 +42,13 @@ public class CoinModel {
 				coinStorage.getNumberOfCoins());
 		Map<Integer, Integer> change = makeMonetaryUnitMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
 		for (int monetaryUnit : numberOfMonetaryUnit.keySet()) {
-			if (remainingMoney < monetaryUnit || numberOfMonetaryUnit.get(monetaryUnit) <= 0) {
+			if (remainingMoney <= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit)) {
+				change.put(monetaryUnit, remainingMoney / monetaryUnit);
+				remainingMoney %= monetaryUnit;
 				continue;
 			}
-			remainingMoney -= monetaryUnit;
-			numberOfMonetaryUnit.put(monetaryUnit, numberOfMonetaryUnit.get(monetaryUnit) - 1);
-			change.put(monetaryUnit, change.get(monetaryUnit) + 1);
+			change.put(monetaryUnit, numberOfMonetaryUnit.get(monetaryUnit));
+			remainingMoney -= monetaryUnit * numberOfMonetaryUnit.get(monetaryUnit);
 		}
 		return change;
 	}
