@@ -8,23 +8,24 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Money;
 import vendingmachine.Notification;
 import vendingmachine.exception.VendingMachineException;
+import vendingmachine.quantity.Quantity;
 
 public class RandomCoinGenerator implements CoinGenerator {
 	@Override
 	public Coins generate(Money money) {
-		Map<Coin, Integer> coins = initializeCoins();
+		Map<Coin, Quantity> coins = initializeCoins();
 		while(!money.isZero()) {
 			Coin coin = generateCoin(money);
-			coins.computeIfPresent(coin, (key, value) -> value+1);
+			coins.computeIfPresent(coin, (originCoin, quantity) -> quantity.up());
 			money.spend(coin.getMoney());
 		}
 		return new Coins(coins);
 	}
 
-	private Map<Coin, Integer> initializeCoins() {
-		Map<Coin, Integer> coins = new EnumMap<>(Coin.class);
+	private Map<Coin, Quantity> initializeCoins() {
+		Map<Coin, Quantity> coins = new EnumMap<>(Coin.class);
 		for (Coin coin : Coin.getCoins()) {
-			coins.put(coin,0);
+			coins.put(coin,Quantity.from());
 		}
 		return coins;
 	}
