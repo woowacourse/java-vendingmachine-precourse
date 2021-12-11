@@ -129,4 +129,17 @@ public class User {
             throw new IllegalArgumentException();
         }
     }
+    public boolean inputUserAmount() {
+        try {
+            input();
+            checkCorrectAmount();
+        } catch (Exception e){
+            System.out.println(ERROR_MESSAGE);
+            return false;
+        }
+        return true;
+    }
+    private void checkCorrectAmount() throws IllegalArgumentException {
+        checkCorrectBalance();
+    }
 }

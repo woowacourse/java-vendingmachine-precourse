@@ -15,6 +15,7 @@ public class Machine {
         coinHashMap();
         showMachineCoins();
         goods();
+        amountInput();
     }
     private void balance() {
         boolean check = false;
@@ -60,6 +61,13 @@ public class Machine {
         System.out.println(Coin.COIN_50.getAmount() + "원 - " + coinsMap.get(Coin.COIN_50) + "개");
         System.out.println(Coin.COIN_10.getAmount() + "원 - " + coinsMap.get(Coin.COIN_10) + "개");
     }
-
+    private void amountInput() {
+        boolean check = false;
+        System.out.println();
+        while (!check) {
+            System.out.println(Message.INPUT_USER_AMOUNT);
+            check = user.inputUserAmount();
+        }
+    }
 
 }
