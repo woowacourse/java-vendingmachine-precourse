@@ -1,11 +1,10 @@
 # TODO LIST   
    
-- [ ] VendingMachine   
-    - [ ] constructor
-    - [ ] buy   
+- [x] VendingMachine   
+    - [x] constructor
+    - [x] buy   
   
-- [x] Product   
-  - [x] hashCode, equals
+~~- [x] Product~~   
   
 - [x] ProductManager   
     - [x] constructor   
@@ -15,4 +14,4 @@
     - [x] return changes
 - [x] Coin   
 - [x] MyIllegalArgumentException
-- [ ] Validator
+- [x] Validator
