@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.utils.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,9 +37,9 @@ public class Application {
                 System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
                 String input = Console.readLine();
                 lineFeed();
-                assertNumberFormat(input);
+                Validator.assertNumberFormat(input);
                 int number = Integer.parseInt(input);
-                assertPositiveGreaterThanZero(number);
+                Validator.assertPositive(number);
                 return number;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -82,9 +83,9 @@ public class Application {
             try {
                 System.out.println("투입 금액을 입력해 주세요.");
                 String input = Console.readLine();
-                assertNumberFormat(input);
+                Validator.assertNumberFormat(input);
                 int number = Integer.parseInt(input);
-                assertPositiveGreaterThanZero(number);
+                Validator.assertPositive(number);
                 return number;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -102,7 +103,6 @@ public class Application {
         System.out.println("투입 금액: " + vendingMachine.getInputMoney() + "원");
     }
 
-
     private static void buyProduct(VendingMachine vendingMachine) {
         try {
             System.out.println("구매할 상품명을 입력해 주세요.");
@@ -114,24 +114,6 @@ public class Application {
             buyProduct(vendingMachine);
         }
     }
-
-
-
-    private static void assertPositiveGreaterThanZero(int number) {
-        if (number <= 0) {
-            throw new IllegalArgumentException("[ERROR] 금액(수량)은 0 이상이어야 합니다.");
-        }
-    }
-
-    private static void assertNumberFormat(String input) {
-        try {
-            int number = Integer.parseInt(input);
-            assertPositiveGreaterThanZero(number);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 금액(수량)은 숫자여야 합니다.");
-        }
-    }
-
 
     private static void lineFeed() {
         System.out.println();
