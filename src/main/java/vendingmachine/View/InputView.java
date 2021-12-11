@@ -18,4 +18,8 @@ public class InputView {
         System.out.println(InputConstant.PLEASE_INPUT_INPUT_AMOUNT);
         return Console.readLine();
     }
+
+    public static void inputOver() {
+        System.out.println();
+    }
 }

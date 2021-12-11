@@ -20,6 +20,7 @@ public class InitController {
     private void initHoldingCoins() {
         try {
             holdingCoinsService.setHoldingCoins(InputView.getHoldingAmount());
+            InputView.inputOver();
             OutputView.printHoldingCoins();
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
@@ -30,6 +31,7 @@ public class InitController {
     private void initProducts() {
         try {
             productListService.setProducts(InputView.getProductInfo());
+            InputView.inputOver();
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             initProducts();
@@ -39,6 +41,7 @@ public class InitController {
     private void initInputAmount() {
         try {
             inputAmountService.setInputAmount(InputView.getInputAmount());
+            InputView.inputOver();
         } catch (IllegalArgumentException e) {
             OutputView.printError(e.getMessage());
             initInputAmount();
