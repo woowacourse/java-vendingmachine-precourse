@@ -8,11 +8,7 @@ public class Drink {
     public Drink(String name, String price, String quantity) {
         new DrinkValidator(name, price, quantity);
         this.name = name;
-        this.price = convertToInt(price);
-        this.quantity = convertToInt(quantity);
-    }
-
-    private int convertToInt(String value) {
-        return Integer.parseInt(value);
+        this.price = Integer.parseInt(price);
+        this.quantity = Integer.parseInt(quantity);
     }
 }
