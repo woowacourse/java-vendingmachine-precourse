@@ -10,14 +10,16 @@ public enum Coin {
 	COIN_10(10);
 
 	private final int amount;
+	private int numberOfCoin;
 	public static List<Coin> coins = new ArrayList<>();
 
 	Coin(final int amount) {
 		this.amount = amount;
+		this.numberOfCoin = 0;
 	}
 
 	// 추가 기능 구현
-	public static List<Coin> init(){
+	public static List<Coin> init() {
 		coins.add(COIN_10);
 		coins.add(COIN_50);
 		coins.add(COIN_100);
@@ -25,7 +27,15 @@ public enum Coin {
 		return coins;
 	}
 
+	public void addCoin() {
+		this.numberOfCoin += 1;
+	}
+
 	public int getAmount() {
 		return this.amount;
+	}
+
+	public int getNumberOfCoin() {
+		return numberOfCoin;
 	}
 }
