@@ -1,5 +1,7 @@
 package inputcontroller;
 
+import static vendingmachine.VendingMachineMain.name2Product;
+
 public class InputValidator {
 
     public static void isVaildMoney(String moneyValue) {
@@ -44,6 +46,15 @@ public class InputValidator {
         }
         if (i % 5 == 3) { // 수량
             isDigit(content);
+        }
+    }
+
+    public static void isInInventory(String productToBuy) {
+        if (!name2Product.containsKey(productToBuy)) {
+            throw new IllegalArgumentException("[ERROR] 상품명 입력 오류");
+        }
+        if (!name2Product.get(productToBuy).provide()) {
+            throw new IllegalArgumentException("[ERROR] 구매 불가");
         }
     }
 }
