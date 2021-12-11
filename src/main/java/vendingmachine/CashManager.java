@@ -7,7 +7,12 @@ public class CashManager {
     private HashMap<Coin, Integer> vault;
 
     public CashManager(int amount) {
-        this.vault = getMinimumCoins(amount);
+        this.vault = new HashMap<>();
+
+        for (Coin coin : Coin.values()) {
+            this.vault.put(coin, amount / coin.getAmount());
+            amount -= (amount / coin.getAmount()) * coin.getAmount();
+        }
     }
 
     public int getRemainCash() {
@@ -25,7 +30,7 @@ public class CashManager {
     }
 
     public void deposit(int amount) throws MyIllegalArgumentException {
-        if(Integer.MAX_VALUE - amount < this.remainCash) {
+        if (Integer.MAX_VALUE - amount < this.remainCash) {
             throw new MyIllegalArgumentException(
                     String.format("Cash overflow. Remains: [%d]", this.remainCash)
             );
@@ -34,13 +39,17 @@ public class CashManager {
         remainCash += amount;
     }
 
-
-    private HashMap<Coin, Integer> getMinimumCoins(int amount) {
+    public HashMap<Coin, Integer> getChanges() {
         HashMap<Coin, Integer> ret = new HashMap<>();
 
         for (Coin coin : Coin.values()) {
-            ret.put(coin, amount / coin.getAmount());
-            amount -= (amount / coin.getAmount()) * coin.getAmount();
+            if (this.vault.get(coin) < 1 || this.remainCash < coin.getAmount()) {
+                continue;
+            }
+
+            this.vault.put(coin, this.vault.get(coin) - this.remainCash / coin.getAmount());
+            ret.put(coin, this.remainCash / coin.getAmount());
+            this.remainCash -= (this.remainCash / coin.getAmount()) * coin.getAmount();
         }
 
         return ret;
