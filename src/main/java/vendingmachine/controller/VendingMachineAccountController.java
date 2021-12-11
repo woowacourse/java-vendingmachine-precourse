@@ -1,19 +1,19 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.service.VendingMachineInputService;
-import vendingmachine.view.VendingMachineAccountInputView;
+import vendingmachine.service.VendingMachineAccountService;
+import vendingmachine.view.VendingMachineAccountView;
 
-public class VendingMachineInputController {
+public class VendingMachineAccountController {
 	public static final int INVALID_INPUT = -1;
 
 	public static int getAccountInput() {
-		VendingMachineAccountInputView.print();
+		VendingMachineAccountView.printInputGuide();
 
 		int machineAccount = INVALID_INPUT;
 		while (machineAccount == INVALID_INPUT) {
 			String input = Console.readLine();
-			machineAccount = VendingMachineInputService.validateInput(input);
+			machineAccount = VendingMachineAccountService.validateInput(input);
 		}
 		return machineAccount;
 	}

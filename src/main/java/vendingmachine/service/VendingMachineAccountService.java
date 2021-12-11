@@ -1,5 +1,6 @@
 package vendingmachine.service;
 
+import static vendingmachine.controller.VendingMachineAccountController.*;
 import static vendingmachine.domain.Coin.*;
 
 import java.util.HashMap;
@@ -7,6 +8,7 @@ import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
+import vendingmachine.view.ErrorMessage;
 
 public class VendingMachineAccountService {
 
@@ -27,5 +29,18 @@ public class VendingMachineAccountService {
 			min = max;
 		}
 		return Randoms.pickNumberInRange(min, max);
+	}
+
+	public static int validateInput(String stringInput) {
+		try {
+			int input = InputExceptionService.parseToInt(stringInput);
+			InputExceptionService.checkZeroOrPositiveInt(input);
+			InputExceptionService.checkModTen(input);
+			return input;
+		} catch (IllegalArgumentException e) {
+			ErrorMessage.print(e.getMessage());
+			return INVALID_INPUT;
+		}
+
 	}
 }
