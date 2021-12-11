@@ -15,15 +15,19 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineService {
     private CoinRepository coinRepository;
-    private ProductRepository productRepository = new ProductRepository();
+    private ProductRepository productRepository; // TODO 생성자 주입 방식으로 -> Controller <- service <- productRepository 만들 수 있음. coinRepository는 service 생성 시점에 만들어짐. 대신, service에서 정적 팩토리 메서드 손봐야함.
     private Price userMoney;
 
-    private VendingMachineService(int initializeMoney) {
-        putInitialAmount(initializeMoney);
-    }
+    // private VendingMachineService(int initializeMoney) {
+    //     putInitialAmount(initializeMoney);
+    // }
+    //
+    // public static VendingMachineService makeVendingMachineHasMoney(int initializeMoney) {
+    //     return new VendingMachineService(initializeMoney);
+    // }
 
-    public static VendingMachineService makeVendingMachineHasMoney(int initializeMoney) {
-        return new VendingMachineService(initializeMoney);
+    public VendingMachineService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
     public void putInitialAmount(int inputMoney) {
