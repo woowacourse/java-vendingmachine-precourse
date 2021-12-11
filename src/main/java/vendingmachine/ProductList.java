@@ -6,19 +6,26 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class ProductList {
     private static final String PRODUCT_INSERT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
+    private static final String ERROR_MESSAGE_PRICE_PREFIX = "상품 가격이 ";
+    private static final String ERROR_MESSAGE_AMOUNT_PREFIX = "수량이 ";
+    private static final String ERROR_NOT_DUPLICATE = "상품명은 중복될 수 없습니다.";
+    private static final String ERROR_LOWER_THAN_ZERO = "1보다 작을 수 없습니다.";
+    private static final String ERROR_LOWER_THAN_HUNDRED = "100보다 작을 수 없습니다.";
+    private static final String ERROR_ONLY_NUMBER = "숫자만 입력할 수 있습니다.";
+    private static final String ERROR_PERMIT_ONLY_RULE = "[상품명,가격,수량]의 형식으로 정확히 입력해주세요.";
+    private static final String ERROR_NOT_ALLOW_UNITS = "1원 단위를 입력할 수 없습니다.";
+    private static final String ERROR_ONLY_ALLOW_SEMICOLON = "상품 구분은 세미콜론(;)을 통해 입력해야합니다.";
+    private static final String ERROR_NOT_INSERTED_PRODUCT = "상품이 입력되지 않았습니다.";
+    private static final String ERROR_NOT_PAIR_OF_BRACKET = "대괄호 쌍이 맞지않습니다.";
+    private static final String BRACKET_START = "[";
+    private static final String BRACKET_END = "]";
+    private static final String PRODUCT_SPLIT_REGEX = ";";
+    private static final String PRODUCT_INFO_SPLIT_REGEX = ",";
+    private static final int TENS = 10;
+    private static final int HUNDRED = 100;
+    private static int MINIMUM_PRICE = Integer.MAX_VALUE;
     private static final HashMap<String, Product> productMap = new HashMap<>();
 
-    /**
-     * 1. 입력
-     * 2. (;) 문자 적용 확인
-     * 2-1. [] 개수 확인
-     * 2-2. ; 개수 비교
-     * 3. (;)을 통해 구분한 각 상품 추출
-     * 4. 각 상품 (,) 구분
-     * 4-1. (,)를 통해 나눠진 배열의 개수가 3개인지 확인
-     * 4-2. 가격, 수량이 숫자인지 확인
-     * 4-3. 상품이 중복되지 않았는지 확인
-     */
     public void insertProduct() {
         System.out.println(PRODUCT_INSERT_MESSAGE);
         String productsInformation = Console.readLine();
@@ -30,13 +37,32 @@ public class ProductList {
 //            System.out.println(product + ", " + productMap.get(product).price + ", " + productMap.get(product).amount);
 //        }
     }
-    private void initProductMap(){
+
+    public boolean checkAvailableState(int customerMoney) {
+        return customerMoney > MINIMUM_PRICE;
+    }
+
+    public int sellProduct(String product) {
+        Product sellProduct = productMap.get(product);
+        sellProduct.sell();
+        return sellProduct.price;
+    }
+
+    private void initProductMap() {
         productMap.clear();
     }
+
     private void setNumberOfProducts(String[] productInformationList) {
         for (String productInformation : productInformationList) {
             Product product = validateSplitProductInformation(productInformation);
+            compareMinimumPrice(product);
             productMap.put(product.name, product);
+        }
+    }
+
+    private void compareMinimumPrice(Product product) {
+        if (MINIMUM_PRICE > product.price) {
+            MINIMUM_PRICE = product.price;
         }
     }
 
@@ -51,7 +77,7 @@ public class ProductList {
 
     private String validateDuplicateProductName(String name) {
         if (productMap.get(name) != null) {
-            throw new IllegalArgumentException("상품명은 중복될 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_NOT_DUPLICATE);
         }
         return name;
     }
@@ -59,11 +85,11 @@ public class ProductList {
     private int validatePrice(String price) {
         try {
             int integerPrice = validateOnlyNumber(price);
-            validateGreaterThanZero(integerPrice);
+            validatePriceGreaterThanHundred(integerPrice);
             validateMultipleOfTen(integerPrice);
             return integerPrice;
         } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException("금액이 " + exception.getMessage());
+            throw new IllegalArgumentException(ERROR_MESSAGE_PRICE_PREFIX + exception.getMessage());
         }
     }
 
@@ -73,19 +99,25 @@ public class ProductList {
             validateGreaterThanZero(integerAmount);
             return integerAmount;
         } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException("수량이 " + exception.getMessage());
+            throw new IllegalArgumentException(ERROR_MESSAGE_AMOUNT_PREFIX + exception.getMessage());
         }
     }
 
     private void validateMultipleOfTen(int price) {
-        if (price % 10 != 0) {
-            throw new IllegalArgumentException("1원 단위를 입력할 수 없습니다.");
+        if (price % TENS != 0) {
+            throw new IllegalArgumentException(ERROR_NOT_ALLOW_UNITS);
         }
     }
 
     private void validateGreaterThanZero(int number) {
         if (number <= 0) {
-            throw new IllegalArgumentException("1보다 작을 수 없습니다.");
+            throw new IllegalArgumentException(ERROR_LOWER_THAN_ZERO);
+        }
+    }
+
+    private void validatePriceGreaterThanHundred(int price) {
+        if (price < HUNDRED) {
+            throw new IllegalArgumentException(ERROR_LOWER_THAN_HUNDRED);
         }
     }
 
@@ -93,15 +125,15 @@ public class ProductList {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException exception) {
-            throw new IllegalArgumentException("숫자만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(ERROR_ONLY_NUMBER);
         }
 
     }
 
     private String[] validateProductInfoSplitRegex(String productInformation) {
-        String[] splitProductInfo = productInformation.split(",");
+        String[] splitProductInfo = productInformation.split(PRODUCT_INFO_SPLIT_REGEX);
         if (splitProductInfo.length != 3) {
-            throw new IllegalArgumentException("[상품명,가격,수량]의 형식으로 정확히 입력해주세요.");
+            throw new IllegalArgumentException(ERROR_PERMIT_ONLY_RULE);
         }
         return splitProductInfo;
     }
@@ -110,15 +142,15 @@ public class ProductList {
         int countOfBracketStart = 0;
         int countOfBracketEnd = 0;
         for (String productString : productsInformation.split("")) {
-            if (productString.equals("[")) {
+            if (productString.equals(BRACKET_START)) {
                 countOfBracketStart++;
             }
-            if (productString.equals("]")) {
+            if (productString.equals(BRACKET_END)) {
                 countOfBracketEnd++;
             }
         }
         if (countOfBracketStart != countOfBracketEnd) {
-            throw new IllegalArgumentException("대괄호 쌍이 맞지않습니다.");
+            throw new IllegalArgumentException(ERROR_NOT_PAIR_OF_BRACKET);
         }
         return countOfBracketStart;
     }
@@ -126,7 +158,7 @@ public class ProductList {
     private int getCountOfSplitRegex(String productsInformation) {
         int countOfSplitRegex = 0;
         for (String productString : productsInformation.split("")) {
-            if (productString.equals(";")) {
+            if (productString.equals(PRODUCT_SPLIT_REGEX)) {
                 countOfSplitRegex++;
             }
         }
@@ -137,14 +169,13 @@ public class ProductList {
         int countOfBracket = getCountOfSquareBracket(productsInformation);
         int countOfSplitRegex = getCountOfSplitRegex(productsInformation);
         if (countOfBracket < 1) {
-            throw new IllegalArgumentException("상품이 입력되지 않았습니다.");
+            throw new IllegalArgumentException(ERROR_NOT_INSERTED_PRODUCT);
         }
         if (countOfBracket > 1 && countOfBracket - 1 != countOfSplitRegex) {
-            throw new IllegalArgumentException("상품 구분은 세미콜론(;)을 통해 입력해야합니다.");
+            throw new IllegalArgumentException(ERROR_ONLY_ALLOW_SEMICOLON);
         }
-        return productsInformation.split(";");
+        return productsInformation.split(PRODUCT_SPLIT_REGEX);
     }
-
 
     private String removeBracketInProduct(String productsInformation) {
         return productsInformation.substring(1, productsInformation.length() - 1);

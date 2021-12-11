@@ -1,28 +1,68 @@
 package vendingmachine;
 
+import camp.nextstep.edu.missionutils.Console;
+
 import java.util.HashMap;
 
 public class VendingMachine {
     private static final String ERROR_MESSAGE_PREFIX = "[ERROR] ";
-    private static final String COIN_NUMBER_PRINT_MESSAGE = "자판기가 보유한 동전";
-    private static HashMap<Coin, Integer> numberOfCoins = new HashMap<>();
-    private static Change change = new Change();
+    private static final Change change = new Change();
     private static ProductList productList = new ProductList();
+    private static int InitialTotalChange;
+    private static int customerMoney;
 
     public VendingMachine() {
         initializeVendingMachine();
     }
 
+    public void run() {
+        inputMoney();
+        while (checkAvailableSellState()) {
+            sellProduct();
+        }
+    }
+
+    private boolean checkAvailableSellState() {
+        return productList.checkAvailableState(customerMoney);
+    }
+
+    private void inputMoney() {
+        System.out.println("투입 금액을 입력해주세요.");
+        String money = Console.readLine();
+        customerMoney = Integer.parseInt(money);
+        printInputMoney();
+    }
+
+    public void sellProduct() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        String product = Console.readLine();
+        int pay = productList.sellProduct(product);
+        customerMoney -= pay;
+        printInputMoney();
+    }
+
+    public void printInputMoney() {
+        System.out.println("투입 금액 : " + customerMoney + "원");
+    }
+
     private void initializeVendingMachine() {
-        int changeInVendingMachin;
+        inputInitialTotalChange();
+        inputInitialProduct();
+        change.createInitialChanges(InitialTotalChange);
+    }
+
+    public void inputInitialTotalChange() {
         while (true) {
             try {
-                changeInVendingMachin = change.insertChange();
+                InitialTotalChange = change.insertChange();
                 break;
             } catch (IllegalArgumentException exception) {
                 System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
             }
         }
+    }
+
+    public void inputInitialProduct() {
         while (true) {
             try {
                 productList.insertProduct();
@@ -30,24 +70,6 @@ public class VendingMachine {
             } catch (IllegalArgumentException exception) {
                 System.out.println(ERROR_MESSAGE_PREFIX + exception.getMessage());
             }
-        }
-        createNumberOfCoin(changeInVendingMachin);
-        printNumberOfCoin();
-    }
-
-    private void printNumberOfCoin() {
-        System.out.println(COIN_NUMBER_PRINT_MESSAGE);
-        for (Coin coin : Coin.values()) {
-            coin.printNumberOfCoin(numberOfCoins.get(coin));
-        }
-    }
-
-    private void createNumberOfCoin(int change) {
-        int randomNumber;
-        for (Coin coin : Coin.values()) {
-            randomNumber = coin.createRandomNumber(change);
-            change -= coin.getTotalOfCoin(randomNumber);
-            numberOfCoins.put(coin, randomNumber);
         }
     }
 }
