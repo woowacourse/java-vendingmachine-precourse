@@ -29,9 +29,12 @@ public class MachineController {
 	private void progress() {
 		while (vendingMachine.canSell()) {
 			OutputView.printInputMoney(vendingMachine.getMoney());
-			String itemName = InputView.getItemName();
-			Beverage beverage = vendingMachine.findBeverageByName(itemName);
-			vendingMachine.sell(beverage);
+			try {
+				Beverage beverage = vendingMachine.findBeverageByName(InputView.getItemName());
+				vendingMachine.sell(beverage);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 
