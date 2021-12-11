@@ -15,8 +15,14 @@ public enum Coin {
         this.amount = amount;
         this.count = count;
     }
-
     // 추가 기능 구현
+    public int getAmount() {
+        return this.amount;
+    }
+    public int getCount() {
+        return this.count;
+    }
+
     public void makeRandom(int money) {
         for (Coin coin : Coin.values()) {
             int endNumber = money / coin.amount;
