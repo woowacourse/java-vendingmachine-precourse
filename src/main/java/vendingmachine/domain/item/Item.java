@@ -33,8 +33,7 @@ public class Item {
 		return this.quantity.toInt() <= 0;
 	}
 
-	// TODO: decreaseQuantity 로 변경 필요
-	public Item buy() {
+	public Item decreaseQuantity() {
 		ItemQuantity subtractedQuantity = this.quantity.subtract();
 		return new Item(this.name, this.price, subtractedQuantity);
 	}

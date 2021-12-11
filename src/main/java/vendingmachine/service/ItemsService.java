@@ -40,7 +40,7 @@ public class ItemsService {
 			throw new NotEnoughBalanceException();
 		}
 
-		Item purchasedItem = item.buy();
+		Item purchasedItem = item.decreaseQuantity();
 
 		userBalanceRepository.update(userBalance.subtract(item.getItemPrice()));
 		itemsRepository.updateByItemName(itemName, purchasedItem);
