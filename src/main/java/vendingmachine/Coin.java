@@ -23,7 +23,7 @@ public enum Coin {
         return this.count;
     }
 
-    public void makeRandom(int money) {
+    public static void makeRandom(int money) {
         for (Coin coin : Coin.values()) {
             int endNumber = money / coin.amount;
             if (endNumber != 0 && coin.amount != 10) {
