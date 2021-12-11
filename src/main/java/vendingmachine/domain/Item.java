@@ -12,6 +12,7 @@ public class Item {
 		this.price = Integer.parseInt(itemInform[ITEM_PRICE_INDEX]);
 		this.count = Integer.parseInt(itemInform[ITEM_COUNT_INDEX]);
 	}
+
 	public Item(String name, int price, int count) {
 		this.name = name;
 		this.price = price;

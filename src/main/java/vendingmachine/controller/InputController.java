@@ -67,4 +67,17 @@ public class InputController {
 			}
 		}
 	}
+
+	public String scanBuyingItem(List<Item> itemList) {
+		while (true) {
+			try {
+				InputView.askBuyingItem();
+				String buyingItem = Console.readLine();
+				InputValidator.checkValidItem(itemList, buyingItem);
+				return buyingItem;
+			} catch (IllegalArgumentException e) {
+				OutputView.printNotExistingItemError();
+			}
+		}
+	}
 }

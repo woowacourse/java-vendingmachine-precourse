@@ -7,5 +7,5 @@ public class VendingMachine {
 	public int holdingMoney;
 	public int inputMoney;
 	public List<Item> itemList;
-	public HashMap<Coin,Integer> coinCount;
+	public HashMap<Coin, Integer> coinCount;
 }
