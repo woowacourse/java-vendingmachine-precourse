@@ -3,6 +3,7 @@ package vendingmachine.model.receiver;
 import java.util.ArrayList;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.model.validator.ProductInfoValidator;
 
 public class ProductInfoReceiver {
 
@@ -24,9 +25,9 @@ public class ProductInfoReceiver {
 		for (String info : infoArr) {
 			String[] splitInfoArr = info.split(",");
 
-			// if (new ProductInfoValidator().validate(splitInfoArrList, splitInfoArr)) {
-			// 	return true;
-			// }
+			if (new ProductInfoValidator().validate(splitInfoArrList, splitInfoArr)) {
+				return true;
+			}
 
 			splitInfoArrList.add(splitInfoArr);
 		}
