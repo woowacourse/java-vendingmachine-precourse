@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.resource.Coin;
 import vendingmachine.resource.CoinStorage;
 
 public class CoinModel {
@@ -34,13 +33,13 @@ public class CoinModel {
 	}
 
 	public Map<Integer, Integer> getNumberOfCoins() {
-		return makeMap(Coin.getMonetaryUnitList(), coinStorage.getNumberOfCoins());
+		return makeMonetaryUnitMap(coinStorage.getNumberOfCoins());
 	}
 
 	public Map<Integer, Integer> getMinimumNumberCoins(int remainingMoney) {
-		Map<Integer, Integer> numberOfMonetaryUnit = makeMap(Coin.getMonetaryUnitList(),
+		Map<Integer, Integer> numberOfMonetaryUnit = makeMonetaryUnitMap(
 			coinStorage.getNumberOfCoins());
-		Map<Integer, Integer> change = makeMap(Coin.getMonetaryUnitList(), new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
+		Map<Integer, Integer> change = makeMonetaryUnitMap(new ArrayList<>(Arrays.asList(0, 0, 0, 0)));
 		for (int monetaryUnit : numberOfMonetaryUnit.keySet()) {
 			if (remainingMoney < monetaryUnit || numberOfMonetaryUnit.get(monetaryUnit) <= 0) {
 				continue;
@@ -52,17 +51,17 @@ public class CoinModel {
 		return change;
 	}
 
-	private Map<Integer, Integer> makeMap(List<Integer> monetaryUnitList, List<Integer> numberOfCoins) {
+	private Map<Integer, Integer> makeMonetaryUnitMap(List<Integer> numberOfCoins) {
 		Map<Integer, Integer> numberOfMonetaryUnit = new HashMap<>();
 		for (int i = 0; i < coinStorage.getNumberOfMonetaryUnitType(); i++) {
-			numberOfMonetaryUnit.put(monetaryUnitList.get(i), numberOfCoins.get(i));
+			numberOfMonetaryUnit.put(CoinStorage.MONETARY_UNIT_LIST.get(i), numberOfCoins.get(i));
 		}
 		return numberOfMonetaryUnit;
 	}
 
 	private List<Integer> getPossibleMonetaryUnit(int amount) {
-		List<Integer> monetaryUnit = Coin.getMonetaryUnitList();
-		for (int oneUnit : Coin.getMonetaryUnitList()) {
+		List<Integer> monetaryUnit = CoinStorage.MONETARY_UNIT_LIST;
+		for (int oneUnit : CoinStorage.MONETARY_UNIT_LIST) {
 			if (amount < oneUnit) {
 				monetaryUnit.remove(0);
 			}
