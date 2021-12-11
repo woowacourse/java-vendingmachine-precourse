@@ -8,7 +8,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class UserBalanceController {
-	private final UserBalanceService userBalanceService = UserBalanceService.getInstance();
+	private final UserBalanceService userBalanceService = new UserBalanceService();
 
 	public void generateUserBalance() {
 		String input = InputView.inputUserBalance();

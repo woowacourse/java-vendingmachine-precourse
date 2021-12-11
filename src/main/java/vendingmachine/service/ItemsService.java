@@ -15,16 +15,8 @@ import vendingmachine.repository.ItemsRepository;
 import vendingmachine.repository.UserBalanceRepository;
 
 public class ItemsService {
-	private static final ItemsService itemsService = new ItemsService();
 	private final ItemsRepository itemsRepository = ItemsRepository.getInstance();
 	private final UserBalanceRepository userBalanceRepository = UserBalanceRepository.getInstance();
-
-	private ItemsService() {
-	}
-
-	public static ItemsService getInstance() {
-		return itemsService;
-	}
 
 	public void createItem(ItemDto itemDto) {
 		Item item = itemDto.toEntity();

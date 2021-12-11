@@ -11,8 +11,8 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class CoinsController {
-	private final CoinsService coinsService = CoinsService.getInstance();
-	private final UserBalanceService userBalanceService = UserBalanceService.getInstance();
+	private final CoinsService coinsService = new CoinsService();
+	private final UserBalanceService userBalanceService = new UserBalanceService();
 
 	public void generateCoins() {
 		String input = InputView.inputVendingMachineBalance();

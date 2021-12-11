@@ -11,15 +11,7 @@ import vendingmachine.dto.CoinsDto;
 import vendingmachine.repository.CoinsRepository;
 
 public class CoinsService {
-	private static final CoinsService coinsService = new CoinsService();
 	private final CoinsRepository coinsRepository = CoinsRepository.getInstance();
-
-	private CoinsService() {
-	}
-
-	public static CoinsService getInstance() {
-		return coinsService;
-	}
 
 	public void generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
 		int remainingBalance = vendingMachineBalance.toInt();

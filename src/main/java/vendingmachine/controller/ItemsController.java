@@ -13,8 +13,8 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class ItemsController {
-	private final ItemsService itemsService = ItemsService.getInstance();
-	private final UserBalanceService userBalanceService = UserBalanceService.getInstance();
+	private final ItemsService itemsService = new ItemsService();
+	private final UserBalanceService userBalanceService = new UserBalanceService();
 
 	public void generateItems() {
 		String input = InputView.inputItems();
