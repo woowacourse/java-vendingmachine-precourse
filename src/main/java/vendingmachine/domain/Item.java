@@ -39,4 +39,16 @@ public class Item {
 			throw new IllegalArgumentException("가격이 100 이상이면서 10으로 나누어 떨어져야 합니다.");
 		}
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getCost() {
+		return cost;
+	}
+
+	public int getAmount() {
+		return amount;
+	}
 }
