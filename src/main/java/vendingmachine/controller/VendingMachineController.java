@@ -34,7 +34,7 @@ public class VendingMachineController {
 				break;
 			}
 		}
-		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(vendingMachineChange(user, vendingMachine))));
+		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
 	}
 
 	public int castingStringMoneyToInt(String stringMoney) {
@@ -76,13 +76,6 @@ public class VendingMachineController {
 			}
 		}
 		return false;
-	}
-
-	public Money vendingMachineChange(User user, VendingMachine vendingMachine) {
-		if (user.getUserMoney().getMoney() <= vendingMachine.getVendingMachineMoney().getMoney()) {
-			return user.getUserMoney();
-		}
-		return vendingMachine.getVendingMachineMoney();
 	}
 
 	public void vendingMahchineMoneyWithErrorHandling() {

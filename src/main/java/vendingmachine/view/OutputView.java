@@ -28,7 +28,9 @@ public class OutputView {
 		System.out.println(INPUT_MONEY_STATUS + lastMoneyValue +COIN_VALUE_UNIT);
 		System.out.println(CHANGE_MONEY_STATUS);
 		for (Integer coinValueUnit : changeCoinStatus.keySet()) {
-			System.out.println(coinValueUnit + COIN_VALUE_UNIT + HYPHEN + changeCoinStatus.get(coinValueUnit) + COIN_COUNT_UNIT);
+			if (changeCoinStatus.get(coinValueUnit) != 0) {
+				System.out.println(coinValueUnit + COIN_VALUE_UNIT + HYPHEN + changeCoinStatus.get(coinValueUnit) + COIN_COUNT_UNIT);
+			}
 		}
 	}
 }
