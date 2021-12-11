@@ -22,4 +22,8 @@ public class Product {
     public int getCount() {
         return this.count;
     }
+
+    public void reduceCount() {
+        this.count -= 1;
+    }
 }

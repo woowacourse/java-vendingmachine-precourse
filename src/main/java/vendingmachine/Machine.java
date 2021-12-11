@@ -14,7 +14,9 @@ public class Machine {
         this.money = InputView.inputMoney();
         while (true) {
             OutputView.printMoney(money);
-            InputView.inputProduct();
+            if (isPurchasable(InputView.inputProduct())) {
+                //reduceMoney(money);
+            }
         }
     }
 
@@ -25,5 +27,9 @@ public class Machine {
             }
         }
         return false;
+    }
+
+    public void reduceMoney(int reduceMoney) {
+        this.money -= reduceMoney;
     }
 }
