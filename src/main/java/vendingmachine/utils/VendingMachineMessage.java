@@ -77,27 +77,19 @@ public class VendingMachineMessage {
 	}
 
 	/* 에러 출력과 관련된 메서드 */
-	public static void invalidLengthError(final int inputtedData) {
-		System.out.println(
-			ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER_LENGTH
-		);
+	public static String invalidLengthError(final int inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER_LENGTH;
 	}
 
-	public static void invalidNumberError(final int inputtedData) {
-		System.out.println(
-			ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER
-		);
+	public static String invalidNumberError(final int inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER;
 	}
 
-	public static void notNumberError(final String inputtedData) {
-		System.out.println(
-			ERROR_MESSAGE_PREFIX + inputtedData + NOT_NUMBER
-		);
+	public static String notNumberError(final String inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + NOT_NUMBER;
 	}
 
-	public static void involveBlankError(final String inputtedData) {
-		System.out.println(
-			ERROR_MESSAGE_PREFIX + inputtedData + INVOLVE_BLACK
-		);
+	public static String involveBlankError(final String inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + INVOLVE_BLACK;
 	}
 }
