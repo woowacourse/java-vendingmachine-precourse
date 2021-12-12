@@ -17,12 +17,30 @@ public class InputManager {
         return getAmount();
     }
 
+    public static String getProductName(ProductMap productMap){
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return getName(productMap);
+    }
+
     private static int getAmount() {
         while (true) {
             String amountString = readLine();
             try {
                 int amount = NumberManager.toNumber(amountString, NumberManager.TYPE_AMOUNT);
                 return amount;
+            } catch (IllegalArgumentException e) {
+            }
+        }
+    }
+
+    private static String getName(ProductMap productMap){
+        String productName;
+
+        while (true) {
+            try {
+                productName = readLine();
+                productMap.checkExistence(productName);
+                return productName;
             } catch (IllegalArgumentException e) {
             }
         }

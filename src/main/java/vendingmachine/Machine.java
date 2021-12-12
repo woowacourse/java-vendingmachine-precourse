@@ -17,7 +17,7 @@ public class Machine {
         setCoinsInMachine();
         setProductMap();
         setUserAmount();
-        while (stopWorking() == KEEP_WORKING) {
+        while (keepWorking()) {
             if (sellProduct() == STOP_WORKING) {
                 break;
             }
@@ -44,7 +44,6 @@ public class Machine {
                 productMap.toProductMap(productListString);
                 return;
             } catch (IllegalArgumentException e) {
-                productMap.resetProductMap();
             }
         }
     }
@@ -53,7 +52,7 @@ public class Machine {
         userAmount = InputManager.getUserAmount();
     }
 
-    private boolean stopWorking() {
+    private boolean keepWorking() {
         System.out.println("\n투입 금액: " + userAmount + "원");
         if (productMap.isWorkable(userAmount)) {
             return KEEP_WORKING;
@@ -71,17 +70,7 @@ public class Machine {
     }
 
     private String getProductName() {
-        System.out.println("구매할 상품명을 입력해 주세요.");
-        String productName;
-
-        while (true) {
-            try {
-                productName = readLine();
-                productMap.checkProductExistence(productName);
-                return productName;
-            } catch (IllegalArgumentException e) {
-            }
-        }
+        return InputManager.getProductName(productMap);
     }
 
     private void returnCoin() {
