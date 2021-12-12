@@ -8,6 +8,7 @@ public enum Coin {
 
     private final int amount;
     private int num;
+    private int finalNum;
 
     Coin(final int amount) {
         this.amount = amount;
@@ -16,10 +17,21 @@ public enum Coin {
     public int getAmount(){
         return amount;
     }
+
     public void setNum(int num){
         this.num = num;
     }
+
     public int getNum(){
         return num;
     }
+
+    public void setFinalNum(int finalNum){
+        this.finalNum = finalNum;
+    }
+
+    public int getFinalNum(){
+        return finalNum;
+    }
+
 }

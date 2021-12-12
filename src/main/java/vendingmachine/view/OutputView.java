@@ -67,7 +67,21 @@ public class OutputView {
     }
 
     private static void getChanges(int nowMoney){
-
+        System.out.println(Constant.CHANGES);
+        int remainMoney = nowMoney;
+        for(Coin coins : Coin.values()){
+            int maxNumCoin = remainMoney/coins.getAmount();
+            if (maxNumCoin<=coins.getNum()){
+                coins.setFinalNum(maxNumCoin);
+            }
+            if (maxNumCoin>coins.getNum()){
+                coins.setFinalNum(coins.getNum());
+            }
+            remainMoney-=coins.getAmount()*coins.getFinalNum();
+            if (coins.getFinalNum()>0){
+                System.out.println(coins.getAmount()+"원 - "+ coins.getFinalNum()+"개");
+            }
+        }
     }
 
     private static int showProcess(int nowMoney) {
