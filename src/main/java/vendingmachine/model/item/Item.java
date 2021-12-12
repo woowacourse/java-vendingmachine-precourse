@@ -35,26 +35,26 @@ public class Item {
     }
 
     public void sell(final Money remainingInputMoney) {
-        checkRemainingQuantity();
-        checkPossibleToPayWith(remainingInputMoney);
+        if (isSoldOut()) {
+            throw new IllegalArgumentException(WANTED_ITEM_SOLD_OUT_EXCEPTION_MESSAGE);
+        }
+        if (isPriceMoreExpensiveThanRemainingInputMoney(remainingInputMoney)) {
+            throw new IllegalArgumentException(PRICE_MORE_EXPENSIVE_EXCEPTION_MESSAGE);
+        }
         remainingQuantity.decrease();
         price.payWith(remainingInputMoney);
     }
 
-    private void checkRemainingQuantity() {
-        if (remainingQuantity.isZero()) {
-            throw new IllegalArgumentException(WANTED_ITEM_SOLD_OUT_EXCEPTION_MESSAGE);
-        }
+    private boolean isSoldOut() {
+        return remainingQuantity.isZero();
     }
 
-    private void checkPossibleToPayWith(final Money remainingInputMoney) {
-        if(price.isMoreExpensiveThan(remainingInputMoney)) {
-            throw new IllegalArgumentException(PRICE_MORE_EXPENSIVE_EXCEPTION_MESSAGE);
-        }
+    private boolean isPriceMoreExpensiveThanRemainingInputMoney(final Money remainingInputMoney) {
+        return price.isMoreExpensiveThan(remainingInputMoney);
     }
 
     public boolean cannotSell(final Money remainingInputMoney) {
-        return price.isMoreExpensiveThan(remainingInputMoney) || remainingQuantity.isZero();
+        return isSoldOut() || isPriceMoreExpensiveThanRemainingInputMoney(remainingInputMoney);
     }
 
     @Override
