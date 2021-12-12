@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class VendingMachine {
 
@@ -24,7 +23,7 @@ public class VendingMachine {
         this.productList = productList;
     }
 
-    public Change getChange() {
+    public Change returnChange() {
         return change;
     }
 
@@ -34,5 +33,39 @@ public class VendingMachine {
 
     public List<Product> getProductList() {
         return productList;
+    }
+
+    public int getRestMoney() {
+        return money.getPrice();
+    }
+
+    public void extractProduct(String productName) {
+        for (Product product : productList) {
+            if (product.getProductName().equals(productName)) {
+                int price = product.getPrice();
+                money.reduce(price);
+
+                product.reduceQuantity();
+
+                return;
+            }
+        }
+    }
+
+    public boolean checkProgress() {
+        Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
+
+        Optional<Product> optionalProduct = productList.stream().max(comparatorByPrice);
+
+        Product maxProduct = optionalProduct
+                .orElseThrow(IllegalArgumentException::new);
+
+        int price = money.getPrice();
+
+        if (price >= maxProduct.getPrice()) {
+            return true;
+        }
+
+        return false;
     }
 }
