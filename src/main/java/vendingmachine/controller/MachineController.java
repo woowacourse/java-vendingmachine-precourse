@@ -20,15 +20,14 @@ public class MachineController {
 		OutputView.printHoldingCoins(coinCount);
 		List<Item> itemList = inputController.scanItemInform();
 		int inputMoney = inputController.scanInputMoney();
-		vendingMachine = new VendingMachine(holdingMoney,inputMoney,itemList,coinCount);
+		vendingMachine = new VendingMachine(holdingMoney, inputMoney, itemList, coinCount);
 		buyItem();
 		OutputView.printChange(vendingMachine.calculateChange());
 	}
 
 	public void buyItem() {
 		InputController inputController = new InputController();
-		while (!InputValidator.checkEmptyItemList(vendingMachine.itemList) && InputValidator.checkBuyingPossible(
-			vendingMachine.itemList, vendingMachine.inputMoney)) {
+		while (!vendingMachine.checkEmptyItemList() && vendingMachine.checkBuyingPossible()) {
 			OutputView.printInputMoney(vendingMachine.inputMoney);
 			int itemIndex = inputController.scanBuyingItem(vendingMachine.itemList);
 			updateItemList(itemIndex);
@@ -48,7 +47,7 @@ public class MachineController {
 
 	public void calculateInputMoney(int itemPrice) {
 		try {
-			if (InputValidator.checkExcessMoney(vendingMachine.inputMoney, itemPrice)) {
+			if (vendingMachine.checkExcessMoney(itemPrice)) {
 				vendingMachine.minusInputMoney(itemPrice);
 			}
 		} catch (IllegalArgumentException e) {

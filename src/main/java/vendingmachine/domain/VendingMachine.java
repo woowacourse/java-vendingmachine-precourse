@@ -42,4 +42,27 @@ public class VendingMachine {
 		}
 		return change;
 	}
+
+	public boolean checkEmptyItemList() {
+		if (itemList.size() == 0) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean checkBuyingPossible() {
+		for (Item item : itemList) {
+			if (inputMoney >= item.price) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean checkExcessMoney(int itemPrice) {
+		if (inputMoney - itemPrice >= 0) {
+			return true;
+		}
+		throw new IllegalArgumentException();
+	}
 }

@@ -30,29 +30,29 @@ public class InputValidator {
 		}
 		throw new IllegalArgumentException();
 	}
-
-	public static boolean checkEmptyItemList(List<Item> itemsList) {
-		if (itemsList.size() == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public static boolean checkBuyingPossible(List<Item> itemList, int inputMoney) {
-		for (Item item : itemList) {
-			if (inputMoney >= item.price) {
-				return true;
-			}
-		}
-		return false;
-	}
-
-	public static boolean checkExcessMoney(int inputMoney, int itemPrice) {
-		if (inputMoney - itemPrice >= 0) {
-			return true;
-		}
-		throw new IllegalArgumentException();
-	}
+	//
+	// public static boolean checkEmptyItemList(List<Item> itemsList) {
+	// 	if (itemsList.size() == 0) {
+	// 		return true;
+	// 	}
+	// 	return false;
+	// }
+	//
+	// public static boolean checkBuyingPossible(List<Item> itemList, int inputMoney) {
+	// 	for (Item item : itemList) {
+	// 		if (inputMoney >= item.price) {
+	// 			return true;
+	// 		}
+	// 	}
+	// 	return false;
+	// }
+	//
+	// public static boolean checkExcessMoney(int inputMoney, int itemPrice) {
+	// 	if (inputMoney - itemPrice >= 0) {
+	// 		return true;
+	// 	}
+	// 	throw new IllegalArgumentException();
+	// }
 
 	public static boolean checkValidFormat(String itemInform) {
 		String regex = "\\[[a-zA-z0-9가-힣]+,\\d{3,},\\d+]";
