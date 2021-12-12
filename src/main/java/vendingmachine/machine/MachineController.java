@@ -31,4 +31,8 @@ public class MachineController {
         }
         return false;
     }
+
+    public boolean checkIsFullCurrentAmount() {
+        return this.currentAmount == machine.getHoldingAmount();
+    }
 }
