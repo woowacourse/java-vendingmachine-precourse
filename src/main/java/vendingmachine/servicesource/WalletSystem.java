@@ -10,15 +10,15 @@ import java.util.List;
 public class WalletSystem {
     private int systemBalance;
     private int insertedBalance;
-    private final WalletUI ui;
+    private final WalletPrinter walletPrinter;
     private HashMap<Coin, Integer> remainCoinsMap = new HashMap<Coin, Integer>();
 
     public WalletSystem(int systemBalance){
         this.systemBalance = systemBalance;
         exchangeBalanceToRandomCoins();
 
-        ui = new WalletUI(this);
-        ui.printRemainCoins();
+        walletPrinter = new WalletPrinter(this);
+        walletPrinter.printAllCoins();
     }
 
     private void exchangeBalanceToRandomCoins(){
@@ -43,15 +43,19 @@ public class WalletSystem {
         return numberList;
     }
 
-    public int getRemainCoinsByCoinType(Coin coinType) {
+    int getRemainCoinsByCoinType(Coin coinType) {
         return remainCoinsMap.get(coinType);
     }
 
-    public void setInsertedBalance(){
+    void setInsertedBalance(){
         insertedBalance = InsertMoneyChecker.getInsertMoney();
     }
 
-    public int getInsertedBalance(){
+    int getInsertedBalance(){
         return insertedBalance;
+    }
+
+    WalletPrinter getWalletPrinter(){
+        return walletPrinter;
     }
 }

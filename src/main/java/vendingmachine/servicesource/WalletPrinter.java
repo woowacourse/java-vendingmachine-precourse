@@ -2,13 +2,13 @@ package vendingmachine.servicesource;
 
 import vendingmachine.constants.StringConstants;
 
-public class WalletUI {
+public class WalletPrinter {
     private final WalletSystem wallet;
     private final String PRINT_TITLE_MESSAGE = "\n자판기가 보유한 동전";
     private final String PRINT_INSERTED_BALANCE_MESSAGE = "투입 금액: ";
     private final String PRINT_DELIMITER = " - ";
 
-    WalletUI(WalletSystem wallet){
+    WalletPrinter(WalletSystem wallet){
         this.wallet = wallet;
     }
 
