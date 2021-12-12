@@ -31,6 +31,10 @@ public class ProductMap {
     private static final int INDEX_AMOUNT = 1;
     private static final int INDEX_COUNT = 2;
 
+    public void resetProductMap(){
+        productMap.clear();
+    }
+
     public void toProductMap(String productListString) {
         String[] productStrings = productListString.split(PARSER_LIST);
         for (String p : productStrings) {
@@ -47,7 +51,7 @@ public class ProductMap {
 
     private void parseProductString(String productString) {
         int INDEX_FIRST = 0;
-        int INDEX_LAST = productString.length();
+        int INDEX_LAST = productString.length()-1;
 
         if (productString.length()<MIN_PRODUCT_SIZE
             || productString.charAt(INDEX_FIRST) != '['
@@ -56,7 +60,7 @@ public class ProductMap {
             throw new IllegalArgumentException();
         }
 
-        String productInfoString = productString.substring(INDEX_FIRST + 1, INDEX_LAST - 1);
+        String productInfoString = productString.substring(INDEX_FIRST + 1, INDEX_LAST);
         parseProductInfoString(productInfoString);
     }
 

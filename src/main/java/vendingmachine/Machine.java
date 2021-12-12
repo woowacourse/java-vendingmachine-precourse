@@ -9,7 +9,7 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 public class Machine {
     public NumberManager numberManager = new NumberManager();
 
-    private CoinMap coinMap = new CoinMap();
+    private CoinManager coinManager = new CoinManager();
     private final List<Integer> amountList = new ArrayList<>(Arrays.asList(500, 100, 50, 10));
     public ProductMap productMap = new ProductMap();
     public int userAmount = 0;
@@ -24,7 +24,7 @@ public class Machine {
         setCoinsInMachine();
         setProductMap();
         setUserAmount();
-        while (stopWorking()) {
+        while (stopWorking() == KEEP_WORKING) {
             if (sellProduct() == STOP_WORKING) {
                 break;
             }
@@ -45,17 +45,18 @@ public class Machine {
                 int heldAmount = numberManager.toNumber(heldAmountString, NumberManager.TYPE_AMOUNT);
                 return heldAmount;
             } catch (IllegalArgumentException e) {
+                coinManager.resetCoinCount();
             }
         }
     }
 
     private void makeCoins(int amount) {
-        coinMap.makeCoins(amount);
-        coinMap.printCoins(coinMap.ALL_PRINT);
+        coinManager.makeCoins(amount);
+        coinManager.printCoins();
     }
 
     private void setProductMap() {
-        System.out.println("상품명과 가격, 수량을 입력해주세요.");
+        System.out.println("\n상품명과 가격, 수량을 입력해주세요.");
         while (true) {
             String productListString;
             try {
@@ -63,12 +64,13 @@ public class Machine {
                 productMap.toProductMap(productListString);
                 return;
             } catch (IllegalArgumentException e) {
+                productMap.resetProductMap();
             }
         }
     }
 
     private void setUserAmount() {
-        System.out.println("투입 금액을 입력해 주세요.");
+        System.out.println("\n투입 금액을 입력해 주세요.");
         while (true) {
             String userAmountString = readLine();
             try {
@@ -80,7 +82,7 @@ public class Machine {
     }
 
     private boolean stopWorking() {
-        if (productMap.getMinAmount() < userAmount) {
+        if (productMap.getMinAmount() > userAmount) {
             return STOP_WORKING;
         }
         return KEEP_WORKING;
@@ -96,7 +98,7 @@ public class Machine {
     }
 
     private String getProductName() {
-        System.out.println("투입 금액: " + userAmount + "원");
+        System.out.println("\n투입 금액: " + userAmount + "원");
         System.out.println("구매할 상품명을 입력해 주세요.");
         String productName;
 
@@ -111,7 +113,7 @@ public class Machine {
     }
 
     private void returnCoin() {
-        coinMap.returnCoins(userAmount);
+        coinManager.returnCoins(userAmount);
     }
 
 }
