@@ -11,6 +11,8 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+	private static final String SPLITTER_OF_PRODUCT = ";";
+
 	private final VendingMachine vendingMachine = new VendingMachine();
 
 	public void run() {
@@ -44,28 +46,30 @@ public class VendingMachineController {
 	}
 
 	private int getInputAmountFromInput() {
-		String inputAmountInput = InputView.getInputAmountInput();
-		try {
-			InputValidator.checkIsValidInputAmountInput(inputAmountInput);
-		} catch (IllegalArgumentException exception) {
-			OutputView.printErrorMessage(exception.getMessage());
-			return getInputAmountFromInput();
+		while (true) {
+			try {
+				String inputAmountInput = InputView.getInputAmountInput();
+				InputValidator.checkIsValidInputAmountInput(inputAmountInput);
+				return Integer.parseInt(inputAmountInput);
+			} catch (IllegalArgumentException exception) {
+				OutputView.printErrorMessage(exception.getMessage());
+			}
 		}
-		return Integer.parseInt(inputAmountInput);
 	}
 
 	private List<String> getProductListFromInput() {
-		String productsInput = InputView.getProductsInput();
-		try {
-			InputValidator.checkIsValidProductsInput(productsInput);
-		} catch (IllegalArgumentException exception) {
-			OutputView.printErrorMessage(exception.getMessage());
-			return getProductListFromInput();
+		while (true) {
+			try {
+				String productsInput = InputView.getProductsInput();
+				InputValidator.checkIsValidProductsInput(productsInput);
+				String[] productArray = productsInput.split(SPLITTER_OF_PRODUCT);
+				return Arrays.stream(productArray)
+					.map(productInfo -> productInfo = productInfo.substring(1, productInfo.length() - 1))
+					.collect(Collectors.toList());
+			} catch (IllegalArgumentException exception) {
+				OutputView.printErrorMessage(exception.getMessage());
+			}
 		}
-		String[] productArray = productsInput.split(";");
-		return Arrays.stream(productArray)
-			.map(productInfo -> productInfo = productInfo.substring(1, productInfo.length() - 1))
-			.collect(Collectors.toList());
 	}
 
 	private void makeVendingMachineHoldingAmount() {
@@ -74,13 +78,14 @@ public class VendingMachineController {
 	}
 
 	private int getHoldingAmountFromInput() {
-		String holdingAmountInput = InputView.getHoldingAmountInput();
-		try {
-			InputValidator.checkIsValidHoldingAmountInput(holdingAmountInput);
-		} catch (IllegalArgumentException exception) {
-			OutputView.printErrorMessage(exception.getMessage());
-			return getHoldingAmountFromInput();
+		while (true) {
+			try {
+				String holdingAmountInput = InputView.getHoldingAmountInput();
+				InputValidator.checkIsValidHoldingAmountInput(holdingAmountInput);
+				return Integer.parseInt(holdingAmountInput);
+			} catch (IllegalArgumentException exception) {
+				OutputView.printErrorMessage(exception.getMessage());
+			}
 		}
-		return Integer.parseInt(holdingAmountInput);
 	}
 }
