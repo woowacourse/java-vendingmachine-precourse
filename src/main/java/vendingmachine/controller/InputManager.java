@@ -6,6 +6,7 @@ import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,16 @@ public class InputManager {
         }
     }
 
+    private static ArrayList<Item> createItemList(String inputData) {
+        List<Item> items = Arrays.stream(inputData.split(";"))
+                .map((eachItem) -> {
+                    String removedBracket = eachItem.substring(1, eachItem.length()-1);
+                    String[] itemData = removedBracket.split(",");
+                    return new Item(itemData[0], Integer.parseInt(itemData[1]), Integer.parseInt(itemData[2]));
+                }).collect(Collectors.toList());
+        return new ArrayList<Item>(items);
+    }
+
     public static ArrayList<Item> setItemList() {
         while (true) {
             String inputData = getUserInput("상품명과 가격, 수량을 입력해 주세요.");
@@ -40,11 +51,7 @@ public class InputManager {
                 System.out.println(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
                 continue;
             }
-            return new ArrayList<Item>(Arrays.stream(inputData.split(";"))
-                    .map((eachItem) -> {
-                        String[] itemData = eachItem.split(",");
-                        return new Item(itemData[0], Integer.parseInt(itemData[1]), Integer.parseInt(itemData[2]));
-                    }).collect(Collectors.toList()));
+            return createItemList(inputData);
         }
     }
 
@@ -53,6 +60,7 @@ public class InputManager {
             String inputData = getUserInput("투입 금액을 입력해주세요.");
             try {
                 Validators.validateIntegerString(inputData);
+                return Integer.parseInt(inputData);
             } catch (IllegalArgumentException e) {
                 System.out.println(PREFIX_ERROR + " 잘못된 금액 입력입니다.");
             }

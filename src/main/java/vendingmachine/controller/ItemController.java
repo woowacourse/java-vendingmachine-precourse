@@ -23,7 +23,7 @@ public class ItemController {
     }
 
     public boolean checkAmount(int amount) {
-        return getMinItemPrice() <= amount;
+        return getMinItemPrice() > amount;
     }
 
     public boolean isEmpty() {

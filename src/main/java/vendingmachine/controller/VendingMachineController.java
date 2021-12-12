@@ -19,7 +19,7 @@ public class VendingMachineController {
     public void init() {
         vendingMachine = InputManager.setVendingMachine();
         OutputManager.printVendingMachineStatus(vendingMachine);
-        ItemController itemController = new ItemController();
+        itemController = new ItemController();
         vendingMachine.setRemainderMoney(InputManager.setUserAmount());
     }
 
