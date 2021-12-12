@@ -10,6 +10,14 @@ import vendingmachine.view.output.OutputView;
 import java.util.LinkedHashMap;
 
 public class VendingMachineController {
+    private static final VendingMachineController instance = new VendingMachineController();
+
+    private VendingMachineController() {
+    }
+
+    public static VendingMachineController getInstance() {
+        return instance;
+    }
 
     public void start() {
         MoneyInputView moneyInputView = new MoneyInputView();
