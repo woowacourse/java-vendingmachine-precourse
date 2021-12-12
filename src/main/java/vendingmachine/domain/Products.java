@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.enums.ErrorMessage.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -18,16 +20,21 @@ public class Products {
 	public Products(String input) {
 		for (String individualInput : input.split(SEPARATOR)) {
 			Matcher matcher = PATTERN.matcher(individualInput);
-			if (matcher.find()) {
-				Name name = new Name(matcher.group(NAME_INDEX));
-				Money price = new Money(matcher.group(PRICE_INDEX));
-				Quantity quantity = new Quantity(matcher.group(QUANTITY_INDEX));
-				products.add(new Product(name, price, quantity));
-			}
+			validateRegex(matcher);
+			Name name = new Name(matcher.group(NAME_INDEX));
+			Money price = new Money(matcher.group(PRICE_INDEX));
+			Quantity quantity = new Quantity(matcher.group(QUANTITY_INDEX));
+			products.add(new Product(name, price, quantity));
 		}
 	}
 
 	public void save() {
 		products.forEach(ProductRepository::save);
+	}
+
+	private void validateRegex(Matcher matcher) {
+		if (!matcher.find()) {
+			throw new IllegalArgumentException(PRODUCT_INVALID_FORMAT_ERROR_MESSAGE.get());
+		}
 	}
 }
