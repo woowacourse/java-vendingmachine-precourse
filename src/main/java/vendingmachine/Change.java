@@ -1,17 +1,20 @@
 package vendingmachine;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
-    private HashMap<Integer, Integer> coinCountList = new HashMap<>();
+    private Message message = new Message();
+    private Parser parser = new Parser();
+    private LinkedHashMap<Integer, Integer> coinCountMap = new LinkedHashMap<>();
     private List<Integer> coinAmountList = new ArrayList<>();
 
     Change() {
         initCoinAmount();
+        initCoinCount();
     }
 
     public void makeCoins(int holding) {
@@ -20,7 +23,8 @@ public class Change {
             addCoin(selected);
             int sum = getSum();
             if (isSame(sum, holding)) {
-                System.out.println(coinCountList.toString());
+                String output = parser.parseHolding(coinCountMap);
+                message.printCoinCount(output);
                 break;
             } else if (sum > holding) {
                 initCoinCount();
@@ -35,7 +39,10 @@ public class Change {
     }
 
     private void initCoinCount() {
-        coinCountList.clear();
+        coinCountMap.clear();
+        for (int key : coinAmountList) {
+            coinCountMap.put(key, 0);
+        }
     }
 
     private boolean isSame(int sum, int holding) {
@@ -46,14 +53,13 @@ public class Change {
     }
 
     private void addCoin(int value) {
-        int originCount = coinCountList.getOrDefault(value, 0);
-        coinCountList.put(value, originCount + 1);
+        coinCountMap.put(value, coinCountMap.get(value) + 1);
     }
 
     private int getSum() {
         int result = 0;
-        for (int key : coinCountList.keySet()) {
-            result += key * coinCountList.get(key);
+        for (int key : coinCountMap.keySet()) {
+            result += key * coinCountMap.get(key);
         }
         return result;
     }
