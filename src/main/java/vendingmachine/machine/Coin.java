@@ -20,6 +20,10 @@ public enum Coin {
         this.number = number;
     }
 
+    public int getCoinAmount() {
+        return this.amount;
+    }
+
     public void setCoinNumber() {
         this.number++;
     }
