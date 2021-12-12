@@ -26,8 +26,9 @@ public class Changes {
 	}
 
 	public int giveChanges(Coin coin) {
-		int givingCoin = GivingChangesService.countCoinForChanges(coinList, coin, changes);
+		int givingCoin = GivingChangesService.countCoinForChanges(coinList.get(coin.ordinal()), coin, changes);
 		changes -= givingCoin * coin.getAmount();
+		coinList.set(coin.ordinal(), coinList.get(coin.ordinal()) - givingCoin);
 		return givingCoin;
 	}
 }
