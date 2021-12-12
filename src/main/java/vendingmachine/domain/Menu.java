@@ -30,15 +30,15 @@ public class Menu {
     }
 
     public boolean hasSellableMerchandise(int moneyLeft) {
-        boolean isEnoughMoney = false;
+        boolean sellableMerchandiseExists = false;
         for (Merchandise merchandise : this.merchandiseList) {
             if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) continue;
             if (moneyLeft >= merchandise.getPrice()) {
-                isEnoughMoney = true;
+                sellableMerchandiseExists = true;
                 break;
             }
         }
-        return isEnoughMoney;
+        return sellableMerchandiseExists;
     }
 
     private Merchandise getMerchandiseByName(String name) {
