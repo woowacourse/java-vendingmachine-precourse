@@ -81,4 +81,21 @@ public class VendingMachine {
         }
 
     }
+    // 잔돈 생성
+    private int calculateCoinUsingAmount(Coin coin) {
+        int quotient = inputMoney / coin.getValue();
+        if (quotient > coinMap.get(coin)) return coinMap.get(coin);
+        return quotient;
+    }
+
+    private Map<Coin, Integer> generateChanges() {
+        Map<Coin, Integer> changes = new LinkedHashMap<>();
+        for(Coin coin : Coin.values()) {
+            int usingAmount = calculateCoinUsingAmount(coin);
+            if (usingAmount == DEFAULT_AMOUNT) continue;
+            reduceInputMoney(usingAmount * coin.getValue());
+            changes.put(coin, usingAmount);
+        }
+        return changes;
+    }
 }
