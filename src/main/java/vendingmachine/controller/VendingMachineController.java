@@ -21,11 +21,9 @@ public class VendingMachineController {
 		setInitCoins();
 		printInitCoins();
 
-		userView.askProductsInfo();
-		vendingMachine.setMenu();
+		setMenuList();
 
-		userView.askInsertMoney();
-		vendingMachine.insertMoney();
+		insetMoney();
 
 		order();
 		printChanges();
@@ -59,6 +57,20 @@ public class VendingMachineController {
 		while (true) {
 			try {
 				vendingMachine.setMenu(userView.insertProductsInfo());
+			} catch (IllegalArgumentException e) {
+				System.out.println(ErrorMessage.ERROR + e.getMessage());
+			}
+			break;
+		}
+
+	}
+
+	public void insetMoney() {
+		userView.askInsertMoney();
+
+		while (true) {
+			try {
+				vendingMachine.insertMoney(userView.insertMoney());
 			} catch (IllegalArgumentException e) {
 				System.out.println(ErrorMessage.ERROR + e.getMessage());
 			}

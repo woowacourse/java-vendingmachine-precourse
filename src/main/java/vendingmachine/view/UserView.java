@@ -26,6 +26,11 @@ public class UserView {
 		System.out.println("\n" + InputMessage.INSERT_MONEY_MESSAGE);
 	}
 
+	public String insertMoney() {
+		String insertedMoney = Console.readLine();
+		return insertedMoney;
+	}
+
 	public void orderMenu() {
 		System.out.println(InputMessage.ORDER_MENU_NAME);
 	}

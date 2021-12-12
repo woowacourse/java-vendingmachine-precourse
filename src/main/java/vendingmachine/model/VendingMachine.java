@@ -21,12 +21,12 @@ public class VendingMachine {
 		return changes.countCoin(coin);
 	}
 
-	public void setMenu(String productinfo) {
-		menu.setProductList(productinfo);
+	public void setMenu(String productInfo) {
+		menu.setProductList(productInfo);
 	}
 
-	public void insertMoney() {
-		insertedMoney = Money.setMoney();
+	public void insertMoney(String insertedMoney) {
+		this.insertedMoney = Money.setMoney(insertedMoney);
 	}
 
 	public void takeOrder() {
