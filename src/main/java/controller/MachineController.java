@@ -1,5 +1,6 @@
 package controller;
 
+import model.VendingMachine;
 import view.InputDisplay;
 
 public class MachineController {
@@ -8,8 +9,9 @@ public class MachineController {
 	}
 
 	public static void turnOnMachine() {
+		VendingMachine vendingMachine = new VendingMachine();
 		InputDisplay.askInputVendingMachineChange();
-		InputController.inputVendingMachineChange();
+		vendingMachine.makeVendingMachineCoinBox(InputController.inputVendingMachineChange());
 	}
 
 }
