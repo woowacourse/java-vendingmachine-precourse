@@ -3,6 +3,8 @@ package vendingmachine;
 import java.util.Arrays;
 
 public class Validator {
+    private static final int PRODUCT_INFO_LENGTH = 3;
+
     public static void validateMachineMoneyInput(String input) throws IllegalArgumentException {
         validateMachineMoneyInputIsPositiveNumber(input);
         validateMachineMoneyInputIsMultipleOf10(input);
@@ -51,8 +53,11 @@ public class Validator {
         String[] str = Arrays.stream(product.split(","))
                 .filter(s -> !s.isEmpty())
                 .toArray(String[]::new);
-        if (str.length != 3) {
+        if (str.length != PRODUCT_INFO_LENGTH) {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_IS_NOT_RIGHT_FORM_ERROR_STRING);
+        }
+        if (!isPositiveNumber(str[PRODUCT_INFO_LENGTH - 1]) || !isPositiveNumber(str[PRODUCT_INFO_LENGTH - 2])) {
+            throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_PRICE_QUANTITY_FORM_ERROR_STRING);
         }
     }
 }
