@@ -7,6 +7,11 @@ import vendingmachine.Coin;
 
 public class Changes {
 
+    private static final String CHANGE_IS_INTEGER = "[ERROR] : 숫자로 이루어져야 합니다.";
+    private static final String CHANGE_IS_OVER_THAN_TEN = "[ERROR] : 잔돈은 10원 이상의 값을 입력하여야 합니다.";
+    private static final String CHANGE_IS_MULTIPLE_OF_TEN = "[ERROR] : 상품 가격은 10원으로 나누어 떨어져야 합니다.";
+    private static final Integer DEFAULT = 0;
+
     private Map<Integer, Integer> changes = new LinkedHashMap<>();
 
     public Changes(String inputMoney) {
@@ -23,25 +28,25 @@ public class Changes {
         try {
             Integer.parseInt(stringChange);
         } catch (Exception exception) {
-            throw new IllegalArgumentException("[ERROR] : 숫자로 이루어져야 합니다.");
+            throw new IllegalArgumentException(CHANGE_IS_INTEGER);
         }
     }
 
     private void graterThanZero(String stringChange) {
         Integer change = Integer.parseInt(stringChange);
         if (change < 10) {
-            throw new IllegalArgumentException("[ERROR] : 잔돈은 10원 이상의 값을 입력하여야 합니다.");
+            throw new IllegalArgumentException(CHANGE_IS_OVER_THAN_TEN);
         }
 
         if (change % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] : 상품 가격은 10원으로 나누어 떨어져야 합니다.");
+            throw new IllegalArgumentException(CHANGE_IS_MULTIPLE_OF_TEN);
         }
     }
 
     private void prepareChanges(int inputMoney) {
 
         for (Integer change : Coin.amounts()) {
-            changes.put(change, 0);
+            changes.put(change, DEFAULT);
         }
 
         while (totalChanges() < inputMoney) {
@@ -57,7 +62,7 @@ public class Changes {
         return changes.keySet().stream()
             .map(change -> this.changes.get(change) * change)
             .reduce(Integer::sum)
-            .orElse(0);
+            .orElse(DEFAULT);
     }
 
     public Map<Integer, Integer> changes() {
@@ -68,28 +73,35 @@ public class Changes {
         Map<Integer, Integer> changeToCustomerInfo = new LinkedHashMap<>();
         for (Integer change : Coin.amounts()) {
             if (customerInputMoney > total(changeToCustomerInfo)) {
-                calculateChangesToCustomerByCange(customerInputMoney, changeToCustomerInfo, change);
+                calculateChangesToCustomerByChange(customerInputMoney, changeToCustomerInfo, change);
             }
         }
 
         return changeToCustomerInfo;
     }
 
-    private void calculateChangesToCustomerByCange(
+    private void calculateChangesToCustomerByChange(
         int customerInputMoney,
         Map<Integer, Integer> changeToCustomerInfo,
         Integer change
     ) {
-        int frequency = calculateFrequency(customerInputMoney, changeToCustomerInfo, change);
+        int frequency = countNumberofChange(customerInputMoney, changeToCustomerInfo, change);
+        // 인자로 받은 change (잔돈)이 자판기에 존재한다면, 고객에게 줄 잔돈을 계산하겠다.
         if (frequency != 0) {
+            // 자판기에 있는 잔고는 줄어들고
             changes.put(change, changes.get(change) - frequency);
+            // 고객에게 줄 잔고는 늘어난다.
             changeToCustomerInfo
-                .put(change, changeToCustomerInfo.getOrDefault(customerInputMoney, 0) + frequency);
+                .put(change, changeToCustomerInfo.getOrDefault(customerInputMoney, DEFAULT) + frequency);
         }
     }
 
-    private int calculateFrequency(int customerInputMoney,
-        Map<Integer, Integer> changeToCustomerInfo, Integer change) {
+    private int countNumberofChange(
+        int customerInputMoney,
+        Map<Integer, Integer> changeToCustomerInfo,
+        Integer change
+    ) {
+        // 고객에게 줘야하는 잔돈의 개수를 계산하는 과정
         int frequency = changes.get(change);
         int reaminingPayment = customerInputMoney - total(changeToCustomerInfo);
 
@@ -101,7 +113,7 @@ public class Changes {
     }
 
     private int total(Map<Integer, Integer> changeToCustomerInfo) {
-        int total = 0;
+        int total = DEFAULT;
         for (Integer change : changeToCustomerInfo.keySet()) {
             int count = changeToCustomerInfo.get(change);
             total += change * count;

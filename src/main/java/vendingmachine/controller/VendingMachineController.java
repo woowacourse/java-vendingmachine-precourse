@@ -31,16 +31,6 @@ public class VendingMachineController {
         }
     }
 
-//    private void prepareMerchandise() {
-//        try {
-//            vendingMachine.setMerchandise(InputView.requireVendingMachineMerchandiseInfo());
-//        } catch (IllegalArgumentException exception) {
-//            OutputView.printErrorMessage(exception.getMessage());
-//            prepareMerchandise();
-//            return;
-//        }
-//    }
-
     private Changes prepareChange() {
         Changes changes;
         try {
@@ -53,18 +43,6 @@ public class VendingMachineController {
         OutputView.printChangesState(changes.changes());
         return changes;
     }
-
-//    private void prepareChange() {
-//        try {
-//            vendingMachine = new VendingMachine(InputView.requireChanges());
-//
-//        } catch (IllegalArgumentException exception) {
-//            OutputView.printErrorMessage(exception.getMessage());
-//            prepareChange();
-//            return;
-//        }
-//        OutputView.printChangesState(vendingMachine.getChanges());
-//    }
 
     private void buyMerchandise() {
         while (vendingMachine.canBuySomething() && !vendingMachine.soldOut()) {
