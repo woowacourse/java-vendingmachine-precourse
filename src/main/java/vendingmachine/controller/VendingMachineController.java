@@ -37,7 +37,7 @@ public class VendingMachineController {
     private void initializeProductsInfo() {
         try {
             List<Product> productList = ProductInfoValidator.getValidProductList(InputView.inputProductInfo());
-
+            productList.forEach(vendingMachine::storeProduct);
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
             initializeProductsInfo();
