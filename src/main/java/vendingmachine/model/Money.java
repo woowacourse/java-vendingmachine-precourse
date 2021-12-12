@@ -16,8 +16,7 @@ public class Money {
 		money -= subtraction;
 	}
 
-	public boolean isBiggerThanValue(int value) {
+	public boolean isMoneyBiggerThanValue(int value) {
 		return money >= value;
 	}
-
 }

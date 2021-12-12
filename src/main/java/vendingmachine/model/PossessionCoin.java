@@ -22,9 +22,9 @@ public class PossessionCoin {
 	}
 
 	public void createRandomCoins(Money money) {
-		while (money.isBiggerThanValue(MINIMUM_COIN_AMOUNT)) {
+		while (money.isMoneyBiggerThanValue(MINIMUM_COIN_AMOUNT)) {
 			int randomAmount = pickNumberInList(Coin.createCoinList());
-			if (money.isBiggerThanValue(randomAmount)) {
+			if (money.isMoneyBiggerThanValue(randomAmount)) {
 				money.subtractMoney(randomAmount);
 				coins.put(randomAmount, coins.get(randomAmount) + 1);
 			}
