@@ -5,7 +5,7 @@ import java.util.HashMap;
 import vendingmachine.domain.Coin;
 
 public class OutputView {
-	public static final String HOLDING_MONEY_ERROR = "[ERROR] 금액은 0이상의 숫자여야 합니다.";
+	public static final String HOLDING_MONEY_ERROR = "[ERROR] 금액은 10이상의 숫자여야 합니다.";
 	public static final String ITEM_INFORMATION_ERROR = "[ERROR] 형식에 맞게 입력해 주세요.";
 	public static final String INPUT_MONEY_ERROR = "[ERROR] 투입 금액은 1이상의 숫자여야 합니다.";
 	public static final String NOT_EXISTING_ITEM_ERROR = "[ERROR] 존재하지 않는 상품 입니다.";
@@ -68,5 +68,4 @@ public class OutputView {
 			}
 		}
 	}
-
 }
