@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class VendingMachine extends LoopInput {
     private static final String BUY_PRODUCT_MESSAGE = "구매할 상품명을 입력해 주세요.";
     private static final Change change = new Change();
@@ -29,7 +27,7 @@ public class VendingMachine extends LoopInput {
     private void initializeVendingMachine() {
         change.input();
         productList.input();
-        change.createInitialChanges();
+        change.createRandomChange();
     }
 
     private boolean checkAvailableSellState() {

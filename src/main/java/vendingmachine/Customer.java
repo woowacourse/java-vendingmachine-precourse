@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class Customer extends LoopInput {
     private static final String INPUT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";
     private static final Validator validator = new Validator();

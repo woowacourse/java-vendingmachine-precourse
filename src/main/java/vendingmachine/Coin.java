@@ -1,6 +1,7 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import java.util.ArrayList;
+import java.util.List;
 
 public enum Coin {
     COIN_500(500),
@@ -8,7 +9,7 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
-    private static final int START_OF_RANGE = 0;
+    private static final String COIN_NAME_PREFIX = "COIN_";
     private static final String PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX = "원 - ";
     private static final String PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX = "개";
     private final int amount;
@@ -17,16 +18,12 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int createRandomNumber(int change) {
-        if (this == COIN_10) {
-            return change / this.amount;
+    public static List<Integer> createCoinAmountList() {
+        List<Integer> list = new ArrayList<>();
+        for (Coin coin : Coin.values()) {
+            list.add(coin.amount);
         }
-        int max = change / this.amount;
-        return Randoms.pickNumberInRange(START_OF_RANGE, max);
-    }
-
-    public int getTotalOfCoin(int randomNumber) {
-        return this.amount * randomNumber;
+        return list;
     }
 
     public void printNumberOfCoin(int number) {
@@ -50,5 +47,9 @@ public enum Coin {
             return;
         }
         System.out.println(this.amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + amount + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
+    }
+
+    public static Coin getCoinByAmount(int amount) {
+        return Coin.valueOf(COIN_NAME_PREFIX + amount);
     }
 }
