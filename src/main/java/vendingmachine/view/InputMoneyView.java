@@ -16,7 +16,7 @@ public class InputMoneyView implements View {
 			money = readMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			show();
+			reshow();
 			return;
 		}
 
@@ -35,5 +35,9 @@ public class InputMoneyView implements View {
 
 	private void goInputItemNameView() {
 		Application.controller.view(ViewMappingKey.INPUT_ITEM_NAME);
+	}
+
+	private void reshow() {
+		Application.controller.view(ViewMappingKey.INPUT_MONEY);
 	}
 }

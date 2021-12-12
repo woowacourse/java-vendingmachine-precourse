@@ -18,7 +18,7 @@ public class InputItemNameView implements View {
 		}
 		printMoneyAndMessage(money);
 		purchase();
-		show();
+		reshow();
 	}
 
 	private void printMoneyAndMessage(int money) {
@@ -52,5 +52,9 @@ public class InputItemNameView implements View {
 
 	private void goReturnChangesView() {
 		Application.controller.view(ViewMappingKey.RETURN_CHANGES);
+	}
+
+	private void reshow() {
+		Application.controller.view(ViewMappingKey.INPUT_ITEM_NAME);
 	}
 }

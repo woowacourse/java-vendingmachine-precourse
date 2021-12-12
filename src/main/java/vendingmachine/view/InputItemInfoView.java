@@ -19,7 +19,7 @@ public class InputItemInfoView implements View {
 			items = readItems();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			show();
+			reshow();
 			return;
 		}
 		addItems(items);
@@ -37,5 +37,9 @@ public class InputItemInfoView implements View {
 
 	private void goInputMoneyView() {
 		Application.controller.view(ViewMappingKey.INPUT_MONEY);
+	}
+
+	private void reshow() {
+		Application.controller.view(ViewMappingKey.INPUT_ITEM_INFO);
 	}
 }

@@ -16,7 +16,7 @@ public class InputFirstMoneyView implements View {
 			firstMoney = readFirstMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			show();
+			reshow();
 			return;
 		}
 		createFirstCoins(firstMoney);
@@ -34,5 +34,9 @@ public class InputFirstMoneyView implements View {
 
 	private void goShowFirstMoney() {
 		Application.controller.view(ViewMappingKey.SHOW_FIRST_MONEY);
+	}
+
+	private void reshow() {
+		Application.controller.view(ViewMappingKey.INPUT_FIRST_MONEY);
 	}
 }
