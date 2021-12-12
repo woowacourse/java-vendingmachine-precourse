@@ -8,4 +8,10 @@ public class Utils {
         String[] splits = inputString.replace("[","").replace("]","").split(";");
         return new ArrayList<String>(Arrays.asList(splits));
     }
+
+    public static void validateNumber(String str) {
+        if (!str.chars().allMatch(Character::isDigit)) {
+            throw new IllegalArgumentException("숫자여야 합니다.");
+        }
+    }
 }
