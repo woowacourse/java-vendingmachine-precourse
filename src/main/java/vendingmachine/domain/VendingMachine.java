@@ -63,17 +63,17 @@ public class VendingMachine {
         throw new IllegalArgumentException(ERROR_HEADER + NOT_EXIST_PRODUCT);
     }
 
-    private CoinCountMap calculateLeftoverCash(int toReturnCash ) {
+    private CoinCountMap calculateLeftoverCash(int toReturnCash) {
         CoinCountMap leftoverCoinCountMap = new CoinCountMap();
         Coin[] coinArray = Coin.values();
         int idx = 0;
         while (toReturnCash != 0) {
             Coin coin = coinArray[idx];
-            if (this.coinCountMap.getCoinCount().get(coin) == 0) {
+            if (this.coinCountMap.getCoinCount().get(coin) == 0 || toReturnCash < coin.getAmount()) {
                 idx += 1;
                 continue;
             }
-            int minCoinCount = findMinCoinCount(idx, coinArray, toReturnCash);
+            int minCoinCount = findMinCoinCount(coin, toReturnCash);
             toReturnCash -= minCoinCount * coin.getAmount();
             leftoverCoinCountMap.getCoinCount().replace(coin, leftoverCoinCountMap.getCoinCount().get(coin) + minCoinCount);
             this.coinCountMap.getCoinCount().replace(coin, this.coinCountMap.getCoinCount().get(coin) - minCoinCount);
@@ -81,10 +81,9 @@ public class VendingMachine {
         return leftoverCoinCountMap;
     }
 
-    private int findMinCoinCount(int idx, Coin[] coinArray, int toReturnCash) {
-        int coinValue = coinArray[idx].getAmount();
-        return Math.min(toReturnCash / coinValue, this.coinCountMap.getCoinCount().get(coinArray[idx]));
-
+    private int findMinCoinCount(Coin coin, int toReturnCash) {
+        int coinValue = coin.getAmount();
+        return Math.min(toReturnCash / coinValue, this.coinCountMap.getCoinCount().get(coin));
     }
 
 
