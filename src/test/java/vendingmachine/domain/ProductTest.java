@@ -128,4 +128,30 @@ class ProductTest {
         // when
         assertThat(result).isFalse();
     }
+
+    @DisplayName("상품의 수량이 0 초과인 경우 true를 반환한다.")
+    @Test
+    void isExistQuantity_QuantityGraterThan0_True() {
+        // given
+        Product product = new Product("[콜라,1500,1]");
+
+        // then
+        boolean result = product.isExistQuantity();
+
+        // when
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("상품의 수량이 0 이하인 경우 False를 반환한다.")
+    @Test
+    void isExistQuantity_QuantityNotMoreThan0_False() {
+        // given
+        Product product = new Product("[콜라,1500,0]");
+
+        // then
+        boolean result = product.isExistQuantity();
+
+        // when
+        assertThat(result).isFalse();
+    }
 }
