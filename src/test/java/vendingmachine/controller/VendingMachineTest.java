@@ -19,7 +19,7 @@ public class VendingMachineTest extends NsTest {
 
 	@DisplayName("보유 금액을 설정하여 동전을 무작위로 생성하는 기능 테스트")
 	@Test
-	void initHoldingMoneyTest() {
+	void init_holding_money_test() {
 		assertRandomNumberInListTest(
 			() -> {
 				run("450");
@@ -35,7 +35,7 @@ public class VendingMachineTest extends NsTest {
 
 	@DisplayName("보유 동전을 출력하는 기능 테스트")
 	@Test
-	void showAllCoinQuantityTest() {
+	void show_all_coin_quantity_test() {
 		assertSimpleTest(
 			() -> {
 				vendingMachine.showAllCoinQuantity();
@@ -48,7 +48,7 @@ public class VendingMachineTest extends NsTest {
 
 	@DisplayName("상품 등록 기능 테스트")
 	@Test
-	void registerProductsTest() {
+	void register_products_test() {
 		assertSimpleTest(
 			() -> {
 				run("[콜라,1500,20];[사이다,1000,10]");
@@ -63,7 +63,7 @@ public class VendingMachineTest extends NsTest {
 
 	@DisplayName("구매를 위한 돈 투입 기능 테스트")
 	@Test
-	void insertMoneyTest() {
+	void insert_money_test() {
 		assertSimpleTest(
 			() -> {
 				run("3000");
