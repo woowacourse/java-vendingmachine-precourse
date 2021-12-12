@@ -8,11 +8,11 @@ public class NameView {
 
 	public Name getInput() {
 		System.out.println(Message.INPUT_MESSAGE_NAME);
-		Name name = new Name();
+		Name name;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			name.set(input);
+			name = new Name(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());
 			return getInput();

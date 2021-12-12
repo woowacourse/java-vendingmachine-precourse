@@ -6,7 +6,7 @@ public class Name {
 
 	private String name;
 
-	public void set(String input) {
+	public Name(String input) {
 		checkInput(input);
 		name = input;
 	}

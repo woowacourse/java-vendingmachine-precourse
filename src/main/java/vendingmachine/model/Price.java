@@ -6,9 +6,13 @@ public class Price {
 
 	private int price;
 
-	public void set(String input) {
+	public Price(String input) {
 		checkInput(input);
 		price = Integer.valueOf(input);
+	}
+
+	public int get() {
+		return price;
 	}
 
 	private void checkInput(String input) {

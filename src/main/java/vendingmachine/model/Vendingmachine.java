@@ -7,9 +7,6 @@ public class Vendingmachine {
 	private InsertingSum insertingSum;
 
 	public Vendingmachine() {
-		holdingSum = new HoldingSum();
-		stock = new Stock();
-		insertingSum = new InsertingSum();
 	}
 
 	public HoldingSum getHoldingSum() {

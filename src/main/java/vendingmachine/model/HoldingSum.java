@@ -11,13 +11,16 @@ public class HoldingSum {
 
 	private Map<String, Integer> coinMap;
 
-	public int getCoinCount(String coinName) {
-		return coinMap.getOrDefault(coinName, 0);
+	public HoldingSum() {
 	}
 
-	public void set(String input) {
+	public HoldingSum(String input) {
 		checkInput(input);
 		coinMap = generateCoinsRandomly(input);
+	}
+
+	public int getCoinCount(String coinName) {
+		return coinMap.getOrDefault(coinName, 0);
 	}
 
 	private void checkInput(String input) {

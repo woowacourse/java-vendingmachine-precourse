@@ -13,19 +13,13 @@ public class Product {
 	private Price price;
 	private TheNumber theNumber;
 
-	public Product() {
-		name = new Name();
-		price = new Price();
-		theNumber = new TheNumber();
-	}
-
-	public void set(String input) {
+	public Product(String input) {
 		checkInput(input);
 		String inputWithoutBracket = input.substring(1, input.length() - 1);
 		List<String> productInfo = Arrays.asList(inputWithoutBracket.split(Rule.DELIMETER_PRODUCT_INFO));
-		name.set(productInfo.get(0));
-		price.set(productInfo.get(1));
-		theNumber.set(productInfo.get(2));
+		name = new Name(productInfo.get(0));
+		price = new Price(productInfo.get(1));
+		theNumber = new TheNumber(productInfo.get(2));
 	}
 
 	private void checkInput(String input) {

@@ -1,9 +1,8 @@
 package vendingmachine.model;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import vendingmachine.constant.Rule;
 import vendingmachine.util.SplitChecker;
@@ -11,24 +10,19 @@ import vendingmachine.util.StringChecker;
 
 public class Stock {
 
-	private Set<Product> productSet;
+	private List<Product> productList;
 
-	public Stock() {
-		productSet = new HashSet<>();
-	}
-
-	public void set(String input) {
+	public Stock(String input) {
 		checkInput(input);
-		Set<Product> productSet = new HashSet<>();
+		List<Product> productList = new ArrayList<>();
 		List<String> productInfoList = Arrays.asList(input.split(Rule.DELIMETER_PRODUCT));
 
 		for (String productInfo : productInfoList) {
-			Product product = new Product();
-			product.set(productInfo);
-			productSet.add(product);
+			Product product = new Product(productInfo);
+			productList.add(product);
 		}
 
-		this.productSet = productSet;
+		this.productList = productList;
 	}
 
 	private void checkInput(String input) {

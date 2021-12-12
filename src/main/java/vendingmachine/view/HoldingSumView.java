@@ -9,11 +9,11 @@ public class HoldingSumView {
 
 	public HoldingSum getInput() {
 		System.out.println(Message.INPUT_MESSAGE_HOlDING_SUM);
-		HoldingSum holdingSum = new HoldingSum();
+		HoldingSum holdingSum;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			holdingSum.set(input);
+			holdingSum = new HoldingSum(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());
 			return getInput();

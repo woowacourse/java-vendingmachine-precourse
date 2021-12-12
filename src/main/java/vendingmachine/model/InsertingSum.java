@@ -7,13 +7,13 @@ public class InsertingSum {
 
 	private int insertingSum;
 
-	public int get() {
-		return insertingSum;
-	}
-
-	public void set(String input) {
+	public InsertingSum(String input) {
 		checkInput(input);
 		insertingSum = Integer.valueOf(input);
+	}
+
+	public int get() {
+		return insertingSum;
 	}
 
 	private void checkInput(String input) {

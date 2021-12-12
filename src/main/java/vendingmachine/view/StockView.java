@@ -8,11 +8,11 @@ public class StockView {
 
 	public Stock getInput() {
 		System.out.println(Message.INPUT_MESSAGE_STOCK);
-		Stock stock = new Stock();
+		Stock stock;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			stock.set(input);
+			stock = new Stock(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());
 			return getInput();

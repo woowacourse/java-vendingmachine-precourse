@@ -8,11 +8,11 @@ public class InsertingSumView {
 
 	public InsertingSum getInput() {
 		System.out.println(Message.INPUT_MESSAGE_INSERTING_SUM);
-		InsertingSum insertingSum = new InsertingSum();
+		InsertingSum insertingSum;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			insertingSum.set(input);
+			insertingSum = new InsertingSum(input);
 		} catch (Exception e) {
 			System.out.println(Message.ERROR + e.getMessage());
 			return getInput();
