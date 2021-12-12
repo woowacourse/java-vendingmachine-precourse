@@ -1,6 +1,13 @@
 package vendingmachine.user;
 
 public class UserMoneyValidation {
+    public static void checkUserMoneyValidation(String money) {
+        isEmpty(money);
+        isNumber(money);
+        isPositive(money);
+        hasEmpty(money);
+    }
+
     public static void isEmpty(String money) {
         if (money.length() == 0) {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NULL);
