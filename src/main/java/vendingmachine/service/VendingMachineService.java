@@ -5,8 +5,11 @@ import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import java.util.List;
 
 import vendingmachine.domain.CoinRepository;
+import vendingmachine.domain.Money;
+import vendingmachine.domain.MoneyRepository;
 import vendingmachine.domain.Products;
 import vendingmachine.dto.RequestHoldingMoneyDto;
+import vendingmachine.dto.RequestInsertMoneyDto;
 import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.ResponseAllCoinQuantity;
 import vendingmachine.enums.Coin;
@@ -34,5 +37,10 @@ public class VendingMachineService {
 	public void registerProducts(RequestRegisterProductsDto requestHoldingMoneyDto) {
 		Products products = requestHoldingMoneyDto.getProducts();
 		products.save();
+	}
+
+	public void insertMoney(RequestInsertMoneyDto requestInsertMoneyDto) {
+		Money money = requestInsertMoneyDto.getMoney();
+		MoneyRepository.add(money);
 	}
 }

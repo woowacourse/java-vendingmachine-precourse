@@ -19,6 +19,10 @@ public class Money {
 		return money;
 	}
 
+	public void add(Money money) {
+		this.money += money.money;
+	}
+
 	public boolean isLowerThen(Money money) {
 		return this.money < money.money;
 	}
