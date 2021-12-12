@@ -7,11 +7,13 @@ import vendingmachine.view.InputView;
 public class ProductController {
 	private ProductStorage productStorage;
 	private ProductMapper productMapper;
+	private ProductStorageValidator productStorageValidator;
 	private ProductValidator productValidator;
 
 	public ProductController() {
 		productStorage = new ProductStorage();
 		productMapper = new ProductMapper();
+		productStorageValidator = new ProductStorageValidator();
 		productValidator = new ProductValidator();
 	}
 
@@ -23,7 +25,9 @@ public class ProductController {
 
 	private void requestInitialProducts() {
 		try {
-			productStorage.storeProducts(Console.readLine(), productMapper, productValidator);
+			String inputProducts = Console.readLine();
+			productStorageValidator.validate(inputProducts);
+			productStorage.storeProducts(inputProducts, productMapper, productValidator);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.showMessage(illegalArgumentException);
 			requestInitialProducts();
