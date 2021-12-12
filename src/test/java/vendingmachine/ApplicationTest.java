@@ -25,6 +25,37 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 반환불가_잔돈_테스트() {
+        assertRandomNumberInListTest(
+                () -> {
+                    run("1000", "[콜라,300,2]", "1000", "콜라", "콜라");
+                    System.out.println(output());
+                    assertThat(output()).contains(
+                            "자판기가 보유한 동전", "500원 - 2개", "100원 - 0개", "50원 - 0개", "10원 - 0개",
+                            "투입 금액: 1000원", "투입 금액: 700원", "투입 금액: 400원"
+                    );
+                },
+                500, 500
+        );
+    }
+
+    @Test
+    void 재고_없고_줄수있는_잔돈보다_투입금액이_클떄_잔돈_테스트() {
+        assertRandomNumberInListTest(
+                () -> {
+                    run("1000", "[콜라,1000,1]", "1900", "콜라", "콜라");
+                    System.out.println(output());
+                    assertThat(output()).contains(
+                            "자판기가 보유한 동전", "500원 - 2개", "100원 - 0개", "50원 - 0개", "10원 - 0개",
+                            "투입 금액: 1900원", "투입 금액: 900원"
+                    );
+                },
+                500, 500
+        );
+    }
+
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(
             () -> {
