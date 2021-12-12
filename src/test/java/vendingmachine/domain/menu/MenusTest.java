@@ -27,7 +27,6 @@ class MenusTest {
 
 		VendingMachine vendingMachine = new VendingMachine(coins, menus);
 		vendingMachine.putMoney("3000");
-		assertEquals(vendingMachine.getInputMoney(), 2000);
 
 		Throwable exception = assertThrows(IllegalArgumentException.class, () ->
 			vendingMachine.buy("닥터페퍼")
