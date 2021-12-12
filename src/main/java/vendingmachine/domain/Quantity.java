@@ -26,6 +26,10 @@ public class Quantity {
 		this.quantity -= quantity;
 	}
 
+	public boolean isSoldOut() {
+		return quantity == SOLD_OUT;
+	}
+
 	private void validateNumberFormat(String value) {
 		try {
 			Integer.parseInt(value);

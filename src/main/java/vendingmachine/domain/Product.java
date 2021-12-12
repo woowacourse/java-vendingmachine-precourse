@@ -40,7 +40,17 @@ public class Product {
 
 	public void sell() {
 		Money money = MoneyRepository.get();
+		validateCanSellByMoney(money);
 		money.sub(price);
 		quantity.sub(ONE);
+	}
+
+	private void validateCanSellByMoney(Money money) {
+		if (money.isLowerThen(price)) {
+			throw new IllegalArgumentException(MONEY_LOWER_THEN_PRICE_ERROR_MESSAGE.get());
+		}
+		if (quantity.isSoldOut()) {
+			throw new IllegalArgumentException(PRODUCT_SOLD_OUT_ERROR_MESSAGE.get());
+		}
 	}
 }
