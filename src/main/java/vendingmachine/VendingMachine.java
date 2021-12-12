@@ -35,11 +35,15 @@ public class VendingMachine {
         return money != -1 && !products.isEmpty() && !coins.isEmpty();
     }
 
-    public String remainMoney() {
-        return String.format(Constant.REMAIN_MONEY, money);
+    public int remainMoney() {
+        return money;
     }
 
     public boolean hasProduct(String name) {
         return products.stream().anyMatch(p -> p.isSameNameWith(name));
+    }
+
+    public boolean canBuyWith(int money) {
+        return !products.isEmpty() && products.stream().anyMatch(p -> p.isPriceLowerOrEqualWith(money));
     }
 }

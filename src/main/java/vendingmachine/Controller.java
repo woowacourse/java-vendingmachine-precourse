@@ -24,7 +24,11 @@ public class Controller {
         if (!machine.isReadyToStartBuying()) {
             requestMachineInfo();
         }
-        System.out.println(machine.remainMoney());
+
+        System.out.printf((Constant.REMAIN_MONEY) + "%n", machine.remainMoney());
+        if (!machine.canBuyWith(machine.remainMoney())) {
+            return;
+        }
         String nameToBuy = input.requestBuyingProduct();
 
         if (!machine.hasProduct(nameToBuy)) {

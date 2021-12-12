@@ -14,4 +14,8 @@ public class Product {
     public boolean isSameNameWith(String name) {
         return this.name.equals(name);
     }
+
+    public boolean isPriceLowerOrEqualWith(int price) {
+        return this.price <= price;
+    }
 }
