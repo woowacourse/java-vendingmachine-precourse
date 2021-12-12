@@ -79,10 +79,10 @@ class ProductTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("상품 수량이 음수인 경우 예외를 던진다.")
+    @DisplayName("상품 수량이 0개 이하인 경우 예외를 던진다.")
     @ParameterizedTest
-    @ValueSource(strings = {"[콜라,1500,-1]", "[사이다,1000,-10]"})
-    void constructor_ProductQuantityThenNegativeNumber_ExceptionThrown(String inputProduct) {
+    @ValueSource(strings = {"[콜라,1500,-1]", "[사이다,1000,0]"})
+    void constructor_ProductQuantityNotMoreThan0_ExceptionThrown(String inputProduct) {
         // given & when & then
         assertThatThrownBy(() -> {
             new Product(inputProduct);
