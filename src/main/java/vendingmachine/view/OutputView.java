@@ -15,4 +15,9 @@ public class OutputView {
 		System.out.println();
 		System.out.println(user);
 	}
+
+	public static void printChangeCoins(CoinCounter changeCoinCounter) {
+		System.out.println(CHANGE);
+		System.out.println(changeCoinCounter);
+	}
 }
