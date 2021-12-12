@@ -87,4 +87,10 @@ public class Validator {
 		validatePositive(input);
 		validateRemainder(input, MIN_MONEY_VALUE);
 	}
+
+	public static void validateAmountInput(String input) {
+		validateEmptyStr(input);
+		validateNumber(input);
+		validatePositive(input);
+	}
 }
