@@ -20,6 +20,8 @@ public class VendingMachineController {
 	public static String MERCHANDISE_PARSER = ";";
 	public static String MERCHANDISE_INFORMATION_PARSER = ",";
 
+	public static String ALL_MERCHANDISE_SOLD_0UT_MESSAGE = "모든 상품은 소진되었습니다.";
+
 	private VendingMachine vendingMachine;
 	private User user;
 
@@ -27,14 +29,12 @@ public class VendingMachineController {
 		vendingMahchineMoneyWithErrorHandling();
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		inputMerchandiseInformationWithErrorHandling();
-		inputMoneyWithErrorHandling();
-		while (true) {
-			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
-			buyMerchandiseWithErrorHandling();
-			if (!isUserBuyMerchandise(vendingMachine, user)) {
-				break;
-			}
+		if (vendingMachine.getMerchandises().isAllMerchandisesSoldout()) {
+			System.out.println(ALL_MERCHANDISE_SOLD_0UT_MESSAGE);
+			return;
 		}
+		inputMoneyWithErrorHandling();
+		showMoneyAndInputMerchandise();
 		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
 	}
 
@@ -80,6 +80,20 @@ public class VendingMachineController {
 			}
 		}
 		return false;
+	}
+
+	public void showMoneyAndInputMerchandise() {
+		while (true) {
+			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
+			buyMerchandiseWithErrorHandling();
+			if (vendingMachine.getMerchandises().isAllMerchandisesSoldout()) {
+				System.out.println(ALL_MERCHANDISE_SOLD_0UT_MESSAGE);
+				break;
+			}
+			if (!isUserBuyMerchandise(vendingMachine, user)) {
+				break;
+			}
+		}
 	}
 
 	public void vendingMahchineMoneyWithErrorHandling() {

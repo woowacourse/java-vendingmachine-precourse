@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.List;
-import java.util.stream.Stream;
+import java.util.stream.Collectors;
 
 import vendingmachine.utils.ErrorMessage;
 import vendingmachine.utils.Validator;
@@ -27,4 +27,11 @@ public class Merchandises {
 		return merchandise;
 	}
 
+	public boolean isAllMerchandisesSoldout() {
+		List<Merchandise> soldOutMerchandises = merchandiseList.stream()
+			.filter(merchandise -> merchandise.getQuantity() == 0)
+			.collect(Collectors.toList());
+
+		return soldOutMerchandises.size() == merchandiseList.size();
+	}
 }
