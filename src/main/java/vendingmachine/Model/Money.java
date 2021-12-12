@@ -20,6 +20,10 @@ public class Money {
 		return money;
 	}
 
+	public int toCoinCount(int divider) {
+		return money / divider;
+	}
+
 	public void setMinus(int money) {
 		this.money -= money;
 	}

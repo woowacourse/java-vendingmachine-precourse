@@ -35,7 +35,7 @@ public class CoinGroup {
 		coins.put(coin, coinCount);
 	}
 
-	public LinkedHashMap<Integer, Integer> getMap() {
+	public LinkedHashMap<Integer, Integer> getIntegerMap() {
 		LinkedHashMap<Integer, Integer> coinMap = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			coinMap.put(coin.getAmount(), coins.get(coin));
@@ -43,8 +43,8 @@ public class CoinGroup {
 		return coinMap;
 	}
 
-	public LinkedHashMap<Integer, Integer> getNotEmptyMap() {
-		LinkedHashMap<Integer, Integer> emptyCoins = getMap();
+	public LinkedHashMap<Integer, Integer> getNotEmptyIntegerMap() {
+		LinkedHashMap<Integer, Integer> emptyCoins = getIntegerMap();
 		coins.keySet().stream()
 			.filter(coin -> coins.get(coin) == 0)
 			.forEach(coin -> emptyCoins.remove(coin.getAmount()));

@@ -23,7 +23,7 @@ public class MachineController {
 		vendingMachine.initCoins(InputController.getMachineMoney());
 		printBreak();
 
-		OutputView.printCoin(vendingMachine.getCoins().getMap());
+		OutputView.printCoin(vendingMachine.getCoinMap());
 		printBreak();
 
 		vendingMachine.initBeverages(InputController.getBeverageGroup());
@@ -34,7 +34,7 @@ public class MachineController {
 	}
 
 	private void activate() {
-		OutputView.printUserMoney(vendingMachine.getUserMoney().get());
+		OutputView.printUserMoney(vendingMachine.getUserMoneyInt());
 		String beverageNameInput = InputController.getBeverageName(vendingMachine);
 		printBreak();
 
@@ -45,10 +45,7 @@ public class MachineController {
 	}
 
 	private void giveChanges() {
-		OutputView.printUserMoney(vendingMachine.getUserMoney().get());
-
-		ChangesCoinGroup changes = new ChangesCoinGroup(vendingMachine);
-		changes.setRepeat();
-		OutputView.printChange(changes.getNotEmptyMap());
+		OutputView.printUserMoney(vendingMachine.getUserMoneyInt());
+		OutputView.printChange(new ChangesCoinGroup(vendingMachine).getNotEmptyIntegerMap());
 	}
 }

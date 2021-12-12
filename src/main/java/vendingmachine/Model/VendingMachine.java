@@ -1,5 +1,7 @@
 package vendingmachine.Model;
 
+import java.util.LinkedHashMap;
+
 public class VendingMachine {
 	private CoinGroup coins;
 	private BeverageGroup beverageGroup;
@@ -29,8 +31,16 @@ public class VendingMachine {
 		return userMoney;
 	}
 
+	public int getUserMoneyInt() {
+		return userMoney.get();
+	}
+
 	public int getMinPrice() {
 		return beverageGroup.getMinPrice();
+	}
+
+	public LinkedHashMap<Integer, Integer> getCoinMap() {
+		return coins.getIntegerMap();
 	}
 
 	public void sell(String name) {

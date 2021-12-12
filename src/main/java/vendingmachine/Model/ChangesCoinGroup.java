@@ -3,33 +3,34 @@ package vendingmachine.Model;
 import java.util.Arrays;
 
 public class ChangesCoinGroup extends CoinGroup {
-	private final CoinGroup machineCoins;
-	private int userMoney;
+	private final CoinGroup changeCoins;
+	private Money userMoney;
 
 	public ChangesCoinGroup(VendingMachine vendingMachine) {
 		super();
-		this.machineCoins = vendingMachine.getCoins();
-		this.userMoney = vendingMachine.getUserMoney().get();
+		this.changeCoins = vendingMachine.getCoins();
+		this.userMoney = vendingMachine.getUserMoney();
+		setAllCoins();
 	}
 
-	public void setRepeat() {
-		Arrays.stream(Coin.values()).forEach(this::set);
+	public void setAllCoins() {
+		Arrays.stream(Coin.values()).forEach(this::setThisValueCoins);
 	}
 
-	private void set(Coin coin) {
+	private void setThisValueCoins(Coin coin) {
 		if (isNoStockLimit(coin)) {
-			setOne(coin, machineCoins.getStock(coin));
+			moneyToCoin(coin, changeCoins.getStock(coin));
 			return;
 		}
-		setOne(coin, userMoney / coin.getAmount());
+		moneyToCoin(coin, userMoney.toCoinCount(coin.getAmount()));
 	}
 
 	private boolean isNoStockLimit(Coin coin) {
-		return (userMoney / coin.getAmount()) > machineCoins.getStock(coin);
+		return userMoney.toCoinCount(coin.getAmount()) > changeCoins.getStock(coin);
 	}
 
-	private void setOne(Coin coin, int coinCount) {
+	private void moneyToCoin(Coin coin, int coinCount) {
 		set(coin, coinCount);
-		userMoney -= coin.getAmount() * coinCount;
+		userMoney.setMinus(coin.getAmount() * coinCount);
 	}
 }

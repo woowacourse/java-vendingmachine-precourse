@@ -8,13 +8,11 @@ import vendingmachine.Utils.Validator.BeverageGroupValidator;
 public class BeverageGroup {
 	private static final int NO_PRICE = 0;
 
-	private final ArrayList<Beverage> beverages = new ArrayList<>();
+	private final ArrayList<Beverage> beverages;
 
 	public BeverageGroup(String input) {
 		validate(input);
-		for (String[] values : Converter.getBeverages(input)) {
-			beverages.add(new Beverage(values));
-		}
+		beverages = Converter.getBeverages(input);
 	}
 
 	private void validate(String input) {
