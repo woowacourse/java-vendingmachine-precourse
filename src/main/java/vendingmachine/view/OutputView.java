@@ -10,7 +10,6 @@ public class OutputView {
 	private static final String NOTICE_CHANGES = "잔돈";
 
 	public static void showInitialLeftCoins(Coins leftCoins) {
-		// TODO: 동전 출력 순서(map order)
 		System.out.println(NOTICE_INIT_LEFT_COINS);
 		Map<Coin, Integer> leftCoinMap = leftCoins.getCoins();
 		for (Coin coin : leftCoinMap.keySet()) {

@@ -4,9 +4,9 @@ import static vendingmachine.utils.ArithmeticValidator.*;
 import static vendingmachine.utils.StringValidator.*;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
+import java.util.TreeMap;
 
 import vendingmachine.utils.RandomCoinSelector;
 
@@ -44,18 +44,20 @@ public class Coins {
 	private static Map<Coin, Integer> generateCoinMapAccordingToRule(int totalAmount) {
 		Map<Coin, Integer> coinMap = initCoinMap();
 
-		while (totalAmount != 0) {
-			Coin coin = RandomCoinSelector.selectCoinCheaperThanOrEqualToValue(totalAmount);
+		int leftAmount = totalAmount;
+
+		while (leftAmount != 0) {
+			Coin coin = RandomCoinSelector.selectCoinCheaperThanOrEqualToValue(leftAmount);
 			coinMap.put(coin, coinMap.get(coin) + 1);
 
-			totalAmount -= coin.getAmount();
+			leftAmount -= coin.getAmount();
 		}
 
 		return coinMap;
 	}
 
 	private static Map<Coin, Integer> initCoinMap() {
-		Map<Coin, Integer> coinMap = new HashMap<>();
+		Map<Coin, Integer> coinMap = new TreeMap<>(new CoinMapComparator());
 		for (Coin coin : Coin.values()) {
 			coinMap.put(coin, 0);
 		}
