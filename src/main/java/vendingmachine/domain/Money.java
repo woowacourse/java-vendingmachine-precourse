@@ -34,7 +34,7 @@ public class Money {
     }
 
     private static void checkMoneyShareByLeastCoin(int money) {
-        if (money % 10 != EMPTY_MONEY) {
+        if (money % Coin.leastCoin() != EMPTY_MONEY) {
             throw new MoneyShareByLeastCoin();
         }
     }
