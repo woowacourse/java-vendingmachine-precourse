@@ -2,9 +2,8 @@ package vendingmachine.service;
 
 import static vendingmachine.service.exception.InputExceptionService.*;
 
-import com.sun.tools.internal.xjc.reader.xmlschema.bindinfo.BIConversion;
-
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Catalog;
 import vendingmachine.domain.UserAccount;
 import vendingmachine.view.exception.ErrorMessage;
 
@@ -25,7 +24,7 @@ public class UserAccountService {
 			int userAccount = parseToInt(input);
 			checkModTen(userAccount);
 			checkZeroOrPositiveInt(userAccount);
-			new UserAccount(userAccount);
+			UserAccount.setUserAccount(userAccount);
 			return true;
 		} catch (IllegalArgumentException e) {
 			ErrorMessage.print(e.getMessage());

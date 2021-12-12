@@ -11,4 +11,26 @@ public class CatalogRepository {
 	public static void join(Catalog catalog) {
 		catalogList.add(catalog);
 	}
+
+	public static List<Catalog> getCatalogs() {
+		return catalogList;
+	}
+
+	public static Catalog getCatalogByName(String catalogName) {
+		Catalog temporaryCatalog = new Catalog(catalogName, 0, 0);
+		for (Catalog catalog : catalogList) {
+			if (catalog.equals(temporaryCatalog)) {
+				return catalog;
+			}
+		}
+		return null;
+	}
+
+	public static void reduceAmount(Catalog catalogToPurchase) {
+
+		Catalog catalog = getCatalogByName(catalogToPurchase.getName());
+		if (catalog != null) {
+			catalog.purchase();
+		}
+	}
 }

@@ -13,6 +13,18 @@ public class Catalog {
 		this.amount = amount;
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public int getAmount() {
+		return this.amount;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -25,8 +37,7 @@ public class Catalog {
 		return Objects.equals(name, catalog.name);
 	}
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(name);
+	public void purchase() {
+		this.amount--;
 	}
 }

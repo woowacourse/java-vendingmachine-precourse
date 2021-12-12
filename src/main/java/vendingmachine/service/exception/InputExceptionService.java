@@ -9,10 +9,9 @@ public class InputExceptionService {
 	private static final String NOT_MONEY_ERROR_MESSAGE = "돈을 입력하려면 10으로 나누어 떨어지는 0 이상의 정수여야 합니다.";
 	private static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "0 이상의 정수여야 합니다.";
 	private static final String NOT_INTEGER_ERROR_MESSAGE = "정수로 입력 받아야 할 특정 값을 정수로 변환하는 데 실패했습니다.";
-	private static final String NOT_BRACED_ERROR_MESSAGE = "각 상품은 [ ] 로 감싸져야 합니다.";
 	private static final String BLANK_STRING_ERROR_MESSAGE = "빈 입력이 포함되었는지 확인하십시오.";
-	private static final String CATALOG_SIZE_ERROR_MESSAGE = "각 상품은 [상품명,가격,수량] 형식으로 입력되어야 하고, 각 상품은 ';' 로 구분되어야 합니다.";
-	private static final int CATALOG_SIZE = 3;
+	private static final String CATALOG_INPUT_ERROR_MESSAGE = "각 상품은 [상품명,가격,수량] 형식으로 입력되어야 하고, 각 상품은 ';' 로 구분되어야 합니다.";
+	private static final int NUMBER_OF_CATALOG_MEMBER_VARIABLES = 3;
 	private static final String CATALOG_DUPLICATE_ERROR_MESSAGE = "중복되는 상품명이 포함되어 있습니다.";
 	private static final int CATALOG_MINIMUM_PRICE = 100;
 	private static final String CATALOG_MINIMUM_PRICE_ERROR_MESSAGE = "상품 가격은 최소 100원 이상이어야 합니다";
@@ -39,7 +38,7 @@ public class InputExceptionService {
 
 	public static void checkBraced(String input) {
 		if (!input.startsWith("[") || !input.endsWith("]")) {
-			throw new IllegalArgumentException(NOT_BRACED_ERROR_MESSAGE);
+			throw new IllegalArgumentException(CATALOG_INPUT_ERROR_MESSAGE);
 		}
 	}
 
@@ -50,8 +49,8 @@ public class InputExceptionService {
 	}
 
 	public static void checkCatalogSize(int size) {
-		if (size != CATALOG_SIZE) {
-			throw new IllegalArgumentException(CATALOG_SIZE_ERROR_MESSAGE);
+		if (size != NUMBER_OF_CATALOG_MEMBER_VARIABLES) {
+			throw new IllegalArgumentException(CATALOG_INPUT_ERROR_MESSAGE);
 		}
 	}
 
@@ -62,7 +61,7 @@ public class InputExceptionService {
 	}
 
 	public static void checkMinimumPrice(int price) {
-		if(price <CATALOG_MINIMUM_PRICE ){
+		if (price < CATALOG_MINIMUM_PRICE) {
 			throw new IllegalArgumentException(CATALOG_MINIMUM_PRICE_ERROR_MESSAGE);
 		}
 	}
