@@ -1,7 +1,6 @@
 package vendingmachine;
 
 public class Product {
-    private static final String ERROR_NOT_STOCK = "상품의 재고가 없습니다.";
     private String name;
     private int price;
     private int amount;
@@ -13,9 +12,6 @@ public class Product {
     }
 
     public int sell() {
-        if (this.amount <= 0) {
-            throw new IllegalArgumentException(ERROR_NOT_STOCK);
-        }
         amount--;
         return this.price;
     }

@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class Validator {
     private static final String ERROR_NOT_ALLOW_UNITS = "1원 단위는 허용되지 않습니다.";
+    private static final String ERROR_NOT_STOCK_FOR_SALE = "상품의 재고가 없습니다.";
     private static final String ERROR_GREATER_THAN_ZERO = "0 이하의 숫자를 입력할 수 없습니다.";
     private static final String ERROR_ONLY_INTEGER = "금액은 숫자만 입력 가능합니다.";
     private static final String ERROR_MESSAGE_PRICE_PREFIX = "상품 가격이 ";
@@ -22,6 +23,7 @@ public class Validator {
     private static final String PRODUCT_SPLIT_REGEX = ";";
     private static final String PRODUCT_INFO_SPLIT_REGEX = ",";
     private static final String STRING_SPLIT_REGEX = "";
+    private static final int PRODUCT_INFO_LENGTH = 3;
     private static final int HUNDRED = 100;
     private static final int TENS = 10;
 
@@ -78,7 +80,7 @@ public class Validator {
 
     public String[] validateProductInfoSplitRegex(String productInformation) {
         String[] splitProductInfo = productInformation.split(PRODUCT_INFO_SPLIT_REGEX);
-        if (splitProductInfo.length != 3) {
+        if (splitProductInfo.length != PRODUCT_INFO_LENGTH) {
             throw new IllegalArgumentException(ERROR_PERMIT_ONLY_RULE);
         }
         return splitProductInfo;
@@ -154,6 +156,12 @@ public class Validator {
             return integerAmount;
         } catch (IllegalArgumentException exception) {
             throw new IllegalArgumentException(ERROR_MESSAGE_AMOUNT_PREFIX + exception.getMessage());
+        }
+    }
+
+    public void validateProductStock(Product product) {
+        if (!product.existStock()) {
+            throw new IllegalArgumentException(ERROR_NOT_STOCK_FOR_SALE);
         }
     }
 }

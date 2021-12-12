@@ -52,6 +52,7 @@ public class ProductList extends LoopInput {
 
     public Product sellProduct(String product) {
         Product sellProduct = productMap.get(product);
+        validator.validateProductStock(sellProduct);
         sellProduct.sell();
         return sellProduct;
     }
