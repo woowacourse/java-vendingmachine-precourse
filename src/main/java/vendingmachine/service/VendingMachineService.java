@@ -11,30 +11,11 @@ public class VendingMachineService {
 	public VendingMachineView vendingMachineView;
 	public UserView userView;
 
-	public VendingMachineService(VendingMachine vendingMachine) {
+	public VendingMachineService(VendingMachine vendingMachine, UserView userView,
+		VendingMachineView vendingMachineView) {
 		this.vendingMachine = vendingMachine;
-		vendingMachineView = new VendingMachineView();
-		userView = new UserView();
-	}
-
-	public void setMenuList() {
-		boolean successSetMenuList = false;
-		vendingMachineView.askProductsInfo();
-
-		while (!successSetMenuList) {
-			successSetMenuList = setMenuListIfItIsRight();
-		}
-
-	}
-
-	public boolean setMenuListIfItIsRight() {
-		try {
-			vendingMachine.setMenu(userView.insertProductsInfo());
-		} catch (IllegalArgumentException e) {
-			System.out.println(ErrorMessage.ERROR + e.getMessage());
-			return false;
-		}
-		return true;
+		this.vendingMachineView = vendingMachineView;
+		this.userView = userView;
 	}
 
 	public void insertMoney() {

@@ -17,7 +17,7 @@ public class VendingMachineController {
 	public VendingMachineController(VendingMachine vendingMachine) {
 		vendingMachineView = new VendingMachineView();
 		userView = new UserView();
-		vendingMachineService = new VendingMachineService(vendingMachine);
+		vendingMachineService = new VendingMachineService(vendingMachine, userView, vendingMachineView);
 		settingCoinService = new SettingCoinService(vendingMachine, userView, vendingMachineView);
 		settingMenuService = new SettingMenuService(vendingMachine, userView, vendingMachineView);
 	}
