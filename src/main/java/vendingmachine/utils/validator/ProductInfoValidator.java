@@ -12,6 +12,7 @@ public class ProductInfoValidator {
 
     private static final String NVALID_FORMAT_ERROR_MESSAGE = "상품 정보 형식이 올바르지 않습니다. \"[상품명1, 상품 가격1, 상품 수량1];[상품명2, 상품 가격2, 상품 수량2]...\" 형식으로 입력해 주세요.";
     private static final String DROPPED_INFO_ERROR_MESSAGE = "누락된 정보가 있습니다. 상품명, 가격, 수량을 확인해 주세요.";
+    private static final String DROPPED_PRODUCT_NAME_ERROR_MESSAGE = "상품명이 입력되지 않았습니다.";
     private static final String INVALID_NAME_ERROR_MESSAGE = "상품명은 한글, 숫자, 영문으로만 이루어진 이름이어야 합니다.";
     private static final String INVALID_NUMBER_PRICE_ERROR_MESSAGE = "상품 가격은 반드시 10억 이하의 숫자여야 합니다.";
     private static final String LESS_THAN_100_PRICE_ERROR_MESSAGE = "상품 가격은 반드시 100원 이상이어야 합니다.";
@@ -82,9 +83,15 @@ public class ProductInfoValidator {
         return intStock;
     }
 
-    public static void validateIsNotDropped(final String input) {
+    private static void validateIsNotDropped(final String input) {
         if (input.length() == 0) {
             throw new IllegalArgumentException(DROPPED_INFO_ERROR_MESSAGE);
+        }
+    }
+
+    public static void validateProductNameDropped(final String input) {
+        if (input.length() == 0) {
+            throw new IllegalArgumentException(DROPPED_PRODUCT_NAME_ERROR_MESSAGE);
         }
     }
 }

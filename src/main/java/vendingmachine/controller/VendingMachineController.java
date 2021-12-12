@@ -63,8 +63,8 @@ public class VendingMachineController {
     private String typeProductToBuy() {
         try {
             String productToBuy = InputView.inputProductToBuy();
-            ProductInfoValidator.validateIsNotDropped(productToBuy);
-            ProductInfoValidator.getValidProductList(productToBuy);
+            ProductInfoValidator.validateName(productToBuy);
+            ProductInfoValidator.validateProductNameDropped(productToBuy);
             return productToBuy;
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
