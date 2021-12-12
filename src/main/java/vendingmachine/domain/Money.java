@@ -15,11 +15,7 @@ public class Money {
 		return money;
 	}
 
-	public int decideCoinCount(int money, Coin coinValue) {
-		int coinCount = 0;
-		if (coinValue.getAmount() <= money) {
-			coinCount = money / coinValue.getAmount();
-		}
-		return coinCount;
+	public void deductMoney(Money minusMoney) {
+		money -= minusMoney.getMoney();
 	}
 }
