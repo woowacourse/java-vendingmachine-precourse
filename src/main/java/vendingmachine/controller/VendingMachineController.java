@@ -8,36 +8,32 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+	private VendingMachine vendingMachine;
+
 	public void init() {
-		String initialLeftMoney = InputView.getInitialLeftMoney();
 		try {
-			Coins leftCoins = Coins.generateCoinsRandomlyFromTotalAmount(initialLeftMoney);
-			OutputView.showInitialLeftCoins(leftCoins);
-
-			Menus menus = initMenus();
-
-			VendingMachine vendingMachine = new VendingMachine(leftCoins, menus);
-
-			String inputMoney = InputView.getMoney();
-			vendingMachine.putMoney(inputMoney);
-
-			while (true) {
-				showLeftMoney(vendingMachine);
-
-				if (vendingMachine.canBuy()) {
-					buyItem(vendingMachine);
-					continue;
-				}
-
-				Coins changes = vendingMachine.returnChanges();
-				OutputView.showChanges(changes);
-				break;
-			}
-
+			initVendingMachine();
+			buyItems();
+			returnChanges();
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			init();
 		}
+	}
+
+	private void initVendingMachine() {
+		Coins leftCoins = initCoins();
+		Menus menus = initMenus();
+		vendingMachine = new VendingMachine(leftCoins, menus);
+
+		putMoneyToVendingMachine();
+	}
+
+	private Coins initCoins() {
+		String initialLeftMoney = InputView.getInitialLeftMoney();
+		Coins leftCoins = Coins.generateCoinsRandomlyFromTotalAmount(initialLeftMoney);
+		OutputView.showInitialLeftCoins(leftCoins);
+		return leftCoins;
 	}
 
 	private Menus initMenus() {
@@ -50,18 +46,41 @@ public class VendingMachineController {
 		}
 	}
 
-	private void showLeftMoney(VendingMachine vendingMachine) {
+	private void putMoneyToVendingMachine() {
+		try {
+			String inputMoney = InputView.getMoney();
+			vendingMachine.putMoney(inputMoney);
+		} catch (Exception e) {
+			ErrorView.printErrorMesasge(e.getMessage());
+			putMoneyToVendingMachine();
+		}
+	}
+
+	private void buyItems() {
+		while (vendingMachine.canBuy()) {
+			showLeftMoney();
+			buyItem();
+		}
+	}
+
+	private void showLeftMoney() {
 		int leftInputMoney = vendingMachine.getInputMoney();
 		InputView.showLeftMoney(leftInputMoney);
 	}
 
-	private void buyItem(VendingMachine vendingMachine) {
+	private void buyItem() {
 		String menuToBuy = InputView.getMenuToBuy();
 		try {
 			vendingMachine.buy(menuToBuy);
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
-			buyItem(vendingMachine);
+			buyItem();
 		}
+	}
+
+	private void returnChanges() {
+		showLeftMoney();
+		Coins changes = vendingMachine.returnChanges();
+		OutputView.showChanges(changes);
 	}
 }
