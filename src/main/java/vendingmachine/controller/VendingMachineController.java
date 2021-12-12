@@ -9,8 +9,7 @@ public class VendingMachineController {
 	private final VendingMachine vendingMachine;
 
 	public VendingMachineController() {
-		OutputView.setVendingMachineMoney();
-		vendingMachine = new VendingMachine(InputView.readLineInt());
+		vendingMachine = new VendingMachine(InputView.readPositiveInt());
 		showVendingMachineCoins();
 	}
 
@@ -25,7 +24,7 @@ public class VendingMachineController {
 
 	public void buyProduct() {
 		OutputView.enterInputMoney();
-		int money = InputView.readLineInt();
+		int money = InputView.readPositiveInt();
 		while (checkCanBuyProduct(money)) {
 			OutputView.showRemainingMoney(money);
 			OutputView.enterWantProduct();
