@@ -3,6 +3,7 @@ package vendingmachine.domain;
 public class Money {
 
     private static final String INTEGER_REGEX = "[0-9]+";
+    private static final int EMPTY_MONEY = 0;
 
     private int money;
 
@@ -25,8 +26,12 @@ public class Money {
     }
 
     private static void checkMoneyShareByLeastCoin(int money) {
-        if (money % 10 != 0) {
+        if (money % 10 != EMPTY_MONEY) {
             throw new IllegalArgumentException("[ERROR] 금액은 10원으로 나누어떨어지는 금액만 입력할 수 있습니다.");
         }
+    }
+
+    public boolean isEmpty() {
+        return money == EMPTY_MONEY;
     }
 }
