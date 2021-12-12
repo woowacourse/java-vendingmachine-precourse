@@ -21,4 +21,10 @@ public class CommodityRepository {
               .findAny()
               .orElse(null);
     }
+    
+    public static void reduceQuantity(Commodity commodity) {
+        Commodity original =  commodity.clone();
+        commodity.subtractQuantity();
+        commodities.set(commodities.indexOf(original), commodity);
+    }
 }
