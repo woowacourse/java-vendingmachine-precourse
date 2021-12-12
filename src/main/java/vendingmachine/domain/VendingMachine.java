@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -17,6 +18,20 @@ public class VendingMachine {
     public VendingMachine() {
         int totalMoney = InputView.getVendingMachineTotalMoneyInput();
         this.initializeCoins(totalMoney);
+        OutputView.printCoinsInfo(this.coins);
+        this.setMerchandiseInfo(InputView.getMerchandiseInput());
+        this.setMoneyLeft(InputView.getCustomerMoneyInput());
+    }
+
+    public void run() {
+        while (true) {
+            OutputView.printMoneyLeft(this.getMoneyLeft());
+
+            if (!this.canBuyMore()) break;
+            this.sellMerchandise();
+        }
+
+        OutputView.printCoinChanges(this.calculateCoinChanges());
     }
 
     private void initializeCoins(int totalMoney) {
@@ -37,23 +52,19 @@ public class VendingMachine {
         }
     }
 
-    public HashMap<Coin, Integer> getCoins() {
-        return this.coins;
-    }
-
-    public void setMerchandiseInfo(HashMap<String, List<Integer>> merchandiseInfo) {
+    private void setMerchandiseInfo(HashMap<String, List<Integer>> merchandiseInfo) {
         this.merchandiseInfo = merchandiseInfo;
     }
 
-    public int getMoneyLeft() {
+    private int getMoneyLeft() {
         return this.moneyLeft;
     }
 
-    public void setMoneyLeft(int moneyInput) {
+    private void setMoneyLeft(int moneyInput) {
         this.moneyLeft = moneyInput;
     }
 
-    public void sellMerchandise() {
+    private void sellMerchandise() {
         String name = InputView.getMerchandiseNameInput();
 
         List<Integer> info = merchandiseInfo.get(name);
@@ -65,7 +76,7 @@ public class VendingMachine {
         merchandiseInfo.put(name, Arrays.asList(price, number-1));
     }
 
-    public boolean canBuyMore() {
+    private boolean canBuyMore() {
         boolean isEnoughMoney = false;
         for (List<Integer> info : merchandiseInfo.values()) {
             int price = info.get(0);
@@ -79,7 +90,7 @@ public class VendingMachine {
         return isEnoughMoney;
     }
 
-    public HashMap<Coin, Integer> calculateCoinChanges() {
+    private HashMap<Coin, Integer> calculateCoinChanges() {
         HashMap<Coin, Integer> coinChanges = new HashMap<>();
         for (Coin coin : Coin.getCoinsDesc()) {
             if (this.coins.get(coin) == 0) continue;
