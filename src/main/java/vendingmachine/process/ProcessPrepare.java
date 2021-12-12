@@ -15,4 +15,9 @@ public class ProcessPrepare {
     public static void checkHoldingAmount() {
         UserMoneyValidation.checkUserMoneyValidation(holdingAmount);
     }
+
+    public static int toIntegerHoldingAmount() {
+        return Integer.parseInt(holdingAmount);
+    }
+
 }
