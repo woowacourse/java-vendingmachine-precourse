@@ -24,7 +24,6 @@ public class VendingMachine {
 	private CustomerInput customerInput = new CustomerInput();
 	private MachineViewer viewer = new MachineViewer();
 	private List<CoinStock> coins = new ArrayList<>();
-	private List<Product> products = new ArrayList<>();
 	private int money = 0;
 
 	public void run() {
@@ -34,10 +33,10 @@ public class VendingMachine {
 
 	public void operate() {
 		setupChangeCoins();
-		viewer.showCoinBoxStatus(coins);
+		viewer.showCoins(coins);
 		Products products = new Products(setupSellingProducts());
 		setupMoney();
-		while (checkAnyProductRemain() && checkCanBuyCheapest()) {
+		while (products.anyAvailableRemain(money)) {
 			String customerInput = getCustomerInput();
 			if (customerInput.equals(END_OPTION)) {
 				break;
@@ -68,9 +67,10 @@ public class VendingMachine {
 	}
 
 	public List<Product> setupSellingProducts() {
+		List<Product> products = new ArrayList<>();
 		try {
 			List<String> productsInfo = machineInput.getProductsInfo();
-			makeProductsFromInfo(productsInfo);
+			products = makeProductsFromInfo(productsInfo);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setupSellingProducts();
@@ -87,15 +87,16 @@ public class VendingMachine {
 		}
 	}
 
-	private void makeProductsFromInfo(List<String> productsInfo) {
+	private List<Product> makeProductsFromInfo(List<String> productsInfo) {
 		ProductBuilder productBuilder = new ProductBuilder();
-		products = productsInfo.stream()
+		List<Product> products = productsInfo.stream()
 				.map(p -> productBuilder.makeProductFromInfo(p))
 				.collect(Collectors.toList());
-		checkNoDuplication();
+		checkNoDuplication(products);
+		return products;
 	}
 
-	private void checkNoDuplication() {
+	private void checkNoDuplication(List<Product> products) {
 		boolean duplicate = products.stream()
 				.map(Product::getName)
 				.distinct()
@@ -103,15 +104,5 @@ public class VendingMachine {
 		if (duplicate) {
 			throw new IllegalArgumentException(DUPLICATED_PRODUCT_NAME);
 		}
-	}
-
-	private boolean checkAnyProductRemain() {
-		return products.stream()
-				.anyMatch(p -> p.isStockRemain() == true);
-	}
-
-	private boolean checkCanBuyCheapest() {
-		return products.stream()
-				.anyMatch(p -> p.enoughMoneyToBuy(money));
 	}
 }
