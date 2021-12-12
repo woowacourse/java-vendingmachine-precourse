@@ -20,7 +20,7 @@ public class OutputView {
     public static void printCurrentOwnCoins(Map<Coin, Integer> coins) {
         System.out.println(PRINT_VENDING_MACHINE_OWN_COINS_MESSAGE);
         for (Coin coin : coins.keySet()) {
-            System.out.printf("%d원 - %d개\n", coin.amount(), coins.get(coin));
+            System.out.printf(PRINT_CHANGE_COIN_MESSAGE, coin.amount(), coins.get(coin));
         }
     }
 

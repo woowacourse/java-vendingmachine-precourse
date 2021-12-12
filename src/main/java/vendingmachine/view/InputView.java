@@ -22,6 +22,10 @@ public class InputView {
 
     private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
 
+    private static final String INPUT_FORMAT_ERROR_MESSAGE = "[ERROR] 정해진 입력방식이 아닙니다.";
+    private static final String INPUT_FORMAT_GUIDE_MESSAGE = "상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분해주세요.";
+    private static final String LINE_BREAK = "\n";
+
     private InputView() {
     }
 
@@ -62,8 +66,7 @@ public class InputView {
 
     private static void checkInputProductPattern(List<String> products) {
         if (isInputProductPatternMismatches(products)) {
-            throw new IllegalArgumentException("[ERROR] 정해진 입력방식이 아닙니다."
-                + "상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분해주세요.");
+            throw new IllegalArgumentException(INPUT_FORMAT_ERROR_MESSAGE + LINE_BREAK + INPUT_FORMAT_GUIDE_MESSAGE);
         }
     }
 
