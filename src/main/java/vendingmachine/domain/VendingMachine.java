@@ -48,7 +48,7 @@ public class VendingMachine {
 
     public void insertProducts(String products) {
         productList = new ProductList();
-        StringTokenizer stringTokenizer = new StringTokenizer(products, ";");
+        StringTokenizer stringTokenizer = new StringTokenizer(products, "[];");
         Validator.validateProductInformationIsNull(stringTokenizer);
 
         while(stringTokenizer.hasMoreTokens()) {
