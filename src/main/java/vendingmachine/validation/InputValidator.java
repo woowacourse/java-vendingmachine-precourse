@@ -3,7 +3,7 @@ package vendingmachine.validation;
 import vendingmachine.domain.Merchandise;
 
 public class InputValidator {
-	private static final String ERROR_MESSAGE = "[ERROR] ";
+	public static final String ERROR_MESSAGE = "[ERROR] ";
 	private static final String NOT_DIGIT_MESSAGE = "양수의 숫자가 아닌 문자는 입력할 수 없습니다.";
 	private static final String NOT_RANGE_MESSAGE = "10원 단위로 입력해주세요.";
 	private static final String NOT_MERCHANDISEFORM_MESSAGE
@@ -100,6 +100,16 @@ public class InputValidator {
 		if (payment.equals("0")) {
 			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_RANGE_MESSAGE);
 		}
+	}
+
+	public boolean isValidSelectedItem(String item) {
+		try {
+			validateMerchandiseName(item);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -16,4 +16,20 @@ public class Merchandise {
 		this.count = Integer.parseInt(elements[MERCHANDISE_COUNT_INDEX]);
 	}
 
+	public boolean isSameMerchandise(String name) {
+		return this.name.equals(name);
+	}
+
+	public boolean checkAbleToSell(int balance) {
+		if (balance < price || count <= 0) {
+			return false;
+		}
+		return true;
+	}
+
+	public int sell(int balance) {
+		count -= 1;
+		return balance - price;
+	}
+
 }

@@ -13,7 +13,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Machine {
 	private Map<Integer, Integer> coinCount = new HashMap<>();
 	private List<Merchandise> merchandiseList = new ArrayList<>();
-	private int payment;
+	private int balance;
 
 	public Machine() {
 		for (Integer i : Coin.getCoinList()) {
@@ -47,7 +47,33 @@ public class Machine {
 	}
 
 	public void setPayment(String payment) {
-		this.payment = Integer.parseInt(payment);
+		this.balance = Integer.parseInt(payment);
 	}
 
+	public int getCurrentBalance() {
+		return balance;
+	}
+
+	public boolean isExistItem(String item) {
+		for (Merchandise merchandise : merchandiseList) {
+			if (merchandise.isSameMerchandise(item)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void buyItem(String name) {
+		Merchandise item = findItem(name);
+		if (item.checkAbleToSell(balance)) {
+			balance = item.sell(balance);
+		}
+	}
+
+	private Merchandise findItem(String name) {
+		return merchandiseList.stream()
+			.filter(merchandise -> merchandise.isSameMerchandise(name))
+			.findAny()
+			.orElse(null);
+	}
 }

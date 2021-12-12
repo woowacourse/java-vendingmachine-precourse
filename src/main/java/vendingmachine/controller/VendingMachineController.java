@@ -2,12 +2,14 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Machine;
 import vendingmachine.validation.InputValidator;
+import vendingmachine.validation.MachineValidator;
 import vendingmachine.view.MachineView;
 
 public class VendingMachineController {
 	private final InputValidator validator = new InputValidator();
 	private final MachineView view = new MachineView();
 	private final Machine machine = new Machine();
+	private final MachineValidator machineValidator = new MachineValidator(machine);
 
 	public void settingMachineChanges() {
 		while (true) {
@@ -35,6 +37,17 @@ public class VendingMachineController {
 			String payment = view.inputPayment();
 			if (validator.isValidPayment(payment)) {
 				machine.setPayment(payment);
+				break;
+			}
+		}
+	}
+
+	public void chooseMerchandise() {
+		view.printCurrentBalance(machine.getCurrentBalance());
+		while (true) {
+			String item = view.inputMerchandiseToBuy();
+			if (validator.isValidSelectedItem(item) && machineValidator.isValidSelectedItem(item)) {
+				machine.buyItem(item);
 				break;
 			}
 		}
