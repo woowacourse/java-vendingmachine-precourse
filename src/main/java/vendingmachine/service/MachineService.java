@@ -20,4 +20,8 @@ public class MachineService {
 	public void addItems(Machine machine, Map<String, Item> items) {
 		machine.addItems(items);
 	}
+
+	public void purchase(Machine machine, String itemName) {
+		machine.purchase(itemName);
+	}
 }

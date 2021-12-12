@@ -29,4 +29,16 @@ public class Machine {
 			this.items.put(itemName, items.get(itemName));
 		}
 	}
+
+	public void purchase(String itemName) throws IllegalArgumentException {
+		Item item = items.get(itemName);
+		checkInputCoinAmount(item);
+		item.decreaseQuantity();
+	}
+
+	private void checkInputCoinAmount(Item item) {
+		if (inputCoinAmount < item.getPrice()) {
+			throw new IllegalArgumentException("[ERROR] 투입금액이 부족합니다.");
+		}
+	}
 }
