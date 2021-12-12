@@ -19,7 +19,7 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public static List<Integer> currentCoins() {
+    public static List<Integer> currentCoinAmounts() {
         return Arrays.stream(values())
             .map(coin -> coin.amount)
             .collect(Collectors.toList());
