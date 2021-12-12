@@ -34,4 +34,8 @@ public class Money {
     public boolean isEmpty() {
         return money == EMPTY_MONEY;
     }
+
+    public void cutOffByCoin(Coin coin) {
+        money -= coin.amount();
+    }
 }
