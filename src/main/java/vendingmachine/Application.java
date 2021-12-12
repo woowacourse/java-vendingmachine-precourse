@@ -8,6 +8,6 @@ public class Application {
 		CoinController coinController = new CoinController();
 		ProductController productController = new ProductController();
 		coinController.setVendingMachineCoinCounter();
-		productController.getProducts();
+		productController.setProducts();
 	}
 }

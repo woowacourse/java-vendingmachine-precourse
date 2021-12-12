@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.coin;
 
 import static vendingmachine.constant.OutputMessage.*;
 

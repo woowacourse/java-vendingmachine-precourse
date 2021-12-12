@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.coin;
 
 import static camp.nextstep.edu.missionutils.Randoms.*;
 import static vendingmachine.constant.SystemMessage.*;

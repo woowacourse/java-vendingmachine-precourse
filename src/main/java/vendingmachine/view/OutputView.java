@@ -2,7 +2,7 @@ package vendingmachine.view;
 
 import static vendingmachine.constant.OutputMessage.*;
 
-import vendingmachine.domain.CoinCounter;
+import vendingmachine.domain.coin.CoinCounter;
 
 public class OutputView {
 	public static void printCoinCounter(CoinCounter coinCounter) {

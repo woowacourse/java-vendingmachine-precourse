@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.coin;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -22,6 +22,11 @@ public enum Coin {
 		return allCointAmount.get(allCointAmount.size() - 1);
 	}
 
+	public static int getSecondBiggestCoinAmount() {
+		List<Integer> allCointAmount = getAllCoinAmount();
+		return allCointAmount.get(1);
+	}
+	
 	public static List<Integer> getAllCoinAmount() {
 		return Arrays.stream(Coin.values())
 			.map(coin -> coin.amount)

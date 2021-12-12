@@ -2,8 +2,8 @@ package vendingmachine.controller;
 
 import java.util.Map;
 
-import vendingmachine.domain.CoinCounter;
-import vendingmachine.domain.CoinService;
+import vendingmachine.domain.coin.CoinCounter;
+import vendingmachine.domain.coin.CoinService;
 import vendingmachine.validator.AmountValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
