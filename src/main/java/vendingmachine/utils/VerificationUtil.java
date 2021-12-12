@@ -2,6 +2,8 @@ package vendingmachine.utils;
 
 public class VerificationUtil {
 
+    private static final String REGEX = "^\\[[a-zA-Z가-힣]+,[1-9][0-9]+0,[1-9][0-9]*]$";
+
     private VerificationUtil() {
     }
 
