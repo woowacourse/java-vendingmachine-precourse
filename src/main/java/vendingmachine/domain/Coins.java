@@ -2,26 +2,27 @@ package vendingmachine.domain;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
-	public final List<Integer> coinsValueList = Arrays.asList(10, 50, 100, 500);
+	public final List<Integer> coinsValueList = Arrays.asList(500, 100, 50, 10);
 
-	public HashMap<Coin, Integer> coins;
+	private static LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
 	public int holdingMoney = 0;
 
 	public Coins(int holdingMoney) {
-		coins = initializeCoins();
 		this.holdingMoney = holdingMoney;
+		coins = initializeCoins();
 	}
 
-	public HashMap<Coin, Integer> initializeCoins() {
-		coins.put(Coin.COIN_10, 0);
-		coins.put(Coin.COIN_50, 0);
-		coins.put(Coin.COIN_100, 0);
+	public LinkedHashMap<Coin, Integer> initializeCoins() {
 		coins.put(Coin.COIN_500, 0);
+		coins.put(Coin.COIN_100, 0);
+		coins.put(Coin.COIN_50, 0);
+		coins.put(Coin.COIN_10, 0);
 		generateCoins(holdingMoney);
 		return coins;
 	}
@@ -39,5 +40,9 @@ public class Coins {
 	public Coin pickRandomCoinValue() {
 		int amount = Randoms.pickNumberInList(coinsValueList);
 		return Coin.valueOf(amount);
+	}
+
+	public static LinkedHashMap<Coin, Integer> getCoins() {
+		return coins;
 	}
 }

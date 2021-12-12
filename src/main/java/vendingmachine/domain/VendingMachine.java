@@ -3,7 +3,6 @@ package vendingmachine.domain;
 import java.util.HashMap;
 
 import vendingmachine.VendingMachineController;
-import vendingmachine.view.InputView;
 
 public class VendingMachine {
 
@@ -21,8 +20,6 @@ public class VendingMachine {
 
 	public void getCoins(){
 		Coins coins = new Coins(holdingMoney);
-		this.holdingCoins = coins.coins;
+		this.holdingCoins = coins.getCoins();
 	}
-
-
 }

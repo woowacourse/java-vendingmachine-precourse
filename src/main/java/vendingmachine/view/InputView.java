@@ -13,11 +13,12 @@ public class InputView {
 		int holdingMoney = 0;
 
 		do{
-			System.out.println(Message.ASK_HOLDING_MONEY);
+			System.out.println(Message.ASK_HOLDING_MONEY_MESSAGE);
 			stringHoldingMoney = Console.readLine();
 		} while(!isRightHoldingMoney(stringHoldingMoney));
 
 		holdingMoney = Integer.parseInt(stringHoldingMoney);
+		System.out.println();
 		return holdingMoney;
 	}
 
