@@ -10,4 +10,8 @@ public class User {
 	public void decreasePayMoney(int value) {
 		this.payMoney -= value;
 	}
+
+	public int getPayMoney() {
+		return this.payMoney;
+	}
 }
