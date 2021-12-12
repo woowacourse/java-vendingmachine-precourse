@@ -20,7 +20,6 @@ public class ProductsInfoValidation {
 
     public static void verifyEachRegex(String eachProduct, ThrowIllegalSupplier validator) {
         if(RegexSeparator.isNotValid(eachProduct)) {
-            System.out.println("in");
             acceptThrow(() -> validator.get());
         }
     }
@@ -41,7 +40,6 @@ public class ProductsInfoValidation {
 
     private static void verifyDuplicate(String eachProduct, ThrowIllegalSupplier validator) {
         String productName = RegexSeparator.getNameFromProductInfo(eachProduct);
-        System.out.println(productName);
         if(productNameSet.contains(productName)) {
             acceptThrow(() -> validator.get());
         }
