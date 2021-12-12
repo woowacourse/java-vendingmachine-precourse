@@ -2,7 +2,6 @@ package vendingmachine;
 
 import inputcontroller.InputGenerator;
 
-//import static models.Product.totalRemains;
 import static vendingmachine.VendingMachineMain.*;
 
 public class Application {

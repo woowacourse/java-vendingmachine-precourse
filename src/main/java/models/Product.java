@@ -15,7 +15,6 @@ public class Product {
 
     public void provide() {
         this.remains--;
-        //totalRemains--;
         userInputMoney -= this.price;
     }
 
