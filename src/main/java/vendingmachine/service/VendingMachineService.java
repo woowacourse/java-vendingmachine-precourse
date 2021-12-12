@@ -52,8 +52,7 @@ public class VendingMachineService {
     }
 
     public int buyProduct(int amount, String name){
-        Product product = vendingMachine.findByName(name);
-        return vendingMachine.buy(amount,product);
+        return vendingMachine.buy(amount, name);
     }
 
     private int[] makeChangeCoinList(int[] vendingMachineCoins, int balance){

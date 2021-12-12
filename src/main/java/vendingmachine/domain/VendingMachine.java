@@ -22,25 +22,6 @@ public class VendingMachine {
         this.products = setProducts(productList);
     }
 
-
-
-    public Product findByName(String name){
-        return products.stream()
-                .filter(product -> name.equals(product.getName()))
-                .findAny()
-                .orElseThrow(()->new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT));
-    }
-
-    public int buy(int balance, Product product){
-        this.balance = balance;
-        if(this.balance - product.getPrice() < 0){
-            throw new IllegalArgumentException(Message.IS_OVER_BALANCE);
-        }
-        this.balance -= product.getPrice();
-        product.subQuantity();
-        return this.balance;
-    }
-
     private List<Integer> setCoins(int[] coinList){
         return Arrays.stream(coinList)
                 .boxed()
@@ -59,6 +40,18 @@ public class VendingMachine {
         return products;
     }
 
+    public int buy(int balance,String name){
+        Product product = findByName(name);
+        this.balance = balance;
+        if(this.balance - product.getPrice() < 0){
+            throw new IllegalArgumentException(Message.IS_OVER_BALANCE);
+        }
+        this.balance -= product.getPrice();
+        product.subQuantity();
+        return this.balance;
+    }
+
+
     public boolean isBalanceBigger(int balance){
         if(balance > this.change){
             return true;
@@ -70,6 +63,25 @@ public class VendingMachine {
        return this.coins.stream()
                .mapToInt(i->i)
                .toArray();
+    }
+
+
+    public boolean availableCheck(int balance){
+        int minPrice = findMinPrice();
+        if(balance < minPrice){
+            return false;
+        }
+
+        if(isZeroQuantity(findByPrice(minPrice))){
+            return false;
+        }
+
+        List<Integer> quantities = findAllQuantity();
+        if(quantities.stream().mapToInt(Integer::intValue).sum() == 0){
+            return false;
+        }
+
+        return true;
     }
 
     public Product findByPrice(int price){
@@ -92,22 +104,12 @@ public class VendingMachine {
                 .collect(Collectors.toList());
     }
 
-    public boolean availableCheck(int balance){
-        int minPrice = findMinPrice();
-        if(balance < minPrice){
-            return false;
-        }
-
-        if(isZeroQuantity(findByPrice(minPrice))){
-            return false;
-        }
-
-        List<Integer> quantities = findAllQuantity();
-        if(quantities.stream().mapToInt(Integer::intValue).sum() == 0){
-            return false;
-        }
-
-        return true;
+    private Product findByName(String name){
+        return products.stream()
+                .filter(product -> name.equals(product.getName()))
+                .findAny()
+                .orElseThrow(()->new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT));
     }
+
 
 }
