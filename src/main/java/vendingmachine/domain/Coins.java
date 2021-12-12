@@ -4,17 +4,16 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.view.Input;
 
 public class Coins {
 	private final Map<Coin, Integer> coins = new TreeMap<>();
 	private int moneyInMachine;
 
-	public Coins() {
+	public Coins(int moneyInMachine) {
 		for (Coin coin : Coin.values()){
 			coins.put(coin, 0);
 		}
-		moneyInMachine = Input.getMoneyInMachine();
+		this.moneyInMachine = moneyInMachine;
 	}
 
 	public void makeRandomNumberOfCoins() {
