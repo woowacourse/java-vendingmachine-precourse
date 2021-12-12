@@ -45,6 +45,7 @@ public class Validator {
                     .toArray(String[]::new);
             validateProductContainThreeElements(elements);
             validateProductPriceAndQuantityIsPositiveNumber(elements[1], elements[2]);
+            validateProductPrice(Integer.parseInt(elements[1]));
         }
     }
 
@@ -63,6 +64,12 @@ public class Validator {
     private static void validateProductPriceAndQuantityIsPositiveNumber(String price, String quantity) throws IllegalArgumentException {
         if (!isPositiveNumber(price) || !isPositiveNumber(quantity)) {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_PRICE_QUANTITY_FORM_ERROR_STRING);
+        }
+    }
+
+    private static void validateProductPrice(int price) throws IllegalArgumentException {
+        if (price < 100 || price % 10 != 0) {
+            throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_PRICE_ERROR_STRING);
         }
     }
 }
