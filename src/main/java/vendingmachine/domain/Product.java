@@ -12,6 +12,7 @@ public class Product {
 
     public Product(String name, int price, int remainAmount) {
         checkPriceLargeThanStandardPrice(price);
+        checkPriceDivisableByLeastCoin(price);
         this.name = name;
         this.price = price;
         this.remainAmount = remainAmount;
@@ -20,6 +21,12 @@ public class Product {
     private static void checkPriceLargeThanStandardPrice(int price) {
         if (price < STANDARD_PRICE) {
             throw new IllegalArgumentException("[ERROR] 상품 가격은 100원 이상의 값이 들어와야 합니다.");
+        }
+    }
+
+    private static void checkPriceDivisableByLeastCoin(int price) {
+        if (price % Coin.leastCoin() != 0) {
+            throw new IllegalArgumentException("[ERROR] 상품 가격은 10원으로 나누어떠러져야 합니다.");
         }
     }
 
