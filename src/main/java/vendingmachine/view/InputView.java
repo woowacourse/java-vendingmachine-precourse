@@ -29,24 +29,37 @@ public class InputView {
 	}
 
 	public static ArrayList<Item> holdingItemsInput(){
-		ArrayList<Item> itemList = new ArrayList<Item>();
-		List<String> stringItemsList = new ArrayList<String>();
-		String [] eachValueOfProductArray = new String[3];
+		ArrayList<Item> itemList;
+		List<String> stringItemsList ;
 
 		System.out.println(Message.ASK_ADD_ITEMS_MESSAGE);
-		stringItemsList = Arrays.asList(Console.readLine().split(";"));
+		String [] itemStringList = Console.readLine().split(";");
 
-		for(int i = 0; i < stringItemsList.size(); i++){
-			stringItemsList.get(i).replace("[","");
-			stringItemsList.get(i).replace("]","");
+		stringItemsList = new ArrayList<String>(Arrays.asList(itemStringList));
+
+		removeBracket(stringItemsList);
+		itemList = generateItemList(stringItemsList);
+		for (int i = 0 ; i<itemList.size(); i++){
+			System.out.println(itemList.get(i).getName());
+			System.out.println(itemList.get(i).getPrice());
+			System.out.println(itemList.get(i).getStock());
 		}
-
-		generateItemList(itemList, stringItemsList);
 		return itemList;
 	}
 
-	private static void generateItemList(ArrayList<Item> itemList, List<String> stringItemsList) {
+	private static void removeBracket(List<String> stringItemsList) {
+		for(int i = 0; i < stringItemsList.size(); i++){
+			String str= stringItemsList.get(i);
+			stringItemsList.remove(i);
+			str=str.replace("[","");
+			str=str.replace("]","");
+			stringItemsList.add(i,str);
+		}
+	}
+
+	private static ArrayList<Item> generateItemList(List<String> stringItemsList) {
 		String[] eachValueOfProductArray;
+		ArrayList<Item> itemArrayList = new ArrayList<Item>();
 		for(int i = 0; i < stringItemsList.size(); i++){
 			eachValueOfProductArray = stringItemsList.get(i).split(",");
 
@@ -55,8 +68,9 @@ public class InputView {
 			int stock = Integer.parseInt(eachValueOfProductArray[2]);
 
 			Item item = new Item(name, price, stock);
-			itemList.add(item);
+			itemArrayList.add(item);
 		}
+		return itemArrayList;
 	}
 
 	private static boolean isRightHoldingMoney(String stringHoldingMoney){
