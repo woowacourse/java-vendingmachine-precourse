@@ -23,6 +23,10 @@ public class Validator {
     }
 
     public static void validateProductInput(String[] tokens) throws IllegalArgumentException {
+        if (tokens.length < 3) {
+            throw new MyIllegalArgumentException("Invalid format of input");
+        }
+
         if (productSet.contains(tokens[0])) {
             throw new MyIllegalArgumentException(
                     String.format("Duplicated product [%s].", tokens[0])
