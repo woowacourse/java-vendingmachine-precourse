@@ -38,4 +38,8 @@ public class VendingMachine {
     public String remainMoney() {
         return String.format(Constant.REMAIN_MONEY, money);
     }
+
+    public boolean hasProduct(String name) {
+        return products.stream().anyMatch(p -> p.isSameNameWith(name));
+    }
 }

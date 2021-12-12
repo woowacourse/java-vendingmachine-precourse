@@ -26,5 +26,10 @@ public class Controller {
         }
         System.out.println(machine.remainMoney());
         String nameToBuy = input.requestBuyingProduct();
+
+        if (!machine.hasProduct(nameToBuy)) {
+            System.out.println(Constant.MACHINE_DONT_HAVE_PRODUCT_ERROR_STRING);
+            startBuying();
+        }
     }
 }

@@ -10,4 +10,8 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public boolean isSameNameWith(String name) {
+        return this.name.equals(name);
+    }
 }

@@ -14,4 +14,5 @@ public class Constant {
 
     public static final String REMAIN_MONEY = "투입 금액: %d원";
     public static final String BUYING_PRODUCT_INPUT_REQUEST_STRING = "구매할 상품명을 입력해 주세요.";
+    public static final String MACHINE_DONT_HAVE_PRODUCT_ERROR_STRING = "[ERROR] 존재하지 않는 상품입니다.";
 }
