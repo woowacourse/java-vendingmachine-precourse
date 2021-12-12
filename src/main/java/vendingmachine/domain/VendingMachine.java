@@ -10,20 +10,35 @@ import java.util.List;
 
 public class VendingMachine {
 
-    private final HashMap<Coin, Integer> coinCounter = new HashMap<>();
+    private final HashMap<Coin, Integer> coins = new HashMap<>();
     private HashMap<String, List<Integer>> merchandiseInfo;
     private int moneyLeft = 0;
 
     public VendingMachine() {
         int totalMoney = InputView.getVendingMachineTotalMoneyInput();
+        this.initializeCoins(totalMoney);
+    }
+
+    private void initializeCoins(int totalMoney) {
         for (Coin coin : Coin.values()) {
-            this.coinCounter.put(coin, 0);
+            this.coins.put(coin, 0);
         }
         generateCoins(totalMoney);
     }
 
+    private void generateCoins(int totalMoney) {
+        while (totalMoney > 0) {
+            int randomCoinAmount = Randoms.pickNumberInList(Coin.getCoinsAmountDesc());
+            if (totalMoney >= randomCoinAmount) {
+                Coin newCoin = Coin.getCoinByAmount(randomCoinAmount);
+                coins.put(newCoin, coins.get(newCoin) + 1);
+                totalMoney -= randomCoinAmount;
+            }
+        }
+    }
+
     public HashMap<Coin, Integer> getCoins() {
-        return this.coinCounter;
+        return this.coins;
     }
 
     public void setMerchandiseInfo(HashMap<String, List<Integer>> merchandiseInfo) {
@@ -67,27 +82,16 @@ public class VendingMachine {
     public HashMap<Coin, Integer> calculateCoinChanges() {
         HashMap<Coin, Integer> coinChanges = new HashMap<>();
         for (Coin coin : Coin.getCoinsDesc()) {
-            if (this.coinCounter.get(coin) == 0) continue;
+            if (this.coins.get(coin) == 0) continue;
             if (this.moneyLeft < coin.getAmount()) continue;
             int spentCoinNumber = this.moneyLeft/coin.getAmount();
-            if (spentCoinNumber > this.coinCounter.get(coin)) {
-                spentCoinNumber = this.coinCounter.get(coin);
+            if (spentCoinNumber > this.coins.get(coin)) {
+                spentCoinNumber = this.coins.get(coin);
             }
             coinChanges.put(coin, spentCoinNumber);
-            this.coinCounter.put(coin, this.coinCounter.get(coin)-spentCoinNumber);
+            this.coins.put(coin, this.coins.get(coin)-spentCoinNumber);
             this.moneyLeft -= coin.getAmount() * spentCoinNumber;
         }
         return coinChanges;
-    }
-
-    private void generateCoins(int totalMoney) {
-        while (totalMoney > 0) {
-            int randomCoinAmount = Randoms.pickNumberInList(Coin.getCoinsAmountDesc());
-            if (totalMoney >= randomCoinAmount) {
-                Coin newCoin = Coin.getCoinByAmount(randomCoinAmount);
-                coinCounter.put(newCoin, coinCounter.get(newCoin) + 1);
-                totalMoney -= randomCoinAmount;
-            }
-        }
     }
 }
