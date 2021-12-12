@@ -30,6 +30,10 @@ public class Commodity implements Cloneable {
         return quantity;
     }
     
+    public void subtractQuantity() {
+        quantity--;
+    }
+    
     @Override
     public Commodity clone() {
         Object obj = null;
