@@ -1,6 +1,9 @@
 package vendingmachine.view;
 
+import java.util.ArrayList;
+
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Product;
 import vendingmachine.validator.Validator;
 
 public class Input {
@@ -11,7 +14,16 @@ public class Input {
 		do {
 			System.out.println(MSG_GET_MONEY_IN_MACHINE);
 			moneyInVendingMachine = Console.readLine();
-		} while (Validator.checkMoneyInMachine(moneyInVendingMachine));
+		} while (Validator.isValidMoneyInMachine(moneyInVendingMachine));
 		return Integer.parseInt(moneyInVendingMachine);
+	}
+
+	public static String getProductsInfo() {
+		String productsInfo;
+		do {
+			System.out.println(MSG_GET_MONEY_IN_MACHINE);
+			productsInfo = Console.readLine();
+		} while (Validator.isValidProductsInfo(productsInfo));
+		return productsInfo;
 	}
 }
