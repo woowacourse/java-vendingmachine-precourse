@@ -35,7 +35,7 @@ public class MachineController {
 	}
 
 	private void activate() {
-		OutputView.printUserMoney(vendingMachine.getUserMoney());
+		OutputView.printUserMoney(vendingMachine.getUserMoney().get());
 		String beverageNameInput = InputController.getBeverageName(vendingMachine);
 		printBreak();
 
@@ -46,7 +46,7 @@ public class MachineController {
 	}
 
 	private void giveChanges() {
-		OutputView.printUserMoney(vendingMachine.getUserMoney());
+		OutputView.printUserMoney(vendingMachine.getUserMoney().get());
 
 		ChangesCoinGroup changesCoinGroup = new ChangesCoinGroup(vendingMachine);
 		changesCoinGroup.setRepeat();

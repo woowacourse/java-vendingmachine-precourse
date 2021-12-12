@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class VendingMachine {
 	private CoinGroup coins;
 	private final BeverageGroup beverageGroup = new BeverageGroup();
-	private int userMoney;
+	private Money userMoney;
 
 	public void initCoins(int money) {
 		coins = new CoinGroup(money);
@@ -18,7 +18,7 @@ public class VendingMachine {
 	}
 
 	public void initUserMoney(int money) {
-		userMoney = money;
+		userMoney = new Money(money);
 	}
 
 	public CoinGroup getCoins() {
@@ -30,19 +30,19 @@ public class VendingMachine {
 	}
 
 	public Beverage getBeverage(String name) {
-		return beverageGroup.getBeverages(name);
+		return beverageGroup.getBeverage(name);
 	}
 
-	public int getUserMoney() {
+	public Money getUserMoney() {
 		return userMoney;
 	}
 
 	public void sell(String name) {
-		userMoney -= beverageGroup.getBeverages(name).price;
-		beverageGroup.getBeverages(name).sell();
+		userMoney.setMinus(beverageGroup.getBeverage(name).price.get());
+		beverageGroup.getBeverage(name).sell();
 	}
 
 	public boolean isActivateEnd() {
-		return userMoney < beverageGroup.getMinPrice() || beverageGroup.isAllSoldOut();
+		return userMoney.get() < beverageGroup.getMinPrice() || beverageGroup.isAllSoldOut();
 	}
 }

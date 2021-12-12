@@ -20,7 +20,7 @@ public class BeverageGroup {
 
 	public int getMinPrice() {
 		return beverages.stream()
-			.mapToInt(beverage -> beverage.price)
+			.mapToInt(beverage -> beverage.price.get())
 			.min()
 			.orElse(NO_PRICE);
 	}

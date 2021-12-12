@@ -9,7 +9,7 @@ public class ChangesCoinGroup extends CoinGroup {
 	public ChangesCoinGroup(VendingMachine vendingMachine) {
 		super();
 		this.machineCoins = vendingMachine.getCoins();
-		this.userMoney = vendingMachine.getUserMoney();
+		this.userMoney = vendingMachine.getUserMoney().get();
 	}
 
 	public void setRepeat() {

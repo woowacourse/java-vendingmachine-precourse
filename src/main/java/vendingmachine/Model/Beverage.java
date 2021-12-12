@@ -2,12 +2,12 @@ package vendingmachine.Model;
 
 public class Beverage {
 	public final String name;
-	public final int price;
+	public final Money price;
 	private int stock;
 
 	public Beverage(Object[] values) {
 		name = (String)values[0];
-		price = (int)values[1];
+		price = new Money((int)values[1]);
 		this.stock = (int)values[2];
 	}
 
