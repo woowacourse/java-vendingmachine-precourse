@@ -19,4 +19,10 @@ public class ProductList {
                 .anyMatch(product -> product.name.equals(name));
     }
 
+    public Product[] returnProductUsingName(String name) {
+        return productList.stream()
+                .filter(product -> product.name.equals(name))
+                .toArray(Product[]::new);
+
+    }
 }
