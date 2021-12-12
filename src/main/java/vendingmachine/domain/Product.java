@@ -3,8 +3,8 @@ package vendingmachine.domain;
 import java.util.Objects;
 
 public class Product {
-	private String name;
-	private int cost;
+	private final String name;
+	private final int cost;
 
 	public Product(String name, int cost) {
 		this.name = name;
