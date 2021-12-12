@@ -12,4 +12,5 @@ public class Constant {
 	public static final String SEME_COLON = ";";
 	public static final int LENGTH_OF_ARRAY_SPLIT_BY_COMMA = 3;
 	public static final int MINIMUM_PRODUCT_PRICE = 100;
+	public static final String ENTER = "\n";
 }
