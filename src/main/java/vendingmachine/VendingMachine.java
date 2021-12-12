@@ -5,9 +5,9 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
-	
-	HashMap<Coin, Integer> coinMap =new HashMap<>();
 	int totalCoin;
+	HashMap<Coin, Integer> coinMap =new HashMap<>();
+	
 	
 
 	public VendingMachine(String cash) {
