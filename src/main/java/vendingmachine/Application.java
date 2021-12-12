@@ -13,5 +13,6 @@ public class Application {
 
         vendingMachine.insertCoins(coins);
         vendingMachine.registerProducts(input.requestMachineProduct());
+        input.requestUserMoney();
     }
 }

@@ -36,4 +36,21 @@ public class ValidatedInput {
         }
         return input;
     }
+
+    public int requestUserMoney() {
+        System.out.println(Constant.USER_MONEY_INPUT_REQUEST_STRING);
+        return readUserMoney();
+    }
+
+    private int readUserMoney() {
+        String input = Console.readLine();
+
+        try {
+            Validator.validateUserMoneyInput(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return readUserMoney();
+        }
+        return Integer.parseInt(input);
+    }
 }

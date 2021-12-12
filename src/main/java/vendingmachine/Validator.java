@@ -72,4 +72,9 @@ public class Validator {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_PRICE_ERROR_STRING);
         }
     }
+
+    public static void validateUserMoneyInput(String input) throws IllegalArgumentException {
+        validateInputIsPositiveNumber(input);
+        validateInputIsMultipleOf10(input);
+    }
 }
