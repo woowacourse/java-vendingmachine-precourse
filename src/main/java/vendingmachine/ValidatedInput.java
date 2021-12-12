@@ -20,19 +20,20 @@ public class ValidatedInput {
         return Integer.parseInt(input);
     }
 
-    public void requestMachineProduct() {
+    public String requestMachineProduct() {
         System.out.println(Constant.MACHINE_PRODUCT_INPUT_REQUEST_STRING);
-        readMachineProduct();
+        return readMachineProduct();
     }
 
-    private void readMachineProduct() {
+    private String readMachineProduct() {
         String input = Console.readLine();
 
         try {
             Validator.validateMachineProductInput(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            readMachineProduct();
+            return readMachineProduct();
         }
+        return input;
     }
 }

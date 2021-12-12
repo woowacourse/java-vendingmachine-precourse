@@ -9,6 +9,8 @@ public class Application {
         int machineMoney = input.requestMachineMoney();
         List<Coin> coins = Coin.generateCoinsBy(machineMoney);
         System.out.println(new CoinCollection(coins));
-        input.requestMachineProduct();
+
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.registerProducts(input.requestMachineProduct());
     }
 }
