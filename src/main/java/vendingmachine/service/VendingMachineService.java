@@ -10,9 +10,10 @@ import vendingmachine.utils.Validation;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
+
+import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 
 public class VendingMachineService {
 
@@ -35,21 +36,42 @@ public class VendingMachineService {
         this.vendingMachine = new VendingMachine(amount,coins,products);
     }
 
+
+
     private int[] makeRandomCoins(int amount){
-        int nowPrice = amount;
-        int[] coinList = new int[4];
-        while(nowPrice > 0){
-            for(Coin coin : Coin.values()) {
-                int quantity = coin.convertPriceToCoins(coin, nowPrice);
-                coinList[coin.ordinal()] += quantity;
-                nowPrice -= coin.calculateBalance(quantity);
-            }
+        List<Integer> randomCoinList = new ArrayList<>();
+        while (amount > 0) {
+            int coin = pickCoin(amount);
+            amount -= coin;
+            randomCoinList.add(coin);
         }
-        return coinList;
+
+        int[] countList = countFrequency(randomCoinList);
+
+        return countList;
     }
 
+    public int pickCoin(int amount){
+        List<Integer> possibleCoinList = new ArrayList<>();
+        for(Coin coin : Coin.values()){
+            if(amount > coin.getAmount()){
+                possibleCoinList.add(coin.getAmount());
+            }
+        }
+        int coin = pickNumberInList(possibleCoinList);
+        return coin;
+    }
 
-
+    
+    public int[] countFrequency(List<Integer> randomCoinList){
+        int[] frequencyList = new int[4];
+        int[] coinList = {500,100,50,10};
+        for(int i = 0; i < 4; i++){
+            frequencyList[i] = Collections.frequency(randomCoinList,coinList[i]);
+        }
+        return frequencyList;
+    }
+    
     public void start(){
         int balance = vendingMachineValidation.inputAmountValidation();
         while(true){
