@@ -6,11 +6,9 @@ import java.util.List;
 public class VendingMachine {
     private static VendingMachine instance = new VendingMachine();
     private static List<Product> products;
-    private static int inputAmount;
 
     private VendingMachine() {
         this.products = new ArrayList<>();
-        this.inputAmount = 0;
     }
 
     public static void addProduct(Product p) {
@@ -28,10 +26,6 @@ public class VendingMachine {
             }
         }
         return false;
-    }
-
-    public static void inputMoney(int amount) {
-        inputAmount += amount;
     }
 }
 
