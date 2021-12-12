@@ -32,5 +32,9 @@ public class Item {
 	public boolean isOverThisPrice(int money) {
 		return this.price > money;
 	}
+
+	public boolean isEqualThisPrice(int money) {
+		return this.price == money;
+	}
 }
 
