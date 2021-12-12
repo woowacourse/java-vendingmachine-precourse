@@ -6,6 +6,7 @@ import static vendingmachine.ErrorMessage.AMOUNT_UNIT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.CONTAINS_BLANK_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_COUNT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_DUPLICATE_ERROR_MESSAGE;
+import static vendingmachine.ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_PRICE_ERROR_MESSAGE;
 
 import java.util.List;
@@ -14,6 +15,7 @@ public class Validator {
 
     private final static int MINIMUM_PRICE_BOUND = 100;
     private final static int MINIMUM_COUNT_BOUND = 1;
+    private final static String PRODUCT_INFO_INPUT_FORMAT = "\\[[가-힣a-zA-Z0-9]+,\\d+,\\d+]";
     private final static String NEGATIVE_SIGN = "-";
     private final static String BLANK = " ";
 
@@ -26,6 +28,7 @@ public class Validator {
 
     public void validateProductInfosInput(String input) {
         checkContainsBlank(input);
+        checkProductInputFormat(input);
 
         Converter converter = new Converter();
         List<String> names = converter.convertToProductNames(input);
@@ -35,6 +38,14 @@ public class Validator {
         checkNames(names);
         checkPrices(prices);
         checkCounts(count);
+    }
+
+    public void checkProductInputFormat(String input) {
+        for (String productInfo : input.split(";")) {
+            if (!productInfo.matches(PRODUCT_INFO_INPUT_FORMAT)) {
+                throw new IllegalArgumentException(PRODUCT_INPUT_FORMAT_ERROR_MESSAGE.getMessage());
+            }
+        }
     }
 
     public void validateProductNameInput(String input) {
