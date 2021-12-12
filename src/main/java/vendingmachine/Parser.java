@@ -10,4 +10,8 @@ public class Parser {
         }
         return result;
     }
+
+    public String[] parseProduct(String input) {
+        return input.split(";");
+    }
 }
