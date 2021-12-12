@@ -33,7 +33,7 @@ class ProductTest {
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Product(name, price, remainAmount))
-            .withMessage("[ERROR] 상품 가격은 10원으로 나누어떠러져야 합니다.");
+            .withMessage("[ERROR] 상품 가격은 10원으로 나누어떨어져야 합니다.");
     }
 
     @Test
