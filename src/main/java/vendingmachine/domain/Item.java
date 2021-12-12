@@ -19,6 +19,10 @@ public class Item {
 		return price;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
 	public boolean isInStock() {
 		return this.amount > 0;
 	}
