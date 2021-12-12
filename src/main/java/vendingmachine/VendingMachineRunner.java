@@ -10,14 +10,18 @@ public class VendingMachineRunner implements Runnable {
 
     @Override
     public void run() {
-        VendingMachine vendingMachine = initializeVendingMachine(input.inputInteger());
+        VendingMachine vendingMachine = initializeVendingMachine();
         ConsolePrinter.print(vendingMachine.getCoins(), Message.VENDING_MACHINE_INFORMATION);
     }
 
-    private VendingMachine initializeVendingMachine(int money) {
+    private VendingMachine initializeVendingMachine() {
         while (true) {
-            System.out.println(Message.INPUT_VENDING_MACHINE_HOLDING_MONEY.getMessage());
-            return new VendingMachine(Coins.createRandomCoin(money));
+            try {
+                ConsolePrinter.print(Message.INPUT_VENDING_MACHINE_HOLDING_MONEY.getMessage());
+                return new VendingMachine(Coins.createRandomCoin(input.inputInteger()));
+            } catch (IllegalArgumentException exception) {
+                ConsolePrinter.print(exception.getMessage());
+            }
         }
     }
 }

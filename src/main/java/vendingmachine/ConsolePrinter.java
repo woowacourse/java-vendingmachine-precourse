@@ -14,4 +14,8 @@ public class ConsolePrinter {
             System.out.println(MessageFormat.format(VENDING_MACHINE_INFORMATION, coin.getAmount(), coinMap.get(coin)));
         }
     }
+
+    public static void print(String message) {
+        System.out.println(message);
+    }
 }
