@@ -14,7 +14,7 @@ public class Items {
         items.computeIfAbsent(itemToAdd, numberOfItem -> numberOfItemsToAdd);
     }
 
-    //테스틀르 위한 용도
+    //테스트를 위한 public
     public int countItems(Item item) {
         return items.getOrDefault(item, 0);
     }
@@ -25,7 +25,7 @@ public class Items {
     }
 
     public boolean isInStock(Item item) {
-        if(items.get(item) > 0) {
+        if(countItems(item) > 0) {
             return true;
         }
         return false;

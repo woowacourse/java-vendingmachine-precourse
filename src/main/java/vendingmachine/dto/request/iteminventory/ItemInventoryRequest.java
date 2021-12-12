@@ -44,6 +44,21 @@ public class ItemInventoryRequest {
         return itemInventoryInfo;
     }
 
+    private ItemInfo extractItemInfo(List<String> infoToAdd) {
+        ItemRequest itemRequest = new ItemRequest(infoToAdd.get(INDEX_OF_ITEM_NAME), infoToAdd.get(INDEX_OF_ITEM_PRICE));
+        return itemRequest.toItemInfo();
+    }
+
+    private int extractItemQuantity(List<String> infoToAdd) {
+        try {
+            int quantity = Integer.parseInt(infoToAdd.get(INDEX_OF_ITEM_QUANTITY));
+            validateItemQuantity(quantity);
+            return quantity;
+        } catch (IllegalArgumentException exception) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_QUANTITY_INPUT);
+        }
+    }
+
     private void validateInfoInBrackets() {
         if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) || input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
             throw new IllegalArgumentException();
@@ -59,21 +74,6 @@ public class ItemInventoryRequest {
     private void validateNumberOfInfo(List<String> dividedInfoValue) {
         if (dividedInfoValue.size() != NUMBER_OF_INFO_ITEM_INVENTORY_INPUT_TO_HAS) {
             throw new IllegalArgumentException();
-        }
-    }
-
-    private ItemInfo extractItemInfo(List<String> infoToAdd) {
-        ItemRequest itemRequest = new ItemRequest(infoToAdd.get(INDEX_OF_ITEM_NAME), infoToAdd.get(INDEX_OF_ITEM_PRICE));
-        return itemRequest.toItemInfo();
-    }
-
-    private int extractItemQuantity(List<String> infoToAdd) {
-        try {
-            int quantity = Integer.parseInt(infoToAdd.get(INDEX_OF_ITEM_QUANTITY));
-            validateItemQuantity(quantity);
-            return quantity;
-        } catch (IllegalArgumentException exception) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_QUANTITY_INPUT);
         }
     }
 

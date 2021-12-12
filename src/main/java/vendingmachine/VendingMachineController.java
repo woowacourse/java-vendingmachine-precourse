@@ -12,7 +12,7 @@ public class VendingMachineController {
         createCoinBalance();
         createItems();
         createAvailableMoney();
-        updateItems();
+        purchase();
         getChanges();
     }
     
@@ -28,13 +28,13 @@ public class VendingMachineController {
         vendingMachineService.insertMoney(console.inputAvailableMoney());
     }
 
-    private void updateItems() {
+    private void purchase() {
         while (vendingMachineService.isPurchaseAvailable()) {
             try {
-                console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
-                vendingMachineService.purchaseByItemName(console.inputItemsToPurchase());
+                showAvailableMoney();
+                purchaseByItemName();
             } catch (IllegalArgumentException error) {
-                console.printErrorMessage(error.getMessage());
+               showErrorMessage(error.getMessage());
             }
         }
     }
@@ -42,5 +42,17 @@ public class VendingMachineController {
     private void getChanges() {
         console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
         console.printChange(vendingMachineService.giveChange());
+    }
+
+    private void showAvailableMoney() {
+        console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
+    }
+
+    private void purchaseByItemName() {
+        vendingMachineService.purchaseByItemName(console.inputItemsToPurchase());
+    }
+
+    private void showErrorMessage(String errorMessage) {
+        console.printErrorMessage(errorMessage);
     }
 }

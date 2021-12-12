@@ -7,10 +7,9 @@ import vendingmachine.coin.Coin;
 
 public class Coins {
     private static final int initialNumberOfCoin = 0;
-    private Map<Coin, Integer> coins;
+    private final Map<Coin, Integer> coins = new HashMap<>();
 
     public Coins() {
-        this.coins = new HashMap<>();
         initialize();
     }
 

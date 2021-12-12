@@ -12,14 +12,7 @@ public class CoinExchangeMachine {
 
     public Coins changeIntoCoins(int amountToChange) {
         initialize(amountToChange);
-        while (isMoreThanOrEqualToMinAmountOfCoin(amount)) {
-            int pickedAmount = Randoms.pickNumberInList(amountsToPick);
-            if (pickedAmount > amount) {
-                amountsToPick.remove(new Integer(pickedAmount));
-                continue;
-            }
-            changeIntoCoin(pickedAmount);
-        }
+        changeIntoCoins();
         return coins;
     }
 
@@ -29,10 +22,15 @@ public class CoinExchangeMachine {
         amountsToPick = new ArrayList<>(Coin.getAllDenominations());
     }
 
-    private void changeIntoCoin(int pickedAmount) {
-        Coin coin = Coin.findByAmount(pickedAmount).get();
-        coins.add(coin);
-        amount -= coin.getAmount();
+    private void changeIntoCoins() {
+        while (isMoreThanOrEqualToMinAmountOfCoin(amount)) {
+            int pickedAmount = pickCoinAmountRandomly();
+            if (pickedAmount > amount) {
+                removeAmountFromListToPick(pickedAmount);
+                continue;
+            }
+            changeIntoCoin(pickedAmount);
+        }
     }
 
     private boolean isMoreThanOrEqualToMinAmountOfCoin(int amount) {
@@ -41,5 +39,19 @@ public class CoinExchangeMachine {
             return true;
         }
         return false;
+    }
+
+    private int pickCoinAmountRandomly() {
+        return Randoms.pickNumberInList(amountsToPick);
+    }
+
+    private void removeAmountFromListToPick(int pickedAmount) {
+        amountsToPick.remove(new Integer(pickedAmount));
+    }
+
+    private void changeIntoCoin(int pickedAmount) {
+        Coin coin = Coin.findByAmount(pickedAmount).get();
+        coins.add(coin);
+        amount -= coin.getAmount();
     }
 }

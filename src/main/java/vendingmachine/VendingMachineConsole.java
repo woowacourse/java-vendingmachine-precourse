@@ -60,6 +60,10 @@ public class VendingMachineConsole {
         System.out.println(REQUEST_MESSAGE_ABOUT_COIN_BALANCE);
     }
 
+    private String input() {
+        return Console.readLine();
+    }
+
     private void printItemInventoryInfoRequestMessage() {
         System.out.println();
         System.out.println(REQUEST_MESSAGE_ABOUT_ITEM_INVENTORY_INFO);
@@ -68,10 +72,6 @@ public class VendingMachineConsole {
     private void printAvailableMoneyRequestMessage() {
         System.out.println();
         System.out.println(REQUEST_MESSAGE_ABOUT_AVAILABLE_MONEY);
-    }
-
-    private String input() {
-        return Console.readLine();
     }
 
     private <T> T inputUntilSucceed(Supplier<T> input) {

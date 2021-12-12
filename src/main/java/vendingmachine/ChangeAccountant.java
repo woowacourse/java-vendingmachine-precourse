@@ -13,7 +13,7 @@ public class ChangeAccountant {
         this.amountToChange = amountToChange;
         this.coinBalance = coinBalance;
 
-        Coin.getAllKindsCoinFromLargestToSmallest().forEach(this::changeToEachCoin);
+        Coin.getAllKindsOfCoinFromLargestToSmallest().forEach(this::changeToEachCoin);
         return changes;
     }
 

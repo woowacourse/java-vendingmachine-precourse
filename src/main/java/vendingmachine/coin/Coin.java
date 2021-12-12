@@ -14,7 +14,7 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public static List<Coin> getAllKindsCoinFromLargestToSmallest() {
+    public static List<Coin> getAllKindsOfCoinFromLargestToSmallest() {
         return Arrays.asList(COIN_500, COIN_100, COIN_50, COIN_10);
     }
 
@@ -23,7 +23,7 @@ public enum Coin {
     }
 
     public static Optional<Coin> findByAmount(int amount) {
-        return Coin.getAllKindsCoinFromLargestToSmallest().stream()
+        return Coin.getAllKindsOfCoinFromLargestToSmallest().stream()
                 .filter(coin -> coin.amount == amount)
                 .findAny();
     }

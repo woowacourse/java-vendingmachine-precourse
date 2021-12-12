@@ -21,30 +21,43 @@ public class CoinsResponse {
     }
 
     public String convertCoinBalanceToPrint() {
-        for(Coin coin: Coin.getAllKindsCoinFromLargestToSmallest()) {
-            response.add(writeEachCoinResult(coin, coins.count(coin)));
-        }
-        return String.join(NEW_LINE, response);
+        return convertToPrint(numberOfCoin -> true);
     }
 
     public String convertChangeToPrint() {
-        for(Coin coin: Coin.getAllKindsCoinFromLargestToSmallest()) {
-            int count = coins.count(coin);
-            int numberOfNoCoin = 0;
-            if(count > numberOfNoCoin) {
-                response.add(writeEachCoinResult(coin, coins.count(coin)));
-            }
+        int numberOfNoCoin = 0;
+        return convertToPrint(numberOfCoin -> numberOfCoin > numberOfNoCoin);
+    }
+
+    private String convertToPrint(CoinConditionToIncludeInPrinting condition) {
+        for (Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
+           convertToPrintByUnit(coinUnit, condition);
         }
         return String.join(NEW_LINE, response);
     }
 
-    private StringBuilder writeEachCoinResult(Coin coin, int numberOfCoin) {
+    private void convertToPrintByUnit(Coin coinUnit, CoinConditionToIncludeInPrinting condition) {
+        int count = coins.count(coinUnit);
+        if (condition.test(count)) {
+            convertToPrintByUnit(coinUnit, count);
+        }
+    }
+
+    private void convertToPrintByUnit(Coin coinUnit, int count) {
+        response.add(writeResponse(coinUnit, count));
+    }
+
+    private StringBuilder writeResponse(Coin coinUnit, int count) {
         StringBuilder coinResult = new StringBuilder();
-        coinResult.append(coin.getAmount());
+        coinResult.append(coinUnit.getAmount());
         coinResult.append(MONETARY_UNIT_OF_KOREA);
         coinResult.append(DELIMITER);
-        coinResult.append(numberOfCoin);
+        coinResult.append(count);
         coinResult.append(UNIT_OF_NUMBER_OF_COIN);
         return coinResult;
+    }
+
+    interface CoinConditionToIncludeInPrinting {
+        boolean test(int numberOfCoin);
     }
 }
