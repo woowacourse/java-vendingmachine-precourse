@@ -16,4 +16,8 @@ public class VendingMachine {
     public Map<Coin, Integer> currentRemainCoins() {
         return coins.currentRemainCoins();
     }
+
+    public void chargeMoney(String money) {
+        remainMoney.chargeMoney(money);
+    }
 }
