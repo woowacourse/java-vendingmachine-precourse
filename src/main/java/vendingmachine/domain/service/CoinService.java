@@ -8,6 +8,7 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.repository.CoinRepository;
+import vendingmachine.util.PublicConst;
 
 public class CoinService {
 	private static final int ADD_COIN_COUNT = 1;
@@ -57,14 +58,14 @@ public class CoinService {
 		for (Coin coin : coins.keySet()) {
 			int coinCount = coins.get(coin);
 
-			if (coinCount == 0)
+			if (coinCount == PublicConst.NOT_EXIST || coin.getAmount() > money)
 				continue;
 
 			int changeCount = Math.min(coinCount, money / coin.getAmount());
 			changes.put(coin, changeCount);
 			money -= coin.getAmount() * changeCount;
 
-			if (money == 0)
+			if (money == PublicConst.NOT_EXIST)
 				break;
 		}
 	}

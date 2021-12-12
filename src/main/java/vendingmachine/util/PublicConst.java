@@ -9,4 +9,5 @@ public class PublicConst {
 	public static final String COIN_DELIMITER = " - ";
 	public static final String COUNT_LITERAL = "개";
 	public static final int ITEM_AMOUNT_MIN = 1;
+	public static final int NOT_EXIST = 0;
 }
