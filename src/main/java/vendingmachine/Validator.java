@@ -4,7 +4,7 @@ import static vendingmachine.ErrorMessage.AMOUNT_FORMAT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.AMOUNT_NEGATIVE_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.AMOUNT_UNIT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.CONTAINS_BLANK_ERROR_MESSAGE;
-import static vendingmachine.ErrorMessage.PRODUCT_COUNT_ERROR_MESSAGE;
+import static vendingmachine.ErrorMessage.PRODUCT_QUANTITY_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_DUPLICATE_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_PRICE_ERROR_MESSAGE;
@@ -14,7 +14,7 @@ import java.util.List;
 public class Validator {
 
     private final static int MINIMUM_PRICE_BOUND = 100;
-    private final static int MINIMUM_COUNT_BOUND = 1;
+    private final static int MINIMUM_QUANTITY_BOUND = 1;
     private final static String PRODUCT_INFO_INPUT_FORMAT = "\\[[가-힣a-zA-Z0-9]+,\\d+,\\d+]";
     private final static String NEGATIVE_SIGN = "-";
     private final static String BLANK = " ";
@@ -33,11 +33,11 @@ public class Validator {
         Converter converter = new Converter();
         List<String> names = converter.convertToProductNames(input);
         List<String> prices = converter.convertToProductPrices(input);
-        List<String> count = converter.convertToProductCounts(input);
+        List<String> quantities = converter.convertToProductQuantities(input);
 
         checkNames(names);
         checkPrices(prices);
-        checkCounts(count);
+        checkQuantities(quantities);
     }
 
     public void checkProductInputFormat(String input) {
@@ -65,11 +65,11 @@ public class Validator {
         }
     }
 
-    private void checkCounts(List<String> counts) {
-        for (String count : counts) {
-            checkPositiveNumber(count);
-            checkNumberFormat(count);
-            checkMoreThanMinimumCount(count);
+    private void checkQuantities(List<String> quantities) {
+        for (String quantity : quantities) {
+            checkPositiveNumber(quantity);
+            checkNumberFormat(quantity);
+            checkMoreThanMinimumQuantity(quantity);
         }
     }
 
@@ -115,9 +115,9 @@ public class Validator {
         }
     }
 
-    private void checkMoreThanMinimumCount(String input) {
-        if (Integer.parseInt(input) < MINIMUM_COUNT_BOUND) {
-            throw new IllegalArgumentException(PRODUCT_COUNT_ERROR_MESSAGE.getMessage());
+    private void checkMoreThanMinimumQuantity(String input) {
+        if (Integer.parseInt(input) < MINIMUM_QUANTITY_BOUND) {
+            throw new IllegalArgumentException(PRODUCT_QUANTITY_ERROR_MESSAGE.getMessage());
         }
     }
 }

@@ -33,12 +33,12 @@ public class Printer {
     public void printMachineCoins(Map<Coin, Integer> coins) {
         System.out.println();
         System.out.println("자판기가 보유한 동전");
-        printCoinCount(coins);
+        printCoinQuantity(coins);
     }
 
     public void printChanges(Map<Coin, Integer> coins) {
         System.out.println("잔돈");
-        printCoinCount(coins);
+        printCoinQuantity(coins);
     }
 
     public void printCustomerMoney(int money) {
@@ -46,7 +46,7 @@ public class Printer {
         System.out.printf("투입 금액: %d원%n", money);
     }
 
-    private void printCoinCount(Map<Coin, Integer> coins) {
+    private void printCoinQuantity(Map<Coin, Integer> coins) {
         for (Coin coin : coins.keySet()) {
             System.out.println(coin.getAmount() + "원 - " + coins.get(coin) + "개");
         }

@@ -62,28 +62,28 @@ public class VendingMachine {
 
     private void makeChange(Map<Coin, Integer> changes, Coin coin) {
         int amount = coin.getAmount();
-        int count = machineCoins.get(coin);
+        int quantity = machineCoins.get(coin);
 
-        if (count != 0 && customerMoney / amount >= count) {
-            customerMoney -= amount * count;
-            reduceMachineCoin(coin, count);
-            changes.put(coin, count);
+        if (quantity != 0 && customerMoney / amount >= quantity) {
+            customerMoney -= amount * quantity;
+            reduceMachineCoin(coin, quantity);
+            changes.put(coin, quantity);
             return;
         }
-        if (count != 0 && customerMoney / amount < count) {
+        if (quantity != 0 && customerMoney / amount < quantity) {
             customerMoney -= amount * (customerMoney / amount);
             reduceMachineCoin(coin, customerMoney / amount);
             changes.put(coin, customerMoney / amount);
         }
     }
 
-    private void reduceMachineCoin(Coin coin, int count) {
-        this.machineCoins.put(coin, machineCoins.get(coin) - count);
+    private void reduceMachineCoin(Coin coin, int quantity) {
+        this.machineCoins.put(coin, machineCoins.get(coin) - quantity);
     }
 
     private int getMinimumAmount() {
         return products.stream()
-            .filter(product -> product.getCount() > 0)
+            .filter(product -> product.getQuantity() > 0)
             .min(Comparator.comparing(Product::getPrice))
             .map(Product::getPrice)
             .orElse(0);

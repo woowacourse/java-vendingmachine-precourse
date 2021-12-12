@@ -12,7 +12,7 @@ public class Converter {
     private static final String PROPERTY_SEPARATOR = ",";
     private static final int NAME = 0;
     private static final int PRICE = 1;
-    private static final int COUNT = 2;
+    private static final int QUANTITY = 2;
 
     public Map<Coin, Integer> convertToCoins(int money) {
         Map<Coin, Integer> coins = new LinkedHashMap<>();
@@ -36,7 +36,7 @@ public class Converter {
             .map(productInfo ->
                 new Product(productInfo[NAME],
                     Integer.parseInt(productInfo[PRICE]),
-                    Integer.parseInt(productInfo[COUNT])))
+                    Integer.parseInt(productInfo[QUANTITY])))
             .collect(Collectors.toList());
     }
 
@@ -56,11 +56,11 @@ public class Converter {
             .collect(Collectors.toList());
     }
 
-    public List<String> convertToProductCounts(String input) {
+    public List<String> convertToProductQuantities(String input) {
         return Arrays.stream(input.split(PRODUCT_SEPARATOR))
             .map(productInfo -> productInfo.substring(1, productInfo.length() - 1))
             .map(productInfo -> productInfo.split(PROPERTY_SEPARATOR))
-            .map(productInfo -> productInfo[COUNT])
+            .map(productInfo -> productInfo[QUANTITY])
             .collect(Collectors.toList());
     }
 }

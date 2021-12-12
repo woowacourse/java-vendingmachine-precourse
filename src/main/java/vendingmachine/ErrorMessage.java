@@ -7,7 +7,7 @@ public enum ErrorMessage {
     AMOUNT_NEGATIVE_ERROR_MESSAGE("[ERROR] 금액은 음수가 될 수 없습니다."),
     PRODUCT_INPUT_FORMAT_ERROR_MESSAGE("[ERROR] 입력 형식이 틀렸습니다."),
     PRODUCT_DUPLICATE_ERROR_MESSAGE("[ERROR] 중복된 상품명을 사용하실 수 없습니다."),
-    PRODUCT_COUNT_ERROR_MESSAGE("[ERROR] 수량은 1개 이상 입력하셔야합니다."),
+    PRODUCT_QUANTITY_ERROR_MESSAGE("[ERROR] 수량은 1개 이상 입력하셔야합니다."),
     PRODUCT_PRICE_ERROR_MESSAGE("[ERROR] 가격은 100원 이상 입력하셔야합니다."),
     PRODUCT_SOLD_OUT_ERROR_MESSAGE("[ERROR] 해당 상품은 현재 없는 상품입니다."),
     DUPLICATE_SEPARATOR_ERROR_MESSAGE("[ERROR] 구분자는 한 번씩만 사용하실 수 있습니다.");

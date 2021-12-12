@@ -6,19 +6,19 @@ public class Product {
 
     private String name;
     private int price;
-    private int count;
+    private int quantity;
 
-    Product(String name, int price, int count) {
+    Product(String name, int price, int quantity) {
         this.name = name;
         this.price = price;
-        this.count = count;
+        this.quantity = quantity;
     }
 
     public void sell() {
-        if (count <= 0) {
+        if (quantity <= 0) {
             throw new IllegalArgumentException(PRODUCT_SOLD_OUT_ERROR_MESSAGE.getMessage());
         }
-        this.count--;
+        this.quantity--;
     }
 
     public String getName() {
@@ -29,7 +29,7 @@ public class Product {
         return price;
     }
 
-    public int getCount() {
-        return count;
+    public int getQuantity() {
+        return quantity;
     }
 }
