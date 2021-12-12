@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
 import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -18,12 +20,16 @@ public class VendingMachine {
 		initCoinCounts(returnCoinCounts);
 	}
 
-	public Merchandises getMerchandises() {
-		return merchandises;
+	public static boolean isUserBuyMerchandise(User user, Merchandises merchandises) {
+		List<Merchandise> notBuyMerchandise = merchandises.getMerchandiseList().stream()
+			.filter((merchandise -> merchandise.getMoney().getMoney() > user.getUserMoney().getMoney()))
+			.collect(Collectors.toList());
+
+		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();
 	}
 
-	public Money getVendingMachineMoney() {
-		return vendingMachineMoney;
+	public Merchandises getMerchandises() {
+		return merchandises;
 	}
 
 	public void initCoinCounts(LinkedHashMap<Coin, Integer> coinMap) {

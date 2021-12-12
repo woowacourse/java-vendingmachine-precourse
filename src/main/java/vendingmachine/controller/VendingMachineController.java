@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import static vendingmachine.domain.Merchandise.*;
+import static vendingmachine.domain.VendingMachine.*;
 
 import java.util.LinkedHashMap;
 
@@ -23,7 +24,7 @@ public class VendingMachineController {
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		inputMerchandiseInformationWithErrorHandling();
 		inputMoneyWithErrorHandling();
-		while(isUserBuyMerchandise(vendingMachine, user) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()){
+		while(isUserBuyMerchandise(user, vendingMachine.getMerchandises()) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()){
 			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
 			buyMerchandiseWithErrorHandling();
 		}
@@ -37,17 +38,6 @@ public class VendingMachineController {
 		}
 		return intCoinStatus;
 	}
-
-	public boolean isUserBuyMerchandise(VendingMachine vendingMachine, User user) {
-		Merchandises merchandises = vendingMachine.getMerchandises();
-		for (Merchandise merchandise : merchandises.getMerchandiseList()) {
-			if (merchandise.getMoney().getMoney() <= user.getUserMoney().getMoney()) {
-				return true;
-			}
-		}
-		return false;
-	}
-
 
 	public void vendingMahchineMoneyWithErrorHandling() {
 		try {
