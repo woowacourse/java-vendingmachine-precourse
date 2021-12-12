@@ -18,4 +18,8 @@ public class VendingMachineService {
 	public void addProducts(Products products) {
 		vendingMachine.addProductAll(products);
 	}
+
+	public void insert(Money insertMoney) {
+		vendingMachine.insert(insertMoney);
+	}
 }

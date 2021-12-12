@@ -18,4 +18,11 @@ public class VendingMachineController {
 		vendingMachineService.addProducts(products);
 	}
 
+	public void addInsertMoney(String amount) {
+		Money insertMoney = Money.of(amount);
+		vendingMachineService.insert(insertMoney);
+	}
+
+
+
 }
