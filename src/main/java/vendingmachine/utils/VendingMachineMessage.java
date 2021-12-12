@@ -42,7 +42,7 @@ public class VendingMachineMessage {
 
 	private static final String NOT_NUMBER = " 숫자만 입력되야 합니다";
 
-	private static final String INVOLVE_BLACK = " 공백이 포함되면 안됩니다";
+	private static final String INVOLVE_BLANK = " 공백이 포함되면 안됩니다";
 
 	private static ArrayList<Integer> getCoinTypeList() {
 		ArrayList<Integer> coinTypes = new ArrayList<>();
@@ -90,6 +90,6 @@ public class VendingMachineMessage {
 	}
 
 	public static String involveBlankError(final String inputtedData) {
-		return ERROR_MESSAGE_PREFIX + inputtedData + INVOLVE_BLACK;
+		return ERROR_MESSAGE_PREFIX + inputtedData + INVOLVE_BLANK;
 	}
 }
