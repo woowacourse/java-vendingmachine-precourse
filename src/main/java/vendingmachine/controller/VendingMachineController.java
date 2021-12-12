@@ -12,6 +12,7 @@ import vendingmachine.domain.Money;
 import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.ErrorMessage;
+import vendingmachine.utils.Validator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -25,7 +26,7 @@ public class VendingMachineController {
 	public void play() {
 		vendingMahchineMoneyWithErrorHandling();
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
-		vendingMachine.stockMerchandises(new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
+		inputMerchandiseInformationWithErrorHandling();
 		inputMoneyWithErrorHandling();
 		while (true) {
 			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
@@ -62,6 +63,7 @@ public class VendingMachineController {
 	public List<Merchandise> constructMerchandises(List<String> merchandiseInformations) {
 		List<Merchandise> merchandiseList = new ArrayList<>();
 		for (String merchandiseInformation : merchandiseInformations) {
+			Validator.validateInputMerchandise(merchandiseInformation);
 			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1);
 			merchandiseList.add(constructMerchandise(merchandise));
 		}
@@ -100,6 +102,19 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
 			inputMoneyWithErrorHandling();
+		}
+	}
+
+	public void inputMerchandiseInformationWithErrorHandling() {
+		try {
+			vendingMachine.stockMerchandises(
+				new Merchandises(constructMerchandises(parsingMerchandise(InputView.inputMerchandiseInformation()))));
+		} catch (NumberFormatException numberFormatException) {
+			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
+			inputMerchandiseInformationWithErrorHandling();
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			inputMerchandiseInformationWithErrorHandling();
 		}
 	}
 }
