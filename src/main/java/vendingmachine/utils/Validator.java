@@ -93,4 +93,9 @@ public class Validator {
 		validateNumber(input);
 		validatePositive(input);
 	}
+
+	public static void validateNameInput(String input) {
+		validateEmptyStr(input);
+		validateName(input);
+	}
 }
