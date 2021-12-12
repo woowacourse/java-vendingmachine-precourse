@@ -5,8 +5,8 @@ import vendingmachine.processor.OutputProcessor;
 
 public abstract class View {
 	private Visible visible;
-	private final InputProcessor inputProcessor;
-	private final OutputProcessor outputProcessor;
+	protected final InputProcessor inputProcessor;
+	protected final OutputProcessor outputProcessor;
 
 	public View() {
 		this.visible = Visible.SHOW;

@@ -7,7 +7,7 @@ import vendingmachine.product.Products;
 public class VendingMachineController {
 	private final VendingMachineService vendingMachineService = new VendingMachineService();
 
-	public Coins showRetentionCoin(String retentionAmount) {
+	public Coins addRetentionCoin(String retentionAmount) {
 		Money retentionMoney = Money.of(retentionAmount);
 		return vendingMachineService.generateCoin(retentionMoney);
 	}
