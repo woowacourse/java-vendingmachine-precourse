@@ -32,4 +32,8 @@ public class Product {
 	public void sellProduct() {
 		this.quantity -= 1;
 	}
+
+	public boolean canSell(int money) {
+		return money > this.price && this.quantity != 0;
+	}
 }

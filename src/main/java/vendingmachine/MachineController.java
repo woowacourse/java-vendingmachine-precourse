@@ -17,10 +17,11 @@ public class MachineController {
 	}
 
 	public void startMachine() {
-		while (true) {
+		do {
 			customer.printCustomerMoney();
 			machineOpen();
-		}
+		} while (machine.minimumMoneyCheck(customer));
+		customer.printCustomerMoney();
 	}
 
 	public void machineOpen() {

@@ -54,7 +54,7 @@ public class Machine {
 		int target = money;
 		while (target > 0) {
 			Coin coin = Coin.pickRandomCoin();
-			if (Coin.hasEnoughMoney(target,coin)) {
+			if (Coin.hasEnoughMoney(target, coin)) {
 				target -= coin.getAmount();
 				this.wallet.put(coin, wallet.get(coin) + 1);
 			}
@@ -86,7 +86,7 @@ public class Machine {
 	}
 
 	public String removeSquareBracket(String input) {
-		return input.substring(1,input.length() - 1);
+		return input.substring(1, input.length() - 1);
 	}
 
 	public Product findProduct(String input) {
@@ -98,5 +98,13 @@ public class Machine {
 		throw new IllegalArgumentException(ERROR_MSG_PURCHASE_PRODUCT_NAME);
 	}
 
+	public boolean minimumMoneyCheck(Customer customer) {
+		for (Product product : products) {
+			if (product.canSell(customer.getMoney())) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }
