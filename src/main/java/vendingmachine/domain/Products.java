@@ -19,4 +19,16 @@ public class Products {
             throw new IllegalArgumentException("[ERROR] 중복되는 이름의 상품은 같이 입력될 수 없습니다.");
         }
     }
+
+    public int purchaseProduct(String name) {
+        Product product = getProductByName(name);
+        return product.purchaseProduct();
+    }
+
+    private Product getProductByName(String name) {
+        return products.stream()
+            .filter(product -> product.isEqualsName(name))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException("[ERROR] 상품의 이름을 찾을 수 없습니다."));
+    }
 }
