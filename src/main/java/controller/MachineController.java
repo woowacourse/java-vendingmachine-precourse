@@ -2,6 +2,7 @@ package controller;
 
 import model.VendingMachine;
 import view.InputDisplay;
+import view.OutputDisplay;
 
 public class MachineController {
 
@@ -12,6 +13,7 @@ public class MachineController {
 		VendingMachine vendingMachine = new VendingMachine();
 		InputDisplay.askInputVendingMachineChange();
 		vendingMachine.makeVendingMachineCoinBox(InputController.inputVendingMachineChange());
+		OutputDisplay.showEachCoinInCoinBox(vendingMachine.giveEachCoinValue(), vendingMachine.giveEachCoinCount());
 	}
 
 }

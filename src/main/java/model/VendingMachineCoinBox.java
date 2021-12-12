@@ -1,6 +1,8 @@
 package model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import utils.generator.RandomCoinPriceGenerator;
@@ -34,7 +36,7 @@ public class VendingMachineCoinBox {
 				continue;
 			}
 			totalCoinPriceInCoinBox += coinPrice;
-			Coin coin = Coin.getCoinByPrice(coinPrice);
+			Coin coin = Coin.getValueByPrice(coinPrice);
 			coinBox.put(coin, coinBox.get(coin) + ADD_COIN_COUNT);
 		}
 	}
@@ -45,5 +47,21 @@ public class VendingMachineCoinBox {
 			return true;
 		}
 		return false;
+	}
+
+	public List<Integer> bringEachCoinCountInCoinBox() {
+		List<Integer> eachCoinCount = new ArrayList<>();
+		for (Coin coin : Coin.getValuesByDescending()) {
+			eachCoinCount.add(coinBox.get(coin));
+		}
+		return eachCoinCount;
+	}
+
+	public List<Integer> bringEachCoinValueInCoinBox() {
+		List<Integer> eachCoinValue = new ArrayList<>();
+		for (Coin coin : Coin.getValuesByDescending()) {
+			eachCoinValue.add(coin.getAmount());
+		}
+		return eachCoinValue;
 	}
 }
