@@ -44,10 +44,7 @@ public class VendingMachineCoinBox {
 
 	private boolean isTotalCoinPriceOverInputVendingMachineChange(int totalCoinPriceInCoinBox, int coinPrice,
 		int insertVendingMachineChange) {
-		if (totalCoinPriceInCoinBox + coinPrice > insertVendingMachineChange) {
-			return true;
-		}
-		return false;
+		return totalCoinPriceInCoinBox + coinPrice > insertVendingMachineChange;
 	}
 
 	public List<Integer> bringEachCoinCountInCoinBox() {
