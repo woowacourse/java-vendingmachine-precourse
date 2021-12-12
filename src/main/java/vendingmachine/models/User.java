@@ -14,4 +14,8 @@ public class User {
 	public int getPayMoney() {
 		return this.payMoney;
 	}
+
+	public boolean isBankrupt(int minPrice) {
+		return this.payMoney < minPrice;
+	}
 }
