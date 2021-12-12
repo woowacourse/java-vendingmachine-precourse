@@ -13,4 +13,12 @@ public class CommodityRepository {
     public static void addCommodity(Commodity commodity) {
         commodities.add(commodity);
     }
+    
+    public static Commodity findByName(String name) {
+        return commodities.stream()
+              .filter(c -> c.getName()
+              .equals(name))
+              .findAny()
+              .orElse(null);
+    }
 }
