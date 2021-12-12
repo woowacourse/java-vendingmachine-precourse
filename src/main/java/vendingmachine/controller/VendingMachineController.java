@@ -5,6 +5,7 @@ import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.RandomGenerator;
+import vendingmachine.utils.ReturnCoin;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -21,6 +22,8 @@ public class VendingMachineController {
 		do {
 			buy(vendingMachine, products);
 		} while (isBuy(vendingMachine, products));
+		OutputView.printEnteredAmount(vendingMachine.getEnteredAmount());
+		OutputView.printReturnCoin(ReturnCoin.getReturnCoin(coins.getHoldingCoin(), vendingMachine.getEnteredAmount()));
 	}
 
 	public static void buy(VendingMachine vendingMachine, Products products) {
