@@ -19,6 +19,11 @@ public class Products {
         return new Products(new ArrayList<>());
     }
 
+    public void putProducts(List<Product> products) {
+        this.products.addAll(products);
+        checkProductNameDuplicate(this.products);
+    }
+
     private static void checkProductNameDuplicate(List<Product> products) {
         Set<Product> productSet = new HashSet<>(products);
         if (products.size() != productSet.size()) {
