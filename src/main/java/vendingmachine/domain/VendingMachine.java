@@ -55,8 +55,12 @@ public class VendingMachine {
     }
 
     public boolean checkProgress() {
-        if (checkMoney() == true && checkQuantity() == true) {
-            return true;
+        try {
+            if (checkMoney() == true && checkQuantity() == true) {
+                return true;
+            }
+        } catch(IllegalArgumentException e) {
+            return false;
         }
 
         return false;
@@ -65,7 +69,10 @@ public class VendingMachine {
     private boolean checkMoney() {
         Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
 
-        Optional<Product> optionalProduct = productList.stream().min(comparatorByPrice);
+        Optional<Product> optionalProduct = productList
+                .stream()
+                .filter(p -> p.getQuantity() > 0)
+                .min(comparatorByPrice);
 
         Product minProduct = optionalProduct
                 .orElseThrow(IllegalArgumentException::new);
