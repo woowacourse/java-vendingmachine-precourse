@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.dto.ItemDto;
+import vendingmachine.exception.ItemEmptyException;
 import vendingmachine.exception.NotNumericException;
 import vendingmachine.validator.ItemValidator;
 
@@ -14,6 +15,8 @@ public class ItemsInputParser {
 	private static final String OPEN_BRACKET = "[";
 	private static final String CLOSE_BRACKET = "]";
 	private static final String BLANK_CHAR = "";
+
+	private static final int ITEM_EMPTY_QUANTITY = 0;
 
 	private static final int ITEM_NAME_INDEX = 0;
 	private static final int ITEM_PRICE_INDEX = 1;
@@ -26,7 +29,12 @@ public class ItemsInputParser {
 	}
 
 	private static List<String> parseItems(String itemsInput) {
-		return Arrays.asList(itemsInput.split(ITEM_DELIMITER));
+		List<String> splittedItems = Arrays.asList(itemsInput.split(ITEM_DELIMITER));
+		if (splittedItems.size() <= ITEM_EMPTY_QUANTITY) {
+			throw new ItemEmptyException();
+		}
+
+		return splittedItems;
 	}
 
 	private static ItemDto parseItemInput(String itemInput) {
