@@ -30,4 +30,8 @@ public class VendingMachineService {
 	public boolean isPurchasable() {
 		return vendingMachine.isPurchasable();
 	}
+
+	public void purchaseProduct(String productName) {
+		vendingMachine.purchase(productName);
+	}
 }

@@ -31,4 +31,8 @@ public class VendingMachineController {
 		return vendingMachineService.isPurchasable();
 	}
 
+	public void purchaseProduct(String productName) {
+		vendingMachineService.purchaseProduct(productName);
+	}
+
 }
