@@ -15,6 +15,7 @@ public class ProductInfoValidator {
     public static final String INVALID_NAME_ERROR_MESSAGE = "상품명은 한글, 숫자, 영문으로만 이루어진 이름이어야 합니다.";
     public static final String INVALID_NUMBER_PRICE_ERROR_MESSAGE = "상품 가격은 반드시 10억 이하의 숫자여야 합니다.";
     public static final String LESS_THAN_100_PRICE_ERROR_MESSAGE = "상품 가격은 반드시 100원 이상이어야 합니다.";
+    public static final String NOT_DIVISIBLE_BY_10_PRICE_ERROR_MESSAGE = "상품 가격의 최소 단위는 10이어야 합니다.";
     private static final String SEMICOLON_SEPARATION_REGEX = "\\s*;\\s*";
     private static final Pattern PRODUCT_INFO_PATTERN = Pattern.compile(
         "^\\[\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\]$");
@@ -65,6 +66,7 @@ public class ProductInfoValidator {
         NumberValidator.validateNotExceedMaxValue(intPrice, PRICE_AND_STOCK_MAXIMUM,
             INVALID_NUMBER_PRICE_ERROR_MESSAGE);
         NumberValidator.validateNotExceedMinValue(intPrice, PRICE_MINIMUM, LESS_THAN_100_PRICE_ERROR_MESSAGE);
+        NumberValidator.validateDivisibleByTen(intPrice, NOT_DIVISIBLE_BY_10_PRICE_ERROR_MESSAGE);
         return intPrice;
     }
 
