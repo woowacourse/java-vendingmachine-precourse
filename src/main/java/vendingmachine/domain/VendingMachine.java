@@ -5,14 +5,8 @@ import java.util.Map;
 public class VendingMachine {
 
     private final Changes changes;
-
-    private Money money;
-    private Merchandises merchandises;
-
-    public VendingMachine(String change) {
-        this.changes = new Changes(change);
-        this.money = new Money(0);
-    }
+    private final Money money;
+    private final Merchandises merchandises;
 
     public VendingMachine(String stringMerchandise, Changes changes) {
         this.changes = changes;
