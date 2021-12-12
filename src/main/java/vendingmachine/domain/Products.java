@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -12,6 +13,10 @@ public class Products {
     public Products(List<Product> products) {
         checkProductNameDuplicate(products);
         this.products = products;
+    }
+
+    public static Products init() {
+        return new Products(new ArrayList<>());
     }
 
     private static void checkProductNameDuplicate(List<Product> products) {
