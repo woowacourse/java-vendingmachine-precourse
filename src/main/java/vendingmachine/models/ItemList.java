@@ -22,4 +22,13 @@ public class ItemList {
 	public int getMinPrice() {
 		return this.ItemList.values().stream().filter(eachItem -> !eachItem.isAmountZero()).mapToInt(Item::getPrice).min().getAsInt();
 	}
+
+	public boolean isAllSoldOut() {
+		int totalItemCount = this.ItemList.size();
+		int soldOutItemCount = (int)this.ItemList.values().stream().filter(Item::isAmountZero).count();
+		if (soldOutItemCount == totalItemCount) {
+			return true;
+		}
+		return false;
+	}
 }
