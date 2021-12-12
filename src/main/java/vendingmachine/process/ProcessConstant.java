@@ -2,6 +2,8 @@ package vendingmachine.process;
 
 public class ProcessConstant {
     public static final String GOODS_DELIMITER = ";";
+    public static final String SQUARE_BRACKETS_OPEN = "[";
+    public static final String SQUARE_BRACKETS_CLOSE = "]";
 
     public static final String ASK_HOLDING_AMOUNT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
     public static final String PRINT_HOLDING_AMOUNT = "자판기가 보유한 동전";
