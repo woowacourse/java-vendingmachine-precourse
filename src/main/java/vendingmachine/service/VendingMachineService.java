@@ -1,37 +1,32 @@
 package vendingmachine.service;
 
-import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Change;
-import vendingmachine.domain.Money;
-import vendingmachine.domain.Product;
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.*;
 
-import static vendingmachine.utils.VerificationUtil.validateHoldingAmount;
+import java.util.List;
+
+import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class VendingMachineService {
 
-    private Change change;
-    private Money money;
-    private Product product;
-    private VendingMachine vendingMachine;
+    public VendingMachine createVendingMachine(Change change, List<Product> productList, Money money) {
+        VendingMachine vendingMachine = new VendingMachine();
 
-    public Money createMoney() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        vendingMachine.createChange(change);
+        vendingMachine.inputProducts(productList);
+        vendingMachine.inputMoney(money);
 
-        while (true) {
-            try {
-                String inputMoney = Console.readLine();
+        return vendingMachine;
+    }
 
-                validateHoldingAmount(inputMoney);
+    public void progressVendingMachine(VendingMachine vendingMachine) {
+        while (vendingMachine.checkProgress()) {
+            System.out.println("\n투입 금액: " + vendingMachine.getRestMoney());
 
-                int moneyPrice = Integer.parseInt(inputMoney);
+            System.out.println("구매할 상품명을 입력해 주세요.");
 
-                Money money = new Money(moneyPrice);
+            String productName = readLine();
 
-                return money;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+            vendingMachine.extractProduct(productName);
         }
     }
 }
