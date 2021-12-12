@@ -5,6 +5,11 @@ import vendingmachine.model.Coin;
 import vendingmachine.model.VendingMachine;
 
 public class VendingMachineView {
+
+	public void printInitCoinsComment() {
+		System.out.println("\n" + OutputMessage.PREPARED_NUMBER_OF_COINS_MESSAGE);
+	}
+
 	public void printCoinsOfVendingMachine(VendingMachine vendingMachine) {
 		System.out.println("\n" + OutputMessage.PREPARED_NUMBER_OF_COINS_MESSAGE);
 
@@ -20,7 +25,7 @@ public class VendingMachineView {
 
 	public void printChangesComment(int remainMoney) {
 		printRemainOfInsertedMoney(remainMoney);
-		System.out.println("\n" + OutputMessage.PRINT_CHANGES);
+		System.out.println(OutputMessage.PRINT_CHANGES);
 	}
 
 	public void printChanges(int countCoin, Coin coin) {

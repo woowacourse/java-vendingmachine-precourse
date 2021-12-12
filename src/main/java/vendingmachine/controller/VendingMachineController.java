@@ -19,8 +19,8 @@ public class VendingMachineController {
 	public void use() {
 		userView.askVendingMachineCoins();
 		vendingMachine.setCoins();
-		vendingMachineView.printCoinsOfVendingMachine(vendingMachine);
-
+		printInitCoins();
+		
 		userView.askProductsInfo();
 		vendingMachine.setMenu();
 
@@ -29,6 +29,14 @@ public class VendingMachineController {
 
 		order();
 		printResult();
+	}
+
+	public void printInitCoins() {
+		vendingMachineView.printInitCoinsComment();
+
+		for (Coin coin : Coin.values()) {
+			vendingMachineView.printChanges(vendingMachine.countCoin(coin.ordinal()), coin);
+		}
 	}
 
 	public void order() {
@@ -49,5 +57,5 @@ public class VendingMachineController {
 		}
 
 	}
-	
+
 }

@@ -56,4 +56,5 @@ public class VendingMachine {
 	public int giveChanges(Coin coin) {
 		return changes.giveChanges(coin);
 	}
+
 }
