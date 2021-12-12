@@ -16,13 +16,15 @@ public class Machine {
         while (purchasable) {
             OutputView.printMoney(money);
             //남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려준다
+            if (!checkMoney()) {
+                break;
+            }
             this.purchasable = isPurchasable(InputView.inputProduct());
         }
         OutputView.printChanges();
     }
 
     public boolean isPurchasable(String productName) {
-        //System.out.println("isPurchasable 들어왔습니다."+productName);
         for (Product product : this.products) {
             if (product.getName().equals(productName) && product.getPrice() <= money && product.getCount() > 0) {
                 reduceMoney(product.getPrice());
@@ -48,5 +50,14 @@ public class Machine {
             }
         }
         return 0;
+    }
+
+    public boolean checkMoney() {
+        for (Product product : this.products) {
+            if(product.getPrice() <= money) {
+                return true;
+            }
+        }
+        return false;
     }
 }
