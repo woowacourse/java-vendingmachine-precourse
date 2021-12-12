@@ -1,6 +1,7 @@
 package vendingmachine.domain.coin;
 
 import static vendingmachine.utils.ArithmeticValidator.*;
+import static vendingmachine.utils.Formatter.*;
 import static vendingmachine.utils.StringValidator.*;
 
 import java.util.Comparator;
@@ -97,5 +98,22 @@ public class Coins {
 
 	public Map<Coin, Integer> getCoins() {
 		return coinMap;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		for (Coin coin : coinMap.keySet()) {
+			sb.append(
+				formatToKoreanCurrencyUnit(coin.getAmount()))
+			;
+			sb.append(" - ");
+			sb.append(
+				formatToKoreanItemCountUnit(coinMap.get(coin))
+			);
+			sb.append(System.lineSeparator());
+		}
+
+		return sb.toString();
 	}
 }

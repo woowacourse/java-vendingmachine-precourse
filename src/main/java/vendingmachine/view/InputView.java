@@ -22,6 +22,7 @@ public class InputView {
 	}
 
 	public static String getMoney() {
+		System.out.println();
 		System.out.println(NOTICE_INPUT_MONEY);
 		return Console.readLine();
 	}

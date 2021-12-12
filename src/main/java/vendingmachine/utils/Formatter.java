@@ -2,7 +2,7 @@ package vendingmachine.utils;
 
 public class Formatter {
 	private static final String KOREAN_CURRENCY_UNIT = "원";
-	private static final String KOREAN_ITEM_COUNT_UNIT = "원";
+	private static final String KOREAN_ITEM_COUNT_UNIT = "개";
 
 	public static String formatToKoreanCurrencyUnit(String price) {
 		return price + KOREAN_CURRENCY_UNIT;
