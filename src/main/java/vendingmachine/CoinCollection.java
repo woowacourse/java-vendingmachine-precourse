@@ -18,11 +18,7 @@ public class CoinCollection {
     List<Coin> coins50 = new ArrayList<>();
     List<Coin> coins10 = new ArrayList<>();
 
-    public CoinCollection(List<Coin> coins) {
-        coins.forEach(this::addCoin);
-    }
-
-    private void addCoin(Coin coin) {
+    public void addCoin(Coin coin) {
         if (coin == null) {
             return;
         }

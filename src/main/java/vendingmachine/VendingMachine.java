@@ -6,6 +6,14 @@ import java.util.List;
 
 public class VendingMachine {
     private final List<Product> products = new ArrayList<>();
+    private final CoinCollection coins = new CoinCollection();
+
+    public void insertCoins(List<Coin> coins) {
+        for (Coin coin : coins) {
+            this.coins.addCoin(coin);
+        }
+        System.out.println(coins);
+    }
 
     public void registerProducts(String input) {
         String[] products = input
