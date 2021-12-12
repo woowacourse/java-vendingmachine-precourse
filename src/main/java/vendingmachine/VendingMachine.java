@@ -88,19 +88,13 @@ public class VendingMachine {
         String machineOwnMoney = "";
         while(machineOwnMoney.isEmpty()) {
             try {
-                machineOwnMoney = inputMachineOwnMoneyAndValidation();
+                System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+                machineOwnMoney = Console.readLine();
+                inputMachineOwnMoneyAndValidation(machineOwnMoney);
             } catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 금액은 숫자여야 합니다.");
+                System.out.println(e.getMessage());
             }
         }
         return Integer.parseInt(machineOwnMoney);
-    }
-
-    public static String inputMachineOwnMoneyAndValidation(){
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        String machineOwnMoney = Console.readLine();
-        String regex = "^[0-9]{2,}$";
-        if (!Pattern.matches(regex, machineOwnMoney)) throw new IllegalArgumentException();
-        return machineOwnMoney;
     }
 }

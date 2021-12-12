@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 import static vendingmachine.Application.USER_MONEY;
 
@@ -37,5 +38,15 @@ public class Validation {
             enough = false;
         }
         return enough;
+    }
+
+    public static void userMoneyValidation(String userMoney){
+        String regex = "^[0-9]*$";
+        if (!Pattern.matches(regex, userMoney)) throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+    }
+
+    public static void inputMachineOwnMoneyAndValidation(String machineOwnMoney){
+        String regex = "^[0-9]{2,}$";
+        if (!Pattern.matches(regex, machineOwnMoney)) throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
     }
 }

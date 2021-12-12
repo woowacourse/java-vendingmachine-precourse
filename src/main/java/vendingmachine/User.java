@@ -36,20 +36,15 @@ public class User {
         String userMoney = "";
         while(userMoney.isEmpty()){
             try{
-                userMoney = userMoneyValidation();
-                USER_MONEY = Integer.parseInt(userMoney);
+                System.out.println("투입 금액을 입력해 주세요.");
+                userMoney = Console.readLine();
+                userMoneyValidation(userMoney);
+                //this.userOwnMoney = Integer.parseInt(userMoney);
             }catch (IllegalArgumentException e){
-                System.out.println("[ERROR] 금액은 숫자여야 합니다.");
+                System.out.println(e.getMessage());
             }
         }
     }
 
-    public static String userMoneyValidation(){
-        System.out.println("투입 금액을 입력해 주세요.");
-        String userMoney = Console.readLine();
-        String regex = "^[0-9]*$";
-        if (!Pattern.matches(regex, userMoney)) throw new IllegalArgumentException();
-        return userMoney;
-    }
-
+                                                             
 }
