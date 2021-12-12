@@ -30,4 +30,8 @@ public class Product {
         }
         return true;
     }
+
+    public void pullOut() {
+        stock--;
+    }
 }

@@ -6,7 +6,9 @@ import java.util.List;
 
 public class VendingMachine {
 
-    private static final String PRODUCT_NOT_FOUND_ERROR_MESSAGE= "상품명과 일치하는 상품이 존재하지 않습니다.";
+    private static final String PRODUCT_NOT_FOUND_ERROR_MESSAGE = "상품명과 일치하는 상품이 존재하지 않습니다.";
+    private static final String NOT_ENOUGH_INSERT_AMOUNT_ERROR_MESSAGE = "투입 금액이 부족합니다.";
+    private static final String PRODUCT_SOLD_OUT_ERROR_MESSAGE = "해당 상품의 재고가 없습니다. 다른 상품을 선택해 주세요.";
 
     private int insertAmount;
     private CoinCase coinCase;
@@ -55,5 +57,23 @@ public class VendingMachine {
             .filter(product -> product.getName().equals(productName))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(PRODUCT_NOT_FOUND_ERROR_MESSAGE));
+    }
+
+    public void buyProduct(final Product targetProduct) {
+        if (targetProduct.isBuyAble(insertAmount)) {
+            pay(targetProduct.getPrice());
+            targetProduct.pullOut();
+            return;
+        }
+        if (targetProduct.getPrice() > insertAmount) {
+            throw new IllegalArgumentException(NOT_ENOUGH_INSERT_AMOUNT_ERROR_MESSAGE);
+        }
+        if (targetProduct.getStock() == 0) {
+            throw new IllegalArgumentException(PRODUCT_SOLD_OUT_ERROR_MESSAGE);
+        }
+    }
+
+    private void pay(final int price) {
+        insertAmount -= price;
     }
 }

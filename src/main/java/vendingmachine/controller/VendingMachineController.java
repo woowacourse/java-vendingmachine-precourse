@@ -2,7 +2,6 @@ package vendingmachine.controller;
 
 import java.util.List;
 
-import sun.tools.jconsole.OutputViewer;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingAmountValidator;
@@ -25,8 +24,7 @@ public class VendingMachineController {
         initializeProductsInfo();
         initializeInsertAmount();
         while (vendingMachine.isBuyAbleProductRemain()) {
-            SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
-            vendingMachine.buyProduct(typeProductToBuy());
+            typeProductToBuy();
         }
     }
 
@@ -61,15 +59,17 @@ public class VendingMachineController {
         }
     }
 
-    private Product typeProductToBuy() {
+    private void typeProductToBuy() {
+        SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
         try {
             String productNameToBuy = InputView.inputProductToBuy();
             ProductInfoValidator.validateName(productNameToBuy);
             ProductInfoValidator.validateProductNameDropped(productNameToBuy);
-            return vendingMachine.findProduct(productNameToBuy);
+            Product targetProduct = vendingMachine.findProduct(productNameToBuy);
+            vendingMachine.buyProduct(targetProduct);
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
-            return typeProductToBuy();
+            typeProductToBuy();
         }
     }
 }
