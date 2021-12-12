@@ -21,12 +21,19 @@ public class VendingMachineController {
 			String inputMoney = InputView.getMoney();
 			vendingMachine.putMoney(inputMoney);
 
-			while (vendingMachine.canBuy()) {
-				int leftInputMoney = vendingMachine.getInputMoney();
-				String menuToBuy = InputView.getMenuToBuy(leftInputMoney);
+			while (true) {
+				showLeftMoney(vendingMachine);
 
-				vendingMachine.buy(menuToBuy);
+				if (vendingMachine.canBuy()) {
+					buyItem(vendingMachine);
+					continue;
+				}
+
+				Coins changes = vendingMachine.returnChanges();
+				OutputView.showChanges(changes);
+				break;
 			}
+
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			init();
@@ -40,6 +47,21 @@ public class VendingMachineController {
 		} catch (Exception e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			return initMenus();
+		}
+	}
+
+	private void showLeftMoney(VendingMachine vendingMachine) {
+		int leftInputMoney = vendingMachine.getInputMoney();
+		InputView.showLeftMoney(leftInputMoney);
+	}
+
+	private void buyItem(VendingMachine vendingMachine) {
+		String menuToBuy = InputView.getMenuToBuy();
+		try {
+			vendingMachine.buy(menuToBuy);
+		} catch (Exception e) {
+			ErrorView.printErrorMesasge(e.getMessage());
+			buyItem(vendingMachine);
 		}
 	}
 }

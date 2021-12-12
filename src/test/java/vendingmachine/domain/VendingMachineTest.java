@@ -58,5 +58,4 @@ class VendingMachineTest {
 		);
 		assertEquals("[ERROR] 투입 금액 이하의 메뉴를 선택해주세요.", exception.getMessage());
 	}
-
 }

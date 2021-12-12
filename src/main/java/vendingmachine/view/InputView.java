@@ -26,9 +26,12 @@ public class InputView {
 		return Console.readLine();
 	}
 
-	public static String getMenuToBuy(int leftInputMoney) {
-		System.out.println(NOTICE_LEFT_INPUT_MONEY + formatToKoreanCurrencyUnit(leftInputMoney));
+	public static String getMenuToBuy() {
 		System.out.println(NOTICE_INPUT_MENU_TO_BUY);
 		return Console.readLine();
+	}
+
+	public static void showLeftMoney(int leftMoney) {
+		System.out.println(NOTICE_LEFT_INPUT_MONEY + formatToKoreanCurrencyUnit(leftMoney));
 	}
 }
