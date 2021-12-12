@@ -20,4 +20,14 @@ public class VendingMachineController {
 		view.printChanges(machine.getSortedCoinCount());
 	}
 
+	public void settingMerchandise() {
+		while (true) {
+			String merchandiseList = view.inputMerchandise();
+			if (validator.isValidMerchandise(merchandiseList)) {
+				machine.setMerchandise(merchandiseList);
+				break;
+			}
+		}
+	}
+
 }
