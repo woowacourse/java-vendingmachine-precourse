@@ -140,6 +140,81 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
+	@DisplayName("숫자가 아닌 상품 가격을 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_number_format_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,OzRagwort,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("상품 가격을 소수로 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_double_type_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("[콜라,1.1,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("Integer 최대값보다 더 큰 상품 가격을 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_overflow_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("[콜라,50000000000,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("상품 가격을 100미만으로 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_lower_then_minimum_price_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("[콜라,50,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("상품 가격을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_divisible_by_10_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("[콜라,135,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
 	@DisplayName("구매를 위한 돈 투입 기능 테스트")
 	@Test
 	void insert_money_test() {
