@@ -19,8 +19,8 @@ public class Changes {
 		coinList = Coin.getRandomCoinList(changes);
 	}
 
-	public int countCoin(int idx) {
-		return coinList.get(idx);
+	public int countCoin(Coin coin) {
+		return coinList.get(coin.ordinal());
 	}
 
 	public int giveChanges(Coin coin) {

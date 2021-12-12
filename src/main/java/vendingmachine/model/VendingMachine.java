@@ -17,8 +17,8 @@ public class VendingMachine {
 		changes.setCoinList();
 	}
 
-	public int countCoin(int idx) {
-		return changes.countCoin(idx);
+	public int countCoin(Coin coin) {
+		return changes.countCoin(coin);
 	}
 
 	public void setMenu() {

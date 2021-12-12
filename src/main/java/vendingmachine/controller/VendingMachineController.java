@@ -20,7 +20,7 @@ public class VendingMachineController {
 		userView.askVendingMachineCoins();
 		vendingMachine.setCoins();
 		printInitCoins();
-		
+
 		userView.askProductsInfo();
 		vendingMachine.setMenu();
 
@@ -28,14 +28,14 @@ public class VendingMachineController {
 		vendingMachine.insertMoney();
 
 		order();
-		printResult();
+		printChanges();
 	}
 
 	public void printInitCoins() {
 		vendingMachineView.printInitCoinsComment();
 
 		for (Coin coin : Coin.values()) {
-			vendingMachineView.printChanges(vendingMachine.countCoin(coin.ordinal()), coin);
+			vendingMachineView.printCoin(vendingMachine.countCoin(coin), coin);
 		}
 	}
 
@@ -49,11 +49,16 @@ public class VendingMachineController {
 
 	}
 
-	public void printResult() {
+	public void printChanges() {
 		vendingMachineView.printChangesComment(vendingMachine.getRemainMoney());
 
 		for (Coin coin : Coin.values()) {
-			vendingMachineView.printChanges(vendingMachine.giveChanges(coin), coin);
+			int changes = vendingMachine.giveChanges(coin);
+
+			if (changes != 0) {
+				vendingMachineView.printCoin(changes, coin);
+			}
+			
 		}
 
 	}
