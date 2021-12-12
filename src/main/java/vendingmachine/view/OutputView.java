@@ -10,8 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OutputView {
-    private static List<String[]> productsInfo = new ArrayList<>();
+    private static final List<String[]> productsInfo = new ArrayList<>();
     public static List<String> productsName = new ArrayList<>();
+    public static List<Integer> productsNum = new ArrayList<>();
+    private static String chooseProductName;
+
 
     public static void askVendingMachinePrice(){
         System.out.println(Constant.VENDING_MACHINE_HOLDING_PRICE);
@@ -50,35 +53,65 @@ public class OutputView {
     }
 
     public static void showAllProcess(String[] products, int insertMoney){
-        for (String product : products){
-            makeProductInfo(product);
-        }
-        getProductNameList(productsInfo);
-        int minProductPrice = getMinProductPrice(productsInfo);
+        for (String product : products){makeProductInfo(product);}
+        getProductNameList();
+        getProductNumList();
+        int minProductPrice = getMinProductPrice();
         int nowMoney = insertMoney;
-
-        while (minProductPrice<nowMoney){
-            nowMoney = showProcess(productsInfo, nowMoney, productsName);
+        while (minProductPrice < nowMoney){
+            if (isSoldOut()){break;}
+            nowMoney = showProcess(nowMoney);
         }
         System.out.println(Constant.NOW_MONEY+nowMoney+Constant.WON);
         getChanges(nowMoney);
     }
+
     private static void getChanges(int nowMoney){
 
     }
-    private static int showProcess(List<String[]> productsInfo, int nowMoney, List<String> productsName){
-        String result;
-        System.out.println(Constant.NOW_MONEY+nowMoney+Constant.WON);
-        try{
-            result = setProductsName();
-        } catch (IllegalArgumentException e){
-            System.out.println(Constant.CHOOSE_PRODUCT_ERROR);
-            result = setProductsName();
-        }
-        int indexProduct = indexProduct(productsName,result);
-        int productPrice = Integer.parseInt(productsInfo.get(indexProduct)[1]);
-        nowMoney-=productPrice;
+
+    private static int showProcess(int nowMoney) {
+        System.out.println(Constant.NOW_MONEY + nowMoney + Constant.WON);
+        checkProduct();
+        nowMoney = getNowMoney(chooseProductName, nowMoney);
         return nowMoney;
+    }
+    private static void checkProduct(){
+        try {
+            setProductsName();
+        } catch (IllegalArgumentException e) {
+            System.out.println(Constant.CHOOSE_PRODUCT_NAME_ERROR);
+            checkProduct();
+        }
+    }
+
+    private static int getNowMoney(String chooseProductName, int nowMoney){
+        int indexProduct = indexProduct(productsName, chooseProductName);
+        try{
+            isValidProductNum(indexProduct);
+            productsNum.set(indexProduct,productsNum.get(indexProduct)-1);
+            int productPrice = Integer.parseInt(OutputView.productsInfo.get(indexProduct)[1]);
+            nowMoney -= productPrice;
+            return nowMoney;
+        } catch (IllegalArgumentException e) {
+            System.out.println(Constant.CHOOSE_PRODUCT_NUM_ERROR);
+            checkProduct();
+        }
+        return nowMoney;
+    }
+
+    private static void isValidProductNum(int indexProduct){
+        if (productsNum.get(indexProduct) < 1){
+            throw new IllegalArgumentException();
+        }
+    }
+
+    private static boolean isSoldOut(){
+        int totalNum=0;
+        for (int productNum : productsNum){
+            totalNum += productNum;
+        }
+        return totalNum == 0;
     }
 
     private static int indexProduct(List<String> productsName, String result){
@@ -91,12 +124,13 @@ public class OutputView {
         }
         return i;
     }
-    private static String setProductsName(){
+
+    private static void setProductsName(){
         System.out.println(Constant.CHOOSE_PRODUCT);
         String input = Console.readLine();
         System.out.println();
         InputView.isValidProductName(input, productsName);
-        return input;
+        chooseProductName = input;
     }
 
     private static void makeProductInfo(String product){
@@ -105,15 +139,22 @@ public class OutputView {
         productsInfo.add(productInfo);
     }
 
-    public static void getProductNameList(List<String[]> products){
-        for (String[] product : products){
+    private static void getProductNameList(){
+        for (String[] product : OutputView.productsInfo){
             productsName.add(product[0]);
         }
     }
 
-    private static int getMinProductPrice(List<String[]> products){
+    private static void getProductNumList(){
+        for (String[] product : OutputView.productsInfo){
+            int result = Integer.parseInt(product[2]);
+            productsNum.add(result);
+        }
+    }
+
+    private static int getMinProductPrice(){
         int minPrice = 10000000;
-        for (String[] product : products){
+        for (String[] product : OutputView.productsInfo){
             int result = Integer.parseInt(product[1]);
             if (result < minPrice){
                 minPrice = result;

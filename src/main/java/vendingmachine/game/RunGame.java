@@ -1,9 +1,7 @@
 package vendingmachine.game;
 
 import camp.nextstep.edu.missionutils.Console;
-import camp.nextstep.edu.missionutils.Randoms;
 
-import vendingmachine.model.Coin;
 import vendingmachine.util.Constant;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -48,12 +46,11 @@ public class RunGame {
         }
     }
 
-    private static String[] setProduct(){
+    private static void setProduct(){
         OutputView.askProduct();
         String input = Console.readLine();
         System.out.println();
         products = InputView.splitString(input);
-        return products;
     }
 
     private static void checkInsertMoney(){
@@ -65,11 +62,10 @@ public class RunGame {
         }
     }
 
-    private static int setInsertMoney(){
+    private static void setInsertMoney(){
         OutputView.askInsertMoney();
         String input = Console.readLine();
         System.out.println();
         insertMoney = InputView.parseOnlyInt(input);
-        return insertMoney;
     }
 }
