@@ -1,7 +1,6 @@
 package vendingmachine.process;
 
-import vendingmachine.user.User;
-import vendingmachine.user.UserGoodsValidation;
+import vendingmachine.user.*;
 
 import java.util.List;
 
@@ -35,4 +34,13 @@ public class ProcessPrepareGoods {
             goodsArray.add(goods);
         }
     }
+
+    public static void checkGoodsEachValidation() {
+        for (String[] goods : goodsArray) {
+            UserGoodsNameValidation.checkGoodsNameValidation(goods[0]);
+            UserGoodsPriceValidation.checkGoodsPriceValidation(goods[1]);
+            UserGoodsQuantityValidation.checkGoodsQuantityValidation(goods[2]);
+        }
+    }
+
 }
