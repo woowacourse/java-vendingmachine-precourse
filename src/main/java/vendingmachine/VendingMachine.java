@@ -1,11 +1,11 @@
 package vendingmachine;
 
+import vendingmachine.firstclass.CoinStocks;
 import vendingmachine.firstclass.Products;
 import vendingmachine.input.CustomerInput;
 import vendingmachine.input.MachineInput;
 import vendingmachine.model.CoinStock;
 import vendingmachine.model.Product;
-import vendingmachine.util.CoinCalculator;
 import vendingmachine.util.ProductBuilder;
 import vendingmachine.util.RandomCoinSelector;
 import vendingmachine.view.MachineViewer;
@@ -28,12 +28,11 @@ public class VendingMachine {
 
 	public void run() {
 		operate();
-		returnMoney();
 	}
 
 	public void operate() {
-		setupChangeCoins();
-		viewer.showCoins(coins);
+		CoinStocks coinStocks = setupChangeCoins();
+		viewer.showCoins(coinStocks.toString());
 		Products products = new Products(setupSellingProducts());
 		setupMoney();
 		while (products.anyAvailableRemain(money)) {
@@ -47,12 +46,8 @@ public class VendingMachine {
 				System.out.println(e.getMessage());
 			}
 		}
-	}
-
-	public void returnMoney() {
-		CoinCalculator coinCalculator = new CoinCalculator();
-		List<CoinStock> returnCoins = coinCalculator.combineCoinsByGreedy(coins, money);
-		viewer.showReturnCoins(returnCoins);
+		CoinStocks returnCoinStocks = coinStocks.getReturnCoins(money);
+		viewer.showCoins(returnCoinStocks.toString());
 	}
 
 	private String getCustomerInput() {
@@ -60,10 +55,10 @@ public class VendingMachine {
 		return customerInput.getPurchaseName();
 	}
 
-	private void setupChangeCoins() {
+	private CoinStocks setupChangeCoins() {
 		int changes = machineInput.getTotalMachineChanges();
 		RandomCoinSelector randomCoinSelector = new RandomCoinSelector();
-		coins = randomCoinSelector.makeRandomCoinMix(changes);
+		return new CoinStocks(randomCoinSelector.makeRandomCoinMix(changes));
 	}
 
 	public List<Product> setupSellingProducts() {

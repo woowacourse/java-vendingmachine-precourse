@@ -5,9 +5,9 @@ import vendingmachine.model.CoinStock;
 import java.util.List;
 
 public class MachineViewer {
-	public void showCoinBoxStatus(List<CoinStock> coins) {
+	public void showCoins(String coinsStatus) {
 		System.out.println("\n자판기가 보유한 동전");
-		coins.stream().forEach(System.out::println);
+		System.out.println(coinsStatus);
 	}
 
 	public void showRemainMoney(int money) {
