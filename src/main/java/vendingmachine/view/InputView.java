@@ -14,9 +14,15 @@ public class InputView {
 	private static final String REQUEST_INSERT_MONEY_MESSAGE = "투입 금액을 입력해 주세요.";
 
 	public static RequestHoldingMoneyDto inputHoldingMoney() {
-		System.out.println(REQUEST_HOLDING_AMOUNT_MESSAGE);
-		Money money = new Money(readLine());
-		return new RequestHoldingMoneyDto(money);
+		while (true) {
+			try {
+				System.out.println(REQUEST_HOLDING_AMOUNT_MESSAGE);
+				Money money = new Money(readLine());
+				return new RequestHoldingMoneyDto(money);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public static RequestRegisterProductsDto inputRegisterProducts() {
