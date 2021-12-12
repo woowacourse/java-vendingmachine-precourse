@@ -83,7 +83,11 @@ public class Machine {
 			System.out.println(e.getMessage());
 			inputMachineProduct();
 		}
-		for (String productInfo : productList) {
+		makeProductsList(productList);
+	}
+	
+	public void makeProductsList(String[] input) {
+		for (String productInfo : input) {
 			this.products.add(new Product(removeSquareBracket(productInfo)));
 		}
 	}
