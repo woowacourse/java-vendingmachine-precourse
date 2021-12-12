@@ -43,6 +43,7 @@ public class VendingMachine {
     public Coins giveChange() {
         Coins change = changeAccountant.change(moneyAvailable, coinBalance);
         moneyAvailable = changeAccountant.getRestAfterCalculation();
+        coinBalance.take(change);
         return change;
     }
 
