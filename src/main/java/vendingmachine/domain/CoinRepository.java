@@ -32,7 +32,7 @@ public class CoinRepository {
 	}
 
 	public static Map<Coin, Quantity> findAll() {
-		return coins;
+		return Collections.unmodifiableMap(coins);
 	}
 
 	public static void clear() {
