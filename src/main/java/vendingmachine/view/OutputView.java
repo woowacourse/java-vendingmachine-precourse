@@ -10,5 +10,6 @@ public class OutputView {
 			.stream()
 			.map(e -> String.join("\n", e.getKey().getAmount() + "원 - " + e.getValue() + "개"))
 			.forEach(System.out::println);
+		System.out.println();
 	}
 }
