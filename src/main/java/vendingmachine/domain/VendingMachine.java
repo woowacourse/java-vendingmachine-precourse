@@ -57,4 +57,8 @@ public class VendingMachine {
             productList.insertProduct(product);
         }
     }
+
+    public void setInputMoney(int money) {
+        this.inputMoney = money;
+    }
 }
