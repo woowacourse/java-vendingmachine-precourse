@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import static constant.CharacterConstant.*;
+import static constant.NumberConstant.*;
 import static constant.StringConstant.*;
 
 import java.util.Map;
@@ -82,7 +83,7 @@ public class ApplicationController {
 		int minProductPrice = productRepositoryService.getMinProductPrice();
 		int productStock = productRepositoryService.getProductStock();
 		if (minProductPrice > money
-				|| productStock == 0) {
+				|| productStock == ZERO) {
 			return false;
 		}
 		return true;
@@ -97,7 +98,7 @@ public class ApplicationController {
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + e.getMessage());
 		}
-		return 0;
+		return ZERO;
 	}
 
 	private void returnChange(int money) {

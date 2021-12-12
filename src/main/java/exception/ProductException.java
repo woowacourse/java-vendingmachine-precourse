@@ -21,7 +21,7 @@ public class ProductException {
 	}
 
 	private static void isEmpty(String userProducts) {
-		if (userProducts.trim().length() == 0) {
+		if (userProducts.trim().length() == ZERO) {
 			throw new IllegalArgumentException(PRODUCT_NAME_NULL);
 		}
 	}
@@ -31,7 +31,7 @@ public class ProductException {
 				|| !userProduct.endsWith(PRODUCT_WRAPPER_RIGHT)) {
 			throw new IllegalArgumentException(PRODUCT_WRAPPER_NULL);
 		}
-		userProduct = userProduct.substring(1, userProduct.length() - 1);
+		userProduct = userProduct.substring(PRODUCT_WRAPPER_SIZE, userProduct.length() - PRODUCT_WRAPPER_SIZE);
 		isDivided(userProduct);
 	}
 
@@ -48,8 +48,8 @@ public class ProductException {
 		if (productDetail.size() != PRODUCT_DETAIL_AMOUNT) {
 			throw new IllegalArgumentException(PRODUCT_DETAIL_UNMATCHED);
 		}
-		isValidPrice(productDetail.get(1));
-		isValidQuantity(productDetail.get(2));
+		isValidPrice(productDetail.get(PRODUCT_PRICE_INDEX));
+		isValidQuantity(productDetail.get(PRODUCT_QUANTITY_INDEX));
 	}
 
 	private static int isValidPrice(String productPrice) {

@@ -52,9 +52,9 @@ public class CoinService {
 	private int changeCoin(Coin coin, int left, Map<Coin,Integer> coinState) {
 		int coinStateQuantity = coinState.get(coin);
 		int coinAmount = coin.getAmount();
-		int changeCoinQuantity = 0;
+		int changeCoinQuantity = ZERO;
 		while (shouldChange(coinStateQuantity, coinAmount, left)
-			&& getAllCoinQuantity(coinState) != 0) {
+			&& getAllCoinQuantity(coinState) != ZERO) {
 			left -= coinAmount;
 			coinState.put(coin, --coinStateQuantity);
 			coins.put(coin, ++changeCoinQuantity);
@@ -63,7 +63,7 @@ public class CoinService {
 	}
 
 	private boolean shouldChange(int coinQuantity, int coinAmount, int left) {
-		if (coinQuantity == 0
+		if (coinQuantity == ZERO
 			|| coinAmount > left) {
 			return false;
 		}
@@ -71,7 +71,7 @@ public class CoinService {
 	}
 
 	private int getAllCoinQuantity(Map<Coin, Integer> coins) {
-		int coinQuantity = 0;
+		int coinQuantity = ZERO;
 		for (Integer value : coins.values()) {
 			coinQuantity += value;
 		}

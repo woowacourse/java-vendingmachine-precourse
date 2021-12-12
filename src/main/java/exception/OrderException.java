@@ -1,5 +1,6 @@
 package exception;
 
+import static constant.NumberConstant.*;
 import static constant.StringConstant.*;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class OrderException {
 	}
 
 	public static void isProductLeft(Product product) {
-		if (product.getQuantity() == 0) {
+		if (product.getQuantity() == ZERO) {
 			throw new IllegalArgumentException(ORDER_NOT_LEFT);
 		}
 	}

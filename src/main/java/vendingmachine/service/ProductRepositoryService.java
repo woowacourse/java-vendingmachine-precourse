@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import static constant.CharacterConstant.*;
+import static constant.NumberConstant.*;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -34,14 +35,14 @@ public class ProductRepositoryService {
 	}
 
 	private String unwrapProductInfo(String product) {
-		return product.substring(1, product.length() - 1);
+		return product.substring(PRODUCT_WRAPPER_SIZE, product.length() - PRODUCT_WRAPPER_SIZE);
 	}
 
 	private Product stringToProduct(String product) {
 		String[] productInfo = product.split(PRODUCT_DETAIL_DIVIDER);
-		String productName = productInfo[0];
-		int productPrice = Integer.parseInt(productInfo[1]);
-		int productQuantity = Integer.parseInt(productInfo[2]);
+		String productName = productInfo[PRODUCT_NAME_INDEX];
+		int productPrice = Integer.parseInt(productInfo[PRODUCT_PRICE_INDEX]);
+		int productQuantity = Integer.parseInt(productInfo[PRODUCT_QUANTITY_INDEX]);
 		return new Product(productName, productPrice, productQuantity);
 	}
 
