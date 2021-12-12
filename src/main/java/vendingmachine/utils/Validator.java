@@ -59,6 +59,7 @@ public class Validator {
 			.collect(Collectors.toList());
 		isProductNum(product);
 		isProductDuplicate(product);
+		isProduct(product);
 	}
 
 	public static void existsLastProduct(String input) {
@@ -90,6 +91,29 @@ public class Validator {
 			.collect(Collectors.toSet());
 		if (productName.size() != input.size()) {
 			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_NAME_DUPLICATE);
+		}
+	}
+
+	public static void isProduct(List<String[]> input) {
+		isProductAmountNumber(input);
+		isProductCountNumber(input);
+	}
+
+	public static void isProductAmountNumber(List<String[]> input) {
+		try {
+			input.stream()
+				.map(e -> Integer.parseInt(e[Constant.PRODUCT_AMOUNT_INDEX]));
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_AMOUNT_NUM);
+		}
+	}
+
+	public static void isProductCountNumber(List<String[]> input) {
+		try {
+			input.stream()
+				.map(e -> Integer.parseInt(e[Constant.PRODUCT_COUNT_INDEX]));
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_COUNT_NUM);
 		}
 	}
 

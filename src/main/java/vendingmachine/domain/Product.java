@@ -8,22 +8,16 @@ public class Product {
 	private final int amount;
 	private int count;
 
-	public Product(String[] input) {
-		isAmount(input);
-		isCount(input);
-
-		this.name = input[Constant.PRODUCT_NAME_INDEX];
-		this.amount = Integer.parseInt(input[Constant.PRODUCT_AMOUNT_INDEX]);
-		this.count = Integer.parseInt(input[Constant.PRODUCT_COUNT_INDEX]);
+	public Product(String name, int amount, int count) {
+		isAmount(amount);
+		isCount(count);
+		
+		this.name = name;
+		this.amount = amount;
+		this.count = count;
 	}
 
-	public void isAmount(String[] input) {
-		int amount;
-		try {
-			amount = Integer.parseInt(input[Constant.PRODUCT_AMOUNT_INDEX]);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_AMOUNT_NUM);
-		}
+	public void isAmount(int amount) {
 		if (amount < Constant.PRODUCT_AMOUNT_MIN) {
 			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_AMOUNT_MIN);
 		}
@@ -35,13 +29,7 @@ public class Product {
 		}
 	}
 
-	public void isCount(String[] input) {
-		int count;
-		try {
-			count = Integer.parseInt(input[2]);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_COUNT_NUM);
-		}
+	public void isCount(int count) {
 		if (count < Constant.PRODUCT_COUNT_MIN) {
 			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_COUNT_MIN);
 		}

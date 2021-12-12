@@ -9,6 +9,7 @@ public class Constant {
 	public static final String PRODUCT_START = "[";
 	public static final String PRODUCT_LAST = "]";
 	public static final String PRODUCT_SPLIT = ",";
+	public static final int PRODUCT_SPLIT_LENGTH = 1;
 	public static final int PRODUCT_NUM = 3;
 	public static final int PRODUCT_NAME_INDEX = 0;
 	public static final int PRODUCT_AMOUNT_INDEX = 1;

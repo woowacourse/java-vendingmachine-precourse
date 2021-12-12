@@ -38,10 +38,12 @@ public class InputView {
 		try {
 			Validator.isProducts(products);
 			return new Products(Arrays.stream(products.split(Constant.PRODUCTS_SPLIT))
-				.map(e -> e.substring(1, e.length() - 1))
-				.collect(Collectors.toList())
-				.stream().map(e -> e.split(Constant.PRODUCT_SPLIT))
-				.map(Product::new).collect(Collectors.toList()));
+				.map(e -> e.substring(Constant.PRODUCT_SPLIT_LENGTH, e.length() - Constant.PRODUCT_SPLIT_LENGTH))
+				.map(e -> e.split(Constant.PRODUCT_SPLIT))
+				.map(
+					e -> new Product(e[Constant.PRODUCT_NAME_INDEX], Integer.parseInt(e[Constant.PRODUCT_AMOUNT_INDEX]),
+						Integer.parseInt(e[Constant.PRODUCT_COUNT_INDEX])))
+				.collect(Collectors.toList()));
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return getProducts();
