@@ -16,5 +16,9 @@ public class Item {
 	public int getAmount() {
 		return this.amount;
 	}
+
+	public boolean isAmountZero() {
+		return this.amount <= 0;
+	}
 }
 
