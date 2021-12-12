@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import vendingmachine.domain.Item;
+import vendingmachine.view.OutputView;
 
 public class PurchaseInputValidator {
 
@@ -13,7 +14,7 @@ public class PurchaseInputValidator {
 			isEnoughItem(selectedItem);
 			isEnoughMoney(selectedItem, remainingMoney);
 		} catch (IllegalArgumentException exception) {
-			System.out.println(exception.getMessage());
+			OutputView.printErrorMessage(exception.getMessage());
 			return false;
 		}
 		return true;

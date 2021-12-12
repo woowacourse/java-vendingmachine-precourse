@@ -3,6 +3,8 @@ package vendingmachine.service.validator;
 import java.util.Arrays;
 import java.util.List;
 
+import vendingmachine.view.OutputView;
+
 public class ItemInputValidator {
 	private static final int PRICE_INDEX = 1;
 	private static final int PRICE_DIVISIBLE_BY = 10;
@@ -19,7 +21,7 @@ public class ItemInputValidator {
 			validatePrice(itemElements);
 			validateQuantity(itemElements);
 		} catch (IllegalArgumentException exception) {
-			System.out.println(exception.getMessage());
+			OutputView.printErrorMessage(exception.getMessage());
 			return false;
 		}
 		return true;

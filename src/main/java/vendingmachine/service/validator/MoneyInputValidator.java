@@ -1,5 +1,7 @@
 package vendingmachine.service.validator;
 
+import vendingmachine.view.OutputView;
+
 public class MoneyInputValidator {
 
 	private static final int MINIMUM_MONEY = 0;
@@ -9,7 +11,7 @@ public class MoneyInputValidator {
 			validateDigit(MoneyInput);
 			validateMinimumSavedMoney(MoneyInput);
 		} catch (IllegalArgumentException exception) {
-			System.out.println(exception.getMessage());
+			OutputView.printErrorMessage(exception.getMessage());
 			return false;
 		}
 		return true;
