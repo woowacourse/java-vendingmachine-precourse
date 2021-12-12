@@ -21,10 +21,7 @@ public class CoinService {
 	public void pickRandomCoins(List<Coin> coins, int savedMoney) {
 		while (savedMoney > 0) {
 			int pickedCoinAmount = getPickedCoin(coins, savedMoney);
-			Coin pickedCoin = coins.stream()
-				.filter(coin -> coin.getAmount() == pickedCoinAmount)
-				.findAny()
-				.orElse(null);
+			Coin pickedCoin = Coin.getCoinByAmount(pickedCoinAmount);
 			pickedCoin.addCoin();
 			savedMoney -= pickedCoin.getAmount();
 		}
