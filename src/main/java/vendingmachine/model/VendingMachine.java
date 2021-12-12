@@ -13,8 +13,8 @@ public class VendingMachine {
 		menu = new Menu();
 	}
 
-	public void setCoins() {
-		changes.setCoinList();
+	public void setCoins(String initCoin) {
+		changes.setCoinList(initCoin);
 	}
 
 	public int countCoin(Coin coin) {

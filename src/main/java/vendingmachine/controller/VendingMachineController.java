@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.constants.ErrorMessage;
 import vendingmachine.model.Coin;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.UserView;
@@ -17,8 +18,7 @@ public class VendingMachineController {
 	}
 
 	public void use() {
-		userView.askVendingMachineCoins();
-		vendingMachine.setCoins();
+		setInitCoins();
 		printInitCoins();
 
 		userView.askProductsInfo();
@@ -29,6 +29,20 @@ public class VendingMachineController {
 
 		order();
 		printChanges();
+	}
+
+	public void setInitCoins() {
+		userView.askInitCoins();
+
+		while (true) {
+			try {
+				vendingMachine.setCoins(userView.insertInitCoins());
+			} catch (IllegalArgumentException e) {
+				System.out.println(ErrorMessage.ERROR + e.getMessage());
+			}
+			break;
+		}
+
 	}
 
 	public void printInitCoins() {
@@ -58,7 +72,7 @@ public class VendingMachineController {
 			if (changes != 0) {
 				vendingMachineView.printCoin(changes, coin);
 			}
-			
+
 		}
 
 	}

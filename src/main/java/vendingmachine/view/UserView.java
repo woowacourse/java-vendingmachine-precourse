@@ -1,10 +1,16 @@
 package vendingmachine.view;
 
+import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.constants.InputMessage;
 
 public class UserView {
-	public void askVendingMachineCoins() {
+	public void askInitCoins() {
 		System.out.println(InputMessage.PREPARING_COIN_MESSAGE);
+	}
+
+	public String insertInitCoins() {
+		String initCoin = Console.readLine();
+		return initCoin;
 	}
 
 	public void askProductsInfo() {
@@ -18,5 +24,5 @@ public class UserView {
 	public void orderMenu() {
 		System.out.println(InputMessage.ORDER_MENU_NAME);
 	}
-	
+
 }

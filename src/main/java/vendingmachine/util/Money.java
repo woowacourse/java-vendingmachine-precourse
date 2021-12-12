@@ -1,17 +1,12 @@
 package vendingmachine.util;
 
-import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.constants.ErrorMessage;
-
 public class Money {
-	public static int setMoney() {
+	public static int setMoney(String moneyStr) {
 		int money;
 		try {
-			String moneyStr = Console.readLine();
 			money = NumberException.checkMoneyException(moneyStr);
 		} catch (IllegalArgumentException e) {
-			System.out.println(ErrorMessage.ERROR + e.getMessage());
-			return setMoney();
+			throw new IllegalArgumentException(e.getMessage());
 		}
 		return money;
 	}

@@ -14,8 +14,8 @@ public class Changes {
 		changes = 0;
 	}
 
-	public void setCoinList() {
-		changes = Money.setMoney();
+	public void setCoinList(String initCoin) {
+		changes = Money.setMoney(initCoin);
 		coinList = Coin.getRandomCoinList(changes);
 	}
 
