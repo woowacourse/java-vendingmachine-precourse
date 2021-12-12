@@ -1,4 +1,4 @@
-package vendingmachine.model.manage;
+package vendingmachine.model.coin;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package vendingmachine.model.order;
+package vendingmachine.model.drink;
 
 import java.util.List;
 

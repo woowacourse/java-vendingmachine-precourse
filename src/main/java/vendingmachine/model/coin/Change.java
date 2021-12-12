@@ -1,4 +1,4 @@
-package vendingmachine.model.manage;
+package vendingmachine.model.coin;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -9,9 +9,4 @@ public class Change {
     public Change() {
         coins = new LinkedHashMap<>();
     }
-
-
-
-
-
 }

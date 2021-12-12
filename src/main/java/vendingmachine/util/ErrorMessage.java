@@ -7,6 +7,7 @@ public class ErrorMessage {
     public static final String MACHINE_MONEY_STRING_ERROR = String.format("%s 금액은 숫자여야 합니다.", ERROR);
     public static final String EMPTY_ERROR = String.format("%s 상품 정보는 공백이 될 수 없습니다.", ERROR);
     public static final String NAME_NUMBER_ERROR = String.format("%s 상품명은 숫자가 될 수 없습니다.", ERROR);
+    public static final String DRINK_CONTENT_ERROR = String.format("%s 상품명, 가격, 숫자가 모두 포함되어야 합니다.", ERROR);
     public static final String PRICE_STRING_ERROR = String.format("%s 가격은 숫자여야 합니다.", ERROR);
     public static final String PRICE_MIN_VALUE_ERROR = String.format("%s 가격은 100원 이상이어야 합니다.", ERROR);
     public static final String PRICE_UNIT_ERROR = String.format("%s 가격은 10원 단위로 나눠져야 합니다.", ERROR);

@@ -1,9 +1,10 @@
-package vendingmachine.model.order;
+package vendingmachine.model.drink;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import vendingmachine.util.Constant;
+import vendingmachine.util.ErrorMessage;
 
 public class DrinkMapper {
 
@@ -29,6 +30,9 @@ public class DrinkMapper {
     }
 
     private Drink createDrink(String[] content) {
+        if (content.length != Constant.CHECK_ARR_HAS_ALL_CONTENT)
+            throw new IllegalArgumentException(ErrorMessage.DRINK_CONTENT_ERROR);
+
         return new Drink(content[Constant.NAME_INDEX],
             content[Constant.PRICE_INDEX],
             content[Constant.QUANTITY_INDEX]);

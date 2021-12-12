@@ -1,4 +1,4 @@
-package vendingmachine.model.order;
+package vendingmachine.model.drink;
 
 public class Drink implements Comparable<Drink> {
     private final String name;
