@@ -14,19 +14,7 @@ public enum Coin {
         this.number = number;
     }
 
-    public void setCoin500Number(int number) {
-        this.number = number;
-    }
-
-    public void setCoin100Number(int number) {
-        this.number = number;
-    }
-
-    public void setCoin50Number(int number) {
-        this.number = number;
-    }
-
-    public void setCoin10Number(int number) {
-        this.number = number;
+    public void setCoinNumber() {
+        this.number++;
     }
 }
