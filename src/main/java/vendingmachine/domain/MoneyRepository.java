@@ -12,4 +12,8 @@ public class MoneyRepository {
 	public static Money get() {
 		return money;
 	}
+
+	public static void clear() {
+		money.clear();
+	}
 }

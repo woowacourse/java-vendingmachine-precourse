@@ -5,6 +5,8 @@ import static vendingmachine.enums.ErrorMessage.*;
 import vendingmachine.enums.Coin;
 
 public class Money {
+	private static final int INIT_MONEY = 0;
+
 	private int money;
 
 	public Money(String value) {
@@ -49,5 +51,9 @@ public class Money {
 		if (money % Coin.COIN_10.get() != 0) {
 			throw new IllegalArgumentException(MONEY_NOT_DIVISIBLE_BY_10_ERROR_MESSAGE.get());
 		}
+	}
+
+	public void clear() {
+		money = INIT_MONEY;
 	}
 }

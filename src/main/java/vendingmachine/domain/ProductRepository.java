@@ -23,4 +23,8 @@ public class ProductRepository {
 		return products.stream()
 			.anyMatch(Product::canSell);
 	}
+
+	public static void clear() {
+		products.clear();
+	}
 }

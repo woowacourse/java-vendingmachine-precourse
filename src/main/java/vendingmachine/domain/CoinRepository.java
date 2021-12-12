@@ -28,4 +28,11 @@ public class CoinRepository {
 	public static HashMap<Coin, Quantity> findAll() {
 		return coins;
 	}
+
+	public static void clear() {
+		coins.put(Coin.COIN_500, new Quantity(INIT_QUANTITY));
+		coins.put(Coin.COIN_100, new Quantity(INIT_QUANTITY));
+		coins.put(Coin.COIN_50, new Quantity(INIT_QUANTITY));
+		coins.put(Coin.COIN_10, new Quantity(INIT_QUANTITY));
+	}
 }
