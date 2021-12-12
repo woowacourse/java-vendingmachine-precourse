@@ -3,9 +3,10 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Pattern;
+
+import static vendingmachine.Validation.*;
 
 public class Application {
     static int USER_MONEY = 0;
@@ -17,12 +18,11 @@ public class Application {
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         MACHINE_OWN_MONEY = inputMachineOwnMoney();
-        setVendingMachineOwnCoins();
+        setRandomCountToEachCoin();
         printCurrentMachineCoin();
         ArrayList<Product> products = inputProductNamePriceAmount();
         insertMoneyByUser();
     }
-
     public static void insertMoneyByUser(){
         String userMoney = "";
         while(userMoney.isEmpty()){
@@ -84,13 +84,6 @@ public class Application {
         return products;
     }
 
-    public static void setVendingMachineOwnCoins(){
-        Coin[] eachCoin = Coin.values();
-        for(Coin c: eachCoin){
-            setRandomCountToEachCoin(c);
-        }
-    }
-
     public static void printCurrentMachineCoin(){
         System.out.println("자판기가 보유한 동전");
         Coin[] eachCoin = Coin.values();
@@ -99,21 +92,17 @@ public class Application {
         }
     }
 
-    public static void setRandomCountToEachCoin(Coin coin){
-        int maxCount = MACHINE_OWN_MONEY / coin.getAmount();
-        List<Integer> possibleMoneyList = new ArrayList<>();
+    public static void setRandomCountToEachCoin(){
+        int tempMachineOwnMoney = MACHINE_OWN_MONEY;
+        int selectedCoin;
 
-        if(maxCount <= 0) return;
-        if(coin.getAmount() == 10){
-            coin.setCount(maxCount);
-            return;
+        while(tempMachineOwnMoney != 0) {
+            selectedCoin = Randoms.pickNumberInList(Coin.getCoinList());
+            if(tempMachineOwnMoney / selectedCoin > 0){
+                Coin.valueOf("COIN_" + selectedCoin).addCount();
+                tempMachineOwnMoney -= selectedCoin;
+            }
         }
-
-        for(int i = 0; i <= maxCount; i++){
-            possibleMoneyList.add(i);
-        }
-        coin.setCount(Randoms.pickNumberInList(possibleMoneyList));
-        MACHINE_OWN_MONEY -= coin.getCount() * coin.getAmount();
     }
 
     public static int inputMachineOwnMoney(){

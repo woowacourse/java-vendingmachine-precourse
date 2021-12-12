@@ -1,9 +1,8 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Coin {
     COIN_500(500, 0),
@@ -14,13 +13,19 @@ public enum Coin {
     private final int amount;
     private int count;
 
+    public static List<Integer> getCoinList(){
+        return Arrays.stream(Coin.values())
+                .map(Coin::getAmount)
+                .collect(Collectors.toList());
+    }
+
     Coin(final int amount, int count) {
         this.amount = amount;
         this.count = count;
     }
 
-    public void setCount(int count){
-        this.count = count;
+    public void addCount(){
+        this.count++;
     }
 
     public int getAmount(){
