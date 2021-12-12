@@ -2,7 +2,6 @@ package vendingmachine.strategy;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
 import vendingmachine.domain.Coin;
@@ -14,12 +13,11 @@ class RandomCoinCreateStrategyTest {
     void createCoinRangeTest() {
         // given
         CoinCreateStrategy strategy = new RandomCoinCreateStrategy();
-        List<Integer> expected = Coin.currentCoins();
 
         // when
-        int result = strategy.createCoin();
+        Coin result = strategy.createCoin();
 
         // then
-        assertThat(result).isIn(expected);
+        assertThat(result).isInstanceOf(Coin.class);
     }
 }
