@@ -18,26 +18,6 @@ public class VendingMachineService {
 		this.userView = userView;
 	}
 
-	public void insertMoney() {
-		boolean successInsertMoney = false;
-		vendingMachineView.askInsertMoney();
-
-		while (!successInsertMoney) {
-			successInsertMoney = insertMoneyIfItIsRight();
-		}
-
-	}
-
-	public boolean insertMoneyIfItIsRight() {
-		try {
-			vendingMachine.insertMoney(userView.insertMoney());
-		} catch (IllegalArgumentException e) {
-			System.out.println(ErrorMessage.ERROR + e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
 	public void repeatOrder() {
 
 		while (!vendingMachine.stopMachine()) {

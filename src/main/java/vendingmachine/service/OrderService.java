@@ -9,4 +9,5 @@ public class OrderService {
 		cost = OrderException.checkCanTakeThisOrder(orderedMenu, vendingMachine);
 		return cost;
 	}
+
 }
