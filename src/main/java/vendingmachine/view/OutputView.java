@@ -1,17 +1,17 @@
 package vendingmachine.view;
 
 public class OutputView {
-	static final String HOLDING_MONEY_REQUEST_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+	static final String HOLDING_AMOUNT_REQUEST_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	static final String HOLDING_COIN_MESSAGE = "자판기가 보유한 동전";
 	static final String PRODUCT_INPUT_REQUEST_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
-	static final String INPUT_MONEY_INPUT_REQUEST_MESSAGE = "투입 금액을 입력해 주세요.";
+	static final String INPUT_AMOUNT_INPUT_REQUEST_MESSAGE = "투입 금액을 입력해 주세요.";
 	static final String PRODUCT_TO_BUY_INPUT_REQUEST_MESSAGE = "구매할 상품명을 입력해 주세요.";
 	static final String CHANGES_MESSAGE = "잔돈";
 	static final String ERROR = "[ERROR]";
 	static final String SPACE = " ";
 
-	public static void printHoldingMoneyRequestMessage() {
-		System.out.println(HOLDING_MONEY_REQUEST_MESSAGE);
+	public static void printHoldingAmountRequestMessage() {
+		System.out.println(HOLDING_AMOUNT_REQUEST_MESSAGE);
 	}
 
 	public static void printHoldingCoinMessage() {
@@ -28,9 +28,9 @@ public class OutputView {
 		System.out.println(PRODUCT_INPUT_REQUEST_MESSAGE);
 	}
 
-	public static void printInputMoneyRequestMessage() {
+	public static void printInputAmountRequestMessage() {
 		printEmptyLine();
-		System.out.println(INPUT_MONEY_INPUT_REQUEST_MESSAGE);
+		System.out.println(INPUT_AMOUNT_INPUT_REQUEST_MESSAGE);
 	}
 
 	public static void printProductNameToBuyRequestMessage() {

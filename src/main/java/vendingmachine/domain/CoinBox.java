@@ -6,11 +6,11 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.view.OutputView;
 
 public class CoinBox {
-	private int holdingMoney;
+	private int holdingAmount;
 	private EnumMap<Coin, Integer> coinEnumMap = new EnumMap<>(Coin.class);
 
-	CoinBox(int holdingMoney) {
-		this.holdingMoney = holdingMoney;
+	CoinBox(int holdingAmount) {
+		this.holdingAmount = holdingAmount;
 		coinEnumMap.put(Coin.COIN_500, 0);
 		coinEnumMap.put(Coin.COIN_100, 0);
 		coinEnumMap.put(Coin.COIN_50, 0);
@@ -34,17 +34,17 @@ public class CoinBox {
 	}
 
 	private void makeCoins() {
-		int money = holdingMoney;
-		while (money > 0) {
-			int randomCoinAmount = pickRandomCoinAmount(money);
-			money -= randomCoinAmount;
-			Coin coin = Coin.getCoinByAmount(randomCoinAmount);
+		int amount = holdingAmount;
+		while (amount > 0) {
+			int randomCoinAmount = pickRandomCoinAmount(amount);
+			amount -= randomCoinAmount;
+			Coin coin = Coin.from(randomCoinAmount);
 			int beforeCoinAmount = coinEnumMap.get(coin);
 			coinEnumMap.replace(coin, beforeCoinAmount + 1);
 		}
 	}
 
-	private int pickRandomCoinAmount(int money) {
-		return Randoms.pickNumberInList(Coin.getAmountList(money));
+	private int pickRandomCoinAmount(int amountLimit) {
+		return Randoms.pickNumberInList(Coin.getAmountList(amountLimit));
 	}
 }

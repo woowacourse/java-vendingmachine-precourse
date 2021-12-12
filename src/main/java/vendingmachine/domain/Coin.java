@@ -21,14 +21,14 @@ public enum Coin {
 		return amount;
 	}
 
-	public static List<Integer> getAmountList(int money) {
+	public static List<Integer> getAmountList(int amountLimit) {
 		return Arrays.asList(Coin.values()).stream()
 			.map(Coin::getAmount)
-			.filter(amount -> amount <= money)
+			.filter(amount -> amount <= amountLimit)
 			.collect(Collectors.toList());
 	}
 
-	public static Coin getCoinByAmount(int amount) {
+	public static Coin from(int amount) {
 		return Arrays.stream(Coin.values())
 			.filter(coin -> coin.amount == amount)
 			.findFirst()
