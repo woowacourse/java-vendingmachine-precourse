@@ -1,5 +1,6 @@
 package vendingmachine.utils;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -39,10 +40,15 @@ public class Validator {
 	}
 
 	public static void validateDuplicateMerchandise(List<Merchandise> merchandiseList) {
-		Set<Merchandise> merchandiseSet = merchandiseList.stream()
-			.collect(Collectors.toSet());
+		Set<Merchandise> merchandiseSet = new HashSet<>(merchandiseList);
 		if (merchandiseSet.size() != merchandiseList.size()) {
 			throw new IllegalArgumentException(ErrorMessage.INVALID_DUPLICATED_MERCHANDISE_ERROR_MESSAGE);
+		}
+	}
+
+	public static void validateDivideMerchandisePriceBy10Coin(int merchandisePrice) {
+		if (merchandisePrice % 10 != 0) {
+			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE);
 		}
 	}
 }

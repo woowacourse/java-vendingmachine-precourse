@@ -57,6 +57,7 @@ public class VendingMachineController {
 	public Merchandise constructMerchandise(String merchandiseInforamtion) {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
 		Validator.validateEmptyMerchandiseInformation(informations);
+		Validator.validateDivideMerchandisePriceBy10Coin(Integer.parseInt(informations[1].trim()));
 		return new Merchandise(informations[0].trim(), new Money(Integer.parseInt(informations[1].trim())),
 			Integer.parseInt(informations[2].trim()));
 	}
