@@ -10,18 +10,14 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
-    private final int amount;
     private static final String ERR_INVALID_COIN = "존재하지 않는 동전입니다.";
+    private final int amount;
 
     Coin(final int amount) {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public static Coin getCoin(int amount) {
+    public static Coin getCoin(int amount) throws IllegalArgumentException {
         return Arrays.stream(Coin.values())
             .filter(c -> c.amount == amount)
             .findFirst()
@@ -36,5 +32,9 @@ public enum Coin {
                 .map(coin -> coin.amount)
                 .collect(Collectors.toList())
         ));
+    }
+
+    public int getAmount() {
+        return amount;
     }
 }
