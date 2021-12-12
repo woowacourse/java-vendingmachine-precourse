@@ -6,7 +6,7 @@ import java.util.Map;
 import vendingmachine.util.MapSupporter;
 
 public class Machine {
-	Map<Coin, Integer> coins = new HashMap<>();
+	private Map<Coin, Integer> coins = new HashMap<>();
 
 	public void addCoins(Map<Coin, Integer> coins) {
 		for (Coin coin : coins.keySet()) {
