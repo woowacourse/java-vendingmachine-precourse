@@ -5,16 +5,16 @@ import vendingmachine.SystemMessage.SystemMessage;
 
 public class DrinkListValidator {
     public static boolean isValidateDrinkList(String input) {
-        int flag = Constant.TRUE;
+        int isValidate = Constant.TRUE;
         String[] drinks = input.split(Constant.SEMICOLON);
         for (String drink : drinks) {
-            flag *= isValidateDrinkInfo(drink.trim());
+            isValidate *= isValidateDrinkInfo(drink.trim());
         }
-        return (flag == Constant.TRUE);
+        return (isValidate == Constant.TRUE);
     }
 
     private static int isValidateDrinkInfo(String input) {
-        input = input.substring(1, input.length() - 1);
+        input = input.substring(Constant.ONE, input.length() - Constant.ONE);
         String[] drinkInfo = input.split(Constant.COMMA);
         if (!isValidateInfoFormat(drinkInfo)) {
             return Constant.FALSE;

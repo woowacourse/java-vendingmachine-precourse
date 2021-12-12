@@ -14,8 +14,8 @@ public class Coins {
 
     public static void showCoins(OutputView outputView) {
         outputView.print(NoticeMessage.BALANCE_COIN_MESSAGE);
-        for (CoinPair coin : coins) {
-            coin.showCoin(outputView);
+        for (CoinPair coinPair : coins) {
+            outputView.print(coinPair.toString());
         }
     }
 

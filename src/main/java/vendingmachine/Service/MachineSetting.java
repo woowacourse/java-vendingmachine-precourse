@@ -65,6 +65,7 @@ public class MachineSetting {
         do {
             input = inputView.getInput();
         } while (!DrinkListValidator.isValidateDrinkList(input));
+
         String[] drinks = input.split(Constant.SEMICOLON);
         for (String drink : drinks) {
             drinkList.add(getParsedDrinkInfo(drink.trim()));
@@ -73,7 +74,7 @@ public class MachineSetting {
     }
 
     private static Drink getParsedDrinkInfo(String drink) {
-        drink = drink.substring(1, drink.length() - 1);
+        drink = drink.substring(Constant.ONE, drink.length() - Constant.ONE);
         String[] drinkInfo = drink.split(Constant.COMMA);
         String drinkName = drinkInfo[Constant.NAME_INDEX].trim();
         int drinkPrice = Integer.parseInt(drinkInfo[Constant.PRICE_INDEX].trim());

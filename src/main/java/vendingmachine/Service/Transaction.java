@@ -21,7 +21,7 @@ public class Transaction {
     public static User execute() {
         while (!isEnd()) {
             tryPurchase();
-            user.showRemainMoney(outputView);
+            outputView.print(user.toString());
         }
         return user;
     }

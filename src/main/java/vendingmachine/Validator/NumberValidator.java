@@ -25,9 +25,9 @@ public class NumberValidator {
         return true;
     }
 
-    public static boolean isMultipleOfTen(int input) {
+    public static boolean isMultipleOfTen(int inputNumber) {
         try {
-            if ((input % Constant.TEN) != Constant.ZERO) {
+            if ((inputNumber % Constant.TEN) != Constant.ZERO) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
@@ -37,9 +37,9 @@ public class NumberValidator {
         return true;
     }
 
-    public static boolean isPositiveNumber(int input) {
+    public static boolean isPositiveNumber(int inputNumber) {
         try {
-            if (input < Constant.ZERO) {
+            if (inputNumber < Constant.ZERO) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
@@ -49,9 +49,9 @@ public class NumberValidator {
         return true;
     }
 
-    public static boolean isBiggerThan100(int input) {
+    public static boolean isBiggerThan100(int inputNumber) {
         try {
-            if (input < Constant.HUNDRED) {
+            if (inputNumber < Constant.HUNDRED) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {

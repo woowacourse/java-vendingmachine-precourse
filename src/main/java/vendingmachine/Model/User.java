@@ -18,11 +18,11 @@ public class User {
         coins.expend(inputMoney, outputView);
     }
 
-    public void showRemainMoney(OutputView outputView) {
-        outputView.print(NoticeMessage.INPUT_MONEY_MESSAGE + inputMoney + NoticeMessage.WON_MESSAGE);
-    }
-
     public boolean canPurchase(VendingMachine vendingMachine) {
         return vendingMachine.isExistDrinkBelow(inputMoney);
+    }
+
+    public String toString() {
+        return NoticeMessage.INPUT_MONEY_MESSAGE + inputMoney + NoticeMessage.WON_MESSAGE;
     }
 }

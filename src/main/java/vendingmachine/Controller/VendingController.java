@@ -21,11 +21,10 @@ public class VendingController {
         vendingMachine = machineSetting.execute();
         UserSetting userSetting = new UserSetting(inputView, outputView);
         user = userSetting.execute();
-        user.showRemainMoney(outputView);
+        outputView.print(user.toString());
         Transaction transaction = new Transaction(user, vendingMachine, inputView, outputView);
         user = transaction.execute();
         ReturnChange returnChange = new ReturnChange(user, vendingMachine, outputView);
         returnChange.execute();
     }
-
 }

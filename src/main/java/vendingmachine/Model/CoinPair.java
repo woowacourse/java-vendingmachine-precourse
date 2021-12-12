@@ -17,12 +17,6 @@ public class CoinPair {
         number++;
     }
 
-    public void showCoin(OutputView outputView) {
-        String coinName = coin.name().substring(5) + NoticeMessage.WON_MESSAGE;
-        ;
-        outputView.print(coinName + NoticeMessage.BAR_SEPARATOR_MESSAGE + number + NoticeMessage.EA_MESSAGE);
-    }
-
     public int expendCoin(int remainMoney, OutputView outputView) {
         String coinName = coin.name().substring(5) + NoticeMessage.WON_MESSAGE;
         int requiredNumber = coin.requiredNumber(remainMoney);
@@ -35,5 +29,10 @@ public class CoinPair {
         }
         outputView.print(coinName + NoticeMessage.BAR_SEPARATOR_MESSAGE + requiredNumber + NoticeMessage.EA_MESSAGE);
         return coin.totalAmount(requiredNumber);
+    }
+
+    public String toString() {
+        String coinName = coin.name().substring(5) + NoticeMessage.WON_MESSAGE;
+        return coinName + NoticeMessage.BAR_SEPARATOR_MESSAGE + number + NoticeMessage.EA_MESSAGE;
     }
 }
