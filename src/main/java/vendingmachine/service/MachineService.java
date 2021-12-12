@@ -21,7 +21,7 @@ public class MachineService {
 		machine.addItems(items);
 	}
 
-	public void purchase(Machine machine, String itemName) {
+	public void purchase(Machine machine, String itemName) throws IllegalArgumentException{
 		machine.purchase(itemName);
 	}
 
