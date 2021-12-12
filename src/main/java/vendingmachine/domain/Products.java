@@ -1,12 +1,15 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Products {
 	private final ArrayList<Product> products = new ArrayList<>();
 
-	public Products() {
-
+	public Products(List<List<String>> productsSplitInfoList) {
+		for (List<String> productInfo : productsSplitInfoList) {
+			products.add(new Product(productInfo));
+		}
 	}
 
 	public void add(Product product) {
