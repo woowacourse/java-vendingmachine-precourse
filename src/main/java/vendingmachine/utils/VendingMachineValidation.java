@@ -1,7 +1,4 @@
-package vendingmachine.service;
-
-import vendingmachine.utils.Message;
-import vendingmachine.utils.Validation;
+package vendingmachine.utils;
 import vendingmachine.view.InputView;
 
 import java.util.Arrays;
@@ -10,6 +7,8 @@ import java.util.stream.Collectors;
 
 public class VendingMachineValidation {
     private final Validation validation;
+    private static String SEPARATOR_SEMICOLON = ";";
+    private static String SEPARATOR_COMMA  = ",";
 
     public VendingMachineValidation() {
         this.validation = new Validation();
@@ -48,9 +47,9 @@ public class VendingMachineValidation {
             String input = InputView.input();
             try{
                 validation.productPriceValidation(input);
-                return Arrays.stream(input.split(";"))
+                return Arrays.stream(input.split(SEPARATOR_SEMICOLON))
                         .map(product -> product.replaceAll("[\\[\\]]",""))
-                        .flatMap(product->Arrays.stream(product.split(",")))
+                        .flatMap(product->Arrays.stream(product.split(SEPARATOR_COMMA)))
                         .collect(Collectors.toList());
             }catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
