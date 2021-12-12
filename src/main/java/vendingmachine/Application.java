@@ -14,4 +14,5 @@ public class Application {
 		vendingMachineController.orderUntilEnd();
 		vendingMachineController.giveChangesAtTheEnd();
 	}
+
 }

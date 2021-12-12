@@ -40,4 +40,5 @@ public class OrderException {
 
 		return cost;
 	}
+
 }
