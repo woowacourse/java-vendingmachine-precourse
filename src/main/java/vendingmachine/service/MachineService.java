@@ -11,4 +11,8 @@ public class MachineService {
 		Map<Coin, Integer> generatedCoins = CoinGenerator.generate(Coin.getCoinList(), totalCoin);
 		machine.addCoins(generatedCoins);
 	}
+
+	public void addInputCoins(Machine machine, Integer amount) {
+		machine.addInputCoinAmount(amount);
+	}
 }

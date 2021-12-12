@@ -6,7 +6,8 @@ import java.util.Map;
 import vendingmachine.util.MapSupporter;
 
 public class Machine {
-	private Map<Coin, Integer> coins = new HashMap<>();
+	private final Map<Coin, Integer> coins = new HashMap<>();
+	private Integer inputCoinAmount;
 
 	public void addCoins(Map<Coin, Integer> coins) {
 		for (Coin coin : coins.keySet()) {
@@ -16,5 +17,9 @@ public class Machine {
 
 	public Map<Coin, Integer> getCoins() {
 		return this.coins;
+	}
+
+	public void addInputCoinAmount(final int amount) {
+		this.inputCoinAmount += amount;
 	}
 }
