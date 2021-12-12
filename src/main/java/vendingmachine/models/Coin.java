@@ -48,4 +48,10 @@ public enum Coin {
 	private static int isCoinListEmpty(ArrayList<Item> coinList) {
 		return coinList.stream().mapToInt(Item::getAmount).sum();
 	}
+
+	private static void increaseCoinAmount(ArrayList<Item> coinList, int valueOfNowCoin, int amountOfNowCoin) {
+		coinList.stream()
+			.filter(eachCoin -> eachCoin.getPrice() == valueOfNowCoin)
+			.forEach(eachCoin -> eachCoin.increaseAmount(amountOfNowCoin));
+	}
 }
