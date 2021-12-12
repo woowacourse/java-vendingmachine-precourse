@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import vendingmachine.exception.MoneyPositiveIntegerValueException;
+import vendingmachine.exception.MoneyShareByLeastCoin;
 
 public class Money {
 
@@ -33,7 +34,7 @@ public class Money {
 
     private static void checkMoneyShareByLeastCoin(int money) {
         if (money % 10 != EMPTY_MONEY) {
-            throw new IllegalArgumentException("[ERROR] 금액은 10원으로 나누어떨어지는 금액만 입력할 수 있습니다.");
+            throw new MoneyShareByLeastCoin();
         }
     }
 
