@@ -14,7 +14,7 @@ public class NameView {
 			System.out.println();
 			name = new Name(input);
 		} catch (Exception e) {
-			System.out.println(Message.ERROR + e.getMessage());
+			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}
 		return name;

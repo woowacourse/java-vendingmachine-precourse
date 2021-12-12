@@ -37,6 +37,14 @@ public class NumberChecker {
 
 	}
 
+	public void isLessThan(String input, int min) {
+
+		if (Integer.valueOf(input) < min) {
+			throw new IllegalArgumentException(Message.ERROR_MESSAGE_LESS_THAN_MIN_PRICE);
+		}
+
+	}
+
 	public void isDivisibleNumber(String input, int number) {
 
 		if (Integer.valueOf(input) % number != 0) {

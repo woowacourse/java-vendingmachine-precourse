@@ -7,5 +7,5 @@ public class Rule {
 	public static final String DELIMETER_PRODUCT = ";";
 	public static final String DELIMETER_PRODUCT_INFO = ",";
 	public static final String BRACKET = "[]";
-	public static final String SEMICOLON = ";";
+	public static final String MIN_PRICE = "100";
 }

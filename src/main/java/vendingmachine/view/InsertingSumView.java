@@ -14,7 +14,7 @@ public class InsertingSumView {
 			System.out.println();
 			insertingSum = new InsertingSum(input);
 		} catch (Exception e) {
-			System.out.println(Message.ERROR + e.getMessage());
+			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}
 		return insertingSum;
