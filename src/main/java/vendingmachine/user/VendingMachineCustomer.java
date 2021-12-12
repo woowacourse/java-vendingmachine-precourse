@@ -1,21 +1,21 @@
 package vendingmachine.user;
 
-import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.job.DepositJob;
+import vendingmachine.job.PurchaseJob;
 
 public class VendingMachineCustomer implements Customer {
+
+	private final DepositJob depositJob;
+	private final PurchaseJob purchaseJob;
+
+	public VendingMachineCustomer(DepositJob depositJob, PurchaseJob purchaseJob) {
+		this.depositJob = depositJob;
+		this.purchaseJob = purchaseJob;
+	}
+
 	@Override
 	public void purchase() {
-		System.out.println("투입 금액을 입력해주세요.");
-		String inputMoney = Console.readLine();
-		System.out.println("투입 금액: 3000원\n"
-			+ "구매할 상품명을 입력해 주세요.");
-		String purchaseOne = Console.readLine();
-		System.out.println("투입 금액: 1500원\n"
-			+ "구매할 상품명을 입력해 주세요.");
-		String purchaseTwo = Console.readLine();
-		System.out.println("투입 금액: 500원\n"
-			+ "잔돈\n"
-			+ "100원 - 4개\n"
-			+ "50원 - 1개");
+		depositJob.execute();
+		purchaseJob.execute();
 	}
 }
