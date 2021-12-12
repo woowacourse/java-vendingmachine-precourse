@@ -1,7 +1,6 @@
 package vendingmachine.service;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -33,7 +32,9 @@ public class MachineService {
 		Map<Coin, Integer> countMap = new TreeMap<>();
 		coinList.forEach(coin -> countMap.put(coin, 0));
 		while (deposit > 0) {
-			Deposit randomizedDeposit = getDepositRandomized(deposit);
+			int amountRandomized = Randoms.pickNumberInList(
+				coinList.stream().map(Coin::getAmount).collect(Collectors.toList()));
+			Deposit randomizedDeposit = getDepositRandomized(deposit, amountRandomized);
 			deposit -= randomizedDeposit.getCoin().getAmount() * randomizedDeposit.getCount();
 			countMap.put(randomizedDeposit.getCoin(),
 				countMap.get(randomizedDeposit.getCoin()) + randomizedDeposit.getCount());
@@ -43,9 +44,9 @@ public class MachineService {
 			countMap.keySet().stream().map(coin -> new Deposit(coin, countMap.get(coin))).collect(Collectors.toList()));
 	}
 
-	private Deposit getDepositRandomized(int deposit) {
-		Coin coinRandomized = coinList.get(Randoms.pickNumberInRange(0, coinList.size() - 1));
-		int maxCount = deposit / coinRandomized.getAmount();
+	private Deposit getDepositRandomized(int deposit, int amountRandomized) {
+		int maxCount = deposit / amountRandomized;
+		Coin coinRandomized = Coin.ofValue(amountRandomized).get();
 		int countRandomized = Randoms.pickNumberInRange(0, maxCount);
 		return new Deposit(coinRandomized, countRandomized);
 	}
