@@ -11,6 +11,10 @@ public class AmountValidator {
 			throw new IllegalArgumentException(
 				String.format(LESS_THAN_CERTAIN_COIN_ERROR, Coin.getSmallestCoinAmount()));
 		}
+		if (isDivisibleBySmallestCoinAmount(amount)) {
+			throw new IllegalArgumentException(
+				String.format(NOT_DIVISIBLE_BY_SMALLEST_COIN_ERROR_MESSAGE, Coin.getSmallestCoinAmount()));
+		}
 	}
 
 	private static int toInteger(String inputAmount) {
@@ -23,5 +27,9 @@ public class AmountValidator {
 
 	private static boolean isLessThanCertainCoinAmount(int certainCoinAmount, int inputAmount) {
 		return certainCoinAmount > inputAmount;
+	}
+
+	private static boolean isDivisibleBySmallestCoinAmount(int amount) {
+		return amount % Coin.getSmallestCoinAmount() != 0;
 	}
 }
