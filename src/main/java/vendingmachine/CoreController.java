@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public class CoreController {
 	private CoinController coinController;
 	private UiController uiController;
@@ -11,6 +13,7 @@ public class CoreController {
 
 	protected void setVendingMachineHoldMoney() {
 		int money = uiController.askVendingMachineHoldMoneyAmount();
-		coinController.makeRandomCombinationCoin(money);
+		Map<Coin, Integer> numberOfCoins = coinController.makeRandomCombinationCoin(money);
+		uiController.printCurrentCoinNumber(numberOfCoins);
 	}
 }
