@@ -57,7 +57,7 @@ public class DepositRepository {
 		return stringBuilder.toString();
 	}
 
-	public String toString(boolean skipZero) {
+	public String toStringSkipZero() {
 		StringBuilder stringBuilder = new StringBuilder();
 		depositMap.values()
 			.stream()

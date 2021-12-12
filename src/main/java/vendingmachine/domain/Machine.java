@@ -7,10 +7,6 @@ public class Machine {
 		this.userMoney = 0;
 	}
 
-	public Machine(int userMoney) {
-		this.userMoney = userMoney;
-	}
-
 	public int getUserMoney() {
 		return userMoney;
 	}

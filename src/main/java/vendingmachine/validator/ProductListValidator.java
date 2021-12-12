@@ -22,10 +22,11 @@ public class ProductListValidator {
 	}
 
 	public static void validateComma(String input) throws IllegalArgumentException {
-		int commaCount = 0;
 		Matcher matcher = Pattern.compile(PRODUCT_INFO_DELIMITER.getSymbol()).matcher(input);
+		int commaCount = 0;
 		while (matcher.find())
 			commaCount++;
+
 		if (!Pattern.matches(COMMA_REGEX, input) || commaCount != 2)
 			throw new IllegalArgumentException(PRODUCT_FORMAT_EACH.getMessage());
 	}

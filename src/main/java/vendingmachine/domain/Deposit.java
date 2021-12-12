@@ -7,10 +7,6 @@ public class Deposit implements Comparable<Deposit> {
 	private final Coin coin;
 	private int count;
 
-	public Deposit(Coin coin) {
-		this.coin = coin;
-	}
-
 	public Deposit(Coin coin, int count) {
 		this.coin = coin;
 		this.count = count;

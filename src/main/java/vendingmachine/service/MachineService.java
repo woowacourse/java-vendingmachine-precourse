@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import static vendingmachine.constant.ExceptionMessage.*;
+import static vendingmachine.constant.Symbol.*;
 import static vendingmachine.validator.MoneyValidator.*;
 import static vendingmachine.validator.ProductListValidator.*;
 
@@ -17,15 +18,13 @@ import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
-import vendingmachine.validator.MoneyValidator;
 import vendingmachine.validator.ProductListValidator;
 
 public class MachineService {
 
 	private final DepositRepository depositRepository;
-	private List<Coin> coinList;
-	private ProductRepository productRepository;
-	private Machine machine;
+	private final ProductRepository productRepository;
+	private final Machine machine;
 
 	public MachineService(DepositRepository depositRepository, ProductRepository productRepository, Machine machine) {
 		this.depositRepository = depositRepository;
@@ -36,20 +35,20 @@ public class MachineService {
 	public void setDepositsRandomized(String input) {
 		validateInteger(input);
 		int deposit = Integer.parseInt(input);
-		this.coinList = Arrays.asList(Coin.values());
+		List<Coin> coinList = Arrays.asList(Coin.values());
 		Map<Coin, Integer> countMap = new TreeMap<>();
 		coinList.forEach(coin -> countMap.put(coin, 0));
+
 		while (deposit > 0) {
 			int amountRandomized = Randoms.pickNumberInList(
 				coinList.stream().map(Coin::getAmount).collect(Collectors.toList()));
 			int amountToSub = getAmountToSub(deposit, amountRandomized);
 			if (Coin.ofValue(amountToSub).isPresent()) {
-				Coin target = Coin.ofValue(amountRandomized).get();
+				Coin target = Coin.ofValue(amountToSub).get();
 				deposit -= amountToSub;
 				countMap.put(target, countMap.get(target) + 1);
 			}
 		}
-
 		depositRepository.save(
 			countMap.keySet().stream().map(coin -> new Deposit(coin, countMap.get(coin))).collect(Collectors.toList()));
 	}
@@ -62,10 +61,8 @@ public class MachineService {
 
 	public void setProducts(String input) {
 		ProductListValidator.validateBracketAndSemiColon(input);
-		List<String> inputList = Arrays.asList(input.split(";", -1));
-		List<Product> productList = inputList.stream()
-			.map(this::getProduct)
-			.collect(Collectors.toList());
+		List<String> inputList = Arrays.asList(input.split(PRODUCT_DELIMITER.getSymbol(), -1));
+		List<Product> productList = inputList.stream().map(this::getProduct).collect(Collectors.toList());
 		productRepository.save(productList);
 	}
 
@@ -78,14 +75,13 @@ public class MachineService {
 		validateNameLengthAndInteger(s);
 		s = trimBrackets(s);
 
-		List<String> infoList = Arrays.asList(s.split(",", -1));
+		List<String> infoList = Arrays.asList(s.split(PRODUCT_INFO_DELIMITER.getSymbol(), -1));
 		String name = infoList.get(0);
 		int price = Integer.parseInt(infoList.get(1));
 		int quantity = Integer.parseInt(infoList.get(2));
 
 		validatePrice(price);
 		validateQuantity(quantity);
-
 		return new Product(name, price, quantity);
 	}
 
@@ -117,9 +113,8 @@ public class MachineService {
 	private boolean isSpitableRecursive(int coinIndex, int moneySum, DepositRepository clonedDR) {
 		if (moneySum == 0)
 			return true;
-		if (coinIndex >= Coin.values().length) {
+		if (coinIndex >= Coin.values().length)
 			return false;
-		}
 		Coin coin = Coin.values()[coinIndex];
 		int amount = coin.getAmount();
 		Deposit deposit = clonedDR.findByCoin(coin).orElse(new Deposit(Coin.COIN_10, 0));
@@ -135,7 +130,7 @@ public class MachineService {
 		DepositRepository leftOver = new DepositRepository(depositRepository);
 		spitRecursive(0, machine.getUserMoney(), leftOver, changes);
 		depositRepository.save(leftOver);
-		return changes.toString(true);
+		return changes.toStringSkipZero();
 	}
 
 	private void spitRecursive(int coinIndex, int moneySum, DepositRepository leftOver, DepositRepository changes) {

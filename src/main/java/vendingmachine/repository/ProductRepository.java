@@ -10,7 +10,7 @@ import vendingmachine.domain.Product;
 
 public class ProductRepository {
 
-	private Map<String, Product> productMap;
+	private final Map<String, Product> productMap;
 
 	public ProductRepository() {
 		this.productMap = new HashMap<>();
@@ -29,8 +29,7 @@ public class ProductRepository {
 	}
 
 	public void decreaseQuantity(String productName) {
-		if (productMap.get(productName).decreaseQuantity() == 0) {
+		if (productMap.get(productName).decreaseQuantity() == 0)
 			productMap.remove(productName);
-		}
 	}
 }
