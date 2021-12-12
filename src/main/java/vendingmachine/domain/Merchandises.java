@@ -75,6 +75,7 @@ public class Merchandises {
 
     public int cheapest() {
         return merchandises.stream()
+            .filter(merchandise -> merchandise.count() > 0)
             .map(Merchandise::cost)
             .min(Integer::compare)
             .orElse(0);
