@@ -4,7 +4,7 @@ import static vendingmachine.utils.ExceptionMessages.*;
 
 public class NumberValidator {
 
-    public static void validateTotalMoneyInput(String input) {
+    public static void validateMoneyInput(String input) {
         int intInput = validateIntType(input);
         validateNotNegativeNumber(intInput);
         validateNotHaveOnesDigit(intInput);

@@ -15,7 +15,7 @@ public class InputView {
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
 
             String input = Console.readLine();
-            validateTotalMoneyInput(input);
+            validateMoneyInput(input);
             return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -40,10 +40,16 @@ public class InputView {
     }
 
     public static int getCustomerMoneyInput() {
-        System.out.println("\n투입 금액을 입력해 주세요.");
+        try {
+            System.out.println("\n투입 금액을 입력해 주세요.");
 
-        String input = Console.readLine();
-        return Integer.parseInt(input);
+            String input = Console.readLine();
+            validateMoneyInput(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getCustomerMoneyInput();
+        }
     }
 
     public static String getMerchandiseNameInput() {
