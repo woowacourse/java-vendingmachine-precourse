@@ -12,22 +12,30 @@ public class ProductBuilder {
 	private static final int INFO_STOCK_INDEX = 2;
 
 	public Product makeProductFromInfo(String rawInfo) {
-		String[] info = rawInfo.replace(LEFT_BRACKET, "")
-				.replace(RIGHT_BRACKET, "").split(INFO_DELIM);
-		validatePrice(info[INFO_PRICE_INDEX]);
-		validateStock(info[INFO_STOCK_INDEX]);
+		String[] info = rawInfo.replace(LEFT_BRACKET, "").replace(RIGHT_BRACKET, "").split(INFO_DELIM);
+		validateInfoArr(info);
 		return new Product(info[INFO_NAME_INDEX], Integer.parseInt(info[INFO_PRICE_INDEX]), Integer.parseInt(info[INFO_STOCK_INDEX]));
 	}
 
+	private void validateInfoArr(String[] info) {
+		validatePrice(info[INFO_PRICE_INDEX]);
+		validateStock(info[INFO_STOCK_INDEX]);
+	}
+
 	private void validatePrice(String priceString) {
-		if (!Validator.isOnlyNums(priceString)) {
+		if (!CommonValidator.isOnlyNums(priceString)) {
 			throw new IllegalArgumentException(Error.NOT_ONLY_NUMS_IN_PRICE);
 		}
-		Validator.rightPrice(priceString);
+		if (!ProductInfoValidator.aboveMinimumPrice(priceString)) {
+			throw new IllegalArgumentException(Error.LESS_THEN_MINIMUM_PRICE);
+		}
+		if (!CommonValidator.rightMinimumUnit(priceString)) {
+			throw new IllegalArgumentException(Error.WRONG_PRICE_UNIT);
+		}
 	}
 
 	private void validateStock(String stockString) {
-		if (!Validator.isOnlyNums(stockString)) {
+		if (!CommonValidator.isOnlyNums(stockString)) {
 			throw new IllegalArgumentException(Error.NOT_ONLY_NUMS_IN_STOCK);
 		}
 	}

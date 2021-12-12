@@ -2,7 +2,9 @@ package vendingmachine.input;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.message.Ask;
-import vendingmachine.util.Validator;
+import vendingmachine.util.CommonValidator;
+
+import static vendingmachine.message.Error.NOT_ONLY_NUMS;
 
 public class CustomerInput {
 	public int getInsertedMoney() {
@@ -19,6 +21,8 @@ public class CustomerInput {
 	}
 
 	private void validateMoneyInput(String input) {
-		Validator.onlyNums(input);
+		if (!CommonValidator.isOnlyNums(input)) {
+			throw new IllegalArgumentException(NOT_ONLY_NUMS);
+		}
 	}
 }

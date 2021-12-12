@@ -1,12 +1,15 @@
 package vendingmachine.input;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.util.Validator;
+import vendingmachine.util.CommonValidator;
 import vendingmachine.message.Ask;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static vendingmachine.message.Error.NOT_ONLY_NUMS;
+import static vendingmachine.message.Error.WRONG_PRICE_UNIT;
 
 public class MachineInput {
 	public static final String PRODUCT_INFO_DELIM = ";";
@@ -24,7 +27,12 @@ public class MachineInput {
 	}
 
 	private void validateMachineChangesInput(String input) {
-		Validator.onlyNums(input);
+		if (!CommonValidator.isOnlyNums(input)) {
+			throw new IllegalArgumentException(NOT_ONLY_NUMS);
+		}
+		if (!CommonValidator.rightMinimumUnit(input)) {
+			throw new IllegalArgumentException(WRONG_PRICE_UNIT);
+		}
 	}
 
 	public List<String> getProductsInfo() {
