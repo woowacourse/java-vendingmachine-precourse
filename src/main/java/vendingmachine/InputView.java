@@ -2,8 +2,6 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import javax.rmi.CORBA.Util;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class InputView {
@@ -45,8 +43,18 @@ public class InputView {
         return Integer.parseInt(Console.readLine());
     }
 
-    public static String inputProduct() {
-        System.out.println("구매할 상품명을 입력해 주세요.");
-        return Console.readLine();
+    public static String inputProduct(ArrayList<Product> products) {
+        String buyProduct = "";
+        while (true) {
+            System.out.println("구매할 상품명을 입력해 주세요.");
+            buyProduct = Console.readLine();
+            try {
+                Utils.validateRegistered(products, buyProduct);
+                break;
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return buyProduct;
     }
 }

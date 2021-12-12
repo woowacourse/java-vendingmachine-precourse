@@ -33,7 +33,16 @@ public class Utils {
 
     public static void validateDividableByValue(int number) {
         if (number % DIVIDED_VALUE != 0) {
-            throw new IllegalArgumentException("ERROR 가격은 최소 10원 단위어야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 가격은 최소 10원 단위어야 합니다.");
         }
+    }
+
+    public static void validateRegistered(ArrayList<Product> products, String buyProduct) {
+        for (Product product : products) {
+            if (product.getName().equals(buyProduct)) {
+                return;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR] 등록된 상품이 아닙니다.");
     }
 }
