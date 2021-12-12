@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import static vendingmachine.utils.validator.InputMoneyValidator.*;
+import static vendingmachine.utils.validator.TotalAmountValidator.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
@@ -12,16 +12,14 @@ import vendingmachine.domain.VendingMachine;
 
 public class VendingMachineController {
 	private final VendingMachine vendingMachine;
-	private Products products = new Products();
+	private final Products products = new Products();
 
 	public VendingMachineController() {
 		this.vendingMachine = new VendingMachine();
 	}
 
 	public void run() {
-
-		int totalAmount = inputTotalAmountMoneyOfVendingMachine();
-		vendingMachine.createChanges(totalAmount);
+		vendingMachine.createChanges(inputTotalAmountOfVendingMachine());
 		printChangesVendingMachine(vendingMachine);
 
 		List<String> productInfoList = inputInformationOfProducts();
@@ -46,8 +44,5 @@ public class VendingMachineController {
 		printCurrentInputMoney(vendingMachine);
 		printRemainChanges(vendingMachine);
 	}
-
-
-
 
 }

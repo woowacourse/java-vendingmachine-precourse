@@ -12,15 +12,17 @@ public class Changes {
 	private final static int ADD_ONE = 1;
 
 	private HashMap<Coin, Integer> coinMap = new HashMap<>();
-	private int inputMoney;
+	// 변수명 바꾸기
+	private int totalAmount;
 
-	Changes(int inputMoney) {
-		this.inputMoney = inputMoney;
+	Changes(int totalAmount) {
+		this.totalAmount = totalAmount;
 		initCoinMap();
 	}
 
 	public List<Coin> getRemainChanges() {
 		List<Coin> remainCoinList = new ArrayList<>();
+
 		for (Coin coin : Coin.values()) {
 			if (coinMap.get(coin) != START_NUMBER_ZERO) {
 				remainCoinList.add(coin);
@@ -34,13 +36,13 @@ public class Changes {
 	}
 
 	public void createRandomCoin() {
-		while (inputMoney > START_NUMBER_ZERO) {
+		while (totalAmount > START_NUMBER_ZERO) {
 			int number = Randoms.pickNumberInList(Coin.getCoinList());
 
-			if (inputMoney >= number) {
+			if (totalAmount >= number) {
 				Coin randomCoin = Coin.getCoinByNumber(number);
 				coinMap.put(randomCoin, coinMap.get(randomCoin) + ADD_ONE);
-				inputMoney -= number;
+				totalAmount -= number;
 			}
 		}
 	}

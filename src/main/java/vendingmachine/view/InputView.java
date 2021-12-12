@@ -7,19 +7,19 @@ import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.utils.Message;
-import vendingmachine.utils.validator.InputMoneyValidator;
+import vendingmachine.utils.SystemMessage;
+import vendingmachine.utils.validator.TotalAmountValidator;
 
 public class InputView {
 
 	private static final String INPUT_SPLIT_DELIMITER = ";";
 
-	public static int inputTotalAmountMoneyOfVendingMachine() {
-		System.out.println(Message.GET_AMOUNT_HOLDING_BY_VENDING_MACHINE.getText());
+	public static int inputTotalAmountOfVendingMachine() {
+		System.out.println(SystemMessage.GET_TOTAL_AMOUNT_OF_VENDING_MACHINE.getText());
 		while (true) {
-			String inputMoney = Console.readLine();
-			if (InputMoneyValidator.checkIsValidInputMoney(inputMoney)) {
-				return Integer.parseInt(inputMoney);
+			String totalAmount = Console.readLine();
+			if (TotalAmountValidator.checkIsValidTotalAmount(totalAmount)) {
+				return Integer.parseInt(totalAmount);
 			}
 		}
 	}
@@ -27,7 +27,7 @@ public class InputView {
 	public static List<String> inputInformationOfProducts() {
 		System.out.println();
 		while (true) {
-			System.out.println(Message.GET_INFORMATION_OF_PRODUCTS.getText());
+			System.out.println(SystemMessage.GET_INFORMATION_OF_PRODUCTS.getText());
 			List<String> productInfoList = Arrays.asList(Console.readLine().split(INPUT_SPLIT_DELIMITER));
 			if (checkIsValidProductInfoList(productInfoList)) {
 				return productInfoList;
@@ -38,12 +38,12 @@ public class InputView {
 
 	public static String inputMoneyToPutInVendingMachine() {
 		System.out.println();
-		System.out.println(Message.GET_INPUT_MONEY.getText());
+		System.out.println(SystemMessage.GET_INPUT_MONEY.getText());
 		return Console.readLine();
 	}
 
 	public static String inputProductNameToBuy() {
-		System.out.println(Message.GET_PRODUCT_NAME_TO_BUY.getText());
+		System.out.println(SystemMessage.GET_PRODUCT_NAME_TO_BUY.getText());
 		return Console.readLine();
 	}
 }

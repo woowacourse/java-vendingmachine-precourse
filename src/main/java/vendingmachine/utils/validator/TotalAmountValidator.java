@@ -1,6 +1,6 @@
 package vendingmachine.utils.validator;
 
-import static vendingmachine.utils.ErrorType.*;
+import static vendingmachine.utils.ErrorMessage.*;
 
 
 import java.util.regex.Pattern;
@@ -8,11 +8,11 @@ import java.util.regex.Pattern;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 
-public class InputMoneyValidator {
+public class TotalAmountValidator {
 	private static final int EXPECTED_VALUE_WHEN_DIVIDING = 0;
 	private static final int ZERO_NUMBER = 0;
 
-	public static boolean checkIsValidInputMoney(String inputMoney) {
+	public static boolean checkIsValidTotalAmount(String inputMoney) {
 		try {
 			isNotBlank(inputMoney);
 			isDigit(inputMoney);
