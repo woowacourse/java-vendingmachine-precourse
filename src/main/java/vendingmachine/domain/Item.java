@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 public class Item {
 
+	private static final int OUT_OF_STOCK = 0;
+
 	private String name;
 	private int price;
 	private int quantity;
@@ -26,5 +28,13 @@ public class Item {
 
 	public void purchase() {
 		quantity--;
+	}
+
+	public boolean checkOutOfStock() {
+		return quantity == OUT_OF_STOCK;
+	}
+
+	public boolean checkEqualsName(String itemName) {
+		return name.equals(itemName);
 	}
 }

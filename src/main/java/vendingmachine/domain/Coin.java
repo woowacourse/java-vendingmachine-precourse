@@ -28,6 +28,22 @@ public enum Coin {
 		return getCoinByAmount(amount);
 	}
 
+	public boolean isEnoughAmount(int totalAmount) {
+    	return totalAmount >= amount;
+	}
+
+	public int calculateAmount(int totalAmount) {
+    	return totalAmount - amount;
+	}
+
+	public int calculateCount(int totalAmount, int count) {
+		return Math.min(totalAmount / amount, count);
+	}
+
+	public int calculateChange(int totalAmount, int count) {
+		return totalAmount - (amount * count);
+	}
+
 	private static List<Integer> getAmounts() {
     	return Stream.of(Coin.values())
 			.map(Coin::getAmount)

@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class Items {
 
-	private static final int OUT_OF_STOCK = 0;
 	private static final int NAME = 0;
 	private static final int PRICE = 1;
 	private static final int QUANTITY = 2;
@@ -42,7 +41,7 @@ public class Items {
 		Item item = findByName(itemName);
 		item.purchase();
 
-		if (item.getQuantity() == OUT_OF_STOCK) {
+		if (item.checkOutOfStock()) {
 			list.remove(item);
 		}
 
@@ -51,7 +50,7 @@ public class Items {
 
 	private Item findByName(String itemName) {
 		return list.stream()
-			.filter(item -> item.getName().equals(itemName))
+			.filter(item -> item.checkEqualsName(itemName))
 			.findFirst()
 			.orElse(null);
 	}
@@ -84,7 +83,7 @@ public class Items {
 
 	private boolean checkQuantity() {
 		long count = list.stream()
-			.filter(item -> item.getQuantity() != OUT_OF_STOCK)
+			.filter(item -> !item.checkOutOfStock())
 			.count();
 
 		return count != 0;

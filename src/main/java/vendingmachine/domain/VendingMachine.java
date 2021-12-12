@@ -49,15 +49,11 @@ public class VendingMachine {
 			Coin coin = entry.getKey();
 			Integer count = entry.getValue();
 
-			int coinCount = calculateCount(coin, count, amount);
+			int coinCount = coin.calculateCount(amount, count);
 			change.getList()
 				.put(coin, coinCount);
 
-			amount -= coin.getAmount() * coinCount;
+			amount = coin.calculateChange(amount, coinCount);
 		}
-	}
-
-	private int calculateCount(Coin coin, int count, int amount) {
-		return Math.min(amount / coin.getAmount(), count);
 	}
 }

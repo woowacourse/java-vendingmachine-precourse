@@ -24,8 +24,8 @@ public class Coins {
 		while (totalAmount != ZERO_AMOUNT) {
 			Coin coin = Coin.pickRandom();
 
-			if (totalAmount >= coin.getAmount()) {
-				totalAmount -= coin.getAmount();
+			if (coin.isEnoughAmount(totalAmount)) {
+				totalAmount = coin.calculateAmount(totalAmount);
 				list.put(coin, list.get(coin) + PLUS_QUANTITY);
 			}
 		}
