@@ -1,4 +1,4 @@
-package vendingmachine.machine;
+package vendingmachine.goods;
 
 public class Goods {
     public String name;
