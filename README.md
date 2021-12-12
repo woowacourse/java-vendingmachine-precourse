@@ -27,8 +27,9 @@
 
  - 상품을 구매하는 기능
    - 구매할 상품명을 입력 받음
+   - 상품명에 빈 문자열은 제한
    - 상품명에 해당하는 상품이 있는지 확인하는 기능
-   - 투입한 금액 이하의 상품을 구매 하는 기능
+   - 남은 투입 금액 이하의 상품만 구매 가능한 기능
    - 잔액이 최저 가격의 상품보다 작거나 구매가능한 상품이 없을때 잔액 반환
 
 
@@ -42,6 +43,7 @@
 ```
  servicesource
   - Coin.java
+  - MachineStock.java
   - Product.java
   - VendingMachine.java
   - WalletSystem.java
@@ -56,7 +58,7 @@
     - InputChecker.java
     - NameChecker.java
     - PriceChecker.java
-    - StockChecker.java
+    - QuantityChecker.java
     
   - moneychecker
     - BalanceInputChecker.java
@@ -71,11 +73,15 @@
   - getter 함수
 
 - VendingMachine class 
-  - 상품을 Map으로 저장하는 필드 (key: 상품 객페, value: 상품의 수량)
   - 자판기를 작동시키는 함수
+  - 상품을 판매하는 함수
+
+- MachineStock class
+  - 상품의 리스트와 재고를 저장하는 필드
   - 상품을 추가하는 함수
-  - 금액을 투입받는 함수
-  - 상품을 사는 함수
+  - 입력된 상품이 존재하지 확인하는 함수
+  - 상품의 재고를 확인하는 함수
+  - 상품을 판매하여 재고를 조정하는 함수
 
 - WalletSystem class
   - 자판기의 보유 잔액을 저장하는 필드
@@ -108,10 +114,11 @@
 - PriceChecker class
   - 상품의 가격이 올바른지 확인하는 함수
 
-- StockChecker class
+- QuantityChecker class
   - 상품의 수량이 올바른지 확인하는 함수
 
 - BalanceInputChecker
+  - 금액을 투입받는 함수
   - 자판기의 최초 보유 금액을 확인
 
 - InsertMoneyChecker
