@@ -70,4 +70,12 @@ public class Products {
 		}
 		return ZERO;
 	}
+
+	public boolean isSoldOut() {
+		int productCnt = 0;
+		for (Product product : products) {
+			productCnt += product.getCnt();
+		}
+		return productCnt == 0;
+	}
 }
