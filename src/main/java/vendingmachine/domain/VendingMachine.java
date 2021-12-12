@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
 import java.util.Map;
+import vendingmachine.strategy.CoinCreateStrategy;
+import vendingmachine.strategy.RandomCoinCreateStrategy;
 
 public class VendingMachine {
 
@@ -11,6 +13,11 @@ public class VendingMachine {
     public VendingMachine(Coins coins, Products products) {
         this.coins = coins;
         this.products = products;
+    }
+
+    public static VendingMachine createRandomVendingMachineByMoney(Money money) {
+        CoinCreateStrategy coinCreateStrategy = new RandomCoinCreateStrategy();
+        return new VendingMachine(Coins.createByMoney(money, new RandomCoinCreateStrategy()), Products.init());
     }
 
     public Map<Coin, Integer> currentRemainCoins() {
