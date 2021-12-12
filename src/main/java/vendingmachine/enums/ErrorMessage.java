@@ -2,6 +2,12 @@ package vendingmachine.enums;
 
 public enum ErrorMessage {
 	ERROR_MESSAGE("[ERROR] "),
+	MONEY_NOT_NUMBER_ERROR_MESSAGE(ERROR_MESSAGE.get() + "돈은 2147483647 이하의 숫자로 입력해주세요."),
+	MONEY_LOWER_THEN_ZERO_ERROR_MESSAGE(ERROR_MESSAGE.get() + "0원 이상으로 입력해주세요."),
+	MONEY_NOT_DIVISIBLE_BY_10_ERROR_MESSAGE(ERROR_MESSAGE.get() + "돈은 10원으로 나누어 떨어져야 합니다."),
+	PRICE_LOWER_THEN_MINIMUM_PRICE_ERROR_MESSAGE(ERROR_MESSAGE.get() + "가격은 100원 이상으로 입력해주세요."),
+	QUANTITY_NOT_NUMBER_ERROR_MESSAGE(ERROR_MESSAGE.get() + "수량은 2147483647 이하의 숫자로 입력해주세요."),
+	QUANTITY_LOWER_THEN_ZERO_ERROR_MESSAGE(ERROR_MESSAGE.get() + "수량은 0개 이상으로 입력해주세요."),
 	NO_SUCH_AMOUNT_ERROR_MESSAGE(ERROR_MESSAGE.get() + "없는 동전 종류입니다."),
 	NO_SAME_NAME_PRODUCT_ERROR_MESSAGE(ERROR_MESSAGE.get() + "같은 이름을 가진 상품이 없습니다.");
 

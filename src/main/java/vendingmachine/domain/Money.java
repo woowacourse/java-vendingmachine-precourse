@@ -1,5 +1,9 @@
 package vendingmachine.domain;
 
+import static vendingmachine.enums.ErrorMessage.*;
+
+import vendingmachine.enums.Coin;
+
 public class Money {
 	private int money;
 
@@ -15,17 +19,27 @@ public class Money {
 		return money;
 	}
 
+	public boolean isLowerThen(Money money) {
+		return this.money < money.money;
+	}
+
 	private void validateNumberFormat(String value) {
 		try {
 			Integer.parseInt(value);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(MONEY_NOT_NUMBER_ERROR_MESSAGE.get());
 		}
 	}
 
 	private void validateRange(int money) {
+		if (money < 0) {
+			throw new IllegalArgumentException(MONEY_LOWER_THEN_ZERO_ERROR_MESSAGE.get());
+		}
 	}
 
 	private void validateDivisibleBy10(int money) {
+		if (money % Coin.COIN_10.get() != 0) {
+			throw new IllegalArgumentException(MONEY_NOT_DIVISIBLE_BY_10_ERROR_MESSAGE.get());
+		}
 	}
 }
