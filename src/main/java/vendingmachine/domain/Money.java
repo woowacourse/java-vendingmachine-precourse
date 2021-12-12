@@ -6,13 +6,26 @@ import vendingmachine.validation.PositiveIntegerValidation;
 import vendingmachine.validation.Validator;
 
 public class Money {
-	private static final String UNIT = "원";
+	public static final Money ZERO = new Money(0);
+	private static final String CURRENCY = "원";
 	public static final String NAME = "금액";
 
 	private int amount;
 
 	public Money(int amount) {
 		this.amount = Validator.validate(NAME, amount, new PositiveIntegerValidation());
+	}
+
+	public Money minus(Money other) {
+		return new Money(this.amount - other.amount);
+	}
+
+	public boolean isLessThan(Money other) {
+		return this.amount < other.amount;
+	}
+
+	public boolean isGreaterThan(Money other) {
+		return this.amount > other.amount;
 	}
 
 	@Override
@@ -32,6 +45,6 @@ public class Money {
 
 	@Override
 	public String toString() {
-		return amount + UNIT;
+		return amount + CURRENCY;
 	}
 }
