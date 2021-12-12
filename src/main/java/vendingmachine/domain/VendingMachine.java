@@ -43,7 +43,7 @@ public class VendingMachine {
 
     public int buy(int balance, String name) {
         Product product = findByName(name);
-        if (product.isEnoughBalance(balance,product)) {
+        if (!product.isEnoughBalance(balance,product)) {
             throw new IllegalArgumentException(Message.IS_OVER_BALANCE);
         }
         this.balance = product.subPriceFromBalnace(balance,product);

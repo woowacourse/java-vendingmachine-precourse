@@ -56,7 +56,7 @@ public class Product {
     }
 
     public boolean isEqualName(String name, Product product){
-        if(name == product.name){
+        if(name.equals(product.name)){
             return true;
         }
         return false;
