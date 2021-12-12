@@ -30,4 +30,12 @@ public enum Coin {
 			.get()
 			.getPrice();
 	}
+
+	private static int calculateReturnedCoinAmount(ArrayList<Item> coinList, int coinValue, int money) {
+		return coinList.stream()
+			.filter(eachCoin -> eachCoin.getPrice() == coinValue)
+			.map(eachCoin -> Math.min(money / coinValue, eachCoin.getAmount()))
+			.findFirst()
+			.get();
+	}
 }
