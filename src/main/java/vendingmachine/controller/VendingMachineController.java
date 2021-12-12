@@ -1,5 +1,8 @@
 package vendingmachine.controller;
 
+import java.util.List;
+
+import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingMoneyValidator;
 import vendingmachine.utils.validator.ProductInfoValidator;
@@ -34,6 +37,7 @@ public class VendingMachineController {
     private void initializeProductsInfo() {
         try {
             List<Product> productList = ProductInfoValidator.getValidProductList(InputView.inputProductInfo());
+
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
             initializeProductsInfo();
