@@ -26,4 +26,8 @@ public class Products {
 			}
 		}
 	}
+
+	public void save() {
+		products.forEach(ProductRepository::save);
+	}
 }

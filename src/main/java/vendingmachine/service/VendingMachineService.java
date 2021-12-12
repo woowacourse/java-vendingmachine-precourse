@@ -5,6 +5,7 @@ import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import java.util.List;
 
 import vendingmachine.domain.CoinRepository;
+import vendingmachine.domain.Products;
 import vendingmachine.dto.RequestHoldingMoneyDto;
 import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.ResponseAllCoinQuantity;
@@ -31,6 +32,7 @@ public class VendingMachineService {
 	}
 
 	public void registerProducts(RequestRegisterProductsDto requestHoldingMoneyDto) {
-		// 기능 추가
+		Products products = requestHoldingMoneyDto.getProducts();
+		products.save();
 	}
 }
