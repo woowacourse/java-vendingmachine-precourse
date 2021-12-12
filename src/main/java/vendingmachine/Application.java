@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.VendingMachine;
 
 public class Application {
@@ -7,7 +8,6 @@ public class Application {
         // TODO: 프로그램 구현
         VendingMachine vendingMachine = new VendingMachine();
         VendingMachineController vendingMachineController = new VendingMachineController(vendingMachine);
-
         vendingMachineController.run();
     }
 }

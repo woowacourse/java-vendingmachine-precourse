@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import static vendingmachine.utils.validator.AmountValidator.*;
 import static vendingmachine.utils.validator.ItemValidator.*;
