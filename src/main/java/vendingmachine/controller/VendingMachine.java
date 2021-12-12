@@ -39,8 +39,10 @@ public class VendingMachine {
 	}
 
 	public void sellProduct() {
-		ResponseMoneyDto responseMoneyDto = vendingMachineService.findMoney();
-		RequestSellProductDto requestSellProductDto = inputSellProduct(responseMoneyDto);
-		vendingMachineService.sellProduct(requestSellProductDto);
+		while (vendingMachineService.canSell()) {
+			ResponseMoneyDto responseMoneyDto = vendingMachineService.findMoney();
+			RequestSellProductDto requestSellProductDto = inputSellProduct(responseMoneyDto);
+			vendingMachineService.sellProduct(requestSellProductDto);
+		}
 	}
 }

@@ -32,6 +32,17 @@ public class Product {
 		return productName.equals(checkProductName);
 	}
 
+	public boolean canSell() {
+		Money money = MoneyRepository.get();
+		if (money.isLowerThen(price)) {
+			return false;
+		}
+		if (quantity.isSoldOut()) {
+			return false;
+		}
+		return true;
+	}
+
 	private void validateMinimumPrice(Money price) {
 		if (price.isLowerThen(MINIMUM_PRICE)) {
 			throw new IllegalArgumentException(PRICE_LOWER_THEN_MINIMUM_PRICE_ERROR_MESSAGE.get());

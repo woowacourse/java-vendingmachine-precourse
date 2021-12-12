@@ -59,4 +59,8 @@ public class VendingMachineService {
 		Product product = ProductRepository.findByName(name);
 		product.sell();
 	}
+
+	public boolean canSell() {
+		return ProductRepository.canSell();
+	}
 }
