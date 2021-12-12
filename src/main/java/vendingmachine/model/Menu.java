@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.constants.ErrorMessage;
 import vendingmachine.util.ProductException;
 
 public class Menu {
@@ -18,15 +16,14 @@ public class Menu {
 		menuList = new ArrayList<Product>();
 	}
 
-	public void setProductList() {
-		menuList = makeProductList();
+	public void setProductList(String productInfo) {
+		menuList = makeProductList(productInfo);
 	}
 
-	public List<Product> makeProductList() {
+	public List<Product> makeProductList(String productInfo) {
 		List<Product> productList = new ArrayList<Product>();
 		try {
-			String productListStr = Console.readLine();
-			String[] productStrList = productListStr.split(";", -1);
+			String[] productStrList = productInfo.split(";", -1);
 
 			for (int i = 0; i < productStrList.length; i++) {
 				productList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
@@ -34,8 +31,7 @@ public class Menu {
 			}
 
 		} catch (IllegalArgumentException e) {
-			System.out.println(ErrorMessage.ERROR + e.getMessage());
-			return makeProductList();
+			throw new IllegalArgumentException(e.getMessage());
 		}
 		return productList;
 	}

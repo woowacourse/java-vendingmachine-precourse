@@ -53,6 +53,20 @@ public class VendingMachineController {
 		}
 	}
 
+	public void setMenuList() {
+		userView.askProductsInfo();
+
+		while (true) {
+			try {
+				vendingMachine.setMenu(userView.insertProductsInfo());
+			} catch (IllegalArgumentException e) {
+				System.out.println(ErrorMessage.ERROR + e.getMessage());
+			}
+			break;
+		}
+
+	}
+
 	public void order() {
 
 		while (!vendingMachine.stopMachine()) {
