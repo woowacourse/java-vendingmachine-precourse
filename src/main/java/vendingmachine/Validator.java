@@ -63,8 +63,8 @@ public class Validator {
         }
     }
 
-    public void validateProductIsAvailable(ProductList productList, String product) {
-        if (!productList.isAvailableProduct(product)) {
+    public void validateProductIsAvailable(ProductList productList, String productName) {
+        if (!productList.isAvailableProduct(productName)) {
             throw new IllegalArgumentException(ERROR_NOT_STOCK_PRODUCT);
         }
     }

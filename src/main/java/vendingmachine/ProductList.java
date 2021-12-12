@@ -27,8 +27,8 @@ public class ProductList extends LoopInput {
         productMap.clear();
     }
 
-    public boolean isAvailableProduct(String name) {
-        Product product = productMap.get(name);
+    public boolean isAvailableProduct(String productName) {
+        Product product = productMap.get(productName);
         return product.existStock();
     }
 
@@ -50,23 +50,21 @@ public class ProductList extends LoopInput {
         return false;
     }
 
-    public int sellProduct(String product) {
+    public Product sellProduct(String product) {
         Product sellProduct = productMap.get(product);
         sellProduct.sell();
-        return sellProduct.price;
+        return sellProduct;
     }
 
     private void setNumberOfProducts(String[] productInformationList) {
         for (String productInformation : productInformationList) {
             Product product = validator.validateSplitProductInformation(productMap, productInformation);
             compareMinimumPrice(product);
-            productMap.put(product.name, product);
+            productMap.put(product.getName(), product);
         }
     }
 
     private void compareMinimumPrice(Product product) {
-        if (minimumPrice > product.price) {
-            minimumPrice = product.price;
-        }
+        minimumPrice = product.isLessThanMinimumPrice(minimumPrice);
     }
 }

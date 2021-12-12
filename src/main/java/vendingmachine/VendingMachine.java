@@ -30,12 +30,12 @@ public class VendingMachine extends LoopInput {
         change.createRandomChange();
     }
 
-    private void inputSellProduct(){
+    private void inputSellProduct() {
         String productName = inputString(BUY_PRODUCT_MESSAGE);
         validator.validateExistedProduct(productList, productName);
         validator.validateProductIsAvailable(productList, productName);
-        int productPrice = productList.sellProduct(productName);
-        customer.calcCustomerMoney(productPrice);
+        Product sellProduct = productList.sellProduct(productName);
+        customer.calcCustomerMoney(sellProduct);
         outputMessage.printInputMoney(customer.getCustomerMoney());
     }
 

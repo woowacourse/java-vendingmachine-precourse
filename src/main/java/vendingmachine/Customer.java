@@ -15,8 +15,8 @@ public class Customer extends LoopInput {
         return customerMoney;
     }
 
-    public void calcCustomerMoney(int productPrice) {
-        customerMoney -= productPrice;
+    public void calcCustomerMoney(Product product) {
+        customerMoney = product.calcCustomerMoney(customerMoney);
     }
 
     private void inputCustomerMoney() {

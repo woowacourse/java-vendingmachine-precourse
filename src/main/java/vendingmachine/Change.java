@@ -8,7 +8,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Change extends LoopInput {
     private static final String INPUT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";
     private static final int ADD_COIN = 1;
-    private static final int DEFAULT_STOCK = 1;
+    private static final int DEFAULT_STOCK = 0;
     private static final int ZERO = 0;
     private static final Validator validator = new Validator();
     private static HashMap<Coin, Integer> coinMap = new HashMap<>();
