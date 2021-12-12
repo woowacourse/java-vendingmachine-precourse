@@ -2,7 +2,7 @@ package vendingmachine.view;
 
 import vendingmachine.utils.Validator;
 
-public class ItemChoiceView implements InputView {
+public class ItemChoiceInputView implements InputView {
 	public String checkAllConditions(String nowInput) {
 		try {
 			Validator.validateNameInput(nowInput);
