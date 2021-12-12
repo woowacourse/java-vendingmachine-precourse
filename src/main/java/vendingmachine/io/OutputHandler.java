@@ -29,6 +29,10 @@ public class OutputHandler {
 		printCoinStatus(coinMap);
 	}
 
+	public void printBalance(int balance) {
+		printMessage(String.format(VendingMachineData.MONEY_STATUS_MESSAGE, balance));
+	}
+
 	private void printCoinStatus(Map<Coin, Integer> coinMap) {
 		printCoinStatus(coinMap, true);
 	}
