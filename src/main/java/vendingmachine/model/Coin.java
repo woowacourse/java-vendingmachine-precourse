@@ -7,10 +7,19 @@ public enum Coin {
     COIN_10(10);
 
     private final int amount;
+    private int num;
 
     Coin(final int amount) {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public int getAmount(){
+        return amount;
+    }
+    public void setNum(int num){
+        this.num = num;
+    }
+    public int getNum(){
+        return num;
+    }
 }
