@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.VendingMachine;
+import vendingmachine.service.GivingChangesService;
 import vendingmachine.service.InsertingMoneyService;
 import vendingmachine.service.SettingCoinService;
 import vendingmachine.service.SettingMenuService;
@@ -15,6 +16,7 @@ public class VendingMachineController {
 	private SettingCoinService settingCoinService;
 	private SettingMenuService settingMenuService;
 	private InsertingMoneyService insertingMoneyService;
+	private GivingChangesService givingChangesService;
 
 	public VendingMachineController(VendingMachine vendingMachine) {
 		vendingMachineView = new VendingMachineView();
@@ -23,6 +25,7 @@ public class VendingMachineController {
 		settingCoinService = new SettingCoinService(vendingMachine, userView, vendingMachineView);
 		settingMenuService = new SettingMenuService(vendingMachine, userView, vendingMachineView);
 		insertingMoneyService = new InsertingMoneyService(vendingMachine, userView, vendingMachineView);
+		givingChangesService = new GivingChangesService(vendingMachine, userView, vendingMachineView);
 	}
 
 	public void setInitCoins() {
@@ -43,7 +46,7 @@ public class VendingMachineController {
 	}
 
 	public void giveChangesAtTheEnd() {
-		vendingMachineService.giveChanges();
+		givingChangesService.giveChanges();
 	}
 
 }
