@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import vendingmachine.exception.ProductNameNotFoundException;
 import vendingmachine.exception.ProductsNameDuplicateException;
 
 public class Products {
@@ -49,7 +50,7 @@ public class Products {
         return products.stream()
             .filter(product -> product.isEqualsName(name))
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("[ERROR] 상품의 이름을 찾을 수 없습니다."));
+            .orElseThrow(ProductNameNotFoundException::new);
     }
 
     public boolean isExistPurchasableProduct() {
