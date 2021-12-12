@@ -8,6 +8,7 @@ public class MoneyValidator {
     public void tryToInputMoneyForMakeCoin(String money) throws IllegalArgumentException {
         validateCoinMoneyDigit(money);
         validateCoinMoneyBlank(money);
+        validateMultipleOfTen(money);
     }
 
     private void validateCoinMoneyDigit(String money) {
@@ -26,9 +27,17 @@ public class MoneyValidator {
         }
     }
 
+    private void validateMultipleOfTen(String money) {
+        if (Integer.parseInt(money) % Condition.DIVIDE_NUMBER.getNumber() != Condition.REMAINDER_0.getNumber()) {
+            print(Input.MONEY_DIVIDE_ERROR_MESSAGE.getText());
+            throw new IllegalArgumentException();
+        }
+    }
+
     public void tryInputMoneyForPurchase(String money) throws IllegalArgumentException {
         validatePurchaseMoneyDigit(money);
         validatePurchaseMoneyBlank(money);
+        validateMultipleOfTen(money);
     }
 
     private void validatePurchaseMoneyDigit(String money) {
