@@ -1,13 +1,14 @@
 package vendingmachine.view;
 
 import static vendingmachine.utils.validator.MoneyValidator.*;
-import static vendingmachine.utils.validator.ProductInfoValidator.*;
+import static vendingmachine.utils.validator.ProductValidator.*;
 
 
 import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.SystemMessage;
 
 public class InputView {
@@ -46,9 +47,14 @@ public class InputView {
 			}
 		}
 	}
-
-	public static String inputProductNameToBuy() {
+	// 예외 처리 넣기
+	public static String inputProductNameToBuy(VendingMachine vendingMachine) {
 		System.out.println(SystemMessage.GET_PRODUCT_NAME_TO_BUY.getText());
-		return Console.readLine();
+		while (true) {
+			String productName = Console.readLine();
+			if (checkIsValidToBuyProduct(vendingMachine, productName)) {
+				return productName;
+			}
+		}
 	}
 }

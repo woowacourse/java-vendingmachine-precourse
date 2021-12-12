@@ -35,7 +35,7 @@ public class VendingMachineController {
 	public void buyProducts() {
 		while (isValidToBuyProduct(vendingMachine)) {
 			printCurrentInputMoney(vendingMachine);
-			String productName = inputProductNameToBuy();
+			String productName = inputProductNameToBuy(vendingMachine);
 			vendingMachine.sellProduct(productName);
 		}
 	}

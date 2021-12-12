@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import vendingmachine.utils.ErrorMessage;
+
 public class Products {
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
@@ -40,7 +42,7 @@ public class Products {
 		return productList.stream()
 			.filter(product -> product.getName().equals(productName))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException());
+			.orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ERROR_PRODUCT_DOES_NOT_EXIST.getText()));
 	}
 
 	public void createProductList(List<String> productInfoList) {

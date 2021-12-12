@@ -36,32 +36,28 @@ public class MoneyValidator {
 		return true;
 	}
 
-	public static boolean isValidToDivideByTen(String input) {
+	public static void isValidToDivideByTen(String input) {
 		if (!(Integer.parseInt(input) % Coin.COIN_10.getAmount() == EXPECTED_VALUE_WHEN_DIVIDING)) {
 			throw new IllegalArgumentException(ERROR_MONEY_NOT_DIVIDED_BY_TEN.getText());
 		}
-		return true;
 	}
 
-	public static boolean isNotZeroNumber(String input) {
+	public static void isNotZeroNumber(String input) {
 		if (Integer.parseInt(input) == ZERO_NUMBER) {
 			throw new IllegalArgumentException(ERROR_MONEY_IS_ZERO.getText());
 		}
-		return true;
 	}
 
-	public static boolean isDigit(String input) {
+	public static void isDigit(String input) {
 		if (!Pattern.matches("^[0-9]+$", input)) {
 			throw new IllegalArgumentException(ERROR_MONEY_IS_NOT_NUMBER.getText());
 		}
-		return true;
 	}
 
-	public static boolean isNotBlank(String input) {
+	public static void isNotBlank(String input) {
 		if (input.isEmpty()) {
 			throw new IllegalArgumentException(ERROR_MONEY_IS_BLANK.getText());
 		}
-		return true;
 	}
 
 	public static boolean isValidToBuyProduct(VendingMachine vendingMachine) {
