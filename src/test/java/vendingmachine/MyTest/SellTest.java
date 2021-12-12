@@ -2,10 +2,10 @@ package vendingmachine.MyTest;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.Application;
+import vendingmachine.Utils.Constants;
 
 import org.junit.jupiter.api.Test;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -18,7 +18,7 @@ class SellTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,10]", "1000", "환타");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NAME_IN_NAMES
 				);
 			}
 		);
@@ -30,7 +30,31 @@ class SellTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,10]", "1000", ",");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NAME_STRING
+				);
+			}
+		);
+	}
+
+	@Test
+	void 구매상품명_받기_예외_재고없음() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,900,1];[사이다,900,1]", "3000", "콜라", "콜라");
+				assertThat(output()).contains(
+					Constants.ERROR_NO_STOCK
+				);
+			}
+		);
+	}
+
+	@Test
+	void 구매상품명_받기_예외_돈부족() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,900,1];[사이다,200,1]", "200", "콜라");
+				assertThat(output()).contains(
+					Constants.ERROR_BEVERAGE_EXPENSIVE
 				);
 			}
 		);

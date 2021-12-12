@@ -2,6 +2,7 @@ package vendingmachine.MyTest;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.Application;
+import vendingmachine.Utils.Constants;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,7 +19,7 @@ class InitTest extends NsTest {
 			runException("a");
 			assertThat(output()).contains(
 				"자판기가 보유하고 있는 금액을 입력해 주세요.",
-				ERROR_MESSAGE
+				Constants.ERROR_NUMBER_PATTERN
 			);
 		});
 	}
@@ -29,7 +30,7 @@ class InitTest extends NsTest {
 			runException("0");
 			assertThat(output()).contains(
 				"자판기가 보유하고 있는 금액을 입력해 주세요.",
-				ERROR_MESSAGE
+				Constants.ERROR_NUMBER_PATTERN
 			);
 		});
 	}
@@ -40,7 +41,7 @@ class InitTest extends NsTest {
 			runException("012");
 			assertThat(output()).contains(
 				"자판기가 보유하고 있는 금액을 입력해 주세요.",
-				ERROR_MESSAGE
+				Constants.ERROR_NUMBER_PATTERN
 			);
 		});
 	}
@@ -51,7 +52,7 @@ class InitTest extends NsTest {
 			runException("90");
 			assertThat(output()).contains(
 				"자판기가 보유하고 있는 금액을 입력해 주세요.",
-				ERROR_MESSAGE
+				Constants.ERROR_MONEY_RANGE
 			);
 		});
 	}
@@ -62,7 +63,7 @@ class InitTest extends NsTest {
 			runException("101");
 			assertThat(output()).contains(
 				"자판기가 보유하고 있는 금액을 입력해 주세요.",
-				ERROR_MESSAGE
+				Constants.ERROR_MONEY_UNIT
 			);
 		});
 	}
@@ -88,7 +89,7 @@ class InitTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,10]", "0");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NUMBER_PATTERN
 				);
 			}
 		);
@@ -100,7 +101,7 @@ class InitTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,10]", "01");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NUMBER_PATTERN
 				);
 			}
 		);
@@ -112,7 +113,7 @@ class InitTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,10]", "90");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_MONEY_RANGE
 				);
 			}
 		);
@@ -124,20 +125,32 @@ class InitTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,10]", "101");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_MONEY_UNIT
 				);
 			}
 		);
 	}
 
 	@Test
-	void 투입금액_받기_100() {
+	void 투입금액_받기_예외_최소금액이하넣음() {
 		assertSimpleTest(
 			() -> {
-				runException("450", "[콜라,900,10]", "100");
+				runException("450", "[콜라,900,10]", "890");
+				assertThat(output()).contains(
+					Constants.ERROR_USER_POOR
+				);
+			}
+		);
+	}
+
+	@Test
+	void 투입금액_받기_1000() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[콜라,900,10]", "1000");
 				assertThat(output()).doesNotContain(
 					ERROR_MESSAGE
-				).contains("투입 금액: 100원");
+				).contains("투입 금액: 1000원");
 			}
 		);
 	}

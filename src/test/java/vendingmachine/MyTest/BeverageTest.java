@@ -2,13 +2,12 @@ package vendingmachine.MyTest;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.Application;
+import vendingmachine.Utils.Constants;
 
 import org.junit.jupiter.api.Test;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
-
 
 public class BeverageTest extends NsTest {
 	private static final String ERROR_MESSAGE = "[ERROR]";
@@ -19,7 +18,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,1500,20];-[사이다,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_BEVERAGE_STRING
 				);
 			}
 		);
@@ -31,7 +30,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "콜라,1500,20];[사이다,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_BEVERAGE_STRING
 				);
 			}
 		);
@@ -43,7 +42,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,1500,20]a[사이다,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_BEVERAGE_STRING
 				);
 			}
 		);
@@ -55,7 +54,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라;,1500,20];[사이다,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_BEVERAGE_STRING
 				);
 			}
 		);
@@ -67,14 +66,14 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,150020];[사이다,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_BEVERAGE_STRING
 				);
 			}
 		);
 	}
 
 	@Test
-	void 상품_입력_받기_물건3개이상() {
+	void 상품_입력_받기_정상작동() {
 		assertSimpleTest(
 			() -> {
 				runException("450", "[콜라,1500,20];[사이다,1000,10];[환타,1000,10]");
@@ -91,7 +90,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,1500,20];[사이다,1000,10];[콜라,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_BEVERAGE_DUPLICATED
 				);
 			}
 		);
@@ -103,7 +102,19 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[,1500,20];[사이다,1000,10];[환타,1000,10]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NAME_STRING
+				);
+			}
+		);
+	}
+
+	@Test
+	void 상품_입력_받기_이름에밑줄존재() {
+		assertSimpleTest(
+			() -> {
+				runException("450", "[_,1500,20];[사이다,1000,10];[환타,1000,10]");
+				assertThat(output()).contains(
+					Constants.ERROR_NAME_STRING
 				);
 			}
 		);
@@ -115,7 +126,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,1501,20]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_MONEY_UNIT
 				);
 			}
 		);
@@ -127,7 +138,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,90,20]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_MONEY_RANGE
 				);
 			}
 		);
@@ -139,7 +150,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,0]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NUMBER_PATTERN
 				);
 			}
 		);
@@ -151,7 +162,7 @@ public class BeverageTest extends NsTest {
 			() -> {
 				runException("450", "[콜라,900,01]");
 				assertThat(output()).contains(
-					ERROR_MESSAGE
+					Constants.ERROR_NUMBER_PATTERN
 				);
 			}
 		);

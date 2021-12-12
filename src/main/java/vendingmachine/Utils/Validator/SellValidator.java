@@ -15,7 +15,7 @@ public class SellValidator {
 
 	private void isUserRich(Money userMoney) {
 		if (beverage.price > userMoney.get()) {
-			throw new IllegalArgumentException(Constants.ERROR_USER_POOR);
+			throw new IllegalArgumentException(Constants.ERROR_BEVERAGE_EXPENSIVE);
 		}
 	}
 
