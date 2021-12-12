@@ -41,8 +41,8 @@ public class VendingMachine {
 			throw new IllegalArgumentException(NO_STOCKS_MESSAGE);
 		}
 		productStocks.put(productName, productStocks.get(productName) - 1);
-		return paidMoney - productPrice.get(productName) + calculateMinimumChange(
-			paidMoney - productPrice.get(productName));
+		calculateMinimumChange(paidMoney - productPrice.get(productName));
+		return paidMoney - productPrice.get(productName);
 	}
 
 	private boolean canSell(String productName, int amountPaid) {
@@ -56,14 +56,13 @@ public class VendingMachine {
 		return productStocks.get(productName) >= MINIMUM_STOCKS;
 	}
 
-	private int calculateMinimumChange(int changeCoin) {
+	private void calculateMinimumChange(int changeCoin) {
 		for (int coin : coinsOwned.keySet()) {
 			int coinNumberToPay = Math.min(coinsOwned.get(coin), changeCoin / coin);
 			coinsOwned.put(coin, coinsOwned.get(coin)
 				- coinNumberToPay);
 			changeCoin -= coin * coinNumberToPay;
 		}
-		return changeCoin;
 	}
 
 	private boolean canGiveChange(int remainingChange) {
