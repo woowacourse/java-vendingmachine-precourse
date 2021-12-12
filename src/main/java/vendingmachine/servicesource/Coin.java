@@ -1,5 +1,7 @@
 package vendingmachine.servicesource;
 
+import vendingmachine.constants.StringConstants;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -16,4 +18,11 @@ public enum Coin {
         return amount;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder coinValue = new StringBuilder(Integer.toString(this.amount));
+        coinValue.append(StringConstants.CURRENCY_UNIT);
+
+        return coinValue.toString();
+    }
 }
