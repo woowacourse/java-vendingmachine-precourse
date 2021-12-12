@@ -35,4 +35,7 @@ public class VendingMachineController {
 		vendingMachineService.purchaseProduct(productName);
 	}
 
+	public Coins showReturnChange() {
+		return vendingMachineService.showReturnChange();
+	}
 }

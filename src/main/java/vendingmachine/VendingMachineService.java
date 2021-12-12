@@ -34,4 +34,8 @@ public class VendingMachineService {
 	public void purchaseProduct(String productName) {
 		vendingMachine.purchase(productName);
 	}
+
+	public Coins showReturnChange() {
+		return vendingMachine.returnChange();
+	}
 }
