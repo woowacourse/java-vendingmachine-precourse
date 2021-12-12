@@ -24,12 +24,12 @@ public enum Coin {
 	}
 
 	public static List<Integer> getIntCoinList() {
-        List<Integer> coinList = Arrays.asList(500,100,50,10);
+		List<Integer> coinList = Arrays.asList(500, 100, 50, 10);
 		return coinList;
 	}
 
 	public static Coin getCoinByAmount(int amount) {
-		for (Coin coin: getCoinArray()) {
+		for (Coin coin : getCoinArray()) {
 			if (coin.getAmount() == amount) {
 				return coin;
 			}
