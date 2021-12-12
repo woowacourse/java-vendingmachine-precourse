@@ -13,17 +13,7 @@ public class Machine {
     HashMap<Coin, Integer> coinsMap = new HashMap<>();
     private int userAmount;
 
-    public void start() {
-        balance();
-        coinsInMachine();
-        coinHashMap();
-        showMachineCoins();
-        goods();
-        amountInput();
-        purchase();
-    }
-
-    private void balance() {
+    public void balance() {
         boolean check = false;
         while (!check) {
             System.out.println(Message.INPUT_MACHINE_BALANCE);
@@ -31,7 +21,7 @@ public class Machine {
         }
     }
 
-    private void goods() {
+    public void goods() {
         boolean check = false;
         System.out.println();
         while (!check) {
@@ -40,7 +30,7 @@ public class Machine {
         }
     }
 
-    private void coinsInMachine() {
+    public void coinsInMachine() {
         int balance = user.getMachineBalance();
         int coin;
         while (balance > 0) {
@@ -59,13 +49,13 @@ public class Machine {
         return Randoms.pickNumberInList(Coin.getCoinsList());
     }
 
-    private void coinHashMap() {
+    public void coinHashMap() {
         for (Coin coin : Coin.values()) {
             coinsMap.put(coin, Collections.frequency(coins, coin.getAmount()));
         }
     }
 
-    private void showMachineCoins() {
+    public void showMachineCoins() {
         System.out.println("\n" + Message.SHOW_MACHINE_COINS);
         System.out.println(Coin.COIN_500.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_500) + Message.QUANTITY);
         System.out.println(Coin.COIN_100.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_100) + Message.QUANTITY);
@@ -73,7 +63,7 @@ public class Machine {
         System.out.println(Coin.COIN_10.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_10) + Message.QUANTITY);
     }
 
-    private void amountInput() {
+    public void amountInput() {
         boolean check = false;
         System.out.println();
         while (!check) {
@@ -91,7 +81,7 @@ public class Machine {
         user.userPurchase();
     }
 
-    private void purchase() {
+    public void purchase() {
         boolean check = false;
         while (!check) {
             user.showRemainingAmount();
