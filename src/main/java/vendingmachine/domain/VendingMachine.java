@@ -11,7 +11,6 @@ import vendingmachine.Coin;
 public class VendingMachine {
 	private static final HashMap<Integer, Integer> coins = new HashMap<>();
 	private int changeAmount;
-	private int userInputAmount;
 
 	public void inputChangAmount(int changeAmount) {
 		this.changeAmount = changeAmount;
@@ -33,7 +32,7 @@ public class VendingMachine {
 			.collect(Collectors.toList());
 	}
 
-	public static String printCoins() {
+	public String coinsToString() {
 		StringBuilder result = new StringBuilder();
 		Stream.of(Coin.values())
 			.map(Coin::getAmount)
@@ -41,9 +40,5 @@ public class VendingMachine {
 				String.format("%d원 - %d개\n", amount, coins.getOrDefault(amount, 0))
 			));
 		return result.toString();
-	}
-
-	public void inputUserInputAmount(int changeAmount) {
-		this.changeAmount = changeAmount;
 	}
 }

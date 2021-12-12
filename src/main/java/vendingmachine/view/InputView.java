@@ -18,4 +18,9 @@ public class InputView {
 		System.out.println(Constants.INPUT_MESSAGE_USER_INPUT_AMOUNT);
 		return Console.readLine();
 	}
+
+	public static String inputProductToBuy() {
+		System.out.println(Constants.INPUT_MESSAGE_PRODUCT_TO_BUY);
+		return Console.readLine();
+	}
 }

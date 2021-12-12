@@ -5,12 +5,16 @@ import vendingmachine.view.InputView;
 
 public class ProductController {
 
-	private static final ProductService productService = new ProductService();
+	private final ProductService productService = new ProductService();
+
+	public ProductService getProductService() {
+		return productService;
+	}
 
 	public void inputProduct() {
 		String products;
 		do {
-			productService.deleteProducts();
+			productService.deleteAll();
 			products = InputView.inputProduct();
 		} while (!productService.validateProduct(products));
 	}

@@ -5,12 +5,11 @@ import vendingmachine.util.Constants;
 import vendingmachine.util.ExceptionHandler;
 import vendingmachine.validator.InputValidator;
 
-public class VendingMachineService {
+public final class VendingMachineService {
+	private final VendingMachine vendingMachine = new VendingMachine();
 
-	private VendingMachine vendingMachine;
-
-	public VendingMachineService() {
-		this.vendingMachine = new VendingMachine();
+	public VendingMachine getVendingMachine() {
+		return vendingMachine;
 	}
 
 	public void inputChangeAmount(String vendingMachinePrice) {
@@ -30,15 +29,4 @@ public class VendingMachineService {
 		vendingMachine.generateCoins();
 	}
 
-	public boolean validateInputAmount(String inputAmount) {
-		boolean isValid = InputValidator.isNotEmpty(inputAmount)
-			&& InputValidator.isDigit(inputAmount)
-			&& InputValidator.isGreaterThan(Constants.INPUT_AMOUNT_MIN_VALUE, inputAmount);
-		ExceptionHandler.handleInputError(isValid, Constants.ERROR_MESSAGE_INPUT_USER_INPUT_AMOUNT);
-		return isValid;
-	}
-
-	public void inputUserInputAmount(String inputAmount) {
-		vendingMachine.inputUserInputAmount(Integer.parseInt(inputAmount));
-	}
 }

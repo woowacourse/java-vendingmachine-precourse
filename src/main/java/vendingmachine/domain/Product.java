@@ -10,4 +10,20 @@ public class Product {
 		this.price = price;
 		this.count = count;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public int sell() {
+		return --count;
+	}
+
+	public boolean isEqual(String name) {
+		return this.name.equals(name);
+	}
+
+	public boolean priceIsSmallerThan(int price) {
+		return this.price <= price;
+	}
 }

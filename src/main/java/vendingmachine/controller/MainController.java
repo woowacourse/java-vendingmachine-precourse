@@ -5,15 +5,16 @@ import vendingmachine.view.OutputView;
 public class MainController {
 	public void run() {
 		VendingMachineController vendingMachineController = new VendingMachineController();
+		ProductController productController = new ProductController();
+		PurchaseController purchaseController = new PurchaseController(productController.getProductService());
 
 		vendingMachineController.inputVendingMachineChange();
 		vendingMachineController.generateCoins();
+		OutputView.printCoins(vendingMachineController.getVendingMachine());
 
-		OutputView.printCoins();
-
-		ProductController productController = new ProductController();
 		productController.inputProduct();
 
-		vendingMachineController.inputUserInputAmount();
+		purchaseController.inputUserInputAmount();
+		purchaseController.buy();
 	}
 }

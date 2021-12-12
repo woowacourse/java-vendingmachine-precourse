@@ -4,8 +4,10 @@ public final class Constants {
 	public static final String INPUT_MESSAGE_VENDING_MACHINE_CHANGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	public static final String INPUT_MESSAGE_PRODUCT = "상품명과 가격, 수량을 입력해 주세요.";
 	public static final String INPUT_MESSAGE_USER_INPUT_AMOUNT = "투입 금액을 입력해 주세요.";
+	public static final String INPUT_MESSAGE_PRODUCT_TO_BUY = "구매할 상품명을 입력해 주세요.";
 
 	public static final String OUTPUT_MESSAGE_COINS = "자판기가 보유한 동전";
+	public static final String OUTPUT_MESSAGE_USER_INPUT_AMOUNT = "투입 금액: ";
 
 	public static final String ERROR_MESSAGE = "[ERROR] ";
 	public static final String ERROR_MESSAGE_INPUT_VENDING_MACHINE_CHANGE =
@@ -14,6 +16,7 @@ public final class Constants {
 		ERROR_MESSAGE + "상품명, 가격(숫자), 수량(숫자)은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분해야 합니다. "
 			+ "ex) [콜라,1500,20];[사이다,1000,10]";
 	public static final String ERROR_MESSAGE_INPUT_USER_INPUT_AMOUNT = ERROR_MESSAGE + "금액은 양수여야 합니다.";
+	public static final String ERROR_MESSAGE_INPUT_PRODUCT_TO_BUY = ERROR_MESSAGE + "해당 상품을 구매할 수 없습니다.";
 
 	public static final int VENDING_MACHINE_CHANGE_MIN_VALUE = 10;
 	public static final int VENDING_MACHINE_CHANGE_DENOMINATOR = 10;
