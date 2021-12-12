@@ -47,18 +47,6 @@ public class Merchandises {
         }
     }
 
-    public boolean isConsist(String targetMerchandise) {
-        return merchandises.stream()
-            .anyMatch(merchandise -> merchandise.name().equals(targetMerchandise));
-    }
-
-    public Merchandise get(String targetMerchandise) {
-        return merchandises.stream()
-            .filter(merchandise -> merchandise.name().equals(targetMerchandise))
-            .findFirst()
-            .get();
-    }
-
     public void buy(String targetMerchandise) {
         Merchandise merchandise = findMerchandise(targetMerchandise);
         merchandise.buy();

@@ -5,6 +5,8 @@ import vendingmachine.domain.merchandise.Merchandises;
 
 public class VendingMachine {
 
+    private static final String NOT_EXIST_TARGET_MERCHANDISE = "[ERROR] : 해당 상품은 존재하지 않습니다. 존재하는 상품을 입력 부탁드립니다.";
+
     private final Changes changes;
     private final Money money;
     private final Merchandises merchandises;
@@ -13,14 +15,6 @@ public class VendingMachine {
         this.changes = changes;
         this.money = new Money(0);
         this.merchandises = new Merchandises(stringMerchandise);
-    }
-
-    public Changes changes() {
-        return changes;
-    }
-
-    public Map<Integer, Integer> getChanges() {
-        return changes.changes();
     }
 
     public void putMoney(String stringMoney) {
@@ -36,7 +30,7 @@ public class VendingMachine {
 
     private void validTargetMerchandise(String targetMerchandise) {
         if (!merchandises.exist(targetMerchandise)) {
-            throw new IllegalArgumentException("[ERROR] : 해당 상품은 존재하지 않습니다. 존재하는 상품을 입력 부탁드립니다.");
+            throw new IllegalArgumentException(NOT_EXIST_TARGET_MERCHANDISE);
         }
     }
 

@@ -7,7 +7,6 @@ public class MerchandiseName {
         this.name = name;
     }
 
-
     public String name() {
         return name;
     }
