@@ -16,4 +16,8 @@ public class Pair {
 	public int getSecondValue() {
 		return this.secondValue;
 	}
+
+	public void increaseSecondValue(int amount) {
+		this.secondValue += amount;
+	}
 }
