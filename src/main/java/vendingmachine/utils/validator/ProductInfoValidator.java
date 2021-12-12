@@ -10,7 +10,8 @@ import vendingmachine.domain.Product;
 
 public class ProductInfoValidator {
 
-    public static final String PRODUCT_INVALID_FORMAT_ERROR_MESSAGE = "[ERROR] 상품 정보 형식이 올바르지 않습니다. \"[상품명1, 상품 가격1, 상품 수량1];[상품명2, 상품 가격2, 상품 수량2]...\" 형식으로 입력해 주세요.";
+    public static final String PRODUCT_INVALID_FORMAT_ERROR_MESSAGE = "상품 정보 형식이 올바르지 않습니다. \"[상품명1, 상품 가격1, 상품 수량1];[상품명2, 상품 가격2, 상품 수량2]...\" 형식으로 입력해 주세요.";
+    public static final String PRODUCT_DROPPED_INFO_ERROR_MESSAGE = "누락된 정보가 있습니다. 상품명, 가격, 수량을 확인해 주세요.";
     private static final String SEMICOLON_SEPARATION_REGEX = "\\s*;\\s*";
     private static final Pattern PRODUCT_INFO_PATTERN = Pattern.compile(
         "^\\[\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\]$");
@@ -41,14 +42,23 @@ public class ProductInfoValidator {
     }
 
     private static String getValidProductName(final String name) { // TODO implement Exception cases
+        validateIsNotDropped(name);
         return name;
     }
 
     private static int getValidProductPrice(final String price) { // TODO implement Exception cases
+        validateIsNotDropped(price);
         return NumberValidator.getValidNumber(price, "");
     }
 
     private static int getValidProductStock(final String stock) { // TODO implement Exception cases
+        validateIsNotDropped(stock);
         return NumberValidator.getValidNumber(stock, "");
+    }
+
+    private static void validateIsNotDropped(final String input) {
+        if (input.length() == 0) {
+            throw new IllegalArgumentException(PRODUCT_DROPPED_INFO_ERROR_MESSAGE);
+        }
     }
 }
