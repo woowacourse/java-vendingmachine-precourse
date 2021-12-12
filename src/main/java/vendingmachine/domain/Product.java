@@ -65,11 +65,15 @@ public class Product {
         inputAmount.consume(this.amount);
     }
 
+    public boolean isEmpty() {
+        return this.stock == EMPTY;
+    }
+
     private void validateDeal(InputAmount inputAmount) throws IllegalArgumentException {
         if (this.amount > inputAmount.getAmount()) {
             throw new IllegalArgumentException(ERR_INVALID_INPUT_AMOUNT);
         }
-        if (this.stock == EMPTY) {
+        if (isEmpty()) {
             throw new IllegalArgumentException(ERR_EMPTY_STOCK);
         }
     }
