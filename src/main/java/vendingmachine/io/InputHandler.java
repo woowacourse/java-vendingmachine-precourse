@@ -53,6 +53,11 @@ public class InputHandler {
 		}
 	}
 
+	public String getProductName() {
+		outputHandler.printMessage(VendingMachineData.INPUT_PRODUCT_NAME_MESSAGE);
+		return read();
+	}
+
 	private int getMoney() {
 		String data = read();
 		InputValidator.validMoneyValue(data);
