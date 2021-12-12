@@ -6,6 +6,7 @@ import java.util.Arrays;
 public class Utils {
 
     private static int MIN_VALUE = 100;
+    private static int DIVIDED_VALUE = 10;
 
     public static ArrayList splitString(String inputString) {
         String[] splits = inputString.replace("[","").replace("]","").split(";");
@@ -26,7 +27,13 @@ public class Utils {
 
     public static void validateOvervalue(int number) {
         if (number < MIN_VALUE) {
-            throw new IllegalArgumentException("[ERROR] 상품의 가격은 최소 " + MIN_VALUE + "원 이상이어야 합니다.");
+            throw new IllegalArgumentException("[ERROR] 상품의 가격은 " + MIN_VALUE + "원 이상이어야 합니다.");
+        }
+    }
+
+    public static void validateDividableByValue(int number) {
+        if (number % DIVIDED_VALUE != 0) {
+            throw new IllegalArgumentException("ERROR 가격은 최소 10원 단위어야 합니다.");
         }
     }
 }
