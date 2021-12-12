@@ -10,13 +10,14 @@ import vendingmachine.util.SystemMessage;
 
 public class ReturnChangesView implements View {
 	@Override
-	public void show() {
+	public void flow() {
 		int money = Application.controller.getMoney();
 		printMoneyAndMessage(money);
 		printChanges(money);
 	}
 
 	private void printMoneyAndMessage(int money) {
+		System.out.println();
 		System.out.println(SystemMessage.SHOW_INPUT_MONEY + money + PublicConst.MONETARY_UNIT);
 		System.out.println(SystemMessage.RETURN_CHANGES);
 	}

@@ -9,8 +9,7 @@ import vendingmachine.util.SystemMessage;
 
 public class InputMoneyView implements View {
 	@Override
-	public void show() {
-		System.out.println(SystemMessage.INPUT_MONEY);
+	public void flow() {
 		int money;
 		try {
 			money = readMoney();
@@ -22,6 +21,12 @@ public class InputMoneyView implements View {
 
 		inputMoney(money);
 		goInputItemNameView();
+	}
+
+	@Override
+	public void printViewMessage() {
+		System.out.println();
+		System.out.println(SystemMessage.INPUT_MONEY);
 	}
 
 	private int readMoney() {

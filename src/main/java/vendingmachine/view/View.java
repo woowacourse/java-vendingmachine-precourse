@@ -1,5 +1,9 @@
 package vendingmachine.view;
 
 public interface View {
-	void show();
+	void flow();
+
+	default void printViewMessage() {
+
+	}
 }

@@ -9,10 +9,15 @@ import vendingmachine.util.SystemMessage;
 
 public class ShowFirstMoneyView implements View {
 	@Override
-	public void show() {
-		System.out.println(SystemMessage.SHOW_FIRST_MONEY);
+	public void flow() {
 		printCoins();
 		goInputItemInfoView();
+	}
+
+	@Override
+	public void printViewMessage() {
+		System.out.println();
+		System.out.println(SystemMessage.SHOW_FIRST_MONEY);
 	}
 
 	private void printCoins() {

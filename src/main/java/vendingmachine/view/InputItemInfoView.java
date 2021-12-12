@@ -12,8 +12,7 @@ import vendingmachine.util.SystemMessage;
 
 public class InputItemInfoView implements View {
 	@Override
-	public void show() {
-		System.out.println(SystemMessage.INPUT_ITEM_INFO);
+	public void flow() {
 		List<Item> items;
 		try {
 			items = readItems();
@@ -24,6 +23,12 @@ public class InputItemInfoView implements View {
 		}
 		addItems(items);
 		goInputMoneyView();
+	}
+
+	@Override
+	public void printViewMessage() {
+		System.out.println();
+		System.out.println(SystemMessage.INPUT_ITEM_INFO);
 	}
 
 	private List<Item> readItems() {

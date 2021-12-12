@@ -10,7 +10,7 @@ import vendingmachine.util.SystemMessage;
 public class InputItemNameView implements View {
 
 	@Override
-	public void show() {
+	public void flow() {
 		int money = getMoney();
 		if (!canPurchase(money)) {
 			goReturnChangesView();
@@ -22,6 +22,7 @@ public class InputItemNameView implements View {
 	}
 
 	private void printMoneyAndMessage(int money) {
+		System.out.println();
 		System.out.println(SystemMessage.SHOW_INPUT_MONEY + money + PublicConst.MONETARY_UNIT);
 		System.out.println(SystemMessage.INPUT_ITEM_NAME);
 	}
