@@ -2,6 +2,10 @@ package vendingmachine.domain;
 
 import static vendingmachine.utils.StringValidator.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.Coins;
 import vendingmachine.domain.menu.Menu;
 import vendingmachine.domain.menu.Menus;
@@ -26,6 +30,18 @@ public class VendingMachine {
 
 	private void validateMoney(String money) {
 		validateNumber(money, ERROR_INPUT_MONEY_NUMBER);
+	}
+
+	public Coins returnChanges() {
+		Map<Coin, Integer> coinMap = new HashMap<>();
+		while (!leftCoins.isEmpty() && leftCoins.peekMaxPriceCoin().getAmount() <= inputMoney) {
+			Coin coin = leftCoins.popMaxPriceCoin();
+			coinMap.put(coin, coinMap.getOrDefault(coin, 0) + 1);
+
+			inputMoney -= coin.getAmount();
+		}
+
+		return new Coins(coinMap);
 	}
 
 	public void buy(String menuName) {
@@ -65,6 +81,5 @@ public class VendingMachine {
 	public Coins getLeftCoins() {
 		return leftCoins;
 	}
-
 }
 

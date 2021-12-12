@@ -83,6 +83,11 @@ public class Coins {
 			.orElseThrow(NoSuchElementException::new);
 	}
 
+	public boolean isEmpty() {
+		return coinMap.values().stream()
+			.allMatch(value -> value == 0);
+	}
+
 	public Map<Coin, Integer> getCoins() {
 		return coinMap;
 	}
