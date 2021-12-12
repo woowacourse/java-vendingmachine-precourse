@@ -20,13 +20,21 @@ public class Products {
     }
 
     public void putProducts(List<Product> products) {
+        checkProductNameDuplicate(this.products, products);
         this.products.addAll(products);
-        checkProductNameDuplicate(this.products);
     }
 
     private static void checkProductNameDuplicate(List<Product> products) {
         Set<Product> productSet = new HashSet<>(products);
         if (products.size() != productSet.size()) {
+            throw new IllegalArgumentException("[ERROR] 중복되는 이름의 상품은 같이 입력될 수 없습니다.");
+        }
+    }
+
+    private static void checkProductNameDuplicate(List<Product> products, List<Product> addProducts) {
+        Set<Product> productSet = new HashSet<>(products);
+        productSet.addAll(addProducts);
+        if (products.size() + addProducts.size() != productSet.size()) {
             throw new IllegalArgumentException("[ERROR] 중복되는 이름의 상품은 같이 입력될 수 없습니다.");
         }
     }
