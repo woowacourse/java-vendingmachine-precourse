@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Arrays;
+
 import model.VendingMachine;
 import view.InputDisplay;
 import view.OutputDisplay;
@@ -15,7 +17,7 @@ public class MachineController {
 		vendingMachine.makeVendingMachineCoinBox(InputController.inputVendingMachineChange());
 		OutputDisplay.showEachCoinInCoinBox(vendingMachine.giveEachCoinPrice(), vendingMachine.giveEachCoinCount());
 		InputDisplay.askInputVendingMachineProduct();
-		InputController.inputVendingMachineProduct();
+		InputController.inputVendingMachineProducts();
 	}
 
 }
