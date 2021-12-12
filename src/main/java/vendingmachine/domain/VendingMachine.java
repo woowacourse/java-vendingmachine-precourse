@@ -7,6 +7,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static vendingmachine.domain.Product.isZeroQuantity;
+
 
 public class VendingMachine {
     private int change;
@@ -20,16 +22,13 @@ public class VendingMachine {
         this.products = setProducts(productList);
     }
 
-    public List<Integer> getCoins() {
-        return coins;
-    }
 
-    public List<Product> getProducts() {
-        return products;
-    }
 
-    public int getChange() {
-        return change;
+    public Product findByName(String name){
+        return products.stream()
+                .filter(product -> name.equals(product.getName()))
+                .findAny()
+                .orElseThrow(()->new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT));
     }
 
     public int buy(int balance, Product product){
@@ -59,5 +58,57 @@ public class VendingMachine {
         }
         return products;
     }
+
+    public boolean isBalanceBigger(int balance){
+        if(balance > this.change){
+            return true;
+        }
+        return false;
+    }
+
+    public int[] coinsToArray(){
+       return this.coins.stream()
+               .mapToInt(i->i)
+               .toArray();
+    }
+
+    public Product findByPrice(int price){
+        return products.stream()
+                .filter(product -> product.getPrice() == price)
+                .findAny()
+                .get();
+    }
+
+    public int findMinPrice(){
+        return products.stream()
+                .mapToInt(product -> product.getPrice())
+                .min()
+                .getAsInt();
+    }
+
+    public List<Integer> findAllQuantity(){
+        return products.stream()
+                .map(Product::getPrice)
+                .collect(Collectors.toList());
+    }
+
+    public boolean availableCheck(int balance){
+        int minPrice = findMinPrice();
+        if(balance < minPrice){
+            return false;
+        }
+
+        if(isZeroQuantity(findByPrice(minPrice))){
+            return false;
+        }
+
+        List<Integer> quantities = findAllQuantity();
+        if(quantities.stream().mapToInt(Integer::intValue).sum() == 0){
+            return false;
+        }
+
+        return true;
+    }
+
 
 }

@@ -86,14 +86,4 @@ public class Validation {
             throw new IllegalArgumentException(Message.ERROR + Message.IS_UNDIVISIBLE);
         }
     }
-
-    public void orderValidation(VendingMachine vendingMachine,String order) {
-        boolean isPresent = vendingMachine.getProducts().stream()
-                .map(Product::getName)
-                .collect(Collectors.toList())
-                .contains(order);
-        if (!isPresent){
-            throw new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT);
-        }
-    }
 }

@@ -4,7 +4,6 @@ package vendingmachine.service;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.repository.VendingMachineRepository;
 import vendingmachine.utils.Message;
 import vendingmachine.utils.VendingMachineValidation;
 import vendingmachine.view.InputView;
@@ -12,12 +11,9 @@ import vendingmachine.view.OutputView;
 
 import java.util.*;
 
-import static vendingmachine.domain.Product.isZeroQuantity;
-
 public class VendingMachineService {
 
     private final VendingMachineValidation vendingMachineValidation;
-    private final VendingMachineRepository vendingMachineRepository;
     private final CoinService coinService;
     private VendingMachine vendingMachine;
 
@@ -25,7 +21,6 @@ public class VendingMachineService {
         this.coinService = new CoinService();
         this.vendingMachineValidation = new VendingMachineValidation();
         setVendingMachine();
-        this.vendingMachineRepository = new VendingMachineRepository(this.vendingMachine);
     }
 
     public void setVendingMachine(){
@@ -57,7 +52,7 @@ public class VendingMachineService {
     }
 
     public int buyProduct(int amount, String name){
-        Product product = vendingMachineRepository.findByName(name);
+        Product product = vendingMachine.findByName(name);
         return vendingMachine.buy(amount,product);
     }
 
