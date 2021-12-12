@@ -57,10 +57,6 @@ public enum Coin {
 		return numberOfCoin;
 	}
 
-	public int getRemainingNumber() {
-		return remainingNumber;
-	}
-
 	@Override
 	public String toString() {
 		return amount + Message.MONEY_UNIT + Message.COIN_DELIMITER + numberOfCoin + Message.COUNT_UNIT;

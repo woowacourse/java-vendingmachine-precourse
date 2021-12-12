@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import java.util.List;
-
 public class Item {
 	private String name;
 	private int price;
@@ -13,12 +11,8 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public boolean isEqualItemByName(String itemName){
+	public boolean isEqualItemByName(String itemName) {
 		return name.equals(itemName);
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public int getPrice() {

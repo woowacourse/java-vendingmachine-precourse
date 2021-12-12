@@ -1,7 +1,6 @@
 package vendingmachine.service;
 
 import java.util.List;
-import java.util.Optional;
 
 import vendingmachine.domain.Item;
 import vendingmachine.service.validator.PurchaseInputValidator;
