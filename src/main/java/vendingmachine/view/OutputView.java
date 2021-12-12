@@ -67,12 +67,13 @@ public class OutputView {
 
     }
     private static int showProcess(List<String[]> productsInfo, int nowMoney, List<String> productsName){
-        String result="";
+        String result;
+        System.out.println(Constant.NOW_MONEY+nowMoney+Constant.WON);
         try{
-            result=setProductsName(nowMoney);
+            result = setProductsName();
         } catch (IllegalArgumentException e){
             System.out.println(Constant.CHOOSE_PRODUCT_ERROR);
-            showProcess(productsInfo, nowMoney, productsName);
+            result = setProductsName();
         }
         int indexProduct = indexProduct(productsName,result);
         int productPrice = Integer.parseInt(productsInfo.get(indexProduct)[1]);
@@ -90,8 +91,7 @@ public class OutputView {
         }
         return i;
     }
-    private static String setProductsName(int nowMoney){
-        System.out.println(Constant.NOW_MONEY+nowMoney+Constant.WON);
+    private static String setProductsName(){
         System.out.println(Constant.CHOOSE_PRODUCT);
         String input = Console.readLine();
         System.out.println();
