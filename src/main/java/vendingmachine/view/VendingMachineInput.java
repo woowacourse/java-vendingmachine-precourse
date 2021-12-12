@@ -15,11 +15,17 @@ import vendingmachine.utils.VendingMachineMessage;
  * 자판기 구동에 필요한 정보를 입력받아 컨트롤러에 넘긴다
  *
  * @author yunki kim
- * @version 1.0
+ * @version 1.1
  * @since 2021-12-12(V1.0)
  */
 
 public class VendingMachineInput {
+
+	private final ArrayList<Product> products;
+
+	public VendingMachineInput(final ArrayList<Product> products) {
+		this.products = products;
+	}
 
 	public int inputAmountOfMoney() {
 		System.out.println(VendingMachineMessage.INPUT_AMOUNT_MONEY_IN_MACHINE);
@@ -28,7 +34,6 @@ public class VendingMachineInput {
 	}
 
 	private ArrayList<Product> parseProductsInformation(final String productsInformation) {
-		ArrayList<Product> products = new ArrayList<>();
 		final List<String> productsList = Arrays
 			.stream(productsInformation.split(";"))
 			.collect(Collectors.toList());

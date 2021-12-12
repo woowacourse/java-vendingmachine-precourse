@@ -19,7 +19,7 @@ import vendingmachine.models.Product;
 @DisplayName("VendingMachineInput 클래스")
 class VendingMachineInputTest {
 
-	VendingMachineInput vendingMachineInput = new VendingMachineInput();
+	VendingMachineInput vendingMachineInput = new VendingMachineInput(new ArrayList<>());
 
 	@DisplayName("자판기가 가지고 있는 돈을 입력하면 그 값을 반환한다")
 	@ParameterizedTest(name = "{displayName} inputtedMoney={0}")
