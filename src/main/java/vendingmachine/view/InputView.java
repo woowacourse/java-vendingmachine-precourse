@@ -9,6 +9,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.InvestmentMoney;
 import vendingmachine.domain.PossessionMoney;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.ProductPurchase;
 import vendingmachine.domain.Products;
 
 public class InputView {
@@ -18,7 +19,10 @@ public class InputView {
     private static final String INPUT_PRODUCTS_SPLIT_REGEX = ";";
     private static final int INPUT_PRODUCTS_SPLIT_LIMIT = -1;
 
-    private static final String INVESTMENT_MONEY_MESSAGE = "투입 금액을 입력해 주세요.";
+    private static final String INVESTMENT_MONEY_MESSAGE = "\n투입 금액을 입력해 주세요.";
+
+    private static final String INVESTMENT_MONEY_FORMAT = "\n투입 금액: %s\n";
+    public static final String PRODUCT_PURCHASE_MESSAGE = "구매할 상품명을 입력해 주세요.";
 
     private InputView() {
     }
@@ -49,5 +53,11 @@ public class InputView {
     public static InvestmentMoney getInvestmentMoney() {
         System.out.println(INVESTMENT_MONEY_MESSAGE);
         return new InvestmentMoney(Console.readLine());
+    }
+
+    public static ProductPurchase getProductPurchase(InvestmentMoney investmentMoney) {
+        System.out.printf(INVESTMENT_MONEY_FORMAT, investmentMoney);
+        System.out.println(PRODUCT_PURCHASE_MESSAGE);
+        return new ProductPurchase(Console.readLine());
     }
 }
