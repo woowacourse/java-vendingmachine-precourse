@@ -1,11 +1,8 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public enum Coin {
     COIN_500(500, value -> value / 500),

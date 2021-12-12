@@ -7,6 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static vendingmachine.domain.Product.findMinPrice;
 import static vendingmachine.domain.Product.isZeroQuantity;
 
 
@@ -42,12 +43,10 @@ public class VendingMachine {
 
     public int buy(int balance, String name) {
         Product product = findByName(name);
-        this.balance = balance;
-        //TODO: GETTER 걷어내기
-        if (this.balance - product.getPrice() < 0) {
+        if (product.isEnoughBalance(balance,product)) {
             throw new IllegalArgumentException(Message.IS_OVER_BALANCE);
         }
-        this.balance -= product.getPrice();
+        this.balance = product.subPriceFromBalnace(balance,product);
         product.subQuantity();
         return this.balance;
     }
@@ -68,7 +67,7 @@ public class VendingMachine {
 
 
     public boolean availableCheck(int balance) {
-        int minPrice = findMinPrice();
+        int minPrice = findMinPrice(products);
         if (balance < minPrice) {
             return false;
         }
@@ -77,8 +76,7 @@ public class VendingMachine {
             return false;
         }
 
-        List<Integer> quantities = findAllQuantity();
-        if (quantities.stream().mapToInt(Integer::intValue).sum() == 0) {
+        if(isZeroQuantity(products)) {
             return false;
         }
 
@@ -87,28 +85,14 @@ public class VendingMachine {
 
     public Product findByPrice(int price) {
         return products.stream()
-                .filter(product -> product.getPrice() == price)
+                .filter(product -> product.isEqualPrice(price,product))
                 .findAny()
                 .get();
     }
 
-    public int findMinPrice() {
-        return products.stream()
-                .mapToInt(product -> product.getPrice())
-                .min()
-                .getAsInt();
-    }
-
-    public List<Integer> findAllQuantity() {
-        return products.stream()
-                .map(Product::getPrice)
-                .collect(Collectors.toList());
-    }
-
     private Product findByName(String name) {
         return products.stream()
-                //TODO: GETTER 걷어내기
-                .filter(product -> name.equals(product.getName()))
+                .filter(product -> product.isEqualName(name,product))
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(Message.ERROR + Message.IS_NOT_FOUNDED_PRODUCT));
     }
