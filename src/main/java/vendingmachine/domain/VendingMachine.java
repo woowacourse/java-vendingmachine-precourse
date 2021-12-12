@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.utils.Validator;
 import vendingmachine.view.VendingMachineOutput;
 
 import java.util.*;
@@ -16,7 +17,6 @@ public class VendingMachine {
     public VendingMachine(int amount) {
         productList = new ProductList();
         this.amount = amount;
-        //TODO: amount validate 검증
         generateNumberOfCoinsRandomly(amount);
     }
 
