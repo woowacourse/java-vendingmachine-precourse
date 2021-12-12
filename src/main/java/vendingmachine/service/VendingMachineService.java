@@ -77,17 +77,17 @@ public class VendingMachineService {
 		return new ResponseChangeDto(change);
 	}
 
-	private void settleCoinAndMoney(Coin coin, final Quantity changeQuantity) {
-		CoinRepository.sub(coin, changeQuantity);
-		Money money = new Money(coin.get() * changeQuantity.get());
-		MoneyRepository.sub(money);
-	}
-
 	private Quantity getChangeQuantity(Coin coin) {
 		Quantity remainQuantity = CoinRepository.findQuantityByCoin(coin);
 		Money remainMoney = MoneyRepository.get();
 		Quantity quotientMoneyByAmount = coin.getQuotient(remainMoney);
 		int minQuantity = Math.min(remainQuantity.get(), quotientMoneyByAmount.get());
 		return new Quantity(minQuantity);
+	}
+
+	private void settleCoinAndMoney(Coin coin, final Quantity changeQuantity) {
+		CoinRepository.sub(coin, changeQuantity);
+		Money money = new Money(coin.get() * changeQuantity.get());
+		MoneyRepository.sub(money);
 	}
 }

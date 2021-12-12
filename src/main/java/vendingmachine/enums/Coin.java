@@ -21,10 +21,6 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	public int get() {
-		return amount;
-	}
-
 	public static Coin findByAmount(int amount) {
 		return Arrays.stream(Coin.values())
 			.filter(coin -> coin.amount == amount)
@@ -36,6 +32,10 @@ public enum Coin {
 		return Arrays.stream(Coin.values())
 			.map(Coin::get)
 			.collect(Collectors.toList());
+	}
+
+	public int get() {
+		return amount;
 	}
 
 	public Quantity getQuotient(Money money) {

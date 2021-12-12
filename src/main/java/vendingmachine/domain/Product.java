@@ -17,6 +17,13 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public void sell() {
+		Money money = MoneyRepository.get();
+		validateCanSellByMoney(money);
+		money.sub(price);
+		quantity.sub(ONE);
+	}
+
 	public boolean isSameName(Name name) {
 		String productName = this.name.get();
 		String checkProductName = name.get();
@@ -38,13 +45,6 @@ public class Product {
 		if (price.isLowerThen(MINIMUM_PRICE)) {
 			throw new IllegalArgumentException(PRICE_LOWER_THEN_MINIMUM_PRICE_ERROR_MESSAGE.get());
 		}
-	}
-
-	public void sell() {
-		Money money = MoneyRepository.get();
-		validateCanSellByMoney(money);
-		money.sub(price);
-		quantity.sub(ONE);
 	}
 
 	private void validateCanSellByMoney(Money money) {

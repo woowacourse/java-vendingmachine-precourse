@@ -12,11 +12,11 @@ public class Change {
 		change = new HashMap<>();
 	}
 
-	public void put(Coin coin, Quantity quantity) {
-		change.put(coin, quantity);
-	}
-
 	public Quantity get(Coin coin) {
 		return change.get(coin);
+	}
+
+	public void put(Coin coin, Quantity quantity) {
+		change.put(coin, quantity);
 	}
 }

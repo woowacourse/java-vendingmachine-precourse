@@ -19,6 +19,10 @@ public class CoinRepository {
 		coins.put(Coin.COIN_10, new Quantity(INIT_QUANTITY));
 	}
 
+	public static Map<Coin, Quantity> findAll() {
+		return Collections.unmodifiableMap(coins);
+	}
+
 	public static Quantity findQuantityByCoin(Coin coin) {
 		return coins.get(coin);
 	}
@@ -29,10 +33,6 @@ public class CoinRepository {
 
 	public static void sub(Coin coin, Quantity quantity) {
 		coins.get(coin).sub(quantity.get());
-	}
-
-	public static Map<Coin, Quantity> findAll() {
-		return Collections.unmodifiableMap(coins);
 	}
 
 	public static void clear() {
