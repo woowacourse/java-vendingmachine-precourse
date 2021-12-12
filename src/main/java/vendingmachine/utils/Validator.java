@@ -46,7 +46,7 @@ public class Validator {
 		}
 	}
 
-	public static void validateDivideMerchandisePriceBy10Coin(int merchandisePrice) {
+	public static void validateDivideMoneyBy10Coin(int merchandisePrice) {
 		if (merchandisePrice % 10 != 0) {
 			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE);
 		}

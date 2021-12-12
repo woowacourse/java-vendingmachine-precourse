@@ -7,6 +7,7 @@ public class Money {
 
 	public Money(int money) {
 		Validator.validateMoney(money);
+		Validator.validateDivideMoneyBy10Coin(money);
 		this.money = money;
 	}
 
