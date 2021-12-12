@@ -64,7 +64,7 @@ public class VendingMachine {
 	}
 
 	public boolean canBuy() {
-		return menus.isAnyMenuLeft() && isInputMoneyGreaterThanOrEqualToMinMenuPrice();
+		return !menus.isEveryMenuSoldOut() && isInputMoneyGreaterThanOrEqualToMinMenuPrice();
 	}
 
 	private void useInputMoney(Menu menu) {

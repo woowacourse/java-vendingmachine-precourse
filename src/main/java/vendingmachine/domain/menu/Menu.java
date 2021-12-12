@@ -118,7 +118,7 @@ public class Menu {
 		count--;
 	}
 
-	private boolean isSoldOut() {
+	public boolean isSoldOut() {
 		return count == 0;
 	}
 }

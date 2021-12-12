@@ -61,8 +61,8 @@ public class Menus {
 		return Collections.min(priceList);
 	}
 
-	public boolean isAnyMenuLeft() {
-		return menuList.stream().anyMatch(menu -> menu.getCount() > 0);
+	public boolean isEveryMenuSoldOut() {
+		return menuList.stream().allMatch(Menu::isSoldOut);
 	}
 
 	public Menu findMenuByName(String menuName) {
