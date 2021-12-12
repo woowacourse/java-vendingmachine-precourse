@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import vendingmachine.controller.CatalogController;
+import vendingmachine.controller.ChangeController;
 import vendingmachine.controller.PurchaseController;
 import vendingmachine.controller.UserAccountController;
 import vendingmachine.controller.VendingMachineAccountController;
@@ -18,5 +19,7 @@ public class Application {
 		UserAccountController.setUserAccountByInput();
 
 		PurchaseController.doMainLoop();
+
+		ChangeController.setAndPrintChange();
 	}
 }

@@ -11,14 +11,12 @@ public class PurchaseController {
 	public static void doMainLoop() {
 
 		while (!isEnd()) {
-			// 투입 금액 출력
 			UserAccountView.printUserAccount();
-			// 구매할 상품명 입력
 			Catalog catalogToPurchase = getCatalogInput();
-			//투입 금액 차감
 			UserAccount.purchase(catalogToPurchase);
 			CatalogRepository.reduceAmount(catalogToPurchase);
 		}
+		UserAccountView.printUserAccount();
 	}
 
 	private static Catalog getCatalogInput() {

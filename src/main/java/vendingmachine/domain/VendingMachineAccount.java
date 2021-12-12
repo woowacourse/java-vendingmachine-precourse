@@ -7,9 +7,6 @@ public class VendingMachineAccount {
 	private static final Map<Coin, Integer> coinCount = new HashMap<>();
 	private static int account;
 
-	public VendingMachineAccount() {
-	}
-
 	public void addCoinCount(Coin coin, Integer amount) {
 		coinCount.put(coin, amount);
 	}
@@ -22,11 +19,11 @@ public class VendingMachineAccount {
 		this.account = account;
 	}
 
-	public Integer getCoinCount(Coin coin) {
+	public static Integer getCoinCountByCoin(Coin coin) {
 		return coinCount.get(coin);
 	}
 
-	public void printCoinCount() {
-
+	public static Map<Coin, Integer> getAllCoinCount() {
+		return coinCount;
 	}
 }

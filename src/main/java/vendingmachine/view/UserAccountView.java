@@ -12,6 +12,7 @@ public class UserAccountView {
 
 	public static void printUserAccount() {
 		int userAccount = UserAccount.getAccount();
+		System.out.println();
 		System.out.println(String.format(USER_ACCOUNT_FORMAT, userAccount));
 	}
 }
