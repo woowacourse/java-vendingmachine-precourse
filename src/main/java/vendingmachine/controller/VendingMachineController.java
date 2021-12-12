@@ -18,7 +18,6 @@ public class VendingMachineController {
 
 	private static List<Coin> coins = new ArrayList<>();
 	private static int customerMoney;
-	private InputView inputView;
 	private OutputView outputView;
 	private CoinService coinService;
 	private ItemService itemService;
@@ -27,7 +26,6 @@ public class VendingMachineController {
 	private List<Item> items;
 
 	public VendingMachineController() {
-		inputView = new InputView();
 		outputView = new OutputView();
 		coinService = new CoinService();
 		itemService = new ItemService();
