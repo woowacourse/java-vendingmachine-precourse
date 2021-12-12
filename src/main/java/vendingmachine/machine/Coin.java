@@ -58,6 +58,11 @@ public enum Coin {
         return pickAmount;
     }
 
-   
+   public int getAllCurrentAmount() {
+        int sum = 0;
+        sum = getCoin500AllAmount() + getCoin100AllAmount() + getCoin50AllAmount() + getCoin10AllAmount();
+
+        return sum;
+   }
 
 }
