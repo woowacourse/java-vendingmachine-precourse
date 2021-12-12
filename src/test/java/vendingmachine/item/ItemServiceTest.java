@@ -13,14 +13,14 @@ class ItemServiceTest {
 
     @BeforeAll
     public static void beforeAll() {
-        itemService.addItem(new ItemDto("사탕", 900, 1));
-        itemService.addItem(new ItemDto("젤리", 1500, 3));
+        itemService.addItem(ItemDto.fromInputString("사탕,900,1"));
+        itemService.addItem(ItemDto.fromInputString("젤리,1500,3"));
     }
 
     @Test
     public void addTest() {
-        assertDoesNotThrow(() -> itemService.addItem(new ItemDto("콜라", 1500, 1)));
-        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(new ItemDto("사이다", 90, 20)));
+        assertDoesNotThrow(() -> itemService.addItem(ItemDto.fromInputString("콜라,1500,1")));
+        assertThrows(IllegalArgumentException.class, () -> itemService.addItem(ItemDto.fromInputString("사이다,90,20")));
     }
 
     @Test
