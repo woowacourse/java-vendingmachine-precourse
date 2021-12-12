@@ -15,7 +15,7 @@ public class CoinGenerator {
 			if (randomCoin > totalCoin) {
 				continue;
 			}
-			MapSupporter.increaseValue(coins, Coin.getCoin(randomCoin), 0, 1);
+			MapSupporter.increaseCoinCount(coins, Coin.getCoin(randomCoin), 0, 1);
 			totalCoin -= randomCoin;
 		}
 		return coins;

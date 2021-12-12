@@ -3,6 +3,7 @@ package vendingmachine.service;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Item;
 import vendingmachine.domain.Machine;
 import vendingmachine.util.CoinGenerator;
 
@@ -14,5 +15,9 @@ public class MachineService {
 
 	public void addInputCoins(Machine machine, Integer amount) {
 		machine.addInputCoinAmount(amount);
+	}
+
+	public void addItems(Machine machine, Map<String, Item> items) {
+		machine.addItems(items);
 	}
 }
