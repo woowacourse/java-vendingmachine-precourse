@@ -23,12 +23,12 @@ public class VendingMachineService {
         vendingMachine.insertMoney(money);
     }
 
-    public int checkAvailableMoney() {
+    public int showAvailableMoney() {
         return vendingMachine.showAvailableMoney();
     }
 
-    public void purchaseByItemName(String inputItemsToPurchase) {
-        vendingMachine.purchase(inputItemsToPurchase);
+    public void purchaseByItemName(String itemName) {
+        vendingMachine.purchase(itemName);
     }
 
     public boolean isPurchaseAvailable() {

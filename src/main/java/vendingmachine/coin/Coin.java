@@ -1,6 +1,8 @@
 package vendingmachine.coin;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
 
 public enum Coin {
     COIN_500(500),
@@ -30,5 +32,9 @@ public enum Coin {
 
     public int getAmount() {
         return amount;
+    }
+
+    public int getAmount(int numberOfCoin) {
+        return amount * numberOfCoin;
     }
 }

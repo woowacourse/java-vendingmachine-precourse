@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
-import vendingmachine.item.Item;
-
 public class Items {
-    private Map<Item, Integer> items = new HashMap<>();
+    private final Map<Item, Integer> items = new HashMap<>();
 
     public void add(Item itemToAdd, int numberOfItemsToAdd) {
         items.computeIfPresent(itemToAdd, (item, numberOfItem) -> numberOfItem + numberOfItemsToAdd);
@@ -19,13 +17,13 @@ public class Items {
         return items.getOrDefault(item, 0);
     }
 
-    public Optional<Item> findItemByItemName(String name) {
+    public Optional<Item> findByItemName(String name) {
         return items.keySet().stream()
                 .filter(item -> item.getName().equals(name)).findAny();
     }
 
     public boolean isInStock(Item item) {
-        if(countItems(item) > 0) {
+        if (countItems(item) > 0) {
             return true;
         }
         return false;
@@ -46,7 +44,7 @@ public class Items {
 
     public boolean isEmptyItems() {
         Optional<Integer> itemsInStock = items.values().stream().filter(quantity -> quantity > 0).findAny();
-        if(itemsInStock.isPresent()) {
+        if (itemsInStock.isPresent()) {
             return false;
         }
         return true;

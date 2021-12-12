@@ -1,10 +1,8 @@
 package vendingmachine.coin;
 
-import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
-import vendingmachine.coin.Coin;
-import vendingmachine.coin.Coins;
+import org.junit.jupiter.api.Test;
 
 class CoinsTest {
 
@@ -12,10 +10,9 @@ class CoinsTest {
     void Coin객체로_동전_추가_가능() {
         Coins coins = new Coins();
         coins.add(Coin.COIN_100);
-        coins.add(Coin.COIN_50);
-        int expectedResult = Coin.COIN_100.getAmount() + Coin.COIN_50.getAmount();
+        coins.add(Coin.COIN_100);
 
-        Assertions.assertThat(coins.getAmount()).isEqualTo(expectedResult);
+        assertThat(coins.count(Coin.COIN_100)).isEqualTo(2);
     }
 
     @Test
@@ -33,10 +30,10 @@ class CoinsTest {
         coins.take(coinsToTake);
 
         org.junit.jupiter.api.Assertions.assertAll(
-                () -> Assertions.assertThat(coins.count(Coin.COIN_500)).isEqualTo(1),
-                () -> Assertions.assertThat(coins.count(Coin.COIN_100)).isEqualTo(1),
-                () -> Assertions.assertThat(coins.count(Coin.COIN_50)).isEqualTo(0),
-                () -> Assertions.assertThat(coins.count(Coin.COIN_10)).isEqualTo(0)
+                () -> assertThat(coins.count(Coin.COIN_500)).isEqualTo(1),
+                () -> assertThat(coins.count(Coin.COIN_100)).isEqualTo(1),
+                () -> assertThat(coins.count(Coin.COIN_50)).isEqualTo(0),
+                () -> assertThat(coins.count(Coin.COIN_10)).isEqualTo(0)
         );
     }
 }

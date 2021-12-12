@@ -24,20 +24,17 @@ public class ChangeAccountant {
         this.coinBalance = coinBalance;
     }
 
-    private void changeToEachCoin(Coin coin) {
-        int numberOfCoin = getNumberWithinBalance(coin, accountMaxChangeForCoin(coin, amountToChange));
-        changes.add(coin, numberOfCoin);
-        amountToChange -= numberOfCoin * coin.getAmount();
+    private void changeToEachCoin(Coin coinUnit) {
+        int numberOfCoinToChange = accountWithinBalance(coinUnit, accountMaxWithinAmountByCoinUnit(coinUnit, amountToChange));
+        changes.add(coinUnit, numberOfCoinToChange);
+        amountToChange -= coinUnit.getAmount(numberOfCoinToChange);
     }
 
-    private int accountMaxChangeForCoin(Coin coin, int amountToChange) {
-        if(amountToChange < coin.getAmount()) {
-            return 0;
-        }
-        return amountToChange / coin.getAmount();
+    private int accountMaxWithinAmountByCoinUnit(Coin coinUnit, int amountToChange) {
+        return amountToChange / coinUnit.getAmount();
     }
 
-    private int getNumberWithinBalance(Coin coin, int numberOfCoinToChange) {
+    private int accountWithinBalance(Coin coin, int numberOfCoinToChange) {
         int currentNumber = coinBalance.count(coin);
         if(numberOfCoinToChange > currentNumber) {
             return currentNumber;

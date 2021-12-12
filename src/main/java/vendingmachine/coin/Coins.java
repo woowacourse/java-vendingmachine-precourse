@@ -35,31 +35,10 @@ public class Coins {
         }
     }
 
-    //TEST를 위한 메서드
-    public int getAmount() {
-        return getAmountWithCoin500() + getAmountWithCoin100() + getAmountWithCoin50() + getAmountWithCoin10();
-    }
-
     private void initialize() {
         coins.put(Coin.COIN_500, initialNumberOfCoin);
         coins.put(Coin.COIN_100, initialNumberOfCoin);
         coins.put(Coin.COIN_50, initialNumberOfCoin);
         coins.put(Coin.COIN_10, initialNumberOfCoin);
-    }
-
-    private int getAmountWithCoin500() {
-        return coins.get(Coin.COIN_500) * Coin.COIN_500.getAmount();
-    }
-
-    private int getAmountWithCoin100() {
-        return coins.get(Coin.COIN_100) * Coin.COIN_100.getAmount();
-    }
-
-    private int getAmountWithCoin50() {
-        return coins.get(Coin.COIN_50) * Coin.COIN_50.getAmount();
-    }
-
-    private int getAmountWithCoin10() {
-        return coins.get(Coin.COIN_10) * Coin.COIN_10.getAmount();
     }
 }

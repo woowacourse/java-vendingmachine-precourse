@@ -4,8 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.item.Item;
-
 class ItemTest {
 
     @Test
@@ -15,7 +13,7 @@ class ItemTest {
         Item item = new Item("item", itemPrice);
 
         assertThat(itemPrice).isGreaterThan(lessAmountThanItemPrice);
-        assertThat(item.isMoreExpensiveItemThanMoneyLeft(lessAmountThanItemPrice)).isTrue();
+        assertThat(item.isMoreExpensiveThanMoneyLeft(lessAmountThanItemPrice)).isTrue();
     }
 
 }

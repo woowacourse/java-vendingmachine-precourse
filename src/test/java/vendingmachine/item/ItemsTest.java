@@ -4,9 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.item.Item;
-import vendingmachine.item.Items;
-
 class ItemsTest {
 
     @Test
@@ -24,7 +21,7 @@ class ItemsTest {
         Items items = new Items();
         String notExistItemName = "GHOST";
 
-        assertThat(items.findItemByItemName(notExistItemName)).isEmpty();
+        assertThat(items.findByItemName(notExistItemName)).isEmpty();
     }
 
     @Test
@@ -35,7 +32,7 @@ class ItemsTest {
         items.add(item, quantity);
         String existItemName = "item1";
 
-        assertThat(items.findItemByItemName(existItemName).get().getName()).isEqualTo(existItemName);
+        assertThat(items.findByItemName(existItemName).get().getName()).isEqualTo(existItemName);
     }
 
     @Test

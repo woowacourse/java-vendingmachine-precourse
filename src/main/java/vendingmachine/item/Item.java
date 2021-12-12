@@ -19,7 +19,7 @@ public class Item {
         return price;
     }
 
-    public boolean isMoreExpensiveItemThanMoneyLeft(int moneyAvailable) {
+    public boolean isMoreExpensiveThanMoneyLeft(int moneyAvailable) {
         if(price > moneyAvailable) {
             return true;
         }

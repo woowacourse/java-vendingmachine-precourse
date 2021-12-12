@@ -40,12 +40,12 @@ public class VendingMachineController {
     }
 
     private void getChanges() {
-        console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
+        showAvailableMoney();
         console.printChange(vendingMachineService.giveChange());
     }
 
     private void showAvailableMoney() {
-        console.printAvailableMoney(vendingMachineService.checkAvailableMoney());
+        console.printAvailableMoney(vendingMachineService.showAvailableMoney());
     }
 
     private void purchaseByItemName() {

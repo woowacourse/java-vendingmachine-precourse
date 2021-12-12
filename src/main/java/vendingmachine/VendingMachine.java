@@ -32,11 +32,10 @@ public class VendingMachine {
         return moneyAvailable;
     }
 
-    public void purchase(String itemNameToPurchase) {
-        Item item = findItemToPurchase(itemNameToPurchase);
-        if(!items.isInStock(item)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_OUT_OF_STOCK);
-        }
+    public void purchase(String itemName) {
+        Item item = findItemToPurchase(itemName);
+        validateCheaperThanMoneyAvailable(item);
+        validateInStock(item);;
         purchase(item);
     }
 
@@ -56,8 +55,19 @@ public class VendingMachine {
 
     private Item findItemToPurchase(String itemNameToPurchase) {
         Item itemToPurchase = findItem(itemNameToPurchase);
-        validateAvailableItem(itemToPurchase);
         return itemToPurchase;
+    }
+
+    private void validateCheaperThanMoneyAvailable(Item item) {
+        if (item.isMoreExpensiveThanMoneyLeft(moneyAvailable)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE);
+        }
+    }
+
+    private void validateInStock(Item item) {
+        if(!items.isInStock(item)) {
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_OUT_OF_STOCK);
+        }
     }
 
     private void purchase(Item item) {
@@ -78,20 +88,14 @@ public class VendingMachine {
     }
 
     private Item findItem(String itemName) {
-        Optional<Item> result = findInItems(itemName);
+        Optional<Item> result = findItemInItems(itemName);
         if (!result.isPresent()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE);
         }
         return result.get();
     }
 
-    private Optional<Item> findInItems(String itemName) {
-        return items.findItemByItemName(itemName);
-    }
-
-    private void validateAvailableItem(Item item) {
-        if (item.isMoreExpensiveItemThanMoneyLeft(moneyAvailable)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE);
-        }
+    private Optional<Item> findItemInItems(String itemName) {
+        return items.findByItemName(itemName);
     }
 }
