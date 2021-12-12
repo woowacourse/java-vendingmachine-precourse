@@ -50,7 +50,7 @@ public class Validator {
 		}
 	}
 
-	public static void	isBiggerThanZero(String input) {
+	public static void isBiggerThanZero(String input) {
 		if (Integer.parseInt(input) <= 0) {
 			throw new IllegalArgumentException(ERROR_MSG_LESS_THAN_ZERO);
 		}
