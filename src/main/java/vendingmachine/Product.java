@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+
 public class Product {
     private String name;
     private int price;
@@ -25,5 +27,13 @@ public class Product {
 
     public void reduceCount() {
         this.count -= 1;
+    }
+
+    public static ArrayList<Product> makeProductList(ArrayList<String> strings) {
+        ArrayList<Product> products = new ArrayList<Product>();
+        for (String str : strings) {
+            products.add(new Product(str.split(",")[0], Integer.parseInt(str.split(",")[1]), Integer.parseInt(str.split(",")[2])));
+        }
+        return products;
     }
 }

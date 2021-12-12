@@ -23,13 +23,13 @@ public class InputView {
     }
 
     public static ArrayList inputProductList() {
-        System.out.println();
-        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-        String inputString = Console.readLine();
-        ArrayList<String> strings = Utils.splitString(inputString);
         ArrayList<Product> products = new ArrayList<Product>();
-        for (String str : strings) {
-            products.add(new Product(str.split(",")[0], Integer.parseInt(str.split(",")[1]), Integer.parseInt(str.split(",")[2])));
+        try {
+            System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
+            String inputString = Console.readLine();
+            products = Product.makeProductList(Utils.splitString(inputString));
+        } catch (Exception e) {
+            System.out.println("[ERROR] 가격과 수량은"+e.getMessage());
         }
         return products;
     }
