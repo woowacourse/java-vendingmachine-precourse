@@ -20,14 +20,16 @@ public class Change {
         int auxiliaryMoney = this.totalMoney;
 
         while (auxiliaryMoney > 0) {
-            int index = pickNumberInList(getCoinEnumValueList()) - 1;
+            int coinValue = pickNumberInList(getCoinEnumValueList());
 
-            Coin coin = getCoin(index);
+            Coin coin = valueOf(coinValue);
 
             Integer count = coinMap.get(coin);
 
-            if (checkValidCoin(coin.getAmount())) {
-                coinMap.put(coin, count++);
+            if (checkValidCoin(coin.getAmount(), auxiliaryMoney)) {
+                count = count +1;
+                coinMap.put(coin, count);
+
                 auxiliaryMoney = auxiliaryMoney - coin.getAmount();
             }
         }
@@ -41,8 +43,8 @@ public class Change {
         return totalMoney;
     }
 
-    private boolean checkValidCoin (int coinAmount) {
-        if (coinAmount <= totalMoney) {
+    private boolean checkValidCoin (int coinAmount, int auxiliaryMoney) {
+        if ((coinAmount <= auxiliaryMoney) && (auxiliaryMoney - coinAmount >= 0)) {
             return true;
         }
 
