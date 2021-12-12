@@ -71,16 +71,10 @@ public class OutputView {
         int remainMoney = nowMoney;
         for(Coin coins : Coin.values()){
             int maxNumCoin = remainMoney/coins.getAmount();
-            if (maxNumCoin<=coins.getNum()){
-                coins.setFinalNum(maxNumCoin);
-            }
-            if (maxNumCoin>coins.getNum()){
-                coins.setFinalNum(coins.getNum());
-            }
+            if (maxNumCoin<=coins.getNum()){coins.setFinalNum(maxNumCoin);}
+            if (maxNumCoin>coins.getNum()){coins.setFinalNum(coins.getNum());}
             remainMoney-=coins.getAmount()*coins.getFinalNum();
-            if (coins.getFinalNum()>0){
-                System.out.println(coins.getAmount()+"원 - "+ coins.getFinalNum()+"개");
-            }
+            if (coins.getFinalNum()>0){System.out.println(coins.getAmount()+"원 - "+ coins.getFinalNum()+"개");}
         }
     }
 

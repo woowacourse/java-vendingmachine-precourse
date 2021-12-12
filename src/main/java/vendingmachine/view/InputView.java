@@ -7,6 +7,9 @@ public class InputView {
         if (price%10!=0){
             throw new IllegalArgumentException();
         }
+        if (price<100){
+            throw new IllegalArgumentException();
+        }
     }
     public static int parseInt(String input) {
         isInteger(input);
