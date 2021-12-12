@@ -13,7 +13,11 @@ public class UserGoodsValidation {
         }
     }
 
-        
+    public static void isNumber(String money) {
+        if (!money.matches("-?\\d+")) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_NUMBER);
+        }
+    }
 
     public static void is100WonMore(String price) {
         if (Integer.parseInt(price) >= InputErrorConstant.GOODS_PRICE_LIMIT) {
