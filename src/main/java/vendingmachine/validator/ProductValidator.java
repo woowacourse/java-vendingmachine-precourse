@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class ProductValidator {
-	public static void checkProductName(String name){
+	public static void checkProductName(String name) {
 		checkIsEmpty(name);
 	}
 
@@ -18,7 +18,7 @@ public class ProductValidator {
 		String inputContent = input.substring(SUBSTRING_IDX, input.length() - SUBSTRING_IDX);
 
 		List<String> productInfo = Arrays.asList(inputContent.split(PRODUCT_DELIMITER));
-		MoneyValidator.checkNumber(productInfo.get(PRICE_IDX));
+		MoneyValidator.checkMoney(productInfo.get(PRICE_IDX));
 		checkAmount(productInfo.get(AMOUNT_IDX));
 		return productInfo;
 	}

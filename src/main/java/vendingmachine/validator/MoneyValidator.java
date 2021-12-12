@@ -3,7 +3,7 @@ package vendingmachine.validator;
 import static constants.VendingMachineConstants.*;
 
 public class MoneyValidator {
-	public static void checkNumber(String input) {
+	public static void checkMoney(String input) {
 		isNumber(input);
 		isUpperZero(input);
 		isDivisibleByTen(input);

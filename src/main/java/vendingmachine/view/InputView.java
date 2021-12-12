@@ -49,7 +49,7 @@ public class InputView {
 			System.out.println(Message);
 			String money = Console.readLine();
 			try {
-				MoneyValidator.checkNumber(money);
+				MoneyValidator.checkMoney(money);
 				return Integer.parseInt(money);
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
