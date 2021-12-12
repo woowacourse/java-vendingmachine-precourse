@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.List;
 import vendingmachine.domain.Coin;
 
-public class RandomCoinCreateStrategy implements CoinCreateStrategy{
+public class RandomCoinCreateStrategy implements CoinCreateStrategy {
 
     private static final List<Integer> COIN_RANGE = Coin.currentCoinAmounts();
 
