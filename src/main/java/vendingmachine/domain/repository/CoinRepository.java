@@ -1,6 +1,5 @@
 package vendingmachine.domain.repository;
 
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -17,7 +16,7 @@ public class CoinRepository {
 	};
 
 	public void addCoin(Coin coin, Integer coinCount) {
-		coins.put(coin, coins.get(coin) + 1);
+		coins.put(coin, coins.get(coin) + coinCount);
 	}
 
 	public void deleteCoin(Coin coin, Integer coinCount) {

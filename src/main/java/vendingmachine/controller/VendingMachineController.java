@@ -69,7 +69,13 @@ public class VendingMachineController {
 		return itemService.canPurchaseByMoney(money);
 	}
 
-	public void deductChanges(int totalChanges) {
+	public void deductChanges(Map<Coin, Integer> changes) {
+		int totalChanges = 0;
+
+		for (Coin coin : changes.keySet()) {
+			totalChanges += coin.getAmount() * changes.get(coin);
+		}
 		moneyService.useMoney(totalChanges);
+		coinService.deductCoins(changes);
 	}
 }

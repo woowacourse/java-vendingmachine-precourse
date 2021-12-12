@@ -35,6 +35,10 @@ public class CoinService {
 		return coinRepository.getCoins();
 	}
 
+	public void deductCoins(Map<Coin, Integer> coins) {
+		coins.forEach(coinRepository::deleteCoin);
+	}
+
 	private void addCoin(int coin) {
 		coinRepository.addCoin(Coin.getCoin(coin), ADD_COIN_COUNT);
 	}
