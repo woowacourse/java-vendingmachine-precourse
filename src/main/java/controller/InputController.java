@@ -20,4 +20,8 @@ public class InputController {
 			}
 		}
 	}
+
+	public static String[] inputVendingMachineProduct() {
+		return Console.readLine().split(";");
+	}
 }

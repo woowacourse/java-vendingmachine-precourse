@@ -15,6 +15,7 @@ public class MachineController {
 		vendingMachine.makeVendingMachineCoinBox(InputController.inputVendingMachineChange());
 		OutputDisplay.showEachCoinInCoinBox(vendingMachine.giveEachCoinPrice(), vendingMachine.giveEachCoinCount());
 		InputDisplay.askInputVendingMachineProduct();
+		InputController.inputVendingMachineProduct();
 	}
 
 }
