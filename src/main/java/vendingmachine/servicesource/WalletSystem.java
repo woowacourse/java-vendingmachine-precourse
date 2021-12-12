@@ -10,12 +10,15 @@ import java.util.List;
 public class WalletSystem {
     private int systemBalance;
     private int insertedBalance;
+    private final WalletUI ui;
     private HashMap<Coin, Integer> remainCoinsMap = new HashMap<Coin, Integer>();
 
     public WalletSystem(int systemBalance){
         this.systemBalance = systemBalance;
-
         exchangeBalanceToRandomCoins();
+
+        ui = new WalletUI(this);
+        ui.printRemainCoins();
     }
 
     private void exchangeBalanceToRandomCoins(){
@@ -26,7 +29,6 @@ public class WalletSystem {
             int pickedNumber = Randoms.pickNumberInList(getRandomNumberList(maxNumber));
             systemBalance -= currentCoin.getAmount() * pickedNumber;
             remainCoinsMap.put(currentCoin,pickedNumber);
-            System.out.println(currentCoin.getAmount() + " : " + pickedNumber);
         }
 
     }
