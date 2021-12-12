@@ -26,7 +26,7 @@ public class ReturnChangesView implements View {
 		Map<Coin, Integer> coins = Application.controller.getCoins();
 
 		calculateChanges(coins, changes, money);
-
+		deductChanges(changes);
 		changes.forEach(Coin::printCoinAndCount);
 	}
 
@@ -44,5 +44,15 @@ public class ReturnChangesView implements View {
 			if (money == 0)
 				break;
 		}
+	}
+
+	private void deductChanges(Map<Coin, Integer> changes) {
+		int totalChanges = 0;
+
+		for (Coin coin : changes.keySet()) {
+			totalChanges += coin.getAmount() * changes.get(coin);
+		}
+
+		Application.controller.deductChanges(totalChanges);
 	}
 }
