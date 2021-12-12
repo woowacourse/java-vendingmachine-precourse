@@ -11,4 +11,8 @@ public class Money {
     public int getPrice() {
         return price;
     }
+
+    public void reduce(int money) {
+        price = price - money;
+    }
 }
