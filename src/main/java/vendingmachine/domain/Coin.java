@@ -37,7 +37,7 @@ public enum Coin {
                 .collect(Collectors.toList());
     }
 
-    public int multiply(int value) {
+    public int calcalateCovertedAmount(int value) {
         return this.amount * value;
     }
 

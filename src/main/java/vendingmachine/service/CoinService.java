@@ -45,7 +45,7 @@ public class CoinService {
         return frequencyList;
     }
 
-    public int compareCoin(int needCoin, int haveCoin) {
+    public int compareCoinNum(int needCoin, int haveCoin) {
         if (needCoin > haveCoin) {
             return haveCoin;
         }
