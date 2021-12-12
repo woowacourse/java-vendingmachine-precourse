@@ -28,6 +28,18 @@ public class VendingMachine {
         }
     }
 
+    public HashMap<Coin, Integer> getRemainderByCoin() {
+        HashMap<Coin, Integer> remainderCoinCount = new HashMap<Coin, Integer>();
+        int remainder = remainderMoney;
+        for (Coin coin : Coin.values()) {
+            int count = Math.min(coinCount.get(coin), remainder / coin.getAmount());
+            remainderCoinCount.put(coin, count);
+            remainder -= coin.getAmount() * count;
+        }
+
+        return remainderCoinCount;
+    }
+
     public int getCoinCount(Coin coin) {
         return coinCount.get(coin);
     }

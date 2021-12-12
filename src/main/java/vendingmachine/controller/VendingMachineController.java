@@ -1,7 +1,10 @@
 package vendingmachine.controller;
 
+import java.util.HashMap;
+
 import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.model.Coin;
 import vendingmachine.view.OutputManager;
 
 public class VendingMachineController {
@@ -44,8 +47,12 @@ public class VendingMachineController {
         return true;
     }
 
+
     public void run() {
         init();
         while(purchase()) {}
+        HashMap<Coin, Integer> remainderCoinCount = vendingMachine.getRemainderByCoin();
+        OutputManager.printCurrentUserAmount(vendingMachine);
+        OutputManager.printRemainderCoinCount(remainderCoinCount);
     }
 }
