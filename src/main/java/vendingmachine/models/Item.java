@@ -12,5 +12,9 @@ public class Item {
 	public int getPrice() {
 		return this.price;
 	}
+
+	public int getAmount() {
+		return this.amount;
+	}
 }
 
