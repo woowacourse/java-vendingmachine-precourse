@@ -112,7 +112,7 @@ public class MachineService {
 		DepositRepository leftOver = new DepositRepository(depositRepository);
 		spitRecursive(0, machine.getUserMoney(), leftOver, changes);
 		depositRepository.save(leftOver);
-		return changes.toString();
+		return changes.toString(true);
 	}
 
 	private void spitRecursive(int coinIndex, int moneySum, DepositRepository leftOver, DepositRepository changes) {

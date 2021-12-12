@@ -56,4 +56,14 @@ public class DepositRepository {
 			String.format(Hint.DEPOSIT_EACH.getHint(), deposit.getCoin().getAmount(), deposit.getCount())));
 		return stringBuilder.toString();
 	}
+
+	public String toString(boolean skipZero) {
+		StringBuilder stringBuilder = new StringBuilder();
+		depositMap.values()
+			.stream()
+			.filter(deposit -> deposit.getCount() > 0)
+			.forEach(deposit -> stringBuilder.append(
+				String.format(Hint.DEPOSIT_EACH.getHint(), deposit.getCoin().getAmount(), deposit.getCount())));
+		return stringBuilder.toString();
+	}
 }
