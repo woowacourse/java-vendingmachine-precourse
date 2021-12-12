@@ -5,6 +5,8 @@ import java.util.Scanner;
 import org.junit.platform.commons.util.StringUtils;
 import org.mockito.internal.util.StringUtil;
 
+import vendingmachine.domain.Product;
+
 public class InputView {
 	private static final String HOLDING_MONEY_GUIDE_MESSEAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String PRODUCT_INFO_GUIDE_MESSEEAGE = "상품명과 가격, 수량을 입력해 주세요.";
@@ -12,10 +14,16 @@ public class InputView {
 	private static final String BUY_PRODUCT_GUIDE_MESSEEAGE = "구매할 상품명을 입력해 주세요.";
 	private static final String PRODUCTS_DELIMITER = ";";
 	private static final int ZERO = 0;
+	private static final int ONE = 1;
+	private static final int TEN = 10;
 	private static final int LIMITATION = (int)1e8;
 	private static final String NEGATIVE_ERROR_MESSAGE = "[ERROR] 음수를 입력할 수 없습니다.";
 	private static final String LIMITATION_ERROR_MESSAGE = "[ERROR] 한계값을 넘는 수를 입력할 수 없습니다. (한계값: " + LIMITATION + ")";
-	private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 반드시 숫자로 입력해주세요.";
+	private static final String NOT_NUMBER_ERROR_MESSAGE = "[ERROR] 반드시 음수가 아닌 숫자로 입력해주세요.";
+	private static final String PRODUCT_INFO_DELIMITER = ",";
+	private static final String PRODUCTS_DELIMITER_PREFIX = "[";
+	private static final String PRODUCTS_DELIMITER_SUFFIX = "]";
+	private static final String PRICE_DIVIDE_TEN_ERROR_MESSAGE = "[ERROR] 상품 가격은 10원으로 나누어 떨어져야합니다.";
 
 	private final Scanner scanner;
 
@@ -31,8 +39,7 @@ public class InputView {
 	public String[] scanProductNameAndPriceAndCnt() {
 		System.out.println();
 		System.out.println(PRODUCT_INFO_GUIDE_MESSEEAGE);
-		final String products = scanner.nextLine().trim();
-		return products.split(PRODUCTS_DELIMITER);
+		return validateProductNameAndPriceAndCnt();
 	}
 
 	public int scanInputMoney() {
@@ -59,9 +66,11 @@ public class InputView {
 		}
 	}
 
-	public void validateNotNegativeNumber(String inputNumber) {
-		if (Integer.parseInt(inputNumber) < ZERO) {
-			throw new IllegalArgumentException(NEGATIVE_ERROR_MESSAGE);
+	public void validateNumber(String inputNumber) {
+		for (int i = 0; i < inputNumber.length(); i++) {
+			if (!Character.isDigit(inputNumber.charAt(i))) {
+				throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
+			}
 		}
 	}
 
@@ -71,11 +80,54 @@ public class InputView {
 		}
 	}
 
-	public void validateNumber(String inputNumber) {
-		for (int i = 0; i < inputNumber.length(); i++) {
-			if (!Character.isDigit(inputNumber.charAt(i))) {
-				throw new IllegalArgumentException(NOT_NUMBER_ERROR_MESSAGE);
-			}
+	public void validateNotNegativeNumber(String inputNumber) {
+		if (Integer.parseInt(inputNumber) < ZERO) {
+			throw new IllegalArgumentException(NEGATIVE_ERROR_MESSAGE);
 		}
+	}
+
+	public String[] validateProductNameAndPriceAndCnt() {
+		try {
+			String[] productNameAndPriceAndCnt = scanner.nextLine().split(PRODUCTS_DELIMITER);
+			for (String productInfo : productNameAndPriceAndCnt) {
+				productInfo = removeSquareBracket(productInfo);
+				String[] product = productInfo.split(PRODUCT_INFO_DELIMITER);
+				validatePrice(product[1]);
+				validateProductCnt(product[2]);
+			}
+			return productNameAndPriceAndCnt;
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return validateProductNameAndPriceAndCnt();
+		}
+	}
+
+	public String removeSquareBracket(String product) {
+		if (product.substring(ZERO, ONE).equals(PRODUCTS_DELIMITER_PREFIX)) {
+			product = product.substring(ONE);
+		}
+		if (product.substring(product.length() - ONE).equals(PRODUCTS_DELIMITER_SUFFIX)) {
+			product = product.substring(ZERO, product.length() - ONE);
+		}
+		return product;
+	}
+
+	public void validatePrice(String price) {
+		validateNumber(price);
+		validateLowerThanLimitationNumber(price);
+		validateNotNegativeNumber(price);
+		validateDivideTen(price);
+	}
+
+	public void validateDivideTen(String price) {
+		if (Integer.parseInt(price) % TEN != ZERO) {
+			throw new IllegalArgumentException(PRICE_DIVIDE_TEN_ERROR_MESSAGE);
+		}
+	}
+
+	public void validateProductCnt(String productCnt) {
+		validateNumber(productCnt);
+		validateLowerThanLimitationNumber(productCnt);
+		validateNotNegativeNumber(productCnt);
 	}
 }

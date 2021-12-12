@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -9,7 +8,6 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Count;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
 
 public class Application {
@@ -30,7 +28,6 @@ public class Application {
 			String buyProductName = vendingMachineController.scanBuyProductName();
 			products = products.buy(buyProductName);
 			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
-
 		}
 		Map<Integer, Integer> changes = Coins.returnChange(inputMoney);
 		vendingMachineController.printChange(changes);
