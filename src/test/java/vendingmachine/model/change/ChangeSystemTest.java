@@ -7,6 +7,7 @@ import static vendingmachine.model.change.vo.Coin.*;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import vendingmachine.model.change.coingenerator.CoinGenerator;
@@ -16,6 +17,7 @@ class ChangeSystemTest {
     private final Map<Coin, Integer> coins = new LinkedHashMap<>();
     private final CoinGenerator coinGenerator = () -> coins;
     private final int remainingInputMoney = 5360;
+    private final ChangeSystem changeSystem = new ChangeSystem(coinGenerator);
 
     @Test
     @DisplayName("자판기가 보유하고 있는 동전들을 반환한다.")
@@ -24,7 +26,6 @@ class ChangeSystemTest {
         coins.put(COIN_100, 12);
         coins.put(COIN_50, 3);
         coins.put(COIN_10, 2);
-        ChangeSystem changeSystem = new ChangeSystem(coinGenerator);
         Map<Integer, Integer> actualChanges = changeSystem.getOwningCoins();
         assertThat(actualChanges)
                 .containsExactly(entry(500, 8), entry(100, 12), entry(50, 3), entry(10, 2));
@@ -37,7 +38,6 @@ class ChangeSystemTest {
         coins.put(COIN_100, 12);
         coins.put(COIN_50, 3);
         coins.put(COIN_10, 2);
-        ChangeSystem changeSystem = new ChangeSystem(coinGenerator);
         Map<Integer, Integer> actualChanges = changeSystem.returnChanges(remainingInputMoney);
         assertThat(actualChanges)
                 .containsExactly(entry(500, 8), entry(100, 12), entry(50, 3), entry(10, 1));
@@ -50,7 +50,6 @@ class ChangeSystemTest {
         coins.put(COIN_100, 2);
         coins.put(COIN_50, 3);
         coins.put(COIN_10, 2);
-        ChangeSystem changeSystem = new ChangeSystem(coinGenerator);
         Map<Integer, Integer> actualChanges = changeSystem.returnChanges(remainingInputMoney);
         assertThat(actualChanges)
                 .containsExactly(entry(500, 8), entry(100, 2), entry(50, 3), entry(10, 2));
