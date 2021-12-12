@@ -8,6 +8,8 @@ public class InvestmentMoney {
     private static final int QUOTIENT = 10;
     private static final int REMAINDER = 0;
 
+    private static final String TO_STRING_FORMAT = "%d원";
+
     private int investmentMoney;
 
     public InvestmentMoney(String inputInvestmentMoney) {
@@ -61,10 +63,6 @@ public class InvestmentMoney {
         return false;
     }
 
-    public int calculateCoinQuantity(int amount) {
-        return investmentMoney / amount;
-    }
-
     public int trade(int amount, int quantity) {
         int minCoinQuantity = Math.min(investmentMoney / amount, quantity);
         investmentMoney -= amount * minCoinQuantity;
@@ -73,6 +71,6 @@ public class InvestmentMoney {
 
     @Override
     public String toString() {
-        return investmentMoney + "원";
+        return String.format(TO_STRING_FORMAT, investmentMoney);
     }
 }

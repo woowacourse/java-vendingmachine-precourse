@@ -3,6 +3,8 @@ package vendingmachine.domain.change;
 import vendingmachine.domain.Coin;
 
 public class Change {
+    private static final String TO_STRING_FORMAT = "%d원 - %d개";
+
     private final Coin coin;
     private final int quantity;
 
@@ -13,6 +15,6 @@ public class Change {
 
     @Override
     public String toString() {
-        return coin.getAmount() + "원 - " + quantity + "개";
+        return String.format(TO_STRING_FORMAT, coin.getAmount(), quantity);
     }
 }
