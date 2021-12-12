@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import javax.rmi.CORBA.Util;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -14,6 +15,7 @@ public class InputView {
                 System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
                 money = Console.readLine();
                 Utils.validateNumber(money);
+                Utils.validatePositiveNumber(Integer.parseInt(money));
                 break;
             } catch (Exception e) {
                 System.out.println("[ERROR] 금액은 "+e.getMessage());
@@ -31,7 +33,7 @@ public class InputView {
                 products = Product.makeProductList(Utils.splitString(inputString));
                 break;
             } catch (Exception e) {
-                System.out.println("[ERROR] 가격 혹은 수량이"+e.getMessage());
+                System.out.println("[ERROR] 가격과 수량은 "+e.getMessage());
             }
         }
         return products;

@@ -29,15 +29,13 @@ public class Product {
         this.count -= 1;
     }
 
-    public static ArrayList<Product> makeProductList(ArrayList<String> strings) {
+    public static ArrayList<Product> makeProductList(ArrayList<String> strings) throws Exception{
         ArrayList<Product> products = new ArrayList<Product>();
         for (String str : strings) {
-            try {
-                Utils.validateNumber(str.split(",")[1]);
-                Utils.validateNumber(str.split(",")[2]);
-            } catch (Exception e) {
-                throw new IllegalArgumentException("숫자가 아닙니다.");
-            }
+            Utils.validateNumber(str.split(",")[1]);
+            Utils.validateNumber(str.split(",")[2]);
+            Utils.validatePositiveNumber(Integer.parseInt(str.split(",")[1]));
+            Utils.validatePositiveNumber(Integer.parseInt(str.split(",")[2]));
             products.add(new Product(str.split(",")[0], Integer.parseInt(str.split(",")[1]), Integer.parseInt(str.split(",")[2])));
         }
         return products;

@@ -14,4 +14,10 @@ public class Utils {
             throw new IllegalArgumentException("숫자여야 합니다.");
         }
     }
+
+    public static void validatePositiveNumber(int number) {
+        if (number <= 0) {
+            throw new IllegalArgumentException("0보다 커야합니다.");
+        }
+    }
 }
