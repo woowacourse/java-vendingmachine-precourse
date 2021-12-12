@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
@@ -8,7 +8,6 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import vendingmachine.controller.VendingMachine;
 import vendingmachine.domain.CoinRepository;
 import vendingmachine.enums.Coin;
 
@@ -28,6 +27,19 @@ public class VendingMachineTest extends NsTest {
 				assertEquals(CoinRepository.findQuantityByCoin(Coin.COIN_10).get(), 0);
 			},
 			100, 100, 100, 100, 50
+		);
+	}
+
+	@DisplayName("보유 동전을 출력하는 기능 테스트")
+	@Test
+	void showAllCoinQuantityTest() {
+		assertSimpleTest(
+			() -> {
+				vendingMachine.showAllCoinQuantity();
+				assertThat(output()).contains(
+					"자판기가 보유한 동전", "500원 - 0개", "100원 - 0개", "50원 - 0개", "10원 - 0개"
+				);
+			}
 		);
 	}
 
