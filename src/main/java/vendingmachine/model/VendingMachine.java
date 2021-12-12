@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-import vendingmachine.util.Money;
+import vendingmachine.service.SettingMoneyService;
 
 public class VendingMachine {
 	private int insertedMoney;
@@ -25,7 +25,7 @@ public class VendingMachine {
 	}
 
 	public void insertMoney(String insertedMoney) {
-		this.insertedMoney = Money.setMoney(insertedMoney);
+		this.insertedMoney = SettingMoneyService.setMoney(insertedMoney);
 	}
 
 	public void takeOrder(String orderedMenu) {
