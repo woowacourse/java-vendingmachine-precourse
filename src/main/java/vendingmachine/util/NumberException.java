@@ -1,11 +1,11 @@
 package vendingmachine.util;
 
 import vendingmachine.constants.ErrorMessage;
+import vendingmachine.constants.Rule;
 
 public class NumberException {
-	public static int money = 0;
-
 	public static int checkMoneyException(String moneyStr) {
+		int money;
 		try {
 			money = Integer.parseInt(moneyStr);
 		} catch (IllegalArgumentException e) {
@@ -32,7 +32,7 @@ public class NumberException {
 
 	public static void checkNumberIsDividedTen(int number) {
 
-		if (number % 10 != 0) {
+		if (number % Rule.STANDARD_FOR_DIVIDING != 0) {
 			throw new IllegalArgumentException(ErrorMessage.NOT_DIVIDED_TEN_NUMBER_MESSAGE);
 		}
 
@@ -43,7 +43,7 @@ public class NumberException {
 		try {
 			price = checkMoneyException(priceStr);
 
-			if (price < 100) {
+			if (price < Rule.LOWER_LIMIT_FOR_PRICE) {
 				throw new IllegalArgumentException(ErrorMessage.UNDER_THAN_PRICE_LIMIT_MESSAGE);
 			}
 

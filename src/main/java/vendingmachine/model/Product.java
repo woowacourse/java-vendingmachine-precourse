@@ -1,8 +1,9 @@
 package vendingmachine.model;
 
-import vendingmachine.util.NameException;
+import vendingmachine.constants.Rule;
 import vendingmachine.util.NumberException;
 import vendingmachine.util.ProductException;
+import vendingmachine.util.StringException;
 
 public class Product {
 	public String name;
@@ -10,11 +11,11 @@ public class Product {
 	public int quantity;
 
 	public Product(String productStr) {
-		String[] productInfo = productStr.split(",", -1);
+		String[] productInfo = productStr.split(Rule.STANDARD_FOR_DIVIDE_PRODUCT_INFO, -1);
 
 		ProductException.checkProductInfoSize(productInfo);
 
-		name = NameException.checkNameException(productInfo[0]);
+		name = StringException.checkNameException(productInfo[0]);
 		price = NumberException.checkPriceException(productInfo[1]);
 		quantity = NumberException.checkQuantityException(productInfo[2]);
 	}

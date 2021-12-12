@@ -1,8 +1,9 @@
 package vendingmachine.util;
 
 import vendingmachine.constants.ErrorMessage;
+import vendingmachine.constants.Rule;
 
-public class NameException {
+public class StringException {
 
 	public static String checkNameException(String productName) {
 		try {
@@ -17,13 +18,13 @@ public class NameException {
 	}
 
 	public static void checkNameIsBlank(String name) {
-		if (name.equals("")) {
+		if (name.equals(Rule.NOTHING)) {
 			throw new IllegalArgumentException(ErrorMessage.BLANK_PRODUCT_NAME_MESSAGE);
 		}
 	}
 
 	public static void checkSpaceInProductName(String name) {
-		String[] tmp = name.split(" ", -1);
+		String[] tmp = name.split(Rule.SPACE, -1);
 
 		if (tmp.length != 1) {
 			throw new IllegalArgumentException(ErrorMessage.SPACE_IN_PRODUCT_NAME_MESSAGE);
@@ -32,7 +33,7 @@ public class NameException {
 	}
 
 	public static void checkTabInProductName(String name) {
-		String[] tmp = name.split("\t", -1);
+		String[] tmp = name.split(Rule.TAB, -1);
 
 		if (tmp.length != 1) {
 			throw new IllegalArgumentException(ErrorMessage.TAB_IN_PRODUCT_NAME_MESSAGE);

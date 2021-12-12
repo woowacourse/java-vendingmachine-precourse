@@ -3,6 +3,7 @@ package vendingmachine.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import vendingmachine.constants.Rule;
 import vendingmachine.util.ProductException;
 
 public class Menu {
@@ -11,7 +12,7 @@ public class Menu {
 	public Menu(String productInfo) {
 		menuList = new HashMap<String, Product>();
 
-		String[] productStrList = productInfo.split(";", -1);
+		String[] productStrList = productInfo.split(Rule.STANDARD_FOR_DIVIDE_PRODUCTS, -1);
 
 		for (int i = 0; i < productStrList.length; i++) {
 			Product product = new Product(productStrList[i].substring(1, productStrList[i].length() - 1));

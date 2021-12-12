@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import vendingmachine.constants.InputMessage;
 import vendingmachine.constants.OutputMessage;
+import vendingmachine.constants.Rule;
 import vendingmachine.model.Coin;
 
 public class VendingMachineView {
@@ -26,11 +27,11 @@ public class VendingMachineView {
 	}
 
 	public void printCoin(int countCoin, Coin coin) {
-		System.out.println(coin.getAmount() + "원 - " + countCoin + "개");
+		System.out.println(coin.getAmount() + Rule.AMOUNT_UNIT + Rule.DASH + countCoin + Rule.QUANTITY_UNIT);
 	}
 
 	public void printRemainOfInsertedMoney(int remainMoney) {
-		System.out.println("\n" + OutputMessage.PRINT_USER_MONEY + remainMoney + "원");
+		System.out.println("\n" + OutputMessage.PRINT_USER_MONEY + remainMoney + Rule.AMOUNT_UNIT);
 	}
 
 	public void printChangesComment(int remainMoney) {
