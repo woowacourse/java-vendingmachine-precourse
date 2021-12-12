@@ -50,4 +50,9 @@ public class Money {
             throw new IllegalArgumentException("[ERROR] 차감하려는 동전이 현재 남아있는 금액보다 클 수 없습니다.");
         }
     }
+
+    public void chargeMoney(String money) {
+        checkMoneyIntegerFormat(money);
+        this.money += Integer.parseInt(money);
+    }
 }
