@@ -8,15 +8,17 @@ import vendingmachine.domain.coin.CoinService;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.ProductService;
 import vendingmachine.domain.product.Products;
+import vendingmachine.domain.user.UserAmount;
 import vendingmachine.validator.AmountValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-	private CoinService coinService;
+	private final CoinService coinService;
 	private CoinCounter coinCounter;
 	private Products products;
-	private ProductService productService;
+	private final ProductService productService;
+	private UserAmount userAmount;
 
 	public VendingMachineController() {
 		coinService = new CoinService();
@@ -49,6 +51,15 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
 			setProducts();
+		}
+	}
+
+	public void getUserAmount() {
+		try {
+			userAmount = new UserAmount(InputView.getUserAmount());
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			getUserAmount();
 		}
 	}
 }

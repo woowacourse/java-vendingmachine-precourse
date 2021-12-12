@@ -13,4 +13,9 @@ public class InputView {
 		System.out.println(ASKING_PRODUCT_INFORMATION);
 		return readLine();
 	}
+
+	public static String getUserAmount() {
+		System.out.println(ASKING_USER_AMOUNT);
+		return readLine();
+	}
 }

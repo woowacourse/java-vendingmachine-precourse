@@ -7,5 +7,6 @@ public class Application {
 		VendingMachineController vendingMachineController = new VendingMachineController();
 		vendingMachineController.setVendingMachineCoinCounter();
 		vendingMachineController.setProducts();
+		vendingMachineController.getUserAmount();
 	}
 }

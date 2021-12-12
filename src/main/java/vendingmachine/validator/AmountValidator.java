@@ -5,6 +5,9 @@ import static vendingmachine.constant.ErrorMessage.*;
 import vendingmachine.domain.coin.Coin;
 
 public class AmountValidator {
+	public static void checkUserAmount(String userAmount) {
+		checkVendingMachineAmount(userAmount);
+	}
 
 	public static void checkVendingMachineAmount(String vendingMachineAmount) {
 		int amount = toInteger(vendingMachineAmount);
