@@ -19,7 +19,7 @@ public enum Coin {
 
 	private static int getRandomCoin(ArrayList<Item> coins, int money) {
 		return camp.nextstep.edu.missionutils.Randoms.pickNumberInList(coins.stream()
-			.filter(eachCoin -> eachCoin.getPrice() <= money)
+			.filter(eachCoin -> !eachCoin.isOverThisPrice(money))
 			.map(Item::getPrice)
 			.collect(Collectors.toList()));
 	}
@@ -35,7 +35,7 @@ public enum Coin {
 
 	private static int calculateReturnedCoinAmount(ArrayList<Item> coinList, int coinValue, int money) {
 		return coinList.stream()
-			.filter(eachCoin -> eachCoin.getPrice() == coinValue)
+			.filter(eachCoin -> eachCoin.isEqualThisPrice(money))
 			.map(eachCoin -> Math.min(money / coinValue, eachCoin.getAmount()))
 			.findFirst()
 			.get();
@@ -43,7 +43,7 @@ public enum Coin {
 
 	private static void decreaseCoinAmount(ArrayList<Item> coinList, int valueOfReturnedCoin, int amountOfReturnedCoin) {
 		coinList.stream()
-			.filter(eachCoin -> eachCoin.getPrice() == valueOfReturnedCoin)
+			.filter(eachCoin -> eachCoin.isEqualThisPrice(valueOfReturnedCoin))
 			.forEach(eachCoin -> eachCoin.decreaseAmount(amountOfReturnedCoin));
 	}
 
@@ -53,7 +53,7 @@ public enum Coin {
 
 	private static void increaseCoinAmount(ArrayList<Item> coinList, int valueOfNowCoin, int amountOfNowCoin) {
 		coinList.stream()
-			.filter(eachCoin -> eachCoin.getPrice() == valueOfNowCoin)
+			.filter(eachCoin -> eachCoin.isEqualThisPrice(valueOfNowCoin))
 			.forEach(eachCoin -> eachCoin.increaseAmount(amountOfNowCoin));
 	}
 
