@@ -10,9 +10,6 @@ public class Validator {
 	private static final String NAME_PATTERN = "^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$";
 	private static final int ELEMENT_SIZE = 3;
 	private static final int MIN_MONEY_VALUE = 10;
-	private static final int NAME_INDEX = 0;
-	private static final int PRICE_INDEX = 1;
-	private static final int AMOUNT_INDEX = 2;
 
 	private static void validateEmptyStr(String input) throws IllegalArgumentException {
 		if (input.isEmpty()) {
@@ -58,9 +55,9 @@ public class Validator {
 	public static void validateElementCondition(ArrayList<String[]> itemInput) throws IllegalArgumentException {
 		for (String[] eachParsedItem : itemInput) {
 			validateElementSize(eachParsedItem);
-			validateNameInput(eachParsedItem[NAME_INDEX]);
-			validatePriceInput(eachParsedItem[PRICE_INDEX]);
-			validateAmountInput(eachParsedItem[AMOUNT_INDEX]);
+			validateNameInput(eachParsedItem[Indexes.NAME_INDEX.getValue()]);
+			validatePriceInput(eachParsedItem[Indexes.PRICE_INDEX.getValue()]);
+			validateAmountInput(eachParsedItem[Indexes.AMOUNT_INDEX.getValue()]);
 		}
 	}
 
