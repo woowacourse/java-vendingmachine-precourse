@@ -2,6 +2,7 @@ package vendingmachine.product;
 
 import vendingmachine.Money;
 import vendingmachine.Notification;
+import vendingmachine.exception.OutOfBoundException;
 import vendingmachine.quantity.Quantity;
 
 public class Product {
@@ -39,7 +40,11 @@ public class Product {
 	}
 
 	public void decreaseStock() {
-		stock.down();
+		try {
+			stock.down();
+		} catch (OutOfBoundException e) {
+			throw new IllegalArgumentException(Notification.PRODUCTS_STOCK_INSUFFICIENT.getMessage());
+		}
 	}
 
 	public Money getPrice() {
