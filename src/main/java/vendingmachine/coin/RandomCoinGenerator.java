@@ -13,19 +13,11 @@ import vendingmachine.quantity.Quantity;
 public class RandomCoinGenerator implements CoinGenerator {
 	@Override
 	public Coins generate(Money money) {
-		Map<Coin, Quantity> coins = initializeCoins();
+		Coins coins = new Coins();
 		while(!money.isZero()) {
 			Coin coin = generateCoin(money);
-			coins.computeIfPresent(coin, (originCoin, quantity) -> quantity.up());
+			coins.add(coin);
 			money.spend(coin.getMoney());
-		}
-		return new Coins(coins);
-	}
-
-	private Map<Coin, Quantity> initializeCoins() {
-		Map<Coin, Quantity> coins = new EnumMap<>(Coin.class);
-		for (Coin coin : Coin.getSortedCoins()) {
-			coins.put(coin,Quantity.from());
 		}
 		return coins;
 	}

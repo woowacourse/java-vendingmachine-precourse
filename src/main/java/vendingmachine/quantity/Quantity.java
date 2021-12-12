@@ -1,5 +1,6 @@
 package vendingmachine.quantity;
 
+import vendingmachine.Money;
 import vendingmachine.Notification;
 import vendingmachine.exception.OutOfBoundException;
 
@@ -46,6 +47,14 @@ public class Quantity {
 		return this;
 	}
 
+	public Quantity up(Quantity quantity) {
+		if(!isIncrease(quantity)) {
+			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
+		}
+		count += quantity.count;
+		return this;
+	}
+
 	public Quantity down() {
 		if (isZero()) {
 			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
@@ -60,6 +69,15 @@ public class Quantity {
 		}
 		count -= quantity.count;
 		return this;
+	}
+
+	private boolean isIncrease(Quantity quantity) {
+		try {
+			Math.addExact(this.count, quantity.getCount());
+			return true;
+		} catch (ArithmeticException e) {
+			return false;
+		}
 	}
 
 	private boolean isDecrease(Quantity quantity) {
