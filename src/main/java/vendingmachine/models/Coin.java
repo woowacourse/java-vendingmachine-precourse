@@ -69,4 +69,16 @@ public enum Coin {
 		}
 		return coins;
 	}
+
+	public static ArrayList<Item> getReturnedCoin(ArrayList<Item> coinList, int money) {
+		ArrayList<Item> returnedCoin = new ArrayList<>();
+		while (money > 0 && isCoinListEmpty(coinList) > 0) {
+			int valueOfReturnedCoin = calculateReturnedCoinValue(coinList, money);
+			int amountOfReturnedCoin = calculateReturnedCoinAmount(coinList, valueOfReturnedCoin, money);
+			decreaseCoinAmount(coinList, valueOfReturnedCoin, amountOfReturnedCoin);
+			returnedCoin.add(new Item(valueOfReturnedCoin, amountOfReturnedCoin));
+			money -= valueOfReturnedCoin * amountOfReturnedCoin;
+		}
+		return returnedCoin;
+	}
 }
