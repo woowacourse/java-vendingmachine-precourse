@@ -1,16 +1,20 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.Changes;
+import vendingmachine.service.ChangesService;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.VendingMachineInputView;
 import vendingmachine.view.VendingMachineOutputView;
 
 public class VendingMachineController {
     private final VendingMachineService vendingMachineService;
+    private final ChangesService changesService;
     private final VendingMachineInputView vendingMachineInputView;
     private final VendingMachineOutputView vendingMachineOutputView;
 
     public VendingMachineController() {
         this.vendingMachineService = new VendingMachineService();
+        this.changesService = new ChangesService();
         this.vendingMachineInputView = new VendingMachineInputView();
         this.vendingMachineOutputView = new VendingMachineOutputView();
     }
@@ -24,6 +28,7 @@ public class VendingMachineController {
     public void setVendingMachine() {
         // TODO: 자판기 세팅
         int amount = vendingMachineInputView.inputHoldingAmount();
+        Changes changes = changesService.createChanges(amount);
     }
 
     public void turnOnVendingMachine() {
