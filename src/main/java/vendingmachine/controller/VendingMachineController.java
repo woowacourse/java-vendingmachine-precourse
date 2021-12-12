@@ -65,7 +65,7 @@ public class VendingMachineController {
 		List<Merchandise> merchandiseList = new ArrayList<>();
 		for (String merchandiseInformation : merchandiseInformations) {
 			Validator.validateInputMerchandise(merchandiseInformation);
-			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1);
+			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1).trim();
 			merchandiseList.add(constructMerchandise(merchandise));
 		}
 		return merchandiseList;
