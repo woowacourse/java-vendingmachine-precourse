@@ -8,5 +8,7 @@ public class MessageResource {
 	public static final String OUTPUT_INPUT_CURRENT_AMOUNT = "투입 금액: %d원";
 	public static final String OUTPUT_CHANGES = "%d원 - %d개";
 
-	public static final String ERROR_AMOUNT_IS_NUMERIC = "[ERROR] 금액은 숫자여야 합니다.";
+	public static final String ERROR_AMOUNT_IS_NOT_NUMERIC = "[ERROR] 금액은 숫자여야 합니다.";
+	public static final String ERROR_AMOUNT_IS_NOT_POSITIVE_INT = "[ERROR] 0보다 큰 정수여야 합니다.";
+	public static final String ERROR_IS_NOT_COIN_TYPE_EXIST = "[ERROR] 해당 코인 타입이 존재하지 않습니다.";
 }

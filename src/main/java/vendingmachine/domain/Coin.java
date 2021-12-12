@@ -1,4 +1,10 @@
-package vendingmachine.domain
+package vendingmachine.domain;
+
+import static vendingmachine.resource.MessageResource.*;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Coin {
 	COIN_500(500),
@@ -12,5 +18,20 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	// 추가 기능 구현
+	public int getAmount() {
+		return amount;
+	}
+
+	public static List<Integer> getCoinList() {
+		return Arrays.stream(values())
+			.map(Coin::getAmount)
+			.collect(Collectors.toList());
+	}
+
+	public static Coin getCoinType(int coinAmount) {
+		return Arrays.stream(values())
+			.filter(coin -> coin.amount == coinAmount)
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_IS_NOT_COIN_TYPE_EXIST));
+	}
 }
