@@ -1,5 +1,8 @@
 package vendingmachine.service;
 
+import java.util.List;
+
+import vendingmachine.domain.Item;
 import vendingmachine.service.validator.MoneyInputValidator;
 import vendingmachine.view.InputView;
 
@@ -31,5 +34,10 @@ public class MoneyService {
 			isValidMoney = moneyInputValidator.validateCustomerMoneyInput(customerMoneyString);
 		}while(!isValidMoney);
 		return Integer.parseInt(customerMoneyString);
+	}
+
+	public boolean isEnoughMoneyForMinPriceItem(List<Item> items, int customerMoney) {
+		return items.stream()
+			.anyMatch(item -> item.isEnoughMoneyForPurchasing(customerMoney) == true);
 	}
 }

@@ -22,11 +22,6 @@ public class PurchaseService {
 		return remainingMoney - item.getPrice();
 	}
 
-	public boolean isEnoughMoneyForMinPriceItem(List<Item> items, int customerMoney) {
-		return items.stream()
-			.anyMatch(item -> item.isEnoughMoneyForPurchasing(customerMoney) == true);
-	}
-
 	private Item getItem(List<Item> items, int remainingMoney) {
 		boolean isValidItem;
 		String itemName;
@@ -42,6 +37,5 @@ public class PurchaseService {
 		} while (!isValidItem);
 		return selectedItem;
 	}
-
 
 }
