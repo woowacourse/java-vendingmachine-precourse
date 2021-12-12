@@ -31,4 +31,13 @@ public class GoodsController {
     public boolean checkAvailablePurchase(Goods goods, String name, int userMoney) {
         return checkGoodsName(goods, name) && checkQuantity(goods) && checkMoney(goods, userMoney);
     }
+
+    public void sellGoods(String name, int userMoney) {
+        for (Goods goods : goodsList) {
+            if (checkAvailablePurchase(goods, name, userMoney)) {
+                goods.reduceQuantity();
+                return;
+            }
+        }
+    }
 }
