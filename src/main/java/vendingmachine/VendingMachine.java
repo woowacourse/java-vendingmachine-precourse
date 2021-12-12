@@ -17,7 +17,7 @@ public class VendingMachine {
 	}
 
 	public void addCoinAll(Coins coins) {
-		coins.addAll(coins);
+		this.coins.addAll(coins);
 	}
 
 	public void insert(Money money) {
