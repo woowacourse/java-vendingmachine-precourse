@@ -59,7 +59,7 @@ class ProductsTest {
         }
 
         @Test
-        @DisplayName("구매 가능")
+        @DisplayName("구매 불가능")
         void falseTest() {
             // given
             List<Product> input = Arrays.asList(new Product("콜라", 1500, 0),
@@ -68,6 +68,43 @@ class ProductsTest {
 
             // when
             boolean result = products.isExistPurchasableProduct();
+
+            // then
+            assertFalse(result);
+        }
+    }
+
+    @Nested
+    @DisplayName("Products의 최소 상품 가격보다 돈이 남았는지 확인할 수 있다.")
+    class IsPurchasableMinimumPrice {
+
+        @Test
+        @DisplayName("구매 가능")
+        void trueTest() {
+            // given
+            List<Product> input = Arrays.asList(new Product("콜라", 1500, 20),
+                new Product("사이다", 1000, 10));
+            Products products = new Products(input);
+            Money money = Money.valueOf("10000");
+
+            // when
+            boolean result = products.isPurchasableMinimumPriceProduct(money);
+
+            // then
+            assertTrue(result);
+        }
+
+        @Test
+        @DisplayName("구매 불가능")
+        void falseTest() {
+            // given
+            List<Product> input = Arrays.asList(new Product("콜라", 1500, 0),
+                new Product("사이다", 1000, 0));
+            Products products = new Products(input);
+            Money money = Money.valueOf("500");
+
+            // when
+            boolean result = products.isPurchasableMinimumPriceProduct(money);
 
             // then
             assertFalse(result);

@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -35,5 +36,12 @@ public class Products {
     public boolean isExistPurchasableProduct() {
         return products.stream()
             .anyMatch(Product::isPurchasable);
+    }
+
+    public boolean isPurchasableMinimumPriceProduct(Money money) {
+        Product product = products.stream()
+            .min(Comparator.comparingInt(Product::price))
+            .orElseThrow(() -> new RuntimeException("[ERROR] 상품의 최소금액이 존재하지 않습니다."));
+        return product.isPurchasable(money);
     }
 }

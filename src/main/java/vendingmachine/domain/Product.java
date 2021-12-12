@@ -41,20 +41,28 @@ public class Product {
         return price;
     }
 
-    public void checkRemainAmount() {
+    private void checkRemainAmount() {
         if (remainAmount <= 0) {
             throw new RuntimeException("[ERROR] 상품의 수량이 0보다 작은 경우 더이상 구매할 수 없습니다.");
         }
     }
 
-    public void checkCanPurchaseMoney(Money money) {
-        if (money.currentMoney() < price) {
+    private void checkCanPurchaseMoney(Money money) {
+        if (!isPurchasable(money)) {
             throw new RuntimeException("[ERROR] 현재 돈으로는 구매할 수 없는 상품의 가격입니다.");
         }
     }
 
+    public boolean isPurchasable(Money money) {
+        return money.currentMoney() > price;
+    }
+
     public boolean isPurchasable() {
         return remainAmount != 0;
+    }
+
+    public int price() {
+        return price;
     }
 
     @Override
