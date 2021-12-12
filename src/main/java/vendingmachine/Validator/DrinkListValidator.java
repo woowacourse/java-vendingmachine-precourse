@@ -1,7 +1,7 @@
 package vendingmachine.Validator;
 
 import vendingmachine.Constant.Constant;
-import vendingmachine.SystemMessage.SystemMessage;
+import vendingmachine.SystemMessage.ErrorMessage;
 
 public class DrinkListValidator {
     public static boolean isValidateDrinkList(String input) {
@@ -31,7 +31,7 @@ public class DrinkListValidator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(SystemMessage.WRONG_FORMAT_MESSAGE);
+            System.out.println(ErrorMessage.WRONG_FORMAT_MESSAGE);
             return false;
         }
         return true;

@@ -1,7 +1,7 @@
 package vendingmachine.Validator;
 
 import vendingmachine.Model.*;
-import vendingmachine.SystemMessage.SystemMessage;
+import vendingmachine.SystemMessage.ErrorMessage;
 
 public class TransactionValidator {
     public static boolean isValidateChoice(String input, VendingMachine vendingMachine) {
@@ -10,7 +10,7 @@ public class TransactionValidator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(SystemMessage.NO_SUCH_DRINK_MESSAGE);
+            System.out.println(ErrorMessage.NO_SUCH_DRINK_MESSAGE);
             return false;
         }
         return true;
@@ -22,7 +22,7 @@ public class TransactionValidator {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {
-            System.out.println(SystemMessage.SOLD_OUT_MESSAGE);
+            System.out.println(ErrorMessage.SOLD_OUT_MESSAGE);
             return false;
         }
         return true;

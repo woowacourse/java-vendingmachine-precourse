@@ -1,6 +1,6 @@
 package vendingmachine.SystemMessage;
 
-public class SystemMessage {
+public class ErrorMessage {
     public static final String WRONG_FORMAT_MESSAGE = "[ERROR] 잘못된 입력 형식입니다.";
     public static final String NOT_NUMBER_MESSAGE = "[ERROR] 금액은 숫자여야 합니다.";
     public static final String NOT_MULTIPLE_OF_10_MESSAGE = "[ERROR] 금액의 최소단위는 10원입니다.";
