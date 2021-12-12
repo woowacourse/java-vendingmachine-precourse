@@ -352,6 +352,60 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
+	@DisplayName("상품 판매 시 상품명이 없는 경우 예외 테스트")
+	@Test
+	void sell_product_invalid_name_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					MoneyRepository.add(new Money("3000"));
+					Products products = new Products("[콜라,500,1];[사이다,300,1]");
+					products.save();
+					run("커피");
+					vendingMachine.sellProduct();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("상품 판매 시 상품이 매진된 경우 예외 테스트")
+	@Test
+	void sell_product_sold_out_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					MoneyRepository.add(new Money("3000"));
+					Products products = new Products("[콜라,500,0];[사이다,300,1]");
+					products.save();
+					run("콜라");
+					vendingMachine.sellProduct();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("상품 판매 시 돈이 부족한 경우 예외 테스트")
+	@Test
+	void sell_product_low_money_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					MoneyRepository.add(new Money("3000"));
+					Products products = new Products("[콜라,5000,1];[사이다,300,1]");
+					products.save();
+					run("콜라");
+					vendingMachine.sellProduct();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
 	@Override
 	protected void runMain() {
 	}
