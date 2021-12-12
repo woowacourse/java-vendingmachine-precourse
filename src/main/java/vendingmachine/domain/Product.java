@@ -34,6 +34,18 @@ public class Product {
         return this.name.equals(name);
     }
 
+    public int purchaseProduct() {
+        checkRemainAmount();
+        remainAmount--;
+        return price;
+    }
+
+    public void checkRemainAmount() {
+        if (remainAmount <= 0) {
+            throw new RuntimeException("[ERROR] 상품의 수량이 0보다 작은 경우 더이상 구매할 수 없습니다.");
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

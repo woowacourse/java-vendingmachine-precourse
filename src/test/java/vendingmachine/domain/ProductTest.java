@@ -51,4 +51,19 @@ class ProductTest {
         // then
         assertTrue(result);
     }
+
+    @Test
+    @DisplayName("상품의 남은 수량이 0일 때 구매하려는 경우 exception이 발생해야 한다.")
+    void purchaseProductExceptionByNotRemainAmountTest() {
+        // given
+        String name = "콜라";
+        int price = 1500;
+        int remainAmount = 0;
+        Product product = new Product(name, price, remainAmount);
+
+        // when & then
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> product.purchaseProduct())
+            .withMessage("[ERROR] 상품의 수량이 0보다 작은 경우 더이상 구매할 수 없습니다.");
+    }
 }
