@@ -20,4 +20,8 @@ public class Pair {
 	public void increaseSecondValue(int amount) {
 		this.secondValue += amount;
 	}
+
+	public void decreaseSecondValue(int amount) {
+		this.secondValue -= amount;
+	}
 }
