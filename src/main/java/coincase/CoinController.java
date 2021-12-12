@@ -1,15 +1,19 @@
-package vendingmachine;
+package coincase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import vendingmachine.Coin;
+
 public class CoinController {
 	private Map<Coin, Integer> numberOfCoins;
+	private CoinRuleChecker coinRuleChecker;
 
-	CoinController() {
+	public CoinController() {
 		initNumberOfCoins();
+		coinRuleChecker = new CoinRuleChecker();
 	}
 
 	private void initNumberOfCoins() {
@@ -37,11 +41,18 @@ public class CoinController {
 		return remainMoney;
 	}
 
-	protected Map<Coin, Integer> makeRandomCombinationCoin(int money) {
+	public Map<Coin, Integer> makeRandomCombinationCoin(int money) {
 		int remainMoney = money;
 		while (remainMoney != 0) {
 			remainMoney = changeSomeMoneyToRandomCombinationCoin(remainMoney);
 		}
 		return numberOfCoins;
+	}
+
+	public boolean checkMoneyIsValid(int money) throws IllegalArgumentException {
+		if (coinRuleChecker.checkCoinMinimumUnit(money)) {
+			return true;
+		}
+		throw new IllegalArgumentException();
 	}
 }

@@ -1,4 +1,4 @@
-package vendingmachine;
+package ui;
 
 public class Ui {
 
