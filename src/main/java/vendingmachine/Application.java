@@ -5,5 +5,6 @@ public class Application {
 
         VendingMachine vendingMachine = new VendingMachine();
         vendingMachine.setBaseAsset();
+        vendingMachine.setProducts();
     }
 }
