@@ -47,7 +47,7 @@ public class Coins {
         if (!money.isDivisable(coin) || coinCount <= 0) {
             return 0;
         }
-        money.decreaseByCoin(coin);
+        money.cutOffByCoin(coin);
         return 1 + calculateChange(money, coin, coinCount - 1);
     }
 }

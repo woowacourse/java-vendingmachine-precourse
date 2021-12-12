@@ -45,7 +45,7 @@ public class Money {
         return coin;
     }
 
-    public void checkCoinLargerThenRemainMoney(Coin coin) {
+    private void checkCoinLargerThenRemainMoney(Coin coin) {
         if (money < coin.amount()) {
             throw new IllegalArgumentException("[ERROR] 차감하려는 동전이 현재 남아있는 금액보다 클 수 없습니다.");
         }
@@ -63,12 +63,14 @@ public class Money {
         return this.money / coin.amount() > 0;
     }
 
-    // TODO 금액 미달 시 exception 추가
-    public void decreaseByCoin(Coin coin) {
-        this.money -= coin.amount();
+    public void useMoney(int money) {
+        checkUseMoneyLargerThenRemainMoney(money);
+        this.money -= money;
     }
 
-    public void useMoney(int money) {
-        this.money -= money;
+    private void checkUseMoneyLargerThenRemainMoney(int money) {
+        if (this.money < money) {
+            throw new IllegalArgumentException("[ERROR] 차감하고자하는 금액이 현재 보유 금액보다 클 수 없습니다.");
+        }
     }
 }
