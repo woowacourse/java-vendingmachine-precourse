@@ -7,6 +7,7 @@ import vendingmachine.user.UserMoneyValidation;
 
 public class ProcessPrepare {
     public static String holdingAmount;
+    public static String goods;
 
     public static void inputHoldingAmount() {
         holdingAmount = User.inputMoney();
@@ -20,4 +21,8 @@ public class ProcessPrepare {
         return Integer.parseInt(holdingAmount);
     }
 
+    public static void inputGoods() {
+        goods = User.inputGoods();
+    }
+    
 }
