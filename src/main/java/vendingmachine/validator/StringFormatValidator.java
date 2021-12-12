@@ -1,5 +1,10 @@
 package vendingmachine.validator;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import static vendingmachine.utils.ExceptionMessages.*;
 
 public class StringFormatValidator {
@@ -8,6 +13,7 @@ public class StringFormatValidator {
         for (String merchandiseInfo : merchandiseInfos) {
             validateMerchandiseInfoFormat(merchandiseInfo);
         }
+        validateNoDuplicateMerchandiseNames(merchandiseInfos);
     }
 
     private static void validateMerchandiseInfoFormat(String merchandiseInfo) {
@@ -46,6 +52,21 @@ public class StringFormatValidator {
     private static void validateNotNegativeNumber(int numberInput) {
         if (numberInput < 0) {
             throw new IllegalArgumentException(MERCHANDISE_NUMBER_NEGATIVE_NUMBER_EXCEPTION);
+        }
+    }
+
+    private static void validateNoDuplicateMerchandiseNames(String[] merchandiseInfos) {
+        List<String> merchandiseNames = new ArrayList<>();
+        Set<String> merchandiseNameSet = new HashSet<>();
+
+        for (String merchandiseInfo : merchandiseInfos) {
+            String price = merchandiseInfo.substring(1).split(",")[0];
+            merchandiseNames.add(price);
+            merchandiseNameSet.add(price);
+        }
+
+        if (merchandiseNames.size() > merchandiseNameSet.size()) {
+            throw new IllegalArgumentException(NO_DUPLICATE_MERCHANDISE_NAMES_EXCEPTION);
         }
     }
 }
