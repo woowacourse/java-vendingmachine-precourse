@@ -4,6 +4,7 @@ import vendingmachine.Constant.ErrorConstant;
 import vendingmachine.Constant.OutputConstant;
 import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
+import vendingmachine.Domain.InputAmount;
 
 public class OutputView {
 
@@ -30,5 +31,9 @@ public class OutputView {
         result.append("\n");
 
         return result.toString();
+    }
+
+    public static void printInputAmount() {
+        System.out.println(InputAmount.printInputAmount());
     }
 }

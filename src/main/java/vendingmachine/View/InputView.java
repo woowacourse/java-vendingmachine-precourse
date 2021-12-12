@@ -19,6 +19,11 @@ public class InputView {
         return Console.readLine();
     }
 
+    public static String getProductToPurchase() {
+        System.out.println(InputConstant.PLEASE_INPUT_PRODUCT_TO_PURCHASE);
+        return Console.readLine();
+    }
+
     public static void inputOver() {
         System.out.println();
     }

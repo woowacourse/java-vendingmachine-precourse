@@ -5,4 +5,6 @@ public class OutputConstant {
     public static final String COIN_AMOUNT = "원";
     public static final String COIN_COUNT = "개";
     public static final String COIN_STANDARD = " - ";
+    public static final String PRINT_INPUT_AMOUNT = "투입 금액: ";
+    public static final String INPUT_AMOUNT = "원";
 }

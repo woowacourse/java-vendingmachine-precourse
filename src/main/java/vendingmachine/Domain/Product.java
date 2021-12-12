@@ -11,8 +11,21 @@ public class Product {
         this.count = count;
     }
 
-    public boolean isSameName(String name) {
-        return this.name.equals(name);
+    public boolean isSameName(String input) {
+        return this.name.equals(input);
+    }
+
+    public boolean isRemain() {
+        return this.count > 0;
+    }
+
+    public boolean canPurchase() {
+        return InputAmount.isMoreThanCost(cost);
+    }
+
+    public void purchase() {
+        this.count--;
+        InputAmount.takeMoney(this.cost);
     }
 
 }

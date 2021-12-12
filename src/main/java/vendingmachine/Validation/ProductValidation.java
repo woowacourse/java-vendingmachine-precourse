@@ -39,7 +39,7 @@ public class ProductValidation {
     }
 
     private void checkName(String name) {
-        if (VendingMachine.isDuplicatedProductName(name)) {
+        if (VendingMachine.findProductByName(name) != null) {
             throw new IllegalArgumentException(ErrorConstant.PRODUCT_NAME_MUST_NOT_BE_DUPLICATED);
         }
     }
