@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.CoinRepository;
+import vendingmachine.domain.MoneyRepository;
 import vendingmachine.domain.Name;
 import vendingmachine.domain.ProductRepository;
 import vendingmachine.enums.Coin;
@@ -56,6 +57,19 @@ public class VendingMachineTest extends NsTest {
 				Name cider = new Name("사이다");
 				assertTrue(ProductRepository.findByName(coke).isSameName(coke));
 				assertTrue(ProductRepository.findByName(cider).isSameName(cider));
+			}
+		);
+	}
+
+	@DisplayName("구매를 위한 돈 투입 기능 테스트")
+	@Test
+	void insertMoneyTest() {
+		assertSimpleTest(
+			() -> {
+				run("3000");
+				assertEquals(MoneyRepository.get().get(), 0);
+				vendingMachine.insertMoney();
+				assertEquals(MoneyRepository.get().get(), 3000);
 			}
 		);
 	}
