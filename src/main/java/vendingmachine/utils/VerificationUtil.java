@@ -27,7 +27,7 @@ public class VerificationUtil {
                 .filter(s -> !s.matches(REGEX))
                 .findAny()
                 .ifPresent(s -> {
-                    throw new IllegalArgumentException("[ERROR] 잘못된 상품 입력입니다.");
+                    throw new IllegalArgumentException("[ERROR] 잘못된 상품 입력입니다.\n");
                 });
     }
 
@@ -41,12 +41,12 @@ public class VerificationUtil {
             }
         }
 
-        throw new IllegalArgumentException("[ERROR] 해당하는 상품이 존재하지 않습니다.");
+        throw new IllegalArgumentException("[ERROR] 해당하는 상품이 존재하지 않습니다.\n");
     }
 
     private static void checkProductAmount(Product product) {
         if (product.getQuantity() <= ZERO) {
-            throw new IllegalArgumentException("[ERROR] 해당 상품의 재고가 없습니다.");
+            throw new IllegalArgumentException("[ERROR] 해당 상품의 재고가 없습니다.\n");
         }
     }
 
@@ -56,19 +56,19 @@ public class VerificationUtil {
 
             return number;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 숫자를 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 숫자를 입력해주세요.\n");
         }
     }
 
     private static void validatePositiveNumber(int holdingAmount) {
         if (holdingAmount <= ZERO) {
-            throw new IllegalArgumentException("[ERROR] 양수를 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 양수를 입력해주세요.\n");
         }
     }
 
     private static void validateMultipleOfTen(int holdingAmount) {
         if (holdingAmount % UNIT != ZERO) {
-            throw new IllegalArgumentException("[ERROR] 10원 단위로 입력해주세요.");
+            throw new IllegalArgumentException("[ERROR] 10원 단위로 입력해주세요.\n");
         }
     }
 }
