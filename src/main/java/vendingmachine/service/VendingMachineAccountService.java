@@ -47,7 +47,7 @@ public class VendingMachineAccountService {
 	public static void setAccountByInput() {
 		int machineAccount = INVALID_INPUT;
 		while (machineAccount == INVALID_INPUT) {
-			machineAccount = VendingMachineAccountService.getValidInput();
+			machineAccount = getValidInput();
 		}
 		vendingMachineAccount.setAccount(machineAccount);
 	}

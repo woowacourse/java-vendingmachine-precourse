@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Objects;
+
 public class Catalog {
 	private String name;
 	private int price;
@@ -11,9 +13,20 @@ public class Catalog {
 		this.amount = amount;
 	}
 
-	public void print() {
-		System.out.println("상품명: " + name);
-		System.out.println("가격: " + price);
-		System.out.println("수량: " + amount);
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+		Catalog catalog = (Catalog)obj;
+		return Objects.equals(name, catalog.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
 	}
 }
