@@ -20,7 +20,7 @@ public class OutputHandler {
 		System.out.println();
 	}
 
-	public void printErrorMEssage(Exception exception) {
+	public void printErrorMessage(Exception exception) {
 		printMessage(exception.getMessage());
 	}
 

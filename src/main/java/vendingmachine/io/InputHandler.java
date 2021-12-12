@@ -37,7 +37,7 @@ public class InputHandler {
 			try {
 				return getMoney();
 			} catch (IllegalArgumentException iae) {
-				outputHandler.printErrorMEssage(iae);
+				outputHandler.printErrorMessage(iae);
 			}
 		}
 	}
@@ -48,7 +48,7 @@ public class InputHandler {
 			try {
 				return getProductList();
 			} catch (IllegalArgumentException iae) {
-				outputHandler.printErrorMEssage(iae);
+				outputHandler.printErrorMessage(iae);
 			}
 		}
 	}
