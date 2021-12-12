@@ -3,7 +3,6 @@ package vendingmachine.view;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.utils.Constant;
 
 public class OutputView {
 
@@ -12,6 +11,9 @@ public class OutputView {
 	public static final String PRINT_WON = "원";
 	public static final String PRINT_MID = "-";
 	public static final String PRINT_COIN_NUM = "개";
+	public static final String PRINT_ENTERED_AMOUNT = "투입 금액: ";
+	public static final String PRINT_RETURN_COIN = "잔돈";
+	public static final String PRINT_RETURN_COIN_NONE = "잔돈이 없습니다.";
 
 	public static void printHoldingCoin(Map<Coin, Integer> holdingCoin) {
 		System.out.println(PRINT_HOLDING_COIN);
@@ -25,18 +27,17 @@ public class OutputView {
 	}
 
 	public static void printEnteredAmount(int enteredAmount) {
-		System.out.println(Constant.PRINT_ENTERED_AMOUNT + enteredAmount + Constant.WON);
+		System.out.println(PRINT_ENTERED_AMOUNT + enteredAmount + PRINT_WON);
 	}
 
 	public static void printReturnCoin(Map<Coin, Integer> returnCoin) {
-		System.out.println(Constant.RETURN_COIN);
+		System.out.println(PRINT_RETURN_COIN);
+		returnCoin.entrySet()
+			.stream()
+			.map(e -> String.join("\n", e.getKey().getAmount() + "원 - " + e.getValue() + "개"))
+			.forEach(System.out::println);
 		if (returnCoin.isEmpty()) {
-			System.out.println(Constant.RETURN_COIN_NONE);
-		} else {
-			returnCoin.entrySet()
-				.stream()
-				.map(e -> String.join("\n", e.getKey().getAmount() + "원 - " + e.getValue() + "개"))
-				.forEach(System.out::println);
+			System.out.println(PRINT_RETURN_COIN_NONE);
 		}
 	}
 }

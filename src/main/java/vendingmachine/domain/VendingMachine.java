@@ -11,9 +11,9 @@ public class VendingMachine {
 	public int getEnteredAmount() {
 		return this.enteredAmount;
 	}
-
-	public boolean isBuy(int lowestPossibleProductPrice) {
-		return this.enteredAmount >= lowestPossibleProductPrice;
+	
+	public boolean isBuy(Products products) {
+		return products.isBuy(enteredAmount);
 	}
 
 	public void buy(int spendMoney) {

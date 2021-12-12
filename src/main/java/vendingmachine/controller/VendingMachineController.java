@@ -13,30 +13,30 @@ public class VendingMachineController {
 
 	public static void run() {
 		Coins coins = new Coins(
-			RandomGenerator.getHoldingCoin((InputView.getHoldingAmount()))
+			RandomGenerator.getHoldingCoin(InputView.getHoldingAmount())
 		);
 
 		OutputView.printHoldingCoin(coins.getHoldingCoin());
 
 		Products products = InputView.getProducts();
 		VendingMachine vendingMachine = new VendingMachine(InputView.getEnteredAmount());
-
 		do {
 			buy(vendingMachine, products);
 		} while (isBuy(vendingMachine, products));
+
 		OutputView.printEnteredAmount(vendingMachine.getEnteredAmount());
 		OutputView.printReturnCoin(ReturnCoin.getReturnCoin(coins.getHoldingCoin(), vendingMachine.getEnteredAmount()));
 	}
 
 	public static void buy(VendingMachine vendingMachine, Products products) {
 		OutputView.printEnteredAmount(vendingMachine.getEnteredAmount());
+
 		Product product = InputView.getProductToBuy(products, vendingMachine.getEnteredAmount());
-		product.buy();
-		vendingMachine.buy(product.getAmount());
+		product.buy(vendingMachine);
 	}
 
 	public static boolean isBuy(VendingMachine vendingMachine, Products products) {
-		if (!vendingMachine.isBuy(products.getLowestPossibleProductPrice())) {
+		if (!vendingMachine.isBuy(products)) {
 			return false;
 		}
 		return !products.isEmpty();

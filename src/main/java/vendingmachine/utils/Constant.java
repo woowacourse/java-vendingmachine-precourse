@@ -24,8 +24,4 @@ public class Constant {
 	public static final int ENTERED_AMOUNT_MAX = 2000000000;
 	public static final int ENTERED_AMOUNT_DIVIDE = 10;
 	public static final int ENTERED_AMOUNT_REMAINDER = 0;
-	public static final String PRINT_ENTERED_AMOUNT = "투입 금액: ";
-	public static final String WON = "원";
-	public static final String RETURN_COIN = "잔돈";
-	public static final String RETURN_COIN_NONE = "잔돈이 없습니다.";
 }

@@ -11,7 +11,7 @@ public class Product {
 	public Product(String name, int amount, int count) {
 		isAmount(amount);
 		isCount(count);
-		
+
 		this.name = name;
 		this.amount = amount;
 		this.count = count;
@@ -54,7 +54,8 @@ public class Product {
 		return this.amount <= enteredAmount;
 	}
 
-	public void buy() {
+	public void buy(VendingMachine vendingMachine) {
 		this.count--;
+		vendingMachine.buy(this.amount);
 	}
 }

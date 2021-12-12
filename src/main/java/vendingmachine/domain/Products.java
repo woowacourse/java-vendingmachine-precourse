@@ -10,12 +10,12 @@ public class Products {
 		this.products = products;
 	}
 
-	public int getLowestPossibleProductPrice() {
+	public boolean isBuy(int enteredAmount) {
 		return products.stream()
 			.filter(e -> !e.isEmpty())
 			.mapToInt(Product::getAmount)
 			.min()
-			.orElse(0);
+			.orElse(0) <= enteredAmount;
 	}
 
 	public boolean isEmpty() {

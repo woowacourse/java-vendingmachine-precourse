@@ -50,7 +50,7 @@ public class Validator {
 	public static void isProducts(String input) {
 		existsLastProduct(input);
 
-		String[] products = input.split(Constant.PRODUCTS_SPLIT);
+		String[] products = (input + Constant.PRODUCTS_SPLIT).split(Constant.PRODUCTS_SPLIT);
 		isProductsSplit(products);
 
 		List<String[]> product = Arrays.stream(products)
