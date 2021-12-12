@@ -2,10 +2,13 @@ package vendingmachine.domain;
 
 import java.util.List;
 
+import vendingmachine.utils.Validator;
+
 public class Merchandises {
 	private List<Merchandise> merchandiseList;
 
 	public Merchandises(List<Merchandise> merchandiseList) {
+		Validator.validateDuplicateMerchandise(merchandiseList);
 		this.merchandiseList = merchandiseList;
 	}
 
