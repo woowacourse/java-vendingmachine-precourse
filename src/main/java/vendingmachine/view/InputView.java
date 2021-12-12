@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import static camp.nextstep.edu.missionutils.Console.*;
+import static vendingmachine.constant.Constant.*;
 import static vendingmachine.exception.NumberException.*;
 import static vendingmachine.constant.ViewMessage.*;
 import static vendingmachine.exception.ProductException.*;
@@ -13,7 +14,7 @@ public class InputView {
 	}
 
 	public static int requestInputMoney() {
-		System.out.println(INPUT_MONEY_REQUEST_MESSAGE);
+		System.out.println(ENTER + INPUT_MONEY_REQUEST_MESSAGE);
 		return Integer.parseInt(requestMoney());
 	}
 
@@ -30,8 +31,7 @@ public class InputView {
 	}
 
 	public static String requestProduct() {
-		System.out.println();
-		System.out.println(PRODUCT_REQUEST_MESSAGE);
+		System.out.println(ENTER + PRODUCT_REQUEST_MESSAGE);
 		while (true) {
 			String products = readLine();
 			try {
@@ -41,6 +41,11 @@ public class InputView {
 				System.out.println(exception.getMessage());
 			}
 		}
+	}
+
+	public static String requestProductName() {
+		System.out.println(PURCHASE_PRODUCT_NAME_REQUEST_MESSAGE);
+		return readLine();
 	}
 
 }
