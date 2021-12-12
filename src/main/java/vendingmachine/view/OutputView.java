@@ -12,4 +12,7 @@ public class OutputView {
     public static void showInputMoney(Money money) {
         System.out.println(INPUT_MONEY + money.showMoneyBill());
     }
+
+    public static void showChange(Money money) {
+    }
 }

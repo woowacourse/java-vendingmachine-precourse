@@ -1,5 +1,7 @@
 package vendingmachine.model.Item;
 
+import vendingmachine.model.buy.BuyItemName;
+
 public class Item {
     Name name;
     Price price;
@@ -7,6 +9,10 @@ public class Item {
     public Item(String itemName, String itemPrice) {
         this.name = new Name(itemName);
         this.price = new Price(Integer.parseInt(itemPrice));
+    }
+
+    public boolean sameName(String buyItemName) {
+        return name.equals(buyItemName);
     }
 
     @Override

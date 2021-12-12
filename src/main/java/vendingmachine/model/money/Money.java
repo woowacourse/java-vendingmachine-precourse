@@ -1,5 +1,7 @@
 package vendingmachine.model.money;
 
+import vendingmachine.model.Item.Name;
+
 public class Money {
 
     public static final String DENOMINATION = "원";
@@ -29,4 +31,5 @@ public class Money {
     public String showMoneyBill() {
         return moneyBill.toString() + DENOMINATION;
     }
+
 }

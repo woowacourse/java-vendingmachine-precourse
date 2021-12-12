@@ -3,6 +3,8 @@ package vendingmachine.controller;
 import static vendingmachine.view.InputView.*;
 
 import vendingmachine.model.Item.Items;
+import vendingmachine.model.Item.Name;
+import vendingmachine.model.buy.BuyItemName;
 import vendingmachine.model.money.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -18,6 +20,12 @@ public class VendingMachineController {
         setupItems();
         setupInputMoney();
         OutputView.showInputMoney(money);
+        sellItems();
+        OutputView.showChange(money);
+    }
+
+    private void sellItems() {
+        BuyItemName buyItemName = InputView.getBuyItemName();
     }
 
     private void setupVendingMachine() {
