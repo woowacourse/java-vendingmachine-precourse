@@ -19,6 +19,7 @@ public class SystemMessage {
 	public static final String ERROR_AMOUNT_IS_NOT_POSITIVE = ERROR + " 상품 수량은 양수를 입력해야 합니다.";
 	public static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
 	public static final String SHOW_INPUT_MONEY = "투입 금액: ";
+	public static final String ERROR_TOO_LOW_INPUT_MONEY = ERROR + " 너무 낮은 금액을 투입하여 구매할 수 있는 상품이 없습니다. 투입금을 반환합니다.";
 	public static final String INPUT_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 	public static final String ERROR_NOT_EXIST_ITEM = ERROR + " 존재하지 않는 상품명입니다.";
 	public static final String ERROR_IS_NOT_IN_STOCK = ERROR + " 상품 재고가 남아있지 않습니다.";

@@ -26,7 +26,11 @@ public class InputMoneyView implements View {
 
 	private int readMoney() {
 		String moneyStr = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
-		return MoneyValidator.validate(moneyStr);
+		int money = MoneyValidator.validate(moneyStr);
+		if(!Application.controller.canPurchaseByMoney(money))
+			throw new IllegalArgumentException(SystemMessage.ERROR_TOO_LOW_INPUT_MONEY);
+
+		return money;
 	}
 
 	private void inputMoney(int money) {
