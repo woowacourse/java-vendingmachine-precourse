@@ -7,7 +7,10 @@ import vendingmachine.utils.Constant;
 
 public class OutputView {
 
+	public static final String PRINT_HOLDING_COIN = "자판기가 보유한 동전";
+
 	public static void printHoldingCoin(Map<Coin, Integer> holdingCoin) {
+		System.out.println(PRINT_HOLDING_COIN);
 		holdingCoin.entrySet()
 			.stream()
 			.map(e -> String.join("\n", e.getKey().getAmount() + "원 - " + e.getValue() + "개"))
