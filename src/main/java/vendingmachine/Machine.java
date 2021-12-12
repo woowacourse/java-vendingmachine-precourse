@@ -14,6 +14,9 @@ public class Machine {
     public ProductMap productMap = new ProductMap();
     public int userAmount = 0;
 
+    private static final boolean STOP_WORKING = true;
+    private static final boolean KEEP_WORKING = false;
+
     public Machine() {
     }
 
@@ -22,8 +25,11 @@ public class Machine {
         setProductMap();
         setUserAmount();
         while (stopWorking()) {
-            sellProduct();
+            if (sellProduct() == STOP_WORKING) {
+                break;
+            }
         }
+        returnCoin();
     }
 
     private void setCoinsInMachine() {
@@ -73,23 +79,22 @@ public class Machine {
         }
     }
 
-    private static final boolean STOP_WORKING = true;
-    private static final boolean KEEP_WORKING = true;
-
     private boolean stopWorking() {
-        if (productMap.getMinAmount()<userAmount) {
+        if (productMap.getMinAmount() < userAmount) {
             return STOP_WORKING;
         }
         return KEEP_WORKING;
     }
 
-    private void sellProduct() {
-        String productName=getProductName();
-        if(productMap.isSellable(productName,userAmount)){
-            userAmount-=productMap.sellProduct(productName);
-            return;
+    private boolean sellProduct() {
+        String productName = getProductName();
+        if (productMap.isSellable(productName, userAmount)) {
+            userAmount -= productMap.sellProduct(productName);
+            return KEEP_WORKING;
         }
+        return STOP_WORKING;
     }
+
     private String getProductName() {
         System.out.println("투입 금액: " + userAmount + "원");
         System.out.println("구매할 상품명을 입력해 주세요.");
@@ -97,10 +102,16 @@ public class Machine {
 
         while (true) {
             try {
-                productName=readLine();
+                productName = readLine();
                 productMap.checkProductExistence(productName);
                 return productName;
-            } catch (IllegalArgumentException e) {}
+            } catch (IllegalArgumentException e) {
+            }
         }
     }
+
+    private void returnCoin() {
+        coinMap.returnCoins(userAmount);
+    }
+
 }

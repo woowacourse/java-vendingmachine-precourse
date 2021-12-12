@@ -11,6 +11,7 @@ public class CoinMap {
     private final List<Integer> amountList = new ArrayList<>();
 
     public static final boolean ALL_PRINT = true;
+    public static final boolean NON_ZERO_PRINT=false;
 
     public CoinMap() {
         initiateCoinMap();
@@ -36,6 +37,16 @@ public class CoinMap {
         }
     }
 
+    public void returnCoins(int userAmount){
+        CoinMap returnCoinMap=new CoinMap();
+        for(Integer c:coinMap.keySet()){
+            int count=Math.min(coinMap.get(c),userAmount/c);
+            returnCoinMap.coinMap.put(c,count);
+            userAmount-=c*count;
+        }
+        returnCoinMap.printCoins(NON_ZERO_PRINT);
+    }
+
     public void printCoins(boolean type) {
         if (type == ALL_PRINT) {
             for (Integer c : coinMap.keySet()) {
@@ -49,4 +60,5 @@ public class CoinMap {
             }
         }
     }
+
 }
