@@ -29,7 +29,7 @@ public class Coins {
 	}
 
 	public static Map<Coin, Count> moneyToCoins(int holdingMoney) {
-		while (holdingMoney > 0) {
+		while (holdingMoney >= 10) {
 			int randomCoin = Randoms.pickNumberInList(coins);
 			if (randomCoin <= holdingMoney) {
 				coinsCount.put(Coin.of(randomCoin), coinsCount.get(Coin.of(randomCoin)).add(ONE));
