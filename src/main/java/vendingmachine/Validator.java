@@ -16,11 +16,12 @@ public class Validator {
     private static final String ERROR_NOT_PAIR_OF_BRACKET = "대괄호 쌍이 맞지않습니다.";
     private static final String ERROR_LESS_THAN_MINIMUM = "투입 금액보다 저렴한 상품이 없습니다.";
     private static final String ERROR_NOT_FOUND_PRODUCT = "입력한 상품이 존재하지 않습니다.";
-    private static final String ERROR_NOT_STACK_PRODUCT = "입력한 상품의 재고가 없습니다.";
+    private static final String ERROR_NOT_STOCK_PRODUCT = "입력한 상품의 재고가 없습니다.";
     private static final String BRACKET_START = "[";
     private static final String BRACKET_END = "]";
     private static final String PRODUCT_SPLIT_REGEX = ";";
     private static final String PRODUCT_INFO_SPLIT_REGEX = ",";
+    private static final String STRING_SPLIT_REGEX = "";
     private static final int HUNDRED = 100;
     private static final int TENS = 10;
 
@@ -57,14 +58,14 @@ public class Validator {
     }
 
     public void validateExistedProduct(ProductList productList, String product) {
-        if (!productList.findProductByName(product)) {
+        if (!productList.existProductName(product)) {
             throw new IllegalArgumentException(ERROR_NOT_FOUND_PRODUCT);
         }
     }
 
     public void validateProductIsAvailable(ProductList productList, String product) {
         if (!productList.isAvailableProduct(product)) {
-            throw new IllegalArgumentException(ERROR_NOT_STACK_PRODUCT);
+            throw new IllegalArgumentException(ERROR_NOT_STOCK_PRODUCT);
         }
     }
 
@@ -98,7 +99,7 @@ public class Validator {
     private int getCountOfSquareBracket(String productsInformation) {
         int countOfBracketStart = 0;
         int countOfBracketEnd = 0;
-        for (String productString : productsInformation.split("")) {
+        for (String productString : productsInformation.split(STRING_SPLIT_REGEX)) {
             if (productString.equals(BRACKET_START)) {
                 countOfBracketStart++;
             }
@@ -114,7 +115,7 @@ public class Validator {
 
     private int getCountOfSplitRegex(String productsInformation) {
         int countOfSplitRegex = 0;
-        for (String productString : productsInformation.split("")) {
+        for (String productString : productsInformation.split(STRING_SPLIT_REGEX)) {
             if (productString.equals(PRODUCT_SPLIT_REGEX)) {
                 countOfSplitRegex++;
             }

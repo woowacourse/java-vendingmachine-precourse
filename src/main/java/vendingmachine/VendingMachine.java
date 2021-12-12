@@ -30,10 +30,6 @@ public class VendingMachine extends LoopInput {
         change.createRandomChange();
     }
 
-    private boolean checkAvailableSellState() {
-        return productList.checkAvailableState(customer.getCustomerMoney());
-    }
-
     private void inputSellProduct(){
         String productName = inputString(BUY_PRODUCT_MESSAGE);
         validator.validateExistedProduct(productList, productName);
@@ -41,5 +37,9 @@ public class VendingMachine extends LoopInput {
         int productPrice = productList.sellProduct(productName);
         customer.calcCustomerMoney(productPrice);
         outputMessage.printInputMoney(customer.getCustomerMoney());
+    }
+
+    private boolean checkAvailableSellState() {
+        return productList.checkAvailableState(customer.getCustomerMoney());
     }
 }

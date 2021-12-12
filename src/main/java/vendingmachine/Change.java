@@ -7,6 +7,9 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change extends LoopInput {
     private static final String INPUT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";
+    private static final int ADD_COIN = 1;
+    private static final int DEFAULT_STOCK = 1;
+    private static final int ZERO = 0;
     private static final Validator validator = new Validator();
     private static HashMap<Coin, Integer> coinMap = new HashMap<>();
     private static OutputMessage outputMessage = new OutputMessage();
@@ -18,7 +21,7 @@ public class Change extends LoopInput {
 
     private void initialCoinMap() {
         for (Coin coin : Coin.values()) {
-            coinMap.put(coin, 0);
+            coinMap.put(coin, DEFAULT_STOCK);
         }
     }
 
@@ -37,31 +40,25 @@ public class Change extends LoopInput {
     public void returnChange(int customerMoney) {
         outputMessage.printChangeMessage();
         for (Coin coin : Coin.values()) {
-            int amount = coinMap.get(coin);
-            int returnAmount = coin.returnChange(customerMoney, amount);
-            coinMap.put(coin, amount - returnAmount);
-            customerMoney -= coin.calcChangePrice(returnAmount);
+            int coinStock = coinMap.get(coin);
+            int returnStock = coin.returnChange(customerMoney, coinStock);
+            coinMap.put(coin, coinStock - returnStock);
+            customerMoney -= coin.calcChangePrice(returnStock);
         }
     }
 
     public void createRandomChange() {
+        int ownChange = initialTotalChange;
         List<Integer> list = Coin.createCoinAmountList();
-        while (initialTotalChange != 0) {
-            int amount = Randoms.pickNumberInList(list);
-            if (amount > initialTotalChange) {
+        while (ownChange != ZERO) {
+            int coinAmount = Randoms.pickNumberInList(list);
+            if (coinAmount > ownChange) {
                 continue;
             }
-            initialTotalChange -= amount;
-            Coin coin = Coin.getCoinByAmount(amount);
-            coinMap.put(coin, coinMap.get(coin) + 1);
+            ownChange -= coinAmount;
+            Coin coin = Coin.getCoinByAmount(coinAmount);
+            coinMap.put(coin, coinMap.get(coin) + ADD_COIN);
         }
-        printNumberOfCoin();
-    }
-
-    private void printNumberOfCoin() {
-        outputMessage.printHaveCoinMessage();
-        for (Coin coin : Coin.values()) {
-            coin.printNumberOfCoin(coinMap.get(coin));
-        }
+        outputMessage.printAllCoin(coinMap);
     }
 }

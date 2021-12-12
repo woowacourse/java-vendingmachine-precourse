@@ -10,8 +10,7 @@ public enum Coin {
     COIN_10(10);
 
     private static final String COIN_NAME_PREFIX = "COIN_";
-    private static final String PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX = "원 - ";
-    private static final String PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX = "개";
+    private static OutputMessage outputMessage = new OutputMessage();
     private final int amount;
 
     Coin(final int amount) {
@@ -26,27 +25,19 @@ public enum Coin {
         return list;
     }
 
-    public void printNumberOfCoin(int number) {
-        System.out.println(this.amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + number + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
+    public int getAmount(){
+        return this.amount;
+    }
+    public int calcChangePrice(int stock) {
+        return this.amount * stock;
     }
 
-    public int calcChangePrice(int amount) {
-        return this.amount * amount;
-    }
-
-    public int returnChange(int customerMoney, int amount) {
-        if (customerMoney < this.amount * amount) {
-            amount = customerMoney / this.amount;
+    public int returnChange(int customerMoney, int returnStock) {
+        if (customerMoney < this.amount * returnStock) {
+            returnStock = customerMoney / this.amount;
         }
-        printReturnChange(amount);
-        return amount;
-    }
-
-    private void printReturnChange(int amount) {
-        if (amount == 0) {
-            return;
-        }
-        System.out.println(this.amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + amount + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
+        outputMessage.printReturnChange(this.amount, returnStock);
+        return returnStock;
     }
 
     public static Coin getCoinByAmount(int amount) {

@@ -4,46 +4,46 @@ import java.util.HashMap;
 
 public class ProductList extends LoopInput {
     private static final String INSERT_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
-    private static int MINIMUM_PRICE = Integer.MAX_VALUE;
     private static final HashMap<String, Product> productMap = new HashMap<>();
     private static final Validator validator = new Validator();
+    private static int minimumPrice = Integer.MAX_VALUE;
 
     public void inputMethod() {
         this.inputProductList();
     }
 
-    private void inputProductList() {
-        String productsInformation = inputString(INSERT_PRODUCT_MESSAGE);
-        initProductMap();
-        String[] productInformationList = validator.validateSplitRegex(productsInformation);
-        setNumberOfProducts(productInformationList);
+    public boolean existProductName(String name) {
+        return productMap.containsKey(name);
     }
 
-    public boolean findProductByName(String name) {
-        return productMap.containsKey(name);
+    private void inputProductList() {
+        String product = inputString(INSERT_PRODUCT_MESSAGE);
+        initProductMap();
+        String[] productList = validator.validateSplitRegex(product);
+        setNumberOfProducts(productList);
+    }
+
+    private void initProductMap() {
+        productMap.clear();
     }
 
     public boolean isAvailableProduct(String name) {
         Product product = productMap.get(name);
-        return product.isAvailable();
+        return product.existStock();
     }
 
     public boolean compareMinimumPrice(int customerMoney) {
-        return customerMoney >= MINIMUM_PRICE;
+        return customerMoney >= minimumPrice;
     }
 
     public boolean checkAvailableState(int customerMoney) {
-        return checkProductAmount() && checkAvailableBuyProduct(customerMoney);
+        return checkProductStock() && compareMinimumPrice(customerMoney);
     }
 
-    private boolean checkAvailableBuyProduct(int customerMoney) {
-        return customerMoney > MINIMUM_PRICE;
-    }
-
-    private boolean checkProductAmount() {
+    private boolean checkProductStock() {
         for (String name : productMap.keySet()) {
             Product product = productMap.get(name);
-            if (product.isAvailable()) {
+            if (product.existStock()) {
                 return true;
             }
         }
@@ -56,10 +56,6 @@ public class ProductList extends LoopInput {
         return sellProduct.price;
     }
 
-    private void initProductMap() {
-        productMap.clear();
-    }
-
     private void setNumberOfProducts(String[] productInformationList) {
         for (String productInformation : productInformationList) {
             Product product = validator.validateSplitProductInformation(productMap, productInformation);
@@ -69,8 +65,8 @@ public class ProductList extends LoopInput {
     }
 
     private void compareMinimumPrice(Product product) {
-        if (MINIMUM_PRICE > product.price) {
-            MINIMUM_PRICE = product.price;
+        if (minimumPrice > product.price) {
+            minimumPrice = product.price;
         }
     }
 }
