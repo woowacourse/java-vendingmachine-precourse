@@ -16,6 +16,7 @@ import vendingmachine.view.InputView;
 public class VendingMachineController {
 
 	private static List<Coin> coins = new ArrayList<>();
+	private static int customerMoney;
 	private InputView inputView;
 	private CoinService coinService;
 	private ItemService itemService;
@@ -39,12 +40,25 @@ public class VendingMachineController {
 			System.out.println(coin.getAmount() + " : " + coin.getNumberOfCoin());
 		}
 		items = itemService.getItems();
-		int customerMoney = moneyService.getCustomerMoney();
-		customerMoney = purchaseService.purchaseItem(items, customerMoney);
+	}
+
+	public void customerInit() {
+		customerMoney = moneyService.getCustomerMoney();
+	}
+
+	public void purchase() {
+		do {
+			customerMoney = purchaseService.purchaseItem(items, customerMoney);
+			moneyService.isEnoughMoneyForMinPriceItem(items, customerMoney);
+		} while (isContinuePurchase());
 		coinService.getRemainingCoins(coins, customerMoney);
-		for (Coin remainingCoin : coins) {
-			System.out.println(remainingCoin.getAmount() + " : " + remainingCoin.getRemainingNumber());
+	}
+
+	private boolean isContinuePurchase() {
+		if (moneyService.isEnoughMoneyForMinPriceItem(items, customerMoney) && itemService.isEnoughQuantityForItems(
+			items)) {
+			return true;
 		}
-		System.out.println(purchaseService.isEnoughMoneyForMinPriceItem(items, customerMoney));
+		return false;
 	}
 }
