@@ -1,6 +1,9 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 public enum Coin {
     COIN_500(500, 0, value -> value / 500),
@@ -19,10 +22,38 @@ public enum Coin {
         this.calculateChange = calculateChange;
     }
 
-    public int getAmount() {
-        return amount;
+//    public static Coin getByAmount(int amount) {
+//        return Arrays.stream(Coin.values())
+//                .filter(coin -> coin.isEqual(amount))
+//                .findAny()
+//                .get();
+//    }
+//
+//    public boolean isEqual(int amount){
+//        if( this.amount == amount){
+//            return true;
+//        }
+//        return false;
+//    }
+
+    public static boolean isPossible(int amount,Coin coin){
+        if(amount >= coin.amount){
+            return true;
+        }
+        return false;
     }
 
+
+    public static List<Integer> convertAmountList(List<Coin> possibleCoinList){
+        return possibleCoinList.stream()
+                .map(coin-> coin.amount)
+                .collect(Collectors.toList());
+    }
+
+
+    public int multiply(int value){
+        return this.amount * value;
+    }
 
     public int calculateChange(int value){return calculateChange.apply(value);}
 
