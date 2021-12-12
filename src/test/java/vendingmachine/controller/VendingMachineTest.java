@@ -13,9 +13,11 @@ import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.CoinRepository;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.MoneyRepository;
 import vendingmachine.domain.Name;
 import vendingmachine.domain.ProductRepository;
+import vendingmachine.domain.Products;
 import vendingmachine.enums.Coin;
 
 public class VendingMachineTest extends NsTest {
@@ -315,6 +317,37 @@ public class VendingMachineTest extends NsTest {
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
 				}
+			}
+		);
+	}
+
+	@DisplayName("상품 판매 기능 테스트")
+	@Test
+	void sell_product_test() {
+		assertSimpleTest(
+			() -> {
+				MoneyRepository.add(new Money("3000"));
+				Products products = new Products("[콜라,500,1]");
+				products.save();
+				runException("콜라");
+				vendingMachine.sellProduct();
+				assertFalse(ProductRepository.findByName(new Name("콜라")).canSell());
+			}
+		);
+	}
+
+	@DisplayName("상품 반복 판매 기능 테스트")
+	@Test
+	void sell_product_repeat_test() {
+		assertSimpleTest(
+			() -> {
+				MoneyRepository.add(new Money("3000"));
+				Products products = new Products("[콜라,500,1];[사이다,300,1]");
+				products.save();
+				run("콜라", "사이다");
+				vendingMachine.sellProduct();
+				assertFalse(ProductRepository.findByName(new Name("콜라")).canSell());
+				assertFalse(ProductRepository.findByName(new Name("사이다")).canSell());
 			}
 		);
 	}
