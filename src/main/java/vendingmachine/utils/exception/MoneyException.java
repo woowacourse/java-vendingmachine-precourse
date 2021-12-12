@@ -18,43 +18,43 @@ public class MoneyException {
 	private static final String OVER_RANGE_ERROR_MESSAGE = "최대 허용하는 정수값을 초과했습니다.";
 
 	public static void validateInputMoney(String inputMoney) {
-		if (!validateSpace(inputMoney)) {
+		if (containSpace(inputMoney)) {
 			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
 		}
-		if (!validateNumber(inputMoney)) {
+		if (!isNumber(inputMoney)) {
 			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
 		}
-		if (!validateMaxValue(inputMoney)) {
+		if (!isOverIntMaxValue(inputMoney)) {
 			throw new IllegalArgumentException(ERROR_HEADER + OVER_RANGE_ERROR_MESSAGE);
 		}
 	}
 
 	public static void validateMoney(int money) {
-		if (!validatePositiveNumber(money)) {
+		if (isNegativeNumber(money)) {
 			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
 		}
-		if (!validateMultiplicationOfTen(money)) {
+		if (!isMultiplicationOfTen(money)) {
 			throw new IllegalArgumentException(ERROR_HEADER + UNIT_ERROR_MESSAGE);
 		}
 	}
 
-	public static boolean validateSpace(String inputMoney) {
-		return (!(inputMoney.contains(SPACE) || inputMoney.isEmpty()));
+	public static boolean containSpace(String inputMoney) {
+		return inputMoney.contains(SPACE) || inputMoney.isEmpty();
 	}
 
-	public static boolean validatePositiveNumber(int inputMoney) {
-		return inputMoney >= MINIMUM_NATURAL_NUMBER;
+	public static boolean isNegativeNumber(int inputMoney) {
+		return inputMoney < MINIMUM_NATURAL_NUMBER;
 	}
 
-	private static boolean validateNumber(String inputMoney) {
+	public static boolean isNumber(String inputMoney) {
 		return inputMoney.matches(REGULAR_EXPRESSION_ONLY_NUMBER);
 	}
 
-	private static boolean validateMultiplicationOfTen(int inputMoney) {
+	private static boolean isMultiplicationOfTen(int inputMoney) {
 		return inputMoney % MINIMUM_UNIT_OF_MONEY == APPROPRIATE_REMAINDER;
 	}
 
-	private static boolean validateMaxValue(String inputMoney) {
+	private static boolean isOverIntMaxValue(String inputMoney) {
 		return Long.parseLong(inputMoney) <= MAXIMUM_INT_VALUE;
 	}
 }

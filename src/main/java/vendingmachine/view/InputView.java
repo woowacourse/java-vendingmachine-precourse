@@ -12,22 +12,15 @@ public class InputView {
 
 	public static int writeVendingMachineAmount() {
 		OutputView.askVendingMachineAmount();
-		String inputMoney = Console.readLine();
-		try {
-			MoneyException.validateInputMoney(inputMoney);
-			int money = Integer.parseInt(inputMoney);
-			MoneyException.validateMoney(money);
-			return money;
-		} catch (IllegalArgumentException IAE) {
-			OutputView.printError(IAE);
-			return writeVendingMachineAmount();
-		}
+		return writeInputMoney();
 	}
 
 	public static String writeProductsInfo() {
 		OutputView.askProductInfo();
 		try {
-			return ProductException.validateInputProductsInfo(Console.readLine());
+			String inputProductsInfo = Console.readLine();
+			ProductException.validateInputProductsInfo(inputProductsInfo);
+			return inputProductsInfo;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
 			return writeProductsInfo();
@@ -36,16 +29,7 @@ public class InputView {
 
 	public static int writeInsertMoney() {
 		OutputView.askInsertMoney();
-		String inputMoney = Console.readLine();
-		try {
-			MoneyException.validateInputMoney(inputMoney);
-			int money = Integer.parseInt(inputMoney);
-			MoneyException.validateMoney(money);
-			return money;
-		} catch (IllegalArgumentException IAE) {
-			OutputView.printError(IAE);
-			return writeInsertMoney();
-		}
+		return writeInputMoney();
 	}
 
 	public static String writeProductNameToBuy(VendingMachine vendingMachine) {
@@ -53,12 +37,25 @@ public class InputView {
 		OutputView.askProductToBuy();
 		String inputName = Console.readLine();
 		try {
-			ProductException.validateNameOfProduct(inputName, vendingMachine);
-			ProductException.validateProductSoldOut(inputName, vendingMachine.getProducts());
+			ProductException.validateName(inputName, vendingMachine);
+			ProductException.validateSoldOut(inputName, vendingMachine.getProducts());
 			return inputName;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
 			return writeProductNameToBuy(vendingMachine);
+		}
+	}
+
+	private static int writeInputMoney() {
+		try {
+			String inputMoney = Console.readLine();
+			MoneyException.validateInputMoney(inputMoney);
+			int money = Integer.parseInt(inputMoney);
+			MoneyException.validateMoney(money);
+			return money;
+		} catch (IllegalArgumentException IAE) {
+			OutputView.printError(IAE);
+			return writeVendingMachineAmount();
 		}
 	}
 }

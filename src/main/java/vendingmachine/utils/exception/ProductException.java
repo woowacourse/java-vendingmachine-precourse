@@ -1,7 +1,6 @@
 package vendingmachine.utils.exception;
 
 import java.util.List;
-import java.util.Objects;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import vendingmachine.model.Product;
@@ -9,6 +8,7 @@ import vendingmachine.model.VendingMachine;
 
 public class ProductException {
 
+	private static final int INITIAL_VALUE = 0;
 	private static final int MINIMUM_PRICE = 100;
 	private static final String ERROR_HEADER = "[ERROR] ";
 	private static final String SPACE_ERROR_MESSAGE = "공백이 입력되었습니다.";
@@ -24,40 +24,29 @@ public class ProductException {
 	private ProductException() {
 	}
 
-	public static String validateInputProductsInfo(String inputProductsInfo) {
-		if (!Pattern.matches(REGULAR_EXPRESSION_PRODUCT_INFO, inputProductsInfo)) {
+	public static void validateInputProductsInfo(String inputProductsInfo) {
+		if (MoneyException.containSpace(inputProductsInfo)) {
+			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
+		}
+		if (!isRightExpression(inputProductsInfo)) {
 			throw new IllegalArgumentException(
 				ERROR_HEADER + INVALID_PRODUCT_EXPRESSION_ERROR_MESSAGE);
 		}
-		return inputProductsInfo;
 	}
 
-	public static void validateNameOfProduct(String name, VendingMachine vendingMachine) {
+	public static void validateName(String name, VendingMachine vendingMachine) {
 		List<Product> products = vendingMachine.getProducts();
-		if (!MoneyException.validateSpace(name)) {
-			throw new IllegalArgumentException(ERROR_HEADER + SPACE_ERROR_MESSAGE);
-		}
-		if (!validateProductInVendingMachine(name, products)) {
+		if (!containInVendingMachine(name, products)) {
 			throw new IllegalArgumentException((ERROR_HEADER + NOT_IN_VENDING_MACHINE));
 		}
-		for (Product product : products) {
-			validateExpensiveProduct(name, product, vendingMachine.getRemainInsertMoney());
+		if (isExpensiveThanRemain(products, name, vendingMachine.getRemainInsertMoney())) {
+			throw new IllegalArgumentException(ERROR_HEADER + INVALID_EXPENSIVE_PRODUCT);
 		}
 	}
 
-	public static int validatePriceOfProductsInfo(int price) {
-		MoneyException.validateMoney(price);
-		if (!validateOver100(price)) {
-			throw new IllegalArgumentException(ERROR_HEADER + INVALID_PRICE_ERROR_MESSAGE);
-		}
-		return price;
-	}
-
-	public static int validateNumberOfProductsInfo(int number) {
-		if (!MoneyException.validatePositiveNumber(number)) {
-			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
-		}
-		return number;
+	public static void validateFilteredInfo(String[] filteredInfo) {
+		validatePrice(filteredInfo[1]);
+		validateNumber(filteredInfo[2]);
 	}
 
 	public static void validateDuplicatedName(List<Product> products) {
@@ -66,29 +55,54 @@ public class ProductException {
 		}
 	}
 
-	public static void validateProductSoldOut(String inputProduct, List<Product> products) {
+	public static void validateSoldOut(String inputProduct, List<Product> products) {
 		if (products.stream().filter(product -> product.getName().equals(inputProduct))
 			.anyMatch(Product::isSoldOut)) {
 			throw new IllegalArgumentException(ERROR_HEADER + SOLD_OUT_ERROR);
 		}
 	}
 
-	private static boolean validateProductInVendingMachine(String inputProduct,
+	private static void validatePrice(String inputPrice) {
+		if (!MoneyException.isNumber(inputPrice)) {
+			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
+		}
+		int price = Integer.parseInt(inputPrice);
+		MoneyException.validateMoney(price);
+		if (!isOver100(price)) {
+			throw new IllegalArgumentException(ERROR_HEADER + INVALID_PRICE_ERROR_MESSAGE);
+		}
+	}
+
+	private static void validateNumber(String inputNumber) {
+		if (!MoneyException.isNumber(inputNumber)) {
+			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
+		}
+		int number = Integer.parseInt(inputNumber);
+		if (MoneyException.isNegativeNumber(number)) {
+			throw new IllegalArgumentException(ERROR_HEADER + NATURAL_NUMBER_ERROR_MESSAGE);
+		}
+	}
+
+	private static boolean isRightExpression(String inputProductsInfo) {
+		return Pattern.matches(REGULAR_EXPRESSION_PRODUCT_INFO, inputProductsInfo);
+	}
+
+	private static boolean containInVendingMachine(String inputProduct,
 		List<Product> products) {
 		return products.stream().map(Product::getName).collect(Collectors.toList())
 			.contains(inputProduct);
 	}
 
-	private static void validateExpensiveProduct(String inputProduct, Product product,
-		int remainInsertMoney) {
-		if (Objects.equals(product.getName(), inputProduct)) {
-			if (product.getPrice() > remainInsertMoney) {
-				throw new IllegalArgumentException(ERROR_HEADER + INVALID_EXPENSIVE_PRODUCT);
-			}
-		}
+	private static boolean isExpensiveThanRemain(List<Product> products, String name, int remain) {
+		int numberOfProductsExpensiveThanRemain = (int) products.
+			stream().
+			filter(product -> product.getName().equals(name)).
+			filter(product -> product.getPrice() > remain)
+			.count();
+		return numberOfProductsExpensiveThanRemain != INITIAL_VALUE;
 	}
 
-	private static boolean validateOver100(int money) {
+	private static boolean isOver100(int money) {
 		return money >= MINIMUM_PRICE;
 	}
 }

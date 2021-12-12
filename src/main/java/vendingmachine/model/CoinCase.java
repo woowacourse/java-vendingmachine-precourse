@@ -3,6 +3,7 @@ package vendingmachine.model;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.List;
+import vendingmachine.utils.exception.MoneyException;
 
 public class CoinCase {
 
@@ -13,8 +14,10 @@ public class CoinCase {
 	private static final int MINIMUM_RANGE = 1;
 
 	public CoinCase(Coin coin, int currentAmount) {
-		this.coin = coin;
+		// 검증을 먼저 하면 가끔씩 currnetAmount에 0이 들어가서 에러 발생. 이유??
+		// MoneyException.validateMoney(currentAmount);
 		this.currentAmount = currentAmount;
+		this.coin = coin;
 		this.count = calculateCountOfCoin();
 	}
 
@@ -34,7 +37,7 @@ public class CoinCase {
 	public int returnChange(int changeUserWant) {
 		if (count < changeUserWant) {
 			changeUserWant = count;
-			count = 0;
+			count = INITIAL_VALUE;
 			return changeUserWant;
 		}
 		count -= changeUserWant;

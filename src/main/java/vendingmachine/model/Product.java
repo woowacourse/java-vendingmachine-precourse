@@ -4,6 +4,7 @@ import vendingmachine.utils.exception.ProductException;
 
 public class Product {
 
+	private final String productInfo;
 	private final String name;
 	private final int price;
 	private int number;
@@ -16,13 +17,12 @@ public class Product {
 	private static final String PRODUCT_BRACKET_RIGHT = "]";
 
 	public Product(String productInfo) {
-		productInfo = ProductException.validateInputProductsInfo(productInfo);
-		String[] info = removeBrackets(productInfo).split(PRODUCT_INFO_DELIMITER);
-		this.name = info[NAME_INDEX];
-		this.price = ProductException.validatePriceOfProductsInfo(
-			Integer.parseInt(info[PRICE_INDEX]));
-		this.number = ProductException.validateNumberOfProductsInfo(
-			Integer.parseInt(info[NUMBER_INDEX]));
+		this.productInfo = productInfo;
+		String[] filteredInfo = filterInfo();
+		ProductException.validateFilteredInfo(filteredInfo);
+		this.name = filteredInfo[NAME_INDEX];
+		this.price = Integer.parseInt(filteredInfo[PRICE_INDEX]);
+		this.number = Integer.parseInt(filteredInfo[NUMBER_INDEX]);
 	}
 
 	public String getName() {
@@ -49,5 +49,10 @@ public class Product {
 		return productInfo
 			.replace(PRODUCT_BRACKET_LEFT, "")
 			.replace(PRODUCT_BRACKET_RIGHT, "");
+	}
+
+	private String[] filterInfo() {
+		ProductException.validateInputProductsInfo(productInfo);
+		return removeBrackets(productInfo).split(PRODUCT_INFO_DELIMITER);
 	}
 }

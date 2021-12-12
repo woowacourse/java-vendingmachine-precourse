@@ -3,6 +3,7 @@ package vendingmachine.model;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import vendingmachine.utils.exception.MoneyException;
 
 public class Changes {
 
@@ -12,6 +13,7 @@ public class Changes {
 	private static final int INITIAL_VALUE = 0;
 
 	public Changes(List<CoinCase> coinCases, int remainInsertMoney) {
+		MoneyException.validateMoney(remainInsertMoney);
 		this.coinCases = coinCases;
 		this.remainInsertMoney = remainInsertMoney;
 		this.changes = calculateChanges();
