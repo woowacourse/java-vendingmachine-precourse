@@ -1,6 +1,10 @@
 package vendingmachine.view;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import vendingmachine.models.Item;
+import vendingmachine.utils.Indexes;
 
 public class ItemInformationInputView implements InputView {
 	private static final String FIRST_DELIMITER = ";";
@@ -17,5 +21,16 @@ public class ItemInformationInputView implements InputView {
 			doubleSplit.add(eachFirstParsed.split(SECOND_DELIMITER));
 		}
 		return doubleSplit;
+	}
+
+	public HashMap<String, Item> parse(String input) {
+		HashMap<String, Item> parsedItem = new HashMap<>();
+		ArrayList<String[]> nowParsedInput = generateDoubleSplit(input);
+		for (String[] eachParsed : nowParsedInput) {
+			parsedItem.put(eachParsed[Indexes.NAME_INDEX.getValue()],
+				new Item(Integer.valueOf(eachParsed[Indexes.PRICE_INDEX.getValue()]),
+					Integer.valueOf(eachParsed[Indexes.AMOUNT_INDEX.getValue()])));
+		}
+		return parsedItem;
 	}
 }
