@@ -15,6 +15,10 @@ public class OutputView {
 	private static final String RESPONSE_COIN_QUANTITY_FORM = "%d원 - %d개";
 	private static final String RESPONSE_NOW_MONEY_FORM = "투입 금액: %d원";
 
+	public static void outputExceptionMessage(IllegalArgumentException e) {
+		System.out.println(e.getMessage());
+	}
+
 	public static void outputAllCoinQuantity(ResponseAllCoinQuantity responseAllCoinQuantity) {
 		HashMap<Coin, Quantity> coins = responseAllCoinQuantity.getCoins();
 		System.out.println(RESPONSE_ALL_COIN_QUANTITY_MESSAGE);

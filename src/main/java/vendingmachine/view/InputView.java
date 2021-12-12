@@ -17,42 +17,24 @@ public class InputView {
 	private static final String REQUEST_SELL_PRODUCT_MESSAGE = "구매할 상품명을 입력해 주세요.";
 
 	public static RequestHoldingMoneyDto inputHoldingMoney() {
-		while (true) {
-			try {
-				System.out.println(REQUEST_HOLDING_AMOUNT_MESSAGE);
-				Money money = new Money(readLine());
-				System.out.println();
-				return new RequestHoldingMoneyDto(money);
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+		System.out.println(REQUEST_HOLDING_AMOUNT_MESSAGE);
+		Money money = new Money(readLine());
+		System.out.println();
+		return new RequestHoldingMoneyDto(money);
 	}
 
 	public static RequestRegisterProductsDto inputRegisterProducts() {
-		while (true) {
-			try {
-				System.out.println(REQUEST_REGISTER_PRODUCT_MESSAGE);
-				Products products = new Products(readLine());
-				System.out.println();
-				return new RequestRegisterProductsDto(products);
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+		System.out.println(REQUEST_REGISTER_PRODUCT_MESSAGE);
+		Products products = new Products(readLine());
+		System.out.println();
+		return new RequestRegisterProductsDto(products);
 	}
 
 	public static RequestInsertMoneyDto inputInsertMoney() {
-		while (true) {
-			try {
-				System.out.println(REQUEST_INSERT_MONEY_MESSAGE);
-				Money money = new Money(readLine());
-				System.out.println();
-				return new RequestInsertMoneyDto(money);
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			}
-		}
+		System.out.println(REQUEST_INSERT_MONEY_MESSAGE);
+		Money money = new Money(readLine());
+		System.out.println();
+		return new RequestInsertMoneyDto(money);
 	}
 
 	public static RequestSellProductDto inputSellProduct() {

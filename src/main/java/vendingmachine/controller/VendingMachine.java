@@ -20,8 +20,15 @@ public class VendingMachine {
 	}
 
 	public void initHoldingMoney() {
-		RequestHoldingMoneyDto requestHoldingMoneyDto = inputHoldingMoney();
-		vendingMachineService.initCoinRepository(requestHoldingMoneyDto);
+		while (true) {
+			try {
+				RequestHoldingMoneyDto requestHoldingMoneyDto = inputHoldingMoney();
+				vendingMachineService.initCoinRepository(requestHoldingMoneyDto);
+				return;
+			} catch (IllegalArgumentException e) {
+				outputExceptionMessage(e);
+			}
+		}
 	}
 
 	public void showAllCoinQuantity() {
@@ -30,8 +37,15 @@ public class VendingMachine {
 	}
 
 	public void registerProducts() {
-		RequestRegisterProductsDto requestHoldingMoneyDto = inputRegisterProducts();
-		vendingMachineService.registerProducts(requestHoldingMoneyDto);
+		while (true) {
+			try {
+				RequestRegisterProductsDto requestHoldingMoneyDto = inputRegisterProducts();
+				vendingMachineService.registerProducts(requestHoldingMoneyDto);
+				return;
+			} catch (IllegalArgumentException e) {
+				outputExceptionMessage(e);
+			}
+		}
 	}
 
 	public void sellProduct() {
@@ -43,8 +57,15 @@ public class VendingMachine {
 	}
 
 	private void insertMoney() {
-		RequestInsertMoneyDto requestInsertMoneyDto = inputInsertMoney();
-		vendingMachineService.insertMoney(requestInsertMoneyDto);
+		while (true) {
+			try {
+				RequestInsertMoneyDto requestInsertMoneyDto = inputInsertMoney();
+				vendingMachineService.insertMoney(requestInsertMoneyDto);
+				return;
+			} catch (IllegalArgumentException e) {
+				outputExceptionMessage(e);
+			}
+		}
 	}
 
 	private void sellProductStep() {
@@ -56,7 +77,7 @@ public class VendingMachine {
 				vendingMachineService.sellProduct(requestSellProductDto);
 				return;
 			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
+				outputExceptionMessage(e);
 			}
 		}
 	}
