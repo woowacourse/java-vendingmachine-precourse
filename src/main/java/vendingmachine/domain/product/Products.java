@@ -1,12 +1,12 @@
-package vendingmachine.product;
+package vendingmachine.domain.product;
 
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import vendingmachine.Money;
-import vendingmachine.Notification;
+import vendingmachine.domain.money.Money;
+import vendingmachine.constant.Notification;
 
 public class Products {
 	private final Map<String, Product> products;

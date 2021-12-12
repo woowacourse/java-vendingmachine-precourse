@@ -1,7 +1,8 @@
-package vendingmachine;
+package vendingmachine.domain.vendingmachine;
 
-import vendingmachine.coin.Coins;
-import vendingmachine.product.Products;
+import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.money.Money;
+import vendingmachine.domain.product.Products;
 
 public class VendingMachine {
 	private final Coins coins = new Coins();

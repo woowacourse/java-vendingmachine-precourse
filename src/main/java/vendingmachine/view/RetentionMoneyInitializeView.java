@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
-import vendingmachine.VendingMachineController;
-import vendingmachine.coin.Coins;
+import vendingmachine.controller.VendingMachineController;
+import vendingmachine.domain.coin.Coins;
 
 public class RetentionMoneyInitializeView extends VendingMachineView {
 	public RetentionMoneyInitializeView(VendingMachineController controller) {

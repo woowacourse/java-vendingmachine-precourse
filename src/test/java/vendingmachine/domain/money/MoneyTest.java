@@ -1,8 +1,10 @@
-package vendingmachine;
+package vendingmachine.domain.money;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import vendingmachine.constant.Notification;
 
 class MoneyTest {
 	@Test

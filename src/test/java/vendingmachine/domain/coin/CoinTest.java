@@ -1,11 +1,11 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.Money;
-import vendingmachine.Notification;
+import vendingmachine.constant.Notification;
+import vendingmachine.domain.money.Money;
 import vendingmachine.exception.DomainNotFoundException;
 
 class CoinTest {

@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.controller.VendingMachineController;
 import vendingmachine.view.ChangeReturnView;
 import vendingmachine.view.MoneyInputView;
 import vendingmachine.view.ProductInitializeView;

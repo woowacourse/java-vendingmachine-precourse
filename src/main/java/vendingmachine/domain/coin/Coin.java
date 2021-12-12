@@ -1,4 +1,4 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import vendingmachine.Money;
-import vendingmachine.quantity.Quantity;
+import vendingmachine.domain.money.Money;
+import vendingmachine.domain.quantity.Quantity;
 
 public enum Coin {
 

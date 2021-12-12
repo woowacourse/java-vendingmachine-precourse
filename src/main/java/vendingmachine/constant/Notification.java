@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.constant;
 
 public enum Notification {
 	AMOUNT_CONVERT_FAILURE("[ERROR] 금액은 숫자여야 합니다."),

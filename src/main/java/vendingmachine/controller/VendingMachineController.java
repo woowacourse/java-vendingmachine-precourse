@@ -1,8 +1,10 @@
-package vendingmachine;
+package vendingmachine.controller;
 
-import vendingmachine.coin.Coins;
+import vendingmachine.service.VendingMachineService;
+import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.money.Money;
 import vendingmachine.dto.ProductDto;
-import vendingmachine.product.Products;
+import vendingmachine.domain.product.Products;
 
 public class VendingMachineController {
 	private final VendingMachineService vendingMachineService = new VendingMachineService();

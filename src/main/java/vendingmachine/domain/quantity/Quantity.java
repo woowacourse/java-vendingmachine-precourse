@@ -1,6 +1,6 @@
-package vendingmachine.quantity;
+package vendingmachine.domain.quantity;
 
-import vendingmachine.Notification;
+import vendingmachine.constant.Notification;
 import vendingmachine.exception.OutOfBoundException;
 
 public class Quantity {

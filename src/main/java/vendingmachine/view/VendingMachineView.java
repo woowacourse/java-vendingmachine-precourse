@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.VendingMachineController;
+import vendingmachine.controller.VendingMachineController;
 import vendingmachine.processor.InputProcessor;
 import vendingmachine.processor.OutputProcessor;
 

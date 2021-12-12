@@ -1,8 +1,8 @@
 package vendingmachine.view;
 
-import vendingmachine.Money;
-import vendingmachine.VendingMachineController;
-import vendingmachine.coin.Coins;
+import vendingmachine.domain.money.Money;
+import vendingmachine.controller.VendingMachineController;
+import vendingmachine.domain.coin.Coins;
 
 public class ChangeReturnView extends VendingMachineView {
 	public ChangeReturnView(VendingMachineController controller) {

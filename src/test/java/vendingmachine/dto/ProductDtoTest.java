@@ -6,8 +6,8 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.product.Product;
-import vendingmachine.product.Products;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
 
 class ProductDtoTest {
 	@Test

@@ -1,9 +1,11 @@
-package vendingmachine;
+package vendingmachine.service;
 
-import vendingmachine.coin.CoinGenerator;
-import vendingmachine.coin.Coins;
-import vendingmachine.coin.RandomCoinGenerator;
-import vendingmachine.product.Products;
+import vendingmachine.domain.coin.CoinGenerator;
+import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.coin.RandomCoinGenerator;
+import vendingmachine.domain.money.Money;
+import vendingmachine.domain.product.Products;
+import vendingmachine.domain.vendingmachine.VendingMachine;
 
 public class VendingMachineService {
 	private final VendingMachine vendingMachine = new VendingMachine();

@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.VendingMachineController;
+import vendingmachine.controller.VendingMachineController;
 
 public class ProductInitializeView extends VendingMachineView {
 	public ProductInitializeView(VendingMachineController controller) {

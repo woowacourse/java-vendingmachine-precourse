@@ -1,8 +1,8 @@
 package vendingmachine.dto;
 
-import vendingmachine.Notification;
-import vendingmachine.product.Product;
-import vendingmachine.product.Products;
+import vendingmachine.constant.Notification;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
 
 public class ProductDto {
 	private static final int PRODUCT_COMPOSITION_SIZE = 3;

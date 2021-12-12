@@ -1,10 +1,10 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Money;
-import vendingmachine.Notification;
+import vendingmachine.domain.money.Money;
+import vendingmachine.constant.Notification;
 import vendingmachine.exception.DomainNotFoundException;
 
 public class RandomCoinGenerator implements CoinGenerator {

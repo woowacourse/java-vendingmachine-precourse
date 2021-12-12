@@ -1,9 +1,9 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.Money;
+import vendingmachine.domain.money.Money;
 
 class CoinGeneratorTest {
 	@Test

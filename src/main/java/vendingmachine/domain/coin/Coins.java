@@ -1,12 +1,12 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import vendingmachine.Money;
-import vendingmachine.quantity.Quantity;
+import vendingmachine.domain.money.Money;
+import vendingmachine.domain.quantity.Quantity;
 
 public class Coins {
 	private final Map<Coin, Quantity> coins;

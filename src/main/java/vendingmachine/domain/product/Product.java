@@ -1,9 +1,9 @@
-package vendingmachine.product;
+package vendingmachine.domain.product;
 
-import vendingmachine.Money;
-import vendingmachine.Notification;
+import vendingmachine.domain.money.Money;
+import vendingmachine.constant.Notification;
+import vendingmachine.domain.quantity.Quantity;
 import vendingmachine.exception.OutOfBoundException;
-import vendingmachine.quantity.Quantity;
 
 public class Product {
 	private static final int MINIMUM_PRICE = 100;

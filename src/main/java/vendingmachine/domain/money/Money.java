@@ -1,9 +1,10 @@
-package vendingmachine;
+package vendingmachine.domain.money;
 
 import java.util.Objects;
 
+import vendingmachine.constant.Notification;
 import vendingmachine.exception.OutOfBoundException;
-import vendingmachine.quantity.Quantity;
+import vendingmachine.domain.quantity.Quantity;
 
 public class Money implements Comparable<Money> {
 	private static final int MINIMUM_UNIT = 10;

@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
-import vendingmachine.Money;
-import vendingmachine.VendingMachineController;
+import vendingmachine.domain.money.Money;
+import vendingmachine.controller.VendingMachineController;
 
 public class ProductPurchaseView extends VendingMachineView {
 	public ProductPurchaseView(VendingMachineController controller) {
