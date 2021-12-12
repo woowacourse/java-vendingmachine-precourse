@@ -1,6 +1,5 @@
 package vendingmachine.manager;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import vendingmachine.constants.ErrorConstants;
@@ -33,7 +32,7 @@ public class ProductManager {
 
 	private boolean checkUserCanBuyProduct(int userBalance) {
 		for(Product product : productList) {
-			if(product.compareToPrice(userBalance)) {
+			if(product.checkCanBuyWithMoney(userBalance)) {
 				return true;
 			}
 		}

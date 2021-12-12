@@ -7,10 +7,10 @@ import vendingmachine.constants.ViewConstants;
 import vendingmachine.domain.Product;
 
 public class InputManager {
-	private final Converter converter;
+	private final Validator validator;
 
 	public InputManager() {
-		this.converter = new Converter();
+		this.validator = new Validator();
 	}
 
 	public int getStorageMoney() {
@@ -26,7 +26,7 @@ public class InputManager {
 			print(askMessage);
 			String inputString = Console.readLine();
 			try {
-				return converter.convertMoney(inputString);
+				return validator.validateMoney(inputString);
 			}catch (IllegalArgumentException e) {
 				print(e.getMessage());
 			}
@@ -38,7 +38,7 @@ public class InputManager {
 			print(ViewConstants.ASK_PRODUCT_LIST);
 			String inputString = Console.readLine();
 			try {
-				return converter.convertToProductList(inputString);
+				return validator.validateProductList(inputString);
 			}catch (IllegalArgumentException e) {
 				print(e.getMessage());
 			}

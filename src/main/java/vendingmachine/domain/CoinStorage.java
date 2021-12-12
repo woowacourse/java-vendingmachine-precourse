@@ -18,9 +18,9 @@ public class CoinStorage {
 	}
 
 	private void init() {
-		this.coinMap = new EnumMap<Coin, Integer>(Coin.class);
+		this.coinMap = new EnumMap<>(Coin.class);
 		for(Coin coin : Coin.values()) {
-			coinMap.put(coin, DEFAULT_QUANTITY);
+			setCoinQuantity(coin, DEFAULT_QUANTITY);
 		}
 	}
 
@@ -40,7 +40,7 @@ public class CoinStorage {
 	}
 
 	public EnumMap<Coin, Integer> getChange(int remainedMoney) {
-		EnumMap<Coin, Integer> changeMap = new EnumMap<Coin, Integer>(Coin.class);
+		EnumMap<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
 		for(Coin coin : coinMap.keySet()) {
 			if(remainedMoney <= 0) {
 				break;
@@ -48,7 +48,7 @@ public class CoinStorage {
 			int changeQuantity = calculateChangeQuantity(coin, remainedMoney);
 			if(changeQuantity > 0) {
 				changeMap.put(coin, changeQuantity);
-				coinMap.put(coin, getCoinQuantity(coin) - changeQuantity);
+				setCoinQuantity(coin, getCoinQuantity(coin) - changeQuantity);
 				remainedMoney -= coin.getAmount() * changeQuantity;
 			}
 		}
@@ -69,11 +69,11 @@ public class CoinStorage {
 		coinMap.put(coin, coinMap.get(coin) + 1);
 	}
 
-	public int getCoinQuantity(Coin coin) {
-		return coinMap.get(coin);
+	private void setCoinQuantity(Coin coin, int quantity) {
+		coinMap.put(coin, quantity);
 	}
 
-	public String toString() {
-		return coinMap.toString();
+	public int getCoinQuantity(Coin coin) {
+		return coinMap.get(coin);
 	}
 }

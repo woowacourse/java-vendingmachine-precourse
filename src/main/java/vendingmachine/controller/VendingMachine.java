@@ -24,7 +24,7 @@ public class VendingMachine {
 
 	public void start() {
 		init();
-		buyProduct();
+		buyProducts();
 		getChange();
 	}
 
@@ -43,7 +43,7 @@ public class VendingMachine {
 		outputManager.notifyStorageCoinStart();
 		for(Coin coin : Coin.values()) {
 			int quantity = coinStorage.getCoinQuantity(coin);
-			outputManager.notifyStorageCoinInLine(coin, quantity);
+			outputManager.notifyQuantityByCoin(coin, quantity);
 		}
 	}
 
@@ -55,17 +55,17 @@ public class VendingMachine {
 		userBalance = new UserBalance(inputManager.getUserBalance());
 	}
 
-	private void buyProduct() {
+	private void buyProducts() {
 		while(true) {
 			outputManager.notifyUserBalance(userBalance.getUserBalance());
 			if(!productManager.checkCanBuyProduct(userBalance.getUserBalance())) {
 				return;
 			}
 			String productName = inputManager.getProductName();
-			if(checkProductExist(productName)) {
+			if(!checkProductExist(productName)) {
 				continue;
 			}
-			buy(productName);
+			buyProduct(productName);
 		}
 	}
 
@@ -74,12 +74,12 @@ public class VendingMachine {
 			productManager.checkProductExist(productName);
 		} catch (IllegalArgumentException e) {
 			inputManager.print(e.getMessage());
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
-	private void buy(String name) {
+	private void buyProduct(String name) {
 		Product product = productManager.searchProduct(name);
 
 		product.reduceQuantity(1);

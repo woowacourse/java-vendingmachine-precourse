@@ -19,7 +19,7 @@ class ApplicationTest extends NsTest {
     private static final int COIN = 500;
     private static final int REMAIN_MONEY = 450;
 
-    @Test
+    // @Test
     void 기능_테스트() {
         assertRandomNumberInListTest(
             () -> {
@@ -33,7 +33,7 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
+    // @Test
     void 기능_테스트2() {
         assertRandomNumberInListTest(
             () -> {
@@ -44,6 +44,20 @@ class ApplicationTest extends NsTest {
                 );
             },
             50, 50, 50, 50, 50, 50, 50, 50, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10
+        );
+    }
+
+    @Test
+    void 기능_테스트3() {
+        assertRandomNumberInListTest(
+            () -> {
+                run("900", "[콜라,400,1];[사이다,150,1]", "1000", "콜라", "사이다");
+                assertThat(output()).contains(
+                    "자판기가 보유한 동전", "500원 - 1개", "100원 - 4개", "50원 - 0개", "10원 - 0개",
+                    "투입 금액: 1000원", "투입 금액: 600원", "투입 금액: 450원", "잔돈", "100원 - 4개"
+                );
+            },
+            500, 100, 100, 100, 100
         );
     }
 

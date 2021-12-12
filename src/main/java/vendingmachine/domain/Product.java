@@ -14,11 +14,8 @@ public class Product {
 		this.quantity -= reduceValue;
 	}
 
-	public boolean compareToPrice(int money) {
-		if (this.price <= money) {
-			return true;
-		}
-		return false;
+	public boolean checkCanBuyWithMoney(int money) {
+		return this.price <= money;
 	}
 
 	public boolean checkHaveStock() {

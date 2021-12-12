@@ -1,5 +1,6 @@
 package vendingmachine.view;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vendingmachine.constants.ErrorConstants;
@@ -8,19 +9,30 @@ import vendingmachine.domain.Product;
 
 public class Validator {
 	public int validateMoney(String inputString) {
-		int number = checkNumber(inputString);
-		checkOverZero(number);
+		int number = checkNumberFormat(inputString);
+		checkOverMinimumMoney(number);
 		checkDivisionByTen(number);
 		return number;
 	}
 
-	public Product validateProduct(String productString) {
+	public List<Product> validateProductList(String inputString) {
+		String [] splits = splitWithDelimiter(inputString, ValidateConstants.PRODUCT_DELIMITER);
+		List<Product> products = new ArrayList<>();
+		for(String productString : splits) {
+			Product product = validateProduct(productString);
+			validateProductExist(products, product.getName());
+			products.add(product);
+		}
+		return products;
+	}
+
+	private Product validateProduct(String productString) {
 		productString = removeDelimiters(productString);
 		String [] splits = splitWithDelimiter(productString, ValidateConstants.PRODUCT_CONTENT_DELIMITER);
 		return checkProductFormat(splits);
 	}
 
-	public String [] splitWithDelimiter(String input, String delimiter) {
+	private String [] splitWithDelimiter(String input, String delimiter) {
 		return input.split(delimiter);
 	}
 
@@ -34,7 +46,7 @@ public class Validator {
 	private Product checkProductFormat(String [] splits) {
 		checkProductContentSize(splits.length);
 		String name = splits[ValidateConstants.NAME_INDEX];
-		int price = validatePrice(splits[ValidateConstants.PRICE_INDEX]);
+		int price = validateMoney(splits[ValidateConstants.PRICE_INDEX]);
 		int quantity = validateQuantity(splits[ValidateConstants.QUANTITY_INDEX]);
 		return new Product(name, price, quantity);
 	}
@@ -45,7 +57,7 @@ public class Validator {
 		}
 	}
 
-	public void validateProductExist(List<Product> productList, String name) {
+	private void validateProductExist(List<Product> productList, String name) {
 		Product found =  productList.stream()
 			.filter(product -> name.equals(product.getName()))
 			.findAny()
@@ -55,21 +67,8 @@ public class Validator {
 		}
 	}
 
-	private int validatePrice(String price) {
-		int number = checkNumber(price);
-		checkPriceFormat(number);
-		return number;
-	}
-
-	private void checkPriceFormat(int price) {
-		if(price < ValidateConstants.MINIMUM_MONEY) {
-			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_PRICE_RANGE);
-		}
-		checkDivisionByTen(price);
-	}
-
 	private int validateQuantity(String quantity) {
-		int number = checkNumber(quantity);
+		int number = checkNumberFormat(quantity);
 		checkQuantityFormat(number);
 		return number;
 	}
@@ -80,15 +79,26 @@ public class Validator {
 		}
 	}
 
+	private void checkSize(String inputString) {
+		if(inputString.length() == 0) {
+			throw new IllegalArgumentException(ErrorConstants.ERROR_NUMBER);
+		}
+	}
+
+	private int checkNumberFormat(String inputString) {
+		checkSize(inputString);
+		return checkNumber(inputString);
+	}
+
 	private int checkNumber(String inputString) {
 		boolean number = inputString.chars().allMatch( Character::isDigit);
 		if(!number) {
-			throw new IllegalArgumentException(ErrorConstants.ERROR_MONEY_NUMBER);
+			throw new IllegalArgumentException(ErrorConstants.ERROR_NUMBER);
 		}
 		return Integer.parseInt(inputString);
 	}
 
-	private void checkOverZero(int number) {
+	private void checkOverMinimumMoney(int number) {
 		if(number < ValidateConstants.MINIMUM_MONEY) {
 			throw new IllegalArgumentException(ErrorConstants.ERROR_MONEY_RANGE);
 		}

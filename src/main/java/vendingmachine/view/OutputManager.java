@@ -11,9 +11,9 @@ public class OutputManager {
 		print(ViewConstants.COIN_QUANTITY_START);
 	}
 
-	public void notifyStorageCoinInLine(Coin coin, int quantity) {
-		String line = String.format(ViewConstants.COIN_QUANTITY_STATEMENT, coin.getAmount(), quantity);
-		print(line);
+	public void notifyQuantityByCoin(Coin coin, int quantity) {
+		String quantityAnnouncement = String.format(ViewConstants.COIN_QUANTITY_STATEMENT, coin.getAmount(), quantity);
+		print(quantityAnnouncement);
 	}
 
 	public void notifyUserBalance(int userBalance) {
@@ -26,7 +26,7 @@ public class OutputManager {
 
 	public void notifyChange(EnumMap<Coin, Integer> changeMap) {
 		for(Coin coin : changeMap.keySet()) {
-			notifyStorageCoinInLine(coin, changeMap.get(coin));
+			notifyQuantityByCoin(coin, changeMap.get(coin));
 		}
 	}
 
