@@ -16,10 +16,10 @@ public class VendingMachineController {
 		vendingMachine.holdingMoney = InputView.holdingMoneyInput();
 		vendingMachine.holdingCoins = vendingMachine.getCoins();
 		OutputView.printHoldingCoins(vendingMachine.holdingCoins);
-		vendingMachine.holdingItem = InputView.holdingItemsInput();
 	}
 
 	public void run(VendingMachine vendingMachine){
+		vendingMachine.holdingItem = InputView.holdingItemsInput();
 		vendingMachine.inputMoney = InputView.inputMoneyInput();
 	}
 

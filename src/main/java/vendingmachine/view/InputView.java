@@ -12,42 +12,38 @@ public class InputView {
 	private static final char CHAR_NUMERIC_MIN = '0';
 	private static final char CHAR_NUMERIC_MAX = '9';
 	private static final String ZERO_HOLDING_MONEY = "0";
-	private static final int DIVIDE_VALUE= 10;
+	private static final int DIVIDE_VALUE = 10;
 
-	public static int holdingMoneyInput(){
+	public static int holdingMoneyInput() {
 		String stringHoldingMoney = "";
 		int holdingMoney = 0;
 
-		do{
+		do {
 			System.out.println(Message.ASK_HOLDING_MONEY_MESSAGE);
 			stringHoldingMoney = Console.readLine();
-		} while(!isRightHoldingMoney(stringHoldingMoney));
+		} while (!isRightHoldingMoney(stringHoldingMoney));
 
 		holdingMoney = Integer.parseInt(stringHoldingMoney);
 		System.out.println();
 		return holdingMoney;
 	}
 
-	public static ArrayList<Item> holdingItemsInput(){
+	public static ArrayList<Item> holdingItemsInput() {
 		ArrayList<Item> itemList;
-		List<String> stringItemsList ;
+		List<String> stringItemsList;
 
 		System.out.println(Message.ASK_ADD_ITEMS_MESSAGE);
-		String [] itemStringList = Console.readLine().split(";");
+		String[] itemStringList = Console.readLine().split(";");
 
 		stringItemsList = new ArrayList<String>(Arrays.asList(itemStringList));
 
 		removeBracket(stringItemsList);
 		itemList = generateItemList(stringItemsList);
-		for (int i = 0 ; i<itemList.size(); i++){
-			System.out.println(itemList.get(i).getName());
-			System.out.println(itemList.get(i).getPrice());
-			System.out.println(itemList.get(i).getStock());
-		}
+
 		return itemList;
 	}
 
-	public static int inputMoneyInput(){
+	public static int inputMoneyInput() {
 		int inputMoney = 0;
 
 		System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
@@ -58,19 +54,19 @@ public class InputView {
 	}
 
 	private static void removeBracket(List<String> stringItemsList) {
-		for(int i = 0; i < stringItemsList.size(); i++){
-			String str= stringItemsList.get(i);
+		for (int i = 0; i < stringItemsList.size(); i++) {
+			String stringItem = stringItemsList.get(i);
 			stringItemsList.remove(i);
-			str=str.replace("[","");
-			str=str.replace("]","");
-			stringItemsList.add(i,str);
+			stringItem = stringItem.replace("[", "");
+			stringItem = stringItem.replace("]", "");
+			stringItemsList.add(i, stringItem);
 		}
 	}
 
 	private static ArrayList<Item> generateItemList(List<String> stringItemsList) {
 		String[] eachValueOfProductArray;
 		ArrayList<Item> itemArrayList = new ArrayList<Item>();
-		for(int i = 0; i < stringItemsList.size(); i++){
+		for (int i = 0; i < stringItemsList.size(); i++) {
 			eachValueOfProductArray = stringItemsList.get(i).split(",");
 
 			String name = eachValueOfProductArray[0];
@@ -83,13 +79,13 @@ public class InputView {
 		return itemArrayList;
 	}
 
-	private static boolean isRightHoldingMoney(String stringHoldingMoney){
+	private static boolean isRightHoldingMoney(String stringHoldingMoney) {
 		boolean isRightHoldingMoney = true;
 		try {
 			nonNumericHoldingMoneyError(stringHoldingMoney);
 			zeroHoldingMoneyError(stringHoldingMoney);
 			dividedByTenHoldingMoneyError(stringHoldingMoney);
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightHoldingMoney = false;
 		}
@@ -111,8 +107,8 @@ public class InputView {
 		}
 	}
 
-	public static void dividedByTenHoldingMoneyError(String stringHoldingMoney){
-		if(Integer.parseInt(stringHoldingMoney) % DIVIDE_VALUE != 0){
+	public static void dividedByTenHoldingMoneyError(String stringHoldingMoney) {
+		if (Integer.parseInt(stringHoldingMoney) % DIVIDE_VALUE != 0) {
 			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
 		}
 	}
