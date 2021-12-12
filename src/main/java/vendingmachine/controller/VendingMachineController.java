@@ -1,5 +1,7 @@
-package vendingmachine.domain;
+package vendingmachine.controller;
 
+import vendingmachine.domain.Money;
+import vendingmachine.domain.RandomCoinMaker;
 import vendingmachine.view.input.MoneyInputView;
 import vendingmachine.view.input.ProductInputView;
 import vendingmachine.view.input.PurchaseInputView;
@@ -7,7 +9,7 @@ import vendingmachine.view.output.OutputView;
 
 import java.util.LinkedHashMap;
 
-public class VendingMachine {
+public class VendingMachineController {
 
     public void start() {
         MoneyInputView moneyInputView = new MoneyInputView();
