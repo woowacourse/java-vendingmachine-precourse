@@ -22,7 +22,7 @@ public class VendingMachineController {
 		perChaseItem(items, money);
 
 		System.out.println(money.toString());
-		OutputView.printChanges(coins);
+		OutputView.printChanges(money.makeChanges(coins));
 	}
 
 	private Money giveMoney() {

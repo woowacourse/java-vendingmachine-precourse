@@ -27,6 +27,14 @@ public class OutputView {
 		}
 	}
 
+	public static void printChanges(Map<Integer, Integer> changes) {
+		printNewLine();
+		System.out.println("잔돈");
+		for (Map.Entry<Integer, Integer> coin : changes.entrySet()) {
+			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
+		}
+	}
+	
 	public static void printItemsRequest() {
 		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
 	}
@@ -40,14 +48,4 @@ public class OutputView {
 		System.out.println("구매할 상품명을 입력해 주세요.");
 	}
 
-	public static void printChanges(Coins coins) {
-		printNewLine();
-		System.out.println("잔돈");
-		for (Map.Entry<Integer, Integer> coin : coins.findAll().entrySet()) {
-			if (coin.getValue() <= 0) {
-				continue;
-			}
-			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
-		}
-	}
 }
