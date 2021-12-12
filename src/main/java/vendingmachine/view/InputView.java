@@ -5,7 +5,7 @@ import vendingmachine.utils.ValidateUtils;
 
 public class InputView {
 
-	public static int inputVendingMachineCoin() {
+	public static int inputVendingMachineMoney() {
 		String coin = Console.readLine();
 		ValidateUtils.validateInputCoin(coin);
 		return Integer.parseInt(coin);
