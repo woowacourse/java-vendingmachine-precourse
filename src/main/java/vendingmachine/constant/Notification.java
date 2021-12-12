@@ -16,8 +16,7 @@ public enum Notification {
 	PRODUCT_NOT_FOUND("[ERROR] 해당 상품이 존재하지 않습니다."),
 	PRODUCT_IS_NULL("[ERROR] 상품을 올바르게 입력해주세요."),
 	PRODUCTS_SIZE_INSUFFICIENT("[ERROR] 상품은 최소 1개 이상 입력해야합니다."),
-	PRODUCTS_STOCK_INSUFFICIENT("[ERROR] 상품의 재고가 부족합니다. 다른 상품을 구매해주세요."),
-	VENDING_MACHINE_INITIALIZE_FAIL("[ERROR] 자동판매기에는 상품들과 잔돈들이 있어야합니다.");
+	PRODUCTS_STOCK_INSUFFICIENT("[ERROR] 상품의 재고가 부족합니다. 다른 상품을 구매해주세요.");
 
 	private final String message;
 
