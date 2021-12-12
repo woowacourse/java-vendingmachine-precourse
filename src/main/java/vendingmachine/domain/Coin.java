@@ -1,9 +1,10 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
-import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.constant.ErrorConst;
 import vendingmachine.constant.MessageConst;
 
 public enum Coin {
@@ -18,6 +19,13 @@ public enum Coin {
 		this.amount = amount;
 	}
 
+	public static Coin getCoinByAmount(int selectAmount) {
+		return Arrays.stream(Coin.values())
+			.filter(coin -> coin.getAmount() == selectAmount)
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException(ErrorConst.COIN_IS_NOT_VALID));
+	}
+
 	public boolean isDivided(int money) {
 		return money % amount == 0;
 	}
@@ -27,27 +35,12 @@ public enum Coin {
 		return amount + MessageConst.COIN_UNIT;
 	}
 
-	public int randomPick(int money) {
-		if (isTenCoin()) {
-			return money / COIN_10.amount;
-		}
-		List<Integer> pickList = fillPickList(money);
-		return Randoms.pickNumberInList(pickList);
+	public int getAmount() {
+		return amount;
 	}
 
-	public int getRemainMoney(int money, int coinNum) {
-		return money - (coinNum * amount);
-	}
-
-	private boolean isTenCoin() {
-		return amount == COIN_10.amount;
-	}
-
-	private List<Integer> fillPickList(int money) {
-		List<Integer> pickList = new ArrayList<>();
-		for (int i = 0; i <= money / amount; i++) {
-			pickList.add(i);
-		}
-		return pickList;
+	public static List<Integer> getCoinAmountList() {
+		List<Coin> coins = Arrays.asList(Coin.values());
+		return coins.stream().map(Coin::getAmount).collect(Collectors.toList());
 	}
 }
