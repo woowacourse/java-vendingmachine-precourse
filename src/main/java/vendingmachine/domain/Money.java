@@ -35,9 +35,10 @@ public class Money {
         return money == EMPTY_MONEY;
     }
 
-    public void cutOffByCoin(Coin coin) {
+    public Coin cutOffByCoin(Coin coin) {
         checkCoinLargerThenRemainMoney(coin);
         money -= coin.amount();
+        return coin;
     }
 
     public void checkCoinLargerThenRemainMoney(Coin coin) {
