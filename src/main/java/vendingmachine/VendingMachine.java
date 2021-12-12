@@ -7,6 +7,7 @@ import java.util.List;
 public class VendingMachine {
     private final List<Product> products = new ArrayList<>();
     private final CoinCollection coins = new CoinCollection();
+    private int money = 0;
 
     public void insertCoins(List<Coin> coins) {
         for (Coin coin : coins) {
@@ -24,5 +25,9 @@ public class VendingMachine {
                 .map(s -> s.split(","))
                 .map(s -> new Product(s[0], Integer.parseInt(s[1]), Integer.parseInt(s[2])))
                 .forEach(this.products::add);
+    }
+
+    public void insertMoney(int money) {
+        this.money = money;
     }
 }
