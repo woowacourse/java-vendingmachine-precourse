@@ -16,4 +16,8 @@ public class Product {
         this.price = Integer.parseInt(price);
         this.quantity = Integer.parseInt(quantity);
     }
+
+    public boolean checkQuantityEnough() {
+        return quantity > 0;
+    }
 }
