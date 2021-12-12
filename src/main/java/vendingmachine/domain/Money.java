@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.exception.MoneyPositiveIntegerValueException;
+
 public class Money {
 
     private static final String INTEGER_REGEX = "[0-9]+";
@@ -25,7 +27,7 @@ public class Money {
 
     private static void checkMoneyIntegerFormat(String money) {
         if (!money.matches(INTEGER_REGEX)) {
-            throw new IllegalArgumentException("[ERROR] 금액은 양의 숫자여야 합니다.");
+            throw new MoneyPositiveIntegerValueException();
         }
     }
 
