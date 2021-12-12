@@ -5,14 +5,23 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class Coins {
+    private static final int DIVISIBLE_VALUE = 10;
+
     private static final int INITIAL_VALUE = 0;
     private static final int COUNTING_VALUE = 1;
 
     private Map<Coin, Integer> coins;
 
     private Coins(final int money) {
+        validateDivisible(money);
         initCoins();
         fullRandomAmount(money);
+    }
+
+    private void validateDivisible(int money) {
+        if (money % DIVISIBLE_VALUE != 0) {
+            throw ErrorMessage.NOT_DIVISIBLE_VALUE.getException();
+        }
     }
 
     private void initCoins() {
