@@ -15,8 +15,7 @@ public class Machine {
         this.money = InputView.inputMoney();
         while (purchasable) {
             OutputView.printMoney(money);
-            //남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려준다
-            if (!checkMoney()) {
+            if (!checkMoney() || !checkCount()) {
                 break;
             }
             this.purchasable = isPurchasable(InputView.inputProduct());
@@ -56,6 +55,15 @@ public class Machine {
         for (Product product : this.products) {
             if(product.getPrice() <= money) {
                 return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkCount() {
+        for(Product product : this.products) {
+            if (product.getCount() != 0) {
+               return true;
             }
         }
         return false;
