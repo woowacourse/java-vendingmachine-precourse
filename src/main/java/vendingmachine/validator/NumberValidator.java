@@ -24,7 +24,7 @@ public class NumberValidator {
         }
     }
 
-    private static void validateNotHaveOnesDigit(int intInput) {
+    static void validateNotHaveOnesDigit(int intInput) {
         if (intInput%10 > 0) {
             throw new IllegalArgumentException(HAS_ONES_NUMBER_EXCEPTION);
         }
