@@ -3,15 +3,17 @@ package vendingmachine.domain;
 import java.util.stream.Stream;
 
 public enum Coin {
-    COIN_500(500),
-    COIN_100(100),
-    COIN_50(50),
-    COIN_10(10);
+    COIN_500(500,"500원"),
+    COIN_100(100, "100원"),
+    COIN_50(50, "50원"),
+    COIN_10(10, "10원");
 
     private final int amount;
+    private final String name;
 
-    Coin(final int amount) {
+    Coin(int amount, String name) {
         this.amount = amount;
+        this.name = name;
     }
 
     public int countCoin(int totalAmount) {
@@ -32,5 +34,10 @@ public enum Coin {
 
     public static Stream<Coin> stream() {
         return Stream.of(Coin.values());
+    }
+
+    @Override
+    public String toString() {
+        return name;
     }
 }
