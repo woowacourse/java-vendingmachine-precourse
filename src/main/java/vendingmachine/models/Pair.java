@@ -12,4 +12,8 @@ public class Pair {
 	public int getFirstValue() {
 		return this.firstValue;
 	}
+
+	public int getSecondValue() {
+		return this.secondValue;
+	}
 }
