@@ -18,6 +18,19 @@ class ChangeSystemTest {
     private final int remainingInputMoney = 5360;
 
     @Test
+    @DisplayName("자판기가 보유하고 있는 동전들을 반환한다.")
+    void getOwningCoins() {
+        coins.put(COIN_500, 8);
+        coins.put(COIN_100, 12);
+        coins.put(COIN_50, 3);
+        coins.put(COIN_10, 2);
+        ChangeSystem changeSystem = new ChangeSystem(coinGenerator);
+        Map<Integer, Integer> actualChanges = changeSystem.getOwningCoins();
+        assertThat(actualChanges)
+                .containsExactly(entry(500, 8), entry(100, 12), entry(50, 3), entry(10, 2));
+    }
+
+    @Test
     @DisplayName("(모두 거슬러 줄 수 있는 경우) 남은 투입 금액을 받아 거슬러 줄 수 있는 만큼, 최소의 동전 개수로 거스름돈을 반환한다.")
     void returnChangesWithEnoughCoins() {
         coins.put(COIN_500, 8);

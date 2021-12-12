@@ -14,6 +14,13 @@ public class ChangeSystem {
         this.possibleChangesToReturn = coinGenerator.generate();
     }
 
+    public Map<Integer, Integer> getOwningCoins() {
+        Map<Integer, Integer> owningCoins = new LinkedHashMap<>();
+        possibleChangesToReturn.keySet()
+                .forEach(coin -> owningCoins.put(coin.getAmount(), possibleChangesToReturn.get(coin)));
+        return owningCoins;
+    }
+
     public Map<Integer, Integer> returnChanges(final int remainingInputMoney) {
         this.remainingInputMoney = remainingInputMoney;
         Map<Integer, Integer> returnedChanges = new LinkedHashMap<>();
