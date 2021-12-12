@@ -63,7 +63,13 @@ public class VendingMachineController {
 		}
 	}
 
-	public void buyProducts() {
+	public void useVendingMachine() {
+		while (user.canBuyProduct(products)) {
+			buyProducts();
+		}
+	}
+
+	private void buyProducts() {
 		try {
 			OutputView.printUserAmount(user);
 			user.buyProduct(products, InputView.getProductName());

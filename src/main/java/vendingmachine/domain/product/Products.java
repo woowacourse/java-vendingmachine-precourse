@@ -25,6 +25,18 @@ public class Products {
 			.anyMatch(product::equals);
 	}
 
+	public boolean hasAnyProducts() {
+		return products.stream()
+			.anyMatch(Product::hasStock);
+	}
+
+	public Product getCheapestProduct() {
+		return products.stream()
+			.filter(Product::hasStock)
+			.min(Product::compareTo)
+			.orElseThrow(() -> new IllegalAccessError(SOLD_OUT_ERROR_MESSAGE));
+	}
+
 	public Product getProductByName(ProductName productName) {
 		List<Product> targetProduct = products.stream()
 			.filter(product -> product.hasName(productName))

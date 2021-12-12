@@ -6,7 +6,7 @@ import static vendingmachine.constant.SystemMessage.*;
 import vendingmachine.validator.AmountValidator;
 import vendingmachine.validator.ProductValidator;
 
-public class Product {
+public class Product implements Comparable<Product> {
 	private ProductName name;
 	private ProductAmount amount;
 	private ProductStock stock;
@@ -35,6 +35,10 @@ public class Product {
 		return stock.isPositive();
 	}
 
+	public boolean canBeSold(int userAmount) {
+		return !amount.isExpensive(userAmount);
+	}
+
 	public void sell(int userAmount) {
 		if (amount.isExpensive(userAmount)) {
 			throw new IllegalArgumentException(PRODUCT_IS_EXPENSIVE_ERROR_MESSAGE);
@@ -44,5 +48,10 @@ public class Product {
 
 	public int getChange(int userAmount) {
 		return amount.getChange(userAmount);
+	}
+
+	@Override
+	public int compareTo(Product other) {
+		return amount.compareTo(other.amount);
 	}
 }

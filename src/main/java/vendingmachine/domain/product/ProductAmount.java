@@ -17,4 +17,8 @@ public class ProductAmount {
 	public int getChange(int userAmount) {
 		return userAmount - amount;
 	}
+
+	public int compareTo(ProductAmount other) {
+		return this.amount - other.amount;
+	}
 }

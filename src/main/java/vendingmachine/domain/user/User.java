@@ -18,6 +18,22 @@ public class User {
 		return "투입 금액: " + this.amount + "원";
 	}
 
+	public boolean canBuyProduct(Products products) {
+		if (!hasAnyProducts(products)) {
+			return false;
+		}
+		return canBuyCheapestProduct(products);
+	}
+
+	private boolean hasAnyProducts(Products products) {
+		return products.hasAnyProducts();
+	}
+
+	private boolean canBuyCheapestProduct(Products products) {
+		Product cheapestProduct = products.getCheapestProduct();
+		return cheapestProduct.canBeSold(this.amount);
+	}
+
 	public void buyProduct(Products products, String inputProductName) {
 		ProductName productName = new ProductName(inputProductName);
 		Product product = products.getProductByName(productName);
