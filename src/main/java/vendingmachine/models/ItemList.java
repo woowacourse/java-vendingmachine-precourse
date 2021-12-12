@@ -42,4 +42,8 @@ public class ItemList {
 	private void checkItemName(String itemName) {
 		Validator.isItemName(this.ItemList, itemName);
 	}
+
+	private void checkPayMoney(String itemName, int payMoney) {
+		Validator.validatePayAmount(this.ItemList, itemName, payMoney);
+	}
 }
