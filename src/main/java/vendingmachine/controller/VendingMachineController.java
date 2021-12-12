@@ -4,6 +4,7 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingMoneyValidator;
 import vendingmachine.view.ErrorMessageOutputView;
 import vendingmachine.view.InputView;
+import vendingmachine.view.SystemMessageOutputView;
 
 public class VendingMachineController {
 
@@ -15,6 +16,8 @@ public class VendingMachineController {
 
     public void execute() {
         enterHoldingMoney();
+        vendingMachine.initializeCoinCase();
+        SystemMessageOutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
     }
 
     private void enterHoldingMoney() {

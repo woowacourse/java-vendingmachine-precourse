@@ -24,6 +24,10 @@ public class CoinCase {
         }
     }
 
+    public HashMap<Coin, Integer> getHoldingCoins() {
+        return holdingCoins;
+    }
+
     private void pushIn(Coin coinUnit) {
         holdingCoins.put(coinUnit, holdingCoins.get(coinUnit) + 1);
     }

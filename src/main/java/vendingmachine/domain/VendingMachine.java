@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.HashMap;
+
 public class VendingMachine {
 
     private int holdingMoney;
@@ -16,5 +18,9 @@ public class VendingMachine {
 
     public void initializeCoinCase() {
         coinCase.generateCoins(holdingMoney);
+    }
+
+    public HashMap<Coin, Integer> getHoldingCoins() {
+        return coinCase.getHoldingCoins();
     }
 }

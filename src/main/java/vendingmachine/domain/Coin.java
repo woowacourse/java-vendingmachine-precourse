@@ -11,6 +11,8 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
+    private static final String WON_AND_HYPHEN_SYMBOL = "원 - ";
+
     private final int amount;
 
     Coin(final int amount) {
@@ -32,5 +34,9 @@ public enum Coin {
             randomCoin = getCoinListDecreasingOrder().get(randomIndex);
         } while (randomCoin.getAmount() > maximum);
         return randomCoin;
+    }
+
+    public String toString() {
+        return amount + WON_AND_HYPHEN_SYMBOL;
     }
 }
