@@ -14,4 +14,10 @@ public class StringValidation {
             acceptThrow(() -> validator.get());
         }
     }
+
+    public static void isOutOfIntegerRange(String userInput, ThrowIllegalSupplier validator) {
+        if (Long.parseLong(userInput) > Integer.MAX_VALUE) {
+            acceptThrow(() -> validator.get());
+        }
+    }
 }
