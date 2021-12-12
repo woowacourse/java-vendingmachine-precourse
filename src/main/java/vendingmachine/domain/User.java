@@ -24,10 +24,6 @@ public class User {
 	public void buyMerchandise(String merchandiseName, Merchandises merchandises) {
 		buyingMerchandiseList = new ArrayList<>();
 		Merchandise buyingMerchandise = merchandises.selectMerchandise(merchandiseName);
-		if (buyingMerchandise.getQuantity() == 0) {
-			System.out.println(MERCHANDISE_SOLD_OUT_MESSAGE);
-			return;
-		}
 		buyingMerchandise.sellMerchandise();
 		buyingMerchandiseList.add(buyingMerchandise);
 		setUserMoney(new Money(userMoney.getMoney() - buyingMerchandise.getMoney().getMoney()));

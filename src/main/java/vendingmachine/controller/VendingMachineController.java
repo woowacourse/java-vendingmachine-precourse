@@ -29,10 +29,6 @@ public class VendingMachineController {
 		vendingMahchineMoneyWithErrorHandling();
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		inputMerchandiseInformationWithErrorHandling();
-		if (vendingMachine.getMerchandises().isAllMerchandisesSoldout()) {
-			System.out.println(ALL_MERCHANDISE_SOLD_0UT_MESSAGE);
-			return;
-		}
 		inputMoneyWithErrorHandling();
 		showMoneyAndInputMerchandise();
 		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
@@ -85,14 +81,11 @@ public class VendingMachineController {
 	public void showMoneyAndInputMerchandise() {
 		while (true) {
 			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
-			buyMerchandiseWithErrorHandling();
-			if (vendingMachine.getMerchandises().isAllMerchandisesSoldout()) {
-				System.out.println(ALL_MERCHANDISE_SOLD_0UT_MESSAGE);
-				break;
+			if (isUserBuyMerchandise(vendingMachine, user) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()) {
+				buyMerchandiseWithErrorHandling();
+				continue;
 			}
-			if (!isUserBuyMerchandise(vendingMachine, user)) {
-				break;
-			}
+			break;
 		}
 	}
 
@@ -138,6 +131,7 @@ public class VendingMachineController {
 		try {
 			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
 		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(user.getUserMoney().getMoney());
 			System.out.println(illegalArgumentException.getMessage());
 			buyMerchandiseWithErrorHandling();
 		}
