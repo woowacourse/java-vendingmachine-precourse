@@ -37,6 +37,16 @@ public class ItemInformationInputView implements InputView {
 		}
 	}
 
+	public String getInput() {
+		OutputView.noticeItemInput();
+		String nowInput = BLANK_STRING;
+		while (nowInput.isEmpty()) {
+			String userInput = camp.nextstep.edu.missionutils.Console.readLine();
+			nowInput = checkAllConditions(userInput);
+		}
+		return nowInput;
+	}
+
 	public HashMap<String, Item> parse(String input) {
 		HashMap<String, Item> parsedItem = new HashMap<>();
 		ArrayList<String[]> nowParsedInput = generateDoubleSplit(input);
