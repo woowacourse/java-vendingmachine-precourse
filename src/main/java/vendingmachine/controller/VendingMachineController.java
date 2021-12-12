@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import java.util.List;
 
+import sun.tools.jconsole.OutputViewer;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingAmountValidator;
@@ -23,6 +24,9 @@ public class VendingMachineController {
         initializeHoldingMoney();
         initializeProductsInfo();
         initializeInsertAmount();
+        while (vendingMachine.isBuyAbleProductRemain()) {
+            SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
+        }
     }
 
     private void initializeHoldingMoney() {

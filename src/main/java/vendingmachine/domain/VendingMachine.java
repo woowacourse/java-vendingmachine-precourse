@@ -28,6 +28,10 @@ public class VendingMachine {
         return coinCase.getHoldingAmount();
     }
 
+    public int getInsertAmount() {
+        return insertAmount;
+    }
+
     public void storeProduct(final Product product) {
         productStorage.add(product);
     }
