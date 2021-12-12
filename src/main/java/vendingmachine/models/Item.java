@@ -28,5 +28,9 @@ public class Item {
 	public void decreaseAmount(int value) {
 		this.amount -= value;
 	}
+
+	public boolean isOverThisPrice(int money) {
+		return this.price > money;
+	}
 }
 
