@@ -29,5 +29,9 @@ public class ProcessPrepare {
     public static void checkGoods() {
         UserGoodsValidation.checkUserGoodsValidation(goods);
     }
-    
+
+    public static void removeBracket() {
+        goods.replace(ProcessConstant.SQUARE_BRACKETS_OPEN, "");
+        goods.replace(ProcessConstant.SQUARE_BRACKETS_CLOSE, "");
+    }
 }
