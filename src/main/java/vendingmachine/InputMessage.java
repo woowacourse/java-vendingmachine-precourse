@@ -12,6 +12,10 @@ public class InputMessage {
         System.out.println();
     }
 
+    public void printInputMessage(String message) {
+        System.out.println(message);
+    }
+
     public void printInputMoneyMessage() {
         System.out.println(INPUT_MONEY_MESSAGE);
     }

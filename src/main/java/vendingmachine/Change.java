@@ -4,29 +4,23 @@ import java.util.HashMap;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class Change {
+public class Change extends LoopInput {
+    private static final String INPUT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";
     private static final Validator validator = new Validator();
     private static HashMap<Coin, Integer> coinMap = new HashMap<>();
     private static InputMessage inputMessage = new InputMessage();
-    private static OutputMessage outputMessage = new OutputMessage();
+    private static int initialTotalChange;
 
-    public int inputInitialTotalChange() {
-        while (true) {
-            try {
-                return insertChange();
-            } catch (IllegalArgumentException exception) {
-                outputMessage.printErrorMessage(exception.getMessage());
-            }
-        }
+    public void inputMethod() {
+        this.inputChange();
     }
 
-    public int insertChange() {
-        inputMessage.printInsertCoinMessage();
-        String changeInVendingMachine = Console.readLine();
+    private void inputChange() {
+        String changeInVendingMachine = inputString(INPUT_MONEY_MESSAGE);
         int change = validator.validateOnlyInteger(changeInVendingMachine);
         validator.isGreatThanZero(change);
         validator.isMultipleOfTen(change);
-        return change;
+        initialTotalChange = change;
     }
 
     public void returnChange(int customerMoney) {
@@ -39,11 +33,11 @@ public class Change {
         }
     }
 
-    public void createInitialChanges(int change) {
+    public void createInitialChanges() {
         int randomNumber;
         for (Coin coin : Coin.values()) {
-            randomNumber = coin.createRandomNumber(change);
-            change -= coin.getTotalOfCoin(randomNumber);
+            randomNumber = coin.createRandomNumber(initialTotalChange);
+            initialTotalChange -= coin.getTotalOfCoin(randomNumber);
             coinMap.put(coin, randomNumber);
         }
         printNumberOfCoin();

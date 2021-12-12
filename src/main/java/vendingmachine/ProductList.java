@@ -4,27 +4,18 @@ import java.util.HashMap;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class ProductList {
+public class ProductList extends LoopInput {
+    private static final String INSERT_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
     private static int MINIMUM_PRICE = Integer.MAX_VALUE;
     private static final HashMap<String, Product> productMap = new HashMap<>();
-    private static final InputMessage inputMessage = new InputMessage();
-    private static OutputMessage outputMessage = new OutputMessage();
     private static final Validator validator = new Validator();
 
-    public void inputInitialProduct() {
-        while (true) {
-            try {
-                insertProduct();
-                break;
-            } catch (IllegalArgumentException exception) {
-                outputMessage.printErrorMessage(exception.getMessage());
-            }
-        }
+    public void inputMethod() {
+        this.inputProductList();
     }
 
-    public void insertProduct() {
-        inputMessage.printInsertProductMessage();
-        String productsInformation = Console.readLine();
+    private void inputProductList() {
+        String productsInformation = inputString(INSERT_PRODUCT_MESSAGE);
         initProductMap();
         String[] productInformationList = validator.validateSplitRegex(productsInformation);
         setNumberOfProducts(productInformationList);
