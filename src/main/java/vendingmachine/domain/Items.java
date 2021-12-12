@@ -17,12 +17,15 @@ public class Items {
 		return Collections.unmodifiableList(items);
 	}
 
-	public Item findItemByName(String name) {
+	public Item findItemByName(String name, Money money) {
 		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException("해당 이름의 상품을 찾을 수 없습니다."));
 		if (foundItem.getAmount() <= 0) {
 			throw new IllegalArgumentException("상품의 수량이 0개이므로 구매할 수 없습니다.");
+		}
+		if (!money.payable(foundItem.getCost())){
+			throw new IllegalArgumentException("투입 금액보다 상품의 금액이 더 비싸므로 상품을 구매할 수 없습니다.");
 		}
 		return foundItem;
 	}
