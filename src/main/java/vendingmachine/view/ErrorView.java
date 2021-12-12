@@ -3,6 +3,7 @@ package vendingmachine.view;
 import vendingmachine.client.ErrorClient;
 
 public class ErrorView {
+	private static final String PREFIX = "[ERROR] ";
 
 	private final ErrorClient client;
 
@@ -11,6 +12,6 @@ public class ErrorView {
 	}
 
 	public void error(String msg) {
-		client.error(msg);
+		client.error(PREFIX + msg);
 	}
 }
