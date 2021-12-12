@@ -46,7 +46,7 @@ public class VendingMachine {
     public int getMinPriceOfProducts() {
         int minValue = Integer.MAX_VALUE;
         for (Product product : products) {
-            if (product.getPrice() < minValue) {
+            if (product.getPrice() < minValue && product.getCount() > 0) {
                 minValue = product.getPrice();
             }
         }
