@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.possessionmoney;
 
 public class PossessionMoney {
     private static final int ZERO = 0;

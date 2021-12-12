@@ -1,5 +1,12 @@
 package vendingmachine.domain;
 
+import vendingmachine.domain.change.Changes;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
+import vendingmachine.domain.possessioncoin.PossessionCoins;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
+import vendingmachine.domain.productpurchase.ProductPurchase;
+
 public class VendingMachine {
     private final PossessionCoins possessionCoins;
     private final Products products;

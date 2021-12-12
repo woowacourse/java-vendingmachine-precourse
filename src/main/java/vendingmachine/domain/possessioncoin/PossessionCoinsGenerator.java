@@ -1,4 +1,6 @@
-package vendingmachine.domain;
+package vendingmachine.domain.possessioncoin;
+
+import vendingmachine.domain.possessionmoney.PossessionMoney;
 
 @FunctionalInterface
 public interface PossessionCoinsGenerator {

@@ -6,11 +6,11 @@ import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.InvestmentMoney;
-import vendingmachine.domain.PossessionMoney;
-import vendingmachine.domain.Product;
-import vendingmachine.domain.ProductPurchase;
-import vendingmachine.domain.Products;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
+import vendingmachine.domain.possessionmoney.PossessionMoney;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.productpurchase.ProductPurchase;
+import vendingmachine.domain.product.Products;
 
 public class InputView {
     private static final String POSSESSION_MONEY_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";

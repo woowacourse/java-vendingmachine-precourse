@@ -1,7 +1,7 @@
 package vendingmachine;
 
 import vendingmachine.controller.VendingMachineController;
-import vendingmachine.domain.RandomPossessionCoinsGenerator;
+import vendingmachine.domain.possessioncoin.RandomPossessionCoinsGenerator;
 
 public class Application {
     public static void main(String[] args) {

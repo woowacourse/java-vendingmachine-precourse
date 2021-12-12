@@ -1,9 +1,12 @@
-package vendingmachine.domain;
+package vendingmachine.domain.possessioncoin;
 
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
 
 class PossessionCoinTest {
 

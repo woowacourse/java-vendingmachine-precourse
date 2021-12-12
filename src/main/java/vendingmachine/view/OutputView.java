@@ -1,8 +1,8 @@
 package vendingmachine.view;
 
-import vendingmachine.domain.Changes;
-import vendingmachine.domain.InvestmentMoney;
-import vendingmachine.domain.PossessionCoins;
+import vendingmachine.domain.change.Changes;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
+import vendingmachine.domain.possessioncoin.PossessionCoins;
 
 public class OutputView {
     private static final String POSSESSION_COINS_MESSAGE = "\n자판기가 보유한 동전";

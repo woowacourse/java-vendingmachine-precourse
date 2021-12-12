@@ -1,7 +1,11 @@
-package vendingmachine.domain;
+package vendingmachine.domain.possessioncoin;
+
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
 
 public class PossessionCoin {
-    public static final int DEFAULT_QUANTITY = 0;
+    private static final int DEFAULT_QUANTITY = 0;
+
     private final Coin coin;
     private final int quantity;
 

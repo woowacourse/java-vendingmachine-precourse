@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.possessioncoin;
 
 import static java.util.stream.Collectors.*;
 
@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.possessionmoney.PossessionMoney;
 
 public class RandomPossessionCoinsGenerator implements PossessionCoinsGenerator {
     private static final int COINS_DEFAULT_QUANTITY = 0;

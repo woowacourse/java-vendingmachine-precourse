@@ -1,4 +1,7 @@
-package vendingmachine.domain;
+package vendingmachine.domain.investmentmoney;
+
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.product.Product;
 
 public class InvestmentMoney {
     private static final int DEFAULT_INVESTMENT_MONEY = 0;

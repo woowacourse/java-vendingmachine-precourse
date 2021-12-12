@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.product;
 
 public class Product {
     private static final String INPUT_PRODUCT_PREFIX = "[";
@@ -118,9 +118,9 @@ public class Product {
     }
 
     private void validateQuantityZero() {
-         if (quantity == DEFAULT_QUANTITY) {
-             throw new IllegalArgumentException();
-         }
+        if (quantity == DEFAULT_QUANTITY) {
+            throw new IllegalArgumentException();
+        }
     }
 
     public boolean isSameName(String productPurchaseName) {

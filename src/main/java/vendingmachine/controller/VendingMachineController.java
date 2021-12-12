@@ -1,11 +1,11 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.Changes;
-import vendingmachine.domain.InvestmentMoney;
-import vendingmachine.domain.PossessionCoins;
-import vendingmachine.domain.PossessionCoinsGenerator;
-import vendingmachine.domain.PossessionMoney;
-import vendingmachine.domain.Products;
+import vendingmachine.domain.change.Changes;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
+import vendingmachine.domain.possessioncoin.PossessionCoins;
+import vendingmachine.domain.possessioncoin.PossessionCoinsGenerator;
+import vendingmachine.domain.possessionmoney.PossessionMoney;
+import vendingmachine.domain.product.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;

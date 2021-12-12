@@ -1,8 +1,12 @@
-package vendingmachine.domain;
+package vendingmachine.domain.possessioncoin;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.investmentmoney.InvestmentMoney;
+import vendingmachine.domain.change.Change;
 
 public class PossessionCoins {
     List<PossessionCoin> possessionCoins;

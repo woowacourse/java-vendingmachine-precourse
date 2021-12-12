@@ -1,4 +1,6 @@
-package vendingmachine.domain;
+package vendingmachine.domain.change;
+
+import vendingmachine.domain.Coin;
 
 public class Change {
     private final Coin coin;
@@ -11,6 +13,6 @@ public class Change {
 
     @Override
     public String toString() {
-        return  coin.getAmount() + "원 - " + quantity + "개";
+        return coin.getAmount() + "원 - " + quantity + "개";
     }
 }

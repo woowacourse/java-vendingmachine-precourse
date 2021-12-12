@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.productpurchase;
 
 import static org.assertj.core.api.Assertions.*;
 
