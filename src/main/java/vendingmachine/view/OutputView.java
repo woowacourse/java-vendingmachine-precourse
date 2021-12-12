@@ -26,8 +26,9 @@ public class OutputView {
 	}
 
 	public static void printInputMoney(int inputMoney) {
-		System.out.println(INPUT_MONEY_GUIDE_MESSEAGE);
-		System.out.println(inputMoney);
+		System.out.println();
+		System.out.print(INPUT_MONEY_GUIDE_MESSEAGE);
+		System.out.print(inputMoney);
 		System.out.println(INPUT_MONEY_GUIDE_MESSEAGE_SUFFIX);
 	}
 }

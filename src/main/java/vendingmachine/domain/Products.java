@@ -34,7 +34,29 @@ public class Products {
 		return new Products(newProduct);
 	}
 
+	public static Products buy(String buyProductName, Products products) {
+		List<Product> newProducts = new ArrayList<>();
+		List<Product> productList = products.getProducts();
+		for (Product product : productList) {
+			if (product.getName().equals(buyProductName)) {
+				product = product.reduce(ONE);
+			}
+			newProducts.add(product);
+		}
+		return new Products(newProducts);
+	}
+
 	public List<Product> getProducts() {
-		return products;
+		return this.products;
+	}
+
+	public int getProductPrice(String buyProductName, Products products) {
+		List<Product> productList = products.getProducts();
+		for (Product product : productList) {
+			if (product.getName().equals(buyProductName)) {
+				return product.getPrice();
+			}
+		}
+		return ZERO;
 	}
 }

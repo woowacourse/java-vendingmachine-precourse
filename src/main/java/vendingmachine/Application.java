@@ -13,7 +13,6 @@ import vendingmachine.domain.Products;
 
 public class Application {
 	public static void main(String[] args) {
-		// TODO: 프로그램 구현
 		final Scanner scanner = new Scanner(System.in);
 		VendingMachineController vendingMachineController = new VendingMachineController(scanner);
 		String holdingMoney = vendingMachineController.scanHoldingMoney();
@@ -25,6 +24,9 @@ public class Application {
 		while (inputMoney.isRemain()) {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());
 			String buyProductName = vendingMachineController.scanBuyProductName();
+			products = Products.buy(buyProductName, products);
+			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
+			System.out.println("inputMoney.getMoney(): " + inputMoney.getMoney());
 		}
 	}
 }

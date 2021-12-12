@@ -6,6 +6,7 @@ import java.util.Scanner;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Count;
+import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
