@@ -52,9 +52,10 @@ public class MachineController {
 		printDeposits(depositRepository);
 		setProductList();
 		setMoney();
+		printMoney(machine);
 		while (machineService.getAffordableList().size() > 0){
-			printMoney(machine);
 			purchase();
+			printMoney(machine);
 		}
 		printChanges(machineService.spitChanges());
 	}
