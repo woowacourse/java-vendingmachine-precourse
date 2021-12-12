@@ -23,24 +23,30 @@ public class VendingMachineController {
 
 		setMenuList();
 
-		insetMoney();
+		insertMoney();
 
 		repeatOrder();
 		printChanges();
 	}
 
 	public void setInitCoins() {
+		boolean successInitCoins = false;
 		userView.askInitCoins();
 
-		while (true) {
-			try {
-				vendingMachine.setCoins(userView.insertInitCoins());
-			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorMessage.ERROR + e.getMessage());
-			}
-			break;
+		while (!successInitCoins) {
+			successInitCoins = setInitCoinsIfItIsRight();
 		}
 
+	}
+
+	public boolean setInitCoinsIfItIsRight() {
+		try {
+			vendingMachine.setCoins(userView.insertInitCoins());
+		} catch (IllegalArgumentException e) {
+			System.out.println(ErrorMessage.ERROR + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	public void printInitCoins() {
@@ -52,31 +58,43 @@ public class VendingMachineController {
 	}
 
 	public void setMenuList() {
+		boolean successSetMenuList = false;
 		userView.askProductsInfo();
 
-		while (true) {
-			try {
-				vendingMachine.setMenu(userView.insertProductsInfo());
-			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorMessage.ERROR + e.getMessage());
-			}
-			break;
+		while (!successSetMenuList) {
+			successSetMenuList = setMenuListIfItIsRight();
 		}
 
 	}
 
-	public void insetMoney() {
+	public boolean setMenuListIfItIsRight() {
+		try {
+			vendingMachine.setMenu(userView.insertProductsInfo());
+		} catch (IllegalArgumentException e) {
+			System.out.println(ErrorMessage.ERROR + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	public void insertMoney() {
+		boolean successInsertMoney = false;
 		userView.askInsertMoney();
 
-		while (true) {
-			try {
-				vendingMachine.insertMoney(userView.insertMoney());
-			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorMessage.ERROR + e.getMessage());
-			}
-			break;
+		while (!successInsertMoney) {
+			successInsertMoney = insertMoneyIfItIsRight();
 		}
 
+	}
+
+	public boolean insertMoneyIfItIsRight() {
+		try {
+			vendingMachine.insertMoney(userView.insertMoney());
+		} catch (IllegalArgumentException e) {
+			System.out.println(ErrorMessage.ERROR + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	public void repeatOrder() {
@@ -89,17 +107,23 @@ public class VendingMachineController {
 	}
 
 	public void order() {
+		boolean successOrder = false;
 		userView.askOrderMenu();
 
-		while (true) {
-			try {
-				vendingMachine.takeOrder(userView.OrderMenu());
-			} catch (IllegalArgumentException e) {
-				System.out.println(ErrorMessage.ERROR + e.getMessage());
-			}
-			break;
+		while (!successOrder) {
+			successOrder = orderIfIsRight();
 		}
 
+	}
+
+	public boolean orderIfIsRight() {
+		try {
+			vendingMachine.takeOrder(userView.OrderMenu());
+		} catch (IllegalArgumentException e) {
+			System.out.println(ErrorMessage.ERROR + e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	public void printChanges() {
