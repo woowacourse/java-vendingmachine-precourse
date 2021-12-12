@@ -29,6 +29,11 @@ public class OutputHandler {
 		printCoinStatus(coinMap);
 	}
 
+	public void printReturnChanges(Map<Coin, Integer> coinMap) {
+		printMessage(VendingMachineData.CHANGE_STATUS_MESSAGE);
+		printCoinStatus(coinMap, false);
+	}
+
 	public void printBalance(int balance) {
 		printMessage(String.format(VendingMachineData.MONEY_STATUS_MESSAGE, balance));
 	}
@@ -39,6 +44,9 @@ public class OutputHandler {
 
 	private void printCoinStatus(Map<Coin, Integer> coinMap, boolean printZero) {
 		for (Coin coin : Coin.getCoinList()) {
+			if(!printZero && coinMap.get(coin) == 0) {
+				continue;
+			}
 			printMessage(String.format(VendingMachineData.CHANGE_STATUS_FORMAT, coin.getAmount(), coinMap.get(coin)));
 		}
 	}
