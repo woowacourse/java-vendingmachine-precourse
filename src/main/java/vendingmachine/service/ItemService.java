@@ -13,6 +13,7 @@ public class ItemService {
 	private ItemInputValidator itemInputValidator;
 	private InputView inputView;
 	private static final String ITEM_DELIMITER = ";";
+	public static final String ELEMENT_DELIMITER = ",";
 	private static final int ITEM_NAME_INDEX = 0;
 	private static final int ITEM_PRICE_INDEX = 1;
 	private static final int ITEM_QUANTITY_INDEX = 2;
@@ -45,7 +46,7 @@ public class ItemService {
 
 	private Item splitItem(String itemString) {
 		String itemWithoutBrackets = itemInputValidator.deleteBrackets(itemString);
-		List<String> elementList = Arrays.asList(itemWithoutBrackets.split(","));
+		List<String> elementList = Arrays.asList(itemWithoutBrackets.split(ELEMENT_DELIMITER));
 		String itemName = elementList.get(ITEM_NAME_INDEX);
 		int price = Integer.parseInt(elementList.get(ITEM_PRICE_INDEX));
 		int quantity = Integer.parseInt(elementList.get(ITEM_QUANTITY_INDEX));

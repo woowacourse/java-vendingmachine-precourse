@@ -11,12 +11,17 @@ public class ItemInputValidator {
 	private static final int QUANTITY_INDEX = 2;
 	private static final int QUANTITY_MIN = 1;
 	private static final int MINIMUM_PRICE = 100;
+	public static final int SIZE_OF_ITEM_LIST = 3;
+	public static final int ZERO = 0;
+	private static final String START_BRACKET = "[";
+	private static final String END_BRACKET = "]";
+	public static final String ELEMENT_DELIMITER = ",";
 
 	public boolean validateItemInput(String itemString) {
 		try {
 			validateBrackets(itemString);
 			String itemWithoutBrackets = deleteBrackets(itemString);
-			List<String> itemElements = Arrays.asList(itemWithoutBrackets.split(","));
+			List<String> itemElements = Arrays.asList(itemWithoutBrackets.split(ELEMENT_DELIMITER));
 			validateSize(itemElements);
 			validatePrice(itemElements);
 			validateQuantity(itemElements);
@@ -28,16 +33,16 @@ public class ItemInputValidator {
 	}
 
 	private void validateBrackets(String itemString) {
-		if (!itemString.startsWith("[")) {
+		if (!itemString.startsWith(START_BRACKET)) {
 			throw new IllegalArgumentException("각 상품의 입력은 대괄호로 시작해야 합니다.");
 		}
-		if (!itemString.endsWith("]")) {
+		if (!itemString.endsWith(END_BRACKET)) {
 			throw new IllegalArgumentException("각 상품의 입력은 대괄호로 끝나야 합니다.");
 		}
 	}
 
 	private void validateSize(List<String> itemElements) {
-		if (!(itemElements.size() == 3)) {
+		if (!(itemElements.size() == SIZE_OF_ITEM_LIST)) {
 			throw new IllegalArgumentException("상품의 정보는 [상품,가격,수량]으로 입력해야 합니다.");
 		}
 	}
@@ -64,7 +69,7 @@ public class ItemInputValidator {
 	}
 
 	private void isDivisible(String priceString) {
-		if (Integer.parseInt(priceString) % PRICE_DIVISIBLE_BY != 0) {
+		if (Integer.parseInt(priceString) % PRICE_DIVISIBLE_BY != ZERO) {
 			throw new IllegalArgumentException("상품의 가격은 10으로 나누어 떨어져야 합니다.");
 		}
 	}
