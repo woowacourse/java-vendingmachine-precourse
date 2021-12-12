@@ -18,9 +18,13 @@ public class Items {
 	}
 
 	public Item findItemByName(String name) {
-		return items.stream()
+		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException("해당 이름의 상품을 찾을 수 없습니다."));
+		if (foundItem.getAmount() <= 0) {
+			throw new IllegalArgumentException("상품의 수량이 0개이므로 구매할 수 없습니다.");
+		}
+		return foundItem;
 	}
 
 	public boolean checkAllOutOfOrder() {
