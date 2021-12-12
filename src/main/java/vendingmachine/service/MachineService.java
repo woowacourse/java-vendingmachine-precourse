@@ -34,21 +34,22 @@ public class MachineService {
 		while (deposit > 0) {
 			int amountRandomized = Randoms.pickNumberInList(
 				coinList.stream().map(Coin::getAmount).collect(Collectors.toList()));
-			Deposit randomizedDeposit = getDepositRandomized(deposit, amountRandomized);
-			deposit -= randomizedDeposit.getCoin().getAmount() * randomizedDeposit.getCount();
-			countMap.put(randomizedDeposit.getCoin(),
-				countMap.get(randomizedDeposit.getCoin()) + randomizedDeposit.getCount());
+			int amountToSub = getAmountToSub(deposit, amountRandomized);
+			if(Coin.ofValue(amountToSub).isPresent()){
+				Coin target = Coin.ofValue(amountRandomized).get();
+				deposit -= amountToSub;
+				countMap.put(target, countMap.get(target) + 1);
+			}
 		}
 
 		depositRepository.save(
 			countMap.keySet().stream().map(coin -> new Deposit(coin, countMap.get(coin))).collect(Collectors.toList()));
 	}
 
-	private Deposit getDepositRandomized(int deposit, int amountRandomized) {
-		int maxCount = deposit / amountRandomized;
-		Coin coinRandomized = Coin.ofValue(amountRandomized).get();
-		int countRandomized = Randoms.pickNumberInRange(0, maxCount);
-		return new Deposit(coinRandomized, countRandomized);
+	private int getAmountToSub(int deposit, int amountRandomized) {
+		if (deposit - amountRandomized < 0)
+			return 0;
+		return amountRandomized;
 	}
 
 	public void setProducts(List<String> inputList) {
