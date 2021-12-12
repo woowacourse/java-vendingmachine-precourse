@@ -19,4 +19,11 @@ public class Product {
         this.quantity -= 1;
         order.calculate(this.price);
     }
+
+    public boolean isPossibleBuy() {
+        if (this.quantity > 0) {
+            return true;
+        }
+        throw ErrorMessage.IMPOSSIBLE_BUY_PRODUCT.getException();
+    }
 }

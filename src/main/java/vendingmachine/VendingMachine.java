@@ -23,6 +23,7 @@ public class VendingMachine {
     public void buyProduct(Order order) {
         products.stream()
             .filter(product -> product.isEqualToName(order.getProductName()))
+            .filter(Product::isPossibleBuy)
             .findAny()
             .orElseThrow(ErrorMessage.NOT_FOUND_PRODUCT::getException)
             .processPurchasing(order);
