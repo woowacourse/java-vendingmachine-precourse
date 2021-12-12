@@ -1,10 +1,10 @@
 package vendingmachine;
 
-import vendingmachine.controller.VendingMachineController;
+import vendingmachine.controller.CoinController;
 
 public class Application {
 	public static void main(String[] args) {
-		VendingMachineController vendingMachineController = new VendingMachineController();
-		vendingMachineController.getVendingMachineAmount();
+		CoinController coinController = new CoinController();
+		coinController.setVendingMachineCoinCounter();
 	}
 }

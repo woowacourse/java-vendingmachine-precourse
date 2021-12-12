@@ -22,7 +22,7 @@ public enum Coin {
 		return allCointAmount.get(allCointAmount.size() - 1);
 	}
 
-	private static List<Integer> getAllCoinAmount() {
+	public static List<Integer> getAllCoinAmount() {
 		return Arrays.stream(Coin.values())
 			.map(coin -> coin.amount)
 			.sorted(Comparator.reverseOrder())
