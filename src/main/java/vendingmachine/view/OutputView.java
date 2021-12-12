@@ -24,4 +24,13 @@ public class OutputView {
 	public static void reportInputMoney(int money) {
 		System.out.println(ENTER + INPUT_MONEY_REPORT_MESSAGE + money + MONEY_UNIT);
 	}
+
+	public static void reportChange(Change change) {
+		System.out.println(CHANGE_REPORT_MESSAGE);
+		for (Map.Entry<Integer, Integer> coin : change.getCoins().entrySet()) {
+			if (coin.getValue() != 0) {
+				System.out.println(coin.getKey() + MONEY_UNIT + MONEY_COIN_SEPARATION + coin.getValue() + COIN_UNIT);
+			}
+		}
+	}
 }
