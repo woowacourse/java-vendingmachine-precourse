@@ -19,18 +19,18 @@ public class Product {
 		this.stock = quantity;
 	}
 
-	private void validateMinimumPrice(Money price) {
-		if(!price.isSpendable(MINIMUM_PRICE)) {
-			throw new IllegalArgumentException(Notification.PRODUCT_INSUFFICIENCY_PRICE.getMessage());
-		}
-	}
-
 	public static Product of(String name, String price, String quantity) {
 		return new Product(name, Money.of(price), Quantity.of(quantity));
 	}
 
+	private void validateMinimumPrice(Money price) {
+		if (!price.isSpendable(MINIMUM_PRICE)) {
+			throw new IllegalArgumentException(Notification.PRODUCT_INSUFFICIENCY_PRICE.getMessage());
+		}
+	}
+
 	private void validateNameEmpty(String name) {
-		if(name==null || name.isEmpty()) {
+		if (name == null || name.isEmpty()) {
 			throw new IllegalArgumentException(Notification.PRODUCT_NAME_INVALID.getMessage());
 		}
 	}
@@ -53,5 +53,9 @@ public class Product {
 
 	public Quantity getStock() {
 		return Quantity.of(stock.getCount());
+	}
+
+	public boolean isPurchasable(Money money) {
+		return !this.stock.isZero() && money.isSpendable(this.price);
 	}
 }

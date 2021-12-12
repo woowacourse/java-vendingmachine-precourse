@@ -36,4 +36,8 @@ public class VendingMachine {
 		Money productPrice = products.purchaseProduct(productName);
 		insertMoney.spend(productPrice);
 	}
+
+	public boolean isPurchasable() {
+		return products.isPurchasable(insertMoney);
+	}
 }

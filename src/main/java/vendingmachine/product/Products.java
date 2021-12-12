@@ -1,5 +1,6 @@
 package vendingmachine.product;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -61,5 +62,11 @@ public class Products {
 		if(!products.containsKey(productName)) {
 			throw new DomainNotFoundException(Notification.PRODUCT_NOT_FOUND.getMessage());
 		}
+	}
+
+	public boolean isPurchasable(Money money) {
+		Collection<Product> productCollection = products.values();
+		return productCollection.stream()
+			.anyMatch(product -> product.isPurchasable(money));
 	}
 }
