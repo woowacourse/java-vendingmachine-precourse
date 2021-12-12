@@ -10,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.constant.Coin;
+import vendingmachine.constant.Hint;
 import vendingmachine.constant.Symbol;
 import vendingmachine.domain.Deposit;
 import vendingmachine.domain.Machine;
@@ -87,32 +88,15 @@ class MachineServiceTest {
 	}
 
 	@Test
-	void isSpitableTrue() {
-		// given
-		machine.setUserMoney(5000);
-		// when
-		// then
-		assertThat(machineService.isSpitable()).isTrue();
-		assertThat(depositRepository.getDepositTotal()).isEqualTo(6600);
-	}
-
-	@Test
-	void isSpitableFalse() {
-		// given
-		machine.setUserMoney(6690);
-		// when
-		// then
-		assertThat(machineService.isSpitable()).isFalse();
-		assertThat(depositRepository.getDepositTotal()).isEqualTo(6600);
-	}
-
-	@Test
 	void spitChanges() {
 		// given
 		machine.setUserMoney(10000);
+		String previousDeposits = depositRepository.toStringSkipZero();
+		String expectedAfterSpit = new DepositRepository().toStringSkipZero();
 		// when
 		String changes = machineService.spitChanges();
 		// then
-		System.err.println(changes);
+		assertThat(changes).contains(previousDeposits);
+		assertThat(depositRepository.toStringSkipZero()).isEqualTo(expectedAfterSpit);
 	}
 }

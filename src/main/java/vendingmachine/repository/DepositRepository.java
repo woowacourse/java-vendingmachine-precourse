@@ -18,18 +18,6 @@ public class DepositRepository {
 		depositMap = new TreeMap<>();
 	}
 
-	public DepositRepository(DepositRepository depositRepository) {
-		this.depositMap = new HashMap<>();
-		depositRepository.depositMap.values()
-			.stream()
-			.map(deposit -> new Deposit(deposit.getCoin(), deposit.getCount()))
-			.forEach(nd -> depositMap.put(nd.getCoin(), nd));
-	}
-
-	public void save(DepositRepository depositRepository) {
-		depositRepository.depositMap.values().forEach(deposit -> depositMap.put(deposit.getCoin(), deposit));
-	}
-
 	public void save(List<Deposit> depositList) {
 		depositList.forEach(deposit -> depositMap.put(deposit.getCoin(), deposit));
 	}
@@ -47,6 +35,27 @@ public class DepositRepository {
 			.stream()
 			.mapToInt(deposit -> deposit.getCoin().getAmount() * deposit.getCount())
 			.sum();
+	}
+
+	public DepositRepository spit(int money) {
+		DepositRepository changes = new DepositRepository();
+		spitRecursive(0, money, changes);
+		return changes;
+	}
+
+	private void spitRecursive(int coinIndex, int moneySum, DepositRepository changes) {
+		if (moneySum == 0)
+			return;
+		if (coinIndex >= Coin.values().length)
+			return;
+		Coin coin = Coin.values()[coinIndex];
+		Deposit deposit = this.findByCoin(coin).orElse(new Deposit(Coin.COIN_10, 0));
+		int count = Math.min(moneySum / coin.getAmount(), deposit.getCount());
+
+		moneySum -= coin.getAmount() * count;
+		deposit.decreaseBy(count);
+		changes.save(new Deposit(coin, count));
+		spitRecursive(coinIndex + 1, moneySum, changes);
 	}
 
 	@Override
