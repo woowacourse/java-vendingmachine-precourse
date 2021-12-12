@@ -5,8 +5,10 @@ import vendingmachine.model.money.Money;
 public class OutputView {
 
     public static final String INPUT_MONEY = "투입 금액 : ";
+    public static final String CHANGE = "잔돈";
 
-    public static void showCoins(String s) {
+    public static void showCoins(String coins) {
+        System.out.println(coins);
     }
 
     public static void showInputMoney(Money money) {
@@ -14,6 +16,7 @@ public class OutputView {
     }
 
     public static void showChange(Money money) {
+        System.out.println(CHANGE);
         System.out.println(money.showChange());
     }
 }

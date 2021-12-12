@@ -20,7 +20,6 @@ public class Money {
     }
 
     public String showCoins() {
-        System.out.println(moneyCoins.toString());
         return moneyCoins.toString();
     }
 
