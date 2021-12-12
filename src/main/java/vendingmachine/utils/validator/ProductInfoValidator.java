@@ -17,6 +17,7 @@ public class ProductInfoValidator {
     public static final String LESS_THAN_100_PRICE_ERROR_MESSAGE = "상품 가격은 반드시 100원 이상이어야 합니다.";
     public static final String NOT_DIVISIBLE_BY_10_PRICE_ERROR_MESSAGE = "상품 가격의 최소 단위는 10이어야 합니다.";
     public static final String INVALID_NUMBER_STOCK_ERROR_MESSAGE = "상품 수량은 반드시 10억 이하의 숫자여야 합니다.";
+    public static final String NEGATIVE_STOCK_ERROR_MESSAGE = "상품 가격은 반드시 0 이상이어야 합니다.";
     private static final String SEMICOLON_SEPARATION_REGEX = "\\s*;\\s*";
     private static final Pattern PRODUCT_INFO_PATTERN = Pattern.compile(
         "^\\[\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\]$");
@@ -26,6 +27,7 @@ public class ProductInfoValidator {
     private static final int PRODUCT_STOCK_INDEX = 3;
     private static final int PRICE_AND_STOCK_MAXIMUM = 1000000000;
     private static final int PRICE_MINIMUM = 100;
+    private static final int STOCK_MINIMUM = 0;
 
     public static List<Product> getValidProductList(final String input) {
         List<Product> productList = new ArrayList<>();
@@ -76,7 +78,8 @@ public class ProductInfoValidator {
         int intStock = NumberValidator.getValidNumber(stock, INVALID_NUMBER_STOCK_ERROR_MESSAGE);
         NumberValidator.validateNotExceedMaxValue(intStock, PRICE_AND_STOCK_MAXIMUM,
             INVALID_NUMBER_STOCK_ERROR_MESSAGE);
-        return NumberValidator.getValidNumber(stock, "");
+        NumberValidator.validateNotExceedMinValue(intStock, STOCK_MINIMUM, NEGATIVE_STOCK_ERROR_MESSAGE);
+        return intStock;
     }
 
     private static void validateIsNotDropped(final String input) {
