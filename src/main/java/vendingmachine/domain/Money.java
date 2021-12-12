@@ -23,6 +23,10 @@ public class Money {
 		this.money += money.money;
 	}
 
+	public void sub(Money price) {
+		this.money -= price.money;
+	}
+
 	public boolean isLowerThen(Money money) {
 		return this.money < money.money;
 	}

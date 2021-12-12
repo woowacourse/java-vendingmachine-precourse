@@ -3,6 +3,8 @@ package vendingmachine.domain;
 import static vendingmachine.enums.ErrorMessage.*;
 
 public class Quantity {
+	private static final int SOLD_OUT = 0;
+
 	private int quantity;
 
 	public Quantity(String value) {
@@ -18,6 +20,10 @@ public class Quantity {
 
 	public void add(int quantity) {
 		this.quantity += quantity;
+	}
+
+	public void sub(int quantity) {
+		this.quantity -= quantity;
 	}
 
 	private void validateNumberFormat(String value) {

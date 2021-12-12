@@ -4,6 +4,7 @@ import static vendingmachine.enums.ErrorMessage.*;
 
 public class Product {
 	private static final Money MINIMUM_PRICE = new Money("100");
+	private static final int ONE = 1;
 
 	private Name name;
 	private Money price;
@@ -35,5 +36,11 @@ public class Product {
 		if (price.isLowerThen(MINIMUM_PRICE)) {
 			throw new IllegalArgumentException(PRICE_LOWER_THEN_MINIMUM_PRICE_ERROR_MESSAGE.get());
 		}
+	}
+
+	public void sell() {
+		Money money = MoneyRepository.get();
+		money.sub(price);
+		quantity.sub(ONE);
 	}
 }
