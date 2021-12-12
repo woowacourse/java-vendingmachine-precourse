@@ -23,7 +23,7 @@ public class ProductValidator {
 		}
 	}
 
-	static public void validateIsEmptyName(String productName) {
+	static public void IsEmpty(String productName) {
 		if (productName.equals("")) {
 			throw new IllegalArgumentException(MSG_EMPTY_NAME_ERROR);
 		}

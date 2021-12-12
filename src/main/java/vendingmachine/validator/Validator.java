@@ -22,13 +22,13 @@ public class Validator {
 		}
 	}
 
-	public static void ValidateProduct(List<List<String>> productsEachInfoList) {
+	public static void validateEachProduct(List<List<String>> productsEachInfoList) {
 		for (List<String> productInfo : productsEachInfoList) {
-			Validator.validateEachProduct(productInfo);
+			Validator.ValidateProduct(productInfo);
 		}
 	}
 
-	private static void validateEachProduct(List<String> productInfo) {
+	private static void ValidateProduct(List<String> productInfo) {
 		ProductValidator.validateInfoMiss(productInfo);
 		validateProductName(productInfo.get(0));
 		validateProductPrice(productInfo.get(1));
@@ -36,13 +36,13 @@ public class Validator {
 	}
 
 	private static void validateProductName(String name) {
-		ProductValidator.validateIsEmptyName(name);
+		ProductValidator.IsEmpty(name);
 	}
 
 	private static void validateProductPrice(String price) {
 		NumberValidator.isInteger(price);
 		int intPrice = Integer.parseInt(price);
-		NumberValidator.checkLowLimitOfPrice(intPrice);
+		NumberValidator.isGreaterThanLowLimitOfPrice(intPrice);
 		NumberValidator.isDivisibleByLowLimitOfCoin(intPrice);
 	}
 
