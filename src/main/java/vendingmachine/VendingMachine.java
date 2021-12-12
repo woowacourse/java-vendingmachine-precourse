@@ -60,4 +60,19 @@ public class VendingMachine {
             products.remove(product);
         }
     }
+
+    public Change returnChange() {
+        Change change = new Change();
+        List<Coin> coinsInOrder = Coin.getCoinsInOrder();
+
+        for (Coin coin : coinsInOrder) {
+            while (coin.isLessOrEqualWith(money) && coins.isRemain(coin)) {
+                coins.pullCoin(coin);
+                change.addCoin(coin);
+                money = coin.subtractFrom(money);
+            }
+        }
+
+        return change;
+    }
 }

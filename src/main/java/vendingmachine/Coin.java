@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Coin {
     COIN_500(500),
@@ -52,5 +53,19 @@ public enum Coin {
                 .mapToInt(c -> c.amount)
                 .min()
                 .orElse(COIN_10.amount);
+    }
+
+    public static List<Coin> getCoinsInOrder() {
+        return Arrays.stream(Coin.values())
+                .sorted()
+                .collect(Collectors.toList());
+    }
+
+    public boolean isLessOrEqualWith(int money) {
+        return amount <= money;
+    }
+
+    public int subtractFrom(int money) {
+        return money - amount;
     }
 }

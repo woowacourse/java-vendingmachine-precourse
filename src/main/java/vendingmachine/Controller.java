@@ -30,6 +30,7 @@ public class Controller {
     private void buyProduct() {
         System.out.printf((Constant.REMAIN_MONEY) + "%n", machine.remainMoney());
         if (!machine.canBuyWith(machine.remainMoney())) {
+            System.out.println(machine.returnChange());
             return;
         }
         String nameToBuy = input.requestBuyingProduct();
