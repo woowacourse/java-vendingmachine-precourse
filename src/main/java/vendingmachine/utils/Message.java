@@ -5,6 +5,8 @@ public class Message {
     public static String VENDINGMACHINE_INPUT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
     public static String PRODUCTS_INPUT = "상품명과 가격, 수량을 입력해 주세요.";
     public static String AMOUNT_INPUT = "투입 금액을 입력해 주세요.";
+    public static String PRODUCT_NAME_INPUT = "구매할 상품명을 입력하세요";
+    public static String BALANCE = "투입 금액: %s원\n";
 
     public static String ERROR = "[ERROR]";
     public static String IS_NOT_NUMERIC = "입력값은 숫자여야 합니다.";
