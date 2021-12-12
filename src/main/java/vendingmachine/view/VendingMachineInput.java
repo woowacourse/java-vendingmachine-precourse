@@ -47,4 +47,10 @@ public class VendingMachineInput {
 		final String productsInformation = Console.readLine();
 		return parseProductsInformation(productsInformation);
 	}
+
+	public int inputMoney() {
+		System.out.println(VendingMachineMessage.INPUT_MONEY);
+		final String inputtedMoney = Console.readLine();
+		return Integer.parseInt(inputtedMoney);
+	}
 }

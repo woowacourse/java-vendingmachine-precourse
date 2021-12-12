@@ -6,7 +6,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -68,4 +67,14 @@ class VendingMachineInputTest {
 		}
 	}
 
+	@DisplayName("상품 구매를 위해 투입한 금액에 정상적으로 반환되는지 확인")
+	@ParameterizedTest(name = "{displayName} inputtedMoney={0}")
+	@ValueSource(strings = {"1000", "500"})
+	void inputMoneyToPurchaseProduct(final String inputtedMoney) {
+		InputStream input = new ByteArrayInputStream(inputtedMoney.getBytes());
+		System.setIn(input);
+
+		assertEquals(Integer.parseInt(inputtedMoney),
+			vendingMachineInput.inputMoney(), "투입된 금액과 반환된 금액이 일치하지 않음");
+	}
 }
