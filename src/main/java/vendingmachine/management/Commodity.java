@@ -4,7 +4,7 @@ import vendingmachine.management.validation.CheckCommodityName;
 import vendingmachine.management.validation.CheckCommodityPrice;
 import vendingmachine.management.validation.CheckCommodityQuantity;
 
-public class Commodity {
+public class Commodity implements Cloneable {
     private String name;
     private int price;
     private int quantity;
@@ -28,6 +28,19 @@ public class Commodity {
     
     public int getQuantity() {
         return quantity;
+    }
+    
+    @Override
+    public Commodity clone() {
+        Object obj = null;
+        try {
+            obj = super.clone();
+        } catch (CloneNotSupportedException e) {}
+        Commodity c = (Commodity)obj;
+        c.name = this.name;
+        c.price = this.price;
+        c.quantity = this.quantity;
+        return c;
     }
     
     private void validCommodityName(String name) {
