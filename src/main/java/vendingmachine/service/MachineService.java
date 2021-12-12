@@ -92,8 +92,7 @@ public class MachineService {
 	}
 
 	public boolean isSpitable() {
-		return isSpitableRecursive(0, machine.getUserMoney(),
-			new DepositRepository(depositRepository));
+		return isSpitableRecursive(0, machine.getUserMoney(), new DepositRepository(depositRepository));
 	}
 
 	private boolean isSpitableRecursive(int coinIndex, int moneySum, DepositRepository clonedDR) {
@@ -104,11 +103,35 @@ public class MachineService {
 		}
 		Coin coin = Coin.values()[coinIndex];
 		int amount = coin.getAmount();
-		Deposit deposit = clonedDR.findByCoin(coin).orElse(new Deposit(Coin.COIN_10,0));
+		Deposit deposit = clonedDR.findByCoin(coin).orElse(new Deposit(Coin.COIN_10, 0));
 		int count = Math.min(moneySum / amount, deposit.getCount());
 
 		moneySum -= amount * count;
 		deposit.decreaseBy(count);
 		return isSpitableRecursive(coinIndex + 1, moneySum, clonedDR);
+	}
+
+	public String spitChanges() {
+		DepositRepository changes = new DepositRepository();
+		DepositRepository leftOver = new DepositRepository(depositRepository);
+		spitRecursive(0, machine.getUserMoney(), leftOver, changes);
+		depositRepository.save(leftOver);
+		return changes.toString();
+	}
+
+	private void spitRecursive(int coinIndex, int moneySum, DepositRepository leftOver, DepositRepository changes) {
+		if (moneySum == 0)
+			return;
+		if (coinIndex >= Coin.values().length)
+			return;
+
+		Coin coin = Coin.values()[coinIndex];
+		Deposit deposit = leftOver.findByCoin(coin).orElse(new Deposit(Coin.COIN_10, 0));
+		int count = Math.min(moneySum / coin.getAmount(), deposit.getCount());
+
+		moneySum -= coin.getAmount() * count;
+		deposit.decreaseBy(count);
+		changes.save(new Deposit(coin, count));
+		spitRecursive(coinIndex + 1, moneySum, leftOver, changes);
 	}
 }

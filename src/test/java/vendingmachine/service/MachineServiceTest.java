@@ -107,4 +107,14 @@ class MachineServiceTest {
 		assertThat(machineService.isSpitable()).isFalse();
 		assertThat(depositRepository.getDepositTotal()).isEqualTo(6600);
 	}
+
+	@Test
+	void spitChanges() {
+		// given
+		machine.setUserMoney(10000);
+		// when
+		String changes = machineService.spitChanges();
+		// then
+		System.err.println(changes);
+	}
 }

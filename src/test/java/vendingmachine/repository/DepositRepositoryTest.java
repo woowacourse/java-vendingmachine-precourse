@@ -9,6 +9,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.constant.Coin;
+import vendingmachine.constant.Hint;
 import vendingmachine.domain.Deposit;
 
 class DepositRepositoryTest {
@@ -53,5 +54,35 @@ class DepositRepositoryTest {
 		// when
 		// then
 		assertThat(depositRepository.getDepositTotal()).isEqualTo(totalExpected);
+	}
+
+	@Test
+	void saveDeposit() {
+		// given
+		Deposit deposit = new Deposit(Coin.COIN_10, 1);
+		// when
+		depositRepository.save(deposit);
+		// then
+		assertThat(depositRepository.findByCoin(deposit.getCoin())).hasValueSatisfying(d -> {
+			assertThat(d.getCoin()).isEqualTo(deposit.getCoin());
+			assertThat(d.getCount()).isEqualTo(deposit.getCount());
+		});
+	}
+
+	@Test
+	void testToString() {
+		// given
+		// when
+		// then
+		assertThat(depositRepository.toString()).satisfies(s -> {
+			assertThat(s).contains(String.format(Hint.DEPOSIT_EACH.getHint(), depositList.get(0).getCoin().getAmount(),
+				depositList.get(0).getCount()));
+			assertThat(s).contains(String.format(Hint.DEPOSIT_EACH.getHint(), depositList.get(1).getCoin().getAmount(),
+				depositList.get(1).getCount()));
+			assertThat(s).contains(String.format(Hint.DEPOSIT_EACH.getHint(), depositList.get(2).getCoin().getAmount(),
+				depositList.get(2).getCount()));
+			assertThat(s).contains(String.format(Hint.DEPOSIT_EACH.getHint(), depositList.get(3).getCoin().getAmount(),
+				depositList.get(3).getCount()));
+		});
 	}
 }
