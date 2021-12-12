@@ -19,11 +19,6 @@ public class Products {
         return new Products(new ArrayList<>());
     }
 
-    public void putProducts(List<Product> products) {
-        checkProductNameDuplicate(this.products, products);
-        this.products.addAll(products);
-    }
-
     private static void checkProductNameDuplicate(List<Product> products) {
         Set<Product> productSet = new HashSet<>(products);
         if (products.size() != productSet.size()) {
@@ -37,6 +32,11 @@ public class Products {
         if (products.size() + addProducts.size() != productSet.size()) {
             throw new IllegalArgumentException("[ERROR] 중복되는 이름의 상품은 같이 입력될 수 없습니다.");
         }
+    }
+
+    public void putProducts(List<Product> products) {
+        checkProductNameDuplicate(this.products, products);
+        this.products.addAll(products);
     }
 
     public int purchaseProduct(Money money, String name) {
