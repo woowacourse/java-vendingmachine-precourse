@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.utils.ExceptionMessage;
 import vendingmachine.utils.Validator;
 import vendingmachine.view.VendingMachineOutput;
 
@@ -15,7 +16,6 @@ public class VendingMachine {
     private ProductList productList;
 
     public VendingMachine(int amount) {
-        productList = new ProductList();
         this.amount = amount;
         generateNumberOfCoinsRandomly(amount);
     }
@@ -39,7 +39,6 @@ public class VendingMachine {
     }
 
     private Product transferRawDataToEntity(String productRawData) {
-
         String[] productInfo = productRawData.split(",");
         Validator.validateProductInformationSize(productInfo.length);
 
@@ -48,6 +47,7 @@ public class VendingMachine {
     }
 
     public void insertProducts(String products) {
+        productList = new ProductList();
         StringTokenizer stringTokenizer = new StringTokenizer(products, ";");
         Validator.validateProductInformationIsNull(stringTokenizer);
 
@@ -72,10 +72,20 @@ public class VendingMachine {
 
     public void reduceInputMoneyAndProductQuantityByName(String name) {
         Product[] products = productList.returnProductUsingName(name);
-        if(products.length <= DEFAULT_AMOUNT) return; // 에러 메세지
+        if(products.length <= DEFAULT_AMOUNT) {
+            System.out.println(ExceptionMessage.NOT_AVAILABLE);
+            return;
+        }
+
         for(Product product : products) {
-            if(!product.checkQuantityEnough()) return; // 에러 메세지
-            if(!product.checkPurchasePossible(inputMoney)) return; //에러 메세지
+            if(!product.checkQuantityEnough()) {
+                System.out.println(ExceptionMessage.OUT_OF_STOCK);
+                return;
+            }
+            if(!product.checkPurchasePossible(inputMoney)) {
+                System.out.println(ExceptionMessage.BALANCE_IS_INSUFFICIENT);
+                return;
+            }
             reduceInputMoney(product.price);
             product.reduceQuantity();
         }
