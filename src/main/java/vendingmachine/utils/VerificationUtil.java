@@ -1,6 +1,10 @@
 package vendingmachine.utils;
 
+import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachine;
+
 import java.util.Arrays;
+import java.util.List;
 
 public class VerificationUtil {
 
@@ -23,6 +27,25 @@ public class VerificationUtil {
                 .ifPresent(s -> {
                     throw new IllegalArgumentException("[ERROR] 잘못된 상품 입력입니다.");
                 });
+    }
+
+    public static void checkProduct(VendingMachine vendingMachine, String productName) {
+        List<Product> productList = vendingMachine.getProductList();
+
+        for (Product product : productList) {
+            if (product.getProductName().equals(productName)) {
+                checkProductAmount(product);
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("[ERROR] 해당하는 상품이 존재하지 않습니다.");
+    }
+
+    private static void checkProductAmount(Product product) {
+        if (product.getQuantity() <= 0) {
+            throw new IllegalArgumentException("[ERROR] 해당 상품의 재고가 없습니다.");
+        }
     }
 
     private static int getValidatedNumber(String input) {
