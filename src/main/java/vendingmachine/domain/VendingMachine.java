@@ -65,13 +65,7 @@ public class VendingMachine {
     }
 
     private void sellMerchandise() {
-        String name = InputView.getMerchandiseNameInput();
-        Merchandise merchandise = menu.getMerchandiseByName(name);
-
-        if (merchandise.getNumber() == 0) {
-            throw new IllegalArgumentException(SOLD_OUT_EXCEPTION);
-        }
-
+        Merchandise merchandise = menu.selectAvailableMerchandise();
         customerMoneyLeft -= merchandise.getPrice();
         merchandise.decreaseNumber();
     }
