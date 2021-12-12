@@ -2,7 +2,7 @@ package vendingmachine.util.validator;
 
 import static vendingmachine.util.validator.Validation.acceptThrow;
 
-public class VendingMachineValidation {
+public class BalanceValidation {
     public static void verifyBalanceInput(String userInput, ThrowIllegalSupplier validator) {
         StringValidation.isNotInteger(userInput, validator);
         StringValidation.isOutOfIntegerRange(userInput, validator);

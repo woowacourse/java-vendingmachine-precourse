@@ -4,12 +4,12 @@ import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 
-public class VendingMachineValidationTest {
+public class BalanceValidationTest {
 
     @Test
     void 정수_외_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> VendingMachineValidation
+                .isThrownBy(() -> BalanceValidation
                         .verifyBalanceInput("1a3",() -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
@@ -17,7 +17,7 @@ public class VendingMachineValidationTest {
     @Test
     void 음수_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> VendingMachineValidation
+                .isThrownBy(() -> BalanceValidation
                         .verifyBalanceInput("-1",() -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
@@ -25,7 +25,7 @@ public class VendingMachineValidationTest {
     @Test
     void Integer_범위를_넘는_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> VendingMachineValidation
+                .isThrownBy(() -> BalanceValidation
                         .verifyBalanceInput("999999999999",() -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
@@ -33,7 +33,7 @@ public class VendingMachineValidationTest {
     @Test
     void 입력값_10의_배수_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> VendingMachineValidation
+                .isThrownBy(() -> BalanceValidation
                         .verifyBalanceInput("131",() -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
