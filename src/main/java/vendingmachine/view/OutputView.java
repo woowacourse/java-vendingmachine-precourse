@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Quantity;
@@ -20,7 +20,7 @@ public class OutputView {
 	}
 
 	public static void outputAllCoinQuantity(ResponseAllCoinQuantity responseAllCoinQuantity) {
-		HashMap<Coin, Quantity> coins = responseAllCoinQuantity.getCoins();
+		Map<Coin, Quantity> coins = responseAllCoinQuantity.getCoins();
 		System.out.println(RESPONSE_ALL_COIN_QUANTITY_MESSAGE);
 		for (Coin coin : Coin.values()) {
 			int amount = coin.get();

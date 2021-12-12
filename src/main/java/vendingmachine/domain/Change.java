@@ -1,11 +1,12 @@
 package vendingmachine.domain;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import vendingmachine.enums.Coin;
 
 public class Change {
-	private final HashMap<Coin, Quantity> change;
+	private final Map<Coin, Quantity> change;
 
 	public Change() {
 		change = new HashMap<>();

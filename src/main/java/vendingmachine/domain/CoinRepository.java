@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.Map;
 
 import vendingmachine.enums.Coin;
 
@@ -8,7 +10,7 @@ public class CoinRepository {
 	private static final String INIT_QUANTITY = "0";
 	private static final int ONE = 1;
 
-	private static final HashMap<Coin, Quantity> coins = new HashMap<>();
+	private static final Map<Coin, Quantity> coins = new HashMap<>();
 
 	static {
 		coins.put(Coin.COIN_500, new Quantity(INIT_QUANTITY));
@@ -29,7 +31,7 @@ public class CoinRepository {
 		coins.get(coin).sub(quantity.get());
 	}
 
-	public static HashMap<Coin, Quantity> findAll() {
+	public static Map<Coin, Quantity> findAll() {
 		return coins;
 	}
 

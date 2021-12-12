@@ -1,18 +1,18 @@
 package vendingmachine.dto;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import vendingmachine.domain.Quantity;
 import vendingmachine.enums.Coin;
 
 public class ResponseAllCoinQuantity {
-	private HashMap<Coin, Quantity> coins;
+	private Map<Coin, Quantity> coins;
 
-	public ResponseAllCoinQuantity(HashMap<Coin, Quantity> coins) {
+	public ResponseAllCoinQuantity(Map<Coin, Quantity> coins) {
 		this.coins = coins;
 	}
 
-	public HashMap<Coin, Quantity> getCoins() {
+	public Map<Coin, Quantity> getCoins() {
 		return coins;
 	}
 }
