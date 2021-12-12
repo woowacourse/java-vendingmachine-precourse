@@ -9,15 +9,15 @@ import vendingmachine.view.OutputView;
 
 public class CoinCaseFactory {
 
-	public static int currentAmount;
+	private static int currentAmount;
 
 	private CoinCaseFactory() {
 	}
 
 	public static List<CoinCase> makeCoinCases(int totalAmount) {
 		currentAmount = totalAmount;
-		List<Coin> coinTypes = Arrays.stream(Coin.values()).collect(Collectors.toList());
-		List<CoinCase> coinCases = coinTypes.stream()
+		List<CoinCase> coinCases = Arrays.
+			stream(Coin.values())
 			.map(CoinCaseFactory::makeCoinCase)
 			.collect(Collectors.toList());
 		OutputView.printVendingMachineCoinStatus(coinCases);

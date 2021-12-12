@@ -14,9 +14,9 @@ public class ProductFactory {
 
 	public static List<Product> makeProducts() {
 		String inputProductsInfo = InputView.writeProductsInfo();
-		List<String> productsInfo = Arrays.asList(inputProductsInfo.split(PRODUCTS_DELIMITER));
 		try {
-			List<Product> products = productsInfo.stream()
+			List<Product> products = Arrays
+				.stream(inputProductsInfo.split(PRODUCTS_DELIMITER))
 				.map(Product::new)
 				.collect(Collectors.toList());
 			ProductException.validateDuplicatedName(products);
