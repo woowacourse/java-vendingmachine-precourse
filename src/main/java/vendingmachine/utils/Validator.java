@@ -25,4 +25,10 @@ public class Validator {
 			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_INPUT_ERROR_MESSAGE);
 		}
 	}
+
+	public static void validateEmptyMerchandiseInformation(String[] merchandiseInformation) {
+		if (merchandiseInformation.length < 3) {
+			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_INFORMATION_ERROR_MESSAGE);
+		}
+	}
 }
