@@ -53,4 +53,8 @@ public class CoinProcessor {
 	private int getRandomCoin() {
 		return Randoms.pickNumberInList(Coin.getCoinValues());
 	}
+
+	public Map<Coin, Integer> getCoinMap() {
+		return coinMap;
+	}
 }
