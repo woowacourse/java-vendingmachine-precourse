@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -39,5 +40,9 @@ public class VendingMachineController {
 
 	public void printInputMoney(int inputMoney) {
 		OutputView.printInputMoney(inputMoney);
+	}
+
+	public void printChange(Map<Integer, Integer> changes) {
+		OutputView.printChange(changes);
 	}
 }

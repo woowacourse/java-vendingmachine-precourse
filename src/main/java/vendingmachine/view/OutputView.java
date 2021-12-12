@@ -13,6 +13,8 @@ public class OutputView {
 	private static final String HOLDING_COINS_GUIDE_MESSEAGE_SUFFIX = "개";
 	private static final String INPUT_MONEY_GUIDE_MESSEAGE = "투입 금액: ";
 	private static final String INPUT_MONEY_GUIDE_MESSEAGE_SUFFIX = "원";
+	private static final String CHANGE_GUIDE_MESSEAGE = "잔돈";
+	private static final String CHANGE_GUIDE_MESSEAGE_SUFFIX = "개";
 
 	public static void printHoldingCoins(Map<Coin, Count> coins) {
 		System.out.println();
@@ -30,5 +32,15 @@ public class OutputView {
 		System.out.print(INPUT_MONEY_GUIDE_MESSEAGE);
 		System.out.print(inputMoney);
 		System.out.println(INPUT_MONEY_GUIDE_MESSEAGE_SUFFIX);
+	}
+
+	public static void printChange(Map<Integer, Integer> changes) {
+		System.out.println(CHANGE_GUIDE_MESSEAGE);
+		for (Integer coin : changes.keySet()) {
+			System.out.print(coin);
+			System.out.print(HOLDING_COINS_CONNECTOR);
+			System.out.print(changes.get(coin));
+			System.out.println(CHANGE_GUIDE_MESSEAGE_SUFFIX);
+		}
 	}
 }

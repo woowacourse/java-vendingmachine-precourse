@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -23,12 +24,15 @@ public class Application {
 		Money inputMoney = new Money(Integer.parseInt(vendingMachineController.scanInputMoney()));
 		while (inputMoney.isRemain()) {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());
-			String buyProductName = vendingMachineController.scanBuyProductName();
-			products = products.buy(buyProductName);
-			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
 			if (products.isHigherThanMinProductPrice(inputMoney)) {
 				break;
 			};
+			String buyProductName = vendingMachineController.scanBuyProductName();
+			products = products.buy(buyProductName);
+			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
+
 		}
+		Map<Integer, Integer> changes = Coins.returnChange(inputMoney);
+		vendingMachineController.printChange(changes);
 	}
 }

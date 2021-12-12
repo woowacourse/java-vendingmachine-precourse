@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -37,5 +38,23 @@ public class Coins {
 			}
 		}
 		return coinsCount;
+	}
+
+	public static Map<Integer, Integer> returnChange(Money inputMoney) {
+		int changeSum = inputMoney.getMoney();
+		Map<Integer, Integer> changes = new LinkedHashMap<>();
+		for (Coin coin : coinsCount.keySet()) {
+			int changeCnt = 0;
+			int coinCnt = coinsCount.get(coin).getCount();
+			if (coinCnt * coin.getAmount() <= changeSum) {
+				changeCnt += coinCnt;
+			}
+			if (coinCnt * coin.getAmount() > changeSum) {
+				changeCnt += changeSum / coin.getAmount();
+			}
+			changes.put(coin.getAmount(), changeCnt);
+			changeSum -= changeCnt * coin.getAmount();
+		}
+		return changes;
 	}
 }
