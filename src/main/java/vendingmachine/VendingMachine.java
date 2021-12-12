@@ -12,7 +12,7 @@ public class VendingMachine {
         for (Coin coin : coins) {
             this.coins.addCoin(coin);
         }
-        System.out.println(coins);
+        System.out.println(this.coins);
     }
 
     public void registerProducts(String input) {
