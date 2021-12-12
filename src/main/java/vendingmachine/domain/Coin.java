@@ -1,7 +1,9 @@
 package vendingmachine.domain;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import vendingmachine.exception.CoinNotExistAmountException;
 
@@ -28,5 +30,16 @@ public enum Coin {
             .filter(coin -> coin.amount == amount)
             .findFirst()
             .orElseThrow(CoinNotExistAmountException::new);
+    }
+
+    public static Map<Coin, Integer> createEmptyCoinMap() {
+        Map<Coin, Integer> coinMap = new HashMap<>();
+        Arrays.stream(values())
+            .forEach(coin -> coinMap.put(coin, 0));
+        return coinMap;
+    }
+
+    public int amount() {
+        return amount;
     }
 }
