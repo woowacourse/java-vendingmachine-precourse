@@ -7,12 +7,19 @@ public class StringFormatValidator {
     public static void validateMerchandiseInfoFormat(String merchandiseInfo) {
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
         String name = infoList[0];
-        validateIntType(infoList[1]);
-        validateIntType(infoList[2]);
-        int price = Integer.parseInt(infoList[1]);
+
+        validatePriceInput(infoList[1]);
+        validateMerchandiseNumberInput(infoList[2]);
+    }
+
+    private static void validatePriceInput(String input) {
+        int price = validateIntType(input);
         validateNotLessThanHundred(price);
         NumberValidator.validateNotHaveOnesDigit(price);
-        int number = Integer.parseInt(infoList[2]);
+    }
+
+    private static void validateMerchandiseNumberInput(String input) {
+        int number = validateIntType(input);
         validateNotNegativeNumber(number);
     }
 
