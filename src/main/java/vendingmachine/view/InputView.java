@@ -47,7 +47,7 @@ public class InputView {
 			}
 		}
 	}
-	// 예외 처리 넣기
+
 	public static String inputProductNameToBuy(VendingMachine vendingMachine) {
 		System.out.println(SystemMessage.GET_PRODUCT_NAME_TO_BUY.getText());
 		while (true) {
