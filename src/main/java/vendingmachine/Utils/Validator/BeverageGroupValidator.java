@@ -2,6 +2,7 @@ package vendingmachine.Utils.Validator;
 
 import java.util.Arrays;
 
+import vendingmachine.Model.Converter;
 import vendingmachine.Utils.Constants;
 
 public class BeverageGroupValidator {
@@ -24,9 +25,9 @@ public class BeverageGroupValidator {
 	}
 
 	private void isNoDuplicate() {
-		String[] beverageNames = Arrays
-			.stream(beverageString.split(Constants.SEPARATOR))
-			.map(beverage -> beverage.split(Constants.DELIMITER)[0])
+		String[] beverageNames = Converter.getBeverages(beverageString)
+			.stream()
+			.map(beverage -> beverage.name)
 			.toArray(String[]::new);
 
 		if (beverageNames.length != Arrays.stream(beverageNames).distinct().count()) {

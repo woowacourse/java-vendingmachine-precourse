@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class ChangesCoinGroup extends CoinGroup {
 	private final CoinGroup changeCoins;
-	private Money userMoney;
+	private final Money userMoney;
 
 	public ChangesCoinGroup(VendingMachine vendingMachine) {
 		super();

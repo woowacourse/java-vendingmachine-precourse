@@ -12,9 +12,7 @@ public class CoinGroup {
 
 	public CoinGroup(Money money) {
 		initiate();
-		while (!money.isEmpty()) {
-			moneyToCoin(money);
-		}
+		moneyToCoin(money);
 	}
 
 	private void initiate() {
@@ -28,6 +26,9 @@ public class CoinGroup {
 		if (money.isBiggerOrSame(coin.getAmount())) {
 			coins.replace(coin, coins.get(coin) + 1);
 			money.setMinus(coin.getAmount());
+		}
+		if (!money.isEmpty()) {
+			moneyToCoin(money);
 		}
 	}
 
