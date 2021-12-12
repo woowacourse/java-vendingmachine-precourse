@@ -43,9 +43,17 @@ public class Validator {
 			.collect(Collectors.toList());
 		ProductValidator.checkInfoMiss(info);
 		checkProductName(info.get(0));
+		checkProductPrice(info.get(1));
 	}
 
 	private static void checkProductName(String name){
 		ProductValidator.checkIsEmptyName(name);
+	}
+
+	private static void checkProductPrice(String price) {
+		NumberValidator.isInteger(price);
+		int intPrice = Integer.parseInt(price);
+		NumberValidator.checkLowLimitOfPrice(intPrice);
+		NumberValidator.isDivisibleByLowLimitOfCoin(intPrice);
 	}
 }
