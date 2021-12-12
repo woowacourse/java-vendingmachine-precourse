@@ -1,11 +1,29 @@
 package vendingmachine.job;
 
-import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.controller.ProductController;
+import vendingmachine.view.ViewManager;
 
 public class ConsoleProductJob implements ProductJob {
+
+	private final ViewManager viewManager;
+	private final ProductController controller;
+
+	public ConsoleProductJob(ViewManager viewManager, ProductController controller) {
+		this.viewManager = viewManager;
+		this.controller = controller;
+	}
+
 	@Override
 	public void execute() {
-		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-		String inputProduct = Console.readLine();
+		tryExecute();
+	}
+
+	private void tryExecute() {
+		try {
+			controller.generateProductLine(viewManager.input());
+		} catch (IllegalArgumentException exception) {
+			viewManager.error(exception.getMessage());
+			tryExecute();
+		}
 	}
 }
