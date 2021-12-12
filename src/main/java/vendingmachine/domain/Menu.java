@@ -16,4 +16,16 @@ public class Menu {
         }
         throw new IllegalArgumentException();
     }
+
+    public boolean canBuyMore(int moneyLeft) {
+        boolean isEnoughMoney = false;
+        for (Merchandise merchandise : this.merchandiseList) {
+            if (merchandise.getNumber() == 0) continue;
+            if (moneyLeft >= merchandise.getPrice()) {
+                isEnoughMoney = true;
+                break;
+            }
+        }
+        return isEnoughMoney;
+    }
 }

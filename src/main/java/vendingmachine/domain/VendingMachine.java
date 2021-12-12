@@ -5,9 +5,7 @@ import vendingmachine.domain.enums.Coin;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class VendingMachine {
 
@@ -27,7 +25,7 @@ public class VendingMachine {
         while (true) {
             OutputView.printMoneyLeft(this.getMoneyLeft());
 
-            if (!this.canBuyMore()) break;
+            if (!menu.canBuyMore(this.moneyLeft)) break;
             this.sellMerchandise();
         }
 
@@ -66,28 +64,12 @@ public class VendingMachine {
 
     private void sellMerchandise() {
         String name = InputView.getMerchandiseNameInput();
-
         Merchandise merchandise = menu.getMerchandiseByName(name);
 
         if (merchandise.getNumber() == 0) throw new IllegalArgumentException();
 
         moneyLeft -= merchandise.getPrice();
-
         merchandise.decreaseNumber();
-    }
-
-    private boolean canBuyMore() {
-        boolean isEnoughMoney = false;
-        for (List<Integer> info : menu.values()) {
-            int price = info.get(0);
-            int number = info.get(1);
-            if (number == 0) continue;
-            if (moneyLeft >= price) {
-                isEnoughMoney = true;
-                break;
-            }
-        }
-        return isEnoughMoney;
     }
 
     private HashMap<Coin, Integer> calculateCoinChanges() {
