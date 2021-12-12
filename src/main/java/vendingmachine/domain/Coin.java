@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.constant.MessageConst;
 
 public enum Coin {
 	COIN_500(500),
@@ -23,7 +24,7 @@ public enum Coin {
 
 	@Override
 	public String toString() {
-		return amount + "원";
+		return amount + MessageConst.COIN_UNIT;
 	}
 
 	public int randomPick(int money) {

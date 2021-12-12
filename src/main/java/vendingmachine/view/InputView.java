@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.constant.ErrorConst;
 
 public class InputView {
 	public static String inputText() {
@@ -11,7 +12,7 @@ public class InputView {
 		try {
 			return Integer.parseInt(inputText());
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+			throw new IllegalArgumentException(ErrorConst.MONEY_IS_NUMBER);
 		}
 	}
 }

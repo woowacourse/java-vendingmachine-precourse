@@ -1,15 +1,20 @@
 package vendingmachine.util;
 
+import vendingmachine.constant.ErrorConst;
 import vendingmachine.domain.Coin;
 
 public class Validator {
 	public static void validateInitialMoney(int money) {
-		if (money < 0) {
-			throw new IllegalArgumentException("[ERROR] 금액은 자연수여야 합니다.");
+		if (isMinus(money)) {
+			throw new IllegalArgumentException(ErrorConst.MONEY_IS_NOT_MINUS);
 		}
 		if (isNotDividedByTen(money)) {
-			throw new IllegalArgumentException("[ERROR] 금액은 10원 단위로 나누어 떨어져야합니다.");
+			throw new IllegalArgumentException(ErrorConst.MONEY_IS_DIVIDED_BY_TEN);
 		}
+	}
+
+	private static boolean isMinus(int money) {
+		return money < 0;
 	}
 
 	private static boolean isNotDividedByTen(int money) {
