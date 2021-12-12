@@ -15,8 +15,8 @@ import vendingmachine.service.MachineService;
 import vendingmachine.service.MachineWalletService;
 import vendingmachine.service.ProductService;
 
-// Machine 의존성 주입 파일
-public class MachineConfig {
+// 의존성 주입 파일
+public class MachineLauncherConfig {
 	private static Products products;
 	private static ProductFactory productFactory;
 	private static Machine machine;

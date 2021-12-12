@@ -1,6 +1,6 @@
 package vendingmachine.application;
 
-import vendingmachine.config.MachineConfig;
+import vendingmachine.config.MachineLauncherConfig;
 import vendingmachine.io.Input;
 import vendingmachine.io.Output;
 
@@ -9,7 +9,7 @@ public class MachineLauncher {
 	private Output output;
 
 	public void run(){
-		MachineConfig.injectDependencies(this);
+		MachineLauncherConfig.injectDependencies(this);
 
 		input.inputMachineAmount();
 		output.outputMachineNumOfCoins();

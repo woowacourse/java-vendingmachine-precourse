@@ -37,12 +37,11 @@ public class Input {
 
 	public void inputProducts() {
 		printer.printProductsNotice();
-
-		// [콜라,1500,20];[사이다,1000,10];[환타,800,10]
+		
 		while (!VALIDATOR.validateProductInputFormat(input = readLine())) {
 			// validateProductInputFormat, validateSemicolonFormat
 		}
-		productService.saveAll(input.split(SEMICOLON));
+		productService.saveAll(input.replaceAll(PRODUCT_INPUT_SEMICOLON_FORMAT, SEMICOLON).split(SEMICOLON));
 	}
 
 	public void inputCustomerAmount() {

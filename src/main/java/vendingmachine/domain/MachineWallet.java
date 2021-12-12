@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import static vendingmachine.config.ConstantConfig.*;
 import static vendingmachine.domain.Coin.*;
 
 import java.util.Map;
@@ -30,7 +31,7 @@ public class MachineWallet {
 		int numOfCoin = numOfCoins.get(coinType);
 		if (customerAmount > 0 && customerAmount >= coinType) {
 			int numOfChangeCoin = customerAmount / coinType;
-			if (numOfChangeCoin > numOfCoin) { // 잔돈으로 반환해야하는 수(numOfChangeCoin)보다 현재 보유코인 갯수(numOfCoin)가 부족할 때
+			if (numOfChangeCoin > numOfCoin) {
 				getChange(coinType, numOfCoin, numOfCoin);
 				return;
 			}
@@ -49,7 +50,8 @@ public class MachineWallet {
 		StringBuilder sb = new StringBuilder();
 		getCoinStream()
 			.map(c -> c.getValue())
-			.forEach(c -> sb.append(c + "원 - " + numOfCoins.get(c) + "개\n"));
+			.forEach(
+				c -> sb.append(String.format(OUTPUT_CUSTOMER_NUN_OF_CHANGES + LINE_SEPARATOR, c, numOfCoins.get(c))));
 		return sb.toString();
 	}
 }
