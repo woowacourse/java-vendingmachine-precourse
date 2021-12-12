@@ -12,4 +12,6 @@ public enum Coin {
         this.amount = amount;
     }
 
+    public int getValue(){ return amount; }
+
 }
