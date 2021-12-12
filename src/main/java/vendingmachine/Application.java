@@ -8,18 +8,41 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class Application {
+    static int USER_MONEY = 0;
     static int MACHINE_OWN_MONEY = 0;
     static int PRODUCT_NAME = 0;
     static int PRODUCT_PRICE = 1;
     static int PRODUCT_AMOUNT = 2;
+
     public static void main(String[] args) {
         // TODO: 프로그램 구현
         MACHINE_OWN_MONEY = inputMachineOwnMoney();
         setVendingMachineOwnCoins();
         printCurrentMachineCoin();
         ArrayList<Product> products = inputProductNamePriceAmount();
-
+        insertMoneyByUser();
     }
+
+    public static void insertMoneyByUser(){
+        String userMoney = "";
+        while(userMoney.isEmpty()){
+            try{
+                userMoney = userMoneyValidation();
+                USER_MONEY = Integer.parseInt(userMoney);
+            }catch (IllegalArgumentException e){
+                System.out.println("[ERROR] 금액은 숫자여야 합니다.");
+            }
+        }
+    }
+
+    public static String userMoneyValidation(){
+        System.out.println("투입 금액을 입력해 주세요.");
+        String userMoney = Console.readLine();
+        String regex = "^[0-9]*$";
+        if (!Pattern.matches(regex, userMoney)) throw new IllegalArgumentException();
+        return userMoney;
+    }
+
 
     public static ArrayList<Product> createProduct(ArrayList<String> products){
         ArrayList<Product> productList = new ArrayList<>();
