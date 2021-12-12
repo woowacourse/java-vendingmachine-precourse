@@ -27,7 +27,7 @@ public class VendingMachine {
         while (true) {
             OutputView.printMoneyLeft(this.getCustomerMoneyLeft());
 
-            if (!menu.canBuyMore(this.customerMoneyLeft)) break;
+            if (!menu.hasSellableMerchandise(this.customerMoneyLeft)) break;
             this.sellMerchandise();
         }
 

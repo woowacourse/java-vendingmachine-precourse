@@ -29,7 +29,7 @@ public class Menu {
         }
     }
 
-    public boolean canBuyMore(int moneyLeft) {
+    public boolean hasSellableMerchandise(int moneyLeft) {
         boolean isEnoughMoney = false;
         for (Merchandise merchandise : this.merchandiseList) {
             if (merchandise.getNumber() == 0) continue;
