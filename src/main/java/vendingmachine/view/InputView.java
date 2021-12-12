@@ -38,8 +38,14 @@ public class InputView {
 	}
 
 	public static RequestInsertMoneyDto inputInsertMoney() {
-		System.out.println(REQUEST_INSERT_MONEY_MESSAGE);
-		Money money = new Money(readLine());
-		return new RequestInsertMoneyDto(money);
+		while (true) {
+			try {
+				System.out.println(REQUEST_INSERT_MONEY_MESSAGE);
+				Money money = new Money(readLine());
+				return new RequestInsertMoneyDto(money);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 }
