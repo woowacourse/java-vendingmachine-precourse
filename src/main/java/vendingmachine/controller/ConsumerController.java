@@ -8,6 +8,7 @@ import vendingmachine.util.ItemValidator;
 import vendingmachine.util.MoneyValidator;
 
 public class ConsumerController {
+
 	public static int getInputMoney() {
 		String inputString = Console.readLine();
 		try {

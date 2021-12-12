@@ -11,7 +11,7 @@ public class Consumer {
 		return new Consumer(inputMoney);
 	}
 
-	public boolean cannotBuy(Item item) {
+	public boolean cannotAfford(Item item) {
 		return money < item.getPrice();
 	}
 

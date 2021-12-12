@@ -10,6 +10,7 @@ public class ItemValidator {
 
 	public static final String ITEM_SEPARATOR = ";";
 	public static final String ITEM_FORM = "^\\[[a-zA-Z가-힣]+,[1-9][0-9]+0,[1-9][0-9]*]$";
+	public static final int OUT_OF_STOCK = 0;
 
 	public static void validateItemForm(String inputString) {
 		Arrays.stream(inputString.split(ITEM_SEPARATOR))
@@ -21,20 +22,20 @@ public class ItemValidator {
 	}
 
 	public static Item validateAvailability(List<Item> itemList, String inputString) {
-		Item item = validateItemForm(itemList, inputString);
-		validateQuantity(item);
+		Item item = validateItemExistence(itemList, inputString);
+		validateItemStock(item);
 		return item;
 	}
 
-	private static Item validateItemForm(List<Item> itemList, String inputString) {
+	private static Item validateItemExistence(List<Item> itemList, String inputString) {
 		return itemList.stream()
 			.filter(item -> item.getItemName().equals(inputString))
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException(ErrorMessage.CANNOT_FIND_ITEM));
 	}
 
-	private static void validateQuantity(Item item) {
-		if (item.getQuantity() == 0) {
+	private static void validateItemStock(Item item) {
+		if (item.getQuantity() == OUT_OF_STOCK) {
 			throw new IllegalArgumentException(ErrorMessage.SOLD_OUT);
 		}
 	}

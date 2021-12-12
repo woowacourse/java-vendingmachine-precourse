@@ -1,8 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -15,48 +13,39 @@ public enum Coin {
 	COIN_50(50),
 	COIN_10(10);
 
+	public static final int INITIAL_BALANCE_VALUE = 0;
+	public static final int BALANCE_THRESHOLD = 0;
+	public static final int INCREASE_COUNT = 1;
 	private final int amount;
 
 	Coin(final int amount) {
 		this.amount = amount;
 	}
 
-	public static List<Integer> getPossibleQuantity(Integer amount, int balance) {
-		List<Integer> list = new ArrayList<>();
-		for (int quantity = 0; quantity <= getMaxQuantity(amount, balance); quantity++) {
-			list.add(quantity);
-		}
-		return list;
-	}
-
-	public static int calculateResidue(Integer amount, int balance, int quantity) {
-		return balance - amount * quantity;
-	}
-
-	public static int getMaxQuantity(Integer amount, int balance) {
-		return balance / amount;
-	}
-
 	public static Map<Coin, Integer> decideCoinRandomly(int balance, Map<Coin, Integer> balanceMap) {
 		initializeValue(balanceMap);
-		while (balance > 0) {
-			int pickCoin = Randoms.pickNumberInList(
-				Arrays.stream(Coin.values())
+		while (needMoreCalculation(balance)) {
+			int amount = Randoms.pickNumberInList(
+				Arrays.stream(values())
 					.map(Coin::getAmount)
-						.collect(Collectors.toList())
-					);
-			if (pickCoin <= balance) {
-				balanceMap.put(Coin.getCoin(pickCoin), balanceMap.get(Coin.getCoin(pickCoin)) + 1);
-				balance -= pickCoin;
+					.collect(Collectors.toList())
+			);
+			if (amount <= balance) {
+				balanceMap.put(getCoin(amount), getPreviousCount(balanceMap, amount) + INCREASE_COUNT);
+				balance -= amount;
 			}
 		}
 		return balanceMap;
 	}
 
 	private static void initializeValue(Map<Coin, Integer> balanceMap) {
-		for (Coin coin : Coin.values()) {
-			balanceMap.put(coin, 0);
+		for (Coin coin : values()) {
+			balanceMap.put(coin, INITIAL_BALANCE_VALUE);
 		}
+	}
+
+	private static boolean needMoreCalculation(int balance) {
+		return balance > BALANCE_THRESHOLD;
 	}
 
 	public int getAmount() {
@@ -68,5 +57,9 @@ public enum Coin {
 			.filter(coin -> coin.getAmount() == amount)
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_COIN_AMOUNT));
+	}
+
+	private static int getPreviousCount(Map<Coin, Integer> balanceMap, int amount) {
+		return balanceMap.get(getCoin(amount));
 	}
 }

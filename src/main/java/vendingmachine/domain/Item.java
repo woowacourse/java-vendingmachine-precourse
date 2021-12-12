@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Item {
 	public static final String ITEM_ATTRIBUTE_SEPARATOR = ",";
+	public static final int BEGIN_INDEX = 1;
 	private final String itemName;
 	private final Integer price;
 	private Integer quantity;
@@ -19,12 +20,16 @@ public class Item {
 		List<Item> itemList = new ArrayList<>();
 
 		inputValue.forEach(string -> {
-			string = string.substring(1, string.length() - 1);
+			string = removeBracket(string);
 			String[] attributes = string.split(ITEM_ATTRIBUTE_SEPARATOR);
 			itemList.add(new Item(attributes[0], attributes[1], attributes[2]));
 		});
 
 		return itemList;
+	}
+
+	private static String removeBracket(String string) {
+		return string.substring(BEGIN_INDEX, string.length() - 1);
 	}
 
 	public void sold() {

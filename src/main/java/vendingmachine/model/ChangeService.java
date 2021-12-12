@@ -12,7 +12,7 @@ import vendingmachine.view.ConsumerMessage;
 public class ChangeService {
 	public static void giveChange(VendingMachine vendingMachine, Consumer consumer) {
 		ConsumerMessage.printCurrentStatusMessage(consumer);
-		ChangeMessage.printInProgress();
+		ChangeMessage.printChangeStatement();
 
 		Map<Coin, Integer> changeMap = makeChanges(vendingMachine.getBalanceMap(), consumer.getMoney(),
 			new LinkedHashMap<>());
@@ -22,10 +22,16 @@ public class ChangeService {
 	private static Map<Coin, Integer> makeChanges(Map<Coin, Integer> balanceMap, int money,
 		Map<Coin, Integer> changeMap) {
 		for (Map.Entry<Coin, Integer> entry : balanceMap.entrySet()) {
-			int possibleCoinNumber = Math.min(money / entry.getKey().getAmount(), entry.getValue());
-			changeMap.put(entry.getKey(), possibleCoinNumber);
-			money -= entry.getKey().getAmount() * possibleCoinNumber;
+			int optimalCoinCount = getOptimalCoinCount(money, entry);
+			changeMap.put(entry.getKey(), optimalCoinCount);
+			money -= entry.getKey().getAmount() * optimalCoinCount;
 		}
 		return changeMap;
+	}
+
+	private static int getOptimalCoinCount(int money, Map.Entry<Coin, Integer> entry) {
+		int requiringCount = money / entry.getKey().getAmount();
+		int possessingCount = entry.getValue();
+		return Math.min(requiringCount, possessingCount);
 	}
 }

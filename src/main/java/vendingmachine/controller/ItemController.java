@@ -8,16 +8,18 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.util.ItemValidator;
 
 public class ItemController {
-	public static List<String> getInputValue() {
+
+	public static final String ITEM_SEPARATOR = ";";
+
+	public static List<String> getInputItemForm() {
 		String inputString = Console.readLine();
 		try {
-			ItemValidator.validate(inputString);
+			ItemValidator.validateItemForm(inputString);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
-			return getInputValue();
+			return getInputItemForm();
 		}
-
-		return Arrays.stream(inputString.split(";"))
+		return Arrays.stream(inputString.split(ITEM_SEPARATOR))
 			.collect(Collectors.toList());
 	}
 }
