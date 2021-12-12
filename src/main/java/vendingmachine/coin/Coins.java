@@ -27,6 +27,10 @@ public class Coins {
 		coins.computeIfPresent(coin, (originCoin, originQuantity) -> originQuantity.up(quantity));
 	}
 
+	public void removeZeroQuantity() {
+		coins.values().removeIf(Quantity::isZero);
+	}
+
 	public void addAll(Coins coins) {
 		Set<Map.Entry<Coin, Quantity>> coinSet = coins.coins.entrySet();
 		for (Map.Entry<Coin, Quantity> coin : coinSet) {
@@ -55,6 +59,7 @@ public class Coins {
 		for (Coin coin : sortedCoins) {
 			calculateChange(coin,money,returnCoins);
 		}
+		returnCoins.removeZeroQuantity();
 		return returnCoins;
 	}
 
