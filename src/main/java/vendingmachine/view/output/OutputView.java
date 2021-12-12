@@ -27,15 +27,16 @@ public class OutputView {
         System.out.println(message);
     }
 
-    public void showChange() {
+    public void showChange(LinkedHashMap<Integer, Integer> coinMap) {
         divisionLine();
         print(Output.PURCHASE_MONEY.getText() + Money.getInstance().getMoney());
         print(Output.CHANGE.getText());
-        LinkedHashMap<Integer, Integer> coinMap =
-                ReturnCoin.getInstance().calcReturnChangeToCoin(Money.getInstance().getMoney());
+        LinkedHashMap<Integer, Integer> changeCoinMap =
+                ReturnCoin.getInstance().calcReturnChangeToCoin(coinMap, Money.getInstance().getMoney());
 
-        for (Integer coin : coinMap.keySet()) {
-            print(coin + Output.WON.getText()+ Output.DELIMITER.getText() + coinMap.get(coin) + Output.UNIT.getText());
+        for (Integer coin : changeCoinMap.keySet()) {
+            print(coin + Output.WON.getText()+ Output.DELIMITER.getText() +
+                    changeCoinMap.get(coin) + Output.UNIT.getText());
         }
     }
 }

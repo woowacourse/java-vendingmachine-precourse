@@ -5,14 +5,16 @@ import vendingmachine.view.input.ProductInputView;
 import vendingmachine.view.input.PurchaseInputView;
 import vendingmachine.view.output.OutputView;
 
+import java.util.LinkedHashMap;
+
 public class VendingMachine {
 
     public void start() {
         MoneyInputView moneyInputView = new MoneyInputView();
         Integer moneyForCoin = moneyInputView.inputMoneyForMakeCoin();
-        RandomCoinMaker.getInstance().makeCoin(moneyForCoin);
+        LinkedHashMap<Integer, Integer> coinMap = RandomCoinMaker.getInstance().makeCoin(moneyForCoin);
         OutputView outputView = new OutputView();
-        outputView.showCoin(RandomCoinMaker.getInstance().getCoinMap());
+        outputView.showCoin(coinMap);
 
         ProductInputView productInputView = new ProductInputView();
         productInputView.inputProducts();
@@ -20,6 +22,6 @@ public class VendingMachine {
         Money.getInstance().storeMoney(moneyForPurchase);
         PurchaseInputView purchaseInputView = new PurchaseInputView();
         purchaseInputView.inputProductForPurchase();
-        outputView.showChange();
+        outputView.showChange(coinMap);
     }
 }

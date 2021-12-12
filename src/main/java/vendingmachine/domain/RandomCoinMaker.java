@@ -9,7 +9,6 @@ import vendingmachine.constant.Condition;
 
 public class RandomCoinMaker {
     private static final RandomCoinMaker instance = new RandomCoinMaker();
-    private LinkedHashMap<Integer, Integer> coinMap = new LinkedHashMap<>();
 
     private RandomCoinMaker() {
     }
@@ -18,32 +17,29 @@ public class RandomCoinMaker {
         return instance;
     }
 
-    private void init() {
+    private LinkedHashMap<Integer, Integer> init() {
         ArrayList<Integer> coins = Coin.getCoins();
         coins.sort(Comparator.reverseOrder());
 
+        LinkedHashMap<Integer, Integer> coinMap = new LinkedHashMap<>();
         for (Integer coin : coins) {
             coinMap.put(coin, Condition.QUANTITY_0.getNumber());
         }
+        return coinMap;
     }
 
-    public void makeCoin(Integer money) {
-        init();
+    public LinkedHashMap<Integer, Integer> makeCoin(Integer money) {
+        LinkedHashMap<Integer, Integer> coinMap = init();
         ArrayList<Integer> coins = Coin.getCoins();
+
         while (money > Condition.MONEY_0.getNumber()) {
             int coin = Randoms.pickNumberInList(coins);
             if (money - coin >= Condition.MONEY_0.getNumber()) {
                 money -= coin;
-                storeCoin(coin);
+                coinMap.put(coin, coinMap.get(coin) + Condition.ONE_COIN.getNumber());
             }
         }
-    }
 
-    public LinkedHashMap<Integer, Integer> getCoinMap() {
         return coinMap;
-    }
-
-    private void storeCoin(int coin) {
-        coinMap.put(coin, coinMap.get(coin) + Condition.ONE_COIN.getNumber());
     }
 }

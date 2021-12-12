@@ -30,24 +30,21 @@ public class ReturnCoin {
         return true;
     }
 
-    public LinkedHashMap<Integer, Integer> calcReturnChangeToCoin(int money) {
-        LinkedHashMap<Integer, Integer> coinMap = RandomCoinMaker.getInstance().getCoinMap();
-
+    public LinkedHashMap<Integer, Integer> calcReturnChangeToCoin(LinkedHashMap<Integer, Integer> coinMap, int money) {
         LinkedHashMap<Integer, Integer> changeCoinMap = new LinkedHashMap<>();
         for (Integer coin : coinMap.keySet()) {
             if (coinMap.get(coin) <= Condition.QUANTITY_0.getNumber()) {
                 continue;
             }
             if (money / coin > Condition.QUOTIENT_1.getNumber()) {
-                int number = moveCoin(money, coin);
+                int number = moveCoin(coinMap, money, coin);
                 changeCoinMap.put(coin, number);
             }
         }
         return changeCoinMap;
     }
 
-    private int moveCoin(int money, int coin) {
-        LinkedHashMap<Integer, Integer> coinMap = RandomCoinMaker.getInstance().getCoinMap();
+    private int moveCoin(LinkedHashMap<Integer, Integer> coinMap, int money, int coin) {
         int coinQuantityLimit = coinMap.get(coin);
         int coinUsing = Condition.QUANTITY_0.getNumber();
 
