@@ -41,7 +41,6 @@ public class InputView {
 		removeBracket(stringItemsList);
 		itemList = generateItemList(stringItemsList);
 
-
 		return itemList;
 	}
 
