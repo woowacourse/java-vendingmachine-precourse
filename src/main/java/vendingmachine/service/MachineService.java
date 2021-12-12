@@ -1,5 +1,9 @@
 package vendingmachine.service;
 
+import static vendingmachine.constant.ExceptionMessage.*;
+import static vendingmachine.validator.MoneyValidator.*;
+import static vendingmachine.validator.ProductListValidator.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +17,8 @@ import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
+import vendingmachine.validator.MoneyValidator;
+import vendingmachine.validator.ProductListValidator;
 
 public class MachineService {
 
@@ -27,7 +33,9 @@ public class MachineService {
 		this.machine = machine;
 	}
 
-	public void setDepositsRandomized(int deposit) {
+	public void setDepositsRandomized(String input) {
+		validateInteger(input);
+		int deposit = Integer.parseInt(input);
 		this.coinList = Arrays.asList(Coin.values());
 		Map<Coin, Integer> countMap = new TreeMap<>();
 		coinList.forEach(coin -> countMap.put(coin, 0));
@@ -35,7 +43,7 @@ public class MachineService {
 			int amountRandomized = Randoms.pickNumberInList(
 				coinList.stream().map(Coin::getAmount).collect(Collectors.toList()));
 			int amountToSub = getAmountToSub(deposit, amountRandomized);
-			if(Coin.ofValue(amountToSub).isPresent()){
+			if (Coin.ofValue(amountToSub).isPresent()) {
 				Coin target = Coin.ofValue(amountRandomized).get();
 				deposit -= amountToSub;
 				countMap.put(target, countMap.get(target) + 1);
@@ -52,9 +60,11 @@ public class MachineService {
 		return amountRandomized;
 	}
 
-	public void setProducts(List<String> inputList) {
+	public void setProducts(String input) {
+		ProductListValidator.validateBracketAndSemiColon(input);
+		List<String> inputList = Arrays.asList(input.split(";", -1));
 		List<Product> productList = inputList.stream()
-			.map(s -> getProduct(trimBrackets(s)))
+			.map(this::getProduct)
 			.collect(Collectors.toList());
 		productRepository.save(productList);
 	}
@@ -64,15 +74,23 @@ public class MachineService {
 	}
 
 	private Product getProduct(String s) {
+		validateComma(s);
+		validateNameLengthAndInteger(s);
+		s = trimBrackets(s);
+
 		List<String> infoList = Arrays.asList(s.split(",", -1));
 		String name = infoList.get(0);
 		int price = Integer.parseInt(infoList.get(1));
 		int quantity = Integer.parseInt(infoList.get(2));
 
+		validatePrice(price);
+		validateQuantity(quantity);
+
 		return new Product(name, price, quantity);
 	}
 
 	public void setMoney(String inputMoney) {
+		validateInteger(inputMoney);
 		machine.setUserMoney(Integer.parseInt(inputMoney));
 	}
 
@@ -84,9 +102,12 @@ public class MachineService {
 	}
 
 	public void purchaseProduct(String productName) {
-		Product product = productRepository.findByName(productName).orElseThrow(IllegalArgumentException::new);
-		machine.decreaseUserMoney(product.getPrice());
-		productRepository.decreaseQuantity(productName);
+		if (!productRepository.findByName(productName).isPresent())
+			throw new IllegalArgumentException(NO_SUCH_PRODUCT.getMessage());
+		productRepository.findByName(productName).ifPresent(product -> {
+			machine.decreaseUserMoney(product.getPrice());
+			productRepository.decreaseQuantity(productName);
+		});
 	}
 
 	public boolean isSpitable() {

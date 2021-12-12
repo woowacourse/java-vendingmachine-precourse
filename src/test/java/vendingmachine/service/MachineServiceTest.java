@@ -2,7 +2,6 @@ package vendingmachine.service;
 
 import static org.assertj.core.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -11,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.constant.Coin;
+import vendingmachine.constant.Symbol;
 import vendingmachine.domain.Deposit;
 import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
@@ -35,7 +35,7 @@ class MachineServiceTest {
 		machineService = new MachineService(depositRepository, productRepository, machine);
 
 		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
-		machineService.setProducts(productList);
+		machineService.setProducts(productList.get(0) + Symbol.PRODUCT_DELIMITER.getSymbol() + productList.get(1));
 
 		depositList = Arrays.asList(new Deposit(Coin.COIN_10, 10), new Deposit(Coin.COIN_50, 10),
 			new Deposit(Coin.COIN_100, 10), new Deposit(Coin.COIN_500, 10));
@@ -45,18 +45,17 @@ class MachineServiceTest {
 	@Test
 	void setDepositsRandomized() {
 		// given
-		int deposit = 550;
+		String deposit = "550";
 		// when
 		machineService.setDepositsRandomized(deposit);
 		// then
-		assertThat(depositRepository.getDepositTotal()).isEqualTo(deposit);
+		assertThat(depositRepository.getDepositTotal()).isEqualTo(Integer.parseInt(deposit));
 	}
 
 	@Test
 	void setProducts() {
 		// given
 		// when
-		machineService.setProducts(productList);
 		// then
 		assertThat(productRepository.findByName("콜라")).hasValueSatisfying(p -> {
 			assertThat(p.getName()).isEqualTo("콜라");
@@ -68,7 +67,6 @@ class MachineServiceTest {
 	@Test
 	void getAffordableList() {
 		// given
-		machineService.setProducts(productList);
 		// when
 		machine.setUserMoney(500);
 		// then

@@ -10,6 +10,7 @@ import vendingmachine.domain.Machine;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.service.MachineService;
+import vendingmachine.validator.ProductListValidator;
 
 public class MachineController {
 
@@ -26,25 +27,47 @@ public class MachineController {
 	}
 
 	public void setDeposit() {
-		String input = inputDeposit();
-		int deposit = Integer.parseInt(input);
-		machineService.setDepositsRandomized(deposit);
+		try {
+			String input = inputDeposit();
+			machineService.setDepositsRandomized(input);
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			setDeposit();
+		}
 	}
 
 	public void setProductList() {
-		String input = inputProductList();
-		List<String> inputList = Arrays.asList(input.split(";", -1));
-		machineService.setProducts(inputList);
+		try {
+			String input = inputProductList();
+			machineService.setProducts(input);
+		}
+		catch (IllegalArgumentException e){
+			System.out.println(e.getMessage());
+			setProductList();
+		}
 	}
 
 	public void setMoney() {
-		String input = inputMoney();
-		machineService.setMoney(input);
+		try {
+			String input = inputMoney();
+			machineService.setMoney(input);
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			setMoney();
+		}
 	}
 
 	public void purchase() {
-		String input = inputProductName();
-		machineService.purchaseProduct(input);
+		try {
+			String input = inputProductName();
+			machineService.purchaseProduct(input);
+		}
+		catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			purchase();
+		}
 	}
 
 	public void operate() {
