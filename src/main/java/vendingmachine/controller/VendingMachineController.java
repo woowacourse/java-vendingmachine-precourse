@@ -37,7 +37,7 @@ public class VendingMachineController {
 
 	private void perChaseItem(Items items, Money money) {
 		int leastItemCost = itemcontroller.getLeastItemCost(items);
-		while (leastItemCost <= money.getRemainingMoney() && !items.checkAllOutOfOrder()) {
+		while (money.payable(leastItemCost) && !items.checkAllOutOfOrder()) {
 			try {
 				System.out.println(money.toString());
 				OutputView.printItemPerChaseRequest();

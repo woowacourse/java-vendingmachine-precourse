@@ -13,8 +13,8 @@ public class Money {
 		reduce(moneyAmount);
 	}
 
-	public int getRemainingMoney() {
-		return money;
+	public boolean payable(int moneyAmount) {
+		return moneyAmount <= money;
 	}
 
 	private void reduce(int moneyAmount) {
