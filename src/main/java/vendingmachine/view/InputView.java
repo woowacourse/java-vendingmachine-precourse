@@ -4,8 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.util.Constants;
 
 public class InputView {
-	public static String inputVendingMachinePrice() {
-		System.out.println(Constants.INPUT_MESSAGE_VENDING_MACHINE_PRICE);
+	public static String inputVendingMachineChange() {
+		System.out.println(Constants.INPUT_MESSAGE_VENDING_MACHINE_CHANGE);
 		return Console.readLine();
 	}
 
@@ -14,8 +14,8 @@ public class InputView {
 		return Console.readLine();
 	}
 
-	public static String inputInputAmount() {
-		System.out.println(Constants.INPUT_MESSAGE_INPUT_AMOUNT);
+	public static String inputUserInputAmount() {
+		System.out.println(Constants.INPUT_MESSAGE_USER_INPUT_AMOUNT);
 		return Console.readLine();
 	}
 }

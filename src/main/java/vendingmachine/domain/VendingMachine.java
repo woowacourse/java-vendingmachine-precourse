@@ -9,10 +9,11 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
 
 public class VendingMachine {
+	private static final HashMap<Integer, Integer> coins = new HashMap<>();
 	private int changeAmount;
-	private static HashMap<Integer, Integer> coins = new HashMap<>();
+	private int userInputAmount;
 
-	public VendingMachine(int changeAmount) {
+	public void inputChangAmount(int changeAmount) {
 		this.changeAmount = changeAmount;
 	}
 
@@ -40,5 +41,9 @@ public class VendingMachine {
 				String.format("%d원 - %d개\n", amount, coins.getOrDefault(amount, 0))
 			));
 		return result.toString();
+	}
+
+	public void inputUserInputAmount(int changeAmount) {
+		this.changeAmount = changeAmount;
 	}
 }

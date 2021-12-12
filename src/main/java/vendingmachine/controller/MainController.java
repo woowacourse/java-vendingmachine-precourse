@@ -1,18 +1,19 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.OutputView;
 
 public class MainController {
 	public void run() {
-		InputController inputController = new InputController();
+		VendingMachineController vendingMachineController = new VendingMachineController();
 
-		int changeAmount = Integer.parseInt(inputController.inputVendingMachinePrice());
-		VendingMachine vendingMachine = new VendingMachine(changeAmount);
+		vendingMachineController.inputVendingMachineChange();
+		vendingMachineController.generateCoins();
 
-		vendingMachine.generateCoins();
 		OutputView.printCoins();
-		inputController.inputProduct();
-		inputController.inputInputAmount();
+
+		ProductController productController = new ProductController();
+		productController.inputProduct();
+
+		vendingMachineController.inputUserInputAmount();
 	}
 }
