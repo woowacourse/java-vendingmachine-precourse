@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.view.VendingMachineOutput;
 
 import java.util.*;
 
@@ -97,5 +98,18 @@ public class VendingMachine {
             changes.put(coin, usingAmount);
         }
         return changes;
+    }
+
+    public void printChanges() {
+        Map<Coin, Integer> changes = generateChanges();
+        VendingMachineOutput.printChange(changes);
+    }
+
+    public void printCoins() {
+        VendingMachineOutput.printCoinsVendingMachineHas(coinMap);
+    }
+
+    public void printRestMoney() {
+        VendingMachineOutput.printRestMoney(inputMoney);
     }
 }
