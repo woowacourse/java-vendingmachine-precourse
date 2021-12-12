@@ -6,17 +6,27 @@ import vendingmachine.Domain.Coin;
 import vendingmachine.Domain.HoldingCoins;
 import vendingmachine.Domain.InputAmount;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class OutputView {
 
     public static void printError(String message) {
         System.out.println(ErrorConstant.ERROR_OCCURRED + message);
     }
 
+    public static void printInputAmount() {
+        System.out.println(InputAmount.printInputAmount());
+    }
+
     public static void printHoldingCoins() {
         System.out.println(OutputConstant.PRINT_COIN);
+        printCoins(Arrays.asList(Coin.values()));
+    }
 
+    public static void printCoins(List<Coin> coins) {
         StringBuilder result = new StringBuilder();
-        for (Coin c : Coin.values()) {
+        for (Coin c : coins) {
             result.append(printCoin(c));
         }
 
@@ -31,9 +41,5 @@ public class OutputView {
         result.append("\n");
 
         return result.toString();
-    }
-
-    public static void printInputAmount() {
-        System.out.println(InputAmount.printInputAmount());
     }
 }
