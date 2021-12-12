@@ -34,5 +34,4 @@ public class Changes {
 		}
 		return change;
 	}
-
 }

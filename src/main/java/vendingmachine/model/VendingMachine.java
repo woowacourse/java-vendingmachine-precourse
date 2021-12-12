@@ -51,7 +51,7 @@ public class VendingMachine {
 		return products.stream()
 			.mapToInt(Product::getNumber)
 			.max()
-			.getAsInt() == 0;
+			.getAsInt() == INITIAL_VALUE;
 	}
 
 	private int getLowestProductPrice() {
