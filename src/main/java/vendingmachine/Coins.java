@@ -14,6 +14,7 @@ public class Coins {
 
     private Coins(final int money) {
         validateDivisible(money);
+        validateNaturalNumber(money);
         initCoins();
         fullRandomAmount(money);
     }
@@ -21,6 +22,12 @@ public class Coins {
     private void validateDivisible(int money) {
         if (money % DIVISIBLE_VALUE != 0) {
             throw ErrorMessage.NOT_DIVISIBLE_VALUE.getException();
+        }
+    }
+
+    private void validateNaturalNumber(int money) {
+        if (money < 0) {
+            throw ErrorMessage.NOT_NATURAL_NUMBER.getException();
         }
     }
 
