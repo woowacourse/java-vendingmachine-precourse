@@ -21,11 +21,11 @@ public class PossessionCoin {
 		return coins;
 	}
 
-	public void createRandomCoins(PossessionMoney money) {
-		while (money.isBiggerThanMinimumCoin()) {
+	public void createRandomCoins(Money money) {
+		while (money.isBiggerThanValue(MINIMUM_COIN_AMOUNT)) {
 			int randomAmount = pickNumberInList(Coin.createCoinList());
-			if (money.canMoneyIntoCoin(randomAmount)) {
-				money.changeMoneyIntoCoin(randomAmount);
+			if (money.isBiggerThanValue(randomAmount)) {
+				money.subtractMoney(randomAmount);
 				coins.put(randomAmount, coins.get(randomAmount) + 1);
 			}
 		}
