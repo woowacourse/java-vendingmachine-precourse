@@ -12,5 +12,4 @@ public class Error {
 	public static String ZERO_QUANTITY_ERROR = "[ERROR] 1개 이상의 수량을 입력하세요.";
 
 	public static String ITEM_NOT_EXIST_ERROR = "[ERROR] 해당 상품이 존재하지 않습니다. 다시 입력하세요.";
-	public static String ITEM_NOT_STOCK_ERROR = "[ERROR] 상품 재고가 없습니다. 다른 상품을 입력하세요.";
 }

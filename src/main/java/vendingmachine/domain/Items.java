@@ -38,14 +38,18 @@ public class Items {
 			.collect(Collectors.toList());
 	}
 
-	public int getStockByName(String itemName) {
-		return list.stream()
-			.filter(item -> item.getName().equals(itemName))
-			.mapToInt(Item::getQuantity)
-			.sum();
+	public int purchase(String itemName) {
+		Item item = findByName(itemName);
+		item.purchase();
+
+		if (item.getQuantity() == OUT_OF_STOCK) {
+			list.remove(item);
+		}
+
+		return item.getPrice();
 	}
 
-	public Item findByName(String itemName) {
+	private Item findByName(String itemName) {
 		return list.stream()
 			.filter(item -> item.getName().equals(itemName))
 			.findFirst()
@@ -83,6 +87,6 @@ public class Items {
 			.filter(item -> item.getQuantity() != OUT_OF_STOCK)
 			.count();
 
-		return count != OUT_OF_STOCK;
+		return count != 0;
 	}
 }

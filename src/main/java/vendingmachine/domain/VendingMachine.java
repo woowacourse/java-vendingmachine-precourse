@@ -35,9 +35,7 @@ public class VendingMachine {
 	}
 
 	public int purchaseItem(String itemName) {
-		Item item = items.findByName(itemName);
-		item.purchase();
-		return item.getPrice();
+		return items.purchase(itemName);
 	}
 
 	public Coins returnCoins(int amount) {
