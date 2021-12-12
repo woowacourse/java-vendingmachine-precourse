@@ -25,7 +25,7 @@ public class VendingMachine {
 
         for (Coin coin : Coin.values()) {
             int randomValue = Randoms.pickNumberInRange(0, amount/coin.getValue());
-            amount -= randomValue;
+            amount -= randomValue * coin.getValue();
             coinMap.put(coin, randomValue);
         }
 
