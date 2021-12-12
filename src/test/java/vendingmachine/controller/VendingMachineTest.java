@@ -6,6 +6,8 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.NoSuchElementException;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,6 +22,20 @@ public class VendingMachineTest extends NsTest {
 	private static final String ERROR_MESSAGE = "[ERROR]";
 
 	private final VendingMachine vendingMachine = new VendingMachine();
+
+	@BeforeEach
+	void beforeEach() {
+		ProductRepository.clear();
+		MoneyRepository.clear();
+		CoinRepository.clear();
+	}
+
+	@AfterEach
+	void afterEach() {
+		ProductRepository.clear();
+		MoneyRepository.clear();
+		CoinRepository.clear();
+	}
 
 	@DisplayName("보유 금액을 설정하여 동전을 무작위로 생성하는 기능 테스트")
 	@Test
