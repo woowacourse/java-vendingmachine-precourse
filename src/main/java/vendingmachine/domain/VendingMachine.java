@@ -11,6 +11,7 @@ public class VendingMachine {
 	private static VendingMachine vendingMachine = null;
 
 	public int holdingMoney = 0;
+	public int inputMoney = 0;
 	public LinkedHashMap<Coin, Integer> holdingCoins;
 	public ArrayList<Item> holdingItem = new ArrayList<Item>();
 

@@ -47,6 +47,16 @@ public class InputView {
 		return itemList;
 	}
 
+	public static int inputMoneyInput(){
+		int inputMoney = 0;
+
+		System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
+		String stringInputMoney = Console.readLine();
+		inputMoney = Integer.parseInt(stringInputMoney);
+
+		return inputMoney;
+	}
+
 	private static void removeBracket(List<String> stringItemsList) {
 		for(int i = 0; i < stringItemsList.size(); i++){
 			String str= stringItemsList.get(i);
