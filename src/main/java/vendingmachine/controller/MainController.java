@@ -1,8 +1,10 @@
 package vendingmachine.controller;
 
+import vendingmachine.view.InputView;
+
 public class MainController {
 
     public void run() {
-        System.out.println("게임 시작!!!");
+        System.out.println(InputView.inputVendingMachineMoney());
     }
 }
