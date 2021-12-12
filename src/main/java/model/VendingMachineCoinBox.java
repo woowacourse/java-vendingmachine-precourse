@@ -8,9 +8,9 @@ import utils.generator.RandomCoinPriceGenerator;
 public class VendingMachineCoinBox {
 	private final Map<Coin, Integer> coinBox;
 
-	public VendingMachineCoinBox(int inputVendingMachineChange) {
+	public VendingMachineCoinBox(int insertVendingMachineChange) {
 		coinBox = initCoinBox();
-		makeCoins(inputVendingMachineChange);
+		makeCoins(insertVendingMachineChange);
 	}
 
 	private Map<Coin, Integer> initCoinBox() {
@@ -22,12 +22,12 @@ public class VendingMachineCoinBox {
 		return coinBox;
 	}
 
-	private void makeCoins(int inputVendingMachineChange) {
+	private void makeCoins(int insertVendingMachineChange) {
 		int totalCoinPriceInCoinBox = 0;
-		while (totalCoinPriceInCoinBox < inputVendingMachineChange) {
+		while (totalCoinPriceInCoinBox < insertVendingMachineChange) {
 			int coinPrice = RandomCoinPriceGenerator.pickRandomCoinPrice();
 			if (isTotalCoinPriceOverInputVendingMachineChange(totalCoinPriceInCoinBox, coinPrice,
-				inputVendingMachineChange)) {
+				insertVendingMachineChange)) {
 				continue;
 			}
 			totalCoinPriceInCoinBox += coinPrice;
@@ -37,8 +37,8 @@ public class VendingMachineCoinBox {
 	}
 
 	private boolean isTotalCoinPriceOverInputVendingMachineChange(int totalCoinPriceInCoinBox, int coinPrice,
-		int inputVendingMachineChange) {
-		if (totalCoinPriceInCoinBox + coinPrice > inputVendingMachineChange) {
+		int insertVendingMachineChange) {
+		if (totalCoinPriceInCoinBox + coinPrice > insertVendingMachineChange) {
 			return true;
 		}
 		return false;
