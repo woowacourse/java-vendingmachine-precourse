@@ -24,6 +24,9 @@ public class InputView {
 	private static final String PRODUCTS_DELIMITER_PREFIX = "[";
 	private static final String PRODUCTS_DELIMITER_SUFFIX = "]";
 	private static final String PRICE_DIVIDE_TEN_ERROR_MESSAGE = "[ERROR] 상품 가격은 10원으로 나누어 떨어져야합니다.";
+	private static final String TWO_COMMAS = ",,";
+	private static final String TWO_COMMAS_ERROR_MESSAGE = "[ERROR] 2개 이상의 쉼표가 연속으로 올 수 없습니다. ";
+	private static final String INPUT_FORM_ERROR_MESSAGE = "[ERROR] 상품입력형식에 맞게 입력해주세요. 상품정보는 ;로 구분되고 각 상품정보는 [이름,가격,수량] 형식으로 입력해야 합니다. ";
 
 	private final Scanner scanner;
 
@@ -90,6 +93,7 @@ public class InputView {
 		try {
 			String[] productNameAndPriceAndCnt = scanner.nextLine().split(PRODUCTS_DELIMITER);
 			for (String productInfo : productNameAndPriceAndCnt) {
+				validateProductInputForm(productInfo);
 				productInfo = removeSquareBracket(productInfo);
 				String[] product = productInfo.split(PRODUCT_INFO_DELIMITER);
 				validatePrice(product[1]);
@@ -129,5 +133,18 @@ public class InputView {
 		validateNumber(productCnt);
 		validateLowerThanLimitationNumber(productCnt);
 		validateNotNegativeNumber(productCnt);
+	}
+
+	public void validateProductInputForm(String productInfo) {
+		if (productInfo.contains(TWO_COMMAS)) {
+			throw new IllegalArgumentException(TWO_COMMAS_ERROR_MESSAGE);
+		}
+		String[] product = productInfo.split(PRODUCT_INFO_DELIMITER);
+		if (product.length != 3) {
+			throw new IllegalArgumentException(INPUT_FORM_ERROR_MESSAGE);
+		}
+		if (!product[0].contains(PRODUCTS_DELIMITER_PREFIX) || !product[2].contains(PRODUCTS_DELIMITER_SUFFIX)) {
+			throw new IllegalArgumentException(INPUT_FORM_ERROR_MESSAGE);
+		}
 	}
 }
