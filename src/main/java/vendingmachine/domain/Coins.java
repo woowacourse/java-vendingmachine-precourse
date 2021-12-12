@@ -43,7 +43,7 @@ public class Coins {
 	}
 
 	private void updateCoinStatus(Map.Entry<Coin, Integer> coin, Balance balance) {
-		while (balance.getBalance() >= coin.getKey().getAmount() && coin.getValue() > EMPTY) {
+		while (balance.canBuy(coin.getKey().getAmount()) && coin.getValue() > EMPTY) {
 			balance.reduceBalance(coin.getKey().getAmount());
 			if (changeableCoins.containsKey(coin.getKey())) {
 				changeableCoins.replace(coin.getKey(), changeableCoins.get(coin.getKey()) + QUANTITY);

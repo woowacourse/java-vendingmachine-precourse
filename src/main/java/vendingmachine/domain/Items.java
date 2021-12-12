@@ -31,7 +31,7 @@ public class Items {
 
 	public boolean notEnoughItem(String itemName) {
 		for (Item item : itemList) {
-			if (item.getName().equals(itemName) && !item.exists()) {
+			if (item.is(itemName) && !item.exists()) {
 				return true;
 			}
 		}
@@ -40,7 +40,7 @@ public class Items {
 
 	public boolean notEnoughBalance(String itemName, Balance balance) {
 		for (Item item : itemList) {
-			if (item.getName().equals(itemName) && item.getPrice() > balance.getBalance()) {
+			if (item.is(itemName) && !balance.canBuy(item.getPrice())) {
 				return true;
 			}
 		}
@@ -48,6 +48,6 @@ public class Items {
 	}
 
 	public List<Item> getItemList() {
-		return itemList;
+		return Collections.unmodifiableList(itemList);
 	}
 }

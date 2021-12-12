@@ -38,7 +38,7 @@ public class VendingMachine {
 	}
 
 	public boolean isAvailable() {
-		return balance.getBalance() >= items.getExistingCheapest();
+		return balance.canBuy(items.getExistingCheapest());
 	}
 
 	public void executePurchase(String itemName) {
@@ -49,7 +49,7 @@ public class VendingMachine {
 	}
 
 	private void returnItem(Item item, String itemName) {
-		if (item.getName().equals(itemName) && item.exists()) {
+		if (item.is(itemName) && item.exists()) {
 			item.reduceQuantity();
 			balance.reduceBalance(item.getPrice());
 		}

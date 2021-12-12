@@ -17,6 +17,10 @@ public class Item {
 		return quantity != EMPTY;
 	}
 
+	public boolean is(String itemName) {
+		return name.equals(itemName);
+	}
+
 	public void reduceQuantity() {
 		quantity--;
 	}

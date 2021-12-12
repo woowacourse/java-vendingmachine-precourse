@@ -11,6 +11,10 @@ public class Balance {
 		balance -= price;
 	}
 
+	public boolean canBuy(int price) {
+		return balance >= price;
+	}
+
 	public int getBalance() {
 		return balance;
 	}
