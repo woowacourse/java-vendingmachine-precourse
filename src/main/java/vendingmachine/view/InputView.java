@@ -9,6 +9,7 @@ public class InputView {
 
     public static Asset getInitialAsset() {
         try {
+            System.out.println(INPUT_REQUEST_INITIAL_ASSET);
             return new Asset(Integer.parseInt(Console.readLine()));
         } catch (Exception e) {
             System.out.println(e.getMessage());

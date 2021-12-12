@@ -2,7 +2,7 @@ package vendingmachine.model;
 
 public class Asset {
 
-    private MoneyBill moneyBill;
+    private final MoneyBill moneyBill;
     private final MoneyCoins moneyCoins;
 
     public Asset(int amount) {
@@ -14,5 +14,10 @@ public class Asset {
         while (!moneyBill.isZero()) {
             moneyCoins.add(moneyBill.convertToRandomCoin());
         }
+    }
+
+    public String showCoins() {
+        System.out.println(moneyCoins.toString());
+        return moneyCoins.toString();
     }
 }
