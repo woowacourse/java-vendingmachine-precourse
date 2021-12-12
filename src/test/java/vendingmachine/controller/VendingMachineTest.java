@@ -173,6 +173,21 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
+	@DisplayName("[registerProducts 예외 테스트] 숫자가 아닌 상품 수량을 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_quantity_number_format_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,1500,OzRagwort]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
 	@DisplayName("[registerProducts 예외 테스트] 상품 가격을 소수로 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_double_type_exception_test() {
@@ -180,6 +195,21 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					run("[콜라,1.1,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("[registerProducts 예외 테스트] 상품 수량을 소수로 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_quantity_double_type_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,1500,1.1]");
 					vendingMachine.registerProducts();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -203,6 +233,21 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
+	@DisplayName("[registerProducts 예외 테스트] Integer 최대값보다 더 큰 상품 수량을 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_quantity_overflow_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,1500,50000000000]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
 	@DisplayName("[registerProducts 예외 테스트] 상품 가격을 100미만으로 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_lower_then_minimum_price_exception_test() {
@@ -210,6 +255,21 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					run("[콜라,50,20]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("[registerProducts 예외 테스트] 상품 수량을 음수으로 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_quantity_negative_number_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,1500,-1]");
 					vendingMachine.registerProducts();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
