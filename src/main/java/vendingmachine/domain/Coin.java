@@ -41,15 +41,15 @@ public enum Coin implements Comparator<Coin> {
         return coinMap;
     }
 
-    public int amount() {
-        return amount;
-    }
-
     public static int leastCoin() {
         return Arrays.stream(values())
             .min(Comparator.comparingInt(Coin::amount))
             .map(Coin::amount)
             .orElseThrow(CoinNotFoundLeastException::new);
+    }
+
+    public int amount() {
+        return amount;
     }
 
     @Override
