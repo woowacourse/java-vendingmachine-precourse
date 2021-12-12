@@ -31,7 +31,7 @@ public class PurchaseService {
 			itemName = inputView.inputItemName();
 			String finalItemName = itemName;
 			selectedItem = items.stream()
-				.filter(item -> item.getName().equals(finalItemName))
+				.filter(item -> item.isEqualItemByName(finalItemName) == true)
 				.findAny()
 				.orElse(null);
 			isValidItem = purchaseInputValidator.validateItem(selectedItem, remainingMoney);

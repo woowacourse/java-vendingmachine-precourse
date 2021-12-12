@@ -1,9 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
@@ -11,7 +9,6 @@ import vendingmachine.service.CoinService;
 import vendingmachine.service.ItemService;
 import vendingmachine.service.MoneyService;
 import vendingmachine.service.PurchaseService;
-import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
