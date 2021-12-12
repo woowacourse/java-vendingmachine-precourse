@@ -25,6 +25,10 @@ public class OutputView {
 		printChangeStatus(changesMap);
 	}
 
+	public static void printInputAmount() {
+		System.out.println(MessageConst.INPUT_AMOUNT_MESSAGE);
+	}
+
 	private static void printChangeStatus(Map<Coin, Integer> changesMap) {
 		changesMap.forEach(OutputView::printCoinAndCoinNum);
 	}
@@ -32,5 +36,4 @@ public class OutputView {
 	private static void printCoinAndCoinNum(Coin coin, Integer coinNum) {
 		System.out.println(coin + MessageConst.SEPARATOR + coinNum + MessageConst.UNIT);
 	}
-
 }

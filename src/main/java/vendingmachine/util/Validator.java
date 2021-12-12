@@ -1,16 +1,12 @@
 package vendingmachine.util;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.regex.Matcher;
 
 import vendingmachine.constant.ErrorConst;
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Item;
 
 public class Validator {
-	public static void validateInitialMoney(int money) {
+	public static void validateMoney(int money) {
 		if (isMinus(money)) {
 			throw new IllegalArgumentException(ErrorConst.MONEY_IS_NOT_MINUS);
 		}
@@ -24,7 +20,6 @@ public class Validator {
 		if (itemName.trim().equals("")) {
 			throw new IllegalArgumentException("[ERROR] 상품명으로 공백을 지정할 수 없습니다.");
 		}
-		//TODO 상품명이 중복될 경우
 	}
 
 	public static void validatePrice(int price) {

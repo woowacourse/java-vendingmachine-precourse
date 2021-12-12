@@ -13,19 +13,27 @@ public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = initVendingMachine();
 		OutputView.printChanges(vendingMachine.getChanges());
-		OutputView.printItemSettingMessage();
-		initVendingMachineItem(vendingMachine);
+		initItemList(vendingMachine);
+		initInputAmount(vendingMachine);
 	}
 
-	private void initVendingMachineItem(VendingMachine vendingMachine) {
+	private void initInputAmount(VendingMachine vendingMachine) {
 		try {
-			String inputItemText = InputView.inputText();
-			List<Item> items = Converter.toItems(inputItemText);
-			System.out.println(items);
-			vendingMachine.initItemList(items);
+			OutputView.printInputAmount();
+			vendingMachine.initInputAmount(InputView.inputMoney());
 		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
-			initVendingMachineItem(vendingMachine);
+			initInputAmount(vendingMachine);
+		}
+	}
+
+	private void initItemList(VendingMachine vendingMachine) {
+		try {
+			OutputView.printItemSettingMessage();
+			vendingMachine.initItemList(Converter.toItems(InputView.inputText()));
+		} catch (IllegalArgumentException e) {
+			OutputView.printErrorMessage(e.getMessage());
+			initItemList(vendingMachine);
 		}
 	}
 
@@ -33,7 +41,7 @@ public class VendingMachineController {
 		try {
 			OutputView.printInitMessage();
 			int initialMoney = InputView.inputMoney();
-			Validator.validateInitialMoney(initialMoney);
+			Validator.validateMoney(initialMoney);
 			return new VendingMachine(initialMoney);
 		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
