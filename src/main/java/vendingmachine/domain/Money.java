@@ -17,6 +17,12 @@ public class Money {
 		this.money = money;
 	}
 
+	public Money(int money) {
+		validateRange(money);
+		validateDivisibleBy10(money);
+		this.money = money;
+	}
+
 	public int get() {
 		return money;
 	}
@@ -25,8 +31,8 @@ public class Money {
 		this.money += money.money;
 	}
 
-	public void sub(Money price) {
-		this.money -= price.money;
+	public void sub(Money money) {
+		this.money -= money.money;
 	}
 
 	public boolean isLowerThen(Money money) {

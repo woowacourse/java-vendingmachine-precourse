@@ -8,6 +8,7 @@ import vendingmachine.dto.RequestInsertMoneyDto;
 import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.RequestSellProductDto;
 import vendingmachine.dto.ResponseAllCoinQuantity;
+import vendingmachine.dto.ResponseChangeDto;
 import vendingmachine.dto.ResponseMoneyDto;
 import vendingmachine.service.VendingMachineService;
 
@@ -55,5 +56,10 @@ public class VendingMachine {
 				System.out.println(e.getMessage());
 			}
 		}
+	}
+
+	public void returnChange() {
+		ResponseChangeDto responseChangeDto = vendingMachineService.returnChange();
+		outputChange(responseChangeDto);
 	}
 }

@@ -4,6 +4,7 @@ import static vendingmachine.enums.ErrorMessage.*;
 
 public class Quantity {
 	private static final int SOLD_OUT = 0;
+	private static final int EMPTY_QUANTITY = 0;
 
 	private int quantity;
 
@@ -11,6 +12,10 @@ public class Quantity {
 		validateNumberFormat(value);
 		int quantity = Integer.parseInt(value);
 		validateRange(quantity);
+		this.quantity = quantity;
+	}
+
+	public Quantity(int quantity) {
 		this.quantity = quantity;
 	}
 
@@ -24,6 +29,10 @@ public class Quantity {
 
 	public void sub(int quantity) {
 		this.quantity -= quantity;
+	}
+
+	public boolean has() {
+		return quantity > EMPTY_QUANTITY;
 	}
 
 	public boolean isSoldOut() {

@@ -6,6 +6,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.domain.Money;
+import vendingmachine.domain.Quantity;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -33,5 +36,9 @@ public enum Coin {
 		return Arrays.stream(Coin.values())
 			.map(Coin::get)
 			.collect(Collectors.toList());
+	}
+
+	public Quantity getQuotient(Money money) {
+		return new Quantity(money.get() / amount);
 	}
 }

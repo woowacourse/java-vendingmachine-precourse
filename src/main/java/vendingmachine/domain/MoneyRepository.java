@@ -9,6 +9,10 @@ public class MoneyRepository {
 		MoneyRepository.money.add(money);
 	}
 
+	public static void sub(Money money) {
+		MoneyRepository.money.sub(money);
+	}
+
 	public static Money get() {
 		return money;
 	}

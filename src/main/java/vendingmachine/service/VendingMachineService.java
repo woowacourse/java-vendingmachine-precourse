@@ -4,6 +4,7 @@ import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 
 import java.util.List;
 
+import vendingmachine.domain.Change;
 import vendingmachine.domain.CoinRepository;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.MoneyRepository;
@@ -11,11 +12,13 @@ import vendingmachine.domain.Name;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductRepository;
 import vendingmachine.domain.Products;
+import vendingmachine.domain.Quantity;
 import vendingmachine.dto.RequestHoldingMoneyDto;
 import vendingmachine.dto.RequestInsertMoneyDto;
 import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.RequestSellProductDto;
 import vendingmachine.dto.ResponseAllCoinQuantity;
+import vendingmachine.dto.ResponseChangeDto;
 import vendingmachine.dto.ResponseMoneyDto;
 import vendingmachine.enums.Coin;
 
@@ -62,5 +65,29 @@ public class VendingMachineService {
 
 	public boolean canSell() {
 		return ProductRepository.canSell();
+	}
+
+	public ResponseChangeDto returnChange() {
+		Change change = new Change();
+		for (Coin coin : Coin.values()) {
+			Quantity changeQuantity = getChangeQuantity(coin);
+			change.put(coin, changeQuantity);
+			settleCoinAndMoney(coin, changeQuantity);
+		}
+		return new ResponseChangeDto(change);
+	}
+
+	private void settleCoinAndMoney(Coin coin, final Quantity changeQuantity) {
+		CoinRepository.sub(coin, changeQuantity);
+		Money money = new Money(coin.get() * changeQuantity.get());
+		MoneyRepository.sub(money);
+	}
+
+	private Quantity getChangeQuantity(Coin coin) {
+		Quantity remainQuantity = CoinRepository.findQuantityByCoin(coin);
+		Money remainMoney = MoneyRepository.get();
+		Quantity quotientMoneyByAmount = coin.getQuotient(remainMoney);
+		int minQuantity = Math.min(remainQuantity.get(), quotientMoneyByAmount.get());
+		return new Quantity(minQuantity);
 	}
 }
