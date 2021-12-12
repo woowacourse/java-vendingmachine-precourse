@@ -36,6 +36,7 @@ public class Product {
             Utils.validateNumber(str.split(",")[2]);
             Utils.validatePositiveNumber(Integer.parseInt(str.split(",")[1]));
             Utils.validatePositiveNumber(Integer.parseInt(str.split(",")[2]));
+            Utils.validateOvervalue(Integer.parseInt(str.split(",")[1]));
             products.add(new Product(str.split(",")[0], Integer.parseInt(str.split(",")[1]), Integer.parseInt(str.split(",")[2])));
         }
         return products;
