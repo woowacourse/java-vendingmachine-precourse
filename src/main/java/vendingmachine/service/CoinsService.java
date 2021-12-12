@@ -5,8 +5,8 @@ import java.util.Map;
 
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinQuantity;
-import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsDto;
+import vendingmachine.dto.VendingMachineBalanceDto;
 import vendingmachine.repository.CoinsRepository;
 import vendingmachine.repository.UserBalanceRepository;
 
@@ -16,8 +16,8 @@ public class CoinsService {
 	private final CoinsRepository coinsRepository = CoinsRepository.getInstance();
 	private final UserBalanceRepository userBalanceRepository = UserBalanceRepository.getInstance();
 
-	public void generateRandomCoins(VendingMachineBalance vendingMachineBalance) {
-		int remainingBalance = vendingMachineBalance.toInt();
+	public void generateRandomCoins(VendingMachineBalanceDto vendingMachineBalanceDto) {
+		int remainingBalance = vendingMachineBalanceDto.toEntity().toInt();
 
 		while (remainingBalance > REMAINING_BALANCE_WHEN_ALL_COINS_GENERATED) {
 			Coin randomCoin = Coin.pickRandomWithLimit(remainingBalance);

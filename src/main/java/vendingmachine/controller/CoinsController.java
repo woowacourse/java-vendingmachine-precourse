@@ -1,7 +1,7 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.vendingmachinebalance.VendingMachineBalance;
 import vendingmachine.dto.CoinsDto;
+import vendingmachine.dto.VendingMachineBalanceDto;
 import vendingmachine.exception.NotNumericException;
 import vendingmachine.service.CoinsService;
 import vendingmachine.utils.StringUtils;
@@ -27,8 +27,9 @@ public class CoinsController {
 			throw new NotNumericException();
 		}
 
-		VendingMachineBalance vendingMachineBalance = VendingMachineBalance.from(Integer.parseInt(input));
-		coinsService.generateRandomCoins(vendingMachineBalance);
+		int vendingMachineBalance = Integer.parseInt(input);
+		VendingMachineBalanceDto vendingMachineBalanceDto = VendingMachineBalanceDto.from(vendingMachineBalance);
+		coinsService.generateRandomCoins(vendingMachineBalanceDto);
 	}
 
 	public void printGeneratedCoins() {

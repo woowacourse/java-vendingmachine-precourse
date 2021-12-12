@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.userbalance.UserBalance;
+import vendingmachine.dto.UserBalanceDto;
 import vendingmachine.exception.NotNumericException;
 import vendingmachine.service.UserBalanceService;
 import vendingmachine.utils.StringUtils;
@@ -26,8 +26,10 @@ public class UserBalanceController {
 			throw new NotNumericException();
 		}
 
-		UserBalance userBalance = UserBalance.from(Integer.parseInt(input));
-		userBalanceService.initUserBalance(userBalance);
-		OutputView.printCurrentUserBalance(userBalance.toInt());
+		int userBalance = Integer.parseInt(input);
+		UserBalanceDto userBalanceDto = UserBalanceDto.from(userBalance);
+		userBalanceService.initUserBalance(userBalanceDto);
+
+		OutputView.printCurrentUserBalance(userBalance);
 	}
 }
