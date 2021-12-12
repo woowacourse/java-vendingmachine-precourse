@@ -31,6 +31,7 @@ public class CashHolder {
         }
         try {
             coin = mostExpensiveCoinBelowAmount(amount);
+            coins.computeIfPresent(coin, (k, v) -> v - 1);
             changes.putIfAbsent(coin, 0);
             changes.computeIfPresent(coin, (k, v) -> v + 1);
             amount -= coin.getAmount();
