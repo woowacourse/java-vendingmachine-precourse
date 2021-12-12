@@ -67,9 +67,9 @@ public class VendingMachine {
         CoinCountMap leftoverCoinCountMap = new CoinCountMap();
         Coin[] coinArray = Coin.values();
         int idx = 0;
-        while (toReturnCash != 0) {
+        while (checkValidMoney(toReturnCash) && checkValidIndex(idx)) {
             Coin coin = coinArray[idx];
-            if (this.coinCountMap.getCoinCount().get(coin) == 0 || toReturnCash < coin.getAmount()) {
+            if (!checkCoinCanBeReturned(coin, toReturnCash)) {
                 idx += 1;
                 continue;
             }
@@ -79,6 +79,30 @@ public class VendingMachine {
             this.coinCountMap.getCoinCount().replace(coin, this.coinCountMap.getCoinCount().get(coin) - minCoinCount);
         }
         return leftoverCoinCountMap;
+    }
+
+    private boolean checkValidIndex(int idx) {
+        if (idx < 4) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkValidMoney(int toReturnCash) {
+        if (toReturnCash != 0 ) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkCoinCanBeReturned(Coin coin, int toReturnCash) {
+        if (this.coinCountMap.getCoinCount().get(coin) == 0) {
+            return false;
+        }
+        if (toReturnCash < coin.getAmount()) {
+            return false;
+        }
+        return true;
     }
 
     private int findMinCoinCount(Coin coin, int toReturnCash) {
