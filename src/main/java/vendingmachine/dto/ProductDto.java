@@ -1,11 +1,5 @@
 package vendingmachine.dto;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-
 import vendingmachine.Notification;
 import vendingmachine.product.Product;
 import vendingmachine.product.Products;
@@ -32,7 +26,7 @@ public class ProductDto {
 	}
 
 	private void validProductSize(String[] productArray) {
-		if(productArray.length < PRODUCT_MINIMUM_SIZE) {
+		if (productArray.length < PRODUCT_MINIMUM_SIZE) {
 			throw new IllegalArgumentException(Notification.PRODUCTS_SIZE_INSUFFICIENT.getMessage());
 		}
 	}
@@ -53,17 +47,17 @@ public class ProductDto {
 
 	private String removePattern(String product) {
 		validatePattern(product);
-		return product.substring(PRODUCT_START_INDEX,product.length()-1);
+		return product.substring(PRODUCT_START_INDEX, product.length() - 1);
 	}
 
 	private void validateSize(int productSize) {
-		if(productSize != PRODUCT_COMPOSITION_SIZE) {
+		if (productSize != PRODUCT_COMPOSITION_SIZE) {
 			throw new IllegalArgumentException(Notification.PRODUCT_INVALID_COMPOSITION.getMessage());
 		}
 	}
 
 	private void validatePattern(String product) {
-		if(!product.startsWith("[") || !product.endsWith("]")){
+		if (!product.startsWith("[") || !product.endsWith("]")) {
 			throw new IllegalArgumentException(Notification.PRODUCT_INVALID_COMPOSITION.getMessage());
 		}
 	}

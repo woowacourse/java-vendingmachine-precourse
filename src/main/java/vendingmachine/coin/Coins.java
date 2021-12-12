@@ -1,7 +1,6 @@
 package vendingmachine.coin;
 
 import java.util.EnumMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,7 +14,7 @@ public class Coins {
 	public Coins() {
 		this.coins = new EnumMap<>(Coin.class);
 		for (Coin coin : Coin.getSortedCoins()) {
-			coins.put(coin,Quantity.from());
+			coins.put(coin, Quantity.from());
 		}
 	}
 
@@ -34,7 +33,7 @@ public class Coins {
 	public void addAll(Coins coins) {
 		Set<Map.Entry<Coin, Quantity>> coinSet = coins.coins.entrySet();
 		for (Map.Entry<Coin, Quantity> coin : coinSet) {
-			add(coin.getKey(),coin.getValue());
+			add(coin.getKey(), coin.getValue());
 		}
 	}
 
@@ -57,7 +56,7 @@ public class Coins {
 		Coins returnCoins = new Coins();
 		List<Coin> sortedCoins = Coin.getSortedCoins();
 		for (Coin coin : sortedCoins) {
-			calculateChange(coin,money,returnCoins);
+			calculateChange(coin, money, returnCoins);
 		}
 		returnCoins.removeZeroQuantity();
 		return returnCoins;
@@ -66,10 +65,10 @@ public class Coins {
 	public void calculateChange(Coin coin, Money money, Coins returnCoins) {
 		Quantity retentionQuantity = coins.get(coin);
 		Quantity ableQuantity = coin.exchangeableQuantity(money, retentionQuantity);
-		if(!ableQuantity.isZero()) {
-			money.spend(coin.getMoney(),ableQuantity);
+		if (!ableQuantity.isZero()) {
+			money.spend(coin.getMoney(), ableQuantity);
 			retentionQuantity.down(ableQuantity);
-			returnCoins.add(coin,ableQuantity);
+			returnCoins.add(coin, ableQuantity);
 		}
 	}
 }

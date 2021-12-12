@@ -1,6 +1,5 @@
 package vendingmachine.quantity;
 
-import vendingmachine.Money;
 import vendingmachine.Notification;
 import vendingmachine.exception.OutOfBoundException;
 
@@ -48,7 +47,7 @@ public class Quantity {
 	}
 
 	public Quantity up(Quantity quantity) {
-		if(!isIncrease(quantity)) {
+		if (!isIncrease(quantity)) {
 			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
 		}
 		count += quantity.count;
@@ -64,7 +63,7 @@ public class Quantity {
 	}
 
 	public Quantity down(Quantity quantity) {
-		if(!isDecrease(quantity)) {
+		if (!isDecrease(quantity)) {
 			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
 		}
 		count -= quantity.count;
@@ -104,6 +103,6 @@ public class Quantity {
 
 	@Override
 	public String toString() {
-		return count+"개";
+		return count + "개";
 	}
 }

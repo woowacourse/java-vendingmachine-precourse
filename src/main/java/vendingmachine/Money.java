@@ -44,14 +44,14 @@ public class Money implements Comparable<Money> {
 	}
 
 	public void spend(Money money, Quantity quantity) {
-		if(!isMultipliable(money,quantity)) {
+		if (!isMultipliable(money, quantity)) {
 			throw new OutOfBoundException(Notification.AMOUNT_NOT_SPEND.getMessage());
 		}
-		spend(Money.of(money.getAmount()* quantity.getCount()));
+		spend(Money.of(money.getAmount() * quantity.getCount()));
 	}
 
 	public void earn(Money money) {
-		if(!isAddable(money)) {
+		if (!isAddable(money)) {
 			throw new OutOfBoundException(Notification.AMOUNT_NOT_EARN.getMessage());
 		}
 		this.amount += money.amount;
@@ -103,7 +103,8 @@ public class Money implements Comparable<Money> {
 	public boolean equals(Object o) {
 		if (this == o) {
 			return true;
-		} if (o == null || getClass() != o.getClass()) {
+		}
+		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
 		Money money1 = (Money)o;
@@ -117,7 +118,7 @@ public class Money implements Comparable<Money> {
 
 	@Override
 	public String toString() {
-		return amount+"원";
+		return amount + "원";
 	}
 
 	@Override

@@ -2,13 +2,11 @@ package vendingmachine.product;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
 import vendingmachine.Money;
 import vendingmachine.Notification;
-import vendingmachine.exception.DomainNotFoundException;
 
 public class Products {
 	private final Map<String, Product> products;
@@ -17,7 +15,7 @@ public class Products {
 		this.products = products;
 	}
 
-	public static Products from(){
+	public static Products from() {
 		return new Products(new HashMap<>());
 	}
 
@@ -25,7 +23,7 @@ public class Products {
 		validateNull(product);
 		String name = product.getName();
 		validateExists(name);
-		products.put(name,product);
+		products.put(name, product);
 	}
 
 	public void addAll(Products products) {
@@ -44,7 +42,7 @@ public class Products {
 	}
 
 	private void validateExists(String name) {
-		if(products.containsKey(name)) {
+		if (products.containsKey(name)) {
 			throw new IllegalArgumentException(Notification.PRODUCT_ALREADY_EXIST.getMessage());
 		}
 	}
@@ -66,7 +64,7 @@ public class Products {
 	}
 
 	public void validateProductName(String productName) {
-		if(!products.containsKey(productName)) {
+		if (!products.containsKey(productName)) {
 			throw new IllegalArgumentException(Notification.PRODUCT_NOT_FOUND.getMessage());
 		}
 	}

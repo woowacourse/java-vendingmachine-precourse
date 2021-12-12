@@ -1,9 +1,5 @@
 package vendingmachine.coin;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import java.util.Optional;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -18,7 +14,7 @@ class CoinTest {
 	public void isExistMoneyInCoin() {
 		Assertions.assertThrows(DomainNotFoundException.class, () ->
 			Coin.valueOf(Money.of(20))
-			.orElseThrow(() -> new DomainNotFoundException(Notification.COIN_NOT_FOUND.getMessage()))
+				.orElseThrow(() -> new DomainNotFoundException(Notification.COIN_NOT_FOUND.getMessage()))
 		);
 	}
 }

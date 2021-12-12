@@ -5,10 +5,10 @@ import vendingmachine.processor.InputProcessor;
 import vendingmachine.processor.OutputProcessor;
 
 public abstract class VendingMachineView {
-	private Visible visible;
 	protected final InputProcessor inputProcessor = new InputProcessor();
 	protected final OutputProcessor outputProcessor = new OutputProcessor();
 	protected final VendingMachineController controller;
+	private Visible visible;
 
 	public VendingMachineView(VendingMachineController controller) {
 		this.visible = Visible.SHOW;
@@ -22,5 +22,6 @@ public abstract class VendingMachineView {
 	public boolean isShow() {
 		return visible.isShow();
 	}
+
 	public abstract void show();
 }

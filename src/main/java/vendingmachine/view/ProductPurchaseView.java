@@ -14,7 +14,7 @@ public class ProductPurchaseView extends VendingMachineView {
 			validatePurchasable();
 			purchaseProcess();
 			validatePurchasable();
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			outputProcessor.printMessage(e.getMessage());
 		} catch (IllegalStateException e) {
 			hide();
@@ -30,7 +30,7 @@ public class ProductPurchaseView extends VendingMachineView {
 	}
 
 	private void validatePurchasable() {
-		if(!controller.isPurchasable()) {
+		if (!controller.isPurchasable()) {
 			throw new IllegalStateException();
 		}
 	}
