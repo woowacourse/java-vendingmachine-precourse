@@ -12,6 +12,7 @@ public class Machine {
 
 	private static final String REQUEST_MSG_MACHINE_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String REQUEST_MSG_MACHINE_PRODUCT = "상품명과 가격, 수량을 입력해주세요.";
+	private static final String ERROR_MSG_PURCHASE_PRODUCT_NAME = "[ERROR] 해당하는 상품이 없습니다.";
 
 	private int money;
 	private HashMap<Coin, Integer> wallet;
@@ -21,7 +22,7 @@ public class Machine {
 		products = new ArrayList<>();
 	}
 
-	public void run() {
+	public void readyToOpen() {
 		inputMachineMoney();
 		setMachineCoin(this.money);
 		inputMachineProduct();
@@ -80,12 +81,21 @@ public class Machine {
 			inputMachineProduct();
 		}
 		for (String productInfo : productList) {
-			products.add(new Product(removeSquareBracket(productInfo)));
+			this.products.add(new Product(removeSquareBracket(productInfo)));
 		}
 	}
 
 	public String removeSquareBracket(String input) {
 		return input.substring(1,input.length() - 1);
+	}
+
+	public Product findProduct(String input) {
+		for (Product product : products) {
+			if (product.isThisName(input)) {
+				return product;
+			}
+		}
+		throw new IllegalArgumentException(ERROR_MSG_PURCHASE_PRODUCT_NAME);
 	}
 
 
