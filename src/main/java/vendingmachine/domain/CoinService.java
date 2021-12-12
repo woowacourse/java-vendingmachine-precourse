@@ -28,6 +28,7 @@ public class CoinService {
 			amount -= randomCoinAmount;
 		}
 	}
+
 	private int pickRandomCoinAmount(int amount) {
 		int randomCoinAmount;
 		List<Integer> allCoinAmount = Coin.getAllCoinAmount();

@@ -6,6 +6,7 @@ import vendingmachine.domain.CoinCounter;
 import vendingmachine.domain.CoinService;
 import vendingmachine.validator.AmountValidator;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class CoinController {
 	private CoinService coinService;
@@ -17,8 +18,9 @@ public class CoinController {
 
 	public void setVendingMachineCoinCounter() {
 		int amount = getVendingMachineAmount();
-		Map<Integer,Integer> coinCounter = coinService.getCoinCounter(amount);
+		Map<Integer, Integer> coinCounter = coinService.getCoinCounter(amount);
 		this.coinCounter = new CoinCounter(coinCounter);
+		OutputView.printCoinCounter(this.coinCounter);
 	}
 
 	private int getVendingMachineAmount() {
