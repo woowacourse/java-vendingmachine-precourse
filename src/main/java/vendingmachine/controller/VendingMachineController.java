@@ -31,14 +31,6 @@ public class VendingMachineController {
 		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
 	}
 
-	public LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
-		LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
-		for (Coin coin : coinStatus.keySet()) {
-			intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
-		}
-		return intCoinStatus;
-	}
-
 	public void vendingMahchineMoneyWithErrorHandling() {
 		try {
 			Money vendingMachineMoney = new Money(Integer.parseInt(InputView.inputVendingMachineMoney()));

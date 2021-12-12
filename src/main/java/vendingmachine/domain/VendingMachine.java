@@ -28,6 +28,14 @@ public class VendingMachine {
 		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();
 	}
 
+	public static LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
+		LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
+		for (Coin coin : coinStatus.keySet()) {
+			intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
+		}
+		return intCoinStatus;
+	}
+
 	public Merchandises getMerchandises() {
 		return merchandises;
 	}
