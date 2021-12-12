@@ -14,4 +14,10 @@ public class GoodsController {
         return goods.name == name;
     }
 
+    public boolean checkQuantity(Goods goods) {
+        if (goods.quantity > 0) {
+            return true;
+        }
+        return false;
+    }
 }
