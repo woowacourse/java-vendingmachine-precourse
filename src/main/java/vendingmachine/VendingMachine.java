@@ -23,20 +23,20 @@ public class VendingMachine {
 	private MachineInput machineInput = new MachineInput();
 	private CustomerInput customerInput = new CustomerInput();
 	private MachineViewer viewer = new MachineViewer();
-	private List<CoinStock> coins = new ArrayList<>();
-	private int money = 0;
-
-	public void run() {
-		operate();
-	}
 
 	public void operate() {
-		CoinStocks coinStocks = setupChangeCoins();
+		CoinStocks coinStocks = new CoinStocks(setupChangeCoins());
 		viewer.showCoins(coinStocks.toString());
 		Products products = new Products(setupSellingProducts());
-		setupMoney();
+		int money = setupMoney();
+		money = sellUntilStop(products, money);
+		CoinStocks returnCoinStocks = coinStocks.getReturnCoins(money);
+		viewer.showCoins(returnCoinStocks.toString());
+	}
+
+	private int sellUntilStop(Products products, int money) {
 		while (products.anyAvailableRemain(money)) {
-			String customerInput = getCustomerInput();
+			String customerInput = getCustomerInput(money);
 			if (customerInput.equals(END_OPTION)) {
 				break;
 			}
@@ -46,19 +46,18 @@ public class VendingMachine {
 				System.out.println(e.getMessage());
 			}
 		}
-		CoinStocks returnCoinStocks = coinStocks.getReturnCoins(money);
-		viewer.showCoins(returnCoinStocks.toString());
+		return money;
 	}
 
-	private String getCustomerInput() {
+	private String getCustomerInput(int money) {
 		viewer.showRemainMoney(money);
 		return customerInput.getPurchaseName();
 	}
 
-	private CoinStocks setupChangeCoins() {
+	private List<CoinStock> setupChangeCoins() {
 		int changes = machineInput.getTotalMachineChanges();
 		RandomCoinSelector randomCoinSelector = new RandomCoinSelector();
-		return new CoinStocks(randomCoinSelector.makeRandomCoinMix(changes));
+		return randomCoinSelector.makeRandomCoinMix(changes);
 	}
 
 	public List<Product> setupSellingProducts() {
@@ -73,13 +72,15 @@ public class VendingMachine {
 		return products;
 	}
 
-	public void setupMoney() {
+	public int setupMoney() {
+		int money = 0;
 		try {
 			money = customerInput.getInsertedMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setupMoney();
 		}
+		return money;
 	}
 
 	private List<Product> makeProductsFromInfo(List<String> productsInfo) {
