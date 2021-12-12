@@ -24,4 +24,10 @@ public class Product {
     public void reduceQuantity() {
         quantity -= 1;
     }
+
+    public boolean checkPurchasePossible(int restMoney) {
+        return restMoney >= price;
+    }
+
+
 }
