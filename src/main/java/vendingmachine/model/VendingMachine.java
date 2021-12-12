@@ -22,4 +22,8 @@ public class VendingMachine {
     public int getRemainingInputMoney() {
         return remainingInputMoney.getValue();
     }
+
+    public boolean canSellMore() {
+        return items.canSellSomethingWith(remainingInputMoney);
+    }
 }

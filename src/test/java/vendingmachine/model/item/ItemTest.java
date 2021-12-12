@@ -83,4 +83,25 @@ class ItemTest {
         assertThatIllegalArgumentException().isThrownBy(() -> new Item(NotEnoughInputItemDTO))
                 .withMessage(expectedExceptionMessage);
     }
+
+    @Test
+    @DisplayName("남은 투입 금액을 받아 상품을 판매할 수 있는지 반환한다(상품 가격을 지불할 수 있어도 수량이 0이면 판매할 수 없다.)")
+    void cannotSellBecauseOfZeroQuantity() {
+        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "800", "1"));
+        Item item = new Item(inputItemDTO);
+        Money remainingInputMoney = new Money("1800");
+        item.sell(remainingInputMoney);
+        boolean actual = item.cannotSell(remainingInputMoney);
+        assertThat(actual).isTrue();
+    }
+
+    @Test
+    @DisplayName("남은 투입 금액을 받아 상품을 판매할 수 있는지 반환한다(상품 가격을 지불할 수 없으면 판매할 수 없다.)")
+    void cannotSellBecauseOfNotEnoughRemainingInputMoney() {
+        InputItemDTO inputItemDTO = new InputItemDTO(Arrays.asList("물", "800", "1"));
+        Item item = new Item(inputItemDTO);
+        Money remainingInputMoney = new Money("600");
+        boolean actual = item.cannotSell(remainingInputMoney);
+        assertThat(actual).isTrue();
+    }
 }

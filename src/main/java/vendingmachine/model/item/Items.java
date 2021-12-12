@@ -32,4 +32,8 @@ public class Items {
                 .orElseThrow(() -> new IllegalArgumentException(WANTED_ITEM_NOT_FOUND_EXCEPTION_MESSAGE));
         userWantedItem.sell(remainingInputMoney);
     }
+
+    public boolean canSellSomethingWith(final Money remainingInputMoney) {
+        return values.stream().anyMatch(item -> !item.cannotSell(remainingInputMoney));
+    }
 }

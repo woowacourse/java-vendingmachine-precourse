@@ -53,6 +53,10 @@ public class Item {
         }
     }
 
+    public boolean cannotSell(final Money remainingInputMoney) {
+        return price.isMoreExpensiveThan(remainingInputMoney) || remainingQuantity.isZero();
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
