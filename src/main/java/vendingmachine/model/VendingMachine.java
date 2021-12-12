@@ -64,8 +64,7 @@ public class VendingMachine {
 	private boolean hasProductsUserCanBuy() {
 		return products.stream()
 			.filter(product -> product.getNumber() > INITIAL_VALUE)
-			.filter(product -> product.getPrice() < remainInsertMoney)
-			.count() != INITIAL_VALUE;
+			.anyMatch(product -> product.getPrice() <= remainInsertMoney);
 	}
 
 	private void useMoneyToBuy(Product product) {
