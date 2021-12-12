@@ -22,4 +22,8 @@ public class VendingMachine {
 
         investmentMoney.calculate(product);
     }
+
+    public Changes getChanges(InvestmentMoney investmentMoney) {
+        return new Changes(possessionCoins.takeChange(investmentMoney));
+    }
 }
