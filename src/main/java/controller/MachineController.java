@@ -13,7 +13,7 @@ public class MachineController {
 		VendingMachine vendingMachine = new VendingMachine();
 		InputDisplay.askInputVendingMachineChange();
 		vendingMachine.makeVendingMachineCoinBox(InputController.inputVendingMachineChange());
-		OutputDisplay.showEachCoinInCoinBox(vendingMachine.giveEachCoinValue(), vendingMachine.giveEachCoinCount());
+		OutputDisplay.showEachCoinInCoinBox(vendingMachine.giveEachCoinPrice(), vendingMachine.giveEachCoinCount());
 	}
 
 }
