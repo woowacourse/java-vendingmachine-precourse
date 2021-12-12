@@ -15,7 +15,7 @@ public class InputChecker {
     static final int PRODUCT_PRICE_INDEX = 1;
     static final int PRODUCT_STOCK_INDEX = 2;
 
-    public static HashMap<Product, Integer> getProductHashMap(){
+    public static HashMap<Product, Integer> getProductStockHashMap(){
         HashMap<Product, Integer> productStockMap = new HashMap<>();
         List<String> products = getRightProductInput();
 
