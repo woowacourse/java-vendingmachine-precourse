@@ -7,7 +7,7 @@ import java.util.Optional;
 import vendingmachine.item.Item;
 
 public class Items {
-    private Map<Item, Integer> items = new HashMap<>();;
+    private Map<Item, Integer> items = new HashMap<>();
 
     public void add(Item itemToAdd, int numberOfItemsToAdd) {
         items.computeIfPresent(itemToAdd, (item, numberOfItem) -> numberOfItem + numberOfItemsToAdd);

@@ -6,9 +6,9 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class CoinExchangeMachine {
-    private int amount;
-    private Coins coins;
-    private List<Integer> amountsToPick;
+    private int amount = 0;
+    private Coins coins = new Coins();
+    private List<Integer> amountsToPick = new ArrayList<>(Coin.getAllDenominations());
 
     public Coins changeIntoCoins(int amountToChange) {
         initialize(amountToChange);
@@ -18,8 +18,6 @@ public class CoinExchangeMachine {
 
     private void initialize(int amountToChange) {
         this.amount = amountToChange;
-        coins = new Coins();
-        amountsToPick = new ArrayList<>(Coin.getAllDenominations());
     }
 
     private void changeIntoCoins() {

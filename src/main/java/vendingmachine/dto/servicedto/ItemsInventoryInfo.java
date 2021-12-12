@@ -8,9 +8,6 @@ import vendingmachine.dto.servicedto.ItemInventoryInfo;
 public class ItemsInventoryInfo {
     List<ItemInventoryInfo> itemsInventoryInfo = new ArrayList<>();
 
-    public ItemsInventoryInfo() {
-    }
-
     public void add(ItemInventoryInfo itemInventoryInfo) {
         itemsInventoryInfo.add(itemInventoryInfo);
     }

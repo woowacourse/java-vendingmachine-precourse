@@ -10,9 +10,9 @@ import vendingmachine.item.Items;
 
 public class VendingMachine {
     private final ChangeAccountant changeAccountant = new ChangeAccountant();
-    private Coins coinBalance;
-    private Items items;
-    private int moneyAvailable;
+    private Coins coinBalance = new Coins();
+    private Items items = new Items();
+    private int moneyAvailable = 0;
 
     public Coins depositCoinBalance(Coins coinBalance) {
         this.coinBalance = coinBalance;

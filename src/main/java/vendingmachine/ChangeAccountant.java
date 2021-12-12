@@ -4,15 +4,12 @@ import vendingmachine.coin.Coin;
 import vendingmachine.coin.Coins;
 
 public class ChangeAccountant {
-    private Coins changes;
-    private int amountToChange;
-    private Coins coinBalance;
+    private Coins changes = new Coins();
+    private int amountToChange = 0;
+    private Coins coinBalance = new Coins();
 
     public Coins change(int amountToChange, Coins coinBalance) {
-        initialize();
-        this.amountToChange = amountToChange;
-        this.coinBalance = coinBalance;
-
+        initialize(amountToChange, coinBalance);
         Coin.getAllKindsOfCoinFromLargestToSmallest().forEach(this::changeToEachCoin);
         return changes;
     }
@@ -21,9 +18,10 @@ public class ChangeAccountant {
         return amountToChange;
     }
 
-    private void initialize() {
+    private void initialize(int amountToChange, Coins coinBalance) {
         changes = new Coins();
-        amountToChange = 0;
+        this.amountToChange = amountToChange;
+        this.coinBalance = coinBalance;
     }
 
     private void changeToEachCoin(Coin coin) {
