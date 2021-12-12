@@ -65,7 +65,7 @@ public class NumberException {
 		try {
 			checkPositiveNumberException(quantity);
 		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException(e.getMessage());
+			throw new IllegalArgumentException(ErrorMessage.NOT_POSITIVE_NUMBER_QUANTITY_MESSAGE);
 		}
 
 		return quantity;
