@@ -1,8 +1,8 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import vendingmachine.type.Coin;
 
@@ -15,8 +15,7 @@ public class VendingMachineCoins {
 	}
 
 	public List<Coin> getKeys() {
-		return coins.keySet().stream()
-			.collect(Collectors.toList());
+		return new ArrayList<>(coins.keySet());
 	}
 
 	public int getAmount(Coin coin) {
