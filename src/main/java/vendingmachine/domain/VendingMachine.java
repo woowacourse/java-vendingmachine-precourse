@@ -75,14 +75,19 @@ public class VendingMachine {
         for (Coin coin : Coin.getCoinsDesc()) {
             if (this.coins.get(coin) == ZERO_COINS) continue;
             if (this.customerMoneyLeft < coin.getAmount()) continue;
-            int spentCoinNumber = this.customerMoneyLeft/coin.getAmount();
-            if (spentCoinNumber > this.coins.get(coin)) {
-                spentCoinNumber = this.coins.get(coin);
-            }
-            coinChanges.put(coin, spentCoinNumber);
-            this.coins.put(coin, this.coins.get(coin)-spentCoinNumber);
-            this.customerMoneyLeft -= coin.getAmount() * spentCoinNumber;
+            int coinNumber = this.calculateMaximumCoinNumber(coin);
+            coinChanges.put(coin, coinNumber);
+            this.coins.put(coin, this.coins.get(coin)-coinNumber);
+            this.customerMoneyLeft -= coin.getAmount() * coinNumber;
         }
         return coinChanges;
+    }
+
+    private int calculateMaximumCoinNumber(Coin coin) {
+        int spentCoinNumber = this.customerMoneyLeft/coin.getAmount();
+        if (spentCoinNumber > this.coins.get(coin)) {
+            spentCoinNumber = this.coins.get(coin);
+        }
+        return spentCoinNumber;
     }
 }
