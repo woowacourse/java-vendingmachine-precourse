@@ -14,6 +14,7 @@ public enum Coin {
 
     private final int amount;
     public int number;
+    public int currentAmount = 0;
 
     Coin(final int amount, int number) {
         this.amount = amount;
@@ -40,5 +41,13 @@ public enum Coin {
         int pickAmount = Randoms.pickNumberInList(coin);
 
         return pickAmount;
+    }
+
+    public void setCurrentAmount(int amount) {
+        this.currentAmount += amount;
+    }
+
+    public boolean isSummation(int holdingAmount) {
+        return this.currentAmount == holdingAmount;
     }
 }
