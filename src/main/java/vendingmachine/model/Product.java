@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 import vendingmachine.constant.Rule;
 import vendingmachine.util.SplitChecker;
@@ -31,5 +32,28 @@ public class Product {
 		splitChecker.exceedMaxSplit(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO);
 		splitChecker.hasZeroLength(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO);
 		splitChecker.isCorrectTheNumber(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO, Rule.NUMBER_OF_PRODUCT_INFO);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj == null || getClass() != obj.getClass()) {
+			return false;
+		}
+
+		Product other = (Product)obj;
+		if (!name.equals(other.name)) {
+			return false;
+		}
+
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(this.name);
 	}
 }
