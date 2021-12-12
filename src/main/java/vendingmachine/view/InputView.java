@@ -31,8 +31,8 @@ public class InputView {
 
         String input = Console.readLine();
         String[] merchandiseInfos = input.split(";");
+        validateMenuInputFormat(merchandiseInfos);
         for (String merchandiseInfo : merchandiseInfos) {
-            validateMerchandiseInfoFormat(merchandiseInfo);
             merchandiseList.add(new Merchandise(merchandiseInfo));
         }
         return new Menu(merchandiseList);

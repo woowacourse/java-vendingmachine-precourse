@@ -4,7 +4,13 @@ import static vendingmachine.utils.ExceptionMessages.*;
 
 public class StringFormatValidator {
 
-    public static void validateMerchandiseInfoFormat(String merchandiseInfo) {
+    public static void validateMenuInputFormat(String[] merchandiseInfos) {
+        for (String merchandiseInfo : merchandiseInfos) {
+            validateMerchandiseInfoFormat(merchandiseInfo);
+        }
+    }
+
+    private static void validateMerchandiseInfoFormat(String merchandiseInfo) {
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
         String name = infoList[0];
 
