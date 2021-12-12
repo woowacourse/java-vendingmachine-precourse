@@ -24,9 +24,9 @@ public class Application {
 		while (inputMoney.isRemain()) {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());
 			String buyProductName = vendingMachineController.scanBuyProductName();
-			products = Products.buy(buyProductName, products);
+			products = products.buy(buyProductName);
 			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
-			if (Products.isHigherThanMinProductPrice(inputMoney, products)) {
+			if (products.isHigherThanMinProductPrice(inputMoney)) {
 				break;
 			};
 		}

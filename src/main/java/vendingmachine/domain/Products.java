@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Products {
 	private static final String PRODUCTS_DELIMITER = ",";
@@ -34,10 +35,9 @@ public class Products {
 		return new Products(newProduct);
 	}
 
-	public static Products buy(String buyProductName, Products products) {
+	public Products buy(String buyProductName) {
 		List<Product> newProducts = new ArrayList<>();
-		List<Product> productList = products.getProducts();
-		for (Product product : productList) {
+		for (Product product : products) {
 			if (product.getName().equals(buyProductName)) {
 				product = product.reduce(ONE);
 			}
@@ -46,10 +46,9 @@ public class Products {
 		return new Products(newProducts);
 	}
 
-	public static boolean isHigherThanMinProductPrice(Money inputMoney, Products products) {
-		List<Product> productList = products.getProducts();
+	public boolean isHigherThanMinProductPrice(Money inputMoney) {
 		int minProductPrice = Integer.MAX_VALUE;
-		for (Product product : productList) {
+		for (Product product : products) {
 			minProductPrice = Math.min(product.getPrice(), minProductPrice);
 		}
 		if (inputMoney.getMoney() < minProductPrice) {
