@@ -26,7 +26,9 @@ public class Application {
 			String buyProductName = vendingMachineController.scanBuyProductName();
 			products = Products.buy(buyProductName, products);
 			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
-			System.out.println("inputMoney.getMoney(): " + inputMoney.getMoney());
+			if (Products.isHigherThanMinProductPrice(inputMoney, products)) {
+				break;
+			};
 		}
 	}
 }

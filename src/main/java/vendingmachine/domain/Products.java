@@ -46,6 +46,18 @@ public class Products {
 		return new Products(newProducts);
 	}
 
+	public static boolean isHigherThanMinProductPrice(Money inputMoney, Products products) {
+		List<Product> productList = products.getProducts();
+		int minProductPrice = Integer.MAX_VALUE;
+		for (Product product : productList) {
+			minProductPrice = Math.min(product.getPrice(), minProductPrice);
+		}
+		if (inputMoney.getMoney() < minProductPrice) {
+			return true;
+		}
+		return false;
+	}
+
 	public List<Product> getProducts() {
 		return this.products;
 	}
