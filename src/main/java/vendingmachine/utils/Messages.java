@@ -15,7 +15,7 @@ public enum Messages {
 	OUTPUT_VIEW_NOTICE_COIN_INPUT_MSG("자판기가 보유하고 있는 금액을 입력해 주세요."),
 	OUTPUT_VIEW_NOTICE_ITEM_INPUT_MSG("상품명과 가격, 수량을 입력해 주세요."),
 	OUTPUT_VIEW_NOTICE_PAY_MONEY_INPUT_MSG("투입 금액을 입력해 주세요."),
-	OUTPUT_VIEW_NOTICE_PAY_ITEM_INPUT_MSG("구매할 상품명을 입력해 주세요."),
+	OUTPUT_VIEW_NOTICE_BUY_ITEM_INPUT_MSG("구매할 상품명을 입력해 주세요."),
 	OUTPUT_VIEW_NOW_MONEY_MSG("투입 금액: "),
 	OUTPUT_VIEW_WON_MSG("원"),
 	OUTPUT_VIEW_COIN_COUNT_MSG("개"),
