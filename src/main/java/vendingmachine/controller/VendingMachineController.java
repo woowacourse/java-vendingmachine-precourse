@@ -8,6 +8,7 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = initVendingMachine();
+		OutputView.printChanges(vendingMachine.getChanges());
 	}
 
 	private VendingMachine initVendingMachine() {

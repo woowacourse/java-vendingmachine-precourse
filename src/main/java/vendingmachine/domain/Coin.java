@@ -21,6 +21,11 @@ public enum Coin {
 		return money % amount == 0;
 	}
 
+	@Override
+	public String toString() {
+		return amount + "원";
+	}
+
 	public int randomPick(int money) {
 		if (isTenCoin()) {
 			return money / COIN_10.amount;

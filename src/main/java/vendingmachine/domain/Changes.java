@@ -13,4 +13,8 @@ public class Changes {
 			money = coin.getRemainMoney(money, coinNum);
 		}
 	}
+
+	public Map<Coin, Integer> getChanges() {
+		return changes;
+	}
 }
