@@ -11,5 +11,7 @@ public class Goods {
         this.quantity = quantity;
     }
 
-
+    public void reduceQuantity() {
+        this.quantity = String.valueOf(Integer.parseInt(quantity) - 1);
+    }
 }
