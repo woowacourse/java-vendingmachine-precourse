@@ -26,6 +26,7 @@ public class VendingMachineController {
         initializeInsertAmount();
         while (vendingMachine.isBuyAbleProductRemain()) {
             SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
+            String productToBuy = InputView.inputProductToBuy();
         }
     }
 
