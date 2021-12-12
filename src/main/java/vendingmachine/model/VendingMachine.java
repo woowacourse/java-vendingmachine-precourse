@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.model;
 import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.model.Coin;
 
 public class VendingMachine {
     private HashMap<Coin, Integer> coinCount = new HashMap<Coin, Integer>();

@@ -1,18 +1,22 @@
-package vendingmachine;
+package vendingmachine.controller;
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.Validators;
+import vendingmachine.model.Item;
+import vendingmachine.model.VendingMachine;
+
 import java.util.ArrayList;
 
 public class InputManager {
-    public static final String PREFIX_ERROR = "[ERROR]";
+    private static final String PREFIX_ERROR = "[ERROR]";
 
-    public String getUserInput(String guide) {
+    private static String getUserInput(String guide) {
         System.out.println(guide);
         String userInput = Console.readLine();
         System.out.println();
         return userInput;
     }
 
-    public VendingMachine setVendingMachine() {
+    public static VendingMachine setVendingMachine() {
         while (true) {
             String inputData = getUserInput("자판기가 보유하고 있는 금액을 입력해 주세요.");
             try {
@@ -23,7 +27,7 @@ public class InputManager {
         }
     }
 
-    public ArrayList<Item> setItemList() {
+    public static ArrayList<Item> setItemList() {
         while (true) {
             String inputData = getUserInput("상품명과 가격, 수량을 입력해 주세요.");
             try {
@@ -34,7 +38,7 @@ public class InputManager {
         }
     }
 
-    public int setUserAmount() {
+    public static int setUserAmount() {
         while (true) {
             String inputData = getUserInput("투입 금액을 입력해주세요.");
             try {

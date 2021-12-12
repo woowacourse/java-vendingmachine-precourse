@@ -1,5 +1,5 @@
 package vendingmachine;
-import net.bytebuddy.pool.TypePool;
+import vendingmachine.model.Item;
 
 import java.util.ArrayList;
 
