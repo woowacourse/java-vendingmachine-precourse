@@ -23,34 +23,44 @@ public class VendingMachine {
 	private MachineInput machineInput = new MachineInput();
 	private CustomerInput customerInput = new CustomerInput();
 	private MachineViewer viewer = new MachineViewer();
+	private CoinStocks coinStocks;
+	private Products products;
+	private int insertedMoney;
 
 	public void operate() {
-		CoinStocks coinStocks = new CoinStocks(setupChangeCoins());
-		viewer.showCoins(coinStocks.toString());
-		Products products = new Products(setupSellingProducts());
-		int money = setupMoney();
-		money = sellUntilStop(products, money);
-		CoinStocks returnCoinStocks = coinStocks.getReturnCoins(money);
-		viewer.showCoins(returnCoinStocks.toString());
+		setupMachine();
+		sellUntilStop();
+		returnMoney();
 	}
 
-	private int sellUntilStop(Products products, int money) {
-		while (products.anyAvailableRemain(money)) {
-			String customerInput = getCustomerInput(money);
+	private void setupMachine() {
+		coinStocks = new CoinStocks(setupChangeCoins());
+		viewer.showCoins(coinStocks.toString());
+		products = new Products(setupSellingProducts());
+		setupMoney();
+	}
+
+	private void sellUntilStop() {
+		while (products.anyAvailableRemain(insertedMoney)) {
+			String customerInput = getCustomerInput();
 			if (customerInput.equals(END_OPTION)) {
 				break;
 			}
 			try {
-				money = products.sellProduct(customerInput, money);
+				insertedMoney = products.sellProductAndDeductMoney(customerInput, insertedMoney);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
 		}
-		return money;
 	}
 
-	private String getCustomerInput(int money) {
-		viewer.showRemainMoney(money);
+	private void returnMoney() {
+		CoinStocks returnCoinStocks = coinStocks.getReturnCoins(insertedMoney);
+		viewer.showCoins(returnCoinStocks.toString());
+	}
+
+	private String getCustomerInput() {
+		viewer.showRemainMoney(insertedMoney);
 		return customerInput.getPurchaseName();
 	}
 
@@ -61,35 +71,33 @@ public class VendingMachine {
 	}
 
 	public List<Product> setupSellingProducts() {
-		List<Product> products = new ArrayList<>();
+		List<Product> inputProducts = new ArrayList<>();
 		try {
-			List<String> productsInfo = machineInput.getProductsInfo();
-			products = makeProductsFromInfo(productsInfo);
+			List<String> inputProductsInfo = machineInput.getProductsInfo();
+			inputProducts = makeProductsFromInfo(inputProductsInfo);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setupSellingProducts();
 		}
-		return products;
+		return inputProducts;
 	}
 
-	public int setupMoney() {
-		int money = 0;
+	public void setupMoney() {
 		try {
-			money = customerInput.getInsertedMoney();
+			insertedMoney = customerInput.getInsertedMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setupMoney();
 		}
-		return money;
 	}
 
 	private List<Product> makeProductsFromInfo(List<String> productsInfo) {
 		ProductBuilder productBuilder = new ProductBuilder();
-		List<Product> products = productsInfo.stream()
+		List<Product> inputProducts = productsInfo.stream()
 				.map(p -> productBuilder.makeProductFromInfo(p))
 				.collect(Collectors.toList());
-		checkNoDuplication(products);
-		return products;
+		checkNoDuplication(inputProducts);
+		return inputProducts;
 	}
 
 	private void checkNoDuplication(List<Product> products) {

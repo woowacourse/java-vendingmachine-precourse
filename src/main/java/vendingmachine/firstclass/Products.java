@@ -16,7 +16,7 @@ public class Products {
 		this.products = products;
 	}
 
-	public int sellProduct(String name, int money) {
+	public int sellProductAndDeductMoney(String name, int money) {
 		Product product = getProductByName(name);
 		return countOutProduct(product, money);
 	}
