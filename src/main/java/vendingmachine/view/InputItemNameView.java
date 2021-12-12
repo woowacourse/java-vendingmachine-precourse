@@ -12,7 +12,7 @@ public class InputItemNameView implements View {
 	@Override
 	public void show() {
 		int money = Application.controller.getMoney();
-		if(!canPurchase(money)) {
+		if (!canPurchase(money)) {
 			Application.controller.view(ViewMappingKey.RETURN_CHANGES);
 			return;
 		}
@@ -44,10 +44,10 @@ public class InputItemNameView implements View {
 
 	private Item getItem(String itemName) {
 		Item item = Application.controller.searchItem(itemName);
-		if(item == null) {
+		if (item == null) {
 			throw new IllegalArgumentException(SystemMessage.ERROR_NOT_EXIST_ITEM);
 		}
-		if(!item.isInStock())
+		if (!item.isInStock())
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_IN_STOCK);
 
 		return item;

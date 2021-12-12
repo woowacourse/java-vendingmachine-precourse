@@ -56,14 +56,14 @@ public class ItemValidator {
 	}
 
 	private static void validatePrice(String priceStr) {
-		if(isNotInteger(priceStr))
+		if (isNotInteger(priceStr))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_INTEGER);
 		int price = Integer.parseInt(priceStr);
 
-		if(!isMoreThanMin(price))
+		if (!isMoreThanMin(price))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_MIN);
 
-		if(!isMultipleOf10(price))
+		if (!isMultipleOf10(price))
 			throw new IllegalArgumentException(SystemMessage.ERROR_PRICE_IS_NOT_MULTIPLE_OF_10);
 	}
 
@@ -85,11 +85,11 @@ public class ItemValidator {
 	}
 
 	private static void validateAmount(String amountStr) {
-		if(isNotInteger(amountStr))
+		if (isNotInteger(amountStr))
 			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_INTEGER);
 		int amount = Integer.parseInt(amountStr);
 
-		if(!isPositive(amount))
+		if (!isPositive(amount))
 			throw new IllegalArgumentException(SystemMessage.ERROR_AMOUNT_IS_NOT_POSITIVE);
 	}
 

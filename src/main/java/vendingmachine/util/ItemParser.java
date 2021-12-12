@@ -14,7 +14,7 @@ public class ItemParser {
 		List<Item> items = new ArrayList<>();
 		itemStrs.forEach(itemStr -> {
 			Item item = parse(itemStr);
-			if(hasName(items, item.getName()))
+			if (hasName(items, item.getName()))
 				throw new IllegalArgumentException(SystemMessage.ERROR_ITEM_NAME_DUPLICATE);
 
 			items.add(item);
@@ -28,8 +28,8 @@ public class ItemParser {
 	}
 
 	private static boolean hasName(List<Item> items, String itemName) {
-		for(Item item : items) {
-			if(item.getName().equals(itemName))
+		for (Item item : items) {
+			if (item.getName().equals(itemName))
 				return true;
 		}
 

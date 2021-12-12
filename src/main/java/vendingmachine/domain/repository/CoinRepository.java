@@ -7,7 +7,7 @@ import java.util.Map;
 import vendingmachine.domain.Coin;
 
 public class CoinRepository {
-	private final Map<Coin, Integer> coins = new LinkedHashMap<Coin, Integer>(){
+	private final Map<Coin, Integer> coins = new LinkedHashMap<Coin, Integer>() {
 		{
 			put(Coin.COIN_500, 0);
 			put(Coin.COIN_100, 0);

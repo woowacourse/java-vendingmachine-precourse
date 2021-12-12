@@ -20,10 +20,10 @@ public class CoinService {
 	);
 
 	public void createFirstCoins(int firstMoney) {
-		while(firstMoney != FIRST_MONEY_END) {
+		while (firstMoney != FIRST_MONEY_END) {
 			int coin = Randoms.pickNumberInList(coinUnit);
 
-			if(firstMoney < coin)
+			if (firstMoney < coin)
 				continue;
 
 			addCoin(coin);

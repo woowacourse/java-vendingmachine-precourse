@@ -2,13 +2,13 @@ package vendingmachine.util;
 
 public class MoneyValidator {
 	public static int validate(String moneyStr) {
-		if(!isNumeric(moneyStr))
+		if (!isNumeric(moneyStr))
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_INTEGER);
 
 		int result = Integer.parseInt(moneyStr);
-		if(!isPositive(result))
+		if (!isPositive(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_POSITIVE);
-		if(!isMultipleOf10(result))
+		if (!isMultipleOf10(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_MULTIPLE_OF_10);
 		return result;
 	}

@@ -27,7 +27,7 @@ public class ItemRepository {
 
 	public void deductItemAmount(String itemName) {
 		items.forEach(item -> {
-			if(item.getName().equals(itemName))
+			if (item.getName().equals(itemName))
 				item.deductAmount();
 		});
 	}
