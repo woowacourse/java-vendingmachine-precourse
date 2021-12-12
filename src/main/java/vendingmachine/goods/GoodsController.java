@@ -20,4 +20,11 @@ public class GoodsController {
         }
         return false;
     }
+
+    public boolean checkMoney(Goods goods, int userMoney) {
+        if (goods.price <= userMoney) {
+            return true;
+        }
+        return false;
+    }
 }
