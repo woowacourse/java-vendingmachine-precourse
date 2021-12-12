@@ -22,8 +22,17 @@ public class InputHandler {
 		this.outputHandler = outputHandler;
 	}
 
-	public int getValidMoney() {
+	public int getValidVendingMachineChanges() {
 		outputHandler.printMessage(VendingMachineData.INPUT_VENDING_MACHINE_MONEY_MESSAGE);
+		return getValidMoney();
+	}
+
+	public int getValidBalance() {
+		outputHandler.printMessage(VendingMachineData.INPUT_MONEY_MESSAGE);
+		return getValidMoney();
+	}
+
+	private int getValidMoney() {
 		while (true) {
 			try {
 				return getMoney();

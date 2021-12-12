@@ -16,6 +16,10 @@ public class OutputHandler {
 		System.out.print(message);
 	}
 
+	public void printBlankLine() {
+		System.out.println();
+	}
+
 	public void printErrorMEssage(Exception exception) {
 		printMessage(exception.getMessage());
 	}
