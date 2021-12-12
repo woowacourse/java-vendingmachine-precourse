@@ -43,10 +43,6 @@ public class VendingMachine {
         return money.amount() >= merchandises.cheapest();
     }
 
-    public void setMerchandise(String requireVendingMachineMerchandiseInfo) {
-        this.merchandises = new Merchandises(requireVendingMachineMerchandiseInfo);
-    }
-
     public int money() {
         return money.amount();
     }
