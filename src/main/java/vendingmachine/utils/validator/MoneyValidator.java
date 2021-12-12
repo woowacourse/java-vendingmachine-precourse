@@ -8,16 +8,27 @@ import java.util.regex.Pattern;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 
-public class TotalAmountValidator {
+public class MoneyValidator {
 	private static final int EXPECTED_VALUE_WHEN_DIVIDING = 0;
 	private static final int ZERO_NUMBER = 0;
-
-	public static boolean checkIsValidTotalAmount(String inputMoney) {
+	
+	public static boolean checkIsValidInputMoney(String input) {
 		try {
-			isNotBlank(inputMoney);
-			isDigit(inputMoney);
-			isNotZeroNumber(inputMoney);
-			isValidToDivideByTen(inputMoney);
+			isNotBlank(input);
+			isDigit(input);
+			isNotZeroNumber(input);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
+	}
+	public static boolean checkIsValidTotalAmount(String input) {
+		try {
+			isNotBlank(input);
+			isDigit(input);
+			isNotZeroNumber(input);
+			isValidToDivideByTen(input);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -54,8 +65,8 @@ public class TotalAmountValidator {
 	}
 
 	public static boolean isValidToBuyProduct(VendingMachine vendingMachine) {
-		int currentInputMoney = vendingMachine.getInputMoney().getCurrentMoney();
+		int currentMoney = vendingMachine.getInputMoney().getCurrentMoney();
 		int minPriceProduct = vendingMachine.getProducts().getMinPriceProduct();
-		return currentInputMoney >= minPriceProduct;
+		return currentMoney >= minPriceProduct;
 	}
 }

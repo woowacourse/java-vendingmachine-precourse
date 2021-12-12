@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import static vendingmachine.utils.validator.TotalAmountValidator.*;
+import static vendingmachine.utils.validator.MoneyValidator.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
