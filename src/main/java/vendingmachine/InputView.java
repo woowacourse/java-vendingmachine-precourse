@@ -13,6 +13,7 @@ public class InputView {
     }
 
     public static ArrayList inputProductList() {
+        System.out.println();
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         String inputString = Console.readLine();
         ArrayList<String> strings = Utils.splitString(inputString);
