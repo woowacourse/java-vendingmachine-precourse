@@ -95,14 +95,17 @@ public class ProductMap {
         return name;
     }
 
-    public int getMinAmount(){
+    public boolean isWorkable(int userAmount){
         int minAmount=-1;
         for(ProductInfo p:productMap.values()){
             if(p.count>0 && (minAmount<0 || minAmount>p.amount)){
                 minAmount=p.amount;
             }
         }
-        return minAmount;
+        if(minAmount<0 || minAmount>userAmount){
+            return false;
+        }
+        return true;
     }
 
     private static final boolean SELLABLE=true;

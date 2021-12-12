@@ -1,18 +1,12 @@
 package vendingmachine;
 
-import java.util.Arrays;
-import java.util.ArrayList;
-import java.util.List;
-
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Machine {
-    public NumberManager numberManager = new NumberManager();
-
-    private CoinManager coinManager = new CoinManager();
-    private final List<Integer> amountList = new ArrayList<>(Arrays.asList(500, 100, 50, 10));
-    public ProductMap productMap = new ProductMap();
-    public int userAmount = 0;
+    private final NumberManager numberManager = new NumberManager();
+    private final CoinManager coinManager = new CoinManager();
+    private final ProductMap productMap = new ProductMap();
+    private int userAmount = 0;
 
     private static final boolean STOP_WORKING = true;
     private static final boolean KEEP_WORKING = false;
@@ -82,10 +76,11 @@ public class Machine {
     }
 
     private boolean stopWorking() {
-        if (productMap.getMinAmount() > userAmount) {
-            return STOP_WORKING;
+        System.out.println("\n투입 금액: " + userAmount + "원");
+        if (productMap.isWorkable(userAmount)) {
+            return KEEP_WORKING;
         }
-        return KEEP_WORKING;
+        return STOP_WORKING;
     }
 
     private boolean sellProduct() {
@@ -98,7 +93,6 @@ public class Machine {
     }
 
     private String getProductName() {
-        System.out.println("\n투입 금액: " + userAmount + "원");
         System.out.println("구매할 상품명을 입력해 주세요.");
         String productName;
 

@@ -30,7 +30,7 @@ public enum Coin {
     }
 
     public int returnCoin(int userAmount){
-        int returnCount=Math.min(userAmount/amount,count);
+        int returnCount=getReturnCount(userAmount);
 
         decreaseCount(returnCount);
         userAmount-=returnCount*amount;
@@ -40,6 +40,10 @@ public enum Coin {
         }
 
         return userAmount;
+    }
+
+    private int getReturnCount(int userAmount){
+        return Math.min(userAmount/amount,count);
     }
 
     private void decreaseCount(int count){
