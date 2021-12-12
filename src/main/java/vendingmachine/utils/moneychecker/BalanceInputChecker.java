@@ -5,6 +5,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utils.datatypechecker.IntegerChecker;
 
 public class BalanceInputChecker {
+    private static final String INPUT_REQUEST_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
     private static final String CONTENT_TYPE = "자판기 보유금";
     private static final int LOW_LIMIT = 0;
     private static final int MOD = 10;
@@ -13,8 +14,9 @@ public class BalanceInputChecker {
         String input;
 
         do{
+            System.out.println(INPUT_REQUEST_MESSAGE);
             input = Console.readLine();
-        }while(isRightInput(input));
+        }while(!isRightInput(input));
 
         return Integer.parseInt(input);
     }
