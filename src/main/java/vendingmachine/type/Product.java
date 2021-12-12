@@ -27,6 +27,10 @@ public class Product {
 		return quantity <= 0;
 	}
 
+	public boolean isPossibleToBuy(int balance) {
+		return price <= balance;
+	}
+
 	public void sell() {
 		quantity--;
 	}

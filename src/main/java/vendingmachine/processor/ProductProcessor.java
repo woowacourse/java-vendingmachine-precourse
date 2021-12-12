@@ -29,4 +29,22 @@ public class ProductProcessor {
 		}
 		product.sell();
 	}
+
+	public boolean hasProduct() {
+		for(Product product:productList) {
+			if(!product.isSoldOut()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isPossibleToBuy(int balance) {
+		for(Product product:productList) {
+			if(product.isPossibleToBuy(balance)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
