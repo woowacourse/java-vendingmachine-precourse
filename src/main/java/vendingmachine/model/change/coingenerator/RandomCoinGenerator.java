@@ -55,7 +55,7 @@ public class RandomCoinGenerator implements CoinGenerator {
         return pickNumberInList(possibleNumbers);
     }
 
-    private void subtractGeneratedMoney(int generateMoney) {
-        remainingMoneyToGenerateCoin -= generateMoney;
+    private void subtractGeneratedMoney(int generatedMoneyValue) {
+        remainingMoneyToGenerateCoin -= generatedMoneyValue;
     }
 }
