@@ -30,15 +30,13 @@ public class ParsingManager {
         if (productInfoString.length() < MIN_PRODUCT_INFO_SIZE
             || firstCharOf(productInfoString) != '['
             || lastCharOf(productInfoString) != ']') {
-            System.out.println("[ERROR] 상품 입력 형식에 맞게 입력해주세요.");
-            throw new IllegalArgumentException();
+            Error.PRODUCT_INPUT_FORM.generate();
         }
     }
 
     private static void checkProductInfoArraySize(String[] productInfoArray) {
         if (productInfoArray.length != PRODUCT_INFO_SIZE) {
-            System.out.println("[ERROR] 상품 입력 형식에 맞게 입력해주세요.");
-            throw new IllegalArgumentException();
+            Error.PRODUCT_INPUT_FORM.generate();
         }
     }
 

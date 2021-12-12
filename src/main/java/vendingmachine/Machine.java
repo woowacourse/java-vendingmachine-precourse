@@ -7,8 +7,8 @@ public class Machine {
     private final ProductMap productMap = new ProductMap();
     private int userAmount = 0;
 
-    private static final boolean STOP_WORKING = true;
-    private static final boolean KEEP_WORKING = false;
+    private static final boolean STOP_WORKING = false;
+    private static final boolean KEEP_WORKING = true;
 
     public Machine() {
     }

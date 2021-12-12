@@ -67,8 +67,7 @@ public class ProductMap {
         if (isExisting(name)) {
             return;
         }
-        System.out.println("[ERROR] 존재하는 상품만 입력해주세요.");
-        throw new IllegalArgumentException();
+        Error.PRODUCT_NON_EXIST.generate();
     }
 
     public boolean isSellable(String name, int userAmount) {

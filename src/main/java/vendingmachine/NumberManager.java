@@ -15,12 +15,10 @@ public class NumberManager {
     public static int toNumber(String numberString, int type) {
         int number = toInt(numberString);
         if (type == TYPE_AMOUNT && isAmountError(number)) {
-            System.out.println("[ERROR] 가격(금액)은 10으로 나누어 떨어지는 자연수로 입력해주세요.");
-            throw new IllegalArgumentException();
+            Error.AMOUNT_FORM.generate();
         }
         if (type == TYPE_COUNT && isCountError(number)) {
-            System.out.println("[ERROR] 상품 수량은 자연수로 입력해주세요.");
-            throw new IllegalArgumentException();
+            Error.COUNT_FORM.generate();
         }
         return number;
     }
