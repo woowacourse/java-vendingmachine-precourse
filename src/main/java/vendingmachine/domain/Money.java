@@ -59,4 +59,12 @@ public class Money {
     public int currentMoney() {
         return money;
     }
+
+    public boolean isDivisable(Coin coin) {
+        return this.money / coin.amount() > 0;
+    }
+
+    public void decreaseByCoin(Coin coin) {
+        this.money -= coin.amount();
+    }
 }
