@@ -35,4 +35,8 @@ public class VendingMachine {
 		int spendAmount = items.purchase(itemName, money.getAmount());
 		money.spend(spendAmount);
 	}
+
+	public boolean continuable() {
+		return items.continuable(money.getAmount());
+	}
 }

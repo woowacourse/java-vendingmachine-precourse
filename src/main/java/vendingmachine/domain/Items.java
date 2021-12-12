@@ -57,4 +57,16 @@ public class Items {
 			throw new IllegalArgumentException(FIND_NO_ITEM);
 		}
 	}
+
+	public boolean continuable(int leftMoney) {
+		return enoughMoneyForAllItem(leftMoney) && quantityLeft();
+	}
+
+	private boolean enoughMoneyForAllItem(int leftMoney) {
+		return itemRepository.stream().anyMatch(item -> item.enoughMoney(leftMoney));
+	}
+
+	private boolean quantityLeft() {
+		return itemRepository.stream().anyMatch(Item::quantityLeft);
+	}
 }

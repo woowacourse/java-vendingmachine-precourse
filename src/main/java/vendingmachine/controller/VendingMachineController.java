@@ -19,7 +19,7 @@ public class VendingMachineController {
 		insertMoney();
 		do {
 			purchase();
-		} while(true);
+		} while (vendingMachine.continuable());
 	}
 
 	private void insertChanges() {
