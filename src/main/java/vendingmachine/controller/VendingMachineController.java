@@ -15,18 +15,18 @@ public class VendingMachineController {
     }
 
     public void execute() {
-        enterHoldingMoney();
+        initializeHoldingMoney();
         vendingMachine.initializeCoinCase();
         SystemMessageOutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
     }
 
-    private void enterHoldingMoney() {
+    private void initializeHoldingMoney() {
         try {
             int validHoldingMoneyInput = HoldingMoneyValidator.getValidHoldingMoney(InputView.inputHoldingMoney());
             vendingMachine.setHoldingMoney(validHoldingMoneyInput);
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
-            enterHoldingMoney();
+            initializeHoldingMoney();
         }
     }
 }
