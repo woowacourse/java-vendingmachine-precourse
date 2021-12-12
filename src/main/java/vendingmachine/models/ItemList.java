@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 public class ItemList {
 	private HashMap<String, Item> ItemList;
+	private static final int DECREMENTAL_VALUE = 1;
 
 	public ItemList(HashMap<String, Item> parsedInput) {
 		this.ItemList = new HashMap<>();
@@ -30,5 +31,9 @@ public class ItemList {
 			return true;
 		}
 		return false;
+	}
+
+	public void sellItem(String name) {
+		this.ItemList.get(name).decreaseAmount(DECREMENTAL_VALUE);
 	}
 }
