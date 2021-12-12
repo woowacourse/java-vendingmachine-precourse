@@ -1,4 +1,4 @@
-package vendingmachine.machine;
+package vendingmachine;
 
 public enum Coin {
     COIN_500(500),
