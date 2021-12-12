@@ -27,4 +27,8 @@ public class GoodsController {
         }
         return false;
     }
+
+    public boolean checkAvailablePurchase(Goods goods, String name, int userMoney) {
+        return checkGoodsName(goods, name) && checkQuantity(goods) && checkMoney(goods, userMoney);
+    }
 }
