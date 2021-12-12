@@ -40,9 +40,20 @@ public class VendingMachine {
 
 	public void sellProduct() {
 		while (vendingMachineService.canSell()) {
-			ResponseMoneyDto responseMoneyDto = vendingMachineService.findMoney();
-			RequestSellProductDto requestSellProductDto = inputSellProduct(responseMoneyDto);
-			vendingMachineService.sellProduct(requestSellProductDto);
+			sellProductStep();
+		}
+	}
+
+	private void sellProductStep() {
+		while (true) {
+			try {
+				ResponseMoneyDto responseMoneyDto = vendingMachineService.findMoney();
+				RequestSellProductDto requestSellProductDto = inputSellProduct(responseMoneyDto);
+				vendingMachineService.sellProduct(requestSellProductDto);
+				return;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
 		}
 	}
 }
