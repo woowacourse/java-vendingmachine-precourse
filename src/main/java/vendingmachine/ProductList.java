@@ -16,6 +16,18 @@ public class ProductList extends LoopInput {
         return productMap.containsKey(name);
     }
 
+    public Product sellProduct(String product) {
+        Product sellProduct = productMap.get(product);
+        validator.validateProductStock(sellProduct);
+        sellProduct.sell();
+        return sellProduct;
+    }
+
+    public boolean isAvailableProduct(String productName) {
+        Product product = productMap.get(productName);
+        return product.existStock();
+    }
+
     private void inputProductList() {
         String product = inputString(INSERT_PRODUCT_MESSAGE);
         initProductMap();
@@ -25,11 +37,6 @@ public class ProductList extends LoopInput {
 
     private void initProductMap() {
         productMap.clear();
-    }
-
-    public boolean isAvailableProduct(String productName) {
-        Product product = productMap.get(productName);
-        return product.existStock();
     }
 
     public boolean compareMinimumPrice(int customerMoney) {
@@ -48,13 +55,6 @@ public class ProductList extends LoopInput {
             }
         }
         return false;
-    }
-
-    public Product sellProduct(String product) {
-        Product sellProduct = productMap.get(product);
-        validator.validateProductStock(sellProduct);
-        sellProduct.sell();
-        return sellProduct;
     }
 
     private void setNumberOfProducts(String[] productInformationList) {

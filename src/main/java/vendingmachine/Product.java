@@ -11,9 +11,8 @@ public class Product {
         this.amount = amount;
     }
 
-    public int sell() {
+    public void sell() {
         amount--;
-        return this.price;
     }
 
     public boolean existStock() {

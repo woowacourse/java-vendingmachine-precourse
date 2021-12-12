@@ -5,8 +5,8 @@ public class VendingMachine extends LoopInput {
     private static final Change change = new Change();
     private static final Validator validator = new Validator();
     private static final Customer customer = new Customer();
-    private static ProductList productList = new ProductList();
-    private static OutputMessage outputMessage = new OutputMessage();
+    private static final ProductList productList = new ProductList();
+    private static final OutputMessage outputMessage = new OutputMessage();
 
     public VendingMachine() {
         this.initializeVendingMachine();

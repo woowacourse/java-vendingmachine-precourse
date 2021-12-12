@@ -10,7 +10,7 @@ public enum Coin {
     COIN_10(10);
 
     private static final String COIN_NAME_PREFIX = "COIN_";
-    private static OutputMessage outputMessage = new OutputMessage();
+    private static final OutputMessage outputMessage = new OutputMessage();
     private final int amount;
 
     Coin(final int amount) {
@@ -25,9 +25,10 @@ public enum Coin {
         return list;
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return this.amount;
     }
+
     public int calcChangePrice(int stock) {
         return this.amount * stock;
     }

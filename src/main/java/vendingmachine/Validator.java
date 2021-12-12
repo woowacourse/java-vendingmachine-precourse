@@ -26,6 +26,7 @@ public class Validator {
     private static final int PRODUCT_INFO_LENGTH = 3;
     private static final int HUNDRED = 100;
     private static final int TENS = 10;
+    private static final int ZERO = 0;
 
     public int validateOnlyInteger(String inputString) {
         try {
@@ -36,13 +37,13 @@ public class Validator {
     }
 
     public void isMultipleOfTen(int inputInteger) {
-        if (inputInteger % TENS != 0) {
+        if (inputInteger % TENS != ZERO) {
             throw new IllegalArgumentException(ERROR_NOT_ALLOW_UNITS);
         }
     }
 
     public void isGreatThanZero(int inputInteger) {
-        if (inputInteger <= 0) {
+        if (inputInteger <= ZERO) {
             throw new IllegalArgumentException(ERROR_GREATER_THAN_ZERO);
         }
     }
@@ -134,6 +135,12 @@ public class Validator {
         return new Product(name, price, amount);
     }
 
+    public void validateProductStock(Product product) {
+        if (!product.existStock()) {
+            throw new IllegalArgumentException(ERROR_NOT_STOCK_FOR_SALE);
+        }
+    }
+
     private String removeBracketInProduct(String productsInformation) {
         return productsInformation.substring(1, productsInformation.length() - 1);
     }
@@ -156,12 +163,6 @@ public class Validator {
             return integerAmount;
         } catch (IllegalArgumentException exception) {
             throw new IllegalArgumentException(ERROR_MESSAGE_AMOUNT_PREFIX + exception.getMessage());
-        }
-    }
-
-    public void validateProductStock(Product product) {
-        if (!product.existStock()) {
-            throw new IllegalArgumentException(ERROR_NOT_STOCK_FOR_SALE);
         }
     }
 }

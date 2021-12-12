@@ -13,28 +13,14 @@ public class Change extends LoopInput {
     private static final Validator validator = new Validator();
     private static HashMap<Coin, Integer> coinMap = new HashMap<>();
     private static OutputMessage outputMessage = new OutputMessage();
-    private static int initialTotalChange;
+    private static int vendingMachineChange;
 
     public Change() {
         initialCoinMap();
     }
 
-    private void initialCoinMap() {
-        for (Coin coin : Coin.values()) {
-            coinMap.put(coin, DEFAULT_STOCK);
-        }
-    }
-
     public void inputMethod() {
         this.inputChange();
-    }
-
-    private void inputChange() {
-        String changeInVendingMachine = inputString(INPUT_MONEY_MESSAGE);
-        int change = validator.validateOnlyInteger(changeInVendingMachine);
-        validator.isGreatThanZero(change);
-        validator.isMultipleOfTen(change);
-        initialTotalChange = change;
     }
 
     public void returnChange(int customerMoney) {
@@ -48,7 +34,7 @@ public class Change extends LoopInput {
     }
 
     public void createRandomChange() {
-        int ownChange = initialTotalChange;
+        int ownChange = vendingMachineChange;
         List<Integer> list = Coin.createCoinAmountList();
         while (ownChange != ZERO) {
             int coinAmount = Randoms.pickNumberInList(list);
@@ -60,5 +46,19 @@ public class Change extends LoopInput {
             coinMap.put(coin, coinMap.get(coin) + ADD_COIN);
         }
         outputMessage.printAllCoin(coinMap);
+    }
+
+    private void initialCoinMap() {
+        for (Coin coin : Coin.values()) {
+            coinMap.put(coin, DEFAULT_STOCK);
+        }
+    }
+
+    private void inputChange() {
+        String inputChange = inputString(INPUT_MONEY_MESSAGE);
+        int change = validator.validateOnlyInteger(inputChange);
+        validator.isGreatThanZero(change);
+        validator.isMultipleOfTen(change);
+        vendingMachineChange = change;
     }
 }
