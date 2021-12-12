@@ -26,9 +26,15 @@ public class InputView {
 	}
 
 	public static RequestRegisterProductsDto inputRegisterProducts() {
-		System.out.println(REQUEST_REGISTER_PRODUCT_MESSAGE);
-		Products products = new Products(readLine());
-		return new RequestRegisterProductsDto(products);
+		while (true) {
+			try {
+				System.out.println(REQUEST_REGISTER_PRODUCT_MESSAGE);
+				Products products = new Products(readLine());
+				return new RequestRegisterProductsDto(products);
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	public static RequestInsertMoneyDto inputInsertMoney() {
