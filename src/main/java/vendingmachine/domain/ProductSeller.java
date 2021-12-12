@@ -30,6 +30,12 @@ public class ProductSeller {
         return this.minimumProductAmount > inputAmount.getAmount();
     }
 
+    public boolean isEmpty() {
+        return this.products.values()
+            .stream()
+            .allMatch(Product::isEmpty);
+    }
+
     private void updateMinimumProductAmount() throws IllegalArgumentException{
         this.minimumProductAmount = products.values().stream()
             .filter(p -> !p.isEmpty())
