@@ -19,14 +19,20 @@ public class InputFirstMoneyView implements View {
 			show();
 			return;
 		}
-		Application.controller.createFirstCoins(firstMoney);
-		Application.controller.view(ViewMappingKey.SHOW_FIRST_MONEY);
+		createFirstCoins(firstMoney);
+		goShowFirstMoney();
 	}
 
 	private int readFirstMoney() {
 		String firstMoneyStr = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
-		MoneyValidator.validate(firstMoneyStr);
-
 		return MoneyValidator.validate(firstMoneyStr);
+	}
+
+	private void createFirstCoins(int firstMoney) {
+		Application.controller.createFirstCoins(firstMoney);
+	}
+
+	private void goShowFirstMoney() {
+		Application.controller.view(ViewMappingKey.SHOW_FIRST_MONEY);
 	}
 }

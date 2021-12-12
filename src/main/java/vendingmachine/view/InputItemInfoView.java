@@ -22,12 +22,20 @@ public class InputItemInfoView implements View {
 			show();
 			return;
 		}
-		Application.controller.addItems(items);
-		Application.controller.view(ViewMappingKey.INPUT_MONEY);
+		addItems(items);
+		goInputMoneyView();
 	}
 
 	private List<Item> readItems() {
 		String itemListStr = Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
 		return ItemParser.parseList(itemListStr);
+	}
+
+	private void addItems(List<Item> items) {
+		Application.controller.addItems(items);
+	}
+
+	private void goInputMoneyView() {
+		Application.controller.view(ViewMappingKey.INPUT_MONEY);
 	}
 }

@@ -22,31 +22,7 @@ public class ReturnChangesView implements View {
 	}
 
 	private void printChanges(int money) {
-		Map<Coin, Integer> changes = new LinkedHashMap<>();
-		Map<Coin, Integer> coins = Application.controller.getCoins();
-
-		calculateChanges(coins, changes, money);
-		deductChanges(changes);
+		Map<Coin, Integer> changes = Application.controller.getChangesToBeReturned(money);
 		changes.forEach(Coin::printCoinAndCount);
-	}
-
-	private void calculateChanges(Map<Coin, Integer> coins, Map<Coin, Integer> changes, int money) {
-		for (Coin coin : coins.keySet()) {
-			int coinCount = coins.get(coin);
-
-			if (coinCount == 0)
-				continue;
-
-			int changeCount = Math.min(coinCount, money / coin.getAmount());
-			changes.put(coin, changeCount);
-			money -= coin.getAmount() * changeCount;
-
-			if (money == 0)
-				break;
-		}
-	}
-
-	private void deductChanges(Map<Coin, Integer> changes) {
-		Application.controller.deductChanges(changes);
 	}
 }

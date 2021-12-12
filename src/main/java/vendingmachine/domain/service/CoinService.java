@@ -1,6 +1,7 @@
 package vendingmachine.domain.service;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -35,11 +36,36 @@ public class CoinService {
 		return coinRepository.getCoins();
 	}
 
+	public Map<Coin, Integer> getChangesToBeReturned(int money) {
+		Map<Coin, Integer> changes = new LinkedHashMap<>();
+		Map<Coin, Integer> coins = coinRepository.getCoins();
+
+		calculateChanges(coins, changes, money);
+
+		return changes;
+	}
+
 	public void deductCoins(Map<Coin, Integer> coins) {
 		coins.forEach(coinRepository::deleteCoin);
 	}
 
 	private void addCoin(int coin) {
 		coinRepository.addCoin(Coin.getCoin(coin), ADD_COIN_COUNT);
+	}
+
+	private void calculateChanges(Map<Coin, Integer> coins, Map<Coin, Integer> changes, int money) {
+		for (Coin coin : coins.keySet()) {
+			int coinCount = coins.get(coin);
+
+			if (coinCount == 0)
+				continue;
+
+			int changeCount = Math.min(coinCount, money / coin.getAmount());
+			changes.put(coin, changeCount);
+			money -= coin.getAmount() * changeCount;
+
+			if (money == 0)
+				break;
+		}
 	}
 }

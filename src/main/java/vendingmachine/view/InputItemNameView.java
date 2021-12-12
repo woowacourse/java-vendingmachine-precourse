@@ -11,9 +11,9 @@ public class InputItemNameView implements View {
 
 	@Override
 	public void show() {
-		int money = Application.controller.getMoney();
+		int money = getMoney();
 		if (!canPurchase(money)) {
-			Application.controller.view(ViewMappingKey.RETURN_CHANGES);
+			goReturnChangesView();
 			return;
 		}
 		printMoneyAndMessage(money);
@@ -30,7 +30,7 @@ public class InputItemNameView implements View {
 		String itemName = readItemName();
 		Item item;
 		try {
-			item = getItem(itemName);
+			item = Application.controller.searchItem(itemName);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
@@ -42,18 +42,15 @@ public class InputItemNameView implements View {
 		return Console.readLine().replaceAll(PublicConst.BLANK_REGEX, PublicConst.EMPTY_STRING);
 	}
 
-	private Item getItem(String itemName) {
-		Item item = Application.controller.searchItem(itemName);
-		if (item == null) {
-			throw new IllegalArgumentException(SystemMessage.ERROR_NOT_EXIST_ITEM);
-		}
-		if (!item.isInStock())
-			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_IN_STOCK);
-
-		return item;
-	}
-
 	private boolean canPurchase(int money) {
 		return Application.controller.canPurchaseByMoney(money);
+	}
+
+	private int getMoney() {
+		return Application.controller.getMoney();
+	}
+
+	private void goReturnChangesView() {
+		Application.controller.view(ViewMappingKey.RETURN_CHANGES);
 	}
 }

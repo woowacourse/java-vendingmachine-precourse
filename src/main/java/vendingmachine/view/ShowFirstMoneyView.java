@@ -11,12 +11,16 @@ public class ShowFirstMoneyView implements View {
 	@Override
 	public void show() {
 		System.out.println(SystemMessage.SHOW_FIRST_MONEY);
-		Map<Coin, Integer> coins = Application.controller.getCoins();
-		printCoins(coins);
-		Application.controller.view(ViewMappingKey.INPUT_ITEM_INFO);
+		printCoins();
+		goInputItemInfoView();
 	}
 
-	private void printCoins(Map<Coin, Integer> coins) {
+	private void printCoins() {
+		Map<Coin, Integer> coins = Application.controller.getCoins();
 		coins.forEach(Coin::printCoinAndCount);
+	}
+
+	private void goInputItemInfoView() {
+		Application.controller.view(ViewMappingKey.INPUT_ITEM_INFO);
 	}
 }
