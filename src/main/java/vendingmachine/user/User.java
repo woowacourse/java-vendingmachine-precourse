@@ -3,11 +3,11 @@ package vendingmachine.user;
 import camp.nextstep.edu.missionutils.Console;
 
 public class User {
-    public String inputMoney() {
+    public static String inputMoney() {
         return Console.readLine();
     }
 
-    public String inputGoods() {
+    public static String inputGoods() {
         return Console.readLine();
     }
 }
