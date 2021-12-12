@@ -38,6 +38,26 @@ public class Product {
 		return name;
 	}
 
+	public Price getPrice() {
+		return price;
+	}
+
+	public boolean theNumberisZero() {
+		return theNumber.isZero();
+	}
+
+	public void minusTheNumber() {
+		theNumber.minus();
+	}
+
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Name: " + name.get());
+		stringBuilder.append(", Price: " + price.get());
+		stringBuilder.append(", theNumber: " + theNumber.get());
+		return stringBuilder.toString();
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {

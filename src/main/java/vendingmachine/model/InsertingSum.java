@@ -24,4 +24,17 @@ public class InsertingSum {
 		numberChecker.isPositiveInteger(input);
 		numberChecker.isDivisibleNumber(input, Coin.minAmount());
 	}
+
+	public void subtractPrice(Price price) {
+		insertingSum -= price.get();
+	}
+
+	public boolean isLessThan(Price price) {
+
+		if (insertingSum < price.get()) {
+			return true;
+		}
+
+		return false;
+	}
 }

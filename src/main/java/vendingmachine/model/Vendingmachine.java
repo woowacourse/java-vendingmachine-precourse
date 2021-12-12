@@ -28,4 +28,22 @@ public class Vendingmachine {
 	public void setInsertingSum(InsertingSum insertingSum) {
 		this.insertingSum = insertingSum;
 	}
+
+	public void sellProduct(Name name) {
+		Product soldProduct = stock.giveProduct(name);
+		insertingSum.subtractPrice(soldProduct.getPrice());
+	}
+
+	public boolean isPossibleToSell() {
+
+		if (stock.isEmpty()) {
+			return false;
+		}
+
+		if (insertingSum.isLessThan(stock.getMinPrice())) {
+			return false;
+		}
+
+		return true;
+	}
 }

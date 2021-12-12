@@ -44,7 +44,9 @@ public class HoldingSum {
 				String coinName = Coin.getName(randomCoinAmount);
 				coinMap.put(coinName, coinMap.getOrDefault(coinName, 0) + 1);
 			}
+
 		}
+
 		return coinMap;
 	}
 }

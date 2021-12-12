@@ -15,4 +15,21 @@ public class TheNumber {
 		NumberChecker numberChecker = new NumberChecker();
 		numberChecker.isPositiveInteger(input);
 	}
+
+	public int get() {
+		return theNumber;
+	}
+
+	public void minus() {
+		theNumber--;
+	}
+
+	public boolean isZero() {
+
+		if (theNumber == 0) {
+			return true;
+		}
+
+		return false;
+	}
 }
