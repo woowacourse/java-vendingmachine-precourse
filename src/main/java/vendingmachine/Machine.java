@@ -62,8 +62,10 @@ public class Machine {
 
     private boolean sellProduct() {
         String productName = getProductName();
-        if (productMap.isSellable(productName, userAmount)) {
-            userAmount -= productMap.sellProduct(productName);
+
+        int reducedUserAmount = productMap.trySellProduct(productName, userAmount);
+        if (isSuccessfulSale(reducedUserAmount, userAmount)) {
+            userAmount = reducedUserAmount;
             return KEEP_WORKING;
         }
         return STOP_WORKING;
@@ -77,4 +79,10 @@ public class Machine {
         coinManager.returnCoins(userAmount);
     }
 
+    private boolean isSuccessfulSale(int reducedUserAmount, int userAmount) {
+        if (reducedUserAmount < userAmount) {
+            return true;
+        }
+        return false;
+    }
 }

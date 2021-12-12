@@ -40,11 +40,11 @@ public class ParsingManager {
         }
     }
 
-    private static char firstCharOf(String string){
+    private static char firstCharOf(String string) {
         return string.charAt(0);
     }
 
-    private static char lastCharOf(String string){
-        return string.charAt(string.length()-1);
+    private static char lastCharOf(String string) {
+        return string.charAt(string.length() - 1);
     }
 }

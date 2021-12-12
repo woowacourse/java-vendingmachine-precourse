@@ -13,10 +13,6 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public void resetCount() {
-        this.count = 0;
-    }
-
     public int getAmount() {
         return this.amount;
     }

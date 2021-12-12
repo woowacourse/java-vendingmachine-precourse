@@ -18,7 +18,7 @@ public class InputManager {
         return getAmount();
     }
 
-    public static String getProductName(ProductMap productMap){
+    public static String getProductName(ProductMap productMap) {
         Message.GET_PRODUCT_NAME.print();
         return getName(productMap);
     }
@@ -34,7 +34,7 @@ public class InputManager {
         }
     }
 
-    private static String getName(ProductMap productMap){
+    private static String getName(ProductMap productMap) {
         String productName;
 
         while (true) {

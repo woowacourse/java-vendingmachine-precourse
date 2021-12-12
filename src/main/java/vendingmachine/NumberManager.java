@@ -1,9 +1,6 @@
 package vendingmachine;
 
 public class NumberManager {
-    private static final boolean ERROR = true;
-    private static final boolean NON_ERROR = false;
-
     public static final int TYPE_AMOUNT = 0;
     public static final int TYPE_COUNT = 1;
 
@@ -35,15 +32,15 @@ public class NumberManager {
 
     private static boolean isAmountError(int amount) {
         if (amount <= 0 || amount % AMOUNT_UNIT > 0) {
-            return ERROR;
+            return true;
         }
-        return NON_ERROR;
+        return false;
     }
 
     private static boolean isCountError(int count) {
         if (count <= 0) {
-            return ERROR;
+            return true;
         }
-        return NON_ERROR;
+        return false;
     }
 }

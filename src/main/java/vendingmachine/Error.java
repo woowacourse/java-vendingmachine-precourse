@@ -9,11 +9,12 @@ public enum Error {
     REDUNDANT_NAME("[ERROR] 상품 이름은 모두 다르게 입력해주세요.");
 
     private final String errorMessage;
-    Error(String errorMessage){
-        this.errorMessage=errorMessage;
+
+    Error(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
-    public void generate(){
+    public void generate() {
         System.out.println(this.errorMessage);
         throw new IllegalArgumentException();
     }

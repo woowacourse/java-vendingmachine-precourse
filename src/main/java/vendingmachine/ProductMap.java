@@ -3,16 +3,41 @@ package vendingmachine;
 import java.util.HashMap;
 
 public class ProductMap {
-
     public HashMap<String, ProductInfo> productMap = new HashMap<>();
 
+    private static final int MIN_NAME_SIZE = 1;
+
+    private static final int INDEX_NAME = 0;
+    private static final int INDEX_AMOUNT = 1;
+    private static final int INDEX_COUNT = 2;
+
     private static class ProductInfo {
-        public int amount;
-        public int count;
+        private final int amount;
+        private int count;
 
         public ProductInfo(int amount, int count) {
             this.amount = amount;
             this.count = count;
+        }
+
+        public int trySell(int userAmount) {
+            if (isSellable(userAmount)) {
+                sell();
+                return updateUserAmount(userAmount);
+            }
+            return userAmount;
+        }
+
+        public boolean isSellable(int userAmount) {
+            if (outOfStock()) {
+                Message.OUT_OF_STOCK.print();
+                return false;
+            }
+            if (excessAmount(userAmount)) {
+                Message.EXCESS_AMOUNT.print();
+                return false;
+            }
+            return true;
         }
 
         public boolean outOfStock() {
@@ -34,24 +59,19 @@ public class ProductMap {
         }
 
         public int updateMinAmount(int minAmount) {
-            if(minAmount<0){
+            if (minAmount < 0) {
                 return amount;
             }
             return Math.min(amount, minAmount);
+        }
+
+        private int updateUserAmount(int userAmount) {
+            return userAmount - amount;
         }
     }
 
     public ProductMap() {
     }
-
-    private static final int MIN_NAME_SIZE = 1;
-
-    private static final int INDEX_NAME = 0;
-    private static final int INDEX_AMOUNT = 1;
-    private static final int INDEX_COUNT = 2;
-
-    private static final boolean SELLABLE = true;
-    private static final boolean NON_SELLABLE = false;
 
     public void toProductMap(String productListString) {
         resetProductMap();
@@ -70,25 +90,12 @@ public class ProductMap {
         Error.PRODUCT_NON_EXIST.generate();
     }
 
-    public boolean isSellable(String name, int userAmount) {
+    public int trySellProduct(String name, int userAmount) {
         ProductInfo targetProduct = productMap.get(name);
 
-        if (targetProduct.outOfStock()) {
-            Message.OUT_OF_STOCK.print();
-            return NON_SELLABLE;
-        }
-        if (targetProduct.excessAmount(userAmount)) {
-            Message.EXCESS_AMOUNT.print();
-            return NON_SELLABLE;
-        }
-        return SELLABLE;
-    }
-
-    public int sellProduct(String productName) {
-        ProductInfo targetProduct = productMap.get(productName);
-        targetProduct.sell();
-        productMap.put(productName, targetProduct);
-        return targetProduct.amount;
+        userAmount = targetProduct.trySell(userAmount);
+        productMap.put(name, targetProduct);
+        return userAmount;
     }
 
     public boolean isWorkable(int userAmount) {
@@ -135,7 +142,7 @@ public class ProductMap {
         return false;
     }
 
-    private int getMinAmount(int userAmount){
+    private int getMinAmount(int userAmount) {
         int minAmount = -1;
         for (ProductInfo p : productMap.values()) {
             if (p.outOfStock() || p.excessAmount(userAmount)) {
