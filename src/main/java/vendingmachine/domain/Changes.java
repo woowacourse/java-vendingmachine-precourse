@@ -11,6 +11,8 @@ public class Changes {
     private static final String CHANGE_IS_OVER_THAN_TEN = "[ERROR] : 잔돈은 10원 이상의 값을 입력하여야 합니다.";
     private static final String CHANGE_IS_MULTIPLE_OF_TEN = "[ERROR] : 상품 가격은 10원으로 나누어 떨어져야 합니다.";
     private static final Integer DEFAULT = 0;
+    private static final Integer MULTIPLE_THRETHOLD = 10;
+    private static final Integer MINIMUM = 10;
 
     private Map<Integer, Integer> changes = new LinkedHashMap<>();
 
@@ -34,11 +36,11 @@ public class Changes {
 
     private void graterThanZero(String stringChange) {
         Integer change = Integer.parseInt(stringChange);
-        if (change < 10) {
+        if (change < MINIMUM) {
             throw new IllegalArgumentException(CHANGE_IS_OVER_THAN_TEN);
         }
 
-        if (change % 10 != 0) {
+        if (change % MULTIPLE_THRETHOLD != 0) {
             throw new IllegalArgumentException(CHANGE_IS_MULTIPLE_OF_TEN);
         }
     }
