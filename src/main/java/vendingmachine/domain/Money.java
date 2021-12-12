@@ -2,6 +2,9 @@ package vendingmachine.domain;
 
 public class Money {
 
+    private static final String MONEY_IS_INTEGER = "[ERROR] : 돈은 숫자로 구성되어야 합니다.";
+    private static final String MONEY_IS_OVER_THAN_1 = "[ERROR] : 돈은 양의 정수 이어야 합니다.";
+
     private int amount = 0;
 
     public Money(int money) {
@@ -18,11 +21,11 @@ public class Money {
         try {
             money = Integer.parseInt(stringMoney);
         } catch (Exception exception) {
-            throw new IllegalArgumentException("[ERROR] : 돈은 숫자로 구성되어야 합니다.");
+            throw new IllegalArgumentException(MONEY_IS_INTEGER);
         }
 
         if (money <= 0) {
-            throw new IllegalArgumentException("[ERROR] : 돈은 양의 정수 이어야 합니다.");
+            throw new IllegalArgumentException(MONEY_IS_OVER_THAN_1);
         }
     }
 
