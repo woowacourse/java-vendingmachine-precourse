@@ -4,6 +4,8 @@ import static camp.nextstep.edu.missionutils.test.Assertions.*;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.NoSuchElementException;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -15,6 +17,8 @@ import vendingmachine.domain.ProductRepository;
 import vendingmachine.enums.Coin;
 
 public class VendingMachineTest extends NsTest {
+	private static final String ERROR_MESSAGE = "[ERROR]";
+
 	private final VendingMachine vendingMachine = new VendingMachine();
 
 	@DisplayName("보유 금액을 설정하여 동전을 무작위로 생성하는 기능 테스트")
@@ -30,6 +34,81 @@ public class VendingMachineTest extends NsTest {
 				assertEquals(CoinRepository.findQuantityByCoin(Coin.COIN_10).get(), 0);
 			},
 			100, 100, 100, 100, 50
+		);
+	}
+
+	@DisplayName("숫자가 아닌 보유 금액을 입력 한 경우 예외 테스트")
+	@Test
+	void init_holding_money_number_format_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("OzRagwort");
+					vendingMachine.initHoldingMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("보유 금액을 소수로 입력 한 경우 예외 테스트")
+	@Test
+	void init_holding_money_double_type_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("1.1");
+					vendingMachine.initHoldingMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("Integer 최대값보다 더 큰 보유 금액을 입력 한 경우 예외 테스트")
+	@Test
+	void init_holding_money_overflow_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("5000000000");
+					vendingMachine.initHoldingMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("보유 금액을 음수로 입력 한 경우 예외 테스트")
+	@Test
+	void init_holding_money_negative_number_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("-1");
+					vendingMachine.initHoldingMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("보유 금액을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
+	@Test
+	void init_holding_money_divisible_by_10_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("135");
+					vendingMachine.initHoldingMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
 		);
 	}
 
