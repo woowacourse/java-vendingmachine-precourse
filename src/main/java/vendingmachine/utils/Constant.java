@@ -19,4 +19,8 @@ public class Constant {
 	public static final int PRODUCT_AMOUNT_REMAINDER = 0;
 	public static final int PRODUCT_COUNT_MIN = 1;
 	public static final int PRODUCT_COUNT_MAX = 2000000000;
+	public static final int ENTERED_AMOUNT_MIN = 10;
+	public static final int ENTERED_AMOUNT_MAX = 2000000000;
+	public static final int ENTERED_AMOUNT_DIVIDE = 10;
+	public static final int ENTERED_AMOUNT_REMAINDER = 0;
 }

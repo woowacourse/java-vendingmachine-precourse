@@ -61,4 +61,22 @@ public class Validation {
 		}
 	}
 
+	public static void isEnteredAmount(String input) {
+		int enteredAmount;
+		try {
+			enteredAmount = Integer.parseInt(input);
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.ENTERED_AMOUNT_NUM);
+		}
+		if (enteredAmount < Constant.ENTERED_AMOUNT_MIN) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.ENTERED_AMOUNT_MIN);
+		}
+		if (enteredAmount > Constant.ENTERED_AMOUNT_MAX) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.ENTERED_AMOUNT_MAX);
+		}
+		if (enteredAmount % Constant.ENTERED_AMOUNT_DIVIDE != Constant.ENTERED_AMOUNT_REMAINDER) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.ENTERED_AMOUNT_DIVIDE);
+		}
+	}
+
 }

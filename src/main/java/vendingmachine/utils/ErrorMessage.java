@@ -17,4 +17,8 @@ public class ErrorMessage {
 	public static final String PRODUCT_COUNT_NUM = "상품 수량은 숫자여야 합니다.";
 	public static final String PRODUCT_COUNT_MIN = "상품 수량은 1개 이상이여야 합니다.";
 	public static final String PRODUCT_COUNT_MAX = "상품 수량은 20억개 이하여야 합니다.";
+	public static final String ENTERED_AMOUNT_NUM = "투입금액은 수여야 합니다.";
+	public static final String ENTERED_AMOUNT_MIN = "투입금액은 10원 이상이여야 합니다.";
+	public static final String ENTERED_AMOUNT_MAX = "투입금액은 20억원 이하여야 합니다.";
+	public static final String ENTERED_AMOUNT_DIVIDE = "투입금액은 10원으로 나누어 떨어져야 합니다.";
 }

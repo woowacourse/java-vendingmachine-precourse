@@ -1,16 +1,14 @@
 package vendingmachine.domain;
 
-import java.util.Map;
-
 public class VendingMachine {
 
-	private Map<Coin, Integer> holdingCoin;
+	private final int enteredAmount;
 
-	public VendingMachine(Map<Coin, Integer> holdingCoin) {
-		this.holdingCoin = holdingCoin;
+	public VendingMachine(int enteredAmount) {
+		this.enteredAmount = enteredAmount;
 	}
 
-	public Map<Coin, Integer> getHoldingCoin() {
-		return this.holdingCoin;
+	public int getEnteredAmount() {
+		return enteredAmount;
 	}
 }
