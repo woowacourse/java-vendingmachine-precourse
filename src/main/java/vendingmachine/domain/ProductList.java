@@ -28,11 +28,11 @@ public class ProductList {
 
     public boolean checkPurchasePossible(int restMoney) {
         return productList.stream()
-                .anyMatch(product -> product.price > restMoney);
+                .anyMatch(product -> product.price <= restMoney);
     }
 
     public boolean checkAllProductsSoldOut() {
         return productList.stream()
-                .allMatch(product -> product.quantity <= 0);
+                .anyMatch(product -> product.quantity > 0);
     }
 }
