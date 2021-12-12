@@ -24,11 +24,11 @@ public class Validator {
 
 	public static void validateEachProduct(List<List<String>> productsEachInfoList) {
 		for (List<String> productInfo : productsEachInfoList) {
-			Validator.ValidateProduct(productInfo);
+			Validator.validateProduct(productInfo);
 		}
 	}
 
-	private static void ValidateProduct(List<String> productInfo) {
+	private static void validateProduct(List<String> productInfo) {
 		ProductValidator.validateInfoMiss(productInfo);
 		validateProductName(productInfo.get(0));
 		validateProductPrice(productInfo.get(1));
@@ -50,5 +50,17 @@ public class Validator {
 		NumberValidator.isInteger(amount);
 		int intAmount = Integer.parseInt(amount);
 		NumberValidator.isGreaterThanOrEqualToZero(intAmount);
+	}
+
+	public static boolean isValidInputMoney(String inputMoney) {
+		try {
+			NumberValidator.isInteger(inputMoney);
+			int intInputMoney = Integer.parseInt(inputMoney);
+			NumberValidator.isDivisibleByLowLimitOfCoin(intInputMoney);
+			return true;
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 }
