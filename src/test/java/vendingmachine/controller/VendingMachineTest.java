@@ -39,7 +39,7 @@ public class VendingMachineTest extends NsTest {
 		CoinRepository.clear();
 	}
 
-	@DisplayName("보유 금액을 설정하여 동전을 무작위로 생성하는 기능 테스트")
+	@DisplayName("[initHolding 기능 테스트] 보유 금액을 설정하여 동전을 무작위로 생성하는 기능 테스트")
 	@Test
 	void init_holding_money_test() {
 		assertRandomNumberInListTest(
@@ -55,7 +55,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("숫자가 아닌 보유 금액을 입력 한 경우 예외 테스트")
+	@DisplayName("[initHolding 예외 테스트] 숫자가 아닌 보유 금액을 입력 한 경우 예외 테스트")
 	@Test
 	void init_holding_money_number_format_exception_test() {
 		assertSimpleTest(
@@ -70,7 +70,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("보유 금액을 소수로 입력 한 경우 예외 테스트")
+	@DisplayName("[initHolding 예외 테스트] 보유 금액을 소수로 입력 한 경우 예외 테스트")
 	@Test
 	void init_holding_money_double_type_exception_test() {
 		assertSimpleTest(
@@ -85,7 +85,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("Integer 최대값보다 더 큰 보유 금액을 입력 한 경우 예외 테스트")
+	@DisplayName("[initHolding 예외 테스트] Integer 최대값보다 더 큰 보유 금액을 입력 한 경우 예외 테스트")
 	@Test
 	void init_holding_money_overflow_exception_test() {
 		assertSimpleTest(
@@ -100,7 +100,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("보유 금액을 음수로 입력 한 경우 예외 테스트")
+	@DisplayName("[initHolding 예외 테스트] 보유 금액을 음수로 입력 한 경우 예외 테스트")
 	@Test
 	void init_holding_money_negative_number_exception_test() {
 		assertSimpleTest(
@@ -115,7 +115,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("보유 금액을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
+	@DisplayName("[initHolding 예외 테스트] 보유 금액을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
 	@Test
 	void init_holding_money_divisible_by_10_exception_test() {
 		assertSimpleTest(
@@ -130,7 +130,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("보유 동전을 출력하는 기능 테스트")
+	@DisplayName("[showAllCoinQuantity 기능 테스트] 보유 동전을 출력하는 기능 테스트")
 	@Test
 	void show_all_coin_quantity_test() {
 		assertSimpleTest(
@@ -143,7 +143,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 등록 기능 테스트")
+	@DisplayName("[registerProducts 기능 테스트] 상품 등록 기능 테스트")
 	@Test
 	void register_products_test() {
 		assertSimpleTest(
@@ -158,7 +158,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("숫자가 아닌 상품 가격을 입력 한 경우 예외 테스트")
+	@DisplayName("[registerProducts 예외 테스트] 숫자가 아닌 상품 가격을 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_number_format_exception_test() {
 		assertSimpleTest(
@@ -173,7 +173,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 가격을 소수로 입력 한 경우 예외 테스트")
+	@DisplayName("[registerProducts 예외 테스트] 상품 가격을 소수로 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_double_type_exception_test() {
 		assertSimpleTest(
@@ -188,7 +188,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("Integer 최대값보다 더 큰 상품 가격을 입력 한 경우 예외 테스트")
+	@DisplayName("[registerProducts 예외 테스트] Integer 최대값보다 더 큰 상품 가격을 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_overflow_exception_test() {
 		assertSimpleTest(
@@ -203,7 +203,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 가격을 100미만으로 입력 한 경우 예외 테스트")
+	@DisplayName("[registerProducts 예외 테스트] 상품 가격을 100미만으로 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_lower_then_minimum_price_exception_test() {
 		assertSimpleTest(
@@ -218,7 +218,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 가격을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
+	@DisplayName("[registerProducts 예외 테스트] 상품 가격을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_divisible_by_10_exception_test() {
 		assertSimpleTest(
@@ -233,7 +233,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("구매를 위한 돈 투입 기능 테스트")
+	@DisplayName("[sellProduct 기능 테스트] 구매를 위한 돈 투입 기능 테스트")
 	@Test
 	void insert_money_test() {
 		assertSimpleTest(
@@ -246,7 +246,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("숫자가 아닌 투입 금액을 입력 한 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 숫자가 아닌 투입 금액을 입력 한 경우 예외 테스트")
 	@Test
 	void insert_money_number_format_exception_test() {
 		assertSimpleTest(
@@ -261,7 +261,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("투입 금액을 소수로 입력 한 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 투입 금액을 소수로 입력 한 경우 예외 테스트")
 	@Test
 	void insert_money_double_type_exception_test() {
 		assertSimpleTest(
@@ -276,7 +276,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("Integer 최대값보다 더 큰 투입 금액을 입력 한 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] Integer 최대값보다 더 큰 투입 금액을 입력 한 경우 예외 테스트")
 	@Test
 	void insert_money_overflow_exception_test() {
 		assertSimpleTest(
@@ -291,7 +291,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("투입 금액을 음수로 입력 한 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 투입 금액을 음수로 입력 한 경우 예외 테스트")
 	@Test
 	void insert_money_negative_number_exception_test() {
 		assertSimpleTest(
@@ -306,7 +306,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("투입 금액을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 투입 금액을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
 	@Test
 	void insert_money_divisible_by_10_exception_test() {
 		assertSimpleTest(
@@ -321,7 +321,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 판매 기능 테스트")
+	@DisplayName("[sellProduct 기능 테스트] 상품 판매 기능 테스트")
 	@Test
 	void sell_product_test() {
 		assertSimpleTest(
@@ -335,7 +335,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 반복 판매 기능 테스트")
+	@DisplayName("[sellProduct 기능 테스트] 상품 반복 판매 기능 테스트")
 	@Test
 	void sell_product_repeat_test() {
 		assertSimpleTest(
@@ -351,7 +351,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 판매 시 상품명이 없는 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 상품 판매 시 상품명이 없는 경우 예외 테스트")
 	@Test
 	void sell_product_invalid_name_exception_test() {
 		assertSimpleTest(
@@ -369,7 +369,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 판매 시 상품이 매진된 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 상품 판매 시 상품이 매진된 경우 예외 테스트")
 	@Test
 	void sell_product_sold_out_exception_test() {
 		assertSimpleTest(
@@ -387,7 +387,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("상품 판매 시 돈이 부족한 경우 예외 테스트")
+	@DisplayName("[sellProduct 예외 테스트] 상품 판매 시 돈이 부족한 경우 예외 테스트")
 	@Test
 	void sell_product_low_money_exception_test() {
 		assertSimpleTest(
@@ -405,7 +405,7 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
-	@DisplayName("잔돈 출력 기능 테스트")
+	@DisplayName("[sellProduct 기능 테스트] 잔돈 출력 기능 테스트")
 	@Test
 	void return_change_test() {
 		assertRandomNumberInListTest(
