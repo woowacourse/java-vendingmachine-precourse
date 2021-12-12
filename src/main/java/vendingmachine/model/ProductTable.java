@@ -30,6 +30,29 @@ public class ProductTable {
         return productTable.get(productName).isAvailable();
     }
 
+    public int getCheapestPrice() {
+        if (productTable.size() == 0) {
+            return -1;
+        }
+        ArrayList<Product> list = new ArrayList<>(productTable.values());
+        list.sort(Comparator.naturalOrder());
+        for (Product product : list) {
+            if (product.isAvailable()) {
+                return product.getPrice();
+            }
+        }
+        return -1;
+    }
+
+    public boolean isAvailable() {
+        for (Product product : productTable.values()) {
+            if (product.isAvailable()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public void clearTable() {
         productTable.clear();
     }
