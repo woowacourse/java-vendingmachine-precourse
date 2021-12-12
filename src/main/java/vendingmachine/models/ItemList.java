@@ -18,4 +18,8 @@ public class ItemList {
 	public int getItemPrice(String name) {
 		return this.ItemList.get(name).getPrice();
 	}
+
+	public int getMinPrice() {
+		return this.ItemList.values().stream().filter(eachItem -> !eachItem.isAmountZero()).mapToInt(Item::getPrice).min().getAsInt();
+	}
 }
