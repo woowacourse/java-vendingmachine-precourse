@@ -7,6 +7,7 @@ import vendingmachine.utils.datatypechecker.IntegerChecker;
 public class BalanceInputChecker {
     private static final String CONTENT_TYPE = "자판기 보유금";
     private static final int LOW_LIMIT = 0;
+    private static final int MOD = 10;
 
     public static int getBalance(){
         String input;
@@ -23,7 +24,10 @@ public class BalanceInputChecker {
 
         try{
             IntegerChecker.checkStringToInteger(input, CONTENT_TYPE);
-            IntegerChecker.checkLowLimit(Integer.parseInt(input), LOW_LIMIT, CONTENT_TYPE);
+
+            int balance = Integer.parseInt(input);
+            IntegerChecker.checkLowLimit(balance, LOW_LIMIT, CONTENT_TYPE);
+            IntegerChecker.checkDivideIntoMod(balance, MOD, CONTENT_TYPE);
         }catch (IllegalArgumentException exception){
             System.out.println(exception.getMessage());
             isRight = false;
