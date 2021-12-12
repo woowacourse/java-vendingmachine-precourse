@@ -1,11 +1,14 @@
 package vendingmachine;
 
+import java.util.HashSet;
+
 public class Validator {
     private static final int MAX_PRODUCTS_TYPES = 10;
     private static final int MAX_PRODUCT_NAME_LENGTH = 10;
     private static final int MAX_PRODUCT_PRICE = 10000;
     private static final int MAX_PRODUCT_AMOUNT = 100;
     private static final int MAX_CASH = MAX_PRODUCTS_TYPES * MAX_PRODUCT_PRICE * MAX_PRODUCT_AMOUNT;
+    private static HashSet<String> productSet = new HashSet<>();
 
     public static void validateCashInput(String buffer) throws IllegalArgumentException {
         for (char c : buffer.toCharArray()) {
@@ -20,6 +23,11 @@ public class Validator {
     }
 
     public static void validateProductInput(String[] tokens) throws IllegalArgumentException {
+        if (productSet.contains(tokens[0])) {
+            throw new MyIllegalArgumentException(
+                    String.format("Duplicated product [%s].", tokens[0])
+            );
+        }
         validateProductName(tokens[0]);
         validateProductPrice(tokens[1]);
         validateProductAmount(tokens[2]);
