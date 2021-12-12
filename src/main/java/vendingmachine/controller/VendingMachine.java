@@ -34,15 +34,17 @@ public class VendingMachine {
 		vendingMachineService.registerProducts(requestHoldingMoneyDto);
 	}
 
-	public void insertMoney() {
-		RequestInsertMoneyDto requestInsertMoneyDto = inputInsertMoney();
-		vendingMachineService.insertMoney(requestInsertMoneyDto);
-	}
-
 	public void sellProduct() {
+		insertMoney();
 		while (vendingMachineService.canSell()) {
 			sellProductStep();
 		}
+		returnChange();
+	}
+
+	private void insertMoney() {
+		RequestInsertMoneyDto requestInsertMoneyDto = inputInsertMoney();
+		vendingMachineService.insertMoney(requestInsertMoneyDto);
 	}
 
 	private void sellProductStep() {
@@ -58,7 +60,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void returnChange() {
+	private void returnChange() {
 		ResponseChangeDto responseChangeDto = vendingMachineService.returnChange();
 		outputChange(responseChangeDto);
 	}

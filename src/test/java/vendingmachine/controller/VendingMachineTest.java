@@ -240,7 +240,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				run("3000");
 				assertEquals(MoneyRepository.get().get(), 0);
-				vendingMachine.insertMoney();
+				vendingMachine.sellProduct();
 				assertEquals(MoneyRepository.get().get(), 3000);
 			}
 		);
@@ -253,7 +253,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					run("OzRagwort");
-					vendingMachine.insertMoney();
+					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
 				}
@@ -268,7 +268,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					runException("1.1");
-					vendingMachine.insertMoney();
+					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
 				}
@@ -283,7 +283,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					runException("5000000000");
-					vendingMachine.insertMoney();
+					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
 				}
@@ -298,7 +298,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					runException("-1");
-					vendingMachine.insertMoney();
+					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
 				}
@@ -313,7 +313,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				try {
 					runException("OzRagwort");
-					vendingMachine.insertMoney();
+					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
 				}
@@ -326,10 +326,9 @@ public class VendingMachineTest extends NsTest {
 	void sell_product_test() {
 		assertSimpleTest(
 			() -> {
-				MoneyRepository.add(new Money("3000"));
 				Products products = new Products("[콜라,500,1]");
 				products.save();
-				runException("콜라");
+				runException("3000", "콜라");
 				vendingMachine.sellProduct();
 				assertFalse(ProductRepository.findByName(new Name("콜라")).canSell());
 			}
@@ -344,7 +343,7 @@ public class VendingMachineTest extends NsTest {
 				MoneyRepository.add(new Money("3000"));
 				Products products = new Products("[콜라,500,1];[사이다,300,1]");
 				products.save();
-				run("콜라", "사이다");
+				run("3000", "콜라", "사이다");
 				vendingMachine.sellProduct();
 				assertFalse(ProductRepository.findByName(new Name("콜라")).canSell());
 				assertFalse(ProductRepository.findByName(new Name("사이다")).canSell());
@@ -403,6 +402,25 @@ public class VendingMachineTest extends NsTest {
 				} catch (final NoSuchElementException ignore) {
 				}
 			}
+		);
+	}
+
+	@DisplayName("잔돈 출력 기능 테스트")
+	@Test
+	void return_change_test() {
+		assertRandomNumberInListTest(
+			() -> {
+				run("2150", "콜라", "사이다");
+				CoinRepository.addOneQuantityByAmount(500);
+				CoinRepository.addOneQuantityByAmount(100);
+				CoinRepository.addOneQuantityByAmount(50);
+				Products products = new Products("[콜라,1000,0];[사이다,500,0]");
+				products.save();
+				vendingMachine.sellProduct();
+				assertThat(output()).contains(
+					"잔돈", "500원 - 1개", "100원 - 1개", "50원 - 1개"
+				);
+			}, 500, 100, 50
 		);
 	}
 
