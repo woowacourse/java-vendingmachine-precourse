@@ -29,7 +29,9 @@ public class ChangeSystem {
     }
 
     private void change(final Map<Integer, Integer> returnedChanges) {
-        possibleChangesToReturn.keySet().forEach(coin -> change(coin, returnedChanges));
+        possibleChangesToReturn.keySet().stream()
+                .filter(coin -> possibleChangesToReturn.get(coin) != 0)
+                .forEach(coin -> change(coin, returnedChanges));
     }
 
     private void change(final Coin coin, final Map<Integer, Integer> returnedChanges) {
