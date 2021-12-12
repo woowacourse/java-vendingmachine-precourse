@@ -33,7 +33,7 @@ public class ApplicationController {
 	}
 
 	private void saveBalance() {
-		String balance = InputView.getVendingMachineBalance();
+		String balance = InputView.getUserInputSingleLine(VENDING_MACHINE_BALANCE_MESSAGE);
 		try {
 			vendingMachineService.saveBalance(balance);
 			saveCoins();
@@ -51,7 +51,7 @@ public class ApplicationController {
 	}
 
 	private void saveProducts() {
-		String userProducts = InputView.getVendingMachineProducts();
+		String userProducts = InputView.getUserInputSingleLine(LINE_STAMP + VENDING_MACHINE_PRODUCT_MESSAGE);
 		try {
 			productRepositoryService.saveProductRepository(userProducts);
 			getMoney();
@@ -62,7 +62,7 @@ public class ApplicationController {
 	}
 
 	private void getMoney() {
-		String money = InputView.getMoney();
+		String money = InputView.getUserInputSingleLine(LINE_STAMP + INSERT_MONEY_MESSAGE);
 		try {
 			PriceException.isValidPrice(money);
 			int validMoney = Integer.parseInt(money);
@@ -94,7 +94,7 @@ public class ApplicationController {
 	private int updateByOrder(int money) {
 		try {
 			PrintView.printMoneyState(money);
-			String orderedProduct = InputView.getOrderedProduct();
+			String orderedProduct = InputView.getUserInputSingleLine(ORDER_PRODUCT_MESSAGE);
 			productRepositoryService.updateProductByOrder(orderedProduct, money);
 			return productRepositoryService.getPriceByOrder(orderedProduct);
 		} catch (IllegalArgumentException e) {
