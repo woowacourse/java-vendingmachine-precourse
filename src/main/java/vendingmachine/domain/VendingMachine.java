@@ -62,6 +62,10 @@ public class VendingMachine {
         this.inputMoney = money;
     }
 
+    public boolean checkPurchasePossible() {
+        return productList.checkPurchasePossible(inputMoney) && productList.checkAllProductsSoldOut();
+    }
+
     private void reduceInputMoney(int money) {
         this.inputMoney -= money;
     }
