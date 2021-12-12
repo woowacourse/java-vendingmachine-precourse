@@ -29,4 +29,14 @@ public class VendingMachineController {
             initializeHoldingMoney();
         }
     }
+
+    private void initializeProductsInfo() {
+        try {
+            int validHoldingMoneyInput = HoldingMoneyValidator.getValidHoldingMoney(InputView.inputHoldingMoney());
+            vendingMachine.setHoldingMoney(validHoldingMoneyInput);
+        } catch (IllegalArgumentException e) {
+            ErrorMessageOutputView.printErrorMessage(e.getMessage());
+            initializeHoldingMoney();
+        }
+    }
 }
