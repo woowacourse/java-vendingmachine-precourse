@@ -18,6 +18,10 @@ public class Product {
 		return Math.min(price, minPrice);
 	}
 
+	public int addAmount(int totalAmount) {
+		return amount + totalAmount;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
