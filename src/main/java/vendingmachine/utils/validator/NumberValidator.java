@@ -15,4 +15,10 @@ public class NumberValidator {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
+    public static void validateNotExceedMinValue(final int input, final int minValue, final String errorMessage) {
+        if (input < minValue) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
 }
