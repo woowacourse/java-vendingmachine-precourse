@@ -29,6 +29,7 @@ public class Message {
 	public static final String ERROR_MESSAGE_LENGTH_ZERO = "1자 이상을 입력해주세요";
 	public static final String ERROR_MESSAGE_THE_NUMBER_OF = "개를 입력해주세요.";
 	public static final String ERROR_MESSAGE_NOT_BRACKET = "개별 상품은 " + Rule.BRACKET + "로 묶어야합니다.";
+	public static final String ERROR_MESSAGE_PRODUCT_DUPLECATION = "상품명은 중복될 수 없습니다.";
 
 	public static String toString(int amount, int count) {
 		return amount + WON + " - " + count + EA;
