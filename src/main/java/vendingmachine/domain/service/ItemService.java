@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import vendingmachine.domain.Item;
 import vendingmachine.domain.repository.ItemRepository;
-import vendingmachine.util.PublicConst;
 import vendingmachine.util.SystemMessage;
 
 public class ItemService {
@@ -33,13 +32,9 @@ public class ItemService {
 	public boolean canPurchaseByMoney(int money) {
 		List<Item> purchasableItems = itemRepository.getAll()
 			.stream()
-			.filter(item -> canPurchase(item, money))
+			.filter(item -> item.canPurchase(money))
 			.collect(Collectors.toList());
 
 		return !purchasableItems.isEmpty();
-	}
-
-	private boolean canPurchase(Item item, int money) {
-		return item.getPrice() <= money && item.getAmount() >= PublicConst.ITEM_AMOUNT_MIN;
 	}
 }

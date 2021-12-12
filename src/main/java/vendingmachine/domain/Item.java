@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.util.PublicConst;
+
 public class Item {
 	private String name;
 	private int price;
@@ -19,12 +21,12 @@ public class Item {
 		return price;
 	}
 
-	public int getAmount() {
-		return amount;
+	public boolean canPurchase(int money) {
+		return price <= money && isInStock();
 	}
 
 	public boolean isInStock() {
-		return this.amount > 0;
+		return this.amount > PublicConst.NOT_EXIST;
 	}
 
 	public void deductAmount() {
