@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.validator.AmountValidator.*;
 import static vendingmachine.utils.validator.ItemValidator.*;
 
@@ -10,6 +9,8 @@ import vendingmachine.view.Input;
 import vendingmachine.view.Output;
 
 public class VendingMachineController {
+
+	private static final int AMOUNT = 0;
 
 	private final VendingMachine vendingMachine;
 

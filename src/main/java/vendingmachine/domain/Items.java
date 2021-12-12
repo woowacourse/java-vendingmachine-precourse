@@ -1,14 +1,18 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.Message.*;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static vendingmachine.utils.Message.*;
-import static vendingmachine.utils.Constant.*;
-
 public class Items {
+
+	private static final int OUT_OF_STOCK = 0;
+	private static final int NAME = 0;
+	private static final int PRICE = 1;
+	private static final int QUANTITY = 2;
 
 	private List<Item> list;
 
@@ -79,6 +83,6 @@ public class Items {
 			.filter(item -> item.getQuantity() != OUT_OF_STOCK)
 			.count();
 
-		return count != 0;
+		return count != OUT_OF_STOCK;
 	}
 }

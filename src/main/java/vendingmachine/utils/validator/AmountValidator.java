@@ -1,9 +1,11 @@
 package vendingmachine.utils.validator;
 
-import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.Error.*;
 
 public class AmountValidator {
+
+	private static final int PRICE = 1;
+	private static final int LOWEST_AMOUNT = 100;
 
 	public static int validateAmount(String amount, int condition) {
 		try {
@@ -25,7 +27,7 @@ public class AmountValidator {
 	}
 
 	private static void validateMinimum(int amount, int condition) {
-		if (condition == PRICE && amount < 100) {
+		if (condition == PRICE && amount < LOWEST_AMOUNT) {
 			throw new IllegalArgumentException(AMOUNT_MINIMUM_ERROR);
 		}
 	}

@@ -6,6 +6,8 @@ import vendingmachine.domain.Coins;
 
 public class Output {
 
+	private static final int OUT_OF_STOCK = 0;
+
 	public static void holdingAmount(Coins coins) {
 		System.out.println(HOLDING_COINS_OUTPUT_MESSAGE);
 		StringBuilder message = new StringBuilder();
@@ -32,7 +34,7 @@ public class Output {
 		StringBuilder message = new StringBuilder();
 		coins.getList()
 			.forEach((coin, count) -> {
-				if (count != 0) {
+				if (count != OUT_OF_STOCK) {
 					message.append(coin.getAmount())
 						.append(COIN_PRINT_FORMAT)
 						.append(count)
@@ -41,6 +43,6 @@ public class Output {
 				}
 			});
 
-		System.out.println(message);
+		System.out.print(message);
 	}
 }

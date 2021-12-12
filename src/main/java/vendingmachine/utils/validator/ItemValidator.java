@@ -1,8 +1,8 @@
 package vendingmachine.utils.validator;
 
 import static vendingmachine.utils.Error.*;
-import static vendingmachine.utils.validator.AmountValidator.*;
 import static vendingmachine.utils.Message.*;
+import static vendingmachine.utils.validator.AmountValidator.*;
 
 import java.util.ArrayList;
 import java.util.List;

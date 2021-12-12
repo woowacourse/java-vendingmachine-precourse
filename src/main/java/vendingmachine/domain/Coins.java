@@ -4,9 +4,11 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static vendingmachine.utils.Constant.*;
-
 public class Coins {
+
+	private static final int ZERO_AMOUNT = 0;
+	private static final int PLUS_QUANTITY = 1;
+	private static final int DEFAULT_QUANTITY = 0;
 
 	private Map<Coin, Integer> list;
 
@@ -19,12 +21,12 @@ public class Coins {
 	}
 
 	public void insertRandomCoins(int totalAmount) {
-		while (totalAmount != ZERO) {
+		while (totalAmount != ZERO_AMOUNT) {
 			Coin coin = Coin.pickRandom();
 
 			if (totalAmount >= coin.getAmount()) {
 				totalAmount -= coin.getAmount();
-				list.put(coin, list.get(coin) + ONE);
+				list.put(coin, list.get(coin) + PLUS_QUANTITY);
 			}
 		}
 	}

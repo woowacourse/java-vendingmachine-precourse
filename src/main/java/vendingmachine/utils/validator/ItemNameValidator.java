@@ -8,6 +8,8 @@ import vendingmachine.domain.Items;
 
 public class ItemNameValidator {
 
+	private static final int OUT_OF_STOCK = 0;
+
 	public static void validateItem(Items items, String itemName) {
 		validateStatus(items, itemName);
 		validateStock(items, itemName);
@@ -24,7 +26,7 @@ public class ItemNameValidator {
 	private static void validateStock(Items items, String itemName) {
 		int quantity = items.getStockByName(itemName);
 
-		if (quantity == 0) {
+		if (quantity == OUT_OF_STOCK) {
 			throw new IllegalArgumentException(ITEM_NOT_STOCK_ERROR);
 		}
 	}
