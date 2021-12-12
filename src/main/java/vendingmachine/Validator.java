@@ -54,10 +54,16 @@ public class Validator {
             }
         }
 
-        if (Integer.parseInt(price) > MAX_PRODUCT_PRICE) {
+        int nPrice = Integer.parseInt(price);
+
+        if (nPrice > MAX_PRODUCT_PRICE) {
             throw new MyIllegalArgumentException(
                     String.format("Product price shouldn't be higher than %d", MAX_PRODUCT_PRICE)
             );
+        }
+
+        if (nPrice % 10 != 0) {
+            throw new MyIllegalArgumentException("Price of product should be divided by 10");
         }
     }
 
