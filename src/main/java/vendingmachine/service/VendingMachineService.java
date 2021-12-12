@@ -17,34 +17,6 @@ public class VendingMachineService {
 		userView = new UserView();
 	}
 
-	public void setInitCoins() {
-		boolean successInitCoins = false;
-		vendingMachineView.askInitCoins();
-
-		while (!successInitCoins) {
-			successInitCoins = setInitCoinsIfItIsRight();
-		}
-
-	}
-
-	public boolean setInitCoinsIfItIsRight() {
-		try {
-			vendingMachine.setCoins(userView.insertInitCoins());
-		} catch (IllegalArgumentException e) {
-			System.out.println(ErrorMessage.ERROR + e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	public void printInitCoins() {
-		vendingMachineView.printInitCoinsComment();
-
-		for (Coin coin : Coin.values()) {
-			vendingMachineView.printCoin(vendingMachine.countCoin(coin), coin);
-		}
-	}
-
 	public void setMenuList() {
 		boolean successSetMenuList = false;
 		vendingMachineView.askProductsInfo();

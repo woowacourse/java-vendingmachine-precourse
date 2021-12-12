@@ -1,18 +1,27 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.VendingMachine;
+import vendingmachine.service.SettingCoinService;
 import vendingmachine.service.VendingMachineService;
+import vendingmachine.view.UserView;
+import vendingmachine.view.VendingMachineView;
 
 public class VendingMachineController {
-	public VendingMachineService vendingMachineService;
+	private VendingMachineService vendingMachineService;
+	private VendingMachineView vendingMachineView;
+	private UserView userView;
+	private SettingCoinService settingCoinService;
 
 	public VendingMachineController(VendingMachine vendingMachine) {
+		vendingMachineView = new VendingMachineView();
+		userView = new UserView();
 		vendingMachineService = new VendingMachineService(vendingMachine);
+		settingCoinService = new SettingCoinService(vendingMachine, userView, vendingMachineView);
 	}
 
 	public void setInitCoins() {
-		vendingMachineService.setInitCoins();
-		vendingMachineService.printInitCoins();
+		settingCoinService.setInitCoins();
+		settingCoinService.printInitCoins();
 	}
 
 	public void setMenuList() {
