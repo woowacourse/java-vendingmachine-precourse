@@ -38,7 +38,7 @@ public class CoinService {
 
     public int[] countFrequency(List<Integer> randomCoinList) {
         int[] frequencyList = new int[4];
-        int[] coinList = coinAmountList;
+        int[] coinList = getCoinAmountList();
         for (int i = 0; i < 4; i++) {
             frequencyList[i] = Collections.frequency(randomCoinList, coinList[i]);
         }

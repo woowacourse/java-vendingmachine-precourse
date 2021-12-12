@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -19,7 +20,15 @@ public enum Coin {
         this.calculateNeedCoin = calculateChange;
     }
 
-    public static int[] coinAmountList = {500, 100, 50, 10};
+    public static int[] getCoinAmountList(){
+        List<Integer> coinAmountList = new ArrayList<>();
+        for(Coin coin : Coin.values()){
+            coinAmountList.add(coin.amount);
+        }
+        return coinAmountList.stream()
+                .mapToInt(Integer::intValue)
+                .toArray();
+    }
 
     public static boolean isPossible(int amount, Coin coin) {
         if (amount >= coin.amount) {
