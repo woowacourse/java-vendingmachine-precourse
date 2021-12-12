@@ -49,6 +49,16 @@ public class Stock {
 		return productMap;
 	}
 
+	public Product getProduct(Name name) {
+
+		if (hasProduct(name)) {
+			Product selectedProduct = productMap.get(name);
+			return selectedProduct;
+		}
+
+		return null;
+	}
+
 	public Product giveProduct(Name name) {
 
 		if (hasProduct(name)) {
@@ -63,7 +73,7 @@ public class Stock {
 	private boolean hasProduct(Name name) {
 
 		if (productMap.get(name) == null) {
-			throw new IllegalArgumentException("없는 상품입니다.");
+			throw new IllegalArgumentException(Message.ERROR_MESSAGE_NON_EXISTENT_PRODUCT);
 		}
 
 		return true;

@@ -30,6 +30,8 @@ public class Message {
 	public static final String ERROR_MESSAGE_THE_NUMBER_OF = "개를 입력해주세요.";
 	public static final String ERROR_MESSAGE_NOT_BRACKET = "개별 상품은 " + Rule.BRACKET + "로 묶어야합니다.";
 	public static final String ERROR_MESSAGE_PRODUCT_DUPLECATION = "상품명은 중복될 수 없습니다.";
+	public static final String ERROR_MESSAGE_NON_EXISTENT_PRODUCT = "없는 상품입니다.";
+	public static final String ERROR_MESSAGE_INSERTING_SUM_IS_LESS_PRICE = "투입 금액이 부족합니다.";
 
 	public static String toString(int amount, int count) {
 		return amount + WON + " - " + count + EA;

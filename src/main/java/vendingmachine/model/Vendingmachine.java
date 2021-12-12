@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import vendingmachine.constant.Message;
+
 public class Vendingmachine {
 
 	private HoldingSum holdingSum;
@@ -30,8 +32,18 @@ public class Vendingmachine {
 	}
 
 	public void sellProduct(Name name) {
+		checkRestInsertingSum(name);
 		Product soldProduct = stock.giveProduct(name);
 		insertingSum.subtractPrice(soldProduct.getPrice());
+	}
+
+	private void checkRestInsertingSum(Name name) {
+		Product selectedProduct = stock.getProduct(name);
+
+		if (insertingSum.isLessThan(selectedProduct.getPrice())) {
+			throw new IllegalArgumentException(Message.ERROR_MESSAGE_INSERTING_SUM_IS_LESS_PRICE);
+		}
+
 	}
 
 	public boolean isPossibleToSell() {
