@@ -31,7 +31,7 @@ public class VendingMachineProductValidator {
 		}
 		throw new IllegalArgumentException();
 	}
-	
+
 	private static boolean isRightStartAndRightFinish(String vendingMachineProduct) {
 		if (vendingMachineProduct.startsWith(LEFT_BRACKET) && vendingMachineProduct.endsWith(RIGHT_BRACKET)) {
 			return true;
@@ -58,8 +58,14 @@ public class VendingMachineProductValidator {
 		int lastIndex = vendingMachineProduct.length() - 1;
 		List<String> vendingMachineProductsInformation = Arrays.asList(
 			vendingMachineProduct.substring(START_INDEX, lastIndex).split(COMMA));
-		ProductNameValidator.isValidProductName(vendingMachineProductsInformation.get(PRODUCT_NAME_INDEX));
-		ProductPriceValidator.isValidProductPrice(vendingMachineProductsInformation.get(PRODUCT_PRICE_INDEX));
-		ProductCountValidator.isValidProductCount(vendingMachineProductsInformation.get(PRODUCT_COUNT_INDEX));
+		if (!ProductNameValidator.isValidProductName(vendingMachineProductsInformation.get(PRODUCT_NAME_INDEX))) {
+			throw new IllegalArgumentException();
+		}
+		if (!ProductPriceValidator.isValidProductPrice(vendingMachineProductsInformation.get(PRODUCT_PRICE_INDEX))) {
+			throw new IllegalArgumentException();
+		}
+		if (!ProductCountValidator.isValidProductCount(vendingMachineProductsInformation.get(PRODUCT_COUNT_INDEX))) {
+			throw new IllegalArgumentException();
+		}
 	}
 }
