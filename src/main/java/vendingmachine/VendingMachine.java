@@ -19,20 +19,15 @@ public class VendingMachine {
         System.out.println("자판기가 보유한 동전");
         System.out.println(this.cashManager.getVaultStatus());
         initProducts();
+        insertCoin();
+        purchase();
 
-        while (true) {
-            try {
-                System.out.println("투입 급액을 입력해 주세요.");
-                String buffer = Console.readLine();
-                Validator.validateCashInput(buffer);
-                this.cashManager.setRemainCash(Integer.parseInt(buffer));
+        System.out.println("잔돈");
+        CashManager change = this.cashManager.getChanges();
+        System.out.println(change.getVaultStatus());
+    }
 
-                break;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-
+    private void purchase() {
         while (true) {
             try {
                 System.out.println();
@@ -58,10 +53,21 @@ public class VendingMachine {
                 System.out.println(e.getMessage());
             }
         }
+    }
 
-        System.out.println("잔돈");
-        CashManager change = this.cashManager.getChanges();
-        System.out.println(change.getVaultStatus());
+    private void insertCoin() {
+        while (true) {
+            try {
+                System.out.println("투입 급액을 입력해 주세요.");
+                String buffer = Console.readLine();
+                Validator.validateCashInput(buffer);
+                this.cashManager.setRemainCash(Integer.parseInt(buffer));
+
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 
     private void initVault() {
