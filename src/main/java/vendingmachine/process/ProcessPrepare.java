@@ -9,6 +9,7 @@ import vendingmachine.user.UserMoneyValidation;
 public class ProcessPrepare {
     public static String holdingAmount;
     public static String goods;
+    public static String[] goodsArray;
 
     public static void inputHoldingAmount() {
         holdingAmount = User.inputMoney();
@@ -33,5 +34,9 @@ public class ProcessPrepare {
     public static void removeBracket() {
         goods.replace(ProcessConstant.SQUARE_BRACKETS_OPEN, "");
         goods.replace(ProcessConstant.SQUARE_BRACKETS_CLOSE, "");
+    }
+
+    public static void toGoodsArray() {
+        goodsArray = goods.split(ProcessConstant.GOODS_DELIMITER);
     }
 }
