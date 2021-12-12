@@ -51,9 +51,8 @@ public class Money {
         }
     }
 
-    public void chargeMoney(String money) {
-        checkMoneyIntegerFormat(money);
-        this.money += Integer.parseInt(money);
+    public void chargeMoney(Money chargeMoney) {
+        this.money += chargeMoney.money;
     }
 
     public int currentMoney() {

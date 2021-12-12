@@ -29,7 +29,7 @@ public class VendingMachine {
         return coins.currentRemainCoins();
     }
 
-    public void chargeMoney(String money) {
+    public void chargeMoney(Money money) {
         remainMoney.chargeMoney(money);
     }
 

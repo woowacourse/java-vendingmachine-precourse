@@ -44,17 +44,4 @@ class MoneyTest {
             .isThrownBy(() -> money.cutOffByCoin(coin))
             .withMessage("[ERROR] 차감하려는 동전이 현재 남아있는 금액보다 클 수 없습니다.");
     }
-
-    @ParameterizedTest
-    @ValueSource(strings = {"", "-1", "+100", "money"})
-    @DisplayName("사용자 Money 충전 시 숫자가 입력되지 않는 경우 exception이 발생되어야 한다.")
-    void chargeMoneyExceptionByStringMoneyTest(String input) {
-        // given
-        Money money = Money.init();
-
-        // when & then
-        assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> money.chargeMoney(input))
-            .withMessage("[ERROR] 금액은 양의 숫자여야 합니다.");
-    }
 }

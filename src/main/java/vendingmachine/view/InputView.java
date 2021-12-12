@@ -18,6 +18,8 @@ public class InputView {
     private static final String INPUT_PRODUCT_DELMIETER = ",";
     private static final int INPUT_PRODUCTS_LIMIT = -1;
 
+    private static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
+
     private InputView() {
     }
 
@@ -70,5 +72,10 @@ public class InputView {
 
     private static Product valueToProduct(String[] value) {
         return new Product(value[0], Integer.parseInt(value[1]), Integer.parseInt(value[2]));
+    }
+
+    public static String inputMoney() {
+        System.out.println(INPUT_MONEY);
+        return Console.readLine();
     }
 }

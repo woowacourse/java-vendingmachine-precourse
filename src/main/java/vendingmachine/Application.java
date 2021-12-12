@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import static vendingmachine.view.InputView.inputMoney;
 import static vendingmachine.view.InputView.inputProducts;
 import static vendingmachine.view.InputView.inputVendinMachineOwnMoney;
 import static vendingmachine.view.OutputView.printCurrentOwnCoins;
@@ -15,6 +16,8 @@ public class Application {
         VendingMachine machine = VendingMachine.createRandomVendingMachineByMoney(money);
         printCurrentOwnCoins(machine.currentRemainCoins());
         inputVendingMachineProducts(machine);
+
+        machine.chargeMoney(inputUserMoney());
     }
 
     private static Money inputVendingMachineOwnMoney() {
@@ -32,6 +35,15 @@ public class Application {
         } catch (Exception e) {
             printErrorMessage(e);
             inputVendingMachineProducts(machine);
+        }
+    }
+
+    private static Money inputUserMoney() {
+        try {
+            return Money.valueOf(inputMoney());
+        } catch (IllegalArgumentException e) {
+            printErrorMessage(e);
+            return inputUserMoney();
         }
     }
 }
