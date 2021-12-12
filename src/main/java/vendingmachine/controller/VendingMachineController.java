@@ -25,7 +25,7 @@ public class VendingMachineController {
 
 		insetMoney();
 
-		order();
+		repeatOrder();
 		printChanges();
 	}
 
@@ -79,12 +79,25 @@ public class VendingMachineController {
 
 	}
 
-	public void order() {
+	public void repeatOrder() {
 
 		while (!vendingMachine.stopMachine()) {
 			vendingMachineView.printRemainOfInsertedMoney(vendingMachine.getRemainMoney());
-			userView.orderMenu();
-			vendingMachine.takeOrder();
+			order();
+		}
+
+	}
+
+	public void order() {
+		userView.askOrderMenu();
+
+		while (true) {
+			try {
+				vendingMachine.takeOrder(userView.OrderMenu());
+			} catch (IllegalArgumentException e) {
+				System.out.println(ErrorMessage.ERROR + e.getMessage());
+			}
+			break;
 		}
 
 	}

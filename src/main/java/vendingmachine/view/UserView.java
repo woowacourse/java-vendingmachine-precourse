@@ -31,8 +31,13 @@ public class UserView {
 		return insertedMoney;
 	}
 
-	public void orderMenu() {
+	public void askOrderMenu() {
 		System.out.println(InputMessage.ORDER_MENU_NAME);
+	}
+
+	public String OrderMenu() {
+		String orderedMenu = Console.readLine();
+		return orderedMenu;
 	}
 
 }

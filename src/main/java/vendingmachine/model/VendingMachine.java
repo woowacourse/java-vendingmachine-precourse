@@ -29,8 +29,8 @@ public class VendingMachine {
 		this.insertedMoney = Money.setMoney(insertedMoney);
 	}
 
-	public void takeOrder() {
-		insertedMoney -= Order.takeOrder(this);
+	public void takeOrder(String orderedMenu) {
+		insertedMoney -= Order.takeOrder(this, orderedMenu);
 	}
 
 	public boolean findMenu(String order) {
