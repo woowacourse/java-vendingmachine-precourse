@@ -18,25 +18,21 @@ public enum Coin {
         this.amount = amount;
     }
 
-    private int getAmount() {
-        return amount;
-    }
-
     public static List<Integer> getAmountList() {
         return Stream.of(values())
                 .map(c -> c.amount)
                 .collect(Collectors.toList());
     }
 
-    public static Coin getCoinByAmount(int amount) {
+    public static Coin getCoinByAmount(int target) {
         return Stream.of(Coin.values())
-                .filter(c -> c.getAmount() == amount)
+                .filter(c -> c.amount == target)
                 .findFirst()
                 .orElse(null);
     }
 
     public String printAmount() {
-        return getAmount() + OutputConstant.COIN_AMOUNT;
+        return amount + OutputConstant.COIN_AMOUNT;
     }
 
 }
