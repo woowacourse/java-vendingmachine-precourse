@@ -6,10 +6,12 @@ import vendingmachine.user.User;
 import vendingmachine.user.UserGoodsValidation;
 import vendingmachine.user.UserMoneyValidation;
 
+import java.util.List;
+
 public class ProcessPrepare {
     public static String holdingAmount;
     public static String goods;
-    public static String[] goodsArray;
+    public static List<String[]> goodsArray;
 
     public static void inputHoldingAmount() {
         holdingAmount = User.inputMoney();
@@ -36,7 +38,17 @@ public class ProcessPrepare {
         goods.replace(ProcessConstant.SQUARE_BRACKETS_CLOSE, "");
     }
 
+    public static String[] toArray() {
+        String[] goodsArray = goods.split(ProcessConstant.GOODS_DELIMITER);
+        return goodsArray;
+    }
+
     public static void toGoodsArray() {
-        goodsArray = goods.split(ProcessConstant.GOODS_DELIMITER);
+        String[] array = toArray();
+
+        for (String oneGoods : array) {
+            String[] goods = oneGoods.split(",");
+            goodsArray.add(goods);
+        }
     }
 }
