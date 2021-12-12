@@ -228,6 +228,81 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
+	@DisplayName("숫자가 아닌 투입 금액을 입력 한 경우 예외 테스트")
+	@Test
+	void insert_money_number_format_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("OzRagwort");
+					vendingMachine.insertMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("투입 금액을 소수로 입력 한 경우 예외 테스트")
+	@Test
+	void insert_money_double_type_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("1.1");
+					vendingMachine.insertMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("Integer 최대값보다 더 큰 투입 금액을 입력 한 경우 예외 테스트")
+	@Test
+	void insert_money_overflow_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("5000000000");
+					vendingMachine.insertMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("투입 금액을 음수로 입력 한 경우 예외 테스트")
+	@Test
+	void insert_money_negative_number_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("-1");
+					vendingMachine.insertMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
+	@DisplayName("투입 금액을 10으로 나누어 떨어지지 않게 입력 한 경우 예외 테스트")
+	@Test
+	void insert_money_divisible_by_10_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					runException("OzRagwort");
+					vendingMachine.insertMoney();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
 	@Override
 	protected void runMain() {
 	}
