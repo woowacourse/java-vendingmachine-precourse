@@ -48,6 +48,7 @@ public class InputView {
 	}
 
 	public static String writeProductNameToBuy(VendingMachine vendingMachine) {
+		OutputView.printInsertedMoney(vendingMachine);
 		OutputView.askProductToBuy();
 		String inputName = Console.readLine();
 		try {
