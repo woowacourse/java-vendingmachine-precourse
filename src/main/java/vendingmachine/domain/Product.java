@@ -53,6 +53,10 @@ public class Product {
         }
     }
 
+    public boolean isPurchasable() {
+        return remainAmount != 0;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {

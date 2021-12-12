@@ -1,10 +1,13 @@
 package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 class ProductsTest {
@@ -34,5 +37,40 @@ class ProductsTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> products.purchaseProduct(money, "사이다"))
             .withMessage("[ERROR] 상품의 이름을 찾을 수 없습니다.");
+    }
+
+    @Nested
+    @DisplayName("Products의 상품 수량이 소진되었는지 확인할 수 있다.")
+    class IsExistPurchasableProductTest {
+
+        @Test
+        @DisplayName("구매 가능")
+        void trueTest() {
+            // given
+            List<Product> input = Arrays.asList(new Product("콜라", 1500, 20),
+                new Product("사이다", 1000, 10));
+            Products products = new Products(input);
+
+            // when
+            boolean result = products.isExistPurchasableProduct();
+
+            // then
+            assertTrue(result);
+        }
+
+        @Test
+        @DisplayName("구매 가능")
+        void falseTest() {
+            // given
+            List<Product> input = Arrays.asList(new Product("콜라", 1500, 0),
+                new Product("사이다", 1000, 0));
+            Products products = new Products(input);
+
+            // when
+            boolean result = products.isExistPurchasableProduct();
+
+            // then
+            assertFalse(result);
+        }
     }
 }

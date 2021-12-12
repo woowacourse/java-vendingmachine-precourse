@@ -31,4 +31,9 @@ public class Products {
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("[ERROR] 상품의 이름을 찾을 수 없습니다."));
     }
+
+    public boolean isExistPurchasableProduct() {
+        return products.stream()
+            .anyMatch(Product::isPurchasable);
+    }
 }
