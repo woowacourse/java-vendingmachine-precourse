@@ -11,7 +11,8 @@ public class HoldingMoneyValidator {
         int intInput = NumberValidator.getValidNumber(input, INPUT_IS_NOT_A_VALID_NUMBER_OR_EXCEED_MAX);
         NumberValidator.validateNotExceedMaxValue(intInput, MAX_HOLDING_MONEY,
             INPUT_IS_NOT_A_VALID_NUMBER_OR_EXCEED_MAX);
-        NumberValidator.validateNotExceedMinValue(intInput, MAX_HOLDING_MONEY,
+        NumberValidator.validateNotExceedMinValue(intInput, MIN_HOLDING_MONEY,
             INPUT_IS_NOT_A_VALID_NUMBER_OR_EXCEED_MAX);
+        return intInput;
     }
 }
