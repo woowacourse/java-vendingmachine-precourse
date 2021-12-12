@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.Objects;
+import vendingmachine.exception.ProductLeastPriceException;
 
 public class Product {
 
@@ -20,7 +21,7 @@ public class Product {
 
     private static void checkPriceLargeThanStandardPrice(int price) {
         if (price < STANDARD_PRICE) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격은 100원 이상의 값이 들어와야 합니다.");
+            throw new ProductLeastPriceException();
         }
     }
 
