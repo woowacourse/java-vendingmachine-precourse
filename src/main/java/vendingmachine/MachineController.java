@@ -6,22 +6,23 @@ public class MachineController {
 
 	private static final String REQUEST_MSG_INPUT_PRODUCT_NAME = "구입할 상품명을 입력해 주세요.";
 
-	private Machine machine;
-	private Customer customer;
+	private final Machine machine;
+	private final Customer customer;
 
 	public MachineController() {
-		machine = new Machine();
-		machine.readyToOpen();
-		customer = new Customer();
-		customer.readyToPurchase();
+		this.machine = new Machine();
+		this.machine.readyToOpen();
+		this.customer = new Customer();
+		this.customer.readyToPurchase();
 	}
 
 	public void startMachine() {
 		do {
-			customer.printCustomerMoney();
+			this.customer.printCustomerMoney();
 			machineOpen();
-		} while (machine.minimumMoneyCheck(customer));
-		customer.printCustomerMoney();
+		} while (this.machine.minimumMoneyCheck(this.customer));
+		this.customer.printCustomerMoney();
+		this.machine.giveTheChange(this.customer);
 	}
 
 	public void machineOpen() {

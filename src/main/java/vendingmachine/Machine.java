@@ -13,6 +13,8 @@ public class Machine {
 	private static final String REQUEST_MSG_MACHINE_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String REQUEST_MSG_MACHINE_PRODUCT = "상품명과 가격, 수량을 입력해주세요.";
 	private static final String ERROR_MSG_PURCHASE_PRODUCT_NAME = "[ERROR] 해당하는 상품이 없습니다.";
+	private static final String INFORMATION_MSG_MACHINE_CHANGE = "자판기가 보유한 동전";
+	private static final String INFORMATION_MSG_CHANGE = "잔돈";
 
 	private int money;
 	private HashMap<Coin, Integer> wallet;
@@ -63,6 +65,7 @@ public class Machine {
 	}
 
 	public void openWallet() {
+		System.out.println(INFORMATION_MSG_MACHINE_CHANGE);
 		for (Coin coin : Arrays.stream(Coin.values()).collect(Collectors.toList())) {
 			System.out.println(coin.getAmount() + "원 - " + this.wallet.get(coin) + "개");
 		}
@@ -105,6 +108,22 @@ public class Machine {
 			}
 		}
 		return false;
+	}
+
+	public void giveTheChange(Customer customer) {
+		System.out.println(INFORMATION_MSG_CHANGE);
+		int target = customer.getMoney();
+		for (Coin coin : Arrays.stream(Coin.values()).collect(Collectors.toList())) {
+			if (coin.getAmount() > target) {
+				continue;
+			}
+			if (this.wallet.get(coin) == 0) {
+				continue;
+			}
+			int coinCount = Math.min(target / coin.getAmount(), this.wallet.get(coin));
+			target -= coinCount * coin.getAmount();
+			System.out.println(coin.getAmount() + "원 - " + coinCount + "개");
+		}
 	}
 
 }
