@@ -34,11 +34,13 @@ public class InputView {
 
 		System.out.println(Message.ASK_ADD_ITEMS_MESSAGE);
 		String[] itemStringList = Console.readLine().split(";");
+		System.out.println();
 
 		stringItemsList = new ArrayList<String>(Arrays.asList(itemStringList));
 
 		removeBracket(stringItemsList);
 		itemList = generateItemList(stringItemsList);
+
 
 		return itemList;
 	}
@@ -48,6 +50,7 @@ public class InputView {
 
 		System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
 		String stringInputMoney = Console.readLine();
+		System.out.println();
 		inputMoney = Integer.parseInt(stringInputMoney);
 
 		return inputMoney;
@@ -58,7 +61,7 @@ public class InputView {
 
 		System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
 		buyItem = Console.readLine();
-
+		System.out.println();
 		return buyItem;
 	}
 

@@ -12,15 +12,15 @@ public class Item {
 	}
 
 	public String getName() {
-		return this.name;
+		return name;
 	}
 
 	public int getPrice() {
-		return this.price;
+		return price;
 	}
 
 	public int getStock() {
-		return this.stock;
+		return stock;
 	}
 
 	public void setStock(int stock){
