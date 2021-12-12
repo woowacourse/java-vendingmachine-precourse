@@ -38,27 +38,4 @@ public class VendingMachineTest {
         vendingMachine.splitInfoAndFillProduct(ALL_PRODUCT_INFO);
         assertThat(vendingMachine.hasProduct(productNameList)).isTrue();
     }
-
-    @Test
-    void 최소_개수_동전_반환() {
-        consumer = Consumer.from(CONSUMER_BALANCE_FROM_WOOWA);
-        vendingMachine = VendingMachine.of(MACHINE_BALANCE_FROM_WOOWA);
-
-        fillCoinsAsSelf();
-
-        vendingMachine.makeChange(consumer.getHowMuchBalance(MACHINE_BALANCE_FROM_WOOWA));
-
-        assertThat(Coin.COIN_100.isChangeCount(4)).isTrue();
-        assertThat(Coin.COIN_50.isChangeCount(1)).isTrue();
-        assertThat(Coin.COIN_500.isChangeCount(0)).isTrue();
-        assertThat(Coin.COIN_10.isChangeCount(0)).isTrue();
-    }
-
-    private void fillCoinsAsSelf() {
-        vendingMachine.fillCoinsAsBalanceAmount((machineBalance) -> {
-            if (100 <= machineBalance)
-                return 100;
-            return 50;
-        });
-    }
 }

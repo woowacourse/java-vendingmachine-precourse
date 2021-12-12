@@ -29,14 +29,6 @@ public class CoinPocketTest {
         assertThat(coinPocket.countEachCoin(Coin.COIN_50)).isEqualTo(1);
     }
 
-    @Test
-    void 랜덤() {
-        while (machineBalance > 0) {
-            machineBalance -= coinPocket.putCoinAndAddCount(machineBalance, new CoinRandomProvider());
-        }
-        assertThat(coinPocket.getAllCoinsSum()).isEqualTo(450);
-    }
-
     private void putCoin(int amount) {
         machineBalance -= coinPocket.putCoinAndAddCount(machineBalance, (i) -> amount);
     }
