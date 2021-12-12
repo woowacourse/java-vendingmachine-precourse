@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.manager;
 
 import java.util.EnumMap;
 import java.util.List;

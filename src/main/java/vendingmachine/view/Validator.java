@@ -8,10 +8,15 @@ import vendingmachine.constants.ValidateConstants;
 import vendingmachine.domain.Product;
 
 public class Validator {
-	public int validateMoney(String inputString) {
+	public int validateCommonMoney(String inputString) {
 		int number = checkNumberFormat(inputString);
-		checkOverMinimumMoney(number);
 		checkDivisionByTen(number);
+		return number;
+	}
+
+	public int validatePriceAndUserMoney(String inputString) {
+		int number = validateCommonMoney(inputString);
+		checkOverMinimumMoney(number);
 		return number;
 	}
 
@@ -20,7 +25,7 @@ public class Validator {
 		List<Product> products = new ArrayList<>();
 		for(String productString : splits) {
 			Product product = validateProduct(productString);
-			validateProductExist(products, product.getName());
+			validateProductRedundant(products, product.getName());
 			products.add(product);
 		}
 		return products;
@@ -37,16 +42,18 @@ public class Validator {
 	}
 
 	private String removeDelimiters(String productString) {
-		if(!productString.startsWith("[") || !productString.endsWith("]")) {
+		if(!productString.startsWith(ValidateConstants.PRODUCT_START_DELIMITER)
+			|| !productString.endsWith(ValidateConstants.PRODUCT_END_DELIMITER)) {
 			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_FORMAT);
 		}
-		return productString.replace("[", "").replace("]", "");
+		return productString.replace(ValidateConstants.PRODUCT_START_DELIMITER, "")
+			.replace(ValidateConstants.PRODUCT_END_DELIMITER, "");
 	}
 
 	private Product checkProductFormat(String [] splits) {
 		checkProductContentSize(splits.length);
 		String name = splits[ValidateConstants.NAME_INDEX];
-		int price = validateMoney(splits[ValidateConstants.PRICE_INDEX]);
+		int price = validatePriceAndUserMoney(splits[ValidateConstants.PRICE_INDEX]);
 		int quantity = validateQuantity(splits[ValidateConstants.QUANTITY_INDEX]);
 		return new Product(name, price, quantity);
 	}
@@ -57,7 +64,7 @@ public class Validator {
 		}
 	}
 
-	private void validateProductExist(List<Product> productList, String name) {
+	private void validateProductRedundant(List<Product> productList, String name) {
 		Product found =  productList.stream()
 			.filter(product -> name.equals(product.getName()))
 			.findAny()
@@ -105,6 +112,10 @@ public class Validator {
 	}
 
 	private void checkDivisionByTen(int number) {
+		if(number == 0) {
+			throw new IllegalArgumentException(ErrorConstants.ERROR_MONEY_ZERO);
+		}
+
 		if(number % ValidateConstants.DIVISION_VALUE != 0) {
 			throw new IllegalArgumentException(ErrorConstants.ERROR_MONEY_DIVISION);
 		}

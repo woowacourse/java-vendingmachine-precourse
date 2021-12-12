@@ -7,6 +7,8 @@ import vendingmachine.constants.ViewConstants;
 import vendingmachine.domain.Product;
 
 public class InputManager {
+	private static final int MONEY_ERROR_CODE = -1;
+
 	private final Validator validator;
 
 	public InputManager() {
@@ -14,35 +16,63 @@ public class InputManager {
 	}
 
 	public int getStorageMoney() {
-		return getMoneyNumber(ViewConstants.ASK_STORAGE_MONEY);
+		while(true) {
+			print(ViewConstants.ASK_STORAGE_MONEY);
+			String inputString = Console.readLine();
+			int money = validateStorageMoney(inputString);
+			if(money != MONEY_ERROR_CODE) {
+				return money;
+			}
+		}
+	}
+
+	private int validateStorageMoney(String inputString) {
+		try {
+			return validator.validateCommonMoney(inputString);
+		}catch (IllegalArgumentException e) {
+			print(e.getMessage());
+		}
+		return MONEY_ERROR_CODE;
 	}
 
 	public int getUserBalance() {
-		return getMoneyNumber(ViewConstants.ASK_USER_BALANCE);
-	}
-
-	public int getMoneyNumber(String askMessage) {
 		while(true) {
-			print(askMessage);
+			print(ViewConstants.ASK_USER_BALANCE);
 			String inputString = Console.readLine();
-			try {
-				return validator.validateMoney(inputString);
-			}catch (IllegalArgumentException e) {
-				print(e.getMessage());
+			int money = validateUserBalance(inputString);
+			if(money != MONEY_ERROR_CODE) {
+				return money;
 			}
 		}
+	}
+
+	private int validateUserBalance(String inputString) {
+		try {
+			return validator.validatePriceAndUserMoney(inputString);
+		}catch (IllegalArgumentException e) {
+			print(e.getMessage());
+		}
+		return MONEY_ERROR_CODE;
 	}
 
 	public List<Product> getProductList() {
 		while(true) {
 			print(ViewConstants.ASK_PRODUCT_LIST);
 			String inputString = Console.readLine();
-			try {
-				return validator.validateProductList(inputString);
-			}catch (IllegalArgumentException e) {
-				print(e.getMessage());
+			List<Product> products = validateProductList(inputString);
+			if(products != null) {
+				return products;
 			}
 		}
+	}
+
+	private List<Product> validateProductList(String inputString) {
+		try {
+			return validator.validateProductList(inputString);
+		}catch (IllegalArgumentException e) {
+			print(e.getMessage());
+		}
+		return null;
 	}
 
 	public String getProductName() {

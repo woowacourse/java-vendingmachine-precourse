@@ -2,7 +2,7 @@ package vendingmachine.controller;
 
 import java.util.EnumMap;
 
-import vendingmachine.domain.CoinStorage;
+import vendingmachine.manager.CoinStorage;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.UserBalance;
 import vendingmachine.enums.Coin;
