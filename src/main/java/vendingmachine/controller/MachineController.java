@@ -34,6 +34,7 @@ public class MachineController {
 	public void setProductList() {
 		String input = inputProductList();
 		List<String> inputList = Arrays.asList(input.split(";", -1));
+		machineService.setProducts(inputList);
 	}
 
 	public void setMoney() {
