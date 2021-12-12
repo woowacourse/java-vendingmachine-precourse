@@ -14,6 +14,12 @@ public class VendingMachine {
         this.money = new Money(0);
     }
 
+    public VendingMachine(String stringMerchandise, Changes changes) {
+        this.changes = changes;
+        this.money = new Money(0);
+        this.merchandises = new Merchandises(stringMerchandise);
+    }
+
     public Changes changes() {
         return changes;
     }

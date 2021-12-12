@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import java.util.List;
 import vendingmachine.controller.VendingMachineController;
 
 public class Application {
