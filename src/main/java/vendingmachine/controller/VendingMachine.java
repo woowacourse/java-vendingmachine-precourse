@@ -1,8 +1,10 @@
 package vendingmachine.controller;
 
 import static vendingmachine.view.InputView.*;
+import static vendingmachine.view.OutputView.*;
 
 import vendingmachine.dto.RequestHoldingMoneyDto;
+import vendingmachine.dto.ResponseAllCoinQuantity;
 import vendingmachine.service.VendingMachineService;
 
 public class VendingMachine {
@@ -15,5 +17,10 @@ public class VendingMachine {
 	public void initHoldingMoney() {
 		RequestHoldingMoneyDto requestHoldingMoneyDto = inputHoldingMoney();
 		vendingMachineService.initCoinRepository(requestHoldingMoneyDto);
+	}
+
+	public void showAllCoinQuantity() {
+		ResponseAllCoinQuantity responseAllCoinQuantity = vendingMachineService.getAllCoinQuantity();
+		outputAllCoinQuantity(responseAllCoinQuantity);
 	}
 }

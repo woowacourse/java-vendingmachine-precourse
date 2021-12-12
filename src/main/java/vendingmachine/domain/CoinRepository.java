@@ -24,4 +24,8 @@ public class CoinRepository {
 	public static void addOneQuantityByAmount(int amount) {
 		coins.get(Coin.findByAmount(amount)).add(ONE);
 	}
+
+	public static HashMap<Coin, Quantity> findAll() {
+		return coins;
+	}
 }
