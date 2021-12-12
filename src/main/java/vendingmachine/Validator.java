@@ -6,17 +6,17 @@ public class Validator {
     private static final int PRODUCT_INFO_LENGTH = 3;
 
     public static void validateMachineMoneyInput(String input) throws IllegalArgumentException {
-        validateMachineMoneyInputIsPositiveNumber(input);
-        validateMachineMoneyInputIsMultipleOf10(input);
+        validateInputIsPositiveNumber(input);
+        validateInputIsMultipleOf10(input);
     }
 
-    private static void validateMachineMoneyInputIsPositiveNumber(String input) throws IllegalArgumentException {
+    private static void validateInputIsPositiveNumber(String input) throws IllegalArgumentException {
         if (!isPositiveNumber(input)) {
             throw new IllegalArgumentException(Constant.MACHINE_MONEY_INPUT_IS_NOT_POSITIVE_NUMBER_ERROR_STRING);
         }
     }
 
-    private static void validateMachineMoneyInputIsMultipleOf10(String input) throws IllegalArgumentException {
+    private static void validateInputIsMultipleOf10(String input) throws IllegalArgumentException {
         if (Integer.parseInt(input) % 10 != 0) {
             throw new IllegalArgumentException(Constant.MACHINE_MONEY_INPUT_IS_NOT_MULTIPLE_OF_10);
         }
@@ -37,18 +37,18 @@ public class Validator {
         String[] products = input.split(";");
 
         for (String product : products) {
-            validateMachineProductInputBracket(product);
-            validateMachineProductInputDividedByComma(product);
+            validateInputEnclosedInBracket(product);
+            validateInputDividedByComma(product);
         }
     }
 
-    private static void validateMachineProductInputBracket(String product) throws IllegalArgumentException {
+    private static void validateInputEnclosedInBracket(String product) throws IllegalArgumentException {
         if (!product.startsWith("[") || !product.endsWith("]")) {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_IS_NOT_RIGHT_FORM_ERROR_STRING);
         }
     }
 
-    private static void validateMachineProductInputDividedByComma(String product) throws IllegalArgumentException {
+    private static void validateInputDividedByComma(String product) throws IllegalArgumentException {
         product = product.replaceAll("[]\\[]", "");
         String[] str = Arrays.stream(product.split(","))
                 .filter(s -> !s.isEmpty())
