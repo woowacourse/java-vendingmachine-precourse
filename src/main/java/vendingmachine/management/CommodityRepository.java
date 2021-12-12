@@ -2,6 +2,9 @@ package vendingmachine.management;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
+
+import vendingmachine.operation.validation.CheckCommoditySelection;
 
 public class CommodityRepository {
     private static final List<Commodity> commodities = new ArrayList<>();
@@ -15,16 +18,17 @@ public class CommodityRepository {
     }
     
     public static Commodity findByName(String name) {
+        CheckCommoditySelection.validationNotRegistered(name);
         return commodities.stream()
               .filter(c -> c.getName()
               .equals(name))
               .findAny()
-              .orElse(null);
+              .orElseThrow(IllegalArgumentException::new);
     }
     
     public static void reduceQuantity(Commodity commodity) {
-        Commodity original =  commodity.clone();
+        int index = commodities.indexOf(commodity);
         commodity.subtractQuantity();
-        commodities.set(commodities.indexOf(original), commodity);
+        commodities.set(index, commodity);
     }
 }
