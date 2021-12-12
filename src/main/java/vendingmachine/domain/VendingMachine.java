@@ -43,4 +43,8 @@ public class VendingMachine {
 			}
 		}
 	}
+
+	public int getInputMoney() {
+		return inputMoney;
+	}
 }

@@ -9,6 +9,7 @@ import vendingmachine.utils.Message;
 public class OutputView {
 	private static final String WON_FORMAT = "원 - ";
 	private static final String EA_FORMAT = "개";
+	private static final String BALANCE_FORMAT = "투입 금액: ";
 
 	public static void printHoldingCoins(LinkedHashMap<Coin, Integer> coins){
 		System.out.println(Message.HOLDING_COINS_MESSAGE);
@@ -19,5 +20,9 @@ public class OutputView {
 			System.out.println(key.getAmount() + WON_FORMAT + value + EA_FORMAT);
 		}
 		System.out.println();
+	}
+
+	public static void printBalance(int balance){
+		System.out.println(BALANCE_FORMAT + balance);
 	}
 }

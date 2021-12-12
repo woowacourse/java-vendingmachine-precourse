@@ -28,6 +28,7 @@ public class VendingMachineController {
 		String buyItem = InputView.buyItemInput();
 		vendingMachine.stockDeduct(buyItem);
 		vendingMachine.inputMoneyDeduct(buyItem);
+		OutputView.printBalance(vendingMachine.getInputMoney());
 	}
 
 
