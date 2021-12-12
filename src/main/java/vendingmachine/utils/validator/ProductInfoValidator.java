@@ -10,6 +10,7 @@ import vendingmachine.domain.Product;
 
 public class ProductInfoValidator {
 
+    public static final String PRODUCT_INVALID_FORMAT_ERROR_MESSAGE = "[ERROR] 상품 정보 형식이 올바르지 않습니다. \"[상품명1, 상품 가격1, 상품 수량1];[상품명2, 상품 가격2, 상품 수량2]...\" 형식으로 입력해 주세요.";
     private static final String SEMICOLON_SEPARATION_REGEX = "\\s*;\\s*";
     private static final Pattern PRODUCT_INFO_PATTERN = Pattern.compile(
         "^\\[\\s*(.*)\\s*,\\s*(.*)\\s*,\\s*(.*)\\s*\\]$");
@@ -27,6 +28,10 @@ public class ProductInfoValidator {
     private static Product getValidProduct(final String productInfo) {
 
         Matcher productInfoMatcher = PRODUCT_INFO_PATTERN.matcher(productInfo);
+
+        if (!productInfoMatcher.matches()) {
+            throw new IllegalArgumentException(PRODUCT_INVALID_FORMAT_ERROR_MESSAGE);
+        }
 
         String validName = getValidProductName(productInfoMatcher.group(PRODUCT_NAME_INDEX));
         int validPrice = getValidProductPrice(productInfoMatcher.group(PRODUCT_PRICE_INDEX));
