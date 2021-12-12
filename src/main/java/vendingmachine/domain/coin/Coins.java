@@ -85,7 +85,7 @@ public class Coins {
 			.filter(entry -> entry.getKey().getAmount() <= value)
 			.map(entry -> entry.getKey())
 			.max(Comparator.comparing(Coin::getAmount))
-			.orElseThrow(NoSuchElementException::new);
+			.orElseThrow(() -> new NoSuchElementException("[ERROR] 해당 값 이하의 코인이 존재하지 않습니다."));
 	}
 
 	public boolean isEmpty() {

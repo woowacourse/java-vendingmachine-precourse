@@ -11,14 +11,9 @@ public class VendingMachineController {
 	private VendingMachine vendingMachine;
 
 	public void init() {
-		try {
-			initVendingMachine();
-			buyItems();
-			returnChanges();
-		} catch (Exception e) {
-			ErrorView.printErrorMesasge(e.getMessage());
-			init();
-		}
+		initVendingMachine();
+		buyItems();
+		returnChanges();
 	}
 
 	private void initVendingMachine() {
@@ -30,17 +25,22 @@ public class VendingMachineController {
 	}
 
 	private Coins initCoins() {
-		String initialLeftMoney = InputView.getInitialLeftMoney();
-		Coins leftCoins = Coins.generateCoinsRandomlyFromTotalAmount(initialLeftMoney);
-		OutputView.showInitialLeftCoins(leftCoins);
-		return leftCoins;
+		try {
+			String initialLeftMoney = InputView.getInitialLeftMoney();
+			Coins leftCoins = Coins.generateCoinsRandomlyFromTotalAmount(initialLeftMoney);
+			OutputView.showInitialLeftCoins(leftCoins);
+			return leftCoins;
+		} catch (IllegalArgumentException e) {
+			ErrorView.printErrorMesasge(e.getMessage());
+			return initCoins();
+		}
 	}
 
 	private Menus initMenus() {
 		try {
 			String menuInfos = InputView.getMenuInfo();
 			return Menus.from(menuInfos);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			return initMenus();
 		}
@@ -50,7 +50,7 @@ public class VendingMachineController {
 		try {
 			String inputMoney = InputView.getMoney();
 			vendingMachine.putMoney(inputMoney);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			putMoneyToVendingMachine();
 		}
@@ -72,7 +72,7 @@ public class VendingMachineController {
 		String menuToBuy = InputView.getMenuToBuy();
 		try {
 			vendingMachine.buy(menuToBuy);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			ErrorView.printErrorMesasge(e.getMessage());
 			buyItem();
 		}

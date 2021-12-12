@@ -26,7 +26,7 @@ public enum Coin {
 		return Arrays.stream(coins)
 			.filter(coin -> coin.getAmount() == amount)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("해당 가격의 코인은 존재하지 않습니다."));
+			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 가격의 코인은 존재하지 않습니다."));
 	}
 
 	public static Coin getMinPriceCoin() {
