@@ -9,6 +9,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Catalog;
 import vendingmachine.repository.CatalogRepository;
+import vendingmachine.service.exception.InputExceptionService;
 import vendingmachine.view.exception.ErrorMessage;
 
 public class CatalogService {
@@ -73,6 +74,7 @@ public class CatalogService {
 		int price = parseToInt(priceString);
 		checkModTen(price);
 		checkZeroOrPositiveInt(price);
+		InputExceptionService.checkMinimumPrice(price);
 		return price;
 	}
 

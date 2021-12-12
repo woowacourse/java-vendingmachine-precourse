@@ -14,6 +14,8 @@ public class InputExceptionService {
 	private static final String CATALOG_SIZE_ERROR_MESSAGE = "각 상품은 [상품명,가격,수량] 형식으로 입력되어야 하고, 각 상품은 ';' 로 구분되어야 합니다.";
 	private static final int CATALOG_SIZE = 3;
 	private static final String CATALOG_DUPLICATE_ERROR_MESSAGE = "중복되는 상품명이 포함되어 있습니다.";
+	private static final int CATALOG_MINIMUM_PRICE = 100;
+	private static final String CATALOG_MINIMUM_PRICE_ERROR_MESSAGE = "상품 가격은 최소 100원 이상이어야 합니다";
 
 	public static void checkZeroOrPositiveInt(int input) {
 		if (input < 0) {
@@ -56,6 +58,12 @@ public class InputExceptionService {
 	public static void checkCatalogAlreadyExist(List<Catalog> catalogList, Catalog catalog) {
 		if (catalogList.contains(catalog)) {
 			throw new IllegalArgumentException(CATALOG_DUPLICATE_ERROR_MESSAGE);
+		}
+	}
+
+	public static void checkMinimumPrice(int price) {
+		if(price <CATALOG_MINIMUM_PRICE ){
+			throw new IllegalArgumentException(CATALOG_MINIMUM_PRICE_ERROR_MESSAGE);
 		}
 	}
 }
