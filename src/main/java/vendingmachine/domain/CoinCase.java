@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.HashMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.utils.validator.ProductInfoValidator;
 
 public class CoinCase {
 

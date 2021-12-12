@@ -51,19 +51,19 @@ public class ProductInfoValidator {
         return new Product(validName, validPrice, validStock);
     }
 
-    private static String getValidProductName(final String name) { // TODO implement Exception cases
+    private static String getValidProductName(final String name) {
         validateIsNotDropped(name);
         validateName(name);
         return name;
     }
 
-    private static void validateName(String name) {
+    public static void validateName(String name) {
         if (!PRODUCT_NAME_PATTERN.matcher(name).matches()) {
             throw new IllegalArgumentException(INVALID_NAME_ERROR_MESSAGE);
         }
     }
 
-    private static int getValidProductPrice(final String price) { // TODO implement Exception cases
+    private static int getValidProductPrice(final String price) {
         validateIsNotDropped(price);
         int intPrice = NumberValidator.getValidNumber(price, INVALID_NUMBER_PRICE_ERROR_MESSAGE);
         NumberValidator.validateNotExceedMaxValue(intPrice, MAX_PRICE_AND_STOCK,
@@ -73,7 +73,7 @@ public class ProductInfoValidator {
         return intPrice;
     }
 
-    private static int getValidProductStock(final String stock) { // TODO implement Exception cases
+    private static int getValidProductStock(final String stock) {
         validateIsNotDropped(stock);
         int intStock = NumberValidator.getValidNumber(stock, INVALID_NUMBER_STOCK_ERROR_MESSAGE);
         NumberValidator.validateNotExceedMaxValue(intStock, MAX_PRICE_AND_STOCK,
@@ -82,7 +82,7 @@ public class ProductInfoValidator {
         return intStock;
     }
 
-    private static void validateIsNotDropped(final String input) {
+    public static void validateIsNotDropped(final String input) {
         if (input.length() == 0) {
             throw new IllegalArgumentException(DROPPED_INFO_ERROR_MESSAGE);
         }
