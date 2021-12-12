@@ -10,13 +10,10 @@ public class Product {
     private static final int NAME_INDEX = 0;
     private static final int PRICE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
-    private static final int DEFAULT_PRICE = 100;
-    private static final int PRICE_QUOTIENT = 10;
-    private static final int REMAINDER = 0;
     private static final int DEFAULT_QUANTITY = 0;
 
-    private final String name;
-    private final int price;
+    private final Name name;
+    private final Price price;
     private int quantity;
 
     public Product(String inputProduct) {
@@ -27,8 +24,8 @@ public class Product {
         String[] splitInputProduct = inputProduct.split(INPUT_PRODUCT_SPLIT_REGEX, INPUT_PRODUCT_SPLIT_LIMIT);
         validateSplitInputProduct(splitInputProduct);
 
-        this.name = splitInputProduct[NAME_INDEX];
-        this.price = Integer.parseInt(splitInputProduct[PRICE_INDEX]);
+        this.name = new Name(splitInputProduct[NAME_INDEX]);
+        this.price = new Price(splitInputProduct[PRICE_INDEX]);
         this.quantity = Integer.parseInt(splitInputProduct[QUANTITY_INDEX]);
     }
 
@@ -39,46 +36,7 @@ public class Product {
     }
 
     private void validateSplitInputProduct(String[] splitInputProduct) {
-        validateName(splitInputProduct[NAME_INDEX]);
-        validatePrice(splitInputProduct[PRICE_INDEX]);
         validateQuantity(splitInputProduct[QUANTITY_INDEX]);
-    }
-
-    private void validateName(String name) {
-        validateEmpty(name);
-        validateBlank(name);
-    }
-
-    private void validateEmpty(String name) {
-        if (name.isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validateBlank(String name) {
-        if (name.trim().isEmpty()) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validatePrice(String inputPrice) {
-        validateNumberFormat(inputPrice);
-        int price = Integer.parseInt(inputPrice);
-
-        validateNumberSize(price);
-        validateDivide(price);
-    }
-
-    private void validateNumberSize(int price) {
-        if (price < DEFAULT_PRICE) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    private void validateDivide(int price) {
-        if (price % PRICE_QUOTIENT != REMAINDER) {
-            throw new IllegalArgumentException();
-        }
     }
 
     private void validateQuantity(String inputQuantity) {
@@ -109,7 +67,7 @@ public class Product {
     }
 
     public int getPrice() {
-        return price;
+        return price.getPrice();
     }
 
     public void decreaseQuantity() {
@@ -124,7 +82,7 @@ public class Product {
     }
 
     public boolean isSameName(String productPurchaseName) {
-        if (this.name.equals(productPurchaseName)) {
+        if (this.name.isSame(productPurchaseName)) {
             return true;
         }
         return false;
