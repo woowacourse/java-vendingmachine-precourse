@@ -35,7 +35,7 @@ public enum Coin {
 
 	private static int calculateReturnedCoinAmount(ArrayList<Item> coinList, int coinValue, int money) {
 		return coinList.stream()
-			.filter(eachCoin -> eachCoin.isEqualThisPrice(money))
+			.filter(eachCoin -> eachCoin.isEqualThisPrice(coinValue))
 			.map(eachCoin -> Math.min(money / coinValue, eachCoin.getAmount()))
 			.findFirst()
 			.get();
