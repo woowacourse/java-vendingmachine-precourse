@@ -10,6 +10,12 @@ public class Products {
         this.products = products;
     }
 
+    public boolean isPossiblePurchase(InvestmentMoney investmentMoney) {
+        return products.stream()
+            .filter(Product::isExistQuantity)
+            .anyMatch(investmentMoney::isPay);
+    }
+
     public Optional<Product> findByName(String productPurchaseName) {
         return products.stream()
             .filter(product -> product.isSameName(productPurchaseName))

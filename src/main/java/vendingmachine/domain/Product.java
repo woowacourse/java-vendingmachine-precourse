@@ -101,6 +101,13 @@ public class Product {
         }
     }
 
+    public boolean isExistQuantity() {
+        if (quantity > DEFAULT_QUANTITY) {
+            return true;
+        }
+        return false;
+    }
+
     public int getPrice() {
         return price;
     }

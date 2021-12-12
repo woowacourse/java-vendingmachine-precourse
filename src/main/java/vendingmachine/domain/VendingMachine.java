@@ -9,6 +9,13 @@ public class VendingMachine {
         this.products = products;
     }
 
+    public boolean isOperate(InvestmentMoney investmentMoney) {
+        if (products.isPossiblePurchase(investmentMoney)) {
+            return true;
+        }
+        return false;
+    }
+
     public void buy(InvestmentMoney investmentMoney, ProductPurchase productPurchase) {
         String productPurchaseName = productPurchase.getName();
         Product product = products.findByName(productPurchaseName).orElseThrow(IllegalArgumentException::new);

@@ -44,6 +44,13 @@ public class InvestmentMoney {
         investmentMoney -= product.getPrice();
     }
 
+    public boolean isPay(Product product) {
+        if (investmentMoney >= product.getPrice()) {
+            return true;
+        }
+        return false;
+    }
+
     @Override
     public String toString() {
         return investmentMoney + "원";
