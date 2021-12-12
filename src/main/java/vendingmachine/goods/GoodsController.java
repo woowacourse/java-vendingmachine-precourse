@@ -10,4 +10,8 @@ public class GoodsController {
         this.goodsList = goodsList;
     }
 
+    public boolean checkGoodsName(Goods goods, String name) {
+        return goods.name == name;
+    }
+
 }
