@@ -71,9 +71,22 @@ public class Machine {
 		System.out.println(REQUEST_MSG_MACHINE_PRODUCT);
 		String userInput = Console.readLine();
 		String[] productList = userInput.split(";");
+		try {
+			for (String productInfo : productList) {
+				Validator.productInput(removeSquareBracket(productInfo));
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			inputMachineProduct();
+		}
 		for (String productInfo : productList) {
-			products.add(new Product(productInfo.substring(1,productInfo.length() - 1)));
+			products.add(new Product(removeSquareBracket(productInfo)));
 		}
 	}
+
+	public String removeSquareBracket(String input) {
+		return input.substring(1,input.length() - 1);
+	}
+
 
 }
