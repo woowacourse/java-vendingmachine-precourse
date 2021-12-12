@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Objects;
 import vendingmachine.exception.ProductLeastPriceException;
+import vendingmachine.exception.ProductNotDivisableException;
 
 public class Product {
 
@@ -27,7 +28,7 @@ public class Product {
 
     private static void checkPriceDivisableByLeastCoin(int price) {
         if (price % Coin.leastCoin() != 0) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격은 10원으로 나누어떠러져야 합니다.");
+            throw new ProductNotDivisableException();
         }
     }
 
