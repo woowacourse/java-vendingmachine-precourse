@@ -51,6 +51,23 @@ public class InvestmentMoney {
         return false;
     }
 
+    public boolean isPossibleChange(Coin coin) {
+        if (investmentMoney >= coin.getAmount()) {
+            return true;
+        }
+        return false;
+    }
+
+    public int calculateCoinQuantity(int amount) {
+        return investmentMoney / amount;
+    }
+
+    public int trade(int amount, int quantity) {
+        int minCoinQuantity = Math.min(investmentMoney / amount, quantity);
+        investmentMoney -= amount * minCoinQuantity;
+        return minCoinQuantity;
+    }
+
     @Override
     public String toString() {
         return investmentMoney + "원";

@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,5 +13,19 @@ public class PossessionCoins {
 
     public List<PossessionCoin> getPossessionCoins() {
         return Collections.unmodifiableList(possessionCoins);
+    }
+
+    public List<Change> takeChange(InvestmentMoney investmentMoney) {
+        List<Change> changes = new ArrayList<>();
+
+        for (PossessionCoin possessionCoin : possessionCoins) {
+            Coin coin = possessionCoin.getCoin();
+            if (possessionCoin.isExistQuantity() && investmentMoney.isPossibleChange(coin)) {
+                int coinQuantity = possessionCoin.calculate(investmentMoney);
+                changes.add(new Change(coin, coinQuantity));
+            }
+        }
+
+        return changes;
     }
 }
