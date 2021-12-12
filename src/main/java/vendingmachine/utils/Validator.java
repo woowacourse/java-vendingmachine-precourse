@@ -24,4 +24,11 @@ public class Validator {
 				Messages.ERROR_NOT_VALID_NAME.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
+
+	private static void validateRemainder(String input, int minValue) throws IllegalArgumentException {
+		if (Integer.valueOf(input) % minValue != 0) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_DIVIDABLE_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
+	}
 }
