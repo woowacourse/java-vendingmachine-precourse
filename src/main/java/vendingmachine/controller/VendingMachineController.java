@@ -14,19 +14,18 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = initVendingMachine();
 		OutputView.printChanges(vendingMachine.getChanges());
 		OutputView.printItemSettingMessage();
-		List<Item> items = initItem();
-
+		initVendingMachineItem(vendingMachine);
 	}
 
-	private List<Item> initItem() {
-		try{
+	private void initVendingMachineItem(VendingMachine vendingMachine) {
+		try {
 			String inputItemText = InputView.inputText();
 			List<Item> items = Converter.toItems(inputItemText);
 			System.out.println(items);
-			return items;
-		} catch(IllegalArgumentException e){
+			vendingMachine.initItemList(items);
+		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
-			return initItem();
+			initVendingMachineItem(vendingMachine);
 		}
 	}
 

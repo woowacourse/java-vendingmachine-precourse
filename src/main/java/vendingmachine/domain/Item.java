@@ -11,6 +11,10 @@ public class Item {
 		this.num = num;
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	@Override
 	public String toString() {
 		return "Item{" +

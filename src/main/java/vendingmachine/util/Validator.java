@@ -1,9 +1,13 @@
 package vendingmachine.util;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 
 import vendingmachine.constant.ErrorConst;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Item;
 
 public class Validator {
 	public static void validateInitialMoney(int money) {
@@ -38,7 +42,6 @@ public class Validator {
 		if (isNotMatchingReg(m)) {
 			throw new IllegalArgumentException(ErrorConst.ITEM_OUT_OF_FORMAT);
 		}
-
 	}
 
 	private static boolean isNotMatchingReg(Matcher m) {
