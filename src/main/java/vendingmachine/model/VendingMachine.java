@@ -1,8 +1,6 @@
 package vendingmachine.model;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class VendingMachine {
 
@@ -25,20 +23,6 @@ public class VendingMachine {
 		return products;
 	}
 
-	public Map<Integer, Integer> getChanges() {
-		Map<Integer, Integer> change = new HashMap<>();
-		for (CoinCase coinCase : coinCases) {
-			if (remainInsertMoney == INITIAL_VALUE) {
-				break;
-			}
-			int coinType = coinCase.getCoin().getAmount();
-			int changeCount = coinCase.returnChange(remainInsertMoney / coinType);
-			remainInsertMoney -= changeCount * coinType;
-			change.put(coinType, changeCount);
-		}
-		return change;
-	}
-
 	public void readyToSellProduct(String selectedProduct) {
 		for (Product product : products) {
 			if (product.getName().equals(selectedProduct)) {
@@ -47,7 +31,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void sellProduct(Product product) {
+	private void sellProduct(Product product) {
 		if (!product.isSoldOut()) {
 			product.sellProduct();
 			useMoneyToBuy(product);
@@ -57,6 +41,10 @@ public class VendingMachine {
 	public boolean isReturnChangeCondition() {
 		return getLowestProductPrice() > remainInsertMoney || isSoldOutAllProducts()
 			|| !hasProductsUserCanBuy();
+	}
+
+	public Changes returnChanges() {
+		return new Changes(coinCases, remainInsertMoney);
 	}
 
 	private boolean isSoldOutAllProducts() {

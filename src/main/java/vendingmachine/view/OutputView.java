@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import vendingmachine.model.Changes;
 import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
 import vendingmachine.model.VendingMachine;
@@ -74,10 +75,10 @@ public class OutputView {
 		System.out.println(ASK_PRODUCT_NAME);
 	}
 
-	public static void printChanges(Map<Integer, Integer> changes) {
+	public static void printChanges(Changes changes) {
 		printNewLine();
 		System.out.println(CHANGE);
-		changes.entrySet()
+		changes.getChanges().entrySet()
 			.stream()
 			.filter(coin -> coin.getValue() > INITIAL_VALUE)
 			.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))

@@ -18,7 +18,7 @@ public class VendingMachineController {
 			runVendingMachine(vendingMachine);
 		}
 		OutputView.printInsertedMoney(vendingMachine);
-		OutputView.printChanges(vendingMachine.getChanges());
+		OutputView.printChanges(vendingMachine.returnChanges());
 	}
 
 	private static VendingMachine initVendingMachine() {
