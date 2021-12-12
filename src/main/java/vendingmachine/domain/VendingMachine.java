@@ -41,16 +41,15 @@ public class VendingMachine {
     private Product transferRawDataToEntity(String productRawData) {
 
         String[] productInfo = productRawData.split(",");
-        // TODO: 예외 처리
-        if (productInfo.length != PRODUCT_INFORMATION_SIZE) return null;
+        Validator.validateProductInformationSize(productInfo.length);
+
         return new Product(productInfo[0], productInfo[1], productInfo[2]);
 
     }
 
     public void insertProducts(String products) {
         StringTokenizer stringTokenizer = new StringTokenizer(products, ";");
-        // TODO: 예외 처리
-        if(!stringTokenizer.hasMoreTokens()) return;
+        Validator.validateProductInformationIsNull(stringTokenizer);
 
         while(stringTokenizer.hasMoreTokens()) {
             String currentProduct = stringTokenizer.nextToken();
