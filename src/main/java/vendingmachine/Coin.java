@@ -36,7 +36,7 @@ public enum Coin {
         userAmount -= returnCount * amount;
 
         if (returnCount > 0) {
-            System.out.println(amount + "원 - " + returnCount + "개");
+            printCoinInfo();
         }
 
         return userAmount;

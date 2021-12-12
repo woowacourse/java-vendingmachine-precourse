@@ -36,7 +36,7 @@ public class Machine {
     }
 
     private void setProductMap() {
-        System.out.println("\n상품명과 가격, 수량을 입력해주세요.");
+        Message.SET_PRODUCT_MAP.print();
         while (true) {
             String productListString;
             try {

@@ -74,11 +74,11 @@ public class ProductMap {
         ProductInfo targetProduct = productMap.get(name);
 
         if (targetProduct.outOfStock()) {
-            System.out.println("해당 상품 재고가 없습니다!");
+            Message.OUT_OF_STOCK.print();
             return NON_SELLABLE;
         }
         if (targetProduct.excessAmount(userAmount)) {
-            System.out.println("금액이 부족합니다!");
+            Message.EXCESS_AMOUNT.print();
             return NON_SELLABLE;
         }
         return SELLABLE;
@@ -114,12 +114,10 @@ public class ProductMap {
 
     private String toName(String name) {
         if (isNullString(name)) {
-            System.out.println("[ERROR] 상품 이름은 한 글자 이상으로 입력해주세요.");
-            throw new IllegalArgumentException();
+            Error.NULL_STRING_NAME.generate();
         }
         if (isExisting(name)) {
-            System.out.println("[ERROR] 상품 이름은 모두 다르게 입력해주세요.");
-            throw new IllegalArgumentException();
+            Error.REDUNDANT_NAME.generate();
         }
         return name;
     }

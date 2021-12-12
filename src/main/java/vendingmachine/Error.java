@@ -4,9 +4,11 @@ public enum Error {
     COUNT_FORM("[ERROR] 상품 수량은 자연수로 입력해주세요."),
     AMOUNT_FORM("[ERROR] 가격(금액)은 10으로 나누어 떨어지는 자연수로 입력해주세요."),
     PRODUCT_INPUT_FORM("[ERROR] 상품 입력 형식에 맞게 입력해주세요."),
-    PRODUCT_NON_EXIST("[ERROR] 존재하는 상품만 입력해주세요.");
+    PRODUCT_NON_EXIST("[ERROR] 존재하는 상품만 입력해주세요."),
+    NULL_STRING_NAME("[ERROR] 상품 이름은 한 글자 이상으로 입력해주세요."),
+    REDUNDANT_NAME("[ERROR] 상품 이름은 모두 다르게 입력해주세요.");
 
-    private String errorMessage;
+    private final String errorMessage;
     Error(String errorMessage){
         this.errorMessage=errorMessage;
     }

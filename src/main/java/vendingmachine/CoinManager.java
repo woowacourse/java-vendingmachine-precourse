@@ -35,14 +35,14 @@ public class CoinManager {
     }
 
     public void printCoins() {
-        System.out.println("\n자판기가 보유한 동전");
+        Message.PRINT_COINS.print();
         for (Coin c : Coin.values()) {
             c.printCoinInfo();
         }
     }
 
     public void returnCoins(int userAmount) {
-        System.out.println("잔돈");
+        Message.RETURN_COINS.print();
         for (Coin c : Coin.values()) {
             userAmount = c.returnCoin(userAmount);
         }

@@ -8,17 +8,18 @@ public class InputManager {
     }
 
     public static int getHeldAmount() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        Message.GET_HELD_AMOUNT.print();
+        System.out.println();
         return getAmount();
     }
 
     public static int getUserAmount() {
-        System.out.println("\n투입 금액을 입력해 주세요.");
+        Message.GET_USER_AMOUNT.print();
         return getAmount();
     }
 
     public static String getProductName(ProductMap productMap){
-        System.out.println("구매할 상품명을 입력해 주세요.");
+        Message.GET_PRODUCT_NAME.print();
         return getName(productMap);
     }
 
