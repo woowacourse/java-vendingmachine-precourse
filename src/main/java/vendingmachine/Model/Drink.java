@@ -2,6 +2,8 @@ package vendingmachine.Model;
 
 import vendingmachine.Constant.Constant;
 
+import java.util.List;
+
 public class Drink {
     private String name;
     private int price;
@@ -43,5 +45,10 @@ public class Drink {
             return true;
         }
         return false;
+    }
+
+    public List<String> addNameToList(List<String> drinkNames) {
+        drinkNames.add(name);
+        return drinkNames;
     }
 }

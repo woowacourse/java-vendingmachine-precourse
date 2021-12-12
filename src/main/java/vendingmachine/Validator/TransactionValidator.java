@@ -6,7 +6,7 @@ import vendingmachine.SystemMessage.ErrorMessage;
 public class TransactionValidator {
     public static boolean isValidateChoice(String input, VendingMachine vendingMachine) {
         try {
-            if (vendingMachine.isDrinkInList(input)) {
+            if (!vendingMachine.isDrinkInList(input)) {
                 throw new IllegalArgumentException();
             }
         } catch (IllegalArgumentException e) {

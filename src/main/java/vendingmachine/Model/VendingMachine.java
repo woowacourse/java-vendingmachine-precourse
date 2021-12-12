@@ -3,6 +3,7 @@ package vendingmachine.Model;
 import vendingmachine.Constant.Constant;
 import vendingmachine.View.OutputView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class VendingMachine {
@@ -15,11 +16,11 @@ public class VendingMachine {
     }
 
     public boolean isDrinkInList(String drinkName) {
-        int isDrinkFound = Constant.TRUE;
+        List<String> drinkNames = new ArrayList<>();
         for (Drink drink : drinks) {
-            isDrinkFound *= drink.isSameDrink(drinkName);
+            drink.addNameToList(drinkNames);
         }
-        return (isDrinkFound == Constant.TRUE);
+        return drinkNames.contains(drinkName);
     }
 
     public boolean isEmpty() {
@@ -40,12 +41,11 @@ public class VendingMachine {
     }
 
     public Drink findDrinkWithName(String userChoice) {
+        List<String> drinkNames = new ArrayList<>();
         for (Drink drink : drinks) {
-            if (drink.isSameDrink(userChoice) == Constant.TRUE) {
-                return drink;
-            }
+            drink.addNameToList(drinkNames);
         }
-        return null;
+        return drinks.get(drinkNames.indexOf(userChoice));
     }
 
     public void calculateChange(User user, OutputView outputView) {
