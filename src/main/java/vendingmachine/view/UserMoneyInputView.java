@@ -13,4 +13,14 @@ public class UserMoneyInputView implements InputView {
 			return BLANK_STRING;
 		}
 	}
+
+	public String getInput() {
+		OutputView.noticePayMoneyInput();
+		String nowInput = BLANK_STRING;
+		while (nowInput.isEmpty()) {
+			String userInput = camp.nextstep.edu.missionutils.Console.readLine();
+			nowInput = checkAllConditions(userInput);
+		}
+		return nowInput;
+	}
 }
