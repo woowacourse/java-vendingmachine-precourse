@@ -13,6 +13,7 @@ public class ConsoleInputView implements InputView {
     private static final String WANTED_ITEM_NAME_INPUT_MESSAGE = "구매할 상품명을 입력해 주세요.";
 
     private static final String ERROR_SYMBOL = "[ERROR] ";
+    private static final String NEW_LINE = "\n";
 
     @Override
     public String inputVendingMachineMoney() {
@@ -23,24 +24,29 @@ public class ConsoleInputView implements InputView {
     @Override
     public String inputCustomerMoney() {
         System.out.println(CUSTOMER_MONEY_INPUT_MESSAGE);
-        return readLine();
+        String userInput = readLine();
+        System.out.println();
+        return userInput;
     }
 
     @Override
     public String inputWantedItemName() {
         System.out.println(WANTED_ITEM_NAME_INPUT_MESSAGE);
-        return readLine();
+        String userInput = readLine();
+        System.out.println();
+        return userInput;
     }
 
     @Override
     public void showErrorMessage(final String errorMessage) {
-        System.out.println(ERROR_SYMBOL + errorMessage);
+        System.out.println(ERROR_SYMBOL + errorMessage + NEW_LINE);
     }
 
     @Override
     public List<InputItemDTO> inputItemInfos() {
         System.out.println(ITEMS_INPUT_MESSAGE);
         String userInput = readLine();
+        System.out.println();
         InputItemInfos inputItemInfos = new InputItemInfos();
         return inputItemInfos.generateInputItemDTOs(userInput);
     }
