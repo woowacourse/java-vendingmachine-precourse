@@ -21,8 +21,7 @@ public class InputView {
 
     private static final String INVESTMENT_MONEY_MESSAGE = "\n투입 금액을 입력해 주세요.";
 
-    private static final String INVESTMENT_MONEY_FORMAT = "\n투입 금액: %s\n";
-    public static final String PRODUCT_PURCHASE_MESSAGE = "구매할 상품명을 입력해 주세요.";
+    private static final String PRODUCT_PURCHASE_MESSAGE = "구매할 상품명을 입력해 주세요.";
 
     private InputView() {
     }
@@ -55,8 +54,7 @@ public class InputView {
         return new InvestmentMoney(Console.readLine());
     }
 
-    public static ProductPurchase getProductPurchase(InvestmentMoney investmentMoney) {
-        System.out.printf(INVESTMENT_MONEY_FORMAT, investmentMoney);
+    public static ProductPurchase getProductPurchase() {
         System.out.println(PRODUCT_PURCHASE_MESSAGE);
         return new ProductPurchase(Console.readLine());
     }
