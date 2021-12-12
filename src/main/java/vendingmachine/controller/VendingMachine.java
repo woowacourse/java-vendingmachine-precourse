@@ -4,6 +4,7 @@ import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
 import vendingmachine.dto.RequestHoldingMoneyDto;
+import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.ResponseAllCoinQuantity;
 import vendingmachine.service.VendingMachineService;
 
@@ -22,5 +23,10 @@ public class VendingMachine {
 	public void showAllCoinQuantity() {
 		ResponseAllCoinQuantity responseAllCoinQuantity = vendingMachineService.getAllCoinQuantity();
 		outputAllCoinQuantity(responseAllCoinQuantity);
+	}
+
+	public void registerProducts() {
+		RequestRegisterProductsDto requestHoldingMoneyDto = inputRegisterProducts();
+		vendingMachineService.registerProducts(requestHoldingMoneyDto);
 	}
 }

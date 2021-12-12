@@ -6,6 +6,7 @@ import java.util.List;
 
 import vendingmachine.domain.CoinRepository;
 import vendingmachine.dto.RequestHoldingMoneyDto;
+import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.ResponseAllCoinQuantity;
 import vendingmachine.enums.Coin;
 
@@ -27,5 +28,9 @@ public class VendingMachineService {
 
 	public ResponseAllCoinQuantity getAllCoinQuantity() {
 		return new ResponseAllCoinQuantity(CoinRepository.findAll());
+	}
+
+	public void registerProducts(RequestRegisterProductsDto requestHoldingMoneyDto) {
+		// 기능 추가
 	}
 }
