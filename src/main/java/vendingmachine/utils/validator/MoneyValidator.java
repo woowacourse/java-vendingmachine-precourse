@@ -1,6 +1,6 @@
 package vendingmachine.utils.validator;
 
-import static vendingmachine.utils.ErrorMessage.*;
+import static vendingmachine.utils.message.ErrorMessage.*;
 
 
 import java.util.List;

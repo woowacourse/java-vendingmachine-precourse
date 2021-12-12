@@ -9,7 +9,7 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.utils.SystemMessage;
+import vendingmachine.utils.message.SystemMessage;
 
 public class InputView {
 

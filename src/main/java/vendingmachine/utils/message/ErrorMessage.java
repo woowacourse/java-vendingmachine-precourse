@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.utils.message;
 
 public enum ErrorMessage {
 	ERROR_HEADER("[ERROR] "),

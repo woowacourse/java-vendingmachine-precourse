@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import vendingmachine.utils.ErrorMessage;
+import vendingmachine.utils.message.ErrorMessage;
 
 public class Products {
 	private static final int NAME_INDEX = 0;

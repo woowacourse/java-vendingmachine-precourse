@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.utils.ErrorMessage;
+import vendingmachine.utils.message.ErrorMessage;
 
 public class ProductValidator {
 
