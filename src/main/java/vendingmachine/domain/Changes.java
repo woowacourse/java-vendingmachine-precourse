@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -41,5 +42,12 @@ public class Changes {
 		}
 
 		return zeroCoinMap;
+	}
+
+	public List<Coin> orderByCoin() {
+		return coinMap.keySet()
+			.stream()
+			.sorted()
+			.collect(Collectors.toList());
 	}
 }
