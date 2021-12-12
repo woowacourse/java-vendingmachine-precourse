@@ -14,7 +14,6 @@ public enum Coin {
 
     private final int amount;
     public int number;
-    public int currentAmount = 0;
 
     Coin(final int amount, int number) {
         this.amount = amount;
@@ -23,6 +22,22 @@ public enum Coin {
 
     public void setCoinNumber() {
         this.number++;
+    }
+
+    public int getCoin500AllAmount() {
+        return COIN_500.amount * COIN_500.number;
+    }
+
+    public int getCoin100AllAmount() {
+        return COIN_100.amount * COIN_100.number;
+    }
+
+    public int getCoin50AllAmount() {
+        return COIN_50.amount * COIN_50.number;
+    }
+
+    public int getCoin10AllAmount() {
+        return COIN_10.amount * COIN_10.number;
     }
 
     public List<Integer> getAllCoinsAmount() {
@@ -43,11 +58,6 @@ public enum Coin {
         return pickAmount;
     }
 
-    public void setCurrentAmount(int amount) {
-        this.currentAmount += amount;
-    }
+   
 
-    public boolean isSummation(int holdingAmount) {
-        return this.currentAmount == holdingAmount;
-    }
 }
