@@ -3,24 +3,26 @@ package vendingmachine.Model;
 import java.util.ArrayList;
 
 public class BeverageGroup {
+	private static final int NO_PRICE = 0;
+
 	private final ArrayList<Beverage> beverages = new ArrayList<>();
 
 	public void add(Beverage beverage) {
 		beverages.add(beverage);
 	}
 
-	public Beverage getBeverages(String name) {
+	public Beverage getBeverage(String nameString) {
 		return beverages.stream()
-			.filter(beverage -> beverage.name.equals(name))
-			.findAny()
+			.filter(beverage -> beverage.name.equals(nameString))
+			.findFirst()
 			.orElse(null);
 	}
 
 	public int getMinPrice() {
 		return beverages.stream()
-			.map(beverage -> beverage.price)
-			.max(Integer::compare)
-			.orElse(0);
+			.mapToInt(beverage -> beverage.price)
+			.min()
+			.orElse(NO_PRICE);
 	}
 
 	public String[] getNames() {
