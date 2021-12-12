@@ -10,11 +10,10 @@ public class VendingMachine {
 
 	public VendingMachine() {
 		insertedMoney = 0;
-		changes = new Changes();
 	}
 
 	public void setCoins(String initCoin) {
-		changes.setCoinList(initCoin);
+		changes = new Changes(initCoin);
 	}
 
 	public int countCoin(Coin coin) {

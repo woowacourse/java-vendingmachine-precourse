@@ -1,6 +1,5 @@
 package vendingmachine.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import vendingmachine.service.CountingCoinForGivingChangesService;
@@ -11,12 +10,7 @@ public class Changes {
 	private List<Integer> coinList;
 	private int changes;
 
-	public Changes() {
-		coinList = new ArrayList<Integer>();
-		changes = 0;
-	}
-
-	public void setCoinList(String initCoin) {
+	public Changes(String initCoin) {
 		changes = SettingMoneyService.setMoney(initCoin);
 		coinList = MakingRandomCoinService.getRandomCoinList(changes);
 	}
