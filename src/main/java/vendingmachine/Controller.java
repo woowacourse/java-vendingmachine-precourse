@@ -24,7 +24,10 @@ public class Controller {
         if (!machine.isReadyToStartBuying()) {
             requestMachineInfo();
         }
+        buyProduct();
+    }
 
+    private void buyProduct() {
         System.out.printf((Constant.REMAIN_MONEY) + "%n", machine.remainMoney());
         if (!machine.canBuyWith(machine.remainMoney())) {
             return;
@@ -33,7 +36,10 @@ public class Controller {
 
         if (!machine.hasProduct(nameToBuy)) {
             System.out.println(Constant.MACHINE_DONT_HAVE_PRODUCT_ERROR_STRING);
-            startBuying();
+            buyProduct();
+            return;
         }
+        machine.buy(nameToBuy);
+        buyProduct();
     }
 }

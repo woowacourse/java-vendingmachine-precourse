@@ -18,4 +18,16 @@ public class Product {
     public boolean isPriceLowerOrEqualWith(int price) {
         return this.price <= price;
     }
+
+    public void countDownQuantity() {
+        quantity -= 1;
+    }
+
+    public boolean isEmpty() {
+        return quantity <= 0;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

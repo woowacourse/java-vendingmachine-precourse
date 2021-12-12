@@ -46,4 +46,18 @@ public class VendingMachine {
     public boolean canBuyWith(int money) {
         return !products.isEmpty() && products.stream().anyMatch(p -> p.isPriceLowerOrEqualWith(money));
     }
+
+    public void buy(String name) {
+        Product product = products.stream()
+                .filter(p -> p.isSameNameWith(name))
+                .findFirst()
+                .orElseThrow(IllegalArgumentException::new);
+
+        product.countDownQuantity();
+        money -= product.getPrice();
+
+        if (product.isEmpty()) {
+            products.remove(product);
+        }
+    }
 }
