@@ -11,5 +11,7 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = new VendingMachine(
 			RandomGenerator.getHoldingCoin((InputView.getHoldingAmount())));
 		OutputView.inputHoldingCoin(vendingMachine.getHoldingCoin());
+		InputView.getProducts();
+		
 	}
 }
