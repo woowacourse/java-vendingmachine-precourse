@@ -9,6 +9,8 @@ import vendingmachine.view.common.CommonErrorView;
 import vendingmachine.view.common.CommonOutputView;
 import vendingmachine.view.deposit.DepositInputView;
 import vendingmachine.view.product.ProductInputView;
+import vendingmachine.view.purchase.PurchaseInputView;
+import vendingmachine.view.purchase.PurchaseOutputView;
 
 public class ViewConfig {
 
@@ -34,5 +36,13 @@ public class ViewConfig {
 
 	public static InputView getDepositInputView() {
 		return new DepositInputView(ClientConfig.getInputClient());
+	}
+
+	public static InputView getPurchaseInputView() {
+		return new PurchaseInputView(ClientConfig.getInputClient());
+	}
+
+	public static OutputView getPurchaseOutputView() {
+		return new PurchaseOutputView(ClientConfig.getOutputClient());
 	}
 }

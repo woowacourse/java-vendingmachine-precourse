@@ -27,12 +27,15 @@ public class JobConfig {
 
 	public static DepositJob getDepositJob() {
 		return new ConsoleDepositJob(
-			ViewManagerConfig.getDepositManager(),
+			ViewManagerConfig.getDepositViewManager(),
 			ControllerConfig.getDepositController()
 		);
 	}
 
 	public static PurchaseJob getPurchaseJob() {
-		return new ConsolePurchaseJob();
+		return new ConsolePurchaseJob(
+			ViewManagerConfig.getPurchaseViewManager(),
+			ControllerConfig.getPurchaseController()
+		);
 	}
 }

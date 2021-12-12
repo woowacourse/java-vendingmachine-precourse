@@ -1,19 +1,48 @@
 package vendingmachine.job;
 
-import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.controller.PurchaseController;
+import vendingmachine.view.ViewManager;
 
 public class ConsolePurchaseJob implements PurchaseJob {
+
+	private final ViewManager viewManager;
+	private final PurchaseController controller;
+
+	public ConsolePurchaseJob(ViewManager viewManager, PurchaseController controller) {
+		this.viewManager = viewManager;
+		this.controller = controller;
+	}
+
 	@Override
 	public void execute() {
-		System.out.println("투입 금액: 3000원\n"
-			+ "구매할 상품명을 입력해 주세요.");
-		String purchaseOne = Console.readLine();
-		System.out.println("투입 금액: 1500원\n"
-			+ "구매할 상품명을 입력해 주세요.");
-		String purchaseTwo = Console.readLine();
-		System.out.println("투입 금액: 500원\n"
-			+ "잔돈\n"
-			+ "100원 - 4개\n"
-			+ "50원 - 1개");
+		while (true) {
+			showMoney();
+			if (!isAvailable()) {
+				break;
+			}
+			tryExecute();
+		}
+		finish();
+	}
+
+	private void showMoney() {
+		viewManager.output(controller.retrieveDeposit());
+	}
+
+	private boolean isAvailable() {
+		return controller.isAvailable();
+	}
+
+	private void tryExecute() {
+		try {
+			controller.purchase(viewManager.input());
+		} catch (IllegalArgumentException e) {
+			viewManager.error(e.getMessage());
+			tryExecute();
+		}
+	}
+
+	private void finish() {
+		viewManager.output(controller.retrieveChangeSafe());
 	}
 }

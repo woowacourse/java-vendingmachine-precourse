@@ -12,7 +12,7 @@ class PurchaseJobTest extends ConsoleTest {
 
 	@Test
 	@DisplayName("문자열을 입력받아 상품울 구매한다.")
-	public void testCustomerPurchase() {
+	public void testPurchase() {
 		// given
 		PurchaseJob purchaseJob = JobConfig.getPurchaseJob();
 		// when

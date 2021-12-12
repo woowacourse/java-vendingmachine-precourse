@@ -16,6 +16,6 @@ class ErrorClientTest extends ConsoleTest {
 		// when
 		errorClient.error(error);
 		// then
-		assertEquals("[ERROR] Some Exception Occured\n", outputStream.toString());
+		assertEquals("Some Exception Occured\n", outputStream.toString());
 	}
 }

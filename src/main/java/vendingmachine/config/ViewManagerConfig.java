@@ -1,5 +1,7 @@
 package vendingmachine.config;
 
+import javax.swing.text.View;
+
 import vendingmachine.view.ViewManager;
 
 public class ViewManagerConfig {
@@ -19,10 +21,18 @@ public class ViewManagerConfig {
 		);
 	}
 
-	public static ViewManager getDepositManager() {
+	public static ViewManager getDepositViewManager() {
 		return new ViewManager(
 			ViewConfig.getDepositInputView(),
 			ViewConfig.getCommonOutputView(),
+			ViewConfig.getCommonErrorView()
+		);
+	}
+
+	public static ViewManager getPurchaseViewManager() {
+		return new ViewManager(
+			ViewConfig.getPurchaseInputView(),
+			ViewConfig.getPurchaseOutputView(),
 			ViewConfig.getCommonErrorView()
 		);
 	}
