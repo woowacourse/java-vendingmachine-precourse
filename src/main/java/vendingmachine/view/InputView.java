@@ -7,7 +7,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
 import vendingmachine.utils.Constant;
-import vendingmachine.utils.Validation;
+import vendingmachine.utils.Validator;
 
 public class InputView {
 
@@ -22,7 +22,7 @@ public class InputView {
 		System.out.println();
 
 		try {
-			Validation.isHoldingAmount(holdingAmount);
+			Validator.isHoldingAmount(holdingAmount);
 			return Integer.parseInt(holdingAmount);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -36,7 +36,7 @@ public class InputView {
 		System.out.println();
 
 		try {
-			Validation.isProducts(products);
+			Validator.isProducts(products);
 			return new Products(Arrays.stream(products.split(Constant.PRODUCTS_SPLIT))
 				.map(e -> e.substring(1, e.length() - 1))
 				.collect(Collectors.toList())
@@ -54,7 +54,7 @@ public class InputView {
 		System.out.println();
 
 		try {
-			Validation.isEnteredAmount(enteredAmount);
+			Validator.isEnteredAmount(enteredAmount);
 			return Integer.parseInt(enteredAmount);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -67,7 +67,7 @@ public class InputView {
 		String productName = Console.readLine();
 		System.out.println();
 		try {
-			Validation.isProductToBuy(products, productName, enteredAmount);
+			Validator.isProductToBuy(products, productName, enteredAmount);
 			return products.findByName(productName).get();
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
