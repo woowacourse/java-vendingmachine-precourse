@@ -15,6 +15,10 @@ public class Item {
 		return price;
 	}
 
+	public Boolean isSoldOut() {
+		return quantity == 0;
+	}
+
 	public void decreaseQuantity() {
 		if (!isPurchasable()) {
 			throw new IllegalArgumentException("[ERROR] 상품이 소진되었습니다. 다른 상품을 선택해주세요.");

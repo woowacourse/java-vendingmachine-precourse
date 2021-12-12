@@ -24,4 +24,8 @@ public class MachineService {
 	public void purchase(Machine machine, String itemName) {
 		machine.purchase(itemName);
 	}
+
+	public Boolean isPurchasable(Machine machine) {
+		return machine.isPurchasable();
+	}
 }
