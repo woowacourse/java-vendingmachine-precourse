@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-public class Merchandise {
+public class Merchandise implements Comparable<Merchandise> {
 	public static final int MERCHANDISE_NAME_INDEX = 0;
 	public static final int MERCHANDISE_PRICE_INDEX = 1;
 	public static final int MERCHANDISE_COUNT_INDEX = 2;
@@ -32,4 +32,12 @@ public class Merchandise {
 		return balance - price;
 	}
 
+	public boolean isSoldOut() {
+		return count == 0;
+	}
+
+	@Override
+	public int compareTo(Merchandise o) {
+		return this.price - o.price;
+	}
 }

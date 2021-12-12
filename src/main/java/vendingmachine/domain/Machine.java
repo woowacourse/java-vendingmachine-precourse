@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -75,5 +76,29 @@ public class Machine {
 			.filter(merchandise -> merchandise.isSameMerchandise(name))
 			.findAny()
 			.orElse(null);
+	}
+
+	public boolean checkAbleToBuyItem() {
+		if (checkItemsCount() && checkBalance()) {
+			return true;
+		}
+		return false;
+	}
+
+	private boolean checkItemsCount() {
+		for (Merchandise merchandise : merchandiseList) {
+			if (merchandise.isSoldOut()) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	private boolean checkBalance() {
+		Collections.sort(merchandiseList);
+		if (merchandiseList.get(0).checkAbleToSell(balance) == false) {
+			return false;
+		}
+		return true;
 	}
 }
