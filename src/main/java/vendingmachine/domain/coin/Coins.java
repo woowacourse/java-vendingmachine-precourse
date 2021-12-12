@@ -68,16 +68,21 @@ public class Coins {
 			.reduce(0, Integer::sum);
 	}
 
-	public Coin popMaxPriceCoin() {
-		Coin maxPriceCoin = peekMaxPriceCoin();
-		coinMap.put(maxPriceCoin, coinMap.get(maxPriceCoin) - 1);
-
-		return maxPriceCoin;
+	public boolean hasCoinCheaperThanOrEqualToValue(int value) {
+		return coinMap.entrySet().stream()
+			.anyMatch(entry -> entry.getValue() > 0 && entry.getKey().getAmount() <= value);
 	}
 
-	public Coin peekMaxPriceCoin() {
+	public Coin popMaxPriceCoinCheaperThanOrEqualToValue(int value) {
+		Coin coin = peekMaxPriceCoinCheaperThanOrEqualToValue(value);
+		coinMap.put(coin, coinMap.get(coin) - 1);
+		return coin;
+	}
+
+	public Coin peekMaxPriceCoinCheaperThanOrEqualToValue(int value) {
 		return coinMap.entrySet().stream()
 			.filter(entry -> entry.getValue() > 0)
+			.filter(entry -> entry.getKey().getAmount() <= value)
 			.map(entry -> entry.getKey())
 			.max(Comparator.comparing(Coin::getAmount))
 			.orElseThrow(NoSuchElementException::new);

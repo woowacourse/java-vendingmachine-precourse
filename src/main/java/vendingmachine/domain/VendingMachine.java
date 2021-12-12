@@ -34,8 +34,8 @@ public class VendingMachine {
 
 	public Coins returnChanges() {
 		Map<Coin, Integer> coinMap = new HashMap<>();
-		while (!leftCoins.isEmpty() && leftCoins.peekMaxPriceCoin().getAmount() <= inputMoney) {
-			Coin coin = leftCoins.popMaxPriceCoin();
+		while (leftCoins.hasCoinCheaperThanOrEqualToValue(inputMoney)) {
+			Coin coin = leftCoins.popMaxPriceCoinCheaperThanOrEqualToValue(inputMoney);
 			coinMap.put(coin, coinMap.getOrDefault(coin, 0) + 1);
 
 			inputMoney -= coin.getAmount();

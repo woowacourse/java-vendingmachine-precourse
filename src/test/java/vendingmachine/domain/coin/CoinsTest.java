@@ -52,19 +52,32 @@ class CoinsTest {
 	}
 
 	@Test
-	void popMaxPriceCoin() {
+	void popMaxPriceCoinCheaperThanOrEqualToValueTest() {
 		Map<Coin, Integer> coinMap = new HashMap<>();
 		coinMap.put(Coin.COIN_500, 2);
 		coinMap.put(Coin.COIN_100, 2);
 
 		Coins coins = new Coins(coinMap);
 
-		assertEquals(coins.popMaxPriceCoin(), Coin.COIN_500);
-		assertEquals(coins.popMaxPriceCoin(), Coin.COIN_500);
+		assertEquals(coins.popMaxPriceCoinCheaperThanOrEqualToValue(600), Coin.COIN_500);
+		assertEquals(coins.popMaxPriceCoinCheaperThanOrEqualToValue(500), Coin.COIN_500);
 
-		assertEquals(coins.popMaxPriceCoin(), Coin.COIN_100);
-		assertEquals(coins.popMaxPriceCoin(), Coin.COIN_100);
-		assertThrows(NoSuchElementException.class, coins::popMaxPriceCoin);
+		assertEquals(coins.popMaxPriceCoinCheaperThanOrEqualToValue(200), Coin.COIN_100);
+		assertEquals(coins.popMaxPriceCoinCheaperThanOrEqualToValue(200), Coin.COIN_100);
+		assertThrows(NoSuchElementException.class, () ->
+			coins.peekMaxPriceCoinCheaperThanOrEqualToValue(100)
+		);
+	}
+
+	@Test
+	void isEmptyTest() {
+		Map<Coin, Integer> coinMap = new HashMap<>();
+		coinMap.put(Coin.COIN_500, 0);
+		coinMap.put(Coin.COIN_100, 0);
+
+		Coins coins = new Coins(coinMap);
+
+		assertTrue(coins.isEmpty());
 	}
 
 }

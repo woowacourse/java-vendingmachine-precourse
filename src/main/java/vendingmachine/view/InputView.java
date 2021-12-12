@@ -32,6 +32,7 @@ public class InputView {
 	}
 
 	public static void showLeftMoney(int leftMoney) {
+		System.out.println();
 		System.out.println(NOTICE_LEFT_INPUT_MONEY + formatToKoreanCurrencyUnit(leftMoney));
 	}
 }
