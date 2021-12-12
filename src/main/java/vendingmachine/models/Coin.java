@@ -47,8 +47,8 @@ public enum Coin {
 			.forEach(eachCoin -> eachCoin.decreaseAmount(amountOfReturnedCoin));
 	}
 
-	private static int isCoinListEmpty(ArrayList<Item> coinList) {
-		return coinList.stream().mapToInt(Item::getAmount).sum();
+	private static boolean isCoinListEmpty(ArrayList<Item> coinList) {
+		return coinList.stream().mapToInt(Item::getAmount).sum() == 0;
 	}
 
 	private static void increaseCoinAmount(ArrayList<Item> coinList, int valueOfNowCoin, int amountOfNowCoin) {
@@ -72,7 +72,7 @@ public enum Coin {
 
 	public static ArrayList<Item> getReturnedCoin(ArrayList<Item> coinList, int money) {
 		ArrayList<Item> returnedCoin = new ArrayList<>();
-		while (money > 0 && isCoinListEmpty(coinList) > 0) {
+		while (money > 0 && !isCoinListEmpty(coinList)) {
 			int valueOfReturnedCoin = calculateReturnedCoinValue(coinList, money);
 			int amountOfReturnedCoin = calculateReturnedCoinAmount(coinList, valueOfReturnedCoin, money);
 			decreaseCoinAmount(coinList, valueOfReturnedCoin, amountOfReturnedCoin);
