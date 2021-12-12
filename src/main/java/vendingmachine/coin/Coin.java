@@ -1,6 +1,7 @@
 package vendingmachine.coin;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import vendingmachine.Money;
+import vendingmachine.quantity.Quantity;
 
 public enum Coin {
 
@@ -43,8 +45,10 @@ public enum Coin {
 			.collect(Collectors.toList());
 	}
 
-	public static List<Coin> getCoins() {
-		return new ArrayList<>(BY_MONEY.values());
+	public static List<Coin> getSortedCoins() {
+		ArrayList<Coin> coins = new ArrayList<>(BY_MONEY.values());
+		coins.sort((o1, o2) -> o2.money.compareTo(o1.money));
+		return coins;
 	}
 
 	public Money getMoney() {
@@ -54,5 +58,11 @@ public enum Coin {
 	@Override
 	public String toString() {
 		return money.toString();
+	}
+
+	public Quantity exchangeableQuantity(Money money, Quantity quantity) {
+		int ableQuantity = money.getAmount() / this.money.getAmount();
+		int returnQuantity = Math.min(ableQuantity, quantity.getCount());
+		return Quantity.of(returnQuantity);
 	}
 }

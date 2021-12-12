@@ -3,8 +3,9 @@ package vendingmachine;
 import java.util.Objects;
 
 import vendingmachine.exception.OutOfBoundException;
+import vendingmachine.quantity.Quantity;
 
-public class Money {
+public class Money implements Comparable<Money> {
 	private static final int MINIMUM_UNIT = 10;
 	private int amount;
 
@@ -42,11 +43,27 @@ public class Money {
 		this.amount -= money.amount;
 	}
 
+	public void spend(Money money, Quantity quantity) {
+		if(!isMultipliable(money,quantity)) {
+			throw new OutOfBoundException(Notification.AMOUNT_NOT_SPEND.getMessage());
+		}
+		spend(Money.of(money.getAmount()* quantity.getCount()));
+	}
+
 	public void earn(Money money) {
 		if(!isAddable(money)) {
 			throw new OutOfBoundException(Notification.AMOUNT_NOT_EARN.getMessage());
 		}
 		this.amount += money.amount;
+	}
+
+	private boolean isMultipliable(Money money, Quantity quantity) {
+		try {
+			Math.addExact(money.amount, quantity.getCount());
+			return true;
+		} catch (ArithmeticException e) {
+			return false;
+		}
 	}
 
 	private boolean isAddable(Money money) {
@@ -102,4 +119,10 @@ public class Money {
 	public String toString() {
 		return amount+"원";
 	}
+
+	@Override
+	public int compareTo(Money o) {
+		return Integer.compare(this.amount, o.amount);
+	}
+
 }

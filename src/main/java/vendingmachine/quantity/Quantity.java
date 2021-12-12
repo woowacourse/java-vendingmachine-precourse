@@ -54,6 +54,18 @@ public class Quantity {
 		return this;
 	}
 
+	public Quantity down(Quantity quantity) {
+		if(!isDecrease(quantity)) {
+			throw new OutOfBoundException(Notification.QUANTITY_EXCEED_RANGE.getMessage());
+		}
+		count -= quantity.count;
+		return this;
+	}
+
+	private boolean isDecrease(Quantity quantity) {
+		return count - quantity.count >= MINIMUM_QUANTITY;
+	}
+
 	public boolean isZero() {
 		return count == MINIMUM_QUANTITY;
 	}

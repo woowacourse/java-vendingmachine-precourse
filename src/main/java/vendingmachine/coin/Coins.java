@@ -1,7 +1,10 @@
 package vendingmachine.coin;
 
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import vendingmachine.Money;
 import vendingmachine.quantity.Quantity;
 
 public class Coins {
@@ -24,5 +27,24 @@ public class Coins {
 				.append(coin.getValue()).append("\n");
 		}
 		return stringBuilder.toString();
+	}
+
+	public Coins returnChange(Money money) {
+		Map<Coin, Quantity> returnCoins = new LinkedHashMap<>();
+		List<Coin> sortedCoins = Coin.getSortedCoins();
+		for (Coin coin : sortedCoins) {
+			calculateChange(coin,money,returnCoins);
+		}
+		return new Coins(returnCoins);
+	}
+
+	public void calculateChange(Coin coin, Money money, Map<Coin, Quantity> returnCoins) {
+		Quantity retentionQuantity = coins.get(coin);
+		Quantity ableQuantity = coin.exchangeableQuantity(money, retentionQuantity);
+		if(!ableQuantity.isZero()) {
+			money.spend(coin.getMoney(),ableQuantity);
+			retentionQuantity.down(ableQuantity);
+			returnCoins.put(coin,ableQuantity);
+		}
 	}
 }

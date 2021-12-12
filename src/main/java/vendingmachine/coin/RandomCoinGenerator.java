@@ -24,7 +24,7 @@ public class RandomCoinGenerator implements CoinGenerator {
 
 	private Map<Coin, Quantity> initializeCoins() {
 		Map<Coin, Quantity> coins = new EnumMap<>(Coin.class);
-		for (Coin coin : Coin.getCoins()) {
+		for (Coin coin : Coin.getSortedCoins()) {
 			coins.put(coin,Quantity.from());
 		}
 		return coins;
