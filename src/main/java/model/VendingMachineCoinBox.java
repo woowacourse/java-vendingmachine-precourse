@@ -11,6 +11,7 @@ public class VendingMachineCoinBox {
 	private static final int START_COIN_COUNT = 0;
 	private static final int START_TOTAL_COIN_PRICE = 0;
 	private static final int ADD_COIN_COUNT = 1;
+
 	private final Map<Coin, Integer> coinBox;
 
 	public VendingMachineCoinBox(int insertVendingMachineChange) {
