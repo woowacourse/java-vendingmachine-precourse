@@ -3,12 +3,14 @@ package vendingmachine.Domain;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductList {
-    private static ProductList instance = new ProductList();
+public class VendingMachine {
+    private static VendingMachine instance = new VendingMachine();
     private static List<Product> products;
+    private static int inputAmount;
 
-    private ProductList() {
+    private VendingMachine() {
         this.products = new ArrayList<>();
+        this.inputAmount = 0;
     }
 
     public static void addProduct(Product p) {
@@ -26,6 +28,10 @@ public class ProductList {
             }
         }
         return false;
+    }
+
+    public static void inputMoney(int amount) {
+        inputAmount += amount;
     }
 }
 

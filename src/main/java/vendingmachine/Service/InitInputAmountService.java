@@ -1,6 +1,6 @@
 package vendingmachine.Service;
 
-import vendingmachine.Domain.InputAmount;
+import vendingmachine.Domain.VendingMachine;
 import vendingmachine.Validation.InputAmountValidation;
 
 public class InitInputAmountService {
@@ -8,7 +8,7 @@ public class InitInputAmountService {
 
     public void setInputAmount(String inputAmount) {
         validation.isValidInputAmount(inputAmount);
-        InputAmount.setInputAmount(Integer.parseInt(inputAmount));
+        VendingMachine.inputMoney(Integer.parseInt(inputAmount));
     }
 
 }

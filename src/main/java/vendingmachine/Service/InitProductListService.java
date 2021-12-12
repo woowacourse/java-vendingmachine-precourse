@@ -2,16 +2,16 @@ package vendingmachine.Service;
 
 import vendingmachine.Constant.DomainConstant;
 import vendingmachine.Domain.Product;
-import vendingmachine.Domain.ProductList;
+import vendingmachine.Domain.VendingMachine;
 import vendingmachine.Validation.ProductValidation;
 
 public class InitProductListService {
     ProductValidation validation = new ProductValidation();
 
     public void setProducts(String input) {
-        ProductList.clearList();
+        VendingMachine.clearList();
         for (String p : input.split(";")) {
-            ProductList.addProduct(parseProductInfo(p));
+            VendingMachine.addProduct(parseProductInfo(p));
         }
     }
 

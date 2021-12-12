@@ -2,7 +2,7 @@ package vendingmachine.Validation;
 
 import vendingmachine.Constant.DomainConstant;
 import vendingmachine.Constant.ErrorConstant;
-import vendingmachine.Domain.ProductList;
+import vendingmachine.Domain.VendingMachine;
 
 public class ProductValidation {
     CommonValidation common = new CommonValidation();
@@ -39,7 +39,7 @@ public class ProductValidation {
     }
 
     private void checkName(String name) {
-        if (ProductList.isDuplicatedProductName(name)) {
+        if (VendingMachine.isDuplicatedProductName(name)) {
             throw new IllegalArgumentException(ErrorConstant.PRODUCT_NAME_MUST_NOT_BE_DUPLICATED);
         }
     }
