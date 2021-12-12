@@ -15,6 +15,10 @@ public class OutputView {
 		System.out.println(errorMessage);
 	}
 
+	public static void printItemSettingMessage(){
+		System.out.println(MessageConst.ITEM_SETTING_MESSAGE);
+	}
+
 	public static void printChanges(Changes changes) {
 		Map<Coin, Integer> changesMap = changes.getChanges();
 		System.out.println(MessageConst.MACHINE_HAVING_CHANGES);
