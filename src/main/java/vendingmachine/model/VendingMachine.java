@@ -54,7 +54,9 @@ public class VendingMachine {
 	}
 
 	public int giveChanges(Coin coin) {
-		return changes.giveChanges(coin);
+		int coinNum = changes.give(coin, insertedMoney);
+		insertedMoney -= coin.getAmount() * coinNum;
+		return coinNum;
 	}
 
 }

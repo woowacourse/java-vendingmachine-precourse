@@ -3,7 +3,7 @@ package vendingmachine.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import vendingmachine.service.GivingChangesService;
+import vendingmachine.service.CountingCoinForGivingChangesService;
 import vendingmachine.service.MakingRandomCoinService;
 import vendingmachine.service.SettingMoneyService;
 
@@ -25,8 +25,9 @@ public class Changes {
 		return coinList.get(coin.ordinal());
 	}
 
-	public int giveChanges(Coin coin) {
-		int givingCoin = GivingChangesService.countCoinForChanges(coinList.get(coin.ordinal()), coin, changes);
+	public int give(Coin coin, int remainMoney) {
+		int givingCoin = CountingCoinForGivingChangesService.countCoinForChanges(coinList.get(coin.ordinal()), coin,
+			remainMoney);
 		changes -= givingCoin * coin.getAmount();
 		coinList.set(coin.ordinal(), coinList.get(coin.ordinal()) - givingCoin);
 		return givingCoin;
