@@ -1,11 +1,8 @@
 package vendingmachine.controller;
 
-import net.bytebuddy.pool.TypePool;
 import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.OutputManager;
-
-import java.util.ArrayList;
 
 public class VendingMachineController {
     private VendingMachine vendingMachine;
