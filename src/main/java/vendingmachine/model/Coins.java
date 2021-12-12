@@ -19,11 +19,14 @@ public class Coins {
 
         while (costList.size() > 1) {
             int picked = Randoms.pickNumberInList(costList);
-            updateCountCoin(picked);
+            countCoinOf(picked, 1);
             money -= picked;
-            updateCostListWith(costList, money);
+            updateCostList(costList, money);
         }
-        countCoin.put(costList.get(0), money / 10);
+
+        if (money > 0) {
+            countCoinOf(costList.get(0), money / costList.get(0));
+        }
     }
 
     public int getCoinCount(Coin coin) {
