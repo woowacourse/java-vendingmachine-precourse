@@ -24,6 +24,8 @@ public class VendingMachine {
         products.stream()
             .filter(product -> product.isEqualToName(order.getProductName()))
             .findAny()
-            .ifPresent(product -> product.processPurchasing(order));
+            .orElseThrow(ErrorMessage.NOT_FOUND_PRODUCT::getException)
+            .processPurchasing(order);
+
     }
 }
