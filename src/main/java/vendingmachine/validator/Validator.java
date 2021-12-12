@@ -1,8 +1,6 @@
 package vendingmachine.validator;
 
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Validator {
 	public static boolean isValidMoneyInMachine(String moneyInVendingMachine) {
@@ -18,9 +16,9 @@ public class Validator {
 		}
 	}
 
-	public static boolean isValidProductsInfo(String productsInfo) {
+	public static boolean isValidProductsInputFormat(List<String> productsInfo) {
 		try {
-			checkProductsInfo(productsInfo);
+			validateProductsInputFormat(productsInfo);
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -28,37 +26,43 @@ public class Validator {
 		}
 	}
 
-	private static void checkProductsInfo(String productsInfo) {
-		for (String productInfo : Arrays.stream(productsInfo.split(";"))
-			.map(String::trim)
-			.collect(Collectors.toList())) {
+	private static void validateProductsInputFormat(List<String> productsInfo) {
+		for (String productInfo : productsInfo) {
 			ProductValidator.checkFormat(productInfo);
-			checkEachInfo(productInfo);
 		}
 	}
 
-	private static void checkEachInfo(String productInfo) {
-		List<String> info = Arrays.stream(productInfo.split(","))
-			.map(String::trim)
-			.collect(Collectors.toList());
-		ProductValidator.checkInfoMiss(info);
-		checkProductName(info.get(0));
-		checkProductPrice(info.get(1));
-		checkProductAmount(info.get(2));
+	public static boolean isValidProduct(List<List<String>> productsEachInfoList) {
+		try {
+			for (List<String> productInfo : productsEachInfoList) {
+				Validator.validateEachProduct(productInfo);
+			}
+			return true;
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
 	}
 
-	private static void checkProductName(String name){
+	private static void validateEachProduct(List<String> productInfo) {
+		ProductValidator.checkInfoMiss(productInfo);
+		validateProductName(productInfo.get(0));
+		validateProductPrice(productInfo.get(1));
+		validateProductAmount(productInfo.get(2));
+	}
+
+	private static void validateProductName(String name) {
 		ProductValidator.checkIsEmptyName(name);
 	}
 
-	private static void checkProductPrice(String price) {
+	private static void validateProductPrice(String price) {
 		NumberValidator.isInteger(price);
 		int intPrice = Integer.parseInt(price);
 		NumberValidator.checkLowLimitOfPrice(intPrice);
 		NumberValidator.isDivisibleByLowLimitOfCoin(intPrice);
 	}
 
-	private static void checkProductAmount(String amount) {
+	private static void validateProductAmount(String amount) {
 		NumberValidator.isInteger(amount);
 		int intAmount = Integer.parseInt(amount);
 		NumberValidator.isGreaterThanOrEqualToZero(intAmount);
