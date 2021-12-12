@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import vendingmachine.exception.ProductNameNotFoundException;
+import vendingmachine.exception.ProductNotFoundLeastException;
 import vendingmachine.exception.ProductsNameDuplicateException;
 
 public class Products {
@@ -61,7 +62,7 @@ public class Products {
     public boolean isPurchasableMinimumPriceProduct(Money money) {
         Product product = products.stream()
             .min(Comparator.comparingInt(Product::price))
-            .orElseThrow(() -> new RuntimeException("[ERROR] 상품의 최소금액이 존재하지 않습니다."));
+            .orElseThrow(ProductNotFoundLeastException::new);
         return product.isPurchasable(money);
     }
 }
