@@ -7,7 +7,7 @@ import java.util.HashMap;
 
 public class VendingMachine {
 
-    public final HashMap<Integer, Integer> coinTable = new HashMap<>();
+    private final HashMap<Integer, Integer> coinTable = new HashMap<>();
 
     public void generateRandomCoin(String inputMoney) {
         int money = Integer.parseInt(inputMoney);
@@ -25,6 +25,10 @@ public class VendingMachine {
         for (Coin coin : Coin.values()) {
             coinTable.put(coin.getAmount(), 0);
         }
+    }
+
+    public HashMap<Integer, Integer> getCoin() {
+        return coinTable;
     }
 
 }
