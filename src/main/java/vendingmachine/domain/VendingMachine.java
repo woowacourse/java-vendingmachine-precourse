@@ -36,8 +36,8 @@ public class VendingMachine {
 		coinCounts.put(coin, coinCounts.get(coin) + 1);
 	}
 
-	public void updateReturnCoinMap(Coin coin, int changeCount) {
-		returnCoinCounts.put(coin, changeCount);
+	public void updateReturnCoinMap(LinkedHashMap<Coin,Integer> coinMap, Coin coin, int changeCount) {
+		coinMap.put(coin, changeCount);
 	}
 
 	public void stockMerchandises(Merchandises merchandises) {
@@ -61,7 +61,8 @@ public class VendingMachine {
 		int coinChangeMaxCount = changeMoney / coin.getAmount();
 		int returnCoinCount = Math.min(coinChangeMaxCount, coinCounts.get(coin));
 		changeMoney -= returnCoinCount * coin.getAmount();
-		updateReturnCoinMap(coin, returnCoinCount);
+		updateReturnCoinMap(returnCoinCounts,coin, returnCoinCount);
+		updateReturnCoinMap(coinCounts, coin, coinCounts.get(coin) - returnCoinCount);
 		return changeMoney;
 	}
 
