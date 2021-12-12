@@ -1,9 +1,11 @@
 package vendingmachine;
-import camp.nextstep.edu.missionutils.Randoms;
-import java.util.HashMap;
+
+import java.lang.Math;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.lang.Math;
+import java.util.HashMap;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class Machine {
     User user = new User();
@@ -20,6 +22,7 @@ public class Machine {
         amountInput();
         purchase();
     }
+
     private void balance() {
         boolean check = false;
         while (!check) {
@@ -27,14 +30,16 @@ public class Machine {
             check = user.inputMachineBalance();
         }
     }
+
     private void goods() {
         boolean check = false;
         System.out.println();
         while (!check) {
-            System.out.println(Message.INPUT_MACHINE_Goods);
+            System.out.println(Message.INPUT_MACHINE_GOODS);
             check = user.inputGoods();
         }
     }
+
     private void coinsInMachine() {
         int balance = user.getMachineBalance();
         int coin;
@@ -43,20 +48,23 @@ public class Machine {
             if (coin == user.getMachineBalance()) {
                 continue;
             }
-            if(coin <= balance) {
+            if (coin <= balance) {
                 coins.add(coin);
                 balance = balance - coin;
             }
         }
     }
+
     private int randomCoin() {
         return Randoms.pickNumberInList(Coin.getCoinsList());
     }
+
     private void coinHashMap() {
-        for(Coin coin : Coin.values()) {
+        for (Coin coin : Coin.values()) {
             coinsMap.put(coin, Collections.frequency(coins, coin.getAmount()));
         }
     }
+
     private void showMachineCoins() {
         System.out.println("\n" + Message.SHOW_MACHINE_COINS);
         System.out.println(Coin.COIN_500.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_500) + Message.QUANTITY);
@@ -64,6 +72,7 @@ public class Machine {
         System.out.println(Coin.COIN_50.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_50) + Message.QUANTITY);
         System.out.println(Coin.COIN_10.getAmount() + Message.WON_SPACE_BAR_SPACE + coinsMap.get(Coin.COIN_10) + Message.QUANTITY);
     }
+
     private void amountInput() {
         boolean check = false;
         System.out.println();
@@ -72,6 +81,7 @@ public class Machine {
             check = user.inputUserAmount();
         }
     }
+
     private void buyGoods() {
         boolean check = false;
         while (!check) {
@@ -80,6 +90,7 @@ public class Machine {
         }
         user.userPurchase();
     }
+
     private void purchase() {
         boolean check = false;
         while (!check) {
@@ -92,6 +103,7 @@ public class Machine {
         returnBalance();
         showReturnBalance();
     }
+
     private void returnBalance() {
         userAmount = user.getUserAmount();
         eachBalance(Coin.COIN_500);
@@ -99,11 +111,13 @@ public class Machine {
         eachBalance(Coin.COIN_50);
         eachBalance(Coin.COIN_10);
     }
+
     private void eachBalance(Coin coin) {
         int count = Math.min(userAmount / coin.getAmount(), coinsMap.get(coin));
         coinsMap.put(coin, count);
         userAmount -= count * coin.getAmount();
     }
+
     private void showReturnBalance() {
         System.out.println(Message.RETURN_BALANCE);
         if (!(coinsMap.get(Coin.COIN_500) == 0)) {

@@ -1,8 +1,9 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import camp.nextstep.edu.missionutils.Console;
 
 public class User {
     private String input;
@@ -27,9 +28,11 @@ public class User {
         }
         return true;
     }
+
     private void input() {
         input = String.valueOf(Console.readLine());
     }
+
     private void checkCorrectBalance() throws IllegalArgumentException{
         checkBlank(input);
         checkCharacter(input);
@@ -37,12 +40,14 @@ public class User {
         checkNegativeNumber(machineBalance);
         checkMultipleOfTen(machineBalance);
     }
+
     private void checkBlank(String input) throws IllegalArgumentException {
         if (input.equals("")) {
             ERROR_MESSAGE = Message.ERROR_MACHINE_BALANCE_BLANK;
             throw new IllegalArgumentException();
         }
     }
+
     private void checkCharacter(String input) throws IllegalArgumentException {
         for (int i = 0; i < input.length(); i++) {
             if (!Character.isDigit(input.charAt(i))) {
@@ -51,21 +56,25 @@ public class User {
             }
         }
     }
+
     private void checkNegativeNumber(int number) throws IllegalArgumentException {
         if (number < 0) {
             ERROR_MESSAGE = Message.ERROR_MACHINE_BALANCE_NEGATIVE_NUMBER;
             throw new IllegalArgumentException();
         }
     }
+
     private void checkMultipleOfTen(int number) throws IllegalArgumentException {
         if (!(number % 10 == 0)) {
             ERROR_MESSAGE = Message.ERROR_MACHINE_BALANCE_MULTIPLE_OF_TEN;
             throw new IllegalArgumentException();
         }
     }
+
     public int getMachineBalance() {
         return machineBalance;
     }
+
     public boolean inputGoods() {
         try {
             input();
@@ -76,6 +85,7 @@ public class User {
         }
         return true;
     }
+
     private void checkCorrectGoods() throws IllegalArgumentException {
         checkBlank(input);
         goods.clear();
@@ -87,6 +97,7 @@ public class User {
         }
 
     }
+
     private void checkCorrectProduct(String temp) throws IllegalArgumentException {
         checkSquareBrackets(temp);
         temp = temp.substring(1,temp.length()-1);
@@ -97,41 +108,46 @@ public class User {
         productPrices.put(product[0], price);
         productQuantities.put(product[0], quantity);
     }
+
     private void checkSquareBrackets(String temp) throws IllegalArgumentException {
         if (!(temp.charAt(0) == '[' || temp.charAt(temp.length()-1) == ']')) {
-            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_INPUT_SQUARE_BRACKETS;
+            ERROR_MESSAGE = Message.ERROR_MACHINE_GOODS_INPUT_SQUARE_BRACKETS;
             throw new IllegalArgumentException();
         }
     }
+
     private void checkProductElement(String[] temps) throws IllegalArgumentException {
         if (temps.length != 3) {
-            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_INPUT_COMMA;
+            ERROR_MESSAGE = Message.ERROR_MACHINE_GOODS_INPUT_COMMA;
             throw new IllegalArgumentException();
         }
         for (int i = 0; i < 3; i++) {
             if (temps[i].equals("")) {
-                ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD;
+                ERROR_MESSAGE = Message.ERROR_MACHINE_GOODS;
                 throw new IllegalArgumentException();
             }
         }
     }
+
     private void checkGoodsPrice(String temp) throws IllegalArgumentException {
         checkCharacter(temp);
         price = Integer.parseInt(temp);
         if (price < 100) {
-            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_PRICE;
+            ERROR_MESSAGE = Message.ERROR_MACHINE_GOODS_PRICE;
             throw new IllegalArgumentException();
         }
         checkMultipleOfTen(price);
     }
+
     private void checkGoodsQuantity(String temp) throws IllegalArgumentException {
         checkCharacter(temp);
         quantity = Integer.parseInt(temp);
         if (quantity < 0) {
-            ERROR_MESSAGE = Message.ERROR_MACHINE_Goods_INVAILD_QUANTITY;
+            ERROR_MESSAGE = Message.ERROR_MACHINE_GOODS_QUANTITY;
             throw new IllegalArgumentException();
         }
     }
+
     public boolean inputUserAmount() {
         try {
             input();
@@ -143,17 +159,20 @@ public class User {
         userAmount = machineBalance;
         return true;
     }
+
     private void checkCorrectAmount() throws IllegalArgumentException {
         checkCorrectBalance();
     }
+
     public void showRemainingAmount() {
         System.out.println();
         System.out.println(Message.REMAINING_AMOUNT + userAmount + Message.WON);
     }
+
     public boolean availablePurchase() {
         allInventory = 0;
         minProduct = 999999999;
-        for(String product : productQuantities.keySet()) {
+        for (String product : productQuantities.keySet()) {
             if (productPrices.get(product) <= minProduct && productQuantities.get(product) >= 1) {
                 minProduct = productPrices.get(product);
             }
@@ -164,6 +183,7 @@ public class User {
         }
         return false;
     }
+
     public boolean inputUserGoods() {
         try {
             input();
@@ -174,6 +194,7 @@ public class User {
         }
         return true;
     }
+
     private void checkCorrectUserGoods() throws IllegalArgumentException {
         checkBlank(input);
         if (!productPrices.containsKey(input)) {
@@ -185,10 +206,12 @@ public class User {
             throw new IllegalArgumentException();
         }
     }
+
     public void userPurchase() {
         productQuantities.put(input, productQuantities.get(input) - 1);
         userAmount -= productPrices.get(input);
     }
+
     public int getUserAmount() {
         return userAmount;
     }
