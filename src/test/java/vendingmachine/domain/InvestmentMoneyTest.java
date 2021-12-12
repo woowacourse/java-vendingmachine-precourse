@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -45,6 +46,19 @@ class InvestmentMoneyTest {
         // given & when & then
         assertThatThrownBy(() -> {
             new InvestmentMoney(inputInvestmentMoney);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("투입 금액보다 상품의 가격이 큰 경우 예외를 던진다.")
+    @Test
+    void calculate_ProductPriceLessThenInvestmentMoney_ExceptionThrown() {
+        // given
+        InvestmentMoney investmentMoney = new InvestmentMoney("1000");
+        Product product = new Product("[콜라,1500,10]");
+
+        // when & then
+        assertThatThrownBy(() -> {
+            investmentMoney.calculate(product);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

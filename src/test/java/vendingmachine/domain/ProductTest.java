@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -86,5 +87,45 @@ class ProductTest {
         assertThatThrownBy(() -> {
             new Product(inputProduct);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("상품 수량이 0개이면 구매가 불가능 하므로 예외를 던진다.")
+    @Test
+    void decreaseQuantity_QuantityThenNegativeNumber_ExceptionThrown() {
+        // given
+        Product product = new Product("[콜라,1500,0]");
+
+        // when & then
+        assertThatThrownBy(() -> {
+            product.decreaseQuantity();
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("상품과 상품 구매를 위한 이름이 같으면 true를 반환한다.")
+    @Test
+    void isSameName_productPurchaseNameThenEquals_TrueReturn() {
+        // given
+        Product product = new Product("[콜라,1500,0]");
+        String productPurchaseName = "콜라";
+
+        // then
+        boolean result = product.isSameName(productPurchaseName);
+
+        // when
+        assertThat(result).isTrue();
+    }
+
+    @DisplayName("상품과 상품 구매를 위한 이름이 다르면 False를 반환한다.")
+    @Test
+    void isSameName_productPurchaseNameThenNotEquals_FalseReturn() {
+        // given
+        Product product = new Product("[콜라,1500,0]");
+        String productPurchaseName = "사이다";
+
+        // then
+        boolean result = product.isSameName(productPurchaseName);
+
+        // when
+        assertThat(result).isFalse();
     }
 }
