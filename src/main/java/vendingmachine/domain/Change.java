@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.domain;
+
+import vendingmachine.domain.Coin;
 
 import static vendingmachine.Constant.*;
 

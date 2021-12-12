@@ -1,4 +1,9 @@
-package vendingmachine;
+package vendingmachine.domain;
+
+import vendingmachine.domain.Change;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.CoinCollection;
+import vendingmachine.domain.Product;
 
 import java.util.ArrayList;
 import java.util.Arrays;

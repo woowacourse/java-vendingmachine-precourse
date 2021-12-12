@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.VendingMachine;
+
 import java.util.List;
 
 public class Controller {
