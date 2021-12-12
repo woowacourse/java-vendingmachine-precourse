@@ -2,9 +2,11 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import static vendingmachine.Constant.*;
+
 public class ValidatedInput {
     public int requestMachineMoney() {
-        System.out.println(Constant.MACHINE_MONEY_INPUT_REQUEST_STRING);
+        System.out.println(MACHINE_MONEY_INPUT_REQUEST_STRING);
         return readMachineMoney();
     }
 
@@ -17,11 +19,12 @@ public class ValidatedInput {
             System.out.println(e.getMessage());
             return readMachineMoney();
         }
+        System.out.println();
         return Integer.parseInt(input);
     }
 
     public String requestMachineProduct() {
-        System.out.println(Constant.MACHINE_PRODUCT_INPUT_REQUEST_STRING);
+        System.out.println(MACHINE_PRODUCT_INPUT_REQUEST_STRING);
         return readMachineProduct();
     }
 
@@ -34,11 +37,12 @@ public class ValidatedInput {
             System.out.println(e.getMessage());
             return readMachineProduct();
         }
+        System.out.println();
         return input;
     }
 
     public int requestUserMoney() {
-        System.out.println(Constant.USER_MONEY_INPUT_REQUEST_STRING);
+        System.out.println(USER_MONEY_INPUT_REQUEST_STRING);
         return readUserMoney();
     }
 
@@ -51,11 +55,15 @@ public class ValidatedInput {
             System.out.println(e.getMessage());
             return readUserMoney();
         }
+        System.out.println();
         return Integer.parseInt(input);
     }
 
     public String requestBuyingProduct() {
-        System.out.println(Constant.BUYING_PRODUCT_INPUT_REQUEST_STRING);
-        return Console.readLine();
+        System.out.println(BUYING_PRODUCT_INPUT_REQUEST_STRING);
+        String input = Console.readLine();
+
+        System.out.println();
+        return input;
     }
 }
