@@ -33,6 +33,7 @@ public class VendingMachineController {
 	}
 
 	public void view(ViewMappingKey key) {
+		System.out.println();
 		viewMapper.get(key).show();
 	}
 

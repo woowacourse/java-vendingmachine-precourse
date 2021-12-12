@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.Item;
 import vendingmachine.domain.repository.ItemRepository;
 import vendingmachine.util.PublicConst;
+import vendingmachine.util.SystemMessage;
 
 public class ItemService {
 	private final ItemRepository itemRepository = new ItemRepository();
@@ -15,7 +16,14 @@ public class ItemService {
 	}
 
 	public Item searchItem(String itemName) {
-		return itemRepository.getItemByName(itemName);
+		Item item = itemRepository.getItemByName(itemName);
+		if (item == null) {
+			throw new IllegalArgumentException(SystemMessage.ERROR_NOT_EXIST_ITEM);
+		}
+		if (!item.isInStock())
+			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_IN_STOCK);
+
+		return item;
 	}
 
 	public void deductItemAmount(String itemName) {
