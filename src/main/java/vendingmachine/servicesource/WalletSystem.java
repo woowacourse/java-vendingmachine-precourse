@@ -7,13 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 
 public class WalletSystem {
-    private int balance;
+    private int systemBalance;
     private HashMap<Coin, Integer> remainCoins = new HashMap<Coin, Integer>();
 
-    List<Integer> list = new ArrayList<>();
-
-    public WalletSystem(int balance){
-        this.balance = balance;
+    public WalletSystem(int systemBalance){
+        this.systemBalance = systemBalance;
 
         exchangeBalanceToRandomCoins();
     }
@@ -22,9 +20,9 @@ public class WalletSystem {
         Coin[] coinTypes =  Coin.values();
 
         for(Coin currentCoin : coinTypes){
-            int maxNumber = balance / currentCoin.getAmount();
+            int maxNumber = systemBalance / currentCoin.getAmount();
             int pickedNumber = Randoms.pickNumberInList(getRandomNumberList(maxNumber));
-            balance -= currentCoin.getAmount() * pickedNumber;
+            systemBalance -= currentCoin.getAmount() * pickedNumber;
             remainCoins.put(currentCoin,pickedNumber);
             System.out.println(currentCoin.getAmount() + " : " + pickedNumber);
         }
