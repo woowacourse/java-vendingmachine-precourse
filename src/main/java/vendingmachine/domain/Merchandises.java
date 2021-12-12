@@ -19,10 +19,12 @@ public class Merchandises {
 	}
 
 	public Merchandise selectMerchandise(String merchandiseName) {
-		return merchandiseList.stream()
-			.filter(merchandise -> merchandise.getName().equals(merchandiseName))
+		Merchandise merchandise = merchandiseList.stream()
+			.filter(sellMerchandise -> sellMerchandise.getName().equals(merchandiseName))
 			.findFirst()
-			.orElseThrow(()-> new IllegalArgumentException(ErrorMessage.INVALID_NO_STOCK_MERCHANDISE_BUY_ERROR_MESSAGE));
+			.orElseThrow(
+				() -> new IllegalArgumentException(ErrorMessage.INVALID_NO_STOCK_MERCHANDISE_BUY_ERROR_MESSAGE));
+		return merchandise;
 	}
 
 }

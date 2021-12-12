@@ -25,6 +25,14 @@ public class Merchandise {
 		return name;
 	}
 
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void sellMerchandise() {
+		quantity--;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

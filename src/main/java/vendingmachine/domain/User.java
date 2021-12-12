@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 public class User {
+	public static final String MERCHANDISE_SOLD_OUT_MESSAGE = "상품이 소진되었습니다.";
 	private Money userMoney;
 	private List<Merchandise> buyingMerchandiseList;
 
@@ -20,12 +21,16 @@ public class User {
 		this.userMoney = userMoney;
 	}
 
-	public void buyMerchandise(String merchandiseName, Merchandises merchandises){
+	public void buyMerchandise(String merchandiseName, Merchandises merchandises) {
 		buyingMerchandiseList = new ArrayList<>();
 		Merchandise buyingMerchandise = merchandises.selectMerchandise(merchandiseName);
-		if (buyingMerchandise != null) {
-			buyingMerchandiseList.add(buyingMerchandise);
-			setUserMoney(new Money(userMoney.getMoney()-buyingMerchandise.getMoney().getMoney()));
+		if (buyingMerchandise.getQuantity() == 0) {
+			System.out.println(MERCHANDISE_SOLD_OUT_MESSAGE);
+			return;
 		}
+		buyingMerchandise.sellMerchandise();
+		buyingMerchandiseList.add(buyingMerchandise);
+		setUserMoney(new Money(userMoney.getMoney() - buyingMerchandise.getMoney().getMoney()));
+
 	}
 }
