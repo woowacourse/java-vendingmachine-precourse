@@ -2,6 +2,7 @@ package vendingmachine;
 
 import static vendingmachine.utils.Constant.*;
 import static vendingmachine.utils.validator.AmountValidator.*;
+import static vendingmachine.utils.validator.ItemValidator.*;
 
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.VendingMachine;
@@ -41,8 +42,16 @@ public class VendingMachineController {
 	}
 
 	private void addItem() {
-		String itemList = Input.item();
-		vendingMachine.insertItems(itemList);
+		while (true) {
+			try {
+				String itemList = Input.item();
+				validateItemList(itemList);
+				vendingMachine.insertItems(itemList);
+				break;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	private int inputAmount() {

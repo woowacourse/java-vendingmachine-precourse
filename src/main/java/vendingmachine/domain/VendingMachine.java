@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.validator.PurchaseItemValidator.*;
+import static vendingmachine.utils.validator.ItemNameValidator.*;
 
 import java.util.Map;
 

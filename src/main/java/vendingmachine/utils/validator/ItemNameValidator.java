@@ -6,7 +6,7 @@ import java.util.List;
 
 import vendingmachine.domain.Items;
 
-public class PurchaseItemValidator {
+public class ItemNameValidator {
 
 	public static void validateItem(Items items, String itemName) {
 		validateStatus(items, itemName);
