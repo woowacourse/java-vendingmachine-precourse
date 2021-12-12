@@ -1,6 +1,12 @@
 package vendingmachine.user;
 
 public class UserGoodsValidation {
+    public static void checkUserGoodsValidation(String input) {
+        isEmpty(input);
+        checkHasBracket(input);
+        checkBracketNumber(input);
+    }
+
     public static void isEmpty(String input) {
         if (input.length() == 0) {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_GOODS_IS_NULL);
