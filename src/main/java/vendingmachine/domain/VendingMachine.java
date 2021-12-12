@@ -2,7 +2,6 @@ package vendingmachine.domain;
 
 import java.util.HashMap;
 import java.util.Map;
-import vendingmachine.Coin;
 
 public class VendingMachine {
 
