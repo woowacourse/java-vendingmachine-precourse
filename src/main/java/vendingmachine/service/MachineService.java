@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -29,22 +30,17 @@ public class MachineService {
 
 	public void setDepositsRandomized(int deposit) {
 		this.coinList = Arrays.asList(Coin.values());
-		Map<Coin, Integer> countMap = new HashMap<>();
+		Map<Coin, Integer> countMap = new TreeMap<>();
+		coinList.forEach(coin -> countMap.put(coin, 0));
 		while (deposit > 0) {
 			Deposit randomizedDeposit = getDepositRandomized(deposit);
 			deposit -= randomizedDeposit.getCoin().getAmount() * randomizedDeposit.getCount();
 			countMap.put(randomizedDeposit.getCoin(),
-				addIfNotNull(countMap.get(randomizedDeposit.getCoin()), randomizedDeposit.getCount()));
+				countMap.get(randomizedDeposit.getCoin()) + randomizedDeposit.getCount());
 		}
 
 		depositRepository.save(
 			countMap.keySet().stream().map(coin -> new Deposit(coin, countMap.get(coin))).collect(Collectors.toList()));
-	}
-
-	private Integer addIfNotNull(Integer previousCount, Integer count) {
-		if (previousCount != null)
-			return previousCount + count;
-		return count;
 	}
 
 	private Deposit getDepositRandomized(int deposit) {
