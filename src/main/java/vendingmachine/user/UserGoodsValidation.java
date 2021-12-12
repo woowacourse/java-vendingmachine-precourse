@@ -1,6 +1,12 @@
 package vendingmachine.user;
 
 public class UserGoodsValidation {
+    public static void isEmpty(String inputGoods) {
+        if (inputGoods.length() == 0) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_GOODS_IS_NULL);
+        }
+    }
+
     public static void is100WonMore(String price) {
         if (Integer.parseInt(price) >= InputErrorConstant.GOODS_PRICE_LIMIT) {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_100WON_MORE);
