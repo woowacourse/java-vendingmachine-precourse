@@ -3,6 +3,7 @@ package vendingmachine;
 import vendingmachine.coin.CoinGenerator;
 import vendingmachine.coin.Coins;
 import vendingmachine.coin.RandomCoinGenerator;
+import vendingmachine.product.Products;
 
 public class VendingMachineService {
 	private final VendingMachine vendingMachine = new VendingMachine();
@@ -14,4 +15,7 @@ public class VendingMachineService {
 		return generateCoins;
 	}
 
+	public void addProducts(Products products) {
+		vendingMachine.addProductAll(products);
+	}
 }
