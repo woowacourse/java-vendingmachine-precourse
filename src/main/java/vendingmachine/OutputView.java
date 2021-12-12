@@ -35,6 +35,10 @@ public class OutputView {
         System.out.println();
     }
 
+    public void printMessage(String message) {
+        System.out.println(message);
+    }
+
     private void printCoinInformation(int coinAmount, int coinCount) {
         System.out.println(coinAmount + UNIT_OF_COIN + MONEY_TO_COUNT_MAPPER + coinCount + UNIT_OF_COIN_COUNT);
     }

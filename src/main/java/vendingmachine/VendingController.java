@@ -28,7 +28,7 @@ public class VendingController {
         outputView.printMoneyInputToVendingMachine(vendingMachine.getInputMoney());
         while (true) {
             try {
-                if (vendingMachine.getMinPrice() > vendingMachine.getInputMoney()) {
+                if (vendingMachine.getMinPriceOfProducts() > vendingMachine.getInputMoney()) {
                     return;
                 }
                 if (vendingMachine.getProductsCount() == 0) {
@@ -37,7 +37,7 @@ public class VendingController {
                 vendingMachine.buyProduct(inputView.inputToSelectProduct());
                 outputView.printMoneyInputToVendingMachine(vendingMachine.getInputMoney());
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                outputView.printMessage(e.getMessage());
             }
         }
     }

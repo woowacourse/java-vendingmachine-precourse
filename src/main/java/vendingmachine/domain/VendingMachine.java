@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
 import java.util.List;
-import java.util.Map;
 
 public class VendingMachine {
 
@@ -44,7 +43,7 @@ public class VendingMachine {
         return counts;
     }
 
-    public int getMinPrice() {
+    public int getMinPriceOfProducts() {
         int minValue = Integer.MAX_VALUE;
         for (Product product : products) {
             if (product.getPrice() < minValue) {
