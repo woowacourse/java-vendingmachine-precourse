@@ -22,7 +22,7 @@ public class Products {
 	}
 
 	public boolean anyAvailableRemain(int money) {
-		return checkAnyProductRemain() && anyAvailableRemain(money);
+		return checkAnyProductRemain() && checkCanBuyCheapest(money);
 	}
 
 	private Product getProductByName(String name) {
