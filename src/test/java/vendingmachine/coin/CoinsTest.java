@@ -16,6 +16,16 @@ class CoinsTest {
     }
 
     @Test
+    void Coin_개수로_동전_추가_가능() {
+        Coins coins = new Coins();
+        Coin coinUnit = Coin.COIN_50;
+        int numberOfCoin = 2;
+        coins.add(coinUnit, numberOfCoin);
+
+        assertThat(coins.count(coinUnit)).isEqualTo(numberOfCoin);
+    }
+
+    @Test
     void Coins끼리의_뺄셈_가능() {
         Coins coins = new Coins();
         coins.add(Coin.COIN_500, 1);
