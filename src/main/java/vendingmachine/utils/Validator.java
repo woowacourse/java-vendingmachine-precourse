@@ -6,9 +6,8 @@ import static vendingmachine.utils.ExceptionMessage.*;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class Validate {
+public class Validator {
 	public static final String REGEX_OF_PRODUCT_INPUT = "\\[.+,\\d{3,},\\d+]";
-	public static final int MINIMUM_PRODUCT_PRICE = 100;
 	public static final int CAN_DIVISIBLE_COIN_STANDARD = 10;
 
 	public static void validateInputHoldingAmountMoney(String input) {
@@ -50,9 +49,6 @@ public class Validate {
 	}
 
 	public static void validateProductPrice(int productPrice) {
-		if (productPrice < MINIMUM_PRODUCT_PRICE) {
-			throw new IllegalArgumentException(ERROR_MINIMUM_CONDITION_PRODUCT_PRICE);
-		}
 		if (productPrice % CAN_DIVISIBLE_COIN_STANDARD != 0) {
 			throw new IllegalArgumentException(ERROR_CONDITION_PRODUCT_PRICE);
 		}

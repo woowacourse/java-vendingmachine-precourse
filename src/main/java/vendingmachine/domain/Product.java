@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.utils.ExceptionMessage.*;
-import static vendingmachine.utils.Validate.*;
+import static vendingmachine.utils.Validator.*;
 
 import java.util.List;
 

@@ -10,10 +10,19 @@ public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = new VendingMachine(inputHoldingAmountMoney());
 		printHoldingAmountCoin(vendingMachine.getHoldingAmountCoins());
-		vendingMachine.insertProductListInProductRepository(inputProductList());
+		insertProductList(vendingMachine);
 		vendingMachine.insertUserInputAmount(inputUserAmount());
 		purchaseIsPossible(vendingMachine);
 		callPrintChangeAmount(vendingMachine);
+	}
+
+	private void insertProductList(VendingMachine vendingMachine) {
+		try {
+			vendingMachine.insertProductListInProductRepository(inputProductList());
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			insertProductList(vendingMachine);
+		}
 	}
 
 	private void purchaseIsPossible(VendingMachine vendingMachine) {
