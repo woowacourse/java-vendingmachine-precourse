@@ -1,25 +1,25 @@
 plugins {
-    id 'java'
+	id 'java'
 }
 
 group 'camp.nextstep.edu'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
-    maven { url 'https://jitpack.io' }
+	mavenCentral()
+	maven { url 'https://jitpack.io' }
 }
 
 dependencies {
-    implementation 'com.github.woowacourse-projects:mission-utils:1.0.0'
+	implementation 'com.github.woowacourse-projects:mission-utils:1.0.0'
 }
 
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(8)
+	}
 }
 
 test {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
