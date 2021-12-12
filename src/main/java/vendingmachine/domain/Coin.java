@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -12,6 +13,8 @@ public enum Coin {
     COIN_10(10);
 
     private static final String WON_AND_HYPHEN_SYMBOL = "원 - ";
+    private static final int COIN_LOWEST_INDEX = 0;
+    private static final int COIN_HIGHST_INDEX = 3;
 
     private final int amount;
 
@@ -27,11 +30,23 @@ public enum Coin {
         return Arrays.asList(values());
     }
 
+    private static List<Integer> getCoinAmountList() {
+        List<Integer> coinAmountList = new ArrayList<>();
+        getCoinListDecreasingOrder().forEach(coin -> coinAmountList.add(coin.getAmount()));
+        return coinAmountList;
+    }
+
+    private static Coin getCoin(final int amountOfUnit) {
+        return getCoinListDecreasingOrder().stream()
+            .filter(coin -> coin.getAmount() == amountOfUnit)
+            .findFirst()
+            .get();
+    }
+
     public static Coin pickRandomCoin(final int maximum) {
         Coin randomCoin;
         do {
-            int randomIndex = Randoms.pickNumberInRange(0, 3);
-            randomCoin = getCoinListDecreasingOrder().get(randomIndex);
+            randomCoin = getCoin(Randoms.pickNumberInList(getCoinAmountList()));
         } while (randomCoin.getAmount() > maximum);
         return randomCoin;
     }
