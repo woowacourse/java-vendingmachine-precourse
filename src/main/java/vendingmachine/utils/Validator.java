@@ -1,5 +1,7 @@
 package vendingmachine.utils;
 
+import java.util.ArrayList;
+
 public class Validator {
 	private static final String NUMBER_PATTERN = "^[0-9]+$";
 	private static final String NAME_PATTERN = "^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$";
@@ -37,5 +39,11 @@ public class Validator {
 		if (itemInput.length != ELEMENT_SIZE)
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_VALID_ELEMENT_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+	}
+
+	public static void validateItemSize(ArrayList<String[]> itemInput) throws IllegalArgumentException {
+		if (itemInput.isEmpty())
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 	}
 }
