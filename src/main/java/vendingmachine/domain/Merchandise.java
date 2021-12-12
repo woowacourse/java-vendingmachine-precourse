@@ -2,10 +2,9 @@ package vendingmachine.domain;
 
 public class Merchandise {
 
-    private final String name;
-    private final int cost;
-
-    private int count;
+    private final MerchandiseName merchandiseName;
+    private final MerchandiseCost merchandiseCost;
+    private final MerchandiseCount merchandiseCount;
 
     public Merchandise(String merchandise) {
 
@@ -15,43 +14,10 @@ public class Merchandise {
 
         validStartEndformat(merchandise);
         validMerchandisFormat(merchandiseInfo);
-        validCost(merchandiseInfo[1]);
-        validCount(merchandiseInfo[2]);
 
-        this.name = merchandiseInfo[0];
-        this.cost = Integer.parseInt(merchandiseInfo[1]);
-        this.count = Integer.parseInt(merchandiseInfo[2]);
-
-
-    }
-
-    private void validCount(String stringCount) {
-        int count = 0;
-        try {
-            count = Integer.parseInt(stringCount);
-        } catch (Exception exception) {
-            throw new IllegalArgumentException("[ERROR] : 상품 수량은 숫자로 이루어져야 합니다.");
-        }
-
-        if (count <= 0) {
-            throw new IllegalArgumentException("[ERROR] : 상품 수량은 1개 이상 존재해야 합니다.");
-        }
-    }
-
-    private void validCost(String stringCost) {
-        int cost = 0;
-        try {
-            cost = Integer.parseInt(stringCost);
-        } catch (Exception exception) {
-            throw new IllegalArgumentException("[ERROR] : 가격은 숫자로 이루어져야 합니다.");
-        }
-
-        if (cost < 100) {
-            throw new IllegalArgumentException("[ERROR] : 상품 가격은 100원 이상이어야 합니다.");
-        }
-        if (cost % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] : 상품 가격은 10원으로 나누어 떨어져야 합니다.");
-        }
+        merchandiseName = new MerchandiseName(merchandiseInfo[0]);
+        merchandiseCost = new MerchandiseCost(merchandiseInfo[1]);
+        merchandiseCount = new MerchandiseCount(merchandiseInfo[2]);
     }
 
     private void validStartEndformat(String merchandise) {
@@ -67,18 +33,18 @@ public class Merchandise {
     }
 
     public String name() {
-        return name;
+        return merchandiseName.name();
     }
 
     public int cost() {
-        return cost;
+        return merchandiseCost.cost();
     }
 
     public int count() {
-        return count;
+        return merchandiseCount.count();
     }
 
     public void buy() {
-        this.count--;
+        merchandiseCount.minus();
     }
 }
