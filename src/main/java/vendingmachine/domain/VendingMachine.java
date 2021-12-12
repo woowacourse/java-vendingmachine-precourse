@@ -12,14 +12,14 @@ import java.util.List;
 public class VendingMachine {
 
     private final HashMap<Coin, Integer> coins = new HashMap<>();
-    private HashMap<String, List<Integer>> merchandiseInfo;
+    private Menu menu;
     private int moneyLeft = 0;
 
     public VendingMachine() {
         int totalMoney = InputView.getVendingMachineTotalMoneyInput();
         this.initializeCoins(totalMoney);
         OutputView.printCoinsInfo(this.coins);
-        this.setMerchandiseInfo(InputView.getMerchandiseInput());
+        this.setMenu(InputView.getMenuInput());
         this.setMoneyLeft(InputView.getCustomerMoneyInput());
     }
 
@@ -52,8 +52,8 @@ public class VendingMachine {
         }
     }
 
-    private void setMerchandiseInfo(HashMap<String, List<Integer>> merchandiseInfo) {
-        this.merchandiseInfo = merchandiseInfo;
+    private void setMenu(Menu menu) {
+        this.menu = menu;
     }
 
     private int getMoneyLeft() {
