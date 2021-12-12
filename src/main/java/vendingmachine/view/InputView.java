@@ -15,6 +15,7 @@ public class InputView {
 		while (true) {
 			System.out.println(PRODUCTS_INPUT_MESSAGE);
 			String inputProducts = Console.readLine();
+			OutputView.printNewLine();
 			try {
 				return getProduct(inputProducts);
 			} catch (IllegalArgumentException e) {
@@ -48,6 +49,7 @@ public class InputView {
 		while (true) {
 			System.out.println(Message);
 			String money = Console.readLine();
+			OutputView.printNewLine();
 			try {
 				MoneyValidator.checkMoney(money);
 				return Integer.parseInt(money);
@@ -61,6 +63,7 @@ public class InputView {
 		while (true) {
 			System.out.println(BUY_PRODUCT_NAME_MESSAGE);
 			String productName = Console.readLine();
+			OutputView.printNewLine();
 			try {
 				ProductValidator.checkProductName(productName);
 				return productName;

@@ -32,7 +32,6 @@ public class VendingMachineController {
 		try {
 			Integer userMoney = InputView.getUserMoney(vendingMachineProducts.getLowestPrice());
 			user = new User(userMoney);
-			OutputView.printNewLine();
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			saveUser();
@@ -42,7 +41,6 @@ public class VendingMachineController {
 	private void saveProducts() {
 		try {
 			vendingMachineProducts = new VendingMachineProducts(getProducts());
-			OutputView.printNewLine();
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 		}
@@ -70,7 +68,6 @@ public class VendingMachineController {
 	private void saveVendingMachineMoney() {
 		int vendingMachineInputMoney = InputView.getVendingMachineMoney();
 		vendingMachineMoney.moneyToCoins(vendingMachineInputMoney);
-		OutputView.printNewLine();
 	}
 
 	private void vendingMachineWork() {
