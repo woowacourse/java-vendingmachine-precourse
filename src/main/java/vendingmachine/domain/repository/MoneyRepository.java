@@ -1,7 +1,9 @@
 package vendingmachine.domain.repository;
 
+import vendingmachine.util.PublicConst;
+
 public class MoneyRepository {
-	private int amount = 0;
+	private int amount = PublicConst.NOT_EXIST;
 
 	public int getAmount() {
 		return amount;

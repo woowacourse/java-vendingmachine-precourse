@@ -4,14 +4,15 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.util.PublicConst;
 
 public class CoinRepository {
 	private final Map<Coin, Integer> coins = new LinkedHashMap<Coin, Integer>() {
 		{
-			put(Coin.COIN_500, 0);
-			put(Coin.COIN_100, 0);
-			put(Coin.COIN_50, 0);
-			put(Coin.COIN_10, 0);
+			put(Coin.COIN_500, PublicConst.NOT_EXIST);
+			put(Coin.COIN_100, PublicConst.NOT_EXIST);
+			put(Coin.COIN_50, PublicConst.NOT_EXIST);
+			put(Coin.COIN_10, PublicConst.NOT_EXIST);
 		}
 	};
 
