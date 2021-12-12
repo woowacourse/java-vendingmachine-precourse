@@ -22,13 +22,13 @@ public class OutputView {
         System.out.println("\n투입 금액: " + moneyLeft + "원\n");
     }
 
-    public static void printCoinChanges(HashMap<Coin, Integer> coins) {
+    public static void printCoinChanges(HashMap<Coin, Integer> coinChanges) {
         StringBuilder sb = new StringBuilder();
         sb.append("잔돈\n");
 
-        for (Coin coin : coins.keySet()) {
+        for (Coin coin : coinChanges.keySet()) {
             sb.append(coin.getAmount()).append("원 - ");
-            sb.append(coins.get(coin)).append("개");
+            sb.append(coinChanges.get(coin)).append("개");
             sb.append("\n");
         }
 
