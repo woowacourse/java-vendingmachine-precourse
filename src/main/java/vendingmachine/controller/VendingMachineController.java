@@ -30,7 +30,7 @@ public class VendingMachineController {
 		inputMoneyWithErrorHandling();
 		while (true) {
 			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
-			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
+			buyMerchandiseWithErrorHandling();
 			if (!isUserBuyMerchandise(vendingMachine, user)) {
 				break;
 			}
@@ -117,6 +117,15 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
 			inputMerchandiseInformationWithErrorHandling();
+		}
+	}
+
+	public void buyMerchandiseWithErrorHandling() {
+		try {
+			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
+		} catch (IllegalArgumentException illegalArgumentException) {
+			System.out.println(illegalArgumentException.getMessage());
+			buyMerchandiseWithErrorHandling();
 		}
 	}
 }

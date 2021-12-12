@@ -1,7 +1,9 @@
 package vendingmachine.domain;
 
 import java.util.List;
+import java.util.stream.Stream;
 
+import vendingmachine.utils.ErrorMessage;
 import vendingmachine.utils.Validator;
 
 public class Merchandises {
@@ -17,11 +19,10 @@ public class Merchandises {
 	}
 
 	public Merchandise selectMerchandise(String merchandiseName) {
-		for (Merchandise merchandise : merchandiseList) {
-			if (merchandise.getName().equals(merchandiseName)) {
-				return merchandise;
-			}
-		}
-		return null;
+		return merchandiseList.stream()
+			.filter(merchandise -> merchandise.getName().equals(merchandiseName))
+			.findFirst()
+			.orElseThrow(()-> new IllegalArgumentException(ErrorMessage.INVALID_NO_STOCK_MERCHANDISE_BUY_ERROR_MESSAGE));
 	}
+
 }

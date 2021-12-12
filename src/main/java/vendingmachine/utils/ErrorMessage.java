@@ -9,5 +9,6 @@ public class ErrorMessage {
 	public static String INVALID_MERCHANDISE_INFORMATION_ERROR_MESSAGE = "[ERROR] 상품 정보는 상품명, 가격, 수량 순으로 모두 입력해야한다.";
 	public static String INVALID_DUPLICATED_MERCHANDISE_ERROR_MESSAGE = "[ERROR] 상품명은 중복 되게 입력할 수 없다.";
 	public static String INVALID_MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE = "[ERROR] 상품 가격은 10원으로 나누어떨어져야 한다.";
+	public static String INVALID_NO_STOCK_MERCHANDISE_BUY_ERROR_MESSAGE = "[ERROR] 존재하는 상품만 구매할 수 있다.";
 
 }
