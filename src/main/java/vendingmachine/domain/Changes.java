@@ -3,6 +3,8 @@ package vendingmachine.domain;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -18,6 +20,21 @@ public class Changes {
 	Changes(int totalAmount) {
 		this.totalAmount = totalAmount;
 		initCoinMap();
+	}
+
+	public Map<Coin, Integer> calculateRemainChanges(int currentMoney) {
+		List<Coin> remainCoinList = getRemainChanges();
+		Map<Coin, Integer> remainChangesResult = new TreeMap<>();
+
+		for (Coin coin : remainCoinList) {
+			int count = currentMoney / coin.getAmount();
+			if (coinMap.get(coin) < count) {
+				count = coinMap.get(coin);
+			}
+			currentMoney -= (coin.getAmount() * count);
+			remainChangesResult.put(coin, count);
+		}
+		return remainChangesResult;
 	}
 
 	public List<Coin> getRemainChanges() {

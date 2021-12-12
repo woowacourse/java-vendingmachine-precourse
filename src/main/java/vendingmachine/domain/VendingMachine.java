@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.List;
+import java.util.Map;
 
 public class VendingMachine {
 
@@ -18,6 +19,10 @@ public class VendingMachine {
 
 	public InputMoney getInputMoney() {
 		return inputMoney;
+	}
+
+	public Map<Coin, Integer> returnChanges() {
+		return changes.calculateRemainChanges(inputMoney.getCurrentMoney());
 	}
 
 	public void createChanges(int totalChanges) {
