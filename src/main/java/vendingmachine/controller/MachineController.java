@@ -1,5 +1,9 @@
 package vendingmachine.controller;
 
+import java.util.HashMap;
+import java.util.List;
+
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.OutputView;
@@ -7,15 +11,16 @@ import vendingmachine.view.OutputView;
 public class MachineController {
 	public static final int ITEM_COUNT_ZERO = 0;
 
-	VendingMachine vendingMachine = new VendingMachine();
+	VendingMachine vendingMachine;
 
 	public void work() {
 		InputController inputController = new InputController();
-		vendingMachine.holdingMoney = inputController.scanHoldingMoney();
-		vendingMachine.coinCount = RandomCoinMaker.makeRandomCoin(vendingMachine.holdingMoney);
-		OutputView.printHoldingCoins(vendingMachine.coinCount);
-		vendingMachine.itemList = inputController.scanItemInform();
-		vendingMachine.inputMoney = inputController.scanInputMoney();
+		int holdingMoney = inputController.scanHoldingMoney();
+		HashMap<Coin, Integer> coinCount = RandomCoinMaker.makeRandomCoin(holdingMoney);
+		OutputView.printHoldingCoins(coinCount);
+		List<Item> itemList = inputController.scanItemInform();
+		int inputMoney = inputController.scanInputMoney();
+		vendingMachine = new VendingMachine(holdingMoney,inputMoney,itemList,coinCount);
 		buyItem();
 		OutputView.printChange(vendingMachine.calculateChange());
 	}

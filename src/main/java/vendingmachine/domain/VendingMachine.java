@@ -9,6 +9,13 @@ public class VendingMachine {
 	public List<Item> itemList;
 	public HashMap<Coin, Integer> coinCount;
 
+	public VendingMachine(int holdingMoney, int inputMoney, List<Item> itemList, HashMap<Coin, Integer> coinCount) {
+		this.holdingMoney = holdingMoney;
+		this.inputMoney = inputMoney;
+		this.itemList = itemList;
+		this.coinCount = coinCount;
+	}
+
 	public void minusInputMoney(int itemPrice) {
 		inputMoney -= itemPrice;
 	}
