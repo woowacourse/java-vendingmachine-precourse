@@ -35,15 +35,19 @@ public class CoinGroup {
 		coins.put(coin, coinCount);
 	}
 
-	public LinkedHashMap<Coin, Integer> getMap() {
-		return coins;
+	public LinkedHashMap<Integer, Integer> getMap() {
+		LinkedHashMap<Integer, Integer> coinMap = new LinkedHashMap<>();
+		for (Coin coin : Coin.values()) {
+			coinMap.put(coin.getAmount(), coins.get(coin));
+		}
+		return coinMap;
 	}
 
-	public LinkedHashMap<Coin, Integer> getNotEmptyMap() {
-		LinkedHashMap<Coin, Integer> emptyCoins = new LinkedHashMap<>(coins);
+	public LinkedHashMap<Integer, Integer> getNotEmptyMap() {
+		LinkedHashMap<Integer, Integer> emptyCoins = getMap();
 		coins.keySet().stream()
 			.filter(coin -> coins.get(coin) == 0)
-			.forEach(emptyCoins::remove);
+			.forEach(coin -> emptyCoins.remove(coin.getAmount()));
 		return emptyCoins;
 	}
 
