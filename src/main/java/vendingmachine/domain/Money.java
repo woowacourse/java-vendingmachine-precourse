@@ -26,14 +26,19 @@ public class Money {
 
 	public Map<Integer, Integer> makeChanges(Coins coins) {
 		Map<Integer, Integer> changes = new LinkedHashMap<>();
-		for (Map.Entry<Integer, Integer> coin : coins.findAll().entrySet()) {
-			int existentCoinAmount = money / coin.getKey();
-			if (0 < existentCoinAmount && existentCoinAmount <= coin.getValue()) {
-				changes.put(coin.getKey(), existentCoinAmount);
-				reduce(coin.getKey() * existentCoinAmount);
-			}
+		for (Map.Entry<Integer, Integer> coin : coins.findRestCoins().entrySet()) {
+			int number = getAvailableChangeNumber(coin.getKey(), coin.getValue(), money);
+			changes.put(coin.getKey(), number);
+			reduce(coin.getKey() * number);
 		}
 		return changes;
+	}
+
+	private int getAvailableChangeNumber(int coin, int number, int money){
+		if (coin * number > money){ // 동전 총액 > 투입 금액인 경우 (example: 100원 * 3 (300원) > 투입금액 200원)
+			return money / coin;
+		}
+		return number;
 	}
 
 	private void reduce(int moneyAmount) {
