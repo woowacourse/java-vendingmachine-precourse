@@ -2,6 +2,12 @@ package vendingmachine.util;
 
 public class ErrorMessage {
     public static final String ERROR = "[ERROR]";
+    public static final String CHOICE_DRINK_EMPTY_ERROR = String.format("%s 해당 상품의 재고가 없습니다.", ERROR);
+    public static final String CHOICE_DRINK_NO_SUCH_ERROR = String.format("%s 해당 상품은 자판기에 없습니다.", ERROR);
+    public static final String USER_MONEY_NEED_MORE_MONEY = String.format("%s 투입 금액은 상품의 최저값 이상이어야 합니다.", ERROR);
+    public static final String USER_MONEY_STRING_ERROR = String.format("%s 투입 금액은 숫자여야 합니다.", ERROR);
+    public static final String USER_MONEY_UNIT_ERROR = String.format("%s 투입 금액은 10원 단위로 나눠져야 합니다.", ERROR);
+    public static final String DRINK_NO_SUCH_MIN_PRICE_ERROR = String.format("%s 최소 금액을 가진 음료를 찾을 수 없습니다.", ERROR);
     public static final String MACHINE_MONEY_UNIT_ERROR = String.format("%s 금액은 10원 단위로 나눠져야 합니다.", ERROR);
     public static final String MACHINE_MONEY_RANGE_ERROR = String.format("%s 금액은 10원 이상이어야 합니다.", ERROR);
     public static final String MACHINE_MONEY_STRING_ERROR = String.format("%s 금액은 숫자여야 합니다.", ERROR);
