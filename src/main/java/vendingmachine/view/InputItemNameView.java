@@ -12,12 +12,13 @@ public class InputItemNameView implements View {
 	@Override
 	public void show() {
 		int money = getMoney();
+		printMoneyAndMessage(money);
+		purchase();
+
 		if (!canPurchase(money)) {
 			goReturnChangesView();
 			return;
 		}
-		printMoneyAndMessage(money);
-		purchase();
 		reshow();
 	}
 
