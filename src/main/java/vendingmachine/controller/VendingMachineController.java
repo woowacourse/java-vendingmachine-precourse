@@ -1,9 +1,7 @@
 package vendingmachine.controller;
 
-import static vendingmachine.view.InputView.*;
 
 import vendingmachine.model.Item.Items;
-import vendingmachine.model.Item.Name;
 import vendingmachine.model.buy.BuyItemName;
 import vendingmachine.model.money.Money;
 import vendingmachine.view.InputView;
@@ -18,7 +16,9 @@ public class VendingMachineController {
         setupVendingMachine();
         OutputView.showCoins(money.showCoins());
         setupItems();
+        System.out.println("test" + money.toString());
         setupInputMoney();
+        System.out.println("test2" + money.toString());
         OutputView.showInputMoney(money);
         sellItems();
         OutputView.showChange(money);
@@ -39,8 +39,10 @@ public class VendingMachineController {
 
     private void sellItems() {
         BuyItemName buyItemName = InputView.getBuyItemName();
-        if (items.isSellable(buyItemName, money)) {
-
+        while (items.isSellable(buyItemName, money)) {
+            items.sell(buyItemName, money);
+            System.out.println(money.toString());
+            buyItemName = InputView.getBuyItemName();
         }
     }
 }

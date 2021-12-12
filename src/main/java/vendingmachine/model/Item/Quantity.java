@@ -1,6 +1,6 @@
 package vendingmachine.model.Item;
 
-import vendingmachine.util.Validator;
+import vendingmachine.util.validator.Validator;
 
 public class Quantity {
     int quantity;
@@ -17,6 +17,11 @@ public class Quantity {
 
     public boolean isNotZero() {
         return quantity != 0;
+    }
+
+    public Quantity decrease() {
+        this.quantity -= 1;
+        return this;
     }
 
     @Override

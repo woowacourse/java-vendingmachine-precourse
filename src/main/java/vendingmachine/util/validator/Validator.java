@@ -1,4 +1,4 @@
-package vendingmachine.util;
+package vendingmachine.util.validator;
 
 public class Validator {
     public static final String NOT_INTEGER_EXCEPTION = "[ERROR] 숫자를 입력해주세요.";

@@ -2,9 +2,10 @@ package vendingmachine.model.money;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.model.Item.Item;
+import vendingmachine.model.Item.Price;
 import vendingmachine.model.enums.Coin;
 
-import static vendingmachine.util.Validator.*;
+import static vendingmachine.util.validator.Validator.*;
 
 public class MoneyBill {
     private int amount;
@@ -49,6 +50,10 @@ public class MoneyBill {
 
     public boolean isSameOrBigger(Item item) {
         return this.amount > item.getPrice().getAmount();
+    }
+
+    public void decrease(Price price) {
+        this.amount -= price.getAmount();
     }
 
     @Override

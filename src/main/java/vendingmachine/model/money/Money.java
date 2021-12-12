@@ -2,6 +2,7 @@ package vendingmachine.model.money;
 
 import vendingmachine.model.Item.Item;
 import vendingmachine.model.Item.Name;
+import vendingmachine.model.Item.Price;
 
 public class Money {
 
@@ -38,5 +39,21 @@ public class Money {
 
     public boolean isAffordable(Item item) {
         return moneyBill.isSameOrBigger(item);
+    }
+
+    public void decrease(Price price) {
+        moneyBill.decrease(price);
+    }
+
+    private MoneyBill getMoneyBill() {
+        return moneyBill;
+    }
+
+    @Override
+    public String toString() {
+        return "Money{" +
+            "moneyBill=" + moneyBill +
+            ", moneyCoins=" + moneyCoins +
+            '}';
     }
 }

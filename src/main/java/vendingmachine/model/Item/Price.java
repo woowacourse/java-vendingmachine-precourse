@@ -1,6 +1,6 @@
 package vendingmachine.model.Item;
 
-import vendingmachine.util.Validator;
+import vendingmachine.util.validator.Validator;
 
 public class Price {
     public static final String PRICE_NON_DIVIDABLE_EXCEPTION = "[ERROR] 가격은 10으로 나누어 떨어져야 합니다.";

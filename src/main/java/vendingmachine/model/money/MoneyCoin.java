@@ -1,6 +1,6 @@
 package vendingmachine.model.money;
 
-import static vendingmachine.util.Validator.*;
+import static vendingmachine.util.validator.Validator.*;
 
 import java.util.Arrays;
 import java.util.Objects;

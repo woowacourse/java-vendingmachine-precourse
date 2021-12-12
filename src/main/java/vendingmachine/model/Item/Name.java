@@ -16,7 +16,7 @@ public class Name {
     }
 
     public boolean sameName(BuyItemName buyItemName) {
-        return this.name.equals(buyItemName.toString());
+        return name.equals(buyItemName.toString());
     }
 
     @Override
