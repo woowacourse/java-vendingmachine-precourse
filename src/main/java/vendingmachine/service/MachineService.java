@@ -15,8 +15,8 @@ public class MachineService {
         vendingMachine.popProduct(productName);
     }
 
-    public void saveAmount(int amount) {
-        vendingMachine.setInitialAmount(amount);
+    public void saveAmount(String amount) {
+        vendingMachine.setInitialAmount(Integer.parseInt(amount));
     }
 
     public void saveProducts(String inputProducts) {
@@ -24,7 +24,7 @@ public class MachineService {
         vendingMachine.setProducts(products);
     }
 
-    public void saveUserInsertAmount(int userAmount) {
-        vendingMachine.setUserInsertAmount(userAmount);
+    public void saveUserInsertAmount(String userAmount) {
+        vendingMachine.setUserInsertAmount(Integer.parseInt(userAmount));
     }
 }

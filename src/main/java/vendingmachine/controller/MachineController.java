@@ -39,6 +39,23 @@ public class MachineController {
         OutputView.printRemainingCoins(vendingMachine.getCoins());
     }
 
+    private void requestInsertUserAmount() {
+        InputView.printUserInsertAmountMessage();
+        machineService.saveUserInsertAmount(inputValidAmount());
+    }
+
+    private String inputValidAmount() {
+        while (true) {
+            try {
+                String input = InputView.getInput();
+                InputValidator.validateAmountInput(input);
+                return input;
+            } catch (IllegalArgumentException e) {
+                OutputView.printErrorMessage(e);
+            }
+        }
+    }
+
     private void requestInsertProduct() {
         InputView.printInputProductMessage();
         String inputProducts;
@@ -52,23 +69,6 @@ public class MachineController {
             }
         }
         machineService.saveProducts(inputProducts);
-    }
-
-    private void requestInsertUserAmount() {
-        InputView.printUserInsertAmountMessage();
-        machineService.saveUserInsertAmount(inputValidAmount());
-    }
-
-    private int inputValidAmount() {
-        while (true) {
-            try {
-                String input = InputView.getInput();
-                InputValidator.validateAmountInput(input);
-                return Integer.parseInt(input);
-            } catch (IllegalArgumentException e) {
-                OutputView.printErrorMessage(e);
-            }
-        }
     }
 
     private boolean shouldContinue() {
