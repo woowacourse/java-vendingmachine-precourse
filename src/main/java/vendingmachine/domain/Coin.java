@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import vendingmachine.exception.CoinNotExistAmountException;
 
 public enum Coin {
     COIN_500(500),
@@ -20,5 +21,12 @@ public enum Coin {
         return Arrays.stream(values())
             .map(coin -> coin.amount)
             .collect(Collectors.toList());
+    }
+
+    public static Coin valueOfAmount(int amount) {
+        return Arrays.stream(values())
+            .filter(coin -> coin.amount == amount)
+            .findFirst()
+            .orElseThrow(CoinNotExistAmountException::new);
     }
 }
