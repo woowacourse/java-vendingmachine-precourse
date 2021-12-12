@@ -70,6 +70,7 @@ public class Coins {
             if (change / coinCost <= coinAvailable) {
                 coinAvailable = change / coinCost;
             }
+            countCoinOf(coinCost, -coinAvailable);
             change -= coinAvailable * coinCost;
             returnable += coinAvailable * coinCost;
         }
