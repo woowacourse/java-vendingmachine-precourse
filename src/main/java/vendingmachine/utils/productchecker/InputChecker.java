@@ -121,4 +121,17 @@ public class InputChecker {
 
         return haveSameProduct;
     }
+
+    public static boolean isRightNameInput(String input){
+        boolean isRight = true;
+
+        try{
+            NameChecker.checkName(input);
+        }catch (IllegalArgumentException exception){
+            System.out.println(exception.getMessage());
+            isRight = false;
+        }
+
+        return isRight;
+    }
 }
