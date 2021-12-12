@@ -6,7 +6,8 @@
 
  - 최초 자판기 보유금 입력
     - 보유금으로 각 동전 개수를 랜덤 생성
- 
+    - 보유금은 10원으로 나누어 떨어지게 제한
+
 
  - 자판기 보유 동전의 수량을 출력하는 기능
  
@@ -56,6 +57,9 @@
     - PriceChecker.java
     - StockChecker.java
     
+  - moneychecker
+    - BalanceInputChecker.java
+    - InsertMoneyChecker.java
 ```
 
 
@@ -74,7 +78,8 @@
 
 - WalletSystem class
   - 자판기의 보유 잔액을 저장하는 필드
-  - 동전을 Map을 저장하는 필드
+  - 투입받은 금액을 저장하는 필드
+  - 동전을 Map으로 저장하는 필드
   - 입력 받은 보유금으로 랜덤한 동전을 생성하는 함수
 
 - WalletUI class
@@ -103,4 +108,10 @@
 
 - StockChecker class
   - 상품의 수량이 올바른지 확인하는 함수
+
+- BalanceInputChecker
+  - 자판기의 최초 보유 금액을 확인
+
+- InsertMoneyChecker
+  - 입력(투입)받은 금액을 확인하는 함수
 
