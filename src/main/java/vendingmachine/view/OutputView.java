@@ -6,7 +6,12 @@ import vendingmachine.domain.VendingMachine;
 
 import java.util.Map;
 
+import static camp.nextstep.edu.missionutils.Console.readLine;
+
 public class OutputView {
+
+    private OutputView() {
+    }
 
     public static void printVendingMachineChange(Change change) {
         Map<Coin, Integer> coinMap = change.getCoinMap();
@@ -19,7 +24,9 @@ public class OutputView {
     }
 
     public static void printVendingMachineChangeResult(VendingMachine vendingMachine) {
-        System.out.println("\n투입 금액: " + vendingMachine.getRestMoney());
+        int restMoney = vendingMachine.getRestMoney();
+
+        System.out.println("\n투입 금액: " + restMoney + "원");
 
         Change change = vendingMachine.returnChange();
 
@@ -28,7 +35,7 @@ public class OutputView {
         System.out.println("잔돈");
 
         for (Coin coin : coinMap.keySet()) {
-            if (coinMap.get(coin) > 0) {
+            if (coinMap.get(coin) > 0 && ((restMoney - coin.getAmount()) >= 0)) {
                 System.out.println(coin.getAmount()+"원 - " + coinMap.get(coin)+"개");
             }
         }
