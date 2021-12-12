@@ -18,20 +18,22 @@ public class ConsoleInputView implements InputView {
     @Override
     public String inputVendingMachineMoney() {
         System.out.println(VENDING_MACHINE_INPUT_MESSAGE);
-        return readLine();
+        return getUserInput();
     }
 
     @Override
     public String inputCustomerMoney() {
         System.out.println(CUSTOMER_MONEY_INPUT_MESSAGE);
-        String userInput = readLine();
-        System.out.println();
-        return userInput;
+        return getUserInput();
     }
 
     @Override
     public String inputWantedItemName() {
         System.out.println(WANTED_ITEM_NAME_INPUT_MESSAGE);
+        return getUserInput();
+    }
+
+    private String getUserInput() {
         String userInput = readLine();
         System.out.println();
         return userInput;
