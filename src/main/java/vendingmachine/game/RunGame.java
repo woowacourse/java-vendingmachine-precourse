@@ -17,7 +17,6 @@ public class RunGame {
         checkProduct();
         checkInsertMoney();
         OutputView.showAllProcess(products, insertMoney);
-
     }
 
     private static void checkVendingMachinePrice(){
@@ -27,14 +26,13 @@ public class RunGame {
             System.out.println(Constant.VENDING_MACHINE_HOLDING_PRICE_ERROR);
             checkVendingMachinePrice();
         }
-
     }
 
     private static void setPrice(){
         OutputView.askVendingMachinePrice();
         String input = Console.readLine();
         System.out.println();
-        vendingmachineholdingPrice = InputView.parseInt(input);
+        vendingmachineholdingPrice = InputView.parseIntVendingMachine(input);
     }
 
     private static void checkProduct(){

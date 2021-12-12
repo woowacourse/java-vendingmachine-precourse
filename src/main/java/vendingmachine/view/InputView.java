@@ -11,11 +11,26 @@ public class InputView {
             throw new IllegalArgumentException();
         }
     }
+
     public static int parseInt(String input) {
         isInteger(input);
         int result = Integer.parseInt(input);
         isPositive(result);
         isValidPrice(result);
+        return result;
+    }
+
+    private static void isValidMachinePrice(int price){
+        if (price%10!=0){
+            throw new IllegalArgumentException();
+        }
+    }
+
+    public static int parseIntVendingMachine(String input) {
+        isInteger(input);
+        int result = Integer.parseInt(input);
+        isPositive(result);
+        isValidMachinePrice(result);
         return result;
     }
 
