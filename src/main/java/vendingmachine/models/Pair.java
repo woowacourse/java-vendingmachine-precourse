@@ -8,4 +8,8 @@ public class Pair {
 		this.firstValue = firstValue;
 		this.secondValue = secondValue;
 	}
+
+	public int getFirstValue() {
+		return this.firstValue;
+	}
 }
