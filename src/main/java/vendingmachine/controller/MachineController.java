@@ -16,26 +16,20 @@ public class MachineController {
         this.machineService = new MachineService(vendingMachine);
     }
 
-    public void run() {
-        initMachine();
-        useMachine();
-        endMachine();
-    }
-
-    private void initMachine() {
+    public void initMachine() {
         requestInsertInitialAmount();
         requestInsertProduct();
         requestInsertUserAmount();
     }
 
-    private void useMachine() {
+    public void useMachine() {
         InputView.printProductToBuyMessage();
         while (shouldContinue()) {
             buyProduct();
         }
     }
 
-    private void endMachine() {
+    public void endMachine() {
         OutputView.printChanges(vendingMachine.getChanges());
     }
 

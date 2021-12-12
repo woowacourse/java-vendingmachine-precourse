@@ -7,6 +7,12 @@ public class Application {
     public static void main(String[] args) {
         VendingMachine vendingMachine = new VendingMachine();
         MachineController machineController = new MachineController(vendingMachine);
-        machineController.run();
+        runVendingMachine(machineController);
+    }
+
+    private static void runVendingMachine(MachineController machineController) {
+        machineController.initMachine();
+        machineController.useMachine();
+        machineController.endMachine();
     }
 }
