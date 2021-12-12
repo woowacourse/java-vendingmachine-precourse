@@ -10,7 +10,6 @@ public class VendingMachine {
 	public VendingMachine() {
 		insertedMoney = 0;
 		changes = new Changes();
-		menu = new Menu();
 	}
 
 	public void setCoins(String initCoin) {
@@ -22,7 +21,7 @@ public class VendingMachine {
 	}
 
 	public void setMenu(String productInfo) {
-		menu.setProductList(productInfo);
+		menu = new Menu(productInfo);
 	}
 
 	public void insertMoney(String insertedMoney) {

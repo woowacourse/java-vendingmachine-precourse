@@ -11,25 +11,17 @@ public class Menu {
 	public Map<String, Integer> nameList;
 	public List<Product> menuList;
 
-	public Menu() {
+	public Menu(String productInfo) {
 		nameList = new HashMap<String, Integer>();
 		menuList = new ArrayList<Product>();
-	}
 
-	public void setProductList(String productInfo) {
-		menuList = makeProductList(productInfo);
-	}
-
-	public List<Product> makeProductList(String productInfo) {
-		List<Product> productList = new ArrayList<Product>();
 		String[] productStrList = productInfo.split(";", -1);
 
 		for (int i = 0; i < productStrList.length; i++) {
-			productList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
-			ProductException.checkProductReDuplication(productList.get(i).getName(), nameList, i);
+			menuList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
+			ProductException.checkProductReDuplication(menuList, menuList.get(i).getName(), nameList, i);
 		}
-		
-		return productList;
+
 	}
 
 	public boolean findMenu(String order) {
