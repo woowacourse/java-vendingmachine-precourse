@@ -3,6 +3,7 @@ package vendingmachine.process;
 import camp.nextstep.edu.missionutils.Console;
 
 import vendingmachine.user.User;
+import vendingmachine.user.UserGoodsValidation;
 import vendingmachine.user.UserMoneyValidation;
 
 public class ProcessPrepare {
@@ -23,6 +24,10 @@ public class ProcessPrepare {
 
     public static void inputGoods() {
         goods = User.inputGoods();
+    }
+
+    public static void checkGoods() {
+        UserGoodsValidation.checkUserGoodsValidation(goods);
     }
     
 }
