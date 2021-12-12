@@ -19,7 +19,7 @@ public class VendingMachineController {
 
 		Items items = itemcontroller.giveItems();
 		Money money = giveMoney();
-		perChaseItem(items, money);
+		sellItem(items, money);
 
 		System.out.println(money.toString());
 		OutputView.printChanges(money.makeChanges(coins));
@@ -35,7 +35,7 @@ public class VendingMachineController {
 		}
 	}
 
-	private void perChaseItem(Items items, Money money) {
+	private void sellItem(Items items, Money money) {
 		int leastItemCost = itemcontroller.getLeastItemCost(items);
 		while (money.payable(leastItemCost) && !items.checkAllOutOfOrder()) {
 			try {
