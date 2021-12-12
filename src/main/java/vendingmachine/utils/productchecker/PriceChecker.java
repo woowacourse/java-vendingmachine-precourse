@@ -14,15 +14,6 @@ public class PriceChecker {
 
         int priceToInteger = Integer.parseInt(price);
         IntegerChecker.checkLowLimit(priceToInteger, LOW_LIMIT, CONTENT_TYPE);
-        checkPriceCanDivided(priceToInteger);
+        IntegerChecker.checkDivideIntoMod(priceToInteger, MOD, CONTENT_TYPE);
     }
-
-    private static void checkPriceCanDivided(int price) throws IllegalArgumentException{
-
-        if(price % MOD != 0){
-            throw new IllegalArgumentException("[ERROR]: 상품의 가격은 " + MOD +" 원으로 나누어 떨어져야 합니다.");
-        }
-
-    }
-
 }
