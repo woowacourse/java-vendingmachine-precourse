@@ -36,11 +36,12 @@ public enum Coin {
         return coinList;
     }
 
-    public static Coin getCoin (int index) {
-        List<Coin> coinList = getCoinEnumList();
-
-        Coin coin = coinList.get(index);
-
-        return coin;
+    public static Coin valueOf(int coinValue) {
+        for (Coin coin : Coin.values()) {
+            if (coin.getAmount() == coinValue) {
+                return coin;
+            }
+        }
+        return null;
     }
 }
