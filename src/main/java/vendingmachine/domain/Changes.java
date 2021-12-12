@@ -91,8 +91,7 @@ public class Changes {
             // 자판기에 있는 잔고는 줄어들고
             changes.put(change, changes.get(change) - frequency);
             // 고객에게 줄 잔고는 늘어난다.
-            changeToCustomerInfo
-                .put(change, changeToCustomerInfo.getOrDefault(customerInputMoney, DEFAULT) + frequency);
+            changeToCustomerInfo.put(change, changeToCustomerInfo.getOrDefault(customerInputMoney, DEFAULT) + frequency);
         }
     }
 

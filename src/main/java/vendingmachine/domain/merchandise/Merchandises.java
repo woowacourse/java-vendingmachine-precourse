@@ -72,6 +72,7 @@ public class Merchandises {
     }
 
     public boolean exist(String targetMerchandise) {
-        return merchandises.stream().anyMatch(merchandise -> merchandise.name().equals(targetMerchandise));
+        return merchandises.stream()
+            .anyMatch(merchandise -> merchandise.name().equals(targetMerchandise));
     }
 }

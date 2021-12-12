@@ -26,7 +26,7 @@ public class MerchandiseCount {
     }
 
     public void minus() {
-        this.count --;
+        this.count--;
     }
 
     public int count() {
