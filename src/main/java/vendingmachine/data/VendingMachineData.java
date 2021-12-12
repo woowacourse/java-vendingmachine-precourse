@@ -16,8 +16,8 @@ public class VendingMachineData {
 	public static final String PRODUCT_INFO_FORM_NOT_MATCH_ERROR = "[ERROR] 상품 입력 양식이 잘못되었습니다.";
 	public static final String PRODUCT_NAME_DUPLICATED_ERROR = "[ERROR] 중복되는 상품명이 존재합니다.";
 	public static final String PRODUCT_QUANTITY_TOO_SMALL = "[ERROR] 수량이 너무 작습니다.";
-
-	public static final String PRODUCT_SOLDOUT_MESSAGE = "해당 상품은 매진되었습니다. 다른 상품을 골라주세요.";
+	public static final String PRODUCT_NOT_FOUND_ERROR = "[ERROR] 해당 상품은 존재하지 않습니다. 다른 상품을 골라주세요.";
+	public static final String PRODUCT_SOLDOUT_ERROR = "[ERROR] 해당 상품은 매진되었습니다. 다른 상품을 골라주세요.";
 
 	public static final String PRODUCT_REGEX = "\\[([\\w 가-힣]+),(\\d+),(\\d+)\\]";
 }

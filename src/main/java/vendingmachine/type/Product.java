@@ -22,4 +22,12 @@ public class Product {
 	public int getQuantity() {
 		return quantity;
 	}
+
+	public boolean isSoldOut() {
+		return quantity <= 0;
+	}
+
+	public void sell() {
+		quantity--;
+	}
 }
