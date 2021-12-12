@@ -83,6 +83,7 @@ public class ProductException {
 			.distinct()
 			.collect(Collectors.toList()).size();
 		if (productNames.size() != distinctSize) {
+			productList.clear();
 			throw new IllegalArgumentException(PRODUCT_NAME_DUPLICATED);
 		}
 	}

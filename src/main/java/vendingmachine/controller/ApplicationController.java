@@ -27,15 +27,11 @@ public class ApplicationController {
 		ProductRepository productRepository = productRepositoryService.getProductRepository();
 		vendingMachineService.saveProductRepository(productRepository);
 
-		getBalance();
+		saveBalance();
 	}
 
-	private void getBalance() {
-		String vendingMachineBalance = InputView.getVendingMachineBalance();
-		saveBalance(vendingMachineBalance);
-	}
-
-	private void saveBalance(String balance) {
+	private void saveBalance() {
+		String balance = InputView.getVendingMachineBalance();
 		try {
 			vendingMachineService.saveBalance(balance);
 			saveCoins();
@@ -49,21 +45,17 @@ public class ApplicationController {
 		vendingMachineService.saveCoins();
 		PrintView.printVendingMachineCoins(vendingMachineService.getCoinMap());
 
-		getProducts();
+		saveProducts();
 	}
 
-	private void getProducts() {
+	private void saveProducts() {
 		String userProducts = InputView.getVendingMachineProducts();
-		saveProducts(userProducts);
-	}
-
-	private void saveProducts(String userProducts) {
 		try {
 			productRepositoryService.saveProductRepository(userProducts);
 			getMoney();
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + e.getMessage());
-			getProducts();
+			saveProducts();
 		}
 	}
 
