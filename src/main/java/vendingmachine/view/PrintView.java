@@ -22,11 +22,14 @@ public class PrintView {
 		System.out.println(coinMessage);
 	}
 
-	public static void printMoneyState(int balance) {
-		System.out.println(INSERT_MONEY_STATE + balance + PRICE_UNIT);
+	public static void printMoneyState(int money) {
+		System.out.println(LINE_STAMP + INSERT_MONEY_STATE + money + PRICE_UNIT);
 	}
 
-	public static void printChange() {
-
+	public static void printChange(Map<Coin, Integer> coins) {
+		System.out.println(CHANGE);
+		for (Coin coin : coins.keySet()) {
+			printCoinState(coins, coin);
+		}
 	}
 }

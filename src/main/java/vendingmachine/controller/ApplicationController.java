@@ -110,7 +110,7 @@ public class ApplicationController {
 	private void returnChange(int money) {
 		PrintView.printMoneyState(money);
 		Map<Coin, Integer> changeCoinSet = vendingMachineService.getChangeCoinSet(money);
-		PrintView.printVendingMachineCoins(changeCoinSet);
+		PrintView.printChange(changeCoinSet);
 	}
 
 }
