@@ -4,6 +4,7 @@ import java.util.EnumMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import vendingmachine.Money;
 import vendingmachine.quantity.Quantity;
@@ -26,6 +27,12 @@ public class Coins {
 		coins.computeIfPresent(coin, (originCoin, originQuantity) -> originQuantity.up(quantity));
 	}
 
+	public void addAll(Coins coins) {
+		Set<Map.Entry<Coin, Quantity>> coinSet = coins.coins.entrySet();
+		for (Map.Entry<Coin, Quantity> coin : coinSet) {
+			add(coin.getKey(),coin.getValue());
+		}
+	}
 
 	public boolean isEmpty() {
 		return coins.isEmpty();

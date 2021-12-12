@@ -28,6 +28,13 @@ public class Products {
 		products.put(name,product);
 	}
 
+	public void addAll(Products products) {
+		Collection<Product> productCollection = products.getProducts().values();
+		for (Product product : productCollection) {
+			add(product);
+		}
+	}
+
 	private void validateNull(Product product) {
 		try {
 			Objects.requireNonNull(product);
