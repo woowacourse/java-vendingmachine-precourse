@@ -13,6 +13,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Machine {
 	private Map<Integer, Integer> coinCount = new HashMap<>();
 	private List<Merchandise> merchandiseList = new ArrayList<>();
+	private int payment;
 
 	public Machine() {
 		for (Integer i : Coin.getCoinList()) {
@@ -44,4 +45,9 @@ public class Machine {
 			this.merchandiseList.add(new Merchandise(item));
 		}
 	}
+
+	public void setPayment(String payment) {
+		this.payment = Integer.parseInt(payment);
+	}
+
 }

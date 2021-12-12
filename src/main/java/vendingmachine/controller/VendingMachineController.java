@@ -30,4 +30,14 @@ public class VendingMachineController {
 		}
 	}
 
+	public void putMoneyIntoMachine() {
+		while (true) {
+			String payment = view.inputPayment();
+			if (validator.isValidPayment(payment)) {
+				machine.setPayment(payment);
+				break;
+			}
+		}
+	}
+
 }

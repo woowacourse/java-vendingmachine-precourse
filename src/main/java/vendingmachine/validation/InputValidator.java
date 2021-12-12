@@ -10,6 +10,7 @@ public class InputValidator {
 		= "상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분해주세요";
 	private static final String NOT_NAME_LENGTH_IN_RANGE = "이름은 한글자 이상이어야 합니다.";
 	private static final String PRICE_MIN_MESSAGE = "상품 가격은 100원 이상으로 입력해 주세요";
+	private static final String PAYMENT_MIN_MESSAGE = "투입 금액은 0원 이상이어야 합니다.";
 	private static final int MOD_NUMBER = 10;
 
 	public boolean isValidChanges(String changes) {
@@ -75,13 +76,30 @@ public class InputValidator {
 	private void validateMerchandisePrice(String price) {
 		validateNumberInput(price);
 		validateNumberInRange(price);
-		if(Integer.parseInt(price)<100) {
+		if (Integer.parseInt(price) < 100) {
 			throw new IllegalArgumentException(ERROR_MESSAGE + PRICE_MIN_MESSAGE);
 		}
 	}
 
 	private void validateMerchandiseCount(String count) {
 		validateNumberInput(count);
+	}
+
+	public boolean isValidPayment(String payment) {
+		try {
+			validateNumberInput(payment);
+			validatePaymentInRange(payment);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+			return false;
+		}
+		return true;
+	}
+
+	private void validatePaymentInRange(String payment) {
+		if (payment.equals("0")) {
+			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_RANGE_MESSAGE);
+		}
 	}
 
 }
