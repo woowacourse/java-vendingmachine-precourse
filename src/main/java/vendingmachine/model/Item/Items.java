@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Optional;
 
 import vendingmachine.model.buy.BuyItemName;
+import vendingmachine.model.money.Money;
 
 public class Items {
     private static final HashMap<Item, Quantity> items = new HashMap<>();
@@ -32,5 +33,19 @@ public class Items {
             stringBuilder.append(" " + Items.items.get(item) + "개 \n");
         }
         return stringBuilder.toString();
+    }
+
+    public boolean isSellable(BuyItemName buyItemName, Money money) {
+        return isExist(buyItemName) && moneyLeft(buyItemName, money);
+    }
+
+    private boolean isExist(BuyItemName buyItemName) {
+        Optional<Item> findItem = items.keySet().stream().filter(item -> item.sameName(buyItemName)).findFirst();
+        return findItem.isPresent() && items.get(findItem).isNotZero();
+    }
+
+    private boolean moneyLeft(BuyItemName buyItemName, Money money) {
+        Optional<Item> findItem = items.keySet().stream().filter(item -> item.sameName(buyItemName)).findFirst();
+        return money.isAffordable(findItem.get());
     }
 }

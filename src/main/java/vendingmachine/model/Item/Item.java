@@ -15,6 +15,14 @@ public class Item {
         return name.sameName(buyItemName);
     }
 
+    public boolean sameName(BuyItemName buyItemName) {
+        return name.sameName(buyItemName);
+    }
+
+    public Price getPrice() {
+        return price;
+    }
+
     @Override
     public String toString() {
         return name.toString() + price.toString();

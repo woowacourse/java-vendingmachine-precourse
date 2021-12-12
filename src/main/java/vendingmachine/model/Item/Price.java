@@ -18,8 +18,13 @@ public class Price {
         }
     }
 
+    public int getAmount() {
+        return this.price;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(price);
     }
+
 }

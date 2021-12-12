@@ -2,6 +2,8 @@ package vendingmachine.model.Item;
 
 import java.util.Objects;
 
+import vendingmachine.model.buy.BuyItemName;
+
 public class Name {
     String name;
 
@@ -11,6 +13,10 @@ public class Name {
 
     public boolean sameName(String name) {
         return this.name.equals(name);
+    }
+
+    public boolean sameName(BuyItemName buyItemName) {
+        return this.name.equals(buyItemName.toString());
     }
 
     @Override

@@ -39,5 +39,8 @@ public class VendingMachineController {
 
     private void sellItems() {
         BuyItemName buyItemName = InputView.getBuyItemName();
+        if (items.isSellable(buyItemName, money)) {
+            
+        }
     }
 }

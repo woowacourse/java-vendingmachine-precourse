@@ -1,5 +1,6 @@
 package vendingmachine.model.money;
 
+import vendingmachine.model.Item.Item;
 import vendingmachine.model.Item.Name;
 
 public class Money {
@@ -33,5 +34,9 @@ public class Money {
 
     public String showChange() {
         return moneyCoins.showChange();
+    }
+
+    public boolean isAffordable(Item item) {
+        return moneyBill.isSameOrBigger(item);
     }
 }

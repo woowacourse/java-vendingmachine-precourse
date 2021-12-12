@@ -15,6 +15,10 @@ public class Quantity {
         Validator.validateNonNegative(Integer.parseInt(quantity));
     }
 
+    public boolean isNotZero() {
+        return quantity != 0;
+    }
+
     @Override
     public String toString() {
         return Integer.toString(quantity);
