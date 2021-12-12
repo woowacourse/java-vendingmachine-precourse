@@ -2,6 +2,7 @@ package vendingmachine.service;
 
 import static constant.NumberConstant.*;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import exception.PriceException;
@@ -24,7 +25,7 @@ public class VendingMachineService {
 
 	public void saveCoins() {
 		int balance = vendingMachine.getBalance();
-		Map<Coin, Integer> coinMap = new CoinService().getCoinsByBalance(balance);
+		LinkedHashMap<Coin, Integer> coinMap = new CoinService().getCoinsByBalance(balance);
 		vendingMachine.setCoinMap(coinMap);
 	}
 

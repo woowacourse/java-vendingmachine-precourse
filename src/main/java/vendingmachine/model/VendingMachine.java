@@ -1,11 +1,12 @@
 package vendingmachine.model;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.repository.ProductRepository;
 
 public class VendingMachine {
-	private Map<Coin, Integer> coinMap;
+	private LinkedHashMap<Coin, Integer> coinMap;
 	private ProductRepository productRepository;
 	private int balance;
 
@@ -17,7 +18,7 @@ public class VendingMachine {
 		return balance;
 	}
 
-	public void setCoinMap(Map<Coin, Integer> coinMap) {
+	public void setCoinMap(LinkedHashMap<Coin, Integer> coinMap) {
 		this.coinMap = coinMap;
 	}
 
@@ -27,9 +28,5 @@ public class VendingMachine {
 
 	public void setProductRepository(ProductRepository productRepository) {
 		this.productRepository = productRepository;
-	}
-
-	public ProductRepository getProductRepository() {
-		return productRepository;
 	}
 }

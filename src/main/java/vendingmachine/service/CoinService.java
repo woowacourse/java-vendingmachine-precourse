@@ -5,7 +5,7 @@ import static constant.StringConstant.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -13,9 +13,9 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.model.Coin;
 
 public class CoinService {
-	private Map<Coin, Integer> coins = new HashMap<>();
+	private LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
 
-	public Map<Coin, Integer> getCoinsByBalance(int balance) {
+	public LinkedHashMap<Coin, Integer> getCoinsByBalance(int balance) {
 		List<Integer> coinUnitList = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
 			coinUnitList.add(coin.getAmount());
