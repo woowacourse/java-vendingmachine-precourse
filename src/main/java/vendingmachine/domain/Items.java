@@ -10,8 +10,6 @@ import java.util.stream.Collectors;
 public class Items {
 	private static final String START_OR_END_WITH_BRACKET = "[ERROR] 상품 정보는 대괄호로 감싸져 있어야 합니다.";
 	private static final String FIND_NO_ITEM = "[ERROR] 상품이 존재하지 않습니다.";
-	private static final String LACK_MONEY = "[ERROR] 잔액이 부족합니다.";
-	private static final String QUANTITY_ZERO = "[ERROR] 재고가 없습니다.";
 
 	private final List<Item> itemRepository;
 
@@ -49,9 +47,7 @@ public class Items {
 
 	public int purchase(String itemName, int money) {
 		Item item = find(itemName);
-		validateEnoughMoney(item, money);
-		validateQuantityLeft(item);
-		return item.purchase();
+		return item.purchase(money);
 	}
 
 	private Item find(String name) {
@@ -59,18 +55,6 @@ public class Items {
 			return itemRepository.stream().filter(item -> item.equals(name)).collect(Collectors.toList()).get(0);
 		} catch (IndexOutOfBoundsException e) {
 			throw new IllegalArgumentException(FIND_NO_ITEM);
-		}
-	}
-
-	private void validateEnoughMoney(Item item, int money) {
-		if (!item.purchasable(money)) {
-			throw new IllegalArgumentException(LACK_MONEY);
-		}
-	}
-
-	private void validateQuantityLeft(Item item) {
-		if (!item.quantityLeft()) {
-			throw new IllegalArgumentException(QUANTITY_ZERO);
 		}
 	}
 }

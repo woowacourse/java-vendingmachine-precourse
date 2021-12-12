@@ -31,13 +31,32 @@ class ItemTest {
 	}
 
 	@Test
+	void 상품_구매_실패() {
+		// given
+		String[] itemData = {"콜라", "1200", "1"};
+		int notEnoughMoney = 1100;
+		int enoughMoney = 3300;
+
+		// then
+		Item item = new Item(itemData);
+
+		// then
+		assertAll(() -> assertThatThrownBy(() -> item.purchase(notEnoughMoney)),
+			() -> {
+				item.purchase(enoughMoney);
+				assertThatThrownBy(() -> item.purchase(enoughMoney));
+			});
+	}
+
+	@Test
 	void 상품_구매() {
 		// given
 		String[] itemData = {"콜라", "1200", "1"};
+		int money = 1300;
 
 		// when
 		Item item = new Item(itemData);
-		item.purchase();
+		item.purchase(money);
 
 		// then
 		assertThat(item.quantityLeft()).isEqualTo(false);

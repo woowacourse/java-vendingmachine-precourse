@@ -29,21 +29,17 @@ class ItemsTest {
 	}
 
 	@Test
-	void 상품_구매_실패() {
+	void 상품_찾을수_없음() {
 		// given
 		String input = "[콜라,1200,10];[알로에,1500,1]";
 		String wrongName = "사이다";
-		String notEnoughMoney = "알로에";
 		int money = 1300;
 
 		// when
 		Items items = new Items(input);
 
 		// then
-		assertAll(() -> assertThatThrownBy(() -> items.purchase(wrongName, money))
-				.isInstanceOf(IllegalArgumentException.class),
-			() -> assertThatThrownBy(() -> items.purchase(notEnoughMoney, money))
-				.isInstanceOf(IllegalArgumentException.class));
+		assertThatThrownBy(() -> items.purchase(wrongName, money)).isInstanceOf(IllegalArgumentException.class);
 	}
 
 	@Test
