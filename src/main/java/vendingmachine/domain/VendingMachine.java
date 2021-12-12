@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.ExceptionMessages.SOLD_OUT_EXCEPTION;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
 import vendingmachine.view.InputView;
@@ -66,7 +68,9 @@ public class VendingMachine {
         String name = InputView.getMerchandiseNameInput();
         Merchandise merchandise = menu.getMerchandiseByName(name);
 
-        if (merchandise.getNumber() == 0) throw new IllegalArgumentException();
+        if (merchandise.getNumber() == 0) {
+            throw new IllegalArgumentException(SOLD_OUT_EXCEPTION);
+        }
 
         customerMoneyLeft -= merchandise.getPrice();
         merchandise.decreaseNumber();
