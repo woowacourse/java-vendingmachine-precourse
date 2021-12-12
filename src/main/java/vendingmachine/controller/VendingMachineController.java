@@ -23,7 +23,10 @@ public class VendingMachineController {
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		inputMerchandiseInformationWithErrorHandling();
 		inputMoneyWithErrorHandling();
-		showMoneyAndInputMerchandise();
+		while(isUserBuyMerchandise(vendingMachine, user) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()){
+			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
+			buyMerchandiseWithErrorHandling();
+		}
 		OutputView.showChangeMoneyStatus(user.getUserMoney().getMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
 	}
 
@@ -45,16 +48,6 @@ public class VendingMachineController {
 		return false;
 	}
 
-	public void showMoneyAndInputMerchandise() {
-		while (true) {
-			OutputView.showInputMoneyStatus(user.getUserMoney().getMoney());
-			if (isUserBuyMerchandise(vendingMachine, user) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()) {
-				buyMerchandiseWithErrorHandling();
-				continue;
-			}
-			break;
-		}
-	}
 
 	public void vendingMahchineMoneyWithErrorHandling() {
 		try {
