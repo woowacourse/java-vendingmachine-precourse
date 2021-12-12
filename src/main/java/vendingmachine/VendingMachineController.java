@@ -21,8 +21,14 @@ public class VendingMachineController {
 	public void run(VendingMachine vendingMachine){
 		vendingMachine.holdingItem = InputView.holdingItemsInput();
 		vendingMachine.inputMoney = InputView.inputMoneyInput();
+		buy(vendingMachine);
 	}
 
+	public void buy(VendingMachine vendingMachine){
+		String buyItem = InputView.buyItemInput();
+		vendingMachine.stockDeduct(buyItem);
+		vendingMachine.inputMoneyDeduct(buyItem);
+	}
 
 
 }

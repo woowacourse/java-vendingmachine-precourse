@@ -53,6 +53,15 @@ public class InputView {
 		return inputMoney;
 	}
 
+	public static String buyItemInput(){
+		String buyItem = "";
+
+		System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
+		buyItem = Console.readLine();
+
+		return buyItem;
+	}
+
 	private static void removeBracket(List<String> stringItemsList) {
 		for (int i = 0; i < stringItemsList.size(); i++) {
 			String stringItem = stringItemsList.get(i);
