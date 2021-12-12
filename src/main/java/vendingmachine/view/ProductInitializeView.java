@@ -10,6 +10,7 @@ public class ProductInitializeView extends VendingMachineView {
 	@Override
 	public void show() {
 		String products = inputProcessor.readProductComposition();
+		outputProcessor.printLine();
 		try {
 			controller.addProductList(products);
 			hide();

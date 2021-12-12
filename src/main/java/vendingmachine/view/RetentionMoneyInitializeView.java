@@ -11,6 +11,7 @@ public class RetentionMoneyInitializeView extends VendingMachineView {
 	@Override
 	public void show() {
 		String retentionMoney = inputProcessor.readRetentionMoney();
+		outputProcessor.printLine();
 		try {
 			Coins coins = controller.addRetentionCoin(retentionMoney);
 			outputProcessor.printRetentionCoins(coins);

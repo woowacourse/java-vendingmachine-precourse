@@ -25,6 +25,7 @@ public class ProductPurchaseView extends VendingMachineView {
 		Money insertMoney = controller.getInsertMoney();
 		outputProcessor.printInsertMoney(insertMoney);
 		String productName = inputProcessor.readProductName();
+		outputProcessor.printLine();
 		controller.purchaseProduct(productName);
 	}
 

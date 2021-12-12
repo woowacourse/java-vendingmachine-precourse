@@ -10,6 +10,7 @@ public class MoneyInputView extends VendingMachineView {
 	@Override
 	public void show() {
 		String insertMoney = inputProcessor.readInsertMoney();
+		outputProcessor.printLine();
 		try {
 			controller.addInsertMoney(insertMoney);
 			hide();

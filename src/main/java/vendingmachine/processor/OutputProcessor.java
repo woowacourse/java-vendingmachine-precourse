@@ -4,7 +4,7 @@ import vendingmachine.Money;
 import vendingmachine.coin.Coins;
 
 public class OutputProcessor {
-	private static final String PRINT_RETENTION_COINS = "자판기가 보유한 동전\n";
+	private static final String PRINT_RETENTION_COINS = "자판기가 보유한 동전";
 	private static final String PRINT_INSERT_MONEY = "투입 금액: ";
 	private static final String PRINT_RETURN_CHANGE = "잔돈";
 
@@ -24,5 +24,9 @@ public class OutputProcessor {
 
 	public void printMessage(String message) {
 		System.out.println(message);
+	}
+
+	public void printLine() {
+		System.out.println();
 	}
 }
