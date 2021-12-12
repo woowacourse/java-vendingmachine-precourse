@@ -20,5 +20,9 @@ public class Item {
 	public boolean isAmountZero() {
 		return this.amount <= 0;
 	}
+
+	public void increaseAmount(int value) {
+		this.amount += value;
+	}
 }
 
