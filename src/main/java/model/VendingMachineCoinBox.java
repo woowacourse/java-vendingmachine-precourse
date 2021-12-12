@@ -28,15 +28,15 @@ public class VendingMachineCoinBox {
 	}
 
 	private void makeCoins(int insertVendingMachineChange) {
-		int totalCoinValueInCoinBox = START_TOTAL_COIN_PRICE;
-		while (totalCoinValueInCoinBox < insertVendingMachineChange) {
-			int coinValue = RandomCoinPriceGenerator.pickRandomCoinPrice();
-			if (isTotalCoinPriceOverInputVendingMachineChange(totalCoinValueInCoinBox, coinValue,
+		int totalCoinPriceInCoinBox = START_TOTAL_COIN_PRICE;
+		while (totalCoinPriceInCoinBox < insertVendingMachineChange) {
+			int coinPrice = RandomCoinPriceGenerator.pickRandomCoinPrice();
+			if (isTotalCoinPriceOverInputVendingMachineChange(totalCoinPriceInCoinBox, coinPrice,
 				insertVendingMachineChange)) {
 				continue;
 			}
-			totalCoinValueInCoinBox += coinValue;
-			Coin coin = Coin.getCoinByValue(coinValue);
+			totalCoinPriceInCoinBox += coinPrice;
+			Coin coin = Coin.getValueByPrice(coinPrice);
 			coinBox.put(coin, coinBox.get(coin) + ADD_COIN_COUNT);
 		}
 	}
@@ -57,7 +57,7 @@ public class VendingMachineCoinBox {
 		return eachCoinCount;
 	}
 
-	public List<Integer> bringEachCoinValueInCoinBox() {
+	public List<Integer> bringEachCoinPriceInCoinBox() {
 		List<Integer> eachCoinPrice = new ArrayList<>();
 		for (Coin coin : Coin.getValuesByDescending()) {
 			eachCoinPrice.add(coin.getAmount());

@@ -18,7 +18,7 @@ public enum Coin {
 	}
 
 	// 추가 기능 구현
-	public static Coin getCoinByPrice(int coinPrice) {
+	public static Coin getValueByPrice(int coinPrice) {
 		if (coinPrice == 500) {
 			return COIN_500;
 		} else if (coinPrice == 100) {

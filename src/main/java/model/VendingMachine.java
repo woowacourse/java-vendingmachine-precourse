@@ -13,7 +13,7 @@ public class VendingMachine {
 		return vendingMachineCoinBox.bringEachCoinCountInCoinBox();
 	}
 
-	public List<Integer> giveEachCoinValue() {
-		return vendingMachineCoinBox.bringEachCoinValueInCoinBox();
+	public List<Integer> giveEachCoinPrice() {
+		return vendingMachineCoinBox.bringEachCoinPriceInCoinBox();
 	}
 }
