@@ -23,7 +23,7 @@ public class VendingMachineController {
 	}
 
 	private void purchaseProduct(VendingMachine vendingMachine) {
-		printInputAmount(vendingMachine.getInputAmount());
+		printInputAmount(vendingMachine.toString());
 		try {
 			vendingMachine.purchaseProduct(inputPurchaseProductName());
 		} catch (IllegalArgumentException illegalArgumentException) {
@@ -33,7 +33,7 @@ public class VendingMachineController {
 	}
 
 	private void callPrintChangeAmount(VendingMachine vendingMachine) {
-		printInputAmount(vendingMachine.getInputAmount());
+		printInputAmount(vendingMachine.toString());
 		printChangeAmount(vendingMachine.getChangeAmountToString());
 	}
 }

@@ -9,8 +9,8 @@ public class OutputView {
 		System.out.println(holdingAmountCoinToString);
 	}
 
-	public static void printInputAmount(int inputAmount) {
-		System.out.println("투입 금액: " + inputAmount + "원");
+	public static void printInputAmount(String inputAmountToString) {
+		System.out.println(inputAmountToString);
 	}
 
 	public static void printChangeAmount(String changeAmountToString) {
