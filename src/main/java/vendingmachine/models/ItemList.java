@@ -35,7 +35,10 @@ public class ItemList {
 		return false;
 	}
 
-	public void sellItem(String name) {
+	public void sellItem(String name, int payMoney) {
+		checkItemName(name);
+		checkPayMoney(name, payMoney);
+		checkAmount(name);
 		this.ItemList.get(name).decreaseAmount(DECREMENTAL_VALUE);
 	}
 
