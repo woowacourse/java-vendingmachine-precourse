@@ -76,7 +76,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("1.1");
+					run("1.1");
 					vendingMachine.initHoldingMoney();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -91,7 +91,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("5000000000");
+					run("5000000000");
 					vendingMachine.initHoldingMoney();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -106,7 +106,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("-1");
+					run("-1");
 					vendingMachine.initHoldingMoney();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -121,7 +121,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("135");
+					run("135");
 					vendingMachine.initHoldingMoney();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -179,7 +179,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("[콜라,1.1,20]");
+					run("[콜라,1.1,20]");
 					vendingMachine.registerProducts();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -194,7 +194,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("[콜라,50000000000,20]");
+					run("[콜라,50000000000,20]");
 					vendingMachine.registerProducts();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -209,7 +209,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("[콜라,50,20]");
+					run("[콜라,50,20]");
 					vendingMachine.registerProducts();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -224,7 +224,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("[콜라,135,20]");
+					run("[콜라,135,20]");
 					vendingMachine.registerProducts();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -267,7 +267,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("1.1");
+					run("1.1");
 					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -282,7 +282,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("5000000000");
+					run("5000000000");
 					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -297,7 +297,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("-1");
+					run("-1");
 					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -312,7 +312,7 @@ public class VendingMachineTest extends NsTest {
 		assertSimpleTest(
 			() -> {
 				try {
-					runException("OzRagwort");
+					run("OzRagwort");
 					vendingMachine.sellProduct();
 					assertThat(output()).contains(ERROR_MESSAGE);
 				} catch (final NoSuchElementException ignore) {
@@ -328,7 +328,7 @@ public class VendingMachineTest extends NsTest {
 			() -> {
 				Products products = new Products("[콜라,500,1]");
 				products.save();
-				runException("3000", "콜라");
+				run("3000", "콜라");
 				vendingMachine.sellProduct();
 				assertFalse(ProductRepository.findByName(new Name("콜라")).canSell());
 			}
