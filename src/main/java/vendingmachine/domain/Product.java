@@ -24,4 +24,8 @@ public class Product {
 		final String[] product_element = product.split(PRODUCT_ELEMENT_SPLIT);
 		return new Product(product_element[NAME_INDEX], product_element[PRICE_INDEX], product_element[QUANTITY_INDEX]);
 	}
+
+	public Name getName() {
+		return name;
+	}
 }
