@@ -35,8 +35,12 @@ public class VendingMachineRunner implements Runnable {
 
     private int inputAmount() {
         while (true) {
-            ConsolePrinter.print(Message.INPUT_AMOUNT.getMessage());
-            return input.inputInteger();
+            try {
+                ConsolePrinter.print(Message.INPUT_AMOUNT.getMessage());
+                return input.inputInteger();
+            } catch (IllegalArgumentException exception) {
+                ConsolePrinter.print(exception.getMessage());
+            }
         }
     }
 
