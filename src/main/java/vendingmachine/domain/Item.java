@@ -22,12 +22,9 @@ public class Item {
 		return price;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void purchase() {
+	public int purchase() {
 		quantity--;
+		return price;
 	}
 
 	public boolean checkOutOfStock() {

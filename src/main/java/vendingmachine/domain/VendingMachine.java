@@ -2,8 +2,6 @@ package vendingmachine.domain;
 
 import static vendingmachine.utils.validator.ItemNameValidator.*;
 
-import java.util.Map;
-
 public class VendingMachine {
 
 	private final Coins coins;
@@ -40,20 +38,7 @@ public class VendingMachine {
 
 	public Coins returnCoins(int amount) {
 		Coins change = new Coins();
-		processChange(change, amount);
+		change.processChange(amount);
 		return change;
-	}
-
-	private void processChange(Coins change, int amount) {
-		for (Map.Entry<Coin, Integer> entry : coins.getList().entrySet()) {
-			Coin coin = entry.getKey();
-			Integer count = entry.getValue();
-
-			int coinCount = coin.calculateCount(amount, count);
-			change.getList()
-				.put(coin, coinCount);
-
-			amount = coin.calculateChange(amount, coinCount);
-		}
 	}
 }

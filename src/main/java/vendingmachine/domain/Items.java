@@ -39,13 +39,12 @@ public class Items {
 
 	public int purchase(String itemName) {
 		Item item = findByName(itemName);
-		item.purchase();
+		int price = item.purchase();
 
 		if (item.checkOutOfStock()) {
 			list.remove(item);
 		}
-
-		return item.getPrice();
+		return price;
 	}
 
 	private Item findByName(String itemName) {

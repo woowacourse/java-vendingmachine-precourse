@@ -31,6 +31,18 @@ public class Coins {
 		}
 	}
 
+	public void processChange(int amount) {
+		for (Map.Entry<Coin, Integer> entry : list.entrySet()) {
+			Coin coin = entry.getKey();
+			Integer count = entry.getValue();
+
+			int coinCount = coin.calculateCount(amount, count);
+			list.put(coin, coinCount);
+
+			amount = coin.calculateChange(amount, coinCount);
+		}
+	}
+
 	private Map<Coin, Integer> initializeCoins() {
 		list = new LinkedHashMap<>();
 
