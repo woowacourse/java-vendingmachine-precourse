@@ -1,6 +1,7 @@
 package controller;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 import utils.validator.VendingMachineChangeValidator;
@@ -8,6 +9,9 @@ import utils.validator.vendingmachineproducts.VendingMachineProductsValidator;
 
 public class InputController {
 	private static final boolean INPUT_ERROR = true;
+	private static final String LEFT_BRACKET = "[";
+	private static final String RIGHT_BRACKET = "]";
+	private static final String EMPTY_VALUE = "";
 
 	private InputController() {
 	}
@@ -29,11 +33,16 @@ public class InputController {
 			try {
 				List<String> vendingMachineProducts = VendingMachineProductsValidator.checkValidVendingMachineProducts(
 					Console.readLine());
-				return vendingMachineProducts;
-
+				return vendingMachineProducts.stream()
+					.map(InputController::trimVendingMachineProduct)
+					.collect(Collectors.toList());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
 		}
+	}
+
+	private static String trimVendingMachineProduct(String vendingMachineProduct) {
+		return vendingMachineProduct.replace(LEFT_BRACKET, EMPTY_VALUE).replace(RIGHT_BRACKET, EMPTY_VALUE);
 	}
 }
