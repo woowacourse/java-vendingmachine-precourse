@@ -5,6 +5,7 @@ import java.util.List;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingMoneyValidator;
+import vendingmachine.utils.validator.InsertAmountValidator;
 import vendingmachine.utils.validator.ProductInfoValidator;
 import vendingmachine.view.ErrorMessageOutputView;
 import vendingmachine.view.InputView;
@@ -41,6 +42,16 @@ public class VendingMachineController {
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
             initializeProductsInfo();
+        }
+    }
+
+    private void initializeInsertAmount() {
+        try {
+            int insertAmount = InsertAmountValidator.getValidInsertAmountValidator(InputView.inputInsertAmount());
+            vendingMachine.insertMoney(insertAmount);
+        } catch (IllegalArgumentException e) {
+            ErrorMessageOutputView.printErrorMessage(e.getMessage());
+            initializeInsertAmount();
         }
     }
 }
