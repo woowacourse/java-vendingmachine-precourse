@@ -8,5 +8,6 @@ public class Application {
 		vendingMachineController.setVendingMachineCoinCounter();
 		vendingMachineController.setProducts();
 		vendingMachineController.getUserAmount();
+		vendingMachineController.buyProducts();
 	}
 }

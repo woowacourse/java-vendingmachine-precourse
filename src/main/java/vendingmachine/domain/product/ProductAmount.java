@@ -9,4 +9,12 @@ public class ProductAmount {
 		AmountValidator.checkProductAmount(amount);
 		this.amount = amount;
 	}
+
+	public boolean isExpensive(int userAmount) {
+		return amount > userAmount;
+	}
+
+	public int getChange(int userAmount) {
+		return userAmount - amount;
+	}
 }

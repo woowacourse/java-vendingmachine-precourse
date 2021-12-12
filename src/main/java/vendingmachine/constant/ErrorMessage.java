@@ -8,4 +8,6 @@ public class ErrorMessage {
 	public static final String DUPLICATE_NAME_EXIST_ERROR_MESSAGE = "[ERROR] 중복된 이름의 상품이 존재합니다.\n";
 	public static final String BLANK_NAME_ERROR_MESSAGE = "[ERROR] 이름은 공백일 수 없습니다.\n";
 	public static final String OUT_OF_STOCK_ERROR_MESSAGE = "[ERROR] 재고가 없는 상품은 등록할 수 없습니다.\n";
+	public static final String PRODUCT_IS_NOT_EXISTENT_ERROR_MESSAGE = "[ERROR] 해당 상품은 존재하지 않습니다.";
+	public static final String PRODUCT_IS_EXPENSIVE_ERROR_MESSAGE = "[ERROR] 투입 금액 부족으로 해당 상품을 살 수 없습니다.\n";
 }

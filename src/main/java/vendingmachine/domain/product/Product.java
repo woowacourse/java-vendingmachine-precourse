@@ -1,5 +1,6 @@
 package vendingmachine.domain.product;
 
+import static vendingmachine.constant.ErrorMessage.*;
 import static vendingmachine.constant.SystemMessage.*;
 
 import vendingmachine.validator.AmountValidator;
@@ -24,5 +25,24 @@ public class Product {
 
 	public boolean equals(Product o) {
 		return name.equals(o.name);
+	}
+
+	public boolean hasName(ProductName productName) {
+		return name.equals(productName);
+	}
+
+	public boolean hasStock() {
+		return stock.isPositive();
+	}
+
+	public void sell(int userAmount) {
+		if (amount.isExpensive(userAmount)) {
+			throw new IllegalArgumentException(PRODUCT_IS_EXPENSIVE_ERROR_MESSAGE);
+		}
+		stock = stock.subtract();
+	}
+
+	public int getChange(int userAmount) {
+		return amount.getChange(userAmount);
 	}
 }
