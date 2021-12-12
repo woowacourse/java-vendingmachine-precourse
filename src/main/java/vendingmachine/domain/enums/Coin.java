@@ -20,6 +20,10 @@ public enum Coin {
         return this.amount;
     }
 
+    public String getAmountFormat() {
+        return this.amount + "원";
+    }
+
     public static Coin getCoinByAmount(int amount) {
         for (Coin coin : Coin.values()) {
             if (coin.amount != amount) continue;
