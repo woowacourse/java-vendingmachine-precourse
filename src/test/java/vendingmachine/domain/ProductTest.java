@@ -5,8 +5,24 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.NullAndEmptySource;
 
 class ProductTest {
+
+    @ParameterizedTest
+    @NullAndEmptySource
+    @DisplayName("상품의 이름이 공백이 들어올 경우 exception이 발생해야 한다.")
+    void createProductExceptionByEmptyNameTest(String input) {
+        // given
+        int price = 100;
+        int remainAmount = 20;
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> new Product(input, price, remainAmount))
+            .withMessage("[ERROR] 상품의 이름은 공백이 들어올 수 없습니다.");
+    }
 
     @Test
     @DisplayName("제품의 가격이 100원 이하일 경우 exception이 발생해야 한다.")

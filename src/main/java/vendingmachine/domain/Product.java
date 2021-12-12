@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Objects;
 import vendingmachine.exception.ProductLeastPriceException;
+import vendingmachine.exception.ProductNameEmptyException;
 import vendingmachine.exception.ProductNonRemainAmountException;
 import vendingmachine.exception.ProductNotDivisableException;
 import vendingmachine.exception.ProductNotEnoughMoneyException;
@@ -15,11 +16,18 @@ public class Product {
     private int remainAmount;
 
     public Product(String name, int price, int remainAmount) {
+        checkNameIsEmpty(name);
         checkPriceLargeThanStandardPrice(price);
         checkPriceDivisableByLeastCoin(price);
         this.name = name;
         this.price = price;
         this.remainAmount = remainAmount;
+    }
+
+    private static void checkNameIsEmpty(String name) {
+        if (Objects.isNull(name) || name.equals("")) {
+            throw new ProductNameEmptyException();
+        }
     }
 
     private static void checkPriceLargeThanStandardPrice(int price) {
