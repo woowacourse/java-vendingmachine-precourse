@@ -1,9 +1,10 @@
 package vendingmachine.view;
 
-import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Product;
 import vendingmachine.validator.Validator;
 
 public class Input {
@@ -18,12 +19,11 @@ public class Input {
 		return Integer.parseInt(moneyInVendingMachine);
 	}
 
-	public static String getProductsInfo() {
-		String productsInfo;
-		do {
-			System.out.println(MSG_GET_MONEY_IN_MACHINE);
-			productsInfo = Console.readLine();
-		} while (Validator.isValidProductsInfo(productsInfo));
-		return productsInfo;
+	public static List<String> getProductsInfo() {
+		System.out.println(MSG_GET_MONEY_IN_MACHINE);
+		String productsInfo = Console.readLine();
+		return Arrays.stream(productsInfo.split(";"))
+			.map(String::trim)
+			.collect(Collectors.toList());
 	}
 }
