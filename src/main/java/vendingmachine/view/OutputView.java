@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Randoms;
+
 import vendingmachine.model.Coin;
 import vendingmachine.util.Constant;
 
@@ -12,11 +13,21 @@ public class OutputView {
         System.out.println(Constant.VENDING_MACHINE_HOLDING_PRICE);
     }
 
+    public static void askProduct(){
+        System.out.println(Constant.PRODUCT);
+    }
+
+    public static void askInsertMoney(){
+        System.out.println(Constant.INSERT_MONEY);
+    }
+
     public static void showCoins(int vendingmachineholdingPrice){
         getCoins(vendingmachineholdingPrice);
+        System.out.println(Constant.VENDING_MACHINE_HOLDING_COIN);
         for(Coin coins : Coin.values()){
             System.out.println(coins.getAmount()+"원 - "+ coins.getNum()+"개");
         }
+        System.out.println();
     }
 
     private static void getCoins(int vendingmachineholdingPrice){
@@ -33,4 +44,12 @@ public class OutputView {
             coins.setNum(numCoin);
         }
     }
+
+    public static void showAllProcess(String[] products, int insertMoney){
+
+
+
+    }
+
+
 }
