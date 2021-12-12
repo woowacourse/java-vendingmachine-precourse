@@ -2,7 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
-public class Input {
+public class ValidatedInput {
     public int requestMachineMoney() {
         System.out.println(Constant.MACHINE_MONEY_INPUT_REQUEST_STRING);
         return readMachineMoney();
