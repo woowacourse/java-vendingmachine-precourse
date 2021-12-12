@@ -29,6 +29,7 @@ public class ManagementController {
                 deposit = Integer.parseInt(input);
                 CheckMoenyFigure.validationPositiveNumber(deposit);
                 CheckMoenyFigure.validationUnit(deposit);
+                return;
             } catch(IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -42,8 +43,9 @@ public class ManagementController {
             try {
                 String [] commodityInfo = input.split(";");
                 CheckCommodityFormat.validation(commodityInfo);
-                Arrays.stream(commodityInfo).forEach(s -> s.substring(1, s.length()-1));
+                Arrays.stream(commodityInfo).forEach(c -> c.substring(1, c.length()-1));
                 putCommodities(commodityInfo);
+                return;
             } catch (IllegalArgumentException e){
                 System.out.println(e.getMessage());
             }
