@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import vendingmachine.models.Item;
 import vendingmachine.utils.Indexes;
+import vendingmachine.utils.Validator;
 
 public class ItemInformationInputView implements InputView {
 	private static final String FIRST_DELIMITER = ";";
@@ -21,6 +22,19 @@ public class ItemInformationInputView implements InputView {
 			doubleSplit.add(eachFirstParsed.split(SECOND_DELIMITER));
 		}
 		return doubleSplit;
+	}
+
+	public String checkAllConditions(String nowInput) {
+		try {
+			ArrayList<String[]> parsedItem = generateDoubleSplit(nowInput);
+			Validator.validateItemSize(parsedItem);
+			Validator.validateElementCondition(parsedItem);
+			return nowInput;
+		}
+		catch (IllegalArgumentException error) {
+			System.out.print(error.getMessage());
+			return BLANK_STRING;
+		}
 	}
 
 	public HashMap<String, Item> parse(String input) {
