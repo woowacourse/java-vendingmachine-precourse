@@ -34,11 +34,27 @@ public class VendingMachine {
 
 	public String coinsToString() {
 		StringBuilder result = new StringBuilder();
-		Stream.of(Coin.values())
-			.map(Coin::getAmount)
+		Coin.getAmountList()
 			.forEach(amount -> result.append(
 				String.format("%d원 - %d개\n", amount, coins.getOrDefault(amount, 0))
 			));
 		return result.toString();
+	}
+
+	public HashMap<Integer, Integer> selectCoinsToBeReturned(int userInputAmount) {
+		List<Integer> changeList = Coin.getAmountList().stream()
+			.filter(coins::containsKey)
+			.collect(Collectors.toList());
+
+		int greedyAmount = userInputAmount;
+		HashMap<Integer, Integer> resultCoins = new HashMap<>();
+		for (int c : changeList) {
+			if (greedyAmount >= c) {
+				int cnt = Math.min(greedyAmount / c, coins.get(c));
+				resultCoins.put(c, resultCoins.getOrDefault(c, 0) + cnt);
+				greedyAmount -= cnt * c;
+			}
+		}
+		return resultCoins;
 	}
 }

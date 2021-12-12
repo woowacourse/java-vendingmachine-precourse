@@ -8,6 +8,7 @@ public final class Constants {
 
 	public static final String OUTPUT_MESSAGE_COINS = "자판기가 보유한 동전";
 	public static final String OUTPUT_MESSAGE_USER_INPUT_AMOUNT = "투입 금액: ";
+	public static final String OUTPUT_MESSAGE_RETURNED_COINS = "잔돈";
 
 	public static final String ERROR_MESSAGE = "[ERROR] ";
 	public static final String ERROR_MESSAGE_INPUT_VENDING_MACHINE_CHANGE =

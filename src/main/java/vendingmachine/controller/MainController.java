@@ -16,5 +16,6 @@ public class MainController {
 
 		purchaseController.inputUserInputAmount();
 		purchaseController.buy();
+		vendingMachineController.returnChange(purchaseController.getFinalUserInputAmount());
 	}
 }

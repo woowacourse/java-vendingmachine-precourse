@@ -6,12 +6,16 @@ import vendingmachine.util.ExceptionHandler;
 import vendingmachine.validator.InputValidator;
 
 public class PurchaseService {
+	private final ProductService productService;
 	private int userInputAmount;
 	private Product productToBuy;
-	private final ProductService productService;
 
 	public PurchaseService(ProductService productService) {
 		this.productService = productService;
+	}
+
+	public int getUserInputAmount() {
+		return userInputAmount;
 	}
 
 	public String userInputAmountToString() {
@@ -45,7 +49,7 @@ public class PurchaseService {
 		return isValid;
 	}
 
-	public boolean checkReturnChange() {
-		return false;
+	public boolean shouldReturnChange() {
+		return productService.isEmpty() || productService.isSmallerThanMinimumPrice(userInputAmount);
 	}
 }

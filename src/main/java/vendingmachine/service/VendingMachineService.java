@@ -1,5 +1,7 @@
 package vendingmachine.service;
 
+import java.util.HashMap;
+
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.Constants;
 import vendingmachine.util.ExceptionHandler;
@@ -29,4 +31,7 @@ public final class VendingMachineService {
 		vendingMachine.generateCoins();
 	}
 
+	public HashMap<Integer, Integer> returnChange(int userInputAmount) {
+		return vendingMachine.selectCoinsToBeReturned(userInputAmount);
+	}
 }

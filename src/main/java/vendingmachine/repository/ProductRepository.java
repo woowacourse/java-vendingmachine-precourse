@@ -2,6 +2,7 @@ package vendingmachine.repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import vendingmachine.domain.Product;
 
@@ -25,11 +26,23 @@ public class ProductRepository {
 		return null;
 	}
 
+	public int getMinimumPrice() {
+		return products.stream()
+			.map(Product::getPrice)
+			.sorted()
+			.collect(Collectors.toList())
+			.get(0);
+	}
+
 	public void delete(Product product) {
 		products.remove(product);
 	}
 
 	public void deleteAll() {
 		products.clear();
+	}
+
+	public boolean isEmpty() {
+		return products.isEmpty();
 	}
 }

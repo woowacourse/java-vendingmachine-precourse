@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-public class Product {
+public class Product implements Comparable<Product> {
 	private String name;
 	private int price;
 	private int count;
@@ -25,5 +25,13 @@ public class Product {
 
 	public boolean priceIsSmallerThan(int price) {
 		return this.price <= price;
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		if (this.price <= o.price) {
+			return 1;
+		}
+		return 0;
 	}
 }

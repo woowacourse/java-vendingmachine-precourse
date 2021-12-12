@@ -4,7 +4,6 @@ import vendingmachine.service.ProductService;
 import vendingmachine.view.InputView;
 
 public class ProductController {
-
 	private final ProductService productService = new ProductService();
 
 	public ProductService getProductService() {

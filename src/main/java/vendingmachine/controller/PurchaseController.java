@@ -20,18 +20,23 @@ public class PurchaseController {
 		purchaseService.inputUserInputAmount(inputAmount);
 	}
 
+	public int getFinalUserInputAmount() {
+		return purchaseService.getUserInputAmount();
+	}
+
+	public void buy() {
+		while (!purchaseService.shouldReturnChange()) {
+			OutputView.printUserInputAmount(purchaseService.userInputAmountToString());
+			inputProductToBuy();
+			purchaseService.buy();
+		}
+		OutputView.printUserInputAmount(purchaseService.userInputAmountToString());
+	}
+
 	public void inputProductToBuy() {
 		String productToBuy;
 		do {
 			productToBuy = InputView.inputProductToBuy();
 		} while (!purchaseService.validateProductToBuy(productToBuy));
-	}
-
-	public void buy() {
-		do {
-			OutputView.printUserInputAmount(purchaseService.userInputAmountToString());
-			inputProductToBuy();
-			purchaseService.buy();
-		} while (!purchaseService.checkReturnChange());
 	}
 }

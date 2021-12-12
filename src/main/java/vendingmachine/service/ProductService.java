@@ -35,6 +35,10 @@ public class ProductService {
 		productRepository.deleteAll();
 	}
 
+	public boolean isEmpty() {
+		return productRepository.isEmpty();
+	}
+
 	public boolean validateProduct(String products) {
 		List<String> productArray = Arrays.asList(products.split(Constants.PRODUCT_SEPARATOR));
 		boolean isValid = InputValidator.isNotEmpty(productArray)
@@ -70,5 +74,9 @@ public class ProductService {
 	private boolean validateProductCount(String count) {
 		return InputValidator.isDigit(count)
 			&& InputValidator.isGreaterThan(Constants.PRODUCT_COUNT_MIN_VALUE, count);
+	}
+
+	public boolean isSmallerThanMinimumPrice(int amount) {
+		return amount < productRepository.getMinimumPrice();
 	}
 }
