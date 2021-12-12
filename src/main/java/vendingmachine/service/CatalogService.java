@@ -1,6 +1,6 @@
 package vendingmachine.service;
 
-import static vendingmachine.service.InputExceptionService.*;
+import static vendingmachine.service.exception.InputExceptionService.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,7 +9,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Catalog;
 import vendingmachine.repository.CatalogRepository;
-import vendingmachine.view.ErrorMessage;
+import vendingmachine.view.exception.ErrorMessage;
 
 public class CatalogService {
 	private static final String CATALOG_STRING_SPLITTER = ";";

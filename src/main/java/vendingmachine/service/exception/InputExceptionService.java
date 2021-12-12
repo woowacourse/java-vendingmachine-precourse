@@ -1,4 +1,4 @@
-package vendingmachine.service;
+package vendingmachine.service.exception;
 
 import java.util.List;
 

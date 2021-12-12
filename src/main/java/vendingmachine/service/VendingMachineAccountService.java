@@ -6,7 +6,8 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachineAccount;
-import vendingmachine.view.ErrorMessage;
+import vendingmachine.service.exception.InputExceptionService;
+import vendingmachine.view.exception.ErrorMessage;
 
 public class VendingMachineAccountService {
 	public static final int INVALID_INPUT = -1;

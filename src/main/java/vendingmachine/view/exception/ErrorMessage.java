@@ -1,4 +1,4 @@
-package vendingmachine.view;
+package vendingmachine.view.exception;
 
 public class ErrorMessage {
 	private static final String ERROR_MESSAGE_PREFIX = "[ERROR]";
