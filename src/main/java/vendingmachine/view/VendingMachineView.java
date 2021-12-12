@@ -24,4 +24,5 @@ public abstract class VendingMachineView {
 	public boolean isShow() {
 		return visible.isShow();
 	}
+	public abstract void show();
 }
