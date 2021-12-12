@@ -30,6 +30,21 @@ public class Coins {
         return coinTable.get(coin.getAmount());
     }
 
+    public int getCoinCount(int coinCost) {
+        if (isIncluded(coinCost)) {
+            return coinTable.get(coinCost);
+        }
+        return -1;
+    }
+
+    public int getValueOfCoins() {
+        int money = 0;
+        for (int coinCost : coinTable.keySet()) {
+            money += getCoinCount(coinCost) * coinCost;
+        }
+        return money;
+    }
+
     public boolean isIncluded(int coinCost) {
         for (int key : coinTable.keySet()) {
             if (key == coinCost) {
@@ -37,6 +52,25 @@ public class Coins {
             }
         }
         return false;
+    }
+
+    public int getAvailableChange(int change) {   //change: 잔돈
+        ArrayList<Integer> list = createCostList(change);
+        list.sort(Collections.reverseOrder());
+        int returnable = 0;
+
+        for (int coinCost : list) {
+            if (change < coinCost) {
+                continue;
+            }
+            int coinAvailable = getCoinCount(coinCost);
+            if (change / coinCost <= coinAvailable) {
+                coinAvailable = change / coinCost;
+            }
+            change -= coinAvailable * coinCost;
+            returnable += coinAvailable * coinCost;
+        }
+        return returnable;
     }
 
     private void initializeCoins() {
