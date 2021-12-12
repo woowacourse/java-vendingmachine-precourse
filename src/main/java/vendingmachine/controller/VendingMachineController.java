@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Changes;
 import vendingmachine.domain.InvestmentMoney;
 import vendingmachine.domain.PossessionCoins;
 import vendingmachine.domain.PossessionCoinsGenerator;
@@ -30,11 +31,14 @@ public class VendingMachineController {
         while (vendingMachine.isOperate(investmentMoney)) {
             buy(vendingMachine, investmentMoney);
         }
+
+        finish(vendingMachine, investmentMoney);
     }
 
     private void buy(VendingMachine vendingMachine, InvestmentMoney investmentMoney) {
         try {
-            vendingMachine.buy(investmentMoney, InputView.getProductPurchase(investmentMoney));
+            OutputView.printInvestmentMoney(investmentMoney);
+            vendingMachine.buy(investmentMoney, InputView.getProductPurchase());
         } catch (IllegalArgumentException e) {
             buy(vendingMachine, investmentMoney);
         }
@@ -46,5 +50,11 @@ public class VendingMachineController {
 
         OutputView.printPossessionCoins(possessionCoins);
         return possessionCoins;
+    }
+
+    private void finish(VendingMachine vendingMachine, InvestmentMoney investmentMoney) {
+        OutputView.printInvestmentMoney(investmentMoney);
+        Changes changes = vendingMachine.getChanges(investmentMoney);
+        OutputView.printChanges(changes);
     }
 }
