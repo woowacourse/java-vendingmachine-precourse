@@ -53,4 +53,9 @@ public class ValidatedInput {
         }
         return Integer.parseInt(input);
     }
+
+    public String requestBuyingProduct() {
+        System.out.println(Constant.BUYING_PRODUCT_INPUT_REQUEST_STRING);
+        return Console.readLine();
+    }
 }

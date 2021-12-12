@@ -25,5 +25,6 @@ public class Controller {
             requestMachineInfo();
         }
         System.out.println(machine.remainMoney());
+        String nameToBuy = input.requestBuyingProduct();
     }
 }
