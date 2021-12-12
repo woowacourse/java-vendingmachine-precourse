@@ -21,4 +21,10 @@ public class NumberValidator {
             throw new IllegalArgumentException(errorMessage);
         }
     }
+
+    public static void validateDivisibleByTen(final int input, final String errorMessage) {
+        if (input % 10 != 0) {
+            throw new IllegalArgumentException(errorMessage);
+        }
+    }
 }
