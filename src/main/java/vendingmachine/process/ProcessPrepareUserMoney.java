@@ -13,4 +13,8 @@ public class ProcessPrepareUserMoney {
     public static void checkUserMoney() {
         UserMoneyValidation.checkUserMoneyValidation(money);
     }
+
+    public static int toIntegerUserMoney() {
+        return Integer.parseInt(money);
+    }
 }
