@@ -100,4 +100,26 @@ public class Product {
             throw new IllegalArgumentException();
         }
     }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void decreaseQuantity() {
+        validateQuantityZero();
+        quantity--;
+    }
+
+    private void validateQuantityZero() {
+         if (quantity == DEFAULT_QUANTITY) {
+             throw new IllegalArgumentException();
+         }
+    }
+
+    public boolean isSameName(String productPurchaseName) {
+        if (this.name.equals(productPurchaseName)) {
+            return true;
+        }
+        return false;
+    }
 }

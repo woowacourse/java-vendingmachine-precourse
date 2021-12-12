@@ -34,4 +34,18 @@ public class InvestmentMoney {
             throw new IllegalArgumentException();
         }
     }
+
+    public void calculate(Product product) {
+        if (investmentMoney < product.getPrice()) {
+            throw new IllegalArgumentException();
+        }
+
+        product.decreaseQuantity();
+        investmentMoney -= product.getPrice();
+    }
+
+    @Override
+    public String toString() {
+        return investmentMoney + "원";
+    }
 }
