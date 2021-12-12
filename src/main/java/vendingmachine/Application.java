@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.utils.Validator;
+import vendingmachine.view.ConsoleView;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,7 +13,10 @@ import java.util.stream.Collectors;
 public class Application {
 
 
+    private static final String INPUT_SEED_MONEY_CONSOLE_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+    private static final String INPUT_MONEY_CONSOLE_MESSAGE = "투입 금액을 입력해 주세요.";
     private static final String PRODUCT_INFO_SEPARATOR = ";";
+
 
     public static void main(String[] args) {
         VendingMachine vendingMachine = new VendingMachine(getSeedMoneyFromUser());
@@ -33,19 +36,7 @@ public class Application {
     }
 
     private static int getSeedMoneyFromUser() {
-        while (true) {
-            try {
-                System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-                String input = Console.readLine();
-                lineFeed();
-                Validator.checkNumberFormat(input);
-                int number = Integer.parseInt(input);
-                Validator.checkPositive(number);
-                return number;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        return ConsoleView.getMoneyFromUser(INPUT_SEED_MONEY_CONSOLE_MESSAGE);
     }
 
     private static void printSeedMoneyInVendingMachine(VendingMachine vendingMachine) {
@@ -87,19 +78,7 @@ public class Application {
     }
 
     private static int getInputMoneyFromUser() {
-        while (true) {
-            try {
-                System.out.println("투입 금액을 입력해 주세요.");
-                String input = Console.readLine();
-                lineFeed();
-                Validator.checkNumberFormat(input);
-                int number = Integer.parseInt(input);
-                Validator.checkPositive(number);
-                return number;
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
+        return ConsoleView.getMoneyFromUser(INPUT_MONEY_CONSOLE_MESSAGE);
     }
 
     private static void printChanges(Coins changes) {
