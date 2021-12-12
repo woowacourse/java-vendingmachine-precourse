@@ -10,15 +10,17 @@ import vendingmachine.domain.Item;
 import vendingmachine.service.CoinService;
 import vendingmachine.service.ItemService;
 import vendingmachine.service.MoneyService;
+import vendingmachine.service.PurchaseService;
 import vendingmachine.view.InputView;
 
 public class VendingMachineController {
 
+	private static List<Coin> coins = new ArrayList<>();
 	private InputView inputView;
 	private CoinService coinService;
 	private ItemService itemService;
 	private MoneyService moneyService;
-	private List<Coin> coins;
+	private PurchaseService purchaseService;
 	private List<Item> items;
 
 	public VendingMachineController() {
@@ -26,13 +28,23 @@ public class VendingMachineController {
 		coinService = new CoinService();
 		itemService = new ItemService();
 		moneyService = new MoneyService();
+		purchaseService = new PurchaseService();
 	}
 
 	public void machineInit() {
 		int savedMoney = moneyService.getSavedMoney();
-		coins = Coin.init();
-		HashMap<Coin, Integer> savedCoins = coinService.getRandomCoins(coins, savedMoney);
+		coinService.init(coins);
+		coinService.pickRandomCoins(coins, savedMoney);
+		for (Coin coin : coins) {
+			System.out.println(coin.getAmount() + " : " + coin.getNumberOfCoin());
+		}
 		items = itemService.getItems();
 		int customerMoney = moneyService.getCustomerMoney();
+		customerMoney = purchaseService.purchaseItem(items, customerMoney);
+		coinService.getRemainingCoins(coins, customerMoney);
+		for (Coin remainingCoin : coins) {
+			System.out.println(remainingCoin.getAmount() + " : " + remainingCoin.getRemainingNumber());
+		}
+		System.out.println(purchaseService.isEnoughMoneyForMinPriceItem(items, customerMoney));
 	}
 }
