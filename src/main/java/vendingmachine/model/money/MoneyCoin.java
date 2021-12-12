@@ -1,4 +1,4 @@
-package vendingmachine.model;
+package vendingmachine.model.money;
 
 import static vendingmachine.util.Validator.*;
 

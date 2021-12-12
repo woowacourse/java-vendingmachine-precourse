@@ -1,4 +1,4 @@
-package vendingmachine.model;
+package vendingmachine.model.money;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.model.enums.Coin;

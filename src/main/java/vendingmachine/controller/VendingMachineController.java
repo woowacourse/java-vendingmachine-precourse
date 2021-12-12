@@ -1,20 +1,29 @@
 package vendingmachine.controller;
 
-import vendingmachine.model.Asset;
+import static vendingmachine.view.InputView.*;
+
+import vendingmachine.model.Item.Items;
+import vendingmachine.model.money.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 
-    private Asset asset;
+    private Money money;
+    private Items items;
 
     public void start() {
         setupVendingMachine();
-        OutputView.showCoins(asset.showCoins());
+        OutputView.showCoins(money.showCoins());
+        setupItems();
     }
 
     private void setupVendingMachine() {
-        this.asset = InputView.getInitialAsset();
-        asset.generateRandomCoins();
+        this.money = InputView.getInitialAsset();
+        money.generateRandomCoins();
+    }
+
+    private void setupItems() {
+        this.items = InputView.getInitialItems();
     }
 }

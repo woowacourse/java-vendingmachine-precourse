@@ -11,10 +11,10 @@ public class Validator {
             throw new IllegalArgumentException(NOT_INTEGER_EXCEPTION);
         }
     }
+
     public static void validateNonNegative(int input) {
         if (input < 0) {
             throw new IllegalArgumentException(NOT_POSITIVE_NUMBER_EXCEPTION);
         }
     }
-
 }

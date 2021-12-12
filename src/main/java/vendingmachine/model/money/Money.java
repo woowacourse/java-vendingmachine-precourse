@@ -1,11 +1,11 @@
-package vendingmachine.model;
+package vendingmachine.model.money;
 
-public class Asset {
+public class Money {
 
     private final MoneyBill moneyBill;
     private final MoneyCoins moneyCoins;
 
-    public Asset(int amount) {
+    public Money(int amount) {
         this.moneyBill = new MoneyBill(amount);
         this.moneyCoins = new MoneyCoins();
     }
