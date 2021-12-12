@@ -17,7 +17,11 @@ public class ProductRepository {
         return instance;
     }
 
-    public void addProduct(Product product) {
+    public void addProduct(ArrayList<String> productInfoList) {
+        Product product = new Product(productInfoList.get(Condition.INDEX_PRODUCT_NAME.getNumber()),
+                Integer.parseInt(productInfoList.get(Condition.INDEX_PRODUCT_COST.getNumber())),
+                Integer.parseInt(productInfoList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber())));
+
         products.add(product);
     }
 

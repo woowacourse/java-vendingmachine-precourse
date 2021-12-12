@@ -93,14 +93,14 @@ public class ProductInputView {
     private void validateProductInfo(String[] products) throws IllegalArgumentException {
         for (String product : products) {
             String[] productInfo = product.split(Input.COMMA.getText());
-            ArrayList<String> productList = convertProductToList(productInfo);
+            ArrayList<String> productInfoList = convertProductToList(productInfo);
 
-            validateProductName(productList.get(Condition.INDEX_PRODUCT_NAME.getNumber()));
-            validateProductCost(productList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
-            validateLimitOfProductCost(productList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
-            validateProductAmount(productList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber()));
+            validateProductName(productInfoList.get(Condition.INDEX_PRODUCT_NAME.getNumber()));
+            validateProductCost(productInfoList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
+            validateLimitOfProductCost(productInfoList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
+            validateProductAmount(productInfoList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber()));
 
-            storeProductMap(productList);
+            ProductRepository.getInstance().addProduct(productInfoList);
         }
     }
 
@@ -155,15 +155,6 @@ public class ProductInputView {
                 throw new IllegalArgumentException();
             }
         }
-    }
-
-    private void storeProductMap(ArrayList<String> productList) {
-        Product product = new Product(productList.get(Condition.INDEX_PRODUCT_NAME.getNumber()),
-                Integer.parseInt(productList.get(Condition.INDEX_PRODUCT_COST.getNumber())),
-                        Integer.parseInt(productList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber())));
-
-        ProductRepository productRepository = ProductRepository.getInstance();
-        productRepository.addProduct(product);
     }
 
     private ArrayList<String> convertProductToList(String[] product) {
