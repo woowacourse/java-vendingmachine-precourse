@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.CoinRepository;
+import vendingmachine.domain.Name;
+import vendingmachine.domain.ProductRepository;
 import vendingmachine.enums.Coin;
 
 public class VendingMachineTest extends NsTest {
@@ -39,6 +41,21 @@ public class VendingMachineTest extends NsTest {
 				assertThat(output()).contains(
 					"자판기가 보유한 동전", "500원 - 0개", "100원 - 0개", "50원 - 0개", "10원 - 0개"
 				);
+			}
+		);
+	}
+
+	@DisplayName("상품 등록 기능 테스트")
+	@Test
+	void registerProductsTest() {
+		assertSimpleTest(
+			() -> {
+				run("[콜라,1500,20];[사이다,1000,10]");
+				vendingMachine.registerProducts();
+				Name coke = new Name("콜라");
+				Name cider = new Name("사이다");
+				assertTrue(ProductRepository.findByName(coke).isSameName(coke));
+				assertTrue(ProductRepository.findByName(cider).isSameName(cider));
 			}
 		);
 	}
