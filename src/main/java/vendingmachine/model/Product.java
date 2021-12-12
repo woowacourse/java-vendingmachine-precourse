@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-import vendingmachine.utils.ExceptionUtils;
+import vendingmachine.utils.exception.ProductException;
 
 public class Product {
 
@@ -16,12 +16,12 @@ public class Product {
 	private static final String PRODUCT_BRACKET_RIGHT = "]";
 
 	public Product(String productInfo) {
-		productInfo = ExceptionUtils.validateInputProductsInfo(productInfo);
+		productInfo = ProductException.validateInputProductsInfo(productInfo);
 		String[] info = removeBrackets(productInfo).split(PRODUCT_INFO_DELIMITER);
 		this.name = info[NAME_INDEX];
-		this.price = ExceptionUtils.validatePriceOfProductsInfo(
+		this.price = ProductException.validatePriceOfProductsInfo(
 			Integer.parseInt(info[PRICE_INDEX]));
-		this.number = ExceptionUtils.validateNumberOfProductsInfo(
+		this.number = ProductException.validateNumberOfProductsInfo(
 			Integer.parseInt(info[NUMBER_INDEX]));
 	}
 

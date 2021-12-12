@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-import vendingmachine.utils.ExceptionUtils;
+import vendingmachine.utils.exception.MoneyException;
 
 public enum Coin {
 	COIN_500(500),
@@ -11,7 +11,7 @@ public enum Coin {
 	private final int amount;
 
 	Coin(final int amount) {
-		ExceptionUtils.validateMoney(amount);
+		MoneyException.validateMoney(amount);
 		this.amount = amount;
 	}
 

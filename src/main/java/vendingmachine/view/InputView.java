@@ -2,7 +2,8 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.VendingMachine;
-import vendingmachine.utils.ExceptionUtils;
+import vendingmachine.utils.exception.MoneyException;
+import vendingmachine.utils.exception.ProductException;
 
 public class InputView {
 
@@ -13,9 +14,9 @@ public class InputView {
 		OutputView.askVendingMachineAmount();
 		String inputMoney = Console.readLine();
 		try {
-			ExceptionUtils.validateInputMoney(inputMoney);
+			MoneyException.validateInputMoney(inputMoney);
 			int money = Integer.parseInt(inputMoney);
-			ExceptionUtils.validateMoney(money);
+			MoneyException.validateMoney(money);
 			return money;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
@@ -26,7 +27,7 @@ public class InputView {
 	public static String writeProductsInfo() {
 		OutputView.askProductInfo();
 		try {
-			return ExceptionUtils.validateInputProductsInfo(Console.readLine());
+			return ProductException.validateInputProductsInfo(Console.readLine());
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
 			return writeProductsInfo();
@@ -37,9 +38,9 @@ public class InputView {
 		OutputView.askInsertMoney();
 		String inputMoney = Console.readLine();
 		try {
-			ExceptionUtils.validateInputMoney(inputMoney);
+			MoneyException.validateInputMoney(inputMoney);
 			int money = Integer.parseInt(inputMoney);
-			ExceptionUtils.validateMoney(money);
+			MoneyException.validateMoney(money);
 			return money;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
@@ -52,8 +53,8 @@ public class InputView {
 		OutputView.askProductToBuy();
 		String inputName = Console.readLine();
 		try {
-			ExceptionUtils.validateNameOfProduct(inputName, vendingMachine);
-			ExceptionUtils.validateProductSoldOut(inputName, vendingMachine.getProducts());
+			ProductException.validateNameOfProduct(inputName, vendingMachine);
+			ProductException.validateProductSoldOut(inputName, vendingMachine.getProducts());
 			return inputName;
 		} catch (IllegalArgumentException IAE) {
 			OutputView.printError(IAE);
