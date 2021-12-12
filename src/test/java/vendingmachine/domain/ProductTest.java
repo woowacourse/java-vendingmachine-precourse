@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -33,5 +34,21 @@ class ProductTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Product(name, price, remainAmount))
             .withMessage("[ERROR] 상품 가격은 10원으로 나누어떠러져야 합니다.");
+    }
+
+    @Test
+    @DisplayName("상품의 이름과 동일한 이름이 들어오는 경우 true를 반환한다.")
+    void isEqualsNameTest() {
+        // given
+        String name = "콜라";
+        int price = 1500;
+        int remainAmount = 20;
+        Product product = new Product(name, price, remainAmount);
+
+        // when
+        boolean result = product.isEqualsName(name);
+
+        // then
+        assertTrue(result);
     }
 }

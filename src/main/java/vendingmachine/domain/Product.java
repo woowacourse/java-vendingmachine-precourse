@@ -30,6 +30,10 @@ public class Product {
         }
     }
 
+    public boolean isEqualsName(String name) {
+        return this.name.equals(name);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
