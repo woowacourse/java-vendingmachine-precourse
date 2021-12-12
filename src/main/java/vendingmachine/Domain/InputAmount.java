@@ -17,8 +17,12 @@ public class InputAmount {
         inputAmount -= cost;
     }
 
-    public static boolean isMoreThanCost(int cost) {
-        return inputAmount >= cost;
+    public static boolean isMoreThanNum(int num) {
+        return inputAmount >= num;
+    }
+
+    public static int calculateMaxNumber(Coin c) {
+        return inputAmount / c.getAmount();
     }
 
     public static String printInputAmount() {

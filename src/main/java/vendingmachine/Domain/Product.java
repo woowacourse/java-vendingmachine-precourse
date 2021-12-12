@@ -20,7 +20,7 @@ public class Product {
     }
 
     public boolean canPurchase() {
-        return InputAmount.isMoreThanCost(cost);
+        return InputAmount.isMoreThanNum(cost);
     }
 
     public void purchase() {

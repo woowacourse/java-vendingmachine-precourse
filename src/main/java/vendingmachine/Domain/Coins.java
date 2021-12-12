@@ -8,9 +8,11 @@ import java.util.Map;
 public class Coins {
     private static Coins instance = new Coins();
     private static Map<Coin, Integer> holdingCoins;
+    private static Map<Coin, Integer> change;
 
     private Coins() {
         holdingCoins = new LinkedHashMap<>();
+        change = new LinkedHashMap<>();
         for (Coin c : Coin.values()) {
             holdingCoins.put(c, 0);
         }
@@ -21,8 +23,20 @@ public class Coins {
         holdingCoins.put(c, holdingCoins.get(c) + 1);
     }
 
+    public static void addToChange(Coin c, int count) {
+        change.put(c, count);
+    }
+
+    public static int calculateNumberOfCoin(Coin c) {
+        return Math.min(holdingCoins.get(c), InputAmount.calculateMaxNumber(c));
+    }
+
     public static String printHoldingCoins() {
         return printCoins(holdingCoins);
+    }
+
+    public static String printChange() {
+        return printCoins(change);
     }
 
     private static String printCoins(Map<Coin, Integer> coins) {

@@ -31,6 +31,14 @@ public enum Coin {
                 .orElse(null);
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
+    public int calculateTotalAmount(int count) {
+        return amount * count;
+    }
+
     public String printAmount() {
         return amount + OutputConstant.COIN_AMOUNT;
     }

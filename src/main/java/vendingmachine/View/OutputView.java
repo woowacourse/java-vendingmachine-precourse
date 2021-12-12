@@ -20,4 +20,9 @@ public class OutputView {
         System.out.println(Coins.printHoldingCoins());
     }
 
+    public static void printChange() {
+        System.out.println(OutputConstant.PRINT_CHANGE);
+        System.out.println(Coins.printChange());
+    }
+
 }
