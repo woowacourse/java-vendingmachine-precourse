@@ -49,4 +49,12 @@ public class Product {
 			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_COUNT_MAX);
 		}
 	}
+
+	public int getAmount() {
+		return this.amount;
+	}
+
+	public boolean isBuy() {
+		return this.count != 0;
+	}
 }

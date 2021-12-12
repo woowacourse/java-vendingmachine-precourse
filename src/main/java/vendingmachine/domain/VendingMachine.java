@@ -9,6 +9,10 @@ public class VendingMachine {
 	}
 
 	public int getEnteredAmount() {
-		return enteredAmount;
+		return this.enteredAmount;
+	}
+	
+	public boolean isBuy(int lowestPossibleProductPrice) {
+		return this.enteredAmount >= lowestPossibleProductPrice;
 	}
 }
