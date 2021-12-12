@@ -11,11 +11,16 @@ import java.util.List;
 
 public class InputView {
     public static int getTotalMoneyInput() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+        try {
+            System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
 
-        String input = Console.readLine();
-        validateTotalMoneyInput(input);
-        return Integer.parseInt(input);
+            String input = Console.readLine();
+            validateTotalMoneyInput(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getTotalMoneyInput();
+        }
     }
 
     public static Menu getMenuInput() {
