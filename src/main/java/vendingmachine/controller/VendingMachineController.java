@@ -15,14 +15,14 @@ public class VendingMachineController {
 	public void run() {
 
 		Coins coins = coinController.giveHoldingCoins();
-		OutputView.printHoldingCoinStatus(coins.getHoldingCoinsAsText());
+		OutputView.printHoldingCoinStatus(coins);
 
 		Items items = itemcontroller.giveItems();
 		Money money = giveMoney();
 		perChaseItem(items, money);
 
 		System.out.println(money.toString());
-		OutputView.printChanges(coins.getChangesAsText());
+		OutputView.printChanges(coins);
 	}
 
 	private Money giveMoney() {
