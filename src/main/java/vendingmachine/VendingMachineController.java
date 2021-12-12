@@ -23,6 +23,8 @@ public class VendingMachineController {
 		vendingMachineService.insert(insertMoney);
 	}
 
-
+	public Money getInsertMoney() {
+		return vendingMachineService.getInsertMoney();
+	}
 
 }

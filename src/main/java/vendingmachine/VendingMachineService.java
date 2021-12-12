@@ -22,4 +22,8 @@ public class VendingMachineService {
 	public void insert(Money insertMoney) {
 		vendingMachine.insert(insertMoney);
 	}
+
+	public Money getInsertMoney() {
+		return vendingMachine.getInsertMoney();
+	}
 }
