@@ -1,5 +1,6 @@
 package vendingmachine.model;
 import java.util.HashMap;
+import java.util.Arrays;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.model.Coin;
 
@@ -13,18 +14,26 @@ public class VendingMachine {
         }
     }
 
-    private void generateCoinCount(int amount) {
-        int remainder = amount;
+    private Coin getCoinByValue(int value) {
         for (Coin coin : Coin.values()) {
-            if (coin == Coin.COIN_10) {
-                coinCount.replace(coin, remainder / coin.getAmount());
+            if (coin.isEqual(value)) {
+                return coin;
+            }
+        }
+        return null;
+    }
+
+    private void generateCoinCount(int amount) {
+        while(true) {
+            int pickedCoin = Randoms.pickNumberInList(Arrays.asList(10, 50, 100, 500));
+            Coin coin = getCoinByValue(pickedCoin);
+            if (amount >= pickedCoin) {
+                amount -= pickedCoin;
+                coinCount.replace(coin, coinCount.get(coin) + 1);
+            }
+            if (amount == 0) {
                 break;
             }
-            int minCoinCount = 0;
-            int maxCoinCount = remainder / coin.getAmount();
-            int pickCount = Randoms.pickNumberInRange(minCoinCount, maxCoinCount);
-            coinCount.replace(coin, pickCount);
-            remainder -= coin.getAmount() * pickCount;
         }
     }
 

@@ -17,6 +17,10 @@ public enum Coin {
         return this.amount;
     }
 
+    public boolean isEqual(int amount) {
+        return this.amount == amount;
+    }
+
     public String toString() {
         return this.amount+"원";
     }
