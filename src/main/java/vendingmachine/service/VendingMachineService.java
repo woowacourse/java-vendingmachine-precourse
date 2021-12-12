@@ -2,7 +2,6 @@ package vendingmachine.service;
 
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
 import vendingmachine.utils.VendingMachineValidation;
@@ -23,7 +22,7 @@ public class VendingMachineService {
         setVendingMachine();
     }
 
-    public void setVendingMachine(){
+    private void setVendingMachine(){
         int amount = vendingMachineValidation.changeValidation();
         int[] coins = coinService.makeRandomCoins(amount);
         OutputView.printVendingMachineCoins(coins);
@@ -51,7 +50,7 @@ public class VendingMachineService {
         }
     }
 
-    public int buyProduct(int amount, String name){
+    private int buyProduct(int amount, String name){
         return vendingMachine.buy(amount, name);
     }
 
@@ -64,24 +63,15 @@ public class VendingMachineService {
             if(balance == 0){
                 break;
             }
-            changeCoinList[i] = compareCoin(needCoin,haveCoin);
+            changeCoinList[i] = coinService.compareCoin(needCoin,haveCoin);
             balance -= coin.multiply(changeCoinList[i]);
             i++;
         }
         return changeCoinList;
     }
 
-    private int compareCoin(int needCoin, int haveCoin){
-        if(needCoin > haveCoin){
-            return haveCoin;
-        }
-        return needCoin;
-    }
-
-
 
     private void printChange(int balance){
-
         int[] vendingMachineCoins = vendingMachine.coinsToArray();
 
         if(vendingMachine.isBalanceBigger(balance)){
@@ -93,6 +83,5 @@ public class VendingMachineService {
 
         OutputView.printChangeCoins(changeCoinList);
     }
-
 
 }
