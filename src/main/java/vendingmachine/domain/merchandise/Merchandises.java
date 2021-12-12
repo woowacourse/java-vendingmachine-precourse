@@ -5,29 +5,19 @@ import java.util.List;
 
 public class Merchandises {
 
+    private static final String DUPLICATE_ERROR = "상품명은 중복 불가입니다.";
+    private static final String DELIMITER = ";";
+
     private List<Merchandise> merchandises = new ArrayList<>();
 
     public Merchandises(String vendingMachineMerchandises) {
         validMerchandise(vendingMachineMerchandises);
-        setMerchandiseList(vendingMachineMerchandises);
-        checkDuplicateMerchandise();
+
     }
 
     private void validMerchandise(String vendingMachineMerchandises) {
-        validStart(vendingMachineMerchandises);
-        validEnd(vendingMachineMerchandises);
-    }
-
-    private void validEnd(String vendingMachineMerchandises) {
-        if (!vendingMachineMerchandises.endsWith("]")) {
-            throw new IllegalArgumentException("[ERROR] : 상품 목록 끝은 대괄호(])로 끝나야 합니다.");
-        }
-    }
-
-    private void validStart(String vendingMachineMerchandises) {
-        if (!vendingMachineMerchandises.startsWith("[")) {
-            throw new IllegalArgumentException("[ERROR] : 상품 목록 시작은 대괄호([)로 시작하여야 합니다.");
-        }
+        addMerchandise(vendingMachineMerchandises);
+        checkDuplicateMerchandise();
     }
 
     private void checkDuplicateMerchandise() {
@@ -36,12 +26,12 @@ public class Merchandises {
             .count();
         int merchandiseCount = merchandises.size();
         if (distinctMerchandiseCount != merchandiseCount) {
-            throw new IllegalArgumentException("상품명은 중복 불가입니다.");
+            throw new IllegalArgumentException(DUPLICATE_ERROR);
         }
     }
 
-    private void setMerchandiseList(String vendingMachineMerchandises) {
-        String[] merchandises = vendingMachineMerchandises.split(";");
+    private void addMerchandise(String vendingMachineMerchandises) {
+        String[] merchandises = vendingMachineMerchandises.split(DELIMITER);
         for (String merchandise : merchandises) {
             this.merchandises.add(new Merchandise(merchandise));
         }

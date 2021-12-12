@@ -23,7 +23,8 @@ public class VendingMachineController {
 
     private void prepareMerchandise(Changes changes) {
         try {
-            vendingMachine = new VendingMachine(InputView.requireVendingMachineMerchandiseInfo(), changes);
+            vendingMachine = new VendingMachine(InputView.requireVendingMachineMerchandiseInfo(),
+                changes);
         } catch (IllegalArgumentException exception) {
             OutputView.printErrorMessage(exception.getMessage());
             prepareMerchandise(changes);

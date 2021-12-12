@@ -5,6 +5,9 @@ public class MerchandiseCost {
     private static final String MERCHANDISE_COST_IS_INTEGER = "[ERROR] : 가격은 숫자로 이루어져야 합니다.";
     private static final String MERCHANDISE_COST_IS_OVER_THAN_100 = "[ERROR] : 상품 가격은 100원 이상이어야 합니다.";
     private static final String MERCHANDISE_COST_IS_MULTIPLE_OF_10 = "[ERROR] : 상품 가격은 10원으로 나누어 떨어져야 합니다.";
+    private static final Integer MINIMUM_COST = 100;
+    private static final Integer MULTIPLE_THRETHOLD = 10;
+
     private final Integer cost;
 
     public MerchandiseCost(String cost) {
@@ -20,10 +23,10 @@ public class MerchandiseCost {
             throw new IllegalArgumentException(MERCHANDISE_COST_IS_INTEGER);
         }
 
-        if (cost < 100) {
+        if (cost < MINIMUM_COST) {
             throw new IllegalArgumentException(MERCHANDISE_COST_IS_OVER_THAN_100);
         }
-        if (cost % 10 != 0) {
+        if (cost % MULTIPLE_THRETHOLD != 0) {
             throw new IllegalArgumentException(MERCHANDISE_COST_IS_MULTIPLE_OF_10);
         }
     }
