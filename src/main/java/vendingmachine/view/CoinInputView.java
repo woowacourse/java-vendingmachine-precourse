@@ -13,4 +13,14 @@ public class CoinInputView implements InputView {
 			return BLANK_STRING;
 		}
 	}
+
+	public String getInput() {
+		OutputView.noticeCoinInput();
+		String coinInput = BLANK_STRING;
+		while (coinInput.isEmpty()) {
+			String nowInput = camp.nextstep.edu.missionutils.Console.readLine();
+			coinInput = checkAllConditions(nowInput);
+		}
+		return coinInput;
+	}
 }
