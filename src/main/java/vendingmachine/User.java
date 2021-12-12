@@ -21,7 +21,7 @@ public class User {
         try {
             input();
             checkCorrectBalance();
-        } catch (Exception e){
+        } catch (IllegalArgumentException exception){
             System.out.println(ERROR_MESSAGE);
             return false;
         }
@@ -70,7 +70,7 @@ public class User {
         try {
             input();
             checkCorrectGoods();
-        } catch (Exception e){
+        } catch (IllegalArgumentException exception){
             System.out.println(ERROR_MESSAGE);
             return false;
         }
@@ -136,7 +136,7 @@ public class User {
         try {
             input();
             checkCorrectAmount();
-        } catch (Exception e){
+        } catch (IllegalArgumentException exception){
             System.out.println(ERROR_MESSAGE);
             return false;
         }
@@ -168,7 +168,7 @@ public class User {
         try {
             input();
             checkCorrectUserGoods();
-        } catch (Exception e){
+        } catch (IllegalArgumentException exception){
             System.out.println(ERROR_MESSAGE);
             return false;
         }
