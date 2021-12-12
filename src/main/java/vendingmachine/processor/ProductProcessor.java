@@ -15,13 +15,7 @@ public class ProductProcessor {
 		this.productList = productList;
 	}
 
-	public int sellProduct(String productName) {
-		Product product = findProduct(productName);
-		popProduct(product);
-		return product.getPrice();
-	}
-
-	private Product findProduct(String productName) {
+	public Product findProduct(String productName) {
 		Product result = productList.stream()
 			.filter(product -> productName.equals(product.getName()))
 			.findFirst()
@@ -29,11 +23,10 @@ public class ProductProcessor {
 		return result;
 	}
 
-	private void popProduct(Product product) {
+	public void sellProduct(Product product) {
 		if(product.isSoldOut()) {
 			throw new ProductSoldOutException(VendingMachineData.PRODUCT_SOLDOUT_ERROR);
 		}
 		product.sell();
 	}
-
 }
