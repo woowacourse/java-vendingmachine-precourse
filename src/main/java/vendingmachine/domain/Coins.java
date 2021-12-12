@@ -37,20 +37,17 @@ public class Coins {
     public Map<Coin, Integer> changeCoins(Money money) {
         Map<Coin, Integer> changes = Coin.createEmptyCoinMap();
         for (Coin coin : coins.keySet()) {
-            int result = getResult(money, coin);
-            changes.put(coin, result);
+            int coinCount = coins.get(coin);
+            changes.put(coin, calculateChange(money, coin, coinCount));
         }
         return changes;
     }
 
-    private int getResult(Money money, Coin coin) {
-        int coinCount = coins.get(coin);
-        int result = 0;
-        while (money.isDivisable(coin) && coinCount > 0) {
-            money.decreaseByCoin(coin);
-            result++;
-            coinCount--;
+    private int calculateChange(Money money, Coin coin, int coinCount) {
+        if (!money.isDivisable(coin) || coinCount <= 0) {
+            return 0;
         }
-        return result;
+        money.decreaseByCoin(coin);
+        return 1 + calculateChange(money, coin, coinCount - 1);
     }
 }
