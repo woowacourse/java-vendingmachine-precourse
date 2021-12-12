@@ -34,4 +34,17 @@ class CoinTest {
             .isThrownBy(() -> Coin.valueOfAmount(amount))
             .withMessage("[ERROR] Coin의 종류에 존재하지 않는 Coin입니다.");
     }
+
+    @Test
+    @DisplayName("최소 coin금액을 반환할 수 있다.")
+    void leastCoinTest() {
+        // given
+        int expected = 10;
+
+        // when
+        int result = Coin.leastCoin();
+
+        // then
+        assertThat(result).isEqualTo(expected);
+    }
 }

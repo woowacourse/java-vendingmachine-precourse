@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +42,12 @@ public enum Coin {
 
     public int amount() {
         return amount;
+    }
+
+    public static int leastCoin() {
+        return Arrays.stream(values())
+            .min(Comparator.comparingInt(Coin::amount))
+            .map(Coin::amount)
+            .orElseThrow(() -> new RuntimeException("최소 coin이 존재하지 않습니다."));
     }
 }
