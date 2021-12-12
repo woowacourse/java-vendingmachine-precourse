@@ -6,7 +6,7 @@ import vendingmachine.views.InputView;
 import vendingmachine.views.OutputView;
 
 public class VendingMachineController {
-	private VendingMachine vendingMachine;
+	private final VendingMachine vendingMachine;
 
 	public VendingMachineController(VendingMachine vendingMachine) {
 		this.vendingMachine = vendingMachine;
@@ -15,15 +15,26 @@ public class VendingMachineController {
 	public void run() {
 		insertChanges();
 		vendingMachine.printCoins();
+		insertItems();
 	}
 
 	private void insertChanges() {
 		try {
 			String changesString = InputView.inputChanges();
-			vendingMachine.inputChanges(new Money(changesString));
+			vendingMachine.insertChanges(new Money(changesString));
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			insertChanges();
+		}
+	}
+
+	private void insertItems() {
+		try {
+			String itemsString = InputView.inputItems();
+			vendingMachine.insertItems(itemsString);
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
+			insertItems();
 		}
 	}
 }

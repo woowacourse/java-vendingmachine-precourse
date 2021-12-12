@@ -4,8 +4,9 @@ import vendingmachine.views.OutputView;
 
 public class VendingMachine {
 	private Coins coins;
+	private Items items;
 
-	public void inputChanges(Money changes) {
+	public void insertChanges(Money changes) {
 		createCoins(changes.getAmount());
 	}
 
@@ -15,5 +16,9 @@ public class VendingMachine {
 
 	public void printCoins() {
 		OutputView.printCoins(coins);
+	}
+
+	public void insertItems(String itemsString) {
+		this.items = new Items(itemsString);
 	}
 }

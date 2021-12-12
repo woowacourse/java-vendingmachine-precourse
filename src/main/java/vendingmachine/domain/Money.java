@@ -1,24 +1,19 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.DataParser;
+
 public class Money {
 	private static final int ZERO = 0;
 	private static final int MIN = 10; // 가장 작은 동전 단위
 	private static final String INVALID_MONEY = "[ERROR] 올바르지 않은 금액 입력입니다.";
+	private static final String NOT_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
 
 	private int amount;
 
 	public Money(String input) {
-		int parsedValue = parseInt(input);
+		int parsedValue = DataParser.parseInt(input, NOT_NUMBER);
 		validate(parsedValue);
 		this.amount = parsedValue;
-	}
-
-	private int parseInt(String input) {
-		try {
-			return Integer.parseInt(input);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(INVALID_MONEY);
-		}
 	}
 
 	private void validate(int amount) {
