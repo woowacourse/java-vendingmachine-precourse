@@ -10,4 +10,8 @@ public class ProductList {
         productList = new ArrayList<>();
     }
 
+    public void insertProduct(Product product) {
+        productList.add(product);
+    }
+
 }
