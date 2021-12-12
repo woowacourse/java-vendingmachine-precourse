@@ -12,4 +12,8 @@ public class OutputManager {
         }
         System.out.println();
     }
+
+    public static void printCurrentUserAmount(VendingMachine vendingMachine) {
+        System.out.println("투입 금액:" + vendingMachine.getRemainderMoney());
+    }
 }

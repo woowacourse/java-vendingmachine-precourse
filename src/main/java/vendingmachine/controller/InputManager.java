@@ -6,7 +6,6 @@ import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
 
 import java.util.Arrays;
-
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -37,13 +36,15 @@ public class InputManager {
             String inputData = getUserInput("상품명과 가격, 수량을 입력해 주세요.");
             try {
                 Validators.validateItem(inputData);
-                return new ArrayList<Item>(Arrays.stream(inputData.split(";")).map((eachItem) -> {
-                    String[] itemData = eachItem.split(",");
-                    return new Item(itemData[0], Integer.parseInt(itemData[1]), Integer.parseInt(itemData[2]));
-                }).collect(Collectors.toList()));
             } catch (IllegalArgumentException e) {
                 System.out.println(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
+                continue;
             }
+            return new ArrayList<Item>(Arrays.stream(inputData.split(";"))
+                    .map((eachItem) -> {
+                        String[] itemData = eachItem.split(",");
+                        return new Item(itemData[0], Integer.parseInt(itemData[1]), Integer.parseInt(itemData[2]));
+                    }).collect(Collectors.toList()));
         }
     }
 
@@ -54,6 +55,18 @@ public class InputManager {
                 Validators.validateIntegerString(inputData);
             } catch (IllegalArgumentException e) {
                 System.out.println(PREFIX_ERROR + " 잘못된 금액 입력입니다.");
+            }
+        }
+    }
+
+    public static String getWantedItemName() {
+        while (true) {
+            try {
+                String inputData = getUserInput("구매할 상품명을 입력해주세요.");
+                Validators.validateEmptyString(inputData);
+                return inputData;
+            } catch (IllegalArgumentException e) {
+                System.out.println(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
             }
         }
     }

@@ -5,6 +5,7 @@ import vendingmachine.model.Coin;
 
 public class VendingMachine {
     private HashMap<Coin, Integer> coinCount = new HashMap<Coin, Integer>();
+    private int remainderMoney;
 
     private void initCoinCount() {
         for (Coin coin: Coin.values()) {
@@ -29,6 +30,18 @@ public class VendingMachine {
 
     public int getCoinCount(Coin coin) {
         return coinCount.get(coin);
+    }
+
+    public void setRemainderMoney(int money) {
+        remainderMoney = money;
+    }
+
+    public int getRemainderMoney() {
+        return remainderMoney;
+    }
+
+    public void decreaseMoney(int money) {
+        remainderMoney -= money;
     }
 
     public VendingMachine(int amount) {

@@ -17,13 +17,19 @@ public class Validators {
         }
     }
 
-    public static void validateItem(String inputData) {
-        String[] itemDataList = inputData.split(";");
+    public static void validateItem(String data) {
+        String[] itemDataList = data.split(";");
         String pattern = "\\[[[A-Za-z가-힣0-9ㄱ-ㅎ][\\s]*]+,[0-9]+,[0-9]+\\]";
         for (String itemData : itemDataList) {
             if (!Pattern.matches(pattern, itemData)) {
                 throw new IllegalArgumentException();
             }
+        }
+    }
+
+    public static void validateEmptyString(String data) {
+        if (data.equals("")) {
+            throw new IllegalArgumentException();
         }
     }
 

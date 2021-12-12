@@ -11,15 +11,23 @@ public class Item {
         this.itemCount = itemCount;
     }
 
-    boolean checkName(String name) {
+    public int getPrice() {
+        return price;
+    }
+
+    public boolean checkName(String name) {
         return this.name.contentEquals(name);
     }
 
-    boolean checkNotItem() {
+    public boolean checkNotItem() {
         return itemCount == 0;
     }
 
-    boolean checkPrice(int amount) {
+    public boolean checkPrice(int amount) {
         return this.price <= amount;
+    }
+
+    public void decreaseCount() {
+        itemCount -= 1;
     }
 }
