@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
@@ -10,7 +10,7 @@ public class Change {
 
     private final static int ZERO = 0;
 
-    private Map<Coin, Integer> coinMap = new HashMap<>();
+    private Map<Coin, Integer> coinMap = new TreeMap<>();
     private int totalMoney;
 
     public Change(int money) {
