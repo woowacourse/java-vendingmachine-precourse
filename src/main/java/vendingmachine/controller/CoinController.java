@@ -8,10 +8,10 @@ public class CoinController {
     CoinService coinService = new CoinService();
     OutputView outputView = new OutputView();
 
-    public void generate(){
+    public void generate() {
         outputView.printMachineMoney();
         coinService.generate();
-        //outputView.printMachineCoin();
+        outputView.printCoin();
     }
 
 }
