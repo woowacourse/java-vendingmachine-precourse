@@ -15,7 +15,7 @@ public class Product {
 
 		ProductException.checkProductInfoSize(productInfo);
 
-		name = StringException.checkNameException(productInfo[0]);
+		name = StringException.checkStringException(productInfo[0]);
 		price = NumberException.checkPriceException(productInfo[1]);
 		quantity = NumberException.checkQuantityException(productInfo[2]);
 	}

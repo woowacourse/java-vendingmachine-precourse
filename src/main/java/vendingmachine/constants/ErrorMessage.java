@@ -7,7 +7,8 @@ public class ErrorMessage {
 	public static final String NOT_POSITIVE_NUMBER_MONEY_MESSAGE = " 금액은 0보다 큰 숫자만 입력할 수 있습니다.";
 	public static final String NOT_DIVIDED_TEN_NUMBER_MESSAGE = " 1 단위의 금액은 투입할 수 없습니다.";
 
-	public static final String ARRAY_SIZE_MESSAGE = " 상품 정보가 잘못되었습니다.";
+	public static final String INSERTED_PRODUCT_IS_WRONG = " 입력받은 상품 정보의 형식이 잘못되었습니다.";
+	public static final String ARRAY_SIZE_MESSAGE = " 상품 정보를 모두 입력해주십시오.";
 	public static final String REDUPLICATION_NAME_MESSAGE = " 상품 이름이 중복입니다.";
 
 	public static final String SPACE_IN_PRODUCT_NAME_MESSAGE = " 상품 이름에 공백이 있으면 안됩니다.";

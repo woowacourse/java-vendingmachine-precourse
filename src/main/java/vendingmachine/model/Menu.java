@@ -12,6 +12,7 @@ public class Menu {
 	public Menu(String productInfo) {
 		menuList = new HashMap<String, Product>();
 
+		ProductException.checkInsertedProductLineIsRight(productInfo);
 		String[] productStrList = productInfo.split(Rule.STANDARD_FOR_DIVIDE_PRODUCTS, -1);
 
 		for (int i = 0; i < productStrList.length; i++) {

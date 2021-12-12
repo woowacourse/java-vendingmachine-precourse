@@ -24,4 +24,12 @@ public class ProductException {
 
 	}
 
+	public static void checkInsertedProductLineIsRight(String insertedProductLine) {
+		try {
+			insertedProductLine = StringException.checkStringException(insertedProductLine);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException(ErrorMessage.INSERTED_PRODUCT_IS_WRONG);
+		}
+	}
+
 }

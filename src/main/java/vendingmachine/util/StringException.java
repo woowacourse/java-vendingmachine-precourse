@@ -5,26 +5,26 @@ import vendingmachine.constants.Rule;
 
 public class StringException {
 
-	public static String checkNameException(String productName) {
+	public static String checkStringException(String str) {
 		try {
-			checkNameIsBlank(productName);
-			checkSpaceInProductName(productName);
-			checkTabInProductName(productName);
+			checkStringIsBlank(str);
+			checkSpaceInString(str);
+			checkTabInString(str);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(e.getMessage());
 		}
 
-		return productName;
+		return str;
 	}
 
-	public static void checkNameIsBlank(String name) {
-		if (name.equals(Rule.NOTHING)) {
+	public static void checkStringIsBlank(String str) {
+		if (str.equals(Rule.NOTHING)) {
 			throw new IllegalArgumentException(ErrorMessage.BLANK_PRODUCT_NAME_MESSAGE);
 		}
 	}
 
-	public static void checkSpaceInProductName(String name) {
-		String[] tmp = name.split(Rule.SPACE, -1);
+	public static void checkSpaceInString(String str) {
+		String[] tmp = str.split(Rule.SPACE, -1);
 
 		if (tmp.length != 1) {
 			throw new IllegalArgumentException(ErrorMessage.SPACE_IN_PRODUCT_NAME_MESSAGE);
@@ -32,8 +32,8 @@ public class StringException {
 
 	}
 
-	public static void checkTabInProductName(String name) {
-		String[] tmp = name.split(Rule.TAB, -1);
+	public static void checkTabInString(String str) {
+		String[] tmp = str.split(Rule.TAB, -1);
 
 		if (tmp.length != 1) {
 			throw new IllegalArgumentException(ErrorMessage.TAB_IN_PRODUCT_NAME_MESSAGE);
