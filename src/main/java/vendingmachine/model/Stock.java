@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -15,7 +16,7 @@ import vendingmachine.util.StringChecker;
 public class Stock {
 
 	private List<Product> productList;
-	private Map<Product, Integer> productIndex;
+	private Map<Name, Integer> productIndex;
 
 	public Stock(String input) {
 		checkInput(input);
@@ -58,6 +59,11 @@ public class Stock {
 	}
 
 	private void setProductIndex(List<Product> productList) {
+		productIndex = new HashMap<>();
+
+		for (Product product : productList) {
+			productIndex.put(product.getName(), productIndex.size());
+		}
 
 	}
 }

@@ -34,6 +34,10 @@ public class Product {
 		splitChecker.isCorrectTheNumber(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO, Rule.NUMBER_OF_PRODUCT_INFO);
 	}
 
+	public Name getName() {
+		return name;
+	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
