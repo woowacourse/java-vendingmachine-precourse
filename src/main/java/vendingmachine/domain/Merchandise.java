@@ -10,4 +10,20 @@ public class Merchandise {
         this.price = price;
         this.number = number;
     }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public void decreaseNumber() {
+        this.number--;
+    }
 }

@@ -67,18 +67,18 @@ public class VendingMachine {
     private void sellMerchandise() {
         String name = InputView.getMerchandiseNameInput();
 
-        List<Integer> info = merchandiseInfo.get(name);
-        int price = info.get(0);
-        int number = info.get(1);
+        Merchandise merchandise = menu.getMerchandiseByName(name);
 
-        moneyLeft -= price;
+        if (merchandise.getNumber() == 0) throw new IllegalArgumentException();
 
-        merchandiseInfo.put(name, Arrays.asList(price, number-1));
+        moneyLeft -= merchandise.getPrice();
+
+        merchandise.decreaseNumber();
     }
 
     private boolean canBuyMore() {
         boolean isEnoughMoney = false;
-        for (List<Integer> info : merchandiseInfo.values()) {
+        for (List<Integer> info : menu.values()) {
             int price = info.get(0);
             int number = info.get(1);
             if (number == 0) continue;
