@@ -23,6 +23,8 @@ public class VendingMachineController {
         initializeHoldingMoney();
         vendingMachine.initializeCoinCase();
         SystemMessageOutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
+        initializeProductsInfo();
+        initializeInsertAmount();
     }
 
     private void initializeHoldingMoney() {
