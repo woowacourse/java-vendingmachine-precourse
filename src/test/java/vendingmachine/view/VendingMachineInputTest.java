@@ -77,4 +77,15 @@ class VendingMachineInputTest {
 		assertEquals(Integer.parseInt(inputtedMoney),
 			vendingMachineInput.inputMoney(), "투입된 금액과 반환된 금액이 일치하지 않음");
 	}
+
+	@DisplayName("상품 구매를 위해 선택한 상품 이름이 정상적으로 반환되는지 확인")
+	@ParameterizedTest(name = "{displayName} selectedProduct={0}")
+	@ValueSource(strings = {"콜라", "사이다"})
+	void selectedProductToPurchase(final String selectedProduct) {
+		InputStream input = new ByteArrayInputStream(selectedProduct.getBytes());
+		System.setIn(input);
+
+		assertEquals(selectedProduct, vendingMachineInput.selectProduct(),
+			"선택한 제품과 반환된 제품 이름이 다르다");
+	}
 }

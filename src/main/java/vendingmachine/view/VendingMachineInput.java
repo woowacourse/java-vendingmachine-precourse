@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
+
 import vendingmachine.models.Product;
 import vendingmachine.utils.VendingMachineMessage;
 
@@ -52,5 +53,10 @@ public class VendingMachineInput {
 		System.out.println(VendingMachineMessage.INPUT_MONEY);
 		final String inputtedMoney = Console.readLine();
 		return Integer.parseInt(inputtedMoney);
+	}
+
+	public String selectProduct() {
+		System.out.println(VendingMachineMessage.SELECT_PRODUCT_TO_PURCHASE);
+		return Console.readLine();
 	}
 }
