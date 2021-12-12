@@ -20,4 +20,8 @@ public class Product {
     public boolean checkQuantityEnough() {
         return quantity > 0;
     }
+
+    public void reduceQuantity() {
+        quantity -= 1;
+    }
 }
