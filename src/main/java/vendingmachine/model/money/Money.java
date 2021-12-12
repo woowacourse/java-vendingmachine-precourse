@@ -2,6 +2,7 @@ package vendingmachine.model.money;
 
 public class Money {
 
+    public static final String DENOMINATION = "원";
     private final MoneyBill moneyBill;
     private final MoneyCoins moneyCoins;
 
@@ -19,5 +20,13 @@ public class Money {
     public String showCoins() {
         System.out.println(moneyCoins.toString());
         return moneyCoins.toString();
+    }
+
+    public void addMoneyBill(MoneyBill inputMoney) {
+        moneyBill.add(inputMoney);
+    }
+
+    public String showMoneyBill() {
+        return moneyBill.toString() + DENOMINATION;
     }
 }

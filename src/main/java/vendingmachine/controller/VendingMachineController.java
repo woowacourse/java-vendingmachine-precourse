@@ -16,6 +16,8 @@ public class VendingMachineController {
         setupVendingMachine();
         OutputView.showCoins(money.showCoins());
         setupItems();
+        setupInputMoney();
+        OutputView.showInputMoney(money);
     }
 
     private void setupVendingMachine() {
@@ -25,5 +27,9 @@ public class VendingMachineController {
 
     private void setupItems() {
         this.items = InputView.getInitialItems();
+    }
+
+    private void setupInputMoney() {
+        money.addMoneyBill(InputView.getInputMoney());
     }
 }

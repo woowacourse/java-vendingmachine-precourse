@@ -37,4 +37,17 @@ public class MoneyBill {
         this.amount -= randomAmount;
         return new MoneyCoin(randomAmount);
     }
+
+    public void add(MoneyBill inputMoney) {
+        this.amount += inputMoney.getAmount();
+    }
+
+    private int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public String toString() {
+        return Integer.toString(amount);
+    }
 }
