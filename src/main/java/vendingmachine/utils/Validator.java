@@ -9,6 +9,7 @@ public class Validator {
 	private static final String NUMBER_PATTERN = "^[0-9]+$";
 	private static final String NAME_PATTERN = "^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$";
 	private static final int ELEMENT_SIZE = 3;
+	private static final int MIN_MONEY_VALUE = 10;
 
 	private static void validateEmptyStr(String input) throws IllegalArgumentException {
 		if (input.isEmpty()) {
@@ -78,5 +79,12 @@ public class Validator {
 			throw new IllegalArgumentException(
 				Messages.ERROR_SOLD_OUT_MESSAGE + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
+	}
+
+	public static void validatePriceInput(String input) {
+		validateEmptyStr(input);
+		validateNumber(input);
+		validatePositive(input);
+		validateRemainder(input, MIN_MONEY_VALUE);
 	}
 }
