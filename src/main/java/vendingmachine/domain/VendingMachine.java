@@ -35,4 +35,12 @@ public class VendingMachine {
     public void insertMoney(final int insertAmount) {
         this.insertAmount = insertAmount;
     }
+
+    public boolean isBuyAbleProductRemain() {
+        for (Product product : productStorage) {
+            if (product.isBuyAble(insertAmount))
+                return true;
+        }
+        return false;
+    }
 }

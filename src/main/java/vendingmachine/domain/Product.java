@@ -23,4 +23,11 @@ public class Product {
     public int getStock() {
         return stock;
     }
+
+    public boolean isBuyAble(final int insertAmount) {
+        if (stock == 0 || price > insertAmount) {
+            return false;
+        }
+        return true;
+    }
 }
