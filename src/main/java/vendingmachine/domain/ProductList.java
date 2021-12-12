@@ -14,4 +14,9 @@ public class ProductList {
         productList.add(product);
     }
 
+    public boolean checkExistUsingName(String name) {
+        return productList.stream()
+                .anyMatch(product -> product.name.equals(name));
+    }
+
 }
