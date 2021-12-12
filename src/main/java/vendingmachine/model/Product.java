@@ -23,6 +23,7 @@ public class Product {
 		return quantity;
 	}
 
+	//상품이 주문된 후 재고 감소
 	public void afterOrdered() {
 		--quantity;
 	}

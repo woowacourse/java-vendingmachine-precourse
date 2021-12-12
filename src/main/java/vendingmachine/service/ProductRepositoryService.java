@@ -62,6 +62,7 @@ public class ProductRepositoryService {
 		return productStocks;
 	}
 
+	//주문에 따른 Product저장소 업데이트
 	public void updateProductByOrder(String order, int money) {
 		Product orderedProduct = productRepository.findByName(order);
 		OrderException.isProductLeft(orderedProduct);

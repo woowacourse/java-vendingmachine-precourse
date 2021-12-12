@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 
 import vendingmachine.model.Product;
 
+/*
+주문에 대한 검증을 담당
+ */
 public class OrderException {
 	public static void isExistOrder(String order, List<Product> productList) {
 		boolean isExist = productList.stream()

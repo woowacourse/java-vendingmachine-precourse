@@ -24,6 +24,7 @@ public class ApplicationController {
 		this.productRepositoryService = productRepositoryService;
 	}
 
+	//vendingMachine에 productRepository주입
 	public void startVendingMachine() {
 		ProductRepository productRepository = productRepositoryService.getProductRepository();
 		vendingMachineService.saveProductRepository(productRepository);
@@ -73,20 +74,21 @@ public class ApplicationController {
 	}
 
 	private void getOrder(int money) {
-		while (shouldChange(money)) {
+		while (!shouldChange(money)) {
 			money -= updateByOrder(money);
 		}
 		returnChange(money);
 	}
 
+	//잔돈 반환 유무 판단
 	private boolean shouldChange(int money) {
 		int minProductPrice = productRepositoryService.getMinProductPrice();
 		int productStock = productRepositoryService.getProductStock();
 		if (minProductPrice > money
 				|| productStock == ZERO) {
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private int updateByOrder(int money) {

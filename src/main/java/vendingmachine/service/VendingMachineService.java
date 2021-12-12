@@ -37,6 +37,7 @@ public class VendingMachineService {
 		vendingMachine.setProductRepository(productRepository);
 	}
 
+	//반환금액에 맞는 동전 갯수 받기
 	public Map<Coin, Integer> getChangeCoinSet(int money) {
 		money %= MIN_BILL_UNIT;
 		Map<Coin, Integer> coinState = vendingMachine.getCoinMap();

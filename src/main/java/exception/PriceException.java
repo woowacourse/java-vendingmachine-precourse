@@ -3,6 +3,9 @@ package exception;
 import static constant.NumberConstant.*;
 import static constant.StringConstant.*;
 
+/*
+금액 입력에 대한 검증
+ */
 public class PriceException {
 	public static void isValidPrice(String rawPrice) {
 		try {
@@ -29,6 +32,7 @@ public class PriceException {
 		throw new IllegalArgumentException(NOT_POSITIVE);
 	}
 
+	//10원(최소 동전 단위)으로 나누어 떨어지는 지 검증
 	public static void isCoinValue(int price) {
 		if (price % MIN_COIN_UNIT != ZERO) {
 			throw new IllegalArgumentException(NOT_COIN_VALUE);

@@ -26,6 +26,7 @@ public class ProductException {
 		}
 	}
 
+	//[]로 감싸여 있는지 검증
 	private static void isWrapped(String userProduct) {
 		if (!userProduct.startsWith(PRODUCT_WRAPPER_LEFT)
 				|| !userProduct.endsWith(PRODUCT_WRAPPER_RIGHT)) {
@@ -35,6 +36,7 @@ public class ProductException {
 		isDivided(userProduct);
 	}
 
+	//두개 이상의 상품이 ;으로 나뉘어 있는지 검증
 	private static void isDivided(String userProduct) {
 		if (userProduct.contains(PRODUCT_WRAPPER_LEFT)
 			&& userProduct.contains(PRODUCT_WRAPPER_RIGHT)) {
@@ -83,7 +85,7 @@ public class ProductException {
 			.distinct()
 			.collect(Collectors.toList()).size();
 		if (productNames.size() != distinctSize) {
-			productList.clear();
+			productList.clear(); //중복 유무와 상관없이 생성된 ProductList를 초기화 해야함
 			throw new IllegalArgumentException(PRODUCT_NAME_DUPLICATED);
 		}
 	}

@@ -13,6 +13,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.model.Coin;
 
 public class CoinService {
+	//순서 보장을 위한 LinkedHashMap타입 선택
 	private LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
 
 	public LinkedHashMap<Coin, Integer> getCoinsByBalance(int balance) {
@@ -22,15 +23,15 @@ public class CoinService {
 			coins.put(coin, ZERO);
 		}
 		while(balance > ZERO) {
-			int coinUnit = gatherCoin(balance, coinUnitList);
+			int coinUnit = getRandomCoin(balance, coinUnitList);
 			updateCoinQuantity(coinUnit);
 			balance -= coinUnit;
 		}
 		return coins;
 	}
 
-	private int gatherCoin(int balance, List<Integer> coinList) {
-		while (balance < Collections.max(coinList)) {
+	private int getRandomCoin(int balance, List<Integer> coinList) {
+		while (balance < Collections.max(coinList)) { //잔액이 400원인 경우 500원 동전은 생성될 필요X
 			coinList.remove(ZERO);
 		}
 		return Randoms.pickNumberInList(coinList);
@@ -54,7 +55,7 @@ public class CoinService {
 		int coinAmount = coin.getAmount();
 		int changeCoinQuantity = ZERO;
 		while (shouldChange(coinStateQuantity, coinAmount, left)
-			&& getAllCoinQuantity(coinState) != ZERO) {
+			&& isCoinLeft(coinState)) { //동전이 없거나 잔돈 금액을 충족할때 까지 동전 반환
 			left -= coinAmount;
 			coinState.put(coin, --coinStateQuantity);
 			coins.put(coin, ++changeCoinQuantity);
@@ -63,6 +64,8 @@ public class CoinService {
 	}
 
 	private boolean shouldChange(int coinQuantity, int coinAmount, int left) {
+		//각각의 동전에 대해서 갯수가 없거나
+		//단위가 잔액보다 큰 경우는 해당 동전을 돌려줄 수 없음
 		if (coinQuantity == ZERO
 			|| coinAmount > left) {
 			return false;
@@ -70,12 +73,16 @@ public class CoinService {
 		return true;
 	}
 
-	private int getAllCoinQuantity(Map<Coin, Integer> coins) {
+	//자판기의 동전이 존재하는지 확인
+	private boolean isCoinLeft(Map<Coin, Integer> coins) {
 		int coinQuantity = ZERO;
 		for (Integer value : coins.values()) {
 			coinQuantity += value;
 		}
-		return coinQuantity;
+		if (coinQuantity == ZERO) {
+			return false;
+		}
+		return true;
 	}
 
 }
