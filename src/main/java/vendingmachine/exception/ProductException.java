@@ -42,12 +42,12 @@ public class ProductException {
 	}
 
 	private static void checkProduct(String[] product) {
-		checkProductName(product[0]);
+		checkProductNameEmpty(product[0]);
 		checkProductPrice(product[1]);
 		checkProductQuantity(product[2]);
 	}
 
-	private static void checkProductName(String productName) {
+	public static void checkProductNameEmpty(String productName) {
 		if (productName == null || productName.trim().isEmpty()) {
 			throw new IllegalArgumentException(PRODUCT_NAME_EMPTY_MSG);
 		}

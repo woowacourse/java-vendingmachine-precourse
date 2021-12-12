@@ -20,11 +20,19 @@ public class Product {
 		return quantity;
 	}
 
-	public boolean isProduct(String name) {
-		return this.name.equals(name);
+	public String getName() {
+		return name;
 	}
 
-	public boolean isUnderMinimumPrice(int minimumPrice) {
-		return price < minimumPrice;
+	public boolean isOverZeroQuantity() {
+		return quantity > 0;
+	}
+
+	public boolean isPurchase(int money) {
+		return money >= price;
+	}
+
+	public void purchase() {
+		quantity--;
 	}
 }

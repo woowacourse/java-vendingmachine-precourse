@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import static vendingmachine.constant.Constant.*;
+import static vendingmachine.constant.ErrorMessage.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -30,5 +31,24 @@ public class Products {
 
 	public boolean isOverZeroAllProductCount() {
 		return 0 < products.stream().mapToInt(Product::getQuantity).sum();
+	}
+
+	public void purchase(String productName, Money inputMoney) {
+		Product product = findByName(productName);
+		product.purchase();
+		inputMoney.subtractMoney(product.getPrice());
+	}
+
+	private Product findByName(String productName) {
+		return products.stream()
+			.filter(product -> product.getName().equals(productName))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException(PRODUCT_NOT_EXIST_MSG));
+	}
+
+	public boolean canSell(String productName, Money inputMoney) {
+		Product product = findByName(productName);
+		return product.isOverZeroQuantity() && product.isPurchase(inputMoney.getMoney());
+
 	}
 }

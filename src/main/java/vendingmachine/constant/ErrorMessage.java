@@ -16,4 +16,6 @@ public class ErrorMessage {
 	public static final String PRODUCT_PARENTHESIS_FORMAT_MSG = "[ERROR] []로 상품을 분리해야 합니다!";
 	public static final String PRODUCT_SEME_COLON_FORMAT_MSG = "[ERROR] ;으로 상품을 분리해야 합니다!";
 	public static final String PRODUCT_COMMA_FORMAT_MSG = "[ERROR] ,으로 상품명과 가격, 수량을 구분해야합니다!";
+	public static final String PRODUCT_NOT_EXIST_MSG = "[ERROR] 입력한 상품이 존재하지 않습니다!";
+	public static final String PRODUCT_NOT_BUY_MSG = "[ERROR] 상품을 판매할 수 없습니다!";
 }
