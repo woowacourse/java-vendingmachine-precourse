@@ -95,7 +95,7 @@
    1. TransactionController
       - [ ] 전체 거래 프로세스를 진행하는 기능
    2. UserAndItemController
-      - [ ] 개별 거래 프로세스를 진행하는 기능
+      - [x] 개별 거래 프로세스를 진행하는 기능
 
 4. Utils
    1. Messages
