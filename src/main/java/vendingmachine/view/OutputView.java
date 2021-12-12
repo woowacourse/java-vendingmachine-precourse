@@ -14,5 +14,6 @@ public class OutputView {
     }
 
     public static void showChange(Money money) {
+        System.out.println(money.showChange());
     }
 }

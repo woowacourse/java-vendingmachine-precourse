@@ -12,7 +12,7 @@ public class Item {
     }
 
     public boolean sameName(String buyItemName) {
-        return name.equals(buyItemName);
+        return name.sameName(buyItemName);
     }
 
     @Override

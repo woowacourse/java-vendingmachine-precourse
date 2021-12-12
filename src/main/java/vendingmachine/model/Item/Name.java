@@ -9,6 +9,10 @@ public class Name {
         this.name = itemName;
     }
 
+    public boolean sameName(String name) {
+        return this.name.equals(name);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

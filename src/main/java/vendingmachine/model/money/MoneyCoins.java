@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import vendingmachine.model.enums.Coin;
 
@@ -37,6 +38,20 @@ public class MoneyCoins {
             return coins.get(coin);
         }
         return 0;
+    }
+
+    public String showChange() {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        ArrayList<MoneyCoin> moneyCoins = (ArrayList<MoneyCoin>)coins.keySet()
+            .stream()
+            .filter(coin -> coins.get(coin) != 0)
+            .collect(Collectors.toList());
+
+        for (MoneyCoin moneyCoin : moneyCoins) {
+            stringBuilder.append(moneyCoin.toString() + HYPHEN + coins.get(moneyCoin) + COUNT_UNIT);
+        }
+        return stringBuilder.toString();
     }
 
     @Override

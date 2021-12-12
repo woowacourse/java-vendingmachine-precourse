@@ -24,10 +24,6 @@ public class VendingMachineController {
         OutputView.showChange(money);
     }
 
-    private void sellItems() {
-        BuyItemName buyItemName = InputView.getBuyItemName();
-    }
-
     private void setupVendingMachine() {
         this.money = InputView.getInitialAsset();
         money.generateRandomCoins();
@@ -39,5 +35,9 @@ public class VendingMachineController {
 
     private void setupInputMoney() {
         money.addMoneyBill(InputView.getInputMoney());
+    }
+
+    private void sellItems() {
+        BuyItemName buyItemName = InputView.getBuyItemName();
     }
 }

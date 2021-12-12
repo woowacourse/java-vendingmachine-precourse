@@ -32,4 +32,7 @@ public class Money {
         return moneyBill.toString() + DENOMINATION;
     }
 
+    public String showChange() {
+        return moneyCoins.showChange();
+    }
 }
