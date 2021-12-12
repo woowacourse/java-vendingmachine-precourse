@@ -27,8 +27,9 @@ public class Application {
             buyProduct(vendingMachine);
         }
 
+        printInputMoneyInVendingMachine(vendingMachine);
         Coins changes = vendingMachine.getChanges();
-        printChanges(vendingMachine, changes);
+        printChanges(changes);
     }
 
     private static int getSeedMoneyFromUser() {
@@ -90,6 +91,7 @@ public class Application {
             try {
                 System.out.println("투입 금액을 입력해 주세요.");
                 String input = Console.readLine();
+                lineFeed();
                 Validator.checkNumberFormat(input);
                 int number = Integer.parseInt(input);
                 Validator.checkPositive(number);
@@ -100,8 +102,7 @@ public class Application {
         }
     }
 
-    private static void printChanges(VendingMachine vendingMachine, Coins changes) {
-        printInputMoneyInVendingMachine(vendingMachine);
+    private static void printChanges(Coins changes) {
         System.out.println("잔돈");
         changes.getCounter().entrySet()
                 .stream()
