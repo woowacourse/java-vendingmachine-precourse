@@ -1,8 +1,12 @@
 package vendingmachine;
 
+import static org.assertj.core.api.Assertions.*;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.coin.Coin;
+import vendingmachine.coin.Coins;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
 
@@ -17,7 +21,7 @@ class VendingMachineTest {
         items.add(new Item("item1", 5), 0);
         items.add(new Item("item2", 15), 1);
         vendingMachine.storeItems(items);
-        Assertions.assertThat(vendingMachine.isPurchaseAvailable()).isFalse();
+        assertThat(vendingMachine.isPurchaseAvailable()).isFalse();
     }
 
     @Test
@@ -29,7 +33,18 @@ class VendingMachineTest {
         items.add(new Item("item1", 100), 0);
         items.add(new Item("item2", 5), 1);
         vendingMachine.storeItems(items);
-        Assertions.assertThat(vendingMachine.isPurchaseAvailable()).isTrue();
+        assertThat(vendingMachine.isPurchaseAvailable()).isTrue();
     }
 
+    @Test
+    void 거슬러_준_후_잔여금이_자판기에_남음() {
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insertMoney(1000);
+        Coins coinBalance = new Coins();
+        coinBalance.add(Coin.COIN_50);
+        vendingMachine.depositCoinBalance(coinBalance);
+        vendingMachine.giveChange();
+
+        assertThat(vendingMachine.showAvailableMoney()).isEqualTo(950);
+    }
 }
