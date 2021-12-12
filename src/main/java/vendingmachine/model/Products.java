@@ -4,12 +4,11 @@ import static vendingmachine.validator.ProductValidator.*;
 
 import java.util.HashMap;
 
-// TODO: 2021/12/08 더 좋은 이름
-public class ProductList {
+public class Products {
 
 	private final HashMap<String, Product> hashMap;
 
-	public ProductList() {
+	public Products() {
 		this.hashMap = new HashMap<>();
 	}
 

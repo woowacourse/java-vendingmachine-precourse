@@ -8,13 +8,12 @@ import java.util.Set;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.view.OutputView;
 
-// TODO: 2021/12/08 더 좋은 이름
-public class CoinList {
+public class Coins {
 
 	private final LinkedHashMap<Coin, Integer> hashMap;
 	private final int totalMoney;
 
-	public CoinList(int totalMoney) {
+	public Coins(int totalMoney) {
 		this.totalMoney = totalMoney;
 		this.hashMap = new LinkedHashMap<>();
 		hashMap.put(Coin.COIN_500, 0);

@@ -5,18 +5,18 @@ import java.util.Map;
 public class VendingMachine {
 
 	private int deposit;
-	private ProductList productList;
-	private CoinList coinList;
+	private Products products;
+	private Coins coins;
 	private Changes changes = new Changes();
 
-	public VendingMachine(int deposit, ProductList productList, CoinList coinList) {
+	public VendingMachine(int deposit, Products products, Coins coins) {
 		this.deposit = deposit;
-		this.productList = productList;
-		this.coinList = coinList;
+		this.products = products;
+		this.coins = coins;
 	}
 
-	public ProductList getProductList() {
-		return productList;
+	public Products getProductList() {
+		return products;
 	}
 
 	public int getDeposit() {
@@ -28,12 +28,12 @@ public class VendingMachine {
 	}
 
 	public boolean isContinueToSell() {
-		int minimumPrice = productList.getMinimumPrice();
+		int minimumPrice = products.getMinimumPrice();
 		if (minimumPrice > deposit) {
 			return false;
 		}
 
-		if (productList.isOutOfStock()) {
+		if (products.isOutOfStock()) {
 			return false;
 		}
 
@@ -41,7 +41,7 @@ public class VendingMachine {
 	}
 
 	public Changes createChanges() {
-		for (Map.Entry<Coin, Integer> entry : coinList.getHashMap()) {
+		for (Map.Entry<Coin, Integer> entry : coins.getHashMap()) {
 			if (deposit == 0) {
 				break;
 			}
@@ -62,7 +62,7 @@ public class VendingMachine {
 			return;
 		}
 
-		coinList.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
+		coins.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
 		changes.addCoin(coin, numberOfChange);
 	}
 

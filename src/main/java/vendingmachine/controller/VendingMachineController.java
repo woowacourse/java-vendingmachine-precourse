@@ -1,9 +1,9 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.Changes;
-import vendingmachine.model.CoinList;
+import vendingmachine.model.Coins;
 import vendingmachine.model.Product;
-import vendingmachine.model.ProductList;
+import vendingmachine.model.Products;
 import vendingmachine.model.VendingMachine;
 
 public class VendingMachineController {
@@ -17,16 +17,16 @@ public class VendingMachineController {
 
 	public void init() {
 		int moneyOfVendingMachine = viewController.returnMoneyOfVendingMachine();
-		CoinList coinList = new CoinList(moneyOfVendingMachine);
-		coinList.init();
+		Coins coins = new Coins(moneyOfVendingMachine);
+		coins.init();
 
-		ProductList productList = new ProductList();
+		Products products = new Products();
 		String rawProductsInput = viewController.returnRawProductsInput();
-		productList.init(rawProductsInput);
+		products.init(rawProductsInput);
 
 		int deposit = viewController.returnDepositAmount();
 
-		this.vendingMachine = new VendingMachine(deposit, productList, coinList);
+		this.vendingMachine = new VendingMachine(deposit, products, coins);
 	}
 
 	public void run() {
@@ -42,9 +42,9 @@ public class VendingMachineController {
 	}
 
 	private void sell(String productName) {
-		ProductList productList = vendingMachine.getProductList();
+		Products products = vendingMachine.getProductList();
 
-		Product product = productList.findProduct(productName);
+		Product product = products.findProduct(productName);
 		product.subtractQuantity();
 
 		int price = product.getPrice();
