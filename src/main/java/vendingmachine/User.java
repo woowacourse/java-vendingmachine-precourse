@@ -1,15 +1,28 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class User {
     private Validation validation = new Validation();
+    private Parser parser = new Parser();
 
     public int inputHolding() throws IllegalArgumentException {
         while (true) {
             String input = Console.readLine();
             if (validation.isValidateNumber(input)) {
                 return Integer.parseInt(input);
+            }
+        }
+    }
+
+    public String inputProducts() {
+        while (true) {
+            String input = Console.readLine();
+            String[] parsedInput = parser.parseProduct(input);
+            if (validation.isValidateProduct(parsedInput)) {
+                return input;
             }
         }
     }

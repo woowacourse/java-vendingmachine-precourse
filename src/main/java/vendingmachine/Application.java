@@ -9,5 +9,7 @@ public class Application {
         message.printInputHolding();
         int holding = user.inputHolding();
         change.makeCoins(holding);
+        message.printInputProducts();
+        String products = user.inputProducts();
     }
 }
