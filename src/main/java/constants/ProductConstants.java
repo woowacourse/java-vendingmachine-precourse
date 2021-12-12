@@ -1,12 +1,9 @@
 package constants;
 
 public class ProductConstants {
-	public static final String REGEX = "[a-zA-Z0-9가-힣]+,\\d{3,}+,\\d+";
+	public static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,}+,\\d+]";
 	public static final String PRODUCTS_DELIMITER = ";";
 	public static final String PRODUCT_DELIMITER = ",";
-
-	public static final Character PRODUCT_START_CHAR = '[';
-	public static final Character PRODUCT_END_CHAR = ']';
 
 	public static final Integer SUBSTRING_IDX = 1;
 	public static final Integer FIRST_IDX = 0;

@@ -14,9 +14,8 @@ public class ProductValidator {
 
 	public static List<String> checkProduct(String input) {
 		checkIsEmpty(input);
-		checkFirstAndLastChar(input);
+		isMatchRegex(input);
 		String inputContent = input.substring(SUBSTRING_IDX, input.length() - SUBSTRING_IDX);
-		isMatchRegex(inputContent);
 
 		List<String> productInfo = Arrays.asList(inputContent.split(PRODUCT_DELIMITER));
 		MoneyValidator.checkNumber(productInfo.get(PRICE_IDX));
@@ -27,13 +26,6 @@ public class ProductValidator {
 	private static void checkIsEmpty(String input) {
 		if (input.isEmpty()) {
 			throw new IllegalArgumentException(PRODUCT_EMPTY_ERROR);
-		}
-	}
-
-	private static void checkFirstAndLastChar(String input) {
-		if (input.charAt(FIRST_IDX) != PRODUCT_START_CHAR
-			|| input.charAt(input.length() - SUBSTRING_IDX) != PRODUCT_END_CHAR) {
-			throw new IllegalArgumentException(PRODUCT_COVER_ERROR);
 		}
 	}
 

@@ -15,7 +15,6 @@ public class VendingMachineConstants {
 	public static String ERROR_PREFIX = "[ERROR] ";
 	public static String MONEY_NOT_DIGIT_ERROR = "금액은 숫자여야 합니다.";
 	public static String MONEY_NEGATIVE_NUM_ERROR = "금액은 양수여야 합니다.";
-	public static String PRODUCT_COVER_ERROR = "개별 상품은 대괄호로 묶어야 합니다.";
 	public static String PRODUCT_FORMAT_ERROR = "개별 상품은 [상품명, 100원 이상의 가격, 수량]의 형태로 입력되어야 합니다.";
 	public static String PRODUCT_PRICE_ERROR = "금액은 10원으로 나누어떨어져야 합니다.";
 	public static String PRODUCT_AMOUNT_ERROR = "상품의 수량은 0이상이어야 합니다.";
