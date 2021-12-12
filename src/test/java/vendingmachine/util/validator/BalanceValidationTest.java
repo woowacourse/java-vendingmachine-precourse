@@ -10,7 +10,7 @@ public class BalanceValidationTest {
     void 정수_외_검증() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> BalanceValidation
-                        .verifyBalanceInput("1a3",() -> new IllegalArgumentException("[ERROR]")))
+                        .verifyBalanceInput("1a3"))
                 .withMessageStartingWith("[ERROR]");
     }
 
@@ -18,7 +18,7 @@ public class BalanceValidationTest {
     void 음수_검증() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> BalanceValidation
-                        .verifyBalanceInput("-1",() -> new IllegalArgumentException("[ERROR]")))
+                        .verifyBalanceInput("-1"))
                 .withMessageStartingWith("[ERROR]");
     }
 
@@ -26,7 +26,7 @@ public class BalanceValidationTest {
     void Integer_범위를_넘는_검증() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> BalanceValidation
-                        .verifyBalanceInput("999999999999",() -> new IllegalArgumentException("[ERROR]")))
+                        .verifyBalanceInput("999999999999"))
                 .withMessageStartingWith("[ERROR]");
     }
 
@@ -34,7 +34,7 @@ public class BalanceValidationTest {
     void 입력값_10의_배수_검증() {
         assertThatIllegalArgumentException()
                 .isThrownBy(() -> BalanceValidation
-                        .verifyBalanceInput("131",() -> new IllegalArgumentException("[ERROR]")))
+                        .verifyBalanceInput("131"))
                 .withMessageStartingWith("[ERROR]");
     }
 }

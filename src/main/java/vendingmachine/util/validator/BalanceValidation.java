@@ -1,16 +1,14 @@
 package vendingmachine.util.validator;
 
-import static vendingmachine.util.validator.Validation.acceptThrow;
-
 public class BalanceValidation {
-    public static void verifyBalanceInput(String userInput, ThrowIllegalSupplier validator) {
-        StringValidation.isNotInteger(userInput, validator);
-        StringValidation.isOutOfIntegerRange(userInput, validator);
+    public static void verifyBalanceInput(String userInput) {
+        StringValidation.isNotInteger(userInput, () -> new IllegalArgumentException("[ERROR]"));
+        StringValidation.isOutOfIntegerRange(userInput,  () -> new IllegalArgumentException("[ERROR]"));
 
         int userInputAsInt = Integer.parseInt(userInput);
 
-        IntegerValidation.isNegative(userInputAsInt, validator);
-        IntegerValidation.isNotMultiplyByTen(userInputAsInt, validator);
+        IntegerValidation.isNegative(userInputAsInt,  () -> new IllegalArgumentException("[ERROR]"));
+        IntegerValidation.isNotMultiplyByTen(userInputAsInt,  () -> new IllegalArgumentException("[ERROR]"));
 
     }
 }
