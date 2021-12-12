@@ -18,7 +18,7 @@ public class VendingMachineController {
 		inputView = new InputView(scanner);
 	}
 
-	public String scanHoldingMoney() {
+	public int scanHoldingMoney() {
 		return inputView.scanHoldingMoney();
 	}
 
@@ -26,7 +26,7 @@ public class VendingMachineController {
 		return inputView.scanProductNameAndPriceAndCnt();
 	}
 
-	public String scanInputMoney() {
+	public int scanInputMoney() {
 		return inputView.scanInputMoney();
 	}
 

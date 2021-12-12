@@ -28,13 +28,12 @@ public class Coins {
 		coinsCount.put(Coin.COIN_10, new Count(ZERO));
 	}
 
-	public static Map<Coin, Count> moneyToCoins(String holdingMoney) {
-		int moneySum = Integer.parseInt(holdingMoney);
-		while (moneySum > 0) {
+	public static Map<Coin, Count> moneyToCoins(int holdingMoney) {
+		while (holdingMoney > 0) {
 			int randomCoin = Randoms.pickNumberInList(coins);
-			if (randomCoin <= moneySum) {
+			if (randomCoin <= holdingMoney) {
 				coinsCount.put(Coin.of(randomCoin), coinsCount.get(Coin.of(randomCoin)).add(ONE));
-				moneySum -= randomCoin;
+				holdingMoney -= randomCoin;
 			}
 		}
 		return coinsCount;

@@ -16,12 +16,12 @@ public class Application {
 	public static void main(String[] args) {
 		final Scanner scanner = new Scanner(System.in);
 		VendingMachineController vendingMachineController = new VendingMachineController(scanner);
-		String holdingMoney = vendingMachineController.scanHoldingMoney();
+		int holdingMoney = vendingMachineController.scanHoldingMoney();
 		Map<Coin, Count> coins = Coins.moneyToCoins(holdingMoney);
 		vendingMachineController.printHoldingCoins(coins);
 		String[] productNameAndPriceAndCnt = vendingMachineController.scanProductNameAndPriceAndCnt();
 		Products products = Products.save(productNameAndPriceAndCnt);
-		Money inputMoney = new Money(Integer.parseInt(vendingMachineController.scanInputMoney()));
+		Money inputMoney = new Money(vendingMachineController.scanInputMoney());
 		while (inputMoney.isRemain()) {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());
 			if (products.isHigherThanMinProductPrice(inputMoney) || products.isSoldOut()) {
