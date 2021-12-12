@@ -2,9 +2,6 @@ package vendingmachine.domain;
 
 import java.util.HashMap;
 
-import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.utils.validator.ProductInfoValidator;
-
 public class CoinCase {
 
     private final HashMap<Coin, Integer> holdingCoins;
@@ -37,7 +34,16 @@ public class CoinCase {
         return totalHoldingAmount;
     }
 
+    public int getNumberOfHoldingCoins(final Coin coin) {
+        return holdingCoins.get(coin);
+    }
+
     private void pushIn(Coin coinUnit) {
+
         holdingCoins.put(coinUnit, holdingCoins.get(coinUnit) + 1);
+    }
+
+    public void pullOut(Coin coinUnit) {
+        holdingCoins.put(coinUnit, holdingCoins.get(coinUnit) - 1);
     }
 }

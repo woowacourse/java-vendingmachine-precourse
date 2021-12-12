@@ -32,6 +32,10 @@ public class VendingMachine {
         return coinCase.getHoldingAmount();
     }
 
+    public int getNumberOfHoldingCoins(final Coin coin) {
+        return coinCase.getNumberOfHoldingCoins(coin);
+    }
+
     public int getInsertAmount() {
         return insertAmount;
     }
@@ -75,5 +79,9 @@ public class VendingMachine {
 
     private void pay(final int price) {
         insertAmount -= price;
+    }
+
+    public void returnCoin(final Coin coin) {
+        coinCase.pullOut(coin);
     }
 }
