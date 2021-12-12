@@ -9,20 +9,19 @@ import vendingmachine.dto.RequestHoldingMoneyDto;
 import vendingmachine.dto.RequestInsertMoneyDto;
 import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.RequestSellProductDto;
-import vendingmachine.dto.ResponseMoneyDto;
 
 public class InputView {
 	private static final String REQUEST_HOLDING_AMOUNT_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String REQUEST_REGISTER_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String REQUEST_INSERT_MONEY_MESSAGE = "투입 금액을 입력해 주세요.";
 	private static final String RESPONSE_NOW_MONEY_MESSAGE = "구매할 상품명을 입력해 주세요.";
-	private static final String RESPONSE_NOW_MONEY_FORM = "투입 금액: %d원";
 
 	public static RequestHoldingMoneyDto inputHoldingMoney() {
 		while (true) {
 			try {
 				System.out.println(REQUEST_HOLDING_AMOUNT_MESSAGE);
 				Money money = new Money(readLine());
+				System.out.println();
 				return new RequestHoldingMoneyDto(money);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -35,6 +34,7 @@ public class InputView {
 			try {
 				System.out.println(REQUEST_REGISTER_PRODUCT_MESSAGE);
 				Products products = new Products(readLine());
+				System.out.println();
 				return new RequestRegisterProductsDto(products);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -47,6 +47,7 @@ public class InputView {
 			try {
 				System.out.println(REQUEST_INSERT_MONEY_MESSAGE);
 				Money money = new Money(readLine());
+				System.out.println();
 				return new RequestInsertMoneyDto(money);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
@@ -54,10 +55,10 @@ public class InputView {
 		}
 	}
 
-	public static RequestSellProductDto inputSellProduct(ResponseMoneyDto responseMoneyDto) {
-		String nowMoneyMessage = String.format(RESPONSE_NOW_MONEY_FORM, responseMoneyDto.getMoney().get());
-		System.out.println(nowMoneyMessage);
+	public static RequestSellProductDto inputSellProduct() {
 		System.out.println(RESPONSE_NOW_MONEY_MESSAGE);
-		return new RequestSellProductDto(new Name(readLine()));
+		Name name = new Name(readLine());
+		System.out.println();
+		return new RequestSellProductDto(name);
 	}
 }

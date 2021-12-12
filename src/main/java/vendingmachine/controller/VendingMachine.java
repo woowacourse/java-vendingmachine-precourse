@@ -51,7 +51,8 @@ public class VendingMachine {
 		while (true) {
 			try {
 				ResponseMoneyDto responseMoneyDto = vendingMachineService.findMoney();
-				RequestSellProductDto requestSellProductDto = inputSellProduct(responseMoneyDto);
+				outputNowMoney(responseMoneyDto);
+				RequestSellProductDto requestSellProductDto = inputSellProduct();
 				vendingMachineService.sellProduct(requestSellProductDto);
 				return;
 			} catch (IllegalArgumentException e) {
@@ -61,6 +62,8 @@ public class VendingMachine {
 	}
 
 	private void returnChange() {
+		ResponseMoneyDto responseMoneyDto = vendingMachineService.findMoney();
+		outputNowMoney(responseMoneyDto);
 		ResponseChangeDto responseChangeDto = vendingMachineService.returnChange();
 		outputChange(responseChangeDto);
 	}
