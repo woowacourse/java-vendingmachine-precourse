@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class ItemRegPattern {
 	private static Pattern pattern = null;
-	private static String ITEM_INPUT_REG = "\\[([^,]+),(\\d+),(\\d+)\\]";
+	private static final String ITEM_INPUT_REG = "\\[([^,]+),(\\d+),(\\d+)\\]";
 
 	private ItemRegPattern() {
 
