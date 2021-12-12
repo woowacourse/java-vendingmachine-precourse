@@ -53,19 +53,41 @@ public class VendingMachine {
     }
 
     public boolean checkProgress() {
-        Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
-
-        Optional<Product> optionalProduct = productList.stream().max(comparatorByPrice);
-
-        Product maxProduct = optionalProduct
-                .orElseThrow(IllegalArgumentException::new);
-
-        int price = money.getPrice();
-
-        if (price >= maxProduct.getPrice()) {
+        if (checkMoney() == true && checkQuantity() == true) {
             return true;
         }
 
         return false;
+    }
+
+    private boolean checkMoney() {
+        Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
+
+        Optional<Product> optionalProduct = productList.stream().min(comparatorByPrice);
+
+        Product minProduct = optionalProduct
+                .orElseThrow(IllegalArgumentException::new);
+
+        int price = money.getPrice();
+
+        if (price >= minProduct.getPrice()) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean checkQuantity() {
+        int sumQuantity = 0;
+
+        for (Product product : productList) {
+            sumQuantity = sumQuantity + product.getQuantity();
+        }
+
+        if (sumQuantity == 0) {
+           return false;
+        }
+
+        return true;
     }
 }
