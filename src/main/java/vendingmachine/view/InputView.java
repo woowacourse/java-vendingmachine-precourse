@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import static vendingmachine.validator.NumberValidator.*;
+import static vendingmachine.validator.StringFormatValidator.*;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Menu;
@@ -29,12 +30,9 @@ public class InputView {
 
         String input = Console.readLine();
         String[] merchandiseInfos = input.split(";");
-        for (String m : merchandiseInfos) {
-            String[] merchandiseInfo = m.substring(1, m.length() - 1).split(",");
-            String name = merchandiseInfo[0];
-            int price = Integer.parseInt(merchandiseInfo[1]);
-            int number = Integer.parseInt(merchandiseInfo[2]);
-            merchandiseList.add(new Merchandise(name, price, number));
+        for (String merchandiseInfo : merchandiseInfos) {
+            validateMerchandiseInfoFormat(merchandiseInfo);
+            merchandiseList.add(new Merchandise(merchandiseInfo));
         }
         return new Menu(merchandiseList);
     }

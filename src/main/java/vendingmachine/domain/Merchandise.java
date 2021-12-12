@@ -5,10 +5,11 @@ public class Merchandise {
     public int price;
     public int number;
 
-    public Merchandise(String name, int price, int number) {
-        this.name = name;
-        this.price = price;
-        this.number = number;
+    public Merchandise(String merchandiseInfo) {
+        String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
+        this.name = infoList[0];
+        this.price = Integer.parseInt(infoList[1]);
+        this.number = Integer.parseInt(infoList[2]);
     }
 
     public String getName() {
