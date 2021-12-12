@@ -4,7 +4,7 @@ import java.util.List;
 
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.utils.validator.HoldingMoneyValidator;
+import vendingmachine.utils.validator.HoldingAmountValidator;
 import vendingmachine.utils.validator.InsertAmountValidator;
 import vendingmachine.utils.validator.ProductInfoValidator;
 import vendingmachine.view.ErrorMessageOutputView;
@@ -21,16 +21,15 @@ public class VendingMachineController {
 
     public void execute() {
         initializeHoldingMoney();
-        vendingMachine.initializeCoinCase();
-        SystemMessageOutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
         initializeProductsInfo();
         initializeInsertAmount();
     }
 
     private void initializeHoldingMoney() {
         try {
-            int validHoldingMoneyInput = HoldingMoneyValidator.getValidHoldingMoney(InputView.inputHoldingMoney());
-            vendingMachine.setHoldingMoney(validHoldingMoneyInput);
+            int validHoldingMoneyInput = HoldingAmountValidator.getValidHoldingAmount(InputView.inputHoldingAmount());
+            vendingMachine.initializeCoinCase(validHoldingMoneyInput);
+            SystemMessageOutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
             initializeHoldingMoney();

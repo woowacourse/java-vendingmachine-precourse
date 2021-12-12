@@ -28,6 +28,14 @@ public class CoinCase {
         return holdingCoins;
     }
 
+    public int getHoldingAmount() {
+        int totalHoldingAmount = 0;
+        for (Coin coinUnit : Coin.getCoinListDecreasingOrder()) {
+            totalHoldingAmount += coinUnit.getAmount() * holdingCoins.get(coinUnit);
+        }
+        return totalHoldingAmount;
+    }
+
     private void pushIn(Coin coinUnit) {
         holdingCoins.put(coinUnit, holdingCoins.get(coinUnit) + 1);
     }
