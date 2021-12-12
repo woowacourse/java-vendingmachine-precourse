@@ -12,23 +12,21 @@ public class Constants {
 	// 정규식 상수
 	public static final String DELIMITER = ",";
 	public static final String SEPARATOR = ";";
-	public static final String MONEY_REGEX = "[1-9]+[0-9]+0";
-	public static final String NAME_REGEX = "[가-힣\\w]+";
-	public static final String NUMBER_REGEX = "[1-9]+[0-9]*";
-	public static final String BEVERAGE_REGEX = NAME_REGEX + DELIMITER + MONEY_REGEX + DELIMITER + NUMBER_REGEX;
+	public static final String WORD_REGEX = "[가-힣\\w]*";
+	public static final String BEVERAGE_REGEX = WORD_REGEX + DELIMITER + WORD_REGEX + DELIMITER + WORD_REGEX;
 
 	// 정규식 패턴 상수
-	public static final Pattern MONEY_PATTERN = Pattern.compile("^" + MONEY_REGEX + "$");
-	public static final Pattern NAME_PATTERN = Pattern.compile("^" + NAME_REGEX + "$");
 	public static final Pattern BEVERAGES_PATTERN = Pattern.compile(
 		"^(\\[" + BEVERAGE_REGEX + "])(" + SEPARATOR + "\\[" + BEVERAGE_REGEX + "])*$");
+	public static final Pattern NAME_PATTERN = Pattern.compile("^[가-힣\\w]+$");
+	public static final Pattern NUMBER_PATTERN = Pattern.compile("^[1-9]+[0-9]*$");
 
 	// 오류메세지 관련 상수
 	public static final String ERROR = "[ERROR] ";
-	public static final String ERROR_MONEY_PATTERN = ERROR + "입력은 정수여야 한다.";
+	public static final String ERROR_NUMBER_PATTERN = ERROR + "숫자 입력은 비지 않은 1 이상의 정수 형식이어야 한다.";
 	public static final String ERROR_MONEY_RANGE = ERROR + "입력은 100 이상의 정수여야 한다.";
 	public static final String ERROR_MONEY_UNIT = ERROR + "숫자의 끝자리는 0이어야 한다.";
-	public static final String ERROR_NAME_STRING = ERROR + "입력은 문자여야 한다.";
+	public static final String ERROR_NAME_STRING = ERROR + "이름은 1자 이상의 문자여야 한다.";
 	public static final String ERROR_NAME_IN_NAMES = ERROR + "입력된 이름의 제품이 없다.";
 	public static final String ERROR_BEVERAGE_STRING = ERROR + "올바른 형식으로 입력해야 한다.";
 	public static final String ERROR_BEVERAGE_DUPLICATED = ERROR + "중복된 제품이 있다.";

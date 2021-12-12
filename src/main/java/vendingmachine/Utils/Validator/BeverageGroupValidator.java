@@ -4,10 +4,10 @@ import java.util.Arrays;
 
 import vendingmachine.Utils.Constants;
 
-public class BeverageValidator {
+public class BeverageGroupValidator {
 	private final String beverageString;
 
-	public BeverageValidator(String beverage) {
+	public BeverageGroupValidator(String beverage) {
 		beverageString = beverage;
 		validate();
 	}
@@ -17,7 +17,7 @@ public class BeverageValidator {
 		isNoDuplicate();
 	}
 
-	private void isRightString() {
+	public void isRightString() {
 		if (!Constants.BEVERAGES_PATTERN.matcher(beverageString).matches()) {
 			throw new IllegalArgumentException(Constants.ERROR_BEVERAGE_STRING);
 		}

@@ -9,11 +9,13 @@ public class Converter {
 		return Integer.parseInt(moneyString);
 	}
 
-	public static ArrayList<Object[]> getBeverages(String beverageString) {
-		ArrayList<Object[]> beverages = new ArrayList<>();
+	public static ArrayList<String[]> getBeverages(String beverageString) {
+		ArrayList<String[]> beverages = new ArrayList<>();
 		for (String beverage : beverageString.split(Constants.SEPARATOR)) {
-			String[] values = beverage.substring(1, beverage.length() - 1).split(Constants.DELIMITER);
-			beverages.add(new Object[]{values[0], getInt(values[1]), getInt(values[2])});
+			beverages.add(
+				beverage
+				.substring(1, beverage.length() - 1)
+				.split(Constants.DELIMITER));
 		}
 		return beverages;
 	}

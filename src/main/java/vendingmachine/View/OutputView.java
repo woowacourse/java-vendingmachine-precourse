@@ -32,4 +32,8 @@ public class OutputView {
 	public static void printBreak() {
 		System.out.println();
 	}
+
+	public static void printError(String error) {
+		System.out.println(error);
+	}
 }

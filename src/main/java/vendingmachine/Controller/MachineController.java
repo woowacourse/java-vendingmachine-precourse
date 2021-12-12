@@ -3,7 +3,6 @@ package vendingmachine.Controller;
 import static vendingmachine.View.OutputView.printBreak;
 
 import vendingmachine.Model.ChangesCoinGroup;
-import vendingmachine.Model.Converter;
 import vendingmachine.Model.VendingMachine;
 import vendingmachine.View.OutputView;
 
@@ -21,16 +20,16 @@ public class MachineController {
 	}
 
 	private void initiate() {
-		vendingMachine.initCoins(Converter.getInt(InputController.getMachineMoney()));
+		vendingMachine.initCoins(InputController.getMachineMoney());
 		printBreak();
 
 		OutputView.printCoin(vendingMachine.getCoins().getMap());
 		printBreak();
 
-		vendingMachine.initBeverage(Converter.getBeverages(InputController.getBeverages()));
+		vendingMachine.initBeverages(InputController.getBeverageGroup());
 		printBreak();
 
-		vendingMachine.initUserMoney(Converter.getInt(InputController.getUserMoney()));
+		vendingMachine.initUserMoney(InputController.getUserMoney());
 		printBreak();
 	}
 
@@ -48,8 +47,8 @@ public class MachineController {
 	private void giveChanges() {
 		OutputView.printUserMoney(vendingMachine.getUserMoney().get());
 
-		ChangesCoinGroup changesCoinGroup = new ChangesCoinGroup(vendingMachine);
-		changesCoinGroup.setRepeat();
-		OutputView.printChange(changesCoinGroup.getNotEmptyMap());
+		ChangesCoinGroup changes = new ChangesCoinGroup(vendingMachine);
+		changes.setRepeat();
+		OutputView.printChange(changes.getNotEmptyMap());
 	}
 }

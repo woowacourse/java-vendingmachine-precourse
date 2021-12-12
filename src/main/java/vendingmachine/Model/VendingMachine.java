@@ -1,32 +1,24 @@
 package vendingmachine.Model;
 
-import java.util.ArrayList;
-
 public class VendingMachine {
 	private CoinGroup coins;
-	private final BeverageGroup beverageGroup = new BeverageGroup();
+	private BeverageGroup beverageGroup;
 	private Money userMoney;
 
-	public void initCoins(int money) {
+	public void initCoins(Money money) {
 		coins = new CoinGroup(money);
 	}
 
-	public void initBeverage(ArrayList<Object[]> beverages) {
-		for (Object[] values : beverages) {
-			this.beverageGroup.add(new Beverage(values));
-		}
+	public void initBeverages(BeverageGroup beverages) {
+		this.beverageGroup = beverages;
 	}
 
-	public void initUserMoney(int money) {
-		userMoney = new Money(money);
+	public void initUserMoney(Money money) {
+		userMoney = money;
 	}
 
 	public CoinGroup getCoins() {
 		return coins;
-	}
-
-	public String[] getNames() {
-		return beverageGroup.getNames();
 	}
 
 	public Beverage getBeverage(String name) {
@@ -38,7 +30,7 @@ public class VendingMachine {
 	}
 
 	public void sell(String name) {
-		userMoney.setMinus(beverageGroup.getBeverage(name).price.get());
+		userMoney.setMinus(beverageGroup.getBeverage(name).price);
 		beverageGroup.getBeverage(name).sell();
 	}
 

@@ -1,54 +1,49 @@
 package vendingmachine.Controller;
 
+import vendingmachine.Model.BeverageGroup;
+import vendingmachine.Model.Money;
 import vendingmachine.Model.VendingMachine;
-import vendingmachine.Utils.Validator.BeverageValidator;
-import vendingmachine.Utils.Validator.MoneyValidator;
 import vendingmachine.Utils.Validator.NameValidator;
 import vendingmachine.Utils.Validator.SellValidator;
 import vendingmachine.View.InputView;
+import vendingmachine.View.OutputView;
 
 public class InputController {
-	public static String getMachineMoney() {
+	public static Money getMachineMoney() {
 		try {
-			String input = InputView.machineMoneyInput();
-			new MoneyValidator(input);
-			return input;
+			return new Money(InputView.machineMoneyInput());
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			OutputView.printError(e.getMessage());
 			return getMachineMoney();
 		}
 	}
 
-	public static String getUserMoney() {
+	public static Money getUserMoney() {
 		try {
-			String input = InputView.userMoneyInput();
-			new MoneyValidator(input);
-			return input;
+			return new Money(InputView.userMoneyInput());
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return getMachineMoney();
+			OutputView.printError(e.getMessage());
+			return getUserMoney();
 		}
 	}
 
-	public static String getBeverages() {
+	public static BeverageGroup getBeverageGroup() {
 		try {
-			String input = InputView.machinebeverageInput();
-			new BeverageValidator(input);
-			return input;
+			return new BeverageGroup(InputView.beverageGroupInput());
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return getBeverages();
+			OutputView.printError(e.getMessage());
+			return getBeverageGroup();
 		}
 	}
 
 	public static String getBeverageName(VendingMachine vendingMachine) {
 		try {
-			String input = InputView.buybeverageNameInput();
-			new NameValidator(input, vendingMachine.getNames());
+			String input = InputView.beverageNameInput();
+			new NameValidator(input);
 			new SellValidator(vendingMachine.getBeverage(input), vendingMachine.getUserMoney());
 			return input;
 		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
+			OutputView.printError(e.getMessage());
 			return getBeverageName(vendingMachine);
 		}
 	}

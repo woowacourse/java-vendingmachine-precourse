@@ -5,8 +5,8 @@ import vendingmachine.Utils.Constants;
 public class MoneyValidator {
 	public MoneyValidator(String money) {
 		isRightUnit(money);
-		isRightString(money);
 		isRightRange(Integer.parseInt(money));
+		isRightString(money);
 	}
 
 	private void isRightUnit(String money) {
@@ -15,15 +15,15 @@ public class MoneyValidator {
 		}
 	}
 
-	private void isRightString(String money) {
-		if (!Constants.MONEY_PATTERN.matcher(money).matches()) {
-			throw new IllegalArgumentException(Constants.ERROR_MONEY_PATTERN);
-		}
-	}
-
 	private void isRightRange(int money) {
 		if (money < Constants.MIN_MONEY) {
 			throw new IllegalArgumentException(Constants.ERROR_MONEY_RANGE);
+		}
+	}
+
+	private void isRightString(String money) {
+		if (!Constants.NUMBER_PATTERN.matcher(money).matches()) {
+			throw new IllegalArgumentException(Constants.ERROR_NUMBER_PATTERN);
 		}
 	}
 }

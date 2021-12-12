@@ -10,8 +10,7 @@ public class CoinGroup {
 	public CoinGroup() {
 	}
 
-	public CoinGroup(int moneyInt) {
-		Money money = new Money(moneyInt);
+	public CoinGroup(Money money) {
 		initiate();
 		while (!money.isEmpty()) {
 			moneyToCoin(money);

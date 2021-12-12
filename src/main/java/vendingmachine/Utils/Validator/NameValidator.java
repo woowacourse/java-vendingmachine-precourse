@@ -1,34 +1,18 @@
 package vendingmachine.Utils.Validator;
 
-import java.util.Arrays;
-import java.util.Objects;
-
 import vendingmachine.Utils.Constants;
 
 public class NameValidator {
-	public final String NAME;
-	private final String[] NAMES;
+	private final String name;
 
-	public NameValidator(String name, String[] names) {
-		NAME = name;
-		NAMES = names;
-		validate();
-	}
-
-	private void validate() {
+	public NameValidator(String name) {
+		this.name = name;
 		isRightString();
-		isInNames();
 	}
 
 	private void isRightString() {
-		if (!Constants.NAME_PATTERN.matcher(NAME).matches()) {
+		if (!Constants.NAME_PATTERN.matcher(name).matches()) {
 			throw new IllegalArgumentException(Constants.ERROR_NAME_STRING);
-		}
-	}
-
-	private void isInNames() {
-		if (Arrays.stream(NAMES).noneMatch(name -> Objects.equals(name, NAME))) {
-			throw new IllegalArgumentException(Constants.ERROR_NAME_IN_NAMES);
 		}
 	}
 }
