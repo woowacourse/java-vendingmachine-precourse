@@ -24,45 +24,9 @@ public enum Coin {
         this.number++;
     }
 
-    public int getCoin500AllAmount() {
-        return COIN_500.amount * COIN_500.number;
+    public int getCoinHowMuch() {
+        return this.amount * this.number;
     }
 
-    public int getCoin100AllAmount() {
-        return COIN_100.amount * COIN_100.number;
-    }
-
-    public int getCoin50AllAmount() {
-        return COIN_50.amount * COIN_50.number;
-    }
-
-    public int getCoin10AllAmount() {
-        return COIN_10.amount * COIN_10.number;
-    }
-
-    public List<Integer> getAllCoinsAmount() {
-        List<Integer> coin = new ArrayList<>();
-        coin.add(COIN_500.amount);
-        coin.add(COIN_100.amount);
-        coin.add(COIN_50.amount);
-        coin.add(COIN_10.amount);
-
-        return coin;
-    }
-
-    public int getRandomCoinAmount() {
-        List<Integer> coin = getAllCoinsAmount();
-
-        int pickAmount = Randoms.pickNumberInList(coin);
-
-        return pickAmount;
-    }
-
-   public int getAllCurrentAmount() {
-        int sum = 0;
-        sum = getCoin500AllAmount() + getCoin100AllAmount() + getCoin50AllAmount() + getCoin10AllAmount();
-
-        return sum;
-   }
 
 }
