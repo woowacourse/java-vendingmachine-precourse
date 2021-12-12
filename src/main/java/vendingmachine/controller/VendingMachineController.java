@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingMoneyValidator;
+import vendingmachine.utils.validator.ProductInfoValidator;
 import vendingmachine.view.ErrorMessageOutputView;
 import vendingmachine.view.InputView;
 import vendingmachine.view.SystemMessageOutputView;
@@ -32,11 +33,10 @@ public class VendingMachineController {
 
     private void initializeProductsInfo() {
         try {
-            int validHoldingMoneyInput = HoldingMoneyValidator.getValidHoldingMoney(InputView.inputHoldingMoney());
-            vendingMachine.setHoldingMoney(validHoldingMoneyInput);
+            List<Product> productList = ProductInfoValidator.getValidProductList(InputView.inputProductInfo());
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
-            initializeHoldingMoney();
+            initializeProductsInfo();
         }
     }
 }
