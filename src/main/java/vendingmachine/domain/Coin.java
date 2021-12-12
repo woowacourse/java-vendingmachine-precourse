@@ -34,6 +34,10 @@ public enum Coin {
 		return COIN_10;
 	}
 
+	public boolean isNotZeroRemainingNumber() {
+		return remainingNumber > 0;
+	}
+
 	public void addCoin() {
 		this.numberOfCoin += 1;
 	}
@@ -56,5 +60,14 @@ public enum Coin {
 
 	public int getRemainingNumber() {
 		return remainingNumber;
+	}
+
+	@Override
+	public String toString() {
+		return amount + "원" + " - " + numberOfCoin + "개";
+	}
+
+	public String toStringRemainingNumber() {
+		return amount + "원" + " - " + remainingNumber + "개";
 	}
 }
