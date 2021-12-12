@@ -38,4 +38,12 @@ class ProductDtoTest {
 		productDto.convertProducts();
 	}
 
+	@Test
+	@DisplayName("제품명이 중복될 수 없다.")
+	public void duplicateFail() {
+		ProductDto productDto = new ProductDto("[콜라,1500,20];[콜라,1000,10]");
+		Assertions.assertThrows(IllegalArgumentException.class, productDto::convertProducts);
+	}
+
+
 }
