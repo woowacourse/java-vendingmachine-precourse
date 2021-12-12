@@ -2,6 +2,8 @@ package vendingmachine.service;
 
 import static vendingmachine.domain.Coin.*;
 
+import java.util.Arrays;
+
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
@@ -16,20 +18,15 @@ public class VendingMachineAccountService {
 
 	public static void setRandomCoins() {
 		int account = vendingMachineAccount.getAccount();
-		for (Coin coin : Coin.values()) {
-			int randomCount = getRandomCount(account, coin.getAmount());
-			account -= randomCount * coin.getAmount();
-			vendingMachineAccount.addCoinCount(coin, randomCount);
-		}
-	}
 
-	private static int getRandomCount(int remainAmount, int coinUnit) {
-		int min = 0;
-		int max = remainAmount / coinUnit;
-		if (coinUnit == COIN_10.getAmount()) {
-			min = max;
+		while (account > 0) {
+			int randomCoin = Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10));
+			if (account < randomCoin) {
+				continue;
+			}
+			account -= randomCoin;
+			vendingMachineAccount.addCoinCount(Coin.valueOf(randomCoin));
 		}
-		return Randoms.pickNumberInRange(min, max);
 	}
 
 	public static int getValidInput() {

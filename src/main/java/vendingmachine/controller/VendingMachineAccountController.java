@@ -16,6 +16,7 @@ public class VendingMachineAccountController {
 	}
 
 	public static void printCoinCount() {
+		VendingMachineAccountView.printVendingMachineCoin();
 		VendingMachineAccountView.printCoinMap(VendingMachineAccount.getAllCoinCount());
 	}
 }
