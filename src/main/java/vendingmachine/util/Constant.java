@@ -8,7 +8,13 @@ public class Constant {
     public static final String PRODUCT_ERROR = "[ERROR] 올바른 상품의 형식이 아닙니다.";
     public static final String INSERT_MONEY = "투입 금액을 입력해 주세요.";
     public static final String INSERT_MONEY_ERROR = "[ERROR] 올바른 투입 금액이 아닙니다.";
-    
+    public static final String NOW_MONEY = "투입 금액: ";
+    public static final String WON = "원";
+    public static final String CHOOSE_PRODUCT = "구매할 상품명을 입력해 주세요.";
+    public static final String CHOOSE_PRODUCT_ERROR = "올바른 상품명이 아닙니다.";
+
+
+
 
 
 }

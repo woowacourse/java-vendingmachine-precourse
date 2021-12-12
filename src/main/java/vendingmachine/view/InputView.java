@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import java.util.List;
+
 public class InputView {
     private static void isValidPrice(int price){
         if (price%10!=0){
@@ -65,5 +67,13 @@ public class InputView {
             }
         }
         return count;
+    }
+
+    public static void isValidProductName(String productName, List<String> products){
+        if (!products.contains(productName)){
+            throw new IllegalArgumentException();
+        }
+
+
     }
 }
