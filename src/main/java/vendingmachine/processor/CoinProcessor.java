@@ -13,7 +13,7 @@ public class CoinProcessor {
 
 	private Map<Coin, Integer> coinMap = new HashMap<Coin, Integer>();
 
-	public void generateCoinList(int money) {
+	public void generateCoinMap(int money) {
 		List<Integer> coins = new ArrayList<Integer>();
 		while (money != 0) {
 			int coinValue = getRandomCoin();
@@ -24,6 +24,24 @@ public class CoinProcessor {
 			money -= coinValue;
 		}
 		initCoinMap(coins);
+	}
+
+	public Map<Coin, Integer> generateChangeMap(int change) {
+		Map<Coin, Integer> result = new HashMap<Coin, Integer>();
+		for(Coin coin:Coin.getCoinList()) {
+			int numberOfChangeCoin = getNumberOfChangeCoin(change, coin, coinMap.get(coin));
+			result.put(coin, numberOfChangeCoin);
+			change -= numberOfChangeCoin * coin.getAmount();
+		}
+		return result;
+	}
+
+	private int getNumberOfChangeCoin(int change, Coin coin, int quantity) {
+		int maximumChange = change / coin.getAmount();
+		if(quantity < maximumChange) {
+			return maximumChange = quantity;
+		}
+		return maximumChange;
 	}
 
 	private void initCoinMap(List<Integer> coins) {
