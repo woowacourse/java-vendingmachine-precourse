@@ -38,7 +38,7 @@ public class VendingMachine {
 
 	public Coins returnCoins(int amount) {
 		Coins change = new Coins();
-		change.processChange(amount);
+		change.processChange(coins, amount);
 		return change;
 	}
 }

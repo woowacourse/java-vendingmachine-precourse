@@ -31,13 +31,17 @@ public class Coins {
 		}
 	}
 
-	public void processChange(int amount) {
+	public void processChange(Coins coins, int amount) {
+		coins.process(list, amount);
+	}
+
+	private void process(Map<Coin, Integer> changeList, int amount) {
 		for (Map.Entry<Coin, Integer> entry : list.entrySet()) {
 			Coin coin = entry.getKey();
 			Integer count = entry.getValue();
 
 			int coinCount = coin.calculateCount(amount, count);
-			list.put(coin, coinCount);
+			changeList.put(coin, coinCount);
 
 			amount = coin.calculateChange(amount, coinCount);
 		}
