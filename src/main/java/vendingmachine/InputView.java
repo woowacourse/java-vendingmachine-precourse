@@ -24,6 +24,7 @@ public class InputView {
     }
 
     public static int inputMoney() {
+        System.out.println();
         System.out.println("투입 금액을 입력해 주세요.");
         return Integer.parseInt(Console.readLine());
     }
