@@ -34,8 +34,8 @@ public class VendingMachineController {
 	private int inputHoldingAmount() {
 		while (true) {
 			try {
-				String amount = Input.holdingAmount();
-				return validateAmount(amount, AMOUNT);
+				String holdingAmount = Input.holdingAmount();
+				return validateAmount(holdingAmount, AMOUNT);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
@@ -58,8 +58,8 @@ public class VendingMachineController {
 	private int inputAmount() {
 		while (true) {
 			try {
-				String amount = Input.inputAmount();
-				return validateAmount(amount, AMOUNT);
+				String inputAmount = Input.inputAmount();
+				return validateAmount(inputAmount, AMOUNT);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}

@@ -20,12 +20,12 @@ public class Coins {
 		return list;
 	}
 
-	public void insertRandomCoins(int totalAmount) {
-		while (totalAmount != ZERO_AMOUNT) {
+	public void insertRandomCoins(int holdingAmount) {
+		while (holdingAmount != ZERO_AMOUNT) {
 			Coin coin = Coin.pickRandom();
 
-			if (coin.isEnoughAmount(totalAmount)) {
-				totalAmount = coin.calculateAmount(totalAmount);
+			if (coin.isEnoughAmount(holdingAmount)) {
+				holdingAmount = coin.calculateAmount(holdingAmount);
 				list.put(coin, list.get(coin) + PLUS_QUANTITY);
 			}
 		}

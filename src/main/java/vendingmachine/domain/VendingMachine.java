@@ -16,8 +16,8 @@ public class VendingMachine {
 		return coins;
 	}
 
-	public void insertCoins(int amount) {
-		coins.insertRandomCoins(amount);
+	public void insertCoins(int holdingAmount) {
+		coins.insertRandomCoins(holdingAmount);
 	}
 
 	public void insertItems(String itemList) {

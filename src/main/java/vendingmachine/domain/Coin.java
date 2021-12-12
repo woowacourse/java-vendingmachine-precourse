@@ -24,16 +24,16 @@ public enum Coin {
 	}
 
 	public static Coin pickRandom() {
-		int amount = pickRandomCoin(getAmounts());
-		return getCoinByAmount(amount);
+		int pickAmount = pickRandomCoin(getAmounts());
+		return getCoinByAmount(pickAmount);
 	}
 
-	public boolean isEnoughAmount(int totalAmount) {
-    	return totalAmount >= amount;
+	public boolean isEnoughAmount(int holdingAmount) {
+    	return holdingAmount >= amount;
 	}
 
-	public int calculateAmount(int totalAmount) {
-    	return totalAmount - amount;
+	public int calculateAmount(int holdingAmount) {
+    	return holdingAmount - amount;
 	}
 
 	public int calculateCount(int totalAmount, int count) {
@@ -50,9 +50,9 @@ public enum Coin {
 			.collect(Collectors.toList());
 	}
 
-	private static Coin getCoinByAmount(int amount) {
+	private static Coin getCoinByAmount(int pickAmount) {
     	return Stream.of(Coin.values())
-			.filter(coin -> coin.amount == amount)
+			.filter(coin -> coin.amount == pickAmount)
 			.findFirst()
 			.orElse(null);
 	}
