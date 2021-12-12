@@ -2,6 +2,7 @@ package vendingmachine;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Utils {
 
@@ -44,5 +45,11 @@ public class Utils {
             }
         }
         throw new IllegalArgumentException("[ERROR] 등록된 상품이 아닙니다.");
+    }
+
+    public static void validateDuplication(ArrayList<Product> products, String name) {
+        if ((int)products.stream().filter(p -> p.getName().equals(name)).count() != 0) {
+            throw new IllegalArgumentException("[ERROR] 상품은 중복 등록될 수 없습니다.");
+        }
     }
 }
