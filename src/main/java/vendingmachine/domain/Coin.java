@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
 import vendingmachine.exception.CoinNotExistAmountException;
+import vendingmachine.exception.CoinNotFoundLeastException;
 
 public enum Coin implements Comparator<Coin> {
     COIN_500(500),
@@ -48,7 +49,7 @@ public enum Coin implements Comparator<Coin> {
         return Arrays.stream(values())
             .min(Comparator.comparingInt(Coin::amount))
             .map(Coin::amount)
-            .orElseThrow(() -> new RuntimeException("최소 coin이 존재하지 않습니다."));
+            .orElseThrow(CoinNotFoundLeastException::new);
     }
 
     @Override
