@@ -13,4 +13,9 @@ public class OutputView {
 		System.out.print(
 			Messages.OUTPUT_VIEW_NOTICE_ITEM_INPUT_MSG.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 	}
+
+	public static void noticePayMoneyInput() {
+		System.out.print(
+			Messages.OUTPUT_VIEW_NOTICE_PAY_MONEY_INPUT_MSG.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+	}
 }
