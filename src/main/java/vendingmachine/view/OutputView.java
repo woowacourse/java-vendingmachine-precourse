@@ -40,4 +40,30 @@ public class OutputView {
             }
         }
     }
+
+    public static String printInputVendingMachineMoney() {
+        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+
+        return readLine();
+    }
+
+    public static String printInputVendingMachineProduct() {
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+
+        return readLine();
+    }
+
+    public static String printInputInsertAmount() {
+        System.out.println("투입 금액을 입력해 주세요.");
+
+        return readLine();
+    }
+
+    public static String printInputProductName(int restMoney) {
+        System.out.println("\n투입 금액: " + restMoney + "원");
+
+        System.out.println("구매할 상품명을 입력해 주세요.");
+
+        return readLine();
+    }
 }
