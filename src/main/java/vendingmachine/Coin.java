@@ -13,8 +13,8 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public void resetCount(){
-        this.count=0;
+    public void resetCount() {
+        this.count = 0;
     }
 
     public int getAmount() {
@@ -25,28 +25,28 @@ public enum Coin {
         this.count++;
     }
 
-    public void printCoinInfo(){
-        System.out.println(amount+"원 - "+count+"개");
+    public void printCoinInfo() {
+        System.out.println(amount + "원 - " + count + "개");
     }
 
-    public int returnCoin(int userAmount){
-        int returnCount=getReturnCount(userAmount);
+    public int returnCoin(int userAmount) {
+        int returnCount = getReturnCount(userAmount);
 
         decreaseCount(returnCount);
-        userAmount-=returnCount*amount;
+        userAmount -= returnCount * amount;
 
-        if(returnCount>0){
-            System.out.println(amount+"원 - "+returnCount+"개");
+        if (returnCount > 0) {
+            System.out.println(amount + "원 - " + returnCount + "개");
         }
 
         return userAmount;
     }
 
-    private int getReturnCount(int userAmount){
-        return Math.min(userAmount/amount,count);
+    private int getReturnCount(int userAmount) {
+        return Math.min(userAmount / amount, count);
     }
 
-    private void decreaseCount(int count){
-        this.count-=count;
+    private void decreaseCount(int count) {
+        this.count -= count;
     }
 }

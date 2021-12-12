@@ -3,7 +3,6 @@ package vendingmachine;
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class Machine {
-    private final NumberManager numberManager = new NumberManager();
     private final CoinManager coinManager = new CoinManager();
     private final ProductMap productMap = new ProductMap();
     private int userAmount = 0;
@@ -27,21 +26,8 @@ public class Machine {
     }
 
     private void setCoinsInMachine() {
-        int heldAmount = getHeldAmountInMachine();
+        int heldAmount = InputManager.getHeldAmount();
         makeCoins(heldAmount);
-    }
-
-    private int getHeldAmountInMachine() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        while (true) {
-            String heldAmountString = readLine();
-            try {
-                int heldAmount = numberManager.toNumber(heldAmountString, NumberManager.TYPE_AMOUNT);
-                return heldAmount;
-            } catch (IllegalArgumentException e) {
-                coinManager.resetCoinCount();
-            }
-        }
     }
 
     private void makeCoins(int amount) {
@@ -64,15 +50,7 @@ public class Machine {
     }
 
     private void setUserAmount() {
-        System.out.println("\n투입 금액을 입력해 주세요.");
-        while (true) {
-            String userAmountString = readLine();
-            try {
-                userAmount = numberManager.toNumber(userAmountString, NumberManager.TYPE_AMOUNT);
-                return;
-            } catch (IllegalArgumentException e) {
-            }
-        }
+        userAmount = InputManager.getUserAmount();
     }
 
     private boolean stopWorking() {

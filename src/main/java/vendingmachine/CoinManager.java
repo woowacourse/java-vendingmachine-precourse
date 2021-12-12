@@ -41,12 +41,6 @@ public class CoinManager {
         }
     }
 
-    public void resetCoinCount(){
-        for(Coin c:Coin.values()){
-            c.resetCount();
-        }
-    }
-
     public void returnCoins(int userAmount) {
         System.out.println("잔돈");
         for (Coin c : Coin.values()) {

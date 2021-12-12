@@ -9,9 +9,10 @@ public class NumberManager {
 
     private static final int AMOUNT_UNIT = 10;
 
-    public NumberManager() {}
+    public NumberManager() {
+    }
 
-    public int toNumber(String numberString, int type) {
+    public static int toNumber(String numberString, int type) {
         int number = toInt(numberString);
         if (type == TYPE_AMOUNT && isAmountError(number)) {
             System.out.println("[ERROR] 가격(금액)은 10으로 나누어 떨어지는 자연수로 입력해주세요.");
@@ -24,7 +25,7 @@ public class NumberManager {
         return number;
     }
 
-    private int toInt(String numberString) {
+    private static int toInt(String numberString) {
         int number;
         try {
             number = Integer.parseInt(numberString);
@@ -34,14 +35,14 @@ public class NumberManager {
         }
     }
 
-    private boolean isAmountError(int amount) {
+    private static boolean isAmountError(int amount) {
         if (amount <= 0 || amount % AMOUNT_UNIT > 0) {
             return ERROR;
         }
         return NON_ERROR;
     }
 
-    private boolean isCountError(int count) {
+    private static boolean isCountError(int count) {
         if (count <= 0) {
             return ERROR;
         }
