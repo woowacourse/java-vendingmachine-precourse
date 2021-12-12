@@ -38,4 +38,10 @@ public enum Coin {
 			.findFirst()
 			.get();
 	}
+
+	private static void decreaseCoinAmount(ArrayList<Item> coinList, int valueOfReturnedCoin, int amountOfReturnedCoin) {
+		coinList.stream()
+			.filter(eachCoin -> eachCoin.getPrice() == valueOfReturnedCoin)
+			.forEach(eachCoin -> eachCoin.decreaseAmount(amountOfReturnedCoin));
+	}
 }
