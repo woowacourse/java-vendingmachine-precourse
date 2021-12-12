@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import exception.OrderException;
+import exception.ProductException;
 import vendingmachine.model.Product;
 import vendingmachine.repository.ProductRepository;
 
@@ -23,11 +24,13 @@ public class ProductRepositoryService {
 	}
 
 	public void saveProductRepository(String userInput) {
+		ProductException.isValidProduct(userInput);
 		List<String> productInfos = Arrays.asList(userInput.split(PRODUCT_DIVIDER));
 		for (String productInfo : productInfos) {
 			Product product = stringToProduct(unwrapProductInfo(productInfo));
 			productRepository.addProduct(product);
 		}
+		ProductException.isDuplicated(productRepository.getProductList());
 	}
 
 	private String unwrapProductInfo(String product) {

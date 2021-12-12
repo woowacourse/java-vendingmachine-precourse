@@ -62,7 +62,7 @@ public class ApplicationController {
 			productRepositoryService.saveProductRepository(userProducts);
 			getMoney();
 		} catch (IllegalArgumentException e) {
-			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
+			System.out.println(ERROR_PREFIX + e.getMessage());
 			getProducts();
 		}
 	}
@@ -74,17 +74,14 @@ public class ApplicationController {
 			int validMoney = Integer.parseInt(money);
 			getOrder(validMoney);
 		} catch (IllegalArgumentException e) {
-			System.out.println(ERROR_PREFIX + INSERT_MONEY_PREFIX + e.getMessage() + LINE_STAMP);
+			System.out.println(ERROR_PREFIX + INSERT_MONEY_PREFIX + e.getMessage());
 			getMoney();
 		}
 	}
 
 	private void getOrder(int money) {
 		while (shouldChange(money)) {
-			PrintView.printMoneyState(money);
-			String orderedProduct = InputView.getOrderedProduct();
-			updateByOrder(orderedProduct, money);
-			money -= productRepositoryService.getPriceByOrder(orderedProduct);
+			money -= updateByOrder(money);
 		}
 		returnChange(money);
 	}
@@ -99,12 +96,16 @@ public class ApplicationController {
 		return true;
 	}
 
-	private void updateByOrder(String orderedProduct, int money) {
+	private int updateByOrder(int money) {
 		try {
+			PrintView.printMoneyState(money);
+			String orderedProduct = InputView.getOrderedProduct();
 			productRepositoryService.updateProductByOrder(orderedProduct, money);
+			return productRepositoryService.getPriceByOrder(orderedProduct);
 		} catch (IllegalArgumentException e) {
-			System.out.println(ERROR_PREFIX + e.getMessage() + LINE_STAMP);
+			System.out.println(ERROR_PREFIX + e.getMessage());
 		}
+		return 0;
 	}
 
 	private void returnChange(int money) {
