@@ -63,6 +63,8 @@
 - [x] "[ERROR]"로 시작하는 에러 메시지를 출력한다.
 - [x] 에러 메시지를 출력한 후 재입력 받는다.
 
+---
+
 ## 📔 Controller(VendingMachine) 기능 사용 예시
 
 - `initHoldingMoney` : 보유 금액을 설정하고 무작위로 동전을 생성하는 메소드
@@ -103,3 +105,38 @@
   100원 - 4개
   50원 - 1개
   ```
+
+---
+
+## ❕ 예외 메시지
+
+- `[ERROR] 상품은 [상품명,가격,수량]으로 입력해주세요.`
+    - PRODUCT_INVALID_FORMAT_ERROR_MESSAGE
+    - 상품 추가 시 잘못된 형식으로 입력한 경우 발생
+- `[ERROR] 같은 이름을 가진 상품이 없습니다.`
+    - NO_SAME_NAME_PRODUCT_ERROR_MESSAGE
+    - 구매하려는 상품이 등록되어있지 않은 경우 발생
+- `[ERROR] 상품이 매진되었습니다.`
+    - PRODUCT_SOLD_OUT_ERROR_MESSAGE
+    - 매진된 상품을 구매하려한 경우 발생
+- `[ERROR] 돈은 2147483647 이하의 숫자로 입력해주세요.`
+    - MONEY_NOT_NUMBER_ERROR_MESSAGE
+    - 돈, 가격을 문자, 소수, 자료형 이상의 숫자를 입력한 경우 발생
+- `[ERROR] 0원 이상으로 입력해주세요.`
+    - MONEY_LOWER_THEN_ZERO_ERROR_MESSAGE
+    - 돈을 음수로 입력한 경우 발생
+- `[ERROR] 돈이 부족합니다.`
+    - MONEY_LOWER_THEN_PRICE_ERROR_MESSAGE
+    - 구매하려는 상품의 가격이 사용 가능한 돈보다 비싼 경우 발생
+- `[ERROR] 돈은 10원으로 나누어 떨어져야 합니다.`
+    - MONEY_NOT_DIVISIBLE_BY_10_ERROR_MESSAGE
+    - 입력한 돈, 가격이 10원으로 나누어 떨어지지 않은 경우 발생
+- `[ERROR] 가격은 100원 이상으로 입력해주세요.`
+    - PRICE_LOWER_THEN_MINIMUM_PRICE_ERROR_MESSAGE
+    - 상품 추가 시 가격을 100원 미만으로 입력한 경우 발생
+- `[ERROR] 수량은 2147483647 이하의 숫자로 입력해주세요.`
+    - QUANTITY_NOT_NUMBER_ERROR_MESSAGE
+    - 수량을 문자, 소수, 자료형 이상의 숫자를 입력한 경우 발생
+- `[ERROR] 수량은 0개 이상으로 입력해주세요.`
+    - QUANTITY_LOWER_THEN_ZERO_ERROR_MESSAGE
+    - 수량을 음수로 입력한 경우 발생
