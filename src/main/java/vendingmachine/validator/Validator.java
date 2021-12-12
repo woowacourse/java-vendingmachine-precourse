@@ -44,6 +44,7 @@ public class Validator {
 		ProductValidator.checkInfoMiss(info);
 		checkProductName(info.get(0));
 		checkProductPrice(info.get(1));
+		checkProductAmount(info.get(2));
 	}
 
 	private static void checkProductName(String name){
@@ -55,5 +56,11 @@ public class Validator {
 		int intPrice = Integer.parseInt(price);
 		NumberValidator.checkLowLimitOfPrice(intPrice);
 		NumberValidator.isDivisibleByLowLimitOfCoin(intPrice);
+	}
+
+	private static void checkProductAmount(String amount) {
+		NumberValidator.isInteger(amount);
+		int intAmount = Integer.parseInt(amount);
+		NumberValidator.isGreaterThanOrEqualToZero(intAmount);
 	}
 }
