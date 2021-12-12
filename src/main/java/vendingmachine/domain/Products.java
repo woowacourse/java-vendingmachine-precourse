@@ -1,19 +1,26 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Products {
 	private final ArrayList<Product> products = new ArrayList<>();
+	private int minPrice = Integer.MAX_VALUE;
 
 	public Products() {
 	}
 
 	public void add(Product product) {
 		products.add(product);
+		minPrice = product.getMinPrice(minPrice);
 	}
 
 	public boolean isContains(Product product) {
 		return products.contains(product);
+	}
+
+	public void calculateMinPrice() {
+		for(Product product : products) {
+			minPrice = product.getMinPrice(minPrice);
+		}
 	}
 }

@@ -14,6 +14,10 @@ public class Product {
 		this.amount = Integer.parseInt(productInfo.get(ProductIdx.AMOUNT.ordinal()));
 	}
 
+	public int getMinPrice(int minPrice) {
+		return Math.min(price, minPrice);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
