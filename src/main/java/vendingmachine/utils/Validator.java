@@ -1,6 +1,9 @@
 package vendingmachine.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
+import vendingmachine.models.Item;
 
 public class Validator {
 	private static final String NUMBER_PATTERN = "^[0-9]+$";
@@ -52,5 +55,12 @@ public class Validator {
 		if (itemInput.isEmpty())
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+	}
+
+	public static void isItemName(HashMap<String, Item> ItemList, String inputName) throws IllegalArgumentException {
+		if (!ItemList.containsKey(inputName)) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_CONTAIN_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
 	}
 }
