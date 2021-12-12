@@ -36,8 +36,12 @@ public class InputView {
 		return getMoney(VENDING_MACHINE_MONEY_INPUT_MESSAGE);
 	}
 
-	public static Integer getUserMoney() {
-		return getMoney(USER_MONEY_MESSAGE);
+	public static Integer getUserMoney(Integer lowestPrice) {
+		Integer userMoney = getMoney(USER_MONEY_MESSAGE);
+		if (userMoney < lowestPrice) {
+			throw new IllegalArgumentException(USER_MONEY_NOT_ENOUGH_ERROR);
+		}
+		return userMoney;
 	}
 
 	private static Integer getMoney(String Message) {

@@ -24,6 +24,7 @@ public class VendingMachineConstants {
 	public static String PRODUCT_NOT_EXIST_ERROR = "이미 모두 팔린 제품입니다.";
 	public static String PRODUCT_EXPENSIVE_ERROR = "투입한 금액보다 높은 가격의 제품은 구매할 수 없습니다.";
 	public static String COIN_NOT_FOUND_ERROR = "코인을 찾을 수 없습니다.";
+	public static String USER_MONEY_NOT_ENOUGH_ERROR = "투입 금액이 최저 가격보다 낮습니다.";
 
 	public static List<Integer> COIN_VALUES = Arrays.asList(500, 100, 50, 10);
 
