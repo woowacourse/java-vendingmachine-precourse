@@ -12,4 +12,8 @@ public class Input {
             }
         }
     }
+
+    public String inputString() {
+        return Console.readLine();
+    }
 }

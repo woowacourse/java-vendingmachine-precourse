@@ -56,7 +56,7 @@ public class Coins {
         return coins.get(coin) + COUNTING_VALUE;
     }
 
-    public static Coins createRandomCoin(final int money) {
+    public static Coins createRandomCoins(final int money) {
         return new Coins(money);
     }
 
