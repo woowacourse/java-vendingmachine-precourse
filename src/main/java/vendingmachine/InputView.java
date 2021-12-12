@@ -18,7 +18,7 @@ public class InputView {
                 Utils.validatePositiveNumber(Integer.parseInt(money));
                 break;
             } catch (Exception e) {
-                System.out.println("[ERROR] 금액은 "+e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
         return Integer.parseInt(money);
@@ -33,7 +33,7 @@ public class InputView {
                 products = Product.makeProductList(Utils.splitString(inputString));
                 break;
             } catch (Exception e) {
-                System.out.println("[ERROR] 가격과 수량은 "+e.getMessage());
+                System.out.println(e.getMessage());
             }
         }
         return products;
