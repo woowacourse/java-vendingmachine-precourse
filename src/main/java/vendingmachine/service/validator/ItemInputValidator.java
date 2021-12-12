@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import vendingmachine.view.OutputView;
+import vendingmachine.view.messages.ErrorMessage;
 
 public class ItemInputValidator {
 	private static final int PRICE_INDEX = 1;
@@ -34,16 +35,16 @@ public class ItemInputValidator {
 
 	private void validateBrackets(String itemString) {
 		if (!itemString.startsWith(START_BRACKET)) {
-			throw new IllegalArgumentException("각 상품의 입력은 대괄호로 시작해야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.START_BRACKET_EXCEPTION);
 		}
 		if (!itemString.endsWith(END_BRACKET)) {
-			throw new IllegalArgumentException("각 상품의 입력은 대괄호로 끝나야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.END_BRACKET_EXCEPTION);
 		}
 	}
 
 	private void validateSize(List<String> itemElements) {
 		if (!(itemElements.size() == SIZE_OF_ITEM_LIST)) {
-			throw new IllegalArgumentException("상품의 정보는 [상품,가격,수량]으로 입력해야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.ITEM_INFO_EXCEPTION);
 		}
 	}
 
@@ -63,34 +64,34 @@ public class ItemInputValidator {
 	private void isPriceDigit(String priceString) {
 		for (int i = 0; i < priceString.length(); i++) {
 			if (!Character.isDigit(priceString.charAt(i))) {
-				throw new IllegalArgumentException("상품의 가격은 숫자로 입력되어야 합니다.");
+				throw new IllegalArgumentException(ErrorMessage.ITEM_PRICE_CHARACTER_EXCEPTION);
 			}
 		}
 	}
 
 	private void isDivisible(String priceString) {
 		if (Integer.parseInt(priceString) % PRICE_DIVISIBLE_BY != ZERO) {
-			throw new IllegalArgumentException("상품의 가격은 10으로 나누어 떨어져야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.ITEM_PRICE_DIVISIBLE_EXCEPTION);
 		}
 	}
 
 	private void validateMinimumPrice(String priceString) {
 		if (Integer.parseInt(priceString) < MINIMUM_PRICE) {
-			throw new IllegalArgumentException("상품의 가격은 100원 이상이어야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.ITEM_PRICE_MINIMUM_EXCEPTION);
 		}
 	}
 
 	private void isQuantityDigit(String quantityString) {
 		for (int i = 0; i < quantityString.length(); i++) {
 			if (!Character.isDigit(quantityString.charAt(i))) {
-				throw new IllegalArgumentException("상품의 수량은 숫자로 입력되어야 합니다.");
+				throw new IllegalArgumentException(ErrorMessage.ITEM_QUANTITY_CHARACTER_EXCEPTION);
 			}
 		}
 	}
 
 	private void isQuantityPositive(String quantityString) {
 		if (Integer.parseInt(quantityString) < QUANTITY_MIN) {
-			throw new IllegalArgumentException("상품의 수량은 1 이상이어야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.ITEM_QUANTITY_MINIMUM_EXCEPTION);
 		}
 	}
 

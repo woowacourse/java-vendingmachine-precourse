@@ -1,6 +1,7 @@
 package vendingmachine.service.validator;
 
 import vendingmachine.view.OutputView;
+import vendingmachine.view.messages.ErrorMessage;
 
 public class MoneyInputValidator {
 
@@ -28,24 +29,23 @@ public class MoneyInputValidator {
 		return true;
 	}
 
-
 	private void validateDigit(String savedMoneyInput) {
 		for (int i = 0; i < savedMoneyInput.length(); i++) {
 			if (!Character.isDigit(savedMoneyInput.charAt(i))) {
-				throw new IllegalArgumentException("보유 금액 입력은 숫자여야 합니다.");
+				throw new IllegalArgumentException(ErrorMessage.SAVED_MONEY_CHARACTER_EXCEPTION);
 			}
 		}
 	}
 
 	private void validateMinimumSavedMoney(String savedMoneyInput) {
 		if (Integer.parseInt(savedMoneyInput) < MINIMUM_MONEY) {
-			throw new IllegalArgumentException("보유 금액은 0원 이상이어야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.SAVED_MONEY_MINIMUM_EXCEPTION);
 		}
 	}
 
 	private void validateMinimumCustomerMoney(String customerMoneyInput) {
 		if (Integer.parseInt(customerMoneyInput) <= MINIMUM_MONEY) {
-			throw new IllegalArgumentException("투입 금액은 0원 초과이어야 합니다.");
+			throw new IllegalArgumentException(ErrorMessage.CUSTOMER_MONEY_MINIMUM_EXCEPTION);
 		}
 	}
 
