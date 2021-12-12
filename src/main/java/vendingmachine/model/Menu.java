@@ -22,17 +22,13 @@ public class Menu {
 
 	public List<Product> makeProductList(String productInfo) {
 		List<Product> productList = new ArrayList<Product>();
-		try {
-			String[] productStrList = productInfo.split(";", -1);
+		String[] productStrList = productInfo.split(";", -1);
 
-			for (int i = 0; i < productStrList.length; i++) {
-				productList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
-				ProductException.checkProductReDuplication(productList.get(i).getName(), nameList, i);
-			}
-
-		} catch (IllegalArgumentException e) {
-			throw new IllegalArgumentException(e.getMessage());
+		for (int i = 0; i < productStrList.length; i++) {
+			productList.add(new Product(productStrList[i].substring(1, productStrList[i].length() - 1)));
+			ProductException.checkProductReDuplication(productList.get(i).getName(), nameList, i);
 		}
+		
 		return productList;
 	}
 
