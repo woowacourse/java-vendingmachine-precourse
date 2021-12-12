@@ -8,7 +8,7 @@ public class NumberValidator {
 	static final int LOW_LIMIT_OF_PRICE = 100;
 	static final int LOW_LIMIT_OF_COIN = 10;
 
-	static public void isInteger(String number) {
+	public static void isInteger(String number) {
 		try {
 			Integer.parseInt(number.trim());
 		} catch (NumberFormatException exception) {
@@ -16,19 +16,19 @@ public class NumberValidator {
 		}
 	}
 
-	static public void isGreaterThanOrEqualToZero(int number) {
+	public static void isGreaterThanOrEqualToZero(int number) {
 		if (number < 0) {
 			throw new IllegalArgumentException(MSG_LESS_THAN_ZERO_ERROR);
 		}
 	}
 
-	static public void isGreaterThanLowLimitOfPrice(int number) {
+	public static void isGreaterThanLowLimitOfPrice(int number) {
 		if (number < LOW_LIMIT_OF_PRICE) {
 			throw new IllegalArgumentException(MSG_LESS_THAN_PRICE_LIMIT_ERROR);
 		}
 	}
 
-	static public void isDivisibleByLowLimitOfCoin(int number) {
+	public static void isDivisibleByLowLimitOfCoin(int number) {
 		if (number % LOW_LIMIT_OF_COIN != 0) {
 			throw new IllegalArgumentException(MSG_NOT_DIVISIBLE_ERROR);
 		}

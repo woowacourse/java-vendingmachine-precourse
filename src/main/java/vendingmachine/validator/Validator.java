@@ -36,7 +36,7 @@ public class Validator {
 	}
 
 	private static void validateProductName(String name) {
-		ProductValidator.IsEmpty(name);
+		ProductValidator.isEmpty(name);
 	}
 
 	private static void validateProductPrice(String price) {
