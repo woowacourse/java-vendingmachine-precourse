@@ -20,4 +20,12 @@ public class VendingMachine {
     public void chargeMoney(String money) {
         remainMoney.chargeMoney(money);
     }
+
+    public boolean isPurchasable() {
+        return products.isExistPurchasableProduct() && products.isPurchasableMinimumPriceProduct(remainMoney);
+    }
+
+    public Map<Coin, Integer> changeCoins() {
+        return coins.changeCoins(remainMoney);
+    }
 }
