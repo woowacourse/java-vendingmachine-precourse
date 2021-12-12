@@ -42,7 +42,7 @@ public class Product {
     private void validateQuantity(String inputQuantity) {
         validateNumberFormat(inputQuantity);
         int quantity = Integer.parseInt(inputQuantity);
-        validateNegativeNumber(quantity);
+        validateLeastQuantity(quantity);
     }
 
     private void validateNumberFormat(String input) {
@@ -53,8 +53,8 @@ public class Product {
         }
     }
 
-    private void validateNegativeNumber(int quantity) {
-        if (quantity < DEFAULT_QUANTITY) {
+    private void validateLeastQuantity(int quantity) {
+        if (quantity <= DEFAULT_QUANTITY) {
             throw new IllegalArgumentException();
         }
     }
