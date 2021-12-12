@@ -1,7 +1,10 @@
 package vendingmachine.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Arrays;
+import java.util.Collections;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -13,6 +16,10 @@ class ProductTest {
             IllegalArgumentException.class,
             () -> Product.getValidProduct(info)
         );
+    }
+
+    ProductSeller generateSellerFromInfos(String infos) {
+        return new ProductSeller(Arrays.asList(infos.split(";")));
     }
 
     @Test
@@ -39,5 +46,43 @@ class ProductTest {
     @Test
     void validateName() {
         validateThrows("[콜 라,200,5]");
+    }
+
+    @Test
+    void validateBelowPrice() {
+        ProductSeller seller = new ProductSeller(Collections.singletonList("[콜라,1500,100]"));
+        InputAmount inputAmount = new InputAmount(1000);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> seller.pickProduct("콜라", inputAmount)
+        );
+    }
+
+    @Test
+    void validateNonExistingProduct() {
+        ProductSeller seller = generateSellerFromInfos("[사이다,2000,1];[콜라,1000,2]");
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> seller.pickProduct("환타", new InputAmount(5000))
+        );
+    }
+
+    @Test
+    void sellProductTest() {
+        ProductSeller seller = generateSellerFromInfos("[사이다,2000,1];[콜라,1000,2]");
+        InputAmount inputAmount = new InputAmount(10000);
+        seller.pickProduct("사이다", inputAmount);
+        assertThat(inputAmount.getAmount()).isEqualTo(8000);
+    }
+
+    @Test
+    void emptyStockTest() {
+        ProductSeller seller = generateSellerFromInfos("[사이다,2000,1];[콜라,1000,2]");
+        InputAmount inputAmount = new InputAmount(10000);
+        seller.pickProduct("사이다", inputAmount);
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> seller.pickProduct("사이다", inputAmount)
+        );
     }
 }

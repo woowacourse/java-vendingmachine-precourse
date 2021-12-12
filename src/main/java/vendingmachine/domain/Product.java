@@ -9,8 +9,11 @@ public class Product {
     private static final String ERR_HEADER = "[ERROR]";
     private static final String ERR_INVALID_FORMAT = ERR_HEADER + "잘못된 상품정보 형식입니다.";
     private static final String ERR_INVALID_STOCK = ERR_HEADER + "재고가 비어있으면 안됩니다.";
-    private static final String ERR_INVALID_PRICE = ERR_HEADER + "상품 가격은 100원 이상이여야 하고 10원으로 나누어 떨어져야합니다.";
+    private static final String ERR_INVALID_PRICE =
+        ERR_HEADER + "상품 가격은 100원 이상이고 10원으로 나누어 떨어져야합니다.";
     private static final String ERR_INVALID_NAME = ERR_HEADER + "상품 이름이름은 글자와 숫자만 허용됩니다..";
+    private static final String ERR_INVALID_INPUT_AMOUNT = "투입금액이 상품가격보다 적습니다.";
+    private static final String ERR_EMPTY_STOCK = "상품의 재고가 없습니다.";
     private static final char INFO_PREFIX = '[';
     private static final char INFO_SUFFIX = ']';
     private static final char INFO_DELIMITER = ',';
@@ -25,16 +28,12 @@ public class Product {
 
     private final String name;
     private int stock;
-    private int price;
+    private int amount;
 
     private Product(String name, int stock, int price) {
         this.name = name;
         this.stock = stock;
-        this.price = price;
-    }
-
-    public String getName() {
-        return this.name;
+        this.amount = price;
     }
 
     public static Product getValidProduct(String info) {
@@ -48,6 +47,33 @@ public class Product {
             Integer.parseInt(fields.get(INFO_PRICE_POSITION)));
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public int getStock() {
+        return stock;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void sell(InputAmount inputAmount) throws IllegalArgumentException {
+        validateDeal(inputAmount);
+        this.stock--;
+        inputAmount.consume(this.amount);
+    }
+
+    private void validateDeal(InputAmount inputAmount) throws IllegalArgumentException {
+        if (this.amount > inputAmount.getAmount()) {
+            throw new IllegalArgumentException(ERR_INVALID_INPUT_AMOUNT);
+        }
+        if (this.stock == EMPTY) {
+            throw new IllegalArgumentException(ERR_EMPTY_STOCK);
+        }
+    }
+
     private static void validateProductInfoFormat(String info) {
         if (info.charAt(INFO_PREFIX_POSITION) != INFO_PREFIX
             || info.charAt(info.length() - 1) != INFO_SUFFIX) {
@@ -59,9 +85,13 @@ public class Product {
         if (fields.size() != INFO_FIELDS) {
             throw new IllegalArgumentException(ERR_INVALID_FORMAT);
         }
+        String stock = fields.get(INFO_STOCK_POSITION);
+        String amount = fields.get(INFO_PRICE_POSITION);
+        GeneralValidator.validateNumeric(stock);
+        GeneralValidator.validateNumeric(amount);
         validateName(fields.get(INFO_NAME_POSITION));
-        validateStock(fields.get(INFO_STOCK_POSITION));
-        validatePrice(fields.get(INFO_PRICE_POSITION));
+        validateStock(Integer.parseInt(stock));
+        validateAmount(Integer.parseInt(amount));
     }
 
     private static void validateName(String name) {
@@ -70,18 +100,15 @@ public class Product {
             throw new IllegalArgumentException(ERR_INVALID_NAME);
         }
     }
-    
-    private static void validateStock(String stock) {
-        GeneralValidator.validateNumeric(stock);
-        if (Integer.parseInt(stock) == EMPTY) {
+
+    private static void validateStock(int stock) {
+        if (stock == EMPTY) {
             throw new IllegalArgumentException(ERR_INVALID_STOCK);
         }
     }
-    
-    private static void validatePrice(String price) {
-        GeneralValidator.validateNumeric(price);
-        int converted = Integer.parseInt(price);
-        if (converted < MIN_PRICE || converted % MIN_AMOUNT != 0) {
+
+    private static void validateAmount(int amount) {
+        if (amount < MIN_PRICE || amount % MIN_AMOUNT != 0) {
             throw new IllegalArgumentException(ERR_INVALID_PRICE);
         }
     }
