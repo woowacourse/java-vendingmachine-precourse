@@ -10,6 +10,8 @@ public enum Coin {
 	COIN_10(10);
 
 	private final int amount;
+	private static final int BASE_AMOUNT = 0;
+	private static final int INCREMENTAL_AMOUNT = 1;
 
 	Coin(final int amount) {
 		this.amount = amount;
@@ -53,5 +55,18 @@ public enum Coin {
 		coinList.stream()
 			.filter(eachCoin -> eachCoin.getPrice() == valueOfNowCoin)
 			.forEach(eachCoin -> eachCoin.increaseAmount(amountOfNowCoin));
+	}
+
+	public static ArrayList<Item> getInitialCoins(int money) {
+		ArrayList<Item> coins = new ArrayList<>();
+		for (Coin eachCoin : Coin.values()) {
+			coins.add(new Item(eachCoin.amount, BASE_AMOUNT));
+		}
+		while (money > 0) {
+			int nowCoin = getRandomCoin(coins, money);
+			increaseCoinAmount(coins, nowCoin, INCREMENTAL_AMOUNT);
+			money -= nowCoin;
+		}
+		return coins;
 	}
 }
