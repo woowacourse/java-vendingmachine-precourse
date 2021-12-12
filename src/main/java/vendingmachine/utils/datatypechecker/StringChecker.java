@@ -28,4 +28,19 @@ public class StringChecker {
         }
 
     }
+
+    public static void checkSameString(List<String> strings, String contentType) throws IllegalArgumentException{
+
+        for(String findString : strings){
+            int firstIndex = strings.indexOf(findString);
+            int lastIndex = strings.lastIndexOf(findString);
+
+            if(firstIndex != lastIndex){
+                throw new IllegalArgumentException("[ERROR]: " + contentType + "은 같은 문자열이 올 수 없습니다..");
+            }
+
+        }
+
+    }
+
 }
