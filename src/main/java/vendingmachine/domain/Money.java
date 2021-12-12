@@ -35,8 +35,12 @@ public class Money {
 		return amount;
 	}
 
+	public void spend(int amount) {
+		this.amount -= amount;
+	}
+
 	@Override
 	public String toString() {
-		return getAmount() + WON;
+		return amount + WON;
 	}
 }

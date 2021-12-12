@@ -29,4 +29,17 @@ class ItemTest {
 		// then
 		assertThat(item).isNotNull();
 	}
+
+	@Test
+	void 상품_구매() {
+		// given
+		String[] itemData = {"콜라", "1200", "1"};
+
+		// when
+		Item item = new Item(itemData);
+		item.purchase();
+
+		// then
+		assertThat(item.quantityLeft()).isEqualTo(false);
+	}
 }

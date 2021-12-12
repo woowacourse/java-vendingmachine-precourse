@@ -17,7 +17,9 @@ public class VendingMachineController {
 		vendingMachine.printCoins();
 		insertItems();
 		insertMoney();
-		vendingMachine.printMoney();
+		do {
+			purchase();
+		} while(true);
 	}
 
 	private void insertChanges() {
@@ -47,6 +49,17 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			insertMoney();
+		}
+	}
+
+	private void purchase() {
+		try {
+			vendingMachine.printMoney();
+			String itemName = InputView.inputItemName();
+			vendingMachine.purchase(itemName);
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
+			purchase();
 		}
 	}
 }

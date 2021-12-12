@@ -6,6 +6,7 @@ public class InputView {
 	private static final String INPUT_CHANGES = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String INPUT_ITEMS = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
+	private static final String INPUT_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 
 	public static String inputChanges() {
 		System.out.println(INPUT_CHANGES);
@@ -19,6 +20,11 @@ public class InputView {
 
 	public static String inputMoney() {
 		System.out.println(INPUT_MONEY);
+		return Console.readLine();
+	}
+
+	public static String inputItemName() {
+		System.out.println(INPUT_ITEM_NAME);
 		return Console.readLine();
 	}
 }

@@ -29,7 +29,20 @@ public class Item {
 		}
 	}
 
-	private boolean quantityLeft() {
+	public boolean quantityLeft() {
 		return quantity > ZERO;
+	}
+
+	public boolean equals(String name) {
+		return this.name.equals(name);
+	}
+
+	public boolean purchasable(int amount) {
+		return amount >= price.getAmount();
+	}
+
+	public int purchase() {
+		this.quantity -= 1;
+		return price.getAmount();
 	}
 }

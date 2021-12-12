@@ -30,4 +30,9 @@ public class VendingMachine {
 	public void printMoney() {
 		OutputView.printMoney(money);
 	}
+
+	public void purchase(String itemName) {
+		int spendAmount = items.purchase(itemName, money.getAmount());
+		money.spend(spendAmount);
+	}
 }
