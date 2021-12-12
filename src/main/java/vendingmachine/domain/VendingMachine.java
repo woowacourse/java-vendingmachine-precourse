@@ -61,4 +61,20 @@ public class VendingMachine {
     public void setInputMoney(int money) {
         this.inputMoney = money;
     }
+
+    private void reduceInputMoney(int money) {
+        this.inputMoney -= money;
+    }
+
+    public void reduceInputMoneyAndProductQuantityByName(String name) {
+        Product[] products = productList.returnProductUsingName(name);
+        if(products.length <= DEFAULT_AMOUNT) return; // 에러 메세지
+        for(Product product : products) {
+            if(!product.checkQuantityEnough()) return; // 에러 메세지
+            if(!product.checkPurchasePossible(inputMoney)) return; //에러 메세지
+            reduceInputMoney(product.price);
+            product.reduceQuantity();
+        }
+
+    }
 }
