@@ -35,7 +35,7 @@ public class CoinsTest {
     class ChangeCoinsTest {
 
         private Coins coins;
-        Map<Coin, Integer> expected;
+        private Map<Coin, Integer> expected;
 
         @BeforeEach
         void beforeEach() {
