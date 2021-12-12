@@ -8,13 +8,13 @@ public class AmountValidator {
 
 	public static void checkVendingMachineAmount(String vendingMachineAmount) {
 		int amount = toInteger(vendingMachineAmount);
+		checkAmountBiggerThanCertainCoinAmount(Coin.getSmallestCoinAmount(), amount);
 		checkAmountDivisibleBySmallestCoinAmount(amount);
-		checkAmountBiggerThanCertainCoinAmount(Coin.getSmallestCoinAmount(), Integer.parseInt(vendingMachineAmount));
 	}
 
 	public static void checkProductAmount(int productAmount) {
-		checkAmountDivisibleBySmallestCoinAmount(productAmount);
 		checkAmountBiggerThanCertainCoinAmount(Coin.getSecondBiggestCoinAmount(), productAmount);
+		checkAmountDivisibleBySmallestCoinAmount(productAmount);
 	}
 
 	public static int toInteger(String amount) {
