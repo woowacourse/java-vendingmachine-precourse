@@ -12,9 +12,15 @@ public class InputView {
 		return readLine();
 	}
 
-	public static int readLineInt() {
-		String input = readLine();
-		validator.validateNumber(input);
-		return Integer.parseInt(input);
+	public static int readPositiveInt() {
+		try {
+			OutputView.setVendingMachineMoney();
+			String input = readLine();
+			validator.validatePrice(input);
+			return Integer.parseInt(input);
+		} catch (IllegalArgumentException error) {
+			System.out.println(error.getMessage());
+			return readPositiveInt();
+		}
 	}
 }
