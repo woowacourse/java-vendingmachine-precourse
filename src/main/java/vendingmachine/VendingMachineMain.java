@@ -11,7 +11,7 @@ import static models.Coin.*;
 public class VendingMachineMain {
     public static int totalAmount;
     public static HashMap<Coin, Integer> coin2Num;
-    public static int minCost = 10000;
+    public static int minCost = 2000000000;
 
     public static HashMap<String, Product> name2Product;
     public static int userInputMoney;
