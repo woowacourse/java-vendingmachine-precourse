@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.Map;
+import vendingmachine.domain.merchandise.Merchandises;
 
 public class VendingMachine {
 
