@@ -8,5 +8,6 @@ public class Application {
         Controller controller =
                 new Controller(new VendingMachine(), new ValidatedInput());
         controller.requestMachineInfo();
+        controller.startBuying();
     }
 }

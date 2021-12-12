@@ -11,4 +11,6 @@ public class Constant {
     public static final String MACHINE_PRODUCT_INPUT_PRICE_ERROR_STRING = "[ERROR] 가격은 100원 이상의 10의 배수 이어야 합니다.";
 
     public static final String USER_MONEY_INPUT_REQUEST_STRING = "투입 금액을 입력해 주세요.";
+
+    public static final String REMAIN_MONEY = "투입 금액: %d원";
 }

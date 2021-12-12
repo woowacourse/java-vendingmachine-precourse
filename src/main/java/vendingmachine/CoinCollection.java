@@ -36,6 +36,10 @@ public class CoinCollection {
         }
     }
 
+    public boolean isEmpty() {
+        return coins500.isEmpty() && coins100.isEmpty() && coins50.isEmpty() && coins10.isEmpty();
+    }
+
     @Override
     public String toString() {
         String string = "";

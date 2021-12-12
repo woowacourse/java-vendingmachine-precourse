@@ -19,4 +19,11 @@ public class Controller {
         machine.registerProducts(input.requestMachineProduct());
         machine.insertMoney(input.requestUserMoney());
     }
+
+    public void startBuying() {
+        if (!machine.isReadyToStartBuying()) {
+            requestMachineInfo();
+        }
+        System.out.println(machine.remainMoney());
+    }
 }
