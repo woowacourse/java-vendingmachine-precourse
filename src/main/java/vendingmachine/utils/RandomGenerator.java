@@ -1,6 +1,7 @@
 package vendingmachine.utils;
 
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,25 +12,24 @@ public class RandomGenerator {
 
 	public static Map<Coin, Integer> getHoldingCoin(int holdingAmount) {
 		Map<Coin, Integer> holdingCoin = Coin.getCoin();
-		while (holdingAmount != 0) {
-			int randomCoin = getRandomCoin(holdingAmount);
-			Coin nowCoin = Stream.of(Coin.values())
-				.filter(e -> e.getAmount() == randomCoin)
-				.findFirst()
-				.orElseThrow(IllegalArgumentException::new);
-			holdingAmount -= randomCoin;
-			holdingCoin.put(nowCoin, holdingCoin.get(nowCoin) + 1);
+
+		int remainingAmount = holdingAmount;
+		while (remainingAmount > 0) {
+			Coin coin = getRandomCoin(remainingAmount);
+			remainingAmount -= coin.getAmount();
+			holdingCoin.put(coin, holdingCoin.get(coin) + 1);
 		}
 		return holdingCoin;
 	}
 
-	public static int getRandomCoin(int remainingAmount) {
+	public static Coin getRandomCoin(int remainingAmount) {
 		int randomCoin = Randoms.pickNumberInList(Stream.of(Coin.values())
 			.map(Coin::getAmount)
+			.filter(e -> e <= remainingAmount)
 			.collect(Collectors.toList()));
-		if (remainingAmount < randomCoin) {
-			return getRandomCoin(remainingAmount);
-		}
-		return randomCoin;
+		Optional<Coin> coin = Stream.of(Coin.values())
+			.filter(e -> e.getAmount() == randomCoin)
+			.findFirst();
+		return coin.orElseGet(() -> getRandomCoin(remainingAmount));
 	}
 }

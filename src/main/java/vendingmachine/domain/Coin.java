@@ -20,7 +20,7 @@ public enum Coin {
 	}
 
 	public static Map<Coin, Integer> getCoin() {
-		Map<Coin, Integer> coin = new EnumMap<Coin, Integer>(Coin.class);
+		Map<Coin, Integer> coin = new EnumMap<>(Coin.class);
 		coin.put(COIN_500, 0);
 		coin.put(COIN_100, 0);
 		coin.put(COIN_50, 0);
