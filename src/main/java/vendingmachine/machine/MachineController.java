@@ -15,6 +15,10 @@ public class MachineController {
         this.machine = machine;
     }
 
+    public void setCurrentAmount(int amount) {
+        this.currentAmount += amount;
+    }
+
     public int pickRandomCoin() {
         int random = Randoms.pickNumberInList(new ArrayList<Integer>(Arrays.asList(500,100,50,10)));
 
