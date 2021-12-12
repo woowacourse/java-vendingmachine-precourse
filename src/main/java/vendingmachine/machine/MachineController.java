@@ -24,4 +24,11 @@ public class MachineController {
 
         return random;
     }
+
+    public boolean checkIsRightRandom(int amount) {
+        if (this.currentAmount + amount <= machine.getHoldingAmount()) {
+            return true;
+        }
+        return false;
+    }
 }
