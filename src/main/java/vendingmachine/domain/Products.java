@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import vendingmachine.exception.ProductsNameDuplicateException;
 
 public class Products {
 
@@ -22,21 +23,21 @@ public class Products {
     private static void checkProductNameDuplicate(List<Product> products) {
         Set<Product> productSet = new HashSet<>(products);
         if (products.size() != productSet.size()) {
-            throw new IllegalArgumentException("[ERROR] 중복되는 이름의 상품은 같이 입력될 수 없습니다.");
-        }
-    }
-
-    private static void checkProductNameDuplicate(List<Product> products, List<Product> addProducts) {
-        Set<Product> productSet = new HashSet<>(products);
-        productSet.addAll(addProducts);
-        if (products.size() + addProducts.size() != productSet.size()) {
-            throw new IllegalArgumentException("[ERROR] 중복되는 이름의 상품은 같이 입력될 수 없습니다.");
+            throw new ProductsNameDuplicateException();
         }
     }
 
     public void putProducts(List<Product> products) {
         checkProductNameDuplicate(this.products, products);
         this.products.addAll(products);
+    }
+
+    private static void checkProductNameDuplicate(List<Product> products, List<Product> addProducts) {
+        Set<Product> productSet = new HashSet<>(products);
+        productSet.addAll(addProducts);
+        if (products.size() + addProducts.size() != productSet.size()) {
+            throw new ProductsNameDuplicateException();
+        }
     }
 
     public int purchaseProduct(Money money, String name) {
