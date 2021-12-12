@@ -11,21 +11,21 @@ public class VendingMachine {
 
     private final HashMap<Coin, Integer> coins = new HashMap<>();
     private Menu menu;
-    private int moneyLeft = 0;
+    private int customerMoneyLeft = 0;
 
     public VendingMachine() {
         int totalMoney = InputView.getTotalMoneyInput();
         this.initializeCoins(totalMoney);
         OutputView.printCoinsInfo(this.coins);
         this.setMenu(InputView.getMenuInput());
-        this.setMoneyLeft(InputView.getCustomerMoneyInput());
+        this.setCustomerMoneyLeft(InputView.getCustomerMoneyInput());
     }
 
     public void run() {
         while (true) {
-            OutputView.printMoneyLeft(this.getMoneyLeft());
+            OutputView.printMoneyLeft(this.getCustomerMoneyLeft());
 
-            if (!menu.canBuyMore(this.moneyLeft)) break;
+            if (!menu.canBuyMore(this.customerMoneyLeft)) break;
             this.sellMerchandise();
         }
 
@@ -54,12 +54,12 @@ public class VendingMachine {
         this.menu = menu;
     }
 
-    private int getMoneyLeft() {
-        return this.moneyLeft;
+    private int getCustomerMoneyLeft() {
+        return this.customerMoneyLeft;
     }
 
-    private void setMoneyLeft(int moneyInput) {
-        this.moneyLeft = moneyInput;
+    private void setCustomerMoneyLeft(int moneyInput) {
+        this.customerMoneyLeft = moneyInput;
     }
 
     private void sellMerchandise() {
@@ -68,7 +68,7 @@ public class VendingMachine {
 
         if (merchandise.getNumber() == 0) throw new IllegalArgumentException();
 
-        moneyLeft -= merchandise.getPrice();
+        customerMoneyLeft -= merchandise.getPrice();
         merchandise.decreaseNumber();
     }
 
@@ -76,14 +76,14 @@ public class VendingMachine {
         HashMap<Coin, Integer> coinChanges = new HashMap<>();
         for (Coin coin : Coin.getCoinsDesc()) {
             if (this.coins.get(coin) == 0) continue;
-            if (this.moneyLeft < coin.getAmount()) continue;
-            int spentCoinNumber = this.moneyLeft/coin.getAmount();
+            if (this.customerMoneyLeft < coin.getAmount()) continue;
+            int spentCoinNumber = this.customerMoneyLeft/coin.getAmount();
             if (spentCoinNumber > this.coins.get(coin)) {
                 spentCoinNumber = this.coins.get(coin);
             }
             coinChanges.put(coin, spentCoinNumber);
             this.coins.put(coin, this.coins.get(coin)-spentCoinNumber);
-            this.moneyLeft -= coin.getAmount() * spentCoinNumber;
+            this.customerMoneyLeft -= coin.getAmount() * spentCoinNumber;
         }
         return coinChanges;
     }
