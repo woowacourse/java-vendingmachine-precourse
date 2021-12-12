@@ -71,4 +71,12 @@ public class Validator {
 				Messages.ERROR_NOT_ENOUGH_MONEY_MESSAGE + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
+
+	public static void validateBuyAmount(HashMap<String, Item> ItemList, String inputName) throws
+		IllegalArgumentException {
+		if (ItemList.get(inputName).isAmountZero()) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_SOLD_OUT_MESSAGE + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
+	}
 }
