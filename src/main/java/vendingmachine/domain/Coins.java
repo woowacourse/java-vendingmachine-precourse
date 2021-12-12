@@ -1,8 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 public class Coins {
@@ -17,23 +15,17 @@ public class Coins {
 		return Collections.unmodifiableMap(coins);
 	}
 
-	public String getHoldingCoinsAsText(){
+	public String getHoldingCoinsAsText() {
 		String holdingStatus = "";
-		for (Integer amount : getReverseSortedCoinAmountKey()) {
+		for (Integer amount : coins.keySet()) {
 			holdingStatus += String.format(HOLDING_COIN_AMOUNT_TEXT, amount, coins.get(amount));
 		}
 		return holdingStatus;
 	}
 
-	private List<Integer> getReverseSortedCoinAmountKey() {
-		List<Integer> keys = new ArrayList<>(coins.keySet());
-		keys.sort(Collections.reverseOrder());
-		return keys;
-	}
-
 	public String getChangesAsText() {
 		String status = "";
-		for (Integer amount : getReverseSortedCoinAmountKey()) {
+		for (Integer amount : coins.keySet()) {
 			if (coins.get(amount) <= 0) {
 				continue;
 			}

@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
@@ -27,7 +27,7 @@ public class CoinController {
 	}
 
 	private Map<Integer, Integer> makeCoins(int price) {
-		Map<Integer, Integer> coinAmount = new HashMap<>();
+		Map<Integer, Integer> coinAmount = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			int amount = coin.getAmount();
 			coinAmount.put(amount, price / amount);
