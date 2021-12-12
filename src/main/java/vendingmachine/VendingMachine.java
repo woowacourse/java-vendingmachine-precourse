@@ -16,11 +16,14 @@ public class VendingMachine {
         return this.coins.getCoins();
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
     public void addAll(List<Product> products) {
         this.products.addAll(products);
+    }
+
+    public void buyProduct(Order order) {
+        products.stream()
+            .filter(product -> product.isEqualToName(order.getProductName()))
+            .findAny()
+            .ifPresent(product -> product.processPurchasing(order));
     }
 }

@@ -10,4 +10,13 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public boolean isEqualToName(String name) {
+        return this.name.equals(name);
+    }
+
+    public void processPurchasing(Order order) {
+        this.quantity -= 1;
+        order.calculate(this.price);
+    }
 }
