@@ -7,6 +7,7 @@ public class Money {
 	private static final int MIN = 10; // 가장 작은 동전 단위
 	private static final String INVALID_MONEY = "[ERROR] 올바르지 않은 금액 입력입니다.";
 	private static final String NOT_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
+	private static final String WON = "원";
 
 	private int amount;
 
@@ -32,5 +33,10 @@ public class Money {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	@Override
+	public String toString() {
+		return getAmount() + WON;
 	}
 }
