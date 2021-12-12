@@ -2,7 +2,7 @@ package vendingmachine.Service;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Domain.Coin;
-import vendingmachine.Domain.HoldingCoins;
+import vendingmachine.Domain.Coins;
 import vendingmachine.Validation.HoldingAmountValidation;
 
 public class InitHoldingCoinsService {
@@ -17,7 +17,7 @@ public class InitHoldingCoinsService {
         while (amount > 0) {
             int pickedAmount = pickRandomCoin(amount);
             amount -= pickedAmount;
-            HoldingCoins.addCoin(pickedAmount);
+            Coins.addToHoldingCoins(pickedAmount);
         }
     }
 
