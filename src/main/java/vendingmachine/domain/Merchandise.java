@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 public class Merchandise {
+
     public String name;
     public int price;
     public int number;

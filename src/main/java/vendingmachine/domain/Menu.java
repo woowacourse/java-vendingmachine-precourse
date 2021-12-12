@@ -8,6 +8,7 @@ import vendingmachine.view.InputView;
 import java.util.List;
 
 public class Menu {
+
     List<Merchandise> merchandiseList;
 
     public Menu(List<Merchandise> merchandiseList) {

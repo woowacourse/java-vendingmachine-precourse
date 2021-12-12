@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InputView {
+
     public static int getTotalMoneyInput() {
         try {
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
@@ -52,7 +53,6 @@ public class InputView {
 
     public static String getMerchandiseNameInput() {
         System.out.println("구매할 상품명을 입력해 주세요.");
-
         return Console.readLine();
     }
 }

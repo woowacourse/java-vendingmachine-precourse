@@ -29,6 +29,4 @@ public class NumberValidator {
             throw new IllegalArgumentException(HAS_ONES_NUMBER_EXCEPTION);
         }
     }
-
-
 }

@@ -5,6 +5,7 @@ import vendingmachine.domain.enums.Coin;
 import java.util.HashMap;
 
 public class OutputView {
+
     public static void printCoinsInfo(HashMap<Coin, Integer> coins) {
         StringBuilder sb = new StringBuilder();
         sb.append("\n자판기가 보유한 동전\n");
