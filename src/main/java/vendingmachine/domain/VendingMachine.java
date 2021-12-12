@@ -4,6 +4,8 @@ import java.util.*;
 
 public class VendingMachine {
 
+    private static final int ZERO = 0;
+
     private Change change;
     private Money money;
     private List<Product> productList = new ArrayList<>();
@@ -78,13 +80,13 @@ public class VendingMachine {
     }
 
     private boolean checkQuantity() {
-        int sumQuantity = 0;
+        int sumQuantity = ZERO;
 
         for (Product product : productList) {
             sumQuantity = sumQuantity + product.getQuantity();
         }
 
-        if (sumQuantity == 0) {
+        if (sumQuantity == ZERO) {
            return false;
         }
 

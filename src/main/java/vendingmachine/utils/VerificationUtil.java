@@ -9,6 +9,8 @@ import java.util.List;
 public class VerificationUtil {
 
     private static final String REGEX = "^\\[[a-zA-Z가-힣]+,[1-9][0-9]+0,[1-9][0-9]*]$";
+    private static final int ZERO = 0;
+    private static final int UNIT = 10;
 
     private VerificationUtil() {
     }
@@ -43,7 +45,7 @@ public class VerificationUtil {
     }
 
     private static void checkProductAmount(Product product) {
-        if (product.getQuantity() <= 0) {
+        if (product.getQuantity() <= ZERO) {
             throw new IllegalArgumentException("[ERROR] 해당 상품의 재고가 없습니다.");
         }
     }
@@ -59,13 +61,13 @@ public class VerificationUtil {
     }
 
     private static void validatePositiveNumber(int holdingAmount) {
-        if (holdingAmount <= 0) {
+        if (holdingAmount <= ZERO) {
             throw new IllegalArgumentException("[ERROR] 양수를 입력해주세요.");
         }
     }
 
     private static void validateMultipleOfTen(int holdingAmount) {
-        if (holdingAmount % 10 != 0) {
+        if (holdingAmount % UNIT != ZERO) {
             throw new IllegalArgumentException("[ERROR] 10원 단위로 입력해주세요.");
         }
     }

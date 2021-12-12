@@ -10,6 +10,8 @@ import static camp.nextstep.edu.missionutils.Console.readLine;
 
 public class OutputView {
 
+    private static final int ZERO = 0;
+
     private OutputView() {
     }
 
@@ -35,7 +37,7 @@ public class OutputView {
         System.out.println("잔돈");
 
         for (Coin coin : coinMap.keySet()) {
-            if (coinMap.get(coin) > 0 && ((restMoney - coin.getAmount()) >= 0)) {
+            if (coinMap.get(coin) > ZERO && ((restMoney - coin.getAmount()) >= ZERO)) {
                 System.out.println(coin.getAmount()+"원 - " + coinMap.get(coin)+"개");
             }
         }

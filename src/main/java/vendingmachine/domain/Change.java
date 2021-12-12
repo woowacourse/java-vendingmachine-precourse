@@ -8,6 +8,8 @@ import static vendingmachine.domain.Coin.*;
 
 public class Change {
 
+    private final static int ZERO = 0;
+
     private Map<Coin, Integer> coinMap = new HashMap<>();
     private int totalMoney;
 
@@ -19,7 +21,7 @@ public class Change {
     public void createCoin() {
         int auxiliaryMoney = this.totalMoney;
 
-        while (auxiliaryMoney > 0) {
+        while (auxiliaryMoney > ZERO) {
             int coinValue = pickNumberInList(getCoinEnumValueList());
 
             Coin coin = valueOf(coinValue);
@@ -27,7 +29,7 @@ public class Change {
             Integer count = coinMap.get(coin);
 
             if (checkValidCoin(coin.getAmount(), auxiliaryMoney)) {
-                count = count +1;
+                count = ++count;
                 coinMap.put(coin, count);
 
                 auxiliaryMoney = auxiliaryMoney - coin.getAmount();
@@ -52,9 +54,9 @@ public class Change {
     }
 
     private void initCoinMap() {
-        coinMap.put(COIN_10, 0);
-        coinMap.put(COIN_50, 0);
-        coinMap.put(COIN_100, 0);
-        coinMap.put(COIN_500, 0);
+        coinMap.put(COIN_10, ZERO);
+        coinMap.put(COIN_50, ZERO);
+        coinMap.put(COIN_100, ZERO);
+        coinMap.put(COIN_500, ZERO);
     }
 }

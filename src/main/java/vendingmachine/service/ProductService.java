@@ -10,6 +10,12 @@ import static vendingmachine.view.OutputView.printInputVendingMachineProduct;
 
 public class ProductService {
 
+    private static final String SEPARATOR = ";";
+    private static final String DELIMITER = ",";
+    private static final int PRODUCTNAMEINDEX = 0;
+    private static final int PRICEINDEX = 1;
+    private static final int QUANTITYINDEX = 2;
+
     public List<Product> createProducts() {
         List<Product> productList = createProductListByInput();
 
@@ -33,7 +39,7 @@ public class ProductService {
     public static List<Product> createProductList(String input) {
         List<Product> productList = new ArrayList<>();
 
-        String[] splitString = input.split(";");
+        String[] splitString = input.split(SEPARATOR);
 
         for (String s : splitString) {
 
@@ -50,17 +56,17 @@ public class ProductService {
     private static String[] splitProductInfo(String splitString) {
         String resultString = splitString.substring(1, splitString.length() -1);
 
-        String[] resultStrings = resultString.split(",");
+        String[] resultStrings = resultString.split(DELIMITER);
 
         return resultStrings;
     }
 
     private static Product createProduct(String[] strings) {
-        String productName = strings[0];
+        String productName = strings[PRODUCTNAMEINDEX];
 
-        int price = Integer.parseInt(strings[1]);
+        int price = Integer.parseInt(strings[PRICEINDEX]);
 
-        int quantity = Integer.parseInt(strings[2]);
+        int quantity = Integer.parseInt(strings[QUANTITYINDEX]);
 
         Product product = new Product(productName, price, quantity);
 
