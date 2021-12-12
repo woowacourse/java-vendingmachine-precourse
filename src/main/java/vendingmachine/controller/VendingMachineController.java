@@ -9,7 +9,7 @@ public class VendingMachineController {
         this.vendingMachineService = new VendingMachineService();
     }
 
-    public void start(){
+    public void start() {
         vendingMachineService.start();
     }
 

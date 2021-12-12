@@ -22,14 +22,14 @@ public class Product {
     }
 
     public void subQuantity() {
-        if(this.quantity == 0){
+        if (this.quantity == 0) {
             throw new IllegalArgumentException(Message.IS_OUT_OF_STOCK);
         }
         this.quantity -= 1;
     }
 
-    public static boolean isZeroQuantity(Product product){
-        if(product.quantity == 0){
+    public static boolean isZeroQuantity(Product product) {
+        if (product.quantity == 0) {
             return true;
         }
         return false;

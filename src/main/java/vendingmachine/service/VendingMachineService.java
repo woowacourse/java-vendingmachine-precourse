@@ -22,48 +22,49 @@ public class VendingMachineService {
         setVendingMachine();
     }
 
-    private void setVendingMachine(){
-        int amount = vendingMachineValidation.changeValidation();
-        int[] coins = coinService.makeRandomCoins(amount);
+    private void setVendingMachine() {
+        int change = vendingMachineValidation.changeValidation();
+        int[] coins = coinService.makeRandomCoins(change);
         OutputView.printVendingMachineCoins(coins);
 
         List<String> products = vendingMachineValidation.productValidation();
-        this.vendingMachine = new VendingMachine(amount,coins,products);
+        this.vendingMachine = new VendingMachine(change, coins, products);
     }
 
-    
-    public void start(){
-        int balance = vendingMachineValidation.inputAmountValidation();
-        while(true){
+
+    public void start() {
+        int balance = vendingMachineValidation.balanceValidation();
+        while (true) {
             System.out.printf(Message.BALANCE, balance);
-            try{
-                if(!vendingMachine.availableCheck(balance)) {
+            //TODO: vendingMachineRunning으로 분리
+            try {
+                if (!vendingMachine.availableCheck(balance)) {
                     printChange(balance);
                     break;
                 }
                 System.out.println(Message.PRODUCT_NAME_INPUT);
                 String order = InputView.input();
                 balance = buyProduct(balance, order);
-            } catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private int buyProduct(int amount, String name){
+    private int buyProduct(int amount, String name) {
         return vendingMachine.buy(amount, name);
     }
 
-    private int[] makeChangeCoinList(int[] vendingMachineCoins, int balance){
+    private int[] makeChangeCoinList(int[] vendingMachineCoins, int balance) {
         int[] changeCoinList = new int[4];
         int i = 0;
-        for(Coin coin : Coin.values()){
-            int needCoin = coin.calculateChange(balance);
-            int haveCoin = vendingMachineCoins[i];
-            if(balance == 0){
+        for (Coin coin : Coin.values()) {
+            if (balance == 0) {
                 break;
             }
-            changeCoinList[i] = coinService.compareCoin(needCoin,haveCoin);
+            int needCoin = coin.calculateNeedCoin(balance);
+            int haveCoin = vendingMachineCoins[i];
+            changeCoinList[i] = coinService.compareCoin(needCoin, haveCoin);
             balance -= coin.multiply(changeCoinList[i]);
             i++;
         }
@@ -71,15 +72,15 @@ public class VendingMachineService {
     }
 
 
-    private void printChange(int balance){
-        int[] vendingMachineCoins = vendingMachine.coinsToArray();
+    private void printChange(int balance) {
+        int[] vendingMachineCoinList = vendingMachine.coinsToArray();
 
-        if(vendingMachine.isBalanceBigger(balance)){
-            OutputView.printVendingMachineCoins(vendingMachineCoins);
+        if (vendingMachine.isBalanceBigger(balance)) {
+            OutputView.printVendingMachineCoins(vendingMachineCoinList);
             return;
         }
 
-        int[] changeCoinList = makeChangeCoinList(vendingMachineCoins, balance);
+        int[] changeCoinList = makeChangeCoinList(vendingMachineCoinList, balance);
 
         OutputView.printChangeCoins(changeCoinList);
     }
