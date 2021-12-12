@@ -44,4 +44,8 @@ public enum Coin {
 			.filter(eachCoin -> eachCoin.getPrice() == valueOfReturnedCoin)
 			.forEach(eachCoin -> eachCoin.decreaseAmount(amountOfReturnedCoin));
 	}
+
+	private static int isCoinListEmpty(ArrayList<Item> coinList) {
+		return coinList.stream().mapToInt(Item::getAmount).sum();
+	}
 }
