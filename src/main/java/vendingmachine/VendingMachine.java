@@ -40,4 +40,8 @@ public class VendingMachine {
 	public boolean isPurchasable() {
 		return products.isPurchasable(insertMoney);
 	}
+
+	public Coins returnChange() {
+		return coins.returnChange(insertMoney);
+	}
 }
