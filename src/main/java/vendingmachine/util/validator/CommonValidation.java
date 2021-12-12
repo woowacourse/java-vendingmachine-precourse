@@ -8,4 +8,10 @@ public class CommonValidation{
             acceptThrow(() -> validator.get());
         }
     }
+
+    public static void isBlank(String userInput, ThrowIllegalSupplier validator) {
+        if(userInput.isEmpty()) {
+            acceptThrow(() -> validator.get());
+        }
+    }
 }
