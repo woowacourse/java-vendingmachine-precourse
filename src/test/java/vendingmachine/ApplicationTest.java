@@ -1,41 +1,55 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
+import static camp.nextstep.edu.missionutils.test.Assertions.*;
+import static org.assertj.core.api.Assertions.*;
+
 import org.junit.jupiter.api.Test;
 
-import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
-import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
-import static org.assertj.core.api.Assertions.assertThat;
+import camp.nextstep.edu.missionutils.test.NsTest;
 
 class ApplicationTest extends NsTest {
-    private static final String ERROR_MESSAGE = "[ERROR]";
+	private static final String ERROR_MESSAGE = "[ERROR]";
 
-    @Test
-    void 기능_테스트() {
-        assertRandomNumberInListTest(
-            () -> {
-                run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
-                assertThat(output()).contains(
-                    "자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
-                    "투입 금액: 3000원", "투입 금액: 1500원"
-                );
-            },
-            100, 100, 100, 100, 50
-        );
-    }
+	@Test
+	void 기능_테스트1() {
+		assertRandomNumberInListTest(
+			() -> {
+				run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
+				assertThat(output()).contains(
+					"자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
+					"투입 금액: 3000원", "투입 금액: 1500원"
+				);
+			},
+			100, 100, 100, 100, 50
+		);
+	}
 
-    @Test
-    void 예외_테스트() {
-        assertSimpleTest(
-            () -> {
-                runException("-1");
-                assertThat(output()).contains(ERROR_MESSAGE);
-            }
-        );
-    }
+	@Test
+	void 기능_테스트2() {
+		assertRandomNumberInListTest(
+			() -> {
+				run("220", "[콜라,100,1]", "220", "콜라");
+				assertThat(output()).contains(
+					"자판기가 보유한 동전", "500원 - 0개", "100원 - 1개", "50원 - 2개", "10원 - 2개",
+					"투입 금액: 220원", "투입 금액: 120원"
+				);
+			},
+			100, 50, 50, 10, 10
+		);
+	}
 
-    @Override
-    protected void runMain() {
-        Application.main(new String[]{});
-    }
+	@Test
+	void 예외_테스트() {
+		assertSimpleTest(
+			() -> {
+				runException("-1");
+				assertThat(output()).contains(ERROR_MESSAGE);
+			}
+		);
+	}
+
+	@Override
+	protected void runMain() {
+		Application.main(new String[] {});
+	}
 }
