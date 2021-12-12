@@ -17,7 +17,7 @@ class CoinTest {
         List<Integer> expected = Arrays.asList(500, 100, 50, 10);
 
         // when
-        List<Integer> result = Coin.currentCoins();
+        List<Integer> result = Coin.currentCoinAmounts();
 
         // then
         assertThat(result).isEqualTo(expected);

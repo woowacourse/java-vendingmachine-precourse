@@ -6,7 +6,7 @@ import vendingmachine.domain.Coin;
 
 public class RandomCoinCreateStrategy implements CoinCreateStrategy{
 
-    private static final List<Integer> COIN_RANGE = Coin.currentCoins();
+    private static final List<Integer> COIN_RANGE = Coin.currentCoinAmounts();
 
     @Override
     public Coin createCoin() {
