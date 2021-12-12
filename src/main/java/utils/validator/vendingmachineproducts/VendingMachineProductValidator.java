@@ -31,7 +31,7 @@ public class VendingMachineProductValidator {
 		}
 		throw new IllegalArgumentException();
 	}
-
+	
 	private static boolean isRightStartAndRightFinish(String vendingMachineProduct) {
 		if (vendingMachineProduct.startsWith(LEFT_BRACKET) && vendingMachineProduct.endsWith(RIGHT_BRACKET)) {
 			return true;

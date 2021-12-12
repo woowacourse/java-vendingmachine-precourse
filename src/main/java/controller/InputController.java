@@ -31,8 +31,7 @@ public class InputController {
 	public static List<String> inputVendingMachineProducts() {
 		while (INPUT_ERROR) {
 			try {
-				List<String> vendingMachineProducts = VendingMachineProductsValidator.checkValidVendingMachineProducts(
-					Console.readLine());
+				List<String> vendingMachineProducts = tryInputVendingMachineProducts();
 				return vendingMachineProducts.stream()
 					.map(InputController::trimVendingMachineProduct)
 					.collect(Collectors.toList());
@@ -40,6 +39,12 @@ public class InputController {
 				System.out.println(error.getMessage());
 			}
 		}
+	}
+
+	private static List<String> tryInputVendingMachineProducts() {
+		List<String> vendingMachineProducts = VendingMachineProductsValidator.checkValidVendingMachineProducts(
+			Console.readLine());
+		return VendingMachineProductsValidator.checkHasDuplicateProduct(vendingMachineProducts);
 	}
 
 	private static String trimVendingMachineProduct(String vendingMachineProduct) {
