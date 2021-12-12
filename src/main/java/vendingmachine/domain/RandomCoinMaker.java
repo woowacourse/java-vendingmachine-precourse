@@ -23,7 +23,7 @@ public class RandomCoinMaker {
         coins.sort(Comparator.reverseOrder());
 
         for (Integer coin : coins) {
-            coinMap.put(coin, 0);
+            coinMap.put(coin, Condition.QUANTITY_0.getNumber());
         }
     }
 
