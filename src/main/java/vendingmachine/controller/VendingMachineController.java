@@ -78,4 +78,9 @@ public class VendingMachineController {
 			buyProducts();
 		}
 	}
+
+	public void returnChange() {
+		OutputView.printUserAmount(user);
+		CoinCounter changeCoinCounter = coinCounter.getChangeCoinCounter(user);
+	}
 }

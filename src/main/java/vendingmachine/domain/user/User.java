@@ -40,4 +40,8 @@ public class User {
 		product.sell(this.amount);
 		amount = product.getChange(amount);
 	}
+
+	public int getAmount() {
+		return this.amount;
+	}
 }
