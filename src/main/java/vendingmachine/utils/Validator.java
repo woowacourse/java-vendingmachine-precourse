@@ -1,6 +1,5 @@
 package vendingmachine.utils;
 
-
 import static vendingmachine.utils.ExceptionMessage.*;
 
 import java.util.List;
@@ -30,7 +29,7 @@ public class Validator {
 	}
 
 	public static void validateInputProductList(List<String> productList) {
-		for (String product: productList) {
+		for (String product : productList) {
 			if (!Pattern.matches(REGEX_OF_PRODUCT_INPUT, product)) {
 				throw new IllegalArgumentException(ERROR_NOT_CORRECT_REGEX_INPUT);
 			}

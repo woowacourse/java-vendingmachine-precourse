@@ -39,6 +39,6 @@ public class VendingMachine {
 
 	@Override
 	public String toString() {
-		return  INPUT_AMOUNT_PREFIX + inputAmount + INPUT_AMOUNT_UNIT;
+		return INPUT_AMOUNT_PREFIX + inputAmount + INPUT_AMOUNT_UNIT;
 	}
 }

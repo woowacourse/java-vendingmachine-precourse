@@ -9,6 +9,5 @@ public class ExceptionMessage {
 	public static String ERROR_ONLY_CAN_INPUT_POSITIVE_MONEY = ERROR_MESSAGE + "금액은 0원 이상 입력해야 합니다.";
 	public static String ERROR_NOT_CORRECT_REGEX_INPUT = ERROR_MESSAGE + "입력 값 형식이 올바르지 않습니다.";
 	public static String ERROR_INPUT_HOLDING_AMOUNT_MONEY = ERROR_MESSAGE + "입력 값은 숫자이어야 합니다.";
-	public static String ERROR_MINIMUM_CONDITION_PRODUCT_PRICE = ERROR_MESSAGE + "상품의 가격은 최소 100원 이상이어야 합니다.";
 	public static String ERROR_CONDITION_PRODUCT_PRICE = ERROR_MESSAGE + "상품의 가격은 10원으로 나누어 떨어져야 합니다.";
 }

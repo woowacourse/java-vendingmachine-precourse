@@ -53,10 +53,10 @@ public class InputView {
 		System.out.println(PRINT_SCREEN_INPUT_USER_AMOUNT);
 		String input = Console.readLine();
 		printEmptyLine();
-		try{
+		try {
 			validateInputUserAmount(input);
 			return Integer.parseInt(input);
-		}catch (IllegalArgumentException illegalArgumentException) {
+		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
 			return inputUserAmount();
 		}
