@@ -23,4 +23,10 @@ public class UserGoodsValidation {
         }
         return countOpen == countClose;
     }
+
+    public static void checkHasBracket(String input) {
+        if (!input.contains(InputErrorConstant.SQUARE_BRACKETS_OPEN)) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_IS_NOT_SQUARE_BRACKETS);
+        }
+    }
 }
