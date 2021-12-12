@@ -1,20 +1,47 @@
 package vendingmachine;
 
+import java.util.HashMap;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
 	
-
+	HashMap<Coin, Integer> coinMap =new HashMap<>();
 	int totalCoin;
-
-	public VendingMachine(String cash) {
-		int totalcoin = ValidTotalCoin(cash);
-		this.totalCoin = totalcoin;
-	}
 	
 
+	public VendingMachine(String cash) {
+		this.totalCoin = ValidTotalCoin(cash);
+		init();
+		makeRandomCoin();
+	}
+	
+	
+	private void makeRandomCoin() {
+		int remainCoin=0;
+		while(remainCoin != totalCoin) {
+			int randomCoin = Randoms.pickNumberInList(Coin.coinList());
+			if((remainCoin + randomCoin) > totalCoin){
+				continue;
+			}
+			remainCoin += randomCoin;
+			Coin findCoin =Coin.getCoinKeyNumber(randomCoin);
+			coinMap.put(findCoin, coinMap.get(findCoin)+ 1);
+		}
+	}
+	
+	
+	
+	private void init(){
+    	for(Coin money : Coin.values()){
+    	    coinMap.put(money,0);
+        }
+	}
 
+	
 
-
+	
+	
 	//예외처리 
 	private int ValidTotalCoin(String cash){
 		if(!cash.chars().allMatch(Character::isDigit)) {
@@ -32,8 +59,7 @@ public class VendingMachine {
 	}
 	
 	
-	/* 구현전 내용 */
-	//무작위로 잔돈 보유하기 
+	/* 구현전 내용 */ 
 	
 	//자판기에 상품명,가격 수량을 추가하기
 	
