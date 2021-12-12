@@ -4,16 +4,17 @@ import static vendingmachine.utils.ArithmeticValidator.*;
 import static vendingmachine.utils.StringValidator.*;
 
 public class Menu {
+	private static final String ERROR_SQUARE_BRACKETS = "대괄호 사이에 상품정보를 입력해야 합니다.";
+	private static final String ERROR_DELIMITERS = "상품 정보는 [상품명,가격,수량] 형태로 입력해야 합니다.";
 
-	private static final String ERROR_SQUARE_BRACKETS = "[ERROR] 대괄호 사이에 상품정보를 입력해야 합니다.";
-	private static final String ERROR_DELIMITERS = "[ERROR] 상품 정보는 [상품명,가격,수량] 형태로 입력해야 합니다.";
-
-	private static final String ERROR_PRICE_NUMBER = "[ERROR] 상품 가격은 정수입니다.";
-	private static final String ERROR_LESS_THAN_MIN_PRICE = "[ERROR] 상품 가격은 100원 이상입니다.";
+	private static final String ERROR_PRICE_NUMBER = "상품 가격은 정수입니다.";
+	private static final String ERROR_LESS_THAN_MIN_PRICE = "상품 가격은 100원 이상입니다.";
 	private static final String ERROR_PRICE_NOT_DIVISIBLE_BY_MIN_PRICE_COIN =
-		"[ERROR] 상품 가격은 10원으로 나누어 떨어져야 합니다.";
+		"상품 가격은 10원으로 나누어 떨어져야 합니다.";
 
-	private static final String ERROR_COUNT_NUMBER = "[ERROR] 상품 수량은 정수입니다.";
+	private static final String ERROR_COUNT_NUMBER = "상품 수량은 정수입니다.";
+
+	private static final String ERROR_SOLD_OUT = "품절 상품입니다.";
 
 	private static final String DELIMITER = ",";
 	private static final int NAME_INDEX = 0;
@@ -113,7 +114,7 @@ public class Menu {
 
 	public void sold() {
 		if (isSoldOut()) {
-			throw new IllegalArgumentException("[ERROR] 품절 상품입니다.");
+			throw new IllegalArgumentException(ERROR_SOLD_OUT);
 		}
 		count--;
 	}

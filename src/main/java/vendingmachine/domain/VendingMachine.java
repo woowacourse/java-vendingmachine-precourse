@@ -12,7 +12,8 @@ import vendingmachine.domain.menu.Menu;
 import vendingmachine.domain.menu.Menus;
 
 public class VendingMachine {
-	private static final String ERROR_INPUT_MONEY_NUMBER = "[ERROR] 투입 금액은 정수입니다.";
+	private static final String ERROR_INPUT_MONEY_NUMBER = "투입 금액은 정수입니다.";
+	private static final String ERROR_MENU_PRICE_GREATER_THAN_INPUT_MONEY = "투입 금액 이하의 메뉴를 선택해주세요.";
 
 	private Coins leftCoins;
 	private Menus menus;
@@ -22,6 +23,10 @@ public class VendingMachine {
 		this.leftCoins = leftCoins;
 		this.menus = menus;
 		this.inputMoney = 0;
+	}
+
+	public int getInputMoney() {
+		return inputMoney;
 	}
 
 	public void putMoney(String money) {
@@ -55,7 +60,7 @@ public class VendingMachine {
 
 	private void validateMenuPrice(Menu menu) {
 		if (!isLessThanInputMoney(menu)) {
-			throw new IllegalArgumentException("[ERROR] 투입 금액 이하의 메뉴를 선택해주세요.");
+			throw new IllegalArgumentException(ERROR_MENU_PRICE_GREATER_THAN_INPUT_MONEY);
 		}
 	}
 
@@ -63,24 +68,16 @@ public class VendingMachine {
 		return menu.getPrice() <= inputMoney;
 	}
 
-	public boolean canBuy() {
-		return !menus.isEveryMenuSoldOut() && isInputMoneyGreaterThanOrEqualToMinMenuPrice();
-	}
-
 	private void useInputMoney(Menu menu) {
 		inputMoney -= menu.getPrice();
 	}
 
+	public boolean canBuy() {
+		return !menus.isEveryMenuSoldOut() && isInputMoneyGreaterThanOrEqualToMinMenuPrice();
+	}
+
 	private boolean isInputMoneyGreaterThanOrEqualToMinMenuPrice() {
 		return inputMoney >= menus.getMinMenuPrice();
-	}
-
-	public int getInputMoney() {
-		return inputMoney;
-	}
-
-	public Coins getLeftCoins() {
-		return leftCoins;
 	}
 }
 

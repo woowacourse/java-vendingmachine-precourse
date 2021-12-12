@@ -20,7 +20,7 @@ class CoinsTest {
 			Coins.generateCoinsRandomlyFromTotalAmount(input)
 		);
 
-		assertEquals("[ERROR] 보유 금액은 정수입니다.", exception.getMessage());
+		assertEquals("보유 금액은 정수입니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest
@@ -30,7 +30,7 @@ class CoinsTest {
 			Coins.generateCoinsRandomlyFromTotalAmount(input)
 		);
 
-		assertEquals("[ERROR] 보유 금액은 10원 이상입니다.", exception.getMessage());
+		assertEquals("보유 금액은 10원 이상입니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest
@@ -40,7 +40,7 @@ class CoinsTest {
 			Coins.generateCoinsRandomlyFromTotalAmount(input)
 		);
 
-		assertEquals("[ERROR] 보유 금액은 10원의 배수입니다.", exception.getMessage());
+		assertEquals("보유 금액은 10원의 배수입니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest

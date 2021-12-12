@@ -18,7 +18,7 @@ class MenusTest {
 			Menus.from(input)
 		);
 
-		assertEquals("[ERROR] 각 상품 정보는 세미콜론(;)으로 구분합니다.", exception.getMessage());
+		assertEquals("각 상품 정보는 세미콜론(;)으로 구분합니다.", exception.getMessage());
 	}
 
 	@Test
@@ -27,7 +27,7 @@ class MenusTest {
 				Menus menus = Menus.from("[콜라,300,2];[콜라,400,15]");
 			}
 		);
-		assertEquals("[ERROR] 상품명은 중복될 수 없습니다.", exception.getMessage());
+		assertEquals("상품명은 중복될 수 없습니다.", exception.getMessage());
 	}
 
 	@Test
@@ -41,6 +41,6 @@ class MenusTest {
 		Throwable exception = assertThrows(IllegalArgumentException.class, () ->
 			vendingMachine.buy("닥터페퍼")
 		);
-		assertEquals("[ERROR] 존재하지 않는 상품입니다.", exception.getMessage());
+		assertEquals("존재하지 않는 상품입니다.", exception.getMessage());
 	}
 }

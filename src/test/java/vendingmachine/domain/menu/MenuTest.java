@@ -17,7 +17,7 @@ class MenuTest {
 			Menu.from(input)
 		);
 
-		assertEquals("[ERROR] 대괄호 사이에 상품정보를 입력해야 합니다.", exception.getMessage());
+		assertEquals("대괄호 사이에 상품정보를 입력해야 합니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest
@@ -27,7 +27,7 @@ class MenuTest {
 			Menu.from(input)
 		);
 
-		assertEquals("[ERROR] 상품 정보는 [상품명,가격,수량] 형태로 입력해야 합니다.", exception.getMessage());
+		assertEquals("상품 정보는 [상품명,가격,수량] 형태로 입력해야 합니다.", exception.getMessage());
 	}
 
 	@Test
@@ -36,7 +36,7 @@ class MenuTest {
 			Menu.from("[상품명,오백원,4]")
 		);
 
-		assertEquals("[ERROR] 상품 가격은 정수입니다.", exception.getMessage());
+		assertEquals("상품 가격은 정수입니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest
@@ -46,7 +46,7 @@ class MenuTest {
 			Menu.from(input)
 		);
 
-		assertEquals("[ERROR] 상품 가격은 100원 이상입니다.", exception.getMessage());
+		assertEquals("상품 가격은 100원 이상입니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest
@@ -56,7 +56,7 @@ class MenuTest {
 			Menu.from(input)
 		);
 
-		assertEquals("[ERROR] 상품 가격은 10원으로 나누어 떨어져야 합니다.", exception.getMessage());
+		assertEquals("상품 가격은 10원으로 나누어 떨어져야 합니다.", exception.getMessage());
 	}
 
 	@ParameterizedTest
@@ -66,7 +66,7 @@ class MenuTest {
 			Menu.from(input)
 		);
 
-		assertEquals("[ERROR] 상품 수량은 정수입니다.", exception.getMessage());
+		assertEquals("상품 수량은 정수입니다.", exception.getMessage());
 	}
 
 }

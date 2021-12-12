@@ -30,7 +30,7 @@ class VendingMachineTest {
 			vendingMachine.putMoney(input)
 		);
 
-		assertEquals("[ERROR] 투입 금액은 정수입니다.", exception.getMessage());
+		assertEquals("투입 금액은 정수입니다.", exception.getMessage());
 	}
 
 	@Test
@@ -47,7 +47,7 @@ class VendingMachineTest {
 		Throwable exception = assertThrows(IllegalArgumentException.class, () ->
 			vendingMachine.buy("콜라")
 		);
-		assertEquals("[ERROR] 품절 상품입니다.", exception.getMessage());
+		assertEquals("품절 상품입니다.", exception.getMessage());
 	}
 
 	@Test
@@ -56,6 +56,6 @@ class VendingMachineTest {
 		Throwable exception = assertThrows(IllegalArgumentException.class, () ->
 			vendingMachine.buy("데자와")
 		);
-		assertEquals("[ERROR] 투입 금액 이하의 메뉴를 선택해주세요.", exception.getMessage());
+		assertEquals("투입 금액 이하의 메뉴를 선택해주세요.", exception.getMessage());
 	}
 }

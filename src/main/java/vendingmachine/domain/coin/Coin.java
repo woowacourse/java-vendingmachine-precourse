@@ -6,10 +6,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Coin {
+
 	COIN_500(500),
 	COIN_100(100),
 	COIN_50(50),
 	COIN_10(10);
+
+	private static final String ERROR_NO_VALUE = "해당 가격의 코인은 존재하지 않습니다.";
 
 	private final int amount;
 
@@ -26,7 +29,7 @@ public enum Coin {
 		return Arrays.stream(coins)
 			.filter(coin -> coin.getAmount() == amount)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 해당 가격의 코인은 존재하지 않습니다."));
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_NO_VALUE));
 	}
 
 	public static Coin getMinPriceCoin() {
@@ -36,5 +39,4 @@ public enum Coin {
 		int minPrice = Collections.min(amountList);
 		return valueOf(minPrice);
 	}
-
 }

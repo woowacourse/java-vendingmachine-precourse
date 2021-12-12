@@ -12,9 +12,10 @@ import java.util.TreeMap;
 import vendingmachine.utils.RandomCoinSelector;
 
 public class Coins {
-	private static final String ERROR_NOT_NUMBER = "[ERROR] 보유 금액은 정수입니다.";
-	private static final String ERROR_LT_MIN_PRICE_COIN = "[ERROR] 보유 금액은 10원 이상입니다.";
-	private static final String ERROR_NOT_DIVISIBLE_BY_MIN_PRICE_COIN = "[ERROR] 보유 금액은 10원의 배수입니다.";
+	private static final String ERROR_NOT_NUMBER = "보유 금액은 정수입니다.";
+	private static final String ERROR_LT_MIN_PRICE_COIN = "보유 금액은 10원 이상입니다.";
+	private static final String ERROR_NOT_DIVISIBLE_BY_MIN_PRICE_COIN = "보유 금액은 10원의 배수입니다.";
+	private static final String ERROR_NO_COIN_LESS_THAN_VALUE = "해당 값 이하의 코인이 존재하지 않습니다.";
 
 	private final Map<Coin, Integer> coinMap;
 
@@ -88,7 +89,7 @@ public class Coins {
 			.filter(entry -> entry.getKey().getAmount() <= value)
 			.map(entry -> entry.getKey())
 			.max(Comparator.comparing(Coin::getAmount))
-			.orElseThrow(() -> new NoSuchElementException("[ERROR] 해당 값 이하의 코인이 존재하지 않습니다."));
+			.orElseThrow(() -> new NoSuchElementException(ERROR_NO_COIN_LESS_THAN_VALUE));
 	}
 
 	public boolean isEmpty() {
