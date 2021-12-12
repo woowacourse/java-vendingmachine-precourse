@@ -1,12 +1,18 @@
 package vendingmachine.view;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Item;
 import vendingmachine.utils.Message;
 
 public class InputView {
 	private static final char CHAR_NUMERIC_MIN = '0';
 	private static final char CHAR_NUMERIC_MAX = '9';
 	private static final String ZERO_HOLDING_MONEY = "0";
+	private static final int DIVIDE_VALUE= 10;
 
 	public static int holdingMoneyInput(){
 		String stringHoldingMoney = "";
@@ -20,6 +26,37 @@ public class InputView {
 		holdingMoney = Integer.parseInt(stringHoldingMoney);
 		System.out.println();
 		return holdingMoney;
+	}
+
+	public static ArrayList<Item> holdingItemsInput(){
+		ArrayList<Item> itemList = new ArrayList<Item>();
+		List<String> stringItemsList = new ArrayList<String>();
+		String [] eachValueOfProductArray = new String[3];
+
+		System.out.println(Message.ASK_ADD_ITEMS_MESSAGE);
+		stringItemsList = Arrays.asList(Console.readLine().split(";"));
+
+		for(int i = 0; i < stringItemsList.size(); i++){
+			stringItemsList.get(i).replace("[","");
+			stringItemsList.get(i).replace("]","");
+		}
+
+		generateItemList(itemList, stringItemsList);
+		return itemList;
+	}
+
+	private static void generateItemList(ArrayList<Item> itemList, List<String> stringItemsList) {
+		String[] eachValueOfProductArray;
+		for(int i = 0; i < stringItemsList.size(); i++){
+			eachValueOfProductArray = stringItemsList.get(i).split(",");
+
+			String name = eachValueOfProductArray[0];
+			int price = Integer.parseInt(eachValueOfProductArray[1]);
+			int stock = Integer.parseInt(eachValueOfProductArray[2]);
+
+			Item item = new Item(name, price, stock);
+			itemList.add(item);
+		}
 	}
 
 	private static boolean isRightHoldingMoney(String stringHoldingMoney){
@@ -51,7 +88,7 @@ public class InputView {
 	}
 
 	public static void dividedByTenHoldingMoneyError(String stringHoldingMoney){
-		if(Integer.parseInt(stringHoldingMoney) % 10 != 0){
+		if(Integer.parseInt(stringHoldingMoney) % DIVIDE_VALUE != 0){
 			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
 		}
 	}

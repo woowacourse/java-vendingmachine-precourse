@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import vendingmachine.VendingMachineController;
 
@@ -9,17 +11,19 @@ public class VendingMachine {
 	private static VendingMachine vendingMachine = null;
 
 	public int holdingMoney = 0;
-	public HashMap<Coin, Integer> holdingCoins;
+	public LinkedHashMap<Coin, Integer> holdingCoins;
+	public ArrayList<Item> holdingItem = new ArrayList<Item>();
 
 	public VendingMachine vendingMachine(){
 		if (this.vendingMachine == null){
-			VendingMachineController vendingMachine = new VendingMachineController();
+			VendingMachine vendingMachine = new VendingMachine();
 		}
 		return vendingMachine;
 	}
 
-	public void getCoins(){
+	public LinkedHashMap<Coin, Integer> getCoins(){
 		Coins coins = new Coins(holdingMoney);
 		this.holdingCoins = coins.getCoins();
+		return holdingCoins;
 	}
 }
