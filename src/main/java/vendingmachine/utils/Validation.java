@@ -2,8 +2,12 @@ package vendingmachine.utils;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import vendingmachine.domain.Product;
+import vendingmachine.domain.Products;
 
 public class Validation {
 
@@ -76,6 +80,19 @@ public class Validation {
 		}
 		if (enteredAmount % Constant.ENTERED_AMOUNT_DIVIDE != Constant.ENTERED_AMOUNT_REMAINDER) {
 			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.ENTERED_AMOUNT_DIVIDE);
+		}
+	}
+
+	public static void isProductToBuy(Products products, String input, int enteredAmount) {
+		Optional<Product> product = products.findByName(input);
+		if (!product.isPresent()) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_TO_BUY_EMPTY_PRODUCT);
+		}
+		if (product.get().isEmpty()) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_TO_BUY_EMPTY_COUNT);
+		}
+		if (!product.get().isBuy(enteredAmount)) {
+			throw new IllegalArgumentException(ErrorMessage.COMMON + ErrorMessage.PRODUCT_TO_BUY_LACK);
 		}
 	}
 

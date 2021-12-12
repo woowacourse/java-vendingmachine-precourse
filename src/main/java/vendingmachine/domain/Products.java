@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.List;
+import java.util.Optional;
 
 public class Products {
 	private final List<Product> products;
@@ -11,16 +12,22 @@ public class Products {
 
 	public int getLowestPossibleProductPrice() {
 		return products.stream()
-			.filter(Product::isBuy)
+			.filter(e -> !e.isEmpty())
 			.mapToInt(Product::getAmount)
 			.min()
 			.orElse(0);
 	}
 
-	public boolean isBuy() {
+	public boolean isEmpty() {
 		return products.stream()
-			.filter(Product::isBuy)
-			.count() != 0L;
+			.filter(Product::isEmpty)
+			.count() == products.size();
+	}
+
+	public Optional<Product> findByName(String name) {
+		return products.stream()
+			.filter(e -> e.getName().equals(name))
+			.findFirst();
 	}
 
 }

@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.Coins;
+import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.RandomGenerator;
@@ -16,24 +17,23 @@ public class VendingMachineController {
 		OutputView.printHoldingCoin(coins.getHoldingCoin());
 		Products products = InputView.getProducts();
 		VendingMachine vendingMachine = new VendingMachine(InputView.getEnteredAmount());
-		OutputView.printEnteredAmount(vendingMachine.getEnteredAmount());
 
-		while (isBuy(vendingMachine, products)) {
-			buy();
-		}
+		do {
+			buy(vendingMachine, products);
+		} while (isBuy(vendingMachine, products));
+	}
+
+	public static void buy(VendingMachine vendingMachine, Products products) {
+		OutputView.printEnteredAmount(vendingMachine.getEnteredAmount());
+		Product product = InputView.getProductToBuy(products, vendingMachine.getEnteredAmount());
+		product.buy();
+		vendingMachine.buy(product.getAmount());
 	}
 
 	public static boolean isBuy(VendingMachine vendingMachine, Products products) {
-		if (vendingMachine.isBuy(products.getLowestPossibleProductPrice())) {
-			return true;
+		if (!vendingMachine.isBuy(products.getLowestPossibleProductPrice())) {
+			return false;
 		}
-		if (products.isBuy()) {
-			return true;
-		}
-		return false;
-	}
-
-	public static void buy() {
-
+		return !products.isEmpty();
 	}
 }

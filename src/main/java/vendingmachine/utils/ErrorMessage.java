@@ -21,4 +21,7 @@ public class ErrorMessage {
 	public static final String ENTERED_AMOUNT_MIN = "투입금액은 10원 이상이여야 합니다.";
 	public static final String ENTERED_AMOUNT_MAX = "투입금액은 20억원 이하여야 합니다.";
 	public static final String ENTERED_AMOUNT_DIVIDE = "투입금액은 10원으로 나누어 떨어져야 합니다.";
+	public static final String PRODUCT_TO_BUY_EMPTY_PRODUCT = "입력한 상품명이 존재하지 않습니다.";
+	public static final String PRODUCT_TO_BUY_EMPTY_COUNT = "입력한 상품은 품절되어 구매할 수 없습니다.";
+	public static final String PRODUCT_TO_BUY_LACK = "현재 금액으로 입력한 상품을 구매할 수 없습니다.";
 }

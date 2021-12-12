@@ -6,7 +6,7 @@ import vendingmachine.utils.ErrorMessage;
 public class Product {
 	private final String name;
 	private final int amount;
-	private final int count;
+	private int count;
 
 	public Product(String[] input) {
 		isAmount(input);
@@ -50,11 +50,23 @@ public class Product {
 		}
 	}
 
+	public String getName() {
+		return name;
+	}
+
 	public int getAmount() {
 		return this.amount;
 	}
 
-	public boolean isBuy() {
-		return this.count != 0;
+	public boolean isEmpty() {
+		return this.count == 0;
+	}
+
+	public boolean isBuy(int enteredAmount) {
+		return this.amount <= enteredAmount;
+	}
+
+	public void buy() {
+		this.count--;
 	}
 }
