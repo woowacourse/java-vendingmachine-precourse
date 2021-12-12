@@ -97,7 +97,7 @@
 
 4. Utils
    1. Messages
-      - [ ] OutputView에 필요한 메세지 혹은 예외 메세지를 가져오는 기능
+      - [x] OutputView에 필요한 메세지 혹은 예외 메세지를 가져오는 기능
    2. Validator
       - [x] 입력이 빈 입력인지 검사하는 기능
       - [x] 입력이 숫자인지 검사하는 기능
