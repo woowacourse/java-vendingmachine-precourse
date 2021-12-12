@@ -31,7 +31,7 @@ public class VendingMachineController {
 
 	public void setInitCoins() {
 		boolean successInitCoins = false;
-		userView.askInitCoins();
+		vendingMachineView.askInitCoins();
 
 		while (!successInitCoins) {
 			successInitCoins = setInitCoinsIfItIsRight();
@@ -59,7 +59,7 @@ public class VendingMachineController {
 
 	public void setMenuList() {
 		boolean successSetMenuList = false;
-		userView.askProductsInfo();
+		vendingMachineView.askProductsInfo();
 
 		while (!successSetMenuList) {
 			successSetMenuList = setMenuListIfItIsRight();
@@ -79,7 +79,7 @@ public class VendingMachineController {
 
 	public void insertMoney() {
 		boolean successInsertMoney = false;
-		userView.askInsertMoney();
+		vendingMachineView.askInsertMoney();
 
 		while (!successInsertMoney) {
 			successInsertMoney = insertMoneyIfItIsRight();
@@ -108,7 +108,7 @@ public class VendingMachineController {
 
 	public void order() {
 		boolean successOrder = false;
-		userView.askOrderMenu();
+		vendingMachineView.askOrderMenu();
 
 		while (!successOrder) {
 			successOrder = orderIfIsRight();

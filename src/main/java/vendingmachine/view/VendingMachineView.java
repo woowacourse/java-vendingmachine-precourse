@@ -1,9 +1,25 @@
 package vendingmachine.view;
 
+import vendingmachine.constants.InputMessage;
 import vendingmachine.constants.OutputMessage;
 import vendingmachine.model.Coin;
 
 public class VendingMachineView {
+	public void askInitCoins() {
+		System.out.println(InputMessage.PREPARING_COIN_MESSAGE);
+	}
+
+	public void askProductsInfo() {
+		System.out.println("\n" + InputMessage.INPUT_MENU_MESSAGE);
+	}
+
+	public void askInsertMoney() {
+		System.out.println("\n" + InputMessage.INSERT_MONEY_MESSAGE);
+	}
+
+	public void askOrderMenu() {
+		System.out.println(InputMessage.ORDER_MENU_NAME);
+	}
 
 	public void printInitCoinsComment() {
 		System.out.println("\n" + OutputMessage.PREPARED_NUMBER_OF_COINS_MESSAGE);
