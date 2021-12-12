@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import vendingmachine.controller.CatalogController;
+import vendingmachine.controller.UserAccountController;
 import vendingmachine.controller.VendingMachineAccountController;
 
 public class Application {
@@ -12,5 +13,7 @@ public class Application {
 		VendingMachineAccountController.printCoinCount();
 
 		CatalogController.setCatalogListInput();
+
+		UserAccountController.setUserAccountByInput();
 	}
 }
