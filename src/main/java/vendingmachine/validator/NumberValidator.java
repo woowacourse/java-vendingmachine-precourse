@@ -5,12 +5,12 @@ import static vendingmachine.utils.ExceptionMessages.*;
 public class NumberValidator {
 
     public static void validateTotalMoneyInput(String input) {
-        int intInput = validateTotalMoneyInputType(input);
-        validateTotalMoneyNotNegative(intInput);
-        validateTotalMoneyNotHaveOnes(intInput);
+        int intInput = validateIntType(input);
+        validateNotNegativeNumber(intInput);
+        validateNotHaveOnesDigit(intInput);
     }
 
-    private static int validateTotalMoneyInputType(String input) {
+    private static int validateIntType(String input) {
         try {
             return Integer.parseInt(input);
         } catch (Exception e) {
@@ -18,15 +18,17 @@ public class NumberValidator {
         }
     }
 
-    private static void validateTotalMoneyNotNegative(int intInput) {
+    private static void validateNotNegativeNumber(int intInput) {
         if (intInput < 0) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION);
         }
     }
 
-    private static void validateTotalMoneyNotHaveOnes(int intInput) {
+    private static void validateNotHaveOnesDigit(int intInput) {
         if (intInput%10 > 0) {
             throw new IllegalArgumentException(HAS_ONES_NUMBER_EXCEPTION);
         }
     }
+
+
 }
