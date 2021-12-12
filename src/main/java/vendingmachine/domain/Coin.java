@@ -2,13 +2,13 @@ package vendingmachine.domain;
 
 import java.util.Arrays;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 import vendingmachine.exception.CoinNotExistAmountException;
 
-public enum Coin {
+public enum Coin implements Comparator<Coin> {
     COIN_500(500),
     COIN_100(100),
     COIN_50(50),
@@ -34,7 +34,7 @@ public enum Coin {
     }
 
     public static Map<Coin, Integer> createEmptyCoinMap() {
-        Map<Coin, Integer> coinMap = new HashMap<>();
+        Map<Coin, Integer> coinMap = new TreeMap<>();
         Arrays.stream(values())
             .forEach(coin -> coinMap.put(coin, 0));
         return coinMap;
@@ -49,5 +49,10 @@ public enum Coin {
             .min(Comparator.comparingInt(Coin::amount))
             .map(Coin::amount)
             .orElseThrow(() -> new RuntimeException("최소 coin이 존재하지 않습니다."));
+    }
+
+    @Override
+    public int compare(Coin o1, Coin o2) {
+        return o2.amount - o1.amount;
     }
 }
