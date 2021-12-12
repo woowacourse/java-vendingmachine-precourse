@@ -1,23 +1,34 @@
 package vendingmachine.billing;
 
 public class MoneyValidator {
-	private static final String NOT_INTEGER = "금액은 숫자만 입력이 가능합니다.";
+	private static final String NOT_ONLY_NUMBERS = "금액은 숫자만 입력이 가능합니다.";
+	private static final String NOT_INTEGER_RANGE = "금액은 20억 이하만 가능합니다.";
 	private static final String NOT_POSITIVE = "금액은 0보다 커야합니다.";
 	private static final String NOT_DIVISIBLE = "금액은 10원으로 나누어떨어져야 합니다.";
+	private static final int MAXIMUM_INTEGER_RANGE = 2000000000;
 	private static final int MINIMUM_DIVISIBLE_NUMBER = 10;
 	private static final int ZERO = 0;
 
 	public void validate(String money, String prefix) {
-		validateInteger(money, prefix);
+		validateOnlyNumbers(money, prefix);
+		validateRange(money, prefix);
 		validatePositive(Integer.parseInt(money), prefix);
 		validateDivisible(Integer.parseInt(money), prefix);
 	}
 
-	private void validateInteger(String money, String prefix) {
+	private void validateOnlyNumbers(String money, String prefix) {
+		if (money.chars().anyMatch(each -> !Character.isDigit(each))) {
+			throw new IllegalArgumentException(prefix + NOT_ONLY_NUMBERS);
+		}
+	}
+
+	private void validateRange(String money, String prefix) {
 		try {
-			Integer.parseInt(money);
+			if (Integer.parseInt(money) > MAXIMUM_INTEGER_RANGE) {
+				throw new IllegalArgumentException(prefix + NOT_INTEGER_RANGE);
+			}
 		} catch (IllegalArgumentException illegalArgumentException) {
-			throw new IllegalArgumentException(prefix + NOT_INTEGER);
+			throw new IllegalArgumentException(prefix + NOT_INTEGER_RANGE);
 		}
 	}
 
