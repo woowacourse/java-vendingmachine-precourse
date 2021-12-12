@@ -27,4 +27,12 @@ public class Product {
         }
         this.quantity -= 1;
     }
+
+    public static boolean isZeroQuantity(Product product){
+        if(product.quantity == 0){
+            return true;
+        }
+        return false;
+    }
+
 }

@@ -23,6 +23,14 @@ public class VendingMachineRepository {
         return findProduct;
     }
 
+    public Product findByPrice(int price){
+        List<Product> products = vendingMachine.getProducts();
+        return products.stream()
+                .filter(product -> product.getPrice() == price)
+                .findAny()
+                .get();
+    }
+
     public int findMinPrice(){
         List<Product> products = vendingMachine.getProducts();
         return products.stream()

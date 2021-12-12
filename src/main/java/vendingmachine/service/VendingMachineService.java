@@ -12,6 +12,7 @@ import java.util.*;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
+import static vendingmachine.domain.Product.isZeroQuantity;
 
 public class VendingMachineService {
 
@@ -74,7 +75,7 @@ public class VendingMachineService {
         while(true){
             System.out.println("투입 금액: " + balance + "원");
             try{
-                if(!balanceCheck(balance)) {
+                if(!availableCheck(balance)) {
                     printChange(balance);
                     break;
                 }
@@ -90,35 +91,50 @@ public class VendingMachineService {
     private void printChange(int balance){
         int change = vendingMachineRepository.findChange();
         List<Integer> vendingMachineCoins = vendingMachineRepository.findCoins();
+
         if(balance > change){
             OutputView.printVendingMachineCoins(vendingMachineCoins.stream().mapToInt(i->i).toArray());
             return;
         }
 
+        int[] changeCoinList = makeChangeCoinList(vendingMachineCoins, balance);
+
+        OutputView.printChangeCoins(changeCoinList);
+    }
+
+    private int[] makeChangeCoinList(List<Integer> vendingMachineCoins, int balance){
         int[] changeCoinList = new int[4];
         int i = 0;
         for(Coin coin : Coin.values()){
             int coinNum = coin.calculateChange(balance);
             if(coinNum > vendingMachineCoins.get(i)){
                 coinNum = vendingMachineCoins.get(i);
-            }
-            changeCoinList[i] = coinNum;
-            balance -= coin.multiply(coinNum);
-            if(balance == 0){
-                break;
+                changeCoinList[i] = coinNum;
+                balance -= coin.multiply(coinNum);
+                if(balance == 0){
+                    break;
+                }
+                i++;
             }
         }
-        OutputView.printChangeCoins(changeCoinList);
+        return changeCoinList;
     }
 
-    private boolean balanceCheck(int balance){
-        if(balance < vendingMachineRepository.findMinPrice()){
+    private boolean availableCheck(int balance){
+        int minPrice = vendingMachineRepository.findMinPrice();
+        if(balance < minPrice){
             return false;
         }
+
+        if(isZeroQuantity(vendingMachineRepository.findByPrice(minPrice))){
+            return false;
+        }
+
         List<Integer> quantities = vendingMachineRepository.findAllQuantity();
         if(quantities.stream().mapToInt(Integer::intValue).sum() == 0){
             return false;
         }
+
         return true;
     }
 
