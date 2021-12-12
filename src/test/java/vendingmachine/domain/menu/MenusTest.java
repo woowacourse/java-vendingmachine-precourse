@@ -10,6 +10,7 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.domain.coin.Coins;
 
 class MenusTest {
+
 	@ParameterizedTest
 	@ValueSource(strings = {"", ";", "상품정보1;상품정보2;", ";상품정보1;상품정보2"})
 	void validateDelimetersTest(String input) {
@@ -18,6 +19,15 @@ class MenusTest {
 		);
 
 		assertEquals("[ERROR] 각 상품 정보는 세미콜론(;)으로 구분합니다.", exception.getMessage());
+	}
+
+	@Test
+	void validateDuplicationTest() {
+		Throwable exception = assertThrows(IllegalArgumentException.class, () -> {
+				Menus menus = Menus.from("[콜라,300,2];[콜라,400,15]");
+			}
+		);
+		assertEquals("[ERROR] 상품명은 중복될 수 없습니다.", exception.getMessage());
 	}
 
 	@Test
