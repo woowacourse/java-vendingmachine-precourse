@@ -15,17 +15,11 @@ public class GoodsController {
     }
 
     public boolean checkQuantity(Goods goods) {
-        if (goods.quantity > 0) {
-            return true;
-        }
-        return false;
+        return goods.quantity > 0;
     }
 
     public boolean checkMoney(Goods goods, int userMoney) {
-        if (goods.price <= userMoney) {
-            return true;
-        }
-        return false;
+        return goods.price <= userMoney;
     }
 
     public boolean checkAvailablePurchase(Goods goods, String name, int userMoney) {
