@@ -9,4 +9,6 @@ public class Message {
 	public static final String REMAINING = "잔돈";
 	public static final String INPUT_MONEY = "투입 금액: ";
 	public static final String MONEY_UNIT = "원";
+	public static final String COUNT_UNIT = "개";
+	public static final String COIN_DELIMITER = " - ";
 }

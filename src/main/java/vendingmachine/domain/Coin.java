@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
-import java.util.List;
+import vendingmachine.view.messages.Message;
 
 public enum Coin {
 	COIN_500(500),
@@ -64,10 +63,10 @@ public enum Coin {
 
 	@Override
 	public String toString() {
-		return amount + "원" + " - " + numberOfCoin + "개";
+		return amount + Message.MONEY_UNIT + Message.COIN_DELIMITER + numberOfCoin + Message.COUNT_UNIT;
 	}
 
 	public String toStringRemainingNumber() {
-		return amount + "원" + " - " + remainingNumber + "개";
+		return amount + Message.MONEY_UNIT + Message.COIN_DELIMITER + remainingNumber + Message.COUNT_UNIT;
 	}
 }
