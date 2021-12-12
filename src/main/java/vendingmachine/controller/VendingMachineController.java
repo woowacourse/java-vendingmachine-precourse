@@ -26,6 +26,7 @@ public class VendingMachineController {
         initializeInsertAmount();
         while (vendingMachine.isBuyAbleProductRemain()) {
             SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
+            vendingMachine.buyProduct(typeProductToBuy());
         }
     }
 
@@ -60,12 +61,12 @@ public class VendingMachineController {
         }
     }
 
-    private String typeProductToBuy() {
+    private Product typeProductToBuy() {
         try {
-            String productToBuy = InputView.inputProductToBuy();
-            ProductInfoValidator.validateName(productToBuy);
-            ProductInfoValidator.validateProductNameDropped(productToBuy);
-            return productToBuy;
+            String productNameToBuy = InputView.inputProductToBuy();
+            ProductInfoValidator.validateName(productNameToBuy);
+            ProductInfoValidator.validateProductNameDropped(productNameToBuy);
+            return vendingMachine.findProduct(productNameToBuy);
         } catch (IllegalArgumentException e) {
             ErrorMessageOutputView.printErrorMessage(e.getMessage());
             return typeProductToBuy();

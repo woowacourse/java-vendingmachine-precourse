@@ -6,6 +6,8 @@ import java.util.List;
 
 public class VendingMachine {
 
+    private static final String PRODUCT_NOT_FOUND_ERROR_MESSAGE= "상품명과 일치하는 상품이 존재하지 않습니다.";
+
     private int insertAmount;
     private CoinCase coinCase;
     private List<Product> productStorage;
@@ -46,5 +48,12 @@ public class VendingMachine {
                 return true;
         }
         return false;
+    }
+
+    public Product findProduct(final String productName) {
+        return productStorage.stream()
+            .filter(product -> product.getName().equals(productName))
+            .findFirst()
+            .orElseThrow(() -> new IllegalArgumentException(PRODUCT_NOT_FOUND_ERROR_MESSAGE));
     }
 }
