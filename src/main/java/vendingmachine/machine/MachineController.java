@@ -4,7 +4,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class MachineController {
     Coin[] coins = Coin.values();
@@ -34,5 +33,24 @@ public class MachineController {
 
     public boolean checkIsFullCurrentAmount() {
         return this.currentAmount == machine.getHoldingAmount();
+    }
+
+    public Coin compareCoin(int amount) {
+        for (Coin coin : coins) {
+            if (coin.getCoinAmount() == amount) {
+                return coin;
+            }
+        }
+        return coins[0];
+    }
+
+
+    public void makeCoins() {
+        while (!checkIsFullCurrentAmount()) {
+            int random = pickRandomCoin();
+            if (checkIsRightRandom(random)) {
+                compareCoin(random).setCoinNumber();
+            }
+        }
     }
 }
