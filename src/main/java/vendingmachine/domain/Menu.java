@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.ExceptionMessages.UNKNOWN_MERCHANDISE_NAME_EXCEPTION;
+
 import java.util.List;
 
 public class Menu {
@@ -14,7 +16,7 @@ public class Menu {
             if (!merchandise.getName().equals(name)) continue;
             return merchandise;
         }
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException(UNKNOWN_MERCHANDISE_NAME_EXCEPTION);
     }
 
     public boolean canBuyMore(int moneyLeft) {
