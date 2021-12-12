@@ -44,7 +44,8 @@
   - Coin.java
   - Product.java
   - VendingMachine.java
-  - Wallet.java
+  - WalletSystem.java
+  - WalletPrinter.java
   
  utils
   - datatypechecker
@@ -82,8 +83,9 @@
   - 동전을 Map으로 저장하는 필드
   - 입력 받은 보유금으로 랜덤한 동전을 생성하는 함수
 
-- WalletUI class
+- WalletPrinter class
   - 보유 중인 동전 정보를 출력하는 함수
+  - 남은 투입 금액을 출력하는 함수
   - 잔돈을 반환하는 함수
     - 최소 개수로 반환하는 알고리즘 구현
 
