@@ -1,5 +1,7 @@
 package vendingmachine.utils;
 
+import java.util.Arrays;
+
 public class VerificationUtil {
 
     private static final String REGEX = "^\\[[a-zA-Z가-힣]+,[1-9][0-9]+0,[1-9][0-9]*]$";
@@ -12,6 +14,15 @@ public class VerificationUtil {
 
         validatePositiveNumber(holdingAmount);
         validateMultipleOfTen(holdingAmount);
+    }
+
+    public static void validateProductInput(String input) {
+        Arrays.stream(input.split(";"))
+                .filter(s -> !s.matches(REGEX))
+                .findAny()
+                .ifPresent(s -> {
+                    throw new IllegalArgumentException("[ERROR] 잘못된 상품 입력입니다.");
+                });
     }
 
     private static int getValidatedNumber(String input) {
