@@ -13,7 +13,7 @@ public class OutputView {
 	public static void outputAllCoinQuantity(ResponseAllCoinQuantity responseAllCoinQuantity) {
 		HashMap<Coin, Quantity> coins = responseAllCoinQuantity.getCoins();
 		System.out.println(RESPONSE_ALL_COIN_QUANTITY_MESSAGE);
-		for (Coin coin : coins.keySet()) {
+		for (Coin coin : Coin.values()) {
 			int amount = coin.get();
 			int quantity = coins.get(coin).get();
 			String message = String.format(RESPONSE_ALL_COIN_QUANTITY_FORM, amount, quantity);
