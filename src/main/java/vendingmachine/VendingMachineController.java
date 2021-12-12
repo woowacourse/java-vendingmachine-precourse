@@ -27,4 +27,8 @@ public class VendingMachineController {
 		return vendingMachineService.getInsertMoney();
 	}
 
+	public boolean isPurchasable() {
+		return vendingMachineService.isPurchasable();
+	}
+
 }
