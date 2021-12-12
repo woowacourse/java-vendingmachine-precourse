@@ -38,6 +38,11 @@ public class ItemService {
 			.collect(Collectors.toList());
 	}
 
+	public boolean isEnoughQuantityForItems(List<Item> items) {
+		return !items.stream()
+			.allMatch(item -> item.isEnoughQuantity() == false);
+	}
+
 	private Item splitItem(String itemString) {
 		String itemWithoutBrackets = itemInputValidator.deleteBrackets(itemString);
 		List<String> elementList = Arrays.asList(itemWithoutBrackets.split(","));
@@ -46,5 +51,6 @@ public class ItemService {
 		int quantity = Integer.parseInt(elementList.get(ITEM_QUANTITY_INDEX));
 		return new Item(itemName, price, quantity);
 	}
+
 
 }
