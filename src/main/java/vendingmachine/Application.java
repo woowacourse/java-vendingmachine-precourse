@@ -22,7 +22,80 @@ public class Application {
         printCurrentMachineCoin();
         ArrayList<Product> products = inputProductNamePriceAmount();
         insertMoneyByUser();
+        startVendingMachine(products);
     }
+
+    public static HashMap<Integer, Integer> startVendingMachine(ArrayList<Product> products){
+        while(isUserMoneyAndMachineInventoryEnough(products)){
+            try {
+                purchaseProduct(products);
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
+        return changesBack();
+    }
+
+    public static Product findPurchaseProduct(ArrayList<Product> products, String purchaseProductName){
+        Product purchaseProductObject= null;
+        for(Product product: products){
+            if(product.getName().equals(purchaseProductName)){
+                purchaseProductObject = product;
+                break;
+            }
+        }
+        return purchaseProductObject;
+    }
+
+    public static void purchaseProduct(ArrayList<Product> products) throws IllegalArgumentException {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        String purchaseProductName = Console.readLine();
+        Product purchaseProductObject = findPurchaseProduct(products, purchaseProductName);
+        productNotFound(purchaseProductObject);
+        productAmountNotEnough(purchaseProductObject);
+        userMoneyNotEnough(purchaseProductObject);
+        purchaseSuccess(purchaseProductObject);
+    }
+
+    public static void purchaseSuccess(Product product){
+        product.sold();
+        USER_MONEY -= product.getPrice();
+    }
+
+    public static HashMap<Integer, Integer> changesBack(){
+        HashMap<Integer, Integer> changes = new HashMap<>();
+        Coin[] eachCoin = Coin.values();
+        for(Coin c: eachCoin){
+            findChanges(c, changes);
+        }
+        printChanges(changes);
+        return changes;
+    }
+
+    public static void printChanges(HashMap<Integer, Integer> changes){
+        List<Map.Entry<Integer, Integer>> entryList = new LinkedList<>(changes.entrySet());
+        entryList.sort((o1, o2) -> o2.getKey() - o1.getKey());
+        System.out.println("잔");
+        for(Map.Entry<Integer, Integer> entry : entryList){
+            if(entry.getValue() != 0){
+                System.out.println(entry.getKey() + "원 - " + entry.getValue() + "개");
+            }
+        }
+    }
+
+    public static void findChanges(Coin coin, HashMap<Integer, Integer> changes){
+        if(coin.getAmount() < USER_MONEY && coin.getCount() > 0 && USER_MONEY >= 10){
+            int coinCount = USER_MONEY / coin.getAmount();
+            if(USER_MONEY / coin.getAmount() > coin.getCount()){
+                coinCount = coin.getCount();
+            }
+            changes.put(coin.getAmount(), coinCount);
+            USER_MONEY -= coinCount * coin.getAmount();
+        }
+    }
+
+
+
     public static void insertMoneyByUser(){
         String userMoney = "";
         while(userMoney.isEmpty()){
