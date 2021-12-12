@@ -1,12 +1,17 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import vendingmachine.utils.Validator;
 
 public class Merchandise {
-	private String name;
-	private Money money;
+	public static String MERCHANDISE_INFORMATION_PARSER = ",";
+	public static String MERCHANDISE_PARSER = ";";
+
+	private final String name;
+	private final Money money;
 	private int quantity;
 
 	public Merchandise(String name, Money money, int quantity) {
@@ -29,8 +34,26 @@ public class Merchandise {
 		return quantity;
 	}
 
-	public void sellMerchandise() {
+	public void decreaseQuantity() {
 		quantity--;
+	}
+
+	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
+		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
+		Validator.validateEmptyMerchandiseInformation(informations);
+		Validator.validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
+		return new Merchandise(informations[0].trim(), new Money(Integer.parseInt(informations[1].trim())),
+			Integer.parseInt(informations[2].trim()));
+	}
+
+	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
+		List<Merchandise> merchandiseList = new ArrayList<>();
+		for (String merchandiseInformation : merchandiseInformations.split(MERCHANDISE_PARSER)) {
+			Validator.validateInputMerchandise(merchandiseInformation);
+			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1).trim();
+			merchandiseList.add(constructMerchandise(merchandise));
+		}
+		return merchandiseList;
 	}
 
 	@Override
