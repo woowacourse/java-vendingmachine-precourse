@@ -38,7 +38,12 @@ public class Validator {
 
         for (String product : products) {
             validateInputEnclosedInBracket(product);
-            validateInputDividedByComma(product);
+
+            String disClosed = product.replaceAll("[]\\[]", "");
+            String[] elements = Arrays.stream(disClosed.split(","))
+                    .filter(s -> !s.isEmpty())
+                    .toArray(String[]::new);
+            validateProductContainThreeElements(elements);
         }
     }
 
@@ -48,16 +53,9 @@ public class Validator {
         }
     }
 
-    private static void validateInputDividedByComma(String product) throws IllegalArgumentException {
-        product = product.replaceAll("[]\\[]", "");
-        String[] str = Arrays.stream(product.split(","))
-                .filter(s -> !s.isEmpty())
-                .toArray(String[]::new);
-        if (str.length != PRODUCT_INFO_LENGTH) {
+    private static void validateProductContainThreeElements(String[] elements) throws IllegalArgumentException {
+        if (elements.length != PRODUCT_INFO_LENGTH) {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_IS_NOT_RIGHT_FORM_ERROR_STRING);
-        }
-        if (!isPositiveNumber(str[PRODUCT_INFO_LENGTH - 1]) || !isPositiveNumber(str[PRODUCT_INFO_LENGTH - 2])) {
-            throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_PRICE_QUANTITY_FORM_ERROR_STRING);
         }
     }
 }
