@@ -3,6 +3,8 @@ package vendingmachine.util;
 import vendingmachine.message.Error;
 import vendingmachine.model.Product;
 
+import static vendingmachine.message.Error.WRONG_INFO_FORMAT;
+
 public class ProductBuilder {
 	private static final String LEFT_BRACKET = "[";
 	private static final String RIGHT_BRACKET = "]";
@@ -12,8 +14,13 @@ public class ProductBuilder {
 	private static final int INFO_STOCK_INDEX = 2;
 
 	public Product makeProductFromInfo(String rawInfo) {
-		String[] info = rawInfo.replace(LEFT_BRACKET, "").replace(RIGHT_BRACKET, "").split(INFO_DELIM);
-		validateInfoArr(info);
+		String[] info;
+		try {
+			info = rawInfo.replace(LEFT_BRACKET, "").replace(RIGHT_BRACKET, "").split(INFO_DELIM);
+			validateInfoArr(info);
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new IllegalArgumentException(WRONG_INFO_FORMAT);
+		}
 		return new Product(info[INFO_NAME_INDEX], Integer.parseInt(info[INFO_PRICE_INDEX]), Integer.parseInt(info[INFO_STOCK_INDEX]));
 	}
 
