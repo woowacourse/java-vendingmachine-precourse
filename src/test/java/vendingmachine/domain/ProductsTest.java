@@ -28,10 +28,11 @@ class ProductsTest {
         // given
         List<Product> input = Arrays.asList(new Product("콜라", 1500, 20));
         Products products = new Products(input);
+        Money money = Money.init();
 
         // when & then
         assertThatExceptionOfType(IllegalArgumentException.class)
-            .isThrownBy(() -> products.purchaseProduct("사이다"))
+            .isThrownBy(() -> products.purchaseProduct(money, "사이다"))
             .withMessage("[ERROR] 상품의 이름을 찾을 수 없습니다.");
     }
 }

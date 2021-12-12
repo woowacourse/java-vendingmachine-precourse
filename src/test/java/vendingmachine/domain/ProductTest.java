@@ -60,10 +60,27 @@ class ProductTest {
         int price = 1500;
         int remainAmount = 0;
         Product product = new Product(name, price, remainAmount);
+        Money money = Money.init();
 
         // when & then
         assertThatExceptionOfType(RuntimeException.class)
-            .isThrownBy(() -> product.purchaseProduct())
+            .isThrownBy(() -> product.purchaseProduct(money))
             .withMessage("[ERROR] 상품의 수량이 0보다 작은 경우 더이상 구매할 수 없습니다.");
+    }
+
+    @Test
+    @DisplayName("가격이 현재 금액보다 클 경우 exception이 발생해야 한다.")
+    void purchaseProductExceptionByCantPurchaseMoneyTest() {
+        // given
+        String name = "콜라";
+        int price = 1500;
+        int remainAmount = 1;
+        Product product = new Product(name, price, remainAmount);
+        Money money = Money.init();
+
+        // when & then
+        assertThatExceptionOfType(RuntimeException.class)
+            .isThrownBy(() -> product.purchaseProduct(money))
+            .withMessage("[ERROR] 현재 돈으로는 구매할 수 없는 상품의 가격입니다.");
     }
 }

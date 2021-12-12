@@ -34,8 +34,9 @@ public class Product {
         return this.name.equals(name);
     }
 
-    public int purchaseProduct() {
+    public int purchaseProduct(Money money) {
         checkRemainAmount();
+        checkCanPurchaseMoney(money);
         remainAmount--;
         return price;
     }
@@ -43,6 +44,12 @@ public class Product {
     public void checkRemainAmount() {
         if (remainAmount <= 0) {
             throw new RuntimeException("[ERROR] 상품의 수량이 0보다 작은 경우 더이상 구매할 수 없습니다.");
+        }
+    }
+
+    public void checkCanPurchaseMoney(Money money) {
+        if (money.currentMoney() < price) {
+            throw new RuntimeException("[ERROR] 현재 돈으로는 구매할 수 없는 상품의 가격입니다.");
         }
     }
 

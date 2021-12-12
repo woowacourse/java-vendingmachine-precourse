@@ -55,4 +55,8 @@ public class Money {
         checkMoneyIntegerFormat(money);
         this.money += Integer.parseInt(money);
     }
+
+    public int currentMoney() {
+        return money;
+    }
 }

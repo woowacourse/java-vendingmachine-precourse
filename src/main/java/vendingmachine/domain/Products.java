@@ -20,9 +20,9 @@ public class Products {
         }
     }
 
-    public int purchaseProduct(String name) {
+    public int purchaseProduct(Money money, String name) {
         Product product = getProductByName(name);
-        return product.purchaseProduct();
+        return product.purchaseProduct(money);
     }
 
     private Product getProductByName(String name) {
