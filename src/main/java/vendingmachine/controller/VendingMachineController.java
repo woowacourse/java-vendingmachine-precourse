@@ -11,6 +11,8 @@ import vendingmachine.service.VendingMachineService;
 
 import java.util.List;
 
+import static vendingmachine.view.OutputView.*;
+
 public class VendingMachineController {
 
     private final ChangeService changeService = new ChangeService();
@@ -18,14 +20,26 @@ public class VendingMachineController {
     private final ProductService productService = new ProductService();
     private final VendingMachineService vendingMachineService = new VendingMachineService();
 
+    public void runVendingMachine() {
+        VendingMachine vendingMachine = initVendingMachine();
+
+        vendingMachineService.progressVendingMachine(vendingMachine);
+
+        printVendingMachineChangeResult(vendingMachine);
+    }
+
     private VendingMachine initVendingMachine() {
-        Money money = moneyService.createMoney();
+        Money money = moneyService.createHoldingMoney();
 
         Change change = changeService.crateChange(money);
 
-        List<Product> productList = productService.createProductListWithInput();
+        printVendingMachineChange(change);
 
-        VendingMachine vendingMachine = vendingMachineService.createVendingMachine(change, productList, money);
+        List<Product> productList = productService.createProducts();
+
+        Money inputMoney = moneyService.createInputMoney();
+
+        VendingMachine vendingMachine = vendingMachineService.createVendingMachine(change, productList, inputMoney);
 
         return vendingMachine;
     }
