@@ -18,4 +18,12 @@ public class ViewManagerConfig {
 			ViewConfig.getCommonErrorView()
 		);
 	}
+
+	public static ViewManager getDepositManager() {
+		return new ViewManager(
+			ViewConfig.getDepositInputView(),
+			ViewConfig.getCommonOutputView(),
+			ViewConfig.getCommonErrorView()
+		);
+	}
 }

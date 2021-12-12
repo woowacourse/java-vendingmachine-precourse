@@ -12,15 +12,24 @@ import vendingmachine.job.PurchaseJob;
 public class JobConfig {
 
 	public static ChangeSafeJob getChangeSafeJob() {
-		return new ConsoleChangeSafeJob();
+		return new ConsoleChangeSafeJob(
+			ViewManagerConfig.getChangeSafeViewManager(),
+			ControllerConfig.getChangeSafeController()
+		);
 	}
 
 	public static ProductJob getProductJob() {
-		return new ConsoleProductJob();
+		return new ConsoleProductJob(
+			ViewManagerConfig.getProductViewManager(),
+			ControllerConfig.getProductController()
+		);
 	}
 
 	public static DepositJob getDepositJob() {
-		return new ConsoleDepositJob();
+		return new ConsoleDepositJob(
+			ViewManagerConfig.getDepositManager(),
+			ControllerConfig.getDepositController()
+		);
 	}
 
 	public static PurchaseJob getPurchaseJob() {
