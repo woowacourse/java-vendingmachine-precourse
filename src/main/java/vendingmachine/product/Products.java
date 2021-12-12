@@ -67,7 +67,7 @@ public class Products {
 
 	public void validateProductName(String productName) {
 		if(!products.containsKey(productName)) {
-			throw new DomainNotFoundException(Notification.PRODUCT_NOT_FOUND.getMessage());
+			throw new IllegalArgumentException(Notification.PRODUCT_NOT_FOUND.getMessage());
 		}
 	}
 

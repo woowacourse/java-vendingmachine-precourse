@@ -13,7 +13,7 @@ public class VendingMachine {
 	}
 
 	public void addProductAll(Products products) {
-		products.addAll(products);
+		this.products.addAll(products);
 	}
 
 	public void addCoinAll(Coins coins) {

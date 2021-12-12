@@ -11,7 +11,7 @@ public enum Notification {
 	QUANTITY_EXCEED_RANGE("[ERROR] 수량은 범위를 초과할 수 없습니다."),
 	PRODUCT_INVALID_COMPOSITION("[ERROR] 상품이 올바르게 구성되어있지 않습니다."),
 	PRODUCT_NAME_INVALID("[ERROR] 상품명이 올바르지 않습니다."),
-	PRODUCT_INSUFFICIENCY_PRICE("[ERROR] 상품명은 최소 100원 이상이여야합니다."),
+	PRODUCT_INSUFFICIENCY_PRICE("[ERROR] 상품의 금액은 최소 100원 이상이여야합니다."),
 	PRODUCT_ALREADY_EXIST("[ERROR] 동일한 상품명이 존재합니다."),
 	PRODUCT_NOT_FOUND("[ERROR] 해당 상품이 존재하지 않습니다."),
 	PRODUCT_IS_NULL("[ERROR] 상품을 올바르게 입력해주세요."),
