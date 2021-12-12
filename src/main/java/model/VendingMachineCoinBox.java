@@ -6,6 +6,9 @@ import java.util.Map;
 import utils.generator.RandomCoinPriceGenerator;
 
 public class VendingMachineCoinBox {
+	private static final int START_COIN_COUNT = 0;
+	private static final int START_TOTAL_COIN_PRICE = 0;
+	private static final int ADD_COIN_COUNT = 1;
 	private final Map<Coin, Integer> coinBox;
 
 	public VendingMachineCoinBox(int insertVendingMachineChange) {
@@ -15,15 +18,15 @@ public class VendingMachineCoinBox {
 
 	private Map<Coin, Integer> initCoinBox() {
 		final Map<Coin, Integer> coinBox = new HashMap<>();
-		coinBox.put(Coin.COIN_500, 0);
-		coinBox.put(Coin.COIN_100, 0);
-		coinBox.put(Coin.COIN_50, 0);
-		coinBox.put(Coin.COIN_10, 0);
+		coinBox.put(Coin.COIN_500, START_COIN_COUNT);
+		coinBox.put(Coin.COIN_100, START_COIN_COUNT);
+		coinBox.put(Coin.COIN_50, START_COIN_COUNT);
+		coinBox.put(Coin.COIN_10, START_COIN_COUNT);
 		return coinBox;
 	}
 
 	private void makeCoins(int insertVendingMachineChange) {
-		int totalCoinPriceInCoinBox = 0;
+		int totalCoinPriceInCoinBox = START_TOTAL_COIN_PRICE;
 		while (totalCoinPriceInCoinBox < insertVendingMachineChange) {
 			int coinPrice = RandomCoinPriceGenerator.pickRandomCoinPrice();
 			if (isTotalCoinPriceOverInputVendingMachineChange(totalCoinPriceInCoinBox, coinPrice,
@@ -32,7 +35,7 @@ public class VendingMachineCoinBox {
 			}
 			totalCoinPriceInCoinBox += coinPrice;
 			Coin coin = Coin.getCoinByPrice(coinPrice);
-			coinBox.put(coin, coinBox.get(coin) + 1);
+			coinBox.put(coin, coinBox.get(coin) + ADD_COIN_COUNT);
 		}
 	}
 
