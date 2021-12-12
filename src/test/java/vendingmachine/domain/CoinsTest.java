@@ -1,10 +1,13 @@
 package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import java.util.Map;
 import java.util.TreeMap;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
 public class CoinsTest {
@@ -27,22 +30,55 @@ public class CoinsTest {
         assertThat(result).isEqualTo(expected);
     }
 
-    @Test
+    @Nested
     @DisplayName("잔돈을 반환할 수 있다.")
-    void changeCoinsTest() {
-        // given
-        Money money = Money.valueOf("500");
-        Map<Coin, Integer> coinMap = Coin.createEmptyCoinMap();
-        coinMap.put(Coin.valueOfAmount(100), 4);
-        coinMap.put(Coin.valueOfAmount(50), 1);
-        Coins coins = new Coins(coinMap);
+    class ChangeCoinsTest {
 
-        Map<Coin, Integer> expected = new TreeMap<>(coinMap);
+        private Coins coins;
+        Map<Coin, Integer> expected;
 
-        // when
-        Map<Coin, Integer> result = coins.changeCoins(money);
+        @BeforeEach
+        void beforeEach() {
+            Map<Coin, Integer> coinMap = Coin.createEmptyCoinMap();
+            coinMap.put(Coin.valueOfAmount(100), 4);
+            coinMap.put(Coin.valueOfAmount(50), 1);
+            coins = new Coins(coinMap);
 
-        // then
-        assertThat(result).isEqualTo(expected);
+            expected = new TreeMap<>(coinMap);
+        }
+
+        @Test
+        @DisplayName("남는 금액 없이 잔돈을 반환할 수 있다.")
+        void changeCoinsTest() {
+            // given
+            Money money = Money.valueOf("450");
+            Money remainMoney = Money.init();
+
+            // when
+            Map<Coin, Integer> result = coins.changeCoins(money);
+
+            // then
+            assertAll(
+                () -> assertThat(result).isEqualTo(expected),
+                () -> assertThat(money.currentMoney()).isEqualTo(remainMoney.currentMoney())
+            );
+        }
+
+        @Test
+        @DisplayName("잔돈을 다 반환할 수 없다면 반환할 수 있는 금액만 반환한다.")
+        void changeCoinsRemainMoneyTest() {
+            // given
+            Money money = Money.valueOf("600");
+            Money remainMoney = Money.valueOf("150");
+
+            // when
+            Map<Coin, Integer> result = coins.changeCoins(money);
+
+            // then
+            assertAll(
+                () -> assertThat(result).isEqualTo(expected),
+                () -> assertThat(money.currentMoney()).isEqualTo(remainMoney.currentMoney())
+            );
+        }
     }
 }
