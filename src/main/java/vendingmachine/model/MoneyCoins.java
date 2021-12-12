@@ -1,14 +1,12 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-public class Coins {
+public class MoneyCoins {
     Map<MoneyCoin, Integer> coins = new HashMap<>();
 
-    public void addCoin(MoneyCoin coin) {
+    public void add(MoneyCoin coin) {
         if (coins.containsKey(coin)) {
             coins.put(coin, coins.get(coin) + 1);
             return;

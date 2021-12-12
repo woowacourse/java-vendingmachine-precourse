@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.Asset;
+import vendingmachine.model.Asset;
 import vendingmachine.view.InputView;
 
 public class VendingMachineController {

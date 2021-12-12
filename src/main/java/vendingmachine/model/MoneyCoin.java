@@ -1,12 +1,11 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
-import static vendingmachine.domain.Asset.*;
 import static vendingmachine.util.Validator.*;
 
 import java.util.Arrays;
 import java.util.Objects;
 
-import vendingmachine.domain.enums.Coin;
+import vendingmachine.model.enums.Coin;
 
 public class MoneyCoin {
     public static final String NOT_CORRECT_COIN_TYPE = "[ERROR] 10원, 50원, 100원, 500원 중 입력하세요";

@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Asset;
+import vendingmachine.model.Asset;
 
 public class InputView {
 

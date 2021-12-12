@@ -1,24 +1,18 @@
-package vendingmachine.domain;
-
-import camp.nextstep.edu.missionutils.Randoms;
-
-import java.util.Arrays;
-
-import vendingmachine.domain.enums.Coin;
+package vendingmachine.model;
 
 public class Asset {
 
     private MoneyBill moneyBill;
-    private final Coins coins;
+    private final MoneyCoins moneyCoins;
 
     public Asset(int amount) {
         this.moneyBill = new MoneyBill(amount);
-        this.coins = new Coins();
+        this.moneyCoins = new MoneyCoins();
     }
 
     public void generateRandomCoins() {
         while (!moneyBill.isZero()) {
-
+            moneyCoins.add(moneyBill.convertToRandomCoin());
         }
     }
 }
