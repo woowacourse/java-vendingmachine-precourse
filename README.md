@@ -93,7 +93,7 @@
 
 3. Controller
    1. TransactionController
-      - [ ] 전체 거래 프로세스를 진행하는 기능
+      - [x] 전체 거래 프로세스를 진행하는 기능
    2. UserAndItemController
       - [x] 개별 거래 프로세스를 진행하는 기능
 
