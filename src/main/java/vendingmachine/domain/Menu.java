@@ -1,9 +1,9 @@
 package vendingmachine.domain;
 
-import vendingmachine.view.InputView;
+import static vendingmachine.utils.ExceptionMessages.*;
+import static vendingmachine.constants.Constants.*;
 
-import static vendingmachine.utils.ExceptionMessages.SOLD_OUT_EXCEPTION;
-import static vendingmachine.utils.ExceptionMessages.UNKNOWN_MERCHANDISE_NAME_EXCEPTION;
+import vendingmachine.view.InputView;
 
 import java.util.List;
 
@@ -19,7 +19,7 @@ public class Menu {
             String name = InputView.getMerchandiseNameInput();
             Merchandise merchandise = this.getMerchandiseByName(name);
 
-            if (merchandise.getNumber() == 0) {
+            if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) {
                 throw new IllegalArgumentException(SOLD_OUT_EXCEPTION);
             }
             return merchandise;
@@ -32,7 +32,7 @@ public class Menu {
     public boolean hasSellableMerchandise(int moneyLeft) {
         boolean isEnoughMoney = false;
         for (Merchandise merchandise : this.merchandiseList) {
-            if (merchandise.getNumber() == 0) continue;
+            if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) continue;
             if (moneyLeft >= merchandise.getPrice()) {
                 isEnoughMoney = true;
                 break;

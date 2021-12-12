@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.utils.ExceptionMessages.SOLD_OUT_EXCEPTION;
+import static vendingmachine.constants.Constants.*;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
@@ -13,7 +13,7 @@ public class VendingMachine {
 
     private final HashMap<Coin, Integer> coins = new HashMap<>();
     private Menu menu;
-    private int customerMoneyLeft = 0;
+    private int customerMoneyLeft = NO_CUSTOMER_MONEY_LEFT;
 
     public VendingMachine() {
         int totalMoney = InputView.getTotalMoneyInput();
@@ -36,13 +36,13 @@ public class VendingMachine {
 
     private void initializeCoins(int totalMoney) {
         for (Coin coin : Coin.values()) {
-            this.coins.put(coin, 0);
+            this.coins.put(coin, ZERO_COINS);
         }
         generateCoins(totalMoney);
     }
 
     private void generateCoins(int totalMoney) {
-        while (totalMoney > 0) {
+        while (totalMoney > NO_TOTAL_MONEY_LEFT) {
             int randomCoinAmount = Randoms.pickNumberInList(Coin.getCoinsAmountDesc());
             if (totalMoney >= randomCoinAmount) {
                 Coin newCoin = Coin.getCoinByAmount(randomCoinAmount);
@@ -73,7 +73,7 @@ public class VendingMachine {
     private HashMap<Coin, Integer> calculateCoinChanges() {
         HashMap<Coin, Integer> coinChanges = new HashMap<>();
         for (Coin coin : Coin.getCoinsDesc()) {
-            if (this.coins.get(coin) == 0) continue;
+            if (this.coins.get(coin) == ZERO_COINS) continue;
             if (this.customerMoneyLeft < coin.getAmount()) continue;
             int spentCoinNumber = this.customerMoneyLeft/coin.getAmount();
             if (spentCoinNumber > this.coins.get(coin)) {
