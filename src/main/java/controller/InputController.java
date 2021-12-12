@@ -12,9 +12,9 @@ public class InputController {
 	public static int inputVendingMachineChange() {
 		while (INPUT_ERROR) {
 			try {
-				int VendingMachineChange = VendingMachineChangeValidator.checkValidVendingMachineChange(
+				int vendingMachineChange = VendingMachineChangeValidator.checkValidVendingMachineChange(
 					Console.readLine());
-				return VendingMachineChange;
+				return vendingMachineChange;
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
