@@ -9,7 +9,15 @@ public class VendingMachineController {
 
     public void run() {
         // 자판기가 보유할 금액 입력 받기
-        int amount = VendingMachineInput.insertAmount();
+        int amount = -1;
+        do {
+            try {
+                amount = VendingMachineInput.insertAmount();
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        } while (amount == -1);
+
         VendingMachine vendingMachine = new VendingMachine(amount);
 
         // 자판기가 보유한 동전 출력
