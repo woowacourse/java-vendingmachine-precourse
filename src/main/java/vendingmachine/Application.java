@@ -2,7 +2,10 @@ package vendingmachine;
 
 import static vendingmachine.view.InputView.inputMoney;
 import static vendingmachine.view.InputView.inputProducts;
+import static vendingmachine.view.InputView.inputPurChaseProductName;
 import static vendingmachine.view.InputView.inputVendinMachineOwnMoney;
+import static vendingmachine.view.OutputView.printChangeCoins;
+import static vendingmachine.view.OutputView.printCurrentMoney;
 import static vendingmachine.view.OutputView.printCurrentOwnCoins;
 import static vendingmachine.view.OutputView.printErrorMessage;
 
@@ -18,6 +21,7 @@ public class Application {
         inputVendingMachineProducts(machine);
 
         machine.chargeMoney(inputUserMoney());
+        purchaseProductAndCheckPurchasable(machine);
     }
 
     private static Money inputVendingMachineOwnMoney() {
@@ -44,6 +48,25 @@ public class Application {
         } catch (IllegalArgumentException e) {
             printErrorMessage(e);
             return inputUserMoney();
+        }
+    }
+
+    private static void purchaseProductAndCheckPurchasable(VendingMachine machine) {
+        printCurrentMoney(machine.currentMoney());
+        if (!machine.isPurchasable()) {
+            printChangeCoins(machine.changeCoins());
+            return;
+        }
+        purchaseProduct(machine);
+        purchaseProductAndCheckPurchasable(machine);
+    }
+
+    private static void purchaseProduct(VendingMachine machine) {
+        try {
+            machine.purchaseProduct(inputPurChaseProductName());
+        } catch (IllegalArgumentException e) {
+            printErrorMessage(e);
+            purchaseProduct(machine);
         }
     }
 }

@@ -63,7 +63,12 @@ public class Money {
         return this.money / coin.amount() > 0;
     }
 
+    // TODO 금액 미달 시 exception 추가
     public void decreaseByCoin(Coin coin) {
         this.money -= coin.amount();
+    }
+
+    public void useMoney(int money) {
+        this.money -= money;
     }
 }

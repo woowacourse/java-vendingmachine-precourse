@@ -20,6 +20,8 @@ public class InputView {
 
     private static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
 
+    private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
+
     private InputView() {
     }
 
@@ -76,6 +78,11 @@ public class InputView {
 
     public static String inputMoney() {
         System.out.println(INPUT_MONEY);
+        return Console.readLine();
+    }
+
+    public static String inputPurChaseProductName() {
+        System.out.println(INPUT_PURCHASE_PRODUCT);
         return Console.readLine();
     }
 }
