@@ -5,13 +5,12 @@ import vendingmachine.model.VendingMachine;
 import vendingmachine.view.UserView;
 import vendingmachine.view.VendingMachineView;
 
-public class VendingMachineService {
+public class OrderingService {
 	public VendingMachine vendingMachine;
 	public VendingMachineView vendingMachineView;
 	public UserView userView;
 
-	public VendingMachineService(VendingMachine vendingMachine, UserView userView,
-		VendingMachineView vendingMachineView) {
+	public OrderingService(VendingMachine vendingMachine, UserView userView, VendingMachineView vendingMachineView) {
 		this.vendingMachine = vendingMachine;
 		this.vendingMachineView = vendingMachineView;
 		this.userView = userView;

@@ -1,7 +1,7 @@
 package vendingmachine.model;
 
-import vendingmachine.service.OrderService;
 import vendingmachine.service.SettingMoneyService;
+import vendingmachine.service.TakingOrderService;
 
 public class VendingMachine {
 	private int insertedMoney;
@@ -29,7 +29,7 @@ public class VendingMachine {
 	}
 
 	public void takeOrder(String orderedMenu) {
-		insertedMoney -= OrderService.takeOrder(this, orderedMenu);
+		insertedMoney -= TakingOrderService.takeOrder(this, orderedMenu);
 	}
 
 	public boolean findMenu(String order) {
