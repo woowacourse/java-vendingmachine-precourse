@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.util.constant.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,13 @@ public class Change {
 
     public int getNumber() {
         return number;
+    }
+
+    @Override
+    public String toString() {
+        return coin.getAmount() + Symbol.WON +
+                Symbol.HYPHEN_SPACE +
+                number + Symbol.COUNT;
     }
 
     public void addNumber(int number) {

@@ -1,15 +1,24 @@
 package vendingmachine.model;
 
-import vendingmachine.util.InputCondition;
+import vendingmachine.util.constant.InputCondition;
+import vendingmachine.util.constant.Symbol;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Changes {
     private final List<Change> changes;
 
     public Changes() {
         this.changes = initChanges();
+    }
+
+    @Override
+    public String toString() {
+        return changes.stream()
+                .map(Change::toString)
+                .collect(Collectors.joining(Symbol.NEW_LINE));
     }
 
     public void calculateChanges(int amount) {

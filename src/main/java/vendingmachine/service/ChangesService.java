@@ -9,4 +9,8 @@ public class ChangesService {
         changes.calculateChanges(amount);
         return changes;
     }
+
+    public String getHoldingChanges(Changes changes) {
+        return changes.toString();
+    }
 }

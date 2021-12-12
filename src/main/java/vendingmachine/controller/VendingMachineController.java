@@ -29,6 +29,7 @@ public class VendingMachineController {
         // TODO: 자판기 세팅
         int amount = vendingMachineInputView.inputHoldingAmount();
         Changes changes = changesService.createChanges(amount);
+        vendingMachineOutputView.outputHoldingChanges(changesService.getHoldingChanges(changes));
     }
 
     public void turnOnVendingMachine() {

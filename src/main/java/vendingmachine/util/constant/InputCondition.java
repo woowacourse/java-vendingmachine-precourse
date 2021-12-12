@@ -1,4 +1,4 @@
-package vendingmachine.util;
+package vendingmachine.util.constant;
 
 public final class InputCondition {
     public static final String NUMBER_REGEX = "^[-]{0,1}[0-9]+";

@@ -1,7 +1,7 @@
 package vendingmachine.util.validator;
 
 import vendingmachine.util.ErrorMessage;
-import vendingmachine.util.InputCondition;
+import vendingmachine.util.constant.InputCondition;
 import vendingmachine.util.InputGenerator;
 
 public class AmountValidator implements InputValidator {
