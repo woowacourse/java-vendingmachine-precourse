@@ -22,7 +22,6 @@ public class Beverage {
 		new NumberValidator(values[2]);
 	}
 
-
 	public void sell() {
 		stock--;
 	}

@@ -18,12 +18,12 @@ public class InputController {
 		}
 	}
 
-	public static Money getUserMoney() {
+	public static Money getUserMoney(int minPrice) {
 		try {
-			return new Money(InputView.userMoneyInput());
+			return new Money(InputView.userMoneyInput(), minPrice);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
-			return getUserMoney();
+			return getUserMoney(minPrice);
 		}
 	}
 

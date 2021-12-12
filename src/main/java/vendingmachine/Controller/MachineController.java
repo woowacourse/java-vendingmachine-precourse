@@ -29,7 +29,7 @@ public class MachineController {
 		vendingMachine.initBeverages(InputController.getBeverageGroup());
 		printBreak();
 
-		vendingMachine.initUserMoney(InputController.getUserMoney());
+		vendingMachine.initUserMoney(InputController.getUserMoney(vendingMachine.getMinPrice()));
 		printBreak();
 	}
 

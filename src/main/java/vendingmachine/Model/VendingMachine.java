@@ -29,6 +29,10 @@ public class VendingMachine {
 		return userMoney;
 	}
 
+	public int getMinPrice() {
+		return beverageGroup.getMinPrice();
+	}
+
 	public void sell(String name) {
 		userMoney.setMinus(beverageGroup.getBeverage(name).price);
 		beverageGroup.getBeverage(name).sell();
