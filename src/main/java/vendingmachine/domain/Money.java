@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import vendingmachine.exception.MoneyLessThanCoinException;
 import vendingmachine.exception.MoneyPositiveIntegerValueException;
 import vendingmachine.exception.MoneyShareByLeastCoin;
 
@@ -50,7 +51,7 @@ public class Money {
 
     private void checkCoinLargerThenRemainMoney(Coin coin) {
         if (money < coin.amount()) {
-            throw new IllegalArgumentException("[ERROR] 차감하려는 동전이 현재 남아있는 금액보다 클 수 없습니다.");
+            throw new MoneyLessThanCoinException();
         }
     }
 
