@@ -63,4 +63,12 @@ public class Validator {
 				Messages.ERROR_NOT_CONTAIN_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
+
+	public static void validatePayAmount(HashMap<String, Item> ItemList, String inputName, int pay) throws
+		IllegalArgumentException {
+		if (ItemList.get(inputName).isOverThisPrice(pay)) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_ENOUGH_MONEY_MESSAGE + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
+	}
 }
