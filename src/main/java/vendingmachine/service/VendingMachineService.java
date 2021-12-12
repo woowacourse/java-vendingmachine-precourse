@@ -4,7 +4,8 @@ import vendingmachine.domain.*;
 
 import java.util.List;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import static vendingmachine.utils.VerificationUtil.checkProduct;
+import static vendingmachine.view.OutputView.printInputProductName;
 
 public class VendingMachineService {
 
@@ -20,13 +21,17 @@ public class VendingMachineService {
 
     public void progressVendingMachine(VendingMachine vendingMachine) {
         while (vendingMachine.checkProgress()) {
-            System.out.println("\n투입 금액: " + vendingMachine.getRestMoney());
+            int restMoney = vendingMachine.getRestMoney();
 
-            System.out.println("구매할 상품명을 입력해 주세요.");
+            String productName = printInputProductName(restMoney);
 
-            String productName = readLine();
+            try {
+                checkProduct(vendingMachine, productName);
 
-            vendingMachine.extractProduct(productName);
+                vendingMachine.extractProduct(productName);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
         }
     }
 }
