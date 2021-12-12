@@ -24,6 +24,7 @@ public class VendingMachineController {
 		inputProducts();
 		inputMoney();
 		doShopping();
+		returnChange();
 	}
 
 	public void inputPossession() {
@@ -71,6 +72,12 @@ public class VendingMachineController {
 		if (!products.canSell(productName, inputMoney)) {
 			throw new IllegalArgumentException(PRODUCT_NOT_BUY_MSG);
 		}
+	}
+
+	private void returnChange() {
+		change = new Change();
+		change.createGreedyCoin(possessionCoin, inputMoney.getMoney());
+		reportChange(change);
 	}
 
 }
