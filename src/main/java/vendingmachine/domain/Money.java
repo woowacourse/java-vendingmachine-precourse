@@ -11,6 +11,10 @@ public class Money {
         this.money = money;
     }
 
+    public static Money init() {
+        return new Money(EMPTY_MONEY);
+    }
+
     public static Money valueOf(String inputMoney) {
         checkMoneyIntegerFormat(inputMoney);
         int money = Integer.parseInt(inputMoney);

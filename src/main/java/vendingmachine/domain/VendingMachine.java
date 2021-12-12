@@ -6,6 +6,7 @@ public class VendingMachine {
 
     private final Coins coins;
     private final Products products;
+    private final Money remainMoney = Money.init();
 
     public VendingMachine(Coins coins, Products products) {
         this.coins = coins;
