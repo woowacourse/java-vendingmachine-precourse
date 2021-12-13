@@ -46,10 +46,10 @@ public class ItemStorage {
 	}
 
 	public void reduceItemQuantity(String name) {
-		gitItemByName(name).reduceQuantity();
+		getItemByName(name).reduceQuantity();
 	}
 
-	private Item gitItemByName(String name) {
+	private Item getItemByName(String name) {
 		return itemList.stream()
 				.filter(item -> Objects.equals(item.getName(), name))
 				.findAny()
