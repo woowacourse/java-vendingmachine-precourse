@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import vendingmachine.service.VendingMachineService;
 
-class VendingMachineControllerServiceTest {
+class VendingMachineServiceTest {
 
     @ParameterizedTest
     @DisplayName("10으로 나눠떨어지는 정상적인 금액을 입력받는다.")
