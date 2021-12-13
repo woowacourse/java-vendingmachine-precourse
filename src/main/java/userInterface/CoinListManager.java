@@ -10,16 +10,17 @@ import utils.InputManager;
 import vendingmachine.Coin;
 import vendingmachine.Coins;
 
-public class CoinListMaker {
+public class CoinListManager {
 	private int deposit = 0;
 	private Coins coinList;
 
-	CoinListMaker(Coins coinList) {
+	public CoinListManager(Coins coinList) {
 		this.coinList = coinList;
 		initDeposit();
 	}
 
 	private void initDeposit() {
+		System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
 		isAmount validator = new isAmount();
 		InputManager inputManager = new InputManager();
 		String input = inputManager.getStringWithInput(validator);
@@ -45,5 +46,13 @@ public class CoinListMaker {
 		IntStream.range(0,maxCount+1).forEach(i -> numList.add(i));
 
 		return Randoms.pickNumberInList(numList);
+	}
+
+	public void printCoinList() {
+		System.out.println("자판기가 보유한 동전");
+
+		coinList.keySet().forEach(coin -> {
+			System.out.printf("%s원 - %d개\n",coin.toString(),coinList.get(coin));
+		});
 	}
 }

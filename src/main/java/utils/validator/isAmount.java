@@ -11,6 +11,6 @@ public class isAmount implements Validator{
 
 	private boolean isNegative(StringBuilder input) {
 		int amount = Integer.parseInt(input.toString());
-		return amount >= 0;
+		return amount <= 0;
 	}
 }
