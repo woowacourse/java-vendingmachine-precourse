@@ -40,4 +40,12 @@ public class Catalog {
 	public void purchase() {
 		this.amount--;
 	}
+
+	public boolean isCheaperThan(int userAccount) {
+		return price <= userAccount;
+	}
+
+	public boolean isExist() {
+		return amount > 0;
+	}
 }

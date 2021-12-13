@@ -13,8 +13,7 @@ public class PurchaseController {
 		while (!isEnd()) {
 			UserAccountView.printUserAccount();
 			Catalog catalogToPurchase = getCatalogInput();
-			UserAccount.purchase(catalogToPurchase);
-			CatalogRepository.reduceAmount(catalogToPurchase);
+			PurchaseService.purchase(catalogToPurchase);
 		}
 		UserAccountView.printUserAccount();
 	}
@@ -23,7 +22,7 @@ public class PurchaseController {
 		PurchaseView.printGuide();
 		Catalog catalog = null;
 		while (catalog == null) {
-			catalog = PurchaseService.getCatalogInput();
+			catalog = PurchaseService.getValidCatalogInput();
 		}
 		return catalog;
 	}

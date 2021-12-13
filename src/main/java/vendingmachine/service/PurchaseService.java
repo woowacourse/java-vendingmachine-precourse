@@ -11,24 +11,21 @@ import vendingmachine.repository.CatalogRepository;
 import vendingmachine.view.exception.ErrorMessage;
 
 public class PurchaseService {
-	private static final int NO_MORE_CATALOG = 0;
 
 	public static boolean checkEndCondition() {
 		int userAccount = UserAccount.getAccount();
 		List<Catalog> catalogList = CatalogRepository.getCatalogs();
 
 		for (Catalog catalog : catalogList) {
-			int catalogPrice = catalog.getPrice();
-			int catalogAmount = catalog.getAmount();
-			if (catalogPrice <= userAccount
-				&& catalogAmount != NO_MORE_CATALOG) {
+			if(catalog.isCheaperThan(userAccount)
+				&& catalog.isExist()){
 				return false;
 			}
 		}
 		return true;
 	}
 
-	public static Catalog getCatalogInput() {
+	public static Catalog getValidCatalogInput() {
 		try {
 			String catalogName = Console.readLine();
 			return getValidCatalog(catalogName);
@@ -44,5 +41,10 @@ public class PurchaseService {
 		checkExistCatalog(catalog);
 		checkCanPurchase(catalog);
 		return catalog;
+	}
+
+	public static void purchase(Catalog catalogToPurchase) {
+		UserAccount.purchase(catalogToPurchase);
+		CatalogRepository.reduceAmount(catalogToPurchase);
 	}
 }
