@@ -49,12 +49,16 @@ public class Coins {
     public Map<Coin, Integer> exchange(int amount) {
         Map<Coin, Integer> userCoins = new TreeMap<>();
         final int[] inputAmount = {amount};
-        coins.forEach((coin, count) -> IntStream.range(START_INDEX, count).forEach(i -> {
-            if (coin.isOrLess(inputAmount[START_INDEX])) {
-                inputAmount[START_INDEX] -= coin.getAmount();
-                userCoins.put(coin, userCoins.getOrDefault(coin, COIN_DEFAULT_COUNT) + SELECT_COIN_COUNT);
-            }
-        }));
+        coins.forEach((coin, count) -> IntStream.range(START_INDEX, count).forEach(i ->
+            insertIntoUserCoin(userCoins, inputAmount, coin)
+        ));
         return userCoins;
+    }
+
+    private void insertIntoUserCoin(Map<Coin, Integer> userCoins, int[] inputAmount, Coin coin) {
+        if (coin.isOrLess(inputAmount[START_INDEX])) {
+            inputAmount[START_INDEX] -= coin.getAmount();
+            userCoins.put(coin, userCoins.getOrDefault(coin, COIN_DEFAULT_COUNT) + SELECT_COIN_COUNT);
+        }
     }
 }
