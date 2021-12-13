@@ -10,6 +10,10 @@ public class ChangeAccountant {
 
     public Coins change(int amountToChange, Coins coinBalance) {
         initialize(amountToChange, coinBalance);
+        if(coinBalance.hasSmallerOrEqualAmount(amountToChange)) {
+            updateAmountToChangeAfterExchange(coinBalance.getAmount());
+            return coinBalance;
+        }
         Coin.getAllKindsOfCoinFromLargestToSmallest().forEach(this::changeToEachCoin);
         return changes;
     }
@@ -24,10 +28,14 @@ public class ChangeAccountant {
         this.coinBalance = coinBalance;
     }
 
+    private void updateAmountToChangeAfterExchange(int amountExchangedForCoin) {
+        amountToChange -= amountExchangedForCoin;
+    }
+
     private void changeToEachCoin(Coin coinUnit) {
         int numberOfCoinToChange = accountWithinBalance(coinUnit, accountMaxWithinAmountByCoinUnit(coinUnit, amountToChange));
         changes.add(coinUnit, numberOfCoinToChange);
-        amountToChange -= coinUnit.getAmount(numberOfCoinToChange);
+        updateAmountToChangeAfterExchange(coinUnit.getAmount(numberOfCoinToChange));
     }
 
     private int accountMaxWithinAmountByCoinUnit(Coin coinUnit, int amountToChange) {

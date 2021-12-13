@@ -1,6 +1,7 @@
 package vendingmachine.coin;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -35,11 +36,21 @@ class CoinsTest {
         coinsToTake.add(Coin.COIN_50, 3);
         coinsToTake.add(Coin.COIN_10, 2);
         coins.take(coinsToTake);
-        org.junit.jupiter.api.Assertions.assertAll(
+        assertAll(
                 () -> assertThat(coins.count(Coin.COIN_500)).isEqualTo(0),
                 () -> assertThat(coins.count(Coin.COIN_100)).isEqualTo(1),
                 () -> assertThat(coins.count(Coin.COIN_50)).isEqualTo(0),
                 () -> assertThat(coins.count(Coin.COIN_10)).isEqualTo(0)
         );
+    }
+
+    @Test
+    void 총액_구하기() {
+        Coins coins = new Coins();
+        coins.add(Coin.COIN_500);
+        coins.add(Coin.COIN_50);
+        int expectedResult = Coin.COIN_500.getAmount() + Coin.COIN_50.getAmount();
+
+        assertThat(coins.getAmount()).isEqualTo(expectedResult);
     }
 }

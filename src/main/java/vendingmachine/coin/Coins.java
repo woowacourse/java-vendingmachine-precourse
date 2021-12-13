@@ -35,6 +35,21 @@ public class Coins {
         }
     }
 
+    public boolean hasSmallerOrEqualAmount(int amountToCompare) {
+        if(getAmount() <= amountToCompare) {
+            return true;
+        }
+        return false;
+    }
+
+    public int getAmount() {
+        int totalAmount = 0;
+        for (Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
+            totalAmount += coinUnit.getAmount(this.count(coinUnit));
+        }
+        return totalAmount;
+    }
+
     private void initialize() {
         coins.put(Coin.COIN_500, initialNumberOfCoin);
         coins.put(Coin.COIN_100, initialNumberOfCoin);
