@@ -15,7 +15,7 @@ public class OutputView {
 		+ OUTPUT_TYPE_STRING + COUNT_UNIT;
 	private static final String HOLDING_CASH_REQUEST_TEXT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String HOLDING_COIN_TEXT = "자판기가 보유한 동전";
-	private static final String REGISTER_ITEM_REQUEST_TEXT = "자판기가 보유한 동전";
+	private static final String REGISTER_ITEM_REQUEST_TEXT = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INSERTING_MONEY_REQUEST_TEXT = "투입 금액을 입력해 주세요.";
 	private static final String PERCHASE_ITEM_REQUEST_TEXT = "투입 금액을 입력해 주세요.";
 
@@ -37,6 +37,7 @@ public class OutputView {
 		System.out.println(HOLDING_COIN_TEXT);
 		for (Map.Entry<Integer, Integer> coin : coins.findAll().entrySet()) {
 			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
+			printNewLine();
 		}
 	}
 
@@ -45,6 +46,7 @@ public class OutputView {
 		System.out.println(CHANGES);
 		for (Map.Entry<Integer, Integer> coin : changes.entrySet()) {
 			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
+			printNewLine();
 		}
 	}
 
