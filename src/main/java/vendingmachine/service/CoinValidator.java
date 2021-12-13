@@ -1,25 +1,24 @@
 package vendingmachine.service;
 
+import vendingmachine.Constants.CoinConstant;
+import vendingmachine.repository.Coin;
+
 public class CoinValidator {
 
     public void isValid(String number) {
         if (!isNumeric(number)) {
-            throw new IllegalArgumentException("[ERROR] 금액은 숫자로만 이루어져야 합니다.");
+            throw new IllegalArgumentException(CoinConstant.NON_NUMERIC_ERROR_MESSAGE);
         }
         if (!isDivideByTen(number)) {
-            throw new IllegalArgumentException("[ERROR] 금액은 10으로 나누어 떨어져야 합니다.");
+            throw new IllegalArgumentException(CoinConstant.DIVIDE_TEN_ERROR_MESSAGE);
         }
     }
 
     public boolean isNumeric(String number) {
-        String numericRegex = "[0-9]+";
-        return number.matches(numericRegex);
+        return number.matches(CoinConstant.NUMERIC_REGEX);
     }
 
     public boolean isDivideByTen(String number) {
-        if (Integer.parseInt(number) % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] 금액은 10으로 나누어 떨어져야 합니다.");
-        }
-        return true;
+        return Integer.parseInt(number) % 10 == 0;
     }
 }
