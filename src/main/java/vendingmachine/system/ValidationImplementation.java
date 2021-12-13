@@ -111,4 +111,23 @@ public class ValidationImplementation implements Validation {
         return true;
     }
 
+    @Override
+    public boolean isValidProductNameToBuy(String productName) {
+        if (!isOnlyHangle(productName)) {
+            throw new IllegalArgumentException();
+        }
+        if (isExistBlank(productName)) {
+            throw new IllegalArgumentException();
+        }
+        if (isZeroLengthString(productName)) {
+            throw new IllegalArgumentException();
+        }
+
+        return true;
+    }
+
+    private boolean isZeroLengthString(String productName) {
+        return productName.length() == 0;
+    }
+
 }
