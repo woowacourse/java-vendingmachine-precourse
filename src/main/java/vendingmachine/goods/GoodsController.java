@@ -46,4 +46,22 @@ public class GoodsController {
         }
         return false;
     }
+
+    public boolean isCheaper(int price, int cheapest) {
+        return price < cheapest;
+    }
+
+    public int isCheapest() {
+        int cheapest = 0;
+        for (Goods goods : goodsList) {
+            if (checkQuantity(goods) && isCheaper(goods.getPrice(), cheapest)) {
+                cheapest = goods.getPrice();
+            }
+        }
+        return cheapest;
+    }
+
+    public boolean isMoneyMoreThanCheapest(int userMoney) {
+        return userMoney >= isCheapest();
+    }
 }
