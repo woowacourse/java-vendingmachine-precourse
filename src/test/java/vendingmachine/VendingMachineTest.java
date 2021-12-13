@@ -35,8 +35,14 @@ public class VendingMachineTest {
     }
 
     @Test
-    void 최저가격_남은금액_초과_잔돈반환() {
+    void 최저가격_남은금액_초과_False() {
         vendingMachine.insertMoney(900);
+        assertThat(vendingMachine.isPurchasable()).isFalse();
+    }
+
+    @Test
+    void 모든상품_재고_없음_False() {
+        vendingMachine = new VendingMachine("[콜라,1500,0];[사이다,1000,0]", 450);
         assertThat(vendingMachine.isPurchasable()).isFalse();
     }
 }

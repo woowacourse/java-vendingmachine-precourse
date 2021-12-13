@@ -21,7 +21,12 @@ public class Products {
     }
 
     public boolean isPurchasable(int inputAmount) {
-        return isExceedLeastPrice(inputAmount);
+        return isExceedLeastPrice(inputAmount) && isAnyProductInStock();
+    }
+
+    private boolean isAnyProductInStock() {
+        return products.stream()
+                .anyMatch(Product::hasStock);
     }
 
     private boolean isExceedLeastPrice(int inputAmount) {

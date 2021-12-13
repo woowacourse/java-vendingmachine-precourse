@@ -45,6 +45,10 @@ public class Product {
         return price.canBuy(inputAmount);
     }
 
+    public boolean hasStock() {
+        return quantity.canBuy();
+    }
+
     private void validateInfoNotMissed(String goodsInfo) {
         if (isInfoMissed(goodsInfo.split(","))) {
             throw new IllegalArgumentException(INFO_MISSED_MESSAGE);
