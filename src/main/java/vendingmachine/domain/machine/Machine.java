@@ -7,6 +7,7 @@ import vendingmachine.domain.machine.product.Product;
 import vendingmachine.domain.machine.product.storage.ProductStorage;
 import vendingmachine.domain.machine.product.storage.ProductStorageImpl;
 import vendingmachine.domain.user.Balance;
+import vendingmachine.domain.user.User;
 
 public class Machine {
 
@@ -24,6 +25,10 @@ public class Machine {
 	public void purchaseProduct(Balance balance, String productName) {
 		Product product = productStorage.findOne(productName);
 		product.sell(balance);
+	}
+
+	public void refund(User user) {
+		coinStorage.refund(user);
 	}
 
 }

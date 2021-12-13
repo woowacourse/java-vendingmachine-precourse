@@ -35,7 +35,7 @@ public class MachineServiceImpl implements MachineService {
 
 	@Override
 	public void refundChanges() {
-
+		user.refund();
 	}
 
 }

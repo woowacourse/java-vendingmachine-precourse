@@ -16,4 +16,8 @@ public class Balance {
 		return this.money;
 	}
 
+	public boolean isNotLessThan(int money) {
+		return (this.money >= money);
+	}
+
 }

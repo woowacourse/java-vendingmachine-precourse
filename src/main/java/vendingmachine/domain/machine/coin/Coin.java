@@ -31,11 +31,15 @@ public enum Coin {
 
     public static List<Coin> getCoinsLessThen(int money) {
         return Arrays.stream(Coin.values())
-            .filter(coin -> coin.isNotMoreThan(money)).collect(Collectors.toList());
+            .filter(coin -> coin.isNotBiggerThan(money)).collect(Collectors.toList());
     }
 
-    public boolean isNotMoreThan(int money) {
+    public boolean isNotBiggerThan(int money) {
         return (amount <= money);
+    }
+
+    public boolean isBiggerThan(int money) {
+        return !isNotBiggerThan(money);
     }
 
     public int getAmount() {
