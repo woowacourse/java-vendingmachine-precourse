@@ -3,6 +3,7 @@ package vendingmachine;
 import java.util.Arrays;
 import java.util.HashMap;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.validator.InputAmountValidator;
 import vendingmachine.validator.InputBuyItemValidator;
 import vendingmachine.validator.InputItemValidator;
@@ -41,9 +42,16 @@ public class VendingMachine {
 
 	private void setCoins(int amount) {
 		for (Coin coin : Coin.values()) {
-			coins.put(coin, amount / coin.getAmount());
-			amount = amount % coin.getAmount();
+			coins.put(coin, 0);
 		}
+
+		do {
+			int randomCoinAmount = Randoms.pickNumberInList(Coin.getCoinValueList());
+			if (amount - randomCoinAmount >= 0) {
+				coins.computeIfPresent(Coin.valueOf(randomCoinAmount), (k, v) -> v + 1);
+				amount -= randomCoinAmount;
+			}
+		} while (amount > 0);
 	}
 
 	private String getInputItem() {
