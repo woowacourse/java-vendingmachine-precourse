@@ -12,13 +12,10 @@ public class MainController {
 
     public void run() {
         processOfGeneratingCoins();
-        OutputView.printCoinByVendingMachine(vendingMachine.getCoin());
-        InputController.makeProductsList(vendingMachine);
+        processOfPrintingCoin();
+        processOfMakingProductList();
         processOfInsertMoney();
-        while (vendingMachine.checkAdditionalPurchase()) {
-            OutputView.printRemainingAmount(vendingMachine.getMoney());
-            processOfBuyingProduct();
-        }
+        processOfBuyingProduct();
         processOfPrintingChanges();
     }
 
@@ -31,6 +28,19 @@ public class MainController {
         }
     }
 
+    private void processOfPrintingCoin() {
+        OutputView.printCoinByVendingMachine(vendingMachine.getCoin());
+    }
+
+    private void processOfMakingProductList() {
+        try {
+            InputController.makeProductsList(vendingMachine);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            processOfMakingProductList();
+        }
+    }
+
     private void processOfInsertMoney() {
         try {
             vendingMachine.insertMoney(new Money(InputView.inputMoney()));
@@ -40,9 +50,19 @@ public class MainController {
         }
     }
 
+//    private void processOfBuyingProduct() {
+//        while (vendingMachine.checkAdditionalPurchase()) {
+//            OutputView.printRemainingAmount(vendingMachine.getMoney());
+//            processOfBuyingProduct();
+//        }
+//    }
+
     private void processOfBuyingProduct() {
         try {
-            vendingMachine.buyProduct(InputView.inputProductToPurchase());
+            while (vendingMachine.checkAdditionalPurchase()) {
+                OutputView.printRemainingAmount(vendingMachine.getMoney());
+                vendingMachine.buyProduct(InputView.inputProductToPurchase());
+            }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             processOfBuyingProduct();
