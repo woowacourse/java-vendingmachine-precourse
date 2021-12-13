@@ -46,7 +46,7 @@ public class Merchandise {
 
 	public boolean isMinPriceMoreThanBalance(int balance) {
 		Collections.sort(itemList);
-		if (itemList.get(0).checkAbleToSell(balance) == false) {
+		if (itemList.get(0).isPriceLowerThanBalance(balance) == false) {
 			return true;
 		}
 		return false;

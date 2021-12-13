@@ -31,6 +31,10 @@ public class Item implements Comparable<Item> {
 		return count == 0;
 	}
 
+	public boolean isPriceLowerThanBalance(int balance) {
+		return price < balance;
+	}
+
 	@Override
 	public int compareTo(Item o) {
 		return this.price - o.price;
