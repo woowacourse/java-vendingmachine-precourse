@@ -1,4 +1,3 @@
 package vendingmachine.util;
 
-public class InputUtil {
-}
+public class InputUtil {}

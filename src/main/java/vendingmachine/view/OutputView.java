@@ -1,4 +1,4 @@
 package vendingmachine.view;
 
-public class UserView {
+public class OutputView {
 }
