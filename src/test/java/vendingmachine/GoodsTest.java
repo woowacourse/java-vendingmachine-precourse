@@ -1,8 +1,11 @@
 package vendingmachine;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class GoodsTest {
     @Test
@@ -12,5 +15,12 @@ public class GoodsTest {
         assertThat(goods.getName()).isEqualTo("콜라");
         assertThat(goods.getPrice()).isEqualTo(1500);
         assertThat(goods.getQuantity()).isEqualTo(20);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"콜라,90,20", "콜라,105,20", "콜라,문자,20", "콜라,,20"})
+    void 상품가격_예외테스트(String wrongInput) {
+        assertThatThrownBy(() -> new Goods(wrongInput))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
