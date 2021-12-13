@@ -22,8 +22,8 @@ public class Item {
 	private static final String MENTION = "상품 %s의 %s이 ";
 	private static final String NON_DIGIT_ERROR = ERROR + MENTION + "숫자여야 합니다.";
 	private static final String NOT_DIVISIBLE_BY_TEN_ERROR = ERROR + MENTION + TEN + "으로 나누어 떨어져야 합니다.";
-	private static final String INVALID_COST_CONDITION_ERROR = ERROR + COST + "이" + COST_LOWER_BOUND + " 이상이면서 "
-		+ TEN + "으로 나누어 떨어져야 합니다.";
+	private static final String INVALID_RANGE_ERROR = ERROR + MENTION + "%d 이상이여야 합니다.";
+
 	private final String name;
 	private final int cost;
 	private int amount;
@@ -61,15 +61,15 @@ public class Item {
 	}
 
 	private void validateCost(final int cost) {
-		if (!isValidRange(cost)) {
-			throw new IllegalArgumentException(String.format(INVALID_RANGE_ERROR, name, COST));
+		if (!isValidCostRange(cost)) {
+			throw new IllegalArgumentException(String.format(INVALID_RANGE_ERROR, name, COST, COST_LOWER_BOUND));
 		}
 		if (!isDivisibleByTen(cost)) {
 			throw new IllegalArgumentException(String.format(NOT_DIVISIBLE_BY_TEN_ERROR, name, COST));
 		}
 	}
 
-	private boolean isValidRange(final int cost) {
+	private boolean isValidCostRange(final int cost) {
 		return COST_LOWER_BOUND <= cost;
 	}
 
@@ -79,7 +79,7 @@ public class Item {
 
 	private void validateAmount(final int amount) {
 		if (!isValidAmountRange(amount)) {
-			throw new IllegalArgumentException(String.format(INVALID_AMOUNT_RANGE_ERROR, name, AMOUNT));
+			throw new IllegalArgumentException(String.format(INVALID_RANGE_ERROR, name, AMOUNT, AMOUNT_LOWER_BOUND));
 		}
 	}
 
