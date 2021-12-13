@@ -15,19 +15,11 @@ public class Products {
 	}
 
 	public Money getCheapestPrice() {
-		removeSoldOutProduct();
+		Collections.sort(products);
 		if (products.isEmpty()) {
 			return new Money(0);
 		}
-		return Collections.min(products).getPrice();
-	}
-
-	public void removeSoldOutProduct() {
-		for (Product product : products) {
-			if (product.soldOut()) {
-				products.remove(product);
-			}
-		}
+		return products.get(0).getPrice();
 	}
 
 	public boolean soldOut() {
@@ -40,7 +32,6 @@ public class Products {
 	}
 
 	public boolean isBuy(Money insertMoney) {
-		removeSoldOutProduct();
 		if (products.isEmpty()) {
 			return false;
 		}
@@ -48,15 +39,6 @@ public class Products {
 			return false;
 		}
 		return true;
-	}
-
-	public boolean contains(String productName) {
-		for (Product product : products) {
-			if (product.equals(productName)) {
-				return true;
-			}
-		}
-		return false;
 	}
 
 	public Product findForName(String productName) {

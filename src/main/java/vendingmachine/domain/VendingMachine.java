@@ -16,7 +16,6 @@ public class VendingMachine {
 
 	public void buy(String productName) {
 		Product product = products.findForName(productName);
-		System.out.println(product);
 		if (product == null || insertMoney.compareTo(product.getPrice()) < 0) {
 			return;
 		}
