@@ -24,6 +24,7 @@ public class Change {
 				break;
 			wallet.reduceCoin(coin);
 			change.put(coin, change.get(coin) + 1);
+			remainBalance -= coin.getAmount();
 		}
 		return change;
 	}

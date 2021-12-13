@@ -15,6 +15,7 @@ public class OutputView {
 	}
 
 	public static void remainCoins(Map<Coin, Integer> remain) {
+		remain.forEach((coin, integer) -> System.out.println("coin = " + coin + " : " + integer));
 	}
 
 	public static void remainBalance(int balance) {
