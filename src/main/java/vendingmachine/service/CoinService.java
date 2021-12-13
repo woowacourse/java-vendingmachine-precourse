@@ -1,5 +1,10 @@
 package vendingmachine.service;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.repository.Coin;
 import vendingmachine.view.InputView;
@@ -13,23 +18,24 @@ public class CoinService {
     }
 
     public void exchangeMoneyToCoin(int money) {
-        for (Coin coin : Coin.values()) {
-            if (coin.getAmount() != Coin.COIN_10.getAmount()) {
-                money = generate500To100(coin, money);
-                continue;
+        List<Integer> number = new ArrayList<>(Arrays.asList(500,100,50,10));
+        HashMap<Integer, String> numberMap = new HashMap<>();
+        numberMap = makeNumberMap(numberMap);
+        while (money != 0) {
+            int randomCoin = Randoms.pickNumberInList(number);
+            if (randomCoin <= money) {
+                Coin coin = Coin.valueOf(numberMap.get(randomCoin));
+                coin.addStock();
+                money -= randomCoin;
             }
-            generate10(money);
         }
     }
 
-    public int generate500To100(Coin coin, int money) {
-        int random = Randoms.pickNumberInRange(0, money / coin.getAmount());
-        coin.setStock(random);
-        return money - coin.getAmount() * random;
+    public HashMap<Integer, String> makeNumberMap(HashMap<Integer, String> numberMap){
+        numberMap.put(500,"COIN_500");
+        numberMap.put(100,"COIN_100");
+        numberMap.put(50,"COIN_50");
+        numberMap.put(10,"COIN_10");
+        return numberMap;
     }
-
-    public void generate10(int money) {
-        Coin.COIN_10.setStock(money / Coin.COIN_10.getAmount());
-    }
-
 }

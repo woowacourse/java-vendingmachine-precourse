@@ -26,4 +26,12 @@ public enum Coin {
     public void setStock(int stock) {
         this.stock = stock;
     }
+
+    public void addStock() {
+        this.stock++;
+    }
+
+    public void subtractStock(int number) {
+        this.stock -= number;
+    }
 }
