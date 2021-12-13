@@ -3,9 +3,9 @@ package vendingmachine;
 public class Error {
 	private static final String ERROR_PREFIX = "[ERROR] ";
 
-	public static final String ONLY_NUMBER = "금액은 숫자여야 합니다.";
-	public static final String OVER_ZERO = "금액은 0이상의 숫자여야 합니다.";
-	public static final String DIVIDED_BY_TEN = "금액은 10원 단위로 입력해야 합니다.";
+	public static final String MONEY_OF_CHANGES_ONLY_NUMBER = "금액은 숫자여야 합니다.";
+	public static final String MONEY_OF_CHANGES_OVER_ZERO = "금액은 0이상의 숫자여야 합니다.";
+	public static final String MONEY_OF_CHANGES_DIVIDED_BY_TEN = "금액은 10원 단위로 입력해야 합니다.";
 
 	public static final String PRODUCT_EMPTY = "상품 정보를 입력해주세요.";
 	public static final String PRODUCTS_COVER_TEXT = "상품의 정보는 대괄호([])를 감싼 형식으로 작성해주세요.";
@@ -28,7 +28,6 @@ public class Error {
 	public static final String NOT_EXIST_PRODUCT = "상품의 재고가 소진되었습니다. 다른 상품을 선택해주세요.";
 	public static final String LOWER_MONEY = "금액이 부족합니다.";
 
-	// TODO: 모든 Exception 에러 IllegalArgumentException 로 변경하기
 	public static void error(String str) {
 		throw new IllegalArgumentException(ERROR_PREFIX + str);
 	}

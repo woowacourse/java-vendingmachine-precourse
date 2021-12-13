@@ -18,8 +18,8 @@ public class Print {
 
 	private static final String SELECT_PRODUCT = "구매할 상품명을 입력해 주세요.";
 
-	public static void printError(String errorMessage) {
-		System.out.println(errorMessage);
+	public static void printErrorMessage(Exception e) {
+		System.out.println(e.getMessage());
 	}
 
 	public static void printNotice(String notice) {

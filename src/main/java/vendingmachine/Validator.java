@@ -13,46 +13,45 @@ public class Validator {
 
 	private static final int MINIMUM_OF_PRODUCT_PRICE = 100;
 
-	// TODO: 동일한 기능을 하는 검증 메소드 합치기
-	public static void validateNumber(String str) {
+	public static void validateNumber(String str, String errorMessage) {
 		int number;
 		try {
 			number = Integer.parseInt(str);
 		} catch (Exception e) {
-			error(ONLY_NUMBER);
+			error(errorMessage);
 		}
 	}
 
-	public static void validateOverZero(String str) {
+	public static void validateOverZero(String str, String errorMessage) {
 		int number = Integer.parseInt(str);
 		if (number < ZERO) {
-			error(OVER_ZERO);
+			error(errorMessage);
 		}
 	}
 
-	public static void validateDividedByTen(String str) {
+	public static void validateDividedByTen(String str, String errorMessage) {
 		int number = Integer.parseInt(str);
 
 		if (number % MONEY_UNIT != 0) {
-			error(DIVIDED_BY_TEN);
+			error(errorMessage);
 		}
 	}
 
-	public static void validateEmpty(String str) {
+	public static void validateEmpty(String str, String errorMessage) {
 		if (str.equals(EMPTY)) {
-			error(PRODUCT_EMPTY);
+			error(errorMessage);
 		}
 	}
 
-	public static void validateCoverTextOfProducts(String stringOfProducts) {
+	public static void validateCoverTextOfProducts(String stringOfProducts, String errorMessage) {
 		String[] products = splitStringOfProducts(stringOfProducts);
 
 		for (String stringOfProduct : products) {
 			if (!stringOfProduct.substring(0, 1).equals(COVER_PRODUCT_START)) {
-				error(PRODUCTS_COVER_TEXT);
+				error(errorMessage);
 			}
 			if (!stringOfProduct.substring(stringOfProduct.length() - 1).equals(COVER_PRODUCT_END)) {
-				error(PRODUCTS_COVER_TEXT);
+				error(errorMessage);
 			}
 		}
 	}
@@ -61,98 +60,29 @@ public class Validator {
 		return stringOfProducts.split(SPLIT_PRODUCTS);
 	}
 
-	public static void validateSplitTextOfProduct(String stringOfProducts) {
+	public static void validateSplitTextOfProduct(String stringOfProducts, String errorMessage) {
 		String[] products = splitStringOfProducts(stringOfProducts);
 
 		for (String stringOfProduct : products) {
 			if (stringOfProduct.split(SPLIT_PRODUCT).length != PRODUCT_INFO_COUNT) {
-				error(PRODUCT_SPLIT_TEXT);
+				error(errorMessage);
 			}
 		}
 	}
 
-	public static void validateProductNameEmpty(String str) {
-		if (str.equals(EMPTY)) {
-			error(PRODUCT_NAME_EMPTY);
-		}
-	}
-
-	public static void validateDuplicatedProductName(String str, VendingMachine vendingMachine, List<String> insertProductName) {
+	public static void validateDuplicated(String str, VendingMachine vendingMachine, List<String> insertProductName, String errorMessage) {
 		if (vendingMachine.isDuplicatedName(str)) {
-			error(PRODUCT_NAME_DUPLICATE);
+			error(errorMessage);
 		}
 		if (insertProductName.contains(str)) {
-			error(PRODUCT_NAME_DUPLICATE);
+			error(errorMessage);
 		}
 	}
 
-	public static void validateProductPriceNumber(String str) {
-		int number;
-		try {
-			number = Integer.parseInt(str);
-		} catch (Exception e) {
-			error(PRODUCT_PRICE_ONLY_NUMBER);
-		}
-	}
-
-	public static void validateProductPriceMinimum(String str) {
+	public static void validateProductPriceMinimum(String str, String errorMessage) {
 		int number = Integer.parseInt(str);
 		if (number < MINIMUM_OF_PRODUCT_PRICE) {
-			error(PRODUCT_PRICE_MINIMUM);
-		}
-	}
-
-	public static void validateProductPriceDividedByTen(String str) {
-		int number = Integer.parseInt(str);
-
-		if (number % MONEY_UNIT != 0) {
-			error(PRODUCT_PRICE_DIVIDED_BY_TEN);
-		}
-	}
-
-	public static void validateProductQuantityNumber(String str) {
-		int number;
-		try {
-			number = Integer.parseInt(str);
-		} catch (Exception e) {
-			error(PRODUCT_QUANTITY_ONLY_NUMBER);
-		}
-	}
-
-	public static void validateProductQuantityOverZero(String str) {
-		int number = Integer.parseInt(str);
-		if (number < ZERO) {
-			error(PRODUCT_QUANTITY_OVER_ZERO);
-		}
-	}
-
-	public static void validateMoneyNumber(String str) {
-		int number;
-		try {
-			number = Integer.parseInt(str);
-		} catch (Exception e) {
-			error(MONEY_NUMBER);
-		}
-	}
-
-	public static void validateMoneyOverZero(String str) {
-		int number = Integer.parseInt(str);
-		if (number < ZERO) {
-			error(MONEY_OVER_ZERO);
-		}
-	}
-
-	public static void validateMoneyDividedByTen(String str) {
-		int number = Integer.parseInt(str);
-
-		if (number % MONEY_UNIT != 0) {
-			error(MONEY_DIVIDED_BY_TEN);
-		}
-	}
-
-	public static void validateSelectedProductEmpty(String str) {
-		if (str.equals(EMPTY)) {
-			error(SELECTED_PRODUCT_EMPTY);
+			error(errorMessage);
 		}
 	}
 }
