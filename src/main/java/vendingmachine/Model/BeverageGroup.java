@@ -8,7 +8,6 @@ import vendingmachine.Utils.Validator.BeverageGroupValidator;
 
 public class BeverageGroup {
 	private static final int NO_PRICE = 0;
-
 	private final ArrayList<Beverage> beverages;
 
 	public BeverageGroup(String input) {
@@ -20,11 +19,19 @@ public class BeverageGroup {
 		new BeverageGroupValidator(input);
 	}
 
-	public Beverage getBeverage(String nameString) {
+	public Beverage find(String nameString) {
 		return beverages.stream()
 			.filter(beverage -> beverage.name.equals(nameString))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(Constants.ERROR_NAME_IN_NAMES));
+	}
+
+	public int findPrice(String nameString) {
+		return find(nameString).price;
+	}
+
+	public void minusOneStock(String nameString) {
+		find(nameString).minusOneStock();
 	}
 
 	public int getMinPrice() {

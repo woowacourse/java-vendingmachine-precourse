@@ -40,7 +40,7 @@ public class InputController {
 		try {
 			String input = InputView.beverageNameInput();
 			new NameValidator(input);
-			new SellValidator(vendingMachine.getBeverage(input), vendingMachine.getUserMoney());
+			new SellValidator(vendingMachine.beverages.find(input), vendingMachine.userMoney);
 			return input;
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());

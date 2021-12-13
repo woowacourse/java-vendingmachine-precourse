@@ -1,43 +1,37 @@
 package vendingmachine.Controller;
 
-import static vendingmachine.View.OutputView.printBreak;
-
+import vendingmachine.Model.BeverageGroup;
 import vendingmachine.Model.ChangesCoinGroup;
+import vendingmachine.Model.CoinGroup;
+import vendingmachine.Model.Money;
 import vendingmachine.Model.VendingMachine;
 import vendingmachine.View.OutputView;
 
 public class MachineController {
-	private final VendingMachine vendingMachine;
+	private VendingMachine vendingMachine;
 
 	public MachineController() {
-		this.vendingMachine = new VendingMachine();
-	}
-
-	public void operate() {
 		initiate();
 		activate();
 		giveChanges();
 	}
 
 	private void initiate() {
-		vendingMachine.initCoins(InputController.getMachineMoney());
-		printBreak();
-
-		OutputView.printCoin(vendingMachine.getCoinMap());
-		printBreak();
-
-		vendingMachine.initBeverages(InputController.getBeverageGroup());
-		printBreak();
-
-		vendingMachine.initUserMoney(InputController.getUserMoney(vendingMachine.getMinPrice()));
-		printBreak();
+		CoinGroup coins = new CoinGroup(InputController.getMachineMoney());
+		OutputView.printBreak();
+		OutputView.printMachineCoin(coins.get());
+		OutputView.printBreak();
+		BeverageGroup beverages = InputController.getBeverageGroup();
+		OutputView.printBreak();
+		Money userMoney = InputController.getUserMoney(beverages.getMinPrice());
+		OutputView.printBreak();
+		vendingMachine = new VendingMachine(coins, beverages, userMoney);
 	}
 
 	private void activate() {
-		OutputView.printUserMoney(vendingMachine.getUserMoneyInt());
+		OutputView.printUserMoney(vendingMachine.userMoney);
 		String beverageNameInput = InputController.getBeverageName(vendingMachine);
-		printBreak();
-
+		OutputView.printBreak();
 		vendingMachine.sell(beverageNameInput);
 		if (!vendingMachine.isActivateEnd()) {
 			activate();
@@ -45,7 +39,7 @@ public class MachineController {
 	}
 
 	private void giveChanges() {
-		OutputView.printUserMoney(vendingMachine.getUserMoneyInt());
-		OutputView.printChange(new ChangesCoinGroup(vendingMachine).getNotEmptyIntegerMap());
+		OutputView.printUserMoney(vendingMachine.userMoney);
+		OutputView.printChanges(new ChangesCoinGroup(vendingMachine).getNotEmptyMap());
 	}
 }

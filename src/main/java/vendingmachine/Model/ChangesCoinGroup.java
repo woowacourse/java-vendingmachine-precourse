@@ -8,8 +8,8 @@ public class ChangesCoinGroup extends CoinGroup {
 
 	public ChangesCoinGroup(VendingMachine vendingMachine) {
 		super();
-		this.changeCoins = vendingMachine.getCoins();
-		this.userMoney = vendingMachine.getUserMoney();
+		this.changeCoins = vendingMachine.coins;
+		this.userMoney = vendingMachine.userMoney;
 		setAllCoins();
 	}
 
@@ -31,6 +31,6 @@ public class ChangesCoinGroup extends CoinGroup {
 
 	private void moneyToCoin(Coin coin, int coinCount) {
 		set(coin, coinCount);
-		userMoney.setMinus(coin.getAmount() * coinCount);
+		userMoney.spend(coin.getAmount() * coinCount);
 	}
 }
