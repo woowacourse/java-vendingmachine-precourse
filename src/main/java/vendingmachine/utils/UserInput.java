@@ -14,10 +14,10 @@ public class UserInput {
         );
     }
 
-    public static String getProductName() {
+    public static String getProductOrder() {
         return getValidInput(() -> {
             String input = Console.readLine();
-            // TODO implement me
+            InputValidator.validateNonSpecialChar(input);
             return input;
         });
     }
