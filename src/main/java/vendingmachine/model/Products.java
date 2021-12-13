@@ -29,4 +29,13 @@ public class Products {
 		}
 		throw new IllegalArgumentException(ErrorMessageConstants.NO_SUCH_PRODUCT_EXCEPTION_MESSAGE);
 	}
+
+	public boolean exists() {
+		for (Product product: products) {
+			if (product.exists()) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
