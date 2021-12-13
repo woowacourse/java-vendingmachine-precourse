@@ -1,14 +1,11 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import vendingmachine.domain.enumclass.Coin;
 import vendingmachine.utils.CoinUtil;
@@ -23,6 +20,7 @@ public class VendingMachine {
 	public VendingMachine() {
 		this.coinMap = new TreeMap<>(Collections.reverseOrder());
 		this.products = new ArrayList<>();
+
 		coinMap.put(Coin.COIN_500.getAmount(), 0);
 		coinMap.put(Coin.COIN_100.getAmount(), 0);
 		coinMap.put(Coin.COIN_50.getAmount(), 0);
@@ -48,6 +46,7 @@ public class VendingMachine {
 			if (randomCoin > money) {
 				continue;
 			}
+
 			addCoin(randomCoin);
 			money -= randomCoin;
 		}
@@ -81,6 +80,7 @@ public class VendingMachine {
 		if (compareLowPriceAndInputCost()) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -89,6 +89,7 @@ public class VendingMachine {
 		if (products.get(0).getPrice() <= inputCost && products.get(0).getAmount() > 0) {
 			return false;
 		}
+
 		return true;
 	}
 
@@ -96,6 +97,7 @@ public class VendingMachine {
 		if (inputCost < getSumCoinAmount()) {
 			return inputCost;
 		}
+
 		return getSumCoinAmount();
 	}
 

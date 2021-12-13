@@ -31,6 +31,7 @@ public class VendingMachineService {
 		result.addMessage(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
 		vendingMachine.makeCoinInCoinMap(Integer.parseInt(inputStr));
 		result.addCoinCountMessage(vendingMachine.getCoinMap());
+
 		return result.getResult();
 	}
 
@@ -58,6 +59,7 @@ public class VendingMachineService {
 		if (vendingMachine.checkGetChange()) {
 			return true;
 		}
+
 		return false;
 	}
 
@@ -75,6 +77,7 @@ public class VendingMachineService {
 		for (String rowProduct : products) {
 			String[] product = rowProduct.split(",");
 			InputProductValidator.validateProduct(product, vendingMachine.getProducts());
+
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
 		}
@@ -84,6 +87,7 @@ public class VendingMachineService {
 		change = vendingMachine.compareInputCostAndCoinToDecideChange();
 		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
 		Map<Integer, Integer> changeMap = new TreeMap<>(Collections.reverseOrder());
+
 		for (Integer i : coinMap.keySet()) {
 			changeMap = addChangeMapToValue(i, coinMap.get(i), changeMap);
 		}
@@ -101,6 +105,7 @@ public class VendingMachineService {
 				break;
 			}
 		}
+
 		return map;
 	}
 }
