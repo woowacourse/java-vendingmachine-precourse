@@ -11,6 +11,11 @@ public class Coins {
         initialize();
     }
 
+    public Coins(Coins coinBalance) {
+        initialize();
+        initialize(coinBalance);
+    }
+
     public void add(Coin coinToAdd) {
         coins.computeIfPresent(coinToAdd, (coin, number) -> number + 1);
     }
@@ -55,5 +60,11 @@ public class Coins {
         coins.put(Coin.COIN_100, initialNumberOfCoin);
         coins.put(Coin.COIN_50, initialNumberOfCoin);
         coins.put(Coin.COIN_10, initialNumberOfCoin);
+    }
+
+    private void initialize(Coins coinsToCopy) {
+        for (Coin coin : coinsToCopy.coins.keySet()) {
+            coins.put(coin, coinsToCopy.count(coin));
+        }
     }
 }

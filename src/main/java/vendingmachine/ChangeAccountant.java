@@ -12,7 +12,7 @@ public class ChangeAccountant {
         initialize(amountToChange, coinBalance);
         if (coinBalance.hasSmallerOrEqualAmount(amountToChange)) {
             updateAmountToChangeAfterExchange(coinBalance.getAmount());
-            return coinBalance;
+            return new Coins(coinBalance);
         }
         Coin.getAlCoinUnitsFromLargestToSmallest().forEach(this::changeToEachCoin);
         return changes;
