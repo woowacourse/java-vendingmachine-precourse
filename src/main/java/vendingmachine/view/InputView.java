@@ -8,9 +8,9 @@ public class InputView {
 	private InputView() {
 	}
 
-	public static int haveAmount() {
+	public static String haveAmount() {
 		System.out.println(INPUT_HAVE_AMOUNT_MESSAGE);
-		return Integer.parseInt(Console.readLine());
+		return Console.readLine();
 	}
 
 	public static String inputProducts() {
