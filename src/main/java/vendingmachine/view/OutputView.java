@@ -1,4 +1,4 @@
-package vendingmachine.view.output;
+package vendingmachine.view;
 
 import java.util.LinkedHashMap;
 import java.util.Set;

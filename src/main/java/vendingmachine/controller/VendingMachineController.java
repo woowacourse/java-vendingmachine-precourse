@@ -4,10 +4,8 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.domain.Money;
 import vendingmachine.domain.RandomCoinMaker;
-import vendingmachine.view.input.MoneyInputView;
-import vendingmachine.view.input.ProductInputView;
-import vendingmachine.view.input.PurchaseInputView;
-import vendingmachine.view.output.OutputView;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     private static final VendingMachineController instance = new VendingMachineController();
@@ -20,36 +18,21 @@ public class VendingMachineController {
     }
 
     public void start() {
-        MoneyInputView moneyInputView = new MoneyInputView();
-        int moneyForCoin = inputMoneyForMakeCoin(moneyInputView);
-
+        InputView inputView = new InputView();
+        int moneyForCoin = inputView.inputMoneyForMakeCoin();
         LinkedHashMap<Integer, Integer> vendingMachineCoin = RandomCoinMaker.getInstance().makeCoin(moneyForCoin);
 
         OutputView outputView = new OutputView();
         showCoinVendingMachineHas(outputView, vendingMachineCoin);
 
-        inputProductsToVendingMachine();
-        storeMoney(moneyInputView);
-        inputProductForPurchase();
+        inputView.inputProducts();
+        storeMoney(inputView);
+        inputView.inputProductForPurchase();
         showChange(outputView, vendingMachineCoin);
     }
 
-    private void inputProductsToVendingMachine() {
-        ProductInputView productInputView = new ProductInputView();
-        productInputView.inputProducts();
-    }
-
-    private void inputProductForPurchase() {
-        PurchaseInputView purchaseInputView = new PurchaseInputView();
-        purchaseInputView.inputProductForPurchase();
-    }
-
-    private int inputMoneyForMakeCoin(MoneyInputView moneyInputView) {
-        return moneyInputView.inputMoneyForMakeCoin();
-    }
-
-    private void storeMoney(MoneyInputView moneyInputView) {
-        int moneyForPurchase = moneyInputView.inputMoneyForPurchase();
+    private void storeMoney(InputView inputView) {
+        int moneyForPurchase = inputView.inputMoneyForPurchase();
         Money.getInstance().storeMoney(moneyForPurchase);
     }
 
