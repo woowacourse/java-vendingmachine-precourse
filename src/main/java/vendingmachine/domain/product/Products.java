@@ -37,12 +37,7 @@ public class Products {
 		}
 	}
 
-	public boolean isValidateHasProductsQuantity() {
-		return products.stream()
-			.allMatch(product -> product.isValidateProductQuantityZero());
-	}
-
-	public boolean isValidateHasBalanceProductsPurchase(Balance balance) {
+	public boolean isValidateProductsPurchase(Balance balance) {
 		return products.stream()
 			.allMatch(product -> product.isValidateProductPurchase(balance));
 	}

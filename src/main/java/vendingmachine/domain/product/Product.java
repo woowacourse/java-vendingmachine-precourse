@@ -29,12 +29,11 @@ public class Product {
 		return new Product(product_element[NAME_INDEX], product_element[PRICE_INDEX], product_element[QUANTITY_INDEX]);
 	}
 
-	public boolean isValidateProductQuantityZero() {
-		return quantity.isValidateQuantityZero();
-	}
-
 	public boolean isValidateProductPurchase(Balance balance) {
-		return price.isValidateCalculateMinus(balance);
+		if (price.isValidateCalculateMinus(balance) || quantity.isValidateQuantityZero()) {
+			return true;
+		}
+		return false;
 	}
 
 	public boolean isValidateSameProduct(String productName) {

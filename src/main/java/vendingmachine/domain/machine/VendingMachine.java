@@ -25,9 +25,7 @@ public class VendingMachine {
 	}
 
 	public boolean isContinueVendingMachine() {
-		if (balance.isValidateHasBalanceZero()
-			|| products.isValidateHasProductsQuantity()
-			|| products.isValidateHasBalanceProductsPurchase(balance)) {
+		if (balance.isValidateHasBalanceZero() || products.isValidateProductsPurchase(balance)) {
 			return false;
 		}
 
