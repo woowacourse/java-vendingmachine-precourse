@@ -1,6 +1,7 @@
 package vendingmachine.validation;
 
 import vendingmachine.constant.Constants;
+import vendingmachine.model.Coin;
 
 public class UtilValidation {
 
@@ -19,8 +20,8 @@ public class UtilValidation {
 	}
 
 	public static void canDivideMinCoin(int number) {
-		if (number % Constants.MIN_COIN != 0) {
-			throw (new IllegalArgumentException("금액은 "+ Constants.MIN_COIN +"으로 나누어 떨어져야 합니다."));
+		if (number % Coin.getMin() != 0) {
+			throw (new IllegalArgumentException("금액은 "+ Coin.getMin() +"으로 나누어 떨어져야 합니다."));
 		}
 	}
 

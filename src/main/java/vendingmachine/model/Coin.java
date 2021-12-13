@@ -12,9 +12,15 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
-
-    public int getAmount() {
-        return amount;
+    public static int getMin() {
+        int min = (int)Double.POSITIVE_INFINITY;
+        for (Coin coin:
+        Coin.values()) {
+            if (coin.amount < min) {
+                min = coin.amount;
+            }
+        }
+        return min;
     }
+
 }

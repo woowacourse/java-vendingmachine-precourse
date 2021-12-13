@@ -17,10 +17,18 @@ public class Wallet {
 
 	private void setWallet() {
 		try {
-			WalletValidation.setWalletValidation(InputView.setVendingMachineWallet());
+			String input = InputView.setVendingMachineWallet();
+			WalletValidation.setWalletValidation(input);
+			makeRandomCoin(Integer.parseInt(input));
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.illegalArgumentException(illegalArgumentException.getMessage());
 			setWallet();
 		}
+	}
+
+	private void makeRandomCoin(int money) {
+		Coin[] coins = Coin.values();
+
+
 	}
 }
