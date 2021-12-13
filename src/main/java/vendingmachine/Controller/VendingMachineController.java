@@ -3,9 +3,11 @@ package vendingmachine.Controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
+import vendingmachine.model.Coin;
 import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.Messages;
@@ -28,7 +30,8 @@ public class VendingMachineController {
     public void run() {
         int machineMoney = fillMoney();
         VendingMachine vendingMachine = new VendingMachine(machineMoney);
-        outputView.printMachineHaveCoin(vendingMachine.getMachineCoins());
+        Map<Integer, Integer> machineCoins = vendingMachine.getMachineCoins();
+        outputView.printMachineHaveCoin(machineCoins);
 
         List<Product> products = displayProducts();
 
@@ -42,7 +45,7 @@ public class VendingMachineController {
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
         } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
 
-        List<Integer> returnCoins = vendingMachine.calculateReturnChangeCoin(purchasingCost);
+        Map<Integer, Integer> returnCoins = vendingMachine.calculateReturnChangeCoin(machineCoins, purchasingCost);
         outputView.printReturnChange(purchasingCost, returnCoins);
 
     }

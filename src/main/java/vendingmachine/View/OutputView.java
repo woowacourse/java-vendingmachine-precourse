@@ -1,6 +1,5 @@
 package vendingmachine.View;
 
-import java.util.List;
 import java.util.Map;
 
 import vendingmachine.model.Coin;
@@ -23,7 +22,7 @@ public class OutputView {
                 + Symbol.WON.getSymbol();
     }
 
-    public void printMachineHaveCoin(final Map<Coin, Integer> machineCoins) {
+    public void printMachineHaveCoin(final Map<Integer, Integer> machineCoins) {
         System.out.println();
         System.out.println(Messages.MACHINE_HAVE_COINS.getInputMessage());
 
@@ -32,10 +31,10 @@ public class OutputView {
         System.out.println(machineHaveCoinPrintFormat);
     }
 
-    protected String createMachineCoinPrintFormat(final Map<Coin, Integer> machineCoins) {
+    protected String createMachineCoinPrintFormat(final Map<Integer, Integer> machineCoins) {
         final StringBuilder stringBuilder = new StringBuilder();
 
-        for (Coin machineCoin : machineCoins.keySet()) {
+        for (int machineCoin : machineCoins.keySet()) {
             stringBuilder.append(machineCoin)
                     .append(Symbol.WON.getSymbol())
                     .append(Symbol.SPACE.getSymbol())
@@ -49,9 +48,29 @@ public class OutputView {
         return stringBuilder.toString();
     }
 
-    public void printReturnChange(final int purchasingCost, final List<Integer> returnCoins) {
+    public void printReturnChange(final int purchasingCost, final Map<Integer, Integer> returnCoins) {
         printPurChasingCost(purchasingCost);
         System.out.println(CHANGE);
+
+        String returnChangePrintFormat = createReturnChangePrintFormat(returnCoins);
+        System.out.println(returnChangePrintFormat);
+    }
+
+    protected String createReturnChangePrintFormat(final Map<Integer, Integer> returnCoins) {
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        for (int returnCoin : returnCoins.keySet()) {
+            stringBuilder.append(returnCoin)
+                    .append(Symbol.WON.getSymbol())
+                    .append(Symbol.SPACE.getSymbol())
+                    .append(Symbol.DASH.getSymbol())
+                    .append(Symbol.SPACE.getSymbol())
+                    .append(returnCoins.get(returnCoin))
+                    .append(Symbol.EA.getSymbol())
+                    .append(Symbol.NEW_LINE.getSymbol());
+        }
+
+        return stringBuilder.toString();
     }
 
 }

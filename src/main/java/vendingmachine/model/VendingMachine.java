@@ -9,11 +9,16 @@ import vendingmachine.utils.ExceptionMessages;
 
 public class VendingMachine {
 
-    private final Map<Coin, Integer> machineCoins;
+    private final Map<Integer, Integer> machineCoins;
 
     public VendingMachine(final int machineMoney) {
         validateMachineMoney(machineMoney);
         this.machineCoins = calculateCoins(machineMoney);
+    }
+
+
+    public Map<Integer, Integer> getMachineCoins() {
+        return machineCoins;
     }
 
     public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
@@ -57,8 +62,8 @@ public class VendingMachine {
         return (inputMachineMoney % 10) == 0;
     }
 
-    protected Map<Coin, Integer> calculateCoins(final int machineMoney) {
-        Map<Coin, Integer> machineCoins = createCoinUnitList();
+    protected Map<Integer, Integer> calculateCoins(final int machineMoney) {
+        Map<Integer, Integer> machineCoins = createCoinUnitList();
         int machineMoneyToCountCoin = machineMoney;
 
         while (machineMoneyToCountCoin != 0) {
@@ -71,15 +76,14 @@ public class VendingMachine {
     }
 
 
-    protected int inputCoinRandomly(final Map<Coin, Integer> machineCoins, int machineMoneyToCountCoin) {
-        for (Coin machineCoin : machineCoins.keySet()) {
-            int coinUnit = machineCoin.getAmount();
-            int share = (machineMoneyToCountCoin / coinUnit);
+    protected int inputCoinRandomly(final Map<Integer, Integer> machineCoins, int machineMoneyToCountCoin) {
+        for (int machineCoin : machineCoins.keySet()) {
+            int share = (machineMoneyToCountCoin / machineCoin);
 
             final List<Integer> inputRandomCoinRange = createCoinRangeList(share);
             int coinCount = Coin.COIN_500.inputCoinCountRandomly(inputRandomCoinRange);
 
-            machineMoneyToCountCoin = machineMoneyToCountCoin - (coinCount * coinUnit);
+            machineMoneyToCountCoin = machineMoneyToCountCoin - (coinCount * machineCoin);
             machineCoins.put(machineCoin, coinCount);
         }
 
@@ -97,12 +101,12 @@ public class VendingMachine {
         return inputRandomCoinRange;
     }
 
-    public Map<Coin, Integer> createCoinUnitList() {
-        final Map<Coin, Integer> machineCoins = new LinkedHashMap<>();
+    public Map<Integer, Integer> createCoinUnitList() {
+        final Map<Integer, Integer> machineCoins = new LinkedHashMap<>();
         Coin[] coin = Coin.values();
 
         for (int i = 0; i < Coin.values().length; i++) {
-            machineCoins.put(coin[i], 0);
+            machineCoins.put(coin[i].getAmount(), 0);
         }
 
         return machineCoins;
@@ -147,13 +151,30 @@ public class VendingMachine {
         }
     }
 
-    public List<Integer> calculateReturnChangeCoin(final int purchasingCost) {
+    public Map<Integer, Integer> calculateReturnChangeCoin(final Map<Integer, Integer> machineCoins, int purchasingCost) {
+        final Map<Integer, Integer> returnChange = new LinkedHashMap<>();
 
-        return null;
+        for (int machineCoin : machineCoins.keySet()) {
+            int machineCoinCount = machineCoins.get(machineCoin);
+
+            if (machineCoinCount != 0) {
+                int coinCount = calculateMaximumCoinCount(machineCoinCount, purchasingCost, machineCoin);
+                purchasingCost = purchasingCost - (coinCount * machineCoin);
+                returnChange.put(machineCoin, coinCount);
+            }
+        }
+
+        return returnChange;
     }
 
-    public Map<Coin, Integer> getMachineCoins() {
-        return machineCoins;
+    private int calculateMaximumCoinCount(final int machineCoinCount, final int purchasingCost, final int coinUnit) {
+        int coinCount = purchasingCost / coinUnit;
+
+        if (coinCount > machineCoinCount) {
+            coinCount = machineCoinCount;
+        }
+
+        return coinCount;
     }
 
 }
