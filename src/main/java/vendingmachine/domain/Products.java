@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Products {
+	private static final String ERROR_PRODUCTS_DUPLICATED = "상품 구성에 중복되는 상품이 있습니다.";
+
 	private List<Product> products;
 
 	public Products(List<Product> products) {
@@ -23,14 +25,12 @@ public class Products {
 		return new Products(inputProducts);
 	}
 
-	private void isValidateDuplicated(List<Product> products) {
-		final Set<String> distinctProductsName = products.stream()
-			.map(product -> product.getName())
-			.map(name -> name.getName())
+	public void isValidateDuplicated(List<Product> products) {
+		final Set<Product> distinctProductsName = products.stream()
 			.collect(Collectors.toSet());
 
 		if (distinctProductsName.size() != products.size()) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ERROR_PRODUCTS_DUPLICATED);
 		}
 	}
 }
