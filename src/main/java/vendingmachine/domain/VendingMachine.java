@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.enumclass.Coin;
 import vendingmachine.utils.CoinUtil;
 import vendingmachine.validation.GlobalValidation;
+import vendingmachine.validation.validator.InputProductValidator;
 
 public class VendingMachine {
 
@@ -31,10 +32,6 @@ public class VendingMachine {
 		products = new ArrayList<>();
 	}
 
-	public int getSumCoinAmount() {
-		return coinMap.keySet().stream().mapToInt(key -> key * coinMap.get(key)).sum();
-	}
-
 	public void makeCoinInCoinMap(int money) {
 		while (money > 0) {
 			int randomCoin = CoinUtil.generateRandomCoin();
@@ -47,8 +44,22 @@ public class VendingMachine {
 		}
 	}
 
+	public int getSumCoinAmount() {
+		return coinMap.keySet().stream().mapToInt(key -> key * coinMap.get(key)).sum();
+	}
+
 	public void addCoin(int coin) {
 		coinMap.put(coin, coinMap.get(coin) + 1);
+	}
+
+	public void addProducts(String[] productList) {
+		for (String rowProduct : productList) {
+			String[] product = rowProduct.split(",");
+			InputProductValidator.validateProduct(product, products);
+
+			addProduct(
+				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+		}
 	}
 
 	public void addProduct(Product product) {

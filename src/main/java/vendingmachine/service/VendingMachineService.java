@@ -4,13 +4,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeMap;
 
-import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
 import vendingmachine.validation.validator.InputCostValidator;
 import vendingmachine.validation.validator.InputProductNameValidator;
-import vendingmachine.validation.validator.InputProductValidator;
 import vendingmachine.validation.validator.InputProductsValidator;
 import vendingmachine.validation.validator.InputVendingMachineCostValidator;
 
@@ -38,7 +36,7 @@ public class VendingMachineService {
 	public void postProductInfo(String inputStr) {
 		vendingMachine.initProducts();
 		InputProductsValidator.validateProducts(inputStr);
-		addProducts(inputStr);
+		vendingMachine.addProducts(inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";"));
 	}
 
 	public String postInputCosts(String inputStr) {
@@ -71,31 +69,19 @@ public class VendingMachineService {
 		return result.getResult();
 	}
 
-	private void addProducts(String inputStr) {
-		String[] products = inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";");
-
-		for (String rowProduct : products) {
-			String[] product = rowProduct.split(",");
-			InputProductValidator.validateProduct(product, vendingMachine.getProducts());
-
-			vendingMachine.addProduct(
-				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
-		}
-	}
-
 	private void getMinimumChange() {
 		change = vendingMachine.compareInputCostAndCoinToDecideChange();
 		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
 		Map<Integer, Integer> changeMap = new TreeMap<>(Collections.reverseOrder());
 
 		for (Integer i : coinMap.keySet()) {
-			changeMap = addChangeMapToValue(i, coinMap.get(i), changeMap);
+			changeMap = addChangeMapToCoin(i, coinMap.get(i), changeMap);
 		}
 
 		result.addCoinCountMessage(changeMap);
 	}
 
-	private Map<Integer, Integer> addChangeMapToValue(int key, int value, Map<Integer, Integer> map) {
+	private Map<Integer, Integer> addChangeMapToCoin(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
 			if (change >= key) {
 				map.put(key, map.getOrDefault(key, 0) + 1);
