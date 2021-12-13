@@ -18,7 +18,7 @@ public class User {
 
 	public void buyMerchandise(String merchandiseName, Merchandises merchandises) {
 		Merchandise buyingMerchandise = merchandises.selectMerchandise(merchandiseName);
-		buyingMerchandise.decreaseQuantity();
+		buyingMerchandise.deductQuantity();
 		buyingMerchandiseList.add(buyingMerchandise);
 		userMoney.deductMoney(buyingMerchandise.getMoney());
 	}

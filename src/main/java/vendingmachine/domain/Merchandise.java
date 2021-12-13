@@ -12,7 +12,7 @@ public class Merchandise {
 
 	private final String name;
 	private final Money money;
-	private Quantity quantity;
+	private final Quantity quantity;
 
 	public Merchandise(String name, Money money, Quantity quantity) {
 		Validator.validateEmptyMerchandiseName(name);
@@ -50,6 +50,10 @@ public class Merchandise {
 
 	public boolean isMerchandiseSoldOut() {
 		return quantity.isQuantityZero();
+	}
+
+	public void deductQuantity() {
+		quantity.decreaseQuantity();
 	}
 
 	@Override
