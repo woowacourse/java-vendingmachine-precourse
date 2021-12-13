@@ -22,7 +22,7 @@ public class VendingMachine {
 
 	public static boolean isUserBuyMerchandise(User user, Merchandises merchandises) {
 		List<Merchandise> notBuyMerchandise = merchandises.getMerchandiseList().stream()
-			.filter((merchandise -> merchandise.isBigMerchandiseMoney(user.getUserMoney().getMoney())))
+			.filter(merchandise -> merchandise.isBigMerchandiseMoney(user.getUserMoney()))
 			.collect(Collectors.toList());
 
 		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();
@@ -80,14 +80,13 @@ public class VendingMachine {
 		return changeMoney;
 	}
 
-	public LinkedHashMap<Coin, Integer> changeCoinStatus(Money lastMoney) {
-		int returnMoney = lastMoney.getMoney();
-		if (returnMoney >= vendingMachineMoney.getMoney()) {
+	public LinkedHashMap<Coin, Integer> changeCoinStatus(int lastMoney) {
+		if (lastMoney >= vendingMachineMoney.getMoney()) {
 			return coinCounts;
 		}
 		for (Coin coin : coinCounts.keySet()) {
-			returnMoney = returnCoin(returnMoney, coin);
-			if (returnMoney == 0) {
+			lastMoney = returnCoin(lastMoney, coin);
+			if (lastMoney == 0) {
 				break;
 			}
 		}

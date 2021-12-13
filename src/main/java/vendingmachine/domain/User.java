@@ -12,8 +12,8 @@ public class User {
 		buyingMerchandiseList = new ArrayList<>();
 	}
 
-	public Money getUserMoney() {
-		return userMoney;
+	public int getUserMoney() {
+		return userMoney.getMoney();
 	}
 
 	public void buyMerchandise(String merchandiseName, Merchandises merchandises) {
