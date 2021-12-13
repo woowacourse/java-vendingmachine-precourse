@@ -6,12 +6,15 @@ import static vendingmachine.service.VendingMachineManagement.*;
 import vendingmachine.domain.VendingMachine;
 
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Validator {
 	private static final int ZERO = 0;
 	private static final int MONEY_UNIT = 10;
 
 	private static final int MINIMUM_OF_PRODUCT_PRICE = 100;
+
+	private static final String COVER_TEXT_OF_PRODUCT_PATTERN = COVER_PRODUCT_START_PATTERN + ".*" + COVER_PRODUCT_END_PATTERN;
 
 	public static void validateNumber(String str, String errorMessage) {
 		int number;
@@ -47,10 +50,7 @@ public class Validator {
 		String[] products = splitStringOfProducts(stringOfProducts);
 
 		for (String stringOfProduct : products) {
-			if (!stringOfProduct.substring(0, 1).equals(COVER_PRODUCT_START)) {
-				error(errorMessage);
-			}
-			if (!stringOfProduct.substring(stringOfProduct.length() - 1).equals(COVER_PRODUCT_END)) {
+			if (!Pattern.matches(COVER_TEXT_OF_PRODUCT_PATTERN, stringOfProduct)) {
 				error(errorMessage);
 			}
 		}
@@ -64,7 +64,7 @@ public class Validator {
 		String[] products = splitStringOfProducts(stringOfProducts);
 
 		for (String stringOfProduct : products) {
-			if (stringOfProduct.split(SPLIT_PRODUCT).length != PRODUCT_INFO_COUNT) {
+			if (Pattern.matches(SPLIT_PRODUCT_PATTERN, stringOfProduct)) {
 				error(errorMessage);
 			}
 		}

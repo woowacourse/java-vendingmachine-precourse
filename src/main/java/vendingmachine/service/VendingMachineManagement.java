@@ -15,10 +15,12 @@ public class VendingMachineManagement {
 
 	public static final String SPLIT_PRODUCTS = ";";
 	public static final String COVER_PRODUCT_START = "[";
+	public static final String COVER_PRODUCT_START_PATTERN = "^\\" + COVER_PRODUCT_START;
 	public static final String COVER_PRODUCT_END = "]";
+	public static final String COVER_PRODUCT_END_PATTERN = COVER_PRODUCT_END + "$";
 	public static final String EMPTY = "";
 	public static final String SPLIT_PRODUCT = ",";
-	public static final int PRODUCT_INFO_COUNT = 3;
+	public static final String SPLIT_PRODUCT_PATTERN = ".*" + SPLIT_PRODUCT + ".*" + SPLIT_PRODUCT + ".*" + SPLIT_PRODUCT;
 
 	public static final String PRODUCT_NAME = "name";
 	public static final int PRODUCT_NAME_INDEX = 0;
@@ -75,8 +77,8 @@ public class VendingMachineManagement {
 	}
 
 	public static String removeTextCoverProduct(String product) {
-		product = product.replace(COVER_PRODUCT_START, EMPTY);
-		product = product.replace(COVER_PRODUCT_END, EMPTY);
+		product = product.replaceFirst(COVER_PRODUCT_START_PATTERN, EMPTY);
+		product = product.replaceAll(COVER_PRODUCT_END_PATTERN, EMPTY);
 
 		return product;
 	}
