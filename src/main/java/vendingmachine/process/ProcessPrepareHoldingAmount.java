@@ -11,6 +11,12 @@ import java.util.List;
 public class ProcessPrepareHoldingAmount {
     public static String holdingAmount;
 
+    public static int makeHoldingAmount() {
+        inputHoldingAmount();
+        checkHoldingAmount();
+        return toIntegerHoldingAmount();
+    }
+
     public static void inputHoldingAmount() {
         holdingAmount = User.inputMoney();
     }
