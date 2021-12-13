@@ -2,43 +2,23 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
-import camp.nextstep.edu.missionutils.Randoms;
 
 public class Machine {
-	private Map<Integer, Integer> coinCount = new HashMap<>();
+	private Coins coins;
+	private Coins change;
 	private List<Merchandise> merchandiseList = new ArrayList<>();
 	private int balance;
 
-	public Machine() {
-		for (Integer i : Coin.getCoinList()) {
-			coinCount.put(i, 0);
-		}
+	public void setCoins(int amount) {
+		coins = new Coins(amount);
+		coins.pickCoins();
 	}
 
-	public void setCoins(int changes) {
-		while (changes != 0) {
-			int pick = Randoms.pickNumberInList(Coin.getCoinList());
-			if (changes - pick < 0) {
-				continue;
-			}
-			coinCount.put(pick, coinCount.get(pick) + 1);
-			changes -= pick;
-		}
-	}
-
-	public Map<Integer, Integer> getSortedCoinCount() {
-		Map<Integer, Integer> sortedCoinCount = coinCount.entrySet().stream()
-			.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
-			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e2, LinkedHashMap::new));
-		return sortedCoinCount;
+	public Map<Integer, Integer> getCoinList() {
+		return coins.getSortedCoinCount();
 	}
 
 	public void setMerchandise(String merchandiseList) {
@@ -104,29 +84,31 @@ public class Machine {
 	}
 
 	public Map<Integer, Integer> getReturnCoins() {
-		Map<Integer, Integer> sortedCoinCount = getSortedCoinCount();
-		Map<Integer, Integer> result = new LinkedHashMap<>();
+		change = new Coins();
+		Map<Integer, Integer> sortedCoinCount = coins.getSortedCoinCount();
 		Iterator<Integer> coins = sortedCoinCount.keySet().iterator();
 		while (coins.hasNext() && balance > 0) {
 			int coin = coins.next();
-			int count = getReturnCoinCount(coin, sortedCoinCount.get(coin));
+			int count = getReturnCoinCount(coin);
 			if (count != 0) {
 				balance -= coin * count;
-				result.put(coin, count);
+				moveCoinsToChange(coin, count);
 			}
 		}
-		return result;
+		return change.getSortedCoinCount();
 	}
 
-	private int getReturnCoinCount(int coin, int remainingCoinCount) {
+	private int getReturnCoinCount(int coin) {
 		int count = balance / coin;
-		if (remainingCoinCount < count) {
-			count = remainingCoinCount;
+		if (coins.getCoinCount(coin) < count) {
+			count = coins.getCoinCount(coin);
 		}
 		return count;
 	}
 
-	private boolean isExistCoin() {
-		return Collections.min(coinCount.values()) != 0;
+	private void moveCoinsToChange(int coin, int count) {
+		coins.changeCoinCount(coin, coins.getCoinCount(coin) - count);
+		change.changeCoinCount(coin, count);
 	}
+
 }

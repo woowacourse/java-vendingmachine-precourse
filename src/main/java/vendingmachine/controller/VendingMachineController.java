@@ -19,7 +19,7 @@ public class VendingMachineController {
 				break;
 			}
 		}
-		view.printChanges(machine.getSortedCoinCount());
+		view.printChanges(machine.getCoinList());
 	}
 
 	public void settingMerchandise() {

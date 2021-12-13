@@ -10,7 +10,7 @@ class MachineTest {
 	@Test
 	void 잔돈_생성_테스트() {
 		machine.setCoins(450);
-		System.out.println(machine.getSortedCoinCount());
+		System.out.println(machine.getCoinList());
 	}
 
 	@Test
@@ -37,8 +37,8 @@ class MachineTest {
 	@Test
 	void 잔돈_최소개수_반환_테스트() {
 		machine.setCoins(1050);
-		System.out.println(machine.getSortedCoinCount());
-		machine.setPayment("1200");
+		System.out.println(machine.getCoinList());
+		machine.setPayment("800");
 		System.out.println(machine.getReturnCoins());
 	}
 }
