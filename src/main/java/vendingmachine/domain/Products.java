@@ -8,6 +8,10 @@ import java.util.stream.Collectors;
 
 public class Products {
 	private static final int PRODUCT_ARRAY_LENGTH = 3;
+	private static final String SEMICOLON = ";";
+	private static final String COMMA = ",";
+	private static final String LEFT_SQUARE_BRACKETS = "[";
+	private static final String RIGHT_SQUARE_BRACKETS = "]";
 
 	private final List<Product> products;
 
@@ -16,7 +20,7 @@ public class Products {
 	}
 
 	private List<Product> createProducts(String inputProducts) {
-		String[] split = inputProducts.split(";");
+		String[] split = inputProducts.split(SEMICOLON);
 		checkFormat(split);
 
 		return Arrays.stream(split)
@@ -25,7 +29,7 @@ public class Products {
 	}
 
 	private String[] getProductSplit(String str) {
-		String[] item = str.substring(1, str.length() - 1).split(",");
+		String[] item = str.substring(1, str.length() - 1).split(COMMA);
 		if (item.length != PRODUCT_ARRAY_LENGTH) {
 			throw new IllegalArgumentException(ERROR_INPUT_PRODUCT_NOT_VALID);
 		}
@@ -34,7 +38,7 @@ public class Products {
 
 	private void checkFormat(String[] split) {
 		for (String s : split) {
-			if (!(s.startsWith("[") && s.endsWith("]"))) {
+			if (!(s.startsWith(LEFT_SQUARE_BRACKETS) && s.endsWith(RIGHT_SQUARE_BRACKETS))) {
 				throw new IllegalArgumentException(ERROR_PRODUCT_NOT_SQUARE_BRACKETS);
 			}
 		}
