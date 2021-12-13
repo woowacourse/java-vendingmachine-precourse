@@ -11,7 +11,7 @@ public class OutputView {
 	public static void containCoins(Wallet wallet) {
 		System.out.println("자판기가 보유한 동전");
 		Arrays.stream(Coin.values())
-			.forEach(coin -> System.out.println(coin.getAmount() + "원 - " + wallet.getWallet().get(coin) + "개"));
+			.forEach(coin -> printMoney(coin.getAmount(), wallet.getWallet().get(coin)));
 	}
 
 	public static void remainCoins(Map<Coin, Integer> remain) {
@@ -20,8 +20,12 @@ public class OutputView {
 			if (entry.getValue() == 0) {
 				continue;
 			}
-			System.out.println(entry.getKey().getAmount() + "원 - " + entry.getValue() + "개");
+			printMoney(entry.getKey().getAmount(), entry.getValue());
 		}
+	}
+
+	private static void printMoney(int amount, int count) {
+		System.out.println(amount + "원 - " + count + "개");
 	}
 
 	public static void remainBalance(int balance) {
