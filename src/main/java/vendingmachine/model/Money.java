@@ -20,7 +20,7 @@ public class Money {
         setRandomCnt(total);
     }
 
-    public Map<Coin, Integer> getChanges(int total) {
+    public String getChangesString(int total) {
         Map<Coin, Integer> changes = new LinkedHashMap<>();
 
         for (Entry<Coin, Integer> entry : coins.entrySet()) {
@@ -33,7 +33,18 @@ public class Money {
                 break;
             }
         }
-        return changes;
+        return getChangeString(changes);
+    }
+
+    private String getChangeString(Map<Coin, Integer> coins) {
+        StringBuilder stringBuilder = new StringBuilder("잔돈\n");
+        for(Entry<Coin, Integer> coin: coins.entrySet()) {
+            stringBuilder.append(coin.getKey().toString())
+                    .append(" - ")
+                    .append(coin.getValue())
+                    .append("개\n");
+        }
+        return stringBuilder.toString();
     }
 
     public int getTotalMoney() {
@@ -69,5 +80,17 @@ public class Money {
             coins.put(coin, coins.getOrDefault(coin, DEFALUT_CNT) + 1);
             temp += random;
         }
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder("자판기가 보유한 동전\n");
+        for(Entry<Coin, Integer> coin: coins.entrySet()) {
+            stringBuilder.append(coin.getKey().toString())
+                    .append(" - ")
+                    .append(coin.getValue())
+                    .append("개\n");
+        }
+        return stringBuilder.toString();
     }
 }

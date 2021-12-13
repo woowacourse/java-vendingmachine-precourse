@@ -16,15 +16,16 @@ public class VendingMachineController {
 
     public void run() {
         VendingMachine vendingMachine = createVendingMachine();
+        System.out.println(vendingMachine.getAllChangesString());
         int payment = inputMoney(vendingMachine);
 
         while (!vendingMachine.isExit()) {
-            System.out.println("투입 금액: "+payment);
-            String purchase = input.inputPurchase();
-            vendingMachine.buyProduct(purchase);
+            String purchase = input.inputPurchase(payment);
+            int buy = vendingMachine.buyProduct(purchase);
+            payment -= buy;
         }
 
-        System.out.println(vendingMachine.getChangeString());
+        System.out.println(vendingMachine.getPayChangeString());
     }
 
     private VendingMachine createVendingMachine() {

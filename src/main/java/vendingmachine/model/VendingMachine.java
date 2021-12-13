@@ -23,29 +23,24 @@ public class VendingMachine {
         return products.getMinPrice() > payment || products.isAllSoldOut();
     }
 
-    public void buyProduct(String name) {
+    public int buyProduct(String name) {
+        int productPrice = 0;
         try {
-            System.out.println("투입 금액: "+payment);
-            int productPrice = products.buyProduct(name, payment);
+            productPrice = products.buyProduct(name, payment);
             payment -= productPrice;
 
         } catch (IllegalStateException e) {
             System.out.println(e.getMessage());
         }
+        return productPrice;
     }
 
-    public String getChangeString() {
-        Map<Coin, Integer> coins = changes.getChanges(payment);
-        StringBuilder stringBuilder = new StringBuilder("잔돈\n");
-        for(Entry<Coin, Integer> coin: coins.entrySet()) {
-            if(coin.getValue() == 0) {
-                continue;
-            }
-            stringBuilder.append(coin.getKey().getAmount())
-                    .append(" - ")
-                    .append(coin.getValue())
-                    .append("개\n");
-        }
-        return stringBuilder.toString();
+    public String getAllChangesString() {
+        return changes.toString();
     }
+
+    public String getPayChangeString() {
+        return changes.getChangesString(payment);
+    }
+
 }

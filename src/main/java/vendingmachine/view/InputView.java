@@ -60,7 +60,8 @@ public class InputView {
         }
     }
 
-    public String inputPurchase() {
+    public String inputPurchase(int payment) {
+        System.out.println("투입 금액: "+payment+"원");
         System.out.println(INPUT_PURCHASE_SENETENCE);
         return Console.readLine();
     }
