@@ -46,12 +46,12 @@ public class VendingMachineController {
 	}
 
 	public void purchase() {
-		do {
+		while (isContinuePurchase()) {
 			outputView.printCustomerMoney(customerMoney);
 			outputView.printInputPurchaseItem();
 			customerMoney = purchaseService.purchaseItem(items, customerMoney);
 			moneyService.isEnoughMoneyForMinPriceItem(items, customerMoney);
-		} while (isContinuePurchase());
+		}
 		coinService.getRemainingCoins(coins, customerMoney);
 		outputView.printCustomerMoney(customerMoney);
 		outputView.printRemainingMessage();
