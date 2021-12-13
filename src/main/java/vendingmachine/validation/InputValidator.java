@@ -35,6 +35,10 @@ public class InputValidator {
 
 	private void validateItemsForm(String merchandiseList) {
 		String[] items = merchandiseList.split(";");
+		if (items.length == 0) {
+			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_MERCHANDISEFORM_MESSAGE);
+		}
+
 		for (String item : items) {
 			if (item.length() < 0) {
 				throw new IllegalArgumentException(ERROR_MESSAGE + NOT_MERCHANDISEFORM_MESSAGE);
