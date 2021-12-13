@@ -90,7 +90,14 @@ public class VendingMachineController {
 	}
 
 	private boolean canBuyProduct() {
-		return vendingMachineProducts.hasProduct() && user.isEnoughMoney(vendingMachineProducts.getLowestPrice());
+		while (true) {
+			try {
+				return vendingMachineProducts.hasProduct() && user.isEnoughMoney(
+					vendingMachineProducts.getLowestPrice());
+			} catch (IllegalArgumentException e) {
+				OutputView.printError(e.getMessage());
+			}
+		}
 	}
 
 	private void getChange() {

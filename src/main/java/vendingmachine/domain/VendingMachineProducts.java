@@ -24,7 +24,7 @@ public class VendingMachineProducts {
 			.filter(VendingMachineProduct::isExist)
 			.map(VendingMachineProduct::getPrice)
 			.min(Comparator.naturalOrder())
-			.orElse(0);
+			.orElseThrow(()->new IllegalArgumentException(PRODUCT_LOWEST_PRICE_NOT_FOUND_ERROR));
 	}
 
 	public boolean hasProduct() {
