@@ -18,15 +18,24 @@ public class Changer {
 	public Changes returnChange() {
 		for (Coin nowCoin : getHavingCoins()) {
 			int dividedNum = nowCoin.getNumDivided(remainAmount);
-			if (dividedNum <= 0) {
+			int nowCoinNum = havingChanges.getCoinNum(nowCoin);
+			if (isZero(dividedNum)) {
 				continue;
 			}
-			if (dividedNum <= havingChanges.getCoinNum(nowCoin)) {
+			if (isDividedNumMoreThanHavingCoinNum(nowCoinNum, dividedNum)) {
 				doReturn(nowCoin, dividedNum);
 			}
-			doReturn(nowCoin, havingChanges.getCoinNum(nowCoin));
+			doReturn(nowCoin, nowCoinNum);
 		}
 		return returningChanges;
+	}
+
+	private boolean isDividedNumMoreThanHavingCoinNum(int nowCoinNum, int dividedNum) {
+		return dividedNum <= nowCoinNum;
+	}
+
+	private boolean isZero(int dividedNum) {
+		return dividedNum == 0;
 	}
 
 	private void doReturn(Coin nowCoin, int coinNum) {
