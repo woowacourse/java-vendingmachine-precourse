@@ -56,6 +56,7 @@ public class VendingMachineController {
 
 	public void run() {
 		while (products.selectMinimumPrice() <= insertMoney && products.exists()) {
+			OutputView.printInsertMoney(insertMoney);
 			try {
 				purchaseProduct();
 			} catch (IllegalArgumentException exception) {

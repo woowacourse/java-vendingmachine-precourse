@@ -36,4 +36,8 @@ public class OutputView {
 	public static void printInputPurchaseProductMessage() {
 		System.out.println(INPUT_PURCHASE_PRODUCT);
 	}
+
+	public static void printInsertMoney(int insertMoney) {
+		System.out.println(insertMoney);
+	}
 }
