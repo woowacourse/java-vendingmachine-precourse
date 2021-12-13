@@ -19,7 +19,7 @@ public class MachineController {
 	private void initiate() {
 		CoinGroup coins = new CoinGroup(InputController.getMachineMoney());
 		OutputView.printBreak();
-		OutputView.printMachineCoin(coins.get());
+		OutputView.printMachineCoin(coins.getMap());
 		OutputView.printBreak();
 		BeverageGroup beverages = InputController.getBeverageGroup();
 		OutputView.printBreak();
@@ -40,6 +40,6 @@ public class MachineController {
 
 	private void giveChanges() {
 		OutputView.printUserMoney(vendingMachine.userMoney);
-		OutputView.printChanges(new ChangesCoinGroup(vendingMachine).getNotEmptyMap());
+		OutputView.printChanges(new ChangesCoinGroup(vendingMachine.coins, vendingMachine.userMoney).getNotEmptyMap());
 	}
 }

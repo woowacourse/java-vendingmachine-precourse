@@ -5,14 +5,16 @@ import java.util.LinkedHashMap;
 import vendingmachine.Utils.Util;
 
 public class CoinGroup {
-	protected final LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>(); // 코인종류-코인개수 맵
-
-	public CoinGroup() {
-	}
+	protected final LinkedHashMap<Coin, Integer> coins; // 코인종류-코인개수 맵
 
 	public CoinGroup(Money money) {
+		this.coins = new LinkedHashMap<>();
 		initiate();
 		moneyToCoin(money);
+	}
+
+	public CoinGroup(CoinGroup coins) {
+		this.coins = coins.getMap();
 	}
 
 	private void initiate() {
@@ -32,11 +34,7 @@ public class CoinGroup {
 		}
 	}
 
-	public void set(Coin coin, int coinCount) {
-		coins.put(coin, coinCount);
-	}
-
-	public LinkedHashMap<Coin, Integer> get() {
+	public LinkedHashMap<Coin, Integer> getMap() {
 		return coins;
 	}
 
