@@ -4,7 +4,7 @@ import java.util.Map;
 
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Quantity;
-import vendingmachine.dto.ResponseAllCoinQuantity;
+import vendingmachine.dto.ResponseAllCoinQuantityDto;
 import vendingmachine.dto.ResponseChangeDto;
 import vendingmachine.dto.ResponseMoneyDto;
 import vendingmachine.enums.Coin;
@@ -19,8 +19,8 @@ public class OutputView {
 		System.out.println(e.getMessage());
 	}
 
-	public static void outputAllCoinQuantity(ResponseAllCoinQuantity responseAllCoinQuantity) {
-		Map<Coin, Quantity> coins = responseAllCoinQuantity.getCoins();
+	public static void outputAllCoinQuantity(ResponseAllCoinQuantityDto responseAllCoinQuantityDto) {
+		Map<Coin, Quantity> coins = responseAllCoinQuantityDto.getCoins();
 		System.out.println(RESPONSE_ALL_COIN_QUANTITY_MESSAGE);
 		for (Coin coin : Coin.values()) {
 			int amount = coin.get();

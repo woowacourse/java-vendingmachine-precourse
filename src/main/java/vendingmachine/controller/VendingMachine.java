@@ -7,7 +7,7 @@ import vendingmachine.dto.RequestHoldingMoneyDto;
 import vendingmachine.dto.RequestInsertMoneyDto;
 import vendingmachine.dto.RequestRegisterProductsDto;
 import vendingmachine.dto.RequestSellProductDto;
-import vendingmachine.dto.ResponseAllCoinQuantity;
+import vendingmachine.dto.ResponseAllCoinQuantityDto;
 import vendingmachine.dto.ResponseChangeDto;
 import vendingmachine.dto.ResponseMoneyDto;
 import vendingmachine.service.VendingMachineService;
@@ -32,8 +32,8 @@ public class VendingMachine {
 	}
 
 	public void showAllCoinQuantity() {
-		ResponseAllCoinQuantity responseAllCoinQuantity = vendingMachineService.getAllCoinQuantity();
-		outputAllCoinQuantity(responseAllCoinQuantity);
+		ResponseAllCoinQuantityDto responseAllCoinQuantityDto = vendingMachineService.getAllCoinQuantity();
+		outputAllCoinQuantity(responseAllCoinQuantityDto);
 	}
 
 	public void registerProducts() {
