@@ -11,14 +11,12 @@ public class VendingMachine {
 	}
 
 	public void insertMoney(Money money) {
-		insertMoney = money;
+		insertMoney.plus(money);
 	}
 
-	public boolean compareCheapestPrice(Money money) {
+	public int compareCheapestPrice(Money money) {
+		products.removeSoldOutProduct();
 		Money cheapestPrice = products.getCheapestPrice();
-		if (money.compareTo(cheapestPrice) < 0) {
-			return false;
-		}
-		return true;
+		return money.compareTo(cheapestPrice);
 	}
 }

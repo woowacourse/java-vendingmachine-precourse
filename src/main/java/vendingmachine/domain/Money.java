@@ -26,4 +26,8 @@ public class Money implements Comparable<Money>{
 	public int compareTo(Money o) {
 		return amount - o.amount;
 	}
+
+	public void plus(Money money) {
+		amount += money.amount;
+	}
 }
