@@ -1,15 +1,12 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 public class Machine {
 	private Coins coins;
 	private Coins change;
-	private List<Merchandise> merchandiseList = new ArrayList<>();
+	private Merchandise merchandise = new Merchandise();
 	private int balance;
 
 	public void setCoins(int amount) {
@@ -24,7 +21,7 @@ public class Machine {
 	public void setMerchandise(String merchandiseList) {
 		String[] items = merchandiseList.split(";");
 		for (String item : items) {
-			this.merchandiseList.add(new Merchandise(item));
+			merchandise.addItem(item);
 		}
 	}
 
@@ -37,47 +34,18 @@ public class Machine {
 	}
 
 	public boolean isExistItem(String item) {
-		for (Merchandise merchandise : merchandiseList) {
-			if (merchandise.isSameMerchandise(item)) {
-				return true;
-			}
-		}
-		return false;
+		return merchandise.isExistItem(item);
 	}
 
 	public void buyItem(String name) {
-		Merchandise item = findItem(name);
+		Item item = merchandise.findItem(name);
 		if (item.checkAbleToSell(balance)) {
 			balance = item.sell(balance);
 		}
 	}
 
-	private Merchandise findItem(String name) {
-		return merchandiseList.stream()
-			.filter(merchandise -> merchandise.isSameMerchandise(name))
-			.findAny()
-			.orElse(null);
-	}
-
 	public boolean checkAbleToBuyItem() {
-		if (checkItemsCount() && checkBalance()) {
-			return true;
-		}
-		return false;
-	}
-
-	private boolean checkItemsCount() {
-		for (Merchandise merchandise : merchandiseList) {
-			if (merchandise.isSoldOut()) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean checkBalance() {
-		Collections.sort(merchandiseList);
-		if (merchandiseList.get(0).checkAbleToSell(balance) == false) {
+		if (merchandise.isAllSoldOut() || merchandise.isMinPriceMoreThanBalance(balance)) {
 			return false;
 		}
 		return true;
@@ -85,7 +53,11 @@ public class Machine {
 
 	public Map<Integer, Integer> getReturnCoins() {
 		change = new Coins();
-		Map<Integer, Integer> sortedCoinCount = coins.getSortedCoinCount();
+		calcChange(coins.getSortedCoinCount());
+		return change.getSortedCoinCount();
+	}
+
+	private void calcChange(Map<Integer, Integer> sortedCoinCount) {
 		Iterator<Integer> coins = sortedCoinCount.keySet().iterator();
 		while (coins.hasNext() && balance > 0) {
 			int coin = coins.next();
@@ -95,7 +67,6 @@ public class Machine {
 				moveCoinsToChange(coin, count);
 			}
 		}
-		return change.getSortedCoinCount();
 	}
 
 	private int getReturnCoinCount(int coin) {

@@ -1,43 +1,54 @@
 package vendingmachine.domain;
 
-public class Merchandise implements Comparable<Merchandise> {
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
+public class Merchandise {
 	public static final int MERCHANDISE_NAME_INDEX = 0;
 	public static final int MERCHANDISE_PRICE_INDEX = 1;
 	public static final int MERCHANDISE_COUNT_INDEX = 2;
-	private String name;
-	private int price;
-	private int count;
+	private List<Item> itemList = new ArrayList<>();
 
-	public Merchandise(String item) {
+	public void addItem(String item) {
 		item = item.replace("[", "").replace("]", "");
 		String[] elements = item.split(",");
-		this.name = elements[MERCHANDISE_NAME_INDEX];
-		this.price = Integer.parseInt(elements[MERCHANDISE_PRICE_INDEX]);
-		this.count = Integer.parseInt(elements[MERCHANDISE_COUNT_INDEX]);
+		String name = elements[MERCHANDISE_NAME_INDEX];
+		int price = Integer.parseInt(elements[MERCHANDISE_PRICE_INDEX]);
+		int count = Integer.parseInt(elements[MERCHANDISE_COUNT_INDEX]);
+		itemList.add(new Item(name, price, count));
 	}
 
-	public boolean isSameMerchandise(String name) {
-		return this.name.equals(name);
+	public boolean isExistItem(String name) {
+		for (Item item : itemList) {
+			if (item.isSameItem(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
-	public boolean checkAbleToSell(int balance) {
-		if (balance < price || count <= 0) {
-			return false;
+	public Item findItem(String name) {
+		return itemList.stream()
+			.filter(item -> item.isSameItem(name))
+			.findAny()
+			.orElse(null);
+	}
+
+	public boolean isAllSoldOut() {
+		for (Item item : itemList) {
+			if (item.isSoldOut() == false) {
+				return false;
+			}
 		}
 		return true;
 	}
 
-	public int sell(int balance) {
-		count -= 1;
-		return balance - price;
-	}
-
-	public boolean isSoldOut() {
-		return count == 0;
-	}
-
-	@Override
-	public int compareTo(Merchandise o) {
-		return this.price - o.price;
+	public boolean isMinPriceMoreThanBalance(int balance) {
+		Collections.sort(itemList);
+		if (itemList.get(0).checkAbleToSell(balance) == false) {
+			return true;
+		}
+		return false;
 	}
 }
