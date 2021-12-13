@@ -50,8 +50,12 @@ public class Machine {
 
 	public void purchase(String itemName) throws IllegalArgumentException {
 		Item item = items.get(itemName);
-		checkInputCoinAmountByItem(item);
+		validatePurchase(item);
 		inputCoinAmount -= item.getPrice();
+	}
+
+	private void validatePurchase(Item item) {
+		checkInputCoinAmountByItem(item);
 		item.decreaseQuantity();
 	}
 
