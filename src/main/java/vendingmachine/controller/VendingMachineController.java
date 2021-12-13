@@ -46,7 +46,7 @@ public class VendingMachineController {
 		view.printCurrentBalance(machine.getCurrentBalance());
 		while (true) {
 			String item = view.inputMerchandiseToBuy();
-			if (validator.isValidSelectedItem(item) && machineValidator.isValidSelectedItem(item)) {
+			if (machineValidator.isValidSelectedItem(item)) {
 				machine.buyItem(item);
 				break;
 			}
