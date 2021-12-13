@@ -20,7 +20,7 @@ public class VendingMachineController {
 		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		inputMerchandiseInformationWithErrorHandling();
 		inputMoneyWithErrorHandling();
-		while(isUserBuyMerchandise(user, vendingMachine.getMerchandises()) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()){
+		while(vendingMachine.isUserBuyMerchandise(user.getUserMoney()) && !vendingMachine.getMerchandises().isAllMerchandisesSoldout()){
 			OutputView.showInputMoneyStatus(user.getUserMoney());
 			buyMerchandiseWithErrorHandling();
 		}

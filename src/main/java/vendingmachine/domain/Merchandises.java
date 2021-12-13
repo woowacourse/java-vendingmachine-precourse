@@ -47,4 +47,10 @@ public class Merchandises {
 
 		return soldOutMerchandises.size() == merchandiseList.size();
 	}
+
+	public List<Merchandise> selectExpensiveMerchandise(int userMoney) {
+		return merchandiseList.stream()
+			.filter(merchandise -> merchandise.isBigMerchandiseMoney(userMoney))
+			.collect(Collectors.toList());
+	}
 }

@@ -20,20 +20,17 @@ public class VendingMachine {
 		initCoinCounts(returnCoinCounts);
 	}
 
-	public static boolean isUserBuyMerchandise(User user, Merchandises merchandises) {
-		List<Merchandise> notBuyMerchandise = merchandises.getMerchandiseList().stream()
-			.filter(merchandise -> merchandise.isBigMerchandiseMoney(user.getUserMoney()))
-			.collect(Collectors.toList());
-
-		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();
-	}
-
 	public static LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
 		LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
 		for (Coin coin : coinStatus.keySet()) {
 			intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
 		}
 		return intCoinStatus;
+	}
+
+	public boolean isUserBuyMerchandise(int userMoney) {
+		List<Merchandise> notBuyMerchandise = merchandises.selectExpensiveMerchandise(userMoney);
+		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();
 	}
 
 	public Merchandises getMerchandises() {
