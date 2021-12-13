@@ -17,6 +17,12 @@ public class Validator {
 		}
 	}
 
+	public static void isPositive(String input) {
+		if (Integer.parseInt(input) < 0) {
+			throw new IllegalArgumentException("[ERROR] 0이상의 수를 입력해주세요.");
+		}
+	}
+
 	public static void isDivisible(String input) {
 		if (Integer.parseInt(input) % DIVISIBLE_VALUE != 0) {
 			throw new IllegalArgumentException("[ERROR] 돈은 10원으로 나누어 떨어져야 합니다.");
