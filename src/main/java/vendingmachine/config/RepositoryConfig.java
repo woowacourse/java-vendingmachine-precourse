@@ -1,0 +1,24 @@
+package vendingmachine.config;
+
+import vendingmachine.domain.ChangeSafe;
+import vendingmachine.domain.ProductSet;
+import vendingmachine.repository.ChangeSafeRepository;
+import vendingmachine.repository.ProductRepository;
+
+public class RepositoryConfig {
+	public static ChangeSafeRepository getChangeSafeRepository() {
+		return new ChangeSafeRepository();
+	}
+
+	public static ChangeSafeRepository getChangeSafeRepository(ChangeSafe changeSafe) {
+		return new ChangeSafeRepository(changeSafe);
+	}
+
+	public static ProductRepository getProductRepository() {
+		return new ProductRepository();
+	}
+
+	public static ProductRepository getProductRepository(ProductSet productSet) {
+		return new ProductRepository(productSet);
+	}
+}

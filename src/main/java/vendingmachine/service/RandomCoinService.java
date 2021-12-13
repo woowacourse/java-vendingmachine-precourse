@@ -1,5 +1,6 @@
 package vendingmachine.service;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -11,7 +12,7 @@ public class RandomCoinService implements CoinService {
 
 	@Override
 	public Map<Coin, Quantity> generateCoinMap(Money money) {
-		Map<Coin, Quantity> coins = new TreeMap<>();
+		Map<Coin, Quantity> coins = new LinkedHashMap<>();
 		while (money.isGreaterThan(Money.ZERO)) {
 			Coin coin = pickOne(money);
 			createOrAdd(coins, coin);
@@ -29,9 +30,9 @@ public class RandomCoinService implements CoinService {
 	}
 
 	private Coin pickOne(Money money) {
-		Coin coin = Coin.pickRandom();
-		if (!money.isLessThan(coin.toMoney())) {
-			return coin;
+		int amount = Coin.pickRandom();
+		if (!money.isLessThan(new Money(amount))) {
+			return Coin.of(amount);
 		}
 		return pickOne(money);
 	}

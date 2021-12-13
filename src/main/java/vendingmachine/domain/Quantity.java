@@ -5,6 +5,7 @@ import vendingmachine.validation.Validator;
 
 public class Quantity {
 	private static final String UNIT = "개";
+	public static final String NAME = "수량";
 	public static final Quantity ZERO = new Quantity(0);
 	public static final Quantity ONE = new Quantity(1);
 

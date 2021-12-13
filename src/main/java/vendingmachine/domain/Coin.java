@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -11,24 +13,35 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
+    private static final String CURRENCY = "원";
+    private static final String ERROR_NO_AMOUNT = "%d 원 동전이 없습니다.";
     private final int amount;
 
     Coin(final int amount) {
         this.amount = amount;
     }
 
-    public static Coin pickRandom() {
-        int randomIndex = Randoms.pickNumberInList(
-            IntStream.range(0, values().length)
-                .boxed()
-                .collect(Collectors.toList())
-        );
-        return Coin.values()[randomIndex];
+    public static int pickRandom() {
+        List<Integer> amounts = getAmountList();
+        return Randoms.pickNumberInList(amounts);
+    }
+
+    private static List<Integer> getAmountList() {
+        return Arrays.stream(Coin.values()).map(coin -> coin.amount).collect(Collectors.toList());
+    }
+
+    public static Coin of(int amount) {
+        for (Coin coin : Coin.values()) {
+            if (amount == coin.amount) {
+                return coin;
+            }
+        }
+        throw new IllegalArgumentException(String.format(ERROR_NO_AMOUNT, amount));
     }
 
     @Override
     public String toString() {
-        return String.valueOf(amount);
+        return amount + CURRENCY;
     }
 
     public Money toMoney() {

@@ -16,6 +16,6 @@ public class ChangeSafeService {
 	}
 
 	public String persist(Map<Coin, Quantity> coinMap) {
-		return repository.merge(new ChangeSafe(coinMap));
+		return repository.save(new ChangeSafe(coinMap));
 	}
 }

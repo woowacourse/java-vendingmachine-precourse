@@ -16,7 +16,10 @@ public class ControllerConfig {
 	}
 
 	public static ProductController getProductController() {
-		return new ProductController();
+		return new ProductController(
+			ServiceConfig.getSplitService(),
+			ServiceConfig.getProductService()
+		);
 	}
 
 	public static DepositController getDepositController() {

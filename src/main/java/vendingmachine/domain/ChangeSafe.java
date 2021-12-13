@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class ChangeSafe {
-	private static final int INIT_QUANTITY = 0;
 	private static final String FORMAT = "%s - %s";
 	private static final String JOINER = "\n";
 
@@ -17,18 +16,25 @@ public class ChangeSafe {
 	}
 
 	public ChangeSafe(Map<Coin, Quantity> coinMap) {
-		this.coinMap = new LinkedHashMap<>(coinMap);
+		this();
+		merge(coinMap);
 	}
 
 	private Map<Coin, Quantity> createEmpty() {
 		return new LinkedHashMap<>(
-			Arrays.stream(Coin.values()).collect(Collectors.toMap(coin -> coin, coin -> Quantity.ZERO))
+			Arrays.stream(Coin.values())
+				.collect(LinkedHashMap::new,
+					(map, coin) -> map.put(coin, Quantity.ZERO),
+					Map::putAll)
 		);
 	}
 
 	public ChangeSafe merge(ChangeSafe other) {
-		other.coinMap.forEach((k, v) -> this.coinMap.merge(k, v, Quantity::plus));
-		return new ChangeSafe(this.coinMap);
+		return new ChangeSafe(other.coinMap);
+	}
+
+	private void merge(Map<Coin, Quantity> other) {
+		other.forEach((k, v) -> this.coinMap.merge(k, v, Quantity::plus));
 	}
 
 	@Override
