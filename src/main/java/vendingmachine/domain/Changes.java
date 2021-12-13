@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,6 +45,35 @@ public class Changes {
 			.collect(Collectors.toList());
 	}
 
+	public List<Coin> giveChanges(int currentAmount) {
+		List<Coin> result = new ArrayList<>();
+
+		for (Coin coin : changeCoinList()) {
+			if (currentAmount >= coin.getAmount()) {
+				currentAmount -= coin.getAmount();
+				result.add(coin);
+			}
+		}
+
+		return result;
+	}
+
+	public List<Coin> changeCoinList() {
+		List<Coin> coinList = new ArrayList<>();
+
+		for (Coin coin : coinMap.keySet()) {
+			if (coinMap.get(coin) == 0) {
+				continue;
+			}
+			int i = 0;
+			while (coinMap.get(coin) != i++) {
+				coinList.add(coin);
+			}
+		}
+
+		return getOrderCoinList(coinList);
+	}
+
 	private Map<Coin, Integer> initZeroCoinMap() {
 		Map<Coin, Integer> zeroCoinMap = new HashMap<>();
 
@@ -51,5 +82,11 @@ public class Changes {
 		}
 
 		return zeroCoinMap;
+	}
+
+	private List<Coin> getOrderCoinList(List<Coin> coinList) {
+		return coinList.stream()
+			.sorted(Comparator.comparingInt(Coin::getAmount).reversed())
+			.collect(Collectors.toList());
 	}
 }
