@@ -6,14 +6,14 @@ import java.util.HashMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class Coins {
+public class CoinBox {
     private final HashMap<Integer, Integer> coinTable = new HashMap<>();
 
-    public Coins() {
-        initializeCoins();
+    public CoinBox() {
+        initializeCoiBox();
     }
 
-    public void generateRandomCoins(int money) {
+    public void generateRandomCoinBox(int money) {
         ArrayList<Integer> costList = createCostList(money);
         costList.sort(Collections.reverseOrder());
 
@@ -40,7 +40,7 @@ public class Coins {
         return -1;
     }
 
-    public int getValueOfCoins() {
+    public int getValueOfCoinBox() {
         int money = 0;
         for (int coinCost : coinTable.keySet()) {
             money += getCoinCount(coinCost) * coinCost;
@@ -77,7 +77,7 @@ public class Coins {
         return returnable;
     }
 
-    private void initializeCoins() {
+    private void initializeCoiBox() {
         for (Coin coin : Coin.values()) {
             coinTable.put(coin.getAmount(), 0);
         }
