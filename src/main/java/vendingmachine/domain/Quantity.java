@@ -16,6 +16,7 @@ public class Quantity {
 	}
 
 	public Quantity(int quantity) {
+		validateRange(quantity);
 		this.quantity = quantity;
 	}
 
