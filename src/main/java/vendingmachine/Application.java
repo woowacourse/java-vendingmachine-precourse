@@ -5,5 +5,6 @@ public class Application {
 		// TODO: 프로그램 구현
 		CoreController tmp = new CoreController();
 		tmp.setVendingMachineHoldMoney();
+		tmp.setVendingMachineHoldProduct();
 	}
 }

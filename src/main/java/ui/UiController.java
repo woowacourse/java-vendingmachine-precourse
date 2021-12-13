@@ -7,6 +7,8 @@ import vendingmachine.Coin;
 public class UiController {
 	private static final String QUESTION_VENDING_MACHINE_HOLD_MONEY
 		= "자판기가 보유하고 있는 금액을 입력해 주세요.\n";
+	private static final String QUESTION_VENDING_MACHINE_HOLD_PRODUCT
+		= "\n상품명과 가격, 수량을 입력해 주세요.\n";
 	private static final String MESSAGE_CURRENT_COIN_NUMBER
 		= "\n자판기가 보유한 동전\n";
 	private static final String MONEY_NUMBER
@@ -43,5 +45,19 @@ public class UiController {
 
 	public void printLogicalExceptionError(String logicalErrorMessage) {
 		ui.printMessage(logicalErrorMessage);
+	}
+
+	public String askVendingMachineHoldProduct() {
+		boolean endCondition = false;
+		String products = "";
+		while (!endCondition) {
+			products = ui.printQuestion(QUESTION_VENDING_MACHINE_HOLD_PRODUCT);
+			try {
+				endCondition = inputFormatChecker.checkProductSpecFormat(products);
+			} catch (IllegalArgumentException e) {
+				ui.printMessage(e.getMessage());
+			}
+		}
+		return products;
 	}
 }
