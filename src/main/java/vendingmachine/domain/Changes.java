@@ -15,11 +15,9 @@ public class Changes {
 		}
 	}
 
-	public Changes(Money money) {
-		setRandomChanges(money);
-	}
+	public Changes() {}
 
-	private void setRandomChanges(Money money) {
+	public void setRandomChanges(Money money) {
 		int amount = money.getAmount();
 		while (amount > 0) {
 			int coinAmount = Randoms.pickNumberInList(Coin.getAmountList());
@@ -32,7 +30,30 @@ public class Changes {
 		}
 	}
 
+	private void setChanges(Coin coin, int count) {
+		changes.replace(coin, count);
+	}
+
 	public Map<Coin, Integer> getChanges() {
+		return changes;
+	}
+
+	public Money getTotalMoney() {
+		Money totalMoney = new Money(0);
+		for (Map.Entry<Coin, Integer> coinInteger : changes.entrySet()) {
+			totalMoney.plus(new Money(coinInteger.getKey().getAmount() * coinInteger.getValue()));
+		}
+		return totalMoney;
+	}
+
+	public Changes toChangesMinCount(Money insertMoney) {
+		Changes changes = new Changes();
+		int amount = insertMoney.getAmount();
+		for (Coin coin : Coin.values()) {
+			int count = Math.min(this.changes.get(coin), amount / coin.getAmount());
+			changes.setChanges(coin, count);
+			amount -= coin.getAmount() * count;
+		}
 		return changes;
 	}
 }

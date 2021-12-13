@@ -45,4 +45,8 @@ public class VendingMachine {
 	public Money getInsertMoney() {
 		return insertMoney;
 	}
+
+	public Changes returnChanges() {
+		return changes.toChangesMinCount(insertMoney);
+	}
 }
