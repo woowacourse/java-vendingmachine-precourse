@@ -3,6 +3,10 @@ package vendingmachine.model;
 import java.util.Objects;
 
 public class Beverage implements Comparable<Beverage> {
+	private static final int SOLD_OUT_COUNT = 0;
+	private static final String SOLD_OUT_ERROR = "[ERROR] 모두 판매된 상품입니다.";
+	private static final String MONEY_SHORT_ERROR = "[ERROR] 돈이 부족합니다.";
+
 	private final String name;
 	private final Money price;
 	private int count;
@@ -34,7 +38,7 @@ public class Beverage implements Comparable<Beverage> {
 
 	private void checkPrice(Money insertedMoney) {
 		if (priceExpensiveThan(insertedMoney)) {
-			throw new IllegalArgumentException("[ERROR] 돈이 부족합니다.");
+			throw new IllegalArgumentException(MONEY_SHORT_ERROR);
 		}
 	}
 
@@ -44,12 +48,12 @@ public class Beverage implements Comparable<Beverage> {
 
 	private void checkSoldOut() {
 		if (soldOut()) {
-			throw new IllegalArgumentException("[ERROR] 모두 판매된 상품입니다.");
+			throw new IllegalArgumentException(SOLD_OUT_ERROR);
 		}
 	}
 
 	public boolean soldOut() {
-		return count == 0;
+		return count == SOLD_OUT_COUNT;
 	}
 
 	private void decreaseCount() {
