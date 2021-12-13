@@ -20,8 +20,8 @@ public class MenuInputFormatValidator {
         validateNotEmptyInput(merchandiseInfo);
         validateSeparatorFormat(merchandiseInfo);
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
-        String name = infoList[0];
 
+        validateNameLength(infoList[0]);
         validatePriceInput(infoList[1]);
         validateMerchandiseNumberInput(infoList[2]);
     }
@@ -50,6 +50,12 @@ public class MenuInputFormatValidator {
 
         if (content.split(",").length != 3) {
             throw new IllegalArgumentException(INVALID_COMMAS_EXCEPTION);
+        }
+    }
+
+    private static void validateNameLength(String input) {
+        if (input.length() == 0) {
+            throw new IllegalArgumentException(EMPTY_NAME_INPUT_EXCEPTION);
         }
     }
 
