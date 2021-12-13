@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.view.OutputView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -65,6 +66,7 @@ public class VendingMachine {
                 return true;
             }
         }
+        OutputView.printRemainingAmount(getMoney());
         return false;
     }
 
