@@ -17,4 +17,11 @@ public class InputView {
             }
         }
     }
+
+    public static String inputProductInfo() {
+        System.out.println(VendingMachineConstant.INPUT_PRODUCT_INFO_MESSAGE);
+        String inputProductInfo = Console.readLine();
+        // TODO 검증 로직
+        return inputProductInfo;
+    }
 }

@@ -2,6 +2,7 @@ package vendingmachine.util;
 
 public class VendingMachineConstant {
     public static final String INPUT_VENDING_MACHINE_MONEY_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+    public static final String INPUT_PRODUCT_INFO_MESSAGE = "\n상품명과 가격, 수량을 입력해 주세요.";
 
     public static String ERROR_PREFIX_MESSAGE = "[ERROR] ";
 

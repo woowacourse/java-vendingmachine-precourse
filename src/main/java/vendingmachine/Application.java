@@ -8,5 +8,7 @@ public class Application {
         String vendingMachineMoney = InputView.inputVendingMachineMoney();
         Coins coins = new Coins(Integer.parseInt(vendingMachineMoney));
         OutputView.printCoinCount(coins.getCoins());
+
+        InputView.inputProductInfo();
     }
 }
