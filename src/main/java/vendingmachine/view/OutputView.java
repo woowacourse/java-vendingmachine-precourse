@@ -52,6 +52,7 @@ public class OutputView {
 	}
 
 	public static void printItemsRequest() {
+		printNewLine();
 		System.out.println(REGISTER_ITEM_REQUEST_TEXT);
 	}
 
