@@ -39,7 +39,7 @@ public class Products {
 
 	public boolean isValidateProductsPurchase(Balance balance) {
 		return products.stream()
-			.allMatch(product -> product.isValidateProductPurchase(balance));
+			.noneMatch(product -> product.isValidateProductPurchase(balance));
 	}
 
 	public Product isCheckSameProduct(String productName) {

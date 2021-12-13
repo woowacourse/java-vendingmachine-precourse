@@ -31,9 +31,9 @@ public class Product {
 
 	public boolean isValidateProductPurchase(Balance balance) {
 		if (price.isValidateCalculateMinus(balance) || quantity.isValidateQuantityZero()) {
-			return true;
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public boolean isValidateSameProduct(String productName) {
