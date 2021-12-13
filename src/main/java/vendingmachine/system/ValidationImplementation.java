@@ -12,6 +12,11 @@ public class ValidationImplementation implements Validation {
 
     public boolean isValidHoldingMoney(String holdingMoney) {
         boolean result = true;
+
+        if (isZeroLengthString(holdingMoney)) {
+            throw new IllegalArgumentException();
+        }
+
         if (!isOnlyDigit(holdingMoney)) {
             throw new IllegalArgumentException();
         }
@@ -40,6 +45,11 @@ public class ValidationImplementation implements Validation {
 
     @Override
     public boolean isValidProductNameAndPriceAndStock(String productInformations) {
+
+        if (isZeroLengthString(productInformations)) {
+            throw new IllegalArgumentException();
+        }
+
         if (isExistBlank(productInformations)) {
             throw new IllegalArgumentException();
         }
@@ -49,6 +59,7 @@ public class ValidationImplementation implements Validation {
             if (!isCorrectBracket(productInformation[index])) {
                 throw new IllegalArgumentException();
             }
+
             String removeBracketProductInformation = productInformation[index]
                 .substring(1, productInformation[index].length() - 1);
             String[] productNameAndPriceAndQuantity = removeBracketProductInformation.split(",");
@@ -60,11 +71,13 @@ public class ValidationImplementation implements Validation {
             if (!isOnlyHangle(productName)) {
                 throw new IllegalArgumentException();
             }
+
             String price = productNameAndPriceAndQuantity[1];
             String quantity = productNameAndPriceAndQuantity[2];
             if (!isOnlyDigit(price) || !isDivisibleBy10(price) || !isOnlyDigit(quantity)) {
                 throw new IllegalArgumentException();
             }
+
             if (isMoreThan100Million(price) || isMoreThan100Million(quantity)) {
                 throw new IllegalArgumentException();
             }
@@ -101,6 +114,10 @@ public class ValidationImplementation implements Validation {
 
     @Override
     public boolean isValidUserInsertMoney(String userInsertMoney) {
+        if (isZeroLengthString(userInsertMoney)) {
+            throw new IllegalArgumentException();
+        }
+
         if (!isOnlyDigit(userInsertMoney)) {
             throw new IllegalArgumentException();
         }
@@ -113,13 +130,13 @@ public class ValidationImplementation implements Validation {
 
     @Override
     public boolean isValidProductNameToBuy(String productName) {
+        if (isZeroLengthString(productName)) {
+            throw new IllegalArgumentException();
+        }
         if (!isOnlyHangle(productName)) {
             throw new IllegalArgumentException();
         }
         if (isExistBlank(productName)) {
-            throw new IllegalArgumentException();
-        }
-        if (isZeroLengthString(productName)) {
             throw new IllegalArgumentException();
         }
 
