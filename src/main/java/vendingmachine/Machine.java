@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.ui.MachineUI;
 
-import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -14,8 +14,9 @@ public class Machine {
     private final Validator validator;
     private final Parser parser = new Parser();
     private int amount = 0;
-    private Coin coins;
-    List<Goods> goodsList;
+    private int inputMoney = 0;
+    Map<String,Goods> goodsList;
+
     public Machine(MachineUI machineUI,Validator validator){
         this.machineUI = machineUI;
         this.validator = validator;
@@ -25,6 +26,7 @@ public class Machine {
         generateRandomCoins();
         machineUI.showAmount();
         getGoodsList();
+        getMoney();
     }
     private void getVendingMachineAmount(){
         while (true){
@@ -33,10 +35,10 @@ public class Machine {
             System.out.println();
             try{
                 validator.validateAmount(amountInput);
-                amount = Integer.parseInt(amountInput);
+                amount = Integer.parseInt(amountInput.trim());
                 break;
             }catch (Exception e){
-
+                System.out.println();
             }
         }
     }
@@ -69,10 +71,24 @@ public class Machine {
                 goodsList = parser.parseGoods(goodsListInput);
                 break;
             }catch (Exception e){
-
+                System.out.println();
             }
             System.out.println();
         }
     }
-
+    private void getMoney(){
+        while (true){
+            System.out.println("투입 금액");
+            String moneyInput = Console.readLine();
+            System.out.println();
+            try{
+                validator.validateInputMoney(moneyInput);
+                inputMoney = Integer.parseInt(moneyInput);
+                break;
+            }catch (Exception e){
+                System.out.println();
+            }
+            System.out.println();
+        }
+    }
 }
