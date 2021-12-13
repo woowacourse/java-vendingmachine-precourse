@@ -1,18 +1,14 @@
 package vendingmachine;
 
-import java.text.MessageFormat;
 import java.util.Map;
 
 public class ConsolePrinter {
-    private static final String VENDING_MACHINE_INFORMATION = "{0}원 - {1}개";
-    private static final String VENDING_MACHINE_INPUT_AMOUNT = "투입 금액 : {0}원";
-
     private ConsolePrinter() {}
 
-    public static void print(Map<Coin, Integer> coinMap, Message headMessage) {
+    public static void printCoins(Map<Coin, Integer> coinMap, Message headMessage) {
         System.out.println(headMessage.getMessage());
         for (Coin coin : coinMap.keySet()) {
-            System.out.println(MessageFormat.format(VENDING_MACHINE_INFORMATION, coin.getAmount(), coinMap.get(coin)));
+            System.out.println(coin.getAmount() + "원 - " + coinMap.get(coin));
         }
     }
 
@@ -20,7 +16,7 @@ public class ConsolePrinter {
         System.out.println(message);
     }
 
-    public static void print(int userAmount) {
-        System.out.println(MessageFormat.format(VENDING_MACHINE_INPUT_AMOUNT, userAmount));
+    public static void printUserAmount(int userAmount) {
+        System.out.println("투입 금액: " + userAmount + "원");
     }
 }
