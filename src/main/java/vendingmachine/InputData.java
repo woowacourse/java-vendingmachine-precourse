@@ -6,6 +6,7 @@ public class InputData {
 	private static final String SET_AMOUNT_MSG = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String SET_ITEM_MSG = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_MONEY_MSG = "투입 금액을 입력해 주세요.";
+	private static final String BUY_ITEM_MSG = "구매할 상품명을 입력해 주세요.";
 
 	public int setAmount() {
 		String amount;
@@ -64,5 +65,12 @@ public class InputData {
 			System.out.println(e.getMessage());
 			return false;
 		}
+	}
+
+	public String buyItem() {
+		System.out.println(BUY_ITEM_MSG);
+		String item = Console.readLine();
+
+		return item;
 	}
 }

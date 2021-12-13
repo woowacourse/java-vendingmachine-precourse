@@ -10,6 +10,8 @@ public class InputException {
 	private static final String ITEM_STOCK_IS_INTEGER_ERROR_MSG = "[ERROR] 상품 수량은 숫자여야 합니다.";
 	private static final String ITEM_STOCK_IS_POSITIVE_ERROR_MSG = "[ERROR] 상품 수량은 0보다 커야 합니다.";
 
+	private static final String CAN_BUY = "[ERROR] 리스트에 없는 상품입니다.";
+
 	public static void checkAmount(String amount) {
 		isInteger(amount);
 		isPositiveInteger(amount);
@@ -80,5 +82,9 @@ public class InputException {
 				throw new IllegalArgumentException(ITEM_STOCK_IS_POSITIVE_ERROR_MSG);
 			}
 		}
+	}
+
+	public static void canBuy(String item) {
+		throw new IllegalArgumentException(CAN_BUY);
 	}
 }
