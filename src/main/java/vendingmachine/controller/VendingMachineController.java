@@ -24,8 +24,8 @@ public class VendingMachineController {
 	public void setVendingMachineCoinCounter() {
 		try {
 			int amount = InputView.getVendingMachineAmount();
-			this.coinCounter = new CoinCounter(Coin.getCoinCounter(amount));
-			OutputView.printCoinCounter(this.coinCounter);
+			coinCounter = new CoinCounter(Coin.getCoinCounter(amount));
+			OutputView.printCoinCounter(coinCounter.getVendingMachineStatus());
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
 			setVendingMachineCoinCounter();
@@ -70,7 +70,7 @@ public class VendingMachineController {
 
 	public void returnChange() {
 		OutputView.printUserAmount(user);
-		CoinCounter changeCoinCounter = coinCounter.getChangeCoinCounter(user);
-		OutputView.printChangeCoins(changeCoinCounter);
+		coinCounter.makeChangeCoinCounter(user);
+		OutputView.printChangeCoins(coinCounter.getChangeStatus());
 	}
 }
