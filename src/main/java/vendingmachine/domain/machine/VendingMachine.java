@@ -9,7 +9,7 @@ public class VendingMachine {
 	private Products products;
 	private Balance balance;
 
-	public VendingMachine(Coins coins, Products products, Balance balance) {
+	private VendingMachine(Coins coins, Products products, Balance balance) {
 		this.coins = coins;
 		this.products = products;
 		this.balance = balance;

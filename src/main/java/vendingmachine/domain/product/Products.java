@@ -13,7 +13,7 @@ public class Products {
 
 	private List<Product> products;
 
-	public Products(List<Product> products) {
+	private Products(List<Product> products) {
 		isValidateDuplicated(products);
 		this.products = products;
 	}

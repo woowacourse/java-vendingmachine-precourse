@@ -10,7 +10,7 @@ public class Price {
 	private static final String ERROR_PRICE_NOT_PATTERN = "상품 금액 앞자리에는 0을 입력할 수 없습니다.";
 	private static final String ERROR_PRICE_NOT_TEN_PERCENT_DIVISION = "상품 금액은 10의 단위로 나누어 떨어져야 합니다.";
 
-	public final int price;
+	private final int price;
 
 	public Price(int price) {
 		this.price = price;

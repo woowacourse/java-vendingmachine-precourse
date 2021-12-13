@@ -13,9 +13,9 @@ public class Coins {
 	private static final int COINS_NUM_DIVISION_STANDARD = 10;
 	private static final String ERROR_COINS_AMOUNT_NOT_TEN_PERCENT_DIVISION = "보유금액은 10의 단위로 나누어 떨어져야 합니다.";
 
-	public final Map<Coin, Integer> coins;
+	private final Map<Coin, Integer> coins;
 
-	public Coins(Map<Coin, Integer> coins) {
+	private Coins(Map<Coin, Integer> coins) {
 		this.coins = coins;
 	}
 
