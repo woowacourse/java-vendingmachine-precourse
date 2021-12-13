@@ -14,7 +14,7 @@ public class OutputView {
     private static final String WON = "원";
     private static final String DASH = " - ";
     private static final String UNIT = "개";
-    private static final String LINE_SEPARATOR = "\n";
+    public static final String LINE_SEPARATOR = "\n";
 
     public static void printCoinByVendingMachine(HashMap<Integer, Integer> coinTable) {
         System.out.println(LINE_SEPARATOR + COINS_HELD_BY_VENDING_MACHINE_MESSAGE);
@@ -26,7 +26,7 @@ public class OutputView {
     }
 
     public static void printRemainingAmount(Money money) {
-        System.out.println(REMAINING_AMOUNT_MESSAGE + money.getCost() + WON);
+        System.out.println(LINE_SEPARATOR + REMAINING_AMOUNT_MESSAGE + money.getCost() + WON);
     }
 
     public static void printChanges(HashMap<Integer, Integer> changes) {
