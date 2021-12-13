@@ -2,10 +2,9 @@ package vendingmachine.constant;
 
 public class Constant {
 	public static final String NO_STOCKS_MESSAGE = "[ERROR] 재고가 남아있지 않습니다.";
+	public static final String DUPLICATED_ITEM_MESSAGE = "[ERROR] 이미 해당 상품이 존재합니다.";
 	public static final String DISTINGUISH_BETWEEN_PRODUCTS = ";";
 	public static final String DISTINGUISH_BETWEEN_PRODUCT_INFORMATION = ",";
-	public static final String RIGHT_SQUARE_BRACKETS = "\\]";
-	public static final String LEFT_SQUARE_BRACKETS = "\\[";
 	public static final String ENTER_VENDING_MACHINE_INITIAL_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	public static final String VENDING_MACHINE_COINS = "자판기가 보유한 동전";
 	public static final String RULES_TO_SHOW = "원 - ";
@@ -17,9 +16,7 @@ public class Constant {
 	public static final String REMAINING_MONEY = "잔돈";
 	public static final String ENTER_WANT_TO_BUY_PRODUCT = "구매할 상품명을 입력해 주세요.";
 	public static final String REGEX_EXPRESSION_OF_NUMBER = "[+-]?\\d*(\\.\\d+)?";
-	public static final int INITIAL_VALUE = 0;
 	public static final int NAME = 0;
 	public static final int PRICE = 1;
 	public static final int STOCKS = 2;
-	public static final int MINIMUM_STOCKS = 1;
 }
