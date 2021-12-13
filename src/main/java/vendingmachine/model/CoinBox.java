@@ -66,15 +66,16 @@ public class CoinBox {
             if (change < coinCost) {
                 continue;
             }
-            int coinAvailable = getCoinCount(coinCost);
-            if (change / coinCost <= coinAvailable) {
-                coinAvailable = change / coinCost;
-            }
+            int coinAvailable = getCoinAvailable(coinCost, change);
             countCoinOf(coinCost, -coinAvailable);
             change -= coinAvailable * coinCost;
             returnable += coinAvailable * coinCost;
         }
         return returnable;
+    }
+
+    private int getCoinAvailable(int coinCost, int money) {
+        return Math.min(money / coinCost, getCoinCount(coinCost));
     }
 
     private void initializeCoiBox() {
