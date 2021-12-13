@@ -20,4 +20,8 @@ public class Money {
 	public int getMoney() {
 		return money;
 	}
+
+	public boolean isEqualsZero() {
+		return this.money == 0;
+	}
 }

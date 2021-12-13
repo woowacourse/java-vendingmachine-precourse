@@ -38,6 +38,9 @@ public class Application {
 			products = products.buy(buyProductName);
 			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
 		}
+		if (inputMoney.isEqualsZero()) {
+			vendingMachineController.printInputMoney(inputMoney.getMoney());
+		}
 		return inputMoney;
 	}
 }
