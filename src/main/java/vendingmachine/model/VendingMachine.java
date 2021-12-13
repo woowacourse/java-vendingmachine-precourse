@@ -1,8 +1,11 @@
 package vendingmachine.model;
 
+import java.util.Map;
+
 import vendingmachine.validation.VendingMachineValidation;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 
@@ -25,15 +28,19 @@ public class VendingMachine {
 
 	public void buyProduct(User user) {
 		String name = InputView.buyProduct();
-		Product product = null;
 		try {
-			 product = VendingMachineValidation.buyProduct(productList, name, user);
+			Product product = VendingMachineValidation.buyProduct(productList, name, user);
+			product.reduceStock();
+			user.buyProduct(product.getPrice());
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.illegalArgumentException(illegalArgumentException.getMessage());
 			buyProduct(user);
 		}
-		product.reduceStock();
-		user.buyProduct(product.getPrice());
 	}
 
+	public void getChange(User user) {
+		Change change = new Change(wallet, user.getBalance());
+		Map<Coin, Integer> remainCoin = change.calculateChange();
+		OutputView.remainCoins(remainCoin);
+	}
 }

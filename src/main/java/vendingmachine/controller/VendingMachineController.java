@@ -15,8 +15,10 @@ public class VendingMachineController {
 
 	public void run() {
 		while (vendingMachine.isRemainProduct() && vendingMachine.canBuy(user)) {
+			user.printRemain();
 			vendingMachine.buyProduct(user);
 		}
-		// TODO - 잔돈 목록 출력
+		user.printRemain();
+		vendingMachine.getChange(user);
 	}
 }

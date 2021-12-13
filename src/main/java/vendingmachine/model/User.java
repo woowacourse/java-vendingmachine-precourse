@@ -3,6 +3,7 @@ package vendingmachine.model;
 import vendingmachine.validation.UserValidation;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class User {
 
@@ -29,5 +30,13 @@ public class User {
 
 	public void buyProduct(int price) {
 		balance -= price;
+	}
+
+	public int getBalance() {
+		return balance;
+	}
+
+	public void printRemain() {
+		OutputView.remainBalance(balance);
 	}
 }

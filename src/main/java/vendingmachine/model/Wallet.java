@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -57,5 +58,18 @@ public class Wallet {
 
 	public Map<Coin, Integer> getWallet() {
 		return wallet;
+	}
+
+	public Coin canReturn(int remain) {
+		for (Map.Entry<Coin, Integer> entry : wallet.entrySet()) {
+			if (entry.getKey().getAmount() <= remain && entry.getValue() > 0) {
+				return entry.getKey();
+			}
+		}
+		return null;
+	}
+
+	public void reduceCoin(Coin coin) {
+		wallet.put(coin, wallet.get(coin) - 1);
 	}
 }
