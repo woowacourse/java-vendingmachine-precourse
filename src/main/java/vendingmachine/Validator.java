@@ -37,16 +37,20 @@ public class Validator {
         String[] products = input.split(";");
 
         for (String product : products) {
-            validateInputEnclosedInBracket(product);
-
-            String disClosed = product.replaceAll("[]\\[]", "");
-            String[] elements = Arrays.stream(disClosed.split(","))
-                    .filter(s -> !s.isEmpty())
-                    .toArray(String[]::new);
-            validateProductContainThreeElements(elements);
-            validateProductPriceAndQuantityIsPositiveNumber(elements[1], elements[2]);
-            validateProductPrice(Integer.parseInt(elements[1]));
+            validateSingleProductInput(product);
         }
+    }
+
+    private static void validateSingleProductInput(String product) {
+        String disClosed = product.replaceAll("[]\\[]", "");
+        String[] elements = Arrays.stream(disClosed.split(","))
+                .filter(s -> !s.isEmpty())
+                .toArray(String[]::new);
+
+        validateInputEnclosedInBracket(product);
+        validateProductContainThreeElements(elements);
+        validateProductPriceAndQuantityIsPositiveNumber(elements[1], elements[2]);
+        validateProductPrice(Integer.parseInt(elements[1]));
     }
 
     private static void validateInputEnclosedInBracket(String product) throws IllegalArgumentException {
