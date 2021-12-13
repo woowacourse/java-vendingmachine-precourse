@@ -8,9 +8,8 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.validator.HoldingAmountValidator;
 import vendingmachine.utils.validator.InsertAmountValidator;
 import vendingmachine.utils.validator.ProductInfoValidator;
-import vendingmachine.view.ErrorMessageOutputView;
 import vendingmachine.view.InputView;
-import vendingmachine.view.SystemMessageOutputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 
@@ -34,9 +33,9 @@ public class VendingMachineController {
         try {
             int validHoldingMoneyInput = HoldingAmountValidator.getValidHoldingAmount(InputView.inputHoldingAmount());
             vendingMachine.initializeCoinCase(validHoldingMoneyInput);
-            SystemMessageOutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
+            OutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
         } catch (IllegalArgumentException e) {
-            ErrorMessageOutputView.printErrorMessage(e.getMessage());
+            OutputView.printErrorMessage(e.getMessage());
             initializeHoldingMoney();
         }
     }
@@ -46,7 +45,7 @@ public class VendingMachineController {
             List<Product> productList = ProductInfoValidator.getValidProductList(InputView.inputProductInfo());
             productList.forEach(vendingMachine::storeProduct);
         } catch (IllegalArgumentException e) {
-            ErrorMessageOutputView.printErrorMessage(e.getMessage());
+            OutputView.printErrorMessage(e.getMessage());
             initializeProductsInfo();
         }
     }
@@ -56,13 +55,13 @@ public class VendingMachineController {
             int insertAmount = InsertAmountValidator.getValidInsertAmountValidator(InputView.inputInsertAmount());
             vendingMachine.insertMoney(insertAmount);
         } catch (IllegalArgumentException e) {
-            ErrorMessageOutputView.printErrorMessage(e.getMessage());
+            OutputView.printErrorMessage(e.getMessage());
             initializeInsertAmount();
         }
     }
 
     private void typeProductToBuy() {
-        SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
+        OutputView.printInsertAmount(vendingMachine.getInsertAmount());
         try {
             String productNameToBuy = InputView.inputProductToBuy();
             ProductInfoValidator.validateName(productNameToBuy);
@@ -70,14 +69,14 @@ public class VendingMachineController {
             Product targetProduct = vendingMachine.findProduct(productNameToBuy);
             vendingMachine.buyProduct(targetProduct);
         } catch (IllegalArgumentException e) {
-            ErrorMessageOutputView.printErrorMessage(e.getMessage());
+            OutputView.printErrorMessage(e.getMessage());
             typeProductToBuy();
         }
     }
 
     private void returnChange() {
-        SystemMessageOutputView.printInsertAmount(vendingMachine.getInsertAmount());
-        SystemMessageOutputView.printChangeInfoMessage();
+        OutputView.printInsertAmount(vendingMachine.getInsertAmount());
+        OutputView.printChangeInfoMessage();
         int remainInsertAmount = vendingMachine.getInsertAmount();
         for (Coin coin : Coin.getCoinListDecreasingOrder()) {
             remainInsertAmount = returnChange(coin, remainInsertAmount);
@@ -91,7 +90,7 @@ public class VendingMachineController {
             vendingMachine.returnCoin(coin);
             numberOfChangeCoins++;
         }
-        SystemMessageOutputView.printChangeCoins(coin, numberOfChangeCoins);
+        OutputView.printChangeCoins(coin, numberOfChangeCoins);
         return remainInsertAmount;
     }
 }
