@@ -33,9 +33,8 @@ public class ItemValidator extends Validator {
 			isNumber(quantity);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("[ERROR] 수량에 숫자를 입력해주세요.");
-		} finally {
-			isPositive(quantity);
 		}
+		isPositive(quantity);
 	}
 
 	private static void isRightPrice(String price) {
@@ -43,10 +42,9 @@ public class ItemValidator extends Validator {
 			isNumber(price);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("[ERROR] 가격에 숫자를 입력해주세요.");
-		} finally {
-			isPositive(price);
-			isDivisible(price);
 		}
+		isPositive(price);
+		isDivisible(price);
 	}
 
 	private static void isContainsAllItemInfosAndThrowException(String[] itemInfos) {
