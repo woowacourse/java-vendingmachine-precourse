@@ -11,31 +11,64 @@ import vendingmachine.view.VendingMachine;
 
 public class VendingMachineUI implements VendingMachine {
 	VendingMachineStatus vendingMachineStatus = VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE;
+	private int moneyInVendingMachine = 0;
+
 	@Override
 	public void start() {
 		while (true) {
 			if (vendingMachineStatus == VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE) {
-				inputVendingMachineHavingMoney();
+				proceedInputVendingMachineHavingMoney();
+			}
+			if (vendingMachineStatus == VendingMachineStatus.SHOW_COINS_IN_VENDING_MACHINE) {
+				System.out.println(PROMPT_VENDING_MACHINE_HAVE_COINS);
+				break;
+			}
+			if (vendingMachineStatus == VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE) {
+
+			}
+			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_MONEY) {
+
+			}
+			if (vendingMachineStatus == VendingMachineStatus.SHOW_USER_LEFT_MONEY) {
+
+			}
+			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_GOODS) {
+
+			}
+			if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
+				break;
 			}
 
 		}
 
 	}
 
+	private void proceedInputVendingMachineHavingMoney() {
+		inputVendingMachineHavingMoney();
+	}
+
 	private void inputVendingMachineHavingMoney() {
-		try {
-			System.out.println(PROMPT_VENDING_MACHINE_HAVE_MONEY);
-			int vendingMachineMoney = inputVendingMachineMoney();
-			checkIfNegative(vendingMachineMoney);
-		} catch (IllegalArgumentException exception) {
-			printIllegalArgumentErrorMessage();
+		System.out.println(PROMPT_VENDING_MACHINE_HAVE_MONEY);
+		if(inputVendingMachineMoney()) {
+			checkIfNegative(moneyInVendingMachine);
 		}
 	}
 
-	private int inputVendingMachineMoney() {
+	private boolean inputVendingMachineMoney() {
 		String vendingMachineMoneyString = readLine();
-		int vendingMachineMoney = Integer.parseInt(vendingMachineMoneyString);
-		return vendingMachineMoney;
+		try {
+			isNumber(vendingMachineMoneyString);
+		} catch (InvalidUserInputException exception) {
+			return false;
+		}
+		moneyInVendingMachine = Integer.parseInt(vendingMachineMoneyString);
+		return true;
+	}
+
+	private void isNumber(String vendingMachineMoneyString) {
+		if (!vendingMachineMoneyString.matches(NUMBER_REGEX)) {
+			throw new InvalidUserInputException();
+		}
 	}
 
 	private void printIllegalArgumentErrorMessage() {
@@ -43,6 +76,15 @@ public class VendingMachineUI implements VendingMachine {
 	}
 
 	private void checkIfNegative(int vendingMachineMoney) {
+		try {
+			isNotNegative(vendingMachineMoney);
+			vendingMachineStatus = VendingMachineStatus.SHOW_COINS_IN_VENDING_MACHINE;
+		} catch (NegativeUserInputException exception) {
+
+		}
+	}
+
+	private void isNotNegative(int vendingMachineMoney) {
 		if (vendingMachineMoney <= 0) {
 			throw new NegativeUserInputException();
 		}
