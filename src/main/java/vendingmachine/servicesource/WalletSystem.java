@@ -22,15 +22,24 @@ public class WalletSystem {
     }
 
     private void exchangeBalanceToRandomCoins(){
-        Coin[] coinTypes =  Coin.values();
 
-        for(Coin currentCoin : coinTypes){
+        for(Coin currentCoin : Coin.values()){
             int maxNumber = systemBalance / currentCoin.getAmount();
             int pickedNumber = Randoms.pickNumberInList(getRandomNumberList(maxNumber));
             systemBalance -= currentCoin.getAmount() * pickedNumber;
             remainCoinsMap.put(currentCoin,pickedNumber);
         }
 
+        exchangeRemainBalanceToMinimumCoin();
+    }
+
+    private void exchangeRemainBalanceToMinimumCoin(){
+        Coin minimumCoin = Coin.getMinimumAmountCoin();
+        int changedNumber = systemBalance / minimumCoin.getAmount();
+        changedNumber += remainCoinsMap.get(minimumCoin);
+        systemBalance %= minimumCoin.getAmount();
+
+        remainCoinsMap.replace(minimumCoin, changedNumber);
     }
 
     private List<Integer> getRandomNumberList(int maxNumber){
