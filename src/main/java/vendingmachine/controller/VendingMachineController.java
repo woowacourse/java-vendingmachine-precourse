@@ -2,7 +2,6 @@ package vendingmachine.controller;
 
 import java.util.List;
 
-import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinCounter;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.ProductService;
@@ -19,12 +18,13 @@ public class VendingMachineController {
 
 	public VendingMachineController() {
 		productService = new ProductService();
+		coinCounter = new CoinCounter();
 	}
 
 	public void setVendingMachineCoinCounter() {
 		try {
 			int amount = InputView.getVendingMachineAmount();
-			coinCounter = new CoinCounter(Coin.getCoinCounter(amount));
+			coinCounter.setVendingMachineCoinCounter(amount);
 			OutputView.printCoinCounter(coinCounter.getVendingMachineStatus());
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
