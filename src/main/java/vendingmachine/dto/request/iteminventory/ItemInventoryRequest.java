@@ -46,7 +46,7 @@ public class ItemInventoryRequest {
     }
 
     private ItemInfo extractItemInfo(List<String> infoToAdd) {
-        ItemRequest itemRequest = new ItemRequest(infoToAdd.get(INDEX_OF_ITEM_NAME), infoToAdd.get(INDEX_OF_ITEM_PRICE));
+        ItemRequest itemRequest = new ItemRequest(infoToAdd.get(INDEX_OF_ITEM_NAME).trim(), infoToAdd.get(INDEX_OF_ITEM_PRICE));
         return itemRequest.toItemInfo();
     }
 
