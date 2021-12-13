@@ -26,7 +26,7 @@ public enum Coin {
 
     }
 
-    public static Coin getRandomCoinBelowAmount(int maximum) {
+    public static Coin getRandomCoinBelowAmount(int maximum) throws IllegalArgumentException {
         return getCoin(Randoms.pickNumberInList(
             Arrays.stream(Coin.values())
                 .filter(coin -> coin.amount <= maximum)

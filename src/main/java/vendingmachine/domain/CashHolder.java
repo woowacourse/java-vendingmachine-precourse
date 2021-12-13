@@ -54,13 +54,18 @@ public class CashHolder {
 
     private Map<Coin, Integer> fillChanges(int totalAmount, Map<Coin, Integer> coins) {
         Coin coin;
-        if (totalAmount == 0) {
+
+        if (totalAmount == ZERO) {
             return coins;
         }
-        coin = Coin.getRandomCoinBelowAmount(totalAmount);
-        coins.putIfAbsent(coin, 0);
-        coins.computeIfPresent(coin, (k, v) -> v + 1);
-        return fillChanges(totalAmount - coin.getAmount(), coins);
+        try {
+            coin = Coin.getRandomCoinBelowAmount(totalAmount);
+            coins.putIfAbsent(coin, ZERO);
+            coins.computeIfPresent(coin, (k, v) -> v + 1);
+            return fillChanges(totalAmount - coin.getAmount(), coins);
+        } catch (IllegalArgumentException belowMinimumCoin) { // totalAmount < coin minimum amount
+            return coins;
+        }
     }
 
     private void validatePositiveAmount(int totalAmount) {
