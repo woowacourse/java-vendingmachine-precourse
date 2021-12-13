@@ -5,7 +5,6 @@ import java.util.Map;
 import vendingmachine.constant.MessageConst;
 import vendingmachine.domain.Changes;
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.VendingMachine;
 
 public class OutputView {
 	public static void printInitMessage() {
@@ -20,18 +19,32 @@ public class OutputView {
 		System.out.println(MessageConst.ITEM_SETTING_MESSAGE);
 	}
 
-	public static void printChanges(Changes changes) {
+	public static void printMachineHavingChanges(Changes changes) {
 		Map<Coin, Integer> changesMap = changes.getChanges();
 		System.out.println(MessageConst.MACHINE_HAVING_CHANGES);
-		printChangeStatus(changesMap);
+		printChangeStatus(changesMap, true);
+	}
+
+	public static void printReturnChanges(Changes changes) {
+		Map<Coin, Integer> changesMap = changes.getChanges();
+		System.out.println(MessageConst.RETURN_CHANGE_MESSAGE);
+		printChangeStatus(changesMap, false);
 	}
 
 	public static void printEnterInputAmount() {
 		System.out.println(MessageConst.INPUT_AMOUNT_MESSAGE);
 	}
 
-	private static void printChangeStatus(Map<Coin, Integer> changesMap) {
-		changesMap.forEach(OutputView::printCoinAndCoinNum);
+	private static void printChangeStatus(Map<Coin, Integer> changesMap, boolean isVisibleZero) {
+		if (isVisibleZero) {
+			changesMap.forEach(OutputView::printCoinAndCoinNum);
+			return;
+		}
+		changesMap.forEach((coin, num) -> {
+			if (num > 0) {
+				printCoinAndCoinNum(coin, num);
+			}
+		});
 	}
 
 	private static void printCoinAndCoinNum(Coin coin, Integer coinNum) {
