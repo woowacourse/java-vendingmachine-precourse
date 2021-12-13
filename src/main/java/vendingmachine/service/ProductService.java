@@ -83,4 +83,16 @@ public class ProductService {
             throw new IllegalArgumentException(ERROR_LESS_QUANTITY);
         }
     }
+
+    public boolean availableToBuy(int change) {
+        boolean canBuy = false;
+        for (String name : productRepository.getProductNameSet()) {
+            if (productRepository.getProductPrice(name, change) < change
+                    && productRepository.getProductQuantity(name, change) > 0) {
+                canBuy = true;
+                return canBuy;
+            }
+        }
+        return canBuy;
+    }
 }

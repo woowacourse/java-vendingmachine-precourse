@@ -38,7 +38,17 @@ public class VendingMachineController {
     }
 
     public void startSale() {
-        getUserOrder(ChangeService.getCurrentChange());
+        int currentChange = ChangeService.getCurrentChange();
+        while (isAvailableKeepSell(currentChange)) {
+            getUserOrder(currentChange);
+        }
+    }
+
+    private boolean isAvailableKeepSell(int change) {
+        if (!productService.availableToBuy(change)) {
+            return false;
+        }
+        return true;
     }
 
     private String getUserOrder(int change) {
