@@ -5,6 +5,7 @@ import vendingmachine.domain.Product;
 import java.util.ArrayList;
 import java.util.List;
 
+import static vendingmachine.utils.VerificationUtil.checkProductPrice;
 import static vendingmachine.utils.VerificationUtil.validateProductInput;
 import static vendingmachine.view.OutputView.printInputVendingMachineProduct;
 
@@ -65,6 +66,8 @@ public class ProductService {
         String productName = strings[PRODUCTNAMEINDEX];
 
         int price = Integer.parseInt(strings[PRICEINDEX]);
+
+        checkProductPrice(price);
 
         int quantity = Integer.parseInt(strings[QUANTITYINDEX]);
 
