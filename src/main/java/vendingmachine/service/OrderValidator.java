@@ -25,6 +25,16 @@ public class OrderValidator {
         return true;
 
     }
+
+    public boolean hasStock(String order, Products products){
+        Product product = products.getProduct(order);
+        if (!(product.getStock() > 0)){
+            throw new IllegalArgumentException("[ERROR] 재고가 없습니다.");
+        }
+        return true;
+
+
+    }
     //
     // public boolean isValidOrder() {
     //

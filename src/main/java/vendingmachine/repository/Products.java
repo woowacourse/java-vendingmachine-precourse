@@ -23,6 +23,15 @@ public class Products {
         return false;
     }
 
+    public Product getProduct(String name){
+        for (Product product: products){
+            if (product.getName().equals(name)){
+                return product;
+            }
+        }
+        return null;
+    }
+
     // public boolean isPossiblePrice() {
     //
     // }
