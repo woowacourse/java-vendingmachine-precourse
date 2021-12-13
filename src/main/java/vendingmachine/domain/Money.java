@@ -16,8 +16,17 @@ public class Money {
 		this.amount = Validator.validate(NAME, amount, new PositiveIntegerValidation());
 	}
 
+	public Money plus(Money other) {
+		return new Money(this.amount + other.amount);
+	}
+
 	public Money minus(Money other) {
 		return new Money(this.amount - other.amount);
+	}
+
+	public Money multiply(int other) {
+		int amount = this.amount;
+		return new Money(amount * other);
 	}
 
 	public boolean isLessThan(Money other) {
@@ -47,4 +56,5 @@ public class Money {
 	public String toString() {
 		return amount + CURRENCY;
 	}
+
 }
