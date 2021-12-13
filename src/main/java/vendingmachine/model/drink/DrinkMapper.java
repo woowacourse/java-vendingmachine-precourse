@@ -47,7 +47,7 @@ public class DrinkMapper {
         Set<String> names = new HashSet<>();
         for (String content : contents) {
             int nameLength = content.indexOf(Constant.DRINK_CONTENT_SPLIT_WORD);
-            names.add(content.substring(nameLength));
+            names.add(content.substring(Constant.NAME_INDEX, nameLength));
         }
         return names.size() != contents.length;
     }
