@@ -39,18 +39,12 @@ public class PossessionMoney {
         }
     }
 
-    public boolean isZero() {
-        if (possessionMoney == ZERO) {
-            return true;
-        }
-        return false;
+    public boolean isExist() {
+        return possessionMoney > ZERO;
     }
 
     public boolean isCalculate(int amount) {
-        if (possessionMoney >= amount) {
-            return true;
-        }
-        return false;
+        return possessionMoney >= amount;
     }
 
     public void calculate(int randomCoinAmount) {

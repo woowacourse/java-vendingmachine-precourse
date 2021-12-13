@@ -33,7 +33,7 @@ public class RandomPossessionCoinsGenerator implements PossessionCoinsGenerator 
     }
 
     private void fillQuantity(Map<Coin, Integer> possessionCoins, PossessionMoney possessionMoney) {
-        while (!possessionMoney.isZero()) {
+        while (possessionMoney.isExist()) {
             Coin randomCoin = getRandomCoin();
             int randomCoinAmount = randomCoin.getAmount();
 
