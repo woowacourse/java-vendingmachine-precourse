@@ -8,7 +8,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class CoinExchangeMachine {
     private int amount = 0;
     private Coins coins = new Coins();
-    private List<Integer> amountsToPick = new ArrayList<>(Coin.getAllDenominations());
+    private List<Integer> amountsToPick = new ArrayList<>();
 
     public Coins changeIntoCoins(int amountToChange) {
         initialize(amountToChange);
@@ -18,6 +18,8 @@ public class CoinExchangeMachine {
 
     private void initialize(int amountToChange) {
         this.amount = amountToChange;
+        coins = new Coins();
+        amountsToPick = new ArrayList<>(Coin.getAllDenominations());
     }
 
     private void changeIntoCoins() {
@@ -47,8 +49,7 @@ public class CoinExchangeMachine {
     }
 
     private void changeIntoCoin(int pickedAmount) {
-        Coin coin = Coin.findByAmount(pickedAmount).get();
-        coins.add(coin);
+        coins.add(Coin.findByAmount(pickedAmount).get());
         amount -= pickedAmount;
     }
 }

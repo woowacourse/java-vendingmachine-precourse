@@ -33,7 +33,7 @@ public class VendingMachine {
     }
 
     public void purchase(String itemName) {
-        Item item = findItemToPurchase(itemName);
+        Item item = findItemByItemName(itemName);
         validateCheaperThanMoneyAvailable(item);
         validateInStock(item);
         purchase(item);
@@ -51,11 +51,6 @@ public class VendingMachine {
             return false;
         }
         return true;
-    }
-
-    private Item findItemToPurchase(String itemNameToPurchase) {
-        Item itemToPurchase = findItem(itemNameToPurchase);
-        return itemToPurchase;
     }
 
     private void validateCheaperThanMoneyAvailable(Item item) {
@@ -87,15 +82,11 @@ public class VendingMachine {
         return items.isEmptyItems();
     }
 
-    private Item findItem(String itemName) {
-        Optional<Item> result = findItemInItems(itemName);
+    private Item findItemByItemName(String itemName) {
+        Optional<Item> result = items.findByItemName(itemName);
         if (!result.isPresent()) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE);
         }
         return result.get();
-    }
-
-    private Optional<Item> findItemInItems(String itemName) {
-        return items.findByItemName(itemName);
     }
 }

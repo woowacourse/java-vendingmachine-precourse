@@ -1,8 +1,10 @@
 package vendingmachine.item;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class Items {
     private final Map<Item, Integer> items = new HashMap<>();
@@ -34,7 +36,7 @@ public class Items {
 
     public int findLowestPriceInStock() {
         return items.keySet().stream()
-                .filter(item -> items.get(item) > 0)
+                .filter(item -> this.countItems(item) > 0)
                 .map(Item::getPrice)
                 .sorted()
                 .findFirst()
@@ -42,10 +44,15 @@ public class Items {
     }
 
     public boolean isEmptyItems() {
-        Optional<Integer> itemsInStock = items.values().stream().filter(quantity -> quantity > 0).findAny();
-        if (itemsInStock.isPresent()) {
+        if (findAllInStock().size() > 0) {
             return false;
         }
         return true;
+    }
+
+    private List<Item> findAllInStock() {
+        return items.keySet().stream()
+                .filter(item -> this.countItems(item) > 0)
+                .collect(Collectors.toList());
     }
 }

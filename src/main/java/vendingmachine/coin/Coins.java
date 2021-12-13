@@ -48,23 +48,18 @@ public class Coins {
     }
 
     public int getAmount() {
-        int totalAmount = 0;
-        for (Coin coinUnit : Coin.getAlCoinUnitsFromLargestToSmallest()) {
-            totalAmount += coinUnit.getAmount(this.count(coinUnit));
-        }
-        return totalAmount;
+        return Coin.getAlCoinUnitsFromLargestToSmallest().stream()
+                .mapToInt(coinUnit-> coinUnit.getAmount(this.count(coinUnit)))
+                .sum();
     }
 
     private void initialize() {
-        coins.put(Coin.COIN_500, initialNumberOfCoin);
-        coins.put(Coin.COIN_100, initialNumberOfCoin);
-        coins.put(Coin.COIN_50, initialNumberOfCoin);
-        coins.put(Coin.COIN_10, initialNumberOfCoin);
+        Coin.getAlCoinUnitsFromLargestToSmallest()
+                .forEach(coinUnit -> coins.put(coinUnit, initialNumberOfCoin));
     }
 
     private void initialize(Coins coinsToCopy) {
-        for (Coin coin : coinsToCopy.coins.keySet()) {
-            coins.put(coin, coinsToCopy.count(coin));
-        }
+        coinsToCopy.coins.keySet()
+                .forEach(coin -> coins.put(coin, coinsToCopy.count(coin)));
     }
 }

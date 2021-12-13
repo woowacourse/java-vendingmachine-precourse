@@ -44,9 +44,6 @@ public class ChangeAccountant {
 
     private int accountWithinBalance(Coin coin, int numberOfCoinToChange) {
         int currentNumber = coinBalance.count(coin);
-        if (numberOfCoinToChange > currentNumber) {
-            return currentNumber;
-        }
-        return numberOfCoinToChange;
+        return Math.min(numberOfCoinToChange, currentNumber);
     }
 }

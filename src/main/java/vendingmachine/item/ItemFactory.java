@@ -9,9 +9,7 @@ public class ItemFactory {
 
     public Items createByInventoryList(ItemsInventoryInfo itemsInventoryInfo) {
         initialize();
-        for (ItemInventoryInfo itemInventoryInfo : itemsInventoryInfo.getInfo()) {
-            createItem(itemInventoryInfo);
-        }
+        itemsInventoryInfo.getInfo().forEach(this::createItem);
         return items;
     }
 
