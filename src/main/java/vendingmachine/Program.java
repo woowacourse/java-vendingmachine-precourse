@@ -8,8 +8,6 @@ import camp.nextstep.edu.missionutils.Console;
 public class Program {
 	public static final String PRODUCT_ENTRY_DIVIDER = ";";
 	public static final String PRODUCT_ENTRY_ELEMENT_DIVIDER = ",";
-	public static final int UNDER_BOUND_CHAR_TO_BE_NUMBER = 0;
-	public static final int UPPER_BOUND_CHAR_TO_BE_NUMBER = 9;
 
 	public final CoinPocket coinPocket;
 	public final ProductTable productTable;
@@ -32,6 +30,10 @@ public class Program {
 	private int setInitialMoneyInMachine() throws IllegalArgumentException {
 		Guide.INITIAL_MONEY_REQUEST.println();
 		String moneyInString = Console.readLine();
+		InitialMoneyValidator validator = new InitialMoneyValidator(moneyInString);
+		if (!validator.validate()) {
+			setInitialMoneyInMachine();
+		}
 		return Integer.parseInt(moneyInString);
 	}
 
