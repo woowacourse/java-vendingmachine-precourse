@@ -14,19 +14,34 @@ public class VendingMachine {
         this.machineMoney = machineMoney;
     }
 
-    public boolean isContinueDeal(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
-        boolean isContinueDeal = purchasingCost >= cheapestProductPrice;
+    public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
+        boolean isContinueDeal = true;
 
-        System.out.println("구매비용: "+purchasingCost);
-        System.out.println("가장 싼 제품: "+cheapestProductPrice);
+        if (!isCostBiggerCheapestProductPrice(cheapestProductPrice, purchasingCost)) {
+            isContinueDeal = false;
+        }
+
+        if (!isSoldOutAllProduct(products)) {
+            isContinueDeal = false;
+        }
+
+        return isContinueDeal;
+    }
+
+    protected boolean isSoldOutAllProduct(final List<Product> products) {
+        boolean isContinueDeal = false;
 
         for (Product product : products) {
-            if (product.getCount().isCountValidation()) {
-                isContinueDeal = false;
+            if (!(product.getProductCount() == 0)) {
+                isContinueDeal = true;
             }
         }
 
         return isContinueDeal;
+    }
+
+    protected boolean isCostBiggerCheapestProductPrice(final int cheapestProductPrice, final int purchasingCost) {
+        return purchasingCost >= cheapestProductPrice;
     }
 
 
@@ -91,8 +106,9 @@ public class VendingMachine {
         return coinUnitList;
     }
 
-    public void validatePurchasingProductName(final List<Product> products, final String purchasingProductName) {
+    public void validatePurchasingProductNameOnMachine(final List<Product> products, final String purchasingProductName) {
         boolean checkPurchasingProductOnProductList = false;
+
         for (Product product : products) {
             if (product.getName().compareProductName(purchasingProductName)) {
                 checkPurchasingProductOnProductList = true;
@@ -114,4 +130,19 @@ public class VendingMachine {
 
         return purchasingCost;
     }
+
+    public void validatePurchasingProductSoldOut(final List<Product> products, final String purchasingProductName) {
+        boolean checkPurchasingProductSoldOut = false;
+
+        for (Product product : products) {
+            if (product.getName().compareProductName(purchasingProductName)) {
+                checkPurchasingProductSoldOut = product.getCount().isCountValidation();
+            }
+        }
+
+        if (!checkPurchasingProductSoldOut) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PURCHASING_PRODUCT_SOLD_OUT.getErrorMessage());
+        }
+    }
+
 }

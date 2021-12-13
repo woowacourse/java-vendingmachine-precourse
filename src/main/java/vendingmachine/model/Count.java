@@ -14,12 +14,10 @@ public class Count {
 
     public void minusCount() {
         this.count--;
-        System.out.println("개수: " + this.count);
     }
 
     public boolean isCountValidation() {
-        System.out.println(this.count);
-        return (this.count) < 0;
+        return this.count > 0;
     }
 
 }

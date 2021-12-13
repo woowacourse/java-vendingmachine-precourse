@@ -24,6 +24,10 @@ public class Product {
         return count;
     }
 
+    public int getProductCount() {
+        return count.getCount();
+    }
+
     public int getProductPrice() {
         return price.getPrice();
     }

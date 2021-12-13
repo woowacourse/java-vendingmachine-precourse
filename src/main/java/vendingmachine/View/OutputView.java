@@ -7,6 +7,8 @@ import vendingmachine.utils.Symbol;
 
 public class OutputView {
 
+    public static final String CHANGE = "잔돈";
+
     public void printPurChasingCost(int purchasingCost) {
         String purchasingCostPrintFormat = createPurchasingCostPrintFormat(purchasingCost);
         System.out.println(purchasingCostPrintFormat);

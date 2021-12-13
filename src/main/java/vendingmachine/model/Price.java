@@ -20,7 +20,6 @@ public class Price {
 
     public int subtractPrice(int purchasingCost) {
         purchasingCost = purchasingCost - this.price;
-        System.out.println("비용: "+purchasingCost);
         return purchasingCost;
     }
 

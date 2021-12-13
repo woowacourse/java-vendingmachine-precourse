@@ -37,7 +37,8 @@ public class VendingMachineController {
 
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
-        } while (vendingMachine.isContinueDeal(products, cheapestProductPrice, purchasingCost));
+        } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
+
     }
 
     protected int findCheapestProductPrice(final List<Product> products) {
@@ -55,7 +56,8 @@ public class VendingMachineController {
     protected String choosePurchasingProduct(final List<Product> products, VendingMachine vendingMachine) {
         try {
             String purchasingProductName = inputView.inputPurchasingProductName(Messages.INPUT_PURCHASING_PRODUCT_NAME.getInputMessage());
-            vendingMachine.validatePurchasingProductName(products, purchasingProductName);
+            vendingMachine.validatePurchasingProductNameOnMachine(products, purchasingProductName);
+            vendingMachine.validatePurchasingProductSoldOut(products, purchasingProductName);
 
             return purchasingProductName;
         } catch (IllegalArgumentException illegalArgumentException) {
