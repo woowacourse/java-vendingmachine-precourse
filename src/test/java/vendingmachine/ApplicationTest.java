@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
@@ -36,6 +37,6 @@ class ApplicationTest extends NsTest {
 
     @Override
     protected void runMain() {
-        Application.main(new String[]{});
+        Application.main(new String[] {});
     }
 }
