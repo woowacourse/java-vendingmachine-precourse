@@ -1,11 +1,8 @@
 package vendingmachine.service;
 
-import java.util.Arrays;
-
 import vendingmachine.domain.Money;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
-import vendingmachine.utils.validator.RequestValidator;
 
 import static vendingmachine.utils.validator.RequestValidator.*;
 
@@ -20,10 +17,9 @@ public class ProductsService {
 	public static Products toProducts(String request) throws IllegalArgumentException {
 		Products products = new Products();
 		String[] eachProductRequest = request.split(PRODUCTS_REQUEST_DELIMITER);
+		isMatchRegexToProducts(eachProductRequest);
 		for (String productRequest : eachProductRequest) {
-			RequestValidator.isMatchRegexToProduct(productRequest);
-			;
-			String[] productItems = productRequest.substring(SUBSTRING_INDEX, productRequest.length()-SUBSTRING_INDEX)
+			String[] productItems = productRequest.substring(SUBSTRING_INDEX, productRequest.length() - SUBSTRING_INDEX)
 				.split(PRODUCT_REQUEST_DELIMITER);
 			products.add(toProduct(productItems));
 		}
@@ -36,7 +32,6 @@ public class ProductsService {
 		Money price = new Money(Integer.parseInt(productItem[PRICE_INDEX]));
 		isNumber(productItem[COUNT_INDEX]);
 		int count = Integer.parseInt(productItem[COUNT_INDEX]);
-
 		return new Product(name, price, count);
 	}
 }

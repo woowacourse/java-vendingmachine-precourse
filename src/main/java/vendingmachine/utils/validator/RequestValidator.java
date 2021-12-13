@@ -21,6 +21,12 @@ public class RequestValidator {
 		}
 	}
 
+	public static void isMatchRegexToProducts(String[] requests) throws IllegalArgumentException {
+		for (String request : requests) {
+			isMatchRegexToProduct(request);
+		}
+	}
+
 	public static void isMatchRegexToProduct(String request) throws IllegalArgumentException {
 		if (!request.matches(REGEX)) {
 			throw new IllegalArgumentException(IS_MATCH_REGEX_TO_PRODUCT_ERROR_MESSAGE);

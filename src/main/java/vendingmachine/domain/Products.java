@@ -32,13 +32,7 @@ public class Products {
 	}
 
 	public boolean isBuy(Money insertMoney) {
-		if (products.isEmpty()) {
-			return false;
-		}
-		if (getCheapestPrice().compareTo(insertMoney) > 0) {
-			return false;
-		}
-		return true;
+		return !products.isEmpty() && !(getCheapestPrice().compareTo(insertMoney) > 0);
 	}
 
 	public Product findForName(String productName) {

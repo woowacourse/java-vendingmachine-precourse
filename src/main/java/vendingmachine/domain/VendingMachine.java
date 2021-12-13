@@ -25,21 +25,12 @@ public class VendingMachine {
 
 
 	public boolean isBuy() {
-		if (products.soldOut()) {
-			return false;
-		}
-		if (!products.isBuy(insertMoney)) {
-			return false;
-		}
-		return true;
+		return (!products.soldOut() || products.isBuy(insertMoney));
 	}
 
 	public boolean isBuy(String productName) {
 		Product product = products.findForName(productName);
-		if (product == null || product.soldOut() || !product.isBuy(insertMoney)) {
-			return false;
-		}
-		return true;
+		return (product != null || !product.soldOut() || product.isBuy(insertMoney));
 	}
 
 	public Money getInsertMoney() {

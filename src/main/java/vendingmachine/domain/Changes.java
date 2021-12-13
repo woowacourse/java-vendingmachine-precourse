@@ -15,7 +15,16 @@ public class Changes {
 		}
 	}
 
-	public Changes() {}
+	public Changes() {
+	}
+
+	public Map<Coin, Integer> getChanges() {
+		return changes;
+	}
+
+	private void setChanges(Coin coin, int count) {
+		changes.replace(coin, count);
+	}
 
 	public void setRandomChanges(Money money) {
 		int amount = money.getAmount();
@@ -28,22 +37,6 @@ public class Changes {
 			amount -= coinAmount;
 			changes.replace(coin, changes.get(coin) + 1);
 		}
-	}
-
-	private void setChanges(Coin coin, int count) {
-		changes.replace(coin, count);
-	}
-
-	public Map<Coin, Integer> getChanges() {
-		return changes;
-	}
-
-	public Money getTotalMoney() {
-		Money totalMoney = new Money(0);
-		for (Map.Entry<Coin, Integer> coinInteger : changes.entrySet()) {
-			totalMoney.plus(new Money(coinInteger.getKey().getAmount() * coinInteger.getValue()));
-		}
-		return totalMoney;
 	}
 
 	public Changes toChangesMinCount(Money insertMoney) {

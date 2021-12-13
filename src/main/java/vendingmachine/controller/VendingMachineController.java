@@ -1,10 +1,14 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Changes;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.ExceptionView;
 import vendingmachine.view.OutputView;
+
+import static vendingmachine.controller.RequestController.*;
 
 public class VendingMachineController {
 	private VendingMachine vendingMachine;
@@ -34,5 +38,11 @@ public class VendingMachineController {
 	public void returnChanges() {
 		OutputView.insertMoneyUI(vendingMachine.getInsertMoney());
 		OutputView.returnChangesUI(VendingMachineService.returnChanges(vendingMachine));
+	}
+
+	public static VendingMachine createVendingMachine() {
+		Changes changes = requestChanges();
+		Products products = requestProducts();
+		return new VendingMachine(changes, products);
 	}
 }

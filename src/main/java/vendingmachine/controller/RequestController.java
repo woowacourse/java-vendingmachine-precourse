@@ -13,12 +13,6 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class RequestController {
-	public static VendingMachine requestVendingMachine() {
-		Changes changes = requestChanges();
-		Products products = requestProducts();
-		return new VendingMachine(changes, products);
-	}
-
 	public static Changes requestChanges() {
 		try {
 			String request = InputView.requestChanges();
@@ -44,7 +38,7 @@ public class RequestController {
 	public static Money requestInsertMoney() {
 		try {
 			String request = InputView.requestInsertMoney();
-			return MoneyService.toService(request);
+			return MoneyService.toMoney(request);
 		} catch (IllegalArgumentException e) {
 			ExceptionView.errorUI(e.getMessage());
 			return requestInsertMoney();

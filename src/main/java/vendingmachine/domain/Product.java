@@ -23,6 +23,22 @@ public class Product implements Comparable<Product>{
 		this.amount = amount;
 	}
 
+	public Money getPrice() {
+		return price;
+	}
+
+	public boolean soldOut() {
+		return amount == 0;
+	}
+
+	public boolean isBuy(Money insertMoney) {
+		return price.compareTo(insertMoney) <= 0;
+	}
+
+	public void buy() {
+		amount -= 1;
+	}
+
 	private void validateName(String name) throws IllegalArgumentException {
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException(NAME_ERROR_MESSAGE);
@@ -39,17 +55,6 @@ public class Product implements Comparable<Product>{
 		if (amount < MIN_AMOUNT) {
 			throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
 		}
-	}
-
-	public Money getPrice() {
-		return price;
-	}
-
-	public boolean soldOut() {
-		if (amount == 0) {
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -70,16 +75,5 @@ public class Product implements Comparable<Product>{
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);
-	}
-
-	public boolean isBuy(Money insertMoney) {
-		if (price.compareTo(insertMoney) > 0) {
-			return false;
-		}
-		return true;
-	}
-
-	public void buy() {
-		amount -= 1;
 	}
 }
