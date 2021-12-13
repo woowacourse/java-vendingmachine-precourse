@@ -1,17 +1,47 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public class VendingMachine {
 	private CoinBucket coinBucket;
 	private Beverages beverages;
+	private Money insertedMoney;
 
 	public void powerOn() {
 		init();
+		start();
+	}
+
+	private void start() {
+		while (canSell()) {
+			sell();
+		}
+		printChanges();
+	}
+
+	private void printChanges() {
+		OutputView.printChanges(getChanges());
+	}
+
+	private Map<Coin, Integer> getChanges() {
+		return coinBucket.getChanges(insertedMoney);
+	}
+
+	private boolean canSell() {
+		return beverages.canSellMore(insertedMoney);
+	}
+
+	private void sell() {
+		OutputView.printInsertedMoney(insertedMoney);
+		String beverageName = InputView.readBeverageName();
+		beverages.sell(beverageName, insertedMoney);
 	}
 
 	private void init() {
 		coinBucket = initCoinBucket();
 		OutputView.printCoinBucket(coinBucket.getCoins());
 		beverages = initBeverages();
+		insertedMoney = insertMoney();
 	}
 
 	private CoinBucket initCoinBucket() {
@@ -41,5 +71,15 @@ public class VendingMachine {
 	private Beverages getBeveragesFromInput() {
 		String beverageInfos = InputView.readBeverageInfos();
 		return BeverageShop.getBeverages(beverageInfos);
+	}
+
+	private Money insertMoney() {
+		try {
+			int money = InputView.readInsertMoney();
+			return Money.from(money);
+		} catch (IllegalArgumentException e) {
+			OutputView.printErrorMessage(e.getMessage());
+			return insertMoney();
+		}
 	}
 }
