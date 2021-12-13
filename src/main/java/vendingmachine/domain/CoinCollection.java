@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import vendingmachine.domain.Coin;
-
 import java.util.ArrayList;
 import java.util.List;
 
