@@ -6,7 +6,6 @@ public class ProductConstants {
 	public static final String PRODUCT_DELIMITER = ",";
 
 	public static final Integer SUBSTRING_IDX = 1;
-	public static final Integer FIRST_IDX = 0;
 	public static final Integer NAME_IDX = 0;
 	public static final Integer PRICE_IDX = 1;
 	public static final Integer AMOUNT_IDX = 2;

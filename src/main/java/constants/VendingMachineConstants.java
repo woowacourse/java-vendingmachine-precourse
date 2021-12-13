@@ -30,7 +30,5 @@ public class VendingMachineConstants {
 
 	public static String KOR_MONETARY_UNIT = "원";
 	public static String DASH_WITH_SPACE = " - ";
-	public static String SPACE = " ";
 	public static String KOR_ITEM_UNIT = "개";
-
 }
