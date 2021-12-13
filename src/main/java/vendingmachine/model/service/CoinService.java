@@ -14,7 +14,7 @@ public class CoinService {
 	public static final int ADD_COIN_COUNT_NUMBER = 1;
 	public static final int EMPTY_CHANGE_NUMBER = 0;
 
-	private CoinRepository coinRepository = CoinRepository.instance;
+	CoinRepository coinRepository = CoinRepository.instance;
 
 	public void addCoin(String coinName) {
 		coinRepository.getCoinRepository()

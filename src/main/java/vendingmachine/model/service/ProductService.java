@@ -12,7 +12,7 @@ public class ProductService {
 	public static final int INDEX_OF_STOCK = 2;
 	public static final String FAIL_TO_FIND_MESSAGE_THROUGH_PRODUCT_NAME = "FailToFind";
 
-	private ProductRepository productRepository = ProductRepository.instance;
+	ProductRepository productRepository = ProductRepository.instance;
 
 	public void addProducts(ArrayList<String[]> splitInfoArrList) {
 		for (String[] splitInfoArr : splitInfoArrList) {

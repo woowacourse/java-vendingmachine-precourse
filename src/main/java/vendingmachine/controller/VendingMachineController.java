@@ -36,7 +36,7 @@ public class VendingMachineController {
 		giveChange(restMoney);
 	}
 
-	private void inputMoneyForChange() {
+	public void inputMoneyForChange() {
 		vendingMachineView.inputMoneyForChange();
 
 		int change = moneyReceiver.receive();
@@ -45,12 +45,12 @@ public class VendingMachineController {
 		vendingMachineView.makeEmptyLine();
 	}
 
-	private void showCoinInVendingMachine() {
+	public void showCoinInVendingMachine() {
 		vendingMachineView.showCoinsInVendingMachine();
 		vendingMachineView.makeEmptyLine();
 	}
 
-	private void inputProductInfo() {
+	public void inputProductInfo() {
 		vendingMachineView.inputProductInfo();
 
 		ArrayList<String[]> splitInfoArrList = productInfoReceiver.receive();
@@ -59,7 +59,7 @@ public class VendingMachineController {
 		vendingMachineView.makeEmptyLine();
 	}
 
-	private Customer inputMoneyForBuy() {
+	public Customer inputMoneyForBuy() {
 		vendingMachineView.inputMoneyForBuy();
 
 		int moneyForBuy = moneyReceiver.receive();
@@ -68,7 +68,7 @@ public class VendingMachineController {
 		return new Customer(moneyForBuy);
 	}
 
-	private int buyProduct(Customer customer) {
+	public int buyProduct(Customer customer) {
 		while (customer.getMoney() >= productService.getMinPrice()) {
 			vendingMachineView.buyProduct(customer);
 
@@ -83,7 +83,7 @@ public class VendingMachineController {
 		return customer.getMoney();
 	}
 
-	private void giveChange(int restMoney) {
+	public void giveChange(int restMoney) {
 		HashMap<String, Integer> coinForChange = coinService.calculateCoinForChange(restMoney);
 
 		vendingMachineView.giveChange(restMoney, coinForChange);
