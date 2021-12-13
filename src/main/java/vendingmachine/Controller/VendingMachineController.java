@@ -26,7 +26,10 @@ public class VendingMachineController {
     }
 
     public void run() {
-        VendingMachine vendingMachine = fillMoney();
+        int machineMoney = fillMoney();
+        VendingMachine vendingMachine = new VendingMachine(machineMoney);
+        outputView.printMachineHaveCoin(vendingMachine.getMachineCoins());
+
         List<Product> products = displayProducts();
 
         int cheapestProductPrice = findCheapestProductPrice(products);
@@ -38,6 +41,9 @@ public class VendingMachineController {
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
         } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
+
+        List<Integer> returnCoins = vendingMachine.calculateReturnChangeCoin(purchasingCost);
+        outputView.printReturnChange(purchasingCost, returnCoins);
 
     }
 
@@ -101,26 +107,14 @@ public class VendingMachineController {
         return new Product(name, price, count);
     }
 
-    protected VendingMachine fillMoney() {
+    protected int fillMoney() {
         try {
-            int machineMoney = inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
-            VendingMachine vendingMachine = new VendingMachine(machineMoney);
-
-            changeMachineMoneyIntoCoins(machineMoney, vendingMachine);
-
-            return vendingMachine;
+            return inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
 
             return fillMoney();
         }
-    }
-
-    protected void changeMachineMoneyIntoCoins(final int machineMoney, final VendingMachine vendingMachine) {
-        List<Integer> coinUnitList = vendingMachine.createCoinUnitList();
-        List<Integer> machineCoins = vendingMachine.calculateCoins(machineMoney, coinUnitList);
-
-        outputView.printMachineHaveCoin(machineCoins, coinUnitList);
     }
 
 }

@@ -1,17 +1,19 @@
 package vendingmachine.model;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import vendingmachine.utils.ExceptionMessages;
 
 public class VendingMachine {
 
-    private final int machineMoney;
+    private final Map<Coin, Integer> machineCoins;
 
     public VendingMachine(final int machineMoney) {
         validateMachineMoney(machineMoney);
-        this.machineMoney = machineMoney;
+        this.machineCoins = changeMachineMoneyIntoCoins(machineMoney);
     }
 
     public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
@@ -55,30 +57,35 @@ public class VendingMachine {
         return (inputMachineMoney % 10) == 0;
     }
 
-    public List<Integer> calculateCoins(final int machineMoney, final List<Integer> coins) {
-        List<Integer> machineCoins = new ArrayList<>();
+    public Map<Coin, Integer> changeMachineMoneyIntoCoins(final int machineMoney) {
+        return calculateCoins(machineMoney);
+    }
+
+    public Map<Coin, Integer> calculateCoins(final int machineMoney) {
+        Map<Coin, Integer> machineCoins = createCoinUnitList();
         int machineMoneyToCountCoin = machineMoney;
 
         while (machineMoneyToCountCoin != 0) {
-            machineCoins = new ArrayList<>();
+            machineCoins = new LinkedHashMap<>();
             machineMoneyToCountCoin = machineMoney;
 
-            machineMoneyToCountCoin = inputCoinRandomly(machineCoins, coins, machineMoneyToCountCoin);
+            machineMoneyToCountCoin = inputCoinRandomly(machineCoins, machineMoneyToCountCoin);
         }
 
         return machineCoins;
     }
 
 
-    protected int inputCoinRandomly(final List<Integer> machineCoins, final List<Integer> coins, int machineMoneyToCountCoin) {
-        for (int coinUnit : coins) {
-            int share = machineMoneyToCountCoin / coinUnit;
+    protected int inputCoinRandomly(final Map<Coin, Integer> machineCoins, int machineMoneyToCountCoin) {
+        for (Coin machineCoin : machineCoins.keySet()) {
+            int coinUnit = machineCoin.getAmount();
+            int share = (machineMoneyToCountCoin / coinUnit);
 
             final List<Integer> inputRandomCoinRange = createCoinRangeList(share);
             int coinCount = Coin.COIN_500.inputCoinCountRandomly(inputRandomCoinRange);
 
-            machineMoneyToCountCoin = machineMoney - (coinCount * coinUnit);
-            machineCoins.add(coinCount);
+            machineMoneyToCountCoin = machineMoneyToCountCoin - (coinCount * coinUnit);
+            machineCoins.put(machineCoin, coinCount);
         }
 
         return machineMoneyToCountCoin;
@@ -95,15 +102,15 @@ public class VendingMachine {
         return inputRandomCoinRange;
     }
 
-    public List<Integer> createCoinUnitList() {
-        final List<Integer> coinUnitList = new ArrayList<>();
+    public Map<Coin, Integer> createCoinUnitList() {
+        final Map<Coin, Integer> machineCoins = new LinkedHashMap<>();
         Coin[] coin = Coin.values();
 
         for (int i = 0; i < Coin.values().length; i++) {
-            coinUnitList.add(coin[i].getAmount());
+            machineCoins.put(coin[i], 0);
         }
 
-        return coinUnitList;
+        return machineCoins;
     }
 
     public void validatePurchasingProductNameOnMachine(final List<Product> products, final String purchasingProductName) {
@@ -143,6 +150,15 @@ public class VendingMachine {
         if (!checkPurchasingProductSoldOut) {
             throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PURCHASING_PRODUCT_SOLD_OUT.getErrorMessage());
         }
+    }
+
+    public List<Integer> calculateReturnChangeCoin(final int purchasingCost) {
+
+        return null;
+    }
+
+    public Map<Coin, Integer> getMachineCoins() {
+        return machineCoins;
     }
 
 }
