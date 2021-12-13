@@ -2,17 +2,23 @@ package vendingmachine.view;
 
 import static vendingmachine.constant.Constant.*;
 
-import java.util.LinkedHashMap;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.CoinStorage;
 
 public class OutputView {
+
+	public static void breakLine() {
+		System.out.println();
+	}
+
 	public static void setVendingMachineMoney() {
 		System.out.println(ENTER_VENDING_MACHINE_INITIAL_MONEY);
 	}
 
-	public static void showCoins(LinkedHashMap<Integer, Integer> coins) {
+	public static void showCoins(CoinStorage coinStorage) {
 		System.out.println(VENDING_MACHINE_COINS);
-		for (int coin : coins.keySet()) {
-			System.out.println(coin + RULES_TO_SHOW + coins.get(coin) + NUMBER);
+		for (Coin coin : coinStorage.checkbox().keySet()) {
+			System.out.println(coin.getAmount() + RULES_TO_SHOW + coinStorage.checkbox().get(coin) + NUMBER);
 		}
 		System.out.println();
 	}
@@ -33,10 +39,10 @@ public class OutputView {
 		System.out.println(ENTER_WANT_TO_BUY_PRODUCT);
 	}
 
-	public static void showRemainingMoney(LinkedHashMap<Integer, Integer> coins) {
+	public static void showCoinStorageState(CoinStorage coinStorage) {
 		System.out.println(REMAINING_MONEY);
-		coins.entrySet().stream()
+		coinStorage.checkbox().entrySet().stream()
 			.filter(key -> key.getValue() > 0)
-			.forEach(key -> System.out.println(key.getKey() + RULES_TO_SHOW + key.getValue() + NUMBER));
+			.forEach(key -> System.out.println(key.getKey().getAmount() + RULES_TO_SHOW + key.getValue() + NUMBER));
 	}
 }
