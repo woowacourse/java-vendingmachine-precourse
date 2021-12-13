@@ -10,4 +10,20 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public boolean isProduct(String productName) {
+        return name.equals(productName);
+    }
+
+    public void decreaseProduct() {
+        quantity -= 1;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public boolean isSoldOut() {
+        return quantity == 0;
+    }
 }
