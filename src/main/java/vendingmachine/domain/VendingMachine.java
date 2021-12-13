@@ -31,12 +31,16 @@ public class VendingMachine {
     }
 
     public void printUserMoney() {
-        System.out.println("투입 금액을 입력해 주세요.");
-        setUserMoney();
         System.out.println("투입금액 = " + userMoney + " 원");
     }
 
-    public void printProduct() {
+    public void inputUserMoney() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        setUserMoney();
+        printUserMoney();
+    }
+
+    public void inputProducts() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         setProduct();
         for (Product product : products) {
@@ -44,7 +48,7 @@ public class VendingMachine {
         }
     }
 
-    public void print() {
+    public void inputAmount() {
         System.out.println("금액을 입력하시오");
         setAmount();
         CoinGenerator coinGenerator = new CoinGenerator();
