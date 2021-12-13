@@ -60,16 +60,9 @@ public class InputView {
 	}
 
 	public static String getProductName() {
-		while (true) {
-			System.out.println(BUY_PRODUCT_NAME_MESSAGE);
-			String productName = Console.readLine();
-			OutputView.printNewLine();
-			try {
-				ProductValidator.checkProductName(productName);
-				return productName;
-			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
-			}
-		}
+		System.out.println(BUY_PRODUCT_NAME_MESSAGE);
+		String productName = Console.readLine();
+		OutputView.printNewLine();
+		return productName;
 	}
 }
