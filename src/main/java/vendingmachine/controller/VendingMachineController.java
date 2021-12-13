@@ -45,12 +45,14 @@ public class VendingMachineController {
 		outputView.printInsertMoney(vendingMachine.getInputMoney());
 
 		while (vendingMachine.end()) {
-			String productName = enterBuyingProduct();
-			/**
-			 * 가정 : 구매할 물건이 존재한다(이에 대한 예외처리를 완료했을 때의 로직)
-			 */
-			vendingMachine.purchase(productName);
-			outputView.printInsertMoney(vendingMachine.getInputMoney());
+			try {
+				String productName = enterBuyingProduct();
+				vendingMachine.purchase(productName);
+				outputView.printInsertMoney(vendingMachine.getInputMoney());
+			} catch (IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
+
 		}
 	}
 

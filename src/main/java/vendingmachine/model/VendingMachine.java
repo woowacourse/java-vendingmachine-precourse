@@ -75,7 +75,7 @@ public class VendingMachine {
 	}
 
 	public boolean end() {
-		return inputMoney < 0 || productList.isEmpty() || isInputMoneyCanBuyProduct();
+		return inputMoney >= 0 && !productList.isEmpty() && isInputMoneyCanBuyProduct();
 	}
 
 	private boolean isInputMoneyCanBuyProduct() {
