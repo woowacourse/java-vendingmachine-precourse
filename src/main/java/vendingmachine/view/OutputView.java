@@ -20,8 +20,17 @@ public class OutputView {
         System.out.println("상품과 가격, 수량을 입력해 주세요.");
     }
 
-    public void printOrderMoney(){
+    public void printOrderMoney() {
         System.out.println("투입 금액을 입력해 주세요.");
+    }
+
+    public void printInputMoney(int money) {
+        System.out.println("투입 금액: " + money + "원");
+
+    }
+
+    public void printProduct(){
+        System.out.println("구매할 상품명을 입력해 주세요.");
     }
 
 }
