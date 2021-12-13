@@ -78,7 +78,7 @@ public class Validator {
 		IllegalArgumentException {
 		if (ItemList.get(inputName).isOverThisPrice(pay)) {
 			throw new IllegalArgumentException(
-				Messages.ERROR_NOT_ENOUGH_MONEY_MESSAGE + Messages.COMMON_LINE_BREAK_MSG.getValue());
+				Messages.ERROR_NOT_ENOUGH_MONEY_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
@@ -86,7 +86,7 @@ public class Validator {
 		IllegalArgumentException {
 		if (ItemList.get(inputName).isAmountZero()) {
 			throw new IllegalArgumentException(
-				Messages.ERROR_SOLD_OUT_MESSAGE + Messages.COMMON_LINE_BREAK_MSG.getValue());
+				Messages.ERROR_SOLD_OUT_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
