@@ -19,8 +19,7 @@ public class VendingMachineController {
 		String machineMoney = enterMachineMoney();
 		int convertedMachineMoney = Utils.moneyConverter(machineMoney);
 		VendingMachine vendingMachine = new VendingMachine();
-		vendingMachine.initOwnMoney(convertedMachineMoney);
-		vendingMachine.generateCoin();
+		vendingMachine.generateCoin(convertedMachineMoney);
 		printCurrentCoin(vendingMachine);
 		while(true) {
 			try {

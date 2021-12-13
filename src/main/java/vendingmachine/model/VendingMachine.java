@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
-	private int ownMoney; // 갖고 있을 필요가 있나?
 	private int inputMoney;
 	private List<Product> productList;
 	private final Map<Coin, Integer> coinMap = new LinkedHashMap<>();
@@ -19,23 +18,15 @@ public class VendingMachine {
 		return this.inputMoney;
 	}
 
-	public int getOwnMoney() {
-		return this.ownMoney;
-	}
-
 	public Map<Coin, Integer> getCoinMap() {
 		return this.coinMap;
-	}
-
-	public void initOwnMoney(int ownMoney) {
-		this.ownMoney = ownMoney;
 	}
 
 	public void initInputMoney(int inputMoney) {
 		this.inputMoney = inputMoney;
 	}
 
-	public void generateCoin() {
+	public void generateCoin(int ownMoney) {
 		initCoinMap();
 		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
 
