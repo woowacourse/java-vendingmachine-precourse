@@ -39,7 +39,7 @@ public class Machine {
 	}
 
 	private void prepareItems() {
-		this.itemManager = new ItemManager(askItems());
+		this.itemManager = new ItemManager(mapItems());
 		display.printBlankLine();
 	}
 
@@ -67,13 +67,13 @@ public class Machine {
 		}
 	}
 
-	private Map<String, Item> askItems() {
+	private Map<String, Item> mapItems() {
 		display.askItems();
 		try {
-			return itemParser.stringToItems(Console.readLine());
+			return itemParser.mapItemsFrom(Console.readLine());
 		} catch (IllegalArgumentException e) {
 			display.printError(e);
-			return askItems();
+			return mapItems();
 		}
 	}
 

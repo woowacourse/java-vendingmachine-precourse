@@ -46,14 +46,14 @@ class ApplicationTest extends NsTest {
     @Test
     void 아이템_목록_생성_테스트() {
         ItemParser itemParser = new ItemParser();
-        Map<String, Item> items = itemParser.stringToItems("[콜라,1000,10];[사이다,1200,15]");
+        Map<String, Item> items = itemParser.mapItemsFrom("[콜라,1000,10];[사이다,1200,15]");
         assertThat(items.get("콜라")).isInstanceOf(Item.class);
     }
 
     @Test
     void 상품_목록_형식_검사_테스트() {
         ItemParser itemParser = new ItemParser();
-        assertThrows(IllegalArgumentException.class, () -> itemParser.stringToItems("[콜라,1000,1"));
+        assertThrows(IllegalArgumentException.class, () -> itemParser.mapItemsFrom("[콜라,1000,1"));
     }
 
     @Override
