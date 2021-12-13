@@ -14,7 +14,6 @@ import java.util.stream.Collectors;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.constant.Coin;
 import vendingmachine.domain.Deposit;
-import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
@@ -24,12 +23,16 @@ public class MachineService {
 
 	private final DepositRepository depositRepository;
 	private final ProductRepository productRepository;
-	private final Machine machine;
+	private int money;
 
-	public MachineService(DepositRepository depositRepository, ProductRepository productRepository, Machine machine) {
+	public MachineService() {
+		this(new DepositRepository(), new ProductRepository());
+	}
+
+	public MachineService(DepositRepository depositRepository, ProductRepository productRepository) {
 		this.depositRepository = depositRepository;
 		this.productRepository = productRepository;
-		this.machine = machine;
+		this.money = 0;
 	}
 
 	public void setDepositsRandomized(String input) {
@@ -51,6 +54,10 @@ public class MachineService {
 		}
 		depositRepository.save(
 			countMap.keySet().stream().map(coin -> new Deposit(coin, countMap.get(coin))).collect(Collectors.toList()));
+	}
+
+	public String getDeposits() {
+		return depositRepository.toString();
 	}
 
 	private int getAmountToSub(int deposit, int amountRandomized) {
@@ -85,15 +92,25 @@ public class MachineService {
 		return new Product(name, price, quantity);
 	}
 
-	public void setMoney(String inputMoney) {
+	public void addMoney(String inputMoney) {
 		validateInteger(inputMoney);
-		machine.setUserMoney(Integer.parseInt(inputMoney));
+		this.money += Integer.parseInt(inputMoney);
+	}
+
+	private void decreaseMoney(int amount) {
+		if (amount > money)
+			throw new IllegalArgumentException(NOT_ENOUGH_MONEY.getMessage());
+		this.money -= amount;
+	}
+
+	public final int getMoney() {
+		return money;
 	}
 
 	public List<Product> getAffordableList() {
 		return productRepository.findAll()
 			.stream()
-			.filter(product -> product.getPrice() <= machine.getUserMoney())
+			.filter(product -> product.getPrice() <= money)
 			.collect(Collectors.toList());
 	}
 
@@ -101,7 +118,7 @@ public class MachineService {
 		if (!productRepository.findByName(productName).isPresent())
 			throw new IllegalArgumentException(NO_SUCH_PRODUCT.getMessage());
 		productRepository.findByName(productName).ifPresent(product -> {
-			machine.decreaseUserMoney(product.getPrice());
+			decreaseMoney(product.getPrice());
 			productRepository.decreaseQuantity(productName);
 		});
 	}

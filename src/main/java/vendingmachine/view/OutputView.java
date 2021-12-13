@@ -1,7 +1,6 @@
 package vendingmachine.view;
 
 import vendingmachine.constant.Hint;
-import vendingmachine.domain.Machine;
 import vendingmachine.repository.DepositRepository;
 
 public class OutputView {
@@ -11,12 +10,12 @@ public class OutputView {
 		System.out.println(changes);
 	}
 
-	public static void printMoney(Machine machine) {
-		System.out.printf(Hint.LEFT_MONEY.getHint(), machine.getUserMoney());
+	public static void printMoney(int money) {
+		System.out.printf(Hint.LEFT_MONEY.getHint(), money);
 	}
 
-	public static void printDeposits(DepositRepository depositRepository) {
+	public static void printDeposits(String deposits) {
 		System.out.println(Hint.MACHINE_HAS.getHint());
-		System.out.println(depositRepository.toString());
+		System.out.println(deposits);
 	}
 }

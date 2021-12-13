@@ -3,35 +3,23 @@ package vendingmachine.controller;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
-import java.util.Arrays;
-import java.util.List;
-
-import vendingmachine.domain.Machine;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
 import vendingmachine.service.MachineService;
-import vendingmachine.validator.ProductListValidator;
 
 public class MachineController {
 
 	private final MachineService machineService;
-	private final DepositRepository depositRepository;
-	private final ProductRepository productRepository;
-	private final Machine machine;
 
 	public MachineController() {
-		this.depositRepository = new DepositRepository();
-		this.productRepository = new ProductRepository();
-		this.machine = new Machine();
-		this.machineService = new MachineService(depositRepository, productRepository, machine);
+		this.machineService = new MachineService();
 	}
 
 	public void setDeposit() {
 		try {
 			String input = inputDeposit();
 			machineService.setDepositsRandomized(input);
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setDeposit();
 		}
@@ -41,8 +29,7 @@ public class MachineController {
 		try {
 			String input = inputProductList();
 			machineService.setProducts(input);
-		}
-		catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setProductList();
 		}
@@ -51,9 +38,8 @@ public class MachineController {
 	public void setMoney() {
 		try {
 			String input = inputMoney();
-			machineService.setMoney(input);
-		}
-		catch (IllegalArgumentException e) {
+			machineService.addMoney(input);
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setMoney();
 		}
@@ -63,8 +49,7 @@ public class MachineController {
 		try {
 			String input = inputProductName();
 			machineService.purchaseProduct(input);
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			purchase();
 		}
@@ -72,13 +57,13 @@ public class MachineController {
 
 	public void operate() {
 		setDeposit();
-		printDeposits(depositRepository);
+		printDeposits(machineService.getDeposits());
 		setProductList();
 		setMoney();
-		printMoney(machine);
-		while (machineService.getAffordableList().size() > 0){
+		printMoney(machineService.getMoney());
+		while (machineService.getAffordableList().size() > 0) {
 			purchase();
-			printMoney(machine);
+			printMoney(machineService.getMoney());
 		}
 		printChanges(machineService.spitChanges());
 	}

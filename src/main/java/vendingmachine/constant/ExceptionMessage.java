@@ -9,7 +9,9 @@ public enum ExceptionMessage {
 	INVALID_PRICE("가격은 100원 이상, 10원으로 나누어 떨어져야 합니다"),
 	INVALID_QUANTITY("수량은 1개 이상이어야 합니다"),
 	MONEY_NOT_INTEGER("금액은 음수가 아닌 정수이어야 합니다"),
-	NO_SUCH_PRODUCT("그런 상품은 존재하지 않습니다");
+	NO_SUCH_PRODUCT("그런 상품은 존재하지 않습니다"),
+	NOT_ENOUGH_MONEY("투입 금액이 부족합니다")
+	;
 
 	private static final String prefix = "[ERROR] ";
 	private final String message;

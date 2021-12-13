@@ -10,10 +10,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.constant.Coin;
-import vendingmachine.constant.Hint;
 import vendingmachine.constant.Symbol;
 import vendingmachine.domain.Deposit;
-import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
@@ -23,7 +21,6 @@ class MachineServiceTest {
 	MachineService machineService;
 	DepositRepository depositRepository;
 	ProductRepository productRepository;
-	Machine machine;
 
 	List<String> productList;
 	List<Deposit> depositList;
@@ -32,8 +29,7 @@ class MachineServiceTest {
 	void setUp() {
 		depositRepository = new DepositRepository();
 		productRepository = new ProductRepository();
-		machine = new Machine();
-		machineService = new MachineService(depositRepository, productRepository, machine);
+		machineService = new MachineService(depositRepository, productRepository);
 
 		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
 		machineService.setProducts(productList.get(0) + Symbol.PRODUCT_DELIMITER.getSymbol() + productList.get(1));
@@ -69,7 +65,7 @@ class MachineServiceTest {
 	void getAffordableList() {
 		// given
 		// when
-		machine.setUserMoney(500);
+		machineService.addMoney("10000");
 		// then
 		assertThat(machineService.getAffordableList()).hasSize(1);
 	}
@@ -78,7 +74,7 @@ class MachineServiceTest {
 	void purchaseProduct() {
 		// given
 		Product target = productRepository.findByName("콜라").get();
-		machine.setUserMoney(target.getPrice() * target.getQuantity());
+		machineService.addMoney(String.valueOf(target.getPrice() * target.getQuantity()));
 		// when
 		IntStream.range(0, target.getQuantity()).forEach(i ->
 			machineService.purchaseProduct(target.getName())
@@ -90,7 +86,7 @@ class MachineServiceTest {
 	@Test
 	void spitChanges() {
 		// given
-		machine.setUserMoney(10000);
+		machineService.addMoney("10000");
 		String previousDeposits = depositRepository.toStringSkipZero();
 		String expectedAfterSpit = new DepositRepository().toStringSkipZero();
 		// when
