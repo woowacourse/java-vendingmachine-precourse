@@ -13,4 +13,12 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+    public int getAmount() {
+        return amount;
+    }
+
+    @Override
+    public String toString() {
+        return String.valueOf(amount + "원");
+    }
 }
