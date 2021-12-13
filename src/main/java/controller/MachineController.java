@@ -11,17 +11,34 @@ public class MachineController {
 
 	public static void turnOnMachine() {
 		VendingMachine vendingMachine = new VendingMachine();
-		InputDisplay.askInputVendingMachineChange();
-		vendingMachine.makeVendingMachineCoinBox(InputController.inputVendingMachineChange());
-		OutputDisplay.showEachCoinInCoinBox(vendingMachine.giveEachCoinPrice(), vendingMachine.giveEachCoinCount());
-		InputDisplay.askInputVendingMachineProduct();
-		vendingMachine.makeVendingMachineProducts(InputController.inputVendingMachineProducts());
-		InputDisplay.askInputUserInsertMoney();
-		vendingMachine.makeUserInsertMoneyBox(InputController.inputUserInsertMoney());
 
-		while (true) {
-			OutputDisplay.showNowUserInsertMoney(vendingMachine.giveUserInsertMoney());
-			InputDisplay.askInputProductNameToBuy();
+		putChangeIntoMachine(vendingMachine);
+		prepareProductOnMachine(vendingMachine);
+		putInsertedMoneyIntoMachine(vendingMachine);
+
+		sellProductInMachine(vendingMachine);
+	}
+
+	private static void putChangeIntoMachine(VendingMachine vendingMachine) {
+		InputDisplay.askInputChange();
+		vendingMachine.makeCoinBox(InputController.inputChange());
+		OutputDisplay.showCoinsInCoinBox(vendingMachine.givePriceOfEachCoins(), vendingMachine.giveCountOfEachCoins());
+	}
+
+	private static void prepareProductOnMachine(VendingMachine vendingMachine) {
+		InputDisplay.askInputProducts();
+		vendingMachine.makeProductBox(InputController.inputProducts());
+	}
+
+	private static void putInsertedMoneyIntoMachine(VendingMachine vendingMachine) {
+		InputDisplay.askInputInsertedMoney();
+		vendingMachine.makeInsertedMoneyBox(InputController.inputInsertedMoney());
+	}
+
+	private static void sellProductInMachine(VendingMachine vendingMachine) {
+		while (!vendingMachine.isAllProductSoldOut() && vendingMachine.hasEnoughMoneyToBuyProduct()) {
+			OutputDisplay.showNowInsertedMoney(vendingMachine.giveInsertedMoney());
+			InputDisplay.askInputProductToBuy();
 			vendingMachine.sellProduct(InputController.inputProductNameToBuy());
 		}
 	}
