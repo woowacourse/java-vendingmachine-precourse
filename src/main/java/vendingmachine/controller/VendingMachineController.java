@@ -8,8 +8,7 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	public void run() {
-		int inputVendingMachineMoney = inputVendingMachineMoney();
-		VendingMachine vendingMachine = new VendingMachine(inputVendingMachineMoney);
+		VendingMachine vendingMachine = new VendingMachine(inputVendingMachineMoney());
 		OutputView.printVendingMachineCoins(vendingMachine.findCoins());
 		Products products = inputProduct();
 		vendingMachine.addProducts(products);
@@ -36,7 +35,7 @@ public class VendingMachineController {
 		}
 	}
 
-	private int inputVendingMachineMoney() {
+	private Money inputVendingMachineMoney() {
 		try {
 			OutputView.printInputVendingMachineCoin();
 			return InputView.inputVendingMachineMoney();

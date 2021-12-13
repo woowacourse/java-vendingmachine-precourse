@@ -12,22 +12,22 @@ public class VendingMachine {
 	private Products products;
 	private Money userMoney;
 
-	public VendingMachine(int vendingMachineMoney) {
+	public VendingMachine(Money vendingMachineMoney) {
 		coins = createVendingMachineCoins(vendingMachineMoney);
 	}
 
-	private VendingMachineCoins createVendingMachineCoins(int vendingMachineMoney) {
+	private VendingMachineCoins createVendingMachineCoins(Money vendingMachineMoney) {
 		return new VendingMachineCoins(generateVendingMachineCoins(vendingMachineMoney));
 	}
 
-	private Map<Coin, Integer> generateVendingMachineCoins(int vendingMachineMoney) {
+	private Map<Coin, Integer> generateVendingMachineCoins(Money vendingMachineMoney) {
 		Map<Coin, Integer> coinsMap = new EnumMap<>(Coin.class);
 		initializeCoinMap(coinsMap);
-		while (vendingMachineMoney > 0) {
+		while (vendingMachineMoney.hasMoreMoney()) {
 			int amount = Randoms.pickNumberInList(Coin.getCoinList());
-			if (vendingMachineMoney >= amount) {
+			if (vendingMachineMoney.isPossibleChangeToCoin(amount)) {
 				addCoin(coinsMap, amount);
-				vendingMachineMoney -= amount;
+				vendingMachineMoney.changeToCoin(amount);
 			}
 		}
 		return coinsMap;

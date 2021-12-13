@@ -4,7 +4,7 @@ import vendingmachine.utils.ValidateUtils;
 
 public class Money {
 
-	private final int money;
+	private int money;
 
 	public Money(String money) {
 		validateMoney(money);
@@ -13,5 +13,17 @@ public class Money {
 
 	private void validateMoney(String money) {
 		ValidateUtils.validateInputCoin(money);
+	}
+
+	public boolean hasMoreMoney() {
+		return money > 0;
+	}
+
+	public boolean isPossibleChangeToCoin(int amount) {
+		return money >= amount;
+	}
+
+	public void changeToCoin(int amount) {
+		money -= amount;
 	}
 }
