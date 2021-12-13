@@ -26,7 +26,7 @@ public class VendingMachineController {
         while (vendingMachine.isBuyAbleProductRemain()) {
             typeProductToBuy();
         }
-        returnChange();
+        letReturnChange();
     }
 
     private void initializeHoldingMoney() {
@@ -78,16 +78,15 @@ public class VendingMachineController {
         }
     }
 
-    private void returnChange() {
+    private void letReturnChange() {
         OutputView.printInsertAmount(vendingMachine.getInsertAmount());
         OutputView.printChangeInfoMessage();
-        int remainInsertAmount = vendingMachine.getInsertAmount();
         for (Coin coin : Coin.getCoinListDecreasingOrder()) {
-            remainInsertAmount = returnChange(coin, remainInsertAmount);
+            returnCoin(coin, vendingMachine.getInsertAmount());
         }
     }
 
-    private int returnChange(final Coin coin, int remainInsertAmount) {
+    private int returnCoin(final Coin coin, int remainInsertAmount) {
         int numberOfChangeCoins = 0;
         while (vendingMachine.getNumberOfHoldingCoins(coin) > 0 && remainInsertAmount >= coin.getAmount()) {
             remainInsertAmount -= coin.getAmount();

@@ -11,8 +11,8 @@ public class VendingMachine {
     private static final String PRODUCT_SOLD_OUT_ERROR_MESSAGE = "해당 상품의 재고가 없습니다. 다른 상품을 선택해 주세요.";
 
     private int insertAmount;
-    private CoinCase coinCase;
-    private List<Product> productStorage;
+    private final CoinCase coinCase;
+    private final List<Product> productStorage;
 
     public VendingMachine() {
         this.insertAmount = 0;
@@ -22,14 +22,6 @@ public class VendingMachine {
 
     public void initializeCoinCase(final int holdingAmount) {
         coinCase.generateCoins(holdingAmount);
-    }
-
-    public HashMap<Coin, Integer> getHoldingCoins() {
-        return coinCase.getHoldingCoins();
-    }
-
-    public int getHoldingAmount() {
-        return coinCase.getHoldingAmount();
     }
 
     public int getNumberOfHoldingCoins(final Coin coin) {
@@ -81,5 +73,6 @@ public class VendingMachine {
 
     public void returnCoin(final Coin coin) {
         coinCase.pullOut(coin);
+        insertAmount -= coin.getAmount();
     }
 }
