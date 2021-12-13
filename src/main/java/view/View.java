@@ -7,13 +7,17 @@ import vendingmachine.domain.Coin;
 import vendingmachine.utils.ValidationUtil;
 
 public class View {
+    public static final int DEFAULT_VALUE = 0;
+    public static final String TARGET_SPACE = " ";
+    public static final String REPLACEMENT_EMPTY = "";
+
     public static void printInitialCoins(Map<Coin, Integer> coins) {
         System.out.println();
         System.out.println("자판기가 보유한 동전");
-        System.out.println("500원 - " + coins.getOrDefault(Coin.COIN_500, 0) + "개");
-        System.out.println("100원 - " + coins.getOrDefault(Coin.COIN_100, 0) + "개");
-        System.out.println("50원 - " + coins.getOrDefault(Coin.COIN_50, 0) + "개");
-        System.out.println("10원 - " + coins.getOrDefault(Coin.COIN_10, 0) + "개");
+        System.out.println("500원 - " + coins.getOrDefault(Coin.COIN_500, DEFAULT_VALUE) + "개");
+        System.out.println("100원 - " + coins.getOrDefault(Coin.COIN_100, DEFAULT_VALUE) + "개");
+        System.out.println("50원 - " + coins.getOrDefault(Coin.COIN_50, DEFAULT_VALUE) + "개");
+        System.out.println("10원 - " + coins.getOrDefault(Coin.COIN_10, DEFAULT_VALUE) + "개");
     }
 
     public static void printCoins(int inputAmount, Map<Coin, Integer> coins) {
@@ -25,7 +29,7 @@ public class View {
 
     public static String putCoinIntoVendingMachine() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        String inputValue = Console.readLine().replace(" ", "");
+        String inputValue = Console.readLine().replace(TARGET_SPACE, REPLACEMENT_EMPTY);
         if (isValidAmount(inputValue)) {
             return inputValue;
         }
@@ -45,7 +49,7 @@ public class View {
     public static String registerProduct() {
         System.out.println();
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
-        String value =  Console.readLine().replace(" ", "");
+        String value =  Console.readLine().replace(TARGET_SPACE, REPLACEMENT_EMPTY);
         if (isEmpty(value)) {
             return registerProduct();
         }
@@ -65,7 +69,7 @@ public class View {
     public static String inputAmount() {
         System.out.println();
         System.out.println("투입 금액을 입력해 주세요.");
-        String inputValue = Console.readLine().replace(" ", "");
+        String inputValue = Console.readLine().replace(TARGET_SPACE, REPLACEMENT_EMPTY);
         if (isValidAmount(inputValue)) {
             return inputValue;
         }
@@ -76,7 +80,7 @@ public class View {
         System.out.println();
         System.out.println("투입 금액: " + userBalance + "원");
         System.out.println("구매할 상품명을 입력해 주세요.");
-        String value = Console.readLine().replace(" ", "");
+        String value = Console.readLine().replace(TARGET_SPACE, REPLACEMENT_EMPTY);
         if (isEmpty(value)) {
             return buyProduct(userBalance);
         }
