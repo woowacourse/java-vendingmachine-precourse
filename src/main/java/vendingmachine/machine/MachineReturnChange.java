@@ -3,7 +3,6 @@ package vendingmachine.machine;
 public class MachineReturnChange {
     Coin[] coins = Coin.values();
     Machine machine;
-    int changes = 0;    // 반환할 잔돈 금액
 
     MachineReturnChange(Machine machine) {
         this.machine = machine;
@@ -18,6 +17,12 @@ public class MachineReturnChange {
                 return userMoney - coin.getCoinAmount() * number;
             }
             number--;
+        }
+    }
+
+    public void makeChanges(int userMoney) {
+        for (Coin coin : coins) {
+            userMoney -= reduceUserMoney(coin, userMoney);
         }
     }
 }
