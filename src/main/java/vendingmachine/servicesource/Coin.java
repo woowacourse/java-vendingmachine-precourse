@@ -2,8 +2,10 @@ package vendingmachine.servicesource;
 
 import vendingmachine.constants.StringConstants;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.List;
 
 public enum Coin{
     COIN_500(500),
@@ -46,6 +48,20 @@ public enum Coin{
         });
 
         return coinTypes;
+    }
+
+    static public List<Integer> getAmountsListLowerThanBalance(int balance){
+        List<Integer> amountOfCoins = new ArrayList<>();
+
+        for(Coin currentCoin : Coin.values()){
+
+            if(currentCoin.getAmount() <= balance){
+                amountOfCoins.add(currentCoin.getAmount());
+            }
+
+        }
+
+        return amountOfCoins;
     }
 
     @Override
