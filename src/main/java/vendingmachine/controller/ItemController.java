@@ -13,6 +13,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class ItemController {
+	private static final int ZERO = 0;
 	private static final String PREFIX = "[";
 	private static final String SUFFIX = "]";
 	private static final String DELIMITER_COMMA = ",";
@@ -38,6 +39,7 @@ public class ItemController {
 	public int getLeastItemCost(Items items) {
 		return items.findAll()
 			.stream()
+			.filter((item) -> ZERO < item.getAmount())
 			.min(Comparator.comparing(Item::getCost))
 			.get()
 			.getCost();

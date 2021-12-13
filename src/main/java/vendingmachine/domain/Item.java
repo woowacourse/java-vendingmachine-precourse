@@ -70,6 +70,10 @@ public class Item {
 		return cost;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
+
 	public void sell() {
 		amount --;
 	}
