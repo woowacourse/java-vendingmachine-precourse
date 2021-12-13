@@ -3,50 +3,44 @@ package model;
 import java.util.List;
 
 public class VendingMachine {
-	private VendingMachineCoinBox vendingMachineCoinBox;
-	private VendingMachineProducts vendingMachineProducts;
-	private UserInsertMoneyBox userInsertMoneyBox;
+	private CoinBox coinBox;
+	private ProductBox productBox;
+	private InsertedMoneyBox insertedMoneyBox;
 
-	public void makeVendingMachineCoinBox(int insertVendingMachineChange) {
-		vendingMachineCoinBox = new VendingMachineCoinBox(insertVendingMachineChange);
+	public void makeCoinBox(int change) {
+		coinBox = new CoinBox(change);
 	}
 
-	public void makeVendingMachineProducts(List<String> vendingMachineProductsInformation) {
-		vendingMachineProducts = new VendingMachineProducts(vendingMachineProductsInformation);
+	public void makeProductBox(List<String> products) {
+		productBox = new ProductBox(products);
 	}
 
-	public void makeUserInsertMoneyBox(int userInsertMoney) {
-		userInsertMoneyBox = new UserInsertMoneyBox(userInsertMoney);
+	public void makeInsertedMoneyBox(int insertedMoney) {
+		insertedMoneyBox = new InsertedMoneyBox(insertedMoney);
 	}
 
-	public List<Integer> giveEachCoinCount() {
-		return vendingMachineCoinBox.bringEachCoinCountInCoinBox();
+	public List<Integer> giveCountOfEachCoins() {
+		return coinBox.getCountOfEachCoins();
 	}
 
-	public List<Integer> giveEachCoinPrice() {
-		return vendingMachineCoinBox.bringEachCoinPriceInCoinBox();
+	public List<Integer> givePriceOfEachCoins() {
+		return coinBox.getPriceOfEachCoins();
 	}
 
-	public int giveUserInsertMoney() {
-		return userInsertMoneyBox.bringMoney();
+	public int giveInsertedMoney() {
+		return insertedMoneyBox.getMoney();
 	}
 
-	public boolean isAllProductsSoldOut() {
-		if (!vendingMachineProducts.hasAnyProduct()) {
-			return true;
-		}
-		return false;
+	public boolean isAllProductSoldOut() {
+		return !productBox.hasProduct();
 	}
 
 	public boolean hasEnoughMoneyToBuyProduct() {
-		if (userInsertMoneyBox.hasEnoughMoney(vendingMachineProducts.bringMinimumProductPrice())) {
-			return true;
-		}
-		return false;
+		return insertedMoneyBox.hasEnoughMoney(productBox.getMinimumProductPrice());
 	}
 
 	public void sellProduct(String productName) {
-		int soldProductPrice = vendingMachineProducts.sellProduct(productName);
-		userInsertMoneyBox.reduceMoney(soldProductPrice);
+		productBox.sellProduct(productName);
+		insertedMoneyBox.reduceMoney(productBox.giveSoldProductPrice(productName));
 	}
 }
