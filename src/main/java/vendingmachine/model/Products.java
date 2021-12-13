@@ -12,13 +12,12 @@ public class Products {
         this.products = products;
     }
 
-    public boolean buyProduct(String name, int payment) {
+    public void buyProduct(String name, int payment) {
         Product product = findProduct(name);
         if (product == null) {
-            System.out.println(BUY_ERROR_SENTENCE);
-            return false;
+            throw new IllegalStateException(BUY_ERROR_SENTENCE);
         }
-        return product.buy(payment);
+        product.buy(payment);
     }
 
     public Product findProduct(String name) {

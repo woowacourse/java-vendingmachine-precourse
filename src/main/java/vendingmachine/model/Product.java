@@ -17,12 +17,10 @@ public class Product {
         return this.name.equals(name);
     }
 
-    public boolean buy(int payment) {
+    public void buy(int payment) {
         if (price > payment || stock <= 0) {
-            System.out.println(BUY_ERROR_SENTENCE);
-            return false;
+            throw new IllegalStateException(BUY_ERROR_SENTENCE);
         }
         stock--;
-        return true;
     }
 }
