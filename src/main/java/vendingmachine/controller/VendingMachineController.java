@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import vendingmachine.model.Coin;
 import vendingmachine.model.service.CoinService;
 import vendingmachine.model.Customer;
 import vendingmachine.model.service.CustomerService;
@@ -89,7 +90,7 @@ public class VendingMachineController {
 	}
 
 	public void giveChange(int restMoney) {
-		HashMap<String, Integer> coinForChange = coinService.calculateCoinForChange(restMoney);
+		HashMap<Coin, Integer> coinForChange = coinService.calculateCoinForChange(restMoney);
 
 		vendingMachineView.giveChange(restMoney, coinForChange);
 	}

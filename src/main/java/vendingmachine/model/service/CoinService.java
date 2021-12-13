@@ -13,31 +13,38 @@ public class CoinService {
 
 	public static final int ADD_COIN_COUNT_NUMBER = 1;
 	public static final int EMPTY_CHANGE_NUMBER = 0;
+	public static final String COIN_NAME_PREFIX = "COIN_";
 
 	CoinRepository coinRepository = CoinRepository.instance;
 
 	public void addCoin(String coinName) {
 		coinRepository.getCoinRepository()
-			.put(coinName, coinRepository.getCoinRepository().get(coinName) + ADD_COIN_COUNT_NUMBER);
+			.put(Coin.valueOf(coinName),
+				coinRepository.getCoinRepository().get(Coin.valueOf(coinName)) + ADD_COIN_COUNT_NUMBER);
 	}
 
 	public void fillCoin(int change) {
 		List<Integer> coinAmountList = getCoinAmountList();
 
 		while (change != EMPTY_CHANGE_NUMBER) {
-			int coin = Randoms.pickNumberInList(coinAmountList);
-			if (change - coin >= EMPTY_CHANGE_NUMBER) {
-				addCoin(String.valueOf(coin));
-				change -= coin;
+			int amount = Randoms.pickNumberInList(coinAmountList);
+			if (change - amount >= EMPTY_CHANGE_NUMBER) {
+				addCoin(makeCoinName(amount));
+				change -= amount;
 			}
 		}
 	}
 
-	public HashMap<String, Integer> calculateCoinForChange(int restMoney) {
-		HashMap<String, Integer> coinForChange = new HashMap<>();
+	public String makeCoinName(int amount) {
+		String coinName = COIN_NAME_PREFIX + amount;
+		return coinName;
+	}
+
+	public HashMap<Coin, Integer> calculateCoinForChange(int restMoney) {
+		HashMap<Coin, Integer> coinForChange = new HashMap<>();
 		for (int amount : getCoinAmountList()) {
 			int availableCount = restMoney / amount;
-			Integer maxCount = coinRepository.getCoinRepository().get(String.valueOf(amount));
+			Integer maxCount = coinRepository.getCoinRepository().get(Coin.valueOf(makeCoinName(amount)));
 			if (maxCount < availableCount) {
 				restMoney = putCoinForChange(restMoney, coinForChange, amount, maxCount);
 				continue;
@@ -48,8 +55,8 @@ public class CoinService {
 		return coinForChange;
 	}
 
-	private int putCoinForChange(int restMoney, HashMap<String, Integer> coinForChange, int amount, Integer count) {
-		coinForChange.put(String.valueOf(amount), count);
+	private int putCoinForChange(int restMoney, HashMap<Coin, Integer> coinForChange, int amount, Integer count) {
+		coinForChange.put(Coin.valueOf(makeCoinName(amount)), count);
 		restMoney -= count * amount;
 		return restMoney;
 	}

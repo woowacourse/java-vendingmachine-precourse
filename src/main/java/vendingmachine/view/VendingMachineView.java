@@ -26,10 +26,10 @@ public class VendingMachineView {
 	public void showCoinsInVendingMachine() {
 		System.out.println(COINS_IN_VENDING_MACHINE_MESSAGE);
 
-		HashMap<String, Integer> coinRepository = CoinRepository.instance.getCoinRepository();
+		HashMap<Coin, Integer> coinRepository = CoinRepository.instance.getCoinRepository();
 		for (Coin coin : Coin.values()) {
 			int amount = coin.getAmount();
-			Integer coinCount = coinRepository.get(String.valueOf(amount));
+			Integer coinCount = coinRepository.get(coin);
 			System.out.println(amount + MONEY_COUNT_UNIT + HYPHEN + coinCount + COIN_COUNT_UNIT);
 		}
 	}
@@ -47,13 +47,13 @@ public class VendingMachineView {
 		System.out.println(INPUT_NAME_FOR_BUY);
 	}
 
-	public void giveChange(int restMoney, HashMap<String, Integer> coinForChange) {
+	public void giveChange(int restMoney, HashMap<Coin, Integer> coinForChange) {
 		System.out.println(MONEY_FOR_BUY_AVAILABLE_PREFIX + restMoney);
 		System.out.println(GIVE_CHANGE);
 
 		for (Coin coin : Coin.values()) {
 			int amount = coin.getAmount();
-			Integer coinCount = coinForChange.get(String.valueOf(amount));
+			Integer coinCount = coinForChange.get(coin);
 			if (coinCount != 0) {
 				System.out.println(amount + MONEY_COUNT_UNIT + HYPHEN + coinCount + COIN_COUNT_UNIT);
 			}
