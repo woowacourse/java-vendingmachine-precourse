@@ -4,6 +4,7 @@ public class Balance {
 	private static final int BALANCE_MINIMUM = 100;
 	private static final int BALANCE_DIVISION_STANDARD = 10;
 	private static final int BALANCE_ZERO = 0;
+	private static final String ERROR_BALANCE_NOT_PURCHASE = "해당 잔액으로 구매할 수 없습니다.";
 
 	private final int balance;
 
@@ -42,7 +43,7 @@ public class Balance {
 
 	private void isValidatePaymentCalculateMinus(int calculate) {
 		if (calculate < BALANCE_ZERO) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(ERROR_BALANCE_NOT_PURCHASE);
 		}
 	}
 
