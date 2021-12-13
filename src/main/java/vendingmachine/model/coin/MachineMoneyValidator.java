@@ -1,7 +1,7 @@
 package vendingmachine.model.coin;
 
 import vendingmachine.util.Constant;
-import vendingmachine.util.ErrorMessage;
+import vendingmachine.util.Message;
 import vendingmachine.util.exception.MoneyValidator;
 
 public class MachineMoneyValidator extends MoneyValidator {
@@ -12,13 +12,13 @@ public class MachineMoneyValidator extends MoneyValidator {
     @Override
     public void moneyValid(String money) {
         if (!isNumeric(money)) {
-            throw new IllegalArgumentException(ErrorMessage.MACHINE_MONEY_STRING_ERROR);
+            throw new IllegalArgumentException(Message.MACHINE_MONEY_STRING_ERROR);
         }
         if (!isRangeValid(toInt(money), Constant.UNIT_VALUE)) {
-            throw new IllegalArgumentException(ErrorMessage.MACHINE_MONEY_RANGE_ERROR);
+            throw new IllegalArgumentException(Message.MACHINE_MONEY_RANGE_ERROR);
         }
         if (!isUnitSplit(toInt(money))) {
-            throw new IllegalArgumentException(ErrorMessage.MACHINE_MONEY_UNIT_ERROR);
+            throw new IllegalArgumentException(Message.MACHINE_MONEY_UNIT_ERROR);
         }
     }
 }
