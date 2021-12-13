@@ -2,7 +2,6 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.coin.CoinCombination;
 import vendingmachine.domain.product.Product;
-import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinGenerator;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
@@ -10,11 +9,11 @@ import vendingmachine.domain.vendingMachine.Amount;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import java.util.Map;
-
 public class VendingMachine {
     private Amount amount;
-    private CoinCombination coinCombination;
+    private CoinCombination vendingMachinCoinCombination;
+    private CoinCombination changeCoinCombination;
+
     private Products products = new Products();
     private UserMoney userMoney;
     public VendingMachine() {
@@ -49,9 +48,9 @@ public class VendingMachine {
 
     public void inputAmount() {
         setAmount();
-        coinCombination = new CoinCombination();
-        CoinGenerator.calculatePossibleCoinCombination(coinCombination, amount.getAmount());
-        OutputView.printCoinCount(coinCombination);
+        vendingMachinCoinCombination = new CoinCombination();
+        CoinGenerator.calculatePossibleCoinCombination(vendingMachinCoinCombination, amount.getAmount());
+        OutputView.printCoinCount(vendingMachinCoinCombination);
     }
 
     public void inputProductByUser() {
@@ -63,7 +62,10 @@ public class VendingMachine {
 
     public void returnChange() {
         if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
-
+            int totalChange = userMoney.reduceMoney();
+            changeCoinCombination = new CoinCombination();
+            CoinGenerator.calculatePossibleCoinCombination(changeCoinCombination, totalChange);
+            changeCoinCombination.print();
         }
     }
 }

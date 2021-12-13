@@ -21,4 +21,10 @@ public class UserMoney {
         return money >= products.getCheapestPrice();
     }
 
+    public int reduceMoney() {
+        while (money > 1000) {
+            money -= 1000;
+        }
+        return money;
+    }
 }

@@ -6,7 +6,7 @@ import java.util.stream.Collectors;
 
 public class Products {
     private List<Product> products;
-    private int cheapestPrice;
+    private int cheapestPrice = Integer.MAX_VALUE;
     public Products() {
         products = new ArrayList<>();
     }
