@@ -3,8 +3,12 @@ package vendingmachine;
 import java.util.Objects;
 
 public class Product {
-    private static final int EMPTY_QUANTITY = 0;
     private static final int MIN_PRICE = 100;
+    private static final int MIN_DIVIDE= 10;
+    private static final int VALID_REMAINDER = 0;
+
+    private static final int EMPTY_QUANTITY = 0;
+    private static final int DECREASE = 1;
 
     private final String name;
     private final int price;
@@ -28,6 +32,9 @@ public class Product {
         if (price < MIN_PRICE) {
             throw ErrorMessage.MIN_PRICE.getException();
         }
+        if (price % MIN_DIVIDE != VALID_REMAINDER) {
+            throw ErrorMessage.NOT_DIVISIBLE.getException();
+        }
     }
 
     public boolean isEqualToName(String name) {
@@ -35,7 +42,7 @@ public class Product {
     }
 
     public void processPurchasing(Order order) {
-        this.quantity -= 1;
+        this.quantity -= DECREASE;
         order.calculate(this.price);
     }
 
