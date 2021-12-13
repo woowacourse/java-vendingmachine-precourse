@@ -20,4 +20,9 @@ public class Beverages {
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 없는 상품입니다."));
 	}
+
+	public boolean soldOut() {
+		return beverages.stream()
+			.allMatch(Beverage::soldOut);
+	}
 }

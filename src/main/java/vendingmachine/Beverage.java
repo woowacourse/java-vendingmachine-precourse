@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.Objects;
-
 public class Beverage {
 	private final String name;
 	private final Money price;
@@ -44,7 +42,7 @@ public class Beverage {
 		}
 	}
 
-	private boolean soldOut() {
+	public boolean soldOut() {
 		return count == 0;
 	}
 
@@ -54,19 +52,5 @@ public class Beverage {
 
 	public boolean nameEquals(String name) {
 		return this.name.equals(name);
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (o == null || getClass() != o.getClass()) {
-			return false;
-		}
-		Beverage beverage = (Beverage)o;
-		return name.equals(beverage.name);
-	}
-
-	@Override
-	public int hashCode() {
-		return Objects.hash(name);
 	}
 }
