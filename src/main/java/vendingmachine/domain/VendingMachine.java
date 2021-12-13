@@ -10,6 +10,7 @@ public class VendingMachine {
 
     private final HashMap<Integer, Integer> coinTable = new HashMap<>();
     private List<Product> products = new ArrayList<>();
+    private Money money;
 
     public void generateRandomCoin(String inputMoney) {
         int money = Integer.parseInt(inputMoney);
@@ -35,6 +36,10 @@ public class VendingMachine {
 
     public void addProduct(Product product) {
         products.add(product);
+    }
+
+    public void insertMoney(Money money) {
+        this.money = money;
     }
 
 }
