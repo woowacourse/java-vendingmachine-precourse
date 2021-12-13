@@ -44,10 +44,7 @@ public class Product {
     }
 
     public boolean isSameName(String productPurchaseName) {
-        if (this.name.isSame(productPurchaseName)) {
-            return true;
-        }
-        return false;
+        return this.name.isSame(productPurchaseName);
     }
 
     public void receive() {
@@ -58,9 +55,6 @@ public class Product {
     }
 
     public boolean isExistQuantity() {
-        if (quantity.isExistQuantity()) {
-            return true;
-        }
-        return false;
+        return quantity.isExistQuantity();
     }
 }

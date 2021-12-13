@@ -29,9 +29,6 @@ public class Name {
     }
 
     public boolean isSame(String name) {
-        if (this.name.equals(name)) {
-            return true;
-        }
-        return false;
+        return this.name.equals(name);
     }
 }

@@ -34,10 +34,7 @@ public class Quantity {
     }
 
     public boolean isExistQuantity() {
-        if (quantity > DEFAULT_QUANTITY) {
-            return true;
-        }
-        return false;
+        return quantity > DEFAULT_QUANTITY;
     }
 
     public void decreaseQuantity() {
