@@ -6,6 +6,8 @@ public class InputMoneyValidator {
 			exceptionStringNotNumber(string);
 			exceptionStringZero(string);
 			exceptionStringEmpty(string);
+			exceptionStringNotDivideByTen(string);
+			exceptionStringSmallerThanTen(string);
 			return true;
 		} catch (IllegalArgumentException exception) {
 			return false;
@@ -31,9 +33,29 @@ public class InputMoneyValidator {
 		}
 	}
 
+	private static void exceptionStringNotDivideByTen(String string) {
+		long number = getNumberFromString(string);
+		if (number % 10 != 0) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+
+	private static void exceptionStringSmallerThanTen(String string) {
+		long number = getNumberFromString(string);
+		if (number <= 10) {
+			throw new IllegalArgumentException();
+		}
+	}
+
 	private static void exceptionCharNotNumber(char letter) {
 		if (letter > '9' || letter < '0') {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	private static long getNumberFromString(String string) {
+		exceptionStringNotNumber(string);
+		return Long.parseLong(string);
 	}
 }
