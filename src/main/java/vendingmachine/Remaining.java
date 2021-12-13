@@ -39,10 +39,7 @@ public class Remaining<T> {
 	}
 
 
-	public Set<String> keySet() {
-		Set<String> keyNameSet = new HashSet<>();
-		remain.keySet().forEach(keyName -> keyNameSet.add(keyName.toString()));
-
-		return keyNameSet;
+	public Set<T> keySet() {
+		return remain.keySet();
 	}
 }
