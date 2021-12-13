@@ -16,6 +16,11 @@ public class MoneyValidator {
 		validateDivision(Integer.parseInt(money));
 	}
 
+	public static void validateInsertMoney(String money) {
+		validateInteger(money);
+		validateRange(Integer.parseInt(money));
+	}
+
 	private static void validateInteger(String money) {
 		try {
 			Integer.parseInt(money);

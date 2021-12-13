@@ -15,4 +15,9 @@ public class InputView {
 		OutputView.printInputProductMessage();
 		return Console.readLine();
 	}
+
+	public static String readInsertMoney() {
+		OutputView.printInputInsertMoneyMessage();
+		return Console.readLine();
+	}
 }

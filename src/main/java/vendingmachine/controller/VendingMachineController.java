@@ -14,11 +14,13 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
 	private Coins coins;
 	private Products products;
+	private int insertMoney;
 
 	public VendingMachineController() {
 		initCoins();
 		OutputView.printCoins(coins);
 		initProducts();
+		initInsertMoney();
 	}
 
 	private void initCoins() {
@@ -39,5 +41,16 @@ public class VendingMachineController {
 		List<Product> productList = new ArrayList<>();
 		separatedProducts.forEach(product -> productList.add(new Product(StringUtils.parseProductDetail(product))));
 		products = new Products(productList);
+	}
+
+	private void initInsertMoney() {
+		String inputInsertMoney = InputView.readInsertMoney();
+		try {
+			MoneyValidator.validateInsertMoney(inputInsertMoney);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printExceptionMessage(exception.getMessage());
+			initInsertMoney();
+		}
+		insertMoney = Integer.parseInt(inputInsertMoney);
 	}
 }
