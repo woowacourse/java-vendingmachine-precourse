@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
 
 public class VendingMachine {
 	private static final HashMap<Integer, Integer> coins = new HashMap<>();

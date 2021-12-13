@@ -2,7 +2,7 @@ package vendingmachine.controller;
 
 import java.util.HashMap;
 
-import vendingmachine.Coin;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.InputView;
