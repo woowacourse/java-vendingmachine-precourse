@@ -59,6 +59,11 @@ public class Money implements Comparable<Money> {
 	}
 
 	@Override
+	public String toString() {
+		return String.valueOf(amount);
+	}
+
+	@Override
 	public boolean equals(Object o) {
 		if (o == null || getClass() != o.getClass()) {
 			return false;

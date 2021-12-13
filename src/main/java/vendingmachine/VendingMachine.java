@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public class VendingMachine {
 	private CoinBucket coinBucket;
 	private Beverages beverages;
@@ -10,7 +12,7 @@ public class VendingMachine {
 
 	private void init() {
 		coinBucket = initCoinBucket();
-		OutputView.printCoinBucket();
+		OutputView.printCoinBucket(coinBucket.getCoins());
 	}
 
 	private CoinBucket initCoinBucket() {
