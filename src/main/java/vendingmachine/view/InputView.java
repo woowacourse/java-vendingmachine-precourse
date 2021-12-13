@@ -22,4 +22,9 @@ public class InputView {
 		System.out.println(INPUT_AMOUNT_MESSAGE);
 		return Console.readLine();
 	}
+
+	public static String inputBuyProduct() {
+		System.out.println(INPUT_BUY_PRODUCT_MESSAGE);
+		return Console.readLine();
+	}
 }
