@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,15 +30,22 @@ public class ProductArgumentResolver {
                 .collect(Collectors.toList());
     }
 
-    private Product newProduct(String[] split) {
-        return new Product(split[NAME_INDEX].trim(), toInt(split[PRICE_INDEX]), toInt(split[QUANTITY_INDEX]));
-    }
-
     private String[] splitProducts(String products) {
         if (products.startsWith(PRODUCT_DELIMITER)) {
             throw ErrorMessage.INVALID_NOT_ALLOW_NAME.getException();
         }
-        return products.split(PRODUCTS_DELIMITER);
+
+        String[] split = products.split(PRODUCTS_DELIMITER);
+        if (countSemicolon(products) != split.length) {
+            throw ErrorMessage.INVALID_SEMICOLON.getException();
+        }
+        return split;
+    }
+
+    private long countSemicolon(String products) {
+        return products.chars()
+            .filter(character -> (String.valueOf(character).equals(PRODUCTS_DELIMITER)))
+            .count();
     }
 
     private boolean isCoveredBrackets(String product) {
@@ -55,6 +61,10 @@ public class ProductArgumentResolver {
             return split;
         }
         throw ErrorMessage.INVALID_DELIMITER.getException();
+    }
+
+    private Product newProduct(String[] split) {
+        return new Product(split[NAME_INDEX].trim(), toInt(split[PRICE_INDEX]), toInt(split[QUANTITY_INDEX]));
     }
 
     private int toInt(String string) {

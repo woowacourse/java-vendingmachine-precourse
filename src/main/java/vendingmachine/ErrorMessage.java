@@ -7,6 +7,7 @@ public enum ErrorMessage {
     NOT_NATURAL_NUMBER(new IllegalArgumentException("[ERROR] 금액은 0원을 넘어야합니다.")),
 
     // 상품 등록
+    INVALID_SEMICOLON(new IllegalArgumentException("[ERROR] 상품 단위를 세미콜론 ';'으로 분리해주세요.")),
     INVALID_BRACKETS(new IllegalArgumentException("[ERROR] 개별 상품은 대괄호 '[]'로 묶어 입력하세요.")),
     INVALID_DELIMITER(new IllegalArgumentException("[ERROR] 상품명, 가격, 수량은 쉼표','로 구분해주세요.")),
     INVALID_PRODUCT_NAME(new IllegalArgumentException("[ERROR] 상품의 이름을 입력해주세요.")),
