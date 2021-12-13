@@ -1,6 +1,7 @@
 package vendingmachine.validation;
 
 import static vendingmachine.constant.Constants.*;
+import static vendingmachine.constant.ErrorMessage.*;
 
 public class ProductValidation {
 
@@ -17,20 +18,20 @@ public class ProductValidation {
 
 	public static void productParsingNumber(int length) {
 		if (length != 3) {
-			throw new IllegalArgumentException("상품의 입력 폼이 올바르지 않습니다.");
+			throw new IllegalArgumentException(ERROR_PRODUCT_FORM);
 		}
 	}
 
 	public static String productName(String name) {
-		if (!name.contains("[")) {
-			throw new IllegalArgumentException("상품의 입력 폼이 올바르지 않습니다.");
+		if (!name.contains(PRODUCT_START)) {
+			throw new IllegalArgumentException(ERROR_PRODUCT_FORM);
 		}
 		return name.substring(1);
 	}
 
 	public static String productStock(String stock) {
-		if (!stock.contains("]")) {
-			throw new IllegalArgumentException("상품의 입력 폼이 올바르지 않습니다.");
+		if (!stock.contains(PRODUCT_END)) {
+			throw new IllegalArgumentException(ERROR_PRODUCT_FORM);
 		}
 		return stock.substring(0,stock.length()-1);
 	}

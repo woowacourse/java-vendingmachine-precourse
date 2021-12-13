@@ -2,14 +2,17 @@ package vendingmachine.constant;
 
 public class Constants {
 
-	public static Double INF = Double.POSITIVE_INFINITY;
+	public static final Double INF = Double.POSITIVE_INFINITY;
 
-	public static int MIN_PRICE = 100;
+	public static final int MIN_PRICE = 100;
 
-	public static String PRODUCTS_DELIMETER = ";";
-	public static String PRODUCT_DELIMETER = ",";
+	public static final String PRODUCTS_DELIMETER = ";";
+	public static final String PRODUCT_DELIMETER = ",";
 
-	public static int PRODUCT_NAME_IDX = 0;
-	public static int PRODUCT_PRICE_IDX = 1;
-	public static int PRODUCT_STOCK_IDX = 2;
+	public static final int PRODUCT_NAME_IDX = 0;
+	public static final int PRODUCT_PRICE_IDX = 1;
+	public static final int PRODUCT_STOCK_IDX = 2;
+	public static final String PRODUCT_START = "[";
+	public static final String PRODUCT_END = "]";
+
 }

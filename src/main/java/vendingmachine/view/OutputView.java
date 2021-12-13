@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import static vendingmachine.constant.ViewMessage.*;
+
 import java.util.Arrays;
 import java.util.Map;
 
@@ -9,13 +11,13 @@ import vendingmachine.model.Wallet;
 public class OutputView {
 
 	public static void containCoins(Wallet wallet) {
-		System.out.println("자판기가 보유한 동전");
+		System.out.println(OWN_COIN);
 		Arrays.stream(Coin.values())
 			.forEach(coin -> printMoney(coin.getAmount(), wallet.getWallet().get(coin)));
 	}
 
 	public static void remainCoins(Map<Coin, Integer> remain) {
-		System.out.println("잔돈");
+		System.out.println(CHANGE);
 		for (Map.Entry<Coin, Integer> entry : remain.entrySet()) {
 			if (entry.getValue() == 0) {
 				continue;

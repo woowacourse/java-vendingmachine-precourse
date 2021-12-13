@@ -1,5 +1,7 @@
 package vendingmachine.validation;
 
+import static vendingmachine.constant.ErrorMessage.*;
+
 import vendingmachine.model.Coin;
 
 public class UtilValidation {
@@ -8,13 +10,13 @@ public class UtilValidation {
 		try {
 			Integer.parseInt(input);
 		} catch (NumberFormatException numberFormatException) {
-			throw (new IllegalArgumentException("보유 금액은 숫자여야 합니다."));
+			throw (new IllegalArgumentException(ERROR_BE_NUMBER));
 		}
 	}
 
 	public static void isNaturalNumber(int number) {
 		if (!(number > 0)) {
-			throw (new IllegalArgumentException("입력은 자연수여야 합니다."));
+			throw (new IllegalArgumentException(ERROR_BE_NATURAL_NUMBER));
 		}
 	}
 
