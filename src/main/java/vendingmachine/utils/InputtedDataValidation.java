@@ -19,12 +19,12 @@ public class InputtedDataValidation {
 		}
 		if(inputtedData.length() <= 1) {
 			errorMessage = VendingMachineMessage
-				.invalidLengthError(Integer.parseInt(inputtedData));
+				.invalidLengthError(inputtedData);
 			throw new IllegalArgumentException(errorMessage);
 		}
 		if(inputtedData.charAt(inputtedData.length() - 1) != '0') {
 			errorMessage = VendingMachineMessage
-				.invalidNumberError(Integer.parseInt(inputtedData));
+				.invalidNumberError(inputtedData);
 			throw new IllegalArgumentException(errorMessage);
 		}
 		return true;

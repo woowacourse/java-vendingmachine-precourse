@@ -77,12 +77,12 @@ public class VendingMachineMessage {
 	}
 
 	/* 에러 출력과 관련된 메서드 */
-	public static String invalidLengthError(final int inputtedData) {
+	public static String invalidLengthError(final String inputtedData) {
 		System.out.println(ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER_LENGTH);
 		return ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER_LENGTH;
 	}
 
-	public static String invalidNumberError(final int inputtedData) {
+	public static String invalidNumberError(final String inputtedData) {
 		return ERROR_MESSAGE_PREFIX + inputtedData + INVALID_NUMBER;
 	}
 

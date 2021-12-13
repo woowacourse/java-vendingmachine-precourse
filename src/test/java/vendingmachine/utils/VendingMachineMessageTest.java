@@ -100,8 +100,8 @@ class VendingMachineMessageTest {
 
 		@DisplayName("유효하지 않은 숫자 길이")
 		@ParameterizedTest(name = "{displayName} inputtedData={0}")
-		@ValueSource(ints = {1})
-		void invalidNumberLengthError(final int inputtedData) {
+		@ValueSource(strings = {"1"})
+		void invalidNumberLengthError(final String inputtedData) {
 			final String errorMessage = VendingMachineMessage
 				.invalidLengthError(inputtedData);
 			final String expectedMessage = "[ERROR]: " + inputtedData + " 길이가 너무 짧습니다";
@@ -110,8 +110,8 @@ class VendingMachineMessageTest {
 
 		@DisplayName("유효하지 않은 숫자가 들어온 경유")
 		@ParameterizedTest(name = "{displayName} inputtedData={0}")
-		@ValueSource(ints = {-1})
-		void invalidNumberError(final int inputtedData) {
+		@ValueSource(strings = {"-1"})
+		void invalidNumberError(final String inputtedData) {
 			final String errorMessage = VendingMachineMessage
 				.invalidNumberError(inputtedData);
 			final String expectedMessage = "[ERROR]: " + inputtedData + " 1의자리가 0인 정수여야 합니다";
