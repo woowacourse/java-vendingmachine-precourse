@@ -5,6 +5,7 @@ import java.util.List;
 public class VendingMachine {
 	private VendingMachineCoinBox vendingMachineCoinBox;
 	private VendingMachineProducts vendingMachineProducts;
+	private UserInsertMoneyBox userInsertMoneyBox;
 
 	public void makeVendingMachineCoinBox(int insertVendingMachineChange) {
 		vendingMachineCoinBox = new VendingMachineCoinBox(insertVendingMachineChange);
@@ -12,6 +13,10 @@ public class VendingMachine {
 
 	public void makeVendingMachineProducts(List<String> vendingMachineProductsInformation) {
 		vendingMachineProducts = new VendingMachineProducts(vendingMachineProductsInformation);
+	}
+
+	public void makeUserInsertMoneyBox(int userInsertMoney) {
+		userInsertMoneyBox = new UserInsertMoneyBox(userInsertMoney);
 	}
 
 	public List<Integer> giveEachCoinCount() {
