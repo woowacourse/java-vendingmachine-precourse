@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.Coin;
+import vendingmachine.repository.Coin;
 
 public class OutputView {
 
@@ -14,6 +14,10 @@ public class OutputView {
         for (Coin coin : Coin.values()) {
             System.out.println(coin.getAmount() + "원 - " + coin.getStock() + "개");
         }
+    }
+
+    public void printMachineProduct() {
+        System.out.println("상품과 가격, 수량을 입력해 주세요.");
     }
 
 }
