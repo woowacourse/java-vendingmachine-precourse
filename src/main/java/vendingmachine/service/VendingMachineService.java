@@ -83,7 +83,7 @@ public class VendingMachineService {
 	}
 
 	private void getMinimumChange() {
-		change = vendingMachine.compareInputCostAndCoinToChange();
+		change = vendingMachine.compareInputCostAndCoinToDecideChange();
 		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
 		Map<Integer, Integer> changeMap = new TreeMap<>(Collections.reverseOrder());
 		for (Integer i : coinMap.keySet()) {

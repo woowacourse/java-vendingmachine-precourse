@@ -74,15 +74,13 @@ public class VendingMachine {
 		if (products.get(0).getPrice() <= inputCost && products.get(0).getAmount() > 0) {
 			return false;
 		}
-
 		return true;
 	}
 
-	public int compareInputCostAndCoinToChange() {
+	public int compareInputCostAndCoinToDecideChange() {
 		if (inputCost < getSumCoinAmount()) {
 			return inputCost;
 		}
-
 		return getSumCoinAmount();
 	}
 
