@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Item;
 import vendingmachine.utils.Message;
 
 public class InputView {
-	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,},\\d+]";
+	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d+,\\d+]";
 
 	private static final char CHAR_NUMERIC_MIN = '0';
 	private static final char CHAR_NUMERIC_MAX = '9';
@@ -35,12 +36,13 @@ public class InputView {
 	public static ArrayList<Item> holdingItemsInput() {
 		ArrayList<Item> itemList;
 		String itemString = "";
+		String[] itemStringArray;
 		do {
 			System.out.println(Message.ASK_ADD_ITEMS_MESSAGE);
 			itemString = Console.readLine();
-		} while (!isRightItemInput(itemString));
+			itemStringArray = itemString.split(";");
+		} while (!isRightItemInput(itemStringArray));
 
-		String[] itemStringArray = itemString.split(";");
 		removeBracket(itemStringArray);
 		itemList = generateItemList(itemStringArray);
 		System.out.println();
@@ -118,12 +120,12 @@ public class InputView {
 		return isRightInputMoney;
 	}
 
-	private static boolean isRightItemInput(String itemString){
+	private static boolean isRightItemInput(String[] itemStringArray){
 		boolean isRightItemInput = true;
 
 		try{
-			wrongRegexMatchError(itemString);
-			duplicatedItemNameError(itemString);
+			wrongRegexMatchError(itemStringArray);
+			duplicatedItemNameError(itemStringArray);
 		} catch (IllegalArgumentException e){
 			System.out.println(e.getMessage());
 			isRightItemInput = false;
@@ -131,27 +133,23 @@ public class InputView {
 		return isRightItemInput;
 	}
 
-	private static void duplicatedItemNameError(String itemString){
-		// item set;
-		// menuCount = input ;
-		// [0] -> set
-		// set_size menuCout
+	private static void duplicatedItemNameError(String[] itemStringArray){
 		Set<String> itemNames = new HashSet<String>();
-		String [] itemArray =  itemString.split(";");
-		removeBracket(itemArray);
-		int itemCount = itemArray.length;
+		removeBracket(itemStringArray);
+		int itemCount = itemStringArray.length;
 		for(int i = 0; i < itemCount; i++) {
-			itemNames.add(itemArray[i].split(",")[0]);
+			itemNames.add(itemStringArray[i].split(",")[0]);
 		}
 		if(itemCount != itemNames.size()){
 			throw new IllegalArgumentException(Message.DUPLICATED_NAME_ITEM_ERROR);
 		}
-
 	}
 
-	private static void wrongRegexMatchError(String itemString) {
-		if(!itemString.matches(REGEX)) {
-			throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
+	private static void wrongRegexMatchError(String[] itemStringArray) {
+		for (int i = 0; i < itemStringArray.length; i++) {
+			if (!Pattern.matches(REGEX, itemStringArray[i])) {
+				throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
+			}
 		}
 	}
 
