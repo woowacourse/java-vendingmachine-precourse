@@ -14,6 +14,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static vendingmachine.utils.VerificationUtil.validateHoldingAmount;
+import static vendingmachine.utils.VerificationUtil.validateProductInput;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -109,15 +110,34 @@ class ApplicationTest extends NsTest {
 
     @Test
     public void 십단위_아닌_금액_테스트() throws Exception {
-        //given
-        MoneyService moneyService = new MoneyService();
-
         //when
         String input = "123";
 
         //then
         assertThrows(IllegalArgumentException.class, () -> {
             validateHoldingAmount(input);
+        });
+    }
+
+    @Test
+    public void 상품_입력_테스트1() throws Exception {
+        //when
+        String input = "[a,a,1]";
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            validateProductInput(input);
+        });
+    }
+
+    @Test
+    public void 상품_입력_테스트2() throws Exception {
+        //when
+        String input = "[a,1,a]";
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            validateProductInput(input);
         });
     }
 }
