@@ -3,11 +3,11 @@ package vendingmachine.view;
 import java.util.List;
 
 public class InputView {
-    private static void isValidPrice(int price){
-        if (price%10!=0){
+    private static void isValidPrice(int price) {
+        if (price%10!=0) {
             throw new IllegalArgumentException();
         }
-        if (price<100){
+        if (price<100) {
             throw new IllegalArgumentException();
         }
     }
@@ -21,7 +21,7 @@ public class InputView {
     }
 
     private static void isValidMachinePrice(int price){
-        if (price%10!=0){
+        if (price%10!=0) {
             throw new IllegalArgumentException();
         }
     }
@@ -62,11 +62,11 @@ public class InputView {
     }
 
     private static void isValidProduct(String[] result) {
-        for(String product : result){
-            if (countChar(product,',')>2){
+        for(String product : result) {
+            if (countChar(product,',')>2) {
                 throw new IllegalArgumentException();
             }
-            if (product.charAt(0)!='[' || product.charAt(product.length()-1)!=']'){
+            if (product.charAt(0)!='[' || product.charAt(product.length()-1)!=']') {
                 throw new IllegalArgumentException();
             }
             product = product.substring(1, product.length() - 1);
@@ -78,7 +78,6 @@ public class InputView {
 
     private static int countChar(String str, char ch) {
         int count = 0;
-
         for (int i = 0; i < str.length(); i++) {
             if (str.charAt(i) == ch) {
                 count++;
@@ -88,7 +87,7 @@ public class InputView {
     }
 
     public static void isValidProductName(String productName, List<String> products){
-        if (!products.contains(productName)){
+        if (!products.contains(productName)) {
             throw new IllegalArgumentException();
         }
     }

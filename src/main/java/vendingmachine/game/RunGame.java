@@ -11,7 +11,7 @@ public class RunGame {
     private static String[] products;
     private static int insertMoney;
 
-    public static void run(){
+    public static void run() {
         checkVendingMachinePrice();
         OutputView.showCoins(vendingmachineholdingPrice);
         checkProduct();
@@ -19,48 +19,48 @@ public class RunGame {
         OutputView.showAllProcess(products, insertMoney);
     }
 
-    private static void checkVendingMachinePrice(){
-        try{
+    private static void checkVendingMachinePrice() {
+        try {
             setPrice();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(Constant.VENDING_MACHINE_HOLDING_PRICE_ERROR);
             checkVendingMachinePrice();
         }
     }
 
-    private static void setPrice(){
+    private static void setPrice() {
         OutputView.askVendingMachinePrice();
         String input = Console.readLine();
         System.out.println();
         vendingmachineholdingPrice = InputView.parseIntVendingMachine(input);
     }
 
-    private static void checkProduct(){
-        try{
+    private static void checkProduct() {
+        try {
             setProduct();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(Constant.PRODUCT_ERROR);
             checkProduct();
         }
     }
 
-    private static void setProduct(){
+    private static void setProduct() {
         OutputView.askProduct();
         String input = Console.readLine();
         System.out.println();
         products = InputView.splitString(input);
     }
 
-    private static void checkInsertMoney(){
+    private static void checkInsertMoney() {
         try {
             setInsertMoney();
-        } catch (IllegalArgumentException e){
+        } catch (IllegalArgumentException e) {
             System.out.println(Constant.INSERT_MONEY_ERROR);
             checkInsertMoney();
         }
     }
 
-    private static void setInsertMoney(){
+    private static void setInsertMoney() {
         OutputView.askInsertMoney();
         String input = Console.readLine();
         System.out.println();

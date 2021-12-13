@@ -29,24 +29,24 @@ public class OutputView {
         System.out.println(Constant.INSERT_MONEY);
     }
 
-    public static void showCoins(int vendingmachineholdingPrice){
+    public static void showCoins(int vendingmachineholdingPrice) {
         getCoins(vendingmachineholdingPrice);
         System.out.println(Constant.VENDING_MACHINE_HOLDING_COIN);
-        for(Coin coins : Coin.values()){
+        for(Coin coins : Coin.values()) {
             System.out.println(coins.getAmount()+"원 - "+ coins.getNum()+"개");
         }
         System.out.println();
     }
 
-    private static void getCoins(int vendingmachineholdingPrice){
+    private static void getCoins(int vendingmachineholdingPrice) {
         int remainMoney = vendingmachineholdingPrice;
-        for (Coin coin : Coin.values()){
+        for (Coin coin : Coin.values()) {
             coinAmount.add(coin.getAmount());
         }
         Coin[] coinsNum = Coin.values();
-        while (remainMoney!=0){
+        while (remainMoney!=0) {
             int coinAmountIndex=Randoms.pickNumberInList(coinAmount);
-            if (remainMoney-coinAmountIndex<0){
+            if (remainMoney-coinAmountIndex<0) {
                 continue;
             }
             remainMoney-=coinAmountIndex;
@@ -54,24 +54,24 @@ public class OutputView {
         }
     }
 
-    public static void showAllProcess(String[] products, int insertMoney){
-        for (String product : products){makeProductInfo(product);}
+    public static void showAllProcess(String[] products, int insertMoney) {
+        for (String product : products) {makeProductInfo(product);}
         getProductNameList();
         getProductNumList();
         int minProductPrice = getMinProductPrice();
         nowMoney = insertMoney;
-        while (minProductPrice <= nowMoney){
-            if (isSoldOut()){break;}
+        while (minProductPrice <= nowMoney) {
+            if (isSoldOut()) {break;}
             showProcess();
         }
         System.out.println(Constant.NOW_MONEY+nowMoney+Constant.WON);
         getChanges();
     }
 
-    private static void getChanges(){
+    private static void getChanges() {
         System.out.println(Constant.CHANGES);
         int remainMoney = nowMoney;
-        for(Coin coins : Coin.values()){
+        for(Coin coins : Coin.values()) {
             int maxNumCoin = remainMoney/coins.getAmount();
             if (maxNumCoin<=coins.getNum()){coins.setFinalNum(maxNumCoin);}
             if (maxNumCoin>coins.getNum()){coins.setFinalNum(coins.getNum());}
@@ -84,7 +84,8 @@ public class OutputView {
         System.out.println(Constant.NOW_MONEY + nowMoney + Constant.WON);
         checkProduct();
     }
-    private static void checkProduct(){
+
+    private static void checkProduct() {
         try {
             setProductsName();
             getNowMoney(chooseProductName);
@@ -94,7 +95,7 @@ public class OutputView {
         }
     }
 
-    private static void getNowMoney(String chooseProductName){
+    private static void getNowMoney(String chooseProductName) {
         int indexProduct = indexProduct(productsName, chooseProductName);
         int productPrice = Integer.parseInt(productsInfo.get(indexProduct)[1]);
         isValidProductNum(indexProduct, productPrice);
@@ -102,24 +103,24 @@ public class OutputView {
         nowMoney -= productPrice;
     }
 
-    private static void isValidProductNum(int indexProduct, int productPrice){
-        if (productsNum.get(indexProduct) < 1){
+    private static void isValidProductNum(int indexProduct, int productPrice) {
+        if (productsNum.get(indexProduct) < 1) {
             throw new IllegalArgumentException();
         }
-        if (productPrice>nowMoney){
+        if (productPrice>nowMoney) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static boolean isSoldOut(){
+    private static boolean isSoldOut() {
         int totalNum=0;
-        for (int productNum : productsNum){
+        for (int productNum : productsNum) {
             totalNum += productNum;
         }
         return totalNum == 0;
     }
 
-    private static int indexProduct(List<String> productsName, String result){
+    private static int indexProduct(List<String> productsName, String result) {
         int i;
         for (i = 0; i < productsName.size(); i++) {
             String item = productsName.get(i);
@@ -130,7 +131,7 @@ public class OutputView {
         return i;
     }
 
-    private static void setProductsName(){
+    private static void setProductsName() {
         System.out.println(Constant.CHOOSE_PRODUCT);
         String input = Console.readLine();
         System.out.println();
@@ -145,23 +146,23 @@ public class OutputView {
     }
 
     private static void getProductNameList(){
-        for (String[] product : OutputView.productsInfo){
+        for (String[] product : OutputView.productsInfo) {
             productsName.add(product[0]);
         }
     }
 
     private static void getProductNumList(){
-        for (String[] product : OutputView.productsInfo){
+        for (String[] product : OutputView.productsInfo) {
             int result = Integer.parseInt(product[2]);
             productsNum.add(result);
         }
     }
 
-    private static int getMinProductPrice(){
+    private static int getMinProductPrice() {
         int minPrice = 10000000;
-        for (String[] product : OutputView.productsInfo){
+        for (String[] product : OutputView.productsInfo) {
             int result = Integer.parseInt(product[1]);
-            if (result < minPrice){
+            if (result < minPrice) {
                 minPrice = result;
             }
         }

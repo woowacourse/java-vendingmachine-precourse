@@ -14,24 +14,23 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
-    public void setNum(int num){
+    public void setNum(int num) {
         this.num = num;
     }
 
-    public int getNum(){
+    public int getNum() {
         return num;
     }
 
-    public void setFinalNum(int finalNum){
+    public void setFinalNum(int finalNum) {
         this.finalNum = finalNum;
     }
 
-    public int getFinalNum(){
+    public int getFinalNum() {
         return finalNum;
     }
-
 }
