@@ -1,6 +1,10 @@
 package vendingmachine.domain;
 
+import static vendingmachine.util.StringConversionUtil.parseInt;
+
+import java.util.List;
 import java.util.Objects;
+import vendingmachine.exception.ProductContentSizeException;
 import vendingmachine.exception.ProductLeastPriceException;
 import vendingmachine.exception.ProductNameEmptyException;
 import vendingmachine.exception.ProductNonRemainAmountException;
@@ -11,6 +15,8 @@ public class Product {
 
     private static final int STANDARD_PRICE = 100;
     private static final String BLANK_NAME = "";
+
+    private static final int PRODUCT_CONTANT_SIZE = 3;
 
     private final String name;
     private final int price;
@@ -40,6 +46,17 @@ public class Product {
     private static void checkPriceDivisableByLeastCoin(int price) {
         if (price % Coin.leastCoin() != 0) {
             throw new ProductNotDivisableException();
+        }
+    }
+
+    public static Product crearteProduct(List<String> contents) {
+        checkContentSize(contents);
+        return new Product(contents.get(0), parseInt(contents.get(1)), parseInt(contents.get(2)));
+    }
+
+    private static void checkContentSize(List<String> contents) {
+        if (contents.size() != PRODUCT_CONTANT_SIZE) {
+            throw new ProductContentSizeException();
         }
     }
 

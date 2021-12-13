@@ -3,6 +3,8 @@ package vendingmachine.domain;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -50,6 +52,18 @@ class ProductTest {
         assertThatExceptionOfType(IllegalArgumentException.class)
             .isThrownBy(() -> new Product(name, price, remainAmount))
             .withMessage("[ERROR] 상품 가격은 10원으로 나누어떨어져야 합니다.");
+    }
+
+    @Test
+    @DisplayName("상품의 정보가 제한 갯수와 다른 경우 exception이 발생해야 한다.")
+    void createProductExceptionByContentSizeTest() {
+        // given
+        List<String> contents = Arrays.asList("콜라", "1000", "20", "사이다");
+
+        // when & then
+        assertThatExceptionOfType(IllegalArgumentException.class)
+            .isThrownBy(() -> Product.crearteProduct(contents))
+            .withMessage("[ERROR] 상품은 이름, 가격, 수량을 정확한 포맷으로 입력해야합니다.");
     }
 
     @Test
