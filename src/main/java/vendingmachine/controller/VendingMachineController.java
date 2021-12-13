@@ -4,8 +4,8 @@ import vendingmachine.service.ChangeService;
 import vendingmachine.service.MachineCoinService;
 import vendingmachine.service.ProductService;
 
-import static vendingmachine.view.OutputViews.printCurrentChange;
-import static vendingmachine.view.OutputViews.printMachineInitCoin;
+import static vendingmachine.view.InputViews.inputOrderMessage;
+import static vendingmachine.view.OutputViews.*;
 
 public class VendingMachineController {
 
@@ -39,5 +39,6 @@ public class VendingMachineController {
 
     public void orderProduct() {
         printCurrentChange(changeService.getCurrentChange());
+        inputOrderMessage();
     }
 }

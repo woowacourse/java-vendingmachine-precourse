@@ -8,5 +8,6 @@ public class Application {
         VendingMachineController vendingMachineController = new VendingMachineController();
 
         vendingMachineController.init();
+        vendingMachineController.orderProduct();
     }
 }
