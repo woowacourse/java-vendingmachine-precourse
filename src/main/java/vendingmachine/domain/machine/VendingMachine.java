@@ -37,4 +37,8 @@ public class VendingMachine {
 	public Balance getHasBalance() {
 		return balance;
 	}
+
+	public Coins getReturnCoins() {
+		return coins.calculateReturnCoins(balance);
+	}
 }
