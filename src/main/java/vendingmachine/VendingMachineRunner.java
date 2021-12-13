@@ -53,7 +53,7 @@ public class VendingMachineRunner implements Runnable {
         while (true) {
             useMoney(vendingMachine, order);
             if (!vendingMachine.isCheckedStockByProduct(order.getHoldingAmount())) {
-                // todo 잔돈반환
+                ConsolePrinter.print(vendingMachine.getChangeMoney(order.getHoldingAmount()), Message.CHANGE_MONTY);
                 break;
             }
         }

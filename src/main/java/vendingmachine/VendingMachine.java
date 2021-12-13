@@ -1,6 +1,8 @@
 package vendingmachine;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -34,5 +36,9 @@ public class VendingMachine {
             return product.isPossibleBuyProduct(holdingAmount);
         }
         return false;
+    }
+
+    public Map<Coin, Integer>  getChangeMoney(int holdingAmount) {
+        return this.coins.countWithMinimumCoins(holdingAmount);
     }
 }
