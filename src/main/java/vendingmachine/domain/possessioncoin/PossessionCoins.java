@@ -1,10 +1,10 @@
 package vendingmachine.domain.possessioncoin;
 
-import java.util.ArrayList;
+import static java.util.stream.Collectors.*;
+
 import java.util.Collections;
 import java.util.List;
 
-import vendingmachine.domain.Coin;
 import vendingmachine.domain.investmentmoney.InvestmentMoney;
 import vendingmachine.domain.change.Change;
 
@@ -20,16 +20,15 @@ public class PossessionCoins {
     }
 
     public List<Change> takeChange(InvestmentMoney investmentMoney) {
-        List<Change> changes = new ArrayList<>();
+        return possessionCoins.stream()
+            .filter(PossessionCoin::isExistQuantity)
+            .filter(investmentMoney::isPossibleChange)
+            .map(possessionCoin -> getChange(investmentMoney, possessionCoin))
+            .collect(toList());
+    }
 
-        for (PossessionCoin possessionCoin : possessionCoins) {
-            Coin coin = possessionCoin.getCoin();
-            if (possessionCoin.isExistQuantity() && investmentMoney.isPossibleChange(coin)) {
-                int coinQuantity = possessionCoin.calculate(investmentMoney);
-                changes.add(new Change(coin, coinQuantity));
-            }
-        }
-
-        return changes;
+    private Change getChange(InvestmentMoney investmentMoney, PossessionCoin possessionCoin) {
+        int coinQuantity = possessionCoin.calculatePossibleQuantity(investmentMoney);
+        return new Change(possessionCoin.getCoin(), coinQuantity);
     }
 }
