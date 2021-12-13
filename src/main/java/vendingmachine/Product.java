@@ -33,6 +33,10 @@ public class Product {
         return quantity.get();
     }
 
+    public boolean isName(String productName) {
+        return name.equals(productName);
+    }
+
     private void validateInfoNotMissed(String goodsInfo) {
         if (isInfoMissed(goodsInfo.split(","))) {
             throw new IllegalArgumentException(INFO_MISSED_MESSAGE);
