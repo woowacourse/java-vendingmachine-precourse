@@ -13,8 +13,12 @@ public class ChangeSafeRepository {
 		changeSafe = otherChangeSafe;
 	}
 
-	public String save(ChangeSafe newChangeSafe) {
-		changeSafe = changeSafe.merge(newChangeSafe);
-		return changeSafe.toString();
+	public ChangeSafe save(ChangeSafe newChangeSafe) {
+		changeSafe = newChangeSafe;
+		return get();
+	}
+
+	public ChangeSafe get() {
+		return changeSafe;
 	}
 }
