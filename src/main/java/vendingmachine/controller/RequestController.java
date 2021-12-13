@@ -1,9 +1,11 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.Changes;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.service.ChangesService;
+import vendingmachine.service.MoneyService;
 import vendingmachine.service.ProductsService;
 import vendingmachine.view.ExceptionView;
 import vendingmachine.view.InputView;
@@ -32,6 +34,16 @@ public class RequestController {
 		} catch (IllegalArgumentException e) {
 			ExceptionView.errorUI(e.getMessage());
 			return requestProducts();
+		}
+	}
+
+	public static Money requestInsertMoney() {
+		try {
+			String request = InputView.requestInsertMoney();
+			return MoneyService.toService(request);
+		} catch (IllegalArgumentException e) {
+			ExceptionView.errorUI(e.getMessage());
+			return requestInsertMoney();
 		}
 	}
 }
