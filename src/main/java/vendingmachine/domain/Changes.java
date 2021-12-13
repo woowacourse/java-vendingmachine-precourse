@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.resource.MessageResource.*;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -11,6 +13,8 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.utils.NumericUtils;
 
 public class Changes {
+	private static final int DIVIDE_NUM = 10;
+
 	private final Map<Coin, Integer> coinMap;
 
 	public Changes(String inputAmount) {
@@ -22,16 +26,31 @@ public class Changes {
 		List<Integer> coinList = Coin.getCoinList();
 		int totalAmount = NumericUtils.parsePositiveInt(inputAmount);
 
+		checkAmount(totalAmount);
+		getRandomCoins(copyCoinMap, coinList, totalAmount);
+
+		return copyCoinMap;
+	}
+
+	private void getRandomCoins(Map<Coin, Integer> copyCoinMap, List<Integer> coinList, int totalAmount) {
 		while (totalAmount > 0) {
 			int randomCoin = Randoms.pickNumberInList(coinList);
 			if (totalAmount - randomCoin >= 0) {
 				totalAmount -= randomCoin;
-				copyCoinMap.put(Coin.getCoinType(randomCoin),
-					copyCoinMap.getOrDefault(Coin.getCoinType(randomCoin), 0) + 1);
+				addMap(copyCoinMap, randomCoin);
 			}
 		}
+	}
 
-		return copyCoinMap;
+	private void checkAmount(int totalAmount) {
+		if (totalAmount % DIVIDE_NUM != 0) {
+			throw new IllegalArgumentException(ERROR_IS_NOT_COIN_TYPE_EXIST);
+		}
+	}
+
+	private void addMap(Map<Coin, Integer> copyCoinMap, int randomCoin) {
+		copyCoinMap.put(Coin.getCoinType(randomCoin),
+			copyCoinMap.getOrDefault(Coin.getCoinType(randomCoin), 0) + 1);
 	}
 
 	public int getCoinMapValue(Coin coin) {
