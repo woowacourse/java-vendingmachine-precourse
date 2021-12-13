@@ -94,6 +94,6 @@ public class ConsolePrinterTest {
         InputAmount inputAmount = mock(InputAmount.class);
         when(inputAmount.getAmount()).thenReturn(amount);
         printer.printInputAmount(inputAmount);
-        assertThat(out()).contains(String.valueOf(amount));
+        assertThat(out()).contains("투입 금액: " + amount);
     }
 }

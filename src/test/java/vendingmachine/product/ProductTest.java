@@ -22,7 +22,7 @@ class ProductTest {
         InputAmount inputAmount = new InputAmount(1000);
         assertThrows(
             IllegalArgumentException.class,
-            () -> seller.pickProduct("콜라", inputAmount)
+            () -> seller.orderProduct("콜라", inputAmount)
         );
     }
 
@@ -31,7 +31,7 @@ class ProductTest {
         ProductSeller seller = generateSellerFromInfos("[사이다,2000,1];[콜라,1000,2]");
         assertThrows(
             IllegalArgumentException.class,
-            () -> seller.pickProduct("환타", new InputAmount(5000))
+            () -> seller.orderProduct("환타", new InputAmount(5000))
         );
     }
 
@@ -39,7 +39,7 @@ class ProductTest {
     void sellProductTest() {
         ProductSeller seller = generateSellerFromInfos("[사이다,2000,1];[콜라,1000,2]");
         InputAmount inputAmount = new InputAmount(10000);
-        seller.pickProduct("사이다", inputAmount);
+        seller.orderProduct("사이다", inputAmount);
         assertThat(inputAmount.getAmount()).isEqualTo(8000);
     }
 
@@ -47,10 +47,10 @@ class ProductTest {
     void emptyStockTest() {
         ProductSeller seller = generateSellerFromInfos("[사이다,2000,1];[콜라,1000,2]");
         InputAmount inputAmount = new InputAmount(10000);
-        seller.pickProduct("사이다", inputAmount);
+        seller.orderProduct("사이다", inputAmount);
         assertThrows(
             IllegalArgumentException.class,
-            () -> seller.pickProduct("사이다", inputAmount)
+            () -> seller.orderProduct("사이다", inputAmount)
         );
     }
 }

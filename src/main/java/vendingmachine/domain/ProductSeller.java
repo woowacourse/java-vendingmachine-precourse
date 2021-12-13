@@ -18,7 +18,7 @@ public class ProductSeller {
             .collect(Collectors.toMap(Product::getName, p -> p));
     }
 
-    public void pickProduct(String name, InputAmount inputAmount) throws IllegalArgumentException {
+    public void orderProduct(String name, InputAmount inputAmount) throws IllegalArgumentException {
         validateProductExist(name);
         products.get(name).sell(inputAmount);
     }
@@ -31,6 +31,10 @@ public class ProductSeller {
         return this.products.values()
             .stream()
             .allMatch(Product::isEmptyStock);
+    }
+
+    public boolean isPurchaseAvailable(InputAmount inputAmount) {
+        return !isEmpty() && !isBelowCheapest(inputAmount);
     }
 
     private Product getCheapestProduct() throws IllegalArgumentException {
