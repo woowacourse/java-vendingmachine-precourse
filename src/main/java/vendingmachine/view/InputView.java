@@ -15,7 +15,7 @@ public class InputView {
     private static final String INPUT_PRODUCTS = "상품명과 가격, 수량을 입력해 주세요.";
     private static final String INPUT_PRODUCT_REGEX = "\\[.*,[0-9]+,[0-9]+\\]";
     private static final String INPUT_PRODUCTS_DELIMITER = ";";
-    private static final String INPUT_PRODUCT_DELMIETER = ",";
+    private static final String INPUT_PRODUCT_DELIMIETER = ",";
     private static final int INPUT_PRODUCTS_LIMIT = -1;
 
     private static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
@@ -46,7 +46,7 @@ public class InputView {
 
     private static List<Product> calculateProductList() {
         return inputProductValue().stream()
-            .map(product -> product.split(INPUT_PRODUCT_DELMIETER))
+            .map(InputView::splitByDelimiterToList)
             .map(InputView::valueToProduct)
             .collect(Collectors.toList());
     }
@@ -75,8 +75,12 @@ public class InputView {
             .anyMatch(product -> !product.matches(INPUT_PRODUCT_REGEX));
     }
 
-    private static Product valueToProduct(String[] value) {
-        return new Product(value[0], Integer.parseInt(value[1]), Integer.parseInt(value[2]));
+    private static List<String> splitByDelimiterToList(String product) {
+        return Arrays.asList(product.split(INPUT_PRODUCT_DELIMIETER));
+    }
+
+    private static Product valueToProduct(List<String> products) {
+        return new Product(products.get(0), Integer.parseInt(products.get(1)), Integer.parseInt(products.get(2)));
     }
 
     public static String inputMoney() {
