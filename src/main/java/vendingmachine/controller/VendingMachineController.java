@@ -66,7 +66,7 @@ public class VendingMachineController {
 
 	public void buyMerchandiseWithErrorHandling() {
 		try {
-			user.buyMerchandise(InputView.inputMerchandiseName(), vendingMachine.getMerchandises());
+			user.buyMerchandise(vendingMachine.sellMerchandise(InputView.inputMerchandiseName()));
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(user.getUserMoney());
 			System.out.println(illegalArgumentException.getMessage());

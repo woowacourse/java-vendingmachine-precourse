@@ -36,8 +36,8 @@ public class VendingMachine {
 		return merchandises.isAllMerchandisesSoldOut();
 	}
 
-	public Merchandises getMerchandises() {
-		return merchandises;
+	public Merchandise sellMerchandise(String merchandiseName) {
+		return merchandises.selectMerchandise(merchandiseName);
 	}
 
 	public void initCoinCounts(LinkedHashMap<Coin, Integer> coinMap) {
