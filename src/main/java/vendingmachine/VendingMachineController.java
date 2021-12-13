@@ -30,10 +30,10 @@ public class VendingMachineController {
 
 	public void buy(VendingMachine vendingMachine){
 		while (vendingMachine.isAvailableKeepBuyingAboutPrice() && vendingMachine.isAvailableKeepBuyingAboutStock()) {
+			OutputView.printBalance(vendingMachine);
 			String buyItem = InputView.buyItemInput();
 			vendingMachine.stockDeduct(buyItem);
 			vendingMachine.inputMoneyDeduct(buyItem);
-			OutputView.printBalance(vendingMachine.getInputMoney());
 		}
 	}
 

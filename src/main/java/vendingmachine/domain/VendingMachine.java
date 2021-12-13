@@ -77,4 +77,8 @@ public class VendingMachine {
 	public LinkedHashMap<Coin, Integer> getCoins() {
 		return holdingCoins;
 	}
+
+	public String inputMoneyToString() {
+		return inputMoney + "원";
+	}
 }
