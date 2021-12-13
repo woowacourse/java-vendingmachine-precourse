@@ -20,7 +20,7 @@ public class MoneyValidator {
 		try {
 			Integer.parseInt(money);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(ErrorMessageConstants.INTEGER_ERROR);
+			throw new IllegalArgumentException(ErrorMessageConstants.INTEGER_EXCEPTION_MESSAGE);
 		}
 	}
 
