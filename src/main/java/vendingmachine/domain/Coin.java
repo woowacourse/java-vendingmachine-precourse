@@ -12,21 +12,21 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	// 추가 기능 구현
-	public int getAmount() {
-		return this.amount;
-	}
-
-	public static Coin valueOf(int amount){
-		if(amount == 500){
+	public static Coin valueOf(int amount) {
+		if (amount == 500) {
 			return COIN_500;
 		}
-		if(amount == 100){
+		if (amount == 100) {
 			return COIN_100;
 		}
-		if(amount == 50){
+		if (amount == 50) {
 			return COIN_50;
 		}
 		return COIN_10;
+	}
+
+	// 추가 기능 구현
+	public int getAmount() {
+		return this.amount;
 	}
 }

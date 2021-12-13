@@ -1,7 +1,5 @@
 package vendingmachine.service;
 
-import static vendingmachine.domain.Coin.*;
-
 import java.util.Arrays;
 
 import camp.nextstep.edu.missionutils.Console;

@@ -13,6 +13,10 @@ public class VendingMachineAccount {
 		}
 	}
 
+	public static Map<Coin, Integer> getAllCoinCount() {
+		return coinCount;
+	}
+
 	public void addCoinCount(Coin coin) {
 		coinCount.put(coin, coinCount.get(coin) + 1);
 	}
@@ -23,9 +27,5 @@ public class VendingMachineAccount {
 
 	public void setAccount(int account) {
 		this.account = account;
-	}
-
-	public static Map<Coin, Integer> getAllCoinCount() {
-		return coinCount;
 	}
 }

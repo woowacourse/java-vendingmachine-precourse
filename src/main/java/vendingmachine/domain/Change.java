@@ -7,7 +7,7 @@ public class Change {
 
 	private static final Map<Coin, Integer> change = new HashMap<>();
 
-	public static Map<Coin, Integer> getChange(){
+	public static Map<Coin, Integer> getChange() {
 		return change;
 	}
 

@@ -1,12 +1,9 @@
 package vendingmachine.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.UserAccount;
-import vendingmachine.domain.VendingMachineAccount;
 import vendingmachine.service.ChangeService;
 import vendingmachine.view.VendingMachineAccountView;
 
