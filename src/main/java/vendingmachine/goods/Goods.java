@@ -18,4 +18,8 @@ public class Goods {
     public int getQuantity() {
         return this.quantity;
     }
+
+    public int getPrice() {
+        return this.price;
+    }
 }
