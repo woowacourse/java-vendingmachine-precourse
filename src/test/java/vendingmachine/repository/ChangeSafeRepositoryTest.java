@@ -27,11 +27,8 @@ class ChangeSafeRepositoryTest implements Rollback {
 		coinMap.put(Coin.COIN_50, new Quantity(2));
 		ChangeSafe changeSafe = new ChangeSafe(coinMap);
 	    // when
-		String save = repository.save(changeSafe);
+		ChangeSafe save = repository.save(changeSafe);
 		// then
-		assertEquals("500원 - 0개\n"
-			+ "100원 - 3개\n"
-			+ "50원 - 2개\n"
-			+ "10원 - 0개", save);
+		assertEquals("400원", save.sumToMoney().toString());
 	}
 }
