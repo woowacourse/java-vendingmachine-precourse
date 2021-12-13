@@ -5,6 +5,10 @@ import java.util.EnumMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
+	private static final String DASH = "-";
+	private static final String WHITESPACE = " ";
+	private static final String LINE_WRAP = "\n";
+	private static final String POSTFIX = "개";
 	private EnumMap<Coin, Integer> coinMap;
 
 	public Coins(int amount) {
@@ -24,5 +28,19 @@ public class Coins {
 	private Coin selectCoinType() {
 		int coinIndex = Randoms.pickNumberInRange(0, Coin.values().length - 1);
 		return Coin.values()[coinIndex];
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder coinsStringBuilder = new StringBuilder();
+		coinMap.keySet()
+			.forEach(coin -> coinsStringBuilder.append(coin.toString())
+				.append(WHITESPACE)
+				.append(DASH)
+				.append(WHITESPACE)
+				.append(coinMap.get(coin))
+				.append(POSTFIX)
+				.append(LINE_WRAP));
+		return coinsStringBuilder.toString();
 	}
 }

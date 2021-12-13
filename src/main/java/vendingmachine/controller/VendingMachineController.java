@@ -9,6 +9,7 @@ import vendingmachine.model.Products;
 import vendingmachine.util.StringUtils;
 import vendingmachine.util.validator.MoneyValidator;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private Coins coins;
@@ -16,6 +17,7 @@ public class VendingMachineController {
 
 	public VendingMachineController() {
 		initCoins();
+		OutputView.printCoins(coins);
 		initProducts();
 	}
 
