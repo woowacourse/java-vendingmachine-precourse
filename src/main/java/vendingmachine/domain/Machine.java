@@ -46,7 +46,8 @@ public class Machine {
 	}
 
 	public boolean checkAbleToBuyItem() {
-		if (merchandise.isAllSoldOut() || merchandise.isMinPriceMoreThanBalance(balance)) {
+		Item cheapestItem = merchandise.getLowPriceItemAmongRemainingItems();
+		if (merchandise.isAllSoldOut() || cheapestItem.isNotEnoughMoney(balance)) {
 			return false;
 		}
 		return true;

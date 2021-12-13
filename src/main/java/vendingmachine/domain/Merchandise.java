@@ -44,11 +44,13 @@ public class Merchandise {
 		return true;
 	}
 
-	public boolean isMinPriceMoreThanBalance(int balance) {
+	public Item getLowPriceItemAmongRemainingItems() {
 		Collections.sort(itemList);
-		if (itemList.get(0).isPriceLowerThanBalance(balance) == false) {
-			return true;
+		for (Item item : itemList) {
+			if (item.isSoldOut() == false) {
+				return item;
+			}
 		}
-		return false;
+		return null;
 	}
 }

@@ -16,7 +16,7 @@ public class Item implements Comparable<Item> {
 	}
 
 	public boolean checkAbleToSell(int balance) {
-		if (balance < price || count <= 0) {
+		if (isNotEnoughMoney(balance) || count <= 0) {
 			return false;
 		}
 		return true;
@@ -31,8 +31,8 @@ public class Item implements Comparable<Item> {
 		return count == 0;
 	}
 
-	public boolean isPriceLowerThanBalance(int balance) {
-		return price < balance;
+	public boolean isNotEnoughMoney(int balance) {
+		return balance < price;
 	}
 
 	@Override
