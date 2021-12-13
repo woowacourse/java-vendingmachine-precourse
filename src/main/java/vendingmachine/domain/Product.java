@@ -32,7 +32,7 @@ public class Product {
 	}
 
 	public boolean isValidateProductPurchase(Balance balance) {
-		 return price.isValidateCalculateMinus(balance);
+		return price.isValidateCalculateMinus(balance);
 	}
 
 	public boolean isValidateSameProduct(String productName) {

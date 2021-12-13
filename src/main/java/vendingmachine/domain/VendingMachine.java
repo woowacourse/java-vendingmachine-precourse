@@ -18,8 +18,8 @@ public class VendingMachine {
 
 	public boolean isContinueVendingMachine() {
 		if (balance.isValidateHasBalanceZero()
-		|| products.isValidateHasProductsQuantity()
-		|| products.isValidateHasBalanceProductsPurchase(balance)) {
+			|| products.isValidateHasProductsQuantity()
+			|| products.isValidateHasBalanceProductsPurchase(balance)) {
 			return false;
 		}
 
