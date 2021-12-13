@@ -34,4 +34,16 @@ public class GoodsController {
             }
         }
     }
+
+    public boolean isQuantityMoreThanOne() {
+        int totalQuantity = 0;
+
+        for (Goods goods : goodsList) {
+            totalQuantity += goods.getQuantity();
+            if(totalQuantity >= 1) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
