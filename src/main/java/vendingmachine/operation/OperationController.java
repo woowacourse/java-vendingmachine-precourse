@@ -1,7 +1,6 @@
 package vendingmachine.operation;
 
 import vendingmachine.view.InputView;
-
 import vendingmachine.view.outputView.OperationView;
 import vendingmachine.Coin;
 import vendingmachine.common.CheckMoenyFigure;
