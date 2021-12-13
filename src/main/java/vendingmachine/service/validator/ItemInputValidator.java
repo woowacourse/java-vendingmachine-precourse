@@ -1,5 +1,6 @@
 package vendingmachine.service.validator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -7,6 +8,8 @@ import vendingmachine.view.OutputView;
 import vendingmachine.view.messages.ErrorMessage;
 
 public class ItemInputValidator {
+	private static List<String> itemDuplicateValidatorList = new ArrayList<>();
+	private static final int ITEM_NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int PRICE_DIVISIBLE_BY = 10;
 	private static final int QUANTITY_INDEX = 2;
@@ -26,8 +29,10 @@ public class ItemInputValidator {
 			validateSize(itemElements);
 			validatePrice(itemElements);
 			validateQuantity(itemElements);
+			validateDuplicateItem(itemElements);
 		} catch (IllegalArgumentException exception) {
 			OutputView.printErrorMessage(exception.getMessage());
+			itemDuplicateValidatorList.clear();
 			return false;
 		}
 		return true;
@@ -59,6 +64,14 @@ public class ItemInputValidator {
 		String quantityString = itemElements.get(QUANTITY_INDEX);
 		isQuantityDigit(quantityString);
 		isQuantityPositive(quantityString);
+	}
+
+	private void validateDuplicateItem(List<String> itemElements) {
+		String itemName = itemElements.get(ITEM_NAME_INDEX);
+		if (itemDuplicateValidatorList.contains(itemName)) {
+			throw new IllegalArgumentException("상품의 이름이 중복되어서는 안됩니다.");
+		}
+		itemDuplicateValidatorList.add(itemName);
 	}
 
 	private void isPriceDigit(String priceString) {
