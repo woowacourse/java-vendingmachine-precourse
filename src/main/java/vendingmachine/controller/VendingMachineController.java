@@ -3,7 +3,9 @@ package vendingmachine.controller;
 import static vendingmachine.utils.validator.AmountValidator.*;
 import static vendingmachine.utils.validator.ItemValidator.*;
 
-import vendingmachine.domain.Coins;
+import java.util.Map;
+
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.Input;
 import vendingmachine.view.Output;
@@ -90,7 +92,7 @@ public class VendingMachineController {
 
 	private void returnChange(int amount) {
 		Output.inputAmount(amount);
-		Coins change = vendingMachine.returnCoins(amount);
+		Map<Coin, Integer> change = vendingMachine.returnCoins(amount);
 		Output.change(change);
 	}
 }

@@ -2,18 +2,18 @@ package vendingmachine.view;
 
 import static vendingmachine.utils.Message.*;
 
+import java.util.Map;
+
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 
 public class Output {
 
-	private static final int OUT_OF_STOCK = 0;
-
 	public static void holdingAmount(Coins coins) {
-		System.out.println(HOLDING_COINS_OUTPUT_MESSAGE);
 		StringBuilder message = new StringBuilder();
+		message.append(HOLDING_COINS_OUTPUT_MESSAGE);
 		coins.getList()
-			.forEach((coin, count) -> message.append(coin.getAmount())
-				.append(COIN_PRINT_FORMAT)
+			.forEach((coin, count) -> message.append(coin.toString())
 				.append(count)
 				.append(COIN_COUNT)
 				.append("\n"));
@@ -29,19 +29,14 @@ public class Output {
 		System.out.println(message);
 	}
 
-	public static void change(Coins coins) {
-		System.out.println(CHANGE_MESSAGE);
+	public static void change(Map<Coin, Integer> coins) {
 		StringBuilder message = new StringBuilder();
-		coins.getList()
-			.forEach((coin, count) -> {
-				if (count != OUT_OF_STOCK) {
-					message.append(coin.getAmount())
-						.append(COIN_PRINT_FORMAT)
-						.append(count)
-						.append(COIN_COUNT)
-						.append("\n");
-				}
-			});
+		message.append(CHANGE_MESSAGE);
+		coins.forEach((coin, count) -> message.append(coin.toString())
+			.append(count)
+			.append(COIN_COUNT)
+			.append("\n")
+		);
 
 		System.out.print(message);
 	}

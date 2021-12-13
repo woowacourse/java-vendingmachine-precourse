@@ -2,6 +2,9 @@ package vendingmachine.domain;
 
 import static vendingmachine.utils.validator.ItemNameValidator.*;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 public class VendingMachine {
 
 	private final Coins coins;
@@ -36,9 +39,9 @@ public class VendingMachine {
 		return items.purchase(itemName);
 	}
 
-	public Coins returnCoins(int amount) {
-		Coins change = new Coins();
-		change.processChange(coins, amount);
+	public Map<Coin, Integer> returnCoins(int amount) {
+		Map<Coin, Integer> change = new LinkedHashMap<>();
+		coins.processChange(change, amount);
 		return change;
 	}
 }

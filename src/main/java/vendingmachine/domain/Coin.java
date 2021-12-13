@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.utils.Random.*;
+import static vendingmachine.utils.Message.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -55,5 +56,10 @@ public enum Coin {
 			.filter(coin -> coin.amount == pickAmount)
 			.findFirst()
 			.orElse(null);
+	}
+
+	@Override
+	public String toString() {
+		return amount + COIN_PRINT_FORMAT;
 	}
 }
