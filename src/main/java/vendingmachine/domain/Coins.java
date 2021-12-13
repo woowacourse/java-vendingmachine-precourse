@@ -20,10 +20,9 @@ public class Coins {
 		Map<Integer, Integer> restCoins = new LinkedHashMap<>();
 		for (Integer coin : coins.keySet()) {
 			Integer number = coins.get(coin);
-			if (number <= NUMBER_LOWER_BOUND) {
-				continue;
+			if (NUMBER_LOWER_BOUND < number) {
+				restCoins.put(coin, number);
 			}
-			restCoins.put(coin, number);
 		}
 		return restCoins;
 	}
