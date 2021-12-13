@@ -101,7 +101,7 @@ public class ProductRepository {
         List<Product> findProduct = products.stream().
                 filter(product -> product.getName().equals(productName)).collect(Collectors.toList());
 
-        if (findProduct.get(Condition.INDEX_0.getNumber()).getCost() > Money.getInstance().getMoney()) {
+        if (Money.isProductMoreExpensiveThanHasMoney(findProduct.get(Condition.INDEX_0.getNumber()).getCost())) {
             return false;
         }
         return true;

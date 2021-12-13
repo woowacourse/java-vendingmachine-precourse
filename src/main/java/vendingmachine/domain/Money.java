@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 public class Money {
     private static final Money instance = new Money();
-    private int money;
+    private static int money;
 
     private Money() {
     }
@@ -21,5 +21,12 @@ public class Money {
 
     public int getMoney() {
         return money;
+    }
+
+    public static boolean isProductMoreExpensiveThanHasMoney(int productCost) {
+        if (productCost > money) {
+            return true;
+        }
+        return false;
     }
 }
