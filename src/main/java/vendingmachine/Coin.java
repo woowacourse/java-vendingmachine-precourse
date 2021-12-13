@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -14,5 +17,22 @@ public enum Coin {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	public static List<Integer> getAmountList() {
+		List<Integer> amountList = new ArrayList<>();
+		for (Coin coin : Coin.values()) {
+			amountList.add(coin.amount);
+		}
+		return amountList;
+	}
+
+	public static Coin findToAmount(int amount) {
+		for (Coin coin : Coin.values()) {
+			if (coin.amount == amount) {
+				return coin;
+			}
+		}
+		return null;
 	}
 }
