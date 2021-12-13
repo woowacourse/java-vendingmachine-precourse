@@ -10,6 +10,7 @@ public class InputItemValidator {
 
 	private static final String REGEX = "\\[[a-zA-Z0-9가-힣 _-]+,\\d{3,},\\d+]";
 	private static final String DELIMITER = ",";
+	private static final String OPEN_BRACKET = "[";
 
 	List<String> itemNames = new ArrayList<>();
 
@@ -28,9 +29,14 @@ public class InputItemValidator {
 
 	private void validateItemInfo(String item) throws IllegalArgumentException {
 		validateByRegex(item);
-		String[] itemInfo = item.split(DELIMITER);
+		String[] itemInfo = splitItem(item);
 		InputMoneyValidator.validateIsDivisibleBy10(Integer.parseInt(itemInfo[ITEM_PRICE_INDEX]));
 		validateNameDuplication(itemInfo[ITEM_NAME_INDEX]);
+	}
+
+	private String[] splitItem(String item) {
+		item = item.replace(OPEN_BRACKET, "");
+		return item.split(DELIMITER);
 	}
 
 	private void validateByRegex(String item) throws IllegalArgumentException {
@@ -44,5 +50,21 @@ public class InputItemValidator {
 			throw new IllegalArgumentException(ErrorMsgConst.ITEM_DUP_ERROR_MSG);
 		}
 		itemNames.add(itemName);
+	}
+
+	public boolean validateInputItemName(String itemName) {
+		try {
+			isExistInItemList(itemName);
+		} catch (IllegalArgumentException e) {
+			System.out.println(ErrorMsgConst.ERROR_MSG + e.getMessage());
+			return false;
+		}
+		return true;
+	}
+
+	private void isExistInItemList(String itemName) throws IllegalArgumentException {
+		if (!itemNames.contains(itemName)) {
+			throw new IllegalArgumentException(ErrorMsgConst.ITEM_NOT_EXIST_ERROR_MSG);
+		}
 	}
 }
