@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-public class Messages {
+public class ExceptionMessages {
     public static final String ERROR_NOT_INTEGER = "[ERROR] 입력하신 값은 숫자가 아닙니다.";
     public static final String ERROR_NEGATIVE_NUMBER = "[ERROR] 양수의 값을 입력해주세요.";
     public static final String ERROR_INVALID_BRACKET = "[ERROR] 상품명, 가격, 수량은 괄호로 감싸서 입력해주세요. ([사이다,1000,10])";

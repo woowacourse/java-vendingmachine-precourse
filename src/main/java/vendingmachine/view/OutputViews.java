@@ -6,7 +6,6 @@ import java.util.Map;
 
 public class OutputViews {
     public static final String PRINT_MACHINE_COIN_MESSAGE = "\n자판기가 보유한 동전";
-
     public static final String REMAIN_MONEY = "잔돈";
     public static final String INSERT_MONEY = "\n투입 금액: ";
     public static final String WON = "원";

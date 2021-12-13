@@ -1,6 +1,6 @@
 package vendingmachine.service;
 
-import static vendingmachine.view.Messages.*;
+import static vendingmachine.view.ExceptionMessages.*;
 
 public class Validator {
     public static final char PRODUCT_OPEN_BRACKET = '[';

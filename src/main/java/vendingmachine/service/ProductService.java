@@ -1,7 +1,6 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.Product;
-import vendingmachine.repository.ProductRepository;
 import vendingmachine.view.InputViews;
 
 import java.util.HashMap;
@@ -9,7 +8,6 @@ import java.util.Map;
 
 import static vendingmachine.repository.ProductRepository.*;
 import static vendingmachine.service.Validator.*;
-import static vendingmachine.view.Messages.*;
 
 public class ProductService {
     public static final String PRODUCT_OUTER_SEPORATOR = ";";

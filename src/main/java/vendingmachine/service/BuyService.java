@@ -2,7 +2,7 @@ package vendingmachine.service;
 
 import static vendingmachine.repository.ChangeRepository.subtractChange;
 import static vendingmachine.repository.ProductRepository.*;
-import static vendingmachine.view.Messages.*;
+import static vendingmachine.view.ExceptionMessages.*;
 
 public class BuyService {
 
