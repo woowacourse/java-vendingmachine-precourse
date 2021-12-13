@@ -1,4 +1,4 @@
-package userInterface;
+package userinterface;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Product;
@@ -32,6 +32,7 @@ public class OrderManager {
 	private void pickProduct() {
 		String productName = Console.readLine();
 		Product product = getProductInstance(productName);
+
 		if (!productList.isEmpty(product)) {
 			productList.deduct(product);
 			depositManager.deduct(product.getPrice());

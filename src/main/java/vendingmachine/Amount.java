@@ -1,6 +1,6 @@
 package vendingmachine;
 
-import utils.validator.isAmount;
+import utils.validator.IsAmount;
 
 public class Amount {
 	private int amount;
@@ -8,7 +8,8 @@ public class Amount {
 	public Amount(int amount) {
 		String amountStr = Integer.toString(amount);
 		StringBuilder amountSB = new StringBuilder(amountStr);
-		new isAmount().run(amountSB);
+		new IsAmount().run(amountSB);
+
 		this.amount = amount;
 	}
 

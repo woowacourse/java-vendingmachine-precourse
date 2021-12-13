@@ -1,9 +1,9 @@
-package userInterface;
+package userinterface;
 
 import camp.nextstep.edu.missionutils.Console;
+import utils.validator.IsAmount;
 import vendingmachine.Product;
 import vendingmachine.Products;
-import utils.validator.isAmount;
 
 public class ProductListManager {
 	private Products productList;
@@ -21,6 +21,7 @@ public class ProductListManager {
 	// 입력 자체로 에러를 판단할 수 없어 InputManager() 클래스를 사용하지 않는다.
 	private void initProductList() {
 		boolean passed = false;
+
 		while (!passed) {
 			try {
 				productList = new Products();
@@ -47,24 +48,25 @@ public class ProductListManager {
 
 	private String trimBracket(String string) {
 		return string
-			.replace("[","")
-			.replace("]","");
+			.replace("[", "")
+			.replace("]", "");
 	}
 
 	private void addProductToList(String[] namePriceRemain) {
 		String name = namePriceRemain[0];
 		String price = namePriceRemain[1];
 		String remain = namePriceRemain[2];
-		if (checkValidations(name,price,remain)) {
+
+		if (checkValidations(name, price, remain)) {
 			int priceInt = Integer.parseInt(price);
 			int remainInt = Integer.parseInt(remain);
-			Product product = new Product(name,priceInt);
+			Product product = new Product(name, priceInt);
 			productList.put(product, remainInt);
 		}
 	}
 
 	private boolean checkValidations(String name, String price, String remain) {
-		isAmount isAmount = new isAmount();
+		IsAmount isAmount = new IsAmount();
 
 		return (isNotDuplicate(name)
 			&& isAmount.run(new StringBuilder(price))

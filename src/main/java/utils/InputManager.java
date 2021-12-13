@@ -19,7 +19,7 @@ public class InputManager {
 	private void initInput() {
 		try {
 			input = new StringBuilder(Console.readLine());
-			passed = validator.run(input); // static 으로 만드는게 나을지도?
+			passed = validator.run(input);
 		} catch (IllegalArgumentException error) {
 			System.out.println(error.getMessage());
 		}

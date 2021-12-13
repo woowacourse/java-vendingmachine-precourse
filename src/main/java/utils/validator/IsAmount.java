@@ -1,8 +1,9 @@
 package utils.validator;
 
-public class isAmount implements Validator{
+public class IsAmount implements Validator {
 	public boolean run(StringBuilder input) {
-		new isDigit().run(input);
+		new IsDigit().run(input);
+
 		if (isNegative(input)) {
 			throw new IllegalArgumentException("[ERROR] 음수단위의 금액은 사용할 수 없습니다.");
 		}
