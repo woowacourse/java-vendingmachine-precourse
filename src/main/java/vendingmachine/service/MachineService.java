@@ -36,6 +36,11 @@ public class MachineService {
 		machine.addInputCoinAmount(amount);
 	}
 
+	public int getInputCoinAmount(Long id) {
+		Machine machine = machineRepository.findById(id);
+		return machine.getInputCoinAmount();
+	}
+
 	public void addItems(Long id, Map<String, Item> items) {
 		Machine machine = machineRepository.findById(id);
 		machine.addItems(items);
@@ -51,7 +56,7 @@ public class MachineService {
 		return machine.isPurchasable();
 	}
 
-	public Map<Coin, Integer> returnCoins(Long id) {
+	public SortedMap<Coin, Integer> returnCoins(Long id) {
 		Machine machine = machineRepository.findById(id);
 		return machine.returnCoins();
 	}

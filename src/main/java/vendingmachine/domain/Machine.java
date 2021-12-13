@@ -26,6 +26,10 @@ public class Machine {
 		this.inputCoinAmount += amount;
 	}
 
+	public int getInputCoinAmount() {
+		return inputCoinAmount;
+	}
+
 	public void addItems(Map<String, Item> items) {
 		for (String itemName : items.keySet()) {
 			Item item = items.get(itemName);
@@ -47,6 +51,7 @@ public class Machine {
 	public void purchase(String itemName) throws IllegalArgumentException {
 		Item item = items.get(itemName);
 		checkInputCoinAmountByItem(item);
+		inputCoinAmount -= item.getPrice();
 		item.decreaseQuantity();
 	}
 
@@ -75,7 +80,7 @@ public class Machine {
 		return inputCoinAmount < getMinPrice();
 	}
 
-	public Map<Coin, Integer> returnCoins() {
+	public SortedMap<Coin, Integer> returnCoins() {
 		SortedMap<Coin, Integer> returnCoins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
 		int returnCoinsAmount = this.inputCoinAmount;
 		for (Coin coin : coins.keySet()) {

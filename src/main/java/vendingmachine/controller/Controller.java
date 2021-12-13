@@ -15,16 +15,46 @@ public class Controller {
 
 	public void run() {
 		Long machineId = machineService.generate();
+		inputCoinsToMachineByManager(machineId);
+		inputItemsToMachineByManager(machineId);
+		inputCoinsToMachineByUser(machineId);
+		purchaseItemsByUser(machineId);
+		printRestCoinsAndExit(machineId);
+	}
 
-		InputView.requestMachineCoinsAmount();
-		machineService.addCoins(machineId, getCoinAmountByUser());
-		OutputView.printMachineCoins(machineService.getCoins(machineId));
+	private void printRestCoinsAndExit(Long machineId) {
+		OutputView.printInputCoins(machineService.getInputCoinAmount(machineId));
+		OutputView.printHeadLast();
+		OutputView.printMachineCoins(machineService.returnCoins(machineId));
+	}
 
+	private void purchaseItemsByUser(Long machineId) {
+		while (machineService.isPurchasable(machineId)) {
+			OutputView.printInputCoins(machineService.getInputCoinAmount(machineId));
+			InputView.requestPurchaseItem();
+			try {
+				machineService.purchase(machineId, Console.readLine());
+			} catch (IllegalArgumentException e) {
+				OutputView.printExceptionMessage(e.getMessage());
+			}
+		}
+	}
+
+	private void inputCoinsToMachineByUser(Long machineId) {
 		InputView.requestInputCoins();
 		machineService.addInputCoins(machineId, getInputCoinsByUser());
+	}
 
+	private void inputItemsToMachineByManager(Long machineId) {
 		InputView.requestItems();
 		machineService.addItems(machineId, getItemsByUser());
+	}
+
+	private void inputCoinsToMachineByManager(Long machineId) {
+		InputView.requestMachineCoinsAmount();
+		machineService.addCoins(machineId, getCoinAmountByUser());
+		OutputView.printHeadFirst();
+		OutputView.printMachineCoins(machineService.getCoins(machineId));
 	}
 
 	private Integer getInputCoinsByUser() {
