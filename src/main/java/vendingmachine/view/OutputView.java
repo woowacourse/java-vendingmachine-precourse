@@ -11,9 +11,7 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.message.SystemMessage;
 
 public class OutputView {
-	// public static final String MONEY_UNIT = "원";
-	// public static final String DASH_DELIMITER = " - ";
-	// public static final String AMOUNT_UNIT = "개";
+	public static final int ZERO_NUMBER = 0;
 
 	public static void printChangesVendingMachine(VendingMachine vendingMachine) {
 		System.out.println();
@@ -37,9 +35,12 @@ public class OutputView {
 	public static void printRemainChanges(Map<Coin, Integer> remainChangesResult) {
 		System.out.println(SystemMessage.REMAIN_CHANGES.getText());
 		for (Map.Entry<Coin, Integer> entry : remainChangesResult.entrySet()) {
-			System.out.println(
-				entry.getKey().getAmount() + MONEY_UNIT_WON.getText() + DASH_DELIMITER.getText() + entry.getValue()
-					+ AMOUNT_UNIT.getText());
+			if (entry.getValue() == ZERO_NUMBER) {
+				continue;
+			}
+				System.out.println(
+					entry.getKey().getAmount() + MONEY_UNIT_WON.getText() + DASH_DELIMITER.getText() + entry.getValue()
+						+ AMOUNT_UNIT.getText());
 		}
 	}
 
