@@ -47,7 +47,7 @@ public class Items {
 		return price;
 	}
 
-	private Item findByName(String itemName) {
+	public Item findByName(String itemName) {
 		return list.stream()
 			.filter(item -> item.checkEqualsName(itemName))
 			.findFirst()

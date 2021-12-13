@@ -71,18 +71,18 @@ public class VendingMachineController {
 	private void purchaseItems(int amount) {
 		while (vendingMachine.availablePurchase(amount)) {
 			Output.inputAmount(amount);
-			String itemName = inputItemName();
+			String itemName = inputItemName(amount);
 			amount -= vendingMachine.purchaseItem(itemName);
 		}
 
 		returnChange(amount);
 	}
 
-	private String inputItemName() {
+	private String inputItemName(int amount) {
 		while (true) {
 			try {
 				String itemName = Input.itemName();
-				vendingMachine.checkItem(itemName);
+				vendingMachine.checkItem(itemName, amount);
 				return itemName;
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());

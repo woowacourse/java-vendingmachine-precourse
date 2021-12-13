@@ -31,8 +31,8 @@ public class VendingMachine {
 		return items.check(amount);
 	}
 
-	public void checkItem(String itemName) {
-		validateItem(items, itemName);
+	public void checkItem(String itemName, int amount) {
+		validateItem(items, itemName, amount);
 	}
 
 	public int purchaseItem(String itemName) {

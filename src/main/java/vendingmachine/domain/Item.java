@@ -22,6 +22,10 @@ public class Item {
 		return price;
 	}
 
+	public boolean checkPurchase(int amount) {
+		return price <= amount;
+	}
+
 	public int purchase() {
 		quantity--;
 		return price;
