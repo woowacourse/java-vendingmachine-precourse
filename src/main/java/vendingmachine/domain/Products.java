@@ -30,6 +30,14 @@ public class Products {
 			.allMatch(Product::isSoldOut);
 	}
 
+	private boolean canBuyCurrentAmount(int currentAmount) {
+		return products.stream()
+			.filter(product -> !product.isSoldOut())
+			.map(Product::getPrice)
+			.min(Integer::compareTo)
+			.orElse(0) >= currentAmount;
+	}
+
 	private Product findByProductName(String productName) {
 		return products.stream()
 			.filter(product -> product.getName().equals(productName))
