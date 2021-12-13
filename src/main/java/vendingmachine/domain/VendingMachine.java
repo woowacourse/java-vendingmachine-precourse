@@ -16,6 +16,12 @@ public class VendingMachine {
         this.products = products;
     }
 
+    public void checkPossiblePurchase(InvestmentMoney investmentMoney) {
+        if (!isOperate(investmentMoney)) {
+            throw new IllegalArgumentException();
+        }
+    }
+
     public boolean isOperate(InvestmentMoney investmentMoney) {
         if (products.isPossiblePurchase(investmentMoney)) {
             return true;

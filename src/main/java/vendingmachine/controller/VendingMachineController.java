@@ -26,13 +26,24 @@ public class VendingMachineController {
     }
 
     private void operate(VendingMachine vendingMachine) {
-        InvestmentMoney investmentMoney = InputView.getInvestmentMoney();
+        InvestmentMoney investmentMoney = getInvestmentMoney(vendingMachine);
 
         while (vendingMachine.isOperate(investmentMoney)) {
             buy(vendingMachine, investmentMoney);
         }
 
         finish(vendingMachine, investmentMoney);
+    }
+
+    private InvestmentMoney getInvestmentMoney(VendingMachine vendingMachine) {
+        try {
+            InvestmentMoney investmentMoney = InputView.getInvestmentMoney();
+            vendingMachine.checkPossiblePurchase(investmentMoney);
+
+            return investmentMoney;
+        } catch (IllegalArgumentException e) {
+            return getInvestmentMoney(vendingMachine);
+        }
     }
 
     private void buy(VendingMachine vendingMachine, InvestmentMoney investmentMoney) {
