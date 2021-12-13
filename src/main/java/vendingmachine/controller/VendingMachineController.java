@@ -1,7 +1,11 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.Product;
+import vendingmachine.model.Products;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
+
+import java.util.List;
 
 public class VendingMachineController {
     private final InputView input;
@@ -15,7 +19,8 @@ public class VendingMachineController {
     }
 
     private VendingMachine createVendingMachine() {
-        int changes = input.inputVendingmachineChange();
-        return new VendingMachine(changes);
+        int change = input.inputVendingmachineChange();
+        List<Product> products = input.inputProductList();
+        return new VendingMachine(change, new Products(products));
     }
 }
