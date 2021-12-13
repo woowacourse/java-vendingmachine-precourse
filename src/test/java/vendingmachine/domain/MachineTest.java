@@ -1,11 +1,21 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 
 class MachineTest {
-	private static final String MERCHANDISE = "[콜라,1000,3];[사이다,2000,3]";
-	private static final String MERCHANDISE_COUNT_ZERO = "[콜라,1000,0];[사이다,2000,0]";
+	private final List<String> item = new ArrayList<>();
+	private final List<String> itemCountZero = new ArrayList<>();
 	private final Machine machine = new Machine();
+
+	MachineTest(){
+		item.add("[콜라,1000,3]");
+		item.add("[사이다,2000,3]");
+		itemCountZero.add("[콜라,1000,0]");
+		itemCountZero.add("[사이다,2000,0]");
+	}
 
 	@Test
 	void 잔돈_생성_테스트() {
@@ -15,21 +25,21 @@ class MachineTest {
 
 	@Test
 	void 잔돈_반환_시점_테스트_가격() {
-		machine.setMerchandise(MERCHANDISE);
+		machine.setMerchandise(item);
 		machine.setPayment("500");
 		assert machine.checkAbleToBuyItem() == false;
 	}
 
 	@Test
 	void 잔돈_반환_시점_테스트_수량() {
-		machine.setMerchandise(MERCHANDISE_COUNT_ZERO);
+		machine.setMerchandise(itemCountZero);
 		machine.setPayment("2000");
 		assert machine.checkAbleToBuyItem() == false;
 	}
 
 	@Test
 	void 잔돈_반환_시점_테스트_성공() {
-		machine.setMerchandise(MERCHANDISE);
+		machine.setMerchandise(item);
 		machine.setPayment("2000");
 		assert machine.checkAbleToBuyItem();
 	}

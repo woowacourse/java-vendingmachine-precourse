@@ -1,6 +1,6 @@
 package vendingmachine.validation;
 
-import vendingmachine.domain.Merchandise;
+import vendingmachine.Parser;
 
 public class InputValidator {
 	public static final String ERROR_MESSAGE = "[ERROR] ";
@@ -53,9 +53,9 @@ public class InputValidator {
 		if (elements.length != ITEM_INFO_LENGTH) {
 			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_MERCHANDISEFORM_MESSAGE);
 		}
-		validateMerchandiseName(elements[Merchandise.MERCHANDISE_NAME_INDEX]);
-		validateMerchandisePrice(elements[Merchandise.MERCHANDISE_PRICE_INDEX]);
-		validateMerchandiseCount(elements[Merchandise.MERCHANDISE_COUNT_INDEX]);
+		validateMerchandiseName(elements[Parser.ITEM_NAME_INDEX]);
+		validateMerchandisePrice(elements[Parser.ITEM_PRICE_INDEX]);
+		validateMerchandiseCount(elements[Parser.ITEM_COUNT_INDEX]);
 	}
 
 	private void validateMerchandiseName(String name) {

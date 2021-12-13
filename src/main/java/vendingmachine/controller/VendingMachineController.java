@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.Parser;
 import vendingmachine.domain.Machine;
 import vendingmachine.validation.InputValidator;
 import vendingmachine.validation.MachineValidator;
@@ -26,7 +27,7 @@ public class VendingMachineController {
 		while (true) {
 			String merchandiseList = view.inputMerchandise();
 			if (validator.isValidMerchandise(merchandiseList)) {
-				machine.setMerchandise(merchandiseList);
+				machine.setMerchandise(Parser.parseToItemStringList(merchandiseList));
 				break;
 			}
 		}

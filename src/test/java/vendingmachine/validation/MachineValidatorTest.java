@@ -1,18 +1,21 @@
 package vendingmachine.validation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.domain.Machine;
 
 class MachineValidatorTest {
-	private static final String MERCHANDISE = "[콜라,1000,3];[사이다,2000,3]";
+	private final List<String> item = new ArrayList<>();
 	private final Machine machine = new Machine();
 	private final MachineValidator validator = new MachineValidator(machine);
 
 	MachineValidatorTest() {
-		machine.setMerchandise(MERCHANDISE);
+		item.add("[콜라,1000,3]");
+		item.add("[사이다,2000,3]");
+		machine.setMerchandise(item);
 	}
 
 	@Test

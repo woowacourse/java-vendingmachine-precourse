@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 public class Machine {
@@ -16,10 +16,9 @@ public class Machine {
 		return coins.getSortedCoinCount();
 	}
 
-	public void setMerchandise(String merchandiseList) {
-		String[] items = merchandiseList.split(";");
-		for (String item : items) {
-			merchandise.addItem(item);
+	public void setMerchandise(List<String> merchandise) {
+		for (String item : merchandise) {
+			this.merchandise.add(item);
 		}
 	}
 

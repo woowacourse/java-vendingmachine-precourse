@@ -4,19 +4,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import vendingmachine.Parser;
+
 public class Merchandise {
-	public static final int MERCHANDISE_NAME_INDEX = 0;
-	public static final int MERCHANDISE_PRICE_INDEX = 1;
-	public static final int MERCHANDISE_COUNT_INDEX = 2;
 	private List<Item> itemList = new ArrayList<>();
 
-	public void addItem(String item) {
-		item = item.replace("[", "").replace("]", "");
-		String[] elements = item.split(",");
-		String name = elements[MERCHANDISE_NAME_INDEX];
-		int price = Integer.parseInt(elements[MERCHANDISE_PRICE_INDEX]);
-		int count = Integer.parseInt(elements[MERCHANDISE_COUNT_INDEX]);
-		itemList.add(new Item(name, price, count));
+	public void add(String item) {
+		itemList.add(Parser.parseToItem(item));
 	}
 
 	public boolean isExistItem(String name) {
