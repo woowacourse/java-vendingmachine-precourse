@@ -8,13 +8,13 @@ import vendingmachine.Coin;
 public class CashHolder {
 
     private static final String ERR_PREFIX = "[ERROR]";
-    private static final String ERR_INVALID_TOTAL_AMOUNT = ERR_PREFIX + "금액음 10 단위로 나누어 떨어져야합니다.";
-    private static final int MIN_VALUE = 10;
-    private static final int EMPTY = 0;
+    private static final String ERR_BELOW_MIN_AMOUNT = ERR_PREFIX + "보유 금액은 0원 보다 커야 합니다.";
+    private static final int MIN_AMOUNT = 10;
+    private static final int ZERO = 0;
     private final Map<Coin, Integer> coins;
 
     public CashHolder(int totalAmount) {
-        validateTotalAmount(totalAmount);
+        validatePositiveAmount(totalAmount);
         this.coins = fillChanges(totalAmount, new HashMap<>());
     }
 
@@ -25,7 +25,7 @@ public class CashHolder {
     private Map<Coin, Integer> calculateChanges(int amount, Map<Coin, Integer> changes) {
         Coin coin;
 
-        if (coins.isEmpty() || amount == 0) {
+        if (amount < MIN_AMOUNT) {
             return changes;
         }
         try {
@@ -42,7 +42,7 @@ public class CashHolder {
 
     private Coin mostExpensiveCoinBelowAmount(int amount) throws IllegalArgumentException {
         return this.coins.keySet().stream()
-            .filter(c -> coins.get(c) != EMPTY)
+            .filter(c -> coins.getOrDefault(c, ZERO) != ZERO)
             .filter(c -> c.getAmount() <= amount)
             .max(Comparator.comparingInt(Coin::getAmount))
             .orElseThrow(IllegalArgumentException::new);
@@ -59,9 +59,9 @@ public class CashHolder {
         return fillChanges(totalAmount - coin.getAmount(), coins);
     }
 
-    private void validateTotalAmount(int totalAmount) {
-        if (totalAmount % MIN_VALUE != 0) {
-            throw new IllegalArgumentException(ERR_INVALID_TOTAL_AMOUNT);
+    private void validatePositiveAmount(int totalAmount) {
+        if (totalAmount <= ZERO) {
+            throw new IllegalArgumentException(ERR_BELOW_MIN_AMOUNT);
         }
     }
 }
