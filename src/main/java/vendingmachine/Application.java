@@ -10,8 +10,10 @@ public class Application {
         for(Coin coin : Coin.values()){
             coins.add(coin.getValue());
         }
-
-        int[] randomList = Utils.generateRandomCoin(coins,400);
+        Integer inputmoney = Utils.vendMoneyInput();
+        int[] randomList = Utils.generateRandomCoin(coins,inputmoney);
         Utils.printRandomCoin(coins, randomList);
     }
+
+    
 }

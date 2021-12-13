@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Utils {
 
-    public int vendMoneyInput(){
+    public static int vendMoneyInput(){
         System.out.println(Message.INPUT_VEND_MONEY);
         String inputVendMoney = Console.readLine();
         return Integer.parseInt(inputVendMoney);
