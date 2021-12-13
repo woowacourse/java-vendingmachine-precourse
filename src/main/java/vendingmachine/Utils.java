@@ -93,4 +93,21 @@ public class Utils {
         }
         return true;
     }
+
+    public static void validateNameCommon(ArrayList<Product> products, String name) throws Exception {
+        validateDuplication(products, name);
+        validateStrEmpty(name);
+    }
+
+    public static void validatePriceCommon(String price) throws Exception {
+        Utils.validateNumber(price);
+        Utils.validatePositiveNumber(Integer.parseInt(price));
+        Utils.validateOvervalue(Integer.parseInt(price));
+        Utils.validateDividableByValue(Integer.parseInt(price));
+    }
+
+    public static void validateCountCommon(String count) throws Exception {
+        Utils.validateNumber(count);
+        Utils.validatePositiveNumber(Integer.parseInt(count));
+    }
 }
