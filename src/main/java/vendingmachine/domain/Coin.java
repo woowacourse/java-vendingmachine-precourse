@@ -32,6 +32,14 @@ public enum Coin {
 		return String.valueOf(amount);
 	}
 
+	public int calculateMaxCount(long money) {
+		return (int)money / amount;
+	}
+
+	public int multipleCount(int count) {
+		return amount * count;
+	}
+
 	private static int getRandomValidAmount(long money) {
 		int coinAmount;
 		do {

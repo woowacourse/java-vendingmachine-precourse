@@ -12,7 +12,11 @@ public class CoinModel {
 		changeCoins = new ChangeCoins(money);
 	}
 
-	public static ChangeCoins getChangeCoins() {
-		return changeCoins;
+	public static Map<Coin, Integer> getAllChangeCoins() {
+		return changeCoins.getCoins();
+	}
+
+	public static Map<Coin, Integer> exchangeCoinFromMoney(long money) {
+		return changeCoins.getChangeCoinsFromMoney(money);
 	}
 }

@@ -5,13 +5,23 @@ import vendingmachine.controller.InputMoneyController;
 import vendingmachine.controller.ProductController;
 
 public class Application {
+    private static InputMoneyController inputMoneyController;
+    private static ProductController productController;
+    private static CoinController coinController;
+
+    public static void initialize() {
+        inputMoneyController = new InputMoneyController();
+        productController = new ProductController();
+        coinController = new CoinController();
+    }
+
     public static void main(String[] args) {
-        InputMoneyController inputMoneyController = new InputMoneyController();
-        ProductController productController = new ProductController();
+        initialize();
         inputMoneyController.inputVendingMachineMoney();
-        new CoinController().makeChangeCoins();
+        coinController.makeChangeCoins();
         productController.inputProduct();
         inputMoneyController.inputUserMoney();
         productController.orderProductUntilValid();
+        coinController.displayChangeCoinViews();
     }
 }

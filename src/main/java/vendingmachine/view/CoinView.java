@@ -12,10 +12,13 @@ public class CoinView {
 		System.out.println(MESSAGE_PRINT_COINS);
 	}
 
-	public static void printCoins(ChangeCoins coins) {
-		Map<Coin, Integer> coinData = coins.getCoins();
+	public static void printCoins(Map<Coin, Integer> coinData) {
 		for (Map.Entry<Coin, Integer> entry : coinData.entrySet()) {
 			System.out.println(entry.getKey() + STRING_WON + STRING_DASH_WITH_SPACE + entry.getValue() + STRING_COUNT);
 		}
+	}
+
+	public static void messageChangeCoinView() {
+		System.out.println(MESSAGE_CHANGE);
 	}
 }
