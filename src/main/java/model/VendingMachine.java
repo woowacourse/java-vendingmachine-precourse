@@ -30,4 +30,11 @@ public class VendingMachine {
 	public int giveUserInsertMoney() {
 		return userInsertMoneyBox.bringMoney();
 	}
+
+	public boolean isAllProductsSoldOut() {
+		if (!vendingMachineProducts.hasAnyProduct()) {
+			return true;
+		}
+		return false;
+	}
 }

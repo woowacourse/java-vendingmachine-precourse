@@ -19,5 +19,8 @@ public class MachineController {
 		InputDisplay.askInputUserInsertMoney();
 		vendingMachine.makeUserInsertMoneyBox(InputController.inputUserInsertMoney());
 		OutputDisplay.showNowUserInsertMoney(vendingMachine.giveUserInsertMoney());
+		if(!vendingMachine.isAllProductsSoldOut()) {
+			System.out.println("상품남음");
+		}
 	}
 }

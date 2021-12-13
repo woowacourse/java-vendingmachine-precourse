@@ -29,4 +29,8 @@ public class VendingMachineProducts {
 			Integer.parseInt(productInformation.get(PRODUCT_PRICE_INDEX)),
 			Integer.parseInt(productInformation.get(PRODUCT_COUNT_INDEX)));
 	}
+
+	public boolean hasAnyProduct() {
+		return products.stream().filter(product -> !product.isSoldOut()).count() > 0;
+	}
 }

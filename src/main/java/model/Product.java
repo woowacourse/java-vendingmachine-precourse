@@ -10,4 +10,11 @@ public class Product {
 		this.price = price;
 		this.count = count;
 	}
+
+	public boolean isSoldOut() {
+		if (count == 0) {
+			return true;
+		}
+		return false;
+	}
 }
