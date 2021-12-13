@@ -11,7 +11,7 @@ public class CoinRepository {
 	// Singleton instance of CoinRepository class
 	public static CoinRepository instance = new CoinRepository();
 
-	private HashMap<String, Integer> coinRepository;
+	private final HashMap<String, Integer> coinRepository;
 
 	private CoinRepository() {
 		this.coinRepository = new HashMap<>();
