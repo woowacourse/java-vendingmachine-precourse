@@ -86,7 +86,7 @@ public class ProductTest {
 	@Test
 	void isProductQuantityNumberTest() {
 		//given
-		String userInput = "[콜라,20,천원]";
+		String userInput = "[콜라,200,천원]";
 
 		//when
 
@@ -100,7 +100,7 @@ public class ProductTest {
 	@Test
 	void isProductQuantityPositiveTest() {
 		//given
-		String userInput = "[콜라,20,-1]";
+		String userInput = "[콜라,200,-1]";
 
 		//when
 
@@ -127,5 +127,19 @@ public class ProductTest {
 			ProductException.isDuplicated(productList);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(PRODUCT_NAME_DUPLICATED);
+	}
+
+	@Test
+	void isProductPriceTest() {
+		//given
+		String userInput = "[콜라,10,1]";
+
+		//when
+
+		//then
+		assertThatThrownBy(() -> {
+			ProductException.isValidProduct(userInput);})
+			.isInstanceOf(IllegalArgumentException.class)
+			.hasMessageContaining(LESS_PRODUCT_PRICE);
 	}
 }

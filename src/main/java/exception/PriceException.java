@@ -38,4 +38,10 @@ public class PriceException {
 			throw new IllegalArgumentException(NOT_COIN_VALUE);
 		}
 	}
+
+	public static void isProductPrice(int price) {
+		if (price < MIN_PRODUCT_PRICE) {
+			throw new IllegalArgumentException(LESS_PRODUCT_PRICE);
+		}
+	}
 }

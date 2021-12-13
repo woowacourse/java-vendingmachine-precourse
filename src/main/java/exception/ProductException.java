@@ -58,6 +58,7 @@ public class ProductException {
 		try {
 			PriceException.isValidPrice(productPrice);
 			int price = Integer.parseInt(productPrice);
+			PriceException.isProductPrice(price);
 			return price;
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException(PRODUCT_PRICE_PREFIX + e.getMessage());

@@ -17,6 +17,7 @@ public class StringConstant {
 	public static final String PRODUCT_NOT_DIVIDED = "개별 상품은 세미콜론(;)으로 구분되어야 합니다.";
 	public static final String PRODUCT_DETAIL_UNMATCHED = "개별 상품은 상품명, 가격, 수량만 존재해야 합니다.";
 	public static final String PRODUCT_NAME_DUPLICATED = "동일한 상품을 등록 할 수 없습니다.";
+	public static final String LESS_PRODUCT_PRICE = "100원보다 작을 수 없습니다.";
 
 	public static final String COIN_ENUM_PREFIX = "COIN_";
 	public static final String PRICE_UNIT = "원";
