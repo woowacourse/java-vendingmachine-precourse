@@ -17,11 +17,18 @@ public class StringFormatValidator {
     }
 
     private static void validateMerchandiseInfoFormat(String merchandiseInfo) {
+        validateBracketFormat(merchandiseInfo);
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
         String name = infoList[0];
 
         validatePriceInput(infoList[1]);
         validateMerchandiseNumberInput(infoList[2]);
+    }
+
+    private static void validateBracketFormat(String merchandiseInfo) {
+        if (!merchandiseInfo.startsWith("[") || !merchandiseInfo.endsWith("]")) {
+            throw new IllegalArgumentException(NOT_SURROUNDED_BY_BRACKETS_EXCEPTION);
+        }
     }
 
     private static void validatePriceInput(String input) {
