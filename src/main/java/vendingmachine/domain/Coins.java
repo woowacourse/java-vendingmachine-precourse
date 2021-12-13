@@ -26,4 +26,10 @@ public class Coins {
 		}
 		return restCoins;
 	}
+
+	public void update(Map<Integer, Integer> reducedCoins) {
+		for (Integer coin : reducedCoins.keySet()) {
+			coins.put(coin, coins.get(coin) - reducedCoins.get(coin));
+		}
+	}
 }

@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import java.util.Map;
+
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
@@ -21,7 +23,7 @@ public class VendingMachineController {
 		sellItem(items, money);
 
 		OutputView.printMoney(money);
-		OutputView.printChanges(money.makeChanges(coins));
+		OutputView.printChanges(getChanges(coins, money));
 	}
 
 	private Money giveMoney() {
@@ -43,5 +45,11 @@ public class VendingMachineController {
 				OutputView.printError(e.getMessage());
 			}
 		}
+	}
+
+	private Map<Integer, Integer> getChanges(Coins coins, Money money) {
+		Map<Integer, Integer> changes = money.makeChanges(coins);
+		coins.update(changes);
+		return changes;
 	}
 }
