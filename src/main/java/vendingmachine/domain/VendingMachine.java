@@ -151,7 +151,7 @@ public class VendingMachine {
 		}
 
 		subtractProduct(selectedProduct);
-		subtractMoney(selectedProduct);
+		subtractMoney(selectedProduct.getPrice());
 	}
 
 	private Product getProduct(String name) {
@@ -188,9 +188,34 @@ public class VendingMachine {
 		products.put(product, products.get(product) - SUBTRACT_COUNT_OF_PRODUCT);
 	}
 
-	private void subtractMoney(Product product) {
-		this.money -= product.getPrice();
+	private void subtractMoney(int money) {
+		this.money -= money;
 	}
 
-	// 잔돈 정보 반환
+	public void returnChanges() {
+		Coin[] coins = Coin.values();
+
+		for (Coin coin : coins) {
+			int amount = Coin.getAmountOfCoin(coin);
+			int count = getReturnCountOfCoin(coin);
+
+			if (count == INITIAL_COIN) {
+				continue;
+			}
+			printCountOfCoins(amount, count);
+		}
+	}
+
+	private int getReturnCountOfCoin(Coin coin) {
+		int amount = Coin.getAmountOfCoin(coin);
+		int count = INITIAL_COIN;
+
+		if (money < amount) {
+			return count;
+		}
+		count = changes.get(coin);
+		subtractMoney(amount * count);
+
+		return count;
+	}
 }

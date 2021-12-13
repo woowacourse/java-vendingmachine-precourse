@@ -99,6 +99,7 @@ public class VendingMachineManagement {
 		vendingMachine.setMoney(money);
 
 		purchase(money);
+		returnChanges();
 	}
 
 	private void purchase(int money) {
@@ -110,7 +111,6 @@ public class VendingMachineManagement {
 
 			purchase(vendingMachine.getMoney());
 		}
-		// 잔돈 반환
 	}
 
 	private void noticeRemainMoney(int money) {
@@ -127,5 +127,7 @@ public class VendingMachineManagement {
 		printSelectProduct();
 	}
 
-	// 잔돈 반환
+	private void returnChanges() {
+		vendingMachine.returnChanges();
+	}
 }
