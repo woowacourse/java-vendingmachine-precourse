@@ -3,9 +3,7 @@ package vendingmachine.servicesource;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.utils.moneychecker.InsertMoneyChecker;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class WalletSystem {
     private int systemBalance;
@@ -78,6 +76,32 @@ public class WalletSystem {
         }
 
         return canBuy;
+    }
+
+    void returnChangeByRemainCoins(){
+        Coin[] coinTypes = Coin.getSortedCoinTypes();
+        HashMap<Coin, Integer> returnCoinsMap = new HashMap<>();
+
+        for(Coin currentCoinType : coinTypes){
+            int returnCoinNumber = getMaxReturnCoinNumber(currentCoinType);
+            returnCoinsMap.put(currentCoinType, returnCoinNumber);
+
+            remainCoinsMap.replace(currentCoinType, remainCoinsMap.get(currentCoinType) - returnCoinNumber);
+            insertedBalance -= currentCoinType.getAmount() * returnCoinNumber;
+        }
+
+        walletPrinter.printReturnedCoins(returnCoinsMap);
+    }
+
+    private int getMaxReturnCoinNumber(Coin coinType){
+        int needCoinNumber = insertedBalance / coinType.getAmount();
+        int remainCoinNumber = remainCoinsMap.get(coinType);
+
+        if(needCoinNumber >= remainCoinNumber){
+            return remainCoinNumber;
+        }
+
+        return needCoinNumber;
     }
 
     private void checkRemainBalance(int price){
