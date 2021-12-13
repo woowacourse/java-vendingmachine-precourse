@@ -9,43 +9,42 @@ import vendingmachine.model.user.UserMoney;
 import vendingmachine.util.Message;
 
 public class Input {
-    public MachineMoney inputMachineMoney() {
+
+    private Input() {
+    }
+
+    public static MachineMoney machineMoney() {
         try {
-            Output.printGuideMessage(Message.INPUT_MACHINE_MONEY_GUIDE);
+            Output.guideMessage(Message.INPUT_MACHINE_MONEY_GUIDE);
             return new MachineMoney(Console.readLine());
         } catch (IllegalArgumentException e) {
-            Output.printErrorMessage(e.getMessage());
-            return inputMachineMoney();
+            Output.errorMessage(e.getMessage());
+            return machineMoney();
         }
     }
 
-    public Drinks inputDrinks(DrinkMapper mapper) {
+    public static Drinks drinks(DrinkMapper mapper) {
         try {
-            Output.printGuideMessage(Message.INPUT_DRINKS_GUIDE);
+            Output.guideMessage(Message.INPUT_DRINKS_GUIDE);
             return new Drinks(Console.readLine(), mapper);
         } catch (IllegalArgumentException e) {
-            Output.printErrorMessage(e.getMessage());
-            return inputDrinks(mapper);
+            Output.errorMessage(e.getMessage());
+            return drinks(mapper);
         }
     }
 
-    public UserMoney inputUserMoney(Drinks drinks) {
+    public static UserMoney userMoney() {
         try {
-            Output.printGuideMessage(Message.INPUT_USER_MONEY_GUIDE);
-            return new UserMoney(Console.readLine(), drinks);
+            Output.guideMessage(Message.INPUT_USER_MONEY_GUIDE);
+            return new UserMoney(Console.readLine());
         } catch (IllegalArgumentException e) {
-            Output.printErrorMessage(e.getMessage());
-            return inputUserMoney(drinks);
+            Output.errorMessage(e.getMessage());
+            return userMoney();
         }
     }
 
-    public ChoiceDrink inputChoiceDrink(Drinks drinks) {
-        try {
-            Output.printGuideMessage(Message.INPUT_CHOICE_DRINK);
-            return new ChoiceDrink(Console.readLine(), drinks);
-        } catch (IllegalArgumentException e) {
-            Output.printErrorMessage(e.getMessage());
-            return inputChoiceDrink(drinks);
-        }
+    public static ChoiceDrink choiceDrink() {
+        Output.guideMessage(Message.INPUT_CHOICE_DRINK);
+        return new ChoiceDrink(Console.readLine());
     }
 }
