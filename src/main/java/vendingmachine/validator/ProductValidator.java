@@ -6,7 +6,6 @@ import java.util.List;
 
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Input;
-import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductRepository;
 
 import static vendingmachine.constant.Condition.INDEX_0;

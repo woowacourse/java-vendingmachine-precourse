@@ -1,11 +1,10 @@
 package vendingmachine.domain;
 
-import vendingmachine.constant.Condition;
-import vendingmachine.constant.Input;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import vendingmachine.constant.Condition;
 
 public class ProductRepository {
     private static final ProductRepository instance = new ProductRepository();
