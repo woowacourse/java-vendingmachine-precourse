@@ -24,6 +24,13 @@ public class VendingMachine {
 		return true;
 	}
 
+	public boolean isBuy(String productName) {
+		if (!products.contains(productName)) {
+			return false;
+		}
+		return true;
+	}
+
 	public Money getInsertMoney() {
 		return insertMoney;
 	}

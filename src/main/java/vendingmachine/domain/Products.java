@@ -48,4 +48,13 @@ public class Products {
 		}
 		return true;
 	}
+
+	public boolean contains(String productName) {
+		for (Product product : products) {
+			if (product.equals(productName)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }
