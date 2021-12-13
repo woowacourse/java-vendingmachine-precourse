@@ -1,7 +1,9 @@
-package vendingmachine.domain;
+package vendingmachine.repository;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import vendingmachine.domain.Coin;
 
 public class VendingMachineAccount {
 	private static final Map<Coin, Integer> coinCount = new HashMap<>();

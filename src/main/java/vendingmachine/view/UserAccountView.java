@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.domain.UserAccount;
+import vendingmachine.repository.UserAccount;
 
 public class UserAccountView {
 	private static final String INPUT_GUIDE_MESSAGE = "투입 금액을 입력해주세요.";

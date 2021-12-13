@@ -6,7 +6,7 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Catalog;
-import vendingmachine.domain.UserAccount;
+import vendingmachine.repository.UserAccount;
 import vendingmachine.repository.CatalogRepository;
 import vendingmachine.view.exception.ErrorMessage;
 

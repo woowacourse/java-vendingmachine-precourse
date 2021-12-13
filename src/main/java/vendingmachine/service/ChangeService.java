@@ -2,10 +2,10 @@ package vendingmachine.service;
 
 import java.util.Map;
 
-import vendingmachine.domain.Change;
+import vendingmachine.repository.Change;
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.UserAccount;
-import vendingmachine.domain.VendingMachineAccount;
+import vendingmachine.repository.UserAccount;
+import vendingmachine.repository.VendingMachineAccount;
 
 public class ChangeService {
 

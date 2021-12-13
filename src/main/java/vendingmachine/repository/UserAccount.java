@@ -1,4 +1,6 @@
-package vendingmachine.domain;
+package vendingmachine.repository;
+
+import vendingmachine.domain.Catalog;
 
 public class UserAccount {
 	private static int account;

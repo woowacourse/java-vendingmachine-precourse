@@ -3,7 +3,7 @@ package vendingmachine.service;
 import static vendingmachine.service.exception.InputExceptionService.*;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.UserAccount;
+import vendingmachine.repository.UserAccount;
 import vendingmachine.view.exception.ErrorMessage;
 
 public class UserAccountService {

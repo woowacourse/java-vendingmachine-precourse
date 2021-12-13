@@ -2,7 +2,7 @@ package vendingmachine.controller;
 
 import java.util.Map;
 
-import vendingmachine.domain.Change;
+import vendingmachine.repository.Change;
 import vendingmachine.domain.Coin;
 import vendingmachine.service.ChangeService;
 import vendingmachine.view.VendingMachineAccountView;

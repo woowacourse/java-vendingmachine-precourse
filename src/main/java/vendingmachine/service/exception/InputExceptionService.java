@@ -3,7 +3,7 @@ package vendingmachine.service.exception;
 import java.util.List;
 
 import vendingmachine.domain.Catalog;
-import vendingmachine.domain.UserAccount;
+import vendingmachine.repository.UserAccount;
 
 public class InputExceptionService {
 	private static final int MONEY_MINIMUM_UNIT = 10;

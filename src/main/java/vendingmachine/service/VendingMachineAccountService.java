@@ -6,7 +6,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.VendingMachineAccount;
+import vendingmachine.repository.VendingMachineAccount;
 import vendingmachine.service.exception.InputExceptionService;
 import vendingmachine.view.exception.ErrorMessage;
 

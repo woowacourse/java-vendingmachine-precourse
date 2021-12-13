@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.VendingMachineAccount;
+import vendingmachine.repository.VendingMachineAccount;
 import vendingmachine.service.VendingMachineAccountService;
 import vendingmachine.view.VendingMachineAccountView;
 
