@@ -2,9 +2,10 @@ package vendingmachine.domain;
 
 import java.util.HashMap;
 
+import vendingmachine.utils.ErrorMessage;
+
 public class ProductRepository {
 	private final static int NUMBER_OF_NO_PRODUCT = 0;
-	private final static String INVALID_PRODUCT_MESSAGE = "해당 상품이 존재하지 않습니다.";
 
 	private final HashMap<Product, Integer> productHashMap = new HashMap<>();
 
@@ -35,6 +36,6 @@ public class ProductRepository {
 		return productHashMap.keySet().stream()
 			.filter(product -> product.isSame(productName))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_MESSAGE));
+			.orElseThrow(() -> new IllegalArgumentException(ErrorMessage.INVALID_PRODUCT_MESSAGE));
 	}
 }
