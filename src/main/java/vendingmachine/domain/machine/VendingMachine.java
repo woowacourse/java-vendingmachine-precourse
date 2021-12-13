@@ -1,4 +1,8 @@
-package vendingmachine.domain;
+package vendingmachine.domain.machine;
+
+import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
 
 public class VendingMachine {
 	private Coins coins;

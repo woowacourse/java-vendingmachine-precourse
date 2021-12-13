@@ -1,6 +1,8 @@
-package vendingmachine.domain;
+package vendingmachine.domain.product;
 
 import java.util.Objects;
+
+import vendingmachine.domain.machine.Balance;
 
 public class Product {
 	private static final int NAME_INDEX = 0;

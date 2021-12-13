@@ -1,4 +1,6 @@
-package vendingmachine.domain;
+package vendingmachine.domain.product;
+
+import vendingmachine.domain.machine.Balance;
 
 public class Price {
 	private static final int PRICE_ZERO = 0;

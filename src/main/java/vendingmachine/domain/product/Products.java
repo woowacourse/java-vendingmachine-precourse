@@ -1,9 +1,11 @@
-package vendingmachine.domain;
+package vendingmachine.domain.product;
 
 import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+
+import vendingmachine.domain.machine.Balance;
 
 public class Products {
 	private static final String ERROR_PRODUCTS_DUPLICATED = "상품 구성에 중복되는 상품이 있습니다.";

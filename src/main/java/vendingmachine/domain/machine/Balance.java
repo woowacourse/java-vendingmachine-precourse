@@ -1,4 +1,6 @@
-package vendingmachine.domain;
+package vendingmachine.domain.machine;
+
+import vendingmachine.domain.product.Price;
 
 public class Balance {
 	private static final int BALANCE_MINIMUM = 100;

@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.product;
 
 public class Quantity {
 	private static final int QUANTITY_ZERO = 0;
