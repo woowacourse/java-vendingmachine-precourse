@@ -17,4 +17,9 @@ public class InputView {
 		System.out.println(INPUT_PRODUCTS_MESSAGE);
 		return Console.readLine();
 	}
+
+	public static String inputAmount() {
+		System.out.println(INPUT_AMOUNT_MESSAGE);
+		return Console.readLine();
+	}
 }
