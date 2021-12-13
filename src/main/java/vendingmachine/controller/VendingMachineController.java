@@ -6,6 +6,8 @@ import vendingmachine.service.MachineCoinService;
 import vendingmachine.service.ProductService;
 
 import static vendingmachine.repository.BuyService.sellProduct;
+import static vendingmachine.service.ChangeService.getCurrentChange;
+import static vendingmachine.service.ChangeService.getFinalChange;
 import static vendingmachine.view.InputViews.inputOrderMessage;
 import static vendingmachine.view.OutputViews.*;
 
@@ -45,6 +47,7 @@ public class VendingMachineController {
             sellProduct(getUserOrder(currentChange));
             currentChange = ChangeService.getCurrentChange();
         }
+        printFinalChange(getFinalChange(), getCurrentChange());
     }
 
     private boolean isAvailableKeepSell(int change) {

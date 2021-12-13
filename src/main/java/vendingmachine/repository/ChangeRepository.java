@@ -11,7 +11,7 @@ public class ChangeRepository {
         ChangeRepository.change = change;
     }
 
-    public static void subtractChange(int productPrice) {
-        change -= productPrice;
+    public static void subtractChange(int price) {
+        change -= price;
     }
 }
