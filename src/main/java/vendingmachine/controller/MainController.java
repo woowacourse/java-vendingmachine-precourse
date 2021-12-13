@@ -11,7 +11,7 @@ public class MainController {
     VendingMachine vendingMachine = new VendingMachine();
 
     public void run() {
-        vendingMachine.generateRandomCoin(InputView.inputVendingMachineMoney());
+        processOfGeneratingCoins();
         OutputView.printCoinByVendingMachine(vendingMachine.getCoin());
         InputController.makeProductsList(vendingMachine);
         vendingMachine.insertMoney(new Money(InputView.inputMoney()));
@@ -23,6 +23,14 @@ public class MainController {
         changes.makeChanges(vendingMachine.getCoin(), vendingMachine.getMoney());
 
         OutputView.printChanges(changes.getChanges());
+    }
 
+    private void processOfGeneratingCoins() {
+        try {
+            vendingMachine.generateCoins(InputView.inputVendingMachineMoney());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            processOfGeneratingCoins();
+        }
     }
 }

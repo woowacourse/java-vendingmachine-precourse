@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.utils.Exception;
+import vendingmachine.utils.NumberValidator;
 import vendingmachine.view.OutputView;
 
 import java.util.ArrayList;
@@ -13,11 +15,16 @@ public class VendingMachine {
     private List<Product> products = new ArrayList<>();
     private Money money;
 
-    public void generateRandomCoin(String inputMoney) {
+    public void generateCoins(String inputMoney) {
+        validateVendingMachineMoney(inputMoney);
+        generateRandomCoin(inputMoney);
+    }
+
+    private void generateRandomCoin(String inputMoney) {
         int money = Integer.parseInt(inputMoney);
         initCoinTable();
         while (money > 0) {
-            int randomNum = Randoms.pickNumberInList(new ArrayList<>(coinTable.keySet()));
+            int randomNum = Randoms.pickNumberInList(new ArrayList<Integer>(coinTable.keySet()));
             if (randomNum <= money) {
                 coinTable.put(randomNum, coinTable.get(randomNum) + 1);
                 money -= randomNum;
@@ -70,4 +77,12 @@ public class VendingMachine {
         return false;
     }
 
+    private void validateVendingMachineMoney(String price) {
+        if (!NumberValidator.validateNumber(price)) {
+            throw new IllegalArgumentException(Exception.NUMBER_EXCEPTION_MESSAGE);
+        }
+        if (!NumberValidator.checkDivideTen(price)) {
+            throw new IllegalArgumentException(Exception.NUMBER_DIVIDE_TEM_EXCEPTION_MESSAGE);
+        }
+    }
 }
