@@ -26,9 +26,9 @@ public class ItemInformationInputView implements InputView {
 
 	public String checkAllConditions(String nowInput) {
 		try {
+			Validator.validateItemConditions(nowInput, FIRST_DELIMITER, ITEM_START_PAREN, ITEM_END_PAREN);
 			ArrayList<String[]> parsedItem = generateDoubleSplit(nowInput);
-			Validator.validateItemSize(parsedItem);
-			Validator.validateElementCondition(parsedItem);
+			Validator.validateElementConditions(parsedItem);
 			return nowInput;
 		} catch (IllegalArgumentException error) {
 			System.out.print(error.getMessage());
