@@ -89,3 +89,144 @@
     * 출력 형식은 다음과 같다.
         * 잔돈
         * [$동전금액]원 - [$동전개수]개
+
+---
+
+## 클래스 명세
+
+### MainController
+
+- start() : 자판기 시작
+
+### InitController
+
+- initVendingMachine() : 자판기 보유금액, 상품, 투입금액 초기화 함수 호출
+- initHoldingCoins() : 자판기 보유금액 초기화
+- initProducts() : 상품정보 초기화
+- initInputAmount() : 투입금액 초기화
+
+### PurchaseController
+
+- startPurchasing() : 상품구매가 불가능해질 때까지 상품 구매 반복
+- purchase() : 상품 구매
+
+### ChangeController
+
+- returnChange() : 잔돈 돌려주기
+
+### InitHoldingCoinsService
+
+- setHoldingCoins() : 자판기 보유 동전 설정
+- addPickedCoin : 선택된 동전 자판기 보유동전에 추가
+- pickRandomCoin : 랜덤으로 동전 선택
+
+### InitProductListService
+
+- setProducts() : 자판기 상품 설정
+- parseProductInfo() : 입력된 자판기 상품 정보 파싱
+
+### InitInputAmountService
+
+- setInputAmount() : 투입금액 설정
+
+### PurchaseService
+
+- purchase() : 상품 구매 진행
+- isAvailable() : 구매 가능한 상황인지 확인
+
+### ChangeService
+
+- calculateChange() : 잔돈 계산
+
+### CommonValidation : 공통 검증부분
+
+- isExist() : null 혹은 빈값을 입력했는지 확인
+- isInteger() : 정수인지 확인
+- isMoreThanNum() : 해당값보다 더 큰지 확인
+- isDividedByNum() : 해당값으로 나누어 떨어지는지 확인
+
+### HoldingAmountValidation : 자판기 보유금액 검증
+
+- isValidHoldingAmount() : 잘못된 입력으로 확인된 경우 예외발생
+- checkBasic() : 존재하는지, 정수인지 확인
+- checkCondition() : 자판기 보유금액의 최솟값보다 큰지, 10으로 나누어 떨어지는지 확인
+
+### InputAmountValidation : 투입금액 검증
+
+- isValidInputAmount() : 잘못된 입력으로 확인된 경우 예외발생
+- checkBasic() : 존재하는지, 정수인지 확인
+- checkCondition() : 투입금액의 최솟값보다 큰지 확인
+
+### ProductValidation : 상품정보 검증
+
+- isValidProductFormat() : 잘못된 입력으로 확인된 경우 예외발생
+- checkArrayFormat() : 올바른 입력 형식인지 확인
+- checkVariables() : 모든 입력값이 존재하는지 확인
+- isValidProductInfo() : 이름,가격,수량 확인
+- checkName() : 자판기에 이미 존재하는 상품의 이름과 중복되는지 확인
+- checkCost() : 10 이상이며 10으로 나누어떨어지는 정수인지 확인
+- checkCount() : 0이상의 정수인지 확인
+
+### ProductToPurchaseValidation : 구매하려는 상품 검증
+
+- isValid() : 잘못된 입력으로 확인된 경우 예외발생
+- isExistProduct() : 자판기에 존재하는 상품인지 확인
+- isRemainingProduct() : 남은 수량이 1이상인지 확인
+- canPurchaseWithThat() : 현재 남아있는 투입 금액으로 구매할 수 있는지 확인
+
+### InputAmount
+
+- int inputAmount : 투입금액
+- inputMoney() : 금액 투입
+- takeMoney() : 상품 구매하여 투입금액 감소
+- isMoreThanNum() : 해당금액보다 더 큰지 확인
+- calculateMaxNumber() : 투입금액을 해당동전으로 돌려주기위해 필요한 최대 개수 계산
+- printInputAmount() : 투입금액 출력을 위한 양식으로 변환
+
+### Product
+
+- String name : 이름
+- int cost : 가격
+- int count : 수량
+- Product() : 생성자
+- isSameName() : 해당이름과 같은 이름인지 확인
+- isRemain() : 수량이 1이상인지 확인
+- canPurchase() : 현재 남은 투입금액으로 구매 가능한 상품인지 확인
+- purchase()  : 구매
+
+### Coins
+
+- Map<Coin, Integer> holdingCoins : 자판기가 보유하고 있는 동전
+- Map<Coin, Integer> change : 잔돈
+- addToHoldingCoins() : 자판기가 보유하고 있는 동전에 동전 추가
+- addToChange() : 잔돈에 동전 추가
+- calculateNumberOfCoin() : 잔돈으로 돌려주기 위해 필요한 동전개수 계산
+- printHoldingCoins() : 자판기가 보유하고 있는 동전 출력을 위한 양식으로 변환
+- printChange() : 잔돈 출력을 위한 양식으로 변환
+- printCoins() : 전체 동전 출력을 위한 양식으로 변환
+- printCoin() : 동전 하나하나의 출력을 위한 양식으로 변환
+
+### VendingMachine
+
+- List<Product> products : 자판기에 존재하는 상품들의 정보
+- addProduct() : 자판기에 상품 추가
+- clearList() : 자판기 상품 모두 삭제
+- findProductByName() : 이름을 이용하여 상품 찾기
+- isAnyThingToPurchase() : 구매 가능한 상품이 존재하는지 확인
+- findAndPurchase() : 상품이름을 이용하여 상품 구매
+
+### DomainConstant
+
+- Domain과 관련된 상수
+
+### ErrorConstant
+
+- 에러출력을 위한 상수
+
+### InputConstant
+
+- 입력값을 받기 위한 상수
+
+### OutputConstant
+
+- 출력을 위한 상수
