@@ -3,6 +3,7 @@ package vendingmachine.service;
 import vendingmachine.view.InputView;
 
 import static vendingmachine.constants.SystemConstants.NO_CUSTOMER_MONEY_LEFT;
+import static vendingmachine.validator.NumberInputValidator.validateMoneyInput;
 
 public class CustomerMoneyService {
 
@@ -13,10 +14,21 @@ public class CustomerMoneyService {
     }
 
     public void initializeCustomerMoneyLeft() {
-        this.customerMoneyLeft = InputView.getCustomerMoneyInput();
+        this.customerMoneyLeft = this.getCustomerMoneyInput();
     }
 
     public void decreaseCustomerMoneyLeft(int moneySpent) {
         this.customerMoneyLeft -= moneySpent;
+    }
+
+    public int getCustomerMoneyInput() {
+        try {
+            String input = InputView.requestCustomerMoneyInput();
+            validateMoneyInput(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getCustomerMoneyInput();
+        }
     }
 }
