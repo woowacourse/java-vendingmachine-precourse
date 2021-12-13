@@ -17,6 +17,16 @@ public class MachineCore {
     private final ProductValidator productValidator = new ProductValidator();
 
     public void startMachine() {
+        prepareMachin();
+        runMachine();
+    }
+
+    private void runMachine() {
+        readInputMoneyFromUser();
+
+    }
+
+    private void prepareMachin() {
         readMachineAssetFromUser();
         printCoinBoxStatus();
         readProductTableFromUser();
@@ -46,6 +56,7 @@ public class MachineCore {
                 view.printError();
             }
         }
+        view.printBlankLine();
     }
 
     private void printCoinBoxStatus() {
@@ -54,9 +65,23 @@ public class MachineCore {
         for (Coin coin : Coin.values()) {
             view.printCoinStatus(coin.getAmount(), coinBox.getCoinCount(coin));
         }
+        view.printBlankLine();
     }
 
     private ProductTable splitProductInfo(String userInput) {
         return productValidator.checkStringOfProductTable(userInput);
+    }
+
+    private void readInputMoneyFromUser() {
+        while (true) {
+            try {
+                String input = view.askQuestion(InputData.ASK_INPUT_MONEY);
+                machine.setInputMoney(consoleValidator.checkNumeric(input));
+                break;
+            } catch (IllegalArgumentException exception) {
+                view.printError();
+            }
+        }
+        view.printBlankLine();
     }
 }

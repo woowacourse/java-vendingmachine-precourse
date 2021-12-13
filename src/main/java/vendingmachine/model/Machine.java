@@ -9,6 +9,7 @@ public class Machine {
     private ProductTable productTable;
 
     private int asset;
+    private int inputMoney;
 
     public Machine() {
     }
@@ -25,5 +26,19 @@ public class Machine {
 
     public CoinBox getCoinBox() {
         return coinBox;
+    }
+
+    public int getInputMoney() {
+        return inputMoney;
+    }
+
+    public void setInputMoney(int inputMoney) {
+        validator.checkAsset(inputMoney);
+        this.inputMoney = inputMoney;
+    }
+
+    public void addInputMoney(int inputMoney) {
+        validator.checkAsset(inputMoney);
+        this.inputMoney += inputMoney;
     }
 }
