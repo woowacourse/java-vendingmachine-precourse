@@ -34,7 +34,7 @@ public class ProductContainer {
 
     public boolean isAllSoldOut() {
         return productMap.values().stream()
-                                    .filter(product -> product.getStockQuantity() != 0)
+                                    .filter(product -> !product.isSoldOut())
                                     .collect(Collectors.toList())
                                     .isEmpty();
     }
