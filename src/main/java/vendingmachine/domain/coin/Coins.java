@@ -17,11 +17,11 @@ public class Coins {
 		this.coins = coins;
 	}
 
-	public Coins from(int coinsAmount) {
+	public static Coins from(int coinsAmount) {
 		return new Coins(generateRandomCoins(coinsAmount));
 	}
 
-	private Map<Coin, Integer> generateRandomCoins(int inputCoinsAmount) {
+	private static Map<Coin, Integer> generateRandomCoins(int inputCoinsAmount) {
 		final List<Integer> coinsType = Coin.getCoinsAmount();
 		Map<Coin, Integer> randomCoins = initRandomCoins();
 
@@ -38,7 +38,7 @@ public class Coins {
 		return randomCoins;
 	}
 
-	private Map<Coin, Integer> initRandomCoins() {
+	private static Map<Coin, Integer> initRandomCoins() {
 		Map<Coin, Integer> initCoins = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			initCoins.put(coin, COIN_DEFAULT_QUANTITY);
