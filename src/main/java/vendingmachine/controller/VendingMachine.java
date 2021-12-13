@@ -9,8 +9,7 @@ import vendingmachine.domain.vendingMachine.Amount;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Map;
 
 public class VendingMachine {
     private Amount amount;
@@ -49,7 +48,8 @@ public class VendingMachine {
     public void inputAmount() {
         setAmount();
         CoinGenerator coinGenerator = new CoinGenerator();
-        List<Integer> coinCombination = coinGenerator.generate(amount.getAmount());
+        Map<Coin, Integer> coinCombination = coinGenerator.
+                generate(amount.getAmount());
         OutputView.printCoinCount(coinCombination);
     }
 

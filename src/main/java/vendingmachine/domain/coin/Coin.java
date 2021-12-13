@@ -36,6 +36,10 @@ public enum Coin {
         return Stream.of(Coin.values());
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public String toString() {
         return name;

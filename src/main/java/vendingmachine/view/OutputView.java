@@ -4,18 +4,15 @@ import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
 
-import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.Map;
 
 public class OutputView {
 
-    public static void printCoinCount(List<Integer> coinCombination) {
-        AtomicInteger index = new AtomicInteger();
-        Coin.stream()
-                .forEach(coin -> {
-                    System.out.println(coin.toString() + " - " + coinCombination.get(index.get()) + "개");
-                    index.addAndGet(1);
-                });
+    public static void printCoinCount(Map<Coin, Integer> coinCombination) {
+        coinCombination.forEach(
+                (coin, count) -> System.out.println(coin + " - " + count + "개")
+        );
+
     }
 
     public static void printProducts(Products products) {
