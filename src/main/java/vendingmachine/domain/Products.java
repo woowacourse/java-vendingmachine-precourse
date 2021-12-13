@@ -25,6 +25,7 @@ public class Products {
 	}
 
 	public void save() {
+		validateNotRegisteredProduct();
 		products.forEach(ProductRepository::save);
 	}
 
@@ -55,6 +56,12 @@ public class Products {
 			if (count != NO_DUPLICATE_CASE) {
 				throw new IllegalArgumentException(PRODUCT_DUPLICATE_NAME_ERROR_MESSAGE.get());
 			}
+		}
+	}
+
+	private void validateNotRegisteredProduct() {
+		if (products.stream().anyMatch(ProductRepository::contains)) {
+			throw new IllegalArgumentException(PRODUCT_ALREADY_REGISTERED_ERROR_MESSAGE.get());
 		}
 	}
 }

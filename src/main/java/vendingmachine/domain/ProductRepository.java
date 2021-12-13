@@ -19,6 +19,11 @@ public class ProductRepository {
 			.orElseThrow(() -> new IllegalArgumentException(NO_SAME_NAME_PRODUCT_ERROR_MESSAGE.get()));
 	}
 
+	public static boolean contains(Product checkProduct) {
+		return products.stream()
+			.anyMatch(product -> product.isSameName(checkProduct));
+	}
+
 	public static boolean canSell() {
 		return products.stream()
 			.anyMatch(Product::canSell);
