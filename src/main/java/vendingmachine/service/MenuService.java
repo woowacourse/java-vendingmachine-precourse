@@ -12,8 +12,8 @@ public class MenuService {
 
     private Menu menu;
 
-    public void setMenu(Menu menu) {
-        this.menu = menu;
+    public void initializeMenu() {
+        this.menu = InputView.getMenuInput();
     }
 
     public Merchandise selectAvailableMerchandise() {

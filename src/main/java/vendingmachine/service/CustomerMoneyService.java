@@ -1,5 +1,7 @@
 package vendingmachine.service;
 
+import vendingmachine.view.InputView;
+
 import static vendingmachine.constants.SystemConstants.NO_CUSTOMER_MONEY_LEFT;
 
 public class CustomerMoneyService {
@@ -10,8 +12,8 @@ public class CustomerMoneyService {
         return customerMoneyLeft;
     }
 
-    public void setCustomerMoneyLeft(int moneyInput) {
-        this.customerMoneyLeft = moneyInput;
+    public void initializeCustomerMoneyLeft() {
+        this.customerMoneyLeft = InputView.getCustomerMoneyInput();
     }
 
     public void decreaseCustomerMoneyLeft(int moneySpent) {

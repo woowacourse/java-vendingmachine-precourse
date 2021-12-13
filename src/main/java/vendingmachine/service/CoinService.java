@@ -2,6 +2,7 @@ package vendingmachine.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
+import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.HashMap;
@@ -17,11 +18,11 @@ public class CoinService {
         return coins;
     }
 
-    public void initializeCoins(int totalMoney) {
+    public void initializeCoins() {
         for (Coin coin : Coin.values()) {
             this.coins.put(coin, ZERO_COINS);
         }
-        generateCoins(totalMoney);
+        generateCoins(InputView.getInitialMoneyInput());
 
         OutputView.printCoinsInfo(this.coins);
     }

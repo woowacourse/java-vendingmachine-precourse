@@ -1,26 +1,26 @@
-package vendingmachine.domain;
+package vendingmachine.controller;
 
 import static vendingmachine.constants.SystemConstants.*;
 
+import vendingmachine.domain.Merchandise;
 import vendingmachine.domain.enums.Coin;
 import vendingmachine.service.CoinService;
 import vendingmachine.service.CustomerMoneyService;
 import vendingmachine.service.MenuService;
-import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.HashMap;
 
-public class VendingMachine {
+public class VendingMachineController {
 
     private final CoinService coinService = new CoinService();
     private final MenuService menuService = new MenuService();
     private final CustomerMoneyService customerMoneyService = new CustomerMoneyService();
 
-    public VendingMachine() {
-        coinService.initializeCoins(InputView.getInitialMoneyInput());
-        menuService.setMenu(InputView.getMenuInput());
-        customerMoneyService.setCustomerMoneyLeft(InputView.getCustomerMoneyInput());
+    public VendingMachineController() {
+        coinService.initializeCoins();
+        menuService.initializeMenu();
+        customerMoneyService.initializeCustomerMoneyLeft();
     }
 
     public void run() {
