@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import vendingmachine.InputValidator;
+import vendingmachine.utils.InputValidator;
 import vendingmachine.domain.Customer;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;

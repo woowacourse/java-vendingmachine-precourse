@@ -47,6 +47,6 @@ public class CoinBox {
 	}
 
 	private int pickRandomCoinAmount(int amountLimit) {
-		return Randoms.pickNumberInList(Coin.getAmountList(amountLimit));
+		return Randoms.pickNumberInList(Coin.toListWithLimit(amountLimit));
 	}
 }

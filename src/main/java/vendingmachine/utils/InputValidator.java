@@ -1,8 +1,6 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 import java.util.regex.Pattern;
-
-import vendingmachine.utils.ErrorMessage;
 
 public class InputValidator {
 	private static final String SPLITTER_OF_PRODUCT = ";";
@@ -55,7 +53,7 @@ public class InputValidator {
 
 	public static void checkIsValidInputAmountInput(String inputAmount) {
 		for (int i = 0; i < inputAmount.length(); i++) {
-			if(!Character.isDigit(inputAmount.charAt(i))) {
+			if (!Character.isDigit(inputAmount.charAt(i))) {
 				throw new IllegalArgumentException(ErrorMessage.INVALID_TYPE_OF_INPUT_AMOUNT_MESSAGE);
 			}
 		}

@@ -22,7 +22,7 @@ public enum Coin {
 		return amount;
 	}
 
-	public static List<Integer> getAmountList(int amountLimit) {
+	public static List<Integer> toListWithLimit(int amountLimit) {
 		return Arrays.asList(Coin.values()).stream()
 			.map(Coin::getAmount)
 			.filter(amount -> amount <= amountLimit)

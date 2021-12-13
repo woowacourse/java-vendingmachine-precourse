@@ -8,23 +8,23 @@ public class VendingMachine {
 	private static final int PRODUCT_COST_INDEX = 1;
 	private static final int NUMBER_OF_PRODUCT_INDEX = 2;
 
-	private final ProductRepository productRepository = new ProductRepository();
+	private final ProductRepository productStorage = new ProductRepository();
 	private CoinBox coinBox;
 
 	public List<String> getChangeInfoListForCustomer(int changeAmount) {
 		return coinBox.getChangeInfoListForCustomer(changeAmount);
 	}
 
-	public void sellProduct(String productName) {
-		productRepository.sellProduct(productName);
+	public void setHoldingAmount(int amount) {
+		coinBox = new CoinBox(amount);
+	}
+
+	public List<String> getHoldingCoinInfoList() {
+		return coinBox.getCoinInfoList();
 	}
 
 	public int getProductCost(String productName) {
-		return productRepository.getProductCost(productName);
-	}
-
-	public boolean canTrade(int money) {
-		return productRepository.canSellProduct(money);
+		return productStorage.getProductCost(productName);
 	}
 
 	public void addProducts(List<String> productList) {
@@ -33,15 +33,17 @@ public class VendingMachine {
 			String productName = info[PRODUCT_NAME_INDEX];
 			int productCost = Integer.parseInt(info[PRODUCT_COST_INDEX]);
 			int numberOfProduct = Integer.parseInt(info[NUMBER_OF_PRODUCT_INDEX]);
-			productRepository.addProduct(new Product(productName, productCost), numberOfProduct);
+			productStorage.addProduct(new Product(productName, productCost), numberOfProduct);
 		});
 	}
 
-	public List<String> getHoldingCoinInfoList() {
-		return coinBox.getCoinInfoList();
+	public void sellProduct(String productName) {
+		productStorage.sellProduct(productName);
 	}
 
-	public void setHoldingAmount(int amount) {
-		coinBox = new CoinBox(amount);
+	public boolean canTrade(int money) {
+		return productStorage.canSellProduct(money);
 	}
+
+
 }
