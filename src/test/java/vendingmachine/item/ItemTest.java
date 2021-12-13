@@ -15,5 +15,4 @@ class ItemTest {
         assertThat(itemPrice).isGreaterThan(lessAmountThanItemPrice);
         assertThat(item.isMoreExpensiveThanMoneyLeft(lessAmountThanItemPrice)).isTrue();
     }
-
 }

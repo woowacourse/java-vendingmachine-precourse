@@ -20,7 +20,6 @@ class ItemsInventoryRequestTest {
 
         List<ItemInventoryInfo> itemsInventoryInfo = new ItemsInventoryRequest(input).toItemsInventoryInfo().getInfo();
 
-        assertThat(itemsInventoryInfo.size()).isEqualTo(1);
         for (ItemInventoryInfo itemInventoryInfo : itemsInventoryInfo) {
             assertThat(itemInventoryInfo.getQuantity()).isEqualTo(quantity);
             assertThat(itemInventoryInfo.getItemInfo().getName()).isEqualTo(name);
@@ -40,7 +39,6 @@ class ItemsInventoryRequestTest {
 
         List<ItemInventoryInfo> itemsInventoryInfo = new ItemsInventoryRequest(input).toItemsInventoryInfo().getInfo();
 
-        assertThat(itemsInventoryInfo.size()).isEqualTo(2);
         assertThat(itemsInventoryInfo.stream()).anyMatch(itemInventoryInfo -> itemInventoryInfo.getQuantity() == item1Quantity && itemInventoryInfo.getItemInfo().getName().equals(item1Name) && itemInventoryInfo.getItemInfo().getPrice() == item1Price);
         assertThat(itemsInventoryInfo.stream()).anyMatch(itemInventoryInfo -> itemInventoryInfo.getQuantity() == item2Quantity && itemInventoryInfo.getItemInfo().getName().equals(item2Name) && itemInventoryInfo.getItemInfo().getPrice() == item2Price);
     }

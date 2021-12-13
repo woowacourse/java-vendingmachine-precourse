@@ -1,6 +1,7 @@
 package vendingmachine.dto.request.iteminventory;
 
-import static vendingmachine.StringConstants.*;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_QUANTITY_INPUT;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -66,7 +67,7 @@ public class ItemInventoryRequest {
     }
 
     private void validateNoEmptyInfo() {
-        if(input.length() <= LENGTH_OF_OPENING_BRACKET + LENGTH_OF_CLOSING_BRACKET) {
+        if (input.length() <= LENGTH_OF_OPENING_BRACKET + LENGTH_OF_CLOSING_BRACKET) {
             throw new IllegalArgumentException();
         }
     }

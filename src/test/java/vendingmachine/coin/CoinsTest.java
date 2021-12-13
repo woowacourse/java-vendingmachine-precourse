@@ -1,7 +1,6 @@
 package vendingmachine.coin;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
@@ -30,18 +29,24 @@ class CoinsTest {
     void Coins끼리의_뺄셈_가능() {
         Coins coins = new Coins();
         coins.add(Coin.COIN_100, 2);
-        coins.add(Coin.COIN_50, 3);
         Coins coinsToTake = new Coins();
         coinsToTake.add(Coin.COIN_100, 1);
-        coinsToTake.add(Coin.COIN_50, 3);
-        coinsToTake.add(Coin.COIN_10, 2);
+
         coins.take(coinsToTake);
-        assertAll(
-                () -> assertThat(coins.count(Coin.COIN_500)).isEqualTo(0),
-                () -> assertThat(coins.count(Coin.COIN_100)).isEqualTo(1),
-                () -> assertThat(coins.count(Coin.COIN_50)).isEqualTo(0),
-                () -> assertThat(coins.count(Coin.COIN_10)).isEqualTo(0)
-        );
+
+        assertThat(coins.count(Coin.COIN_100)).isEqualTo(1);
+    }
+
+    @Test
+    void 빼는_동전이_더_많은_경우_동전의_수를_0으로_변경() {
+        Coins coins = new Coins();
+        coins.add(Coin.COIN_100, 2);
+        Coins coinsToTake = new Coins();
+        coinsToTake.add(Coin.COIN_100, 3);
+
+        coins.take(coinsToTake);
+
+        assertThat(coins.count(Coin.COIN_100)).isEqualTo(0);
     }
 
     @Test

@@ -24,7 +24,7 @@ public class Coins {
     }
 
     public void take(Coins coinsToTake) {
-        for (Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
+        for (Coin coinUnit : Coin.getAlCoinUnitsFromLargestToSmallest()) {
             int numberOfCoin = this.count(coinUnit);
             int numberToTake = coinsToTake.count(coinUnit);
             if (numberOfCoin >= numberToTake) {
@@ -36,7 +36,7 @@ public class Coins {
     }
 
     public boolean hasSmallerOrEqualAmount(int amountToCompare) {
-        if(getAmount() <= amountToCompare) {
+        if (getAmount() <= amountToCompare) {
             return true;
         }
         return false;
@@ -44,7 +44,7 @@ public class Coins {
 
     public int getAmount() {
         int totalAmount = 0;
-        for (Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
+        for (Coin coinUnit : Coin.getAlCoinUnitsFromLargestToSmallest()) {
             totalAmount += coinUnit.getAmount(this.count(coinUnit));
         }
         return totalAmount;

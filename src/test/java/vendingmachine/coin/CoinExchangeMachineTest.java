@@ -1,6 +1,7 @@
 package vendingmachine.coin;
 
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+
 import org.junit.jupiter.api.Test;
 
 class CoinExchangeMachineTest {
@@ -9,12 +10,8 @@ class CoinExchangeMachineTest {
     void 입력과_같은_금액을_동전으로_반환() {
         int amountToChange = 1000;
         CoinExchangeMachine coinExchangeMachine = new CoinExchangeMachine();
-        Coins change = coinExchangeMachine.changeIntoCoins(amountToChange);
+        Coins coins = coinExchangeMachine.changeIntoCoins(amountToChange);
 
-        int resultAmount = 0;
-        for (Coin unit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
-            resultAmount += unit.getAmount(change.count(unit));
-        }
-        Assertions.assertThat(resultAmount).isEqualTo(amountToChange);
+        assertThat(coins.getAmount()).isEqualTo(amountToChange);
     }
 }

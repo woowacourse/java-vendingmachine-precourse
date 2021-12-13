@@ -1,7 +1,6 @@
 package vendingmachine;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertAll;
 
 import org.junit.jupiter.api.Test;
 
@@ -37,8 +36,8 @@ class ChangeAccountantTest {
         Coins change = changeAccountant.change(amountToChange, coins);
 
         assertThat(amountToChange).isGreaterThan(coins.getAmount());
-        for(Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
+        for (Coin coinUnit : Coin.getAlCoinUnitsFromLargestToSmallest()) {
             assertThat(change.count(coinUnit)).isEqualTo(coins.count(coinUnit));
-        };
+        }
     }
 }
