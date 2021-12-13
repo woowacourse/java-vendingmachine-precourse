@@ -8,6 +8,7 @@ import java.util.Map;
 
 import static vendingmachine.repository.ProductRepository.*;
 import static vendingmachine.service.Validator.*;
+import static vendingmachine.view.OutputViews.printErrorMessage;
 
 public class ProductService {
     public static final String PRODUCT_OUTER_SEPORATOR = ";";
@@ -23,7 +24,7 @@ public class ProductService {
                 parseProduct(input);
                 return;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                printErrorMessage(e);
             }
         }
     }

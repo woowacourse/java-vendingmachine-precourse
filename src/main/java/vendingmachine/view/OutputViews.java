@@ -30,4 +30,8 @@ public class OutputViews {
     public static void printCurrentChange(int change) {
         System.out.println(INSERT_MONEY + change + WON);
     }
+
+    public static void printErrorMessage(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+    }
 }

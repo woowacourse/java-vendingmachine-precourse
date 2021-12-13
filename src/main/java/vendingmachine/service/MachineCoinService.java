@@ -11,6 +11,7 @@ import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
 import static vendingmachine.repository.MachineCoinRepository.initCoin;
 import static vendingmachine.service.Validator.*;
+import static vendingmachine.view.OutputViews.printErrorMessage;
 
 public class MachineCoinService {
 
@@ -25,7 +26,7 @@ public class MachineCoinService {
                 checkDivideByTen(inputMoney);
                 return inputMoney;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                printErrorMessage(e);
             }
         }
     }

@@ -10,6 +10,7 @@ import static vendingmachine.domain.Coin.*;
 import static vendingmachine.repository.ChangeRepository.*;
 import static vendingmachine.repository.MachineCoinRepository.getNumOfCoin;
 import static vendingmachine.service.Validator.*;
+import static vendingmachine.view.OutputViews.printErrorMessage;
 
 public class ChangeService {
 
@@ -23,7 +24,7 @@ public class ChangeService {
                 initChange(inputMoney);
                 return;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                printErrorMessage(e);
             }
         }
     }

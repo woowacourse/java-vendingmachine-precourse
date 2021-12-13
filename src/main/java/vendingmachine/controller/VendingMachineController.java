@@ -59,7 +59,7 @@ public class VendingMachineController {
                 isValidOrderName(order, change);
                 return order;
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                printErrorMessage(e);
             }
         }
     }
