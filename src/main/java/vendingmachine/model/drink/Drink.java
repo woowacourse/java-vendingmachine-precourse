@@ -15,11 +15,7 @@ public class Drink implements Comparable<Drink> {
     }
 
     public boolean isSameDrink(String drinkName) {
-        return this.name == drinkName;
-    }
-
-    public boolean isOverPrice(int userMoney) {
-        return userMoney >= this.price;
+        return this.name.equals(drinkName);
     }
 
     public boolean hasQuantity() {
@@ -28,6 +24,10 @@ public class Drink implements Comparable<Drink> {
 
     public void decQuantity() {
         this.quantity--;
+    }
+
+    public int getPrice() {
+        return price;
     }
 
     @Override

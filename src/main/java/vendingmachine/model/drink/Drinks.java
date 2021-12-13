@@ -3,7 +3,9 @@ package vendingmachine.model.drink;
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import vendingmachine.util.ErrorMessage;
+import vendingmachine.model.user.ChoiceDrink;
+import vendingmachine.model.user.UserMoney;
+import vendingmachine.util.Message;
 
 public class Drinks {
     private final List<Drink> drinkInventory;
@@ -12,16 +14,15 @@ public class Drinks {
         drinkInventory = mapper.createDrinks(inputContents);
     }
 
-    public Drink findMinPriceDrink() {
+    public Drink findByDrinkName(ChoiceDrink choiceDrink) {
         return drinkInventory.stream()
-            .min(Drink::compareTo)
-            .orElseThrow(() -> new NoSuchElementException(ErrorMessage.DRINK_NO_SUCH_MIN_PRICE_ERROR));
+            .filter(drink -> drink.isSameDrink(choiceDrink.getName()))
+            .findFirst()
+            .orElseThrow(() -> new NoSuchElementException(Message.CHOICE_DRINK_NO_SUCH_ERROR));
     }
 
-    public Drink findByDrinkName(String name) {
+    public boolean isBuyContinue(UserMoney userMoney) {
         return drinkInventory.stream()
-            .filter(drink -> drink.isSameDrink(name))
-            .findFirst()
-            .orElseThrow(() -> new NoSuchElementException(ErrorMessage.CHOICE_DRINK_NO_SUCH_ERROR));
+            .filter(Drink::hasQuantity).anyMatch(userMoney::canBuy);
     }
 }
