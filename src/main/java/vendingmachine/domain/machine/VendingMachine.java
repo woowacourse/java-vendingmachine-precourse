@@ -15,6 +15,10 @@ public class VendingMachine {
 		this.balance = balance;
 	}
 
+	public static VendingMachine of(Coins coins, Products products, Balance balance) {
+		return new VendingMachine(coins, products, balance);
+	}
+
 	public void purchaseProduct(String productName) {
 		final Product product = products.isCheckSameProduct(productName);
 		balance = product.purchase(balance);
