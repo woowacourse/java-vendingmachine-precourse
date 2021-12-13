@@ -33,15 +33,11 @@ public class CoinListManager {
 	}
 
 	public void makeRandomList() {
-		// 1. 랜덤을 뽑는 리스트는 [500,100,50,10]이다.
-		// 2. sumOfChange 가 0이 될때까지 반복한다.
-		// 3. 만약 sumOfChange 가 뽑힌 값보다 작으면, 리스트에서 해당 값을 제외하고 continue 한다.
-		// 4. 리스트에서 뽑은 값 만큼 sumOfChange 에서 값을 빼고, coinList 에는 addOne() 한다.
 		List<Integer> valueList = Arrays.asList(500,100,50,10);
-		while ( sumOfChange < 0 ) {
+		while ( 0 <  sumOfChange) {
 			int randomAmount = Randoms.pickNumberInList(valueList);
+			System.out.println("이번에 뽑은 동전 : " + randomAmount);
 			if (!isAvailableToDeduct(randomAmount)) {
-				valueList.remove(new Integer(randomAmount));
 				continue;
 			}
 			sumOfChange -= randomAmount;
