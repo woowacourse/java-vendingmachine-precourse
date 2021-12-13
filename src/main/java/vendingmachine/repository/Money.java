@@ -12,4 +12,8 @@ public class Money {
         return this.remainder;
     }
 
+    public void subtract(int amount){
+        remainder -= amount;
+    }
+
 }

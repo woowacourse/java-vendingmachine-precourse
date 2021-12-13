@@ -32,8 +32,4 @@ public class Products {
         return null;
     }
 
-    // public boolean isPossiblePrice() {
-    //
-    // }
-
 }

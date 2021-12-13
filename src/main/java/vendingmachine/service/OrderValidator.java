@@ -32,12 +32,6 @@ public class OrderValidator {
             throw new IllegalArgumentException("[ERROR] 재고가 없습니다.");
         }
         return true;
-
-
     }
-    //
-    // public boolean isValidOrder() {
-    //
-    // }
 
 }
