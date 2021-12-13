@@ -6,12 +6,10 @@ import vendingmachine.view.OutputView;
 public class CoinController {
 
     CoinService coinService = new CoinService();
-    OutputView outputView = new OutputView();
 
     public void generate() {
-        outputView.printMachineMoney();
+        OutputView.printMachineMoney();
         coinService.generate();
-        outputView.printCoin();
+        OutputView.printCoin();
     }
-
 }

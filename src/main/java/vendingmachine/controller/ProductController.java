@@ -8,11 +8,10 @@ import vendingmachine.service.ProductService;
 import vendingmachine.view.OutputView;
 
 public class ProductController {
-    OutputView outputView = new OutputView();
     ProductService productService = new ProductService();
 
     public Products generate(){
-        outputView.printMachineProduct();
+        OutputView.printMachineProduct();
         return productService.generate();
     }
 
