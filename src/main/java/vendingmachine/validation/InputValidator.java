@@ -8,12 +8,14 @@ public class InputValidator {
 		= "상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분해주세요";
 	private static final String NOT_NAME_LENGTH_IN_RANGE = "이름은 한글자 이상이어야 합니다.";
 	private static final NumberInputValidator numberInputValidator = new NumberInputValidator();
+	private static final int MIN_NAME_LENGTH = 1;
+	private static final int ITEM_INFO_LENGTH = 3;
 
-	public boolean isValidChanges(String changes) {
+	public boolean isValidMoney(String amount) {
 		try {
-			numberInputValidator.validateNumberInput(changes);
-			numberInputValidator.validateNonZero(changes);
-			numberInputValidator.validateMultipleNumber(changes);
+			numberInputValidator.validateNumberInput(amount);
+			numberInputValidator.validateNonZero(amount);
+			numberInputValidator.validateMultipleNumber(amount);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e);
 			return false;
@@ -31,21 +33,10 @@ public class InputValidator {
 		return true;
 	}
 
-	public boolean isValidPayment(String payment) {
-		try {
-			numberInputValidator.validateNumberInput(payment);
-			numberInputValidator.validateMultipleNumber(payment);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e);
-			return false;
-		}
-		return true;
-	}
-
 	private void validateItemsForm(String merchandiseList) {
 		String[] items = merchandiseList.split(";");
 		for (String item : items) {
-			if (item.length() == 0) {
+			if (item.length() < 0) {
 				throw new IllegalArgumentException(ERROR_MESSAGE + NOT_MERCHANDISEFORM_MESSAGE);
 			}
 			validateItemForm(item);
@@ -55,7 +46,7 @@ public class InputValidator {
 	private void validateItemForm(String item) {
 		item = item.replace("[", "").replace("]", "");
 		String[] elements = item.split(",");
-		if (elements.length != 3) {
+		if (elements.length != ITEM_INFO_LENGTH) {
 			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_MERCHANDISEFORM_MESSAGE);
 		}
 		validateMerchandiseName(elements[Merchandise.MERCHANDISE_NAME_INDEX]);
@@ -64,7 +55,7 @@ public class InputValidator {
 	}
 
 	private void validateMerchandiseName(String name) {
-		if (name.length() == 0) {
+		if (name.length() < MIN_NAME_LENGTH) {
 			throw new IllegalArgumentException(ERROR_MESSAGE + NOT_NAME_LENGTH_IN_RANGE);
 		}
 	}

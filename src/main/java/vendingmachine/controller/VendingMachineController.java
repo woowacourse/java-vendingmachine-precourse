@@ -14,7 +14,7 @@ public class VendingMachineController {
 	public void settingMachineChanges() {
 		while (true) {
 			String changes = view.inputChanges();
-			if (validator.isValidChanges(changes)) {
+			if (validator.isValidMoney(changes)) {
 				machine.setCoins(Integer.parseInt(changes));
 				break;
 			}
@@ -35,7 +35,7 @@ public class VendingMachineController {
 	public void putMoneyIntoMachine() {
 		while (true) {
 			String payment = view.inputPayment();
-			if (validator.isValidPayment(payment)) {
+			if (validator.isValidMoney(payment)) {
 				machine.setPayment(payment);
 				break;
 			}
