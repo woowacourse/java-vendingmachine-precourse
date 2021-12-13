@@ -17,5 +17,6 @@ public class MachineController {
 		InputDisplay.askInputVendingMachineProduct();
 		vendingMachine.makeVendingMachineProducts(InputController.inputVendingMachineProducts());
 		InputDisplay.askInputUserInsertMoney();
+		InputController.inputUserInsertMoney();
 	}
 }

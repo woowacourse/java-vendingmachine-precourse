@@ -50,4 +50,8 @@ public class InputController {
 	private static String trimVendingMachineProduct(String vendingMachineProduct) {
 		return vendingMachineProduct.replace(LEFT_BRACKET, EMPTY_VALUE).replace(RIGHT_BRACKET, EMPTY_VALUE);
 	}
+
+	public static int inputUserInsertMoney() {
+		return Integer.parseInt(Console.readLine());
+	}
 }
