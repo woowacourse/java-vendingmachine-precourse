@@ -74,7 +74,7 @@ public class Item {
 		amount --;
 	}
 
-	public boolean isSellable() {
+	public boolean isStockExist() {
 		return ZERO < amount;
 	}
 }

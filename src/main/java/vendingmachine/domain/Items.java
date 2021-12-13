@@ -32,7 +32,7 @@ public class Items {
 
 	public boolean checkAllOutOfOrder() {
 		return items.stream()
-			.map(Item::isSellable)
+			.map(Item::isStockExist)
 			.noneMatch((condition) -> true);
 	}
 
@@ -46,7 +46,7 @@ public class Items {
 	}
 
 	private void checkItemSellable(Item item, Money money){
-		if (!item.isSellable()) {
+		if (!item.isStockExist()) {
 			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
 		}
 		if (!money.payable(item.getCost())){
