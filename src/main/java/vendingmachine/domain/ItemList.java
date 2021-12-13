@@ -14,11 +14,6 @@ public class ItemList {
 		this.items = items;
 	}
 
-	public int getLeastItemPrice() {
-		List<Integer> priceList = items.stream().map(Item::getPrice).sorted().collect(Collectors.toList());
-		return priceList.get(0);
-	}
-
 	private void checkDupName(List<Item> items) {
 		List<String> nameList = new ArrayList<>();
 		for (Item item : items) {
@@ -27,5 +22,13 @@ public class ItemList {
 			}
 			nameList.add(item.getName());
 		}
+	}
+
+	public boolean haveAffordableItem(int amount) {
+		List<Item> affordableItems = items.stream()
+			.filter(item -> item.getPrice() <= amount && item.isRemain())
+			.collect(Collectors.toList());
+
+		return !affordableItems.isEmpty();
 	}
 }

@@ -41,4 +41,8 @@ public class OutputView {
 	public static void printInputAmount(int amount) {
 		System.out.println(MessageConst.REMAIN_INPUT_MONEY_MESSAGE + amount + MessageConst.COIN_UNIT);
 	}
+
+	public static void printBuyItem() {
+		System.out.println(MessageConst.BUY_ITEM_MESSAGE);
+	}
 }

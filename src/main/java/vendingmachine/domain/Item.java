@@ -15,6 +15,10 @@ public class Item {
 		return name;
 	}
 
+	public boolean isRemain(){
+		return num > 0;
+	}
+
 	public int getPrice() {
 		return price;
 	}

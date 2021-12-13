@@ -22,9 +22,8 @@ public class VendingMachine {
 		this.amount = inputAmount;
 	}
 
-	public boolean isAmountOverItemLeastPrice() {
-		int leastItemPrice = itemList.getLeastItemPrice();
-		return amount >= leastItemPrice;
+	public boolean haveAffordableItem() {
+		return itemList.haveAffordableItem(amount);
 	}
 
 	public Changes getChanges() {
