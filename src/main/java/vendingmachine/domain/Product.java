@@ -42,7 +42,6 @@ public class Product implements Comparable<Product> {
 		if (inputCost - price >= 0) {
 			return true;
 		}
-
 		return false;
 	}
 

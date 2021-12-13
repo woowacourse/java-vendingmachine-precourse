@@ -6,7 +6,7 @@ public class VendingMachineClient {
 
 	private VendingMachineController vendingMachineController = new VendingMachineController();
 
-	public void start(){
+	public void start() {
 		vendingMachineController.postVendingMachineCosts();
 		vendingMachineController.postProductInfo();
 		vendingMachineController.postInputCosts();

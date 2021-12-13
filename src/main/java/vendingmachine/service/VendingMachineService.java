@@ -9,7 +9,6 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
 import vendingmachine.utils.CoinUtil;
-import vendingmachine.validation.GlobalValidation;
 import vendingmachine.validation.validator.InputCostValidator;
 import vendingmachine.validation.validator.InputProductNameValidator;
 import vendingmachine.validation.validator.InputProductValidator;
@@ -29,12 +28,9 @@ public class VendingMachineService {
 
 	public String postVendingMachineCosts(String inputStr) {
 		InputVendingMachineCostValidator.validateVendingMachineCost(inputStr);
-
 		result.init();
 		result.addMessage(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
-
 		vendingMachine = CoinUtil.makeCoin(Integer.parseInt(inputStr), vendingMachine);
-
 		result.addCoinCountMessage(vendingMachine.getCoinMap());
 		return result.getResult();
 	}
@@ -47,9 +43,7 @@ public class VendingMachineService {
 
 	public String postInputCosts(String inputStr) {
 		InputCostValidator.validateInputCost(inputStr);
-
 		result.init();
-
 		//TODO
 		vendingMachine.setInputCost(Integer.parseInt(inputStr));
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
@@ -59,7 +53,6 @@ public class VendingMachineService {
 
 	public boolean postProductName(String inputStr) {
 		InputProductNameValidator.validateProductName(inputStr, vendingMachine.getProducts());
-
 		result.init();
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
@@ -67,7 +60,6 @@ public class VendingMachineService {
 		if (vendingMachine.checkGetChange()) {
 			return true;
 		}
-
 		return false;
 	}
 
@@ -79,34 +71,27 @@ public class VendingMachineService {
 		return result.getResult();
 	}
 
-	// TODO: 비즈니스 로직
 	private void addProducts(String inputStr) {
 		String[] products = inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";");
+
 		for (String rowProduct : products) {
 			String[] product = rowProduct.split(",");
-
 			InputProductValidator.validateProduct(product, vendingMachine.getProducts());
-
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
 		}
 	}
 
-	// TODO: 비즈니스 로직
 	private void getMinimumChange() {
 		change = vendingMachine.compareInputCostAndCoinToChange();
-
 		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
 		Map<Integer, Integer> changeMap = new TreeMap<>(Collections.reverseOrder());
-
 		for (Integer i : coinMap.keySet()) {
 			changeMap = addChangeMapToValue(i, coinMap.get(i), changeMap);
 		}
-
 		result.addCoinCountMessage(changeMap);
 	}
 
-	// TODO: 비즈니스 로직
 	private Map<Integer, Integer> addChangeMapToValue(int key, int value, Map<Integer, Integer> map) {
 		for (int j = 0; j < value; j++) {
 			if (change >= key) {
