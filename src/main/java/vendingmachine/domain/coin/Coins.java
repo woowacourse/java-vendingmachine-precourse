@@ -1,7 +1,6 @@
 package vendingmachine.domain.coin;
 
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -32,11 +31,10 @@ public class Coins {
 	}
 
 	private static Map<Coin, Integer> generateRandomCoins(int inputCoinsAmount) {
-		final List<Integer> coinsType = Coin.getCoinsAmount();
 		Map<Coin, Integer> randomCoins = initRandomCoins();
 
 		while (inputCoinsAmount != COIN_AMOUNT_ZERO) {
-			final int randomCoinAmount = Randoms.pickNumberInList(coinsType);
+			final int randomCoinAmount = Randoms.pickNumberInList(Coin.getCoinsAmount());
 			final Coin randomCoin = Coin.valueOf(randomCoinAmount);
 
 			if (inputCoinsAmount - randomCoinAmount >= COIN_AMOUNT_ZERO) {
