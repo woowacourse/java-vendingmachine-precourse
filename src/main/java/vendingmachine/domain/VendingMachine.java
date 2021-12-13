@@ -2,7 +2,6 @@ package vendingmachine.domain;
 
 import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -30,7 +29,7 @@ public class VendingMachine {
 
 	public boolean isUserBuyMerchandise(int userMoney) {
 		List<Merchandise> notBuyMerchandise = merchandises.selectExpensiveMerchandise(userMoney);
-		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();
+		return notBuyMerchandise.size() != merchandises.getMerchandisesSize();
 	}
 
 	public Merchandises getMerchandises() {

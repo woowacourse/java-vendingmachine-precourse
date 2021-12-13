@@ -27,10 +27,6 @@ public class Merchandises {
 		return merchandiseList;
 	}
 
-	public List<Merchandise> getMerchandiseList() {
-		return merchandiseList;
-	}
-
 	public Merchandise selectMerchandise(String merchandiseName) {
 		Merchandise merchandise = merchandiseList.stream()
 			.filter(sellMerchandise -> sellMerchandise.isEqualsName(merchandiseName))
@@ -52,5 +48,9 @@ public class Merchandises {
 		return merchandiseList.stream()
 			.filter(merchandise -> merchandise.isBigMerchandiseMoney(userMoney))
 			.collect(Collectors.toList());
+	}
+
+	public int getMerchandisesSize() {
+		return merchandiseList.size();
 	}
 }
