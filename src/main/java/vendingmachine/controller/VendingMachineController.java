@@ -1,10 +1,10 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.Changes;
-import vendingmachine.model.Coins;
 import vendingmachine.model.Product;
-import vendingmachine.model.Products;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.repository.CoinRepository;
+import vendingmachine.repository.ProductRepository;
 
 public class VendingMachineController {
 
@@ -17,16 +17,16 @@ public class VendingMachineController {
 
 	public void init() {
 		int moneyOfVendingMachine = viewController.returnMoneyOfVendingMachine();
-		Coins coins = new Coins(moneyOfVendingMachine);
-		coins.init();
+		CoinRepository coinRepository = new CoinRepository(moneyOfVendingMachine);
+		coinRepository.init();
 
-		Products products = new Products();
+		ProductRepository productRepository = new ProductRepository();
 		String rawProductsInput = viewController.returnRawProductsInput();
-		products.init(rawProductsInput);
+		productRepository.init(rawProductsInput);
 
 		int deposit = viewController.returnDepositAmount();
 
-		this.vendingMachine = new VendingMachine(deposit, products, coins);
+		this.vendingMachine = new VendingMachine(deposit, productRepository, coinRepository);
 	}
 
 	public void run() {
@@ -42,9 +42,9 @@ public class VendingMachineController {
 	}
 
 	private void sell(String productName) {
-		Products products = vendingMachine.getProductList();
+		ProductRepository productRepository = vendingMachine.getProductList();
 
-		Product product = products.findProduct(productName);
+		Product product = productRepository.findProduct(productName);
 		product.subtractQuantity();
 
 		int price = product.getPrice();

@@ -2,21 +2,24 @@ package vendingmachine.model;
 
 import java.util.Map;
 
+import vendingmachine.repository.CoinRepository;
+import vendingmachine.repository.ProductRepository;
+
 public class VendingMachine {
 
 	private int deposit;
-	private Products products;
-	private Coins coins;
+	private ProductRepository productRepository;
+	private CoinRepository coinRepository;
 	private Changes changes = new Changes();
 
-	public VendingMachine(int deposit, Products products, Coins coins) {
+	public VendingMachine(int deposit, ProductRepository productRepository, CoinRepository coinRepository) {
 		this.deposit = deposit;
-		this.products = products;
-		this.coins = coins;
+		this.productRepository = productRepository;
+		this.coinRepository = coinRepository;
 	}
 
-	public Products getProductList() {
-		return products;
+	public ProductRepository getProductList() {
+		return productRepository;
 	}
 
 	public int getDeposit() {
@@ -28,12 +31,12 @@ public class VendingMachine {
 	}
 
 	public boolean isContinueToSell() {
-		int minimumPrice = products.getMinimumPrice();
+		int minimumPrice = productRepository.getMinimumPrice();
 		if (minimumPrice > deposit) {
 			return false;
 		}
 
-		if (products.isOutOfStock()) {
+		if (productRepository.isOutOfStock()) {
 			return false;
 		}
 
@@ -41,7 +44,7 @@ public class VendingMachine {
 	}
 
 	public Changes createChanges() {
-		for (Map.Entry<Coin, Integer> entry : coins.getHashMap()) {
+		for (Map.Entry<Coin, Integer> entry : coinRepository.getCoins()) {
 			if (deposit == 0) {
 				break;
 			}
@@ -62,7 +65,7 @@ public class VendingMachine {
 			return;
 		}
 
-		coins.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
+		coinRepository.subtractCoin(coin, availableNumberOfCoins - numberOfChange);
 		changes.addCoin(coin, numberOfChange);
 	}
 

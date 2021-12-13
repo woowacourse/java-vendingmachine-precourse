@@ -1,15 +1,17 @@
-package vendingmachine.model;
+package vendingmachine.repository;
 
 import static vendingmachine.validator.ProductValidator.*;
 
 import java.util.HashMap;
 
-public class Products {
+import vendingmachine.model.Product;
 
-	private final HashMap<String, Product> hashMap;
+public class ProductRepository {
 
-	public Products() {
-		this.hashMap = new HashMap<>();
+	private final HashMap<String, Product> products;
+
+	public ProductRepository() {
+		this.products = new HashMap<>();
 	}
 
 	public void init(String rawProductsInput) {
@@ -24,11 +26,11 @@ public class Products {
 
 	private void registerProduct(Product product) {
 		String name = product.getName();
-		hashMap.put(name, product);
+		products.put(name, product);
 	}
 
 	public boolean isExistProduct(String productName) {
-		return hashMap.containsKey(productName);
+		return products.containsKey(productName);
 	}
 
 	public boolean isQuantitySufficient(String productName) {
@@ -42,12 +44,12 @@ public class Products {
 	}
 
 	public Product findProduct(String productName) {
-		return hashMap.get(productName);
+		return products.get(productName);
 	}
 
 	public int getMinimumPrice() {
 		int minimumPrice = Integer.MAX_VALUE;
-		for (Product product : hashMap.values()) {
+		for (Product product : products.values()) {
 			if (product.isEmpty()) {
 				continue;
 			}
@@ -63,7 +65,7 @@ public class Products {
 	}
 
 	public boolean isOutOfStock() {
-		for (Product product : hashMap.values()) {
+		for (Product product : products.values()) {
 			if (!product.isEmpty()) {
 				return false;
 			}
