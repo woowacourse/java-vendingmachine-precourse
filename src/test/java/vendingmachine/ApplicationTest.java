@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import vendingmachine.service.ProductService;
 
 import java.util.Arrays;
 import java.util.List;
@@ -10,6 +11,7 @@ import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -70,5 +72,18 @@ class ApplicationTest extends NsTest {
                 50, 50, 50, 50, 50,
                 10, 10, 10, 10, 10
         );
+    }
+
+    @Test
+    public void 최소개수동전_테스트() {
+        //given
+        ProductService productService = new ProductService();
+
+        //when
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            productService.createProductList("[a,1550,1];[b,90,1]");
+        });
     }
 }
