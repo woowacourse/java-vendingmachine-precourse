@@ -4,6 +4,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.repository.MachineCoinRepository;
 import vendingmachine.view.InputViews;
 
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -70,5 +71,9 @@ public class MachineCoinService {
 
     private static int pickRandomCoin(int remainMoney) {
         return pickNumberInList(getAvailableCoinValueList(remainMoney));
+    }
+
+    public Map<Coin, Integer> getNumOfCoin() {
+        return MachineCoinRepository.findNumOfCoin();
     }
 }

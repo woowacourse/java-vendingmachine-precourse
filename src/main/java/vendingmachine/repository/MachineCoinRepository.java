@@ -12,6 +12,12 @@ public class MachineCoinRepository {
         coins.keySet().forEach(c-> remainCoin.put(c, coins.get(c)));
     }
 
+    public static Map<Coin, Integer> findNumOfCoin() {
+        Map<Coin, Integer> numOfCoin = new TreeMap<>();
+        remainCoin.keySet().forEach(c-> numOfCoin.put(c, remainCoin.get(c)));
+        return numOfCoin;
+    }
+
 
 
 }
