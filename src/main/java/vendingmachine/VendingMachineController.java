@@ -20,15 +20,18 @@ public class VendingMachineController {
 	}
 
 	public void run(VendingMachine vendingMachine){
-		vendingMachine.holdingItem = InputView.holdingItemsInput();
+		vendingMachine.holdingItemList = InputView.holdingItemsInput();
 		vendingMachine.inputMoney = InputView.inputMoneyInput();
 		buy(vendingMachine);
 	}
 
 	public void buy(VendingMachine vendingMachine){
+		String buyItem;
 		while (vendingMachine.isAvailableKeepBuyingAboutPrice() && vendingMachine.isAvailableKeepBuyingAboutStock()) {
 			OutputView.printBalance(vendingMachine);
-			String buyItem = InputView.buyItemInput();
+			do{
+				buyItem = InputView.buyItemInput();
+			} while (!vendingMachine.isPurchasableItem(buyItem));
 			vendingMachine.stockDeduct(buyItem);
 			vendingMachine.inputMoneyDeduct(buyItem);
 		}

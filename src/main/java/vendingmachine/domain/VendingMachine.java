@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import vendingmachine.utils.Message;
+
 public class VendingMachine {
 
 	private static VendingMachine vendingMachine = null;
@@ -14,7 +16,7 @@ public class VendingMachine {
 	public int inputMoney = 0;
 	public LinkedHashMap<Coin, Integer> holdingCoins;
 	public LinkedHashMap<Coin, Integer> changeCoins;
-	public ArrayList<Item> holdingItem;
+	public ArrayList<Item> holdingItemList;
 
 	public VendingMachine vendingMachine() {
 		if (this.vendingMachine == null) {
@@ -30,25 +32,25 @@ public class VendingMachine {
 	}
 
 	public void stockDeduct(String buyItem) {
-		for (int i = 0; i < holdingItem.size(); i++) {
-			if (holdingItem.get(i).getName().equals(buyItem)) {
-				holdingItem.get(i).setStock(holdingItem.get(i).getStock() - 1);
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem)) {
+				holdingItemList.get(i).setStock(holdingItemList.get(i).getStock() - 1);
 			}
 		}
 	}
 
 	public void inputMoneyDeduct(String buyItem) {
-		for (int i = 0; i < this.holdingItem.size(); i++) {
-			if (this.holdingItem.get(i).getName().equals(buyItem)) {
-				this.inputMoney -= this.holdingItem.get(i).getPrice();
+		for (int i = 0; i < this.holdingItemList.size(); i++) {
+			if (this.holdingItemList.get(i).getName().equals(buyItem)) {
+				this.inputMoney -= this.holdingItemList.get(i).getPrice();
 			}
 		}
 	}
 
-	public boolean isAvailableKeepBuyingAboutPrice(){
+	public boolean isAvailableKeepBuyingAboutPrice() {
 		boolean isAvailableKeepBuyingAboutPrice = false;
-		for (int i = 0; i < holdingItem.size(); i++){
-			if (holdingItem.get(i).getPrice() <= inputMoney){
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getPrice() <= inputMoney) {
 				isAvailableKeepBuyingAboutPrice = true;
 			}
 		}
@@ -57,17 +59,50 @@ public class VendingMachine {
 
 	public boolean isAvailableKeepBuyingAboutStock() {
 		boolean isAvailableKeepBuyingAboutStock = false;
-		for(int i = 0; i< holdingItem.size(); i++){
-			if(holdingItem.get(i).getStock() > 0){
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getStock() > 0) {
 				isAvailableKeepBuyingAboutStock = true;
 			}
 		}
 		return isAvailableKeepBuyingAboutStock;
 	}
 
+	public boolean isPurchasableItem(String buyItem) {
+		boolean isPurchasableItem = true;
+		try {
+			nonExistItemError(buyItem);
+			nonEnoughMoneyError(buyItem);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			isPurchasableItem = false;
+		}
+		return isPurchasableItem;
+	}
+
 	public void calculateChangeCoins() {
 		Changes changes = new Changes();
 		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);
+	}
+
+	public void nonExistItemError(String buyItem) {
+		boolean isExistedItem = false;
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem)) {
+				isExistedItem = true;
+			}
+		}
+		if(isExistedItem == false){
+			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
+		}
+	}
+
+	public void nonEnoughMoneyError(String buyItem){
+		for (int i = 0; i < holdingItemList.size(); i++){
+			if(holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
+				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
+			}
+		}
+
 	}
 
 	public int getInputMoney() {

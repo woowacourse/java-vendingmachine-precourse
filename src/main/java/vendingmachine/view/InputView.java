@@ -30,34 +30,30 @@ public class InputView {
 
 	public static ArrayList<Item> holdingItemsInput() {
 		ArrayList<Item> itemList;
-		List<String> stringItemsList;
+		//[진로,2500,3];[카스,1000,2] -> [ [진로,2500,3], [카스,1000,2] ]
 
 		System.out.println(Message.ASK_ADD_ITEMS_MESSAGE);
-		String[] itemStringList = Console.readLine().split(";");
+		String[] itemStringArray = Console.readLine().split(";");
+		removeBracket(itemStringArray);
+		itemList = generateItemList(itemStringArray);
 		System.out.println();
-
-		stringItemsList = new ArrayList<String>(Arrays.asList(itemStringList));
-
-		removeBracket(stringItemsList);
-		itemList = generateItemList(stringItemsList);
-
 		return itemList;
 	}
 
 	public static int inputMoneyInput() {
 		int inputMoney = 0;
 		String stringInputMoney = "";
-		do{
+		do {
 			System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
 			stringInputMoney = Console.readLine();
-		} while(!isRightInputMoney(stringInputMoney));
+		} while (!isRightInputMoney(stringInputMoney));
 		System.out.println();
 		inputMoney = Integer.parseInt(stringInputMoney);
 
 		return inputMoney;
 	}
 
-	public static String buyItemInput(){
+	public static String buyItemInput() {
 		String buyItem = "";
 
 		System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
@@ -66,21 +62,18 @@ public class InputView {
 		return buyItem;
 	}
 
-	private static void removeBracket(List<String> stringItemsList) {
-		for (int i = 0; i < stringItemsList.size(); i++) {
-			String stringItem = stringItemsList.get(i);
-			stringItemsList.remove(i);
-			stringItem = stringItem.replace("[", "");
-			stringItem = stringItem.replace("]", "");
-			stringItemsList.add(i, stringItem);
+	private static void removeBracket(String[] stringItemsArray) {
+		for (int i = 0; i < stringItemsArray.length; i++) {
+			stringItemsArray[i] = stringItemsArray[i].replace("[", "");
+			stringItemsArray[i] = stringItemsArray[i].replace("]", "");
 		}
 	}
 
-	private static ArrayList<Item> generateItemList(List<String> stringItemsList) {
+	private static ArrayList<Item> generateItemList(String[] stringItemsArray) {
 		String[] eachValueOfProductArray;
 		ArrayList<Item> itemArrayList = new ArrayList<Item>();
-		for (int i = 0; i < stringItemsList.size(); i++) {
-			eachValueOfProductArray = stringItemsList.get(i).split(",");
+		for (int i = 0; i < stringItemsArray.length; i++) {
+			eachValueOfProductArray = stringItemsArray[i].split(",");
 
 			String name = eachValueOfProductArray[0];
 			int price = Integer.parseInt(eachValueOfProductArray[1]);
@@ -105,18 +98,26 @@ public class InputView {
 		return isRightHoldingMoney;
 	}
 
-	private static boolean isRightInputMoney(String stringInputMoney){
+	private static boolean isRightInputMoney(String stringInputMoney) {
 		boolean isRightInputMoney = true;
-		try{
+		try {
 			nonNumericError(stringInputMoney);
 			zeroNumericError(stringInputMoney);
 			dividedByTenMoneyError(stringInputMoney);
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightInputMoney = false;
 		}
 		return isRightInputMoney;
 	}
+
+	// private static boolean isRightHoldingItem(List<String> stringItemList) {
+	// 	boolean isRightHoldingItem = true;
+	//
+	// 	try {
+	//
+	// 	}
+	// }
 
 	public static void nonNumericError(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {

@@ -10,4 +10,6 @@ public class Message {
 	public static final String  NON_NUMERIC_ERROR = "[ERROR] 금액은 숫자여야 합니다.";
 	public static final String  ZERO_NUMERIC_ERROR = "[ERROR] 금액은 0이 아닌 양의 정수를 입력하셔야 합니다.";
 	public static final String  DIVIDED_BY_TEN_HOLDING_MONEY_ERROR = "[ERROR] 보유 금액은 10으로 나누어 떨어져야 합니다.";
+	public static final String  NON_EXIST_ITEM_ERROR = "[ERROR] 존재하지 않은 상품은 구매할 수 없습니다.";
+	public static final String  NON_ENOUGH_MONEY_ERROR = "[ERROR] 보유 금액보다 상품 가격이 더 비쌉니다.";
 }
