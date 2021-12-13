@@ -1,8 +1,10 @@
 package vendingmachine.model.Item;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.function.Function;
 
 import vendingmachine.model.buy.BuyItemName;
 import vendingmachine.model.money.Money;
@@ -10,11 +12,13 @@ import vendingmachine.model.money.Money;
 public class Items {
     private static final HashMap<Item, Quantity> items = new HashMap<>();
     public static final String COUNT_UNIT = "개 \n";
+    public static final String DELIMITER = ",";
+    public static final String SPACE = " ";
 
     public Items(String[] rawItems) {
         for (String rawItem : rawItems) {
             String itemData = rawItem.substring(1, rawItem.length() - 1);
-            String[] itemSplit = itemData.split(",");
+            String[] itemSplit = itemData.split(DELIMITER);
             items.put(new Item(itemSplit[0], itemSplit[1]), new Quantity(itemSplit[2]));
         }
     }
@@ -53,6 +57,19 @@ public class Items {
         money.decrease(findItem.getPrice());
     }
 
+    public boolean isLeft() {
+        Optional<Item> findItem = items.keySet().stream()
+            .filter(item -> items.get(item).isNotZero())
+            .findFirst();
+        return findItem.isPresent();
+    }
+
+    public int getMinPriceAsAmount() {
+        Optional<Item> minPriceItem = items.keySet().stream()
+            .min(Comparator.comparingInt(Item::getPriceAsAmount));
+        return minPriceItem.get().getPriceAsAmount();
+    }
+
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
@@ -60,7 +77,7 @@ public class Items {
         ArrayList<Item> items = new ArrayList<>(Items.items.keySet());
         for (Item item : items) {
             stringBuilder.append(item.toString());
-            stringBuilder.append(" " + Items.items.get(item) + COUNT_UNIT);
+            stringBuilder.append(SPACE + Items.items.get(item) + COUNT_UNIT);
         }
         return stringBuilder.toString();
     }

@@ -23,6 +23,10 @@ public class Item {
         return price;
     }
 
+    public int getPriceAsAmount() {
+        return price.getAmount();
+    }
+
     @Override
     public String toString() {
         return name.toString() + price.toString();

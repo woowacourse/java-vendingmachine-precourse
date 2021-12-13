@@ -15,13 +15,13 @@ public class InputView {
     public static final String INPUT_REQUEST_MONEY = "투입 금액을 입력해 주세요.";
     public static final String INPUT_REQUEST_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 
-    public static Money getInitialAsset() {
+    public static Money getInitialMoney() {
         try {
             System.out.println(INPUT_REQUEST_INITIAL_ASSET);
             return new Money(Integer.parseInt(Console.readLine()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
-            return getInitialAsset();
+            return getInitialMoney();
         }
     }
 

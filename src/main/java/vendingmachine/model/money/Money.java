@@ -1,7 +1,6 @@
 package vendingmachine.model.money;
 
 import vendingmachine.model.Item.Item;
-import vendingmachine.model.Item.Name;
 import vendingmachine.model.Item.Price;
 
 public class Money {
@@ -45,8 +44,8 @@ public class Money {
         moneyBill.decrease(price);
     }
 
-    private MoneyBill getMoneyBill() {
-        return moneyBill;
+    public boolean isLowerThanAnyItem(int minPriceAsAmount) {
+        return moneyBill.isSmallerThan(minPriceAsAmount);
     }
 
     @Override
