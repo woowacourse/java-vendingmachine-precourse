@@ -14,8 +14,7 @@ public class Machine {
     }
 
     public void setInitialAsset(int asset) {
-        validator.checkAsset(asset);
-        this.asset = asset;
+        this.asset =  validator.checkAsset(asset);
     }
 
     private void setCoins(int asset) {

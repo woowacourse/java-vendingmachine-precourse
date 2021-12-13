@@ -5,21 +5,24 @@ public class ProductValidator {
     public static final int PRICE_UNIT = 10;
     public static final int NAME_MAX_LENGTH = 30;
 
-    public void isValidPrice(int money) {
+    public int checkPrice(int money) {
         if (money % PRICE_UNIT != 0 || money < PRICE_MINIMUM) {
             throw new IllegalArgumentException();
         }
+        return money;
     }
 
-    public void isValidStock(int stock) {
+    public int checkStock(int stock) {
         if (stock < 0) {
             throw new IllegalArgumentException();
         }
+        return stock;
     }
 
-    public void isValidName(String name) {
+    public String checkName(String name) {
         if (name.length() > NAME_MAX_LENGTH || name.length() == 0) {
             throw new IllegalArgumentException();
         }
+        return name;
     }
 }

@@ -10,13 +10,9 @@ public class Product implements Comparable<Product> {
 
     public Product(String name, int price, int stock) {
         ProductValidator validator = new ProductValidator();
-        validator.isValidPrice(price);
-        validator.isValidName(name);
-        validator.isValidStock(stock);
-
-        this.price = price;
-        this.name = name;
-        this.stock = stock;
+        this.price = validator.checkPrice(price);
+        this.name = validator.checkName(name);
+        this.stock = validator.checkStock(stock);
     }
 
     public String getName() {
@@ -28,7 +24,7 @@ public class Product implements Comparable<Product> {
     }
 
     public void sell() {
-        if(isAvailable()) {
+        if (isAvailable()) {
             stock--;
         }
     }
