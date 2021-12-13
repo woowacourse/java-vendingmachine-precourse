@@ -6,4 +6,8 @@ public class InputMoneyModel {
 	public static void saveMoney(String string) {
 		inputMoney = Long.parseLong(string);
 	}
+
+	public static void makeCoinFromInputMoney() {
+		CoinModel.makeChangeCoins(inputMoney);
+	}
 }
