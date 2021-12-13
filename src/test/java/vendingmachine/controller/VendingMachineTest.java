@@ -175,6 +175,23 @@ public class VendingMachineTest extends NsTest {
 		);
 	}
 
+	@DisplayName("[registerProducts 예외 테스트] 이미 등록된 상품을 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_already_registered_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,1500,20];[사이다,1000,10]");
+					Product product = new Product(new Name("콜라"), new Money("1500"), new Quantity("20"));
+					ProductRepository.save(product);
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
+			}
+		);
+	}
+
 	@DisplayName("[registerProducts 예외 테스트] 숫자가 아닌 상품 가격을 입력 한 경우 예외 테스트")
 	@Test
 	void register_products_number_format_exception_test() {
