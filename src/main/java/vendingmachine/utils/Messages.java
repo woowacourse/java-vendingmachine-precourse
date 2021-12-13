@@ -6,6 +6,7 @@ public enum Messages {
 	ERROR_NOT_VALID_NAME("[ERROR] 상품이름에는 공백 및 특수문자가 포함될 수 없습니다."),
 	ERROR_NOT_VALID_ELEMENT_SIZE("[ERROR] 상품정보는 상품이름,상품가격,상품수량의 형식으로 총 3개여야 합니다."),
 	ERROR_NOT_VALID_ITEM_SIZE("[ERROR] 전체 상품정보 중 유효하지 않은 상품이 있습니다."),
+	ERROR_NOT_VALID_PARENTHESES("[ERROR] 상품정보는 한 쌍의 대괄호로 구분해야 합니다."),
 	ERROR_BLANK("[ERROR] 입력은 반드시 한글자 이상이어야 합니다."),
 	ERROR_NOT_CONTAIN_MESSAGE("[ERROR] 해당 상품은 존재하지 않습니다."),
 	ERROR_NOT_ENOUGH_MONEY_MESSAGE("[ERROR] 금액이 부족합니다."),

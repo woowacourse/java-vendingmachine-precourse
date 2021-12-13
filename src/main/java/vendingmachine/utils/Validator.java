@@ -46,6 +46,13 @@ public class Validator {
 		}
 	}
 
+	private static void validateParentheses(String input, String startParentheses, String endParentheses) {
+		if (input.lastIndexOf(startParentheses) != 0 || input.indexOf(endParentheses) != input.length() - 1) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_VALID_PARENTHESES.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
+	}
+
 	public static void validateElementSize(String[] itemInput) throws IllegalArgumentException {
 		if (itemInput.length != ELEMENT_SIZE)
 			throw new IllegalArgumentException(
@@ -61,11 +68,12 @@ public class Validator {
 		}
 	}
 
-	public static void validateItemSize(String itemInput, char delimiter) throws IllegalArgumentException {
+	private static void validateItemSize(String itemInput, String delimiter) throws IllegalArgumentException {
 		validateEmptyStr(itemInput);
-		int totalSemiColon = (int)itemInput.chars().filter(c -> c == delimiter).count();
-		if (itemInput.split(String.valueOf(delimiter)).length != totalSemiColon - 1) {
-			throw new IllegalArgumentException(Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		int totalSemiColon = (int)itemInput.chars().filter(c -> c == delimiter.charAt(0)).count();
+		if (itemInput.split(delimiter).length != totalSemiColon + 1) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
