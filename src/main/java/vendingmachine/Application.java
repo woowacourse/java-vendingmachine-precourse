@@ -9,7 +9,8 @@ public class Application {
         Coins coins = new Coins(Integer.parseInt(vendingMachineMoney));
         OutputView.printCoinCount(coins.getCoins());
 
-        InputView.inputProductInfo();
+        String productInfo = InputView.inputProductInfo();
+        Products products = new Products(productInfo);
 
         InputView.inputUserMoney();
     }
