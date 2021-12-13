@@ -18,7 +18,7 @@ public class Machine {
             if (!checkMoney() || !checkCount()) {
                 break;
             }
-            this.purchasable = isPurchasable(InputView.inputProduct(products));
+            this.purchasable = isPurchasable(InputView.inputBuyProduct(products));
         }
         OutputView.printChanges();
     }
