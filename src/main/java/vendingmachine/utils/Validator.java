@@ -62,29 +62,30 @@ public class Validator {
 	}
 
 	public static void validateItemSize(ArrayList<String[]> itemInput) throws IllegalArgumentException {
-		if (itemInput.isEmpty())
+		if (itemInput.isEmpty()) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
 	}
 
-	public static void isItemName(HashMap<String, Item> ItemList, String inputName) throws IllegalArgumentException {
-		if (!ItemList.containsKey(inputName)) {
+	public static void isItemName(HashMap<String, Item> itemList, String inputName) throws IllegalArgumentException {
+		if (!itemList.containsKey(inputName)) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_CONTAIN_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
-	public static void validatePayAmount(HashMap<String, Item> ItemList, String inputName, int pay) throws
+	public static void validatePayAmount(HashMap<String, Item> itemList, String inputName, int pay) throws
 		IllegalArgumentException {
-		if (ItemList.get(inputName).isOverThisPrice(pay)) {
+		if (itemList.get(inputName).isOverThisPrice(pay)) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_ENOUGH_MONEY_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
-	public static void validateBuyAmount(HashMap<String, Item> ItemList, String inputName) throws
+	public static void validateBuyAmount(HashMap<String, Item> itemList, String inputName) throws
 		IllegalArgumentException {
-		if (ItemList.get(inputName).isAmountZero()) {
+		if (itemList.get(inputName).isAmountZero()) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_SOLD_OUT_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
