@@ -3,6 +3,7 @@ package vendingmachine.constants;
 import vendingmachine.domain.enums.Coin;
 
 public class SystemConstants {
+
     public static String BLANK_LINE = "\n";
     public static String WON = "원";
     public static String COIN_PRINT_SEPARATOR = " - ";
