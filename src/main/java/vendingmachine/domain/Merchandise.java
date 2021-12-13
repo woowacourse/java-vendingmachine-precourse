@@ -1,8 +1,10 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import vendingmachine.utils.Validator;
 
@@ -14,10 +16,10 @@ public class Merchandise {
 	private final Money money;
 	private final Quantity quantity;
 
-	public Merchandise(Name name, Money money, Quantity quantity) {
-		this.name = name;
-		this.money = money;
-		this.quantity = quantity;
+	public Merchandise(String name, int money, int quantity) {
+		this.name = new Name(name);
+		this.money = new Money(money);
+		this.quantity = new Quantity(quantity);
 	}
 
 	public Money getMoney() {
@@ -28,8 +30,13 @@ public class Merchandise {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
 		Validator.validateEmptyMerchandiseInformation(informations);
 		Validator.validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
-		return new Merchandise(new Name(informations[0].trim()), new Money(Integer.parseInt(informations[1].trim())),
-			new Quantity(Integer.parseInt(informations[2].trim())));
+
+		List<String> trimInformation = Arrays.stream(informations)
+			.map(information -> information.trim())
+			.collect(Collectors.toList());
+
+		return new Merchandise(trimInformation.get(0), Integer.parseInt(trimInformation.get(1)),
+			Integer.parseInt(trimInformation.get(2)));
 	}
 
 	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
