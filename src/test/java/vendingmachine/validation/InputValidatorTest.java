@@ -9,9 +9,9 @@ class InputValidatorTest {
 
 	@Test
 	void isValidChanges() {
-		assert validator.isValidChanges("가") == false;
-		assert validator.isValidChanges("-1") == false;
-		assert validator.isValidChanges("451") == false;
-		assert validator.isValidChanges("450");
+		assert validator.isValidMoney("가") == false;
+		assert validator.isValidMoney("-1") == false;
+		assert validator.isValidMoney("451") == false;
+		assert validator.isValidMoney("450");
 	}
 }
