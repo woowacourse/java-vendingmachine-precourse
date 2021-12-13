@@ -1,5 +1,9 @@
 package vendingmachine.process;
 
+import vendingmachine.goods.GoodsController;
+import vendingmachine.user.User;
+import vendingmachine.user.UserGoodsNameValidation;
+
 public class ProcessUserBuyGoods {
     // 반복해서 투입 금액 받아서 물건 사기
     // 투입 금액 예외처리 - ProcessPrepareUserMoney
@@ -9,10 +13,16 @@ public class ProcessUserBuyGoods {
     //
 
     public static int userMoney;
+    public static String goods;
 
     public static void makeUserMoney() {
         ProcessPrepareUserMoney.inputUserMoney();
         ProcessPrepareUserMoney.checkUserMoney();
         userMoney = ProcessPrepareUserMoney.toIntegerUserMoney();
+    }
+
+    public static void inputGoodsName() {
+        goods = User.inputGoods();
+        UserGoodsNameValidation.checkGoodsNameValidation(goods);
     }
 }
