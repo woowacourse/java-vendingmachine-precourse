@@ -20,7 +20,7 @@ public class InputDisplay {
 		System.out.println("투입 금액을 입력해 주세요.");
 	}
 
-	public static void askInputProductToBuy() {
+	public static void askInputProductNameToBuy() {
 		System.out.println("구매할 상품명을 입력해 주세요.");
 	}
 }
