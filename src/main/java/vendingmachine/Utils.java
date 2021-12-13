@@ -9,8 +9,14 @@ public class Utils {
     private static int MIN_VALUE = 100;
     private static int DIVIDED_VALUE = 10;
 
-    public static ArrayList splitString(String inputString) {
-        String[] splits = inputString.replace("[","").replace("]","").split(";");
+    public static ArrayList splitString(String inputString) throws Exception{
+        //String[] splits = inputString.replace("[","").replace("]","").split(";");
+        String[] splits = inputString.split(";");
+        for (int i = 0; i < splits.length ; i++ ) {
+            Utils.validateProductInputForm(splits[i]);
+            splits[i] = splits[i].substring(1, splits[i].length()-1);
+            System.out.println("_"+splits[i]+"_");
+        }
         return new ArrayList<String>(Arrays.asList(splits));
     }
 
@@ -59,21 +65,31 @@ public class Utils {
         }
     }
 
-    public static void validateProductInputForm(String inputProductList) {
-        if (!checkCommaCount(inputProductList)) {
+    public static void validateProductInputForm(String inputProduct) {
+        if (!checkCommaCount(inputProduct)) {
             throw new IllegalArgumentException("[ERROR] 입력형식에 맞지 않습니다.");
+        }
+        if (!checkSquareBrackets(inputProduct)) {
+            throw new IllegalArgumentException("[ERROR] 입력형식에 맞지 않습니다라닫닫.");
         }
     }
 
-    public static boolean checkCommaCount(String inputProductList) {
+    public static boolean checkCommaCount(String inputProduct) {
         int commaCount = 0;
-        for (int i = 0; i < inputProductList.length() ; i++) {
-            if (inputProductList.charAt(i) == ',') {
+        for (int i = 0; i < inputProduct.length() ; i++) {
+            if (inputProduct.charAt(i) == ',') {
                 commaCount++;
             }
         }
         if (commaCount != 2) {
             return false;
+        }
+        return true;
+    }
+
+    public static boolean checkSquareBrackets(String inputProduct) {
+        if (inputProduct.charAt(0) != '[' || inputProduct.charAt(inputProduct.length()-1) != ']') {
+           return false;
         }
         return true;
     }
