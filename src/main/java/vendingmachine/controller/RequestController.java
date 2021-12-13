@@ -1,7 +1,9 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.Changes;
+import vendingmachine.domain.Products;
 import vendingmachine.service.ChangesService;
+import vendingmachine.service.ProductsService;
 import vendingmachine.view.ExceptionView;
 import vendingmachine.view.InputView;
 
@@ -13,6 +15,16 @@ public class RequestController {
 		} catch (IllegalArgumentException e) {
 			ExceptionView.errorUI(e.getMessage());
 			return requestChanges();
+		}
+	}
+
+	public static Products requestProducts() {
+		try {
+			String request = InputView.requestProducts();
+			return ProductsService.toProducts(request);
+		} catch (IllegalArgumentException e) {
+			ExceptionView.errorUI(e.getMessage());
+			return requestProducts();
 		}
 	}
 }
