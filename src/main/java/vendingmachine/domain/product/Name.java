@@ -24,7 +24,7 @@ public class Name {
         }
     }
 
-    protected String getName() {
+    public String getName() {
         return name;
     }
 

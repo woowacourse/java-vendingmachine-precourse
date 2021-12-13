@@ -40,7 +40,7 @@ public class Price {
         }
     }
 
-    protected int getPrice() {
+    public int getPrice() {
         return price;
     }
 }
