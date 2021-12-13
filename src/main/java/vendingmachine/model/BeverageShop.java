@@ -12,6 +12,9 @@ public class BeverageShop {
 	private static final int PRICE_GROUP = 2;
 	private static final int COUNT_GROUP = 3;
 
+	private static final String NAME_DUPLICATE_ERROR = "[ERROR] 음료가 중복됩니다.";
+	private static final String INVALID_INFO_FORM_ERROR = "[ERROR] 올바른 형식으로 입력해야 합니다.";
+
 	private BeverageShop() {
 	}
 
@@ -32,7 +35,7 @@ public class BeverageShop {
 
 	private static void checkNotDuplicate(List<Beverage> beverages, Beverage newBeverage) {
 		if (beverages.contains(newBeverage)) {
-			throw new IllegalArgumentException("[ERROR] 음료가 중복됩니다.");
+			throw new IllegalArgumentException(NAME_DUPLICATE_ERROR);
 		}
 	}
 
@@ -41,7 +44,7 @@ public class BeverageShop {
 		if (matcher.find()) {
 			return getBeverageWithMatcher(matcher);
 		}
-		throw new IllegalArgumentException("[ERROR] 올바른 형식으로 입력해야 합니다.");
+		throw new IllegalArgumentException(INVALID_INFO_FORM_ERROR);
 	}
 
 	private static Beverage getBeverageWithMatcher(Matcher matcher) {

@@ -3,6 +3,8 @@ package vendingmachine.model;
 import java.util.List;
 
 public class Beverages {
+	private static final String NO_EXIST_BEVERAGE_ERROR = "[ERROR] 없는 상품입니다.";
+
 	private final List<Beverage> beverages;
 
 	public Beverages(List<Beverage> beverages) {
@@ -18,7 +20,7 @@ public class Beverages {
 		return beverages.stream()
 			.filter(beverage -> beverage.nameEquals(beverageName))
 			.findAny()
-			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 없는 상품입니다."));
+			.orElseThrow(() -> new IllegalArgumentException(NO_EXIST_BEVERAGE_ERROR));
 	}
 
 	public boolean canSellMore(Money balance) {
