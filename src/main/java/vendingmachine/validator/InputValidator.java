@@ -17,7 +17,7 @@ public class InputValidator {
 	private static final String MONEY_REGEX = "\\d+0";
 	private static final String STOCK_REGEX = "[1-9]+[0-9]*";
 	private static final String NAME_REGEX = "[a-zA-Z0-9가-힣]+";
-	private static final String BRACKET_REGEX = "\\[(.*)\\]";
+	private static final String BRACKET_REGEX = "^\\[.+,.+,.+]$";
 	private static final String OPEN_BRACKET_REGEX = "\\[";
 	private static final String CLOSE_BRACKET_REGEX = "\\]";
 
@@ -27,6 +27,7 @@ public class InputValidator {
 		checkBracket(input);
 		String[] itemList = input.split(";");
 		for (String item : itemList) {
+			checkBracket(item);
 			String itemInfo = eraseBracket(item);
 			items.add(itemInfo);
 		}
