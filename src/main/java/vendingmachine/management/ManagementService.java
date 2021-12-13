@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Randoms;
+
 import vendingmachine.Coin;
+import vendingmachine.management.validation.CheckCommodityFormat;
 import vendingmachine.management.validation.CheckCommodityPrice;
 import vendingmachine.management.validation.CheckCommodityQuantity;
 
@@ -35,6 +37,7 @@ public class ManagementService {
     }
     
     public static Commodity toCommodity(String input) {
+        CheckCommodityFormat.validationSquareBracket(input);
         input = input.substring(1,input.length()-1);
         String [] components = input.split(",");
         String name = components[COMMODITY_NAME];
