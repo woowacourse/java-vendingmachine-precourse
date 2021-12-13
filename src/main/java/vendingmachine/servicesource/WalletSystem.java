@@ -43,6 +43,35 @@ public class WalletSystem {
         return numberList;
     }
 
+    void withdrawInsertedBalance(int price){
+        insertedBalance -= price;
+    }
+
+    boolean canBuySelectedProduct(Product product){
+        boolean canBuy = true;
+
+        try{
+            checkRemainBalance(product.getPrice());
+        }catch(IllegalArgumentException exception){
+            canBuy = false;
+            System.out.println(exception.getMessage());
+        }
+
+        return canBuy;
+    }
+
+    private void checkRemainBalance(int price){
+
+        if(insertedBalance < price ){
+            throw new IllegalArgumentException("[ERROR]: 잔액이 부족합니다.");
+        }
+
+    }
+
+    WalletPrinter getWalletPrinter(){
+        return walletPrinter;
+    }
+
     int getRemainCoinsByCoinType(Coin coinType) {
         return remainCoinsMap.get(coinType);
     }
@@ -55,7 +84,4 @@ public class WalletSystem {
         return insertedBalance;
     }
 
-    WalletPrinter getWalletPrinter(){
-        return walletPrinter;
-    }
 }
