@@ -15,4 +15,12 @@ public class Products {
             productsList.add(new Product(name, price, number));
         }
     }
+
+    public int getMaxPrice() {
+        int result = 0;
+        for (Product p : productsList) {
+            result = Math.max(result, p.getPrice());
+        }
+        return result;
+    }
 }
