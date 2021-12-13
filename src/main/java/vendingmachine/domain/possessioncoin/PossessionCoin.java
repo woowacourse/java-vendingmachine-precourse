@@ -5,6 +5,7 @@ import vendingmachine.domain.investmentmoney.InvestmentMoney;
 
 public class PossessionCoin {
     private static final int DEFAULT_QUANTITY = 0;
+    private static final String TO_STRING_FORMAT = "%d원 - %d개";
 
     private final Coin coin;
     private final int quantity;
@@ -31,6 +32,6 @@ public class PossessionCoin {
 
     @Override
     public String toString() {
-        return coin.getAmount() + "원 - " + quantity + "개";
+        return String.format(TO_STRING_FORMAT, coin.getAmount(), quantity);
     }
 }

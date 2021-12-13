@@ -1,6 +1,9 @@
 package vendingmachine.domain.product;
 
 public class Name {
+    private static final String VALID_EMPTY = "[ERROR] 상품 이름이 비어있습니다.";
+    private static final String VALID_BLANK = "[ERROR] 상품 이름이 공백입니다.";
+
     private final String name;
 
     public Name(String name) {
@@ -11,13 +14,13 @@ public class Name {
 
     private void validateEmpty(String name) {
         if (name.isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(VALID_EMPTY);
         }
     }
 
     private void validateBlank(String name) {
         if (name.trim().isEmpty()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(VALID_BLANK);
         }
     }
 

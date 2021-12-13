@@ -34,6 +34,8 @@ public class VendingMachineController {
 
             return possessionCoins;
         } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
+            System.out.println();
             return getPossessionCoins();
         }
     }
@@ -42,6 +44,7 @@ public class VendingMachineController {
         try {
             return InputView.getProducts();
         } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
             return getProducts();
         }
     }
@@ -63,6 +66,7 @@ public class VendingMachineController {
 
             return investmentMoney;
         } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
             return getInvestmentMoney(vendingMachine);
         }
     }
@@ -72,6 +76,7 @@ public class VendingMachineController {
             OutputView.printInvestmentMoney(investmentMoney);
             vendingMachine.buy(investmentMoney, InputView.getProductPurchase());
         } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e.getMessage());
             buy(vendingMachine, investmentMoney);
         }
     }

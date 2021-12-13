@@ -1,12 +1,15 @@
 package vendingmachine.domain.product;
 
 public class Product {
+    private static final String VALID_START_END_WITH = "[ERROR] 상품 입력은 '['로 시작하고 ']'로 끝나야 합니다.";
+    private static final String VALID_NUMBER_FORMAT = "[ERROR] 상품 수량은 숫자여야 합니다.";
+    private static final String VALID_LEAST_QUANTITY = "[ERROR] 상품 수량은 최소 1개 이상이어야 합니다.";
+
     private static final String INPUT_PRODUCT_PREFIX = "[";
     private static final String INPUT_PRODUCT_SUFFIX = "]";
     private static final String EMPTY = "";
     private static final String INPUT_PRODUCT_SPLIT_REGEX = ",";
     private static final int INPUT_PRODUCT_SPLIT_LIMIT = -1;
-
     private static final int NAME_INDEX = 0;
     private static final int PRICE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
@@ -31,7 +34,7 @@ public class Product {
 
     private void validateStartWithAndEndWith(String inputProduct) {
         if (!(inputProduct.startsWith(INPUT_PRODUCT_PREFIX) && inputProduct.endsWith(INPUT_PRODUCT_SUFFIX))) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(VALID_START_END_WITH);
         }
     }
 
@@ -49,13 +52,13 @@ public class Product {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(VALID_NUMBER_FORMAT);
         }
     }
 
     private void validateLeastQuantity(int quantity) {
         if (quantity <= DEFAULT_QUANTITY) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(VALID_LEAST_QUANTITY);
         }
     }
 

@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.investmentmoney.InvestmentMoney;
 
 public class Products {
+    private static final String VALID_DUPLICATE = "[ERROR] 상품 이름은 중복될 수 없습니다.";
+
     private final List<Product> products;
 
     public Products(List<Product> products) {
@@ -22,7 +24,7 @@ public class Products {
             .collect(Collectors.toSet());
 
         if (originalSize != noneDuplicatedProductNames.size()) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(VALID_DUPLICATE);
         }
     }
 
