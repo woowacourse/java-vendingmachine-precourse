@@ -35,4 +35,24 @@ class ProductRepositoryTest implements Rollback {
 		// then
 		assertEquals("[[사이다, 1500원, 15개], [콜라, 1000원, 10개]]", save);
 	}
+
+	@Test
+	@DisplayName("상품을 구매한다.")
+	public void testProductPurchase() {
+		// given
+		Name name = new Name("콜라");
+		// when
+		Price price = repository.purchase(name);
+	    // then
+		assertEquals("1500원", price.toString());
+	}
+
+	@Test
+	@DisplayName("상품이 없으면 예외를 던진다")
+	public void testPurchaseWrongName() {
+	    // when
+		Name name = new Name("없는 물건");
+		// then
+		assertThrows(IllegalArgumentException.class, () -> repository.purchase(name));
+	}
 }
