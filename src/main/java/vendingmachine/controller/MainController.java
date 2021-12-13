@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Changes;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
@@ -18,5 +19,10 @@ public class MainController {
             OutputView.printRemainingAmount(vendingMachine.getMoney());
             vendingMachine.buyProduct(InputView.inputProductToPurchase());
         }
+        Changes changes = new Changes();
+        changes.makeChanges(vendingMachine.getCoin(), vendingMachine.getMoney());
+
+        OutputView.printChanges(changes.getChanges());
+
     }
 }
