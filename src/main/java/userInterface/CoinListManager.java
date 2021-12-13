@@ -1,6 +1,7 @@
 package userInterface;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -12,7 +13,7 @@ import vendingmachine.Coin;
 import vendingmachine.Coins;
 
 public class CoinListManager {
-	private int deposit = 0;
+	private int sumOfChange = 0;
 	private Coins coinList;
 	Coin[] coinArrays = {Coin.COIN_500,Coin.COIN_100,Coin.COIN_50, Coin.COIN_10};
 
@@ -27,30 +28,29 @@ public class CoinListManager {
 		isAmount validator = new isAmount();
 		InputManager inputManager = new InputManager();
 		String input = inputManager.getStringWithInput(validator);
-		deposit = Integer.parseInt(input);
+		sumOfChange = Integer.parseInt(input);
 		System.out.println();
 	}
 
 	public void makeRandomList() {
-		Coin[] coinArraysWithOutTen = {Coin.COIN_500,Coin.COIN_100,Coin.COIN_50};
-
-		for (Coin coin : coinArraysWithOutTen) {
-			int value = coin.getAmount();
-			int randomNum = rand(deposit/value);
-			coinList.put(coin,randomNum);
-			deposit -= randomNum*value;
+		// 1. 랜덤을 뽑는 리스트는 [500,100,50,10]이다.
+		// 2. sumOfChange 가 0이 될때까지 반복한다.
+		// 3. 만약 sumOfChange 가 뽑힌 값보다 작으면, 리스트에서 해당 값을 제외하고 continue 한다.
+		// 4. 리스트에서 뽑은 값 만큼 sumOfChange 에서 값을 빼고, coinList 에는 addOne() 한다.
+		List<Integer> valueList = Arrays.asList(500,100,50,10);
+		while ( sumOfChange < 0 ) {
+			int randomAmount = Randoms.pickNumberInList(valueList);
+			if (!isAvailableToDeduct(randomAmount)) {
+				valueList.remove(new Integer(randomAmount));
+				continue;
+			}
+			sumOfChange -= randomAmount;
+			coinList.addOne(randomAmount);
 		}
-
-		Coin coinOfMinValue = Coin.COIN_10;
-		coinList.put(coinOfMinValue,deposit/coinOfMinValue.getAmount());
-		deposit = 0;
 	}
 
-	private int rand(int maxCount) {
-		List<Integer> numList = new ArrayList<>();
-		IntStream.range(0,maxCount+1).forEach(i -> numList.add(i));
-
-		return Randoms.pickNumberInList(numList);
+	private boolean isAvailableToDeduct(int amount) {
+		return amount <= sumOfChange;
 	}
 
 	public void printCoinList() {
