@@ -3,6 +3,9 @@ package vendingmachine.domain;
 import java.util.List;
 
 public class Item {
+	private static final int ZERO = 0;
+	private static final int TEN = 10;
+	private static final int COST_LOWER_BOUND = 100;
 	private static final int NUMBER_OF_TYPE = 3;
 	private static final String COST = "비용";
 	private static final String AMOUNT = "수량";
@@ -35,7 +38,7 @@ public class Item {
 	}
 
 	private void validateCost(int cost) {
-		if (cost < 100 || 0 < cost % 10) {
+		if (cost < COST_LOWER_BOUND || ZERO < cost % TEN) {
 			throw new IllegalArgumentException("가격이 100 이상이면서 10으로 나누어 떨어져야 합니다.");
 		}
 	}
@@ -53,6 +56,6 @@ public class Item {
 	}
 
 	public boolean isSellable() {
-		return 0 < amount;
+		return ZERO < amount;
 	}
 }
