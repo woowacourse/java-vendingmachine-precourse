@@ -4,13 +4,13 @@ import java.util.List;
 
 public class VendingMachine {
 
-	private final List<CoinCase> coinCases;
+	private final CoinCase coinCase;
 	private final List<Product> products;
 	private int remainInsertMoney;
 	private static final int INITIAL_VALUE = 0;
 
-	public VendingMachine(List<CoinCase> coinCases, List<Product> products, int insertMoney) {
-		this.coinCases = coinCases;
+	public VendingMachine(CoinCase coinCase, List<Product> products, int insertMoney) {
+		this.coinCase = coinCase;
 		this.products = products;
 		this.remainInsertMoney = insertMoney;
 	}
@@ -44,7 +44,7 @@ public class VendingMachine {
 	}
 
 	public Changes returnChanges() {
-		return new Changes(coinCases, remainInsertMoney);
+		return new Changes(coinCase, remainInsertMoney);
 	}
 
 	private boolean isSoldOutAllProducts() {

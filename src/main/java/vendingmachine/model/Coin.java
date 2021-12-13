@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import vendingmachine.utils.exception.MoneyException;
 
 public enum Coin {
@@ -9,6 +11,7 @@ public enum Coin {
 	COIN_10(10);
 
 	private final int amount;
+	private static final int INITIAL_VALUE = 0;
 
 	Coin(final int amount) {
 		MoneyException.validateMoney(amount);
@@ -18,5 +21,10 @@ public enum Coin {
 	// 추가 기능 구현
 	public int getAmount() {
 		return amount;
+	}
+
+	public static Coin getCoinEqualAmount(int amount) {
+		return Arrays.stream(Coin.values()).filter(coin -> coin.amount == amount)
+			.collect(Collectors.toList()).get(INITIAL_VALUE);
 	}
 }

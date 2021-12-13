@@ -1,7 +1,10 @@
 package vendingmachine.utils;
 
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
@@ -9,24 +12,39 @@ import vendingmachine.view.OutputView;
 
 public class CoinCaseFactory {
 
-	private static int currentAmount;
+	private static final int INITIAL_VALUE = 0;
 
 	private CoinCaseFactory() {
 	}
 
-	public static List<CoinCase> makeCoinCases(int totalAmount) {
-		currentAmount = totalAmount;
-		List<CoinCase> coinCases = Arrays.
-			stream(Coin.values())
-			.map(CoinCaseFactory::makeCoinCase)
-			.collect(Collectors.toList());
-		OutputView.printVendingMachineCoinStatus(coinCases);
-		return coinCases;
+	public static CoinCase makeCoinCase(int totalAmount) {
+		CoinCase coinCase = new CoinCase();
+		int currentAmount = totalAmount;
+		while (currentAmount > INITIAL_VALUE) {
+			int pickedCoinAmount = pickRandomCoin(currentAmount);
+			currentAmount -= pickedCoinAmount;
+			increasePickedCoin(coinCase, pickedCoinAmount);
+		}
+		OutputView.printVendingMachineCoinStatus(coinCase);
+		return coinCase;
 	}
 
-	private static CoinCase makeCoinCase(Coin coin) {
-		CoinCase coinCase = new CoinCase(coin, currentAmount);
-		currentAmount = coinCase.getCurrentAmount();
-		return coinCase;
+	private static void increasePickedCoin(CoinCase coinCaseTmp, int pickedCoin) {
+		coinCaseTmp.increasePickedCoinCount(Coin.getCoinEqualAmount(pickedCoin));
+	}
+
+	private static int pickRandomCoin(int currentAmount) {
+		int pickedCoinAmount;
+		do {
+			pickedCoinAmount = Randoms.pickNumberInList(makeRandomCoinRange());
+		}
+		while (currentAmount < pickedCoinAmount);
+		return pickedCoinAmount;
+	}
+
+	private static List<Integer> makeRandomCoinRange() {
+		return Arrays.stream(Coin.values())
+			.map(Coin::getAmount)
+			.collect(Collectors.toList());
 	}
 }

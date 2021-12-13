@@ -24,7 +24,7 @@ public class VendingMachineController {
 	private static VendingMachine initVendingMachine() {
 		int amount = InputView.writeVendingMachineAmount();
 		return VendingMachineFactory.makeVendingMachine(
-			CoinCaseFactory.makeCoinCases(amount),
+			CoinCaseFactory.makeCoinCase(amount),
 			ProductFactory.makeProducts(),
 			InputView.writeInsertMoney());
 	}

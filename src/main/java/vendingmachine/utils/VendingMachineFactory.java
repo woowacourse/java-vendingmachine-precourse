@@ -10,7 +10,7 @@ public class VendingMachineFactory {
 	private VendingMachineFactory() {
 	}
 
-	public static VendingMachine makeVendingMachine(List<CoinCase> coinCases,
+	public static VendingMachine makeVendingMachine(CoinCase coinCases,
 		List<Product> products, int insertMoney) {
 		return new VendingMachine(coinCases, products, insertMoney);
 	}

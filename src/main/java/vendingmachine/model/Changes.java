@@ -1,38 +1,32 @@
 package vendingmachine.model;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import vendingmachine.utils.exception.MoneyException;
 
 public class Changes {
 
-	private final Map<Integer, Integer> changes;
-	private final List<CoinCase> coinCases;
+	private final Map<Coin, Integer> changes;
+	private final CoinCase coinCase;
 	private int remainInsertMoney;
-	private static final int INITIAL_VALUE = 0;
 
-	public Changes(List<CoinCase> coinCases, int remainInsertMoney) {
+	public Changes(CoinCase coinCase, int remainInsertMoney) {
 		MoneyException.validateMoney(remainInsertMoney);
-		this.coinCases = coinCases;
+		this.coinCase = coinCase;
 		this.remainInsertMoney = remainInsertMoney;
 		this.changes = calculateChanges();
 	}
 
-	public Map<Integer, Integer> getChanges() {
+	public Map<Coin, Integer> getChanges() {
 		return changes;
 	}
 
-	private Map<Integer, Integer> calculateChanges() {
-		Map<Integer, Integer> change = new HashMap<>();
-		for (CoinCase coinCase : coinCases) {
-			if (remainInsertMoney == INITIAL_VALUE) {
-				break;
-			}
-			int coinType = coinCase.getCoin().getAmount();
-			int changeCount = coinCase.returnChange(remainInsertMoney / coinType);
-			remainInsertMoney -= changeCount * coinType;
-			change.put(coinType, changeCount);
+	private Map<Coin, Integer> calculateChanges() {
+		Map<Coin, Integer> change = new HashMap<>();
+		for (Coin coin : Coin.values()) {
+			int changeCount = coinCase.returnChange(coin, remainInsertMoney / coin.getAmount());
+			remainInsertMoney -= changeCount * coin.getAmount();
+			change.put(coin, changeCount);
 		}
 		return change;
 	}

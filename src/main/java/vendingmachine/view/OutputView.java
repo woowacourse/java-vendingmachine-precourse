@@ -1,11 +1,7 @@
 package vendingmachine.view;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import vendingmachine.model.Changes;
-import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
 import vendingmachine.model.VendingMachine;
 
@@ -16,6 +12,7 @@ public class OutputView {
 	private static final String VENDING_MACHINE_COIN_STATUS = "자판기가 보유한 동전";
 	private static final String ASK_PRODUCT_INFORMATION = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String KOREAN_CURRENCY = "원";
+	private static final String UNIT_OF_COUNTING_COINS = "개";
 	private static final String DELIMITER_COIN_AND_NUMBER = " - ";
 	private static final String ASK_INSERT_MONEY = "투입 금액을 입력해 주세요.";
 	private static final String NOTICE_INSERTED_MONEY = "투입 금액: ";
@@ -35,18 +32,17 @@ public class OutputView {
 		System.out.println(ASK_VENDING_MACHINE_AMOUNT);
 	}
 
-	public static void printVendingMachineCoinStatus(List<CoinCase> coinsCase) {
+	public static void printVendingMachineCoinStatus(CoinCase coinCase) {
 		printCoinStatus();
-		List<Integer> coinTypes = coinsCase.stream().map(CoinCase::getCoin)
-			.map(Coin::getAmount).collect(
-				Collectors.toList());
-		List<Integer> numberOfCoins = coinsCase.stream().map(CoinCase::getNumber)
-			.collect(
-				Collectors.toList());
-		for (int i = INITIAL_VALUE; i < coinTypes.size(); i++) {
-			System.out.println(coinTypes.get(i) + KOREAN_CURRENCY + DELIMITER_COIN_AND_NUMBER
-				+ numberOfCoins.get(i));
-		}
+		coinCase.getCoinCase().
+			entrySet().
+			stream().
+			sorted(Map.Entry.comparingByKey()).
+			forEach(entry -> System.out.println(entry.getKey().getAmount()
+				+ KOREAN_CURRENCY
+				+ DELIMITER_COIN_AND_NUMBER
+				+ entry.getValue()
+				+ UNIT_OF_COUNTING_COINS));
 	}
 
 	public static void askProductInfo() {
@@ -80,13 +76,14 @@ public class OutputView {
 		System.out.println(CHANGE);
 		changes.getChanges().entrySet()
 			.stream()
+			.sorted(Map.Entry.comparingByKey())
 			.filter(coin -> coin.getValue() > INITIAL_VALUE)
-			.sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
 			.forEach(entry ->
-				System.out.println(entry.getKey()
+				System.out.println(entry.getKey().getAmount()
 					+ KOREAN_CURRENCY
 					+ DELIMITER_COIN_AND_NUMBER
-					+ entry.getValue()));
+					+ entry.getValue()
+					+ UNIT_OF_COUNTING_COINS));
 	}
 
 	private static void printNewLine() {
