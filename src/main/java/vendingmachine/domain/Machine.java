@@ -86,20 +86,14 @@ public class Machine {
 		return returnCoins;
 	}
 
+	//TODO: 동전 큰 순서로 sort 해야함
 	private int setReturnCoinsAndGetReturnCoinsAmount(Map<Coin, Integer> returnCoins, int returnCoinsAmount,
 		Coin coin) {
-		// List였을땐 그냥 돌리면서 하면 됐는데 Map이라서 달라짐
-		// for문을 개수로 돌리는데 개수가 변함.
-		// -- 해결 --
-
-		// 또 다른 문제 : LinkedHashMap으로 반환해야 view 편함
-		// addCoins할때 sort할까?
 		for (int i = 0; i < coins.get(coin); i++) {
 			if (returnCoinsAmount < coin.getAmount()) {
 				break;
 			}
 			MapSupporter.increaseCoinCount(returnCoins, coin, 0, 1);
-			// MapSupporter.increaseCoinCount(coins, coin, 0, -1);
 			returnCoinsAmount -= coin.getAmount();
 		}
 		return returnCoinsAmount;
