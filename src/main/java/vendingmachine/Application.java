@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import vendingmachine.controller.RequestController;
 import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.VendingMachine;
 
