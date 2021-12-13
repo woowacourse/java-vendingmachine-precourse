@@ -135,7 +135,7 @@ class ProductTest {
     void isExistQuantity_QuantityNotMoreThan0_False() {
         // given
         Product product = new Product("[콜라,1500,1]");
-        product.purchase();
+        product.receive();
 
         // then
         boolean result = product.isExistQuantity();

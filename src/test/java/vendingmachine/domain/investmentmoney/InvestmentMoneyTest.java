@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
-import vendingmachine.domain.investmentmoney.InvestmentMoney;
 import vendingmachine.domain.product.Product;
 
 class InvestmentMoneyTest {
@@ -59,9 +58,12 @@ class InvestmentMoneyTest {
         InvestmentMoney investmentMoney = new InvestmentMoney("1000");
         Product product = new Product("[콜라,1500,10]");
 
-        // when & then
+        // when
+        int price = product.getPrice();
+
+        // then
         assertThatThrownBy(() -> {
-            investmentMoney.calculate(product);
+            investmentMoney.calculate(price);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -59,7 +59,7 @@ class ProductsTest {
         Products products = new Products(productList);
 
         // when
-        product1.purchase();
+        product1.receive();
         boolean result = products.isPossiblePurchase(investmentMoney);
 
         // then
@@ -79,8 +79,8 @@ class ProductsTest {
         Products products = new Products(productList);
 
         // when
-        product1.purchase();
-        product2.purchase();
+        product1.receive();
+        product2.receive();
         boolean result = products.isPossiblePurchase(investmentMoney);
 
         // then
@@ -100,7 +100,7 @@ class ProductsTest {
         Products products = new Products(productList);
 
         // when
-        product2.purchase();
+        product2.receive();
         boolean result = products.isPossiblePurchase(investmentMoney);
 
         // then
