@@ -27,8 +27,8 @@ public class OutputView {
 
 	public static void printCurrentInputMoney(VendingMachine vendingMachine) {
 		System.out.println();
-		System.out.print(SystemMessage.CURRENT_INPUT_MONEY.getText());
-		System.out.print(vendingMachine.getInputMoney().getCurrentMoney());
+		System.out.print(SystemMessage.CURRENT_INSERT_MONEY.getText());
+		System.out.print(vendingMachine.getInsertMoney().getCurrentMoney());
 		System.out.println(MONEY_UNIT_WON.getText());
 	}
 

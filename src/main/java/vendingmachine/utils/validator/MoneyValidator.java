@@ -14,7 +14,7 @@ public class MoneyValidator {
 	private static final int EXPECTED_VALUE_WHEN_DIVIDING = 0;
 	private static final int ZERO_NUMBER = 0;
 
-	public static boolean checkIsValidInputMoney(String input) {
+	public static boolean checkIsValidInsertMoney(String input) {
 		try {
 			isNotBlank(input);
 			isDigit(input);
@@ -69,15 +69,14 @@ public class MoneyValidator {
 		}
 		return checkProductStock(vendingMachine);
 	}
-
-	// 상품 물량과 상품 최소 가격 확인
+	
 	public static boolean checkProductStock(VendingMachine vendingMachine) {
 		List<Product> productList = vendingMachine.getProducts().getProductList();
 		for (Product product : productList) {
 			if (product.getQuantity() == ZERO_NUMBER) {
 				continue;
 			}
-			if (product.getPrice() <= vendingMachine.getInputMoney().getCurrentMoney()) {
+			if (product.getPrice() <= vendingMachine.getInsertMoney().getCurrentMoney()) {
 				return true;
 			}
 		}
@@ -85,7 +84,7 @@ public class MoneyValidator {
 	}
 
 	public static boolean checkMinPrice(VendingMachine vendingMachine) {
-		int currentMoney = vendingMachine.getInputMoney().getCurrentMoney();
+		int currentMoney = vendingMachine.getInsertMoney().getCurrentMoney();
 		int minPriceProduct = vendingMachine.getProducts().getMinPriceProduct();
 		return currentMoney >= minPriceProduct;
 	}

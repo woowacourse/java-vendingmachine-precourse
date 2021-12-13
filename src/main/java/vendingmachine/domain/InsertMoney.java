@@ -1,9 +1,9 @@
 package vendingmachine.domain;
 
-public class InputMoney {
+public class InsertMoney {
 	private int currentMoney;
 
-	public InputMoney(int currentMoney) {
+	public InsertMoney(int currentMoney) {
 		this.currentMoney = currentMoney;
 	}
 

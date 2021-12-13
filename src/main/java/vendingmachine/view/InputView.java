@@ -25,9 +25,9 @@ public class InputView {
 		return Arrays.asList(Console.readLine().split(INPUT_SPLIT_DELIMITER));
 	}
 
-	public static String inputMoneyToPutInVendingMachine() {
+	public static String insertMoneyIntoVendingMachine() {
 		System.out.println();
-		System.out.println(SystemMessage.GET_INPUT_MONEY.getText());
+		System.out.println(SystemMessage.GET_INSERT_MONEY.getText());
 		return Console.readLine();
 	}
 

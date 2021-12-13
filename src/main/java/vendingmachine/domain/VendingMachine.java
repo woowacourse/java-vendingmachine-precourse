@@ -7,7 +7,7 @@ public class VendingMachine {
 
 	private Changes changes;
 	private Products products;
-	private InputMoney inputMoney;
+	private InsertMoney insertMoney;
 
 	public Changes getChanges() {
 		return changes;
@@ -17,12 +17,12 @@ public class VendingMachine {
 		return products;
 	}
 
-	public InputMoney getInputMoney() {
-		return inputMoney;
+	public InsertMoney getInsertMoney() {
+		return insertMoney;
 	}
 
 	public Map<Coin, Integer> returnChanges() {
-		return changes.calculateRemainChanges(inputMoney.getCurrentMoney());
+		return changes.calculateRemainChanges(insertMoney.getCurrentMoney());
 	}
 
 	public void createChanges(int totalChanges) {
@@ -35,16 +35,14 @@ public class VendingMachine {
 		products.createProductList(productInfoList);
 	}
 
-	public void createInputMoney(int tempInputMoney) {
-		inputMoney = new InputMoney(tempInputMoney);
+	public void createInsertMoney(int tempInsertMoney) {
+		insertMoney = new InsertMoney(tempInsertMoney);
 	}
 
-	public boolean sellProduct(String productName) {
+	public void sellProduct(String productName) {
 		if (products.checkStockAndSellProduct(productName)) {
-			inputMoney.reduceMoney(products.getProductByName(productName).getPrice());
-			return true;
+			insertMoney.reduceMoney(products.getProductByName(productName).getPrice());
 		}
-		return false;
 	}
 
 }

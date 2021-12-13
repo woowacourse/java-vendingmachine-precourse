@@ -12,7 +12,7 @@ public class ProductValidator {
 	private static final int OUT_OF_STOCK = 0;
 
 	public static boolean checkIsValidToBuyProduct(VendingMachine vendingMachine, String productName) {
-		int currentMoney = vendingMachine.getInputMoney().getCurrentMoney();
+		int currentMoney = vendingMachine.getInsertMoney().getCurrentMoney();
 		try {
 			Product product = vendingMachine.getProducts().getProductByName(productName);
 			List<Product> productList = vendingMachine.getProducts().getProductList();

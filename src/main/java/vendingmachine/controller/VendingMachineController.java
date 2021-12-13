@@ -26,6 +26,12 @@ public class VendingMachineController {
 		returnRemainChanges();
 	}
 
+	public void returnRemainChanges() {
+		printCurrentInputMoney(vendingMachine);
+		printRemainChanges(vendingMachine.returnChanges());
+
+	}
+
 	public void buyProducts() {
 		while (isValidToBuyProduct(vendingMachine)) {
 			printCurrentInputMoney(vendingMachine);
@@ -34,17 +40,11 @@ public class VendingMachineController {
 		}
 	}
 
-	public void returnRemainChanges() {
-		printCurrentInputMoney(vendingMachine);
-		printRemainChanges(vendingMachine.returnChanges());
-
-	}
-
 	public void initInsertMoney() {
 		while (true) {
-			String insertMoney = inputMoneyToPutInVendingMachine();
-			if (checkIsValidInputMoney(insertMoney)) {
-				vendingMachine.createInputMoney(Integer.parseInt(insertMoney));
+			String insertMoney = insertMoneyIntoVendingMachine();
+			if (checkIsValidInsertMoney(insertMoney)) {
+				vendingMachine.createInsertMoney(Integer.parseInt(insertMoney));
 				break;
 			}
 		}
