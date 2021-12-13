@@ -1,8 +1,5 @@
 package vendingmachine.controller;
 
-import java.util.List;
-
-import vendingmachine.domain.Item;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.Converter;
 import vendingmachine.util.Validator;
@@ -14,16 +11,16 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = initVendingMachine();
 		OutputView.printChanges(vendingMachine.getChanges());
 		initItemList(vendingMachine);
-		initInputAmount(vendingMachine);
+		inputAmount(vendingMachine);
 	}
 
-	private void initInputAmount(VendingMachine vendingMachine) {
+	private void inputAmount(VendingMachine vendingMachine) {
 		try {
 			OutputView.printInputAmount();
-			vendingMachine.initInputAmount(InputView.inputMoney());
+			vendingMachine.inputAmount(InputView.inputMoney());
 		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
-			initInputAmount(vendingMachine);
+			inputAmount(vendingMachine);
 		}
 	}
 

@@ -7,7 +7,7 @@ import vendingmachine.util.Validator;
 public class VendingMachine {
 	private final Changes changes;
 	private ItemList itemList;
-	private int inputAmount;
+	private int amount;
 
 	public VendingMachine(int money) {
 		changes = new Changes(money);
@@ -17,9 +17,9 @@ public class VendingMachine {
 		itemList = new ItemList(items);
 	}
 
-	public void initInputAmount(int inputAmount) {
+	public void inputAmount(int inputAmount) {
 		Validator.validateMoney(inputAmount);
-		this.inputAmount = inputAmount;
+		this.amount = inputAmount;
 	}
 
 	public Changes getChanges() {
