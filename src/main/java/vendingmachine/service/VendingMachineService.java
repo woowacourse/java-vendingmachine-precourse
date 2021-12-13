@@ -44,7 +44,6 @@ public class VendingMachineService {
 	public String postInputCosts(String inputStr) {
 		InputCostValidator.validateInputCost(inputStr);
 		result.init();
-		//TODO
 		vendingMachine.setInputCost(Integer.parseInt(inputStr));
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
