@@ -14,7 +14,7 @@ public class MachineStock {
     private HashMap<Product, Integer> productStockMap;  // key: Product, value: 재고 수량
     private HashMap<String, Product> productListMap;    // key: Product name, value: Product
 
-    void MachineStock(){
+    MachineStock(){
         productStockMap = InputChecker.getProductStockHashMap();
         productListMap = makeProductList( productStockMap.keySet());
         setCheapestPrice();
