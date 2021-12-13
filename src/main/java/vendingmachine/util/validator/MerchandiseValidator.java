@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class MerchandiseValidator implements InputValidator {
-
     private static final MerchandiseValidator instance = new MerchandiseValidator();
     private String input;
 

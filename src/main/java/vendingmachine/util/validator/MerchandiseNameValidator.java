@@ -8,7 +8,6 @@ public class MerchandiseNameValidator implements InputValidator {
     private static final MerchandiseNameValidator instance = new MerchandiseNameValidator();
     private List<String> merchandiseNames;
 
-
     private MerchandiseNameValidator() {
     }
 
