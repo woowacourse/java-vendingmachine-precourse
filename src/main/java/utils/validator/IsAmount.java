@@ -4,19 +4,22 @@ public class IsAmount implements Validator {
 	public boolean run(StringBuilder input) {
 		new IsDigit().run(input);
 
-		if (isNegative(input) && hasNoSmallValue(input)) {
-			throw new IllegalArgumentException("[ERROR] 음수단위의 금액은 사용할 수 없습니다.");
-		}
-		return true;
+		return isNotNegative(input) && hasNoSmallValue(input);
 	}
 
-	private boolean isNegative(StringBuilder input) {
+	private boolean isNotNegative(StringBuilder input) {
 		int amount = Integer.parseInt(input.toString());
-		return amount <= 0;
+		if (0 <= amount) {
+			return true;
+		}
+		throw new IllegalArgumentException("[ERROR] 음수단위의 금액은 사용할 수 없습니다.");
 	}
 
 	private boolean hasNoSmallValue(StringBuilder input) {
 		int amount = Integer.parseInt(input.toString());
-		return amount % 10 != 0;
+		if (amount % 10 != 0) {
+			return true;
+		}
+		throw new IllegalArgumentException("[ERROR] 10이하 단위의 금액은 사용할 수 없습니다.");
 	}
 }
