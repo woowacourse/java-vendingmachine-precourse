@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import vendingmachine.view.OutputView;
-
 public class Customer {
 	private static final String CAN_NOT_BUY_PRODUCT_MESSAGE = "상품이 투입금액보다 비쌉니다.";
 	private int money;
@@ -12,10 +10,6 @@ public class Customer {
 
 	public int getMoney() {
 		return money;
-	}
-
-	public void showChanges() {
-		OutputView.printCustomerChanges(money);
 	}
 
 	public void purchaseProduct(int productCost) {

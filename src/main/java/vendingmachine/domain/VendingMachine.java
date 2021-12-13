@@ -2,8 +2,6 @@ package vendingmachine.domain;
 
 import java.util.List;
 
-import vendingmachine.view.OutputView;
-
 public class VendingMachine {
 	private static final String SPLITTER_OF_PRODUCT_INFO = ",";
 	private static final int PRODUCT_NAME_INDEX = 0;
@@ -13,9 +11,8 @@ public class VendingMachine {
 	private final ProductRepository productRepository = new ProductRepository();
 	private CoinBox coinBox;
 
-	public void returnChanges(int amount) {
-		OutputView.printChangesMessage();
-		coinBox.returnChanges(amount);
+	public List<String> getChangeInfoListForCustomer(int changeAmount) {
+		return coinBox.getChangeInfoListForCustomer(changeAmount);
 	}
 
 	public void sellProduct(String productName) {
@@ -40,9 +37,8 @@ public class VendingMachine {
 		});
 	}
 
-	public void showHoldingCoins() {
-		OutputView.printHoldingCoinMessage();
-		coinBox.showCoins();
+	public List<String> getHoldingCoinInfoList() {
+		return coinBox.getCoinInfoList();
 	}
 
 	public void setHoldingAmount(int amount) {

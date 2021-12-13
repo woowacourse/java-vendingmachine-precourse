@@ -19,8 +19,8 @@ public class OutputView {
 		System.out.println(HOLDING_COIN_MESSAGE);
 	}
 
-	public static void printCoinInfo(String coin, int numberOfCoin) {
-		System.out.println(coin + " - " + numberOfCoin + "개");
+	public static void printCoinInfo(String coinInfo) {
+		System.out.println(coinInfo);
 	}
 
 	public static void printProductInputRequestMessage() {

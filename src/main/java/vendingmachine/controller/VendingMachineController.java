@@ -16,15 +16,33 @@ public class VendingMachineController {
 	private final VendingMachine vendingMachine = new VendingMachine();
 
 	public void run() {
-		makeVendingMachineHoldingAmount();
-		vendingMachine.showHoldingCoins();
-		List<String> productList = getProductListFromInput();
-		vendingMachine.addProducts(productList);
+		requestVendingMachineHoldingAmount();
+		showHoldingCoinInfo();
+		requestVendingMachineProduct();
+
 		int inputMoney = getInputAmountFromInput();
 		Customer customer = new Customer(inputMoney);
-		customer.showChanges();
+		OutputView.printCustomerChanges(customer.getMoney());
 		makeVendingMachineTrade(customer);
-		vendingMachine.returnChanges(customer.getMoney());
+
+		requestCustomerChangesReturn(customer);
+	}
+
+	private void requestCustomerChangesReturn(Customer customer) {
+		OutputView.printChangesMessage();
+		List<String> changeInfoList = vendingMachine.getChangeInfoListForCustomer(customer.getMoney());
+		changeInfoList.forEach(OutputView::printCoinInfo);
+	}
+
+	private void requestVendingMachineProduct() {
+		List<String> productList = getProductListFromInput();
+		vendingMachine.addProducts(productList);
+	}
+
+	private void showHoldingCoinInfo() {
+		OutputView.printHoldingCoinMessage();
+		List<String> coinInfoLIst = vendingMachine.getHoldingCoinInfoList();
+		coinInfoLIst.forEach(OutputView::printCoinInfo);
 	}
 
 	private void makeVendingMachineTrade(Customer customer) {
@@ -34,7 +52,7 @@ public class VendingMachineController {
 				int productCost = vendingMachine.getProductCost(productName);
 				customer.purchaseProduct(productCost);
 				vendingMachine.sellProduct(productName);
-				customer.showChanges();
+				OutputView.printCustomerChanges(customer.getMoney());
 			} catch (IllegalArgumentException exception) {
 				OutputView.printErrorMessage(exception.getMessage());
 			}
@@ -72,7 +90,7 @@ public class VendingMachineController {
 		}
 	}
 
-	private void makeVendingMachineHoldingAmount() {
+	private void requestVendingMachineHoldingAmount() {
 		int holdingAmount = getHoldingAmountFromInput();
 		vendingMachine.setHoldingAmount(holdingAmount);
 	}
