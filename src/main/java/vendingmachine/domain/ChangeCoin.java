@@ -4,17 +4,17 @@ import java.util.LinkedHashMap;
 
 import vendingmachine.constant.Condition;
 
-public class ReturnCoin {
-    private static final ReturnCoin instance = new ReturnCoin();
+public class ChangeCoin {
+    private static final ChangeCoin instance = new ChangeCoin();
 
-    private ReturnCoin() {
+    private ChangeCoin() {
     }
 
-    public static ReturnCoin getInstance () {
+    public static ChangeCoin getInstance () {
         return instance;
     }
 
-    public boolean canReturn(int money) {
+    public boolean canReturnChange(int money) {
         if (!ProductRepository.getInstance().hasAllProductQuantity()) {
             return false;
         }
@@ -32,14 +32,14 @@ public class ReturnCoin {
                 continue;
             }
             if (money / coin > Condition.QUOTIENT_1.getNumber()) {
-                int number = moveCoin(coinMap, money, coin);
+                int number = nextCoin(coinMap, money, coin);
                 changeCoinMap.put(coin, number);
             }
         }
         return changeCoinMap;
     }
 
-    private int moveCoin(LinkedHashMap<Integer, Integer> coinMap, int money, int coin) {
+    private int nextCoin(LinkedHashMap<Integer, Integer> coinMap, int money, int coin) {
         int coinQuantityLimit = coinMap.get(coin);
         int coinUsing = Condition.QUANTITY_0.getNumber();
 

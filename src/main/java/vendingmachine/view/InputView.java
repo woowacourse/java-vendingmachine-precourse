@@ -5,7 +5,7 @@ import vendingmachine.constant.Input;
 import vendingmachine.constant.Output;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.ProductRepository;
-import vendingmachine.domain.ReturnCoin;
+import vendingmachine.domain.ChangeCoin;
 import vendingmachine.validator.MoneyValidator;
 import vendingmachine.validator.ProductValidator;
 import vendingmachine.validator.PurchaseValidator;
@@ -63,7 +63,7 @@ public class InputView {
 
     public void inputProductForPurchase() {
         while (true) {
-            if (!ReturnCoin.getInstance().canReturn(Money.getInstance().getMoney())) {
+            if (!ChangeCoin.getInstance().canReturnChange(Money.getInstance().getMoney())) {
                 return;
             }
 
