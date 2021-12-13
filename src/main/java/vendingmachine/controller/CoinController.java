@@ -1,12 +1,12 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.CoinModel;
-import vendingmachine.model.InputMoneyModel;
+import vendingmachine.model.MoneyModel;
 import vendingmachine.view.CoinView;
 
 public class CoinController {
 	public void makeChangeCoins() {
-		InputMoneyModel.makeCoinFromInputMoney();
+		MoneyModel.makeCoinFromInputMoney();
 		displayCoinViews();
 	}
 

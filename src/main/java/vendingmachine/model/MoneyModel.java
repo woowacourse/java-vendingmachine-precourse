@@ -1,6 +1,6 @@
 package vendingmachine.model;
 
-public class InputMoneyModel {
+public class MoneyModel {
 	private static long inputMoney;
 	private static long userMoney;
 
@@ -13,5 +13,8 @@ public class InputMoneyModel {
 	}
 	public static void makeCoinFromInputMoney() {
 		CoinModel.makeChangeCoins(inputMoney);
+	}
+	public static long getUserMoney() {
+		return userMoney;
 	}
 }
