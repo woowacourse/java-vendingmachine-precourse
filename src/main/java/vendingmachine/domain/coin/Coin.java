@@ -33,4 +33,8 @@ public enum Coin {
 	private boolean isSameAmount(int coinAmount) {
 		return this.amount == coinAmount;
 	}
+
+	public int getAmount() {
+		return amount;
+	}
 }

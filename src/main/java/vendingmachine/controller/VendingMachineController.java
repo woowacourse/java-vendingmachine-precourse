@@ -3,10 +3,16 @@ package vendingmachine.controller;
 import vendingmachine.domain.coin.Coins;
 import vendingmachine.domain.machine.Balance;
 import vendingmachine.domain.product.Products;
+import vendingmachine.dto.CoinsDto;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+
+	public void processInit() {
+		Coins coins = registerCoins();
+		OutputView.printVendingMachineHasCoinsMessage(CoinsDto.from(coins));
+	}
 
 	private Coins registerCoins() {
 		try {

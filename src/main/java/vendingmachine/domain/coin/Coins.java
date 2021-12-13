@@ -46,4 +46,8 @@ public class Coins {
 
 		return initCoins;
 	}
+
+	public Map<Coin, Integer> getCoins() {
+		return coins;
+	}
 }
