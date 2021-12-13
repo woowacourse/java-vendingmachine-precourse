@@ -6,13 +6,13 @@ import vendingmachine.utils.UserInput;
 public class VendingMachine {
 
     private ProductSeller productSeller;
-    private CashHolder cashHolder;
+    private HoldingAmount holdingAmount;
     private ConsolePrinter printer;
 
     public VendingMachine() {
         printer = new ConsolePrinter();
-        cashHolder = UserInput.getValidHoldingAmount();
-        printer.printHoldingAmount(cashHolder);
+        holdingAmount = UserInput.getValidHoldingAmount();
+        printer.printHoldingAmount(holdingAmount);
         productSeller = UserInput.getProductSeller();
     }
 
@@ -24,6 +24,6 @@ public class VendingMachine {
             productSeller.orderProduct(productName, inputAmount);
             printer.printInputAmount(inputAmount);
         }
-        printer.printChanges(cashHolder.returnChanges(inputAmount));
+        printer.printChanges(holdingAmount.returnChanges(inputAmount));
     }
 }

@@ -40,12 +40,12 @@ public class Product {
         return this.name;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
     public int getAmount() {
         return amount;
+    }
+
+    public boolean isBelowProductPrice(InputAmount inputAmount) {
+        return this.amount > inputAmount.getAmount();
     }
 
     private void validateName(String name) {
@@ -68,7 +68,7 @@ public class Product {
     }
 
     private void validateDeal(InputAmount inputAmount) throws IllegalArgumentException {
-        if (this.amount > inputAmount.getAmount()) {
+        if (isBelowProductPrice(inputAmount)) {
             throw new IllegalArgumentException(ERR_INVALID_INPUT_AMOUNT);
         }
         if (isEmptyStock()) {

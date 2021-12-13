@@ -3,7 +3,7 @@ package vendingmachine.utils;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
 import java.util.function.Supplier;
-import vendingmachine.domain.CashHolder;
+import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductSeller;
@@ -38,8 +38,8 @@ public class UserInput {
         return new InputAmount(getValidNumberWithPrompt(PROMPT_INPUT_AMOUNT));
     }
 
-    public static CashHolder getValidHoldingAmount() {
-        return new CashHolder(getValidNumberWithPrompt(PROMPT_HOLDING_AMOUNT));
+    public static HoldingAmount getValidHoldingAmount() {
+        return new HoldingAmount(getValidNumberWithPrompt(PROMPT_HOLDING_AMOUNT));
     }
 
     private static int getValidNumberWithPrompt(String prompt) {

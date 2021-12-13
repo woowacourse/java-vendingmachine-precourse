@@ -23,10 +23,6 @@ public class ProductSeller {
         products.get(name).sell(inputAmount);
     }
 
-    public boolean isBelowCheapest(InputAmount inputAmount) {
-        return getCheapestProduct().getAmount() > inputAmount.getAmount();
-    }
-
     public boolean isEmpty() {
         return this.products.values()
             .stream()
@@ -34,7 +30,7 @@ public class ProductSeller {
     }
 
     public boolean isPurchaseAvailable(InputAmount inputAmount) {
-        return !isEmpty() && !isBelowCheapest(inputAmount);
+        return !isEmpty() && !getCheapestProduct().isBelowProductPrice(inputAmount);
     }
 
     private Product getCheapestProduct() throws IllegalArgumentException {

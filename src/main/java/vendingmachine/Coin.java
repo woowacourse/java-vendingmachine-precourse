@@ -39,7 +39,11 @@ public enum Coin {
         return amount;
     }
 
-    public String getName() {
+    public String getLocalCurrency() {
         return this.amount + CURRENCY_UNIT;
+    }
+
+    public boolean isBelowAmount(int amount) {
+        return this.amount <= amount;
     }
 }
