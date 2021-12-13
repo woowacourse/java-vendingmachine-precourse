@@ -28,25 +28,17 @@ public enum Coin {
         return Arrays.asList(values());
     }
 
-    private static List<Integer> getCoinAmountList() {
+    public static List<Integer> getCoinAmountList() {
         List<Integer> coinAmountList = new ArrayList<>();
         getCoinListDecreasingOrder().forEach(coin -> coinAmountList.add(coin.getAmount()));
         return coinAmountList;
     }
 
-    private static Coin getCoin(final int amountOfUnit) {
+    public static Coin getCoin(final int amountOfUnit) {
         return getCoinListDecreasingOrder().stream()
             .filter(coin -> coin.getAmount() == amountOfUnit)
             .findFirst()
             .get();
-    }
-
-    public static Coin pickRandomCoin(final int maximum) {
-        Coin randomCoin;
-        do {
-            randomCoin = getCoin(Randoms.pickNumberInList(getCoinAmountList()));
-        } while (randomCoin.getAmount() > maximum);
-        return randomCoin;
     }
 
     public String toString() {

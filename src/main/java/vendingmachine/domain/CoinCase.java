@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import java.util.HashMap;
 
+import vendingmachine.utils.RandomCoinPicker;
+
 public class CoinCase {
 
     private final HashMap<Coin, Integer> holdingCoins;
@@ -16,7 +18,7 @@ public class CoinCase {
     public void generateCoins(final int holdingMoney) {
         int amountToGenerate = holdingMoney;
         while (amountToGenerate > 0) {
-            Coin pickedCoin = Coin.pickRandomCoin(amountToGenerate);
+            Coin pickedCoin = RandomCoinPicker.pick(amountToGenerate);
             pushIn(pickedCoin);
             amountToGenerate -= pickedCoin.getAmount();
         }
