@@ -3,12 +3,10 @@ package vendingmachine.validator;
 import java.util.List;
 
 public class Validator {
-	public static boolean isValidMoneyInMachine(String moneyInVendingMachine) {
+	public static boolean isValidMoneyInMachine(int moneyInMachine) {
 		try {
-			NumberValidator.isInteger(moneyInVendingMachine);
-			int intMoneyInVendingMachine = Integer.parseInt(moneyInVendingMachine);
-			NumberValidator.isGreaterThanOrEqualToZero(intMoneyInVendingMachine);
-			NumberValidator.isDivisibleByLowLimitOfCoin(intMoneyInVendingMachine);
+			NumberValidator.isGreaterThanOrEqualToZero(moneyInMachine);
+			NumberValidator.isDivisibleByLowLimitOfCoin(moneyInMachine);
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -52,11 +50,9 @@ public class Validator {
 		NumberValidator.isGreaterThanOrEqualToZero(intAmount);
 	}
 
-	public static boolean isValidInputMoney(String inputMoney) {
+	public static boolean isValidInputMoney(int inputMoney) {
 		try {
-			NumberValidator.isInteger(inputMoney);
-			int intInputMoney = Integer.parseInt(inputMoney);
-			NumberValidator.isDivisibleByLowLimitOfCoin(intInputMoney);
+			NumberValidator.isDivisibleByLowLimitOfCoin(inputMoney);
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
