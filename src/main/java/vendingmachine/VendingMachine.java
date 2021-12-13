@@ -9,11 +9,13 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachine {
+	private final static String SPLIT_REGEX = ",";
+
 	InputView inputView = new InputView();
 	OutputView outputView = new OutputView();
 
 	HashMap<Coin, Integer> coins = new HashMap<>();
-	List<Item> items = new ArrayList<>();
+	HashMap<String, Item> items = new HashMap<>();
 	int userAmount;
 
 	public VendingMachine() {
@@ -25,8 +27,6 @@ public class VendingMachine {
 		setItems(inputItem);
 
 		getInputUserAmount();
-
-		outputView.printUserAmount(userAmount);
 	}
 
 	private int getInputAmount() {
@@ -56,7 +56,9 @@ public class VendingMachine {
 		List<String> itemStrings = new ArrayList<>();
 		itemStrings = Arrays.asList(inputItem.split(";"));
 		for (String itemString : itemStrings) {
-			items.add(new Item(itemString));
+			itemString = itemString.replace("[", "").replace("]", "");
+			String[] itemInfos = itemString.split(SPLIT_REGEX);
+			items.put(itemInfos[0], new Item(itemInfos));
 		}
 	}
 
@@ -67,4 +69,31 @@ public class VendingMachine {
 		} while (!InputUserAmountValidator.isValidated(inputUserAmount));
 		userAmount = Integer.parseInt(inputUserAmount);
 	}
+
+	public void repeatBuyItem() {
+		String buyItemName;
+		do {
+			outputView.printUserAmount(userAmount);
+			buyItemName = getInputBuyItem();
+			buyItem(buyItemName);
+		} while(true);
+	}
+
+	private String getInputBuyItem() {
+		String inputBuyItem;
+		do {
+			inputBuyItem = inputView.getInputBuyItem();
+		} while(!InputBuyItemValidator.isValidated(inputBuyItem, items));
+		return inputBuyItem;
+	}
+
+	private void buyItem(String buyItemName) {
+		final Item item = items.get(buyItemName);
+		item.reduceNumber();
+		userAmount -= item.getPrice();
+	}
+
+	// private boolean couldRepeatBuyItem() {
+	//
+	// }
 }

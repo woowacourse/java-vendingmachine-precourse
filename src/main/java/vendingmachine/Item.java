@@ -1,23 +1,12 @@
 package vendingmachine;
 
 public class Item {
-	private final static String SPLIT_REGEX = ",";
-
-	private final String name;
 	private final int price;
-	private final int number;
+	private int number;
 
-	public Item(String itemString) {
-		System.out.println(itemString);
-		itemString = itemString.replace("[", "").replace("]", "");
-		String[] itemInfos = itemString.split(SPLIT_REGEX);
-		name = itemInfos[0];
+	public Item(String[] itemInfos) {
 		price = Integer.parseInt(itemInfos[1]);
 		number = Integer.parseInt(itemInfos[2]);
-	}
-
-	public String getName() {
-		return name;
 	}
 
 	public int getPrice() {
@@ -26,5 +15,9 @@ public class Item {
 
 	public int getNumber() {
 		return number;
+	}
+
+	public void reduceNumber() {
+		number--;
 	}
 }
