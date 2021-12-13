@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Map;
+
 public class VendingMachine {
 	private final Coins coins;
 	private final Products products;
@@ -27,9 +29,9 @@ public class VendingMachine {
 		inputMoney = product.minusPrice(inputMoney);
 	}
 
-	public Coins giveChange() {
+	public Map<Coin, Integer> giveChange() {
 		if (!coins.isGreaterThanTotalMoney(inputMoney))	{
-			return coins;
+			return coins.getCoinsMap();
 		}
 		return coins.calculateChange(inputMoney);
 	}

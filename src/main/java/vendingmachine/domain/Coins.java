@@ -14,9 +14,10 @@ public class Coins {
 			coins.put(coin, 0);
 		}
 		this.totalMoney = totalMoney;
+		makeRandomNumberOfCoins();
 	}
 
-	public void initRandomNumberOfCoins() {
+	private void makeRandomNumberOfCoins() {
 		int tempMoneyInMachine = totalMoney;
 		while (tempMoneyInMachine != 0){
 			int randomAmount = getRandomAmount(tempMoneyInMachine);
@@ -27,12 +28,16 @@ public class Coins {
 		}
 	}
 
-	public Coins calculateChange(int money) {
-		Coins change = new Coins(totalMoney);
+	public Map<Coin, Integer> getCoinsMap() {
+		return coins;
+	}
+
+	public Map<Coin, Integer> calculateChange(int money) {
+		Map<Coin, Integer> change = new TreeMap<>();
 		for(int amount : Coin.amountList()){
 			Coin coin = Coin.getByAmount(amount);
 			int count = Math.min(money/amount, coins.get(coin));
-			change.putCoin(coin, count);
+			change.put(coin, count);
 			money -= amount * count;
 		}
 		return change;
@@ -48,10 +53,6 @@ public class Coins {
 			return randomAmount;
 		}
 		return 0;
-	}
-
-	private void putCoin(Coin coin, int count) {
-		coins.put(coin, count);
 	}
 
 	private void increaseCoin(int amount) {

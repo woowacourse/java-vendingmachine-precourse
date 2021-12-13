@@ -12,7 +12,6 @@ public class VendingMachineController {
 
 	public VendingMachineController() {
 		Coins coins = new Coins(getMoneyInMachine());
-		coins.initRandomNumberOfCoins();
 		Output.coinsInMachine(coins);
 
 		Products products = ProductsController.getProducts();
@@ -49,6 +48,7 @@ public class VendingMachineController {
 				System.out.println(e.getMessage());
 			}
 		}
-		vendingMachine.giveChange();
+		Output.inputMoney(vendingMachine.getInputMoney());
+		Output.change(vendingMachine.giveChange());
 	}
 }
