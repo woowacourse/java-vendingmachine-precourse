@@ -15,14 +15,14 @@ public class VerificationUtil {
     private VerificationUtil() {
     }
 
-    public static void validateHoldingAmount (String input) {
+    public static void validateHoldingAmount(String input) {
         int holdingAmount = getValidatedNumber(input);
 
         validatePositiveNumber(holdingAmount);
         validateMultipleOfTen(holdingAmount);
     }
 
-    public static void validateProductInput (String input) {
+    public static void validateProductInput(String input) {
         Arrays.stream(input.split(";"))
                 .filter(s -> !s.matches(REGEX))
                 .findAny()
@@ -31,7 +31,7 @@ public class VerificationUtil {
                 });
     }
 
-    public static void checkProduct (VendingMachine vendingMachine, String productName) {
+    public static void checkProduct(VendingMachine vendingMachine, String productName) {
         List<Product> productList = vendingMachine.getProductList();
 
         for (Product product : productList) {
@@ -44,19 +44,19 @@ public class VerificationUtil {
         throw new IllegalArgumentException("[ERROR] 해당하는 상품이 존재하지 않습니다.\n");
     }
 
-    public static void checkProductPrice (int productPrice) {
+    public static void checkProductPrice(int productPrice) {
         if (productPrice < 100) {
             throw new IllegalArgumentException("[ERROR] 상품은 100원 이상이어야 합니다.");
         }
     }
 
-    private static void checkProductAmount (Product product) {
+    private static void checkProductAmount(Product product) {
         if (product.getQuantity() <= ZERO) {
             throw new IllegalArgumentException("[ERROR] 해당 상품의 재고가 없습니다.\n");
         }
     }
 
-    private static int getValidatedNumber (String input) {
+    private static int getValidatedNumber(String input) {
         try {
             int number = Integer.parseInt(input);
 
@@ -66,13 +66,13 @@ public class VerificationUtil {
         }
     }
 
-    private static void validatePositiveNumber (int holdingAmount) {
+    private static void validatePositiveNumber(int holdingAmount) {
         if (holdingAmount <= ZERO) {
             throw new IllegalArgumentException("[ERROR] 양수를 입력해주세요.\n");
         }
     }
 
-    private static void validateMultipleOfTen (int holdingAmount) {
+    private static void validateMultipleOfTen(int holdingAmount) {
         if (holdingAmount % UNIT != ZERO) {
             throw new IllegalArgumentException("[ERROR] 10원 단위로 입력해주세요.\n");
         }
