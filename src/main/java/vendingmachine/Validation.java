@@ -49,7 +49,7 @@ public class Validation {
 
     private void isPositive(String input) throws IllegalArgumentException {
         if (Integer.parseInt(input) <= 0) {
-            throw new IllegalArgumentException();
+           throw new IllegalArgumentException();
         }
     }
 
@@ -62,14 +62,14 @@ public class Validation {
 
     private void isInBrackets(String input) throws IllegalArgumentException {
         int firstBracketIdx = input.indexOf("[");
-        int lastBracketIdx = input.indexOf("]");
+        int lastBracketIdx = input.lastIndexOf("]");
         if (firstBracketIdx != 0 || lastBracketIdx != input.length() - 1) {
             throw new IllegalArgumentException();
         }
     }
 
     private String removeBrackets(String input) {
-        return input.replace("[", "").replace("]", "");
+        return input.substring(1, input.length() - 1);
     }
 
     private void isFormat(String input) throws IllegalArgumentException {
@@ -87,14 +87,15 @@ public class Validation {
     }
 
     private void isCorrectPriceRange(String input) throws IllegalArgumentException {
-        if (!isNumber(input) || !isDivisibleByTen(input)
-                || Integer.parseInt(input) < 100) {
+        if (!(isNumber(input) && isDivisibleByTen(input)
+                && Integer.parseInt(input) >= 100)) {
             throw new IllegalArgumentException();
         }
     }
 
     private void isCorrectProductCount(String input) throws IllegalArgumentException {
-        if (!isNumber(input) || Integer.parseInt(input) < 0) {
+        if (!(isNumber(input) && Integer.parseInt(input) >= 0)) {
+            System.out.println("count");
             throw new IllegalArgumentException();
         }
     }
