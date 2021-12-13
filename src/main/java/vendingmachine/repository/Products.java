@@ -16,7 +16,7 @@ public class Products {
 
     public boolean hasProduct(String name) {
         for (Product product : products) {
-            if (product.getName().equals(name)) {
+            if (product.isSameName(name)) {
                 return true;
             }
         }
@@ -25,7 +25,7 @@ public class Products {
 
     public Product getProduct(String name) {
         for (Product product : products) {
-            if (product.getName().equals(name)) {
+            if (product.isSameName(name)) {
                 return product;
             }
         }

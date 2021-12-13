@@ -11,9 +11,6 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getName() {
-        return this.name;
-    }
 
     public int getPrice() {
         return this.price;
@@ -33,6 +30,10 @@ public class Product {
 
     public boolean isOutOfStock() {
         return stock == 0;
+    }
+
+    public boolean isSameName(String input){
+        return name.equals(input);
     }
 
 }

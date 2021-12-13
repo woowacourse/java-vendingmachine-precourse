@@ -14,5 +14,4 @@ public class ProductController {
         OutputView.printMachineProduct();
         return productService.generate();
     }
-
 }

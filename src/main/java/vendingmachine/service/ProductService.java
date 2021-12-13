@@ -7,7 +7,7 @@ import vendingmachine.repository.Products;
 import vendingmachine.view.InputView;
 
 public class ProductService {
-    //InputView inputView = new InputView();
+
     ProductValidator productValidator = new ProductValidator();
 
     public Products generate() {

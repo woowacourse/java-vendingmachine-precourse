@@ -125,7 +125,7 @@ public class OrderService {
 
     public boolean isPossiblePrice(String userOrder) {
         for (Product product : products.getProducts()) {
-            if (product.getName().equals(userOrder)) {
+            if (product.isSameName(userOrder)) {
                 orderValidator.isPossiblePrice(product, money);
             }
         }

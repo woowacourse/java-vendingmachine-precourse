@@ -10,7 +10,7 @@ import vendingmachine.repository.Coin;
 import vendingmachine.view.InputView;
 
 public class CoinService {
-    //InputView inputView = new InputView();
+
     CoinValidator coinValidator = new CoinValidator();
 
     public void generate() {
@@ -30,6 +30,7 @@ public class CoinService {
         List<Integer> number = new ArrayList<>(Arrays.asList(500, 100, 50, 10));
         HashMap<Integer, String> numberMap = new HashMap<>();
         numberMap = makeNumberMap(numberMap);
+
         while (money != 0) {
             int randomCoin = Randoms.pickNumberInList(number);
             if (randomCoin <= money) {
