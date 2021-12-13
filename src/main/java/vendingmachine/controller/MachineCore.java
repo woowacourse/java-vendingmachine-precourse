@@ -23,8 +23,10 @@ public class MachineCore {
 
     private void runMachine() {
         readInputMoneyFromUser();
-        String productName =readProductToBuyFromUser();
-        machine.sellProduct(productName);
+        while (machine.isStillAvailableToBuy()) {
+            String productName =readProductToBuyFromUser();
+            machine.sellProduct(productName);
+        }
     }
 
     private void prepareMachin() {

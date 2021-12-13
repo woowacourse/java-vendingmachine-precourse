@@ -14,6 +14,15 @@ public class Machine {
     public Machine() {
     }
 
+    public boolean isStillAvailableToBuy() {
+        return productTable.isThereAvailableProduct() &&
+            productTable.getCheapestPrice() <= inputMoney;
+    }
+
+    public void sellProduct(String productName) {
+        productTable.sellProduct(productName);
+    }
+
     public void setInitialAsset(int asset) {
         coinBox = new CoinBox();
         coinBox.generateRandomCoinBox(validator.checkAsset(asset));
