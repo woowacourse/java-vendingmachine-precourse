@@ -41,7 +41,8 @@ public enum Coin {
 			.get();
 	}
 
-	private static void decreaseCoinAmount(ArrayList<Item> coinList, int valueOfReturnedCoin, int amountOfReturnedCoin) {
+	private static void decreaseCoinAmount(ArrayList<Item> coinList, int valueOfReturnedCoin,
+		int amountOfReturnedCoin) {
 		coinList.stream()
 			.filter(eachCoin -> eachCoin.isEqualThisPrice(valueOfReturnedCoin))
 			.forEach(eachCoin -> eachCoin.decreaseAmount(amountOfReturnedCoin));

@@ -30,8 +30,7 @@ public class ItemInformationInputView implements InputView {
 			Validator.validateItemSize(parsedItem);
 			Validator.validateElementCondition(parsedItem);
 			return nowInput;
-		}
-		catch (IllegalArgumentException error) {
+		} catch (IllegalArgumentException error) {
 			System.out.print(error.getMessage());
 			return BLANK_STRING;
 		}

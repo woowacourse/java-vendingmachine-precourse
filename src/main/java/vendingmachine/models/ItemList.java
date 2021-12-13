@@ -23,7 +23,12 @@ public class ItemList {
 	}
 
 	public int getMinPrice() {
-		return this.ItemList.values().stream().filter(eachItem -> !eachItem.isAmountZero()).mapToInt(Item::getPrice).min().getAsInt();
+		return this.ItemList.values()
+			.stream()
+			.filter(eachItem -> !eachItem.isAmountZero())
+			.mapToInt(Item::getPrice)
+			.min()
+			.getAsInt();
 	}
 
 	public boolean isAllSoldOut() {
