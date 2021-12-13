@@ -30,8 +30,7 @@ public class InputView {
         System.out.println(REQUEST_MENU_INPUT);
         List<Merchandise> merchandiseList = new ArrayList<>();
         try {
-            String input = Console.readLine();
-            String[] merchandiseInfos = input.split(";");
+            String[] merchandiseInfos = Console.readLine().split(";");
             validateMenuInputFormat(merchandiseInfos);
             for (String merchandiseInfo : merchandiseInfos) {
                 merchandiseList.add(new Merchandise(merchandiseInfo));

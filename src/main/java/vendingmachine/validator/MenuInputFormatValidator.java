@@ -45,7 +45,7 @@ public class MenuInputFormatValidator {
     }
 
     private static void validateInternalSeparators(String content) {
-        if (content.contains("[") || content.contains("]") || content.contains(";")) {
+        if (content.contains("[") || content.contains("]")) {
             throw new IllegalArgumentException(INVALID_SEPARATORS_EXCEPTION);
         }
 
