@@ -75,7 +75,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    public void 최소개수동전_테스트() {
+    public void 상품_100원이상_테스트() {
         //given
         ProductService productService = new ProductService();
 
