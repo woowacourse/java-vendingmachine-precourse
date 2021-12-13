@@ -15,7 +15,7 @@ public class Products {
     public int getMinPrice() {
         int min = Integer.MAX_VALUE;
         for(Product product : products) {
-            if (!product.isSoldOut() && min > product.getPrice()) {
+            if (product.isNotSoldOut() && min > product.getPrice()) {
                 min = product.getPrice();
             }
         }
@@ -24,7 +24,7 @@ public class Products {
 
     public boolean isAllSoldOut() {
         for(Product product : products) {
-            if (!product.isSoldOut()) {
+            if (product.isNotSoldOut()) {
                 return false;
             }
         }

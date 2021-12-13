@@ -12,6 +12,11 @@ public class Money {
     private static final List<Integer> AMOUNT_LIST = Coin.getAmountList();
     private static final int DEFALUT_CNT = 0;
     private static final int DEFALUT_TOTAL = 0;
+    private static final String REST_MONEY_SENTENCE = "잔돈";
+    private static final String VENDINGMACHINE_COIN_SENTENCE = "자판기가 보유한 동전";
+    private static final String REST_MONEY_SEPARATOR = " - ";
+    private static final String REST_MONEY_UNIT = "개";
+    private static final String LINE_BREAKER = "\n";
 
     private Map<Coin, Integer> coins = new LinkedHashMap<>();
 
@@ -29,23 +34,26 @@ public class Money {
             changes.put(coin, cnt);
             coins.put(coin, coins.get(coin) - cnt);
             total -= cnt * entry.getValue();
-            if (total <= 0) {
+            if (total <= DEFALUT_TOTAL) {
                 break;
             }
         }
         return getChangeString(changes);
     }
 
-    private String getChangeString(Map<Coin, Integer> coins) {
-        StringBuilder stringBuilder = new StringBuilder("잔돈\n");
+    @Override
+    public String toString() {
+        StringBuilder stringBuilder = new StringBuilder(VENDINGMACHINE_COIN_SENTENCE);
         for (Entry<Coin, Integer> coin : coins.entrySet()) {
-            stringBuilder.append(coin.getKey().toString())
-                    .append(" - ")
+            stringBuilder.append(LINE_BREAKER)
+                    .append(coin.getKey().toString())
+                    .append(REST_MONEY_SEPARATOR)
                     .append(coin.getValue())
-                    .append("개\n");
+                    .append(REST_MONEY_UNIT);
         }
         return stringBuilder.toString();
     }
+
 
     public int getTotalMoney() {
         int total = DEFALUT_TOTAL;
@@ -53,6 +61,18 @@ public class Money {
             total += entry.getKey().getAmount() * entry.getValue();
         }
         return total;
+    }
+
+    private String getChangeString(Map<Coin, Integer> coins) {
+        StringBuilder stringBuilder = new StringBuilder(REST_MONEY_SENTENCE);
+        for (Entry<Coin, Integer> coin : coins.entrySet()) {
+            stringBuilder.append(LINE_BREAKER)
+                    .append(coin.getKey().toString())
+                    .append(REST_MONEY_SEPARATOR)
+                    .append(coin.getValue())
+                    .append(REST_MONEY_UNIT);
+        }
+        return stringBuilder.toString();
     }
 
     private int getMaxCntByTotal(int amount, int cnt, int total) {
@@ -82,15 +102,4 @@ public class Money {
         }
     }
 
-    @Override
-    public String toString() {
-        StringBuilder stringBuilder = new StringBuilder("자판기가 보유한 동전\n");
-        for (Entry<Coin, Integer> coin : coins.entrySet()) {
-            stringBuilder.append(coin.getKey().toString())
-                    .append(" - ")
-                    .append(coin.getValue())
-                    .append("개\n");
-        }
-        return stringBuilder.toString();
-    }
 }

@@ -7,14 +7,14 @@ import java.util.regex.Pattern;
 public class Validator {
     private static final String MONEY_ERROR_SENETENCE = "[ERROR] 금액은 숫자여야 합니다.";
     private static final String PRODUCT_ERROR_SENETENCE = "[ERROR] 올바른 상품 정보를 입력해주십시오.";
-    private static final String DIVISOR_PRODUCT_LIST = ";";
-    private static final String DIVISOR_PRODUCT = ",";
     private static final Pattern NUMBER_PATTERN = Pattern.compile("^[0-9]*$");
     private static final int DIVISOR_PRICE = 10;
     private static final int MIN_PRICE = 100;
+    private static final int PRODUCT_NAME = 0;
+    private static final int PRODUCT_PRICE = 1;
+    private static final int PRODUCT_STOCK = 2;
     private static final char OPEN_BRACKET = '[';
     private static final char CLOSE_BRACKET = ']';
-    private static final int NEGATIVE_NUMBER = -1;
     private static final StringUtil stringUtil = new StringUtil();
 
     public boolean isValidMoney(String input) {
@@ -49,15 +49,15 @@ public class Validator {
             if (!isValidProductInfo(productInfo, names)) {
                 return false;
             }
-            names.add(productInfo[0]);
+            names.add(productInfo[PRODUCT_NAME]);
         }
         return true;
     }
 
     private boolean isValidProductInfo(String[] productInfo, List<String> names) {
-        return !isDuplicateName(names, productInfo[0])
-                && isValidPrice(productInfo[1])
-                && isValidStock(productInfo[2]);
+        return !isDuplicateName(names, productInfo[PRODUCT_NAME])
+                && isValidPrice(productInfo[PRODUCT_PRICE])
+                && isValidStock(productInfo[PRODUCT_STOCK]);
     }
 
     private boolean isValidPrice(String input) {

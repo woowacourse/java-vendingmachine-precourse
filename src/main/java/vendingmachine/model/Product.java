@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 public class Product {
     private static final String BUY_ERROR_SENTENCE = "[ERROR] 상품을 구매할 수 없습니다.";
+    private static final int MIN_STOCK = 0;
 
     private String name;
     private int price;
@@ -21,12 +22,12 @@ public class Product {
         return this.price;
     }
 
-    public boolean isSoldOut() {
-        return stock == 0;
+    public boolean isNotSoldOut() {
+        return stock != MIN_STOCK;
     }
 
     public void buy(int payment) {
-        if (price > payment || stock <= 0) {
+        if (price > payment || stock <= MIN_STOCK) {
             throw new IllegalStateException(BUY_ERROR_SENTENCE);
         }
         stock--;

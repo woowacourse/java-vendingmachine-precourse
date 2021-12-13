@@ -1,6 +1,8 @@
 package vendingmachine.model;
 
 public class VendingMachine {
+    private static final int MIN_PRODUCT_PRICE = 0;
+
     private Products products;
     private Money changes;
     private int payment;
@@ -19,7 +21,7 @@ public class VendingMachine {
     }
 
     public int buyProduct(String name) {
-        int productPrice = 0;
+        int productPrice = MIN_PRODUCT_PRICE;
         try {
             productPrice = products.buyProduct(name, payment);
             payment -= productPrice;
