@@ -16,7 +16,7 @@ public class ProductService {
 
 	private final ProductRepository productRepository;
 
-	public ProductService(){
+	public ProductService() {
 		this(new ProductRepository());
 	}
 
@@ -27,7 +27,9 @@ public class ProductService {
 	public void setProducts(String input) {
 		ProductListValidator.validateBracketAndSemiColon(input);
 		List<String> inputList = Arrays.asList(input.split(PRODUCT_DELIMITER.getSymbol(), -1));
-		List<Product> productList = inputList.stream().map(ProductService::generateProduct).collect(Collectors.toList());
+		List<Product> productList = inputList.stream()
+			.map(ProductService::generateProduct)
+			.collect(Collectors.toList());
 		productRepository.save(productList);
 	}
 
@@ -53,7 +55,7 @@ public class ProductService {
 			.collect(Collectors.toList());
 	}
 
-	private Product findProduct(String productName){
+	private Product findProduct(String productName) {
 		if (!productRepository.findByName(productName).isPresent())
 			throw new IllegalArgumentException(NO_SUCH_PRODUCT.getMessage());
 		return productRepository.findByName(productName).get();

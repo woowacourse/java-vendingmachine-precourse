@@ -3,9 +3,6 @@ package vendingmachine.service;
 import static vendingmachine.constant.ExceptionMessage.*;
 import static vendingmachine.validator.MoneyValidator.*;
 
-import java.util.List;
-
-import vendingmachine.domain.Product;
 import vendingmachine.repository.DepositRepository;
 
 public class MachineService {
@@ -24,20 +21,6 @@ public class MachineService {
 		this.money = 0;
 	}
 
-	public void setDepositsRandomized(String input) {
-		validateInteger(input);
-		int deposit = Integer.parseInt(input);
-		depositService.setDepositsRandomized(deposit);
-	}
-
-	public String getDeposits() {
-		return depositService.getDeposits();
-	}
-
-	public void setProducts(String input) {
-		productService.setProducts(input);
-	}
-
 	public void addMoney(String inputMoney) {
 		validateInteger(inputMoney);
 		this.money += Integer.parseInt(inputMoney);
@@ -51,10 +34,6 @@ public class MachineService {
 
 	public final int getMoney() {
 		return money;
-	}
-
-	public List<Product> getAffordableList() {
-		return productService.getAffordableList(money);
 	}
 
 	public void purchaseProduct(String productName) {

@@ -70,7 +70,7 @@ public class DepositService {
 		spitRecursive(coinIndex + 1, moneySum, changes);
 	}
 
-	public String getDeposits(){
+	public String getDeposits() {
 		return depositRepository.toString();
 	}
 }

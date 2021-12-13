@@ -1,7 +1,6 @@
 package vendingmachine.view;
 
 import vendingmachine.constant.Hint;
-import vendingmachine.repository.DepositRepository;
 
 public class OutputView {
 

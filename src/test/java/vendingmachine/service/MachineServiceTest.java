@@ -18,40 +18,27 @@ import vendingmachine.repository.ProductRepository;
 
 class MachineServiceTest {
 
-	MachineService machineService;
-	ProductService productService;
-	DepositService depositService;
-	DepositRepository depositRepository;
-	ProductRepository productRepository;
+	private MachineService machineService;
+	private DepositRepository depositRepository;
+	private ProductRepository productRepository;
 
-	List<String> productList;
-	List<Deposit> depositList;
+	private List<String> productList;
 
 	@BeforeEach
 	void setUp() {
 		this.depositRepository = new DepositRepository();
 		this.productRepository = new ProductRepository();
-		this.productService = new ProductService(productRepository);
-		this.depositService = new DepositService(depositRepository);
+		ProductService productService = new ProductService(productRepository);
+		DepositService depositService = new DepositService(depositRepository);
 
 		this.machineService = new MachineService(depositService, productService);
 
-		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
-		machineService.setProducts(productList.get(0) + Symbol.PRODUCT_DELIMITER.getSymbol() + productList.get(1));
+		this.productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
+		productService.setProducts(productList.get(0) + Symbol.PRODUCT_DELIMITER.getSymbol() + productList.get(1));
 
-		depositList = Arrays.asList(new Deposit(Coin.COIN_10, 10), new Deposit(Coin.COIN_50, 10),
+		List<Deposit> depositList = Arrays.asList(new Deposit(Coin.COIN_10, 10), new Deposit(Coin.COIN_50, 10),
 			new Deposit(Coin.COIN_100, 10), new Deposit(Coin.COIN_500, 10));
-		depositRepository.save(depositList);
-	}
-
-	@Test
-	void setDepositsRandomized() {
-		// given
-		String deposit = "550";
-		// when
-		machineService.setDepositsRandomized(deposit);
-		// then
-		assertThat(depositRepository.getDepositTotal()).isEqualTo(Integer.parseInt(deposit));
+		this.depositRepository.save(depositList);
 	}
 
 	@Test
@@ -67,18 +54,9 @@ class MachineServiceTest {
 	}
 
 	@Test
-	void getAffordableList() {
-		// given
-		// when
-		machineService.addMoney("550");
-		// then
-		assertThat(machineService.getAffordableList()).hasSize(1);
-	}
-
-	@Test
 	void purchaseProduct() {
 		// given
-		Product target = productRepository.findByName("콜라").get();
+		Product target = productRepository.findByName("콜라").orElseThrow(IllegalArgumentException::new);
 		machineService.addMoney(String.valueOf(target.getPrice() * target.getQuantity()));
 		// when
 		IntStream.range(0, target.getQuantity()).forEach(i -> machineService.purchaseProduct(target.getName()));

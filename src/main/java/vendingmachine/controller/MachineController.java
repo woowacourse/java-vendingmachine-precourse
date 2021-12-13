@@ -1,24 +1,30 @@
 package vendingmachine.controller;
 
+import static vendingmachine.validator.MoneyValidator.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
-import vendingmachine.repository.DepositRepository;
-import vendingmachine.repository.ProductRepository;
+import vendingmachine.service.DepositService;
 import vendingmachine.service.MachineService;
+import vendingmachine.service.ProductService;
 
 public class MachineController {
 
 	private final MachineService machineService;
+	private final DepositService depositService;
+	private final ProductService productService;
 
 	public MachineController() {
 		this.machineService = new MachineService();
+		this.productService = new ProductService();
+		this.depositService = new DepositService();
 	}
 
 	public void setDeposit() {
 		try {
 			String input = inputDeposit();
-			machineService.setDepositsRandomized(input);
+			validateInteger(input);
+			depositService.setDepositsRandomized(Integer.parseInt(input));
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setDeposit();
@@ -28,20 +34,20 @@ public class MachineController {
 	public void setProductList() {
 		try {
 			String input = inputProductList();
-			machineService.setProducts(input);
+			productService.setProducts(input);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setProductList();
 		}
 	}
 
-	public void setMoney() {
+	public void addMoney() {
 		try {
 			String input = inputMoney();
 			machineService.addMoney(input);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
-			setMoney();
+			addMoney();
 		}
 	}
 
@@ -57,11 +63,11 @@ public class MachineController {
 
 	public void operate() {
 		setDeposit();
-		printDeposits(machineService.getDeposits());
+		printDeposits(depositService.getDeposits());
 		setProductList();
-		setMoney();
+		addMoney();
 		printMoney(machineService.getMoney());
-		while (machineService.getAffordableList().size() > 0) {
+		while (productService.getAffordableList(machineService.getMoney()).size() > 0) {
 			purchase();
 			printMoney(machineService.getMoney());
 		}
