@@ -57,4 +57,13 @@ public class Products {
 		}
 		return false;
 	}
+
+	public Product findForName(String productName) {
+		for (Product product : products) {
+			if (product.hashCode() == productName.hashCode()) {
+				return product;
+			}
+		}
+		return null;
+	}
 }

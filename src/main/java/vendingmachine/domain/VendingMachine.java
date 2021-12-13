@@ -25,7 +25,11 @@ public class VendingMachine {
 	}
 
 	public boolean isBuy(String productName) {
-		if (!products.contains(productName)) {
+		Product product = products.findForName(productName);
+		if (product == null) {
+			return false;
+		}
+		if (product.soldOut()) {
 			return false;
 		}
 		return true;
