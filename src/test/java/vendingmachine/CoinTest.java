@@ -4,9 +4,15 @@ import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.Coin.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class CoinTest {
+
+	@AfterEach
+	void reset() {
+		Coin.resetForTest();
+	}
 
 	@Test
 	void 동전생성_테스트() {

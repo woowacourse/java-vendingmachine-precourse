@@ -27,6 +27,12 @@ public enum Coin implements Comparable<Coin> {
 		return this.amount.equals(amount);
 	}
 
+	//테스팅을 위한 함수
+	protected static void resetForTest() {
+		Arrays.stream(Coin.values())
+			.forEach(coin -> coin.count = 0);
+	}
+
 	public void addOne() {
 		count++;
 	}

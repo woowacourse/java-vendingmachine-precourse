@@ -3,9 +3,15 @@ package vendingmachine;
 import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.Coin.*;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 
 public class CoinBucketTest {
+
+	@AfterEach
+	void reset() {
+		Coin.resetForTest();
+	}
 
 	@Test
 	void 코인_랜덤생성_테스트() {
