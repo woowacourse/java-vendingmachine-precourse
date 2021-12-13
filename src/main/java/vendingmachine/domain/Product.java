@@ -56,7 +56,7 @@ public class Product {
     }
 
     private void validateStock(int stock) {
-        if (stock == EMPTY_STOCK) {
+        if (stock <= EMPTY_STOCK) {
             throw new IllegalArgumentException(ERR_INVALID_STOCK);
         }
     }
