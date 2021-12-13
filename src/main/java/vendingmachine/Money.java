@@ -4,7 +4,18 @@ public class Money implements Comparable<Money> {
 	private int amount;
 
 	private Money(int amount) {
+		checkValidation(amount);
 		this.amount = amount;
+	}
+
+	private void checkValidation(int amount) {
+		checkLowerLimit(amount);
+	}
+
+	private void checkLowerLimit(int amount) {
+		if (amount < 0) {
+			throw new IllegalArgumentException("[ERROR] 금액은 음수일 수 없습니다.");
+		}
 	}
 
 	public static Money from(int amount) {
