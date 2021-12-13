@@ -4,15 +4,17 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.ui.MachineUI;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+
 
 public class Machine {
 
     private final MachineUI machineUI;
     private final Validator validator;
     private final Parser parser = new Parser();
+    private final Exchanger exchanger = new Exchanger();
     private int amount = 0;
     private int inputMoney = 0;
     Map<String,Goods> goodsList;
@@ -27,8 +29,10 @@ public class Machine {
         machineUI.showAmount();
         getGoodsList();
         getMoney();
+        getUserOrder();
+        machineUI.showExchange(exchanger.getExchangedCoins());
     }
-    private void getVendingMachineAmount(){
+    public void getVendingMachineAmount(){
         while (true){
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
             String amountInput = Console.readLine();
@@ -44,22 +48,21 @@ public class Machine {
     }
     private void generateRandomCoins(){
         int leftAmount = amount;
-        leftAmount = setCoins(leftAmount,Coin.COIN_500.getAmount());
-        if(leftAmount == 0) return;
-        leftAmount = setCoins(leftAmount,Coin.COIN_100.getAmount());
-        if(leftAmount == 0) return;
-        leftAmount = setCoins(leftAmount,Coin.COIN_50.getAmount());
-        if(leftAmount == 0) return;
-        Coin.COIN_10.setNumber(leftAmount/Coin.COIN_10.getAmount());
-    }
-    private int setCoins(int leftAmount, int coin){
-        int bound = leftAmount / coin;
-        int number = 0;
-        if( bound >=1){
-            number = Randoms.pickNumberInList(IntStream.range(0,bound).boxed().collect(Collectors.toList()));
-            Coin.valueOf("COIN_"+coin).setNumber(number);
+        while(leftAmount != 0){
+            List<Integer> coinList = findAvailableCoins(leftAmount);
+            int coinValue = Randoms.pickNumberInList(coinList);
+            Coin.valueOf("COIN_"+coinValue).increaseNumber();
+            leftAmount -= coinValue;
         }
-        return leftAmount  - coin * number;
+    }
+
+    private List<Integer> findAvailableCoins(int leftAmount){
+        List<Integer> list = new ArrayList<>();
+        if(leftAmount / Coin.COIN_500.getAmount() >=1) list.add(500);
+        if(leftAmount / Coin.COIN_100.getAmount() >=1) list.add(100);
+        if(leftAmount / Coin.COIN_50.getAmount() >=1) list.add(50);
+        if(leftAmount / Coin.COIN_10.getAmount() >=1) list.add(10);
+        return list;
     }
     private void getGoodsList(){
         while (true){
@@ -90,5 +93,39 @@ public class Machine {
             }
             System.out.println();
         }
+    }
+    private void getUserOrder(){
+        int leftMoney = inputMoney;
+        while (true){
+            System.out.println("투입 금액: " + leftMoney + "원");
+            if(isAllSoldOut() || findMinPrice() > leftMoney ) {
+                exchanger.exchange(leftMoney);
+                break;
+            }
+            System.out.println("구입할 상품명을 입력해 주세요.");
+            String goodsInput = Console.readLine();
+            if(!goodsList.containsKey(goodsInput)) {
+                System.out.println("[ERROR] 상품 목록에 없는 제품입니다.");
+                continue;
+            }
+            int goodsPrice = goodsList.get(goodsInput).getPrice();
+            leftMoney -= goodsPrice;
+            System.out.println();
+        }
+    }
+    private int findMinPrice(){
+        int minPrice = Integer.MAX_VALUE;
+        for (Map.Entry<String,Goods> goodsEntry: goodsList.entrySet()){
+            int price = goodsEntry.getValue().getPrice();
+            if(goodsEntry.getValue().getNumber() == 0 ) continue;
+            if(minPrice > price ) minPrice = price;
+        }
+        return minPrice;
+    }
+    private boolean isAllSoldOut(){
+        for (Map.Entry<String,Goods> element: goodsList.entrySet()){
+            if(element.getValue().getNumber() > 0) return false;
+        }
+        return true;
     }
 }
