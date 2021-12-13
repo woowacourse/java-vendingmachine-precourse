@@ -1,12 +1,34 @@
 package vendingmachine;
 
-import java.util.Arrays;
+
 
 public class Application {
-    public static void main(String[] args) {
-        // TODO: 프로그램 구현
-    	String goods= Input.goodsInput();
-    	System.out.println(goods);
-    }
-    
+	public static void main(String[] args) {
+		String changs = Input.MachineCashInput();
+		VendingMachine VM = new VendingMachine(changs);
+		Output.hasCoinPrint(VM.coinMap);
+
+		// 출력 VM
+		String goodsInfo = Input.goodsInput();
+		VM.beverage(goodsInfo);
+
+		// 투입금액
+		String money = Input.cashInput();
+		MoneyInput Money = new MoneyInput(money);
+
+		while (VM.coinReturn(Money.getMoney())) {
+			Output.inputMoneyPrint(Money.getMoney());
+
+			// 구매할 상품
+			String buyGoods = Input.buyGoodsInput();
+			int buyBPrice = VM.getBeveragePrice(buyGoods);
+			Money.remainMoney(buyBPrice);
+
+		}
+		int finalMoney = Money.getMoney();
+		Output.inputMoneyPrint(finalMoney);
+		Output.changesPrint(VM.lastChange(finalMoney));
+
+	}
+
 }
