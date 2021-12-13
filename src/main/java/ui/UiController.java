@@ -11,8 +11,12 @@ public class UiController {
 		= "\n상품명과 가격, 수량을 입력해 주세요.\n";
 	private static final String QUESTION_INPUT_MONEY
 		= "\n투입 금액을 입력해 주세요.\n";
+	private static final String QUESTION_PRODUCT_NAME_TO_BUY
+		= "구매할 상품명을 입력해 주세요.\n";
 	private static final String MESSAGE_CURRENT_COIN_NUMBER
 		= "\n자판기가 보유한 동전\n";
+	private static final String MESSAGE_REMAIN_MONEY
+		= "\n투입 금액: %d원\n";
 	private static final String MONEY_NUMBER
 		= "%d원 - %d개\n";
 
@@ -75,5 +79,14 @@ public class UiController {
 			}
 		}
 		return Integer.parseInt(inputMoney);
+	}
+
+	public void printRemainMoney(int money) {
+		String message = String.format(MESSAGE_REMAIN_MONEY, money);
+		ui.printMessage(message);
+	}
+
+	public String askProductNameToBuy() {
+		return ui.printQuestion(QUESTION_PRODUCT_NAME_TO_BUY);
 	}
 }

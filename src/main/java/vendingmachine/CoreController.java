@@ -7,6 +7,8 @@ import productcase.ProductController;
 import ui.UiController;
 
 public class CoreController {
+	private static final int FAIL_TO_BUY = -1;
+
 	private int inputMoney;
 	private CoinController coinController;
 	private ProductController productController;
@@ -32,5 +34,27 @@ public class CoreController {
 
 	protected void setInputMoney() {
 		inputMoney = uiController.askInputMoney();
+	}
+
+	private String getValidProductName() {
+		String productName = "";
+		uiController.printRemainMoney(inputMoney);
+		productName = uiController.askProductNameToBuy();
+		return productName;
+	}
+
+	protected void buyProduct() {
+		int remainMoney = 0;
+		boolean endCondition = false;
+		while (!endCondition) {
+			String productName = getValidProductName();
+			try {
+				remainMoney = productController.buyProduct(productName, inputMoney);
+				endCondition = true;
+			} catch (IllegalArgumentException e) {
+				uiController.printLogicalExceptionError(e.getMessage());
+			}
+		}
+		inputMoney = remainMoney;
 	}
 }

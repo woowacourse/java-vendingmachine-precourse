@@ -7,5 +7,8 @@ public class Application {
 		tmp.setVendingMachineHoldMoney();
 		tmp.setVendingMachineHoldProduct();
 		tmp.setInputMoney();
+		while (true) {
+			tmp.buyProduct();
+		}
 	}
 }
