@@ -14,13 +14,12 @@ import vendingmachine.view.UserMoneyInputView;
 
 public class TransactionController {
 	public static void run() {
-		ItemInformationInputView itemInformationInputView = new ItemInformationInputView();
+
 		UserMoneyInputView userMoneyInputView = new UserMoneyInputView();
 		ArrayList<Item> coin = generateCoinByInput();
 		OutputView.viewCoins(coin,
 			Messages.OUTPUT_VIEW_INITIAL_COIN_MSG.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
-		ItemList itemList = new ItemList(
-			itemInformationInputView.parse(itemInformationInputView.getInput()));
+		ItemList itemList = generateItemListByInput();
 		User user = new User(Integer.valueOf(userMoneyInputView.getInput()));
 		while (!itemList.isAllSoldOut() && !user.isBankrupt(itemList.getMinPrice())) {
 			OutputView.viewNowPayMoney(user.getPayMoney());
@@ -35,5 +34,12 @@ public class TransactionController {
 		CoinInputView coinInputView = new CoinInputView();
 		ArrayList<Item> coin = Coin.getInitialCoins(Integer.valueOf(coinInputView.getInput()));
 		return coin;
+	}
+
+	private static ItemList generateItemListByInput() {
+		ItemInformationInputView itemInformationInputView = new ItemInformationInputView();
+		ItemList itemList = new ItemList(
+			itemInformationInputView.parse(itemInformationInputView.getInput()));
+		return itemList;
 	}
 }
