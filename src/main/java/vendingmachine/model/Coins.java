@@ -3,7 +3,6 @@ package vendingmachine.model;
 import java.util.EnumMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
 
 public class Coins {
 	private EnumMap<Coin, Integer> coinMap;
