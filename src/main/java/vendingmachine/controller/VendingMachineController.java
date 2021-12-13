@@ -35,6 +35,7 @@ public class VendingMachineController {
 		vendingMachine.initInputMoney(convertedInsertMoney);
 		//물건 구매하기
 		purchaseProduct(vendingMachine);
+		//TODO 잔돈 계산하는 로직 추가
 		//자판기 종료시 잔돈 계산하기
 		calculateCoin(vendingMachine);
 
@@ -62,6 +63,7 @@ public class VendingMachineController {
 		try {
 			return validator.validateMoney(machineMoney);
 		} catch (IllegalArgumentException error) {
+			System.out.println(error.getMessage());
 			return enterMachineMoney();
 		}
 	}
@@ -72,6 +74,7 @@ public class VendingMachineController {
 		try {
 			return validator.validateMoney(insertMoney);
 		} catch (IllegalArgumentException error) {
+			System.out.println(error.getMessage());
 			return enterInsertMoney();
 		}
 	}
@@ -81,6 +84,7 @@ public class VendingMachineController {
 		try {
 			return validator.validateProduct(machineProduct);
 		} catch (IllegalArgumentException error) {
+			System.out.println(error.getMessage());
 			return enterMachineProduct();
 		}
 	}
@@ -90,6 +94,7 @@ public class VendingMachineController {
 		try {
 			return validator.validateBuyingProduct(buyingProduct);
 		} catch (IllegalArgumentException error) {
+			System.out.println(error.getMessage());
 			return enterBuyingProduct();
 		}
 	}

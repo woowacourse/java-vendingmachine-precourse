@@ -1,8 +1,10 @@
 package vendingmachine.model;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -14,7 +16,7 @@ public class VendingMachine {
 	private int ownMoney; // 갖고 있을 필요가 있나?
 	private int inputMoney;
 	private List<Product> productList;
-	private final Map<Coin, Integer> coinMap = new HashMap<>();
+	private final Map<Coin, Integer> coinMap = new LinkedHashMap<>();
 
 	public int getInputMoney() {
 		return this.inputMoney;
@@ -34,13 +36,18 @@ public class VendingMachine {
 
 	public void generateCoin() {
 		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
-		coinAmountList.forEach(amount -> {
-			int maxRange = Utils.getMaxRange(ownMoney, amount);
-			int randomNumber = Randoms.pickNumberInRange(0, maxRange);
-			coinMap.put(Coin.parse(amount), randomNumber);
-			ownMoney = ownMoney - randomNumber*amount;
-			//TODO 마지막으로 남은 10원은 몽땅 생성할 수 있도록..!!
-		});
+		coinAmountList.forEach(this::generateCoins);
+	}
+
+	private void generateCoins(Integer amount) {
+		int maxRange = Utils.getMaxRange(ownMoney, amount);
+		if (amount == 10) {
+			coinMap.put(Coin.parse(amount), maxRange);
+			return;
+		}
+		int randomNumber = Randoms.pickNumberInRange(0, maxRange);
+		coinMap.put(Coin.parse(amount), randomNumber);
+		ownMoney = ownMoney - randomNumber* amount;
 	}
 
 	public void generateProduct(String products) {
