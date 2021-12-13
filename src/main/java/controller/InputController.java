@@ -62,4 +62,8 @@ public class InputController {
 			}
 		}
 	}
+
+	public static String inputProductNameToBuy() {
+		return Console.readLine();
+	}
 }
