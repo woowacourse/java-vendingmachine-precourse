@@ -64,21 +64,21 @@ public class ProductValidator {
 	}
 
 	private static boolean isValidProductName(String productName) {
-		if (!ProductNameValidator.isValidProductName(productName)) {
+		if (!ProductNameValidator.isValidName(productName)) {
 			throw new IllegalArgumentException();
 		}
 		return true;
 	}
 
 	private static boolean isValidProductPrice(String productPrice) {
-		if (!ProductPriceValidator.isValidProductPrice(productPrice)) {
+		if (!ProductPriceValidator.isValidPrice(productPrice)) {
 			throw new IllegalArgumentException();
 		}
 		return true;
 	}
 
 	private static boolean isValidProductCount(String productCount) {
-		if (!ProductCountValidator.isValidProductCount(productCount)) {
+		if (!ProductCountValidator.isValidCount(productCount)) {
 			throw new IllegalArgumentException();
 		}
 		return true;
