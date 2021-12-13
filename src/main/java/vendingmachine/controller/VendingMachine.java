@@ -59,4 +59,14 @@ public class VendingMachine {
         userMoney.reduce(pro.getPrice());
         OutputView.printUserMoney(userMoney);
     }
+
+    public void returnChange() {
+        if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
+            System.out.println(getUserMoney());
+        }
+    }
+
+    private int getUserMoney() {
+        return userMoney.getMoney();
+    }
 }
