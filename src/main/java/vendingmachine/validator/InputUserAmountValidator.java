@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.validator;
 
 public class InputUserAmountValidator {
 	private final static String ONLY_NUMBER = "[0-9]+";

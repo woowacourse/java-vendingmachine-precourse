@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.validator;
 
 import java.util.Arrays;
 import java.util.List;
