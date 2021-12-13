@@ -13,4 +13,9 @@ public class Validator {
 		}
 		return money;
 	}
+
+	public String validateProduct(String validateProduct) {
+		// 상품명이 제대로 들어왔는지 검증하는 로직
+		return "";
+	}
 }
