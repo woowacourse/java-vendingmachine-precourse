@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import vendingmachine.domain.enumclass.Coin;
+import vendingmachine.utils.CoinUtil;
 import vendingmachine.validation.GlobalValidation;
 
 public class VendingMachine {
@@ -36,6 +37,17 @@ public class VendingMachine {
 		return sum;
 	}
 
+	public void makeCoinInCoinMap(int money) {
+		while (money > 0) {
+			int randomCoin = CoinUtil.generateRandomCoin();
+			if (randomCoin > money) {
+				continue;
+			}
+			addCoin(randomCoin);
+			money -= randomCoin;
+		}
+	}
+
 	public void addCoin(int coin) {
 		coinMap.put(coin, coinMap.get(coin) + 1);
 	}
@@ -45,6 +57,7 @@ public class VendingMachine {
 	}
 
 	public void subtractInputCostAndProductAmount(String productName) {
+		//TODO: Stream 으로 처리 할 수 없나?
 		for (Product product : products) {
 			if (productName.equals(product.getName())) {
 				subtractInputCost(product);

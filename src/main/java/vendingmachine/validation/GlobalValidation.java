@@ -58,7 +58,7 @@ public class GlobalValidation {
 		validateNumberIsDivideTen(price, ErrorMessage.PRODUCT_PRICE_IS_NOT_DIVIDE_TEN_ERROR);
 	}
 
-	// 상품 수량이 자연수가 아닐 경우 TODO
+	// 상품 수량이 자연수가 아닐 경우
 	public static void validateProductAmount(String amount) {
 		validateCharIsInt(amount, ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);
 		validateNumberIsZero(Integer.parseInt(amount), ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);

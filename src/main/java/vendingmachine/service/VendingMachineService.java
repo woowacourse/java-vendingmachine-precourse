@@ -30,7 +30,7 @@ public class VendingMachineService {
 		InputVendingMachineCostValidator.validateVendingMachineCost(inputStr);
 		result.init();
 		result.addMessage(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
-		vendingMachine = CoinUtil.makeCoin(Integer.parseInt(inputStr), vendingMachine);
+		vendingMachine.makeCoinInCoinMap(Integer.parseInt(inputStr));
 		result.addCoinCountMessage(vendingMachine.getCoinMap());
 		return result.getResult();
 	}
