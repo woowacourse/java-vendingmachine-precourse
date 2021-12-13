@@ -13,7 +13,6 @@ public class Application {
         Integer inputmoney = Utils.vendMoneyInput();
         int[] randomList = Utils.generateRandomCoin(coins,inputmoney);
         Utils.printRandomCoin(coins, randomList);
+        Utils.prodInput();
     }
-
-    
 }

@@ -42,7 +42,22 @@ public class Utils {
         }
     }
 
-    public void play(){
+    public static List<Product> prodInput(){
+//        System.out.println(Message.INPUT_PROD_NAME);
+//        Console.readLine();
+        List<Product> parsedProdList = parseProd("[콜라,1500,20];[사이다,1000,10]");
+        return parsedProdList;
+    }
 
+    public static List<Product> parseProd(String prodInput){
+        List<String>splitList = Arrays.asList(prodInput.split(";"));
+        List<Product> products = new ArrayList<Product>();
+        for(String prod: splitList){
+            String substringProd = prod.substring(1,prod.length()-1);
+            List<String> splitSubstringProd = Arrays.asList(substringProd.split(","));
+            Product newProduct = new Product(splitSubstringProd.get(0), Integer.parseInt(splitSubstringProd.get(1)), Integer.parseInt(splitSubstringProd.get(2)));
+            products.add(newProduct);
+        }
+        return products;
     }
 }

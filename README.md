@@ -10,7 +10,8 @@
     - [] 500 100 50 10 단위로만 생성
   - 자판기 보유 동전 출력: printRandomCoin()
 - 상품명 가격 수량 입력
-  - 상품 가격 수량 입력 요청: prodInput()
+  - 상품 가격 수량 입력 요청: prodInput()Z
+    - parseProdInput(): 들어온 정보를 자르기 -> vendingmachine의 내부 값으로 사용
     - [] 형식을 지키지 않았을 때
 
 
