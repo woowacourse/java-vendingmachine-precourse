@@ -1,0 +1,13 @@
+package vendingmachine;
+
+public class Product {
+    private String name;
+    private int price;
+    private int number;
+
+    public Product(String name, int price, int number) {
+        this.name = name;
+        this.price = price;
+        this.number = number;
+    }
+}

@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.ArrayList;
-
 import camp.nextstep.edu.missionutils.Console;
 
 public class User {
@@ -17,12 +15,12 @@ public class User {
         }
     }
 
-    public String inputProducts() {
+    public String[] inputProducts() {
         while (true) {
             String input = Console.readLine();
             String[] parsedInput = parser.parseProduct(input);
             if (validation.isValidateProduct(parsedInput)) {
-                return input;
+                return parsedInput;
             }
         }
     }
