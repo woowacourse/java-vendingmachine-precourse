@@ -2,57 +2,28 @@ package vendingmachine;
 
 public class VendingMachineController {
     private final VendingMachineService vendingMachineService;
-    private final VendingMachineConsole console = new VendingMachineConsole();
+    private final VendingMachineConsole vendingMachineConsole;
 
-    public VendingMachineController(VendingMachineService vendingMachineService) {
+    public VendingMachineController(VendingMachineService vendingMachineService, VendingMachineConsole vendingMachineConsole) {
         this.vendingMachineService = vendingMachineService;
+        this.vendingMachineConsole = vendingMachineConsole;
     }
 
     public void on() {
+        createVendingMachine();
         createCoinBalance();
         createItems();
-        createAvailableMoney();
-        purchase();
-        getChanges();
+    }
+
+    private void createVendingMachine() {
+        vendingMachineService.createVendingMachine();
     }
 
     private void createCoinBalance() {
-        console.printCoinBalance(vendingMachineService.createCoinBalance(console.inputCoinBalance()));
+        vendingMachineConsole.printCoinBalance(vendingMachineService.createCoinBalance(vendingMachineConsole.inputCoinBalance()));
     }
 
     private void createItems() {
-        vendingMachineService.createItems(console.inputItemInventoryInfo());
-    }
-
-    private void createAvailableMoney() {
-        vendingMachineService.insertMoney(console.inputAvailableMoney());
-    }
-
-    private void purchase() {
-        while (vendingMachineService.isPurchaseAvailable()) {
-            try {
-                showAvailableMoney();
-                purchaseByItemName();
-            } catch (IllegalArgumentException error) {
-                showErrorMessage(error.getMessage());
-            }
-        }
-    }
-
-    private void getChanges() {
-        showAvailableMoney();
-        console.printChange(vendingMachineService.giveChange());
-    }
-
-    private void showAvailableMoney() {
-        console.printAvailableMoney(vendingMachineService.showAvailableMoney());
-    }
-
-    private void purchaseByItemName() {
-        vendingMachineService.purchaseByItemName(console.inputItemsToPurchase());
-    }
-
-    private void showErrorMessage(String errorMessage) {
-        console.printErrorMessage(errorMessage);
+        vendingMachineService.createItems(vendingMachineConsole.inputItemInventoryInfo());
     }
 }

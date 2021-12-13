@@ -7,9 +7,13 @@ import vendingmachine.item.ItemFactory;
 import vendingmachine.item.Items;
 
 public class VendingMachineService {
-    private final VendingMachine vendingMachine = new VendingMachine();
     private final CoinExchangeMachine coinExchangeMachine = new CoinExchangeMachine();
     private final ItemFactory itemFactory = new ItemFactory();
+    private VendingMachine vendingMachine;
+
+    public void createVendingMachine() {
+        this.vendingMachine = new VendingMachine();
+    }
 
     public Coins createCoinBalance(int coinBalance) {
         return vendingMachine.depositCoinBalance(coinExchangeMachine.changeIntoCoins(coinBalance));
@@ -19,23 +23,7 @@ public class VendingMachineService {
         return vendingMachine.storeItems(itemFactory.createByInventoryList(inputItemInventoryInfo));
     }
 
-    public void insertMoney(int money) {
-        vendingMachine.insertMoney(money);
-    }
-
-    public int showAvailableMoney() {
-        return vendingMachine.showAvailableMoney();
-    }
-
-    public void purchaseByItemName(String itemName) {
-        vendingMachine.purchase(itemName);
-    }
-
-    public boolean isPurchaseAvailable() {
-        return vendingMachine.isPurchaseAvailable();
-    }
-
-    public Coins giveChange() {
-        return vendingMachine.giveChange();
+    public VendingMachine getVendingMachine() {
+        return vendingMachine;
     }
 }

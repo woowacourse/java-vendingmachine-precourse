@@ -12,7 +12,7 @@ public class VendingMachine {
     private final ChangeAccountant changeAccountant = new ChangeAccountant();
     private Coins coinBalance = new Coins();
     private Items items = new Items();
-    private int moneyAvailable = 0;
+    private int leftMoney = 0;
 
     public Coins depositCoinBalance(Coins coinBalance) {
         this.coinBalance = coinBalance;
@@ -24,39 +24,11 @@ public class VendingMachine {
         return this.items;
     }
 
-    public void insertMoney(int money) {
-        this.moneyAvailable = money;
-    }
-
-    public int showAvailableMoney() {
-        return moneyAvailable;
-    }
-
-    public void purchase(String itemName) {
-        Item item = findItemByItemName(itemName);
-        validateCheaperThanMoneyAvailable(item);
-        validateInStock(item);
-        purchase(item);
-    }
-
-    public Coins giveChange() {
+    public Coins giveChange(int moneyAvailable) {
         Coins change = changeAccountant.change(moneyAvailable, coinBalance);
-        moneyAvailable = changeAccountant.getRestAfterCalculation();
+        leftMoney = changeAccountant.getRestAfterCalculation();
         coinBalance.take(change);
         return change;
-    }
-
-    public boolean isPurchaseAvailable() {
-        if (!isMoreMoneyThanLowestPriceInStock() || isAllItemsSoldOut()) {
-            return false;
-        }
-        return true;
-    }
-
-    private void validateCheaperThanMoneyAvailable(Item item) {
-        if (item.isMoreExpensiveThanMoneyLeft(moneyAvailable)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE);
-        }
     }
 
     private void validateInStock(Item item) {
@@ -65,20 +37,15 @@ public class VendingMachine {
         }
     }
 
-    private void purchase(Item item) {
+    public void purchase(Item item) {
         items.reduce(item);
-        moneyAvailable -= item.getPrice();
     }
 
-    private boolean isMoreMoneyThanLowestPriceInStock() {
-        int minimumPrice = items.findLowestPriceInStock();
-        if (moneyAvailable < minimumPrice) {
-            return false;
-        }
-        return true;
+    public int findLowestPriceInStock() {
+        return items.findLowestPriceInStock();
     }
 
-    private boolean isAllItemsSoldOut() {
+    public boolean isAllItemsSoldOut() {
         return items.isEmptyItems();
     }
 
@@ -88,5 +55,11 @@ public class VendingMachine {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE);
         }
         return result.get();
+    }
+
+    public Item findItemToPurchase(String itemName) {
+        Item item = findItemByItemName(itemName);
+        validateInStock(item);
+        return item;
     }
 }
