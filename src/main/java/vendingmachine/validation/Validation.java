@@ -39,24 +39,28 @@ public class Validation {
 		}
 	}
 
-	// 상품의 길이가 3(상품명, 가격, 수량)이 아닌 경우
+	// 상품의 길이가 3(상품명, 가격, 수량)이 아니고  경우
 	public static void validateProductLength(String[] product) {
 		if(product.length!=3){
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_LENGTH_ERROR.getErrorMessage());
 		}
-
 	}
 
-	// 상품 가격이 100 이상 자연수가 아닐 경우
+	// 각 상품이 빈 값으로 들어오는 경우
+
+
+	// 상품 가격이 100 이상, 10으로 나누어 떨어지는 자연수가 아닐 경우
 	public static void validateProductPrice(String price) {
 		validateCharIsInt(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR,price);
 
-		if(Integer.parseInt(price) < 100) {
+		if(Integer.parseInt(price) < 100 ) {
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR.getErrorMessage());
 		}
-	}
 
-	// 상품 가격이 10으로 나누어 떨어지지 않는 경우, 상품명, 가격, 수량이 빈 값으로 들어오는 경우
+		if (Integer.parseInt(price) % 10 != 0) {
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_DIVIDE_TEN_ERROR.getErrorMessage());
+		}
+	}
 
 	// 상품 수량이 자연수가 아닐 경우
 	public static void validateProductAmount(String amount) {
@@ -66,7 +70,6 @@ public class Validation {
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR.getErrorMessage());
 		}
 	}
-
 
 	// 상품이 중복되어 들어오는 경우
 	public static void validateProductIsDistinct(Product product, List<Product> products) {
