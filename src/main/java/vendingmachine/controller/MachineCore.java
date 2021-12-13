@@ -21,7 +21,7 @@ public class MachineCore {
     private void readMachineAssetFromUser() {
         while (true) {
             try {
-                String input = view.askQuestion(InputData.ASK_PRODUCTS_TO_SET);
+                String input = view.askQuestion(InputData.ASK_BUDGET);
                 machine.setInitialAsset(consoleValidator.checkNumeric(input));
                 break;
             } catch (IllegalArgumentException exception) {
@@ -33,7 +33,7 @@ public class MachineCore {
     private void readProductTableFromUser() {
         while (true) {
             try {
-                String input = view.askQuestion(InputData.ASK_BUDGET);
+                String input = view.askQuestion(InputData.ASK_PRODUCT_TO_BUY);
                 ProductTable productTable = splitProductInfo(input);
                 machine.setProductTable(productTable);
                 break;
