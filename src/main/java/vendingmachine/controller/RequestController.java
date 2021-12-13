@@ -7,6 +7,7 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.service.ChangesService;
 import vendingmachine.service.MoneyService;
 import vendingmachine.service.ProductsService;
+import vendingmachine.utils.validator.RequestValidator;
 import vendingmachine.view.ExceptionView;
 import vendingmachine.view.InputView;
 
@@ -44,6 +45,17 @@ public class RequestController {
 		} catch (IllegalArgumentException e) {
 			ExceptionView.errorUI(e.getMessage());
 			return requestInsertMoney();
+		}
+	}
+
+	public static String requestProductName() {
+		try {
+			String request = InputView.requestProductName();
+			RequestValidator.isEmpty(request);
+			return request;
+		} catch (IllegalArgumentException e) {
+			ExceptionView.errorUI(e.getMessage());
+			return requestProductName();
 		}
 	}
 }

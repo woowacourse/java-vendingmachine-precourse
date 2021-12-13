@@ -23,4 +23,8 @@ public class VendingMachine {
 		}
 		return true;
 	}
+
+	public Money getInsertMoney() {
+		return insertMoney;
+	}
 }
