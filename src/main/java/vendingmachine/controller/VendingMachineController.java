@@ -41,8 +41,9 @@ public class VendingMachineController {
 	}
 
 	public static void run() {
-		while (vendingMachine.checkTermination()) {
+		while (!vendingMachine.checkTermination()) {
 			try {
+				Output.inputMoney(vendingMachine.getInputMoney());
 				vendingMachine.buy(getBuyingProductName());
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());

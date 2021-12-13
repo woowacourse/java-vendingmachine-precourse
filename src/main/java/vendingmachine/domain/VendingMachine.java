@@ -11,6 +11,10 @@ public class VendingMachine {
 		this.inputMoney = inputMoney;
 	}
 
+	public int getInputMoney() {
+		return inputMoney;
+	}
+
 	public boolean checkTermination() {
 		return products.isLessThanMinPrice(inputMoney)
 			|| products.getTotalAmount() == 0;
@@ -20,7 +24,7 @@ public class VendingMachine {
 		validateBuyingProductName(buyingProductName);
 		Product product = products.getProductByName(buyingProductName);
 		product.decreaseAmount();
-		inputMoney = product.minusAmount(inputMoney);
+		inputMoney = product.minusPrice(inputMoney);
 	}
 
 	public Coins giveChange() {
@@ -35,7 +39,7 @@ public class VendingMachine {
 		if(product.getSmallerPrice(inputMoney) > inputMoney) {
 			throw new IllegalArgumentException();
 		}
-		if (product.isInStock()){
+		if (!product.isInStock()){
 			throw new IllegalArgumentException();
 		}
 	}

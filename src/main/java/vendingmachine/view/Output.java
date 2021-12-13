@@ -7,4 +7,8 @@ public class Output {
 		System.out.println("자판기가 보유한 동전");
 		System.out.println(coins);
 	}
+
+	public static void inputMoney(int inputMoney) {
+		System.out.println("투입 금액: " + inputMoney + "원");
+	}
 }
