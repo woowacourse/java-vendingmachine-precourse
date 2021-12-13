@@ -1,6 +1,12 @@
 package vendingmachine;
 
 public class VendingMachine {
-    public void Machine(){
+    Computer computer = new Computer();
+    User user = new User();
+
+    public void Machine() {
+        computer.PrintMachineCoin();
+        int coinSum = user.InputMachineCoin();
+        System.out.println(coinSum);
     }
 }
