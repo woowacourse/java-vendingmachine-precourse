@@ -8,8 +8,8 @@ public class VendingMachineService {
 
 	public static void insertMoney(VendingMachine vendingMachine, Money insertMoney) throws IllegalArgumentException {
 		vendingMachine.insertMoney(insertMoney);
-		if (vendingMachine.compareCheapestPrice(insertMoney) < 0) {
-			throw new IllegalArgumentException();
+		if (!vendingMachine.isBuy()) {
+			throw new IllegalArgumentException(INSERT_MONEY_ERROR_MESSAGE);
 		}
 	}
 }

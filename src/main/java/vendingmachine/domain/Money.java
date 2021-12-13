@@ -27,7 +27,7 @@ public class Money implements Comparable<Money>{
 		return amount - o.amount;
 	}
 
-	public void plus(Money money) {
-		amount += money.amount;
+	public Money plus(Money money) {
+		return new Money(amount + money.amount);
 	}
 }
