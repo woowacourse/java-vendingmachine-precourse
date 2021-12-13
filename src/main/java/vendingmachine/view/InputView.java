@@ -13,7 +13,7 @@ import java.util.List;
 
 public class InputView {
 
-    public static int getTotalMoneyInput() {
+    public static int getInitialMoneyInput() {
         try {
             System.out.println(REQUEST_VENDING_MACHINE_INITIAL_MONEY);
 
@@ -22,7 +22,7 @@ public class InputView {
             return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getTotalMoneyInput();
+            return getInitialMoneyInput();
         }
     }
 
@@ -52,7 +52,7 @@ public class InputView {
         }
     }
 
-    public static String getMerchandiseNameInput() {
+    public static String getPurchaseInfoInput() {
         System.out.println(REQUEST_PURCHASE_INPUT);
         return Console.readLine();
     }

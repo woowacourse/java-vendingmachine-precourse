@@ -16,7 +16,7 @@ public class VendingMachine {
     private int customerMoneyLeft = NO_CUSTOMER_MONEY_LEFT;
 
     public VendingMachine() {
-        int totalMoney = InputView.getTotalMoneyInput();
+        int totalMoney = InputView.getInitialMoneyInput();
         this.initializeCoins(totalMoney);
         OutputView.printCoinsInfo(this.coins);
         this.setMenu(InputView.getMenuInput());

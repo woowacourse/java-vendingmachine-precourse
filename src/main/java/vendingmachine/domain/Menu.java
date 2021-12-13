@@ -17,7 +17,7 @@ public class Menu {
 
     public Merchandise selectAvailableMerchandise() {
         try {
-            String name = InputView.getMerchandiseNameInput();
+            String name = InputView.getPurchaseInfoInput();
             Merchandise merchandise = this.getMerchandiseByName(name);
 
             if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) {
