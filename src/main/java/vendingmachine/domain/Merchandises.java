@@ -36,7 +36,7 @@ public class Merchandises {
 		return merchandise;
 	}
 
-	public boolean isAllMerchandisesSoldout() {
+	public boolean isAllMerchandisesSoldOut() {
 		List<Merchandise> soldOutMerchandises = merchandiseList.stream()
 			.filter(merchandise -> merchandise.isMerchandiseSoldOut())
 			.collect(Collectors.toList());

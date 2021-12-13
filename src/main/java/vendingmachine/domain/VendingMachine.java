@@ -32,6 +32,10 @@ public class VendingMachine {
 		return notBuyMerchandise.size() != merchandises.getMerchandisesSize();
 	}
 
+	public boolean isSoldOutMerchandises() {
+		return merchandises.isAllMerchandisesSoldOut();
+	}
+
 	public Merchandises getMerchandises() {
 		return merchandises;
 	}
