@@ -46,9 +46,11 @@ public class InputView {
 
 	public static int inputMoneyInput() {
 		int inputMoney = 0;
-
-		System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
-		String stringInputMoney = Console.readLine();
+		String stringInputMoney = "";
+		do{
+			System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
+			stringInputMoney = Console.readLine();
+		} while(!isRightInputMoney(stringInputMoney));
 		System.out.println();
 		inputMoney = Integer.parseInt(stringInputMoney);
 
@@ -93,9 +95,9 @@ public class InputView {
 	private static boolean isRightHoldingMoney(String stringHoldingMoney) {
 		boolean isRightHoldingMoney = true;
 		try {
-			nonNumericHoldingMoneyError(stringHoldingMoney);
-			zeroHoldingMoneyError(stringHoldingMoney);
-			dividedByTenHoldingMoneyError(stringHoldingMoney);
+			nonNumericError(stringHoldingMoney);
+			zeroNumericError(stringHoldingMoney);
+			dividedByTenMoneyError(stringHoldingMoney);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightHoldingMoney = false;
@@ -103,23 +105,36 @@ public class InputView {
 		return isRightHoldingMoney;
 	}
 
-	public static void nonNumericHoldingMoneyError(String stringHoldingMoney) {
+	private static boolean isRightInputMoney(String stringInputMoney){
+		boolean isRightInputMoney = true;
+		try{
+			nonNumericError(stringInputMoney);
+			zeroNumericError(stringInputMoney);
+			dividedByTenMoneyError(stringInputMoney);
+		} catch (IllegalArgumentException e){
+			System.out.println(e.getMessage());
+			isRightInputMoney = false;
+		}
+		return isRightInputMoney;
+	}
+
+	public static void nonNumericError(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
 			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_MIN || CHAR_NUMERIC_MAX < stringHoldingMoney.charAt(
 					i)) {
-				throw new IllegalArgumentException(Message.NON_NUMERIC_HOLDING_MONEY_ERROR);
+				throw new IllegalArgumentException(Message.NON_NUMERIC_ERROR);
 			}
 		}
 	}
 
-	public static void zeroHoldingMoneyError(String stringHoldingMoney) {
+	public static void zeroNumericError(String stringHoldingMoney) {
 		if (stringHoldingMoney.equals(ZERO_HOLDING_MONEY)) {
-			throw new IllegalArgumentException(Message.ZERO_HOLDING_MONEY_ERROR);
+			throw new IllegalArgumentException(Message.ZERO_NUMERIC_ERROR);
 		}
 	}
 
-	public static void dividedByTenHoldingMoneyError(String stringHoldingMoney) {
-		if (Integer.parseInt(stringHoldingMoney) % DIVIDE_VALUE != 0) {
+	public static void dividedByTenMoneyError(String stringMoney) {
+		if (Integer.parseInt(stringMoney) % DIVIDE_VALUE != 0) {
 			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
 		}
 	}

@@ -1,8 +1,5 @@
 package vendingmachine;
 
-import java.util.LinkedHashMap;
-
-import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
