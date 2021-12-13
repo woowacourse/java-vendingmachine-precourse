@@ -25,4 +25,10 @@ public class UtilValidation {
 		}
 	}
 
+	public static void isUpperNumber(int target, int number) {
+		if (target > number) {
+			throw (new IllegalArgumentException("값이 " + target + "보다 작습니다."));
+		}
+	}
+
 }
