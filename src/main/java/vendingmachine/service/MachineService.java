@@ -22,16 +22,16 @@ import vendingmachine.validator.ProductListValidator;
 public class MachineService {
 
 	private final DepositRepository depositRepository;
-	private final ProductRepository productRepository;
+	private final ProductService productService;
 	private int money;
 
 	public MachineService() {
-		this(new DepositRepository(), new ProductRepository());
+		this(new DepositRepository(), new ProductService());
 	}
 
-	public MachineService(DepositRepository depositRepository, ProductRepository productRepository) {
+	public MachineService(DepositRepository depositRepository, ProductService productService) {
 		this.depositRepository = depositRepository;
-		this.productRepository = productRepository;
+		this.productService = productService;
 		this.money = 0;
 	}
 
@@ -67,25 +67,7 @@ public class MachineService {
 	}
 
 	public void setProducts(String input) {
-		ProductListValidator.validateBracketAndSemiColon(input);
-		List<String> inputList = Arrays.asList(input.split(PRODUCT_DELIMITER.getSymbol(), -1));
-		List<Product> productList = inputList.stream().map(this::getProduct).collect(Collectors.toList());
-		productRepository.save(productList);
-	}
-
-	private String trimBrackets(String s) {
-		return s.substring(1, s.length() - 1);
-	}
-
-	private Product getProduct(String s) {
-		validateComma(s);
-		validateNameLengthAndInteger(s);
-		s = trimBrackets(s);
-
-		List<String> infoList = Arrays.asList(s.split(PRODUCT_INFO_DELIMITER.getSymbol(), -1));
-		validatePrice(Integer.parseInt(infoList.get(1)));
-		validateQuantity(Integer.parseInt(infoList.get(2)));
-		return new Product(infoList);
+		productService.setProducts(input);
 	}
 
 	public void addMoney(String inputMoney) {
@@ -104,19 +86,12 @@ public class MachineService {
 	}
 
 	public List<Product> getAffordableList() {
-		return productRepository.findAll()
-			.stream()
-			.filter(product -> product.getPrice() <= money)
-			.collect(Collectors.toList());
+		return productService.getAffordableList(money);
 	}
 
 	public void purchaseProduct(String productName) {
-		if (!productRepository.findByName(productName).isPresent())
-			throw new IllegalArgumentException(NO_SUCH_PRODUCT.getMessage());
-		productRepository.findByName(productName).ifPresent(product -> {
-			decreaseMoney(product.getPrice());
-			productRepository.decreaseQuantity(productName);
-		});
+		decreaseMoney(productService.getPrice(productName));
+		productService.decreaseProduct(productName);
 	}
 
 	public String spitChanges() {

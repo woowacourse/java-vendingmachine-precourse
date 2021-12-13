@@ -21,6 +21,7 @@ class MachineServiceTest {
 	MachineService machineService;
 	DepositRepository depositRepository;
 	ProductRepository productRepository;
+	ProductService productService;
 
 	List<String> productList;
 	List<Deposit> depositList;
@@ -29,7 +30,8 @@ class MachineServiceTest {
 	void setUp() {
 		depositRepository = new DepositRepository();
 		productRepository = new ProductRepository();
-		machineService = new MachineService(depositRepository, productRepository);
+		productService = new ProductService(productRepository);
+		machineService = new MachineService(depositRepository, productService);
 
 		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
 		machineService.setProducts(productList.get(0) + Symbol.PRODUCT_DELIMITER.getSymbol() + productList.get(1));
@@ -65,7 +67,7 @@ class MachineServiceTest {
 	void getAffordableList() {
 		// given
 		// when
-		machineService.addMoney("10000");
+		machineService.addMoney("550");
 		// then
 		assertThat(machineService.getAffordableList()).hasSize(1);
 	}
@@ -76,9 +78,7 @@ class MachineServiceTest {
 		Product target = productRepository.findByName("콜라").get();
 		machineService.addMoney(String.valueOf(target.getPrice() * target.getQuantity()));
 		// when
-		IntStream.range(0, target.getQuantity()).forEach(i ->
-			machineService.purchaseProduct(target.getName())
-		);
+		IntStream.range(0, target.getQuantity()).forEach(i -> machineService.purchaseProduct(target.getName()));
 		// then
 		assertThat(productRepository.findAll()).hasSize(productList.size() - 1);
 	}
