@@ -17,7 +17,7 @@ public class MachineController {
     public void run() {
         initChange();
         Drinks drinks = Input.drinks(new DrinkMapper());
-        UserMoney userMoney = Input.userMoney();
+        UserMoney userMoney = createUserMoney(drinks);
         Machine machine = new Machine(drinks, userMoney);
         buyCycle(machine);
         Output.changeStatus(change.createChange(userMoney));
@@ -47,5 +47,16 @@ public class MachineController {
         this.change = new Change(machineMoney);
         Output.guideMessage(Message.COIN_STATUS);
         Output.changeStatus(change.getCoins());
+    }
+
+    private UserMoney createUserMoney(Drinks drinks) {
+        UserMoney userMoney = Input.userMoney();
+        try {
+            drinks.isMoneyOverMinPriceDrink(userMoney);
+        } catch (IllegalArgumentException e) {
+            Output.errorMessage(e.getMessage());
+            return createUserMoney(drinks);
+        }
+        return userMoney;
     }
 }

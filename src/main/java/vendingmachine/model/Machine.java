@@ -4,6 +4,7 @@ import vendingmachine.model.drink.Drink;
 import vendingmachine.model.drink.Drinks;
 import vendingmachine.model.user.ChoiceDrink;
 import vendingmachine.model.user.UserMoney;
+import vendingmachine.util.Message;
 
 public class Machine {
     private final Drinks drinkInventory;
@@ -16,10 +17,14 @@ public class Machine {
 
     public void buy(ChoiceDrink choiceDrink) {
         Drink buyItem = drinkInventory.findByDrinkName(choiceDrink);
-        if (money.canBuy(buyItem)) {
-            money.decAmount(buyItem);
-            buyItem.decQuantity();
+        if (!money.canBuy(buyItem)) {
+            throw new IllegalArgumentException(Message.USER_MONEY_OVER_ERROR);
         }
+        if (!buyItem.hasQuantity()) {
+            throw new IllegalArgumentException(Message.DRINK_SOLD_OUT_ERROR);
+        }
+        money.decAmount(buyItem);
+        buyItem.decQuantity();
     }
 
     public boolean isContinue() {

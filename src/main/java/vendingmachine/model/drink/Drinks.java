@@ -20,6 +20,13 @@ public class Drinks {
             .orElseThrow(() -> new IllegalArgumentException(Message.CHOICE_DRINK_NO_SUCH_ERROR));
     }
 
+    public Drink isMoneyOverMinPriceDrink(UserMoney money) {
+        return drinkInventory.stream()
+            .min(Drink::compareTo)
+            .filter(money::canBuy)
+            .orElseThrow(() -> new IllegalArgumentException(Message.USER_MONEY_MIN_ERROR));
+    }
+
     public boolean isBuyContinue(UserMoney userMoney) {
         return drinkInventory.stream()
             .filter(Drink::hasQuantity).anyMatch(userMoney::canBuy);
