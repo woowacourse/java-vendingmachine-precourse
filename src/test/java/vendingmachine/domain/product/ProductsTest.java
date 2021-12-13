@@ -30,6 +30,22 @@ class ProductsTest {
         }).doesNotThrowAnyException();
     }
 
+    @DisplayName("Product의 이름이 중복되는 경우 예외를 던진다.")
+    @Test
+    void constructor_DuplicateProductName_ExceptionThrown() {
+        // given
+        List<Product> products = new ArrayList<>();
+        Product product1 = new Product("[콜라,1500,20]");
+        Product product2 = new Product("[콜라,1000,10]");
+        products.add(product1);
+        products.add(product2);
+
+        // when
+        assertThatThrownBy(() -> {
+            new Products(products);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("전체 상품 중 수량이 하나라도 존재하고 구매 가능한 경우 true를 반환한다.")
     @Test
     void isExistTotalQuantity_ExistQuantity_True() {
