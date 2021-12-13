@@ -14,10 +14,16 @@ public class ProductController {
 		ProductModel.enrollProducts(inputProductUntilValid());
 	}
 
-	public void orderProduct() {
+	public void orderProductUntilValid() {
+		do {
+			orderProduct();
+		} while (ProductModel.canBuyProduct());
+	}
+
+	private void orderProduct() {
 		MoneyView.printLastUserMoney(MoneyModel.getUserMoney());
 		ProductView.messageOrderProduct();
-		orderProductNameUntilValid();
+		ProductModel.buyProduct(orderProductNameUntilValid());
 	}
 
 	private String inputProductUntilValid() {

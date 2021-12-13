@@ -31,5 +31,17 @@ public class Product {
 	public boolean isCheaperOrSameThan(long money) {
 		return money >= price;
 	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public boolean soldOut() {
+		return count == 0;
+	}
+
+	public void consume() {
+		count -= 1;
+	}
 }
 

@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import vendingmachine.domain.MachineProducts;
+import vendingmachine.domain.Product;
 
 public class ProductModel {
 	private static MachineProducts products;
@@ -19,5 +20,22 @@ public class ProductModel {
 
 	public static boolean canBuyProductWithUserMoney(String name) {
 		return products.canBuy(name, MoneyModel.getUserMoney());
+	}
+
+	public static void buyProduct(String name) {
+		MoneyModel.subtractUserMoney(products.getPrice(name));
+		products.buyProduct(name);
+	}
+
+	public static boolean canBuyProduct() {
+		return !allProductSoldOut() && canBuyCheapestOne();
+	}
+
+	private static boolean allProductSoldOut() {
+		return products.allProductCountZero();
+	}
+
+	private static boolean canBuyCheapestOne() {
+		return products.canBuyCheapest(MoneyModel.getUserMoney());
 	}
 }

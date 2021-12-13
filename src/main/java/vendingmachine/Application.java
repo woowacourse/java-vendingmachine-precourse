@@ -12,6 +12,6 @@ public class Application {
         new CoinController().makeChangeCoins();
         productController.inputProduct();
         inputMoneyController.inputUserMoney();
-        productController.orderProduct();
+        productController.orderProductUntilValid();
     }
 }
