@@ -19,6 +19,7 @@ public enum Condition {
     MINIMUM_COST(100),
     BRACKETS_NUMBER(2),
     ONE_SELL(1);
+    
     private int number;
 
     Condition(int number) {
