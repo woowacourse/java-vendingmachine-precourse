@@ -1,50 +1,44 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
-import java.util.regex.Pattern;
-
-import static vendingmachine.Validation.*;
+import static vendingmachine.Validation.VALIDATION_SUCCESS;
 
 public class User {
-
     private int userOwnMoney;
 
-    public User(int userOwnMoney){
-        this.userOwnMoney = userOwnMoney;
-    }
-
-
-    public static void purchaseProduct(ArrayList<Product> products) throws IllegalArgumentException {
-        System.out.println("구매할 상품명을 입력해 주세요.");
-        String purchaseProductName = Console.readLine();
-        Product purchaseProductObject = findPurchaseProduct(products, purchaseProductName);
-        productNotFound(purchaseProductObject);
-        productAmountNotEnough(purchaseProductObject);
-        userMoneyNotEnough(purchaseProductObject);
-        purchaseSuccess(purchaseProductObject);
-    }
-
-
-    public static void purchaseSuccess(Product product){
-        product.sold();
-        USER_MONEY -= product.getPrice();
-    }
-
-    public static void insertMoneyByUser(){
-        String userMoney = "";
-        while(userMoney.isEmpty()){
+    public User(){
+        VALIDATION_SUCCESS = true;
+        while(VALIDATION_SUCCESS){
             try{
-                System.out.println("투입 금액을 입력해 주세요.");
-                userMoney = Console.readLine();
-                userMoneyValidation(userMoney);
-                //this.userOwnMoney = Integer.parseInt(userMoney);
+                View.inputMsgOnUser();
+                String userOwnMoney = Console.readLine();
+                Validation.userMoneyValidation(userOwnMoney);
+                VALIDATION_SUCCESS = false;
+                this.userOwnMoney = Integer.parseInt(userOwnMoney);
             }catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+                View.noticeMsgOnException(e.getMessage());
             }
         }
+    } // 생성자 종료
+
+    public int getUserOwnMoney(){
+        return this.userOwnMoney;
     }
 
-                                                             
+    public void minusUserOwnMoney(int moneyForMinus){
+        this.userOwnMoney -= moneyForMinus;
+    }
+
+    public void purchaseProduct(ArrayList<Product> productList) throws IllegalArgumentException {
+        View.inputMsgOnPurchaseProduct();
+        String selectedProduct = Console.readLine();
+
+        Product purchaseProduct = VendingMachine.isSelectedProductInVendingMachine(productList, selectedProduct);
+        Validation.productNotFound(purchaseProduct);
+        Validation.productAmountNotEnough(purchaseProduct);
+        Validation.userMoneyNotEnough(purchaseProduct, this.userOwnMoney);
+        purchaseProduct.sold();
+        this.userOwnMoney -= purchaseProduct.getPrice();
+    }
 }
