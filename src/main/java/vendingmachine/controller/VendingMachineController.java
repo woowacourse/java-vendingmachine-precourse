@@ -65,7 +65,8 @@ public class VendingMachineController {
 				OutputView.printExceptionMessage(exception.getMessage());
 			}
 		}
-		coins.calculateChange(insertMoney);
+		Coins change = coins.calculateChange(insertMoney);
+		OutputView.printChange(change);
 	}
 
 	private void purchaseProduct() {

@@ -5,9 +5,10 @@ import vendingmachine.model.Coins;
 public class OutputView {
 	private static final String INPUT_HOLDING_AMOUNT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String INPUT_PRODUCT = "상품명과 가격, 수량을 입력해 주세요.";
-	private static final String OUTPUT_HOLDING_COINS = "자판기가 보유한 동전";
 	private static final String INPUT_INSERT_MONEY = "투입 금액을 입력해 주세요.";
 	private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
+	private static final String OUTPUT_HOLDING_COINS = "자판기가 보유한 동전";
+	private static final String OUTPUT_CHANGE = "잔돈";
 
 	private OutputView() {
 	}
@@ -39,5 +40,10 @@ public class OutputView {
 
 	public static void printInsertMoney(int insertMoney) {
 		System.out.println(insertMoney);
+	}
+
+	public static void printChange(Coins change) {
+		System.out.println(OUTPUT_CHANGE);
+		System.out.println(change.toString());
 	}
 }

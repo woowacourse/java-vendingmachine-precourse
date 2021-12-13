@@ -11,6 +11,10 @@ public class Coins {
 	private static final String POSTFIX = "개";
 	private EnumMap<Coin, Integer> coinMap;
 
+	public Coins() {
+		this.coinMap = new EnumMap<>(Coin.class);
+	}
+
 	public Coins(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
 		while (amount > 0) {
@@ -30,17 +34,17 @@ public class Coins {
 		return Coin.values()[coinIndex];
 	}
 
-	public EnumMap<Coin, Integer> calculateChange(int insertMoney) {
-		EnumMap<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
+	public Coins calculateChange(int insertMoney) {
+		Coins change = new Coins();
 		for (Coin coin: coinMap.keySet()) {
 			int coinNumber = coin.divideByCoinAmount(insertMoney);
 			if (coinNumber > 0 && coinMap.get(coin) >= coinNumber) {
 				insertMoney -= coin.multiplyByCoinNumber(coinNumber);
 				coinMap.put(coin, coinMap.get(coin) - coinNumber);
-				changeMap.put(coin, coinNumber);
+				change.coinMap.put(coin, coinNumber);
 			}
 		}
-		return changeMap;
+		return change;
 	}
 
 	@Override
