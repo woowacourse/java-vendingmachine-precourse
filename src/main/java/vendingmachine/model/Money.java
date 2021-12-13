@@ -1,6 +1,13 @@
 package vendingmachine.model;
 
+import static java.lang.String.*;
+
 public class Money implements Comparable<Money> {
+	private static final int MIN = 0;
+	private static final String AMOUNT_LOWER_ERROR = "[ERROR] 금액은 음수일 수 없습니다.";
+	private static final int UNIT = 10;
+	private static final String UNIT_INVALID_ERROR = format("[ERROR] 금액은 %d으로 나누어 떨어져야 합니다.", UNIT);
+
 	private int amount;
 
 	private Money(int amount) {
@@ -14,14 +21,14 @@ public class Money implements Comparable<Money> {
 	}
 
 	private void checkLowerLimit(int amount) {
-		if (amount < 0) {
-			throw new IllegalArgumentException("[ERROR] 금액은 음수일 수 없습니다.");
+		if (amount < MIN) {
+			throw new IllegalArgumentException(AMOUNT_LOWER_ERROR);
 		}
 	}
 
 	private void checkDivideBy10(int amount) {
-		if (amount % 10 != 0) {
-			throw new IllegalArgumentException("[ERROR] 금액은 10으로 나누어 떨어져야 합니다.");
+		if (amount % UNIT != 0) {
+			throw new IllegalArgumentException(UNIT_INVALID_ERROR);
 		}
 	}
 
@@ -42,7 +49,7 @@ public class Money implements Comparable<Money> {
 	}
 
 	public boolean isRemain() {
-		return amount > 0;
+		return amount > MIN;
 	}
 
 	public void use(Money other) {
