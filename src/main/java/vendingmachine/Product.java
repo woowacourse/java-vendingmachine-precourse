@@ -15,8 +15,8 @@ public class Product {
         return price;
     }
 
-    public boolean isInclude(String input) {
-        if (input.contains(name)) {
+    public boolean isSameName(String input) {
+        if (name.equals(input)) {
             return true;
         }
         return false;
@@ -24,5 +24,12 @@ public class Product {
 
     public void decreaseNumber() {
         number -= 1;
+    }
+
+    public boolean isEmpty() {
+        if (number == 0) {
+            return true;
+        }
+        return false;
     }
 }

@@ -27,7 +27,7 @@ public class Products {
     public boolean isSingleProductName(String input) throws IllegalArgumentException {
         int count = 0;
         for (Product p : productsList) {
-            if (p.isInclude(input)) {
+            if (p.isSameName(input)) {
                 count += 1;
             }
         }
@@ -39,11 +39,20 @@ public class Products {
 
     public int calculateProduct(String name) {
         for (Product p : productsList) {
-            if (p.isInclude(name)) {
+            if (p.isSameName(name)) {
                 p.decreaseNumber();
                 return p.getPrice();
             }
         }
         return 0;
+    }
+
+    public boolean isExistProduct() {
+        for (Product p : productsList) {
+            if (p.isEmpty()) {
+                return false;
+            }
+        }
+        return true;
     }
 }
