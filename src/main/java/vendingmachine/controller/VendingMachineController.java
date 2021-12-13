@@ -82,8 +82,8 @@ public class VendingMachineController {
 		String productName = InputView.getProductName();
 		try {
 			VendingMachineProduct product = vendingMachineProducts.findName(productName);
-			vendingMachineProducts.buyProduct(productName);
 			user.buyProduct(product.getPrice());
+			vendingMachineProducts.buyProduct(productName);
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 		}
