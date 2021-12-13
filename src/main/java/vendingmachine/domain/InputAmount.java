@@ -12,7 +12,7 @@ public class InputAmount {
         return amount;
     }
 
-    public void consume(int price) {
-        amount -= price;
+    public void consume(Product product) {
+        amount -= product.getAmount();
     }
 }

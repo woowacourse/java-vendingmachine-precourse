@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -11,36 +12,31 @@ public class ProductSeller {
     private static final String ERR_EMPTY_PRODUCTS = ERR_HEADER + "상품 리스트가 비어있습니다.";
 
     private final Map<String, Product> products;
-    private int minimumProductAmount;
 
-    public ProductSeller(List<String> productInfos) {
-        this.products = productInfos.stream()
-            .map(Product::getValidProduct)
+    public ProductSeller(List<Product> productList) {
+        this.products = productList.stream()
             .collect(Collectors.toMap(Product::getName, p -> p));
-        updateMinimumProductAmount();
     }
 
-    public void pickProduct(String name, InputAmount inputAmount) {
+    public void pickProduct(String name, InputAmount inputAmount) throws IllegalArgumentException {
         validateProductExist(name);
         products.get(name).sell(inputAmount);
-        updateMinimumProductAmount();
     }
 
     public boolean isBelowCheapest(InputAmount inputAmount) {
-        return this.minimumProductAmount > inputAmount.getAmount();
+        return getCheapestProduct().getAmount() > inputAmount.getAmount();
     }
 
     public boolean isEmpty() {
         return this.products.values()
             .stream()
-            .allMatch(Product::isEmpty);
+            .allMatch(Product::isEmptyStock);
     }
 
-    private void updateMinimumProductAmount() throws IllegalArgumentException{
-        this.minimumProductAmount = products.values().stream()
-            .filter(p -> !p.isEmpty())
-            .mapToInt(Product::getAmount)
-            .min()
+    private Product getCheapestProduct() throws IllegalArgumentException {
+        return products.values().stream()
+            .filter(p -> !p.isEmptyStock())
+            .min(Comparator.comparingInt(Product::getAmount))
             .orElseThrow(() -> new IllegalArgumentException(ERR_EMPTY_PRODUCTS));
     }
 

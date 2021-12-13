@@ -9,7 +9,7 @@ public class UserInput {
     public static String getProductName() {
         return getValidInput(() -> {
             String input = Console.readLine();
-            InputValidator.validateProductName(input);
+            // TODO implement me
             return input;
         });
     }
