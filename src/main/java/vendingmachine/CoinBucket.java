@@ -41,16 +41,20 @@ public class CoinBucket {
 		return coins.contains(coin);
 	}
 
-	public List<Coin> getCoins() {
-		return Collections.unmodifiableList(coins);
+	public Map<Coin, Integer> getCoins() {
+		Map<Coin, Integer> currentCoins = new HashMap<>();
+		for (Coin coin : coins) {
+			currentCoins.put(coin, coin.getCount());
+		}
+		return Collections.unmodifiableMap(currentCoins);
 	}
 
 	public Map<Coin, Integer> getChanges(Money balance) {
 		Map<Coin, Integer> changes = new HashMap<>();
 
 		for (Coin coin : coins) {
-			int count = coin.getChangeCount(balance);
-			balance.use(coin.getAmountOfCount(count));
+			int count = coin.getMaxCountLessThan(balance);
+			balance.use(coin.totalAmountOfCount(count));
 			changes.put(coin, count);
 		}
 		return Collections.unmodifiableMap(changes);
