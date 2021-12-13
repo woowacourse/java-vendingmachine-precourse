@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
-import static vendingmachine.validator.NumberValidator.*;
-import static vendingmachine.validator.StringFormatValidator.*;
+import static vendingmachine.validator.NumberInputValidator.*;
+import static vendingmachine.validator.MenuInputFormatValidator.*;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Menu;

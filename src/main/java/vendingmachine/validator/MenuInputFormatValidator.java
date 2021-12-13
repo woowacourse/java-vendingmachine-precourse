@@ -7,7 +7,7 @@ import java.util.Set;
 
 import static vendingmachine.utils.ExceptionMessages.*;
 
-public class StringFormatValidator {
+public class MenuInputFormatValidator {
 
     public static void validateMenuInputFormat(String[] merchandiseInfos) {
         for (String merchandiseInfo : merchandiseInfos) {
@@ -52,7 +52,7 @@ public class StringFormatValidator {
     private static void validatePriceInput(String input) {
         int price = validateIntType(input);
         validateNotLessThanHundred(price);
-        NumberValidator.validateNotHaveOnesDigit(price);
+        NumberInputValidator.validateNotHaveOnesDigit(price);
     }
 
     private static void validateMerchandiseNumberInput(String input) {

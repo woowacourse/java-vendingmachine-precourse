@@ -2,7 +2,7 @@ package vendingmachine.validator;
 
 import static vendingmachine.utils.ExceptionMessages.*;
 
-public class NumberValidator {
+public class NumberInputValidator {
 
     public static void validateMoneyInput(String input) {
         int intInput = validateIntType(input);
