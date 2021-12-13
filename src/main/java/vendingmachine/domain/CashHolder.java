@@ -22,6 +22,10 @@ public class CashHolder {
         return new Changes(calculateChanges(inputAmount.getAmount(), new HashMap<>()));
     }
 
+    public int getHoldingCoinCount(Coin coin) {
+        return coins.getOrDefault(coin, ZERO);
+    }
+
     private Map<Coin, Integer> calculateChanges(int amount, Map<Coin, Integer> changes) {
         Coin coin;
 
