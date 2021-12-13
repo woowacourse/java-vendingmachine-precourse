@@ -11,11 +11,13 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
+import javax.swing.Icon;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vendingmachine.domain.CashHolder;
 import vendingmachine.domain.Changes;
+import vendingmachine.domain.InputAmount;
 import vendingmachine.utils.ConsolePrinter;
 
 public class ConsolePrinterTest {
@@ -83,5 +85,15 @@ public class ConsolePrinterTest {
             .map(c -> c.getName() + " - " + 1 + "개")
             .collect(Collectors.joining("\n")) + "\n";
         assertThat(out()).isEqualTo(answer);
+    }
+
+    @Test
+    void inputAmountTest() {
+        final int amount = 1000;
+        ConsolePrinter printer = new ConsolePrinter();
+        InputAmount inputAmount = mock(InputAmount.class);
+        when(inputAmount.getAmount()).thenReturn(amount);
+        printer.printInputAmount(inputAmount);
+        assertThat(out()).contains(String.valueOf(amount));
     }
 }
