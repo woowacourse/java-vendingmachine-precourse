@@ -8,7 +8,11 @@ import vendingmachine.controller.PurchaseController;
 public class ControllerConfig {
 
 	public static ChangeSafeController getChangeSafeController() {
-		return new ChangeSafeController();
+		return new ChangeSafeController(
+			ServiceConfig.getMoneyService(),
+			ServiceConfig.getCoinService(),
+			ServiceConfig.getChangeSafeService()
+		);
 	}
 
 	public static ProductController getProductController() {

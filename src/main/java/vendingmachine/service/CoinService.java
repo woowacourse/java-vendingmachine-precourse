@@ -4,7 +4,8 @@ import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.Quantity;
 
 public interface CoinService {
-	Map<Coin, Integer> generateCoinMap(Money money);
+	Map<Coin, Quantity> generateCoinMap(Money money);
 }
