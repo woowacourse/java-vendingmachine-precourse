@@ -7,8 +7,8 @@ public class CustomerService {
 
 	ProductService productService = new ProductService();
 
-	public boolean buyProduct(Customer customer, String name) {
-		Product product = productService.getByName(name);
+	public boolean buyProduct(Customer customer, String productName) {
+		Product product = productService.getByName(productName);
 		int price = product.getPrice();
 		int stock = product.getStock();
 
