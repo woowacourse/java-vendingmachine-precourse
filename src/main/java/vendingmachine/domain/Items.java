@@ -13,7 +13,7 @@ public class Items {
 	private static final String OUT_OF_ORDER_ERROR = ERROR + "상품의 재고가 소진되어 구매할 수 없습니다.";
 	private final List<Item> items;
 
-	public Items(List<Item> items) {
+	public Items(final List<Item> items) {
 		validateDuplication(items);
 		this.items = items;
 	}
@@ -22,7 +22,7 @@ public class Items {
 		return Collections.unmodifiableList(items);
 	}
 
-	public Item findItemByName(String name, Money money) {
+	public Item findItemByName(final String name, final Money money) {
 		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException(CANNOT_FIND_NAME_ERROR));
@@ -30,7 +30,7 @@ public class Items {
 		return foundItem;
 	}
 
-	private void checkItemSellable(Item item, Money money) {
+	private void checkItemSellable(final Item item, final Money money) {
 		if (!item.isStockExist()) {
 			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
 		}
@@ -45,7 +45,7 @@ public class Items {
 			.noneMatch((condition) -> true);
 	}
 
-	private void validateDuplication(List<Item> items) {
+	private void validateDuplication(final List<Item> items) {
 		Set<String> nonDuplicatedItems = items.stream()
 			.map(Item::getName)
 			.collect(Collectors.toSet());

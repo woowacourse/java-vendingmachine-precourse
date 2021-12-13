@@ -22,7 +22,7 @@ public class OutputView {
 	private static final String PERCHASE_ITEM_REQUEST_TEXT = "구매할 상품명을 입력해 주세요.";
 
 
-	public static void printError(String error) {
+	public static void printError(final String error) {
 		System.out.println(error);
 	}
 
@@ -34,7 +34,7 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printHoldingCoinStatus(Coins coins) {
+	public static void printHoldingCoinStatus(final Coins coins) {
 		printNewLine();
 		System.out.println(HOLDING_COIN_TEXT);
 		for (Map.Entry<Integer, Integer> coin : coins.findAll().entrySet()) {
@@ -43,7 +43,7 @@ public class OutputView {
 		}
 	}
 
-	public static void printChanges(Map<Integer, Integer> changes) {
+	public static void printChanges(final Map<Integer, Integer> changes) {
 		if (changes.size() <= ZERO) {
 			return;
 		}
@@ -69,7 +69,7 @@ public class OutputView {
 		System.out.println(PERCHASE_ITEM_REQUEST_TEXT);
 	}
 
-	public static void printMoney(Money money) {
+	public static void printMoney(final Money money) {
 		printNewLine();
 		System.out.println(money);
 	}

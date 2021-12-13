@@ -8,7 +8,7 @@ public class Coins {
 	private static final int NUMBER_LOWER_BOUND = 0;
 	private final Map<Integer, Integer> coins;
 
-	public Coins(Map<Integer, Integer> coins) {
+	public Coins(final Map<Integer, Integer> coins) {
 		this.coins = coins;
 	}
 
@@ -27,7 +27,7 @@ public class Coins {
 		return restCoins;
 	}
 
-	public void update(Map<Integer, Integer> reducedCoins) {
+	public void update(final Map<Integer, Integer> reducedCoins) {
 		for (Integer coin : reducedCoins.keySet()) {
 			coins.put(coin, coins.get(coin) - reducedCoins.get(coin));
 		}

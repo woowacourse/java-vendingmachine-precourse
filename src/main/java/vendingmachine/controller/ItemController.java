@@ -22,7 +22,7 @@ public class ItemController {
 		+ SUFFIX + "로 끝나야 합니다.";
 	private final InputView inputView;
 
-	public ItemController(InputView inputView) {
+	public ItemController(final InputView inputView) {
 		this.inputView = inputView;
 	}
 
@@ -46,7 +46,7 @@ public class ItemController {
 		}
 	}
 
-	private Items initializeItems(List<String> itemDetails) {
+	private Items initializeItems(final List<String> itemDetails) {
 		List<Item> items = new ArrayList<>();
 		for (String itemDetail : itemDetails) {
 			if (!(itemDetail.startsWith(PREFIX) && itemDetail.endsWith(SUFFIX))) {
@@ -57,13 +57,13 @@ public class ItemController {
 		return new Items(items);
 	}
 
-	private List<String> extractValueFromItemDetail(String itemDetail) {
+	private List<String> extractValueFromItemDetail(final String itemDetail) {
 		String itemDetailBracketRemoved = itemDetail.substring(itemDetail.indexOf(PREFIX) + 1,
 			itemDetail.lastIndexOf(SUFFIX));
 		return Splitter.on(DELIMITER_COMMA).trimResults().omitEmptyStrings().splitToList(itemDetailBracketRemoved);
 	}
 
-	public int getLeastItemCost(Items items) {
+	public int getLeastItemCost(final Items items) {
 		return items.findAll()
 			.stream()
 			.filter((item) -> ZERO < item.getAmount())
@@ -72,7 +72,7 @@ public class ItemController {
 			.getCost();
 	}
 
-	public void update(Items items, Money money) {
+	public void update(final Items items, final Money money) {
 		OutputView.printMoney(money);
 		OutputView.printItemPerChaseRequest();
 		Item item = items.findItemByName(inputView.scanItemName(), money);

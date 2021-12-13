@@ -27,7 +27,7 @@ public class Item {
 	private final int cost;
 	private int amount;
 
-	public Item(List<String> detailContainer) {
+	public Item(final List<String> detailContainer) {
 		checkLength(detailContainer);
 		this.name = detailContainer.get(NAME_INDEX);
 		this.cost = isNumber(detailContainer.get(COST_INDEX), COST);
@@ -36,13 +36,13 @@ public class Item {
 
 	}
 
-	private void checkLength(List<String> detailContainer) {
+	private void checkLength(final List<String> detailContainer) {
 		if (detailContainer.size() != NUMBER_OF_TYPE) {
 			throw new IllegalArgumentException(INVALID_NUMBER_OF_TYPE_ERROR);
 		}
 	}
 
-	private int isNumber(String value, String type) {
+	private int isNumber(final String value, final String type) {
 		try {
 			return Integer.parseInt(value);
 		} catch (NumberFormatException e) {
@@ -50,7 +50,7 @@ public class Item {
 		}
 	}
 
-	private void validateCost(int cost) {
+	private void validateCost(final int cost) {
 		if (!isValidRange(cost)) {
 			throw new IllegalArgumentException(String.format(INVALID_RANGE_ERROR, name, COST));
 		}
@@ -59,11 +59,11 @@ public class Item {
 		}
 	}
 
-	private boolean isValidRange(int cost) {
+	private boolean isValidRange(final int cost) {
 		return COST_LOWER_BOUND <= cost;
 	}
 
-	private boolean isDivisibleByTen(int cost) {
+	private boolean isDivisibleByTen(final int cost) {
 		return ZERO == cost % TEN;
 	}
 

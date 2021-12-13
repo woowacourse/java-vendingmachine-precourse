@@ -12,7 +12,7 @@ import vendingmachine.view.OutputView;
 public class CoinController {
 	private final InputView inputView;
 
-	public CoinController(InputView inputView) {
+	public CoinController(final InputView inputView) {
 		this.inputView = inputView;
 	}
 
@@ -43,7 +43,7 @@ public class CoinController {
 		return coinAmount;
 	}
 
-	public Map<Integer, Integer> getChanges(Coins coins, Money money) {
+	public Map<Integer, Integer> getChanges(final Coins coins, final Money money) {
 		Map<Integer, Integer> changes = money.makeChanges(coins);
 		coins.update(changes);
 		return changes;

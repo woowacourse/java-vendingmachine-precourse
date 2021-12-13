@@ -34,7 +34,7 @@ public class VendingMachineController {
 		}
 	}
 
-	private void sellItem(Items items, Money money) {
+	private void sellItem(final Items items, final Money money) {
 		while (money.payable(itemcontroller.getLeastItemCost(items))
 			&& !items.checkAllOutOfOrder()) {
 			try {
