@@ -2,16 +2,35 @@ package vendingmachine.domain;
 
 import vendingmachine.view.InputView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class VendingMachine {
     private int amount;
+    private List<Product> products = new ArrayList<>();
     public VendingMachine() {
     }
 
     private void setAmount() {
         amount = Integer.parseInt(InputView.getUserInput());
+    }
+
+    private void setProduct() {
+        String productForm = InputView.getUserInput();
+        String[] productInformations = productForm.split(";");
+        for (String productInformation : productInformations) {
+            String[] product = productInformation.replaceAll("[\\[\\]]", "").split(",");
+            products.add(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+        }
+
+    }
+
+    public void printProduct() {
+        setProduct();
+        for (Product product : products) {
+            product.print();
+        }
     }
 
     public void print() {
