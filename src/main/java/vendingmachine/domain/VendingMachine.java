@@ -11,6 +11,10 @@ public class VendingMachine {
 		this.balance = balance;
 	}
 
+	public void purchaseProduct(String productName) {
+		products.isCheckSameProduct(productName);
+	}
+
 	public boolean isContinueVendingMachine() {
 		if (balance.isValidateHasBalanceZero()
 		|| products.isValidateHasProductsQuantity()

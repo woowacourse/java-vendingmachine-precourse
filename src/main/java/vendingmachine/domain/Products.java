@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 public class Products {
 	private static final String ERROR_PRODUCTS_DUPLICATED = "상품 구성에 중복되는 상품이 있습니다.";
+	private static final String ERROR_PRODUCT_NOT_REGISTER = "등록되지 않은 상품 입니다.";
 
 	private List<Product> products;
 
@@ -42,5 +43,12 @@ public class Products {
 	public boolean isValidateHasBalanceProductsPurchase(Balance balance) {
 		return products.stream()
 			.allMatch(product -> product.isValidateProductPurchase(balance));
+	}
+
+	public Product isCheckSameProduct(String productName) {
+		return products.stream()
+			.filter(product -> product.isValidateSameProduct(productName))
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_PRODUCT_NOT_REGISTER));
 	}
 }

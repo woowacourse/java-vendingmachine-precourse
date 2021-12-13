@@ -13,6 +13,10 @@ public class Name {
 		return new Name(name);
 	}
 
+	public boolean isValidateSameName(String productName) {
+		return name.equals(productName);
+	}
+
 	public String getName() {
 		return name;
 	}

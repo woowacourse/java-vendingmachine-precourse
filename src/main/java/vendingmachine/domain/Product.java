@@ -35,6 +35,10 @@ public class Product {
 		 return price.isValidateCalculateMinus(balance);
 	}
 
+	public boolean isValidateSameProduct(String productName) {
+		return name.isValidateSameName(productName);
+	}
+
 	public Name getName() {
 		return name;
 	}
