@@ -4,6 +4,7 @@ public class Constant {
 	public static final String WON = "원";
 	public static final String COIN_UNIT = "개";
 
+	public static final String DASH = " - ";
 	public static final String ITEMS_DELIMITER = ";";
 	public static final String ITEM_DELIMITER = ",";
 	public static final String START_BRACKET = "\\[";

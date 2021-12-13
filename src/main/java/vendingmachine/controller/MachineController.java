@@ -16,7 +16,7 @@ public class MachineController {
 	public void run() {
 		int machineMoney = inputView.enterMachineMoney();
 		Machine machine = new Machine(machineMoney);
-		machine.makeCoins();
+		machine.makeRandomCoins();
 		outputView.printMachineCoins(machine);
 		Items items = getItems();
 		machine.setItems(items);

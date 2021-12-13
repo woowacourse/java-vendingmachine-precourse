@@ -10,8 +10,8 @@ public class Machine {
 		this.coins = new Coins();
 	}
 
-	public void makeCoins() {
-		coins.makeCoins(money);
+	public void makeRandomCoins() {
+		coins.makeRandomCoins(money);
 	}
 
 	public void sellItem(String buyItem) {
