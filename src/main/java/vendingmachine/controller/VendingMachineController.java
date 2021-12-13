@@ -48,6 +48,7 @@ public class VendingMachineController {
 
 	public void showCoinInVendingMachine() {
 		vendingMachineView.showCoinsInVendingMachine();
+
 		vendingMachineView.makeEmptyLine();
 	}
 
