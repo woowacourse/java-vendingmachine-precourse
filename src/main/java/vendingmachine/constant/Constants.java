@@ -2,6 +2,8 @@ package vendingmachine.constant;
 
 public class Constants {
 
+	public static Double INF = Double.POSITIVE_INFINITY;
+
 	public static int MIN_PRICE = 100;
 
 	public static String PRODUCTS_DELIMETER = ";";

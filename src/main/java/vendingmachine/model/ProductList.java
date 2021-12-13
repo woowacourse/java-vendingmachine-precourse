@@ -29,21 +29,32 @@ public class ProductList {
 	}
 
 	private void setProduct(String[] products) {
-		for (String product:
-			 products) {
+		for (String product :
+			products) {
 			String[] productStrings = product.split(PRODUCT_DELIMETER);
 			ProductValidation.productParsingNumber(productStrings.length);
-			productList.add(new Product(productStrings[PRODUCT_NAME_IDX], productStrings[PRODUCT_PRICE_IDX], productStrings[PRODUCT_STOCK_IDX]));
+			productList.add(new Product(productStrings[PRODUCT_NAME_IDX], productStrings[PRODUCT_PRICE_IDX],
+				productStrings[PRODUCT_STOCK_IDX]));
 		}
 	}
 
 	public boolean isRemainProduct() {
-		for (Product product:
-			 productList) {
+		for (Product product :
+			productList) {
 			if (!product.isRemain())
 				return false;
-			}
-		return true;
 		}
+		return true;
+	}
+
+	public int getRemainMinPrice() {
+		int price = INF.intValue();
+		for (Product product:
+			 productList) {
+			if (product.isRemain() && price > product.getPrice()) {
+				price = product.getPrice();
+			}
+		}
+		return price;
 	}
 }

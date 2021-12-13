@@ -16,6 +16,10 @@ public class Product {
 		this.stock = Integer.parseInt(stock);
 	}
 
+	public int getPrice() {
+		return price;
+	}
+
 	public boolean isRemain() {
 		return stock > 0;
 	}

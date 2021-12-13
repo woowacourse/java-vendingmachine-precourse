@@ -19,6 +19,11 @@ public class User {
 			this.balance = Integer.parseInt(input);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.illegalArgumentException(illegalArgumentException.getMessage());
+			setUser();
 		}
+	}
+
+	public boolean canBuy(int price) {
+		return balance >= price;
 	}
 }

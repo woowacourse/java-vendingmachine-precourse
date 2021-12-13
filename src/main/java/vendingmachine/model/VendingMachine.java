@@ -15,5 +15,7 @@ public class VendingMachine {
 	}
 
 	public boolean canBuy(User user) {
+		int minPrice = productList.getRemainMinPrice();
+		return user.canBuy(minPrice);
 	}
 }
