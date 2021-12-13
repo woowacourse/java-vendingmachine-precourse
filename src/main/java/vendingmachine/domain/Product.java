@@ -13,22 +13,20 @@ public class Product {
 	private final int count;
 
 	public Product(String name, int price, int count) {
-		check(price, count);
+		check(price);
 		this.name = name;
 		this.price = price;
 		this.count = count;
 	}
 
-	private void check(int price, int count) {
+	public Product(String[] split) {
+		this(split[0], NumericUtils.parsePositiveInt(split[1]), NumericUtils.parsePositiveInt(split[2]));
+	}
+
+	private void check(int price) {
 		if (price < MIN_AMOUNT || price % DIVIDE_NUM != 0) {
 			throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_NOT_VALID);
 		}
-		if (count < 0) {
-			throw new IllegalArgumentException(ERROR_PRODUCT_COUNT_IS_NOT_POSITIVE_INT);
-		}
 	}
 
-	public Product(String[] split) {
-		this(split[0], NumericUtils.parseInt(split[1]), NumericUtils.parseInt(split[2]));
-	}
 }

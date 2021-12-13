@@ -1,13 +1,12 @@
 package vendingmachine.domain;
 
-import static vendingmachine.resource.MessageResource.*;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.utils.NumericUtils;
 
 public class Changes {
 	private final Map<Coin, Integer> coinMap;
@@ -19,7 +18,7 @@ public class Changes {
 	public Map<Coin, Integer> createCoinMap(String inputAmount) {
 		Map<Coin, Integer> copyCoinMap = initZeroCoinMap();
 		List<Integer> coinList = Coin.getCoinList();
-		int totalAmount = checkAmount(inputAmount);
+		int totalAmount = NumericUtils.parsePositiveInt(inputAmount);
 
 		while (totalAmount > 0) {
 			int randomCoin = Randoms.pickNumberInList(coinList);
@@ -52,20 +51,5 @@ public class Changes {
 		}
 
 		return zeroCoinMap;
-	}
-
-	private boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");
-	}
-
-	private int checkAmount(String totalAmount) {
-		if (!isNumeric(totalAmount)) {
-			throw new IllegalArgumentException(ERROR_AMOUNT_IS_NOT_NUMERIC);
-		}
-		if (Integer.parseInt(totalAmount) < 0) {
-			throw new IllegalArgumentException(ERROR_AMOUNT_IS_NOT_POSITIVE_INT);
-		}
-
-		return Integer.parseInt(totalAmount);
 	}
 }
