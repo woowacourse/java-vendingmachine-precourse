@@ -26,12 +26,7 @@ public class Items {
 		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException(CANNOT_FIND_NAME_ERROR));
-		if (!foundItem.isSellable()) {
-			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
-		}
-		if (!money.payable(foundItem.getCost())){
-			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
-		}
+		checkItemSellable(foundItem, money);
 		return foundItem;
 	}
 
@@ -47,6 +42,15 @@ public class Items {
 			.collect(Collectors.toSet());
 		if (nonDuplicatedItems.size() < items.size()) {
 			throw new IllegalArgumentException(DUPLICATE_NAME_ERROR);
+		}
+	}
+
+	private void checkItemSellable(Item item, Money money){
+		if (!item.isSellable()) {
+			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
+		}
+		if (!money.payable(item.getCost())){
+			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
 		}
 	}
 }
