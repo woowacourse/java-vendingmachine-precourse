@@ -5,6 +5,7 @@ import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
+import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -42,4 +43,9 @@ public class CoinController {
 		return coinAmount;
 	}
 
+	public Map<Integer, Integer> getChanges(Coins coins, Money money) {
+		Map<Integer, Integer> changes = money.makeChanges(coins);
+		coins.update(changes);
+		return changes;
+	}
 }
