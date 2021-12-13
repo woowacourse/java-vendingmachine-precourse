@@ -52,10 +52,10 @@ class PriceTest {
     }
 
     @ParameterizedTest
-    @DisplayName("양의 정수가 아닌 값으로 Price 객체를 생성하면 예외를 발생시킨다.")
-    @ValueSource(strings = {"?", "1.2", "0", "-1"})
+    @DisplayName("정수가 아니거나 100 미만의 값으로 Price 객체를 생성하면 예외를 발생시킨다.")
+    @ValueSource(strings = {"?", "1.2", "0", "-1", "99"})
     void evokeExceptionByNotInteger(final String notIntegerValue) {
-        String expectedExceptionMessage = "상품 가격은 양의 정수여야 합니다.";
+        String expectedExceptionMessage = "상품 가격은 100 이상의 정수여야 합니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> new Price(notIntegerValue))
                 .withMessage(expectedExceptionMessage);
     }
@@ -66,15 +66,6 @@ class PriceTest {
         String notMultipleOfTen = "1001";
         String expectedExceptionMessage = "상품 가격의 최소 단위는 10원입니다.";
         assertThatIllegalArgumentException().isThrownBy(() -> new Price(notMultipleOfTen))
-                .withMessage(expectedExceptionMessage);
-    }
-
-    @Test
-    @DisplayName("100 미만의 값으로 Price 객체를 생성하면 예외를 발생시킨다.")
-    void evokeExceptionByLowerThan100() {
-        String valueLowerThan100 = "99";
-        String expectedExceptionMessage = "상품 가격은 최소 100원이여야 합니다.";
-        assertThatIllegalArgumentException().isThrownBy(() -> new Price(valueLowerThan100))
                 .withMessage(expectedExceptionMessage);
     }
 }
