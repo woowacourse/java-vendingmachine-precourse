@@ -28,4 +28,8 @@ public class Product {
     public int getPrice() {
         return price;
     }
+
+    public int getCount() {
+        return count;
+    }
 }

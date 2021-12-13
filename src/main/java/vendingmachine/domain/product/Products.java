@@ -6,12 +6,13 @@ import java.util.stream.Collectors;
 
 public class Products {
     private List<Product> products;
-
+    private int cheapestPrice;
     public Products() {
         products = new ArrayList<>();
     }
 
     public void add(Product product) {
+        cheapestPrice = Math.min(cheapestPrice, product.getPrice());
         products.add(product);
     }
 
@@ -29,4 +30,18 @@ public class Products {
         product.sell();
         return product;
     }
+
+    public int getCheapestPrice() {
+        return cheapestPrice;
+    }
+
+    public boolean isSoldOut() {
+        for (Product product : products) {
+            if (product.getCount() != 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
