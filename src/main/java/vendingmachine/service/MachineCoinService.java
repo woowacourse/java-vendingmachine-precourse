@@ -12,8 +12,9 @@ import static vendingmachine.domain.Coin.*;
 import static vendingmachine.repository.MachineCoinRepository.initCoin;
 import static vendingmachine.service.Validator.*;
 
-
 public class MachineCoinService {
+
+    public static final int INIT_COIN_NUM = 0;
 
     public static int getInitMachineMoney() {
         while (true) {
@@ -32,7 +33,7 @@ public class MachineCoinService {
     public void initRemainCoin(int initMoney) {
         Map<Coin, Integer> remainCoin = new TreeMap<>();
         for (Coin c : getCoinList()) {
-            remainCoin.put(c, 0);
+            remainCoin.put(c, INIT_COIN_NUM);
         }
         setRemainCoin(remainCoin, initMoney);
         initCoin(remainCoin);
