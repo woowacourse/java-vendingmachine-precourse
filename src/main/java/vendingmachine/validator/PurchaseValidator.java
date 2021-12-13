@@ -1,6 +1,6 @@
 package vendingmachine.validator;
 
-import vendingmachine.constant.Input;
+import vendingmachine.constant.Error;
 import vendingmachine.domain.ProductRepository;
 
 public class PurchaseValidator {
@@ -13,21 +13,21 @@ public class PurchaseValidator {
 
     private void validateProductAmountExist(String productName) {
         if(!ProductRepository.getInstance().hasProductQuantity(productName)) {
-            System.out.println(Input.PRODUCT_AMOUNT_LACK_ERROR_MESSAGE.getText());
+            System.out.println(Error.PRODUCT_AMOUNT_LACK_ERROR_MESSAGE.getError());
             throw new IllegalArgumentException();
         }
     }
 
     private void validateProductExist(String productName) {
         if (!ProductRepository.getInstance().isProductExist(productName)) {
-            System.out.println(Input.PRODUCT_EXIST_ERROR_MESSAGE.getText());
+            System.out.println(Error.PRODUCT_EXIST_ERROR_MESSAGE.getError());
             throw new IllegalArgumentException();
         }
     }
 
     private void validateEnoughMoneyForProductCost(String productName) {
         if (!ProductRepository.getInstance().canPurchaseProduct(productName)) {
-            System.out.println(Input.PRODUCT_PURCHASE_LACK_MONEY_ERROR_MESSAGE.getText());
+            System.out.println(Error.PRODUCT_PURCHASE_LACK_MONEY_ERROR_MESSAGE.getError());
             throw new IllegalArgumentException();
         }
     }
