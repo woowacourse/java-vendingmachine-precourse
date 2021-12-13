@@ -18,16 +18,7 @@ public class CoreController {
 	}
 
 	protected void setVendingMachineHoldMoney() {
-		int money = 0;
-		boolean endCondition = false;
-		while (!endCondition) {
-			money = uiController.askVendingMachineHoldMoneyAmount();
-			try {
-				endCondition = coinController.checkMoneyIsValid(money);
-			} catch (IllegalArgumentException e) {
-				uiController.printLogicalExceptionError(e.getMessage());
-			}
-		}
+		int money = uiController.askVendingMachineHoldMoneyAmount();
 		Map<Coin, Integer> numberOfCoins = coinController.makeRandomCombinationCoin(money);
 		uiController.printCurrentCoinNumber(numberOfCoins);
 	}

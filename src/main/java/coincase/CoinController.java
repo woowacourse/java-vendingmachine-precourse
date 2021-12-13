@@ -48,11 +48,4 @@ public class CoinController {
 		}
 		return numberOfCoins;
 	}
-
-	public boolean checkMoneyIsValid(int money) throws IllegalArgumentException {
-		if (coinRuleChecker.checkCoinMinimumUnit(money)) {
-			return true;
-		}
-		throw new IllegalArgumentException();
-	}
 }
