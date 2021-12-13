@@ -7,7 +7,6 @@ import vendingmachine.domain.Menu;
 import vendingmachine.domain.Merchandise;
 import vendingmachine.view.InputView;
 
-
 public class MenuService {
 
     private Menu menu;
@@ -16,18 +15,17 @@ public class MenuService {
         this.menu = InputView.getMenuInput();
     }
 
-    public Merchandise selectAvailableMerchandise() {
+    public Merchandise selectAvailableMerchandise(int moneyLeft) {
         try {
             String name = InputView.getPurchaseInfoInput();
             Merchandise merchandise = this.getMerchandiseByName(name);
 
-            if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) {
-                throw new IllegalArgumentException(SOLD_OUT_EXCEPTION);
-            }
+            if (merchandise.getPrice() > moneyLeft) throw new IllegalArgumentException();
+            if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) throw new IllegalArgumentException(SOLD_OUT_EXCEPTION);
             return merchandise;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return selectAvailableMerchandise();
+            return selectAvailableMerchandise(moneyLeft);
         }
     }
 

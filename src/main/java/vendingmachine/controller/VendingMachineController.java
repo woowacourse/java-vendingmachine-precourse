@@ -36,7 +36,9 @@ public class VendingMachineController {
     }
 
     public void sellMerchandise() {
-        Merchandise merchandise = menuService.selectAvailableMerchandise();
+        int customerMoneyLeft = customerMoneyService.getCustomerMoneyLeft();
+        Merchandise merchandise = menuService.selectAvailableMerchandise(customerMoneyLeft);
+
         customerMoneyService.decreaseCustomerMoneyLeft(merchandise.getPrice());
         merchandise.decreaseNumber();
     }

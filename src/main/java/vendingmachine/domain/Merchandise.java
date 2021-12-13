@@ -4,9 +4,9 @@ import static vendingmachine.constants.SystemConstants.*;
 
 public class Merchandise {
 
-    public String name;
-    public int price;
-    public int number;
+    private String name;
+    private int price;
+    private int number;
 
     public Merchandise(String merchandiseInfo) {
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
