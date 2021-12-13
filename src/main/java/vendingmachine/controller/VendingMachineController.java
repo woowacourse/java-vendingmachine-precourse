@@ -25,14 +25,18 @@ public class VendingMachineController {
 
     public void run() {
         while (true) {
-            int currentMoneyLeft = customerMoneyService.getCustomerMoneyLeft();
-            OutputView.printMoneyLeft(currentMoneyLeft);
-
+            int currentMoneyLeft = this.returnCurrentMoneyLeft();
             if (!menuService.hasSellableMerchandise(currentMoneyLeft)) break;
             this.sellMerchandise();
         }
 
         this.returnCoinChanges();
+    }
+
+    private int returnCurrentMoneyLeft() {
+        int currentMoneyLeft = customerMoneyService.getCustomerMoneyLeft();
+        OutputView.printMoneyLeft(currentMoneyLeft);
+        return currentMoneyLeft;
     }
 
     private void sellMerchandise() {
@@ -53,15 +57,12 @@ public class VendingMachineController {
             if (coinService.getCoins().get(coin) == ZERO_COINS) continue;
             if (customerMoneyService.getCustomerMoneyLeft() < coin.getAmount()) continue;
 
-            int coinNumber = this.calculateMaximumCoinNumber(coin);
-            coinChanges.put(coin, coinNumber);
-            coinService.getCoins().put(coin, coinService.getCoins().get(coin)-coinNumber);
-            customerMoneyService.decreaseCustomerMoneyLeft(coin.getAmount() * coinNumber);
+            coinChanges.put(coin, this.getMaximumCoinNumber(coin));
         }
         return coinChanges;
     }
 
-    private int calculateMaximumCoinNumber(Coin coin) {
+    private int getMaximumCoinNumber(Coin coin) {
         int spentCoinNumber = customerMoneyService.getCustomerMoneyLeft()/coin.getAmount();
         if (spentCoinNumber > coinService.getCoins().get(coin)) {
             spentCoinNumber = coinService.getCoins().get(coin);
