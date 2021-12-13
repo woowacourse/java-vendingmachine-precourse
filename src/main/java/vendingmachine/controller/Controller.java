@@ -18,6 +18,7 @@ public class Controller {
 
 		InputView.requestMachineCoinsAmount();
 		machineService.addCoins(machineId, getCoinAmountByUser());
+		OutputView.printMachineCoins(machineService.getCoins(machineId));
 
 		InputView.requestInputCoins();
 		machineService.addInputCoins(machineId, getInputCoinsByUser());

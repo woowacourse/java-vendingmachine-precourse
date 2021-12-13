@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import java.util.Map;
+import java.util.SortedMap;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
@@ -21,8 +22,13 @@ public class MachineService {
 
 	public void addCoins(Long id, Integer totalCoin) {
 		Machine machine = machineRepository.findById(id);
-		Map<Coin, Integer> generatedCoins = CoinGenerator.generate(Coin.getCoinList(), totalCoin);
+		SortedMap<Coin, Integer> generatedCoins = CoinGenerator.generate(Coin.getCoinList(), totalCoin);
 		machine.addCoins(generatedCoins);
+	}
+
+	public SortedMap<Coin, Integer> getCoins(Long id) {
+		Machine machine = machineRepository.findById(id);
+		return machine.getCoins();
 	}
 
 	public void addInputCoins(Long id, Integer amount) {

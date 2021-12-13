@@ -1,23 +1,24 @@
 package vendingmachine.domain;
 
 import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import vendingmachine.util.MapSupporter;
 
 public class Machine {
-	private final Map<Coin, Integer> coins = new HashMap<>();
+	private final SortedMap<Coin, Integer> coins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
 	private int inputCoinAmount;
 	private final Map<String, Item> items = new HashMap<>();
 
-	public void addCoins(Map<Coin, Integer> coins) {
+	public void addCoins(SortedMap<Coin, Integer> coins) {
 		for (Coin coin : coins.keySet()) {
 			MapSupporter.increaseCoinCount(this.coins, coin, 0, coins.get(coin));
 		}
 	}
 
-	public Map<Coin, Integer> getCoins() {
+	public SortedMap<Coin, Integer> getCoins() {
 		return this.coins;
 	}
 
@@ -71,14 +72,11 @@ public class Machine {
 	}
 
 	private boolean checkInputCoinAmountByMinPrice() {
-		if (inputCoinAmount < getMinPrice()) {
-			return true;
-		}
-		return false;
+		return inputCoinAmount < getMinPrice();
 	}
 
 	public Map<Coin, Integer> returnCoins() {
-		Map<Coin, Integer> returnCoins = new LinkedHashMap<>();
+		SortedMap<Coin, Integer> returnCoins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
 		int returnCoinsAmount = this.inputCoinAmount;
 		for (Coin coin : coins.keySet()) {
 			returnCoinsAmount = setReturnCoinsAndGetReturnCoinsAmount(returnCoins, returnCoinsAmount, coin);
@@ -86,8 +84,7 @@ public class Machine {
 		return returnCoins;
 	}
 
-	//TODO: 동전 큰 순서로 sort 해야함
-	private int setReturnCoinsAndGetReturnCoinsAmount(Map<Coin, Integer> returnCoins, int returnCoinsAmount,
+	private int setReturnCoinsAndGetReturnCoinsAmount(SortedMap<Coin, Integer> returnCoins, int returnCoinsAmount,
 		Coin coin) {
 		for (int i = 0; i < coins.get(coin); i++) {
 			if (returnCoinsAmount < coin.getAmount()) {
