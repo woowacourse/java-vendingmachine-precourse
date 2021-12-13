@@ -33,4 +33,8 @@ public class Product {
 	public void purchase() {
 		this.quantity--;
 	}
+
+	public int subtractProductPrice(int insertMoney) {
+		return insertMoney - this.price;
+	}
 }

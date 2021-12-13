@@ -67,6 +67,8 @@ public class VendingMachineController {
 
 	private void purchaseProduct() {
 		String inputPurchaseProduct = InputView.readPurchaseProduct();
-		products.findProduct(inputPurchaseProduct).purchase();
+		Product product = products.findProduct(inputPurchaseProduct);
+		product.purchase();
+		insertMoney = product.subtractProductPrice(insertMoney);
 	}
 }
