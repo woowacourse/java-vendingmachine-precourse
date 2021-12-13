@@ -7,6 +7,7 @@ import vendingmachine.model.Coins;
 import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.util.StringUtils;
+import vendingmachine.util.validator.MoneyValidator;
 import vendingmachine.view.InputView;
 
 public class VendingMachineController {
@@ -19,8 +20,13 @@ public class VendingMachineController {
 	}
 
 	private void initCoins() {
-		int inputAmountMoney = InputView.readAmountMoney();
-		coins = new Coins(inputAmountMoney);
+		String inputAmountMoney = InputView.readAmountMoney();
+		try {
+			MoneyValidator.validate(inputAmountMoney);
+		} catch (IllegalArgumentException exception) {
+			initCoins();
+		}
+		coins = new Coins(Integer.parseInt(inputAmountMoney));
 	}
 
 	public void initProducts() {
