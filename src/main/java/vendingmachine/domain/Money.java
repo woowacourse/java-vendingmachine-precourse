@@ -27,11 +27,7 @@ public class Money {
 		Map<Integer, Integer> changes = new LinkedHashMap<>();
 		for (Map.Entry<Integer, Integer> coin : coins.findRestCoins().entrySet()) {
 			int number = getAvailableChangeNumber(coin.getKey(), coin.getValue(), money);
-			boolean addable = ZERO < number;
-			if (addable) {
-				changes.put(coin.getKey(), number);
-				reduce(coin.getKey() * number);
-			}
+			updateChangesAndMoney(changes, coin.getKey(), number);
 		}
 		return changes;
 	}
@@ -41,6 +37,15 @@ public class Money {
 			return money / coin;
 		}
 		return number;
+	}
+
+	private void updateChangesAndMoney(Map<Integer, Integer> changes, Integer coin, Integer number){
+		final boolean addable = ZERO < number;
+		if (!addable) {
+			return;
+		}
+		changes.put(coin, number);
+		reduce(coin * number);
 	}
 
 	private void reduce(int moneyAmount) {
