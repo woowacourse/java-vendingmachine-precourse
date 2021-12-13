@@ -40,6 +40,7 @@ public class VendingMachineController {
 		vendingMachineView.inputMoneyForChange();
 
 		int change = moneyReceiver.receive();
+
 		coinService.fillCoin(change);
 
 		vendingMachineView.makeEmptyLine();
@@ -54,6 +55,7 @@ public class VendingMachineController {
 		vendingMachineView.inputProductInfo();
 
 		ArrayList<String[]> splitInfoArrList = productInfoReceiver.receive();
+
 		productService.addProducts(splitInfoArrList);
 
 		vendingMachineView.makeEmptyLine();
@@ -63,6 +65,7 @@ public class VendingMachineController {
 		vendingMachineView.inputMoneyForBuy();
 
 		int moneyForBuy = moneyReceiver.receive();
+
 		vendingMachineView.makeEmptyLine();
 
 		return new Customer(moneyForBuy);
@@ -73,6 +76,7 @@ public class VendingMachineController {
 			vendingMachineView.buyProduct(customer);
 
 			String productName = nameForBuyReceiver.receive();
+
 			if (!customerService.buyProduct(customer, productName)) {
 				vendingMachineView.makeEmptyLine();
 				break;
