@@ -1,5 +1,6 @@
 package vendingmachine.validator;
 
+import static vendingmachine.constants.Integers.*;
 import static vendingmachine.constants.ExceptionMessages.*;
 
 public class NumberInputValidator {
@@ -19,13 +20,13 @@ public class NumberInputValidator {
     }
 
     private static void validateNotNegativeNumber(int intInput) {
-        if (intInput < 0) {
+        if (intInput < MINIMUM_MONEY_INPUT) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_EXCEPTION);
         }
     }
 
     static void validateNotHaveOnesDigit(int intInput) {
-        if (intInput%10 > 0) {
+        if (intInput%MINIMUM_COIN_DIGIT > 0) {
             throw new IllegalArgumentException(HAS_ONES_NUMBER_EXCEPTION);
         }
     }

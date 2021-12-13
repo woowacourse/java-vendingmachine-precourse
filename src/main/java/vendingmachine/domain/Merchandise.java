@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.constants.Integers.*;
+
 public class Merchandise {
 
     public String name;
@@ -8,9 +10,9 @@ public class Merchandise {
 
     public Merchandise(String merchandiseInfo) {
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
-        this.name = infoList[0];
-        this.price = Integer.parseInt(infoList[1]);
-        this.number = Integer.parseInt(infoList[2]);
+        this.name = infoList[NAME_IDX];
+        this.price = Integer.parseInt(infoList[PRICE_IDX]);
+        this.number = Integer.parseInt(infoList[NUMBER_IDX]);
     }
 
     public String getName() {

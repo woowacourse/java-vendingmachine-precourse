@@ -1,11 +1,12 @@
 package vendingmachine.validator;
 
+import static vendingmachine.constants.ExceptionMessages.*;
+import static vendingmachine.constants.Integers.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
-import static vendingmachine.constants.ExceptionMessages.*;
 
 public class MenuInputFormatValidator {
 
@@ -21,9 +22,9 @@ public class MenuInputFormatValidator {
         validateSeparatorFormat(merchandiseInfo);
 
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
-        validateNameLength(infoList[0]);
-        validatePriceInput(infoList[1]);
-        validateMerchandiseNumberInput(infoList[2]);
+        validateNameLength(infoList[NAME_IDX]);
+        validatePriceInput(infoList[PRICE_IDX]);
+        validateMerchandiseNumberInput(infoList[NUMBER_IDX]);
     }
 
     private static void validateNotBlankInput(String merchandiseInfo) {
@@ -48,13 +49,13 @@ public class MenuInputFormatValidator {
             throw new IllegalArgumentException(INVALID_SEPARATORS_EXCEPTION);
         }
 
-        if (content.split(",").length != 3) {
+        if (content.split(",").length != MERCHANDISE_INFO_TYPE_NUM) {
             throw new IllegalArgumentException(INVALID_COMMAS_EXCEPTION);
         }
     }
 
     private static void validateNameLength(String input) {
-        if (input.length() == 0) {
+        if (input.length() == MINIMUM_NAME_LENGTH) {
             throw new IllegalArgumentException(BLANK_NAME_INPUT_EXCEPTION);
         }
     }
@@ -79,13 +80,13 @@ public class MenuInputFormatValidator {
     }
 
     private static void validateNotLessThanHundred(int intInput) {
-        if (intInput < 100) {
+        if (intInput < MINIMUM_PRICE) {
             throw new IllegalArgumentException(PRICE_NUMBER_LESS_THAN_HUNDRED_EXCEPTION);
         }
     }
 
     private static void validateNotNegativeNumber(int numberInput) {
-        if (numberInput < 0) {
+        if (numberInput < MINIMUM_MONEY_INPUT) {
             throw new IllegalArgumentException(MERCHANDISE_NUMBER_NEGATIVE_NUMBER_EXCEPTION);
         }
     }
@@ -95,9 +96,9 @@ public class MenuInputFormatValidator {
         Set<String> merchandiseNameSet = new HashSet<>();
 
         for (String merchandiseInfo : merchandiseInfos) {
-            String price = merchandiseInfo.substring(1).split(",")[0];
-            merchandiseNames.add(price);
-            merchandiseNameSet.add(price);
+            String name = merchandiseInfo.substring(1).split(",")[NAME_IDX];
+            merchandiseNames.add(name);
+            merchandiseNameSet.add(name);
         }
 
         if (merchandiseNames.size() > merchandiseNameSet.size()) {
