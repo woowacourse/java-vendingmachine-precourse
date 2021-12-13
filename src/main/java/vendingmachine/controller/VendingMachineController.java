@@ -4,7 +4,6 @@ import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.ExceptionView;
-import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
@@ -18,6 +17,7 @@ public class VendingMachineController {
 		while (vendingMachine.isBuy()) {
 			OutputView.insertMoneyUI(vendingMachine.getInsertMoney());
 			String productName = RequestController.requestProductName();
+			VendingMachineService.buyForName(vendingMachine, productName);
 		}
 	}
 

@@ -12,4 +12,10 @@ public class VendingMachineService {
 			throw new IllegalArgumentException(INSERT_MONEY_ERROR_MESSAGE);
 		}
 	}
+
+	public static void buyForName(VendingMachine vendingMachine, String name) {
+		if (vendingMachine.isBuy(name)) {
+			vendingMachine.buy(name);
+		}
+	}
 }

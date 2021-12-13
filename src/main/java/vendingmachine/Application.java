@@ -10,5 +10,6 @@ public class Application {
         VendingMachine vendingMachine = RequestController.requestVendingMachine();
         VendingMachineController vendingMachineController = new VendingMachineController(vendingMachine);
         vendingMachineController.insertMoney();
+        vendingMachineController.run();
     }
 }

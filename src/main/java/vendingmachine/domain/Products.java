@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class Products {
 	private List<Product> products = new ArrayList<>();
@@ -32,10 +33,10 @@ public class Products {
 	public boolean soldOut() {
 		for (Product product : products) {
 			if (!product.soldOut()) {
-				return true;
+				return false;
 			}
 		}
-		return false;
+		return true;
 	}
 
 	public boolean isBuy(Money insertMoney) {
@@ -60,7 +61,7 @@ public class Products {
 
 	public Product findForName(String productName) {
 		for (Product product : products) {
-			if (product.hashCode() == productName.hashCode()) {
+			if (product.hashCode() == Objects.hash(productName)) {
 				return product;
 			}
 		}

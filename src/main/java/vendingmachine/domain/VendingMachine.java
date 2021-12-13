@@ -15,11 +15,13 @@ public class VendingMachine {
 	}
 
 	public void buy(String productName) {
-		if (isBuy(productName)) {
-			Product product = products.findForName(productName);
-			product.buy();
-			insertMoney = insertMoney.subtract(product.getPrice());
+		Product product = products.findForName(productName);
+		System.out.println(product);
+		if (product == null || insertMoney.compareTo(product.getPrice()) < 0) {
+			return;
 		}
+		product.buy();
+		insertMoney = insertMoney.subtract(product.getPrice());
 	}
 
 
@@ -35,13 +37,7 @@ public class VendingMachine {
 
 	public boolean isBuy(String productName) {
 		Product product = products.findForName(productName);
-		if (product == null) {
-			return false;
-		}
-		if (product.soldOut()) {
-			return false;
-		}
-		if (!product.isBuy(insertMoney)) {
+		if (product == null || product.soldOut() || !product.isBuy(insertMoney)) {
 			return false;
 		}
 		return true;
