@@ -1,6 +1,5 @@
 package vendingmachine.view;
 
-import static vendingmachine.utils.validator.MoneyValidator.*;
 import static vendingmachine.utils.validator.ProductValidator.*;
 
 
@@ -29,12 +28,7 @@ public class InputView {
 	public static String inputMoneyToPutInVendingMachine() {
 		System.out.println();
 		System.out.println(SystemMessage.GET_INPUT_MONEY.getText());
-		while (true) {
-			String inputMoney = Console.readLine();
-			if (checkIsValidInputMoney(inputMoney)) {
-				return inputMoney;
-			}
-		}
+		return Console.readLine();
 	}
 
 	public static String inputProductNameToBuy(VendingMachine vendingMachine) {

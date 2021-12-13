@@ -20,9 +20,7 @@ public class VendingMachineController {
 	public void run() {
 		initAmountMoneyHoldingByVendingMachine();
 		initProductInfoList();
-
-		String tempInputMoney = inputMoneyToPutInVendingMachine();
-		vendingMachine.createInputMoney(Integer.parseInt(tempInputMoney));
+		initInsertMoney();
 
 		buyProducts();
 		returnRemainChanges();
@@ -42,23 +40,35 @@ public class VendingMachineController {
 
 	}
 
-	public void initProductInfoList() {
-		List<String> productInfoList = inputInformationOfProducts();
-		if (checkIsValidProductInfoList(productInfoList)) {
-			vendingMachine.createProductList(productInfoList);
-			return;
+	public void initInsertMoney() {
+		while (true) {
+			String insertMoney = inputMoneyToPutInVendingMachine();
+			if (checkIsValidInputMoney(insertMoney)) {
+				vendingMachine.createInputMoney(Integer.parseInt(insertMoney));
+				break;
+			}
 		}
-		initProductInfoList();
+	}
+
+	public void initProductInfoList() {
+		while (true) {
+			List<String> productInfoList = inputInformationOfProducts();
+			if (checkIsValidProductInfoList(productInfoList)) {
+				vendingMachine.createProductList(productInfoList);
+				break;
+			}
+		}
 	}
 
 	public void initAmountMoneyHoldingByVendingMachine() {
-		String amountMoney = inputTotalAmountOfVendingMachine();
-		if (checkIsValidTotalAmount(amountMoney)) {
-			vendingMachine.createChanges(Integer.parseInt(amountMoney));
-			printChangesVendingMachine(vendingMachine);
-			return;
+		while (true) {
+			String amountMoney = inputTotalAmountOfVendingMachine();
+			if (checkIsValidTotalAmount(amountMoney)) {
+				vendingMachine.createChanges(Integer.parseInt(amountMoney));
+				printChangesVendingMachine(vendingMachine);
+				return;
+			}
 		}
-		initAmountMoneyHoldingByVendingMachine();
 	}
 
 }
