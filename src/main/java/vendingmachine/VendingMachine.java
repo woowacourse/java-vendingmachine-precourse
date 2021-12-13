@@ -23,10 +23,16 @@ public class VendingMachine {
     public void buyProduct(Order order) {
         products.stream()
             .filter(product -> product.isEqualToName(order.getProductName()))
-            .filter(Product::isPossibleBuy)
+            .filter(Product::isExistedProduct)
             .findAny()
             .orElseThrow(ErrorMessage.NOT_FOUND_PRODUCT::getException)
             .processPurchasing(order);
+    }
 
+    public boolean isCheckedStockByProduct(int holdingAmount) {
+        for (Product product : products) {
+            return product.isPossibleBuyProduct(holdingAmount);
+        }
+        return false;
     }
 }

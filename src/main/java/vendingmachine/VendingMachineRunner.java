@@ -46,16 +46,21 @@ public class VendingMachineRunner implements Runnable {
 
     private void processBuyProduct(VendingMachine vendingMachine, Order order) {
         while (true) {
-            try {
-                ConsolePrinter.print(order.getHoldingAmount());
-                order.addProduct(inputProduct());
-                vendingMachine.buyProduct(order);
-                if (order.getHoldingAmount() < 0) {             /** 임시 */
-                    break;
-                }
-            } catch (IllegalArgumentException exception) {
-                ConsolePrinter.print(exception.getMessage());
+            useMoney(vendingMachine, order);
+            if (!vendingMachine.isCheckedStockByProduct(order.getHoldingAmount())) {
+                // todo 잔돈반환
+                break;
             }
+        }
+    }
+
+    private void useMoney(VendingMachine vendingMachine, Order order) {
+        try {
+            ConsolePrinter.print(order.getHoldingAmount());
+            order.addProduct(inputProduct());
+            vendingMachine.buyProduct(order);
+        } catch (IllegalArgumentException exception) {
+            ConsolePrinter.print(exception.getMessage());
         }
     }
 
