@@ -9,6 +9,7 @@ public class ProductController {
     private static ProductService productService;
 
     public static void initProductList() {
-        inputProductList();
+        productService = new ProductService();
+        productService.getProductList();
     }
 }

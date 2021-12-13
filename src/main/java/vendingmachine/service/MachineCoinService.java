@@ -10,6 +10,7 @@ import java.util.TreeMap;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
+import static vendingmachine.service.Validator.*;
 import static vendingmachine.view.Messages.*;
 
 
@@ -28,26 +29,6 @@ public class MachineCoinService {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
-        }
-    }
-
-    public static int checkNotString(String input) {
-        try {
-            return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(ERROR_NOT_INTEGER);
-        }
-    }
-
-    public static void checkPositiveNumber(int input) {
-        if (input < 0) {
-            throw new IllegalArgumentException(ERROR_NEGATIVE_NUMBER);
-        }
-    }
-
-    public static void checkDivideByTen(int price) {
-        if (price % 10 != 0) {
-            throw new IllegalArgumentException(ERROR_DIVIDE_BY_TEN);
         }
     }
 
