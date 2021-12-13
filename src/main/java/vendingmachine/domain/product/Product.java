@@ -67,6 +67,13 @@ public class Product {
         return price.getPrice();
     }
 
+    public boolean isSameName(String productPurchaseName) {
+        if (this.name.isSame(productPurchaseName)) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean isExistQuantity() {
         if (quantity > DEFAULT_QUANTITY) {
             return true;
@@ -74,21 +81,7 @@ public class Product {
         return false;
     }
 
-    public void decreaseQuantity() {
-        validateQuantityZero();
+    public void purchase() {
         quantity--;
-    }
-
-    private void validateQuantityZero() {
-        if (quantity == DEFAULT_QUANTITY) {
-            throw new IllegalArgumentException();
-        }
-    }
-
-    public boolean isSameName(String productPurchaseName) {
-        if (this.name.isSame(productPurchaseName)) {
-            return true;
-        }
-        return false;
     }
 }

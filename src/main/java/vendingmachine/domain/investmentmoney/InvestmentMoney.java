@@ -45,7 +45,7 @@ public class InvestmentMoney {
             throw new IllegalArgumentException();
         }
 
-        product.decreaseQuantity();
+        product.purchase();
         investmentMoney -= product.getPrice();
     }
 

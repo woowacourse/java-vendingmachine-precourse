@@ -35,6 +35,7 @@ public class Products {
     public Optional<Product> findByName(String productPurchaseName) {
         return products.stream()
             .filter(product -> product.isSameName(productPurchaseName))
+            .filter(Product::isExistQuantity)
             .findFirst();
     }
 }
