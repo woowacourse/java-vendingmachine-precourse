@@ -10,8 +10,12 @@ public class VendingMachine {
 	HashMap<Coin, Integer> coinMap = new HashMap<>();
 	static ArrayList<Beverage> Beverages = new ArrayList<>();
 
+	
 	public VendingMachine(String cash) {
-		this.totalCoin = ValidTotalCoin(cash);
+		Validater.isNumberCheck(cash);
+		Validater.isDivideTen(cash);
+		Validater.isZeroCheck(cash);
+		this.totalCoin = Integer.parseInt(cash);
 		init();
 		makeRandomCoin();
 	}
@@ -22,6 +26,8 @@ public class VendingMachine {
 		}
 	}
 	
+	
+	//랜덤 코인 생성
 	private void makeRandomCoin() {
 		int remainCoin = 0;
 		while (remainCoin != totalCoin) {
@@ -35,9 +41,10 @@ public class VendingMachine {
 		}
 	}
 	
-
+	
+	//음료 추가
 	public static void beverage(String goodsInput) {
-		isSemicolon(goodsInput);
+		Validater.isSemicolon(goodsInput);
 		String[] goodsList = goodsInput.split(";");
 
 		for (String beverageString : goodsList) {
@@ -45,30 +52,42 @@ public class VendingMachine {
 		}
 
 	}
-
-
-	// 예외처리
-	private int ValidTotalCoin(String cash) {
-		if (!cash.chars().allMatch(Character::isDigit)) {
-			throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+	
+	//음료 리스트 뽑기 
+	public static String[] getBeverageName() {
+		String[] beverageNames = new String[Beverages.size()];
+		int idx = 0;
+		for(Beverage beverage :Beverages) {
+			beverageNames[idx] = beverage.getName();
+			idx ++;
 		}
-		int totalCoin = Integer.parseInt(cash);
-		DivideTen(totalCoin);
-		return totalCoin;
-	}
-
-	private void DivideTen(int totalCoin) {
-		if (totalCoin % 10 != 0) {
-			throw new IllegalArgumentException("[ERROR] 금액은 10원으로 나눠져야 합니다.");
-		}
+		
+		return beverageNames;
 	}
 	
-	private static void isSemicolon(String goodsInput) {
-		if (!goodsInput.matches("[;]")) {
-			throw new IllegalArgumentException("옳바른 입력값이 아닙니다.");
-		}
+	
+	
+	//음료 관리 
+	public static void isBeverageCheck(String buyBeverage) throws IllegalAccessException {
+			String[] beverageNames = getBeverageName();
+			boolean check = false;
+			for(String name : beverageNames) {
+				if(name == buyBeverage) {
+					check= true;
+				}	
+			}
+			if(!check) {
+				throw new IllegalAccessException("자판기에 없는 음료입니다.");		
+			}
+		
 	}
 
+	
+
+	/* 예외 별도 클래스 처리 */
+
+	
+	/* 구현전 내용 */
 	
 	// 자판기 출력은 별도 클래스로 이동
 
