@@ -32,12 +32,7 @@ public class VendingMachine {
 	}
 
 	public int getSumCoinAmount() {
-		int sum = 0;
-		for (Integer i : coinMap.keySet()) {
-			sum += i * coinMap.get(i);
-		}
-
-		return sum;
+		return coinMap.keySet().stream().mapToInt(key -> key * coinMap.get(key)).sum();
 	}
 
 	public void makeCoinInCoinMap(int money) {
