@@ -1,6 +1,6 @@
 package vendingmachine.validator;
 
-import static vendingmachine.utils.ExceptionMessages.*;
+import static vendingmachine.constants.ExceptionMessages.*;
 
 public class NumberInputValidator {
 

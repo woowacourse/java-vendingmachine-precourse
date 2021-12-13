@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.constants;
 
 public class ExceptionMessages {
 

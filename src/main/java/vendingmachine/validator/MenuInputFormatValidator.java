@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import static vendingmachine.utils.ExceptionMessages.*;
+import static vendingmachine.constants.ExceptionMessages.*;
 
 public class MenuInputFormatValidator {
 
