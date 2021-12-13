@@ -47,6 +47,17 @@ public class WalletSystem {
         insertedBalance -= price;
     }
 
+    boolean haveEnoughInsertedBalanceToPurchase(int cheapestPrice){
+        boolean canPurchase =true;
+
+        if(insertedBalance < cheapestPrice ){
+            canPurchase = false;
+            walletPrinter.printNotEnoughBalance();
+        }
+
+        return canPurchase;
+    }
+
     boolean canBuySelectedProduct(Product product){
         boolean canBuy = true;
 
