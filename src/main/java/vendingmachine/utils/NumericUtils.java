@@ -10,7 +10,7 @@ public class NumericUtils {
 		try {
 			int result = Integer.parseInt(str);
 
-			if (result < 0) {
+			if (result <= 0) {
 				throw new IllegalArgumentException(ERROR_NUMBER_IS_NOT_POSITIVE_INT);
 			}
 			return result;
