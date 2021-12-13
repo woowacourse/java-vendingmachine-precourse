@@ -5,6 +5,7 @@ import vendingmachine.constants.StringConstants;
 public class WalletPrinter {
     private final WalletSystem wallet;
     private final String PRINT_TITLE_MESSAGE = "\n자판기가 보유한 동전";
+    private final String PRINT_NOT_ENOUGH_BALANCE_MESSAGE = "잔액으로 살 수 있는 상품이 없습니다.";
     private final String PRINT_INSERTED_BALANCE_MESSAGE = "투입 금액: ";
     private final String PRINT_DELIMITER = " - ";
 
@@ -26,5 +27,9 @@ public class WalletPrinter {
 
     void printRemainInsertedBalance(){
         System.out.println(PRINT_INSERTED_BALANCE_MESSAGE + wallet.getInsertedBalance() + StringConstants.CURRENCY_UNIT);
+    }
+
+    void printNotEnoughBalance(){
+        System.out.println(PRINT_NOT_ENOUGH_BALANCE_MESSAGE);
     }
 }
