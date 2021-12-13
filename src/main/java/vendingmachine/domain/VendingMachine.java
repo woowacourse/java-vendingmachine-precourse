@@ -56,4 +56,8 @@ public class VendingMachine {
 		item.sell();
 		amount -= item.getPrice();
 	}
+
+	public Changes returnChange() {
+		return changes.returnChange(amount);
+	}
 }
