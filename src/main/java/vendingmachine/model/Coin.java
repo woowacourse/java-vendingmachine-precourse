@@ -19,8 +19,8 @@ public enum Coin {
     }
 
     // 추가 기능 구현
-    public Map<Coin, Integer> generateRandomCoins() {
-        CoinGeneratorInterface generator = new CoinGenerator();
-        return generator.getRandomCoins(this.amount);
+
+    public int getAmount() {
+        return amount;
     }
 }

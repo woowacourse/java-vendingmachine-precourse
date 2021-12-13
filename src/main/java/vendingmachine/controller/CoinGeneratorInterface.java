@@ -5,5 +5,5 @@ import java.util.HashMap;
 import vendingmachine.model.Coin;
 
 public interface CoinGeneratorInterface {
-	HashMap<Coin, Integer> getRandomCoins(int price);
+	HashMap<Integer, Integer> getRandomCoins(int price);
 }

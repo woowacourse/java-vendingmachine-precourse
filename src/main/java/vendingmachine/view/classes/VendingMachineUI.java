@@ -5,8 +5,11 @@ import static vendingmachine.constant.ExceptionConstant.*;
 import static vendingmachine.constant.PromptConstant.*;
 
 import vendingmachine.constant.VendingMachineStatus;
+import vendingmachine.controller.CoinGeneratorInterface;
+import vendingmachine.controller.classes.CoinGenerator;
 import vendingmachine.exception.InvalidUserInputException;
 import vendingmachine.exception.NegativeUserInputException;
+import vendingmachine.model.Coin;
 import vendingmachine.view.VendingMachine;
 
 public class VendingMachineUI implements VendingMachine {
@@ -21,6 +24,8 @@ public class VendingMachineUI implements VendingMachine {
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_COINS_IN_VENDING_MACHINE) {
 				System.out.println(PROMPT_VENDING_MACHINE_HAVE_COINS);
+				CoinGeneratorInterface coinGeneratorInterface = new CoinGenerator();
+				System.out.println(coinGeneratorInterface.getRandomCoins(moneyInVendingMachine).toString());
 				break;
 			}
 			if (vendingMachineStatus == VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE) {
