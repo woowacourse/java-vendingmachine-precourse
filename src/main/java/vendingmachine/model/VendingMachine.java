@@ -104,10 +104,11 @@ public class VendingMachine {
         }
     }
 
-    public int calculateRemainingPurchasingCost(final List<Product> products, final String choosePurchasingProductName, int purchasingCost) {
+    public int sellProduct(final List<Product> products, final String choosePurchasingProductName, int purchasingCost) {
         for (Product product : products) {
             if (product.getName().compareProductName(choosePurchasingProductName)) {
                 purchasingCost = product.getPrice().subtractPrice(purchasingCost);
+                product.getCount().minusCount();
             }
         }
 

@@ -2,7 +2,7 @@ package vendingmachine.model;
 
 public class Count {
 
-    private final int count;
+    private int count;
 
     public Count(final int count) {
         this.count = count;
@@ -12,14 +12,14 @@ public class Count {
         return count;
     }
 
-    public int minusCount(int count) {
-        count = this.count - 1;
-        System.out.println("개수: " + count);
-        return count;
+    public void minusCount() {
+        this.count--;
+        System.out.println("개수: " + this.count);
     }
 
     public boolean isCountValidation() {
-        return (this.count - 1) <= 0;
+        System.out.println(this.count);
+        return (this.count) < 0;
     }
 
 }

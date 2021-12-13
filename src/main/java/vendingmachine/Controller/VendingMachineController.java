@@ -36,7 +36,7 @@ public class VendingMachineController {
             outputView.printPurChasingCost(purchasingCost);
 
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
-            purchasingCost = vendingMachine.calculateRemainingPurchasingCost(products, choosePurchasingProductName, purchasingCost);
+            purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
         } while (vendingMachine.isContinueDeal(products, cheapestProductPrice, purchasingCost));
     }
 
