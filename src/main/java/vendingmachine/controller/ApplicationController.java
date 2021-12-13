@@ -36,15 +36,15 @@ public class ApplicationController {
 		String balance = InputView.getUserInput(VENDING_MACHINE_BALANCE_MESSAGE);
 		try {
 			vendingMachineService.saveBalance(balance);
-			setCoinsByBalance(Integer.parseInt(balance));
+			setCoinsByBalance();
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + BALANCE_PRICE_PREFIX + e.getMessage() + LINE_BREAK);
 			startVendingMachine();
 		}
 	}
 
-	private void setCoinsByBalance(int balance) {
-		vendingMachineService.setVendingMachineCoins(balance);
+	private void setCoinsByBalance() {
+		vendingMachineService.setVendingMachineCoins();
 		PrintView.printCoins(vendingMachineService.getCoinMap(), LINE_BREAK + COIN_CONTAIN_MESSAGE);
 
 		saveProducts();

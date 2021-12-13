@@ -23,7 +23,8 @@ public class VendingMachineService {
 		vendingMachine.setBalance(balance);
 	}
 
-	public void setVendingMachineCoins(int balance) {
+	public void setVendingMachineCoins() {
+		int balance = vendingMachine.getBalance();
 		LinkedHashMap<Coin, Integer> coinMap = new CoinService().getCoinsByBalance(balance);
 		vendingMachine.setCoinMap(coinMap);
 	}
