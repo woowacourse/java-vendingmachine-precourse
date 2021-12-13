@@ -55,7 +55,7 @@ public class VendingMachine {
 		});
 	}
 
-	public void generateProduct(String products) {
+	public void generateProduct(String products) throws IllegalArgumentException {
 		this.productList = Arrays.stream(products.split(";"))
 			.map(Product::createProduct)
 			.collect(Collectors.toList());

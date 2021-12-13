@@ -11,6 +11,10 @@ public class Product {
 		Product product = new Product();
 		productInformation = productInformation.replace("[", "").replace("]", "");
 		String[] productInfo = productInformation.split(",");
+		if (productInfo.length != 3) {
+			throw new IllegalArgumentException("[ERROR] 잘못된 상품 정보 입력입니다. 다시 입력해 주세요.");
+		}
+
 		product.name = productInfo[0];
 		product.price = Utils.moneyConverter(productInfo[1]);
 		product.amount = Integer.parseInt(productInfo[2]);

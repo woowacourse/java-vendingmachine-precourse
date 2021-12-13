@@ -5,9 +5,14 @@ import java.util.regex.Pattern;
 public class Validator {
 	String ERROR_MONEY_IS_INTEGER = "[ERROR] 금액은 숫자여야 합니다.";
 	String ERROR_MONEY_CAN_DIVIDE_INTO_10 = "[ERROR] 금액은 10원 단위여아합니다.";
+	String ERROR_CANNOT_EMPTY = "[ERROR] 입력은 공백일 수 없습니다.";
 
 	public String validateMoney(String money) {
 		String numberOnly = "^[0-9]+$";
+
+		if (money.isEmpty()) {
+			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
+		}
 
 		if (!Pattern.matches(numberOnly, money)) {
 			throw new IllegalArgumentException(ERROR_MONEY_IS_INTEGER);
@@ -20,17 +25,16 @@ public class Validator {
 	}
 
 	public String validateProduct(String validateProduct) {
-		// 상품명이 제대로 들어왔는지 검증하는 로직
+		if (validateProduct.isEmpty()) {
+			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
+		}
 		return validateProduct;
 	}
 
 	public String validateBuyingProduct(String validateBuyingProduct) {
-		// 구매할 상품이 잘 들어갔는지 검증하는 로직
-		/**
-		 * 잘못 들어온 경우
-		 * 1. 상품 명에 없는 이름
-		 * 2. 이름이 빈칸
-		 */
+		if (validateBuyingProduct.isEmpty()) {
+			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
+		}
 		return validateBuyingProduct;
 	}
 }

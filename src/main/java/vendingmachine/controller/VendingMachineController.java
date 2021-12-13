@@ -22,8 +22,15 @@ public class VendingMachineController {
 		vendingMachine.initOwnMoney(convertedMachineMoney);
 		vendingMachine.generateCoin();
 		printCurrentCoin(vendingMachine);
-		String products = enterMachineProduct();
-		vendingMachine.generateProduct(products);
+		while(true) {
+			try {
+				String products = enterMachineProduct();
+				vendingMachine.generateProduct(products);
+				break;
+			} catch(IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
+		}
 		String insertMoney = enterInsertMoney();
 		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
 		vendingMachine.initInputMoney(convertedInsertMoney);
@@ -36,7 +43,7 @@ public class VendingMachineController {
 
 		while (vendingMachine.end()) {
 			try {
-				String productName = inputView.enterBuyingProduct();
+				String productName = enterBuyingProduct();
 				vendingMachine.purchase(productName);
 				outputView.printInsertMoney(vendingMachine.getInputMoney());
 			} catch (IllegalArgumentException error) {
@@ -120,6 +127,16 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException error) {
 			System.out.println(error.getMessage());
 			return enterMachineProduct();
+		}
+	}
+
+	private String enterBuyingProduct() {
+		String buyingProduct = inputView.enterBuyingProduct();
+		try {
+			return validator.validateBuyingProduct(buyingProduct);
+		} catch (IllegalArgumentException error) {
+			System.out.println(error.getMessage());
+			return enterBuyingProduct();
 		}
 	}
 }
