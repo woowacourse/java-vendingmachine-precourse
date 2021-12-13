@@ -29,7 +29,13 @@ public class ItemValidator {
 		}
 	}
 
-	public String isInSquareBracket(String item) {
+	public Item validateItem(String input, List<Item> items) {
+		String inputWithOitBlanket = isInSquareBracket(input);
+		Item item = isRightFormalOfItem(inputWithOitBlanket);
+		return validateDuplicateName(item, items);
+	}
+
+	private String isInSquareBracket(String item) {
 		if (item.startsWith("[") && item.endsWith("]")) {
 			return item.replaceFirst("\\[", "")
 				.replaceFirst("]", "");
@@ -38,7 +44,7 @@ public class ItemValidator {
 		throw new IllegalArgumentException(NOT_IN_SQUARE_BRACKET_ERROR);
 	}
 
-	public Item isRightFormalOfItem(String item) {
+	private Item isRightFormalOfItem(String item) {
 		String[] attributes = item.split(",");
 
 		if (attributes.length != THREE) {
@@ -52,7 +58,7 @@ public class ItemValidator {
 		return new Item(name, price, stockQuantity);
 	}
 
-	public Item validateName(Item item, List<Item> items) {
+	private Item validateDuplicateName(Item item, List<Item> items) {
 		Optional<Item> findItem = items.stream()
 			.filter(i -> i.isName(item))
 			.findFirst();
@@ -89,10 +95,6 @@ public class ItemValidator {
 
 		if (item == null) {
 			throw new IllegalArgumentException(NOT_EXIST_ITEM_ERROR);
-		}
-
-		if (!item.isAvailableToBuy()) {
-			throw new IllegalArgumentException(NO_SUFFICIENT_QUANTITY_ERROR);
 		}
 
 		if (!item.isAvailableToBuy(money)) {

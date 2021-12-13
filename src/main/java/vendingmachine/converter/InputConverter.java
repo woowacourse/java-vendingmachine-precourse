@@ -33,10 +33,7 @@ public class InputConverter {
 		List<Item> items = new ArrayList<>();
 
 		Stream.of(input.split(";"))
-			.forEach(item ->
-				items.add(itemValidator.validateName(
-					itemValidator.isRightFormalOfItem(
-						itemValidator.isInSquareBracket(item)), items)));
+			.forEach(item -> items.add(itemValidator.validateItem(item, items)));
 
 		return items;
 	}
