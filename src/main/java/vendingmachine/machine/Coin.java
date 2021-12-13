@@ -24,12 +24,16 @@ public enum Coin {
         return this.amount;
     }
 
+    public int getNumber() {
+        return this.number;
+    }
+
     public void setCoinNumber() {
         this.number++;
     }
 
-    public void minusCoinNumber() {
-        this.number--;
+    public void minusCoinNumber(int num) {
+        this.number -= num;
     }
 
     public int getCoinHowMuch() {
