@@ -49,11 +49,19 @@ public class MoneyBill {
     }
 
     public boolean isSameOrBigger(Item item) {
-        return this.amount > item.getPrice().getAmount();
+        return this.amount >= item.getPrice().getAmount();
+    }
+
+    public boolean isSameOrBigger(MoneyCoin moneyCoin) {
+        return this.amount >= moneyCoin.getAmount();
     }
 
     public void decrease(Price price) {
         this.amount -= price.getAmount();
+    }
+
+    public void decrease(MoneyCoin moneyCoin) {
+        this.amount -= moneyCoin.getAmount();
     }
 
     @Override

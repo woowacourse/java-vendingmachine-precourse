@@ -33,13 +33,6 @@ public class MoneyCoins {
         coins.put(coin, 1);
     }
 
-    public int get(MoneyCoin coin) {
-        if (coins.containsKey(coin)) {
-            return coins.get(coin);
-        }
-        return 0;
-    }
-
     public String showChange() {
         StringBuilder stringBuilder = new StringBuilder();
 
@@ -52,6 +45,26 @@ public class MoneyCoins {
             stringBuilder.append(moneyCoin.toString() + HYPHEN + coins.get(moneyCoin) + COUNT_UNIT);
         }
         return stringBuilder.toString();
+    }
+
+    public MoneyCoins giveChange(MoneyBill moneyBill) {
+        MoneyCoins changeResult = new MoneyCoins();
+        coins.keySet().stream().forEach(moneyCoin -> {
+            while (moneyBill.isSameOrBigger(moneyCoin) && moneyCoinExist(moneyCoin)) {
+                changeResult.add(moneyCoin);
+                moneyBill.decrease(moneyCoin);
+                this.decrease(moneyCoin);
+            }
+        });
+        return changeResult;
+    }
+
+    private void decrease(MoneyCoin moneyCoin) {
+        coins.put(moneyCoin, coins.get(moneyCoin) - 1);
+    }
+
+    private boolean moneyCoinExist(MoneyCoin moneyCoin) {
+        return coins.get(moneyCoin) > 0;
     }
 
     @Override

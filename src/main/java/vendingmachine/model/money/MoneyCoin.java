@@ -31,6 +31,10 @@ public class MoneyCoin {
         return Arrays.stream(Coin.values()).anyMatch(coin -> coin.getValue() == amount);
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)

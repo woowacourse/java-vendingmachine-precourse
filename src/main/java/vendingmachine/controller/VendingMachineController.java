@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import vendingmachine.model.Item.Items;
 import vendingmachine.model.buy.BuyItemName;
 import vendingmachine.model.money.Money;
+import vendingmachine.model.money.MoneyCoins;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -14,7 +15,7 @@ public class VendingMachineController {
     public void start() {
         setupVendingMachine();
         sellItems();
-        OutputView.showChange(money);
+        giveChange();
     }
 
     private void setupVendingMachine() {
@@ -36,6 +37,11 @@ public class VendingMachineController {
 
     private void setupInputMoney() {
         money.addMoneyBill(InputView.getInputMoney());
+    }
+
+    private void giveChange() {
+        MoneyCoins changeResult = money.giveChange();
+        OutputView.showChange(changeResult);
     }
 
     private void sellItems() {

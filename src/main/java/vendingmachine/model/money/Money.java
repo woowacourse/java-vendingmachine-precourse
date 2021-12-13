@@ -48,6 +48,10 @@ public class Money {
         return moneyBill.isSmallerThan(minPriceAsAmount);
     }
 
+    public MoneyCoins giveChange() {
+        return this.moneyCoins.giveChange(moneyBill);
+    }
+
     @Override
     public String toString() {
         return "Money{" +

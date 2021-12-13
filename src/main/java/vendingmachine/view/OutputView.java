@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import vendingmachine.model.money.Money;
+import vendingmachine.model.money.MoneyCoins;
 
 public class OutputView {
 
@@ -15,8 +16,8 @@ public class OutputView {
         System.out.println(INPUT_MONEY + money.showMoneyBill());
     }
 
-    public static void showChange(Money money) {
+    public static void showChange(MoneyCoins changeResult) {
         System.out.println(CHANGE);
-        System.out.println(money.showChange());
+        System.out.println(changeResult.showChange());
     }
 }
