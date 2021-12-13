@@ -3,7 +3,6 @@ package vendingmachine.service;
 import static constant.CharacterConstant.*;
 import static constant.NumberConstant.*;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -26,7 +25,7 @@ public class ProductRepositoryService {
 
 	public void saveProductRepository(String userInput) {
 		ProductException.isValidProduct(userInput);
-		List<String> productInfos = Arrays.asList(userInput.split(PRODUCT_DIVIDER));
+		String[] productInfos = userInput.split(PRODUCT_DIVIDER);
 		for (String productInfo : productInfos) {
 			Product product = stringToProduct(unwrapProductInfo(productInfo));
 			productRepository.addProduct(product);
@@ -40,13 +39,14 @@ public class ProductRepositoryService {
 
 	private Product stringToProduct(String product) {
 		String[] productInfo = product.split(PRODUCT_DETAIL_DIVIDER);
-		String productName = productInfo[PRODUCT_NAME_INDEX];
-		int productPrice = Integer.parseInt(productInfo[PRODUCT_PRICE_INDEX]);
-		int productQuantity = Integer.parseInt(productInfo[PRODUCT_QUANTITY_INDEX]);
-		return new Product(productName, productPrice, productQuantity);
+		return new Product(
+			productInfo[PRODUCT_NAME_INDEX],
+			Integer.parseInt(productInfo[PRODUCT_PRICE_INDEX]),
+			Integer.parseInt(productInfo[PRODUCT_QUANTITY_INDEX])
+		);
 	}
 
-	public int getMinProductPrice() {
+	public int getMinPrice() {
 		List<Integer> productPriceList = productRepository.getProductList()
 			.stream()
 			.map(Product::getPrice)
@@ -54,7 +54,7 @@ public class ProductRepositoryService {
 		return Collections.min(productPriceList);
 	}
 
-	public int getProductStock() {
+	public int getStock() {
 		int productStocks = productRepository.getProductList()
 			.stream()
 			.mapToInt(Product::getQuantity)
@@ -63,11 +63,11 @@ public class ProductRepositoryService {
 	}
 
 	//주문에 따른 Product저장소 업데이트
-	public void updateProductByOrder(String order, int money) {
+	public void updateByOrder(String order, int money) {
 		Product orderedProduct = productRepository.findByName(order);
 		OrderException.isProductLeft(orderedProduct);
 		OrderException.isEnoughToOrder(orderedProduct, money);
-		orderedProduct.afterOrdered();
+		orderedProduct.sold();
 	}
 
 	public int getPriceByOrder(String order) {

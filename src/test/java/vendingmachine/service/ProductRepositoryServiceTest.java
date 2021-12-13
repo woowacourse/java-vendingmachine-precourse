@@ -41,7 +41,7 @@ class ProductRepositoryServiceTest {
 		//when
 
 		//then
-		assertThat(productRepositoryService.getMinProductPrice())
+		assertThat(productRepositoryService.getMinPrice())
 			.isEqualTo(1000);
 	}
 
@@ -56,7 +56,7 @@ class ProductRepositoryServiceTest {
 		productRepositoryService.saveProductRepository(userInput);
 
 		//then
-		assertThat(productRepositoryService.getProductStock())
+		assertThat(productRepositoryService.getStock())
 			.isEqualTo(20);
 	}
 
@@ -67,7 +67,7 @@ class ProductRepositoryServiceTest {
 		int money = 2000;
 
 		//when
-		productRepositoryService.updateProductByOrder(order, money);
+		productRepositoryService.updateByOrder(order, money);
 
 		//then
 		assertThat(productRepository.findByName(order).getQuantity())

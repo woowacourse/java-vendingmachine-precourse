@@ -17,14 +17,13 @@ public class VendingMachineService {
 		this.vendingMachine = vendingMachine;
 	}
 
-	public void saveBalance(String rawBalance) throws IllegalArgumentException {
+	public void saveBalance(String rawBalance) {
 		PriceException.isValidPrice(rawBalance);
 		int balance = Integer.parseInt(rawBalance);
 		vendingMachine.setBalance(balance);
 	}
 
-	public void saveCoins() {
-		int balance = vendingMachine.getBalance();
+	public void setVendingMachineCoins(int balance) {
 		LinkedHashMap<Coin, Integer> coinMap = new CoinService().getCoinsByBalance(balance);
 		vendingMachine.setCoinMap(coinMap);
 	}
@@ -38,10 +37,9 @@ public class VendingMachineService {
 	}
 
 	//반환금액에 맞는 동전 갯수 받기
-	public Map<Coin, Integer> getChangeCoinSet(int money) {
+	public Map<Coin, Integer> getChangeCoins(int money) {
 		money %= MIN_BILL_UNIT;
 		Map<Coin, Integer> coinState = vendingMachine.getCoinMap();
-		return new CoinService().getMinCoinSet(coinState, money);
-
+		return new CoinService().getChangeCoins(coinState, money);
 	}
 }

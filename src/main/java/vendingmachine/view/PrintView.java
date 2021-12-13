@@ -8,8 +8,8 @@ import java.util.Map;
 import vendingmachine.model.Coin;
 
 public class PrintView {
-	public static void printVendingMachineCoins(Map<Coin,Integer> coins) {
-		System.out.println(LINE_STAMP + COIN_CONTAIN_MESSAGE);
+	public static void printCoins(Map<Coin,Integer> coins, String singleLineMessage) {
+		System.out.println(singleLineMessage);
 		for (Coin coin : coins.keySet()) {
 			printCoinState(coins, coin);
 		}
@@ -23,13 +23,6 @@ public class PrintView {
 	}
 
 	public static void printMoneyState(int money) {
-		System.out.println(LINE_STAMP + INSERT_MONEY_STATE + money + PRICE_UNIT);
-	}
-
-	public static void printChange(Map<Coin, Integer> coins) {
-		System.out.println(CHANGE);
-		for (Coin coin : coins.keySet()) {
-			printCoinState(coins, coin);
-		}
+		System.out.println(LINE_BREAK + INSERT_MONEY_STATE + money + PRICE_UNIT);
 	}
 }

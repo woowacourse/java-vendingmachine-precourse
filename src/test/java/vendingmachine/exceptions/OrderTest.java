@@ -31,7 +31,7 @@ public class OrderTest {
 
 		//then
 		assertThatThrownBy(() -> {
-			productRepositoryService.updateProductByOrder(userInput, 1000);})
+			productRepositoryService.updateByOrder(userInput, 1000);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(ORDER_NOT_EXIST);
 	}
@@ -46,7 +46,7 @@ public class OrderTest {
 
 		//then
 		assertThatThrownBy(() -> {
-			productRepositoryService.updateProductByOrder(userInput, 10);})
+			productRepositoryService.updateByOrder(userInput, 10);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(NOT_ENOUGH_MONEY);
 	}
@@ -58,11 +58,11 @@ public class OrderTest {
 
 		//when
 		String userInput = "콜라";
-		productRepositoryService.updateProductByOrder(userInput, 1000);
+		productRepositoryService.updateByOrder(userInput, 1000);
 
 		//then
 		assertThatThrownBy(() -> {
-			productRepositoryService.updateProductByOrder(userInput, 900);})
+			productRepositoryService.updateByOrder(userInput, 900);})
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining(ORDER_NOT_LEFT);
 	}

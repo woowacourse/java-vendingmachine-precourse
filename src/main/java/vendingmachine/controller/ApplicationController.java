@@ -33,25 +33,25 @@ public class ApplicationController {
 	}
 
 	private void saveBalance() {
-		String balance = InputView.getUserInputSingleLine(VENDING_MACHINE_BALANCE_MESSAGE);
+		String balance = InputView.getUserInput(VENDING_MACHINE_BALANCE_MESSAGE);
 		try {
 			vendingMachineService.saveBalance(balance);
-			saveCoins();
+			setCoinsByBalance(Integer.parseInt(balance));
 		} catch (IllegalArgumentException e) {
-			System.out.println(ERROR_PREFIX + BALANCE_PRICE_PREFIX + e.getMessage() + LINE_STAMP);
+			System.out.println(ERROR_PREFIX + BALANCE_PRICE_PREFIX + e.getMessage() + LINE_BREAK);
 			startVendingMachine();
 		}
 	}
 
-	private void saveCoins() {
-		vendingMachineService.saveCoins();
-		PrintView.printVendingMachineCoins(vendingMachineService.getCoinMap());
+	private void setCoinsByBalance(int balance) {
+		vendingMachineService.setVendingMachineCoins(balance);
+		PrintView.printCoins(vendingMachineService.getCoinMap(), LINE_BREAK + COIN_CONTAIN_MESSAGE);
 
 		saveProducts();
 	}
 
 	private void saveProducts() {
-		String userProducts = InputView.getUserInputSingleLine(LINE_STAMP + VENDING_MACHINE_PRODUCT_MESSAGE);
+		String userProducts = InputView.getUserInput(LINE_BREAK + VENDING_MACHINE_PRODUCT_MESSAGE);
 		try {
 			productRepositoryService.saveProductRepository(userProducts);
 			getMoney();
@@ -62,7 +62,7 @@ public class ApplicationController {
 	}
 
 	private void getMoney() {
-		String money = InputView.getUserInputSingleLine(LINE_STAMP + INSERT_MONEY_MESSAGE);
+		String money = InputView.getUserInput(LINE_BREAK + INSERT_MONEY_MESSAGE);
 		try {
 			PriceException.isValidPrice(money);
 			int validMoney = Integer.parseInt(money);
@@ -82,8 +82,8 @@ public class ApplicationController {
 
 	//잔돈 반환 유무 판단
 	private boolean shouldChange(int money) {
-		int minProductPrice = productRepositoryService.getMinProductPrice();
-		int productStock = productRepositoryService.getProductStock();
+		int minProductPrice = productRepositoryService.getMinPrice();
+		int productStock = productRepositoryService.getStock();
 		if (minProductPrice > money
 				|| productStock == ZERO) {
 			return true;
@@ -94,8 +94,8 @@ public class ApplicationController {
 	private int updateByOrder(int money) {
 		try {
 			PrintView.printMoneyState(money);
-			String orderedProduct = InputView.getUserInputSingleLine(ORDER_PRODUCT_MESSAGE);
-			productRepositoryService.updateProductByOrder(orderedProduct, money);
+			String orderedProduct = InputView.getUserInput(ORDER_PRODUCT_MESSAGE);
+			productRepositoryService.updateByOrder(orderedProduct, money);
 			return productRepositoryService.getPriceByOrder(orderedProduct);
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_PREFIX + e.getMessage());
@@ -105,8 +105,8 @@ public class ApplicationController {
 
 	private void returnChange(int money) {
 		PrintView.printMoneyState(money);
-		Map<Coin, Integer> changeCoinSet = vendingMachineService.getChangeCoinSet(money);
-		PrintView.printChange(changeCoinSet);
+		Map<Coin, Integer> changeCoinSet = vendingMachineService.getChangeCoins(money);
+		PrintView.printCoins(changeCoinSet, CHANGE);
 	}
 
 }

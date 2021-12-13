@@ -24,7 +24,7 @@ public class CoinService {
 		}
 		while(balance > ZERO) {
 			int coinUnit = getRandomCoin(balance, coinUnitList);
-			updateCoinQuantity(coinUnit);
+			addCoinUnitQuantity(coinUnit);
 			balance -= coinUnit;
 		}
 		return coins;
@@ -37,37 +37,37 @@ public class CoinService {
 		return Randoms.pickNumberInList(coinList);
 	}
 
-	private void updateCoinQuantity(int coinUnit) {
+	private void addCoinUnitQuantity(int coinUnit) {
 		Coin coin = Coin.valueOf(COIN_ENUM_PREFIX + coinUnit);
 		int previousQuantity = coins.get(coin);
 		coins.put(coin, ++previousQuantity);
 	}
 
-	public Map<Coin,Integer> getMinCoinSet(Map<Coin, Integer> coinState, int left) {
+	public Map<Coin,Integer> getChangeCoins(Map<Coin, Integer> coinState, int moneyLeft) {
 		for (Coin coin : coinState.keySet()) {
-			left = changeCoin(coin, left, coinState);
+			moneyLeft = changeByCoin(coin, moneyLeft, coinState);
 		}
 		return coins;
 	}
 
-	private int changeCoin(Coin coin, int left, Map<Coin,Integer> coinState) {
+	private int changeByCoin(Coin coin, int moneyLeft, Map<Coin,Integer> coinState) {
 		int coinStateQuantity = coinState.get(coin);
 		int coinAmount = coin.getAmount();
 		int changeCoinQuantity = ZERO;
-		while (shouldChange(coinStateQuantity, coinAmount, left)
+		while (shouldChange(coinStateQuantity, coinAmount, moneyLeft)
 			&& isCoinLeft(coinState)) { //동전이 없거나 잔돈 금액을 충족할때 까지 동전 반환
-			left -= coinAmount;
+			moneyLeft -= coinAmount;
 			coinState.put(coin, --coinStateQuantity);
 			coins.put(coin, ++changeCoinQuantity);
 		}
-		return left;
+		return moneyLeft;
 	}
 
-	private boolean shouldChange(int coinQuantity, int coinAmount, int left) {
+	private boolean shouldChange(int coinQuantity, int coinAmount, int moneyLeft) {
 		//각각의 동전에 대해서 갯수가 없거나
 		//단위가 잔액보다 큰 경우는 해당 동전을 돌려줄 수 없음
 		if (coinQuantity == ZERO
-			|| coinAmount > left) {
+			|| coinAmount > moneyLeft) {
 			return false;
 		}
 		return true;
