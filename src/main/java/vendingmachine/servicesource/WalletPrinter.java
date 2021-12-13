@@ -9,7 +9,7 @@ public class WalletPrinter {
     private final String PRINT_TITLE_MESSAGE = "\n자판기가 보유한 동전";
     private final String PRINT_NOT_ENOUGH_BALANCE_MESSAGE = "잔액으로 살 수 있는 상품이 더 이상 없어, 잔돈을 반환합니다.";
     private final String RETURN_CHANGE_MESSAGE = "잔돈";
-    private final String PRINT_INSERTED_BALANCE_MESSAGE = "투입 금액: ";
+    private final String PRINT_INSERTED_BALANCE_MESSAGE = "\n투입 금액: ";
     private final String PRINT_DELIMITER = " - ";
 
     WalletPrinter(WalletSystem wallet){

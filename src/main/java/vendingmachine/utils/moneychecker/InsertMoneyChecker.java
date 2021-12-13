@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utils.datatypechecker.IntegerChecker;
 
 public class InsertMoneyChecker {
-    private static final String INPUT_REQUEST_MESSAGE = "투입 금액을 입력해 주세요.";
+    private static final String INPUT_REQUEST_MESSAGE = "\n투입 금액을 입력해 주세요.";
     private static final String CONTENT_TYPE = "투입 금액";
     private static final int LOW_LIMIT = 0;
     private static final int MOD = 10;
