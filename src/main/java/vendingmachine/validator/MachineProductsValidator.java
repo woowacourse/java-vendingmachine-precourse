@@ -1,8 +1,11 @@
 package vendingmachine.validator;
 
+import static vendingmachine.Constants.*;
+
 import java.util.List;
 
 import vendingmachine.service.ProductService;
+import vendingmachine.view.ErrorView;
 
 public class MachineProductsValidator extends CommonValidator{
 	public static boolean checkMachineProducts(String inputLine) {
@@ -11,6 +14,7 @@ public class MachineProductsValidator extends CommonValidator{
 			exceptionInvalidProduct(inputLine);
 			return true;
 		} catch (IllegalArgumentException exception) {
+			ErrorView.error(ERROR_PRODUCTS);
 			return false;
 		}
 	}

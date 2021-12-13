@@ -2,6 +2,8 @@ package vendingmachine.validator;
 
 import static vendingmachine.Constants.*;
 
+import vendingmachine.view.ErrorView;
+
 public class CommonValidator {
 	protected static boolean checkString(String string) {
 		try {
@@ -9,6 +11,7 @@ public class CommonValidator {
 			exceptionStringSpace(string);
 			return true;
 		} catch (IllegalArgumentException exception) {
+			ErrorView.error(ERROR_STRING);
 			return false;
 		}
 	}

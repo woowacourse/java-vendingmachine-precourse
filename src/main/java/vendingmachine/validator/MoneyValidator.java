@@ -2,6 +2,8 @@ package vendingmachine.validator;
 
 import static vendingmachine.Constants.*;
 
+import vendingmachine.view.ErrorView;
+
 public class MoneyValidator extends PositiveValidator{
 	public static boolean checkInputMoney(String string) {
 		try {
@@ -10,6 +12,7 @@ public class MoneyValidator extends PositiveValidator{
 			exceptionStringSmallerThanMinimum(string);
 			return true;
 		} catch (IllegalArgumentException exception) {
+			ErrorView.error(ERROR_INPUT_MONEY);
 			return false;
 		}
 	}
