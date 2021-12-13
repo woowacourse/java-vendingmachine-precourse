@@ -32,17 +32,22 @@ public class InputView {
             System.out.println(REQUEST_MENU_INPUT);
             String menuInput = Console.readLine();
             validateMenuInputFormat(menuInput);
-            String[] merchandiseInfos = menuInput.split(SEMICOLON);
 
-            List<Merchandise> merchandiseList = new ArrayList<>();
-            for (String merchandiseInfo : merchandiseInfos) {
-                merchandiseList.add(new Merchandise(merchandiseInfo));
-            }
-            return new Menu(merchandiseList);
+            return generateMenuFromInput(menuInput);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getMenuInput();
         }
+    }
+
+    private static Menu generateMenuFromInput(String menuInput) {
+        String[] merchandiseInfos = menuInput.split(SEMICOLON);
+
+        List<Merchandise> merchandiseList = new ArrayList<>();
+        for (String merchandiseInfo : merchandiseInfos) {
+            merchandiseList.add(new Merchandise(merchandiseInfo));
+        }
+        return new Menu(merchandiseList);
     }
 
     public static int getCustomerMoneyInput() {
