@@ -41,6 +41,8 @@ public class ItemValidator extends Validator {
 			isNumber(price);
 		} catch (IllegalArgumentException e) {
 			throw new IllegalArgumentException("[ERROR] 가격에 숫자를 입력해주세요.");
+		} finally {
+			isDivisible(price);
 		}
 	}
 
