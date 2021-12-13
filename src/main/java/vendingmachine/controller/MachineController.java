@@ -2,18 +2,19 @@ package vendingmachine.controller;
 
 import vendingmachine.service.MachineService;
 import vendingmachine.util.InputValidator;
-import vendingmachine.model.VendingMachine;
-import vendingmachine.util.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class MachineController {
-    private final VendingMachine vendingMachine;
-    private final MachineService machineService;
+    private static MachineController instance;
+    private static MachineService machineService;
 
-    public MachineController(VendingMachine vendingMachine) {
-        this.vendingMachine = vendingMachine;
-        this.machineService = new MachineService(vendingMachine);
+    public static MachineController getInstance() {
+        if (instance == null) {
+            instance = new MachineController();
+            machineService = new MachineService();
+        }
+        return instance;
     }
 
     public void initMachine() {
@@ -24,19 +25,20 @@ public class MachineController {
 
     public void useMachine() {
         InputView.printProductToBuyMessage();
-        while (shouldContinue()) {
+        while (machineService.shouldContinue()) {
+            OutputView.printRemainingInsertAmount(machineService.getUserInsertAmount());
             buyProduct();
         }
     }
 
     public void endMachine() {
-        OutputView.printChanges(vendingMachine.getChanges());
+        OutputView.printChanges(machineService.getChanges());
     }
 
     private void requestInsertInitialAmount() {
         InputView.printInputInitialAmountMessage();
         machineService.saveAmount(inputValidAmount());
-        OutputView.printRemainingCoins(vendingMachine.getCoins());
+        OutputView.printRemainingCoins(machineService.getCoins());
     }
 
     private void requestInsertUserAmount() {
@@ -71,37 +73,15 @@ public class MachineController {
         machineService.saveProducts(inputProducts);
     }
 
-    private boolean shouldContinue() {
-        return hasEnoughInsertAmount() && hasRemainingProducts() && canBuySomething();
-    }
-
-    private boolean hasEnoughInsertAmount() {
-        OutputView.printRemainingInsertAmount(vendingMachine.getUserInsertAmount());
-        return vendingMachine.hasEnoughAmount();
-    }
-
-    private boolean hasRemainingProducts() {
-        return vendingMachine.hasAnyProduct();
-    }
-
-    private boolean canBuySomething() {
-        return vendingMachine.existProductToBuy();
-    }
-
     private void buyProduct() {
         while (true) {
             try {
                 String productName = InputView.getInput();
-                checkProductName(productName);
                 machineService.buyProduct(productName);
                 break;
             } catch (IllegalArgumentException e) {
                 OutputView.printErrorMessage(e);
             }
         }
-    }
-
-    private void checkProductName(String productName) {
-        ProductValidator.isProductInVendingMachine(vendingMachine, productName);
     }
 }

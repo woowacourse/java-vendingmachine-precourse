@@ -38,7 +38,7 @@ public class Products {
         return products.stream()
                 .mapToInt(Product::getPrice)
                 .min()
-                .orElseThrow(IllegalArgumentException::new);
+                .orElse(0);
     }
 
     public boolean isQuantityEnough(String product) {
@@ -56,14 +56,6 @@ public class Products {
                 .findAny().orElse(DEFAULT_VALUE);
     }
 
-    public boolean existsAffordableProduct(int amount) {
-        return DEFAULT_VALUE < products.stream()
-                .filter(p -> p.getQuantity() > DEFAULT_VALUE)
-                .filter(p -> p.getPrice() <= amount)
-                .mapToInt(Product::getQuantity)
-                .sum();
-    }
-
     public int reduceQuantity(String productName) {
         return Objects.requireNonNull(products.stream()
                 .filter(p -> p.getName().equals(productName))
@@ -74,5 +66,31 @@ public class Products {
         return products.stream()
                 .mapToInt(Product::getQuantity)
                 .sum();
+    }
+
+    public boolean hasAnyProduct() {
+        return products.size() > DEFAULT_VALUE;
+    }
+
+    public int existProductToBuy(int amount) {
+        return products.stream()
+                .filter(p -> p.getQuantity() > DEFAULT_VALUE)
+                .filter(p -> p.getPrice() <= amount)
+                .mapToInt(Product::getQuantity)
+                .sum();
+    }
+
+    public int getPrice(String productName) {
+        return products.stream()
+                .filter(p -> p.getName().equals(productName))
+                .mapToInt(Product::getPrice)
+                .findAny().orElse(DEFAULT_VALUE);
+    }
+
+    public Product findByName(String productName) {
+        return products.stream()
+                .filter(p -> p.getName().equals(productName))
+                .findAny()
+                .orElse(null);
     }
 }

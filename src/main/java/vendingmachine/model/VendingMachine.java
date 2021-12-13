@@ -8,10 +8,6 @@ import java.util.TreeMap;
 public class VendingMachine {
     public static final int DEFAULT_VALUE = 0;
     public static final int INCREMENT_BY_ONE = 1;
-    private static final String ERROR_MESSAGE = "[ERROR] ";
-    private static final String NOT_ENOUGH_QUANTITY_MESSAGE = "상품 수량이 부족합니다.";
-    private static final String NOT_ENOUGH_MONEY_MESSAGE = "잔액이 부족합니다.";
-    private static final String TRY_AGAIN_MESSAGE = " 다시 선택해 주세요.";
 
     private final Map<Coin, Integer> coins;
     private Products products;
@@ -48,30 +44,6 @@ public class VendingMachine {
         return products.existProductName(productName);
     }
 
-    public boolean hasEnoughAmount() {
-        return userInsertAmount >= products.getCheapest();
-    }
-
-    public boolean hasAnyProduct() {
-        return products.getSize() > DEFAULT_VALUE;
-    }
-
-    public boolean existProductToBuy() {
-        return products.existsAffordableProduct(userInsertAmount);
-    }
-
-    public void checkProductQuantity(String product) {
-        if (!products.isQuantityEnough(product)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE + NOT_ENOUGH_QUANTITY_MESSAGE + TRY_AGAIN_MESSAGE);
-        }
-    }
-
-    public void popProduct(String product) {
-        if (!products.isAffordable(userInsertAmount, product)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE + NOT_ENOUGH_MONEY_MESSAGE + TRY_AGAIN_MESSAGE);
-        }
-        userInsertAmount -= products.reduceQuantity(product);
-    }
 
     public Map<Coin, Integer> getCoins() {
         return coins;
@@ -109,5 +81,9 @@ public class VendingMachine {
 
     public void setUserInsertAmount(int userInsertAmount) {
         this.userInsertAmount = userInsertAmount;
+    }
+
+    public void reduceAmount(int productPrice) {
+        userInsertAmount -= productPrice;
     }
 }
