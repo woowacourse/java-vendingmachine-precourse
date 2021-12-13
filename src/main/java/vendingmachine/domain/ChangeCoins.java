@@ -12,6 +12,10 @@ public class ChangeCoins {
 		makeChangeCoinsFrom(money);
 	}
 
+	public Map<Coin, Integer> getCoins() {
+		return coins;
+	}
+
 	private void makeChangeCoinsFrom(Long money) {
 		while (money != 0) {
 			Coin selectedCoin = selectCoin(money);

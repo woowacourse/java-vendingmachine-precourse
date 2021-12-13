@@ -27,6 +27,10 @@ public enum Coin {
 		return findCoinByAmount(coinAmount);
 	}
 
+	public String toString() {
+		return String.valueOf(amount);
+	}
+
 	private static int getRandomValidAmount(long money) {
 		int coinAmount;
 		do {
