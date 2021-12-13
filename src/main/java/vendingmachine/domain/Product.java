@@ -30,6 +30,12 @@ public class Product {
 		return productName.equals(checkProductName);
 	}
 
+	public boolean isSameName(Product product) {
+		String productName = this.name.get();
+		String checkProductName = product.name.get();
+		return productName.equals(checkProductName);
+	}
+
 	public boolean canSell() {
 		Money money = MoneyRepository.get();
 		if (money.isLowerThen(price)) {

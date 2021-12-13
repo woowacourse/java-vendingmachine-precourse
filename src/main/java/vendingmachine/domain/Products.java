@@ -14,27 +14,47 @@ public class Products {
 	private static final int NAME_INDEX = 1;
 	private static final int PRICE_INDEX = 2;
 	private static final int QUANTITY_INDEX = 3;
+	private static final long NO_DUPLICATE_CASE = 1;
 
 	private List<Product> products = new ArrayList<>();
 
 	public Products(String input) {
-		for (String individualInput : input.split(SEPARATOR)) {
-			Matcher matcher = PATTERN.matcher(individualInput);
-			validateRegex(matcher);
-			Name name = new Name(matcher.group(NAME_INDEX));
-			Money price = new Money(matcher.group(PRICE_INDEX));
-			Quantity quantity = new Quantity(matcher.group(QUANTITY_INDEX));
-			products.add(new Product(name, price, quantity));
-		}
+		List<Product> newProducts = toProductList(input);
+		validateDuplicateName(newProducts);
+		products.addAll(newProducts);
 	}
 
 	public void save() {
 		products.forEach(ProductRepository::save);
 	}
 
+	private List<Product> toProductList(String input) {
+		List<Product> newProducts = new ArrayList<>();
+		for (String individualInput : input.split(SEPARATOR)) {
+			Matcher matcher = PATTERN.matcher(individualInput);
+			validateRegex(matcher);
+			Name name = new Name(matcher.group(NAME_INDEX));
+			Money price = new Money(matcher.group(PRICE_INDEX));
+			Quantity quantity = new Quantity(matcher.group(QUANTITY_INDEX));
+			newProducts.add(new Product(name, price, quantity));
+		}
+		return newProducts;
+	}
+
 	private void validateRegex(Matcher matcher) {
 		if (!matcher.find()) {
 			throw new IllegalArgumentException(PRODUCT_INVALID_FORMAT_ERROR_MESSAGE.get());
+		}
+	}
+
+	private void validateDuplicateName(List<Product> newProducts) {
+		for (Product newProduct : newProducts) {
+			long count = newProducts.stream()
+				.filter(product -> product.isSameName(newProduct))
+				.count();
+			if (count != NO_DUPLICATE_CASE) {
+				throw new IllegalArgumentException(PRODUCT_DUPLICATE_NAME_ERROR_MESSAGE.get());
+			}
 		}
 	}
 }
