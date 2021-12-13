@@ -2,99 +2,92 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
-
 import java.util.*;
-import java.util.regex.Pattern;
-
-import static vendingmachine.Application.USER_MONEY;
-import static vendingmachine.Validation.isUserMoneyAndMachineInventoryEnough;
+import static vendingmachine.Validation.*;
 
 public class VendingMachine {
-
     private int machineOwnMoney;
 
-    public VendingMachine(int machineOwnMoney){
-        this.machineOwnMoney = machineOwnMoney;
-    }
-
-
-    public static void startVendingMachine(ArrayList<Product> products){
-        while(isUserMoneyAndMachineInventoryEnough(products)){
+    public VendingMachine(){
+        VALIDATION_SUCCESS = true;
+        while(VALIDATION_SUCCESS) {
             try {
-                purchaseProduct(products);
+                View.inputMsgOnVendingMachine();
+                String machineOwnMoney = Console.readLine();
+                Validation.machineOwnMoneyValidation(machineOwnMoney);
+                VALIDATION_SUCCESS = false;
+                this.machineOwnMoney = Integer.parseInt(machineOwnMoney);
             } catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+                View.noticeMsgOnException(e.getMessage());
             }
         }
-        changesBack();
-    }
+    } // 생성자 종료
 
-
-    public static HashMap<Integer, Integer> changesBack(){
-        HashMap<Integer, Integer> changes = new HashMap<>();
-        Coin[] eachCoin = Coin.values();
-        for(Coin c: eachCoin){
-            findChanges(c, changes);
+    public void startVendingMachine(ArrayList<Product> productList, User user){
+        while(isUserMoneyAndMachineInventoryEnough(productList, user.getUserOwnMoney())){
+            try {
+                user.purchaseProduct(productList);
+            } catch (IllegalArgumentException e){
+                View.noticeMsgOnException(e.getMessage());
+            }
         }
-        printChanges(changes);
-        return changes;
+        changesBackToUser(user);
     }
 
-    public static void printChanges(HashMap<Integer, Integer> changes){
+    public void changesBackToUser(User user){
+        HashMap<Integer, Integer> changes = new HashMap<>();
+        for(Coin coin: Coin.values()){
+            changes.put(coin.getAmount(), coin.calculateChangesCoin(user));
+        }
         List<Map.Entry<Integer, Integer>> entryList = new LinkedList<>(changes.entrySet());
         entryList.sort((o1, o2) -> o2.getKey() - o1.getKey());
-        System.out.println("잔");
+        View.noticeMsgOnChanges();
         for(Map.Entry<Integer, Integer> entry : entryList){
             if(entry.getValue() != 0){
-                System.out.println(entry.getKey() + "원 - " + entry.getValue() + "개");
+                View.noticeMsgOnEachChanges(entry);
             }
         }
     }
 
-    public static void findChanges(Coin coin, HashMap<Integer, Integer> changes){
-        if(coin.getAmount() < USER_MONEY && coin.getCount() > 0 && USER_MONEY >= 10){
-            int coinCount = USER_MONEY / coin.getAmount();
-            if(USER_MONEY / coin.getAmount() > coin.getCount()){
-                coinCount = coin.getCount();
-            }
-            changes.put(coin.getAmount(), coinCount);
-            USER_MONEY -= coinCount * coin.getAmount();
-        }
-    }
-
-
-    public static void printCurrentMachineCoin(){
-        System.out.println("자판기가 보유한 동전");
-        Coin[] eachCoin = Coin.values();
-        for(Coin c: eachCoin){
-            System.out.println(c.getAmount()+"원 - " + c.getCount()+"개");
-        }
-    }
-
-    public static void setRandomCountToEachCoin(){
-        int tempMachineOwnMoney = MACHINE_OWN_MONEY;
-        int selectedCoin;
-
+    public void setRandomValueToEachCoin(){
+        int tempMachineOwnMoney = this.machineOwnMoney;
         while(tempMachineOwnMoney != 0) {
-            selectedCoin = Randoms.pickNumberInList(Coin.getCoinList());
+            int selectedCoin = Randoms.pickNumberInList(Coin.getCoinList());
             if(tempMachineOwnMoney / selectedCoin > 0){
                 Coin.valueOf("COIN_" + selectedCoin).addCount();
                 tempMachineOwnMoney -= selectedCoin;
             }
         }
+        View.noticeMsgOnCoins();
+        for(Coin c: Coin.values()){
+            View.noticeMsgOnEachCoin(c);
+        }
     }
 
-    public static int inputMachineOwnMoney(){
-        String machineOwnMoney = "";
-        while(machineOwnMoney.isEmpty()) {
+    public ArrayList<Product> insertProductToVendingMachine(){
+        ArrayList<String> productStringList = new ArrayList<>();
+        VALIDATION_SUCCESS = true;
+        while(VALIDATION_SUCCESS) {
             try {
-                System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-                machineOwnMoney = Console.readLine();
-                inputMachineOwnMoneyAndValidation(machineOwnMoney);
+                View.inputMsgOnProduct();
+                productStringList = Validation.stringParsingToList(Console.readLine());
+                Validation.inputProductValidation(productStringList); // 상품명은 한글, 영어, 숫자, 특수문자 모두 가능하다. (ex. 비타500, 토레타!, 2%)
+                VALIDATION_SUCCESS = false;
             } catch (IllegalArgumentException e){
-                System.out.println(e.getMessage());
+                View.noticeMsgOnException(e.getMessage());
             }
         }
-        return Integer.parseInt(machineOwnMoney);
+        return Product.createProductList(productStringList);
+    }
+
+    public static Product isSelectedProductInVendingMachine(ArrayList<Product> productList, String selectedProduct) {
+        Product foundProduct = null;
+        for (Product product : productList) {
+            if (product.getName().equals(selectedProduct)) {
+                foundProduct = product;
+                break;
+            }
+        }
+        return foundProduct;
     }
 }
