@@ -14,7 +14,6 @@ public class Coins {
 	private static final String ERROR_COINS_AMOUNT_NOT_TEN_PERCENT_DIVISION = "보유금액은 10의 단위로 나누어 떨어져야 합니다.";
 	private static final String ERROR_COINS_NOT_ZERO_OVER = "보유금액은 금액은 0원 이상이여야 합니다.";
 
-
 	private final Map<Coin, Integer> coins;
 
 	private Coins(Map<Coin, Integer> coins) {
@@ -35,7 +34,7 @@ public class Coins {
 
 	private static void isValidateCoinsAmount10PercentDivision(int coinsAmount) {
 		if (coinsAmount % COINS_NUM_DIVISION_STANDARD != COIN_AMOUNT_ZERO) {
-			throw new IllegalArgumentException(ERROR_COINS_AMOUNT_NOT_TEN_PERCENT_DIVISION );
+			throw new IllegalArgumentException(ERROR_COINS_AMOUNT_NOT_TEN_PERCENT_DIVISION);
 		}
 	}
 
