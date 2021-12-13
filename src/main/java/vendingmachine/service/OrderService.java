@@ -50,10 +50,7 @@ public class OrderService {
         if (compareLowestAndRemainder()) {
             return true;
         }
-        if (products.isOutOfStock()) {
-            return true;
-        }
-        return false;
+        return products.isOutOfStock();
     }
 
     public boolean compareLowestAndRemainder() {
