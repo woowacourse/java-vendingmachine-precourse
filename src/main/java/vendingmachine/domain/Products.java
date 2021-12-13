@@ -16,10 +16,12 @@ public class Products {
 
 	public Money getCheapestPrice() {
 		Collections.sort(products);
-		if (products.isEmpty()) {
-			return new Money(0);
+		for (Product product : products) {
+			if (!product.soldOut()) {
+				return product.getPrice();
+			}
 		}
-		return products.get(0).getPrice();
+		return new Money(0);
 	}
 
 	public boolean soldOut() {
@@ -29,10 +31,6 @@ public class Products {
 			}
 		}
 		return true;
-	}
-
-	public boolean isBuy(Money insertMoney) {
-		return !products.isEmpty() && !(getCheapestPrice().compareTo(insertMoney) > 0);
 	}
 
 	public Product findForName(String productName) {

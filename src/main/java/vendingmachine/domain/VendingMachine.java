@@ -23,9 +23,8 @@ public class VendingMachine {
 		insertMoney = insertMoney.subtract(product.getPrice());
 	}
 
-
 	public boolean isBuy() {
-		return (!products.soldOut() || products.isBuy(insertMoney));
+		return !(products.soldOut() || products.getCheapestPrice().compareTo(insertMoney) > 0);
 	}
 
 	public boolean isBuy(String productName) {
