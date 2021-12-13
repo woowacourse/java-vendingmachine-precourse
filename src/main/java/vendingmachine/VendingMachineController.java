@@ -18,7 +18,6 @@ public class VendingMachineController {
 		vendingMachine.holdingCoins = vendingMachine.makeCoins();
 		OutputView.printHoldingCoins(vendingMachine.holdingCoins);
 		vendingMachine.holdingItemList = InputView.holdingItemsInput();
-
 	}
 
 	public void buy(VendingMachine vendingMachine) {
@@ -26,9 +25,7 @@ public class VendingMachineController {
 		String buyItem;
 		while (vendingMachine.isAvailableKeepBuyingAboutPrice() && vendingMachine.isAvailableKeepBuyingAboutStock()) {
 			OutputView.printBalance(vendingMachine);
-			do {
-				buyItem = InputView.buyItemInput();
-			} while (!vendingMachine.isPurchasableItem(buyItem));
+			buyItem = InputView.buyItemInput(vendingMachine.holdingItemList, vendingMachine.inputMoney);
 			vendingMachine.stockDeduct(buyItem);
 			vendingMachine.inputMoneyDeduct(buyItem);
 		}

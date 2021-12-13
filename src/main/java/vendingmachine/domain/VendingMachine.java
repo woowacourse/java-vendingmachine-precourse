@@ -51,25 +51,7 @@ public class VendingMachine {
 		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);
 	}
 
-	public void nonExistItemError(String buyItem) {
-		boolean isExistedItem = false;
-		for (int i = 0; i < holdingItemList.size(); i++) {
-			if (holdingItemList.get(i).getName().equals(buyItem)) {
-				isExistedItem = true;
-			}
-		}
-		if (isExistedItem == false) {
-			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
-		}
-	}
 
-	public void nonEnoughMoneyError(String buyItem) {
-		for (int i = 0; i < holdingItemList.size(); i++) {
-			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
-				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
-			}
-		}
-	}
 
 	public boolean isAvailableKeepBuyingAboutPrice() {
 		boolean isAvailableKeepBuyingAboutPrice = false;
@@ -91,17 +73,7 @@ public class VendingMachine {
 		return isAvailableKeepBuyingAboutStock;
 	}
 
-	public boolean isPurchasableItem(String buyItem) {
-		boolean isPurchasableItem = true;
-		try {
-			nonExistItemError(buyItem);
-			nonEnoughMoneyError(buyItem);
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			isPurchasableItem = false;
-		}
-		return isPurchasableItem;
-	}
+
 
 	public String inputMoneyToString() {
 		return inputMoney + "원";

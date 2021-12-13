@@ -63,11 +63,12 @@ public class InputView {
 		return inputMoney;
 	}
 
-	public static String buyItemInput() {
+	public static String buyItemInput(ArrayList<Item> holdingItemList, int inputMoney) {
 		String buyItem = "";
-
-		System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
-		buyItem = Console.readLine();
+		do {
+			System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
+			buyItem = Console.readLine();
+		} while(!isPurchasableItem(buyItem, holdingItemList, inputMoney));
 		System.out.println();
 		return buyItem;
 	}
@@ -133,6 +134,18 @@ public class InputView {
 		return isRightItemInput;
 	}
 
+	public static boolean isPurchasableItem(String buyItem, ArrayList<Item> holdingItemList, int inputMoney) {
+		boolean isPurchasableItem = true;
+		try {
+			nonExistItemError(buyItem, holdingItemList);
+			nonEnoughMoneyError(buyItem, holdingItemList, inputMoney);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			isPurchasableItem = false;
+		}
+		return isPurchasableItem;
+	}
+
 	public static void nonNumericError(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
 			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_MIN || CHAR_NUMERIC_MAX < stringHoldingMoney.charAt(
@@ -170,6 +183,26 @@ public class InputView {
 		for (int i = 0; i < itemStringArray.length; i++) {
 			if (!Pattern.matches(REGEX, itemStringArray[i])) {
 				throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
+			}
+		}
+	}
+
+	public static void nonExistItemError(String buyItem, ArrayList<Item> holdingItemList) {
+		boolean isExistedItem = false;
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem)) {
+				isExistedItem = true;
+			}
+		}
+		if (isExistedItem == false) {
+			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
+		}
+	}
+
+	public static void nonEnoughMoneyError(String buyItem, ArrayList<Item> holdingItemList, int inputMoney) {
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
+				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
 			}
 		}
 	}
