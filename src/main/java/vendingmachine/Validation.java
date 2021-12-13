@@ -1,8 +1,11 @@
 package vendingmachine;
 
+import java.util.HashSet;
+
 public class Validation {
     private Message message = new Message();
     private Products products = new Products();
+    private HashSet<String> nameSet = new HashSet<>();
 
     public boolean isValidateNumber(String input) {
         try {
@@ -23,12 +26,22 @@ public class Validation {
                 isInBrackets(s);
                 String removedBrackets = removeBrackets(s);
                 isFormat(removedBrackets);
-                return true;
+                isUniqueName(s);
             } catch (IllegalArgumentException e) {
                 message.printInputCorrectFormat();
+                return false;
             }
         }
-        return false;
+        return true;
+    }
+
+    private void isUniqueName(String s) throws IllegalArgumentException {
+        String[] divided = s.split(",");
+        String name = divided[0].substring(1);
+        if (nameSet.contains(name)) {
+            throw new IllegalArgumentException();
+        }
+        nameSet.add(name);
     }
 
     private void isSpace(String input) throws IllegalArgumentException {
