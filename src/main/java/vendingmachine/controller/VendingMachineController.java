@@ -42,6 +42,7 @@ public class VendingMachineController {
 				System.out.println(money.toString());
 				OutputView.printItemPerChaseRequest();
 				Item item = items.findItemByName(inputView.scanItemName(), money);
+				item.sell();
 				money.pay(item.getCost());
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());

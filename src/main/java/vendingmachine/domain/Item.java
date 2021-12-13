@@ -9,7 +9,7 @@ public class Item {
 
 	private final String name;
 	private final int cost;
-	private final int amount;
+	private int amount;
 
 	public Item(List<String> detailContainer) {
 		checkLength(detailContainer);
@@ -50,5 +50,9 @@ public class Item {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	public void sell() {
+		amount --;
 	}
 }
