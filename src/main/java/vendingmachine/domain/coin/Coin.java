@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.exception.NoMatchingCoinException;
 
 public enum Coin {
 	COIN_500(500),
@@ -18,19 +19,10 @@ public enum Coin {
 	}
 
 	public static Coin from(int amount) {
-		if (amount == COIN_500.getAmount()) {
-			return COIN_500;
-		}
-
-		if (amount == COIN_100.getAmount()) {
-			return COIN_100;
-		}
-
-		if (amount == COIN_50.getAmount()) {
-			return COIN_50;
-		}
-
-		return COIN_10;
+		return Arrays.stream(Coin.values())
+			.filter(coin -> coin.getAmount() == amount)
+			.findFirst()
+			.orElseThrow(NoMatchingCoinException::new);
 	}
 
 	public static Coin pickRandomWithLimit(int balanceLimit) {
@@ -50,7 +42,6 @@ public enum Coin {
 		);
 
 		return Coin.from(pickedAmount);
-
 	}
 
 	public int getAmount() {
