@@ -26,8 +26,12 @@ public class ProductArgumentResolver {
         return Arrays.stream(splitProducts(this.products))
                 .filter(this::isCoveredBrackets)
                 .map(this::splitProduct)
-                .map(split -> new Product(split[NAME_INDEX], toInt(PRICE_INDEX, split), toInt(QUANTITY_INDEX, split)))
+                .map(this::newProduct)
                 .collect(Collectors.toList());
+    }
+
+    private Product newProduct(String[] split) {
+        return new Product(split[NAME_INDEX].trim(), toInt(PRICE_INDEX, split), toInt(QUANTITY_INDEX, split));
     }
 
     private String[] splitProducts(String products) {

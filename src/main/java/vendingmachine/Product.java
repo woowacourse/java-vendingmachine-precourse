@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Objects;
+
 public class Product {
     private static final int EMPTY_QUANTITY = 0;
 
@@ -8,9 +10,16 @@ public class Product {
     private int quantity;
 
     public Product(String name, int price, int quantity) {
+        validateName(name);
         this.name = name;
         this.price = price;
         this.quantity = quantity;
+    }
+
+    private void validateName(String name) {
+        if (Objects.isNull(name) || name.isEmpty()) {
+            throw ErrorMessage.INVALID_PRODUCT_NAME.getException();
+        }
     }
 
     public boolean isEqualToName(String name) {
