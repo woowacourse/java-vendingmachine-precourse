@@ -41,13 +41,18 @@
 ## vendingmachine 패키기 구성
 
 ```
+ constants
+  - StringConstants.java
+  
  servicesource
-  - Coin.java
+  - wallet
+    - Coin.java
+    - WalletSystem.java
+    - WalletPrinter.java
+    
   - MachineStock.java
   - Product.java
   - VendingMachine.java
-  - WalletSystem.java
-  - WalletPrinter.java
   
  utils
   - datatypechecker
@@ -94,6 +99,9 @@
   - 남은 투입 금액을 출력하는 함수
   - 잔돈을 반환하는 함수
     - 최소 개수로 반환하는 알고리즘 구현
+
+- StringConstants class
+  - 문자열 상수를 저장 
 
 - StringChecker class
   - 문자열관련 확인 기능을 담당하는 클래스
