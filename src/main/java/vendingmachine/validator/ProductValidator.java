@@ -36,7 +36,7 @@ public class ProductValidator {
 	}
 
 	private static void checkAmount(String amount) {
-		if (Integer.parseInt(amount) < 0) {
+		if (Integer.parseInt(amount) <= 0) {
 			throw new IllegalArgumentException(PRODUCT_AMOUNT_ERROR);
 		}
 	}
