@@ -12,6 +12,10 @@ public class DepositManager {
 		initDeposit();
 	}
 
+	public int getDeposit() {
+		return deposit.get();
+	}
+
 	private void initDeposit() {
 		isAmount validator = new isAmount();
 		String input = new InputManager().getStringWithInput(validator);

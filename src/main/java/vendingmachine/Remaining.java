@@ -38,7 +38,6 @@ public class Remaining<T> {
 		return remain.containsKey(t);
 	}
 
-
 	public Set<T> keySet() {
 		return remain.keySet();
 	}
