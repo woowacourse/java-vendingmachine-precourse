@@ -1,7 +1,7 @@
 package vendingmachine;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 값을 분석해서 Item 객체를 만드는 model class
@@ -13,21 +13,20 @@ import java.util.Map;
 public class ItemParser {
 	private static final String ITEM_SEPARATOR = ";";
 
-	public Map<String, Item> mapItemsFrom(String string) {
-		Map<String, Item> items = new HashMap<>();
+	public List<Item> listFrom(String string) {
+		List<Item> items = new ArrayList<>();
 		String[] stringItems = string.split(ITEM_SEPARATOR);
 		for (String stringItem : stringItems) {
 			Item item = Item.from(stringItem);
 			validateDuplicate(items, item);
-			items.put(item.getName(), item);
+			items.add(item);
 		}
 		return items;
 	}
 
-	private void validateDuplicate(Map<String, Item> items, Item item) {
-		if (!items.containsKey(item.getName())) {
-			return;
+	private void validateDuplicate(List<Item> items, Item item) {
+		if (items.stream().anyMatch(existingItem -> existingItem.hasSameNameWith(item))) {
+			throw new IllegalArgumentException(Error.DUPLICATE_ITEM.getMassage());
 		}
-		throw new IllegalArgumentException(Error.DUPLICATE_ITEM.getMassage());
 	}
 }

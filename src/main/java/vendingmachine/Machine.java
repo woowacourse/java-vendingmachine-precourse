@@ -1,6 +1,6 @@
 package vendingmachine;
 
-import java.util.Map;
+import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -39,7 +39,7 @@ public class Machine {
 	}
 
 	private void prepareItems() {
-		this.itemManager = new ItemManager(mapItems());
+		this.itemManager = new ItemManager(listItems());
 		display.printBlankLine();
 	}
 
@@ -67,13 +67,13 @@ public class Machine {
 		}
 	}
 
-	private Map<String, Item> mapItems() {
+	private List<Item> listItems() {
 		display.askItems();
 		try {
-			return itemParser.mapItemsFrom(Console.readLine());
+			return itemParser.listFrom(Console.readLine());
 		} catch (IllegalArgumentException e) {
 			display.printError(e);
-			return mapItems();
+			return listItems();
 		}
 	}
 

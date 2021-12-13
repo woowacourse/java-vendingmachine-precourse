@@ -9,7 +9,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Map;
+import java.util.List;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -46,14 +46,14 @@ class ApplicationTest extends NsTest {
     @Test
     void 아이템_목록_생성_테스트() {
         ItemParser itemParser = new ItemParser();
-        Map<String, Item> items = itemParser.mapItemsFrom("[콜라,1000,10];[사이다,1200,15]");
-        assertThat(items.get("콜라")).isInstanceOf(Item.class);
+        List<Item> items = itemParser.listFrom("[콜라,1000,10];[사이다,1200,15]");
+        assertThat(items.get(0).isName("콜라")).isTrue();
     }
 
     @Test
     void 상품_목록_형식_검사_테스트() {
         ItemParser itemParser = new ItemParser();
-        assertThrows(IllegalArgumentException.class, () -> itemParser.mapItemsFrom("[콜라,1000,1"));
+        assertThrows(IllegalArgumentException.class, () -> itemParser.listFrom("[콜라,1000,1"));
     }
 
     @Override

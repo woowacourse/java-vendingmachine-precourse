@@ -44,16 +44,20 @@ public class Item {
 			Validator.stringToInteger(properties[COUNT_INDEX]));
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public int getPrice() {
 		return price;
 	}
 
 	public void takeOne() {
 		count--;
+	}
+
+	public boolean isName(String name) {
+		return this.name.equals(name);
+	}
+
+	public boolean hasSameNameWith(Item item) {
+		return isName(item.name);
 	}
 
 	public boolean isSoldOut() {

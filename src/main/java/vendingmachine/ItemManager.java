@@ -1,7 +1,7 @@
 package vendingmachine;
 
 import java.util.Comparator;
-import java.util.Map;
+import java.util.List;
 
 /**
  * 자판기의 상품 재고를 관리하는 model class
@@ -11,20 +11,20 @@ import java.util.Map;
  * @since 1.0
  */
 public class ItemManager {
-	private final Map<String, Item> items;
+	private final List<Item> items;
 
-	public ItemManager(Map<String, Item> items) {
+	public ItemManager(List<Item> items) {
 		this.items = items;
 	}
 
 	public int getMinPrice() {
-		Item cheapestItem = items.values().stream()
+		Item cheapestItem = items.stream()
 			.min(Comparator.comparingInt(Item::getPrice)).get();
 		return cheapestItem.getPrice();
 	}
 
 	public boolean hasItem(String name) {
-		return items.containsKey(name);
+		return items.stream().anyMatch(item -> item.isName(name));
 	}
 
 	public boolean isAllSoldOut() {
@@ -33,12 +33,12 @@ public class ItemManager {
 
 	public Item takeOne(String name) {
 		validateBuyingItem(name);
-		Item item = items.get(name);
-		item.takeOne();
-		if (item.isSoldOut()) {
-			items.remove(name);
+		Item buyingItem = items.stream().filter(item -> item.isName(name)).findFirst().get();
+		buyingItem.takeOne();
+		if (buyingItem.isSoldOut()) {
+			items.remove(buyingItem);
 		}
-		return item;
+		return buyingItem;
 	}
 
 	private void validateBuyingItem(String name) {
