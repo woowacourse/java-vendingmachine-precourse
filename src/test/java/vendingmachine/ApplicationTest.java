@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
+import vendingmachine.service.MoneyService;
 import vendingmachine.service.ProductService;
 
 import java.util.Arrays;
@@ -12,6 +13,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberI
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static vendingmachine.utils.VerificationUtil.validateHoldingAmount;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -103,5 +105,19 @@ class ApplicationTest extends NsTest {
                 50, 50, 50, 50, 50,
                 10, 10, 10, 10, 10
         );
+    }
+
+    @Test
+    public void 십단위_아닌_금액_테스트() throws Exception {
+        //given
+        MoneyService moneyService = new MoneyService();
+
+        //when
+        String input = "123";
+
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            validateHoldingAmount(input);
+        });
     }
 }
