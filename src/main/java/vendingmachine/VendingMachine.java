@@ -48,13 +48,12 @@ public class VendingMachine {
 		String inputItem;
 		do {
 			inputItem = inputView.getInputItem();
-		} while(!InputItemValidator.isValidated(inputItem));
+		} while (!InputItemValidator.isValidated(inputItem));
 		return inputItem;
 	}
 
 	private void setItems(String inputItem) {
-		List<String> itemStrings = new ArrayList<>();
-		itemStrings = Arrays.asList(inputItem.split(";"));
+		String[] itemStrings = inputItem.split(";");
 		for (String itemString : itemStrings) {
 			itemString = itemString.replace("[", "").replace("]", "");
 			String[] itemInfos = itemString.split(SPLIT_REGEX);
@@ -76,14 +75,14 @@ public class VendingMachine {
 			outputView.printUserAmount(userAmount);
 			buyItemName = getInputBuyItem();
 			buyItem(buyItemName);
-		} while(true);
+		} while (couldRepeatBuyItem());
 	}
 
 	private String getInputBuyItem() {
 		String inputBuyItem;
 		do {
 			inputBuyItem = inputView.getInputBuyItem();
-		} while(!InputBuyItemValidator.isValidated(inputBuyItem, items));
+		} while (!InputBuyItemValidator.isValidated(inputBuyItem, items));
 		return inputBuyItem;
 	}
 
@@ -93,7 +92,54 @@ public class VendingMachine {
 		userAmount -= item.getPrice();
 	}
 
-	// private boolean couldRepeatBuyItem() {
-	//
-	// }
+	private boolean couldRepeatBuyItem() {
+		return checkRemainUserAmount() && checkRemainItemNumber();
+	}
+
+	private boolean checkRemainUserAmount() {
+		Integer[] prices = items.values().stream()
+			.map(Item::getPrice)
+			.toArray(Integer[]::new);
+
+		Arrays.sort(prices);
+
+		return userAmount >= prices[0];
+	}
+
+	private boolean checkRemainItemNumber() {
+		for (Item item : items.values()) {
+			if (item.getNumber() != 0) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void returnCoin() {
+		outputView.printUserAmount(userAmount);
+
+		HashMap<Coin, Integer> returnCoins = new HashMap<>();
+		getReturnCoin(returnCoins);
+
+		outputView.printReturnCoin(returnCoins);
+	}
+
+	private void getReturnCoin(HashMap<Coin, Integer> returnCoins) {
+		for (Coin coin : Coin.values()) {
+			calculateReturnCoin(returnCoins, coin);
+		}
+	}
+
+	private void calculateReturnCoin(HashMap<Coin, Integer> returnCoins, Coin coin) {
+		int returnCoinNumber = 0;
+		for (int i = 0; i < coins.get(coin); i++) {
+			if (userAmount - coin.getAmount() >= 0) {
+				returnCoinNumber++;
+				userAmount -= coin.getAmount();
+			}
+		}
+		if (returnCoinNumber > 0) {
+			returnCoins.put(coin, returnCoinNumber);
+		}
+	}
 }
