@@ -29,6 +29,10 @@ public class Money implements Comparable<Money> {
 		return new Money(amount);
 	}
 
+	public static Money from(String amount) {
+		return new Money(Integer.parseInt(amount));
+	}
+
 	public int getAmount() {
 		return amount;
 	}
