@@ -17,14 +17,13 @@ public class VendingMachineController {
 	}
 
 	private void runVendingMachine(VendingMachine vendingMachine) {
-		while(true){
-			if (!vendingMachine.haveAffordableItem()) {
-				// 잔돈 반환 기능
-				return;
-			}
-			// 구매기능
-			buyItem(vendingMachine);
+		if (!vendingMachine.haveAffordableItem()) {
+			// 잔돈 반환 기능
+			return;
 		}
+		// 구매기능
+		buyItem(vendingMachine);
+		runVendingMachine(vendingMachine);
 	}
 
 	private void buyItem(VendingMachine vendingMachine) {
