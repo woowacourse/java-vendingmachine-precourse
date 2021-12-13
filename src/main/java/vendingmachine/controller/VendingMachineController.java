@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.util.util;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.InputView;
 
@@ -8,8 +9,10 @@ public class VendingMachineController {
 	Validator validator = new Validator();
 
 	public void runMachine() {
-		String machineMoney = enterMoney();
 		//금액 입력받기
+		String machineMoney = enterMoney();
+		//금액 int로 변경
+		int money = util.moneyConverter(machineMoney);
 		//자판기에게 금액 센팅
 		//동전 생성
 		//상품명 입력받기
