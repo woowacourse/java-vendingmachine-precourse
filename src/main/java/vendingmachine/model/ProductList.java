@@ -36,4 +36,14 @@ public class ProductList {
 			productList.add(new Product(productStrings[PRODUCT_NAME_IDX], productStrings[PRODUCT_PRICE_IDX], productStrings[PRODUCT_STOCK_IDX]));
 		}
 	}
+
+	public boolean isRemainProduct() {
+		for (Product product:
+			 productList) {
+			if (!product.isRemain())
+				return false;
+			}
+		return true;
+		}
+	}
 }

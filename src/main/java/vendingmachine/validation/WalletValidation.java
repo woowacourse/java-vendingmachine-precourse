@@ -8,5 +8,4 @@ public class WalletValidation {
 		UtilValidation.isNaturalNumber(value);
 		UtilValidation.canDivideMinCoin(value);
 	}
-
 }

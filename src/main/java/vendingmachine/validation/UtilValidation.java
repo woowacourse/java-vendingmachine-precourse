@@ -30,5 +30,4 @@ public class UtilValidation {
 			throw (new IllegalArgumentException("값이 " + target + "보다 작습니다."));
 		}
 	}
-
 }

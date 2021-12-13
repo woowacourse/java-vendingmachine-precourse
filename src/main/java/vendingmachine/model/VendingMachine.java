@@ -10,4 +10,10 @@ public class VendingMachine {
 		productList = new ProductList();
 	}
 
+	public boolean isRemainProduct() {
+		return productList.isRemainProduct();
+	}
+
+	public boolean canBuy(User user) {
+	}
 }

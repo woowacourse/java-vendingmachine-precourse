@@ -14,6 +14,8 @@ public class VendingMachineController {
 	}
 
 	public void run() {
+		while (vendingMachine.isRemainProduct() && vendingMachine.canBuy(user)) {
 
+		}
 	}
 }

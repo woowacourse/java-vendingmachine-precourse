@@ -16,12 +16,7 @@ public class Product {
 		this.stock = Integer.parseInt(stock);
 	}
 
-	@Override
-	public String toString() {
-		return "Product{" +
-			"name='" + name + '\'' +
-			", price=" + price +
-			", stock=" + stock +
-			'}';
+	public boolean isRemain() {
+		return stock > 0;
 	}
 }

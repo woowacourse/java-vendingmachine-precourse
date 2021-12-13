@@ -20,6 +20,5 @@ public class User {
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.illegalArgumentException(illegalArgumentException.getMessage());
 		}
-
 	}
 }

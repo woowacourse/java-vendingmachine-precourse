@@ -7,5 +7,4 @@ public class UserValidation {
 		int value = Integer.parseInt(input);
 		UtilValidation.isNaturalNumber(value);
 	}
-
 }

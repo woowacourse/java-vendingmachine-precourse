@@ -10,5 +10,4 @@ public class Constants {
 	public static int PRODUCT_NAME_IDX = 0;
 	public static int PRODUCT_PRICE_IDX = 1;
 	public static int PRODUCT_STOCK_IDX = 2;
-
 }
