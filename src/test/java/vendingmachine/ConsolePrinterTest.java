@@ -1,0 +1,87 @@
+package vendingmachine;
+
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import vendingmachine.domain.CashHolder;
+import vendingmachine.domain.Changes;
+import vendingmachine.utils.ConsolePrinter;
+
+public class ConsolePrinterTest {
+
+    ByteArrayOutputStream capture;
+    PrintStream sysout;
+
+    @BeforeEach
+    void setUp() {
+        sysout = System.out;
+        capture = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(capture));
+    }
+
+    @AfterEach
+    void tearDown() {
+        System.setOut(sysout);
+    }
+
+    String out() {
+        return capture.toString();
+    }
+
+    @Test
+    void returnChangeTest() {
+        Map<Coin, Integer> testCase = new HashMap<Coin, Integer>() {{
+            put(Coin.COIN_500, 1);
+            put(Coin.COIN_100, 3);
+        }};
+        ConsolePrinter printer = new ConsolePrinter();
+        printer.printChanges(new Changes(testCase));
+        assertThat(out()).isEqualTo(
+            "잔돈\n500원 - 1개\n100원 - 3개\n"
+        );
+    }
+
+    @Test
+    void emptyChangeTest() {
+        ConsolePrinter printer = new ConsolePrinter();
+        printer.printChanges(new Changes(new HashMap<>()));
+        assertThat(out()).isEqualTo(
+            "잔돈\n"
+        );
+    }
+
+    @Test
+    void extremeCountTest() {
+        Map<Coin, Integer> testCase = new HashMap<Coin, Integer>() {{
+            put(Coin.COIN_500, Integer.MAX_VALUE);
+        }};
+        ConsolePrinter printer = new ConsolePrinter();
+        printer.printChanges(new Changes(testCase));
+        assertThat(out()).isEqualTo(
+            "잔돈\n500원 - " + Integer.MAX_VALUE + "개\n"
+        );
+    }
+
+    @Test
+    void holdingAmountTest() {
+        ConsolePrinter printer = new ConsolePrinter();
+        CashHolder cashHolder = mock(CashHolder.class);
+        when(cashHolder.getHoldingCoinCount(any())).thenReturn(1);
+        printer.printHoldingAmount(cashHolder);
+        String answer = "보유금액\n" + Arrays.stream(Coin.values())
+            .map(c -> c.getName() + " - " + 1 + "개")
+            .collect(Collectors.joining("\n")) + "\n";
+        assertThat(out()).isEqualTo(answer);
+    }
+}
