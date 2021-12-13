@@ -14,6 +14,8 @@ public class ProductArgumentResolver {
     private static final int PRICE_INDEX = 1;
     private static final int QUANTITY_INDEX = 2;
 
+    private static final int PRODUCT_LENGTH = 3;
+
     private final String products;
 
     public ProductArgumentResolver(String products) {
@@ -40,7 +42,11 @@ public class ProductArgumentResolver {
     }
 
     private String[] splitProduct(String product) {
-        return product.substring(1, product.length() - 1).split(PRODUCT_DELIMITER);
+        String[] split = product.substring(1, product.length() - 1).split(PRODUCT_DELIMITER);
+        if (split.length == PRODUCT_LENGTH) {
+            return split;
+        }
+        throw ErrorMessage.INVALID_DELIMITER.getException();
     }
 
     private int toInt(int priceIndex, String[] split) {
