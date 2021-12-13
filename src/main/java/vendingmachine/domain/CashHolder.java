@@ -18,9 +18,8 @@ public class CashHolder {
         this.coins = fillChanges(totalAmount, new HashMap<>());
     }
 
-    public void returnChanges(int amount) {
-        Map<Coin, Integer> result = calculateChanges(amount, new HashMap<>());
-        // TODO UI Logic print changes
+    public Changes returnChanges(InputAmount inputAmount) {
+        return new Changes(calculateChanges(inputAmount.getAmount(), new HashMap<>()));
     }
 
     private Map<Coin, Integer> calculateChanges(int amount, Map<Coin, Integer> changes) {
