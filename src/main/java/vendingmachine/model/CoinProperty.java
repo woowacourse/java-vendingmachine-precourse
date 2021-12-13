@@ -8,8 +8,9 @@ import vendingmachine.Coin;
 public class CoinProperty {
 	private EnumMap<Coin, Integer> coinMap;
 
-	public CoinProperty() {
+	public CoinProperty(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
+		initialize(amount);
 	}
 
 	public void initialize(int amount) {
