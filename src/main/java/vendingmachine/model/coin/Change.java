@@ -33,4 +33,8 @@ public class Change {
     public void decCoins(CoinType type, int useCoin) {
         type.decAmount(useCoin);
     }
+
+    public List<CoinType> getCoins() {
+        return coins;
+    }
 }

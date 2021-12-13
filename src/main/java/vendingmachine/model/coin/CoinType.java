@@ -25,6 +25,6 @@ public class CoinType {
 
     @Override
     public String toString() {
-        return String.format(Constant.COIN_TYPE_FORMAT, type, amount);
+        return String.format(Constant.COIN_TYPE_FORMAT, type.getAmount(), amount);
     }
 }
