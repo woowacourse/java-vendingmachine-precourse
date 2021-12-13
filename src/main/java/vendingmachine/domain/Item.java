@@ -26,9 +26,9 @@ public class Item {
 		return price <= amount;
 	}
 
-	public int purchase() {
+	public int purchase(int amount) {
 		quantity--;
-		return price;
+		return amount - price;
 	}
 
 	public boolean checkOutOfStock() {

@@ -24,7 +24,8 @@ public class VendingMachineController {
 		chargeHoldingAmount();
 		addItem();
 		int amount = inputAmount();
-		purchaseItems(amount);
+		int change = purchaseItems(amount);
+		returnChange(change);
 	}
 
 	private void chargeHoldingAmount() {
@@ -68,14 +69,13 @@ public class VendingMachineController {
 		}
 	}
 
-	private void purchaseItems(int amount) {
+	private int purchaseItems(int amount) {
 		while (vendingMachine.availablePurchase(amount)) {
 			Output.inputAmount(amount);
 			String itemName = inputItemName(amount);
-			amount -= vendingMachine.purchaseItem(itemName);
+			amount = vendingMachine.purchaseItem(itemName, amount);
 		}
-
-		returnChange(amount);
+		return amount;
 	}
 
 	private String inputItemName(int amount) {

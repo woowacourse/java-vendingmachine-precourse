@@ -37,9 +37,9 @@ public class Items {
 			.collect(Collectors.toList());
 	}
 
-	public int purchase(String itemName) {
+	public int purchase(String itemName, int amount) {
 		Item item = findByName(itemName);
-		int price = item.purchase();
+		int price = item.purchase(amount);
 
 		if (item.checkOutOfStock()) {
 			list.remove(item);
@@ -74,6 +74,7 @@ public class Items {
 	private boolean checkLowestPrice(int amount) {
 		int lowestPrice = list.stream()
 			.mapToInt(Item::getPrice)
+			.sorted()
 			.findFirst()
 			.orElse(0);
 

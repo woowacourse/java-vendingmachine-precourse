@@ -47,7 +47,6 @@ public class Coins {
 
 	private Map<Coin, Integer> initializeCoins() {
 		list = new LinkedHashMap<>();
-
 		Arrays.stream(Coin.values())
 			.forEach(coin -> list.put(coin, DEFAULT_QUANTITY));
 

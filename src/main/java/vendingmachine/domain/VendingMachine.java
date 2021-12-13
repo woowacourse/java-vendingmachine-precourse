@@ -35,8 +35,8 @@ public class VendingMachine {
 		validateItem(items, itemName, amount);
 	}
 
-	public int purchaseItem(String itemName) {
-		return items.purchase(itemName);
+	public int purchaseItem(String itemName, int amount) {
+		return items.purchase(itemName, amount);
 	}
 
 	public Map<Coin, Integer> returnCoins(int amount) {
