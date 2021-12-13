@@ -7,6 +7,8 @@ public class Balance {
 	private static final int BALANCE_DIVISION_STANDARD = 10;
 	private static final int BALANCE_ZERO = 0;
 	private static final String ERROR_BALANCE_NOT_PURCHASE = "해당 잔액으로 구매할 수 없습니다.";
+	private static final String ERROR_BALANCE_NOT_ONE_HUNDRED_OVER = "투입 금액은 100원 이상이여야 합니다.";
+	private static final String ERROR_BALANCE_NOT_TEN_PERCENT_DIVISION = "투입 금액은 10의 단위로 나누어 떨어져야 합니다.";
 
 	private final int balance;
 
@@ -22,13 +24,13 @@ public class Balance {
 
 	private static void isValidateBalanceMiniMum(int balance) {
 		if (balance < BALANCE_MINIMUM) {
-			throw new IllegalArgumentException("투입 금액은 100원 이상이여야 합니다.");
+			throw new IllegalArgumentException(ERROR_BALANCE_NOT_ONE_HUNDRED_OVER);
 		}
 	}
 
 	private static void isValidateBalance10PercentDivision(int balance) {
 		if (balance % BALANCE_DIVISION_STANDARD != BALANCE_ZERO) {
-			throw new IllegalArgumentException("투입 금액은 10원으로 나누어 떨어져야 합니다.");
+			throw new IllegalArgumentException(ERROR_BALANCE_NOT_TEN_PERCENT_DIVISION);
 		}
 	}
 
