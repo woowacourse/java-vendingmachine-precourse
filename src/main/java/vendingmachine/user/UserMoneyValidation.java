@@ -3,9 +3,10 @@ package vendingmachine.user;
 public class UserMoneyValidation {
     public static void checkUserMoneyValidation(String money) {
         isEmpty(money);
+        hasEmpty(money);
         isNumber(money);
         isPositive(money);
-        hasEmpty(money);
+        isMoreThan10Won(money);
     }
 
     public static void isEmpty(String money) {
@@ -29,6 +30,12 @@ public class UserMoneyValidation {
     public static void hasEmpty(String money) {
         if (money.contains(InputErrorConstant.EMPTY_SPACE)) {
             throw new IllegalArgumentException(InputErrorConstant.ERROR_PREFIX + InputErrorConstant.ERROR_HAS_SPACE);
+        }
+    }
+
+    public static void isMoreThan10Won(String money) {
+        if (Integer.parseInt(money) < 10) {
+            throw new IllegalArgumentException(InputErrorConstant.ERROR_PREFIX + InputErrorConstant.ERROR_IS_NOT_MORE_THAN_10WON);
         }
     }
 }

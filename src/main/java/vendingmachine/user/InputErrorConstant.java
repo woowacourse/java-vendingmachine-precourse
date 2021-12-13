@@ -13,11 +13,12 @@ public class InputErrorConstant {
     public static final String QUANTITY = "개수는 ";
     public static final String MONEY = "금액은 ";
 
-    public static final String ERROR_PREFIX = "[ERROR]";
+    public static final String ERROR_PREFIX = "[ERROR] ";
     public static final String ERROR_IS_NOT_NUMBER = "숫자여야 합니다.";
     public static final String ERROR_IS_NOT_POSITIVE = "양수여야 합니다.";
     public static final String ERROR_IS_NULL = "입력하셔야 합니다.";
     public static final String ERROR_HAS_SPACE = "입력 중간에 빈칸이 포함될 수 없습니다.";
+    public static final String ERROR_IS_NOT_MORE_THAN_10WON = "최소 10원 이상이여야 합니다.";
 
     public static final String ERROR_GOODS_IS_NULL = ERROR_PREFIX + "상품명과 가격, 수량을 입력하셔야 합니다.";
     public static final String ERROR_IS_NOT_DELIMITER = ERROR_PREFIX + "상품은 세미콜론(;)으로 구분해야 합니다.";
