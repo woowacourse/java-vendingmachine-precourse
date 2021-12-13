@@ -1,4 +1,4 @@
-package utils.validator.vendingmachineproducts;
+package utils.validator.products;
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,7 +16,7 @@ public class ProductsValidator {
 	public static List<String> checkValidProducts(String products) {
 		if (!hasBlankInInput(products) && !isFinishAsSemiColon(products)) {
 			return Arrays.stream(products.split(SEMI_COLON))
-				.map(VendingMachineProductValidator::checkValidVendingMachineProduct)
+				.map(ProductValidator::checkValidProduct)
 				.collect(Collectors.toList());
 		}
 		throw new IllegalArgumentException();

@@ -1,4 +1,4 @@
-package utils.validator.vendingmachineproducts.productinformation;
+package utils.validator.products.information;
 
 import java.util.regex.Pattern;
 

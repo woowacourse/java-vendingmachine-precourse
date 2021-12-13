@@ -3,9 +3,9 @@ package utils.validator.products;
 import java.util.Arrays;
 import java.util.List;
 
-import utils.validator.products.productinformation.ProductCountValidator;
-import utils.validator.products.productinformation.ProductNameValidator;
-import utils.validator.products.productinformation.ProductPriceValidator;
+import utils.validator.products.information.ProductCountValidator;
+import utils.validator.products.information.ProductNameValidator;
+import utils.validator.products.information.ProductPriceValidator;
 
 public class ProductValidator {
 	private static final int START_INDEX = 1;

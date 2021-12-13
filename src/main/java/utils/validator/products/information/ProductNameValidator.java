@@ -1,4 +1,4 @@
-package utils.validator.vendingmachineproducts.productinformation;
+package utils.validator.products.information;
 
 public class ProductNameValidator {
 	private static final int MIN_PRODUCT_NAME_INPUT_LENGTH = 1;
