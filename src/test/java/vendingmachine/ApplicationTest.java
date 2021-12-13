@@ -58,7 +58,7 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    public void 잔돈_테스트() throws Exception {
+    public void 잔돈_테스트() {
         assertRandomNumberInListTest(
                 () -> {
                     run("3000", "[a,1000,1];[b,2000,1];[c,200,1]", "6000", "a", "b", "c");
@@ -85,5 +85,23 @@ class ApplicationTest extends NsTest {
         assertThrows(IllegalArgumentException.class, () -> {
             productService.createProductList("[a,1550,1];[b,90,1]");
         });
+    }
+
+    @Test
+    public void 최소_개수_동전_테스트() {
+        assertRandomNumberInListTest(
+                () -> {
+                    run("3000", "[a,1000,1];[b,2000,1];[c,200,1]", "6000", "a", "b", "c");
+                    assertThat(output()).contains(
+                            "자판기가 보유한 동전", "500원 - 4개", "100원 - 7개", "50원 - 5개", "10원 - 5개",
+                            "투입 금액: 5000원", "투입 금액: 3000원", "투입 금액: 2800원",
+                            "500원 - 4개", "100원 - 7개", "50원 - 2개"
+                    );
+                },
+                500, 500, 500, 500,
+                100, 100, 100, 100, 100, 100, 100,
+                50, 50, 50, 50, 50,
+                10, 10, 10, 10, 10
+        );
     }
 }
