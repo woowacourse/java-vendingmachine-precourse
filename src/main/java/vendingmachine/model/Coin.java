@@ -27,6 +27,10 @@ public enum Coin {
         return min;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public static List<Integer> getCoinValues() {
         List<Integer> coinValues = new LinkedList<>();
         Arrays.stream(Coin.values()).forEach(coin -> coinValues.add(coin.amount));
