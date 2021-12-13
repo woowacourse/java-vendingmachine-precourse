@@ -20,16 +20,16 @@ public class ProductTable {
         productTable.remove(productName);
     }
 
-    public void buyProduct(String productName) {
-        checkBuyable(productName, true);
+    public void sellProduct(String productName) {
+        checkSellable(productName, true);
         productTable.get(productName).sell();
     }
 
-    public boolean isExist(String productName) {
+    public boolean isProductExist(String productName) {
         return productTable.containsKey(productName);
     }
 
-    public boolean isBuyable(String productName) {
+    public boolean isProductAvailable(String productName) {
         checkExists(productName, true);
         return productTable.get(productName).isAvailable();
     }
@@ -48,7 +48,7 @@ public class ProductTable {
         return -1;
     }
 
-    public boolean isAvailable() {
+    public boolean isThereAvailableProduct() {
         for (Product product : productTable.values()) {
             if (product.isAvailable()) {
                 return true;
@@ -76,14 +76,14 @@ public class ProductTable {
         return sb.toString();
     }
 
-    private void checkExists(String productName, boolean bool) {
-        if (isExist(productName) != bool) {
+    private void checkExists(String productName, boolean expect) {
+        if (isProductExist(productName) != expect) {
             throw new IllegalArgumentException();
         }
     }
 
-    private void checkBuyable(String productName, boolean bool) {
-        if (isBuyable(productName) != bool) {
+    private void checkSellable(String productName, boolean expect) {
+        if (isProductAvailable(productName) != expect) {
             throw new IllegalArgumentException();
         }
     }
