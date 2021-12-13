@@ -6,11 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class Remaining<T> {
-	private HashMap <T,Integer> remain;
-
-	Remaining(T t) {
-		remain = new HashMap<T, Integer>();
-	}
+	private HashMap <T,Integer> remain= new HashMap<>();
 
 	public void put(T t, Integer num) {
 		// 상품 세팅 하는 경우 반환하는 에러
