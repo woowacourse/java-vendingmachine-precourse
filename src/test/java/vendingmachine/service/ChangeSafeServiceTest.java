@@ -8,13 +8,15 @@ import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.Rollback;
 import vendingmachine.config.ServiceConfig;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Quantity;
 
-class ChangeSafeServiceTest {
+class ChangeSafeServiceTest implements Rollback {
 
 	ChangeSafeService changeSafeService = ServiceConfig.getChangeSafeService();
+
 	@Test
 	@DisplayName("코인맵으로 금고를 생성한다.")
 	public void testPersist() {
@@ -26,9 +28,9 @@ class ChangeSafeServiceTest {
 		// when
 		String persist = changeSafeService.persist(coinMap);
 		// then
-		assertEquals("50 - 0개\n"
-			+ "100 - 3개\n"
-			+ "10 - 0개\n"
-			+ "500 - 1개", persist);
+		assertEquals("500원 - 1개\n"
+			+ "100원 - 3개\n"
+			+ "50원 - 0개\n"
+			+ "10원 - 0개", persist);
 	}
 }
