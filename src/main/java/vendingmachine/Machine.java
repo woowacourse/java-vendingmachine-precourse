@@ -39,12 +39,12 @@ public class Machine {
     }
 
     public static int makeChanges(Coin coin) {
-        int changes = money/coin.getAmount();
+        int changes = money / coin.getAmount();
         if (changes != 0) {
             if (coin.getCount() - changes >= 0) {
                 return changes;
             }
-            if (coin.getCount() -changes < 0) {
+            if (coin.getCount() - changes < 0) {
                 return coin.getCount();
             }
         }
@@ -53,7 +53,7 @@ public class Machine {
 
     public boolean checkMoney() {
         for (Product product : this.products) {
-            if(product.getPrice() <= money) {
+            if (product.getPrice() <= money) {
                 return true;
             }
         }
@@ -61,9 +61,9 @@ public class Machine {
     }
 
     public boolean checkCount() {
-        for(Product product : this.products) {
+        for (Product product : this.products) {
             if (product.getCount() != 0) {
-               return true;
+                return true;
             }
         }
         return false;

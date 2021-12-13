@@ -8,7 +8,7 @@ public class Product {
     private int price;
     private int count;
 
-    Product (String name, int price, int count) {
+    Product(String name, int price, int count) {
         this.name = name;
         this.price = price;
         this.count = count;
@@ -30,7 +30,7 @@ public class Product {
         this.count -= 1;
     }
 
-    public static ArrayList<Product> makeProductList(ArrayList<String> strings) throws Exception{
+    public static ArrayList<Product> makeProductList(ArrayList<String> strings) throws Exception {
         ArrayList<Product> products = new ArrayList<Product>();
         for (String str : strings) {
             Utils.validateNumber(str.split(",")[1]);

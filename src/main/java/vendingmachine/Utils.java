@@ -9,13 +9,13 @@ public class Utils {
     private static int MIN_VALUE = 100;
     private static int DIVIDED_VALUE = 10;
 
-    public static ArrayList splitString(String inputString) throws Exception{
+    public static ArrayList splitString(String inputString) throws Exception {
         //String[] splits = inputString.replace("[","").replace("]","").split(";");
         String[] splits = inputString.split(";");
-        for (int i = 0; i < splits.length ; i++ ) {
+        for (int i = 0; i < splits.length; i++) {
             Utils.validateProductInputForm(splits[i]);
-            splits[i] = splits[i].substring(1, splits[i].length()-1);
-            System.out.println("_"+splits[i]+"_");
+            splits[i] = splits[i].substring(1, splits[i].length() - 1);
+            System.out.println("_" + splits[i] + "_");
         }
         return new ArrayList<String>(Arrays.asList(splits));
     }
@@ -54,14 +54,14 @@ public class Utils {
     }
 
     public static void validateDuplication(ArrayList<Product> products, String name) {
-        if ((int)products.stream().filter(p -> p.getName().equals(name)).count() != 0) {
+        if ((int) products.stream().filter(p -> p.getName().equals(name)).count() != 0) {
             throw new IllegalArgumentException("[ERROR] 상품은 중복 등록될 수 없습니다.");
         }
     }
 
     public static void validateStrEmpty(String productName) {
         if (productName.equals("")) {
-           throw new IllegalArgumentException("[ERROR] 상품명은 공백이 될 수 없습니다.");
+            throw new IllegalArgumentException("[ERROR] 상품명은 공백이 될 수 없습니다.");
         }
     }
 
@@ -76,7 +76,7 @@ public class Utils {
 
     public static boolean checkCommaCount(String inputProduct) {
         int commaCount = 0;
-        for (int i = 0; i < inputProduct.length() ; i++) {
+        for (int i = 0; i < inputProduct.length(); i++) {
             if (inputProduct.charAt(i) == ',') {
                 commaCount++;
             }
@@ -88,8 +88,8 @@ public class Utils {
     }
 
     public static boolean checkSquareBrackets(String inputProduct) {
-        if (inputProduct.charAt(0) != '[' || inputProduct.charAt(inputProduct.length()-1) != ']') {
-           return false;
+        if (inputProduct.charAt(0) != '[' || inputProduct.charAt(inputProduct.length() - 1) != ']') {
+            return false;
         }
         return true;
     }

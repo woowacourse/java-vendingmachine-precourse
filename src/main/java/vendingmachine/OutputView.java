@@ -20,7 +20,7 @@ public class OutputView {
         for (Coin coin : Coin.values()) {
             int changes = Machine.makeChanges(coin);
             if (changes != 0) {
-               System.out.println(coin.getAmount() + "원 - " + changes + "개");
+                System.out.println(coin.getAmount() + "원 - " + changes + "개");
             }
         }
 
