@@ -11,19 +11,21 @@ public class VendingMachineController {
 
 	public VendingMachineController(VendingMachine vendingMachine) {
 		this.vendingMachine = vendingMachine;
-		this.management = new VendingMachineManagement(vendingMachine);
+		this.management = new VendingMachineManagement(vendingMachine, this);
 	}
 
 	public void start() {
 		createAdministrator();
-
 		setCoins();
 		showCoins();
 		setProducts();
+
+		createConsumer();
+		setMoney();
 	}
 
 	private void createAdministrator() {
-		administrator = new Administrator(this.vendingMachine);
+		administrator = new Administrator(vendingMachine);
 	}
 
 	private void setCoins() {
@@ -44,5 +46,18 @@ public class VendingMachineController {
 		management.insertProducts(input);
 	}
 
-	// 소비자 관련
+	private void createConsumer() {
+		consumer = new Consumer(vendingMachine);
+	}
+
+	private void setMoney() {
+		management.noticeInsertMoney();
+
+		String input = consumer.getMoney();
+		management.insertMoney(input);
+	}
+
+	public String selectProduct() {
+		return consumer.selectProduct();
+	}
 }

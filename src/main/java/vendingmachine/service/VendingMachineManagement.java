@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.VendingMachine;
 
 public class VendingMachineManagement {
 	private VendingMachine vendingMachine;
+	private VendingMachineController controller;
 
 	public static final String SPLIT_PRODUCTS = ";";
 	public static final String COVER_PRODUCT_START = "[";
@@ -25,8 +27,9 @@ public class VendingMachineManagement {
 	public static final String PRODUCT_QUANTITY = "quantity";
 	public static final int PRODUCT_QUANTITY_INDEX = 2;
 
-	public VendingMachineManagement(VendingMachine vendingMachine) {
+	public VendingMachineManagement(VendingMachine vendingMachine, VendingMachineController controller) {
 		this.vendingMachine = vendingMachine;
+		this.controller = controller;
 	}
 
 	public void noticeInsertMoneyOfChanges() {
@@ -87,15 +90,42 @@ public class VendingMachineManagement {
 		return product;
 	}
 
-	// 자판기 거래 관련
+	public void noticeInsertMoney() {
+		printInsertMoney();
+	}
 
-	// 투입 금액 검증
+	public void insertMoney(String stringOfMoney) {
+		int money = Integer.parseInt(stringOfMoney);
+		vendingMachine.setMoney(money);
 
-	// 구매할 수 있는 상황인지 확인
+		purchase(money);
+	}
 
-	// 구매하는 상품 정보 검증
+	private void purchase(int money) {
+		noticeRemainMoney(money);
 
-	// 구매하는 상품 이름 자판기에 전달
+		if (vendingMachine.isPurchase()) {
+			String product = selectProduct();
+			vendingMachine.buy(product);
+
+			purchase(vendingMachine.getMoney());
+		}
+		// 잔돈 반환
+	}
+
+	private void noticeRemainMoney(int money) {
+		printRemainMoney(money);
+	}
+
+	private String selectProduct() {
+		noticeSelectProduct();
+
+		return controller.selectProduct();
+	}
+
+	private void noticeSelectProduct() {
+		printSelectProduct();
+	}
 
 	// 잔돈 반환
 }

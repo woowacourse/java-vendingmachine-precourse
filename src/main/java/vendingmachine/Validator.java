@@ -13,6 +13,7 @@ public class Validator {
 
 	private static final int MINIMUM_OF_PRODUCT_PRICE = 100;
 
+	// TODO: 동일한 기능을 하는 검증 메소드 합치기
 	public static void validateNumber(String str) {
 		int number;
 		try {
@@ -122,6 +123,36 @@ public class Validator {
 		int number = Integer.parseInt(str);
 		if (number < ZERO) {
 			error(PRODUCT_QUANTITY_OVER_ZERO);
+		}
+	}
+
+	public static void validateMoneyNumber(String str) {
+		int number;
+		try {
+			number = Integer.parseInt(str);
+		} catch (Exception e) {
+			error(MONEY_NUMBER);
+		}
+	}
+
+	public static void validateMoneyOverZero(String str) {
+		int number = Integer.parseInt(str);
+		if (number < ZERO) {
+			error(MONEY_OVER_ZERO);
+		}
+	}
+
+	public static void validateMoneyDividedByTen(String str) {
+		int number = Integer.parseInt(str);
+
+		if (number % MONEY_UNIT != 0) {
+			error(MONEY_DIVIDED_BY_TEN);
+		}
+	}
+
+	public static void validateSelectedProductEmpty(String str) {
+		if (str.equals(EMPTY)) {
+			error(SELECTED_PRODUCT_EMPTY);
 		}
 	}
 }

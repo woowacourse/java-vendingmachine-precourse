@@ -18,6 +18,16 @@ public class Error {
 	public static final String PRODUCT_QUANTITY_ONLY_NUMBER = "상품 개수는 숫자여야 합니다.";
 	public static final String PRODUCT_QUANTITY_OVER_ZERO = "상품 개수는 0이상의 숫자여야 합니다.";
 
+	public static final String MONEY_NUMBER = "투입 금액은 숫자여야 합니다.";
+	public static final String MONEY_OVER_ZERO = "투입 금액은 0이상의 숫자여야 합니다.";
+	public static final String MONEY_DIVIDED_BY_TEN = "투입 금액은 10원 단위로 입력해야 합니다.";
+
+	public static final String SELECTED_PRODUCT_EMPTY = "구매할 상품명을 입력해 주세요.";
+
+	public static final String NOT_EXIST_PRODUCT_NAME = "존재하지 않는 상품입니다. 다른 상품을 선택해주세요.";
+	public static final String NOT_EXIST_PRODUCT = "상품의 재고가 소진되었습니다. 다른 상품을 선택해주세요.";
+	public static final String LOWER_MONEY = "금액이 부족합니다.";
+
 	// TODO: 모든 Exception 에러 IllegalArgumentException 로 변경하기
 	public static void error(String str) {
 		throw new IllegalArgumentException(ERROR_PREFIX + str);

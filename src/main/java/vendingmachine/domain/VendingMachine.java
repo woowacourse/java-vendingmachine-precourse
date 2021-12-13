@@ -4,7 +4,9 @@ import static camp.nextstep.edu.missionutils.Randoms.*;
 
 import static vendingmachine.view.Print.*;
 import static vendingmachine.service.VendingMachineManagement.*;
+import static vendingmachine.Error.*;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
 import java.util.List;
@@ -16,6 +18,8 @@ public class VendingMachine {
 
 	private static final int INITIAL_COIN = 0;
 	private static final int ADD_COUNT_OF_COIN = 1;
+	private static final int SUBTRACT_COUNT_OF_PRODUCT = 1;
+	private static final int PRODUCT_NOT_EXIST = 0;
 
 	public VendingMachine() {
 		Coin[] coins = Coin.values();
@@ -23,6 +27,10 @@ public class VendingMachine {
 		for (Coin coin : coins) {
 			this.changes.put(coin, INITIAL_COIN);
 		}
+	}
+
+	public int getMoney() {
+		return this.money;
 	}
 
 	public boolean isDuplicatedName(String name) {
@@ -80,9 +88,109 @@ public class VendingMachine {
 		products.put(product, quantity);
 	}
 
-	// 투입 금액 정보 저장
+	public void setMoney(int money) {
+		this.money = money;
+	}
 
-	// 구매한 상품 정보 개수 및 투입 금액 차감
+	public boolean isPurchase() {
+		if (isLowerMinimumPrice()) {
+			return false;
+		}
+		if (!isAllProductExist()) {
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isLowerMinimumPrice() {
+		int minimumPrice = getMinimumPrice();
+		return this.money < minimumPrice;
+	}
+
+	private int getMinimumPrice() {
+		int minimumPrice = getPriceList().get(0);
+
+		for (Integer price : getPriceList()) {
+			if (price < minimumPrice) {
+				minimumPrice = price;
+			}
+		}
+		return minimumPrice;
+	}
+
+	private ArrayList<Integer> getPriceList() {
+		ArrayList<Integer> priceList = new ArrayList<>();
+
+		for (Entry<Product, Integer> product : products.entrySet()) {
+			int price = product.getKey().getPrice();
+			priceList.add(price);
+		}
+		return priceList;
+	}
+
+	private boolean isAllProductExist() {
+		int totalQuantity = 0;
+
+		for (Entry<Product, Integer> product : products.entrySet()) {
+			int quantity = product.getValue();
+			totalQuantity += quantity;
+		}
+
+		return totalQuantity > PRODUCT_NOT_EXIST;
+	}
+
+	public void buy(String name) {
+		Product selectedProduct = getProduct(name);
+
+		if (selectedProduct == null) {
+			printNotice(NOT_EXIST_PRODUCT_NAME);
+			return;
+		}
+		if (!isPurchaseNowProduct(selectedProduct)) {
+			return;
+		}
+
+		subtractProduct(selectedProduct);
+		subtractMoney(selectedProduct);
+	}
+
+	private Product getProduct(String name) {
+		for (Entry<Product, Integer> product : products.entrySet()) {
+			Product nowProduct = product.getKey();
+			if (nowProduct.getName().equals(name)) {
+				return nowProduct;
+			}
+		}
+		return null;
+	}
+
+	private boolean isPurchaseNowProduct(Product product) {
+		if (isLowerProductPrice(product)) {
+			printNotice(LOWER_MONEY);
+			return false;
+		}
+		if (!isProductExist(product)) {
+			printNotice(NOT_EXIST_PRODUCT);
+			return false;
+		}
+		return true;
+	}
+
+	private boolean isLowerProductPrice(Product product) {
+		return this.money < product.getPrice();
+	}
+
+	private boolean isProductExist(Product product) {
+		return products.get(product) > PRODUCT_NOT_EXIST;
+	}
+
+	private void subtractProduct(Product product) {
+		products.put(product, products.get(product) - SUBTRACT_COUNT_OF_PRODUCT);
+	}
+
+	private void subtractMoney(Product product) {
+		this.money -= product.getPrice();
+	}
 
 	// 잔돈 정보 반환
 }
