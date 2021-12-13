@@ -17,7 +17,7 @@ public class ChangeSafe {
 
 	public ChangeSafe(Map<Coin, Quantity> coinMap) {
 		this();
-		merge(coinMap);
+		this.coinMap = merge(coinMap);
 	}
 
 	private Map<Coin, Quantity> createEmpty() {
@@ -30,11 +30,12 @@ public class ChangeSafe {
 	}
 
 	public ChangeSafe merge(ChangeSafe other) {
-		return new ChangeSafe(other.coinMap);
+		return new ChangeSafe(merge(other.coinMap));
 	}
 
-	private void merge(Map<Coin, Quantity> other) {
+	private Map<Coin, Quantity> merge(Map<Coin, Quantity> other) {
 		other.forEach((k, v) -> this.coinMap.merge(k, v, Quantity::plus));
+		return this.coinMap;
 	}
 
 	@Override
