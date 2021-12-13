@@ -5,15 +5,11 @@ import java.util.EnumMap;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
 
-public class CoinProperty {
+public class Coins {
 	private EnumMap<Coin, Integer> coinMap;
 
-	public CoinProperty(int amount) {
+	public Coins(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
-		initialize(amount);
-	}
-
-	public void initialize(int amount) {
 		while (amount > 0) {
 			Coin coin = selectCoinType();
 			int coinNumber = generateRandomValueInRange(coin.divideByCoinAmount(amount));

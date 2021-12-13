@@ -3,14 +3,14 @@ package vendingmachine.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import vendingmachine.model.CoinProperty;
+import vendingmachine.model.Coins;
 import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.util.StringUtils;
 import vendingmachine.view.InputView;
 
 public class VendingMachineController {
-	private CoinProperty coinProperty;
+	private Coins coins;
 	private Products products;
 
 	public VendingMachineController() {
@@ -20,7 +20,7 @@ public class VendingMachineController {
 
 	private void initCoins() {
 		int inputAmountMoney = InputView.readAmountMoney();
-		coinProperty = new CoinProperty(inputAmountMoney);
+		coins = new Coins(inputAmountMoney);
 	}
 
 	public void initProducts() {
@@ -31,6 +31,4 @@ public class VendingMachineController {
 		separatedProducts.forEach(product -> productList.add(new Product(StringUtils.parseProductDetail(product))));
 		products = new Products(productList);
 	}
-
-
 }
