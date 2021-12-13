@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 public class InputProcessor {
-    private static final String PREFIX_ERROR = "[ERROR]";
-
     public static VendingMachine setVendingMachine() {
         while (true) {
             String inputData = InputManager.getUserInput("자판기가 보유하고 있는 금액을 입력해 주세요.");
@@ -21,7 +19,7 @@ public class InputProcessor {
                 Validators.validateAmount(inputData);
                 return new VendingMachine(Integer.parseInt(inputData));
             } catch (IllegalArgumentException e) {
-                OutputManager.printMessage(PREFIX_ERROR + " 0 또는 자연수만 입력 가능합니다.");
+                OutputManager.printErrorMessage("0 또는 자연수만 입력 가능합니다.");
             }
         }
     }
@@ -42,7 +40,7 @@ public class InputProcessor {
             try {
                 Validators.validateItem(inputData);
             } catch (IllegalArgumentException e) {
-                OutputManager.printMessage(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
+                OutputManager.printErrorMessage("잘못된 상품 입력입니다.");
                 continue;
             }
             return createItemList(inputData);
@@ -56,7 +54,7 @@ public class InputProcessor {
                 Validators.validateIntegerString(inputData);
                 return Integer.parseInt(inputData);
             } catch (IllegalArgumentException e) {
-                OutputManager.printMessage(PREFIX_ERROR + " 잘못된 금액 입력입니다.");
+                OutputManager.printErrorMessage("잘못된 금액 입력입니다.");
             }
         }
     }
@@ -68,7 +66,7 @@ public class InputProcessor {
                 Validators.validateEmptyString(inputData);
                 return inputData;
             } catch (IllegalArgumentException e) {
-                OutputManager.printMessage(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
+                OutputManager.printErrorMessage("잘못된 상품 입력입니다.");
             }
         }
     }

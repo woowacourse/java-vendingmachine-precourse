@@ -42,7 +42,7 @@ public class VendingMachineController {
             targetItem = itemController.find(InputProcessor.getWantedItemName());
             buyItem(targetItem);
         } catch (IllegalArgumentException e) {
-            OutputManager.printMessage("[ERROR] 존재하지 않는 상품입니다.");
+            OutputManager.printErrorMessage("존재하지 않는 상품입니다.");
         }
         return true;
     }
