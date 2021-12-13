@@ -26,8 +26,13 @@ public class VendingMachineController {
     }
 
     private void setupMoney() {
-        this.money = InputView.getInitialMoney();
-        money.generateRandomCoins();
+        try {
+            this.money = new Money(Integer.parseInt(InputView.getInitialMoney()));
+            money.generateRandomCoins();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            setupMoney();
+        }
     }
 
     private void setupItems() {

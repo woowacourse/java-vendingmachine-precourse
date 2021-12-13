@@ -16,11 +16,7 @@ public class MoneyBill {
     }
 
     private void validateMoney(int amount) {
-        try {
-            validateNonNegative(amount);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        validateNonNegative(amount);
     }
 
     public boolean isZero() {
