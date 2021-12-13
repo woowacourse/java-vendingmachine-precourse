@@ -10,6 +10,7 @@ import vendingmachine.exception.ProductNotEnoughMoneyException;
 public class Product {
 
     private static final int STANDARD_PRICE = 100;
+    private static final String BLANK_NAME = "";
 
     private final String name;
     private final int price;
@@ -25,7 +26,7 @@ public class Product {
     }
 
     private static void checkNameIsEmpty(String name) {
-        if (Objects.isNull(name) || name.equals("")) {
+        if (Objects.isNull(name) || name.equals(BLANK_NAME)) {
             throw new ProductNameEmptyException();
         }
     }
