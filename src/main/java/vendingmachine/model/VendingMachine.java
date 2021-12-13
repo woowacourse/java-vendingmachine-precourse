@@ -7,6 +7,10 @@ import vendingmachine.model.Coin;
 public class VendingMachine {
     private HashMap<Coin, Integer> coinCount = new HashMap<Coin, Integer>();
     private int remainderMoney;
+    private static final int COIN_10 = 10;
+    private static final int COIN_50 = 50;
+    private static final int COIN_100 = 100;
+    private static final int COIN_500 = 500;
 
     private void initCoinCount() {
         for (Coin coin: Coin.values()) {
@@ -25,7 +29,7 @@ public class VendingMachine {
 
     private void generateCoinCount(int amount) {
         while(true) {
-            int pickedCoin = Randoms.pickNumberInList(Arrays.asList(10, 50, 100, 500));
+            int pickedCoin = Randoms.pickNumberInList(Arrays.asList(COIN_10, COIN_50, COIN_100, COIN_500));
             Coin coin = getCoinByValue(pickedCoin);
             if (amount >= pickedCoin) {
                 amount -= pickedCoin;

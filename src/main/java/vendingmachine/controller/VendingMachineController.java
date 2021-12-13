@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import java.util.HashMap;
 
+import vendingmachine.ErrorMessage;
 import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.model.Coin;
@@ -42,7 +43,7 @@ public class VendingMachineController {
             targetItem = itemController.find(InputProcessor.getWantedItemName());
             buyItem(targetItem);
         } catch (IllegalArgumentException e) {
-            OutputManager.printErrorMessage("존재하지 않는 상품입니다.");
+            OutputManager.printErrorMessage(ErrorMessage.NOT_EXIST_ITEM_ERROR);
         }
         return true;
     }

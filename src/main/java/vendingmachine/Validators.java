@@ -2,6 +2,10 @@ package vendingmachine;
 import java.util.regex.Pattern;
 
 public class Validators {
+    private static final String ITEM_PATTERN = "\\[[[A-Za-z가-힣0-9ㄱ-ㅎ][\\s]*]+,[0-9]+,[0-9]+\\]";
+    private static final String SPLIT_REGEX = ";";
+    private static final int ZERO = 0;
+
     public static void validateIntegerString(String data) {
         try {
             Integer.parseInt(data);
@@ -12,16 +16,15 @@ public class Validators {
 
     public static void validateAmount(String data) {
         validateIntegerString(data);
-        if (Integer.parseInt(data) <= 0) {
+        if (Integer.parseInt(data) <= ZERO) {
             throw new IllegalArgumentException();
         }
     }
 
     public static void validateItem(String data) {
-        String[] itemDataList = data.split(";");
-        String pattern = "\\[[[A-Za-z가-힣0-9ㄱ-ㅎ][\\s]*]+,[0-9]+,[0-9]+\\]";
+        String[] itemDataList = data.split(SPLIT_REGEX);
         for (String itemData : itemDataList) {
-            if (!Pattern.matches(pattern, itemData)) {
+            if (!Pattern.matches(ITEM_PATTERN, itemData)) {
                 throw new IllegalArgumentException();
             }
         }
