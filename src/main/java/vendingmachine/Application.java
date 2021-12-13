@@ -10,16 +10,22 @@ public class Application {
 
 	public static void main(String[] args) {
 		// TODO: 프로그램 구현
-		VendingMachineAccountController.setAccountInput();
-		VendingMachineAccountController.setRandomCoins();
-		VendingMachineAccountController.printCoinCount();
+		initApplication();
+		startApplication();
+		endApplication();
+	}
 
+	private static void startApplication() {
+		PurchaseController.purchaseCatalogs();
+	}
+
+	private static void endApplication() {
+		ChangeController.setChange();
+	}
+
+	private static void initApplication() {
+		VendingMachineAccountController.setVendingMachineAccount();
 		CatalogController.setCatalogListInput();
-
 		UserAccountController.setUserAccountByInput();
-
-		PurchaseController.doMainLoop();
-
-		ChangeController.setAndPrintChange();
 	}
 }

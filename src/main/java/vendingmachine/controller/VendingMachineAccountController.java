@@ -6,6 +6,12 @@ import vendingmachine.view.VendingMachineAccountView;
 
 public class VendingMachineAccountController {
 
+	public static void setVendingMachineAccount() {
+		setAccountInput();
+		setRandomCoins();
+		printCoinCount();
+	}
+
 	public static void setAccountInput() {
 		VendingMachineAccountView.printInputGuide();
 		VendingMachineAccountService.setAccountByInput();
