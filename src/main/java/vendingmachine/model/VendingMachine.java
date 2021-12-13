@@ -1,9 +1,11 @@
 package vendingmachine.model;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vendingmachine.Coin;
+import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.util.Utils;
 
 public class VendingMachine {
 	private int ownMoney;
@@ -19,5 +21,13 @@ public class VendingMachine {
 		this.inputMoney = inputMoney;
 	}
 
-
+	public void generateCoin() {
+		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
+		coinAmountList.forEach(amount -> {
+			int maxRange = Utils.getMaxRange(ownMoney, amount);
+			int randomNumber = Randoms.pickNumberInRange(0, maxRange);
+			coinIntegerMap.put(Coin.parse(amount), randomNumber);
+			ownMoney = ownMoney - randomNumber*amount;
+		});
+	}
 }

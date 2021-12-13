@@ -1,7 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.VendingMachine;
-import vendingmachine.util.util;
+import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.InputView;
 
@@ -13,17 +13,18 @@ public class VendingMachineController {
 		//금액 입력받기
 		String machineMoney = enterMachineMoney();
 		//금액 int 로 변경
-		int convertedMachineMoney = util.moneyConverter(machineMoney);
+		int convertedMachineMoney = Utils.moneyConverter(machineMoney);
 		//자판기에게 금액 셋팅
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.initOwnMoney(convertedMachineMoney);
 		//동전 생성
+		vendingMachine.generateCoin();
 		//상품명 입력받기
 		//상품 생성
 		//투입 금액 입력받기
 		String insertMoney = enterInsertMoney();
 		//금액 int 로 변경
-		int convertedInsertMoney = util.moneyConverter(insertMoney);
+		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
 		//금액 셋팅
 		vendingMachine.initInputMoney(convertedInsertMoney);
 		//물건 구매하기
