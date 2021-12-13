@@ -4,7 +4,7 @@ import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.service.VendingMachine;
 import vendingmachine.exception.InputException;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;

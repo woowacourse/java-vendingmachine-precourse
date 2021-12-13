@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,21 +18,8 @@ public class Beverages {
 		beverages.put(beverage, stock);
 	}
 
-	public int getMinimumBeveragePrice() {
-		return Collections.min(beverages.keySet(), Comparator.comparingInt(Beverage::getPrice)).getPrice();
-	}
-
 	public int size() {
 		return beverages.size();
-	}
-
-	public boolean isAllSoldOut() {
-		for (Integer stock : beverages.values()) {
-			if (stock > 0) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public void sell(Beverage beverage) {

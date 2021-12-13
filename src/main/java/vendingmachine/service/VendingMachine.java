@@ -1,8 +1,13 @@
-package vendingmachine.domain;
+package vendingmachine.service;
 
 import java.util.Map;
 import java.util.TreeMap;
 
+import vendingmachine.domain.Beverage;
+import vendingmachine.domain.Beverages;
+import vendingmachine.domain.Change;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.Money;
 import vendingmachine.exception.NotFoundBeverageException;
 
 public class VendingMachine {
@@ -59,11 +64,14 @@ public class VendingMachine {
 		beverages.sell(beverage);
 	}
 
-	public boolean canSell() {
-		return !inputMoney.isSmaller(beverages.getMinimumBeveragePrice()) && !beverages.isAllSoldOut();
-	}
-
 	public boolean canNotSellOne(Beverage beverage) {
 		return inputMoney.isSmaller(beverage.getPrice());
+	}
+
+	public boolean canSell() {
+		return beverages.getBeverages()
+			.entrySet()
+			.stream()
+			.anyMatch(beverages -> !inputMoney.isSmaller(beverages.getKey().getPrice()) && beverages.getValue() > NONE);
 	}
 }
