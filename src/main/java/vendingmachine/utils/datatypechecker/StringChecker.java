@@ -1,9 +1,14 @@
 package vendingmachine.utils.datatypechecker;
 
+import vendingmachine.constants.StringConstants;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class StringChecker {
+    //Error Message suffix
+    public static final String CAN_BE_BLANK = "은 빈칸이 될수 없습니다.";
+    public static final String CAN_BE_SAME_STRING= "은 같은 문자열이 올 수 없습니다.";
 
     public static List<String> parseStringBySeparator(String input, char separator){
         int parseBeginIndex = 0 , parseEndIndex =0;
@@ -24,7 +29,7 @@ public class StringChecker {
     public static void checkStringLength(String content, String contentType) throws IllegalArgumentException{
 
         if(content.length() == 0){
-            throw new IllegalArgumentException("[ERROR]: " + contentType + "은 빈칸이 될수 없습니다.");
+            throw new IllegalArgumentException(StringConstants.ERROR_MESSAGE_PREFIX + contentType + CAN_BE_BLANK);
         }
 
     }
@@ -36,7 +41,7 @@ public class StringChecker {
             int lastIndex = strings.lastIndexOf(findString);
 
             if(firstIndex != lastIndex){
-                throw new IllegalArgumentException("[ERROR]: " + contentType + "은 같은 문자열이 올 수 없습니다..");
+                throw new IllegalArgumentException(StringConstants.ERROR_MESSAGE_PREFIX + contentType + CAN_BE_SAME_STRING);
             }
 
         }

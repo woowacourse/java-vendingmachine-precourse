@@ -1,20 +1,28 @@
 package vendingmachine.utils.datatypechecker;
 
+import vendingmachine.constants.StringConstants;
+
 public class IntegerChecker {
-    static public void checkStringToInteger(String value, String contentType) throws IllegalArgumentException{
+    //Error Message suffix
+    public static final String NOT_INTEGER = "은(는) 정수 형태로 입력해주세요.";
+    public static final String LOWER_THAN_LIMIT = " 이상으로 설정해주세요.";
+    public static final String NOT_DIVIDED = " 원으로 나누어 떨어져야 합니다.";
+
+    public static void checkStringToInteger(String value, String contentType) throws IllegalArgumentException{
 
         try{
             Integer.parseInt(value);
         }catch (NumberFormatException exception){
-            throw new IllegalArgumentException("[ERROR]: " + contentType + "은 정수 형태로 입력해주세요.");
+            throw new IllegalArgumentException(StringConstants.ERROR_MESSAGE_PREFIX + contentType + NOT_INTEGER);
         }
 
     }
 
-    static public void checkLowLimit(int value, int lowLimit, String contentType) throws IllegalArgumentException{
+    public static  void checkLowLimit(int value, int lowLimit, String contentType) throws IllegalArgumentException{
 
         if(value < lowLimit){
-            throw new IllegalArgumentException("[ERROR]: " + contentType + " 값은" + lowLimit +" 이상으로 설정해주세요.");
+            String errorMessage = StringConstants.ERROR_MESSAGE_PREFIX + contentType + StringConstants.SUBJECT_SUFFIX + lowLimit +LOWER_THAN_LIMIT;
+            throw new IllegalArgumentException(errorMessage);
         }
 
     }
@@ -22,7 +30,8 @@ public class IntegerChecker {
     public static void checkDivideIntoMod(int value, int mod, String contentType) throws IllegalArgumentException{
 
         if(value % mod != 0){
-            throw new IllegalArgumentException("[ERROR]: "+ contentType +"은(는) " + mod +" 원으로 나누어 떨어져야 합니다.");
+            String errorMessage = StringConstants.ERROR_MESSAGE_PREFIX + contentType +StringConstants.SUBJECT_SUFFIX + mod + NOT_DIVIDED;
+            throw new IllegalArgumentException(errorMessage);
         }
 
     }
