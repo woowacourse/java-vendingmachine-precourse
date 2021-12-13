@@ -1,8 +1,8 @@
 package vendingmachine.domain;
 
 public class Money {
-    private int money;
     private static final Money instance = new Money();
+    private int money;
 
     private Money() {
     }

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import static vendingmachine.constant.Condition.INDEX_0;
+import static vendingmachine.constant.Condition.LENGTH_1;
+
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Input;
 import vendingmachine.domain.ProductRepository;
-
-import static vendingmachine.constant.Condition.INDEX_0;
-import static vendingmachine.constant.Condition.LENGTH_1;
 
 public class ProductValidator {
 
@@ -30,8 +30,8 @@ public class ProductValidator {
     }
 
     private void validateBlank(String[] products) {
-        if (products.length == LENGTH_1.getNumber()) {
-            if (products[INDEX_0.getNumber()].length() == Condition.LENGTH_0.getNumber()) {
+        if (products.length == Condition.LENGTH_1.getNumber()) {
+            if (products[Condition.INDEX_0.getNumber()].length() == Condition.LENGTH_0.getNumber()) {
                 print(Input.PRODUCTS_BLANK_ERROR_MESSAGE.getText());
                 throw new IllegalArgumentException();
             }
@@ -39,12 +39,12 @@ public class ProductValidator {
     }
 
     private void validateBrackets(String[] products) {
-        if (!products[INDEX_0.getNumber()].startsWith(Input.OPEN_BRACKET.getText())) {
+        if (!products[Condition.INDEX_0.getNumber()].startsWith(Input.OPEN_BRACKET.getText())) {
             print(Input.PRODUCT_BRACKETS_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
         }
 
-        if (!products[products.length - LENGTH_1.getNumber()].endsWith(Input.CLOSE_BRACKET.getText())) {
+        if (!products[products.length - Condition.LENGTH_1.getNumber()].endsWith(Input.CLOSE_BRACKET.getText())) {
             print(Input.PRODUCT_BRACKETS_ERROR_MESSAGE.getText());
             throw new IllegalArgumentException();
         }
