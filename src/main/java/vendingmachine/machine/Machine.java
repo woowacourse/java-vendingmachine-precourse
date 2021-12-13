@@ -11,9 +11,12 @@ public class Machine {
     public List<Goods> goods;
     public int holdingAmount;
 
-    public Machine(int holdingAmount, List<Goods> goods) {
-        this.goods = goods;
+    public Machine(int holdingAmount) {
         this.holdingAmount = holdingAmount;
+    }
+
+    public void setGoods(List<Goods> goods) {
+        this.goods = goods;
     }
 
     public int getHoldingAmount() {
