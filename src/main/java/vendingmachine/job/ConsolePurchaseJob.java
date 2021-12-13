@@ -20,9 +20,8 @@ public class ConsolePurchaseJob implements PurchaseJob {
 			if (!isAvailable()) {
 				break;
 			}
-			tryExecute();
+			tryPurchase();
 		}
-		finish();
 	}
 
 	private void showMoney() {
@@ -33,16 +32,13 @@ public class ConsolePurchaseJob implements PurchaseJob {
 		return controller.isAvailable();
 	}
 
-	private void tryExecute() {
+	private void tryPurchase() {
 		try {
 			controller.purchase(viewManager.input());
 		} catch (IllegalArgumentException e) {
 			viewManager.error(e.getMessage());
-			tryExecute();
+			tryPurchase();
 		}
 	}
 
-	private void finish() {
-		viewManager.output(controller.retrieveChangeSafe());
-	}
 }
