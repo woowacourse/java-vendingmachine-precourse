@@ -1,5 +1,8 @@
 package vendingmachine.service;
 
+import java.util.HashMap;
+
+import vendingmachine.repository.Coin;
 import vendingmachine.repository.Money;
 import vendingmachine.repository.Product;
 import vendingmachine.repository.Products;
@@ -12,14 +15,54 @@ public class OrderService {
     OrderValidator orderValidator = new OrderValidator();
     Products products;
     Money money;
+    HashMap<Coin, Integer> map = new HashMap<>();
 
     public void get(Products products) {
         this.products = products;
         outputView.printOrderMoney();
         getUserMoney();
         getProduct();
+        returnCoin();
         //남은 가능한 잔돈을 반환하고 손님을 보낸다.
         //printCoin();
+    }
+
+    public void returnCoin() {
+        outputView.printReturnCoin();
+        giveMinimumCoin(money.getRemainder());
+        outputView.printCoinResult(map);
+    }
+
+    public void giveMinimumCoin(int remainder) {
+        for (Coin coin : Coin.values()) {
+            remainder = getMinimumCoin(coin, remainder);
+        }
+
+    }
+
+    public int getMinimumCoin(Coin coin, int remainder) {
+        map.put(coin,0);
+        if (coin.getAmount() > remainder) {
+            return remainder;
+        }
+        if (coin.getStock() == 0) {
+            return remainder;
+        }
+        return subtractRemainder(coin, remainder);
+    }
+
+
+    public int subtractRemainder(Coin coin, int remainder) {
+        int possibleNumber = remainder / coin.getAmount();
+        if (coin.getStock() >= possibleNumber) {
+            coin.subtractStock(possibleNumber);
+            map.put(coin,possibleNumber);
+            return remainder % coin.getAmount();
+        }
+        remainder -= coin.getAmount() * coin.getStock();
+        map.put(coin,coin.getStock());
+        coin.setStock(0);
+        return remainder;
     }
 
     public void getUserMoney() {
@@ -38,11 +81,11 @@ public class OrderService {
     public void getProduct() {
         while (true) {
             outputView.printInputMoney(money.getRemainder());
-            Product userProduct = getOrderFromUser();
-            subtract(userProduct, money);
             if (isEnd()) {
                 return;
             }
+            Product userProduct = getOrderFromUser();
+            subtract(userProduct, money);
         }
     }
 

@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import java.util.HashMap;
+
 import vendingmachine.repository.Coin;
 
 public class OutputView {
@@ -29,8 +31,20 @@ public class OutputView {
 
     }
 
-    public void printProduct(){
+    public void printProduct() {
         System.out.println("구매할 상품명을 입력해 주세요.");
+    }
+
+    public void printReturnCoin() {
+        System.out.println("잔돈");
+    }
+
+    public void printCoinResult(HashMap<Coin, Integer> map){
+
+        for (Coin coin: Coin.values()){
+            System.out.println(coin.getAmount()+"원 - " + map.get(coin)+"개");
+        }
+
     }
 
 }
