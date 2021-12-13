@@ -10,7 +10,7 @@ public class MachineHoldingAmount {
     Machine machine;
     public int currentAmount = 0;
 
-    MachineHoldingAmount(Machine machine) {
+    public MachineHoldingAmount(Machine machine) {
         this.machine = machine;
     }
 
@@ -48,6 +48,7 @@ public class MachineHoldingAmount {
         while (!checkIsFullCurrentAmount()) {
             int random = pickRandomCoin();
             if (checkIsRightRandom(random)) {
+                setCurrentAmount(random);
                 compareCoin(random).setCoinNumber();
             }
         }

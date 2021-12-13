@@ -8,13 +8,14 @@ import vendingmachine.machine.MachineReturnChange;
 
 public class ProcessController {
     public static Coin[] coins = Coin.values();
-    Machine machine;
+    static Machine machine;
+    static MachineHoldingAmount machineHoldingAmount;
     static GoodsController goodsController;
 
     private static int holdingAmount;
     private static int userMoney;
 
-    public static void makeHoldingAmount(MachineHoldingAmount machineHoldingAmount) {
+    public static void makeHoldingAmount() {
         while (true) {
             try {
                 System.out.println(ProcessConstant.ASK_HOLDING_AMOUNT);
@@ -24,6 +25,11 @@ public class ProcessController {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void makeCoins() {
+        machine = new Machine(holdingAmount);
+        machineHoldingAmount = new MachineHoldingAmount(machine);
         machineHoldingAmount.makeCoins();
     }
 
