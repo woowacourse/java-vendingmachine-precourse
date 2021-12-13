@@ -17,7 +17,7 @@ public class ProductsController {
 		Products products;
 		do {
 			products = makeProducts();
-		} while(products == null);
+		} while (products == null);
 		return products;
 	}
 
@@ -32,7 +32,7 @@ public class ProductsController {
 			Products products = new Products();
 			addProduct(products, splitLists);
 			return products;
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return null;
 		}
@@ -50,10 +50,10 @@ public class ProductsController {
 		return splitLists;
 	}
 
-	private static void addProduct(Products products, List<List<String>> productsInfoList){
+	private static void addProduct(Products products, List<List<String>> productsInfoList) {
 		for (List<String> productInfo : productsInfoList) {
 			Product product = new Product(productInfo);
-			if (products.isContains(product)){
+			if (products.isContains(product)) {
 				throw new IllegalArgumentException(MSG_DUPLICATION_ERROR);
 			}
 			products.add(product);

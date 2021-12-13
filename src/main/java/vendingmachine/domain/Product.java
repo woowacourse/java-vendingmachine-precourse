@@ -22,6 +22,10 @@ public class Product {
 		return Math.min(this.price, price);
 	}
 
+	public int minusPrice(int money) {
+		return money - price;
+	}
+
 	public boolean isInStock() {
 		return amount > 0;
 	}
@@ -32,10 +36,6 @@ public class Product {
 
 	public int addAmount(int totalAmount) {
 		return totalAmount + amount;
-	}
-
-	public int minusPrice(int money) {
-		return money - price;
 	}
 
 	@Override

@@ -13,7 +13,6 @@ public class VendingMachineController {
 	public VendingMachineController() {
 		Coins coins = new Coins(getMoneyInMachine());
 		Output.coinsInMachine(coins);
-
 		Products products = ProductsController.getProducts();
 		int inputMoney = getInputMoney();
 		vendingMachine = new VendingMachine(coins, products, inputMoney);

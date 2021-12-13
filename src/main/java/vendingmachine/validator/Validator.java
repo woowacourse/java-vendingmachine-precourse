@@ -22,15 +22,15 @@ public class Validator {
 
 	public static void validateEachProduct(List<List<String>> productsEachInfoList) {
 		for (List<String> productInfo : productsEachInfoList) {
-			Validator.validateProduct(productInfo);
+			validateProduct(productInfo);
 		}
 	}
 
 	private static void validateProduct(List<String> productInfo) {
 		ProductValidator.validateInfoMiss(productInfo);
-		validateProductName(productInfo.get(0));
-		validateProductPrice(productInfo.get(1));
-		validateProductAmount(productInfo.get(2));
+		validateProductName(productInfo.get(ProductIdx.NAME.ordinal()));
+		validateProductPrice(productInfo.get(ProductIdx.PRICE.ordinal()));
+		validateProductAmount(productInfo.get(ProductIdx.AMOUNT.ordinal()));
 	}
 
 	private static void validateProductName(String name) {
@@ -59,4 +59,6 @@ public class Validator {
 			return false;
 		}
 	}
+
+	private enum ProductIdx {NAME, PRICE, AMOUNT}
 }

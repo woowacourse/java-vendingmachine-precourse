@@ -3,11 +3,14 @@ package vendingmachine.domain;
 import java.util.Map;
 
 public class VendingMachine {
+	static final String MSG_SMALL_INPUT_MONEY_ERROR = "[ERROR] 투입 금액이 물건 가격보다 적다.";
+	static final String MSG_OUT_OF_STOCK_ERROR = "[ERROR] 해당 상품은 품절되었다.";
+
 	private final Coins coins;
 	private final Products products;
 	private int inputMoney;
 
-	public VendingMachine (Coins coins, Products products, int inputMoney){
+	public VendingMachine(Coins coins, Products products, int inputMoney) {
 		this.coins = coins;
 		this.products = products;
 		this.inputMoney = inputMoney;
@@ -29,20 +32,20 @@ public class VendingMachine {
 		inputMoney = product.minusPrice(inputMoney);
 	}
 
+	private void validateBuyingProductName(String buyingProductName) {
+		Product product = products.getProductByName(buyingProductName);
+		if (product.getSmallerPrice(inputMoney) > inputMoney) {
+			throw new IllegalArgumentException(MSG_SMALL_INPUT_MONEY_ERROR);
+		}
+		if (!product.isInStock()) {
+			throw new IllegalArgumentException(MSG_OUT_OF_STOCK_ERROR);
+		}
+	}
+
 	public Map<Coin, Integer> giveChange() {
-		if (!coins.isGreaterThanTotalMoney(inputMoney))	{
+		if (!coins.isGreaterThanTotalMoney(inputMoney)) {
 			return coins.getCoinsMap();
 		}
 		return coins.calculateChange(inputMoney);
-	}
-
-	private void validateBuyingProductName(String buyingProductName) {
-		Product product = products.getProductByName(buyingProductName);
-		if(product.getSmallerPrice(inputMoney) > inputMoney) {
-			throw new IllegalArgumentException();
-		}
-		if (!product.isInStock()){
-			throw new IllegalArgumentException();
-		}
 	}
 }
