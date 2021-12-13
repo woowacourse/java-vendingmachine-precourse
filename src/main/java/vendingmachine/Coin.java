@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-
 package vendingmachine;
 
 import java.util.Arrays;
@@ -29,6 +27,10 @@ public enum Coin {
         return amount;
     }
 
+    public int getNumberOfCoin() {
+        return numberOfCoin;
+    }
+
     public void InputOneCoin() {
         this.numberOfCoin ++;
     }
@@ -56,26 +58,11 @@ public enum Coin {
         return oneCoin;
     }
 
-}
-=======
-package vendingmachine;
-
-public enum Coin {
-    COIN_500(500),
-    COIN_100(100),
-    COIN_50(50),
-    COIN_10(10);
-
-    private final int amount;
-    private int numberOfCoin;
-
-    Coin(final int amount) {
-        this.amount = amount;
+    public static void PrintNumberOfCoin() {
+        System.out.println("자판기가 보유한 동전");
+        for (Coin coin : Coin.values()) {
+            System.out.println(coin.getAmount() + "원 - " + coin.getNumberOfCoin() + "개");
+        }
+        System.out.println();
     }
-
-    public void setNumberOfCoin(int numberOfCoin) {
-        this.numberOfCoin = numberOfCoin;
-    }
-
 }
->>>>>>> 8d5939b8533e3dbd17938b5e73d73927fe474ffc
