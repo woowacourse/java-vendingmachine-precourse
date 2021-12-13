@@ -1,15 +1,15 @@
 package vendingmachine.service;
 
+import static vendingmachine.constants.SystemConstants.NO_TOTAL_MONEY_LEFT;
+import static vendingmachine.constants.SystemConstants.ZERO_COINS;
+import static vendingmachine.validator.NumberInputValidator.validateMoneyInput;
+
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.HashMap;
-
-import static vendingmachine.constants.SystemConstants.NO_TOTAL_MONEY_LEFT;
-import static vendingmachine.constants.SystemConstants.ZERO_COINS;
-import static vendingmachine.validator.NumberInputValidator.validateMoneyInput;
 
 public class CoinService {
 

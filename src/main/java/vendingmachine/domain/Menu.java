@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Menu {
 
-    private List<Merchandise> merchandiseList;
+    private final List<Merchandise> merchandiseList;
 
     public Menu(List<Merchandise> merchandiseList) {
         this.merchandiseList = merchandiseList;
