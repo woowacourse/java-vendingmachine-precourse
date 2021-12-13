@@ -18,6 +18,16 @@ public enum Coin {
         return amount;
     }
 
+    public int getMinimumCoinAmount(){
+        int minimumAmount = Integer.MAX_VALUE;
+
+        for(Coin currentCoin : Coin.values()){
+            minimumAmount = Math.max(minimumAmount, currentCoin.getAmount());
+        }
+
+        return minimumAmount;
+    }
+
     @Override
     public String toString(){
         StringBuilder coinValue = new StringBuilder(Integer.toString(this.amount));
