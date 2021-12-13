@@ -32,6 +32,9 @@ public class VendingMachine {
 		if (product.soldOut()) {
 			return false;
 		}
+		if (!product.isBuy(insertMoney)) {
+			return false;
+		}
 		return true;
 	}
 

@@ -71,4 +71,11 @@ public class Product implements Comparable<Product>{
 	public int hashCode() {
 		return Objects.hash(name);
 	}
+
+	public boolean isBuy(Money insertMoney) {
+		if (price.compareTo(insertMoney) > 0) {
+			return false;
+		}
+		return true;
+	}
 }
