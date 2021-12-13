@@ -23,7 +23,8 @@ public class MachineCore {
 
     private void runMachine() {
         readInputMoneyFromUser();
-
+        String productName =readProductToBuyFromUser();
+        machine.sellProduct(productName);
     }
 
     private void prepareMachin() {
@@ -83,5 +84,16 @@ public class MachineCore {
             }
         }
         view.printBlankLine();
+    }
+
+    private String readProductToBuyFromUser() {
+        while (true) {
+            try {
+                String input = view.askQuestion(InputData.ASK_PRODUCT_TO_BUY);
+                return productValidator.checkName(input);
+            } catch (IllegalArgumentException exception) {
+                view.printError();
+            }
+        }
     }
 }
