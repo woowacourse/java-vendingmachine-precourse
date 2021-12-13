@@ -1,7 +1,9 @@
 package vendingmachine.controller;
 
 import vendingmachine.model.Changes;
+import vendingmachine.model.DisplayMerchandise;
 import vendingmachine.service.ChangesService;
+import vendingmachine.service.DisplayMerchandiseService;
 import vendingmachine.service.VendingMachineService;
 import vendingmachine.view.VendingMachineInputView;
 import vendingmachine.view.VendingMachineOutputView;
@@ -9,12 +11,14 @@ import vendingmachine.view.VendingMachineOutputView;
 public class VendingMachineController {
     private final VendingMachineService vendingMachineService;
     private final ChangesService changesService;
+    private final DisplayMerchandiseService displayMerchandiseService;
     private final VendingMachineInputView vendingMachineInputView;
     private final VendingMachineOutputView vendingMachineOutputView;
 
     public VendingMachineController() {
         this.vendingMachineService = new VendingMachineService();
         this.changesService = new ChangesService();
+        this.displayMerchandiseService = new DisplayMerchandiseService();
         this.vendingMachineInputView = new VendingMachineInputView();
         this.vendingMachineOutputView = new VendingMachineOutputView();
     }
@@ -31,6 +35,7 @@ public class VendingMachineController {
         Changes changes = changesService.createChanges(amount);
         vendingMachineOutputView.outputHoldingChanges(changesService.getHoldingChanges(changes));
         String[][] merchandise = vendingMachineInputView.inputMerchandiseInfo();
+        DisplayMerchandise displayMerchandise = displayMerchandiseService.createDisplayMerchandise(merchandise);
     }
 
     public void turnOnVendingMachine() {
