@@ -30,6 +30,7 @@ public class VendingMachineController {
         int amount = vendingMachineInputView.inputHoldingAmount();
         Changes changes = changesService.createChanges(amount);
         vendingMachineOutputView.outputHoldingChanges(changesService.getHoldingChanges(changes));
+        String[][] merchandise = vendingMachineInputView.inputMerchandiseInfo();
     }
 
     public void turnOnVendingMachine() {

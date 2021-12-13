@@ -5,6 +5,16 @@ import vendingmachine.util.constant.InputCondition;
 import vendingmachine.util.InputGenerator;
 
 public class AmountValidator implements InputValidator {
+
+    private static final AmountValidator instance = new AmountValidator();
+
+    private AmountValidator() {
+    }
+
+    public static AmountValidator getInstance() {
+        return instance;
+    }
+
     @Override
     public void validate(String input) {
         validateNumber(input);
