@@ -28,6 +28,10 @@ public enum Coin {
         this.number++;
     }
 
+    public void minusCoinNumber() {
+        this.number--;
+    }
+
     public int getCoinHowMuch() {
         return this.amount * this.number;
     }
