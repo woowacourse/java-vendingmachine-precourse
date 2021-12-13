@@ -19,10 +19,7 @@ public class TransactionController {
 			Messages.OUTPUT_VIEW_INITIAL_COIN_MSG.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		ItemList itemList = generateItemListByInput();
 		User user = generateUserByInput();
-		while (!itemList.isAllSoldOut() && !user.isBankrupt(itemList.getMinPrice())) {
-			OutputView.viewNowPayMoney(user.getPayMoney());
-			UserAndItemController.buy(user, itemList);
-		}
+		startTransaction(user, itemList);
 		ArrayList<Item> returnedCoin = Coin.getReturnedCoin(coin, user.getPayMoney());
 		OutputView.viewCoins(returnedCoin,
 			Messages.OUTPUT_VIEW_RETURN_MONEY_MSG.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
@@ -45,5 +42,12 @@ public class TransactionController {
 		UserMoneyInputView userMoneyInputView = new UserMoneyInputView();
 		User user = new User(Integer.valueOf(userMoneyInputView.getInput()));
 		return user;
+	}
+
+	private static void startTransaction(User user, ItemList itemList) {
+		while (!itemList.isAllSoldOut() && !user.isBankrupt(itemList.getMinPrice())) {
+			OutputView.viewNowPayMoney(user.getPayMoney());
+			UserAndItemController.buy(user, itemList);
+		}
 	}
 }
