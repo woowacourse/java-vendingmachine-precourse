@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
-import java.util.stream.Collectors;
 
 public class ProductContainer {
 
@@ -33,14 +32,11 @@ public class ProductContainer {
     }
 
     public boolean isAllSoldOut() {
-        return productMap.values().stream()
-                                    .filter(product -> !product.isSoldOut())
-                                    .collect(Collectors.toList())
-                                    .isEmpty();
+        return productMap.values().stream().allMatch(Product::isSoldOut);
     }
 
     private void checkProductInContainer(String productName) {
-        if (!productMap.keySet().contains(productName)) {
+        if (!productMap.containsKey(productName)) {
             throw new NoSuchElementException(ErrorMessage.NO_PRODUCT_MATCH.getCompleteMessage());
         }
     }
