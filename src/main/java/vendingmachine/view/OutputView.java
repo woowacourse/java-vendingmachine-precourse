@@ -15,7 +15,13 @@ public class OutputView {
 	}
 
 	public static void remainCoins(Map<Coin, Integer> remain) {
-		remain.forEach((coin, integer) -> System.out.println("coin = " + coin + " : " + integer));
+		System.out.println("잔돈");
+		for (Map.Entry<Coin, Integer> entry : remain.entrySet()) {
+			if (entry.getValue() == 0) {
+				continue;
+			}
+			System.out.println(entry.getKey().getAmount() + "원 - " + entry.getValue() + "개");
+		}
 	}
 
 	public static void remainBalance(int balance) {
