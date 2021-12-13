@@ -4,9 +4,19 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class PrintUI {
     public static int InputChange() {
+        int change;
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        int change = Integer.parseInt(Console.readLine());
-        return change;
+        try {
+            change = Integer.parseInt(Console.readLine());
+            if (change < 0) {
+                throw new IllegalArgumentException();
+            }
+            System.out.println();
+            return change;
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] : 음수는 넣을 수 없어요");
+            return InputChange();
+        }
     }
 
     public static String[] InputJuice() {
