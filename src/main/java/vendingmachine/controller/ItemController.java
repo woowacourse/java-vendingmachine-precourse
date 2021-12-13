@@ -8,7 +8,7 @@ public class ItemController {
     ArrayList<Item> itemList;
 
     public ItemController() {
-        itemList = InputManager.setItemList();
+        itemList = InputProcessor.setItemList();
     }
 
     public int getMinItemPrice() {

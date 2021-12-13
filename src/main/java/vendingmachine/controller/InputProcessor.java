@@ -1,9 +1,9 @@
 package vendingmachine.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Validators;
 import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.view.InputManager;
 import vendingmachine.view.OutputManager;
 
 import java.util.Arrays;
@@ -11,19 +11,12 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
-public class InputManager {
+public class InputProcessor {
     private static final String PREFIX_ERROR = "[ERROR]";
-
-    private static String getUserInput(String guide) {
-        OutputManager.printMessage(guide);
-        String userInput = Console.readLine();
-        OutputManager.printBlank();
-        return userInput;
-    }
 
     public static VendingMachine setVendingMachine() {
         while (true) {
-            String inputData = getUserInput("자판기가 보유하고 있는 금액을 입력해 주세요.");
+            String inputData = InputManager.getUserInput("자판기가 보유하고 있는 금액을 입력해 주세요.");
             try {
                 Validators.validateAmount(inputData);
                 return new VendingMachine(Integer.parseInt(inputData));
@@ -45,7 +38,7 @@ public class InputManager {
 
     public static ArrayList<Item> setItemList() {
         while (true) {
-            String inputData = getUserInput("상품명과 가격, 수량을 입력해 주세요.");
+            String inputData = InputManager.getUserInput("상품명과 가격, 수량을 입력해 주세요.");
             try {
                 Validators.validateItem(inputData);
             } catch (IllegalArgumentException e) {
@@ -58,7 +51,7 @@ public class InputManager {
 
     public static int setUserAmount() {
         while (true) {
-            String inputData = getUserInput("투입 금액을 입력해주세요.");
+            String inputData = InputManager.getUserInput("투입 금액을 입력해주세요.");
             try {
                 Validators.validateIntegerString(inputData);
                 return Integer.parseInt(inputData);
@@ -71,7 +64,7 @@ public class InputManager {
     public static String getWantedItemName() {
         while (true) {
             try {
-                String inputData = getUserInput("구매할 상품명을 입력해주세요.");
+                String inputData = InputManager.getUserInput("구매할 상품명을 입력해주세요.");
                 Validators.validateEmptyString(inputData);
                 return inputData;
             } catch (IllegalArgumentException e) {

@@ -10,20 +10,20 @@ import vendingmachine.view.OutputManager;
 public class VendingMachineController {
     private VendingMachine vendingMachine;
     private ItemController itemController;
-    private InputManager inputManager;
+    private InputProcessor inputManager;
 
     public boolean checkItemInList(ItemController itemController, String itemName) {
         return itemController.checkInList(itemName);
     }
 
     public void init() {
-        vendingMachine = InputManager.setVendingMachine();
+        vendingMachine = InputProcessor.setVendingMachine();
         OutputManager.printVendingMachineStatus(vendingMachine);
         itemController = new ItemController();
-        vendingMachine.setRemainderMoney(InputManager.setUserAmount());
+        vendingMachine.setRemainderMoney(InputProcessor.setUserAmount());
     }
 
-    public void processItem(Item item) {
+    public void buyItem(Item item) {
         if (item.checkPrice(vendingMachine.getRemainderMoney()) && !item.checkNotItem()) {
             vendingMachine.decreaseMoney(item.getPrice());
             item.decreaseCount();
@@ -39,10 +39,10 @@ public class VendingMachineController {
         Item targetItem = null;
         try {
             OutputManager.printCurrentUserAmount(vendingMachine);
-            targetItem = itemController.find(InputManager.getWantedItemName());
-            processItem(targetItem);
+            targetItem = itemController.find(InputProcessor.getWantedItemName());
+            buyItem(targetItem);
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] 존재하지 않는 상품입니다.");
+            OutputManager.printMessage("[ERROR] 존재하지 않는 상품입니다.");
         }
         return true;
     }
