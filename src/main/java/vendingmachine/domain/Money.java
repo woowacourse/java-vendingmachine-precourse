@@ -19,10 +19,6 @@ public class Money {
 		reduce(moneyAmount);
 	}
 
-	public void getMoney() {
-		System.out.println(money);
-	}
-
 	public boolean payable(int moneyAmount) {
 		return moneyAmount <= money;
 	}

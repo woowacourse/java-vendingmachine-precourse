@@ -21,7 +21,7 @@ public class VendingMachineController {
 		Money money = giveMoney();
 		sellItem(items, money);
 
-		System.out.println(money.toString());
+		System.out.println(money);
 		OutputView.printChanges(money.makeChanges(coins));
 	}
 
@@ -39,7 +39,7 @@ public class VendingMachineController {
 		int leastItemCost = itemcontroller.getLeastItemCost(items);
 		while (money.payable(leastItemCost) && !items.checkAllOutOfOrder()) {
 			try {
-				System.out.println(money.toString());
+				System.out.println(money);
 				OutputView.printItemPerChaseRequest();
 				Item item = items.findItemByName(inputView.scanItemName(), money);
 				item.sell();
