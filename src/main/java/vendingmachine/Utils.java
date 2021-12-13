@@ -70,12 +70,21 @@ public class Utils {
     public static void play(List<Product> productList, int userMoney) {
         while(userMoney>0){
             System.out.println(Message.USER_MONEY+ userMoney + "원");
+            
+            // 종결조건 확인
+            if(terminate(productList, userMoney)){
+                break;
+            }
+
             System.out.println(Message.INPUT_PROD_NAME);
             String prod = Console.readLine();
             int price = buyProdByUwer(productList,  prod);
             userMoney-=price;
         }
         return;
+    }
+
+    public static void printLastMoney() {
     }
 
     public static int buyProdByUwer(List<Product> productList, String prod){
@@ -89,6 +98,27 @@ public class Utils {
         }
         // 재고가 없는 경우 에러를 발생시킨다.
         return 0;
+    }
+
+    public static boolean terminate(List<Product> productList, int userMoney){
+        if(lessThanCheapest(productList, userMoney))   return true;
+        if(allStockOut(productList))   return true;
+        return false;
+    }
+
+    public static boolean lessThanCheapest(List<Product> productList, int userMoney){
+        int minPrice = 1000000;
+        for(Product product: productList){
+            minPrice = Math.min(product.getPrice(), minPrice);
+        }
+        return (minPrice>userMoney);
+    }
+
+    public static boolean allStockOut(List<Product> productList){
+        for(Product product: productList){
+            if(product.getStock()>0)    return false;
+        }
+        return true;
     }
 
     public static boolean checkStock(String prod){return true;};

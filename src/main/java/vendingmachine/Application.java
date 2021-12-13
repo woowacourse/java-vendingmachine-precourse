@@ -27,5 +27,7 @@ public class Application {
         // 구매
         Utils.play(productList, userMoney);
 
+        // 마지막 결과 출력
+        Utils.printLastMoney();
     }
 }
