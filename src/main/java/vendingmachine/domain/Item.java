@@ -7,7 +7,7 @@ public class Item {
 	private static final int TEN = 10;
 	private static final int COST_LOWER_BOUND = 100;
 	private static final int NUMBER_OF_TYPE = 3;
-	private static final String COST = "비용";
+	private static final String COST = "가격";
 	private static final String AMOUNT = "수량";
 
 	private final String name;

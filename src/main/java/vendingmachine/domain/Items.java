@@ -22,7 +22,7 @@ public class Items {
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException("해당 이름의 상품을 찾을 수 없습니다."));
 		if (!foundItem.isSellable()) {
-			throw new IllegalArgumentException("상품의 수량이 0개이므로 구매할 수 없습니다.");
+			throw new IllegalArgumentException("상품의 재고가 소진되어 구매할 수 없습니다.");
 		}
 		if (!money.payable(foundItem.getCost())){
 			throw new IllegalArgumentException("투입 금액보다 상품의 금액이 더 비싸므로 상품을 구매할 수 없습니다.");
