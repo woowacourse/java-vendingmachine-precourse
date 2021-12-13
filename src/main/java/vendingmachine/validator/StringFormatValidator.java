@@ -17,7 +17,7 @@ public class StringFormatValidator {
     }
 
     private static void validateMerchandiseInfoFormat(String merchandiseInfo) {
-        validateBracketFormat(merchandiseInfo);
+        validateSeparatorFormat(merchandiseInfo);
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
         String name = infoList[0];
 
@@ -25,9 +25,20 @@ public class StringFormatValidator {
         validateMerchandiseNumberInput(infoList[2]);
     }
 
-    private static void validateBracketFormat(String merchandiseInfo) {
+    private static void validateSeparatorFormat(String merchandiseInfo) {
+        validateSurroundingBrackets(merchandiseInfo);
+        validateNoInternalSeparators(merchandiseInfo.substring(1, merchandiseInfo.length() - 1));
+    }
+
+    private static void validateSurroundingBrackets(String merchandiseInfo) {
         if (!merchandiseInfo.startsWith("[") || !merchandiseInfo.endsWith("]")) {
             throw new IllegalArgumentException(NOT_SURROUNDED_BY_BRACKETS_EXCEPTION);
+        }
+    }
+
+    private static void validateNoInternalSeparators(String content) {
+        if (content.contains("[") || content.contains("]") || content.contains(";")) {
+            throw new IllegalArgumentException(INVALID_SEPARATORS_EXCEPTION);
         }
     }
 
