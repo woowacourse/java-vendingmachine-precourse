@@ -1,7 +1,5 @@
 package vendingmachine.management;
 
-import java.util.Arrays;
-
 import vendingmachine.common.CheckMoenyFigure;
 import vendingmachine.management.validation.CheckCommodityFormat;
 import vendingmachine.view.InputView;

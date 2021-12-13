@@ -27,6 +27,7 @@ public class OperationView {
     
     public static void showBalanceReturn(Map<Coin,Integer> map) {
         System.out.println(BALANCE);
+        
         for(Coin c : map.keySet()) {
             if(map.get(c) == 0) {
                 continue;
