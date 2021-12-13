@@ -21,7 +21,7 @@ public class MenuInputFormatValidator {
         validateNotBlankInput(merchandiseInfo);
         validateSeparatorFormat(merchandiseInfo);
 
-        String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
+        String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(COMMA);
         validateNameLength(infoList[NAME_IDX]);
         validatePriceInput(infoList[PRICE_IDX]);
         validateMerchandiseNumberInput(infoList[NUMBER_IDX]);
@@ -39,17 +39,17 @@ public class MenuInputFormatValidator {
     }
 
     private static void validateSurroundingBrackets(String merchandiseInfo) {
-        if (!merchandiseInfo.startsWith("[") || !merchandiseInfo.endsWith("]")) {
+        if (!merchandiseInfo.startsWith(BRACKET_OPEN) || !merchandiseInfo.endsWith(BRACKET_CLOSE)) {
             throw new IllegalArgumentException(NOT_SURROUNDED_BY_BRACKETS_EXCEPTION);
         }
     }
 
     private static void validateInternalSeparators(String content) {
-        if (content.contains("[") || content.contains("]")) {
+        if (content.contains(BRACKET_OPEN) || content.contains(BRACKET_CLOSE)) {
             throw new IllegalArgumentException(INVALID_SEPARATORS_EXCEPTION);
         }
 
-        if (content.split(",").length != MERCHANDISE_INFO_TYPE_NUM) {
+        if (content.split(COMMA).length != MERCHANDISE_INFO_TYPE_NUM) {
             throw new IllegalArgumentException(INVALID_COMMAS_EXCEPTION);
         }
     }
@@ -96,7 +96,7 @@ public class MenuInputFormatValidator {
         Set<String> merchandiseNameSet = new HashSet<>();
 
         for (String merchandiseInfo : merchandiseInfos) {
-            String name = merchandiseInfo.substring(1).split(",")[NAME_IDX];
+            String name = merchandiseInfo.substring(1).split(COMMA)[NAME_IDX];
             merchandiseNames.add(name);
             merchandiseNameSet.add(name);
         }

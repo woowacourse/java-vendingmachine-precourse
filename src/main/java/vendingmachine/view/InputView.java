@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import static vendingmachine.constants.InputMessages.*;
+import static vendingmachine.constants.SystemConstants.SEMICOLON;
 import static vendingmachine.validator.NumberInputValidator.*;
 import static vendingmachine.validator.MenuInputFormatValidator.*;
 
@@ -29,7 +30,7 @@ public class InputView {
     public static Menu getMenuInput() {
         try {
             System.out.println(REQUEST_MENU_INPUT);
-            String[] merchandiseInfos = Console.readLine().split(";");
+            String[] merchandiseInfos = Console.readLine().split(SEMICOLON);
             validateMenuInputFormat(merchandiseInfos);
 
             List<Merchandise> merchandiseList = new ArrayList<>();

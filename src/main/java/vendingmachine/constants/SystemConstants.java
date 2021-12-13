@@ -18,4 +18,9 @@ public class SystemConstants {
     public static int MINIMUM_COIN_DIGIT = Coin.COIN_10.getAmount();
     public static int MINIMUM_PRICE = 100;
     public static int MERCHANDISE_INFO_TYPE_NUM = 3;
+
+    public static String SEMICOLON = ";";
+    public static String COMMA = ",";
+    public static String BRACKET_OPEN = "[";
+    public static String BRACKET_CLOSE = "]";
 }
