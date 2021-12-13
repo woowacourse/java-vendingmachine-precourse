@@ -14,6 +14,10 @@ public class Changes {
         this.changes = initChanges();
     }
 
+    public List<Change> getChanges() {
+        return changes;
+    }
+
     @Override
     public String toString() {
         return changes.stream()
@@ -28,8 +32,30 @@ public class Changes {
         dealWithRemainAmount(amount);
     }
 
-    public void getSumOfChanges() {
-        // TODO: 잔돈 합산 반환
+    public int getSumOfChanges() {
+        int sum = 0;
+
+        for (Change change : changes) {
+            if (change.getNumber() == 0) {
+                continue;
+            }
+            sum += change.getNumber() * change.getCoin().getAmount();
+        }
+        return sum;
+    }
+
+    public List<Change> calculateReturnChanges(int amount) {
+        List<Change> returnChanges = new ArrayList<>();
+
+        for (Change change : changes) {
+            if (amount <= 0) {
+                break;
+            }
+            Change returnChange = change.getReturnChange(amount);
+            returnChanges.add(returnChange);
+            amount -= returnChange.getNumber() * returnChange.getCoin().getAmount();
+        }
+        return returnChanges;
     }
 
     private List<Change> initChanges() {

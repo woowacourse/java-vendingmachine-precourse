@@ -33,10 +33,26 @@ public class Change {
         this.number += number;
     }
 
+    public void subNumber(int number) {
+        this.number -= number;
+    }
+
     public int pickRandomNumber(int amount) {
         int maxRange = amount / coin.getAmount();
         List<Integer> ranges = getRangeList(maxRange);
         return Randoms.pickNumberInList(ranges);
+    }
+
+    public Change getReturnChange(int amount) {
+        Change newChange = new Change(coin);
+        int count = amount / coin.getAmount();
+
+        if (number < count) {
+            count = number;
+        }
+        newChange.addNumber(count);
+        subNumber(count);
+        return newChange;
     }
 
     private List<Integer> getRangeList(int max) {

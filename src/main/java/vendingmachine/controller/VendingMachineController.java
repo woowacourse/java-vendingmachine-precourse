@@ -53,6 +53,9 @@ public class VendingMachineController {
     }
 
     public void turnOffVendingMachine() {
-        // TODO: 자판기 판매 종료, 잔돈 반환
+        int returnAmount = vendingMachineService.getRemainAmount();
+        Changes changes = vendingMachineService.getReturnChanges();
+        String returnChanges = changesService.getReturnChanges(returnAmount, changes);
+        vendingMachineOutputView.outputReturnChanges(returnChanges);
     }
 }

@@ -26,4 +26,8 @@ public class VendingMachineService {
         Merchandise merchandise = vendingMachine.getDisplayMerchandise().decreaseMerchandiseInventory(merchandiseName);
         vendingMachine.subtractInputAmount(merchandise.getPrice());
     }
+
+    public Changes getReturnChanges() {
+        return vendingMachine.getChanges();
+    }
 }
