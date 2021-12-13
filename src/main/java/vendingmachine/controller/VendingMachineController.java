@@ -35,8 +35,8 @@ public class VendingMachineController {
 	}
 
 	private void sellItem(Items items, Money money) {
-		int leastItemCost = itemcontroller.getLeastItemCost(items);
-		while (money.payable(leastItemCost) && !items.checkAllOutOfOrder()) {
+		while (money.payable(itemcontroller.getLeastItemCost(items))
+			&& !items.checkAllOutOfOrder()) {
 			try {
 				itemcontroller.update(items, money);
 			} catch (IllegalArgumentException e) {
