@@ -13,15 +13,15 @@ public class ProductRepository {
         productMap.keySet().forEach(k -> productInfo.put(k, productMap.get(k)));
     }
 
-    public Set<String> getProductNameSet() {
+    public static Set<String> getProductNameSet() {
         return productInfo.keySet();
     }
 
-    public int getProductPrice(String name, int change) {
+    public static int getProductPrice(String name, int change) {
         return productInfo.get(name).getPrice();
     }
 
-    public int getProductQuantity(String name, int change) {
+    public static int getProductQuantity(String name) {
         return productInfo.get(name).getQuantity();
     }
 
@@ -30,25 +30,10 @@ public class ProductRepository {
         return productInfo.get(name).getPrice();
     }
 
-    public boolean isExist(String name) {
+    public static boolean isExist(String name) {
         if (!productInfo.containsKey(name)) {
             return false;
         }
         return true;
     }
-
-    public boolean hasEnoughMoney(String name, int change) {
-        if (change < productInfo.get(name).getPrice()) {
-            return false;
-        }
-        return true;
-    }
-
-    public boolean hasEnoughQuantity(String name) {
-        if (productInfo.get(name).getQuantity() > 0) {
-            return true;
-        }
-        return false;
-    }
-
 }

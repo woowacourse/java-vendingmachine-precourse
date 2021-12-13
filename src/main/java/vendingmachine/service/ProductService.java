@@ -7,13 +7,11 @@ import vendingmachine.view.InputViews;
 import java.util.HashMap;
 import java.util.Map;
 
-import static vendingmachine.repository.ProductRepository.saveProductInfo;
+import static vendingmachine.repository.ProductRepository.*;
 import static vendingmachine.service.Validator.*;
 import static vendingmachine.view.Messages.*;
 
 public class ProductService {
-
-    private static ProductRepository productRepository = new ProductRepository();
 
     public void getProductList() {
         while (true) {
@@ -70,29 +68,5 @@ public class ProductService {
         int quantity = checkNotString(quantityStr);
         checkPositiveNumber(quantity);
         return quantity;
-    }
-
-    public static void isValidOrderName(String order, int change) {
-        if (!productRepository.isExist(order)) {
-            throw new IllegalArgumentException(ERROR_NOT_INVALID_ORDER_NAME);
-        }
-        if (!productRepository.hasEnoughMoney(order, change)) {
-            throw new IllegalArgumentException(ERROR_LESS_CHANGE);
-        }
-        if (!productRepository.hasEnoughQuantity(order)) {
-            throw new IllegalArgumentException(ERROR_LESS_QUANTITY);
-        }
-    }
-
-    public boolean availableToBuy(int change) {
-        boolean canBuy = false;
-        for (String name : productRepository.getProductNameSet()) {
-            if (productRepository.getProductPrice(name, change) < change
-                    && productRepository.getProductQuantity(name, change) > 0) {
-                canBuy = true;
-                return canBuy;
-            }
-        }
-        return canBuy;
     }
 }

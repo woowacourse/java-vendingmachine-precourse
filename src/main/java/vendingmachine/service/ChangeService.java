@@ -7,14 +7,11 @@ import vendingmachine.view.InputViews;
 import java.util.TreeMap;
 
 import static vendingmachine.domain.Coin.*;
-import static vendingmachine.repository.ChangeRepository.getChange;
-import static vendingmachine.repository.ChangeRepository.subtractChange;
+import static vendingmachine.repository.ChangeRepository.*;
 import static vendingmachine.repository.MachineCoinRepository.getNumOfCoin;
 import static vendingmachine.service.Validator.*;
 
 public class ChangeService {
-
-    private static ChangeRepository changeRepository;
 
     public void getInitUserChange() {
         while (true) {
@@ -23,7 +20,7 @@ public class ChangeService {
                 int inputMoney = checkNotString(input);
                 checkPositiveNumber(inputMoney);
                 checkDivideByTen(inputMoney);
-                changeRepository.initChange(inputMoney);
+                initChange(inputMoney);
                 return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -62,5 +59,4 @@ public class ChangeService {
         }
         return 0;
     }
-
 }

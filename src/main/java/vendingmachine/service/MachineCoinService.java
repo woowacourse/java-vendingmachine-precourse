@@ -9,12 +9,11 @@ import java.util.TreeMap;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
+import static vendingmachine.repository.MachineCoinRepository.initCoin;
 import static vendingmachine.service.Validator.*;
 
 
 public class MachineCoinService {
-
-    private static MachineCoinRepository machineCoinRepository;
 
     public static int getInitMachineMoney() {
         while (true) {
@@ -31,12 +30,12 @@ public class MachineCoinService {
     }
 
     public void initRemainCoin(int initMoney) {
-        Map<Coin, Integer> remainCoin= new TreeMap<>();
+        Map<Coin, Integer> remainCoin = new TreeMap<>();
         for (Coin c : getCoinList()) {
             remainCoin.put(c, 0);
         }
         setRemainCoin(remainCoin, initMoney);
-        machineCoinRepository.initCoin(remainCoin);
+        initCoin(remainCoin);
     }
 
     private void setRemainCoin(Map<Coin, Integer> remainCoin, int initMoney) {

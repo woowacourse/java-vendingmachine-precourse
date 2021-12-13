@@ -1,11 +1,12 @@
 package vendingmachine.controller;
 
-import vendingmachine.repository.ProductRepository;
 import vendingmachine.service.ChangeService;
 import vendingmachine.service.MachineCoinService;
 import vendingmachine.service.ProductService;
 
-import static vendingmachine.repository.BuyService.sellProduct;
+import static vendingmachine.service.BuyService.isAvailableKeepSell;
+import static vendingmachine.service.BuyService.isValidOrderName;
+import static vendingmachine.service.BuyService.sellProduct;
 import static vendingmachine.service.ChangeService.getCurrentChange;
 import static vendingmachine.service.ChangeService.getFinalChange;
 import static vendingmachine.view.InputViews.inputOrderMessage;
@@ -50,19 +51,12 @@ public class VendingMachineController {
         printFinalChange(getFinalChange(), getCurrentChange());
     }
 
-    private boolean isAvailableKeepSell(int change) {
-        if (!productService.availableToBuy(change)) {
-            return false;
-        }
-        return true;
-    }
-
     private String getUserOrder(int change) {
         while (true) {
             try {
                 printCurrentChange(change);
                 String order = inputOrderMessage();
-                ProductService.isValidOrderName(order, change);
+                isValidOrderName(order, change);
                 return order;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
