@@ -4,8 +4,12 @@ import vendingmachine.service.MachineCoinService;
 
 public class MachineCoinController {
 
-    public static void initMachineCoin() {
-        MachineCoinService.getInitMachineMoney();
+    private static MachineCoinService machineCoinService;
 
+    public static void initMachineCoin() {
+        machineCoinService = new MachineCoinService();
+
+        int inputMoney = machineCoinService.getInitMachineMoney();
+        machineCoinService.initRemainCoin(inputMoney);
     }
 }
