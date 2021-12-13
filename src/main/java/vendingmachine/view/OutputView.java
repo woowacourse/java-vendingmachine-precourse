@@ -1,6 +1,9 @@
-package vendingmachine;
+package vendingmachine.view;
 
 import java.util.Map;
+
+import vendingmachine.model.Coin;
+import vendingmachine.model.Money;
 
 public class OutputView {
 	private static final String MACHINE_COIN_MESSAGE = "\n자판기가 보유한 동전";

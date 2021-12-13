@@ -1,7 +1,7 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.Coin.*;
+import static vendingmachine.model.Coin.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;

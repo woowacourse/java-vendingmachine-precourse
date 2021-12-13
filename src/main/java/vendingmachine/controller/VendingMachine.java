@@ -1,6 +1,15 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import java.util.Map;
+
+import vendingmachine.model.BeverageShop;
+import vendingmachine.model.Beverages;
+import vendingmachine.model.Coin;
+import vendingmachine.model.CoinBucket;
+import vendingmachine.view.InputView;
+import vendingmachine.model.Money;
+import vendingmachine.view.OutputView;
+import vendingmachine.model.RandomCoinGenerator;
 
 public class VendingMachine {
 	private CoinBucket coinBucket;

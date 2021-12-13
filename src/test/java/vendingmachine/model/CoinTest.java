@@ -1,8 +1,8 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.Coin.*;
+import static vendingmachine.model.Coin.*;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
@@ -17,9 +17,9 @@ public class CoinTest {
 	@Test
 	void 동전생성_테스트() {
 		assertEquals(COIN_10, Coin.from(Money.from(10)));
-		assertEquals(Coin.COIN_50, Coin.from(Money.from(50)));
-		assertEquals(Coin.COIN_100, Coin.from(Money.from(100)));
-		assertEquals(Coin.COIN_500, Coin.from(Money.from(500)));
+		assertEquals(COIN_50, Coin.from(Money.from(50)));
+		assertEquals(COIN_100, Coin.from(Money.from(100)));
+		assertEquals(COIN_500, Coin.from(Money.from(500)));
 	}
 
 	@Test

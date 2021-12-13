@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 public class Money implements Comparable<Money> {
 	private int amount;

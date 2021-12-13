@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 public interface CoinGenerator {
 

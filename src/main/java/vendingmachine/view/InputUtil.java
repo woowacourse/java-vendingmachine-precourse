@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.view;
 
 import static camp.nextstep.edu.missionutils.Console.*;
 
