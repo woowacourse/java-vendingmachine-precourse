@@ -15,14 +15,10 @@ public class InputView {
 
 	private static final String INPUT_SPLIT_DELIMITER = ";";
 
-	public static int inputTotalAmountOfVendingMachine() {
+	public static String inputTotalAmountOfVendingMachine() {
 		System.out.println(SystemMessage.GET_TOTAL_AMOUNT_OF_VENDING_MACHINE.getText());
-		while (true) {
-			String totalAmount = Console.readLine();
-			if (checkIsValidTotalAmount(totalAmount)) {
-				return Integer.parseInt(totalAmount);
-			}
-		}
+		return Console.readLine();
+
 	}
 
 	public static List<String> inputInformationOfProducts() {
