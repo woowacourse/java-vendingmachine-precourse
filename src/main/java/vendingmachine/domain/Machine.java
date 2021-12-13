@@ -33,8 +33,9 @@ public class Machine {
 		return balance;
 	}
 
-	public boolean isExistItem(String item) {
-		return merchandise.isExistItem(item);
+	public boolean isValidItem(String item) {
+		return merchandise.isExistItem(item)
+			&& merchandise.findItem(item).isSoldOut() == false;
 	}
 
 	public void buyItem(String name) {

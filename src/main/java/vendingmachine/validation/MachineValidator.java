@@ -12,7 +12,7 @@ public class MachineValidator {
 
 	public boolean isValidSelectedItem(String name) {
 		try {
-			validateItemExist(name);
+			validateItemSelect(name);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e);
 			return false;
@@ -20,8 +20,8 @@ public class MachineValidator {
 		return true;
 	}
 
-	public void validateItemExist(String name) {
-		if (machine.isExistItem(name) == false) {
+	public void validateItemSelect(String name) {
+		if (machine.isValidItem(name) == false) {
 			throw new IllegalArgumentException(InputValidator.ERROR_MESSAGE + NOT_EXIST_ITEM);
 		}
 	}
