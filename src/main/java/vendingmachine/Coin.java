@@ -53,4 +53,8 @@ public enum Coin implements Comparable<Coin> {
 		}
 		return count;
 	}
+
+	public boolean isRemain() {
+		return count > 0;
+	}
 }

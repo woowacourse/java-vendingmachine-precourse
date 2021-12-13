@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Objects;
+
 public class Beverage implements Comparable<Beverage> {
 	private final String name;
 	private final Money price;
@@ -61,5 +63,19 @@ public class Beverage implements Comparable<Beverage> {
 	@Override
 	public int compareTo(Beverage o) {
 		return price.compareTo(o.price);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (o == null || getClass() != o.getClass()) {
+			return false;
+		}
+		Beverage beverage = (Beverage)o;
+		return name.equals(beverage.name);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name);
 	}
 }

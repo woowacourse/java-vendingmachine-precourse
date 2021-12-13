@@ -55,8 +55,14 @@ public class CoinBucket {
 		for (Coin coin : coins) {
 			int count = coin.getMaxCountLessThan(balance);
 			balance.use(coin.totalAmountOfCount(count));
-			changes.put(coin, count);
+			if (canAddToBalance(count)) {
+				changes.put(coin, count);
+			}
 		}
 		return Collections.unmodifiableMap(changes);
+	}
+
+	private boolean canAddToBalance(int count) {
+		return count > 0;
 	}
 }
