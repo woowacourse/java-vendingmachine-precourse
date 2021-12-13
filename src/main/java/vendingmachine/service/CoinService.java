@@ -10,6 +10,7 @@ import static vendingmachine.constants.SystemConstants.NO_TOTAL_MONEY_LEFT;
 import static vendingmachine.constants.SystemConstants.ZERO_COINS;
 
 public class CoinService {
+
     private final HashMap<Coin, Integer> coins = new HashMap<>();
 
     public HashMap<Coin, Integer> getCoins() {

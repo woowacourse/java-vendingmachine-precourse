@@ -2,9 +2,9 @@ package vendingmachine.domain;
 
 import static vendingmachine.constants.SystemConstants.*;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;
 import vendingmachine.service.CoinService;
+import vendingmachine.service.MenuService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -13,12 +13,12 @@ import java.util.HashMap;
 public class VendingMachine {
 
     private final CoinService coinService = new CoinService();
-    private Menu menu;
+    private final MenuService menuService = new MenuService();
     private int customerMoneyLeft = NO_CUSTOMER_MONEY_LEFT;
 
     public VendingMachine() {
         coinService.initializeCoins(InputView.getInitialMoneyInput());
-        this.setMenu(InputView.getMenuInput());
+        menuService.setMenu(InputView.getMenuInput());
         this.setCustomerMoneyLeft(InputView.getCustomerMoneyInput());
     }
 
@@ -26,15 +26,11 @@ public class VendingMachine {
         while (true) {
             OutputView.printMoneyLeft(this.getCustomerMoneyLeft());
 
-            if (!menu.hasSellableMerchandise(this.customerMoneyLeft)) break;
+            if (!menuService.hasSellableMerchandise(this.customerMoneyLeft)) break;
             this.sellMerchandise();
         }
 
         OutputView.printCoinChanges(this.calculateCoinChanges());
-    }
-
-    private void setMenu(Menu menu) {
-        this.menu = menu;
     }
 
     private int getCustomerMoneyLeft() {
@@ -46,7 +42,7 @@ public class VendingMachine {
     }
 
     private void sellMerchandise() {
-        Merchandise merchandise = menu.selectAvailableMerchandise();
+        Merchandise merchandise = menuService.selectAvailableMerchandise();
         customerMoneyLeft -= merchandise.getPrice();
         merchandise.decreaseNumber();
     }
