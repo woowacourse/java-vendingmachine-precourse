@@ -42,9 +42,8 @@ public enum Coin {
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_INPUT_AMOUNT));
 	}
 
-	public static List<Integer> getAmountListOfCoin() {
+	public static List<Coin> getCoinList() {
 		return Arrays.stream(Coin.values())
-			.map(Coin::getAmount)
 			.collect(Collectors.toList());
 	}
 

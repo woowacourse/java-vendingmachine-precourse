@@ -49,10 +49,10 @@ public class CoinStore {
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
-		for (int amountOfCoin : Coin.getAmountListOfCoin()) {
-			stringBuilder.append(amountOfCoin).append(WON_REPRESENT_UNIT);
+		for (Coin coin : Coin.getCoinList()) {
+			stringBuilder.append(coin.toString());
 			stringBuilder.append(DELIMITER_OF_COIN_STORE_STATUS_REPRESENT);
-			stringBuilder.append(coins.get(Coin.findCoin(amountOfCoin))).append(COIN_REPRESENT_UNIT);
+			stringBuilder.append(coins.get(coin)).append(COIN_REPRESENT_UNIT);
 			stringBuilder.append("\n");
 		}
 		return stringBuilder.toString();
