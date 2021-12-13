@@ -15,7 +15,8 @@ public class ItemController {
 	private static final String PREFIX = "[";
 	private static final String SUFFIX = "]";
 	private static final String DELIMITER_COMMA = ",";
-	private static final String INVALID_PREFIX_AND_SUFFIX_ERROR = "각 상품별 정보는 " + PREFIX + "로 시작해서"
+	private static final String ERROR = "[ERROR] ";
+	private static final String INVALID_PREFIX_AND_SUFFIX_ERROR = ERROR + "각 상품별 정보는 " + PREFIX + "로 시작해서"
 		+ SUFFIX + "로 끝나야 합니다.";
 	private final InputView inputView;
 

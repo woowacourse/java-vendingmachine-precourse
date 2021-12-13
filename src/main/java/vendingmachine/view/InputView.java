@@ -9,9 +9,10 @@ import camp.nextstep.edu.missionutils.Console;
 public class InputView {
 	private static final int PRICE_LOWER_BOUND = 0;
 	private static final String SEMICOLON = ";";
-	private static final String NON_DIGIT_ERROR = "입력 금액은 숫자여야 합니다.";
-	private static final String NEGATIVE_DIGIT_ERROR = "입력 금액은 0 이상의 숫자여야 합니다.";
-	private static final String EMPTY_ITEMS_ERROR = "상품 목록은 비어 있을 수 없습니다.";
+	private static final String ERROR = "[ERROR] ";
+	private static final String NON_DIGIT_ERROR = ERROR + "입력 금액은 숫자여야 합니다.";
+	private static final String NEGATIVE_DIGIT_ERROR = ERROR + "입력 금액은 0 이상의 숫자여야 합니다.";
+	private static final String EMPTY_ITEMS_ERROR = ERROR + "상품 목록은 비어 있을 수 없습니다.";
 
 	public int scanPrice() {
 		try {

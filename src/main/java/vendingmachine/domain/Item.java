@@ -10,10 +10,11 @@ public class Item {
 	private static final String NAME = "상품명";
 	private static final String COST = "가격";
 	private static final String AMOUNT = "수량";
-	private static final String INVALID_NUMBER_OF_TYPE_ERROR = "상품 정보는 " + NAME + ", " + COST + ", " + AMOUNT
+	private static final String ERROR = "[ERROR] ";
+	private static final String INVALID_NUMBER_OF_TYPE_ERROR = ERROR + "상품 정보는 " + NAME + ", " + COST + ", " + AMOUNT
 		+ "의 세 단위로 입력해야 합니다.";
-	private static final String NON_DIGIT_ERROR = "%s이 숫자여야 합니다.";
-	private static final String INVALID_COST_CONDITION_ERROR = COST + "이" + COST_LOWER_BOUND + " 이상이면서 "
+	private static final String NON_DIGIT_ERROR = ERROR + "%s이 숫자여야 합니다.";
+	private static final String INVALID_COST_CONDITION_ERROR = ERROR + COST + "이" + COST_LOWER_BOUND + " 이상이면서 "
 		+ TEN + "으로 나누어 떨어져야 합니다.";
 
 	private final String name;
