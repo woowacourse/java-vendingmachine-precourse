@@ -58,4 +58,23 @@ public class Utils {
            throw new IllegalArgumentException("[ERROR] 상품명은 공백이 될 수 없습니다.");
         }
     }
+
+    public static void validateProductInputForm(String inputProductList) {
+        if (!checkCommaCount(inputProductList)) {
+            throw new IllegalArgumentException("[ERROR] 입력형식에 맞지 않습니다.");
+        }
+    }
+
+    public static boolean checkCommaCount(String inputProductList) {
+        int commaCount = 0;
+        for (int i = 0; i < inputProductList.length() ; i++) {
+            if (inputProductList.charAt(i) == ',') {
+                commaCount++;
+            }
+        }
+        if (commaCount != 2) {
+            return false;
+        }
+        return true;
+    }
 }
