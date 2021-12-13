@@ -136,11 +136,20 @@ public class VendingMachineController {
 
     protected int fillMoney() {
         try {
-            return inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
+            int inputMoney = inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
+            isOverZero(inputMoney);
+
+            return inputMoney;
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
 
             return fillMoney();
+        }
+    }
+
+    protected void isOverZero(final int inputMoney) {
+        if(inputMoney == 0){
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_LESS_THAN_ZERO.getErrorMessage());
         }
     }
 

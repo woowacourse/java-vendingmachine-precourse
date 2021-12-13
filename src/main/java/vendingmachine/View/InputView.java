@@ -4,7 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.utils.ExceptionMessages;
 import vendingmachine.utils.Messages;
 import vendingmachine.utils.RegularExpressions;
@@ -17,7 +16,7 @@ public class InputView {
 
         try {
             String inputMoney = inputValue();
-            validateMoney(inputMoney);
+            isNaturalNumber(inputMoney);
 
             return Integer.parseInt(inputMoney);
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -32,7 +31,7 @@ public class InputView {
 
         try {
             String inputProducts = inputValue();
-            validateProducts(inputProducts);
+            isFollowingProductsFormat(inputProducts);
             String noSquareBracketsProducts = deleteSquareBrackets(inputProducts);
 
             return Arrays.asList(splitInputProducts(noSquareBracketsProducts));
@@ -54,7 +53,7 @@ public class InputView {
 
         try {
             String inputPurchasingProductName = inputValue();
-            validateInputPurchasingProductName(inputPurchasingProductName);
+            isKorean(inputPurchasingProductName);
 
             return inputPurchasingProductName;
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -64,14 +63,10 @@ public class InputView {
         }
     }
 
-    protected void validateMoney(final String inputMoney) {
-        if (isNaturalNumber(inputMoney)) {
+    protected void isNaturalNumber(final String inputMoney) {
+        if (!inputMoney.matches(RegularExpressions.INPUT_NUMBER_REGULAR_EXPRESSION.getRegularExpression())) {
             throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_NUMBER.getErrorMessage());
         }
-    }
-
-    protected boolean isNaturalNumber(final String inputNumber) {
-        return !inputNumber.matches(RegularExpressions.INPUT_NUMBER_REGULAR_EXPRESSION.getRegularExpression());
     }
 
     protected String[] splitInputProducts(final String inputProducts) {
@@ -83,28 +78,20 @@ public class InputView {
                 .replaceAll(Symbol.REAR_SQUARE_BRACKET.getSymbol(), Symbol.BLANK.getSymbol());
     }
 
-    protected void validateProducts(final String inputProducts) {
+    protected void isFollowingProductsFormat(final String inputProducts) {
         String[] splitInputProducts = splitInputProducts(inputProducts);
 
         for (String splitInputProduct : splitInputProducts) {
-            if (!isFollowingProductsFormat(splitInputProduct)) {
+            if (!splitInputProduct.matches(RegularExpressions.INPUT_PRODUCT_INFORMATION_REGULAR_EXPRESSION.getRegularExpression())) {
                 throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_INFORMATION_CONDITION.getErrorMessage());
             }
         }
     }
 
-    protected boolean isFollowingProductsFormat(final String inputProduct) {
-        return inputProduct.matches(RegularExpressions.INPUT_PRODUCT_INFORMATION_REGULAR_EXPRESSION.getRegularExpression());
-    }
-
-    protected void validateInputPurchasingProductName(final String inputPurchasingProductName) {
-        if (!isKorean(inputPurchasingProductName)) {
+    protected void isKorean(final String inputPurchasingProductName) {
+        if (!inputPurchasingProductName.matches(RegularExpressions.PRODUCT_NAME_REGULAR_EXPRESSION.getRegularExpression())) {
             throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_NAME_KOREAN.getErrorMessage());
         }
-    }
-
-    protected boolean isKorean(final String inputPurchasingProductName) {
-        return inputPurchasingProductName.matches(RegularExpressions.PRODUCT_NAME_REGULAR_EXPRESSION.getRegularExpression());
     }
 
     protected String inputValue() {

@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import vendingmachine.utils.ExceptionMessages;
+
 public class Product {
 
     private final Name name;
@@ -7,6 +9,7 @@ public class Product {
     private final Count count;
 
     public Product(final String name, final int price, final int count) {
+        validateProduct(count);
         this.name = new Name(name);
         this.price = new Price(price);
         this.count = new Count(count);
@@ -34,6 +37,12 @@ public class Product {
 
     public int getProductPrice() {
         return price.getPrice();
+    }
+
+    protected void validateProduct(final int count) {
+        if(count < 0){
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_COUNT_LESS_THAN_ZERO.getErrorMessage());
+        }
     }
 
 }
