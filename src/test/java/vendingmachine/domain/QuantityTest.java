@@ -38,4 +38,16 @@ class QuantityTest {
 		// then
 		assertEquals("5개", plus.toString());
 	}
+
+	@Test
+	@DisplayName("같은 수량은 같은 객체로 취급한다.")
+	public void testPlusEquals() {
+	    // given
+		Quantity quantityA = new Quantity(2);
+		Quantity quantityB = new Quantity(3);
+	    // when
+		boolean equals = quantityA.equals(quantityB);
+		// then
+		assertTrue(equals);
+	}
 }
