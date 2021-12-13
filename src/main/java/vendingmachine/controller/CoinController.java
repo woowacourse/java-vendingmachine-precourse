@@ -18,7 +18,7 @@ public class CoinController {
 
 	public Coins giveHoldingCoins() {
 		Coins coins = initializeCoins();
-		OutputView.printHoldingCoinStatus(coins);
+		OutputView.printHoldingCoinStatus(coins.findAll());
 		return coins;
 	}
 

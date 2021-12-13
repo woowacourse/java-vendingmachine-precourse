@@ -34,10 +34,10 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printHoldingCoinStatus(final Coins coins) {
+	public static void printHoldingCoinStatus(final Map<Integer, Integer> coins) {
 		printNewLine();
 		System.out.println(HOLDING_COIN_TEXT);
-		for (Map.Entry<Integer, Integer> coin : coins.findAll().entrySet()) {
+		for (Map.Entry<Integer, Integer> coin : coins.entrySet()) {
 			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
 			printNewLine();
 		}
