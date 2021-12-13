@@ -9,7 +9,7 @@ import vendingmachine.domain.productpurchase.ProductPurchase;
 
 public class VendingMachine {
     private static final String VALID_POSSIBLE_PURCHASE = "[ERROR] 구매할 수 있는 상품이 없습니다.";
-    private static final String VALID_PRODUCT_NAME_OR_QUANTITY = "[ERROR] 상품명이 일치하지 않거나 수량이 부족합니다.";
+    private static final String VALID_PRODUCT_NAME = "[ERROR] 일치하는 상품명이 없습니다.";
 
     private final PossessionCoins possessionCoins;
     private final Products products;
@@ -35,7 +35,7 @@ public class VendingMachine {
     public void buy(InvestmentMoney investmentMoney, ProductPurchase productPurchase) {
         String productPurchaseName = productPurchase.getName();
         Product product = products.findByName(productPurchaseName)
-            .orElseThrow(() -> new IllegalArgumentException(VALID_PRODUCT_NAME_OR_QUANTITY));
+            .orElseThrow(() -> new IllegalArgumentException(VALID_PRODUCT_NAME));
 
         investmentMoney.calculate(product);
     }

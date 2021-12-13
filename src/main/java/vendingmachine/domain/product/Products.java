@@ -1,9 +1,10 @@
 package vendingmachine.domain.product;
 
+import static java.util.stream.Collectors.*;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import vendingmachine.domain.investmentmoney.InvestmentMoney;
 
@@ -21,7 +22,7 @@ public class Products {
         int originalSize = products.size();
         Set<String> noneDuplicatedProductNames = products.stream()
             .map(Product::getName)
-            .collect(Collectors.toSet());
+            .collect(toSet());
 
         if (originalSize != noneDuplicatedProductNames.size()) {
             throw new IllegalArgumentException(VALID_DUPLICATE);
@@ -37,7 +38,6 @@ public class Products {
     public Optional<Product> findByName(String productPurchaseName) {
         return products.stream()
             .filter(product -> product.isSameName(productPurchaseName))
-            .filter(Product::isExistQuantity)
             .findFirst();
     }
 }
