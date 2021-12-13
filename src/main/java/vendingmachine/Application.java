@@ -11,5 +11,6 @@ public class Application {
         VendingMachineController vendingMachineController = new VendingMachineController(vendingMachine);
         vendingMachineController.insertMoney();
         vendingMachineController.run();
+        vendingMachineController.returnChanges();
     }
 }

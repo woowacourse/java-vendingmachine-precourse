@@ -30,4 +30,9 @@ public class VendingMachineController {
 			insertMoney();
 		}
 	}
+
+	public void returnChanges() {
+		OutputView.insertMoneyUI(vendingMachine.getInsertMoney());
+		OutputView.returnChangesUI(VendingMachineService.returnChanges(vendingMachine));
+	}
 }

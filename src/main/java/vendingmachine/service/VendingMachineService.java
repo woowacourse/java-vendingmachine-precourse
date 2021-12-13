@@ -1,5 +1,6 @@
 package vendingmachine.service;
 
+import vendingmachine.domain.Changes;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
 
@@ -17,5 +18,9 @@ public class VendingMachineService {
 		if (vendingMachine.isBuy(name)) {
 			vendingMachine.buy(name);
 		}
+	}
+
+	public static Changes returnChanges(VendingMachine vendingMachine) {
+		return vendingMachine.returnChanges();
 	}
 }

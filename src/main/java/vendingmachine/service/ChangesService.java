@@ -8,6 +8,8 @@ public class ChangesService {
 	public static Changes toChanges(String request) throws IllegalArgumentException {
 		RequestValidator.isEmpty(request);
 		RequestValidator.isNumber(request);
-		return new Changes(new Money(Integer.parseUnsignedInt(request)));
+		Changes changes = new Changes();
+		changes.setRandomChanges(new Money(Integer.parseUnsignedInt(request)));
+		return changes;
 	}
 }

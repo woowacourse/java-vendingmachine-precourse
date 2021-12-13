@@ -10,6 +10,7 @@ import vendingmachine.service.ProductsService;
 import vendingmachine.utils.validator.RequestValidator;
 import vendingmachine.view.ExceptionView;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class RequestController {
 	public static VendingMachine requestVendingMachine() {
@@ -21,7 +22,9 @@ public class RequestController {
 	public static Changes requestChanges() {
 		try {
 			String request = InputView.requestChanges();
-			return ChangesService.toChanges(request);
+			Changes changes = ChangesService.toChanges(request);
+			OutputView.vendingMachineChanges(changes);
+			return changes;
 		} catch (IllegalArgumentException e) {
 			ExceptionView.errorUI(e.getMessage());
 			return requestChanges();
