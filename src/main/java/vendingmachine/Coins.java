@@ -16,4 +16,10 @@ public class Coins extends Remaining<Coin>{
 
 		return sum;
 	}
+
+	private int changeSum;
+
+	public void returnChange(int changeSum) {
+		this.changeSum = changeSum;
+	}
 }
