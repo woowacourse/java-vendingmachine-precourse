@@ -1,6 +1,4 @@
-package vendingmachine.domain;
-
-import vendingmachine.utils.ExceptionMessages;
+package vendingmachine.model;
 
 public class Count {
 
@@ -10,14 +8,16 @@ public class Count {
         this.count = count;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public int minusCount(int count) {
         return count - 1;
     }
 
-    public void validateCount(int count) {
-        if(minusCount(count) < 0){
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_COUNT_LESS_THAN_ZERO.getErrorMessage());
-        }
+    public boolean isCountValidation() {
+        return minusCount(this.count) >= 0;
     }
 
 }

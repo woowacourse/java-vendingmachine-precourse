@@ -1,21 +1,24 @@
 package vendingmachine.Controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
-import vendingmachine.domain.Product;
-import vendingmachine.domain.VendingMachine;
-import vendingmachine.service.VendingMachineService;
+import vendingmachine.model.Product;
+import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.Messages;
 import vendingmachine.utils.Symbol;
 
 public class VendingMachineController {
 
+    public static final int PRODUCT_INFORMATION_NAME_INDEX = 0;
+    public static final int PRODUCT_INFORMATION_PRICE_INDEX = 1;
+    public static final int PRODUCT_INFORMATION_COUNT_INDEX = 2;
+
     private final InputView inputView;
     private final OutputView outputView;
-    private VendingMachineService vendingMachineService;
 
     public VendingMachineController() {
         this.inputView = new InputView();
@@ -23,85 +26,100 @@ public class VendingMachineController {
     }
 
     public void run() {
-        vendingMachineService = new VendingMachineService();
+        VendingMachine vendingMachine = fillMoney();
+        List<Product> products = displayProducts();
+        int cheapestProductPrice = findCheapestProductPrice(products);
 
-        String fillMachineMoney = fillMachineMoney();
-        VendingMachine vendingMachine = new VendingMachine(fillMachineMoney);
+        int purchasingCost = inputView.inputPurchasingCost();
 
-        List<Integer> coins = vendingMachine.createCoinList();
-        List<Integer> machineCoins = vendingMachine.calculateCoins(fillMachineMoney, coins);
+        while (!vendingMachine.isContinueDeal(products, cheapestProductPrice, purchasingCost)) {
+            outputView.printPurChasingCost(purchasingCost);
 
-        final String machineCoinPrintFormat = createMachineCoinPrintFormat(machineCoins, coins);
-        outputView.printMachineHaveCoin(machineCoinPrintFormat);
+            String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
+            purchasingCost = vendingMachine.calculateRemainingPurchasingCost(products, choosePurchasingProductName, purchasingCost);
+        }
 
-        List<Product> products = fillProducts();
-
-        outputView.printNewLine();
-        int purchasingCost = inputPurchasingCost();
-
-        outputView.printNewLine();
-        outputView.printPurChasingCost(purchasingCost);
-
-        inputView.inputPurchasingProductName();
     }
 
-    protected String fillMachineMoney() {
+    protected int findCheapestProductPrice(final List<Product> products) {
+        int cheapestProductPrice = products.get(0).getProductPrice();
+
+        for (Product product : products) {
+            if (product.isCheaper(cheapestProductPrice)) {
+                cheapestProductPrice = product.getProductPrice();
+            }
+        }
+
+        return cheapestProductPrice;
+    }
+
+    protected String choosePurchasingProduct(final List<Product> products, VendingMachine vendingMachine) {
         try {
-            String inputMachineMoney = inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
-            vendingMachineService.validateMachineMoney(inputMachineMoney);
+            String purchasingProductName = inputView.inputPurchasingProductName(Messages.INPUT_PURCHASING_PRODUCT_NAME.getInputMessage());
+            vendingMachine.validatePurchasingProductName(products, purchasingProductName);
 
-            return inputMachineMoney;
+            return purchasingProductName;
         } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.printErrorMessage(illegalArgumentException);
+            System.out.println(illegalArgumentException.getMessage());
 
-            return fillMachineMoney();
+            return choosePurchasingProduct(products, vendingMachine);
         }
     }
 
-    protected List<Product> fillProducts() {
+    protected List<Product> displayProducts() {
         try {
-            String inputProducts = inputView.inputProducts();
-            vendingMachineService.isFollowingProductsFormat(Arrays.asList(vendingMachineService.splitInputProducts(inputProducts)));
+            List<String> inputProductInformation = inputView.inputProducts(Messages.INPUT_PRODUCT_INFORMATION_MESSAGE.getInputMessage());
 
-            String noSquareBracketsProducts = vendingMachineService.deleteSquareBrackets(inputProducts);
-            List<String> inputProductList = Arrays.asList(vendingMachineService.splitInputProducts(noSquareBracketsProducts));
-
-            return vendingMachineService.addProduct(inputProductList);
+            return fillProducts(inputProductInformation);
         } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.printErrorMessage(illegalArgumentException);
+            System.out.println(illegalArgumentException.getMessage());
 
-            return fillProducts();
+            return displayProducts();
         }
     }
 
-    public String createMachineCoinPrintFormat(final List<Integer> machineCoins, final List<Integer> coins) {
-        final StringBuilder stringBuilder = new StringBuilder();
+    protected List<Product> fillProducts(List<String> inputProductInformation) {
+        final List<Product> productList = new ArrayList<>();
 
-        for (int i = 0; i < machineCoins.size(); i++) {
-            stringBuilder.append(coins.get(i))
-                    .append(Symbol.WON.getSymbol())
-                    .append(Symbol.SPACE.getSymbol())
-                    .append(Symbol.DASH.getSymbol())
-                    .append(Symbol.SPACE.getSymbol())
-                    .append(machineCoins.get(i))
-                    .append(Symbol.EA.getSymbol())
-                    .append(Symbol.NEW_LINE.getSymbol());
+        for (String inputProduct : inputProductInformation) {
+            String[] splitInputProduct = inputProduct.split(Symbol.COMMA.getSymbol());
+            final List<String> productInformation = Arrays.asList(splitInputProduct);
+            Product product = createProduct(productInformation);
+
+            productList.add(product);
         }
 
-        return stringBuilder.toString();
+        return productList;
     }
 
-    protected int inputPurchasingCost() {
+    protected Product createProduct(final List<String> productInformation) {
+        String name = productInformation.get(PRODUCT_INFORMATION_NAME_INDEX);
+        int price = Integer.parseInt(productInformation.get(PRODUCT_INFORMATION_PRICE_INDEX));
+        int count = Integer.parseInt(productInformation.get(PRODUCT_INFORMATION_COUNT_INDEX));
+
+        return new Product(name, price, count);
+    }
+
+    protected VendingMachine fillMoney() {
         try {
-            String inputPurchasingCost = inputView.inputMoney(Messages.INPUT_USED_PURCHASING_MONEY_MESSAGE.getInputMessage());
-            vendingMachineService.validateInputPurchasingCost(inputPurchasingCost);
+            int machineMoney = inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
+            VendingMachine vendingMachine = new VendingMachine(machineMoney);
 
-            return Integer.parseInt(inputPurchasingCost);
+            changeMachineMoneyIntoCoins(machineMoney, vendingMachine);
+
+            return vendingMachine;
         } catch (IllegalArgumentException illegalArgumentException) {
-            outputView.printErrorMessage(illegalArgumentException);
+            System.out.println(illegalArgumentException.getMessage());
 
-            return inputPurchasingCost();
+            return fillMoney();
         }
+    }
+
+    protected void changeMachineMoneyIntoCoins(final int machineMoney, final VendingMachine vendingMachine) {
+        List<Integer> coinUnitList = vendingMachine.createCoinUnitList();
+        List<Integer> machineCoins = vendingMachine.calculateCoins(machineMoney, coinUnitList);
+
+        outputView.printMachineHaveCoin(machineCoins, coinUnitList);
     }
 
 }

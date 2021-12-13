@@ -1,52 +1,39 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import vendingmachine.utils.Coin;
 import vendingmachine.utils.ExceptionMessages;
-import vendingmachine.utils.Symbol;
 
 public class VendingMachine {
 
-    public static final int PRODUCT_INFORMATION_NAME_INDEX = 0;
-    public static final int PRODUCT_INFORMATION_PRICE_INDEX = 1;
-    public static final int PRODUCT_INFORMATION_COUNT_INDEX = 2;
-
     private final int machineMoney;
-    private List<Product> products;
 
     public VendingMachine(final int machineMoney) {
         validateMachineMoney(machineMoney);
         this.machineMoney = machineMoney;
     }
 
-    public List<Product> fillProducts(List<String> inputProductInformation) {
-        final List<Product> productList = new ArrayList<>();
+    public boolean isContinueDeal(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
+        boolean isContinueDeal = true;
 
-        for (String inputProduct : inputProductInformation) {
-            String [] splitInputProduct = inputProduct.split(Symbol.COMMA.getSymbol());
-            final List<String> productInformation = Arrays.asList(splitInputProduct);
-            Product product = createProduct(productInformation);
+//        if (cheapestProductPrice > purchasingCost) {
+//            isContinueDeal = false;
+//        }
 
-            productList.add(product);
+        for (Product product : products) {
+            if (product.getCount().isCountValidation() || product.getPrice().isPurchasingCostValidation(purchasingCost)) {
+                isContinueDeal = false;
+            }
         }
 
-        return productList;
+        return isContinueDeal;
     }
 
-    protected Product createProduct(final List<String> productInformation) {
-        String name = productInformation.get(PRODUCT_INFORMATION_NAME_INDEX);
-        int price = Integer.parseInt(productInformation.get(PRODUCT_INFORMATION_PRICE_INDEX));
-        int count = Integer.parseInt(productInformation.get(PRODUCT_INFORMATION_COUNT_INDEX));
-
-        return new Product(name, price, count);
-    }
 
     protected void validateMachineMoney(final int inputMachineMoney) {
         if (!isMultiplyTen(inputMachineMoney)) {
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_UNIT.getErrorMessage());
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MACHINE_MONEY_CONDITION.getErrorMessage());
         }
     }
 
@@ -105,4 +92,26 @@ public class VendingMachine {
         return coinUnitList;
     }
 
+    public void validatePurchasingProductName(final List<Product> products, final String purchasingProductName) {
+        boolean checkPurchasingProductOnProductList = false;
+        for (Product product : products) {
+            if (product.getName().compareProductName(purchasingProductName)) {
+                checkPurchasingProductOnProductList = true;
+            }
+        }
+
+        if (!checkPurchasingProductOnProductList) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PURCHASING_PRODUCT_NAME_CONDITION.getErrorMessage());
+        }
+    }
+
+    public int calculateRemainingPurchasingCost(final List<Product> products, final String choosePurchasingProductName, int purchasingCost) {
+        for (Product product : products) {
+            if (product.getName().compareProductName(choosePurchasingProductName)) {
+                purchasingCost = product.getPrice().subtractPrice(purchasingCost);
+            }
+        }
+
+        return purchasingCost;
+    }
 }

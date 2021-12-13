@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
 import vendingmachine.utils.ExceptionMessages;
 
@@ -10,22 +10,25 @@ public class Price {
     private final int price;
 
     public Price(final int price) {
+        validatePrice(price);
         this.price = price;
     }
 
-    public int subtract(int money, int price) {
-        return money - price;
+    public int getPrice() {
+        return price;
     }
 
-    public void validateMoney(int money, int price) {
-        if(subtract(money, price) < 0){
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_LESS_THAN_ZERO.getErrorMessage());
-        }
+    public int subtractPrice(int purchasingCost) {
+        return purchasingCost - this.price;
+    }
+
+    public boolean isPurchasingCostValidation(int purchasingCost) {
+        return subtractPrice(purchasingCost) >= 0;
     }
 
     protected void validatePrice(final int price) {
         if (!isFollowingPriceRule(price)) {
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_PRICE_FORMAT.getErrorMessage());
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_PRICE_CONDITION.getErrorMessage());
         }
     }
 

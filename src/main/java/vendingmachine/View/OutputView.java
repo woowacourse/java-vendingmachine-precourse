@@ -1,26 +1,48 @@
 package vendingmachine.View;
 
+import java.util.List;
+
 import vendingmachine.utils.Messages;
 import vendingmachine.utils.Symbol;
 
 public class OutputView {
 
-    public void printErrorMessage(IllegalArgumentException illegalArgumentException) {
-        System.out.println(illegalArgumentException.getMessage());
-    }
-
-    public void printNewLine() {
-        System.out.println();
-    }
-
     public void printPurChasingCost(int purchasingCost) {
-        System.out.println(Messages.INPUT_PURCHASING_COST.getInputMessage() + purchasingCost + Symbol.WON.getSymbol());
+        String purchasingCostPrintFormat = createPurchasingCostPrintFormat(purchasingCost);
+        System.out.println(purchasingCostPrintFormat);
     }
 
-    public void printMachineHaveCoin(final String machineHaveCoinPrintFormat) {
-        printNewLine();
+    protected String createPurchasingCostPrintFormat(final int purchasingCost) {
+        return Symbol.NEW_LINE.getSymbol()
+                + Messages.OUTPUT_PURCHASING_COST_MESSAGE.getInputMessage()
+                + purchasingCost
+                + Symbol.WON.getSymbol();
+    }
+
+    public void printMachineHaveCoin(final List<Integer> machineCoins, final List<Integer> coinUnitList) {
+        System.out.println();
         System.out.println(Messages.MACHINE_HAVE_COINS.getInputMessage());
+
+        String machineHaveCoinPrintFormat = createMachineCoinPrintFormat(machineCoins, coinUnitList);
+
         System.out.println(machineHaveCoinPrintFormat);
+    }
+
+    protected String createMachineCoinPrintFormat(final List<Integer> machineCoins, final List<Integer> coins) {
+        final StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < machineCoins.size(); i++) {
+            stringBuilder.append(coins.get(i))
+                    .append(Symbol.WON.getSymbol())
+                    .append(Symbol.SPACE.getSymbol())
+                    .append(Symbol.DASH.getSymbol())
+                    .append(Symbol.SPACE.getSymbol())
+                    .append(machineCoins.get(i))
+                    .append(Symbol.EA.getSymbol())
+                    .append(Symbol.NEW_LINE.getSymbol());
+        }
+
+        return stringBuilder.toString();
     }
 
 }

@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.model;
 
 public class Name {
 
@@ -8,6 +8,8 @@ public class Name {
         this.name = name;
     }
 
-
+    public boolean compareProductName(final String purchasingProductName) {
+        return name.equals(purchasingProductName);
+    }
 
 }

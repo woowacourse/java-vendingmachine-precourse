@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.model;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int inputCoinCountRandomly(List<Integer> coins) {
+    protected int inputCoinCountRandomly(List<Integer> coins) {
         return Randoms.pickNumberInList(coins);
     }
 
-    public int getAmount() {
+    protected int getAmount() {
         return amount;
     }
 
