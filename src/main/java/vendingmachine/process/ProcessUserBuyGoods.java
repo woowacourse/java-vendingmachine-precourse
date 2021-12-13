@@ -22,7 +22,7 @@ public class ProcessUserBuyGoods {
     }
 
     public static boolean checkCanBuy(GoodsController goodsController) {
-        return goodsController.isMoneyMoreThanCheapest(userMoney) || goodsController.isQuantityMoreThanOne();
+        return goodsController.isMoneyMoreThanCheapest(userMoney) && goodsController.isQuantityMoreThanOne();
     }
 
     public static void inputGoodsName() {

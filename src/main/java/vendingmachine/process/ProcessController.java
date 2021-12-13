@@ -56,4 +56,14 @@ public class ProcessController {
             }
         }
     }
+
+    public static void buyGoods() {
+        while (true) {
+            System.out.println(ProcessConstant.USER_MONEY + userMoney);
+            if (!ProcessUserBuyGoods.checkCanBuy(goodsController)) {
+                break;
+            }
+            userMoney = ProcessUserBuyGoods.sellGoods(goodsController);
+        }
+    }
 }
