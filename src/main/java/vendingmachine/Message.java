@@ -26,7 +26,11 @@ public class Message {
         System.out.println("투입 금액을 입력해 주세요.");
     }
 
-    public void printRemainingAmount(int amount) {
+    public void printChanges(int amount) {
         System.out.println("투입 금액: " + amount + "원");
+    }
+
+    public void printLackOfChanges() {
+        System.out.println("잔돈");
     }
 }
