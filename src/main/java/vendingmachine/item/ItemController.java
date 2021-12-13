@@ -1,5 +1,6 @@
 package vendingmachine.item;
 
+import vendingmachine.exception.NotEnoughStockException;
 import vendingmachine.item.dto.ItemDto;
 import vendingmachine.utils.validator.InputDataValidator;
 import vendingmachine.utils.validator.ItemDataValidator;
@@ -43,5 +44,25 @@ public class ItemController {
         }catch(PatternSyntaxException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    public void purChaseItem(String itemName, int quantity) {
+        itemService.purchaseItem(itemName, quantity);
+    }
+
+    public void cancelPurchase(String itemName, int quantity) {
+        itemService.cancelPurchase(itemName, quantity);
+    }
+
+    public void hasStockQuantity(String itemName, int quantity) {
+        try {
+            itemService.hasStockQuantity(itemName, quantity);
+        }catch(NotEnoughStockException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        }
+    }
+
+    public int getPriceByName(String itemName) {
+        return itemService.getPriceByName(itemName);
     }
 }

@@ -2,7 +2,7 @@ package vendingmachine.item;
 
 import vendingmachine.exception.NotEnoughStockException;
 import vendingmachine.item.dto.ItemDto;
-import vendingmachine.utils.ItemErrorMessage;
+import vendingmachine.utils.message.ItemErrorMessage;
 
 public class Item {
 
@@ -24,10 +24,30 @@ public class Item {
         return name;
     }
 
-    public void reduceStock() throws NotEnoughStockException {
+    public int getPrice() {
+        return price;
+    }
+
+    public void addStock(int quantity) {
+        stockQuantity += quantity;
+    }
+
+    public void reduceStock(int quantity) {
         if(stockQuantity == 0) {
             throw new NotEnoughStockException(ItemErrorMessage.NOT_STOCK);
         }
-        stockQuantity -= 1;
+        if(stockQuantity < quantity) {
+            throw new NotEnoughStockException(ItemErrorMessage.NOT_ENOUGH_STOCK);
+        }
+        stockQuantity -= quantity;
+    }
+
+    public void hasStockQuantity(int quantity) {
+        if(stockQuantity == 0) {
+            throw new NotEnoughStockException(ItemErrorMessage.NOT_STOCK);
+        }
+        if(stockQuantity < quantity) {
+            throw new NotEnoughStockException(ItemErrorMessage.NOT_ENOUGH_STOCK);
+        }
     }
 }
