@@ -50,31 +50,29 @@ public class VendingMachine {
 
     public boolean isBuyAbleProductRemain() {
         for (Product product : productStorage) {
-            if (product.isBuyAble(insertAmount))
+            if (product.isBuyAble(insertAmount) && !product.isSoldOut()) {
                 return true;
+            }
         }
         return false;
     }
 
     public Product findProduct(final String productName) {
         return productStorage.stream()
-            .filter(product -> product.getName().equals(productName))
+            .filter(product -> product.matchName(productName))
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(PRODUCT_NOT_FOUND_ERROR_MESSAGE));
     }
 
     public void buyProduct(final Product targetProduct) {
-        if (targetProduct.isBuyAble(insertAmount)) {
-            pay(targetProduct.getPrice());
-            targetProduct.pullOut();
-            return;
-        }
-        if (targetProduct.getPrice() > insertAmount) {
+        if (!targetProduct.isBuyAble(insertAmount)) {
             throw new IllegalArgumentException(NOT_ENOUGH_INSERT_AMOUNT_ERROR_MESSAGE);
         }
-        if (targetProduct.getStock() == 0) {
+        if (targetProduct.isSoldOut()) {
             throw new IllegalArgumentException(PRODUCT_SOLD_OUT_ERROR_MESSAGE);
         }
+        pay(targetProduct.getPrice());
+        targetProduct.pullOut();
     }
 
     private void pay(final int price) {

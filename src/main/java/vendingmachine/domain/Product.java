@@ -12,23 +12,29 @@ public class Product {
         this.stock = stock;
     }
 
-    public String getName() {
-        return name;
+    public boolean matchName(final String name) {
+        if (this.name.equals(name)) {
+            return true;
+        }
+        return false;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public int getStock() {
-        return stock;
-    }
-
     public boolean isBuyAble(final int insertAmount) {
-        if (stock == 0 || price > insertAmount) {
+        if (price > insertAmount) {
             return false;
         }
         return true;
+    }
+
+    public boolean isSoldOut() {
+        if (stock == 0) {
+            return true;
+        }
+        return false;
     }
 
     public void pullOut() {

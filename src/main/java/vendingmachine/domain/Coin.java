@@ -13,8 +13,6 @@ public enum Coin {
     COIN_10(10);
 
     private static final String WON_AND_HYPHEN_SYMBOL = "원 - ";
-    private static final int COIN_LOWEST_INDEX = 0;
-    private static final int COIN_HIGHST_INDEX = 3;
 
     private final int amount;
 

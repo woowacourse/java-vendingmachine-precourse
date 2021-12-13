@@ -39,7 +39,6 @@ public class CoinCase {
     }
 
     private void pushIn(Coin coinUnit) {
-
         holdingCoins.put(coinUnit, holdingCoins.get(coinUnit) + 1);
     }
 

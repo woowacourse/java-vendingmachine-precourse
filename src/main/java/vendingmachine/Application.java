@@ -5,7 +5,7 @@ import vendingmachine.domain.VendingMachine;
 
 public class Application {
     public static void main(String[] args) {
-        VendingMachineController vendingMachineController = new VendingMachineController(new VendingMachine());
+        VendingMachineController vendingMachineController = new VendingMachineController();
         vendingMachineController.execute();
     }
 }

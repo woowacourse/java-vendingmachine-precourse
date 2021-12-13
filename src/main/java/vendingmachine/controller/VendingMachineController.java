@@ -15,8 +15,8 @@ public class VendingMachineController {
 
     private final VendingMachine vendingMachine;
 
-    public VendingMachineController(VendingMachine vendingMachine) {
-        this.vendingMachine = vendingMachine;
+    public VendingMachineController() {
+        this.vendingMachine = new VendingMachine();
     }
 
     public void execute() {

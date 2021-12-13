@@ -38,17 +38,13 @@ public class ProductInfoValidator {
     }
 
     private static Product getValidProduct(final String productInfo) {
-
         Matcher productInfoMatcher = PRODUCT_INFO_PATTERN.matcher(productInfo);
-
         if (!productInfoMatcher.matches()) {
             throw new IllegalArgumentException(NVALID_FORMAT_ERROR_MESSAGE);
         }
-
         String validName = getValidProductName(productInfoMatcher.group(PRODUCT_NAME_INDEX));
         int validPrice = getValidProductPrice(productInfoMatcher.group(PRODUCT_PRICE_INDEX));
         int validStock = getValidProductStock(productInfoMatcher.group(PRODUCT_STOCK_INDEX));
-
         return new Product(validName, validPrice, validStock);
     }
 
