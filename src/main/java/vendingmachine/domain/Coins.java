@@ -14,9 +14,10 @@ public class Coins {
 			coins.put(coin, 0);
 		}
 		this.moneyInMachine = moneyInMachine;
+		makeRandomNumberOfCoins();
 	}
 
-	public void makeRandomNumberOfCoins() {
+	private void makeRandomNumberOfCoins() {
 		int tempMoneyInMachine = moneyInMachine;
 		while (tempMoneyInMachine != 0){
 			int randomAmount = getRandomAmount(tempMoneyInMachine);

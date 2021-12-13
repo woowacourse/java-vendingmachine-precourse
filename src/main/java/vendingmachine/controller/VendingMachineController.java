@@ -10,16 +10,10 @@ public class VendingMachineController {
 	private VendingMachine vendingMachine;
 
 	public VendingMachineController() {
-		Coins coins = getCoins(getMoneyInMachine());
+		Coins coins = new Coins(getMoneyInMachine());
 		Products products = ProductsController.getProducts();
 		int inputMoney = getInputMoney();
 		vendingMachine = new VendingMachine(coins, products, inputMoney);
-	}
-
-	private static Coins getCoins(int moneyInMachine) {
-		Coins coins = new Coins(moneyInMachine);
-		coins.makeRandomNumberOfCoins();
-		return coins;
 	}
 
 	private static int getMoneyInMachine() {
