@@ -21,4 +21,9 @@ public class Message {
     public void printInputCorrectFormat() {
         System.out.println("[ERROR] [상품명,가격,수량]의 형식으로 입력해주세요.");
     }
+
+    public void printInputAmount() {
+        System.out.println("투입 금액을 입력해 주세요.");
+    }
+
 }
