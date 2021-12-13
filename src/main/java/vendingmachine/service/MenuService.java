@@ -1,8 +1,9 @@
 package vendingmachine.service;
 
-import static vendingmachine.constants.ExceptionMessages.*;
 import static vendingmachine.constants.SystemConstants.*;
+import static vendingmachine.constants.ExceptionMessages.*;
 import static vendingmachine.validator.MenuInputFormatValidator.validateMenuInputFormat;
+import static vendingmachine.validator.PurchaseValidator.*;
 
 import vendingmachine.domain.Menu;
 import vendingmachine.domain.Merchandise;
@@ -46,8 +47,7 @@ public class MenuService {
             String name = InputView.getPurchaseInfoInput();
             Merchandise merchandise = this.getMerchandiseByName(name);
 
-            if (merchandise.getPrice() > moneyLeft) throw new IllegalArgumentException();
-            if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) throw new IllegalArgumentException(SOLD_OUT_EXCEPTION);
+            validateAvailableMerchandise(merchandise, moneyLeft);
             return merchandise;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
