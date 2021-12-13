@@ -8,7 +8,6 @@ import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
-import vendingmachine.utils.CoinUtil;
 import vendingmachine.validation.validator.InputCostValidator;
 import vendingmachine.validation.validator.InputProductNameValidator;
 import vendingmachine.validation.validator.InputProductValidator;
@@ -17,8 +16,8 @@ import vendingmachine.validation.validator.InputVendingMachineCostValidator;
 
 public class VendingMachineService {
 
-	private ResponseMessage result;
-	private VendingMachine vendingMachine;
+	private final ResponseMessage result;
+	private final VendingMachine vendingMachine;
 	private int change;
 
 	public VendingMachineService() {
@@ -88,6 +87,7 @@ public class VendingMachineService {
 		for (Integer i : coinMap.keySet()) {
 			changeMap = addChangeMapToValue(i, coinMap.get(i), changeMap);
 		}
+
 		result.addCoinCountMessage(changeMap);
 	}
 

@@ -1,5 +1,6 @@
 package vendingmachine.validation;
 
+import java.util.Arrays;
 import java.util.List;
 
 import vendingmachine.domain.Product;
@@ -39,12 +40,10 @@ public class GlobalValidation {
 	// 상품의 길이가 3(상품명, 가격, 수량)이 아니고 빈 값일 있을 경우
 	public static void validateProductLengthAndBlank(String[] product) {
 		if (product.length != Constant.THREE.getNumber()) {
-			throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_LENGTH_ERROR.getErrorMessage());
+			throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_INFORMATION_ERROR.getErrorMessage());
 		}
 
-		for (String p : product) {
-			validateStringIsBlank(p, ErrorMessage.PRODUCT_INPUT_LENGTH_ERROR);
-		}
+		Arrays.stream(product).forEach(p -> validateStringIsBlank(p, ErrorMessage.PRODUCT_INPUT_INFORMATION_ERROR));
 	}
 
 	// 상품 가격이 100 이상, 10으로 나누어 떨어지는 자연수가 아닐 경우

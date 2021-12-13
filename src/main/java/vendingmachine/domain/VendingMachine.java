@@ -1,10 +1,14 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import vendingmachine.domain.enumclass.Coin;
 import vendingmachine.utils.CoinUtil;
@@ -34,6 +38,7 @@ public class VendingMachine {
 		for (Integer i : coinMap.keySet()) {
 			sum += i * coinMap.get(i);
 		}
+
 		return sum;
 	}
 
@@ -57,14 +62,11 @@ public class VendingMachine {
 	}
 
 	public void subtractInputCostAndProductAmount(String productName) {
-		//TODO: Stream 으로 처리 할 수 없나?
-		for (Product product : products) {
-			if (productName.equals(product.getName())) {
-				subtractInputCost(product);
-				product.subtractAmount();
-				break;
-			}
-		}
+		Product rightProduct = products.stream().filter(product -> productName.equals(product.getName())).collect(
+			Collectors.toList()).get(0);
+
+		subtractInputCost(rightProduct);
+		rightProduct.subtractAmount();
 	}
 
 	private void subtractInputCost(Product product) {

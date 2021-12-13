@@ -52,7 +52,7 @@
   
 
 - 상품의 길이가 3(상품명, 가격, 수량)이 아니고 빈 값이 있을 경우.  
-  : **[ERROR] 상품명, 가격, 수량은 쉼표로, 구분하여 상품명, 가격, 수량이 모두 입력되어야 합니다.**
+  : **[ERROR] 상품명, 가격, 수량은 쉼표로, 구분하여 상품명, 가격, 수량 3개의 정보가 입력되어야 합니다.**
   
 
 - 상품 가격이 100이상 자연수가 아닌 경우.   
@@ -122,6 +122,38 @@
 ---
 
 ## 📒 패키지 구조
+* main/java/vendingmachine
+    * controller
+        * VendingMachineController.java
+    * domain
+        * enumclass
+          * Coin.java
+        * Product.java
+        * VendingMachine.java
+    * exception
+        * dto
+            * ErrorResponse.java
+        * ErrorMessage.java
+    * message
+        * dto
+            * ResponseMessage.java
+        * Message.java
+    * service
+        * VendingMachineService.java
+    * utils
+      * CoinUtil.java
+    * validation
+        * enumclass
+          * Constant.java
+        * validator
+          * InputCostValidator.java
+          * InputProductNameValidator.java
+          * InputProductsValidator.java
+          * InputProductValidator.java
+          * InputVendingMachineCostValidator.java
+        * GlobalValidation.java
+    * VendingMachineClient.java
+    * Application.java
 
 
 ## ✔️ Commit Conventions
