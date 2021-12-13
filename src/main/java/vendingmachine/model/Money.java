@@ -1,7 +1,7 @@
 package vendingmachine.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
+import vendingmachine.model.enums.Coin;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Money {
 
     private String getChangeString(Map<Coin, Integer> coins) {
         StringBuilder stringBuilder = new StringBuilder("잔돈\n");
-        for(Entry<Coin, Integer> coin: coins.entrySet()) {
+        for (Entry<Coin, Integer> coin : coins.entrySet()) {
             stringBuilder.append(coin.getKey().toString())
                     .append(" - ")
                     .append(coin.getValue())
@@ -56,7 +56,7 @@ public class Money {
     }
 
     private int getMaxCntByTotal(int amount, int cnt, int total) {
-        int maxCnt = (int) Math.floor( (double) total / amount);
+        int maxCnt = (int) Math.floor((double) total / amount);
         return Math.min(maxCnt, cnt);
     }
 
@@ -85,7 +85,7 @@ public class Money {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder("자판기가 보유한 동전\n");
-        for(Entry<Coin, Integer> coin: coins.entrySet()) {
+        for (Entry<Coin, Integer> coin : coins.entrySet()) {
             stringBuilder.append(coin.getKey().toString())
                     .append(" - ")
                     .append(coin.getValue())

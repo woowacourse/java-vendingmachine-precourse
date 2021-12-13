@@ -1,10 +1,5 @@
 package vendingmachine.model;
 
-import vendingmachine.Coin;
-
-import java.util.Map;
-import java.util.Map.Entry;
-
 public class VendingMachine {
     private Products products;
     private Money changes;

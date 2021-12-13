@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model.enums;
 
 import java.util.Arrays;
 import java.util.List;
