@@ -7,10 +7,10 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-public class GoodsTest {
+public class ProductTest {
     @Test
     void 상품명_가격_수량으로_이루어져_있다() {
-        Goods goods = new Goods("콜라,1500,20");
+        Product goods = new Product("콜라,1500,20");
 
         assertThat(goods.getName()).isEqualTo("콜라");
         assertThat(goods.getPrice()).isEqualTo(1500);
@@ -20,7 +20,8 @@ public class GoodsTest {
     @ParameterizedTest
     @ValueSource(strings = {"콜라,90,20", "콜라,105,20", "콜라,문자,20", "콜라,,20"})
     void 상품가격_예외테스트(String wrongInput) {
-        assertThatThrownBy(() -> new Goods(wrongInput))
+        assertThatThrownBy(() -> new Product(wrongInput))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
 }

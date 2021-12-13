@@ -1,6 +1,6 @@
 package vendingmachine;
 
-public class GoodsPrice {
+public class ProductPrice {
     private static final int DIVISOR = 10;
     private static final int ZERO = 0;
     private static final int LEAST_PRICE = 100;
@@ -10,7 +10,7 @@ public class GoodsPrice {
 
     private int price;
 
-    public GoodsPrice(String priceString) {
+    public ProductPrice(String priceString) {
         validatePricePolicy(priceString);
         this.price = Integer.parseInt(priceString);
     }

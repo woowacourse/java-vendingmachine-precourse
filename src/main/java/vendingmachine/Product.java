@@ -1,14 +1,14 @@
 package vendingmachine;
 
-public class Goods {
+public class Product {
     private static final int GOODS_SIZE = 3;
     private static final String INFO_MISSED_MESSAGE = "상품명,가격,수량 순으로 누락 없이 작성해주세요.";
 
     private final String name;
-    private final GoodsPrice price;
-    private final GoodsQuantity quantity;
+    private final ProductPrice price;
+    private final ProductQuantity quantity;
 
-    public Goods(String namePriceQuantity) {
+    public Product(String namePriceQuantity) {
         validateInfoNotMissed(namePriceQuantity);
         String[] goodsInfo = namePriceQuantity.split(",");
 
@@ -17,8 +17,8 @@ public class Goods {
         String quantityString = goodsInfo[2];
 
         this.name = name;
-        this.price = new GoodsPrice(priceString);
-        this.quantity = new GoodsQuantity(quantityString);
+        this.price = new ProductPrice(priceString);
+        this.quantity = new ProductQuantity(quantityString);
     }
 
     public String getName() {
