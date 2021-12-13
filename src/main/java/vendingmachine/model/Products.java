@@ -2,6 +2,8 @@ package vendingmachine.model;
 
 import java.util.List;
 
+import vendingmachine.util.ErrorMessageConstants;
+
 public class Products {
 	private final List<Product> products;
 
@@ -25,6 +27,6 @@ public class Products {
 				return product;
 			}
 		}
-		throw new IllegalArgumentException();
+		throw new IllegalArgumentException(ErrorMessageConstants.NO_SUCH_PRODUCT_EXCEPTION_MESSAGE);
 	}
 }
