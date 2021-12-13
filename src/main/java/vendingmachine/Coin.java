@@ -37,5 +37,9 @@ public enum Coin {
     public static void addNumber(Coin coin) {
         coin.number++;
     }
+    
+    public static void deleteNumber(Coin coin) {
+        coin.number--;
+    }
 
 }
