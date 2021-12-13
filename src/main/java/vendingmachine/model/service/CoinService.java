@@ -35,7 +35,7 @@ public class CoinService {
 		}
 	}
 
-	public String makeCoinName(int amount) {
+	private String makeCoinName(int amount) {
 		String coinName = COIN_NAME_PREFIX + amount;
 		return coinName;
 	}
