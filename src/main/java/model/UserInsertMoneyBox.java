@@ -6,4 +6,8 @@ public class UserInsertMoneyBox {
 	public UserInsertMoneyBox(int userInsertMoney) {
 		money = userInsertMoney;
 	}
+
+	public int bringMoney() {
+		return money;
+	}
 }

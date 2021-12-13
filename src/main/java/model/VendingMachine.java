@@ -26,4 +26,8 @@ public class VendingMachine {
 	public List<Integer> giveEachCoinPrice() {
 		return vendingMachineCoinBox.bringEachCoinPriceInCoinBox();
 	}
+
+	public int giveUserInsertMoney() {
+		return userInsertMoneyBox.bringMoney();
+	}
 }

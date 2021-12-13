@@ -21,4 +21,9 @@ public class OutputDisplay {
 	private static void showCoin(int coinPrice, int coinCount) {
 		System.out.println(coinPrice + PRICE + coinCount + COUNT);
 	}
+
+	public static void showNowUserInsertMoney(int userInsertMoney) {
+		System.out.println();
+		System.out.println("투입 금액: " + userInsertMoney + "원");
+	}
 }
