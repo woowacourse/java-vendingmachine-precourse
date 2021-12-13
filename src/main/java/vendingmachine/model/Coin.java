@@ -24,7 +24,7 @@ public enum Coin {
     public static List<Integer> getOrderedCoinAmounts() {
         return Arrays.stream(values())
             .map(Coin::getAmount)
-            .sorted(Comparator.reverseOrder()) //TODO 내림차순으로 잘 정렬되는지 확인
+            .sorted(Comparator.reverseOrder())
             .collect(Collectors.toList());
     }
 

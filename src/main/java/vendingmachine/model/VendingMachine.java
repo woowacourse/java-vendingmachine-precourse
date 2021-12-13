@@ -8,7 +8,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.util.Utils;
 
 public class VendingMachine {
 	private int ownMoney; // 갖고 있을 필요가 있나?
@@ -33,19 +32,23 @@ public class VendingMachine {
 	}
 
 	public void generateCoin() {
+		initCoinMap();
 		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
-		coinAmountList.forEach(this::generateSpecificCoin);
+
+		while (ownMoney > 0) {
+			int coinAmount = Randoms.pickNumberInList(coinAmountList);
+			if (coinAmount <= ownMoney) {
+				coinMap.put(Coin.parse(coinAmount), coinMap.get(Coin.parse(coinAmount))+1);
+				ownMoney = ownMoney - coinAmount;
+			}
+		}
 	}
 
-	private void generateSpecificCoin(Integer amount) {
-		int maxRange = Utils.getMaxRange(ownMoney, amount);
-		if (amount == 10) {
-			coinMap.put(Coin.parse(amount), maxRange);
-			return;
-		}
-		int randomNumber = Randoms.pickNumberInRange(0, maxRange);
-		coinMap.put(Coin.parse(amount), randomNumber);
-		ownMoney = ownMoney - randomNumber* amount;
+	private void initCoinMap() {
+		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
+		coinAmountList.forEach(coinAmount -> {
+			coinMap.put(Coin.parse(coinAmount), 0);
+		});
 	}
 
 	public void generateProduct(String products) {
