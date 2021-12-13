@@ -1,28 +1,37 @@
 package vendingmachine.machine;
 
 public class MachineReturnChange {
-    Coin[] coins = Coin.values();
-    Machine machine;
+    public static Coin[] coins = Coin.values();
 
-    MachineReturnChange(Machine machine) {
-        this.machine = machine;
-    }
+    public static int[] coinNumber = new int[4];
 
-    public int reduceUserMoney(Coin coin, int userMoney) {
+    public static int reduceUserMoney(Coin coin, int userMoney, int i) {
         int number = coin.getNumber();
 
         while (true) {
             if (coin.getCoinAmount() * number < userMoney) {
                 coin.minusCoinNumber(number);
+                coinNumber[i] = number;
                 return userMoney - coin.getCoinAmount() * number;
             }
             number--;
         }
     }
 
-    public void makeChanges(int userMoney) {
+    public static void makeChanges(int userMoney) {
+        int i = 0;
+
         for (Coin coin : coins) {
-            userMoney -= reduceUserMoney(coin, userMoney);
+            userMoney -= reduceUserMoney(coin, userMoney, i);
+            i += 1;
         }
+    }
+
+    public static boolean isThisCoinZero(Coin coin) {
+        return coin.getNumber() == 0;
+    }
+
+    public static int getCoinNumber(int i) {
+        return coinNumber[i];
     }
 }

@@ -4,6 +4,7 @@ import vendingmachine.goods.GoodsController;
 import vendingmachine.machine.Coin;
 import vendingmachine.machine.Machine;
 import vendingmachine.machine.MachineHoldingAmount;
+import vendingmachine.machine.MachineReturnChange;
 
 public class ProcessController {
     public static Coin[] coins = Coin.values();
@@ -71,6 +72,19 @@ public class ProcessController {
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
+        }
+    }
+
+    public static void makeChanges() {
+        MachineReturnChange.makeChanges(userMoney);
+
+        System.out.println(ProcessConstant.EXCHANGE);
+
+        for (int i=0; i<coins.length; i++) {
+            if (MachineReturnChange.isThisCoinZero(coins[i])) {
+                continue;
+            }
+            System.out.println(ProcessConstant.COINS[i] + MachineReturnChange.getCoinNumber(i)+ProcessConstant.UNIT);
         }
     }
 }
