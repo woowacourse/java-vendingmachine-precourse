@@ -1,7 +1,7 @@
 package vendingmachine.service;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.Coin;
+import vendingmachine.repository.Coin;
 import vendingmachine.view.InputView;
 
 public class CoinService {

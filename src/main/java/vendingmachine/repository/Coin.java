@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.repository;
 
 public enum Coin {
     COIN_500(500, 0),
