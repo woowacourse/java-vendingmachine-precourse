@@ -7,6 +7,7 @@ import vendingmachine.model.Coin;
 import vendingmachine.util.Constant;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
@@ -14,7 +15,7 @@ public class OutputView {
     public static List<String> productsName = new ArrayList<>();
     public static List<Integer> productsNum = new ArrayList<>();
     private static String chooseProductName;
-
+    private static final List<Integer> coinAmount = new ArrayList<>();
 
     public static void askVendingMachinePrice(){
         System.out.println(Constant.VENDING_MACHINE_HOLDING_PRICE);
@@ -39,17 +40,30 @@ public class OutputView {
 
     private static void getCoins(int vendingmachineholdingPrice){
         int remainMoney = vendingmachineholdingPrice;
-        for(Coin coins : Coin.values()) {
-            if (coins.getAmount() == 10) {coins.setNum(remainMoney / 10);
-                break;
-            }
-            int maxNumCoin = remainMoney / coins.getAmount();
-            List<Integer> NumCoinList = new ArrayList<>();
-            for (int i = 0; i < maxNumCoin + 1; i++) {NumCoinList.add(i);}
-            int numCoin = Randoms.pickNumberInList(NumCoinList);
-            remainMoney -= numCoin * coins.getAmount();
-            coins.setNum(numCoin);
+        for (Coin coin : Coin.values()){
+            coinAmount.add(coin.getAmount());
         }
+        Coin[] coinsNum = Coin.values();
+        while (remainMoney!=0){
+            int coinAmountIndex=Randoms.pickNumberInList(coinAmount);
+            if (remainMoney-coinAmountIndex<0){
+                continue;
+            }
+            remainMoney-=coinAmountIndex;
+            coinsNum[coinAmount.indexOf(coinAmountIndex)].setNum(coinsNum[coinAmount.indexOf(coinAmountIndex)].getNum()+1);
+        }
+
+//        for(Coin coins : Coin.values()) {
+//            if (coins.getAmount() == 10) {coins.setNum(remainMoney / 10);
+//                break;
+//            }
+//            int maxNumCoin = remainMoney / coins.getAmount();
+//            List<Integer> NumCoinList = new ArrayList<>();
+//            for (int i = 0; i < maxNumCoin + 1; i++) {NumCoinList.add(i);}
+//            int numCoin = Randoms.pickNumberInList(NumCoinList);
+//            remainMoney -= numCoin * coins.getAmount();
+//            coins.setNum(numCoin);
+//        }
     }
 
     public static void showAllProcess(String[] products, int insertMoney){

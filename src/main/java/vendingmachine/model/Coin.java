@@ -7,7 +7,7 @@ public enum Coin {
     COIN_10(10);
 
     private final int amount;
-    private int num;
+    private int num = 0;
     private int finalNum;
 
     Coin(final int amount) {
