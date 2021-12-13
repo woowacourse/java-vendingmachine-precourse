@@ -20,7 +20,7 @@ public class InputView {
         return result;
     }
 
-    private static void isValidMachinePrice(int price){
+    private static void isValidMachinePrice(int price) {
         if (price%10!=0) {
             throw new IllegalArgumentException();
         }
@@ -86,7 +86,7 @@ public class InputView {
         return count;
     }
 
-    public static void isValidProductName(String productName, List<String> products){
+    public static void isValidProductName(String productName, List<String> products) {
         if (!products.contains(productName)) {
             throw new IllegalArgumentException();
         }

@@ -139,19 +139,19 @@ public class OutputView {
         chooseProductName = input;
     }
 
-    private static void makeProductInfo(String product){
+    private static void makeProductInfo(String product) {
         product = product.substring(1, product.length() - 1);
         String[] productInfo = product.split(",");
         productsInfo.add(productInfo);
     }
 
-    private static void getProductNameList(){
+    private static void getProductNameList() {
         for (String[] product : OutputView.productsInfo) {
             productsName.add(product[0]);
         }
     }
 
-    private static void getProductNumList(){
+    private static void getProductNumList() {
         for (String[] product : OutputView.productsInfo) {
             int result = Integer.parseInt(product[2]);
             productsNum.add(result);
