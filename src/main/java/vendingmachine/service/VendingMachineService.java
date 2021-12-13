@@ -49,8 +49,7 @@ public class VendingMachineService {
     }
 
     public int vendingMachineRunning(int balance){
-        System.out.println(Message.PRODUCT_NAME_INPUT);
-        String order = InputView.input();
+        String order = vendingMachineValidation.orderValidation();
         balance = buyProduct(balance, order);
         return balance;
     }

@@ -23,6 +23,10 @@ public class Validation {
         formIsCorrect(inputList);
     }
 
+    public void orderValidation(String input){
+        checkInputNull(input);
+    }
+
     private void checkDuplicateProducts(List<String> inputList){
         List<String> nameList = new ArrayList<>();
         for(int i = 0; i < inputList.size(); i+=3){
@@ -61,7 +65,7 @@ public class Validation {
             }
 
             if (i % 3 == 1) {
-                productPriceCheck(inputList, target);
+                productPriceCheck(target);
             }
 
             if (i % 3 == 2) {
@@ -71,7 +75,7 @@ public class Validation {
         }
     }
 
-    private void productPriceCheck(List<String> inputList, String target) {
+    private void productPriceCheck(String target) {
         inputIsNumeric(target);
         inputIsPositive(target);
         productPriceIsHigherThan100(target);

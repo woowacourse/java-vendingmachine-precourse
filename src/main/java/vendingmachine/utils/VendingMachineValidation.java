@@ -57,4 +57,12 @@ public class VendingMachineValidation {
             }
         }
     }
+
+
+    public String orderValidation() {
+        System.out.println(Message.PRODUCT_NAME_INPUT);
+        String order = InputView.input();
+        validation.orderValidation(order);
+        return order;
+    }
 }
