@@ -6,5 +6,6 @@ public class Application {
 		CoreController tmp = new CoreController();
 		tmp.setVendingMachineHoldMoney();
 		tmp.setVendingMachineHoldProduct();
+		tmp.setInputMoney();
 	}
 }

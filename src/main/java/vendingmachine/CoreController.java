@@ -7,11 +7,13 @@ import productcase.ProductController;
 import ui.UiController;
 
 public class CoreController {
+	private int inputMoney;
 	private CoinController coinController;
 	private ProductController productController;
 	private UiController uiController;
 
 	CoreController() {
+		inputMoney = 0;
 		coinController = new CoinController();
 		productController = new ProductController();
 		uiController = new UiController();
@@ -26,5 +28,9 @@ public class CoreController {
 	protected void setVendingMachineHoldProduct() {
 		String products = uiController.askVendingMachineHoldProduct();
 		productController.setNewProducts(products);
+	}
+
+	protected void setInputMoney() {
+		inputMoney = uiController.askInputMoney();
 	}
 }
