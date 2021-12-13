@@ -11,26 +11,19 @@ public class Product {
 		this.count = count;
 	}
 
-	public boolean isSoldOut() {
-		if (count == 0) {
-			return true;
-		}
-		return false;
-	}
-
-	public int bringPrice() {
+	public int getPrice() {
 		return price;
 	}
 
-	public int reduceCount() {
+	public void reduceCount() {
 		count -= 1;
-		return price;
+	}
+
+	public boolean isSoldOut() {
+		return count == 0;
 	}
 
 	public boolean isSameName(String productName) {
-		if (name.equals(productName)) {
-			return true;
-		}
-		return false;
+		return name.equals(productName);
 	}
 }
