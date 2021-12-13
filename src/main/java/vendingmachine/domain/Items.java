@@ -30,11 +30,11 @@ public class Items {
 		return foundItem;
 	}
 
-	private void checkItemSellable(Item item, Money money){
+	private void checkItemSellable(Item item, Money money) {
 		if (!item.isStockExist()) {
 			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
 		}
-		if (!money.payable(item.getCost())){
+		if (!money.payable(item.getCost())) {
 			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
 		}
 	}

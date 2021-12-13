@@ -36,14 +36,14 @@ public class Money {
 		return changes;
 	}
 
-	private int getAvailableChangeNumber(int coin, int number, int money){
-		if (coin * number > money){ // 동전 총액 > 투입 금액인 경우 (example: 100원 * 3 (300원) > 투입금액 200원)
+	private int getAvailableChangeNumber(int coin, int number, int money) {
+		if (coin * number > money) { // 동전 총액 > 투입 금액인 경우 (example: 100원 * 3 (300원) > 투입금액 200원)
 			return money / coin;
 		}
 		return number;
 	}
 
-	private void updateChangesAndMoney(Map<Integer, Integer> changes, Integer coin, Integer number){
+	private void updateChangesAndMoney(Map<Integer, Integer> changes, Integer coin, Integer number) {
 		final boolean updatable = ZERO < number;
 		if (!updatable) {
 			return;

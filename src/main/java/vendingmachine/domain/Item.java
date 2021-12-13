@@ -54,16 +54,16 @@ public class Item {
 		if (!isValidRange(cost)) {
 			throw new IllegalArgumentException(String.format(INVALID_RANGE_ERROR, name, COST));
 		}
-		if (!isDivisibleByTen(cost)){
+		if (!isDivisibleByTen(cost)) {
 			throw new IllegalArgumentException(String.format(NOT_DIVISIBLE_BY_TEN_ERROR, name, COST));
 		}
 	}
 
-	private boolean isValidRange(int cost){
+	private boolean isValidRange(int cost) {
 		return COST_LOWER_BOUND <= cost;
 	}
 
-	private boolean isDivisibleByTen(int cost){
+	private boolean isDivisibleByTen(int cost) {
 		return ZERO == cost % TEN;
 	}
 
@@ -80,7 +80,7 @@ public class Item {
 	}
 
 	public void sell() {
-		amount --;
+		amount--;
 	}
 
 	public boolean isStockExist() {
