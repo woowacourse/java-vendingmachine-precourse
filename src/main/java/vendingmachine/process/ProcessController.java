@@ -6,15 +6,10 @@ import vendingmachine.machine.MachineHoldingAmount;
 
 public class ProcessController {
     Coin[] coins = Coin.values();
-    MachineHoldingAmount machineHoldingAmount;
 
-    private int holdingAmount;
+    private static int holdingAmount;
 
-    public ProcessController(MachineHoldingAmount machineHoldingAmount) {
-        this.machineHoldingAmount = machineHoldingAmount;
-    }
-
-    public void makeHoldingAmount() {
+    public static void makeHoldingAmount(MachineHoldingAmount machineHoldingAmount) {
         while (true) {
             try {
                 System.out.println(ProcessConstant.ASK_HOLDING_AMOUNT);
@@ -27,7 +22,7 @@ public class ProcessController {
         machineHoldingAmount.makeCoins();
     }
 
-    public void printMachineCoins() {
+    public static void printMachineCoins() {
         System.out.println(ProcessConstant.PRINT_HOLDING_AMOUNT);
         for (int i = 0; i<coins.length; i++) {
             System.out.println(ProcessConstant.COINS[i] + coins[i].getNumber() + ProcessConstant.UNIT);
