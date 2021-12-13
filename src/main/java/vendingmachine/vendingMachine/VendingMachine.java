@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.vendingMachine;
 
 import static vendingmachine.StringConstants.*;
 

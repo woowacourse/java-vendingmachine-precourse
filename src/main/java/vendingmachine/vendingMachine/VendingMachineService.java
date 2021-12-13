@@ -1,10 +1,11 @@
-package vendingmachine;
+package vendingmachine.vendingMachine;
 
 import vendingmachine.coin.CoinExchangeMachine;
 import vendingmachine.coin.Coins;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 import vendingmachine.item.ItemFactory;
 import vendingmachine.item.Items;
+import vendingmachine.vendingMachine.VendingMachine;
 
 public class VendingMachineService {
     private final CoinExchangeMachine coinExchangeMachine = new CoinExchangeMachine();

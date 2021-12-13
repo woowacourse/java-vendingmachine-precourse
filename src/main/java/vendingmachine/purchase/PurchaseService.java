@@ -1,5 +1,6 @@
-package vendingmachine;
+package vendingmachine.purchase;
 
+import vendingmachine.vendingMachine.VendingMachine;
 import vendingmachine.coin.Coins;
 import vendingmachine.item.Item;
 

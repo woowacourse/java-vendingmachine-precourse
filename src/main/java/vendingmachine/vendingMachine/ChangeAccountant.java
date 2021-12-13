@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.vendingMachine;
 
 import vendingmachine.coin.Coin;
 import vendingmachine.coin.Coins;

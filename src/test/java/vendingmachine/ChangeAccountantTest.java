@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import vendingmachine.coin.Coin;
 import vendingmachine.coin.Coins;
+import vendingmachine.vendingMachine.ChangeAccountant;
 
 class ChangeAccountantTest {
 

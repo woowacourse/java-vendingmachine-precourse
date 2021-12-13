@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.purchase;
+
+import vendingmachine.VendingMachineConsole;
 
 public class PurchaseController {
     private final PurchaseService purchaseService;

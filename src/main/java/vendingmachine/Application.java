@@ -1,5 +1,11 @@
 package vendingmachine;
 
+import vendingmachine.purchase.PurchaseController;
+import vendingmachine.purchase.PurchaseService;
+import vendingmachine.vendingMachine.VendingMachine;
+import vendingmachine.vendingMachine.VendingMachineController;
+import vendingmachine.vendingMachine.VendingMachineService;
+
 public class Application {
     private static final VendingMachineConsole vendingMachineConsole = new VendingMachineConsole();
     private static final VendingMachine vendingMachine = new VendingMachine();

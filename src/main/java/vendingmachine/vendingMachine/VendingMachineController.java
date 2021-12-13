@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.vendingMachine;
+
+import vendingmachine.VendingMachineConsole;
 
 public class VendingMachineController {
     private final VendingMachineService vendingMachineService;

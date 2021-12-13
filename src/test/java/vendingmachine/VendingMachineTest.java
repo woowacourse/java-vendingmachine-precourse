@@ -8,6 +8,7 @@ import vendingmachine.coin.Coin;
 import vendingmachine.coin.Coins;
 import vendingmachine.item.Item;
 import vendingmachine.item.Items;
+import vendingmachine.vendingMachine.VendingMachine;
 
 class VendingMachineTest {
 
