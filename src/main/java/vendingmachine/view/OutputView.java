@@ -5,6 +5,7 @@ import java.util.Map;
 import vendingmachine.constant.MessageConst;
 import vendingmachine.domain.Changes;
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.VendingMachine;
 
 public class OutputView {
 	public static void printInitMessage() {
@@ -15,7 +16,7 @@ public class OutputView {
 		System.out.println(errorMessage);
 	}
 
-	public static void printItemSettingMessage(){
+	public static void printItemSettingMessage() {
 		System.out.println(MessageConst.ITEM_SETTING_MESSAGE);
 	}
 
@@ -25,7 +26,7 @@ public class OutputView {
 		printChangeStatus(changesMap);
 	}
 
-	public static void printInputAmount() {
+	public static void printEnterInputAmount() {
 		System.out.println(MessageConst.INPUT_AMOUNT_MESSAGE);
 	}
 
@@ -35,5 +36,9 @@ public class OutputView {
 
 	private static void printCoinAndCoinNum(Coin coin, Integer coinNum) {
 		System.out.println(coin + MessageConst.SEPARATOR + coinNum + MessageConst.UNIT);
+	}
+
+	public static void printInputAmount(int amount) {
+		System.out.println(MessageConst.REMAIN_INPUT_MONEY_MESSAGE + amount + MessageConst.COIN_UNIT);
 	}
 }

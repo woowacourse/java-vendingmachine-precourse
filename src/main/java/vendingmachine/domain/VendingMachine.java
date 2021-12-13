@@ -30,4 +30,8 @@ public class VendingMachine {
 	public Changes getChanges() {
 		return changes;
 	}
+
+	public int getAmount() {
+		return amount;
+	}
 }

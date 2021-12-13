@@ -12,11 +12,12 @@ public class VendingMachineController {
 		OutputView.printChanges(vendingMachine.getChanges());
 		initItemList(vendingMachine);
 		inputAmount(vendingMachine);
+		OutputView.printInputAmount(vendingMachine.getAmount());
 	}
 
 	private void inputAmount(VendingMachine vendingMachine) {
 		try {
-			OutputView.printInputAmount();
+			OutputView.printEnterInputAmount();
 			vendingMachine.inputAmount(InputView.inputMoney());
 		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e.getMessage());
