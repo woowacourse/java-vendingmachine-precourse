@@ -1,8 +1,10 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 
+import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
 import vendingmachine.model.Product;
 import vendingmachine.model.Products;
@@ -63,6 +65,7 @@ public class VendingMachineController {
 				OutputView.printExceptionMessage(exception.getMessage());
 			}
 		}
+		coins.calculateChange(insertMoney);
 	}
 
 	private void purchaseProduct() {

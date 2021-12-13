@@ -30,6 +30,19 @@ public class Coins {
 		return Coin.values()[coinIndex];
 	}
 
+	public EnumMap<Coin, Integer> calculateChange(int insertMoney) {
+		EnumMap<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
+		for (Coin coin: coinMap.keySet()) {
+			int coinNumber = coin.divideByCoinAmount(insertMoney);
+			if (coinNumber > 0 && coinMap.get(coin) >= coinNumber) {
+				insertMoney -= coin.multiplyByCoinNumber(coinNumber);
+				coinMap.put(coin, coinMap.get(coin) - coinNumber);
+				changeMap.put(coin, coinNumber);
+			}
+		}
+		return changeMap;
+	}
+
 	@Override
 	public String toString() {
 		StringBuilder coinsStringBuilder = new StringBuilder();
