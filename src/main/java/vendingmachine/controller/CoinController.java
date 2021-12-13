@@ -7,10 +7,10 @@ import vendingmachine.view.CoinView;
 public class CoinController {
 	public void makeChangeCoins() {
 		InputMoneyModel.makeCoinFromInputMoney();
-		printCoins();
+		displayCoinViews();
 	}
 
-	private void printCoins() {
+	private void displayCoinViews() {
 		CoinView.messagePrintCoins();
 		CoinView.printCoins(CoinModel.getChangeCoins());
 	}

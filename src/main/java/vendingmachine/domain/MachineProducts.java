@@ -12,7 +12,7 @@ import vendingmachine.service.ProductService;
 public class MachineProducts {
 	List<Product> products = new ArrayList<>();
 
-	MachineProducts(String inputLine) {
+	public MachineProducts(String inputLine) {
 		products = makeProducts(inputLine);
 	}
 
