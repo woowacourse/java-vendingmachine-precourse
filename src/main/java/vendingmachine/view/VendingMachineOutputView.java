@@ -12,4 +12,8 @@ public class VendingMachineOutputView {
         output.append(Symbol.NEW_LINE).append(changes).append(Symbol.NEW_LINE);
         System.out.println(output);
     }
+
+    public void outputInputAmount(int remainAmount) {
+        System.out.println(Symbol.NEW_LINE + ViewMessage.OUTPUT_INPUT_AMOUNT.getMessage() + remainAmount);
+    }
 }

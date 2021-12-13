@@ -9,7 +9,10 @@ public enum ErrorMessage {
     ERROR_NOT_NUMBER("[ERROR] 금액은 숫자여야 합니다."),
     ERROR_OUT_OF_RANGE_AMOUNT("[ERROR] 금액은 100원 이상이어야 합니다."),
     ERROR_CANNOT_DIVIDE_BY_TEN("[ERROR] 금액은 10원 단위여야 합니다."),
-    ERROR_OUT_OF_RANGE_INVENTORY("[ERROR] 수량은 1개 이상이어야 합니다.");
+    ERROR_OUT_OF_RANGE_INVENTORY("[ERROR] 수량은 1개 이상이어야 합니다."),
+
+    ERROR_NOT_EXIST_MERCHANDISE_NAME("[ERROR] 해당 상품은 존재하지 않습니다."),
+    ERROR_SOLD_OUT_MERCHANDISE("[ERROR] 해당 상품은 품절되었습니다.");
 
     private final String message;
 

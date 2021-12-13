@@ -10,4 +10,20 @@ public class VendingMachine {
         this.displayMerchandise = displayMerchandise;
         this.inputAmount = inputAmount;
     }
+
+    public Changes getChanges() {
+        return changes;
+    }
+
+    public DisplayMerchandise getDisplayMerchandise() {
+        return displayMerchandise;
+    }
+
+    public int getInputAmount() {
+        return inputAmount;
+    }
+
+    public void subtractInputAmount(int price) {
+        inputAmount -= price;
+    }
 }

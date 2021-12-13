@@ -42,7 +42,14 @@ public class VendingMachineController {
     }
 
     public void turnOnVendingMachine() {
-        // TODO: 자판기 판매 시작
+        vendingMachineOutputView.outputInputAmount(vendingMachineService.getRemainAmount());
+
+        while (vendingMachineService.canBuyWithRemainAmount() && displayMerchandiseService.isExistDisplayMerchandise()) {
+            String merchandiseName = vendingMachineInputView.inputMerchandiseName(
+                    displayMerchandiseService.getDisplayMerchandiseNames());
+            vendingMachineService.buyMerchandise(merchandiseName);
+            vendingMachineOutputView.outputInputAmount(vendingMachineService.getRemainAmount());
+        }
     }
 
     public void turnOffVendingMachine() {
