@@ -8,10 +8,6 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class ProductValidator {
-	public static void checkProductName(String name) {
-		checkIsEmpty(name);
-	}
-
 	public static List<String> checkProduct(String input) {
 		checkIsEmpty(input);
 		isMatchRegex(input);
