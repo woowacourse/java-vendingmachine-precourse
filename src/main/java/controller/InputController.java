@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
+import utils.validator.ProductNameToBuyValidator;
 import utils.validator.VendingMachineChangeValidator;
 import utils.validator.userinsertmoney.UserInsertMoneyValidator;
 import utils.validator.vendingmachineproducts.VendingMachineProductsValidator;
@@ -64,6 +65,13 @@ public class InputController {
 	}
 
 	public static String inputProductNameToBuy() {
-		return Console.readLine();
+		while (INPUT_ERROR) {
+			try {
+				String productName = ProductNameToBuyValidator.checkValidProductName(Console.readLine());
+				return productName;
+			} catch (IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
+		}
 	}
 }
