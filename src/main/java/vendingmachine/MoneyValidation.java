@@ -10,6 +10,11 @@ public class MoneyValidation {
 		validateVendingMachineMoneyDividedByMinCoinPrice(money);
 	}
 
+	public static void validateInsertAmount(String insertAmount) {
+		validateIntegerType(insertAmount);
+		validateNotNegative(Integer.parseInt(insertAmount));
+	}
+
 	private static void validateNotNegative(int money) {
 		if (money < 0) {
 			throw new IllegalArgumentException("금액은 0보다 작을 수 없습니다.");
