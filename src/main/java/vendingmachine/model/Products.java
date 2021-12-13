@@ -8,4 +8,14 @@ public class Products {
 	public Products(List<Product> productList) {
 		this.products = productList;
 	}
+
+	public int selectMinimumPrice() {
+		int minimumPrice = Integer.MAX_VALUE;
+		for (Product product: products) {
+			if (product.exists()) {
+				minimumPrice = product.compareMinimumPrice(minimumPrice);
+			}
+		}
+		return minimumPrice;
+	}
 }

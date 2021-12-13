@@ -16,4 +16,17 @@ public class Product {
 		this.price = Integer.parseInt(productDetail[1]);
 		this.quantity = Integer.parseInt(productDetail[2]);
 	}
+
+	public boolean equalProductName(String name) {
+		return this.name.equals(name);
+	}
+
+
+	public boolean exists() {
+		return this.quantity > 0;
+	}
+
+	public int compareMinimumPrice(int minimumPrice) {
+		return Math.min(this.price, minimumPrice);
+	}
 }

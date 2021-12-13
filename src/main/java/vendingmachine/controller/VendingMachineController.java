@@ -53,4 +53,10 @@ public class VendingMachineController {
 		}
 		insertMoney = Integer.parseInt(inputInsertMoney);
 	}
+
+	public void run() {
+		while (products.selectMinimumPrice() <= insertMoney) {
+
+		}
+	}
 }
