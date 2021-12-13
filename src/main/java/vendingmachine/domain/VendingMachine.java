@@ -6,7 +6,6 @@ import vendingmachine.utils.NumberValidator;
 import vendingmachine.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,7 +13,7 @@ import java.util.stream.Collectors;
 public class VendingMachine {
 
     private final HashMap<Integer, Integer> coinTable = new HashMap<>();
-    private List<Product> products = new ArrayList<>();
+    private final List<Product> products = new ArrayList<>();
     private Money money;
 
     public void generateCoins(String inputMoney) {
@@ -26,7 +25,7 @@ public class VendingMachine {
         int money = Integer.parseInt(inputMoney);
         initCoinTable();
         while (money > 0) {
-            int randomNum = Randoms.pickNumberInList(new ArrayList<Integer>(coinTable.keySet()));
+            int randomNum = Randoms.pickNumberInList(new ArrayList<>(coinTable.keySet()));
             if (randomNum <= money) {
                 coinTable.put(randomNum, coinTable.get(randomNum) + 1);
                 money -= randomNum;
@@ -101,4 +100,20 @@ public class VendingMachine {
             throw new IllegalArgumentException(Exception.NUMBER_DIVIDE_TEM_EXCEPTION_MESSAGE);
         }
     }
+
+    public void validateDuplicateName() {
+        if (!checkDuplicateName()) {
+            throw new IllegalArgumentException(Exception.PRODUCT_NAME_DUPLICATE_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private boolean checkDuplicateName() {
+        return products.size() != products.stream()
+                .map(Product::getName)
+                .collect(Collectors.toList())
+                .stream()
+                .distinct()
+                .count();
+    }
+
 }
