@@ -18,4 +18,11 @@ public class Money {
 	public void deductMoney(Money minusMoney) {
 		money -= minusMoney.getMoney();
 	}
+
+	public boolean compareMoney(Money anotherMoney) {
+		if (money > anotherMoney.getMoney()) {
+			return true;
+		}
+		return false;
+	}
 }
