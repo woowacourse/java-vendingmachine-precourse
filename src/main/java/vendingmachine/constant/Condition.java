@@ -18,9 +18,7 @@ public enum Condition {
     DIVIDE_NUMBER(10),
     MINIMUM_COST(100),
     BRACKETS_NUMBER(2),
-    ONE_SELL(1),
-    NOTHING(-1);
-
+    ONE_SELL(1);
     private int number;
 
     Condition(int number) {
