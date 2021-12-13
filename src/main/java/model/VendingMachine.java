@@ -44,4 +44,9 @@ public class VendingMachine {
 		}
 		return false;
 	}
+
+	public void sellProduct(String productName) {
+		int soldProductPrice = vendingMachineProducts.sellProduct(productName);
+		userInsertMoneyBox.reduceMoney(soldProductPrice);
+	}
 }

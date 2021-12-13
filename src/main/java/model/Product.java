@@ -3,7 +3,7 @@ package model;
 public class Product {
 	private final String name;
 	private final int price;
-	private final int count;
+	private int count;
 
 	public Product(String name, int price, int count) {
 		this.name = name;
@@ -20,5 +20,17 @@ public class Product {
 
 	public int bringPrice() {
 		return price;
+	}
+
+	public int reduceCount() {
+		count -= 1;
+		return price;
+	}
+
+	public boolean isSameName(String productName) {
+		if (name.equals(productName)) {
+			return true;
+		}
+		return false;
 	}
 }

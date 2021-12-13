@@ -1,7 +1,7 @@
 package model;
 
 public class UserInsertMoneyBox {
-	final int money;
+	private int money;
 
 	public UserInsertMoneyBox(int userInsertMoney) {
 		money = userInsertMoney;
@@ -16,5 +16,9 @@ public class UserInsertMoneyBox {
 			return false;
 		}
 		return true;
+	}
+
+	public void reduceMoney(int soldProductPrice) {
+		money -= soldProductPrice;
 	}
 }

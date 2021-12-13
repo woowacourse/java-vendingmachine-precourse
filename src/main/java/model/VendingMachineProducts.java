@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class VendingMachineProducts {
 	private static final String COMMA = ",";
@@ -39,5 +40,13 @@ public class VendingMachineProducts {
 	public int bringMinimumProductPrice() {
 		Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::bringPrice);
 		return products.stream().max(comparatorByPrice).orElseThrow(NoSuchElementException::new).bringPrice();
+	}
+
+	public int sellProduct(String productName) {
+		Product soldProduct = products.stream()
+			.filter(product -> product.isSameName(productName))
+			.collect(Collectors.toList())
+			.get(0);
+		return soldProduct.reduceCount();
 	}
 }

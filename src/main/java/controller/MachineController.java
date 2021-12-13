@@ -18,8 +18,11 @@ public class MachineController {
 		vendingMachine.makeVendingMachineProducts(InputController.inputVendingMachineProducts());
 		InputDisplay.askInputUserInsertMoney();
 		vendingMachine.makeUserInsertMoneyBox(InputController.inputUserInsertMoney());
-		OutputDisplay.showNowUserInsertMoney(vendingMachine.giveUserInsertMoney());
-		InputDisplay.askInputProductNameToBuy();
-		InputController.inputProductNameToBuy();
+
+		while (true) {
+			OutputDisplay.showNowUserInsertMoney(vendingMachine.giveUserInsertMoney());
+			InputDisplay.askInputProductNameToBuy();
+			vendingMachine.sellProduct(InputController.inputProductNameToBuy());
+		}
 	}
 }
