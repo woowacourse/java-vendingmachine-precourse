@@ -22,12 +22,12 @@ public enum Coin {
 	}
 
 	public static List<Integer> getList() {
-		return Arrays.asList(10, 50, 100, 500);
+		return Arrays.asList(COIN_10.getAmount(), COIN_50.getAmount(), COIN_100.getAmount(), COIN_500.getAmount());
 	}
 
 	public static Coin getCoin(int amount) {
 		return Arrays.stream(Coin.values())
-			.filter(coin -> coin.amount == amount)
+			.filter(coin -> coin.getAmount() == amount)
 			.findAny()
 			.orElseThrow(NotFoundCoinException::new);
 	}
