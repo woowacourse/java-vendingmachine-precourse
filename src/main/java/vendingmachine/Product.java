@@ -1,2 +1,4 @@
-package vendingmachine;public class Product {
+package vendingmachine;
+
+public class Product {
 }
