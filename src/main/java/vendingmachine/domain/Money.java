@@ -8,6 +8,7 @@ public class Money {
 	private static final String WHITE_SPACE = " ";
 	private static final String COLON = ":";
 	private static final String WON = "원";
+	private static final int ZERO = 0;
 	private int money;
 
 	public Money(int money) {
@@ -30,8 +31,11 @@ public class Money {
 		Map<Integer, Integer> changes = new LinkedHashMap<>();
 		for (Map.Entry<Integer, Integer> coin : coins.findRestCoins().entrySet()) {
 			int number = getAvailableChangeNumber(coin.getKey(), coin.getValue(), money);
-			changes.put(coin.getKey(), number);
-			reduce(coin.getKey() * number);
+			boolean addable = ZERO < number;
+			if (addable) {
+				changes.put(coin.getKey(), number);
+				reduce(coin.getKey() * number);
+			}
 		}
 		return changes;
 	}
