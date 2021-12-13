@@ -40,8 +40,8 @@ public class Money {
 	}
 
 	private void updateChangesAndMoney(Map<Integer, Integer> changes, Integer coin, Integer number){
-		final boolean addable = ZERO < number;
-		if (!addable) {
+		final boolean updatable = ZERO < number;
+		if (!updatable) {
 			return;
 		}
 		changes.put(coin, number);

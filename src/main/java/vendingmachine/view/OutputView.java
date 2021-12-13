@@ -17,7 +17,7 @@ public class OutputView {
 	private static final String HOLDING_COIN_TEXT = "자판기가 보유한 동전";
 	private static final String REGISTER_ITEM_REQUEST_TEXT = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INSERTING_MONEY_REQUEST_TEXT = "투입 금액을 입력해 주세요.";
-	private static final String PERCHASE_ITEM_REQUEST_TEXT = "투입 금액을 입력해 주세요.";
+	private static final String PERCHASE_ITEM_REQUEST_TEXT = "구매할 상품명을 입력해 주세요.";
 
 
 	public static void printError(String error) {
