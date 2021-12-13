@@ -1,82 +1,53 @@
 package vendingmachine.domain;
 
-import static camp.nextstep.edu.missionutils.Randoms.*;
 import static vendingmachine.constant.Constant.*;
-import static vendingmachine.domain.Coin.*;
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 public class VendingMachine {
-	private final HashMap<String, Integer> productPrice = new HashMap<>();
-	private final HashMap<String, Integer> productStocks = new HashMap<>();
-	private final LinkedHashMap<Integer, Integer> coinsOwned = new LinkedHashMap<>();
+	private final List<Item> salesItems = new ArrayList<>();
+	private final CoinStorage coinStorage;
 
 	public VendingMachine(int startMoney) {
-		for (int coin : getCoinList()) {
-			coinsOwned.put(coin, INITIAL_VALUE);
-		}
-		while (startMoney > INITIAL_VALUE) {
-			int coinPicked = pickNumberInList(getCoinList());
-			if (coinPicked <= startMoney) {
-				coinsOwned.put(coinPicked, coinsOwned.get(coinPicked) + 1);
-				startMoney -= coinPicked;
-			}
+		coinStorage = new CoinStorage(startMoney);
+	}
+
+	public void addNewItems(List<Item> items) {
+		for (Item item : items) {
+			isInItems(item);
+			salesItems.add(item);
 		}
 	}
 
-	public void addProduct(String products) {
-		products = products.replaceAll(LEFT_SQUARE_BRACKETS, "").replaceAll(RIGHT_SQUARE_BRACKETS, "");
-		for (String productPriceAndStock : products.split(DISTINGUISH_BETWEEN_PRODUCTS)) {
-			String[] product = productPriceAndStock.split(DISTINGUISH_BETWEEN_PRODUCT_INFORMATION);
-			// validateProduct(product);
-			productPrice.put(product[NAME], Integer.parseInt(product[PRICE]));
-			productStocks.put(product[NAME], Integer.parseInt(product[STOCKS]));
+	private void isInItems(Item item) {
+		if (salesItems.contains(item)) {
+			throw new IllegalArgumentException(DUPLICATED_ITEM_MESSAGE);
 		}
 	}
 
-	public int getProduct(String productName, int paidMoney) {
-		if (!canSell(productName, paidMoney)) {
+	public int getItem(String itemName, int money) {
+		Optional<Item> it = salesItems.stream()
+			.filter(item -> item.getName().equals(itemName))
+			.filter(Item::isNotSoldOut)
+			.findAny();
+		if (!it.isPresent()) {
 			throw new IllegalArgumentException(NO_STOCKS_MESSAGE);
 		}
-		productStocks.put(productName, productStocks.get(productName) - 1);
-		calculateMinimumChange(paidMoney - productPrice.get(productName));
-		return paidMoney - productPrice.get(productName);
+		coinStorage.changeCoins(money - it.get().getPrice());
+		return money - it.get().getPrice();
 	}
 
-	private boolean canSell(String productName, int amountPaid) {
-		if (!isExistProductStocks(productName)) {
-			return false;
-		}
-		return productPrice.get(productName) <= amountPaid;
-	}
-
-	private boolean isExistProductStocks(String productName) {
-		return productStocks.get(productName) >= MINIMUM_STOCKS;
-	}
-
-	private void calculateMinimumChange(int changeCoin) {
-		for (int coin : coinsOwned.keySet()) {
-			int coinNumberToPay = Math.min(coinsOwned.get(coin), changeCoin / coin);
-			coinsOwned.put(coin, coinsOwned.get(coin)
-				- coinNumberToPay);
-			changeCoin -= coin * coinNumberToPay;
-		}
-	}
-
-	private boolean canGiveChange(int remainingChange) {
-		for (int coin : coinsOwned.keySet()) {
-			remainingChange -= coin * Math.min(coinsOwned.get(coin), remainingChange / coin);
-		}
-		return remainingChange == 0;
-	}
-
-	public LinkedHashMap<Integer, Integer> getCoinsOwned() {
-		return coinsOwned;
+	public CoinStorage getCoinStorage() {
+		return coinStorage;
 	}
 
 	public int getNeedMinimumMoney() {
-		return Collections.min(productPrice.values());
+		return salesItems.stream()
+			.mapToInt(Item::getPrice)
+			.min()
+			.orElseThrow(NoSuchElementException::new);
 	}
 }
