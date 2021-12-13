@@ -22,8 +22,7 @@ public class MachineService {
 
 	public void addCoins(Long id, Integer totalCoin) {
 		Machine machine = machineRepository.findById(id);
-		SortedMap<Coin, Integer> generatedCoins = CoinGenerator.generate(Coin.getCoinList(), totalCoin);
-		machine.addCoins(generatedCoins);
+		machine.addCoins(CoinGenerator.generate(Coin.getCoinList(), totalCoin));
 	}
 
 	public SortedMap<Coin, Integer> getCoins(Long id) {
