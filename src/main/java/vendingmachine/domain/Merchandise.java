@@ -12,11 +12,10 @@ public class Merchandise {
 
 	private final String name;
 	private final Money money;
-	private int quantity;
+	private Quantity quantity;
 
-	public Merchandise(String name, Money money, int quantity) {
+	public Merchandise(String name, Money money, Quantity quantity) {
 		Validator.validateEmptyMerchandiseName(name);
-		Validator.validateQuantity(quantity);
 		this.name = name;
 		this.money = money;
 		this.quantity = quantity;
@@ -30,20 +29,13 @@ public class Merchandise {
 		return name;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void decreaseQuantity() {
-		quantity--;
-	}
 
 	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
 		Validator.validateEmptyMerchandiseInformation(informations);
 		Validator.validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
 		return new Merchandise(informations[0].trim(), new Money(Integer.parseInt(informations[1].trim())),
-			Integer.parseInt(informations[2].trim()));
+			new Quantity(Integer.parseInt(informations[2].trim())));
 	}
 
 	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
@@ -54,6 +46,10 @@ public class Merchandise {
 			merchandiseList.add(constructMerchandise(merchandise));
 		}
 		return merchandiseList;
+	}
+
+	public boolean isMerchandiseSoldOut() {
+		return quantity.isQuantityZero();
 	}
 
 	@Override

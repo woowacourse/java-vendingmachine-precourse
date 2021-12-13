@@ -29,7 +29,7 @@ public class Merchandises {
 
 	public boolean isAllMerchandisesSoldout() {
 		List<Merchandise> soldOutMerchandises = merchandiseList.stream()
-			.filter(merchandise -> merchandise.getQuantity() == 0)
+			.filter(merchandise -> merchandise.isMerchandiseSoldOut())
 			.collect(Collectors.toList());
 
 		return soldOutMerchandises.size() == merchandiseList.size();
