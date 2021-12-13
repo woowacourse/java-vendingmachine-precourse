@@ -6,6 +6,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class Items {
+	private static final String DUPLICATE_NAME_ERROR = "상품명이 중복되지 않아야 합니다.";
+	private static final String CANNOT_FIND_NAME_ERROR = "해당 이름의 상품을 찾을 수 없습니다.";
+	private static final String NOT_ENOUGH_MONEY_ERROR = "투입 금액보다 상품의 금액이 더 비싸므로 상품을 구매할 수 없습니다.";
+	private static final String OUT_OF_ORDER_ERROR = "상품의 재고가 소진되어 구매할 수 없습니다.";
 	private final List<Item> items;
 
 	public Items(List<Item> items) {
@@ -20,12 +24,12 @@ public class Items {
 	public Item findItemByName(String name, Money money) {
 		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
-			.findFirst().orElseThrow(() -> new IllegalArgumentException("해당 이름의 상품을 찾을 수 없습니다."));
+			.findFirst().orElseThrow(() -> new IllegalArgumentException(CANNOT_FIND_NAME_ERROR));
 		if (!foundItem.isSellable()) {
-			throw new IllegalArgumentException("상품의 재고가 소진되어 구매할 수 없습니다.");
+			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
 		}
 		if (!money.payable(foundItem.getCost())){
-			throw new IllegalArgumentException("투입 금액보다 상품의 금액이 더 비싸므로 상품을 구매할 수 없습니다.");
+			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
 		}
 		return foundItem;
 	}
@@ -41,7 +45,7 @@ public class Items {
 			.map(Item::getName)
 			.collect(Collectors.toSet());
 		if (nonDuplicatedItems.size() < items.size()) {
-			throw new IllegalArgumentException("상품명이 중복되지 않아야 합니다.");
+			throw new IllegalArgumentException(DUPLICATE_NAME_ERROR);
 		}
 	}
 }

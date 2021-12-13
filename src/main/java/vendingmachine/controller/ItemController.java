@@ -15,7 +15,8 @@ public class ItemController {
 	private static final String PREFIX = "[";
 	private static final String SUFFIX = "]";
 	private static final String DELIMITER_COMMA = ",";
-
+	private static final String INVALID_PREFIX_AND_SUFFIX_ERROR = "각 상품별 정보는 " + PREFIX + "로 시작해서"
+		+ SUFFIX + "로 끝나야 합니다.";
 	private final InputView inputView;
 
 	ItemController(InputView inputView) {
@@ -44,7 +45,7 @@ public class ItemController {
 		List<Item> items = new ArrayList<>();
 		for (String itemDetail : itemDetails) {
 			if (!(itemDetail.startsWith(PREFIX) && itemDetail.endsWith(SUFFIX))) {
-				throw new IllegalArgumentException("각 상품별 정보는 대괄호로 시작해서 대괄호로 끝나야 합니다.");
+				throw new IllegalArgumentException(INVALID_PREFIX_AND_SUFFIX_ERROR);
 			}
 			items.add(new Item(extractValueFromItemDetail(itemDetail)));
 		}
