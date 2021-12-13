@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 import utils.validator.VendingMachineChangeValidator;
+import utils.validator.userinsertmoney.UserInsertMoneyValidator;
 import utils.validator.vendingmachineproducts.VendingMachineProductsValidator;
 
 public class InputController {
@@ -52,6 +53,13 @@ public class InputController {
 	}
 
 	public static int inputUserInsertMoney() {
-		return Integer.parseInt(Console.readLine());
+		while (INPUT_ERROR) {
+			try {
+				int userInsertMoney = UserInsertMoneyValidator.checkValidUserInsertMoney(Console.readLine());
+				return userInsertMoney;
+			} catch (IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
+		}
 	}
 }
