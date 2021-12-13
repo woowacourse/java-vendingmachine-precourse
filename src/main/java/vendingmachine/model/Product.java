@@ -2,6 +2,9 @@ package vendingmachine.model;
 
 public class Product {
     private static final String BUY_ERROR_SENTENCE = "[ERROR] 상품을 구매할 수 없습니다.";
+    private static final int PRODUCT_NAME = 0;
+    private static final int PRODUCT_PRICE = 1;
+    private static final int PRODUCT_STOCK = 2;
     private static final int MIN_STOCK = 0;
 
     private String name;
@@ -9,9 +12,9 @@ public class Product {
     private int stock;
 
     public Product(String[] productInfo) {
-        this.name = productInfo[0];
-        this.price = Integer.parseInt(productInfo[1]);
-        this.stock = Integer.parseInt(productInfo[2]);
+        this.name = productInfo[PRODUCT_NAME];
+        this.price = Integer.parseInt(productInfo[PRODUCT_PRICE]);
+        this.stock = Integer.parseInt(productInfo[PRODUCT_STOCK]);
     }
 
     public boolean isSameProduct(String name) {

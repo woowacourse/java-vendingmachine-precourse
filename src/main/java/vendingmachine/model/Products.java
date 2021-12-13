@@ -1,11 +1,10 @@
 package vendingmachine.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Products {
     private static final String BUY_ERROR_SENTENCE = "[ERROR] 존재하지 않는 상품입니다.";
-    
+
     private List<Product> products;
 
     public Products(List<Product> products) {
@@ -14,7 +13,7 @@ public class Products {
 
     public int getMinPrice() {
         int min = Integer.MAX_VALUE;
-        for(Product product : products) {
+        for (Product product : products) {
             if (product.isNotSoldOut() && min > product.getPrice()) {
                 min = product.getPrice();
             }
@@ -23,7 +22,7 @@ public class Products {
     }
 
     public boolean isAllSoldOut() {
-        for(Product product : products) {
+        for (Product product : products) {
             if (product.isNotSoldOut()) {
                 return false;
             }
