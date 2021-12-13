@@ -7,7 +7,7 @@ import vendingmachine.validation.GlobalValidation;
 
 public class InputProductNameValidator {
 	public static void validateProductName(String inputStr, List<Product> products) {
-		GlobalValidation.validateNull(inputStr);
+		GlobalValidation.validateInputIsNull(inputStr);
 		GlobalValidation.validateProductIsNotInProducts(inputStr, products);
 	}
 }
