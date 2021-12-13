@@ -10,6 +10,7 @@ public class ExceptionMessages {
     public static final String EMPTY_INPUT_EXCEPTION = ERROR + "개별 상품 정보를 입력하지 않았습니다.";
     public static final String NOT_SURROUNDED_BY_BRACKETS_EXCEPTION = ERROR + "개별 상품 정보는 대괄호로 감싸여야 합니다.";
     public static final String INVALID_SEPARATORS_EXCEPTION = ERROR + "대괄호와 세미콜론 위치가 형식에 맞지 않습니다.";
+    public static final String INVALID_COMMAS_EXCEPTION = ERROR + "개별 상품 정보의 세부 정보는 쉼표 2개를 기준으로 총 3가지여야 합니다.";
     public static final String UNKNOWN_MERCHANDISE_NAME_EXCEPTION = ERROR + "존재하지 않는 상품명입니다.";
     public static final String SOLD_OUT_EXCEPTION = ERROR + "매진된 상품입니다.";
     public static final String DUPLICATE_MERCHANDISE_NAMES_EXCEPTION = ERROR + " 동일한 이름의 상품이 중복으로 존재하면 안 됩니다.";

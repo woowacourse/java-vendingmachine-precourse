@@ -34,7 +34,7 @@ public class MenuInputFormatValidator {
 
     private static void validateSeparatorFormat(String merchandiseInfo) {
         validateSurroundingBrackets(merchandiseInfo);
-        validateNoInternalSeparators(merchandiseInfo.substring(1, merchandiseInfo.length() - 1));
+        validateInternalSeparators(merchandiseInfo.substring(1, merchandiseInfo.length() - 1));
     }
 
     private static void validateSurroundingBrackets(String merchandiseInfo) {
@@ -43,9 +43,13 @@ public class MenuInputFormatValidator {
         }
     }
 
-    private static void validateNoInternalSeparators(String content) {
+    private static void validateInternalSeparators(String content) {
         if (content.contains("[") || content.contains("]") || content.contains(";")) {
             throw new IllegalArgumentException(INVALID_SEPARATORS_EXCEPTION);
+        }
+
+        if (content.split(",").length != 3) {
+            throw new IllegalArgumentException(INVALID_COMMAS_EXCEPTION);
         }
     }
 
