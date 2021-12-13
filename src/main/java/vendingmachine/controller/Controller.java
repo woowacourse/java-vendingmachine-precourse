@@ -1,7 +1,6 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Machine;
 import vendingmachine.service.MachineService;
 import vendingmachine.util.Parser;
 import vendingmachine.view.InputView;
@@ -12,9 +11,9 @@ public class Controller {
 
 	public void run() {
 		InputView.requestMachineCoinsAmount();
-		Machine machine = new Machine();
+		Long id = machineService.generate();
 		int coinAmount = getCoinAmountByUser();
-		machineService.addInputCoins(machine, coinAmount);
+		machineService.addInputCoins(id, coinAmount);
 	}
 
 	private int getCoinAmountByUser() {
