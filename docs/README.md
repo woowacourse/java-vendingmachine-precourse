@@ -2,7 +2,7 @@
 
 - [ ] 자판기 세팅 기능
     - [ ] 자판기 보유금액 입력 기능
-        - [ ] 동전 무작위 생성 기능
+        - [x] 동전 무작위 생성 기능
     - [ ] 자판기 보유상품 입력 기능
         - [x] 상품 등록 기능
 
@@ -18,9 +18,9 @@
 
 ## 프로그램 로직 세부사항
 
-- [ ] 동전 무작위 생성 기능
-    - [ ] 입력된 보유금액을 기준으로 동전을 무작위 생성한다.
-    - [ ] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
+- [x] 동전 무작위 생성 기능
+    - [x] 입력된 보유금액을 기준으로 동전을 무작위 생성한다.
+    - [x] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
 
 - [x] 상품 등록 기능
     - [x] 상품명은 중복될 수 없다.
