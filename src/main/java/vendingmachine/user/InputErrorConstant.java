@@ -25,6 +25,8 @@ public class InputErrorConstant {
     public static final String ERROR_IS_NOT_100WON_MORE = ERROR_PREFIX + "상품의 가격은 100원 이상부터 가능합니다.";
     public static final String ERROR_IS_NOT_PRICE_RULE = ERROR_PREFIX + "상품의 가격은 10원으로 나누어 떨어져야 합니다.";
 
+    public static final String ERROR_NOT_EXISTS_GOODS_NAME = ERROR_PREFIX + "입력하신 상품은 존재하지 않습니다.";
+
     public static final String ERROR_MONEY_IS_NOT_NUMBER = ERROR_PREFIX + MONEY + ERROR_IS_NOT_NUMBER;
     public static final String ERROR_MONEY_IS_NOT_POSITIVE = ERROR_PREFIX + MONEY + ERROR_IS_NOT_POSITIVE;
     public static final String ERROR_MONEY_IS_NULL = ERROR_PREFIX + MONEY + ERROR_IS_NULL;

@@ -1,5 +1,7 @@
 package vendingmachine.goods;
 
+import vendingmachine.user.InputErrorConstant;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +67,14 @@ public class GoodsController {
 
     public boolean isMoneyMoreThanCheapest(int userMoney) {
         return userMoney >= isCheapest();
+    }
+
+    public void existGoodsName(String goodsName) {
+        for (Goods goods : goodsList) {
+            if (checkGoodsName(goods, goodsName)) {
+                return;
+            }
+        }
+        throw new IllegalArgumentException(InputErrorConstant.ERROR_NOT_EXISTS_GOODS_NAME);
     }
 }

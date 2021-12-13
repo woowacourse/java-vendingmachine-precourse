@@ -59,11 +59,18 @@ public class ProcessController {
 
     public static void buyGoods() {
         while (true) {
-            System.out.println(ProcessConstant.USER_MONEY + userMoney);
-            if (!ProcessUserBuyGoods.checkCanBuy(goodsController)) {
-                break;
+            try {
+                System.out.println(ProcessConstant.USER_MONEY + userMoney);
+                if (!ProcessUserBuyGoods.checkCanBuy(goodsController, userMoney)) {
+                    break;
+                }
+                System.out.println(ProcessConstant.ASK_BUY_GOODS_NAME);
+                ProcessUserBuyGoods.inputGoodsName();
+                ProcessUserBuyGoods.existsGoodsName(goodsController);
+                userMoney = ProcessUserBuyGoods.sellGoods(goodsController, userMoney);
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
             }
-            userMoney = ProcessUserBuyGoods.sellGoods(goodsController);
         }
     }
 }
