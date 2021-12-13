@@ -1,10 +1,18 @@
 package vendingmachine.utils;
 
 import camp.nextstep.edu.missionutils.Console;
+import java.util.List;
 import java.util.function.Supplier;
+import vendingmachine.domain.Product;
 import vendingmachine.validator.InputValidator;
 
 public class UserInput {
+
+    public static List<Product> getProductList() {
+        return getValidInput(
+            () -> ProductParser.parse(Console.readLine())
+        );
+    }
 
     public static String getProductName() {
         return getValidInput(() -> {
