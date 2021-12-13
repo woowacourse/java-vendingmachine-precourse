@@ -1,5 +1,6 @@
 package vendingmachine.Model;
 
+import vendingmachine.Utils.Converter;
 import vendingmachine.Utils.Validator.MoneyValidator;
 import vendingmachine.Utils.Validator.NameValidator;
 import vendingmachine.Utils.Validator.NumberValidator;

@@ -1,6 +1,6 @@
 package vendingmachine.Utils.Validator;
 
-import vendingmachine.Model.Converter;
+import vendingmachine.Utils.Converter;
 import vendingmachine.Utils.Constants;
 
 public class MoneyValidator {

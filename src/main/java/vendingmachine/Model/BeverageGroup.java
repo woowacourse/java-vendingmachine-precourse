@@ -3,6 +3,7 @@ package vendingmachine.Model;
 import java.util.ArrayList;
 
 import vendingmachine.Utils.Constants;
+import vendingmachine.Utils.Converter;
 import vendingmachine.Utils.Validator.BeverageGroupValidator;
 
 public class BeverageGroup {

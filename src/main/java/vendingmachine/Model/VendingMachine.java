@@ -7,15 +7,15 @@ public class VendingMachine {
 	private BeverageGroup beverageGroup;
 	private Money userMoney;
 
-	public void initCoins(Money money) {
+	public void initiateCoins(Money money) {
 		coins = new CoinGroup(money);
 	}
 
-	public void initBeverages(BeverageGroup beverages) {
+	public void initiateBeverages(BeverageGroup beverages) {
 		this.beverageGroup = beverages;
 	}
 
-	public void initUserMoney(Money money) {
+	public void initiateUserMoney(Money money) {
 		userMoney = money;
 	}
 

@@ -1,6 +1,6 @@
 package vendingmachine.View;
 
-import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.Utils.Util;
 
 public class InputView {
 	public static final String PRINT_MACHINE_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
@@ -10,21 +10,21 @@ public class InputView {
 
 	public static String machineMoneyInput() {
 		System.out.println(PRINT_MACHINE_MONEY);
-		return Console.readLine();
+		return Util.getInput();
 	}
 
 	public static String beverageGroupInput() {
 		System.out.println(PRINT_BEVERAGE_GROUP);
-		return Console.readLine();
+		return Util.getInput();
 	}
 
 	public static String userMoneyInput() {
 		System.out.println(PRINT_USER_MONEY);
-		return Console.readLine();
+		return Util.getInput();
 	}
 
 	public static String beverageNameInput() {
 		System.out.println(PRINT_BUY_BEVERAGE);
-		return Console.readLine();
+		return Util.getInput();
 	}
 }

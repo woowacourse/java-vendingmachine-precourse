@@ -22,7 +22,7 @@ public class CoinGroup {
 	}
 
 	private void moneyToCoin(Money money) {
-		Coin coin = Util.randomCoin();
+		Coin coin = Coin.getCoin(Util.randomCoinNumber());
 		if (money.isBiggerOrSame(coin.getAmount())) {
 			coins.replace(coin, coins.get(coin) + 1);
 			money.setMinus(coin.getAmount());

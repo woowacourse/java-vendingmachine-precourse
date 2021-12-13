@@ -1,8 +1,8 @@
-package vendingmachine.Model;
+package vendingmachine.Utils;
 
 import java.util.ArrayList;
 
-import vendingmachine.Utils.Constants;
+import vendingmachine.Model.Beverage;
 
 public class Converter {
 	public static int getInt(String moneyString) {

@@ -4,7 +4,7 @@ import java.util.regex.Pattern;
 
 public class Constants {
 	// 단위 상수
-	public static final Integer[] COIN_NUMS = {500, 100, 50, 10};
+	public static final Integer[] COIN_NUMBERS = {500, 100, 50, 10};
 	public static final int MIN_MONEY = 100;
 	public static final char MONEY_UNIT = '0';
 	public static final String COIN_NAME = "COIN_";
