@@ -23,13 +23,16 @@ public class Product {
         return this.stock;
     }
 
-    public void subtractStock(){
+    public void subtractStock() {
         this.stock--;
     }
 
-    public boolean isLowerPrice(int comparedPrice){
+    public boolean isLowerPrice(int comparedPrice) {
         return this.price < comparedPrice;
     }
 
+    public boolean isOutOfStock() {
+        return stock == 0;
+    }
 
 }

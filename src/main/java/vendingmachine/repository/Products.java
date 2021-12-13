@@ -23,22 +23,31 @@ public class Products {
         return false;
     }
 
-    public Product getProduct(String name){
-        for (Product product: products){
-            if (product.getName().equals(name)){
+    public Product getProduct(String name) {
+        for (Product product : products) {
+            if (product.getName().equals(name)) {
                 return product;
             }
         }
         return null;
     }
 
-    public int getLowestPrice(){
+    public int getLowestPrice() {
         int lowestPrice = products.get(0).getPrice();
-        for (Product product: products){
-            if (product.isLowerPrice(lowestPrice)){
+        for (Product product : products) {
+            if (product.isLowerPrice(lowestPrice)) {
                 lowestPrice = product.getPrice();
             }
         }
         return lowestPrice;
+    }
+
+    public boolean isOutOfStock() {
+        for (Product product : products){
+            if(!product.isOutOfStock()) {
+                return false;
+            }
+        }
+        return true;
     }
 }

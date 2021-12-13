@@ -50,10 +50,10 @@ public class OrderService {
         if (compareLowestAndRemainder()) {
             return true;
         }
-        //남은 금액이 상품 최저가격보다 작거나
-        //모든 상품이 소진된 경우
+        if (products.isOutOfStock()) {
+            return true;
+        }
         return false;
-
     }
 
     public boolean compareLowestAndRemainder() {
