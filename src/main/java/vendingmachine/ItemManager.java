@@ -7,7 +7,7 @@ import java.util.Map;
  * 자판기의 상품 재고를 관리하는 model class
  *
  * @author YJGwon
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 public class ItemManager {
@@ -32,11 +32,19 @@ public class ItemManager {
 	}
 
 	public Item takeOne(String name) {
+		validateBuyingItem(name);
 		Item item = items.get(name);
 		item.takeOne();
 		if (item.isSoldOut()) {
 			items.remove(name);
 		}
 		return item;
+	}
+
+	private void validateBuyingItem(String name) {
+		if (hasItem(name)) {
+			return;
+		}
+		throw new IllegalArgumentException(Error.NO_SUCH_ITEM.getMassage());
 	}
 }

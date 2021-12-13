@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
@@ -51,8 +52,8 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 상품_목록_형식_검사_테스트() {
-        Validator validator = new Validator();
-        assertThrows(IllegalArgumentException.class, () -> validator.validateItemFormat("[콜라,1000,1"));
+        ItemParser itemParser = new ItemParser();
+        assertThrows(IllegalArgumentException.class, () -> itemParser.stringToItems("[콜라,1000,1"));
     }
 
     @Override

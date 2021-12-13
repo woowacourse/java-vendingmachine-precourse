@@ -9,15 +9,19 @@ import camp.nextstep.edu.missionutils.Randoms;
  * 자판기의 동전을 관리하는 model class
  *
  * @author YJGwon
- * @version 1.0
+ * @version 1.1
  * @since 1.0
  */
 public class Cashier {
-	private static final int MIN_AMOUNT = 10;
+	private static final int AMOUNT_UNIT = 10;
+	private static final int MIN_AMOUNT = 0;
 
+	private final Validator validator;
 	private int insertAmount;
 
 	public Cashier(int holdingAmount) {
+		this.validator = new Validator();
+		validateAmount(holdingAmount);
 		makeCoins(holdingAmount);
 	}
 
@@ -26,6 +30,7 @@ public class Cashier {
 	}
 
 	public void insertMoney(int insertAmount) {
+		validateAmount(insertAmount);
 		this.insertAmount = insertAmount;
 	}
 
@@ -45,7 +50,7 @@ public class Cashier {
 				payMoney(coin.take(count));
 				changes.put(coin, count);
 			}
-			if (!isInsertAmountEnough(MIN_AMOUNT)) {
+			if (!isInsertAmountEnough(AMOUNT_UNIT)) {
 				break;
 			}
 		}
@@ -68,10 +73,18 @@ public class Cashier {
 
 	private int countCoinForChange(Coin coin) {
 		int required = coin.divideByAmount(insertAmount);
-		int count = required;
 		if (coin.remainLessThen(required)) {
-			count = coin.getCount();
+			return coin.getCount();
 		}
-		return count;
+		return required;
+	}
+
+	private void validateAmount(int amount) {
+		if (!validator.isBiggerThenMinValue(amount, MIN_AMOUNT)) {
+			throw new IllegalArgumentException(Error.MINUS.getMassage());
+		}
+		if (!validator.isDivisible(amount, AMOUNT_UNIT)) {
+			throw new IllegalArgumentException(Error.CAN_NOT_BE_DIVIDED_BY_10.getMassage());
+		}
 	}
 }

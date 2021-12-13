@@ -34,7 +34,7 @@ public class Machine {
 	}
 
 	private void prepareCoins() {
-		this.cashier = new Cashier(askHoldingAmount());
+		prepareCashier();
 		display.printBlankLine();
 		display.printAllCoin();
 		display.printBlankLine();
@@ -46,36 +46,26 @@ public class Machine {
 	}
 
 	private void prepareInsertAmount() {
-		cashier.insertMoney(askInsertAmount());
+		insertMoney();
 		display.printBlankLine();
 	}
 
 	private void sellItems() {
 		display.printInsertAmount(cashier);
 		while (!itemManager.isAllSoldOut() && cashier.isInsertAmountEnough(itemManager.getMinPrice())) {
-			cashier.payItem(itemManager.takeOne(askWhatToBuy()));
+			cashier.payItem(askWhatToBuy());
 			display.printBlankLine();
 			display.printInsertAmount(cashier);
 		}
 	}
 
-	private int askInsertAmount() {
-		display.askInsertAmount();
-		try {
-			return validator.validateAmount(Console.readLine());
-		} catch (IllegalArgumentException e) {
-			display.printError(e);
-			return askInsertAmount();
-		}
-	}
-
-	private int askHoldingAmount() {
+	private void prepareCashier() {
 		display.askHoldingAmount();
 		try {
-			return validator.validateAmount(Console.readLine());
+			this.cashier = new Cashier(validator.stringToInteger(Console.readLine()));
 		} catch (IllegalArgumentException e) {
 			display.printError(e);
-			return askHoldingAmount();
+			prepareCashier();
 		}
 	}
 
@@ -89,10 +79,20 @@ public class Machine {
 		}
 	}
 
-	private String askWhatToBuy() {
+	private void insertMoney() {
+		display.askInsertAmount();
+		try {
+			cashier.insertMoney(validator.stringToInteger(Console.readLine()));
+		} catch (IllegalArgumentException e) {
+			display.printError(e);
+			insertMoney();
+		}
+	}
+
+	private Item askWhatToBuy() {
 		display.askWhatToBuy();
 		try {
-			return validator.validateBuyingItem(Console.readLine(), itemManager);
+			return itemManager.takeOne(Console.readLine());
 		} catch (IllegalArgumentException e) {
 			display.printError(e);
 			return askWhatToBuy();
