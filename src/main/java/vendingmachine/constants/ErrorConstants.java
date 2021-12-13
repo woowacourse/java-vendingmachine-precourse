@@ -11,4 +11,5 @@ public class ErrorConstants {
 	public static String ERROR_PRODUCT_CONTENT_SIZE = "[ERROR] 상품의 이름, 가격, 수량을 모두 입력하세요.";
 	public static String ERROR_PRODUCT_QUANTITY_RANGE = "[ERROR] 상품의 개수는 1이상이어야 합니다.";
 	public static String ERROR_PRODUCT_NOT_EXIST = "[ERROR] 상품을 찾을 수 없습니다.";
+	public static String ERROR_USER_BALANCE_NOT_ENOUGH = "[ERROR] 투입 금액이 부족하므로 상품을 구매할 수 없습니다.";
 }

@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import java.util.EnumMap;
 
+import vendingmachine.constants.ErrorConstants;
 import vendingmachine.manager.CoinStorage;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.UserBalance;
@@ -62,26 +63,32 @@ public class VendingMachine {
 				return;
 			}
 			String productName = inputManager.getProductName();
-			if(!checkProductExist(productName)) {
+			Product product = checkProductExist(productName);
+			if(product == null || checkCanBuyWithUserBalance(product, userBalance.getUserBalance())) {
 				continue;
 			}
-			buyProduct(productName);
+			buyProduct(product);
 		}
 	}
 
-	private boolean checkProductExist(String productName) {
+	private Product checkProductExist(String productName) {
 		try {
-			productManager.checkProductExist(productName);
+			return productManager.checkProductExist(productName);
 		} catch (IllegalArgumentException e) {
 			inputManager.print(e.getMessage());
+		}
+		return null;
+	}
+
+	private boolean checkCanBuyWithUserBalance(Product product, int userBalance) {
+		if(!product.checkCanBuyWithMoney(userBalance)) {
+			inputManager.print(ErrorConstants.ERROR_USER_BALANCE_NOT_ENOUGH);
 			return false;
 		}
 		return true;
 	}
 
-	private void buyProduct(String name) {
-		Product product = productManager.searchProduct(name);
-
+	private void buyProduct(Product product) {
 		product.reduceQuantity(1);
 		userBalance.deductBalance(product.getPrice());
 	}
