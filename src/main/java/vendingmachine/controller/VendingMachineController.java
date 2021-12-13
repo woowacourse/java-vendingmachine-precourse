@@ -22,6 +22,7 @@ public class VendingMachineController {
 		//동전 생성
 		vendingMachine.generateCoin();
 		//동전 출력
+		calculateCoin(vendingMachine);
 		//상품명 입력받기
 		String products = enterMachineProduct();
 		//상품 생성
