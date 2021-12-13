@@ -22,19 +22,13 @@ public class Merchandise {
 		this.quantity = new Quantity(quantity);
 	}
 
-	public Money getMoney() {
-		return money;
-	}
-
 	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
 		Validator.validateEmptyMerchandiseInformation(informations);
 		Validator.validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
-
 		List<String> trimInformation = Arrays.stream(informations)
 			.map(information -> information.trim())
 			.collect(Collectors.toList());
-
 		return new Merchandise(trimInformation.get(0), Integer.parseInt(trimInformation.get(1)),
 			Integer.parseInt(trimInformation.get(2)));
 	}
@@ -47,6 +41,10 @@ public class Merchandise {
 			merchandiseList.add(constructMerchandise(merchandise));
 		}
 		return merchandiseList;
+	}
+
+	public int getMerchandiseMoney() {
+		return money.getMoney();
 	}
 
 	public boolean isMerchandiseSoldOut() {
@@ -66,14 +64,14 @@ public class Merchandise {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o) {
+	public boolean equals(Object obj) {
+		if (this == obj) {
 			return true;
 		}
-		if (o == null || getClass() != o.getClass()) {
+		if (obj == null || getClass() != obj.getClass()) {
 			return false;
 		}
-		Merchandise that = (Merchandise)o;
+		Merchandise that = (Merchandise)obj;
 		return Objects.equals(name, that.name);
 	}
 

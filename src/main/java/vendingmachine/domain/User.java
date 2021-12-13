@@ -20,6 +20,6 @@ public class User {
 		Merchandise buyingMerchandise = merchandises.selectMerchandise(merchandiseName);
 		buyingMerchandise.deductQuantity();
 		buyingMerchandiseList.add(buyingMerchandise);
-		userMoney.deductMoney(buyingMerchandise.getMoney().getMoney());
+		userMoney.deductMoney(buyingMerchandise.getMerchandiseMoney());
 	}
 }
