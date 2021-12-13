@@ -10,13 +10,8 @@ public class VendingMachineController {
     }
 
     public void on() {
-        createVendingMachine();
         createCoinBalance();
         createItems();
-    }
-
-    private void createVendingMachine() {
-        vendingMachineService.createVendingMachine();
     }
 
     private void createCoinBalance() {

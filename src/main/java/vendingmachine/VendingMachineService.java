@@ -11,8 +11,8 @@ public class VendingMachineService {
     private final ItemFactory itemFactory = new ItemFactory();
     private VendingMachine vendingMachine;
 
-    public void createVendingMachine() {
-        this.vendingMachine = new VendingMachine();
+    public VendingMachineService(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
     }
 
     public Coins createCoinBalance(int coinBalance) {
@@ -21,9 +21,5 @@ public class VendingMachineService {
 
     public Items createItems(ItemsInventoryInfo inputItemInventoryInfo) {
         return vendingMachine.storeItems(itemFactory.createByInventoryList(inputItemInventoryInfo));
-    }
-
-    public VendingMachine getVendingMachine() {
-        return vendingMachine;
     }
 }

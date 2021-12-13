@@ -4,11 +4,11 @@ import vendingmachine.coin.Coins;
 import vendingmachine.item.Item;
 
 public class PurchaseService {
-    private final VendingMachineService vendingMachineService;
+    private final VendingMachine vendingMachine;
     private Purchase purchase;
 
-    public PurchaseService(VendingMachineService vendingMachineService) {
-        this.vendingMachineService = vendingMachineService;
+    public PurchaseService(VendingMachine vendingMachine) {
+        this.vendingMachine = vendingMachine;
     }
 
     public void insertMoney(int money) {
@@ -16,7 +16,7 @@ public class PurchaseService {
     }
 
     public boolean isPurchaseAvailable() {
-        if (!isMoreMoneyThanLowestPriceInStock() || findVendingMachine().isAllItemsSoldOut()) {
+        if (!isMoreMoneyThanLowestPriceInStock() || vendingMachine.isAllItemsSoldOut()) {
             return false;
         }
         return true;
@@ -27,15 +27,11 @@ public class PurchaseService {
     }
 
     public Coins giveChange() {
-        return findVendingMachine().giveChange(purchase.end());
-    }
-
-    private VendingMachine findVendingMachine() {
-        return vendingMachineService.getVendingMachine();
+        return vendingMachine.giveChange(purchase.end());
     }
 
     private boolean isMoreMoneyThanLowestPriceInStock() {
-        int minimumPrice = findVendingMachine().findLowestPriceInStock();
+        int minimumPrice = vendingMachine.findLowestPriceInStock();
         if (purchase.isAffordablePrice(minimumPrice)) {
             return true;
         }
@@ -43,8 +39,8 @@ public class PurchaseService {
     }
 
     public void purchaseByItemName(String itemName) {
-        Item item = findVendingMachine().findItemToPurchase(itemName);
+        Item item = vendingMachine.findItemToPurchase(itemName);
         purchase.pay(item.getPrice());
-        findVendingMachine().purchase(item);
+        vendingMachine.purchase(item);
     }
 }
