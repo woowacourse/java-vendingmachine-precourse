@@ -26,7 +26,7 @@ public class Application {
         while (true) {
             int remain = change.getAmount();
             message.printChanges(remain);
-            if (remain < products.getMaxPrice()) {
+            if (remain < products.getMaxPrice() && !products.isExistProduct()) {
                 message.printLackOfChanges();
                 LinkedHashMap<Integer, Integer> changeCoinsMap = coinStock.getLastChanges(remain);
                 message.printLastChanges(changeCoinsMap);
