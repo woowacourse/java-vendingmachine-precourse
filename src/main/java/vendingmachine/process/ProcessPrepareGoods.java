@@ -10,14 +10,17 @@ public class ProcessPrepareGoods {
     public static String goods;
     public static List<String[]> goodsArray = new ArrayList<>();
 
-    public static List<Goods> makeGoods() {
+    public static void makeGoods() {
         inputGoods();
         checkGoods();
         removeBracket();
         toArray();
         toGoodsArray();
         checkGoodsEachValidation();
-        return produceGoods();
+    }
+
+    public static void clearList() {
+        goodsArray.clear();
     }
 
     public static void inputGoods() {
@@ -51,7 +54,11 @@ public class ProcessPrepareGoods {
         for (String[] goods : goodsArray) {
             UserGoodsNameValidation.checkGoodsNameValidation(goods[0]);
             UserGoodsPriceValidation.checkGoodsPriceValidation(goods[1]);
-            UserGoodsQuantityValidation.checkGoodsQuantityValidation(goods[2]);
+            try {
+                UserGoodsQuantityValidation.checkGoodsQuantityValidation(goods[2]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new IllegalArgumentException(InputErrorConstant.ERROR_QUANTITY_IS_NULL);
+            }
         }
     }
 

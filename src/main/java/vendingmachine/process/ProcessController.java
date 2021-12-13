@@ -1,10 +1,13 @@
 package vendingmachine.process;
 
+import vendingmachine.goods.Goods;
 import vendingmachine.goods.GoodsController;
 import vendingmachine.machine.Coin;
 import vendingmachine.machine.Machine;
 import vendingmachine.machine.MachineHoldingAmount;
 import vendingmachine.machine.MachineReturnChange;
+
+import java.util.List;
 
 public class ProcessController {
     public static Coin[] coins = Coin.values();
@@ -46,13 +49,15 @@ public class ProcessController {
         while (true) {
             try {
                 System.out.println(ProcessConstant.ASK_GOODS);
-                goodsController = new GoodsController(ProcessPrepareGoods.makeGoods());
-                System.out.println();
+                ProcessPrepareGoods.makeGoods();
                 break;
             } catch (IllegalArgumentException e) {
+                ProcessPrepareGoods.clearList();
                 System.out.println(e.getMessage());
             }
         }
+        goodsController = new GoodsController(ProcessPrepareGoods.produceGoods());
+        System.out.println();
     }
 
     public static void inputUserMoney() {
