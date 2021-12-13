@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import java.util.HashMap;
+import java.util.Map;
 
 import vendingmachine.billing.Coin;
 import vendingmachine.billing.Money;
@@ -17,17 +17,16 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printVendingMachineOwnCoins(HashMap<Coin, Integer> coins) {
+	public static void printVendingMachineOwnCoins(Map<Coin, Integer> coins) {
 		printLineBreak();
 		System.out.println(VENDING_MACHINE_OWN_COINS);
 		printAllCoins(coins);
 		printLineBreak();
 	}
 
-	private static void printAllCoins(HashMap<Coin, Integer> coins) {
-		for (Coin coin : Coin.values()) {
-			System.out.println(coin.getAmount() + MONETARY_UNIT + COINS_FORMAT + coins.get(coin) + COUNTING_UNIT);
-		}
+	private static void printAllCoins(Map<Coin, Integer> coins) {
+		coins.forEach((key, value) -> System.out.println(
+			key.getAmount() + MONETARY_UNIT + COINS_FORMAT + value + COUNTING_UNIT));
 	}
 
 	public static void printRemainMoney(Money money) {
@@ -35,10 +34,8 @@ public class OutputView {
 		System.out.println(REMAIN_MONEY_FORMAT + money.toString() + MONETARY_UNIT);
 	}
 
-	public static void printChange(HashMap<Coin, Integer> coins) {
+	public static void printChange(Map<Coin, Integer> changeCoins) {
 		System.out.println(CHANGE);
-		for (Coin coin : coins.keySet()) {
-			System.out.println(coin.getAmount() + MONETARY_UNIT + COINS_FORMAT + coins.get(coin) + COUNTING_UNIT);
-		}
+		printAllCoins(changeCoins);
 	}
 }

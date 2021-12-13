@@ -1,8 +1,9 @@
 package vendingmachine.billing;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
+import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -11,7 +12,7 @@ public class Changes {
 	private static final int PLUS_ONE = 1;
 	private static final int MINUS_ONE = -1;
 
-	private HashMap<Coin, Integer> coins;
+	private Map<Coin, Integer> coins;
 	private Money moneyForChange;
 
 	public void input(Money moneyForChange) {
@@ -27,10 +28,8 @@ public class Changes {
 	}
 
 	private void initialCoins() {
-		coins = new HashMap<>();
-		for (Coin each : Coin.values()) {
-			coins.put(each, ZERO);
-		}
+		coins = new EnumMap<>(Coin.class);
+		Arrays.stream(Coin.values()).forEach(each -> coins.put(each, ZERO));
 	}
 
 	private void addRandomCoin(List<Integer> possibleCoins) {
@@ -41,19 +40,19 @@ public class Changes {
 		}
 	}
 
-	public HashMap<Coin, Integer> getCoins() {
+	public Map<Coin, Integer> getCoins() {
 		return coins;
 	}
 
-	public HashMap<Coin, Integer> calculateChange(Money money) {
-		HashMap<Coin, Integer> changeCoins = new LinkedHashMap<>();
+	public Map<Coin, Integer> calculateChange(Money money) {
+		Map<Coin, Integer> changeCoins = new EnumMap<>(Coin.class);
 		for (Coin coin : Coin.values()) {
 			changeCoinAsPossible(coin, money, changeCoins);
 		}
 		return changeCoins;
 	}
 
-	private void changeCoinAsPossible(Coin coin, Money money, HashMap<Coin, Integer> changeCoins) {
+	private void changeCoinAsPossible(Coin coin, Money money, Map<Coin, Integer> changeCoins) {
 		while (coins.get(coin) > ZERO && coin.isChangeable(money)) {
 			coin.change(money);
 			coins.merge(coin, MINUS_ONE, Integer::sum);
