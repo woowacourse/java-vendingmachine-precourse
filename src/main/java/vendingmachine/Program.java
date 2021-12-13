@@ -8,6 +8,8 @@ import camp.nextstep.edu.missionutils.Console;
 public class Program {
 	public static final String PRODUCT_ENTRY_DIVIDER = ";";
 	public static final String PRODUCT_ENTRY_ELEMENT_DIVIDER = ",";
+	public static final int UNDER_BOUND_CHAR_TO_BE_NUMBER = 0;
+	public static final int UPPER_BOUND_CHAR_TO_BE_NUMBER = 9;
 
 	public final CoinPocket coinPocket;
 	public final ProductTable productTable;
@@ -27,8 +29,8 @@ public class Program {
 		giveChange();
 	}
 
-	private int setInitialMoneyInMachine() {
-		Message.INITIAL_MONEY_REQUEST.println();
+	private int setInitialMoneyInMachine() throws IllegalArgumentException {
+		Guide.INITIAL_MONEY_REQUEST.println();
 		String moneyInString = Console.readLine();
 		return Integer.parseInt(moneyInString);
 	}
@@ -39,12 +41,12 @@ public class Program {
 			coinPocket.pushSingle(randomCoin);
 			money = randomCoin.subtract(money);
 		}
-		Message.INITIAL_COIN_CHANGE_SHOW.println();
-		Message.printCoinPocket(coinPocket);
+		Guide.INITIAL_COIN_CHANGE_SHOW.println();
+		Guide.printCoinPocket(coinPocket);
 	}
 
 	private void setProductTable() {
-		Message.ITEM_REQUEST.println();
+		Guide.ITEM_REQUEST.println();
 		String productEntriesInString = Console.readLine();
 		List<String> productEntries = Arrays.asList(productEntriesInString.split(PRODUCT_ENTRY_DIVIDER));
 		productEntries.forEach(entry -> {
@@ -55,7 +57,7 @@ public class Program {
 	}
 
 	private void setUserMoney() {
-		Message.USER_MONEY_REQUEST.println();
+		Guide.USER_MONEY_REQUEST.println();
 		String userMoneyInString = Console.readLine();
 		userMoney = Integer.parseInt(userMoneyInString);
 	}
@@ -65,8 +67,8 @@ public class Program {
 	}
 
 	private void buyProductUntilFailure() {
-		Message.printLeftMoney(userMoney);
-		Message.PURCHASE_REQUEST.println();
+		Guide.printLeftMoney(userMoney);
+		Guide.PURCHASE_REQUEST.println();
 		String name = getProductName();
 		productTable.buy(name);
 		userMoney = productTable.getLeftMoney(name, userMoney);
@@ -87,10 +89,10 @@ public class Program {
 	}
 
 	private void giveChange() {
-		Message.printLeftMoney(userMoney);
-		Message.USER_CHANGE_SHOW.println();
+		Guide.printLeftMoney(userMoney);
+		Guide.USER_CHANGE_SHOW.println();
 		CoinPocket change = calculateChange();
 		change.removeCoinsOfZeroNumber();
-		Message.printCoinPocket(change);
+		Guide.printCoinPocket(change);
 	}
 }

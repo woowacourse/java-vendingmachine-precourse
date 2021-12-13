@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public enum Message {
+public enum Guide {
 	INITIAL_MONEY_REQUEST("자판기가 보유하고 있는 금액을 입력해 주세요."),
 	ITEM_REQUEST("\n상품명과 가격, 수량을 입력해 주세요."),
 	USER_MONEY_REQUEST("\n투입 금액을 입력해 주세요."),
@@ -18,7 +18,7 @@ public enum Message {
 	public static final String LEFT_MONEY_FORMAT = "%s원\n";
 	private final String message;
 
-	Message(final String message) {
+	Guide(final String message) {
 		this.message = message;
 	}
 
