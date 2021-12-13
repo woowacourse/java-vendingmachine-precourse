@@ -20,7 +20,7 @@ public class MoneyTest {
 		String input = "250"; // 자판기 보유 금액을 설정한다.
 		InputStream in = new ByteArrayInputStream(input.getBytes());
 		System.setIn(in);
-		coins = coinController.giveHoldingCoins(); // 보유 금액만큼 최소 갯수의 동전을 생성한다.
+		coins = coinController.initializeCoins(); // 보유 금액만큼 최소 갯수의 동전을 생성한다.
 	}
 
 	@DisplayName("예상 잔돈 반환 갯수 만큼 잔돈을 반환하는지 확인한다.")

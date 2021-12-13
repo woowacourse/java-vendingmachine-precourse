@@ -15,14 +15,14 @@ public class CoinController {
 		this.inputView = inputView;
 	}
 
-	public Coins giveHoldingCoins() {
+	public Coins initializeCoins() {
 		try {
 			OutputView.printHoldingCashRequest();
 			int price = inputView.scanPrice();
 			return new Coins(makeCoins(price));
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
-			return giveHoldingCoins();
+			return initializeCoins();
 		}
 	}
 
