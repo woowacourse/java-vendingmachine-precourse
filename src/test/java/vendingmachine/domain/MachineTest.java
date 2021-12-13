@@ -33,4 +33,12 @@ class MachineTest {
 		machine.setPayment("2000");
 		assert machine.checkAbleToBuyItem();
 	}
+
+	@Test
+	void 잔돈_최소개수_반환_테스트() {
+		machine.setCoins(1050);
+		System.out.println(machine.getSortedCoinCount());
+		machine.setPayment("1200");
+		System.out.println(machine.getReturnCoins());
+	}
 }

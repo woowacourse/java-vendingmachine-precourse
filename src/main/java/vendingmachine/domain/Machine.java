@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -100,5 +101,32 @@ public class Machine {
 			return false;
 		}
 		return true;
+	}
+
+	public Map<Integer, Integer> getReturnCoins() {
+		Map<Integer, Integer> sortedCoinCount = getSortedCoinCount();
+		Map<Integer, Integer> result = new LinkedHashMap<>();
+		Iterator<Integer> coins = sortedCoinCount.keySet().iterator();
+		while (coins.hasNext() && balance > 0) {
+			int coin = coins.next();
+			int count = getReturnCoinCount(coin, sortedCoinCount.get(coin));
+			if (count != 0) {
+				balance -= coin * count;
+				result.put(coin, count);
+			}
+		}
+		return result;
+	}
+
+	private int getReturnCoinCount(int coin, int remainingCoinCount) {
+		int count = balance / coin;
+		if (remainingCoinCount < count) {
+			count = remainingCoinCount;
+		}
+		return count;
+	}
+
+	private boolean isExistCoin() {
+		return Collections.min(coinCount.values()) != 0;
 	}
 }

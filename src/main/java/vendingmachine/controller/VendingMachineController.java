@@ -53,4 +53,12 @@ public class VendingMachineController {
 		}
 	}
 
+	public void chooseUntilReturnBalance() {
+		while (machine.checkAbleToBuyItem()) {
+			chooseMerchandise();
+		}
+		view.printCurrentBalance(machine.getCurrentBalance());
+		view.printBalanceCoinsCount(machine.getReturnCoins());
+	}
+
 }

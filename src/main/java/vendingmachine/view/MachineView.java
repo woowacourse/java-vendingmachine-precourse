@@ -9,6 +9,7 @@ public class MachineView {
 	private static final String INPUT_MERCHANDISE_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_PAYMENT_MESSAGE = "투입 금액을 입력해 주세요.";
 	private static final String INPUT_BUY_MESSAGE = "구매할 상품명을 입력해 주세요.";
+	private static final String BALANCE = "잔돈";
 
 	public String inputChanges() {
 		System.out.println(INPUT_CHANGES_MESSAGE);
@@ -43,6 +44,13 @@ public class MachineView {
 	public String inputMerchandiseToBuy() {
 		System.out.println(INPUT_BUY_MESSAGE);
 		return Console.readLine();
+	}
+
+	public void printBalanceCoinsCount(Map<Integer, Integer> changesInfo) {
+		System.out.println(BALANCE);
+		for (int coin : changesInfo.keySet()) {
+			System.out.println(coin + "원 - " + changesInfo.get(coin) + "개");
+		}
 	}
 
 }
