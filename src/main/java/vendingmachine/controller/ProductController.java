@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.MoneyModel;
 import vendingmachine.model.ProductModel;
 import vendingmachine.validator.MachineProductsValidator;
-import vendingmachine.validator.ProductValidator;
+import vendingmachine.validator.OrderValidator;
 import vendingmachine.view.MoneyView;
 import vendingmachine.view.ProductView;
 
@@ -32,7 +32,7 @@ public class ProductController {
 		String productName;
 		do {
 			productName = Console.readLine();
-		} while (!ProductValidator.checkProductName(productName));
+		} while (!OrderValidator.checkProductName(productName));
 		return productName;
 	}
 }

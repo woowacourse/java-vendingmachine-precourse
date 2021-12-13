@@ -14,13 +14,21 @@ public class MachineProducts {
 	}
 
 	public boolean hasName(String name) {
-		return products.stream().anyMatch(product -> product.isSameName(name));
+		return findProductByName(name) != null;
 	}
 
 	public boolean productCountOverOne(String name) {
+		return findProductByName(name).hasMoreThanOneCount();
+	}
+
+	public boolean canBuy(String name, long money) {
+		return findProductByName(name).isCheaperOrSameThan(money);
+	}
+
+	private Product findProductByName(String name) {
 		return products.stream()
 			.filter(product -> product.isSameName(name))
-			.allMatch(product -> product.hasMoreThanOneCount());
+			.findFirst().orElse(null);
 	}
 
 	private List<Product> makeProducts(String inputLine) {

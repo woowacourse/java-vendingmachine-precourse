@@ -16,4 +16,8 @@ public class ProductModel {
 	public static boolean hasMoreThanOneCount(String name) {
 		return products.productCountOverOne(name);
 	}
+
+	public static boolean canBuyProductWithUserMoney(String name) {
+		return products.canBuy(name, MoneyModel.getUserMoney());
+	}
 }

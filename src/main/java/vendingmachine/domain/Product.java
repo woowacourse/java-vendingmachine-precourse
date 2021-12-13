@@ -27,5 +27,9 @@ public class Product {
 	public boolean hasMoreThanOneCount() {
 		return this.count > 0;
 	}
+
+	public boolean isCheaperOrSameThan(long money) {
+		return money >= price;
+	}
 }
 

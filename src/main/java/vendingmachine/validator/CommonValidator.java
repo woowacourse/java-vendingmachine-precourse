@@ -7,13 +7,17 @@ import vendingmachine.view.ErrorView;
 public class CommonValidator {
 	protected static boolean checkString(String string) {
 		try {
-			exceptionStringEmpty(string);
-			exceptionStringSpace(string);
+			exceptionStringEmptyOrSpace(string);
 			return true;
 		} catch (IllegalArgumentException exception) {
 			ErrorView.error(ERROR_STRING);
 			return false;
 		}
+	}
+
+	protected static void exceptionStringEmptyOrSpace(String inputLine) {
+		exceptionStringEmpty(inputLine);
+		exceptionStringSpace(inputLine);
 	}
 
 	protected static void exceptionStringEmpty(String string) {
