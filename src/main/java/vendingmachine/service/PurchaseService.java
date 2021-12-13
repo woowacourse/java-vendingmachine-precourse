@@ -41,18 +41,8 @@ public class PurchaseService {
 	private static Catalog getValidCatalog(String input) {
 		checkEmptyString(input);
 		Catalog catalog = CatalogRepository.getCatalogByName(input);
-		if (catalog == null) {
-			throw new IllegalArgumentException("존재하지 않는 상품명 입니다.");
-		}
-		int amount = catalog.getAmount();
-		int price = catalog.getPrice();
-		int userAccount = UserAccount.getAccount();
-		if (price > userAccount) {
-			throw new IllegalArgumentException("상품을 살 돈이 부족합니다.");
-		}
-		if (amount == NO_MORE_CATALOG) {
-			throw new IllegalArgumentException("상품의 개수가 부족합니다.");
-		}
+		checkExistCatalog(catalog);
+		checkCanPurchase(catalog);
 		return catalog;
 	}
 }

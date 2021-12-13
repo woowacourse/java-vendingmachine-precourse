@@ -21,6 +21,7 @@ public class Application {
 
 	private static void endApplication() {
 		ChangeController.setChange();
+		ChangeController.printChange();
 	}
 
 	private static void initApplication() {

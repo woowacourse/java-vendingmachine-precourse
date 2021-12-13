@@ -3,6 +3,7 @@ package vendingmachine.service.exception;
 import java.util.List;
 
 import vendingmachine.domain.Catalog;
+import vendingmachine.domain.UserAccount;
 
 public class InputExceptionService {
 	private static final int MONEY_MINIMUM_UNIT = 10;
@@ -15,6 +16,10 @@ public class InputExceptionService {
 	private static final String CATALOG_DUPLICATE_ERROR_MESSAGE = "중복되는 상품명이 포함되어 있습니다.";
 	private static final int CATALOG_MINIMUM_PRICE = 100;
 	private static final String CATALOG_MINIMUM_PRICE_ERROR_MESSAGE = "상품 가격은 최소 100원 이상이어야 합니다";
+	private static final String NO_SUCH_CATALOG = "존재하지 않는 상품명 입니다.";
+	private static final int NO_MORE_CATALOG = 0;
+	private static final String NOT_ENOUGH_MONEY = "상품을 살 돈이 부족합니다.";
+	private static final String NOT_ENOUGH_CATALOG = "상품의 개수가 부족합니다.";
 
 	public static void checkZeroOrPositiveInt(int input) {
 		if (input < 0) {
@@ -63,6 +68,24 @@ public class InputExceptionService {
 	public static void checkMinimumPrice(int price) {
 		if (price < CATALOG_MINIMUM_PRICE) {
 			throw new IllegalArgumentException(CATALOG_MINIMUM_PRICE_ERROR_MESSAGE);
+		}
+	}
+
+	public static void checkExistCatalog(Catalog catalog) {
+		if (catalog == null) {
+			throw new IllegalArgumentException(NO_SUCH_CATALOG);
+		}
+	}
+
+	public static void checkCanPurchase(Catalog catalog) {
+		int amount = catalog.getAmount();
+		int price = catalog.getPrice();
+		int userAccount = UserAccount.getAccount();
+		if (price > userAccount) {
+			throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
+		}
+		if (amount == NO_MORE_CATALOG) {
+			throw new IllegalArgumentException(NOT_ENOUGH_CATALOG);
 		}
 	}
 }

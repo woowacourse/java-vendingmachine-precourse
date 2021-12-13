@@ -8,7 +8,7 @@ import vendingmachine.view.PurchaseView;
 import vendingmachine.view.UserAccountView;
 
 public class PurchaseController {
-	public static void doMainLoop() {
+	public static void purchaseCatalogs() {
 
 		while (!isEnd()) {
 			UserAccountView.printUserAccount();
