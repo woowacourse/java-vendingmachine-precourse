@@ -8,30 +8,30 @@ public enum Coin implements Comparable<Coin> {
 	COIN_50(50),
 	COIN_10(10);
 
-	private final int amount;
+	private final Money amount;
 	private int count;
 
 	Coin(final int amount) {
-		this.amount = amount;
+		this.amount = Money.from(amount);
 		this.count = 0;
 	}
 
-	public static Coin from(int amount) {
+	public static Coin from(Money amount) {
 		return Arrays.stream(values())
 			.filter(coin -> coin.isAmountExactly(amount))
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR]"));
 	}
 
-	private boolean isAmountExactly(int amount) {
-		return this.amount == amount;
+	private boolean isAmountExactly(Money amount) {
+		return this.amount.equals(amount);
 	}
 
 	public void addOne() {
 		count++;
 	}
 
-	public int getAmount() {
+	public Money getAmount() {
 		return amount;
 	}
 

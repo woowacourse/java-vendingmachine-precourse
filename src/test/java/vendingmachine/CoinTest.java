@@ -10,15 +10,15 @@ public class CoinTest {
 
 	@Test
 	void 동전생성_테스트() {
-		assertEquals(COIN_10, Coin.from(10));
-		assertEquals(Coin.COIN_50, Coin.from(50));
-		assertEquals(Coin.COIN_100, Coin.from(100));
-		assertEquals(Coin.COIN_500, Coin.from(500));
+		assertEquals(COIN_10, Coin.from(Money.from(10)));
+		assertEquals(Coin.COIN_50, Coin.from(Money.from(50)));
+		assertEquals(Coin.COIN_100, Coin.from(Money.from(100)));
+		assertEquals(Coin.COIN_500, Coin.from(Money.from(500)));
 	}
 
 	@Test
 	void 동전생성_알맞지않은가격_에러() {
-		assertThatThrownBy(() -> Coin.from(70))
+		assertThatThrownBy(() -> Coin.from(Money.from(70)))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
 
