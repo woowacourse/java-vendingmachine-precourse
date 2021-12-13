@@ -32,4 +32,13 @@ public class Products {
         return null;
     }
 
+    public int getLowestPrice(){
+        int lowestPrice = products.get(0).getPrice();
+        for (Product product: products){
+            if (product.isLowerPrice(lowestPrice)){
+                lowestPrice = product.getPrice();
+            }
+        }
+        return lowestPrice;
+    }
 }

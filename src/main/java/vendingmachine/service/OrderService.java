@@ -18,6 +18,7 @@ public class OrderService {
         outputView.printOrderMoney();
         getUserMoney();
         getProduct();
+        //남은 가능한 잔돈을 반환하고 손님을 보낸다.
         //printCoin();
     }
 
@@ -39,10 +40,24 @@ public class OrderService {
             outputView.printInputMoney(money.getRemainder());
             Product userProduct = getOrderFromUser();
             subtract(userProduct, money);
-            // if (isValidCoin()) {
-            //      continue;}
+            if (isEnd()) {
+                return;
+            }
         }
-        // break;
+    }
+
+    public boolean isEnd() {
+        if (compareLowestAndRemainder()) {
+            return true;
+        }
+        //남은 금액이 상품 최저가격보다 작거나
+        //모든 상품이 소진된 경우
+        return false;
+
+    }
+
+    public boolean compareLowestAndRemainder() {
+        return products.getLowestPrice() > money.getRemainder();
     }
 
     public void subtract(Product userProduct, Money money) {
