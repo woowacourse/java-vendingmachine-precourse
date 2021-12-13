@@ -2,6 +2,9 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.ArrayList;
+import java.util.Random;
+
 public enum Coin {
     COIN_500(500,0),
     COIN_100(100, 0),
@@ -24,14 +27,31 @@ public enum Coin {
     }
 
     public static void makeRandom(int money) {
+        ArrayList<Integer> coinList = new ArrayList<Integer>();
         for (Coin coin : Coin.values()) {
-            int endNumber = money / coin.amount;
-            if (endNumber != 0 && coin.amount != 10) {
-                coin.count = Randoms.pickNumberInRange(0,endNumber);
-                money -= (coin.count * coin.amount);
+            coinList.add(coin.amount);
+        }
+        while (money != 0) {
+            int randomCoin = Randoms.pickNumberInList(coinList);
+            if (money - randomCoin >= 0) {
+                money -= randomCoin;
+                setCountByAmount(randomCoin);
             }
-            if(coin.amount == 10) {
-                coin.count = money / coin.amount;
+        }
+    }
+
+    public static int totalAmount() {
+        int totalAmount = 0;
+        for (Coin coin : Coin.values()) {
+            totalAmount += (coin.amount * coin.count);
+        }
+        return totalAmount;
+    }
+
+    public static void setCountByAmount(int amount) {
+        for (Coin coin : Coin.values()) {
+            if (amount == coin.amount) {
+                coin.count += 1;
             }
         }
     }

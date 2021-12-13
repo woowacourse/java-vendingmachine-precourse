@@ -9,9 +9,9 @@ public class InputView {
     public static int inputMachineMoney() {
         String money = "";
         while (true) {
+            System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+            money = Console.readLine();
             try {
-                System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-                money = Console.readLine();
                 Utils.validateNumber(money);
                 Utils.validatePositiveNumber(Integer.parseInt(money));
                 break;
@@ -25,9 +25,9 @@ public class InputView {
     public static ArrayList inputProductList() {
         ArrayList<Product> products = new ArrayList<Product>();
         while (true) {
+            System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+            String inputString = Console.readLine();
             try {
-                System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
-                String inputString = Console.readLine();
                 products = Product.makeProductList(Utils.splitString(inputString));
                 break;
             } catch (Exception e) {
@@ -38,7 +38,6 @@ public class InputView {
     }
 
     public static int inputMoney() {
-        System.out.println();
         System.out.println("투입 금액을 입력해 주세요.");
         return Integer.parseInt(Console.readLine());
     }
