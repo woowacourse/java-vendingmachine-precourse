@@ -8,32 +8,31 @@ import java.util.Map;
 import utils.generator.RandomCoinPriceGenerator;
 
 public class CoinBox {
-	private static final int START_COIN_COUNT = 0;
-	private static final int START_TOTAL_COIN_PRICE = 0;
+	private static final int INITIAL_COIN_COUNT = 0;
+	private static final int INITIAL_TOTAL_COIN_PRICE = 0;
 	private static final int ADD_COIN_COUNT = 1;
 
 	private final Map<Coin, Integer> coinBox;
 
-	public CoinBox(int insertVendingMachineChange) {
+	public CoinBox(int change) {
 		coinBox = initCoinBox();
-		makeCoins(insertVendingMachineChange);
+		makeCoins(change);
 	}
 
 	private Map<Coin, Integer> initCoinBox() {
 		final Map<Coin, Integer> coinBox = new HashMap<>();
-		coinBox.put(Coin.COIN_500, START_COIN_COUNT);
-		coinBox.put(Coin.COIN_100, START_COIN_COUNT);
-		coinBox.put(Coin.COIN_50, START_COIN_COUNT);
-		coinBox.put(Coin.COIN_10, START_COIN_COUNT);
+		coinBox.put(Coin.COIN_500, INITIAL_COIN_COUNT);
+		coinBox.put(Coin.COIN_100, INITIAL_COIN_COUNT);
+		coinBox.put(Coin.COIN_50, INITIAL_COIN_COUNT);
+		coinBox.put(Coin.COIN_10, INITIAL_COIN_COUNT);
 		return coinBox;
 	}
 
-	private void makeCoins(int insertVendingMachineChange) {
-		int totalCoinPriceInCoinBox = START_TOTAL_COIN_PRICE;
-		while (totalCoinPriceInCoinBox < insertVendingMachineChange) {
+	private void makeCoins(int change) {
+		int totalCoinPriceInCoinBox = INITIAL_TOTAL_COIN_PRICE;
+		while (totalCoinPriceInCoinBox < change) {
 			int coinPrice = RandomCoinPriceGenerator.pickRandomCoinPrice();
-			if (isTotalCoinPriceOverInputVendingMachineChange(totalCoinPriceInCoinBox, coinPrice,
-				insertVendingMachineChange)) {
+			if (isTotalCoinPriceOverChange(totalCoinPriceInCoinBox, coinPrice, change)) {
 				continue;
 			}
 			totalCoinPriceInCoinBox += coinPrice;
@@ -42,24 +41,23 @@ public class CoinBox {
 		}
 	}
 
-	private boolean isTotalCoinPriceOverInputVendingMachineChange(int totalCoinPriceInCoinBox, int coinPrice,
-		int insertVendingMachineChange) {
-		return totalCoinPriceInCoinBox + coinPrice > insertVendingMachineChange;
+	private boolean isTotalCoinPriceOverChange(int totalCoinPriceInCoinBox, int coinPrice, int change) {
+		return totalCoinPriceInCoinBox + coinPrice > change;
 	}
 
-	public List<Integer> bringEachCoinCountInCoinBox() {
-		List<Integer> eachCoinCount = new ArrayList<>();
+	public List<Integer> getCountOfEachCoins() {
+		List<Integer> countOfEachCoins = new ArrayList<>();
 		for (Coin coin : Coin.getValuesByDescending()) {
-			eachCoinCount.add(coinBox.get(coin));
+			countOfEachCoins.add(coinBox.get(coin));
 		}
-		return eachCoinCount;
+		return countOfEachCoins;
 	}
 
-	public List<Integer> bringEachCoinPriceInCoinBox() {
-		List<Integer> eachCoinPrice = new ArrayList<>();
+	public List<Integer> getPriceOfEachCoins() {
+		List<Integer> priceOfEachCoins = new ArrayList<>();
 		for (Coin coin : Coin.getValuesByDescending()) {
-			eachCoinPrice.add(coin.getAmount());
+			priceOfEachCoins.add(coin.getAmount());
 		}
-		return eachCoinPrice;
+		return priceOfEachCoins;
 	}
 }
