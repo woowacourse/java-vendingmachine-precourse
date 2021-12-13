@@ -41,21 +41,7 @@ public class ItemList {
 	}
 
 	public void sellItem(String name, int payMoney) {
-		checkItemName(name);
-		checkPayMoney(name, payMoney);
-		checkAmount(name);
+		Validator.validateBuyingConditions(this.itemList, name, payMoney);
 		this.itemList.get(name).decreaseAmount(DECREMENTAL_VALUE);
-	}
-
-	private void checkItemName(String itemName) {
-		Validator.isItemName(this.itemList, itemName);
-	}
-
-	private void checkPayMoney(String itemName, int payMoney) {
-		Validator.validatePayAmount(this.itemList, itemName, payMoney);
-	}
-
-	private void checkAmount(String itemName) {
-		Validator.validateBuyAmount(this.itemList, itemName);
 	}
 }

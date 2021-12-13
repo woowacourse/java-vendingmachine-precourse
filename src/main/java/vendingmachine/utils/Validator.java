@@ -62,29 +62,20 @@ public class Validator {
 		}
 	}
 
-	public static void validateElementSize(String[] itemInput) throws IllegalArgumentException {
+	private static void validateElementSize(String[] itemInput) throws IllegalArgumentException {
 		if (itemInput.length != ELEMENT_SIZE)
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_VALID_ELEMENT_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 	}
 
-	public static void validateElementCondition(ArrayList<String[]> itemInput) throws IllegalArgumentException {
-		for (String[] eachParsedItem : itemInput) {
-			validateElementSize(eachParsedItem);
-			validateNameInput(eachParsedItem[Indexes.NAME_INDEX.getValue()]);
-			validatePriceInput(eachParsedItem[Indexes.PRICE_INDEX.getValue()]);
-			validateAmountInput(eachParsedItem[Indexes.AMOUNT_INDEX.getValue()]);
-		}
-	}
-
-	public static void isItemName(HashMap<String, Item> itemList, String inputName) throws IllegalArgumentException {
+	private static void isItemName(HashMap<String, Item> itemList, String inputName) throws IllegalArgumentException {
 		if (!itemList.containsKey(inputName)) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_CONTAIN_MESSAGE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
-	public static void validatePayAmount(HashMap<String, Item> itemList, String inputName, int pay) throws
+	private static void validatePayAmount(HashMap<String, Item> itemList, String inputName, int pay) throws
 		IllegalArgumentException {
 		if (itemList.get(inputName).isOverThisPrice(pay)) {
 			throw new IllegalArgumentException(
@@ -92,7 +83,7 @@ public class Validator {
 		}
 	}
 
-	public static void validateBuyAmount(HashMap<String, Item> itemList, String inputName) throws
+	private static void validateBuyAmount(HashMap<String, Item> itemList, String inputName) throws
 		IllegalArgumentException {
 		if (itemList.get(inputName).isAmountZero()) {
 			throw new IllegalArgumentException(
@@ -124,5 +115,20 @@ public class Validator {
 		for (String eachItem : input.split(delimiter)) {
 			validateParentheses(eachItem, startParentheses, endParentheses);
 		}
+	}
+
+	public static void validateElementConditions(ArrayList<String[]> itemInput) throws IllegalArgumentException {
+		for (String[] eachParsedItem : itemInput) {
+			validateElementSize(eachParsedItem);
+			validateNameInput(eachParsedItem[Indexes.NAME_INDEX.getValue()]);
+			validatePriceInput(eachParsedItem[Indexes.PRICE_INDEX.getValue()]);
+			validateAmountInput(eachParsedItem[Indexes.AMOUNT_INDEX.getValue()]);
+		}
+	}
+
+	public static void validateBuyingConditions(HashMap<String, Item> itemList, String inputName, int pay) {
+		isItemName(itemList, inputName);
+		validatePayAmount(itemList, inputName, pay);
+		validateBuyAmount(itemList, inputName);
 	}
 }
