@@ -6,7 +6,6 @@ public class Machine {
     private static int money;
     private ArrayList<Product> products;
     private boolean purchasable = true;
-    //private Coin coins;
 
     Machine() {
         Coin.makeRandom(InputView.inputMachineMoney());
