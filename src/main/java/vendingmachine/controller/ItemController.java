@@ -73,7 +73,7 @@ public class ItemController {
 	}
 
 	public void update(Items items, Money money) {
-		System.out.println(money);
+		OutputView.printMoney(money);
 		OutputView.printItemPerChaseRequest();
 		Item item = items.findItemByName(inputView.scanItemName(), money);
 		item.sell();

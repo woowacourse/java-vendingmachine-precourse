@@ -20,7 +20,7 @@ public class VendingMachineController {
 		Money money = giveMoney();
 		sellItem(items, money);
 
-		System.out.println(money);
+		OutputView.printMoney(money);
 		OutputView.printChanges(money.makeChanges(coins));
 	}
 

@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.Map;
 
 import vendingmachine.domain.Coins;
+import vendingmachine.domain.Money;
 
 public class OutputView {
 	private static final String WON = "원";
@@ -61,6 +62,11 @@ public class OutputView {
 
 	public static void printItemPerChaseRequest() {
 		System.out.println(PERCHASE_ITEM_REQUEST_TEXT);
+	}
+
+	public static void printMoney(Money money) {
+		printNewLine();
+		System.out.println(money);
 	}
 
 }
