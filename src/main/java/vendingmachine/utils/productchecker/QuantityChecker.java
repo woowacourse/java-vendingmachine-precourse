@@ -4,7 +4,7 @@ import vendingmachine.utils.datatypechecker.IntegerChecker;
 import vendingmachine.utils.datatypechecker.StringChecker;
 
 public class QuantityChecker {
-    static private final int LOW_LIMIT = 0;
+    static private final int LOW_LIMIT = 1;
     static private final String CONTENT_TYPE = "수량";
 
     static void checkQuantity(String stock) throws IllegalArgumentException{
