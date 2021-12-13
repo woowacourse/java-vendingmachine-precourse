@@ -26,7 +26,7 @@ public class DepositManager {
 
 	public void printDeposit() {
 		System.out.println();
-		System.out.printf("투입 금액 : %d원\n", deposit.get());
+		System.out.printf("투입 금액: %d원\n", deposit.get());
 	}
 
 	public boolean deduct(int price) {
