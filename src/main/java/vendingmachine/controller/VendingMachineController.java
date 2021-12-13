@@ -12,17 +12,31 @@ public class VendingMachineController {
 		OutputView.printChanges(vendingMachine.getChanges());
 		initItemList(vendingMachine);
 		inputAmount(vendingMachine);
-
 		OutputView.printInputAmount(vendingMachine.getAmount());
-		OutputView.printBuyItem();
-		String s = InputView.inputText();
-		Validator.validateItemName(s);
-		if(!vendingMachine.haveAffordableItem()){
-			// 잔돈 반환 기능
-			return;
+		runVendingMachine(vendingMachine);
+	}
+
+	private void runVendingMachine(VendingMachine vendingMachine) {
+		while(true){
+			if (!vendingMachine.haveAffordableItem()) {
+				// 잔돈 반환 기능
+				return;
+			}
+			// 구매기능
+			buyItem(vendingMachine);
 		}
-		// 구매기능
-		vendingMachine.buy(s);
+	}
+
+	private void buyItem(VendingMachine vendingMachine) {
+		try {
+			OutputView.printBuyItem();
+			String wantedItemName = InputView.inputText();
+			Validator.validateItemName(wantedItemName);
+			vendingMachine.buy(wantedItemName);
+			OutputView.printInputAmount(vendingMachine.getAmount());
+		} catch (IllegalArgumentException e) {
+			OutputView.printErrorMessage(e.getMessage());
+		}
 	}
 
 	private void inputAmount(VendingMachine vendingMachine) {
