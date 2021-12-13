@@ -1,6 +1,7 @@
 package utils;
 
 import camp.nextstep.edu.missionutils.Console;
+import utils.validator.Validator;
 
 public class InputManager {
 	private StringBuilder input;
