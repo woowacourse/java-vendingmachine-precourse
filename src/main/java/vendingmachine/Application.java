@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.controller.ChangeController;
 import vendingmachine.controller.MachineCoinController;
 import vendingmachine.controller.ProductController;
 
@@ -8,5 +9,6 @@ public class Application {
         // TODO: 프로그램 구현
         MachineCoinController.initMachineCoin();
         ProductController.initProductList();
+        ChangeController.initUserChange();
     }
 }
