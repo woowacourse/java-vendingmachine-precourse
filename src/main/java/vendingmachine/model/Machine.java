@@ -14,13 +14,16 @@ public class Machine {
     }
 
     public void setInitialAsset(int asset) {
-        this.asset = validator.checkAsset(asset);
         coinBox = new CoinBox();
-        coinBox.generateRandomCoinBox(asset);
+        coinBox.generateRandomCoinBox(validator.checkAsset(asset));
+        this.asset = coinBox.getValueOfCoinBox();
     }
 
     public void setProductTable(ProductTable productTable) {
         this.productTable = productTable;
     }
 
+    public CoinBox getCoinBox() {
+        return coinBox;
+    }
 }

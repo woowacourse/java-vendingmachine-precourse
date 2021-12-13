@@ -1,11 +1,14 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.Coin;
+import vendingmachine.model.CoinBox;
 import vendingmachine.model.Machine;
 import vendingmachine.model.ProductTable;
 import vendingmachine.validator.ConsoleValidator;
 import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputData;
 import vendingmachine.view.MainView;
+import vendingmachine.view.OutputData;
 
 public class MachineCore {
     private final Machine machine = new Machine();
@@ -15,6 +18,7 @@ public class MachineCore {
 
     public void startMachine() {
         readMachineAssetFromUser();
+        printCoinBoxStatus();
         readProductTableFromUser();
     }
 
@@ -28,6 +32,7 @@ public class MachineCore {
                 view.printError();
             }
         }
+        view.printBlankLine();
     }
 
     private void readProductTableFromUser() {
@@ -40,6 +45,14 @@ public class MachineCore {
             } catch (IllegalArgumentException exception) {
                 view.printError();
             }
+        }
+    }
+
+    private void printCoinBoxStatus() {
+        view.printOutput(OutputData.MACHINES_COINS);
+        CoinBox coinBox = machine.getCoinBox();
+        for (Coin coin : Coin.values()) {
+            view.printCoinStatus(coin.getAmount(), coinBox.getCoinCount(coin));
         }
     }
 
