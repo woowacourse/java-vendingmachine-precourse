@@ -3,6 +3,7 @@ package userInterface;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import utils.validator.isAmount;
@@ -51,7 +52,9 @@ public class CoinListManager {
 	public void printCoinList() {
 		System.out.println("자판기가 보유한 동전");
 
-		coinList.keySet().forEach(coin -> {
+		Coin[] coinArrays = {Coin.COIN_500,Coin.COIN_100,Coin.COIN_50, Coin.COIN_10};
+
+		Stream.of(coinArrays).forEach(coin -> {
 			System.out.printf("%s원 - %d개\n",coin.toString(),coinList.get(coin));
 		});
 	}
