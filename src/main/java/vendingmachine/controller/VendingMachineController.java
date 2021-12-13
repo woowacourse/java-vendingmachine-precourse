@@ -9,17 +9,19 @@ public class VendingMachineController {
 	private final VendingMachine vendingMachine;
 
 	public VendingMachineController() {
+		OutputView.setVendingMachineMoney();
 		vendingMachine = new VendingMachine(InputView.readPositiveInt());
 		showVendingMachineCoins();
 	}
 
 	private void showVendingMachineCoins() {
-		OutputView.showCoins(vendingMachine.getCoinsOwned());
+		OutputView.showCoins(vendingMachine.getCoinStorage());
 	}
 
 	public void addProduct() {
 		OutputView.addProductAndNumbers();
-		vendingMachine.addProduct(InputView.readLineString());
+		vendingMachine.addNewItems(InputView.readItems());
+		OutputView.breakLine();
 	}
 
 	public void buyProduct() {
@@ -29,12 +31,13 @@ public class VendingMachineController {
 			OutputView.showRemainingMoney(money);
 			OutputView.enterWantProduct();
 			String product = InputView.readLineString();
-			money = vendingMachine.getProduct(product, money);
+			money = vendingMachine.getItem(product, money);
+			OutputView.breakLine();
 		}
 	}
 
 	public void showChange() {
-		OutputView.showRemainingMoney(vendingMachine.getCoinsOwned());
+		OutputView.showCoinStorageState(vendingMachine.getCoinStorage());
 	}
 
 	private boolean checkCanBuyProduct(int money) {
