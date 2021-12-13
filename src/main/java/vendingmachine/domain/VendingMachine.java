@@ -16,6 +16,13 @@ public class VendingMachine {
 			|| products.getTotalAmount() == 0;
 	}
 
+	public void buy(String buyingProductName) {
+		validateBuyingProductName(buyingProductName);
+		Product product = products.getProductByName(buyingProductName);
+		product.decreaseAmount();
+		inputMoney = product.minusAmount(inputMoney);
+	}
+
 	private void validateBuyingProductName(String buyingProductName) {
 		Product product = products.getProductByName(buyingProductName);
 		if(product.getSmallerPrice(inputMoney) > inputMoney) {

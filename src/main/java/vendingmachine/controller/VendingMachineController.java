@@ -16,6 +16,13 @@ public class VendingMachineController {
 		vendingMachine = new VendingMachine(coins, products, inputMoney);
 	}
 
+	public void run() {
+		while(vendingMachine.checkTermination()) {
+			vendingMachine.buy(getBuyingProductName());
+		}
+		// 잔돈반환
+	}
+
 	private static int getMoneyInMachine() {
 		int moneyInMachine;
 		do {

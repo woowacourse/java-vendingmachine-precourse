@@ -26,8 +26,16 @@ public class Product {
 		return amount > 0;
 	}
 
+	public void decreaseAmount() {
+		amount--;
+	}
+
 	public int addAmount(int totalAmount) {
-		return amount + totalAmount;
+		return totalAmount + amount;
+	}
+
+	public int minusAmount(int price) {
+		return price - amount;
 	}
 
 	@Override
