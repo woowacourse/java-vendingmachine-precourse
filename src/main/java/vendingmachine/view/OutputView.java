@@ -13,6 +13,7 @@ public class OutputView {
 
 	public static void printVendingmachineChanges(Changes changes) {
 		List<Coin> coins = changes.orderByCoin();
+		System.out.println(OUTPUT_VENDINGMACHINE_HAVE_COINS);
 		coins.forEach(coin ->
 			System.out.printf(OUTPUT_CHANGES, coin.getAmount(), changes.getCoinMapValue(coin)));
 	}
@@ -22,6 +23,7 @@ public class OutputView {
 	}
 
 	public static void printChanges(List<Coin> coinList) {
+		System.out.println(OUTPUT_CHANGES_TEXT);
 		for (int coin : Coin.getCoinList()) {
 			sumCoinType(coinList, coin);
 		}
