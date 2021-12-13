@@ -16,7 +16,7 @@ import static vendingmachine.view.Messages.*;
 
 public class MachineCoinService {
 
-    private MachineCoinRepository machineCoinRepository;
+    private static MachineCoinRepository machineCoinRepository;
 
     public static int getInitMachineMoney() {
         while (true) {
