@@ -4,7 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.ui.MachineUI;
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -12,8 +12,10 @@ public class Machine {
 
     private final MachineUI machineUI;
     private final Validator validator;
+    private final Parser parser = new Parser();
     private int amount = 0;
     private Coin coins;
+    List<Goods> goodsList;
     public Machine(MachineUI machineUI,Validator validator){
         this.machineUI = machineUI;
         this.validator = validator;
@@ -22,21 +24,21 @@ public class Machine {
         getVendingMachineAmount();
         generateRandomCoins();
         machineUI.showAmount();
+        getGoodsList();
     }
     private void getVendingMachineAmount(){
-
         while (true){
             System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
             String amountInput = Console.readLine();
+            System.out.println();
             try{
                 validator.validateAmount(amountInput);
                 amount = Integer.parseInt(amountInput);
                 break;
             }catch (Exception e){
-                System.out.println();
+
             }
         }
-
     }
     private void generateRandomCoins(){
         int leftAmount = amount;
@@ -56,6 +58,21 @@ public class Machine {
             Coin.valueOf("COIN_"+coin).setNumber(number);
         }
         return leftAmount  - coin * number;
+    }
+    private void getGoodsList(){
+        while (true){
+            System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+            String goodsListInput = Console.readLine();
+            System.out.println();
+            try{
+                validator.validateGoodsList(goodsListInput);
+                goodsList = parser.parseGoods(goodsListInput);
+                break;
+            }catch (Exception e){
+
+            }
+            System.out.println();
+        }
     }
 
 }
