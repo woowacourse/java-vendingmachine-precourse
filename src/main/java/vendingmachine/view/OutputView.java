@@ -20,4 +20,8 @@ public class OutputView {
         System.out.println("상품과 가격, 수량을 입력해 주세요.");
     }
 
+    public void printOrderMoney(){
+        System.out.println("투입 금액을 입력해 주세요.");
+    }
+
 }

@@ -3,6 +3,7 @@ package vendingmachine.service;
 import java.util.ArrayList;
 
 import vendingmachine.repository.Product;
+import vendingmachine.repository.Products;
 import vendingmachine.view.InputView;
 
 public class ProductService {
@@ -10,10 +11,10 @@ public class ProductService {
     InputView inputView = new InputView();
     ProductValidator productValidator = new ProductValidator();
 
-    public ArrayList<Product> generate() {
+    public Products generate() {
         while (true) {
             try {
-                return replaceString(inputView.getProduct());
+                return new Products(replaceString(inputView.getProduct()));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

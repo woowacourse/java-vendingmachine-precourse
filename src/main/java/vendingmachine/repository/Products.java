@@ -1,0 +1,16 @@
+package vendingmachine.repository;
+
+import java.util.ArrayList;
+
+public class Products {
+
+    private ArrayList<Product> products;
+
+    public Products(ArrayList<Product> products) {
+        this.products = products;
+    }
+
+    public ArrayList<Product> getProducts() {
+        return this.products;
+    }
+}
