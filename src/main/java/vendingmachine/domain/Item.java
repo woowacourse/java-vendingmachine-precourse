@@ -45,9 +45,17 @@ public class Item {
 	}
 
 	private void validateCost(int cost) {
-		if (cost < COST_LOWER_BOUND || ZERO < cost % TEN) {
+		if (!isValidRange(cost) || !isDivisibleByTen(cost)) {
 			throw new IllegalArgumentException(INVALID_COST_CONDITION_ERROR);
 		}
+	}
+
+	private boolean isDivisibleByTen(int cost){
+		return ZERO == cost % TEN;
+	}
+
+	private boolean isValidRange(int cost){
+		return COST_LOWER_BOUND <= cost;
 	}
 
 	public String getName() {
