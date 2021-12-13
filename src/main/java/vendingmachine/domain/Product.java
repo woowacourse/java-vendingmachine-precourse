@@ -10,7 +10,7 @@ public class Product {
 
 	private final String name;
 	private final int price;
-	private final int count;
+	private int count;
 
 	public Product(String name, int price, int count) {
 		check(price);
@@ -23,10 +23,21 @@ public class Product {
 		this(split[0], NumericUtils.parsePositiveInt(split[1]), NumericUtils.parsePositiveInt(split[2]));
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public int getPrice() {
+		return price;
+	}
+
+	public void reduceCount() {
+		count--;
+	}
+
 	private void check(int price) {
 		if (price < MIN_AMOUNT || price % DIVIDE_NUM != 0) {
 			throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_NOT_VALID);
 		}
 	}
-
 }

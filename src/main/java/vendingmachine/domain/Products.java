@@ -19,6 +19,19 @@ public class Products {
 		this.products = createProducts(inputProducts);
 	}
 
+	public void buyProduct(String productName, VendingMachine vendingMachine) {
+		Product product = findByProductName(productName);
+		vendingMachine.deduct(product.getPrice());
+		product.reduceCount();
+	}
+
+	private Product findByProductName(String productName) {
+		return products.stream()
+			.filter(product -> product.getName().equals(productName))
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FOUND_PRODUCT_NAME));
+	}
+
 	private List<Product> createProducts(String inputProducts) {
 		String[] split = inputProducts.split(SEMICOLON);
 		checkFormat(split);
