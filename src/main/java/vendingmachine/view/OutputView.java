@@ -6,6 +6,7 @@ import vendingmachine.domain.Coins;
 import vendingmachine.domain.Money;
 
 public class OutputView {
+	private static final int ZERO = 0;
 	private static final String WON = "원";
 	private static final String COUNT_UNIT = "개";
 	private static final String HYPHEN = "-";
@@ -43,6 +44,9 @@ public class OutputView {
 	}
 
 	public static void printChanges(Map<Integer, Integer> changes) {
+		if (changes.size() <= ZERO) {
+			return;
+		}
 		printNewLine();
 		System.out.println(CHANGES);
 		for (Map.Entry<Integer, Integer> coin : changes.entrySet()) {
