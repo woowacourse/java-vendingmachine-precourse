@@ -13,7 +13,10 @@ public class Constant {
     public static final int QUANTITY_INDEX = 2;
     public static final int CHECK_ARR_HAS_ALL_CONTENT = 3;
 
-    public static final String COIN_TYPE_FORMAT = "%d원 - %d개";
+    public static final String COIN_UNIT = "%d원";
+    public static final String NEXT_LINE = "\n";
+    public static final String STRING_FORMAT = "%s %s";
+    public static final String COIN_TYPE_FORMAT = "%s원 - %d개";
     public static final String ERROR = "[ERROR]";
     public static final String CHANGE_BRACKET_TO_GAP = "";
     public static final String OPEN_SQUARE_BRACKET = "[";
