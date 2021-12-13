@@ -12,8 +12,12 @@ public class Application {
         message.printInputHolding();
         int holding = user.inputHolding();
         change.makeCoins(holding);
+
         message.printInputProducts();
         String[] productsList = user.inputProducts();
         products.addProducts(productsList);
+
+        message.printInputAmount();
+        user.inputAmount();
     }
 }

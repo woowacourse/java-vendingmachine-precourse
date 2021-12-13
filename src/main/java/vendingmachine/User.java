@@ -24,4 +24,13 @@ public class User {
             }
         }
     }
+
+    public String inputAmount() {
+        while (true) {
+            String input = Console.readLine();
+            if (validation.isValidateAmount(input)) {
+                return input;
+            }
+        }
+    }
 }

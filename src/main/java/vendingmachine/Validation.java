@@ -7,7 +7,7 @@ public class Validation {
         try {
             isSpace(input);
             isNumber(input);
-            isPositive(input);
+            isWholeNumbers(input);
             isDivisibleByTen(input);
             return true;
         } catch (IllegalArgumentException e) {
@@ -47,10 +47,11 @@ public class Validation {
         return true;
     }
 
-    private void isPositive(String input) throws IllegalArgumentException {
-        if (Integer.parseInt(input) <= 0) {
+    private boolean isWholeNumbers(String input) throws IllegalArgumentException {
+        if (Integer.parseInt(input) < 0) {
            throw new IllegalArgumentException();
         }
+        return true;
     }
 
     private boolean isDivisibleByTen(String input) throws IllegalArgumentException {
@@ -98,5 +99,16 @@ public class Validation {
             System.out.println("count");
             throw new IllegalArgumentException();
         }
+    }
+
+    public boolean isValidateAmount(String input) {
+        try {
+            isNumber(input);
+            isWholeNumbers(input);
+        } catch (IllegalArgumentException e) {
+            message.printInputCorrectNumber();
+            return false;
+        }
+        return true;
     }
 }
