@@ -10,4 +10,8 @@ public class UserMoney {
     public int getMoney() {
         return money;
     }
+
+    public void reduce(int price) {
+        money -= price;
+    }
 }

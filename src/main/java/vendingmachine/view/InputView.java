@@ -18,4 +18,9 @@ public class InputView {
         return readLine();
     }
 
+    public static String getProductByUser() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return readLine();
+    }
+
 }

@@ -8,5 +8,6 @@ public class Application {
         vendingMachine.inputAmount();
         vendingMachine.inputProducts();
         vendingMachine.inputUserMoney();
+        vendingMachine.inputProductByUser();
     }
 }

@@ -52,4 +52,11 @@ public class VendingMachine {
         List<Integer> coinCombination = coinGenerator.generate(amount.getAmount());
         OutputView.printCoinCount(coinCombination);
     }
+
+    public void inputProductByUser() {
+        String productByUser = InputView.getProductByUser();
+        Product pro = products.reduce(productByUser);
+        userMoney.reduce(pro.getPrice());
+        OutputView.printUserMoney(userMoney);
+    }
 }
