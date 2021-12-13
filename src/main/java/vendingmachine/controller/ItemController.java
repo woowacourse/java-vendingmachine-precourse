@@ -22,7 +22,7 @@ public class ItemController {
 		+ SUFFIX + "로 끝나야 합니다.";
 	private final InputView inputView;
 
-	ItemController(InputView inputView) {
+	public ItemController(InputView inputView) {
 		this.inputView = inputView;
 	}
 

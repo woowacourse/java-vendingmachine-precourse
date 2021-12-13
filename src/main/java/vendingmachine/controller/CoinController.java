@@ -11,7 +11,7 @@ import vendingmachine.view.OutputView;
 public class CoinController {
 	private final InputView inputView;
 
-	CoinController(InputView inputView) {
+	public CoinController(InputView inputView) {
 		this.inputView = inputView;
 	}
 
