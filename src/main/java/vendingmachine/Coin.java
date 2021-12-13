@@ -38,4 +38,19 @@ public enum Coin implements Comparable<Coin> {
 	public int getCount() {
 		return count;
 	}
+
+	public Money totalAmount() {
+		return getAmountOfCount(count);
+	}
+
+	public Money getAmountOfCount(int count) {
+		return amount.totalAmountOfCount(count);
+	}
+
+	public int getChangeCount(Money balance) {
+		if (totalAmount().isValuableThan(balance)) {
+			return balance.getMaxCountOfCoin(amount);
+		}
+		return count;
+	}
 }

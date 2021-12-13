@@ -20,11 +20,19 @@ public class Money {
 	}
 
 	public boolean isRemain() {
-		return amount > 10;
+		return amount > 0;
 	}
 
 	public void use(Money other) {
 		this.amount -= other.amount;
+	}
+
+	public Money totalAmountOfCount(int count) {
+		return new Money(amount * count);
+	}
+
+	public int getMaxCountOfCoin(Money coinAmount) {
+		return this.amount / coinAmount.amount;
 	}
 
 	@Override
