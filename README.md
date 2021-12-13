@@ -58,14 +58,17 @@ vendingmachine
     - VendingMachineController
 
   - model
+    - Changes
     - Coin
     - CoinCase
     - Product
     - VendingMachine
     
   - utils
+    - exception
+      - MoneyException
+      - ProductException
     - CoinCaseFactory
-    - ExceptionUtils
     - ProductFactory
     - VendingMachineFactory
     
