@@ -55,8 +55,15 @@ public class Machine {
 	}
 
 	private void validatePurchase(Item item) {
+		isNoItem(item);
 		checkInputCoinAmountByItem(item);
 		item.decreaseQuantity();
+	}
+
+	private void isNoItem(Item item) {
+		if (item == null) {
+			throw new IllegalArgumentException("[ERROR] 해당하는 상품이 없습니다.");
+		}
 	}
 
 	private void checkInputCoinAmountByItem(Item item) {
