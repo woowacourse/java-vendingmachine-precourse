@@ -59,17 +59,6 @@ public class Stock {
 		return null;
 	}
 
-	public Product giveProduct(Name name) {
-
-		if (hasProduct(name)) {
-			Product selectedProduct = productMap.get(name);
-			subtractProduct(selectedProduct);
-			return selectedProduct;
-		}
-
-		return null;
-	}
-
 	private boolean hasProduct(Name name) {
 
 		if (productMap.get(name) == null) {
@@ -77,6 +66,12 @@ public class Stock {
 		}
 
 		return true;
+	}
+
+	public Product giveProduct(Name name) {
+		Product selectedProduct = getProduct(name);
+		subtractProduct(selectedProduct);
+		return selectedProduct;
 	}
 
 	private void subtractProduct(Product product) {

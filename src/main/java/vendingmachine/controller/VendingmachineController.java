@@ -33,5 +33,6 @@ public class VendingmachineController {
 		vendingmachine.setInsertingSum(insertingSumView.getInput());
 
 		vendingmachine = vendingmachineService.sellProductUntilPossible(vendingmachine);
+		vendingmachine = vendingmachineService.giveChange(vendingmachine);
 	}
 }

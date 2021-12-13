@@ -34,7 +34,7 @@ public class Vendingmachine {
 	public void sellProduct(Name name) {
 		checkRestInsertingSum(name);
 		Product soldProduct = stock.giveProduct(name);
-		insertingSum.subtractPrice(soldProduct.getPrice());
+		insertingSum.subtract(soldProduct.getPrice().get());
 	}
 
 	private void checkRestInsertingSum(Name name) {
@@ -57,5 +57,12 @@ public class Vendingmachine {
 		}
 
 		return true;
+	}
+
+	public Change getChange() {
+		Change change = new Change(insertingSum, holdingSum);
+		insertingSum.subtract(change.sum());
+		holdingSum.subtractChange(change);
+		return change;
 	}
 }

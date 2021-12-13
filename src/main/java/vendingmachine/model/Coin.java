@@ -20,6 +20,19 @@ public enum Coin {
 		return amount;
 	}
 
+	public static final int getAmount(String name) {
+
+		for (Coin coin : Coin.values()) {
+
+			if (coin.name().equals(name)) {
+				return coin.getAmount();
+			}
+
+		}
+
+		return -1;
+	}
+
 	public static List<Integer> getAmountList() {
 		List<Integer> amountList = new ArrayList<>();
 

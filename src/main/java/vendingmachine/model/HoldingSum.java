@@ -9,18 +9,14 @@ import vendingmachine.util.StringChecker;
 
 public class HoldingSum {
 
-	private Map<String, Integer> coinMap;
+	private Map<String, Integer> holdingSum;
 
 	public HoldingSum() {
 	}
 
 	public HoldingSum(String input) {
 		checkInput(input);
-		coinMap = generateCoinsRandomly(input);
-	}
-
-	public int getCoinCount(String coinName) {
-		return coinMap.getOrDefault(coinName, 0);
+		holdingSum = generateCoinsRandomly(input);
 	}
 
 	private void checkInput(String input) {
@@ -48,5 +44,28 @@ public class HoldingSum {
 		}
 
 		return coinMap;
+	}
+
+	public Map<String, Integer> get() {
+		return holdingSum;
+	}
+
+	public int getCoinCount(String coinName) {
+		return holdingSum.getOrDefault(coinName, 0);
+	}
+
+	public void subtractChange(Change change) {
+
+		for (Map.Entry<String, Integer> entry : change.getEntrySet()) {
+			String coinName = entry.getKey();
+			int coinCount = entry.getValue();
+			holdingSum.put(coinName, holdingSum.get(coinName) - coinCount);
+
+			if (holdingSum.get(coinName) == 0) {
+				holdingSum.remove(coinName);
+			}
+
+		}
+
 	}
 }

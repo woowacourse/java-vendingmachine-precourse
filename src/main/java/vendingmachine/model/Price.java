@@ -1,5 +1,6 @@
 package vendingmachine.model;
 
+import vendingmachine.constant.Rule;
 import vendingmachine.util.NumberChecker;
 
 public class Price implements Comparable<Price> {
@@ -18,6 +19,7 @@ public class Price implements Comparable<Price> {
 	private void checkInput(String input) {
 		NumberChecker numberChecker = new NumberChecker();
 		numberChecker.isPositiveInteger(input);
+		numberChecker.isLessThan(input, Rule.MIN_PRICE);
 		numberChecker.isDivisibleNumber(input, Coin.minAmount());
 	}
 

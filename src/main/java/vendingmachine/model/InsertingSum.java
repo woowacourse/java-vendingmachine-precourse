@@ -25,8 +25,8 @@ public class InsertingSum {
 		numberChecker.isDivisibleNumber(input, Coin.minAmount());
 	}
 
-	public void subtractPrice(Price price) {
-		insertingSum -= price.get();
+	public void subtract(int amount) {
+		insertingSum -= amount;
 	}
 
 	public boolean isLessThan(Price price) {
@@ -36,5 +36,9 @@ public class InsertingSum {
 		}
 
 		return false;
+	}
+
+	public void initialization() {
+		insertingSum = 0;
 	}
 }
