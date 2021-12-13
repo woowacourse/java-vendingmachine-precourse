@@ -47,4 +47,11 @@ public class Product implements Comparable<Product>{
 	public Money getPrice() {
 		return price;
 	}
+
+	public boolean soldOut() {
+		if (amount == 0) {
+			return true;
+		}
+		return false;
+	}
 }

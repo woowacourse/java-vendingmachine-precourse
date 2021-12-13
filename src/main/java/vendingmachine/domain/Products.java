@@ -16,4 +16,12 @@ public class Products {
 	public Money getCheapestPrice() {
 		return Collections.min(products).getPrice();
 	}
+
+	public void removeSoldOutProduct() {
+		for (Product product : products) {
+			if (product.soldOut()) {
+				products.remove(product);
+			}
+		}
+	}
 }
