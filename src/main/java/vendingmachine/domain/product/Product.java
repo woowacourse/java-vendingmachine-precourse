@@ -59,15 +59,19 @@ public class Product {
         }
     }
 
+    public String getName() {
+        return name.getName();
+    }
+
+    public int getPrice() {
+        return price.getPrice();
+    }
+
     public boolean isExistQuantity() {
         if (quantity > DEFAULT_QUANTITY) {
             return true;
         }
         return false;
-    }
-
-    public int getPrice() {
-        return price.getPrice();
     }
 
     public void decreaseQuantity() {

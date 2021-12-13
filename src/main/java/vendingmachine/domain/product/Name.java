@@ -21,6 +21,10 @@ public class Name {
         }
     }
 
+    protected String getName() {
+        return name;
+    }
+
     public boolean isSame(String name) {
         if (this.name.equals(name)) {
             return true;
