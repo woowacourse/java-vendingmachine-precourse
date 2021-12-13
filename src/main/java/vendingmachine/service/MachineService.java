@@ -124,6 +124,8 @@ public class MachineService {
 	}
 
 	public String spitChanges() {
-		return depositRepository.spit(machine.getUserMoney()).toStringSkipZero();
+		DepositRepository changes = depositRepository.spit(money);
+		decreaseMoney(changes.getDepositTotal());
+		return changes.toStringSkipZero();
 	}
 }
