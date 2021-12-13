@@ -9,7 +9,7 @@ public enum ErrorMessage {
 
 	ERROR_PRODUCT_INFO_IS_NOT_VALID(
 		ERROR_HEADER.text + "잘못된 형식입니다. " + "\n상품명, 가격, 수량은 쉼표(,)로 개별 상품은 대괄호([])로 묶고 세미콜론(;)으로 구분하여 입력해야 합니다."
-			+ "\n입력 예시) [콜라,1500,20];[사이다,1000,10]\n"),
+			+ "\n입력 예시) [콜라,1500,20];[사이다,1000,10]"),
 
 	ERROR_PRODUCT_DOES_NOT_EXIST(ERROR_HEADER.text + "자판기에 없는 상품입니다. 다른 상품을 입력해주세요."),
 	ERROR_PRODUCT_OUT_OF_STOCK(ERROR_HEADER.text + "상품 재고가 없습니다. 다른 상품을 입력해주세요."),
