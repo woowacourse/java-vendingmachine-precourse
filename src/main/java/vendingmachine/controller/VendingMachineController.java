@@ -10,6 +10,14 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 
+	public void run() {
+		final VendingMachine vendingMachine = processInit();
+
+		while (vendingMachine.isContinueVendingMachine()) {
+
+		}
+	}
+
 	public VendingMachine processInit() {
 		Coins coins = registerCoins();
 		OutputView.printVendingMachineHasCoinsMessage(CoinsDto.from(coins));
