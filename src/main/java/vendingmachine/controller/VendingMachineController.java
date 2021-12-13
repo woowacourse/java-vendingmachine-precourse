@@ -15,8 +15,8 @@ public class VendingMachineController {
 
 	public void run() {
 		while (vendingMachine.isRemainProduct() && vendingMachine.canBuy(user)) {
-			System.out.println("살수이따");
+			vendingMachine.buyProduct(user);
 		}
-		System.out.println("d없따..");
+		// TODO - 잔돈 목록 출력
 	}
 }

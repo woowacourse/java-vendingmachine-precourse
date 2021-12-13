@@ -1,5 +1,9 @@
 package vendingmachine.model;
 
+import vendingmachine.validation.VendingMachineValidation;
+import vendingmachine.view.ErrorView;
+import vendingmachine.view.InputView;
+
 public class VendingMachine {
 
 	Wallet wallet;
@@ -18,4 +22,18 @@ public class VendingMachine {
 		int minPrice = productList.getRemainMinPrice();
 		return user.canBuy(minPrice);
 	}
+
+	public void buyProduct(User user) {
+		String name = InputView.buyProduct();
+		Product product = null;
+		try {
+			 product = VendingMachineValidation.existProduct(productList, name);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			ErrorView.illegalArgumentException(illegalArgumentException.getMessage());
+			buyProduct(user);
+		}
+		product.reduceStock();
+		user.buyProduct(product.getPrice());
+	}
+
 }

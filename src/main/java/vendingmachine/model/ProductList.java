@@ -49,12 +49,22 @@ public class ProductList {
 
 	public int getRemainMinPrice() {
 		int price = INF.intValue();
-		for (Product product:
-			 productList) {
+		for (Product product :
+			productList) {
 			if (product.isRemain() && price > product.getPrice()) {
 				price = product.getPrice();
 			}
 		}
 		return price;
+	}
+
+	public Product findByName(String name) {
+		for (Product product:
+			 productList) {
+			if (product.getName().equals(name)) {
+				return product;
+			}
+		}
+		return null;
 	}
 }

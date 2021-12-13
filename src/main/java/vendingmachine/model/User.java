@@ -26,4 +26,8 @@ public class User {
 	public boolean canBuy(int price) {
 		return balance >= price;
 	}
+
+	public void buyProduct(int price) {
+		balance -= price;
+	}
 }

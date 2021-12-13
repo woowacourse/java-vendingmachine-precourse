@@ -23,4 +23,12 @@ public class Product {
 	public boolean isRemain() {
 		return stock > 0;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void reduceStock() {
+		stock--;
+	}
 }
