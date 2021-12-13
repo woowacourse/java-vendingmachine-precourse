@@ -10,4 +10,9 @@ public class Juice {
         this.numberOfCan = numberOfCan;
         this.price = price;
     }
+
+    public int getPrice() {
+        return price;
+    }
+
 }
