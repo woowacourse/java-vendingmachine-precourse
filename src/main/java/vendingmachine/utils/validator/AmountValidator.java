@@ -21,7 +21,7 @@ public class AmountValidator {
 	}
 
 	private static void validatePositive(int amount) {
-		if (amount < 1) {
+		if (amount < 10) {
 			throw new IllegalArgumentException(AMOUNT_NOT_POSITIVE_ERROR);
 		}
 	}
