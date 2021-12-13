@@ -1,7 +1,6 @@
-package vendingmachine.verification;
+package vendingmachine.validator;
 
 import static vendingmachine.NumberConstant.*;
-import static vendingmachine.verification.Verification.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +11,7 @@ import vendingmachine.service.ItemService;
 public class ItemValidator {
 
 	private static final ItemService itemService = new ItemService();
+	private static final MoneyValidator moneyValidator = new MoneyValidator();
 
 	private static final String NOT_SUFFICIENT_MONEY_ERROR = "[ERROR] 투입 금액은 상품 최저 금액보다 같거나 커야 합니다.\n";
 	private static final String NOT_IN_SQUARE_BRACKET_ERROR = "[ERROR] 상품은 대괄호 안에서 입력해야 합니다.\n";
@@ -65,7 +65,7 @@ public class ItemValidator {
 	}
 
 	private int validatePrice(String priceInput) {
-		int price = isInteger(priceInput);
+		int price = moneyValidator.isInteger(priceInput);
 
 		if (price < HUNDRED || price % TEN != ZERO) {
 			throw new IllegalArgumentException(PRICE__ERROR);
@@ -75,7 +75,7 @@ public class ItemValidator {
 	}
 
 	private int validateStockQuantity(String stockQuantityInput) {
-		int stockQuantity = isInteger(stockQuantityInput);
+		int stockQuantity = moneyValidator.isInteger(stockQuantityInput);
 
 		if (stockQuantity <= ZERO) {
 			throw new IllegalArgumentException(STOCK_QUANTITY__ERROR);

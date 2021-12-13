@@ -6,7 +6,7 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Item;
-import vendingmachine.verification.Verification;
+import vendingmachine.converter.InputConverter;
 
 public class InputService {
 
@@ -20,7 +20,7 @@ public class InputService {
 		while (true) {
 			try {
 				System.out.println(INPUT_VENDING_MACHINE_MONEY_MESSAGE);
-				return Verification.ofMoney(Console.readLine());
+				return InputConverter.convertMoney(Console.readLine());
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
@@ -31,7 +31,7 @@ public class InputService {
 		while (true) {
 			try {
 				System.out.println(INPUT_ITEMS_MESSAGE);
-				return Verification.ofItems(Console.readLine());
+				return InputConverter.convertItems(Console.readLine());
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
@@ -42,7 +42,7 @@ public class InputService {
 		while (true) {
 			try {
 				System.out.println(INPUT_USER_MONEY_MESSAGE);
-				return Verification.ofUserMoney(Console.readLine());
+				return InputConverter.convertUserMoney(Console.readLine());
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
@@ -54,7 +54,7 @@ public class InputService {
 			try {
 				System.out.println(INPUT_MONEY_MESSAGE + money + WON);
 				System.out.println(INPUT_ITEM_NAME_MESSAGE);
-				return Verification.ofItemName(Console.readLine(), money);
+				return InputConverter.convertItemName(Console.readLine(), money);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 			}
