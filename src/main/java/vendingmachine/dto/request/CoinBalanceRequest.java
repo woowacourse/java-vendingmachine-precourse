@@ -1,6 +1,6 @@
 package vendingmachine.dto.request;
 
-import static vendingmachine.StringConstants.*;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_CURRENT_BALANCE_INPUT;
 
 public class CoinBalanceRequest {
     private static final int MINIMUM_COIN_UNIT = 10;

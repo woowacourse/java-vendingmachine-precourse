@@ -24,5 +24,4 @@ class ChangeAccountantTest {
         assertThat(change.count(Coin.COIN_10)).isEqualTo(0);
         assertThat(changeAccountant.getRestAfterCalculation()).isEqualTo(50);
     }
-
 }

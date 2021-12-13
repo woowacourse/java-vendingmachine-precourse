@@ -12,5 +12,4 @@ class ItemPurchaseRequestTest {
 
         assertThatThrownBy(() -> new ItemPurchaseRequest(empty).toItemNameToPurchase()).isInstanceOf(IllegalArgumentException.class);
     }
-
 }

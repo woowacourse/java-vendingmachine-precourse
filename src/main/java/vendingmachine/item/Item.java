@@ -20,7 +20,7 @@ public class Item {
     }
 
     public boolean isMoreExpensiveThanMoneyLeft(int moneyAvailable) {
-        if(price > moneyAvailable) {
+        if (price > moneyAvailable) {
             return true;
         }
         return false;

@@ -12,7 +12,6 @@ public class Items {
         items.computeIfAbsent(itemToAdd, numberOfItem -> numberOfItemsToAdd);
     }
 
-    //테스트를 위한 public
     public int countItems(Item item) {
         return items.getOrDefault(item, 0);
     }

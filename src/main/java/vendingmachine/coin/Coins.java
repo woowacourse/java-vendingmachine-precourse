@@ -27,7 +27,7 @@ public class Coins {
         for (Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
             int numberOfCoin = this.count(coinUnit);
             int numberToTake = coinsToTake.count(coinUnit);
-            if(numberOfCoin >= numberToTake) {
+            if (numberOfCoin >= numberToTake) {
                 coins.put(coinUnit, numberOfCoin - numberToTake);
                 continue;
             }

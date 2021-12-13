@@ -32,11 +32,10 @@ public class CoinExchangeMachine {
     }
 
     private boolean isMoreThanOrEqualToMinAmountOfCoin(int amount) {
-        int minAccountOfCoin = Coin.COIN_10.getAmount();
-        if (amount >= minAccountOfCoin) {
-            return true;
+        if (Coin.COIN_10.hasMoreAmount(amount)) {
+            return false;
         }
-        return false;
+        return true;
     }
 
     private int pickCoinAmountRandomly() {
@@ -50,6 +49,6 @@ public class CoinExchangeMachine {
     private void changeIntoCoin(int pickedAmount) {
         Coin coin = Coin.findByAmount(pickedAmount).get();
         coins.add(coin);
-        amount -= coin.getAmount();
+        amount -= pickedAmount;
     }
 }

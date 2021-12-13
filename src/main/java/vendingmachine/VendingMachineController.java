@@ -15,11 +15,11 @@ public class VendingMachineController {
         purchase();
         getChanges();
     }
-    
+
     private void createCoinBalance() {
         console.printCoinBalance(vendingMachineService.createCoinBalance(console.inputCoinBalance()));
     }
-    
+
     private void createItems() {
         vendingMachineService.createItems(console.inputItemInventoryInfo());
     }
@@ -34,7 +34,7 @@ public class VendingMachineController {
                 showAvailableMoney();
                 purchaseByItemName();
             } catch (IllegalArgumentException error) {
-               showErrorMessage(error.getMessage());
+                showErrorMessage(error.getMessage());
             }
         }
     }

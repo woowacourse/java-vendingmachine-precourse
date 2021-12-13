@@ -31,7 +31,7 @@ public class CoinsResponse {
 
     private String convertToPrint(CoinConditionToIncludeInPrinting condition) {
         for (Coin coinUnit : Coin.getAllKindsOfCoinFromLargestToSmallest()) {
-           convertToPrintByUnit(coinUnit, condition);
+            convertToPrintByUnit(coinUnit, condition);
         }
         return String.join(NEW_LINE, response);
     }

@@ -35,7 +35,7 @@ public class VendingMachine {
     public void purchase(String itemName) {
         Item item = findItemToPurchase(itemName);
         validateCheaperThanMoneyAvailable(item);
-        validateInStock(item);;
+        validateInStock(item);
         purchase(item);
     }
 
@@ -47,7 +47,7 @@ public class VendingMachine {
     }
 
     public boolean isPurchaseAvailable() {
-        if(!isMoreMoneyThanLowestPriceInStock() || isAllItemsSoldOut()) {
+        if (!isMoreMoneyThanLowestPriceInStock() || isAllItemsSoldOut()) {
             return false;
         }
         return true;
@@ -65,7 +65,7 @@ public class VendingMachine {
     }
 
     private void validateInStock(Item item) {
-        if(!items.isInStock(item)) {
+        if (!items.isInStock(item)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_OUT_OF_STOCK);
         }
     }

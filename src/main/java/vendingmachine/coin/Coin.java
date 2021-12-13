@@ -37,4 +37,8 @@ public enum Coin {
     public int getAmount(int numberOfCoin) {
         return amount * numberOfCoin;
     }
+
+    public boolean hasMoreAmount(int amountToCompare) {
+        return this.getAmount() > amountToCompare;
+    }
 }

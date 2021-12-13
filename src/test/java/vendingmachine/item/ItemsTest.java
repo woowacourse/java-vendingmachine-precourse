@@ -1,6 +1,6 @@
 package vendingmachine.item;
 
-import static org.assertj.core.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,7 +64,7 @@ class ItemsTest {
 
         items.reduce(item);
 
-        assertThat(items.countItems(item)).isEqualTo(quantity-1);
+        assertThat(items.countItems(item)).isEqualTo(quantity - 1);
     }
 
     @Test
@@ -97,6 +97,4 @@ class ItemsTest {
 
         assertThat(items.isEmptyItems()).isFalse();
     }
-
-
 }
