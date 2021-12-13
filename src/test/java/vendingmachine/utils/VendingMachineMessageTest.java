@@ -114,7 +114,7 @@ class VendingMachineMessageTest {
 		void invalidNumberError(final int inputtedData) {
 			final String errorMessage = VendingMachineMessage
 				.invalidNumberError(inputtedData);
-			final String expectedMessage = "[ERROR]: " + inputtedData + " 숫자는 정수여야 합니다";
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 1의자리가 0인 정수여야 합니다";
 			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
 
@@ -124,7 +124,7 @@ class VendingMachineMessageTest {
 		void notNumberError(final String inputtedData) {
 			final String errorMessage = VendingMachineMessage
 				.notNumberError(inputtedData);
-			final String expectedMessage = "[ERROR]: " + inputtedData + " 숫자만 입력되야 합니다";
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 정수만 입력되야 합니다";
 			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
 

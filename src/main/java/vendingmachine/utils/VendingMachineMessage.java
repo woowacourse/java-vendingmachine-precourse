@@ -38,9 +38,9 @@ public class VendingMachineMessage {
 
 	private static final String INVALID_NUMBER_LENGTH = " 길이가 너무 짧습니다";
 
-	private static final String INVALID_NUMBER = " 숫자는 정수여야 합니다";
+	private static final String INVALID_NUMBER = " 1의자리가 0인 정수여야 합니다";
 
-	private static final String NOT_NUMBER = " 숫자만 입력되야 합니다";
+	private static final String NOT_INTEGER = " 정수만 입력되야 합니다";
 
 	private static final String INVOLVE_BLANK = " 공백이 포함되면 안됩니다";
 
@@ -87,7 +87,7 @@ public class VendingMachineMessage {
 	}
 
 	public static String notNumberError(final String inputtedData) {
-		return ERROR_MESSAGE_PREFIX + inputtedData + NOT_NUMBER;
+		return ERROR_MESSAGE_PREFIX + inputtedData + NOT_INTEGER;
 	}
 
 	public static String involveBlankError(final String inputtedData) {
