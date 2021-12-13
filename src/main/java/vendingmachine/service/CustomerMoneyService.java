@@ -9,7 +9,7 @@ public class CustomerMoneyService {
     private int customerMoneyLeft = NO_CUSTOMER_MONEY_LEFT;
 
     public int getCustomerMoneyLeft() {
-        return customerMoneyLeft;
+        return this.customerMoneyLeft;
     }
 
     public void initializeCustomerMoneyLeft() {

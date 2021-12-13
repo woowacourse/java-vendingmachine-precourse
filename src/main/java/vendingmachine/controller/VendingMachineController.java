@@ -32,10 +32,10 @@ public class VendingMachineController {
             this.sellMerchandise();
         }
 
-        OutputView.printCoinChanges(this.calculateCoinChanges());
+        this.returnCoinChanges();
     }
 
-    public void sellMerchandise() {
+    private void sellMerchandise() {
         int customerMoneyLeft = customerMoneyService.getCustomerMoneyLeft();
         Merchandise merchandise = menuService.selectAvailableMerchandise(customerMoneyLeft);
 
@@ -43,11 +43,16 @@ public class VendingMachineController {
         merchandise.decreaseNumber();
     }
 
-    public HashMap<Coin, Integer> calculateCoinChanges() {
+    private void returnCoinChanges() {
+        OutputView.printCoinChanges(this.calculateCoinChanges());
+    }
+
+    private HashMap<Coin, Integer> calculateCoinChanges() {
         HashMap<Coin, Integer> coinChanges = new HashMap<>();
         for (Coin coin : Coin.getCoinsDesc()) {
             if (coinService.getCoins().get(coin) == ZERO_COINS) continue;
             if (customerMoneyService.getCustomerMoneyLeft() < coin.getAmount()) continue;
+
             int coinNumber = this.calculateMaximumCoinNumber(coin);
             coinChanges.put(coin, coinNumber);
             coinService.getCoins().put(coin, coinService.getCoins().get(coin)-coinNumber);
@@ -56,7 +61,7 @@ public class VendingMachineController {
         return coinChanges;
     }
 
-    public int calculateMaximumCoinNumber(Coin coin) {
+    private int calculateMaximumCoinNumber(Coin coin) {
         int spentCoinNumber = customerMoneyService.getCustomerMoneyLeft()/coin.getAmount();
         if (spentCoinNumber > coinService.getCoins().get(coin)) {
             spentCoinNumber = coinService.getCoins().get(coin);
