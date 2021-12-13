@@ -11,6 +11,7 @@ public class ProductService {
 	public static final int INDEX_OF_PRICE = 1;
 	public static final int INDEX_OF_STOCK = 2;
 	public static final String FAIL_TO_FIND_MESSAGE_THROUGH_PRODUCT_NAME = "FailToFind";
+	public static final int OUT_OF_STOCK_COUNT = 0;
 
 	ProductRepository productRepository = ProductRepository.instance;
 
@@ -41,5 +42,15 @@ public class ProductService {
 		}
 
 		return minPrice;
+	}
+
+	public boolean checkAllStocksEmpty() {
+		for (Product product : productRepository.getProductRepository()) {
+			if (product.getStock() != OUT_OF_STOCK_COUNT) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

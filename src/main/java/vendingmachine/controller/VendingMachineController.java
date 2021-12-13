@@ -74,7 +74,7 @@ public class VendingMachineController {
 	}
 
 	public int buyProduct(Customer customer) {
-		while (customer.getMoney() >= productService.getMinPrice()) {
+		while (customer.getMoney() >= productService.getMinPrice() && !productService.checkAllStocksEmpty()) {
 			vendingMachineView.buyProduct(customer);
 
 			String productName = nameForBuyReceiver.receive();

@@ -1,6 +1,7 @@
 package vendingmachine.model.validator;
 
 import vendingmachine.model.Product;
+import vendingmachine.model.service.CustomerService;
 import vendingmachine.model.service.ProductService;
 
 public class NameForBuyValidator {
@@ -13,6 +14,9 @@ public class NameForBuyValidator {
 
 	public boolean validate(String name) {
 		try {
+			if (name.equals(CustomerService.CHANGE_REQUIRE_WORD_FROM_CUSTOMER)) {
+				return false;
+			}
 			isMatchToProduct(name);
 			isStockAvailable(name);
 
