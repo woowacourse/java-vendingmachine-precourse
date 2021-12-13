@@ -39,16 +39,16 @@ public class CoinService {
 			int availableCount = restMoney / amount;
 			Integer maxCount = coinRepository.getCoinRepository().get(String.valueOf(amount));
 			if (maxCount < availableCount) {
-				restMoney = putCoinForCharge(restMoney, coinForChange, amount, maxCount);
+				restMoney = putCoinForChange(restMoney, coinForChange, amount, maxCount);
 				continue;
 			}
-			restMoney = putCoinForCharge(restMoney, coinForChange, amount, availableCount);
+			restMoney = putCoinForChange(restMoney, coinForChange, amount, availableCount);
 		}
 
 		return coinForChange;
 	}
 
-	private int putCoinForCharge(int restMoney, HashMap<String, Integer> coinForChange, int amount, Integer count) {
+	private int putCoinForChange(int restMoney, HashMap<String, Integer> coinForChange, int amount, Integer count) {
 		coinForChange.put(String.valueOf(amount), count);
 		restMoney -= count * amount;
 		return restMoney;
