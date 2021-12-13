@@ -15,8 +15,9 @@ public class Item {
 	private static final String COST = "가격";
 	private static final String AMOUNT = "수량";
 	private static final String ERROR = "[ERROR] ";
-	private static final String INVALID_NUMBER_OF_TYPE_ERROR = ERROR + "상품 정보는 " + NAME + ", " + COST + ", " + AMOUNT
-		+ "의 세 단위로 입력해야 합니다.";
+	private static final String INVALID_NUMBER_OF_TYPE_ERROR =
+		String.format(ERROR + "상품 정보는 %s, %s, %s의" + NUMBER_OF_TYPE + " 단위로 입력해야 합니다.",
+			NAME, COST, AMOUNT);
 	private static final String MENTION = "상품 %s의 %s이 ";
 	private static final String NON_DIGIT_ERROR = ERROR + MENTION + "숫자여야 합니다.";
 	private static final String NOT_DIVISIBLE_BY_TEN_ERROR = ERROR + MENTION + TEN + "으로 나누어 떨어져야 합니다.";
