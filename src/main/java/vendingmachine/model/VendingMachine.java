@@ -1,9 +1,7 @@
 package vendingmachine.model;
 
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,10 +34,10 @@ public class VendingMachine {
 
 	public void generateCoin() {
 		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
-		coinAmountList.forEach(this::generateCoins);
+		coinAmountList.forEach(this::generateSpecificCoin);
 	}
 
-	private void generateCoins(Integer amount) {
+	private void generateSpecificCoin(Integer amount) {
 		int maxRange = Utils.getMaxRange(ownMoney, amount);
 		if (amount == 10) {
 			coinMap.put(Coin.parse(amount), maxRange);
@@ -56,6 +54,15 @@ public class VendingMachine {
 			.collect(Collectors.toList());
 	}
 
+	public void removeProduct() {
+		List<Product> productListToDelete = this.productList
+			.stream()
+			.filter(it -> it.getAmount() == 0)
+			.collect(Collectors.toList());
+
+		productListToDelete.forEach(productList::remove);
+	}
+
 	public void purchase(String productName) {
 		Product product = productList.stream()
 			.filter(it -> it.getName().equals(productName))
@@ -63,6 +70,7 @@ public class VendingMachine {
 			.map(Product::purchaseProduct) //TODO price 0 됐을 때 상품 리스트에서 제거하는거 하기
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품 이름입니다."));
 
+		removeProduct();
 		inputMoney -= product.getPrice();
 	}
 

@@ -25,6 +25,10 @@ public class Product {
 		return this.price;
 	}
 
+	public int getAmount() {
+		return this.amount;
+	}
+
 	public Product purchaseProduct() {
 		this.amount--;
 		return this;
