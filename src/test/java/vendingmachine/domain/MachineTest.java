@@ -39,6 +39,6 @@ class MachineTest {
 		machine.setCoins(1050);
 		System.out.println(machine.getCoinList());
 		machine.setPayment("800");
-		System.out.println(machine.getReturnCoins());
+		System.out.println(machine.getReturnChange());
 	}
 }

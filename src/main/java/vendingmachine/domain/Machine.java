@@ -5,13 +5,11 @@ import java.util.Map;
 
 public class Machine {
 	private Coins coins;
-	private Coins change;
 	private Merchandise merchandise = new Merchandise();
 	private int balance;
 
 	public void setCoins(int amount) {
 		coins = new Coins(amount);
-		coins.pickCoins();
 	}
 
 	public Map<Integer, Integer> getCoinList() {
@@ -33,9 +31,9 @@ public class Machine {
 		return balance;
 	}
 
-	public boolean isValidItem(String item) {
-		return merchandise.isExistItem(item)
-			&& merchandise.findItem(item).isSoldOut() == false;
+	public boolean isValidItem(String name) {
+		return merchandise.isExistItem(name)
+			&& merchandise.findItem(name).isSoldOut() == false;
 	}
 
 	public void buyItem(String name) {
@@ -53,35 +51,8 @@ public class Machine {
 		return true;
 	}
 
-	public Map<Integer, Integer> getReturnCoins() {
-		change = new Coins();
-		calcChange(coins.getSortedCoinCount());
-		return change.getSortedCoinCount();
-	}
-
-	private void calcChange(Map<Integer, Integer> sortedCoinCount) {
-		Iterator<Integer> coins = sortedCoinCount.keySet().iterator();
-		while (coins.hasNext() && balance > 0) {
-			int coin = coins.next();
-			int count = getReturnCoinCount(coin);
-			if (count != 0) {
-				balance -= coin * count;
-				moveCoinsToChange(coin, count);
-			}
-		}
-	}
-
-	private int getReturnCoinCount(int coin) {
-		int count = balance / coin;
-		if (coins.getCoinCount(coin) < count) {
-			count = coins.getCoinCount(coin);
-		}
-		return count;
-	}
-
-	private void moveCoinsToChange(int coin, int count) {
-		coins.changeCoinCount(coin, coins.getCoinCount(coin) - count);
-		change.changeCoinCount(coin, count);
+	public Map<Integer, Integer> getReturnChange() {
+		return coins.returnToMinCount(balance);
 	}
 
 }

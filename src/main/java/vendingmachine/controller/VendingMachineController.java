@@ -58,7 +58,7 @@ public class VendingMachineController {
 			chooseMerchandise();
 		}
 		view.printCurrentBalance(machine.getCurrentBalance());
-		view.printBalanceCoinsCount(machine.getReturnCoins());
+		view.printBalanceCoinsCount(machine.getReturnChange());
 	}
 
 }
