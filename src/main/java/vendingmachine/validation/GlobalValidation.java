@@ -5,7 +5,7 @@ import java.util.List;
 import vendingmachine.domain.Product;
 import vendingmachine.exception.ErrorMessage;
 
-public class Validation {
+public class GlobalValidation {
 
 	// 금액이 자연수인지 확인
 	public static void validateCostIsNaturalNumber(String cost) {
@@ -31,7 +31,7 @@ public class Validation {
 	}
 
 	// 상품이 형식에 맞게 들어오지 않는 경우
-	public static void validateProductFormat(String inputStr){
+	public static void validateProductsInputFormat(String inputStr){
 		for(String product: inputStr.split(";")) {
 			if(!product.contains("[") || !product.contains("]")) {
 				throw  new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR.getErrorMessage());
@@ -39,15 +39,18 @@ public class Validation {
 		}
 	}
 
-	// 상품의 길이가 3(상품명, 가격, 수량)이 아니고  경우
-	public static void validateProductLength(String[] product) {
-		if(product.length!=3){
+	// 상품의 길이가 3(상품명, 가격, 수량)이 아니고 빈 값일 있을 경우
+	public static void validateProductLengthAndBlank(String[] product) {
+		if (product.length != 3) {
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_LENGTH_ERROR.getErrorMessage());
 		}
+
+		for (String p : product) {
+			if (p.replaceAll(" ", "").length() == 0) {
+				throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_LENGTH_ERROR.getErrorMessage());
+			}
+		}
 	}
-
-	// 각 상품이 빈 값으로 들어오는 경우
-
 
 	// 상품 가격이 100 이상, 10으로 나누어 떨어지는 자연수가 아닐 경우
 	public static void validateProductPrice(String price) {
@@ -99,5 +102,4 @@ public class Validation {
 			}
 		}
 	}
-
 }

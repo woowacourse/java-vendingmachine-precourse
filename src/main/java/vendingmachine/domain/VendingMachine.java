@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import vendingmachine.domain.enumclass.Coin;
-import vendingmachine.validation.Validation;
+import vendingmachine.validation.GlobalValidation;
 
 public class VendingMachine {
 
@@ -55,7 +55,7 @@ public class VendingMachine {
 	}
 
 	private void subtractInputCost(Product product) {
-		Validation.validateProductAmountIsZero(product);
+		GlobalValidation.validateProductAmountIsZero(product);
 
 		if (product.CanInputCostSubtract(inputCost)) {
 			inputCost -= product.getPrice();

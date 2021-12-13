@@ -9,7 +9,12 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
 import vendingmachine.utils.CoinUtil;
-import vendingmachine.validation.Validation;
+import vendingmachine.validation.GlobalValidation;
+import vendingmachine.validation.validator.InputCostValidator;
+import vendingmachine.validation.validator.InputProductNameValidator;
+import vendingmachine.validation.validator.InputProductValidator;
+import vendingmachine.validation.validator.InputProductsValidator;
+import vendingmachine.validation.validator.InputVendingMachineCostValidator;
 
 public class VendingMachineService {
 
@@ -23,9 +28,7 @@ public class VendingMachineService {
 	}
 
 	public String postVendingMachineCosts(String inputStr) {
-		Validation.validateNull(inputStr);
-		Validation.validateCostIsNaturalNumber(inputStr);
-		Validation.validateDivideTen(Integer.parseInt(inputStr));
+		InputVendingMachineCostValidator.validateVendingMachineCost(inputStr);
 
 		result.init();
 		result.addMessage(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
@@ -38,19 +41,16 @@ public class VendingMachineService {
 
 	public void postProductInfo(String inputStr) {
 		vendingMachine.initProducts();
-
-		Validation.validateNull(inputStr);
-		Validation.validateProductFormat(inputStr);
-
+		InputProductsValidator.validateProducts(inputStr);
 		addProducts(inputStr);
 	}
 
 	public String postInputCosts(String inputStr) {
-		Validation.validateNull(inputStr);
-		Validation.validateCostIsNaturalNumber(inputStr);
-		Validation.validateDivideTen(Integer.parseInt(inputStr));
+		InputCostValidator.validateInputCost(inputStr);
 
 		result.init();
+
+		//TODO
 		vendingMachine.setInputCost(Integer.parseInt(inputStr));
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
@@ -58,8 +58,7 @@ public class VendingMachineService {
 	}
 
 	public boolean postProductName(String inputStr) {
-		Validation.validateNull(inputStr);
-		Validation.validateProductIsNotInProducts(inputStr, vendingMachine.getProducts());
+		InputProductNameValidator.validateProductName(inputStr, vendingMachine.getProducts());
 
 		result.init();
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
@@ -86,10 +85,7 @@ public class VendingMachineService {
 		for (String rowProduct : products) {
 			String[] product = rowProduct.split(",");
 
-			Validation.validateProductLength(product);
-			Validation.validateProductPrice(product[1]);
-			Validation.validateProductAmount(product[2]);
-			Validation.validateProductIsDistinct(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])), vendingMachine.getProducts());
+			InputProductValidator.validateProduct(product, vendingMachine.getProducts());
 
 			vendingMachine.addProduct(
 				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
