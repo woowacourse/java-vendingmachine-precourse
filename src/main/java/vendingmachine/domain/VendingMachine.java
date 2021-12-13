@@ -16,9 +16,7 @@ public class VendingMachine {
     private int customerMoneyLeft = NO_CUSTOMER_MONEY_LEFT;
 
     public VendingMachine() {
-        int totalMoney = InputView.getInitialMoneyInput();
-        this.initializeCoins(totalMoney);
-        OutputView.printCoinsInfo(this.coins);
+        this.initializeCoins(InputView.getInitialMoneyInput());
         this.setMenu(InputView.getMenuInput());
         this.setCustomerMoneyLeft(InputView.getCustomerMoneyInput());
     }
@@ -39,6 +37,8 @@ public class VendingMachine {
             this.coins.put(coin, ZERO_COINS);
         }
         generateCoins(totalMoney);
+
+        OutputView.printCoinsInfo(this.coins);
     }
 
     private void generateCoins(int totalMoney) {
