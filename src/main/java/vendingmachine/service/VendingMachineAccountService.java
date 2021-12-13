@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import java.util.Arrays;
+import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
@@ -11,6 +12,7 @@ import vendingmachine.view.exception.ErrorMessage;
 
 public class VendingMachineAccountService {
 	public static final int INVALID_INPUT = -1;
+	private static final List<Integer> COIN_UNIT_LIST = Arrays.asList(500, 100, 50, 10);
 
 	private static final VendingMachineAccount vendingMachineAccount = new VendingMachineAccount();
 
@@ -18,7 +20,7 @@ public class VendingMachineAccountService {
 		int account = vendingMachineAccount.getAccount();
 
 		while (account > 0) {
-			int randomCoin = Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10));
+			int randomCoin = Randoms.pickNumberInList(COIN_UNIT_LIST);
 			if (account < randomCoin) {
 				continue;
 			}
