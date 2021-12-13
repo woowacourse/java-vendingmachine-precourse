@@ -12,8 +12,10 @@ import java.util.regex.Pattern;
 public class Item {
 	// 정규식으로 더 자세한 검증을 할 수도 있지만, 사용자에게 각각의 예외 경우에 대한 자세한 안내를 주기 위해 최소한의 형식만 검사
 	// 상품명 공백, 가격과 수량 범위까지 검사하는 정규식 : "^\\[\\S+,[1-9][0-9]{3,},[1-9][0-9]*]$"
-	private static final String ITEM_REGEX = "^\\[\\S+,[0-9]+,[0-9]+]$";	private static final int NAME_INDEX = 0;
+	private static final String ITEM_REGEX = "^\\[\\S+,[0-9]+,[0-9]+]$";
 	private static final String PROPERTY_SEPARATOR = ",";
+
+	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int COUNT_INDEX = 2;
 
