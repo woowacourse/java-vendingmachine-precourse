@@ -14,8 +14,16 @@ public class Product {
 		this.amount = Integer.parseInt(productInfo.get(ProductIdx.AMOUNT.ordinal()));
 	}
 
-	public int getMinPrice(int price) {
+	public boolean isSameName(String name) {
+		return name.equals(this.name);
+	}
+
+	public int getSmallerPrice(int price) {
 		return Math.min(this.price, price);
+	}
+
+	public boolean isInStock() {
+		return amount > 0;
 	}
 
 	public int addAmount(int totalAmount) {
