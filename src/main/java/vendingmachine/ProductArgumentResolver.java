@@ -35,6 +35,9 @@ public class ProductArgumentResolver {
     }
 
     private String[] splitProducts(String products) {
+        if (products.startsWith(PRODUCT_DELIMITER)) {
+            throw ErrorMessage.INVALID_NOT_ALLOW_NAME.getException();
+        }
         return products.split(PRODUCTS_DELIMITER);
     }
 
