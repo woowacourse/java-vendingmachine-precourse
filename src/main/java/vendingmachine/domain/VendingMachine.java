@@ -11,7 +11,8 @@ public class VendingMachine {
 	private int amount;
 
 	public VendingMachine(int money) {
-		changes = new Changes(money);
+		changes = new Changes();
+		changes.makeRandomCoin(money);
 	}
 
 	public void initItemList(List<Item> items) {
@@ -58,6 +59,9 @@ public class VendingMachine {
 	}
 
 	public Changes returnChange() {
+		if (amount >= changes.getTotalAmount()) {
+			return changes;
+		}
 		return changes.returnChange(amount);
 	}
 }

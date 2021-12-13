@@ -20,13 +20,13 @@ public class OutputView {
 	}
 
 	public static void printMachineHavingChanges(Changes changes) {
-		Map<Coin, Integer> changesMap = changes.getChanges();
+		Map<Coin, Integer> changesMap = changes.getChangesMap();
 		System.out.println(MessageConst.MACHINE_HAVING_CHANGES);
 		printChangeStatus(changesMap, true);
 	}
 
 	public static void printReturnChanges(Changes changes) {
-		Map<Coin, Integer> changesMap = changes.getChanges();
+		Map<Coin, Integer> changesMap = changes.getChangesMap();
 		System.out.println(MessageConst.RETURN_CHANGE_MESSAGE);
 		printChangeStatus(changesMap, false);
 	}

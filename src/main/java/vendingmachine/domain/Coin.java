@@ -30,6 +30,10 @@ public enum Coin {
 		return money % amount == 0;
 	}
 
+	public int getValue(int coinNum) {
+		return coinNum * amount;
+	}
+
 	@Override
 	public String toString() {
 		return amount + MessageConst.COIN_UNIT;
@@ -42,5 +46,9 @@ public enum Coin {
 	public static List<Integer> getCoinAmountList() {
 		List<Coin> coins = Arrays.asList(Coin.values());
 		return coins.stream().map(Coin::getAmount).collect(Collectors.toList());
+	}
+
+	public int getNumDivided(int money) {
+		return money / this.amount;
 	}
 }

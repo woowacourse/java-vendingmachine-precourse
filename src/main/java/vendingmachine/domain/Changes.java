@@ -3,22 +3,22 @@ package vendingmachine.domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Changes {
 	private Map<Coin, Integer> changes = new LinkedHashMap<>();
 
-	public Changes(int money) {
+	public Changes() {
 		initChangesMap(this.changes);
-		makeRandomCoin(money);
 	}
 
 	public Changes(Map<Coin, Integer> changes) {
 		this.changes = changes;
 	}
 
-	private void makeRandomCoin(int money) {
+	public void makeRandomCoin(int money) {
 		List<Integer> coinCandidates = Coin.getCoinAmountList();
 		while (money > 0) {
 			int selectAmount = Randoms.pickNumberInList(coinCandidates);
@@ -41,7 +41,7 @@ public class Changes {
 		changeMap.put(Coin.COIN_10, 0);
 	}
 
-	public Map<Coin, Integer> getChanges() {
+	public Map<Coin, Integer> getChangesMap() {
 		return changes;
 	}
 
@@ -53,31 +53,20 @@ public class Changes {
 		return totalAmount;
 	}
 
+	public int getCoinNum(Coin coin) {
+		return changes.get(coin);
+	}
+
+	public void minusCoin(Coin coin, int returnNum) {
+		changes.replace(coin, changes.get(coin) - returnNum);
+	}
+
+	public void addCoin(Coin coin, int addedNum) {
+		changes.replace(coin, changes.get(coin) + addedNum);
+	}
+
 	public Changes returnChange(int amount) {
-		Map<Coin, Integer> changesToReturn = new LinkedHashMap<>();
-		initChangesMap(changesToReturn);
-
-		for (Map.Entry<Coin, Integer> changeEntry : changes.entrySet()) {
-			Coin nowCoin = changeEntry.getKey();
-			int nowCoinNum = changeEntry.getValue();
-			int dividedNum = amount / nowCoin.getAmount();
-
-			if (nowCoinNum == 0 && dividedNum <= 0) {
-				continue;
-			}
-
-			if (dividedNum <= nowCoinNum) {
-				// 만약 해당 단위의 동전으로만 줘도 될만큼 충분히 많을경우
-				changesToReturn.replace(nowCoin, dividedNum);
-				changes.replace(nowCoin, nowCoinNum - dividedNum);
-				amount -= dividedNum * nowCoin.getAmount();
-				continue;
-			}
-			changesToReturn.replace(nowCoin, nowCoinNum);
-			amount -= nowCoinNum * nowCoin.getAmount();
-			changes.put(nowCoin, 0);
-		}
-
-		return new Changes(changesToReturn);
+		Changer changer = new Changer(this, amount);
+		return changer.returnChange();
 	}
 }
