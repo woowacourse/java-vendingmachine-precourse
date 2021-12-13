@@ -25,4 +25,9 @@ public class ProcessUserBuyGoods {
         goods = User.inputGoods();
         UserGoodsNameValidation.checkGoodsNameValidation(goods);
     }
+
+    public static int sellGoods(GoodsController goodsController) {
+        userMoney = goodsController.sellGoods(goods, userMoney);
+        return userMoney;
+    }
 }

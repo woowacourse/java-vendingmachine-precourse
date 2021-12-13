@@ -26,13 +26,15 @@ public class GoodsController {
         return checkGoodsName(goods, name) && checkQuantity(goods) && checkMoney(goods, userMoney);
     }
 
-    public void sellGoods(String name, int userMoney) {
+    public int sellGoods(String name, int userMoney) {
         for (Goods goods : goodsList) {
             if (checkAvailablePurchase(goods, name, userMoney)) {
+                userMoney -= goods.getPrice();
                 goods.reduceQuantity();
-                return;
+                return userMoney;
             }
         }
+        return userMoney;
     }
 
     public boolean isQuantityMoreThanOne() {
