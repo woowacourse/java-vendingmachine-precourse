@@ -14,7 +14,7 @@ public class NameForBuyValidator {
 	public boolean validate(String name) {
 		try {
 			isMatchToProduct(name);
-			isStockEmpty(name);
+			isStockAvailable(name);
 
 			return false;
 		} catch (IllegalArgumentException illegalArgumentException) {
@@ -31,7 +31,7 @@ public class NameForBuyValidator {
 		}
 	}
 
-	private void isStockEmpty(String name) throws IllegalArgumentException {
+	private void isStockAvailable(String name) throws IllegalArgumentException {
 		int stock = productService.getByName(name).getStock();
 
 		if (stock == EMPTY_STOCK_COUNT) {
