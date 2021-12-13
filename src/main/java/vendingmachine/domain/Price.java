@@ -40,4 +40,8 @@ public class Price {
 			throw new IllegalArgumentException(ERROR_PRICE_NOT_TEN_PERCENT_DIVISION);
 		}
 	}
+
+	public boolean isValidateCalculateMinus(Balance balance) {
+		return this.price > balance.getBalance();
+	}
 }

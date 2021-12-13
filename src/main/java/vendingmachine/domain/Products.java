@@ -38,4 +38,9 @@ public class Products {
 		return products.stream()
 			.allMatch(product -> product.isValidateProductQuantityZero());
 	}
+
+	public boolean isValidateHasBalanceProductsPurchase(Balance balance) {
+		return products.stream()
+			.allMatch(product -> product.isValidateProductPurchase(balance));
+	}
 }

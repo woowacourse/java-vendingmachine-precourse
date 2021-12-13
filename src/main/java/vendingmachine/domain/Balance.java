@@ -32,4 +32,8 @@ public class Balance {
 	public boolean isValidateHasBalanceZero() {
 		return this.balance == BALANCE_ZERO;
 	}
+
+	public int getBalance() {
+		return balance;
+	}
 }

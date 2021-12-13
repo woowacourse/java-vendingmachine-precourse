@@ -31,6 +31,10 @@ public class Product {
 		return quantity.isValidateQuantityZero();
 	}
 
+	public boolean isValidateProductPurchase(Balance balance) {
+		 return price.isValidateCalculateMinus(balance);
+	}
+
 	public Name getName() {
 		return name;
 	}
