@@ -1,18 +1,13 @@
 package vendingmachine.model.user;
 
-import vendingmachine.model.drink.Drink;
-import vendingmachine.model.drink.Drinks;
-import vendingmachine.util.ErrorMessage;
-
 public class ChoiceDrink {
+    private final String choiceDrinkName;
 
-    private final Drink choiceDrink;
+    public ChoiceDrink(String drink) {
+        this.choiceDrinkName = drink;
+    }
 
-    public ChoiceDrink(String buyDrink, Drinks drinks) {
-        choiceDrink = drinks.findByDrinkName(buyDrink);
-
-        if (!choiceDrink.hasQuantity()) {
-            throw new IllegalArgumentException(ErrorMessage.CHOICE_DRINK_EMPTY_ERROR);
-        }
+    public String getName() {
+        return choiceDrinkName;
     }
 }
