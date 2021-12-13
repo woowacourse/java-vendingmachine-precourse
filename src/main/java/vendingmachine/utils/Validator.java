@@ -61,10 +61,11 @@ public class Validator {
 		}
 	}
 
-	public static void validateItemSize(ArrayList<String[]> itemInput) throws IllegalArgumentException {
-		if (itemInput.isEmpty()) {
-			throw new IllegalArgumentException(
-				Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+	public static void validateItemSize(String itemInput, char delimiter) throws IllegalArgumentException {
+		validateEmptyStr(itemInput);
+		int totalSemiColon = (int)itemInput.chars().filter(c -> c == delimiter).count();
+		if (itemInput.split(String.valueOf(delimiter)).length != totalSemiColon - 1) {
+			throw new IllegalArgumentException(Messages.ERROR_NOT_VALID_ITEM_SIZE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
