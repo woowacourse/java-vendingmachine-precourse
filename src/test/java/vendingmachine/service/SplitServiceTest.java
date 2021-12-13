@@ -17,9 +17,9 @@ class SplitServiceTest {
 	@Test
 	@DisplayName("여러개의 상품을 구분한다")
 	public void testProductLineSplit() {
-	    // given
+		// given
 		String input = "[콜라,1500,20];[사이다,1000,10]";
-	    // when
+		// when
 		List<ProductCandidate> productCandidates = splitService.splitProducts(input);
 		// then
 		assertEquals(2, productCandidates.size());
@@ -43,4 +43,21 @@ class SplitServiceTest {
 		assertThrows(IllegalArgumentException.class, () -> splitService.splitProducts(input));
 	}
 
+	@Test
+	@DisplayName("여는 대괄호가 존재하지 않으면 에러를 던진다.")
+	public void testProductLineSplitWithoutOpeningBracket() {
+		// given
+		String input = "콜라,1500,20];[사이다,1000,10]";
+		// then
+		assertThrows(IllegalArgumentException.class, () -> splitService.splitProducts(input));
+	}
+
+	@Test
+	@DisplayName("닫는 대괄호가 존재하지 않으면 에러를 던진다.")
+	public void testProductLineSplitWithoutClosingBracket() {
+		// given
+		String input = "[콜라,1500,20;[사이다,1000,10]";
+		// then
+		assertThrows(IllegalArgumentException.class, () -> splitService.splitProducts(input));
+	}
 }

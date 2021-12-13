@@ -7,7 +7,7 @@ import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberI
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
-class ApplicationTest extends NsTest {
+class ApplicationTest extends NsTest implements Rollback {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test

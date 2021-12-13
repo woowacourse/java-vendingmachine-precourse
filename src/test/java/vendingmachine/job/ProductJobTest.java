@@ -6,9 +6,10 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.ConsoleTest;
+import vendingmachine.Rollback;
 import vendingmachine.config.JobConfig;
 
-class ProductJobTest extends ConsoleTest {
+class ProductJobTest extends ConsoleTest implements Rollback {
 	@Test
 	@DisplayName("문자열을 입력받아 상품을 초기화한다.")
 	public void testAdminInitialize() {
