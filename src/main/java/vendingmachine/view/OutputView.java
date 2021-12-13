@@ -22,4 +22,8 @@ public class OutputView {
 		System.out.println(OUTPUT_HOLDING_COINS);
 		System.out.println(coins.toString());
 	}
+
+	public static void printExceptionMessage(String message) {
+		System.out.println(message);
+	}
 }

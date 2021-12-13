@@ -26,6 +26,7 @@ public class VendingMachineController {
 		try {
 			MoneyValidator.validate(inputAmountMoney);
 		} catch (IllegalArgumentException exception) {
+			OutputView.printExceptionMessage(exception.getMessage());
 			initCoins();
 		}
 		coins = new Coins(Integer.parseInt(inputAmountMoney));
