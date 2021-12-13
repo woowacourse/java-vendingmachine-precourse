@@ -19,8 +19,7 @@ public enum ErrorMessage {
 
     // 상품 구매
     NOT_FOUND_PRODUCT(new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다.")),
-    IMPOSSIBLE_BUY_PRODUCT(new IllegalArgumentException("[ERROR] 해당 상품이 모두 소진되었습니다.")),
-    ;
+    IMPOSSIBLE_BUY_PRODUCT(new IllegalArgumentException("[ERROR] 해당 상품이 모두 소진되었습니다."));
 
     private final RuntimeException exception;
 

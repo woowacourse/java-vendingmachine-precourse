@@ -61,6 +61,6 @@ public class Product {
     }
 
     public boolean isPossibleBuyProduct(int holdingAmount) {
-        return isExistedProduct() && price <= holdingAmount;
+        return this.quantity > EMPTY_QUANTITY && price <= holdingAmount;
     }
 }

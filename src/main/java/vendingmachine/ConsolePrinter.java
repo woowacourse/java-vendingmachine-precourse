@@ -8,7 +8,7 @@ public class ConsolePrinter {
     public static void printCoins(Map<Coin, Integer> coinMap, Message headMessage) {
         System.out.println(headMessage.getMessage());
         for (Coin coin : coinMap.keySet()) {
-            System.out.println(coin.getAmount() + "원 - " + coinMap.get(coin));
+            System.out.println(coin.getAmount() + "원 - " + coinMap.get(coin) + "개");
         }
     }
 

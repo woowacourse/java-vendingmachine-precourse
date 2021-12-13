@@ -1,8 +1,6 @@
 package vendingmachine;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,7 +31,9 @@ public class VendingMachine {
 
     public boolean isCheckedStockByProduct(int holdingAmount) {
         for (Product product : products) {
-            return product.isPossibleBuyProduct(holdingAmount);
+            if (product.isPossibleBuyProduct(holdingAmount)) {
+                return true;
+            }
         }
         return false;
     }
