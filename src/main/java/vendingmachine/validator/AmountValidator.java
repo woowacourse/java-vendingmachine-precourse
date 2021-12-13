@@ -19,14 +19,6 @@ public class AmountValidator {
 		checkAmountDivisibleBySmallestCoinAmount(productAmount);
 	}
 
-	public static int toInteger(String amount) {
-		try {
-			return Integer.parseInt(amount);
-		} catch (IllegalArgumentException exception) {
-			throw new IllegalArgumentException(INPUT_IS_NOT_INTEGER_ERROR_MESSAGE);
-		}
-	}
-
 	private static void checkAmountBiggerThanCertainCoinAmount(int certainCoinAmount, int amount) {
 		if (certainCoinAmount > amount) {
 			throw new IllegalArgumentException(String.format(LESS_THAN_CERTAIN_COIN_ERROR, certainCoinAmount));
