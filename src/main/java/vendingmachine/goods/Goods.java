@@ -14,4 +14,8 @@ public class Goods {
     public void reduceQuantity() {
         this.quantity--;
     }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
 }
