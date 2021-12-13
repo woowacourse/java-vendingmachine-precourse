@@ -1,15 +1,13 @@
 package vendingmachine.model;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class VendingMachine {
 
 	Wallet wallet;
-	List<Product> productList = new LinkedList<>();
+	ProductList productList;
 
 	public VendingMachine() {
 		wallet = new Wallet();
+		productList = new ProductList();
 	}
 
 }

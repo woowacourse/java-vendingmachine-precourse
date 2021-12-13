@@ -8,6 +8,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.validation.WalletValidation;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class Wallet {
 
@@ -16,8 +17,7 @@ public class Wallet {
 	public Wallet() {
 		setDefaultWallet();
 		setWallet();
-
-		wallet.forEach((coin, integer) -> System.out.println("coin = " + coin +" : "+ integer));
+		OutputView.containCoins(this);
 	}
 
 	private void setDefaultWallet() {
@@ -53,5 +53,9 @@ public class Wallet {
 
 	private int reduceMoney(int money ,Coin coin) {
 		return money - coin.getAmount();
+	}
+
+	public Map<Coin, Integer> getWallet() {
+		return wallet;
 	}
 }
