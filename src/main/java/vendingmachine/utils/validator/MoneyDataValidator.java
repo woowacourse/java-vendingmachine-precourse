@@ -1,6 +1,6 @@
 package vendingmachine.utils.validator;
 
-import vendingmachine.utils.ItemErrorMessage;
+import vendingmachine.utils.message.ItemErrorMessage;
 
 import java.util.regex.Pattern;
 
