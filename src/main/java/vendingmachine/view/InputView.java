@@ -30,8 +30,9 @@ public class InputView {
     public static Menu getMenuInput() {
         try {
             System.out.println(REQUEST_MENU_INPUT);
-            String[] merchandiseInfos = Console.readLine().split(SEMICOLON);
-            validateMenuInputFormat(merchandiseInfos);
+            String menuInput = Console.readLine();
+            validateMenuInputFormat(menuInput);
+            String[] merchandiseInfos = menuInput.split(SEMICOLON);
 
             List<Merchandise> merchandiseList = new ArrayList<>();
             for (String merchandiseInfo : merchandiseInfos) {

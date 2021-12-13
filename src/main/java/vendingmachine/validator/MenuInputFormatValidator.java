@@ -10,10 +10,14 @@ import java.util.Set;
 
 public class MenuInputFormatValidator {
 
-    public static void validateMenuInputFormat(String[] merchandiseInfos) {
+    public static void validateMenuInputFormat(String menuInput) {
+        validateNoSurroundingSemicolons(menuInput);
+        String[] merchandiseInfos = menuInput.split(SEMICOLON);
+
         for (String merchandiseInfo : merchandiseInfos) {
             validateMerchandiseInfoFormat(merchandiseInfo);
         }
+
         validateNoDuplicateMerchandiseNames(merchandiseInfos);
     }
 
@@ -25,6 +29,12 @@ public class MenuInputFormatValidator {
         validateNameLength(infoList[NAME_IDX]);
         validatePriceInput(infoList[PRICE_IDX]);
         validateMerchandiseNumberInput(infoList[NUMBER_IDX]);
+    }
+
+    private static void validateNoSurroundingSemicolons(String menuInput) {
+        if (menuInput.startsWith(SEMICOLON) || menuInput.endsWith(SEMICOLON)) {
+            throw new IllegalArgumentException(SURROUNDED_BY_SEMICOLONS_EXCEPTION);
+        }
     }
 
     private static void validateNotBlankInput(String merchandiseInfo) {
