@@ -5,8 +5,10 @@ import vendingmachine.model.validator.MoneyValidator;
 
 public class MoneyReceiver {
 
+	public static final String INIT_VALUE_OF_MONEY = "init";
+
 	public int receive() {
-		String input = "init";
+		String input = INIT_VALUE_OF_MONEY;
 
 		boolean rewindSwitch = true;
 		while (rewindSwitch) {
