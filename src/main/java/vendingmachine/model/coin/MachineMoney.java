@@ -27,9 +27,9 @@ public class MachineMoney {
         Map<Integer, Integer> coins = toMap();
         int money = this.money;
 
-        while (money != 0) {
+        while (money != Constant.EMPTY) {
             int pickedCoin = Coin.createRandomCoin();
-            if (money - pickedCoin < 0)
+            if (money - pickedCoin < Constant.EMPTY)
                 continue;
             money -= pickedCoin;
             coins.put(pickedCoin, coins.get(pickedCoin) + Constant.COIN_STACK_UP_VOLUME);

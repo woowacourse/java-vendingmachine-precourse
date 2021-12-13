@@ -1,5 +1,7 @@
 package vendingmachine.model.coin;
 
+import vendingmachine.util.Constant;
+
 public class CoinType {
     private final Coin type;
     private int amount;
@@ -23,6 +25,6 @@ public class CoinType {
 
     @Override
     public String toString() {
-        return String.format("%d원 - %d개", type, amount);
+        return String.format(Constant.COIN_TYPE_FORMAT, type, amount);
     }
 }
