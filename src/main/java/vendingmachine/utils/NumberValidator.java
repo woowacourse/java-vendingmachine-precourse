@@ -13,4 +13,8 @@ public class NumberValidator {
     public static boolean checkDivideTen(String value) {
         return Integer.parseInt(value) % 10 == 0;
     }
+
+    public static boolean validateZeroNumber(String price) {
+        return !(price.length() == 1 && (int) price.charAt(0) == (int) '0');
+    }
 }
