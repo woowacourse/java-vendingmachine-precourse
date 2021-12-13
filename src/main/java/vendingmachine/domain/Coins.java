@@ -21,7 +21,9 @@ public class Coins {
 		while (tempMoneyInMachine != 0){
 			int randomAmount = getRandomAmount(tempMoneyInMachine);
 			tempMoneyInMachine -= randomAmount;
-			increaseCoin(randomAmount);
+			if (randomAmount != 0) {
+				increaseCoin(randomAmount);
+			}
 		}
 	}
 

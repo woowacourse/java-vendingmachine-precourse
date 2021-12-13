@@ -25,7 +25,7 @@ public enum Coin {
         return Arrays.stream(coins)
             .filter(coin -> coin.getAmount() == amount)
             .findFirst()
-            .get();
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     public static List<Integer> amountList() {
