@@ -20,7 +20,7 @@ public class ConsoleProductJob implements ProductJob {
 
 	private void tryExecute() {
 		try {
-			controller.generateProductLine(viewManager.input());
+			controller.generateProducts(viewManager.input());
 		} catch (IllegalArgumentException exception) {
 			viewManager.error(exception.getMessage());
 			tryExecute();
