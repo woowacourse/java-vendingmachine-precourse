@@ -7,6 +7,7 @@ import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
 import vendingmachine.domain.vendingMachine.Amount;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -19,11 +20,11 @@ public class VendingMachine {
     }
 
     private void setAmount() {
-        amount = new Amount(Integer.parseInt(InputView.getUserInput()));
+        amount = new Amount(Integer.parseInt(InputView.getVendingmachineAmount()));
     }
 
     private void setProduct() {
-        String productForm = InputView.getUserInput();
+        String productForm = InputView.getProducts();
         String[] productInformations = productForm.split(";");
         for (String productInformation : productInformations) {
             String[] product = productInformation.replaceAll("[\\[\\]]", "").split(",");
@@ -32,35 +33,23 @@ public class VendingMachine {
     }
 
     private void setUserMoney() {
-        userMoney = new UserMoney(Integer.parseInt(InputView.getUserInput()));
-    }
-
-    public void printUserMoney() {
-        System.out.println("투입금액 = " + userMoney.getMoney() + " 원");
+        userMoney = new UserMoney(Integer.parseInt(InputView.getUserMoney()));
     }
 
     public void inputUserMoney() {
-        System.out.println("투입 금액을 입력해 주세요.");
         setUserMoney();
-        printUserMoney();
+        OutputView.printUserMoney(userMoney);
     }
 
     public void inputProducts() {
-        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         setProduct();
-        products.print();
+        OutputView.printProducts(products);
     }
 
     public void inputAmount() {
-        System.out.println("금액을 입력하시오");
         setAmount();
         CoinGenerator coinGenerator = new CoinGenerator();
         List<Integer> coinCombination = coinGenerator.generate(amount.getAmount());
-        AtomicInteger index = new AtomicInteger();
-        Coin.stream()
-            .forEach(coin -> {
-                System.out.println(coin.toString() + " - " + coinCombination.get(index.get()) + "개");
-                index.addAndGet(1);
-            });
+        OutputView.printCoinCount(coinCombination);
     }
 }
