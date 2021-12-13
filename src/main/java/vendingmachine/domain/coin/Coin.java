@@ -25,16 +25,16 @@ public enum Coin {
 	}
 
 	public static int getSmallestCoinAmount() {
-		List<Integer> allCointAmount = getAllCoinAmount();
-		return allCointAmount.get(allCointAmount.size() - 1);
+		List<Integer> allCoinAmount = getAllCoinAmount();
+		return allCoinAmount.get(allCoinAmount.size() - 1);
 	}
 
 	public static int getSecondBiggestCoinAmount() {
-		List<Integer> allCointAmount = getAllCoinAmount();
-		return allCointAmount.get(1);
+		List<Integer> allCoinAmount = getAllCoinAmount();
+		return allCoinAmount.get(1);
 	}
 
-	public static List<Integer> getAllCoinAmount() {
+	private static List<Integer> getAllCoinAmount() {
 		return Arrays.stream(Coin.values())
 			.map(coin -> coin.amount)
 			.sorted(Comparator.reverseOrder())
