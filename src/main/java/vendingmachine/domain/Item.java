@@ -22,9 +22,8 @@ public class Item {
 	private static final String MENTION = "상품 %s의 %s이 ";
 	private static final String NON_DIGIT_ERROR = ERROR + MENTION + "숫자여야 합니다.";
 	private static final String NOT_DIVISIBLE_BY_TEN_ERROR = ERROR + MENTION + TEN + "으로 나누어 떨어져야 합니다.";
-	private static final String INVALID_RANGE_ERROR = ERROR + MENTION + COST_LOWER_BOUND + " 이상이여야 합니다.";
-	private static final String INVALID_AMOUNT_RANGE_ERROR = ERROR + MENTION + AMOUNT_LOWER_BOUND + " 이상이여야 합니다.";
-
+	private static final String INVALID_COST_CONDITION_ERROR = ERROR + COST + "이" + COST_LOWER_BOUND + " 이상이면서 "
+		+ TEN + "으로 나누어 떨어져야 합니다.";
 	private final String name;
 	private final int cost;
 	private int amount;
@@ -32,17 +31,25 @@ public class Item {
 	public Item(final List<String> detailContainer) {
 		checkLength(detailContainer);
 		this.name = detailContainer.get(NAME_INDEX);
-		this.cost = isNumber(detailContainer.get(COST_INDEX), COST);
-		validateCost(cost);
-		this.amount = isNumber(detailContainer.get(AMOUNT_INDEX), AMOUNT);
-		validateAmount(amount);
-
+		this.cost = isValid(detailContainer.get(COST_INDEX), COST);
+		this.amount = isValid(detailContainer.get(AMOUNT_INDEX), AMOUNT);
 	}
 
 	private void checkLength(final List<String> detailContainer) {
 		if (detailContainer.size() != NUMBER_OF_TYPE) {
 			throw new IllegalArgumentException(INVALID_NUMBER_OF_TYPE_ERROR);
 		}
+	}
+
+	private int isValid(final String value, final String type) {
+		int digit = isNumber(value, type);
+		if (type.equals(COST)){
+			validateCost(digit);
+		}
+		if (type.equals(AMOUNT)){
+			validateAmount(digit);
+		}
+		return digit;
 	}
 
 	private int isNumber(final String value, final String type) {
