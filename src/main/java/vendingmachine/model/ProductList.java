@@ -11,7 +11,7 @@ import vendingmachine.view.InputView;
 
 public class ProductList {
 
-	List<Product> productList;
+	private List<Product> productList;
 
 	public ProductList() {
 		setProductList();

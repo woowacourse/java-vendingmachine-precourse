@@ -5,8 +5,8 @@ import vendingmachine.model.VendingMachine;
 
 public class VendingMachineController {
 
-	VendingMachine vendingMachine;
-	User user;
+	private final VendingMachine vendingMachine;
+	private final User user;
 
 	public VendingMachineController(VendingMachine vendingMachine, User user) {
 		this.vendingMachine = vendingMachine;

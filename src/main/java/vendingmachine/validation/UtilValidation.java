@@ -1,6 +1,5 @@
 package vendingmachine.validation;
 
-import vendingmachine.constant.Constants;
 import vendingmachine.model.Coin;
 
 public class UtilValidation {

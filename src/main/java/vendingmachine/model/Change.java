@@ -6,9 +6,9 @@ import java.util.Map;
 
 public class Change {
 
-	Wallet wallet;
-	int remainBalance;
-	Map<Coin, Integer> change = new LinkedHashMap<>();
+	private final Wallet wallet;
+	private int remainBalance;
+	private final Map<Coin, Integer> change = new LinkedHashMap<>();
 
 	public Change(Wallet wallet, int remainBalance) {
 		this.wallet = wallet;

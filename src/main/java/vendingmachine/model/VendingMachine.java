@@ -9,8 +9,8 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 
-	Wallet wallet;
-	ProductList productList;
+	private final Wallet wallet;
+	private final ProductList productList;
 
 	public VendingMachine() {
 		wallet = new Wallet();
