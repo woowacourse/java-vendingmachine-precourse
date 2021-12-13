@@ -11,6 +11,8 @@ public class ProcessConstant {
     public static final String COIN_100 = "100원 - ";
     public static final String COIN_50 = "50원 - ";
     public static final String COIN_10 = "10원 - ";
+    public static final String COINS[] = {COIN_500, COIN_100, COIN_50, COIN_10};
+    public static final String UNIT = "개";
 
     public static final String ASK_GOODS = "상품명과 가격, 수량을 입력해 주세요.";
     public static final String ASK_USER_MONEY = "투입 금액을 입력해 주세요.";
