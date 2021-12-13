@@ -5,16 +5,19 @@ import vendingmachine.utils.moneychecker.BalanceInputChecker;
 import vendingmachine.utils.productchecker.InputChecker;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
 public class MachineStock {
     private static final String PRODUCT_NAME_REQUEST = "구매할 상품명을 입력해 주세요.";
+    private int cheapestPrice;
     private HashMap<Product, Integer> productStockMap;  // key: Product, value: 재고 수량
     private HashMap<String, Product> productListMap;    // key: Product name, value: Product
 
     void MachineStock(){
         productStockMap = InputChecker.getProductStockHashMap();
         productListMap = makeProductList( productStockMap.keySet());
+        setCheapestPrice();
     }
 
     private HashMap<String, Product> makeProductList(Set<Product> productsSet){
@@ -25,6 +28,47 @@ public class MachineStock {
         }
 
         return productListMap;
+    }
+
+    void takeOutSelectedProduct(Product product){
+        int changedStock = productStockMap.get(product);
+        productStockMap.replace(product, changedStock - 1 );
+
+        if(changedStock == 0 && product.getPrice() <= cheapestPrice){
+            setCheapestPrice();
+        }
+
+    }
+
+    private void setCheapestPrice(){
+        cheapestPrice = Integer.MAX_VALUE;
+
+        for(Map.Entry<Product, Integer> entry : productStockMap.entrySet()){
+
+            if(entry.getValue() != 0){
+                cheapestPrice = Math.min(cheapestPrice, entry.getKey().getPrice());
+            }
+
+        }
+
+    }
+
+    boolean checkIsOutOfAllStock(){
+        boolean isOutOfAllStock = true;
+
+        for(Map.Entry<Product, Integer> entry : productStockMap.entrySet()){
+
+            if(entry.getValue() != 0){
+                isOutOfAllStock =false;
+            }
+
+        }
+
+        return isOutOfAllStock;
+    }
+
+    int getCheapestPrice(){
+        return cheapestPrice;
     }
 
     Product getSelectedProduct(){
