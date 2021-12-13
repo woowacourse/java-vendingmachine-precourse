@@ -8,8 +8,12 @@ import vendingmachine.view.InputMoneyView;
 public class InputMoneyController {
 	public void inputVendingMachineMoney() {
 		InputMoneyView.messageInputMoney();
-		String inputMoney = inputUntilValid();
-		InputMoneyModel.saveMoney(inputMoney);
+		InputMoneyModel.saveMoney(inputUntilValid());
+	}
+
+	public void inputUserMoney() {
+		InputMoneyView.messageInputUserMoney();
+		InputMoneyModel.saveUserMoney(inputUntilValid());
 	}
 
 	private String inputUntilValid() {

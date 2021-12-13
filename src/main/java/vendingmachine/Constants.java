@@ -19,4 +19,5 @@ public class Constants {
 	public static final String ERROR_STRING = ERROR + " 잘못된 문자열을 입력하셨습니다.";
 	public static final String ERROR_PRODUCTS = ERROR + " 잘못된 상품 정보를 입력하셨습니다.";
 	public static final String ERROR_INPUT_MONEY = ERROR + " 잘못된 금액을 입력하셨습니다.";
+	public static final String MESSAGE_INPUT_USER_MONEY = "\n투입 금액을 입력해 주세요.";
 }

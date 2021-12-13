@@ -27,6 +27,7 @@ public enum Coin {
 		return findCoinByAmount(coinAmount);
 	}
 
+	@Override
 	public String toString() {
 		return String.valueOf(amount);
 	}

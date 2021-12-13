@@ -6,8 +6,10 @@ import vendingmachine.controller.ProductController;
 
 public class Application {
     public static void main(String[] args) {
-        new InputMoneyController().inputVendingMachineMoney();
+        InputMoneyController inputMoneyController = new InputMoneyController();
+        inputMoneyController.inputVendingMachineMoney();
         new CoinController().makeChangeCoins();
         new ProductController().inputProduct();
+        inputMoneyController.inputUserMoney();
     }
 }
