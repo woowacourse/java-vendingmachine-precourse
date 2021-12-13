@@ -5,7 +5,7 @@ import utils.validator.isAmount;
 public class Amount {
 	private int amount;
 
-	Amount(int amount) {
+	public Amount(int amount) {
 		String amountStr = Integer.toString(amount);
 		StringBuilder amountSB = new StringBuilder(amountStr);
 		new isAmount().run(amountSB);
