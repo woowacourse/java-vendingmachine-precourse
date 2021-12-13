@@ -73,7 +73,7 @@ public class StringFormatValidator {
         }
 
         if (merchandiseNames.size() > merchandiseNameSet.size()) {
-            throw new IllegalArgumentException(NO_DUPLICATE_MERCHANDISE_NAMES_EXCEPTION);
+            throw new IllegalArgumentException(DUPLICATE_MERCHANDISE_NAMES_EXCEPTION);
         }
     }
 }
