@@ -10,6 +10,7 @@ import vendingmachine.validator.NumberValidator;
 public class Input {
 	static final String MSG_GET_MONEY_IN_MACHINE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	static final String MSG_GET_INPUT_MONEY = "투입 금액을 입력해 주세요.";
+	static final String MSG_GET_PRODUCT_NAME = "구매할 상품명을 입력해 주세요.";
 
 	public static int moneyInMachine() {
 		System.out.println(MSG_GET_MONEY_IN_MACHINE);
@@ -31,5 +32,11 @@ public class Input {
 		String inputMoney = Console.readLine();
 		NumberValidator.isInteger(inputMoney);
 		return Integer.parseInt(inputMoney);
+	}
+
+	public static String buyingProductName() {
+		System.out.println(MSG_GET_PRODUCT_NAME);
+		String productName = Console.readLine();
+		return productName.trim();
 	}
 }
