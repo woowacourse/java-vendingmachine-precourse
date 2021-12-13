@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Utils {
     public static void MachineOn() {
@@ -40,12 +41,20 @@ public class Utils {
         int money = PrintUI.InputMoney();
         while (true) {
             String juiceName = PrintUI.Ordering(money);
+            money -= OrderCheck(juiceIndex,juiceName);
             if (money < minPrice) {
                 break;
             }
         }
-
     }
 
+    public static int OrderCheck(ArrayList<Juice> juiceIndex, String orderJuice) {
+        for (Juice juice : juiceIndex) {
+            if (Objects.equals(juice.getName(), orderJuice)) {
+                return juice.getPrice();
+            }
+        }
+        return 0;
+    }
 
 }

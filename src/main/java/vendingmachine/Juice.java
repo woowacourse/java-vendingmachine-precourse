@@ -15,4 +15,11 @@ public class Juice {
         return price;
     }
 
+    public int getNumberOfCan() {
+        return numberOfCan;
+    }
+
+    public String getName() {
+        return name;
+    }
 }
