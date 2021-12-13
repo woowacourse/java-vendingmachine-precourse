@@ -19,7 +19,7 @@ public class VendingMachineController {
 	}
 
 	public void run() {
-		while (products.hasNotProductsCount() &&
+		while (!products.hasNotProductsCount() &&
 			products.canBuyCurrentAmount(vendingMachine.getCurrentAmount())) {
 			OutputView.printCurrentMoney(vendingMachine.getCurrentAmount());
 			products.buyProduct(InputView.inputBuyProduct(), vendingMachine);

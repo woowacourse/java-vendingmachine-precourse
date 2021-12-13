@@ -35,7 +35,7 @@ public class Products {
 			.filter(product -> !product.isSoldOut())
 			.map(Product::getPrice)
 			.min(Integer::compareTo)
-			.orElse(0) >= currentAmount;
+			.orElse(0) <= currentAmount;
 	}
 
 	private Product findByProductName(String productName) {
