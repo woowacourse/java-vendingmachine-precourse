@@ -1,11 +1,13 @@
 package vendingmachine;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
-	
+	public static String MachineCashInput() {
+		System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+		String MachineCashInput = Console.readLine();
+		return MachineCashInput;
+	}
 	
 	public static String goodsInput() {
     	System.out.println("상품명과 가격, 수량을 입력해 주세요.");
@@ -16,23 +18,22 @@ public class Input {
 		
 	}
 	
-	public static ArrayList<Beverage> beverage(String goodsInput){
-		isSemicolon(goodsInput);
-		String[] goodsList = goodsInput.split(";");
-		ArrayList<Beverage> Beverages =new ArrayList<>();
-		for(String beverageString : goodsList) {
-			Beverages.add(new Beverage(beverageString));
-		}
-		
-		return Beverages;
-		 
+	public static String cashInput() {
+    	System.out.println("투입 금액을 입력해 주세요.");
+    	String cashInput = Console.readLine();
+    	return cashInput;
 	}
 
-	private static void isSemicolon(String goodsInput) {
-		if(!goodsInput.matches("[;]")) {
-			throw new IllegalArgumentException("옳바른 입력값이 아닙니다.");
-		}
+	
+	public static String buyGoodsInput() {
+    	System.out.println("구매할 상품명을 입력해 주세요.");
+    	String buyGoodsInput =  Console.readLine();
+		return buyGoodsInput;
 	}
+	
+	
+	
+
 
 	
 }
