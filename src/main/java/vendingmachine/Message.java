@@ -33,4 +33,12 @@ public class Message {
     public void printLackOfChanges() {
         System.out.println("잔돈");
     }
+
+    public void printInputProductName() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+    }
+
+    public void printInputCorrectProductName() {
+        System.out.println("[ERROR] 자판기에 존재하는 하나의 상품을 입력해 주세요.");
+    }
 }

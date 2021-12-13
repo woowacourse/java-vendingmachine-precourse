@@ -14,4 +14,11 @@ public class Product {
     public int getPrice() {
         return price;
     }
+
+    public boolean isInclude(String input) {
+        if (input.contains(name)) {
+            return true;
+        }
+        return false;
+    }
 }

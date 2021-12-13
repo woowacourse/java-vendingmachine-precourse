@@ -15,15 +15,18 @@ public class Application {
         String[] productsList = user.inputProducts();
         products.addProducts(productsList);
 
+        message.printInputAmount();
+        int amount = user.inputAmount();
+        Change change = new Change(amount);
+
         while (true) {
-            message.printInputAmount();
-            int amount = user.inputAmount();
-            Change change = new Change(amount);
             message.printChanges(change.getAmount());
             if (change.getAmount() < products.getMaxPrice()) {
                 message.printLackOfChanges();
                 break;
             }
+            message.printInputProductName();
+            String productName = user.inputProductName();
         }
 
     }

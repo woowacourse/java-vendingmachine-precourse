@@ -2,6 +2,7 @@ package vendingmachine;
 
 public class Validation {
     private Message message = new Message();
+    private Products products = new Products();
 
     public boolean isValidateNumber(String input) {
         try {
@@ -107,6 +108,16 @@ public class Validation {
             isWholeNumbers(input);
         } catch (IllegalArgumentException e) {
             message.printInputCorrectNumber();
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isValidateProductName(String input) {
+        try {
+            products.isSingleProductName(input);
+        } catch (IllegalArgumentException e) {
+            message.printInputCorrectProductName();
             return false;
         }
         return true;
