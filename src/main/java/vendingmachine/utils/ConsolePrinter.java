@@ -13,6 +13,7 @@ public class ConsolePrinter {
     private static final String CHANGE_DELIMITER = " - ";
     private static final String CHANGE_HEADER = "잔돈";
     private static final String HOLDING_AMOUNT_HEADER = "보유금액";
+    private static final String INPUT_AMOUNT_PREFIX = "투입금액 : ";
     private static final String COIN_COUNT_SUFFIX = "개";
     private static final String LINE_BREAK = "\n";
     private static final int NO_COIN = 0;
@@ -36,6 +37,11 @@ public class ConsolePrinter {
         printStream.println(Arrays.stream(Coin.values())
             .map(coin -> parseCoinCount(coin, cashHolder.getHoldingCoinCount(coin)))
             .collect(Collectors.joining(LINE_BREAK)));
+    }
+
+    public void printInputAmount(InputAmount inputAmount) {
+        printStream.println(String.join("",
+            INPUT_AMOUNT_PREFIX, String.valueOf(inputAmount.getAmount())));
     }
 
     private String parseCoinCount(Coin coin, int count) {
