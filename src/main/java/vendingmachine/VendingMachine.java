@@ -14,6 +14,7 @@ public class VendingMachine {
 
 	HashMap<Coin, Integer> coins = new HashMap<>();
 	List<Item> items = new ArrayList<>();
+	int userAmount;
 
 	public VendingMachine() {
 		int amount = getInputAmount();
@@ -22,6 +23,10 @@ public class VendingMachine {
 
 		String inputItem = getInputItem();
 		setItems(inputItem);
+
+		getInputUserAmount();
+
+		outputView.printUserAmount(userAmount);
 	}
 
 	private int getInputAmount() {
@@ -53,5 +58,13 @@ public class VendingMachine {
 		for (String itemString : itemStrings) {
 			items.add(new Item(itemString));
 		}
+	}
+
+	private void getInputUserAmount() {
+		String inputUserAmount;
+		do {
+			inputUserAmount = inputView.getInputUserAmount();
+		} while (!InputUserAmountValidator.isValidated(inputUserAmount));
+		userAmount = Integer.parseInt(inputUserAmount);
 	}
 }
