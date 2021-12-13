@@ -2,14 +2,18 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Coins {
-    private final Map<Coin, Integer> coins = new HashMap<>();
+    private final Map<Coin, Integer> coins = new LinkedHashMap<>();
 
     public Coins(int money) {
         makeCoinsByMoney(money);
+    }
+
+    public Map<Coin, Integer> getCoins() {
+        return coins;
     }
 
     private void makeCoinsByMoney(int money) {
