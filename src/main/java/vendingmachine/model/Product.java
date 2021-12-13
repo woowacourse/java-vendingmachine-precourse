@@ -16,4 +16,17 @@ public class Product {
 		product.amount = Integer.parseInt(productInfo[2]);
 		return product;
 	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public Product purchaseProduct() {
+		this.amount--;
+		return this;
+	}
 }

@@ -4,9 +4,11 @@ import vendingmachine.model.VendingMachine;
 import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	InputView inputView = new InputView();
+	OutputView outputView = new OutputView();
 	Validator validator = new Validator();
 
 	public void runMachine() {
@@ -30,7 +32,22 @@ public class VendingMachineController {
 		//금액 셋팅
 		vendingMachine.initInputMoney(convertedInsertMoney);
 		//물건 구매하기
+		purchaseProduct(vendingMachine);
 		//자판기 종료시 잔돈 계산하기
+
+	}
+
+	private void purchaseProduct(VendingMachine vendingMachine) {
+		outputView.printInsertMoney(vendingMachine.getInputMoney());
+
+		while (vendingMachine.end()) {
+			String productName = enterBuyingProduct();
+			/**
+			 * 가정 : 구매할 물건이 존재한다(이에 대한 예외처리를 완료했을 때의 로직)
+			 */
+			vendingMachine.purchase(productName);
+			outputView.printInsertMoney(vendingMachine.getInputMoney());
+		}
 	}
 
 	private String enterMachineMoney() {
@@ -58,6 +75,15 @@ public class VendingMachineController {
 			return validator.validateProduct(machineProduct);
 		} catch (IllegalArgumentException error) {
 			return enterMachineProduct();
+		}
+	}
+
+	private String enterBuyingProduct() {
+		String buyingProduct = inputView.enterBuyingProduct();
+		try {
+			return validator.validateBuyingProduct(buyingProduct);
+		} catch (IllegalArgumentException error) {
+			return enterBuyingProduct();
 		}
 	}
 }

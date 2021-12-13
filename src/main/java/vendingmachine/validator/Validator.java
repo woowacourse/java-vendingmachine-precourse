@@ -18,4 +18,14 @@ public class Validator {
 		// 상품명이 제대로 들어왔는지 검증하는 로직
 		return "";
 	}
+
+	public String validateBuyingProduct(String validateBuyingProduct) {
+		// 구매할 상품이 잘 들어갔는지 검증하는 로직
+		/**
+		 * 잘못 들어온 경우
+		 * 1. 상품 명에 없는 이름
+		 * 2. 이름이 빈칸
+		 */
+		return "";
+	}
 }

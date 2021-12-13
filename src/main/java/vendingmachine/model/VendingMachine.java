@@ -15,6 +15,10 @@ public class VendingMachine {
 	private List<Product> productList;
 	private Map<Coin, Integer> coinIntegerMap;
 
+	public int getInputMoney() {
+		return this.inputMoney;
+	}
+
 	public void initOwnMoney(int ownMoney) {
 		this.ownMoney = ownMoney;
 	}
@@ -37,5 +41,26 @@ public class VendingMachine {
 		this.productList = Arrays.stream(products.split(";"))
 			.map(Product::createProduct)
 			.collect(Collectors.toList());
+	}
+
+	public void purchase(String productName) {
+		Product product = productList.stream()
+			.filter(it -> it.getName().equals(productName))
+			.findFirst()
+			.map(Product::purchaseProduct) //TODO price 0 됐을 때 상품 리스트에서 제거하는거 하기
+			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품 이름입니다."));
+
+		inputMoney -= product.getPrice();
+	}
+
+	public boolean end() {
+		// 자판지 종료 조건
+		/**
+		 * 1. 투입 금액이 없다
+		 * 2. 구매할 상품이 없다
+		 * 3. 구매할 상품보다 투입 금액이 작다
+		 */
+
+		return true;
 	}
 }
