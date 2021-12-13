@@ -10,13 +10,13 @@ public class VendingMachine {
 
 	private static VendingMachine vendingMachine = null;
 
-	Coins coins;
-
 	public int holdingMoney = 0;
 	public int inputMoney = 0;
 	public LinkedHashMap<Coin, Integer> holdingCoins;
 	public LinkedHashMap<Coin, Integer> changeCoins;
 	public ArrayList<Item> holdingItemList;
+
+	Coins coins;
 
 	public VendingMachine vendingMachine() {
 		if (this.vendingMachine == null) {
@@ -103,14 +103,6 @@ public class VendingMachine {
 			}
 		}
 
-	}
-
-	public int getInputMoney() {
-		return inputMoney;
-	}
-
-	public LinkedHashMap<Coin, Integer> getCoins() {
-		return holdingCoins;
 	}
 
 	public String inputMoneyToString() {
