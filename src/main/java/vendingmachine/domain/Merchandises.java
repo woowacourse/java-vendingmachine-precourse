@@ -1,5 +1,8 @@
 package vendingmachine.domain;
 
+import static vendingmachine.domain.Merchandise.*;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,6 +15,16 @@ public class Merchandises {
 	public Merchandises(List<Merchandise> merchandiseList) {
 		Validator.validateDuplicateMerchandise(merchandiseList);
 		this.merchandiseList = merchandiseList;
+	}
+
+	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
+		List<Merchandise> merchandiseList = new ArrayList<>();
+		for (String merchandiseInformation : merchandiseInformations.split(MERCHANDISE_PARSER)) {
+			Validator.validateInputMerchandise(merchandiseInformation);
+			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1).trim();
+			merchandiseList.add(constructMerchandise(merchandise));
+		}
+		return merchandiseList;
 	}
 
 	public List<Merchandise> getMerchandiseList() {

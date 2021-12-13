@@ -1,12 +1,8 @@
 package vendingmachine.controller;
 
-import static vendingmachine.domain.Merchandise.*;
+import static vendingmachine.domain.Merchandises.*;
 import static vendingmachine.domain.VendingMachine.*;
 
-import java.util.LinkedHashMap;
-
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.Merchandise;
 import vendingmachine.domain.Merchandises;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.User;

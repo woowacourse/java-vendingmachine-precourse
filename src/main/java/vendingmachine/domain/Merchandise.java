@@ -33,16 +33,6 @@ public class Merchandise {
 			Integer.parseInt(trimInformation.get(2)));
 	}
 
-	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
-		List<Merchandise> merchandiseList = new ArrayList<>();
-		for (String merchandiseInformation : merchandiseInformations.split(MERCHANDISE_PARSER)) {
-			Validator.validateInputMerchandise(merchandiseInformation);
-			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1).trim();
-			merchandiseList.add(constructMerchandise(merchandise));
-		}
-		return merchandiseList;
-	}
-
 	public int getMerchandiseMoney() {
 		return money.getMoney();
 	}
