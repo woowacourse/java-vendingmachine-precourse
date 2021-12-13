@@ -4,17 +4,17 @@ public class InputMoneyValidator {
 	private static final int ERROR_CODE = -1;
 	private static final int DIVISOR_10 = 10;
 
-	public static void validIsDivisibleBy10(int amount) throws IllegalArgumentException {
+	public static void validateIsDivisibleBy10(int amount) throws IllegalArgumentException {
 		if (amount % DIVISOR_10 != 0) {
 			throw new IllegalArgumentException(ErrorMsgConst.NOT_DIVISIBLE_BY_10_ERROR_MSG);
 		}
 	}
 
-	public int validMachineMoney(String inputAmount) {
+	public int validateMoney(String inputAmount) {
 		try {
 			int amount = transferToInt(inputAmount);
-			validRange(amount);
-			validIsDivisibleBy10(amount);
+			validateRange(amount);
+			validateIsDivisibleBy10(amount);
 			return amount;
 		} catch (IllegalArgumentException e) {
 			System.out.println(ErrorMsgConst.ERROR_MSG + e.getMessage());
@@ -30,7 +30,7 @@ public class InputMoneyValidator {
 		}
 	}
 
-	private void validRange(int amount) throws IllegalArgumentException {
+	private void validateRange(int amount) throws IllegalArgumentException {
 		if (amount < 0) {
 			throw new IllegalArgumentException(ErrorMsgConst.NEGATIVE_INT_ERROR_MSG);
 		}

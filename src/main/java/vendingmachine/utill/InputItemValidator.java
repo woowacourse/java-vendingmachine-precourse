@@ -13,10 +13,10 @@ public class InputItemValidator {
 
 	List<String> itemNames = new ArrayList<>();
 
-	public boolean validItemList(List<String> itemList) {
+	public boolean validateItemList(List<String> itemList) {
 		for (String item : itemList) {
 			try {
-				validItemInfo(item);
+				validateItemInfo(item);
 			} catch (IllegalArgumentException e) {
 				itemNames.clear();
 				System.out.println(ErrorMsgConst.ERROR_MSG + e.getMessage());
@@ -26,20 +26,20 @@ public class InputItemValidator {
 		return true;
 	}
 
-	private void validItemInfo(String item) throws IllegalArgumentException {
-		validByRegex(item);
+	private void validateItemInfo(String item) throws IllegalArgumentException {
+		validateByRegex(item);
 		String[] itemInfo = item.split(DELIMITER);
-		InputMoneyValidator.validIsDivisibleBy10(Integer.parseInt(itemInfo[ITEM_PRICE_INDEX]));
-		validNameDuplication(itemInfo[ITEM_NAME_INDEX]);
+		InputMoneyValidator.validateIsDivisibleBy10(Integer.parseInt(itemInfo[ITEM_PRICE_INDEX]));
+		validateNameDuplication(itemInfo[ITEM_NAME_INDEX]);
 	}
 
-	private void validByRegex(String item) throws IllegalArgumentException {
+	private void validateByRegex(String item) throws IllegalArgumentException {
 		if (!Pattern.matches(REGEX, item)) {
 			throw new IllegalArgumentException(ErrorMsgConst.ITEM_INPUT_ERROR_MSG);
 		}
 	}
 
-	private void validNameDuplication(String itemName) throws IllegalArgumentException {
+	private void validateNameDuplication(String itemName) throws IllegalArgumentException {
 		if (itemNames.contains(itemName)) {
 			throw new IllegalArgumentException(ErrorMsgConst.ITEM_DUP_ERROR_MSG);
 		}

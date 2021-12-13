@@ -7,20 +7,24 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utill.InputItemValidator;
 import vendingmachine.utill.InputMoneyValidator;
 
-public class InputFromAdmin {
+public class InputFromAdminView {
 	private static final String MACHINE_MONEY_INPUT_MSG = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String ITEM_INPUT_MSG = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String DELIMITER = ";";
 
-	private InputMoneyValidator inputMoneyValidator = new InputMoneyValidator();
-	private InputItemValidator inputItemValidator = new InputItemValidator();
+	private InputMoneyValidator inputMoneyValidator;
+	private InputItemValidator inputItemValidator;
+
+	public InputFromAdminView(InputMoneyValidator inputMoneyValidator, InputItemValidator inputItemValidator) {
+		this.inputMoneyValidator = inputMoneyValidator;
+		this.inputItemValidator = inputItemValidator;
+	}
 
 	public int inputMachineMoney() {
 		System.out.println(MACHINE_MONEY_INPUT_MSG);
 		String inputAmount = Console.readLine();
 
-		int amount = inputMoneyValidator.validMachineMoney(inputAmount);
-
+		int amount = inputMoneyValidator.validateMoney(inputAmount);
 		if (amount >= 0) {
 			return amount;
 		}
@@ -28,11 +32,11 @@ public class InputFromAdmin {
 	}
 
 	public List<String> inputItems() {
-		System.out.println(ITEM_INPUT_MSG);
+		System.out.println("\n" + ITEM_INPUT_MSG);
 		String items = Console.readLine();
 		List<String> itemList = splitInputItems(items);
 
-		if (inputItemValidator.validItemList(itemList)) {
+		if (inputItemValidator.validateItemList(itemList)) {
 			return itemList;
 		}
 		return inputItems();

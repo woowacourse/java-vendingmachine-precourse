@@ -9,7 +9,7 @@ public class OutputView {
 
 	public void displayGeneratedCoin(LinkedHashMap<Integer, Integer> coinCount) {
 		StringBuilder sb = new StringBuilder();
-		sb.append(GENERATED_COIN_MSG);
+		sb.append("\n").append(GENERATED_COIN_MSG);
 
 		coinCount.forEach((coin, count) -> {
 			sb.append("\n").append(coin.toString()).append(COIN_WON_MSG)
