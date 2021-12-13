@@ -6,9 +6,14 @@ public class NumericUtils {
 	private NumericUtils() {
 	}
 
-	public static int parseInt(String str) {
+	public static int parsePositiveInt(String str) {
 		try {
-			return Integer.parseInt(str);
+			int result = Integer.parseInt(str);
+
+			if (result < 0) {
+				throw new IllegalArgumentException(ERROR_NUMBER_IS_NOT_POSITIVE_INT);
+			}
+			return result;
 		} catch (NumberFormatException e) {
 			throw new IllegalArgumentException(ERROR_AMOUNT_IS_NOT_NUMERIC);
 		}
