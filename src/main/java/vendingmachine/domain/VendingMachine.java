@@ -23,6 +23,13 @@ public class VendingMachine {
 		inputMoney = product.minusAmount(inputMoney);
 	}
 
+	public Coins giveChange() {
+		if (!coins.isGreaterThanTotalMoney(inputMoney))	{
+			return coins;
+		}
+		return coins.calculateChange(inputMoney);
+	}
+
 	private void validateBuyingProductName(String buyingProductName) {
 		Product product = products.getProductByName(buyingProductName);
 		if(product.getSmallerPrice(inputMoney) > inputMoney) {

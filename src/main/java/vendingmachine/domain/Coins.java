@@ -7,23 +7,37 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
 	private final Map<Coin, Integer> coins = new TreeMap<>();
-	private int moneyInMachine;
+	private final int totalMoney;
 
-	public Coins(int moneyInMachine) {
+	public Coins(int totalMoney) {
 		for (Coin coin : Coin.values()){
 			coins.put(coin, 0);
 		}
-		this.moneyInMachine = moneyInMachine;
-		makeRandomNumberOfCoins();
+		this.totalMoney = totalMoney;
 	}
 
-	private void makeRandomNumberOfCoins() {
-		int tempMoneyInMachine = moneyInMachine;
+	public void initRandomNumberOfCoins() {
+		int tempMoneyInMachine = totalMoney;
 		while (tempMoneyInMachine != 0){
 			int randomAmount = getRandomAmount(tempMoneyInMachine);
 			tempMoneyInMachine -= randomAmount;
-			plusCoin(randomAmount);
+			increaseCoin(randomAmount);
 		}
+	}
+
+	public Coins calculateChange(int money) {
+		Coins change = new Coins(totalMoney);
+		for(int amount : Coin.amountList()){
+			Coin coin = Coin.getByAmount(amount);
+			int count = Math.min(money/amount, coins.get(coin));
+			change.putCoin(coin, count);
+			money -= amount * count;
+		}
+		return change;
+	}
+
+	public boolean isGreaterThanTotalMoney(int money) {
+		return money > totalMoney;
 	}
 
 	private int getRandomAmount(int tempMoneyInMachine) {
@@ -34,8 +48,12 @@ public class Coins {
 		return 0;
 	}
 
-	private void plusCoin(int randomAmount) {
-		Coin coin = Coin.getByAmount(randomAmount);
+	private void putCoin(Coin coin, int count) {
+		coins.put(coin, count);
+	}
+
+	private void increaseCoin(int amount) {
+		Coin coin = Coin.getByAmount(amount);
 		coins.put(coin, coins.get(coin) + 1);
 	}
 }
