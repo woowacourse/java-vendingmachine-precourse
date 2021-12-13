@@ -1,6 +1,6 @@
 package vendingmachine;
 
-public class Money {
+public class Money implements Comparable<Money> {
 	private int amount;
 
 	private Money(int amount) {
@@ -33,6 +33,11 @@ public class Money {
 
 	public int getMaxCountOfCoin(Money coinAmount) {
 		return this.amount / coinAmount.amount;
+	}
+
+	@Override
+	public int compareTo(Money o) {
+		return amount - o.amount;
 	}
 
 	@Override

@@ -21,8 +21,23 @@ public class Beverages {
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 없는 상품입니다."));
 	}
 
-	public boolean soldOut() {
+	public boolean canSellMore(Money balance) {
+		return isBeverageRemain() && canBuyAnyBeverage(balance);
+	}
+
+	private boolean isBeverageRemain() {
 		return beverages.stream()
-			.allMatch(Beverage::soldOut);
+			.anyMatch(beverage -> !beverage.soldOut());
+	}
+
+	private boolean canBuyAnyBeverage(Money balance) {
+		Beverage beverage = getMinimumPriceBeverage();
+		return beverage.priceCheaperThan(balance);
+	}
+
+	private Beverage getMinimumPriceBeverage() {
+		return beverages.stream()
+			.min(Beverage::compareTo)
+			.get();
 	}
 }

@@ -1,6 +1,6 @@
 package vendingmachine;
 
-public class Beverage {
+public class Beverage implements Comparable<Beverage> {
 	private final String name;
 	private final Money price;
 	private int count;
@@ -21,19 +21,23 @@ public class Beverage {
 		decreaseCount();
 	}
 
+	public boolean priceCheaperThan(Money insertedMoney) {
+		return insertedMoney.isValuableThan(price);
+	}
+
 	private void checkCanSell(Money insertedMoney) {
 		checkSoldOut();
 		checkPrice(insertedMoney);
 	}
 
 	private void checkPrice(Money insertedMoney) {
-		if (isMoneyShort(insertedMoney)) {
+		if (priceExpensiveThan(insertedMoney)) {
 			throw new IllegalArgumentException("[ERROR] 돈이 부족합니다.");
 		}
 	}
 
-	private boolean isMoneyShort(Money insertedMoney) {
-		return !insertedMoney.isValuableThan(price);
+	private boolean priceExpensiveThan(Money insertedMoney) {
+		return !priceCheaperThan(insertedMoney);
 	}
 
 	private void checkSoldOut() {
@@ -52,5 +56,10 @@ public class Beverage {
 
 	public boolean nameEquals(String name) {
 		return this.name.equals(name);
+	}
+
+	@Override
+	public int compareTo(Beverage o) {
+		return price.compareTo(o.price);
 	}
 }

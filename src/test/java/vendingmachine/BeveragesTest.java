@@ -25,6 +25,14 @@ public class BeveragesTest {
 		Beverage cola = new Beverage("콜라", Money.from(1000), 0);
 		Beverages beverages = new Beverages(Arrays.asList(cider, cola));
 
-		assertTrue(beverages.soldOut());
+		assertFalse(beverages.canSellMore(Money.from(1000)));
+	}
+
+	@Test
+	void 남은돈이_최저가_상품보다_적을_때() {
+		Beverage cider = new Beverage("사이다", Money.from(1000), 1);
+		Beverages beverages = new Beverages(Arrays.asList(cider));
+
+		assertFalse(beverages.canSellMore(Money.from(900)));
 	}
 }
