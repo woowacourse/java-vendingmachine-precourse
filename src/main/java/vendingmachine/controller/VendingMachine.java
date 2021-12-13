@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.coin.CoinCombination;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinGenerator;
@@ -13,6 +14,7 @@ import java.util.Map;
 
 public class VendingMachine {
     private Amount amount;
+    private CoinCombination coinCombination;
     private Products products = new Products();
     private UserMoney userMoney;
     public VendingMachine() {
@@ -47,9 +49,8 @@ public class VendingMachine {
 
     public void inputAmount() {
         setAmount();
-        CoinGenerator coinGenerator = new CoinGenerator();
-        Map<Coin, Integer> coinCombination = coinGenerator.
-                generate(amount.getAmount());
+        coinCombination = new CoinCombination();
+        CoinGenerator.calculatePossibleCoinCombination(coinCombination, amount.getAmount());
         OutputView.printCoinCount(coinCombination);
     }
 
@@ -62,11 +63,7 @@ public class VendingMachine {
 
     public void returnChange() {
         if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
-            System.out.println(getUserMoney());
-        }
-    }
 
-    private int getUserMoney() {
-        return userMoney.getMoney();
+        }
     }
 }
