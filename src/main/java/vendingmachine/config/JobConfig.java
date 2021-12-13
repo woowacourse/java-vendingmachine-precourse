@@ -1,6 +1,8 @@
 package vendingmachine.config;
 
+import vendingmachine.job.ChangeBackJob;
 import vendingmachine.job.ChangeSafeJob;
+import vendingmachine.job.ConsoleChangeBackJob;
 import vendingmachine.job.ConsoleChangeSafeJob;
 import vendingmachine.job.ConsoleDepositJob;
 import vendingmachine.job.ConsoleProductJob;
@@ -36,6 +38,13 @@ public class JobConfig {
 		return new ConsolePurchaseJob(
 			ViewManagerConfig.getPurchaseViewManager(),
 			ControllerConfig.getPurchaseController()
+		);
+	}
+
+	public static ChangeBackJob getChangeBackJob() {
+		return new ConsoleChangeBackJob(
+			ViewManagerConfig.getChangeBackViewManager(),
+			ControllerConfig.getChangeBackController()
 		);
 	}
 }

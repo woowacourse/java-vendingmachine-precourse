@@ -1,8 +1,10 @@
 package vendingmachine.config;
 
 import vendingmachine.domain.ChangeSafe;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.ProductSet;
 import vendingmachine.repository.ChangeSafeRepository;
+import vendingmachine.repository.DepositRepository;
 import vendingmachine.repository.ProductRepository;
 
 public class RepositoryConfig {
@@ -20,5 +22,13 @@ public class RepositoryConfig {
 
 	public static ProductRepository getProductRepository(ProductSet productSet) {
 		return new ProductRepository(productSet);
+	}
+
+	public static DepositRepository getDepositRepository() {
+		return new DepositRepository();
+	}
+
+	public static DepositRepository getDepositRepository(Money money) {
+		return new DepositRepository(money);
 	}
 }

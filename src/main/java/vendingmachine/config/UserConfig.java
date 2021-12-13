@@ -17,7 +17,8 @@ public class UserConfig {
 	public static Customer getCustomer() {
 		return new VendingMachineCustomer(
 			JobConfig.getDepositJob(),
-			JobConfig.getPurchaseJob()
+			JobConfig.getPurchaseJob(),
+			JobConfig.getChangeBackJob()
 		);
 	}
 }

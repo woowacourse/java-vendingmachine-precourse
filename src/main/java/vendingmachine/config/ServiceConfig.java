@@ -1,11 +1,11 @@
 package vendingmachine.config;
 
 import vendingmachine.service.ChangeSafeService;
-import vendingmachine.service.CoinService;
+import vendingmachine.service.DepositService;
 import vendingmachine.service.MoneyService;
 import vendingmachine.service.ProductService;
 import vendingmachine.service.ProductSplitService;
-import vendingmachine.service.RandomCoinService;
+import vendingmachine.service.PurchaseService;
 import vendingmachine.service.SplitService;
 
 public class ServiceConfig {
@@ -15,11 +15,7 @@ public class ServiceConfig {
 	}
 
 	public static ChangeSafeService getChangeSafeService() {
-		return new ChangeSafeService(RepositoryConfig.getChangeSafeRepository());
-	}
-
-	public static CoinService getCoinService() {
-		return new RandomCoinService();
+		return new ChangeSafeService(DomainConfig.getRandomCoinGenerator(), RepositoryConfig.getChangeSafeRepository());
 	}
 
 	public static SplitService getSplitService() {
@@ -28,5 +24,13 @@ public class ServiceConfig {
 
 	public static ProductService getProductService() {
 		return new ProductService(RepositoryConfig.getProductRepository());
+	}
+
+	public static DepositService getDepositService() {
+		return new DepositService(RepositoryConfig.getDepositRepository());
+	}
+
+	public static PurchaseService getPurchaseService() {
+		return new PurchaseService(RepositoryConfig.getProductRepository(), RepositoryConfig.getDepositRepository());
 	}
 }

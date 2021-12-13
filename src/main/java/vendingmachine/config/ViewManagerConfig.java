@@ -36,4 +36,12 @@ public class ViewManagerConfig {
 			ViewConfig.getCommonErrorView()
 		);
 	}
+
+	public static ViewManager getChangeBackViewManager() {
+		return new ViewManager(
+			ViewConfig.getCommonInputView(),
+			ViewConfig.getChangeBackOutputView(),
+			ViewConfig.getCommonErrorView()
+		);
+	}
 }

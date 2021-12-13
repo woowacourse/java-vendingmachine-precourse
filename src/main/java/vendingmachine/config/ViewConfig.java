@@ -3,9 +3,11 @@ package vendingmachine.config;
 import vendingmachine.view.ErrorView;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
+import vendingmachine.view.changeback.ChangeBackOutputView;
 import vendingmachine.view.changesafe.ChangeSafeInputView;
 import vendingmachine.view.changesafe.ChangeSafeOutputView;
 import vendingmachine.view.common.CommonErrorView;
+import vendingmachine.view.common.CommonInputView;
 import vendingmachine.view.common.CommonOutputView;
 import vendingmachine.view.deposit.DepositInputView;
 import vendingmachine.view.product.ProductInputView;
@@ -44,5 +46,13 @@ public class ViewConfig {
 
 	public static OutputView getPurchaseOutputView() {
 		return new PurchaseOutputView(ClientConfig.getOutputClient());
+	}
+
+	public static InputView getCommonInputView() {
+		return new CommonInputView(ClientConfig.getInputClient());
+	}
+
+	public static OutputView getChangeBackOutputView() {
+		return new ChangeBackOutputView(ClientConfig.getOutputClient());
 	}
 }

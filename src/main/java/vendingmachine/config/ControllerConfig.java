@@ -1,5 +1,6 @@
 package vendingmachine.config;
 
+import vendingmachine.controller.ChangeBackController;
 import vendingmachine.controller.ChangeSafeController;
 import vendingmachine.controller.DepositController;
 import vendingmachine.controller.ProductController;
@@ -10,7 +11,6 @@ public class ControllerConfig {
 	public static ChangeSafeController getChangeSafeController() {
 		return new ChangeSafeController(
 			ServiceConfig.getMoneyService(),
-			ServiceConfig.getCoinService(),
 			ServiceConfig.getChangeSafeService()
 		);
 	}
@@ -23,10 +23,23 @@ public class ControllerConfig {
 	}
 
 	public static DepositController getDepositController() {
-		return new DepositController();
+		return new DepositController(
+			ServiceConfig.getMoneyService(),
+			ServiceConfig.getDepositService()
+		);
 	}
 
 	public static PurchaseController getPurchaseController() {
-		return new PurchaseController();
+		return new PurchaseController(
+			ServiceConfig.getPurchaseService(),
+			ServiceConfig.getChangeSafeService()
+		);
+	}
+
+	public static ChangeBackController getChangeBackController() {
+		return new ChangeBackController(
+			ServiceConfig.getPurchaseService(),
+			ServiceConfig.getChangeSafeService()
+		);
 	}
 }
