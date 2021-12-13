@@ -20,21 +20,20 @@ public class VendingMachine {
     }
 
     public static Product findProductByName(String name) {
-        for (Product p : products) {
-            if (p.isSameName(name)) {
-                return p;
-            }
-        }
-        return null;
+        return products
+                .stream()
+                .filter(p -> p.isSameName(name))
+                .findFirst()
+                .orElse(null);
     }
 
     public static boolean isAnyThingToPurchase() {
-        for (Product p : products) {
-            if (p.isRemain() && p.canPurchase()) {
-                return true;
-            }
-        }
-        return false;
+        return products
+                .stream()
+                .filter(p -> p.isRemain() && p.canPurchase())
+                .findFirst()
+                .orElse(null)
+                != null;
     }
 
     public static void findAndPurchase(String name) {
