@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class Products {
@@ -12,4 +13,7 @@ public class Products {
 		products.add(product);
 	}
 
+	public Money getCheapestPrice() {
+		return Collections.min(products).getPrice();
+	}
 }

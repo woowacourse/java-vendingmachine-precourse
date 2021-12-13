@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 import vendingmachine.Coin;
 
-public class Money {
+public class Money implements Comparable<Money>{
 	private static final String IS_DIVIDE_BY_TEN_ERROR_MESSAGE = "돈은 10의 배수여야 한다.";
 
 	private int amount;
@@ -20,5 +20,10 @@ public class Money {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	@Override
+	public int compareTo(Money o) {
+		return amount - o.amount;
 	}
 }

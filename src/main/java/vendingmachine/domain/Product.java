@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-public class Product {
+public class Product implements Comparable<Product>{
 	private static final int MIN_PRICE = 100;
 	private static final int MIN_AMOUNT = 0;
 
@@ -37,5 +37,14 @@ public class Product {
 		if (amount < MIN_AMOUNT) {
 			throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
 		}
+	}
+
+	@Override
+	public int compareTo(Product o) {
+		return this.price.compareTo(o.price);
+	}
+
+	public Money getPrice() {
+		return price;
 	}
 }
