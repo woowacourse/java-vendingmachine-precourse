@@ -14,11 +14,14 @@ public class ProductContainer {
         productList.forEach(product -> productMap.put(product.getName(), product));
     }
 
-    public Product getProduct(String productName) {
-        if (!productMap.keySet().contains(productName)) {
-            throw new NoSuchElementException(ErrorMessage.NO_PRODUCT_MATCH.getCompleteMessage());
-        }
-        return productMap.get(productName);
+    public int getPrice(String productName) {
+        checkProductInContainer(productName);
+        return productMap.get(productName).getPrice();
+    }
+
+    public void sellProduct(String productName) {
+        checkProductInContainer(productName);
+        productMap.get(productName).sell();
     }
 
     public int getMinimumPrice() {
@@ -34,5 +37,11 @@ public class ProductContainer {
                                     .filter(product -> product.getStockQuantity() != 0)
                                     .collect(Collectors.toList())
                                     .isEmpty();
+    }
+
+    private void checkProductInContainer(String productName) {
+        if (!productMap.keySet().contains(productName)) {
+            throw new NoSuchElementException(ErrorMessage.NO_PRODUCT_MATCH.getCompleteMessage());
+        }
     }
 }

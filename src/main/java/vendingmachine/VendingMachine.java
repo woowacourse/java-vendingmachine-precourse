@@ -22,16 +22,8 @@ public class VendingMachine {
     }
 
     public void sellProduct(String productName) {
-        Product product;
-
-        product = productContainer.getProduct(productName);
-
-        if (balance < product.getPrice()) {
-            throw new NotEnoughBalanceException(ErrorMessage.NOT_ENOUGH_BALANCE.getCompleteMessage());
-        }
-
-        balance -= product.getPrice();
-        product.sell();
+        balance -= productContainer.getPrice(productName);
+        productContainer.sellProduct(productName);
     }
 
     public Coins returnBalance() {
