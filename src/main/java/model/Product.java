@@ -17,4 +17,8 @@ public class Product {
 		}
 		return false;
 	}
+
+	public int bringPrice() {
+		return price;
+	}
 }

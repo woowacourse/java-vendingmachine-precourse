@@ -37,4 +37,11 @@ public class VendingMachine {
 		}
 		return false;
 	}
+
+	public boolean hasEnoughMoneyToBuyProduct() {
+		if (userInsertMoneyBox.hasEnoughMoney(vendingMachineProducts.bringMinimumProductPrice())) {
+			return true;
+		}
+		return false;
+	}
 }

@@ -10,4 +10,11 @@ public class UserInsertMoneyBox {
 	public int bringMoney() {
 		return money;
 	}
+
+	public boolean hasEnoughMoney(int minimumProductPrice) {
+		if (money < minimumProductPrice) {
+			return false;
+		}
+		return true;
+	}
 }

@@ -1,7 +1,9 @@
 package model;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public class VendingMachineProducts {
@@ -32,5 +34,10 @@ public class VendingMachineProducts {
 
 	public boolean hasAnyProduct() {
 		return products.stream().filter(product -> !product.isSoldOut()).count() > 0;
+	}
+
+	public int bringMinimumProductPrice() {
+		Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::bringPrice);
+		return products.stream().max(comparatorByPrice).orElseThrow(NoSuchElementException::new).bringPrice();
 	}
 }
