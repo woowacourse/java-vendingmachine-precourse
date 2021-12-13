@@ -19,8 +19,7 @@ public class ItemValidator {
 	private static final String PRICE__ERROR = "[ERROR] 가격은 100원 이상이고 10원 단위여야 합니다.\n";
 	private static final String STOCK_QUANTITY__ERROR = "[ERROR] 수량은 1개 이상이어야 합니다.\n";
 	private static final String NOT_EXIST_ITEM_ERROR = "[ERROR] 등록된 상품만 구매 가능합니다.\n";
-	private static final String NO_SUFFICIENT_QUANTITY_ERROR = "[ERROR] 상품 수량이 없습니다.\n";
-	private static final String NO_SUFFICIENT_MONEY_THEN_PRICE_ERROR = "[ERROR] 남아 있는 투입 금액부족합니다.\n";
+	private static final String PURCHASE_IMPOSSIBLE_ERROR = "[ERROR] 남아 있는 투입 금액부족하거나 재고가 없습니다.\n";
 	private static final String SAME_NAME_INPUT_ERROR = "[ERROR] 같은 이름의 상품을 여러개 등록할 수 없습니다.\n";
 
 	public void validateMoneyByItemMinPrice(int money) {
@@ -30,8 +29,8 @@ public class ItemValidator {
 	}
 
 	public Item validateItem(String input, List<Item> items) {
-		String inputWithOitBlanket = isInSquareBracket(input);
-		Item item = isRightFormalOfItem(inputWithOitBlanket);
+		String inputWithOutBlanket = isInSquareBracket(input);
+		Item item = isRightFormalOfItem(inputWithOutBlanket);
 		return validateDuplicateName(item, items);
 	}
 
@@ -98,7 +97,7 @@ public class ItemValidator {
 		}
 
 		if (!item.isAvailableToBuy(money)) {
-			throw new IllegalArgumentException(NO_SUFFICIENT_MONEY_THEN_PRICE_ERROR);
+			throw new IllegalArgumentException(PURCHASE_IMPOSSIBLE_ERROR);
 		}
 		return item;
 	}
