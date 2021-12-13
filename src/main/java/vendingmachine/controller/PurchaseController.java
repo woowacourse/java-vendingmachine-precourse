@@ -1,30 +1,28 @@
 package vendingmachine.controller;
 
+import vendingmachine.service.ChangeSafeService;
+import vendingmachine.service.PurchaseService;
+
 public class PurchaseController {
 
-	private int money;
+	private final PurchaseService purchaseService;
+	private final ChangeSafeService changeSafeService;
 
-	public PurchaseController() {
-		money = 3000;
+	public PurchaseController(PurchaseService purchaseService, ChangeSafeService changeSafeService) {
+		this.purchaseService = purchaseService;
+		this.changeSafeService = changeSafeService;
 	}
 
 	public String retrieveDeposit() {
-		return "투입 금액: " + money + "원";
+		return purchaseService.retrieveMoneyStatus();
 	}
 
 	public boolean isAvailable() {
-		return money > 1000;
+		return purchaseService.isAvailable();
 	}
 
 	public void purchase(String input) {
-		if ("콜라".equals(input)) {
-			money -= 1500;
-		} else if ("사이다".equals(input)) {
-			money -= 1000;
-		}
+		purchaseService.purchase(input);
 	}
 
-	public String retrieveChangeSafe() {
-		return "잔돈\n100원 - 4개\n50원 - 1개";
-	}
 }
