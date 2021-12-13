@@ -3,7 +3,7 @@ package vendingmachine.domain;
 public class VendingMachine {
 	private final Coins coins;
 	private final Products products;
-	private final int inputMoney;
+	private int inputMoney;
 
 	public VendingMachine (Coins coins, Products products, int inputMoney){
 		this.coins = coins;
@@ -12,12 +12,17 @@ public class VendingMachine {
 	}
 
 	public boolean checkTermination() {
-		if (products.isLessThanMinPrice(inputMoney)){
-			return true;
+		return products.isLessThanMinPrice(inputMoney)
+			|| products.getTotalAmount() == 0;
+	}
+
+	private void validateBuyingProductName(String buyingProductName) {
+		Product product = products.getProductByName(buyingProductName);
+		if(product.getSmallerPrice(inputMoney) > inputMoney) {
+			throw new IllegalArgumentException();
 		}
-		if (products.getTotalAmount() == 0) {
-			return true;
+		if (product.isInStock()){
+			throw new IllegalArgumentException();
 		}
-		return false;
 	}
 }
