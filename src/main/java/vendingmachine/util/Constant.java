@@ -11,8 +11,7 @@ public class Constant {
     public static final String NOW_MONEY = "투입 금액: ";
     public static final String WON = "원";
     public static final String CHOOSE_PRODUCT = "구매할 상품명을 입력해 주세요.";
-    public static final String CHOOSE_PRODUCT_NAME_ERROR = "올바른 상품명이 아닙니다.";
-    public static final String CHOOSE_PRODUCT_NUM_ERROR = "상품의 소진되었습니다.";
+    public static final String CHOOSE_PRODUCT_NAME_ERROR = "올바른 상품이 아닙니다.";
     public static final String CHANGES= "잔돈";
 
 

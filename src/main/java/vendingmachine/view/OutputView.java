@@ -7,7 +7,6 @@ import vendingmachine.model.Coin;
 import vendingmachine.util.Constant;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class OutputView {
@@ -16,6 +15,7 @@ public class OutputView {
     public static List<Integer> productsNum = new ArrayList<>();
     private static String chooseProductName;
     private static final List<Integer> coinAmount = new ArrayList<>();
+    private static int nowMoney;
 
     public static void askVendingMachinePrice(){
         System.out.println(Constant.VENDING_MACHINE_HOLDING_PRICE);
@@ -52,18 +52,6 @@ public class OutputView {
             remainMoney-=coinAmountIndex;
             coinsNum[coinAmount.indexOf(coinAmountIndex)].setNum(coinsNum[coinAmount.indexOf(coinAmountIndex)].getNum()+1);
         }
-
-//        for(Coin coins : Coin.values()) {
-//            if (coins.getAmount() == 10) {coins.setNum(remainMoney / 10);
-//                break;
-//            }
-//            int maxNumCoin = remainMoney / coins.getAmount();
-//            List<Integer> NumCoinList = new ArrayList<>();
-//            for (int i = 0; i < maxNumCoin + 1; i++) {NumCoinList.add(i);}
-//            int numCoin = Randoms.pickNumberInList(NumCoinList);
-//            remainMoney -= numCoin * coins.getAmount();
-//            coins.setNum(numCoin);
-//        }
     }
 
     public static void showAllProcess(String[] products, int insertMoney){
@@ -71,16 +59,16 @@ public class OutputView {
         getProductNameList();
         getProductNumList();
         int minProductPrice = getMinProductPrice();
-        int nowMoney = insertMoney;
-        while (minProductPrice < nowMoney){
+        nowMoney = insertMoney;
+        while (minProductPrice <= nowMoney){
             if (isSoldOut()){break;}
-            nowMoney = showProcess(nowMoney);
+            showProcess();
         }
         System.out.println(Constant.NOW_MONEY+nowMoney+Constant.WON);
-        getChanges(nowMoney);
+        getChanges();
     }
 
-    private static void getChanges(int nowMoney){
+    private static void getChanges(){
         System.out.println(Constant.CHANGES);
         int remainMoney = nowMoney;
         for(Coin coins : Coin.values()){
@@ -92,38 +80,33 @@ public class OutputView {
         }
     }
 
-    private static int showProcess(int nowMoney) {
+    private static void showProcess() {
         System.out.println(Constant.NOW_MONEY + nowMoney + Constant.WON);
         checkProduct();
-        nowMoney = getNowMoney(chooseProductName, nowMoney);
-        return nowMoney;
     }
     private static void checkProduct(){
         try {
             setProductsName();
+            getNowMoney(chooseProductName);
         } catch (IllegalArgumentException e) {
             System.out.println(Constant.CHOOSE_PRODUCT_NAME_ERROR);
             checkProduct();
         }
     }
 
-    private static int getNowMoney(String chooseProductName, int nowMoney){
+    private static void getNowMoney(String chooseProductName){
         int indexProduct = indexProduct(productsName, chooseProductName);
-        try{
-            isValidProductNum(indexProduct);
-            productsNum.set(indexProduct,productsNum.get(indexProduct)-1);
-            int productPrice = Integer.parseInt(OutputView.productsInfo.get(indexProduct)[1]);
-            nowMoney -= productPrice;
-            return nowMoney;
-        } catch (IllegalArgumentException e) {
-            System.out.println(Constant.CHOOSE_PRODUCT_NUM_ERROR);
-            checkProduct();
-        }
-        return nowMoney;
+        int productPrice = Integer.parseInt(productsInfo.get(indexProduct)[1]);
+        isValidProductNum(indexProduct, productPrice);
+        productsNum.set(indexProduct,productsNum.get(indexProduct)-1);
+        nowMoney -= productPrice;
     }
 
-    private static void isValidProductNum(int indexProduct){
+    private static void isValidProductNum(int indexProduct, int productPrice){
         if (productsNum.get(indexProduct) < 1){
+            throw new IllegalArgumentException();
+        }
+        if (productPrice>nowMoney){
             throw new IllegalArgumentException();
         }
     }

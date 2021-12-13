@@ -91,7 +91,5 @@ public class InputView {
         if (!products.contains(productName)){
             throw new IllegalArgumentException();
         }
-
-
     }
 }
