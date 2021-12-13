@@ -35,14 +35,14 @@ public class OutputMessage {
         }
     }
 
-    public void printNumberOfCoin(int amount, int stock) {
-        System.out.println(amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + stock + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
-    }
-
     public void printReturnChange(int amount, int stock) {
         if (stock == 0) {
             return;
         }
         printNumberOfCoin(amount, stock);
+    }
+
+    private void printNumberOfCoin(int amount, int stock) {
+        System.out.println(amount + PRINT_MESSAGE_NUMBER_OF_COIN_PREFIX + stock + PRINT_MESSAGE_NUMBER_OF_COIN_SUFFIX);
     }
 }

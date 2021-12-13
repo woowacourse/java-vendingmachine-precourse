@@ -28,13 +28,6 @@ public class ProductList extends LoopInput {
         return product.existStock();
     }
 
-    private void inputProductList() {
-        String product = inputString(INSERT_PRODUCT_MESSAGE);
-        initProductMap();
-        String[] productList = validator.validateSplitRegex(product);
-        setNumberOfProducts(productList);
-    }
-
     private void initProductMap() {
         productMap.clear();
     }
@@ -45,6 +38,13 @@ public class ProductList extends LoopInput {
 
     public boolean checkAvailableState(int customerMoney) {
         return checkProductStock() && compareMinimumPrice(customerMoney);
+    }
+
+    private void inputProductList() {
+        String product = inputString(INSERT_PRODUCT_MESSAGE);
+        initProductMap();
+        String[] productList = validator.validateSplitRegex(product);
+        setNumberOfProducts(productList);
     }
 
     private boolean checkProductStock() {

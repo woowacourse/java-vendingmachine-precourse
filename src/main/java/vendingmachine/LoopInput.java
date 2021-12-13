@@ -3,8 +3,8 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 
 public class LoopInput {
-    private static InputMessage inputMessage = new InputMessage();
-    private static OutputMessage outputMessage = new OutputMessage();
+    private static final InputMessage inputMessage = new InputMessage();
+    private static final OutputMessage outputMessage = new OutputMessage();
 
     public void inputMethod() {
     }

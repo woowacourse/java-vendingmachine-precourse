@@ -10,5 +10,4 @@ public class InputMessage {
         printNewLine();
         System.out.println(message);
     }
-
 }

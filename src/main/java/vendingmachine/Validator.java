@@ -60,8 +60,8 @@ public class Validator {
         }
     }
 
-    public void validateExistedProduct(ProductList productList, String product) {
-        if (!productList.existProductName(product)) {
+    public void validateExistedProduct(ProductList productList, String productName) {
+        if (!productList.existProductName(productName)) {
             throw new IllegalArgumentException(ERROR_NOT_FOUND_PRODUCT);
         }
     }
