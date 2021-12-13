@@ -16,6 +16,12 @@ public class Utils {
         return Integer.parseInt(inputVendMoney);
     }
 
+    public static int userMoneyInput() {
+        System.out.println(Message.INPUT_USER_MONEY);
+        String userMoney = Console.readLine();
+        return Integer.parseInt(userMoney);
+    }
+
     // 숫자가 아닌 경우 예외처리
     public void validateVendMoneyInput(){
 
@@ -60,4 +66,31 @@ public class Utils {
         }
         return products;
     }
+
+    public static void play(List<Product> productList, int userMoney) {
+        while(userMoney>0){
+            System.out.println(Message.USER_MONEY+ userMoney + "원");
+            System.out.println(Message.INPUT_PROD_NAME);
+            String prod = Console.readLine();
+            int price = buyProdByUwer(productList,  prod);
+            userMoney-=price;
+        }
+        return;
+    }
+
+    public static int buyProdByUwer(List<Product> productList, String prod){
+        if(checkStock(prod)){
+            for(Product product: productList){
+                if((product.getName()).equals(prod)){
+                    product.minusStock();
+                    return product.getPrice();
+                }
+            }
+        }
+        // 재고가 없는 경우 에러를 발생시킨다.
+        return 0;
+    }
+
+    public static boolean checkStock(String prod){return true;};
+
 }

@@ -11,5 +11,19 @@ public class Product {
         this.stock = stock;
     }
 
+    public String getName(){
+        return this.name;
+    }
 
+    public int getPrice(){
+        return this.price;
+    }
+
+    public int getStock(){
+        return this.stock;
+    }
+
+    public void minusStock() {
+        this.stock--;
+    }
 }
