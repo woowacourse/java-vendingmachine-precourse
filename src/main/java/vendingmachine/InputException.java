@@ -1,9 +1,5 @@
 package vendingmachine;
 
-import java.util.ArrayList;
-
-import org.assertj.core.internal.Arrays;
-
 public class InputException {
 	private static final String IS_INTEGER_ERROR_MSG = "[ERROR] 금액은 숫자여야 합니다.";
 	private static final String IS_POSITIVE_INTEGER_ERROR_MSG = "[ERROR] 금액은 0보다 커야 합니다.";
@@ -24,6 +20,12 @@ public class InputException {
 		itemLengthCheck(items);
 		itemPriceCheck(items);
 		itemStockCheck(items);
+	}
+
+	public static void checkInputMoney(String Money) {
+		isInteger(Money);
+		isPositiveInteger(Money);
+		isMultiplicationOfTen(Money);
 	}
 
 	public static void isInteger(String amount) {
