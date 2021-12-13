@@ -16,11 +16,9 @@ public class Cashier {
 	private static final int AMOUNT_UNIT = 10;
 	private static final int MIN_AMOUNT = 0;
 
-	private final Validator validator;
 	private int insertAmount;
 
 	public Cashier(int holdingAmount) {
-		this.validator = new Validator();
 		validateAmount(holdingAmount);
 		makeCoins(holdingAmount);
 	}
@@ -80,10 +78,10 @@ public class Cashier {
 	}
 
 	private void validateAmount(int amount) {
-		if (!validator.isBiggerThenMinValue(amount, MIN_AMOUNT)) {
+		if (!Validator.isBiggerThenMinValue(amount, MIN_AMOUNT)) {
 			throw new IllegalArgumentException(Error.MINUS.getMassage());
 		}
-		if (!validator.isDivisible(amount, AMOUNT_UNIT)) {
+		if (!Validator.isDivisible(amount, AMOUNT_UNIT)) {
 			throw new IllegalArgumentException(Error.CAN_NOT_BE_DIVIDED_BY_10.getMassage());
 		}
 	}

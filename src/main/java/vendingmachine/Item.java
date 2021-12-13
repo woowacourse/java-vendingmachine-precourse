@@ -15,10 +15,7 @@ public class Item {
 	private final int price;
 	private int count;
 
-	private final Validator validator;
-
 	public Item(int price, int count) {
-		this.validator = new Validator();
 		validateItemPrice(price);
 		validateItemCount(count);
 		this.price = price;
@@ -38,16 +35,16 @@ public class Item {
 	}
 
 	private void validateItemPrice(int price) {
-		if (!validator.isBiggerThenMinValue(price, MIN_PRICE)) {
+		if (!Validator.isBiggerThenMinValue(price, MIN_PRICE)) {
 			throw new IllegalArgumentException(Error.PRICE_RANGE.getMassage());
 		}
-		if (!validator.isDivisible(price, PRICE_UNIT)) {
+		if (!Validator.isDivisible(price, PRICE_UNIT)) {
 			throw new IllegalArgumentException(Error.CAN_NOT_BE_DIVIDED_BY_10.getMassage());
 		}
 	}
 
 	private void validateItemCount(int count) {
-		if (!validator.isBiggerThenMinValue(count, MIN_COUNT)) {
+		if (!Validator.isBiggerThenMinValue(count, MIN_COUNT)) {
 			throw new IllegalArgumentException(Error.COUNT_RANGE.getMassage());
 		}
 	}

@@ -13,7 +13,6 @@ import camp.nextstep.edu.missionutils.Console;
  */
 public class Machine {
 	private final Display display;
-	private final Validator validator;
 	private final ItemParser itemParser;
 
 	private Cashier cashier;
@@ -21,7 +20,6 @@ public class Machine {
 
 	public Machine() {
 		this.display = new Display();
-		this.validator = new Validator();
 		this.itemParser = new ItemParser();
 	}
 
@@ -62,7 +60,7 @@ public class Machine {
 	private void prepareCashier() {
 		display.askHoldingAmount();
 		try {
-			this.cashier = new Cashier(validator.stringToInteger(Console.readLine()));
+			this.cashier = new Cashier(Validator.stringToInteger(Console.readLine()));
 		} catch (IllegalArgumentException e) {
 			display.printError(e);
 			prepareCashier();
@@ -82,7 +80,7 @@ public class Machine {
 	private void insertMoney() {
 		display.askInsertAmount();
 		try {
-			cashier.insertMoney(validator.stringToInteger(Console.readLine()));
+			cashier.insertMoney(Validator.stringToInteger(Console.readLine()));
 		} catch (IllegalArgumentException e) {
 			display.printError(e);
 			insertMoney();

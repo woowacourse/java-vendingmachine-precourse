@@ -23,12 +23,6 @@ public class ItemParser {
 	private static final int PRICE_INDEX = 1;
 	private static final int COUNT_INDEX = 2;
 
-	private final Validator validator;
-
-	public ItemParser() {
-		this.validator = new Validator();
-	}
-
 	public Map<String, Item> stringToItems(String string) {
 		Map<String, Item> items = new HashMap<>();
 		String[] stringItems = string.split(ITEM_SEPARATOR);
@@ -42,8 +36,8 @@ public class ItemParser {
 	}
 
 	private Item propertiesToItem(String[] properties) {
-		return new Item(validator.stringToInteger(properties[PRICE_INDEX]),
-			validator.stringToInteger(properties[COUNT_INDEX]));
+		return new Item(Validator.stringToInteger(properties[PRICE_INDEX]),
+			Validator.stringToInteger(properties[COUNT_INDEX]));
 	}
 
 	private String removeSquareBracket(String stringItem) {
@@ -58,7 +52,7 @@ public class ItemParser {
 	}
 
 	private String validateNewItemName(Map<String, Item> items, String name) {
-		if (!validator.isBlank(name)) {
+		if (!Validator.isBlank(name)) {
 			throw new IllegalArgumentException(Error.BLANK.getMassage());
 		}
 		checkDuplicateItemName(items, name);

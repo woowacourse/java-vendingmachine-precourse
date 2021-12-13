@@ -8,7 +8,7 @@ package vendingmachine;
  * @since 1.0
  */
 public class Validator {
-	public int stringToInteger(String string) {
+	public static int stringToInteger(String string) {
 		try {
 			return Integer.parseInt(string);
 		} catch (NumberFormatException e) {
@@ -16,15 +16,15 @@ public class Validator {
 		}
 	}
 
-	public boolean isBiggerThenMinValue(int number, int minValue) {
+	public static boolean isBiggerThenMinValue(int number, int minValue) {
 		return number >= minValue;
 	}
 
-	public boolean isDivisible(int dividend, int divisor) {
+	public static boolean isDivisible(int dividend, int divisor) {
 		return (dividend % divisor) == 0;
 	}
 
-	public boolean isBlank(String string) {
+	public static boolean isBlank(String string) {
 		return string.trim().length() > 0;
 	}
 }
