@@ -17,7 +17,7 @@ public class IsAmount implements Validator {
 
 	private boolean hasNoSmallValue(StringBuilder input) {
 		int amount = Integer.parseInt(input.toString());
-		if (amount % 10 != 0) {
+		if (amount % 10 == 0) {
 			return true;
 		}
 		throw new IllegalArgumentException("[ERROR] 10이하 단위의 금액은 사용할 수 없습니다.");

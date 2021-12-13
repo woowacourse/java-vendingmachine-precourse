@@ -11,9 +11,9 @@ public class Application {
 		coinListManager.makeRandomList();
 		coinListManager.printCoinList();
 
+		Products productList = new ProductListManager().getList();
 		DepositManager depositManager = new DepositManager();
-		OrderManager orderManager = new OrderManager(new ProductListManager().getList(), depositManager);
-		orderManager.run();
+		new OrderManager(productList, depositManager).run();
 
 		depositManager.printDeposit();
 		coinListManager.returnChange(depositManager.getDeposit());
