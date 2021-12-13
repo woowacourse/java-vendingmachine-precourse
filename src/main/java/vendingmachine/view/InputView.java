@@ -21,4 +21,9 @@ public class InputView {
 	private static int parse(String inputAmountMoney) {
 		return Integer.parseInt(inputAmountMoney);
 	}
+
+	public static String readProducts() {
+		OutputView.printInputProductMessage();
+		return Console.readLine();
+	}
 }
