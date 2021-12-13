@@ -2,10 +2,7 @@ package vendingmachine.billing;
 
 import java.util.Arrays;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
-
-import camp.nextstep.edu.missionutils.Randoms;
 
 public class Changes {
 	private static final int ZERO = 0;
@@ -21,9 +18,8 @@ public class Changes {
 
 	public void createRandomCoins() {
 		initialCoins();
-		List<Integer> possibleCoins = Coin.getAllCoins();
 		while (moneyForChange.isLeft()) {
-			addRandomCoin(possibleCoins);
+			addRandomCoin();
 		}
 	}
 
@@ -32,8 +28,8 @@ public class Changes {
 		Arrays.stream(Coin.values()).forEach(each -> coins.put(each, ZERO));
 	}
 
-	private void addRandomCoin(List<Integer> possibleCoins) {
-		int randomCoinValue = Randoms.pickNumberInList(possibleCoins);
+	private void addRandomCoin() {
+		int randomCoinValue = Coin.getRandomCoin();
 		if (moneyForChange.isChangeable(randomCoinValue)) {
 			moneyForChange.change(randomCoinValue);
 			coins.merge(Coin.issue(randomCoinValue), PLUS_ONE, Integer::sum);

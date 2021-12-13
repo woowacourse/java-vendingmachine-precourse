@@ -1,8 +1,11 @@
 package vendingmachine.billing;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 public enum Coin {
 	COIN_500(500),
@@ -16,22 +19,15 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
-
-	public static List<Integer> getAllCoins() {
-		List<Integer> possibleCoins = new ArrayList<>();
-		for (Coin each : Coin.values()) {
-			possibleCoins.add(each.getAmount());
-		}
-		return possibleCoins;
+	public static int getRandomCoin() {
+		List<Integer> coins = Arrays.stream(Coin.values()).map(coin -> coin.amount).collect(Collectors.toList());
+		return Randoms.pickNumberInList(coins);
 	}
 
 	public static Coin issue(int amount) {
 		HashMap<Integer, Coin> coinMap = new HashMap<>();
 		for (Coin each : Coin.values()) {
-			coinMap.put(each.getAmount(), each);
+			coinMap.put(each.amount, each);
 		}
 		return coinMap.get(amount);
 	}
@@ -42,5 +38,9 @@ public enum Coin {
 
 	public boolean isChangeable(Money money) {
 		return money.isChangeable(amount);
+	}
+
+	public String toString() {
+		return String.valueOf(amount);
 	}
 }

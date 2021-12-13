@@ -26,7 +26,7 @@ public class OutputView {
 
 	private static void printAllCoins(Map<Coin, Integer> coins) {
 		coins.forEach((key, value) -> System.out.println(
-			key.getAmount() + MONETARY_UNIT + COINS_FORMAT + value + COUNTING_UNIT));
+			key.toString() + MONETARY_UNIT + COINS_FORMAT + value + COUNTING_UNIT));
 	}
 
 	public static void printRemainMoney(Money money) {
