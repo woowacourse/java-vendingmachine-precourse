@@ -46,6 +46,7 @@ public class Utils {
                 break;
             }
         }
+        Coin.PrintChange(money);
     }
 
     public static int OrderCheck(ArrayList<Juice> juiceIndex, String orderJuice) {

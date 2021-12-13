@@ -65,4 +65,18 @@ public enum Coin {
         }
         System.out.println();
     }
+
+    public static void PrintChange(int money) {
+        System.out.println("투입 금액: " + money + "원");
+        System.out.println("잔돈");
+        int change = money;
+        int numberOfCoin;
+        for (Coin coin : Coin.values()) {
+            numberOfCoin = Math.min(change / coin.getAmount(),coin.getNumberOfCoin());
+            if (numberOfCoin != 0) {
+                System.out.println(coin.getAmount() + "원 - " + numberOfCoin + "개");
+                change -= coin.getAmount() * numberOfCoin;
+            }
+        }
+    }
 }
