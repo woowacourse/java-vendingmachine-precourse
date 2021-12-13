@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Validators;
 import vendingmachine.model.Item;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.view.OutputManager;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,9 +15,9 @@ public class InputManager {
     private static final String PREFIX_ERROR = "[ERROR]";
 
     private static String getUserInput(String guide) {
-        System.out.println(guide);
+        OutputManager.printMessage(guide);
         String userInput = Console.readLine();
-        System.out.println();
+        OutputManager.printBlank();
         return userInput;
     }
 
@@ -27,7 +28,7 @@ public class InputManager {
                 Validators.validateAmount(inputData);
                 return new VendingMachine(Integer.parseInt(inputData));
             } catch (IllegalArgumentException e) {
-                System.out.println(PREFIX_ERROR + " 0 또는 자연수만 입력 가능합니다.");
+                OutputManager.printMessage(PREFIX_ERROR + " 0 또는 자연수만 입력 가능합니다.");
             }
         }
     }
@@ -48,7 +49,7 @@ public class InputManager {
             try {
                 Validators.validateItem(inputData);
             } catch (IllegalArgumentException e) {
-                System.out.println(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
+                OutputManager.printMessage(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
                 continue;
             }
             return createItemList(inputData);
@@ -62,7 +63,7 @@ public class InputManager {
                 Validators.validateIntegerString(inputData);
                 return Integer.parseInt(inputData);
             } catch (IllegalArgumentException e) {
-                System.out.println(PREFIX_ERROR + " 잘못된 금액 입력입니다.");
+                OutputManager.printMessage(PREFIX_ERROR + " 잘못된 금액 입력입니다.");
             }
         }
     }
@@ -74,7 +75,7 @@ public class InputManager {
                 Validators.validateEmptyString(inputData);
                 return inputData;
             } catch (IllegalArgumentException e) {
-                System.out.println(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
+                OutputManager.printMessage(PREFIX_ERROR + " 잘못된 상품 입력입니다.");
             }
         }
     }

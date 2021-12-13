@@ -28,4 +28,13 @@ public class OutputManager {
             }
         }
     }
+
+    public static void printMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void printBlank() {
+        System.out.println();
+    }
+
 }
