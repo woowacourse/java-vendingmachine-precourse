@@ -10,7 +10,6 @@ public class Money {
 	}
 
 	public Money reduce(int amount) {
-		//예외처리 필요
 		return new Money(this.money - amount);
 	}
 

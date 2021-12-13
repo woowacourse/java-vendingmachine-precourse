@@ -31,9 +31,9 @@ public enum Coin {
 
 	// 추가 기능 구현
 	public static Coin of(int amount) {
-        //예외처리 필요
-        return coins.get(amount);
-    }
+		//예외처리 필요
+		return coins.get(amount);
+	}
 
 	public int getAmount() {
 		return amount;

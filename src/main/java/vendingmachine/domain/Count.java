@@ -12,7 +12,6 @@ public class Count {
 	}
 
 	public Count reduce(int amount) {
-		//예외처리 필요
 		return new Count(this.count - amount);
 	}
 

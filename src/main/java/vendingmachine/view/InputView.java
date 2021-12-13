@@ -2,11 +2,6 @@ package vendingmachine.view;
 
 import java.util.Scanner;
 
-import org.junit.platform.commons.util.StringUtils;
-import org.mockito.internal.util.StringUtil;
-
-import vendingmachine.domain.Product;
-
 public class InputView {
 	private static final String HOLDING_MONEY_GUIDE_MESSEAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String PRODUCT_INFO_GUIDE_MESSEEAGE = "상품명과 가격, 수량을 입력해 주세요.";

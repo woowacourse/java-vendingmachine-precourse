@@ -12,7 +12,6 @@ public class Product {
 	}
 
 	public Product reduce(int amount) {
-		//예외처리 필요
 		return new Product(this.name, this.price, this.cnt - amount);
 	}
 
