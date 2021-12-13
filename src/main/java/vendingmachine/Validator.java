@@ -21,4 +21,40 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
+    public void validateGoodsList(String goodsList){
+        String[] list = goodsList.split(";");
+        for(String goods : list){
+            if(goods.charAt(0)!='['|| goods.charAt(goods.length()-1)!=']'){
+                System.out.println("[ERROR] 대괄호로 묶여있어야 합니다.");
+                throw new IllegalArgumentException();
+            }
+            goods = goods.replace("[","");
+            goods = goods.replace("]","");
+            String[] goodsInfo = goods.split(",");
+            if(goodsInfo.length !=3){
+                System.out.println("[ERROR] 상품 정보 개수는 3개여야 합니다.");
+                throw new IllegalArgumentException();
+            }
+            checkGoodsInfo(goodsInfo[1],goodsInfo[2]);
+        }
+    }
+    private void checkGoodsInfo(String price, String number){
+        System.out.println("price = " + price);
+        System.out.println("number = " + number);
+        try{
+            Integer.parseInt(price.trim());
+            Integer.parseInt(number.trim());
+        }catch (Exception e){
+            throw new IllegalArgumentException("[ERROR] 가격과 수량은 정수여야 합니다.");
+        }
+        int goodsPrice = Integer.parseInt(price.trim());
+        if(goodsPrice < 100) {
+            System.out.println("[ERROR] 상품 가격은 100원 부터 시작입니다." );
+            throw new IllegalArgumentException();
+        }
+        if(goodsPrice % 10 != 0){
+            System.out.println("[ERROR] 상품 가격은 10원 단위여야 합니다." );
+            throw new IllegalArgumentException();
+        }
+    }
 }
