@@ -8,13 +8,16 @@ import java.util.Map;
 public class Coins {
     private final Map<Coin, Integer> coins = new HashMap<>();
 
-    public Map<Coin, Integer> makeCoinsByMoney(int money) {
+    public Coins(int money) {
+        makeCoinsByMoney(money);
+    }
+
+    private void makeCoinsByMoney(int money) {
         for (Coin coin : Coin.values()) {
             int coinCount = getRandomCoinCount(money, coin);
             coins.put(coin, coinCount);
             money -= coin.getAmount() * coinCount;
         }
-        return coins;
     }
 
     private int getRandomCoinCount(int money, Coin coin) {
