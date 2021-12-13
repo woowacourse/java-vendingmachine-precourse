@@ -7,7 +7,7 @@
   1. arg : Validator 함수
   2. 동작1 : try { raedLine -> Validator -> return String }
   3. 동작2: catch (Exception error) { println(error.getMessage())}
-  4. try가 성공할 때까지 반복
+  4. try 가 성공할 때까지 반복
 
 ### 1. Entity
 1. 가격
