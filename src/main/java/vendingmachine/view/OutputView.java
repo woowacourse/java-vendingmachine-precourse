@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import vendingmachine.domain.Money;
+
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
@@ -7,6 +9,7 @@ import java.util.HashMap;
 public class OutputView {
 
     private static final String COINS_HELD_BY_VENDING_MACHINE_MESSAGE = "자판기가 보유한 동전";
+    private static final String REMAINING_AMOUNT_MESSAGE = "투입 금액: ";
     private static final String WON = "원";
     private static final String DASH = " - ";
     private static final String UNIT = "개";
@@ -19,5 +22,9 @@ public class OutputView {
         for (Object coin : sortedCoin) {
             System.out.println(coin + WON + DASH + coinTable.get(coin) + UNIT);
         }
+    }
+
+    public static void printRemainingAmount(Money money) {
+        System.out.println(REMAINING_AMOUNT_MESSAGE + money.getCost() + WON);
     }
 }
