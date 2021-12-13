@@ -17,6 +17,14 @@ public class Product {
         return this.name.equals(name);
     }
 
+    public int getPrice() {
+        return this.price;
+    }
+
+    public boolean isSoldOut() {
+        return stock == 0;
+    }
+
     public void buy(int payment) {
         if (price > payment || stock <= 0) {
             throw new IllegalStateException(BUY_ERROR_SENTENCE);
