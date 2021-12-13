@@ -33,4 +33,8 @@ public class VendingMachine {
 
 		return true;
 	}
+
+	public Balance getHasBalance() {
+		return balance;
+	}
 }

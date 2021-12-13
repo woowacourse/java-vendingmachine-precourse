@@ -4,6 +4,7 @@ import vendingmachine.domain.coin.Coins;
 import vendingmachine.domain.machine.Balance;
 import vendingmachine.domain.machine.VendingMachine;
 import vendingmachine.domain.product.Products;
+import vendingmachine.dto.BalanceDto;
 import vendingmachine.dto.CoinsDto;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -58,5 +59,9 @@ public class VendingMachineController {
 			OutputView.printErrorMessage(e);
 			return registerBalance();
 		}
+	}
+
+	private void processStart(VendingMachine vendingMachine) {
+		OutputView.printVendingMachineHasBalanceMessage(BalanceDto.from(vendingMachine.getHasBalance()));
 	}
 }
