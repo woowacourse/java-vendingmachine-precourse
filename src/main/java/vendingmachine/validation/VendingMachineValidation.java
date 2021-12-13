@@ -2,6 +2,7 @@ package vendingmachine.validation;
 
 import vendingmachine.model.Product;
 import vendingmachine.model.ProductList;
+import vendingmachine.model.User;
 
 public class VendingMachineValidation {
 
@@ -12,4 +13,16 @@ public class VendingMachineValidation {
 		}
 		return product;
 	}
+
+	public static Product buyProduct(ProductList productList, String name, User user) {
+		Product product = existProduct(productList, name);
+		if (!product.isRemain()) {
+			throw new IllegalArgumentException("상품의 재고가 부족합니다.");
+		}
+		if (!user.canBuy(product.getPrice())) {
+			throw new IllegalArgumentException("사용자의 잔고가 부족합니다.");
+		}
+		return product;
+	}
+	
 }

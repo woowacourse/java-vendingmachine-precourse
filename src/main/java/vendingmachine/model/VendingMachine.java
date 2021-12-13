@@ -27,7 +27,7 @@ public class VendingMachine {
 		String name = InputView.buyProduct();
 		Product product = null;
 		try {
-			 product = VendingMachineValidation.existProduct(productList, name);
+			 product = VendingMachineValidation.buyProduct(productList, name, user);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			ErrorView.illegalArgumentException(illegalArgumentException.getMessage());
 			buyProduct(user);
