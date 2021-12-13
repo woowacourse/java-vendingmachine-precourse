@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
+import java.util.HashSet;
 import java.util.Scanner;
+import java.util.Set;
 
 public class InputView {
 	private static final String HOLDING_MONEY_GUIDE_MESSEAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
@@ -22,6 +24,7 @@ public class InputView {
 	private static final String TWO_COMMAS = ",,";
 	private static final String TWO_COMMAS_ERROR_MESSAGE = "[ERROR] 2개 이상의 쉼표가 연속으로 올 수 없습니다. ";
 	private static final String INPUT_FORM_ERROR_MESSAGE = "[ERROR] 상품입력형식에 맞게 입력해주세요. 상품정보는 ;로 구분되고 각 상품정보는 [이름,가격,수량] 형식으로 입력해야 합니다. ";
+	private static final String PRODUCT_NAME_DUPLICATE_ERROR_MESSAGE = "[ERROR] 중복된 상품명을 입력할 수 없습니다. ";
 
 	private final Scanner scanner;
 
@@ -87,6 +90,7 @@ public class InputView {
 	public String[] validateProductNameAndPriceAndCnt() {
 		try {
 			String[] productNameAndPriceAndCnt = scanner.nextLine().split(PRODUCTS_DELIMITER);
+			validateProductName(productNameAndPriceAndCnt);
 			for (String productInfo : productNameAndPriceAndCnt) {
 				validateProductInputForm(productInfo);
 				productInfo = removeSquareBracket(productInfo);
@@ -140,6 +144,19 @@ public class InputView {
 		}
 		if (!product[0].contains(PRODUCTS_DELIMITER_PREFIX) || !product[2].contains(PRODUCTS_DELIMITER_SUFFIX)) {
 			throw new IllegalArgumentException(INPUT_FORM_ERROR_MESSAGE);
+		}
+	}
+
+	public void validateProductName(String[] productNameAndPriceAndCnt) {
+		Set<String> productNames = new HashSet<>();
+		for (String productInfo : productNameAndPriceAndCnt) {
+			validateProductInputForm(productInfo);
+			productInfo = removeSquareBracket(productInfo);
+			String[] product = productInfo.split(PRODUCT_INFO_DELIMITER);
+			productNames.add(product[0]);
+		}
+		if (productNames.size() != productNameAndPriceAndCnt.length) {
+			throw new IllegalArgumentException(PRODUCT_NAME_DUPLICATE_ERROR_MESSAGE);
 		}
 	}
 }
