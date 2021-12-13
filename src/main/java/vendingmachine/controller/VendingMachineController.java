@@ -1,7 +1,6 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.Coins;
-import vendingmachine.domain.Item;
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
@@ -39,11 +38,7 @@ public class VendingMachineController {
 		int leastItemCost = itemcontroller.getLeastItemCost(items);
 		while (money.payable(leastItemCost) && !items.checkAllOutOfOrder()) {
 			try {
-				System.out.println(money);
-				OutputView.printItemPerChaseRequest();
-				Item item = items.findItemByName(inputView.scanItemName(), money);
-				item.sell();
-				money.pay(item.getCost());
+				itemcontroller.update(items, money);
 			} catch (IllegalArgumentException e) {
 				OutputView.printError(e.getMessage());
 			}

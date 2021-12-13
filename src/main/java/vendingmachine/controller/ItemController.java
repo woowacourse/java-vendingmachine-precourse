@@ -8,6 +8,7 @@ import com.google.common.base.Splitter;
 
 import vendingmachine.domain.Item;
 import vendingmachine.domain.Items;
+import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -40,6 +41,14 @@ public class ItemController {
 			.min(Comparator.comparing(Item::getCost))
 			.get()
 			.getCost();
+	}
+
+	public void update(Items items, Money money) {
+		System.out.println(money);
+		OutputView.printItemPerChaseRequest();
+		Item item = items.findItemByName(inputView.scanItemName(), money);
+		item.sell();
+		money.pay(item.getCost());
 	}
 
 	private Items initializeItems(List<String> itemDetails) {
