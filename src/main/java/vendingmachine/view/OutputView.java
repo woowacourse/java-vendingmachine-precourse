@@ -12,6 +12,9 @@ public class OutputView {
 	private static final String EA = "개";
 	private static final String INPUT_PRODUCT = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
+	private static final String CHECK_CURRENT_USER_MONEY = "투입 금액: ";
+	private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
+	private static final String CHARGES = "잔돈";
 
 	public static void printInputVendingMachineCoin() {
 		System.out.println(INPUT_VENDING_MACHINE_COIN);
@@ -41,5 +44,14 @@ public class OutputView {
 	public static void printInputMoney() {
 		printNewLine();
 		System.out.println(INPUT_MONEY);
+	}
+
+	public static void printCurrentUserMoney(int userMoney) {
+		printNewLine();
+		System.out.println(CHECK_CURRENT_USER_MONEY + userMoney);
+	}
+
+	public static void printInputPurchaseProduct() {
+		System.out.println(INPUT_PURCHASE_PRODUCT);
 	}
 }

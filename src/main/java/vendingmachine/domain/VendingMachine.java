@@ -55,4 +55,20 @@ public class VendingMachine {
 	public void inputMoney(Money money) {
 		this.userMoney = money;
 	}
+
+	public boolean isPossibleToPurchaseProduct() {
+		int minimumProductPrice = products.findMinimumProductPrice();
+		return userMoney.isEnoughMoney(minimumProductPrice);
+	}
+
+	public int getUserMoney() {
+		return userMoney.getUserMoney();
+	}
+
+	public void purchaseProduct(String purchaseProductName) {
+		Product product = products.findProduct(purchaseProductName);
+		product.validatePossibleToPurchase(product, userMoney.getUserMoney());
+		product.reduceQuantity();
+		userMoney.spendMoney(product.getPrice());
+	}
 }

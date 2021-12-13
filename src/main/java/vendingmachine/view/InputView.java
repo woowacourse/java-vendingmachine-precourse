@@ -20,4 +20,8 @@ public class InputView {
 		String inputMoney = Console.readLine();
 		return new Money(inputMoney);
 	}
+
+	public static String inputPurchaseProduct() {
+		return Console.readLine();
+	}
 }

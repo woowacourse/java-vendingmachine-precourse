@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import vendingmachine.utils.ValidateUtils;
@@ -10,6 +11,8 @@ public class Products {
 	private static final String ERROR_DUPLICATE_PRODUCT = "중복된 상품입니다.";
 	private static final String ERROR_INVALID_PRODUCT_PRICE = "상품 가격은 100원부터 시작하며, 10원으로 나누어떨어져야 합니다.";
 	private static final String ERROR_INVALID_PRODUCT_INPUT_TYPE = "상품 정보 입력 형식을 다시 확인해주세요";
+	private static final String ERROR_NO_PRODUCT = "존재하지 않는 상품입니다.";
+	private static final String ERROR_NOT_FOUND_PRODUCT = "구매 가능한 상품이 없습니다.";
 	private static final int ZERO = 0;
 	private static final int DIVIDE_NUMBER = 10;
 	private static final int MIN_PRODUCT_PRICE = 100;
@@ -68,5 +71,20 @@ public class Products {
 
 	private String[] splitProductInformation(String product) {
 		return product.substring(1, product.length() - 1).split(COMMA);
+	}
+
+	public int findMinimumProductPrice() {
+		return products.stream()
+			.filter(product -> product.getQuantity() > ZERO)
+			.map(product -> product.getPrice())
+			.min((Comparator.comparingInt(o -> o)))
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FOUND_PRODUCT));
+	}
+
+	public Product findProduct(String purchaseProductName) {
+		return products.stream()
+			.filter(product -> product.getName().equals(purchaseProductName))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_NO_PRODUCT));
 	}
 }

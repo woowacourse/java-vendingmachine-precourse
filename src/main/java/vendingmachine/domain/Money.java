@@ -24,6 +24,18 @@ public class Money {
 	}
 
 	public void changeToCoin(int amount) {
+		spendMoney(amount);
+	}
+
+	public void spendMoney(int amount) {
 		money -= amount;
+	}
+
+	public boolean isEnoughMoney(int minimumProductPrice) {
+		return money >= minimumProductPrice;
+	}
+
+	public int getUserMoney() {
+		return money;
 	}
 }

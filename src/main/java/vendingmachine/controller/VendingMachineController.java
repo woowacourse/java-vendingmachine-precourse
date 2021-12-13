@@ -13,6 +13,38 @@ public class VendingMachineController {
 		Products products = inputProduct();
 		vendingMachine.addProducts(products);
 		vendingMachine.inputMoney(inputMoney());
+		purchaseProduct(vendingMachine);
+	}
+
+	private void purchaseProduct(VendingMachine vendingMachine) {
+		try {
+			vendingMachine.isPossibleToPurchaseProduct();
+			OutputView.printCurrentUserMoney(vendingMachine.getUserMoney());
+			pressPurchaseButton(vendingMachine);
+			purchaseProduct(vendingMachine);
+		} catch (IllegalArgumentException exception) {
+			return;
+		}
+	}
+
+	private void pressPurchaseButton(VendingMachine vendingMachine) {
+		try {
+			String purchaseProductName = inputPurchaseProduct();
+			vendingMachine.purchaseProduct(purchaseProductName);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printException(exception);
+			pressPurchaseButton(vendingMachine);
+		}
+	}
+
+	private String inputPurchaseProduct() {
+		try {
+			OutputView.printInputPurchaseProduct();
+			return InputView.inputPurchaseProduct();
+		} catch (IllegalArgumentException exception) {
+			OutputView.printException(exception);
+			return inputPurchaseProduct();
+		}
 	}
 
 	private Money inputMoney() {
