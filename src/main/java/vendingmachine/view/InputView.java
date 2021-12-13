@@ -5,7 +5,6 @@ import vendingmachine.model.Product;
 import vendingmachine.util.StringUtil;
 import vendingmachine.util.Validator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class InputView {
@@ -61,7 +60,7 @@ public class InputView {
         }
     }
 
-    public String inputPurchase(int payMoney) {
+    public String inputPurchase() {
         System.out.println(INPUT_PURCHASE_SENETENCE);
         return Console.readLine();
     }
