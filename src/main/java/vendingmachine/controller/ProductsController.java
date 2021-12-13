@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -11,18 +11,18 @@ import vendingmachine.validator.ProductValidator;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.Input;
 
-public class ProductController {
+public class ProductsController {
 	public static Products getProducts() {
-		while (true) {
-			Products products = makeProducts();
-			if (products != null)
-				return products;
-		}
+		Products products;
+		do {
+			products = makeProducts();
+		} while(products == null);
+		return products;
 	}
 
 	private static Products makeProducts() {
 		try {
-			List<String> productsInfoList = Input.getProductsInfo();
+			List<String> productsInfoList = Input.productsInfo();
 			Validator.validateProductsInputFormat(productsInfoList);
 
 			List<List<String>> splitLists = getSplitLists(productsInfoList);
