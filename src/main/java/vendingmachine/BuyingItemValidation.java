@@ -14,7 +14,7 @@ public class BuyingItemValidation {
 	}
 
 	private static void validateBuyableItem(Item item) {
-		if (!item.isAmountZero()) {
+		if (item.isAmountZero()) {
 			throw new IllegalArgumentException("해당 상품의 재고가 없습니다.");
 		}
 	}
