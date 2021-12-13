@@ -22,7 +22,7 @@ public class VendingMachine {
 
 	public static boolean isUserBuyMerchandise(User user, Merchandises merchandises) {
 		List<Merchandise> notBuyMerchandise = merchandises.getMerchandiseList().stream()
-			.filter((merchandise -> merchandise.getMoney().compareMoney(user.getUserMoney())))
+			.filter((merchandise -> merchandise.isBigMerchandiseMoney(user.getUserMoney().getMoney())))
 			.collect(Collectors.toList());
 
 		return notBuyMerchandise.size() != merchandises.getMerchandiseList().size();

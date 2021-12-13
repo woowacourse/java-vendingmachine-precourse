@@ -54,6 +54,10 @@ public class Merchandise {
 		return name.isSameName(anotherName);
 	}
 
+	public boolean isBigMerchandiseMoney(int anotherMoney) {
+		return money.isBigMyMoney(anotherMoney);
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) {

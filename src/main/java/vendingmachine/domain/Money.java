@@ -15,12 +15,12 @@ public class Money {
 		return money;
 	}
 
-	public void deductMoney(Money minusMoney) {
-		money -= minusMoney.getMoney();
+	public void deductMoney(int minusMoney) {
+		money -= minusMoney;
 	}
 
-	public boolean compareMoney(Money anotherMoney) {
-		if (money > anotherMoney.getMoney()) {
+	public boolean isBigMyMoney(int anotherMoney) {
+		if (money > anotherMoney) {
 			return true;
 		}
 		return false;
