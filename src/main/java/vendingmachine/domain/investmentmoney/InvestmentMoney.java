@@ -44,13 +44,11 @@ public class InvestmentMoney {
         }
     }
 
-    public void calculate(Product product) {
-        if (investmentMoney < product.getPrice()) {
+    public void calculate(int price) {
+        if (investmentMoney < price) {
             throw new IllegalArgumentException(VALID_PRODUCT_PRICE);
         }
-
-        product.purchase();
-        investmentMoney -= product.getPrice();
+        investmentMoney -= price;
     }
 
     public boolean isPay(Product product) {

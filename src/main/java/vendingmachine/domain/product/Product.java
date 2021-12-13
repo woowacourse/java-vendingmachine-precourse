@@ -50,7 +50,7 @@ public class Product {
         return false;
     }
 
-    public void purchase() {
+    public void receive() {
         if (!quantity.isExistQuantity()) {
             throw new IllegalArgumentException(VALID_PRODUCT_QUANTITY);
         }

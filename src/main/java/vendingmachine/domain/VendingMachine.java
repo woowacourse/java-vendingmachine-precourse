@@ -37,7 +37,8 @@ public class VendingMachine {
         Product product = products.findByName(productPurchaseName)
             .orElseThrow(() -> new IllegalArgumentException(VALID_PRODUCT_NAME));
 
-        investmentMoney.calculate(product);
+        investmentMoney.calculate(product.getPrice());
+        product.receive();
     }
 
     public Changes getChanges(InvestmentMoney investmentMoney) {
