@@ -24,4 +24,11 @@ public class InputView {
         // TODO 검증 로직
         return inputProductInfo;
     }
+
+    public static String inputUserMoney() {
+        System.out.println(VendingMachineConstant.INPUT_USER_MONEY_MESSAGE);
+        String inputMoney = Console.readLine();
+        // TODO 검증 로직
+        return inputMoney;
+    }
 }

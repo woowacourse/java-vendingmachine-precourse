@@ -10,5 +10,7 @@ public class Application {
         OutputView.printCoinCount(coins.getCoins());
 
         InputView.inputProductInfo();
+
+        InputView.inputUserMoney();
     }
 }
