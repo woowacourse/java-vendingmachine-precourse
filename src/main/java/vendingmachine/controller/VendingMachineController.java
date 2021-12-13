@@ -8,7 +8,7 @@ import vendingmachine.view.Input;
 import vendingmachine.view.Output;
 
 public class VendingMachineController {
-	private static VendingMachine vendingMachine;
+	private final VendingMachine vendingMachine;
 
 	public VendingMachineController() {
 		Coins coins = new Coins(getMoneyInMachine());
@@ -38,7 +38,7 @@ public class VendingMachineController {
 		return Input.buyingProductName();
 	}
 
-	public static void run() {
+	public void run() {
 		while (!vendingMachine.checkTermination()) {
 			try {
 				Output.inputMoney(vendingMachine.getInputMoney());
