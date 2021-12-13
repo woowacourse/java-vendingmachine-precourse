@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -31,7 +32,7 @@ public class ProductArgumentResolver {
     }
 
     private Product newProduct(String[] split) {
-        return new Product(split[NAME_INDEX].trim(), toInt(PRICE_INDEX, split), toInt(QUANTITY_INDEX, split));
+        return new Product(split[NAME_INDEX].trim(), toInt(split[PRICE_INDEX]), toInt(split[QUANTITY_INDEX]));
     }
 
     private String[] splitProducts(String products) {
@@ -56,7 +57,11 @@ public class ProductArgumentResolver {
         throw ErrorMessage.INVALID_DELIMITER.getException();
     }
 
-    private int toInt(int priceIndex, String[] split) {
-        return Integer.parseInt(split[priceIndex]);
+    private int toInt(String string) {
+        try {
+            return Integer.parseInt(string);
+        } catch (NumberFormatException exception) {
+            throw ErrorMessage.NOT_NUMBER.getException();
+        }
     }
 }

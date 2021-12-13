@@ -8,7 +8,7 @@ public class Input {
             try {
                 return Integer.parseInt(Console.readLine());
             } catch (NumberFormatException exception) {
-                throw ErrorMessage.NOT_NUMBER.getException();
+                throw ErrorMessage.NOT_PRICE.getException();
             }
         }
     }
