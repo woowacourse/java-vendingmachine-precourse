@@ -17,18 +17,18 @@ public class MenuInputFormatValidator {
     }
 
     private static void validateMerchandiseInfoFormat(String merchandiseInfo) {
-        validateNotEmptyInput(merchandiseInfo);
+        validateNotBlankInput(merchandiseInfo);
         validateSeparatorFormat(merchandiseInfo);
-        String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
 
+        String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
         validateNameLength(infoList[0]);
         validatePriceInput(infoList[1]);
         validateMerchandiseNumberInput(infoList[2]);
     }
 
-    private static void validateNotEmptyInput(String merchandiseInfo) {
+    private static void validateNotBlankInput(String merchandiseInfo) {
         if (merchandiseInfo.length() == 0) {
-            throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION);
+            throw new IllegalArgumentException(BLANK_INPUT_EXCEPTION);
         }
     }
 
@@ -55,7 +55,7 @@ public class MenuInputFormatValidator {
 
     private static void validateNameLength(String input) {
         if (input.length() == 0) {
-            throw new IllegalArgumentException(EMPTY_NAME_INPUT_EXCEPTION);
+            throw new IllegalArgumentException(BLANK_NAME_INPUT_EXCEPTION);
         }
     }
 
