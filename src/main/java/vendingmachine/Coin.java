@@ -20,11 +20,9 @@ public enum Coin {
         if (amount == COIN_500.getAmount()) {
             return COIN_500;
         }
-
         if (amount == COIN_100.getAmount()) {
             return COIN_100;
         }
-
         if (amount == COIN_50.getAmount()) {
             return COIN_50;
         }
@@ -32,7 +30,7 @@ public enum Coin {
         return COIN_10;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 

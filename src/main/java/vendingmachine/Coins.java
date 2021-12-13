@@ -9,44 +9,36 @@ import java.util.Map;
 public class Coins {
     private static final int NO_MONEY = 0;
 
-    private Map<Integer, Integer> coins = new HashMap<>();
+    private final Map<Coin, Integer> coins = new HashMap<>();
 
-    public Coins(int inputAmount) {
-        breakIntoCoins(inputAmount);
+    public Coins(int amount) {
+        breakIntoCoins(amount);
     }
 
     private void breakIntoCoins(int inputAmount) {
         List<Integer> coinAmounts = Coin.getAmounts();
 
-        while (hasMoney(inputAmount)) {
-            Integer randomAmount = Randoms.pickNumberInList(coinAmounts);
-            int coinCount = getCoinCount(randomAmount, inputAmount);
+        while (isMoneyLeft(inputAmount)) {
+            int randomAmount = Randoms.pickNumberInList(coinAmounts);
+            Coin coin = Coin.create(randomAmount);
+            int coinCount = coin.changeIntoCoins(inputAmount);
 
-            addToChanges(randomAmount, coinCount);
+            coins.put(coin, coinCount);
 
             removePickedAmount(coinAmounts, randomAmount);
-            inputAmount = deductInputAmount(randomAmount, coinCount);
+            inputAmount = getRestMoney(inputAmount, coinCount);
         }
-
     }
 
-    private int deductInputAmount(Integer randomAmount, int coinCount) {
-        return randomAmount * coinCount;
+    private int getRestMoney(Integer totalAmount, int coinCount) {
+        return totalAmount % coinCount;
     }
 
     private void removePickedAmount(List<Integer> coinAmounts, Integer randomAmount) {
         coinAmounts.remove(randomAmount);
     }
 
-    private void addToChanges(Integer randomAmount, int coinCount) {
-        coins.put(randomAmount, coinCount);
-    }
-
-    private int getCoinCount(int randomAmount, int inputAmount) {
-        return Coin.create(randomAmount).changeIntoCoins(inputAmount);
-    }
-
-    private boolean hasMoney(int inputAmount) {
+    private boolean isMoneyLeft(int inputAmount) {
         return inputAmount > NO_MONEY;
     }
 
