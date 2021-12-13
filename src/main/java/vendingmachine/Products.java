@@ -36,4 +36,14 @@ public class Products {
         }
         throw new IllegalArgumentException();
     }
+
+    public int calculateProduct(String name) {
+        for (Product p : productsList) {
+            if (p.isInclude(name)) {
+                p.decreaseNumber();
+                return p.getPrice();
+            }
+        }
+        return 0;
+    }
 }

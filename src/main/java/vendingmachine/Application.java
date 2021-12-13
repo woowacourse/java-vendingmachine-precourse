@@ -1,15 +1,19 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 public class Application {
     public static void main(String[] args) {
         Message message = new Message();
         User user = new User();
-        Inventory inventory = new Inventory();
+        CoinStock coinStock = new CoinStock();
         Products products = new Products();
 
         message.printInputHolding();
         int holding = user.inputHolding();
-        inventory.makeCoins(holding);
+        coinStock.makeCoins(holding);
 
         message.printInputProducts();
         String[] productsList = user.inputProducts();
@@ -20,13 +24,18 @@ public class Application {
         Change change = new Change(amount);
 
         while (true) {
-            message.printChanges(change.getAmount());
-            if (change.getAmount() < products.getMaxPrice()) {
+            int remain = change.getAmount();
+            message.printChanges(remain);
+            if (remain < products.getMaxPrice()) {
                 message.printLackOfChanges();
+                LinkedHashMap<Integer, Integer> changeCoinsMap = coinStock.getLastChanges(remain);
+                message.printLastChanges(changeCoinsMap);
                 break;
             }
             message.printInputProductName();
             String productName = user.inputProductName();
+            int price = products.calculateProduct(productName);
+            change.decreaseAmount(price);
         }
 
     }

@@ -6,13 +6,13 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class Inventory {
+public class CoinStock {
     private Message message = new Message();
     private Parser parser = new Parser();
     private LinkedHashMap<Integer, Integer> coinCountMap = new LinkedHashMap<>();
     private List<Integer> coinAmountList = new ArrayList<>();
 
-    Inventory() {
+    CoinStock() {
         initCoinAmount();
         initCoinCount();
     }
@@ -30,6 +30,27 @@ public class Inventory {
                 initCoinCount();
             }
         }
+    }
+
+    public LinkedHashMap<Integer, Integer> getLastChanges(int changes) {
+        LinkedHashMap<Integer, Integer> result = new LinkedHashMap<>();
+        int remain = changes;
+        for (int amount : coinAmountList) {
+            int count = coinCountMap.get(amount);
+            if (count > 0 && remain > 0 && remain % amount == 0) {
+                int usedCount = getUsedCoinCount(amount, count, remain);
+                remain -= usedCount * amount;
+                result.put(amount, usedCount);
+            }
+        }
+        return result;
+    }
+
+    private int getUsedCoinCount(int amount, int count, int remain) {
+        if (remain / amount >= count) {
+            return count;
+        }
+        return remain / amount;
     }
 
     private void initCoinAmount() {
