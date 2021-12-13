@@ -13,6 +13,9 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 	private final static String SPLIT_REGEX = ",";
+	private final static String INPUT_ITEM_SPLIT_REGEX = ";";
+	private final static String REPLACE_TARGET_LEFT = "[";
+	private final static String REPLACE_TARGET_RIGHT = "]";
 
 	InputView inputView = new InputView();
 	OutputView outputView = new OutputView();
@@ -63,9 +66,9 @@ public class VendingMachine {
 	}
 
 	private void setItems(String inputItem) {
-		String[] itemStrings = inputItem.split(";");
+		String[] itemStrings = inputItem.split(INPUT_ITEM_SPLIT_REGEX);
 		for (String itemString : itemStrings) {
-			itemString = itemString.replace("[", "").replace("]", "");
+			itemString = itemString.replace(REPLACE_TARGET_LEFT, "").replace(REPLACE_TARGET_RIGHT, "");
 			String[] itemInfos = itemString.split(SPLIT_REGEX);
 			items.put(itemInfos[0], new Item(itemInfos));
 		}
