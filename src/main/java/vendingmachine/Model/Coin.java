@@ -19,6 +19,10 @@ public enum Coin {
 		return amount;
 	}
 
+	public String toString() {
+		return Integer.toString(amount);
+	}
+
 	public static Coin getCoin(int amount) {
 		return Coin.valueOf(Constants.COIN_NAME + amount);
 	}

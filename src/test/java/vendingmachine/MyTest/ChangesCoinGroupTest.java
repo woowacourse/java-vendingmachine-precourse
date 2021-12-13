@@ -34,6 +34,17 @@ class ChangesCoinGroupTest extends NsTest {
 	}
 
 	@Test
+	void 잔돈_개수확인3() {
+		assertRandomNumberInListTest(() -> {
+				runException("560", "[콜라,200,1];[사이다,200,1]", "460", "콜라", "사이다");
+				assertThat(output()).doesNotContain(
+					"500원 - 0개"
+				);
+			}, 500, 50, 10
+		);
+	}
+
+	@Test
 	void 잔돈_개수확인2() {
 		assertRandomNumberInListTest(() -> {
 				runException("300", "[콜라,900,1];[사이다,2000,1]", "3200", "콜라", "사이다");

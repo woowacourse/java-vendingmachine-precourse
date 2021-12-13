@@ -25,7 +25,7 @@ public class Money {
 		return money / divider;
 	}
 
-	public void setMinus(int money) {
+	public void spend(int money) {
 		this.money -= money;
 	}
 
@@ -35,5 +35,10 @@ public class Money {
 
 	public boolean isBiggerOrSame(int money) {
 		return this.money >= money;
+	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(money);
 	}
 }

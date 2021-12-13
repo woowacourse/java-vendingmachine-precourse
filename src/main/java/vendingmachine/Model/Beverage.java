@@ -23,11 +23,16 @@ public class Beverage {
 		new NumberValidator(values[2]);
 	}
 
-	public void sell() {
+	public void minusOneStock() {
 		stock--;
 	}
 
 	public boolean isSoldOut() {
 		return stock == 0;
+	}
+
+	@Override
+	public String toString() {
+		return name;
 	}
 }
