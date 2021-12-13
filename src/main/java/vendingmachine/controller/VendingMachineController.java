@@ -1,9 +1,11 @@
 package vendingmachine.controller;
 
+import vendingmachine.repository.ProductRepository;
 import vendingmachine.service.ChangeService;
 import vendingmachine.service.MachineCoinService;
 import vendingmachine.service.ProductService;
 
+import static vendingmachine.repository.BuyService.sellProduct;
 import static vendingmachine.view.InputViews.inputOrderMessage;
 import static vendingmachine.view.OutputViews.*;
 
@@ -40,7 +42,8 @@ public class VendingMachineController {
     public void startSale() {
         int currentChange = ChangeService.getCurrentChange();
         while (isAvailableKeepSell(currentChange)) {
-            getUserOrder(currentChange);
+            sellProduct(getUserOrder(currentChange));
+            currentChange = ChangeService.getCurrentChange();
         }
     }
 

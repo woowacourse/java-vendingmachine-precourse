@@ -25,6 +25,11 @@ public class ProductRepository {
         return productInfo.get(name).getQuantity();
     }
 
+    public static int substractProductQuantity(String name) {
+        productInfo.get(name).sellProduct();
+        return productInfo.get(name).getPrice();
+    }
+
     public boolean isExist(String name) {
         if (!productInfo.containsKey(name)) {
             return false;
