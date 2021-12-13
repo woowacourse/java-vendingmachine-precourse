@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import static vendingmachine.view.OutputView.*;
+
 import vendingmachine.model.Changes;
 import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
@@ -35,7 +37,7 @@ public class VendingMachineController {
 			sell(productName);
 
 			int remainingDeposit = vendingMachine.getDeposit();
-			viewController.printRemainingDeposit(remainingDeposit);
+			printRemainingDeposit(remainingDeposit);
 		}
 
 		returnChanges();

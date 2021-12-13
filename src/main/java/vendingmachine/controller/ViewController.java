@@ -1,38 +1,59 @@
 package vendingmachine.controller;
 
+import static vendingmachine.view.OutputView.*;
+
 import vendingmachine.model.VendingMachine;
+import vendingmachine.validator.BuyValidator;
+import vendingmachine.validator.MoneyValidator;
+import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
-import vendingmachine.view.OutputView;
 
 public class ViewController {
 
 	public static InputView inputView = new InputView();
-	public static OutputView outputView = new OutputView();
 
 	public int returnMoneyOfVendingMachine() {
-		outputView.askInputMoneyOfVendingMachine();
-		return inputView.getValidMoney();
+		try {
+			String input = inputView.getMoneyInput();
+			MoneyValidator.isValidMoney(input);
+			return Integer.parseInt(input);
+		} catch (IllegalArgumentException exception) {
+			printError(exception);
+			return returnMoneyOfVendingMachine();
+		}
 	}
 
 	public int returnDepositAmount() {
-		outputView.askDepositAmount();
-		int depositAmount = inputView.getValidMoney();
-		outputView.printRemainingDeposit(depositAmount);
-
-		return depositAmount;
+		try {
+			String input = inputView.getDepositInput();
+			MoneyValidator.isValidMoney(input);
+			return Integer.parseInt(input);
+		} catch (IllegalArgumentException exception) {
+			printError(exception);
+			return returnDepositAmount();
+		}
 	}
 
 	public String returnRawProductsInput() {
-		outputView.askProductToRegister();
-		return inputView.getRawProductsInput();
+		try {
+			String input = inputView.getRawProductsInput();
+			ProductValidator.isValidProducts(input);
+			return input;
+		} catch (IllegalArgumentException exception) {
+			printError(exception);
+			return returnRawProductsInput();
+		}
 	}
 
 	public String returnProductWantToBuy(VendingMachine vendingMachine) {
-		outputView.askProductWantToBuy();
-		return inputView.getProductWantToBuy(vendingMachine);
+		try {
+			String input = inputView.getProductWantToBuy();
+			BuyValidator.isAvailableForBuy(input, vendingMachine);
+			return input;
+		} catch (IllegalArgumentException exception) {
+			printError(exception);
+			return returnProductWantToBuy(vendingMachine);
+		}
 	}
 
-	public void printRemainingDeposit(int deposit) {
-		outputView.printRemainingDeposit(deposit);
-	}
 }
