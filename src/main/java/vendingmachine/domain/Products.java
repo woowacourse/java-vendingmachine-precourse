@@ -12,7 +12,6 @@ public class Products {
 	}
 
 	private List<Product> createProducts(String inputProducts) {
-		System.out.println(inputProducts);
 		String[] split = inputProducts.split(";");
 
 		return Arrays.stream(split)
