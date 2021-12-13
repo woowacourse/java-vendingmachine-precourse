@@ -57,7 +57,7 @@ public class VendingMachine {
 	private void subtractInputCost(Product product) {
 		Validation.validateProductAmountIsZero(product);
 
-		if (inputCost - product.getPrice() >= 0) {
+		if (product.CanInputCostSubtract(inputCost)) {
 			inputCost -= product.getPrice();
 		}
 	}
@@ -77,15 +77,6 @@ public class VendingMachine {
 
 		return true;
 	}
-
-/*	public boolean checkAllProductAmount() {
-		for (Product product : products) {
-			if (product.getAmount() > 0) {
-				return false;
-			}
-		}
-		return true;
-	}*/
 
 	public int compareInputCostAndCoinToChange() {
 		if (inputCost < getSumCoinAmount()) {

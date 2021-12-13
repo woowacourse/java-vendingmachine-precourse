@@ -38,6 +38,14 @@ public class Product implements Comparable<Product> {
 		amount--;
 	}
 
+	public boolean CanInputCostSubtract(int inputCost) {
+		if (inputCost - price >= 0) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public String getName() {
 		return name;
 	}
