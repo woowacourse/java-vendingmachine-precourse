@@ -13,7 +13,7 @@ public class VendingMachine {
 
     public VendingMachine(final int machineMoney) {
         validateMachineMoney(machineMoney);
-        this.machineCoins = changeMachineMoneyIntoCoins(machineMoney);
+        this.machineCoins = calculateCoins(machineMoney);
     }
 
     public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
@@ -57,16 +57,11 @@ public class VendingMachine {
         return (inputMachineMoney % 10) == 0;
     }
 
-    public Map<Coin, Integer> changeMachineMoneyIntoCoins(final int machineMoney) {
-        return calculateCoins(machineMoney);
-    }
-
-    public Map<Coin, Integer> calculateCoins(final int machineMoney) {
+    protected Map<Coin, Integer> calculateCoins(final int machineMoney) {
         Map<Coin, Integer> machineCoins = createCoinUnitList();
         int machineMoneyToCountCoin = machineMoney;
 
         while (machineMoneyToCountCoin != 0) {
-            machineCoins = new LinkedHashMap<>();
             machineMoneyToCountCoin = machineMoney;
 
             machineMoneyToCountCoin = inputCoinRandomly(machineCoins, machineMoneyToCountCoin);
