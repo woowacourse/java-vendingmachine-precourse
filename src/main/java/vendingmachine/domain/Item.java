@@ -13,9 +13,10 @@ public class Item {
 	private static final String ERROR = "[ERROR] ";
 	private static final String INVALID_NUMBER_OF_TYPE_ERROR = ERROR + "상품 정보는 " + NAME + ", " + COST + ", " + AMOUNT
 		+ "의 세 단위로 입력해야 합니다.";
-	private static final String NON_DIGIT_ERROR = ERROR + "%s이 숫자여야 합니다.";
-	private static final String INVALID_COST_CONDITION_ERROR = ERROR + COST + "이" + COST_LOWER_BOUND + " 이상이면서 "
-		+ TEN + "으로 나누어 떨어져야 합니다.";
+	private static final String MENTION = "상품 %s의 %s이 ";
+	private static final String NON_DIGIT_ERROR = ERROR + MENTION + "숫자여야 합니다.";
+	private static final String NOT_DIVISIBLE_BY_TEN_ERROR = ERROR + MENTION + TEN + "으로 나누어 떨어져야 합니다.";
+	private static final String INVALID_RANGE_ERROR = ERROR + MENTION + COST_LOWER_BOUND + " 이상이여야 합니다.";
 
 	private final String name;
 	private final int cost;
@@ -40,13 +41,16 @@ public class Item {
 		try {
 			return Integer.parseInt(value);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(String.format(NON_DIGIT_ERROR, type));
+			throw new IllegalArgumentException(String.format(NON_DIGIT_ERROR, name, type));
 		}
 	}
 
 	private void validateCost(int cost) {
-		if (!isValidRange(cost) || !isDivisibleByTen(cost)) {
-			throw new IllegalArgumentException(INVALID_COST_CONDITION_ERROR);
+		if (!isValidRange(cost)) {
+			throw new IllegalArgumentException(String.format(INVALID_RANGE_ERROR, name, COST));
+		}
+		if (!isDivisibleByTen(cost)){
+			throw new IllegalArgumentException(String.format(NOT_DIVISIBLE_BY_TEN_ERROR, name, COST));
 		}
 	}
 
