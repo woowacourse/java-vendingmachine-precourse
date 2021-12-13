@@ -38,12 +38,14 @@ public class Money {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object other) {
+		if (this == other) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (other == null || getClass() != other.getClass()) {
 			return false;
-		Money money = (Money)o;
+		}
+		Money money = (Money)other;
 		return amount == money.amount;
 	}
 

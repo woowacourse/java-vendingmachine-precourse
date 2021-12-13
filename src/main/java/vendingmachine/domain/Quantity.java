@@ -41,12 +41,14 @@ public class Quantity {
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (this == o)
+	public boolean equals(Object other) {
+		if (this == other) {
 			return true;
-		if (o == null || getClass() != o.getClass())
+		}
+		if (other == null || getClass() != other.getClass()) {
 			return false;
-		Quantity quantity = (Quantity)o;
+		}
+		Quantity quantity = (Quantity)other;
 		return count == quantity.count;
 	}
 
@@ -54,6 +56,5 @@ public class Quantity {
 	public int hashCode() {
 		return Objects.hash(count);
 	}
-
 
 }
