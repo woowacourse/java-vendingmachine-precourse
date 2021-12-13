@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public interface InputValidator {
 
-    public static final String PRODUCT_INFO_INPUT_REGEX = "^(\\[[a-zA-Z가-힣0-9]+,[0-9]+,[0-9]+\\])(;\\[[a-zA-Z가-힣0-9]+,[0-9]+,[0-9]+\\])*$";
+    String PRODUCT_INFO_INPUT_REGEX = "^(\\[[a-zA-Z가-힣0-9]+,[0-9]+,[0-9]+\\])(;\\[[a-zA-Z가-힣0-9]+,[0-9]+,[0-9]+\\])*$";
 
     static void validateInsertedAmount(String insertedAmount) {
         if (insertedAmount.isEmpty()) {
