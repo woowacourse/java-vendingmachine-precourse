@@ -27,6 +27,10 @@ public class Product {
 		return new Product(product_element[NAME_INDEX], product_element[PRICE_INDEX], product_element[QUANTITY_INDEX]);
 	}
 
+	public boolean isValidateProductQuantityZero() {
+		return quantity.isValidateQuantityZero();
+	}
+
 	public Name getName() {
 		return name;
 	}

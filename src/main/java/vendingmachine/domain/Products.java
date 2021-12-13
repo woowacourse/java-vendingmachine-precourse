@@ -33,4 +33,9 @@ public class Products {
 			throw new IllegalArgumentException(ERROR_PRODUCTS_DUPLICATED);
 		}
 	}
+
+	public boolean isValidateHasProductsQuantity() {
+		return products.stream()
+			.allMatch(product -> product.isValidateProductQuantityZero());
+	}
 }
