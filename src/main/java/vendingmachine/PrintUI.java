@@ -8,4 +8,11 @@ public class PrintUI {
         int change = Integer.parseInt(Console.readLine());
         return change;
     }
+
+    public static String[] InputJuice() {
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        String[] Juices = Console.readLine().split(";");
+        System.out.println();
+        return Juices;
+    }
 }
