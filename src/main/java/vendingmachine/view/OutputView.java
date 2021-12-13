@@ -1,11 +1,5 @@
 package vendingmachine.view;
 
-import java.util.HashMap;
-
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.CoinCase;
-import vendingmachine.domain.VendingMachine;
-
 public class OutputView {
 
     private static final String NEW_LINE = "\n";
@@ -16,14 +10,16 @@ public class OutputView {
     private static final String CHANGE_INFO_MESSAGE = "잔돈";
     private static final String ERROR_SYMBOL = "[ERROR] ";
 
-    public static void printHoldingCoins(final HashMap<Coin, Integer> holdingCoins) {
-        System.out.println(HOLDING_COIN_INFO_MESSAGE);
-        for (Coin coin : Coin.getCoinListDecreasingOrder()) {
-            System.out.print(coin.toString());
-            System.out.print(holdingCoins.get(coin));
-            System.out.println(NUMBER_UNIT);
-        }
+    public static void printNewLine() {
         System.out.print(NEW_LINE);
+    }
+
+    public static void printHoldingCoinsInfoMessage() {
+        System.out.println(HOLDING_COIN_INFO_MESSAGE);
+    }
+
+    public static void printHoldingCoins(final String coinUnit, final int amountOfCoin) {
+        System.out.println(coinUnit + amountOfCoin + NUMBER_UNIT);
     }
 
     public static void printInsertAmount(final int insertAmount) {
@@ -35,11 +31,9 @@ public class OutputView {
         System.out.println(CHANGE_INFO_MESSAGE);
     }
 
-    public static void printChangeCoins(final Coin coin, final int numberOfChangeCoins) {
+    public static void printChangeCoins(final String coinUnit, final int numberOfChangeCoins) {
         if (numberOfChangeCoins > 0) {
-            System.out.print(coin.toString());
-            System.out.print(numberOfChangeCoins);
-            System.out.println(NUMBER_UNIT);
+            System.out.println(coinUnit + numberOfChangeCoins + NUMBER_UNIT);
         }
     }
 

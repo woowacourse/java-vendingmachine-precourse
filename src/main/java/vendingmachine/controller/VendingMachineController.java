@@ -33,7 +33,11 @@ public class VendingMachineController {
         try {
             int validHoldingMoneyInput = HoldingAmountValidator.getValidHoldingAmount(InputView.inputHoldingAmount());
             vendingMachine.initializeCoinCase(validHoldingMoneyInput);
-            OutputView.printHoldingCoins(vendingMachine.getHoldingCoins());
+            OutputView.printHoldingCoinsInfoMessage();
+            for (Coin coin : Coin.getCoinListDecreasingOrder()) {
+                OutputView.printHoldingCoins(coin.toString(), vendingMachine.getNumberOfHoldingCoins(coin));
+            }
+            OutputView.printNewLine();
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(e.getMessage());
             initializeHoldingMoney();
@@ -90,7 +94,7 @@ public class VendingMachineController {
             vendingMachine.returnCoin(coin);
             numberOfChangeCoins++;
         }
-        OutputView.printChangeCoins(coin, numberOfChangeCoins);
+        OutputView.printChangeCoins(coin.toString(), numberOfChangeCoins);
         return remainInsertAmount;
     }
 }
