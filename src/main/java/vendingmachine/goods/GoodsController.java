@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class GoodsController {
-    List<Goods> goodsList = new ArrayList<>();
+    List<Goods> goodsList;
 
     GoodsController(List<Goods> goodsList) {
         this.goodsList = goodsList;
