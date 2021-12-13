@@ -25,7 +25,7 @@ public class Products {
 		product.reduceCount();
 	}
 
-	private boolean hasProducts() {
+	private boolean hasNotProductsCount() {
 		return products.stream()
 			.allMatch(Product::isSoldOut);
 	}
