@@ -1,7 +1,16 @@
 package vendingmachine;
 
+import vendingmachine.process.ProcessController;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+
+        ProcessController.makeHoldingAmount();
+        ProcessController.makeCoins();
+        ProcessController.printMachineCoins();
+        ProcessController.inputGoods();
+        ProcessController.inputUserMoney();
+        ProcessController.buyGoods();
+        ProcessController.makeChanges();
     }
 }
