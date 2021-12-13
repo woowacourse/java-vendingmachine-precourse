@@ -6,6 +6,7 @@ public class Item {
 	private static final int ZERO = 0;
 	private static final int TEN = 10;
 	private static final int COST_LOWER_BOUND = 100;
+	private static final int AMOUNT_LOWER_BOUND = ZERO;
 	private static final int NUMBER_OF_TYPE = 3;
 	private static final int NAME_INDEX = 0;
 	private static final int COST_INDEX = 1;
@@ -22,6 +23,7 @@ public class Item {
 	private static final String NON_DIGIT_ERROR = ERROR + MENTION + "숫자여야 합니다.";
 	private static final String NOT_DIVISIBLE_BY_TEN_ERROR = ERROR + MENTION + TEN + "으로 나누어 떨어져야 합니다.";
 	private static final String INVALID_RANGE_ERROR = ERROR + MENTION + COST_LOWER_BOUND + " 이상이여야 합니다.";
+	private static final String INVALID_AMOUNT_RANGE_ERROR = ERROR + MENTION + AMOUNT_LOWER_BOUND + " 이상이여야 합니다.";
 
 	private final String name;
 	private final int cost;
@@ -33,6 +35,7 @@ public class Item {
 		this.cost = isNumber(detailContainer.get(COST_INDEX), COST);
 		validateCost(cost);
 		this.amount = isNumber(detailContainer.get(AMOUNT_INDEX), AMOUNT);
+		validateAmount(amount);
 
 	}
 
@@ -65,6 +68,16 @@ public class Item {
 
 	private boolean isDivisibleByTen(final int cost) {
 		return ZERO == cost % TEN;
+	}
+
+	private void validateAmount(final int amount) {
+		if (!isValidAmountRange(amount)) {
+			throw new IllegalArgumentException(String.format(INVALID_AMOUNT_RANGE_ERROR, name, AMOUNT));
+		}
+	}
+
+	private boolean isValidAmountRange(final int amount) {
+		return AMOUNT_LOWER_BOUND <= amount;
 	}
 
 	public String getName() {
