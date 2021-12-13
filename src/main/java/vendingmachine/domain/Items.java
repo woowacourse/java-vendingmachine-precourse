@@ -30,6 +30,15 @@ public class Items {
 		return foundItem;
 	}
 
+	private void checkItemSellable(Item item, Money money){
+		if (!item.isStockExist()) {
+			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
+		}
+		if (!money.payable(item.getCost())){
+			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
+		}
+	}
+
 	public boolean checkAllOutOfOrder() {
 		return items.stream()
 			.map(Item::isStockExist)
@@ -42,15 +51,6 @@ public class Items {
 			.collect(Collectors.toSet());
 		if (nonDuplicatedItems.size() < items.size()) {
 			throw new IllegalArgumentException(DUPLICATE_NAME_ERROR);
-		}
-	}
-
-	private void checkItemSellable(Item item, Money money){
-		if (!item.isStockExist()) {
-			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
-		}
-		if (!money.payable(item.getCost())){
-			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
 		}
 	}
 }

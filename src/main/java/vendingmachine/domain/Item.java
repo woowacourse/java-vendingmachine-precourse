@@ -54,12 +54,12 @@ public class Item {
 		}
 	}
 
-	private boolean isDivisibleByTen(int cost){
-		return ZERO == cost % TEN;
-	}
-
 	private boolean isValidRange(int cost){
 		return COST_LOWER_BOUND <= cost;
+	}
+
+	private boolean isDivisibleByTen(int cost){
+		return ZERO == cost % TEN;
 	}
 
 	public String getName() {

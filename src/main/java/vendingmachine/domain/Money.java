@@ -19,6 +19,10 @@ public class Money {
 		reduce(moneyAmount);
 	}
 
+	private void reduce(int moneyAmount) {
+		money -= moneyAmount;
+	}
+
 	public boolean payable(int moneyAmount) {
 		return moneyAmount <= money;
 	}
@@ -46,10 +50,6 @@ public class Money {
 		}
 		changes.put(coin, number);
 		reduce(coin * number);
-	}
-
-	private void reduce(int moneyAmount) {
-		money -= moneyAmount;
 	}
 
 	@Override
