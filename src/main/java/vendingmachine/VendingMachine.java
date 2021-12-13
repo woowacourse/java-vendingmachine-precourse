@@ -21,10 +21,10 @@ public class VendingMachine {
 	}
 
 	private int generateRandomCoin() {
-		List<Integer> coins = Stream.of(Coin.values())
-			.map(coin -> coin.getValue())
-			.collect(Collectors.toList());
-
+		List<Integer> coins = new ArrayList<>();
+		for (Coin coin : Coin.values()) {
+			coins.add(coin.getValue());
+		}
 		return pickNumberInList(coins);
 	}
 
