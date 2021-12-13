@@ -2,7 +2,6 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import org.junit.jupiter.api.Test;
-import vendingmachine.service.MoneyService;
 import vendingmachine.service.ProductService;
 
 import java.util.Arrays;
