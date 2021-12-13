@@ -3,14 +3,18 @@ package vendingmachine;
 import java.util.HashMap;
 
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 	InputView inputView = new InputView();
+	OutputView outputView = new OutputView();
 
 	HashMap<Coin, Integer> coins = new HashMap<>();
 
 	public VendingMachine() {
-		System.out.println(getInputAmount());
+		int amount = getInputAmount();
+		setCoins(amount);
+		outputView.printCoinNumberMessage(coins);
 	}
 
 	private int getInputAmount() {
@@ -21,8 +25,11 @@ public class VendingMachine {
 		return Integer.parseInt(inputAmount);
 	}
 
-	private void setCoins(String inputAmount) {
-
+	private void setCoins(int amount) {
+		for (Coin coin : Coin.values()) {
+			coins.put(coin, amount / coin.getAmount());
+			amount = amount % coin.getAmount();
+		}
 	}
 
 }
