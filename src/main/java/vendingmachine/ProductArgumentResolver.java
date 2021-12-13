@@ -36,16 +36,14 @@ public class ProductArgumentResolver {
         }
 
         String[] split = products.split(PRODUCTS_DELIMITER);
-        if (countSemicolon(products) != split.length) {
+        if (countSemicolon(products) != split.length - 1) {
             throw ErrorMessage.INVALID_SEMICOLON.getException();
         }
         return split;
     }
 
     private long countSemicolon(String products) {
-        return products.chars()
-            .filter(character -> (String.valueOf(character).equals(PRODUCTS_DELIMITER)))
-            .count();
+        return products.chars().filter(c -> c == ';').count();
     }
 
     private boolean isCoveredBrackets(String product) {
