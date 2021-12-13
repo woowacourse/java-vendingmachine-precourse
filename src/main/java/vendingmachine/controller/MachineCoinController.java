@@ -1,11 +1,11 @@
 package vendingmachine.controller;
 
-import vendingmachine.view.InputViews;
+import vendingmachine.service.MachineCoinService;
 
 public class MachineCoinController {
 
     public static void initMachineCoin() {
-        InputViews.inputInitMachineMoney();
+        MachineCoinService.getInitMachineMoney();
 
     }
 }
