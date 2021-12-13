@@ -1,7 +1,6 @@
 package vendingmachine.service;
 
 import static vendingmachine.constants.SystemConstants.*;
-import static vendingmachine.constants.ExceptionMessages.*;
 import static vendingmachine.validator.MenuInputFormatValidator.validateMenuInputFormat;
 import static vendingmachine.validator.PurchaseValidator.*;
 
@@ -45,7 +44,7 @@ public class MenuService {
     public Merchandise selectAvailableMerchandise(int moneyLeft) {
         try {
             String name = InputView.getPurchaseInfoInput();
-            Merchandise merchandise = this.getMerchandiseByName(name);
+            Merchandise merchandise = this.menu.getMerchandiseByName(name);
 
             validateAvailableMerchandise(merchandise, moneyLeft);
             return merchandise;
@@ -57,7 +56,7 @@ public class MenuService {
 
     public boolean hasSellableMerchandise(int moneyLeft) {
         boolean sellableMerchandiseExists = false;
-        for (Merchandise merchandise : menu.getMerchandiseList()) {
+        for (Merchandise merchandise : this.menu.getMerchandiseList()) {
             if (merchandise.getNumber() == NO_MERCHANDISE_LEFT) continue;
             if (moneyLeft >= merchandise.getPrice()) {
                 sellableMerchandiseExists = true;
@@ -65,13 +64,5 @@ public class MenuService {
             }
         }
         return sellableMerchandiseExists;
-    }
-
-    private Merchandise getMerchandiseByName(String name) {
-        for (Merchandise merchandise : menu.getMerchandiseList()) {
-            if (!merchandise.getName().equals(name)) continue;
-            return merchandise;
-        }
-        throw new IllegalArgumentException(UNKNOWN_MERCHANDISE_NAME_EXCEPTION);
     }
 }
