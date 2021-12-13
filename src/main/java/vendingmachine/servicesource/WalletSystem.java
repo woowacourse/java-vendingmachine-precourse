@@ -9,45 +9,39 @@ public class WalletSystem {
     private int systemBalance;
     private int insertedBalance;
     private final WalletPrinter walletPrinter;
-    private HashMap<Coin, Integer> remainCoinsMap = new HashMap<Coin, Integer>();
+    private HashMap<Coin, Integer> remainCoinsMap = new HashMap<>();
+    private HashMap<Integer, Coin> amountToCoinMap = new HashMap<>();
 
     public WalletSystem(int systemBalance){
         this.systemBalance = systemBalance;
+        setCoinHashMap();
         exchangeBalanceToRandomCoins();
 
         walletPrinter = new WalletPrinter(this);
         walletPrinter.printAllCoins();
     }
 
+    private void setCoinHashMap(){
+        Coin[] coins = Coin.values();
+
+        for(Coin coinType : coins){
+            remainCoinsMap.put(coinType, 0);
+            amountToCoinMap.put(coinType.getAmount(), coinType);
+        }
+
+    }
+
     private void exchangeBalanceToRandomCoins(){
 
-        for(Coin currentCoin : Coin.values()){
-            int maxNumber = systemBalance / currentCoin.getAmount();
-            int pickedNumber = Randoms.pickNumberInList(getRandomNumberList(maxNumber));
-            systemBalance -= currentCoin.getAmount() * pickedNumber;
-            remainCoinsMap.put(currentCoin,pickedNumber);
+        while(systemBalance > 0){
+            List<Integer> amountOfCoins = Coin.getAmountsListLowerThanBalance(systemBalance);
+            int selectedCoinAmount = Randoms.pickNumberInList(amountOfCoins);
+            Coin selectedCoin = amountToCoinMap.get(selectedCoinAmount);
+
+            systemBalance -= selectedCoinAmount;
+            remainCoinsMap.replace( selectedCoin, remainCoinsMap.get(selectedCoin) + 1);
         }
 
-        exchangeRemainBalanceToMinimumCoin();
-    }
-
-    private void exchangeRemainBalanceToMinimumCoin(){
-        Coin minimumCoin = Coin.getMinimumAmountCoin();
-        int changedNumber = systemBalance / minimumCoin.getAmount();
-        changedNumber += remainCoinsMap.get(minimumCoin);
-        systemBalance %= minimumCoin.getAmount();
-
-        remainCoinsMap.replace(minimumCoin, changedNumber);
-    }
-
-    private List<Integer> getRandomNumberList(int maxNumber){
-        List<Integer> numberList = new ArrayList<>();
-
-        for(int i=0; i<=maxNumber ; ++i){
-            numberList.add(i);
-        }
-
-        return numberList;
     }
 
     void withdrawInsertedBalance(int price){
