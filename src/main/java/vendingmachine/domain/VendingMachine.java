@@ -9,6 +9,7 @@ import vendingmachine.type.Coin;
 public class VendingMachine {
 
 	private VendingMachineCoins coins;
+	private Products products;
 
 	public VendingMachine(int vendingMachineMoney) {
 		coins = createVendingMachineCoins(vendingMachineMoney);
@@ -44,5 +45,9 @@ public class VendingMachine {
 
 	public VendingMachineCoins findCoins() {
 		return coins;
+	}
+
+	public void addProducts(Products products) {
+		this.products = products;
 	}
 }

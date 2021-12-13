@@ -10,6 +10,7 @@ public class OutputView {
 	private static final String WON = "원";
 	private static final String DASH = " - ";
 	private static final String EA = "개";
+	private static final String INPUT_PRODUCT = "상품명과 가격, 수량을 입력해 주세요.";
 
 	public static void printInputVendingMachineCoin() {
 		System.out.println(INPUT_VENDING_MACHINE_COIN);
@@ -25,5 +26,14 @@ public class OutputView {
 
 	private static void printNewLine() {
 		System.out.println();
+	}
+
+	public static void printInputProduct() {
+		printNewLine();
+		System.out.println(INPUT_PRODUCT);
+	}
+
+	public static void printException(Exception exception) {
+		System.out.println(exception.getMessage());
 	}
 }
