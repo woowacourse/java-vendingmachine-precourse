@@ -20,6 +20,15 @@ public class Products {
         return product.getPrice() * productQuantity;
     }
 
+    public boolean isPurchasable(int inputAmount) {
+        return isExceedLeastPrice(inputAmount);
+    }
+
+    private boolean isExceedLeastPrice(int inputAmount) {
+        return products.stream()
+                .allMatch(product -> product.isEnoughMoneyToBuy(inputAmount));
+    }
+
     private Product findProduct(String productName) {
         return products.stream()
                 .filter(product -> product.isName(productName))
@@ -37,4 +46,5 @@ public class Products {
     private String removeBrackets(String productInfo) {
         return productInfo.substring(1, productInfo.length() - 1);
     }
+
 }

@@ -19,6 +19,10 @@ public class ProductPrice {
         return price;
     }
 
+    public boolean canBuy(int inputAmount) {
+        return inputAmount > price;
+    }
+
     private void validatePricePolicy(String priceString) {
         validatePriceNumeric(priceString);
 
@@ -53,4 +57,5 @@ public class ProductPrice {
     private boolean isDividableByDivisor(int price) {
         return price % DIVISOR == ZERO;
     }
+
 }

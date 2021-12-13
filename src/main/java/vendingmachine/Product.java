@@ -41,6 +41,10 @@ public class Product {
         quantity.validateEnoughStock(demandQuantity);
     }
 
+    public boolean isEnoughMoneyToBuy(int inputAmount) {
+        return price.canBuy(inputAmount);
+    }
+
     private void validateInfoNotMissed(String goodsInfo) {
         if (isInfoMissed(goodsInfo.split(","))) {
             throw new IllegalArgumentException(INFO_MISSED_MESSAGE);

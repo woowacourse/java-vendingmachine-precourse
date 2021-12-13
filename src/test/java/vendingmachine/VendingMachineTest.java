@@ -3,6 +3,7 @@ package vendingmachine;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 public class VendingMachineTest {
@@ -31,5 +32,11 @@ public class VendingMachineTest {
         vendingMachine.insertMoney(100000);
         assertThatThrownBy(() -> vendingMachine.buy("사이다", 11))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void 최저가격_남은금액_초과_잔돈반환() {
+        vendingMachine.insertMoney(900);
+        assertThat(vendingMachine.isPurchasable()).isFalse();
     }
 }
