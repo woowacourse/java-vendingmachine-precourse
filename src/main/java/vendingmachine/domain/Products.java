@@ -25,6 +25,11 @@ public class Products {
 		product.reduceCount();
 	}
 
+	private boolean hasProducts() {
+		return products.stream()
+			.allMatch(Product::isSoldOut);
+	}
+
 	private Product findByProductName(String productName) {
 		return products.stream()
 			.filter(product -> product.getName().equals(productName))

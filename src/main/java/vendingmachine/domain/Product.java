@@ -35,6 +35,10 @@ public class Product {
 		count--;
 	}
 
+	public boolean isSoldOut() {
+		return count == 0;
+	}
+
 	private void check(int price) {
 		if (price < MIN_AMOUNT || price % DIVIDE_NUM != 0) {
 			throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_NOT_VALID);
