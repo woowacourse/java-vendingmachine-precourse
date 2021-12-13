@@ -20,13 +20,10 @@ public class PossessionCoin {
     }
 
     public boolean isExistQuantity() {
-        if (quantity > DEFAULT_QUANTITY) {
-            return true;
-        }
-        return false;
+        return quantity > DEFAULT_QUANTITY;
     }
 
-    public int calculate(InvestmentMoney investmentMoney) {
+    public int calculatePossibleQuantity(InvestmentMoney investmentMoney) {
         return investmentMoney.trade(coin.getAmount(), quantity);
     }
 

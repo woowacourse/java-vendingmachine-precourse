@@ -38,7 +38,7 @@ class PossessionCoinTest {
 
     @DisplayName("투입 금액이 주어지면 현재 가진 동전의 개수와 교환 가능한 동전 개수를 비교하여 잔돈의 개수를 반환한다.")
     @Test
-    void calculate_InvestmentMoneyCompareQuantity_MinCoinQuantity() {
+    void calculatePossibleQuantity_InvestmentMoneyCompareQuantity_MinCoinQuantity() {
         // given
         String inputInvestmentMoney = "1000";
         InvestmentMoney investmentMoney = new InvestmentMoney(inputInvestmentMoney);
@@ -48,7 +48,7 @@ class PossessionCoinTest {
         PossessionCoin possessionCoin = new PossessionCoin(coin, quantity);
 
         // when
-        int changeQuantity = possessionCoin.calculate(investmentMoney);
+        int changeQuantity = possessionCoin.calculatePossibleQuantity(investmentMoney);
         int min = Math.min(Integer.parseInt(inputInvestmentMoney) / coin.getAmount(), quantity);
 
         // then
