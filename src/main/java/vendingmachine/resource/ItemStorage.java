@@ -2,6 +2,7 @@ package vendingmachine.resource;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
@@ -38,8 +39,8 @@ public class ItemStorage {
 		return itemList.stream()
 				.filter(item -> Objects.equals(item.getName(), name))
 				.map(Item::getPrice)
-				.collect(Collectors.toList())
-				.get(0);
+				.findAny()
+				.orElseThrow(NoSuchElementException::new);
 	}
 
 	public void reduceItemQuantity(String name) {
@@ -47,6 +48,9 @@ public class ItemStorage {
 	}
 
 	private Item gitItemByName(String name) {
-		return itemList.stream().filter(item -> Objects.equals(item.getName(), name)).findFirst().get();
+		return itemList.stream()
+				.filter(item -> Objects.equals(item.getName(), name))
+				.findAny()
+				.orElseThrow(NoSuchElementException::new);
 	}
 }

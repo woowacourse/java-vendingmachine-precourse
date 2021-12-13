@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import vendingmachine.resource.ItemStorage;
@@ -33,7 +34,7 @@ public class ItemModel {
 		return itemStorage.getPriceList().stream()
 				.mapToInt(Integer::intValue)
 				.min()
-				.getAsInt();
+				.orElseThrow(NoSuchElementException::new);
 	}
 
 	public boolean hasExtraQuantity() {
