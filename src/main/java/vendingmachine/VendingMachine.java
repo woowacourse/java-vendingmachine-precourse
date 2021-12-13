@@ -4,9 +4,9 @@ import static java.util.Arrays.asList;
 
 import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
-import com.sun.glass.ui.Clipboard;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -38,6 +38,22 @@ public class VendingMachine {
         System.out.println("상품명과 가격, 수량을 입력해 주세요. [상품명,가격,수량];[,,] 형태");
         List<String> rawProducts = asList(Console.readLine().split(";"));
         collectProducts(rawProducts);
+    }
+
+    public void sellProducts() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        int insertedMoney = Integer.parseInt(Console.readLine());
+        while (true) {
+            System.out.println("투입 금액: " + insertedMoney + "원");
+            if (!purchasePossible(insertedMoney)) {
+                System.out.println("잔돈");
+                changeMoney(insertedMoney);
+                break;
+            }
+            System.out.println("구매할 상품명을 입력해 주세요.");
+            String wantedProduct = Console.readLine();
+            insertedMoney -= sellProduct(wantedProduct);
+        }
     }
 
     private void generateRandomCoinBasedOnAsset(int asset) {
@@ -99,5 +115,42 @@ public class VendingMachine {
             System.out.println("[ERROR] 상품 가격은 10으로 나누어 떨어져야 합니다.");
             throw new IllegalArgumentException();
         }
+    }
+
+    private boolean purchasePossible(int insertedMoney) {
+        if (minPrice() > insertedMoney) {
+            return false;
+        }
+        if (allSoldOut()) {
+            return false;
+        }
+        return true;
+    }
+
+    private int minPrice() {
+        List<Integer> integerStream = products.stream().map(Product::getPrice).collect(Collectors.toList());
+        return Collections.min(integerStream);
+    }
+
+    private boolean allSoldOut() {
+        return products.stream().filter(Product::soldOut).count() == products.size();
+    }
+
+    private void changeMoney(int insertedMoney) {
+        Set<Coin> coins = coinBox.keySet();
+        for (Coin coin : coins) {
+            Integer coinCount = coinBox.get(coin);
+            if (coinCount * coin.getCoinValue() > insertedMoney) {
+                coinCount = insertedMoney / coin.getCoinValue();
+            }
+            System.out.println(coin.getCoinValue() + "원 - " + coinCount + "개");
+            insertedMoney -= coinCount * coin.getCoinValue();
+        }
+    }
+
+    private int sellProduct(String wantedProduct) {
+        Product product = products.stream().filter(p -> p.getName().equals(wantedProduct)).findFirst().orElseThrow(IllegalArgumentException::new);
+        product.sell();
+        return product.getPrice();
     }
 }

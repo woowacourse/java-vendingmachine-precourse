@@ -11,4 +11,20 @@ public class Product {
         this.price = price;
         this.quantity = quantity;
     }
+
+    public Integer getPrice() {
+        return price;
+    }
+
+    public boolean soldOut() {
+        return this.quantity == 0;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void sell() {
+        this.quantity--;
+    }
 }
