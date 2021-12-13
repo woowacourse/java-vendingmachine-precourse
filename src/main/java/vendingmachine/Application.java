@@ -7,9 +7,6 @@ import userInterface.DepositManager;
 
 public class Application {
     public static void main(String[] args) {
-        /* TODO : 프로그램 구현
-         * 6. 잔여 금액 반환(출력)
-         */
         Coins coinList = new Coins();
         CoinListManager coinListManager = new CoinListManager(coinList);
         coinListManager.makeRandomList();

@@ -17,6 +17,7 @@ public class OrderManager {
 		while (canOrderWithDeposit()) {
 			try {
 				depositManager.printDeposit();
+				System.out.println("구매할 상품명을 입력해 주세요.");
 				pickProduct();
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
