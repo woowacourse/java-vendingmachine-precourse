@@ -16,6 +16,15 @@ public class VendingMachineController {
 
     public void run() {
         VendingMachine vendingMachine = createVendingMachine();
+        int payment = inputMoney(vendingMachine);
+
+        while (!vendingMachine.isExit()) {
+            System.out.println("투입 금액: "+payment);
+            String purchase = input.inputPurchase();
+            vendingMachine.buyProduct(purchase);
+        }
+
+        System.out.println(vendingMachine.getChangeString());
     }
 
     private VendingMachine createVendingMachine() {
@@ -23,4 +32,11 @@ public class VendingMachineController {
         List<Product> products = input.inputProductList();
         return new VendingMachine(change, new Products(products));
     }
+
+    private int inputMoney(VendingMachine vendingMachine) {
+        int payment = input.inputUserPay();
+        vendingMachine.pay(payment);
+        return payment;
+    }
+
 }
