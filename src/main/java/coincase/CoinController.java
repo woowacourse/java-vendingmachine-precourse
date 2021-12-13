@@ -48,4 +48,23 @@ public class CoinController {
 		}
 		return numberOfCoins;
 	}
+
+	private int changeMoneyToCoinAsManyAsPossible(Coin specificCoin, int money) {
+		int coinNum = money / specificCoin.getAmount();
+		coinNum = Math.min(coinNum, numberOfCoins.get(specificCoin));
+		numberOfCoins.put(specificCoin, numberOfCoins.get(specificCoin) - coinNum);
+		return coinNum;
+	}
+
+	public Map<Coin, Integer> getChange(int remainMoney) {
+		Map<Coin, Integer> change = new HashMap<>();
+		for (Coin specificCoin : Coin.values()) {
+			int number = changeMoneyToCoinAsManyAsPossible(specificCoin, remainMoney);
+			if (number != 0) {
+				change.put(specificCoin, number);
+				remainMoney -= (specificCoin.getAmount() * number);
+			}
+		}
+		return change;
+	}
 }

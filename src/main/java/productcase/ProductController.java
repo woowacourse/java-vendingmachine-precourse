@@ -78,4 +78,23 @@ public class ProductController {
 		checkAbleToBuyProductName(specificProduct, inputMoney);
 		return specificProduct.sellOneProduct(inputMoney);
 	}
+
+	public boolean checkAllSoldOut() {
+		for (Product specificProduct : vendingMachineProducts) {
+			if (checkExistStock(specificProduct)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
+	public boolean checkImpossibleToBuyAnything(int inputMoney) {
+		for (Product specificProduct : vendingMachineProducts) {
+			if (checkEnoughMoney(specificProduct, inputMoney)) {
+				return false;
+			}
+		}
+		return true;
+	}
+
 }

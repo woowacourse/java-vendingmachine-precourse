@@ -21,18 +21,18 @@ public class CoreController {
 		uiController = new UiController();
 	}
 
-	protected void setVendingMachineHoldMoney() {
+	private void setVendingMachineHoldMoney() {
 		int money = uiController.askVendingMachineHoldMoneyAmount();
 		Map<Coin, Integer> numberOfCoins = coinController.makeRandomCombinationCoin(money);
 		uiController.printCurrentCoinNumber(numberOfCoins);
 	}
 
-	protected void setVendingMachineHoldProduct() {
+	private void setVendingMachineHoldProduct() {
 		String products = uiController.askVendingMachineHoldProduct();
 		productController.setNewProducts(products);
 	}
 
-	protected void setInputMoney() {
+	private void setInputMoney() {
 		inputMoney = uiController.askInputMoney();
 	}
 
@@ -43,7 +43,7 @@ public class CoreController {
 		return productName;
 	}
 
-	protected void buyProduct() {
+	private void buyProduct() {
 		int remainMoney = 0;
 		boolean endCondition = false;
 		while (!endCondition) {
@@ -56,5 +56,26 @@ public class CoreController {
 			}
 		}
 		inputMoney = remainMoney;
+	}
+
+	private void giveChange() {
+		uiController.printRemainMoney(inputMoney);
+		Map<Coin, Integer> change = coinController.getChange(inputMoney);
+		uiController.printChange(change);
+	}
+
+	private boolean checkTerminateCondition() {
+		return (productController.checkAllSoldOut()
+			|| productController.checkImpossibleToBuyAnything(inputMoney));
+	}
+
+	protected void activateVendingMachine() {
+		setVendingMachineHoldMoney();
+		setVendingMachineHoldProduct();
+		setInputMoney();
+		while (!checkTerminateCondition()) {
+			buyProduct();
+		}
+		giveChange();
 	}
 }

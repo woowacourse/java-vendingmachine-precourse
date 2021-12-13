@@ -17,6 +17,8 @@ public class UiController {
 		= "\n자판기가 보유한 동전\n";
 	private static final String MESSAGE_REMAIN_MONEY
 		= "\n투입 금액: %d원\n";
+	private static final String MESSAGE_CHANGE
+		= "잔돈\n";
 	private static final String MONEY_NUMBER
 		= "%d원 - %d개\n";
 
@@ -42,11 +44,17 @@ public class UiController {
 		return Integer.parseInt(money);
 	}
 
+	private void printNumberOfCoins(Map<Coin, Integer> numberOfCoins) {
+		for (Coin specificCoin : Coin.values()) {
+			if (numberOfCoins.containsKey(specificCoin)) {
+				ui.printMessage(String.format(MONEY_NUMBER, specificCoin.getAmount(), numberOfCoins.get(specificCoin)));
+			}
+		}
+	}
+
 	public void printCurrentCoinNumber(Map<Coin, Integer> numberOfCoins) {
 		ui.printMessage(MESSAGE_CURRENT_COIN_NUMBER);
-		for (Coin specificCoin : Coin.values()) {
-			ui.printMessage(String.format(MONEY_NUMBER, specificCoin.getAmount(), numberOfCoins.get(specificCoin)));
-		}
+		printNumberOfCoins(numberOfCoins);
 	}
 
 	public void printLogicalExceptionError(String logicalErrorMessage) {
@@ -88,5 +96,10 @@ public class UiController {
 
 	public String askProductNameToBuy() {
 		return ui.printQuestion(QUESTION_PRODUCT_NAME_TO_BUY);
+	}
+
+	public void printChange(Map<Coin, Integer> change) {
+		ui.printMessage(MESSAGE_CHANGE);
+		printNumberOfCoins(change);
 	}
 }
