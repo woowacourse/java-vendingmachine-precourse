@@ -56,4 +56,11 @@ public class Coins {
 		Coin coin = Coin.getByAmount(amount);
 		coins.put(coin, coins.get(coin) + 1);
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder retString = new StringBuilder();
+		coins.forEach((key, value) -> retString.append(key + " - " + value + "개\n"));
+		return retString.toString();
+	}
 }

@@ -33,4 +33,9 @@ public enum Coin {
             .map(Coin::getAmount)
             .collect(Collectors.toList());
     }
+
+    @Override
+    public String toString() {
+        return amount + "원";
+    }
 }

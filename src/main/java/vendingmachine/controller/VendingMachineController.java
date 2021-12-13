@@ -5,29 +5,26 @@ import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.Input;
+import vendingmachine.view.Output;
 
 public class VendingMachineController {
-	private VendingMachine vendingMachine;
+	private static VendingMachine vendingMachine;
 
 	public VendingMachineController() {
 		Coins coins = new Coins(getMoneyInMachine());
+		coins.initRandomNumberOfCoins();
+		Output.coinsInMachine(coins);
+
 		Products products = ProductsController.getProducts();
 		int inputMoney = getInputMoney();
 		vendingMachine = new VendingMachine(coins, products, inputMoney);
-	}
-
-	public void run() {
-		while(vendingMachine.checkTermination()) {
-			vendingMachine.buy(getBuyingProductName());
-		}
-		// 잔돈반환
 	}
 
 	private static int getMoneyInMachine() {
 		int moneyInMachine;
 		do {
 			moneyInMachine = Input.moneyInMachine();
-		} while (Validator.isValidMoneyInMachine(moneyInMachine));
+		} while (!Validator.isValidMoneyInMachine(moneyInMachine));
 		return moneyInMachine;
 	}
 
@@ -35,11 +32,22 @@ public class VendingMachineController {
 		int inputMoney;
 		do {
 			inputMoney = Input.inputMoney();
-		} while (Validator.isValidInputMoney(inputMoney));
+		} while (!Validator.isValidInputMoney(inputMoney));
 		return inputMoney;
 	}
 
 	private static String getBuyingProductName() {
 		return Input.buyingProductName();
+	}
+
+	public static void run() {
+		while (vendingMachine.checkTermination()) {
+			try {
+				vendingMachine.buy(getBuyingProductName());
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
+		vendingMachine.giveChange();
 	}
 }
