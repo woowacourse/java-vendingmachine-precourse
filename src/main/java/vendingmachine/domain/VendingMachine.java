@@ -12,7 +12,8 @@ public class VendingMachine {
 	}
 
 	public void purchaseProduct(String productName) {
-		products.isCheckSameProduct(productName);
+		final Product product = products.isCheckSameProduct(productName);
+		balance = product.purchase(balance);
 	}
 
 	public boolean isContinueVendingMachine() {

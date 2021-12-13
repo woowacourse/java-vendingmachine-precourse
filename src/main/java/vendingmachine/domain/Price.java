@@ -44,4 +44,8 @@ public class Price {
 	public boolean isValidateCalculateMinus(Balance balance) {
 		return this.price > balance.getBalance();
 	}
+
+	public int getPrice() {
+		return price;
+	}
 }

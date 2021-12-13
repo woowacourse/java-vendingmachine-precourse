@@ -39,6 +39,13 @@ public class Product {
 		return name.isValidateSameName(productName);
 	}
 
+	public Balance purchase(Balance balance) {
+		balance = balance.payment(price);
+		quantity = quantity.minus();
+
+		return balance;
+	}
+
 	public Name getName() {
 		return name;
 	}

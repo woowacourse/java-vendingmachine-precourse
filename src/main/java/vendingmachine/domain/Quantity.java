@@ -2,7 +2,9 @@ package vendingmachine.domain;
 
 public class Quantity {
 	private static final int QUANTITY_ZERO = 0;
+	private static final int QUANTITY_MINUS = -1;
 	private static final String ERROR_QUANTITY_NOT_NUMBER = "수량이 숫자가 아닙니다.";
+	private static final String ERROR_QUANTITY_ZERO = "수량이 0인 경우 구매하실 수 없습니다.";
 
 	private final int quantity;
 
@@ -25,5 +27,12 @@ public class Quantity {
 
 	public boolean isValidateQuantityZero() {
 		return this.quantity == QUANTITY_ZERO;
+	}
+
+	public Quantity minus() {
+		if (this.quantity == QUANTITY_ZERO) {
+			throw new IllegalArgumentException(ERROR_QUANTITY_ZERO);
+		}
+		return new Quantity(this.quantity + QUANTITY_MINUS);
 	}
 }

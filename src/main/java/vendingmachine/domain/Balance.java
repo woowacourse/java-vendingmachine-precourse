@@ -33,6 +33,19 @@ public class Balance {
 		return this.balance == BALANCE_ZERO;
 	}
 
+	public Balance payment(Price price) {
+		final int calculate = balance - price.getPrice();
+		isValidatePaymentCalculateMinus(calculate);
+
+		return new Balance(calculate);
+	}
+
+	private void isValidatePaymentCalculateMinus(int calculate) {
+		if (calculate < BALANCE_ZERO) {
+			throw new IllegalArgumentException();
+		}
+	}
+
 	public int getBalance() {
 		return balance;
 	}
