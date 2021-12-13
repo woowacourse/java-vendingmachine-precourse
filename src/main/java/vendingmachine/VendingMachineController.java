@@ -5,11 +5,12 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+	private final VendingMachine vendingMachine = new VendingMachine();
 
 	public void Operate() {
-		VendingMachine vendingMachine = new VendingMachine();
 		initialSetting(vendingMachine);
 		run(vendingMachine);
+		buy(vendingMachine);
 		returnChange(vendingMachine);
 	}
 
@@ -22,7 +23,6 @@ public class VendingMachineController {
 	public void run(VendingMachine vendingMachine) {
 		vendingMachine.holdingItemList = InputView.holdingItemsInput();
 		vendingMachine.inputMoney = InputView.inputMoneyInput();
-		buy(vendingMachine);
 	}
 
 	public void buy(VendingMachine vendingMachine) {
@@ -41,5 +41,4 @@ public class VendingMachineController {
 		vendingMachine.calculateChangeCoins();
 		OutputView.printChangeCoins(vendingMachine.changeCoins);
 	}
-
 }

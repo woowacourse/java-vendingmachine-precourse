@@ -13,8 +13,8 @@ public class InputView {
 	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d+,\\d+]";
 
 	private static final int ITEM_NAME_IDX = 0;
-	private static final int ITEM_PRICE_IDX = 0;
-	private static final int ITEM_STOCK_IDX = 0;
+	private static final int ITEM_PRICE_IDX = 1;
+	private static final int ITEM_STOCK_IDX = 2;
 	private static final char CHAR_NUMERIC_MIN = '0';
 	private static final char CHAR_NUMERIC_MAX = '9';
 	private static final String ZERO_HOLDING_MONEY = "0";
@@ -123,7 +123,6 @@ public class InputView {
 
 	private static boolean isRightItemInput(String[] itemStringArray) {
 		boolean isRightItemInput = true;
-
 		try {
 			wrongRegexMatchError(itemStringArray);
 			duplicatedItemNameError(itemStringArray);
@@ -132,26 +131,6 @@ public class InputView {
 			isRightItemInput = false;
 		}
 		return isRightItemInput;
-	}
-
-	private static void duplicatedItemNameError(String[] itemStringArray) {
-		Set<String> itemNames = new HashSet<String>();
-		removeBracket(itemStringArray);
-		int itemCount = itemStringArray.length;
-		for (int i = 0; i < itemCount; i++) {
-			itemNames.add(itemStringArray[i].split(",")[0]);
-		}
-		if (itemCount != itemNames.size()) {
-			throw new IllegalArgumentException(Message.DUPLICATED_NAME_ITEM_ERROR);
-		}
-	}
-
-	private static void wrongRegexMatchError(String[] itemStringArray) {
-		for (int i = 0; i < itemStringArray.length; i++) {
-			if (!Pattern.matches(REGEX, itemStringArray[i])) {
-				throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
-			}
-		}
 	}
 
 	public static void nonNumericError(String stringHoldingMoney) {
@@ -172,6 +151,26 @@ public class InputView {
 	public static void dividedByTenMoneyError(String stringMoney) {
 		if (Integer.parseInt(stringMoney) % DIVIDE_VALUE != 0) {
 			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
+		}
+	}
+
+	private static void duplicatedItemNameError(String[] itemStringArray) {
+		Set<String> itemNames = new HashSet<String>();
+		removeBracket(itemStringArray);
+		int itemCount = itemStringArray.length;
+		for (int i = 0; i < itemCount; i++) {
+			itemNames.add(itemStringArray[i].split(",")[0]);
+		}
+		if (itemCount != itemNames.size()) {
+			throw new IllegalArgumentException(Message.DUPLICATED_NAME_ITEM_ERROR);
+		}
+	}
+
+	private static void wrongRegexMatchError(String[] itemStringArray) {
+		for (int i = 0; i < itemStringArray.length; i++) {
+			if (!Pattern.matches(REGEX, itemStringArray[i])) {
+				throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
+			}
 		}
 	}
 }

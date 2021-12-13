@@ -11,11 +11,11 @@ public class VendingMachine {
 
 	public int holdingMoney = 0;
 	public int inputMoney = 0;
+	public ArrayList<Item> holdingItemList;
 	public LinkedHashMap<Coin, Integer> holdingCoins;
 	public LinkedHashMap<Coin, Integer> changeCoins;
-	public ArrayList<Item> holdingItemList;
 
-	Coins coins;
+	private Coins coins;
 
 	public VendingMachine vendingMachine() {
 		if (this.vendingMachine == null) {
@@ -42,6 +42,31 @@ public class VendingMachine {
 		for (int i = 0; i < this.holdingItemList.size(); i++) {
 			if (this.holdingItemList.get(i).getName().equals(buyItem)) {
 				this.inputMoney -= this.holdingItemList.get(i).getPrice();
+			}
+		}
+	}
+
+	public void calculateChangeCoins() {
+		Changes changes = new Changes();
+		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);
+	}
+
+	public void nonExistItemError(String buyItem) {
+		boolean isExistedItem = false;
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem)) {
+				isExistedItem = true;
+			}
+		}
+		if (isExistedItem == false) {
+			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
+		}
+	}
+
+	public void nonEnoughMoneyError(String buyItem) {
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
+				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
 			}
 		}
 	}
@@ -76,32 +101,6 @@ public class VendingMachine {
 			isPurchasableItem = false;
 		}
 		return isPurchasableItem;
-	}
-
-	public void calculateChangeCoins() {
-		Changes changes = new Changes();
-		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);
-	}
-
-	public void nonExistItemError(String buyItem) {
-		boolean isExistedItem = false;
-		for (int i = 0; i < holdingItemList.size(); i++) {
-			if (holdingItemList.get(i).getName().equals(buyItem)) {
-				isExistedItem = true;
-			}
-		}
-		if (isExistedItem == false) {
-			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
-		}
-	}
-
-	public void nonEnoughMoneyError(String buyItem) {
-		for (int i = 0; i < holdingItemList.size(); i++) {
-			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
-				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
-			}
-		}
-
 	}
 
 	public String inputMoneyToString() {
