@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class ChangeSafe {
@@ -29,6 +30,7 @@ public class ChangeSafe {
 		);
 	}
 
+	// todo : fix this
 	public ChangeSafe merge(ChangeSafe other) {
 		return new ChangeSafe(merge(other.coinMap));
 	}
@@ -38,6 +40,44 @@ public class ChangeSafe {
 		return this.coinMap;
 	}
 
+	public Money sumToMoney() {
+		Money money = Money.ZERO;
+		for (Map.Entry<Coin, Quantity> entry : coinMap.entrySet()) {
+			Money multiply = entry.getKey().toMoney().multiply(entry.getValue().getCount());
+			money = money.plus(multiply);
+		}
+		return money;
+	}
+
+	public ChangeSafe giveChange(Money money) {
+		Map<Coin, Quantity> retCoinMap = new LinkedHashMap<>();
+		while (money.isGreaterThan(Money.ZERO)) {
+			Optional<Coin> optionalCoin = pickGreedy(money);
+			if (!optionalCoin.isPresent()) {
+				break;
+			}
+			Coin coin = optionalCoin.get();
+			createOrAdd(retCoinMap, coin);
+			money = money.minus(coin.toMoney());
+			coinMap.put(coin, coinMap.get(coin).minus(Quantity.ONE));
+		}
+		return new ChangeSafe(retCoinMap);
+	}
+
+	private Optional<Coin> pickGreedy(Money money) {
+		return Arrays.stream(Coin.values())
+			.filter(coin -> !coin.toMoney().isGreaterThan(money) && coinMap.get(coin).isEnough())
+			.findFirst();
+	}
+
+	private void createOrAdd(Map<Coin, Quantity> coins, Coin coin) {
+		if (!coins.containsKey(coin)) {
+			coins.put(coin, Quantity.ONE);
+			return;
+		}
+		coins.put(coin, coins.get(coin).plus(Quantity.ONE));
+	}
+
 	@Override
 	public String toString() {
 		return coinMap.entrySet()
@@ -45,4 +85,5 @@ public class ChangeSafe {
 			.map(entry -> String.format(FORMAT, entry.getKey().toString(), entry.getValue().toString()))
 			.collect(Collectors.joining(JOINER));
 	}
+
 }
