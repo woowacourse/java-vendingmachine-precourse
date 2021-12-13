@@ -24,27 +24,30 @@ public class CoinController {
 		numberOfCoins.put(Coin.COIN_10, 0);
 	}
 
-	private int getSpecificCoinRandomNumInMoneyRange(Coin specificCoin, int remainMoney) {
-		List<Integer> possibleCandidate = new ArrayList<>();
-		for (int i = 0; i <= (remainMoney / specificCoin.getAmount()); ++i) {
-			possibleCandidate.add(i);
+	private List<Integer> getPossibleCoins() {
+		List<Integer> possibleCoins = new ArrayList<>();
+		for (Coin possibleCoin : Coin.values()) {
+			possibleCoins.add(possibleCoin.getAmount());
 		}
-		return camp.nextstep.edu.missionutils.Randoms.pickNumberInList(possibleCandidate);
+		return possibleCoins;
 	}
 
-	private int changeSomeMoneyToRandomCombinationCoin(int remainMoney) {
+	private void addCoin(int coinAmount) {
 		for (Coin specificCoin : Coin.values()) {
-			int randomNum = getSpecificCoinRandomNumInMoneyRange(specificCoin, remainMoney);
-			numberOfCoins.put(specificCoin, numberOfCoins.get(specificCoin) + randomNum);
-			remainMoney -= (specificCoin.getAmount() * randomNum);
+			if (specificCoin.getAmount() == coinAmount) {
+				numberOfCoins.put(specificCoin, numberOfCoins.get(specificCoin) + 1);
+			}
 		}
-		return remainMoney;
 	}
 
 	public Map<Coin, Integer> makeRandomCombinationCoin(int money) {
-		int remainMoney = money;
-		while (remainMoney != 0) {
-			remainMoney = changeSomeMoneyToRandomCombinationCoin(remainMoney);
+		List<Integer> possibleCoins = getPossibleCoins();
+		while (money != 0) {
+			int coinAmount = camp.nextstep.edu.missionutils.Randoms.pickNumberInList(possibleCoins);
+			if (coinAmount <= money) {
+				money -= coinAmount;
+				addCoin(coinAmount);
+			}
 		}
 		return numberOfCoins;
 	}
