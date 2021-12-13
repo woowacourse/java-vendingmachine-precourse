@@ -3,9 +3,6 @@ package vendingmachine;
 public class MoneyInput {
 	int money;
 	public MoneyInput(String inputMoney) {
-		Validater.isNumberCheck(inputMoney);
-		Validater.isDivideTen(inputMoney);
-		Validater.isZeroCheck(inputMoney);
 		this.money = Integer.parseInt(inputMoney);
 	}
 	

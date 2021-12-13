@@ -13,11 +13,6 @@ public class VendingMachine {
 	static ArrayList<Beverage> Beverages = new ArrayList<>();
 
 	public VendingMachine(String cash) {
-
-		Validater.isNumberCheck(cash);
-		Validater.isDivideTen(cash);
-		Validater.isZeroCheck(cash);
-
 		this.totalCoin = Integer.parseInt(cash);
 		init();
 		makeRandomCoin();
