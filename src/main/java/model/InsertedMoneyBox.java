@@ -1,9 +1,9 @@
 package model;
 
-public class UserInsertMoneyBox {
+public class InsertedMoneyBox {
 	private int money;
 
-	public UserInsertMoneyBox(int userInsertMoney) {
+	public InsertedMoneyBox(int userInsertMoney) {
 		money = userInsertMoney;
 	}
 
