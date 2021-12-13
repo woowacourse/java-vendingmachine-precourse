@@ -8,6 +8,7 @@ public class DepositManager {
 	private Amount deposit;
 
 	public DepositManager() {
+		System.out.println();
 		System.out.println("투입 금액을 입력해 주세요.");
 		initDeposit();
 	}
@@ -24,6 +25,7 @@ public class DepositManager {
 	}
 
 	public void printDeposit() {
+		System.out.println();
 		System.out.printf("투입 금액 : %d원\n", deposit.get());
 	}
 

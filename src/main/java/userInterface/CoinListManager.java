@@ -28,6 +28,7 @@ public class CoinListManager {
 		InputManager inputManager = new InputManager();
 		String input = inputManager.getStringWithInput(validator);
 		deposit = Integer.parseInt(input);
+		System.out.println();
 	}
 
 	public void makeRandomList() {
@@ -53,6 +54,7 @@ public class CoinListManager {
 	}
 
 	public void printCoinList() {
+		System.out.println();
 		System.out.println("자판기가 보유한 동전");
 
 		Stream.of(coinArrays).forEach(coin -> {printCoinCount(coin, coinList.get(coin));
