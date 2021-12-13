@@ -70,15 +70,13 @@
   5. 코인 리스트 생성 [ ]
 
 2. 상품 생성 : 입력 (상품 리스트)
-  1. 상품 입력 받기 [x]
-  2. ";" 를 기준으로 split (상품) [x]
-  3. "," 를 기준으로 split (상품명,가격,개수) (String,int,int) [x]
-     -> 상품명에 대한 검증, 가격에 대한 검증, 개수에 대한 검증
-     -> 상품명 : isBlank(x), 1 <= 길이
-     -> 가격 : isDigit(x)
-     -> 개수 : isDigit(x)
-  4. 상품 리스트 생성 [x]
-  5. 입력 예시 : [콜라,1500,20];[사이다,1000,10]
+    1. String을 입력받는다.
+    2. ";"로 split 하여 "[Name,Price,Remain]" 상태의 Array를 만든다.
+    3. Array내의 String에서 "[]"를 제거하고 ","로 split하여 Array를 만든다.
+    4. Price, Remain이 amount인지 확인한다. (음수 안되기 때문)
+    5. Name, Price로 Product 를 생성한다.
+    6. HashMap.put(Product, remain)
+    7. 입력 예시 : [콜라,1500,20];[사이다,1000,10]
 
 3. 투입 금액 : 입력 (금액)
   1. 금액 입력 받기
