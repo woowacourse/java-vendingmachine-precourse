@@ -10,12 +10,11 @@ public class Merchandise {
 	public static String MERCHANDISE_INFORMATION_PARSER = ",";
 	public static String MERCHANDISE_PARSER = ";";
 
-	private final String name;
+	private final Name name;
 	private final Money money;
 	private final Quantity quantity;
 
-	public Merchandise(String name, Money money, Quantity quantity) {
-		Validator.validateEmptyMerchandiseName(name);
+	public Merchandise(Name name, Money money, Quantity quantity) {
 		this.name = name;
 		this.money = money;
 		this.quantity = quantity;
@@ -25,16 +24,11 @@ public class Merchandise {
 		return money;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-
 	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
 		Validator.validateEmptyMerchandiseInformation(informations);
 		Validator.validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
-		return new Merchandise(informations[0].trim(), new Money(Integer.parseInt(informations[1].trim())),
+		return new Merchandise(new Name(informations[0].trim()), new Money(Integer.parseInt(informations[1].trim())),
 			new Quantity(Integer.parseInt(informations[2].trim())));
 	}
 
@@ -54,6 +48,10 @@ public class Merchandise {
 
 	public void deductQuantity() {
 		quantity.decreaseQuantity();
+	}
+
+	public boolean isEqualsName(String anotherName) {
+		return name.isSameName(anotherName);
 	}
 
 	@Override

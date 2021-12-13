@@ -20,7 +20,7 @@ public class Merchandises {
 
 	public Merchandise selectMerchandise(String merchandiseName) {
 		Merchandise merchandise = merchandiseList.stream()
-			.filter(sellMerchandise -> sellMerchandise.getName().equals(merchandiseName))
+			.filter(sellMerchandise -> sellMerchandise.isEqualsName(merchandiseName))
 			.findFirst()
 			.orElseThrow(
 				() -> new IllegalArgumentException(ErrorMessage.INVALID_NO_STOCK_MERCHANDISE_BUY_ERROR_MESSAGE));
