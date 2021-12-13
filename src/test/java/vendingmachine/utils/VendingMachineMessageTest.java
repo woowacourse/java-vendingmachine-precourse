@@ -137,5 +137,37 @@ class VendingMachineMessageTest {
 			final String expectedMessage = "[ERROR]: " + inputtedData + " 공백이 포함되면 안됩니다";
 			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
+
+		@DisplayName("제품정보 입력시 '['와 ']'의 쌍이 맞지 않는 경우")
+		@ParameterizedTest(name = "{displayName} inputtedData={0}")
+		@ValueSource(strings = {"[콜라,1500,20];[사이다,1000,10", "[콜라,1500,20", "콜라,1500,20]"})
+		void checkBrackets(final String inputtedData) {
+			final String errorMessage = VendingMachineMessage
+				.bracketsDontMatch(inputtedData);
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 괄호 쌍이 맞지 않습니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
+		}
+
+		@DisplayName("제품정보에서 두 제품의 정보를 ;로 구분하지 않은 경우")
+		@ParameterizedTest(name = "{displayName} inputtedData={0}")
+		@ValueSource(strings = {"[콜라,1500,20][사이다,1000,10]"})
+		void distinguishProducts(final String inputtedData) {
+			final String errorMessage = VendingMachineMessage
+				.distinguishProductsError(inputtedData);
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 서로 다른 제품은 ;로 구분되야 합니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
+		}
+
+		@DisplayName("하나의 제품 정보에서 이름, 가격, 수량 중 하나 이상이 없는 경우")
+		@ParameterizedTest(name = "{displayName} inputtedData={0}")
+		@ValueSource(strings = {"[콜라,1500 20]"})
+		void productInformationIsntEnough(final String inputtedData) {
+			final String errorMessage = VendingMachineMessage
+				.productInformationIsntEnough(inputtedData);
+			final String expectedMessage =
+				"[ERROR]: " + inputtedData + " 제품의 정보는 이름,가격,수량 순으로 되있어야 하며 ,로 구분되야 합니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다른다");
+
+		}
 	}
 }

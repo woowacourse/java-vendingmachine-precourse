@@ -11,7 +11,7 @@ import vendingmachine.models.Coin;
  * 메시지
  *
  * @author yunki kim
- * @version 1.0
+ * @version 2.0
  * @since 2021-12-11(V1.0)
  */
 
@@ -43,6 +43,12 @@ public class VendingMachineMessage {
 	private static final String NOT_INTEGER = " 정수만 입력되야 합니다";
 
 	private static final String INVOLVE_BLANK = " 공백이 포함되면 안됩니다";
+
+	private static final String WRONG_BRACKET = " 괄호 쌍이 맞지 않습니다";
+
+	private static final String PRODUCTS_DISTINGUISHING = " 서로 다른 제품은 ;로 구분되야 합니다";
+
+	private static final String PRODUCT_INFORMATION = " 제품의 정보는 이름,가격,수량 순으로 되있어야 하며 ,로 구분되야 합니다";
 
 	private static ArrayList<Integer> getCoinTypeList() {
 		ArrayList<Integer> coinTypes = new ArrayList<>();
@@ -92,5 +98,17 @@ public class VendingMachineMessage {
 
 	public static String involveBlankError(final String inputtedData) {
 		return ERROR_MESSAGE_PREFIX + inputtedData + INVOLVE_BLANK;
+	}
+
+	public static String bracketsDontMatch(final String inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + WRONG_BRACKET;
+	}
+
+	public static String distinguishProductsError(final String inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + PRODUCTS_DISTINGUISHING;
+	}
+
+	public static String productInformationIsntEnough(final String inputtedData) {
+		return ERROR_MESSAGE_PREFIX + inputtedData + PRODUCT_INFORMATION;
 	}
 }
