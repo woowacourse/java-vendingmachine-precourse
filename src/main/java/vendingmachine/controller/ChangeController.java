@@ -8,7 +8,8 @@ public class ChangeController {
     private static ChangeService changeService;
 
     public static void initUserChange() {
-        String inputMoney = InputViews.inputUserMoney();
+        changeService = new ChangeService();
+        changeService.getInitUserChange();
     }
 
 }
