@@ -1,6 +1,9 @@
 package vendingmachine.model;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import vendingmachine.validation.WalletValidation;
@@ -27,8 +30,7 @@ public class Wallet {
 	}
 
 	private void makeRandomCoin(int money) {
-		Coin[] coins = Coin.values();
-
+		List<Integer> coinValues = Coin.getCoinValues();
 
 	}
 }

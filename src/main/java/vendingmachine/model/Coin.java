@@ -1,5 +1,9 @@
 package vendingmachine.model;
 
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -23,4 +27,9 @@ public enum Coin {
         return min;
     }
 
+    public static List<Integer> getCoinValues() {
+        List<Integer> coinValues = new LinkedList<>();
+        Arrays.stream(Coin.values()).forEach(coin -> coinValues.add(coin.amount));
+        return coinValues;
+    }
 }
