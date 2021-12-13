@@ -13,17 +13,17 @@ class VendingMachineTest {
 	Products products = Products.from();
 
 	public void initializeProducts() {
-		products.add(Product.of("사이다","1000","2"));
-		products.add(Product.of("환타","1250","10"));
-		products.add(Product.of("밀키스","1700","10"));
-		products.add(Product.of("콜라","1500","10"));
+		products.add(Product.of("사이다", "1000", "2"));
+		products.add(Product.of("환타", "1250", "10"));
+		products.add(Product.of("밀키스", "1700", "10"));
+		products.add(Product.of("콜라", "1500", "10"));
 	}
 
 	@Test
 	public void useVendingMachine() {
 		initializeProducts();
 		VendingMachine vendingMachine = new VendingMachine();
-		vendingMachine.addCoinAll(new RandomCoinGenerator().generate(Money.of(490)));
+		vendingMachine.addRetentionCoinAll(new RandomCoinGenerator().generate(Money.of(490)));
 		vendingMachine.addProductAll(products);
 		vendingMachine.insert(Money.of(3000));
 		Assertions.assertTrue(vendingMachine.isPurchasable());

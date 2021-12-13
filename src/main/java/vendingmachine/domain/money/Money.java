@@ -3,8 +3,8 @@ package vendingmachine.domain.money;
 import java.util.Objects;
 
 import vendingmachine.constant.Notification;
-import vendingmachine.exception.OutOfBoundException;
 import vendingmachine.domain.quantity.Quantity;
+import vendingmachine.exception.OutOfBoundException;
 
 public class Money implements Comparable<Money> {
 	private static final int MINIMUM_UNIT = 10;
@@ -108,8 +108,8 @@ public class Money implements Comparable<Money> {
 		if (o == null || getClass() != o.getClass()) {
 			return false;
 		}
-		Money money1 = (Money)o;
-		return amount == money1.amount;
+		Money compareMoney = (Money)o;
+		return amount == compareMoney.amount;
 	}
 
 	@Override

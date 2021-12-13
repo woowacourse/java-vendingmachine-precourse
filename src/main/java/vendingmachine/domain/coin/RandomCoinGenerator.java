@@ -3,8 +3,8 @@ package vendingmachine.domain.coin;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.money.Money;
 import vendingmachine.constant.Notification;
+import vendingmachine.domain.money.Money;
 import vendingmachine.exception.DomainNotFoundException;
 
 public class RandomCoinGenerator implements CoinGenerator {
@@ -20,7 +20,7 @@ public class RandomCoinGenerator implements CoinGenerator {
 	}
 
 	private Coin generateCoin(final Money money) {
-		List<Integer> possibleCoinAmounts = Coin.getPossibleCoinAmounts(money);
+		List<Integer> possibleCoinAmounts = Coin.getExchangeableCoinAmounts(money);
 		int randomNumber = Randoms.pickNumberInList(possibleCoinAmounts);
 		Money randomMoney = Money.of(randomNumber);
 		return Coin.valueOf(randomMoney)

@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-import vendingmachine.domain.money.Money;
 import vendingmachine.constant.Notification;
+import vendingmachine.domain.money.Money;
 
 public class Products {
 	private final Map<String, Product> products;
@@ -22,7 +22,7 @@ public class Products {
 	public void add(Product product) {
 		validateNull(product);
 		String name = product.getName();
-		validateExists(name);
+		validateDuplication(name);
 		products.put(name, product);
 	}
 
@@ -41,19 +41,14 @@ public class Products {
 		}
 	}
 
-	private void validateExists(String name) {
+	private void validateDuplication(String name) {
 		if (products.containsKey(name)) {
 			throw new IllegalArgumentException(Notification.PRODUCT_ALREADY_EXIST.getMessage());
 		}
 	}
 
-	public boolean isEmpty() {
-		return products.isEmpty();
-	}
-
-	// 필요없다면 최종에 제거하기
 	public Map<String, Product> getProducts() {
-		return products;
+		return new HashMap<>(products);
 	}
 
 	public Money purchaseProduct(String productName) {
@@ -63,7 +58,7 @@ public class Products {
 		return product.getPrice();
 	}
 
-	public void validateProductName(String productName) {
+	private void validateProductName(String productName) {
 		if (!products.containsKey(productName)) {
 			throw new IllegalArgumentException(Notification.PRODUCT_NOT_FOUND.getMessage());
 		}

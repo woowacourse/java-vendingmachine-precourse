@@ -1,8 +1,9 @@
 package vendingmachine.view;
 
-public enum Visible {
+public enum ViewState {
 	HIDE, SHOW;
+
 	public boolean isShow() {
-		return this == Visible.SHOW;
+		return this == ViewState.SHOW;
 	}
 }

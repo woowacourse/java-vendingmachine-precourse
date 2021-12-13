@@ -5,20 +5,16 @@ import vendingmachine.domain.money.Money;
 import vendingmachine.domain.product.Products;
 
 public class VendingMachine {
-	private final Coins coins = new Coins();
+	private final Coins retentionCoins = new Coins();
 	private final Products products = Products.from();
 	private final Money insertMoney = Money.of(0);
-
-	public static VendingMachine from() {
-		return new VendingMachine();
-	}
 
 	public void addProductAll(Products products) {
 		this.products.addAll(products);
 	}
 
-	public void addCoinAll(Coins coins) {
-		this.coins.addAll(coins);
+	public void addRetentionCoinAll(Coins coins) {
+		this.retentionCoins.addAll(coins);
 	}
 
 	public void insert(Money money) {
@@ -39,6 +35,6 @@ public class VendingMachine {
 	}
 
 	public Coins returnChange() {
-		return coins.returnChange(insertMoney);
+		return retentionCoins.makeReturnChange(insertMoney);
 	}
 }

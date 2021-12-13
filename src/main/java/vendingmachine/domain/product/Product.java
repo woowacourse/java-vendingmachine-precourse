@@ -1,7 +1,7 @@
 package vendingmachine.domain.product;
 
-import vendingmachine.domain.money.Money;
 import vendingmachine.constant.Notification;
+import vendingmachine.domain.money.Money;
 import vendingmachine.domain.quantity.Quantity;
 import vendingmachine.exception.OutOfBoundException;
 
@@ -49,10 +49,6 @@ public class Product {
 
 	public Money getPrice() {
 		return Money.of(price.getAmount());
-	}
-
-	public Quantity getStock() {
-		return Quantity.of(stock.getCount());
 	}
 
 	public boolean isPurchasable(Money money) {

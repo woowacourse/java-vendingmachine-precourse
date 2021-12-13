@@ -36,7 +36,7 @@ public enum Coin {
 		return Optional.ofNullable(BY_MONEY.get(money));
 	}
 
-	public static List<Integer> getPossibleCoinAmounts(Money money) {
+	public static List<Integer> getExchangeableCoinAmounts(Money money) {
 		Set<Money> coinMonies = BY_MONEY.keySet();
 		return coinMonies.stream()
 			.filter(money::isSpendable)

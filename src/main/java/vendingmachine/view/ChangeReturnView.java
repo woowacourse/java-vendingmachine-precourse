@@ -1,8 +1,8 @@
 package vendingmachine.view;
 
-import vendingmachine.domain.money.Money;
 import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.money.Money;
 
 public class ChangeReturnView extends VendingMachineView {
 	public ChangeReturnView(VendingMachineController controller) {
@@ -13,7 +13,7 @@ public class ChangeReturnView extends VendingMachineView {
 	public void show() {
 		Money insertMoney = controller.getInsertMoney();
 		outputProcessor.printInsertMoney(insertMoney);
-		Coins coins = controller.showReturnChange();
+		Coins coins = controller.createReturnChange();
 		outputProcessor.printReturnChange(coins);
 		hide();
 	}

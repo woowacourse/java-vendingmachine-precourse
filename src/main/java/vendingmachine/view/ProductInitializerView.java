@@ -2,8 +2,8 @@ package vendingmachine.view;
 
 import vendingmachine.controller.VendingMachineController;
 
-public class ProductInitializeView extends VendingMachineView {
-	public ProductInitializeView(VendingMachineController controller) {
+public class ProductInitializerView extends VendingMachineView {
+	public ProductInitializerView(VendingMachineController controller) {
 		super(controller);
 	}
 
@@ -12,7 +12,7 @@ public class ProductInitializeView extends VendingMachineView {
 		String products = inputProcessor.readProductComposition();
 		outputProcessor.printLine();
 		try {
-			controller.addProductList(products);
+			controller.addProducts(products);
 			hide();
 		} catch (IllegalArgumentException e) {
 			outputProcessor.printMessage(e.getMessage());

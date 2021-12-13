@@ -1,7 +1,7 @@
 package vendingmachine.processor;
 
-import vendingmachine.domain.money.Money;
 import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.money.Money;
 
 public class OutputProcessor {
 	private static final String PRINT_RETENTION_COINS = "자판기가 보유한 동전";

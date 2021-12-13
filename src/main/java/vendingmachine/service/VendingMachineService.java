@@ -10,19 +10,19 @@ import vendingmachine.domain.vendingmachine.VendingMachine;
 public class VendingMachineService {
 	private final VendingMachine vendingMachine = new VendingMachine();
 
-	public Coins generateCoin(Money retentionMoney) {
+	public Coins saveRetentionCoins(Money retentionMoney) {
 		CoinGenerator coinGenerator = new RandomCoinGenerator();
-		Coins generateCoins = coinGenerator.generate(retentionMoney);
-		vendingMachine.addCoinAll(generateCoins);
-		return generateCoins;
+		Coins retentionCoins = coinGenerator.generate(retentionMoney);
+		vendingMachine.addRetentionCoinAll(retentionCoins);
+		return retentionCoins;
 	}
 
-	public void addProducts(Products products) {
+	public void saveProducts(Products products) {
 		vendingMachine.addProductAll(products);
 	}
 
-	public void insert(Money insertMoney) {
-		vendingMachine.insert(insertMoney);
+	public void saveInsertMoney(Money money) {
+		vendingMachine.insert(money);
 	}
 
 	public Money getInsertMoney() {
@@ -37,7 +37,7 @@ public class VendingMachineService {
 		vendingMachine.purchase(productName);
 	}
 
-	public Coins showReturnChange() {
+	public Coins createReturnChange() {
 		return vendingMachine.returnChange();
 	}
 }

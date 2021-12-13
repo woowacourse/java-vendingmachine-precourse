@@ -3,8 +3,8 @@ package vendingmachine.view;
 import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.coin.Coins;
 
-public class RetentionMoneyInitializeView extends VendingMachineView {
-	public RetentionMoneyInitializeView(VendingMachineController controller) {
+public class RetentionMoneyInitializerView extends VendingMachineView {
+	public RetentionMoneyInitializerView(VendingMachineController controller) {
 		super(controller);
 	}
 
@@ -13,7 +13,7 @@ public class RetentionMoneyInitializeView extends VendingMachineView {
 		String retentionMoney = inputProcessor.readRetentionMoney();
 		outputProcessor.printLine();
 		try {
-			Coins coins = controller.addRetentionCoin(retentionMoney);
+			Coins coins = controller.addRetentionCoins(retentionMoney);
 			outputProcessor.printRetentionCoins(coins);
 			hide();
 		} catch (IllegalArgumentException e) {

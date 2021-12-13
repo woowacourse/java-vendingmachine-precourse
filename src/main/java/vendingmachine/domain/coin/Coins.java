@@ -37,22 +37,16 @@ public class Coins {
 		}
 	}
 
-	public boolean isEmpty() {
-		return coins.isEmpty();
-	}
-
 	@Override
 	public String toString() {
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Map.Entry<Coin, Quantity> coin : coins.entrySet()) {
-			stringBuilder
-				.append(coin.getKey()).append(" - ")
-				.append(coin.getValue()).append("\n");
+			stringBuilder.append(coin.getKey()).append(" - ").append(coin.getValue()).append("\n");
 		}
 		return stringBuilder.toString();
 	}
 
-	public Coins returnChange(Money money) {
+	public Coins makeReturnChange(Money money) {
 		Coins returnCoins = new Coins();
 		List<Coin> sortedCoins = Coin.getSortedCoins();
 		for (Coin coin : sortedCoins) {

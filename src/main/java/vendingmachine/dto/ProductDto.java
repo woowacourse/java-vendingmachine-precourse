@@ -1,7 +1,5 @@
 package vendingmachine.dto;
 
-import java.util.Arrays;
-
 import vendingmachine.constant.Notification;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.Products;
@@ -15,44 +13,24 @@ public class ProductDto {
 	private static final String PRODUCT_START_STRING = "[";
 	private static final String PRODUCT_END_STRING = "]";
 
-
 	private final String input;
 
 	public ProductDto(String input) {
 		this.input = input;
 	}
 
-	public Products convertProducts() {
-		long productSize = getProductSize();
+	public Products toProducts() {
 		String[] productArray = input.split(String.valueOf(PRODUCTS_SPLIT));
 		validProductSize(productArray);
-		validateSizeDifference(productArray.length, productSize);
+		validateSizeDifference(productArray.length);
 		Products products = Products.from();
 		for (String product : productArray) {
-			products.add(convertProduct(product));
+			products.add(toProduct(product));
 		}
 		return products;
 	}
 
-	private void validateSizeDifference(int length, long productSize) {
-		if(length != productSize+1) {
-			throw new IllegalArgumentException(Notification.PRODUCT_INVALID_COMPOSITION.getMessage());
-		}
-	}
-
-	private long getProductSize() {
-		return input.chars()
-			.filter(ch -> ch == PRODUCTS_SPLIT)
-			.count();
-	}
-
-	private void validProductSize(String[] productArray) {
-		if (productArray.length < PRODUCT_MINIMUM_SIZE) {
-			throw new IllegalArgumentException(Notification.PRODUCTS_SIZE_INSUFFICIENT.getMessage());
-		}
-	}
-
-	private Product convertProduct(String product) {
+	private Product toProduct(String product) {
 		product = removePattern(product);
 		String[] productElements = product.split(PRODUCT_COMPOSITION_SPLIT);
 		validateSize(productElements.length);
@@ -64,6 +42,24 @@ public class ProductDto {
 		String price = productElements[1];
 		String quantity = productElements[2];
 		return Product.of(name, price, quantity);
+	}
+
+	private long getProductSize() {
+		return input.chars()
+			.filter(ch -> ch == PRODUCTS_SPLIT)
+			.count();
+	}
+
+	private void validateSizeDifference(int length) {
+		if (length != getProductSize() + 1) {
+			throw new IllegalArgumentException(Notification.PRODUCT_INVALID_COMPOSITION.getMessage());
+		}
+	}
+
+	private void validProductSize(String[] productArray) {
+		if (productArray.length < PRODUCT_MINIMUM_SIZE) {
+			throw new IllegalArgumentException(Notification.PRODUCTS_SIZE_INSUFFICIENT.getMessage());
+		}
 	}
 
 	private String removePattern(String product) {

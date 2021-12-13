@@ -8,19 +8,19 @@ public abstract class VendingMachineView {
 	protected final InputProcessor inputProcessor = new InputProcessor();
 	protected final OutputProcessor outputProcessor = new OutputProcessor();
 	protected final VendingMachineController controller;
-	private Visible visible;
+	private ViewState viewState;
 
 	public VendingMachineView(VendingMachineController controller) {
-		this.visible = Visible.SHOW;
+		this.viewState = ViewState.SHOW;
 		this.controller = controller;
 	}
 
 	public void hide() {
-		this.visible = Visible.HIDE;
+		this.viewState = ViewState.HIDE;
 	}
 
 	public boolean isShow() {
-		return visible.isShow();
+		return viewState.isShow();
 	}
 
 	public abstract void show();

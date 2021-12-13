@@ -1,28 +1,28 @@
 package vendingmachine.controller;
 
-import vendingmachine.service.VendingMachineService;
 import vendingmachine.domain.coin.Coins;
 import vendingmachine.domain.money.Money;
-import vendingmachine.dto.ProductDto;
 import vendingmachine.domain.product.Products;
+import vendingmachine.dto.ProductDto;
+import vendingmachine.service.VendingMachineService;
 
 public class VendingMachineController {
 	private final VendingMachineService vendingMachineService = new VendingMachineService();
 
-	public Coins addRetentionCoin(String retentionAmount) {
+	public Coins addRetentionCoins(String retentionAmount) {
 		Money retentionMoney = Money.of(retentionAmount);
-		return vendingMachineService.generateCoin(retentionMoney);
+		return vendingMachineService.saveRetentionCoins(retentionMoney);
 	}
 
-	public void addProductList(String productList) {
+	public void addProducts(String productList) {
 		ProductDto productDto = new ProductDto(productList);
-		Products products = productDto.convertProducts();
-		vendingMachineService.addProducts(products);
+		Products products = productDto.toProducts();
+		vendingMachineService.saveProducts(products);
 	}
 
 	public void addInsertMoney(String amount) {
 		Money insertMoney = Money.of(amount);
-		vendingMachineService.insert(insertMoney);
+		vendingMachineService.saveInsertMoney(insertMoney);
 	}
 
 	public Money getInsertMoney() {
@@ -37,7 +37,7 @@ public class VendingMachineController {
 		vendingMachineService.purchaseProduct(productName);
 	}
 
-	public Coins showReturnChange() {
-		return vendingMachineService.showReturnChange();
+	public Coins createReturnChange() {
+		return vendingMachineService.createReturnChange();
 	}
 }
