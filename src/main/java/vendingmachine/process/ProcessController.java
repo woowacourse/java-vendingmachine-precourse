@@ -11,6 +11,7 @@ public class ProcessController {
     static GoodsController goodsController;
 
     private static int holdingAmount;
+    private static int userMoney;
 
     public static void makeHoldingAmount(MachineHoldingAmount machineHoldingAmount) {
         while (true) {
@@ -37,6 +38,18 @@ public class ProcessController {
             try {
                 System.out.println(ProcessConstant.ASK_GOODS);
                 goodsController = new GoodsController(ProcessPrepareGoods.makeGoods());
+                break;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public static void inputUserMoney() {
+        while (true) {
+            try {
+                System.out.println(ProcessConstant.ASK_USER_MONEY);
+                userMoney = ProcessPrepareUserMoney.makeUserMoney();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
