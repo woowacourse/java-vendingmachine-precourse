@@ -10,4 +10,12 @@ public class Item {
 		this.price = price;
 		this.amount = amount;
 	}
+
+	public boolean isAmountZero() {
+		return this.amount == 0;
+	}
+
+	public boolean isBuyable(int insertAmount) {
+		return this.price <= insertAmount;
+	}
 }
