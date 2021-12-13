@@ -21,6 +21,7 @@ public class VendingMachineController {
 		vendingMachine.initOwnMoney(convertedMachineMoney);
 		//동전 생성
 		vendingMachine.generateCoin();
+		//동전 출력
 		//상품명 입력받기
 		String products = enterMachineProduct();
 		//상품 생성
@@ -34,6 +35,7 @@ public class VendingMachineController {
 		//물건 구매하기
 		purchaseProduct(vendingMachine);
 		//자판기 종료시 잔돈 계산하기
+		calculateCoin(vendingMachine);
 
 	}
 
@@ -48,6 +50,10 @@ public class VendingMachineController {
 			vendingMachine.purchase(productName);
 			outputView.printInsertMoney(vendingMachine.getInputMoney());
 		}
+	}
+
+	private void calculateCoin(VendingMachine vendingMachine) {
+		outputView.printCoinChange(vendingMachine.getCoinMap());
 	}
 
 	private String enterMachineMoney() {

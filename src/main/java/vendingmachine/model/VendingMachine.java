@@ -13,10 +13,14 @@ public class VendingMachine {
 	private int ownMoney; // 갖고 있을 필요가 있나?
 	private int inputMoney;
 	private List<Product> productList;
-	private Map<Coin, Integer> coinIntegerMap;
+	private Map<Coin, Integer> coinMap;
 
 	public int getInputMoney() {
 		return this.inputMoney;
+	}
+
+	public Map<Coin, Integer> getCoinMap() {
+		return this.coinMap;
 	}
 
 	public void initOwnMoney(int ownMoney) {
@@ -32,7 +36,7 @@ public class VendingMachine {
 		coinAmountList.forEach(amount -> {
 			int maxRange = Utils.getMaxRange(ownMoney, amount);
 			int randomNumber = Randoms.pickNumberInRange(0, maxRange);
-			coinIntegerMap.put(Coin.parse(amount), randomNumber);
+			coinMap.put(Coin.parse(amount), randomNumber);
 			ownMoney = ownMoney - randomNumber*amount;
 		});
 	}
