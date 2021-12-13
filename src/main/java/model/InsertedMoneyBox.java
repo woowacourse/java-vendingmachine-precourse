@@ -3,22 +3,19 @@ package model;
 public class InsertedMoneyBox {
 	private int money;
 
-	public InsertedMoneyBox(int userInsertMoney) {
-		money = userInsertMoney;
+	public InsertedMoneyBox(int insertedMoney) {
+		money = insertedMoney;
 	}
 
-	public int bringMoney() {
+	public int getMoney() {
 		return money;
 	}
 
-	public boolean hasEnoughMoney(int minimumProductPrice) {
-		if (money < minimumProductPrice) {
-			return false;
-		}
-		return true;
+	public boolean hasEnoughMoney(int productPrice) {
+		return money >= productPrice;
 	}
 
-	public void reduceMoney(int soldProductPrice) {
-		money -= soldProductPrice;
+	public void reduceMoney(int productPrice) {
+		money -= productPrice;
 	}
 }
