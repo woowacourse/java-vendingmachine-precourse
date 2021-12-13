@@ -32,7 +32,7 @@ public class VendingMachineController {
 		coins = new Coins(Integer.parseInt(inputAmountMoney));
 	}
 
-	public void initProducts() {
+	private void initProducts() {
 		String inputProducts = InputView.readProducts();
 		List<String> separatedProducts = StringUtils.splitProduct(inputProducts);
 		separatedProducts = StringUtils.removeProductBrackets(separatedProducts);
