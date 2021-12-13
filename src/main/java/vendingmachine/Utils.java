@@ -38,6 +38,13 @@ public class Utils {
 
     public static void OrderJuice(int minPrice, ArrayList<Juice> juiceIndex) {
         int money = PrintUI.InputMoney();
+        while (true) {
+            String juiceName = PrintUI.Ordering(money);
+            if (money < minPrice) {
+                break;
+            }
+        }
+
     }
 
 

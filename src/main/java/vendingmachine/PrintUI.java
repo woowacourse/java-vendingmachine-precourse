@@ -24,4 +24,12 @@ public class PrintUI {
         System.out.println();
         return money;
     }
+
+    public static String Ordering(int money) {
+        System.out.println("투입 금액: " + money +"원");
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        String orderJuice = Console.readLine();
+        System.out.println();
+        return orderJuice;
+    }
 }
