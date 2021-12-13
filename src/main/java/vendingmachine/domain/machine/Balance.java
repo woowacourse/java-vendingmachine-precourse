@@ -17,12 +17,12 @@ public class Balance {
 	}
 
 	public static Balance from(int balance) {
-		isValidateBalanceMiniMum(balance);
+		isValidateBalanceMinimum(balance);
 		isValidateBalance10PercentDivision(balance);
 		return new Balance(balance);
 	}
 
-	private static void isValidateBalanceMiniMum(int balance) {
+	private static void isValidateBalanceMinimum(int balance) {
 		if (balance < BALANCE_MINIMUM) {
 			throw new IllegalArgumentException(ERROR_BALANCE_NOT_ONE_HUNDRED_OVER);
 		}
