@@ -44,7 +44,7 @@ public class InputException {
 		throw new IllegalArgumentException(NOT_ENOUGH_INFO);
 	}
 
-	public static void printDuplicatedBeverage(){
+	public static void printDuplicatedBeverage() {
 		throw new IllegalArgumentException(DUPLICATED_BEVERAGE);
 	}
 }

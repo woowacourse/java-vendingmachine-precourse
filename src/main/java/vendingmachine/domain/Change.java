@@ -22,8 +22,9 @@ public class Change {
 		int tmpMoney = 0;
 		while (!money.isSame(tmpMoney)) {
 			int random = Randoms.pickNumberInList(Coin.getList());
-			if (notValidChange(money, tmpMoney, random))
+			if (notValidChange(money, tmpMoney, random)) {
 				continue;
+			}
 			tmpMoney += random;
 			Coin coin = Coin.getCoin(random);
 			changes.put(coin, changes.get(coin) + 1);
