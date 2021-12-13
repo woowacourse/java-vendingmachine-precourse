@@ -24,6 +24,6 @@ public class Product {
     }
 
     public int sell() {
-        return --count;
+        return count--;
     }
 }

@@ -11,15 +11,17 @@ public class VendingMachineController {
     private static int fiveHundredRandomCoin;
     private static int oneHundredRandomCoin;
     private static int fiftyRandomCoin;
-    private static int tenRandomCoin;
 
     public void run() {
         vendingMachineMoney = InputView.inputVendingMachineMoney();
+
         OutputView.printFiveHundredRandomCoins(createFiveHundredCoinRandomly(maxFiveHundredCoin));
         OutputView.printOneHundredRandomCoins(createOneHundredCoinRandomly(maxOneHundredCoin));
         OutputView.printFiftyRandomCoins(createFiftyCoinRandomly(maxFiftyCoin));
-        OutputView.printTenRandomCoins(createTenCoinRandomly(maxTenCoin));
+        OutputView.printTenCoins(createTenCoin(maxTenCoin));
+
         InputView.inputProductInformation();
+
         InputView.inputMoney();
     }
 
@@ -44,10 +46,8 @@ public class VendingMachineController {
         return fiftyRandomCoin;
     }
 
-    public static int createTenCoinRandomly(int maxTenCoin) {
+    public static int createTenCoin(int maxTenCoin) {
         maxTenCoin = Coin.COIN_10.countMaxTenCoin(vendingMachineMoney - (fiveHundredRandomCoin * 500) - (oneHundredRandomCoin * 100) - (fiftyRandomCoin * 50));
-        List<Integer> tenCoins = Coin.COIN_10.tenCoins(maxTenCoin);
-        tenRandomCoin = Coin.COIN_10.createCoinRandom(tenCoins);
-        return tenRandomCoin;
+        return maxTenCoin;
     }
 }

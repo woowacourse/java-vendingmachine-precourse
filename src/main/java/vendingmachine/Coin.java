@@ -66,12 +66,4 @@ public enum Coin {
     public int countMaxTenCoin(int vendingMachineMoney) {
         return vendingMachineMoney / COIN_10.getAmount();
     }
-
-    public List<Integer> tenCoins(int maxTenCoin) {
-        List<Integer> tenCoinList = new ArrayList<>();
-        for (int i = 0; i < maxTenCoin + 1; i++) {
-            tenCoinList.add(i);
-        }
-        return tenCoinList;
-    }
 }

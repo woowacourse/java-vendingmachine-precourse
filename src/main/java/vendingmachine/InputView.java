@@ -1,6 +1,9 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
+import validator.ProductValidator;
+
+import java.util.Arrays;
 
 import static validator.InputNumberValidator.validateVendingMachineMoney;
 
@@ -15,9 +18,14 @@ public class InputView {
         }
     }
 
-    public static String inputProductInformation() {
-        System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
-        return Console.readLine();
+    public static String[] inputProductInformation() {
+        try {
+            System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
+            return ProductValidator.validateInput(Console.readLine());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            return inputProductInformation();
+        }
     }
 
     public static String inputMoney() {

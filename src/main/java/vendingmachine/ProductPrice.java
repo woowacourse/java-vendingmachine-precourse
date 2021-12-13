@@ -28,13 +28,6 @@ public class ProductPrice {
     }
 
     // all-arguments constructor
-    public ProductPrice(int price, int discount) {
-        if (price < 0 && price % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR]");
-        }
-        this.price = price;
-        this.discount = discount;
-    }
 
     public ProductPrice(String price) {
         int priceTemp = Integer.parseInt(price);

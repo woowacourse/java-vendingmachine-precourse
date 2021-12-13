@@ -27,7 +27,7 @@ public class OutputView {
         System.out.println(fiftyCoinList);
     }
 
-    public static void printTenRandomCoins(int randomCoin) {
+    public static void printTenCoins(int randomCoin) {
         StringBuilder tenCoinList = new StringBuilder();
         tenCoinList.append(TEN_COIN).append(randomCoin).append(UNIT);
         System.out.println(tenCoinList);
