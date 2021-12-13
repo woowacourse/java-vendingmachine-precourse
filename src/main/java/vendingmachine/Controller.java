@@ -14,7 +14,7 @@ public class Controller {
         this.input = input;
     }
 
-    public void requestMachineInfo() {
+    public void setupMachine() {
         int machineMoney = input.requestMachineMoney();
         List<Coin> coins = Coin.generateCoinsBy(machineMoney);
 
@@ -24,26 +24,34 @@ public class Controller {
     }
 
     public void startBuying() {
-        if (!machine.isReadyToStartBuying()) {
-            requestMachineInfo();
-        }
-        buyProduct();
+        setupMachineIfNeeded();
+        startProductBuyingProcess();
     }
 
-    private void buyProduct() {
+    private void setupMachineIfNeeded() {
+        if (!machine.isReadyToStartBuying()) {
+            setupMachine();
+        }
+    }
+
+    private void startProductBuyingProcess() {
         System.out.printf((Constant.REMAIN_MONEY) + "%n", machine.remainMoney());
         if (!machine.canBuyWith(machine.remainMoney())) {
             System.out.println(machine.returnChange());
             return;
         }
+        buyProduct();
+    }
+
+    private void buyProduct() {
         String nameToBuy = input.requestBuyingProduct();
 
         if (!machine.hasProduct(nameToBuy)) {
             System.out.println(Constant.MACHINE_DONT_HAVE_PRODUCT_ERROR_STRING);
-            buyProduct();
+            startProductBuyingProcess();
             return;
         }
         machine.buy(nameToBuy);
-        buyProduct();
+        startProductBuyingProcess();
     }
 }
