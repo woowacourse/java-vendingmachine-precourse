@@ -16,15 +16,12 @@ public enum Coin {
         this.amount = amount;
     }
 
-    protected int inputCoinCountRandomly(List<Integer> coins) {
-        return Randoms.pickNumberInList(coins);
-    }
-
     protected int getAmount() {
         return amount;
     }
 
-}
+    protected int inputCoinCountRandomly(List<Integer> coins) {
+        return Randoms.pickNumberInList(coins);
+    }
 
-// 보유 : 1150
-//
+}

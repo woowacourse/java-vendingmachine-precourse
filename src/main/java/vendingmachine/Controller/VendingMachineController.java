@@ -28,17 +28,16 @@ public class VendingMachineController {
     public void run() {
         VendingMachine vendingMachine = fillMoney();
         List<Product> products = displayProducts();
-        int cheapestProductPrice = findCheapestProductPrice(products);
 
+        int cheapestProductPrice = findCheapestProductPrice(products);
         int purchasingCost = inputView.inputPurchasingCost();
 
-        while (!vendingMachine.isContinueDeal(products, cheapestProductPrice, purchasingCost)) {
+        do {
             outputView.printPurChasingCost(purchasingCost);
 
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
             purchasingCost = vendingMachine.calculateRemainingPurchasingCost(products, choosePurchasingProductName, purchasingCost);
-        }
-
+        } while (vendingMachine.isContinueDeal(products, cheapestProductPrice, purchasingCost));
     }
 
     protected int findCheapestProductPrice(final List<Product> products) {

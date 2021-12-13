@@ -13,11 +13,13 @@ public class Count {
     }
 
     public int minusCount(int count) {
-        return count - 1;
+        count = this.count - 1;
+        System.out.println("개수: " + count);
+        return count;
     }
 
     public boolean isCountValidation() {
-        return minusCount(this.count) >= 0;
+        return (this.count - 1) <= 0;
     }
 
 }

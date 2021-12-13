@@ -15,14 +15,13 @@ public class VendingMachine {
     }
 
     public boolean isContinueDeal(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
-        boolean isContinueDeal = true;
+        boolean isContinueDeal = purchasingCost >= cheapestProductPrice;
 
-//        if (cheapestProductPrice > purchasingCost) {
-//            isContinueDeal = false;
-//        }
+        System.out.println("구매비용: "+purchasingCost);
+        System.out.println("가장 싼 제품: "+cheapestProductPrice);
 
         for (Product product : products) {
-            if (product.getCount().isCountValidation() || product.getPrice().isPurchasingCostValidation(purchasingCost)) {
+            if (product.getCount().isCountValidation()) {
                 isContinueDeal = false;
             }
         }

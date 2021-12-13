@@ -19,7 +19,9 @@ public class Price {
     }
 
     public int subtractPrice(int purchasingCost) {
-        return purchasingCost - this.price;
+        purchasingCost = purchasingCost - this.price;
+        System.out.println("비용: "+purchasingCost);
+        return purchasingCost;
     }
 
     public boolean isPurchasingCostValidation(int purchasingCost) {
