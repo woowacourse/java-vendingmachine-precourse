@@ -12,4 +12,8 @@ public class Name {
         return name.equals(purchasingProductName);
     }
 
+    public String getName() {
+        return name;
+    }
+
 }

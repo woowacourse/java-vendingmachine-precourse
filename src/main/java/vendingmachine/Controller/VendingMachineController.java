@@ -2,13 +2,16 @@ package vendingmachine.Controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
 import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.utils.ExceptionMessages;
 import vendingmachine.utils.Messages;
 import vendingmachine.utils.Symbol;
 
@@ -37,7 +40,7 @@ public class VendingMachineController {
         int cheapestProductPrice = findCheapestProductPrice(products);
         int purchasingCost = inputView.inputPurchasingCost();
 
-        purchaseProducts(vendingMachine, products, cheapestProductPrice, purchasingCost);
+        purchasingCost = purchaseProducts(vendingMachine, products, cheapestProductPrice, purchasingCost);
         returnChange(vendingMachine, machineCoins, purchasingCost);
     }
 
@@ -46,13 +49,15 @@ public class VendingMachineController {
         outputView.printReturnChange(purchasingCost, returnCoins);
     }
 
-    protected void purchaseProducts(final VendingMachine vendingMachine, final List<Product> products, final int cheapestProductPrice, int purchasingCost) {
+    protected int purchaseProducts(final VendingMachine vendingMachine, final List<Product> products, final int cheapestProductPrice, int purchasingCost) {
         do {
             outputView.printPurChasingCost(purchasingCost);
 
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
         } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
+
+        return purchasingCost;
     }
 
     protected int findCheapestProductPrice(final List<Product> products) {
@@ -104,7 +109,21 @@ public class VendingMachineController {
             productList.add(product);
         }
 
+        validateDuplicateProduct(productList);
+
         return productList;
+    }
+
+    protected void validateDuplicateProduct(final List<Product> productList) {
+        final List<String> productNames = new ArrayList<>();
+        for (Product product : productList) {
+            productNames.add(product.getProductName());
+        }
+
+        final Set<String> noDuplicateProductName = new HashSet<>(productNames);
+        if (productNames.size() != noDuplicateProductName.size()) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_NAME_DUPLICATE.getErrorMessage());
+        }
     }
 
     protected Product createProduct(final List<String> productInformation) {

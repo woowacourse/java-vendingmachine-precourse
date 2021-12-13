@@ -23,10 +23,6 @@ public class Price {
         return purchasingCost;
     }
 
-    public boolean isPurchasingCostValidation(int purchasingCost) {
-        return subtractPrice(purchasingCost) >= 0;
-    }
-
     protected void validatePrice(final int price) {
         if (!isFollowingPriceRule(price)) {
             throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_PRICE_CONDITION.getErrorMessage());
