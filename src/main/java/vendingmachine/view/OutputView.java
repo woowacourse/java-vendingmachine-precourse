@@ -1,7 +1,5 @@
 package vendingmachine.view;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
@@ -15,6 +13,7 @@ public class OutputView {
 	private static final String INPUT_MONEY_GUIDE_MESSEAGE_SUFFIX = "원";
 	private static final String CHANGE_GUIDE_MESSEAGE = "잔돈";
 	private static final String CHANGE_GUIDE_MESSEAGE_SUFFIX = "개";
+	private static final String NOT_HAVE_PRODUCT_GUIDE_MESSEEAGE = "[ERROR] 구매하려는 상품이 자판기 내에 없습니다. 다른 상품을 선택해주세요.";
 
 	public static void printHoldingCoins(Map<Coin, Count> coins) {
 		System.out.println();
@@ -41,6 +40,14 @@ public class OutputView {
 			System.out.print(HOLDING_COINS_CONNECTOR);
 			System.out.print(changes.get(coin));
 			System.out.println(CHANGE_GUIDE_MESSEAGE_SUFFIX);
+		}
+	}
+
+	public static void printErrorNotHaveProduct() {
+		try {
+			throw new IllegalArgumentException(NOT_HAVE_PRODUCT_GUIDE_MESSEEAGE);
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
 		}
 	}
 }

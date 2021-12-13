@@ -2,7 +2,8 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
+import vendingmachine.controller.VendingMachineController;
 
 public class Products {
 	private static final String PRODUCTS_DELIMITER = ",";
@@ -37,11 +38,16 @@ public class Products {
 
 	public Products buy(String buyProductName) {
 		List<Product> newProducts = new ArrayList<>();
+		boolean validateNotHaveProduct = true;
 		for (Product product : products) {
-			if (product.getName().equals(buyProductName)) {
+			if (product.getName().equals(buyProductName) && product.getCnt() != 0) {
 				product = product.reduce(ONE);
+				validateNotHaveProduct = false;
 			}
 			newProducts.add(product);
+		}
+		if (validateNotHaveProduct) {
+			VendingMachineController.printErrorNotHaveProduct();
 		}
 		return new Products(newProducts);
 	}

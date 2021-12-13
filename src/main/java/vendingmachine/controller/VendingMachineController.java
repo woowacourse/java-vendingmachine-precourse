@@ -1,13 +1,10 @@
 package vendingmachine.controller;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Coins;
 import vendingmachine.domain.Count;
-import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -44,5 +41,9 @@ public class VendingMachineController {
 
 	public void printChange(Map<Integer, Integer> changes) {
 		OutputView.printChange(changes);
+	}
+
+	public static void printErrorNotHaveProduct() {
+		OutputView.printErrorNotHaveProduct();
 	}
 }
