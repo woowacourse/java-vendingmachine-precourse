@@ -10,4 +10,12 @@ public class Money {
     public int getCost() {
         return cost;
     }
+
+    public void decreaseMoney(int cost) {
+        this.cost -= cost;
+    }
+
+    public boolean isAvailableForPurchase(int price) {
+        return price <= cost;
+    }
 }

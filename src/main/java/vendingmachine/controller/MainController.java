@@ -14,6 +14,9 @@ public class MainController {
         OutputView.printCoinByVendingMachine(vendingMachine.getCoin());
         InputController.makeProductsList(vendingMachine);
         vendingMachine.insertMoney(new Money(InputView.inputMoney()));
-        OutputView.printRemainingAmount(vendingMachine.getMoney());
+        while (vendingMachine.checkAdditionalPurchase()) {
+            OutputView.printRemainingAmount(vendingMachine.getMoney());
+            vendingMachine.buyProduct(InputView.inputProductToPurchase());
+        }
     }
 }

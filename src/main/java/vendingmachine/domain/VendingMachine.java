@@ -46,4 +46,26 @@ public class VendingMachine {
         return money;
     }
 
+    public void buyProduct(String productName) {
+        for (Product product : products) {
+            if (product.isProduct(productName)) {
+                product.decreaseProduct();
+                money.decreaseMoney(product.getPrice());
+                break;
+            }
+        }
+    }
+
+    public boolean checkAdditionalPurchase() {
+        for (Product product : products) {
+            if (product.isSoldOut()) {
+                continue;
+            }
+            if (money.isAvailableForPurchase(product.getPrice())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }
