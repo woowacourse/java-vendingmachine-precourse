@@ -20,6 +20,10 @@ public class Deposit implements Comparable<Deposit> {
 		return count;
 	}
 
+	public int getTotal() {
+		return coin.getAmount() * count;
+	}
+
 	public void decreaseBy(int count) {
 		this.count -= count;
 	}

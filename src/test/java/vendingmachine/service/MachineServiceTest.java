@@ -19,19 +19,22 @@ import vendingmachine.repository.ProductRepository;
 class MachineServiceTest {
 
 	MachineService machineService;
+	ProductService productService;
+	DepositService depositService;
 	DepositRepository depositRepository;
 	ProductRepository productRepository;
-	ProductService productService;
 
 	List<String> productList;
 	List<Deposit> depositList;
 
 	@BeforeEach
 	void setUp() {
-		depositRepository = new DepositRepository();
-		productRepository = new ProductRepository();
-		productService = new ProductService(productRepository);
-		machineService = new MachineService(depositRepository, productService);
+		this.depositRepository = new DepositRepository();
+		this.productRepository = new ProductRepository();
+		this.productService = new ProductService(productRepository);
+		this.depositService = new DepositService(depositRepository);
+
+		this.machineService = new MachineService(depositService, productService);
 
 		productList = Arrays.asList("[콜라,300,20]", "[사이다,1500,300]");
 		machineService.setProducts(productList.get(0) + Symbol.PRODUCT_DELIMITER.getSymbol() + productList.get(1));
