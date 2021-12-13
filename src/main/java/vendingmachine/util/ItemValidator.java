@@ -19,9 +19,9 @@ public class ItemValidator {
 
 		List<String> itemParameters = parameterStringToList(itemParameterStr);
 
-		return new Item(itemParameters.get(NAME_INDEX)
-			, Integer.parseInt(itemParameters.get(PRICE_INDEX))
-			, Integer.parseInt(itemParameters.get(AMOUNT_INDEX)));
+		return new Item(itemParameters.get(NAME_INDEX),
+			Integer.parseInt(itemParameters.get(PRICE_INDEX)),
+			Integer.parseInt(itemParameters.get(AMOUNT_INDEX)));
 	}
 
 	private static boolean isWrapped(String itemStr) {
@@ -32,8 +32,8 @@ public class ItemValidator {
 	}
 
 	private static String unwrap(String itemStr) {
-		return itemStr.substring(PublicConst.FIRST_INDEX + PublicConst.INDEX_GAP
-			, itemStr.length() - PublicConst.INDEX_GAP);
+		return itemStr.substring(PublicConst.FIRST_INDEX + PublicConst.INDEX_GAP,
+			itemStr.length() - PublicConst.INDEX_GAP);
 	}
 
 	private static List<String> parameterStringToList(String parameterStr) {

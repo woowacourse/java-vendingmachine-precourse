@@ -22,13 +22,16 @@ public class ItemService {
 		items.forEach(itemRepository::addItem);
 	}
 
-	public Item searchItem(String itemName) {
+	public Item searchItem(String itemName, int money) {
 		Item item = itemRepository.getItemByName(itemName);
-		if (item == null) {
+		if (item == null)
 			throw new IllegalArgumentException(SystemMessage.ERROR_NOT_EXIST_ITEM);
-		}
+
 		if (!item.isInStock())
 			throw new IllegalArgumentException(SystemMessage.ERROR_IS_NOT_IN_STOCK);
+
+		if (item.getPrice() > money)
+			throw new IllegalArgumentException(SystemMessage.ERROR_TOO_EXPENSIVE);
 
 		return item;
 	}

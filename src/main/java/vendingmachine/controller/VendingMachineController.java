@@ -61,8 +61,8 @@ public class VendingMachineController {
 		return itemService.getItemStringsByMoney(money);
 	}
 
-	public Item searchItem(String itemName) {
-		return itemService.searchItem(itemName);
+	public Item searchItem(String itemName, int money) {
+		return itemService.searchItem(itemName, money);
 	}
 
 	public void purchase(Item item) {

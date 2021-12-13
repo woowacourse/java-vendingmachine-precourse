@@ -19,7 +19,7 @@ public class InputItemNameView implements View {
 			return;
 		}
 		printMoneyAndMessage(money);
-		purchase();
+		purchase(money);
 		reshow();
 	}
 
@@ -31,11 +31,11 @@ public class InputItemNameView implements View {
 		System.out.println(SystemMessage.INPUT_ITEM_NAME);
 	}
 
-	private void purchase() {
+	private void purchase(int money) {
 		String itemName = readItemName();
 		Item item;
 		try {
-			item = Application.controller.searchItem(itemName);
+			item = Application.controller.searchItem(itemName, money);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return;
