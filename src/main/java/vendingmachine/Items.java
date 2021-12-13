@@ -19,4 +19,15 @@ public class Items {
 			.filter(item -> item.isBuyable(insertAmount))
 			.count() > 0;
 	}
+
+	public boolean isMatchingInItems(String buyingItem) {
+		return items.stream()
+			.anyMatch(item -> item.isMathcing(buyingItem));
+	}
+
+	public Item findItemWithName(String buyingItem) {
+		return items.stream()
+			.filter(item -> item.isMathcing(buyingItem))
+			.findFirst().get();
+	}
 }

@@ -7,6 +7,7 @@ public class InputView {
 	private static final String ENTER_VENDING_MACHINE_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String ENTER_ITEM_INFO = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String ENTER_INSERT_AMOUNT = "투입 금액을 입력해 주세요.";
+	private static final String ENTER_BUYING_ITEM = "구매할 상품명을 입력해 주세요.";
 
 	public int getInputOfVendingMachineMoney() {
 		try {
@@ -35,6 +36,7 @@ public class InputView {
 
 	public int getInputOfInsertAmount() {
 		try {
+			System.out.println();
 			System.out.println(ENTER_INSERT_AMOUNT);
 			String insertAmount = Console.readLine();
 			MoneyValidation.validateInsertAmount(insertAmount);
@@ -42,6 +44,18 @@ public class InputView {
 		} catch (IllegalArgumentException e) {
 			System.out.println(ERROR_MESSAGE + e.getMessage());
 			return getInputOfInsertAmount();
+		}
+	}
+
+	public Item getInputOfBuyingItem(Items items, int insertAmount) {
+		try {
+			System.out.println(ENTER_BUYING_ITEM);
+			String buyingItem = Console.readLine();
+			BuyingItemValidation.validateBuyingItem(items, insertAmount, buyingItem);
+			return items.findItemWithName(buyingItem);
+		} catch (IllegalArgumentException e) {
+			System.out.println(ERROR_MESSAGE + e.getMessage());
+			return getInputOfBuyingItem(items, insertAmount);
 		}
 	}
 }

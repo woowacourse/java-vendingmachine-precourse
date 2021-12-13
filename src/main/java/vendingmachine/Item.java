@@ -18,4 +18,8 @@ public class Item {
 	public boolean isBuyable(int insertAmount) {
 		return this.price <= insertAmount;
 	}
+
+	public boolean isMathcing(String buyingItem) {
+		return this.name.equals(buyingItem);
+	}
 }
