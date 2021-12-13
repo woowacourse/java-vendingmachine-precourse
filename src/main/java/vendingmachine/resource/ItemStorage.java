@@ -1,5 +1,7 @@
 package vendingmachine.resource;
 
+import static vendingmachine.constants.ErrorMessages.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -40,7 +42,7 @@ public class ItemStorage {
 				.filter(item -> Objects.equals(item.getName(), name))
 				.map(Item::getPrice)
 				.findAny()
-				.orElseThrow(NoSuchElementException::new);
+				.orElseThrow(() -> new NoSuchElementException(CANT_FIND_PRICE_BY_ITEM_NAME_ERROR_MESSAGE));
 	}
 
 	public void reduceItemQuantity(String name) {
@@ -51,6 +53,6 @@ public class ItemStorage {
 		return itemList.stream()
 				.filter(item -> Objects.equals(item.getName(), name))
 				.findAny()
-				.orElseThrow(NoSuchElementException::new);
+				.orElseThrow(() -> new NoSuchElementException(DONT_EXISTING_ITEM_ERROR_MESSAGE));
 	}
 }

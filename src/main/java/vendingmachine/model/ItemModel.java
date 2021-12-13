@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import static vendingmachine.constants.ErrorMessages.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -34,7 +36,7 @@ public class ItemModel {
 		return itemStorage.getPriceList().stream()
 				.mapToInt(Integer::intValue)
 				.min()
-				.orElseThrow(NoSuchElementException::new);
+				.orElseThrow(() -> new NoSuchElementException(CANT_FIND_MINIMUM_PRICE_ITEM_ERROR_MESSAGE));
 	}
 
 	public boolean hasExtraQuantity() {
