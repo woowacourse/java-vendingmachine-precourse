@@ -10,11 +10,14 @@ public class InputView {
 	private static final String PRODUCT_INPUT_PATTERN = "\\[[a-zA-Z0-9가-힣]+,\\d{3,},\\d+]";
 	private static final String PRODUCT_INPUT_FROM_REPLACE_PATTERN = "[\\[\\]]";
 	private static final String PRODUCT_INPUT_TO_REPLACE_PATTERN = "";
+	private static final String PRODUCT_NAME_INPUT_PATTERN = "^[a-zA-Z0-9가-힣]*$";
 
 	private static final String COINS_INPUT_HAS_VENDING_MACHINE = "자판기가 보유하고 있는 금액을 입력해 주세요";
 	private static final String ERROR_NOT_NUMBER_MESSAGE = "숫자의 입력이 아닙니다.";
 	private static final String PRODUCTS_INPUT_HAS_VENDING_MACHINE = "상품명과 가격, 수량을 입력해주세요.";
 	private static final String ERROR_PRODUCT_INPUT_NOT_PATTERN = "상품 입력의 패턴이 아닙니다.";
+	private static final String PRODUCT_NAME_INPUT_PURCHASE = "구매할 상품명을 입력해주세요.";
+	private static final String ERROR_PRODUCT_NAME_INPUT_NOT_PATTERN = "상품명 입력 패턴이 잘못되었습니다.";
 
 	public static int getInputCoins() {
 		System.out.println(COINS_INPUT_HAS_VENDING_MACHINE);
@@ -50,5 +53,18 @@ public class InputView {
 		}
 
 		return true;
+	}
+
+	private static String getInputProductName() {
+		System.out.println(PRODUCT_NAME_INPUT_PURCHASE);
+		final String inputProductName = Console.readLine();
+		isValidateInputProductNamePattern(inputProductName);
+		return inputProductName;
+	}
+
+	private static void isValidateInputProductNamePattern(String inputProductName) {
+		if (!inputProductName.matches(PRODUCT_NAME_INPUT_PATTERN)) {
+			throw new IllegalArgumentException(ERROR_PRODUCT_NAME_INPUT_NOT_PATTERN);
+		}
 	}
 }
