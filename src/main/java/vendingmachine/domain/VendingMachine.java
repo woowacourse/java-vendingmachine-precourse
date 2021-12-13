@@ -15,8 +15,12 @@ public class VendingMachine {
 	}
 
 	public boolean isBuy() {
-		products.removeSoldOutProduct();
-		Money cheapestPrice = products.getCheapestPrice();
-		return insertMoney.compareTo(cheapestPrice) >= 0;
+		if (products.soldOut()) {
+			return false;
+		}
+		if (!products.isBuy(insertMoney)) {
+			return false;
+		}
+		return true;
 	}
 }

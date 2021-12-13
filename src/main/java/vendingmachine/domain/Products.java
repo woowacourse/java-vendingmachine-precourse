@@ -14,6 +14,10 @@ public class Products {
 	}
 
 	public Money getCheapestPrice() {
+		removeSoldOutProduct();
+		if (products.isEmpty()) {
+			return new Money(0);
+		}
 		return Collections.min(products).getPrice();
 	}
 
@@ -23,5 +27,25 @@ public class Products {
 				products.remove(product);
 			}
 		}
+	}
+
+	public boolean soldOut() {
+		for (Product product : products) {
+			if (!product.soldOut()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public boolean isBuy(Money insertMoney) {
+		removeSoldOutProduct();
+		if (products.isEmpty()) {
+			return false;
+		}
+		if (getCheapestPrice().compareTo(insertMoney) > 0) {
+			return false;
+		}
+		return true;
 	}
 }

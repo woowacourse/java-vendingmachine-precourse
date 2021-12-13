@@ -13,6 +13,12 @@ public class VendingMachineController {
 		this.vendingMachine = vendingMachine;
 	}
 
+	public void run() {
+		while (vendingMachine.isBuy()) {
+
+		}
+	}
+
 	public void insertMoney() {
 		try {
 			Money insertMoney = RequestController.requestInsertMoney();
