@@ -21,15 +21,15 @@ public class ProductManager {
 			.orElseThrow(IllegalArgumentException::new);
 	}
 
-	public Product checkProductExist(String name) throws IllegalArgumentException{
-		Product product = searchProduct(name);
+	public Product searchProduct(String name) {
+		Product product = findProductByName(name);
 		if(product == null) {
 			throw new IllegalArgumentException(ErrorConstants.ERROR_PRODUCT_NOT_EXIST);
 		}
 		return product;
 	}
 
-	public Product searchProduct(String name) {
+	private Product findProductByName(String name) {
 		return productList.stream()
 			.filter(product -> name.equals(product.getName()))
 			.findAny()
@@ -51,14 +51,5 @@ public class ProductManager {
 			}
 		}
 		return false;
-	}
-
-	public int buyProduct(String name, int userBalance) {
-		Product product = searchProduct(name);
-		if(!product.checkCanBuyWithMoney(userBalance)) {
-			throw new IllegalArgumentException(ErrorConstants.ERROR_USER_BALANCE_NOT_ENOUGH);
-		}
-		product.reduceQuantity(1);
-		return product.getPrice();
 	}
 }

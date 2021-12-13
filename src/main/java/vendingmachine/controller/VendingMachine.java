@@ -63,21 +63,25 @@ public class VendingMachine {
 				return;
 			}
 			String productName = inputManager.getProductName();
-			Product product = checkProductExist(productName);
-			if(product == null || checkCanBuyWithUserBalance(product, userBalance.getUserBalance())) {
+			Product product = getProduct(productName);
+			if(!checkHaveStockAndUserBalanceEnough(product, userBalance.getUserBalance())) {
 				continue;
 			}
 			buyProduct(product);
 		}
 	}
 
-	private Product checkProductExist(String productName) {
+	private Product getProduct(String productName) {
 		try {
-			return productManager.checkProductExist(productName);
+			return productManager.searchProduct(productName);
 		} catch (IllegalArgumentException e) {
 			inputManager.print(e.getMessage());
 		}
 		return null;
+	}
+
+	private boolean checkHaveStockAndUserBalanceEnough(Product product, int userBalance) {
+		return product != null && checkCanBuyWithUserBalance(product, userBalance);
 	}
 
 	private boolean checkCanBuyWithUserBalance(Product product, int userBalance) {
