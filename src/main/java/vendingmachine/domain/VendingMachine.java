@@ -4,10 +4,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class VendingMachine {
 
     private final HashMap<Integer, Integer> coinTable = new HashMap<>();
+    private List<Product> products = new ArrayList<>();
 
     public void generateRandomCoin(String inputMoney) {
         int money = Integer.parseInt(inputMoney);
@@ -29,6 +31,10 @@ public class VendingMachine {
 
     public HashMap<Integer, Integer> getCoin() {
         return coinTable;
+    }
+
+    public void addProduct(Product product) {
+        products.add(product);
     }
 
 }
