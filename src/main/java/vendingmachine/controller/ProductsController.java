@@ -7,11 +7,12 @@ import java.util.stream.Collectors;
 
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
-import vendingmachine.validator.ProductValidator;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.Input;
 
 public class ProductsController {
+	static final String MSG_DUPLICATION_ERROR = "[ERROR] 상품명은 중복될 수 없다.";
+
 	public static Products getProducts() {
 		Products products;
 		do {
@@ -52,7 +53,9 @@ public class ProductsController {
 	private static void addProduct(Products products, List<List<String>> productsInfoList){
 		for (List<String> productInfo : productsInfoList) {
 			Product product = new Product(productInfo);
-			ProductValidator.validateDuplication(products, product);
+			if (products.isContains(product)){
+				throw new IllegalArgumentException(MSG_DUPLICATION_ERROR);
+			}
 			products.add(product);
 		}
 	}
