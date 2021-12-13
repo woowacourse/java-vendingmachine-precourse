@@ -97,64 +97,45 @@ class VendingMachineMessageTest {
 	@Nested
 	@DisplayName("유저가 잘못된 데이터를 입력했을때 에러 메시지를 출력한다")
 	class Error {
-		MockedStatic<VendingMachineMessage> mockVendingMachineMessage =
-			mockStatic(VendingMachineMessage.class);
 
 		@DisplayName("유효하지 않은 숫자 길이")
 		@ParameterizedTest(name = "{displayName} inputtedData={0}")
 		@ValueSource(ints = {1})
 		void invalidNumberLengthError(final int inputtedData) {
-			mockVendingMachineMessage
-				.when(() -> VendingMachineMessage.invalidLengthError(inputtedData))
-				.thenAnswer(invocation -> null);
-			VendingMachineMessage.invalidLengthError(inputtedData);
-			mockVendingMachineMessage.verify(() -> {
-				VendingMachineMessage.invalidLengthError(inputtedData);
-			});
+			final String errorMessage = VendingMachineMessage
+				.invalidLengthError(inputtedData);
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 길이가 너무 짧습니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
 
 		@DisplayName("유효하지 않은 숫자가 들어온 경유")
 		@ParameterizedTest(name = "{displayName} inputtedData={0}")
 		@ValueSource(ints = {-1})
 		void invalidNumberError(final int inputtedData) {
-			mockVendingMachineMessage
-				.when(() -> VendingMachineMessage.invalidNumberError(inputtedData))
-				.thenAnswer(invocation -> null);
-			VendingMachineMessage.invalidNumberError(inputtedData);
-			mockVendingMachineMessage.verify(() -> {
-				VendingMachineMessage.invalidNumberError(inputtedData);
-			});
+			final String errorMessage = VendingMachineMessage
+				.invalidNumberError(inputtedData);
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 숫자는 정수여야 합니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
 
 		@DisplayName("숫자가 아닌 다른 문자가 포함된 경우")
 		@ParameterizedTest(name = "{displayName} inputtedData={0}")
 		@ValueSource(strings = {"2e4r"})
 		void notNumberError(final String inputtedData) {
-			mockVendingMachineMessage
-				.when(() -> VendingMachineMessage.notNumberError(inputtedData))
-				.thenAnswer(invocation -> null);
-			VendingMachineMessage.notNumberError(inputtedData);
-			mockVendingMachineMessage.verify(() -> {
-				VendingMachineMessage.notNumberError(inputtedData);
-			});
+			final String errorMessage = VendingMachineMessage
+				.notNumberError(inputtedData);
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 숫자만 입력되야 합니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
 
 		@DisplayName("공백이 들어오면 안되는 곳에 공백이 들어온 경우")
 		@ParameterizedTest(name = "{displayName} inputtedData={0}")
 		@ValueSource(strings = {"d er3"})
 		void involveBlackError(final String inputtedData) {
-			mockVendingMachineMessage
-				.when(() -> VendingMachineMessage.involveBlankError(inputtedData))
-				.thenAnswer(invocation -> null);
-			VendingMachineMessage.involveBlankError(inputtedData);
-			mockVendingMachineMessage.verify(() -> {
-				VendingMachineMessage.involveBlankError(inputtedData);
-			});
-		}
-
-		@AfterEach
-		void closeMockVendingMachineMessage() {
-			mockVendingMachineMessage.close();
+			final String errorMessage = VendingMachineMessage
+				.involveBlankError(inputtedData);
+			final String expectedMessage = "[ERROR]: " + inputtedData + " 공백이 포함되면 안됩니다";
+			assertEquals(expectedMessage, errorMessage, "반환된 에러 메시지가 예상과 다르다");
 		}
 	}
 }
