@@ -22,7 +22,7 @@ public class NumberValidator {
 		}
 	}
 
-	public static void isGreaterThanLowLimitOfPrice(int number) {
+	public static void isGreaterThanOrEqualLowLimitOfPrice(int number) {
 		if (number < LOW_LIMIT_OF_PRICE) {
 			throw new IllegalArgumentException(MSG_LESS_THAN_PRICE_LIMIT_ERROR);
 		}

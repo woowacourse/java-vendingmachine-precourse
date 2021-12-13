@@ -14,8 +14,8 @@ public class Product {
 		this.amount = Integer.parseInt(productInfo.get(ProductIdx.AMOUNT.ordinal()));
 	}
 
-	public int getMinPrice(int minPrice) {
-		return Math.min(price, minPrice);
+	public int getMinPrice(int price) {
+		return Math.min(this.price, price);
 	}
 
 	public int addAmount(int totalAmount) {

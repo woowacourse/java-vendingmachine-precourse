@@ -40,7 +40,7 @@ public class Validator {
 	private static void validateProductPrice(String price) {
 		NumberValidator.isInteger(price);
 		int intPrice = Integer.parseInt(price);
-		NumberValidator.isGreaterThanLowLimitOfPrice(intPrice);
+		NumberValidator.isGreaterThanOrEqualLowLimitOfPrice(intPrice);
 		NumberValidator.isDivisibleByLowLimitOfCoin(intPrice);
 	}
 
