@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.resource.MessageResource.*;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,13 +12,14 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Changes {
 	private final Map<Coin, Integer> coinMap;
 
-	public Changes(int totalAmount) {
-		this.coinMap = createCoinMap(totalAmount);
+	public Changes(String inputAmount) {
+		this.coinMap = createCoinMap(inputAmount);
 	}
 
-	public Map<Coin, Integer> createCoinMap(int totalAmount) {
+	public Map<Coin, Integer> createCoinMap(String inputAmount) {
 		Map<Coin, Integer> copyCoinMap = initZeroCoinMap();
 		List<Integer> coinList = Coin.getCoinList();
+		int totalAmount = checkAmount(inputAmount);
 
 		while (totalAmount > 0) {
 			int randomCoin = Randoms.pickNumberInList(coinList);
@@ -34,6 +37,13 @@ public class Changes {
 		return this.coinMap.get(coin);
 	}
 
+	public List<Coin> orderByCoin() {
+		return coinMap.keySet()
+			.stream()
+			.sorted()
+			.collect(Collectors.toList());
+	}
+
 	private Map<Coin, Integer> initZeroCoinMap() {
 		Map<Coin, Integer> zeroCoinMap = new HashMap<>();
 
@@ -44,10 +54,18 @@ public class Changes {
 		return zeroCoinMap;
 	}
 
-	public List<Coin> orderByCoin() {
-		return coinMap.keySet()
-			.stream()
-			.sorted()
-			.collect(Collectors.toList());
+	private boolean isNumeric(String str) {
+		return str.matches("-?\\d+(\\.\\d+)?");
+	}
+
+	private int checkAmount(String totalAmount) {
+		if (!isNumeric(totalAmount)) {
+			throw new IllegalArgumentException(ERROR_AMOUNT_IS_NOT_NUMERIC);
+		}
+		if (Integer.parseInt(totalAmount) < 0) {
+			throw new IllegalArgumentException(ERROR_AMOUNT_IS_NOT_POSITIVE_INT);
+		}
+
+		return Integer.parseInt(totalAmount);
 	}
 }
