@@ -23,7 +23,7 @@ public class Products {
 			.collect(Collectors.toList()));
 	}
 
-	public void isValidateDuplicated(List<Product> products) {
+	private void isValidateDuplicated(List<Product> products) {
 		final Set<Product> distinctProductsName = products.stream()
 			.collect(Collectors.toSet());
 

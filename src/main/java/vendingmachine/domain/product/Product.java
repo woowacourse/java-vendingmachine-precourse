@@ -5,10 +5,10 @@ import java.util.Objects;
 import vendingmachine.domain.machine.Balance;
 
 public class Product {
-	private static final int NAME_INDEX = 0;
+	public static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int QUANTITY_INDEX = 2;
-	private static final String PRODUCT_ELEMENT_SPLIT = ",";
+	public static final String PRODUCT_ELEMENT_SPLIT = ",";
 
 	private Name name;
 	private Price price;
