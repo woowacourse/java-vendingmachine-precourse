@@ -7,6 +7,10 @@ public class Item {
 	private static final int TEN = 10;
 	private static final int COST_LOWER_BOUND = 100;
 	private static final int NUMBER_OF_TYPE = 3;
+	private static final int NAME_INDEX = 0;
+	private static final int COST_INDEX = 1;
+	private static final int AMOUNT_INDEX = 2;
+
 	private static final String NAME = "상품명";
 	private static final String COST = "가격";
 	private static final String AMOUNT = "수량";
@@ -24,10 +28,10 @@ public class Item {
 
 	public Item(List<String> detailContainer) {
 		checkLength(detailContainer);
-		this.name = detailContainer.get(0);
-		this.cost = isNumber(detailContainer.get(1), COST);
+		this.name = detailContainer.get(NAME_INDEX);
+		this.cost = isNumber(detailContainer.get(COST_INDEX), COST);
 		validateCost(cost);
-		this.amount = isNumber(detailContainer.get(2), AMOUNT);
+		this.amount = isNumber(detailContainer.get(AMOUNT_INDEX), AMOUNT);
 
 	}
 
