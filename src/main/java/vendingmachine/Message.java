@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.HashMap;
+
 public class Message {
     public void printInputHolding() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해주세요.");
@@ -40,5 +42,11 @@ public class Message {
 
     public void printInputCorrectProductName() {
         System.out.println("[ERROR] 자판기에 존재하는 하나의 상품을 입력해 주세요.");
+    }
+
+    public void printLastChanges(HashMap<Integer, Integer> map) {
+        for (int amount : map.keySet()) {
+            System.out.println(amount + "원 - " + map.get(amount) + "개");
+        }
     }
 }

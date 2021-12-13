@@ -21,4 +21,8 @@ public class Product {
         }
         return false;
     }
+
+    public void decreaseNumber() {
+        number -= 1;
+    }
 }

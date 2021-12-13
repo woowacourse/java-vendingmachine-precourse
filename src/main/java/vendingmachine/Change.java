@@ -10,4 +10,8 @@ public class Change {
     public int getAmount() {
         return amount;
     }
+
+    public void decreaseAmount(int input) {
+        amount -= input;
+    }
 }
