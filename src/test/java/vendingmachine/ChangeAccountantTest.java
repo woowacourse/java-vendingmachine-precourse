@@ -40,4 +40,16 @@ class ChangeAccountantTest {
             assertThat(change.count(coinUnit)).isEqualTo(coins.count(coinUnit));
         }
     }
+
+    @Test
+    void 거슬러주지_못한_금액을_반환() {
+        ChangeAccountant changeAccountant = new ChangeAccountant();
+        Coins coins = new Coins();
+        coins.add(Coin.COIN_500);
+        int amountToChange = 1050;
+
+        changeAccountant.change(amountToChange, coins);
+
+        assertThat(changeAccountant.getRestAfterCalculation()).isEqualTo(amountToChange - coins.getAmount());
+    }
 }
