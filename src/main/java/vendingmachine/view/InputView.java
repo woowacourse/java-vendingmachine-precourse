@@ -27,11 +27,12 @@ public class InputView {
     }
 
     public static Menu getMenuInput() {
-        System.out.println(REQUEST_MENU_INPUT);
-        List<Merchandise> merchandiseList = new ArrayList<>();
         try {
+            System.out.println(REQUEST_MENU_INPUT);
             String[] merchandiseInfos = Console.readLine().split(";");
             validateMenuInputFormat(merchandiseInfos);
+
+            List<Merchandise> merchandiseList = new ArrayList<>();
             for (String merchandiseInfo : merchandiseInfos) {
                 merchandiseList.add(new Merchandise(merchandiseInfo));
             }
