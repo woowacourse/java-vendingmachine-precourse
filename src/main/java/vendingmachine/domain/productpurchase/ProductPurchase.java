@@ -7,13 +7,9 @@ public class ProductPurchase {
     private final String name;
 
     public ProductPurchase(String name) {
-        validateName(name);
-        this.name = name;
-    }
-
-    private void validateName(String name) {
         validateEmpty(name);
         validateBlank(name);
+        this.name = name;
     }
 
     private void validateEmpty(String name) {
