@@ -20,6 +20,7 @@ public class VendingMachine {
 	}
 
 	private void printChanges() {
+		OutputView.printInsertedMoney(insertedMoney);
 		OutputView.printChanges(getChanges());
 	}
 
@@ -32,6 +33,15 @@ public class VendingMachine {
 	}
 
 	private void sell() {
+		try {
+			sellBeverage();
+		} catch (IllegalArgumentException e) {
+			OutputView.printErrorMessage(e.getMessage());
+			sell();
+		}
+	}
+
+	private void sellBeverage() {
 		OutputView.printInsertedMoney(insertedMoney);
 		String beverageName = InputView.readBeverageName();
 		beverages.sell(beverageName, insertedMoney);

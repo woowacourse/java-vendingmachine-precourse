@@ -41,6 +41,13 @@ public class OutputView {
 
 	public static void printChanges(Map<Coin, Integer> changes) {
 		System.out.println(CHANGES_MESSAGE);
-		printCoins(changes);
+		printExistCoins(changes);
+	}
+
+	private static void printExistCoins(Map<Coin, Integer> coins) {
+		coins.keySet().stream()
+			.sorted()
+			.filter(Coin::isRemain)
+			.forEach(coin -> printCoinAndCount(coin, coins.get(coin)));
 	}
 }
