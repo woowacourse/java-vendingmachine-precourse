@@ -1,6 +1,35 @@
-# 🚀 기능 요구사항
+<h1 align="center"> 💻 자판기 </h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
+  <a href="https://github.com/dongho108/java-vendingmachine-precourse" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+</p>
 
-> 구현되면 ✔︎ 하기
+> 자판기를 구현하는 프로젝트 입니다.
+
+### 🏠 [Homepage](https://github.com/dongho108/java-vendingmachine-precourse)
+
+## Skill
+
+> Java 1.8 <br>
+
+## 🧑‍💻 Author
+
+👤 dongho
+
+* blog: https://ksabs.tistory.com
+* project review: https://ksabs.tistory.com/223
+
+## 💡 무슨 자판기 (~~공포의 자판기~~)?
+
+- 자판기는 관리자에게 보유할 동전의 총 가격을 입력받고 랜덤으로 잔돈을 생성합니다.
+- 또한, 관리자에게 자판기가 보유할 상품을 입력받습니다.
+- 사용자가 돈을 투입하면 구매가능한 상품을 구매할 수 있고 더이상 구매가 불가능할 때 까지 계속 구매를 해야합니다.
+- 구매가 불가능해지면 자판기가 보유한 잔돈중에서만 잔돈을 반환합니다.
+- 잔돈이 부족해도 사용자가 투입한 금액으로 잔돈을 생성하지 않고 보유한 잔돈중에서만 잔돈을 반환합니다.
+
+## 🚀 기능 요구사항
 
 - ✔︎ 자판기는 잔돈을 랜덤으로 생성해야한다.
 - ✔ 자판기는 투입금액을 저장해야 한다.
@@ -26,3 +55,86 @@
     - 상품안의 정보들의 각 타입이 맞지않으면 예외
 - ✔ 사용자는 상품을 구매할 수 있어야 한다.
 
+## 💡 사용법
+
+1. 프로젝트 클론
+
+```
+git clone https://github.com/dongho108/java-racingcar-precourse.git
+```
+
+2. Application Run
+
+```java
+public class Application {
+	public static void main(String[] args) {
+		Controller controller = new Controller();
+		controller.run();
+	}
+}
+
+```
+
+#### ⌨️ 입력
+
+- 상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분한다.
+
+```
+[콜라,1500,20];[사이다,1000,10]
+```
+
+#### 🖥 출력
+
+- 자판기가 보유한 동전
+
+```
+500원 - 0개
+100원 - 4개
+50원 - 1개
+10원 - 0개
+```
+
+- 잔돈은 반환된 동전만 출력한다.
+
+```
+100원 - 4개
+50원 - 1개
+```
+
+- 예외 상황 시 에러 문구를 출력해야 한다. 단, 에러 문구는 [ERROR]로 시작해야 한다.
+
+```
+[ERROR] 금액은 숫자여야 합니다.
+```
+
+#### 💻 프로그래밍 실행 결과 예시
+
+```
+자판기가 보유하고 있는 금액을 입력해 주세요.
+450
+
+자판기가 보유한 동전
+500원 - 0개
+100원 - 4개
+50원 - 1개
+10원 - 0개
+
+상품명과 가격, 수량을 입력해 주세요.
+[콜라,1500,20];[사이다,1000,10]
+
+투입 금액을 입력해 주세요.
+3000
+
+투입 금액: 3000원
+구매할 상품명을 입력해 주세요.
+콜라
+
+투입 금액: 1500원
+구매할 상품명을 입력해 주세요.
+사이다
+
+투입 금액: 500원
+잔돈
+100원 - 4개
+50원 - 1개
+```
