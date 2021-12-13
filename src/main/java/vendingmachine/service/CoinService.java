@@ -10,13 +10,13 @@ import vendingmachine.repository.Coin;
 import vendingmachine.view.InputView;
 
 public class CoinService {
-    InputView inputView = new InputView();
+    //InputView inputView = new InputView();
     CoinValidator coinValidator = new CoinValidator();
 
     public void generate() {
         while (true) {
             try {
-                String money = inputView.getMoney();
+                String money = InputView.getMoney();
                 coinValidator.isValid(money);
                 exchangeMoneyToCoin(Integer.parseInt(money));
                 return;

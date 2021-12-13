@@ -7,14 +7,13 @@ import vendingmachine.repository.Products;
 import vendingmachine.view.InputView;
 
 public class ProductService {
-
-    InputView inputView = new InputView();
+    //InputView inputView = new InputView();
     ProductValidator productValidator = new ProductValidator();
 
     public Products generate() {
         while (true) {
             try {
-                return new Products(replaceString(inputView.getProduct()));
+                return new Products(replaceString(InputView.getProduct()));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

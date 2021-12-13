@@ -10,8 +10,6 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class OrderService {
-    OutputView outputView = new OutputView();
-    InputView inputView = new InputView();
     OrderValidator orderValidator = new OrderValidator();
     Products products;
     Money money;
@@ -19,7 +17,7 @@ public class OrderService {
 
     public void get(Products products) {
         this.products = products;
-        outputView.printOrderMoney();
+        OutputView.printOrderMoney();
         getUserMoney();
         getProduct();
         returnCoin();
@@ -28,9 +26,9 @@ public class OrderService {
     }
 
     public void returnCoin() {
-        outputView.printReturnCoin();
+        OutputView.printReturnCoin();
         giveMinimumCoin(money.getRemainder());
-        outputView.printCoinResult(map);
+        OutputView.printCoinResult(map);
     }
 
     public void giveMinimumCoin(int remainder) {
@@ -68,7 +66,7 @@ public class OrderService {
     public void getUserMoney() {
         while (true) {
             try {
-                String tempMoney = inputView.getMoney();
+                String tempMoney = InputView.getMoney();
                 orderValidator.isValidMoney(tempMoney);
                 money = new Money(Integer.parseInt(tempMoney));
                 return;
@@ -80,7 +78,7 @@ public class OrderService {
 
     public void getProduct() {
         while (true) {
-            outputView.printInputMoney(money.getRemainder());
+            OutputView.printInputMoney(money.getRemainder());
             if (isEnd()) {
                 return;
             }
@@ -107,9 +105,9 @@ public class OrderService {
 
     public Product getOrderFromUser() {
         while (true) {
-            outputView.printProduct();
+            OutputView.printProduct();
             try {
-                String userOrder = inputView.getOrder();
+                String userOrder = InputView.getOrder();
                 isValidOrder(userOrder);
                 return products.getProduct(userOrder);
             } catch (IllegalArgumentException e) {
