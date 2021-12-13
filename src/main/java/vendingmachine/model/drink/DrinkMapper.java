@@ -12,21 +12,21 @@ public class DrinkMapper {
 
     public List<Drink> createDrinks(String inputDrinks) {
         List<Drink> drinks = new ArrayList<>();
-
-        removeBracket(inputDrinks);
         String[] contents = splitDrinks(inputDrinks);
         validNames(contents);
 
         for (String content : contents) {
-            String[] drink = content.split(Constant.DRINK_CONTENT_SPLIT_WORD);
+            String drinkContent = removeBracket(content);
+            String[] drink = drinkContent.split(Constant.DRINK_CONTENT_SPLIT_WORD);
             drinks.add(createDrink(drink));
         }
         return drinks;
     }
 
-    private void removeBracket(String inputDrinks) {
-        inputDrinks.replaceAll(Constant.OPEN_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
-        inputDrinks.replaceAll(Constant.CLONE_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
+    private String removeBracket(String inputDrinks) {
+        String inputDrink = inputDrinks.replace(Constant.OPEN_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
+        inputDrink = inputDrink.replace(Constant.CLONE_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
+        return inputDrink;
     }
 
     private String[] splitDrinks(String drinks) {
@@ -38,9 +38,9 @@ public class DrinkMapper {
         if (content.length != Constant.CHECK_ARR_HAS_ALL_CONTENT)
             throw new IllegalArgumentException(Message.DRINK_CONTENT_ERROR);
 
-        return new Drink(content[Constant.NAME_INDEX],
-            content[Constant.PRICE_INDEX],
-            content[Constant.QUANTITY_INDEX]);
+        return new Drink(content[Constant.NAME_INDEX].trim(),
+            content[Constant.PRICE_INDEX].trim(),
+            content[Constant.QUANTITY_INDEX].trim());
     }
 
     private boolean isDuplicationName(String[] contents) {
