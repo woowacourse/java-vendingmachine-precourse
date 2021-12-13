@@ -14,7 +14,7 @@ public class HoldingSumView {
 			String input = Console.readLine();
 			System.out.println();
 			holdingSum = new HoldingSum(input);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}

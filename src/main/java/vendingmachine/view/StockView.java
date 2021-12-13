@@ -13,7 +13,7 @@ public class StockView {
 			String input = Console.readLine();
 			System.out.println();
 			stock = new Stock(input);
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}

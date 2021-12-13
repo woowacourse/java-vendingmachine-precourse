@@ -23,7 +23,7 @@ public class VendingmachineService {
 		NameView nameView = new NameView();
 		try {
 			vendingmachine.sellProduct(nameView.getInput());
-		} catch (Exception e) {
+		} catch (IllegalArgumentException e) {
 			System.out.println(Message.ERROR + e.getMessage() + "\n");
 		}
 		return vendingmachine;
