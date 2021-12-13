@@ -1,6 +1,7 @@
 package vendingmachine.domain.investmentmoney;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.possessioncoin.PossessionCoin;
 import vendingmachine.domain.product.Product;
 
 public class InvestmentMoney {
@@ -19,6 +20,7 @@ public class InvestmentMoney {
     public InvestmentMoney(String inputInvestmentMoney) {
         validateNumberFormat(inputInvestmentMoney);
         int investmentMoney = Integer.parseInt(inputInvestmentMoney);
+
         validateNegativeNumber(investmentMoney);
         validateDivide(investmentMoney);
         this.investmentMoney = investmentMoney;
@@ -52,17 +54,12 @@ public class InvestmentMoney {
     }
 
     public boolean isPay(Product product) {
-        if (investmentMoney >= product.getPrice()) {
-            return true;
-        }
-        return false;
+        return investmentMoney >= product.getPrice();
     }
 
-    public boolean isPossibleChange(Coin coin) {
-        if (investmentMoney >= coin.getAmount()) {
-            return true;
-        }
-        return false;
+    public boolean isPossibleChange(PossessionCoin possessionCoin) {
+        Coin coin = possessionCoin.getCoin();
+        return investmentMoney >= coin.getAmount();
     }
 
     public int trade(int amount, int quantity) {
