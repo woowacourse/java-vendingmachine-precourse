@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.VendingMachine;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.Input;
 
@@ -16,8 +15,12 @@ public class VendingMachineController {
 	private static int getInputMoney() {
 		int inputMoney;
 		do {
-			inputMoney = Input.moneyInMachine();
+			inputMoney = Input.inputMoney();
 		} while (Validator.isValidInputMoney(inputMoney));
 		return inputMoney;
+	}
+
+	private static String getBuyingProductName() {
+		return Input.buyingProductName();
 	}
 }
