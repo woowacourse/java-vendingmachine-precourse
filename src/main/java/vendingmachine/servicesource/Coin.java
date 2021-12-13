@@ -18,14 +18,18 @@ public enum Coin {
         return amount;
     }
 
-    public int getMinimumCoinAmount(){
-        int minimumAmount = Integer.MAX_VALUE;
+    static public Coin getMinimumAmountCoin(){
+        Coin minimumCoin = null;
 
         for(Coin currentCoin : Coin.values()){
-            minimumAmount = Math.max(minimumAmount, currentCoin.getAmount());
+
+            if(minimumCoin == null || currentCoin.getAmount() < minimumCoin.getAmount()){
+                minimumCoin = currentCoin;
+            }
+
         }
 
-        return minimumAmount;
+        return minimumCoin;
     }
 
     @Override
