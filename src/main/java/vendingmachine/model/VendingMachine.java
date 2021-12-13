@@ -59,6 +59,16 @@ public class VendingMachine {
 		this.productList = Arrays.stream(products.split(";"))
 			.map(Product::createProduct)
 			.collect(Collectors.toList());
+
+		List<String> distinctProductList = productList
+			.stream()
+			.map(Product::getName)
+			.distinct()
+			.collect(Collectors.toList());
+
+		if (distinctProductList.size() != productList.size()) {
+			throw new IllegalArgumentException("[ERROR] 중복된 상품 명이 존재합니다.");
+		}
 	}
 
 	public void removeProduct() {
