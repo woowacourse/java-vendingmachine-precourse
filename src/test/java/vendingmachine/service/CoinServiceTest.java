@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import vendingmachine.config.ServiceConfig;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.Quantity;
 
 class CoinServiceTest {
 
@@ -21,7 +22,7 @@ class CoinServiceTest {
 		// given
 		Money money = new Money(100);
 		// when
-		Map<Coin, Integer> map = service.generateCoinMap(money);
+		Map<Coin, Quantity> map = service.generateCoinMap(money);
 		// then
 		assertFalse(map.isEmpty());
 	}
@@ -32,7 +33,7 @@ class CoinServiceTest {
 		// given
 		Money money = new Money(0);
 		// when
-		Map<Coin, Integer> map = service.generateCoinMap(money);
+		Map<Coin, Quantity> map = service.generateCoinMap(money);
 		// then
 		assertTrue(map.isEmpty());
 	}
