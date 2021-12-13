@@ -19,8 +19,20 @@ public class Controller {
 		InputView.requestMachineCoinsAmount();
 		machineService.addInputCoins(machineId, getCoinAmountByUser());
 
+		InputView.requestInputCoins();
+		machineService.addInputCoins(machineId, getInputCoinsByUser());
+
 		InputView.requestItems();
 		machineService.addItems(machineId, getItemsByUser());
+	}
+
+	private Integer getInputCoinsByUser() {
+		try {
+			return Parser.convertStringToInt(Console.readLine());
+		} catch (IllegalArgumentException e) {
+			OutputView.printExceptionMessage(e.getMessage());
+			return getInputCoinsByUser();
+		}
 	}
 
 	private Map<String, Item> getItemsByUser() {
