@@ -11,9 +11,9 @@ public class OutputView {
 	private static final String COUNT_UNIT = "개";
 	private static final String HYPHEN = "-";
 	private static final String CHANGES = "잔돈";
-	private static final String WHITE_SPACE = " ";
+	private static final String BLANK = " ";
 	private static final String OUTPUT_TYPE_STRING = "%s";
-	public static final String HOLDING_COIN_AMOUNT_TEXT = OUTPUT_TYPE_STRING + WON + WHITE_SPACE + HYPHEN + WHITE_SPACE
+	public static final String HOLDING_COIN_AMOUNT_TEXT = OUTPUT_TYPE_STRING + WON + BLANK + HYPHEN + BLANK
 		+ OUTPUT_TYPE_STRING + COUNT_UNIT;
 	private static final String HOLDING_CASH_REQUEST_TEXT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String HOLDING_COIN_TEXT = "자판기가 보유한 동전";

@@ -5,7 +5,7 @@ import java.util.Map;
 
 public class Money {
 	private static final String INSERTED_AMOUNT = "투입 금액";
-	private static final String WHITE_SPACE = " ";
+	private static final String BLANK = " ";
 	private static final String COLON = ":";
 	private static final String WON = "원";
 	private static final int ZERO = 0;
@@ -54,6 +54,6 @@ public class Money {
 
 	@Override
 	public String toString() {
-		return INSERTED_AMOUNT + COLON + WHITE_SPACE + money + WON;
+		return INSERTED_AMOUNT + COLON + BLANK + money + WON;
 	}
 }
