@@ -44,7 +44,6 @@ public class MachineHoldingAmount {
         return coins[0];
     }
 
-
     public void makeCoins() {
         while (!checkIsFullCurrentAmount()) {
             int random = pickRandomCoin();

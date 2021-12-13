@@ -1,5 +1,8 @@
 package vendingmachine.process;
 
+import vendingmachine.machine.Machine;
+import vendingmachine.machine.MachineHoldingAmount;
+
 public class ProcessController {
     private static int holdingAmount;
 
@@ -12,5 +15,9 @@ public class ProcessController {
                 System.out.println(e.getMessage());
             }
         }
+    }
+
+    public static void makeMachineCoins(MachineHoldingAmount machineHoldingAmount) {
+        machineHoldingAmount.makeCoins();
     }
 }
