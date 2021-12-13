@@ -8,8 +8,4 @@ public class Items {
 	public Items(List<Item> items) {
 		this.items = items;
 	}
-
-	public List<Item> getItems() {
-		return items;
-	}
 }
