@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
 import static vendingmachine.constants.OutputMessages.*;
-import static vendingmachine.constants.SystemConstants.*;
+import static vendingmachine.constants.FormatConstants.*;
 
 import vendingmachine.domain.enums.Coin;
 

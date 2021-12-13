@@ -1,6 +1,6 @@
 package vendingmachine.constants;
 
-import static vendingmachine.constants.SystemConstants.BLANK_LINE;
+import static vendingmachine.constants.FormatConstants.BLANK_LINE;
 
 public class OutputMessages {
 

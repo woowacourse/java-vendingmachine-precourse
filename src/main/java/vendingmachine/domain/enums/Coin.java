@@ -1,6 +1,6 @@
 package vendingmachine.domain.enums;
 
-import static vendingmachine.constants.SystemConstants.WON;
+import static vendingmachine.constants.FormatConstants.WON;
 
 import java.util.List;
 import java.util.stream.Collectors;

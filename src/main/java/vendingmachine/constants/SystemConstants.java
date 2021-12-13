@@ -4,11 +4,6 @@ import vendingmachine.domain.enums.Coin;
 
 public class SystemConstants {
 
-    public static String BLANK_LINE = "\n";
-    public static String WON = "원";
-    public static String COIN_PRINT_SEPARATOR = " - ";
-    public static String COIN_AMOUNT_DIGIT = "개";
-
     public static int ZERO_COINS = 0;
     public static int NO_CUSTOMER_MONEY_LEFT = 0;
     public static int NO_TOTAL_MONEY_LEFT = 0;
