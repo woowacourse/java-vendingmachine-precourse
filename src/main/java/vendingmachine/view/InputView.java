@@ -56,7 +56,7 @@ public class InputView {
 		return true;
 	}
 
-	private static int getInputBalance() {
+	public static int getInputBalance() {
 		System.out.println(BALANCE_INPUT_VENDING_MACHINE);
 		return getConvertInt();
 	}

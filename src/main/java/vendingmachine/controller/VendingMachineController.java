@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.machine.Balance;
 import vendingmachine.domain.product.Products;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -26,6 +27,17 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException e) {
 			OutputView.printErrorMessage(e);
 			return registerProducts();
+		}
+	}
+
+	private Balance registerBalance() {
+		try {
+			final Balance balance = Balance.from(InputView.getInputBalance());
+			OutputView.printLineSeparator();
+			return balance;
+		} catch (IllegalArgumentException e) {
+			OutputView.printErrorMessage(e);
+			return registerBalance();
 		}
 	}
 }
