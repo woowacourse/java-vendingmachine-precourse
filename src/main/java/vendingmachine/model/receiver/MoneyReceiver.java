@@ -7,6 +7,8 @@ public class MoneyReceiver {
 
 	public static final String INIT_VALUE_OF_MONEY = "init";
 
+	MoneyValidator moneyValidator = new MoneyValidator();
+
 	public int receive() {
 		String input = INIT_VALUE_OF_MONEY;
 
@@ -14,7 +16,7 @@ public class MoneyReceiver {
 		while (rewindSwitch) {
 			input = Console.readLine();
 
-			rewindSwitch = new MoneyValidator().validate(input);
+			rewindSwitch = moneyValidator.validate(input);
 		}
 
 		return Integer.parseInt(input);

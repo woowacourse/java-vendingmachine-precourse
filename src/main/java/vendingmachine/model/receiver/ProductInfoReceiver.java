@@ -7,6 +7,8 @@ import vendingmachine.model.validator.ProductInfoValidator;
 
 public class ProductInfoReceiver {
 
+	ProductInfoValidator productInfoValidator = new ProductInfoValidator();
+
 	public ArrayList<String[]> receive() {
 		ArrayList<String[]> splitInfoArrList = new ArrayList<>();
 
@@ -25,7 +27,7 @@ public class ProductInfoReceiver {
 		for (String info : infoArr) {
 			String[] splitInfoArr = info.split(",");
 
-			if (new ProductInfoValidator().validate(splitInfoArrList, splitInfoArr)) {
+			if (productInfoValidator.validate(splitInfoArrList, splitInfoArr)) {
 				return true;
 			}
 

@@ -7,6 +7,8 @@ public class NameForBuyReceiver {
 
 	public static final String INIT_VALUE_OF_NAME_FOR_BUY = "init";
 
+	NameForBuyValidator nameForBuyValidator = new NameForBuyValidator();
+
 	public String receive() {
 		String name = INIT_VALUE_OF_NAME_FOR_BUY;
 
@@ -14,7 +16,7 @@ public class NameForBuyReceiver {
 		while (rewindSwitch) {
 			name = Console.readLine();
 
-			rewindSwitch = new NameForBuyValidator().validate(name);
+			rewindSwitch = nameForBuyValidator.validate(name);
 		}
 
 		return name;
