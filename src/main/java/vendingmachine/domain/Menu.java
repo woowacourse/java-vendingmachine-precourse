@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.constants.ExceptionMessages.*;
-import static vendingmachine.constants.Integers.*;
+import static vendingmachine.constants.SystemConstants.*;
 
 import vendingmachine.view.InputView;
 

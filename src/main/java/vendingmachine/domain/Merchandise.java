@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.constants.Integers.*;
+import static vendingmachine.constants.SystemConstants.*;
 
 public class Merchandise {
 

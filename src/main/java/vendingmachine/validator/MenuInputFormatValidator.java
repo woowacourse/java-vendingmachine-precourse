@@ -1,7 +1,7 @@
 package vendingmachine.validator;
 
 import static vendingmachine.constants.ExceptionMessages.*;
-import static vendingmachine.constants.Integers.*;
+import static vendingmachine.constants.SystemConstants.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;

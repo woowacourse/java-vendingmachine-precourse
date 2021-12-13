@@ -1,5 +1,7 @@
 package vendingmachine.domain.enums;
 
+import static vendingmachine.constants.SystemConstants.WON;
+
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,7 +24,7 @@ public enum Coin {
     }
 
     public String getAmountFormat() {
-        return this.amount + "원";
+        return this.amount + WON;
     }
 
     public static Coin getCoinByAmount(int amount) {

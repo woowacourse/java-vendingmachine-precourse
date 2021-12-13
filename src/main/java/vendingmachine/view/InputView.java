@@ -1,5 +1,6 @@
 package vendingmachine.view;
 
+import static vendingmachine.constants.InputMessages.*;
 import static vendingmachine.validator.NumberInputValidator.*;
 import static vendingmachine.validator.MenuInputFormatValidator.*;
 
@@ -14,7 +15,7 @@ public class InputView {
 
     public static int getTotalMoneyInput() {
         try {
-            System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+            System.out.println(REQUEST_VENDING_MACHINE_INITIAL_MONEY);
 
             String input = Console.readLine();
             validateMoneyInput(input);
@@ -26,7 +27,7 @@ public class InputView {
     }
 
     public static Menu getMenuInput() {
-        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        System.out.println(REQUEST_MENU_INPUT);
         List<Merchandise> merchandiseList = new ArrayList<>();
 
         String input = Console.readLine();
@@ -40,7 +41,7 @@ public class InputView {
 
     public static int getCustomerMoneyInput() {
         try {
-            System.out.println("\n투입 금액을 입력해 주세요.");
+            System.out.println(REQUEST_CUSTOMER_MONEY_INPUT);
 
             String input = Console.readLine();
             validateMoneyInput(input);
@@ -52,7 +53,7 @@ public class InputView {
     }
 
     public static String getMerchandiseNameInput() {
-        System.out.println("구매할 상품명을 입력해 주세요.");
+        System.out.println(REQUEST_PURCHASE_INPUT);
         return Console.readLine();
     }
 }

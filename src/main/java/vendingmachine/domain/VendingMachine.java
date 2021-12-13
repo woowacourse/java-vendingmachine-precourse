@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.constants.Integers.*;
+import static vendingmachine.constants.SystemConstants.*;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;

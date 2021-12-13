@@ -1,6 +1,6 @@
 package vendingmachine.validator;
 
-import static vendingmachine.constants.Integers.*;
+import static vendingmachine.constants.SystemConstants.*;
 import static vendingmachine.constants.ExceptionMessages.*;
 
 public class NumberInputValidator {
