@@ -1,6 +1,5 @@
 package vendingmachine.operation;
 
-import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.Map;
 
@@ -24,8 +23,9 @@ public class OperationService {
         Map<Coin,Integer> coinMap = new EnumMap<>(Coin.class);
         Coin[] coins = Coin.values();
         int idx = 0;
+        
         while(balance > 0 && idx < coins.length) {
-            if(coins[idx].getNumber() == 0) {
+            if(coins[idx].getNumber() == 0 || coins[idx].getAmount() > balance) {
                 idx++;
                 continue;
             }
