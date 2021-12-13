@@ -21,7 +21,6 @@ public class VendingMachineController {
 		initAmountMoneyHoldingByVendingMachine();
 		initProductInfoList();
 		initInsertMoney();
-
 		buyProducts();
 		returnRemainChanges();
 	}
@@ -35,8 +34,10 @@ public class VendingMachineController {
 	public void buyProducts() {
 		while (isValidToBuyProduct(vendingMachine)) {
 			printCurrentInputMoney(vendingMachine);
-			String productName = inputProductNameToBuy(vendingMachine);
-			vendingMachine.sellProduct(productName);
+			String productName = inputProductNameToBuy();
+			if (checkIsValidToBuyProduct(vendingMachine, productName)) {
+				vendingMachine.sellProduct(productName);
+			}
 		}
 	}
 

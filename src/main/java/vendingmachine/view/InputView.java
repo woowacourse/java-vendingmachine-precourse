@@ -1,13 +1,9 @@
 package vendingmachine.view;
 
-import static vendingmachine.utils.validator.ProductValidator.*;
-
-
 import java.util.Arrays;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.message.SystemMessage;
 
 public class InputView {
@@ -31,13 +27,8 @@ public class InputView {
 		return Console.readLine();
 	}
 
-	public static String inputProductNameToBuy(VendingMachine vendingMachine) {
+	public static String inputProductNameToBuy() {
 		System.out.println(SystemMessage.GET_PRODUCT_NAME_TO_BUY.getText());
-		while (true) {
-			String productName = Console.readLine();
-			if (checkIsValidToBuyProduct(vendingMachine, productName)) {
-				return productName;
-			}
-		}
+		return Console.readLine();
 	}
 }
