@@ -7,6 +7,7 @@
   - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용
   - [예외] 입력값이 음수인 경우
   - [예외] 입력값이 숫자가 아닌 경우
+  - [예외] 입력값이 비어있는 경우
 
 - 자판기 보유 동전 생성
   - `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()` 활용
@@ -18,17 +19,21 @@
   - [예외] 입력 형식이 다른경우
   - [예외] 가격이 100원 이하인 경우
   - [예외] 가격이 10원으로 나누어떨어지지 않는 경우
+  - [예외] 입력값이 비어있는 경우
+  - [예외] 중복된 입력값이 있는 경우
   
 - 사용자 금액 입력
   - 투입 금액 입력 문구 출력
   - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용
   - [예외] 투입 금액이 숫자가 아닌 경우
   - [예외] 투입 금액이 음수인 경우
+  - [예외] 입력값이 비어있는 경우
   
 - 구매
   - 현재 투입 금액 출력
   - 구매 상품명 입력 문구 출력
   - `camp.nextstep.edu.missionutils.Console`의 `readLine()` 활용
+  - [예외] 입력값이 비어있는 경우
     
   - 투입 금액에서 구매할 상품 가격을 뺌
     - [예외] 선택 물품의 남은 수량이 0인 경우 
