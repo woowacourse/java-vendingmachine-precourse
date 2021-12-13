@@ -14,9 +14,9 @@ public class MachineRepository {
         vendingMachine.setInitialAmount(initialAmount);
     }
 
-    public static void saveUserInsertAmount(String userAmount) {
+    public static void addUserInsertAmount(String userAmount) {
         int amount = Integer.parseInt(userAmount);
-        vendingMachine.setUserInsertAmount(amount);
+        vendingMachine.addUserInsertAmount(amount);
     }
 
     public static Map<Coin, Integer> getCoins() {

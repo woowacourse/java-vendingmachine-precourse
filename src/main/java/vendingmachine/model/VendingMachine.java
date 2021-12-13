@@ -10,7 +10,7 @@ public class VendingMachine {
     public static final int INCREMENT_BY_ONE = 1;
 
     private final Map<Coin, Integer> coins;
-    private int userInsertAmount;
+    private int userInsertAmount = DEFAULT_VALUE;
 
     public VendingMachine() {
         coins = initializeCoins();
@@ -37,6 +37,10 @@ public class VendingMachine {
         }
 
         return amount;
+    }
+
+    public void addUserInsertAmount(int userInsertAmount) {
+        this.userInsertAmount += userInsertAmount;
     }
 
     public void reduceAmount(int productPrice) {
@@ -71,9 +75,5 @@ public class VendingMachine {
 
     public void setInitialAmount(int initialAmount) {
         createRandom(initialAmount);
-    }
-
-    public void setUserInsertAmount(int userInsertAmount) {
-        this.userInsertAmount = userInsertAmount;
     }
 }

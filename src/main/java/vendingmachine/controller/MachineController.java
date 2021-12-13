@@ -44,7 +44,7 @@ public class MachineController {
 
     private void requestInsertUserAmount() {
         InputView.printUserInsertAmountMessage();
-        machineService.saveUserInsertAmount(inputValidAmount());
+        machineService.insertUserAmount(inputValidAmount());
     }
 
     private String inputValidAmount() {

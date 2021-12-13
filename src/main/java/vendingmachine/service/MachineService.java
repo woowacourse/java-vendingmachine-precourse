@@ -23,8 +23,8 @@ public class MachineService {
         ProductsRepository.createProducts(inputProducts);
     }
 
-    public void saveUserInsertAmount(String userAmount) {
-        MachineRepository.saveUserInsertAmount(userAmount);
+    public void insertUserAmount(String userAmount) {
+        MachineRepository.addUserInsertAmount(userAmount);
     }
 
     public void buyProduct(String productName) {
