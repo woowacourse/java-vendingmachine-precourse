@@ -1,63 +1,43 @@
 package controller;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 import utils.validator.ProductNameValidator;
-import utils.validator.VendingMachineChangeValidator;
-import utils.validator.userinsertmoney.UserInsertMoneyValidator;
-import utils.validator.vendingmachineproducts.VendingMachineProductsValidator;
+import utils.validator.ChangeValidator;
+import utils.validator.InsertedMoneyValidator;
+import utils.validator.products.ProductsValidator;
 
 public class InputController {
 	private static final boolean INPUT_ERROR = true;
-	private static final String LEFT_BRACKET = "[";
-	private static final String RIGHT_BRACKET = "]";
-	private static final String EMPTY_VALUE = "";
 
 	private InputController() {
 	}
 
-	public static int inputVendingMachineChange() {
+	public static int inputChange() {
 		while (INPUT_ERROR) {
 			try {
-				int vendingMachineChange = VendingMachineChangeValidator.checkValidVendingMachineChange(
-					Console.readLine());
-				return vendingMachineChange;
+				return ChangeValidator.checkValidChange(Console.readLine());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
 		}
 	}
 
-	public static List<String> inputVendingMachineProducts() {
+	public static List<String> inputProducts() {
 		while (INPUT_ERROR) {
 			try {
-				List<String> vendingMachineProducts = tryInputVendingMachineProducts();
-				return vendingMachineProducts.stream()
-					.map(InputController::trimVendingMachineProduct)
-					.collect(Collectors.toList());
+				return ProductsValidator.checkValidProducts(Console.readLine());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
 		}
 	}
 
-	private static List<String> tryInputVendingMachineProducts() {
-		List<String> vendingMachineProducts = VendingMachineProductsValidator.checkValidVendingMachineProducts(
-			Console.readLine());
-		return VendingMachineProductsValidator.checkHasDuplicateProduct(vendingMachineProducts);
-	}
-
-	private static String trimVendingMachineProduct(String vendingMachineProduct) {
-		return vendingMachineProduct.replace(LEFT_BRACKET, EMPTY_VALUE).replace(RIGHT_BRACKET, EMPTY_VALUE);
-	}
-
-	public static int inputUserInsertMoney() {
+	public static int inputInsertedMoney() {
 		while (INPUT_ERROR) {
 			try {
-				int userInsertMoney = UserInsertMoneyValidator.checkValidUserInsertMoney(Console.readLine());
-				return userInsertMoney;
+				return InsertedMoneyValidator.checkValidInsertedMoney(Console.readLine());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
@@ -67,8 +47,7 @@ public class InputController {
 	public static String inputProductNameToBuy() {
 		while (INPUT_ERROR) {
 			try {
-				String productName = ProductNameValidator.checkValidProductName(Console.readLine());
-				return productName;
+				return ProductNameValidator.checkValidProductName(Console.readLine());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
