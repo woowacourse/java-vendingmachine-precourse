@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.coin;
 
 import java.util.stream.Stream;
 

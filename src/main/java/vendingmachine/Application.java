@@ -1,10 +1,12 @@
 package vendingmachine;
 
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.controller.VendingMachine;
 
 public class Application {
     public static void main(String[] args) {
         VendingMachine vendingMachine = new VendingMachine();
-        vendingMachine.print();
+        vendingMachine.inputAmount();
+        vendingMachine.inputProducts();
+        vendingMachine.inputUserMoney();
     }
 }

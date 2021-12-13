@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.product;
 
 public class Product {
     private String name;
