@@ -25,12 +25,12 @@ public class Products {
 		product.reduceCount();
 	}
 
-	private boolean hasNotProductsCount() {
+	public boolean hasNotProductsCount() {
 		return products.stream()
 			.allMatch(Product::isSoldOut);
 	}
 
-	private boolean canBuyCurrentAmount(int currentAmount) {
+	public boolean canBuyCurrentAmount(int currentAmount) {
 		return products.stream()
 			.filter(product -> !product.isSoldOut())
 			.map(Product::getPrice)
