@@ -28,7 +28,6 @@ public class VendingMachineController {
 		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
 		vendingMachine.initInputMoney(convertedInsertMoney);
 		purchaseProduct(vendingMachine);
-		//TODO 잔돈 계산하는 로직 추가
 		printRemainCoin(vendingMachine);
 	}
 
@@ -37,7 +36,7 @@ public class VendingMachineController {
 
 		while (vendingMachine.end()) {
 			try {
-				String productName = enterBuyingProduct();
+				String productName = inputView.enterBuyingProduct();
 				vendingMachine.purchase(productName);
 				outputView.printInsertMoney(vendingMachine.getInputMoney());
 			} catch (IllegalArgumentException error) {
@@ -121,16 +120,6 @@ public class VendingMachineController {
 		} catch (IllegalArgumentException error) {
 			System.out.println(error.getMessage());
 			return enterMachineProduct();
-		}
-	}
-
-	private String enterBuyingProduct() {
-		String buyingProduct = inputView.enterBuyingProduct();
-		try {
-			return validator.validateBuyingProduct(buyingProduct);
-		} catch (IllegalArgumentException error) {
-			System.out.println(error.getMessage());
-			return enterBuyingProduct();
 		}
 	}
 }
