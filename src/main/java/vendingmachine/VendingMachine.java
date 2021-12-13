@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import vendingmachine.exception.NotEnoughBalanceException;
-
 
 public class VendingMachine {
 
