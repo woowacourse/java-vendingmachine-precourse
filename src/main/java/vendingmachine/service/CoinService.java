@@ -9,6 +9,7 @@ import java.util.HashMap;
 
 import static vendingmachine.constants.SystemConstants.NO_TOTAL_MONEY_LEFT;
 import static vendingmachine.constants.SystemConstants.ZERO_COINS;
+import static vendingmachine.validator.NumberInputValidator.validateMoneyInput;
 
 public class CoinService {
 
@@ -22,7 +23,7 @@ public class CoinService {
         for (Coin coin : Coin.values()) {
             this.coins.put(coin, ZERO_COINS);
         }
-        generateCoins(InputView.getInitialMoneyInput());
+        generateCoins(this.getVendingMachineMoneyInput());
 
         OutputView.printCoinsInfo(this.coins);
     }
@@ -35,6 +36,17 @@ public class CoinService {
                 coins.put(newCoin, coins.get(newCoin) + 1);
                 totalMoney -= randomCoinAmount;
             }
+        }
+    }
+
+    private int getVendingMachineMoneyInput() {
+        try {
+            String input = InputView.requestVendingMachineMoneyInput();
+            validateMoneyInput(input);
+            return Integer.parseInt(input);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getVendingMachineMoneyInput();
         }
     }
 }

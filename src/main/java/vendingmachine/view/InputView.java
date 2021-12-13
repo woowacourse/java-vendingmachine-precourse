@@ -14,17 +14,9 @@ import java.util.List;
 
 public class InputView {
 
-    public static int getInitialMoneyInput() {
-        try {
-            System.out.println(REQUEST_VENDING_MACHINE_INITIAL_MONEY);
-
-            String input = Console.readLine();
-            validateMoneyInput(input);
-            return Integer.parseInt(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return getInitialMoneyInput();
-        }
+    public static String requestVendingMachineMoneyInput() {
+        System.out.println(REQUEST_VENDING_MACHINE_INITIAL_MONEY);
+        return Console.readLine();
     }
 
     public static Menu getMenuInput() {
