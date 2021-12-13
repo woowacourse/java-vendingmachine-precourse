@@ -3,7 +3,7 @@ package vendingmachine.utils.validator;
 import vendingmachine.utils.ExceptionMessage;
 
 public class BeverageValidator {
-    private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,}+,\\d+]";
+    private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d{3,},\\d+]";
     private static final String DELIMITER = ",";
 
     private static final int SUBSTRING_IDX = 1;
