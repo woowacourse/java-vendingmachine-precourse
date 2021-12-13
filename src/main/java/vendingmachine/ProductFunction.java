@@ -51,10 +51,10 @@ public class ProductFunction {
     }
 
     public static Product createProduct(String eachProduct) {
-        String[] productInput = ProductValidator.validateInput(eachProduct);
-        int price = Integer.parseInt(productInput[PRICE_IDX]);
-        int amount = Integer.parseInt(productInput[AMOUNT_IDX]);
-        return new Product(productInput[PRODUCT_NAME_IDX], price, amount);
+        String[][] productInput = ProductValidator.validateInput(eachProduct);
+        int price = Integer.parseInt(productInput[PRICE_IDX][PRICE_IDX]);
+        int amount = Integer.parseInt(productInput[AMOUNT_IDX][AMOUNT_IDX]);
+        return new Product(productInput[PRODUCT_NAME_IDX][PRODUCT_NAME_IDX], price, amount);
     }
 
     private static void isProductDuplicate(Product product) {

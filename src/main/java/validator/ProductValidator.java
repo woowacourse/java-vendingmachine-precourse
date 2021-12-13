@@ -10,15 +10,13 @@ public class ProductValidator {
     private static final int PRICE_INDEX = 1;
     private static final int AMOUNT_INDEX = 2;
 
-    public static String[] validateInput(String input) {
+    public static String[][] validateInput(String input) {
         String removedInput = input.substring(SUBSTRING_INDEX, input.length() - 1);
         String[] tempProductList = removedInput.split(";");
-        String[] tempProduct = new String[3];
+        String[][] tempProduct = new String[tempProductList.length][tempProductList.length];
         for (int i = 0; i < tempProductList.length; i++) {
-            tempProduct = tempProductList[i].split(DELIMITER);
+            tempProduct[i] = tempProductList[i].split(DELIMITER);
         }
-        isPriceNotDivideByTen(tempProduct[PRICE_INDEX]);
-        isAmountUnderZero(tempProduct[AMOUNT_INDEX]);
         return tempProduct;
     }
 
