@@ -19,10 +19,31 @@ public class VendingMachineController {
 
     public void run() {
         PossessionCoins possessionCoins = getPossessionCoins();
-        Products products = InputView.getProducts();
+        Products products = getProducts();
         VendingMachine vendingMachine = new VendingMachine(possessionCoins, products);
 
         operate(vendingMachine);
+    }
+
+    private PossessionCoins getPossessionCoins() {
+        try {
+            PossessionMoney possessionMoney = InputView.getPossessionMoney();
+            PossessionCoins possessionCoins = possessionCoinsGenerator.generate(possessionMoney);
+
+            OutputView.printPossessionCoins(possessionCoins);
+
+            return possessionCoins;
+        } catch (IllegalArgumentException e) {
+            return getPossessionCoins();
+        }
+    }
+
+    private Products getProducts() {
+        try {
+            return InputView.getProducts();
+        } catch (IllegalArgumentException e) {
+            return getProducts();
+        }
     }
 
     private void operate(VendingMachine vendingMachine) {
@@ -53,14 +74,6 @@ public class VendingMachineController {
         } catch (IllegalArgumentException e) {
             buy(vendingMachine, investmentMoney);
         }
-    }
-
-    private PossessionCoins getPossessionCoins() {
-        PossessionMoney possessionMoney = InputView.getPossessionMoney();
-        PossessionCoins possessionCoins = possessionCoinsGenerator.generate(possessionMoney);
-
-        OutputView.printPossessionCoins(possessionCoins);
-        return possessionCoins;
     }
 
     private void finish(VendingMachine vendingMachine, InvestmentMoney investmentMoney) {
