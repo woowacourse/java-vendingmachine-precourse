@@ -1,7 +1,5 @@
 package vendingmachine.view;
 
-import static vendingmachine.view.OutputView.printErrorMessage;
-
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
@@ -34,17 +32,8 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static List<Product> inputProducts() {
-        try {
-            System.out.println(INPUT_PRODUCTS);
-            return calculateProductList();
-        } catch (IllegalArgumentException e) {
-            printErrorMessage(e);
-            return inputProducts();
-        }
-    }
-
-    private static List<Product> calculateProductList() {
+    public static List<Product> calculateProductList() {
+        System.out.println(INPUT_PRODUCTS);
         return inputProductValue().stream()
             .map(InputView::splitByDelimiterToList)
             .map(InputView::valueToProduct)

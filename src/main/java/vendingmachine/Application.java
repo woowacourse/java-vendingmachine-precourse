@@ -1,7 +1,7 @@
 package vendingmachine;
 
+import static vendingmachine.view.InputView.calculateProductList;
 import static vendingmachine.view.InputView.inputMoney;
-import static vendingmachine.view.InputView.inputProducts;
 import static vendingmachine.view.InputView.inputPurChaseProductName;
 import static vendingmachine.view.InputView.inputVendinMachineOwnMoney;
 import static vendingmachine.view.OutputView.printChangeCoins;
@@ -9,7 +9,9 @@ import static vendingmachine.view.OutputView.printCurrentMoney;
 import static vendingmachine.view.OutputView.printCurrentOwnCoins;
 import static vendingmachine.view.OutputView.printErrorMessage;
 
+import java.util.List;
 import vendingmachine.domain.Money;
+import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
 public class Application {
@@ -39,6 +41,15 @@ public class Application {
         } catch (Exception e) {
             printErrorMessage(e);
             inputVendingMachineProducts(machine);
+        }
+    }
+
+    private static List<Product> inputProducts() {
+        try {
+            return calculateProductList();
+        } catch (IllegalArgumentException e) {
+            printErrorMessage(e);
+            return inputProducts();
         }
     }
 
