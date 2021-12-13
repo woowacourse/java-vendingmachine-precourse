@@ -1,5 +1,7 @@
 package vendingmachine.domain.machine;
 
+import java.util.Objects;
+
 import vendingmachine.domain.product.Price;
 
 public class Balance {
@@ -53,5 +55,20 @@ public class Balance {
 
 	public int getBalance() {
 		return balance;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (!(o instanceof Balance))
+			return false;
+		Balance balance1 = (Balance)o;
+		return balance == balance1.balance;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(balance);
 	}
 }
