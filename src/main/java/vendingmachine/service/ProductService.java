@@ -6,6 +6,7 @@ import vendingmachine.view.InputViews;
 import java.util.HashMap;
 import java.util.Map;
 
+import static vendingmachine.repository.ProductRepository.saveProductInfo;
 import static vendingmachine.service.Validator.*;
 
 public class ProductService {
@@ -30,6 +31,7 @@ public class ProductService {
             Product temp = mappingProduct(productStr);
             productMap.put(temp.getName(), temp);
         }
+        saveProductInfo(productMap);
     }
 
     private static Product mappingProduct(String productStr) {
