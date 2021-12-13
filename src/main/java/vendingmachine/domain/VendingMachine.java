@@ -1,18 +1,19 @@
 package vendingmachine.domain;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-
-import vendingmachine.VendingMachineController;
+import java.util.List;
 
 public class VendingMachine {
 
 	private static VendingMachine vendingMachine = null;
 
+	Coins coins;
+
 	public int holdingMoney = 0;
 	public int inputMoney = 0;
 	public LinkedHashMap<Coin, Integer> holdingCoins;
+	public LinkedHashMap<Coin, Integer> changeCoins;
 	public ArrayList<Item> holdingItem;
 
 	public VendingMachine vendingMachine() {
@@ -22,8 +23,8 @@ public class VendingMachine {
 		return vendingMachine;
 	}
 
-	public LinkedHashMap<Coin, Integer> getCoins() {
-		Coins coins = new Coins(holdingMoney);
+	public LinkedHashMap<Coin, Integer> makeCoins() {
+		coins = new Coins(holdingMoney);
 		this.holdingCoins = coins.getCoins();
 		return holdingCoins;
 	}
@@ -36,7 +37,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void inputMoneyDeduct(String buyItem){
+	public void inputMoneyDeduct(String buyItem) {
 		for (int i = 0; i < this.holdingItem.size(); i++) {
 			if (this.holdingItem.get(i).getName().equals(buyItem)) {
 				this.inputMoney -= this.holdingItem.get(i).getPrice();
@@ -44,7 +45,16 @@ public class VendingMachine {
 		}
 	}
 
+	public void calculateChangeCoins() {
+		Changes changes = new Changes();
+		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);
+	}
+
 	public int getInputMoney() {
 		return inputMoney;
+	}
+
+	public LinkedHashMap<Coin, Integer> getCoins() {
+		return holdingCoins;
 	}
 }

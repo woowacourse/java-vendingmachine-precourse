@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import java.util.LinkedHashMap;
+
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -10,11 +13,12 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = new VendingMachine();
 		initialSetting(vendingMachine);
 		run(vendingMachine);
+		returnChange(vendingMachine);
 	}
 
 	public void initialSetting(VendingMachine vendingMachine) {
 		vendingMachine.holdingMoney = InputView.holdingMoneyInput();
-		vendingMachine.holdingCoins = vendingMachine.getCoins();
+		vendingMachine.holdingCoins = vendingMachine.makeCoins();
 		OutputView.printHoldingCoins(vendingMachine.holdingCoins);
 	}
 
@@ -29,6 +33,11 @@ public class VendingMachineController {
 		vendingMachine.stockDeduct(buyItem);
 		vendingMachine.inputMoneyDeduct(buyItem);
 		OutputView.printBalance(vendingMachine.getInputMoney());
+	}
+
+	public void returnChange(VendingMachine vendingMachine){
+		vendingMachine.calculateChangeCoins();
+		OutputView.printChangeCoins(vendingMachine.changeCoins);
 	}
 
 

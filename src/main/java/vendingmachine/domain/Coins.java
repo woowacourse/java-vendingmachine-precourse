@@ -1,10 +1,13 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
+
+import static vendingmachine.domain.Coin.*;
 
 public class Coins {
 	public final List<Integer> coinsValueList = Arrays.asList(500, 100, 50, 10);
@@ -18,10 +21,10 @@ public class Coins {
 	}
 
 	public LinkedHashMap<Coin, Integer> initializeCoins() {
-		coins.put(Coin.COIN_500, 0);
-		coins.put(Coin.COIN_100, 0);
-		coins.put(Coin.COIN_50, 0);
-		coins.put(Coin.COIN_10, 0);
+		coins.put(COIN_500, 0);
+		coins.put(COIN_100, 0);
+		coins.put(COIN_50, 0);
+		coins.put(COIN_10, 0);
 		generateCoins(holdingMoney);
 		return coins;
 	}
