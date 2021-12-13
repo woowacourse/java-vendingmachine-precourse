@@ -10,6 +10,7 @@ public class VendingMachine {
 
 	private VendingMachineCoins coins;
 	private Products products;
+	private Money userMoney;
 
 	public VendingMachine(int vendingMachineMoney) {
 		coins = createVendingMachineCoins(vendingMachineMoney);
@@ -49,5 +50,9 @@ public class VendingMachine {
 
 	public void addProducts(Products products) {
 		this.products = products;
+	}
+
+	public void inputMoney(Money money) {
+		this.userMoney = money;
 	}
 }
