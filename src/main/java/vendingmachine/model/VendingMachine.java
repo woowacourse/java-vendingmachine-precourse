@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +14,7 @@ public class VendingMachine {
 	private int ownMoney; // 갖고 있을 필요가 있나?
 	private int inputMoney;
 	private List<Product> productList;
-	private Map<Coin, Integer> coinMap;
+	private final Map<Coin, Integer> coinMap = new HashMap<>();
 
 	public int getInputMoney() {
 		return this.inputMoney;
@@ -38,6 +39,7 @@ public class VendingMachine {
 			int randomNumber = Randoms.pickNumberInRange(0, maxRange);
 			coinMap.put(Coin.parse(amount), randomNumber);
 			ownMoney = ownMoney - randomNumber*amount;
+			//TODO 마지막으로 남은 10원은 몽땅 생성할 수 있도록..!!
 		});
 	}
 
@@ -58,13 +60,15 @@ public class VendingMachine {
 	}
 
 	public boolean end() {
-		// 자판지 종료 조건
-		/**
-		 * 1. 투입 금액이 없다
-		 * 2. 구매할 상품이 없다
-		 * 3. 구매할 상품보다 투입 금액이 작다
-		 */
+		return inputMoney < 0 || productList.isEmpty() || isInputMoneyCanBuyProduct();
+	}
 
-		return true;
+	private boolean isInputMoneyCanBuyProduct() {
+		Product product = productList
+			.stream()
+			.min(Comparator.comparing(Product::getPrice))
+			.orElse(new Product());
+
+		return product.getPrice() <= inputMoney;
 	}
 }

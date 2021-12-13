@@ -16,7 +16,7 @@ public class Validator {
 
 	public String validateProduct(String validateProduct) {
 		// 상품명이 제대로 들어왔는지 검증하는 로직
-		return "";
+		return validateProduct;
 	}
 
 	public String validateBuyingProduct(String validateBuyingProduct) {
@@ -26,6 +26,6 @@ public class Validator {
 		 * 1. 상품 명에 없는 이름
 		 * 2. 이름이 빈칸
 		 */
-		return "";
+		return validateBuyingProduct;
 	}
 }

@@ -15,7 +15,7 @@ public class OutputView {
 
 	public void printCoinChange(Map<Coin, Integer> coinMap) {
 		coinMap.forEach((key, value) -> {
-			String coinMessage = String.format(COIN_AMOUNT, key, value);
+			String coinMessage = String.format(COIN_AMOUNT, key.getAmount(), value);
 			System.out.println(coinMessage);
 		});
 	}
