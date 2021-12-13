@@ -16,8 +16,10 @@ import vendingmachine.domain.CoinRepository;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.MoneyRepository;
 import vendingmachine.domain.Name;
+import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductRepository;
 import vendingmachine.domain.Products;
+import vendingmachine.domain.Quantity;
 import vendingmachine.enums.Coin;
 
 public class VendingMachineTest extends NsTest {
@@ -154,6 +156,21 @@ public class VendingMachineTest extends NsTest {
 				Name cider = new Name("사이다");
 				assertTrue(ProductRepository.findByName(coke).isSameName(coke));
 				assertTrue(ProductRepository.findByName(cider).isSameName(cider));
+			}
+		);
+	}
+
+	@DisplayName("[registerProducts 예외 테스트] 상품명을 중복으로 입력 한 경우 예외 테스트")
+	@Test
+	void register_products_duplicate_name_exception_test() {
+		assertSimpleTest(
+			() -> {
+				try {
+					run("[콜라,1500,20];[사이다,2500,20];[콜라,1500,10]");
+					vendingMachine.registerProducts();
+					assertThat(output()).contains(ERROR_MESSAGE);
+				} catch (final NoSuchElementException ignore) {
+				}
 			}
 		);
 	}
