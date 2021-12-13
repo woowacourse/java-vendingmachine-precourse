@@ -15,18 +15,13 @@ public class ReturnCoin {
     }
 
     public boolean canReturn(int money) {
-        if (ProductRepository.getInstance().getMinCost() > money) {
+        if (!ProductRepository.getInstance().hasAllProductQuantity()) {
             return false;
         }
 
-        if (ProductRepository.getInstance().getMinCost() == Condition.NOTHING.getNumber()) {
+        if (!ProductRepository.getInstance().isMinCost(money)) {
             return false;
         }
-
-        if (ProductRepository.getInstance().getAllAmount() == Condition.QUANTITY_0.getNumber()) {
-            return false;
-        }
-
         return true;
     }
 

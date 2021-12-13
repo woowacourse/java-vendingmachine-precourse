@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import vendingmachine.constant.Condition;
+import vendingmachine.constant.Input;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,28 +26,31 @@ public class ProductRepository {
         products.add(product);
     }
 
-    public List<Product> getProducts() {
-        return products;
-    }
-
-    public int getMinCost() {
+    public boolean isMinCost(int money) {
         List<Product> productCollect = products.stream()
                 .sorted().collect(Collectors.toList());
 
         for (Product product : productCollect) {
-            if (product.getQuantity() > Condition.QUANTITY_0.getNumber()) {
-                return product.getCost();
+            if (product.getQuantity() < Condition.QUANTITY_1.getNumber()) {
+                continue;
+            }
+            if (product.getCost() <= money) {
+                return true;
             }
         }
-        return Condition.NOTHING.getNumber();
+        return false;
     }
 
-    public int getAllAmount() {
+    public boolean hasAllProductQuantity() {
         int allAmount = Condition.QUANTITY_0.getNumber();
         for (Product product : products) {
             allAmount += product.getQuantity();
         }
-        return allAmount;
+
+        if (allAmount > Condition.QUANTITY_0.getNumber()) {
+            return true;
+        }
+        return false;
     }
 
     public void purchaseProduct(String productName) {
@@ -55,5 +59,52 @@ public class ProductRepository {
                 product.sellProduct();
             }
         }
+    }
+
+    public int useMoneyForProductPurchase(String productName) {
+        for (Product product : products) {
+            if (product.getName().equals(productName)) {
+                return product.getCost();
+            }
+        }
+        return Condition.MONEY_0.getNumber();
+    }
+
+    public boolean hasSameProduct(String productName) {
+        for (Product product : products) {
+            if (product.getName().equals(productName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean hasProductQuantity(String productName) {
+        List<Product> findProduct = products.stream().
+                filter(product -> product.getName().equals(productName)).collect(Collectors.toList());
+        if (findProduct.get(Condition.INDEX_0.getNumber()).getQuantity() == Condition.QUANTITY_0.getNumber()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean isProductExist(String productName) {
+        boolean result = products.stream()
+                .anyMatch(product -> product.getName().equals(productName));
+
+        if (result) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean canPurchaseProduct(String productName) {
+        List<Product> findProduct = products.stream().
+                filter(product -> product.getName().equals(productName)).collect(Collectors.toList());
+
+        if (findProduct.get(Condition.INDEX_0.getNumber()).getCost() > Money.getInstance().getMoney()) {
+            return false;
+        }
+        return true;
     }
 }

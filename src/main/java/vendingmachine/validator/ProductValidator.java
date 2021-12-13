@@ -1,13 +1,13 @@
 package vendingmachine.validator;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Input;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductRepository;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import static vendingmachine.constant.Condition.INDEX_0;
 import static vendingmachine.constant.Condition.LENGTH_1;
@@ -95,12 +95,9 @@ public class ProductValidator {
             throw new IllegalArgumentException();
         }
 
-        List<Product> products = ProductRepository.getInstance().getProducts();
-        for (Product product : products) {
-            if (product.getName().equals(productName)) {
-                print(Input.PRODUCTS_SAME_NAME_ERROR_MESSAGE.getText());
-                throw new IllegalArgumentException();
-            }
+        if (ProductRepository.getInstance().hasSameProduct(productName)) {
+            print(Input.PRODUCTS_SAME_NAME_ERROR_MESSAGE.getText());
+            throw new IllegalArgumentException();
         }
     }
 
