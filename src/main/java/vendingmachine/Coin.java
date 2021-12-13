@@ -32,4 +32,9 @@ public enum Coin {
                 .findFirst()
                 .orElse(null);
     }
+
+    @Override
+    public String toString() {
+        return this.amount + "원";
+    }
 }
