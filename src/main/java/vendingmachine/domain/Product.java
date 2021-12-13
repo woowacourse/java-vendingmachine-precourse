@@ -17,13 +17,13 @@ public class Product {
     private int stock;
     private int amount;
 
-    public Product(String name, int stock, int price) {
+    public Product(String name, int amount, int stock) {
         validateName(name);
-        validateAmount(price);
+        validateAmount(amount);
         validateStock(stock);
         this.name = name;
         this.stock = stock;
-        this.amount = price;
+        this.amount = amount;
     }
 
     public void sell(InputAmount inputAmount) throws IllegalArgumentException {

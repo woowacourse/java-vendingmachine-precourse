@@ -30,4 +30,35 @@ public class ProductParserTest {
     void invalidStockTest() {
         validateThrows("[콜라,100,0]");
     }
+
+    @Test
+    void invalidStartBracketTest() {
+        validateThrows("콜락,100,3]");
+    }
+
+    @Test
+    void invalidEndBracketTest() {
+        validateThrows("[콜락,100,3");
+    }
+
+
+    @Test
+    void invalidNameTest() {
+        validateThrows("[콜 라,200,5]");
+    }
+
+    @Test
+    void invalidFieldSizeTest() {
+        validateThrows("[코크,20000]");
+    }
+
+    @Test
+    void invalidNumberTest() {
+        validateThrows("[코코,a123,123]");
+    }
+
+    @Test
+    void invalidFormatTest() {
+        validateThrows("[z,100,100];[b,100;,10]");
+    }
 }
