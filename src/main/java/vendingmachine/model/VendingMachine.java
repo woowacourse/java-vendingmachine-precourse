@@ -22,11 +22,7 @@ public class VendingMachine {
     }
 
     public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
-        boolean isContinueDeal = true;
-
-        if (!isCostBiggerCheapestProductPrice(cheapestProductPrice, purchasingCost)) {
-            isContinueDeal = false;
-        }
+        boolean isContinueDeal = isCostBiggerCheapestProductPrice(cheapestProductPrice, purchasingCost);
 
         if (!isSoldOutAllProduct(products)) {
             isContinueDeal = false;
@@ -63,50 +59,60 @@ public class VendingMachine {
     }
 
     protected Map<Integer, Integer> calculateCoins(final int machineMoney) {
-        Map<Integer, Integer> machineCoins = createCoinUnitList();
-        int machineMoneyToCountCoin = machineMoney;
+        final List<Integer> inputRandomCoinRange = createCoinRangeList();
 
-        while (machineMoneyToCountCoin != 0) {
-            machineMoneyToCountCoin = machineMoney;
+        return inputCoinRandomly(inputRandomCoinRange, machineMoney);
+    }
 
-            machineMoneyToCountCoin = inputCoinRandomly(machineCoins, machineMoneyToCountCoin);
+    protected Map<Integer, Integer> inputCoinRandomly(final List<Integer> inputRandomCoinRange, int machineMoneyToCountCoin) {
+        Map<Integer, Integer> machineCoins = createMachineCoins();
+        machineCoins = changeMachineMoneyToCoin(inputRandomCoinRange, machineMoneyToCountCoin, machineCoins, machineMoneyToCountCoin);
+
+        return machineCoins;
+    }
+
+    protected Map<Integer, Integer> changeMachineMoneyToCoin(final List<Integer> inputRandomCoinRange, final int machineMoneyToCountCoin, Map<Integer, Integer> machineCoins, int machineMoney) {
+        while (machineMoney != 0) {
+            int coinUnit = Coin.COIN_500.inputCoinCountRandomly(inputRandomCoinRange);
+            int coinCount = (machineMoneyToCountCoin / coinUnit);
+
+            machineMoney = addCoin(machineCoins, machineMoney, coinUnit, coinCount);
+
+            if (machineMoney < 0) {
+                machineCoins = createMachineCoins();
+                machineMoney = machineMoneyToCountCoin;
+            }
         }
 
         return machineCoins;
     }
 
-
-    protected int inputCoinRandomly(final Map<Integer, Integer> machineCoins, int machineMoneyToCountCoin) {
-        for (int machineCoin : machineCoins.keySet()) {
-            int share = (machineMoneyToCountCoin / machineCoin);
-
-            final List<Integer> inputRandomCoinRange = createCoinRangeList(share);
-            int coinCount = Coin.COIN_500.inputCoinCountRandomly(inputRandomCoinRange);
-
-            machineMoneyToCountCoin = machineMoneyToCountCoin - (coinCount * machineCoin);
-            machineCoins.put(machineCoin, coinCount);
+    protected int addCoin(final Map<Integer, Integer> machineCoins, int machineMoney, final int coinUnit, final int coinCount) {
+        if (coinCount > 0) {
+            machineCoins.put(coinUnit, machineCoins.get(coinUnit) + 1);
+            machineMoney = machineMoney - coinUnit;
         }
 
-        return machineMoneyToCountCoin;
+        return machineMoney;
     }
 
+    protected List<Integer> createCoinRangeList() {
+        List<Integer> coinRange = new ArrayList<>();
+        Coin[] coinUnits = Coin.values();
 
-    protected List<Integer> createCoinRangeList(final int share) {
-        final List<Integer> inputRandomCoinRange = new ArrayList<>();
-
-        for (int j = 0; j <= share; j++) {
-            inputRandomCoinRange.add(j);
+        for (final Coin coinUnit : coinUnits) {
+            coinRange.add(coinUnit.getAmount());
         }
 
-        return inputRandomCoinRange;
+        return coinRange;
     }
 
-    public Map<Integer, Integer> createCoinUnitList() {
+    protected Map<Integer, Integer> createMachineCoins() {
         final Map<Integer, Integer> machineCoins = new LinkedHashMap<>();
-        Coin[] coin = Coin.values();
+        Coin[] coins = Coin.values();
 
-        for (int i = 0; i < Coin.values().length; i++) {
-            machineCoins.put(coin[i].getAmount(), 0);
+        for (final Coin coin : coins) {
+            machineCoins.put(coin.getAmount(), 0);
         }
 
         return machineCoins;

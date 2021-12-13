@@ -2,7 +2,6 @@ package vendingmachine.View;
 
 import java.util.Map;
 
-import vendingmachine.model.Coin;
 import vendingmachine.utils.Messages;
 import vendingmachine.utils.Symbol;
 

@@ -32,8 +32,4 @@ public class Product {
         return price.getPrice();
     }
 
-    public boolean isCheaper(final int cheapestProductPrice) {
-        return this.getProductPrice() < cheapestProductPrice;
-    }
-
 }

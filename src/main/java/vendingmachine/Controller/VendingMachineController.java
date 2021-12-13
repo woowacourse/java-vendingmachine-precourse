@@ -7,7 +7,6 @@ import java.util.Map;
 
 import vendingmachine.View.InputView;
 import vendingmachine.View.OutputView;
-import vendingmachine.model.Coin;
 import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.Messages;
@@ -30,31 +29,37 @@ public class VendingMachineController {
     public void run() {
         int machineMoney = fillMoney();
         VendingMachine vendingMachine = new VendingMachine(machineMoney);
+
         Map<Integer, Integer> machineCoins = vendingMachine.getMachineCoins();
         outputView.printMachineHaveCoin(machineCoins);
 
         List<Product> products = displayProducts();
-
         int cheapestProductPrice = findCheapestProductPrice(products);
         int purchasingCost = inputView.inputPurchasingCost();
 
+        purchaseProducts(vendingMachine, products, cheapestProductPrice, purchasingCost);
+        returnChange(vendingMachine, machineCoins, purchasingCost);
+    }
+
+    protected void returnChange(final VendingMachine vendingMachine, final Map<Integer, Integer> machineCoins, final int purchasingCost) {
+        Map<Integer, Integer> returnCoins = vendingMachine.calculateReturnChangeCoin(machineCoins, purchasingCost);
+        outputView.printReturnChange(purchasingCost, returnCoins);
+    }
+
+    protected void purchaseProducts(final VendingMachine vendingMachine, final List<Product> products, final int cheapestProductPrice, int purchasingCost) {
         do {
             outputView.printPurChasingCost(purchasingCost);
 
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
         } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
-
-        Map<Integer, Integer> returnCoins = vendingMachine.calculateReturnChangeCoin(machineCoins, purchasingCost);
-        outputView.printReturnChange(purchasingCost, returnCoins);
-
     }
 
     protected int findCheapestProductPrice(final List<Product> products) {
         int cheapestProductPrice = products.get(0).getProductPrice();
 
         for (Product product : products) {
-            if (product.isCheaper(cheapestProductPrice)) {
+            if (product.getPrice().isCheaper(cheapestProductPrice)) {
                 cheapestProductPrice = product.getProductPrice();
             }
         }

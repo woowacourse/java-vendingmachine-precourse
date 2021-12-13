@@ -37,4 +37,8 @@ public class Price {
         return (price >= BASED_PRICE) && ((price % PRICE_UNIT) == 0);
     }
 
+    public boolean isCheaper(final int cheapestProductPrice) {
+        return this.price < cheapestProductPrice;
+    }
+
 }

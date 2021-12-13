@@ -16,11 +16,11 @@ public enum Coin {
         this.amount = amount;
     }
 
-    protected int getAmount() {
+    public int getAmount() {
         return amount;
     }
 
-    protected int inputCoinCountRandomly(List<Integer> coins) {
+    public int inputCoinCountRandomly(List<Integer> coins) {
         return Randoms.pickNumberInList(coins);
     }
 
