@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import vendingmachine.exception.CoinNotExistAmountException;
 import vendingmachine.exception.CoinNotFoundLeastException;
 
-public enum Coin implements Comparator<Coin> {
+public enum Coin {
     COIN_500(500),
     COIN_100(100),
     COIN_50(50),
@@ -35,10 +35,14 @@ public enum Coin implements Comparator<Coin> {
     }
 
     public static Map<Coin, Integer> createEmptyCoinMap() {
-        Map<Coin, Integer> coinMap = new TreeMap<>();
+        Map<Coin, Integer> coinMap = new TreeMap<>(coinAmountDescendingComparator());
         Arrays.stream(values())
             .forEach(coin -> coinMap.put(coin, 0));
         return coinMap;
+    }
+
+    private static Comparator<Coin> coinAmountDescendingComparator() {
+        return (o1, o2) -> o2.amount - o1.amount;
     }
 
     public static int leastCoin() {
@@ -50,10 +54,5 @@ public enum Coin implements Comparator<Coin> {
 
     public int amount() {
         return amount;
-    }
-
-    @Override
-    public int compare(Coin o1, Coin o2) {
-        return o2.amount - o1.amount;
     }
 }
