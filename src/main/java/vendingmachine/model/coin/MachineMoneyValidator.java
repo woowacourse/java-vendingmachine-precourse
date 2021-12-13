@@ -14,9 +14,11 @@ public class MachineMoneyValidator extends MoneyValidator {
         if (!isNumeric(money)) {
             throw new IllegalArgumentException(Message.MACHINE_MONEY_STRING_ERROR);
         }
+
         if (!isRangeValid(toInt(money), Constant.UNIT_VALUE)) {
             throw new IllegalArgumentException(Message.MACHINE_MONEY_RANGE_ERROR);
         }
+
         if (!isUnitSplit(toInt(money))) {
             throw new IllegalArgumentException(Message.MACHINE_MONEY_UNIT_ERROR);
         }

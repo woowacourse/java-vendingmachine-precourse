@@ -1,7 +1,6 @@
 package vendingmachine.model.drink;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import vendingmachine.model.user.ChoiceDrink;
 import vendingmachine.model.user.UserMoney;
@@ -18,7 +17,7 @@ public class Drinks {
         return drinkInventory.stream()
             .filter(drink -> drink.isSameDrink(choiceDrink.getName()))
             .findFirst()
-            .orElseThrow(() -> new NoSuchElementException(Message.CHOICE_DRINK_NO_SUCH_ERROR));
+            .orElseThrow(() -> new IllegalArgumentException(Message.CHOICE_DRINK_NO_SUCH_ERROR));
     }
 
     public boolean isBuyContinue(UserMoney userMoney) {

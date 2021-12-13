@@ -15,7 +15,7 @@ public class MachineMoney {
         this.money = Integer.parseInt(inputMoney);
     }
 
-    private static Map<Integer, Integer> toMap() {
+    private Map<Integer, Integer> toMap() {
         Map<Integer, Integer> coins = new LinkedHashMap<>();
         for (int type : Coin.toList()) {
             coins.put(type, Constant.STACK_COINS_BEGIN_VALUE);
@@ -23,14 +23,15 @@ public class MachineMoney {
         return coins;
     }
 
-    public Map<Integer, Integer> toRandomCoins() {
+    private Map<Integer, Integer> toRandomCoins() {
         Map<Integer, Integer> coins = toMap();
         int money = this.money;
 
         while (money != Constant.EMPTY) {
             int pickedCoin = Coin.createRandomCoin();
-            if (money - pickedCoin < Constant.EMPTY)
+            if (money - pickedCoin < Constant.EMPTY) {
                 continue;
+            }
             money -= pickedCoin;
             coins.put(pickedCoin, coins.get(pickedCoin) + Constant.COIN_STACK_UP_VOLUME);
         }

@@ -1,7 +1,5 @@
 package vendingmachine.model;
 
-import java.util.NoSuchElementException;
-
 import vendingmachine.model.drink.Drink;
 import vendingmachine.model.drink.Drinks;
 import vendingmachine.model.user.ChoiceDrink;
@@ -17,14 +15,10 @@ public class Machine {
     }
 
     public void buy(ChoiceDrink choiceDrink) {
-        try {
-            Drink buyItem = drinkInventory.findByDrinkName(choiceDrink);
-            if (money.canBuy(buyItem)) {
-                money.decAmount(buyItem);
-                buyItem.decQuantity();
-            }
-        } catch (NoSuchElementException e) {
-            throw new IllegalArgumentException(e.getMessage());
+        Drink buyItem = drinkInventory.findByDrinkName(choiceDrink);
+        if (money.canBuy(buyItem)) {
+            money.decAmount(buyItem);
+            buyItem.decQuantity();
         }
     }
 

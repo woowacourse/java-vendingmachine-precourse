@@ -7,7 +7,7 @@ import vendingmachine.model.user.UserMoney;
 import vendingmachine.util.Constant;
 
 public class Change {
-    private List<CoinType> coins;
+    private final List<CoinType> coins;
 
     public Change(MachineMoney money) {
         coins = money.createCoins();
