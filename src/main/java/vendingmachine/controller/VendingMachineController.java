@@ -19,6 +19,7 @@ public class VendingMachineController {
 
 		setCoins();
 		showCoins();
+		setProducts();
 	}
 
 	private void createAdministrator() {
@@ -34,6 +35,13 @@ public class VendingMachineController {
 
 	private void showCoins() {
 		management.noticeCountOfCoins();
+	}
+
+	private void setProducts() {
+		management.noticeInsertProducts();
+
+		String input = administrator.getProducts();
+		management.insertProducts(input);
 	}
 
 	// 소비자 관련

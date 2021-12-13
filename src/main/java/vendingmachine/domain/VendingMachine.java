@@ -3,8 +3,10 @@ package vendingmachine.domain;
 import static camp.nextstep.edu.missionutils.Randoms.*;
 
 import static vendingmachine.view.Print.*;
+import static vendingmachine.service.VendingMachineManagement.*;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.List;
 
 public class VendingMachine {
@@ -21,6 +23,17 @@ public class VendingMachine {
 		for (Coin coin : coins) {
 			this.changes.put(coin, INITIAL_COIN);
 		}
+	}
+
+	public boolean isDuplicatedName(String name) {
+		for (Entry<Product, Integer> product : this.products.entrySet()) {
+			String existName = product.getKey().getName();
+
+			if (existName.equals(name)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public void setChanges(int money) {
@@ -53,8 +66,20 @@ public class VendingMachine {
 		}
 	}
 
-	// 상품 정보 저장
-	
+	public void setProducts(List<HashMap<String, String>> products) {
+		for (HashMap<String, String> product : products) {
+			setProduct(product);
+		}
+	}
+
+	private void setProduct(HashMap<String, String> productMap) {
+		int price = Integer.parseInt(productMap.get(PRODUCT_PRICE));
+		int quantity = Integer.parseInt(productMap.get(PRODUCT_QUANTITY));
+		Product product = new Product(productMap.get(PRODUCT_NAME), price);
+
+		products.put(product, quantity);
+	}
+
 	// 투입 금액 정보 저장
 
 	// 구매한 상품 정보 개수 및 투입 금액 차감
