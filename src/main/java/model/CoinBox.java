@@ -7,14 +7,14 @@ import java.util.Map;
 
 import utils.generator.RandomCoinPriceGenerator;
 
-public class VendingMachineCoinBox {
+public class CoinBox {
 	private static final int START_COIN_COUNT = 0;
 	private static final int START_TOTAL_COIN_PRICE = 0;
 	private static final int ADD_COIN_COUNT = 1;
 
 	private final Map<Coin, Integer> coinBox;
 
-	public VendingMachineCoinBox(int insertVendingMachineChange) {
+	public CoinBox(int insertVendingMachineChange) {
 		coinBox = initCoinBox();
 		makeCoins(insertVendingMachineChange);
 	}
