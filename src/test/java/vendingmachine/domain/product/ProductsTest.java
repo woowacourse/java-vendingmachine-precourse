@@ -40,7 +40,7 @@ class ProductsTest {
         products.add(product1);
         products.add(product2);
 
-        // when
+        // when & then
         assertThatThrownBy(() -> {
             new Products(products);
         }).isInstanceOf(IllegalArgumentException.class);
@@ -53,12 +53,13 @@ class ProductsTest {
         InvestmentMoney investmentMoney = new InvestmentMoney("3000");
         List<Product> productList = new ArrayList<>();
         Product product1 = new Product("[콜라,1500,1]");
-        Product product2 = new Product("[사이다,1000,0]");
+        Product product2 = new Product("[사이다,1000,1]");
         productList.add(product1);
         productList.add(product2);
         Products products = new Products(productList);
 
         // when
+        product1.purchase();
         boolean result = products.isPossiblePurchase(investmentMoney);
 
         // then
@@ -71,13 +72,15 @@ class ProductsTest {
         // given
         InvestmentMoney investmentMoney = new InvestmentMoney("3000");
         List<Product> productList = new ArrayList<>();
-        Product product1 = new Product("[콜라,1500,0]");
-        Product product2 = new Product("[사이다,1000,0]");
+        Product product1 = new Product("[콜라,1500,1]");
+        Product product2 = new Product("[사이다,1000,1]");
         productList.add(product1);
         productList.add(product2);
         Products products = new Products(productList);
 
         // when
+        product1.purchase();
+        product2.purchase();
         boolean result = products.isPossiblePurchase(investmentMoney);
 
         // then
@@ -91,12 +94,13 @@ class ProductsTest {
         InvestmentMoney investmentMoney = new InvestmentMoney("1000");
         List<Product> productList = new ArrayList<>();
         Product product1 = new Product("[콜라,1500,1]");
-        Product product2 = new Product("[사이다,1000,0]");
+        Product product2 = new Product("[사이다,1000,1]");
         productList.add(product1);
         productList.add(product2);
         Products products = new Products(productList);
 
         // when
+        product2.purchase();
         boolean result = products.isPossiblePurchase(investmentMoney);
 
         // then

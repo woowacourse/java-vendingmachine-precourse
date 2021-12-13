@@ -89,23 +89,11 @@ class ProductTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
-    @DisplayName("상품 수량이 0개이면 구매가 불가능 하므로 예외를 던진다.")
-    @Test
-    void decreaseQuantity_QuantityThenNegativeNumber_ExceptionThrown() {
-        // given
-        Product product = new Product("[콜라,1500,0]");
-
-        // when & then
-        assertThatThrownBy(() -> {
-            product.decreaseQuantity();
-        }).isInstanceOf(IllegalArgumentException.class);
-    }
-
     @DisplayName("상품과 상품 구매를 위한 이름이 같으면 true를 반환한다.")
     @Test
     void isSameName_productPurchaseNameThenEquals_TrueReturn() {
         // given
-        Product product = new Product("[콜라,1500,0]");
+        Product product = new Product("[콜라,1500,1]");
         String productPurchaseName = "콜라";
 
         // then
@@ -119,7 +107,7 @@ class ProductTest {
     @Test
     void isSameName_productPurchaseNameThenNotEquals_FalseReturn() {
         // given
-        Product product = new Product("[콜라,1500,0]");
+        Product product = new Product("[콜라,1500,1]");
         String productPurchaseName = "사이다";
 
         // then
@@ -146,7 +134,8 @@ class ProductTest {
     @Test
     void isExistQuantity_QuantityNotMoreThan0_False() {
         // given
-        Product product = new Product("[콜라,1500,0]");
+        Product product = new Product("[콜라,1500,1]");
+        product.purchase();
 
         // then
         boolean result = product.isExistQuantity();
