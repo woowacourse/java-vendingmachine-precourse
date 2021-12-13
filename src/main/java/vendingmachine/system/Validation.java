@@ -6,4 +6,5 @@ public interface Validation {
 
     public boolean isValidProductNameAndPriceAndStock(String productNameAndPriceAndStock);
 
+    public boolean isValidUserInsertMoney(String userInsertMoney);
 }

@@ -13,7 +13,7 @@ public class ValidationImplementation implements Validation {
     public boolean isValidHoldingMoney(String holdingMoney) {
         boolean result = true;
         result = isCharacter(holdingMoney);
-        result = isLessThan100MillionOrLessThan100(holdingMoney);
+        result = isMoreThan100MillionOrLessThan100(holdingMoney);
         result = isDivisibleBy10(holdingMoney);
         return result;
     }
@@ -106,6 +106,18 @@ public class ValidationImplementation implements Validation {
 
     private boolean isExistBlank(String inputProductInformation) {
         return inputProductInformation.indexOf(' ') != -1;
+    }
+
+    @Override
+    public boolean isValidUserInsertMoney(String userInsertMoney) {
+        if (!isOnlyDigit(userInsertMoney)) {
+            throw new IllegalArgumentException();
+        }
+
+        if (isMoreThan100Million(userInsertMoney)|| !isDivisibleBy10(userInsertMoney)) {
+            throw new IllegalArgumentException();
+        }
+        return true;
     }
 
 }
