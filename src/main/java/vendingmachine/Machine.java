@@ -104,8 +104,9 @@ public class Machine {
             }
             System.out.println("구입할 상품명을 입력해 주세요.");
             String goodsInput = Console.readLine();
-            if(!goodsList.containsKey(goodsInput)) {
-                System.out.println("[ERROR] 상품 목록에 없는 제품입니다.");
+            try {
+                validator.validateUserOrder(goodsInput,goodsList,leftMoney);
+            }catch (Exception e){
                 continue;
             }
             int goodsPrice = goodsList.get(goodsInput).getPrice();

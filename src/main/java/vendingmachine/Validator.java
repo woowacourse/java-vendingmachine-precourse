@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public class Validator {
     public Validator(){
 
@@ -55,6 +57,16 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
+    public void validateUserOrder(String order, Map<String,Goods> goodsList,int leftMoney){
+        if(!goodsList.containsKey(order)) {
+            System.out.println("[ERROR] 상품 목록에 없는 제품입니다.");
+            throw new IllegalArgumentException();
+        }
+        if(leftMoney < goodsList.get(order).getPrice()){
+            System.out.println("[ERROR] 돈이 부족합니다.");
+            throw new IllegalArgumentException();
+        }
+    }
     private void checkGoodsInfo(String price, String number){
         try{
             Integer.parseInt(price.trim());
@@ -72,5 +84,6 @@ public class Validator {
             throw new IllegalArgumentException();
         }
     }
+
 
 }
