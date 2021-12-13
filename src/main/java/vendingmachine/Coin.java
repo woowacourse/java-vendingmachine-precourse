@@ -1,5 +1,9 @@
 package vendingmachine;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -12,5 +16,20 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public static List<Integer> getAmountList() {
+        return Arrays.stream(Coin.values())
+                .map(Coin::getAmount)
+                .collect(Collectors.toList());
+    }
+
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public static Coin findNameByValue(int value) {
+        return Arrays.stream(Coin.values())
+                .filter(coin -> coin.getAmount() == value)
+                .findFirst()
+                .orElse(null);
+    }
 }
