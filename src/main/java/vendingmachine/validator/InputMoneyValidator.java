@@ -1,5 +1,7 @@
 package vendingmachine.validator;
 
+import static vendingmachine.Constants.*;
+
 public class InputMoneyValidator {
 	public static boolean checkInputMoney(String string) {
 		try {
@@ -22,20 +24,20 @@ public class InputMoneyValidator {
 	}
 
 	private static void exceptionStringZero(String string) {
-		if (string.equals("0")) {
+		if (string.equals(STRING_ZERO)) {
 			throw new IllegalArgumentException();
 		}
 	}
 
 	private static void exceptionStringEmpty(String string) {
-		if (string.equals("")) {
+		if (string.equals(EMPTY_STRING)) {
 			throw new IllegalArgumentException();
 		}
 	}
 
 	private static void exceptionStringNotDivideByTen(String string) {
 		long number = getNumberFromString(string);
-		if (number % 10 != 0) {
+		if (number % MIN_INPUT_MONEY != 0) {
 			throw new IllegalArgumentException();
 		}
 	}
@@ -43,13 +45,13 @@ public class InputMoneyValidator {
 
 	private static void exceptionStringSmallerThanTen(String string) {
 		long number = getNumberFromString(string);
-		if (number <= 10) {
+		if (number <= MIN_INPUT_MONEY) {
 			throw new IllegalArgumentException();
 		}
 	}
 
 	private static void exceptionCharNotNumber(char letter) {
-		if (letter > '9' || letter < '0') {
+		if (letter > CHAR_NINE || letter < CHAR_ZERO) {
 			throw new IllegalArgumentException();
 		}
 	}
