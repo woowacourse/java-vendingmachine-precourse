@@ -2,13 +2,15 @@ package vendingmachine.domain;
 
 import static vendingmachine.resource.MessageResource.*;
 
+import vendingmachine.utils.NumericUtils;
+
 public class VendingMachine {
 	private static final int MIN_PRICE = 0;
 
 	private int currentAmount;
 
-	public VendingMachine(int currentAmount) {
-		this.currentAmount = currentAmount;
+	public VendingMachine(String currentAmount) {
+		this.currentAmount = NumericUtils.parsePositiveInt(currentAmount);
 	}
 
 	public int getCurrentAmount() {
