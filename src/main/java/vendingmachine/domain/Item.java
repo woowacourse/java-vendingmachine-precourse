@@ -48,11 +48,11 @@ public class Item {
 		return cost;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
-
 	public void sell() {
 		amount --;
+	}
+
+	public boolean isSellable() {
+		return 0 < amount;
 	}
 }

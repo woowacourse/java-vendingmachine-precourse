@@ -21,7 +21,7 @@ public class Items {
 		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException("해당 이름의 상품을 찾을 수 없습니다."));
-		if (foundItem.getAmount() <= 0) {
+		if (!foundItem.isSellable()) {
 			throw new IllegalArgumentException("상품의 수량이 0개이므로 구매할 수 없습니다.");
 		}
 		if (!money.payable(foundItem.getCost())){
@@ -32,8 +32,8 @@ public class Items {
 
 	public boolean checkAllOutOfOrder() {
 		return items.stream()
-			.map(Item::getAmount)
-			.allMatch((amount) -> amount == 0);
+			.map(Item::isSellable)
+			.noneMatch((condition) -> true);
 	}
 
 	private void validateDuplication(List<Item> items) {
