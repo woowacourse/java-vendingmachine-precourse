@@ -2,8 +2,8 @@ package vendingmachine.service;
 
 public class OrderValidator {
 
-    public void isValidMoney(String money){
-
-
+    public boolean isValidMoney(String money){
+        String numericRegex = "[0-9]+";
+        return money.matches(numericRegex);
     }
 }

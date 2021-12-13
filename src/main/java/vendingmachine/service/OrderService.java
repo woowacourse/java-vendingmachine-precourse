@@ -8,18 +8,26 @@ import vendingmachine.view.OutputView;
 
 public class OrderService {
     OutputView outputView = new OutputView();
+    InputView inputView = new InputView();
+    OrderValidator orderValidator = new OrderValidator();
     Money money;
 
-    public void get(Products products){
+    public void get(Products products) {
         outputView.printOrderMoney();
         getUserMoney();
 
-
     }
 
-    public void getUserMoney(){
-        InputView inputView = new InputView();
-        money.setMoney(Integer.parseInt(inputView.getMoney()));
-
+    public void getUserMoney() {
+        while (true) {
+            try {
+                String tempMoney = inputView.getMoney();
+                orderValidator.isValidMoney(tempMoney);
+                money = new Money(Integer.parseInt(tempMoney));
+                return;
+            } catch (IllegalArgumentException e){
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }
