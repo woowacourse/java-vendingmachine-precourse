@@ -52,4 +52,10 @@ public class Utils {
             throw new IllegalArgumentException("[ERROR] 상품은 중복 등록될 수 없습니다.");
         }
     }
+
+    public static void validateStrEmpty(String productName) {
+        if (productName.equals("")) {
+           throw new IllegalArgumentException("[ERROR] 상품명은 공백이 될 수 없습니다.");
+        }
+    }
 }

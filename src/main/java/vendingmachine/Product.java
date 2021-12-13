@@ -40,6 +40,7 @@ public class Product {
             Utils.validateOvervalue(Integer.parseInt(str.split(",")[1]));
             Utils.validateDividableByValue(Integer.parseInt(str.split(",")[1]));
             Utils.validateDuplication(products, str.split(",")[0]);
+            Utils.validateStrEmpty(str.split(",")[0]);
             products.add(new Product(str.split(",")[0], Integer.parseInt(str.split(",")[1]), Integer.parseInt(str.split(",")[2])));
         }
         return products;
