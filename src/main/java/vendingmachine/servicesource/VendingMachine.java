@@ -1,5 +1,7 @@
 package vendingmachine.servicesource;
 
+import vendingmachine.servicesource.wallet.WalletPrinter;
+import vendingmachine.servicesource.wallet.WalletSystem;
 import vendingmachine.utils.moneychecker.BalanceInputChecker;
 
 public class VendingMachine {

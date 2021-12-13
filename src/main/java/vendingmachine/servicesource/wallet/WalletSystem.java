@@ -1,6 +1,7 @@
-package vendingmachine.servicesource;
+package vendingmachine.servicesource.wallet;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.servicesource.Product;
 import vendingmachine.utils.moneychecker.InsertMoneyChecker;
 
 import java.util.*;
@@ -44,11 +45,11 @@ public class WalletSystem {
 
     }
 
-    void withdrawInsertedBalance(int price){
+    public void withdrawInsertedBalance(int price){
         insertedBalance -= price;
     }
 
-    boolean haveEnoughInsertedBalanceToPurchase(int cheapestPrice){
+    public boolean haveEnoughInsertedBalanceToPurchase(int cheapestPrice){
         boolean canPurchase =true;
 
         if(insertedBalance < cheapestPrice ){
@@ -59,7 +60,7 @@ public class WalletSystem {
         return canPurchase;
     }
 
-    boolean canBuySelectedProduct(Product product){
+    public boolean canBuySelectedProduct(Product product){
         boolean canBuy = true;
 
         try{
@@ -72,7 +73,7 @@ public class WalletSystem {
         return canBuy;
     }
 
-    void returnChangeByRemainCoins(){
+    public void returnChangeByRemainCoins(){
         Coin[] coinTypes = Coin.getSortedCoinTypes();
         HashMap<Coin, Integer> returnCoinsMap = new HashMap<>();
 
@@ -106,7 +107,7 @@ public class WalletSystem {
 
     }
 
-    WalletPrinter getWalletPrinter(){
+    public WalletPrinter getWalletPrinter(){
         return walletPrinter;
     }
 
@@ -114,7 +115,7 @@ public class WalletSystem {
         return remainCoinsMap.get(coinType);
     }
 
-    void setInsertedBalance(){
+    public void setInsertedBalance(){
         insertedBalance = InsertMoneyChecker.getInsertMoney();
     }
 

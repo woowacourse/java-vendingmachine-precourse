@@ -1,4 +1,4 @@
-package vendingmachine.servicesource;
+package vendingmachine.servicesource.wallet;
 
 import vendingmachine.constants.StringConstants;
 
@@ -41,7 +41,7 @@ public class WalletPrinter {
 
     }
 
-    void printRemainInsertedBalance(){
+    public void printRemainInsertedBalance(){
         System.out.println(PRINT_INSERTED_BALANCE_MESSAGE + wallet.getInsertedBalance() + StringConstants.CURRENCY_UNIT);
     }
 

@@ -1,4 +1,4 @@
-package vendingmachine.servicesource;
+package vendingmachine.servicesource.wallet;
 
 import vendingmachine.constants.StringConstants;
 
