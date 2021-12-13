@@ -7,10 +7,9 @@ import java.util.List;
 import vendingmachine.domain.Item;
 
 public class ItemParser {
-	private static final String OBJECT_SEPARATOR = ";";
 
 	public static List<Item> parseList(String itemListStr) {
-		List<String> itemStrs = Arrays.asList(itemListStr.split(OBJECT_SEPARATOR));
+		List<String> itemStrs = Arrays.asList(itemListStr.split(PublicConst.ITEM_SEPARATOR));
 		List<Item> items = new ArrayList<>();
 		itemStrs.forEach(itemStr -> {
 			Item item = parse(itemStr);

@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Application;
 import vendingmachine.controller.ViewMappingKey;
@@ -23,6 +25,8 @@ public class InputItemNameView implements View {
 
 	private void printMoneyAndMessage(int money) {
 		System.out.println();
+		List<String> itemStrings = Application.controller.getItemStringsByMoney(money);
+		System.out.println(SystemMessage.CAN_PURCHASE_LIST + String.join(PublicConst.ITEM_SEPARATOR, itemStrings));
 		System.out.println(SystemMessage.SHOW_INPUT_MONEY + money + PublicConst.MONETARY_UNIT);
 		System.out.println(SystemMessage.INPUT_ITEM_NAME);
 	}

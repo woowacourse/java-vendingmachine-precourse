@@ -57,6 +57,10 @@ public class VendingMachineController {
 		return moneyService.getMoney();
 	}
 
+	public List<String> getItemStringsByMoney(int money) {
+		return itemService.getItemStringsByMoney(money);
+	}
+
 	public Item searchItem(String itemName) {
 		return itemService.searchItem(itemName);
 	}

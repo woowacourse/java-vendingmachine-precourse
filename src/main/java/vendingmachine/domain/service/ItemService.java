@@ -10,6 +10,14 @@ import vendingmachine.util.SystemMessage;
 public class ItemService {
 	private final ItemRepository itemRepository = new ItemRepository();
 
+	public List<String> getItemStringsByMoney(int money) {
+		return itemRepository.getAll()
+			.stream()
+			.filter(item -> item.canPurchase(money))
+			.map(Item::toString)
+			.collect(Collectors.toList());
+	}
+
 	public void addItems(List<Item> items) {
 		items.forEach(itemRepository::addItem);
 	}

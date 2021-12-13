@@ -6,9 +6,6 @@ import java.util.List;
 import vendingmachine.domain.Item;
 
 public class ItemValidator {
-	private static final String OBJECT_WRAP_LEFT = "[";
-	private static final String OBJECT_WRAP_RIGHT = "]";
-	private static final String PARAMETER_SEPARATOR = ",";
 	private static final int PARAMETER_COUNT = 3;
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
@@ -28,9 +25,9 @@ public class ItemValidator {
 	}
 
 	private static boolean isWrapped(String itemStr) {
-		return OBJECT_WRAP_LEFT
+		return PublicConst.ITEM_WRAP_LEFT
 			.equals(Character.toString(itemStr.charAt(PublicConst.FIRST_INDEX)))
-			&& OBJECT_WRAP_RIGHT
+			&& PublicConst.ITEM_WRAP_RIGHT
 			.equals(Character.toString(itemStr.charAt(itemStr.length() - PublicConst.INDEX_GAP)));
 	}
 
@@ -40,7 +37,7 @@ public class ItemValidator {
 	}
 
 	private static List<String> parameterStringToList(String parameterStr) {
-		List<String> result = Arrays.asList(parameterStr.split(PARAMETER_SEPARATOR));
+		List<String> result = Arrays.asList(parameterStr.split(PublicConst.ITEM_PARAMETER_SEPARATOR));
 
 		if (isRightParameterCount(result))
 			throw new IllegalArgumentException(SystemMessage.ERROR_ITEM_DELIMITER);
