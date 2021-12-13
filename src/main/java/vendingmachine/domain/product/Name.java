@@ -17,10 +17,6 @@ public class Name {
 		return name.equals(productName);
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

@@ -48,10 +48,6 @@ public class Product {
 		return balance;
 	}
 
-	public Name getName() {
-		return name;
-	}
-
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
