@@ -7,8 +7,8 @@ public class User {
 	private final Money userMoney;
 	private final List<Merchandise> buyingMerchandiseList;
 
-	public User(Money userMoney) {
-		this.userMoney = userMoney;
+	public User(int userMoney) {
+		this.userMoney = new Money(userMoney);
 		buyingMerchandiseList = new ArrayList<>();
 	}
 

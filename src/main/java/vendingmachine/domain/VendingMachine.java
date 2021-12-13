@@ -12,8 +12,8 @@ public class VendingMachine {
 	private final LinkedHashMap<Coin, Integer> coinCounts;
 	private final LinkedHashMap<Coin, Integer> returnCoinCounts;
 
-	public VendingMachine(Money vendingMachineMoney) {
-		this.vendingMachineMoney = vendingMachineMoney;
+	public VendingMachine(int vendingMachineMoney) {
+		this.vendingMachineMoney = new Money(vendingMachineMoney);
 		coinCounts = new LinkedHashMap<>();
 		initCoinCounts(coinCounts);
 		returnCoinCounts = new LinkedHashMap<>();

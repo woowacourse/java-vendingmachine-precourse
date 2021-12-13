@@ -29,8 +29,7 @@ public class VendingMachineController {
 
 	public void vendingMahchineMoneyWithErrorHandling() {
 		try {
-			Money vendingMachineMoney = new Money(Integer.parseInt(InputView.inputVendingMachineMoney()));
-			vendingMachine = new VendingMachine(vendingMachineMoney);
+			vendingMachine = new VendingMachine(Integer.parseInt(InputView.inputVendingMachineMoney()));
 		} catch (NumberFormatException numberFormatException) {
 			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
 			vendingMahchineMoneyWithErrorHandling();
@@ -42,7 +41,7 @@ public class VendingMachineController {
 
 	public void inputMoneyWithErrorHandling() {
 		try {
-			user = new User(new Money(Integer.parseInt(InputView.inputMoney())));
+			user = new User(Integer.parseInt(InputView.inputMoney()));
 		} catch (NumberFormatException numberFormatException) {
 			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
 			inputMoneyWithErrorHandling();
