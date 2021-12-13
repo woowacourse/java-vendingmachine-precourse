@@ -16,6 +16,7 @@ public class InputView {
 	private static final String ERROR_NOT_NUMBER_MESSAGE = "숫자의 입력이 아닙니다.";
 	private static final String PRODUCTS_INPUT_HAS_VENDING_MACHINE = "상품명과 가격, 수량을 입력해주세요.";
 	private static final String ERROR_PRODUCT_INPUT_NOT_PATTERN = "상품 입력의 패턴이 아닙니다.";
+	private static final String BALANCE_INPUT_VENDING_MACHINE = "투입 금액을 입력해 주세요.";
 	private static final String PRODUCT_NAME_INPUT_PURCHASE = "구매할 상품명을 입력해주세요.";
 	private static final String ERROR_PRODUCT_NAME_INPUT_NOT_PATTERN = "상품명 입력 패턴이 잘못되었습니다.";
 
@@ -53,6 +54,11 @@ public class InputView {
 		}
 
 		return true;
+	}
+
+	private static int getInputBalance() {
+		System.out.println(BALANCE_INPUT_VENDING_MACHINE);
+		return getConvertInt();
 	}
 
 	private static String getInputProductName() {
