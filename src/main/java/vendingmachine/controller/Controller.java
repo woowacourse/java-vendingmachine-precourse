@@ -47,7 +47,7 @@ public class Controller {
 
 	private void inputItemsToMachineByManager(Long machineId) {
 		InputView.requestItems();
-		machineService.addItems(machineId, getItemsByUser());
+		machineService.addItems(machineId, getItemsByManager());
 	}
 
 	private void inputCoinsToMachineByManager(Long machineId) {
@@ -66,12 +66,12 @@ public class Controller {
 		}
 	}
 
-	private Map<String, Item> getItemsByUser() {
+	private Map<String, Item> getItemsByManager() {
 		try {
 			return ItemParser.getItems(Console.readLine());
 		} catch (IllegalArgumentException e) {
 			OutputView.printExceptionMessage(e.getMessage());
-			return getItemsByUser();
+			return getItemsByManager();
 		}
 	}
 
