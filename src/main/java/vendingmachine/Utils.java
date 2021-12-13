@@ -8,6 +8,7 @@ public class Utils {
         String[] juices = PrintUI.InputJuice();
         ArrayList<Juice> juiceIndex = ClassifyJuice(juices);
         int minPrice = FindMinPrice(juiceIndex);
+        OrderJuice(minPrice, juiceIndex);
     }
 
     public static void CheckChange() {
@@ -34,4 +35,10 @@ public class Utils {
         }
         return minPrice;
     }
+
+    public static void OrderJuice(int minPrice, ArrayList<Juice> juiceIndex) {
+        int money = PrintUI.InputMoney();
+    }
+
+
 }

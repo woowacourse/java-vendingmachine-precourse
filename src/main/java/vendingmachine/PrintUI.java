@@ -15,4 +15,13 @@ public class PrintUI {
         System.out.println();
         return Juices;
     }
+    public static int InputMoney() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        int money = Integer.parseInt(Console.readLine());
+        if (money < 0) {
+            throw new IllegalArgumentException("[ERROR] : 음수는 넣을 수 없어요");
+        }
+        System.out.println();
+        return money;
+    }
 }
