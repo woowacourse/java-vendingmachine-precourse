@@ -9,6 +9,7 @@ public enum Messages {
 	ERROR_NOT_VALID_PARENTHESES("[ERROR] 상품정보는 한 쌍의 대괄호로 구분해야 합니다."),
 	ERROR_BLANK("[ERROR] 입력은 반드시 한글자 이상이어야 합니다."),
 	ERROR_NOT_CONTAIN_MESSAGE("[ERROR] 해당 상품은 존재하지 않습니다."),
+	ERROR_DUPLICATE_NAME_INPUT("[ERROR] 상품 이름은 중복을 허용하지 않습니다."),
 	ERROR_NOT_ENOUGH_MONEY_MESSAGE("[ERROR] 금액이 부족합니다."),
 	ERROR_SOLD_OUT_MESSAGE("[ERROR] 해당 상품은 품절입니다."),
 	ERROR_NOT_DIVIDABLE_MESSAGE("[ERROR] 금액의 최소 단위는 10원 입니다."),

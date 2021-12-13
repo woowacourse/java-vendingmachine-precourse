@@ -2,6 +2,9 @@ package vendingmachine.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
+
+import javax.crypto.MacSpi;
 
 import vendingmachine.models.Item;
 
@@ -91,6 +94,15 @@ public class Validator {
 		}
 	}
 
+	private static void validateDuplicateName(HashSet<String> nameSet, String nameInput) throws
+		IllegalArgumentException {
+		if (nameSet.contains(nameInput)) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_DUPLICATE_NAME_INPUT.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
+		nameSet.add(nameInput);
+	}
+
 	public static void validatePriceInput(String input) {
 		validateEmptyStr(input);
 		validateNumber(input);
@@ -118,9 +130,11 @@ public class Validator {
 	}
 
 	public static void validateElementConditions(ArrayList<String[]> itemInput) throws IllegalArgumentException {
+		HashSet<String> nameSet = new HashSet<>();
 		for (String[] eachParsedItem : itemInput) {
 			validateElementSize(eachParsedItem);
 			validateNameInput(eachParsedItem[Indexes.NAME_INDEX.getValue()]);
+			validateDuplicateName(nameSet, eachParsedItem[Indexes.NAME_INDEX.getValue()]);
 			validatePriceInput(eachParsedItem[Indexes.PRICE_INDEX.getValue()]);
 			validateAmountInput(eachParsedItem[Indexes.AMOUNT_INDEX.getValue()]);
 		}
