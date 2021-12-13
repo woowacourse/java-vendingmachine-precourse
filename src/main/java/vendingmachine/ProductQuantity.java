@@ -2,6 +2,7 @@ package vendingmachine;
 
 public class ProductQuantity {
     private static final String QUANTITY_NOT_NUMERIC_MESSAGE = "상품 수량은 정수만 입력 가능합니다.";
+    private static final String QUANTITY_NOT_ENOUGH_MESSAGE = "상품 재고가 부족합니다.";
 
     private int quantity;
 
@@ -12,6 +13,12 @@ public class ProductQuantity {
 
     public int get() {
         return quantity;
+    }
+
+    public void validateEnoughStock(int demandQuantity) {
+        if (quantity < demandQuantity) {
+            throw new IllegalArgumentException(QUANTITY_NOT_ENOUGH_MESSAGE);
+        }
     }
 
     private void validateQuantityNumeric(String quantity) {

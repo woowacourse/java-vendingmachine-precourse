@@ -37,6 +37,10 @@ public class Product {
         return name.equals(productName);
     }
 
+    public void validateEnoughStock(int demandQuantity) {
+        quantity.validateEnoughStock(demandQuantity);
+    }
+
     private void validateInfoNotMissed(String goodsInfo) {
         if (isInfoMissed(goodsInfo.split(","))) {
             throw new IllegalArgumentException(INFO_MISSED_MESSAGE);
@@ -46,4 +50,5 @@ public class Product {
     private boolean isInfoMissed(String[] goodsInfo) {
         return goodsInfo.length < GOODS_SIZE;
     }
+
 }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Products {
-    private static final String INVALID_PRODUCT_NAME_MESSAGE = "해당 상품은 존재하지 않습니다.";
+    private static final String NOT_EXISTED_PRODUCT_MESSAGE = "해당 상품은 존재하지 않습니다.";
     private static final String SEMI_COLON = ";";
 
     private List<Product> products = new ArrayList<>();
@@ -15,6 +15,7 @@ public class Products {
 
     public int takeOut(String productName, int productQuantity) {
         Product product = findProduct(productName);
+        product.validateEnoughStock(productQuantity);
 
         return product.getPrice() * productQuantity;
     }
@@ -23,7 +24,7 @@ public class Products {
         return products.stream()
                 .filter(product -> product.isName(productName))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_NAME_MESSAGE));
+                .orElseThrow(() -> new IllegalArgumentException(NOT_EXISTED_PRODUCT_MESSAGE));
     }
 
     private void addProducts(String products) {

@@ -25,4 +25,11 @@ public class VendingMachineTest {
         assertThatThrownBy(() -> vendingMachine.buy("콜라", 5))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    void 수요_상품_재고_부족_예외() {
+        vendingMachine.insertMoney(100000);
+        assertThatThrownBy(() -> vendingMachine.buy("사이다", 11))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
 }
