@@ -58,7 +58,7 @@ public class CoinStore {
 		return stringBuilder.toString();
 	}
 
-	private void makeChangeCoins(int amount) {
+	private void createChangeCoins(int amount) {
 		while (Coin.checkIsAtLeastCoin(amount)) {
 			Coin biggestChangeCoin = findBiggestPossibleChangeCoin();
 			if (biggestChangeCoin == null) {
@@ -80,7 +80,7 @@ public class CoinStore {
 	}
 
 	public String changeCoinsToString(int amount) {
-		makeChangeCoins(amount);
+		createChangeCoins(amount);
 		StringBuilder stringBuilder = new StringBuilder();
 		for (Coin amountOfCoin : changeCoins.keySet()) {
 			if (changeCoins.get(amountOfCoin) > NO_COIN) {

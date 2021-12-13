@@ -29,7 +29,7 @@ public class VendingMachine {
 		inputAmount = productRepository.getChangeMoney(productName, inputAmount);
 	}
 
-	public boolean isPossibleRepurchase() {
+	public boolean isPossiblePurchase() {
 		return (productRepository.isCheckStock() && productRepository.isWhetherPurchasePossible(inputAmount));
 	}
 

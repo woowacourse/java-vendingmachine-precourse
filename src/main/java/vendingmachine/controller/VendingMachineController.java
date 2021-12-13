@@ -25,7 +25,7 @@ public class VendingMachineController {
 	}
 
 	private void purchaseIsPossible(VendingMachine vendingMachine) {
-		while (vendingMachine.isPossibleRepurchase()) {
+		while (vendingMachine.isPossiblePurchase()) {
 			purchaseProduct(vendingMachine);
 		}
 	}

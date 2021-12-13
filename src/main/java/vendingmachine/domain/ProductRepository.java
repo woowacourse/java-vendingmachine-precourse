@@ -9,12 +9,11 @@ import java.util.stream.Collectors;
 
 public class ProductRepository {
 	public static String DELIMITER_PRODUCT_STRING = ",";
-
 	private final List<Product> productList = new ArrayList<>();
 
 	public void createProducts(List<String> productListString) {
 		for (String productString : productListString) {
-			addProductByString(splitProductStringByDelimiter(productString));
+			addProduct(splitProductByDelimiter(productString));
 		}
 	}
 
@@ -33,12 +32,12 @@ public class ProductRepository {
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_DO_NOT_HAVE_PRODUCT));
 	}
 
-	private List<String> splitProductStringByDelimiter(String productToString) {
+	private List<String> splitProductByDelimiter(String productToString) {
 		return Arrays.stream(productToString.split(DELIMITER_PRODUCT_STRING))
 			.collect(Collectors.toList());
 	}
 
-	private void addProductByString(List<String> productString) {
+	private void addProduct(List<String> productString) {
 		productList.add(new Product(productString));
 	}
 
