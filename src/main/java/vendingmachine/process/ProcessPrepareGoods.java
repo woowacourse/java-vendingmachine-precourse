@@ -1,12 +1,24 @@
 package vendingmachine.process;
 
+import vendingmachine.goods.Goods;
 import vendingmachine.user.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProcessPrepareGoods {
     public static String goods;
     public static List<String[]> goodsArray;
+
+    public static List<Goods> makeGoods() {
+        inputGoods();
+        checkGoods();
+        removeBracket();
+        toArray();
+        toGoodsArray();
+        checkGoodsEachValidation();
+        return produceGoods();
+    }
 
     public static void inputGoods() {
         goods = User.inputGoods();
@@ -41,6 +53,17 @@ public class ProcessPrepareGoods {
             UserGoodsPriceValidation.checkGoodsPriceValidation(goods[1]);
             UserGoodsQuantityValidation.checkGoodsQuantityValidation(goods[2]);
         }
+    }
+
+    public static List<Goods> produceGoods() {
+        List<Goods> goodsList = new ArrayList<>();
+
+        for (String[] oneGoods : goodsArray) {
+            Goods stuff = new Goods(oneGoods[0], Integer.parseInt(oneGoods[1]), Integer.parseInt(oneGoods[2]));
+            goodsList.add(stuff);
+        }
+
+        return goodsList;
     }
 
 }

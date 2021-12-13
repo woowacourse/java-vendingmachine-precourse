@@ -6,7 +6,7 @@ import java.util.List;
 public class GoodsController {
     List<Goods> goodsList;
 
-    GoodsController(List<Goods> goodsList) {
+    public GoodsController(List<Goods> goodsList) {
         this.goodsList = goodsList;
     }
 
