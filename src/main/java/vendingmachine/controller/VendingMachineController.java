@@ -59,38 +59,29 @@ public class VendingMachineController {
 
 	private void printRemainCoin(VendingMachine vendingMachine) {
 		Map<Coin, Integer> remainCoin = calculateRemainCoin(vendingMachine.getInputMoney(),
-			vendingMachine.getOwnMoney(),
 			vendingMachine.getCoinMap());
 		System.out.println("잔돈");
 		outputView.printCoinChange(remainCoin);
 	}
 
-	private Map<Coin, Integer> calculateRemainCoin(int restMoney, int ownMoney, Map<Coin, Integer> coinMap) {
+	private Map<Coin, Integer> calculateRemainCoin(int restMoney, Map<Coin, Integer> coinMap) {
 		Map<Coin, Integer> returnCoinMap = new LinkedHashMap<>();
-		Map<Coin, Integer> returnCoinMap2 = new LinkedHashMap<>();
-
-		coinMap.forEach((k, v) -> {
-			if (v != 0) {
-				returnCoinMap2.put(k, v);
-			}
-		});
-
-		if (restMoney <= ownMoney) {
-			return returnCoinMap2;
-		}
-
 
 		for (Coin coin : coinMap.keySet()) {
-			int count = ownMoney/coin.getAmount();
+			int count = restMoney/coin.getAmount();
+			if (coinMap.get(coin) == 0) {
+				continue;
+			}
+
 			if (count < coinMap.get(coin)) {
 				returnCoinMap.put(coin, count);
-				ownMoney -= (coin.getAmount() * count);
+				restMoney -= (coin.getAmount() * count);
 				continue;
 			}
 			returnCoinMap.put(coin, coinMap.get(coin));
-			ownMoney -= (coin.getAmount() * coinMap.get(coin));
+			restMoney -= (coin.getAmount() * coinMap.get(coin));
 
-			if (ownMoney == 0) {
+			if (restMoney == 0) {
 				break;
 			}
 		}
