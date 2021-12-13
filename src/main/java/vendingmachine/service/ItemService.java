@@ -29,14 +29,18 @@ public class ItemService {
 		do {
 			String itemInput = inputView.getItemInput();
 			splitItemList = Arrays.asList(itemInput.split(ITEM_DELIMITER));
-			isValid = splitItemList.stream()
-				.map(itemInputString -> itemInputValidator.validateItemInput(itemInputString))
-				.allMatch(bool -> bool == true);
+			isValid = validateItem(splitItemList);
 		} while (!isValid);
 
 		return splitItemList.stream()
 			.map(itemString -> splitItem(itemString))
 			.collect(Collectors.toList());
+	}
+
+	private boolean validateItem(List<String> splitItemList) {
+		return splitItemList.stream()
+			.map(itemInputString -> itemInputValidator.validateItemInput(itemInputString))
+			.allMatch(bool -> bool == true);
 	}
 
 	public boolean isEnoughQuantityForItems(List<Item> items) {
