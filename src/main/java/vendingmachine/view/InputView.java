@@ -61,7 +61,7 @@ public class InputView {
 		return getConvertInt();
 	}
 
-	private static String getInputProductName() {
+	public static String getInputProductName() {
 		System.out.println(PRODUCT_NAME_INPUT_PURCHASE);
 		final String inputProductName = Console.readLine();
 		isValidateInputProductNamePattern(inputProductName);

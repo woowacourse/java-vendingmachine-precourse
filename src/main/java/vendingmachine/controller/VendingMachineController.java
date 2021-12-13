@@ -15,7 +15,7 @@ public class VendingMachineController {
 		final VendingMachine vendingMachine = processInit();
 
 		while (vendingMachine.isContinueVendingMachine()) {
-
+			processStart(vendingMachine);
 		}
 	}
 
@@ -62,6 +62,13 @@ public class VendingMachineController {
 	}
 
 	private void processStart(VendingMachine vendingMachine) {
-		OutputView.printVendingMachineHasBalanceMessage(BalanceDto.from(vendingMachine.getHasBalance()));
+		try {
+			OutputView.printVendingMachineHasBalanceMessage(BalanceDto.from(vendingMachine.getHasBalance()));
+			vendingMachine.purchaseProduct(InputView.getInputProductName());
+			OutputView.printLineSeparator();
+		} catch (IllegalArgumentException e) {
+			OutputView.printErrorMessage(e);
+			processStart(vendingMachine);
+		}
 	}
 }
