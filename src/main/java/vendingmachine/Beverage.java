@@ -1,22 +1,30 @@
 package vendingmachine;
 
+
 public class Beverage {
 	String name;
 	int price;
 	int count;
-	
-	public Beverage(String name, int price, int count) {
-		this.name =name;
-		this.price = price;
-		this.count = count;
+
+	public Beverage(String readString) {
+		String[] beverageInfo = BeverageValidter.readValidter(readString);
+		this.name = beverageInfo[0];
+		this.price = Integer.parseInt(beverageInfo[1]);
+		this.count = Integer.parseInt(beverageInfo[2]);
 	}
-	public String getName(){
+
+	public String getName() {
 		return name;
 	}
+
 	public int getPrice() {
 		return price;
 	}
+
 	public int getCount() {
 		return count;
 	}
+
+	
 }
+
