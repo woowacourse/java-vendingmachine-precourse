@@ -3,6 +3,8 @@ package vendingmachine.domain;
 import java.util.ArrayList;
 
 public class Products {
+	static final String MSG_NOT_EXIST_PRODUCT_ERROR = "[ERROR] 존재하지 않는 상품입니다.";
+
 	private final ArrayList<Product> products = new ArrayList<>();
 
 	public void add(Product product) {
@@ -37,6 +39,7 @@ public class Products {
 		return products.stream()
 			.filter((product) -> product.isSameName(name))
 			.findFirst()
-			.orElseThrow(IllegalArgumentException::new);
+			.orElseThrow(() ->
+				new IllegalArgumentException(MSG_NOT_EXIST_PRODUCT_ERROR));
 	}
 }

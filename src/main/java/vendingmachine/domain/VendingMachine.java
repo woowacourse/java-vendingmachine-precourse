@@ -43,7 +43,7 @@ public class VendingMachine {
 	}
 
 	public Map<Coin, Integer> giveChange() {
-		if (!coins.isGreaterThanTotalMoney(inputMoney)) {
+		if (coins.isGreaterThanTotalMoney(inputMoney)) {
 			return coins.getCoinsMap();
 		}
 		return coins.calculateChange(inputMoney);
