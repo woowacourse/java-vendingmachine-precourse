@@ -34,8 +34,8 @@ public class Product {
 		return totalAmount + amount;
 	}
 
-	public int minusAmount(int price) {
-		return price - amount;
+	public int minusPrice(int money) {
+		return money - price;
 	}
 
 	@Override
