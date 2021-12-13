@@ -27,6 +27,17 @@ public enum Coin {
         return min;
     }
 
+    public static Coin getCoinByValue(int value) {
+        Coin[] coins = Coin.values();
+        for (Coin coin:
+             coins) {
+            if (coin.amount == value) {
+                return coin;
+            }
+        }
+        return null;
+    }
+
     public int getAmount() {
         return amount;
     }

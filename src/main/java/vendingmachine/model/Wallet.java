@@ -38,22 +38,17 @@ public class Wallet {
 	}
 
 	private void makeRandomCoin(int money) {
-		Coin[] coins = Coin.values();
 		while (money != 0) {
-			int idx = Randoms.pickNumberInRange(0, coins.length-1);
-			if (coins[idx].getAmount() <= money) {
-				money = reduceMoney(money, coins[idx]);
-				addCoin(coins[idx]);
+			int value = Randoms.pickNumberInList(Coin.getCoinValues());
+			if (value <= money) {
+				money -= value;
+				addCoin(Coin.getCoinByValue(value));
 			}
 		}
 	}
 
 	private void addCoin(Coin coin) {
 		wallet.put(coin, wallet.get(coin) + 1);
-	}
-
-	private int reduceMoney(int money ,Coin coin) {
-		return money - coin.getAmount();
 	}
 
 	public Map<Coin, Integer> getWallet() {
