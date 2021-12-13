@@ -56,7 +56,12 @@ public class VendingMachineController {
 
 	public void run() {
 		while (products.selectMinimumPrice() <= insertMoney) {
-
+			purchaseProduct();
 		}
+	}
+
+	private void purchaseProduct() {
+		String inputPurchaseProduct = InputView.readPurchaseProduct();
+		products.findProduct(inputPurchaseProduct).purchase();
 	}
 }

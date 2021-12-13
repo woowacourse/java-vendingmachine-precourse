@@ -18,4 +18,13 @@ public class Products {
 		}
 		return minimumPrice;
 	}
+
+	public Product findProduct(String inputPurchaseProduct) {
+		for (Product product : products) {
+			if (product.equalProductName(inputPurchaseProduct)) {
+				return product;
+			}
+		}
+		throw new IllegalArgumentException();
+	}
 }

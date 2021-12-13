@@ -29,4 +29,8 @@ public class Product {
 	public int compareMinimumPrice(int minimumPrice) {
 		return Math.min(this.price, minimumPrice);
 	}
+
+	public void purchase() {
+		this.quantity--;
+	}
 }
