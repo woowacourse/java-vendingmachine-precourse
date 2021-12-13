@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Arrays;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputData {
@@ -18,6 +20,26 @@ public class InputData {
 	public boolean checkAmount(String amount) {
 		try {
 			InputException.checkAmount(amount);
+			return true;
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+	}
+
+	public String[] setItem() {
+		String[] items;
+		do {
+			System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+			items = Console.readLine().split(";");
+		} while (!checkItem(items));
+
+		return items;
+	}
+
+	public boolean checkItem(String[] items) {
+		try {
+			InputException.checkItem(items);
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
