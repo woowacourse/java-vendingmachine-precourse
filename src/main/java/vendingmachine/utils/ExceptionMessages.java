@@ -7,6 +7,7 @@ public class ExceptionMessages {
     public static final String NEGATIVE_NUMBER_EXCEPTION = ERROR + "음수를 입력하시면 안 됩니다.";
     public static final String HAS_ONES_NUMBER_EXCEPTION = ERROR + "1원 단위는 입력하시면 안 됩니다.";
 
+    public static final String EMPTY_INPUT_EXCEPTION = ERROR + "개별 상품 정보를 입력하지 않았습니다.";
     public static final String NOT_SURROUNDED_BY_BRACKETS_EXCEPTION = ERROR + "개별 상품 정보는 대괄호로 감싸여야 합니다.";
     public static final String INVALID_SEPARATORS_EXCEPTION = ERROR + "대괄호와 세미콜론 위치가 형식에 맞지 않습니다.";
     public static final String UNKNOWN_MERCHANDISE_NAME_EXCEPTION = ERROR + "존재하지 않는 상품명입니다.";

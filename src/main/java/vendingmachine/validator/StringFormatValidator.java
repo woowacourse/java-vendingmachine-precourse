@@ -17,12 +17,19 @@ public class StringFormatValidator {
     }
 
     private static void validateMerchandiseInfoFormat(String merchandiseInfo) {
+        validateNotEmptyInput(merchandiseInfo);
         validateSeparatorFormat(merchandiseInfo);
         String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(",");
         String name = infoList[0];
 
         validatePriceInput(infoList[1]);
         validateMerchandiseNumberInput(infoList[2]);
+    }
+
+    private static void validateNotEmptyInput(String merchandiseInfo) {
+        if (merchandiseInfo.length() == 0) {
+            throw new IllegalArgumentException(EMPTY_INPUT_EXCEPTION);
+        }
     }
 
     private static void validateSeparatorFormat(String merchandiseInfo) {
