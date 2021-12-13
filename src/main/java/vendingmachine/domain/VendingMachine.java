@@ -91,14 +91,14 @@ public class VendingMachine {
 				isExistedItem = true;
 			}
 		}
-		if(isExistedItem == false){
+		if (isExistedItem == false) {
 			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
 		}
 	}
 
-	public void nonEnoughMoneyError(String buyItem){
-		for (int i = 0; i < holdingItemList.size(); i++){
-			if(holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
+	public void nonEnoughMoneyError(String buyItem) {
+		for (int i = 0; i < holdingItemList.size(); i++) {
+			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
 				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
 			}
 		}

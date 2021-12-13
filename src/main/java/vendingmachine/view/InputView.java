@@ -120,27 +120,27 @@ public class InputView {
 		return isRightInputMoney;
 	}
 
-	private static boolean isRightItemInput(String[] itemStringArray){
+	private static boolean isRightItemInput(String[] itemStringArray) {
 		boolean isRightItemInput = true;
 
-		try{
+		try {
 			wrongRegexMatchError(itemStringArray);
 			duplicatedItemNameError(itemStringArray);
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightItemInput = false;
 		}
 		return isRightItemInput;
 	}
 
-	private static void duplicatedItemNameError(String[] itemStringArray){
+	private static void duplicatedItemNameError(String[] itemStringArray) {
 		Set<String> itemNames = new HashSet<String>();
 		removeBracket(itemStringArray);
 		int itemCount = itemStringArray.length;
-		for(int i = 0; i < itemCount; i++) {
+		for (int i = 0; i < itemCount; i++) {
 			itemNames.add(itemStringArray[i].split(",")[0]);
 		}
-		if(itemCount != itemNames.size()){
+		if (itemCount != itemNames.size()) {
 			throw new IllegalArgumentException(Message.DUPLICATED_NAME_ITEM_ERROR);
 		}
 	}
