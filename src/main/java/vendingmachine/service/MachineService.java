@@ -83,13 +83,9 @@ public class MachineService {
 		s = trimBrackets(s);
 
 		List<String> infoList = Arrays.asList(s.split(PRODUCT_INFO_DELIMITER.getSymbol(), -1));
-		String name = infoList.get(0);
-		int price = Integer.parseInt(infoList.get(1));
-		int quantity = Integer.parseInt(infoList.get(2));
-
-		validatePrice(price);
-		validateQuantity(quantity);
-		return new Product(name, price, quantity);
+		validatePrice(Integer.parseInt(infoList.get(1)));
+		validateQuantity(Integer.parseInt(infoList.get(2)));
+		return new Product(infoList);
 	}
 
 	public void addMoney(String inputMoney) {
