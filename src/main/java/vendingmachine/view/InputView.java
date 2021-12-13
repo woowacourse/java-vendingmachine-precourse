@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -34,18 +36,18 @@ public class InputView {
 		}
 	}
 
-	public static String[] getInputProducts() {
+	public static List<String> getInputProducts() {
 		System.out.println(PRODUCTS_INPUT_HAS_VENDING_MACHINE);
-		return getConvertArrayString();
+		return getConvertListString();
 	}
 
-	private static String[] getConvertArrayString() {
+	private static List<String> getConvertListString() {
 		return Arrays.stream(Console.readLine().split(PRODUCTS_INPUT_SPLIT, PRODUCTS_INPUT_SPLIT_LIMIT))
 			.filter(inputProduct -> isValidateInputProductPattern(inputProduct))
 			.map(inputProduct -> inputProduct.replaceAll(
 				PRODUCT_INPUT_FROM_REPLACE_PATTERN,
 				PRODUCT_INPUT_TO_REPLACE_PATTERN))
-			.toArray(String[]::new);
+			.collect(Collectors.toList());
 	}
 
 	private static boolean isValidateInputProductPattern(String inputProduct) {

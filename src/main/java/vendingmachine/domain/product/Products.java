@@ -1,6 +1,5 @@
 package vendingmachine.domain.product;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,14 +17,10 @@ public class Products {
 		this.products = products;
 	}
 
-	private Products(String[] products) {
-		this(Arrays.stream(products)
+	public static Products from(List<String> inputProducts) {
+		return new Products(inputProducts.stream()
 			.map(Product::from)
 			.collect(Collectors.toList()));
-	}
-
-	public static Products from(String[] inputProducts) {
-		return new Products(inputProducts);
 	}
 
 	public void isValidateDuplicated(List<Product> products) {
