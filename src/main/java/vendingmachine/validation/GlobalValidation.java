@@ -61,11 +61,7 @@ public class GlobalValidation {
 	// 상품 수량이 자연수가 아닐 경우 TODO
 	public static void validateProductAmount(String amount) {
 		validateCharIsInt(amount, ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);
-
-		if (Integer.parseInt(amount) == Constant.ZERO.getNumber()) {
-			throw new IllegalArgumentException(
-				ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR.getErrorMessage());
-		}
+		validateNumberIsZero(Integer.parseInt(amount), ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);
 	}
 
 	// 상품이 중복되어 들어오는 경우
@@ -82,11 +78,9 @@ public class GlobalValidation {
 		}
 	}
 
-	// 구매할 상품의 수량이 0인 경우 TODO
-	public static void validateProductAmountIsZero(Product product) {
-		if (product.getAmount() == Constant.ZERO.getNumber()) {
-			throw new IllegalArgumentException(ErrorMessage.PRODUCT_AMOUNT_IS_ZERO_ERROR.getErrorMessage());
-		}
+	// 구매할 상품의 수량이 0인 경우
+	public static void validateProductAmountIsZero(int productAmount) {
+		validateNumberIsZero(productAmount, ErrorMessage.PRODUCT_AMOUNT_IS_ZERO_ERROR);
 	}
 
 	private static void validateCharIsInt(String str, ErrorMessage errorMessage) {
@@ -105,6 +99,12 @@ public class GlobalValidation {
 
 	private static void validateNumberIsDivideTen(String number, ErrorMessage errorMessage) {
 		if (Integer.parseInt(number) % Constant.TEN.getNumber() != Constant.ZERO.getNumber()) {
+			throw new IllegalArgumentException(errorMessage.getErrorMessage());
+		}
+	}
+
+	private static void validateNumberIsZero(int number, ErrorMessage errorMessage) {
+		if (number == Constant.ZERO.getNumber()) {
 			throw new IllegalArgumentException(errorMessage.getErrorMessage());
 		}
 	}

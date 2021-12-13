@@ -55,7 +55,7 @@ public class VendingMachine {
 	}
 
 	private void subtractInputCost(Product product) {
-		GlobalValidation.validateProductAmountIsZero(product);
+		GlobalValidation.validateProductAmountIsZero(product.getAmount());
 
 		if (product.CanInputCostSubtract(inputCost)) {
 			inputCost -= product.getPrice();
