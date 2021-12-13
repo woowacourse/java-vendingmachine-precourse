@@ -23,7 +23,11 @@ public class Product {
         return price;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public boolean isSoldOut() {
-        return quantity == 0;
+        return quantity <= 0;
     }
 }

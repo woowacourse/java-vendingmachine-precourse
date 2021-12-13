@@ -6,8 +6,10 @@ import vendingmachine.utils.NumberValidator;
 import vendingmachine.view.OutputView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class VendingMachine {
 
@@ -55,6 +57,7 @@ public class VendingMachine {
     }
 
     public void buyProduct(String productName) {
+        validateExistProduct(productName);
         for (Product product : products) {
             if (product.isProduct(productName)) {
                 product.decreaseProduct();
@@ -75,6 +78,19 @@ public class VendingMachine {
         }
         OutputView.printRemainingAmount(getMoney());
         return false;
+    }
+
+    private void validateExistProduct(String productName) {
+        if (!isProductExistName(productName)) {
+            throw new IllegalArgumentException(Exception.PRODUCT_NO_NAME_EXCEPTION_MESSAGE);
+        }
+    }
+
+    private boolean isProductExistName(String productName) {
+        return products.stream()
+                .map(Product::getName)
+                .collect(Collectors.toList())
+                .contains(productName);
     }
 
     private void validateVendingMachineMoney(String price) {
