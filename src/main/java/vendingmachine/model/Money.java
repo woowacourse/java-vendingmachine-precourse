@@ -25,22 +25,6 @@ public class Money {
         setRandomCnt(total);
     }
 
-    public String getChangesString(int total) {
-        Map<Coin, Integer> changes = new LinkedHashMap<>();
-
-        for (Entry<Coin, Integer> entry : coins.entrySet()) {
-            Coin coin = entry.getKey();
-            int cnt = getMaxCntByTotal(coin.getAmount(), entry.getValue(), total);
-            changes.put(coin, cnt);
-            coins.put(coin, coins.get(coin) - cnt);
-            total -= cnt * entry.getValue();
-            if (total <= DEFALUT_TOTAL) {
-                break;
-            }
-        }
-        return getChangeString(changes);
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder(VENDINGMACHINE_COIN_SENTENCE);
@@ -54,7 +38,8 @@ public class Money {
         return stringBuilder.toString();
     }
 
-    private String getChangeString(Map<Coin, Integer> coins) {
+    public String getChangesString(int total) {
+        Map<Coin, Integer> coins = getChanges(total);
         StringBuilder stringBuilder = new StringBuilder(REST_MONEY_SENTENCE);
         for (Entry<Coin, Integer> coin : coins.entrySet()) {
             stringBuilder.append(LINE_BREAKER)
@@ -64,6 +49,22 @@ public class Money {
                     .append(REST_MONEY_UNIT);
         }
         return stringBuilder.toString();
+    }
+
+    private Map<Coin, Integer> getChanges(int total) {
+        Map<Coin, Integer> changes = new LinkedHashMap<>();
+
+        for (Entry<Coin, Integer> entry : coins.entrySet()) {
+            Coin coin = entry.getKey();
+            int cnt = getMaxCntByTotal(coin.getAmount(), entry.getValue(), total);
+            changes.put(coin, cnt);
+            coins.put(coin, coins.get(coin) - cnt);
+            total -= cnt * entry.getValue();
+            if (total <= DEFALUT_TOTAL) {
+                break;
+            }
+        }
+        return changes;
     }
 
     private int getMaxCntByTotal(int amount, int cnt, int total) {
@@ -92,5 +93,4 @@ public class Money {
             temp += random;
         }
     }
-
 }
