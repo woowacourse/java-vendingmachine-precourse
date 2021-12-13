@@ -15,6 +15,12 @@ public class CoinController {
 		this.inputView = inputView;
 	}
 
+	public Coins giveHoldingCoins() {
+		Coins coins = initializeCoins();
+		OutputView.printHoldingCoinStatus(coins);
+		return coins;
+	}
+
 	public Coins initializeCoins() {
 		try {
 			OutputView.printHoldingCashRequest();
