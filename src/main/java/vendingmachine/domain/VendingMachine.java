@@ -3,11 +3,9 @@ package vendingmachine.domain;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
-import vendingmachine.utils.Message;
-
 public class VendingMachine {
 
-	private static VendingMachine vendingMachine = null;
+
 
 	public int holdingMoney = 0;
 	public int inputMoney = 0;
@@ -16,13 +14,6 @@ public class VendingMachine {
 	public LinkedHashMap<Coin, Integer> changeCoins;
 
 	private Coins coins;
-
-	public VendingMachine vendingMachine() {
-		if (this.vendingMachine == null) {
-			VendingMachine vendingMachine = new VendingMachine();
-		}
-		return vendingMachine;
-	}
 
 	public LinkedHashMap<Coin, Integer> makeCoins() {
 		coins = new Coins(holdingMoney);

@@ -5,9 +5,19 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-	private final VendingMachine vendingMachine = new VendingMachine();
+	private static VendingMachine vendingMachine = null;
+
+	public static VendingMachine getVendingMachine(){
+		if (vendingMachine == null){
+			synchronized (VendingMachine.class) {
+				vendingMachine = new VendingMachine();
+			}
+		}
+		return vendingMachine;
+	}
 
 	public void Operate() {
+		getVendingMachine();
 		initialSetting(vendingMachine);
 		buy(vendingMachine);
 		returnChange(vendingMachine);
