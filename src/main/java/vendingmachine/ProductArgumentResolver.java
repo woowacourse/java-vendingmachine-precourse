@@ -22,7 +22,7 @@ public class ProductArgumentResolver {
 
     public List<Product> resolve() {
         return Arrays.stream(splitProducts(this.products))
-                .filter(this::isCovered)
+                .filter(this::isCoveredBrackets)
                 .map(this::splitProduct)
                 .map(split -> new Product(split[NAME_INDEX], toInt(PRICE_INDEX, split), toInt(QUANTITY_INDEX, split)))
                 .collect(Collectors.toList());
@@ -32,12 +32,15 @@ public class ProductArgumentResolver {
         return products.split(PRODUCTS_DELIMITER);
     }
 
-    private String[] splitProduct(String product) {
-        return product.substring(1, product.length() - 1).split(PRODUCT_DELIMITER);
+    private boolean isCoveredBrackets(String product) {
+        if (product.startsWith(START_PRODUCT) && product.endsWith(END_PRODUCT)) {
+            return true;
+        }
+        throw ErrorMessage.INVALID_BRACKETS.getException();
     }
 
-    private boolean isCovered(String product) {
-        return product.startsWith(START_PRODUCT) && product.endsWith(END_PRODUCT);
+    private String[] splitProduct(String product) {
+        return product.substring(1, product.length() - 1).split(PRODUCT_DELIMITER);
     }
 
     private int toInt(int priceIndex, String[] split) {

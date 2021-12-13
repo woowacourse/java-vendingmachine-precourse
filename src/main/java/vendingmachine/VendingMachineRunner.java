@@ -27,9 +27,14 @@ public class VendingMachineRunner implements Runnable {
 
     private VendingMachine addProducts(VendingMachine vendingMachine) {
         while (true) {
-            ConsolePrinter.print(Message.INPUT_PRODUCT.getMessage());
-            vendingMachine.addAll(new ProductArgumentResolver(input.inputString()).resolve());
-            return vendingMachine;
+            try {
+                ConsolePrinter.print(Message.INPUT_PRODUCT.getMessage());
+                vendingMachine.addAll(new ProductArgumentResolver(input.inputString()).resolve());
+                return vendingMachine;
+            } catch (IllegalArgumentException exception) {
+                ConsolePrinter.print(exception.getMessage());
+            }
+
         }
     }
 
