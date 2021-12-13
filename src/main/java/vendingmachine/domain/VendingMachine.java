@@ -14,6 +14,15 @@ public class VendingMachine {
 		insertMoney = insertMoney.plus(money);
 	}
 
+	public void buy(String productName) {
+		if (isBuy(productName)) {
+			Product product = products.findForName(productName);
+			product.buy();
+			insertMoney = insertMoney.subtract(product.getPrice());
+		}
+	}
+
+
 	public boolean isBuy() {
 		if (products.soldOut()) {
 			return false;

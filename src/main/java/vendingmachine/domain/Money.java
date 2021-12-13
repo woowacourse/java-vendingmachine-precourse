@@ -30,4 +30,8 @@ public class Money implements Comparable<Money>{
 	public Money plus(Money money) {
 		return new Money(amount + money.amount);
 	}
+
+	public Money subtract(Money money) {
+		return new Money(amount - money.amount);
+	}
 }

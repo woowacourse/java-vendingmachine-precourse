@@ -78,4 +78,8 @@ public class Product implements Comparable<Product>{
 		}
 		return true;
 	}
+
+	public void buy() {
+		amount -= 1;
+	}
 }
