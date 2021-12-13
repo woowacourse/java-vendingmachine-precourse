@@ -7,6 +7,10 @@ import java.util.HashMap;
 public class ProductTable {
     private final HashMap<String, Product> productTable = new HashMap<>();
 
+    public void addProduct(Product newProduct) {
+        productTable.put(newProduct.getName(), newProduct);
+    }
+
     public void addProduct(String name, int price, int stock) {
         checkExists(name, false);
         productTable.put(name, new Product(name, price, stock));
@@ -55,6 +59,21 @@ public class ProductTable {
 
     public void clearTable() {
         productTable.clear();
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder("ProductTable {\n");
+        for (Product product: productTable.values()) {
+            sb.append("\t[");
+            sb.append(product.getName());
+            sb.append(",");
+            sb.append(product.getPrice());
+            sb.append(",");
+            sb.append(product.getStock());
+            sb.append("]\n");
+        }
+        sb.append("}");
+        return sb.toString();
     }
 
     private void checkExists(String productName, boolean bool) {

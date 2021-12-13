@@ -3,7 +3,6 @@ package vendingmachine.model;
 import vendingmachine.validator.ProductValidator;
 
 public class Product implements Comparable<Product> {
-
     private String name;
     private int price;
     private int stock;
@@ -21,6 +20,10 @@ public class Product implements Comparable<Product> {
 
     public int getPrice() {
         return price;
+    }
+
+    public int getStock() {
+        return stock;
     }
 
     public void sell() {
