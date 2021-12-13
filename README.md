@@ -194,6 +194,14 @@
 - canPurchase() : 현재 남은 투입금액으로 구매 가능한 상품인지 확인
 - purchase()  : 구매
 
+### Coin
+
+- getAmountList() : 동전값들 모두 반환
+- getCoinByAmount() : 동전값을 통해 해당 동전 반환
+- getAmount() : 동전 값 반환
+- calculateTotalAmount() : 해당 동전과 해당 개수를 이용하여 줄 수 있는 최대 금액
+- printAmount() : 동전값 출력을 위한 양식으로 변환
+
 ### Coins
 
 - Map<Coin, Integer> holdingCoins : 자판기가 보유하고 있는 동전
