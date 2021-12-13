@@ -21,6 +21,10 @@ public class ProcessUserBuyGoods {
         userMoney = ProcessPrepareUserMoney.toIntegerUserMoney();
     }
 
+    public static boolean checkCanBuy(GoodsController goodsController) {
+        return goodsController.isMoneyMoreThanCheapest(userMoney) || goodsController.isQuantityMoreThanOne();
+    }
+
     public static void inputGoodsName() {
         goods = User.inputGoods();
         UserGoodsNameValidation.checkGoodsNameValidation(goods);
