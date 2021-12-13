@@ -23,7 +23,7 @@ public class VendingMachineController {
 
 	public void setVendingMachineCoinCounter() {
 		try {
-			String amount = InputView.getVendingMachineAmount();
+			int amount = InputView.getVendingMachineAmount();
 			this.coinCounter = new CoinCounter(Coin.getCoinCounter(amount));
 			OutputView.printCoinCounter(this.coinCounter);
 		} catch (IllegalArgumentException exception) {

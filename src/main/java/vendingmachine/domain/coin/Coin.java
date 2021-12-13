@@ -41,11 +41,11 @@ public enum Coin {
 			.collect(Collectors.toList());
 	}
 
-	public static Map<Integer, Integer> getCoinCounter(String amount) {
+	public static Map<Integer, Integer> getCoinCounter(int amount) {
 		AmountValidator.checkVendingMachineAmount(amount);
 		Map<Integer, Integer> coinCounter = new LinkedHashMap<>();
 		initializeCoinCounter(coinCounter);
-		setCoinCounter(coinCounter, Integer.parseInt(amount));
+		setCoinCounter(coinCounter, amount);
 		return coinCounter;
 	}
 

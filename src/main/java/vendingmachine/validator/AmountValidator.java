@@ -5,14 +5,13 @@ import static vendingmachine.constant.ErrorMessage.*;
 import vendingmachine.domain.coin.Coin;
 
 public class AmountValidator {
-	public static void checkUserAmount(String userAmount) {
+	public static void checkUserAmount(int userAmount) {
 		checkVendingMachineAmount(userAmount);
 	}
 
-	public static void checkVendingMachineAmount(String vendingMachineAmount) {
-		int amount = toInteger(vendingMachineAmount);
-		checkAmountBiggerThanCertainCoinAmount(Coin.getSmallestCoinAmount(), amount);
-		checkAmountDivisibleBySmallestCoinAmount(amount);
+	public static void checkVendingMachineAmount(int vendingMachineAmount) {
+		checkAmountBiggerThanCertainCoinAmount(Coin.getSmallestCoinAmount(), vendingMachineAmount);
+		checkAmountDivisibleBySmallestCoinAmount(vendingMachineAmount);
 	}
 
 	public static void checkProductAmount(int productAmount) {

@@ -8,9 +8,9 @@ import vendingmachine.validator.AmountValidator;
 public class User {
 	private int amount;
 
-	public User(String amount) {
+	public User(int amount) {
 		AmountValidator.checkUserAmount(amount);
-		this.amount = Integer.parseInt(amount);
+		this.amount = amount;
 	}
 
 	@Override
