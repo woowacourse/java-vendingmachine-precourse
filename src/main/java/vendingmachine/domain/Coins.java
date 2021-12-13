@@ -39,4 +39,14 @@ public class Coins {
 		Coin coinValue = Coin.matchValue(coin);
 		coins.put(coinValue, coins.get(coinValue) + 1);
 	}
+
+	public LinkedHashMap<Integer, Integer> getCoinCount() {
+		LinkedHashMap<Integer, Integer> coinCount = new LinkedHashMap<>();
+
+		for (Coin coin : Coin.values()) {
+			coinCount.put(coin.getAmount(), coins.get(coin));
+		}
+
+		return coinCount;
+	}
 }
