@@ -12,4 +12,25 @@ public class ProductRepository {
         productMap.keySet().forEach(k -> productInfo.put(k, productMap.get(k)));
     }
 
+    public boolean isExist(String name) {
+        if (!productInfo.containsKey(name)) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean hasEnoughMoney(String name, int change) {
+        if (change < productInfo.get(name).getPrice()) {
+            return false;
+        }
+        return true;
+    }
+
+    public boolean hasEnoughQuantity(String name) {
+        if (productInfo.get(name).getQuantity() > 0) {
+            return true;
+        }
+        return false;
+    }
+
 }

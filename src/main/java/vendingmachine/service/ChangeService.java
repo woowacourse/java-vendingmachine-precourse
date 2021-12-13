@@ -24,4 +24,8 @@ public class ChangeService {
         }
     }
 
+    public static int getCurrentChange() {
+        return changeRepository.getChange();
+    }
+
 }

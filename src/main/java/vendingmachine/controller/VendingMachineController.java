@@ -37,8 +37,20 @@ public class VendingMachineController {
         changeService.getInitUserChange();
     }
 
-    public void orderProduct() {
-        printCurrentChange(changeService.getCurrentChange());
-        inputOrderMessage();
+    public void startSale() {
+        getUserOrder(ChangeService.getCurrentChange());
+    }
+
+    private String getUserOrder(int change) {
+        while (true) {
+            try {
+                printCurrentChange(change);
+                String order = inputOrderMessage();
+                ProductService.isValidOrderName(order, change);
+                return order;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
     }
 }

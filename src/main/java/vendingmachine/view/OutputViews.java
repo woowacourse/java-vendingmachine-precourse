@@ -7,6 +7,7 @@ import java.util.Map;
 public class OutputViews {
     public static final String PRINT_MACHINE_COIN_MESSAGE = "\n자판기가 보유한 동전";
 
+    public static final String INSERT_MONEY = "\n투입 금액: ";
     public static final String WON = "원";
     public static final String COIN_PRINT_SEPORATOR = " - ";
     public static final String COIN_PRINT_UNIT = "개";
@@ -18,4 +19,7 @@ public class OutputViews {
         }
     }
 
+    public static void printCurrentChange(int change) {
+        System.out.println(INSERT_MONEY + change + WON);
+    }
 }
