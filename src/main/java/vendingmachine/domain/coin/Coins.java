@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.machine.Balance;
 
 public class Coins {
 	private static final int COIN_AMOUNT_ZERO = 0;
@@ -45,6 +46,32 @@ public class Coins {
 		}
 
 		return initCoins;
+	}
+
+	public Coins calculateReturnCoins(Balance balance) {
+		Map<Coin, Integer> returnCoins = new LinkedHashMap<>();
+		int currentBalance = balance.getBalance();
+
+		for (Coin coin : coins.keySet()) {
+			int coinValue = getCoinValue(coin, currentBalance);
+			currentBalance -= coin.getAmount() * coinValue;
+
+			if (coinValue != COIN_AMOUNT_ZERO) {
+				returnCoins.put(coin, coinValue);
+			}
+		}
+
+		return new Coins(returnCoins);
+	}
+
+	private int getCoinValue(Coin coin, int currentBalance) {
+		final int amount = coin.getAmount();
+		int calculateValue = currentBalance / amount;
+		if (calculateValue > coins.get(coin)) {
+			calculateValue = coins.get(coin);
+		}
+
+		return calculateValue;
 	}
 
 	public Map<Coin, Integer> getCoins() {
