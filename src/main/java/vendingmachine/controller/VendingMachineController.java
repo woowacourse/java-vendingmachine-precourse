@@ -23,7 +23,6 @@ public class VendingMachineController {
         OutputView.showCoins(money.showCoins());
         setupItems();
         setupInputMoney();
-        OutputView.showInputMoney(money);
     }
 
     private void setupMoney() {
@@ -45,13 +44,18 @@ public class VendingMachineController {
     }
 
     private void sellItems() {
+        OutputView.showInputMoney(money);
         if (noMoneyOrItem()) {
             return;
         }
         BuyItemName buyItemName = InputView.getBuyItemName();
+        keepSelling(buyItemName);
+    }
 
+    private void keepSelling(BuyItemName buyItemName) {
         while (items.isSellable(buyItemName, money)) {
             items.sell(buyItemName, money);
+            OutputView.showInputMoney(money);
             if (noMoneyOrItem()) {
                 return;
             }
