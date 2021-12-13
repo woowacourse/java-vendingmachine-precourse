@@ -76,6 +76,6 @@ public class Products {
         return products.stream()
                 .mapToInt(Product::getPrice)
                 .min()
-                .orElse(0);
+                .orElse(DEFAULT_VALUE);
     }
 }

@@ -60,7 +60,7 @@ public class VendingMachine {
         coins.keySet().forEach(coin -> {
             int changesCount = userInsertAmount / coin.getAmount();
             changesCount = Math.min(changesCount, coins.get(coin));
-            if (changesCount > 0) {
+            if (changesCount > DEFAULT_VALUE) {
                 changes.put(coin, changesCount);
             }
             userInsertAmount -= changesCount * coin.getAmount();
