@@ -18,6 +18,10 @@ public class Product {
         quantity = Integer.parseInt(list.get(QUANTITY_INDEX));
     }
 
+    public void popProduct() {
+        quantity -= REDUCE_BY_ONE;
+    }
+
     public String getName() {
         return name;
     }
@@ -28,10 +32,5 @@ public class Product {
 
     public int getQuantity() {
         return quantity;
-    }
-
-    public int popProduct() {
-        quantity -= REDUCE_BY_ONE;
-        return price;
     }
 }

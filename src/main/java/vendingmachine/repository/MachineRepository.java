@@ -2,7 +2,6 @@ package vendingmachine.repository;
 
 
 import vendingmachine.model.Coin;
-import vendingmachine.model.Products;
 import vendingmachine.model.VendingMachine;
 
 import java.util.Map;
@@ -13,10 +12,6 @@ public class MachineRepository {
     public static void saveInitialAmount(String amount) {
         int initialAmount = Integer.parseInt(amount);
         vendingMachine.setInitialAmount(initialAmount);
-    }
-
-    public static void saveProducts(Products products) {
-        vendingMachine.setProducts(products);
     }
 
     public static void saveUserInsertAmount(String userAmount) {

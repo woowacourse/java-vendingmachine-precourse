@@ -25,20 +25,18 @@ public class Products {
         for (String product : products.split(SEMI_COLON)) {
             processedProducts.add(Arrays.asList(product.substring(START_INDEX, product.length() - START_INDEX).split(COMMA)));
         }
-
         return processedProducts;
     }
 
+    public Product findByName(String productName) {
+        return products.stream()
+                .filter(p -> p.getName().equals(productName))
+                .findAny()
+                .orElse(null);
+    }
 
     public boolean existProductName(String productName) {
         return products.stream().anyMatch(product -> product.getName().equals(productName));
-    }
-
-    public int getCheapest() {
-        return products.stream()
-                .mapToInt(Product::getPrice)
-                .min()
-                .orElse(0);
     }
 
     public boolean isQuantityEnough(String product) {
@@ -49,23 +47,10 @@ public class Products {
 
     }
 
-    public boolean isAffordable(int amount, String product) {
-        return amount >= products.stream()
-                .filter(p -> p.getName().equals(product))
-                .mapToInt(Product::getPrice)
-                .findAny().orElse(DEFAULT_VALUE);
-    }
-
-    public int reduceQuantity(String productName) {
-        return Objects.requireNonNull(products.stream()
+    public void reduceQuantity(String productName) {
+        Objects.requireNonNull(products.stream()
                 .filter(p -> p.getName().equals(productName))
                 .findAny().orElse(null)).popProduct();
-    }
-
-    public int getSize() {
-        return products.stream()
-                .mapToInt(Product::getQuantity)
-                .sum();
     }
 
     public boolean hasAnyProduct() {
@@ -87,10 +72,10 @@ public class Products {
                 .findAny().orElse(DEFAULT_VALUE);
     }
 
-    public Product findByName(String productName) {
+    public int getCheapest() {
         return products.stream()
-                .filter(p -> p.getName().equals(productName))
-                .findAny()
-                .orElse(null);
+                .mapToInt(Product::getPrice)
+                .min()
+                .orElse(0);
     }
 }

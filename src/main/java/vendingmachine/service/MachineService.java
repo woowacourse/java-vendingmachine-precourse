@@ -1,8 +1,6 @@
 package vendingmachine.service;
 
 import vendingmachine.model.Coin;
-import vendingmachine.model.Product;
-import vendingmachine.model.Products;
 import vendingmachine.repository.MachineRepository;
 import vendingmachine.repository.ProductsRepository;
 
@@ -23,8 +21,6 @@ public class MachineService {
 
     public void saveProducts(String inputProducts) {
         ProductsRepository.createProducts(inputProducts);
-        Products products = ProductsRepository.getProducts();
-        MachineRepository.saveProducts(products);
     }
 
     public void saveUserInsertAmount(String userAmount) {
@@ -35,8 +31,8 @@ public class MachineService {
         checkProductName(productName);
         checkProductQuantity(productName);
         checkUserAmount(productName);
+        int productPrice = ProductsRepository.getPriceByProductName(productName);
         ProductsRepository.popProduct(productName);
-        int productPrice = ProductsRepository.findProductByName(productName).getPrice();
         MachineRepository.reduceUserAmount(productPrice);
     }
 
@@ -45,6 +41,7 @@ public class MachineService {
             throw new IllegalArgumentException(ERROR_MESSAGE + PRODUCT_NOT_EXIST + RETRY_MESSAGE);
         }
     }
+
     private void checkProductQuantity(String productName) {
         if (!ProductsRepository.checkProductQuantity(productName)) {
             throw new IllegalArgumentException(ERROR_MESSAGE + NOT_ENOUGH_QUANTITY_MESSAGE + RETRY_MESSAGE);
@@ -57,14 +54,6 @@ public class MachineService {
         if (userAmount < productPrice) {
             throw new IllegalArgumentException(ERROR_MESSAGE + NOT_ENOUGH_MONEY_MESSAGE + TRY_AGAIN_MESSAGE);
         }
-    }
-
-    public Map<Coin, Integer> getCoins() {
-        return MachineRepository.getCoins();
-    }
-
-    public int getUserInsertAmount() {
-        return MachineRepository.getUserInsertAmount();
     }
 
     public boolean shouldContinue() {
@@ -82,6 +71,14 @@ public class MachineService {
     private boolean canBuySomething() {
         int amount = MachineRepository.getUserInsertAmount();
         return ProductsRepository.existProductToBuy(amount) > DEFAULT_VALUE;
+    }
+
+    public int getUserInsertAmount() {
+        return MachineRepository.getUserInsertAmount();
+    }
+
+    public Map<Coin, Integer> getCoins() {
+        return MachineRepository.getCoins();
     }
 
     public Map<Coin, Integer> getChanges() {

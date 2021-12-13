@@ -32,6 +32,7 @@ public class MachineController {
     }
 
     public void endMachine() {
+        OutputView.printRemainingInsertAmount(machineService.getUserInsertAmount());
         OutputView.printChanges(machineService.getChanges());
     }
 
