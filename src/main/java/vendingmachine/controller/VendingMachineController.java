@@ -1,5 +1,9 @@
 package vendingmachine.controller;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
+import vendingmachine.model.Coin;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
@@ -12,33 +16,20 @@ public class VendingMachineController {
 	Validator validator = new Validator();
 
 	public void runMachine() {
-		//금액 입력받기
 		String machineMoney = enterMachineMoney();
-		//금액 int 로 변경
 		int convertedMachineMoney = Utils.moneyConverter(machineMoney);
-		//자판기에게 금액 셋팅
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.initOwnMoney(convertedMachineMoney);
-		//동전 생성
 		vendingMachine.generateCoin();
-		//동전 출력
-		calculateCoin(vendingMachine);
-		//상품명 입력받기
+		printCurrentCoin(vendingMachine);
 		String products = enterMachineProduct();
-		//상품 생성
 		vendingMachine.generateProduct(products);
-		//투입 금액 입력받기
 		String insertMoney = enterInsertMoney();
-		//금액 int 로 변경
 		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
-		//금액 셋팅
 		vendingMachine.initInputMoney(convertedInsertMoney);
-		//물건 구매하기
 		purchaseProduct(vendingMachine);
 		//TODO 잔돈 계산하는 로직 추가
-		//자판기 종료시 잔돈 계산하기
-		calculateCoin(vendingMachine);
-
+		printRemainCoin(vendingMachine);
 	}
 
 	private void purchaseProduct(VendingMachine vendingMachine) {
@@ -52,13 +43,55 @@ public class VendingMachineController {
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
-
 		}
 	}
 
-	private void calculateCoin(VendingMachine vendingMachine) {
+	private void printCurrentCoin(VendingMachine vendingMachine) {
+		System.out.println("자판기가 보유한 동전");
 		outputView.printCoinChange(vendingMachine.getCoinMap());
 	}
+
+	private void printRemainCoin(VendingMachine vendingMachine) {
+		Map<Coin, Integer> remainCoin = calculateRemainCoin(vendingMachine.getInputMoney(),
+			vendingMachine.getOwnMoney(),
+			vendingMachine.getCoinMap());
+		System.out.println("잔돈");
+		outputView.printCoinChange(remainCoin);
+	}
+
+	private Map<Coin, Integer> calculateRemainCoin(int restMoney, int ownMoney, Map<Coin, Integer> coinMap) {
+		Map<Coin, Integer> returnCoinMap = new LinkedHashMap<>();
+		Map<Coin, Integer> returnCoinMap2 = new LinkedHashMap<>();
+
+		coinMap.forEach((k, v) -> {
+			if (v != 0) {
+				returnCoinMap2.put(k, v);
+			}
+		});
+
+		if (restMoney <= ownMoney) {
+			return returnCoinMap2;
+		}
+
+
+		for (Coin coin : coinMap.keySet()) {
+			int count = ownMoney/coin.getAmount();
+			if (count < coinMap.get(coin)) {
+				returnCoinMap.put(coin, count);
+				ownMoney -= (coin.getAmount() * count);
+				continue;
+			}
+			returnCoinMap.put(coin, coinMap.get(coin));
+			ownMoney -= (coin.getAmount() * coinMap.get(coin));
+
+			if (ownMoney == 0) {
+				break;
+			}
+		}
+
+		return returnCoinMap;
+	}
+
 
 	private String enterMachineMoney() {
 		String machineMoney = inputView.enterMachineMoney();

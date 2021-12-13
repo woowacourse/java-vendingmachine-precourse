@@ -19,6 +19,10 @@ public class VendingMachine {
 		return this.inputMoney;
 	}
 
+	public int getOwnMoney() {
+		return this.ownMoney;
+	}
+
 	public Map<Coin, Integer> getCoinMap() {
 		return this.coinMap;
 	}
@@ -70,7 +74,7 @@ public class VendingMachine {
 		Product product = productList.stream()
 			.filter(it -> it.getName().equals(productName))
 			.findFirst()
-			.map(Product::purchaseProduct) //TODO price 0 됐을 때 상품 리스트에서 제거하는거 하기
+			.map(Product::purchaseProduct)
 			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품 이름입니다."));
 
 		removeProduct();
