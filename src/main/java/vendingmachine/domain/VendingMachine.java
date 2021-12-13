@@ -7,8 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static vendingmachine.domain.Product.findMinPrice;
-import static vendingmachine.domain.Product.isZeroQuantity;
+import static vendingmachine.domain.Product.*;
 
 
 public class VendingMachine {

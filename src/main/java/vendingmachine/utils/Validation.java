@@ -1,20 +1,44 @@
 package vendingmachine.utils;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
+
 
 public class Validation {
     public void vendingMachinePriceValidation(String input) {
+        checkInputNull(input);
         inputIsNumeric(input);
         inputIsPositive(input);
     }
 
-    public void productPriceValidation(String input) {
+    public void productValidation(String input) {
+        checkInputNull(input);
         List<String> inputList = Arrays.stream(input.split(";"))
                 .flatMap(product -> Arrays.stream(product.split(",")))
                 .collect(Collectors.toList());
+        checkDuplicateProducts(inputList);
         formIsCorrect(inputList);
+    }
+
+    private void checkDuplicateProducts(List<String> inputList){
+        List<String> nameList = new ArrayList<>();
+        for(int i = 0; i < inputList.size(); i+=3){
+            nameList.add(inputList.get(i));
+        }
+        Set<String> removeDuplicateName = nameList.stream()
+                .collect(Collectors.toSet());
+        if(nameList.size() != removeDuplicateName.size()){
+            throw new IllegalArgumentException(Message.ERROR + Message.DUPLICATE_PRODUCT);
+        }
+    }
+
+    private void checkInputNull(String input){
+        if(input.isEmpty()){
+            throw new IllegalArgumentException(Message.ERROR + Message.NULL_INPUT);
+        }
     }
 
     private void inputIsNumeric(String input) {

@@ -47,7 +47,7 @@ public class VendingMachineValidation {
             System.out.println(Message.PRODUCTS_INPUT);
             String input = InputView.input();
             try {
-                validation.productPriceValidation(input);
+                validation.productValidation(input);
                 return Arrays.stream(input.split(SEPARATOR_SEMICOLON))
                         .map(product -> product.replaceAll("[\\[\\]]", ""))
                         .flatMap(product -> Arrays.stream(product.split(SEPARATOR_COMMA)))

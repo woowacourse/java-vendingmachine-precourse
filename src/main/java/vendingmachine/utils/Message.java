@@ -7,6 +7,8 @@ public class Message {
     public static String AMOUNT_INPUT = "투입 금액을 입력해 주세요.";
     public static String PRODUCT_NAME_INPUT = "구매할 상품명을 입력하세요";
     public static String BALANCE = "투입 금액: %s원\n";
+    public static String NULL_INPUT = "입력은 비어있을 수 없습니다";
+    public static String DUPLICATE_PRODUCT = "중복된 상품입니다";
 
     public static String ERROR = "[ERROR]";
     public static String IS_NOT_NUMERIC = "입력값은 숫자여야 합니다.";
