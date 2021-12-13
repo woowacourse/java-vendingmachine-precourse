@@ -54,15 +54,6 @@ public class Money {
         return stringBuilder.toString();
     }
 
-
-    public int getTotalMoney() {
-        int total = DEFALUT_TOTAL;
-        for (Entry<Coin, Integer> entry : coins.entrySet()) {
-            total += entry.getKey().getAmount() * entry.getValue();
-        }
-        return total;
-    }
-
     private String getChangeString(Map<Coin, Integer> coins) {
         StringBuilder stringBuilder = new StringBuilder(REST_MONEY_SENTENCE);
         for (Entry<Coin, Integer> coin : coins.entrySet()) {
