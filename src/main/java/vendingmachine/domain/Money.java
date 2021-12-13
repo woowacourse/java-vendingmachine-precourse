@@ -17,4 +17,8 @@ public class Money {
 			throw new IllegalArgumentException(IS_DIVIDE_BY_TEN_ERROR_MESSAGE);
 		}
 	}
+
+	public int getAmount() {
+		return amount;
+	}
 }
