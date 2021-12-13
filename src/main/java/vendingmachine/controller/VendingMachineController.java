@@ -17,11 +17,12 @@ public class VendingMachineController {
 		OutputView.printBuyItem();
 		String s = InputView.inputText();
 		Validator.validateItemName(s);
-		if(vendingMachine.haveAffordableItem()){
+		if(!vendingMachine.haveAffordableItem()){
 			// 잔돈 반환 기능
 			return;
 		}
 		// 구매기능
+		vendingMachine.buy(s);
 	}
 
 	private void inputAmount(VendingMachine vendingMachine) {

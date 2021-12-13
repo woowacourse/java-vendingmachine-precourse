@@ -9,4 +9,8 @@ public class ErrorConst {
 	public static String ITEM_OUT_OF_FORMAT = "[ERROR] 상품은 지정된 형식으로 넣어야합니다.";
 	public static String ITEM_PRICE_OVER_ONE_HUNDRED = "[ERROR] 상품의 가격은 100원 이상이여야 합니다.";
 	public static String DUP_ITEM_NAME = "[ERROR] 상품명은 중복되면 안됩니다.";
+
+	public static String HAVE_NO_THIS_ITEM = "[ERROR] 입력한 상품은 존재하지 않습니다.";
+	public static String HAVE_NO_STOCK = "[ERROR] 해당 상품의 재고가 존재하지 않습니다.";
+	public static String HAVE_NO_AFFORDABLE_MONEY = "[ERROR] 해당 상품을 사기엔 투입 금액이 부족합니다.";
 }

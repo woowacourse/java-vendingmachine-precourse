@@ -31,4 +31,13 @@ public class ItemList {
 
 		return !affordableItems.isEmpty();
 	}
+
+	public Item getItem(String itemName) {
+		return items.stream().filter(item -> item.getName().equals(itemName))
+			.findFirst().orElseThrow(() -> new IllegalArgumentException(ErrorConst.HAVE_NO_THIS_ITEM));
+	}
+
+	public void buy() {
+
+	}
 }

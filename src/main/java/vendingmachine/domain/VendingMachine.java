@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.List;
 
+import vendingmachine.constant.ErrorConst;
 import vendingmachine.util.Validator;
 
 public class VendingMachine {
@@ -32,5 +33,27 @@ public class VendingMachine {
 
 	public int getAmount() {
 		return amount;
+	}
+
+	public void buy(String itemName) {
+		Item item = itemList.getItem(itemName);
+
+		checkCanBuy(item);
+		doPayment(item);
+	}
+
+	private void checkCanBuy(Item item) {
+		if (!item.isAffordablePrice(amount)) {
+			throw new IllegalArgumentException(ErrorConst.HAVE_NO_AFFORDABLE_MONEY);
+		}
+		if (!item.isRemain()) {
+			throw new IllegalArgumentException(ErrorConst.HAVE_NO_STOCK);
+		}
+	}
+
+	// 반드시 checkCanBuy 이후에 실행해야한다.
+	private void doPayment(Item item) {
+		item.sell();
+		amount -= item.getPrice();
 	}
 }

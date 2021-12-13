@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.constant.ErrorConst;
+
 public class Item {
 	private String name;
 	private int price;
@@ -15,12 +17,16 @@ public class Item {
 		return name;
 	}
 
-	public boolean isRemain(){
+	public boolean isRemain() {
 		return num > 0;
 	}
 
 	public int getPrice() {
 		return price;
+	}
+
+	public boolean isAffordablePrice(int amount) {
+		return price <= amount;
 	}
 
 	@Override
@@ -30,5 +36,10 @@ public class Item {
 			", price=" + price +
 			", num=" + num +
 			'}';
+	}
+
+	public void sell() {
+		if(isRemain())
+			num -= 1;
 	}
 }
