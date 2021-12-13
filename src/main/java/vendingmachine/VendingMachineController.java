@@ -29,16 +29,17 @@ public class VendingMachineController {
 	}
 
 	public void buy(VendingMachine vendingMachine){
-		String buyItem = InputView.buyItemInput();
-		vendingMachine.stockDeduct(buyItem);
-		vendingMachine.inputMoneyDeduct(buyItem);
-		OutputView.printBalance(vendingMachine.getInputMoney());
+		while (vendingMachine.isAvailableKeepBuyingAboutPrice() && vendingMachine.isAvailableKeepBuyingAboutStock()) {
+			String buyItem = InputView.buyItemInput();
+			vendingMachine.stockDeduct(buyItem);
+			vendingMachine.inputMoneyDeduct(buyItem);
+			OutputView.printBalance(vendingMachine.getInputMoney());
+		}
 	}
 
 	public void returnChange(VendingMachine vendingMachine){
 		vendingMachine.calculateChangeCoins();
 		OutputView.printChangeCoins(vendingMachine.changeCoins);
 	}
-
 
 }

@@ -45,6 +45,26 @@ public class VendingMachine {
 		}
 	}
 
+	public boolean isAvailableKeepBuyingAboutPrice(){
+		boolean isAvailableKeepBuyingAboutPrice = false;
+		for (int i = 0; i < holdingItem.size(); i++){
+			if (holdingItem.get(i).getPrice() <= inputMoney){
+				isAvailableKeepBuyingAboutPrice = true;
+			}
+		}
+		return isAvailableKeepBuyingAboutPrice;
+	}
+
+	public boolean isAvailableKeepBuyingAboutStock() {
+		boolean isAvailableKeepBuyingAboutStock = false;
+		for(int i = 0; i< holdingItem.size(); i++){
+			if(holdingItem.get(i).getStock() > 0){
+				isAvailableKeepBuyingAboutStock = true;
+			}
+		}
+		return isAvailableKeepBuyingAboutStock;
+	}
+
 	public void calculateChangeCoins() {
 		Changes changes = new Changes();
 		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);

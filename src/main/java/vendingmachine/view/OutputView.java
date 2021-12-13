@@ -37,6 +37,5 @@ public class OutputView {
 			System.out.println(key.getAmount() + WON_FORMAT + value + EA_FORMAT);
 		}
 		System.out.println();
-
 	}
 }
