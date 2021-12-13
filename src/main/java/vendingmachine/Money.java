@@ -10,11 +10,18 @@ public class Money implements Comparable<Money> {
 
 	private void checkValidation(int amount) {
 		checkLowerLimit(amount);
+		checkDivideBy10(amount);
 	}
 
 	private void checkLowerLimit(int amount) {
 		if (amount < 0) {
 			throw new IllegalArgumentException("[ERROR] 금액은 음수일 수 없습니다.");
+		}
+	}
+
+	private void checkDivideBy10(int amount) {
+		if (amount % 10 != 0) {
+			throw new IllegalArgumentException("[ERROR] 금액은 10으로 나누어 떨어져야 합니다.");
 		}
 	}
 
