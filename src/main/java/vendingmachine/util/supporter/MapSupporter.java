@@ -1,4 +1,4 @@
-package vendingmachine.util;
+package vendingmachine.util.supporter;
 
 import java.util.SortedMap;
 

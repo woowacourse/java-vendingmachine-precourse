@@ -1,4 +1,4 @@
-package vendingmachine.util;
+package vendingmachine.util.validator;
 
 public class Validator {
 	public static void isEmpty(String input) {

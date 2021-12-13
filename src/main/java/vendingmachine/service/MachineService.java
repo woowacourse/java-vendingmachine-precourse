@@ -7,7 +7,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
 import vendingmachine.domain.Machine;
 import vendingmachine.repository.MachineRepository;
-import vendingmachine.util.CoinGenerator;
+import vendingmachine.util.generator.CoinGenerator;
 
 public class MachineService {
 	MachineRepository machineRepository = new MachineRepository();

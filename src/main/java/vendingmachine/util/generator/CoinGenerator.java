@@ -1,4 +1,4 @@
-package vendingmachine.util;
+package vendingmachine.util.generator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,6 +8,7 @@ import java.util.TreeMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
+import vendingmachine.util.supporter.MapSupporter;
 
 public class CoinGenerator {
 	public static SortedMap<Coin, Integer> generate(List<Integer> coinValues, Integer totalCoin) {

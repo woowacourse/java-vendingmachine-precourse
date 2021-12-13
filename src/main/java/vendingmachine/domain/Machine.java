@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import vendingmachine.util.MapSupporter;
+import vendingmachine.util.supporter.MapSupporter;
 
 public class Machine {
 	private final SortedMap<Coin, Integer> coins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());

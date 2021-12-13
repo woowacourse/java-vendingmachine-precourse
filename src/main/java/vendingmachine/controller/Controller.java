@@ -5,8 +5,8 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Item;
 import vendingmachine.service.MachineService;
-import vendingmachine.util.ItemParser;
-import vendingmachine.util.Parser;
+import vendingmachine.util.parser.ItemParser;
+import vendingmachine.util.parser.Parser;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 

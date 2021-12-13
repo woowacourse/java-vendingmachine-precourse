@@ -1,9 +1,10 @@
-package vendingmachine.util;
+package vendingmachine.util.parser;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Item;
+import vendingmachine.util.validator.ItemValidator;
 
 public class ItemParser extends Parser {
 	private static final String SEMI_COLON = ";";

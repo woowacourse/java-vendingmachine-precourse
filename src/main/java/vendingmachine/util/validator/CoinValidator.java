@@ -1,4 +1,4 @@
-package vendingmachine.util;
+package vendingmachine.util.validator;
 
 public class CoinValidator extends Validator {
 	private static final int DIVISIBLE_VALUE = 10;

@@ -1,4 +1,6 @@
-package vendingmachine.util;
+package vendingmachine.util.validator;
+
+import vendingmachine.util.parser.ItemParser;
 
 public class ItemValidator extends Validator {
 	private static final String SEMI_COLON = ";";
