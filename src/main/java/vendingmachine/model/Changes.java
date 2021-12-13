@@ -8,11 +8,9 @@ import vendingmachine.service.SettingMoneyService;
 
 public class Changes {
 	private List<Integer> coinList;
-	private int changes;
 
 	public Changes(String initCoin) {
-		changes = SettingMoneyService.setMoney(initCoin);
-		coinList = MakingRandomCoinService.getRandomCoinList(changes);
+		coinList = MakingRandomCoinService.getRandomCoinList(SettingMoneyService.setMoney(initCoin));
 	}
 
 	public int countCoin(Coin coin) {
@@ -22,7 +20,6 @@ public class Changes {
 	public int give(Coin coin, int remainMoney) {
 		int givingCoin = CountingCoinForGivingChangesService.countCoinForChanges(coinList.get(coin.ordinal()), coin,
 			remainMoney);
-		changes -= givingCoin * coin.getAmount();
 		coinList.set(coin.ordinal(), coinList.get(coin.ordinal()) - givingCoin);
 		return givingCoin;
 	}
