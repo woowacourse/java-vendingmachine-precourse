@@ -16,6 +16,15 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public boolean matchName(Name other) {
+		return this.name.equals(other);
+	}
+
+	public Price purchase() {
+		quantity = quantity.minus(Quantity.ONE);
+		return price;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)
@@ -34,5 +43,17 @@ public class Product {
 	@Override
 	public String toString() {
 		return String.format(FORMAT, name.toString(), price.toString(), quantity.toString());
+	}
+
+	public boolean isPurchasable(Money money) {
+		return isQuantityEnough() && isMoneyEnough(money);
+	}
+
+	private boolean isMoneyEnough(Money money) {
+		return !money.isLessThan(price);
+	}
+
+	public boolean isQuantityEnough() {
+		return quantity.isEnough();
 	}
 }

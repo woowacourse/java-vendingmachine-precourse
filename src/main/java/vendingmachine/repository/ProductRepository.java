@@ -1,5 +1,7 @@
 package vendingmachine.repository;
 
+import vendingmachine.domain.Name;
+import vendingmachine.domain.Price;
 import vendingmachine.domain.ProductSet;
 
 public class ProductRepository {
@@ -18,4 +20,11 @@ public class ProductRepository {
 		return productSet.toString();
 	}
 
+	public Price purchase(Name name) {
+		return productSet.purchase(name);
+	}
+
+	public ProductSet get() {
+		return productSet;
+	}
 }
