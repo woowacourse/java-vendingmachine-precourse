@@ -1,9 +1,6 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
 
 public class Changes {
 	private static final int COIN_COUNT_500_INDEX = 0;

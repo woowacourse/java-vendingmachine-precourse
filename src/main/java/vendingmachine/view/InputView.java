@@ -1,9 +1,7 @@
 package vendingmachine.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -14,6 +12,9 @@ import vendingmachine.utils.Message;
 public class InputView {
 	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d+,\\d+]";
 
+	private static final int ITEM_NAME_IDX = 0;
+	private static final int ITEM_PRICE_IDX = 0;
+	private static final int ITEM_STOCK_IDX = 0;
 	private static final char CHAR_NUMERIC_MIN = '0';
 	private static final char CHAR_NUMERIC_MAX = '9';
 	private static final String ZERO_HOLDING_MONEY = "0";
@@ -22,7 +23,6 @@ public class InputView {
 	public static int holdingMoneyInput() {
 		String stringHoldingMoney = "";
 		int holdingMoney = 0;
-
 		do {
 			System.out.println(Message.ASK_HOLDING_MONEY_MESSAGE);
 			stringHoldingMoney = Console.readLine();
@@ -56,6 +56,7 @@ public class InputView {
 			System.out.println(Message.ASK_INPUT_MONEY_MESSAGE);
 			stringInputMoney = Console.readLine();
 		} while (!isRightInputMoney(stringInputMoney));
+
 		System.out.println();
 		inputMoney = Integer.parseInt(stringInputMoney);
 
@@ -84,9 +85,9 @@ public class InputView {
 		for (int i = 0; i < stringItemsArray.length; i++) {
 			eachValueOfProductArray = stringItemsArray[i].split(",");
 
-			String name = eachValueOfProductArray[0];
-			int price = Integer.parseInt(eachValueOfProductArray[1]);
-			int stock = Integer.parseInt(eachValueOfProductArray[2]);
+			String name = eachValueOfProductArray[ITEM_NAME_IDX];
+			int price = Integer.parseInt(eachValueOfProductArray[ITEM_PRICE_IDX]);
+			int stock = Integer.parseInt(eachValueOfProductArray[ITEM_STOCK_IDX]);
 
 			Item item = new Item(name, price, stock);
 			itemArrayList.add(item);
