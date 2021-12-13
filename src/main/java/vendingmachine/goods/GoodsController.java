@@ -13,11 +13,11 @@ public class GoodsController {
     }
 
     public boolean checkGoodsName(Goods goods, String name) {
-        return goods.name == name;
+        return name.equals(goods.getName());
     }
 
     public boolean checkQuantity(Goods goods) {
-        return goods.quantity > 0;
+        return goods.getQuantity() > 0;
     }
 
     public boolean checkMoney(Goods goods, int userMoney) {
@@ -56,7 +56,8 @@ public class GoodsController {
     }
 
     public int isCheapest() {
-        int cheapest = 0;
+        int cheapest = goodsList.get(0).getPrice();
+
         for (Goods goods : goodsList) {
             if (checkQuantity(goods) && isCheaper(goods.getPrice(), cheapest)) {
                 cheapest = goods.getPrice();

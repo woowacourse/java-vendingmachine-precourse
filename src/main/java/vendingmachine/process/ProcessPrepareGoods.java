@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ProcessPrepareGoods {
     public static String goods;
-    public static List<String[]> goodsArray;
+    public static List<String[]> goodsArray = new ArrayList<>();
 
     public static List<Goods> makeGoods() {
         inputGoods();
@@ -29,8 +29,8 @@ public class ProcessPrepareGoods {
     }
 
     public static void removeBracket() {
-        goods.replace(ProcessConstant.SQUARE_BRACKETS_OPEN, "");
-        goods.replace(ProcessConstant.SQUARE_BRACKETS_CLOSE, "");
+        goods = goods.replace(ProcessConstant.SQUARE_BRACKETS_OPEN, "");
+        goods = goods.replace(ProcessConstant.SQUARE_BRACKETS_CLOSE, "");
     }
 
     public static String[] toArray() {

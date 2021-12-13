@@ -20,6 +20,7 @@ public class ProcessController {
             try {
                 System.out.println(ProcessConstant.ASK_HOLDING_AMOUNT);
                 holdingAmount = ProcessPrepareHoldingAmount.makeHoldingAmount();
+                System.out.println();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -38,6 +39,7 @@ public class ProcessController {
         for (int i = 0; i<coins.length; i++) {
             System.out.println(ProcessConstant.COINS[i] + coins[i].getNumber() + ProcessConstant.UNIT);
         }
+        System.out.println();
     }
 
     public static void inputGoods() {
@@ -45,6 +47,7 @@ public class ProcessController {
             try {
                 System.out.println(ProcessConstant.ASK_GOODS);
                 goodsController = new GoodsController(ProcessPrepareGoods.makeGoods());
+                System.out.println();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -57,6 +60,7 @@ public class ProcessController {
             try {
                 System.out.println(ProcessConstant.ASK_USER_MONEY);
                 userMoney = ProcessPrepareUserMoney.makeUserMoney();
+                System.out.println();
                 break;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -67,9 +71,9 @@ public class ProcessController {
     public static void buyGoods() {
         while (true) {
             try {
-                System.out.println(ProcessConstant.USER_MONEY + userMoney);
+                System.out.println(ProcessConstant.USER_MONEY + userMoney + ProcessConstant.MONEY_UNIT);
                 if (!ProcessUserBuyGoods.checkCanBuy(goodsController, userMoney)) {
-                    break;
+                    return;
                 }
                 System.out.println(ProcessConstant.ASK_BUY_GOODS_NAME);
                 ProcessUserBuyGoods.inputGoodsName();
@@ -87,7 +91,7 @@ public class ProcessController {
         System.out.println(ProcessConstant.EXCHANGE);
 
         for (int i=0; i<coins.length; i++) {
-            if (MachineReturnChange.isThisCoinZero(coins[i])) {
+            if (MachineReturnChange.isThisCoinZero(i)) {
                 continue;
             }
             System.out.println(ProcessConstant.COINS[i] + MachineReturnChange.getCoinNumber(i)+ProcessConstant.UNIT);
