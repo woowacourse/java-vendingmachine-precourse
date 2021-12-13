@@ -36,7 +36,7 @@ public class Products {
 		return new Products(newProduct);
 	}
 
-	public Products buy(String buyProductName) {
+	public Products buy(String buyProductName, Money inputMoney) {
 		List<Product> newProducts = new ArrayList<>();
 		boolean validateNotHaveProduct = true;
 		for (Product product : products) {
@@ -83,5 +83,15 @@ public class Products {
 			productCnt += product.getCnt();
 		}
 		return productCnt == 0;
+	}
+
+	public boolean validateInputMoneyHigherThanProductPrice(String buyProductName, Money inputMoney) {
+		for (Product product : products) {
+			if (product.getName().equals(buyProductName) && product.getPrice() > inputMoney.getMoney()) {
+				VendingMachineController.printErrorProductPriceHigherThanInputMoney();
+				return true;
+			}
+		}
+		return false;
 	}
 }

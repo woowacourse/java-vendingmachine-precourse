@@ -33,10 +33,12 @@ public class Application {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());
 			if (products.isHigherThanMinProductPrice(inputMoney) || products.isSoldOut()) {
 				break;
-			};
+			}
 			String buyProductName = vendingMachineController.scanBuyProductName();
-			products = products.buy(buyProductName);
-			inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
+			if (!products.validateInputMoneyHigherThanProductPrice(buyProductName, inputMoney)) {
+				products = products.buy(buyProductName, inputMoney);
+				inputMoney = inputMoney.reduce(products.getProductPrice(buyProductName, products));
+			}
 		}
 		if (inputMoney.isEqualsZero()) {
 			vendingMachineController.printInputMoney(inputMoney.getMoney());

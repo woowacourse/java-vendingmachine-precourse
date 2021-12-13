@@ -46,4 +46,8 @@ public class VendingMachineController {
 	public static void printErrorNotHaveProduct() {
 		OutputView.printErrorNotHaveProduct();
 	}
+
+	public static void printErrorProductPriceHigherThanInputMoney() {
+		OutputView.printErrorProductPriceHigherThanInputMoney();
+	}
 }

@@ -14,6 +14,7 @@ public class OutputView {
 	private static final String CHANGE_GUIDE_MESSEAGE = "잔돈";
 	private static final String CHANGE_GUIDE_MESSEAGE_SUFFIX = "개";
 	private static final String NOT_HAVE_PRODUCT_GUIDE_MESSEEAGE = "[ERROR] 구매하려는 상품이 자판기 내에 없습니다. 다른 상품을 선택해주세요.";
+	private static final String PRODUCT_PRICE_EXPENSIVE_GUIDE_MESSEEAGE = "[ERROR] 구매하려는 상품이 투입한 금액보다 비쌉니다. 다른 상품을 선택해주세요.";
 
 	public static void printHoldingCoins(Map<Coin, Count> coins) {
 		System.out.println();
@@ -46,6 +47,14 @@ public class OutputView {
 	public static void printErrorNotHaveProduct() {
 		try {
 			throw new IllegalArgumentException(NOT_HAVE_PRODUCT_GUIDE_MESSEEAGE);
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+		}
+	}
+
+	public static void printErrorProductPriceHigherThanInputMoney() {
+		try {
+			throw new IllegalArgumentException(PRODUCT_PRICE_EXPENSIVE_GUIDE_MESSEEAGE);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
 		}
