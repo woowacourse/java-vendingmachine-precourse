@@ -17,6 +17,7 @@ public class Product {
     public Product(String name, int price, int quantity) {
         validateName(name);
         validatePrice(price);
+        validateQuantity(quantity);
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -34,6 +35,12 @@ public class Product {
         }
         if (price % MIN_DIVIDE != VALID_REMAINDER) {
             throw ErrorMessage.NOT_DIVISIBLE.getException();
+        }
+    }
+
+    private void validateQuantity(int quantity) {
+        if (quantity <= EMPTY_QUANTITY) {
+            throw ErrorMessage.INVALID_QUANTITY_.getException();
         }
     }
 

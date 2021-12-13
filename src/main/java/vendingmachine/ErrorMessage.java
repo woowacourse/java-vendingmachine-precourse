@@ -14,6 +14,7 @@ public enum ErrorMessage {
     NOT_NUMBER(new IllegalArgumentException("[ERROR] 상품의 가격 또는 수량은 숫자로 입력해주세요.")),
     MIN_PRICE(new IllegalArgumentException("[ERROR] 상품의 최소 금액은 100원입니다.")),
     NOT_DIVISIBLE(new IllegalArgumentException("[ERROR] 상품은 10원으로 나누어져야 합니다.")),
+    INVALID_QUANTITY_(new IllegalArgumentException("[ERROR] 상품의 수량은 1개를 넘어야 합니다.")),
 
     // 상품 구매
     NOT_FOUND_PRODUCT(new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다.")),
