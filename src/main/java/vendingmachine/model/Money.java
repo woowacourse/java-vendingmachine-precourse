@@ -26,9 +26,12 @@ public class Money {
         for (Entry<Coin, Integer> entry : coins.entrySet()) {
             Coin coin = entry.getKey();
             int cnt = getMaxCntByTotal(coin.getAmount(), entry.getValue(), total);
-
             changes.put(coin, cnt);
             coins.put(coin, coins.get(coin) - cnt);
+            total -= cnt * entry.getValue();
+            if (total <= 0) {
+                break;
+            }
         }
         return changes;
     }
