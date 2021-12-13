@@ -2,8 +2,7 @@ package vendingmachine.util;
 
 public class Parser {
 	public static int convertStringToInt(String input) throws IllegalArgumentException {
-		Validator.isEmpty(input);
-		Validator.isNumber(input);
+		CoinValidator.isRightCoin(input);
 		return Integer.parseInt(input);
 	}
 }
