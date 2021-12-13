@@ -21,11 +21,15 @@ public class MachineService {
 		machine.addItems(items);
 	}
 
-	public void purchase(Machine machine, String itemName) throws IllegalArgumentException{
+	public void purchase(Machine machine, String itemName) throws IllegalArgumentException {
 		machine.purchase(itemName);
 	}
 
 	public Boolean isPurchasable(Machine machine) {
 		return machine.isPurchasable();
+	}
+
+	public Map<Coin, Integer> returnCoins(Machine machine) {
+		return machine.returnCoins();
 	}
 }

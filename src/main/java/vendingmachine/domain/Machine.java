@@ -1,13 +1,14 @@
 package vendingmachine.domain;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.util.MapSupporter;
 
 public class Machine {
 	private final Map<Coin, Integer> coins = new HashMap<>();
-	private Integer inputCoinAmount;
+	private int inputCoinAmount;
 	private final Map<String, Item> items = new HashMap<>();
 
 	public void addCoins(Map<Coin, Integer> coins) {
@@ -74,5 +75,33 @@ public class Machine {
 			return true;
 		}
 		return false;
+	}
+
+	public Map<Coin, Integer> returnCoins() {
+		Map<Coin, Integer> returnCoins = new LinkedHashMap<>();
+		int returnCoinsAmount = this.inputCoinAmount;
+		for (Coin coin : coins.keySet()) {
+			returnCoinsAmount = setReturnCoinsAndGetReturnCoinsAmount(returnCoins, returnCoinsAmount, coin);
+		}
+		return returnCoins;
+	}
+
+	private int setReturnCoinsAndGetReturnCoinsAmount(Map<Coin, Integer> returnCoins, int returnCoinsAmount,
+		Coin coin) {
+		// List였을땐 그냥 돌리면서 하면 됐는데 Map이라서 달라짐
+		// for문을 개수로 돌리는데 개수가 변함.
+		// -- 해결 --
+
+		// 또 다른 문제 : LinkedHashMap으로 반환해야 view 편함
+		// addCoins할때 sort할까?
+		for (int i = 0; i < coins.get(coin); i++) {
+			if (returnCoinsAmount < coin.getAmount()) {
+				break;
+			}
+			MapSupporter.increaseCoinCount(returnCoins, coin, 0, 1);
+			// MapSupporter.increaseCoinCount(coins, coin, 0, -1);
+			returnCoinsAmount -= coin.getAmount();
+		}
+		return returnCoinsAmount;
 	}
 }
