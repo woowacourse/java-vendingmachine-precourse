@@ -44,10 +44,8 @@ public class VendingMachine {
 	}
 
 
-	public void beverage(String goodsInput) {
-		String[] goodsList = goodsInput.split(";");
-
-		for (String beverageString : goodsList) {
+	public void beverage(ArrayList<String[]> goodsInput) {
+		for (String[] beverageString : goodsInput) {
 			Beverages.add(new Beverage(beverageString));
 		}
 
@@ -61,7 +59,11 @@ public class VendingMachine {
 				return price;
 			}
 		}
-		Validater.notInBeverage();
+		try {
+			Validater.notInBeverage();
+		} catch (IllegalArgumentException e) {
+			System.out.println(Validater.errorMassage);
+		}
 		return totalCoin;
 
 	}

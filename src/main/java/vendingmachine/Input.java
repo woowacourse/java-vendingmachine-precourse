@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class Input {
@@ -26,21 +28,28 @@ public class Input {
 		return MachineCashInput;
 	}
 
-	public static String goodsInput() {
+	public static ArrayList<String[]> goodsInput() {
 		String goodsInput;
+		ArrayList<String[]> validList = new ArrayList<>();
 		while (true) {
 			System.out.println(ENTER_GOODS_INFOMATION);
 			System.out.println(ENTER_GOODS_INFOMATION_METHOD);
 			goodsInput = Console.readLine();
+			String[] goodsList = goodsInput.split(";");
+			validList.clear();
 			try {
+				for (String beverageString : goodsList) {
+					validList.add(Validater.beveragesValid(beverageString));
+				}
 				break;
 			} catch (IllegalArgumentException e) {
 				System.out.println(Validater.errorMassage);
 			}
 		}
-		return goodsInput;
+		return validList;
 
 	}
+	
 
 	public static String cashInput() {
 		String cashInput;
@@ -62,6 +71,7 @@ public class Input {
 	public static String buyGoodsInput() {
 		System.out.println(ENTER_BUY_GOODS);
 		String buyGoodsInput = Console.readLine();
+
 		return buyGoodsInput;
 	}
 

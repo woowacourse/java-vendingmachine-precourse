@@ -8,8 +8,8 @@ public class Beverage {
 	int price;
 	int count;
 
-	public Beverage(String readString) {
-		String[] beverageInfo = Validater.beveragesValid(readString);
+	public Beverage(String[] readString) {
+		String[] beverageInfo = readString;
 		this.name = beverageInfo[INDEX_NAME];
 		this.price = Integer.parseInt(beverageInfo[INDEX_PRICE]);
 		this.count = Integer.parseInt(beverageInfo[INDEX_COUNT]);
