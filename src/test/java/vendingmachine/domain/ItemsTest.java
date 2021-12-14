@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.DisplayName;
@@ -54,7 +53,8 @@ public class ItemsTest {
 	@DisplayName("구매가 가능한 상품이 아닌 경우 예외를 발생시킨다")
 	@Test
 	void findItemByNameException() {
-		List<Item> items = Arrays.asList(new Item(Arrays.asList("콜라", "1500", "10")), new Item(Arrays.asList("사이다", "1000", "0")));
+		List<Item> items = Arrays.asList(new Item(Arrays.asList("콜라", "1500", "10")),
+			new Item(Arrays.asList("사이다", "1000", "0")));
 		for (Item item : items) {
 			assertThatThrownBy(() -> {
 				itemController.checkItemSellable(item, 1000);
