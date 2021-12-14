@@ -3,6 +3,7 @@ package vendingmachine.util.validator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import vendingmachine.model.Product;
 import vendingmachine.util.ErrorMessageConstants;
@@ -15,9 +16,8 @@ public class ProductValidator {
 	}
 
 	private static void validateDuplication(List<Product> products) {
-		Set<Product> uniqueProducts = new HashSet<>();
-		products.forEach(product -> uniqueProducts.add(product));
-		if (uniqueProducts.size() != products.size()) {
+		Set<String> uniqueProductNames = products.stream().map(Product::getName).collect(Collectors.toSet());
+		if (uniqueProductNames.size() != products.size()) {
 			throw new IllegalArgumentException(ErrorMessageConstants.DUPLICATED_PRODUCTS_EXCEPTION_MESSAGE);
 		}
 	}

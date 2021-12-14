@@ -46,4 +46,8 @@ public class Product {
 	public boolean isPriceDividedByTen() {
 		return (this.price % TEN) == SymbolConstants.ZERO;
 	}
+
+	public String getName() {
+		return name;
+	}
 }
