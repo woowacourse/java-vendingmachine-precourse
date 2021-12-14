@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import static camp.nextstep.edu.missionutils.Console.*;
 import static vendingmachine.constant.ErrorMessage.*;
+import static vendingmachine.exception.NumberException.*;
 import static vendingmachine.exception.ProductException.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
@@ -15,44 +16,78 @@ public class VendingMachineController {
 
 	PossessionCoin possessionCoin = new PossessionCoin();
 	Money possessionMoney;
-	Money inputMoney;
+	Money insertMoney;
 	Products products;
 	Change change;
 
 	public void run() {
-		inputPossession();
-		inputProducts();
-		inputMoney();
+		requestInput();
 		doShopping();
 		returnChange();
 	}
 
+	public void requestInput() {
+		inputPossession();
+		inputProducts();
+		inputInsertMoney();
+	}
+
 	public void inputPossession() {
-		possessionMoney = new Money(requestPossessionMoney());
+		possessionMoney = new Money(inputPossessionMoney());
 		possessionCoin.createRandomCoins(possessionMoney);
 		reportPossessionCoin(possessionCoin.getCoins());
 	}
 
-	private void inputProducts() {
-		products = new Products(requestProduct());
+	public int inputPossessionMoney() {
+		while (true) {
+			String money = requestPossessionMoney();
+			try {
+				checkNumberException(money);
+				return Integer.parseInt(money);
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+		}
 	}
 
-	private void inputMoney() {
-		inputMoney = new Money(requestInputMoney());
+	private void inputProducts() {
+		while (true) {
+			String productList = requestProduct();
+			try {
+				checkProductException(productList);
+				products = new Products(productList);
+				break;
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+		}
+	}
+
+	private void inputInsertMoney() {
+		while (true) {
+			String money = requestInsertMoney();
+			try {
+				checkNumberException(money);
+				insertMoney = new Money(Integer.parseInt(money));
+				break;
+			} catch (Exception exception) {
+				System.out.println(exception.getMessage());
+			}
+		}
 	}
 
 	private void doShopping() {
 		int minimumPrice = products.getMinimumPrice();
-		while (inputMoney.isMoneyBiggerThanValue(minimumPrice)
+		while (insertMoney.isMoneyBiggerThanValue(minimumPrice)
 			&& products.isOverZeroAllProductCount()) {
-			reportInputMoney(inputMoney.getMoney());
+			reportInputMoney(insertMoney.getMoney());
 			purchaseProduct();
 		}
-		reportInputMoney(inputMoney.getMoney());
+		reportInputMoney(insertMoney.getMoney());
 	}
 
 	private void purchaseProduct() {
-		products.purchase(inputProductName(), inputMoney);
+		products.purchase(inputProductName(), insertMoney);
 	}
 
 	private String inputProductName() {
@@ -69,14 +104,14 @@ public class VendingMachineController {
 	}
 
 	private void checkProductPurchase(String productName) {
-		if (!products.canSell(productName, inputMoney)) {
+		if (!products.canSell(productName, insertMoney)) {
 			throw new IllegalArgumentException(PRODUCT_NOT_BUY_MSG);
 		}
 	}
 
 	private void returnChange() {
 		change = new Change();
-		change.createGreedyCoin(possessionCoin, inputMoney.getMoney());
+		change.createGreedyCoin(possessionCoin, insertMoney.getMoney());
 		reportChangeCoin(change.getCoins());
 	}
 
