@@ -5,10 +5,14 @@ import java.util.Objects;
 import vendingmachine.utils.Util;
 
 public class Count implements Comparable<Count> {
-	private int count;
+	private final int count;
 
 	public Count(String count) {
 		this.count = Util.convertStringToInt(count);
+	}
+
+	public static Count of(String count) {
+		return new Count(count);
 	}
 
 	@Override
@@ -24,10 +28,6 @@ public class Count implements Comparable<Count> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(count);
-	}
-
-	public static Count of(String count) {
-		return new Count(count);
 	}
 
 	public int toInt() {

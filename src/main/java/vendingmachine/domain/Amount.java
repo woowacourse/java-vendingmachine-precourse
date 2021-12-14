@@ -5,10 +5,14 @@ import java.util.Objects;
 import vendingmachine.utils.Util;
 
 public class Amount implements Comparable<Amount> {
-	private int amount;
+	private final int amount;
 
 	public Amount(String amount) {
 		this.amount = Util.convertStringToInt(amount);
+	}
+
+	public static Amount of(String amount) {
+		return new Amount(amount);
 	}
 
 	@Override
@@ -24,10 +28,6 @@ public class Amount implements Comparable<Amount> {
 	@Override
 	public int hashCode() {
 		return Objects.hash(amount);
-	}
-
-	public static Amount of(String amount) {
-		return new Amount(amount);
 	}
 
 	public int toInt() {

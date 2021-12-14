@@ -4,8 +4,8 @@ import java.util.Objects;
 
 public class Product implements Comparable<Product> {
 	private final Name name;
-	private Amount amount;
-	private Count count;
+	private final Amount amount;
+	private final Count count;
 
 	public Product(String name, String amount, String count) {
 		this.name = Name.of(name);

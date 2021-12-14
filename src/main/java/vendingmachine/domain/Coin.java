@@ -16,14 +16,14 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	public int toAmount() {
-		return this.amount;
-	}
-
 	public static Coin findByAmount(int amount) {
 		return Arrays.stream(Coin.values())
 			.filter(e -> e.amount == amount)
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(Message.REQUEST_MESSAGE_THERE_IS_NO_COIN));
+	}
+
+	public int toAmount() {
+		return this.amount;
 	}
 }

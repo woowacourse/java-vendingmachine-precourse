@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import vendingmachine.utils.Constant;
 
 public class CoinCounter {
-	private SortedMap<Coin, Integer> counterMap;
+	private final SortedMap<Coin, Integer> counterMap;
 
 	public CoinCounter() {
 		counterMap = new TreeMap<>();

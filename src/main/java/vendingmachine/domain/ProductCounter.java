@@ -10,7 +10,7 @@ import java.util.stream.IntStream;
 import vendingmachine.utils.Constant;
 
 public class ProductCounter {
-	private SortedMap<Product, Integer> counterMap;
+	private final SortedMap<Product, Integer> counterMap;
 
 	public ProductCounter() {
 		counterMap = new TreeMap<>(Comparator.comparingInt(Product::toAmount).reversed());

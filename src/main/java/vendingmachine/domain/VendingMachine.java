@@ -40,8 +40,9 @@ public class VendingMachine {
 		boolean canExchange = isEnoughMachineMoneyThanCoinAmount(Constant.LOWEST_COIN_AMOUNT);
 		while (canExchange) {
 			int pickRangdomCoin = Util.pickRandomCoin(makeCoinKinds());
-			if (isEnoughExchangeDemands(fisrtInsertedAmount, pickRangdomCoin))
+			if (isEnoughExchangeDemands(fisrtInsertedAmount, pickRangdomCoin)) {
 				continue;
+			}
 			this.machineMoney.decreaseWith(pickRangdomCoin);
 			this.machineCoinCounter.plusCount(Coin.findByAmount(pickRangdomCoin));
 			canExchange = isEnoughMachineMoneyThanCoinAmount(Constant.LOWEST_COIN_AMOUNT);

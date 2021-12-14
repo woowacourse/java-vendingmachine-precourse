@@ -7,7 +7,7 @@ import vendingmachine.utils.Constant;
 import vendingmachine.utils.Message;
 
 public class Products {
-	private List<Product> products;
+	private final List<Product> products;
 
 	public Products(List<String> list) {
 		this.products = list.stream()
