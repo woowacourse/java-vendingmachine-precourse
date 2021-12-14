@@ -33,10 +33,6 @@ public class ItemStorage {
 		return itemList.stream().map(Item::getStock).collect(Collectors.toList());
 	}
 
-	public List<String> getNameList() {
-		return itemList.stream().map(Item::getName).collect(Collectors.toList());
-	}
-
 	public Optional<Integer> getPriceByName(String name) {
 		return itemList.stream()
 				.filter(item -> Objects.equals(item.getName(), name))

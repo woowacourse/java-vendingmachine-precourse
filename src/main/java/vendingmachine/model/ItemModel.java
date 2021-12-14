@@ -53,10 +53,6 @@ public class ItemModel {
 				.orElseThrow(() -> new IllegalArgumentException(DONT_EXISTING_ITEM_ERROR_MESSAGE));
 	}
 
-	public List<String> getNameList() {
-		return itemStorage.getNameList();
-	}
-
 	private List<String> parseItemStringIntoItemList(String items) {
 		return Arrays.stream(items.split(";"))
 				.map(item -> item.substring(1, item.length() - 1))
