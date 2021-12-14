@@ -20,18 +20,28 @@ public class VendingMachineController {
 
 	private static int getValidMoneyInMachine() {
 		int moneyInMachine;
-		do {
-			moneyInMachine = Input.moneyInMachine();
-		} while (!Validator.isValidMoneyInMachine(moneyInMachine));
-		return moneyInMachine;
+		while(true) {
+			try {
+				moneyInMachine = Input.moneyInMachine();
+				Validator.validMoneyInMachine(moneyInMachine);
+				return moneyInMachine;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 
 	private static int getValidInputMoney() {
 		int inputMoney;
-		do {
-			inputMoney = Input.inputMoney();
-		} while (!Validator.isValidInputMoney(inputMoney));
-		return inputMoney;
+		while(true) {
+			try {
+				inputMoney = Input.inputMoney();
+				Validator.validInputMoney(inputMoney);
+				return inputMoney;
+			} catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+			}
+		}
 	}
 	
 	public void run() {

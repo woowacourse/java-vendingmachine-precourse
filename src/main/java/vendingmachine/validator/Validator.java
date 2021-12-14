@@ -3,15 +3,9 @@ package vendingmachine.validator;
 import java.util.List;
 
 public class Validator {
-	public static boolean isValidMoneyInMachine(int moneyInMachine) {
-		try {
-			NumberValidator.isGreaterThanOrEqualToZero(moneyInMachine);
-			NumberValidator.isDivisibleByMinimumUnit(moneyInMachine);
-			return true;
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public static void validMoneyInMachine(int moneyInMachine) {
+		NumberValidator.isGreaterThanOrEqualToZero(moneyInMachine);
+		NumberValidator.isDivisibleByMinimumUnit(moneyInMachine);
 	}
 
 	public static void validateProductsInputFormat(List<String> productsInfo) {
@@ -50,14 +44,8 @@ public class Validator {
 		NumberValidator.isGreaterThanOrEqualToZero(intAmount);
 	}
 
-	public static boolean isValidInputMoney(int inputMoney) {
-		try {
-			NumberValidator.isDivisibleByMinimumUnit(inputMoney);
-			return true;
-		} catch (IllegalArgumentException e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public static void validInputMoney(int inputMoney) {
+		NumberValidator.isDivisibleByMinimumUnit(inputMoney);
 	}
 
 	private enum ProductIdx {NAME, PRICE, AMOUNT}
