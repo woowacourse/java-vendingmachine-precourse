@@ -43,6 +43,8 @@ public class VendingMachineController {
 		while (this.money.getMoney() >= itemcontroller.getLeastItemCost()
 			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
+				outputView.printMoney(this.money.getMoney());
+				outputView.printItemPerChaseRequest();
 				int targetItemCost = itemcontroller.update(moneyAmount);
 				this.money.pay(targetItemCost);
 
