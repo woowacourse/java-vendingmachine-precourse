@@ -1,8 +1,17 @@
 package vendingmachine.service;
 
+import vendingmachine.constants.CoinConstant;
 import vendingmachine.constants.ProductConstant;
 
 public class ProductValidator {
+
+	public void isValidInput(String[] input){
+		if (input.length != ProductConstant.PRODUCT_ARGUMENT_SIZE){
+			throw new IllegalArgumentException("[ERROR] 잘못된 입력입니다. 형식: [상품명1,가격1,수량1];[상품명2,가격2,수량2]");
+		}
+
+
+	}
 
 	public void isValid(String[] product) {
 		isValidName(product[ProductConstant.NAME_INDEX]);

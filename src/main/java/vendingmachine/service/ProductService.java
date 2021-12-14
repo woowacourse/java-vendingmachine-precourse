@@ -35,8 +35,10 @@ public class ProductService {
 	}
 
 	public String[] splitInput(String input) {
-		return input.replaceAll(ProductConstant.LEFT_SQUARE_BRACKET, ProductConstant.BLANK)
+		String[] outputs = input.replaceAll(ProductConstant.LEFT_SQUARE_BRACKET, ProductConstant.BLANK)
 			.replaceAll(ProductConstant.RIGHT_SQUARE_BRACKET, ProductConstant.BLANK)
 			.split(ProductConstant.SEMI_COLON);
+		productValidator.isValidInput(outputs);
+		return outputs;
 	}
 }
