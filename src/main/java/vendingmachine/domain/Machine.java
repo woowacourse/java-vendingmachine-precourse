@@ -97,6 +97,7 @@ public class Machine {
 		for (Coin coin : coins.keySet()) {
 			returnCoinsAmount = setReturnCoinsAndGetReturnCoinsAmount(returnCoins, returnCoinsAmount, coin);
 		}
+		this.inputCoinAmount = returnCoinsAmount;
 		return returnCoins;
 	}
 
