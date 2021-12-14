@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import static vendingmachine.utils.Validator.*;
+import static vendingmachine.utils.InputValidator.*;
 
 import java.util.Arrays;
 import java.util.List;
