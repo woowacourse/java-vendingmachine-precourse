@@ -65,6 +65,20 @@ class ApplicationTest extends NsTest {
         }
     }
 
+    @Test
+    void 투입_금액_예외_테스트() {
+        ArrayList<MoneyExceptionTest> data = getMoneyExceptionTest();
+        for (MoneyExceptionTest testCase : data) {
+            if (testCase == null) {
+                continue;
+            }
+            assertSimpleTest(
+                () -> { runException(testCase.moneyOfChanges, testCase.products, testCase.money);
+                        assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage); }
+            );
+        }
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
