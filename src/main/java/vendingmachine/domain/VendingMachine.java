@@ -12,11 +12,16 @@ public class VendingMachine {
     private int minimumPrice;
     private Map<Coin, Integer> coinHashMap;
     private Map<String, Product> productMap;
+    private Customer customer;
 
     public VendingMachine(int inputMoney) {
         minimumPrice = 0;
         coinHashMap = generateRandomCoins(inputMoney);
         productMap = new HashMap<>();
+    }
+
+    public void settingPutMoneyCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     private Map<Coin, Integer> generateRandomCoins(int inputMoney) {
@@ -54,5 +59,9 @@ public class VendingMachine {
             results.append(holdingCoin.toString()).append(" - ").append(coinHashMap.get(holdingCoin)).append("개").append("\n");
         }
         return results.toString();
+    }
+
+    public String toStringCustomerInputMoney() {
+        return customer.toString();
     }
 }

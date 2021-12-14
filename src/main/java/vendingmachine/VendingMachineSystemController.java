@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import vendingmachine.domain.Product;
+import vendingmachine.domain.Customer;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.system.Validation;
 import vendingmachine.system.ValidationImplementation;
@@ -34,7 +35,10 @@ public class VendingMachineSystemController {
         printConsoleMessage(vendingMachine.toString());
         List<Product> products = inputProductNameAndPriceAndStock();
         vendingMachine.saveProduct(products);
-        int userInsertMoney = inputUserInsertMoney();
+        int customerInsertMoney = inputCustomerInsertMoney();
+        Customer customer = new Customer(customerInsertMoney);
+        vendingMachine.settingPutMoneyCustomer(customer);
+        printConsoleMessage(vendingMachine.toStringCustomerInputMoney());
         inputProductNameToBuy();
     }
 
@@ -88,7 +92,7 @@ public class VendingMachineSystemController {
         return productInformation.substring(1, productInformation.length() - 1);
     }
 
-    public int inputUserInsertMoney() {
+    public int inputCustomerInsertMoney() {
         boolean isValidInput = false;
         int userInputMoney=0;
         do {
