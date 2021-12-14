@@ -1,7 +1,11 @@
 package vendingmachine.domain;
 
+import static vendingmachine.Constant.*;
+
 import java.util.HashMap;
 import java.util.List;
+
+import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 	public int holdingMoney;
@@ -66,5 +70,25 @@ public class VendingMachine {
 			return true;
 		}
 		throw new IllegalArgumentException();
+	}
+
+	public void updateItemList(int index) {
+		Item item = itemList.get(index);
+		item.minusCount();
+		itemList.set(index, item);
+		calculateInputMoney(item.price);
+		if (itemList.get(index).count == ITEM_COUNT_ZERO) {
+			itemList.remove(index);
+		}
+	}
+
+	public void calculateInputMoney(int itemPrice) {
+		try {
+			if (checkExcessMoney(itemPrice)) {
+				minusInputMoney(itemPrice);
+			}
+		} catch (IllegalArgumentException e) {
+			OutputView.printMoneyExcessError();
+		}
 	}
 }

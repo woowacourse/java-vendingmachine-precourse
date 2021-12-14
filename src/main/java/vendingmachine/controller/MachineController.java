@@ -31,28 +31,9 @@ public class MachineController {
 		while (!vendingMachine.checkEmptyItemList() && vendingMachine.checkBuyingPossible()) {
 			OutputView.printInputMoney(vendingMachine.inputMoney);
 			int itemIndex = inputController.scanBuyingItem(vendingMachine.itemList);
-			updateItemList(itemIndex);
+			vendingMachine.updateItemList(itemIndex);
 		}
 		OutputView.printInputMoney(vendingMachine.inputMoney);
 	}
 
-	public void updateItemList(int index) {
-		Item item = vendingMachine.itemList.get(index);
-		item.minusCount();
-		vendingMachine.itemList.set(index, item);
-		calculateInputMoney(item.price);
-		if (vendingMachine.itemList.get(index).count == ITEM_COUNT_ZERO) {
-			vendingMachine.itemList.remove(index);
-		}
-	}
-
-	public void calculateInputMoney(int itemPrice) {
-		try {
-			if (vendingMachine.checkExcessMoney(itemPrice)) {
-				vendingMachine.minusInputMoney(itemPrice);
-			}
-		} catch (IllegalArgumentException e) {
-			OutputView.printMoneyExcessError();
-		}
-	}
 }
