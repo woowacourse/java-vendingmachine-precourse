@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.constant.Constant;
 import vendingmachine.type.Coin;
 
 public class VendingMachineCoins {
 
-	private static final int ZERO = 0;
 	private final Map<Coin, Integer> coins;
 
 	public VendingMachineCoins(Money vendingMachineMoney) {
@@ -63,13 +63,13 @@ public class VendingMachineCoins {
 	}
 
 	private void addChangeCoin(Money userMoney, Map<Coin, Integer> changeCoins, Coin coin) {
-		int quantity = ZERO;
+		int quantity = Constant.ZERO;
 		while (isPossibleGenerateChangeCoin(coin, userMoney)) {
 			quantity++;
 			userCoin(coin);
 			userMoney.spendMoney(coin.getAmount());
 		}
-		if (quantity != ZERO) {
+		if (quantity != Constant.ZERO) {
 			changeCoins.put(coin, quantity);
 		}
 	}
@@ -83,6 +83,6 @@ public class VendingMachineCoins {
 	}
 
 	public boolean hasCoin(Coin coin) {
-		return coins.get(coin) > ZERO;
+		return coins.get(coin) > Constant.ZERO;
 	}
 }

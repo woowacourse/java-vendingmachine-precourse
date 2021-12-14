@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.constant.Message;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -11,7 +13,6 @@ public enum Coin {
 	COIN_10(10);
 
 	private final int amount;
-	private static final String ERROR_NOT_FOUND_COIN_TYPE = "해당 금액을 찾을 수 없습니다.";
 
 	Coin(final int amount) {
 		this.amount = amount;
@@ -26,7 +27,7 @@ public enum Coin {
 		return Arrays.stream(Coin.values())
 			.filter(coin -> coin.getAmount() == amount)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FOUND_COIN_TYPE));
+			.orElseThrow(() -> new IllegalArgumentException(Message.ERROR_NOT_FOUND_COIN_TYPE));
 	}
 
 	public static List<Integer> getCoinList() {

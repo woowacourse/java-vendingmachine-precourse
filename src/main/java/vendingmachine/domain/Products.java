@@ -6,13 +6,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Products {
+import vendingmachine.constant.Constant;
+import vendingmachine.constant.Message;
 
-	private static final String ERROR_DUPLICATE_PRODUCT = "중복된 상품입니다.";
-	private static final String ERROR_NO_PRODUCT = "존재하지 않는 상품입니다.";
-	private static final String ERROR_NOT_FOUND_PRODUCT = "구매 가능한 상품이 없습니다.";
-	private static final String DELIMITER = ";";
-	private static final int ZERO = 0;
+public class Products {
 
 	private final List<Product> products;
 
@@ -21,11 +18,11 @@ public class Products {
 	}
 
 	private List<Product> validateAndCreateProducts(String inputProducts) {
-		List<Product> productList = Arrays.stream(inputProducts.split(DELIMITER))
+		List<Product> productList = Arrays.stream(inputProducts.split(Constant.DELIMITER))
 			.map(Product::fromProductInformation)
 			.collect(Collectors.toList());
 		if (isDuplicate(productList)) {
-			throw new IllegalArgumentException(ERROR_DUPLICATE_PRODUCT);
+			throw new IllegalArgumentException(Message.ERROR_DUPLICATE_PRODUCT);
 		}
 		return productList;
 	}
@@ -36,16 +33,16 @@ public class Products {
 
 	public int findMinimumProductPrice() {
 		return products.stream()
-			.filter(product -> product.getQuantity() > ZERO)
+			.filter(product -> product.getQuantity() > Constant.ZERO)
 			.map(Product::getPrice)
 			.min((Comparator.comparingInt(o -> o)))
-			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FOUND_PRODUCT));
+			.orElseThrow(() -> new IllegalArgumentException(Message.ERROR_NOT_FOUND_PRODUCT));
 	}
 
 	public Product findProduct(String purchaseProductName) {
 		return products.stream()
 			.filter(product -> product.getName().equals(purchaseProductName))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(ERROR_NO_PRODUCT));
+			.orElseThrow(() -> new IllegalArgumentException(Message.ERROR_NO_PRODUCT));
 	}
 }
