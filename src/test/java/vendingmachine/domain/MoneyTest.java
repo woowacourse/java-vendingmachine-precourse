@@ -13,4 +13,18 @@ public class MoneyTest {
 			.isInstanceOf(IllegalArgumentException.class)
 			.hasMessageContaining("돈은 10의 배수여야 한다.");
 	}
+
+	@DisplayName("더하기")
+	@Test
+	void plus() {
+		Money money = new Money(100);
+		assertThat(money.plus(new Money(100)).compareTo(new Money(200))).isEqualTo(0);
+	}
+
+	@DisplayName("빼기")
+	@Test
+	void subtract() {
+		Money money = new Money(100);
+		assertThat(money.subtract(new Money(100)).compareTo(new Money(0))).isEqualTo(0);
+	}
 }
