@@ -1,12 +1,11 @@
 package vendingmachine.service;
 
+import static vendingmachine.constants.Constant.NO_COIN_COUNT;
+
 import java.util.EnumMap;
 import java.util.Map;
 
-import vendingmachine.constants.Constant;
 import vendingmachine.domain.Coin;
-
-import static vendingmachine.constants.Constant.NO_COIN_COUNT;
 
 public class ChangeService {
 	public Map<Coin, Integer> returnChange(Map<Coin, Integer> vendingMachineCoins, int remainedMoney) {
@@ -29,7 +28,8 @@ public class ChangeService {
 		}
 	}
 
-	private int getChangeMoney(Map<Coin, Integer> change, int changeMoney, Map.Entry<Coin, Integer> coin, int coinAmount, int coinCount, int neededCoinCount) {
+	private int getChangeMoney(Map<Coin, Integer> change, int changeMoney, Map.Entry<Coin, Integer> coin,
+								int coinAmount, int coinCount, int neededCoinCount) {
 		if (neededCoinCount > coinCount) {
 			change.put(coin.getKey(), coinCount);
 			changeMoney = getRemainedChange(changeMoney, coinAmount, coinCount);

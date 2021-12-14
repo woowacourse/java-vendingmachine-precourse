@@ -45,7 +45,6 @@ public class Coins {
 
 			vendingMachineRemainedCoins.put(coinType, coinCount);
 		}
-		
 		return generatedCoinAmount;
 	}
 

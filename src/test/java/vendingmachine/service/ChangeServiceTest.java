@@ -6,6 +6,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+
 import vendingmachine.domain.Coin;
 
 class ChangeServiceTest {

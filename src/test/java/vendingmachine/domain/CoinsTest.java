@@ -1,18 +1,19 @@
 package vendingmachine.domain;
 
+import java.util.Map;
+
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+
 import vendingmachine.constants.Message;
 import vendingmachine.utils.View;
-
-import java.util.Map;
 
 class CoinsTest {
 	@Test
 	void generateRandomCoins() {
 		Coins coins = new Coins();
-		final int POSSESSION = 450;
-		Map<Coin, Integer> entry = coins.createCoins(POSSESSION);
+		int possession = 450;
+		Map<Coin, Integer> entry = coins.createCoins(possession);
 
 		View.showCoins(entry, Message.ANSWER_POSSESSION_COIN);
 
@@ -21,6 +22,6 @@ class CoinsTest {
 			totalCoinAmount += e.getValue() * (e.getKey().getAmount());
 		}
 
-		Assertions.assertThat(totalCoinAmount).isEqualTo(POSSESSION);
+		Assertions.assertThat(totalCoinAmount).isEqualTo(possession);
 	}
 }

@@ -22,7 +22,8 @@ public class Message {
 	public static final String ERROR_IS_NOT_POSITIVE = "[ERROR] 입력은 0을 포함한 양의 정수여야 합니다.";
 	public static final String ERROR_DUPLICATED_ADD_ITEM_NAME = "[ERROR] 중복된 제품 이름은 등록할 수 없습니다.";
 	public static final String ERROR_INVALID_ADD_ITEMS_FORMAT = "[ERROR] 잘못된 상품 추가 형식입니다. [이름,가격,수량];[...] 형식으로 입력해주세요";
-	public static final String ERROR_INVALID_ITEM_FORMAT = "[ERROR] 잘못된 상품 입력 형식입니다. [영어+한글+숫자 (10글자 제한), 양의 정수, 양의 정수] 의 형식이어야 합니다.";
+	public static final String ERROR_INVALID_ITEM_FORMAT =
+			"[ERROR] 잘못된 상품 입력 형식입니다. [영어+한글+숫자 (10글자 제한), 양의 정수, 양의 정수] 의 형식이어야 합니다.";
 	public static final String ERROR_INVALID_UNIT_NUMBER = "[ERROR] 가격, 보유동전, 투입 금액은 10으로 나눠 떨어져야 합니다.";
 	public static final String ERROR_INVALID_ADD_ITEM_PRICE = "[ERROR] 0원의 상품을 등록할 수 없습니다.";
 	public static final String ERROR_INVALID_INPUT_MONEY = "[ERROR] 금액을 투입하셔야 합니다.";
