@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import vendingmachine.utils.Util;
 
@@ -100,5 +101,57 @@ public class VendingMachine {
 
 	public int toCurrentUserMoney() {
 		return this.userMoney.toInt();
+	}
+
+	public String returnCoins() {
+		// 유저머니가 <= 0이 되기전까지.. 큰 순서대로 동전을 빼면서, 차감해준다.
+		// 돌리는 조건(0) : 유저돈 > 1이상, --> 최소동전인 >= 10 이상.
+		// -> (1) 잔돈반환 못하는경우 = 동전갯수가 0개..  -> 잔돈반환끝낸다.
+		// ---> 돌리는 조건 + 끝내는 조건을 합쳐서 사용함. 이 때, isAnyAvailable 재활용된다(동전갯수 1개이상 1개라도..있음 가능)
+		// -> (2) 그리디: 것부터 미리 넣어놔서 forEach로 꺼내기만 하면 된다.
+		// -> (3) 반환되지 않은 금액은, 자판기 보유금액인 machineMoney에 남겨둔다.
+		// boolean isReturnable = isReturnable();// > 0;
+
+		// + 반환받을 결과값용 map객체 생성
+		CoinCounter userReturnCoinCounter = new CoinCounter();
+
+		// System.out.println("반환전 : " + this.machineCoinCounter); // 로그
+
+		// while (isReturnable) {
+		this.machineCoinCounter.forEach((coin, count) -> {
+			//(1) 코인당 1~count까지 가진 갯수만큼 반복하면서  머신-1, 사용자 받아갈 map +1 해준다.
+			// -> 이 때, [[[모든 로직을 if에 담아서 , 가능할때까지만 로직이 돌아가도록 하게 함.]]]
+			IntStream.rangeClosed(1, count)
+				.forEach(i -> {
+					//[[[ 최대횟수만큼 돌리되, if안에 다 넣엇, 가능한 경우까지만 알아서 돌다가 멈춤]]]
+					int coinAmount = coin.toAmount();
+					if (isReturnable()) {
+						this.userMoney.decreaseWith(coinAmount);
+						this.machineCoinCounter.minusCount(coin);
+
+						userReturnCoinCounter.plusCount(coin);
+					}
+				});
+		});
+
+		// System.out.println("반환후 : " + this.machineCoinCounter); // 로그
+		// 	isReturnable = isReturnable();
+		// }
+
+		// 남은 금액은 machineMoney 에 넣기
+		this.machineMoney.increaseWith(this.userMoney.toInt());
+
+		// 반환용 결과값 반환
+		// 예외처리 -> 잔돈이 없는 경우 -> 결과값Map이 모두 count가 0인 경우 ->
+		if (!userReturnCoinCounter.isAnyAvailable()) {
+			return "";
+		}
+		// 반환된 동전만 출력 -> toString에서 filter걸기.
+		return userReturnCoinCounter.toReturnCoinString();
+
+	}
+
+	private boolean isReturnable() {
+		return this.userMoney.toInt() >= 10 && this.machineCoinCounter.isAnyAvailable();
 	}
 }

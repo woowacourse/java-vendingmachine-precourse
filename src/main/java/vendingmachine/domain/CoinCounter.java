@@ -52,7 +52,16 @@ public class CoinCounter {
 	public String toString() {
 		return counterMap.keySet()
 			.stream()
-			// .filter( key -> key.ordinal()>=3)
+			// 자판기는 0개도 포함해야해서 필터가 포함되면 안된다.
+			// .filter(key -> counterMap.get(key) > 0) // 반환된 동전만 출력되도록 예외처리
+			.map(enumObjAsKey -> enumObjAsKey.toAmount() + "원 - " + counterMap.get(enumObjAsKey) + "개")
+			.collect(Collectors.joining(System.lineSeparator())); // 줄바꿈 단위로 붙임.
+	}
+
+	public String toReturnCoinString() {
+		return counterMap.keySet()
+			.stream()
+			.filter(key -> counterMap.get(key) > 0) // 반환된 동전만 출력되도록 예외처리
 			.map(enumObjAsKey -> enumObjAsKey.toAmount() + "원 - " + counterMap.get(enumObjAsKey) + "개")
 			.collect(Collectors.joining(System.lineSeparator())); // 줄바꿈 단위로 붙임.
 	}

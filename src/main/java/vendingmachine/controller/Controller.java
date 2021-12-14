@@ -1,7 +1,5 @@
 package vendingmachine.controller;
 
-import java.util.Arrays;
-
 import vendingmachine.domain.Money;
 import vendingmachine.domain.Name;
 import vendingmachine.domain.Products;
@@ -16,23 +14,22 @@ public class Controller {
 		vendingMachine.init();
 
 		OutputView.printInputMachineMoneyInstruction(); //자판기가 보유하고 있는 금액을 입력해 주세요.
-		// Money money = Money.of(InputView.getMoney());
-		Money machineMoney = Money.of("450");
+		Money machineMoney = Money.of(InputView.getMoney());
+		// Money machineMoney = Money.of("450");
 		vendingMachine.insertMachineMoney(machineMoney);
-		OutputView.printResultOfGenerateCoins(vendingMachine.generateCoins());
+		OutputView.printResultOfGenerateCoins(vendingMachine.generateCoins()); //자판기가 보유한 동전
 
 		OutputView.printInputProductsInstruction(); //상품명과 가격, 수량을 입력해 주세요.
-		// Products products = Products.from(InputView.getProducts());//[콜라,1500,20];[사이다,1000,10]
-		Products products = Products.from(Arrays.asList("콜라,1500,20", "사이다,1000,10"));
+		Products products = Products.from(InputView.getProducts());//[콜라,1500,20];[사이다,1000,10]
+		// Products products = Products.from(Arrays.asList("콜라,1500,20", "사이다,1000,10"));
 		vendingMachine.insertProducts(products);
 
 		OutputView.printInputUserMoneyInstruction(); //투입 금액을 입력해 주세요.
-		// Money userMoney = Money.of(InputView.getMoney());
-		Money userMoney = Money.of("3000");
+		Money userMoney = Money.of(InputView.getMoney());
+		// Money userMoney = Money.of("1700");
 		OutputView.printResultOfInputUserMoney(userMoney);
 		vendingMachine.insertUserMoney(userMoney);
 
-		//싱글톤으로 현상태를 반영한 반복문 조건변수 canXXX를 만든다.
 		boolean canSale = vendingMachine.canSale();
 		while (canSale) {
 			OutputView.printCurrentUserMoney(vendingMachine.toCurrentUserMoney());
@@ -42,6 +39,11 @@ public class Controller {
 
 			canSale = vendingMachine.canSale();
 		}
+
+		// 잔돈 반환
+		OutputView.printCurrentUserMoney(vendingMachine.toCurrentUserMoney());
+		String returnCoins = vendingMachine.returnCoins();
+		OutputView.printResultOfReturnCoins(returnCoins);
 
 	}
 }

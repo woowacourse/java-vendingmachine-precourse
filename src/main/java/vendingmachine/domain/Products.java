@@ -36,7 +36,7 @@ public class Products {
 
 	public int findMinAmount() {
 		return this.products.stream()
-			.mapToInt(product -> product.toAmount())
+			.mapToInt(Product::toAmount)
 			.min()
 			.orElse(0);
 	}
