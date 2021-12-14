@@ -22,14 +22,15 @@ public class ItemController {
 		+ SUFFIX + "로 끝나야 합니다.";
 	private final InputView inputView;
 	private final OutputView outputView;
+	private Items items;
 
 	public ItemController(final InputView inputView, final OutputView outputView) {
 		this.inputView = inputView;
 		this.outputView = outputView;
 	}
 
-	public Items setupItems() {
-		return initializeItems();
+	public void setupItems() {
+		this.items = initializeItems();
 	}
 
 	private Items initializeItems() {

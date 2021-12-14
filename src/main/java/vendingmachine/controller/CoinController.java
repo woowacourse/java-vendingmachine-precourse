@@ -12,16 +12,16 @@ import vendingmachine.view.OutputView;
 public class CoinController {
 	private final InputView inputView;
 	private final OutputView outputView;
+	private Coins coins;
 
 	public CoinController(final InputView inputView, final OutputView outputView) {
 		this.inputView = inputView;
 		this.outputView = outputView;
 	}
 
-	public Coins setupHoldingCoins() {
-		Coins coins = initializeCoins();
+	public void setupHoldingCoins() {
+		this.coins = initializeCoins();
 		outputView.printHoldingCoinStatus(coins.findAll());
-		return coins;
 	}
 
 	public Coins initializeCoins() {
