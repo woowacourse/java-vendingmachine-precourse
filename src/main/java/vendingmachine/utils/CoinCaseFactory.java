@@ -3,8 +3,6 @@ package vendingmachine.utils;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 import vendingmachine.model.Coin;
 import vendingmachine.model.CoinCase;
@@ -29,8 +27,8 @@ public class CoinCaseFactory {
 		return coinCase;
 	}
 
-	private static void increasePickedCoin(CoinCase coinCaseTmp, int pickedCoin) {
-		coinCaseTmp.increasePickedCoinCount(Coin.getCoinEqualAmount(pickedCoin));
+	private static void increasePickedCoin(CoinCase coinCase, int pickedCoin) {
+		coinCase.increasePickedCoinCount(Coin.getCoinEqualAmount(pickedCoin));
 	}
 
 	private static int pickRandomCoin(int currentAmount) {

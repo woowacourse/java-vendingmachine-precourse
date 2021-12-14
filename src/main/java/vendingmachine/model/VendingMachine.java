@@ -31,12 +31,12 @@ public class VendingMachine {
 
 	private static void sellProduct(Product product) {
 		if (!product.isSoldOut()) {
-			product.sellProduct();
+			product.takeOutProduct();
 			useMoneyToBuy(product);
 		}
 	}
 
-	public boolean isReturnChangeCondition() {
+	public boolean isChangeCondition() {
 		return getLowestProductPrice() > remainInsertMoney || isSoldOutAllProducts()
 			|| !hasProductsUserCanBuy();
 	}

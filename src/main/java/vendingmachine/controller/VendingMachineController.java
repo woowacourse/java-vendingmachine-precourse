@@ -12,7 +12,7 @@ public class VendingMachineController {
 
 	public static void controlVendingMachine() {
 		VendingMachine vendingMachine = VendingMachineFactory.makeVendingMachine();
-		while (!vendingMachine.isReturnChangeCondition()) {
+		while (!vendingMachine.isChangeCondition()) {
 			runVendingMachine(vendingMachine);
 		}
 		OutputView.printInsertedMoney(vendingMachine);

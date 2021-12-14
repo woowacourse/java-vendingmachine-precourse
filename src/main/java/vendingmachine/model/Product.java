@@ -41,7 +41,7 @@ public class Product {
 		return number == SOLD_OUT_COUNT;
 	}
 
-	public void sellProduct() {
+	public void takeOutProduct() {
 		number--;
 	}
 
