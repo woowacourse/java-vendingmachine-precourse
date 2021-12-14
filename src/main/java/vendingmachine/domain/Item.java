@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 public class Item {
+    private final int ZERO = 0;
     private String name;
     private int price;
     private int stock;
@@ -9,5 +10,13 @@ public class Item {
         this.name = name;
         this.price = price;
         this.stock = stock;
+    }
+
+    public boolean isInStock() {
+        return stock > ZERO;
+    }
+
+    public boolean isEnoughMoney(int money) {
+        return money >= price;
     }
 }

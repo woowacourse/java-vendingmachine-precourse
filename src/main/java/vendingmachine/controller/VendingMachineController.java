@@ -27,6 +27,11 @@ public class VendingMachineController {
         requestPrintBalanceCoins();
         receiveItemInformation();
         receiveInsertMoney();
+
+        while (items.existsItemCanPurchase(money.getRemainMoney())) {
+
+        }
+
     }
 
     private void receiveVendingMachineBalance() {

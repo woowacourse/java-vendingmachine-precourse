@@ -4,12 +4,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
+import vendingmachine.domain.validation.Validator;
+
 public class Items {
-    private final Validation itemManager;
+    private final Validator itemManager;
     private final Map<String, Item> itemList;
 
     public Items() {
-        itemManager = new Validation();
+        itemManager = new Validator();
         itemList = new HashMap<>();
     }
 
@@ -26,5 +28,19 @@ public class Items {
             itemList.put(name, new Item(name, price, stock));
         }
 
+    }
+
+    public boolean existsItemCanPurchase(int money) {
+
+        for (String name : itemList.keySet()) {
+            Item item = itemList.get(name);
+
+            if (item.isInStock() && item.isEnoughMoney(money)) {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 }

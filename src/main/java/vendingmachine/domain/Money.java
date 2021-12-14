@@ -6,4 +6,8 @@ public class Money {
     public Money(String insertMoney) {
         this.money = Integer.parseInt(insertMoney);
     }
+
+    public int getRemainMoney() {
+        return money;
+    }
 }
