@@ -1,6 +1,7 @@
 package vendingmachine.customer;
 
 import vendingmachine.exception.NotEnoughMoneyException;
+import vendingmachine.utils.message.OutputMessage;
 import vendingmachine.utils.validator.InputDataValidator;
 import vendingmachine.utils.validator.MoneyDataValidator;
 
@@ -41,6 +42,11 @@ public class CustomerController {
         }catch(NotEnoughMoneyException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
+    }
+
+    public void printBalance() {
+        System.out.println(OutputMessage.CUSTOMER_BALANCE_PRINT_FORMAT
+                .replace("balance", String.valueOf(getBalance())));
     }
 
     public Integer getBalance() {
