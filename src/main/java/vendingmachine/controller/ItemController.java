@@ -81,10 +81,9 @@ public class ItemController {
 			.getCost();
 	}
 
-	public void update(final int money) {
-		outputView.printMoney(money);
-		outputView.printItemPerChaseRequest();
+	public int update(final int money) {
 		Item item = items.findItemByName(inputView.scanItemName(), money);
+		checkItemSellable(item, money);
 		item.sell();
 	}
 

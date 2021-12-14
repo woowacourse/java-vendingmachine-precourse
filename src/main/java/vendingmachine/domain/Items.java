@@ -21,11 +21,9 @@ public class Items {
 	}
 
 	public Item findItemByName(final String name, final int money) {
-		Item foundItem = items.stream()
+		return items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException(CANNOT_FIND_NAME_ERROR));
-		checkItemSellable(foundItem, money);
-		return foundItem;
 	}
 
 	private void validateDuplication(final List<Item> items) {
