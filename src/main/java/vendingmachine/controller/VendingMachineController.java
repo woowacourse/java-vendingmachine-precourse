@@ -34,7 +34,7 @@ public class VendingMachineController {
 
 		int restMoney = buyProduct(customer);
 
-		giveChange(restMoney);
+		giveChange(restMoney, customer);
 	}
 
 	public void inputMoneyForChange() {
@@ -89,8 +89,8 @@ public class VendingMachineController {
 		return customer.getMoney();
 	}
 
-	public void giveChange(int restMoney) {
-		HashMap<Coin, Integer> coinForChange = coinService.calculateCoinForChange(restMoney);
+	public void giveChange(int restMoney, Customer customer) {
+		HashMap<Coin, Integer> coinForChange = coinService.calculateCoinForChange(restMoney, customer);
 
 		vendingMachineView.giveChange(restMoney, coinForChange);
 	}

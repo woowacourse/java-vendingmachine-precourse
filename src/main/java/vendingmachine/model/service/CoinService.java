@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.model.Coin;
+import vendingmachine.model.Customer;
 import vendingmachine.model.repository.CoinRepository;
 
 public class CoinService {
@@ -40,24 +41,26 @@ public class CoinService {
 		return coinName;
 	}
 
-	public HashMap<Coin, Integer> calculateCoinForChange(int restMoney) {
+	public HashMap<Coin, Integer> calculateCoinForChange(int restMoney, Customer customer) {
 		HashMap<Coin, Integer> coinForChange = new HashMap<>();
 		for (int amount : getCoinAmountList()) {
 			int availableCount = restMoney / amount;
 			Integer maxCount = coinRepository.getCoinRepository().get(Coin.valueOf(makeCoinName(amount)));
 			if (maxCount < availableCount) {
-				restMoney = putCoinForChange(restMoney, coinForChange, amount, maxCount);
+				restMoney = putCoinForChange(restMoney, coinForChange, amount, maxCount, customer);
 				continue;
 			}
-			restMoney = putCoinForChange(restMoney, coinForChange, amount, availableCount);
+			restMoney = putCoinForChange(restMoney, coinForChange, amount, availableCount, customer);
 		}
 
 		return coinForChange;
 	}
 
-	private int putCoinForChange(int restMoney, HashMap<Coin, Integer> coinForChange, int amount, Integer count) {
+	private int putCoinForChange(int restMoney, HashMap<Coin, Integer> coinForChange, int amount, Integer count,
+		Customer customer) {
 		coinForChange.put(Coin.valueOf(makeCoinName(amount)), count);
 		restMoney -= count * amount;
+		customer.setMoney(restMoney);
 		return restMoney;
 	}
 
