@@ -28,14 +28,9 @@ public class VendingMachineController {
 		vendingMachineWork();
 	}
 
-	private void saveUser() {
-		try {
-			Integer userMoney = InputView.getUserMoney(vendingMachineProducts.getLowestPrice());
-			user = new User(userMoney);
-		} catch (IllegalArgumentException e) {
-			OutputView.printError(e.getMessage());
-			saveUser();
-		}
+	private void saveVendingMachineMoney() {
+		int vendingMachineInputMoney = InputView.getVendingMachineMoney();
+		vendingMachineMoney.moneyToCoins(vendingMachineInputMoney);
 	}
 
 	private void saveProducts() {
@@ -65,9 +60,14 @@ public class VendingMachineController {
 		return new VendingMachineProduct(name, price, amount);
 	}
 
-	private void saveVendingMachineMoney() {
-		int vendingMachineInputMoney = InputView.getVendingMachineMoney();
-		vendingMachineMoney.moneyToCoins(vendingMachineInputMoney);
+	private void saveUser() {
+		try {
+			Integer userMoney = InputView.getUserMoney(vendingMachineProducts.getLowestPrice());
+			user = new User(userMoney);
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
+			saveUser();
+		}
 	}
 
 	private void vendingMachineWork() {
