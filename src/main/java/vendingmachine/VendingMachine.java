@@ -7,6 +7,20 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
+	private static String inputMoney;
+
+	public Items[] makeItem() {
+		String[] setItem = InputData.setItem();
+		Items[] items = new Items[setItem.length];
+
+		for (int i = 0; i < setItem.length; i++) {
+			String[] item = setItem[i].replace("[", "").replace("]", "").replace(" ", "").split(",");
+			items[i] = new Items(item[0], item[1], item[2]);
+		}
+
+		return items;
+	}
+
 	public List randomCoin(int amount) {
 		List coinList = new ArrayList();
 
