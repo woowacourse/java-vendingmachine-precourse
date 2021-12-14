@@ -8,6 +8,7 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import vendingmachine.domain.enumclass.Coin;
+import vendingmachine.domain.enumclass.ProductEnum;
 import vendingmachine.utils.CoinUtil;
 import vendingmachine.validation.GlobalValidation;
 import vendingmachine.validation.validator.InputProductValidator;
@@ -62,7 +63,8 @@ public class VendingMachine {
 			InputProductValidator.validateProduct(product, products);
 
 			addProduct(
-				new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+				new Product(product[ProductEnum.NAME.getIndex()], Integer.parseInt(product[ProductEnum.PRICE.getIndex()]), Integer.parseInt(product[ProductEnum.AMOUNT
+					.getIndex()])));
 		}
 	}
 
