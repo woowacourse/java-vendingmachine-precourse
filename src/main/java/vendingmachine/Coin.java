@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -22,22 +21,32 @@ public enum Coin {
 	}
 
 	public static Coin pickRandom(final int money) {
-		List<Coin> randomPool = getRandomPool(money);
-		List<Integer> randomPoolIndices = getRandomPoolIndices(randomPool.size());
-		return randomPool.get(Randoms.pickNumberInList(randomPoolIndices));
-	}
-
-	private static List<Coin> getRandomPool(final int money) {
-		List<Coin> coins = Arrays.asList(Coin.values());
-		return coins.stream().filter(coin -> coin.amount <= money).collect(Collectors.toList());
-	}
-
-	private static List<Integer> getRandomPoolIndices(final int length) {
-		List<Integer> randomPoolIndices = new ArrayList<>();
-		for (int i = 0; i < length; i++) {
-			randomPoolIndices.add(i);
+		try {
+			List<Integer> coinList = getSwappableCoinList(money);
+			int pickedCoinAmount = Randoms.pickNumberInList(coinList);
+			return findCoinByAmount(pickedCoinAmount);
+		} catch (IllegalArgumentException exception) {
+			System.out.println(exception.getMessage());
+			return pickRandom(money);
 		}
-		return randomPoolIndices;
+	}
+
+	private static Coin findCoinByAmount(final int coinAmount) throws IllegalArgumentException {
+		Coin[] coinList = Coin.values();
+		for (Coin coin : coinList) {
+			if (coin.amount == coinAmount) {
+				return coin;
+			}
+		}
+		throw new IllegalArgumentException("[ERROR] Unexpected Behavior");
+	}
+
+	private static List<Integer> getSwappableCoinList(final int money) {
+		List<Coin> coins = Arrays.asList(Coin.values());
+		List<Coin> generalizableCoins = coins.stream()
+			.filter(coin -> coin.amount <= money)
+			.collect(Collectors.toList());
+		return generalizableCoins.stream().map(coin -> coin.amount).collect(Collectors.toList());
 	}
 
 	public static boolean isSwappableForCoin(final int money) {
