@@ -13,7 +13,7 @@ public class VendingMachinePrinter {
 	}
 
 	public static void printGetProductNameMessage(int inputAmount){
-		System.out.println("투입금액: " + inputAmount + "원");
+		System.out.println("투입 금액: " + inputAmount + "원");
 		System.out.println("구매할 상품명을 입력해 주세요.");
 	}
 
