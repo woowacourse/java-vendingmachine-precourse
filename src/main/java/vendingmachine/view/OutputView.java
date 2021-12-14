@@ -13,16 +13,16 @@ public class OutputView {
 		StringBuilder sb = new StringBuilder();
 		sb.append("\n").append(DISPLAY_MACHINE_COIN_MSG);
 
-		coinCount.forEach((coin, count) -> {
-			sb.append(makeDisplayCoinMsg(coin, count));
-		});
-
-		System.out.println(sb);
+		System.out.println(makeDisplayCoinMsg(coinCount, sb));
 	}
 
-	private StringBuilder makeDisplayCoinMsg(Integer coin, Integer count) {
-		return new StringBuilder().append("\n").append(coin.toString()).append(COIN_UNIT_WON)
-			.append(" - ").append(count.toString()).append(COIN_COUNT_UNIT);
+	private StringBuilder makeDisplayCoinMsg(LinkedHashMap<Integer, Integer> coinInfo, StringBuilder sb) {
+		coinInfo.forEach((coin, count) -> {
+			sb.append("\n").append(coin.toString()).append(COIN_UNIT_WON)
+				.append(" - ").append(count.toString()).append(COIN_COUNT_UNIT);
+		});
+
+		return sb;
 	}
 
 	public void displayUserMoney(int change) {
@@ -30,16 +30,10 @@ public class OutputView {
 		System.out.println(msg);
 	}
 
-	public void displayChange(LinkedHashMap<Integer, Integer> change) {
+	public void displayChange(LinkedHashMap<Integer, Integer> changeInfo) {
 		StringBuilder sb = new StringBuilder();
 		sb.append(DISPLAY_CHANGE_MSG);
 
-		change.forEach((coin, count) -> {
-			if (count > 0) {
-				sb.append(makeDisplayCoinMsg(coin, count));
-			}
-		});
-
-		System.out.println(sb);
+		System.out.println(makeDisplayCoinMsg(changeInfo, sb));
 	}
 }
