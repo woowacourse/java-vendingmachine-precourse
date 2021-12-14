@@ -1,7 +1,6 @@
 package vendingmachine.utils;
 
 import static vendingmachine.constants.Message.*;
-import static vendingmachine.utils.Print.*;
 
 import java.util.Map;
 
@@ -13,24 +12,24 @@ public class View {
 	}
 
 	public static void showCoins(Map<Coin, Integer> coins, String message) {
-		showMessage(message);
+		System.out.println(message);
 		coins.forEach(View::showCoin);
-		showMessage(ENTER_LINE);
+		System.out.println(ENTER_LINE);
 	}
 
 	private static void showCoin(Coin coinType, int count) {
-		showMessage(coinType.getAmount() + WON + SPACE + count + COUNT);
+		System.out.println(coinType.getAmount() + WON + SPACE + count + COUNT);
 	}
 
 	public static void showMoney(int money) {
-		showMessage(ANSWER_INPUT_COST + money + WON);
+		System.out.println(ANSWER_INPUT_COST + money + WON);
 	}
 
 	public static void showAskMessage(String askMessage) {
-		showMessage(askMessage);
+		System.out.println(askMessage);
 	}
 
 	public static void showErrorMessage(String errorMessage) {
-		showMessage(errorMessage);
+		System.out.println(errorMessage);
 	}
 }
