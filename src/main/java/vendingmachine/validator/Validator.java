@@ -6,7 +6,7 @@ public class Validator {
 	public static boolean isValidMoneyInMachine(int moneyInMachine) {
 		try {
 			NumberValidator.isGreaterThanOrEqualToZero(moneyInMachine);
-			NumberValidator.isDivisibleByLowLimitOfCoin(moneyInMachine);
+			NumberValidator.isDivisibleByMinimumUnit(moneyInMachine);
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
@@ -40,8 +40,8 @@ public class Validator {
 	private static void validateProductPrice(String price) {
 		NumberValidator.isInteger(price);
 		int intPrice = Integer.parseInt(price);
-		NumberValidator.isGreaterThanOrEqualLowLimitOfPrice(intPrice);
-		NumberValidator.isDivisibleByLowLimitOfCoin(intPrice);
+		NumberValidator.isGreaterThanOrEqualToLeastPrice(intPrice);
+		NumberValidator.isDivisibleByMinimumUnit(intPrice);
 	}
 
 	private static void validateProductAmount(String amount) {
@@ -52,7 +52,7 @@ public class Validator {
 
 	public static boolean isValidInputMoney(int inputMoney) {
 		try {
-			NumberValidator.isDivisibleByLowLimitOfCoin(inputMoney);
+			NumberValidator.isDivisibleByMinimumUnit(inputMoney);
 			return true;
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());

@@ -6,7 +6,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 
 public class Output {
-	static final String MSG_PRINT_COINS_IN_MACHINE = "자판기가 보유한 동전";
+	static final String MSG_PRINT_COINS_IN_MACHINE = "\n자판기가 보유한 동전";
 	static final String MSG_INPUT_MONEY = "\n투입 금액: ";
 	static final String MONETARY_UNIT = "원";
 	static final String CHANGE = "잔돈";

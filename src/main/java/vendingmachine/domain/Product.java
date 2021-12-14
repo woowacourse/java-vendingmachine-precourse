@@ -22,7 +22,7 @@ public class Product {
 		return Math.min(this.price, price);
 	}
 
-	public int minusPrice(int money) {
+	public int payMoney(int money) {
 		return money - price;
 	}
 
