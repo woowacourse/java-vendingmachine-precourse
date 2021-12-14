@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 public class OutPutVendingMachineController {
 

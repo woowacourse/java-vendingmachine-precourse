@@ -1,7 +1,9 @@
-package vendingmachine;
+package vendingmachine.system;
 
 import java.util.List;
 
+import vendingmachine.controller.InputVendingMachineController;
+import vendingmachine.controller.OutPutVendingMachineController;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Customer;
 import vendingmachine.domain.VendingMachine;

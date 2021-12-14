@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import vendingmachine.system.VendingMachineSystem;
+
 public class Application {
 
     public static void main(String[] args) {
