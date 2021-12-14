@@ -22,9 +22,7 @@ public class CatalogRepository {
 		return null;
 	}
 
-	public static void reduceAmount(Catalog catalogToPurchase) {
-
-		Catalog catalog = getCatalogByName(catalogToPurchase.getName());
+	public static void reduceAmount(Catalog catalog) {
 		if (catalog != null) {
 			catalog.purchase();
 		}

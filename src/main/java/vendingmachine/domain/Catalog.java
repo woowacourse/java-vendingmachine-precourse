@@ -13,16 +13,8 @@ public class Catalog {
 		this.amount = amount;
 	}
 
-	public String getName() {
-		return this.name;
-	}
-
 	public int getPrice() {
 		return this.price;
-	}
-
-	public int getAmount() {
-		return this.amount;
 	}
 
 	@Override

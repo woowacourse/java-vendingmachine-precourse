@@ -78,13 +78,10 @@ public class InputExceptionService {
 	}
 
 	public static void checkCanPurchase(Catalog catalog) {
-		int amount = catalog.getAmount();
-		int price = catalog.getPrice();
-		int userAccount = UserAccount.getAccount();
-		if (price > userAccount) {
+		if (!UserAccount.canBuy(catalog)) {
 			throw new IllegalArgumentException(NOT_ENOUGH_MONEY);
 		}
-		if (amount == NO_MORE_CATALOG) {
+		if (!catalog.isExist()) {
 			throw new IllegalArgumentException(NOT_ENOUGH_CATALOG);
 		}
 	}
