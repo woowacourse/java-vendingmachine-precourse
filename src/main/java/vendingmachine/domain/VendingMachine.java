@@ -198,20 +198,22 @@ public class VendingMachine {
 			if (count == INITIAL_COIN) {
 				continue;
 			}
+			subtractMoney(amount * count);
+			subtractCoin(coin, count);
+
 			printCountOfCoins(amount, count);
 		}
 	}
 
 	private int getReturnCountOfCoin(Coin coin) {
 		int amount = Coin.getAmountOfCoin(coin);
-		int count = INITIAL_COIN;
-
 		if (money < amount) {
-			return count;
+			return INITIAL_COIN;
 		}
-		count = changes.get(coin);
-		subtractMoney(amount * count);
+		return changes.get(coin);
+	}
 
-		return count;
+	private void subtractCoin(Coin coin, int count) {
+		changes.put(coin, changes.get(coin) - count);
 	}
 }
