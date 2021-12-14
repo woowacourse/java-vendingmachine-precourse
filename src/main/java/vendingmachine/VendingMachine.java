@@ -9,7 +9,6 @@ public class VendingMachine {
 	private ArrayList<Product> products = null;
 
 	public VendingMachine(int amount) {
-		getRandomCoin(1, 1);
 		for (Coin c: Coin.values()) {
 			if (c.getAmount() == 10) {
 				c.increaseCount(amount / c.getAmount());
