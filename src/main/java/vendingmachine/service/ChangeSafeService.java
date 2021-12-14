@@ -5,8 +5,10 @@ import java.util.Map;
 import vendingmachine.domain.ChangeSafe;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.CoinGenerator;
+import vendingmachine.domain.GreedyCoinPickStrategy;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.Quantity;
+import vendingmachine.domain.RandomCoinPickStrategy;
 import vendingmachine.repository.ChangeSafeRepository;
 
 public class ChangeSafeService {
@@ -20,13 +22,13 @@ public class ChangeSafeService {
 	}
 
 	public String generateChangeSafe(Money money) {
-		Map<Coin, Quantity> coinMap = coinGenerator.generate(money);
+		Map<Coin, Quantity> coinMap = coinGenerator.generate(money, new RandomCoinPickStrategy());
 		return repository.save(new ChangeSafe(coinMap)).toString();
 	}
 
 	public String giveChange(Money money) {
 		ChangeSafe changeSafe = repository.get();
-		return changeSafe.giveChange(money).toString();
+		return new ChangeSafe(coinGenerator.generate(money, new GreedyCoinPickStrategy(changeSafe))).toString();
 	}
 
 }

@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -13,7 +14,7 @@ public enum Coin {
 	COIN_10(10);
 
 	private static final String CURRENCY = "원";
-	private static final String ERROR_NO_AMOUNT = "%d 원 동전이 없습니다.";
+	private static final String ERROR_NO_COIN = "%d 원 동전이 없습니다.";
 	private final int amount;
 
 	Coin(final int amount) {
@@ -35,7 +36,7 @@ public enum Coin {
 				return coin;
 			}
 		}
-		throw new IllegalArgumentException(String.format(ERROR_NO_AMOUNT, amount));
+		throw new NoSuchElementException(String.format(ERROR_NO_COIN, amount));
 	}
 
 	@Override

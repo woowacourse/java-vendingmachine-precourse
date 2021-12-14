@@ -15,7 +15,7 @@ public class ServiceConfig {
 	}
 
 	public static ChangeSafeService getChangeSafeService() {
-		return new ChangeSafeService(DomainConfig.getRandomCoinGenerator(), RepositoryConfig.getChangeSafeRepository());
+		return new ChangeSafeService(DomainConfig.getCoinGenerator(), RepositoryConfig.getChangeSafeRepository());
 	}
 
 	public static SplitService getSplitService() {
