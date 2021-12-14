@@ -1,4 +1,4 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import java.util.HashMap;
 import java.util.Map;

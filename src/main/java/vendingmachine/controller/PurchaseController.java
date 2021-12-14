@@ -1,14 +1,15 @@
-package vendingmachine.purchase;
+package vendingmachine.controller;
 
-import vendingmachine.VendingMachineConsole;
+import vendingmachine.ApplicationConsole;
+import vendingmachine.service.PurchaseService;
 
 public class PurchaseController {
     private final PurchaseService purchaseService;
-    private final VendingMachineConsole vendingMachineConsole;
+    private final ApplicationConsole applicationConsole;
 
-    public PurchaseController(PurchaseService purchaseService, VendingMachineConsole vendingMachineConsole) {
+    public PurchaseController(PurchaseService purchaseService, ApplicationConsole applicationConsole) {
         this.purchaseService = purchaseService;
-        this.vendingMachineConsole = vendingMachineConsole;
+        this.applicationConsole = applicationConsole;
     }
 
     public void start() {
@@ -18,7 +19,7 @@ public class PurchaseController {
     }
 
     private void insertMoney() {
-        purchaseService.insertMoney(vendingMachineConsole.inputAvailableMoney());
+        purchaseService.insertMoney(applicationConsole.inputAvailableMoney());
     }
 
     private void purchase() {
@@ -34,18 +35,18 @@ public class PurchaseController {
 
     private void getChanges() {
         showAvailableMoney();
-        vendingMachineConsole.printChange(purchaseService.giveChange());
+        applicationConsole.printChange(purchaseService.giveChange());
     }
 
     private void showAvailableMoney() {
-        vendingMachineConsole.printAvailableMoney(purchaseService.showAvailableMoney());
+        applicationConsole.printAvailableMoney(purchaseService.showAvailableMoney());
     }
 
     private void purchaseByItemName() {
-        purchaseService.purchaseByItemName(vendingMachineConsole.inputItemsToPurchase());
+        purchaseService.purchaseByItemName(applicationConsole.inputItemsToPurchase());
     }
 
     private void showErrorMessage(String errorMessage) {
-        vendingMachineConsole.printErrorMessage(errorMessage);
+        applicationConsole.printErrorMessage(errorMessage);
     }
 }

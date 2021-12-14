@@ -1,12 +1,10 @@
-package vendingmachine.vendingMachine;
-
-import static vendingmachine.StringConstants.*;
+package vendingmachine.domain.vendingMachine;
 
 import java.util.Optional;
 
-import vendingmachine.coin.Coins;
-import vendingmachine.item.Item;
-import vendingmachine.item.Items;
+import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.item.Item;
+import vendingmachine.domain.item.Items;
 
 public class VendingMachine {
     private final ChangeAccountant changeAccountant = new ChangeAccountant();

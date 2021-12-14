@@ -1,7 +1,7 @@
-package vendingmachine.vendingMachine;
+package vendingmachine.domain.vendingMachine;
 
-import vendingmachine.coin.Coin;
-import vendingmachine.coin.Coins;
+import vendingmachine.domain.coin.Coin;
+import vendingmachine.domain.coin.Coins;
 
 public class ChangeAccountant {
     private Coins changes = new Coins();

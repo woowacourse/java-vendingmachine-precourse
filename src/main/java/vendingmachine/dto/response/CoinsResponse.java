@@ -5,8 +5,8 @@ import static vendingmachine.StringConstants.NEW_LINE;
 import java.util.ArrayList;
 import java.util.List;
 
-import vendingmachine.coin.Coin;
-import vendingmachine.coin.Coins;
+import vendingmachine.domain.coin.Coin;
+import vendingmachine.domain.coin.Coins;
 
 public class CoinsResponse {
     private static final String DELIMITER = " - ";

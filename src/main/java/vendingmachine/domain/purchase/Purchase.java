@@ -1,4 +1,4 @@
-package vendingmachine.purchase;
+package vendingmachine.domain.purchase;
 
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE;
 

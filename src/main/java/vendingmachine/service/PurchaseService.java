@@ -1,8 +1,9 @@
-package vendingmachine.purchase;
+package vendingmachine.service;
 
-import vendingmachine.vendingMachine.VendingMachine;
-import vendingmachine.coin.Coins;
-import vendingmachine.item.Item;
+import vendingmachine.domain.coin.Coins;
+import vendingmachine.domain.purchase.Purchase;
+import vendingmachine.domain.purchase.PurchaseValidator;
+import vendingmachine.domain.vendingMachine.VendingMachine;
 
 public class PurchaseService {
     private final VendingMachine vendingMachine;

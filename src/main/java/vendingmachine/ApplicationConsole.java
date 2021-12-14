@@ -5,7 +5,7 @@ import static vendingmachine.StringConstants.*;
 import java.util.function.Supplier;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.coin.Coins;
+import vendingmachine.domain.coin.Coins;
 import vendingmachine.dto.request.AvailableMoneyRequest;
 import vendingmachine.dto.request.CoinBalanceRequest;
 import vendingmachine.dto.request.ItemPurchaseRequest;
@@ -14,7 +14,7 @@ import vendingmachine.dto.response.CoinsResponse;
 import vendingmachine.dto.response.MoneyAvailableResponse;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
-public class VendingMachineConsole {
+public class ApplicationConsole {
 
     public int inputCoinBalance() {
         printCoinBalanceRequestMessage();

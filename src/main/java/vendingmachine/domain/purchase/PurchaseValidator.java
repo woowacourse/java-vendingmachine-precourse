@@ -1,11 +1,11 @@
-package vendingmachine.purchase;
+package vendingmachine.domain.purchase;
 
 import static vendingmachine.StringConstants.*;
 
 import java.util.Optional;
 
-import vendingmachine.item.Item;
-import vendingmachine.vendingMachine.VendingMachine;
+import vendingmachine.domain.item.Item;
+import vendingmachine.domain.vendingMachine.VendingMachine;
 
 public class PurchaseValidator {
     private final VendingMachine vendingMachine;
