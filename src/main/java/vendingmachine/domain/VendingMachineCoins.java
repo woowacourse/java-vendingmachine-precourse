@@ -57,17 +57,21 @@ public class VendingMachineCoins {
 	public Map<Coin, Integer> generateChangeCoins(Money userMoney) {
 		Map<Coin, Integer> changeCoins = initializeCoinMap();
 		for (Coin coin : coins.keySet()) {
-			int quantity = ZERO;
-			while (isPossibleGenerateChangeCoin(coin, userMoney)) {
-				quantity++;
-				userCoin(coin);
-				userMoney.spendMoney(coin.getAmount());
-			}
-			if (quantity != ZERO) {
-				changeCoins.put(coin, quantity);
-			}
+			addChangeCoin(userMoney, changeCoins, coin);
 		}
 		return changeCoins;
+	}
+
+	private void addChangeCoin(Money userMoney, Map<Coin, Integer> changeCoins, Coin coin) {
+		int quantity = ZERO;
+		while (isPossibleGenerateChangeCoin(coin, userMoney)) {
+			quantity++;
+			userCoin(coin);
+			userMoney.spendMoney(coin.getAmount());
+		}
+		if (quantity != ZERO) {
+			changeCoins.put(coin, quantity);
+		}
 	}
 
 	private void userCoin(Coin coin) {
