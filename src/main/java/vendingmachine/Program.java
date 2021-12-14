@@ -82,9 +82,18 @@ public class Program {
 	}
 
 	private void setUserMoney() {
+		String userMoneyInString = getUserMoney();
+		userMoney = Integer.parseInt(userMoneyInString);
+	}
+
+	private String getUserMoney() {
 		Guide.USER_MONEY_REQUEST.println();
 		String userMoneyInString = Console.readLine();
-		userMoney = Integer.parseInt(userMoneyInString);
+		UserMoneyValidator validator = new UserMoneyValidator();
+		if (!validator.validate(userMoneyInString)) {
+			return getUserMoney();
+		}
+		return userMoneyInString;
 	}
 
 	private String getProductName() {
