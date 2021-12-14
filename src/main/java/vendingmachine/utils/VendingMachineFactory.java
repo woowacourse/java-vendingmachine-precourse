@@ -1,17 +1,18 @@
 package vendingmachine.utils;
 
-import java.util.List;
-import vendingmachine.model.CoinCase;
-import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
+import vendingmachine.view.InputView;
 
 public class VendingMachineFactory {
 
 	private VendingMachineFactory() {
 	}
 
-	public static VendingMachine makeVendingMachine(CoinCase coinCases,
-		List<Product> products, int insertMoney) {
-		return new VendingMachine(coinCases, products, insertMoney);
+	public static VendingMachine makeVendingMachine() {
+		int amount = InputView.writeVendingMachineAmount();
+		return new VendingMachine(
+			CoinCaseFactory.makeCoinCase(amount),
+			ProductFactory.makeProducts(),
+			InputView.writeInsertMoney());
 	}
 }
