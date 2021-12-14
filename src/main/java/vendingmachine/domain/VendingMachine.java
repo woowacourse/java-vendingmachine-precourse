@@ -9,42 +9,26 @@ import vendingmachine.view.InputView;
 
 public class VendingMachine {
 
-	public int holdingMoney;
 	public int inputMoney;
 	public List<Item> holdingItemList;
-	public Map<Coin, Integer> holdingCoins;
 	public Map<Coin, Integer> changeCoins;
-	private Coins coins;
 
-	public VendingMachine(){
-		holdingMoney = inputView.holdingMoneyInput();
-		inputMoney = inputView.inputMoneyInput();
-		holdingItemList = inputView.holdingItemsInput();
-		holdingCoins = makeInitialHoldingCoins();
+	private static VendingMachine vendingMachine = null;
+
+	public static VendingMachine getVendingMachine(int inputMoney, List<Item> holdingItemList){
+		if (vendingMachine == null){
+			vendingMachine = new VendingMachine(inputMoney, holdingItemList);
+		}
+		return vendingMachine;
+	}
+
+	public VendingMachine(int inputMoney, List<Item> holdingItemList){
+		this.inputMoney = inputMoney;
+		this.holdingItemList = holdingItemList;
 	}
 
 	InputView inputView = new InputView();
 
-	public Map<Coin, Integer> makeInitialHoldingCoins() {
-		coins = new Coins(holdingMoney);
-		return coins.generateCoins(holdingMoney);
-	}
-
-	public void settingInputHoldingMoney(){
-		holdingMoney = inputView.holdingMoneyInput();
-	}
-
-	public void settingHoldingCoins(){
-		holdingCoins = makeInitialHoldingCoins();
-	}
-
-	public void settingHoldingItemList(){
-		holdingItemList = inputView.holdingItemsInput();
-	}
-
-	public void settingInputMoney(){
-		inputMoney = inputView.inputMoneyInput();
-	}
 
 	public void stockDeduct(String buyItem) {
 		for (int i = 0; i < holdingItemList.size(); i++) {
@@ -62,7 +46,7 @@ public class VendingMachine {
 		}
 	}
 
-	public void calculateChangeCoins() {
+	public void calculateChangeCoins(Map<Coin, Integer> holdingCoins) {
 		changeCoins = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			int count = Math.min(holdingCoins.get(coin), inputMoney / coin.getAmount());

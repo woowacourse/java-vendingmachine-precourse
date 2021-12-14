@@ -14,38 +14,30 @@ public class Coins {
 
 	public int holdingMoney;
 
-	private Map<Coin, Integer> coins = new LinkedHashMap<>();
+	private Map<Coin, Integer> holdingCoins = new LinkedHashMap<>();
 
-	public Coins(int holdingMoney) {
-		this.holdingMoney = holdingMoney;
-		coins = initializeCoins();
-	}
-
-	public Map<Coin, Integer> initializeCoins() {
-		coins.put(COIN_500, 0);
-		coins.put(COIN_100, 0);
-		coins.put(COIN_50, 0);
-		coins.put(COIN_10, 0);
+	public Map<Coin, Integer> initializeCoins(int holdingMoney) {
+		holdingCoins.put(COIN_500, 0);
+		holdingCoins.put(COIN_100, 0);
+		holdingCoins.put(COIN_50, 0);
+		holdingCoins.put(COIN_10, 0);
 		generateCoins(holdingMoney);
-		return coins;
+		return holdingCoins;
 	}
 
-	public void generateCoins(int holdingMoney) {
+	public Map<Coin, Integer> generateCoins(int holdingMoney) {
 		while (holdingMoney != 0) {
 			Coin coin = pickRandomCoinValue();
 			if (holdingMoney >= coin.getAmount()) {
 				holdingMoney -= coin.getAmount();
-				coins.put(coin, coins.get(coin) + 1);
+				holdingCoins.put(coin, holdingCoins.get(coin) + 1);
 			}
 		}
+		return holdingCoins;
 	}
 
 	public Coin pickRandomCoinValue() {
 		int amount = Randoms.pickNumberInList(coinsValueList);
 		return Coin.valueOf(amount);
-	}
-
-	public Map<Coin, Integer> getCoins() {
-		return coins;
 	}
 }
