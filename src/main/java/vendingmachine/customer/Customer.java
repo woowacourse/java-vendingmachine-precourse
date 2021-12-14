@@ -15,6 +15,10 @@ public class Customer {
         return customer;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     public void addAmount(int amount) {
         this.amount += amount;
     }

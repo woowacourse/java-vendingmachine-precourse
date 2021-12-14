@@ -37,4 +37,8 @@ public class CustomerController {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
+
+    public Integer getRemainingAmount() {
+        return customerService.getRemainingAmount();
+    }
 }

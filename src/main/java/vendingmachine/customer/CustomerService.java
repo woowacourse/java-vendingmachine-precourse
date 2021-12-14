@@ -27,4 +27,8 @@ public class CustomerService {
     public void hasPurchaseAmount(int purchaseAmount) {
         customer.hasPurchaseAmount(purchaseAmount);
     }
+
+    public Integer getRemainingAmount() {
+        return customer.getAmount();
+    }
 }
