@@ -1,8 +1,8 @@
 package vendingmachine.view;
 
-import vendingmachine.exception.BalanceNotMultipleOfTenMessageException;
-import vendingmachine.exception.BalanceNotNumericMessageException;
-import vendingmachine.exception.BalanceNotPositiveMessageException;
+import vendingmachine.exception.MoneyNotMultipleOfTenMessageException;
+import vendingmachine.exception.MoneyNotNumericMessageException;
+import vendingmachine.exception.MoneyNotPositiveMessageException;
 import vendingmachine.view.reader.Reader;
 
 public class InputView {
@@ -15,34 +15,34 @@ public class InputView {
 		this.outputView = outputView;
 	}
 
-	public int requestBalanceOfMachine() {
+	public int requestMoneyOfMachine() {
 		outputView.printMessage("자판기가 보유하고 있는 금액을 입력해 주세요.");
-		return getValidBalance();
+		return getValidMoney();
 	}
 
-	private int getValidBalance() {
+	private int getValidMoney() {
 		String inputString = reader.readLine();
-		int balance = convertBalanceStringToInteger(inputString);
-		validateBalance(balance);
-		return balance;
+		int money = convertMoneyStringToInteger(inputString);
+		validateMoney(money);
+		return money;
 	}
 
-	private int convertBalanceStringToInteger(String inputString) {
+	private int convertMoneyStringToInteger(String inputString) {
 		try {
 			return Integer.parseInt(inputString);
 		} catch (NumberFormatException ex) {
-			throw new BalanceNotNumericMessageException();
+			throw new MoneyNotNumericMessageException();
 		}
 	}
 
-	private void validateBalance(int balance) {
-		validateBalanceIsPositive(balance);
-		validateBalanceIsMutipleOfTen(balance);
+	private void validateMoney(int balance) {
+		validateMoneyIsPositive(balance);
+		validateMoneyIsMultipleOfTen(balance);
 	}
 
-	private void validateBalanceIsPositive(int balance) {
+	private void validateMoneyIsPositive(int balance) {
 		if (isNumberNotPositive(balance)) {
-			throw new BalanceNotPositiveMessageException();
+			throw new MoneyNotPositiveMessageException();
 		}
 	}
 
@@ -50,19 +50,19 @@ public class InputView {
 		return (number <= 0);
 	}
 
-	private void validateBalanceIsMutipleOfTen(int balance) {
-		if (isNumberNotMutipleOfTen(balance)) {
-			throw new BalanceNotMultipleOfTenMessageException();
+	private void validateMoneyIsMultipleOfTen(int balance) {
+		if (isNumberNotMultipleOfTen(balance)) {
+			throw new MoneyNotMultipleOfTenMessageException();
 		}
 	}
 
-	private boolean isNumberNotMutipleOfTen(int number) {
+	private boolean isNumberNotMultipleOfTen(int number) {
 		return (number % 10 != 0);
 	}
 
-	public int requestBalanceOfUser() {
+	public int requestMoneyOfUser() {
 		outputView.printMessage("투입 금액을 입력해 주세요.");
-		return getValidBalance();
+		return getValidMoney();
 	}
 
 }

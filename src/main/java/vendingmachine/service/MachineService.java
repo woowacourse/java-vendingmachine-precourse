@@ -6,11 +6,11 @@ import vendingmachine.dto.ProductDto;
 
 public interface MachineService {
 
-	void fillWithCoins(int balance);
+	void fillWithCoins(int money);
 
 	void saveProducts(List<ProductDto> productDtos);
 
-	void depositMoneyOfUser(int balance);
+	void depositMoneyOfUser(int money);
 
 	void purchaseProduct(String productName);
 

@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import java.util.List;
+
 import vendingmachine.service.MachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -19,8 +20,8 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void fillWithCoins() {
-		int balanceOfMachine = inputView.requestBalanceOfMachine();
-		machineService.fillWithCoins(balanceOfMachine);
+		int moneyOfMachine = inputView.requestMoneyOfMachine();
+		machineService.fillWithCoins(moneyOfMachine);
 		outputView.printEmptyNewLine();
 	}
 
@@ -38,8 +39,8 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void depositMoney() {
-		int balanceOfUser = inputView.requestBalanceOfUser();
-		machineService.depositMoneyOfUser(balanceOfUser);
+		int moneyOfUser = inputView.requestMoneyOfUser();
+		machineService.depositMoneyOfUser(moneyOfUser);
 		outputView.printEmptyNewLine();
 	}
 
