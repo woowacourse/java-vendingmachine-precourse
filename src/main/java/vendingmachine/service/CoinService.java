@@ -9,13 +9,13 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class CoinStock {
-    private Message message = new Message();
-    private Parser parser = new Parser();
-    private LinkedHashMap<Integer, Integer> coinCountMap = new LinkedHashMap<>();
-    private List<Integer> coinAmountList = new ArrayList<>();
+public class CoinService {
+    private final MessageService messageService = new MessageService();
+    private static LinkedHashMap<Integer, Integer> coinCountMap = new LinkedHashMap<>();
+    private static List<Integer> coinAmountList = new ArrayList<>();
+    private static Change change = Change.getInstance();
 
-    CoinStock() {
+    public CoinService() {
         initCoinAmount();
         initCoinCount();
     }
@@ -24,20 +24,19 @@ public class CoinStock {
         while (true) {
             int selected = Randoms.pickNumberInList(coinAmountList);
             addCoin(selected);
-            int sum = getSum();
-            if (isSame(sum, holding)) {
-                String output = parser.parseHolding(coinCountMap);
-                message.printCoinCount(output);
+            int pickedSum = getSum();
+            if (isSamePrice(pickedSum, holding)) {
+                messageService.printCoinCount(coinCountMap);
                 break;
-            } else if (sum > holding) {
+            } else if (pickedSum > holding) {
                 initCoinCount();
             }
         }
     }
 
-    public LinkedHashMap<Integer, Integer> getLastChanges(int changes) {
+    public LinkedHashMap<Integer, Integer> getLastChanges() {
         LinkedHashMap<Integer, Integer> result = new LinkedHashMap<>();
-        int remain = changes;
+        int remain = change.getAmount();
         for (int amount : coinAmountList) {
             int count = coinCountMap.get(amount);
             if (count > 0 && remain > 0 && remain % amount == 0) {
@@ -69,7 +68,7 @@ public class CoinStock {
         }
     }
 
-    private boolean isSame(int sum, int holding) {
+    private boolean isSamePrice(int sum, int holding) {
         if (sum == holding) {
             return true;
         }

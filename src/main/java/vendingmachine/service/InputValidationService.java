@@ -4,9 +4,8 @@ import static vendingmachine.domain.Message.*;
 
 import java.util.HashSet;
 
-public class Validation {
-    private Message message = new Message();
-    private Products products = new Products();
+public class InputValidationService {
+    private final MessageService messageService = new MessageService();
     private HashSet<String> nameSet = new HashSet<>();
 
     public boolean isValidateNumber(String input) {
@@ -15,11 +14,11 @@ public class Validation {
             isNumber(input);
             isWholeNumbers(input);
             isDivisibleByTen(input);
-            return true;
         } catch (IllegalArgumentException e) {
             messageService.printErrorMessage(e.getMessage());
             return false;
         }
+        return true;
     }
 
     public boolean isValidateProduct(String[] products) {
