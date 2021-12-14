@@ -50,13 +50,6 @@ public class MainController {
         }
     }
 
-//    private void processOfBuyingProduct() {
-//        while (vendingMachine.checkAdditionalPurchase()) {
-//            OutputView.printRemainingAmount(vendingMachine.getMoney());
-//            processOfBuyingProduct();
-//        }
-//    }
-
     private void processOfBuyingProduct() {
         try {
             while (vendingMachine.checkAdditionalPurchase()) {
