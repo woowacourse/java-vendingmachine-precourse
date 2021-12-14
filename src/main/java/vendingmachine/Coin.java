@@ -13,4 +13,25 @@ public enum Coin {
         this.amount = amount;
         this.count = count;
     }
+
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public int getCount() {
+        return this.count;
+    }
+
+    public void increaseCount(int times) {
+        this.count += times;
+    }
+
+    public void decreaseCount(int times) {
+        if (this.count <= times) {
+            this.count = 0;
+        }
+        if (this.count > times) {
+            this.count -= times;
+        }
+    }
 }

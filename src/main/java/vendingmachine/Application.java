@@ -19,5 +19,6 @@ public class Application {
     public static void main(String[] args) {
         System.out.println(Constants.coinInitMsg);
         int initCoin = getInitCoin();
+        VendingMachine vm = new VendingMachine(initCoin);
     }
 }
