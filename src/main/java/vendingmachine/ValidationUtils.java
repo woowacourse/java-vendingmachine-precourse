@@ -10,14 +10,12 @@ public class ValidationUtils {
 		}
 	}
 
-	public static boolean validNumberFormat(String num) {
+	public static int validNumberFormat(String num) {
 		try {
-			Integer.parseInt(num);
+			return Integer.parseInt(num);
 		} catch (IllegalArgumentException e) {
-			System.out.println(Messages.ERROR_NOT_NUMBER);
-			return false;
+			throw new IllegalArgumentException(Messages.ERROR_NOT_NUMBER);
 		}
-		return true;
 	}
 
 	public static void isPositive(int num) {

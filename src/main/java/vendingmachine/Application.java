@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.model.Item;
 import vendingmachine.model.Items;
 import vendingmachine.model.UserMoney;
 import vendingmachine.model.VendingMachine;
@@ -25,7 +26,7 @@ public class Application {
 		String[] itemStatuses = InputView.getItemStatuses().split(";");
 		Items items = new Items();
 		for (String itemStatus : itemStatuses) {
-			items.addItem(itemStatus);
+			items.addItem(new Item(itemStatus));
 		}
 		return items;
 	}

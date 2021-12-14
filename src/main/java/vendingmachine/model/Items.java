@@ -8,27 +8,29 @@ import vendingmachine.view.Messages;
 public class Items {
 	private List<Item> itemList = new ArrayList<>();
 
-	public void isAddable(String itemsInput) {
-		String[] itemToAdd = itemsInput.substring(1, itemsInput.length() - 1).split(",");
-		Item.validItemStatus(itemToAdd[0], Integer.parseInt(itemToAdd[1]), Integer.parseInt(itemToAdd[2]));
-	}
-
 	public Item hasItem(String itemName) {
 		for (Item item : itemList) {
-			if (item.sameName(itemName)) {
+			if (item.hasStock(itemName)) {
 				return item;
 			}
 		}
 		throw new IllegalArgumentException(Messages.ERROR_NOT_IN_STOCK);
 	}
 
-	public void addItem(String itemString) {
-		try {
-			isAddable(itemString);
-			itemList.add(new Item(itemString));
-		} catch (Exception e) {
+	public void addItem(Item newItem) {
+		if (isAlreadyInStock(newItem)) {
+			throw new IllegalArgumentException(Messages.ERROR_ALREADY_IN_STOCK);
 		}
+		itemList.add(newItem);
+	}
 
+	private boolean isAlreadyInStock(Item newItem) {
+		for (Item item : itemList) {
+			if (item.sameName(newItem)) {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	public int minPrice() {

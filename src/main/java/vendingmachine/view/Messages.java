@@ -12,4 +12,5 @@ public class Messages {
 	public static final String GET_USER_MONEY = "\n투입 금액을 입력해 주세요.";
 	public static final String GET_ITEM_TO_BUY = "구매할 상품명을 입력해 주세요.";
 	public static final String ERROR_NOT_IN_STOCK = "[ERROR] 해당 상품이 없습니다.";
+	public static final String ERROR_ALREADY_IN_STOCK = "[ERROR] 이미 해당 상품이 존재합니다.";
 }
