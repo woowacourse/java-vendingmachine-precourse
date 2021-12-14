@@ -5,6 +5,7 @@ import static vendingmachine.utils.Constant.ZERO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -57,12 +58,9 @@ public class VendingMachine {
 				.collect(Collectors.toList());
 	}
 	
-	public boolean isSoldOut(String name) {
-		Product selectedProduct = products.stream()
-				.filter(product -> product.getName().equals(name))
-				.collect(Collectors.toList())
-				.get(ZERO);
-		return (selectedProduct.getStock()==ZERO);
+	public Optional<Product> findProduct(String name) {
+		Optional<Product> product = products.stream().filter(p -> p.getName().equals(name)).findFirst();
+		return product;
 	}
 	
 	public int getMinimumPrice() {
