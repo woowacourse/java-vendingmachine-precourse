@@ -33,7 +33,7 @@ public class ProductService {
 
 	public Product findProductByName(String productName, List<Product> productList) {
 		return productList.stream()
-			.filter(it -> it.getName().equals(productName))
+			.filter(it -> it.getEqualProduct(productName))
 			.findFirst()
 			.map(Product::purchaseProduct)
 			.orElseThrow(() -> new IllegalArgumentException(Validator.ERROR_NOT_EXISTED_PRODUCT));

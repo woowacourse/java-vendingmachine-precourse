@@ -1,5 +1,7 @@
 package vendingmachine.model.domain;
 
+import java.util.function.Predicate;
+
 import vendingmachine.util.Constant;
 import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
@@ -34,5 +36,13 @@ public class Product {
 	public Product purchaseProduct() {
 		this.amount--;
 		return this;
+	}
+
+	public boolean getProductToDelete() {
+		return this.amount == 0;
+	}
+
+	public boolean getEqualProduct(String productName) {
+		return this.name.equals(productName);
 	}
 }

@@ -3,6 +3,7 @@ package vendingmachine.model.service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import vendingmachine.model.domain.Coin;
@@ -37,13 +38,13 @@ public class VendingMachineService {
 				continue;
 			}
 			returnCoinMap.put(coin, count);
-			restMoney -= (coin.getAmount() * count);
+			restMoney = coin.calculateRestMoney(restMoney, count);
 		}
 		return returnCoinMap;
 	}
 
 	private int getCount(int restMoney, Map<Coin, Integer> coinMap, Coin coin) {
-		int count = restMoney / coin.getAmount();
+		int count = coin.getPossibleNumberOfCoin(restMoney);
 		if (count >= coinMap.get(coin)) {
 			count = coinMap.get(coin);
 		}
@@ -53,7 +54,7 @@ public class VendingMachineService {
 	private void removeProduct(List<Product> productList) {
 		List<Product> productListToDelete = productList
 			.stream()
-			.filter(it -> it.getAmount() == 0)
+			.filter(Product::getProductToDelete)
 			.collect(Collectors.toList());
 
 		productListToDelete.forEach(productList::remove);

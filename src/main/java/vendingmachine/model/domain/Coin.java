@@ -36,4 +36,13 @@ public enum Coin {
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException(Validator.ERROR_NOT_EXISTED_COIN));
     }
+
+    public int calculateRestMoney(int restMoney, int count) {
+        restMoney -= (amount * count);
+        return restMoney;
+    }
+
+    public int getPossibleNumberOfCoin(int restMoney) {
+        return restMoney / getAmount();
+    }
 }
