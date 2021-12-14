@@ -5,10 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vendingmachine.Coin;
-
 public class CoinController {
-	private Map<Coin, Integer> numberOfCoins;
+	private Map<Integer, Integer> numberOfCoins;
 	private CoinRuleChecker coinRuleChecker;
 
 	public CoinController() {
@@ -18,10 +16,10 @@ public class CoinController {
 
 	private void initNumberOfCoins() {
 		numberOfCoins = new HashMap<>();
-		numberOfCoins.put(Coin.COIN_500, 0);
-		numberOfCoins.put(Coin.COIN_100, 0);
-		numberOfCoins.put(Coin.COIN_50, 0);
-		numberOfCoins.put(Coin.COIN_10, 0);
+		numberOfCoins.put(Coin.COIN_500.getAmount(), 0);
+		numberOfCoins.put(Coin.COIN_100.getAmount(), 0);
+		numberOfCoins.put(Coin.COIN_50.getAmount(), 0);
+		numberOfCoins.put(Coin.COIN_10.getAmount(), 0);
 	}
 
 	private List<Integer> getPossibleCoins() {
@@ -35,12 +33,13 @@ public class CoinController {
 	private void addCoin(int coinAmount) {
 		for (Coin specificCoin : Coin.values()) {
 			if (specificCoin.getAmount() == coinAmount) {
-				numberOfCoins.put(specificCoin, numberOfCoins.get(specificCoin) + 1);
+				int key = specificCoin.getAmount();
+				numberOfCoins.put(key, numberOfCoins.get(key) + 1);
 			}
 		}
 	}
 
-	public Map<Coin, Integer> makeRandomCombinationCoin(int money) {
+	public Map<Integer, Integer> makeRandomCombinationCoin(int money) {
 		List<Integer> possibleCoins = getPossibleCoins();
 		while (money != 0) {
 			int coinAmount = camp.nextstep.edu.missionutils.Randoms.pickNumberInList(possibleCoins);
@@ -54,17 +53,18 @@ public class CoinController {
 
 	private int changeMoneyToCoinAsManyAsPossible(Coin specificCoin, int money) {
 		int coinNum = money / specificCoin.getAmount();
-		coinNum = Math.min(coinNum, numberOfCoins.get(specificCoin));
-		numberOfCoins.put(specificCoin, numberOfCoins.get(specificCoin) - coinNum);
+		int key = specificCoin.getAmount();
+		coinNum = Math.min(coinNum, numberOfCoins.get(key));
+		numberOfCoins.put(key, numberOfCoins.get(key) - coinNum);
 		return coinNum;
 	}
 
-	public Map<Coin, Integer> getChange(int remainMoney) {
-		Map<Coin, Integer> change = new HashMap<>();
+	public Map<Integer, Integer> getChange(int remainMoney) {
+		Map<Integer, Integer> change = new HashMap<>();
 		for (Coin specificCoin : Coin.values()) {
 			int number = changeMoneyToCoinAsManyAsPossible(specificCoin, remainMoney);
 			if (number != 0) {
-				change.put(specificCoin, number);
+				change.put(specificCoin.getAmount(), number);
 				remainMoney -= (specificCoin.getAmount() * number);
 			}
 		}

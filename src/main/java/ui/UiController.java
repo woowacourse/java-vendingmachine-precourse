@@ -2,7 +2,7 @@ package ui;
 
 import java.util.Map;
 
-import vendingmachine.Coin;
+import coincase.Coin;
 
 public class UiController {
 	private static final String QUESTION_VENDING_MACHINE_HOLD_MONEY
@@ -44,15 +44,16 @@ public class UiController {
 		return Integer.parseInt(money);
 	}
 
-	private void printNumberOfCoins(Map<Coin, Integer> numberOfCoins) {
+	private void printNumberOfCoins(Map<Integer, Integer> numberOfCoins) {
 		for (Coin specificCoin : Coin.values()) {
-			if (numberOfCoins.containsKey(specificCoin)) {
-				ui.printMessage(String.format(MONEY_NUMBER, specificCoin.getAmount(), numberOfCoins.get(specificCoin)));
+			int key = specificCoin.getAmount();
+			if (numberOfCoins.containsKey(key)) {
+				ui.printMessage(String.format(MONEY_NUMBER, key, numberOfCoins.get(key)));
 			}
 		}
 	}
 
-	public void printCurrentCoinNumber(Map<Coin, Integer> numberOfCoins) {
+	public void printCurrentCoinNumber(Map<Integer, Integer> numberOfCoins) {
 		ui.printMessage(MESSAGE_CURRENT_COIN_NUMBER);
 		printNumberOfCoins(numberOfCoins);
 	}
@@ -98,7 +99,7 @@ public class UiController {
 		return ui.printQuestion(QUESTION_PRODUCT_NAME_TO_BUY);
 	}
 
-	public void printChange(Map<Coin, Integer> change) {
+	public void printChange(Map<Integer, Integer> change) {
 		ui.printMessage(MESSAGE_CHANGE);
 		printNumberOfCoins(change);
 	}

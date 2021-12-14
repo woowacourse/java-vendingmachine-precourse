@@ -23,7 +23,7 @@ public class CoreController {
 
 	private void setVendingMachineHoldMoney() {
 		int money = uiController.askVendingMachineHoldMoneyAmount();
-		Map<Coin, Integer> numberOfCoins = coinController.makeRandomCombinationCoin(money);
+		Map<Integer, Integer> numberOfCoins = coinController.makeRandomCombinationCoin(money);
 		uiController.printCurrentCoinNumber(numberOfCoins);
 	}
 
@@ -60,7 +60,7 @@ public class CoreController {
 
 	private void giveChange() {
 		uiController.printRemainMoney(inputMoney);
-		Map<Coin, Integer> change = coinController.getChange(inputMoney);
+		Map<Integer, Integer> change = coinController.getChange(inputMoney);
 		uiController.printChange(change);
 	}
 
