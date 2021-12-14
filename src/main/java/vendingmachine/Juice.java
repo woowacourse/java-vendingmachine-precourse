@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Objects;
+
 public class Juice {
     private String name;
     private int numberOfCan;
@@ -11,19 +13,14 @@ public class Juice {
         this.price = price;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public int getNumberOfCan() {
-        return numberOfCan;
-    }
-
-    public String getName() {
-        return name;
-    }
-
     public int MinPrice(int minPrice) {
         return Math.min(this.price,minPrice);
+    }
+
+    public int EqualJuiceName(String orderJuice) {
+        if (Objects.equals(orderJuice, name)) {
+            return price;
+        }
+        return 0;
     }
 }

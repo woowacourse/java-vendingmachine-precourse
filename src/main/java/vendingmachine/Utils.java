@@ -48,9 +48,11 @@ public class Utils {
     }
 
     public static int OrderCheck(ArrayList<Juice> juiceIndex, String orderJuice) {
+        int price;
         for (Juice juice : juiceIndex) {
-            if (Objects.equals(juice.getName(), orderJuice)) {
-                return juice.getPrice();
+            price = juice.EqualJuiceName(orderJuice);
+            if (price != 0) {
+                return price;
             }
         }
         return 0;
