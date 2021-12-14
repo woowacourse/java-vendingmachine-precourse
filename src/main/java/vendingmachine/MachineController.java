@@ -61,10 +61,10 @@ public class MachineController {
 
 	public void startMachine() {
 		do {
-			this.customer.printCustomerMoney();
+			CustomerView.printCustomerMoney(this.customer);
 			machineOpen();
 		} while (this.machine.minimumMoneyCheck(this.customer));
-		this.customer.printCustomerMoney();
+		CustomerView.printCustomerMoney(this.customer);
 		MachineView.giveTheChange(customer, machine);
 	}
 
