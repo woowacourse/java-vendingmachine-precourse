@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class Application {
@@ -9,23 +10,29 @@ public class Application {
         
         // 동전 목록
         List<Integer> coins = Coin.getCoinList();
-        // 자판기 객체 생성
+        // 자판기의 돈 입력
         Vendingmachine vendingmachine = new Vendingmachine();
-        // 자판기 돈 입력
+        vendingmachine.inputVendMoney();
         Integer inputmoney = vendingmachine.getVendMoney();
 
-
         // 자판기의 돈을 동전으로 바꿈
-        int[] randomList = Utils.generateRandomCoin(coins,inputmoney);
-        Utils.printRandomCoin(coins, randomList);
+        vendingmachine.getVendMoneyToCoin();
+        vendingmachine.printRandomCoin();
+
+//        int[] randomList = Utils.generateRandomCoin(coins,inputmoney);
+//        Utils.printRandomCoin(coins, randomList);
+
         // 상품 입력
-        List<Product> productList= Utils.prodInput();
+        vendingmachine.prodInput();
         
         // 사용자의 돈 입력
-        int userMoney = Utils.userMoneyInput();
-//        int userMoney = 3000;
+        vendingmachine.userMoneyInput();
+
+
         // 구매
-        int restMoney = Utils.play(productList, userMoney);
-        Utils.printLastMoney(inputmoney, restMoney, coins, randomList);
+//        int restMoney = Utils.play(productList, userMoney);
+        int restMoney = vendingmachine.play();
+//        Utils.printLastMoney(inputmoney, restMoney, coins, randomList);
+        vendingmachine.printLastMoney();
     }
 }

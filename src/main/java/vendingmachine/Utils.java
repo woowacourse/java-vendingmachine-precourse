@@ -6,13 +6,27 @@ import camp.nextstep.edu.missionutils.Randoms;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 public class Utils {
 
+    public static HashMap<Coin, Integer> makeCoinHash(){
+        HashMap<Coin, Integer> coinList = new HashMap<>();
+        coinList.put(Coin.COIN_500, 0);
+        coinList.put(Coin.COIN_100, 0);
+        coinList.put(Coin.COIN_50, 0);
+        coinList.put(Coin.COIN_10, 0);
+        return coinList;
+    }
+
+
     public static int vendMoneyInput(){
         System.out.println(Message.INPUT_VEND_MONEY);
         String inputVendMoney = Console.readLine();
+        if(Integer.parseInt(inputVendMoney)<0){
+            throw new IllegalArgumentException();
+        }
         return Integer.parseInt(inputVendMoney);
     }
 
@@ -41,17 +55,20 @@ public class Utils {
         return vendMoneyArray;
     }
 
-    public static void printRandomCoin(List<Integer> coins, int[] vendMoneyArray){
+    public static void printRandomCoin(List<Integer> coins, int[] randomList){
         System.out.println("자판기가 보유한 동전");
         for(int i=0; i<4; i++){
-            System.out.println(coins.get(i)+"원 - "+vendMoneyArray[i]+"개");
+            System.out.println(coins.get(i)+"원 - "+randomList[i]+"개");
         }
     }
 
+
+
     public static List<Product> prodInput(){
-//        System.out.println(Message.INPUT_PROD_NAME);
-//        Console.readLine();
-        List<Product> parsedProdList = parseProd("[콜라,1500,20];[사이다,1000,10]");
+        System.out.println(Message.INPUT_PROD_NAME);
+        String prodInput = Console.readLine();
+        List<Product> parsedProdList = parseProd(prodInput);
+//        List<Product> parsedProdList = parseProd("[콜라,1500,20];[사이다,1000,10]");
         return parsedProdList;
     }
 
@@ -67,7 +84,7 @@ public class Utils {
         return products;
     }
 
-    public static void play(List<Product> productList, int userMoney) {
+    public static int play(List<Product> productList, int userMoney) {
         while(userMoney>0){
             System.out.println(Message.USER_MONEY+ userMoney + "원");
             
@@ -78,16 +95,15 @@ public class Utils {
 
             System.out.println(Message.INPUT_PROD_NAME);
             String prod = Console.readLine();
-            int price = buyProdByUwer(productList,  prod);
+            int price = buyProduct(productList,  prod);
             userMoney-=price;
         }
-        return;
+        return  userMoney;
     }
 
-    public static void printLastMoney() {
-    }
 
-    public static int buyProdByUwer(List<Product> productList, String prod){
+
+    public static int buyProduct(List<Product> productList, String prod){
         if(checkStock(prod)){
             for(Product product: productList){
                 if((product.getName()).equals(prod)){
@@ -122,5 +138,40 @@ public class Utils {
     }
 
     public static boolean checkStock(String prod){return true;};
+
+
+    public static void printLastMoney(Integer inputmoney, int userMoney, List<Integer> coins, int[] randomList) {
+        // 유저의 돈이 전체돈보다 더 크다면 그냥 리턴한다.
+        if(userMoney>=inputmoney){
+            returnTotalInputMoney(coins, randomList);
+        }
+        // 유저의 돈이 전체돈보다 작다면 그리디하게 리턴한다.
+        int[] givenList = returnGreedyMoney(coins, randomList, userMoney);
+            returnTotalInputMoney(coins, givenList);
+        return;
+    }
+
+    public static void returnTotalInputMoney(List<Integer> coins, int[] randomList){
+        for(int i=0; i<4; i++){
+            if(randomList[i]==0)    continue;
+            System.out.println(coins.get(i)+"원 - "+randomList[i]+"개");
+        }
+    }
+
+    public static int[] returnGreedyMoney(List<Integer> coins, int[] randomList, int userMoney){
+        int[] giveToUserMoney = {0,0,0,0};
+        for(int i=0; i<coins.size(); i++){
+            while(userMoney< coins.get(i)){
+                if(randomList[i]>0){
+                    randomList[i]--;
+                    giveToUserMoney[i]++;
+                }
+                else{
+                    break;
+                }
+            }
+        }
+        return giveToUserMoney;
+    }
 
 }
