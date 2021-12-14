@@ -67,7 +67,14 @@ public class VendingMachine {
 	}
 
 	public void printReturnCoin(ArrayList<Integer> returnCoin) {
-
+		System.out.println("잔돈");
+		String[] amounts = {"500", "100", "50", "10"};
+		for (int i = 0; i < 4; i++) {
+			if (returnCoin.get(i) == 0) {
+				continue;
+			}
+			System.out.println(amounts[i] + "원" + " - " + returnCoin.get(i) + "개");
+		}
 	}
 
 	public void decreaseProduct(Product buy) {
