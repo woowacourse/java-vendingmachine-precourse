@@ -1,6 +1,5 @@
 package vendingmachine.util.validator;
 
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -9,6 +8,9 @@ import vendingmachine.model.Product;
 import vendingmachine.util.ErrorMessageConstants;
 
 public class ProductValidator {
+
+	private ProductValidator() {
+	}
 
 	public static void validate(List<Product> products) {
 		validateProductsPrice(products);
