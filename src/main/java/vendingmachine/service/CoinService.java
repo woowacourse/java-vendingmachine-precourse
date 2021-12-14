@@ -37,6 +37,9 @@ public class CoinService {
     public LinkedHashMap<Integer, Integer> getLastChanges() {
         LinkedHashMap<Integer, Integer> result = new LinkedHashMap<>();
         int remain = change.getAmount();
+        if (remain > getSum()) {
+            return coinCountMap;
+        }
         for (int amount : coinAmountList) {
             int count = coinCountMap.get(amount);
             if (count > 0 && remain > 0 && remain % amount == 0) {
