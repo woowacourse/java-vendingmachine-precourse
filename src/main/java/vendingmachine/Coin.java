@@ -23,14 +23,6 @@ public enum Coin {
         this.numberOfCoin = numberOfCoin;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public int getNumberOfCoin() {
-        return numberOfCoin;
-    }
-
     public void InputOneCoin() {
         this.numberOfCoin ++;
     }
@@ -50,7 +42,7 @@ public enum Coin {
             oneCoin = pickNumberInList(coinNum);
         } while (change < oneCoin);
         for (Coin coin : Coin.values()) {
-            if (coin.getAmount() == oneCoin) {
+            if (coin.amount == oneCoin) {
                 coin.InputOneCoin();
                 break;
             }
@@ -61,7 +53,7 @@ public enum Coin {
     public static void PrintNumberOfCoin() {
         System.out.println("자판기가 보유한 동전");
         for (Coin coin : Coin.values()) {
-            System.out.println(coin.getAmount() + "원 - " + coin.getNumberOfCoin() + "개");
+            System.out.println(coin.amount + "원 - " + coin.numberOfCoin + "개");
         }
         System.out.println();
     }
@@ -72,10 +64,10 @@ public enum Coin {
         int change = money;
         int numberOfCoin;
         for (Coin coin : Coin.values()) {
-            numberOfCoin = Math.min(change / coin.getAmount(),coin.getNumberOfCoin());
+            numberOfCoin = Math.min(change / coin.amount,coin.numberOfCoin);
             if (numberOfCoin != 0) {
-                System.out.println(coin.getAmount() + "원 - " + numberOfCoin + "개");
-                change -= coin.getAmount() * numberOfCoin;
+                System.out.println(coin.amount + "원 - " + numberOfCoin + "개");
+                change -= coin.amount * numberOfCoin;
             }
         }
     }
