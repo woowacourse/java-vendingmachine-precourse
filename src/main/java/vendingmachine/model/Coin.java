@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import vendingmachine.util.ErrorMessageConstants;
+import vendingmachine.util.SymbolConstants;
 
 public enum Coin {
 	COIN_500(500),
@@ -9,7 +10,6 @@ public enum Coin {
 	COIN_10(10);
 
 	private final int amount;
-	private static final String POSTFIX = "원";
 
 	Coin(final int amount) {
 		this.amount = amount;
@@ -34,7 +34,7 @@ public enum Coin {
 
 	@Override
 	public String toString() {
-		return this.amount + POSTFIX;
+		return this.amount + SymbolConstants.MONEY_POSTFIX;
 	}
 
 	public boolean isReturnable(int insertMoney) {

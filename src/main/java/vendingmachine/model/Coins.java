@@ -5,12 +5,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.util.SymbolConstants;
 
 public class Coins {
 	private static final int DEFAULT_COIN_NUMBER = 0;
 	private static final String DASH = "-";
-	private static final String WHITESPACE = " ";
-	private static final String LINE_WRAP = "\n";
 	private static final String POSTFIX = "개";
 	private EnumMap<Coin, Integer> coinMap;
 
@@ -58,12 +57,12 @@ public class Coins {
 		StringBuilder coinsStringBuilder = new StringBuilder();
 		coinMap.keySet()
 			.forEach(coin -> coinsStringBuilder.append(coin.toString())
-				.append(WHITESPACE)
+				.append(SymbolConstants.WHITESPACE)
 				.append(DASH)
-				.append(WHITESPACE)
+				.append(SymbolConstants.WHITESPACE)
 				.append(coinMap.get(coin))
 				.append(POSTFIX)
-				.append(LINE_WRAP));
+				.append(SymbolConstants.LINE_WRAP));
 		return coinsStringBuilder.toString();
 	}
 
@@ -71,12 +70,12 @@ public class Coins {
 		StringBuilder coinsStringBuilder = new StringBuilder();
 		coins.keySet()
 			.forEach(coin -> coinsStringBuilder.append(coin.toString())
-				.append(WHITESPACE)
+				.append(SymbolConstants.WHITESPACE)
 				.append(DASH)
-				.append(WHITESPACE)
+				.append(SymbolConstants.WHITESPACE)
 				.append(coins.get(coin))
 				.append(POSTFIX)
-				.append(LINE_WRAP));
+				.append(SymbolConstants.LINE_WRAP));
 		return coinsStringBuilder.toString();
 	}
 }

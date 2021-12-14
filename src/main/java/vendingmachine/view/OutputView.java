@@ -1,9 +1,7 @@
 package vendingmachine.view;
 
-import java.util.EnumMap;
-
-import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
+import vendingmachine.util.SymbolConstants;
 
 public class OutputView {
 	private static final String INPUT_HOLDING_AMOUNT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
@@ -13,10 +11,7 @@ public class OutputView {
 	private static final String OUTPUT_HOLDING_COINS = "자판기가 보유한 동전";
 	private static final String OUTPUT_CHANGE = "잔돈";
 	private static final String OUTPUT_INSERT_MONEY = "투입 금액";
-	private static final String MONEY_UNIT = "원";
-	private static final String COLON = ":";
-	private static final String LINE_WRAP = "\n";
-	private static final String WHITESPACE = " ";
+	public static final String COLON = ":";
 
 	private OutputView() {
 	}
@@ -30,7 +25,7 @@ public class OutputView {
 	}
 
 	public static void printCoins(Coins coins) {
-		System.out.println(LINE_WRAP + OUTPUT_HOLDING_COINS);
+		System.out.println(SymbolConstants.LINE_WRAP + OUTPUT_HOLDING_COINS);
 		System.out.println(coins.toString());
 	}
 
@@ -39,7 +34,7 @@ public class OutputView {
 	}
 
 	public static void printInputInsertMoneyMessage() {
-		System.out.println(LINE_WRAP + INPUT_INSERT_MONEY);
+		System.out.println(SymbolConstants.LINE_WRAP + INPUT_INSERT_MONEY);
 	}
 
 	public static void printInputPurchaseProductMessage() {
@@ -47,7 +42,9 @@ public class OutputView {
 	}
 
 	public static void printInsertMoney(int insertMoney) {
-		System.out.println(LINE_WRAP + OUTPUT_INSERT_MONEY + COLON + WHITESPACE + insertMoney + MONEY_UNIT);
+		System.out.println(
+			SymbolConstants.LINE_WRAP + OUTPUT_INSERT_MONEY + COLON + SymbolConstants.WHITESPACE + insertMoney
+				+ SymbolConstants.MONEY_POSTFIX);
 	}
 
 	public static void printChange(String coins) {
