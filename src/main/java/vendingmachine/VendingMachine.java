@@ -5,10 +5,11 @@ public class VendingMachine {
     User user = new User();
 
     public void Machine() {
-        computer.PrintMachineCoin();
+        computer.MSGInputMachineCoin();
         user.InputMachineCoin();
         int sumCoin = user.getCoin();
         MachineCoin machineCoin = new MachineCoin();
         machineCoin.CreateRandomCoin(sumCoin);
+        computer.PrintMachineCoin(machineCoin);
     }
 }
