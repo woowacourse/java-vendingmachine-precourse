@@ -103,6 +103,7 @@ public class Validation {
         if (!price.matches(Text.REGEX_NUMBER)) {
             throwException(ErrorMessage.ITEM_PRICE_NOT_NUMBER);
         }
+
     }
 
     private void checkItemPriceRange(String item) {
@@ -111,6 +112,16 @@ public class Validation {
         if (price < MIN_PRICE || price % DIVISOR != ZERO) {
             throwException(ErrorMessage.ITEM_PRICE_RANGE);
         }
+
+    }
+
+    private void checkItemStockForm(String item) {
+        String stock = getItemElement(Text.REGEX_ITEM_STOCK, item);
+
+        if (!stock.matches(Text.REGEX_NUMBER) || Integer.parseInt(stock) == ZERO) {
+            throwException(ErrorMessage.ITEM_STOCK_FORM);
+        }
+
     }
 
     public void isValidBalanceInput(String balance) {
