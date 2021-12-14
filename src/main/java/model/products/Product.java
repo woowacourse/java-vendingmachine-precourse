@@ -1,4 +1,4 @@
-package model;
+package model.products;
 
 public class Product {
 	private static final int MIN_STOCK_COUNT = 1;

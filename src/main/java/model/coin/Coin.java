@@ -1,4 +1,4 @@
-package model;
+package model.coin;
 
 import java.util.Arrays;
 import java.util.List;

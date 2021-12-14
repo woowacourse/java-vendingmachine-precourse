@@ -1,10 +1,11 @@
-package model;
+package model.coin;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import model.coin.Coin;
 import utils.generator.RandomCoinPriceGenerator;
 
 public class CoinBox {

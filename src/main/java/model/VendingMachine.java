@@ -3,6 +3,9 @@ package model;
 import java.util.List;
 import java.util.Map;
 
+import model.coin.CoinBox;
+import model.products.ProductBox;
+
 public class VendingMachine {
 	private CoinBox coinBox;
 	private ProductBox productBox;
