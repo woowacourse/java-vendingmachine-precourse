@@ -11,7 +11,7 @@ public class CoinView {
 	public static void printCoinMap(Map<Coin, Integer> coinMap) {
 		for (Coin coin : Coin.values()) {
 			if (coinMap.containsKey(coin)) {
-				System.out.println(String.format(COIN_LIST_FORMAT, coin.getAmount(), coinMap.get(coin)));
+				System.out.printf((COIN_LIST_FORMAT) + "%n", coin.getAmount(), coinMap.get(coin));
 			}
 		}
 		System.out.println();
