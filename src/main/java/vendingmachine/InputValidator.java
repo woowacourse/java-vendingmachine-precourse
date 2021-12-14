@@ -10,4 +10,13 @@ public class InputValidator {
 		}
 		return true;
 	}
+
+	public static void validatePrice(int price){
+		if(price < 100){
+			throw new IllegalArgumentException("[ERROR] 상품 가격은 100원부터 시작해야 합니다.");
+		}
+		if(price % 10 != 0){
+			throw new IllegalArgumentException("[ERROR] 상품 가격은 10원으로 나누어떨어져야 합니다.");
+		}
+	}
 }

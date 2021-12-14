@@ -10,7 +10,7 @@ public class InputReceiver {
 	public static int getNumber(){
 		String number;
 
-		//VendingMachinePrinter.printGetHoldingAmountMessage();
+		//VendingMachinePrinter.printGetAmountMessage(messageType);
 
 		while (true) {
 			try {
@@ -19,7 +19,7 @@ public class InputReceiver {
 				return Integer.parseInt(number);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
-				//VendingMachinePrinter.printGetHoldingAmountMessage();
+				//VendingMachinePrinter.printGetAmountMessage(messageType);
 			}
 		}
 	}
@@ -34,7 +34,10 @@ public class InputReceiver {
 				productInfo = Console.readLine();
 				//InputValidator.validateProduct(productInfo);
 				return parseProductInfo(parseEachProduct(productInfo));
-			} catch (IllegalArgumentException e) {
+			} catch (NumberFormatException e) {
+				System.out.println("[ERROR] 가격과 수량은 숫자여야 합니다.");
+				//VendingMachinePrinter.printGetVendingMachineInfoMessage();
+			}catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 				//VendingMachinePrinter.printGetVendingMachineInfoMessage();
 			}
@@ -57,6 +60,7 @@ public class InputReceiver {
 			tempArray[2] = tempArray[2].replace("]","");
 
 			int price = Integer.parseInt(tempArray[1]);
+			InputValidator.validatePrice(price);
 			int quantity = Integer.parseInt(tempArray[2]);
 			Product tempProduct = new Product(tempArray[0], price, quantity);
 
