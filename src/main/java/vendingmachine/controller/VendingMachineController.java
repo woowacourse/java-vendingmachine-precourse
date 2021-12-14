@@ -33,7 +33,7 @@ public class VendingMachineController {
 		Map<Integer, Integer> changes = Coin.getChanges(remainingMoney);
 		Coin.minusChangesFromMachineMoney(changes);
 		OutputView.printChanges(changes, remainingMoney);
-		OutputView.printItemAfterBuying();
-		OutputView.printMachineChangesAfterBuying();
+		// OutputView.printItemAfterBuying(); // 요구사항에 없는 출력 주석
+		// OutputView.printMachineChangesAfterBuying(); // 요구사항에 없는 출력 주석
 	}
 }
