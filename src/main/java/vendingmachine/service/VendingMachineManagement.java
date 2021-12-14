@@ -90,7 +90,7 @@ public class VendingMachineManagement {
 	}
 
 	public static String[] splitStringOfProduct(String stringOfProduct) {
-		String[] product = stringOfProduct.split(SPLIT_PRODUCT);
+		String[] product = stringOfProduct.split(SPLIT_PRODUCT, -1);
 
 		for (int i = 0; i < product.length; i++) {
 			product[i] = product[i].trim();
