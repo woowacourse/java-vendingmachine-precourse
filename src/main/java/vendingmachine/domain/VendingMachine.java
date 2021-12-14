@@ -73,4 +73,17 @@ public class VendingMachine {
 	public Product findProductByName(String inputValue) {
 		return this.products.findProductByName(inputValue);
 	}
+
+	public void sale(Name wantedProductName) {
+		//1. 일단은 일부정보(name) -> 객체를찾아야함.
+		Product product = this.products.findProductByName(wantedProductName.toString());
+
+		//2. 구매조건
+		//(1) 해당객체가 >1 인가..  이것도 입력받을때 검증하기..
+
+	}
+
+	public boolean isProductAvailable(Product product) {
+		return this.productCounter.isAvailable(product);
+	}
 }

@@ -113,9 +113,8 @@ public class ProductCounter {
 			.orElseThrow(() -> new IllegalArgumentException("찾을 수 없습니다. 다시 입력해주세요."));
 	}
 
-	public boolean isAvailable(String inputValue) {
-		Product searchedKey = findBy(inputValue);
-		return this.counterMap.getOrDefault(searchedKey, 0) > 0;
+	public boolean isAvailable(Product product) {
+		return this.counterMap.getOrDefault(product, 0) > 0;
 	}
 
 	public void forEach(BiConsumer<Product, Integer> action) {

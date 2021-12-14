@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
 public class Validators {
@@ -114,9 +115,16 @@ public class Validators {
 	}
 
 	public static void checkValidProduct(String inputValue) {
+		//DB(countMap)속 구매하려고 할 때 검증
+		//1) 존재 유무  검증
 		VendingMachine vendingMachine = VendingMachine.getInstance();
-		vendingMachine.findProductByName(inputValue); // orElseThrow로서.. 못찾으면 에러남.. 찾았으면 아무것도 안일어남.
-		System.out.println("검증끝");
+		Product product = vendingMachine.findProductByName(inputValue);
+		// System.out.println("검증끝");
+		//존재유무 확인후 -> 추가 확인-> 갯수1개이상 유무
+		//2) 1개이상 유무 검증
+		if (!(vendingMachine.isProductAvailable(product))) {
+			throw new IllegalArgumentException("해당 상품은 현재 0개 입니다.");
+		}
 	}
 
 	public static void checkValidLengthOfProductName(String inputValue) {

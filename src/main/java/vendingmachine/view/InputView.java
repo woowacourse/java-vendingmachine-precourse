@@ -66,6 +66,8 @@ public class InputView {
 		Validators.checkIncludeSpace(inputValue);
 		//TODO 추가 검증.. 검색이니까 존재하는지부터 검사하기 with 싱글톤 객체
 		Validators.checkValidProduct(inputValue);
+		//TODO 추가 검증2 존재유무 -> 갯수유무
+
 	}
 
 }

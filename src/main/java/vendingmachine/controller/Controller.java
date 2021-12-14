@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import java.util.Arrays;
 
 import vendingmachine.domain.Money;
+import vendingmachine.domain.Name;
 import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
@@ -32,7 +33,8 @@ public class Controller {
 		vendingMachine.insertUserMoney(userMoney);
 
 		OutputView.printInputPurchaseProductNameInstruction(); //구매할 상품명을 입력해 주세요.
-		InputView.getProductName();
+		Name wantedProductName = Name.of(InputView.getProductName());
+		vendingMachine.sale(wantedProductName);
 
 	}
 }
