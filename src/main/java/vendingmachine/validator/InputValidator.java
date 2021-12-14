@@ -25,7 +25,7 @@ public class InputValidator {
 	}
 
 	public void isRightPattern(String value) {
-		if (value.split(",").length!=Constant.ELEMENT) {
+		if (value.split(",").length != Constant.ELEMENT) {
 			throw new IllegalArgumentException(ExceptionMessage.MISMATCH_FORMAT);
 		}
 	}
@@ -72,22 +72,24 @@ public class InputValidator {
 	}
 
 	// 상품 구매 시 발생 가능
+	public Product isExist(String name, int money, VendingMachine machine) {
+		Optional<Product> product = machine.findProduct(name);
+		if (!product.isPresent()) {
+			throw new IllegalArgumentException(ExceptionMessage.NOT_EXIST_PRODUCT);
+		}
+		isEnoughMoney(money, product.get());
+		isStock(name, machine);
+		return product.get();
+	}
+	
 	public void isEnoughMoney(int money, Product product) {
 		if (money < product.getPrice()) {
 			throw new IllegalArgumentException(ExceptionMessage.NOT_ENOUGH_MONEY);
 		}
 	}
 
-	public Optional<Product> isExist(String name, VendingMachine machine) {
-		Optional<Product> product = machine.getProducts().stream().filter(p -> p.getName().equals(name)).findFirst();
-		if (!product.isPresent()) {
-			throw new IllegalArgumentException(ExceptionMessage.NOT_EXIST_PRODUCT);
-		}
-		return product;
-	}
-
 	public void isStock(String name, VendingMachine machine) {
-		if (machine.isSoldOut(name)) {
+		if (machine.findProduct(name).get().getStock()==ZERO) {
 			throw new IllegalArgumentException(ExceptionMessage.SOLD_OUT_PRODUCT);
 		}
 	}
