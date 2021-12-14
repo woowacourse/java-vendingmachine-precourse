@@ -1,16 +1,19 @@
 package vendingmachine.domain;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
 
 public class Machine {
 	private final Wallet wallet = new Wallet();
 	private int inputCoinAmount;
-	private final Map<String, Item> items = new HashMap<>();
+	private final ItemStorage itemStorage = new ItemStorage();
 
 	public void addCoins(SortedMap<Coin, Integer> coins) {
 		wallet.addCoins(coins);
+	}
+
+	public void addItems(Map<String, Item> items) {
+		itemStorage.addItems(items);
 	}
 
 	public SortedMap<Coin, Integer> getCoins() {
@@ -25,65 +28,22 @@ public class Machine {
 		return inputCoinAmount;
 	}
 
-	public void addItems(Map<String, Item> items) {
-		for (String itemName : items.keySet()) {
-			Item item = items.get(itemName);
-			this.items.put(itemName, item);
-		}
-	}
-
-	private int getMinPrice() {
-		int itemMinPrice = Integer.MAX_VALUE;
-		for (String itemName : items.keySet()) {
-			Item item = items.get(itemName);
-			if (!item.isSoldOut() && item.getPrice() < itemMinPrice) {
-				itemMinPrice = item.getPrice();
-			}
-		}
-		return itemMinPrice;
-	}
-
 	public void purchase(String itemName) throws IllegalArgumentException {
-		Item item = items.get(itemName);
+		Item item = itemStorage.get(itemName);
 		validatePurchase(item);
 		inputCoinAmount -= item.getPrice();
 	}
 
 	private void validatePurchase(Item item) {
-		isNoItem(item);
-		checkInputCoinAmountByItem(item);
+		itemStorage.isNoItem(item);
+		itemStorage.checkInputCoinAmountByItem(item, inputCoinAmount);
 		item.decreaseQuantity();
 	}
 
-	private void isNoItem(Item item) {
-		if (item == null) {
-			throw new IllegalArgumentException("[ERROR] 해당하는 상품이 없습니다.");
-		}
-	}
-
-	private void checkInputCoinAmountByItem(Item item) {
-		if (inputCoinAmount < item.getPrice()) {
-			throw new IllegalArgumentException("[ERROR] 투입금액이 부족합니다.");
-		}
-	}
-
 	public Boolean isPurchasable() {
-		if (checkInputCoinAmountByMinPrice())
+		if (itemStorage.checkInputCoinAmountByMinPrice(inputCoinAmount))
 			return false;
-		return !isAllItemSoldOut();
-	}
-
-	private Boolean isAllItemSoldOut() {
-		for (String itemName : items.keySet()) {
-			if (!items.get(itemName).isSoldOut()) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	private boolean checkInputCoinAmountByMinPrice() {
-		return inputCoinAmount < getMinPrice();
+		return !itemStorage.isAllItemSoldOut();
 	}
 
 	public SortedMap<Coin, Integer> returnCoins() {
