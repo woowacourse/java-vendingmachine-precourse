@@ -88,10 +88,23 @@ public class InputView {
 	private static void inputProduct(String[][] information) {
 		products = new ArrayList<>();
 		for (String[] info : information) {
-			int price = NumberController.isValidNumber(info[1]);
-			NumberController.isMultipleOfTen(price);
-			int count = NumberController.isValidNumber(info[2]);
-			products.add(new Product(info[0], price, count));
+			Product product = generateProduct(info);
+			addProduct(products, product);
 		}
+	}
+
+	private static void addProduct(ArrayList<Product> products, Product product) {
+		for (Product p : products) {
+			FormatController.isSameName(p.getName(), product.getName());
+		}
+		products.add(product);
+	}
+
+	private static Product generateProduct(String[] info) {
+		String name = FormatController.containsNull(info[0]);
+		int price = NumberController.isValidNumber(info[1]);
+		NumberController.isMultipleOfTen(price);
+		int count = NumberController.isValidNumber(info[2]);
+		return new Product(name, price, count);
 	}
 }

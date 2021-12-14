@@ -26,4 +26,17 @@ public class FormatController {
 			throw new IllegalArgumentException(Constant.ERROR_IS_NOT_3_INFO);
 		}
 	}
+
+	public static String containsNull(String name) {
+		if (name.contains(" ")) {
+			throw new IllegalArgumentException(Constant.ERROR_CONTAINS_NULL);
+		}
+		return name;
+	}
+
+	public static void isSameName(String name1, String name2) {
+		if (name1.equals(name2)) {
+			throw new IllegalArgumentException(Constant.ERROR_IS_SAME_NAME);
+		}
+	}
 }
