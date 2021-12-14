@@ -113,15 +113,12 @@ public class Vendingmachine {
     }
 
     public static int buyProduct(List<Product> productList, String prod){
-
         for(Product product: productList){
             if((product.getName()).equals(prod)){
                 product.minusStock();
                 return product.getPrice();
             }
         }
-        
-        // 재고가 없는 경우 에러를 발생시킨다.
         return 0;
     }
 
@@ -132,7 +129,7 @@ public class Vendingmachine {
     }
 
     public static boolean lessThanCheapest(List<Product> productList, int userMoney){
-        int minPrice = 1000000;
+        int minPrice = Integer.MAX_VALUE;
         for(Product product: productList){
             minPrice = Math.min(product.getPrice(), minPrice);
         }
