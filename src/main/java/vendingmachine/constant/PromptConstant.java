@@ -1,6 +1,9 @@
 package vendingmachine.constant;
 
 public final class PromptConstant {
+	public static final int ONE_GOODS_VALID = 0;
+	public static final int PRICE_INVALID = 1;
+	public static final int COUNT_INVALID = 2;
 	public final static String NUMBER_REGEX = "^[+-]?[0-9]*$";
 	public final static String WON_STRING = "원";
 	public final static String COUNT_STRING = "개";

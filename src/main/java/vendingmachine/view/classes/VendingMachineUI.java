@@ -6,15 +6,21 @@ import static vendingmachine.constant.PromptConstant.*;
 
 import vendingmachine.constant.VendingMachineStatus;
 import vendingmachine.controller.CoinGeneratorInterface;
+import vendingmachine.controller.GoodsStackerInterface;
 import vendingmachine.controller.classes.CoinGenerator;
+import vendingmachine.controller.classes.GoodsStacker;
+import vendingmachine.exception.GoodsCountInvalidException;
+import vendingmachine.exception.GoodsPriceInvalidException;
 import vendingmachine.exception.InvalidUserInputException;
 import vendingmachine.exception.NegativeUserInputException;
-import vendingmachine.model.Coin;
+import vendingmachine.exception.UserGoodsInvalidFormatException;
 import vendingmachine.view.VendingMachine;
 
 public class VendingMachineUI implements VendingMachine {
-	VendingMachineStatus vendingMachineStatus = VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE;
+
+	private VendingMachineStatus vendingMachineStatus = VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE;
 	private int moneyInVendingMachine = 0;
+	private PrintHandler printHandler = new PrintHandler();
 
 	@Override
 	public void start() {
@@ -23,16 +29,31 @@ public class VendingMachineUI implements VendingMachine {
 				proceedInputVendingMachineHavingMoney();
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_COINS_IN_VENDING_MACHINE) {
-				System.out.println(PROMPT_VENDING_MACHINE_HAVE_COINS);
-				CoinGeneratorInterface coinGeneratorInterface = new CoinGenerator();
-				System.out.println(coinGeneratorInterface.getRandomCoins(moneyInVendingMachine).toString());
-				break;
+				proceedShowCoinsInVendingMachine();
 			}
 			if (vendingMachineStatus == VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE) {
+				String goodsAndPricesString = inputUserGoodsAndPricesString();
+				GoodsStackerInterface goodsStackerInterface = new GoodsStacker();
+				boolean isValidGoodsAndPriceFormat = isValidGoodsAndPriceFormat(goodsAndPricesString,
+					goodsStackerInterface);
+				int isOneGoodsValidInputFormat = ONE_GOODS_VALID;
+				try {
+					isOneGoodsValidInputFormat = goodsStackerInterface.alignGoods();
+					if (isOneGoodsValidInputFormat == PRICE_INVALID) {
+						throw new GoodsPriceInvalidException();
+					}
+					if (isOneGoodsValidInputFormat == COUNT_INVALID) {
+						throw new GoodsCountInvalidException();
+					}
+				} catch (IllegalArgumentException exception) {
 
+				}
+				if (isValidGoodsAndPriceFormat && isOneGoodsValidInputFormat == ONE_GOODS_VALID) {
+					vendingMachineStatus = VendingMachineStatus.INPUT_USER_MONEY;
+				}
 			}
 			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_MONEY) {
-
+				break;
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_USER_LEFT_MONEY) {
 
@@ -48,13 +69,40 @@ public class VendingMachineUI implements VendingMachine {
 
 	}
 
+	private boolean isValidGoodsAndPriceFormat(String goodsAndPricesString,
+		GoodsStackerInterface goodsStackerInterface) {
+		boolean isValidGoodsAndPriceFormat = false;
+		try {
+			isValidGoodsAndPriceFormat = goodsStackerInterface.stackGoods(goodsAndPricesString);
+			if (!isValidGoodsAndPriceFormat) {
+				throw new UserGoodsInvalidFormatException();
+			}
+		} catch (UserGoodsInvalidFormatException exception) {
+
+		}
+		return isValidGoodsAndPriceFormat;
+	}
+
+	private String inputUserGoodsAndPricesString() {
+		System.out.println(PROMPT_VENDING_MACHINE_GOODS_AND_PRICES);
+		String goodsAndPricesString = readLine();
+		return goodsAndPricesString;
+	}
+
+	private void proceedShowCoinsInVendingMachine() {
+		System.out.println(PROMPT_VENDING_MACHINE_HAVE_COINS);
+		CoinGeneratorInterface coinGeneratorInterface = new CoinGenerator();
+		printHandler.printCoinStatus(coinGeneratorInterface.getRandomCoins(moneyInVendingMachine));
+		vendingMachineStatus = VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE;
+	}
+
 	private void proceedInputVendingMachineHavingMoney() {
 		inputVendingMachineHavingMoney();
 	}
 
 	private void inputVendingMachineHavingMoney() {
 		System.out.println(PROMPT_VENDING_MACHINE_HAVE_MONEY);
-		if(inputVendingMachineMoney()) {
+		if (inputVendingMachineMoney()) {
 			checkIfNegative(moneyInVendingMachine);
 		}
 	}
