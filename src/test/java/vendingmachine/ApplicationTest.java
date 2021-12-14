@@ -1,37 +1,56 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import vendingmachine.domain.ChangesExceptionTest;
+import vendingmachine.domain.SuccessfulTest;
+
 import org.junit.jupiter.api.Test;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
 
+import static vendingmachine.domain.SuccessfulTest.*;
+import static vendingmachine.domain.ChangesExceptionTest.*;
+
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
     void 기능_테스트() {
-        assertRandomNumberInListTest(
-            () -> {
-                run("450", "[콜라,1500,20];[사이다,1000,10]", "3000", "콜라", "사이다");
-                assertThat(output()).contains(
-                    "자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
-                    "투입 금액: 3000원", "투입 금액: 1500원"
-                );
-            },
-            100, 100, 100, 100, 50
-        );
+        SuccessfulTest[] data = getSuccessfulTestData();
+        for (SuccessfulTest testCase : data) {
+            if (testCase == null) {
+                continue;
+            }
+
+            assertRandomNumberInListTest(
+                () -> {
+                    run(testCase.input);
+                    assertThat(output()).contains(
+                        testCase.output
+                    );
+                },
+                testCase.coin, testCase.coins
+            );
+        }
     }
 
     @Test
-    void 예외_테스트() {
-        assertSimpleTest(
-            () -> {
-                runException("-1");
-                assertThat(output()).contains(ERROR_MESSAGE);
+    void 랜덤동전_예외_테스트() {
+        ChangesExceptionTest[] data = getChangesExceptionTestData();
+        for (ChangesExceptionTest testCase : data) {
+            if (testCase == null) {
+                continue;
             }
-        );
+
+            assertSimpleTest(
+                () -> {
+                    runException(testCase.moneyOfChanges);
+                    assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage);
+                }
+            );
+        }
     }
 
     @Override
