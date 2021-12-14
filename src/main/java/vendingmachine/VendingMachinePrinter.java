@@ -23,6 +23,9 @@ public class VendingMachinePrinter {
 			System.out.println(coin.getAmount() + "원 - " + coins.get(coin) + "개");
 		}
 	}
+	public static void printGetProductInfoMessage(){
+		System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+	}
 
 	public static void printChanges(HashMap<Coin, Integer> changes){
 		int inputAmount = 0;

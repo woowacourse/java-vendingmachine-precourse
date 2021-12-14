@@ -46,7 +46,7 @@ public class InputReceiver {
 	public static HashMap<String, Product> getProductInfo(){
 		String productInfo;
 
-		//VendingMachinePrinter.printGetProductInfoMessage();
+		VendingMachinePrinter.printGetProductInfoMessage();
 
 		while (true) {
 			try {
@@ -57,7 +57,7 @@ public class InputReceiver {
 				throw new IllegalArgumentException("[ERROR] 가격과 수량은 숫자여야 합니다.");
 			}catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
-				//VendingMachinePrinter.printGetVendingMachineInfoMessage();
+				VendingMachinePrinter.printGetProductInfoMessage();
 			}
 		}
 	}
