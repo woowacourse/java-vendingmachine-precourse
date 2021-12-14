@@ -1,8 +1,6 @@
 package vendingmachine.domain;
 
-public class SuccessfulTest {
-	private static final int MAX_TESTCASE = 100;
-
+public class SuccessfulTest extends BasicTest {
 	public String[] input;
 	public String[] output;
 	public Integer coin;

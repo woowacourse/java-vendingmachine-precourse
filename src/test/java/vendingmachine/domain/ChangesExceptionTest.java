@@ -2,9 +2,7 @@ package vendingmachine.domain;
 
 import static vendingmachine.Error.*;
 
-public class ChangesExceptionTest {
-	private static final int MAX_TESTCASE = 100;
-
+public class ChangesExceptionTest extends BasicTest {
 	public String moneyOfChanges;
 	public String errorMessage;
 
