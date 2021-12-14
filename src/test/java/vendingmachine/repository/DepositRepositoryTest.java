@@ -19,8 +19,8 @@ class DepositRepositoryTest implements Rollback {
 	    // given
 		Money money = new Money(1000);
 	    // when
-		String save = repository.save(money);
+		Money save = repository.save(money);
 		// then
-		assertEquals("1000원", money.toString());
+		assertEquals("1000원", save.toString());
 	}
 }

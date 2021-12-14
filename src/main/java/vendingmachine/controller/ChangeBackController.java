@@ -2,20 +2,21 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Money;
 import vendingmachine.service.ChangeSafeService;
+import vendingmachine.service.DepositService;
 import vendingmachine.service.PurchaseService;
 
 public class ChangeBackController {
 
-	private final PurchaseService purchaseService;
+	private final DepositService depositService;
 	private final ChangeSafeService changeSafeService;
 
-	public ChangeBackController(PurchaseService purchaseService, ChangeSafeService changeSafeService) {
-		this.purchaseService = purchaseService;
+	public ChangeBackController(DepositService depositService, ChangeSafeService changeSafeService) {
+		this.depositService = depositService;
 		this.changeSafeService = changeSafeService;
 	}
 
 	public String retrieveChangeSafe() {
-		Money money = purchaseService.retrieveMoney();
-		return changeSafeService.giveChange(money);
+		Money money = depositService.retrieve();
+		return changeSafeService.giveChange(money).toString();
 	}
 }

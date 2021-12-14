@@ -21,14 +21,14 @@ public class ChangeSafeService {
 		this.repository = repository;
 	}
 
-	public String generateChangeSafe(Money money) {
+	public ChangeSafe generateChangeSafe(Money money) {
 		Map<Coin, Quantity> coinMap = coinGenerator.generate(money, new RandomCoinPickStrategy());
-		return repository.save(new ChangeSafe(coinMap)).toString();
+		return repository.save(new ChangeSafe(coinMap));
 	}
 
-	public String giveChange(Money money) {
+	public ChangeSafe giveChange(Money money) {
 		ChangeSafe changeSafe = repository.get();
-		return new ChangeSafe(coinGenerator.generate(money, new GreedyCoinPickStrategy(changeSafe))).toString();
+		return new ChangeSafe(coinGenerator.generate(money, new GreedyCoinPickStrategy(changeSafe)));
 	}
 
 }

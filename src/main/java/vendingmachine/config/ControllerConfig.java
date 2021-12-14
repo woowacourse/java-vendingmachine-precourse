@@ -32,13 +32,13 @@ public class ControllerConfig {
 	public static PurchaseController getPurchaseController() {
 		return new PurchaseController(
 			ServiceConfig.getPurchaseService(),
-			ServiceConfig.getChangeSafeService()
+			ServiceConfig.getDepositService()
 		);
 	}
 
 	public static ChangeBackController getChangeBackController() {
 		return new ChangeBackController(
-			ServiceConfig.getPurchaseService(),
+			ServiceConfig.getDepositService(),
 			ServiceConfig.getChangeSafeService()
 		);
 	}

@@ -16,6 +16,6 @@ public class ChangeSafeController {
 
 	public String generateChangeSafe(String input) {
 		Money money = moneyService.generateMoney(input);
-		return changeSafeService.generateChangeSafe(money);
+		return changeSafeService.generateChangeSafe(money).toString();
 	}
 }

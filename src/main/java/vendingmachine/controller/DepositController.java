@@ -16,6 +16,6 @@ public class DepositController {
 
 	public String depositMoney(String input) {
 		Money money = moneyService.generateMoney(input);
-		return depositService.deposit(money);
+		return depositService.deposit(money).toString();
 	}
 }

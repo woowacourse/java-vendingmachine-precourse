@@ -15,9 +15,9 @@ public class DepositRepository {
 		depositMoney = money;
 	}
 
-	public String save(Money money) {
-		depositMoney = depositMoney.plus(money);
-		return money.toString();
+	public Money save(Money money) {
+		depositMoney = money;
+		return get();
 	}
 
 	public Money get() {

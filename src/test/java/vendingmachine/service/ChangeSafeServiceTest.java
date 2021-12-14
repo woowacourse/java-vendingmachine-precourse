@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import vendingmachine.Rollback;
 import vendingmachine.config.ServiceConfig;
+import vendingmachine.domain.ChangeSafe;
 import vendingmachine.domain.Money;
 
 class ChangeSafeServiceTest implements Rollback {
@@ -19,9 +20,9 @@ class ChangeSafeServiceTest implements Rollback {
 		// given
 		Money money = new Money(1000);
 		// when
-		String changeSafe = service.generateChangeSafe(money);
+		ChangeSafe changeSafe = service.generateChangeSafe(money);
 		// then
-		assertTrue(changeSafe.contains("500원"));
+		assertTrue(changeSafe.toString().contains("500원"));
 	}
 
 	@Test
@@ -30,12 +31,12 @@ class ChangeSafeServiceTest implements Rollback {
 		// given
 		Money money = new Money(300);
 		// when
-		String change = service.giveChange(money);
+		ChangeSafe changeSafe = service.giveChange(money);
 		// then
 		assertEquals("500원 - 0개\n"
 			+ "100원 - 3개\n"
 			+ "50원 - 0개\n"
-			+ "10원 - 0개", change);
+			+ "10원 - 0개", changeSafe.toString());
 	}
 
 	@Test
@@ -44,11 +45,11 @@ class ChangeSafeServiceTest implements Rollback {
 		// given
 		Money money = new Money(500);
 		// when
-		String change = service.giveChange(money);
+		ChangeSafe changeSafe = service.giveChange(money);
 		// then
 		assertEquals("500원 - 0개\n"
 			+ "100원 - 4개\n"
 			+ "50원 - 1개\n"
-			+ "10원 - 0개", change);
+			+ "10원 - 0개", changeSafe.toString());
 	}
 }

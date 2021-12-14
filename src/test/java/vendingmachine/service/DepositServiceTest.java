@@ -19,8 +19,8 @@ class DepositServiceTest implements Rollback {
 	    // given
 		Money money = new Money(1000);
 		// then
-		String deposit = service.deposit(money);
+		Money deposit = service.deposit(money);
 		// then
-		assertEquals("1000원", deposit);
+		assertEquals("1000원", deposit.toString());
 	}
 }

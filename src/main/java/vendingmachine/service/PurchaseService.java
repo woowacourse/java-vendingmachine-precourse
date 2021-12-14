@@ -12,29 +12,18 @@ public class PurchaseService {
 	private final ProductRepository productRepository;
 	private final DepositRepository depositRepository;
 
-	public PurchaseService(ProductRepository productRepository,
-		DepositRepository depositRepository) {
+	public PurchaseService(ProductRepository productRepository, DepositRepository depositRepository) {
 		this.productRepository = productRepository;
 		this.depositRepository = depositRepository;
 	}
 
-	public String retrieveMoneyStatus() {
-		return retrieveMoney().toString();
-	}
-
-	public Money retrieveMoney() {
-		return depositRepository.get();
-	}
-
-	public boolean isAvailable() {
-		Money money = depositRepository.get();
+	public boolean isAvailable(Money money) {
 		ProductSet productSet = productRepository.get();
 		return productSet.isAvailable(money);
 	}
 
-	public void purchase(String input) {
-		Price price = productRepository.purchase(new Name(input));
-		depositRepository.decrease(price);
+	public Price purchase(String input) {
+		return productRepository.purchase(new Name(input));
 	}
 
 }
