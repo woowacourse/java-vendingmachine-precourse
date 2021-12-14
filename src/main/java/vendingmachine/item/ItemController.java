@@ -1,12 +1,13 @@
 package vendingmachine.item;
 
 import vendingmachine.exception.NotEnoughStockException;
-import vendingmachine.exception.NotFoundException;
 import vendingmachine.item.dto.ItemDto;
 import vendingmachine.utils.message.ItemErrorMessage;
 import vendingmachine.utils.validator.InputDataValidator;
 import vendingmachine.utils.validator.ItemDataValidator;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.PatternSyntaxException;
 
 public class ItemController {
@@ -26,17 +27,16 @@ public class ItemController {
         return InnerInstanceClazz.instance;
     }
 
-    public void addItem(String inputItems) {
-        try{
-            String[] items = splitItemData(inputItems);
-            for(String item : items) {
-                item = item.replace("[", "").replace("]", "");
-                inputDataValidator.validateData(item);
-                itemService.addItem(ItemDto.fromInputString(item));
-            }
-        }catch(NotFoundException | IllegalArgumentException e){
-            throw new IllegalArgumentException(e.getMessage());
+    public void addItems(String inputItems) {
+
+        List<String> itemData = removeParentheses(splitItemData(inputItems));
+        validateItemData(itemData);
+
+        List<ItemDto> itemDtoList = new ArrayList<>();
+        for(String inputItem : itemData) {
+            itemDtoList.add(ItemDto.fromInputString(inputItem));
         }
+        itemService.addItems(itemDtoList);
     }
 
     private String[] splitItemData(String inputItems) {
@@ -44,6 +44,21 @@ public class ItemController {
             return inputItems.split(ItemDataValidator.MULTIPLE_ITEM_SEPARATE_UNIT);
         }catch(PatternSyntaxException e) {
             throw new IllegalArgumentException(ItemErrorMessage.ITEM_INPUT_FORMAT);
+        }
+    }
+
+    private List<String> removeParentheses (String[] items) {
+
+        List<String> newItemDataFormat = new ArrayList<>();
+        for(String itemData : items) {
+            newItemDataFormat.add(itemData.replace("[", "").replace("]", ""));
+        }
+        return newItemDataFormat;
+    }
+
+    public void validateItemData(List<String> items) {
+        for(String item : items) {
+            inputDataValidator.validateData(item);
         }
     }
 

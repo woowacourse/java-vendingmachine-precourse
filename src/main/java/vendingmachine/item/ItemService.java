@@ -2,7 +2,10 @@ package vendingmachine.item;
 
 import vendingmachine.item.dto.ItemDto;
 import vendingmachine.utils.message.ItemErrorMessage;
+
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ItemService {
 
@@ -25,8 +28,27 @@ public class ItemService {
         return InnerInstanceClazz.instance;
     }
 
-    public void addItem(ItemDto itemDto) {
-        Integer price = itemDto.getPrice();
+    public void addItems(List<ItemDto> items) {
+        validateAllItemPrice(items);
+        validateExistSameName(items);
+
+        for(ItemDto itemDto : items) {
+            itemKeyRepository.save(ItemKey.fromName(itemDto.getName()));
+            Integer key = getItemIdByName(itemDto.getName());
+
+            Item newItem = Item.fromItemDto(itemDto);
+            newItem.setId(key);
+            itemRepository.save(newItem);
+        }
+    }
+
+    public void validateAllItemPrice(List<ItemDto> items) {
+        for(ItemDto item : items) {
+            validatePrice(item.getPrice());
+        }
+    }
+
+    public void validatePrice(Integer price) {
         if(price < ITEM_PRICE_MIN) {
             throw new IllegalArgumentException(ItemErrorMessage.PRICE_RANGE
                     .replaceFirst("min", String.valueOf(ITEM_PRICE_MIN)));
@@ -35,12 +57,16 @@ public class ItemService {
             throw new IllegalArgumentException(ItemErrorMessage.PRICE_DIV
                     .replaceFirst("div", String.valueOf(ITEM_PRICE_DIV)));
         }
-        itemKeyRepository.save(ItemKey.fromName(itemDto.getName()));
-        Integer key = getItemIdByName(itemDto.getName());
+    }
 
-        Item newItem = Item.fromItemDto(itemDto);
-        newItem.setId(key);
-        itemRepository.save(newItem);
+    private void validateExistSameName(List<ItemDto> items) {
+        Set<String> uniqueName = new HashSet<>();
+        for(ItemDto item : items) {
+            if(uniqueName.contains(item.getName())) {
+                throw new IllegalArgumentException(ItemErrorMessage.EXIST_SAME_NAME);
+            }
+            uniqueName.add(item.getName());
+        }
     }
 
     public void purchaseItem(String itemName, int quantity) {

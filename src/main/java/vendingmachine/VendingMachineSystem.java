@@ -4,7 +4,6 @@ import vendingmachine.coin.CoinController;
 import vendingmachine.customer.CustomerController;
 import vendingmachine.exception.NotEnoughMoneyException;
 import vendingmachine.exception.NotEnoughStockException;
-import vendingmachine.exception.NotFoundException;
 import vendingmachine.item.ItemController;
 import vendingmachine.utils.message.OutputMessage;
 import camp.nextstep.edu.missionutils.Console;
@@ -67,7 +66,7 @@ public class VendingMachineSystem {
                 System.out.println(OutputMessage.ITEM_INPUT);
                 String itemData = Console.readLine();
                 System.out.println();
-                itemController.addItem(itemData);
+                itemController.addItems(itemData);
                 break;
             }catch(IllegalArgumentException e) {
                 System.out.println(OutputMessage.ERROR_MESSAGE_PREFIX + e.getMessage());
