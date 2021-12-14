@@ -10,22 +10,27 @@ public class VendingMachine {
 
 	public VendingMachine(int amount) {
 		for (Coin c: Coin.values()) {
+			int num = amount / c.getAmount();
+			if (num <= 0) {
+				continue;
+			}
 			if (c.getAmount() == 10) {
-				c.increaseCount(amount / c.getAmount());
+				c.increaseCount(num);
 				break;
 			}
-			int num = getRandomCoin(0, amount / c.getAmount());
-			c.increaseCount(num);
-			amount -= c.getAmount() * num;
+			int random = getRandomCoin(0, num);
+			c.increaseCount(random);
+			amount -= c.getAmount() * random;
 		}
 	}
 
 	public int getRandomCoin(int start, int end) {
 		List<Integer> li = new ArrayList<>();
-		for (int i = 0; i < end + 1; i++) {
+		for (int i = start; i < end + 1; i++) {
 			li.add(start + i);
 		}
-		return Randoms.pickNumberInList(li);
+		int num = Randoms.pickNumberInList(li);
+		return num;
 	}
 
 	public void setInitProducts(ArrayList<Product> products) {
