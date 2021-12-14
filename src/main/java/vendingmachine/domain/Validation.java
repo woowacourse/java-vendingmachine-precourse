@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.StringTokenizer;
@@ -93,6 +95,22 @@ public class Validation {
 
         if (name.trim().length() != name.length()) {
             throwException(ErrorMessage.ITEM_NAME_SPACE_POSITION);
+        }
+
+    }
+
+    private void checkItemNameOverlap(String itemInput) {
+        List<String> names = new ArrayList<>();
+        StringTokenizer items = getItemToken(itemInput);
+
+        while (items.hasMoreTokens()) {
+            String name = getItemElement(Text.REGEX_ITEM_NAME, items.nextToken());
+
+            if (names.contains(name)) {
+                throwException(ErrorMessage.ITEM_NAME_OVERLAP);
+            }
+
+            names.add(name);
         }
 
     }
