@@ -50,12 +50,12 @@ public class VendingMachineController {
 		int userMoney = inputFromUserView.inputMoneyFromUser();
 		outputView.displayUserMoney(vendingMachine.insertUserMoney(userMoney));
 
-		purchaseItems();
+		purchaseItems(vendingMachine.getItemList());
 	}
 
-	private void purchaseItems() {
+	private void purchaseItems(List<String> itemList) {
 		while (!vendingMachine.isExitPoint()) {
-			int change = vendingMachine.purchaseItem(inputFromUserView.inputItemName());
+			int change = vendingMachine.purchaseItem(inputFromUserView.inputItemName(itemList));
 			outputView.displayUserMoney(change);
 		}
 	}

@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utill.InputItemValidator;
 import vendingmachine.utill.InputMoneyValidator;
@@ -27,13 +29,13 @@ public class InputFromUserView {
 		return inputMoneyFromUser();
 	}
 
-	public String inputItemName() {
+	public String inputItemName(List<String> itemList) {
 		System.out.println(PURCHASE_ITEM_INPUT_MSG);
 		String itemName = Console.readLine();
 
-		if (inputItemValidator.validateInputItemName(itemName)) {
+		if (inputItemValidator.validateInputItemName(itemList, itemName)) {
 			return itemName;
 		}
-		return inputItemName();
+		return inputItemName(itemList);
 	}
 }

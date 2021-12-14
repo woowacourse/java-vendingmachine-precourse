@@ -5,12 +5,7 @@ import java.util.List;
 import java.util.regex.Pattern;
 
 public class InputItemValidator {
-	private static final int ITEM_PRICE_INDEX = 1;
-	private static final int ITEM_NAME_INDEX = 0;
-
 	private static final String REGEX = "\\[[a-zA-Z0-9가-힣 _-]+,\\d{3,},\\d+]";
-	private static final String DELIMITER = ",";
-	private static final String OPEN_BRACKET = "[";
 
 	List<String> itemNames = new ArrayList<>();
 
@@ -29,14 +24,14 @@ public class InputItemValidator {
 		for (String item : itemList) {
 			validateByRegex(item);
 			String[] itemInfo = splitItem(item);
-			InputMoneyValidator.validateIsDivisibleBy10(Integer.parseInt(itemInfo[ITEM_PRICE_INDEX]));
-			validateNameDuplication(itemInfo[ITEM_NAME_INDEX]);
+			InputMoneyValidator.validateIsDivisibleBy10(Integer.parseInt(itemInfo[ItemConst.PRICE_INDEX]));
+			validateNameDuplication(itemInfo[ItemConst.NAME_INDEX]);
 		}
 	}
 
 	private String[] splitItem(String item) {
-		item = item.replace(OPEN_BRACKET, "");
-		return item.split(DELIMITER);
+		item = item.replace(ItemConst.OPEN_BRACKET, "");
+		return item.split(ItemConst.DELIMITER);
 	}
 
 	private void validateByRegex(String item) throws IllegalArgumentException {
@@ -52,9 +47,9 @@ public class InputItemValidator {
 		itemNames.add(itemName);
 	}
 
-	public boolean validateInputItemName(String itemName) {
+	public boolean validateInputItemName(List<String> itemList, String itemName) {
 		try {
-			isExistInItemList(itemName);
+			isExistInItemList(itemList, itemName);
 		} catch (IllegalArgumentException e) {
 			System.out.println(ErrorMsgConst.ERROR_MSG + e.getMessage());
 			return false;
@@ -62,8 +57,8 @@ public class InputItemValidator {
 		return true;
 	}
 
-	private void isExistInItemList(String itemName) throws IllegalArgumentException {
-		if (!itemNames.contains(itemName)) {
+	private void isExistInItemList(List<String> itemList, String itemName) throws IllegalArgumentException {
+		if (!itemList.contains(itemName)) {
 			throw new IllegalArgumentException(ErrorMsgConst.ITEM_NOT_EXIST_ERROR_MSG);
 		}
 	}

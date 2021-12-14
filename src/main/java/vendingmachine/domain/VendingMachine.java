@@ -1,6 +1,9 @@
 package vendingmachine.domain;
 
 import java.util.LinkedHashMap;
+import java.util.List;
+
+import vendingmachine.utill.ItemConst;
 
 public class VendingMachine {
 	private Coins coins;
@@ -52,8 +55,8 @@ public class VendingMachine {
 		return this.userMoneyAmount = userMoney;
 	}
 
-	public boolean checkQuantity(String itemName) {
-		return items.isSoldOut(itemName);
+	public List<String> getItemList() {
+		return items.getItemList();
 	}
 
 	public int purchaseItem(String itemName) {
@@ -70,5 +73,9 @@ public class VendingMachine {
 
 	public boolean isExitPoint() {
 		return items.hasNoStock() || userMoneyAmount < minItemPrice;
+	}
+
+	public LinkedHashMap<Integer, Integer> getChangeInfo() {
+		return coins.calculateChange(userMoneyAmount);
 	}
 }

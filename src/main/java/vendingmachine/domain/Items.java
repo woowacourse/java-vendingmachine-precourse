@@ -21,8 +21,8 @@ public class Items {
 		return item;
 	}
 
-	public boolean isSoldOut(String itemName) {
-		return Objects.requireNonNull(findItem(itemName)).isZeroQuantity();
+	public boolean isSoldOut(Item item) {
+		return item.isZeroQuantity();
 	}
 
 	private Item findItem(String itemName) {
@@ -51,5 +51,17 @@ public class Items {
 			}
 		}
 		return true;
+	}
+
+	public List<String> getItemList() {
+		List<String> itemList = new ArrayList<>();
+
+		for (Item item : items) {
+			if (!isSoldOut(item)) {
+				itemList.add(item.getItemName());
+			}
+		}
+
+		return itemList;
 	}
 }

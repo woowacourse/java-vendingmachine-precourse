@@ -41,6 +41,10 @@ public class Coins {
 		coins.put(coinValue, coins.get(coinValue) + 1);
 	}
 
+	private void reduceCoin(Coin coin, int coinCount) {
+		coins.put(coin, coins.get(coin) - coinCount);
+	}
+
 	public LinkedHashMap<Integer, Integer> getCoinCount() {
 		LinkedHashMap<Integer, Integer> coinCount = new LinkedHashMap<>();
 
@@ -49,5 +53,24 @@ public class Coins {
 		}
 
 		return coinCount;
+	}
+
+	public LinkedHashMap<Integer, Integer> calculateChange(int money) {
+		LinkedHashMap<Integer, Integer> changeInfo = new LinkedHashMap<>();
+
+		for (Coin coin : Coin.values()) {
+			int coinCount = getChangeCoinCount(coin, money);
+			if (coinCount > 0) {
+				changeInfo.put(coin.getAmount(), coinCount);
+				money -= coin.getAmount() * coinCount;
+				reduceCoin(coin, coinCount);
+			}
+		}
+
+		return changeInfo;
+	}
+
+	private int getChangeCoinCount(Coin coin, int money) {
+		return Math.min(coins.get(coin), money / coin.getAmount());
 	}
 }

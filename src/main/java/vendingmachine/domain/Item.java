@@ -11,6 +11,10 @@ public class Item {
 		this.quantity = quantity;
 	}
 
+	public String getItemName() {
+		return this.itemName;
+	}
+
 	public int getPrice() {
 		return this.price;
 	}
