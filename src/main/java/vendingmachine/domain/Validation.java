@@ -6,7 +6,7 @@ public class Validation {
     private String errorMessage;
 
     public String getErrorMessage() {
-        return errorMessage;
+        return ErrorMessage.ERROR + errorMessage;
     }
 
     private void throwException(String errorMessage) {
