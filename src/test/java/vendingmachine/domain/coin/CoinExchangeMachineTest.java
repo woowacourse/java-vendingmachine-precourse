@@ -1,4 +1,4 @@
-package vendingmachine.coin;
+package vendingmachine.domain.coin;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

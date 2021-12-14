@@ -1,4 +1,4 @@
-package vendingmachine.item;
+package vendingmachine.domain.item;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -9,11 +9,12 @@ class ItemsTest {
     @Test
     void Item객체로_아이템_추가_가능() {
         Items items = new Items();
-        Item item = new Item("item1", 10000);
+        String itemName = "item";
+        Item item = new Item(itemName, 10000);
         int quantity = 5;
         items.add(item, quantity);
 
-        assertThat(items.countItems(item)).isEqualTo(quantity);
+        assertThat(items.findByItemName(itemName).get()).isEqualTo(item);
     }
 
     @Test
@@ -27,12 +28,12 @@ class ItemsTest {
     @Test
     void 상품_이름으로_검색시_목록에_있는_상품은_해당_아이템_반환() {
         Items items = new Items();
-        Item item = new Item("item1", 10000);
+        String existItemName = "item";
+        Item item = new Item(existItemName, 10000);
         int quantity = 5;
         items.add(item, quantity);
-        String existItemName = "item1";
 
-        assertThat(items.findByItemName(existItemName).get().getName()).isEqualTo(existItemName);
+        assertThat(items.findByItemName(existItemName).get()).isEqualTo(item);
     }
 
     @Test
@@ -59,23 +60,21 @@ class ItemsTest {
     void 아이템의_개수_1_감소_가능() {
         Items items = new Items();
         Item item = new Item("item", 10000);
-        int quantity = 5;
+        int quantity = 1;
         items.add(item, quantity);
-
         items.reduce(item);
 
-        assertThat(items.countItems(item)).isEqualTo(quantity - 1);
+        assertThat(items.isInStock(item)).isFalse();
     }
 
     @Test
     void 재고가_있는_상품_중_가장_낮은_가격을_찾아낼_수_있다() {
         Items items = new Items();
         int targetPrice = 10;
-        Item item = new Item("item", targetPrice);
-        int quantity = 5;
-        items.add(item, quantity);
+        Item item = new Item("CheapestItem", targetPrice);
         items.add(new Item("itemNotInStock", 0), 0);
-        items.add(new Item("itemMoreExpensive", 15), 1);
+        items.add((item), 1);
+        items.add(new Item("MoreExpensiveItem", 20), 1);
 
         assertThat(items.findLowestPriceInStock()).isEqualTo(targetPrice);
     }
