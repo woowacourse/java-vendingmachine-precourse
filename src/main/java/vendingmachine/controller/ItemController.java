@@ -29,12 +29,16 @@ public class ItemController {
 	}
 
 	public Items setupItems() {
+		return initializeItems();
+	}
+
+	private Items initializeItems() {
 		try {
 			List<String> itemDetails = enterItemList();
 			return makeItems(itemDetails);
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
-			return setupItems();
+			return initializeItems();
 		}
 	}
 
