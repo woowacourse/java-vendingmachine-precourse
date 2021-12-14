@@ -59,4 +59,8 @@ public class Controller {
         return randomList;
     }
 
+    public void inputProduct() {
+        vendingMachine.createProducts(view.inputProduct());
+        System.out.println();
+    }
 }

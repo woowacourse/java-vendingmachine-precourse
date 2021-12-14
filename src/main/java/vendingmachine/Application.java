@@ -4,6 +4,7 @@ public class Application {
     public static void startApplication(Controller controller) {
         controller.setMoney();
         controller.printCoins();
+        controller.inputProduct();
     }
 
     public static void main(String[] args) {
