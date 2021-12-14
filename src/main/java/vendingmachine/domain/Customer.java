@@ -12,11 +12,11 @@ public class Customer {
     }
 
     public void deductTheMoney(int orderProductPrice) {
-        this.inputMoneyToVendingMachine-=orderProductPrice;
+        this.inputMoneyToVendingMachine -= orderProductPrice;
     }
 
     @Override
     public String toString() {
-        return "투입 금액 : "+ inputMoneyToVendingMachine;
+        return "투입 금액: " + inputMoneyToVendingMachine + "원";
     }
 }
