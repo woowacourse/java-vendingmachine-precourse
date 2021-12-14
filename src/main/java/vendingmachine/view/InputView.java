@@ -3,7 +3,8 @@ package vendingmachine.view;
 import java.util.ArrayList;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.controller.ExceptionController;
+import vendingmachine.controller.NumberController;
+import vendingmachine.controller.FormatController;
 import vendingmachine.model.Product;
 import vendingmachine.util.Constant;
 
@@ -45,7 +46,7 @@ public class InputView {
 	public static int askInputAmount() {
 		System.out.println(Constant.ASK_INPUT_AMOUNT);
 		String input = Console.readLine();
-		return ExceptionController.isValidNumber(input);
+		return NumberController.isValidNumber(input);
 	}
 
 	public static int askHoldingAmount() {
@@ -55,14 +56,14 @@ public class InputView {
 	}
 
 	private static int checkHoldingAmount(String input) {
-		int holdingAmount = ExceptionController.isValidNumber(input);
-		ExceptionController.isMultipleOfTen(holdingAmount);
+		int holdingAmount = NumberController.isValidNumber(input);
+		NumberController.isMultipleOfTen(holdingAmount);
 		return holdingAmount;
 	}
 
 	public static void askProductInfo() {
 		System.out.println(Constant.ASK_PRODUCT_INFO);
-		String[] products = splitProducts(Console.readLine());
+		String[] products = FormatController.splitProducts(Console.readLine());
 		checkProducts(products);
 		String[][] information = checkInfoFormat(products);
 		inputProduct(information);
@@ -70,16 +71,16 @@ public class InputView {
 
 	private static void checkProducts(String[] products) {
 		for (int i = 0; i < products.length; i++) {
-			ExceptionController.isInfoFormatValidate(products[i]);
-			products[i] = removeParentheses(products[i]);
+			FormatController.isInfoFormatValidate(products[i]);
+			products[i] = FormatController.removeParentheses(products[i]);
 		}
 	}
 
 	private static String[][] checkInfoFormat(String[] products) {
 		String[][] information = new String[products.length][3];
 		for (int i = 0; i < products.length; i++) {
-			information[i] = splitInfo(products[i]);
-			ExceptionController.isNumberOfInfo3(information[i]);
+			information[i] = FormatController.splitInfo(products[i]);
+			FormatController.isNumberOfInfo3(information[i]);
 		}
 		return information;
 	}
@@ -87,22 +88,10 @@ public class InputView {
 	private static void inputProduct(String[][] information) {
 		products = new ArrayList<>();
 		for (String[] info : information) {
-			int price = ExceptionController.isValidNumber(info[1]);
-			ExceptionController.isMultipleOfTen(price);
-			int count = ExceptionController.isValidNumber(info[2]);
+			int price = NumberController.isValidNumber(info[1]);
+			NumberController.isMultipleOfTen(price);
+			int count = NumberController.isValidNumber(info[2]);
 			products.add(new Product(info[0], price, count));
 		}
-	}
-
-	private static String[] splitProducts(String input) {
-		return input.split(";");
-	}
-
-	private static String removeParentheses(String input) {
-		return input.substring(1, input.length() - 1);
-	}
-
-	private static String[] splitInfo(String input) {
-		return input.split(",");
 	}
 }
