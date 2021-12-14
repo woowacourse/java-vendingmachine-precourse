@@ -26,4 +26,26 @@ public class ProductTest {
 		assertThatThrownBy(() -> new Product("콜라", new Money(100), -1))
 			.isInstanceOf(IllegalArgumentException.class);
 	}
+
+	@DisplayName("해당 상품이 매진인지 확인")
+	@Test
+	void soldOut() {
+		Product product = new Product("콜라", new Money(100), 0);
+		assertThat(product.soldOut()).isTrue();
+	}
+
+	@DisplayName("입력된 가격으로 상품을 살 수 있는지 확인")
+	@Test
+	void isBuy() {
+		Product product = new Product("콜라", new Money(100), 1);
+		assertThat(product.isBuy(new Money(100))).isTrue();
+	}
+
+	@DisplayName("상품 구매")
+	@Test
+	void buy() {
+		Product product = new Product("콜라", new Money(100), 1);
+		product.buy();
+		assertThat(product.soldOut()).isTrue();
+	}
 }

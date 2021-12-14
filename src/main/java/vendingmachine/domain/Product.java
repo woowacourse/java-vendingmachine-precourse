@@ -25,10 +25,14 @@ public class Product implements Comparable<Product> {
 	}
 
 	public boolean isBuy(Money insertMoney) {
-		return price.compareTo(insertMoney) <= 0;
+		return !soldOut() &&
+			price.compareTo(insertMoney) <= 0;
 	}
 
 	public void buy() {
+		if (soldOut()) {
+			return;
+		}
 		amount -= 1;
 	}
 

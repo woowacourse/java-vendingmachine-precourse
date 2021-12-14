@@ -39,7 +39,6 @@ public class VendingMachine {
 	public boolean isBuy(String productName) {
 		Product product = products.findForName(productName);
 		return product != null &&
-			!product.soldOut() &&
 			product.isBuy(remainingMoney);
 	}
 
