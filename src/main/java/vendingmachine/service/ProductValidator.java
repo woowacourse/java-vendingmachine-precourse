@@ -1,7 +1,6 @@
 package vendingmachine.service;
 
-import vendingmachine.constants.CoinConstant;
-import vendingmachine.constants.ProductConstant;
+import vendingmachine.constant.ProductConstant;
 
 public class ProductValidator {
 

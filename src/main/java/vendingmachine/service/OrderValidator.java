@@ -1,6 +1,6 @@
 package vendingmachine.service;
 
-import vendingmachine.constants.OrderConstant;
+import vendingmachine.constant.OrderConstant;
 import vendingmachine.repository.Money;
 import vendingmachine.repository.Product;
 import vendingmachine.repository.Products;

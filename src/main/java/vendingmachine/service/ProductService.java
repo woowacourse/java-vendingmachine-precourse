@@ -2,7 +2,7 @@ package vendingmachine.service;
 
 import java.util.ArrayList;
 
-import vendingmachine.constants.ProductConstant;
+import vendingmachine.constant.ProductConstant;
 import vendingmachine.repository.Product;
 import vendingmachine.repository.Products;
 import vendingmachine.view.InputView;

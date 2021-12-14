@@ -2,7 +2,7 @@ package vendingmachine.service;
 
 import java.util.HashMap;
 
-import vendingmachine.constants.OrderConstant;
+import vendingmachine.constant.OrderConstant;
 import vendingmachine.repository.Coin;
 import vendingmachine.repository.Money;
 import vendingmachine.repository.Product;

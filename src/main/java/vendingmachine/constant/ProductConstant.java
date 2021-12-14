@@ -1,4 +1,4 @@
-package vendingmachine.constants;
+package vendingmachine.constant;
 
 public class ProductConstant {
 
