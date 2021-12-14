@@ -10,6 +10,7 @@ import java.util.List;
 import vendingmachine.domain.Item;
 import vendingmachine.domain.Items;
 import vendingmachine.utils.Input;
+import vendingmachine.utils.Parser;
 import vendingmachine.utils.Validator;
 import vendingmachine.utils.View;
 
@@ -20,41 +21,43 @@ public class UserService {
 				showAskMessage(ASK_POSSESSION);
 
 				String possession = Input.userInput();
-				Validator.validatePossession(possession);
+				int parsedPossession = Parser.makeInteger(possession);
+				Validator.validatePossession(parsedPossession);
 
-				return makeInteger(possession);
+				return parsedPossession;
 			} catch (IllegalArgumentException e) {
 				View.showErrorMessage(e.getMessage());
 			}
 		}
 	}
 
-	public Items addItems() {
+	public Items registerItems() {
 		while (true) {
 			try {
 				showAskMessage(ASK_ITEM_REGISTRATION);
 				Items items = new Items();
 
-				String addingItemInfoLine = Input.userInput();
-				Validator.validateAddingItemFormat(addingItemInfoLine);
+				String addingItemsInfoLine = Input.userInput();
+				Validator.validateAddingItemsLineFormat(addingItemsInfoLine);
 
-				String[] itemsInfo = splitString(addingItemInfoLine, ITEM_SPLIT_CRITERIA);
-				return items.createForSaleItems(itemsInfo);
+				String[] eachItemsInfo = splitLine(addingItemsInfoLine, ITEM_INFO_SPLIT_CRITERIA);
+				return items.createForSaleItems(eachItemsInfo);
 			} catch (IllegalArgumentException e) {
 				showErrorMessage(e.getMessage());
 			}
 		}
 	}
 
-	public int inputUserMoney() {
+	public int getUserMoney() {
 		while (true) {
 			try {
 				showAskMessage(ASK_INPUT_COST);
 
 				String userMoney = Input.userInput();
-				Validator.validatePrice(userMoney);
+				int parsedUserMoney = Parser.makeInteger(userMoney);
+				Validator.validateUserMoney(parsedUserMoney);
 
-				return makeInteger(userMoney);
+				return parsedUserMoney;
 			} catch (IllegalArgumentException e) {
 				showErrorMessage(e.getMessage());
 			}
