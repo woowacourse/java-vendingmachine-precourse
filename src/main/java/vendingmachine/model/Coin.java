@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import vendingmachine.util.ErrorMessageConstants;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -19,7 +21,7 @@ public enum Coin {
 				return coin;
 			}
 		}
-		return null;
+		throw new IllegalArgumentException(ErrorMessageConstants.NO_SUCH_COIN_EXCEPTION_MESSAGE);
 	}
 
 	public int divideByCoinAmount(int amount) {
