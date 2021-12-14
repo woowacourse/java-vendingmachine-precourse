@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 import vendingmachine.controller.VendingMachineController;
 
+import vendingmachine.controller.VendingMachineInputController;
 import vendingmachine.utils.CoinTypeAmountGenerator;
 import vendingmachine.utils.CoinTypeGenerator;
+import vendingmachine.utils.InputtedDataValidation;
 import vendingmachine.utils.RandomGenerator;
 
 import vendingmachine.view.VendingMachineInput;
@@ -20,9 +22,12 @@ public class Application {
 		final ArrayList<Integer> coinTypes = CoinTypeGenerator.getCoinTypes();
 		final CoinTypeAmountGenerator coinTypeAmountGenerator =
 			new CoinTypeAmountGenerator(new RandomGenerator(), coinTypes);
+		final VendingMachineInputController vendingMachineInputController =
+			new VendingMachineInputController(vendingMachineInput, new InputtedDataValidation());
 		VendingMachineController vendingMachineController =
 			new VendingMachineController(vendingMachineOutput,
-				vendingMachineInput, coinTypeAmountGenerator);
-		// vendingMachineController.turnOn();
+				vendingMachineInputController, coinTypeAmountGenerator);
+		vendingMachineController.turnOn();
+
     }
 }
