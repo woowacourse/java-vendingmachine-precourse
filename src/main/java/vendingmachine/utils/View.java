@@ -18,17 +18,18 @@ public class View {
 		showMessage(ENTER_LINE);
 	}
 
-	public static void showMoney(int money) {
-		showMessage(INPUT_COST + money + WON);
+	private static void showCoin(Coin coinType, int count) {
+		showMessage(coinType.getAmount() + WON + SPACE + count + COUNT);
 	}
 
-	public static void showCoin(Coin coinType, int count) {
-		showMessage(coinType.getAmount() + WON + SPACE + count + COUNT);
+	public static void showMoney(int money) {
+		showMessage(ANSWER_INPUT_COST + money + WON);
 	}
 
 	public static void showAskMessage(String askMessage) {
 		showMessage(askMessage);
 	}
+
 	public static void showErrorMessage(String errorMessage) {
 		showMessage(errorMessage);
 	}
