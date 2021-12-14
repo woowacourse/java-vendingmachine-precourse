@@ -1,9 +1,9 @@
 package vendingmachine.Controller;
 
-import vendingmachine.View.Computer;
 import vendingmachine.Model.MachineCoin;
 import vendingmachine.Model.Coin;
 import vendingmachine.Model.Product;
+import vendingmachine.View.Output;
 import vendingmachine.View.User;
 
 import java.util.LinkedHashMap;
@@ -11,35 +11,34 @@ import java.util.List;
 import java.util.Map;
 
 public class VendingMachine {
-    Computer computer = new Computer();
     User user = new User();
     List<Product> productList;
 
     public void Machine() {
-        computer.MSGInputMachineCoin();
+        Output.MSGInputMachineCoin();
         user.InputMachineCoin();
         int sumCoin = user.getCoin();
         MachineCoin machineCoin = new MachineCoin();
         machineCoin.CreateRandomCoin(sumCoin);
         System.out.println();
 
-        computer.PrintMachineCoin(machineCoin);
+        Output.PrintMachineCoin(machineCoin);
         System.out.println();
 
-        computer.MSGInputProduct();
+        Output.MSGInputProduct();
         productList = user.InputProduct();
         System.out.println();
 
-        computer.MSGInputAmount();
+        Output.MSGInputAmount();
         user.InputAmount();
         System.out.println();
 
         while (true) {
-            computer.MSGCurrentAmount(user.getUserCoin());
+            Output.MSGCurrentAmount(user.getUserCoin());
             if (!isPurchase()) {
                 break;
             }
-            computer.MSGInputPurchase();
+            Output.MSGInputPurchase();
             String purchase = user.InputPurchase(productList);
             System.out.println();
 
