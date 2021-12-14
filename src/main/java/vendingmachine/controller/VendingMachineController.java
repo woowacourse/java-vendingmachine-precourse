@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import static vendingmachine.constants.Message.*;
 import static vendingmachine.utils.View.showCoins;
