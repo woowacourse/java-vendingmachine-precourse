@@ -1,30 +1,30 @@
 package vendingmachine.domain.coin;
 
-import vendingmachine.domain.coin.util.CoinProvider;
+import vendingmachine.domain.coin.provider.CoinProvider;
 import vendingmachine.util.CoinChange;
 
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.EnumSet;
 
 public class CoinPocket {
-    private Set<Coin> coins;
+    private EnumSet<Coin> coins;
 
     public static CoinPocket getInstance() {
         return new CoinPocket();
     }
+
     private CoinPocket() {
-        coins = new TreeSet<>();
+        coins = Coin.getSet();
     }
 
     public int putCoinAndAddCount(int machineBalance, CoinProvider coinProvider) {
         int amount = coinProvider.drawCoinLessThanBalance(machineBalance);
-        Coin coin = Coin.getCoinWithAmountInput(amount);
+        Coin coin = Coin.getCoinEquals(amount);
 
-        if(isNoCoinInPocket(coin)) {
+        if (isNoCoinInPocket(coin)) {
             coins.add(coin);
         }
-
         coin.addCount();
+
         return amount;
     }
 
@@ -32,17 +32,12 @@ public class CoinPocket {
         return !coins.contains(coin);
     }
 
+    public void makeCoinCountMin(int changeAmount) {
+        CoinChange.makeCoinsCountMin(coins, changeAmount);
+    }
+
     // for test
     public int countEachCoin(Coin coin) {
         return coin.getCount();
-    }
-
-    // for test
-    protected int getAllCoinsSum() {
-        return coins.stream().mapToInt(coin -> coin.multiplyAmountAndCount()).sum();
-    }
-
-    public void makeCoinCountMin(int changeAmount) {
-        CoinChange.makeCoinsCountMin(coins, changeAmount);
     }
 }

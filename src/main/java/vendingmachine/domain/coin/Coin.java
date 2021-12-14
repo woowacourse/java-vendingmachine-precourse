@@ -1,5 +1,7 @@
 package vendingmachine.domain.coin;
 
+import java.util.EnumSet;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -15,7 +17,11 @@ public enum Coin {
     }
 
     // 추가 기능 구현
-    public static Coin getCoinWithAmountInput(int amountInput) {
+    public static EnumSet<Coin> getSet() {
+        return EnumSet.of(COIN_10, COIN_50, COIN_100, COIN_500);
+    }
+
+    public static Coin getCoinEquals(int amountInput) {
         if (amountInputEquals10(amountInput))
             return COIN_10;
         if (amountInputEquals50(amountInput))
@@ -44,9 +50,8 @@ public enum Coin {
         return amountInput == 10;
     }
 
-    public int getCount() {return count;}
-    public int multiplyAmountAndCount() {
-        return amount * count;
+    public int getCount() {
+        return count;
     }
 
     public void addCount() {

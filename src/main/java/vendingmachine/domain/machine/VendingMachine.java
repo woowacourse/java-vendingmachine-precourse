@@ -1,7 +1,7 @@
 package vendingmachine.domain.machine;
 
 import vendingmachine.domain.coin.CoinPocket;
-import vendingmachine.domain.coin.util.CoinProvider;
+import vendingmachine.domain.coin.provider.CoinProvider;
 import vendingmachine.domain.consumer.Consumer;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.ProductStore;

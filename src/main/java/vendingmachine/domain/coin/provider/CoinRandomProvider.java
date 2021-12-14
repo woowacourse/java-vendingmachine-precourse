@@ -1,4 +1,4 @@
-package vendingmachine.domain.coin.util;
+package vendingmachine.domain.coin.provider;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
