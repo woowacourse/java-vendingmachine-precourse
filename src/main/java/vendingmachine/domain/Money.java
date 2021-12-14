@@ -7,11 +7,7 @@ public class Money {
 		this.money = money;
 	}
 
-	public void pay(final int moneyAmount) {
-		reduce(moneyAmount);
-	}
-
-	private void reduce(final int moneyAmount) {
+	public void reduce(final int moneyAmount) {
 		money -= moneyAmount;
 	}
 
