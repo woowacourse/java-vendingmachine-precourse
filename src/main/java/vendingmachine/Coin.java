@@ -44,4 +44,8 @@ public enum Coin {
 		return target >= coin.amount;
 	}
 
+	public boolean hasBiggerAmount(int target) {
+		return this.amount>target;
+	}
+
 }

@@ -4,16 +4,59 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class MachineController {
 
-	private static final String REQUEST_MSG_INPUT_PRODUCT_NAME = "구입할 상품명을 입력해 주세요.";
 
-	private final Machine machine;
-	private final Customer customer;
+	private Machine machine;
+	private Customer customer;
 
-	public MachineController() {
+	public void readyToOpen() {
 		this.machine = new Machine();
-		this.machine.readyToOpen();
+		inputMachineMoney();
+		setMachineCoin();
+		inputMachineProduct();
 		this.customer = new Customer();
 		this.customer.readyToPurchase();
+	}
+
+	public void inputMachineMoney() {
+		MachineView.requestMoney();
+		String userInput = Console.readLine();
+		try {
+			Validator.isNumeric(userInput);
+			Validator.coinMinimumCheck(userInput);
+			Validator.multipleOfTen(userInput);
+			machine.setMachineMoney(userInput);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			inputMachineMoney();
+		}
+	}
+
+	public void setMachineCoin() {
+		machine.setWallet();
+		int target = machine.getMoney();
+		while (target > 0) {
+			Coin coin = Coin.pickRandomCoin();
+			if (Coin.hasEnoughMoney(target, coin)) {
+				target -= coin.getAmount();
+				machine.updateWallet(coin);
+			}
+		}
+		MachineView.openWallet(machine);
+	}
+
+	public void inputMachineProduct() {
+		MachineView.requestProductList();
+		String userInput = Console.readLine();
+		String[] productList = userInput.split(";");
+		try {
+			for (String productInfo : productList) {
+				Validator.productInput(Util.removeSquareBracket(productInfo));
+			}
+			machine.makeProductsList(productList);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			inputMachineProduct();
+		}
 	}
 
 	public void startMachine() {
@@ -22,7 +65,7 @@ public class MachineController {
 			machineOpen();
 		} while (this.machine.minimumMoneyCheck(this.customer));
 		this.customer.printCustomerMoney();
-		this.machine.giveTheChange(this.customer);
+		MachineView.giveTheChange(customer, machine);
 	}
 
 	public void machineOpen() {
@@ -39,7 +82,7 @@ public class MachineController {
 	}
 
 	public String inputProductName() {
-		System.out.println(REQUEST_MSG_INPUT_PRODUCT_NAME);
+		MachineView.requestProduct();
 		String userInput = Console.readLine();
 		try {
 			Validator.isNull(userInput);
