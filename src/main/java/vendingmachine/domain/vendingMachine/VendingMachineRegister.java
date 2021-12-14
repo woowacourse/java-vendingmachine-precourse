@@ -39,4 +39,8 @@ public class VendingMachineRegister {
     public Products getProducts() {
         return products;
     }
+
+    public VendingMachineAmount getVendingMachineAmount() {
+        return vendingMachineAmount;
+    }
 }

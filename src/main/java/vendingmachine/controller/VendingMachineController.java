@@ -14,6 +14,6 @@ public class VendingMachineController {
 
     public void run() {
         vendingMachineRegister.run();
-        vendingMachineCalculator.run(vendingMachineRegister.getProducts());
+        vendingMachineCalculator.run(vendingMachineRegister.getProducts(), vendingMachineRegister.getVendingMachineAmount());
     }
 }

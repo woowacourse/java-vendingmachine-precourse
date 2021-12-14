@@ -1,6 +1,7 @@
 package vendingmachine.domain.coin;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static vendingmachine.constant.OutputViewMessage.COUNT_MESSAGE;
@@ -10,7 +11,7 @@ public class CoinCombination {
     private final Map<Coin, Integer> coinCombination;
 
     public CoinCombination() {
-        coinCombination = new HashMap<>();
+        coinCombination = new LinkedHashMap<>();
     }
 
     public void put(Coin coin, Integer count) {
@@ -23,4 +24,15 @@ public class CoinCombination {
         );
     }
 
+    public void print2() {
+        for (Coin coin : coinCombination.keySet()) {
+            if (coinCombination.get(coin) > 0) {
+                System.out.println(coin + HYPHEN_MINUS + coinCombination.get(coin) + COUNT_MESSAGE);
+            }
+        }
+    }
+
+    public Map<Coin, Integer> getCoinCombination() {
+        return coinCombination;
+    }
 }

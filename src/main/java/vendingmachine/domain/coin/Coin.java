@@ -30,6 +30,10 @@ public enum Coin {
         return totalAmount;
     }
 
+    public int getAmount() {
+        return amount;
+    }
+
     @Override
     public String toString() {
         return name;

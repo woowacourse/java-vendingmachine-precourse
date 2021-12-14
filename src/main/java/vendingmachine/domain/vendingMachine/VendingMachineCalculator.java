@@ -1,5 +1,6 @@
 package vendingmachine.domain.vendingMachine;
 
+import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.CoinCombination;
 import vendingmachine.domain.coin.CoinGenerator;
 import vendingmachine.domain.product.Product;
@@ -8,18 +9,20 @@ import vendingmachine.domain.user.UserMoney;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+import java.util.Map;
+
 public class VendingMachineCalculator {
     private UserMoney userMoney;
 
     public VendingMachineCalculator() {
     }
 
-    public void run(Products products) {
+    public void run(Products products, VendingMachineAmount vendingMachineAmount) {
         setUserMoney();
         OutputView.printUserMoney(userMoney);
 
         inputProductByUser(products);
-        returnChange();
+        returnChange(vendingMachineAmount);
     }
 
     private void setUserMoney() {
@@ -40,10 +43,10 @@ public class VendingMachineCalculator {
         }
     }
 
-    private void returnChange() {
+    private void returnChange(VendingMachineAmount vendingMachineAmount) {
         int totalChange = userMoney.reduceMoney();
-        CoinCombination changeCoinCombination = CoinGenerator.calculatePossibleCoinCombination(totalChange);
-        changeCoinCombination.print();
+        CoinCombination changeCoinCombination = CoinGenerator.calculateChangeCoinCombination(vendingMachineAmount.getVendingMachineCoinCombination(), totalChange);
+        changeCoinCombination.print2();
     }
 
     private boolean isReturnChange(Products products) {
