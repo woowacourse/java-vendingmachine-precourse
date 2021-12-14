@@ -4,7 +4,7 @@ public class VendingMachine {
     private static final int ZERO = 0;
     private static final String EXCEED_REST_AMOUNT_MESSAGE = "잔액을 초과하여 구매할 수 없습니다.";
     private static final String NOT_DIVIDED_INTO_SEMICOLON_MESSAGE = "상품 정보는 세미콜론으로 구분되어야 합니다.";
-    private static final String TO_STRING_INPUT_AMOUNT_PREFIX = "투입금액: ";
+    private static final String TO_STRING_INPUT_AMOUNT_PREFIX = "투입 금액: ";
     private static final String WRONG_SEMICOLON = "][";
     private static final String AMOUNT_UNIT = "원";
 

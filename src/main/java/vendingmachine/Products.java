@@ -5,11 +5,12 @@ import java.util.List;
 
 public class Products {
     private static final String NOT_EXISTED_PRODUCT_MESSAGE = "해당 상품은 존재하지 않습니다.";
-    private static final String NOT_START_WITH_BRACKET_MESSAGE = "상품 정보는 대괄호로 시작해야합니다.";
-    private static final String NOT_END_WITH_BRACKET_MESSAGE = "상품 정보는 대괄호로 끝나야합니다.";
+    private static final String NOT_START_WITH_BRACKET_MESSAGE = "상품 정보는 대괄호로 시작해야합니다.(상품 정보는 세미콜론으로 구분됩니다.)";
+    private static final String NOT_END_WITH_BRACKET_MESSAGE = "상품 정보는 대괄호로 끝나야합니다.(상품 정보는 세미콜론으로 구분됩니다.)";
     private static final String SEMI_COLON = ";";
     private static final String START_BRACKET = "[";
     private static final String END_BRACKET = "]";
+    private static final int DELETE_BRACKET_INDEX = 1;
 
     private List<Product> products = new ArrayList<>();
 
@@ -42,7 +43,7 @@ public class Products {
 
     private boolean isExceedLeastPrice(int inputAmount) {
         return products.stream()
-                .allMatch(product -> product.isEnoughMoneyToBuy(inputAmount));
+                .anyMatch(product -> product.isEnoughMoneyToBuy(inputAmount));
     }
 
     private void addProducts(String products) {
@@ -55,7 +56,7 @@ public class Products {
     private String removeBrackets(String productInfo) {
         validateProductInfoContainsBracket(productInfo);
 
-        return productInfo.substring(1, productInfo.length() - 1);
+        return productInfo.substring(DELETE_BRACKET_INDEX, productInfo.length() - DELETE_BRACKET_INDEX);
     }
 
     private void validateProductInfoContainsBracket(String productInfo) {
