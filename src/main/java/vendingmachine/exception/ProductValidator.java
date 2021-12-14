@@ -13,6 +13,7 @@ public class ProductValidator {
 
     public static void validateSplitInfos(String[] productList){
         for (String product: productList) {
+            product=product.substring(1,product.length()-1);
             String[] infoList = product.split(INFO_SPLITTER);
             if (infoList.length !=INFO_NUM){
                 throw new IllegalArgumentException(ERROR_INPUT_INFO_SPLITTER);

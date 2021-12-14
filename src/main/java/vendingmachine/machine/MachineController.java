@@ -1,9 +1,10 @@
 package vendingmachine.machine;
 
 import vendingmachine.coin.Coin;
-import vendingmachine.coin.CoinController;
+
 import vendingmachine.product.Product;
-import vendingmachine.product.ProductController;
+
+import vendingmachine.view.Input;
 
 import java.util.Arrays;
 import java.util.List;
@@ -12,10 +13,9 @@ import java.util.Map;
 import static vendingmachine.constant.Constant.PRODUCT_SPLITTER;
 
 public class MachineController {
-    private final CoinController coinController = new CoinController();
-    private final ProductController productController = new ProductController();
-    private final MachineService machineService = new MachineService();
 
+    private final MachineService machineService = new MachineService();
+    private final Input input = new Input();
     public void start(Machine machine,int money,String productList){
         machineService.makeCoins(machine,money);
         machineService.makeProductList(machine,productList);

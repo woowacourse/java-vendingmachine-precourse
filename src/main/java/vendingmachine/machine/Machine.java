@@ -3,6 +3,7 @@ package vendingmachine.machine;
 import vendingmachine.coin.Coin;
 import vendingmachine.product.Product;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ public class Machine {
 
     public Machine(){
         initCoins();
+        productList = new ArrayList<>();
     }
 
     public Map<Coin, Integer> getCoins() {

@@ -1,6 +1,7 @@
 package vendingmachine.coin;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -28,5 +29,11 @@ public enum Coin {
 
     public boolean lessThanEqual(int price){
         return amount<=price;
+    }
+
+    public static List<Coin> sortedCoins(){
+        return Arrays.stream(Coin.values())
+            .sorted(Comparator.comparingInt(Coin::getAmount).reversed())
+            .collect(Collectors.toList());
     }
 }
