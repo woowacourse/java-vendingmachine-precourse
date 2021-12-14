@@ -12,6 +12,10 @@ public class Item {
         this.stock = stock;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
     public boolean isInStock() {
         return stock > ZERO;
     }

@@ -4,6 +4,7 @@ import vendingmachine.domain.Balance;
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.validation.Exception;
+import vendingmachine.domain.validation.PurchaseValidator;
 import vendingmachine.domain.validation.Validator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -14,6 +15,7 @@ public class VendingMachineController {
     private final Balance balance;
     private final Items items;
     private Money money;
+    private String userChoice;
 
     public VendingMachineController() {
         exception = new Exception();
@@ -80,4 +82,18 @@ public class VendingMachineController {
 
     }
 
+    private void receiveUserChoice() {
+        PurchaseValidator purchaseValidator = new PurchaseValidator(exception);
+
+        try {
+            OutputView.printRemainMoney(money.getRemainMoney());
+            OutputView.requestPurchaseItem();
+            userChoice = InputView.receiveInput();
+            purchaseValidator.checkCanPurchase(items, userChoice, money.getRemainMoney());
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(exception.getErrorMessage());
+            receiveUserChoice();
+        }
+
+    }
 }

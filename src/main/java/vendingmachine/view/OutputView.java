@@ -29,6 +29,10 @@ public class OutputView {
         System.out.println(REQUEST_INSERT_MONEY);
     }
 
+    public static void requestPurchaseItem() {
+        System.out.println(REQUEST_PURCHASE_ITEM);
+    }
+
     public static void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage + LINE_BREAK);
     }
@@ -41,5 +45,9 @@ public class OutputView {
         }
 
         System.out.println();
+    }
+
+    public static void printRemainMoney(int money) {
+        System.out.println(INSERT_MONEY + money + WON);
     }
 }

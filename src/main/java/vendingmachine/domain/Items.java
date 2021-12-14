@@ -43,4 +43,12 @@ public class Items {
 
         return false;
     }
+
+    public Item getItem(String itemName) {
+        return itemList.get(itemName);
+    }
+
+    public boolean existsItemName(String itemName) {
+        return itemList.containsKey(itemName);
+    }
 }
