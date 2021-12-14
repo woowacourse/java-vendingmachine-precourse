@@ -17,7 +17,7 @@ public class CoinGenerator implements CoinGeneratorInterface {
 		HashMap<Integer, Integer> coinMap = new HashMap<>();
 		initCoinMap(coinMap);
 		initCoinList();
-		while(price != 0) {
+		while (price != 0) {
 			int pickedCoin = pickNumberInList(coinList);
 			if (price < pickedCoin) {
 				continue;
