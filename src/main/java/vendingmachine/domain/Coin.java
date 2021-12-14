@@ -26,6 +26,11 @@ public enum Coin {
 			.orElseThrow(() -> new IllegalArgumentException(ErrorConst.COIN_IS_NOT_VALID));
 	}
 
+	public static List<Integer> getCoinAmountList() {
+		List<Coin> coins = Arrays.asList(Coin.values());
+		return coins.stream().map(Coin::getAmount).collect(Collectors.toList());
+	}
+
 	public boolean isDivided(int money) {
 		return money % amount == 0;
 	}
@@ -41,11 +46,6 @@ public enum Coin {
 
 	public int getAmount() {
 		return amount;
-	}
-
-	public static List<Integer> getCoinAmountList() {
-		List<Coin> coins = Arrays.asList(Coin.values());
-		return coins.stream().map(Coin::getAmount).collect(Collectors.toList());
 	}
 
 	public int getNumDivided(int money) {
