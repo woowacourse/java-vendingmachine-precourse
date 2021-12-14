@@ -1,5 +1,12 @@
 package vendingmachine;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.system.Validation;
 import vendingmachine.system.ValidationImplementation;
 
@@ -22,52 +29,83 @@ public class VendingMachineSystemController {
     }
 
     public void start() {
-        inputHoldingMoney();
-        inputProductNameAndPriceAndStock();
-        inputUserInsertMoney();
+        int holdingMoney = inputHoldingMoney();
+        VendingMachine vendingMachine = new VendingMachine(holdingMoney);
+        printConsoleMessage(vendingMachine.toString());
+        List<Product> products = inputProductNameAndPriceAndStock();
+        vendingMachine.saveProduct(products);
+        int userInsertMoney = inputUserInsertMoney();
         inputProductNameToBuy();
     }
 
-    public void inputHoldingMoney() {
+    public int inputHoldingMoney() {
         boolean isValidInput = false;
+        String holdingMoney = "-1";
         do {
             try {
                 printConsoleMessage(INPUT_HOLDING_MONEY_MESSAGE);
-                isValidInput = validation.isValidHoldingMoney(Console.readLine());
+                holdingMoney = Console.readLine();
+                isValidInput = validation.isValidHoldingMoney(holdingMoney);
             } catch (IllegalArgumentException e) {
                 printConsoleMessage(ERROR_INPUT_HOLDING_MONEY_MESSAGE);
                 isValidInput = false;
             }
         } while (!isValidInput);
+        return Integer.parseInt(holdingMoney);
     }
 
-    public void inputProductNameAndPriceAndStock() {
+    public List<Product> inputProductNameAndPriceAndStock() {
         boolean isValidInput = false;
+        String productNameAndPriceAndStocks = "";
         do {
             try {
                 printConsoleMessage(INPUT_PRODUCT_PRICE_STOCK_MESSAGE);
-                isValidInput = validation.isValidProductNameAndPriceAndStock(Console.readLine());
+                productNameAndPriceAndStocks = Console.readLine();
+                isValidInput = validation.isValidProductNameAndPriceAndStock(productNameAndPriceAndStocks);
             } catch (IllegalArgumentException e) {
                 printConsoleMessage(ERROR_PRODUCT_PRICE_STOCK_MESSAGE);
                 isValidInput = false;
             }
         } while (!isValidInput);
+        return parsing(productNameAndPriceAndStocks);
     }
 
-    public void inputUserInsertMoney(){
+    private List<Product> parsing(String productNameAndPriceAndStocks) {
+        List<String> streamProductInformation = Arrays.stream(productNameAndPriceAndStocks.split(";")).collect(Collectors.toList());
+        List<Product> results = new ArrayList<>();
+        for (String productInformation : streamProductInformation) {
+            String removeProductInformation = removeBracket(productInformation);
+            String[] productNameAndPriceAndQuantity = removeProductInformation.split(",");
+            String productName = productNameAndPriceAndQuantity[0];
+            int price = toInteger(productNameAndPriceAndQuantity[1]);
+            int quantity = toInteger(productNameAndPriceAndQuantity[2]);
+            results.add(new Product(productName, price, quantity));
+        }
+        return results;
+    }
+
+    private String removeBracket(String productInformation) {
+        return productInformation.substring(1, productInformation.length() - 1);
+    }
+
+    public int inputUserInsertMoney() {
         boolean isValidInput = false;
+        int userInputMoney=0;
         do {
             try {
                 printConsoleMessage(INPUT_USER_INSERT_MONEY_MESSAGE);
-                isValidInput = validation.isValidUserInsertMoney(Console.readLine());
+                String userInsertMoney = Console.readLine();
+                isValidInput = validation.isValidUserInsertMoney(userInsertMoney);
+                userInputMoney = toInteger(userInsertMoney);
             } catch (IllegalArgumentException e) {
                 printConsoleMessage(ERROR_USER_INSERT_MONEY_MESSAGE);
                 isValidInput = false;
             }
         } while (!isValidInput);
+        return userInputMoney;
     }
 
-    public void inputProductNameToBuy(){
+    public void inputProductNameToBuy() {
         boolean isValidInput = false;
         do {
             try {
@@ -78,6 +116,10 @@ public class VendingMachineSystemController {
                 isValidInput = false;
             }
         } while (!isValidInput);
+    }
+
+    public int toInteger(String stringType) {
+        return Integer.parseInt(stringType);
     }
 
     public void printConsoleMessage(String message) {
