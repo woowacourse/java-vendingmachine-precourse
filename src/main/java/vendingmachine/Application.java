@@ -4,8 +4,11 @@ import vendingmachine.controller.InputController;
 import vendingmachine.controller.OrderController;
 
 public class Application {
+    private static InputController inputController = new InputController();
+    private static OrderController orderController = new OrderController();
+
     public static void main(String[] args) {
-        Machine machine = new Machine();
-        machine.run();
+        inputController.init();
+        orderController.start();
     }
 }
