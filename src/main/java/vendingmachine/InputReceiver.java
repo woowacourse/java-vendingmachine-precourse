@@ -24,6 +24,26 @@ public class InputReceiver {
 		}
 	}
 
+	public static int getProductName(){
+		String productName;
+
+		//VendingMachinePrinter.printGetProductNameMessage();
+
+		while (true) {
+			try {
+				productName = Console.readLine();
+				InputValidator.validateProductName(productName);
+				return Integer.parseInt(productName);
+			} catch (NullPointerException e) {
+				System.out.println("[ERROR] 존재하지 않는 상품명입니다.");
+				//VendingMachinePrinter.printGetProductNameMessage();
+			}catch (IllegalArgumentException e) {
+				System.out.println(e.getMessage());
+				//VendingMachinePrinter.printGetProductNameMessage();
+			}
+		}
+	}
+
 	public static HashMap<String, Product> getProductInfo(){
 		String productInfo;
 
