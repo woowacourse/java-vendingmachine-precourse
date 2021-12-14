@@ -2,7 +2,6 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class Items {
 	private final List<Item> items;
@@ -16,7 +15,7 @@ public class Items {
 	}
 
 	public Item purchaseItem(String itemName) {
-		Item item = Objects.requireNonNull(findItem(itemName));
+		Item item = findItem(itemName);
 		item.reduceQuantity();
 		return item;
 	}
@@ -31,7 +30,7 @@ public class Items {
 				return item;
 			}
 		}
-		return null;
+		return new Item("",0,0);
 	}
 
 	public int getMinItemPrice() {
