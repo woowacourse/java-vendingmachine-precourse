@@ -23,15 +23,15 @@ public enum Coin {
 	}
 
 	public static Coin findCoinType(int amount) {
-		return Arrays.asList(Coin.values()).stream()
+		return Arrays.stream(Coin.values())
 			.filter(coin -> coin.getAmount() == amount)
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FOUND_COIN_TYPE));
 	}
 
 	public static List<Integer> getCoinList() {
-		return Arrays.asList(Coin.values()).stream()
-			.map(coin -> coin.getAmount())
+		return Arrays.stream(Coin.values())
+			.map(Coin::getAmount)
 			.collect(Collectors.toList());
 	}
 }
