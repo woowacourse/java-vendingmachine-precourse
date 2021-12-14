@@ -77,5 +77,7 @@ public class VendingMachine {
 			coins.put(key, value);
 			amountOfCoins += key.getAmount();
 		}
+
+		VendingMachinePrinter.printCurrentCoins(coins);
 	}
 }
