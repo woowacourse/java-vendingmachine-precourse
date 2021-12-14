@@ -57,6 +57,23 @@ class ApplicationTest extends NsTest {
         }
     }
 
+    @Test
+    void 상품_등록_예외_테스트() {
+        ArrayList<ProductExceptionTest> data = getProductExceptionTest();
+        for (ProductExceptionTest testCase : data) {
+            if (testCase == null) {
+                continue;
+            }
+
+            assertSimpleTest(
+                () -> {
+                    runException(testCase.moneyOfChanges, testCase.products);
+                    assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage);
+                }
+            );
+        }
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
