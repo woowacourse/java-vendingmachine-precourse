@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Objects;
 
-public class Product implements Comparable<Product>{
+public class Product implements Comparable<Product> {
 	private static final int MIN_PRICE = 100;
 	private static final int MIN_AMOUNT = 0;
 

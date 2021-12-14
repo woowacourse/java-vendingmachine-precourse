@@ -8,7 +8,8 @@ import java.util.Objects;
 public class Products {
 	private List<Product> products = new ArrayList<>();
 
-	public Products() {}
+	public Products() {
+	}
 
 	public void add(Product product) {
 		products.add(product);
