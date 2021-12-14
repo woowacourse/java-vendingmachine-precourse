@@ -3,6 +3,7 @@
 ## 📝 기능 목록
 
 - 자판기 보유 금액 입력받기
+
   - 예외가 발생하면 "[ERROR]"로 시작하는 에러 메시지를 출력 후 자판기 보유 금액을 다시 입력받는다
   - (예외처리)
   - 아무것도 입력받지 않을 경우
@@ -23,14 +24,16 @@
   - 입력에 공백이 있을 경우
   - 입력에 탭이 있을 경우
   - ;기준으로 나눴을 때 아무것도 없는 경우
-  - ;기준으로 나눴을 때 개수가 Inegeger.MAX_VALUE보다 많은 경우
+  - ;기준으로 나눴을 때 개수가 Integer.MAX_VALUE보다 많은 경우
   - ;기준으로 나눴을 때 []로 감싸져 있지 않은 경우
-  - ,기준으로 나눴을 때 개수가 Inegeger.MAX_VALUE보다 많은 경우
+  - ,기준으로 나눴을 때 개수가 Integer.MAX_VALUE보다 많은 경우
   - ,기준으로 나눴을 때 아무것도 없는 경우
   - ,기준으로 나눴을 때 개수가 3개가 아닌 경우
   - 상품명이 아무것도 입력받지 않을 경우
   - 상품명에 공백이 있을 경우
   - 상품명에 탭이 있을 경우
+  - 동일한 상품명이 입력될 경우
+  - 가격이 100원이 안 될 경우
   - 가격이 양의 정수가 아닐 경우
   - 가격이 Integer.MAX_VALUE보다 큰 경우
   - 가격이 가장 작은 코인의 금액으로 나눠지지 않을 경우
@@ -50,6 +53,8 @@
   - 상품명이 아무것도 입력받지 않을 경우
   - 상품명에 공백이 있을 경우
   - 상품명에 탭이 있을 경우
+  - 해당 상품이 없을 경우
+  - 잔액보다 더 큰 상품을 선택한 경우
 - 잔돈을 돌려준다
   - 현재 보유한 최소 개수의 동전으로 돌려준다
   - 지폐를 잔돈으로 반환하지 않는다
@@ -58,7 +63,64 @@
 ## 📝 프로젝트 구조
 
 ````
-
+│  .editorconfig
+│  .gitignore
+│  build.gradle
+│  gradle.properties
+│  gradlew
+│  gradlew.bat
+│  naver-checkstyle-rules.xml
+│  naver-intellij-formatter.xml
+│  README.md
+│  settings.gradle
+│
+├─docs
+│      README.md
+│
+└─src
+    ├─main
+    │  └─java
+    │      └─vendingmachine
+    │          │  Application.java
+    │          │
+    │          ├─constant
+    │          │      Message.java
+    │          │      Rule.java
+    │          │
+    │          ├─controller
+    │          │      VendingMachineController.java
+    │          │
+    │          ├─model
+    │          │      Change.java
+    │          │      Coin.java
+    │          │      HoldingSum.java
+    │          │      InsertingSum.java
+    │          │      Name.java
+    │          │      Price.java
+    │          │      Product.java
+    │          │      Stock.java
+    │          │      TheNumber.java
+    │          │      VendingMachine.java
+    │          │
+    │          ├─service
+    │          │      VendingMachineService.java
+    │          │
+    │          ├─util
+    │          │      NumberChecker.java
+    │          │      SplitChecker.java
+    │          │      StringChecker.java
+    │          │
+    │          └─view
+    │                  ChangeView.java
+    │                  HoldingSumView.java
+    │                  InsertingSumView.java
+    │                  NameView.java
+    │                  StockView.java
+    │
+    └─test
+        └─java
+            └─vendingmachine
+                    ApplicationTest.java
 ````
 
 ## 📝 클래스 구조 및 역할
@@ -67,31 +129,35 @@
   - 자판기 동작 순서 제어 역할
     - 자판기 동작 순서
       - 자판기 보유 금액 입력받기
-      - 보유 금액으로 동전 생성하기
+      - 보유 금액 출력하기
       - 재고 설정하기
-      - 상품 구매하기
-      - 잔돈 돌려주기
+      - 투입 금액 입력받기
+      - 상품 판매하기
+      - 잔돈 출력하기
 - Service
   - 자판기 기능 비즈니스 로직 구현 역할
     - 상품 판매하기
-    - 잔돈 계산하기
 - View
   - 사용자에게 보여지는 UI 로직 구현 역할
     - 자판기 보유 금액 입력받기
-    - 자판기가 보유한 동전 출력하기
+    - 보유 동전 출력하기
     - 재고 입력받기
     - 투입 금액 입력받기
     - 구매 상품 입력받기
     - 잔돈 출력하기
 - Model
   - 비즈니스 로직에 사용되는 객체 모음
-    - Vendingmachine
+    - VendingMachine
       - HoldingSum
+        - Coin
       - Stock
         - Product
           - Name
           - Price
-          - Number
+          - TheNumber
+      - InsertingSum
+    - Change
+      - Coin
 - Constant
   - 자판기에서 사용되는 상수 모음
     - Message
