@@ -45,8 +45,8 @@ public class HoldingAmount {
         }
         try {
             Coin coin = calculator.apply(amountAboveMinCoin);
-            coins.putIfAbsent(coin, ZERO);
-            coins.computeIfPresent(coin, (k, v) -> ++v);
+            target.putIfAbsent(coin, ZERO);
+            target.computeIfPresent(coin, (k, v) -> ++v);
             return fillCoins(amountAboveMinCoin - coin.getAmount(), target, calculator);
         } catch (IllegalArgumentException ignore) {
             return target;
