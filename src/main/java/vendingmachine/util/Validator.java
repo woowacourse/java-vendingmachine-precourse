@@ -1,6 +1,7 @@
 package vendingmachine.util;
 
 import static vendingmachine.constant.Constant.*;
+import static vendingmachine.domain.Coin.*;
 
 public class Validator {
 
@@ -22,6 +23,12 @@ public class Validator {
 	public void validateNegative(String number) {
 		if (Integer.parseInt(number) < 0) {
 			throw new IllegalArgumentException(VALIDATE_NEGATIVE_MESSAGE);
+		}
+	}
+
+	public void validateCoin(int money) {
+		if (money % getMinimumCoinUnit() != 0) {
+			throw new IllegalArgumentException(MONEY_SMALLER_THAN_MINIMUM_COIN);
 		}
 	}
 
