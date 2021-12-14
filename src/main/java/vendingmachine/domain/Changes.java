@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
 import java.util.Map;
-import vendingmachine.Coin;
 
 public class Changes {
 

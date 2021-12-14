@@ -1,19 +1,23 @@
-package vendingmachine.domain;
+package vendingmachine.service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import vendingmachine.domain.InputAmount;
+import vendingmachine.domain.Product;
 
-public class ProductSeller {
+public class Products {
 
     private static final String ERR_HEADER = "[ERROR]";
     private static final String ERR_INVALID_PRODUCT = ERR_HEADER + "존재하지 않는 상품입니다.";
     private static final String ERR_EMPTY_PRODUCTS = ERR_HEADER + "상품 리스트가 비어있습니다.";
+    private static final String ERR_DUPLICATED_NAME = ERR_HEADER + "중복된 이름이 있습니다.";
 
     private final Map<String, Product> products;
 
-    public ProductSeller(List<Product> productList) {
+    public Products(List<Product> productList) {
+        validateNonDuplicateName(productList);
         this.products = productList.stream()
             .collect(Collectors.toMap(Product::getName, p -> p));
     }
@@ -23,19 +27,15 @@ public class ProductSeller {
         products.get(name).sell(inputAmount);
     }
 
-    public boolean isEmpty() {
-        return this.products.values()
-            .stream()
-            .allMatch(Product::isEmptyStock);
-    }
-
     public boolean isPurchaseAvailable(InputAmount inputAmount) {
-        return !isEmpty() && !getCheapestProduct().isBelowProductPrice(inputAmount);
+        return !this.products.values()
+            .stream()
+            .allMatch(Product::isSoldOut) && !getCheapestProduct().isBelowProductPrice(inputAmount);
     }
 
     private Product getCheapestProduct() throws IllegalArgumentException {
         return products.values().stream()
-            .filter(p -> !p.isEmptyStock())
+            .filter(p -> !p.isSoldOut())
             .min(Comparator.comparingInt(Product::getAmount))
             .orElseThrow(() -> new IllegalArgumentException(ERR_EMPTY_PRODUCTS));
     }

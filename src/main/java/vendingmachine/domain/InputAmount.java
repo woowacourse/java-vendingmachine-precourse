@@ -16,7 +16,7 @@ public class InputAmount {
         return amount;
     }
 
-    public void consume(Product product) {
+    public void buy(Product product) {
         amount -= product.getAmount();
     }
 

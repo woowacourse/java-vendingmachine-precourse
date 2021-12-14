@@ -1,4 +1,4 @@
-package vendingmachine.utils;
+package vendingmachine.io;
 
 import camp.nextstep.edu.missionutils.Console;
 import java.util.List;
@@ -6,7 +6,8 @@ import java.util.function.Supplier;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.domain.Product;
-import vendingmachine.domain.ProductSeller;
+import vendingmachine.service.Products;
+import vendingmachine.utils.ProductParser;
 import vendingmachine.validator.InputValidator;
 
 public class UserInput {
@@ -16,8 +17,8 @@ public class UserInput {
     private static final String PROMPT_INPUT_AMOUNT = "투입 금액을 입력해 주세요.";
     private static final String PROMPT_ORDER_PRODUCT = "구매할 상품명을 입력해 주세요.";
 
-    public static ProductSeller getProductSeller() {
-        return new ProductSeller(getProductList());
+    public static Products getProductSeller() {
+        return new Products(getProductList());
     }
 
     public static List<Product> getProductList() {
@@ -55,6 +56,12 @@ public class UserInput {
         return Console.readLine();
     }
 
+    /**
+     *
+     * @param supplier 입력을 받아오는 함수
+     * @param <T> supplier 가 제공하는 객체
+     * @return  예외가 발생하지 않을때까지 입력받기를 시도한다.
+     */
     private static <T> T getValidInput(Supplier<T> supplier) {
         try {
             return supplier.get();

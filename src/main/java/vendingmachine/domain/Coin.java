@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;

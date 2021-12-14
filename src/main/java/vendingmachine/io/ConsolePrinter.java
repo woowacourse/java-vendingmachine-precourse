@@ -1,9 +1,9 @@
-package vendingmachine.utils;
+package vendingmachine.io;
 
 import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import vendingmachine.Coin;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.Changes;
 import vendingmachine.domain.InputAmount;

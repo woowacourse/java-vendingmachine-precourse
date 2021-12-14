@@ -15,9 +15,10 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import vendingmachine.domain.Changes;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
-import vendingmachine.utils.ConsolePrinter;
+import vendingmachine.io.ConsolePrinter;
 
 public class ConsolePrinterTest {
 
@@ -80,7 +81,7 @@ public class ConsolePrinterTest {
         HoldingAmount holdingAmount = mock(HoldingAmount.class);
         when(holdingAmount.getHoldingCoinCount(any())).thenReturn(1);
         printer.printHoldingAmount(holdingAmount);
-        String answer = "보유금액\n" + Arrays.stream(Coin.values())
+        String answer = "자판기가 보유한 동전\n" + Arrays.stream(Coin.values())
             .map(c -> c.getLocalCurrency() + " - " + 1 + "개")
             .collect(Collectors.joining("\n")) + "\n";
         assertThat(out()).isEqualTo(answer);
