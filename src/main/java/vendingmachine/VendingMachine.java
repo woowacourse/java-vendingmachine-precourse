@@ -32,4 +32,13 @@ public class VendingMachine {
     public List<Product> getProductList() {
         return productList;
     }
+
+    public void buyProduct(String menu) {
+        for (int i = 0; i < productList.size(); i++) {
+            if (menu.equals(productList.get(i).getName())) {
+                setSpentMoney(spentMoney - productList.get(i).getPrice());
+                productList.get(i).changeQuantity(-1);
+            }
+        }
+    }
 }
