@@ -31,7 +31,7 @@ public class MainView {
         System.out.println();
     }
 
-    public void printError() {
-        System.out.print(OutputData.ERROR + " ");
+    public void printError(Exception exception) {
+        System.out.println(OutputData.ERROR + " " + exception.getMessage());
     }
 }

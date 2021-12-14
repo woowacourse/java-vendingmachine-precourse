@@ -76,13 +76,20 @@ public class ProductTable {
 
     private void checkExists(String productName, boolean expect) {
         if (productTable.containsKey(productName) != expect) {
-            throw new IllegalArgumentException();
+            if (expect) {
+                throw new IllegalArgumentException("\"" + productName + "\"라는 이름의 상품이 존재하지 않습니다.");
+            }
+            throw new IllegalArgumentException("\"" + productName + "라는 이름의 상품이 이미 존재합니다.");
         }
     }
 
     private void checkSellable(String productName, boolean expect) {
+        checkExists(productName, true);
         if (productTable.get(productName).isAvailable() != expect) {
-            throw new IllegalArgumentException();
+            if (expect) {
+                throw new IllegalArgumentException("\"" + productName + "\"은(는) 현재 구매 불가능한 상태입니다.");
+            }
+            throw new IllegalArgumentException("\"" + productName + "\"은(는) 구매 가능한 상태입니다.");
         }
     }
 }

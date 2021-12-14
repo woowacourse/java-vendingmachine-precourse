@@ -27,21 +27,24 @@ public class ProductValidator {
 
     public int checkPrice(int money) {
         if (money % PRICE_UNIT != 0 || money < PRICE_MINIMUM) {
-            throwIllegalArgumentException();
+            throwIllegalArgumentException("상품의 가격은 최소 100, 10단위 이어야합니다.");
         }
         return money;
     }
 
     public int checkStock(int stock) {
         if (stock < 0) {
-            throwIllegalArgumentException();
+            throwIllegalArgumentException("수량은 양수이어야 합니다.");
         }
         return stock;
     }
 
     public String checkName(String name) {
         if (name.length() > PRODUCT_NAME_MAXIMUM || name.length() < PRODUCT_NAME_MINIMUM) {
-            throwIllegalArgumentException();
+            throwIllegalArgumentException("상품명은 1자이상 30자이하여야 합니다.");
+        }
+        if (name.contains(PRODUCT_DATA_SPLITTER) || name.contains(PRODUCT_LIST_SPLITTER)) {
+            throwIllegalArgumentException("상품명에는 ','나 ';'는 불가합니다.");
         }
         return name;
     }
@@ -77,7 +80,7 @@ public class ProductValidator {
     private String checkAndRemoveCoverBegin(String productName) {
         int coverBegin = productName.indexOf(PRODUCT_INFO_BEGIN);
         if (coverBegin == -1) {
-            throwIllegalArgumentException();
+            throwIllegalArgumentException("상품정보는 '"+PRODUCT_INFO_BEGIN+"'로 시작해야 합니다.");
         }
         return productName.substring(coverBegin + 1);
     }
@@ -85,18 +88,18 @@ public class ProductValidator {
     private String checkAndRemoveCoverEnd(String productName) {
         int coverEnd = productName.indexOf(PRODUCT_INFO_END);
         if (coverEnd == -1) {
-            throwIllegalArgumentException();
+            throwIllegalArgumentException("상품정보는 '"+PRODUCT_INFO_END+"'로 끝나야 합니다.");
         }
         return productName.substring(0, coverEnd);
     }
 
     private void checkProductDataSize(String[] productData) {
         if (productData.length != PRODUCT_DATA_SIZE) {
-            throwIllegalArgumentException();
+            throwIllegalArgumentException("상품정보는 '"+ PRODUCT_DATA_SPLITTER+"'로 구분되어야 합니다.");
         }
     }
 
-    private void throwIllegalArgumentException() {
-        throw new IllegalArgumentException();
+    private void throwIllegalArgumentException(String errorMessage) {
+        throw new IllegalArgumentException(errorMessage);
     }
 }

@@ -24,8 +24,7 @@ public class MachineCore {
     private void runMachine() {
         readInputMoneyFromUser();
         while (machine.isStillAvailableToBuy()) {
-            String productName = readProductToBuyFromUser();
-            machine.sellProduct(productName);
+            readProductToBuyFromUser();
         }
         printInputMoneyLeft();
         printChangeReturned();
@@ -44,7 +43,8 @@ public class MachineCore {
                 machine.setInitialAsset(consoleValidator.checkNumeric(input));
                 break;
             } catch (IllegalArgumentException exception) {
-                view.printError();
+                view.printError(exception);
+                System.out.println(exception.getMessage());
             }
         }
         view.printBlankLine();
@@ -58,7 +58,7 @@ public class MachineCore {
                 machine.setProductTable(productTable);
                 break;
             } catch (IllegalArgumentException exception) {
-                view.printError();
+                view.printError(exception);
             }
         }
         view.printBlankLine();
@@ -99,25 +99,25 @@ public class MachineCore {
                 machine.setInputMoney(consoleValidator.checkNumeric(input));
                 break;
             } catch (IllegalArgumentException exception) {
-                view.printError();
+                view.printError(exception);
             }
         }
         view.printBlankLine();
     }
 
-    private String readProductToBuyFromUser() {
+    private void readProductToBuyFromUser() {
         printInputMoneyLeft();
         String input;
         while (true) {
             try {
                 input = view.askQuestion(InputData.ASK_PRODUCT_TO_BUY);
-                productValidator.checkName(input);
+                input = productValidator.checkName(input);
+                machine.sellProduct(input);
                 break;
             } catch (IllegalArgumentException exception) {
-                view.printError();
+                view.printError(exception);
             }
         }
         view.printBlankLine();
-        return input;
     }
 }
