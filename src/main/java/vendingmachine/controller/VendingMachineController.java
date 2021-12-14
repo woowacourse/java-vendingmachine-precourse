@@ -3,7 +3,7 @@ package vendingmachine.controller;
 import static vendingmachine.constants.SystemConstants.*;
 
 import vendingmachine.domain.Merchandise;
-import vendingmachine.domain.enums.Coin;
+import vendingmachine.domain.Coin;
 import vendingmachine.service.CoinService;
 import vendingmachine.service.CustomerMoneyService;
 import vendingmachine.service.MenuService;

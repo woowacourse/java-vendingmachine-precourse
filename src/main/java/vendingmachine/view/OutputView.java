@@ -3,7 +3,7 @@ package vendingmachine.view;
 import static vendingmachine.constants.OutputMessages.*;
 import static vendingmachine.constants.FormatConstants.*;
 
-import vendingmachine.domain.enums.Coin;
+import vendingmachine.domain.Coin;
 
 import java.util.HashMap;
 import java.util.TreeMap;

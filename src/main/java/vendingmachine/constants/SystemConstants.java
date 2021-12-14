@@ -1,6 +1,6 @@
 package vendingmachine.constants;
 
-import vendingmachine.domain.enums.Coin;
+import vendingmachine.domain.Coin;
 
 public class SystemConstants {
 

@@ -5,7 +5,7 @@ import static vendingmachine.constants.SystemConstants.ZERO_COINS;
 import static vendingmachine.utils.NumberInputValidator.validateMoneyInput;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.enums.Coin;
+import vendingmachine.domain.Coin;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 

@@ -1,4 +1,4 @@
-package vendingmachine.domain.enums;
+package vendingmachine.domain;
 
 import static vendingmachine.constants.FormatConstants.WON;
 
