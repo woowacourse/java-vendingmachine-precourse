@@ -29,7 +29,7 @@ public class CoinPocket {
 
 	public int pop(final Coin coin, final int number) {
 		int numberOfCoinsToPop = Integer.min(randomCoins.get(coin), number);
-		randomCoins.put(coin, numberOfCoinsToPop);
+		randomCoins.put(coin, randomCoins.get(coin) - numberOfCoinsToPop);
 		return numberOfCoinsToPop;
 	}
 
