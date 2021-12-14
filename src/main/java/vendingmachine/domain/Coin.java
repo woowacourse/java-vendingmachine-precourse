@@ -1,9 +1,11 @@
 package vendingmachine.domain;
 
 import static camp.nextstep.edu.missionutils.Randoms.*;
+import static vendingmachine.constant.Constant.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public enum Coin {
@@ -39,6 +41,13 @@ public enum Coin {
 			return coinPicked;
 		}
 		return pickRandomCoinUnderMoney(money);
+	}
+
+	public static int getMinimumCoinUnit() {
+		return Arrays.stream(Coin.values())
+			.mapToInt(Coin::getAmount)
+			.min()
+			.orElseThrow(NoSuchElementException::new);
 	}
 
 }
