@@ -15,7 +15,7 @@ public class Validators {
 
 	public static void checkValidRangeMoney(String inputValue) {
 		int number = Integer.parseInt(inputValue);
-		if (!(1 <= number && number <= 2147483647)) {
+		if (!(1 <= number)) {
 			throw new IllegalArgumentException("정상 범위(" + 1 + "~" + 2147483647 + ")가 아닙니다");
 		}
 	}
