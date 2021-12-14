@@ -23,6 +23,14 @@ public class VendingMachineSystem {
         coinController = CoinController.getInstance();
     }
 
+    private static class InnerInstanceClazz {
+        private static final VendingMachineSystem instance = new VendingMachineSystem();
+    }
+
+    public static VendingMachineSystem getInstance() {
+        return InnerInstanceClazz.instance;
+    }
+
     public void operate() {
         initializeVendingMachineCount();
         printVendingMachineCount();
@@ -47,6 +55,7 @@ public class VendingMachineSystem {
     }
 
     private void printVendingMachineCount() {
+        System.out.println(OutputMessage.VENDING_MACHINE_COIN_PRINT_TITLE);
         coinController.printAllCoin();
         System.out.println();
     }
