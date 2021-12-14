@@ -5,7 +5,6 @@ import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
-import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -45,7 +44,7 @@ public class CoinController {
 		return coinAmount;
 	}
 
-	public Map<Coin, Integer> getRestCoins(){
+	public Map<Coin, Integer> getRestCoins() {
 		return coins.findRestCoins();
 	}
 

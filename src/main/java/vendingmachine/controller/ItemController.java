@@ -8,7 +8,6 @@ import com.google.common.base.Splitter;
 
 import vendingmachine.domain.Item;
 import vendingmachine.domain.Items;
-import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 

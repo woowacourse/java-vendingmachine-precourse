@@ -4,8 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Coins;
-import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -59,7 +57,8 @@ public class VendingMachineController {
 		Map<Coin, Integer> changes = new LinkedHashMap<>();
 		Map<Coin, Integer> restCoins = coinController.getRestCoins();
 		for (Map.Entry<Coin, Integer> coin : restCoins.entrySet()) {
-			final int number = coinController.getAvailableChangeNumber(coin.getKey().getAmount(), coin.getValue(), moneyController.getCurrentMoney());
+			final int number = coinController.getAvailableChangeNumber(coin.getKey().getAmount(), coin.getValue(),
+				moneyController.getCurrentMoney());
 			final boolean isUpperThanZero = 0 < number;
 			if (isUpperThanZero) {
 				changes.put(coin.getKey(), number);

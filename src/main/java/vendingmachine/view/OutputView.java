@@ -3,8 +3,6 @@ package vendingmachine.view;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Coins;
-import vendingmachine.domain.Money;
 
 public class OutputView {
 	private static final int ZERO = 0;
@@ -16,7 +14,6 @@ public class OutputView {
 	private static final String REGISTER_ITEM_REQUEST_TEXT = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INSERT_MONEY_REQUEST_TEXT = "투입 금액을 입력해 주세요.";
 	private static final String BUY_ITEM_REQUEST_TEXT = "구매할 상품명을 입력해 주세요.";
-
 
 	public void printError(final String error) {
 		System.out.println(error);
