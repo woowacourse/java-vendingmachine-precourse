@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import static vendingmachine.Constant.*;
+
 import java.util.List;
 
 import vendingmachine.domain.Item;
@@ -40,8 +42,8 @@ public class InputValidator {
 	}
 
 	public static boolean checkValidSplitFormat(String[] itemInform) {
-		int price = isNumber(itemInform[InputController.ITEM_PRICE_INDEX]);
-		int count = isNumber(itemInform[InputController.ITEM_COUNT_INDEX]);
+		int price = isNumber(itemInform[ITEM_PRICE_INDEX]);
+		int count = isNumber(itemInform[ITEM_COUNT_INDEX]);
 		if (price % 10 != 0 || count < 1) {
 			throw new IllegalArgumentException();
 		}

@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import static vendingmachine.Constant.*;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +11,6 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.OutputView;
 
 public class MachineController {
-	public static final int ITEM_COUNT_ZERO = 0;
 
 	VendingMachine vendingMachine;
 

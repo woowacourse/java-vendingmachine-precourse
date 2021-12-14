@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import static vendingmachine.Constant.*;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -7,7 +9,6 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.Coin;
 
 public class RandomCoinMaker {
-	public static final int TO_THROW_ONE_UNIT = 10;
 
 	public static HashMap<Coin, Integer> makeRandomCoin(int money) {
 		List<Integer> coinList = Coin.getIntCoinList();

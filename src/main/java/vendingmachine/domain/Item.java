@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.controller.InputController.*;
+import static vendingmachine.Constant.*;
 
 public class Item {
 	public String name;

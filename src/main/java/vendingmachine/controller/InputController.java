@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import static vendingmachine.Constant.*;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,16 +11,6 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class InputController {
-	public static final int ITEM_NAME_INDEX = 0;
-	public static final int ITEM_PRICE_INDEX = 1;
-	public static final int ITEM_COUNT_INDEX = 2;
-	public static final int TO_ELIMINATE_FIRST_BRACKET = 1;
-	public static final int HOLDING_MONEY_RANGE = 10;
-	public static final int INPUT_MONEY_RANGE = 1;
-
-	public static final String COLON_SIGN = ";";
-	public static final String COMMA_SIGN = ",";
-
 	public int scanHoldingMoney() {
 		while (true) {
 			try {
