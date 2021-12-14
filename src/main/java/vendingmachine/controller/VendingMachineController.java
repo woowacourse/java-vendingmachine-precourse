@@ -13,11 +13,9 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
 	private CoinCounter coinCounter;
 	private Products products;
-	private final ProductService productService;
 	private User user;
 
 	public VendingMachineController() {
-		productService = new ProductService();
 		coinCounter = new CoinCounter();
 	}
 
@@ -35,6 +33,7 @@ public class VendingMachineController {
 	public void setProducts() {
 		try {
 			products = new Products();
+			ProductService productService = new ProductService();
 			List<Product> processedProducts = productService.makeProducts(InputView.getProducts());
 			processedProducts.forEach(products::add);
 		} catch (IllegalArgumentException exception) {
