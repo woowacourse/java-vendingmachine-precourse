@@ -8,6 +8,7 @@ public final class ErrorMessageConstants {
 	public static final String MINIMUM_PRICE_EXCEPTION_MESSAGE = "[ERROR] 상품의 가격은 100원부터 시작해야 합니다.";
 	public static final String PRICE_DIVISION_EXCEPTION_MESSAGE = "[ERROR] 상품의 가격은 10원으로 나누어떨어져야 합니다.";
 	public static final String PRODUCT_INPUT_FORM_EXCEPTION_MESSAGE = "[ERROR] 상품의 가격은 10원으로 나누어떨어져야 합니다.";
+	public static final String DUPLICATED_PRODUCTS_EXCEPTION_MESSAGE = "[ERROR] 상품명은 중복될 수 없습니다.";
 
 	private ErrorMessageConstants() {
 	}
