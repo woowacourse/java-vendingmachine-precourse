@@ -1,16 +1,14 @@
 package vendingmachine.view;
 
-import static camp.nextstep.edu.missionutils.Console.readLine;
+import java.util.ArrayList;
+import java.util.List;
+import vendingmachine.domain.VendingMachine;
 
+import static camp.nextstep.edu.missionutils.Console.readLine;
 import static vendingmachine.Validator.*;
 import static vendingmachine.Error.*;
 import static vendingmachine.service.VendingMachineManagement.*;
 import static vendingmachine.view.Print.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import vendingmachine.domain.VendingMachine;
 
 public class Input {
 	private static List<String> insertProductName = new ArrayList<>();

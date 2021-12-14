@@ -1,8 +1,8 @@
 package vendingmachine.controller;
 
-import static vendingmachine.view.Input.*;
-
 import vendingmachine.domain.VendingMachine;
+
+import static vendingmachine.view.Input.*;
 
 public class Consumer {
 	private VendingMachine vendingMachine;

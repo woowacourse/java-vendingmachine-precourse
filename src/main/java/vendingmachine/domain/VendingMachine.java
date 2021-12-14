@@ -1,15 +1,14 @@
 package vendingmachine.domain;
 
-import static camp.nextstep.edu.missionutils.Randoms.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
+import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.view.Print.*;
 import static vendingmachine.service.VendingMachineManagement.*;
 import static vendingmachine.Error.*;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map.Entry;
-import java.util.List;
 
 public class VendingMachine {
 	private HashMap<Coin, Integer> changes = new HashMap<>(Coin.values().length);

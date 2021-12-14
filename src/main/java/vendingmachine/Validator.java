@@ -1,12 +1,11 @@
 package vendingmachine;
 
-import static vendingmachine.Error.*;
-import static vendingmachine.service.VendingMachineManagement.*;
-
-import vendingmachine.domain.VendingMachine;
-
 import java.util.List;
 import java.util.regex.Pattern;
+import vendingmachine.domain.VendingMachine;
+
+import static vendingmachine.Error.*;
+import static vendingmachine.service.VendingMachineManagement.*;
 
 public class Validator {
 	private static final int ZERO = 0;

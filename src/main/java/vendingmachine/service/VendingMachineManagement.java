@@ -1,13 +1,12 @@
 package vendingmachine.service;
 
-import static vendingmachine.view.Print.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
 import vendingmachine.controller.VendingMachineController;
 import vendingmachine.domain.VendingMachine;
+
+import static vendingmachine.view.Print.*;
 
 public class VendingMachineManagement {
 	private VendingMachine vendingMachine;
