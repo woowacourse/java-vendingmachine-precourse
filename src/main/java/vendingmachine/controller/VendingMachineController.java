@@ -55,7 +55,7 @@ public class VendingMachineController {
 	}
 
 	public void chooseUntilReturnBalance() {
-		while (machine.checkAbleToBuyItem()) {
+		while (machine.checkAbleToBuyAnyItem()) {
 			chooseMerchandise();
 		}
 		view.printCurrentChanges(machine.getCurrentBalance());

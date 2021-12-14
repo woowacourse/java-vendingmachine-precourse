@@ -31,18 +31,23 @@ public class Machine {
 	}
 
 	public boolean isValidItem(String name) {
-		return merchandise.isExistItem(name)
-			&& merchandise.findItem(name).isSoldOut() == false;
+		return merchandise.isExistItem(name);
+	}
+
+	public boolean checkAbleToBuy(String name) {
+		Item item = merchandise.findItem(name);
+		if (item.checkAbleToSell(balance) == true) {
+			return true;
+		}
+		return false;
 	}
 
 	public void buyItem(String name) {
 		Item item = merchandise.findItem(name);
-		if (item.checkAbleToSell(balance)) {
-			balance = item.sell(balance);
-		}
+		balance = item.sell(balance);
 	}
 
-	public boolean checkAbleToBuyItem() {
+	public boolean checkAbleToBuyAnyItem() {
 		Item cheapestItem = merchandise.getLowPriceItemAmongRemainingItems();
 		if (merchandise.isAllSoldOut() || cheapestItem.isNotEnoughMoney(balance)) {
 			return false;

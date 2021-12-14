@@ -10,7 +10,7 @@ class MachineTest {
 	private final List<String> itemCountZero = new ArrayList<>();
 	private final Machine machine = new Machine();
 
-	MachineTest(){
+	MachineTest() {
 		item.add("[콜라,1000,3]");
 		item.add("[사이다,2000,3]");
 		itemCountZero.add("[콜라,1000,0]");
@@ -27,21 +27,21 @@ class MachineTest {
 	void 잔돈_반환_시점_테스트_가격() {
 		machine.setMerchandise(item);
 		machine.setPayment("500");
-		assert machine.checkAbleToBuyItem() == false;
+		assert machine.checkAbleToBuyAnyItem() == false;
 	}
 
 	@Test
 	void 잔돈_반환_시점_테스트_수량() {
 		machine.setMerchandise(itemCountZero);
 		machine.setPayment("2000");
-		assert machine.checkAbleToBuyItem() == false;
+		assert machine.checkAbleToBuyAnyItem() == false;
 	}
 
 	@Test
 	void 잔돈_반환_시점_테스트_성공() {
 		machine.setMerchandise(item);
 		machine.setPayment("2000");
-		assert machine.checkAbleToBuyItem();
+		assert machine.checkAbleToBuyAnyItem();
 	}
 
 	@Test
