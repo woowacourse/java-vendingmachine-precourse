@@ -41,8 +41,15 @@ public class ProductValidator {
         validateInfoCnt(split);
         String name = validateProductName(split[PRODUCT_NAME_IDX]);
         Price price = validatePrice(split[PRODUCT_PRICE_IDX]);
-        Quantity quantity = new Quantity(split[PRODUCT_QUANTITY_IDX]);
+        Quantity quantity = validateQuantity(split[PRODUCT_QUANTITY_IDX]);
         return Product.registerProduct(name, price, quantity);
+    }
+
+    private static Quantity validateQuantity(String quantityInput) {
+        if (StringUtil.isEmpty(quantityInput)) {
+            throw new IllegalArgumentException(NO_BLANK_ERROR_MESSAGE);
+        }
+        return new Quantity(quantityInput);
     }
 
     private static Price validatePrice(String priceInput) {
