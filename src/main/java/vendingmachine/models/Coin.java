@@ -17,7 +17,4 @@ public enum Coin {
     	return this.amount;
 	}
 
-	public String getCoinType() {
-    	return name();
-	}
 }

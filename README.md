@@ -212,3 +212,5 @@ public enum Coin {
     - 입력받은 데이터의 유효여부를 검증하는 기능 추가(branch: feature/error-handling)
         - 실제 데이터를 입력받는 view에서 모든 메서드가 반환하는 데이터 타입을 String으로 변경
         - 데이터를 입력받아 검증하고 유효하다면 알맞은 데이터 타입으로 반환하고 아니면 다시 입력받는 클래스 구현
+    - 마무리(branch: refactor)
+      1. 필요없는 코드 삭제

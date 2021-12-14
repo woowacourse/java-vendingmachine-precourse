@@ -1,7 +1,6 @@
 package vendingmachine.models;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +12,6 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-
-import vendingmachine.utils.CoinTypeAmountGenerator;
 
 @DisplayName("VendingMachine 클래스")
 @ExtendWith(MockitoExtension.class)

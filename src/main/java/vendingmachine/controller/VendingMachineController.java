@@ -11,7 +11,6 @@ import vendingmachine.models.VendingMachine;
 import vendingmachine.utils.CoinTypeAmountGenerator;
 import vendingmachine.utils.CoinTypeGenerator;
 
-import vendingmachine.view.VendingMachineInput;
 import vendingmachine.view.VendingMachineOutput;
 
 /**
