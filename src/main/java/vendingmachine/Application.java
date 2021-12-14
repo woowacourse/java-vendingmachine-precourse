@@ -2,6 +2,8 @@ package vendingmachine;
 
 public class Application {
     public static void startApplication(Controller controller) {
+        controller.setMoney();
+
 
     }
 

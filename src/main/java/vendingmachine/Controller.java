@@ -26,4 +26,8 @@ public class Controller {
     public List<Coin> getCoins() {
         return this.coins;
     }
+
+    public void setMoney() {
+        vendingMachine.setMoney(view.setMoney());
+    }
 }
