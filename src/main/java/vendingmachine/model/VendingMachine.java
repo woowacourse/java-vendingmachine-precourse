@@ -24,7 +24,8 @@ public class VendingMachine {
         return calculateReturnChangeCoin(machineCoins, purchasingCost);
     }
 
-    public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
+    public boolean isContinuePurchasing(final List<Product> products, final int purchasingCost) {
+        int cheapestProductPrice = findCheapestProductPrice(products);
         boolean isContinueDeal = isCostBiggerCheapestProductPrice(cheapestProductPrice, purchasingCost);
 
         if (!isSoldOutAllProduct(products)) {
@@ -32,6 +33,18 @@ public class VendingMachine {
         }
 
         return isContinueDeal;
+    }
+
+    protected int findCheapestProductPrice(final List<Product> products) {
+        int cheapestProductPrice = products.get(0).getProductPrice();
+
+        for (Product product : products) {
+            if ((product.getPrice().isCheaper(cheapestProductPrice)) && (product.getProductCount() > 0)) {
+                cheapestProductPrice = product.getProductPrice();
+            }
+        }
+
+        return cheapestProductPrice;
     }
 
     protected boolean isSoldOutAllProduct(final List<Product> products) {

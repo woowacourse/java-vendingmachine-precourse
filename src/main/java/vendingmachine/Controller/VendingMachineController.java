@@ -34,35 +34,22 @@ public class VendingMachineController {
         outputView.printMachineHaveCoin(machineCoins);
 
         List<Product> products = displayProducts();
-        int cheapestProductPrice = findCheapestProductPrice(products);
         int purchasingCost = inputView.inputPurchasingCost();
 
-        purchasingCost = purchaseProducts(vendingMachine, products, cheapestProductPrice, purchasingCost);
+        purchasingCost = purchaseProducts(vendingMachine, products, purchasingCost);
         Map<Integer, Integer> returnCoins = vendingMachine.returnChange(machineCoins, purchasingCost);
         outputView.printReturnChange(purchasingCost, returnCoins);
     }
 
-    protected int purchaseProducts(final VendingMachine vendingMachine, final List<Product> products, final int cheapestProductPrice, int purchasingCost) {
+    protected int purchaseProducts(final VendingMachine vendingMachine, final List<Product> products, int purchasingCost) {
         do {
             outputView.printPurChasingCost(purchasingCost);
 
             String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine, purchasingCost);
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
-        } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
+        } while (vendingMachine.isContinuePurchasing(products, purchasingCost));
 
         return purchasingCost;
-    }
-
-    protected int findCheapestProductPrice(final List<Product> products) {
-        int cheapestProductPrice = products.get(0).getProductPrice();
-
-        for (Product product : products) {
-            if (product.getPrice().isCheaper(cheapestProductPrice)) {
-                cheapestProductPrice = product.getProductPrice();
-            }
-        }
-
-        return cheapestProductPrice;
     }
 
     protected String choosePurchasingProduct(final List<Product> products, VendingMachine vendingMachine, int purchasingCost) {
