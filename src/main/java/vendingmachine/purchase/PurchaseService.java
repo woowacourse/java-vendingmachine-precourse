@@ -6,10 +6,12 @@ import vendingmachine.item.Item;
 
 public class PurchaseService {
     private final VendingMachine vendingMachine;
+    private final PurchaseValidator purchaseValidator;
     private Purchase purchase;
 
     public PurchaseService(VendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;
+        this.purchaseValidator = new PurchaseValidator(vendingMachine);
     }
 
     public void insertMoney(int money) {
@@ -17,7 +19,7 @@ public class PurchaseService {
     }
 
     public boolean isPurchaseAvailable() {
-        return purchase.isAvailable(new PurchaseValidator(vendingMachine));
+        return purchase.isAvailable(purchaseValidator);
     }
 
     public int showAvailableMoney() {
@@ -29,8 +31,7 @@ public class PurchaseService {
     }
 
     public void purchaseByItemName(String itemName) {
-        Item item = vendingMachine.findItemToPurchase(itemName);
-        purchase.pay(item.getPrice());
-        vendingMachine.purchase(item);
+        purchase.validate(itemName, purchaseValidator);
+        purchase.pay(vendingMachine.purchase(itemName).getPrice());
     }
 }

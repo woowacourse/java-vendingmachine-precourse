@@ -5,12 +5,11 @@ import vendingmachine.coin.Coins;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 import vendingmachine.item.ItemFactory;
 import vendingmachine.item.Items;
-import vendingmachine.vendingMachine.VendingMachine;
 
 public class VendingMachineService {
     private final CoinExchangeMachine coinExchangeMachine = new CoinExchangeMachine();
     private final ItemFactory itemFactory = new ItemFactory();
-    private VendingMachine vendingMachine;
+    private final VendingMachine vendingMachine;
 
     public VendingMachineService(VendingMachine vendingMachine) {
         this.vendingMachine = vendingMachine;

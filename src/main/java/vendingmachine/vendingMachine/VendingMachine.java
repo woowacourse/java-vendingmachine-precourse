@@ -31,14 +31,10 @@ public class VendingMachine {
         return change;
     }
 
-    private void validateInStock(Item item) {
-        if (!items.isInStock(item)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_OUT_OF_STOCK);
-        }
-    }
-
-    public void purchase(Item item) {
-        items.reduce(item);
+    public Item purchase(String itemName) {
+        Item item = findItemByItemName(itemName).get();
+        purchase(item);
+        return item;
     }
 
     public int findLowestPriceInStock() {
@@ -49,17 +45,16 @@ public class VendingMachine {
         return items.isEmptyItems();
     }
 
-    private Item findItemByItemName(String itemName) {
-        Optional<Item> result = items.findByItemName(itemName);
-        if (!result.isPresent()) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_NOT_EXIST_ITEM_TO_PURCHASE);
-        }
-        return result.get();
+    public Optional<Item> findItemByItemName(String itemName) {
+        return items.findByItemName(itemName);
     }
 
-    public Item findItemToPurchase(String itemName) {
-        Item item = findItemByItemName(itemName);
-        validateInStock(item);
+    public boolean isInStock(Item item) {
+        return items.isInStock(item);
+    }
+
+    private Item purchase(Item item) {
+        items.reduce(item);
         return item;
     }
 }

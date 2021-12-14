@@ -34,6 +34,10 @@ public class Purchase {
     }
 
     public boolean isAvailable(PurchaseValidator purchaseValidator) {
-        return purchaseValidator.isAvailable(this);
+        return purchaseValidator.isAvailableStatus(this);
+    }
+
+    public void validate(String itemName, PurchaseValidator purchaseValidator) {
+        purchaseValidator.validateByItemName(this, itemName);
     }
 }
