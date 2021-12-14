@@ -1,8 +1,8 @@
 package vendingmachine.service;
 
 import static vendingmachine.constants.SystemConstants.*;
-import static vendingmachine.validator.MenuInputFormatValidator.validateMenuInputFormat;
-import static vendingmachine.validator.PurchaseValidator.*;
+import static vendingmachine.utils.MenuInputFormatValidator.validateMenuInputFormat;
+import static vendingmachine.utils.PurchaseValidator.*;
 
 import vendingmachine.domain.Menu;
 import vendingmachine.domain.Merchandise;

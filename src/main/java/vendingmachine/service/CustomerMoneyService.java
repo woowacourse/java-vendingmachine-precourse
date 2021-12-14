@@ -3,7 +3,7 @@ package vendingmachine.service;
 import vendingmachine.view.InputView;
 
 import static vendingmachine.constants.SystemConstants.NO_CUSTOMER_MONEY_LEFT;
-import static vendingmachine.validator.NumberInputValidator.validateMoneyInput;
+import static vendingmachine.utils.NumberInputValidator.validateMoneyInput;
 
 public class CustomerMoneyService {
 

@@ -2,7 +2,7 @@ package vendingmachine.service;
 
 import static vendingmachine.constants.SystemConstants.NO_TOTAL_MONEY_LEFT;
 import static vendingmachine.constants.SystemConstants.ZERO_COINS;
-import static vendingmachine.validator.NumberInputValidator.validateMoneyInput;
+import static vendingmachine.utils.NumberInputValidator.validateMoneyInput;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.domain.enums.Coin;

@@ -1,4 +1,4 @@
-package vendingmachine.validator;
+package vendingmachine.utils;
 
 import static vendingmachine.constants.SystemConstants.*;
 import static vendingmachine.constants.ExceptionMessages.*;

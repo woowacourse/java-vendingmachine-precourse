@@ -1,4 +1,4 @@
-package vendingmachine.validator;
+package vendingmachine.utils;
 
 import vendingmachine.domain.Merchandise;
 
