@@ -1,12 +1,14 @@
 package vendingmachine.domain;
 
+import static vendingmachine.utils.Constant.ZERO;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import static vendingmachine.utils.Constant.ZERO;
+import vendingmachine.view.OutputView;
 
 public class VendingMachine {
 	private static final HashMap<Integer, Integer> coins = new HashMap<>();
@@ -53,6 +55,33 @@ public class VendingMachine {
 				.stream()
 				.filter(amount -> amount <= (changeAmount-sumAmount))
 				.collect(Collectors.toList());
+	}
+	
+	public boolean isSoldOut(String name) {
+		Product selectedProduct = products.stream()
+				.filter(product -> product.getName().equals(name))
+				.collect(Collectors.toList())
+				.get(ZERO);
+		return (selectedProduct.getStock()==ZERO);
+	}
+	
+	public int getMinimumPrice() {
+		return products.stream()
+				.map(Product::getPrice)
+				.sorted()
+				.collect(Collectors.toList()).get(ZERO);
+	}
+
+	public void print_coins() {
+		OutputView.print_line();
+		
+		List<Integer> list= Coin.getAmountList();
+		for (int i = 0; i < list.size(); i++) {
+			int coin = list.get(i);
+			int count = coins.getOrDefault(coin, ZERO);
+			OutputView.print_coins(coin, count);
+		}
+		OutputView.print_line();
 	}
 
 }
