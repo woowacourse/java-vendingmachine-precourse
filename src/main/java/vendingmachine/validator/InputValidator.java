@@ -4,6 +4,8 @@ import static vendingmachine.constant.ErrorMessage.*;
 
 import java.util.regex.Pattern;
 
+import vendingmachine.repository.ItemRepository;
+
 public class InputValidator {
 
 	public static void validateMachineMoney(String input) {
@@ -52,6 +54,19 @@ public class InputValidator {
 		boolean matches = Pattern.matches(regExp, input);
 		if (!matches) {
 			throw new IllegalArgumentException(ERROR_INVALID_BRACKETS);
+		}
+	}
+
+	public static void validateMoneyToBuy(String input) {
+		isDigit(input);
+		isPositive(input);
+		isCorrectUnit(input);
+	}
+
+	public static void validateExistItem(String input) {
+		boolean exist = ItemRepository.existItemByName(input);
+		if (!exist) {
+			throw new IllegalArgumentException(ERROR_NON_EXISTS_ITEM);
 		}
 	}
 }

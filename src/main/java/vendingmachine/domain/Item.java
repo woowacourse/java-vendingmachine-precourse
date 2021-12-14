@@ -3,6 +3,11 @@ package vendingmachine.domain;
 import java.util.Objects;
 
 public class Item {
+
+	public static final int ITEM_NAME_INDEX = 0;
+	public static final int ITEM_PRICE_INDEX = 1;
+	public static final int ITEM_COUNT_INDEX = 2;
+
 	private String name;
 	private int price;
 	private int count;
@@ -11,6 +16,14 @@ public class Item {
 		this.name = name;
 		this.price = price;
 		this.count = count;
+	}
+
+	public boolean equalName(String inputName) {
+		return name.equals(inputName);
+	}
+
+	public int getPrice() {
+		return price;
 	}
 
 	@Override

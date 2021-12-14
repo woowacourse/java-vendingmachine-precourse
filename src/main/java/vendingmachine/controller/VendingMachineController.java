@@ -1,9 +1,11 @@
 package vendingmachine.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
+import vendingmachine.repository.ItemRepository;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -11,6 +13,7 @@ public class VendingMachineController {
 	public void run() {
 		processMachineMoney();
 		processBeverage();
+		processBuying();
 	}
 
 	private void processMachineMoney() {
@@ -21,8 +24,15 @@ public class VendingMachineController {
 
 	private void processBeverage() {
 		List<Item> items = InputView.getItems();
-		for (Item item : items) {
-			System.out.println("item = " + item);
+		ItemRepository.addItems(items);
+	}
+
+	private void processBuying() {
+		int moneyToBuy = InputView.getMoneyToBuy();
+		int remainingMoney = ItemRepository.buyItems(moneyToBuy);
+		Map<Integer, Integer> changes = Coin.getChanges(remainingMoney);
+		for (Map.Entry<Integer, Integer> entry : changes.entrySet()) {
+			System.out.printf("%s - %s\n", entry.getKey(), entry.getValue());
 		}
 	}
 }
