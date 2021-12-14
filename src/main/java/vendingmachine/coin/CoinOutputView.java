@@ -24,10 +24,6 @@ public class CoinOutputView {
 
     public static void repayCoinsPrintInfo(List<Integer> repayList) {
         System.out.println(REPAY_COINS_MESSAGE);
-        if (repayList.stream().allMatch(coin -> coin == 0)) {
-            System.out.println(REPAY_NO_COIN);
-            return;
-        }
         for (int i = 0; i < repayList.size(); i++) {
             int counts = repayList.get(i);
             if (counts == NO_COIN) {
