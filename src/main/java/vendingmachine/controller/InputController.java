@@ -13,8 +13,7 @@ import java.util.stream.Collectors;
 
 public class InputController {
 
-    public static void makeProductsList(VendingMachine vendingMachine) {
-        String inputProducts = InputView.inputProducts();
+    public static void makeProductsList(VendingMachine vendingMachine, String inputProducts) {
         String[] productsInfo = splitProducts(inputProducts, ";");
         if (validateProductForm(productsInfo) && validateDuplicate(productsInfo)) {
             for (String productInfo : sliceProduct(productsInfo)) {

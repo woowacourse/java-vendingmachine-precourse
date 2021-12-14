@@ -34,7 +34,7 @@ public class MainController {
 
     private void processOfMakingProductList() {
         try {
-            InputController.makeProductsList(vendingMachine);
+            InputController.makeProductsList(vendingMachine, InputView.inputProducts());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             processOfMakingProductList();
