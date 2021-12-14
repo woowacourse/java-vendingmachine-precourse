@@ -64,4 +64,16 @@ class InputValidatorTest {
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
+	@Test
+	@DisplayName("투입 금액이 10원 단위가 아닐때 예외가 발생한다. - 실패")
+	void checkInputMoneyFormFailureWhenMoneyIsNotTenUnit() {
+		//given
+		String inputMoney = "9";
+		//when then
+		assertThatThrownBy(
+			() -> InputValidator.checkMoneyForm(inputMoney)
+		).isInstanceOf(IllegalArgumentException.class);
+	}
+
+
 }
