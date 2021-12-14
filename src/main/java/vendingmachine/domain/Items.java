@@ -30,7 +30,7 @@ public class Items {
 				return item;
 			}
 		}
-		return new Item("",0,0);
+		return new Item("", 0, 0);
 	}
 
 	public int getMinItemPrice() {
