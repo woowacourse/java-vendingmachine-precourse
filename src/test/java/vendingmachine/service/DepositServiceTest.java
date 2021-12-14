@@ -26,7 +26,7 @@ class DepositServiceTest {
 		// given
 		int deposit = 550;
 		// when
-		depositService.setDepositsRandomized(550);
+		depositService.setDepositsRandomized(String.valueOf(deposit));
 		// then
 		assertThat(depositRepository.getDepositTotal()).isEqualTo(deposit);
 	}

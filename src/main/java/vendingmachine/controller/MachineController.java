@@ -23,8 +23,7 @@ public class MachineController {
 	public void setDeposit() {
 		try {
 			String input = inputDeposit();
-			validateInteger(input);
-			depositService.setDepositsRandomized(Integer.parseInt(input));
+			depositService.setDepositsRandomized(input);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			setDeposit();

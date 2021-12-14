@@ -1,7 +1,9 @@
 package vendingmachine.constant;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public enum Coin {
 	COIN_500(500),
@@ -21,5 +23,9 @@ public enum Coin {
 
 	public static Optional<Coin> ofAmount(int amount) {
 		return Arrays.stream(Coin.values()).filter(coin -> coin.getAmount() == amount).findAny();
+	}
+
+	public static List<Integer> getAmountList() {
+		return Arrays.stream(Coin.values()).map(Coin::getAmount).collect(Collectors.toList());
 	}
 }

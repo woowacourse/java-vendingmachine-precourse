@@ -1,5 +1,6 @@
 package vendingmachine.repository;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -14,7 +15,7 @@ public class DepositRepository {
 	private final Map<Coin, Deposit> depositMap;
 
 	public DepositRepository() {
-		depositMap = new TreeMap<>();
+		depositMap = new EnumMap<>(Coin.class);
 	}
 
 	public void save(List<Deposit> depositList) {
