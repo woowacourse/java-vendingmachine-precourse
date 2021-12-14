@@ -34,8 +34,6 @@ public class CoinListManager {
 		List<Integer> valueList = Arrays.asList(500, 100, 50, 10);
 		while (0 < sumOfChange) {
 			int randomAmount = Randoms.pickNumberInList(valueList);
-			System.out.println("이번에 뽑은 동전 : " + randomAmount);
-
 			if (!isAvailableToDeduct(randomAmount)) {
 				continue;
 			}
