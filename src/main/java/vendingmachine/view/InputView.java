@@ -12,6 +12,10 @@ import vendingmachine.validator.InputValidator;
 
 public class InputView {
 
+	public static final int ITEM_NAME_INDEX = 0;
+	public static final int ITEM_PRICE_INDEX = 1;
+	public static final int ITEM_COUNT_INDEX = 2;
+
 	public static int getMachineMoney() {
 		while (true) {
 			try {
@@ -52,6 +56,11 @@ public class InputView {
 
 	private static Item getItem(String input) {
 		InputValidator.validateItem(input);
-		return null;
+		input = input.replaceAll("[\\[\\]]", "");
+		String[] strings = input.split(",");
+		String name = strings[ITEM_NAME_INDEX];
+		int price = Integer.parseInt(strings[ITEM_PRICE_INDEX]);
+		int count = Integer.parseInt(strings[ITEM_COUNT_INDEX]);
+		return new Item(name, price, count);
 	}
 }
