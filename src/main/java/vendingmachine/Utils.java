@@ -28,7 +28,7 @@ public class Utils {
                 String[] juiceInfo = juice.substring(1,juice.length() - 1).split(",");
                 juiceIndex.add(new Juice(juiceInfo[0], Integer.parseInt(juiceInfo[1]), Integer.parseInt(juiceInfo[2])));
             }
-            if (SumNumberOfJuice()) {
+            if (SumNumberOfJuice(juiceIndex)) {
                 return juiceIndex;
             }
             return PrintUI.InputJuice();
@@ -46,7 +46,7 @@ public class Utils {
 
     public static void OrderJuice() {
         money = PrintUI.InputMoney();
-        SumNumberOfJuice();
+        SumNumberOfJuice(juiceIndex);
         while (money >= minPrice && totalNumberOfJuice != 0) {
             String juiceName = PrintUI.Ordering(money);
             money -= OrderCheck(juiceIndex,juiceName);
@@ -54,7 +54,7 @@ public class Utils {
         Coin.PrintChange(money);
     }
 
-    public static boolean SumNumberOfJuice() {
+    public static boolean SumNumberOfJuice(ArrayList<Juice> juiceIndex) {
         try {
             for (Juice juice : juiceIndex) {
                 totalNumberOfJuice = juice.SumNumber(totalNumberOfJuice);
