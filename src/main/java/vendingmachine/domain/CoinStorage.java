@@ -3,15 +3,24 @@ package vendingmachine.domain;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 
+import vendingmachine.util.Validator;
+
 public class CoinStorage {
 
 	private static final String ZERO_COIN_MESSAGE = "[ERROR] 코인이 남아있지 않습니다.";
+	private static final int INITIAL = 0;
 	private final LinkedHashMap<Coin, Integer> box = new LinkedHashMap<>();
+	private final Validator validator = new Validator();
 
 	public CoinStorage(int startCoins) {
-		Arrays.stream(Coin.values())
-			.forEach(coin -> box.put(coin, 0));
+		setInitialCoin();
+		validator.validateCoin(startCoins);
 		setCoins(startCoins);
+	}
+
+	private void setInitialCoin() {
+		Arrays.stream(Coin.values())
+			.forEach(coin -> box.put(coin, INITIAL));
 	}
 
 	private void setCoins(int money) {
