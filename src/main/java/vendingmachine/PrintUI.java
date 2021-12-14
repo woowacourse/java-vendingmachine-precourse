@@ -10,13 +10,13 @@ public class PrintUI {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
         try {
             change = Integer.parseInt(Console.readLine());
-            if (change < 0) {
+            if (change < 0 || !((change/10)*10 == change)) {
                 throw new IllegalArgumentException();
             }
             System.out.println();
             return change;
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] : 금액은 양의 정수로 입력해주세요");
+            System.out.println("[ERROR] : 금액은 최소 10원 단위의 양의 정수로 입력해주세요");
             return InputChange();
         }
     }
