@@ -87,4 +87,10 @@ public class ItemController {
 		money.pay(item.getCost());
 	}
 
+	public boolean checkAllOutOfOrder() {
+		return items.findAll().stream()
+			.map(Item::isStockExist)
+			.noneMatch((condition) -> true);
+	}
+
 }

@@ -39,12 +39,6 @@ public class Items {
 		}
 	}
 
-	public boolean checkAllOutOfOrder() {
-		return items.stream()
-			.map(Item::isStockExist)
-			.noneMatch((condition) -> true);
-	}
-
 	private void validateDuplication(final List<Item> items) {
 		Set<String> nonDuplicatedItems = items.stream()
 			.map(Item::getName)
