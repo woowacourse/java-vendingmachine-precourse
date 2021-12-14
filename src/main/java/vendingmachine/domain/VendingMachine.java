@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import vendingmachine.view.InputView;
 
 public class VendingMachine {
 
@@ -27,13 +26,10 @@ public class VendingMachine {
 		this.holdingItemList = holdingItemList;
 	}
 
-	InputView inputView = new InputView();
-
-
 	public void stockDeduct(String buyItem) {
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem)) {
-				holdingItemList.get(i).setStock(holdingItemList.get(i).getStock() - 1);
+				holdingItemList.get(i).deductStock();
 			}
 		}
 	}
