@@ -1,11 +1,13 @@
 package vendingmachine.utils;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
+
 public class Validators {
-	public static void checkNullOrEmpty(String inputValue) {
-		if (inputValue == null || inputValue.trim().isEmpty()) {
-			throw new IllegalArgumentException("빈칸 입력은 허용하지 않는다.");
-		}
-	}
+	public static final String DELIMETER = ";";
 
 	public static void checkValidFormatOfMoney(String inputValue) {
 		if (!(inputValue.chars().allMatch(Character::isDigit))) {
@@ -20,10 +22,76 @@ public class Validators {
 		}
 	}
 
-	public static void checkPassDemands(String inputValue) {
+	public static void checkValidMoney(String inputValue) {
 		int number = Integer.parseInt(inputValue);
 		if (number % 10 != 0) {
 			throw new IllegalArgumentException("10원 단위로 입력해주세요");
 		}
+	}
+
+	public static void checkNullOrEmpty(String inputValue) {
+		if (inputValue == null || inputValue.trim().isEmpty()) {
+			throw new IllegalArgumentException("빈칸 입력은 허용하지 않는다.");
+		}
+	}
+
+	public static void checkValidFirstValue(String inputValue, String delimeter) {
+		if (inputValue.charAt(0) == delimeter.charAt(0)) {
+			throw new IllegalArgumentException("정상적인 이름을 입력하세요.");
+		}
+	}
+
+	public static void checkPatternOfProduct(String inputValue, String delimeter, String regex) {
+		List<String> splitedInputValue = Arrays.stream(inputValue.split(delimeter))
+			.map(String::trim) // [콜라,1500,20]   [사이다,1000,10]
+			.collect(Collectors.toList());
+
+		Pattern pattern = Pattern.compile(regex);
+
+		boolean isMatched = splitedInputValue.stream()
+			.allMatch(stringValue -> pattern.matcher(stringValue).find());
+
+		if (!isMatched) {
+			throw new IllegalArgumentException("패턴에 맞지 않는 입력입니다.");
+		}
+
+		System.out.println("패턴은 통과"); // TODO 로그
+
+		boolean isValidAmount = splitedInputValue.stream()
+			.mapToInt(stringValue -> {
+				Matcher matcher = pattern.matcher(stringValue);
+				if (matcher.find()) {
+					String amount = matcher.group(2);
+					return Integer.parseInt(amount);
+				}
+				return 0;
+			})
+			.allMatch(amount -> amount >= 100 && amount % 10 == 0); // 추출물검사
+
+		if (!isValidAmount) {
+			throw new IllegalArgumentException("상품 가격은 100원부터 시작하며, 10원으로 나누어떨어져야 한다.");
+		}
+
+		System.out.println("금액 검사까지 통과");  // TODO 로그
+
+		List<String> names = splitedInputValue.stream()
+			.map(stringValue -> {
+				Matcher matcher = pattern.matcher(stringValue);
+				if (matcher.find()) {
+					String name = matcher.group(1);
+					return name;
+				}
+				return "";
+			})
+			.collect(Collectors.toList());
+		boolean isDuplicatesOfName = names.stream()
+			.distinct().count() != names.size();
+
+		if (isDuplicatesOfName) {
+			throw new IllegalArgumentException("같은 상품이 중복 입력되었습니다.");
+		}
+
+		System.out.println("상품명(추출) 중복검사까지 통과");  // TODO 로그
+
 	}
 }

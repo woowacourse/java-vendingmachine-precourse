@@ -27,7 +27,7 @@ public class VendingMachine {
 		this.machineMoney = machineMoney;
 	}
 
-	public void generateCoins() {
+	public String generateCoins() {
 		int fisrtInsertedAmount = this.machineMoney.toInt();
 
 		boolean canExchange = this.machineMoney.toInt() >= 10;
@@ -35,8 +35,7 @@ public class VendingMachine {
 		while (canExchange) {
 			int pickRangdomCoin = Util.pickRandomCoin(makeCoinKinds());
 			if (!(this.machineMoney.toInt() >= pickRangdomCoin
-				&&
-				pickRangdomCoin != fisrtInsertedAmount
+				&& pickRangdomCoin != fisrtInsertedAmount
 			)) {
 				continue;
 			}
@@ -45,6 +44,8 @@ public class VendingMachine {
 
 			canExchange = this.machineMoney.toInt() >= 10;
 		}
+
+		return this.machineCoinCounter.toString();
 	}
 
 	private List<Integer> makeCoinKinds() {

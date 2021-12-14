@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class Controller {
@@ -14,7 +15,10 @@ public class Controller {
 		// Money money = Money.of(InputView.getMoney());
 		Money machineMoney = Money.of("450");
 		vendingMachine.insertMachineMoney(machineMoney);
-		vendingMachine.generateCoins();
+		OutputView.printResultOfgenerateCoins(vendingMachine.generateCoins());
+
+		OutputView.printInputProductsInstruction(); //상품명과 가격, 수량을 입력해 주세요.
+		InputView.getProducts(); //[콜라,1500,20];[사이다,1000,10]
 
 	}
 }

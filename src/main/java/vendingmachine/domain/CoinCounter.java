@@ -53,7 +53,7 @@ public class CoinCounter {
 		return counterMap.keySet()
 			.stream()
 			// .filter( key -> key.ordinal()>=3)
-			.map(enumObjAsKey -> enumObjAsKey + " -> " + counterMap.get(enumObjAsKey) + "개")
+			.map(enumObjAsKey -> enumObjAsKey.toAmount() + "원 - " + counterMap.get(enumObjAsKey) + "개")
 			.collect(Collectors.joining(System.lineSeparator())); // 줄바꿈 단위로 붙임.
 	}
 

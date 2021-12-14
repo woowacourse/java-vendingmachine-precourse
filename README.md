@@ -8,9 +8,13 @@
     - [x] 보유 금액으로 동전 랜덤 생성하기 VendingMachine#generateCoins
         - [x] 투입 금액으로는 동전을 생성하지 않기
 - [ ] 상품명, 가격, 수량을 입력하여 상품을 추가하기
-    - [ ] 상품명, 가격, 수량을 입력받는 기능 InputView
-        - [ ] 동일한 이름이 상품을 여러번 입력 방지하기 Validators
-        - [ ] 상품 가격은 100원부터 시작하며, 10원으로 나누어떨어지도록 예외처리 Validators
+    - [x] 상품명, 가격, 수량을 입력받는 기능 InputView#getProducts
+    - [x] 상품정보 예외처리 기능 InputView#checkProductsValidation
+        - [x] 공백입력검사 Validators#checkNullOrEmpty
+        - [x] 상품정보 패턴 검사 Validators#checkPatternOfProduct
+            - [x] 특정 패턴이 맞는지
+            - [x] 상품 이름을 중복해서 입력 방지하기
+            - [x] 상품 가격은 100원부터 시작하며, 10원으로 나누어떨어지도록 예외처리하기
     - [ ] 입력받은 정보를 상품으로 추가하기 VendingMachine
 - [ ] 사용자가 투입한 금액으로 상품을 구매하기
     - [ ] 사용자 투입 금액 입력받기 InputView

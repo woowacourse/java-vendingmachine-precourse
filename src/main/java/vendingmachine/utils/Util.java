@@ -12,4 +12,8 @@ public class Util {
 	public static int pickRandomCoin(List<Integer> coinKinds) {
 		return Randoms.pickNumberInList(coinKinds);
 	}
+
+	public static String removeSpace(String input) {
+		return input.replaceAll(" ", "");
+	}
 }
