@@ -12,7 +12,7 @@ public class Computer {
         System.out.println("자판기가 보유한 동전");
         Map<Coin, Integer> machineCoinMap = machineCoin.getMachineCoin();
         for(Map.Entry<Coin,Integer> m : machineCoinMap.entrySet()){
-            System.out.println(m.getKey() + "원 - " + m.getValue() + "개");
+            System.out.println(m.getKey().getAmount() + "원 - " + m.getValue() + "개");
         }
     }
 
