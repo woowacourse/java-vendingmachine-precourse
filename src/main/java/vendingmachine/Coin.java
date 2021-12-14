@@ -6,11 +6,22 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
+    private static final Coin[] COINLIST = Coin.values();
     private final int amount;
 
     Coin(final int amount) {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public int getAmount() {
+        return amount;
+    }
+
+    public static Coin[] getCoinList() {
+        return COINLIST;
+    }
+
+    public static Coin getRandomCoin(int randomNumber) {
+        return COINLIST[randomNumber];
+    }
 }
