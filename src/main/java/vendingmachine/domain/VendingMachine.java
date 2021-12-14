@@ -6,12 +6,12 @@ public class VendingMachine {
     private static final String ERROR_HEADER = "[ERROR] ";
     private static final String NOT_EXIST_PRODUCT = "구매할 수 있는 상품이 존재하지 않습니다. 자판기에서 구매할 수 있고 존재하는 상품을 입력해주세요. ";
 
-    private final CoinCountMap coinCountMap;
+    private final CoinCountMap vendingMachineChange;
     private final List<Product> products;
     private int inputMoney;
 
-    public VendingMachine(CoinCountMap coinCountMap, List<Product> products, int inputMoney) {
-        this.coinCountMap = coinCountMap;
+    public VendingMachine(CoinCountMap vendingMachineChange, List<Product> products, int inputMoney) {
+        this.vendingMachineChange = vendingMachineChange;
         this.products = products;
         this.inputMoney = inputMoney;
     }
@@ -23,8 +23,8 @@ public class VendingMachine {
     }
 
     public CoinCountMap getLeftoverCash() {
-        if (inputMoney >= coinCountMap.getCoinSum()) {
-            return coinCountMap;
+        if (inputMoney >= vendingMachineChange.getCoinSum()) {
+            return vendingMachineChange;
         }
         return calculateLeftoverCash(inputMoney);
     }
@@ -70,7 +70,7 @@ public class VendingMachine {
             minCoinCount = findMinCoinCount(coin, toReturnCash);
             toReturnCash -= minCoinCount * coin.getAmount();
             leftoverCoinCountMap.getCoinCount().replace(coin, leftoverCoinCountMap.getCoinCount().get(coin) + minCoinCount);
-            this.coinCountMap.getCoinCount().replace(coin, this.coinCountMap.getCoinCount().get(coin) - minCoinCount);
+            this.vendingMachineChange.getCoinCount().replace(coin, this.vendingMachineChange.getCoinCount().get(coin) - minCoinCount);
         }
         return leftoverCoinCountMap;
     }
@@ -84,6 +84,6 @@ public class VendingMachine {
 
     private int findMinCoinCount(Coin coin, int toReturnCash) {
         int coinValue = coin.getAmount();
-        return Math.min(toReturnCash / coinValue, this.coinCountMap.getCoinCount().get(coin));
+        return Math.min(toReturnCash / coinValue, this.vendingMachineChange.getCoinCount().get(coin));
     }
 }
