@@ -14,6 +14,17 @@ public class Products {
 		products.add(product);
 	}
 
+
+	public Product getCheapestProduct() {
+		Collections.sort(products);
+		for (Product product : products) {
+			if (!product.soldOut()) {
+				return product;
+			}
+		}
+		return null;
+	}
+
 	public Money getCheapestPrice() {
 		Collections.sort(products);
 		for (Product product : products) {

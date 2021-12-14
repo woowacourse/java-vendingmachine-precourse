@@ -24,13 +24,14 @@ public class VendingMachine {
 	}
 
 	public boolean isBuy() {
-		return !products.soldOut() &&
-			products.getCheapestPrice().compareTo(insertMoney) <= 0;
+		Product product = products.getCheapestProduct();
+		return product != null &&
+			insertMoney.compareTo(product.getPrice()) >= 0;
 	}
 
 	public boolean isBuy(String productName) {
 		Product product = products.findForName(productName);
-		return (product != null) &&
+		return product != null &&
 			!product.soldOut() &&
 			product.isBuy(insertMoney);
 	}
