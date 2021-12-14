@@ -68,3 +68,15 @@
 - ### 잔돈 반환
     - 남은 투입 금액으로 잔돈 계산
     - 잔돈 출력 후 종료
+
+***
+
+## 🎮 Play Examples
+
+![image](https://user-images.githubusercontent.com/68963707/146011582-d2042852-13f1-43c1-8852-62f645b4460b.png)
+![image](https://user-images.githubusercontent.com/68963707/146011748-9dc6c03b-3dad-4158-8460-25ff27a0a7b7.png)
+
+![image](https://user-images.githubusercontent.com/68963707/146012848-76efb919-5d5e-4933-844f-5e43e0888ebd.png)
+![image](https://user-images.githubusercontent.com/68963707/146012868-c6661a0a-6b0f-475c-a0dc-46d6bc262f72.png)
+
+![image](https://user-images.githubusercontent.com/68963707/146012259-acc08fcb-d719-43b6-b663-63dac0622e44.png)
