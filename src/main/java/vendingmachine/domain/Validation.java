@@ -157,6 +157,14 @@ public class Validation {
 
     }
 
+    private void checkInsertMoneyForm(String insertMoney) {
+
+        if (!insertMoney.matches(Text.REGEX_NUMBER) || Integer.parseInt(insertMoney) % DIVISOR != ZERO) {
+            throwException(ErrorMessage.INSERT_MONEY_FORM);
+        }
+
+    }
+
     public void isValidBalanceInput(String balance) {
         checkEmptyInput(balance);
         checkBalanceOnlyNumber(balance);
@@ -169,5 +177,10 @@ public class Validation {
         checkItemInformationForm(itemInput);
         checkItemInformation(itemInput);
         checkItemNameOverlap(itemInput);
+    }
+
+    public void isValidInsertMoneyInput(String insertMoney) {
+        checkEmptyInput(insertMoney);
+        checkInsertMoneyForm(insertMoney);
     }
 }
