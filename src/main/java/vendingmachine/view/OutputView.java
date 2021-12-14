@@ -32,7 +32,7 @@ public class OutputView {
         divisionLine();
         print(Output.PURCHASE_MONEY.getText() + Money.getInstance().getMoney());
         LinkedHashMap<Integer, Integer> changeCoinMap =
-                ChangeCoin.getInstance().calcReturnChangeToCoin(coinMap, Money.getInstance().getMoney());
+                ChangeCoin.getInstance().calcReturnChangeToCoin(coinMap);
 
         if (changeCoinMap.size() > Condition.QUANTITY_0.getNumber()) {
             print(Output.CHANGE.getText());

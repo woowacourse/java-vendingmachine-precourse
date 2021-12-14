@@ -25,29 +25,29 @@ public class ChangeCoin {
         return true;
     }
 
-    public LinkedHashMap<Integer, Integer> calcReturnChangeToCoin(LinkedHashMap<Integer, Integer> coinMap, int money) {
+    public LinkedHashMap<Integer, Integer> calcReturnChangeToCoin(LinkedHashMap<Integer, Integer> coinMap) {
         LinkedHashMap<Integer, Integer> changeCoinMap = new LinkedHashMap<>();
         for (Integer coin : coinMap.keySet()) {
             if (coinMap.get(coin) <= Condition.QUANTITY_0.getNumber()) {
                 continue;
             }
-            if (money / coin > Condition.QUOTIENT_1.getNumber()) {
-                int number = usingNextCoin(coinMap, money, coin);
+            if (Money.getInstance().getMoney() / coin > Condition.QUOTIENT_1.getNumber()) {
+                int number = usingNextCoin(coinMap, coin);
                 changeCoinMap.put(coin, number);
             }
         }
         return changeCoinMap;
     }
 
-    private int usingNextCoin(LinkedHashMap<Integer, Integer> coinMap, int money, int coin) {
+    private int usingNextCoin(LinkedHashMap<Integer, Integer> coinMap, int coin) {
         int coinQuantityUsingLimit = coinMap.get(coin);
         int coinUsing = Condition.QUANTITY_0.getNumber();
 
         while (coinQuantityUsingLimit > Condition.QUANTITY_0.getNumber()) {
-            if (money / coin < Condition.QUOTIENT_1.getNumber()) {
+            if (Money.getInstance().getMoney() / coin < Condition.QUOTIENT_1.getNumber()) {
                 break;
             }
-            money -= coin;
+            Money.returnChange(coin);
             coinQuantityUsingLimit -= Condition.QUANTITY_1.getNumber();
             coinUsing += Condition.QUANTITY_1.getNumber();
         }

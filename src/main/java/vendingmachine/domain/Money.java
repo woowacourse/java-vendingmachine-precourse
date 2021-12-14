@@ -29,4 +29,8 @@ public class Money {
         }
         return false;
     }
+
+    public static void returnChange(int coin) {
+        money -= coin;
+    }
 }
