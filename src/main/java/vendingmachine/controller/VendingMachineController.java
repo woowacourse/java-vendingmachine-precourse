@@ -7,21 +7,17 @@ import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
 import vendingmachine.model.Money;
-import vendingmachine.model.Products;
 import vendingmachine.service.CoinService;
-import vendingmachine.service.ProductService;
+import vendingmachine.service.ShoppingService;
 
 public class VendingMachineController {
 
 	Money possessionMoney;
-	Money insertMoney;
-	Products products;
 	CoinService coinService = new CoinService();
-	ProductService productService;
+	ShoppingService shoppingService = new ShoppingService();
 
 	public void run() {
 		requestInput();
-		setService();
 		doShopping();
 		returnChange();
 	}
@@ -55,7 +51,7 @@ public class VendingMachineController {
 			String productList = requestProduct();
 			try {
 				checkProductException(productList);
-				products = new Products(productList);
+				shoppingService.createProducts(productList);
 				break;
 			} catch (Exception exception) {
 				System.out.println(exception.getMessage());
@@ -68,7 +64,7 @@ public class VendingMachineController {
 			String money = requestInsertMoney();
 			try {
 				checkNumberException(money);
-				insertMoney = new Money(Integer.parseInt(money));
+				shoppingService.createInsertMoney(Integer.parseInt(money));
 				break;
 			} catch (Exception exception) {
 				System.out.println(exception.getMessage());
@@ -76,22 +72,16 @@ public class VendingMachineController {
 		}
 	}
 
-	private void setService() {
-		productService = new ProductService(products, insertMoney);
-	}
-
 	private void doShopping() {
-		int minimumPrice = productService.getMinimumPrice();
-		while (insertMoney.isMoneyBiggerThanValue(minimumPrice)
-			&& productService.isOverZeroAllProductCount()) {
-			reportInputMoney(insertMoney.getMoney());
+		while (shoppingService.canShopping()) {
+			reportInputMoney(shoppingService.getInsertMoney());
 			purchaseProduct();
 		}
-		reportInputMoney(insertMoney.getMoney());
+		reportInputMoney(shoppingService.getInsertMoney());
 	}
 
 	private void purchaseProduct() {
-		productService.purchase(inputProductName());
+		shoppingService.purchase(inputProductName());
 	}
 
 	private String inputProductName() {
@@ -108,13 +98,13 @@ public class VendingMachineController {
 	}
 
 	private void checkProductPurchase(String productName) {
-		if (!productService.canSell(productName)) {
+		if (!shoppingService.canSell(productName)) {
 			throw new IllegalArgumentException(PRODUCT_NOT_BUY_MSG);
 		}
 	}
 
 	private void returnChange() {
-		coinService.createGreedyCoin(insertMoney.getMoney());
+		coinService.createGreedyCoin(shoppingService.getInsertMoney());
 		reportChangeCoin(coinService.getChangeCoins());
 	}
 
