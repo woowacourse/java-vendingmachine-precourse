@@ -12,8 +12,6 @@ import static vendingmachine.domain.Coin.*;
 public class Coins {
 	public final List<Integer> coinsValueList = Arrays.asList(500, 100, 50, 10);
 
-	public int holdingMoney;
-
 	private Map<Coin, Integer> holdingCoins = new LinkedHashMap<>();
 
 	public Map<Coin, Integer> initializeCoins(int holdingMoney) {
