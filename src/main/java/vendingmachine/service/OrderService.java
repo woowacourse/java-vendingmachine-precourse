@@ -22,7 +22,6 @@ public class OrderService {
 	}
 
 	public boolean canPurchaseAnyItems(int userMoney, Items forSaleItems) {
-		return forSaleItems.getForSaleItemsList().stream()
-				.anyMatch(item -> item.isEnoughMoney(userMoney) && !item.isRunOutOfStock());
+		return forSaleItems.checkCanPurchaseAtLeastOneItem(userMoney);
 	}
 }
