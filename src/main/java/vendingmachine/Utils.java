@@ -7,8 +7,7 @@ public class Utils {
 
     public static void MachineOn() {
         CheckChange();
-        String[] juices = PrintUI.InputJuice();
-        ArrayList<Juice> juiceIndex = ClassifyJuice(juices);
+        ArrayList<Juice> juiceIndex = PrintUI.InputJuice();
         int minPrice = FindMinPrice(juiceIndex);
         OrderJuice(minPrice, juiceIndex);
     }
@@ -20,12 +19,20 @@ public class Utils {
     }
 
     public static ArrayList<Juice> ClassifyJuice(String[] juices) {
-        ArrayList<Juice> juiceIndex = new ArrayList<>();
-        for (String juice : juices) {
-            String[] juiceInfo = juice.substring(1,juice.length() - 1).split(",");
-            juiceIndex.add(new Juice(juiceInfo[0], Integer.parseInt(juiceInfo[1]), Integer.parseInt(juiceInfo[2])));
+        try {
+            ArrayList<Juice> juiceIndex = new ArrayList<>();
+            for (String juice : juices) {
+                String[] juiceInfo = juice.substring(1,juice.length() - 1).split(",");
+                juiceIndex.add(new Juice(juiceInfo[0], Integer.parseInt(juiceInfo[1]), Integer.parseInt(juiceInfo[2])));
+            }
+            if (SumNumberOfJuice(juiceIndex)) {
+                return juiceIndex;
+            }
+            return PrintUI.InputJuice();
+        } catch (Exception e) {
+            System.out.println("[ERROR] : [제품명1,가격1,수량1];[제품명2,가격2,수량2]... 양식을 지켜주세요");
+            return PrintUI.InputJuice();
         }
-        return juiceIndex;
     }
 
     public static int FindMinPrice(ArrayList<Juice> juiceIndex) {
@@ -46,9 +53,19 @@ public class Utils {
         Coin.PrintChange(money);
     }
 
-    public static void SumNumberOfJuice(ArrayList<Juice> juiceIndex) {
-        for (Juice juice : juiceIndex) {
-            totalNumberOfJuice = juice.SumNumber(totalNumberOfJuice);
+    public static boolean SumNumberOfJuice(ArrayList<Juice> juiceIndex) {
+        try {
+            for (Juice juice : juiceIndex) {
+                totalNumberOfJuice = juice.SumNumber(totalNumberOfJuice);
+            }
+            if (totalNumberOfJuice == 0) {
+                throw new IllegalArgumentException();
+            }
+            return true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] : 재고를 채워주세요");
+            totalNumberOfJuice = 0;
+            return false;
         }
     }
 

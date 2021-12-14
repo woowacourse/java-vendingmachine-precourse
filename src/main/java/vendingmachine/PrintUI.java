@@ -2,6 +2,8 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import java.util.ArrayList;
+
 public class PrintUI {
     public static int InputChange() {
         int change;
@@ -14,16 +16,16 @@ public class PrintUI {
             System.out.println();
             return change;
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] : 음수는 넣을 수 없어요");
+            System.out.println("[ERROR] : 금액은 양의 정수로 입력해주세요");
             return InputChange();
         }
     }
 
-    public static String[] InputJuice() {
+    public static ArrayList<Juice> InputJuice() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         String[] Juices = Console.readLine().split(";");
         System.out.println();
-        return Juices;
+        return Utils.ClassifyJuice(Juices);
     }
 
     public static int InputMoney() {
