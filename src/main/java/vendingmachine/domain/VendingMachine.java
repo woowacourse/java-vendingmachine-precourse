@@ -19,7 +19,7 @@ public class VendingMachine {
     public void purchase(int money) {
         do {
             OutputView.printRemainInputMoney(money);
-            Product product = products.getProduct(InputView.inputProductName());
+            Product product = products.getProduct(InputView.inputProductName(products));
             product.purchase(money);
             money -= product.getPrice();
         } while (canPurchase(money));

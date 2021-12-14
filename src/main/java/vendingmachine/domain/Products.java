@@ -13,6 +13,10 @@ public class Products {
         makeProducts(productInfo);
     }
 
+    public List<Product> getProducts() {
+        return products;
+    }
+
     private void makeProducts(String productInfo) {
         String[] productsString = productInfo.split(";");
         for (String productString : productsString) {

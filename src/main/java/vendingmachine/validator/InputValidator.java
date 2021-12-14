@@ -1,5 +1,6 @@
 package vendingmachine.validator;
 
+import vendingmachine.domain.Products;
 import vendingmachine.util.VendingMachineConstant;
 
 public class InputValidator {
@@ -8,6 +9,12 @@ public class InputValidator {
         int inputNumber = Integer.parseInt(input);
         validateNumberIsMoreThanZero(inputNumber);
         validateNumberIsMultipleOfTen(inputNumber);
+    }
+
+    public static void validateProductName(Products products, String productName) {
+        if (products.getProducts().stream().noneMatch(it -> it.getName().equals(productName))) {
+            throw new IllegalArgumentException(VendingMachineConstant.ERROR_PREFIX_MESSAGE + VendingMachineConstant.NOT_EXIST_PRODUCT);
+        }
     }
 
     private static void validateStringIsNumber(String input) {

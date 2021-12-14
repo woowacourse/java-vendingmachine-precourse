@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Products;
 import vendingmachine.util.VendingMachineConstant;
 import vendingmachine.validator.InputValidator;
 
@@ -23,11 +24,17 @@ public class InputView {
         return inputMoney();
     }
 
-    public static String inputProductName() {
+    public static String inputProductName(Products products) {
         System.out.println(VendingMachineConstant.INPUT_PRODUCT_NAME_MESSAGE);
-        String inputProductName = Console.readLine();
-        // TODO 검증 로직
-        return inputProductName;
+        while (true) {
+            String inputProductName = Console.readLine();
+            try {
+                InputValidator.validateProductName(products, inputProductName);
+                return inputProductName;
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
     }
 
     private static String inputMoney() {
