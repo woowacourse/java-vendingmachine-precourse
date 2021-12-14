@@ -51,15 +51,18 @@ public class Application {
     }
 
     public static void main(String[] args) {
+        // 자판기 초기 세팅
         System.out.println(Constants.coinInitMsg);
         int initCoin = getCoin();
         VendingMachine vm = new VendingMachine(initCoin);
         printCoinStatus();
-
+        // 상품들 초기 세팅
         ArrayList<Product> products = getInitProduct();
-
-
+        vm.setInitProducts(products);
+        // 돈 받아서 상품 구매 및 잔돈 출력
+        System.out.println();
         System.out.println(Constants.coinInputMsg);
         int inputCoin = getCoin();
+        vm.buyProducts(inputCoin);
     }
 }
