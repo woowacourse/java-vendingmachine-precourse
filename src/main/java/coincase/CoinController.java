@@ -7,11 +7,9 @@ import java.util.Map;
 
 public class CoinController {
 	private Map<Integer, Integer> numberOfCoins;
-	private CoinRuleChecker coinRuleChecker;
 
 	public CoinController() {
 		initNumberOfCoins();
-		coinRuleChecker = new CoinRuleChecker();
 	}
 
 	private void initNumberOfCoins() {

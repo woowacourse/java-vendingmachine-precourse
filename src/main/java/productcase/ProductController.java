@@ -18,11 +18,9 @@ public class ProductController {
 	private static final int STOCK_INDEX = 2;
 
 	private ArrayList<Product> vendingMachineProducts;
-	private ProductRuleChecker productRuleChecker;
 
 	public ProductController() {
 		vendingMachineProducts = new ArrayList<>();
-		productRuleChecker = new ProductRuleChecker();
 	}
 
 	private String offBracket(String target) {

@@ -8,7 +8,6 @@ import productcase.ProductController;
 import ui.UiController;
 
 public class CoreController {
-	private static final int FAIL_TO_BUY = -1;
 
 	private int inputMoney;
 	private CoinController coinController;
