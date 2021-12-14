@@ -5,8 +5,8 @@ import vendingmachine.utils.validator.ItemDataValidator;
 public class ItemDto {
 
     private String name;
-    private int price;
-    private int stockQuantity;
+    private Integer price;
+    private Integer stockQuantity;
 
     private ItemDto(){}
 
@@ -23,11 +23,11 @@ public class ItemDto {
         return name;
     }
 
-    public int getPrice() {
+    public Integer getPrice() {
         return price;
     }
 
-    public int getStockQuantity() {
+    public Integer getStockQuantity() {
         return stockQuantity;
     }
 }
