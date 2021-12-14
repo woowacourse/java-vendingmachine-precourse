@@ -51,7 +51,8 @@ public class Utils {
         int price;
         for (Juice juice : juiceIndex) {
             price = juice.EqualJuiceName(orderJuice);
-            if (price != 0) {
+            boolean flag =  juice.OutPutOneJuice();
+            if (flag && price != 0) {
                 return price;
             }
         }
