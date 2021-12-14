@@ -1,5 +1,6 @@
 package vendingmachine.model.coin;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -34,6 +35,6 @@ public class Change {
     }
 
     public List<CoinType> getCoins() {
-        return coins;
+        return Collections.unmodifiableList(coins);
     }
 }
