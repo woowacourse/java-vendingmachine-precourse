@@ -51,4 +51,8 @@ public enum Coin {
 	public int divide(final int money) {
 		return money / this.amount;
 	}
+
+	public int subtractByGivenNumberOfCoins(final int money, final int numberOfCoins) {
+		return money - numberOfCoins * this.amount;
+	}
 }

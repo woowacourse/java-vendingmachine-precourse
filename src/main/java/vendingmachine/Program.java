@@ -120,21 +120,22 @@ public class Program {
 		return productName;
 	}
 
-	private CoinPocket calculateChange() {
-		CoinPocket change = new CoinPocket();
-		for (Coin coin : Coin.values()) {
-			int numberOfPoppedCoins = coinPocket.pop(coin, coin.divide(userMoney));
-			change.push(coin, numberOfPoppedCoins);
-		}
-
-		return change;
-	}
-
 	private void giveChange() {
 		Guide.printLeftMoney(userMoney);
 		Guide.USER_CHANGE_SHOW.println();
 		CoinPocket change = calculateChange();
 		change.removeCoinsOfZeroNumber();
 		Guide.printCoinPocket(change);
+	}
+
+	private CoinPocket calculateChange() {
+		CoinPocket change = new CoinPocket();
+		for (Coin coin : Coin.values()) {
+			int numberOfPoppedCoins = coinPocket.pop(coin, coin.divide(userMoney));
+			userMoney = coin.subtractByGivenNumberOfCoins(userMoney, numberOfPoppedCoins);
+			change.push(coin, numberOfPoppedCoins);
+		}
+
+		return change;
 	}
 }
