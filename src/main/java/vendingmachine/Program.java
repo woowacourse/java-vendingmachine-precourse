@@ -28,13 +28,17 @@ public class Program {
 	}
 
 	private int setInitialMoneyInMachine() throws IllegalArgumentException {
+		return Integer.parseInt(getInitialMoney());
+	}
+
+	private String getInitialMoney() throws IllegalArgumentException {
 		Guide.INITIAL_MONEY_REQUEST.println();
 		String moneyInString = Console.readLine();
-		InitialMoneyValidator validator = new InitialMoneyValidator(moneyInString);
-		if (!validator.validate()) {
-			setInitialMoneyInMachine();
+		InitialMoneyValidator validator = new InitialMoneyValidator();
+		if (!validator.validate(moneyInString)) {
+			return getInitialMoney();
 		}
-		return Integer.parseInt(moneyInString);
+		return moneyInString;
 	}
 
 	private void setRandomCoinsInPocketWithMoney(int money) {
