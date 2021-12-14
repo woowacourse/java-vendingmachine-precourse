@@ -1,8 +1,10 @@
 package vendingmachine.validator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import vendingmachine.domain.Beverage;
 import vendingmachine.domain.Beverages;
@@ -26,33 +28,33 @@ public class InputValidator {
 		checkSemicolon(input);
 		checkBracket(input);
 		String[] itemList = input.split(";");
-		for (String item : itemList) {
+		Arrays.stream(itemList).forEach(item -> {
 			checkBracket(item);
 			String itemInfo = eraseBracket(item);
 			items.add(itemInfo);
-		}
+		});
 		return splitItem(items);
 	}
 
 	private static Beverages splitItem(ArrayList<String> itemPriceStock) {
 		Beverages beverages = new Beverages();
-		for (String beveragesInfoList : itemPriceStock) {
-			String[] beverageInfo = beveragesInfoList.split(",");
+		itemPriceStock.stream().map(beveragesInfoList -> beveragesInfoList.split(",")).forEach(beverageInfo -> {
 			validationInfoForm(beverageInfo);
 			String name = checkNameForm(beverageInfo[nameIndex]);
 			int price = checkPriceForm(beverageInfo[priceIndex]);
 			int stock = checkStockForm(beverageInfo[stockIndex]);
 			beverages.add(new Beverage(name, price), stock);
-		}
+		});
 		validateDuplicateBeverage(beverages);
 		return beverages;
 	}
 
 	private static void validateDuplicateBeverage(Beverages beverages) {
-		Set<String> compareToName = new HashSet<>();
-		for (Beverage beverage : beverages.getBeverages().keySet()) {
-			compareToName.add(beverage.getName());
-		}
+		Set<String> compareToName = beverages.getBeverages()
+			.keySet()
+			.stream()
+			.map(Beverage::getName)
+			.collect(Collectors.toSet());
 		if (compareToName.size() != beverages.size()) {
 			InputException.printDuplicatedBeverage();
 		}

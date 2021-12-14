@@ -51,12 +51,12 @@ public class VendingMachine {
 	}
 
 	public Beverage findBeverageByName(String name) {
-		for (Beverage beverage : beverages.getBeverages().keySet()) {
-			if (beverage.isSameName(name)) {
-				return beverage;
-			}
-		}
-		throw new NotFoundBeverageException();
+		return beverages.getBeverages()
+			.keySet()
+			.stream()
+			.filter(beverage -> beverage.isSameName(name))
+			.findAny()
+			.orElseThrow(NotFoundBeverageException::new);
 	}
 
 	public void sell(Beverage beverage) {
