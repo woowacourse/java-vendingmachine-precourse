@@ -10,102 +10,107 @@ import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
 public class Validators {
-	public static final String DELIMETER = ";";
 
 	public static void checkValidFormatOfMoney(String inputValue) {
 		if (!(inputValue.chars().allMatch(Character::isDigit))) {
-			throw new IllegalArgumentException("금액은 숫자만 입력해주세요.");
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_INPUT_ONLY_DIGIT);
 		}
 	}
 
 	public static void checkValidRangeMoney(String inputValue) {
 		int number = Integer.parseInt(inputValue);
-		if (!(1 <= number)) {
-			throw new IllegalArgumentException("정상 범위(" + 1 + "~" + 2147483647 + ")가 아닙니다");
+		if (!(Constant.CONSTANT_ONE <= number)) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_IS_OR_GREATER_THAN_ONE);
 		}
 	}
 
 	public static void checkValidMoney(String inputValue) {
 		int number = Integer.parseInt(inputValue);
-		if (number % 10 != 0) {
-			throw new IllegalArgumentException("10원 단위로 입력해주세요");
+		if (number % Constant.LOWEST_COIN_AMOUNT != Constant.CONSTANT_ZERO) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_TEN_UNIT);
 		}
 	}
 
 	public static void checkNullOrEmpty(String inputValue) {
 		if (inputValue == null || inputValue.trim().isEmpty()) {
-			throw new IllegalArgumentException("빈칸 입력은 허용하지 않는다.");
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_NO_SPACE);
 		}
 	}
 
 	public static void checkValidFirstValue(String inputValue, String delimeter) {
-		if (inputValue.charAt(0) == delimeter.charAt(0)) {
-			throw new IllegalArgumentException("정상적인 이름을 입력하세요.");
+		if (inputValue.charAt(Constant.CONSTANT_ZERO) == delimeter.charAt(Constant.CONSTANT_ZERO)) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_NO_PRODUCT_NAME);
 		}
 	}
 
 	public static void checkPatternOfProduct(String inputValue, String delimeter, String regex) {
+		Pattern pattern = Pattern.compile(regex);
 		List<String> splitedInputValue = Arrays.stream(inputValue.split(delimeter))
 			.map(String::trim)
 			.collect(Collectors.toList());
+		checkPattern(pattern, splitedInputValue);
+		checkAmount(pattern, splitedInputValue);
+		checkCount(pattern, splitedInputValue);
+		checkDuplicatesOfName(pattern, splitedInputValue);
+	}
 
-		Pattern pattern = Pattern.compile(regex);
-
-		boolean isMatched = splitedInputValue.stream()
-			.allMatch(stringValue -> pattern.matcher(stringValue).find());
-
-		if (!isMatched) {
-			throw new IllegalArgumentException("패턴에 맞지 않는 입력입니다.");
-		}
-
-		boolean isValidAmount = splitedInputValue.stream()
-			.mapToInt(stringValue -> {
-				Matcher matcher = pattern.matcher(stringValue);
-				if (matcher.find()) {
-					String amount = matcher.group(2);
-					return Integer.parseInt(amount);
-				}
-				return 0;
-			})
-			.allMatch(amount -> amount >= 100 && amount % 10 == 0);
-
-		if (!isValidAmount) {
-			throw new IllegalArgumentException("상품 가격은 100원부터 시작하며, 10원으로 나누어떨어져야 한다.");
-		}
-
-		System.out.println("금액 검사까지 통과");
-		boolean isValidCount = splitedInputValue.stream()
-			.mapToInt(stringValue -> {
-				Matcher matcher = pattern.matcher(stringValue);
-				if (matcher.find()) {
-					String count = matcher.group(3);
-					return Integer.parseInt(count);
-				}
-				return 0;
-			})
-			.allMatch(count -> count >= 1);
-
-		if (!isValidCount) {
-			throw new IllegalArgumentException("상품 갯수는 1개이상이어야한다.");
-		}
-
-		System.out.println("갯수 검사까지 통과");
-
+	private static void checkDuplicatesOfName(Pattern pattern, List<String> splitedInputValue) {
 		List<String> names = splitedInputValue.stream()
 			.map(stringValue -> {
 				Matcher matcher = pattern.matcher(stringValue);
 				if (matcher.find()) {
-					String name = matcher.group(1);
+					String name = matcher.group(Constant.CONSTANT_ONE);
 					return name;
 				}
-				return "";
+				return Constant.EMPTY_STRING;
 			})
 			.collect(Collectors.toList());
 		boolean isDuplicatesOfName = names.stream()
 			.distinct().count() != names.size();
-
 		if (isDuplicatesOfName) {
-			throw new IllegalArgumentException("같은 상품이 중복 입력되었습니다.");
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_DUPLICATE_NAME);
+		}
+	}
+
+	private static void checkCount(Pattern pattern, List<String> splitedInputValue) {
+		boolean isValidCount = splitedInputValue.stream()
+			.mapToInt(stringValue -> {
+				Matcher matcher = pattern.matcher(stringValue);
+				if (matcher.find()) {
+					String count = matcher.group(Constant.CONSTANT_THREE);
+					return Integer.parseInt(count);
+				}
+				return Constant.CONSTANT_ZERO;
+			})
+			.allMatch(count -> count >= Constant.CONSTANT_ONE);
+		if (!isValidCount) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_MORE_THAN_ONE);
+		}
+	}
+
+	private static void checkAmount(Pattern pattern, List<String> splitedInputValue) {
+		boolean isValidAmount = splitedInputValue.stream()
+			.mapToInt(stringValue -> {
+				Matcher matcher = pattern.matcher(stringValue);
+				if (matcher.find()) {
+					String amount = matcher.group(Constant.CONSTANT_TWO);
+					return Integer.parseInt(amount);
+				}
+				return Constant.CONSTANT_ZERO;
+			})
+			.allMatch(amount -> amount >= Constant.CONSTANT_100
+				&& amount % Constant.LOWEST_COIN_AMOUNT == Constant.CONSTANT_ZERO);
+		if (!isValidAmount) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_INVALID_AMOUNT);
+		}
+	}
+
+	private static void checkPattern(Pattern pattern, List<String> splitedInputValue) {
+		boolean isMatched = splitedInputValue.stream()
+			.allMatch(stringValue -> pattern.matcher(stringValue).find());
+
+		if (!isMatched) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_INVALID_PATTERN);
 		}
 	}
 
@@ -113,23 +118,23 @@ public class Validators {
 		VendingMachine vendingMachine = VendingMachine.getInstance();
 		Product product = vendingMachine.findProductByName(inputValue);
 		if (!(vendingMachine.isProductAvailable(product))) {
-			throw new IllegalArgumentException("해당 상품은 현재 0개 입니다.");
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_THIS_IS_ZERO_COUNT);
 		}
 		if (!vendingMachine.isUserPurchasable(product)) {
-			throw new IllegalArgumentException("해당 상품의 가격이 보유중인 금액보다 비쌉니다.");
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_INVALID_MONEY);
 		}
 	}
 
 	public static void checkValidLengthOfProductName(String inputValue) {
 		int inputValueLength = inputValue.length();
 		if (!(1 <= inputValueLength)) {
-			throw new IllegalArgumentException(1 + "~" + 2147483647 + " 글자 범위 내에서 입력하세요.");
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_INVALID_RANGE);
 		}
 	}
 
 	public static void checkIncludeSpace(String inputValue) {
-		if (inputValue.trim().contains(" ")) {
-			throw new IllegalArgumentException("공백이 포함될 수 없습니다.");
+		if (inputValue.trim().contains(Constant.CONSTANT_SPACE)) {
+			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_NO_SPACE);
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Util {
+
 	public static Integer convertStringToInt(String money) {
 		return Integer.valueOf(money);
 	}
@@ -14,6 +15,6 @@ public class Util {
 	}
 
 	public static String removeSpace(String input) {
-		return input.replaceAll(" ", "");
+		return input.replaceAll(Constant.CONSTANT_SPACE, Constant.EMPTY_STRING);
 	}
 }
