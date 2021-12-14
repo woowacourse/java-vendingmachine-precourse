@@ -1,7 +1,18 @@
 package vendingmachine;
 
 public class Application {
+    public static int getInitCoin() {
+        while (true) {
+            String input = camp.nextstep.edu.missionutils.Console.readLine();
+
+            if (true) {
+                return Integer.parseInt(input);
+            }
+        }
+    }
+
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        System.out.println(Constants.coinInitMsg);
+        int initCoin = getInitCoin();
     }
 }
