@@ -1,5 +1,7 @@
 package vendingmachine.domain.coin;
 
+import static vendingmachine.constant.ErrorMessage.*;
+
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
@@ -32,5 +34,26 @@ public enum Coin {
 			.map(coin -> coin.amount)
 			.sorted(Comparator.reverseOrder())
 			.collect(Collectors.toList());
+	}
+
+	public static List<Coin> getAllCoin() {
+		return Arrays.stream(Coin.values())
+			.collect(Collectors.toList());
+	}
+
+	public static Coin getCoinByAmount(int amount) {
+		return Arrays.stream(Coin.values())
+			.filter(coin -> coin.amount == amount)
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(COIN_IS_NOT_EXISTENT_ERROR_MESSAGE));
+	}
+
+	public int getAmount() {
+		return amount;
+	}
+
+	@Override
+	public String toString() {
+		return Integer.toString(amount);
 	}
 }

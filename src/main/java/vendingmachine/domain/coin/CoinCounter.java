@@ -12,7 +12,7 @@ import vendingmachine.util.RandomCoinGenerator;
 import vendingmachine.validator.AmountValidator;
 
 public class CoinCounter {
-	private final Map<Integer, Integer> coinCounter;
+	private final Map<Coin, Integer> coinCounter;
 
 	public CoinCounter() {
 		this.coinCounter = new LinkedHashMap<>();
@@ -24,17 +24,17 @@ public class CoinCounter {
 		setCoinCounter(coinCounter, amount);
 	}
 
-	private void initializeCoinCounter(Map<Integer, Integer> coinCounter) {
-		List<Integer> allCoinAmount = Coin.getAllCoinAmount();
-		allCoinAmount.forEach(coinAmount -> coinCounter.put(coinAmount, DEFAULT_NUMBER));
+	private void initializeCoinCounter(Map<Coin, Integer> coinCounter) {
+		List<Coin> allCoin = Coin.getAllCoin();
+		allCoin.forEach(coin -> coinCounter.put(coin, DEFAULT_NUMBER));
 	}
 
-	private void setCoinCounter(Map<Integer, Integer> coinCounter, int amount) {
-		int randomCoinAmount;
+	private void setCoinCounter(Map<Coin, Integer> coinCounter, int amount) {
+		Coin randomCoin;
 		while (amount > 0) {
-			randomCoinAmount = RandomCoinGenerator.pickRandomCoinAmount(amount);
-			coinCounter.put(randomCoinAmount, coinCounter.get(randomCoinAmount) + 1);
-			amount -= randomCoinAmount;
+			randomCoin = RandomCoinGenerator.pickRandomCoinAmount(amount);
+			coinCounter.put(randomCoin, coinCounter.get(randomCoin) + 1);
+			amount -= randomCoin.getAmount();
 		}
 	}
 
@@ -42,7 +42,7 @@ public class CoinCounter {
 	public String toString() {
 		StringBuilder result = new StringBuilder();
 		coinCounter.forEach(
-			(coinAmount, numberOfCoins) -> result.append(coinAmount + WON + numberOfCoins + AMOUNT_UNIT + "\n")
+			(coin, count) -> result.append(coin + WON + count + AMOUNT_UNIT + "\n")
 		);
 		return result.toString();
 	}
@@ -53,19 +53,19 @@ public class CoinCounter {
 		return change;
 	}
 
-	private void setChangeCoinCounter(Map<Integer, Integer> changeCoinCounter, int userAmount) {
-		for (int coinAmount : coinCounter.keySet()) {
-			int numberOfCoin = coinCounter.get(coinAmount);
-			int maximumNumberOfCoin = Math.min(userAmount / coinAmount, numberOfCoin);
-			putCoinAmount(changeCoinCounter, coinAmount, maximumNumberOfCoin);
-			userAmount -= coinAmount * maximumNumberOfCoin;
+	private void setChangeCoinCounter(Map<Coin, Integer> changeCoinCounter, int userAmount) {
+		for (Coin coin : coinCounter.keySet()) {
+			int count = coinCounter.get(coin);
+			int maximumCountOfChangeCoin = Math.min(userAmount / coin.getAmount(), count);
+			putCoinAmount(changeCoinCounter, coin, maximumCountOfChangeCoin);
+			userAmount -= coin.getAmount() * maximumCountOfChangeCoin;
 		}
 	}
 
-	private void putCoinAmount(Map<Integer, Integer> changeCoinCounter, int coinAmount, int maximumNumberOfCoin) {
-		if (maximumNumberOfCoin > 0) {
-			changeCoinCounter.put(coinAmount, maximumNumberOfCoin);
-			coinCounter.put(coinAmount, coinCounter.get(coinAmount) - maximumNumberOfCoin);
+	private void putCoinAmount(Map<Coin, Integer> changeCoinCounter, Coin coin, int maximumCountOfChangeCoin) {
+		if (maximumCountOfChangeCoin > 0) {
+			changeCoinCounter.put(coin, maximumCountOfChangeCoin);
+			coinCounter.put(coin, coinCounter.get(coin) - maximumCountOfChangeCoin);
 		}
 	}
 }

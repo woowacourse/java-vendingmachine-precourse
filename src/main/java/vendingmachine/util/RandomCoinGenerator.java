@@ -7,12 +7,14 @@ import java.util.List;
 import vendingmachine.domain.coin.Coin;
 
 public class RandomCoinGenerator {
-	public static int pickRandomCoinAmount(int amount) {
+	public static Coin pickRandomCoinAmount(int amount) {
 		int randomCoinAmount;
 		List<Integer> allCoinAmount = Coin.getAllCoinAmount();
 		do {
 			randomCoinAmount = pickNumberInList(allCoinAmount);
-		} while (amount < randomCoinAmount);
-		return randomCoinAmount;
+		}
+		while (amount < randomCoinAmount)
+			;
+		return Coin.getCoinByAmount(randomCoinAmount);
 	}
 }
