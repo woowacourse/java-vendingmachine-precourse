@@ -75,15 +75,35 @@ public class CoinCollection {
     public String toStringWithoutEmptyCoin() {
         String string = "";
         string += CHANGE_STRING + NEW_LINE;
+        string = append500IfExist(string);
+        string = append100IfExist(string);
+        string = append50IfExist(string);
+        string = append10IfExist(string);
+        return string;
+    }
+
+    private String append500IfExist(String string) {
         if (coins500.size() > 0) {
             string += COIN500_STRING + coins500.size() + UNIT + NEW_LINE;
         }
+        return string;
+    }
+
+    private String append100IfExist(String string) {
         if (coins100.size() > 0) {
             string += COIN100_STRING + coins100.size() + UNIT + NEW_LINE;
         }
+        return string;
+    }
+
+    private String append50IfExist(String string) {
         if (coins50.size() > 0) {
             string += COIN50_STRING + coins50.size() + UNIT + NEW_LINE;
         }
+        return string;
+    }
+
+    private String append10IfExist(String string) {
         if (coins10.size() > 0) {
             string += COIN10_STRING + coins10.size() + UNIT + NEW_LINE;
         }
