@@ -58,7 +58,7 @@ public class VendingMachineCalculator {
     private void returnChange(VendingMachineAmount vendingMachineAmount) {
         int totalChange = userMoney.reduceMoney();
         CoinCombination changeCoinCombination = CoinGenerator.calculateChangeCoinCombination(vendingMachineAmount.getVendingMachineCoinCombination(), totalChange);
-        changeCoinCombination.print2();
+        OutputView.printChangeCoinCount(changeCoinCombination);
     }
 
     private boolean isReturnChange(Products products) {

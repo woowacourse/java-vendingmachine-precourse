@@ -8,7 +8,21 @@ public class OutputView {
 
     public static void printCoinCount(CoinCombination coinCombination) {
         System.out.println(GUIDE_VENDING_MACHINE_COIN_COMBINATION_MESSAGE);
-        coinCombination.print();
+        coinCombination.getCoinCombination()
+                .forEach(
+                        (coin, count) -> System.out.println(coin + HYPHEN_MINUS + count + COUNT_MESSAGE)
+                );
+    }
+
+    public static void printChangeCoinCount(CoinCombination coinCombination) {
+        System.out.println(CHANGE);
+        coinCombination.getCoinCombination()
+                .forEach(
+                        (coin, count) -> {
+                            if (count > 0) {
+                                System.out.println(coin + HYPHEN_MINUS + count + COUNT_MESSAGE);
+                            }}
+                );
     }
 
     public static void printUserMoney(UserMoney userMoney) {

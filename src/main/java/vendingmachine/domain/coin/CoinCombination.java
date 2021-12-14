@@ -18,20 +18,6 @@ public class CoinCombination {
         coinCombination.put(coin, count);
     }
 
-    public void print() {
-        coinCombination.forEach(
-                (coin, count) -> System.out.println(coin + HYPHEN_MINUS + count + COUNT_MESSAGE)
-        );
-    }
-
-    public void print2() {
-        for (Coin coin : coinCombination.keySet()) {
-            if (coinCombination.get(coin) > 0) {
-                System.out.println(coin + HYPHEN_MINUS + coinCombination.get(coin) + COUNT_MESSAGE);
-            }
-        }
-    }
-
     public Map<Coin, Integer> getCoinCombination() {
         return coinCombination;
     }
