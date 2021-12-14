@@ -20,7 +20,10 @@ public class Machine {
     }
 
     public void sellProduct(String productName) {
-        productTable.sellProduct(productName);
+        if (inputMoney < productTable.getPriceOfProduct(productName)) {
+            throw new IllegalArgumentException();
+        }
+        inputMoney -= productTable.sellProduct(productName);
     }
 
     public void setInitialAsset(int asset) {
