@@ -29,9 +29,21 @@ public class InputValidationService {
                 isFormat(removedBrackets);
                 isUniqueName(s);
             } catch (IllegalArgumentException e) {
-                message.printInputCorrectFormat();
+                messageService.printErrorMessage(e.getMessage());
+                nameSet.clear();
                 return false;
             }
+        }
+        return true;
+    }
+
+    public boolean isValidateAmount(String input) {
+        try {
+            isNumber(input);
+            isWholeNumbers(input);
+        } catch (IllegalArgumentException e) {
+            messageService.printErrorMessage(e.getMessage());
+            return false;
         }
         return true;
     }
@@ -40,7 +52,7 @@ public class InputValidationService {
         String[] divided = s.split(",");
         String name = divided[0].substring(1);
         if (nameSet.contains(name)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_SAME_PRODUCT_NAME);
         }
         nameSet.add(name);
     }
@@ -48,30 +60,29 @@ public class InputValidationService {
     private void isSpace(String input) throws IllegalArgumentException {
         String noSpace = input.replaceAll(" ", "");
         if (noSpace.equals("")) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_SPACE_PRODUCT_NAME);
         }
     }
 
     private boolean isNumber(String input) throws IllegalArgumentException {
-        for (String s : input.split("")) {
-            char c = s.charAt(0);
-            if (!Character.isDigit(c)) {
-                throw new IllegalArgumentException();
-            }
+        try {
+            Integer.parseInt(input);
+        } catch (Exception e) {
+            throw new IllegalArgumentException(ERROR_NOT_NUMBER);
         }
         return true;
     }
 
     private boolean isWholeNumbers(String input) throws IllegalArgumentException {
         if (Integer.parseInt(input) < 0) {
-           throw new IllegalArgumentException();
+           throw new IllegalArgumentException(ERROR_NEGATIVE_NUMBER);
         }
         return true;
     }
 
     private boolean isDivisibleByTen(String input) throws IllegalArgumentException {
         if (Integer.parseInt(input) % 10 != 0) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_NOT_DIVISIBLE_BY_TEN);
         }
         return true;
     }
@@ -80,7 +91,7 @@ public class InputValidationService {
         int firstBracketIdx = input.indexOf("[");
         int lastBracketIdx = input.lastIndexOf("]");
         if (firstBracketIdx != 0 || lastBracketIdx != input.length() - 1) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_NOT_IN_BRACKETS);
         }
     }
 
@@ -98,7 +109,7 @@ public class InputValidationService {
 
     private void isCorrectLength(String[] input) throws IllegalArgumentException {
         if (input.length != 3) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(ERROR_PRODUCT_FORMAT);
         }
     }
 
@@ -110,8 +121,7 @@ public class InputValidationService {
     }
 
     private void isCorrectProductCount(String input) throws IllegalArgumentException {
-        if (!(isNumber(input) && Integer.parseInt(input) >= 0)) {
-            System.out.println("count");
+        if (!(isNumber(input) && isWholeNumbers(input))) {
             throw new IllegalArgumentException();
         }
     }
