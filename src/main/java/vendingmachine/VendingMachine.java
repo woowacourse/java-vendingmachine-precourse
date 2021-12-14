@@ -39,18 +39,29 @@ public class VendingMachine {
 	private void sell() {
 		while(productProcessor.hasProduct() && productProcessor.isPossibleToBuy(balance)) {
 			outputHandler.printBalance(balance);
-			Product product = productProcessor.findProduct(inputHandler.getProductName());
+			Product product = getValidProduct();
 			if(!product.isPossibleToBuy(balance)) {
 				outputHandler.printMessage(VendingMachineData.BALANCE_NOT_ENOUGH_MESSAGE);
 				continue;
 			}
 			try {
 				productProcessor.sellProduct(product);
+				balance -= product.getPrice();
 			} catch (IllegalArgumentException iae) {
 				outputHandler.printErrorMessage(iae);
-				continue;
 			}
-			balance -= product.getPrice();
+		}
+	}
+
+	private Product getValidProduct() {
+		outputHandler.printMessage(VendingMachineData.INPUT_PRODUCT_NAME_MESSAGE);
+		while (true) {
+			String productName = inputHandler.getProductName();
+			try {
+				return productProcessor.findProduct(productName);
+			} catch (IllegalArgumentException iae) {
+				outputHandler.printErrorMessage(iae);
+			}
 		}
 	}
 }

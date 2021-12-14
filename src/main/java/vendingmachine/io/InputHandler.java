@@ -55,7 +55,6 @@ public class InputHandler {
 	}
 
 	public String getProductName() {
-		outputHandler.printMessage(VendingMachineData.INPUT_PRODUCT_NAME_MESSAGE);
 		return read();
 	}
 
