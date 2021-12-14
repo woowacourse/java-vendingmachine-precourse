@@ -36,7 +36,7 @@ public class MachineController {
 	}
 
 	private int sellItems(Machine machine, int inputMoney) {
-		while (inputMoney > machine.getMinPrice() && machine.isStockNotEmpty()) {
+		while (inputMoney >= machine.getMinPrice() && machine.isStockNotEmpty()) {
 			String buyItem = inputView.enterBuyItem(machine, inputMoney);
 			machine.sellItem(buyItem);
 			inputMoney -= machine.getPrice(buyItem);
