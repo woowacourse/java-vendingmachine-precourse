@@ -36,36 +36,43 @@
     - [x] 사용자가 잘못된 값을 입력할 경우 `IllegalArgumentException`를 발생 Validators
     - [x] "[ERROR]"로 시작하는 에러 메시지를 출력 후 해당 부분부터 다시 입력을 받기 InputView
 
-## 입출력 예시
+## 3주차 과제 수행시 키포인트
 
-```
-자판기가 보유하고 있는 금액을 입력해 주세요.
-450
+- 객체의 각 필드에도 wrapping class를 적용함
+    - 원시변수 및 if문의 최소화 -> 래핑변수 및 stream의 활용
+- 정규식 패턴검사에 stream을 활용함
+- List대신 Map 자료구조 래핑하여 DB처럼 사용함
+    - 상품 정보등은 List를 포장한 일급컬렉션으로 만들어놓고 정보조회시 사용함
+- 싱글톤 객체를 활용하여 전체 로직을 운영함
+    - controller 반복문의 조건변수도 싱글톤객체에 메세지를 보내니 상태에 따른 값을 얻어와서 구현하기 수월했음
+- 자판기 작동 로직에 대해 고민하여 기능 구현 목록을 작성함
 
-자판기가 보유한 동전
-500원 - 0개
-100원 - 4개
-50원 - 1개
-10원 - 0개
+## 추가 학습사항
 
-상품명과 가격, 수량을 입력해 주세요.
-[콜라,1500,20];[사이다,1000,10]
+- **[java 기본 문법 정리하기](https://github.com/is2js/exampleStudy01)**
+    - [x] 1코테~1주차 과제기간 자바의 정석 등 기본문법
+    - [x] 2주차 과제기간 Enum(day10), Interface(day11) 추가 학습
+    - [x] **3주차 과제기간 파일입출력(day12) 추가 학습** : [설명](https://github.com/is2js/exampleStudy01/blob/master/readme.md)
+      ,  [코드](https://github.com/is2js/exampleStudy01/tree/master/src/main/java)
 
-투입 금액을 입력해 주세요.
-3000
 
-투입 금액: 3000원
-구매할 상품명을 입력해 주세요.
-콜라
+- **[백준 python 기본 구현 문제](https://github.com/is2js/python_algorithm) -> java 로 풀어보면서 개념정리하기**
+    - [x] 1~2주차 [문제풀이](https://github.com/is2js/boj_java)
+      및 [개념정리](https://github.com/is2js/boj_java/blob/master/concept.md)
+    - [x] 2주차 과제기간 [stream 코드를 통한 개념 정리](https://github.com/is2js/boj_java/blob/master/concept.md)
+    - [x] **3주차 과제기간 stream위주로 [로또게임](https://github.com/is2js/MVC_practice/tree/master/src/main/java/lotto2ByMe)
+      구현해보기**
 
-투입 금액: 1500원
-구매할 상품명을 입력해 주세요.
-사이다
 
-투입 금액: 500원
-잔돈
-100원 - 4개
-50원 - 1개
-```
+- **java로 콘솔 게시판 만들어보기 [설명](https://github.com/is2js/exampleStudy01/blob/master/board.md)
+  , [코드](https://github.com/is2js/exampleStudy01/tree/master/src/main/java/board)**
+    - [x] 1주차 콘솔 게시판까지 완성
+    - [x] 2주차 콘솔 게시판 정렬+페이징 기능 구현
+    - [x] **3주차 콘솔 게시판 입출력기능(저장 및 불러오기) 구현**
 
----
+
+- **지난 과제**를 지원동기들 코드 참고하여 **다시 작성해보기**
+    - [x] [1주차과제 복습](https://github.com/is2js/MVC_practice/tree/master/src/main/java/baseball2Youngyooon) : 숫자야구게임 **
+      MVC+ 일급콜렉션 적용** 위주로 코드 새로 짜기
+    - [x] [2주차과제 복습](https://github.com/is2js/MVC_practice/tree/master/src/main/java/racingCar3devhudiForWrap) : **최소단위
+      변수들도 Wrapping클래스** 만들어보기 & 인터페이스 적용해보기
