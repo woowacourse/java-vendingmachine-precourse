@@ -35,9 +35,8 @@ public class InputReceiver {
 				InputValidator.validateProductName(productName, vendingMachine);
 				return productName;
 			} catch (NullPointerException e) {
-				System.out.println("[ERROR] 존재하지 않는 상품명입니다.");
-				//VendingMachinePrinter.printGetProductNameMessage();
-			}catch (IllegalArgumentException e) {
+				throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품명입니다.");
+			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 				//VendingMachinePrinter.printGetProductNameMessage();
 			}
@@ -55,8 +54,7 @@ public class InputReceiver {
 				//InputValidator.validateProduct(productInfo);
 				return parseProductInfo(parseEachProduct(productInfo));
 			} catch (NumberFormatException e) {
-				System.out.println("[ERROR] 가격과 수량은 숫자여야 합니다.");
-				//VendingMachinePrinter.printGetVendingMachineInfoMessage();
+				throw new IllegalArgumentException("[ERROR] 가격과 수량은 숫자여야 합니다.");
 			}catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 				//VendingMachinePrinter.printGetVendingMachineInfoMessage();
