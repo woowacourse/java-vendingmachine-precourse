@@ -52,6 +52,7 @@ public class InputView {
 			return checkValidMoney(inputMoney);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
+
 			return inputMoney(money);
 		}
 	}
