@@ -59,7 +59,15 @@ public class ProductBox {
 	}
 
 	public void sellProduct(String productName) {
-		findSoldProduct(productName).reduceCount();
+		if (hasProductToSellInProductBox(productName)) {
+			findSoldProduct(productName).reduceCount();
+			return;
+		}
+		throw new IllegalArgumentException("[ERROR] 입력한 구매 상품명이 상품 목록에 없다.");
+	}
+
+	private boolean hasProductToSellInProductBox(String productName) {
+		return productBox.stream().anyMatch(product -> product.isSameName(productName));
 	}
 
 	public int giveSoldProductPrice(String productName) {
@@ -72,4 +80,5 @@ public class ProductBox {
 			.collect(Collectors.toList())
 			.get(0);
 	}
+
 }
