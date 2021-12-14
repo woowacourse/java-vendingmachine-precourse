@@ -1,5 +1,6 @@
 package vendingmachine.view.input.validator;
 
+import vendingmachine.domain.machine.money.MoneyCondition;
 import vendingmachine.exception.MoneyNotMultipleOfTenMessageException;
 import vendingmachine.exception.MoneyNotPositiveMessageException;
 
@@ -29,7 +30,7 @@ public class MoneyValidator {
 	}
 
 	private boolean isNumberNotMultipleOfTen(int number) {
-		return (number % 10 != 0);
+		return MoneyCondition.isNotDivide(number);
 	}
 
 }

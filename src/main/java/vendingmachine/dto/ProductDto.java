@@ -1,6 +1,7 @@
 package vendingmachine.dto;
 
 import vendingmachine.domain.machine.product.Product;
+import vendingmachine.domain.machine.money.MoneyCondition;
 import vendingmachine.exception.PriceNotMoreThanMinimumAmountMessageException;
 import vendingmachine.exception.PriceNotMultipleOfTenMessageException;
 import vendingmachine.exception.QuantityNotPositiveMessageException;
@@ -25,13 +26,13 @@ public class ProductDto {
 	}
 
 	private void validatePriceIsMoreThanMinimumAmount(int price) {
-		if (price < 100) {
+		if (MoneyCondition.isTooSmall(price)) {
 			throw new PriceNotMoreThanMinimumAmountMessageException();
 		}
 	}
 
 	private void validatePriceIsMultipleOfTen(int price) {
-		if (price % 10 != 0) {
+		if (MoneyCondition.isNotDivide(price)) {
 			throw new PriceNotMultipleOfTenMessageException();
 		}
 	}
