@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import java.util.Map;
+
 public class VendingMachine {
     private static final int ZERO = 0;
     private static final String EXCEED_REST_AMOUNT_MESSAGE = "잔액을 초과하여 구매할 수 없습니다.";
@@ -14,6 +16,10 @@ public class VendingMachine {
         validateDividedIntoSemicolon(productsString);
         this.products = new Products(productsString);
         this.holdingCoins = new Coins(holdingMoney);
+    }
+
+    public String toStringHoldingCoins() {
+        return holdingCoins.toString();
     }
 
     private void validateDividedIntoSemicolon(String productsString) {

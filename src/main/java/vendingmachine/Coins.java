@@ -2,14 +2,19 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static vendingmachine.Coin.*;
 
 public class Coins {
     private static final int ZERO = 0;
+    private static final String COIN_COUNT_UNIT = "개";
+    private static final String COIN_UNIT_AND_DASH = "원 - ";
+    private static final String TO_NEXT_LINE = "\r\n";
 
     private final Map<Coin, Integer> coins = new HashMap<>();
 
@@ -24,7 +29,7 @@ public class Coins {
         coins.put(COIN_10, coin10Count);
     }
 
-    public Map<Coin, Integer> getCoins() {
+    public Map<Coin, Integer> get() {
         return coins;
     }
 
@@ -39,6 +44,24 @@ public class Coins {
         }
 
         return change;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        List<Coin> sortedCoins = sortCoinsReversed();
+
+        sortedCoins.forEach(coin -> sb.append(coin.getAmount()).append(COIN_UNIT_AND_DASH)
+                        .append(coins.get(coin)).append(COIN_COUNT_UNIT)
+                        .append(TO_NEXT_LINE));
+
+        return sb.toString();
+    }
+
+    private List<Coin> sortCoinsReversed() {
+        return coins.keySet().stream()
+                .sorted(Comparator.comparing(Coin::getAmount).reversed())
+                .collect(Collectors.toList());
     }
 
     private void addChanges(Map<Coin, Integer> change, Coin coin, int coinCount) {
