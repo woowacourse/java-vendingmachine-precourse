@@ -13,11 +13,8 @@ import vendingmachine.utils.Message;
 public class InputView {
 	private static final String REGEX = "\\[[a-zA-Z0-9가-힣]+,\\d+,\\d+]";
 
-	private static final int ITEM_NAME_IDX = 0;
-	private static final int ITEM_PRICE_IDX = 1;
-	private static final int ITEM_STOCK_IDX = 2;
-	private static final char CHAR_NUMERIC_MIN = '0';
-	private static final char CHAR_NUMERIC_MAX = '9';
+	private static final char CHAR_NUMERIC_VALIDATE_MIN = '0';
+	private static final char CHAR_NUMERIC_VALIDATE_MAX = '9';
 	private static final String ZERO_HOLDING_MONEY = "0";
 	private static final int DIVIDE_VALUE = 10;
 
@@ -87,9 +84,9 @@ public class InputView {
 		for (int i = 0; i < stringItemsArray.length; i++) {
 			eachValueOfProductArray = stringItemsArray[i].split(",");
 
-			String name = eachValueOfProductArray[ITEM_NAME_IDX];
-			int price = Integer.parseInt(eachValueOfProductArray[ITEM_PRICE_IDX]);
-			int stock = Integer.parseInt(eachValueOfProductArray[ITEM_STOCK_IDX]);
+			String name = eachValueOfProductArray[0];
+			int price = Integer.parseInt(eachValueOfProductArray[1]);
+			int stock = Integer.parseInt(eachValueOfProductArray[2]);
 
 			Item item = new Item(name, price, stock);
 			itemArrayList.add(item);
@@ -149,8 +146,8 @@ public class InputView {
 
 	public void nonNumericValidate(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
-			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_MIN || CHAR_NUMERIC_MAX < stringHoldingMoney.charAt(
-					i)) {
+			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_VALIDATE_MIN
+					|| CHAR_NUMERIC_VALIDATE_MAX < stringHoldingMoney.charAt(i)) {
 				throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
 			}
 		}
