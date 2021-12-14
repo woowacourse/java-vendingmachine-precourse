@@ -84,6 +84,7 @@ public class VendingMachineUI implements VendingMachine {
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
 				System.out.println(CHANGE_STRING);
+				System.out.println(goodsStackerInterface.getLeftChangeResult());
 				break;
 			}
 		}

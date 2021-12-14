@@ -32,7 +32,6 @@ public class GoodsStacker implements GoodsStackerInterface {
 			String tmpGoodsName = element.split(",")[0];
 			String tmpGoodsPriceString = element.split(",")[1];
 			String tmpGoodsCountString = element.split(",")[2];
-			//System.out.println(tmpGoodsName + tmpGoodsPriceString + tmpGoodsCountString);
 			if(!tmpGoodsPriceString.matches(NUMBER_REGEX)) {
 				return PRICE_INVALID;
 			}
@@ -105,6 +104,11 @@ public class GoodsStacker implements GoodsStackerInterface {
 	public boolean haveName(String userInputGoods) {
 		return vendingMachineStorage.haveName(userInputGoods);
 	}
+	@Override
+	public String getLeftChangeResult() {
+		LeftChangeCalculator leftChangeCalculator = new LeftChangeCalculator();
+		return leftChangeCalculator.calculate(vendingMachineStorage.getUserInputMoney(), vendingMachineStorage.getCoinMap());
+	}
 
 	private boolean isValidInputFormat(String[] goodsAndPriceStringList) {
 		for (String oneGoodsString : goodsAndPriceStringList) {
@@ -115,4 +119,5 @@ public class GoodsStacker implements GoodsStackerInterface {
 		}
 		return true;
 	}
+
 }

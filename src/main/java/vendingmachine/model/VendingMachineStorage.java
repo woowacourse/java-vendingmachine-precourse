@@ -51,4 +51,8 @@ public class VendingMachineStorage {
 		}
 		return false;
 	}
+
+	public HashMap<Integer, Integer> getCoinMap() {
+		return coinMap;
+	}
 }

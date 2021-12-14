@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 public interface GoodsStackerInterface {
 	boolean stackGoods(String userGoodsAndPriceInput);
+
 	int alignGoods();
+
 	void setUserInputMoney(int userInputMoney);
 
 	String getLeftMoneyString();
@@ -18,4 +20,6 @@ public interface GoodsStackerInterface {
 	void setCoinMap(HashMap<Integer, Integer> coinMap);
 
 	boolean haveName(String userInputGoods);
+
+	String getLeftChangeResult();
 }
