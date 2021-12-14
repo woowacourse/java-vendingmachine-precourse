@@ -1,4 +1,6 @@
-package vendingmachine.domain;
+package vendingmachine.domain.validation;
+
+import vendingmachine.domain.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,26 +8,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.StringTokenizer;
 
-public class Validation {
+public class Validator {
     private final int ZERO = 0;
     private final int FIRST = 1;
     private final int DIVISOR = 10;
     private final int MIN_PRICE = 100;
-    private String errorMessage;
+    private Exception exception;
 
-    public String getErrorMessage() {
-        return ErrorMessage.ERROR + errorMessage;
-    }
+    public Validator() {}
 
-    private void throwException(String errorMessage) {
-        this.errorMessage = errorMessage;
-        throw new IllegalArgumentException();
+    public Validator(Exception exception) {
+        this.exception = exception;
     }
 
     private void checkEmptyInput(String input) {
 
         if (input.trim().length() == ZERO) {
-            throwException(ErrorMessage.EMPTY_INPUT);
+            exception.throwException(ErrorMessage.EMPTY_INPUT);
         }
 
     }
@@ -33,7 +32,7 @@ public class Validation {
     private void checkBalanceOnlyNumber(String balance) {
 
         if (!balance.matches(Text.REGEX_NUMBER)) {
-            throwException(ErrorMessage.BALANCE_NOT_NUMBER);
+            exception.throwException(ErrorMessage.BALANCE_NOT_NUMBER);
         }
 
     }
@@ -41,7 +40,7 @@ public class Validation {
     private void checkBalanceRange(String balance) {
 
         if (Integer.parseInt(balance) % DIVISOR != ZERO) {
-            throwException(ErrorMessage.BALANCE_RANGE);
+            exception.throwException(ErrorMessage.BALANCE_RANGE);
         }
 
     }
@@ -63,7 +62,7 @@ public class Validation {
 
         if (itemInput.charAt(ZERO) == Text.SEMICOLON.charAt(ZERO)
                 || itemInput.charAt(lastIndex) == Text.SEMICOLON.charAt(ZERO)) {
-            throwException(ErrorMessage.ITEM_INPUT_FORM);
+            exception.throwException(ErrorMessage.ITEM_INPUT_FORM);
         }
 
     }
@@ -74,7 +73,7 @@ public class Validation {
         while (items.hasMoreTokens()) {
 
             if (!items.nextToken().matches(Text.REGEX_ITEM_FORM)) {
-                throwException(ErrorMessage.ITEM_INPUT_FORM);
+                exception.throwException(ErrorMessage.ITEM_INPUT_FORM);
             }
 
         }
@@ -85,7 +84,7 @@ public class Validation {
         String name = getItemElement(Text.REGEX_ITEM_NAME, item);
 
         if (name.trim().length() == ZERO) {
-            throwException(ErrorMessage.ITEM_NAME_ONLY_SPACE);
+            exception.throwException(ErrorMessage.ITEM_NAME_ONLY_SPACE);
         }
 
     }
@@ -94,7 +93,7 @@ public class Validation {
         String name = getItemElement(Text.REGEX_ITEM_NAME, item);
 
         if (name.trim().length() != name.length()) {
-            throwException(ErrorMessage.ITEM_NAME_SPACE_POSITION);
+            exception.throwException(ErrorMessage.ITEM_NAME_SPACE_POSITION);
         }
 
     }
@@ -107,7 +106,7 @@ public class Validation {
             String name = getItemElement(Text.REGEX_ITEM_NAME, items.nextToken());
 
             if (names.contains(name)) {
-                throwException(ErrorMessage.ITEM_NAME_OVERLAP);
+                exception.throwException(ErrorMessage.ITEM_NAME_OVERLAP);
             }
 
             names.add(name);
@@ -119,7 +118,7 @@ public class Validation {
         String price = getItemElement(Text.REGEX_ITEM_PRICE, item);
 
         if (!price.matches(Text.REGEX_NUMBER)) {
-            throwException(ErrorMessage.ITEM_PRICE_NOT_NUMBER);
+            exception.throwException(ErrorMessage.ITEM_PRICE_NOT_NUMBER);
         }
 
     }
@@ -128,7 +127,7 @@ public class Validation {
         int price = Integer.parseInt(getItemElement(Text.REGEX_ITEM_PRICE, item));
 
         if (price < MIN_PRICE || price % DIVISOR != ZERO) {
-            throwException(ErrorMessage.ITEM_PRICE_RANGE);
+            exception.throwException(ErrorMessage.ITEM_PRICE_RANGE);
         }
 
     }
@@ -137,7 +136,7 @@ public class Validation {
         String stock = getItemElement(Text.REGEX_ITEM_STOCK, item);
 
         if (!stock.matches(Text.REGEX_NUMBER) || Integer.parseInt(stock) == ZERO) {
-            throwException(ErrorMessage.ITEM_STOCK_FORM);
+            exception.throwException(ErrorMessage.ITEM_STOCK_FORM);
         }
 
     }
@@ -160,7 +159,7 @@ public class Validation {
     private void checkInsertMoneyForm(String insertMoney) {
 
         if (!insertMoney.matches(Text.REGEX_NUMBER) || Integer.parseInt(insertMoney) % DIVISOR != ZERO) {
-            throwException(ErrorMessage.INSERT_MONEY_FORM);
+            exception.throwException(ErrorMessage.INSERT_MONEY_FORM);
         }
 
     }

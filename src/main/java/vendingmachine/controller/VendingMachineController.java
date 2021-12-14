@@ -3,18 +3,21 @@ package vendingmachine.controller;
 import vendingmachine.domain.Balance;
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.Validation;
+import vendingmachine.domain.validation.Exception;
+import vendingmachine.domain.validation.Validator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-    private final Validation validator;
+    private final Exception exception;
+    private final Validator validator;
     private final Balance balance;
     private final Items items;
     private Money money;
 
     public VendingMachineController() {
-        validator = new Validation();
+        exception = new Exception();
+        validator = new Validator(exception);
         balance = new Balance();
         items = new Items();
     }
@@ -34,7 +37,7 @@ public class VendingMachineController {
             validator.isValidBalanceInput(balanceInput);
             balance.calculateBalanceCoin(balanceInput);
         } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(validator.getErrorMessage());
+            OutputView.printErrorMessage(exception.getErrorMessage());
             receiveVendingMachineBalance();
         }
 
@@ -52,7 +55,7 @@ public class VendingMachineController {
             validator.isValidItemInput(itemInput);
             items.registerItem(itemInput);
         } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(validator.getErrorMessage());
+            OutputView.printErrorMessage(exception.getErrorMessage());
             receiveItemInformation();
         }
 
@@ -66,7 +69,7 @@ public class VendingMachineController {
             validator.isValidInsertMoneyInput(insertMoney);
             money = new Money(insertMoney);
         } catch (IllegalArgumentException e) {
-            OutputView.printErrorMessage(validator.getErrorMessage());
+            OutputView.printErrorMessage(exception.getErrorMessage());
             receiveInsertMoney();
         }
 

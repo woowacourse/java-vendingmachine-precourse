@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.domain.validation;
 
 public class ErrorMessage {
     public static final String ERROR = "[ERROR] ";
