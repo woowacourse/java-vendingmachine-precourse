@@ -10,4 +10,16 @@ public class Goods {
 		this.price = price;
 		this.count = count;
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public int getPrice() {
+		return price;
+	}
 }

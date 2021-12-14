@@ -21,6 +21,7 @@ public class VendingMachineUI implements VendingMachine {
 	private VendingMachineStatus vendingMachineStatus = VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE;
 	private int moneyInVendingMachine = 0;
 	private PrintHandler printHandler = new PrintHandler();
+	private GoodsStackerInterface goodsStackerInterface = new GoodsStacker();
 
 	@Override
 	public void start() {
@@ -37,17 +38,32 @@ public class VendingMachineUI implements VendingMachine {
 				} catch (InvalidUserInputException exception) {
 
 				}
+
 				if (isValidInput) {
+					int userAmount = Integer.parseInt(userInput);
+					if (!goodsStackerInterface.isEnoughMoney()) {
+						vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+					}
+					goodsStackerInterface.setUserInputMoney(userAmount);
 					vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
 				}
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_USER_LEFT_MONEY) {
-
+				System.out.println(goodsStackerInterface.getLeftMoneyString());
+				vendingMachineStatus = VendingMachineStatus.INPUT_USER_GOODS;
+				if (!goodsStackerInterface.isEnoughMoney()) {
+					vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+				}
 			}
 			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_GOODS) {
-
+				System.out.println(PROMPT_USER_INPUT_GOODS);
+				String userInputGoods = readLine();
+				if (!goodsStackerInterface.buyGoods(userInputGoods)) {
+					vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+				}
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
+				System.out.println(CHANGE_STRING);
 				break;
 			}
 		}
@@ -68,7 +84,7 @@ public class VendingMachineUI implements VendingMachine {
 
 	private void proceedInputGoodsAndPricesInVendingMachine() {
 		String goodsAndPricesString = inputUserGoodsAndPricesString();
-		GoodsStackerInterface goodsStackerInterface = new GoodsStacker();
+
 		boolean isValidGoodsAndPriceFormat = isValidGoodsAndPriceFormat(goodsAndPricesString,
 			goodsStackerInterface);
 		int isOneGoodsValidInputFormat = getIsOneGoodsValidInputFormat(goodsStackerInterface);

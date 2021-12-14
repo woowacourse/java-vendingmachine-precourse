@@ -8,10 +8,12 @@ import java.util.List;
 import vendingmachine.controller.GoodsStackerInterface;
 import vendingmachine.exception.UserGoodsInvalidFormatException;
 import vendingmachine.model.Goods;
+import vendingmachine.model.VendingMachineStorage;
 
 public class GoodsStacker implements GoodsStackerInterface {
 	private List<String> goods = new ArrayList<>();
 	private List<Goods> goodsList = new ArrayList<>();
+	private VendingMachineStorage vendingMachineStorage = new VendingMachineStorage();
 
 	@Override
 	public boolean stackGoods(String userGoodsAndPriceInput) {
@@ -36,10 +38,46 @@ public class GoodsStacker implements GoodsStackerInterface {
 			if(!tmpGoodsCountString.matches(NUMBER_REGEX)) {
 				return COUNT_INVALID;
 			}
-			Goods tmpGoods = new Goods(element.split(",")[0], Integer.parseInt(element.split(",")[1]), Integer.parseInt(element.split(",")[2]));
+			Goods tmpGoods = new Goods(tmpGoodsName, Integer.parseInt(tmpGoodsPriceString), Integer.parseInt(tmpGoodsCountString));
 			goodsList.add(tmpGoods);
 		}
+		vendingMachineStorage.setGoodsList(goodsList);
 		return ONE_GOODS_VALID;
+	}
+
+	@Override
+	public void setUserInputMoney(int userInputMoney) {
+		vendingMachineStorage.setUserInputMoney(userInputMoney);
+	}
+
+	@Override
+	public String getLeftMoneyString() {
+		String leftMoneyString = "";
+		leftMoneyString += PROMPT_SHOW_INSERTED_MONEY;
+		leftMoneyString += vendingMachineStorage.getUserInputMoney();
+		leftMoneyString += WON_STRING;
+
+		return leftMoneyString;
+	}
+
+	@Override
+	public boolean buyGoods(String userInputGoods) {
+		int letfCount = 0;
+		for (Goods goods: vendingMachineStorage.getGoodsList()) {
+			letfCount += goods.getCount();
+		}
+		if (letfCount == 0) {
+			return false;
+		}
+		for (Goods goods: vendingMachineStorage.getGoodsList()) {
+			letfCount += goods.getCount();
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isEnoughMoney() {
+		return vendingMachineStorage.getMinAmount() <= this.vendingMachineStorage.getUserInputMoney();
 	}
 
 	private boolean isValidInputFormat(String[] goodsAndPriceStringList) {
