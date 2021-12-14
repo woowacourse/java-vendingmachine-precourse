@@ -59,25 +59,20 @@ public class VendingMachine {
     }
 
     private void generateRandomCoinBasedOnAsset(int asset) {
-        Set<Coin> coins = coinBox.keySet();
+        List<Integer> coins = Arrays.stream(Coin.values()).map(Coin::getCoinValue).collect(Collectors.toList());
         while (asset > 0) {
-            for (Coin coin : coins) {
-                int amount = coin.getCoinValue();
-                int maxCoinCount = asset / amount;
-                List<Integer> availableNumbers = makeAvailableNumbers(maxCoinCount);
-                int randomCoinCount = Randoms.pickNumberInList(availableNumbers);
-                asset -= amount * randomCoinCount;
-                coinBox.put(coin, randomCoinCount + coinBox.get(coin));
+            int randomCoin = Randoms.pickNumberInList(coins);
+            if (isAvailableCoin(asset, randomCoin)) {
+                asset -= randomCoin;
+                Coin generatedCoin = Arrays.stream(Coin.values()).filter(coin -> randomCoin == coin.getCoinValue()).findFirst()
+                    .orElseThrow(IllegalArgumentException::new);
+                coinBox.put(generatedCoin, coinBox.get(generatedCoin) + 1);
             }
         }
     }
 
-    private List<Integer> makeAvailableNumbers(int maxCoinCount) {
-        List<Integer> tempNumbers = new ArrayList<>();
-        for (int i = 0; i <= maxCoinCount; i++) {
-            tempNumbers.add(i);
-        }
-        return tempNumbers;
+    private boolean isAvailableCoin(int asset, int randomCoin) {
+        return asset >= randomCoin;
     }
 
     private void collectProducts(List<String> rawProducts) {
