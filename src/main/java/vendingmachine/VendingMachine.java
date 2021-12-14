@@ -1,8 +1,5 @@
 package vendingmachine;
 
-import static java.util.Arrays.asList;
-
-import camp.nextstep.edu.missionutils.Console;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,9 +14,13 @@ public class VendingMachine {
 
     Map<Coin, Integer> coinBox;
     List<Product> products;
+    Speaker speaker;
+    Touchpad touchpad;
 
     public VendingMachine() {
         this.coinBox = new LinkedHashMap<>();
+        this.speaker = new Speaker();
+        this.touchpad = new Touchpad();
         List<Coin> sortedCoins = Arrays.stream(Coin.values()).sorted().collect(Collectors.toList());
         for (Coin coin : sortedCoins) {
             coinBox.put(coin, 0);
@@ -27,31 +28,32 @@ public class VendingMachine {
     }
 
     public void setBaseAsset() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        int asset = Integer.parseInt(Console.readLine());
+        speaker.requestVendingMachineAsset();
+        int asset = touchpad.insertVendingMachineAsset();
         generateRandomCoinBasedOnAsset(asset);
-        announceCoinStock();
+        speaker.announceCoinStock(coinBox);
     }
 
     public void setProducts() {
         products = new ArrayList<>();
-        System.out.println("상품명과 가격, 수량을 입력해 주세요. [상품명,가격,수량];[,,] 형태");
-        List<String> rawProducts = asList(Console.readLine().split(";"));
+        speaker.requestProducts();
+        List<String> rawProducts = touchpad.inputProducts();
+        ;
         collectProducts(rawProducts);
     }
 
     public void sellProducts() {
-        System.out.println("투입 금액을 입력해 주세요.");
-        int insertedMoney = Integer.parseInt(Console.readLine());
+        speaker.announceInsertMoney();
+        int insertedMoney = touchpad.insertMoney();
         while (true) {
-            System.out.println("투입 금액: " + insertedMoney + "원");
+            speaker.announceBalance(insertedMoney);
             if (!purchasePossible(insertedMoney)) {
-                System.out.println("잔돈");
+                speaker.announceChanges();
                 changeMoney(insertedMoney);
                 break;
             }
-            System.out.println("구매할 상품명을 입력해 주세요.");
-            String wantedProduct = Console.readLine();
+            speaker.requestPurchaseProduct();
+            String wantedProduct = touchpad.purchaseProduct();
             insertedMoney -= sellProduct(wantedProduct);
         }
     }
@@ -78,18 +80,6 @@ public class VendingMachine {
         return tempNumbers;
     }
 
-    private void announceCoinStock() {
-        System.out.println("\n자판기가 보유한 동전");
-        Set<Coin> coins = coinBox.keySet();
-        for (Coin coin : coins) {
-            System.out.println(coin.getCoinValue() + "원" + " - " + coinBox.get(coin) + "개");
-        }
-    }
-
-    private String removeSquareBrackets(String rawProduct) {
-        return rawProduct.substring(1, rawProduct.length() - 1);
-    }
-
     private void collectProducts(List<String> rawProducts) {
         for (int i = 0; i < rawProducts.size(); i++) {
             String rawProduct = removeSquareBrackets(rawProducts.get(i));
@@ -104,6 +94,10 @@ public class VendingMachine {
                 setProducts();
             }
         }
+    }
+
+    private String removeSquareBrackets(String rawProduct) {
+        return rawProduct.substring(1, rawProduct.length() - 1);
     }
 
     private void validatePrice(Integer productPrice) {
@@ -143,7 +137,7 @@ public class VendingMachine {
             if (coinCount * coin.getCoinValue() > insertedMoney) {
                 coinCount = insertedMoney / coin.getCoinValue();
             }
-            System.out.println(coin.getCoinValue() + "원 - " + coinCount + "개");
+            speaker.announceCoinAmount(coin, coinCount);
             insertedMoney -= coinCount * coin.getCoinValue();
         }
     }
