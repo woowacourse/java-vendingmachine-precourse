@@ -5,6 +5,7 @@ import java.util.Map;
 
 import vendingmachine.model.domain.Coin;
 import vendingmachine.model.domain.VendingMachine;
+import vendingmachine.model.service.VendingMachineService;
 import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.InputView;
@@ -17,6 +18,7 @@ public class VendingMachineController {
 	InputView inputView = new InputView();
 	OutputView outputView = new OutputView();
 	Validator validator = new Validator();
+	VendingMachineService vendingMachineService = new VendingMachineService();
 
 	public void runMachine() { //어플리케이션의 전체적인 실행 흐름 제어
 		String machineMoney = enterMachineMoney();
@@ -36,7 +38,7 @@ public class VendingMachineController {
 		while(true) {
 			try {
 				String products = enterMachineProduct();
-				vendingMachine.generateProduct(products);
+				vendingMachineService.generateProduct(vendingMachine, products);
 				break;
 			} catch(IllegalArgumentException error) {
 				System.out.println(error.getMessage());
@@ -50,7 +52,7 @@ public class VendingMachineController {
 		while (vendingMachine.end()) {
 			try {
 				String productName = enterBuyingProduct();
-				vendingMachine.purchase(productName);
+				vendingMachineService.purchase(vendingMachine, productName);
 				outputView.printInsertMoney(vendingMachine.getInputMoney());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());

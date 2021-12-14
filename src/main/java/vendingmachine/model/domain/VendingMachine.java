@@ -1,17 +1,11 @@
 package vendingmachine.model.domain;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.model.domain.Coin;
-import vendingmachine.model.domain.Product;
-import vendingmachine.util.Constant;
-import vendingmachine.validator.Validator;
 
 public class VendingMachine {
 	private int inputMoney;
@@ -26,8 +20,20 @@ public class VendingMachine {
 		return this.coinMap;
 	}
 
+	public List<Product> getProductList() {
+		return this.productList;
+	}
+
 	public void initInputMoney(int inputMoney) {
 		this.inputMoney = inputMoney;
+	}
+
+	public void initProductList(List<Product> productList) {
+		this.productList = productList;
+	}
+
+	public void calculateInputMoneyAfterPurchase(int productPrice) {
+		this.inputMoney -= productPrice;
 	}
 
 	public void generateCoin(int ownMoney) {
@@ -37,7 +43,7 @@ public class VendingMachine {
 		while (ownMoney > 0) {
 			int coinAmount = Randoms.pickNumberInList(coinAmountList);
 			if (coinAmount <= ownMoney) {
-				coinMap.put(Coin.parse(coinAmount), coinMap.get(Coin.parse(coinAmount))+1);
+				coinMap.put(Coin.parse(coinAmount), coinMap.get(Coin.parse(coinAmount)) + 1);
 				ownMoney = ownMoney - coinAmount;
 			}
 		}
@@ -48,40 +54,6 @@ public class VendingMachine {
 		coinAmountList.forEach(coinAmount -> {
 			coinMap.put(Coin.parse(coinAmount), 0);
 		});
-	}
-
-	public void generateProduct(String products) throws IllegalArgumentException {
-		this.productList = Arrays.stream(products.split(Constant.PRODUCT_SEPARATOR))
-			.map(Product::createProduct)
-			.collect(Collectors.toList());
-
-		List<String> distinctProductList = productList
-			.stream()
-			.map(Product::getName)
-			.distinct()
-			.collect(Collectors.toList());
-
-		Validator.validateProductList(distinctProductList, productList);
-	}
-
-	public void removeProduct() {
-		List<Product> productListToDelete = this.productList
-			.stream()
-			.filter(it -> it.getAmount() == 0)
-			.collect(Collectors.toList());
-
-		productListToDelete.forEach(productList::remove);
-	}
-
-	public void purchase(String productName) {
-		Product product = productList.stream()
-			.filter(it -> it.getName().equals(productName))
-			.findFirst()
-			.map(Product::purchaseProduct)
-			.orElseThrow(() -> new IllegalArgumentException(Validator.ERROR_NOT_EXISTED_PRODUCT));
-
-		removeProduct();
-		inputMoney -= product.getPrice();
 	}
 
 	public boolean end() {

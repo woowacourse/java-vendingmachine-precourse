@@ -9,17 +9,14 @@ public class Product {
 	private int price;
 	private int amount;
 
-	public static Product createProduct(String productInformation) throws IllegalArgumentException {
-		Product product = new Product();
-		productInformation = productInformation.replace(Constant.OPEN_SQUARE_BRACKET, "").replace(Constant.CLOSING_SQUARE_BRACKET, "");
-		String[] productInfo = productInformation.split(Constant.PRODUCT_DETAIL_SEPARATOR);
+	public Product() {
 
-		Validator.validateProduct(productInfo);
+	}
 
-		product.name = productInfo[0];
-		product.price = Utils.moneyConverter(productInfo[1]);
-		product.amount = Integer.parseInt(productInfo[2]);
-		return product;
+	public Product(String name, int price, int amount) {
+		this.name = name;
+		this.price = price;
+		this.amount = amount;
 	}
 
 	public String getName() {

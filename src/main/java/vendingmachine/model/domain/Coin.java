@@ -5,6 +5,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.validator.Validator;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -32,6 +34,6 @@ public enum Coin {
         return Arrays.stream(values())
             .filter(coin -> amount == coin.amount)
             .findFirst()
-            .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 코인입니다."));
+            .orElseThrow(() -> new IllegalArgumentException(Validator.ERROR_NOT_EXISTED_COIN));
     }
 }
