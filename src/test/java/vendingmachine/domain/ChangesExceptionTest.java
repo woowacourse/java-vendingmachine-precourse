@@ -1,8 +1,8 @@
 package vendingmachine.domain;
 
-import static vendingmachine.Error.*;
-
 import java.util.ArrayList;
+
+import static vendingmachine.Error.*;
 
 public class ChangesExceptionTest extends BasicTest {
 	public String moneyOfChanges;

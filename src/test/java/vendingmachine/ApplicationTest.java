@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.ChangesExceptionTest;
+import vendingmachine.domain.MoneyExceptionTest;
 import vendingmachine.domain.ProductExceptionTest;
 import vendingmachine.domain.SuccessfulTest;
 
@@ -14,6 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static vendingmachine.domain.SuccessfulTest.*;
 import static vendingmachine.domain.ChangesExceptionTest.*;
 import static vendingmachine.domain.ProductExceptionTest.*;
+import static vendingmachine.domain.MoneyExceptionTest.*;
 
 import java.util.ArrayList;
 
@@ -27,14 +29,9 @@ class ApplicationTest extends NsTest {
             if (testCase == null) {
                 continue;
             }
-
             assertRandomNumberInListTest(
-                () -> {
-                    run(testCase.input);
-                    assertThat(output()).contains(
-                        testCase.output
-                    );
-                },
+                () -> { run(testCase.input);
+                        assertThat(output()).contains(testCase.output); },
                 testCase.coin, testCase.coins
             );
         }
@@ -47,12 +44,9 @@ class ApplicationTest extends NsTest {
             if (testCase == null) {
                 continue;
             }
-
             assertSimpleTest(
-                () -> {
-                    runException(testCase.moneyOfChanges);
-                    assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage);
-                }
+                () -> { runException(testCase.moneyOfChanges);
+                        assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage); }
             );
         }
     }
@@ -64,12 +58,9 @@ class ApplicationTest extends NsTest {
             if (testCase == null) {
                 continue;
             }
-
             assertSimpleTest(
-                () -> {
-                    runException(testCase.moneyOfChanges, testCase.products);
-                    assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage);
-                }
+                () -> { runException(testCase.moneyOfChanges, testCase.products);
+                        assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage); }
             );
         }
     }
