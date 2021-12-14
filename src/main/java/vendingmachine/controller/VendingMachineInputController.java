@@ -9,6 +9,16 @@ import vendingmachine.models.Product;
 import vendingmachine.utils.InputtedDataValidation;
 import vendingmachine.view.VendingMachineInput;
 
+/**
+ * <h1>데이터를 입력받고 검증하는 클래스</h1>
+ * 입력이 유효하지 않다면 다시 에러를 띄우고 다시 입력받는다.
+ * 입력이 유효하다면 입력 받은 데이터를 알맞은 타입으로 파싱해 반환한다
+ *
+ * @author yunki kim
+ * @version 1.0
+ * @since 2021-12-14(V1.0)
+ * */
+
 public class VendingMachineInputController {
 
 	private final VendingMachineInput vendingMachineInput;
