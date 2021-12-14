@@ -40,7 +40,7 @@ public class VendingMachine {
 	}
 
 	public void sellProduct(String productName) {
-		productBox.sellProduct(productName);
+		productBox.sellProduct(productName, insertedMoneyBox.getMoney());
 		insertedMoneyBox.reduceMoney(productBox.giveSoldProductPrice(productName));
 	}
 

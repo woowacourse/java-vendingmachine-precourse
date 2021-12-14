@@ -13,6 +13,7 @@ public class ProductBox {
 	private static final int PRODUCT_COUNT_INDEX = 2;
 	private static final String HAS_DUPLICATE_PRODUCT_NAME_ERROR_MESSAGE = "[ERROR] 입력한 자판기 상품 중 상품명이 중복 되는 상품이 있다.";
 	private static final String NOT_HAS_PRODUCT_NAME_ERROR_MESSAGE = "[ERROR] 입력한 구매 상품명이 상품 목록에 없다.";
+	private static final String NOT_HAS_ENOUGH_MONEY_ERROR_MESSAGE = "[ERROR] 입력한 구매 상품명을 살 돈이 부족하다.";
 
 	private final List<Product> productBox;
 
@@ -63,8 +64,9 @@ public class ProductBox {
 		return productsInStock.stream().min(comparatorByPrice).orElseThrow(NoSuchElementException::new).getPrice();
 	}
 
-	public void sellProduct(String productName) {
-		if (hasProductNameToSellInProductBox(productName)) {
+	public void sellProduct(String productName, int insertedMoney) {
+		if (hasProductNameToSellInProductBox(productName) && hasEnoughMoneyToBuySameNameProduct(productName,
+			insertedMoney)) {
 			findProductToSell(productName).reduceStock();
 			return;
 		}
@@ -74,6 +76,14 @@ public class ProductBox {
 	private boolean hasProductNameToSellInProductBox(String productName) {
 		if (productBox.stream().noneMatch(product -> product.hasSameName(productName))) {
 			throw new IllegalArgumentException(NOT_HAS_PRODUCT_NAME_ERROR_MESSAGE);
+		}
+		return true;
+	}
+
+	private boolean hasEnoughMoneyToBuySameNameProduct(String productName, int insertedMoney) {
+		int productPriceToSell = findProductToSell(productName).getPrice();
+		if (productPriceToSell > insertedMoney) {
+			throw new IllegalArgumentException(NOT_HAS_ENOUGH_MONEY_ERROR_MESSAGE);
 		}
 		return true;
 	}
