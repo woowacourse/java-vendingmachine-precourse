@@ -37,6 +37,9 @@ public class OutputView {
 	public static void printChange(Map<Integer, Integer> changes) {
 		System.out.println(CHANGE_GUIDE_MESSEAGE);
 		for (Integer coin : changes.keySet()) {
+			if (changes.get(coin) == 0) {
+				continue;
+			}
 			System.out.print(coin);
 			System.out.print(HOLDING_COINS_CONNECTOR);
 			System.out.print(changes.get(coin));
