@@ -11,8 +11,9 @@ public class VendingMachineConstant {
     public static final String INVALID_INPUT_POSITIVE_NUMBER_MESSAGE = "금액은 양수만 가능합니다.";
     public static final String INVALID_INPUT_MULTIPLE_OF_TEN_MESSAGE = "자판기 보유 금액의 최소 단위는 10원입니다.";
 
-    public static final String COIN_UNIT = "원 - ";
-    public static final String COUNT_UNIT = "개";
+    public static final String HYPHEN = " - ";
+    public static final String UNIT_OF_COIN = "원";
+    public static final String UNIT_OF_COUNT = "개";
 
     public static final String RESULT_VENDING_MACHINE_COIN_MESSAGE = "\n자판기가 보유한 동전";
 }
