@@ -4,7 +4,6 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -26,16 +25,6 @@ public class VendingMachineController {
 		Map<Coin, Integer> changes = getChanges();
 		outputView.printChanges(changes);
 
-	}
-
-	private Money giveMoney() {
-		try {
-			outputView.printInsertMoneyRequest();
-			return new Money(inputView.scanAmount());
-		} catch (IllegalArgumentException e) {
-			outputView.printError(e.getMessage());
-			return giveMoney();
-		}
 	}
 
 	private void sellItem() {

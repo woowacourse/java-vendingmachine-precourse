@@ -20,7 +20,7 @@ public class Items {
 		return Collections.unmodifiableList(items);
 	}
 
-	public Item findItemByName(final String name, final int money) {
+	public Item findItemByName(final String name) {
 		return items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException(CANNOT_FIND_NAME_ERROR));
