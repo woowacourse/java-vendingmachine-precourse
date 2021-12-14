@@ -8,20 +8,14 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Customer;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.system.Validation;
-import vendingmachine.system.ValidationImplementation;
+import vendingmachine.system.message.SystemErrorMessage;
+import vendingmachine.system.message.SystemInputMessage;
+import vendingmachine.system.validation.Validation;
+import vendingmachine.system.validation.ValidationImplementation;
 
 import camp.nextstep.edu.missionutils.Console;
 
 public class VendingMachineSystemController {
-    private static final String INPUT_HOLDING_MONEY_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-    private static final String ERROR_INPUT_HOLDING_MONEY_MESSAGE = "[ERROR] 금액은 100 이상 그리고 1억 이하의 숫자이여야 하며 10으로 나누어 떨어져야 합니다.";
-    private static final String INPUT_PRODUCT_PRICE_STOCK_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
-    private static final String ERROR_PRODUCT_PRICE_STOCK_MESSAGE = "[ERROR] [{상품명},{가격},{수량}] 형식으로 입력하셔야 하며 공백이 포함되선 안됩니다. 상품 구분자는 ';' 입니다.";
-    private static final String INPUT_USER_INSERT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";
-    private static final String ERROR_USER_INSERT_MONEY_MESSAGE = "[ERROR] 투입 금액은 1억 이하의 숫자이여야 하며 10으로 나누어 떨어져야 합니다.";
-    private static final String INPUT_PRODUCT_NAME_TO_BUY_MESSAGE = "구매할 상품명을 입력해주세요.";
-    private static final String ERROR_PRODUCT_NAME_TO_BUY_MESSAGE = "[ERROR] 상품명은 한글로 입력해야 합니다. 또는 존재하지 않습니다.";
     private final Validation validation;
 
     public VendingMachineSystemController() {
@@ -51,11 +45,11 @@ public class VendingMachineSystemController {
         String holdingMoney = "-1";
         do {
             try {
-                printConsoleMessage(INPUT_HOLDING_MONEY_MESSAGE);
+                printConsoleMessage(SystemInputMessage.INPUT_HOLDING_MONEY_MESSAGE.getMessage());
                 holdingMoney = Console.readLine();
                 isValidInput = validation.isValidHoldingMoney(holdingMoney);
             } catch (IllegalArgumentException e) {
-                printConsoleMessage(ERROR_INPUT_HOLDING_MONEY_MESSAGE);
+                printConsoleMessage(SystemErrorMessage.ERROR_INPUT_HOLDING_MONEY_MESSAGE.getMessage());
                 isValidInput = false;
             }
         } while (!isValidInput);
@@ -67,11 +61,11 @@ public class VendingMachineSystemController {
         String productNameAndPriceAndStocks = "";
         do {
             try {
-                printConsoleMessage(INPUT_PRODUCT_PRICE_STOCK_MESSAGE);
+                printConsoleMessage(SystemInputMessage.INPUT_PRODUCT_PRICE_STOCK_MESSAGE.getMessage());
                 productNameAndPriceAndStocks = Console.readLine();
                 isValidInput = validation.isValidProductNameAndPriceAndStock(productNameAndPriceAndStocks);
             } catch (IllegalArgumentException e) {
-                printConsoleMessage(ERROR_PRODUCT_PRICE_STOCK_MESSAGE);
+                printConsoleMessage(SystemErrorMessage.ERROR_PRODUCT_PRICE_STOCK_MESSAGE.getMessage());
                 isValidInput = false;
             }
         } while (!isValidInput);
@@ -101,12 +95,12 @@ public class VendingMachineSystemController {
         int userInputMoney = 0;
         do {
             try {
-                printConsoleMessage(INPUT_USER_INSERT_MONEY_MESSAGE);
+                printConsoleMessage(SystemInputMessage.INPUT_USER_INSERT_MONEY_MESSAGE.getMessage());
                 String userInsertMoney = Console.readLine();
                 isValidInput = validation.isValidUserInsertMoney(userInsertMoney);
                 userInputMoney = toInteger(userInsertMoney);
             } catch (IllegalArgumentException e) {
-                printConsoleMessage(ERROR_USER_INSERT_MONEY_MESSAGE);
+                printConsoleMessage(SystemErrorMessage.ERROR_USER_INSERT_MONEY_MESSAGE.getMessage());
                 isValidInput = false;
             }
         } while (!isValidInput);
@@ -118,11 +112,11 @@ public class VendingMachineSystemController {
         String productNameToBuy = "";
         do {
             try {
-                printConsoleMessage(INPUT_PRODUCT_NAME_TO_BUY_MESSAGE);
+                printConsoleMessage(SystemInputMessage.INPUT_PRODUCT_NAME_TO_BUY_MESSAGE.getMessage());
                 productNameToBuy = Console.readLine();
                 isValidInput = validation.isValidProductNameToBuy(productNameToBuy);
             } catch (IllegalArgumentException e) {
-                printConsoleMessage(ERROR_PRODUCT_NAME_TO_BUY_MESSAGE);
+                printConsoleMessage(SystemErrorMessage.ERROR_PRODUCT_NAME_TO_BUY_MESSAGE.getMessage());
                 isValidInput = false;
             }
         } while (!isValidInput);

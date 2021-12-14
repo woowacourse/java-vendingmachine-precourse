@@ -1,4 +1,4 @@
-package vendingmachine.system;
+package vendingmachine.system.validation;
 
 public interface Validation {
 
