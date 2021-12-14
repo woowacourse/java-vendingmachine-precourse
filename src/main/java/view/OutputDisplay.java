@@ -7,6 +7,7 @@ public class OutputDisplay {
 	private static final String COUNT = "개";
 	private static final String INSERTED_MONEY = "투입 금액: ";
 	private static final String UNIT_OF_MONEY = "원";
+	private static final String CHANGE = "잔돈";
 	private static final String VENDING_MACHINE_HOLDING_COIN_MESSAGE = "자판기가 보유한 동전";
 
 	private OutputDisplay() {
@@ -30,6 +31,7 @@ public class OutputDisplay {
 	}
 
 	public static void showChangeAsCoins(Map<Integer, Integer> changeCoins) {
+		System.out.println(CHANGE);
 		for (Map.Entry<Integer, Integer> coin : changeCoins.entrySet()) {
 			showCoinInformation(coin.getKey(), coin.getValue());
 		}

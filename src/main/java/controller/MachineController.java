@@ -57,6 +57,7 @@ public class MachineController {
 	}
 
 	private static void refundChangeInMachine(VendingMachine vendingMachine) {
+		OutputDisplay.showNowInsertedMoney(vendingMachine.giveInsertedMoney());
 		OutputDisplay.showChangeAsCoins(vendingMachine.giveChangeCoins());
 	}
 }
