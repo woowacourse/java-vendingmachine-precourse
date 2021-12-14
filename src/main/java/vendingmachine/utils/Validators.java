@@ -46,7 +46,7 @@ public class Validators {
 
 	public static void checkPatternOfProduct(String inputValue, String delimeter, String regex) {
 		List<String> splitedInputValue = Arrays.stream(inputValue.split(delimeter))
-			.map(String::trim) // [콜라,1500,20]   [사이다,1000,10]
+			.map(String::trim)
 			.collect(Collectors.toList());
 
 		Pattern pattern = Pattern.compile(regex);
@@ -58,8 +58,6 @@ public class Validators {
 			throw new IllegalArgumentException("패턴에 맞지 않는 입력입니다.");
 		}
 
-		System.out.println("패턴은 통과"); // TODO 로그
-
 		boolean isValidAmount = splitedInputValue.stream()
 			.mapToInt(stringValue -> {
 				Matcher matcher = pattern.matcher(stringValue);
@@ -69,13 +67,13 @@ public class Validators {
 				}
 				return 0;
 			})
-			.allMatch(amount -> amount >= 100 && amount % 10 == 0); // 추출물검사
+			.allMatch(amount -> amount >= 100 && amount % 10 == 0);
 
 		if (!isValidAmount) {
 			throw new IllegalArgumentException("상품 가격은 100원부터 시작하며, 10원으로 나누어떨어져야 한다.");
 		}
 
-		System.out.println("금액 검사까지 통과");  // TODO 로그
+		System.out.println("금액 검사까지 통과");
 		boolean isValidCount = splitedInputValue.stream()
 			.mapToInt(stringValue -> {
 				Matcher matcher = pattern.matcher(stringValue);
@@ -85,13 +83,13 @@ public class Validators {
 				}
 				return 0;
 			})
-			.allMatch(count -> count >= 1); // 추출물검사
+			.allMatch(count -> count >= 1);
 
 		if (!isValidCount) {
 			throw new IllegalArgumentException("상품 갯수는 1개이상이어야한다.");
 		}
 
-		System.out.println("갯수 검사까지 통과");  // TODO 로그
+		System.out.println("갯수 검사까지 통과");
 
 		List<String> names = splitedInputValue.stream()
 			.map(stringValue -> {
@@ -113,13 +111,10 @@ public class Validators {
 
 	public static void checkValidProduct(String inputValue) {
 		VendingMachine vendingMachine = VendingMachine.getInstance();
-		//(1) 존재유무 : 찾다가 없으면 thr 됨.
 		Product product = vendingMachine.findProductByName(inputValue);
-		//(2) 1개이상 유무
 		if (!(vendingMachine.isProductAvailable(product))) {
 			throw new IllegalArgumentException("해당 상품은 현재 0개 입니다.");
 		}
-		//(3) 사용자 금액과 비교
 		if (!vendingMachine.isUserPurchasable(product)) {
 			throw new IllegalArgumentException("해당 상품의 가격이 보유중인 금액보다 비쌉니다.");
 		}
