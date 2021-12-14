@@ -1,5 +1,6 @@
 package vendingmachine.utils.validator;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -10,6 +11,8 @@ import vendingmachine.utils.message.ErrorMessage;
 public class ProductValidator {
 
 	private static final int OUT_OF_STOCK = 0;
+	private static final String COMMA = ",";
+	private static final int PRICE_INDEX = 1;
 
 	public static boolean checkIsValidToBuyProduct(VendingMachine vendingMachine, String productName) {
 		int currentMoney = vendingMachine.getInsertMoney().getCurrentMoney();
@@ -62,5 +65,7 @@ public class ProductValidator {
 		if (!Pattern.matches(regex, productInfo)) {
 			throw new IllegalArgumentException(ErrorMessage.ERROR_PRODUCT_INFO_IS_NOT_VALID.getText());
 		}
+		String productPrice = Arrays.asList(productInfo.split(COMMA)).get(PRICE_INDEX);
+		MoneyValidator.isValidToDivideByTen(productPrice);
 	}
 }

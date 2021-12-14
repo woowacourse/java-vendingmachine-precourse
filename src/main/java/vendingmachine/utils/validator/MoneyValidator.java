@@ -3,18 +3,15 @@ package vendingmachine.utils.validator;
 import static vendingmachine.utils.message.ErrorMessage.*;
 
 
-import java.util.List;
 import java.util.regex.Pattern;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 
 public class MoneyValidator {
 	private static final int EXPECTED_VALUE_WHEN_DIVIDING = 0;
 	private static final int ZERO_NUMBER = 0;
 
-	//투입금액
 	public static boolean checkIsValidInsertMoney(String input) {
 		try {
 			isNotBlank(input);
@@ -27,7 +24,6 @@ public class MoneyValidator {
 		return true;
 	}
 
-	//잔판기잔돈 총액
 	public static boolean checkIsValidTotalAmount(String input) {
 		try {
 			isNotBlank(input);
@@ -65,7 +61,6 @@ public class MoneyValidator {
 		}
 	}
 
-	// 상품 재고와 최소 가격 조건
 	public static boolean checkIsValidToBuyProduct(VendingMachine vendingMachine) {
 		if (vendingMachine.isValidToBuyProductWithCurrentMoney()) {
 			return vendingMachine.isValidProductStock();
