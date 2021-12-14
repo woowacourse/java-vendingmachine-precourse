@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import vendingmachine.utils.Constant;
 import vendingmachine.utils.Util;
 
 public class VendingMachine {
@@ -37,7 +38,7 @@ public class VendingMachine {
 	public String generateCoins() {
 		int fisrtInsertedAmount = this.machineMoney.toInt();
 
-		boolean canExchange = this.machineMoney.toInt() >= 10;
+		boolean canExchange = this.machineMoney.toInt() >= Constant.LOWEST_COIN_AMOUNT;
 
 		while (canExchange) {
 			int pickRangdomCoin = Util.pickRandomCoin(makeCoinKinds());
@@ -49,7 +50,7 @@ public class VendingMachine {
 			this.machineMoney.decreaseWith(pickRangdomCoin);
 			this.machineCoinCounter.plusCount(Coin.findByAmount(pickRangdomCoin));
 
-			canExchange = this.machineMoney.toInt() >= 10;
+			canExchange = this.machineMoney.toInt() >= Constant.LOWEST_COIN_AMOUNT;
 		}
 
 		return this.machineCoinCounter.toString();
@@ -104,7 +105,7 @@ public class VendingMachine {
 		CoinCounter userReturnCoinCounter = new CoinCounter();
 
 		this.machineCoinCounter.forEach((coin, count) -> {
-			IntStream.rangeClosed(1, count)
+			IntStream.rangeClosed(Constant.CONSTANT_ONE, count)
 				.forEach(i -> {
 					int coinAmount = coin.toAmount();
 					if (isReturnable()) {
@@ -119,12 +120,12 @@ public class VendingMachine {
 		this.machineMoney.increaseWith(this.userMoney.toInt());
 
 		if (!userReturnCoinCounter.isAnyAvailable()) {
-			return "";
+			return Constant.EMPTY_STRING;
 		}
 		return userReturnCoinCounter.toReturnCoinString();
 	}
 
 	private boolean isReturnable() {
-		return this.userMoney.toInt() >= 10 && this.machineCoinCounter.isAnyAvailable();
+		return this.userMoney.toInt() >= Constant.LOWEST_COIN_AMOUNT && this.machineCoinCounter.isAnyAvailable();
 	}
 }

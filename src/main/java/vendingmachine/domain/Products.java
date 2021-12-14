@@ -3,14 +3,18 @@ package vendingmachine.domain;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.utils.Constant;
+import vendingmachine.utils.Message;
+
 public class Products {
 	private List<Product> products;
 
 	public Products(List<String> list) {
 		this.products = list.stream()
 			.map(element -> {
-				String[] splited = element.split(",");
-				return Product.of(splited[0], splited[1], splited[2]);
+				String[] splited = element.split(Constant.PRODUCT_INFO_DELIMETER);
+				return Product.of(splited[Constant.CONSTANT_ZERO], splited[Constant.CONSTANT_ONE],
+					splited[Constant.CONSTANT_TWO]);
 			})
 			.collect(Collectors.toList());
 	}
@@ -27,13 +31,13 @@ public class Products {
 		return this.products.stream()
 			.filter(product -> product.toName().equals(Name.of(inputValue)))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("해당 상품은 존재하지 않습니다."));
+			.orElseThrow(() -> new IllegalArgumentException(Message.REQUEST_MESSAGE_THERE_IS_NO_PRODUCT));
 	}
 
 	public int findMinAmount() {
 		return this.products.stream()
 			.mapToInt(Product::toAmount)
 			.min()
-			.orElse(0);
+			.orElse(Constant.CONSTANT_ZERO);
 	}
 }

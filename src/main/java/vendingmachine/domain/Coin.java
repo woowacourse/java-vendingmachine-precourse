@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import java.util.Arrays;
 
+import vendingmachine.utils.Message;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -22,6 +24,6 @@ public enum Coin {
 		return Arrays.stream(Coin.values())
 			.filter(e -> e.amount == amount)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("해당하는 값이 없습니다."));
+			.orElseThrow(() -> new IllegalArgumentException(Message.REQUEST_MESSAGE_THERE_IS_NO_COIN));
 	}
 }

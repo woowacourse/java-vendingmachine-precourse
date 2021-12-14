@@ -6,6 +6,8 @@ import java.util.TreeMap;
 import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
+import vendingmachine.utils.Constant;
+
 public class CoinCounter {
 	private SortedMap<Coin, Integer> counterMap;
 
@@ -27,7 +29,8 @@ public class CoinCounter {
 	public String toString() {
 		return counterMap.keySet()
 			.stream()
-			.map(enumObjAsKey -> enumObjAsKey.toAmount() + "원 - " + counterMap.get(enumObjAsKey) + "개")
+			.map(enumObjAsKey -> enumObjAsKey.toAmount() + Constant.CONSTANT_WON + counterMap.get(enumObjAsKey)
+				+ Constant.CONSTANT_COUNT)
 			.collect(Collectors.joining(System.lineSeparator()));
 	}
 
@@ -35,14 +38,15 @@ public class CoinCounter {
 		return counterMap.keySet()
 			.stream()
 			.filter(key -> counterMap.get(key) > 0)
-			.map(enumObjAsKey -> enumObjAsKey.toAmount() + "원 - " + counterMap.get(enumObjAsKey) + "개")
+			.map(enumObjAsKey -> enumObjAsKey.toAmount() + Constant.CONSTANT_WON + counterMap.get(enumObjAsKey)
+				+ Constant.CONSTANT_COUNT)
 			.collect(Collectors.joining(System.lineSeparator()));
 	}
 
 	public boolean isAnyAvailable() {
 		return this.counterMap.keySet()
 			.stream()
-			.anyMatch(key -> counterMap.getOrDefault(key, 0) > 0);
+			.anyMatch(key -> counterMap.getOrDefault(key, Constant.CONSTANT_ZERO) > Constant.CONSTANT_ZERO);
 	}
 
 	public void forEach(BiConsumer<Coin, Integer> action) {

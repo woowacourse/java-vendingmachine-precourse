@@ -7,6 +7,8 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import vendingmachine.utils.Constant;
+
 public class ProductCounter {
 	private SortedMap<Product, Integer> counterMap;
 
@@ -15,31 +17,33 @@ public class ProductCounter {
 	}
 
 	public void minusCount(Product value) {
-		counterMap.put(value, counterMap.getOrDefault(value, 0) - 1);
+		counterMap.put(value, counterMap.getOrDefault(value, Constant.CONSTANT_ZERO) - Constant.CONSTANT_ONE);
 	}
 
 	public void plusCountFromList(List<Product> list) {
 		list.stream()
-			.forEach(keyObj -> IntStream.range(0, keyObj.toCount())
-				.forEach(i -> counterMap.put(keyObj, counterMap.getOrDefault(keyObj, 0) + 1)));
+			.forEach(keyObj -> IntStream.range(Constant.CONSTANT_ZERO, keyObj.toCount())
+				.forEach(i -> counterMap.put(keyObj,
+					counterMap.getOrDefault(keyObj, Constant.CONSTANT_ZERO) + Constant.CONSTANT_ONE)));
 	}
 
 	@Override
 	public String toString() {
 		return counterMap.keySet()
 			.stream()
-			.map(key -> key.toString() + " -> " + counterMap.getOrDefault(key, 0) + "개")
+			.map(key -> key.toString() + Constant.CONSTANT_ARROW + counterMap.getOrDefault(key, Constant.CONSTANT_ZERO)
+				+ Constant.CONSTANT_COUNT)
 			.collect(Collectors.joining(System.lineSeparator()));
 	}
 
 	public boolean isAnyAvailable() {
 		return this.counterMap.keySet()
 			.stream()
-			.anyMatch(key -> counterMap.getOrDefault(key, 0) > 0);
+			.anyMatch(key -> counterMap.getOrDefault(key, Constant.CONSTANT_ZERO) > Constant.CONSTANT_ZERO);
 	}
 
 	public boolean isAvailable(Product product) {
-		return this.counterMap.getOrDefault(product, 0) > 0;
+		return this.counterMap.getOrDefault(product, Constant.CONSTANT_ZERO) > Constant.CONSTANT_ZERO;
 	}
 
 }
