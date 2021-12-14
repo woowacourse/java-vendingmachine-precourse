@@ -98,9 +98,9 @@ public class InputView {
 	private boolean isRightHoldingMoney(String stringHoldingMoney) {
 		boolean isRightHoldingMoney = true;
 		try {
-			nonNumericValidate(stringHoldingMoney);
-			zeroNumericValidate(stringHoldingMoney);
-			dividedByTenMoneyValidate(stringHoldingMoney);
+			checkValidateNonNumeric(stringHoldingMoney);
+			checkValidateZeroNumeric(stringHoldingMoney);
+			checkValidateDividedByTenMoney(stringHoldingMoney);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightHoldingMoney = false;
@@ -111,9 +111,9 @@ public class InputView {
 	private boolean isRightInputMoney(String stringInputMoney) {
 		boolean isRightInputMoney = true;
 		try {
-			nonNumericValidate(stringInputMoney);
-			zeroNumericValidate(stringInputMoney);
-			dividedByTenMoneyValidate(stringInputMoney);
+			checkValidateNonNumeric(stringInputMoney);
+			checkValidateZeroNumeric(stringInputMoney);
+			checkValidateDividedByTenMoney(stringInputMoney);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightInputMoney = false;
@@ -124,8 +124,8 @@ public class InputView {
 	private boolean isRightItemInput(String[] itemStringArray) {
 		boolean isRightItemInput = true;
 		try {
-			wrongRegexMatchValidate(itemStringArray);
-			duplicatedItemNameValidate(itemStringArray);
+			checkValidateWrongRegexMatch(itemStringArray);
+			checkValidateDuplicatedItemName(itemStringArray);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isRightItemInput = false;
@@ -136,8 +136,8 @@ public class InputView {
 	public boolean isPurchasableItem(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		boolean isPurchasableItem = true;
 		try {
-			nonExistItemValidate(buyItem, holdingItemList);
-			nonEnoughMoneyValidate(buyItem, holdingItemList, inputMoney);
+			checkValidateNonExistItem(buyItem, holdingItemList);
+			checkValidateNonEnoughMoney(buyItem, holdingItemList, inputMoney);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			isPurchasableItem = false;
@@ -145,7 +145,7 @@ public class InputView {
 		return isPurchasableItem;
 	}
 
-	public void nonNumericValidate(String stringHoldingMoney) {
+	public void checkValidateNonNumeric(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
 			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_VALIDATE_MIN
 					|| CHAR_NUMERIC_VALIDATE_MAX < stringHoldingMoney.charAt(i)) {
@@ -154,19 +154,19 @@ public class InputView {
 		}
 	}
 
-	public void zeroNumericValidate(String stringHoldingMoney) {
+	public void checkValidateZeroNumeric(String stringHoldingMoney) {
 		if (stringHoldingMoney.equals(ZERO_HOLDING_MONEY)) {
 			throw new IllegalArgumentException("[ERROR] 금액은 0이 아닌 양의 정수를 입력하셔야 합니다.");
 		}
 	}
 
-	public void dividedByTenMoneyValidate(String stringMoney) {
+	public void checkValidateDividedByTenMoney(String stringMoney) {
 		if (Integer.parseInt(stringMoney) % DIVIDE_VALUE != 0) {
 			throw new IllegalArgumentException("[ERROR] 보유 금액은 10으로 나누어 떨어져야 합니다.");
 		}
 	}
 
-	private void duplicatedItemNameValidate(String[] itemStringArray) {
+	private void checkValidateDuplicatedItemName(String[] itemStringArray) {
 		Set<String> itemNames = new HashSet<String>();
 		removeBracket(itemStringArray);
 		int itemCount = itemStringArray.length;
@@ -178,7 +178,7 @@ public class InputView {
 		}
 	}
 
-	private void wrongRegexMatchValidate(String[] itemStringArray) {
+	private void checkValidateWrongRegexMatch(String[] itemStringArray) {
 		for (int i = 0; i < itemStringArray.length; i++) {
 			if (!Pattern.matches(REGEX, itemStringArray[i])) {
 				throw new IllegalArgumentException("[ERROR] 올바른 형식으로 입력해주세요.");
@@ -186,7 +186,7 @@ public class InputView {
 		}
 	}
 
-	public void nonExistItemValidate(String buyItem, List<Item> holdingItemList) {
+	public void checkValidateNonExistItem(String buyItem, List<Item> holdingItemList) {
 		boolean isExistedItem = false;
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem)) {
@@ -198,7 +198,7 @@ public class InputView {
 		}
 	}
 
-	public void nonEnoughMoneyValidate(String buyItem, List<Item> holdingItemList, int inputMoney) {
+	public void checkValidateNonEnoughMoney(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
 				throw new IllegalArgumentException("[ERROR] 보유 금액보다 상품 가격이 더 비쌉니다.");
