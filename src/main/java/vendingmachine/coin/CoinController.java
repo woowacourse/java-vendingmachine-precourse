@@ -2,6 +2,8 @@ package vendingmachine.coin;
 
 import vendingmachine.coin.dto.CoinDto;
 import vendingmachine.utils.message.OutputMessage;
+import vendingmachine.utils.validator.InputDataValidator;
+import vendingmachine.utils.validator.MoneyDataValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,9 +11,11 @@ import java.util.List;
 public class CoinController {
 
     private CoinService coinService;
+    private InputDataValidator inputDataValidator;
 
     private CoinController() {
         coinService = CoinService.getInstance();
+        inputDataValidator = MoneyDataValidator.getInstance();
     }
 
     private static class InnerInstanceClazz {
@@ -22,8 +26,9 @@ public class CoinController {
         return InnerInstanceClazz.instance;
     }
 
-    public void convertToCoin(int initialAmount) {
-        coinService.convertToCoin(initialAmount);
+    public void convertToCoin(String initialAmount) {
+        inputDataValidator.validateData(initialAmount);
+        coinService.convertToCoin(Integer.parseInt(initialAmount));
     }
 
     public void printChange(int remainingAmount) {
