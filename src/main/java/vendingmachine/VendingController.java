@@ -9,6 +9,7 @@ import java.util.List;
 public class VendingController {
     private static final InputView inputView = new InputView();
     private static final OutputView outputView = new OutputView();
+
     private VendingMachine vendingMachine;
 
     public void run() {
@@ -51,6 +52,4 @@ public class VendingController {
         }
         return true;
     }
-
-
 }

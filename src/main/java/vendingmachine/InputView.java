@@ -3,7 +3,6 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.CoinCountMap;
 import vendingmachine.domain.Product;
-import vendingmachine.domain.VendingMachine;
 
 import java.util.ArrayList;
 import java.util.List;
