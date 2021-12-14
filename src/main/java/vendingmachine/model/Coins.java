@@ -1,6 +1,8 @@
 package vendingmachine.model;
 
 import java.util.EnumMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -18,20 +20,23 @@ public class Coins {
 			coinMap.put(coin, DEFAULT_COIN_NUMBER);
 		}
 		while (amount > 0) {
-			Coin coin = selectCoinType();
-			int coinNumber = generateRandomValueInRange(coin.divideByCoinAmount(amount));
-			coinMap.put(coin, coinMap.get(coin) + coinNumber);
-			amount -= coin.multiplyByCoinNumber(coinNumber);
+			Coin coin = selectRandomCoin();
+
+			if (amount >= coin.getAmount()) {
+				addCoin(coin);
+				amount -= coin.getAmount();
+			}
 		}
 	}
 
-	private int generateRandomValueInRange(int endInclusive) {
-		return Randoms.pickNumberInRange(0, endInclusive);
+	private void addCoin(Coin coin) {
+		coinMap.put(coin, coinMap.get(coin) + 1);
 	}
 
-	private Coin selectCoinType() {
-		int coinIndex = Randoms.pickNumberInRange(0, Coin.values().length - 1);
-		return Coin.values()[coinIndex];
+	private Coin selectRandomCoin() {
+		return Coin.of(Randoms.pickNumberInList(Stream.of(Coin.values())
+			.map(Coin::getAmount)
+			.collect(Collectors.toList())));
 	}
 
 	public EnumMap<Coin, Integer> calculateChange(int insertMoney) {

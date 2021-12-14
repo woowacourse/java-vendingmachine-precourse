@@ -13,6 +13,15 @@ public enum Coin {
 		this.amount = amount;
 	}
 
+	public static Coin of(int amount) {
+		for (Coin coin : Coin.values()) {
+			if (coin.amount == amount) {
+				return coin;
+			}
+		}
+		return null;
+	}
+
 	public int divideByCoinAmount(int amount) {
 		return amount / this.amount;
 	}
@@ -28,5 +37,9 @@ public enum Coin {
 
 	public boolean isReturnable(int insertMoney) {
 		return insertMoney >= this.amount;
+	}
+
+	public int getAmount() {
+		return this.amount;
 	}
 }

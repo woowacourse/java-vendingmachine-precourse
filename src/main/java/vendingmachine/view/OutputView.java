@@ -13,6 +13,7 @@ public class OutputView {
 	private static final String OUTPUT_HOLDING_COINS = "자판기가 보유한 동전";
 	private static final String OUTPUT_CHANGE = "잔돈";
 	private static final String OUTPUT_INSERT_MONEY = "투입 금액";
+	private static final String MONEY_UNIT = "원";
 	private static final String COLON = ":";
 	private static final String LINE_WRAP = "\n";
 	private static final String WHITESPACE = " ";
@@ -46,7 +47,7 @@ public class OutputView {
 	}
 
 	public static void printInsertMoney(int insertMoney) {
-		System.out.println(LINE_WRAP + OUTPUT_INSERT_MONEY + COLON + WHITESPACE + insertMoney);
+		System.out.println(LINE_WRAP + OUTPUT_INSERT_MONEY + COLON + WHITESPACE + insertMoney + MONEY_UNIT);
 	}
 
 	public static void printChange(String coins) {
