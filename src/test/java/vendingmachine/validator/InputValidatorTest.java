@@ -3,6 +3,7 @@ package vendingmachine.validator;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -49,6 +50,17 @@ class InputValidatorTest {
 		//when then
 		assertThatThrownBy(
 			() -> InputValidator.checkMoneyForm(input)
+		).isInstanceOf(IllegalArgumentException.class);
+	}
+
+	@Test
+	@DisplayName("수량이 음수일때는 실패한다. - 실패")
+	void checkStockFormFailureWhenInputIsNegative() {
+		//given
+		String InputStock = "-1";
+		//when then
+		assertThatThrownBy(
+			() -> InputValidator.checkStockForm(InputStock)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
