@@ -1,5 +1,8 @@
 package vendingmachine.utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import camp.nextstep.edu.missionutils.Randoms;
 
 /**
@@ -14,16 +17,21 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class RandomGenerator {
 
-	private static final Integer RANDOM_NUMBER_MIN_RANGE = 0;
+	private static final Integer RANDOM_NUMBER_MIN_RANGE = 1;
 
-	private static final Integer RANDOM_NUMBER_MAX_RANGE = 16;
+	private static final Integer RANDOM_NUMBER_MAX_RANGE = 9;
+
+	private final List<Integer> numbers;
 
 	public RandomGenerator() {
 		super();
+		numbers = new ArrayList<>();
+		for(int number = RANDOM_NUMBER_MIN_RANGE; number < RANDOM_NUMBER_MAX_RANGE; number++) {
+			numbers.add(number);
+		}
 	}
 
 	public Integer getRandomNumber() {
-		return Randoms.pickNumberInRange(RANDOM_NUMBER_MIN_RANGE,
-			RANDOM_NUMBER_MAX_RANGE);
+		return Randoms.pickNumberInList(numbers);
 	}
 }

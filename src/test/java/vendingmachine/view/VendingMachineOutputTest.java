@@ -51,8 +51,8 @@ class VendingMachineOutputTest {
 		HashMap<Integer, Integer> changes = new HashMap<>();
 		changes.put(Coin.COIN_500.getAmount(), 1);
 		changes.put(Coin.COIN_100.getAmount(), 2);
-		vendingMachineOutput.printChanges(changes);
+		vendingMachineOutput.printChanges(1, changes);
 		verify(vendingMachineOutput, times(1))
-			.printChanges(changes);
+			.printChanges(1, changes);
 	}
 }

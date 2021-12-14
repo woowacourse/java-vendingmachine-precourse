@@ -64,12 +64,12 @@ public class VendingMachineMessage {
 		final ArrayList<Integer> coinTypes = getCoinTypeList();
 		System.out.println(COIN_TYPES_AMOUNT);
 		coinTypes.forEach(coinType -> {
-			System.out.println(coinType + " - " + coinTypesAmount.get(coinType) + "개");
+			System.out.println(coinType + "원" + " - " + coinTypesAmount.get(coinType) + "개");
 		});
 	}
 
 	public static void printUserInputtedMoney(final int money) {
-		System.out.println(USER_INPUTTED_MONEY + money);
+		System.out.println(USER_INPUTTED_MONEY + money + "원");
 	}
 
 	public static void printChange(final HashMap<Integer, Integer> changes) {
@@ -77,7 +77,7 @@ public class VendingMachineMessage {
 		System.out.println(CHANGE);
 		coinTypes.forEach(coinType -> {
 			if(changes.containsKey(coinType)) {
-				System.out.println(coinType + " - " + changes.get(coinType) + "개");
+				System.out.println(coinType + "원" + " - " + changes.get(coinType) + "개");
 			}
 		});
 	}

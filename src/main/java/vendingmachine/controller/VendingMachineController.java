@@ -131,8 +131,7 @@ public class VendingMachineController {
 	public void turnOn() {
 		inputVendingMachineInformation();
 		purchaseProduct();
-		vendingMachineOutput.printUserInputtedMoney(vendingMachine.getUserInputtedMoney());
-		vendingMachineOutput.printChanges(
+		vendingMachineOutput.printChanges(vendingMachine.getUserInputtedMoney(),
 			makeChanges(vendingMachine.getCoinTypesAmount()));
 	}
 

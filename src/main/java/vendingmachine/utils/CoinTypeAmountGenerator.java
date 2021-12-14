@@ -36,11 +36,11 @@ public class CoinTypeAmountGenerator {
 			final int coinType) {
 		if(amountOfMoney < randomNumber * coinType) {
 			if(amountOfMoney >= coinType) {
-				return coinType;
+				return amountOfMoney / coinType;
 			}
 			return 0;
 		}
-		return randomNumber * coinType;
+		return randomNumber;
 	}
 
 	public HashMap<Integer, Integer> generateCoinTypesAmount(int amountOfMoney) {
@@ -48,10 +48,11 @@ public class CoinTypeAmountGenerator {
 		while(amountOfMoney > 0) {
 			for(Integer coinType : coinTypes) {
 				final Integer randomNumber = randomGenerator.getRandomNumber();
-				final Integer usedMoney = fillCoin(amountOfMoney, randomNumber, coinType);
-				final Integer exCoinAmount = coinTypesAmount.get(coinType);
+				final Integer usedCoins = fillCoin(amountOfMoney, randomNumber, coinType);
+				final Integer usedMoney = usedCoins * coinType;
 				amountOfMoney -= usedMoney;
-				coinTypesAmount.put(coinType, exCoinAmount + (usedMoney / coinType));
+				final Integer exCoinAmount = coinTypesAmount.get(coinType);
+				coinTypesAmount.put(coinType, exCoinAmount + usedCoins);
 			}
 		}
 		return coinTypesAmount;
