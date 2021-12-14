@@ -6,6 +6,7 @@ import vendingmachine.domain.coin.CoinGenerator;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
 import vendingmachine.domain.vendingMachine.Amount;
+import vendingmachine.validator.AmountValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -20,7 +21,14 @@ public class VendingMachine {
     }
 
     private void setAmount() {
-        amount = new Amount(Integer.parseInt(InputView.getVendingmachineAmount()));
+        try {
+            String vendingmachineAmount = InputView.getVendingmachineAmount();
+            AmountValidator.checkVendingMachineAmount(vendingmachineAmount);
+            amount = new Amount(Integer.parseInt(vendingmachineAmount));
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            setAmount();
+        }
     }
 
     private void setProduct() {

@@ -10,6 +10,7 @@ import java.util.Map;
 public class OutputView {
 
     public static void printCoinCount(CoinCombination coinCombination) {
+        System.out.println("자판기가 보유한 동전");
         coinCombination.print();
     }
 
@@ -18,6 +19,6 @@ public class OutputView {
     }
 
     public static void printUserMoney(UserMoney userMoney) {
-        System.out.println("투입 금액 : " + userMoney.getMoney() + "원");
+        System.out.println("투입 금액: " + userMoney.getMoney() + "원");
     }
 }
