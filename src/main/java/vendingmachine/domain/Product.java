@@ -28,7 +28,7 @@ public class Product implements Comparable<Product>{
 	}
 
 	public boolean soldOut() {
-		return amount == 0;
+		return amount == MIN_AMOUNT;
 	}
 
 	public boolean isBuy(Money insertMoney) {
