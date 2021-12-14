@@ -7,6 +7,29 @@
 - 1, 2주차 보다 더 극단적인 연습을 해보는 것에 집중하였습니다.
 - 본 프로그램은 자판기의 상품 구매 및 잔돈 반환 기능을 가지고 있습니다. 
 
+## 프로젝트 구조 
+```
+├── main
+│   └── java
+│       └── vendingmachine
+│           ├── Application.java
+│           ├── Operation.java
+│           ├── domain
+│           │   ├── Coin.java
+│           │   ├── Coins.java
+│           │   ├── Item.java
+│           │   └── VendingMachine.java
+│           ├── utils
+│           │   └── Message.java
+│           └── view
+│               ├── InputView.java
+│               └── OutputView.java
+└── test
+    └── java
+        └── vendingmachine
+            └── ApplicationTest.java
+```
+
 ## 기능 구현 목록
 
 1. 입력 처리 
