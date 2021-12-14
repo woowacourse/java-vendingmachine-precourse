@@ -1,0 +1,52 @@
+package vendingmachine.domain.vendingMachine;
+
+import vendingmachine.domain.coin.CoinCombination;
+import vendingmachine.domain.coin.CoinGenerator;
+import vendingmachine.domain.product.Product;
+import vendingmachine.domain.product.Products;
+import vendingmachine.domain.user.UserMoney;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
+
+public class VendingMachineCalculator {
+    private UserMoney userMoney;
+
+    public VendingMachineCalculator() {
+    }
+
+    public void run(Products products) {
+        setUserMoney();
+        OutputView.printUserMoney(userMoney);
+
+        inputProductByUser(products);
+        returnChange();
+    }
+
+    private void setUserMoney() {
+        try {
+            userMoney = new UserMoney(InputView.getUserMoney());
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            setUserMoney();
+        }
+    }
+
+    private void inputProductByUser(Products products) {
+        while (!isReturnChange(products)) {
+            String productByUser = InputView.getProductByUser();
+            Product pro = products.reduce(productByUser);
+            userMoney.reduce(pro.getPrice());
+            OutputView.printUserMoney(userMoney);
+        }
+    }
+
+    private void returnChange() {
+        int totalChange = userMoney.reduceMoney();
+        CoinCombination changeCoinCombination = CoinGenerator.calculatePossibleCoinCombination(totalChange);
+        changeCoinCombination.print();
+    }
+
+    private boolean isReturnChange(Products products) {
+        return userMoney.canNotBuyCheapestProduct(products) || products.isSoldOut();
+    }
+}
