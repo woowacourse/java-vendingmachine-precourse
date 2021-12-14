@@ -5,6 +5,7 @@ public class Application {
         controller.setMoney();
         controller.printCoins();
         controller.inputProduct();
+        controller.setSpentMoney();
     }
 
     public static void main(String[] args) {

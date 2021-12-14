@@ -63,4 +63,9 @@ public class Controller {
         vendingMachine.createProducts(view.inputProduct());
         System.out.println();
     }
+
+    public void setSpentMoney() {
+        vendingMachine.setSpentMoney((view.inputMoney()));
+        System.out.println();
+    }
 }
