@@ -13,115 +13,72 @@ public class Validator {
 
 	}
 
-	public static void validatePossession(String possession) {
-		validateNumber(possession);
+	public static void validatePossession(int possession) {
 		validateUnit(possession);
 	}
 
-	public static Item validateItemInfo(String[] info, List<Item> registeredItems) {
-		String name = validateName(info[0], registeredItems);
-		int price = validatePrice(info[1]);
-		int stock = validateStock(info[2]);
-
-		return new Item(name, price, stock);
+	public static void validatePrice(int price) {
+		validateUnit(price);
+		validateRange(price, MIN_ADD_PRICE_VALUE, ERROR_INVALID_ADD_ITEM_PRICE);
 	}
 
-	public static void validateItemInfoFormat(String itemInfo) {
-		boolean isValidFormat = Pattern.matches(VALIDATE_ITEM_INFO_FORMAT, itemInfo);
+	public static void validateStock(int stock) {
+		validateRange(stock, MIN_ADD_STOCK_VALUE, ERROR_INVALID_ADD_ITEM_STOCK);
+	}
+
+	public static void validateUserMoney(int userMoney) {
+		validateUnit(userMoney);
+		validateRange(userMoney, MIN_INPUT_MONEY_VALUE, ERROR_INVALID_INPUT_MONEY);
+	}
+
+	public static void validateItemInfoFormat(String itemInfoLine) {
+		boolean isValidFormat = Pattern.matches(VALIDATE_ITEM_INFO_FORMAT, itemInfoLine);
 
 		if (!isValidFormat) {
 			throw new IllegalArgumentException(ERROR_INVALID_ITEM_FORMAT);
 		}
 	}
 
-	public static void validateNumber(String input) {
-		if (isBlanked(input)) {
-			throw new IllegalArgumentException(ERROR_EMPTY_INPUT);
-		} else if (!isNumber(input)) {
-			throw new IllegalArgumentException(ERROR_IS_NOT_NUMBER);
-		}
-		checkIntegerRange(input);
-	}
-
-	private static void checkIntegerRange(String number) {
-		try {
-			Integer.parseInt(number);
-		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException(ERROR_IS_NOT_INTEGER);
+	public static void validateUnit(int number) {
+		if (!isValidUnit(number)) {
+			throw new IllegalArgumentException(ERROR_INVALID_UNIT_NUMBER);
 		}
 	}
 
-	public static void validateUnit(String input) {
-		if (!isValidUnit(input)) {
-			throw new IllegalArgumentException(ERROR_INVALID_INPUT_UNIT);
+	public static void validateRange(int number, int minRangeValue, String errorMessage) {
+		if (!isValidRange(number, minRangeValue)) {
+			throw new IllegalArgumentException(errorMessage);
 		}
 	}
 
-	public static int validatePrice(String price) {
-		validateNumber(price);
-		validateUnit(price);
-
-		int validRangePrice = Parser.makeInteger(price);
-		if (!isValidRange(validRangePrice)) {
-			throw new IllegalArgumentException(ERROR_INVALID_ADD_ITEM_PRICE);
-		}
-
-		return validRangePrice;
+	private static boolean isValidRange(int number, int minRangeValue) {
+		return number >= minRangeValue;
 	}
 
-	public static int validateStock(String stock) {
-		validateNumber(stock);
-
-		int validRangeStock = Parser.makeInteger(stock);
-		if (!isValidRange(validRangeStock)) {
-			throw new IllegalArgumentException(ERROR_INVALID_ADD_ITEM_STOCK);
-		}
-
-		return validRangeStock;
-	}
-
-	private static boolean isValidRange(int number) {
-		return number > MIN_RANGE_VALUE;
-	}
-
-	public static String validateName(String registerName, List<Item> others) {
-		if (isBlanked(registerName)) {
-			throw new IllegalArgumentException(ERROR_EMPTY_INPUT);
-		} else if (isDuplicatedName(registerName, others)) {
-			throw new IllegalArgumentException(ERROR_IS_DUPLICATED_ITEM_NAME);
-		}
-
-		return registerName;
-	}
-
-	public static void validateAddingItemFormat(String addingItemInputLine) {
-		if (isLastIndexSemiColon(addingItemInputLine)) {
-			throw new IllegalArgumentException(ERROR_INVALID_ITEM_ADDING_FORMAT);
+	public static void validateAddingItemName(String registerName, List<Item> registeredItems) {
+		if (isDuplicatedName(registerName, registeredItems)) {
+			throw new IllegalArgumentException(ERROR_DUPLICATED_ADD_ITEM_NAME);
 		}
 	}
 
-	public static void validatePurchaseItemName(String name, List<Item> forSaleList) {
-		if (isBlanked(name)) {
-			throw new IllegalArgumentException(ERROR_EMPTY_INPUT);
-		} else if (!isDuplicatedName(name, forSaleList)) {
-			throw new IllegalArgumentException(ERROR_INVALID_ITEM_NAME);
+	public static void validatePurchaseItemName(String purchaseName, List<Item> forSaleList) {
+		if (!isDuplicatedName(purchaseName, forSaleList)) {
+			throw new IllegalArgumentException(ERROR_NO_ITEM_NAME_EXIST);
 		}
 	}
 
-	private static boolean isDuplicatedName(String registerName, List<Item> otherItems) {
-		return otherItems.stream().anyMatch(i -> i.getName().equals(registerName));
+	public static void validateAddingItemsLineFormat(String addingItemsInputLine) {
+		if (isLastIndexSemiColon(addingItemsInputLine)) {
+			throw new IllegalArgumentException(ERROR_INVALID_ADD_ITEMS_FORMAT);
+		}
 	}
 
-	private static boolean isValidUnit(String input) {
-		return Parser.makeInteger(input) % 10 == VALID_UNIT;
+	private static boolean isDuplicatedName(String name, List<Item> otherItems) {
+		return otherItems.stream().anyMatch(o -> o.isSameName(name));
 	}
 
-	private static boolean isNumber(String input) {
-		return input.chars().allMatch(Character::isDigit);
-	}
-
-	private static boolean isBlanked(String input) {
-		return input.length() == 0;
+	private static boolean isValidUnit(int number) {
+		return number % VALID_UNIT_CHECKER == VALID_UNIT;
 	}
 
 	private static boolean isLastIndexSemiColon(String line) {
