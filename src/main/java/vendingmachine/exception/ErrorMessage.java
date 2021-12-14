@@ -1,7 +1,5 @@
 package vendingmachine.exception;
 
-import vendingmachine.domain.Product;
-
 public enum ErrorMessage {
 
 	COST_IS_NOT_NUMBER_ERROR("금액은 자연수여야 합니다."),

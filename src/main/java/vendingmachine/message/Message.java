@@ -12,7 +12,11 @@ public enum Message {
 	PRINT_AMOUNT_UNIT("개"),
 	PRINT_MONEY_UNIT("원"),
 	LINE_BREAKER("\n"),
-	REST_MONEY_SEPARATOR(" - ");
+	REST_MONEY_SEPARATOR(" - "),
+	OPEN_BRACKET("["),
+	CLOSE_BRACKET("]"),
+	DIVISOR_PRODUCT_LIST(";"),
+	DIVISOR_PRODUCT (",");
 
 
 	private String message;

@@ -34,7 +34,7 @@ public class VendingMachineService {
 		vendingMachine.initProducts();
 		InputProductsValidator.validateProducts(inputStr);
 
-		vendingMachine.addProducts(inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";"));
+		vendingMachine.addProducts(inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(Message.DIVISOR_PRODUCT_LIST.getMessage()));
 	}
 
 	public void postInputCosts(String inputStr) {

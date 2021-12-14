@@ -5,12 +5,10 @@ import java.util.List;
 
 import vendingmachine.domain.Product;
 import vendingmachine.exception.ErrorMessage;
+import vendingmachine.message.Message;
 import vendingmachine.validation.enumclass.Constant;
 
 public class GlobalValidation {
-	private static final String OPEN_BRACKET = "[";
-	private static final String CLOSE_BRACKET = "]";
-	private static final String DIVISOR_PRODUCT_LIST = ";";
 
 	public static void validateCostIsNaturalNumber(String willHoldMoney) {
 		validateStringIsInt(willHoldMoney, ErrorMessage.COST_IS_NOT_NUMBER_ERROR);
@@ -29,13 +27,13 @@ public class GlobalValidation {
 	}
 
 	public static void validateProductsInputFormat(String inputStr) {
-		for (String product : inputStr.split(DIVISOR_PRODUCT_LIST)) {
+		for (String product : inputStr.split(Message.DIVISOR_PRODUCT_LIST.getMessage())) {
 			validateStringContainsSquareBracket(product, ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR);
 		}
 	}
 
 	private static void validateStringContainsSquareBracket(String string, ErrorMessage errorMessage) {
-		if (!string.contains(OPEN_BRACKET) || !string.contains(CLOSE_BRACKET)) {
+		if (!string.contains(Message.OPEN_BRACKET.getMessage()) || !string.contains(Message.CLOSE_BRACKET.getMessage())) {
 			throw new IllegalArgumentException(errorMessage.getErrorMessage());
 		}
 	}
