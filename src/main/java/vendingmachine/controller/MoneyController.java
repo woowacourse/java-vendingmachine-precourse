@@ -32,8 +32,8 @@ public class MoneyController {
 		return money.getMoney();
 	}
 
-	public void update(int moneyAmount) {
-		money.pay(moneyAmount);
+	public void reduceMoney(int moneyAmount) {
+		money.reduce(moneyAmount);
 	}
 
 }

@@ -81,7 +81,7 @@ public class ItemController {
 			.getCost();
 	}
 
-	public int update(final int money) {
+	public int sellItem(final int money) {
 		Item item = items.findItemByName(inputView.scanItemName(), money);
 		checkItemSellable(item, money);
 		item.sell();

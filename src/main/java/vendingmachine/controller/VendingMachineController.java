@@ -46,8 +46,8 @@ public class VendingMachineController {
 			try {
 				outputView.printMoney(moneyController.getCurrentMoney());
 				outputView.printItemPerChaseRequest();
-				int targetItemCost = itemcontroller.update(moneyController.getCurrentMoney());
-				moneyController.update(targetItemCost);
+				int targetItemCost = itemcontroller.sellItem(moneyController.getCurrentMoney());
+				moneyController.reduceMoney(targetItemCost);
 
 			} catch (IllegalArgumentException e) {
 				outputView.printError(e.getMessage());
@@ -63,7 +63,7 @@ public class VendingMachineController {
 			final boolean isUpperThanZero = 0 < number;
 			if (isUpperThanZero) {
 				changes.put(coin.getKey(), number);
-				moneyController.update(coin.getKey().getAmount() * number);
+				moneyController.reduceMoney(coin.getKey().getAmount() * number);
 			}
 		}
 		return changes;

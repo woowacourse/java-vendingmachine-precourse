@@ -27,7 +27,7 @@ public class Coins {
 		return restCoins;
 	}
 
-	public void update(final Map<Coin, Integer> reducedCoins) {
+	public void reduce(final Map<Coin, Integer> reducedCoins) {
 		for (Coin coin : reducedCoins.keySet()) {
 			coins.put(coin, coins.get(coin) - reducedCoins.get(coin));
 		}

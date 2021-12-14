@@ -56,7 +56,7 @@ public class CoinController {
 		return number;
 	}
 
-	public void update(final Map<Coin, Integer> reducedCoins) {
-		coins.update(reducedCoins);
+	public void reduceCoins(final Map<Coin, Integer> reducedCoins) {
+		coins.reduce(reducedCoins);
 	}
 }
