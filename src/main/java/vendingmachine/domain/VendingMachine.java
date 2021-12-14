@@ -27,8 +27,12 @@ public class VendingMachine {
 	}
 
 	public boolean isPossibleToPurchaseProduct() {
-		int minimumProductPrice = products.findMinimumProductPrice();
-		return userMoney.isEnoughMoney(minimumProductPrice);
+		try {
+			int minimumProductPrice = products.findMinimumProductPrice();
+			return userMoney.isEnoughMoney(minimumProductPrice);
+		} catch (IllegalArgumentException exception) {
+			return false;
+		}
 	}
 
 	public int getUserMoney() {
@@ -40,5 +44,9 @@ public class VendingMachine {
 		product.validatePossibleToPurchase(product, userMoney.getUserMoney());
 		product.reduceQuantity();
 		userMoney.spendMoney(product.getPrice());
+	}
+
+	public VendingMachineCoins getChange() {
+		return new VendingMachineCoins(vendingMachineCoins.generateChangeCoins(userMoney));
 	}
 }

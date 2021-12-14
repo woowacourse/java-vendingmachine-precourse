@@ -14,16 +14,18 @@ public class VendingMachineController {
 		vendingMachine.addProducts(products);
 		vendingMachine.inputMoney(inputMoney());
 		purchaseProduct(vendingMachine);
+		returnChange(vendingMachine);
+	}
+
+	private void returnChange(VendingMachine vendingMachine) {
+		OutputView.printCurrentUserMoney(vendingMachine.getUserMoney());
+		OutputView.printChange(vendingMachine.getChange());
 	}
 
 	private void purchaseProduct(VendingMachine vendingMachine) {
-		try {
-			vendingMachine.isPossibleToPurchaseProduct();
+		while (vendingMachine.isPossibleToPurchaseProduct()) {
 			OutputView.printCurrentUserMoney(vendingMachine.getUserMoney());
 			pressPurchaseButton(vendingMachine);
-			purchaseProduct(vendingMachine);
-		} catch (IllegalArgumentException exception) {
-			return;
 		}
 	}
 

@@ -14,7 +14,8 @@ public class OutputView {
 	private static final String INPUT_MONEY = "투입 금액을 입력해 주세요.";
 	private static final String CHECK_CURRENT_USER_MONEY = "투입 금액: ";
 	private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
-	private static final String CHARGES = "잔돈";
+	private static final String RETURN_COINS = "잔돈";
+	private static final String ERROR = "[ERROR] ";
 
 	public static void printInputVendingMachineCoin() {
 		System.out.println(INPUT_VENDING_MACHINE_COIN);
@@ -38,7 +39,7 @@ public class OutputView {
 	}
 
 	public static void printException(Exception exception) {
-		System.out.println(exception.getMessage());
+		System.out.println(ERROR + exception.getMessage());
 	}
 
 	public static void printInputMoney() {
@@ -48,10 +49,19 @@ public class OutputView {
 
 	public static void printCurrentUserMoney(int userMoney) {
 		printNewLine();
-		System.out.println(CHECK_CURRENT_USER_MONEY + userMoney);
+		System.out.println(CHECK_CURRENT_USER_MONEY + userMoney + WON);
 	}
 
 	public static void printInputPurchaseProduct() {
 		System.out.println(INPUT_PURCHASE_PRODUCT);
+	}
+
+	public static void printChange(VendingMachineCoins changeCoins) {
+		System.out.println(RETURN_COINS);
+		for (Coin coin : changeCoins.getKeys()) {
+			if (changeCoins.hasCoin(coin)) {
+				System.out.println(coin.getAmount() + WON + DASH + changeCoins.getAmount(coin) + EA);
+			}
+		}
 	}
 }

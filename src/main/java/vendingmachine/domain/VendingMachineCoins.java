@@ -10,10 +10,15 @@ import vendingmachine.type.Coin;
 
 public class VendingMachineCoins {
 
+	private static final int ZERO = 0;
 	private final Map<Coin, Integer> coins;
 
 	public VendingMachineCoins(Money vendingMachineMoney) {
 		this.coins = generateVendingMachineCoins(vendingMachineMoney);
+	}
+
+	public VendingMachineCoins(Map<Coin, Integer> changeCoins) {
+		this.coins = changeCoins;
 	}
 
 	public List<Coin> getKeys() {
@@ -25,8 +30,7 @@ public class VendingMachineCoins {
 	}
 
 	private Map<Coin, Integer> generateVendingMachineCoins(Money vendingMachineMoney) {
-		Map<Coin, Integer> coinsMap = new EnumMap<>(Coin.class);
-		initializeCoinMap(coinsMap);
+		Map<Coin, Integer> coinsMap = initializeCoinMap();
 		while (vendingMachineMoney.hasMoreMoney()) {
 			int amount = Randoms.pickNumberInList(Coin.getCoinList());
 			if (vendingMachineMoney.isPossibleChangeToCoin(amount)) {
@@ -37,14 +41,44 @@ public class VendingMachineCoins {
 		return coinsMap;
 	}
 
-	private void initializeCoinMap(Map<Coin, Integer> coinsMap) {
+	private Map<Coin, Integer> initializeCoinMap() {
+		Map<Coin, Integer> coinsMap = new EnumMap<>(Coin.class);
 		for (Coin coin : Coin.values()) {
 			coinsMap.put(coin, 0);
 		}
+		return coinsMap;
 	}
 
 	public void addCoin(Map<Coin, Integer> coinsMap, int amount) {
 		Coin coinType = Coin.findCoinType(amount);
 		coinsMap.put(coinType, coinsMap.get(coinType) + 1);
+	}
+
+	public Map<Coin, Integer> generateChangeCoins(Money userMoney) {
+		Map<Coin, Integer> changeCoins = initializeCoinMap();
+		for (Coin coin : coins.keySet()) {
+			int quantity = ZERO;
+			while (isPossibleGenerateChangeCoin(coin, userMoney)) {
+				quantity++;
+				userCoin(coin);
+				userMoney.spendMoney(coin.getAmount());
+			}
+			if (quantity != ZERO) {
+				changeCoins.put(coin, quantity);
+			}
+		}
+		return changeCoins;
+	}
+
+	private void userCoin(Coin coin) {
+		coins.put(coin, coins.get(coin) - 1);
+	}
+
+	private boolean isPossibleGenerateChangeCoin(Coin coin, Money userMoney) {
+		return hasCoin(coin) && userMoney.isEnoughMoney(coin.getAmount());
+	}
+
+	public boolean hasCoin(Coin coin) {
+		return coins.get(coin) > ZERO;
 	}
 }
