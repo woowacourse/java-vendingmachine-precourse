@@ -19,14 +19,6 @@ public class VendingMachine {
 		initCoinCounts(returnCoinCounts);
 	}
 
-	public static LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
-		LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
-		for (Coin coin : coinStatus.keySet()) {
-			intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
-		}
-		return intCoinStatus;
-	}
-
 	public boolean isUserBuyMerchandise(int userMoney) {
 		List<Merchandise> notBuyMerchandise = merchandises.selectExpensiveMerchandise(userMoney);
 		return notBuyMerchandise.size() != merchandises.getMerchandisesSize();
@@ -91,5 +83,13 @@ public class VendingMachine {
 			}
 		}
 		return returnCoinCounts;
+	}
+
+	public static LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
+		LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
+		for (Coin coin : coinStatus.keySet()) {
+			intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
+		}
+		return intCoinStatus;
 	}
 }

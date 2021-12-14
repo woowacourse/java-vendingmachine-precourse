@@ -21,16 +21,6 @@ public class Merchandises {
 		this.merchandiseList = merchandiseList;
 	}
 
-	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
-		List<Merchandise> merchandiseList = new ArrayList<>();
-		for (String merchandiseInformation : merchandiseInformations.split(MERCHANDISE_PARSER)) {
-			validateInputMerchandise(merchandiseInformation);
-			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1).trim();
-			merchandiseList.add(constructMerchandise(merchandise));
-		}
-		return merchandiseList;
-	}
-
 	public Merchandise selectMerchandise(String merchandiseName) {
 		Merchandise merchandise = merchandiseList.stream()
 			.filter(sellMerchandise -> sellMerchandise.isEqualsName(merchandiseName))
@@ -57,6 +47,16 @@ public class Merchandises {
 
 	public int getMerchandisesSize() {
 		return merchandiseList.size();
+	}
+
+	public static List<Merchandise> constructMerchandises(String merchandiseInformations) {
+		List<Merchandise> merchandiseList = new ArrayList<>();
+		for (String merchandiseInformation : merchandiseInformations.split(MERCHANDISE_PARSER)) {
+			validateInputMerchandise(merchandiseInformation);
+			String merchandise = merchandiseInformation.substring(1, merchandiseInformation.length() - 1).trim();
+			merchandiseList.add(constructMerchandise(merchandise));
+		}
+		return merchandiseList;
 	}
 
 	public static void validateDuplicateMerchandise(List<Merchandise> merchandiseList) {

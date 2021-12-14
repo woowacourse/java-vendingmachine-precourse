@@ -20,17 +20,6 @@ public class Merchandise {
 		this.quantity = new Quantity(quantity);
 	}
 
-	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
-		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
-		validateEmptyMerchandiseInformation(informations);
-		validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
-		List<String> trimInformation = Arrays.stream(informations)
-			.map(information -> information.trim())
-			.collect(Collectors.toList());
-		return new Merchandise(trimInformation.get(0), Integer.parseInt(trimInformation.get(1)),
-			Integer.parseInt(trimInformation.get(2)));
-	}
-
 	public int getMerchandiseMoney() {
 		return money.getMoney();
 	}
@@ -49,6 +38,17 @@ public class Merchandise {
 
 	public boolean isBigMerchandiseMoney(int anotherMoney) {
 		return money.isBigMyMoney(anotherMoney);
+	}
+
+	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
+		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
+		validateEmptyMerchandiseInformation(informations);
+		validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
+		List<String> trimInformation = Arrays.stream(informations)
+			.map(information -> information.trim())
+			.collect(Collectors.toList());
+		return new Merchandise(trimInformation.get(0), Integer.parseInt(trimInformation.get(1)),
+			Integer.parseInt(trimInformation.get(2)));
 	}
 
 	public static void validateEmptyMerchandiseInformation(String[] merchandiseInformation) {
