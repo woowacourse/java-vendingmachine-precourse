@@ -14,7 +14,6 @@ public class Products {
 		products.add(product);
 	}
 
-
 	public Product getCheapestProduct() {
 		Collections.sort(products);
 		for (Product product : products) {
@@ -23,25 +22,6 @@ public class Products {
 			}
 		}
 		return null;
-	}
-
-	public Money getCheapestPrice() {
-		Collections.sort(products);
-		for (Product product : products) {
-			if (!product.soldOut()) {
-				return product.getPrice();
-			}
-		}
-		return new Money(0);
-	}
-
-	public boolean soldOut() {
-		for (Product product : products) {
-			if (!product.soldOut()) {
-				return false;
-			}
-		}
-		return true;
 	}
 
 	public Product findForName(String productName) {
