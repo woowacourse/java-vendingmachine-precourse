@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import java.util.EnumMap;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -11,7 +12,7 @@ public class Coins {
 	private static final int COIN_ADDER = 1;
 	private static final String DASH = "-";
 	private static final String POSTFIX = "개";
-	private EnumMap<Coin, Integer> coinMap;
+	private Map<Coin, Integer> coinMap;
 
 	public Coins(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
@@ -37,8 +38,8 @@ public class Coins {
 			.collect(Collectors.toList())));
 	}
 
-	public EnumMap<Coin, Integer> calculateChange(int insertMoney) {
-		EnumMap<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
+	public Map<Coin, Integer> calculateChange(int insertMoney) {
+		Map<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
 		for (Coin coin : coinMap.keySet()) {
 			if (coinMap.get(coin) > 0 && coin.isReturnable(insertMoney)) {
 				int returningCnt = Math.min(coinMap.get(coin), coin.divideByCoinAmount(insertMoney));
@@ -64,7 +65,7 @@ public class Coins {
 		return coinsStringBuilder.toString();
 	}
 
-	public String coinsToString(EnumMap<Coin, Integer> coins) {
+	public String coinsToString(Map<Coin, Integer> coins) {
 		StringBuilder coinsStringBuilder = new StringBuilder();
 		coins.keySet()
 			.forEach(coin -> coinsStringBuilder.append(coin.toString())

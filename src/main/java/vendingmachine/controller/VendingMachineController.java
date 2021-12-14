@@ -1,8 +1,8 @@
 package vendingmachine.controller;
 
 import java.util.ArrayList;
-import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
@@ -84,7 +84,7 @@ public class VendingMachineController {
 			}
 		}
 		OutputView.printInsertMoney(insertMoney);
-		EnumMap<Coin, Integer> change = coins.calculateChange(insertMoney);
+		Map<Coin, Integer> change = coins.calculateChange(insertMoney);
 		OutputView.printChange(coins.coinsToString(change));
 	}
 
