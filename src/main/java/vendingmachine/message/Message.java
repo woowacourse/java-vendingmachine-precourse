@@ -10,7 +10,9 @@ public enum Message {
 	ENTER_PRODUCT_GOING_TO_PURCHASE("구매할 상품명을 입력해 주세요."),
 	PRINT_BALANCE("잔돈"),
 	PRINT_AMOUNT_UNIT("개"),
-	PRINT_MONEY_UNIT("원");
+	PRINT_MONEY_UNIT("원"),
+	LINE_BREAKER("\n"),
+	REST_MONEY_SEPARATOR(" - ");
 
 
 	private String message;

@@ -8,6 +8,9 @@ import vendingmachine.exception.ErrorMessage;
 import vendingmachine.validation.enumclass.Constant;
 
 public class GlobalValidation {
+	private static final String OPEN_BRACKET = "[";
+	private static final String CLOSE_BRACKET = "]";
+	private static final String DIVISOR_PRODUCT_LIST = ";";
 
 	public static void validateCostIsNaturalNumber(String willHoldMoney) {
 		validateStringIsInt(willHoldMoney, ErrorMessage.COST_IS_NOT_NUMBER_ERROR);
@@ -26,13 +29,13 @@ public class GlobalValidation {
 	}
 
 	public static void validateProductsInputFormat(String inputStr) {
-		for (String product : inputStr.split(";")) {
+		for (String product : inputStr.split(DIVISOR_PRODUCT_LIST)) {
 			validateStringContainsSquareBracket(product, ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR);
 		}
 	}
 
 	private static void validateStringContainsSquareBracket(String string, ErrorMessage errorMessage) {
-		if (!string.contains("[") || !string.contains("]")) {
+		if (!string.contains(OPEN_BRACKET) || !string.contains(CLOSE_BRACKET)) {
 			throw new IllegalArgumentException(errorMessage.getErrorMessage());
 		}
 	}
@@ -67,7 +70,7 @@ public class GlobalValidation {
 	}
 
 	public static void validateProductIsNotInProducts(String name, List<Product> products) {
-		if (!products.contains(new Product(name, 0, 0))) {
+		if (!products.contains(new Product(name, Constant.ZERO.getNumber(), Constant.ZERO.getNumber()))) {
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_NAME_IS_NOT_IN_PRODUCTS.getErrorMessage());
 		}
 	}

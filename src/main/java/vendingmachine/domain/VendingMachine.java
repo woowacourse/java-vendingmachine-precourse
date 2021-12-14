@@ -14,6 +14,7 @@ import vendingmachine.validation.GlobalValidation;
 import vendingmachine.validation.validator.InputProductValidator;
 
 public class VendingMachine {
+	private static final String DIVISOR_PRODUCT = ",";
 
 	private Map<Integer, Integer> coinMap;
 	private List<Product> products;
@@ -59,7 +60,7 @@ public class VendingMachine {
 
 	public void addProducts(String[] productList) {
 		for (String rowProduct : productList) {
-			String[] product = rowProduct.split(",");
+			String[] product = rowProduct.split(DIVISOR_PRODUCT);
 			InputProductValidator.validateProduct(product, products);
 
 			addProduct(
