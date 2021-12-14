@@ -44,36 +44,29 @@ public enum Coin {
         return vendingMachineMoney / COIN_500.getAmount();
     }
 
-    public List<Integer> fiveHundredCoins(int maxFiveHundredCoin) {
-        List<Integer> fiveHundredCoinList = new ArrayList<>();
-        for (int i = 0; i < maxFiveHundredCoin + 1; i++) {
-            fiveHundredCoinList.add(i);
+    public List<Integer> generateCoins(int vendingMachineMoney) {
+        List<Integer> coins = new ArrayList<>();
+        if (countMaxFiveHundredCoin(vendingMachineMoney) > 0) {
+            coins.add(COIN_500.amount);
         }
-        return fiveHundredCoinList;
+        if (countMaxOneHundredCoin(vendingMachineMoney) > 0) {
+            coins.add(COIN_100.amount);
+        }
+        if (countMaxFiftyCoin(vendingMachineMoney) > 0) {
+            coins.add(COIN_50.amount);
+        }
+        if (countMaxTenCoin(vendingMachineMoney) > 0) {
+            coins.add(COIN_10.amount);
+        }
+        return coins;
     }
 
     public int countMaxOneHundredCoin(int vendingMachineMoney) {
         return vendingMachineMoney / COIN_100.getAmount();
     }
 
-    public List<Integer> oneHundredCoins(int maxOneHundredCoin) {
-        List<Integer> oneHundredCoinList = new ArrayList<>();
-        for (int i = 0; i < maxOneHundredCoin + 1; i++) {
-            oneHundredCoinList.add(i);
-        }
-        return oneHundredCoinList;
-    }
-
     public int countMaxFiftyCoin(int vendingMachineMoney) {
         return vendingMachineMoney / COIN_50.getAmount();
-    }
-
-    public List<Integer> fiftyCoins(int maxFiftyCoin) {
-        List<Integer> fiftyCoinList = new ArrayList<>();
-        for (int i = 0; i < maxFiftyCoin + 1; i++) {
-            fiftyCoinList.add(i);
-        }
-        return fiftyCoinList;
     }
 
     public int countMaxTenCoin(int vendingMachineMoney) {

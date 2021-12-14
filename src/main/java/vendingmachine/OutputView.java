@@ -9,9 +9,9 @@ public class OutputView {
     public static final String FIFTY_COIN = "50원 - ";
     public static final String TEN_COIN = "10원 - ";
     public static final String UNIT = "개";
-    private static final String INPUT_MONEY = "\n투입 금액 :";
+    private static final String INPUT_MONEY = "\n투입 금액:";
     public static final String CHANGE = "잔돈";
-    public static final String WON = "개";
+    public static final String WON = "원";
 
     public static void printFiveHundredRandomCoins(int randomCoin) {
         StringBuilder fiveHundredCoinList = new StringBuilder();

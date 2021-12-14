@@ -1,7 +1,6 @@
 package vendingmachine;
 
 import validator.ExceptionMessage;
-import validator.ProductValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;

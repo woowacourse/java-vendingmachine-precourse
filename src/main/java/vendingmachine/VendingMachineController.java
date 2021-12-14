@@ -28,8 +28,8 @@ public class VendingMachineController {
 
         do {
             String inputProductName = InputView.inputProductToBuy(inputMoney);
-            inputMoney = purchaseProduct(inputProductName,productList,inputMoney);
-        }while(stopPurchasing(inputMoney, productList));
+            inputMoney = purchaseProduct(inputProductName, productList, inputMoney);
+        } while (stopPurchasing(inputMoney, productList));
 
         Map<Integer, Integer> changes = change.getChanges(coins, inputMoney);
         OutputView.lastInputMoney(inputMoney, changes);
@@ -37,10 +37,29 @@ public class VendingMachineController {
     }
 
     private Map<String, Integer> getRandomCoins() {
-        int fiveHundredCoin = createFiveHundredCoinRandomly(maxFiveHundredCoin);
-        int oneHundredCoin = createOneHundredCoinRandomly(maxOneHundredCoin);
-        int fiftyCoin = createFiftyCoinRandomly(maxFiftyCoin);
-        int tenCoin = createTenCoin(maxTenCoin);
+        int restMoney = vendingMachineMoney;
+        int fiveHundredCoin = 0;
+        int oneHundredCoin = 0;
+        int fiftyCoin = 0;
+        int tenCoin = 0;
+
+        while (restMoney != 0) {
+            int coin = selectCoin(restMoney);
+            restMoney -= coin;
+            if (coin == 500) {
+                fiveHundredCoin++;
+            }
+            if (coin == 100) {
+                oneHundredCoin++;
+            }
+            if (coin == 50) {
+                fiftyCoin++;
+            }
+            if (coin == 10) {
+                tenCoin++;
+            }
+        }
+
 
         OutputView.printFiveHundredRandomCoins(fiveHundredCoin);
         OutputView.printOneHundredRandomCoins(oneHundredCoin);
@@ -50,20 +69,24 @@ public class VendingMachineController {
         return getCoins(fiveHundredCoin, oneHundredCoin, fiftyCoin, tenCoin);
     }
 
+    private int selectCoin(int restMoney) {
+        return Coin.COIN_500.createCoinRandom(Coin.COIN_500.generateCoins(restMoney));
+    }
+
     private Map<String, Integer> getCoins(int fiveHundredCoin, int oneHundredCoin, int fiftyCoin, int tenCoin) {
         Map<String, Integer> coins = new LinkedHashMap<>();
-        coins.put("Coin_"+Coin.COIN_500.getAmount(), fiveHundredCoin);
-        coins.put("Coin_"+Coin.COIN_100.getAmount(), oneHundredCoin);
-        coins.put("Coin_"+Coin.COIN_50.getAmount(), fiftyCoin);
-        coins.put("Coin_"+Coin.COIN_10.getAmount(), tenCoin);
+        coins.put("Coin_" + Coin.COIN_500.getAmount(), fiveHundredCoin);
+        coins.put("Coin_" + Coin.COIN_100.getAmount(), oneHundredCoin);
+        coins.put("Coin_" + Coin.COIN_50.getAmount(), fiftyCoin);
+        coins.put("Coin_" + Coin.COIN_10.getAmount(), tenCoin);
         return coins;
     }
 
     private int findMinimumPrice(List<Product> productList) {
         int minimumPrice = productList.get(0).getPrice();
 
-        for (Product product:productList) {
-            if(minimumPrice > product.getPrice()){
+        for (Product product : productList) {
+            if (minimumPrice > product.getPrice()) {
                 minimumPrice = product.getPrice();
             }
         }
@@ -75,15 +98,15 @@ public class VendingMachineController {
         int minimumPrice = findMinimumPrice(productList);
         boolean isStopPurchasing = true;
 
-        if(inputMoney <= 0){
+        if (inputMoney <= 0) {
             isStopPurchasing = false;
         }
 
-        if(inputMoney < minimumPrice){
+        if (inputMoney < minimumPrice) {
             isStopPurchasing = false;
         }
 
-        if(allSell(productList)){
+        if (allSell(productList)) {
             isStopPurchasing = false;
         }
 
@@ -94,7 +117,7 @@ public class VendingMachineController {
     private boolean allSell(List<Product> productList) {
         boolean isAllSell = true;
 
-        for (Product product:productList) {
+        for (Product product : productList) {
             if (product.getCount() != 0) {
                 isAllSell = false;
                 break;
@@ -106,39 +129,12 @@ public class VendingMachineController {
 
     private int purchaseProduct(String inputProductName, List<Product> productList, int inputMoney) {
 
-        for (Product product:productList) {
-            if(product.getProductName().equals(inputProductName)){
+        for (Product product : productList) {
+            if (product.getProductName().equals(inputProductName)) {
                 inputMoney = product.sell(inputMoney);
             }
         }
 
         return inputMoney;
-    }
-
-
-    public static int createFiveHundredCoinRandomly(int maxFiveHundredCoin) {
-        maxFiveHundredCoin = Coin.COIN_500.countMaxFiveHundredCoin(vendingMachineMoney);
-        List<Integer> fiveHundredCoins = Coin.COIN_500.fiveHundredCoins(maxFiveHundredCoin);
-        fiveHundredRandomCoin = Coin.COIN_500.createCoinRandom(fiveHundredCoins);
-        return fiveHundredRandomCoin;
-    }
-
-    public static int createOneHundredCoinRandomly(int maxOneHundredCoin) {
-        maxOneHundredCoin = Coin.COIN_100.countMaxOneHundredCoin(vendingMachineMoney - (fiveHundredRandomCoin * 500));
-        List<Integer> oneHundredCoins = Coin.COIN_100.oneHundredCoins(maxOneHundredCoin);
-        oneHundredRandomCoin = Coin.COIN_100.createCoinRandom(oneHundredCoins);
-        return oneHundredRandomCoin;
-    }
-
-    public static int createFiftyCoinRandomly(int maxFiftyCoin) {
-        maxFiftyCoin = Coin.COIN_50.countMaxFiftyCoin(vendingMachineMoney - (fiveHundredRandomCoin * 500) - (oneHundredRandomCoin * 100));
-        List<Integer> fiftyCoins = Coin.COIN_50.fiftyCoins(maxFiftyCoin);
-        fiftyRandomCoin = Coin.COIN_50.createCoinRandom(fiftyCoins);
-        return fiftyRandomCoin;
-    }
-
-    public static int createTenCoin(int maxTenCoin) {
-        maxTenCoin = Coin.COIN_10.countMaxTenCoin(vendingMachineMoney - (fiveHundredRandomCoin * 500) - (oneHundredRandomCoin * 100) - (fiftyRandomCoin * 50));
-        return maxTenCoin;
     }
 }
