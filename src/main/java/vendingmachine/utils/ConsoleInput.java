@@ -1,10 +1,9 @@
-package vendingmachine.io;
+package vendingmachine.utils;
 
 import java.util.function.Supplier;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.service.ProductService;
-import vendingmachine.utils.ProductParser;
 import vendingmachine.validator.InputValidator;
 
 public class ConsoleInput {

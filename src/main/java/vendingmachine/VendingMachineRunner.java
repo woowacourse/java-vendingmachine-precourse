@@ -2,8 +2,8 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.controller.VendingMachine;
-import vendingmachine.io.ConsolePrinter;
-import vendingmachine.io.ConsoleInput;
+import vendingmachine.view.ConsolePrinter;
+import vendingmachine.utils.ConsoleInput;
 
 public class VendingMachineRunner {
 

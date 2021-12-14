@@ -1,4 +1,4 @@
-package vendingmachine.io;
+package vendingmachine.view;
 
 import java.io.PrintStream;
 import java.util.Arrays;

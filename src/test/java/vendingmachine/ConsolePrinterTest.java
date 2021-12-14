@@ -16,7 +16,7 @@ import vendingmachine.domain.Changes;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
-import vendingmachine.io.ConsolePrinter;
+import vendingmachine.view.ConsolePrinter;
 
 public class ConsolePrinterTest {
 
