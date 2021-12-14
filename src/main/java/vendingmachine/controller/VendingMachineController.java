@@ -11,20 +11,16 @@ public class VendingMachineController {
 	public VendingMachineController() {
 		OutputView.setVendingMachineMoney();
 		vendingMachine = new VendingMachine(InputView.readPositiveInt());
-		showVendingMachineCoins();
+		OutputView.showCoins(vendingMachine.getCoinStorageBox());
 	}
 
-	private void showVendingMachineCoins() {
-		OutputView.showCoins(vendingMachine.getCoinStorage());
-	}
-
-	public void addProduct() {
-		OutputView.addProductAndNumbers();
+	public void addItems() {
+		OutputView.addItems();
 		vendingMachine.addNewItems(InputView.readItems());
 		OutputView.breakLine();
 	}
 
-	public void buyProduct() {
+	public void buyItems() {
 		OutputView.enterInputMoney();
 		int money = InputView.readPositiveInt();
 		while (checkCanBuyProduct(money)) {
@@ -36,8 +32,8 @@ public class VendingMachineController {
 		}
 	}
 
-	public void showChange() {
-		OutputView.showCoinStorageState(vendingMachine.getCoinStorage());
+	public void showVendingMachineCoins() {
+		OutputView.showCoinStorageState(vendingMachine.getCoinStorageBox());
 	}
 
 	private boolean checkCanBuyProduct(int money) {

@@ -13,30 +13,30 @@ public class CoinStorage {
 	private final Validator validator = new Validator();
 
 	public CoinStorage(int startCoins) {
-		setInitialCoin();
+		setInitialCoins();
 		validator.validateCoin(startCoins);
-		setCoins(startCoins);
+		putRandomCoinsFromMoney(startCoins);
 	}
 
-	private void setInitialCoin() {
+	private void setInitialCoins() {
 		Arrays.stream(Coin.values())
 			.forEach(coin -> box.put(coin, INITIAL));
 	}
 
-	private void setCoins(int money) {
+	private void putRandomCoinsFromMoney(int money) {
 		if (money <= 0) {
 			return;
 		}
 		Coin coinPicked = Coin.pickRandomCoinUnderMoney(money);
 		putCoin(coinPicked);
-		setCoins(money - coinPicked.getAmount());
+		putRandomCoinsFromMoney(money - coinPicked.getAmount());
 	}
 
 	private void putCoin(Coin coin) {
 		box.put(coin, box.get(coin) + 1);
 	}
 
-	public void changeCoins(int money) {
+	public void getChangeCoins(int money) {
 		for (Coin coin : box.keySet()) {
 			int coinNumberToPay = Math.min(box.get(coin), money / coin.getAmount());
 			box.put(coin, box.get(coin) - coinNumberToPay);

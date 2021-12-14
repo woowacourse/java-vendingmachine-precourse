@@ -3,9 +3,8 @@ package vendingmachine.domain;
 import static vendingmachine.constant.Constant.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 public class VendingMachine {
 	private final List<Item> salesItems = new ArrayList<>();
@@ -29,25 +28,24 @@ public class VendingMachine {
 	}
 
 	public int getItem(String itemName, int money) {
-		Optional<Item> it = salesItems.stream()
+		Item itemPicked = salesItems.stream()
 			.filter(item -> item.getName().equals(itemName))
 			.filter(Item::isNotSoldOut)
-			.findAny();
-		if (!it.isPresent()) {
-			throw new IllegalArgumentException(NO_STOCKS_MESSAGE);
-		}
-		coinStorage.changeCoins(money - it.get().getPrice());
-		return money - it.get().getPrice();
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(NO_ITEMS_MESSAGE));
+		coinStorage.getChangeCoins(money - itemPicked.getPrice());
+		itemPicked.sell();
+		return money - itemPicked.getPrice();
 	}
 
-	public CoinStorage getCoinStorage() {
-		return coinStorage;
+	public LinkedHashMap<Coin, Integer> getCoinStorageBox() {
+		return coinStorage.checkbox();
 	}
 
 	public int getNeedMinimumMoney() {
 		return salesItems.stream()
 			.mapToInt(Item::getPrice)
 			.min()
-			.orElseThrow(NoSuchElementException::new);
+			.orElseThrow(() -> new IllegalArgumentException(NO_ITEMS_MESSAGE));
 	}
 }

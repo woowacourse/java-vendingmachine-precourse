@@ -5,7 +5,6 @@ import static vendingmachine.constant.Constant.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 public enum Coin {
@@ -25,18 +24,18 @@ public enum Coin {
 		return amount;
 	}
 
-	public static List<Integer> getCoinList() {
+	public static List<Integer> getCoinValueList() {
 		return Arrays.stream(Coin.values())
 			.map(Coin::getAmount)
 			.collect(Collectors.toList());
 	}
 
 	public static Coin pickRandomCoinUnderMoney(int money) {
-		int coinValue = pickNumberInList(getCoinList());
+		int coinValue = pickNumberInList(getCoinValueList());
 		Coin coinPicked = Arrays.stream(Coin.values())
 			.filter(coin -> coin.getAmount() == coinValue)
-			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException(""));
+			.findAny()
+			.orElseThrow(() -> new IllegalArgumentException(NO_MATCHING_VALUE));
 		if (coinPicked.amount <= money) {
 			return coinPicked;
 		}
@@ -47,7 +46,7 @@ public enum Coin {
 		return Arrays.stream(Coin.values())
 			.mapToInt(Coin::getAmount)
 			.min()
-			.orElseThrow(NoSuchElementException::new);
+			.orElseThrow(() -> new IllegalArgumentException(NO_ANY_COIN));
 	}
 
 }
