@@ -10,5 +10,5 @@ public class Exception {
     public static final String PRODUCT_QUANTITY_NUMBER_EXCEPTION_MESSAGE = "[ERROR] 상품의 수량은 양수의 숫자만 입력해주세요.";
     public static final String PRODUCT_QUANTITY_ZERO_EXCEPTION_MESSAGE = "[ERROR] 상품의 수량은 1개 이상으로 입력해주세요.";
     public static final String PRODUCT_NAME_DUPLICATE_EXCEPTION_MESSAGE = "[ERROR] 제품명의 이름이 중복됩니다.";
-    public static final String PRODUCT_SOLD_OUT_MESSAGE = "[ERROR] 해당 제품의 제고가 없습니다.";
+    public static final String PRODUCT_SOLD_OUT_MESSAGE = "[ERROR] 해당 제품의 재고가 없습니다.";
 }

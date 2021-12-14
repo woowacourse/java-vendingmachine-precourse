@@ -82,6 +82,8 @@ public class VendingMachine {
     private void validateExistProduct(String productName) {
         if (!isProductExistName(productName)) {
             throw new IllegalArgumentException(Exception.PRODUCT_NO_NAME_EXCEPTION_MESSAGE);
+        } else if (isProductSoldOut(productName)) {
+            throw new IllegalArgumentException(Exception.PRODUCT_SOLD_OUT_MESSAGE);
         }
     }
 
@@ -90,6 +92,15 @@ public class VendingMachine {
                 .map(Product::getName)
                 .collect(Collectors.toList())
                 .contains(productName);
+    }
+
+    private boolean isProductSoldOut(String productName) {
+        for (Product product : products) {
+            if (product.getName().equals(productName) && product.isSoldOut()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private void validateVendingMachineMoney(String price) {
