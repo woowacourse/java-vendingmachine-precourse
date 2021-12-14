@@ -14,7 +14,7 @@ class CoinsTest {
 		final int POSSESSION = 450;
 		Map<Coin, Integer> entry = coins.createCoins(POSSESSION);
 
-		View.showCoins(entry, Message.POSSESSION_COIN);
+		View.showCoins(entry, Message.ANSWER_POSSESSION_COIN);
 
 		int totalCoinAmount = 0;
 		for (Map.Entry<Coin, Integer> e : entry.entrySet()) {
