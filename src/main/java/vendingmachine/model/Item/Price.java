@@ -26,7 +26,4 @@ public class Price {
     public String toString() {
         return Integer.toString(price);
     }
-
-
-
 }
