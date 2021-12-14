@@ -23,10 +23,6 @@ public class Money {
 		money -= moneyAmount;
 	}
 
-	public boolean payable(final int moneyAmount) {
-		return moneyAmount <= money;
-	}
-
 	public Map<Integer, Integer> makeChanges(final Coins coins) {
 		Map<Integer, Integer> changes = new LinkedHashMap<>();
 		for (Map.Entry<Integer, Integer> coin : coins.findRestCoins().entrySet()) {
@@ -55,5 +51,9 @@ public class Money {
 	@Override
 	public String toString() {
 		return INSERTED_AMOUNT + COLON + BLANK + money + WON;
+	}
+
+	public int getMoney() {
+		return money;
 	}
 }

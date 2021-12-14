@@ -69,7 +69,7 @@ public class OutputView {
 		System.out.println(PERCHASE_ITEM_REQUEST_TEXT);
 	}
 
-	public void printMoney(final Money money) {
+	public void printMoney(final int money) {
 		printNewLine();
 		System.out.println(money);
 	}

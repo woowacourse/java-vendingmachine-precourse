@@ -20,10 +20,10 @@ public class VendingMachineController {
 		coinController.setupHoldingCoins();
 		itemcontroller.setupItems();
 		this.money = giveMoney();
-		sellItem();
+		sellItem(money.getMoney());
 
-		outputView.printMoney(money);
-		outputView.printChanges(coinController.getChanges(coins, money));
+		outputView.printMoney(money.getMoney());
+		outputView.printChanges(coinController.getChanges(coins, money.getMoney()));
 	}
 
 	private Money giveMoney() {
@@ -36,8 +36,8 @@ public class VendingMachineController {
 		}
 	}
 
-	private void sellItem() {
-		while (this.money.payable(itemcontroller.getLeastItemCost())
+	private void sellItem(int money) {
+		while (this.money.getMoney() >= itemcontroller.getLeastItemCost()
 			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
 				itemcontroller.update(money);

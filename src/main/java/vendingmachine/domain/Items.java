@@ -22,7 +22,7 @@ public class Items {
 		return Collections.unmodifiableList(items);
 	}
 
-	public Item findItemByName(final String name, final Money money) {
+	public Item findItemByName(final String name, final int money) {
 		Item foundItem = items.stream()
 			.filter((item) -> name.equals(item.getName()))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException(CANNOT_FIND_NAME_ERROR));
@@ -30,11 +30,11 @@ public class Items {
 		return foundItem;
 	}
 
-	private void checkItemSellable(final Item item, final Money money) {
+	private void checkItemSellable(final Item item, final int money) {
 		if (!item.isStockExist()) {
 			throw new IllegalArgumentException(OUT_OF_ORDER_ERROR);
 		}
-		if (!money.payable(item.getCost())) {
+		if (!(money >= (item.getCost()))) {
 			throw new IllegalArgumentException(NOT_ENOUGH_MONEY_ERROR);
 		}
 	}

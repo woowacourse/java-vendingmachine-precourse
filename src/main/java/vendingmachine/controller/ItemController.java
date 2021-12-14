@@ -79,7 +79,7 @@ public class ItemController {
 			.getCost();
 	}
 
-	public void update(final Money money) {
+	public void update(final int money) {
 		outputView.printMoney(money);
 		outputView.printItemPerChaseRequest();
 		Item item = items.findItemByName(inputView.scanItemName(), money);

@@ -45,7 +45,7 @@ public class CoinController {
 		return coinAmount;
 	}
 
-	public Map<Integer, Integer> getChanges(final Coins coins, final Money money) {
+	public Map<Integer, Integer> getChanges(final Coins coins, final int money) {
 		Map<Integer, Integer> changes = money.makeChanges(coins);
 		coins.update(changes);
 		return changes;
