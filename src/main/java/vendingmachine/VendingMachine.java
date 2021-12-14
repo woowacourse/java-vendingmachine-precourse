@@ -41,4 +41,14 @@ public class VendingMachine {
             }
         }
     }
+
+    public int getMinPrice() {
+        int minPrice = 99999;
+        for (int i=0; i<productList.size(); i++) {
+            if (productList.get(i).getPrice() < minPrice) {
+                minPrice = productList.get(i).getPrice();
+            }
+        }
+        return minPrice;
+    }
 }
