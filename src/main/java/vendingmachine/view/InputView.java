@@ -15,13 +15,11 @@ import vendingmachine.validator.InputValidator;
 
 public class InputView {
 
-
-
 	public static int getMachineMoney() {
 		while (true) {
+			out.println(INPUT_MACHINE_MONEY);
+			String input = Console.readLine().trim();
 			try {
-				out.println(INPUT_MACHINE_MONEY);
-				String input = Console.readLine().trim();
 				InputValidator.validateMachineMoney(input);
 				printEmptyLine();
 				return Integer.parseInt(input);
@@ -33,9 +31,9 @@ public class InputView {
 
 	public static List<Item> getItems() {
 		while (true) {
+			out.println(INPUT_ITEM_NAMES);
+			String input = Console.readLine().trim();
 			try {
-				out.println(INPUT_ITEM_NAMES);
-				String input = Console.readLine().trim();
 				printEmptyLine();
 				return getItems(input);
 			} catch (Exception exception) {
@@ -68,9 +66,9 @@ public class InputView {
 
 	public static int getMoneyToBuy() {
 		while (true) {
+			out.println(INPUT_MONEY_TO_BUY);
+			String input = Console.readLine().trim();
 			try {
-				out.println(INPUT_MONEY_TO_BUY);
-				String input = Console.readLine().trim();
 				InputValidator.validateMoneyToBuy(input);
 				SystemMessage.printEmptyLine();
 				return Integer.parseInt(input);
@@ -82,9 +80,9 @@ public class InputView {
 
 	public static Item printBuying(int remainingMoney) {
 		while (true) {
+			out.printf(INFO_REMAINING_MONEY, remainingMoney);
+			out.println(INPUT_ITEM_NAME_TO_BUY);
 			try {
-				out.printf(INFO_REMAINING_MONEY, remainingMoney);
-				out.println(INPUT_ITEM_NAME_TO_BUY);
 				String input = Console.readLine().trim();
 				InputValidator.validateExistItem(input);
 				SystemMessage.printEmptyLine();
