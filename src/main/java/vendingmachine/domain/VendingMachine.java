@@ -16,7 +16,7 @@ public class VendingMachine {
 
     public VendingMachine(int inputMoney) {
         minimumPrice = MAXIMUM_PRODUCT_PRICE;
-        coinHashMap = new RandomUtility().generateRandomCoins(inputMoney);
+        coinHashMap = RandomUtility.getInstance().generateRandomCoins(inputMoney);
         productMap = new HashMap<>();
     }
 

@@ -11,6 +11,16 @@ public class ValidationImplementation implements Validation {
     private static final Pattern HANGLE_PATTERN = Pattern.compile("^[가-힣]*$");
     private static final Pattern DIGIT_PATTERN = Pattern.compile("^[0-9]*$");
 
+    private ValidationImplementation() {}
+
+    private static class LazyHolder {
+        public static final ValidationImplementation INSTANCE = new ValidationImplementation();
+    }
+
+    public static ValidationImplementation getInstance(){
+        return ValidationImplementation.LazyHolder.INSTANCE;
+    }
+
     @Override
     public boolean isValidHoldingMoney(String holdingMoney) {
         boolean result = true;

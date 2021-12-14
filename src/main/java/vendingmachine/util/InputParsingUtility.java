@@ -8,7 +8,18 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.Product;
 
 public class InputParsingUtility {
-    public List<Product> parsing(String productNameAndPriceAndStocks) {
+
+    private InputParsingUtility() {}
+
+    private static class LazyHolder {
+        public static final InputParsingUtility INSTANCE = new InputParsingUtility();
+    }
+
+    public static InputParsingUtility getInstance(){
+        return LazyHolder.INSTANCE;
+    }
+
+    public List<Product> toProductFormatting(String productNameAndPriceAndStocks) {
         List<String> streamProductInformation = Arrays.stream(productNameAndPriceAndStocks.split(";")).collect(Collectors.toList());
         List<Product> results = new ArrayList<>();
         for (String productInformation : streamProductInformation) {

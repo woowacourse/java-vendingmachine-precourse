@@ -11,8 +11,8 @@ public class VendingMachineSystem {
     private final OutPutVendingMachineController outputController;
 
     public VendingMachineSystem() {
-        inputController = new InputVendingMachineController();
-        outputController = new OutPutVendingMachineController();
+        inputController = InputVendingMachineController.getInstance();
+        outputController = OutPutVendingMachineController.getInstance();
     }
 
     public void start() {

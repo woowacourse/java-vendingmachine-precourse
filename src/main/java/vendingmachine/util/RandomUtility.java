@@ -8,6 +8,17 @@ import vendingmachine.domain.Coin;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class RandomUtility {
+
+    private RandomUtility() {}
+
+    private static class LazyHolder {
+        public static final RandomUtility INSTANCE = new RandomUtility();
+    }
+
+    public static RandomUtility getInstance() {
+        return RandomUtility.LazyHolder.INSTANCE;
+    }
+
     public Map<Coin, Integer> generateRandomCoins(int inputMoney) {
         Map<Coin, Integer> newCoinHashMap = new LinkedHashMap<>();
         for (Coin coin : Coin.values()) {

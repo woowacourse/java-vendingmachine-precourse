@@ -17,10 +17,18 @@ public class InputVendingMachineController {
     private final OutPutVendingMachineController outputController;
     private final InputParsingUtility inputParsingUtility;
 
-    public InputVendingMachineController() {
-        this.validation = new ValidationImplementation();
-        this.outputController = new OutPutVendingMachineController();
-        this.inputParsingUtility = new InputParsingUtility();
+    private InputVendingMachineController() {
+        this.validation = ValidationImplementation.getInstance();
+        this.outputController = OutPutVendingMachineController.getInstance();
+        this.inputParsingUtility = InputParsingUtility.getInstance();
+    }
+
+    private static class LazyHolder {
+        public static final InputVendingMachineController INSTANCE = new InputVendingMachineController();
+    }
+
+    public static InputVendingMachineController getInstance() {
+        return InputVendingMachineController.LazyHolder.INSTANCE;
     }
 
     public int inputHoldingMoney() {
@@ -52,7 +60,7 @@ public class InputVendingMachineController {
                 isValidInput = false;
             }
         } while (!isValidInput);
-        return inputParsingUtility.parsing(productNameAndPriceAndStocks);
+        return inputParsingUtility.toProductFormatting(productNameAndPriceAndStocks);
     }
 
     public int inputCustomerInsertMoney() {
