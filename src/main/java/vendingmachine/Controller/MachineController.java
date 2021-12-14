@@ -40,6 +40,7 @@ public class MachineController {
 
 	private void giveChanges() {
 		OutputView.printUserMoney(vendingMachine.userMoney);
-		OutputView.printChanges(new ChangesCoinGroup(vendingMachine.coins, vendingMachine.userMoney).getNotEmptyMap());
+		ChangesCoinGroup changesCoins = new ChangesCoinGroup(vendingMachine.coins, vendingMachine.userMoney);
+		OutputView.printChanges(changesCoins.getNotEmptyMap());
 	}
 }
