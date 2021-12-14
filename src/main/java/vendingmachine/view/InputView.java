@@ -11,7 +11,6 @@ public class InputView {
     private static final String INPUT_VENDING_MACHINE_OWN_MONEY_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 
     private static final String INPUT_PRODUCTS = "상품명과 가격, 수량을 입력해 주세요.";
-    private static final String INPUT_PRODUCT_REGEX = "\\[.*,[0-9]+,[0-9]+\\]";
     private static final String INPUT_PRODUCTS_DELIMITER = ";";
     private static final String INPUT_PRODUCT_DELIMIETER = ",";
     private static final int INPUT_PRODUCTS_LIMIT = -1;
@@ -20,6 +19,8 @@ public class InputView {
 
     private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
 
+    private static final String INPUT_PRODUCT_START_FROMAT = "[";
+    private static final String INPUT_PRODUCT_END_FROMAT = "]";
     private static final String INPUT_FORMAT_ERROR_MESSAGE = "[ERROR] 정해진 입력방식이 아닙니다.";
     private static final String INPUT_FORMAT_GUIDE_MESSAGE = "상품명, 가격, 수량은 쉼표로, 개별 상품은 대괄호([])로 묶어 세미콜론(;)으로 구분해주세요.";
     private static final String LINE_BREAK = "\n";
@@ -54,14 +55,18 @@ public class InputView {
     }
 
     private static void checkInputProductPattern(List<String> products) {
-        if (isInputProductPatternMismatches(products)) {
+        if (isProductsPatternMismatches(products)) {
             throw new IllegalArgumentException(INPUT_FORMAT_ERROR_MESSAGE + LINE_BREAK + INPUT_FORMAT_GUIDE_MESSAGE);
         }
     }
 
-    private static boolean isInputProductPatternMismatches(List<String> products) {
+    private static boolean isProductsPatternMismatches(List<String> products) {
         return products.stream()
-            .anyMatch(product -> !product.matches(INPUT_PRODUCT_REGEX));
+            .anyMatch(InputView::isProductFormatMismatches);
+    }
+
+    private static boolean isProductFormatMismatches(String product) {
+        return !product.startsWith(INPUT_PRODUCT_START_FROMAT) || !product.endsWith(INPUT_PRODUCT_END_FROMAT);
     }
 
     private static List<String> splitByDelimiterToList(String product) {
@@ -69,7 +74,7 @@ public class InputView {
     }
 
     private static Product valueToProduct(List<String> products) {
-        return new Product(products.get(0), Integer.parseInt(products.get(1)), Integer.parseInt(products.get(2)));
+        return Product.crearteProduct(products);
     }
 
     public static String inputMoney() {
