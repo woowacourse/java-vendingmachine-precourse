@@ -10,10 +10,10 @@ public class InputMoneyValidator {
 		}
 	}
 
-	public int validateMoney(String inputAmount) {
+	public int validateMoney(String inputAmount, int invalidBoundary) {
 		try {
 			int amount = transferToInt(inputAmount);
-			validateRange(amount);
+			validateRange(amount, invalidBoundary);
 			validateIsDivisibleBy10(amount);
 			return amount;
 		} catch (IllegalArgumentException e) {
@@ -30,9 +30,9 @@ public class InputMoneyValidator {
 		}
 	}
 
-	private void validateRange(int amount) throws IllegalArgumentException {
-		if (amount < 0) {
-			throw new IllegalArgumentException(ErrorMsgConst.NEGATIVE_INT_ERROR_MSG);
+	private void validateRange(int amount, int invalidBoundary) throws IllegalArgumentException {
+		if (amount <= invalidBoundary) {
+			throw new IllegalArgumentException(ErrorMsgConst.INVALID_AMOUNT_RANGE_ERROR_MSG);
 		}
 	}
 }

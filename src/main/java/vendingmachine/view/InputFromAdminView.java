@@ -11,6 +11,7 @@ public class InputFromAdminView {
 	private static final String MACHINE_MONEY_INPUT_MSG = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String ITEM_INPUT_MSG = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String DELIMITER = ";";
+	private static final int INVALID_MACHINE_MONEY_BOUNDARY = -1;
 
 	private InputMoneyValidator inputMoneyValidator;
 	private InputItemValidator inputItemValidator;
@@ -24,7 +25,7 @@ public class InputFromAdminView {
 		System.out.println(MACHINE_MONEY_INPUT_MSG);
 		String inputAmount = Console.readLine();
 
-		int amount = inputMoneyValidator.validateMoney(inputAmount);
+		int amount = inputMoneyValidator.validateMoney(inputAmount, INVALID_MACHINE_MONEY_BOUNDARY);
 		if (amount >= 0) {
 			return amount;
 		}
