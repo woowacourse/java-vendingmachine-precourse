@@ -30,6 +30,11 @@ public class View {
         System.out.println("투입 금액을 입력해 주세요.");
         String result = Console.readLine();
         return Integer.parseInt(result);
+    }
 
+    public static String askProduct(int spentMoney) {
+        System.out.println("투입금액: "+spentMoney+"원");
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return Console.readLine();
     }
 }

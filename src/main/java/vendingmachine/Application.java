@@ -6,6 +6,7 @@ public class Application {
         controller.printCoins();
         controller.inputProduct();
         controller.setSpentMoney();
+        controller.order();
     }
 
     public static void main(String[] args) {

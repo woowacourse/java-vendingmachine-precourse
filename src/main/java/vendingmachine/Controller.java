@@ -68,4 +68,12 @@ public class Controller {
         vendingMachine.setSpentMoney((view.inputMoney()));
         System.out.println();
     }
+
+    public void order() {
+        while (vendingMachine.getSpentMoney() > vendingMachine.getMinPrice()) {
+            String menu = view.askProduct(vendingMachine.getSpentMoney());
+            vendingMachine.buyProduct(menu);
+            System.out.println();
+        }
+    }
 }
