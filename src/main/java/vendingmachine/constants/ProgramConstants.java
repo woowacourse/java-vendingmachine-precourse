@@ -10,5 +10,5 @@ public final class ProgramConstants {
 	public static final char ONE_ITEM_INPUT_END_CHAR = ']';
 	public static final int ITEM_ELEMENT_LENGTH = 3;
 	public static final int PRICE_INDEX = 1;
-	public static final int QUANTITY_INDEX = 2;
+	public static final int STOCK_INDEX = 2;
 }

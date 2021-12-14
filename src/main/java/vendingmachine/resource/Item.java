@@ -3,12 +3,12 @@ package vendingmachine.resource;
 public class Item {
 	private final String name;
 	private final int price;
-	private int quantity;
+	private int stock;
 
-	public Item(String name, int price, int quantity) {
+	public Item(String name, int price, int stock) {
 		this.name = name;
 		this.price = price;
-		this.quantity = quantity;
+		this.stock = stock;
 	}
 
 	public String getName() {
@@ -19,11 +19,11 @@ public class Item {
 		return price;
 	}
 
-	public int getQuantity() {
-		return quantity;
+	public int getStock() {
+		return stock;
 	}
 
-	public void reduceQuantity() {
-		quantity -= 1;
+	public void reduceStock() {
+		stock -= 1;
 	}
 }

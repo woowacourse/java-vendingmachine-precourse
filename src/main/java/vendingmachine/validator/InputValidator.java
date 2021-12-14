@@ -28,7 +28,7 @@ public class InputValidator {
 		checkPriceNotNaturalNumberExceptions(items);
 		checkPriceNotMultiplicationOfMinimumCoinTypeExceptions(items);
 		checkPriceUnderMinimumItemPriceExceptions(items);
-		checkQuantityNotNaturalNumberExceptions(items);
+		checkStockNotNaturalNumberExceptions(items);
 	}
 
 	public void checkAllInputAmountInputExceptions(String inputAmount) {
@@ -93,9 +93,9 @@ public class InputValidator {
 		}
 	}
 
-	private void checkQuantityNotNaturalNumberExceptions(String string) {
-		if (isNotNaturalNumber(string, QUANTITY_INDEX)) {
-			throw new IllegalArgumentException(QUANTITY_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
+	private void checkStockNotNaturalNumberExceptions(String string) {
+		if (isNotNaturalNumber(string, STOCK_INDEX)) {
+			throw new IllegalArgumentException(STOCK_NOT_NATURAL_NUMBER_ERROR_MESSAGE);
 		}
 	}
 

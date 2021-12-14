@@ -26,8 +26,8 @@ public class ItemModel {
 		for (int i = 0; i < itemList.size() / 3; i++) {
 			String name = itemList.get(i * 3);
 			int price = Integer.parseInt(itemList.get(i * 3 + 1));
-			int quantity = Integer.parseInt(itemList.get(i * 3 + 2));
-			itemStorage.creatItem(name, price, quantity);
+			int stock = Integer.parseInt(itemList.get(i * 3 + 2));
+			itemStorage.creatItem(name, price, stock);
 		}
 	}
 
@@ -38,14 +38,14 @@ public class ItemModel {
 				.orElseThrow(() -> new IllegalArgumentException(CANT_FIND_MINIMUM_PRICE_ITEM_ERROR_MESSAGE));
 	}
 
-	public boolean hasExtraQuantity() {
-		return itemStorage.getQuantityList().stream()
+	public boolean hasStock() {
+		return itemStorage.getStockList().stream()
 				.mapToInt(Integer::intValue)
 				.sum() > 0;
 	}
 
 	public void sellItem(String item) {
-		itemStorage.reduceItemQuantity(item);
+		itemStorage.reduceItemStock(item);
 	}
 
 	public int getPriceByName(String name) {

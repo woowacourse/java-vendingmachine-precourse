@@ -109,7 +109,7 @@ public class VendingMachineController {
 	}
 
 	private boolean canBuyItem() {
-		return itemModel.getMinimumPrice() <= userModel.getRemainingMoney() && itemModel.hasExtraQuantity();
+		return itemModel.getMinimumPrice() <= userModel.getRemainingMoney() && itemModel.hasStock();
 	}
 
 	private void buyItem() {

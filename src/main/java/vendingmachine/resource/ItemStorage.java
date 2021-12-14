@@ -21,16 +21,16 @@ public class ItemStorage {
 		return itemStorage;
 	}
 
-	public void creatItem(String name, int price, int quantity) {
-		itemList.add(new Item(name, price, quantity));
+	public void creatItem(String name, int price, int stock) {
+		itemList.add(new Item(name, price, stock));
 	}
 
 	public List<Integer> getPriceList() {
 		return itemList.stream().map(Item::getPrice).collect(Collectors.toList());
 	}
 
-	public List<Integer> getQuantityList() {
-		return itemList.stream().map(Item::getQuantity).collect(Collectors.toList());
+	public List<Integer> getStockList() {
+		return itemList.stream().map(Item::getStock).collect(Collectors.toList());
 	}
 
 	public List<String> getNameList() {
@@ -44,9 +44,9 @@ public class ItemStorage {
 				.findAny();
 	}
 
-	public void reduceItemQuantity(String name) {
+	public void reduceItemStock(String name) {
 		getItemByName(name).orElseThrow(() -> new IllegalArgumentException(DONT_EXISTING_ITEM_ERROR_MESSAGE))
-				.reduceQuantity();
+				.reduceStock();
 	}
 
 	private Optional<Item> getItemByName(String name) {
