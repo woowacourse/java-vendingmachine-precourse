@@ -45,4 +45,14 @@ public class CoinModel {
                 .findAny()
                 .orElse(COIN_10);
     }
+
+    public List<Integer> repayCoin(int price) {
+        List<Integer> repay = new ArrayList<>();
+        for(Coin coin : coins) {
+            int count = Math.min(coin.getCount(), price/coin.getAmount());
+            repay.add(count);
+            price -= coin.getAmount() * count;
+        }
+        return repay;
+    }
 }

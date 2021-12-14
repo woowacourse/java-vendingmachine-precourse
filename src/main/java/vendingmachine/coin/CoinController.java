@@ -28,4 +28,8 @@ public class CoinController {
         coinModel.randomCoinStore();
         CoinView.outputAmount();
     }
+
+    public void showLeftMoney(int price) {
+        CoinView.outputRepay(coinModel.repayCoin(price));
+    }
 }
