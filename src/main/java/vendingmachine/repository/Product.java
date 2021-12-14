@@ -15,10 +15,6 @@ public class Product {
         return this.price;
     }
 
-    public int getStock() {
-        return this.stock;
-    }
-
     public void subtractStock() {
         this.stock--;
     }
@@ -31,7 +27,7 @@ public class Product {
         return stock == 0;
     }
 
-    public boolean isSameName(String input){
+    public boolean isSameName(String input) {
         return name.equals(input);
     }
 

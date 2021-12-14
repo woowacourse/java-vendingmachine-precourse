@@ -2,6 +2,7 @@ package vendingmachine.service;
 
 import java.util.HashMap;
 
+import vendingmachine.Constants.OrderConstant;
 import vendingmachine.repository.Coin;
 import vendingmachine.repository.Money;
 import vendingmachine.repository.Product;
@@ -21,8 +22,6 @@ public class OrderService {
         getUserMoney();
         getProduct();
         returnCoin();
-        //남은 가능한 잔돈을 반환하고 손님을 보낸다.
-        //printCoin();
     }
 
     public void returnCoin() {
@@ -39,7 +38,7 @@ public class OrderService {
     }
 
     public int getMinimumCoin(Coin coin, int remainder) {
-        map.put(coin, 0);
+        map.put(coin, OrderConstant.COIN_STCOK_INIT_VAL);
         if (coin.getAmount() > remainder) {
             return remainder;
         }
@@ -58,7 +57,7 @@ public class OrderService {
         }
         remainder -= coin.getAmount() * coin.getStock();
         map.put(coin, coin.getStock());
-        coin.setStock(0);
+        coin.setStock(OrderConstant.COIN_STCOK_INIT_VAL);
         return remainder;
     }
 
