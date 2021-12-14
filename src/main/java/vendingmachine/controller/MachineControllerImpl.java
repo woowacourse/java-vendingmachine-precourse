@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import java.util.List;
 
+import vendingmachine.dto.ProductDto;
 import vendingmachine.service.MachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -34,7 +35,8 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void registerProducts() {
-
+		List<ProductDto> productDtos = inputView.requestProductDtos();
+		machineService.saveProducts(productDtos);
 	}
 
 	@Override
