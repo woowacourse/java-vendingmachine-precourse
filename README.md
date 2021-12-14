@@ -200,3 +200,4 @@ public enum Coin {
         1. 자판기가 보유한 동전 리스트를 출력한다.
         2. 유저가 투입한 금액을 출력한다.
         3. 잔돈 내역을 출력한다.
+    - 자판기 내부에 있는 동전 종류를 가져오는 기능 구현 (branch: feature/vending-machine-controller)

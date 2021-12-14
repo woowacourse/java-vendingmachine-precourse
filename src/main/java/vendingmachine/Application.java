@@ -3,9 +3,11 @@ package vendingmachine;
 import java.util.ArrayList;
 
 import vendingmachine.controller.VendingMachineController;
-import vendingmachine.models.Coin;
+
 import vendingmachine.utils.CoinTypeAmountGenerator;
+import vendingmachine.utils.CoinTypeGenerator;
 import vendingmachine.utils.RandomGenerator;
+
 import vendingmachine.view.VendingMachineInput;
 import vendingmachine.view.VendingMachineOutput;
 
@@ -15,11 +17,7 @@ public class Application {
 		final VendingMachineOutput vendingMachineOutput = new VendingMachineOutput();
 		final VendingMachineInput vendingMachineInput =
 			new VendingMachineInput(new ArrayList<>());
-		final ArrayList<Integer> coinTypes = new ArrayList<>();
-		coinTypes.add(Coin.COIN_500.getAmount());
-		coinTypes.add(Coin.COIN_100.getAmount());
-		coinTypes.add(Coin.COIN_50.getAmount());
-		coinTypes.add(Coin.COIN_10.getAmount());
+		final ArrayList<Integer> coinTypes = CoinTypeGenerator.getCoinTypes();
 		final CoinTypeAmountGenerator coinTypeAmountGenerator =
 			new CoinTypeAmountGenerator(new RandomGenerator(), coinTypes);
 		VendingMachineController vendingMachineController =

@@ -5,10 +5,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import vendingmachine.models.Coin;
 import vendingmachine.models.Product;
 import vendingmachine.models.VendingMachine;
+
 import vendingmachine.utils.CoinTypeAmountGenerator;
+import vendingmachine.utils.CoinTypeGenerator;
+
 import vendingmachine.view.VendingMachineInput;
 import vendingmachine.view.VendingMachineOutput;
 
@@ -99,21 +101,12 @@ public class VendingMachineController {
 		}
 	}
 
-	private ArrayList<Integer> getCoinTypes() {
-		final ArrayList<Integer> coinTypes = new ArrayList<>();
-		coinTypes.add(Coin.COIN_500.getAmount());
-		coinTypes.add(Coin.COIN_100.getAmount());
-		coinTypes.add(Coin.COIN_50.getAmount());
-		coinTypes.add(Coin.COIN_10.getAmount());
-		return coinTypes;
-	}
-
 	private int calculateUsedCoins(final int coins, final int coinTypeAmount) {
 		return Math.min(coins, coinTypeAmount);
 	}
 
 	private HashMap<Integer, Integer> makeChanges(HashMap<Integer, Integer> coinTypesAmount) {
-		final ArrayList<Integer> coinTypes = getCoinTypes();
+		final ArrayList<Integer> coinTypes = CoinTypeGenerator.getCoinTypes();
 		final HashMap<Integer, Integer> changes = new HashMap<>();
 		coinTypes.forEach(coinType -> {
 			final int restedMoney = vendingMachine.getUserInputtedMoney();

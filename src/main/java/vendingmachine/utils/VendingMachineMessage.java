@@ -3,8 +3,6 @@ package vendingmachine.utils;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import vendingmachine.models.Coin;
-
 /**
  * <h1>자판기 구동시 출력해야하는 메시지</h1>
  * 사용자가 자판기를 사용하게 하기 위해 출력해야 하는
@@ -50,18 +48,9 @@ public class VendingMachineMessage {
 
 	private static final String PRODUCT_INFORMATION = " 제품의 정보는 이름,가격,수량 순으로 되있어야 하며 ,로 구분되야 합니다";
 
-	private static ArrayList<Integer> getCoinTypeList() {
-		ArrayList<Integer> coinTypes = new ArrayList<>();
-		coinTypes.add(Coin.COIN_500.getAmount());
-		coinTypes.add(Coin.COIN_100.getAmount());
-		coinTypes.add(Coin.COIN_50.getAmount());
-		coinTypes.add(Coin.COIN_10.getAmount());
-		return coinTypes;
-	}
-
 	/* 결과 출력과 관련된 메서드 */
 	public static void printCoinTypesAmount(final HashMap<Integer, Integer> coinTypesAmount) {
-		final ArrayList<Integer> coinTypes = getCoinTypeList();
+		final ArrayList<Integer> coinTypes = CoinTypeGenerator.getCoinTypes();
 		System.out.println(COIN_TYPES_AMOUNT);
 		coinTypes.forEach(coinType -> {
 			System.out.println(coinType + "원" + " - " + coinTypesAmount.get(coinType) + "개");
@@ -73,7 +62,7 @@ public class VendingMachineMessage {
 	}
 
 	public static void printChange(final HashMap<Integer, Integer> changes) {
-		final ArrayList<Integer> coinTypes = getCoinTypeList();
+		final ArrayList<Integer> coinTypes = CoinTypeGenerator.getCoinTypes();
 		System.out.println(CHANGE);
 		coinTypes.forEach(coinType -> {
 			if(changes.containsKey(coinType)) {
