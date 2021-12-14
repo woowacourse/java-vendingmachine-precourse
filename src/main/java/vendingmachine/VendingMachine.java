@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.Map;
-
 public class VendingMachine {
     private static final int ZERO = 0;
     private static final String EXCEED_REST_AMOUNT_MESSAGE = "잔액을 초과하여 구매할 수 없습니다.";
@@ -11,31 +9,13 @@ public class VendingMachine {
     private static final String AMOUNT_UNIT = "원";
 
     private final Products products;
-    private final Coins holdingCoins;
+    private final HoldingCoins holdingCoins;
     private int inputAmount = ZERO;
 
     public VendingMachine(String productsString, int holdingMoney) {
         validateDividedIntoSemicolon(productsString);
         this.products = new Products(productsString);
-        this.holdingCoins = new Coins(holdingMoney);
-    }
-
-    public String toStringHoldingCoins() {
-        return holdingCoins.toString();
-    }
-
-    public String  toStringInputAmount() {
-        return TO_STRING_INPUT_AMOUNT_PREFIX + inputAmount + AMOUNT_UNIT;
-    }
-
-    private void validateDividedIntoSemicolon(String productsString) {
-        if (isContainsWrongBrackets(productsString)) {
-            throw new IllegalArgumentException(NOT_DIVIDED_INTO_SEMICOLON_MESSAGE);
-        }
-    }
-
-    private boolean isContainsWrongBrackets(String productsString) {
-        return productsString.contains(WRONG_SEMICOLON);
+        this.holdingCoins = new HoldingCoins(holdingMoney);
     }
 
     public void buy(String productName, int productQuantity) {
@@ -49,6 +29,33 @@ public class VendingMachine {
 
     public boolean isPurchasable() {
         return products.isPurchasable(inputAmount);
+    }
+
+    public String toStringHoldingCoins() {
+        return holdingCoins.toString();
+    }
+
+    public String toStringChanges() {
+        return new Change(inputAmount, holdingCoins).toString();
+    }
+
+    public String toStringInputAmount() {
+        StringBuilder sb = new StringBuilder();
+        sb.append(TO_STRING_INPUT_AMOUNT_PREFIX)
+                .append(inputAmount)
+                .append(AMOUNT_UNIT);
+
+        return sb.toString();
+    }
+
+    private void validateDividedIntoSemicolon(String productsString) {
+        if (isContainsWrongBrackets(productsString)) {
+            throw new IllegalArgumentException(NOT_DIVIDED_INTO_SEMICOLON_MESSAGE);
+        }
+    }
+
+    private boolean isContainsWrongBrackets(String productsString) {
+        return productsString.contains(WRONG_SEMICOLON);
     }
 
     private void validatePurchasable(int restAmount) {
