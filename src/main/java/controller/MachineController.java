@@ -9,7 +9,7 @@ public class MachineController {
 	private MachineController() {
 	}
 
-	public static void turnOnMachine() {
+	public static void operateMachine() {
 		VendingMachine vendingMachine = new VendingMachine();
 
 		putChangeIntoMachine(vendingMachine);
