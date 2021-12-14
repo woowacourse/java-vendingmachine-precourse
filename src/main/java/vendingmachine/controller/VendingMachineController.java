@@ -57,16 +57,15 @@ public class VendingMachineController {
             if (coinService.getCoins().get(coin) == ZERO_COINS) continue;
             if (customerMoneyService.getCustomerMoneyLeft() < coin.getAmount()) continue;
 
-            coinChanges.put(coin, this.getMaximumCoinNumber(coin));
+            int coinNumber = this.getMaximumCoinNumber(coin);
+            coinChanges.put(coin, coinNumber);
+            coinService.getCoins().put(coin, coinService.getCoins().get(coin)-coinNumber);
+            customerMoneyService.decreaseCustomerMoneyLeft(coin.getAmount() * coinNumber);
         }
         return coinChanges;
     }
 
     private int getMaximumCoinNumber(Coin coin) {
-        int spentCoinNumber = customerMoneyService.getCustomerMoneyLeft()/coin.getAmount();
-        if (spentCoinNumber > coinService.getCoins().get(coin)) {
-            spentCoinNumber = coinService.getCoins().get(coin);
-        }
-        return spentCoinNumber;
+        return customerMoneyService.getCustomerMoneyLeft()/coin.getAmount();
     }
 }
