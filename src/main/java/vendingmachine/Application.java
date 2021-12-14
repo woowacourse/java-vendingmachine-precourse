@@ -1,5 +1,11 @@
 package vendingmachine;
 
+import vendingmachine.model.Items;
+import vendingmachine.model.UserMoney;
+import vendingmachine.model.VendingMachine;
+import vendingmachine.view.InputView;
+import vendingmachine.view.ResultView;
+
 public class Application {
 	public static void main(String[] args) {
 		VendingMachine machine = new VendingMachine();
@@ -10,7 +16,8 @@ public class Application {
 		while (!machine.canNotBuyAnything(userMoney, items)) {
 			machine.buyItem(InputView.GetItemToBuy(userMoney), items, userMoney);
 		}
-		ResultView.printChange(userMoney, machine.returnChange(userMoney));
+		ResultView.printRemainMoney(userMoney);
+		ResultView.printChange(machine.returnChange(userMoney));
 	}
 
 	public static Items getItems() {

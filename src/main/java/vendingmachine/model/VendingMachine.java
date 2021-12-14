@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import static camp.nextstep.edu.missionutils.Randoms.*;
 
@@ -6,8 +6,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class VendingMachine {
 	private List<Coin> coins = new ArrayList<>();
@@ -46,7 +44,8 @@ public class VendingMachine {
 		try {
 			Item item = items.hasItem(itemName);
 			item.sellItem(userMoney);
-		} catch (IllegalArgumentException e) {}
+		} catch (IllegalArgumentException e) {
+		}
 	}
 
 	public boolean canNotBuyAnything(UserMoney userMoney, Items items) {

@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import static vendingmachine.ValidationUtils.*;
 

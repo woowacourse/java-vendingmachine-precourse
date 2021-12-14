@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,8 @@ public class Items {
 		try {
 			isAddable(itemString);
 			itemList.add(new Item(itemString));
-		} catch (Exception e) {}
+		} catch (Exception e) {
+		}
 
 	}
 

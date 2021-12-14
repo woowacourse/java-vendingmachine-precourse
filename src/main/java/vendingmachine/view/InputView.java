@@ -1,24 +1,21 @@
-package vendingmachine;
+package vendingmachine.view;
 
 import static camp.nextstep.edu.missionutils.Console.*;
 
+import vendingmachine.model.UserMoney;
+
 public class InputView {
-	private static final String GET_REMAINS = "\n자판기가 보유하고 있는 금액을 입력해 주세요.";
-	private static final String GET_ITEM_STATUS = "\n상품명과 가격, 수량을 입력해 주세요.";
-	private static final String GET_USER_MONEY = "\n투입 금액을 입력해 주세요.";
-	private static final String GET_ITEM_TO_BUY = "구매할 상품명을 입력해 주세요.";
-	private static final String ERROR_NOT_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
 
 	public static int GetRemains() {
-		return getUserInput(GET_REMAINS);
+		return getUserInput(Messages.GET_REMAINS);
 	}
 
 	public static void printGetItemStatus() {
-		System.out.println(GET_ITEM_STATUS);
+		System.out.println(Messages.GET_ITEM_STATUS);
 	}
 
 	public static int GetUserMoney() {
-		return getUserInput(GET_USER_MONEY);
+		return getUserInput(Messages.GET_USER_MONEY);
 	}
 
 	private static int getUserInput(String getUserInput) {
@@ -31,7 +28,7 @@ public class InputView {
 				UserMoney.valid(UserInput);
 				return UserInput;
 			} catch (NumberFormatException e) {
-				System.out.println(ERROR_NOT_NUMBER);
+				System.out.println(Messages.ERROR_NOT_NUMBER);
 			} catch (IllegalArgumentException e) {
 			}
 		}
@@ -39,7 +36,7 @@ public class InputView {
 
 	public static String GetItemToBuy(UserMoney userMoney) {
 		System.out.println("\n투입 금액: " + userMoney.getMoney() + "원");
-		System.out.println(GET_ITEM_TO_BUY);
+		System.out.println(Messages.GET_ITEM_TO_BUY);
 		return readLine();
 	}
 
