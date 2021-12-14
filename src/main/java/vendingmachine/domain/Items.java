@@ -58,12 +58,12 @@ public class Items {
 		}
 	}
 
-	public boolean continuable(int leftMoney) {
-		return enoughMoneyForAllItem(leftMoney) && quantityLeft();
+	public boolean continuable(int moneyLeft) {
+		return enoughMoneyForAllItem(moneyLeft) && quantityLeft();
 	}
 
-	private boolean enoughMoneyForAllItem(int leftMoney) {
-		return itemRepository.stream().anyMatch(item -> item.enoughMoney(leftMoney));
+	private boolean enoughMoneyForAllItem(int moneyLeft) {
+		return itemRepository.stream().anyMatch(item -> item.enoughMoney(moneyLeft));
 	}
 
 	private boolean quantityLeft() {
