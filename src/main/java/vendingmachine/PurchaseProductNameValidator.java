@@ -17,7 +17,7 @@ public class PurchaseProductNameValidator {
 
 	private void isZeroLength(String name) throws IllegalArgumentException {
 		if (name.trim().length() == 0) {
-			throw new IllegalArgumentException(Error.ZERO_LENGTH_PURCHASE_PRODUCT_NAME.getMessage());
+			throw new IllegalArgumentException(Error.NO_PURCHASE_PRODUCT_NAME.getMessage());
 		}
 	}
 

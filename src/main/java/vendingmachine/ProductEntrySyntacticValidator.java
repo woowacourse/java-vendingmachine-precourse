@@ -4,11 +4,10 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProductEntrySyntacticValidator {
+public class ProductEntrySyntacticValidator extends Validator {
 	private static final int MINIMUM_PRODUCT_NAME_LENGTH = 1;
 	private static final int BRACKET_CHAR_LENGTH = 1;
 	private static final int ELEMENT_NUMBER = 3;
-	private static final int INDEX_OF_NAME_IN_ENTRY = 0;
 	private static final String ENTRY_ELEMENT_SEPARATOR = ",";
 	private static final String BRACKET_PAIRS_PATTERN = "\\[.*]";
 	private static final String ILLEGAL_CHARS_OUTSIDE_BRACKETS_PATTERN =
@@ -37,7 +36,7 @@ public class ProductEntrySyntacticValidator {
 			String[] entryElements = entryWithoutBlank
 				.substring(BRACKET_CHAR_LENGTH)
 				.split(ENTRY_ELEMENT_SEPARATOR);
-			checkElementNumber(entryElements);
+			checkElementNumber(entryElements.length);
 			checkProductNameLength(entryElements);
 		});
 	}
@@ -72,17 +71,14 @@ public class ProductEntrySyntacticValidator {
 		}
 	}
 
-	private void checkElementNumber(String[] elements) throws IllegalArgumentException {
-		if (elements.length != ELEMENT_NUMBER) {
-			throw new IllegalArgumentException(Error.ILLEGAL_NUMBER_OF_ELEMENTS_PRODUCT_ENTRY.getMessage());
+	private void checkElementNumber(int length) throws IllegalArgumentException {
+		if (length != ELEMENT_NUMBER) {
+			throw new IllegalArgumentException();
 		}
 	}
 
 	private void checkProductNameLength(String[] elements) throws IllegalArgumentException {
-		String name = elements[INDEX_OF_NAME_IN_ENTRY].trim();
-		if (name.length() < MINIMUM_PRODUCT_NAME_LENGTH) {
-			throw new IllegalArgumentException(Error.ILLEGAL_LENGTH_OF_PRODUCT_NAME.getMessage());
-		}
+		String name = elements[Constants.INDEX_OF_NAME_IN_ENTRY].trim();
+		isMoreThanThreshold(name.length(), MINIMUM_PRODUCT_NAME_LENGTH, Error.NO_PRODUCT_NAME);
 	}
-
 }
