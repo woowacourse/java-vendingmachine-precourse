@@ -48,4 +48,8 @@ public class VendingMachine {
 			minItemPrice = items.getMinItemPrice();
 		}
 	}
+
+	public boolean isExitPoint() {
+		return items.hasNoStock() || userMoneyAmount < minItemPrice;
+	}
 }
