@@ -151,20 +151,20 @@ public class InputView {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
 			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_MIN || CHAR_NUMERIC_MAX < stringHoldingMoney.charAt(
 					i)) {
-				throw new IllegalArgumentException(Message.NON_NUMERIC_ERROR);
+				throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
 			}
 		}
 	}
 
 	public void zeroNumericError(String stringHoldingMoney) {
 		if (stringHoldingMoney.equals(ZERO_HOLDING_MONEY)) {
-			throw new IllegalArgumentException(Message.ZERO_NUMERIC_ERROR);
+			throw new IllegalArgumentException("[ERROR] 금액은 0이 아닌 양의 정수를 입력하셔야 합니다.");
 		}
 	}
 
 	public void dividedByTenMoneyError(String stringMoney) {
 		if (Integer.parseInt(stringMoney) % DIVIDE_VALUE != 0) {
-			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
+			throw new IllegalArgumentException("[ERROR] 보유 금액은 10으로 나누어 떨어져야 합니다.");
 		}
 	}
 
@@ -176,14 +176,14 @@ public class InputView {
 			itemNames.add(itemStringArray[i].split(",")[0]);
 		}
 		if (itemCount != itemNames.size()) {
-			throw new IllegalArgumentException(Message.DUPLICATED_NAME_ITEM_ERROR);
+			throw new IllegalArgumentException("[ERROR] 중복된 상품 이름은 허용하지 않습니다.");
 		}
 	}
 
 	private void wrongRegexMatchError(String[] itemStringArray) {
 		for (int i = 0; i < itemStringArray.length; i++) {
 			if (!Pattern.matches(REGEX, itemStringArray[i])) {
-				throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
+				throw new IllegalArgumentException("[ERROR] 올바른 형식으로 입력해주세요.");
 			}
 		}
 	}
@@ -196,14 +196,14 @@ public class InputView {
 			}
 		}
 		if (isExistedItem == false) {
-			throw new IllegalArgumentException(Message.NON_EXIST_ITEM_ERROR);
+			throw new IllegalArgumentException("[ERROR] 존재하지 않은 상품은 구매할 수 없습니다.");
 		}
 	}
 
 	public void nonEnoughMoneyError(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
-				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);
+				throw new IllegalArgumentException("[ERROR] 보유 금액보다 상품 가격이 더 비쌉니다.");
 			}
 		}
 	}
