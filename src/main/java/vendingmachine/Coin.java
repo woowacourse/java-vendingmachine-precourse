@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
+import camp.nextstep.edu.missionutils.Randoms;
 
 public enum Coin {
     COIN_500(500),
@@ -35,7 +35,7 @@ public enum Coin {
     public static int RandomNumberOfCoin(int change, List<Integer> coinNum) {
         int oneCoin;
         do {
-            oneCoin = pickNumberInList(coinNum);
+            oneCoin = Randoms.pickNumberInList(coinNum);
         } while (change < oneCoin);
         for (Coin coin : Coin.values()) {
             if (coin.amount == oneCoin) {

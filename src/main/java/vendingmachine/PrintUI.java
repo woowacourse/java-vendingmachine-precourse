@@ -1,8 +1,8 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Console;
-
 import java.util.ArrayList;
+
+import camp.nextstep.edu.missionutils.Console;
 
 public class PrintUI {
     public static int InputChange() {
