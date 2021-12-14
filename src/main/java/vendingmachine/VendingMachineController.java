@@ -16,7 +16,7 @@ public class VendingMachineController {
 		return vendingMachine;
 	}
 
-	public void Operate() {
+	public void operate() {
 		getVendingMachine();
 		initialSetting(vendingMachine);
 		buy(vendingMachine);

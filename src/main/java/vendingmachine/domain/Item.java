@@ -1,9 +1,9 @@
 package vendingmachine.domain;
 
 public class Item {
-	private String name = "";
-	private int price = 0;
-	private int stock = 0;
+	private String name;
+	private int price;
+	private int stock;
 
 	public Item(String name, int price, int stock) {
 		this.name = name;

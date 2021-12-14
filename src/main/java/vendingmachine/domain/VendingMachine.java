@@ -2,16 +2,17 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class VendingMachine {
 
 
 
-	public int holdingMoney = 0;
-	public int inputMoney = 0;
+	public int holdingMoney;
+	public int inputMoney;
 	public ArrayList<Item> holdingItemList;
 	public LinkedHashMap<Coin, Integer> holdingCoins;
-	public LinkedHashMap<Coin, Integer> changeCoins;
+	public Map<Coin, Integer> changeCoins;
 
 	private Coins coins;
 
@@ -63,8 +64,6 @@ public class VendingMachine {
 		}
 		return isAvailableKeepBuyingAboutStock;
 	}
-
-
 
 	public String inputMoneyToString() {
 		return inputMoney + "원";

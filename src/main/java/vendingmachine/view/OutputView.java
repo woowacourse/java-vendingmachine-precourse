@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
+import java.util.Map;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachine;
@@ -28,7 +29,7 @@ public class OutputView {
 		System.out.println(BALANCE_FORMAT + vendingMachine.inputMoneyToString());
 	}
 
-	public static void printChangeCoins(LinkedHashMap<Coin, Integer> coins) {
+	public static void printChangeCoins(Map<Coin, Integer> coins) {
 		System.out.println(CHANGES_FORMAT);
 		Iterator<Coin> keys = coins.keySet().iterator();
 		while (keys.hasNext()) {
