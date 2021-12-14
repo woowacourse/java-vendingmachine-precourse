@@ -1,5 +1,7 @@
 package vendingmachine.validator;
 
+import static vendingmachine.Constants.*;
+
 import java.util.List;
 
 import vendingmachine.service.ProductService;
@@ -17,21 +19,22 @@ public class ProductValidator extends CommonValidator {
 	}
 
 	private static void exceptionNotContainsBrackets(String inputLine) {
-		if (inputLine.charAt(0) != '[' || inputLine.charAt(inputLine.length() - 1) != ']') {
+		if (inputLine.charAt(BRACKET_INDEX) != CHAR_LEFT_BRACKET
+				|| inputLine.charAt(inputLine.length() - 1) != CHAR_RIGHT_BRACKET) {
 			throw new IllegalArgumentException();
 		}
 	}
 
 	private static void exceptionInvalidElements(String inputLine) {
-		List<String> elements = ProductService.splitByComma(inputLine);
+		List<String> elements = ProductService.splitProductElements(inputLine);
 		exceptionInvalidElementsSize(elements);
-		exceptionInvalidName(elements.get(0));
-		exceptionInvalidPrice(elements.get(1));
-		exceptionInvalidCount(elements.get(2));
+		exceptionInvalidName(elements.get(PRODUCT_NAME_INDEX));
+		exceptionInvalidPrice(elements.get(PRODUCT_PRICE_INDEX));
+		exceptionInvalidCount(elements.get(PRODUCT_COUNT_INDEX));
 	}
 
 	private static void exceptionInvalidElementsSize(List<String> elements) {
-		if (elements.size() != 3) {
+		if (elements.size() != PRODUCT_ELEMENT_SIZE) {
 			throw new IllegalArgumentException();
 		}
 	}

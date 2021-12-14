@@ -27,7 +27,7 @@ public class CommonValidator {
 	}
 
 	protected static void exceptionStringSpace(String string) {
-		if (string.equals(" ")) {
+		if (string.equals(STRING_SPACE)) {
 			throw new IllegalArgumentException();
 		}
 	}

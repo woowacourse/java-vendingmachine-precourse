@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.Constants.*;
+
 import java.util.List;
 
 import vendingmachine.service.ProductService;
@@ -16,8 +18,10 @@ public class Product {
 	}
 
 	public static Product makeProduct(String inputLine) {
-		List<String> strings = ProductService.splitByComma(inputLine);
-		return new Product(strings.get(0), Integer.parseInt(strings.get(1)), Integer.parseInt(strings.get(2)));
+		List<String> strings = ProductService.splitProductElements(inputLine);
+		return new Product(strings.get(PRODUCT_NAME_INDEX),
+			Integer.parseInt(strings.get(PRODUCT_PRICE_INDEX)),
+			Integer.parseInt(strings.get(PRODUCT_COUNT_INDEX)));
 	}
 
 	public boolean isSameName(String name) {
@@ -25,7 +29,7 @@ public class Product {
 	}
 
 	public boolean hasMoreThanOneCount() {
-		return this.count > 0;
+		return this.count > PRODUCT_COUNT_ZERO;
 	}
 
 	public boolean isCheaperOrSameThan(long money) {
@@ -37,11 +41,11 @@ public class Product {
 	}
 
 	public boolean soldOut() {
-		return count == 0;
+		return count == PRODUCT_COUNT_ZERO;
 	}
 
 	public void consume() {
-		count -= 1;
+		count -= COIN_CONSUME_AMOUNT;
 	}
 }
 

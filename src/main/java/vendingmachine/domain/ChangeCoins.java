@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.Constants.*;
+
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -47,7 +49,7 @@ public class ChangeCoins {
 
 	private void removeZeroCoin(Map<Coin, Integer> usedCoin, Iterator<Coin> iterator) {
 		Coin coin = iterator.next();
-		if (usedCoin.get(coin) == 0) {
+		if (usedCoin.get(coin) == COIN_COUNT_ZERO) {
 			iterator.remove();
 		}
 	}
@@ -55,14 +57,14 @@ public class ChangeCoins {
 	private void makeChangeCoinsFrom(Long money) {
 		while (money != 0) {
 			Coin selectedCoin = selectCoin(money);
-			coins.put(selectedCoin, coins.get(selectedCoin) + 1);
+			coins.put(selectedCoin, coins.get(selectedCoin) + ADD_COIN_COUNT);
 			money = subtractCoinAmount(selectedCoin, money);
 		}
 	}
 
 	private void initializeCoins() {
 		Arrays.asList(Coin.values()).stream()
-			.forEach(coin -> coins.put(coin, 0));
+			.forEach(coin -> coins.put(coin, INITIAL_COIN_COUNT));
 	}
 
 	private Coin selectCoin(long money) {

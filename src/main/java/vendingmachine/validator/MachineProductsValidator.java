@@ -20,7 +20,7 @@ public class MachineProductsValidator extends CommonValidator{
 	}
 
 	private static void exceptionInvalidProduct(String inputLine) {
-		List<String> productLines = ProductService.splitBySemicolon(inputLine);
+		List<String> productLines = ProductService.splitProductsInformation(inputLine);
 		if (!isAllProductsValid(productLines) || isDuplicatedProduct(productLines)) {
 			throw new IllegalArgumentException();
 		}
@@ -28,7 +28,7 @@ public class MachineProductsValidator extends CommonValidator{
 
 	private static boolean isDuplicatedProduct(List<String> productLines) {
 		long count = productLines.stream()
-			.map(line -> ProductService.splitByComma(line).get(0))
+			.map(line -> ProductService.splitProductElements(line).get(0))
 			.distinct().count();
 		if (count != productLines.size()) {
 			return true;

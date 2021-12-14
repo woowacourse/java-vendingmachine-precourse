@@ -1,6 +1,5 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +43,7 @@ public class MachineProducts {
 	}
 
 	private List<Product> makeProducts(String inputLine) {
-		List<String> strings = ProductService.splitBySemicolon(inputLine);
+		List<String> strings = ProductService.splitProductsInformation(inputLine);
 		return strings.stream()
 			.map(string -> Product.makeProduct(string))
 			.collect(Collectors.toList());
