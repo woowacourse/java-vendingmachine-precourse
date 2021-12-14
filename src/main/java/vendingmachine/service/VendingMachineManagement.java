@@ -63,13 +63,20 @@ public class VendingMachineManagement {
 		for (String stringOfProduct : products) {
 			stringOfProduct = removeTextCoverProduct(stringOfProduct);
 			String[] product = splitStringOfProduct(stringOfProduct);
-			HashMap<String, String> productFormMap = new HashMap<>();
-			productFormMap.put(PRODUCT_NAME, product[PRODUCT_NAME_INDEX]);
-			productFormMap.put(PRODUCT_PRICE, product[PRODUCT_PRICE_INDEX]);
-			productFormMap.put(PRODUCT_QUANTITY, product[PRODUCT_QUANTITY_INDEX]);
-			productsFormMap.add(productFormMap);
+
+			productsFormMap.add(getProductFormMap(product));
 		}
 		return productsFormMap;
+	}
+
+	private HashMap<String, String> getProductFormMap(String[] product) {
+		HashMap<String, String> productFormMap = new HashMap<>();
+
+		productFormMap.put(PRODUCT_NAME, product[PRODUCT_NAME_INDEX]);
+		productFormMap.put(PRODUCT_PRICE, product[PRODUCT_PRICE_INDEX]);
+		productFormMap.put(PRODUCT_QUANTITY, product[PRODUCT_QUANTITY_INDEX]);
+
+		return productFormMap;
 	}
 
 	public static String[] splitStringOfProducts(String stringOfProducts) {
