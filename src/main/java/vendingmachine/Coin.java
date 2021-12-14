@@ -17,13 +17,13 @@ public enum Coin {
     }
 
     public static Coin create(int amount) {
-        if (amount == COIN_500.getAmount()) {
+        if (isCoin500(amount)) {
             return COIN_500;
         }
-        if (amount == COIN_100.getAmount()) {
+        if (isCoin100(amount)) {
             return COIN_100;
         }
-        if (amount == COIN_50.getAmount()) {
+        if (isCoin50(amount)) {
             return COIN_50;
         }
 
@@ -42,6 +42,18 @@ public enum Coin {
 
     public int changeIntoCoins(int inputAmount) {
         return inputAmount / this.amount;
+    }
+
+    private static boolean isCoin100(int amount) {
+        return amount == COIN_100.getAmount();
+    }
+
+    private static boolean isCoin50(int amount) {
+        return amount == COIN_50.getAmount();
+    }
+
+    private static boolean isCoin500(int amount) {
+        return amount == COIN_500.getAmount();
     }
 
 }
