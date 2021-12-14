@@ -3,7 +3,9 @@ package vendingmachine.domain;
 import static vendingmachine.constant.SystemMessage.*;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -86,6 +88,33 @@ public enum Coin {
 
 	private static int getSubTotal(Coin coin) {
 		return coin.amount * coin.count;
+	}
+
+	public static Map<Integer, Integer> getChanges(int remainingMoney) {
+		if (remainingMoney >= Coin.getTotal()) {
+			return convertCoinToMap();
+		}
+		Map<Integer, Integer> changes = new LinkedHashMap<>();
+		for (Coin coin : Coin.values()) {
+			int changesCount = getChangesCount(coin, remainingMoney);
+			changes.put(coin.amount, changesCount);
+			remainingMoney -= (coin.amount * changesCount);
+		}
+		return changes;
+	}
+
+	public static int getChangesCount(Coin coin, int remainingMoney) {
+		int quotient = remainingMoney / coin.amount;
+		return Math.min(quotient, coin.count);
+	}
+
+	private static Map<Integer, Integer> convertCoinToMap() {
+		List<Coin> coins = Coin.get();
+		Map<Integer, Integer> coinMap = new LinkedHashMap<>();
+		for (Coin coin : coins) {
+			coinMap.put(coin.amount, coin.count);
+		}
+		return coinMap;
 	}
 
 	public void selfDescription() {

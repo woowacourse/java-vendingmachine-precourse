@@ -13,6 +13,7 @@ public class SystemMessage {
 	 * OutputView
 	 */
 	public static final String OUTPUT_MACHINE_MONEY = "자판기가 보유한 동전";
+	public static final String OUTPUT_CHANGES = "투입 금액: 500원\n잔돈";
 
 	/**
 	 * Coin
