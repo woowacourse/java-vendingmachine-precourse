@@ -11,14 +11,6 @@ public class OutputHandler {
 		System.out.println(message);
 	}
 
-	public void printMessageNoNewline(String message) {
-		System.out.print(message);
-	}
-
-	public void printBlankLine() {
-		System.out.println();
-	}
-
 	public void printErrorMessage(Exception exception) {
 		printMessage(exception.getMessage());
 	}
