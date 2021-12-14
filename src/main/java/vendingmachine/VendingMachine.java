@@ -12,10 +12,10 @@ public class VendingMachine {
 	private int inputAmount;
 
 	VendingMachine(){
-		this.leftMoney = InputReceiver.getNumber();
+		this.leftMoney = InputReceiver.getNumber(MoneyType.leftMoney);
 		_makeCoins();
 		this.products = InputReceiver.getProductInfo();
-		this.inputAmount = InputReceiver.getNumber();
+		this.inputAmount = InputReceiver.getNumber(MoneyType.inputAmount);
 	}
 
 	public void buy(String productName){
@@ -39,6 +39,10 @@ public class VendingMachine {
 
 	public boolean isBuyableProduct(String productName){
 		return products.get(productName).getPrice() > this.inputAmount;
+	}
+
+	public int getInputAmount(){
+		return this.inputAmount;
 	}
 
 	private void _makeCoins(){

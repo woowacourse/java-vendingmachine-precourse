@@ -7,10 +7,10 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputReceiver {
-	public static int getNumber(){
+	public static int getNumber(MoneyType moneyType){
 		String number;
 
-		//VendingMachinePrinter.printGetAmountMessage(messageType);
+		VendingMachinePrinter.printGetAmountMessage(moneyType);
 
 		while (true) {
 			try {
@@ -19,7 +19,7 @@ public class InputReceiver {
 				return Integer.parseInt(number);
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
-				//VendingMachinePrinter.printGetAmountMessage(messageType);
+				VendingMachinePrinter.printGetAmountMessage(moneyType);
 			}
 		}
 	}
@@ -27,7 +27,7 @@ public class InputReceiver {
 	public static String getProductName(VendingMachine vendingMachine){
 		String productName;
 
-		//VendingMachinePrinter.printGetProductNameMessage();
+		VendingMachinePrinter.printGetProductNameMessage(vendingMachine.getInputAmount());
 
 		while (true) {
 			try {
@@ -38,7 +38,7 @@ public class InputReceiver {
 				throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품명입니다.");
 			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
-				//VendingMachinePrinter.printGetProductNameMessage();
+				VendingMachinePrinter.printGetProductNameMessage(vendingMachine.getInputAmount());
 			}
 		}
 	}
