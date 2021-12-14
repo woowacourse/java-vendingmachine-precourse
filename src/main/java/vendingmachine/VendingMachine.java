@@ -6,7 +6,7 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-public class VendingMachin {
+public class VendingMachine {
 	public List randomCoin(int amount) {
 		List coinList = new ArrayList();
 
