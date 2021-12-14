@@ -5,7 +5,7 @@ import java.util.List;
 import vendingmachine.dto.ProductDto;
 import vendingmachine.exception.VendingMachineException;
 import vendingmachine.service.MachineService;
-import vendingmachine.view.InputView;
+import vendingmachine.view.input.InputView;
 import vendingmachine.view.OutputView;
 
 public class MachineControllerImpl implements MachineController {
