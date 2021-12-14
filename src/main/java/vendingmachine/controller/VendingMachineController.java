@@ -22,10 +22,19 @@ public class VendingMachineController {
 		while (!products.hasNotProductsCount() &&
 			products.canBuyCurrentAmount(vendingMachine.getCurrentAmount())) {
 			OutputView.printCurrentMoney(vendingMachine.getCurrentAmount());
-			products.buyProduct(InputView.inputBuyProduct(), vendingMachine);
+			initBuyProduct();
 		}
 		OutputView.printCurrentMoney(vendingMachine.getCurrentAmount());
 		OutputView.printChanges(changes.giveChanges(vendingMachine.getCurrentAmount()));
+	}
+
+	private void initBuyProduct() {
+		try {
+			products.buyProduct(InputView.inputBuyProduct(), vendingMachine);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+			initBuyProduct();
+		}
 	}
 
 	private Changes initChanges() {
