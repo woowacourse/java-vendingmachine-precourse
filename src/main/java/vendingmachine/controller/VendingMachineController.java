@@ -12,26 +12,33 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
-	private static final String CHANGE = "잔돈";
-	private static final String MACHINE_MONEY = "자판기가 보유한 동전";
-
 	InputView inputView = new InputView();
 	OutputView outputView = new OutputView();
 	Validator validator = new Validator();
 	VendingMachineService vendingMachineService = new VendingMachineService();
 
-	public void runMachine() { //어플리케이션의 전체적인 실행 흐름 제어
-		String machineMoney = enterMachineMoney();
-		int convertedMachineMoney = Utils.moneyConverter(machineMoney);
+	public void runMachine() {
 		VendingMachine vendingMachine = new VendingMachine();
-		vendingMachine.generateCoin(convertedMachineMoney);
+		enterAndGenerateMachineMoney(vendingMachine);
 		printCurrentCoin(vendingMachine);
 		enterAndGenerateMachineProduct(vendingMachine);
-		String insertMoney = enterInsertMoney();
-		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
-		vendingMachine.initInputMoney(convertedInsertMoney);
+		enterAndGenerateInsertMoney(vendingMachine);
 		purchaseProduct(vendingMachine);
 		printRemainCoin(vendingMachine);
+	}
+
+	private void enterAndGenerateInsertMoney(VendingMachine vendingMachine) {
+		String insertMoney = enterInsertMoney();
+		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
+
+		vendingMachine.initInputMoney(convertedInsertMoney);
+	}
+
+	private void enterAndGenerateMachineMoney(VendingMachine vendingMachine) {
+		String machineMoney = enterMachineMoney();
+		int convertedMachineMoney = Utils.moneyConverter(machineMoney);
+
+		vendingMachine.generateCoin(convertedMachineMoney);
 	}
 
 	private void enterAndGenerateMachineProduct(VendingMachine vendingMachine) {
@@ -61,38 +68,14 @@ public class VendingMachineController {
 	}
 
 	private void printCurrentCoin(VendingMachine vendingMachine) {
-		System.out.println(MACHINE_MONEY);
+		System.out.println(OutputView.MACHINE_MONEY);
 		outputView.printCoinChange(vendingMachine.getCoinMap());
 	}
 
 	private void printRemainCoin(VendingMachine vendingMachine) {
-		Map<Coin, Integer> remainCoin = calculateRemainCoin(vendingMachine.getInputMoney(),
-			vendingMachine.getCoinMap());
-		System.out.println(CHANGE);
+		Map<Coin, Integer> remainCoin = vendingMachineService.calculateRemainCoin(vendingMachine.getInputMoney(), vendingMachine.getCoinMap());
+		System.out.println(OutputView.CHANGE);
 		outputView.printCoinChange(remainCoin);
-	}
-
-	private Map<Coin, Integer> calculateRemainCoin(int restMoney, Map<Coin, Integer> coinMap) {
-		Map<Coin, Integer> returnCoinMap = new LinkedHashMap<>();
-
-		for (Coin coin : coinMap.keySet()) {
-			int count = getCount(restMoney, coinMap, coin);
-
-			if (count == 0 || restMoney == 0) {
-				continue;
-			}
-			returnCoinMap.put(coin, count);
-			restMoney -= (coin.getAmount() * count);
-		}
-		return returnCoinMap;
-	}
-
-	private int getCount(int restMoney, Map<Coin, Integer> coinMap, Coin coin) {
-		int count = restMoney / coin.getAmount();
-		if (count >= coinMap.get(coin)) {
-			count = coinMap.get(coin);
-		}
-		return count;
 	}
 
 	private String enterMachineMoney() {
@@ -105,7 +88,6 @@ public class VendingMachineController {
 		}
 	}
 
-	//위에꺼랑 합쳐서 리팰토링 할 수 있지 않을까?
 	private String enterInsertMoney() {
 		String insertMoney = inputView.enterBuyingMoney();
 		try {

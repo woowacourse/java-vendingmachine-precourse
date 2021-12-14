@@ -1,40 +1,53 @@
 package vendingmachine.model.service;
 
-import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
+import vendingmachine.model.domain.Coin;
 import vendingmachine.model.domain.Product;
 import vendingmachine.model.domain.VendingMachine;
-import vendingmachine.util.Constant;
 import vendingmachine.validator.Validator;
 
 public class VendingMachineService {
 	ProductService productService = new ProductService();
 
 	public void generateProduct(VendingMachine vendingMachine, String products) throws IllegalArgumentException {
-		List<Product> productList = Arrays.stream(products.split(Constant.PRODUCT_SEPARATOR))
-			.map(productInfo -> productService.createProduct(productInfo))
-			.collect(Collectors.toList());
-
-		List<String> distinctProductList = getDistinctProductList(productList);
-
+		List<Product> productList = productService.createProduct(products);
+		List<String> distinctProductList = getDistinctProductNameList(productList);
 		Validator.validateProductList(distinctProductList, productList);
-
 		vendingMachine.initProductList(productList);
 	}
 
 	public void purchase(VendingMachine vendingMachine, String productName) {
 		List<Product> productList = vendingMachine.getProductList();
-
-		Product product = productList.stream()
-			.filter(it -> it.getName().equals(productName))
-			.findFirst()
-			.map(Product::purchaseProduct)
-			.orElseThrow(() -> new IllegalArgumentException(Validator.ERROR_NOT_EXISTED_PRODUCT));
-
+		Product product = productService.findProductByName(productName, productList);
 		removeProduct(productList);
 		vendingMachine.calculateInputMoneyAfterPurchase(product.getPrice());
+	}
+
+	public Map<Coin, Integer> calculateRemainCoin(int restMoney, Map<Coin, Integer> coinMap) {
+		Map<Coin, Integer> returnCoinMap = new LinkedHashMap<>();
+
+		for (Coin coin : coinMap.keySet()) {
+			int count = getCount(restMoney, coinMap, coin);
+
+			if (count == 0 || restMoney == 0) {
+				continue;
+			}
+			returnCoinMap.put(coin, count);
+			restMoney -= (coin.getAmount() * count);
+		}
+		return returnCoinMap;
+	}
+
+	private int getCount(int restMoney, Map<Coin, Integer> coinMap, Coin coin) {
+		int count = restMoney / coin.getAmount();
+		if (count >= coinMap.get(coin)) {
+			count = coinMap.get(coin);
+		}
+		return count;
 	}
 
 	private void removeProduct(List<Product> productList) {
@@ -46,13 +59,11 @@ public class VendingMachineService {
 		productListToDelete.forEach(productList::remove);
 	}
 
-	private List<String> getDistinctProductList(List<Product> productList) {
+	private List<String> getDistinctProductNameList(List<Product> productList) {
 		return productList
 			.stream()
 			.map(Product::getName)
 			.distinct()
 			.collect(Collectors.toList());
 	}
-
-
 }

@@ -13,6 +13,7 @@ public class Validator {
 	private static final String ERROR_INPUT_IS_BIGGER_THAN_100 = "[ERROR] 상품 가격은 100원 이상이어야합니다.";
 	public static final String ERROR_NOT_EXISTED_PRODUCT = "[ERROR] 존재하지 않는 상품 이름입니다.";
 	public static final String ERROR_NOT_EXISTED_COIN = "[ERROR] 존재하지 않는 코인입니다.";
+	public static final String ERROR_DUPLICATE_PRODUCT_EXISTED = "[ERROR] 중복된 상품 명이 존재합니다.";
 
 	public String validateMoney(String money) {
 		validateInputEmpty(money);
@@ -44,7 +45,7 @@ public class Validator {
 
 	public static void validateProductList(List<String> distinctProductList, List<Product> productList) {
 		if (distinctProductList.size() != productList.size()) {
-			throw new IllegalArgumentException("[ERROR] 중복된 상품 명이 존재합니다.");
+			throw new IllegalArgumentException(ERROR_DUPLICATE_PRODUCT_EXISTED);
 		}
 	}
 
