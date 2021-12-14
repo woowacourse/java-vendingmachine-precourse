@@ -20,7 +20,7 @@ public class Constant {
     public static final String ERROR = "[ERROR]";
     public static final String CHANGE_BRACKET_TO_GAP = "";
     public static final String OPEN_SQUARE_BRACKET = "[";
-    public static final String CLONE_SQUARE_BRACKET = "]";
+    public static final String CLOSE_SQUARE_BRACKET = "]";
     public static final String DRINK_SPLIT_WORD = ";";
     public static final String DRINK_CONTENT_SPLIT_WORD = ",";
 

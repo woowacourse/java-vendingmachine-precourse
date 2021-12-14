@@ -25,7 +25,7 @@ public class DrinkMapper {
 
     private String removeBracket(String inputDrinks) {
         String inputDrink = inputDrinks.replace(Constant.OPEN_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
-        inputDrink = inputDrink.replace(Constant.CLONE_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
+        inputDrink = inputDrink.replace(Constant.CLOSE_SQUARE_BRACKET, Constant.CHANGE_BRACKET_TO_GAP);
         return inputDrink;
     }
 
