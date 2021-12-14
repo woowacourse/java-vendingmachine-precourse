@@ -10,7 +10,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class Balance {
     private final int DEFAULT_VALUE = 0;
     private final int CHANGE_VALUE = 1;
-    private Map<Coin, Integer> balanceCoin;
+    private final Map<Coin, Integer> balanceCoin;
 
     public Balance() {
         balanceCoin = new LinkedHashMap<>();

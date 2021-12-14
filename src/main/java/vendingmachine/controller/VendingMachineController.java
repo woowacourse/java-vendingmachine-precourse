@@ -1,6 +1,7 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.Balance;
+import vendingmachine.domain.Items;
 import vendingmachine.domain.Validation;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -8,10 +9,12 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
     private final Validation validator;
     private final Balance balance;
+    private final Items items;
 
     public VendingMachineController() {
         validator = new Validation();
         balance = new Balance();
+        items = new Items();
     }
 
     public void on() {
@@ -40,6 +43,7 @@ public class VendingMachineController {
             OutputView.requestItemInformation();
             String itemInput = InputView.receiveInput();
             validator.isValidItemInput(itemInput);
+            items.registerItem(itemInput);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(validator.getErrorMessage());
             receiveItemInformation();
