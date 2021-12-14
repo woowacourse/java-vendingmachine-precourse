@@ -24,7 +24,7 @@ public class VendingMachineController {
 		sellItem(money.getMoney());
 
 		outputView.printMoney(money.getMoney());
-		Map<Integer, Integer> changes = getChanges(money.getMoney());
+		Map<Integer, Integer> changes = getChanges();
 		outputView.printChanges(changes);
 
 	}
@@ -54,11 +54,11 @@ public class VendingMachineController {
 		}
 	}
 
-	public Map<Integer, Integer> getChanges(int moneyAmount) {
+	public Map<Integer, Integer> getChanges() {
 		Map<Integer, Integer> changes = new LinkedHashMap<>();
 		Map<Integer, Integer> restCoins = coinController.getRestCoins();
 		for (Map.Entry<Integer, Integer> coin : restCoins.entrySet()) {
-			final int number = coinController.getAvailableChangeNumber(coin.getKey(), coin.getValue(), moneyAmount);
+			final int number = coinController.getAvailableChangeNumber(coin.getKey(), coin.getValue(), money.getMoney());
 			final boolean isUpperThanZero = 0 < number;
 			if (isUpperThanZero) {
 				changes.put(coin.getKey(), number);
