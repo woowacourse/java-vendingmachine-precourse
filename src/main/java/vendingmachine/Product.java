@@ -50,6 +50,14 @@ public class Product {
         return quantity.canBuy();
     }
 
+    public boolean isRestQuantity(int productQuantity) {
+        return quantity.equals(new ProductQuantity(productQuantity));
+    }
+
+    public void decreaseQuantity(int productQuantity) {
+        quantity.decrease(productQuantity);
+    }
+
     private void validateInfoNotMissed(String goodsInfo) {
         if (isInfoMissed(goodsInfo.split(COMMA))) {
             throw new IllegalArgumentException(INFO_MISSED_MESSAGE);

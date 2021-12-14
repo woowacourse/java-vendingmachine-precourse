@@ -18,8 +18,9 @@ public class Products {
     }
 
     public int takeOut(String productName, int productQuantity) {
-        Product product = findProduct(productName);
+        Product product = find(productName);
         product.validateEnoughStock(productQuantity);
+        product.decreaseQuantity(productQuantity);
 
         return product.getPrice() * productQuantity;
     }
@@ -28,6 +29,12 @@ public class Products {
         return isExceedLeastPrice(inputAmount) && isAnyProductInStock();
     }
 
+    public Product find(String productName) {
+        return products.stream()
+                .filter(product -> product.isName(productName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException(NOT_EXISTED_PRODUCT_MESSAGE));
+    }
     private boolean isAnyProductInStock() {
         return products.stream()
                 .anyMatch(Product::hasStock);
@@ -36,13 +43,6 @@ public class Products {
     private boolean isExceedLeastPrice(int inputAmount) {
         return products.stream()
                 .allMatch(product -> product.isEnoughMoneyToBuy(inputAmount));
-    }
-
-    private Product findProduct(String productName) {
-        return products.stream()
-                .filter(product -> product.isName(productName))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException(NOT_EXISTED_PRODUCT_MESSAGE));
     }
 
     private void addProducts(String products) {

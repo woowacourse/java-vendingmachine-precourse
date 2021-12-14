@@ -52,4 +52,12 @@ public class VendingMachineTest {
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("세미콜론");
     }
+
+    @Test
+    void 상품_구매_수량_차감() {
+        vendingMachine.buy("콜라", 2);
+
+        assertThat(vendingMachine.isRestQuantity("콜라", 18)).isTrue();
+    }
+
 }

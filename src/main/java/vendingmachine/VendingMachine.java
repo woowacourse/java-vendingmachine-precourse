@@ -40,12 +40,13 @@ public class VendingMachine {
     }
 
     public String toStringInputAmount() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(TO_STRING_INPUT_AMOUNT_PREFIX)
-                .append(inputAmount)
-                .append(AMOUNT_UNIT);
+        return new StringBuilder()
+                .append(TO_STRING_INPUT_AMOUNT_PREFIX).append(inputAmount).append(AMOUNT_UNIT)
+                .toString();
+    }
 
-        return sb.toString();
+    public boolean isRestQuantity(String productName, int productQuantity) {
+        return products.find(productName).isRestQuantity(productQuantity);
     }
 
     private void validateDividedIntoSemicolon(String productsString) {
