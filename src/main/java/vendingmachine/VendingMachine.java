@@ -45,7 +45,10 @@ public class VendingMachine {
     }
 
     private void giveChanges() {
-        Map<Coin, Integer> changes = makeChanges();
+        Map<Coin, Integer> changes = new LinkedHashMap<>();
+        if (customerMoney != 0) {
+            changes = makeChanges();
+        }
 
         printer.printChanges(changes);
     }
