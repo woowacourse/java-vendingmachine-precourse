@@ -14,28 +14,29 @@ import vendingmachine.service.OrderService;
 import vendingmachine.service.UserService;
 
 public class VendingMachineController {
-	private final Coins coinService = new Coins();
+	private final Coins coins = new Coins();
 	private final UserService userService = new UserService();
 	private final OrderService orderService = new OrderService();
 	private final ChangeService changeService = new ChangeService();
 
 	public void run() {
 		Map<Coin, Integer> vendingMachineCoins = getVendingMachineCoins();
-		showCoins(vendingMachineCoins, POSSESSION_COIN);
+		showCoins(vendingMachineCoins, ANSWER_POSSESSION_COIN);
 
-		Items forSaleItems = userService.addItems();
+		Items forSaleItems = userService.registerItems();
 		int remainedMoney = getUserMoneyAndOrderItems(forSaleItems);
 
 		returnChangeToUser(vendingMachineCoins, remainedMoney);
 	}
 
-	private void returnChangeToUser(Map<Coin, Integer> vendingMachineCoins, int remainedMoney) {
-		Map<Coin, Integer> returnChange = changeService.returnChange(vendingMachineCoins, remainedMoney);
-		showCoins(returnChange, CHANGE_COIN);
+	private void returnChangeToUser(Map<Coin, Integer> vendingMachineCoins, int remainedUserMoney) {
+		Map<Coin, Integer> returnChange = changeService.returnChange(vendingMachineCoins, remainedUserMoney);
+
+		showCoins(returnChange, ANSWER_CHANGE_COIN);
 	}
 
 	private int getUserMoneyAndOrderItems(Items forSaleItems) {
-		int userMoney = userService.inputUserMoney();
+		int userMoney = userService.getUserMoney();
 		int remainedMoney = orderProcess(forSaleItems, userMoney);
 		showMoney(remainedMoney);
 
@@ -44,9 +45,7 @@ public class VendingMachineController {
 
 	private Map<Coin, Integer> getVendingMachineCoins() {
 		int vendingMachinePossession = userService.getVendingMachinePossession();
-		Map<Coin, Integer> vendingMachineCoins = coinService.createCoins(vendingMachinePossession);
-
-		return vendingMachineCoins;
+		return coins.createCoins(vendingMachinePossession);
 	}
 
 	private int orderProcess(Items forSaleItems, int currentUserMoney) {
