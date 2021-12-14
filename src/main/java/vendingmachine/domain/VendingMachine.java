@@ -9,7 +9,9 @@ import vendingmachine.utils.Util;
 public class VendingMachine {
 	private static final VendingMachine vendingMachine = new VendingMachine();
 	private Money machineMoney;
+	private Products products;
 	private CoinCounter machineCoinCounter;
+	private ProductCounter productCounter;
 
 	private VendingMachine() {
 	}
@@ -20,7 +22,9 @@ public class VendingMachine {
 
 	public void init() {
 		this.machineMoney = null;
+		this.products = null;
 		this.machineCoinCounter = new CoinCounter();
+		this.productCounter = new ProductCounter();
 	}
 
 	public void insertMachineMoney(Money machineMoney) {
@@ -53,5 +57,11 @@ public class VendingMachine {
 			.mapToInt(Coin::toAmount)
 			.boxed()
 			.collect(Collectors.toList());
+	}
+
+	public void insertProducts(Products products) {
+		this.products = products;
+		this.productCounter.plusCountFromList(this.products.toList());
+		System.out.println(productCounter);
 	}
 }

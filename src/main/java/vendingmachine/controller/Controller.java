@@ -1,6 +1,9 @@
 package vendingmachine.controller;
 
+import java.util.Arrays;
+
 import vendingmachine.domain.Money;
+import vendingmachine.domain.Products;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -18,7 +21,9 @@ public class Controller {
 		OutputView.printResultOfgenerateCoins(vendingMachine.generateCoins());
 
 		OutputView.printInputProductsInstruction(); //상품명과 가격, 수량을 입력해 주세요.
-		InputView.getProducts(); //[콜라,1500,20];[사이다,1000,10]
+		// Products products = Products.from(InputView.getProducts());//[콜라,1500,20];[사이다,1000,10]
+		Products products = Products.from(Arrays.asList("콜라,1500,20", "사이다,1000,10"));
+		vendingMachine.insertProducts(products);
 
 	}
 }

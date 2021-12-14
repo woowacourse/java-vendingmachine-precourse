@@ -66,13 +66,29 @@ public class Validators {
 				}
 				return 0;
 			})
-			.allMatch(amount -> amount >= 100 && amount % 10 == 0); // 추출물검사
+			.allMatch(amount -> amount >= 100 && amount % 10 == 0 ); // 추출물검사
 
 		if (!isValidAmount) {
 			throw new IllegalArgumentException("상품 가격은 100원부터 시작하며, 10원으로 나누어떨어져야 한다.");
 		}
 
 		System.out.println("금액 검사까지 통과");  // TODO 로그
+		boolean isValidCount = splitedInputValue.stream()
+			.mapToInt(stringValue -> {
+				Matcher matcher = pattern.matcher(stringValue);
+				if (matcher.find()) {
+					String count = matcher.group(3);
+					return Integer.parseInt(count);
+				}
+				return 0;
+			})
+			.allMatch(count -> count >= 1 ); // 추출물검사
+
+		if (!isValidCount) {
+			throw new IllegalArgumentException("상품 갯수는 1개이상이어야한다.");
+		}
+
+		System.out.println("갯수 검사까지 통과");  // TODO 로그
 
 		List<String> names = splitedInputValue.stream()
 			.map(stringValue -> {
@@ -91,7 +107,7 @@ public class Validators {
 			throw new IllegalArgumentException("같은 상품이 중복 입력되었습니다.");
 		}
 
-		System.out.println("상품명(추출) 중복검사까지 통과");  // TODO 로그
+		// System.out.println("상품명(추출) 중복검사까지 통과");  // TODO 로그
 
 	}
 }

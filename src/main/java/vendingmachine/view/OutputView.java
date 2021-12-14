@@ -16,6 +16,7 @@ public class OutputView {
 
 	public static void printResultOfgenerateCoins(String resultOfgenerateCoins) {
 		System.out.println(resultOfgenerateCoins);
+		System.out.println();
 	}
 
 	public static void printInputProductsInstruction() {
