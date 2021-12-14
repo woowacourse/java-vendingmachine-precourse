@@ -32,8 +32,8 @@ public class DepositService {
 			int amountRandomized = Randoms.pickNumberInList(
 				coinList.stream().map(Coin::getAmount).collect(Collectors.toList()));
 			int amountToSub = getAmountToSub(deposit, amountRandomized);
-			if (Coin.ofValue(amountToSub).isPresent()) {
-				Coin target = Coin.ofValue(amountToSub).get();
+			if (Coin.ofAmount(amountToSub).isPresent()) {
+				Coin target = Coin.ofAmount(amountToSub).get();
 				deposit -= amountToSub;
 				countMap.put(target, countMap.get(target) + 1);
 			}

@@ -19,7 +19,7 @@ public enum Coin {
 		return amount;
 	}
 
-	public static Optional<Coin> ofValue(int amount) {
+	public static Optional<Coin> ofAmount(int amount) {
 		return Arrays.stream(Coin.values()).filter(coin -> coin.getAmount() == amount).findAny();
 	}
 }
