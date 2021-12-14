@@ -17,7 +17,7 @@ public class Item {
     private final Price price;
     private final Quantity remainingQuantity;
 
-    public Item(InputItemDTO itemInfo) {
+    public Item(final InputItemDTO itemInfo) {
         validateNumberOfInfo(itemInfo.getNumberOfProperties());
         name = itemInfo.getName();
         price = new Price(itemInfo.getPrice());
