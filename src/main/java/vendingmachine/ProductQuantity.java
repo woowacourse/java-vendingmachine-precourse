@@ -22,8 +22,8 @@ public class ProductQuantity {
         return quantity;
     }
 
-    public void validateEnoughStock(int demandQuantity) {
-        if (quantity < demandQuantity) {
+    public void validateEnoughStock() {
+        if (!canBuy()) {
             throw new IllegalArgumentException(QUANTITY_NOT_ENOUGH_MESSAGE);
         }
     }
@@ -32,8 +32,8 @@ public class ProductQuantity {
         return quantity > NO_STOCK;
     }
 
-    public void decrease(int productQuantity) {
-        quantity -= productQuantity;
+    public void decrease() {
+        quantity--;
     }
 
     private void validateQuantityNumeric(String quantity) {

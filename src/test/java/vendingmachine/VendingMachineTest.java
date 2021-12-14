@@ -11,26 +11,27 @@ public class VendingMachineTest {
 
     @BeforeEach
     void init() {
-        vendingMachine = new VendingMachine("[콜라,1500,20];[사이다,1000,10]", 450);
+        vendingMachine = new VendingMachine("[콜라,1500,20];[사이다,1000,10]", new HoldingCoins(450));
         vendingMachine.insertMoney(5000);
     }
 
     @Test
     void 자판기_수요_상품이_없을때_예외() {
-        assertThatThrownBy(() -> vendingMachine.buy("맥주", 5))
+        assertThatThrownBy(() -> vendingMachine.buy("맥주"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 상품구매금액_투입금액_초과_예외() {
-        assertThatThrownBy(() -> vendingMachine.buy("콜라", 5))
+        vendingMachine = new VendingMachine("[콜라,5500,20];[사이다,1000,10]", new HoldingCoins(450));
+        assertThatThrownBy(() -> vendingMachine.buy("콜라"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
     void 수요_상품_재고_부족_예외() {
-        vendingMachine.insertMoney(100000);
-        assertThatThrownBy(() -> vendingMachine.buy("사이다", 11))
+        vendingMachine = new VendingMachine("[콜라,1500,20];[사이다,1000,0]", new HoldingCoins(450));
+        assertThatThrownBy(() -> vendingMachine.buy("사이다"))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -42,22 +43,22 @@ public class VendingMachineTest {
 
     @Test
     void 모든상품_재고_없음_False() {
-        vendingMachine = new VendingMachine("[콜라,1500,0];[사이다,1000,0]", 450);
+        vendingMachine = new VendingMachine("[콜라,1500,0];[사이다,1000,0]", new HoldingCoins(450));
         assertThat(vendingMachine.isPurchasable()).isFalse();
     }
 
     @Test
     void 상품정보_세미콜론으로_구분되지않음_예외() {
-        assertThatThrownBy(() -> new VendingMachine("[콜라,1500,10][사이다,1000,10]", 450))
+        assertThatThrownBy(() -> new VendingMachine("[콜라,1500,10][사이다,1000,10]", new HoldingCoins(450)))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining("세미콜론");
     }
 
     @Test
     void 상품_구매_수량_차감() {
-        vendingMachine.buy("콜라", 2);
+        vendingMachine.buy("콜라");
 
-        assertThat(vendingMachine.isRestQuantity("콜라", 18)).isTrue();
+        assertThat(vendingMachine.isRestQuantity("콜라", 19)).isTrue();
     }
 
 }

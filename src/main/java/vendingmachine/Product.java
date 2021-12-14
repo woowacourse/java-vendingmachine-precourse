@@ -38,8 +38,8 @@ public class Product {
         return name.equals(productName);
     }
 
-    public void validateEnoughStock(int demandQuantity) {
-        quantity.validateEnoughStock(demandQuantity);
+    public void validateEnoughStock() {
+        quantity.validateEnoughStock();
     }
 
     public boolean isEnoughMoneyToBuy(int inputAmount) {
@@ -54,8 +54,8 @@ public class Product {
         return quantity.equals(new ProductQuantity(productQuantity));
     }
 
-    public void decreaseQuantity(int productQuantity) {
-        quantity.decrease(productQuantity);
+    public void decreaseQuantity() {
+        quantity.decrease();
     }
 
     private void validateInfoNotMissed(String goodsInfo) {

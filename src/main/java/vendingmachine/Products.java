@@ -17,12 +17,12 @@ public class Products {
         addProducts(products);
     }
 
-    public int takeOut(String productName, int productQuantity) {
+    public Product takeOut(String productName) {
         Product product = find(productName);
-        product.validateEnoughStock(productQuantity);
-        product.decreaseQuantity(productQuantity);
+        product.validateEnoughStock();
+        product.decreaseQuantity();
 
-        return product.getPrice() * productQuantity;
+        return product;
     }
 
     public boolean isPurchasable(int inputAmount) {

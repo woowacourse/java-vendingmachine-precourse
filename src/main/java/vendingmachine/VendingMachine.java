@@ -12,15 +12,15 @@ public class VendingMachine {
     private final HoldingCoins holdingCoins;
     private int inputAmount = ZERO;
 
-    public VendingMachine(String productsString, int holdingMoney) {
-        validateDividedIntoSemicolon(productsString);
-        this.products = new Products(productsString);
-        this.holdingCoins = new HoldingCoins(holdingMoney);
+    public VendingMachine(String productsInfo, HoldingCoins holdingCoins) {
+        validateDividedIntoSemicolon(productsInfo);
+        this.products = new Products(productsInfo);
+        this.holdingCoins = holdingCoins;
     }
 
-    public void buy(String productName, int productQuantity) {
-        int totalPrice = products.takeOut(productName, productQuantity);
-        inputAmount = deductFromInputAmount(totalPrice);
+    public void buy(String productName) {
+        Product product = products.takeOut(productName);
+        inputAmount = deductFromInputAmount(product.getPrice());
     }
 
     public void insertMoney(int inputAmount) {
@@ -29,10 +29,6 @@ public class VendingMachine {
 
     public boolean isPurchasable() {
         return products.isPurchasable(inputAmount);
-    }
-
-    public String toStringHoldingCoins() {
-        return holdingCoins.toString();
     }
 
     public String toStringChanges() {
