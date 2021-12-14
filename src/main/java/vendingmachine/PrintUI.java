@@ -30,12 +30,17 @@ public class PrintUI {
 
     public static int InputMoney() {
         System.out.println("투입 금액을 입력해 주세요.");
-        int money = Integer.parseInt(Console.readLine());
-        if (money < 0) {
-            throw new IllegalArgumentException("[ERROR] : 음수는 넣을 수 없어요");
+        try {
+            int money = Integer.parseInt(Console.readLine());
+            if (money < 0) {
+                throw new IllegalArgumentException();
+            }
+            System.out.println();
+            return money;
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] : 양의 정수를 입력해주세요");
+            return InputMoney();
         }
-        System.out.println();
-        return money;
     }
 
     public static String Ordering(int money) {

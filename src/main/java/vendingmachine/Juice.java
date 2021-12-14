@@ -3,9 +3,9 @@ package vendingmachine;
 import java.util.Objects;
 
 public class Juice {
-    private String name;
+    private final String name;
     private int numberOfCan;
-    private int price;
+    private final int price;
 
     Juice(String name, int price, int numberOfCan) {
         this.name = name;
