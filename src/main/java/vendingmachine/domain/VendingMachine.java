@@ -21,6 +21,7 @@ public class VendingMachine {
 	public VendingMachine() {
 		this.coinMap = new TreeMap<>(Collections.reverseOrder());
 		this.products = new ArrayList<>();
+		this.inputCost = 0;
 
 		coinMap.put(Coin.COIN_500.getAmount(), 0);
 		coinMap.put(Coin.COIN_100.getAmount(), 0);
@@ -119,7 +120,9 @@ public class VendingMachine {
 		return products;
 	}
 
-	public void setInputCost(int inputCost) {
-		this.inputCost = inputCost;
+	public void canInputCostSet(int inputCost) {
+		if(this.inputCost == 0) {
+			this.inputCost = inputCost;
+		}
 	}
 }

@@ -1,12 +1,9 @@
 package vendingmachine.service;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
-
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.message.Message;
 import vendingmachine.message.dto.ResponseMessage;
+import vendingmachine.utils.ChangeUtil;
 import vendingmachine.validation.validator.InputCostValidator;
 import vendingmachine.validation.validator.InputProductNameValidator;
 import vendingmachine.validation.validator.InputProductsValidator;
@@ -16,7 +13,6 @@ public class VendingMachineService {
 
 	private final ResponseMessage result;
 	private final VendingMachine vendingMachine;
-	private int change;
 
 	public VendingMachineService() {
 		this.vendingMachine = new VendingMachine();
@@ -42,7 +38,7 @@ public class VendingMachineService {
 	public String postInputCosts(String inputStr) {
 		InputCostValidator.validateInputCost(inputStr);
 		result.init();
-		vendingMachine.setInputCost(Integer.parseInt(inputStr));
+		vendingMachine.canInputCostSet(Integer.parseInt(inputStr));
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
 		return result.getResult();
@@ -64,35 +60,10 @@ public class VendingMachineService {
 	public String getChange() {
 		result.init();
 		result.addMessage(Message.PRINT_BALANCE.getMessage() + '\n');
-		getMinimumChange();
+		result.addCoinCountMessage(ChangeUtil.getMinimumChange(vendingMachine.compareInputCostAndCoinToDecideChange(),
+			vendingMachine.getCoinMap()));
 
 		return result.getResult();
-	}
-
-	private void getMinimumChange() {
-		change = vendingMachine.compareInputCostAndCoinToDecideChange();
-		Map<Integer, Integer> coinMap = vendingMachine.getCoinMap();
-		Map<Integer, Integer> changeMap = new TreeMap<>(Collections.reverseOrder());
-
-		for (Integer i : coinMap.keySet()) {
-			changeMap = addChangeMapToCoin(i, coinMap.get(i), changeMap);
-		}
-
-		result.addCoinCountMessage(changeMap);
-	}
-
-	private Map<Integer, Integer> addChangeMapToCoin(int key, int value, Map<Integer, Integer> map) {
-		for (int j = 0; j < value; j++) {
-			if (change >= key) {
-				map.put(key, map.getOrDefault(key, 0) + 1);
-				change -= key;
-			}
-			if (change < key || change <= 0) {
-				break;
-			}
-		}
-
-		return map;
 	}
 }
 
