@@ -2,7 +2,6 @@ package vendingmachine.validator;
 
 import vendingmachine.constant.Condition;
 import vendingmachine.constant.Error;
-import vendingmachine.constant.Input;
 
 public class MoneyValidator {
 

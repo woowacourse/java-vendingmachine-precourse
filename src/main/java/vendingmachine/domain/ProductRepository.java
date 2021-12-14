@@ -40,7 +40,7 @@ public class ProductRepository {
         return false;
     }
 
-    public boolean hasAllProductQuantity() {
+    public boolean hasProductQuantityAtLeastOne() {
         int allAmount = Condition.QUANTITY_0.getNumber();
         for (Product product : products) {
             allAmount = product.countProductQuantity(allAmount, product);

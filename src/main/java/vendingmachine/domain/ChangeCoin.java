@@ -15,7 +15,7 @@ public class ChangeCoin {
     }
 
     public boolean canReturnChange(int money) {
-        if (!ProductRepository.getInstance().hasAllProductQuantity()) {
+        if (!ProductRepository.getInstance().hasProductQuantityAtLeastOne()) {
             return false;
         }
 
@@ -32,23 +32,23 @@ public class ChangeCoin {
                 continue;
             }
             if (money / coin > Condition.QUOTIENT_1.getNumber()) {
-                int number = nextCoin(coinMap, money, coin);
+                int number = usingNextCoin(coinMap, money, coin);
                 changeCoinMap.put(coin, number);
             }
         }
         return changeCoinMap;
     }
 
-    private int nextCoin(LinkedHashMap<Integer, Integer> coinMap, int money, int coin) {
-        int coinQuantityLimit = coinMap.get(coin);
+    private int usingNextCoin(LinkedHashMap<Integer, Integer> coinMap, int money, int coin) {
+        int coinQuantityUsingLimit = coinMap.get(coin);
         int coinUsing = Condition.QUANTITY_0.getNumber();
 
-        while (coinQuantityLimit > Condition.QUANTITY_0.getNumber()) {
+        while (coinQuantityUsingLimit > Condition.QUANTITY_0.getNumber()) {
             if (money / coin < Condition.QUOTIENT_1.getNumber()) {
                 break;
             }
             money -= coin;
-            coinQuantityLimit -= Condition.QUANTITY_1.getNumber();
+            coinQuantityUsingLimit -= Condition.QUANTITY_1.getNumber();
             coinUsing += Condition.QUANTITY_1.getNumber();
         }
         return coinUsing;

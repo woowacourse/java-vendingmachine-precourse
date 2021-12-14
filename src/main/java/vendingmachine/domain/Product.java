@@ -60,7 +60,6 @@ public class Product implements Comparable<Product>{
     }
 
     public int countProductQuantity(int amount, Product product) {
-        System.out.println(amount + product.getQuantity());
         return amount + product.getQuantity();
     }
 }
