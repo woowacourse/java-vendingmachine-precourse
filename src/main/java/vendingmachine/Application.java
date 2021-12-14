@@ -6,8 +6,9 @@ public class Application {
         VendingMachine vendingMachine = new VendingMachine();
 
         while(vendingMachine.canBuyAnything()){
-
+            vendingMachine.buy(InputReceiver.getProductName(vendingMachine));
         }
+
     }
 
 }
