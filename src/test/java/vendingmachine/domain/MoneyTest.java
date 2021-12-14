@@ -10,10 +10,11 @@ import org.junit.jupiter.api.Test;
 
 import vendingmachine.controller.CoinController;
 import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class MoneyTest {
 	private static final CoinController coinController = new CoinController(
-		new InputView());
+		new InputView(), new OutputView());
 	private static Coins coins;
 
 	void init() {

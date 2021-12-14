@@ -10,8 +10,9 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private static final InputView inputView = new InputView();
-	private static final CoinController coinController = new CoinController(inputView);
-	private static final ItemController itemcontroller = new ItemController(inputView);
+	private static final OutputView outputView = new OutputView();
+	private static final CoinController coinController = new CoinController(inputView, outputView);
+	private static final ItemController itemcontroller = new ItemController(inputView, outputView);
 
 	public void run() {
 
@@ -20,16 +21,16 @@ public class VendingMachineController {
 		Money money = giveMoney();
 		sellItem(items, money);
 
-		OutputView.printMoney(money);
-		OutputView.printChanges(coinController.getChanges(coins, money));
+		outputView.printMoney(money);
+		outputView.printChanges(coinController.getChanges(coins, money));
 	}
 
 	private Money giveMoney() {
 		try {
-			OutputView.printInsertingMoneyRequest();
+			outputView.printInsertingMoneyRequest();
 			return new Money(inputView.scanPrice());
 		} catch (IllegalArgumentException e) {
-			OutputView.printError(e.getMessage());
+			outputView.printError(e.getMessage());
 			return giveMoney();
 		}
 	}
@@ -40,7 +41,7 @@ public class VendingMachineController {
 			try {
 				itemcontroller.update(items, money);
 			} catch (IllegalArgumentException e) {
-				OutputView.printError(e.getMessage());
+				outputView.printError(e.getMessage());
 			}
 		}
 	}

@@ -21,9 +21,11 @@ public class ItemController {
 	private static final String INVALID_PREFIX_AND_SUFFIX_ERROR = ERROR + "각 상품별 정보는 " + PREFIX + "로 시작해서"
 		+ SUFFIX + "로 끝나야 합니다.";
 	private final InputView inputView;
+	private final OutputView outputView;
 
-	public ItemController(final InputView inputView) {
+	public ItemController(final InputView inputView, final OutputView outputView) {
 		this.inputView = inputView;
+		this.outputView = outputView;
 	}
 
 	public Items giveItems() {
@@ -31,17 +33,17 @@ public class ItemController {
 			List<String> itemDetails = extractItemDetails();
 			return initializeItems(itemDetails);
 		} catch (IllegalArgumentException e) {
-			OutputView.printError(e.getMessage());
+			outputView.printError(e.getMessage());
 			return giveItems();
 		}
 	}
 
 	private List<String> extractItemDetails() {
 		try {
-			OutputView.printItemsRequest();
+			outputView.printItemsRequest();
 			return inputView.scanItemDetailList();
 		} catch (IllegalArgumentException e) {
-			OutputView.printError(e.getMessage());
+			outputView.printError(e.getMessage());
 			return extractItemDetails();
 		}
 	}
@@ -73,8 +75,8 @@ public class ItemController {
 	}
 
 	public void update(final Items items, final Money money) {
-		OutputView.printMoney(money);
-		OutputView.printItemPerChaseRequest();
+		outputView.printMoney(money);
+		outputView.printItemPerChaseRequest();
 		Item item = items.findItemByName(inputView.scanItemName(), money);
 		item.sell();
 		money.pay(item.getCost());

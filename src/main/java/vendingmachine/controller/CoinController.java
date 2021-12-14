@@ -11,24 +11,26 @@ import vendingmachine.view.OutputView;
 
 public class CoinController {
 	private final InputView inputView;
+	private final OutputView outputView;
 
-	public CoinController(final InputView inputView) {
+	public CoinController(final InputView inputView, final OutputView outputView) {
 		this.inputView = inputView;
+		this.outputView = outputView;
 	}
 
 	public Coins giveHoldingCoins() {
 		Coins coins = initializeCoins();
-		OutputView.printHoldingCoinStatus(coins.findAll());
+		outputView.printHoldingCoinStatus(coins.findAll());
 		return coins;
 	}
 
 	public Coins initializeCoins() {
 		try {
-			OutputView.printHoldingCashRequest();
+			outputView.printHoldingCashRequest();
 			int price = inputView.scanPrice();
 			return new Coins(makeCoins(price));
 		} catch (IllegalArgumentException e) {
-			OutputView.printError(e.getMessage());
+			outputView.printError(e.getMessage());
 			return initializeCoins();
 		}
 	}
