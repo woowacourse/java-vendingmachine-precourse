@@ -27,19 +27,20 @@ public class VendingMachine {
 
     private Map<Coin, Integer> generateRandomCoins(int inputMoney) {
         Map<Coin, Integer> newCoinHashMap = new LinkedHashMap<>();
-        while (inputMoney != 0) {
-            inputMoney = extractCoin(inputMoney, newCoinHashMap);
-        }
-        return newCoinHashMap;
-    }
-
-    private int extractCoin(int inputMoney, Map<Coin, Integer> newCoinHashMap) {
         for (Coin coin : Coin.values()) {
             int randomQuotient = Randoms.pickNumberInRange(0, inputMoney / coin.getAmount());
             inputMoney -= (randomQuotient * coin.getAmount());
             newCoinHashMap.put(coin, newCoinHashMap.getOrDefault(coin, 0) + randomQuotient);
         }
-        return inputMoney;
+
+        if (inputMoney > 0) {
+            for (Coin coin : Coin.values()) {
+                int quotient = inputMoney / coin.getAmount();
+                inputMoney -= quotient * coin.getAmount();
+                newCoinHashMap.put(coin, newCoinHashMap.getOrDefault(coin, 0) + quotient);
+            }
+        }
+        return newCoinHashMap;
     }
 
     public void saveProduct(List<Product> products) {
@@ -90,7 +91,7 @@ public class VendingMachine {
         StringBuilder results = new StringBuilder();
         results.append("잔돈").append("\n");
         for (Coin coin : resultCoinMap.keySet()) {
-            results.append(coin).append(" - ").append(resultCoinMap.get(coin)).append("\n");
+            results.append(coin).append(" - ").append(resultCoinMap.get(coin)).append("개").append("\n");
         }
         return results.toString();
     }
