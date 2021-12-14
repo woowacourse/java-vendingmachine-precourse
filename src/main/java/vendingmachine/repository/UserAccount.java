@@ -16,4 +16,8 @@ public class UserAccount {
 	public static void purchase(Catalog catalog) {
 		account -= catalog.getPrice();
 	}
+
+	public static boolean canBuy() {
+		return CatalogRepository.isExistCheaperThan(account);
+	}
 }

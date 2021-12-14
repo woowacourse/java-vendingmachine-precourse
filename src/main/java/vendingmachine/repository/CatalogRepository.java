@@ -12,10 +12,6 @@ public class CatalogRepository {
 		catalogList.add(catalog);
 	}
 
-	public static List<Catalog> getCatalogs() {
-		return catalogList;
-	}
-
 	public static Catalog getCatalogByName(String catalogName) {
 		Catalog temporaryCatalog = new Catalog(catalogName, 0, 0);
 		for (Catalog catalog : catalogList) {
@@ -32,5 +28,15 @@ public class CatalogRepository {
 		if (catalog != null) {
 			catalog.purchase();
 		}
+	}
+
+	public static boolean isExistCheaperThan(int account) {
+		for (Catalog catalog : catalogList) {
+			if (catalog.isCheaperThan(account)
+				&& catalog.isExist()) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

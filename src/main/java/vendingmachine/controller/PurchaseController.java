@@ -1,14 +1,14 @@
 package vendingmachine.controller;
 
 import vendingmachine.domain.Catalog;
+import vendingmachine.repository.UserAccount;
 import vendingmachine.service.PurchaseService;
 import vendingmachine.view.PurchaseView;
 import vendingmachine.view.UserAccountView;
 
 public class PurchaseController {
 	public static void purchaseCatalogs() {
-
-		while (!isEnd()) {
+		while (UserAccount.canBuy()) {
 			UserAccountView.printUserAccount();
 			Catalog catalogToPurchase = getCatalogInput();
 			PurchaseService.purchase(catalogToPurchase);
@@ -23,9 +23,5 @@ public class PurchaseController {
 			catalog = PurchaseService.getValidCatalogInput();
 		}
 		return catalog;
-	}
-
-	private static boolean isEnd() {
-		return PurchaseService.checkEndCondition();
 	}
 }

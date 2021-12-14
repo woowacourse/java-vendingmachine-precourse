@@ -2,28 +2,13 @@ package vendingmachine.service;
 
 import static vendingmachine.service.exception.InputExceptionService.*;
 
-import java.util.List;
-
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Catalog;
-import vendingmachine.repository.UserAccount;
 import vendingmachine.repository.CatalogRepository;
+import vendingmachine.repository.UserAccount;
 import vendingmachine.view.exception.ErrorMessage;
 
 public class PurchaseService {
-
-	public static boolean checkEndCondition() {
-		int userAccount = UserAccount.getAccount();
-		List<Catalog> catalogList = CatalogRepository.getCatalogs();
-
-		for (Catalog catalog : catalogList) {
-			if(catalog.isCheaperThan(userAccount)
-				&& catalog.isExist()){
-				return false;
-			}
-		}
-		return true;
-	}
 
 	public static Catalog getValidCatalogInput() {
 		try {
