@@ -13,6 +13,9 @@ import java.util.stream.Stream;
 
 public class VendingMachine {
 
+    private static final int ZERO = 0;
+    private static final int ONE = 1;
+
     Map<Coin, Integer> coinBox;
     List<Product> products;
     Speaker speaker;
@@ -26,7 +29,7 @@ public class VendingMachine {
         this.assistant = new Assistant();
         List<Coin> sortedCoins = makeCoinStream().sorted().collect(Collectors.toList());
         for (Coin coin : sortedCoins) {
-            coinBox.put(coin, 0);
+            coinBox.put(coin, ZERO);
         }
     }
 
@@ -71,20 +74,9 @@ public class VendingMachine {
         }
     }
 
-    private void stopSale(Integer insertedMoney) {
-        speaker.announceChanges();
-        changeMoney(insertedMoney);
-    }
-
-    private Integer purchaseProduct() {
-        speaker.requestPurchaseProduct();
-        String wantedProduct = touchpad.purchaseProduct();
-        return sellProduct(wantedProduct);
-    }
-
     private void generateRandomCoinBasedOnAsset(int asset) {
         List<Integer> coins = makeCoinStream().map(Coin::getAmount).collect(Collectors.toList());
-        while (asset > 0) {
+        while (asset > ZERO) {
             int randomCoin = Randoms.pickNumberInList(coins);
             if (isAvailableCoin(asset, randomCoin)) {
                 asset -= randomCoin;
@@ -94,16 +86,20 @@ public class VendingMachine {
         }
     }
 
+    private Stream<Coin> makeCoinStream() {
+        return Arrays.stream(Coin.values());
+    }
+
+    private boolean isAvailableCoin(int asset, int randomCoin) {
+        return asset >= randomCoin;
+    }
+
     private void insertGeneratedCoinToCoinBox(Coin generatedCoin) {
         coinBox.put(generatedCoin, addOneCoin(generatedCoin));
     }
 
     private int addOneCoin(Coin generatedCoin) {
-        return coinBox.get(generatedCoin) + 1;
-    }
-
-    private boolean isAvailableCoin(int asset, int randomCoin) {
-        return asset >= randomCoin;
+        return coinBox.get(generatedCoin) + ONE;
     }
 
     private boolean purchasePossible(int insertedMoney) {
@@ -125,6 +121,11 @@ public class VendingMachine {
         return products.stream().filter(Product::soldOut).count() == products.size();
     }
 
+    private void stopSale(Integer insertedMoney) {
+        speaker.announceChanges();
+        changeMoney(insertedMoney);
+    }
+
     private void changeMoney(int insertedMoney) {
         Set<Coin> coins = coinBox.keySet();
         for (Coin coin : coins) {
@@ -135,6 +136,12 @@ public class VendingMachine {
         }
     }
 
+    private Integer purchaseProduct() {
+        speaker.requestPurchaseProduct();
+        String wantedProduct = touchpad.purchaseProduct();
+        return sellProduct(wantedProduct);
+    }
+
     private int sellProduct(String wantedProduct) {
         try {
             Product soldProduct = assistant.findWantedProduct(products, wantedProduct);
@@ -142,11 +149,7 @@ public class VendingMachine {
             return soldProduct.getPrice();
         } catch (IllegalArgumentException e) {
             speaker.announceError(e.getMessage());
-            return 0;
+            return ZERO;
         }
-    }
-
-    private Stream<Coin> makeCoinStream() {
-        return Arrays.stream(Coin.values());
     }
 }

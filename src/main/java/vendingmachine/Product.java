@@ -2,6 +2,8 @@ package vendingmachine;
 
 public class Product {
 
+    private static final int SOLD_OUT = 0;
+
     private String name;
     private Integer price;
     private Integer quantity;
@@ -17,7 +19,7 @@ public class Product {
     }
 
     public boolean soldOut() {
-        return this.quantity == 0;
+        return this.quantity == SOLD_OUT;
     }
 
     public void sell() {

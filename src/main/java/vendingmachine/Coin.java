@@ -20,15 +20,15 @@ public enum Coin {
         return this.amount == asset;
     }
 
-    public Integer calculateTotalAmount(Integer coinCount) {
-        return this.amount * coinCount;
-    }
-
     public Integer calculateMaxCoinCount(int insertedMoney, int coinCount) {
         if (calculateTotalAmount(coinCount) > insertedMoney) {
             coinCount = getMaxCountByInsertedMoney(insertedMoney);
         }
         return coinCount;
+    }
+
+    public Integer calculateTotalAmount(Integer coinCount) {
+        return this.amount * coinCount;
     }
 
     private Integer getMaxCountByInsertedMoney(int insertedMoney) {

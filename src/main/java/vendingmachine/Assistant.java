@@ -10,6 +10,7 @@ public class Assistant {
     private static final String PRODUCT_SIZE_ZERO_ERROR_MESSAGE = "상품은 하나 이상 등록해야 합니다.";
     private static final String DUPLICATED_NAME_ERROR_MESSAGE = "중복은 불가능 합니다.";
     private static final String PRICE_MIN_ERROR_MESSAGE = "상품 가격은 100원 이상이어야 합니다.";
+    private static final String EMPTY_PRODUCT_NAME_ERROR_MESSAGE = "빈 상품은 불가능합니다.";
     private static final String PRICE_NOT_TEN_MULTIPLE_ERROR_MESSAGE = "금액은 10으로 나누어 떨어져야 합니다.";
     private static final String NEGATIVE_NUMBER_ERROR_MESSAGE = "금액과 수량은 0 이상이어야 합니다.";
     private static final String PRODUCT_FORMAT_ERROR_MESSAGE = "상품 형식이 맞지 않습니다.";
@@ -17,6 +18,13 @@ public class Assistant {
     private static final String NOT_FOUND_COIN = "동전을 찾을 수 없습니다.";
     private static final String NOT_FOUND_PRODUCT = "상품을 찾을 수 없습니다.";
     private static final int ZERO = 0;
+    private static final int MULTIPLE_NUMBER = 10;
+    private static final int FIRST_INDEX = 0;
+    private static final int LAST_INDEX = -1;
+    private static final int SECOND_INDEX = 1;
+    private static final int THIRD_INDEX = 2;
+    private static final int PROPER_PRODUCT_INFO_COUNT = 3;
+    private static final int MIN_PRODUCT_PRICE = 100;
 
     public Integer convertToInteger(String rawProduct) {
         try {
@@ -51,13 +59,13 @@ public class Assistant {
     }
 
     private void isTenMultiple(Integer price) {
-        if ((price % 10) != 0) {
+        if ((price % MULTIPLE_NUMBER) != ZERO) {
             throw new IllegalArgumentException(PRICE_NOT_TEN_MULTIPLE_ERROR_MESSAGE);
         }
     }
 
     private void isNegativeNumber(Integer number) {
-        if (number < 0) {
+        if (number < ZERO) {
             throw new IllegalArgumentException(NEGATIVE_NUMBER_ERROR_MESSAGE);
         }
     }
@@ -69,7 +77,7 @@ public class Assistant {
     }
 
     private void checkProductFormat(String rawProduct) {
-        if (rawProduct.length() == 0) {
+        if (rawProduct.length() == ZERO) {
             throw new IllegalArgumentException(PRODUCT_SIZE_ZERO_ERROR_MESSAGE);
         }
         if (isNotSquareBracketFormat(rawProduct)) {
@@ -78,22 +86,22 @@ public class Assistant {
     }
 
     private boolean isNotSquareBracketFormat(String rawProduct) {
-        return rawProduct.charAt(0) != '[' || rawProduct.charAt(lastChar(rawProduct)) != ']';
+        return rawProduct.charAt(FIRST_INDEX) != '[' || rawProduct.charAt(lastChar(rawProduct)) != ']';
     }
 
     private int lastChar(String rawProduct) {
-        return rawProduct.length() - 1;
+        return rawProduct.length() + LAST_INDEX;
     }
 
     private String removeSquareBrackets(String rawProduct) {
-        return rawProduct.substring(1, lastChar(rawProduct));
+        return rawProduct.substring(SECOND_INDEX, lastChar(rawProduct));
     }
 
     private Product makeProduct(String[] rawProductInformation, List<Product> products) {
         checkEachProductSize(rawProductInformation);
-        String productName = rawProductInformation[0].trim();
-        Integer productPrice = convertToInteger(rawProductInformation[1]);
-        Integer productQuantity = convertToInteger(rawProductInformation[2]);
+        String productName = rawProductInformation[FIRST_INDEX].trim();
+        Integer productPrice = convertToInteger(rawProductInformation[SECOND_INDEX]);
+        Integer productQuantity = convertToInteger(rawProductInformation[THIRD_INDEX]);
         checkDuplicatedProductName(productName, products);
         checkPrice(productPrice);
         checkQuantity(productQuantity);
@@ -101,28 +109,31 @@ public class Assistant {
     }
 
     private void checkEachProductSize(String[] rawProductInformation) {
-        if (rawProductInformation.length != 3) {
+        if (rawProductInformation.length != PROPER_PRODUCT_INFO_COUNT) {
             throw new IllegalArgumentException(PRODUCT_INFO_SIZE_ERROR_MESSAGE);
         }
     }
 
-    private void checkQuantity(Integer productQuantity) {
-        isNegativeNumber(productQuantity);
+    private void checkDuplicatedProductName(String productName, List<Product> products) {
+        if (productName.length() == ZERO) {
+            throw new IllegalArgumentException(EMPTY_PRODUCT_NAME_ERROR_MESSAGE);
+        }
+        boolean isDuplicated = products.stream().anyMatch(product -> product.matchProductName(productName));
+        if (isDuplicated) {
+            throw new IllegalArgumentException(DUPLICATED_NAME_ERROR_MESSAGE);
+        }
     }
 
     private void checkPrice(Integer productPrice) {
-        if (productPrice < 100) {
+        if (productPrice < MIN_PRODUCT_PRICE) {
             throw new IllegalArgumentException(PRICE_MIN_ERROR_MESSAGE);
         }
         isTenMultiple(productPrice);
         isNegativeNumber(productPrice);
     }
 
-    private void checkDuplicatedProductName(String productName, List<Product> products) {
-        boolean isDuplicated = products.stream().anyMatch(product -> product.matchProductName(productName));
-        if (isDuplicated) {
-            throw new IllegalArgumentException(DUPLICATED_NAME_ERROR_MESSAGE);
-        }
+    private void checkQuantity(Integer productQuantity) {
+        isNegativeNumber(productQuantity);
     }
 
     public Product findWantedProduct(List<Product> products, String wantedProduct) {

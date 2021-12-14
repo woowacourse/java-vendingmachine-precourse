@@ -30,6 +30,10 @@ public class Speaker {
         }
     }
 
+    public void announceError(String message) {
+        System.out.println(ERROR + message);
+    }
+
     public void requestProducts() {
         System.out.println(PRODUCTS_FORMAT);
     }
@@ -52,9 +56,5 @@ public class Speaker {
 
     public void requestPurchaseProduct() {
         System.out.println(WANTED_PRODUCT);
-    }
-
-    public void announceError(String message) {
-        System.out.println(ERROR + message);
     }
 }
