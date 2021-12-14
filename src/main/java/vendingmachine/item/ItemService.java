@@ -79,4 +79,36 @@ public class ItemService {
     private Integer getItemIdByName(String name) {
         return itemKeyRepository.findOneByName(name).getId();
     }
+
+    public boolean isNotStockAllItem() {
+        List<ItemKey> AllItemKey = itemKeyRepository.findAll();
+        for(ItemKey key : AllItemKey) {
+            Item item = itemRepository.findOneById(key.getId());
+            if(!item.isNotStock()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public Integer getLowestPrice(){
+        List<ItemKey> AllItemKey = itemKeyRepository.findAll();
+
+        Integer lowestPrice = null;
+        for(ItemKey key : AllItemKey) {
+            Item item = itemRepository.findOneById(key.getId());
+            if(item.isNotStock()) {
+                continue;
+            }
+
+            int itemPrice = item.getPrice();
+            if(lowestPrice == null) {
+                lowestPrice = itemPrice;
+            }
+            else if(lowestPrice > itemPrice) {
+                lowestPrice = itemPrice;
+            }
+        }
+        return lowestPrice;
+    }
 }

@@ -62,7 +62,16 @@ public class ItemController {
         }
     }
 
-    public int getPriceByName(String itemName) {
+    public Integer getPriceByName(String itemName) {
         return itemService.getPriceByName(itemName);
+    }
+
+    public boolean isNotStockAllItem() {
+        return itemService.isNotStockAllItem();
+    }
+
+    public boolean isLessThanTheLowestAmount(int amount) {
+        Integer lowestPrice = itemService.getLowestPrice();
+        return amount < lowestPrice;
     }
 }

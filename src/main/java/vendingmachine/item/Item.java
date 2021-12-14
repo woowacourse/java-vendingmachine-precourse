@@ -55,4 +55,8 @@ public class Item {
             throw new NotEnoughStockException(ItemErrorMessage.NOT_ENOUGH_STOCK);
         }
     }
+
+    public boolean isNotStock() {
+        return stockQuantity == 0;
+    }
 }

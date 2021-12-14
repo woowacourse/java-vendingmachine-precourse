@@ -49,4 +49,8 @@ public class VendingMachineSystem {
         Integer remainingAmount = customerController.getBalance();
         return coinController.getChange(remainingAmount);
     }
+
+    private boolean isPossibleAdditionalPurchase(int balance) {
+        return !itemController.isNotStockAllItem() && !itemController.isLessThanTheLowestAmount(balance);
+    }
 }
