@@ -13,7 +13,7 @@ public class Products {
 
 	public int selectMinimumPrice() {
 		int minimumPrice = Integer.MAX_VALUE;
-		for (Product product: products) {
+		for (Product product : products) {
 			if (product.exists()) {
 				minimumPrice = product.compareMinimumPrice(minimumPrice);
 			}
@@ -31,7 +31,7 @@ public class Products {
 	}
 
 	public boolean exists() {
-		for (Product product: products) {
+		for (Product product : products) {
 			if (product.exists()) {
 				return true;
 			}
