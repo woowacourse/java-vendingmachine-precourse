@@ -19,6 +19,10 @@ public class Items {
 		return forSaleItems;
 	}
 
+	public boolean checkCanPurchaseAtLeastOneItem(int userMoney) {
+		return forSaleItems.stream().anyMatch(item -> item.canPurchase(userMoney));
+	}
+
 	public Items createForSaleItems(String[] itemsInfo) {
 		for (String itemInfo : itemsInfo) {
 			String[] parsedItemInfo = parsingItemInfo(itemInfo);
