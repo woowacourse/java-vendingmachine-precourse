@@ -34,6 +34,13 @@ public class Products {
 			.orElseThrow(() -> new IllegalArgumentException("해당 상품은 존재하지 않습니다."));
 	}
 
+	public int findMinAmount() {
+		return this.products.stream()
+			.mapToInt(product -> product.toAmount())
+			.min()
+			.orElse(0);
+	}
+
 	// 집계===========
 	// // 단일객체가 comparable -> compareTo 오버라이딩하여, 정렬/집계/비교의 기준이 정해졌을 때, 집계의 기준에 넣는다.
 	// public int findMax() {

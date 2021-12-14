@@ -91,4 +91,14 @@ public class VendingMachine {
 		return this.userMoney.isOrGreaterThan(product);
 
 	}
+
+	public boolean canSale() {
+		boolean isValidUserMoney = this.userMoney.toInt() >= this.products.findMinAmount();
+		boolean anyProductAvailable = this.productCounter.isAnyAvailable();
+		return isValidUserMoney && anyProductAvailable;
+	}
+
+	public int toCurrentUserMoney() {
+		return this.userMoney.toInt();
+	}
 }

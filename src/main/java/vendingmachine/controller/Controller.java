@@ -32,9 +32,16 @@ public class Controller {
 		OutputView.printResultOfInputUserMoney(userMoney);
 		vendingMachine.insertUserMoney(userMoney);
 
-		OutputView.printInputPurchaseProductNameInstruction(); //구매할 상품명을 입력해 주세요.
-		Name wantedProductName = Name.of(InputView.getProductName());
-		vendingMachine.sale(wantedProductName);
+		//싱글톤으로 현상태를 반영한 반복문 조건변수 canXXX를 만든다.
+		boolean canSale = vendingMachine.canSale();
+		while (canSale) {
+			OutputView.printCurrentUserMoney(vendingMachine.toCurrentUserMoney());
+			OutputView.printInputPurchaseProductNameInstruction(); //구매할 상품명을 입력해 주세요.
+			Name wantedProductName = Name.of(InputView.getProductName());
+			vendingMachine.sale(wantedProductName);
+
+			canSale = vendingMachine.canSale();
+		}
 
 	}
 }
