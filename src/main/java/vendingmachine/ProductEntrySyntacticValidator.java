@@ -10,11 +10,11 @@ public class ProductEntrySyntacticValidator {
 	private static final int ELEMENT_NUMBER = 3;
 	private static final int INDEX_OF_NAME_IN_ENTRY = 0;
 	private static final String ENTRY_ELEMENT_SEPARATOR = ",";
-	private static final String BRACKET_PAIRS_PATTERN = "\\[.*\\]";
+	private static final String BRACKET_PAIRS_PATTERN = "\\[.*]";
 	private static final String ILLEGAL_CHARS_OUTSIDE_BRACKETS_PATTERN =
-		"(^[^\\[]+\\[.*\\][^\\]]*$)|(^[^\\[]*\\[.*\\][^\\]]+$)";
+		"(^[^\\[]+\\[.*][^]]*$)|(^[^\\[]*\\[.*][^]]+$)";
 	private static final String ENTRY_WITHOUT_SEMICOLON_PATTERN =
-		"^\\[.*\\]\\[.*\\]$";
+		"^\\[.*]\\[.*]$";
 
 	public ProductEntrySyntacticValidator() {
 	}
@@ -35,7 +35,7 @@ public class ProductEntrySyntacticValidator {
 			checkBrackets(entryWithoutBlank);
 
 			String[] entryElements = entryWithoutBlank
-				.substring(BRACKET_CHAR_LENGTH, entryWithoutBlank.length() - BRACKET_CHAR_LENGTH)
+				.substring(BRACKET_CHAR_LENGTH)
 				.split(ENTRY_ELEMENT_SEPARATOR);
 			checkElementNumber(entryElements);
 			checkProductNameLength(entryElements);
