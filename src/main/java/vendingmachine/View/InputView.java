@@ -5,20 +5,22 @@ import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.utils.ExceptionMessages;
-import vendingmachine.utils.Messages;
+import vendingmachine.utils.InputOutputMessages;
 import vendingmachine.utils.RegularExpressions;
 import vendingmachine.utils.Symbol;
 
 public class InputView {
 
     public int inputMoney(final String message) {
-        System.out.println(message);
-
         try {
+            System.out.println(message);
             String inputMoney = inputValue();
-            isNaturalNumber(inputMoney);
 
-            return Integer.parseInt(inputMoney);
+            isNaturalNumber(inputMoney);
+            int money = Integer.parseInt(inputMoney);
+            isOverZero(money);
+
+            return money;
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
 
@@ -45,7 +47,7 @@ public class InputView {
     public int inputPurchasingCost() {
         System.out.println();
 
-        return inputMoney(Messages.INPUT_PURCHASING_COST_MESSAGE.getInputMessage());
+        return inputMoney(InputOutputMessages.INPUT_PURCHASING_COST_MESSAGE.getInputMessage());
     }
 
     public String inputPurchasingProductName(final String message) {
@@ -60,6 +62,12 @@ public class InputView {
             System.out.println(illegalArgumentException.getMessage());
 
             return inputPurchasingProductName(message);
+        }
+    }
+
+    protected void isOverZero(final int inputMoney) {
+        if(inputMoney == 0){
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_LESS_THAN_ZERO.getErrorMessage());
         }
     }
 

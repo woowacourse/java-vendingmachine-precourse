@@ -8,12 +8,12 @@ public class Name {
         this.name = name;
     }
 
-    public boolean compareProductName(final String purchasingProductName) {
-        return name.equals(purchasingProductName);
-    }
-
     public String getName() {
         return name;
+    }
+
+    public boolean compareProductName(final String purchasingProductName) {
+        return name.equals(purchasingProductName);
     }
 
 }
