@@ -40,12 +40,12 @@ public class Coins {
 
 	public Map<Coin, Integer> calculateChange(int insertMoney) {
 		Map<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
-		for (Coin coin : coinMap.keySet()) {
-			if (coinMap.get(coin) > 0 && coin.isReturnable(insertMoney)) {
-				int returningCnt = Math.min(coinMap.get(coin), coin.divideByCoinAmount(insertMoney));
-				insertMoney -= coin.multiplyByCoinNumber(returningCnt);
-				coinMap.put(coin, coinMap.get(coin) - returningCnt);
-				changeMap.put(coin, returningCnt);
+		for (Map.Entry<Coin, Integer> coin : coinMap.entrySet()) {
+			if (coin.getValue() > 0 && coin.getKey().isReturnable(insertMoney)) {
+				int returningCnt = Math.min(coin.getValue(), coin.getKey().divideByCoinAmount(insertMoney));
+				insertMoney -= coin.getKey().multiplyByCoinNumber(returningCnt);
+				coinMap.put(coin.getKey(), coin.getValue() - returningCnt);
+				changeMap.put(coin.getKey(), returningCnt);
 			}
 		}
 		return changeMap;
