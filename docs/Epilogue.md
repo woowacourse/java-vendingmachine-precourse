@@ -49,7 +49,7 @@
         ├── InputView.java
         └── OutputView.java
 ```
-이전 2주차에서는 MVC 패턴을 사용해 model, view, controller로 정확히 3개로만 분리하여 controller가 너무 많은 부분을 담당했었습니다. 데이터를 어떻게 처리할지 알려줌과 동시에 비즈니스 로직 및 프로그램 흐름 등 모든 부분을 담당했는데, 더 조사한 결과 controller는 오직 중계 역할만 해야함을 알게 됐습니다. 하여, controller와 model 사이에 service layer를 추가하여 controller는 무엇을 수행하라고만 일러주고 실제 처리는 service에서 이루어지도록 변경했습니다.
+이전 2주차에서는 MVC 패턴을 사용해 model, view, controller로 정확히 3개로만 분리하여 controller가 너무 많은 부분을 담당했었습니다. 데이터를 어떻게 처리할지 알려줌과 동시에 비즈니스 로직 및 프로그램 흐름 등 모든 부분을 담당했는데, 더 조사한 결과 controller는 오직 중계 역할만 해야함을 알게 됐습니다. 하여, controller와 model 사이에 service와 repository layer를 추가하여 controller는 무엇을 수행하라고만 일러주고 실제 처리는 service에서 이루어지도록 변경했습니다. 마지막으로 repository를 통한 객체에 직접적인 접근을 이용했습니다.
 
 이외에는 controller에서 입력 예외처리를 해주는 것이 맞는지에 대해 많이 고민했었습니다. 웹이었다면 실제로 정규식을 이용한 예외는 사용자단에서 검증되어 데이터로 넘겨받을 수 있으므로 view에서 검증하여 넘겨줄 지 아니면 view-controller를 통해 넘어온 값을 service layer에서 검증 해야되는 지에 생각해보았습니다. 하지만, view에서 사용자 화면을 나타내기 위한 동작만을 수행하게 만들고 싶었으며 service에서 처리할 경우, 재입력을 받기 위해 view를 건드려야 하므로 그대로 controller에서 처리하도록 두었습니다. 이에 대해서는 아직까지도 정확한 해답을 찾지 못하였지만, 여러가지를 고민해보며 찾아보는 과정에서 많은 배움이 있었습니다.
 

@@ -29,11 +29,16 @@ public enum Coin {
     }
 
     public static List<Coin> getCoinList() {
-        return Arrays.stream(Coin.values()).sequential().collect(Collectors.toList());
+        return Arrays.stream(Coin.values())
+                .sequential()
+                .collect(Collectors.toList());
     }
 
     public static List<Integer> getCoinValues() {
-        return Arrays.stream(Coin.values()).sequential().map(Coin::getAmount).collect(Collectors.toList());
+        return Arrays.stream(Coin.values())
+                .sequential()
+                .map(Coin::getAmount)
+                .collect(Collectors.toList());
     }
 
     public int getAmount() {

@@ -22,9 +22,11 @@ public class Products {
 
     private List<List<String>> processProductsInput(String products) {
         List<List<String>> processedProducts = new ArrayList<>();
-        for (String product : products.split(SEMI_COLON)) {
-            processedProducts.add(Arrays.asList(product.substring(START_INDEX, product.length() - START_INDEX).split(COMMA)));
-        }
+        Arrays.stream(products.split(SEMI_COLON)).forEach(product ->
+            processedProducts.add(Arrays.asList(product
+                    .substring(START_INDEX, product.length() - START_INDEX)
+                    .split(COMMA))));
+
         return processedProducts;
     }
 
