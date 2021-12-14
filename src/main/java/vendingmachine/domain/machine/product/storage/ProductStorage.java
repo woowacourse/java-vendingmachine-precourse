@@ -1,6 +1,7 @@
 package vendingmachine.domain.machine.product.storage;
 
 import vendingmachine.domain.machine.product.Product;
+import vendingmachine.domain.user.Balance;
 
 public interface ProductStorage {
 
@@ -10,6 +11,6 @@ public interface ProductStorage {
 
 	boolean isAllSoldOut();
 
-	int getLowestPriceBetweenNotSoldOut();
+	boolean isPossibleToUseWith(Balance balance);
 
 }

@@ -65,4 +65,9 @@ public class InputView {
 		return getValidMoney();
 	}
 
+	public String requestProductName() {
+		outputView.printMessage("구매할 상품명을 입력해 주세요.");
+		return reader.readLine();
+	}
+
 }

@@ -33,7 +33,7 @@ public class Product {
 		}
 	}
 
-	private boolean isNotEnoughMoney(int money) {
+	public boolean isNotEnoughMoney(int money) {
 		return (this.price > money);
 	}
 
@@ -45,6 +45,10 @@ public class Product {
 
 	public boolean isSoldOut() {
 		return (this.quantity == 0);
+	}
+
+	public boolean isNotSoldOut() {
+		return !isSoldOut();
 	}
 
 	private void decreaseQuantity() {

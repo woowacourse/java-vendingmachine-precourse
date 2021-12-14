@@ -5,6 +5,7 @@ import java.util.Map;
 
 import java.util.Optional;
 import vendingmachine.domain.machine.product.Product;
+import vendingmachine.domain.user.Balance;
 import vendingmachine.exception.ProductAlreadyExistMessageException;
 import vendingmachine.exception.ProductNotFoundMessageException;
 
@@ -33,11 +34,15 @@ public class ProductStorageImpl implements ProductStorage {
 
 	@Override
 	public boolean isAllSoldOut() {
-		return false;
+		return productMap.values().stream()
+			.allMatch(Product::isSoldOut);
 	}
 
 	@Override
-	public int getLowestPriceBetweenNotSoldOut() {
-		return 0;
+	public boolean isPossibleToUseWith(Balance balance) {
+		return productMap.values().stream()
+			.filter(Product::isNotSoldOut)
+			.anyMatch(product -> product.isNotEnoughMoney(balance.getMoney()));
 	}
+
 }

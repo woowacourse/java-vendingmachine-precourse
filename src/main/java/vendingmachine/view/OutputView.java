@@ -22,4 +22,8 @@ public class OutputView {
 		coinStrings.forEach(this::printMessage);
 	}
 
+	public void printCurrentMoneyOfUser(int currentMoneyOfUser) {
+		printMessage(String.format("투입 금액: %d원", currentMoneyOfUser));
+	}
+
 }

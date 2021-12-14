@@ -12,10 +12,14 @@ public interface MachineService {
 
 	void depositMoneyOfUser(int money);
 
+	int getCurrentMoneyOfUser();
+
 	void purchaseProduct(String productName);
 
 	void refundChanges();
 
 	List<String> getCoinsOfMachine();
+
+	boolean isUserPossibleToUseMachine();
 
 }

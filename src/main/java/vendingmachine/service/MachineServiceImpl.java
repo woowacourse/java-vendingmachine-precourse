@@ -32,6 +32,10 @@ public class MachineServiceImpl implements MachineService {
 		user.depositMoney(balance);
 	}
 
+	public int getCurrentMoneyOfUser() {
+		return user.getCurrentMoney();
+	}
+
 	@Override
 	public void purchaseProduct(String productName) {
 		user.purchase(productName);
@@ -45,6 +49,17 @@ public class MachineServiceImpl implements MachineService {
 	@Override
 	public List<String> getCoinsOfMachine() {
 		return machine.getCoinsByString();
+	}
+
+	@Override
+	public boolean isUserPossibleToUseMachine() {
+		if (user.hasNotEnoughMoney()) {
+			return false;
+		}
+		if (machine.isAllProductSoldOut()) {
+			return false;
+		}
+		return true;
 	}
 
 }

@@ -47,4 +47,8 @@ public class User {
 		return balance.getMoney();
 	}
 
+	public boolean hasNotEnoughMoney() {
+		return machine.isPossibleToUseWith(balance);
+	}
+
 }

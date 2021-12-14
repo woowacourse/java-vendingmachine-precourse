@@ -37,4 +37,12 @@ public class Machine {
 		return coinStorage.getAllCoinsAsString();
 	}
 
+	public boolean isAllProductSoldOut() {
+		return productStorage.isAllSoldOut();
+	}
+
+	public boolean isPossibleToUseWith(Balance balance) {
+		return productStorage.isPossibleToUseWith(balance);
+	}
+
 }

@@ -46,7 +46,21 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void purchaseProducts() {
+		while (machineService.isUserPossibleToUseMachine()) {
+			showCurrentMoneyOfUser();
+			purchaseProduct();
+		}
+	}
 
+	private void showCurrentMoneyOfUser() {
+		int currentMoneyOfUser = machineService.getCurrentMoneyOfUser();
+		outputView.printCurrentMoneyOfUser(currentMoneyOfUser);
+	}
+
+	private void purchaseProduct() {
+		String productName = inputView.requestProductName();
+		machineService.purchaseProduct(productName);
+		outputView.printEmptyNewLine();
 	}
 
 }
