@@ -5,6 +5,7 @@ import java.util.EnumMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
+	private static final int DEFAULT_COIN_NUMBER = 0;
 	private static final String DASH = "-";
 	private static final String WHITESPACE = " ";
 	private static final String LINE_WRAP = "\n";
@@ -17,10 +18,13 @@ public class Coins {
 
 	public Coins(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
+		for (Coin coin : Coin.values()) {
+			coinMap.put(coin, DEFAULT_COIN_NUMBER);
+		}
 		while (amount > 0) {
 			Coin coin = selectCoinType();
 			int coinNumber = generateRandomValueInRange(coin.divideByCoinAmount(amount));
-			coinMap.put(coin, coinMap.getOrDefault(coin, 0) + coinNumber);
+			coinMap.put(coin, coinMap.get(coin) + coinNumber);
 			amount -= coin.multiplyByCoinNumber(coinNumber);
 		}
 	}
@@ -36,7 +40,7 @@ public class Coins {
 
 	public Coins calculateChange(int insertMoney) {
 		Coins change = new Coins();
-		for (Coin coin: coinMap.keySet()) {
+		for (Coin coin : coinMap.keySet()) {
 			int coinNumber = coin.divideByCoinAmount(insertMoney);
 			if (coinNumber > 0 && coinMap.get(coin) >= coinNumber) {
 				insertMoney -= coin.multiplyByCoinNumber(coinNumber);
