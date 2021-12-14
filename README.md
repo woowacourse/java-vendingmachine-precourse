@@ -1,4 +1,8 @@
 # 미션 - 자판기
+> 우테코 진행 후기  
+> - [1주차 후기](https://yeonyeon.tistory.com/165)
+> - [2주차 후기](https://yeonyeon.tistory.com/170)  
+> - [3주차 후기](https://yeonyeon.tistory.com/172)
 
 ## 👩‍💻 흐름도
 ![flow chart img](./images/흐름도.png)
