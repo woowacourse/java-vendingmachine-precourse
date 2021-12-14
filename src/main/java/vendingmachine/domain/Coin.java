@@ -37,7 +37,7 @@ public enum Coin {
 
 	public static Coin findCoin(int coin) {
 		return Arrays.stream(values())
-			.filter(i -> i.amount == coin)
+			.filter(coinOfCoins -> coinOfCoins.amount == coin)
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_INPUT_AMOUNT));
 	}

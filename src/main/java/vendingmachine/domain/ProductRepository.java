@@ -27,7 +27,7 @@ public class ProductRepository {
 
 	private Product findProductByName(String productName) {
 		return productList.stream()
-			.filter(i -> i.isSameName(productName))
+			.filter(product -> product.isSameName(productName))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_DO_NOT_HAVE_PRODUCT));
 	}
