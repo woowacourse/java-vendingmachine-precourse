@@ -10,7 +10,13 @@ import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import vendingmachine.controller.ItemController;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
+
 public class ItemsTest {
+	ItemController itemController = new ItemController(new InputView(), new OutputView());
+
 	@DisplayName("이름이 중복되는 상품이 없는 경우 Items 객체를 생성한다")
 	@Test
 	public void createItems() {
@@ -36,9 +42,8 @@ public class ItemsTest {
 	/* 투입 금액이 상품 가격보다 많으면서 상품명이 존재할 때 */
 	@DisplayName("구매가 가능한 상품인 경우 Item 객체를 반환한다")
 	@Test
-	public void findItemByName() {
-		Items items = new Items(Collections.singletonList(new Item(Arrays.asList("콜라", "1500", "10"))));
-		assertThatCode(() -> items.findItemByName("콜라", 3000))
+	public void checkItemSellable() {
+		assertThatCode(() -> itemController.checkItemSellable(new Item(Arrays.asList("콜라", "1500", "10")), 3000))
 			.doesNotThrowAnyException();
 	}
 
@@ -49,11 +54,10 @@ public class ItemsTest {
 	@DisplayName("구매가 가능한 상품이 아닌 경우 예외를 발생시킨다")
 	@Test
 	void findItemByNameException() {
-		Items items = new Items(
-			Arrays.asList(new Item(Arrays.asList("콜라", "1500", "10")), new Item(Arrays.asList("사이다", "1000", "0"))));
-		for (String name : new String[] {"콜라", "사이다", "환타"}) {
+		List<Item> items = Arrays.asList(new Item(Arrays.asList("콜라", "1500", "10")), new Item(Arrays.asList("사이다", "1000", "0")));
+		for (Item item : items) {
 			assertThatThrownBy(() -> {
-				items.findItemByName(name, 1000);
+				itemController.checkItemSellable(item, 1000);
 			}).isInstanceOf(IllegalArgumentException.class);
 		}
 	}
