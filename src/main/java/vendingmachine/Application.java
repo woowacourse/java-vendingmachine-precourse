@@ -13,9 +13,12 @@ import java.util.stream.Collectors;
 public class Application {
 
 
+    private static final String PRODUCT_INFO_SEPARATOR = ";";
     private static final String INPUT_SEED_MONEY_CONSOLE_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
     private static final String INPUT_MONEY_CONSOLE_MESSAGE = "투입 금액을 입력해 주세요.";
-    private static final String PRODUCT_INFO_SEPARATOR = ";";
+    private static final String PRODUCT_NAME_INPUT_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
+    private static final String SEED_MONEY_INFO_MESSAGE = "자판기가 보유한 동전";
+    private static final String PRODUCT_BUY_INFO_MESSAGE = "구매할 상품명을 입력해 주세요.";
 
 
     public static void main(String[] args) {
@@ -40,7 +43,7 @@ public class Application {
     }
 
     private static void printSeedMoneyInVendingMachine(VendingMachine vendingMachine) {
-        System.out.println("자판기가 보유한 동전");
+        System.out.println(SEED_MONEY_INFO_MESSAGE);
         vendingMachine.getCoins()
                 .getCounter()
                 .forEach((key, value) -> {
@@ -71,7 +74,7 @@ public class Application {
     }
 
     private static String[] getProductNamesFromUser() {
-        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+        System.out.println(PRODUCT_NAME_INPUT_MESSAGE);
         String[] result = Console.readLine().split(PRODUCT_INFO_SEPARATOR);
         lineFeed();
         return result;
@@ -99,7 +102,7 @@ public class Application {
 
     private static void buyProduct(VendingMachine vendingMachine) {
         try {
-            System.out.println("구매할 상품명을 입력해 주세요.");
+            System.out.println(PRODUCT_BUY_INFO_MESSAGE);
             Product product = vendingMachine.findProduct(Console.readLine());
             lineFeed();
             vendingMachine.get(product);
