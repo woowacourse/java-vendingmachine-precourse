@@ -11,6 +11,7 @@ public class Program {
 	public static final int INDEX_OF_PRODUCT_NAME = 0;
 	public static final int INDEX_OF_PRODUCT_PRICE = 1;
 	public static final int INDEX_OF_PRODUCT_NUMBER = 2;
+	private static final int BRACKET_CHAR_LENGTH = 1;
 
 	public final CoinPocket coinPocket;
 	public final ProductTable productTable;
@@ -57,10 +58,13 @@ public class Program {
 	private void setProductTable() {
 		List<String> productEntries = getProductEntries();
 		productEntries.forEach(entry -> {
-			String[] elements = entry.substring(1, entry.length() - 1).split(PRODUCT_ENTRY_ELEMENT_SEPARATOR);
-			productTable.push(elements[INDEX_OF_PRODUCT_NAME],
-				new ProductEntry(Integer.parseInt(elements[INDEX_OF_PRODUCT_PRICE]),
-					Integer.parseInt(elements[INDEX_OF_PRODUCT_NUMBER])));
+			String entryWithoutBlank = entry.trim();
+			String[] elements = entryWithoutBlank
+				.substring(BRACKET_CHAR_LENGTH, entryWithoutBlank.length() - BRACKET_CHAR_LENGTH)
+				.split(PRODUCT_ENTRY_ELEMENT_SEPARATOR);
+			productTable.push(elements[INDEX_OF_PRODUCT_NAME].trim(),
+				new ProductEntry(Integer.parseInt(elements[INDEX_OF_PRODUCT_PRICE].trim()),
+					Integer.parseInt(elements[INDEX_OF_PRODUCT_NUMBER].trim())));
 		});
 	}
 
@@ -68,8 +72,10 @@ public class Program {
 		Guide.ITEM_REQUEST.println();
 		String productEntriesInString = Console.readLine();
 		ProductEntrySyntacticValidator syntacticValidator = new ProductEntrySyntacticValidator();
+		ProductEntrySemanticValidator semanticValidator = new ProductEntrySemanticValidator();
 		List<String> productEntries = Arrays.asList(productEntriesInString.split(PRODUCT_ENTRY_SEPARATOR));
-		if (!syntacticValidator.validate(productEntries)) {
+		if (!syntacticValidator.validate(productEntries)
+			|| !semanticValidator.validate((productEntries))) {
 			return getProductEntries();
 		}
 		return productEntries;
