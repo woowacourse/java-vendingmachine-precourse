@@ -22,17 +22,17 @@
 - [x] [종료] 자판기는 사용자의 금액이 상품의 최저 금액보다 적거나, 모든 상품이 소진된 경우 잔돈을 돌려준다.
     - [x] 자판기는 잔돈을 돌려줄 때, 최소 개수의 동전으로 잔돈을 돌려준다.
     - [x] 자판기는 잔돈을 반환할 수 없는 경우, 반환할 수 있는 금액만 반환한다.
-        - 반환되니 않은 금액은 자판기에 남는다.
+        - 반환되지 않은 금액은 자판기에 남는다.
 
 ### ✅ 확인할 목록
 
-- [ ] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
-- [ ] indent depth를 3이 넘지 않도록 구현한다.
-- [ ] 3항 연산자를 쓰지 않는다.
-- [ ] 함수의 길이가 15라인을 넘어가지 않도록 구현한다.
-- [ ] else, switch 예약어를 쓰지 않는다.
-- [ ] Coin 클래스를 활용해 구현한다.
-    - [ ] amount의 접근 제어자 private을 변경할 수 없다.
-- [ ] `camp.nextstep.edu.missionutils`에서 제공하는 `Randoms`, `Console` API 를 활용해 구현해야 한다.
-    - [ ] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
-    - [ ] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
+- [x] 자바 코드 컨벤션을 지키면서 프로그래밍한다.
+- [x] indent depth를 3이 넘지 않도록 구현한다.
+- [x] 3항 연산자를 쓰지 않는다.
+- [x] 함수의 길이가 15라인을 넘어가지 않도록 구현한다.
+- [x] else, switch 예약어를 쓰지 않는다.
+- [x] Coin 클래스를 활용해 구현한다.
+    - [x] amount의 접근 제어자 private을 변경할 수 없다.
+- [x] `camp.nextstep.edu.missionutils`에서 제공하는 `Randoms`, `Console` API 를 활용해 구현해야 한다.
+    - [x] Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용한다.
+    - [x] 사용자가 입력하는 값은 `camp.nextstep.edu.missionutils.Console`의 `readLine()`을 활용한다.
