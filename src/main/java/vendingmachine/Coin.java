@@ -24,4 +24,8 @@ public enum Coin {
     public static Coin getRandomCoin(int randomNumber) {
         return COINLIST[randomNumber];
     }
+
+    public String toString() {
+        return Integer.toString(amount);
+    }
 }
