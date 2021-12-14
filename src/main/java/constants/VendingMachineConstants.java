@@ -11,6 +11,7 @@ public class VendingMachineConstants {
 	public static String USER_INPUT_MONEY_MESSAGE = "투입 금액: ";
 	public static String BUY_PRODUCT_NAME_MESSAGE = "구매할 상품명을 입력해 주세요.";
 	public static String CHANGES_MESSAGE = "잔돈";
+	public static String HAVE_NO_CHANGE_MESSAGE = "잔돈이 없습니다";
 
 	public static String ERROR_PREFIX = "[ERROR] ";
 	public static String MONEY_NOT_DIGIT_ERROR = "금액은 숫자여야 합니다.";

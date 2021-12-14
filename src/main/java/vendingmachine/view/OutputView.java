@@ -21,6 +21,9 @@ public class OutputView {
 
 	public static void printChanges(Map<Coin, Integer> coins) {
 		System.out.println(CHANGES_MESSAGE);
+		if (coins.isEmpty()) {
+			System.out.println(HAVE_NO_CHANGE_MESSAGE);
+		}
 		printCoins(coins);
 	}
 
