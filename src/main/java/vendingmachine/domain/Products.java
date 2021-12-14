@@ -60,4 +60,13 @@ public class Products {
 		productList.add(new Product(name, price, quantity));
 	}
 
+	public boolean checkStock(int currentMoney) {
+		for (Product product : productList) {
+			if ((product.getQuantity() > OUT_OF_STOCK) && product.getPrice() <= currentMoney) {
+				return true;
+			}
+		}
+		return false;
+	}
+
 }

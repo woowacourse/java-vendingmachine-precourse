@@ -45,4 +45,11 @@ public class VendingMachine {
 		}
 	}
 
+	public boolean isValidToBuyProductWithCurrentMoney() {
+		return products.getMinPriceProduct() < insertMoney.getCurrentMoney();
+	}
+
+	public boolean isValidProductStock() {
+		return products.checkStock(insertMoney.getCurrentMoney());
+	}
 }

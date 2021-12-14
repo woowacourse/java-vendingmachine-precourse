@@ -32,7 +32,7 @@ public class VendingMachineController {
 	}
 
 	public void buyProducts() {
-		while (isValidToBuyProduct(vendingMachine)) {
+		while (checkIsValidToBuyProduct(vendingMachine)) {
 			printCurrentInputMoney(vendingMachine);
 			String productName = inputProductNameToBuy();
 			if (checkIsValidToBuyProduct(vendingMachine, productName)) {
