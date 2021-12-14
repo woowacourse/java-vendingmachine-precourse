@@ -25,8 +25,8 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public static void printBalance(VendingMachine vendingMachine) {
-		System.out.println(BALANCE_FORMAT + vendingMachine.inputMoneyToString());
+	public static void printBalance(int inputMoney) {
+		System.out.println(BALANCE_FORMAT + inputMoney + "원");
 	}
 
 	public static void printChangeCoins(Map<Coin, Integer> coins) {

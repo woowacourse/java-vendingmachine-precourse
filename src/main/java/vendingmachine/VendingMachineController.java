@@ -36,7 +36,7 @@ public class VendingMachineController {
 		vendingMachine.inputMoney = inputView.inputMoneyInput();
 		String buyItem;
 		while (vendingMachine.isAvailableKeepBuyingAboutPrice() && vendingMachine.isAvailableKeepBuyingAboutStock()) {
-			OutputView.printBalance(vendingMachine);
+			OutputView.printBalance(vendingMachine.inputMoney);
 			buyItem = inputView.buyItemInput(vendingMachine.holdingItemList, vendingMachine.inputMoney);
 			vendingMachine.stockDeduct(buyItem);
 			vendingMachine.inputMoneyDeduct(buyItem);

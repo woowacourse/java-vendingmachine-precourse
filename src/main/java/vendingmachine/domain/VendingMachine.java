@@ -65,8 +65,4 @@ public class VendingMachine {
 		}
 		return isAvailableKeepBuyingAboutStock;
 	}
-
-	public String inputMoneyToString() {
-		return inputMoney + "원";
-	}
 }
