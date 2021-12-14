@@ -6,11 +6,11 @@ import vendingmachine.domain.Product;
 import vendingmachine.domain.Customer;
 import vendingmachine.domain.VendingMachine;
 
-public class VendingMachineSystemController {
+public class VendingMachineSystem {
     private final InputVendingMachineController inputController;
     private final OutPutVendingMachineController outputController;
 
-    public VendingMachineSystemController() {
+    public VendingMachineSystem() {
         inputController = new InputVendingMachineController();
         outputController = new OutPutVendingMachineController();
     }

@@ -5,8 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
+import vendingmachine.util.RandomUtility;
 
 public class VendingMachine {
     private final static int MAXIMUM_PRODUCT_PRICE = 100_000_001;
@@ -17,7 +16,7 @@ public class VendingMachine {
 
     public VendingMachine(int inputMoney) {
         minimumPrice = MAXIMUM_PRODUCT_PRICE;
-        coinHashMap = generateRandomCoins(inputMoney);
+        coinHashMap = new RandomUtility().generateRandomCoins(inputMoney);
         productMap = new HashMap<>();
     }
 
@@ -25,29 +24,8 @@ public class VendingMachine {
         this.customer = customer;
     }
 
-    private Map<Coin, Integer> generateRandomCoins(int inputMoney) {
-        Map<Coin, Integer> newCoinHashMap = new LinkedHashMap<>();
-        for (Coin coin : Coin.values()) {
-            int randomQuotient = Randoms.pickNumberInRange(0, inputMoney / coin.getAmount());
-            inputMoney -= (randomQuotient * coin.getAmount());
-            newCoinHashMap.put(coin, newCoinHashMap.getOrDefault(coin, 0) + randomQuotient);
-        }
-
-        if (inputMoney > 0) {
-            for (Coin coin : Coin.values()) {
-                int quotient = inputMoney / coin.getAmount();
-                inputMoney -= quotient * coin.getAmount();
-                newCoinHashMap.put(coin, newCoinHashMap.getOrDefault(coin, 0) + quotient);
-            }
-        }
-        return newCoinHashMap;
-    }
-
     public void saveProduct(List<Product> products) {
         for (Product product : products) {
-            if (productMap.containsKey(product.getName())) {
-                throw new IllegalArgumentException();
-            }
             productMap.put(product.getName(), product);
             minimumPrice = Math.min(minimumPrice, product.getPrice());
         }
@@ -82,10 +60,6 @@ public class VendingMachine {
         return true;
     }
 
-    private void reduceCustomerInputMoney(int deductMoney) {
-        this.customer.deductTheMoney(deductMoney);
-    }
-
     public String printCustomerChange() {
         Map<Coin, Integer> resultCoinMap = returnCoinToTheCustomer();
         StringBuilder results = new StringBuilder();
@@ -94,6 +68,10 @@ public class VendingMachine {
             results.append(coin).append(" - ").append(resultCoinMap.get(coin)).append("개").append("\n");
         }
         return results.toString();
+    }
+
+    private void reduceCustomerInputMoney(int deductMoney) {
+        this.customer.deductTheMoney(deductMoney);
     }
 
     private void deductHoldingCoin(Coin coin, int quantity) {
