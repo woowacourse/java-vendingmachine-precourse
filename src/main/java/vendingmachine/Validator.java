@@ -63,7 +63,7 @@ public class Validator {
 		String[] products = splitStringOfProducts(stringOfProducts);
 
 		for (String stringOfProduct : products) {
-			if (Pattern.matches(SPLIT_PRODUCT_PATTERN, stringOfProduct)) {
+			if (!Pattern.matches(SPLIT_PRODUCT_PATTERN, stringOfProduct)) {
 				error(errorMessage);
 			}
 		}
