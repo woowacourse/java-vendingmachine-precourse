@@ -7,12 +7,6 @@ public class Item {
 	private int price;
 	private int count;
 
-	public Item(String name, int price, int count) {
-		this.name = name;
-		this.price = price;
-		this.count = count;
-	}
-
 	public Item(String itemString) {
 		String[] itemToAdd = itemString.substring(1, itemString.length() - 1).split(",");
 		this.name = itemToAdd[0];

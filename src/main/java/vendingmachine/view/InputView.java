@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import static camp.nextstep.edu.missionutils.Console.*;
 
+import vendingmachine.ValidationUtils;
 import vendingmachine.model.UserMoney;
 
 public class InputView {
@@ -19,14 +20,15 @@ public class InputView {
 	}
 
 	private static int getUserInput(String getUserInput) {
-		int UserInput;
+		int userInput;
 		while (true) {
 			try {
 				System.out.println(getUserInput);
-				String userInput = readLine();
-				UserInput = Integer.parseInt(userInput);
-				UserMoney.valid(UserInput);
-				return UserInput;
+				String userInputString = readLine();
+				userInput = Integer.parseInt(userInputString);
+				ValidationUtils.validUnitMoney(userInput);
+				ValidationUtils.isPositive(userInput);
+				return userInput;
 			} catch (NumberFormatException e) {
 				System.out.println(Messages.ERROR_NOT_NUMBER);
 			} catch (IllegalArgumentException e) {

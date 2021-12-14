@@ -3,6 +3,8 @@ package vendingmachine.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import vendingmachine.view.Messages;
+
 public class Items {
 	private List<Item> itemList = new ArrayList<>();
 
@@ -17,7 +19,7 @@ public class Items {
 				return item;
 			}
 		}
-		throw new IllegalArgumentException("[ERROR] 해당 상품이 없습니다.");
+		throw new IllegalArgumentException(Messages.ERROR_NOT_IN_STOCK);
 	}
 
 	public void addItem(String itemString) {
