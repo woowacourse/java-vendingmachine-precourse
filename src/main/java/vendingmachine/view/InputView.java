@@ -8,11 +8,11 @@ public class InputView {
 		return Console.readLine();
 	}
 
-	public static int getMoney() {
+	public static String getMoney() {
 		try {
 			String inputValue = InputView.getInput();
 			checkMoneyValidation(inputValue);
-			return Integer.parseInt(inputValue);
+			return inputValue;
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
 			return getMoney();

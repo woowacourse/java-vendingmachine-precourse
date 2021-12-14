@@ -2,11 +2,11 @@
 
 ## 기능 구현 목록
 
-- [ ] 자판기가 보유하고 있는 금액으로 동전을 무작위로 생성하기
+- [x] 자판기가 보유하고 있는 금액으로 동전을 무작위로 생성하기
     - [x] 자판기 보유금액 입력받기 InputView#getMoney
     - [x] 금액 예외처리 InputView#checkMoneyValidation
-    - [ ] 보유 금액으로 동전 랜덤 생성하기 VendingMachine
-    - [ ] 투입 금액으로는 동전을 생성하지 않기
+    - [x] 보유 금액으로 동전 랜덤 생성하기 VendingMachine#generateCoins
+        - [x] 투입 금액으로는 동전을 생성하지 않기
 - [ ] 상품명, 가격, 수량을 입력하여 상품을 추가하기
     - [ ] 상품명, 가격, 수량을 입력받는 기능 InputView
         - [ ] 동일한 이름이 상품을 여러번 입력 방지하기 Validators

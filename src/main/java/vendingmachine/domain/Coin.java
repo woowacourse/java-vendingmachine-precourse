@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -12,5 +14,14 @@ public enum Coin {
 		this.amount = amount;
 	}
 
-	// 추가 기능 구현
+	public int toAmount() {
+		return this.amount;
+	}
+
+	public static Coin findByAmount(int amount) {
+		return Arrays.stream(Coin.values())
+			.filter(e -> e.amount == amount)
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("해당하는 값이 없습니다."));
+	}
 }
