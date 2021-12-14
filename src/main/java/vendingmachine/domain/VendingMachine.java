@@ -190,19 +190,30 @@ public class VendingMachine {
 
 	public void returnChanges() {
 		Coin[] coins = Coin.values();
-
 		for (Coin coin : coins) {
 			int amount = Coin.getAmountOfCoin(coin);
 			int count = getReturnCountOfCoin(coin);
+			int subtractCount = getSubtractCountOfCoin(amount, count);
 
-			if (count == INITIAL_COIN) {
+			if (count == INITIAL_COIN || subtractCount == INITIAL_COIN) {
 				continue;
 			}
-			subtractMoney(amount * count);
-			subtractCoin(coin, count);
-
-			printCountOfCoins(amount, count);
+			subtractMoney(amount * subtractCount);
+			subtractCoin(coin, subtractCount);
+			printCountOfCoins(amount, subtractCount);
 		}
+	}
+
+	private int getSubtractCountOfCoin(int amount, int count) {
+		if (amount > this.money) {
+			return INITIAL_COIN;
+		}
+
+		int subtractCount = this.money / amount;
+		if (subtractCount < count) {
+			return subtractCount;
+		}
+		return count;
 	}
 
 	private int getReturnCountOfCoin(Coin coin) {
