@@ -63,11 +63,14 @@ public class ProductBox {
 			findSoldProduct(productName).reduceCount();
 			return;
 		}
-		throw new IllegalArgumentException("[ERROR] 입력한 구매 상품명이 상품 목록에 없다.");
+		throw new IllegalArgumentException();
 	}
 
 	private boolean hasProductToSellInProductBox(String productName) {
-		return productBox.stream().anyMatch(product -> product.isSameName(productName));
+		if (productBox.stream().noneMatch(product -> product.isSameName(productName))) {
+			throw new IllegalArgumentException("[ERROR] 입력한 구매 상품명이 상품 목록에 없다.");
+		}
+		return true;
 	}
 
 	public int giveSoldProductPrice(String productName) {
