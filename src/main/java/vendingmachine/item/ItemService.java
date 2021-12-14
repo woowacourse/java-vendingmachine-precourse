@@ -109,6 +109,9 @@ public class ItemService {
                 lowestPrice = itemPrice;
             }
         }
+        if(lowestPrice == null){
+            lowestPrice = 0;
+        }
         return lowestPrice;
     }
 }
