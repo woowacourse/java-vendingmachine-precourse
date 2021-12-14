@@ -1,11 +1,9 @@
 package vendingmachine.view;
 
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.Message;
 
 public class OutputView {
