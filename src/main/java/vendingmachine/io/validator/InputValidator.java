@@ -10,6 +10,7 @@ import vendingmachine.data.VendingMachineData;
 import vendingmachine.exception.IntegerTooSmallException;
 import vendingmachine.exception.NameDuplicatedException;
 import vendingmachine.exception.ProductInformationFormMismatchException;
+import vendingmachine.exception.ProductPriceUnitException;
 import vendingmachine.exception.ValueNotIntegerException;
 import vendingmachine.type.Product;
 
@@ -30,15 +31,9 @@ public class InputValidator {
 		Pattern productPattern = Pattern.compile(VendingMachineData.PRODUCT_REGEX);
 		for (String product : productArray) {
 			Matcher matcher = productPattern.matcher(product);
-			if (!matcher.find()) {
-				throw new ProductInformationFormMismatchException(VendingMachineData.PRODUCT_INFO_FORM_NOT_MATCH_ERROR);
-			}
-			if(Integer.parseInt(matcher.group(2)) <= 0) {
-				throw new IntegerTooSmallException(VendingMachineData.INPUT_VALUE_TOO_SMALL_ERROR);
-			}
-			if(Integer.parseInt(matcher.group(3)) <= 0) {
-				throw new IntegerTooSmallException(VendingMachineData.PRODUCT_QUANTITY_TOO_SMALL);
-			}
+			checkForm(matcher);
+			checkPrice(matcher);
+			checkQuantity(matcher);
 		}
 	}
 
@@ -46,6 +41,29 @@ public class InputValidator {
 		long distinctNameCount = productList.stream().map(Product::getName).distinct().count();
 		if(distinctNameCount != productList.size()) {
 			throw new NameDuplicatedException(VendingMachineData.PRODUCT_NAME_DUPLICATED_ERROR);
+		}
+	}
+
+	private static void checkForm(Matcher matcher) {
+		if (!matcher.find()) {
+			throw new ProductInformationFormMismatchException(VendingMachineData.PRODUCT_INFO_FORM_NOT_MATCH_ERROR);
+		}
+	}
+
+	private static void checkPrice(Matcher matcher) {
+		int price = Integer.parseInt(matcher.group(2));
+		if(price <= VendingMachineData.PRODUCT_MINIMUM_PRICE) {
+			throw new IntegerTooSmallException(VendingMachineData.INPUT_VALUE_TOO_SMALL_ERROR);
+		}
+		if(price % VendingMachineData.PRODUCT_MINIMUM_UNIT != 0) {
+			throw new ProductPriceUnitException(VendingMachineData.PRODUCT_PRICE_UNIT_ERROR);
+		}
+	}
+
+	private static void checkQuantity(Matcher matcher) {
+		int price = Integer.parseInt(matcher.group(2));
+		if(Integer.parseInt(matcher.group(3)) <= 0) {
+			throw new IntegerTooSmallException(VendingMachineData.PRODUCT_QUANTITY_TOO_SMALL);
 		}
 	}
 }
