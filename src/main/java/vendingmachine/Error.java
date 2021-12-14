@@ -20,6 +20,7 @@ public enum Error {
 	NO_PURCHASE_PRODUCT_NAME("구입할 상품을 입력하지 않았습니다."),
 	NO_MATCHED_ENTRY_PRODUCT_NAME("입력한 상품이 자판기에 없습니다.");
 
+	private static final String ERROR_MESSAGE = "[ERROR]";
 	private final String message;
 
 	Error(String message) {
@@ -27,7 +28,6 @@ public enum Error {
 	}
 
 	public String getMessage() {
-		return this.message;
+		return String.format("%s %s", ERROR_MESSAGE, this.message);
 	}
-
 }

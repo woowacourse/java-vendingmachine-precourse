@@ -12,6 +12,8 @@ public enum Coin {
 	COIN_50(50, "50원"),
 	COIN_10(10, "10원");
 
+	private static final String UNEXPECTED_ERROR = "[ERROR] Unexpected Behavior";
+
 	private final int amount;
 	public final String message;
 
@@ -22,13 +24,21 @@ public enum Coin {
 
 	public static Coin pickRandom(final int money) {
 		try {
-			List<Integer> coinList = getSwappableCoinList(money);
-			int pickedCoinAmount = Randoms.pickNumberInList(coinList);
+			List<Integer> coinAmountList = getSwappableCoinAmountList(money);
+			int pickedCoinAmount = Randoms.pickNumberInList(coinAmountList);
 			return findCoinByAmount(pickedCoinAmount);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
 			return pickRandom(money);
 		}
+	}
+
+	private static List<Integer> getSwappableCoinAmountList(final int money) {
+		List<Coin> coins = Arrays.asList(Coin.values());
+		List<Coin> swappableCoins = coins.stream()
+			.filter(coin -> coin.amount <= money)
+			.collect(Collectors.toList());
+		return swappableCoins.stream().map(coin -> coin.amount).collect(Collectors.toList());
 	}
 
 	private static Coin findCoinByAmount(final int coinAmount) throws IllegalArgumentException {
@@ -38,15 +48,7 @@ public enum Coin {
 				return coin;
 			}
 		}
-		throw new IllegalArgumentException("[ERROR] Unexpected Behavior");
-	}
-
-	private static List<Integer> getSwappableCoinList(final int money) {
-		List<Coin> coins = Arrays.asList(Coin.values());
-		List<Coin> generalizableCoins = coins.stream()
-			.filter(coin -> coin.amount <= money)
-			.collect(Collectors.toList());
-		return generalizableCoins.stream().map(coin -> coin.amount).collect(Collectors.toList());
+		throw new IllegalArgumentException(UNEXPECTED_ERROR);
 	}
 
 	public static boolean isSwappableForCoin(final int money) {
