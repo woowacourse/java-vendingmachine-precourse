@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import vendingmachine.domain.Coins;
+import vendingmachine.domain.Products;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.TypeConverter;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
