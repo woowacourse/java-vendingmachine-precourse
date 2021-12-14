@@ -1,8 +1,6 @@
 package view;
 
-import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 public class OutputDisplay {
 	private static final int FIRST_INDEX = 0;
@@ -15,11 +13,12 @@ public class OutputDisplay {
 	private OutputDisplay() {
 	}
 
-	public static void showCoinsInCoinBox(List<Integer> priceOfEachCoins, List<Integer> countOfEachCoins) {
+	public static void showAllCoinInCoinBox(Map<Integer, Integer> eachCoins) {
 		System.out.println();
 		System.out.println(VENDING_MACHINE_HOLDING_COIN_MESSAGE);
-		IntStream.range(FIRST_INDEX, countOfEachCoins.size())
-			.forEach(index -> showCoinInformation(priceOfEachCoins.get(index), countOfEachCoins.get(index)));
+		for (Map.Entry<Integer, Integer> coin : eachCoins.entrySet()) {
+			showCoinInformation(coin.getKey(), coin.getValue());
+		}
 	}
 
 	private static void showCoinInformation(int coinPrice, int coinCount) {
