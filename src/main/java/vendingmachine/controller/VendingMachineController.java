@@ -23,6 +23,7 @@ public class VendingMachineController {
 
 		outputView.printMoney(moneyController.getCurrentMoney());
 		Map<Coin, Integer> changes = getChanges();
+		coinController.reduceCoins(changes);
 		outputView.printChanges(changes);
 
 	}
