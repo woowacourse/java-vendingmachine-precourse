@@ -28,6 +28,10 @@ public class MachineServiceImpl implements MachineService {
 		products.forEach(machine::saveProduct);
 	}
 
+	public void depositMoneyOfUser(int balance) {
+		user.depositMoney(balance);
+	}
+
 	@Override
 	public void purchaseProduct(String productName) {
 		user.purchase(productName);

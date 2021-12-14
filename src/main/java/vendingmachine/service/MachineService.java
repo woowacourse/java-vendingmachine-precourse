@@ -10,6 +10,8 @@ public interface MachineService {
 
 	void saveProducts(List<ProductDto> productDtos);
 
+	void depositMoneyOfUser(int balance);
+
 	void purchaseProduct(String productName);
 
 	void refundChanges();

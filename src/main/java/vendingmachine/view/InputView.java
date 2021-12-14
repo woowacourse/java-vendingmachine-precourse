@@ -60,5 +60,9 @@ public class InputView {
 		return (number % 10 != 0);
 	}
 
+	public int requestBalanceOfUser() {
+		outputView.printMessage("투입 금액을 입력해 주세요.");
+		return getValidBalance();
+	}
 
 }

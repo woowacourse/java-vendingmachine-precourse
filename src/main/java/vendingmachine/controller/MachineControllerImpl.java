@@ -38,7 +38,9 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void depositMoney() {
-
+		int balanceOfUser = inputView.requestBalanceOfUser();
+		machineService.depositMoneyOfUser(balanceOfUser);
+		outputView.printEmptyNewLine();
 	}
 
 	@Override
