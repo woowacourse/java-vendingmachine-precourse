@@ -25,7 +25,7 @@ public class MachineServiceImpl implements MachineService {
 	@Override
 	public void saveProducts(List<ProductDto> productDtos) {
 		List<Product> products = productDtos.stream().map(ProductDto::toEntity).collect(Collectors.toList());
-		products.forEach(machine::saveProduct);
+		machine.saveProducts(products);
 	}
 
 	public void depositMoneyOfUser(int balance) {

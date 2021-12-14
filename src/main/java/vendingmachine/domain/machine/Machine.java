@@ -20,8 +20,8 @@ public class Machine {
 		coinStorage.save(coin);
 	}
 
-	public void saveProduct(Product product) {
-		productStorage.save(product);
+	public void saveProducts(List<Product> products) {
+		productStorage.save(products);
 	}
 
 	public void purchaseProduct(Balance balance, String productName) {

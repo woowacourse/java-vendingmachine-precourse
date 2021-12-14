@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,6 +12,7 @@ import vendingmachine.exception.MoneyNotMultipleOfTenMessageException;
 import vendingmachine.exception.MoneyNotNumericMessageException;
 import vendingmachine.exception.MoneyNotPositiveMessageException;
 import vendingmachine.exception.ProductInputNotExistMessageException;
+import vendingmachine.exception.ProductNameDuplicatedMessageException;
 import vendingmachine.exception.QuantityNotNumericMessageException;
 import vendingmachine.exception.VendingMachineException;
 import vendingmachine.view.reader.Reader;
@@ -90,6 +92,7 @@ public class InputView {
 				productDtos.add(productDto);
 			});
 		validateExistProductDto(productDtos);
+		validateProductDtoDuplicated(productDtos);
 		return productDtos;
 	}
 
@@ -133,6 +136,13 @@ public class InputView {
 	private void validateExistProductDto(List<ProductDto> productDtos) {
 		if (productDtos.size() == 0) {
 			throw new ProductInputNotExistMessageException();
+		}
+	}
+
+	private void validateProductDtoDuplicated(List<ProductDto> productDtos) {
+		List<String> productNames = productDtos.stream().map(ProductDto::getName).collect(Collectors.toList());
+		if (productNames.stream().anyMatch(name -> Collections.frequency(productNames, name) > 1)) {
+			throw new ProductNameDuplicatedMessageException();
 		}
 	}
 

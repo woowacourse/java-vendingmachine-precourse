@@ -1,12 +1,12 @@
 package vendingmachine.domain.machine.product.storage;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import java.util.Optional;
 import vendingmachine.domain.machine.product.Product;
 import vendingmachine.domain.user.Balance;
-import vendingmachine.exception.ProductAlreadyExistMessageException;
 import vendingmachine.exception.ProductNotFoundMessageException;
 
 public class ProductStorageImpl implements ProductStorage {
@@ -14,15 +14,10 @@ public class ProductStorageImpl implements ProductStorage {
 	private Map<String, Product> productMap = new HashMap<>();
 
 	@Override
-	public void save(Product product) {
-		String productName = product.getName();
-		checkProductAlreadyExist(productName);
-		productMap.put(productName, product);
-	}
-
-	private void checkProductAlreadyExist(String productName) {
-		if (productMap.containsKey(productName)) {
-			throw new ProductAlreadyExistMessageException();
+	public void save(List<Product> products) {
+		for (Product product : products) {
+			String productName = product.getName();
+			productMap.put(productName, product);
 		}
 	}
 

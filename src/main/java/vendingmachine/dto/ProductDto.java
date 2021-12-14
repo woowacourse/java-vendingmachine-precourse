@@ -50,4 +50,8 @@ public class ProductDto {
 		return new Product(name, price, quantity);
 	}
 
+	public String getName() {
+		return this.name;
+	}
+
 }
