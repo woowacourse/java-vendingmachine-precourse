@@ -19,12 +19,10 @@ public class CatalogService {
 
 	public static void setCatalogListByInput() {
 		List<Catalog> catalogList;
-		while (true) {
+		do {
 			String input = Console.readLine();
 			catalogList = validateInput(input);
-			if (catalogList != INVALID_INPUT)
-				break;
-		}
+		} while (catalogList == INVALID_INPUT);
 		setCatalogRepository(catalogList);
 	}
 
@@ -74,7 +72,7 @@ public class CatalogService {
 		int price = parseToInt(priceString);
 		checkModTen(price);
 		checkZeroOrPositiveInt(price);
-		InputExceptionService.checkMinimumPrice(price);
+		checkMinimumPrice(price);
 		return price;
 	}
 
@@ -89,6 +87,7 @@ public class CatalogService {
 	}
 
 	private static List<String> makeStringList(String inputString) {
+		checkEndWithSemiColon(inputString);
 		List<String> catalogStringList = Arrays.asList(inputString.split(CATALOG_STRING_SPLITTER));
 		for (String catalogString : catalogStringList) {
 			checkEmptyString(catalogString);
