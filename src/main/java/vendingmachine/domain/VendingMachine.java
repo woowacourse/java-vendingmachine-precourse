@@ -5,6 +5,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import vendingmachine.view.InputView;
+
 public class VendingMachine {
 
 	public int holdingMoney;
@@ -12,13 +14,36 @@ public class VendingMachine {
 	public List<Item> holdingItemList;
 	public Map<Coin, Integer> holdingCoins;
 	public Map<Coin, Integer> changeCoins;
-
 	private Coins coins;
 
-	public Map<Coin, Integer> makeCoins() {
+	public VendingMachine(){
+		holdingMoney = inputView.holdingMoneyInput();
+		inputMoney = inputView.inputMoneyInput();
+		holdingItemList = inputView.holdingItemsInput();
+		holdingCoins = makeInitialHoldingCoins();
+	}
+
+	InputView inputView = new InputView();
+
+	public Map<Coin, Integer> makeInitialHoldingCoins() {
 		coins = new Coins(holdingMoney);
-		this.holdingCoins = coins.getCoins();
-		return holdingCoins;
+		return coins.generateCoins(holdingMoney);
+	}
+
+	public void settingInputHoldingMoney(){
+		holdingMoney = inputView.holdingMoneyInput();
+	}
+
+	public void settingHoldingCoins(){
+		holdingCoins = makeInitialHoldingCoins();
+	}
+
+	public void settingHoldingItemList(){
+		holdingItemList = inputView.holdingItemsInput();
+	}
+
+	public void settingInputMoney(){
+		inputMoney = inputView.inputMoneyInput();
 	}
 
 	public void stockDeduct(String buyItem) {

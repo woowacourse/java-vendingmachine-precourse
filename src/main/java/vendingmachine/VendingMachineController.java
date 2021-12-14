@@ -27,14 +27,14 @@ public class VendingMachineController {
 	}
 
 	public void initialSetting(VendingMachine vendingMachine) {
-		vendingMachine.holdingMoney = inputView.holdingMoneyInput();
-		vendingMachine.holdingCoins = vendingMachine.makeCoins();
+		vendingMachine.settingInputHoldingMoney();
+		vendingMachine.settingHoldingCoins();
 		OutputView.printHoldingCoins(vendingMachine.holdingCoins);
-		vendingMachine.holdingItemList = inputView.holdingItemsInput();
+		vendingMachine.settingHoldingItemList();
 	}
 
 	public void buy(VendingMachine vendingMachine) {
-		vendingMachine.inputMoney = inputView.inputMoneyInput();
+		vendingMachine.settingInputMoney();
 		String buyItem;
 		while (vendingMachine.isAvailableKeepBuyingAboutPrice() && vendingMachine.isAvailableKeepBuyingAboutStock()) {
 			OutputView.printBalance(vendingMachine.inputMoney);
