@@ -5,6 +5,8 @@ import vendingmachine.customer.CustomerController;
 import vendingmachine.exception.NotEnoughMoneyException;
 import vendingmachine.exception.NotEnoughStockException;
 import vendingmachine.item.ItemController;
+import vendingmachine.utils.message.OutputMessage;
+import camp.nextstep.edu.missionutils.Console;
 
 import java.util.List;
 
@@ -19,6 +21,33 @@ public class VendingMachineSystem {
         itemController = ItemController.getInstance();
         customerController = CustomerController.getInstance();
         coinController = CoinController.getInstance();
+    }
+
+    public void operate() {
+        initializeVendingMachineCount();
+        printVendingMachineCount();
+
+        //TODO: 상품 입력
+        //TODO: 투입 금액 입력
+        //TODO: 구매 유도
+        //TODO: 잔돈 반환
+    }
+
+    private void initializeVendingMachineCount() {
+        Integer vendingMachineInitialAmount = getVendingMachineInitialAmount();
+        coinController.convertToCoin(vendingMachineInitialAmount);
+        System.out.println();
+    }
+
+    private Integer getVendingMachineInitialAmount() {
+        System.out.println(OutputMessage.VENDING_MACHINE_BALANCE_INPUT);
+        String inputBalance = Console.readLine();
+        return Integer.parseInt(inputBalance);
+    }
+
+    private void printVendingMachineCount() {
+        coinController.printAllCoin();
+        System.out.println();
     }
 
     private void purchaseItem(String itemName) {
@@ -36,18 +65,6 @@ public class VendingMachineSystem {
             itemController.cancelPurchase(itemName, PURCHASE_UNIT);
             throw new IllegalArgumentException(e.getMessage());
         }
-    }
-
-    private void printChange() {
-        List<String> changeResult = getChange();
-        for(String result : changeResult) {
-            System.out.println(result);
-        }
-    }
-
-    private List<String> getChange() {
-        Integer remainingAmount = customerController.getBalance();
-        return coinController.getChange(remainingAmount);
     }
 
     private boolean isPossibleAdditionalPurchase(int balance) {

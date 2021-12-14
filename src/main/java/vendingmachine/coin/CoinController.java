@@ -26,17 +26,38 @@ public class CoinController {
         coinService.convertToCoin(initialAmount);
     }
 
-    public List<String> getChange(int remainingAmount) {
-        List<String> changeResult = new ArrayList<>();
+    public void printChange(int remainingAmount) {
+        List<CoinDto> change = getChange(remainingAmount);
+        List<String> changeOutputMessage = convertOutputMessage(change);
+        for(String message : changeOutputMessage) {
+            System.out.println(message);
+        }
+    }
 
-        List<CoinDto> change = coinService.createChange(remainingAmount);
-        change.sort((a, b) -> b.getCoinAmount() - a.getCoinAmount());
+    private List<CoinDto> getChange(int remainingAmount) {
+        return coinService.createChange(remainingAmount);
+    }
 
-        for(CoinDto coinDto : change) {
-            changeResult.add(OutputMessage.CHANGE_FORMAT
+    public void printAllCoin() {
+        List<CoinDto> coins = getAllCoin();
+        List<String> coinOutputMessage = convertOutputMessage(coins);
+        for(String message : coinOutputMessage) {
+            System.out.println(message);
+        }
+    }
+
+    private List<CoinDto> getAllCoin() {
+        return coinService.getAllCoin();
+    }
+    private List<String> convertOutputMessage(List<CoinDto> coinDtoList) {
+        List<String> outputMessage = new ArrayList<>();
+
+        coinDtoList.sort((a, b) -> b.getCoinAmount() - a.getCoinAmount());
+        for(CoinDto coinDto : coinDtoList) {
+            outputMessage.add(OutputMessage.COIN_FORMAT
                     .replace("amount", String.valueOf(coinDto.getCoinAmount()))
                     .replace("count", String.valueOf(coinDto.getCount())));
         }
-        return changeResult;
+        return outputMessage;
     }
 }

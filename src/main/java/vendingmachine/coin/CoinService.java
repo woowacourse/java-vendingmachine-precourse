@@ -41,6 +41,17 @@ public class CoinService {
         return change;
     }
 
+    public List<CoinDto> getAllCoin() {
+        List<CoinDto> coins = new ArrayList<>();
+        List<Integer> coinAmounts  = getDescendingOrderCoinAmount();
+
+        for(Integer coinAmount : coinAmounts) {
+            Integer count = vendingMachineCoin.getCoinCount(coinAmount);
+            coins.add(new CoinDto(coinAmount, count));
+        }
+        return coins;
+    }
+
     private List<Integer> getDescendingOrderCoinAmount() {
         List<Integer> coinAmounts  = Coin.getCoinAmountList();
         coinAmounts.sort(Comparator.reverseOrder());
