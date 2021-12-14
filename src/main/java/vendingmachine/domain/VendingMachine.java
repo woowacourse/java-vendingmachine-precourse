@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 public class VendingMachine {
@@ -10,13 +11,13 @@ public class VendingMachine {
 
 	public int holdingMoney;
 	public int inputMoney;
-	public ArrayList<Item> holdingItemList;
-	public LinkedHashMap<Coin, Integer> holdingCoins;
+	public List<Item> holdingItemList;
+	public Map<Coin, Integer> holdingCoins;
 	public Map<Coin, Integer> changeCoins;
 
 	private Coins coins;
 
-	public LinkedHashMap<Coin, Integer> makeCoins() {
+	public Map<Coin, Integer> makeCoins() {
 		coins = new Coins(holdingMoney);
 		this.holdingCoins = coins.getCoins();
 		return holdingCoins;

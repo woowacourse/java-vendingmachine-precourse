@@ -3,6 +3,7 @@ package vendingmachine.domain;
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
@@ -13,14 +14,14 @@ public class Coins {
 
 	public int holdingMoney;
 
-	private static LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
+	private static Map<Coin, Integer> coins = new LinkedHashMap<>();
 
 	public Coins(int holdingMoney) {
 		this.holdingMoney = holdingMoney;
 		coins = initializeCoins();
 	}
 
-	public LinkedHashMap<Coin, Integer> initializeCoins() {
+	public Map<Coin, Integer> initializeCoins() {
 		coins.put(COIN_500, 0);
 		coins.put(COIN_100, 0);
 		coins.put(COIN_50, 0);
@@ -44,7 +45,7 @@ public class Coins {
 		return Coin.valueOf(amount);
 	}
 
-	public static LinkedHashMap<Coin, Integer> getCoins() {
+	public static Map<Coin, Integer> getCoins() {
 		return coins;
 	}
 }

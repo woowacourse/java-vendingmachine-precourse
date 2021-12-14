@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.regex.Pattern;
 
@@ -33,8 +34,8 @@ public class InputView {
 		return holdingMoney;
 	}
 
-	public static ArrayList<Item> holdingItemsInput() {
-		ArrayList<Item> itemList;
+	public static List<Item> holdingItemsInput() {
+		List<Item> itemList;
 		String itemString = "";
 		String[] itemStringArray;
 		do {
@@ -44,7 +45,7 @@ public class InputView {
 		} while (!isRightItemInput(itemStringArray));
 
 		removeBracket(itemStringArray);
-		itemList = generateItemList(itemStringArray);
+		itemList = new ArrayList<Item>(generateItemList(itemStringArray));
 		System.out.println();
 		return itemList;
 	}
@@ -63,7 +64,7 @@ public class InputView {
 		return inputMoney;
 	}
 
-	public static String buyItemInput(ArrayList<Item> holdingItemList, int inputMoney) {
+	public static String buyItemInput(List<Item> holdingItemList, int inputMoney) {
 		String buyItem = "";
 		do {
 			System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
@@ -80,9 +81,9 @@ public class InputView {
 		}
 	}
 
-	private static ArrayList<Item> generateItemList(String[] stringItemsArray) {
+	private static List<Item> generateItemList(String[] stringItemsArray) {
 		String[] eachValueOfProductArray;
-		ArrayList<Item> itemArrayList = new ArrayList<Item>();
+		List<Item> itemArrayList = new ArrayList<Item>();
 		for (int i = 0; i < stringItemsArray.length; i++) {
 			eachValueOfProductArray = stringItemsArray[i].split(",");
 
@@ -134,7 +135,7 @@ public class InputView {
 		return isRightItemInput;
 	}
 
-	public static boolean isPurchasableItem(String buyItem, ArrayList<Item> holdingItemList, int inputMoney) {
+	public static boolean isPurchasableItem(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		boolean isPurchasableItem = true;
 		try {
 			nonExistItemError(buyItem, holdingItemList);
@@ -187,7 +188,7 @@ public class InputView {
 		}
 	}
 
-	public static void nonExistItemError(String buyItem, ArrayList<Item> holdingItemList) {
+	public static void nonExistItemError(String buyItem, List<Item> holdingItemList) {
 		boolean isExistedItem = false;
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem)) {
@@ -199,7 +200,7 @@ public class InputView {
 		}
 	}
 
-	public static void nonEnoughMoneyError(String buyItem, ArrayList<Item> holdingItemList, int inputMoney) {
+	public static void nonEnoughMoneyError(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
 				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);

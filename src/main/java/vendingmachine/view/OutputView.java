@@ -14,7 +14,7 @@ public class OutputView {
 	private static final String BALANCE_FORMAT = "투입 금액: ";
 	private static final String CHANGES_FORMAT = "잔돈";
 
-	public static void printHoldingCoins(LinkedHashMap<Coin, Integer> coins) {
+	public static void printHoldingCoins(Map<Coin, Integer> coins) {
 		System.out.println(Message.HOLDING_COINS_MESSAGE);
 		Iterator<Coin> keys = coins.keySet().iterator();
 		while (keys.hasNext()) {
