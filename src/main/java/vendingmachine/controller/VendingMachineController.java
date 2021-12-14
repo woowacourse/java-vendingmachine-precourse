@@ -31,7 +31,10 @@ public class VendingMachineController {
 		int moneyToBuy = InputView.getMoneyToBuy();
 		int remainingMoney = ItemRepository.buyItems(moneyToBuy);
 		Map<Integer, Integer> changes = Coin.getChanges(remainingMoney);
+		Coin.minusChangesFromMachineMoney(changes);
+		for (Coin coin : Coin.values()) {
+			System.out.println("coin = " + coin);
+		}
 		OutputView.printChanges(changes, remainingMoney);
-
 	}
 }

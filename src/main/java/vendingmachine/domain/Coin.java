@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -30,6 +31,13 @@ public enum Coin {
 		for (Coin coin : Coin.values()) {
 			coin.count = 0;
 		}
+	}
+
+	private static Coin of(Integer coinAmount) {
+		return getCoinStream()
+				.filter(coin -> coin.amount == coinAmount)
+				.findAny()
+				.get();
 	}
 
 	public static void add(int inputMachineMoney) {
@@ -115,6 +123,15 @@ public enum Coin {
 			coinMap.put(coin.amount, coin.count);
 		}
 		return coinMap;
+	}
+
+	public static void minusChangesFromMachineMoney(Map<Integer, Integer> changes) {
+		for (Map.Entry<Integer, Integer> entry : changes.entrySet()) {
+			Integer coinAmount = entry.getKey();
+			Integer coinCount = entry.getValue();
+			Coin coin = Coin.of(coinAmount);
+			coin.count -= coinCount;
+		}
 	}
 
 	public void selfDescription() {

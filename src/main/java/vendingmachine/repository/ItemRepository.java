@@ -1,7 +1,10 @@
 package vendingmachine.repository;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
 import vendingmachine.view.InputView;
 
@@ -43,4 +46,5 @@ public class ItemRepository {
 			.findAny()
 			.get();
 	}
+
 }
