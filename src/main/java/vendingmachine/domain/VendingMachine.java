@@ -13,7 +13,7 @@ public class VendingMachine {
 		coinStore = new CoinStore(money);
 	}
 
-	public String getHoldingAmountCoins() {
+	public String getHoldingAmountCoinsToString() {
 		return coinStore.toString();
 	}
 
@@ -21,8 +21,8 @@ public class VendingMachine {
 		productRepository.createProducts(productListString);
 	}
 
-	public void insertUserInputAmount(int inputAmount) {
-		this.inputAmount = inputAmount;
+	public void addInputAmount(int money) {
+		this.inputAmount += money;
 	}
 
 	public void purchaseProduct(String productName) {
@@ -30,7 +30,7 @@ public class VendingMachine {
 	}
 
 	public boolean isPossiblePurchase() {
-		return (productRepository.isCheckStock() && productRepository.isWhetherPurchasePossible(inputAmount));
+		return productRepository.isCheckStock() && productRepository.isWhetherPurchasePossible(inputAmount);
 	}
 
 	public String getChangeAmountToString() {

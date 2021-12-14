@@ -8,9 +8,9 @@ import vendingmachine.domain.VendingMachine;
 public class VendingMachineController {
 	public void run() {
 		VendingMachine vendingMachine = new VendingMachine(inputHoldingAmountMoney());
-		printHoldingAmountCoin(vendingMachine.getHoldingAmountCoins());
+		printHoldingAmountCoin(vendingMachine.getHoldingAmountCoinsToString());
 		insertProductList(vendingMachine);
-		vendingMachine.insertUserInputAmount(inputUserAmount());
+		vendingMachine.addInputAmount(inputMoney());
 		purchaseIsPossible(vendingMachine);
 		callPrintChangeAmount(vendingMachine);
 	}

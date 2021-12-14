@@ -32,13 +32,13 @@ public class ProductRepository {
 			.orElseThrow(() -> new IllegalArgumentException(ERROR_DO_NOT_HAVE_PRODUCT));
 	}
 
-	private List<String> splitProductByDelimiter(String productToString) {
-		return Arrays.stream(productToString.split(DELIMITER_PRODUCT_STRING))
+	private List<String> splitProductByDelimiter(String product) {
+		return Arrays.stream(product.split(DELIMITER_PRODUCT_STRING))
 			.collect(Collectors.toList());
 	}
 
-	private void addProduct(List<String> productString) {
-		productList.add(new Product(productString));
+	private void addProduct(List<String> product) {
+		productList.add(new Product(product));
 	}
 
 	public boolean isWhetherPurchasePossible(int remainingInputAmount) {

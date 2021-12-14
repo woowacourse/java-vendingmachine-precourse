@@ -49,7 +49,7 @@ public class InputView {
 			.collect(Collectors.toList());
 	}
 
-	public static int inputUserAmount() {
+	public static int inputMoney() {
 		System.out.println(PRINT_SCREEN_INPUT_USER_AMOUNT);
 		String input = Console.readLine();
 		printEmptyLine();
@@ -58,7 +58,7 @@ public class InputView {
 			return Integer.parseInt(input);
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
-			return inputUserAmount();
+			return inputMoney();
 		}
 	}
 
