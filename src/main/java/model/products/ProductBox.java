@@ -6,8 +6,6 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-import model.products.Product;
-
 public class ProductBox {
 	private static final String COMMA = ",";
 	private static final int PRODUCT_NAME_INDEX = 0;

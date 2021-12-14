@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-import model.coin.Coin;
 import utils.generator.RandomCoinPriceGenerator;
 
 public class CoinBox {
