@@ -7,9 +7,10 @@ import java.util.List;
 import vendingmachine.utill.RandomCoinGenerator;
 
 public class Coins {
-	private final LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
+	private final LinkedHashMap<Coin, Integer> coins;
 
 	public Coins() {
+		coins = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			coins.put(coin, 0);
 		}
