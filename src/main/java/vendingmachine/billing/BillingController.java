@@ -33,7 +33,7 @@ public class BillingController {
 			changes.createRandomCoins();
 			OutputView.printVendingMachineOwnCoins(changes.getCoins());
 		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
+			ErrorView.printMessage(illegalArgumentException);
 			requestInitialMoney();
 		}
 	}
@@ -50,7 +50,7 @@ public class BillingController {
 			moneyValidator.validate(paymentsMoney, PAYMENTS_PREFIX);
 			payments.insert(new Money(paymentsMoney));
 		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
+			ErrorView.printMessage(illegalArgumentException);
 			requestInsertMoney();
 		}
 	}

@@ -1,17 +1,17 @@
 package vendingmachine.billing;
 
 public class Payments {
-	private Money moneyForBuying;
+	private Money money;
 
-	public void insert(Money moneyForBuying) {
-		this.moneyForBuying = moneyForBuying;
+	public void insert(Money money) {
+		this.money = money;
 	}
 
 	public Money getRemainMoney() {
-		return moneyForBuying;
+		return money;
 	}
 
 	public void payFor(int productValue) {
-		moneyForBuying.pay(productValue);
+		money.pay(productValue);
 	}
 }

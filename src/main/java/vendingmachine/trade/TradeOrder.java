@@ -13,10 +13,9 @@ public class TradeOrder {
 	public TradeOrder(Product product, Payments payments) {
 		this.product = product;
 		this.payments = payments;
-		validate();
 	}
 
-	private void validate() {
+	public void validate() {
 		if (!product.isRemainStock()) {
 			throw new IllegalArgumentException(ERROR_NOT_LEFT);
 		}

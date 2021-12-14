@@ -29,7 +29,7 @@ public class ProductController {
 			productStorageValidator.validate(inputProducts);
 			productStorage.storeProducts(inputProducts, productMapper, productValidator);
 		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
+			ErrorView.printMessage(illegalArgumentException);
 			requestInitialProducts();
 		}
 	}

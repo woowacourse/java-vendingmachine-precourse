@@ -29,13 +29,14 @@ public class Trade {
 			InputView.printProductForBuyingMessage();
 			orderProduct();
 		} catch (IllegalArgumentException illegalArgumentException) {
-			ErrorView.showMessage(illegalArgumentException);
+			ErrorView.printMessage(illegalArgumentException);
 		}
 	}
 
 	private void orderProduct() {
 		Product product = productStorage.findProductByName(Console.readLine());
 		TradeOrder tradeOrder = new TradeOrder(product, payments);
+		tradeOrder.validate();
 		tradeOrder.complete();
 	}
 }

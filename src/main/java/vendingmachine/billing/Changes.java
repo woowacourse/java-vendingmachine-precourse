@@ -10,15 +10,15 @@ public class Changes {
 	private static final int MINUS_ONE = -1;
 
 	private Map<Coin, Integer> coins;
-	private Money moneyForChange;
+	private Money money;
 
-	public void input(Money moneyForChange) {
-		this.moneyForChange = moneyForChange;
+	public void input(Money money) {
+		this.money = money;
 	}
 
 	public void createRandomCoins() {
 		initialCoins();
-		while (moneyForChange.isLeft()) {
+		while (money.isLeft()) {
 			addRandomCoin();
 		}
 	}
@@ -30,8 +30,8 @@ public class Changes {
 
 	private void addRandomCoin() {
 		int randomCoinValue = Coin.getRandomCoin();
-		if (moneyForChange.isChangeable(randomCoinValue)) {
-			moneyForChange.change(randomCoinValue);
+		if (money.isChangeable(randomCoinValue)) {
+			money.change(randomCoinValue);
 			coins.merge(Coin.issue(randomCoinValue), PLUS_ONE, Integer::sum);
 		}
 	}

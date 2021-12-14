@@ -38,15 +38,15 @@ public class ProductValidator {
 		}
 	}
 
-	private void validateOnlyNumbers(String price) {
-		if (price.chars().anyMatch(each -> !Character.isDigit(each))) {
+	private void validateOnlyNumbers(String input) {
+		if (input.chars().anyMatch(each -> !Character.isDigit(each))) {
 			throw new IllegalArgumentException(ERROR_NOT_ONLY_NUMBERS);
 		}
 	}
 
-	private void validateIntegerRange(String price) {
+	private void validateIntegerRange(String input) {
 		try {
-			if (Integer.parseInt(price) > MAXIMUM_INTEGER_RANGE) {
+			if (Integer.parseInt(input) > MAXIMUM_INTEGER_RANGE) {
 				throw new IllegalArgumentException(ERROR_INTEGER_RANGE);
 			}
 		} catch (IllegalArgumentException illegalArgumentException) {
