@@ -4,10 +4,10 @@ import java.util.List;
 
 import vendingmachine.dto.ProductDto;
 import vendingmachine.exception.VendingMachineException;
-import vendingmachine.view.output.message.OutputMessage;
 import vendingmachine.service.MachineService;
 import vendingmachine.view.input.InputView;
 import vendingmachine.view.output.OutputView;
+import vendingmachine.view.output.message.OutputMessage;
 
 public class MachineControllerImpl implements MachineController {
 

@@ -4,9 +4,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.domain.machine.product.ProductInformationCount;
 import vendingmachine.dto.ProductDto;
 import vendingmachine.exception.FormatIsNotCorrectMessageException;
-import vendingmachine.domain.machine.product.ProductInformationCount;
 import vendingmachine.view.input.Delimiter;
 
 public class ProductDtoConverter {

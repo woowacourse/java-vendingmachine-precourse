@@ -1,6 +1,7 @@
 package vendingmachine.view.output;
 
 import java.util.List;
+
 import vendingmachine.view.output.message.ErrorMessage;
 import vendingmachine.view.output.message.OutputMessage;
 
@@ -26,7 +27,7 @@ public class OutputView {
 	public void printCurrentMoneyOfUser(int currentMoneyOfUser) {
 		printMessage(String.format(OutputMessage.MONEY_OF_USER_OUTPUT_FORMAT, currentMoneyOfUser));
 	}
-	
+
 	public void printCoinsOfUser(List<String> coinStrings) {
 		printMessage(OutputMessage.INTRO_COINS_OF_USER);
 		coinStrings.forEach(this::printMessage);

@@ -1,7 +1,7 @@
 package vendingmachine.dto;
 
-import vendingmachine.domain.machine.product.Product;
 import vendingmachine.domain.machine.money.MoneyCondition;
+import vendingmachine.domain.machine.product.Product;
 import vendingmachine.exception.PriceNotMoreThanMinimumAmountMessageException;
 import vendingmachine.exception.PriceNotMultipleOfTenMessageException;
 import vendingmachine.exception.QuantityNotPositiveMessageException;
