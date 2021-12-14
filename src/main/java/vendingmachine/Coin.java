@@ -20,4 +20,17 @@ public enum Coin {
 
     // 추가 기능 구현
     public int getValue(){return amount;};
+
+    public static List<Integer> getCoinList (){
+        List<Integer> coins = new ArrayList<Integer>();
+        for(Coin coin : Coin.values()){
+            coins.add(coin.getValue());
+        }
+        return coins;
+    }
+
+    public Integer getAmount(){
+        return this.amount;
+    }
+
 }
