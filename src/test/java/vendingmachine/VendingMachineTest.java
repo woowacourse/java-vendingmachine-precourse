@@ -45,4 +45,11 @@ public class VendingMachineTest {
         vendingMachine = new VendingMachine("[콜라,1500,0];[사이다,1000,0]", 450);
         assertThat(vendingMachine.isPurchasable()).isFalse();
     }
+
+    @Test
+    void 상품정보_세미콜론으로_구분되지않음_예외() {
+        assertThatThrownBy(() -> new VendingMachine("[콜라,1500,10][사이다,1000,10]", 450))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining("세미콜론");
+    }
 }

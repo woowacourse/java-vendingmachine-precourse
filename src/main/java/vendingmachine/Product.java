@@ -3,6 +3,7 @@ package vendingmachine;
 public class Product {
     private static final int GOODS_SIZE = 3;
     private static final String INFO_MISSED_MESSAGE = "상품명,가격,수량 순으로 누락 없이 작성해주세요.";
+    private static final String COMMA = ",";
 
     private final String name;
     private final ProductPrice price;
@@ -10,7 +11,7 @@ public class Product {
 
     public Product(String namePriceQuantity) {
         validateInfoNotMissed(namePriceQuantity);
-        String[] goodsInfo = namePriceQuantity.split(",");
+        String[] goodsInfo = namePriceQuantity.split(COMMA);
 
         String name = goodsInfo[0];
         String priceString = goodsInfo[1];
@@ -50,7 +51,7 @@ public class Product {
     }
 
     private void validateInfoNotMissed(String goodsInfo) {
-        if (isInfoMissed(goodsInfo.split(","))) {
+        if (isInfoMissed(goodsInfo.split(COMMA))) {
             throw new IllegalArgumentException(INFO_MISSED_MESSAGE);
         }
     }
