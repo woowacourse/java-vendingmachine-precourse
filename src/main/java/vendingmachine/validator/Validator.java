@@ -10,35 +10,26 @@ public class Validator {
 	private final static String ERROR_INPUT_IS_BIGGER_THAN_100 = "[ERROR] 상품 가격은 100원 이상이어야합니다.";
 
 	public String validateMoney(String money) {
-		if (money.isEmpty()) {
-			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
-		}
+		validateInputEmpty(money);
+		validateOnlyContainNumber(money);
+		validateInputDivideInto10(money);
 
-		if (Utils.isOnlyContainNumber(money)) {
-			throw new IllegalArgumentException(ERROR_INPUT_MUST_BE_NUMBER);
-		}
-
-		if (Integer.parseInt(money)%10 != 0) {
-			throw new IllegalArgumentException(ERROR_MONEY_CAN_DIVIDE_INTO_10);
-		}
 		return money;
 	}
 
 	public String validateProduct(String validateProduct) {
-		if (validateProduct.isEmpty()) {
-			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
-		}
+		validateInputEmpty(validateProduct);
+
 		return validateProduct;
 	}
 
 	public String validateBuyingProduct(String validateBuyingProduct) {
-		if (validateBuyingProduct.isEmpty()) {
-			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
-		}
+		validateProduct(validateBuyingProduct);
+
 		return validateBuyingProduct;
 	}
 
-	public static void validateProduct(String[] product) throws IllegalArgumentException {
+	public static void validateProduct(String[] product) {
 		validateNumberOfInput(product);
 		validateOnlyContainNumber(product[1]);
 		validateOnlyContainNumber(product[2]);
@@ -67,6 +58,12 @@ public class Validator {
 	private static void validateNumberOfInput(String[] input) {
 		if (input.length != 3) {
 			throw new IllegalArgumentException(ERROR_INPUT_INCORRECT);
+		}
+	}
+
+	private static void validateInputEmpty(String input) {
+		if (input.isEmpty()) {
+			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
 		}
 	}
 }
