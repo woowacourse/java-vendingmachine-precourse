@@ -4,7 +4,6 @@ import static vendingmachine.Error.*;
 
 public class ChangesExceptionTest extends BasicTest {
 	public String moneyOfChanges;
-	public String errorMessage;
 
 	private ChangesExceptionTest(String moneyOfChanges, String errorMessage) {
 		this.moneyOfChanges = moneyOfChanges;
