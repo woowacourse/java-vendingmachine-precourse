@@ -15,6 +15,14 @@ public class Product {
 		return this.name;
 	}
 
+	public int getPrice() {
+		return this.price;
+	}
+
+	public int getCount() {
+		return this.count;
+	}
+
 	public String toString() {
 		return this.price + " " + this.name + " " + this.count;
 	}

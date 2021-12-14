@@ -34,11 +34,11 @@ public class VendingMachine {
 	}
 
 	public void buyProducts(int inputCoin) {
-		while (true) {
-			System.out.println();
-			System.out.println("투입 금액: " + inputCoin + "원");
+		while (!isFinished(inputCoin)) {
+			System.out.println("\n투입 금액: " + inputCoin + "원");
 			System.out.println(Constants.productNameMsg);
 			String name = getProductName();
+
 		}
 	}
 
@@ -64,8 +64,32 @@ public class VendingMachine {
 		throw new IllegalArgumentException("[ERROR] 유효한 상품 이름을 입력하세요.");
 	}
 
-	// 잔돈이 최저 금액보다 적거나 모든 상품이 소진되었는지 체크
-	public boolean isFinished() {
+	public boolean isFinished(int inputCoin) {
+		if (getMinimumPriceProduct() > inputCoin) {
+			return true;
+		}
+		if (isNoProducts()) {
+			return true;
+		}
 		return false;
+	}
+
+	public int getMinimumPriceProduct() {
+		int minPrice = this.products.get(0).getPrice();
+		for (Product p: products) {
+			if (minPrice > p.getPrice()) {
+				minPrice = p.getPrice();
+			}
+		}
+		return minPrice;
+	}
+
+	public boolean isNoProducts() {
+		for (Product p: products) {
+			if (p.getCount() != 0) {
+				return false;
+			}
+		}
+		return true;
 	}
 }
