@@ -20,7 +20,7 @@ public class Products {
 		products.add(product);
 	}
 
-	public boolean hasSameName(Product product) {
+	private boolean hasSameName(Product product) {
 		return products.stream()
 			.anyMatch(product::equals);
 	}
