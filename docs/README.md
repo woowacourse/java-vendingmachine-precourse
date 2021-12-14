@@ -9,12 +9,21 @@ project
 │    │    
 │    ├─ Coin.java
 │    │
+│    ├─ MoneyInput.java	   
+│    │
+│    ├─ Beverage.java	   
+│    │
 │    ├─ VendingMachine.java	   
+│    │
+│    ├─ Validater.java	   
+│    │
+│    ├─ Input.java	   
 │    │
 │    └─ Output.java(out 함수)
 │ 
 └─test
-       └─ApplicationTest
+       └─ApplicationTest 
+       └─VendingMachineTest
 ```
 
 
