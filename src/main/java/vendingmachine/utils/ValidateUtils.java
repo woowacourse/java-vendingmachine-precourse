@@ -4,6 +4,10 @@ public class ValidateUtils {
 
 	private static final String ERROR_INVALID_COIN = "유효하지 않은 금액입니다.";
 	private static final String ERROR_NOT_NUMBER = "숫자만 입력해야합니다.";
+	private static final char OPEN_BRACKET = '[';
+	private static final char CLOSE_BRACKET = ']';
+	private static final String COMMA = ",";
+	private static final int PRODUCT_INFORMATION_LENGTH = 3;
 	private static final int ZERO = 0;
 	private static final int DIVIDE_NUMBER = 10;
 	private static final int MIN_PRODUCT_PRICE = 100;
@@ -15,6 +19,12 @@ public class ValidateUtils {
 		if (!isValidCoin(Integer.parseInt(inputCoin))) {
 			throw new IllegalArgumentException(ERROR_INVALID_COIN);
 		}
+	}
+
+	public static boolean isValidInputType(String product) {
+		return product.charAt(ZERO) == OPEN_BRACKET
+			&& product.charAt(product.length() - 1) == CLOSE_BRACKET
+			&& product.split(COMMA).length == PRODUCT_INFORMATION_LENGTH;
 	}
 
 	private static boolean isValidCoin(int coin) {

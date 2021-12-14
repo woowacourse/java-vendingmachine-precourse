@@ -11,12 +11,7 @@ public class Products {
 	private static final String ERROR_DUPLICATE_PRODUCT = "중복된 상품입니다.";
 	private static final String ERROR_NO_PRODUCT = "존재하지 않는 상품입니다.";
 	private static final String ERROR_NOT_FOUND_PRODUCT = "구매 가능한 상품이 없습니다.";
-	private static final String ERROR_INVALID_PRODUCT_INPUT_TYPE = "상품 정보 입력 형식을 다시 확인해주세요";
-	private static final char OPEN_BRACKET = '[';
-	private static final char CLOSE_BRACKET = ']';
-	private static final String COMMA = ",";
 	private static final String DELIMITER = ";";
-	private static final int PRODUCT_INFORMATION_LENGTH = 3;
 	private static final int ZERO = 0;
 
 	private final List<Product> products;
@@ -26,9 +21,6 @@ public class Products {
 	}
 
 	private List<Product> validateAndCreateProducts(String inputProducts) {
-		if (!isValidInputType(inputProducts)) {
-			throw new IllegalArgumentException(ERROR_INVALID_PRODUCT_INPUT_TYPE);
-		}
 		List<Product> productList = Arrays.stream(inputProducts.split(DELIMITER))
 			.map(Product::fromProductInformation)
 			.collect(Collectors.toList());
@@ -36,12 +28,6 @@ public class Products {
 			throw new IllegalArgumentException(ERROR_DUPLICATE_PRODUCT);
 		}
 		return productList;
-	}
-
-	public boolean isValidInputType(String product) {
-		return product.charAt(ZERO) == OPEN_BRACKET
-			&& product.charAt(product.length() - 1) == CLOSE_BRACKET
-			&& product.split(COMMA).length == PRODUCT_INFORMATION_LENGTH;
 	}
 
 	public boolean isDuplicate(List<Product> productList) {
