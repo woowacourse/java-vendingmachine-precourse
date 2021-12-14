@@ -2,6 +2,7 @@ package vendingmachine.service;
 
 import java.util.ArrayList;
 
+import vendingmachine.Constants.ProductConstant;
 import vendingmachine.repository.Product;
 import vendingmachine.repository.Products;
 import vendingmachine.view.InputView;
@@ -24,18 +25,18 @@ public class ProductService {
         ArrayList<Product> products = new ArrayList<>();
 
         for (String product : splitInput(input)) {
-            String[] item = product.split(",");
+            String[] item = product.split(ProductConstant.COMMA);
             productValidator.isValid(item);
-            products.add(new Product(item[0],
-                Integer.parseInt(item[1]),
-                Integer.parseInt(item[2])));
+            products.add(new Product(item[ProductConstant.NAME_INDEX],
+                Integer.parseInt(item[ProductConstant.PRICE_INDEX]),
+                Integer.parseInt(item[ProductConstant.STOCK_INDEX])));
         }
         return products;
 }
 
     public String[] splitInput(String input) {
-        return input.replaceAll("\\[", "")
-            .replaceAll("]", "")
-            .split(";");
+        return input.replaceAll(ProductConstant.LEFT_SQUARE_BRACKET, ProductConstant.BLANK)
+            .replaceAll(ProductConstant.RIGHT_SQUARE_BRACKET, ProductConstant.BLANK)
+            .split(ProductConstant.SEMI_COLON);
     }
 }

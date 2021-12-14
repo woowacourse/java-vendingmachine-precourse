@@ -11,7 +11,6 @@ public class Product {
         this.stock = stock;
     }
 
-
     public int getPrice() {
         return this.price;
     }
