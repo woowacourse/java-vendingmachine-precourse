@@ -2,6 +2,8 @@ package vendingmachine.validator;
 
 import static vendingmachine.constant.ErrorMessage.*;
 
+import java.util.regex.Pattern;
+
 public class InputValidator {
 
 	public static void validateMachineMoney(String input) {
@@ -29,6 +31,27 @@ public class InputValidator {
 		int intInput = Integer.parseInt(input);
 		if (intInput % 10 != 0) {
 			throw new IllegalArgumentException(ERROR_NOT_CORRECT_UNIT);
+		}
+	}
+
+	public static void validateItems(String input) {
+		isCorrectBracket(input);
+	}
+
+	public static void validateItem(String input) {
+		isCorrectBracket(input);
+		String regExp = "^\\[[\\w가-힣]*,\\d*,\\d*\\]$";
+		boolean matches = Pattern.matches(regExp, input);
+		if (!matches) {
+			throw new IllegalArgumentException(ERROR_INVALID_ITEM_FORMAT);
+		}
+	}
+
+	private static void isCorrectBracket(String input) {
+		String regExp = "^\\[.*\\]$";
+		boolean matches = Pattern.matches(regExp, input);
+		if (!matches) {
+			throw new IllegalArgumentException(ERROR_INVALID_BRACKETS);
 		}
 	}
 }
