@@ -57,21 +57,21 @@ public class CoinBox {
         return false;
     }
 
-    public int getAvailableChange(int change) {   //change: 잔돈
+    public CoinBox getAvailableChange(int change) {   //change: 잔돈
         ArrayList<Integer> list = createCostList(change);
         list.sort(Collections.reverseOrder());
-        int returnable = 0;
+        CoinBox returnCoins = new CoinBox();
 
         for (int coinCost : list) {
             if (change < coinCost) {
                 continue;
             }
             int coinAvailable = getCoinAvailable(coinCost, change);
+            returnCoins.countCoinOf(coinCost, coinAvailable);
             countCoinOf(coinCost, -coinAvailable);
             change -= coinAvailable * coinCost;
-            returnable += coinAvailable * coinCost;
         }
-        return returnable;
+        return returnCoins;
     }
 
     private int getCoinAvailable(int coinCost, int money) {

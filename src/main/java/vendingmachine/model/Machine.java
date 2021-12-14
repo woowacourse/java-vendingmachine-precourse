@@ -32,6 +32,12 @@ public class Machine {
         this.asset = coinBox.getValueOfCoinBox();
     }
 
+    public CoinBox getAvailableChange() {
+        CoinBox changeCoins = getCoinBox().getAvailableChange(inputMoney);
+        inputMoney -= changeCoins.getValueOfCoinBox();
+        return changeCoins;
+    }
+
     public void setProductTable(ProductTable productTable) {
         this.productTable = productTable;
     }

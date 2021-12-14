@@ -28,6 +28,7 @@ public class MachineCore {
             machine.sellProduct(productName);
         }
         printInputMoneyLeft();
+        printChangeReturned();
     }
 
     private void prepareMachin() {
@@ -74,6 +75,17 @@ public class MachineCore {
 
     private void printInputMoneyLeft() {
         view.printInputMoneyStatus(machine.getInputMoney());
+    }
+
+    private void printChangeReturned() {
+        CoinBox change = machine.getAvailableChange();
+        view.printOutput(OutputData.CHANGE);
+
+        for (Coin coin : Coin.values()) {
+            if (change.getCoinCount(coin) > 0) {
+                view.printCoinStatus(coin.getAmount(), change.getCoinCount(coin));
+            }
+        }
     }
 
     private ProductTable splitProductInfo(String userInput) {
