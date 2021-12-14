@@ -24,14 +24,8 @@ public class VendingMachineController {
 			OutputView.printCurrentMoney(money.getCurrentAmount());
 			initBuyProduct();
 		}
-		if (money.getCurrentAmount() == 0) {
-			OutputView.printCurrentMoneyZero(money.getCurrentAmount());
-		}
-
-		if (money.getCurrentAmount() != 0) {
 			OutputView.printCurrentMoney(money.getCurrentAmount());
 			OutputView.printChanges(changes.giveChanges(money.getCurrentAmount()));
-		}
 	}
 
 	private void initBuyProduct() {
