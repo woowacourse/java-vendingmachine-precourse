@@ -3,23 +3,18 @@ package vendingmachine.domain;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.SortedMap;
-import java.util.TreeMap;
-
-import vendingmachine.util.supporter.MapSupporter;
 
 public class Machine {
-	private final SortedMap<Coin, Integer> coins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
+	private final Wallet wallet = new Wallet();
 	private int inputCoinAmount;
 	private final Map<String, Item> items = new HashMap<>();
 
 	public void addCoins(SortedMap<Coin, Integer> coins) {
-		for (Coin coin : coins.keySet()) {
-			MapSupporter.increaseCoinCount(this.coins, coin, 0, coins.get(coin));
-		}
+		wallet.addCoins(coins);
 	}
 
 	public SortedMap<Coin, Integer> getCoins() {
-		return this.coins;
+		return wallet.getCoins();
 	}
 
 	public void addInputCoinAmount(final int amount) {
@@ -92,24 +87,8 @@ public class Machine {
 	}
 
 	public SortedMap<Coin, Integer> returnCoins() {
-		SortedMap<Coin, Integer> returnCoins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
-		int returnCoinsAmount = this.inputCoinAmount;
-		for (Coin coin : coins.keySet()) {
-			returnCoinsAmount = setReturnCoinsAndGetReturnCoinsAmount(returnCoins, returnCoinsAmount, coin);
-		}
-		this.inputCoinAmount = returnCoinsAmount;
+		SortedMap<Coin, Integer> returnCoins = wallet.returnCoins(inputCoinAmount);
+		this.inputCoinAmount = wallet.getToTalAmount(returnCoins);
 		return returnCoins;
-	}
-
-	private int setReturnCoinsAndGetReturnCoinsAmount(SortedMap<Coin, Integer> returnCoins, int returnCoinsAmount,
-		Coin coin) {
-		for (int i = 0; i < coins.get(coin); i++) {
-			if (returnCoinsAmount < coin.getAmount()) {
-				break;
-			}
-			MapSupporter.increaseCoinCount(returnCoins, coin, 0, 1);
-			returnCoinsAmount -= coin.getAmount();
-		}
-		return returnCoinsAmount;
 	}
 }
