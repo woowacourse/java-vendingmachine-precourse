@@ -63,4 +63,16 @@ public class MachineControllerImpl implements MachineController {
 		outputView.printEmptyNewLine();
 	}
 
+	@Override
+	public void refundMoneyOfUser() {
+		showCurrentMoneyOfUser();
+		showCoinsOfUser();
+	}
+
+	private void showCoinsOfUser() {
+		List<String> coinsOfUser = machineService.getCoinsOfUser();
+		outputView.printCoinsOfUser(coinsOfUser);
+		outputView.printEmptyNewLine();
+	}
+
 }

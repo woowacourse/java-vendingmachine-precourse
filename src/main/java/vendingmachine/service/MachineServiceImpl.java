@@ -52,6 +52,11 @@ public class MachineServiceImpl implements MachineService {
 	}
 
 	@Override
+	public List<String> getCoinsOfUser() {
+		return user.getCoinsByString();
+	}
+
+	@Override
 	public boolean isUserPossibleToUseMachine() {
 		if (user.hasNotEnoughMoney()) {
 			return false;

@@ -1,5 +1,7 @@
 package vendingmachine.domain.user;
 
+import java.util.List;
+
 import vendingmachine.domain.machine.Machine;
 import vendingmachine.domain.machine.coin.Coin;
 import vendingmachine.domain.machine.coin.storage.CoinStorage;
@@ -49,6 +51,10 @@ public class User {
 
 	public boolean hasNotEnoughMoney() {
 		return machine.isPossibleToUseWith(balance);
+	}
+
+	public List<String> getCoinsByString() {
+		return coinStorage.getExistedCoinsAsString();
 	}
 
 }

@@ -20,6 +20,8 @@ public interface MachineService {
 
 	List<String> getCoinsOfMachine();
 
+	List<String> getCoinsOfUser();
+
 	boolean isUserPossibleToUseMachine();
 
 }

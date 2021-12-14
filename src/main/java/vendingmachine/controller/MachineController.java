@@ -12,4 +12,6 @@ public interface MachineController {
 
 	void purchaseProducts();
 
+	void refundMoneyOfUser();
+
 }

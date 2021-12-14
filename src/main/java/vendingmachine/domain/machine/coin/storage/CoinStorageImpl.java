@@ -87,7 +87,4 @@ public class CoinStorageImpl implements CoinStorage {
 		return results;
 	}
 
-
-
-
 }
