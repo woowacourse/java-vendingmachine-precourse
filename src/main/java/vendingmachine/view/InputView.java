@@ -36,7 +36,7 @@ public class InputView {
 		try {
 			String inputValue = Util.removeSpace(InputView.getInput());
 			checkProductsValidation(inputValue, Constant.PRODUCTS_DELIMETER);
-			inputValue = inputValue.replaceAll("\\[|]", "");
+			inputValue = inputValue.replaceAll(Constant.REGEX_REMOVE_BRACKET, Constant.EMPTY_STRING);
 			return Arrays.asList(inputValue.split(Constant.PRODUCTS_DELIMETER));
 		} catch (IllegalArgumentException e) {
 			OutputView.printError(e.getMessage());
@@ -47,7 +47,7 @@ public class InputView {
 	private static void checkProductsValidation(String inputValue, String delimeter) {
 		Validators.checkNullOrEmpty(inputValue);
 		Validators.checkValidFirstValue(inputValue, delimeter);
-		Validators.checkPatternOfProduct(inputValue, delimeter, "\\[([가-힣]+),([0-9]+),([0-9]+)\\]");
+		Validators.checkPatternOfProduct(inputValue, delimeter, Constant.REGEX_PATTERN);
 	}
 
 	public static String getProductName() {

@@ -127,7 +127,7 @@ public class Validators {
 
 	public static void checkValidLengthOfProductName(String inputValue) {
 		int inputValueLength = inputValue.length();
-		if (!(1 <= inputValueLength)) {
+		if (!(Constant.CONSTANT_ONE <= inputValueLength)) {
 			throw new IllegalArgumentException(Message.REQUEST_MESSAGE_INVALID_RANGE);
 		}
 	}
