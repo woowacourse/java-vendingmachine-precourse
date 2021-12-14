@@ -9,36 +9,49 @@ import vendingmachine.view.OutputView;
 
 public class Controller {
 	public void runMachine() {
-		VendingMachine vendingMachine = VendingMachine.getInstance();
-		vendingMachine.init();
+		VendingMachine vendingMachine = loadVendingMachine();
+		insertMachineMoney(vendingMachine);
+		insertProducts(vendingMachine);
+		insertUserMoney(vendingMachine);
+		saleProcess(vendingMachine);
+		returnUserCoins(vendingMachine);
+	}
 
-		OutputView.printInputMachineMoneyInstruction();
-		Money machineMoney = Money.of(InputView.getMoney());
-		vendingMachine.insertMachineMoney(machineMoney);
-		OutputView.printResultOfGenerateCoins(vendingMachine.generateCoins());
-
-		OutputView.printInputProductsInstruction();
-		Products products = Products.from(InputView.getProducts());
-		vendingMachine.insertProducts(products);
-
-		OutputView.printInputUserMoneyInstruction();
-		Money userMoney = Money.of(InputView.getMoney());
-		OutputView.printResultOfInputUserMoney(userMoney);
-		vendingMachine.insertUserMoney(userMoney);
-
+	private void saleProcess(VendingMachine vendingMachine) {
 		boolean canSale = vendingMachine.canSale();
 		while (canSale) {
 			OutputView.printCurrentUserMoney(vendingMachine.toCurrentUserMoney());
 			OutputView.printInputPurchaseProductNameInstruction();
-			Name wantedProductName = Name.of(InputView.getProductName());
-			vendingMachine.sale(wantedProductName);
-
+			vendingMachine.sale(Name.of(InputView.getProductName()));
 			canSale = vendingMachine.canSale();
 		}
+	}
 
+	private VendingMachine loadVendingMachine() {
+		VendingMachine vendingMachine = VendingMachine.getInstance();
+		vendingMachine.init();
+		return vendingMachine;
+	}
+
+	private void insertMachineMoney(VendingMachine vendingMachine) {
+		OutputView.printInputMachineMoneyInstruction();
+		vendingMachine.insertMachineMoney(Money.of(InputView.getMoney()));
+		OutputView.printResultOfGenerateCoins(vendingMachine.generateCoins());
+	}
+
+	private void insertProducts(VendingMachine vendingMachine) {
+		OutputView.printInputProductsInstruction();
+		vendingMachine.insertProducts(Products.from(InputView.getProducts()));
+	}
+
+	private void insertUserMoney(VendingMachine vendingMachine) {
+		OutputView.printInputUserMoneyInstruction();
+		vendingMachine.insertUserMoney(Money.of(InputView.getMoney()));
+		OutputView.printResultOfInputUserMoney(vendingMachine.toCurrentUserMoney());
+	}
+
+	private void returnUserCoins(VendingMachine vendingMachine) {
 		OutputView.printCurrentUserMoney(vendingMachine.toCurrentUserMoney());
-		String returnCoins = vendingMachine.returnCoins();
-		OutputView.printResultOfReturnCoins(returnCoins);
-
+		OutputView.printResultOfReturnCoins(vendingMachine.returnCoins());
 	}
 }

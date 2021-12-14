@@ -35,8 +35,8 @@ public class OutputView {
 		System.out.println(INPUT_USER_MONEY_INSTRUCTION);
 	}
 
-	public static void printResultOfInputUserMoney(Money money) {
-		System.out.println(money.toInt());
+	public static void printResultOfInputUserMoney(int money) {
+		System.out.println(money);
 		System.out.println();
 	}
 
