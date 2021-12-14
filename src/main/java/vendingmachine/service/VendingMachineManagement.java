@@ -19,7 +19,7 @@ public class VendingMachineManagement {
 	public static final String COVER_PRODUCT_END_PATTERN = COVER_PRODUCT_END + "$";
 	public static final String EMPTY = "";
 	public static final String SPLIT_PRODUCT = ",";
-	public static final String SPLIT_PRODUCT_PATTERN = ".*" + SPLIT_PRODUCT + ".*" + SPLIT_PRODUCT + ".*" + SPLIT_PRODUCT;
+	public static final String SPLIT_PRODUCT_PATTERN = ".*" + SPLIT_PRODUCT + ".*" + SPLIT_PRODUCT + ".*";
 
 	public static final String PRODUCT_NAME = "name";
 	public static final int PRODUCT_NAME_INDEX = 0;
