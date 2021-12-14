@@ -6,7 +6,7 @@ public class InputService {
     private final InputValidationService inputValidationService = new InputValidationService();
     private final ProductValidationService productValidationService = new ProductValidationService();
 
-    public int inputHolding() throws IllegalArgumentException {
+    public int inputCorrectHolding() {
         while (true) {
             String input = Console.readLine();
             if (inputValidationService.isValidateNumber(input)) {
@@ -15,7 +15,7 @@ public class InputService {
         }
     }
 
-    public String[] inputProducts() {
+    public String[] inputCorrectProducts() {
         while (true) {
             String input = Console.readLine();
             String[] parsedInput = input.split(";");
