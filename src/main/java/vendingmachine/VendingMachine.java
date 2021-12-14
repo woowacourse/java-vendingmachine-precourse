@@ -29,8 +29,7 @@ public class VendingMachine {
 		for (int i = start; i < end + 1; i++) {
 			li.add(start + i);
 		}
-		int num = Randoms.pickNumberInList(li);
-		return num;
+		return Randoms.pickNumberInList(li);
 	}
 
 	public void setInitProducts(ArrayList<Product> products) {

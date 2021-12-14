@@ -1,5 +1,9 @@
 package vendingmachine;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public enum Coin {
     COIN_500(500, 0),
     COIN_100(100, 0),
@@ -24,14 +28,5 @@ public enum Coin {
 
     public void increaseCount(int times) {
         this.count += times;
-    }
-
-    public void decreaseCount(int times) {
-        if (this.count <= times) {
-            this.count = 0;
-        }
-        if (this.count > times) {
-            this.count -= times;
-        }
     }
 }
