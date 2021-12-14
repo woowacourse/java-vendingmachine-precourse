@@ -29,14 +29,22 @@ public class VendingMachine {
 		validateBuyingProductName(buyingProductName);
 		Product product = products.getProductByName(buyingProductName);
 		product.decreaseAmount();
-		inputMoney = product.minusPrice(inputMoney);
+		inputMoney = product.payMoney(inputMoney);
 	}
 
 	private void validateBuyingProductName(String buyingProductName) {
 		Product product = products.getProductByName(buyingProductName);
+		isSmallInputMoney(product);
+		isOutOfStock(product);
+	}
+
+	private void isSmallInputMoney(Product product) {
 		if (product.getSmallerPrice(inputMoney) > inputMoney) {
 			throw new IllegalArgumentException(MSG_SMALL_INPUT_MONEY_ERROR);
 		}
+	}
+
+	private void isOutOfStock(Product product) {
 		if (!product.isInStock()) {
 			throw new IllegalArgumentException(MSG_OUT_OF_STOCK_ERROR);
 		}

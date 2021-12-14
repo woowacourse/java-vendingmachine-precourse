@@ -11,14 +11,14 @@ public class VendingMachineController {
 	private final VendingMachine vendingMachine;
 
 	public VendingMachineController() {
-		Coins coins = new Coins(getMoneyInMachine());
+		Coins coins = new Coins(getValidMoneyInMachine());
 		Output.coinsInMachine(coins);
 		Products products = ProductsController.getProducts();
-		int inputMoney = getInputMoney();
+		int inputMoney = getValidInputMoney();
 		vendingMachine = new VendingMachine(coins, products, inputMoney);
 	}
 
-	private static int getMoneyInMachine() {
+	private static int getValidMoneyInMachine() {
 		int moneyInMachine;
 		do {
 			moneyInMachine = Input.moneyInMachine();
@@ -26,28 +26,28 @@ public class VendingMachineController {
 		return moneyInMachine;
 	}
 
-	private static int getInputMoney() {
+	private static int getValidInputMoney() {
 		int inputMoney;
 		do {
 			inputMoney = Input.inputMoney();
 		} while (!Validator.isValidInputMoney(inputMoney));
 		return inputMoney;
 	}
-
-	private static String getBuyingProductName() {
-		return Input.buyingProductName();
-	}
-
+	
 	public void run() {
 		while (!vendingMachine.checkTermination()) {
-			try {
-				Output.inputMoney(vendingMachine.getInputMoney());
-				vendingMachine.buy(getBuyingProductName());
-			} catch (IllegalArgumentException e) {
-				System.out.println(e.getMessage());
-			}
+			runBuyingProduct();
 		}
 		Output.inputMoney(vendingMachine.getInputMoney());
 		Output.change(vendingMachine.giveChange());
+	}
+
+	private void runBuyingProduct() {
+		try {
+			Output.inputMoney(vendingMachine.getInputMoney());
+			vendingMachine.buy(Input.buyingProductName());
+		} catch (IllegalArgumentException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 }

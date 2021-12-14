@@ -23,20 +23,17 @@ public class Coins {
 	private void makeRandomNumberOfCoins() {
 		int tempMoneyInMachine = totalMoney;
 		while (tempMoneyInMachine != 0) {
-			int randomAmount = getRandomAmount(tempMoneyInMachine);
-			tempMoneyInMachine -= randomAmount;
-			if (randomAmount != 0) {
-				increaseCoin(randomAmount);
-			}
+			int randomAmount = Randoms.pickNumberInList(Coin.amountList());
+			tempMoneyInMachine = calculateTempMoneyInMachine(tempMoneyInMachine, randomAmount);
 		}
 	}
 
-	private int getRandomAmount(int tempMoneyInMachine) {
-		int randomAmount = Randoms.pickNumberInList(Coin.amountList());
+	private int calculateTempMoneyInMachine(int tempMoneyInMachine, int randomAmount) {
 		if (randomAmount <= tempMoneyInMachine) {
-			return randomAmount;
+			increaseCoin(randomAmount);
+			tempMoneyInMachine -= randomAmount;
 		}
-		return 0;
+		return tempMoneyInMachine;
 	}
 
 	private void increaseCoin(int amount) {
@@ -52,6 +49,7 @@ public class Coins {
 		Map<Coin, Integer> change = new TreeMap<>();
 		for (int amount : Coin.amountList()) {
 			Coin coin = Coin.getByAmount(amount);
+			// 줄 수 있는 amount원 동전의 최대 개수를 구함
 			int count = Math.min(money / amount, coins.get(coin));
 			change.put(coin, count);
 			money -= amount * count;
