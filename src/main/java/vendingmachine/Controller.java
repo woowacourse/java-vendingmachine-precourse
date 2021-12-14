@@ -30,4 +30,10 @@ public class Controller {
     public void setMoney() {
         vendingMachine.setMoney(view.setMoney());
     }
+
+    public void printCoins() {
+        System.out.println();
+        view.printCoins(this.coins);
+        System.out.println();
+    }
 }
