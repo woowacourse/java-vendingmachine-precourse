@@ -5,6 +5,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+
 	private static VendingMachine vendingMachine = null;
 
 	public static VendingMachine getVendingMachine(){
