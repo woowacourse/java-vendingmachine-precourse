@@ -16,7 +16,7 @@ public class Coins {
 	}
 
 	public void makeRandomCoins(int money) {
-		List<Integer> coinType = getCoinType();
+		List<Integer> coinType = getCoinTypeList();
 		setCoinsMap();
 		while (money != 0) {
 			int randomCoin = Randoms.pickNumberInList(coinType);
@@ -27,7 +27,7 @@ public class Coins {
 		}
 	}
 
-	private List<Integer> getCoinType() {
+	private List<Integer> getCoinTypeList() {
 		List<Integer> coinType = new ArrayList<>();
 		for (Coin coin : Coin.values()) {
 			coinType.add(coin.getAmount());

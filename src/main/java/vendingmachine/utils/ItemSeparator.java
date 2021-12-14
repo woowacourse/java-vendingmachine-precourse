@@ -17,14 +17,14 @@ public class ItemSeparator {
 		while (stringTokenizer.hasMoreTokens()) {
 			String itemValue = stringTokenizer.nextToken();
 			itemValue = itemValue.replaceAll(START_BRACKET, "").replaceAll(END_BRACKET, "");
-			Item item = separateItem(itemValue);
+			Item item = separateToItem(itemValue);
 			items.add(item);
 		}
 
 		return items;
 	}
 
-	private static Item separateItem(String itemValue) {
+	private static Item separateToItem(String itemValue) {
 		StringTokenizer stringTokenizer = new StringTokenizer(itemValue, ITEM_DELIMITER);
 
 		String itemName = stringTokenizer.nextToken().trim();

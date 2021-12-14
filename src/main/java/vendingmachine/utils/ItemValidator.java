@@ -35,7 +35,7 @@ public class ItemValidator {
 	private void validateItem(String item) {
 		item = item.replaceAll(START_BRACKET, "").replaceAll(END_BRACKET, "");
 		StringTokenizer stringTokenizer = new StringTokenizer(item, ITEM_DELIMITER);
-		checkProperties(stringTokenizer);
+		checkItemProperties(stringTokenizer);
 
 		String itemName = stringTokenizer.nextToken().trim();
 		String itemPrice = stringTokenizer.nextToken().trim();
@@ -46,7 +46,7 @@ public class ItemValidator {
 		checkItemQuantity(itemQuantity);
 	}
 
-	private void checkProperties(StringTokenizer stringTokenizer) {
+	private void checkItemProperties(StringTokenizer stringTokenizer) {
 		if (stringTokenizer.countTokens() != NUMBER_OF_ITEM_PROPERTIES) {
 			throw new IllegalArgumentException(ERROR_NUMBER_OF_PROPERTIES);
 		}
