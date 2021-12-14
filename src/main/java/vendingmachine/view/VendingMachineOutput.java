@@ -15,10 +15,12 @@ import vendingmachine.utils.VendingMachineMessage;
 public class VendingMachineOutput {
 
 	public void printCoinTypesAmount(final HashMap<Integer, Integer> coinTypesAmount) {
+		System.out.print("\n");
 		VendingMachineMessage.printCoinTypesAmount(coinTypesAmount);
 	}
 
 	public void printUserInputtedMoney(final int userInputtedMoney) {
+		System.out.print("\n");
 		VendingMachineMessage.printUserInputtedMoney(userInputtedMoney);
 	}
 

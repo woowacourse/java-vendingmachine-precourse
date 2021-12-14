@@ -49,12 +49,14 @@ public class VendingMachineInput {
 	}
 
 	public ArrayList<Product> inputProductsInformation() {
+		System.out.print("\n");
 		System.out.println(VendingMachineMessage.INPUT_PRODUCTS_INFORMATION);
 		final String productsInformation = Console.readLine();
 		return parseProductsInformation(productsInformation);
 	}
 
 	public int inputMoney() {
+		System.out.print("\n");
 		System.out.println(VendingMachineMessage.INPUT_MONEY);
 		final String inputtedMoney = Console.readLine();
 		return Integer.parseInt(inputtedMoney);
