@@ -3,7 +3,6 @@ package view;
 import java.util.Map;
 
 public class OutputDisplay {
-	private static final int FIRST_INDEX = 0;
 	private static final String PRICE = "원 - ";
 	private static final String COUNT = "개";
 	private static final String INSERTED_MONEY = "투입 금액: ";

@@ -24,7 +24,7 @@ public class MachineController {
 	private static void putChangeIntoMachine(VendingMachine vendingMachine) {
 		InputDisplay.askInputChange();
 		vendingMachine.makeCoinBox(InputController.inputChange());
-		OutputDisplay.showCoinsInCoinBox(vendingMachine.givePriceOfEachCoins(), vendingMachine.giveCountOfEachCoins());
+		OutputDisplay.showAllCoinInCoinBox(vendingMachine.giveAllOfEachCoins());
 	}
 
 	private static void prepareProductOnMachine(VendingMachine vendingMachine) {
@@ -47,7 +47,7 @@ public class MachineController {
 	private static void sellProductInMachine(VendingMachine vendingMachine) {
 		while (!vendingMachine.isAllProductSoldOut() && vendingMachine.hasEnoughMoneyToBuyProduct()) {
 			OutputDisplay.showNowInsertedMoney(vendingMachine.giveInsertedMoney());
-			InputDisplay.askInputProductToBuy();
+			InputDisplay.askInputProductNameToBuy();
 			try {
 				vendingMachine.sellProduct(InputController.inputProductNameToBuy());
 			} catch (IllegalArgumentException error) {
