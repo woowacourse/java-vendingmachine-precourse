@@ -12,7 +12,7 @@ public class InputView {
 	private static final String MONEY_TO_VENDING_MACHINE_INPUT_INSTRUCTION = "투입 금액을 입력해 주세요. ";
 	private static final String MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION = "자판기가 보유하고 있는 금액을 입력해 주세요. ";
 	private static final String INPUT_TO_SELECT_PRODUCT_INSTRUCTION = "구매할 상품명을 입력해 주세요. ";
-	private static final String PRODUCT_INPUT_INSTRUCTION = "상품명과 가격, 수량을 입력해 주세요.";
+	private static final String GOODS_INPUT_INSTRUCTION = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String ERROR_HEADER = "[ERROR] ";
 	private static final String INCLUDE_SPACE_ERROR = "입력에 공백이 있습니다. 공백없이 입력해주세요. ";
 	private static final String NOT_VALID_TYPE_MESSAGE = "올바른 숫자 형식이 아닙니다. 숫자를 입력해주세요. ";
@@ -30,7 +30,7 @@ public class InputView {
 
 	public List<Goods> inputProduct() {
 		try {
-			System.out.println(PRODUCT_INPUT_INSTRUCTION);
+			System.out.println(GOODS_INPUT_INSTRUCTION);
 			String inputProducts = Console.readLine();
 			return checkValidProducts(inputProducts);
 		} catch (IllegalArgumentException e) {
