@@ -1,7 +1,5 @@
 package vendingmachine.domain.coin;
 
-import java.util.stream.Stream;
-
 public enum Coin {
     COIN_500(500,"500원"),
     COIN_100(100, "100원"),
@@ -30,14 +28,6 @@ public enum Coin {
             totalAmount -= amount;
         }
         return totalAmount;
-    }
-
-    public static Stream<Coin> stream() {
-        return Stream.of(Coin.values());
-    }
-
-    public int getAmount() {
-        return amount;
     }
 
     @Override

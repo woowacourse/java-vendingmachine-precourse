@@ -97,7 +97,7 @@ public class VendingMachine {
     }
 
     private void returnChange() {
-        if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
+        if (isReturnChange()) {
             int totalChange = userMoney.reduceMoney();
             changeCoinCombination = new CoinCombination();
             CoinGenerator.calculatePossibleCoinCombination(changeCoinCombination, totalChange);
@@ -106,9 +106,6 @@ public class VendingMachine {
     }
 
     private boolean isReturnChange() {
-        if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
-            return true;
-        }
-        return false;
+        return userMoney.canNotBuyCheapestProduct(products) || products.isSoldOut();
     }
 }

@@ -17,8 +17,8 @@ public class UserMoney {
         money -= price;
     }
 
-    public boolean canBuyCheapestProduct(Products products) {
-        return money >= products.getCheapestPrice();
+    public boolean canNotBuyCheapestProduct(Products products) {
+        return money < products.getCheapestPrice();
     }
 
     public int reduceMoney() {

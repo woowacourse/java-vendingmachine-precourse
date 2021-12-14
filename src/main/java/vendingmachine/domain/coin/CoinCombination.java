@@ -4,9 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CoinCombination {
-    private final Map<Coin, Integer> coinCombination = new HashMap<>();
+    private final Map<Coin, Integer> coinCombination;
 
     public CoinCombination() {
+        coinCombination = new HashMap<>();
     }
 
     public void put(Coin coin, Integer count) {
