@@ -53,7 +53,7 @@ public class ProductValidator {
         }
     }
 
-    private void validateProductDivisionBySemicolon (String[] product) {
+    private void validateProductDivisionBySemicolon(String[] product) {
         for (String productInfo : product) {
             List<String> productInfoToList = Arrays.asList(productInfo.split(""));
             long bracketCount = productInfoToList.stream()
@@ -84,7 +84,7 @@ public class ProductValidator {
 
             validateProductName(productInfoList.get(Condition.INDEX_PRODUCT_NAME.getNumber()));
             validateProductCost(productInfoList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
-            validateLimitOfProductCost(productInfoList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
+            validateConditionOfProductCost(productInfoList.get(Condition.INDEX_PRODUCT_COST.getNumber()));
             validateProductAmount(productInfoList.get(Condition.INDEX_PRODUCT_AMOUNT.getNumber()));
 
             ProductRepository.getInstance().addProduct(productInfoList);
@@ -116,7 +116,7 @@ public class ProductValidator {
         }
     }
 
-    private void validateLimitOfProductCost(String productCost) {
+    private void validateConditionOfProductCost(String productCost) {
         if (Integer.parseInt(productCost) % Condition.DIVIDE_NUMBER.getNumber() != Condition.REMAINDER_0.getNumber()) {
             print(Error.PRODUCT_COST_DIVIDE_ERROR_MESSAGE.getError());
             throw new IllegalArgumentException();
