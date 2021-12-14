@@ -10,10 +10,8 @@ public class VendingMachineController {
 
 	public static VendingMachine getVendingMachine(){
 		if (vendingMachine == null){
-			synchronized (VendingMachine.class) {
 				vendingMachine = new VendingMachine();
 			}
-		}
 		return vendingMachine;
 	}
 
