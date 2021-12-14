@@ -15,23 +15,23 @@ public class InputItemValidator {
 	List<String> itemNames = new ArrayList<>();
 
 	public boolean validateItemList(List<String> itemList) {
-		for (String item : itemList) {
-			try {
-				validateItemInfo(item);
-			} catch (IllegalArgumentException e) {
-				itemNames.clear();
-				System.out.println(ErrorMsgConst.ERROR_MSG + e.getMessage());
-				return false;
-			}
+		try {
+			validateItems(itemList);
+		} catch (IllegalArgumentException e) {
+			itemNames.clear();
+			System.out.println(ErrorMsgConst.ERROR_MSG + e.getMessage());
+			return false;
 		}
 		return true;
 	}
 
-	private void validateItemInfo(String item) throws IllegalArgumentException {
-		validateByRegex(item);
-		String[] itemInfo = splitItem(item);
-		InputMoneyValidator.validateIsDivisibleBy10(Integer.parseInt(itemInfo[ITEM_PRICE_INDEX]));
-		validateNameDuplication(itemInfo[ITEM_NAME_INDEX]);
+	private void validateItems(List<String> itemList) throws IllegalArgumentException {
+		for (String item : itemList) {
+			validateByRegex(item);
+			String[] itemInfo = splitItem(item);
+			InputMoneyValidator.validateIsDivisibleBy10(Integer.parseInt(itemInfo[ITEM_PRICE_INDEX]));
+			validateNameDuplication(itemInfo[ITEM_NAME_INDEX]);
+		}
 	}
 
 	private String[] splitItem(String item) {
