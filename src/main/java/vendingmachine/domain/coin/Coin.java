@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain.coin;
 
 public enum Coin {
     COIN_500(500),
@@ -86,16 +86,11 @@ public enum Coin {
         return count > 0;
     }
 
-    // for test
-    public boolean isChangeCount(int targetCount) {
-        return countForChange == targetCount;
-    }
-
-    public String getCountForChangeMessage() {
+    public String toStringChange() {
         return amount + "원 - " + countForChange + "개";
     }
 
-    public String getCountForMessage() {
+    public String toStringRemaining() {
         return amount + "원 - " + count + "개";
     }
 }

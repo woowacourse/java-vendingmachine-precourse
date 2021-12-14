@@ -1,6 +1,6 @@
 package vendingmachine.util;
 
-import vendingmachine.Coin;
+import vendingmachine.domain.coin.Coin;
 
 import java.util.Set;
 

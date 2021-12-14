@@ -1,6 +1,5 @@
 package vendingmachine.domain.coin;
 
-import vendingmachine.Coin;
 import vendingmachine.domain.coin.util.CoinProvider;
 import vendingmachine.util.CoinChange;
 

@@ -1,6 +1,6 @@
 package vendingmachine.controller;
 
-import vendingmachine.Coin;
+import vendingmachine.domain.coin.Coin;
 import vendingmachine.domain.coin.util.CoinRandomProvider;
 import vendingmachine.domain.consumer.Consumer;
 import vendingmachine.domain.machine.VendingMachine;

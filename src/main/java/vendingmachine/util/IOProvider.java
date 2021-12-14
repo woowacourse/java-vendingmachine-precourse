@@ -1,54 +1,56 @@
 package vendingmachine.util;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.Coin;
+import vendingmachine.domain.coin.Coin;
 import vendingmachine.util.validator.BalanceValidation;
 import vendingmachine.util.validator.ProductsValidation;
 
-public class IOProvider {
-    private static final String ASK_MACHINE_BALANCE_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-    private static final String ASK_ALL_PRODUCT_INFO_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
-    private static final String ASK_CONSUMER_BALANCE_MESSAGE = "투입 금액을 입력해 주세요.";
-    private static final String ASK_PRODUCT_NAME_MESSAGE = "구매할 상품명을 입력해 주세요.";
+import static vendingmachine.util.finalstring.Message.*;
 
+public class IOProvider {
     public static int initVendingMachineBalance() {
-        while(true) {
-            print(ASK_MACHINE_BALANCE_MESSAGE);
+        while (true) {
+            printMessage(ASK_MACHINE_BALANCE_MESSAGE.getMessage());
             try {
-                String userInput = Console.readLine();
-                BalanceValidation.verifyBalanceInput(userInput);
-                return Integer.parseInt(userInput);
+                return inputVendingMachineBalance();
             } catch (IllegalArgumentException e) {
                 IOProvider.printMessage(e.getMessage());
                 continue;
             }
         }
+    }
+
+    private static int inputVendingMachineBalance() {
+        String userInput = Console.readLine();
+        BalanceValidation.verifyBalanceInput(userInput);
+
+        return Integer.parseInt(userInput);
     }
 
     public static String readAllProductInfo() {
-
-        while(true) {
-            print(ASK_ALL_PRODUCT_INFO_MESSAGE);
+        while (true) {
+            printMessage(ASK_ALL_PRODUCT_INFO_MESSAGE.getMessage());
             try {
-                String userInput = Console.readLine();
-                ProductsValidation.verifyProductsInput(userInput);
-
-                return userInput;
+                return inputAllProductInfo();
             } catch (IllegalArgumentException e) {
                 IOProvider.printMessage(e.getMessage());
                 continue;
             }
         }
+    }
+
+    private static String inputAllProductInfo() {
+        String userInput = Console.readLine();
+        ProductsValidation.verifyProductsInput(userInput);
+
+        return userInput;
     }
 
     public static int initConsumerBalance() {
-        while(true) {
-            print(ASK_CONSUMER_BALANCE_MESSAGE);
+        while (true) {
+            printMessage(ASK_CONSUMER_BALANCE_MESSAGE.getMessage());
             try {
-                String userInput = Console.readLine();
-                BalanceValidation.verifyBalanceInput(userInput);
-
-                return Integer.parseInt(userInput);
+                return inputConsumerBalance();
             } catch (IllegalArgumentException e) {
                 IOProvider.printMessage(e.getMessage());
                 continue;
@@ -56,27 +58,30 @@ public class IOProvider {
         }
     }
 
-    private static void print(String message) {
-        System.out.println(message);
+    private static int inputConsumerBalance() {
+        String userInput = Console.readLine();
+        BalanceValidation.verifyBalanceInput(userInput);
+
+        return Integer.parseInt(userInput);
     }
 
     public static String readProductName() {
-        while(true) {
-            print(ASK_PRODUCT_NAME_MESSAGE);
+        while (true) {
+            printMessage(ASK_PRODUCT_NAME_MESSAGE.getMessage());
             try {
-                String product = Console.readLine();
-                ProductsValidation.verifyProductInputIsNull(product);
-
-                return product;
+                return inputProductToBuy();
             } catch (IllegalArgumentException e) {
                 IOProvider.printMessage(e.getMessage());
                 continue;
             }
-         }
+        }
     }
 
-    public static void printChangeEachCoin(Coin coin) {
-        System.out.println(coin.getCountForChangeMessage());
+    private static String inputProductToBuy() {
+        String product = Console.readLine();
+        ProductsValidation.verifyProductInputIsNull(product);
+
+        return product;
     }
 
     public static void printMessage(String message) {
@@ -87,7 +92,11 @@ public class IOProvider {
         System.out.println();
     }
 
+    public static void printChangeEachCoin(Coin coin) {
+        System.out.println(coin.toStringChange());
+    }
+
     public static void printVendingMachineCoins(Coin coin) {
-        System.out.println(coin.getCountForMessage());
+        System.out.println(coin.toStringRemaining());
     }
 }

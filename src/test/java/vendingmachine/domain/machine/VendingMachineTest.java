@@ -2,7 +2,6 @@ package vendingmachine.domain.machine;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import vendingmachine.Coin;
 import vendingmachine.domain.consumer.Consumer;
 
 import java.util.Arrays;
