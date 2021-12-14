@@ -70,16 +70,4 @@ public class VendingMachine {
 				.collect(Collectors.toList()).get(ZERO);
 	}
 
-	public void print_coins() {
-		OutputView.print_line();
-		
-		List<Integer> list= Coin.getAmountList();
-		for (int i = 0; i < list.size(); i++) {
-			int coin = list.get(i);
-			int count = coins.getOrDefault(coin, ZERO);
-			OutputView.print_coins(coin, count);
-		}
-		OutputView.print_line();
-	}
-
 }
