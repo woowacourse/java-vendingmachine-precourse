@@ -24,10 +24,10 @@ public class ProductArgumentResolver {
 
     public List<Product> resolve() {
         return Arrays.stream(splitProducts(this.products))
-                .filter(this::isCoveredBrackets)
-                .map(this::splitProduct)
-                .map(this::newProduct)
-                .collect(Collectors.toList());
+            .filter(this::isCoveredBrackets)
+            .map(this::splitProduct)
+            .map(this::newProduct)
+            .collect(Collectors.toList());
     }
 
     private String[] splitProducts(String products) {
