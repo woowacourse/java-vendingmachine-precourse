@@ -33,7 +33,8 @@ public class VendingMachine {
 		this.products = products;
 	}
 
-	public void buyProducts(int inputCoin) {
+	public void buyProducts(int coin) {
+		int inputCoin = coin;
 		while (!isFinished(inputCoin)) {
 			System.out.println("\n투입 금액: " + inputCoin + "원");
 			System.out.println(Constants.productNameMsg);
@@ -41,6 +42,32 @@ public class VendingMachine {
 			inputCoin -= buy.getPrice();
 			decreaseProduct(buy);
 		}
+		System.out.println("\n투입 금액: " + inputCoin + "원");
+		ArrayList<Integer> returnCoin = calculateReturnCoin(inputCoin);
+		printReturnCoin(returnCoin);
+	}
+
+	public ArrayList<Integer> calculateReturnCoin(int inputCoin) {
+		ArrayList<Integer> coins = new ArrayList<>();
+		for (Coin c: Coin.values()) {
+			int quotient = inputCoin / c.getAmount();
+			// 남은 동전 개수가 더 적다면 남은 동전 개수만큼 잔돈 반환
+			if (quotient > c.getCount()) {
+				inputCoin -= c.getAmount() * c.getCount();
+				coins.add(c.getCount());
+				continue;
+			}
+			if (quotient <= c.getCount()) {
+				inputCoin -= c.getAmount() * quotient;
+				coins.add(quotient);
+				continue;
+			}
+		}
+		return coins;
+	}
+
+	public void printReturnCoin(ArrayList<Integer> returnCoin) {
+
 	}
 
 	public void decreaseProduct(Product buy) {
