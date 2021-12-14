@@ -78,6 +78,24 @@ public class Validation {
 
     }
 
+    private void checkItemNameOnlySpace(String item) {
+        String name = getItemElement(Text.REGEX_ITEM_NAME, item);
+
+        if (name.trim().length() == ZERO) {
+            throwException(ErrorMessage.ITEM_NAME_ONLY_SPACE);
+        }
+
+    }
+
+    private void checkItemNameSpacePosition(String item) {
+        String name = getItemElement(Text.REGEX_ITEM_NAME, item);
+
+        if (name.trim().length() != name.length()) {
+            throwException(ErrorMessage.ITEM_NAME_SPACE_POSITION);
+        }
+
+    }
+
     public void isValidBalanceInput(String balance) {
         checkEmptyInput(balance);
         checkBalanceOnlyNumber(balance);
