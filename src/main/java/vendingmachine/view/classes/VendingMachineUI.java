@@ -25,35 +25,21 @@ public class VendingMachineUI implements VendingMachine {
 	@Override
 	public void start() {
 		while (true) {
-			if (vendingMachineStatus == VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE) {
-				proceedInputVendingMachineHavingMoney();
-			}
-			if (vendingMachineStatus == VendingMachineStatus.SHOW_COINS_IN_VENDING_MACHINE) {
-				proceedShowCoinsInVendingMachine();
-			}
-			if (vendingMachineStatus == VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE) {
-				String goodsAndPricesString = inputUserGoodsAndPricesString();
-				GoodsStackerInterface goodsStackerInterface = new GoodsStacker();
-				boolean isValidGoodsAndPriceFormat = isValidGoodsAndPriceFormat(goodsAndPricesString,
-					goodsStackerInterface);
-				int isOneGoodsValidInputFormat = ONE_GOODS_VALID;
+			configureVendingMachine();
+			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_MONEY) {
+				System.out.println(PROMPT_USER_INSERT_MONEY);
+				String userInput = readLine();
+				boolean isValidInput = userInput.matches(NUMBER_REGEX);
 				try {
-					isOneGoodsValidInputFormat = goodsStackerInterface.alignGoods();
-					if (isOneGoodsValidInputFormat == PRICE_INVALID) {
-						throw new GoodsPriceInvalidException();
+					if (!isValidInput) {
+						throw new InvalidUserInputException();
 					}
-					if (isOneGoodsValidInputFormat == COUNT_INVALID) {
-						throw new GoodsCountInvalidException();
-					}
-				} catch (IllegalArgumentException exception) {
+				} catch (InvalidUserInputException exception) {
 
 				}
-				if (isValidGoodsAndPriceFormat && isOneGoodsValidInputFormat == ONE_GOODS_VALID) {
-					vendingMachineStatus = VendingMachineStatus.INPUT_USER_MONEY;
+				if (isValidInput) {
+					vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
 				}
-			}
-			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_MONEY) {
-				break;
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_USER_LEFT_MONEY) {
 
@@ -64,9 +50,55 @@ public class VendingMachineUI implements VendingMachine {
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
 				break;
 			}
-
 		}
 
+	}
+
+	private void configureVendingMachine() {
+		if (vendingMachineStatus == VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE) {
+			proceedInputVendingMachineHavingMoney();
+		}
+		if (vendingMachineStatus == VendingMachineStatus.SHOW_COINS_IN_VENDING_MACHINE) {
+			proceedShowCoinsInVendingMachine();
+		}
+		if (vendingMachineStatus == VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE) {
+			proceedInputGoodsAndPricesInVendingMachine();
+		}
+	}
+
+	private void proceedInputGoodsAndPricesInVendingMachine() {
+		String goodsAndPricesString = inputUserGoodsAndPricesString();
+		GoodsStackerInterface goodsStackerInterface = new GoodsStacker();
+		boolean isValidGoodsAndPriceFormat = isValidGoodsAndPriceFormat(goodsAndPricesString,
+			goodsStackerInterface);
+		int isOneGoodsValidInputFormat = getIsOneGoodsValidInputFormat(goodsStackerInterface);
+		checkIfPossibleToUserPhaseLevel(isValidGoodsAndPriceFormat, isOneGoodsValidInputFormat);
+	}
+
+	private void checkIfPossibleToUserPhaseLevel(boolean isValidGoodsAndPriceFormat, int isOneGoodsValidInputFormat) {
+		if (isValidGoodsAndPriceFormat && isOneGoodsValidInputFormat == ONE_GOODS_VALID) {
+			vendingMachineStatus = VendingMachineStatus.INPUT_USER_MONEY;
+		}
+	}
+
+	private int getIsOneGoodsValidInputFormat(GoodsStackerInterface goodsStackerInterface) {
+		int isOneGoodsValidInputFormat = ONE_GOODS_VALID;
+		try {
+			isOneGoodsValidInputFormat = goodsStackerInterface.alignGoods();
+			checkIfValidUserInputFormat(isOneGoodsValidInputFormat);
+		} catch (IllegalArgumentException exception) {
+
+		}
+		return isOneGoodsValidInputFormat;
+	}
+
+	private void checkIfValidUserInputFormat(int isOneGoodsValidInputFormat) {
+		if (isOneGoodsValidInputFormat == PRICE_INVALID) {
+			throw new GoodsPriceInvalidException();
+		}
+		if (isOneGoodsValidInputFormat == COUNT_INVALID) {
+			throw new GoodsCountInvalidException();
+		}
 	}
 
 	private boolean isValidGoodsAndPriceFormat(String goodsAndPricesString,
