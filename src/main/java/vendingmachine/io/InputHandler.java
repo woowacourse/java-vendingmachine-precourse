@@ -6,6 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.VendingMachine;
 import vendingmachine.data.VendingMachineData;
 import vendingmachine.io.validator.InputValidator;
 import vendingmachine.type.Product;
@@ -65,7 +66,7 @@ public class InputHandler {
 	}
 
 	private List<Product> getProductList() {
-		String[] productData = read().split(";");
+		String[] productData = read().split(VendingMachineData.PRODUCT_SEPARATOR);
 		InputValidator.validProductInformationForm(productData);
 		List<Product> productList = generateProductList(productData);
 		InputValidator.validNameNotDuplicate(productList);

@@ -21,4 +21,5 @@ public class VendingMachineData {
 	public static final String PRODUCT_SOLDOUT_ERROR = "[ERROR] 해당 상품은 매진되었습니다. 다른 상품을 골라주세요.";
 
 	public static final String PRODUCT_REGEX = "\\[([\\w 가-힣]+),(\\d+),(\\d+)\\]";
+	public static final String PRODUCT_SEPARATOR = ";";
 }
