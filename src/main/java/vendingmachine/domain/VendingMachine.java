@@ -48,7 +48,7 @@ public class VendingMachine {
 	}
 
 	public void calculateCoinCount(HashMap<Coin, Integer> change) {
-		for (Coin coin : Coin.getCoinArray()){
+		for (Coin coin : Coin.getCoinArray()) {
 			coinCount.put(coin, coinCount.get(coin) - change.get(coin));
 		}
 	}

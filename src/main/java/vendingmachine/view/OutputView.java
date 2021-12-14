@@ -9,7 +9,7 @@ public class OutputView {
 	public static final String ITEM_INFORMATION_ERROR = "[ERROR] 형식에 맞게 입력해 주세요.";
 	public static final String INPUT_MONEY_ERROR = "[ERROR] 투입 금액은 1이상의 숫자여야 합니다.";
 	public static final String NOT_EXISTING_ITEM_ERROR = "[ERROR] 존재하지 않는 상품 입니다.";
-	public final static String MONEY_EXCESS_ERROR = "[ERROR] 선택하신 상품의 금액이 투입 금액을 초과하였습니다.";
+	public static final String MONEY_EXCESS_ERROR = "[ERROR] 선택하신 상품의 금액이 투입 금액을 초과하였습니다.";
 
 	public static final String COIN_500_STRING = "500원";
 	public static final String COIN_100_STRING = "100원";
