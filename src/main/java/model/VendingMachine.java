@@ -20,12 +20,8 @@ public class VendingMachine {
 		insertedMoneyBox = new InsertedMoneyBox(insertedMoney);
 	}
 
-	public List<Integer> giveCountOfEachCoins() {
-		return coinBox.getCountOfEachCoins();
-	}
-
-	public List<Integer> givePriceOfEachCoins() {
-		return coinBox.getPriceOfEachCoins();
+	public Map<Integer, Integer> giveAllOfEachCoins() {
+		return coinBox.getAllOfEachCoins();
 	}
 
 	public int giveInsertedMoney() {
