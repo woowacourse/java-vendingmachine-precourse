@@ -29,6 +29,16 @@ class ProductTest {
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
+    @DisplayName("상품 입력이 잘못된 경우 예외를 던진다.")
+    @ParameterizedTest
+    @ValueSource(strings = {"[콜라,1500,20][사이다,1000,10]", "[콜라,1500,20,사이다,1000,10]", "[콜라]", "[콜라,1500]"})
+    void constructor_ValidateSplitStringLengthNot3_ExceptionThrown(String inputProduct) {
+        // given & when & then
+        assertThatThrownBy(() -> {
+            new Product(inputProduct);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
     @DisplayName("상품 이름이 비어있거나 공백인 경우 예외를 던진다.")
     @ParameterizedTest
     @ValueSource(strings = {"[,1500,20]", "[ ,1000,10]"})
