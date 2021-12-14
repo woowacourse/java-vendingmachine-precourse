@@ -8,13 +8,12 @@ public enum ErrorMessage {
 	ERROR_MONEY_IS_BLANK(ERROR_HEADER.text + "빈값이 아닌 금액을 입력하셔야 합니다."),
 
 	ERROR_PRODUCT_INFO_IS_NOT_VALID(
-		ERROR_HEADER.text + "잘못된 형식입니다. " + "\n상품명, 가격, 수량은 쉼표(,)로 개별 상품은 대괄호([])로 묶고 세미콜론(;)으로 구분하여 입력해야 합니다."
-			+ "\n입력 예시) [콜라,1500,20];[사이다,1000,10]"),
-
+		ERROR_HEADER.text + "잘못된 형식입니다. " + "\n입력 예시) [콜라,1500,20];[사이다,1000,10]"),
 	ERROR_PRODUCT_NAME_DUPLICATED(ERROR_HEADER.text + "서로 다른 상품명을 입력해야 합니다."),
 	ERROR_PRODUCT_DOES_NOT_EXIST(ERROR_HEADER.text + "자판기에 없는 상품입니다. 다른 상품을 입력해주세요."),
 	ERROR_PRODUCT_OUT_OF_STOCK(ERROR_HEADER.text + "상품 재고가 없습니다. 다른 상품을 입력해주세요."),
 	ERROR_CANNOT_BUY_PRODUCT_WITH_CURRENT_MONEY(ERROR_HEADER.text + "현재 가지고 있는 돈이 부족하여 구매할 수 없습니다. 다른 상품을 입력해주세요."),
+	ERROR_COIN_DOES_NOT_EXIST(ERROR_HEADER.text + "존재하지 않는 동전입니다."),
 	;
 
 	private final String text;

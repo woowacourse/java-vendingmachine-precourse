@@ -14,7 +14,6 @@ public class Changes {
 	private final static int ADD_ONE = 1;
 
 	private HashMap<Coin, Integer> coinMap = new HashMap<>();
-	// 변수명 바꾸기
 	private int totalAmount;
 
 	Changes(int totalAmount) {

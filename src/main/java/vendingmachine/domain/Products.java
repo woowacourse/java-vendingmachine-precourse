@@ -10,19 +10,13 @@ public class Products {
 	private static final int NAME_INDEX = 0;
 	private static final int PRICE_INDEX = 1;
 	private static final int QUANTITY_INDEX = 2;
-
 	private static final String PRODUCT_SPLIT_DELIMITER = ",";
-
 	private static final int OUT_OF_STOCK = 0;
 	private static final int NO_PRICE = 0;
 
-	private List<Product> productList = new ArrayList<>();
+	private final List<Product> productList = new ArrayList<>();
 
 	public Products() {
-	}
-
-	public List<Product> getProductList() {
-		return productList;
 	}
 
 	public int getMinPriceProduct() {

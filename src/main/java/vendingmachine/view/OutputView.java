@@ -38,9 +38,9 @@ public class OutputView {
 			if (entry.getValue() == ZERO_NUMBER) {
 				continue;
 			}
-				System.out.println(
-					entry.getKey().getAmount() + MONEY_UNIT_WON.getText() + DASH_DELIMITER.getText() + entry.getValue()
-						+ AMOUNT_UNIT.getText());
+			System.out.println(
+				entry.getKey().getAmount() + MONEY_UNIT_WON.getText() + DASH_DELIMITER.getText() + entry.getValue()
+					+ AMOUNT_UNIT.getText());
 		}
 	}
 

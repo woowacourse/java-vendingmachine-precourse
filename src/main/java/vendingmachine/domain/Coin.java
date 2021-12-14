@@ -4,6 +4,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import vendingmachine.utils.message.ErrorMessage;
+
 public enum Coin {
 	COIN_500(500),
 	COIN_100(100),
@@ -24,7 +26,7 @@ public enum Coin {
 		return Arrays.stream(Coin.values())
 			.filter(coin -> coin.getAmount() == number)
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException());
+			.orElseThrow(() -> new IllegalArgumentException(ErrorMessage.ERROR_COIN_DOES_NOT_EXIST.getText()));
 	}
 
 	public static List<Integer> getCoinList() {
