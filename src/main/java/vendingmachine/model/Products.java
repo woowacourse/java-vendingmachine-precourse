@@ -5,15 +5,15 @@ import java.util.List;
 import vendingmachine.util.ErrorMessageConstants;
 
 public class Products {
-	private final List<Product> products;
+	private final List<Product> productList;
 
 	public Products(List<Product> productList) {
-		this.products = productList;
+		this.productList = productList;
 	}
 
 	public int selectMinimumPrice() {
 		int minimumPrice = Integer.MAX_VALUE;
-		for (Product product : products) {
+		for (Product product : productList) {
 			if (product.exists()) {
 				minimumPrice = product.compareMinimumPrice(minimumPrice);
 			}
@@ -22,7 +22,7 @@ public class Products {
 	}
 
 	public Product findProduct(String inputPurchaseProduct) {
-		for (Product product : products) {
+		for (Product product : productList) {
 			if (product.equalProductName(inputPurchaseProduct)) {
 				return product;
 			}
@@ -31,7 +31,7 @@ public class Products {
 	}
 
 	public boolean exists() {
-		for (Product product : products) {
+		for (Product product : productList) {
 			if (product.exists()) {
 				return true;
 			}
