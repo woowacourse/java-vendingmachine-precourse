@@ -4,12 +4,12 @@ import static vendingmachine.resource.MessageResource.*;
 
 import vendingmachine.utils.NumericUtils;
 
-public class VendingMachine {
+public class Money {
 	private static final int MIN_PRICE = 0;
 
 	private int currentAmount;
 
-	public VendingMachine(String currentAmount) {
+	public Money(String currentAmount) {
 		this.currentAmount = NumericUtils.parsePositiveInt(currentAmount);
 	}
 

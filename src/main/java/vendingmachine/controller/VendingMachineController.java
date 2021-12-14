@@ -2,41 +2,41 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Changes;
 import vendingmachine.domain.Products;
-import vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.Money;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 	private final Products products;
 	private final Changes changes;
-	private VendingMachine vendingMachine;
+	private Money money;
 
 	public VendingMachineController() {
 		this.changes = initChanges();
 		OutputView.printVendingmachineChanges(changes);
 		this.products = initProducts();
-		this.vendingMachine = initVendingMachine();
+		this.money = initVendingMachine();
 	}
 
 	public void run() {
 		while (!products.hasNotProductsCount() &&
-			products.canBuyCurrentAmount(vendingMachine.getCurrentAmount())) {
-			OutputView.printCurrentMoney(vendingMachine.getCurrentAmount());
+			products.canBuyCurrentAmount(money.getCurrentAmount())) {
+			OutputView.printCurrentMoney(money.getCurrentAmount());
 			initBuyProduct();
 		}
-		if (vendingMachine.getCurrentAmount() == 0) {
-			OutputView.printCurrentMoneyZero(vendingMachine.getCurrentAmount());
+		if (money.getCurrentAmount() == 0) {
+			OutputView.printCurrentMoneyZero(money.getCurrentAmount());
 		}
 
-		if (vendingMachine.getCurrentAmount() != 0) {
-			OutputView.printCurrentMoney(vendingMachine.getCurrentAmount());
-			OutputView.printChanges(changes.giveChanges(vendingMachine.getCurrentAmount()));
+		if (money.getCurrentAmount() != 0) {
+			OutputView.printCurrentMoney(money.getCurrentAmount());
+			OutputView.printChanges(changes.giveChanges(money.getCurrentAmount()));
 		}
 	}
 
 	private void initBuyProduct() {
 		try {
-			products.buyProduct(InputView.inputBuyProduct(), vendingMachine);
+			products.buyProduct(InputView.inputBuyProduct(), money);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			initBuyProduct();
@@ -63,10 +63,10 @@ public class VendingMachineController {
 		}
 	}
 
-	private VendingMachine initVendingMachine() {
+	private Money initVendingMachine() {
 		try {
 			String inputAmount = InputView.inputAmount();
-			return new VendingMachine(inputAmount);
+			return new Money(inputAmount);
 		} catch (IllegalArgumentException e) {
 			System.out.println(e.getMessage());
 			return initVendingMachine();

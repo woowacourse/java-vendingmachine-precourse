@@ -19,9 +19,9 @@ public class Products {
 		this.products = createProducts(inputProducts);
 	}
 
-	public void buyProduct(String productName, VendingMachine vendingMachine) {
+	public void buyProduct(String productName, Money money) {
 		Product product = findByProductName(productName);
-		vendingMachine.deduct(product.getPrice());
+		money.deduct(product.getPrice());
 		product.reduceCount();
 	}
 
