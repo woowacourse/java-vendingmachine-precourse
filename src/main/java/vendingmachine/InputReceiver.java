@@ -7,7 +7,7 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputReceiver {
-	public static int getNumber(MoneyType moneyType){
+	public static int getNumber(MoneyType moneyType) {
 		String number;
 
 		VendingMachinePrinter.printGetAmountMessage(moneyType);
@@ -24,7 +24,7 @@ public class InputReceiver {
 		}
 	}
 
-	public static String getProductName(VendingMachine vendingMachine){
+	public static String getProductName(VendingMachine vendingMachine) {
 		String productName;
 
 		VendingMachinePrinter.printGetProductNameMessage(vendingMachine.getInputAmount());
@@ -43,7 +43,7 @@ public class InputReceiver {
 		}
 	}
 
-	public static HashMap<String, Product> getProductInfo(){
+	public static HashMap<String, Product> getProductInfo() {
 		String productInfo;
 
 		VendingMachinePrinter.printGetProductInfoMessage();
@@ -55,27 +55,27 @@ public class InputReceiver {
 				return parseProductInfo(parseEachProduct(productInfo));
 			} catch (NumberFormatException e) {
 				throw new IllegalArgumentException("[ERROR] 가격과 수량은 숫자여야 합니다.");
-			}catch (IllegalArgumentException e) {
+			} catch (IllegalArgumentException e) {
 				System.out.println(e.getMessage());
 				VendingMachinePrinter.printGetProductInfoMessage();
 			}
 		}
 	}
 
-	public static ArrayList<String> parseEachProduct(String productInfo){
+	public static ArrayList<String> parseEachProduct(String productInfo) {
 		String[] tempProducts = productInfo.split(";");
 		ArrayList<String> products = new ArrayList<String>(Arrays.asList(tempProducts));
 
 		return products;
 	}
 
-	public static HashMap<String, Product> parseProductInfo(ArrayList<String> product){
+	public static HashMap<String, Product> parseProductInfo(ArrayList<String> product) {
 		HashMap<String, Product> products = new HashMap<>();
 
-		for(String temp : product){
+		for (String temp : product) {
 			String[] tempArray = temp.split(",");
-			tempArray[0] = tempArray[0].replace("[","");
-			tempArray[2] = tempArray[2].replace("]","");
+			tempArray[0] = tempArray[0].replace("[", "");
+			tempArray[2] = tempArray[2].replace("]", "");
 
 			int price = Integer.parseInt(tempArray[1]);
 			InputValidator.validatePrice(price);
