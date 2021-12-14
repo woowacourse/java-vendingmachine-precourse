@@ -27,7 +27,7 @@ public class Customer {
         if(balance < amount) {
             throw new NotEnoughMoneyException(MoneyErrorMessage.NOT_ENOUGH_BALANCE);
         }
-        balance += amount;
+        balance -= amount;
     }
 
     public void hasPurchaseAmount(int purchaseAmount) {
