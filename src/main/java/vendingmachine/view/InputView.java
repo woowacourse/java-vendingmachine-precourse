@@ -1,8 +1,11 @@
 package vendingmachine.view;
 
+import static vendingmachine.util.validator.Validator.*;
+
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.model.Item.Items;
 import vendingmachine.model.buy.BuyItemName;
+import vendingmachine.model.money.Money;
 import vendingmachine.model.money.MoneyBill;
 
 public class InputView {
@@ -13,18 +16,14 @@ public class InputView {
     public static final String INPUT_REQUEST_MONEY = "투입 금액을 입력해 주세요.";
     public static final String INPUT_REQUEST_ITEM_NAME = "구매할 상품명을 입력해 주세요.";
 
-    public static String getInitialMoney() {
-        // try {
-        //     System.out.println(INPUT_REQUEST_INITIAL_ASSET);
-        //     // String input = Console.readLine();
-        //     // return new Money(Integer.parseInt(Console.readLine()));
-        //     return Console.readLine();
-        // } catch (Exception e) {
-        //     System.out.println(e.getMessage());
-        //     return getInitialMoney();
-        // }
-        System.out.println(INPUT_REQUEST_INITIAL_ASSET);
-        return Console.readLine();
+    public static Money getInitialMoney() {
+        try {
+            System.out.println(INPUT_REQUEST_INITIAL_ASSET);
+            return new Money(getIntegerInput());
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getInitialMoney();
+        }
     }
 
     public static Items getInitialItems() {
@@ -39,9 +38,8 @@ public class InputView {
 
     public static MoneyBill getInputMoney() {
         try {
-            System.out.println("tef222");
             System.out.println(INPUT_REQUEST_MONEY);
-            return new MoneyBill(Integer.parseInt(Console.readLine()));
+            return new MoneyBill(getIntegerInput());
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getInputMoney();
@@ -52,9 +50,15 @@ public class InputView {
         try {
             System.out.println(INPUT_REQUEST_ITEM_NAME);
             return new BuyItemName(Console.readLine());
-        } catch (Exception e) {
+        } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getBuyItemName();
         }
+    }
+
+    private static int getIntegerInput() {
+        String input = Console.readLine();
+        validateInteger(input);
+        return Integer.parseInt(input);
     }
 }
