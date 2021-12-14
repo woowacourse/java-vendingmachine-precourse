@@ -15,43 +15,13 @@ public class InputValidator {
 		return inputValidator;
 	}
 
-	public boolean checkInitialAmountInputExceptions(String initialAmount) {
-		try {
-			checkAllInitialAmountInputExceptions(initialAmount);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	public boolean checkInitialItemsInputExceptions(String items) {
-		try {
-			checkAllInitialItemsInputExceptions(items);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	public boolean checkInputAmountInputExceptions(String inputAmount) {
-		try {
-			checkAllInputAmountInputExceptions(inputAmount);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	private void checkAllInitialAmountInputExceptions(String initialAmount) {
+	public void checkAllInitialAmountInputExceptions(String initialAmount) {
 		checkEmptyInputExceptions(initialAmount);
 		checkNotNaturalNumberExceptions(initialAmount);
 		checkNotMultiplicationOfMinimumCoinTypeExceptions(initialAmount);
 	}
 
-	private void checkAllInitialItemsInputExceptions(String items) {
+	public void checkAllInitialItemsInputExceptions(String items) {
 		checkEmptyInputExceptions(items);
 		checkNotSatisfiedInputFormatExceptions(items);
 		checkArgumentLackExceptions(items);
@@ -61,7 +31,7 @@ public class InputValidator {
 		checkQuantityNotNaturalNumberExceptions(items);
 	}
 
-	private void checkAllInputAmountInputExceptions(String inputAmount) {
+	public void checkAllInputAmountInputExceptions(String inputAmount) {
 		checkEmptyInputExceptions(inputAmount);
 		checkInputAmountNotNaturalNumberExceptions(inputAmount);
 		checkInputAmountNotMultiplicationOfMinimumCoinTypeExceptions(inputAmount);

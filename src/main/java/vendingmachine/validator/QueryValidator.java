@@ -14,17 +14,7 @@ public class QueryValidator {
 		return queryValidator;
 	}
 
-	public boolean checkBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList, int price) {
-		try {
-			checkAllBuyItemErrorExceptions(itemName, remainingMoney, nameList, price);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
-		return true;
-	}
-
-	private void checkAllBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList, int price) {
+	public void checkAllBuyItemErrorExceptions(String itemName, int remainingMoney, List<String> nameList, int price) {
 		checkDontExistingItemExceptions(itemName, nameList);
 		checkNotEnoughMoneyExceptions(remainingMoney, price);
 	}

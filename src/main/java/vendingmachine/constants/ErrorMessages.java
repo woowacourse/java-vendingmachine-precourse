@@ -15,5 +15,4 @@ public final class ErrorMessages {
 	public static final String DONT_EXISTING_ITEM_ERROR_MESSAGE = "[ERROR] 존재하지 않는 상품명입니다.";
 	public static final String DONT_HAVE_ENOUGH_MONEY_ERROR_MESSAGE = "[ERROR] 돈이 부족합니다.";
 	public static final String CANT_FIND_MINIMUM_PRICE_ITEM_ERROR_MESSAGE = "[ERROR] 최소 가격의 상품을 찾을 수 없습니다.";
-	public static final String CANT_FIND_PRICE_BY_ITEM_NAME_ERROR_MESSAGE = "[ERROR] 해당 상품의 가격을 알 수 없습니다.";
 }

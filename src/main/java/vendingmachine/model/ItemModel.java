@@ -4,7 +4,6 @@ import static vendingmachine.constants.ErrorMessages.*;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import vendingmachine.resource.ItemStorage;
@@ -36,7 +35,7 @@ public class ItemModel {
 		return itemStorage.getPriceList().stream()
 				.mapToInt(Integer::intValue)
 				.min()
-				.orElseThrow(() -> new NoSuchElementException(CANT_FIND_MINIMUM_PRICE_ITEM_ERROR_MESSAGE));
+				.orElseThrow(() -> new IllegalArgumentException(CANT_FIND_MINIMUM_PRICE_ITEM_ERROR_MESSAGE));
 	}
 
 	public boolean hasExtraQuantity() {
@@ -50,7 +49,8 @@ public class ItemModel {
 	}
 
 	public int getPriceByName(String name) {
-		return itemStorage.getPriceByName(name);
+		return itemStorage.getPriceByName(name)
+				.orElseThrow(() -> new IllegalArgumentException(DONT_EXISTING_ITEM_ERROR_MESSAGE));
 	}
 
 	public List<String> getNameList() {

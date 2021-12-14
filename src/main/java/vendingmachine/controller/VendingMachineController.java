@@ -45,8 +45,18 @@ public class VendingMachineController {
 		do {
 			vendingMachineOutputView.printAmountInputMessage();
 			amount = Console.readLine();
-		} while (!inputValidator.checkInitialAmountInputExceptions(amount));
+		} while (!canUseInputAsInitialAmount(amount));
 		return amount;
+	}
+
+	public boolean canUseInputAsInitialAmount(String initialAmount) {
+		try {
+			inputValidator.checkAllInitialAmountInputExceptions(initialAmount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	private void showCoinsVendingMachineHave() {
@@ -59,8 +69,18 @@ public class VendingMachineController {
 		do {
 			vendingMachineOutputView.printInitialItemsInputMessage();
 			items = Console.readLine();
-		} while (!inputValidator.checkInitialItemsInputExceptions(items));
+		} while (!canUseInputAsItems(items));
 		return items;
+	}
+
+	public boolean canUseInputAsItems(String items) {
+		try {
+			inputValidator.checkAllInitialItemsInputExceptions(items);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	private String getInputAmount() {
@@ -68,8 +88,18 @@ public class VendingMachineController {
 		do {
 			vendingMachineOutputView.printUserInputAmountInputMessage();
 			inputAmount = Console.readLine();
-		} while (!inputValidator.checkInputAmountInputExceptions(inputAmount));
+		} while (!canUseInputAsAmount(inputAmount));
 		return inputAmount;
+	}
+
+	private boolean canUseInputAsAmount(String inputAmount) {
+		try {
+			inputValidator.checkAllInputAmountInputExceptions(inputAmount);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return false;
+		}
+		return true;
 	}
 
 	private void buyItems() {
@@ -86,8 +116,12 @@ public class VendingMachineController {
 		vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
 		vendingMachineOutputView.printPurchasingInputMessage();
 		String item = Console.readLine();
-		if (!queryValidator.checkBuyItemErrorExceptions(item, userModel.getRemainingMoney(), itemModel.getNameList(),
-				itemModel.getPriceByName(item))) {
+		try {
+			queryValidator.checkAllBuyItemErrorExceptions(item, userModel.getRemainingMoney(), itemModel.getNameList(),
+					itemModel.getPriceByName(item));
+
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			return;
 		}
 		itemModel.sellItem(item);
