@@ -37,17 +37,26 @@ public class VendingMachine {
 		while (!isFinished(inputCoin)) {
 			System.out.println("\n투입 금액: " + inputCoin + "원");
 			System.out.println(Constants.productNameMsg);
-			String name = getProductName();
-
+			Product buy = getProduct();
+			inputCoin -= buy.getPrice();
+			decreaseProduct(buy);
 		}
 	}
 
-	public String getProductName() {
+	public void decreaseProduct(Product buy) {
+		for (Product p: this.products) {
+			if (p.getName().equals(buy.getName())) {
+				p.decreaseCount();
+				return;
+			}
+		}
+	}
+
+	public Product getProduct() {
 		while (true) {
 			try {
 				String input = camp.nextstep.edu.missionutils.Console.readLine();
-				checkProductExist(input);
-				return input;
+				return checkProductExist(input);
 			} catch (IllegalArgumentException exception) {
 				System.out.println(exception.getMessage());
 				continue;
@@ -55,10 +64,10 @@ public class VendingMachine {
 		}
 	}
 
-	public void checkProductExist(String input) {
+	public Product checkProductExist(String input) {
 		for (Product p: this.products) {
 			if (p.getName().equals(input)) {
-				return;
+				return p;
 			}
 		}
 		throw new IllegalArgumentException("[ERROR] 유효한 상품 이름을 입력하세요.");

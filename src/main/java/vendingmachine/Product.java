@@ -23,6 +23,10 @@ public class Product {
 		return this.count;
 	}
 
+	public void decreaseCount() {
+		this.count--;
+	}
+
 	public String toString() {
 		return this.price + " " + this.name + " " + this.count;
 	}
