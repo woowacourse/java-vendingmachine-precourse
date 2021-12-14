@@ -128,6 +128,7 @@
     * domain
         * enumclass
           * Coin.java
+          * ProductEnum.java  
         * Product.java
         * VendingMachine.java
     * exception
