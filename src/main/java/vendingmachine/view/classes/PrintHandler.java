@@ -10,6 +10,7 @@ import vendingmachine.model.Coin;
 
 public class PrintHandler {
 	private List<Coin> coinList = new ArrayList<>();
+
 	public void printCoinStatus(HashMap<Integer, Integer> coinMap) {
 		initCoinList();
 		String statusScript = makeStatusScriptByMap(coinMap);
@@ -18,7 +19,7 @@ public class PrintHandler {
 
 	private String makeStatusScriptByMap(HashMap<Integer, Integer> coinMap) {
 		String statusScript = "";
-		for (Coin coin: coinList) {
+		for (Coin coin : coinList) {
 			statusScript = getOneLineOfStatusScript(coinMap, statusScript, coin);
 		}
 		return statusScript;

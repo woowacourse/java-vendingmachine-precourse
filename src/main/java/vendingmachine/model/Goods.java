@@ -24,6 +24,6 @@ public class Goods {
 	}
 
 	public void buyOne() {
-		this.count --;
+		this.count--;
 	}
 }

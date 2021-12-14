@@ -8,7 +8,7 @@ public class VendingMachineStorage {
 	private List<Goods> goodsList = new ArrayList<>();
 	private HashMap<Integer, Integer> coinMap;
 	private int userInputMoney = 0;
-	private int minAmount = 987654321;
+	private int minAmount = Integer.MAX_VALUE;
 
 	public List<Goods> getGoodsList() {
 		return goodsList;
@@ -16,10 +16,10 @@ public class VendingMachineStorage {
 
 	public void setGoodsList(List<Goods> goodsList) {
 		this.goodsList = goodsList;
-		setminAmount(goodsList);
+		setMinAmount(goodsList);
 	}
 
-	private void setminAmount(List<Goods> goodsList) {
+	private void setMinAmount(List<Goods> goodsList) {
 		for (Goods goods : goodsList) {
 			if (goods.getPrice() < minAmount) {
 				minAmount = goods.getPrice();
@@ -44,8 +44,8 @@ public class VendingMachineStorage {
 	}
 
 	public boolean haveName(String userInputGoods) {
-		for (Goods goods: goodsList) {
-			if(goods.getName().equals(userInputGoods)) {
+		for (Goods goods : goodsList) {
+			if (goods.getName().equals(userInputGoods)) {
 				return true;
 			}
 		}

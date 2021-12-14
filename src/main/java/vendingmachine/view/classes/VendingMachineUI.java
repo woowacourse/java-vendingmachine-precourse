@@ -89,6 +89,7 @@ public class VendingMachineUI implements VendingMachine {
 			}
 		}
 	}
+
 	private void configureVendingMachine() {
 		if (vendingMachineStatus == VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE) {
 			proceedInputVendingMachineHavingMoney();
@@ -159,7 +160,7 @@ public class VendingMachineUI implements VendingMachine {
 	private void proceedShowCoinsInVendingMachine() {
 		System.out.println(PROMPT_VENDING_MACHINE_HAVE_COINS);
 		CoinGeneratorInterface coinGeneratorInterface = new CoinGenerator();
-		HashMap<Integer, Integer>tmpCoinMap = coinGeneratorInterface.getRandomCoins(moneyInVendingMachine);
+		HashMap<Integer, Integer> tmpCoinMap = coinGeneratorInterface.getRandomCoins(moneyInVendingMachine);
 		printHandler.printCoinStatus(tmpCoinMap);
 		goodsStackerInterface.setCoinMap(tmpCoinMap);
 		vendingMachineStatus = VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE;
