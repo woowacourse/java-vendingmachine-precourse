@@ -39,7 +39,6 @@ public class RandomCoinMaker {
                 coinMap.put(coin, coinMap.get(coin) + Condition.ONE_COIN.getNumber());
             }
         }
-
         return coinMap;
     }
 }
