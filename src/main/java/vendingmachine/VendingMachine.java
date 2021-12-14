@@ -1,11 +1,14 @@
 package vendingmachine;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
 public class VendingMachine {
-    private Coins coins;
+    private static final int EMPTY_VALUE = 0;
+
+    private final Coins coins;
     private final List<Product> products = new ArrayList<>();
 
     public VendingMachine(Coins coins) {
@@ -38,7 +41,25 @@ public class VendingMachine {
         return false;
     }
 
-    public Map<Coin, Integer>  getChangeMoney(int holdingAmount) {
-        return this.coins.countWithMinimumCoins(holdingAmount);
+    public Map<Coin, Integer> getChangeMoney(int holdingAmount) {
+        Map<Coin, Integer> changeMoney = new EnumMap<>(Coin.class);
+        for (Coin coin : Coin.values()) {
+            holdingAmount = countCoin(holdingAmount, changeMoney, coin);
+        }
+        return changeMoney;
+    }
+
+    private int countCoin(int holdingAmount, Map<Coin, Integer> changeMoney, Coin coin) {
+        int count = 0;
+        while (holdingAmount > EMPTY_VALUE) {
+            int amount = coins.takeOut(coin);
+            if (amount == EMPTY_VALUE) {
+                break;
+            }
+            count += 1;
+            holdingAmount -= amount;
+            changeMoney.put(coin, count);
+        }
+        return holdingAmount;
     }
 }

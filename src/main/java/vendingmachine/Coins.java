@@ -22,7 +22,7 @@ public class Coins {
     }
 
     private void validateDivisible(int money) {
-        if (money % DIVISIBLE_VALUE != 0) {
+        if (money % DIVISIBLE_VALUE != NONE) {
             throw ErrorMessage.NOT_DIVISIBLE_VALUE.getException();
         }
     }
@@ -66,32 +66,15 @@ public class Coins {
         return coins;
     }
 
-    public Map<Coin, Integer> countWithMinimumCoins(int holdingAmount) {
-        Map<Coin, Integer> changeMoney = new EnumMap<>(Coin.class);
-        for (Coin coin : Coin.values()) {
-            holdingAmount = getHoldingAmount(holdingAmount, changeMoney, coin);
+    public int takeOut(Coin coin) {
+        if (this.contains(coin)) {
+            coins.put(coin, coins.get(coin) - 1);
+            return coin.getAmount();
         }
-        return changeMoney;
+        return NONE;
     }
 
-    private int getHoldingAmount(int holdingAmount, Map<Coin, Integer> changeMoney, Coin coin) {
-        int amount = coin.getAmount();
-        int quantity = coins.get(coin);
-        int count = 0;
-        while (holdingAmount > NONE) {
-            if (amount <= holdingAmount && quantity > NONE) {
-                holdingAmount -= amount;
-                count += 1;
-                quantity -= 1;
-            }
-            if (quantity <= NONE || amount > holdingAmount) {
-                break;
-            }
-        }
-        if (count != 0) {
-            changeMoney.put(coin, count);
-        }
-        return holdingAmount;
+    public boolean contains(Coin coin) {
+        return coins.get(coin) > NONE;
     }
-
 }
