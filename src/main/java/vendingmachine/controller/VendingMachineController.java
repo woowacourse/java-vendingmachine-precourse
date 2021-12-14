@@ -9,7 +9,7 @@ import vendingmachine.service.CustomerMoneyService;
 import vendingmachine.service.MenuService;
 import vendingmachine.view.OutputView;
 
-import java.util.HashMap;
+import java.util.TreeMap;
 
 public class VendingMachineController {
 
@@ -51,8 +51,8 @@ public class VendingMachineController {
         OutputView.printCoinChanges(this.calculateCoinChanges());
     }
 
-    private HashMap<Coin, Integer> calculateCoinChanges() {
-        HashMap<Coin, Integer> coinChanges = new HashMap<>();
+    private TreeMap<Coin, Integer> calculateCoinChanges() {
+        TreeMap<Coin, Integer> coinChanges = new TreeMap<>();
         for (Coin coin : Coin.getCoinsDesc()) {
             if (coinService.getCoins().get(coin) == ZERO_COINS) continue;
             if (customerMoneyService.getCustomerMoneyLeft() < coin.getAmount()) continue;

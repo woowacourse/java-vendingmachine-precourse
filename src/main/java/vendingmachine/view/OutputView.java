@@ -6,6 +6,7 @@ import static vendingmachine.constants.FormatConstants.*;
 import vendingmachine.domain.enums.Coin;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 public class OutputView {
 
@@ -26,7 +27,7 @@ public class OutputView {
         System.out.println(MONEY_INPUT + moneyLeft + WON);
     }
 
-    public static void printCoinChanges(HashMap<Coin, Integer> coinChanges) {
+    public static void printCoinChanges(TreeMap<Coin, Integer> coinChanges) {
         StringBuilder sb = new StringBuilder();
         sb.append(CHANGES).append(BLANK_LINE);
 
