@@ -46,7 +46,7 @@ public class VendingMachineController {
         do {
             outputView.printPurChasingCost(purchasingCost);
 
-            String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine);
+            String choosePurchasingProductName = choosePurchasingProduct(products, vendingMachine, purchasingCost);
             purchasingCost = vendingMachine.sellProduct(products, choosePurchasingProductName, purchasingCost);
         } while (vendingMachine.isContinuePurchasing(products, cheapestProductPrice, purchasingCost));
 
@@ -65,17 +65,18 @@ public class VendingMachineController {
         return cheapestProductPrice;
     }
 
-    protected String choosePurchasingProduct(final List<Product> products, VendingMachine vendingMachine) {
+    protected String choosePurchasingProduct(final List<Product> products, VendingMachine vendingMachine, int purchasingCost) {
         try {
             String purchasingProductName = inputView.inputPurchasingProductName(InputOutputMessages.INPUT_PURCHASING_PRODUCT_NAME.getInputMessage());
             vendingMachine.validatePurchasingProductNameOnMachine(products, purchasingProductName);
             vendingMachine.validatePurchasingProductSoldOut(products, purchasingProductName);
+            vendingMachine.validateShortMoney(products, purchasingProductName, purchasingCost);
 
             return purchasingProductName;
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
 
-            return choosePurchasingProduct(products, vendingMachine);
+            return choosePurchasingProduct(products, vendingMachine, purchasingCost);
         }
     }
 

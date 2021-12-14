@@ -185,4 +185,18 @@ public class VendingMachine {
         return coinCount;
     }
 
+    public void validateShortMoney(final List<Product> products, final String purchasingProductName, final int purchasingCost) {
+        boolean checkShortMoney = false;
+
+        for (Product product : products) {
+            if (product.getName().compareProductName(purchasingProductName)) {
+                checkShortMoney = product.getPrice().isShortMoney(purchasingCost);
+            }
+        }
+
+        if (!checkShortMoney) {
+            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_SHORT_MONEY.getErrorMessage());
+        }
+    }
+
 }

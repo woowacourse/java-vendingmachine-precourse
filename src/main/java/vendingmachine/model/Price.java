@@ -34,4 +34,8 @@ public class Price {
         return this.price < cheapestProductPrice;
     }
 
+    public boolean isShortMoney(final int purchasingCost) {
+        return (purchasingCost - this.price) >= 0;
+    }
+
 }

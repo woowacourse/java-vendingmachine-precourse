@@ -11,6 +11,7 @@ public enum ExceptionMessages {
     ERROR_MESSAGE_PRODUCT_PRICE_CONDITION("[ERROR] 상품가격은 100원부터 시작하며, 10원으로 나누어 떨어져야 합니다."),
     ERROR_MESSAGE_PURCHASING_PRODUCT_NAME_CONDITION("[ERROR] 구입할 상품은 상품 목록에 있는 값만 입력 가능합니다."),
     ERROR_MESSAGE_PURCHASING_PRODUCT_SOLD_OUT("[ERROR] 구입할 상품이 품절되었습니다."),
+    ERROR_MESSAGE_SHORT_MONEY("[ERROR] 돈이 부족하여 해당 상품을 구입할 수 없습니다."),
     ERROR_MESSAGE_PRODUCT_NAME_KOREAN("[ERROR] 상품이름은 한글로 입력되어야 합니다.");
 
     private final String errorMessage;
