@@ -8,7 +8,7 @@ public class NumericUtils {
 
 	public static int parsePositiveInt(String str) {
 		try {
-			int result = Integer.parseInt(str);
+			int result = Integer.parseInt(str.trim());
 
 			if (result <= 0) {
 				throw new IllegalArgumentException(ERROR_NUMBER_IS_NOT_POSITIVE_INT);
