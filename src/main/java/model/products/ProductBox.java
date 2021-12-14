@@ -56,8 +56,11 @@ public class ProductBox {
 	}
 
 	public int getMinimumProductPrice() {
+		List<Product> productsInStock = productBox.stream()
+			.filter(product -> !product.isSoldOut())
+			.collect(Collectors.toList());
 		Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
-		return productBox.stream().min(comparatorByPrice).orElseThrow(NoSuchElementException::new).getPrice();
+		return productsInStock.stream().min(comparatorByPrice).orElseThrow(NoSuchElementException::new).getPrice();
 	}
 
 	public void sellProduct(String productName) {

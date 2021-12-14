@@ -2,6 +2,7 @@ package model.coin;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -58,7 +59,15 @@ public class CoinBox {
 	public Map<Integer, Integer> getChangeCoins(int insertedMoney) {
 		Map<Integer, Integer> changeCoins = new TreeMap<>(Collections.reverseOrder());
 		for (Coin coin : Coin.getValues()) {
-			int coinCount = getCoinsEqualToCoinPrice(coin, insertedMoney);
+			if (!hasAnyCoinInCoinBox()) {
+				break;
+			}
+			int coinCount = INITIAL_COIN_COUNT;
+			while (hasCoinInCoinBox(coin) && !isCoinPriceOverInsertedMoney(coin, insertedMoney)) {
+				insertedMoney -= coin.getAmount();
+				coinBox.put(coin, coinBox.get(coin) - MINUS_COIN_COUNT);
+				coinCount += ADD_COIN_COUNT;
+			}
 			if (coinCount >= MIN_COIN_COUNT) {
 				changeCoins.put(coin.getAmount(), coinCount);
 			}
@@ -66,18 +75,17 @@ public class CoinBox {
 		return changeCoins;
 	}
 
-	private int getCoinsEqualToCoinPrice(Coin coin, int insertedMoney) {
-		int coinCount = INITIAL_COIN_COUNT;
-		while (hasCoinInCoinBox(coin) && !isCoinPriceOverInsertedMoney(coin, insertedMoney)) {
-			insertedMoney -= coin.getAmount();
-			coinBox.put(coin, coinBox.get(coin) - MINUS_COIN_COUNT);
-			coinCount += ADD_COIN_COUNT;
+	private boolean hasAnyCoinInCoinBox() {
+		for (Coin coin : Coin.getValues()) {
+			if (coinBox.get(coin) >= MIN_COIN_COUNT) {
+				return true;
+			}
 		}
-		return coinCount;
+		return false;
 	}
 
 	private boolean hasCoinInCoinBox(Coin coin) {
-		return coinBox.get(coin) >= MINUS_COIN_COUNT;
+		return coinBox.get(coin) >= MIN_COIN_COUNT;
 	}
 
 	private boolean isCoinPriceOverInsertedMoney(Coin coin, int insertedMoney) {
