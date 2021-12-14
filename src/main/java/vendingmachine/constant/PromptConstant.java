@@ -5,6 +5,7 @@ public final class PromptConstant {
 	public static final int PRICE_INVALID = 1;
 	public static final int COUNT_INVALID = 2;
 	public static final String GOODS_CLASSIFY_DELI = ";";
+	public static final String NAME_PRICE_COUNT_CLASSIFY_DELI = ",";
 	public static final char GOODS_START_DELI = '[';
 	public static final char GOODS_END_DELI = ']';
 	public final static String NUMBER_REGEX = "^[+-]?[0-9]*$";

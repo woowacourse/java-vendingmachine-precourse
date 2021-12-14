@@ -13,28 +13,38 @@ import vendingmachine.model.Coin;
 public class LeftChangeCalculator implements LeftChangeCalculatorInterface {
 	private List<Integer> orderList = new ArrayList<>();
 	private HashMap<Integer, Integer> resultHashMap = new HashMap<>();
+
 	@Override
 	public String calculate(int change, HashMap<Integer, Integer> coinMap) {
 		initOrderList();
 		String calculateString = "";
-		for (Integer order: orderList) {
-			while (coinMap.get(order) > 0) {
-				if (change >= coinMap.get(order) * order) {
-					change -= coinMap.get(order) * order;
-					resultHashMap.put(order, coinMap.get(order));
-					break;
-				}
-				int tmp = coinMap.get(order) - 1;
-				coinMap.put(order, tmp);
-			}
+		for (Integer order : orderList) {
+			change = getChange(change, coinMap, order);
 		}
+		calculateString = getResultString(calculateString);
+		return calculateString;
+	}
 
+	private String getResultString(String calculateString) {
 		for (Map.Entry<Integer, Integer> entry : resultHashMap.entrySet()) {
 			calculateString += entry.getKey() + WON_STRING;
 			calculateString += " - ";
 			calculateString += entry.getValue() + COUNT_STRING + "\n";
 		}
 		return calculateString;
+	}
+
+	private int getChange(int change, HashMap<Integer, Integer> coinMap, Integer order) {
+		while (coinMap.get(order) > 0) {
+			if (change >= coinMap.get(order) * order) {
+				change -= coinMap.get(order) * order;
+				resultHashMap.put(order, coinMap.get(order));
+				break;
+			}
+			int tmp = coinMap.get(order) - 1;
+			coinMap.put(order, tmp);
+		}
+		return change;
 	}
 
 	private void initOrderList() {
