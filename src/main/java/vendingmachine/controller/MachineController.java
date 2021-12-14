@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import static vendingmachine.validator.MoneyValidator.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
@@ -15,9 +14,9 @@ public class MachineController {
 	private final ProductService productService;
 
 	public MachineController() {
-		this.machineService = new MachineService();
 		this.productService = new ProductService();
 		this.depositService = new DepositService();
+		this.machineService = new MachineService(depositService, productService);
 	}
 
 	public void setDeposit() {

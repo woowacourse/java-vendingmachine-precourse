@@ -11,10 +11,6 @@ public class MachineService {
 	private final ProductService productService;
 	private int money;
 
-	public MachineService() {
-		this(new DepositService(), new ProductService());
-	}
-
 	public MachineService(DepositService depositService, ProductService productService) {
 		this.depositService = depositService;
 		this.productService = productService;

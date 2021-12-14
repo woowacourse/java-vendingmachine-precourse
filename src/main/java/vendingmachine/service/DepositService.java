@@ -4,10 +4,8 @@ import static vendingmachine.constant.Coin.*;
 import static vendingmachine.validator.MoneyValidator.*;
 
 import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.constant.Coin;
