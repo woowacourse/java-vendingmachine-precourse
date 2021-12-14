@@ -39,7 +39,7 @@ public class OrderService {
     }
 
     public int getMinimumCoin(Coin coin, int remainder) {
-        map.put(coin,0);
+        map.put(coin, 0);
         if (coin.getAmount() > remainder) {
             return remainder;
         }
@@ -49,16 +49,15 @@ public class OrderService {
         return subtractRemainder(coin, remainder);
     }
 
-
     public int subtractRemainder(Coin coin, int remainder) {
         int possibleNumber = remainder / coin.getAmount();
         if (coin.getStock() >= possibleNumber) {
             coin.subtractStock(possibleNumber);
-            map.put(coin,possibleNumber);
+            map.put(coin, possibleNumber);
             return remainder % coin.getAmount();
         }
         remainder -= coin.getAmount() * coin.getStock();
-        map.put(coin,coin.getStock());
+        map.put(coin, coin.getStock());
         coin.setStock(0);
         return remainder;
     }
@@ -91,7 +90,7 @@ public class OrderService {
         if (compareLowestAndRemainder()) {
             return true;
         }
-        return products.isOutOfStock();
+        return products.isOutOfStock(money.getRemainder());
     }
 
     public boolean compareLowestAndRemainder() {

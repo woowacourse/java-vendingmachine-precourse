@@ -42,12 +42,13 @@ public class Products {
         return lowestPrice;
     }
 
-    public boolean isOutOfStock() {
-        for (Product product : products){
-            if(!product.isOutOfStock()) {
+    public boolean isOutOfStock(int money) {
+        for (Product product : products) {
+            if (!product.isOutOfStock() && product.isLowerPrice(money)) {
                 return false;
             }
         }
         return true;
     }
+
 }

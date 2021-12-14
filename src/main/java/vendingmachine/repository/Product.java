@@ -24,7 +24,7 @@ public class Product {
     }
 
     public boolean isLowerPrice(int comparedPrice) {
-        return this.price < comparedPrice;
+        return this.price <= comparedPrice;
     }
 
     public boolean isOutOfStock() {
