@@ -2,11 +2,11 @@ package vendingmachine.controller;
 
 import java.util.List;
 
+import vendingmachine.configuration.DependencyInjectionContainer;
 import vendingmachine.domain.Product;
 import vendingmachine.system.message.SystemErrorMessage;
 import vendingmachine.system.message.SystemInputMessage;
 import vendingmachine.system.validation.Validation;
-import vendingmachine.system.validation.ValidationImplementation;
 import vendingmachine.util.InputParsingUtility;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -18,9 +18,10 @@ public class InputVendingMachineController {
     private final InputParsingUtility inputParsingUtility;
 
     private InputVendingMachineController() {
-        this.validation = ValidationImplementation.getInstance();
-        this.outputController = OutPutVendingMachineController.getInstance();
-        this.inputParsingUtility = InputParsingUtility.getInstance();
+        DependencyInjectionContainer dependencyInjectionContainer = new DependencyInjectionContainer();
+        this.validation = dependencyInjectionContainer.validation();
+        this.outputController = dependencyInjectionContainer.outPutVendingMachineController();
+        this.inputParsingUtility = dependencyInjectionContainer.inputParsingUtility();
     }
 
     private static class LazyHolder {

@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import vendingmachine.util.RandomUtility;
+import vendingmachine.configuration.DependencyInjectionContainer;
 
 public class VendingMachine {
     private final static int MAXIMUM_PRODUCT_PRICE = 100_000_001;
@@ -16,7 +16,7 @@ public class VendingMachine {
 
     public VendingMachine(int inputMoney) {
         minimumPrice = MAXIMUM_PRODUCT_PRICE;
-        coinHashMap = RandomUtility.getInstance().generateRandomCoins(inputMoney);
+        coinHashMap = new DependencyInjectionContainer().randomUtility().generateRandomCoins(inputMoney);
         productMap = new HashMap<>();
     }
 

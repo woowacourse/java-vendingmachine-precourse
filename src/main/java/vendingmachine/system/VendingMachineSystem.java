@@ -2,6 +2,7 @@ package vendingmachine.system;
 
 import java.util.List;
 
+import vendingmachine.configuration.DependencyInjectionContainer;
 import vendingmachine.controller.InputVendingMachineController;
 import vendingmachine.controller.OutPutVendingMachineController;
 import vendingmachine.domain.Product;
@@ -13,8 +14,9 @@ public class VendingMachineSystem {
     private final OutPutVendingMachineController outputController;
 
     public VendingMachineSystem() {
-        inputController = InputVendingMachineController.getInstance();
-        outputController = OutPutVendingMachineController.getInstance();
+        DependencyInjectionContainer dependencyInjectionContainer = new DependencyInjectionContainer();
+        inputController = dependencyInjectionContainer.inputVendingMachineController();
+        outputController = dependencyInjectionContainer.outPutVendingMachineController();
     }
 
     public void start() {
