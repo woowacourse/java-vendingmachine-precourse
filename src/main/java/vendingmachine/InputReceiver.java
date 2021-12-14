@@ -24,7 +24,7 @@ public class InputReceiver {
 		}
 	}
 
-	public static int getProductName(){
+	public static int getProductName(VendingMachine vendingMachine){
 		String productName;
 
 		//VendingMachinePrinter.printGetProductNameMessage();
@@ -32,7 +32,7 @@ public class InputReceiver {
 		while (true) {
 			try {
 				productName = Console.readLine();
-				InputValidator.validateProductName(productName);
+				InputValidator.validateProductName(productName, vendingMachine);
 				return Integer.parseInt(productName);
 			} catch (NullPointerException e) {
 				System.out.println("[ERROR] 존재하지 않는 상품명입니다.");

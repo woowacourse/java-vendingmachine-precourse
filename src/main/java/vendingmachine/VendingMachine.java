@@ -18,6 +18,14 @@ public class VendingMachine {
 		this.inputAmount = InputReceiver.getNumber();
 	}
 
+	public boolean isLeftQuantity(String productName){
+		return products.get(productName).getQuantity() == 0;
+	}
+
+	public boolean isBuyableProduct(String productName){
+		return products.get(productName).getPrice() > this.inputAmount;
+	}
+
 	private void _makeCoins(){
 		for(Coin coin : Coin.values()){
 			coins.put(coin, 0);

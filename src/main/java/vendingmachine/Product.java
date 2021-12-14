@@ -11,4 +11,11 @@ public class Product {
 		this.quantity = quantity;
 	}
 
+	public int getPrice(){
+		return this.price;
+	}
+
+	public int getQuantity(){
+		return this.quantity;
+	}
 }
