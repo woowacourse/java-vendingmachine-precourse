@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.model.domain.Coin;
@@ -42,12 +41,12 @@ public class VendingMachineController {
 	}
 
 	private void enterAndGenerateMachineProduct(VendingMachine vendingMachine) {
-		while(true) {
+		while (true) {
 			try {
 				String products = enterMachineProduct();
 				vendingMachineService.generateProduct(vendingMachine, products);
 				break;
-			} catch(IllegalArgumentException error) {
+			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
 		}
@@ -56,7 +55,7 @@ public class VendingMachineController {
 	private void purchaseProduct(VendingMachine vendingMachine) {
 		outputView.printInsertMoney(vendingMachine.getInputMoney());
 
-		while (vendingMachine.end()) {
+		while (vendingMachineService.end(vendingMachine)) {
 			try {
 				String productName = enterBuyingProduct();
 				vendingMachineService.purchase(vendingMachine, productName);
@@ -73,7 +72,8 @@ public class VendingMachineController {
 	}
 
 	private void printRemainCoin(VendingMachine vendingMachine) {
-		Map<Coin, Integer> remainCoin = vendingMachineService.calculateRemainCoin(vendingMachine.getInputMoney(), vendingMachine.getCoinMap());
+		Map<Coin, Integer> remainCoin = vendingMachineService.calculateRemainCoin(vendingMachine.getInputMoney(),
+			vendingMachine.getCoinMap());
 		System.out.println(OutputView.CHANGE);
 		outputView.printCoinChange(remainCoin);
 	}

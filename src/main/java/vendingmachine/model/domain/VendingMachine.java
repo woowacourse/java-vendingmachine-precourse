@@ -56,11 +56,15 @@ public class VendingMachine {
 		});
 	}
 
-	public boolean end() {
-		return inputMoney >= 0 && !productList.isEmpty() && isInputMoneyCanBuyProduct();
+	public boolean isInputMoneyRemain() {
+		return inputMoney >= 0;
 	}
 
-	private boolean isInputMoneyCanBuyProduct() {
+	public boolean isProductListNotEmpty() {
+		return !productList.isEmpty();
+	}
+
+	public boolean isInputMoneyCanBuyProduct() {
 		Product product = productList
 			.stream()
 			.min(Comparator.comparing(Product::getPrice))

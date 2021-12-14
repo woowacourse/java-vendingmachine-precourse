@@ -1,11 +1,5 @@
 package vendingmachine.model.domain;
 
-import java.util.function.Predicate;
-
-import vendingmachine.util.Constant;
-import vendingmachine.util.Utils;
-import vendingmachine.validator.Validator;
-
 public class Product {
 	private String name;
 	private int price;

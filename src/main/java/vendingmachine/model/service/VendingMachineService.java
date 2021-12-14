@@ -3,7 +3,6 @@ package vendingmachine.model.service;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import vendingmachine.model.domain.Coin;
@@ -66,5 +65,11 @@ public class VendingMachineService {
 			.map(Product::getName)
 			.distinct()
 			.collect(Collectors.toList());
+	}
+
+	public boolean end(VendingMachine vendingMachine) {
+		return vendingMachine.isInputMoneyRemain()
+			&& vendingMachine.isProductListNotEmpty()
+			&& vendingMachine.isInputMoneyCanBuyProduct();
 	}
 }

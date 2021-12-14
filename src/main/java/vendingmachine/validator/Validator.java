@@ -6,7 +6,7 @@ import vendingmachine.model.domain.Product;
 import vendingmachine.util.Utils;
 
 public class Validator {
-	private static final  String ERROR_INPUT_MUST_BE_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
+	private static final String ERROR_INPUT_MUST_BE_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
 	private static final String ERROR_MONEY_CAN_DIVIDE_INTO_10 = "[ERROR] 금액은 10원 단위여아합니다.";
 	private static final String ERROR_CANNOT_EMPTY = "[ERROR] 입력은 공백일 수 없습니다.";
 	private static final String ERROR_INPUT_INCORRECT = "[ERROR] 잘못된 상품 정보 입력입니다. 다시 입력해 주세요.";
