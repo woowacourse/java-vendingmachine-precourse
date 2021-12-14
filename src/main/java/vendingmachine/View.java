@@ -5,8 +5,14 @@ import java.util.List;
 
 public class View {
     public static int setMoney() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        return Integer.parseInt(Console.readLine());
+        while (true) {
+            System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
+            String result = Console.readLine();
+            if (isStringDouble(result)) {
+                return Integer.parseInt(result);
+            }
+            System.out.println("[ERROR] 금액은 숫자여야 합니다.");
+        }
     }
 
     public static void printCoins(List<Coin> coins) {
@@ -33,7 +39,7 @@ public class View {
     }
 
     public static String askProduct(int spentMoney) {
-        System.out.println("투입금액: "+spentMoney+"원");
+        System.out.println("투입 금액: "+spentMoney+"원");
         System.out.println("구매할 상품명을 입력해 주세요.");
         return Console.readLine();
     }
@@ -46,6 +52,15 @@ public class View {
             if (numberOfCoins[i] > 0) {
                 System.out.println(amount[i]+"원 - "+numberOfCoins[i]+"개");
             }
+        }
+    }
+
+    public static boolean isStringDouble(String s) {
+        try {
+            Double.parseDouble(s);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 }
