@@ -47,6 +47,7 @@ public class VendingMachine {
 	public void setChanges(int money) {
 		List<Integer> amountOfCoins = Coin.getAmountOfCoins();
 
+		// TODO: 로직 수정하기
 		while (money > 0) {
 			int amount = pickNumberInList(amountOfCoins);
 
@@ -108,9 +109,13 @@ public class VendingMachine {
 	}
 
 	private int getMinimumPrice() {
-		int minimumPrice = getPriceList().get(0);
+		ArrayList<Integer> priceList = getPriceList();
+		if (priceList.size() == PRODUCT_NOT_EXIST) {
+			return PRODUCT_NOT_EXIST;
+		}
 
-		for (Integer price : getPriceList()) {
+		int minimumPrice = priceList.get(0);
+		for (Integer price : priceList) {
 			if (price < minimumPrice) {
 				minimumPrice = price;
 			}
@@ -122,6 +127,9 @@ public class VendingMachine {
 		ArrayList<Integer> priceList = new ArrayList<>();
 
 		for (Entry<Product, Integer> product : products.entrySet()) {
+			if (product.getValue() == PRODUCT_NOT_EXIST) {
+				continue;
+			}
 			int price = product.getKey().getPrice();
 			priceList.add(price);
 		}
