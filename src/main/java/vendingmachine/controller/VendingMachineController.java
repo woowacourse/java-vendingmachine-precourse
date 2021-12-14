@@ -6,21 +6,45 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
 
-	private final VendingMachine vendingMachine;
+	private VendingMachine vendingMachine;
 
 	public VendingMachineController() {
+		try {
+			callNewVendingMachine();
+		} catch (Exception e) {
+			logError(e);
+		}
+	}
+
+	private void callNewVendingMachine() {
 		OutputView.setVendingMachineMoney();
 		vendingMachine = new VendingMachine(InputView.readPositiveInt());
 		OutputView.showCoins(vendingMachine.getCoinStorageBox());
 	}
 
-	public void addItems() {
+	public void addItemsWithException() {
+		try {
+			addItems();
+		} catch (Exception e) {
+			logError(e);
+		}
+	}
+
+	private void addItems() {
 		OutputView.addItems();
 		vendingMachine.addNewItems(InputView.readItems());
 		OutputView.breakLine();
 	}
 
-	public void buyItems() {
+	public void buyItemsWithException() {
+		try {
+			buyItems();
+		} catch (Exception e) {
+			logError(e);
+		}
+	}
+
+	private void buyItems() {
 		OutputView.enterInputMoney();
 		int money = InputView.readPositiveInt();
 		while (checkCanBuyProduct(money)) {
@@ -38,5 +62,9 @@ public class VendingMachineController {
 
 	private boolean checkCanBuyProduct(int money) {
 		return money >= vendingMachine.getNeedMinimumMoney();
+	}
+
+	private void logError(Exception error) {
+		System.out.println(error.getMessage());
 	}
 }
