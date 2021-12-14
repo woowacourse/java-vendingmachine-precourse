@@ -17,7 +17,6 @@ public class User {
 	}
 
 	public void buyMerchandise(Merchandise buyingMerchandise) {
-		buyingMerchandise.deductQuantity();
 		buyingMerchandiseList.add(buyingMerchandise);
 		userMoney.deductMoney(buyingMerchandise.getMerchandiseMoney());
 	}

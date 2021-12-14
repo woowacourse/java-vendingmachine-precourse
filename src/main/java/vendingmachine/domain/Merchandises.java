@@ -34,6 +34,7 @@ public class Merchandises {
 			.findFirst()
 			.orElseThrow(
 				() -> new IllegalArgumentException(ErrorMessage.INVALID_NO_STOCK_MERCHANDISE_BUY_ERROR_MESSAGE));
+		merchandise.deductQuantity();
 		return merchandise;
 	}
 
