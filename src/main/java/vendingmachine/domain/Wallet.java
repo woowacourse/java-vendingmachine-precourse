@@ -7,6 +7,7 @@ import vendingmachine.util.supporter.MapSupporter;
 
 public class Wallet {
 	private final SortedMap<Coin, Integer> coins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
+	private int inputCoinAmount;
 
 	public void addCoins(SortedMap<Coin, Integer> coins) {
 		for (Coin coin : coins.keySet()) {
@@ -18,7 +19,15 @@ public class Wallet {
 		return this.coins;
 	}
 
-	public SortedMap<Coin, Integer> returnCoins(int inputCoinAmount) {
+	public void addInputCoinAmount(final int amount) {
+		this.inputCoinAmount += amount;
+	}
+
+	public int getInputCoinAmount() {
+		return inputCoinAmount;
+	}
+
+	public SortedMap<Coin, Integer> returnCoins() {
 		SortedMap<Coin, Integer> returnCoins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
 		int returnCoinsAmount = inputCoinAmount;
 		for (Coin coin : coins.keySet()) {
@@ -45,5 +54,9 @@ public class Wallet {
 			totalAmount += coin.getAmount() * coins.get(coin);
 		}
 		return totalAmount;
+	}
+
+	public void decreaseInputCoinAmount(int price) {
+		inputCoinAmount -= price;
 	}
 }

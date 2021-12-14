@@ -5,7 +5,6 @@ import java.util.SortedMap;
 
 public class Machine {
 	private final Wallet wallet = new Wallet();
-	private int inputCoinAmount;
 	private final ItemStorage itemStorage = new ItemStorage();
 
 	public void addCoins(SortedMap<Coin, Integer> coins) {
@@ -21,34 +20,34 @@ public class Machine {
 	}
 
 	public void addInputCoinAmount(final int amount) {
-		this.inputCoinAmount += amount;
+		wallet.addInputCoinAmount(amount);
 	}
 
 	public int getInputCoinAmount() {
-		return inputCoinAmount;
+		return wallet.getInputCoinAmount();
 	}
 
 	public void purchase(String itemName) throws IllegalArgumentException {
 		Item item = itemStorage.get(itemName);
 		validatePurchase(item);
-		inputCoinAmount -= item.getPrice();
+		wallet.decreaseInputCoinAmount(item.getPrice());
 	}
 
 	private void validatePurchase(Item item) {
 		itemStorage.isNoItem(item);
-		itemStorage.checkInputCoinAmountByItem(item, inputCoinAmount);
+		itemStorage.checkInputCoinAmountByItem(item, getInputCoinAmount());
 		item.decreaseQuantity();
 	}
 
 	public Boolean isPurchasable() {
-		if (itemStorage.checkInputCoinAmountByMinPrice(inputCoinAmount))
+		if (itemStorage.checkInputCoinAmountByMinPrice(getInputCoinAmount()))
 			return false;
 		return !itemStorage.isAllItemSoldOut();
 	}
 
 	public SortedMap<Coin, Integer> returnCoins() {
-		SortedMap<Coin, Integer> returnCoins = wallet.returnCoins(inputCoinAmount);
-		this.inputCoinAmount = wallet.getToTalAmount(returnCoins);
+		SortedMap<Coin, Integer> returnCoins = wallet.returnCoins();
+		wallet.decreaseInputCoinAmount(wallet.getToTalAmount(returnCoins));
 		return returnCoins;
 	}
 }
