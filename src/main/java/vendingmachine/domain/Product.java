@@ -33,4 +33,34 @@ public class Product implements Comparable<Product>{
     public int compareTo(Product p) {
         return Integer.compare(cost, p.cost);
     }
+
+    public boolean isSameName(Product product, String productName) {
+        if (product.getName().equals(productName)) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isCostLessThanMoney(Product product, int money) {
+        if (product.getCost() <= money) {
+            return true;
+        }
+        return false;
+    }
+
+    public int minusMoneyForProductPurchase(Product product, int money) {
+        return money - product.getCost();
+    }
+
+    public boolean hasQuantity(Product product) {
+        if (product.getQuantity() < Condition.QUANTITY_1.getNumber()) {
+            return false;
+        }
+        return true;
+    }
+
+    public int countProductQuantity(int amount, Product product) {
+        System.out.println(amount + product.getQuantity());
+        return amount + product.getQuantity();
+    }
 }

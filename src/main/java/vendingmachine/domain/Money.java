@@ -16,7 +16,7 @@ public class Money {
     }
 
     public void minusMoney(String productName) {
-        money -= ProductRepository.getInstance().useMoneyForProductPurchase(productName);
+        money = ProductRepository.getInstance().useMoneyForProductPurchase(money, productName);
     }
 
     public int getMoney() {

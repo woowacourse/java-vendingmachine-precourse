@@ -30,10 +30,10 @@ public class ProductRepository {
                 .sorted().collect(Collectors.toList());
 
         for (Product product : productCollect) {
-            if (product.getQuantity() < Condition.QUANTITY_1.getNumber()) {
+            if (!product.hasQuantity(product)) {
                 continue;
             }
-            if (product.getCost() <= money) {
+            if (product.isCostLessThanMoney(product, money)) {
                 return true;
             }
         }
@@ -43,7 +43,7 @@ public class ProductRepository {
     public boolean hasAllProductQuantity() {
         int allAmount = Condition.QUANTITY_0.getNumber();
         for (Product product : products) {
-            allAmount += product.getQuantity();
+            allAmount = product.countProductQuantity(allAmount, product);
         }
 
         if (allAmount > Condition.QUANTITY_0.getNumber()) {
@@ -54,16 +54,16 @@ public class ProductRepository {
 
     public void purchaseProduct(String productName) {
         for (Product product : products) {
-            if (product.getName().equals(productName)) {
+            if (product.isSameName(product, productName)) {
                 product.sellProduct();
             }
         }
     }
 
-    public int useMoneyForProductPurchase(String productName) {
+    public int useMoneyForProductPurchase(int money, String productName) {
         for (Product product : products) {
-            if (product.getName().equals(productName)) {
-                return product.getCost();
+            if (product.isSameName(product, productName)) {
+                return product.minusMoneyForProductPurchase(product, money);
             }
         }
         return Condition.MONEY_0.getNumber();
@@ -71,7 +71,7 @@ public class ProductRepository {
 
     public boolean hasSameProduct(String productName) {
         for (Product product : products) {
-            if (product.getName().equals(productName)) {
+            if (product.isSameName(product, productName)) {
                 return true;
             }
         }
@@ -81,8 +81,11 @@ public class ProductRepository {
     public boolean hasProductQuantity(String productName) {
         List<Product> findProduct = products.stream().
                 filter(product -> product.getName().equals(productName)).collect(Collectors.toList());
-        if (findProduct.get(Condition.INDEX_0.getNumber()).getQuantity() == Condition.QUANTITY_0.getNumber()) {
-            return false;
+
+        for (Product product :findProduct) {
+            if (!product.hasQuantity(product)) {
+                return false;
+            }
         }
         return true;
     }
