@@ -3,7 +3,6 @@ package vendingmachine.domain;
 import java.util.List;
 
 public class VendingMachine {
-
     private static final String ERROR_HEADER = "[ERROR] ";
     private static final String NOT_EXIST_PRODUCT = "구매할 수 있는 상품이 존재하지 않습니다. 자판기에서 구매할 수 있고 존재하는 상품을 입력해주세요. ";
 
@@ -21,7 +20,6 @@ public class VendingMachine {
         Product product = findProudctInVendingMachine(inputProductName);
         inputMoney -= product.getPrice();
         product.buyOneProduct();
-
     }
 
     public CoinCountMap getLeftoverCash() {
@@ -53,7 +51,6 @@ public class VendingMachine {
         return minValue;
     }
 
-
     private Product findProudctInVendingMachine(String productName) {
         for (Product product : products) {
             if (product.getName().equals(productName) && inputMoney >= product.getPrice() && product.getCount() > 0) {
@@ -64,16 +61,13 @@ public class VendingMachine {
     }
 
     private CoinCountMap calculateLeftoverCash(int toReturnCash) {
+        int minCoinCount;
         CoinCountMap leftoverCoinCountMap = new CoinCountMap();
-        Coin[] coinArray = Coin.values();
-        int idx = 0;
-        while (checkValidMoney(toReturnCash) && checkValidIndex(idx)) {
-            Coin coin = coinArray[idx];
-            if (!checkCoinCanBeReturned(coin, toReturnCash)) {
-                idx += 1;
-                continue;
+        for (Coin coin : Coin.values()) {
+            if (!checkValidMoney(toReturnCash)) {
+                return leftoverCoinCountMap;
             }
-            int minCoinCount = findMinCoinCount(coin, toReturnCash);
+            minCoinCount = findMinCoinCount(coin, toReturnCash);
             toReturnCash -= minCoinCount * coin.getAmount();
             leftoverCoinCountMap.getCoinCount().replace(coin, leftoverCoinCountMap.getCoinCount().get(coin) + minCoinCount);
             this.coinCountMap.getCoinCount().replace(coin, this.coinCountMap.getCoinCount().get(coin) - minCoinCount);
@@ -81,34 +75,15 @@ public class VendingMachine {
         return leftoverCoinCountMap;
     }
 
-    private boolean checkValidIndex(int idx) {
-        if (idx < 4) {
-            return true;
-        }
-        return false;
-    }
-
     private boolean checkValidMoney(int toReturnCash) {
-        if (toReturnCash != 0 ) {
+        if (toReturnCash != 0) {
             return true;
         }
         return false;
-    }
-
-    private boolean checkCoinCanBeReturned(Coin coin, int toReturnCash) {
-        if (this.coinCountMap.getCoinCount().get(coin) == 0) {
-            return false;
-        }
-        if (toReturnCash < coin.getAmount()) {
-            return false;
-        }
-        return true;
     }
 
     private int findMinCoinCount(Coin coin, int toReturnCash) {
         int coinValue = coin.getAmount();
         return Math.min(toReturnCash / coinValue, this.coinCountMap.getCoinCount().get(coin));
     }
-
-
 }
