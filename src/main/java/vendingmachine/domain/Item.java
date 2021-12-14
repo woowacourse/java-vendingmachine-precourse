@@ -23,4 +23,8 @@ public class Item {
     public boolean isEnoughMoney(int money) {
         return money >= price;
     }
+
+    public void sold() {
+        stock--;
+    }
 }

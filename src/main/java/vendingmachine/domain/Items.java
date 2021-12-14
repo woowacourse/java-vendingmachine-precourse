@@ -7,15 +7,14 @@ import java.util.StringTokenizer;
 import vendingmachine.domain.validation.Validator;
 
 public class Items {
-    private final Validator itemManager;
     private final Map<String, Item> itemList;
 
     public Items() {
-        itemManager = new Validator();
         itemList = new HashMap<>();
     }
 
     public void registerItem(String itemInput) {
+        Validator itemManager = new Validator();
         StringTokenizer items = itemManager.getItemToken(itemInput);
 
         while (items.hasMoreTokens()) {
@@ -50,5 +49,11 @@ public class Items {
 
     public boolean existsItemName(String itemName) {
         return itemList.containsKey(itemName);
+    }
+
+    public int sellItem(String itemName) {
+        Item item = getItem(itemName);
+        item.sold();
+        return item.getPrice();
     }
 }

@@ -31,7 +31,7 @@ public class VendingMachineController {
         receiveInsertMoney();
 
         while (items.existsItemCanPurchase(money.getRemainMoney())) {
-
+            sale();
         }
 
     }
@@ -95,5 +95,11 @@ public class VendingMachineController {
             receiveUserChoice();
         }
 
+    }
+
+    private void sale() {
+        receiveUserChoice();
+        int price = items.sellItem(userChoice);
+        money.use(price);
     }
 }
