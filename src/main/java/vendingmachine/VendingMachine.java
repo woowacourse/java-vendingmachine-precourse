@@ -18,7 +18,7 @@ public class VendingMachine {
 		this.inputAmount = InputReceiver.getNumber(MoneyType.inputAmount);
 	}
 
-	public void calculateChanges() {
+	public HashMap<Coin, Integer> calculateChanges() {
 		int tempBalance = this.inputAmount;
 		HashMap<Coin, Integer> changes = null;
 
@@ -35,6 +35,7 @@ public class VendingMachine {
 				this.coins.put(coin, this.coins.get(coin) - tempNumberOfCoin);
 			}
 		}
+		return changes;
 	}
 
 	public void buy(String productName) {
