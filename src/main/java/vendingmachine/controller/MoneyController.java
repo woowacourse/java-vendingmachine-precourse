@@ -15,16 +15,16 @@ public class MoneyController {
 	}
 
 	public void setupMoney() {
-		money = giveMoney();
+		money = initializeMoney();
 	}
 
-	private Money giveMoney() {
+	private Money initializeMoney() {
 		try {
 			outputView.printInsertingMoneyRequest();
 			return new Money(inputView.scanPrice());
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
-			return giveMoney();
+			return initializeMoney();
 		}
 	}
 
