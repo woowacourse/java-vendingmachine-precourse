@@ -6,7 +6,9 @@ public class VendingMachine {
 
     public void Machine() {
         computer.PrintMachineCoin();
-        int coinSum = user.InputMachineCoin();
-        System.out.println(coinSum);
+        user.InputMachineCoin();
+        int sumCoin = user.getCoin();
+        MachineCoin machineCoin = new MachineCoin();
+        machineCoin.CreateRandomCoin(sumCoin);
     }
 }

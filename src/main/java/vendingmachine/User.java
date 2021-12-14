@@ -3,7 +3,16 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 
 public class User {
-    public int InputMachineCoin(){
+    int sumCoin = 0;
+
+    public int getCoin(){
+        return sumCoin;
+    }
+    public void setCoin(int coin){
+        this.sumCoin = coin;
+    }
+
+    public void InputMachineCoin(){
         String machineCoinString = Console.readLine();
         try{
             isInteger(machineCoinString);
@@ -11,10 +20,9 @@ public class User {
             isDivide(machineCoinString);
         }catch(IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return InputMachineCoin();
+            InputMachineCoin();
         }
-
-        return Integer.parseInt(machineCoinString);
+        setCoin(Integer.parseInt(machineCoinString));
     }
 
     private void isInteger(String machineCoinString){
