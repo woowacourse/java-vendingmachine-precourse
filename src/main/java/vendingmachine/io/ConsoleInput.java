@@ -1,33 +1,31 @@
 package vendingmachine.io;
 
-import camp.nextstep.edu.missionutils.Console;
-import java.util.List;
 import java.util.function.Supplier;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
-import vendingmachine.domain.Product;
-import vendingmachine.service.Products;
+import vendingmachine.service.ProductService;
 import vendingmachine.utils.ProductParser;
 import vendingmachine.validator.InputValidator;
 
-public class UserInput {
+public class ConsoleInput {
 
     private static final String PROMPT_HOLDING_AMOUNT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-    private static final String PROMPT_PRODUCTS_INFO = "상품명과 가격, 수량을 입력해 주세요.";
-    private static final String PROMPT_INPUT_AMOUNT = "투입 금액을 입력해 주세요.";
+    private static final String PROMPT_PRODUCTS_INFO = "\n상품명과 가격, 수량을 입력해 주세요.";
+    private static final String PROMPT_INPUT_AMOUNT = "\n투입 금액을 입력해 주세요.";
     private static final String PROMPT_ORDER_PRODUCT = "구매할 상품명을 입력해 주세요.";
+    private final Supplier<String> lineSupplier;
 
-    public static Products getProductSeller() {
-        return new Products(getProductList());
+    public ConsoleInput(Supplier<String> lineSupplier) {
+        this.lineSupplier = lineSupplier;
     }
 
-    public static List<Product> getProductList() {
+    public ProductService getProductSeller() {
         return getValidInput(
-            () -> ProductParser.parse(getInputWithPrompt(PROMPT_PRODUCTS_INFO))
+            () -> new ProductService(ProductParser.parse(getInputWithPrompt(PROMPT_PRODUCTS_INFO)))
         );
     }
 
-    public static String getProductOrder() {
+    public String getProductOrder() {
         return getValidInput(() -> {
             String input = getInputWithPrompt(PROMPT_ORDER_PRODUCT);
             InputValidator.validateNonSpecialChar(input);
@@ -35,15 +33,15 @@ public class UserInput {
         });
     }
 
-    public static InputAmount getValidInputAmount() {
+    public InputAmount getValidInputAmount() {
         return new InputAmount(getValidNumberWithPrompt(PROMPT_INPUT_AMOUNT));
     }
 
-    public static HoldingAmount getValidHoldingAmount() {
+    public HoldingAmount getValidHoldingAmount() {
         return new HoldingAmount(getValidNumberWithPrompt(PROMPT_HOLDING_AMOUNT));
     }
 
-    private static int getValidNumberWithPrompt(String prompt) {
+    private int getValidNumberWithPrompt(String prompt) {
         return getValidInput(() -> {
             String input = getInputWithPrompt(prompt);
             InputValidator.validateNumeric(input);
@@ -51,18 +49,17 @@ public class UserInput {
         });
     }
 
-    private static String getInputWithPrompt(String prompt) {
+    private String getInputWithPrompt(String prompt) {
         System.out.println(prompt);
-        return Console.readLine();
+        return lineSupplier.get();
     }
 
     /**
-     *
      * @param supplier 입력을 받아오는 함수
-     * @param <T> supplier 가 제공하는 객체
-     * @return  예외가 발생하지 않을때까지 입력받기를 시도한다.
+     * @param <T>      supplier 가 제공하는 객체
+     * @return 예외가 발생하지 않을때까지 입력받기를 시도한다.
      */
-    private static <T> T getValidInput(Supplier<T> supplier) {
+    private <T> T getValidInput(Supplier<T> supplier) {
         try {
             return supplier.get();
         } catch (IllegalArgumentException e) {

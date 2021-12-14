@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.domain.Product;
 
-public class Products {
+public class ProductService {
 
     private static final String ERR_HEADER = "[ERROR]";
     private static final String ERR_INVALID_PRODUCT = ERR_HEADER + "존재하지 않는 상품입니다.";
@@ -16,7 +16,7 @@ public class Products {
 
     private final Map<String, Product> products;
 
-    public Products(List<Product> productList) {
+    public ProductService(List<Product> productList) {
         validateNonDuplicateName(productList);
         this.products = productList.stream()
             .collect(Collectors.toMap(Product::getName, p -> p));

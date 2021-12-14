@@ -14,8 +14,8 @@ public class Product {
     private static final int EMPTY_STOCK = 0;
 
     private final String name;
+    private final int amount;
     private int stock;
-    private int amount;
 
     public Product(String name, int amount, int stock) {
         validateName(name);

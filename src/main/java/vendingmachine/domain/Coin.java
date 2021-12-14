@@ -11,7 +11,7 @@ public enum Coin {
     COIN_10(10);
 
     private static final String ERR_INVALID_COIN = "[ERROR] 존재하지 않는 동전입니다.";
-    private static final String CURRENCY_UNIT = "원";
+    private static final String LOCAL_CURRENCY_UNIT = "원";
     private final int amount;
 
     Coin(final int amount) {
@@ -40,7 +40,7 @@ public enum Coin {
     }
 
     public String getLocalCurrency() {
-        return this.amount + CURRENCY_UNIT;
+        return this.amount + LOCAL_CURRENCY_UNIT;
     }
 
     public boolean isBelowAmount(int amount) {

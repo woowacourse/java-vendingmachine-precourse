@@ -1,41 +1,45 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Changes;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
-import vendingmachine.service.Products;
-import vendingmachine.io.ConsolePrinter;
-import vendingmachine.io.UserInput;
+import vendingmachine.service.ProductService;
 
 public class VendingMachine {
 
-    private final Products products;
-    private final HoldingAmount holdingAmount;
-    private final ConsolePrinter printer;
+    private ProductService productService;
+    private HoldingAmount holdingAmount;
+    private InputAmount inputAmount;
 
-    public VendingMachine() {
-        printer = new ConsolePrinter();
-        holdingAmount = UserInput.getValidHoldingAmount();
-        printer.printHoldingAmount(holdingAmount);
-        products = UserInput.getProductSeller();
+    public Changes getChanges() {
+        return holdingAmount.returnChanges(inputAmount);
     }
 
-    public void run() {
-        InputAmount inputAmount = UserInput.getValidInputAmount();
-        printer.printInputAmount(inputAmount);
-        while (products.isPurchaseAvailable(inputAmount)) {
-            String productName = UserInput.getProductOrder();
-            order(productName, inputAmount);
-            printer.printInputAmount(inputAmount);
-        }
-        printer.printChanges(holdingAmount.returnChanges(inputAmount));
+    public InputAmount getCurrentInputAmount() {
+        return inputAmount;
     }
 
-    private void order(String name, InputAmount inputAmount) {
-        try {
-            products.orderProduct(name, inputAmount);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            order(name, inputAmount);
-        }
+    public HoldingAmount getHoldingAmount() {
+        return this.holdingAmount;
+    }
+
+    public void fillHoldingAmount(HoldingAmount holdingAmount) {
+        this.holdingAmount = holdingAmount;
+    }
+
+    public void addProductSeller(ProductService productService) {
+        this.productService = productService;
+    }
+
+    public void insertMoney(InputAmount inputAmount) {
+        this.inputAmount = inputAmount;
+    }
+
+    public void order(String name) throws IllegalArgumentException {
+        productService.orderProduct(name, inputAmount);
+    }
+
+    public boolean isOrderAvailable() {
+        return productService.isPurchaseAvailable(inputAmount);
     }
 }

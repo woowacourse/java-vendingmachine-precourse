@@ -34,10 +34,10 @@ class HoldingAmountTest {
             () -> {
                 HoldingAmount holdingAmount = new HoldingAmount(1450);
                 Changes changes = holdingAmount.returnChanges(new InputAmount(250));
-                assertThat(
-                    Arrays.stream(Coin.values())
-                        .allMatch(coin -> answer.get(coin) == changes.getCoinCount(coin))
-                ).isTrue();
+                Arrays.stream(Coin.values())
+                    .forEach(c -> assertThat(
+                        changes.getCoinCount(c)
+                    ).isEqualTo(answer.get(c)));
             },
             500, 500, 100, 100, 100, 100, 10, 10, 10, 10, 10
         );

@@ -7,10 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.stream.Collectors;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -81,10 +79,7 @@ public class ConsolePrinterTest {
         HoldingAmount holdingAmount = mock(HoldingAmount.class);
         when(holdingAmount.getHoldingCoinCount(any())).thenReturn(1);
         printer.printHoldingAmount(holdingAmount);
-        String answer = "자판기가 보유한 동전\n" + Arrays.stream(Coin.values())
-            .map(c -> c.getLocalCurrency() + " - " + 1 + "개")
-            .collect(Collectors.joining("\n")) + "\n";
-        assertThat(out()).isEqualTo(answer);
+        assertThat(out()).contains("자판기가 보유한 동전", "500원 - 1개", "100원 - 1개", "50원 - 1개", "10원 - 1개");
     }
 
     @Test
@@ -92,7 +87,7 @@ public class ConsolePrinterTest {
         final int amount = 1000;
         ConsolePrinter printer = new ConsolePrinter();
         InputAmount inputAmount = mock(InputAmount.class);
-        when(inputAmount.getAmount()).thenReturn(amount);
+        when(inputAmount.getLocalCurrency()).thenReturn("1000원");
         printer.printInputAmount(inputAmount);
         assertThat(out()).contains("투입 금액: " + amount);
     }
