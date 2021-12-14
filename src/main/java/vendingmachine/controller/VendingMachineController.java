@@ -20,7 +20,7 @@ public class VendingMachineController {
 		coinController.setupHoldingCoins();
 		itemcontroller.setupItems();
 		this.money = giveMoney();
-		sellItem(items, money);
+		sellItem();
 
 		outputView.printMoney(money);
 		outputView.printChanges(coinController.getChanges(coins, money));
@@ -36,11 +36,11 @@ public class VendingMachineController {
 		}
 	}
 
-	private void sellItem(final Items items, final Money money) {
-		while (money.payable(itemcontroller.getLeastItemCost(items))
-			&& !items.checkAllOutOfOrder()) {
+	private void sellItem() {
+		while (this.money.payable(itemcontroller.getLeastItemCost())
+			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
-				itemcontroller.update(items, money);
+				itemcontroller.update(money);
 			} catch (IllegalArgumentException e) {
 				outputView.printError(e.getMessage());
 			}

@@ -70,7 +70,7 @@ public class ItemController {
 		return Splitter.on(DELIMITER_COMMA).trimResults().omitEmptyStrings().splitToList(itemDetailBracketRemoved);
 	}
 
-	public int getLeastItemCost(final Items items) {
+	public int getLeastItemCost() {
 		return items.findAll()
 			.stream()
 			.filter((item) -> ZERO < item.getAmount())
@@ -79,7 +79,7 @@ public class ItemController {
 			.getCost();
 	}
 
-	public void update(final Items items, final Money money) {
+	public void update(final Money money) {
 		outputView.printMoney(money);
 		outputView.printItemPerChaseRequest();
 		Item item = items.findItemByName(inputView.scanItemName(), money);
