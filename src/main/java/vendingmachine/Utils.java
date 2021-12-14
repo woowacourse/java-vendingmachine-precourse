@@ -1,7 +1,6 @@
 package vendingmachine;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Utils {
     public static void MachineOn() {
@@ -38,17 +37,17 @@ public class Utils {
     public static void OrderJuice(int minPrice, ArrayList<Juice> juiceIndex) {
         int money = PrintUI.InputMoney();
         while (true) {
-            String juiceName = PrintUI.Ordering(money);
-            money -= OrderCheck(juiceIndex,juiceName);
             if (money < minPrice) {
                 break;
             }
+            String juiceName = PrintUI.Ordering(money);
+            money -= OrderCheck(juiceIndex,juiceName);
         }
         Coin.PrintChange(money);
     }
 
     public static int OrderCheck(ArrayList<Juice> juiceIndex, String orderJuice) {
-        int price;
+        int price = 0;
         for (Juice juice : juiceIndex) {
             price = juice.EqualJuiceName(orderJuice);
             boolean flag =  juice.OutPutOneJuice();
@@ -56,7 +55,17 @@ public class Utils {
                 return price;
             }
         }
+        MenuNameError();
         return 0;
+    }
+
+    public static void MenuNameError() {
+        try {
+            throw  new IllegalArgumentException();
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] : 그런 메뉴는 없어요");
+        }
     }
 
 }
