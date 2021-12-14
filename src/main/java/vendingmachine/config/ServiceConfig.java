@@ -31,6 +31,6 @@ public class ServiceConfig {
 	}
 
 	public static PurchaseService getPurchaseService() {
-		return new PurchaseService(RepositoryConfig.getProductRepository(), RepositoryConfig.getDepositRepository());
+		return new PurchaseService(RepositoryConfig.getProductRepository());
 	}
 }

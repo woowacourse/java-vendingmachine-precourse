@@ -2,7 +2,6 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Money;
 import vendingmachine.domain.Price;
-import vendingmachine.service.ChangeSafeService;
 import vendingmachine.service.DepositService;
 import vendingmachine.service.PurchaseService;
 
