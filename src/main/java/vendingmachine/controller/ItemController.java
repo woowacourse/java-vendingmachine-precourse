@@ -18,8 +18,7 @@ public class ItemController {
 	private static final String SUFFIX = "]";
 	private static final String DELIMITER_COMMA = ",";
 	private static final String ERROR = "[ERROR] ";
-	private static final String INVALID_PREFIX_AND_SUFFIX_ERROR = ERROR + "각 상품별 정보는 " + PREFIX + "로 시작해서"
-		+ SUFFIX + "로 끝나야 합니다.";
+	private static final String INVALID_PREFIX_AND_SUFFIX_ERROR = ERROR + "각 상품별 정보는 %s로 시작해서 %s로 끝나야 합니다.";
 	private static final String NOT_ENOUGH_MONEY_ERROR = ERROR + "투입 금액보다 상품의 금액이 더 비싸므로 상품을 구매할 수 없습니다.";
 	private static final String OUT_OF_ORDER_ERROR = ERROR + "상품의 재고가 소진되어 구매할 수 없습니다.";
 	private final InputView inputView;
@@ -59,7 +58,7 @@ public class ItemController {
 		List<Item> items = new ArrayList<>();
 		for (String details : itemList) {
 			if (!(details.startsWith(PREFIX) && details.endsWith(SUFFIX))) {
-				throw new IllegalArgumentException(INVALID_PREFIX_AND_SUFFIX_ERROR);
+				throw new IllegalArgumentException(String.format(INVALID_PREFIX_AND_SUFFIX_ERROR, PREFIX, SUFFIX));
 			}
 			items.add(new Item(extractValueFromItemDetails(details)));
 		}
