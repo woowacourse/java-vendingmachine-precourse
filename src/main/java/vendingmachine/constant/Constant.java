@@ -3,6 +3,8 @@ package vendingmachine.constant;
 public class Constant {
 	public static final String NO_STOCKS_MESSAGE = "[ERROR] 재고가 남아있지 않습니다.";
 	public static final String DUPLICATED_ITEM_MESSAGE = "[ERROR] 이미 해당 상품이 존재합니다.";
+	public static final String NO_ANY_COIN = "[ERROR] 코인이 등록되어있지 않습니다.";
+	public static final String MONEY_SMALLER_THAN_MINIMUM_COIN = "[ERROR] 돈의 단위가 코인의 제일 작은 단위보다 작습니다.";
 	public static final String DISTINGUISH_BETWEEN_PRODUCTS = ";";
 	public static final String DISTINGUISH_BETWEEN_PRODUCT_INFORMATION = ",";
 	public static final String ENTER_VENDING_MACHINE_INITIAL_MONEY = "자판기가 보유하고 있는 금액을 입력해 주세요.";
