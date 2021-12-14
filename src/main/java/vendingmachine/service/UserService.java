@@ -7,9 +7,9 @@ import static vendingmachine.utils.View.*;
 
 import java.util.List;
 
+import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Item;
 import vendingmachine.domain.Items;
-import vendingmachine.utils.Input;
 import vendingmachine.utils.Parser;
 import vendingmachine.utils.Validator;
 import vendingmachine.utils.View;
@@ -20,7 +20,7 @@ public class UserService {
 			try {
 				showAskMessage(ASK_POSSESSION);
 
-				String possession = Input.userInput();
+				String possession = Console.readLine().trim().replaceAll(WHITE_SPACE, EMPTY);
 				int parsedPossession = Parser.makeInteger(possession);
 				Validator.validatePossession(parsedPossession);
 
@@ -37,7 +37,7 @@ public class UserService {
 				showAskMessage(ASK_ITEM_REGISTRATION);
 				Items items = new Items();
 
-				String addingItemsInfoLine = Input.userInput();
+				String addingItemsInfoLine = Console.readLine().trim().replaceAll(WHITE_SPACE, EMPTY);
 				Validator.validateAddingItemsLineFormat(addingItemsInfoLine);
 
 				String[] eachItemsInfo = splitLine(addingItemsInfoLine, ITEM_INFO_SPLIT_CRITERIA);
@@ -53,7 +53,7 @@ public class UserService {
 			try {
 				showAskMessage(ASK_INPUT_COST);
 
-				String userMoney = Input.userInput();
+				String userMoney = Console.readLine().trim().replaceAll(WHITE_SPACE, EMPTY);
 				int parsedUserMoney = Parser.makeInteger(userMoney);
 				Validator.validateUserMoney(parsedUserMoney);
 
@@ -70,7 +70,7 @@ public class UserService {
 				showMoney(userMoney);
 				showAskMessage(ASK_PURCHASING_ITEM_NAME);
 
-				String purchasingItemName = Input.userInput();
+				String purchasingItemName = Console.readLine().trim().replaceAll(WHITE_SPACE, EMPTY);
 				Validator.validatePurchaseItemName(purchasingItemName, forSaleItemList);
 
 				return purchasingItemName;
