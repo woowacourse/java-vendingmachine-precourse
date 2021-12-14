@@ -38,11 +38,7 @@ public class VendingMachineController {
         int purchasingCost = inputView.inputPurchasingCost();
 
         purchasingCost = purchaseProducts(vendingMachine, products, cheapestProductPrice, purchasingCost);
-        returnChange(vendingMachine, machineCoins, purchasingCost);
-    }
-
-    protected void returnChange(final VendingMachine vendingMachine, final Map<Integer, Integer> machineCoins, final int purchasingCost) {
-        Map<Integer, Integer> returnCoins = vendingMachine.calculateReturnChangeCoin(machineCoins, purchasingCost);
+        Map<Integer, Integer> returnCoins = vendingMachine.returnChange(machineCoins, purchasingCost);
         outputView.printReturnChange(purchasingCost, returnCoins);
     }
 

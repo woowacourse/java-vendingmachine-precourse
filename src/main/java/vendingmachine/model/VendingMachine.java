@@ -16,9 +16,12 @@ public class VendingMachine {
         this.machineCoins = calculateCoins(machineMoney);
     }
 
-
     public Map<Integer, Integer> getMachineCoins() {
         return machineCoins;
+    }
+
+    public Map<Integer, Integer> returnChange(final Map<Integer, Integer> machineCoins, final int purchasingCost) {
+        return calculateReturnChangeCoin(machineCoins, purchasingCost);
     }
 
     public boolean isContinuePurchasing(final List<Product> products, final int cheapestProductPrice, final int purchasingCost) {
@@ -46,7 +49,6 @@ public class VendingMachine {
     protected boolean isCostBiggerCheapestProductPrice(final int cheapestProductPrice, final int purchasingCost) {
         return purchasingCost >= cheapestProductPrice;
     }
-
 
     protected void validateMachineMoney(final int inputMachineMoney) {
         if (!isMultiplyTen(inputMachineMoney)) {
