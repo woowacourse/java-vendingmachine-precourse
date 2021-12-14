@@ -17,7 +17,7 @@ public class MachineCore {
     private final ProductValidator productValidator = new ProductValidator();
 
     public void startMachine() {
-        prepareMachin();
+        prepareMachine();
         runMachine();
     }
 
@@ -31,7 +31,7 @@ public class MachineCore {
         printChangeReturned();
     }
 
-    private void prepareMachin() {
+    private void prepareMachine() {
         readMachineAssetFromUser();
         printCoinBoxStatus();
         readProductTableFromUser();
