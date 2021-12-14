@@ -61,7 +61,7 @@ public class ItemInventoryRequest {
     }
 
     private void validateInfoInBrackets() {
-        if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) || input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
+        if (!(input.startsWith(OPENING_BRACKET_FOR_ITEM_INVENTORY_INFO) && input.endsWith(CLOSING_BRACKET_FOR_ITEM_INVENTORY_INFO))) {
             throw new IllegalArgumentException();
         }
     }
