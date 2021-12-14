@@ -73,9 +73,9 @@
       - [x] 개별 거래 프로세스를 진행하는 기능
 
 4. Utils
-   1. Messages
+   1. Messages(Enum)
       - [x] OutputView에 필요한 메세지 혹은 예외 메세지를 가져오는 기능
-   2. Indexes
+   2. Indexes(Enum)
       - [x] 제품 이름, 제품 가격, 제품 수량의 인덱스를 가져오는 기능
    3. Validator
       1. 하위 기능 : 
