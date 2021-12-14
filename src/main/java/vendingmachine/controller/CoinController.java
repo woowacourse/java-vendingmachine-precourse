@@ -18,7 +18,7 @@ public class CoinController {
 		this.outputView = outputView;
 	}
 
-	public Coins giveHoldingCoins() {
+	public Coins setupHoldingCoins() {
 		Coins coins = initializeCoins();
 		outputView.printHoldingCoinStatus(coins.findAll());
 		return coins;
@@ -35,12 +35,12 @@ public class CoinController {
 		}
 	}
 
-	private Map<Integer, Integer> makeCoins(int price) {
+	private Map<Integer, Integer> makeCoins(int holdingAmount) {
 		Map<Integer, Integer> coinAmount = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			int amount = coin.getAmount();
-			coinAmount.put(amount, price / amount);
-			price %= amount;
+			coinAmount.put(amount, holdingAmount / amount);
+			holdingAmount %= amount;
 		}
 		return coinAmount;
 	}

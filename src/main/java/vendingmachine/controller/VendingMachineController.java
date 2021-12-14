@@ -16,8 +16,8 @@ public class VendingMachineController {
 
 	public void run() {
 
-		Coins coins = coinController.giveHoldingCoins();
-		Items items = itemcontroller.giveItems();
+		Coins coins = coinController.setupHoldingCoins();
+		Items items = itemcontroller.setupItems();
 		Money money = giveMoney();
 		sellItem(items, money);
 

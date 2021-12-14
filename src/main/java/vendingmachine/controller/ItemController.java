@@ -28,27 +28,27 @@ public class ItemController {
 		this.outputView = outputView;
 	}
 
-	public Items giveItems() {
+	public Items setupItems() {
 		try {
-			List<String> itemDetails = extractItemDetails();
-			return initializeItems(itemDetails);
+			List<String> itemDetails = enterItemList();
+			return makeItems(itemDetails);
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
-			return giveItems();
+			return setupItems();
 		}
 	}
 
-	private List<String> extractItemDetails() {
+	private List<String> enterItemList() {
 		try {
 			outputView.printItemsRequest();
 			return inputView.scanItemDetailList();
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
-			return extractItemDetails();
+			return enterItemList();
 		}
 	}
 
-	private Items initializeItems(final List<String> itemDetails) {
+	private Items makeItems(final List<String> itemDetails) {
 		List<Item> items = new ArrayList<>();
 		for (String itemDetail : itemDetails) {
 			if (!(itemDetail.startsWith(PREFIX) && itemDetail.endsWith(SUFFIX))) {
