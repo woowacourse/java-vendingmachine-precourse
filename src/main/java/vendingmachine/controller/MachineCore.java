@@ -27,6 +27,7 @@ public class MachineCore {
             String productName = readProductToBuyFromUser();
             machine.sellProduct(productName);
         }
+        printInputMoneyLeft();
     }
 
     private void prepareMachin() {
@@ -71,6 +72,10 @@ public class MachineCore {
         view.printBlankLine();
     }
 
+    private void printInputMoneyLeft() {
+        view.printInputMoneyStatus(machine.getInputMoney());
+    }
+
     private ProductTable splitProductInfo(String userInput) {
         return productValidator.checkStringOfProductTable(userInput);
     }
@@ -89,13 +94,18 @@ public class MachineCore {
     }
 
     private String readProductToBuyFromUser() {
+        printInputMoneyLeft();
+        String input;
         while (true) {
             try {
-                String input = view.askQuestion(InputData.ASK_PRODUCT_TO_BUY);
-                return productValidator.checkName(input);
+                input = view.askQuestion(InputData.ASK_PRODUCT_TO_BUY);
+                productValidator.checkName(input);
+                break;
             } catch (IllegalArgumentException exception) {
                 view.printError();
             }
         }
+        view.printBlankLine();
+        return input;
     }
 }

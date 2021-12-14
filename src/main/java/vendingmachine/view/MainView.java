@@ -21,6 +21,12 @@ public class MainView {
         System.out.println(output);
     }
 
+    public void printInputMoneyStatus(int inputMoneyNow) {
+        String output = OutputData.INPUT_MONEY_LEFT + " "
+            + inputMoneyNow + OutputData.COIN_UNIT;
+        System.out.println(output);
+    }
+
     public void printBlankLine() {
         System.out.println();
     }
