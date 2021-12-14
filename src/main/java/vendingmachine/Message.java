@@ -10,5 +10,5 @@ public class Message {
     public static String REST_MONEY = "잔돈";
 
 
-    public static String ERROR_INPUT_VEND_MONEY = "[ERROR]";
+    public static String ERROR_INPUT_VEND_MONEY = "[ERROR]입력값이 올바르지 않습니다.";
 }

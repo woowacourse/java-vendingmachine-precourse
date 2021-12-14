@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public enum Coin {
@@ -30,4 +31,15 @@ public enum Coin {
         return this.amount;
     }
 
+    public static void removeCoinToList(HashMap<Coin, Integer> restUserMoney, Coin coin){
+        int restCurrent = restUserMoney.get(coin);
+        int restNext = restCurrent + 1;
+        restUserMoney.put(coin, restNext);
+    }
+
+    public static void addCoinToList(HashMap<Coin, Integer> coinList, Coin coin){
+        int current = coinList.get(coin);
+        int next = current-1;
+        coinList.put(coin, next);
+    }
 }

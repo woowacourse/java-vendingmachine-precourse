@@ -11,6 +11,7 @@ public class Vendingmachine {
     private Integer userMoney;
     private List<Product> productList;
     private HashMap<Coin, Integer> coinList;
+    List<Integer> coins = Coin.getCoinList();
 
     public Vendingmachine(){}
 
@@ -41,35 +42,38 @@ public class Vendingmachine {
     public void getVendMoneyToCoin(){
 
         this.coinList = Utils.makeCoinHash();
-        List<Integer> coins = Coin.getCoinList();
         int tempVendMoney=vendMoney;
 
         while(tempVendMoney>0){
-            int selectedMoney = Randoms.pickNumberInList(coins);
+            int selectedMoney = Randoms.pickNumberInList(this.coins);
             if(selectedMoney>tempVendMoney){continue;}
-            if(selectedMoney==500){
-                int next = this.coinList.get(Coin.COIN_500) + 1;
-                this.coinList.put(Coin.COIN_500, next);
-            }
-            if(selectedMoney==100){
-                int next = this.coinList.get(Coin.COIN_100) + 1;
-                this.coinList.put(Coin.COIN_100, next);
-            }
-            if(selectedMoney==50){
-                int next = this.coinList.get(Coin.COIN_50) + 1;
-                this.coinList.put(Coin.COIN_50, next);
-            }
-            if(selectedMoney==10){
-                int next = this.coinList.get(Coin.COIN_10) + 1;
-                this.coinList.put(Coin.COIN_10, next);
-            }
+            calculateSelectedMoney(selectedMoney);
             tempVendMoney -= selectedMoney;
         }
         return;
     }
 
+    private void calculateSelectedMoney(int selectedMoney){
+        if(selectedMoney==500){
+            int next = this.coinList.get(Coin.COIN_500) + 1;
+            this.coinList.put(Coin.COIN_500, next);
+        }
+        if(selectedMoney==100){
+            int next = this.coinList.get(Coin.COIN_100) + 1;
+            this.coinList.put(Coin.COIN_100, next);
+        }
+        if(selectedMoney==50){
+            int next = this.coinList.get(Coin.COIN_50) + 1;
+            this.coinList.put(Coin.COIN_50, next);
+        }
+        if(selectedMoney==10){
+            int next = this.coinList.get(Coin.COIN_10) + 1;
+            this.coinList.put(Coin.COIN_10, next);
+        }
+    }
+
+
     public void printRandomCoin(){
-        List<Integer> coins = Coin.getCoinList();
         System.out.println("자판기가 보유한 동전");
         for(Coin coin: Coin.values()){
             System.out.println( coin.getAmount()+"원 - "+ this.coinList.get(coin)+"개");
@@ -146,7 +150,6 @@ public class Vendingmachine {
     }
 
     public void printLastMoney() {
-        List<Integer> coins = Coin.getCoinList();
         // 유저의 돈이 전체돈보다 더 크다면 그냥 리턴한다.
         if(this.userMoney>=this.vendMoney){
             returnTotalInputMoney(this.coinList);
@@ -158,7 +161,6 @@ public class Vendingmachine {
     }
 
     public void returnTotalInputMoney(HashMap<Coin, Integer> returnMoney){
-        List<Integer> coins = Coin.getCoinList();
         for(Coin coin: Coin.values()){
             System.out.println( coin.getAmount()+"원 - "+ returnMoney.get(coin)+"개");
         }
@@ -168,21 +170,21 @@ public class Vendingmachine {
     public HashMap<Coin, Integer> returnGreedyMoney(){
         HashMap<Coin, Integer> restUserMoney = Utils.makeCoinHash();
         for(Coin coin: Coin.values()){
-            while(this.userMoney< coin.getAmount()){
-                if(this.coinList.get(coin)>0){
-                    int current = this.coinList.get(coin);
-                    int next = current-1;
-                    this.coinList.put(coin, next);
-                    int restCurrent = restUserMoney.get(coin);
-                    int restNext = restCurrent + 1;
-                    restUserMoney.put(coin, restNext);
-                }
-                else{
-                    break;
-                }
-            }
+            greedyAlgorithm(coin, restUserMoney);
         }
         return restUserMoney;
     };
+
+    public void greedyAlgorithm(Coin coin,HashMap<Coin, Integer> restUserMoney){
+        while(this.userMoney< coin.getAmount()){
+            if(this.coinList.get(coin)>0){
+                Coin.removeCoinToList(restUserMoney, coin);
+                Coin.addCoinToList(this.coinList, coin);
+            }
+            else{
+                break;
+            }
+        }
+    }
 
 }
