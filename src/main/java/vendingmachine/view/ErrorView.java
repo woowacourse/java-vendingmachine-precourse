@@ -5,5 +5,6 @@ public class ErrorView {
 
 	public static void printErrorMesasge(String errorMessage) {
 		System.out.println(ERROR_PREFIX + errorMessage);
+		System.out.println();
 	}
 }

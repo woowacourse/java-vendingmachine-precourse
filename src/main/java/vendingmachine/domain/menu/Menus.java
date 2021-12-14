@@ -11,6 +11,7 @@ import java.util.stream.Collectors;
 public class Menus {
 	private static final String ERROR_DELIMITERS = "각 상품 정보는 세미콜론(;)으로 구분합니다.";
 	private static final String ERROR_DUPLICATION = "상품명은 중복될 수 없습니다.";
+	private static final String ERROR_NOT_FIND = "존재하지 않는 상품입니다.";
 	private static final String DELIMITER = ";";
 
 	private final List<Menu> menuList;
@@ -69,6 +70,6 @@ public class Menus {
 		return menuList.stream()
 			.filter(menu -> menu.getName().equals(menuName))
 			.findFirst()
-			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 상품입니다."));
+			.orElseThrow(() -> new IllegalArgumentException(ERROR_NOT_FIND));
 	}
 }
