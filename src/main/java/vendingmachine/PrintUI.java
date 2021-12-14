@@ -32,13 +32,13 @@ public class PrintUI {
         System.out.println("투입 금액을 입력해 주세요.");
         try {
             int money = Integer.parseInt(Console.readLine());
-            if (money < 0) {
+            if (money < 0 || !((money/10)*10 == money)) {
                 throw new IllegalArgumentException();
             }
             System.out.println();
             return money;
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] : 양의 정수를 입력해주세요");
+            System.out.println("[ERROR] : 최소 10원 단위의 양의 정수를 입력해주세요");
             return InputMoney();
         }
     }

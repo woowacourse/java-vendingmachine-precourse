@@ -49,7 +49,7 @@ public class Utils {
         SumNumberOfJuice(juiceIndex);
         while (money >= minPrice && totalNumberOfJuice != 0) {
             String juiceName = PrintUI.Ordering(money);
-            money -= OrderCheck(juiceIndex,juiceName);
+            money -= OrderCheck(juiceName);
         }
         Coin.PrintChange(money);
     }
@@ -70,7 +70,7 @@ public class Utils {
         }
     }
 
-    public static int OrderCheck(ArrayList<Juice> juiceIndex, String orderJuice) {
+    public static int OrderCheck(String orderJuice) {
         int price = 0;
         for (Juice juice : juiceIndex) {
             price = juice.EqualJuiceName(orderJuice);
