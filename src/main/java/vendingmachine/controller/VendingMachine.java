@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import vendingmachine.domain.coin.CoinCombination;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.coin.CoinGenerator;
+import vendingmachine.domain.product.ProductService;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
 import vendingmachine.domain.vendingMachine.VendingMachineAmount;
@@ -50,14 +51,7 @@ public class VendingMachine {
 
     private void setProduct() {
         try {
-            String productForm = InputView.getProducts();
-            String[] productInformations = productForm.split(PRODUCT_DELIMITER);
-            for (String productInformation : productInformations) {
-                ProductValidator.checkProduct(productInformation);
-                String[] product = productInformation.replaceAll(UNNECESSARY_SPECIAL_CHARACTER_REGEX, BLANK).split(NAME_PRICE_COUNT_DELIMITER);
-                AmountValidator.checkProductPrice(product[PRICE]);
-                products.add(new Product(product[NAME], Integer.parseInt(product[PRICE]), Integer.parseInt(product[COUNT])));
-            }
+            products = ProductService.makeProducts(InputView.getProducts());
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             setProduct();
