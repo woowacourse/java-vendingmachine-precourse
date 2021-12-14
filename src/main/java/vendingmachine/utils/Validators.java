@@ -109,21 +109,19 @@ public class Validators {
 		if (isDuplicatesOfName) {
 			throw new IllegalArgumentException("같은 상품이 중복 입력되었습니다.");
 		}
-
-		// System.out.println("상품명(추출) 중복검사까지 통과");  // TODO 로그
-
 	}
 
 	public static void checkValidProduct(String inputValue) {
-		//DB(countMap)속 구매하려고 할 때 검증
-		//1) 존재 유무  검증
 		VendingMachine vendingMachine = VendingMachine.getInstance();
+		//(1) 존재유무 : 찾다가 없으면 thr 됨.
 		Product product = vendingMachine.findProductByName(inputValue);
-		// System.out.println("검증끝");
-		//존재유무 확인후 -> 추가 확인-> 갯수1개이상 유무
-		//2) 1개이상 유무 검증
+		//(2) 1개이상 유무
 		if (!(vendingMachine.isProductAvailable(product))) {
 			throw new IllegalArgumentException("해당 상품은 현재 0개 입니다.");
+		}
+		//(3) 사용자 금액과 비교
+		if (!vendingMachine.isUserPurchasable(product)) {
+			throw new IllegalArgumentException("해당 상품의 가격이 보유중인 금액보다 비쌉니다.");
 		}
 	}
 

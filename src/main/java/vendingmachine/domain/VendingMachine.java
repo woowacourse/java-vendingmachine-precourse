@@ -78,12 +78,17 @@ public class VendingMachine {
 		//1. 일단은 일부정보(name) -> 객체를찾아야함.
 		Product product = this.products.findProductByName(wantedProductName.toString());
 
-		//2. 구매조건
-		//(1) 해당객체가 >1 인가..  이것도 입력받을때 검증하기..
+		//2.[ db속 존재유무 & 1개이상 유무]는 이미 검증이 된 체로왔음.(반복에서 입력시마다 검증함)
+		// [보유중인 돈 >= 상품 금액] 이어야한다. -> 이것도 입력시 추가 검사..
 
 	}
 
 	public boolean isProductAvailable(Product product) {
 		return this.productCounter.isAvailable(product);
+	}
+
+	public boolean isUserPurchasable(Product product) {
+		return this.userMoney.isOrGreaterThan(product);
+
 	}
 }

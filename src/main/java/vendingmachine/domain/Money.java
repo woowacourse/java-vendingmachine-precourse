@@ -50,4 +50,8 @@ public class Money implements Comparable<Money> {
 	public int hashCode() {
 		return Objects.hash(money);
 	}
+
+	public boolean isOrGreaterThan(Product product) {
+		return this.money >= product.toAmount();
+	}
 }

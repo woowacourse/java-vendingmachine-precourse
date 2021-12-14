@@ -67,6 +67,7 @@ public class InputView {
 		//TODO 추가 검증.. 검색이니까 존재하는지부터 검사하기 with 싱글톤 객체
 		Validators.checkValidProduct(inputValue);
 		//TODO 추가 검증2 존재유무 -> 갯수유무
+		//TODO 추가 검증3 존재유무 -> 갯수유무(자판기) -> 사용자 금액이 크거나 같은지 유무 추가
 
 	}
 
