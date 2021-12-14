@@ -23,7 +23,7 @@ public class VendingService {
 
 	public void printCoins() {
 		OutputView.print_line();
-
+		OutputView.print_vendingmachineCoin();
 		List<Integer> list = Coin.getAmountList();
 		for (int i = 0; i < list.size(); i++) {
 			int coin = list.get(i);
