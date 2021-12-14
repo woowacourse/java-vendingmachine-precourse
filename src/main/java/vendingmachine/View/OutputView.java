@@ -57,6 +57,14 @@ public class OutputView {
         final StringBuilder stringBuilder = new StringBuilder();
 
         for (int returnCoin : returnCoins.keySet()) {
+            filterZeroCoin(returnCoins, stringBuilder, returnCoin);
+        }
+
+        return stringBuilder.toString();
+    }
+
+    protected void filterZeroCoin(final Map<Integer, Integer> returnCoins, final StringBuilder stringBuilder, final int returnCoin) {
+        if(returnCoins.get(returnCoin) > 0){
             stringBuilder.append(returnCoin)
                     .append(Symbol.WON.getSymbol())
                     .append(Symbol.SPACE.getSymbol())
@@ -66,8 +74,6 @@ public class OutputView {
                     .append(Symbol.EA.getSymbol())
                     .append(Symbol.NEW_LINE.getSymbol());
         }
-
-        return stringBuilder.toString();
     }
 
 }
