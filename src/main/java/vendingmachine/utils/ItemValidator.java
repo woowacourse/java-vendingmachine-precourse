@@ -15,11 +15,12 @@ public class ItemValidator {
 	public static final String ERROR_QUANTITY_NOT_POSITIVE = "[ERROR] 상품 수량은 1개 이상으로 입력해주세요";
 	public static final String ERROR_PRICE_NOT_DIVIDE_BY_10 = "[ERROR] 상품 가격은 10원으로 나누어떨어져야 합니다.";
 
-	private static List<String> itemNameList = new ArrayList<>();
+	private static List<String> itemNameList;
 
 	public void validateItems(String inputValue) {
 		StringTokenizer stringTokenizer = new StringTokenizer(inputValue, ITEMS_DELIMITER);
 		isNotEmpty(stringTokenizer);
+		itemNameList = new ArrayList<>();
 		while (stringTokenizer.hasMoreTokens()) {
 			validateItem(stringTokenizer.nextToken());
 		}
