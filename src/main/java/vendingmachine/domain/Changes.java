@@ -15,14 +15,22 @@ public class Changes {
 
 	public void makeRandomCoin(int money) {
 		List<Integer> coinCandidates = Coin.getCoinAmountList();
-		while (money > 0) {
+		while (haveMoney(money)) {
 			int selectAmount = Randoms.pickNumberInList(coinCandidates);
 			if (isMoneyUnderSelectAmount(money, selectAmount))
 				continue;
 			Coin coin = Coin.getCoinByAmount(selectAmount);
-			changes.replace(coin, changes.get(coin) + 1);
+			addCoinToChanges(coin);
 			money -= selectAmount;
 		}
+	}
+
+	private boolean haveMoney(int money) {
+		return money > 0;
+	}
+
+	private void addCoinToChanges(Coin coin) {
+		changes.replace(coin, changes.get(coin) + 1);
 	}
 
 	private boolean isMoneyUnderSelectAmount(int money, int selectAmount) {
