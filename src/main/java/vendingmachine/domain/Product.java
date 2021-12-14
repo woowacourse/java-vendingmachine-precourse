@@ -13,7 +13,7 @@ public class Product {
 	private int count;
 
 	public Product(String name, int price, int count) {
-		check(price);
+		check(price, name);
 		this.name = name;
 		this.price = price;
 		this.count = count;
@@ -39,9 +39,12 @@ public class Product {
 		return count == 0;
 	}
 
-	private void check(int price) {
+	private void check(int price, String name) {
 		if (price < MIN_AMOUNT || price % DIVIDE_NUM != 0) {
 			throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_NOT_VALID);
+		}
+		if (name.length() <= 0) {
+			throw new IllegalArgumentException(ERROR_PRODUCT_NAME_LENGTH_NOT_ZERO);
 		}
 	}
 }

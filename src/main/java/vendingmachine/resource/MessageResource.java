@@ -17,6 +17,7 @@ public class MessageResource {
 	public static final String ERROR_INPUT_PRODUCT_NOT_VALID = "[ERROR] 상품명,가격,수량이 올바른 형식이 아닙니다.";
 	public static final String ERROR_PRODUCT_NOT_SQUARE_BRACKETS = "[ERROR] 상품입력 형식이 잘못 되었습니다.";
 	public static final String ERROR_PRODUCT_PRICE_NOT_VALID = "[ERROR] 상품 가격은 100원부터 시작하고 10으로 나누어 떨어져야 합니다.";
+	public static final String ERROR_PRODUCT_NAME_LENGTH_NOT_ZERO = "[ERROR] 상품 이름은 1글자 이상이어야 합니다.";
 	public static final String ERROR_NUMBER_IS_NOT_POSITIVE_INT = "[ERROR] 0보다 큰 정수여야 합니다.";
 	public static final String ERROR_NOT_FOUND_PRODUCT_NAME = "[ERROR] 해당 상품은 존재하지 않습니다.";
 }
