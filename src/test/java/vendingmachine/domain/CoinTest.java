@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.*;
 
 import java.util.List;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -13,11 +14,22 @@ import vendingmachine.validator.InputValidator;
 
 class CoinTest {
 
+	@AfterEach
+	void tearDown() {
+		Coin.clear();
+	}
+
 	@Test
-	void 입력한_코인의_금액_검증() {
+	void 자판기_보유_금액_최소_동전() {
 		int inputMachineMoney = 780;
 		Coin.add(inputMachineMoney);
-		List<Coin> coins = Coin.get();
+		assertThat(Coin.getTotal()).isEqualTo(inputMachineMoney);
+	}
+
+	@Test
+	void 자판기_보유_금액_랜덤() {
+		int inputMachineMoney = 780;
+		Coin.generateRandomCount(inputMachineMoney);
 		assertThat(Coin.getTotal()).isEqualTo(inputMachineMoney);
 	}
 

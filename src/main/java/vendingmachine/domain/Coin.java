@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.constant.SystemMessage.*;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -8,6 +10,7 @@ import java.util.stream.Stream;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public enum Coin {
+
 	COIN_500(500, 0),
 	COIN_100(100, 0),
 	COIN_50(50, 0),
@@ -19,6 +22,21 @@ public enum Coin {
 	Coin(final int amount, int count) {
 		this.amount = amount;
 		this.count = count;
+	}
+
+	public static void clear() {
+		for (Coin coin : Coin.values()) {
+			coin.count = 0;
+		}
+	}
+
+	public static void add(int inputMachineMoney) {
+		Coin[] coins = Coin.values();
+		for (Coin coin : coins) {
+			int quotient = inputMachineMoney / coin.amount;
+			inputMachineMoney %= coin.amount;
+			coin.count = quotient;
+		}
 	}
 
 	public static void generateRandomCount(int machineMoney) {
@@ -51,15 +69,6 @@ public enum Coin {
 			.collect(Collectors.toList());
 	}
 
-	public static void add(int inputMachineMoney) {
-		Coin[] coins = Coin.values();
-		for (Coin coin : coins) {
-			int quotient = inputMachineMoney / coin.amount;
-			inputMachineMoney %= coin.amount;
-			coin.count = quotient;
-		}
-	}
-
 	public static List<Coin> get() {
 		return getCoinStream()
 			.collect(Collectors.toList());
@@ -77,6 +86,10 @@ public enum Coin {
 
 	private static int getSubTotal(Coin coin) {
 		return coin.amount * coin.count;
+	}
+
+	public void selfDescription() {
+		System.out.printf(SELF_DESCRIPTION_FORMAT, amount, count);
 	}
 
 	@Override
