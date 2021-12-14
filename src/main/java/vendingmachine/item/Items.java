@@ -10,7 +10,7 @@ public class Items {
         items = new ArrayList<>();
     }
 
-    public void setItems(ArrayList<Item> items) {
+    public void setItems(List<Item> items) {
         this.items = items;
     }
 
