@@ -9,6 +9,10 @@ public class OutputView {
 	private static final String INPUT_PURCHASE_PRODUCT = "구매할 상품명을 입력해 주세요.";
 	private static final String OUTPUT_HOLDING_COINS = "자판기가 보유한 동전";
 	private static final String OUTPUT_CHANGE = "잔돈";
+	private static final String OUTPUT_INSERT_MONEY = "투입 금액";
+	private static final String COLON = ":";
+	private static final String LINE_WRAP = "\n";
+	private static final String WHITESPACE = " ";
 
 	private OutputView() {
 	}
@@ -22,7 +26,7 @@ public class OutputView {
 	}
 
 	public static void printCoins(Coins coins) {
-		System.out.println(OUTPUT_HOLDING_COINS);
+		System.out.println(LINE_WRAP + OUTPUT_HOLDING_COINS);
 		System.out.println(coins.toString());
 	}
 
@@ -31,7 +35,7 @@ public class OutputView {
 	}
 
 	public static void printInputInsertMoneyMessage() {
-		System.out.println(INPUT_INSERT_MONEY);
+		System.out.println(LINE_WRAP + INPUT_INSERT_MONEY);
 	}
 
 	public static void printInputPurchaseProductMessage() {
@@ -39,11 +43,11 @@ public class OutputView {
 	}
 
 	public static void printInsertMoney(int insertMoney) {
-		System.out.println(insertMoney);
+		System.out.println(LINE_WRAP + OUTPUT_INSERT_MONEY + COLON + WHITESPACE + insertMoney);
 	}
 
 	public static void printChange(Coins change) {
-		System.out.println(OUTPUT_CHANGE);
+		System.out.println(LINE_WRAP + OUTPUT_CHANGE);
 		System.out.println(change.toString());
 	}
 }
