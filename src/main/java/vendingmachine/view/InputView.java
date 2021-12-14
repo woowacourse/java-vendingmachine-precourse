@@ -15,8 +15,7 @@ import vendingmachine.validator.InputValidator;
 
 public class InputView {
 
-	public static final String INFO_REMAINING_MONEY = "투입 금액: %d원\n";
-	public static final String INPUT_ITEM_NAME_TO_BUY = "구매할 상품명을 입력해 주세요.";
+
 
 	public static int getMachineMoney() {
 		while (true) {
