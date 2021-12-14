@@ -1,7 +1,10 @@
-package vendingmachine;
+package vendingmachine.model.item.service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import vendingmachine.model.item.domain.Item;
+import vendingmachine.model.shared.Error;
 
 /**
  * 값을 분석해서 Item 객체를 만드는 model class

@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model.cash.domain;
 
 import java.util.Arrays;
 import java.util.List;

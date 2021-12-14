@@ -1,6 +1,9 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import vendingmachine.model.item.domain.Item;
+import vendingmachine.model.item.service.ItemParser;
+import vendingmachine.model.cash.domain.Coin;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,9 +1,13 @@
-package vendingmachine;
+package vendingmachine.model.cash.service;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.model.cash.domain.Coin;
+import vendingmachine.model.item.domain.Item;
+import vendingmachine.model.shared.Error;
+import vendingmachine.model.shared.Validator;
 
 /**
  * 자판기의 동전을 관리하는 model class

@@ -1,8 +1,14 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.model.cash.service.Cashier;
+import vendingmachine.model.item.domain.Item;
+import vendingmachine.model.item.service.ItemManager;
+import vendingmachine.model.item.service.ItemParser;
+import vendingmachine.model.shared.Validator;
+import vendingmachine.view.Display;
 
 /**
  * 자판기의 처리 흐름을 제어하는 controller class

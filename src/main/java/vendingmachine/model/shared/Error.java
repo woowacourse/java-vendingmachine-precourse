@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model.shared;
 
 public enum Error {
 	NOT_NUMBER("숫자로만 입력해야 합니다."),

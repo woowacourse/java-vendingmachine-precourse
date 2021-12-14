@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model.shared;
 
 /**
  * 필요한 검증을 수행하는 model class

@@ -1,7 +1,10 @@
-package vendingmachine;
+package vendingmachine.model.item.service;
 
 import java.util.Comparator;
 import java.util.List;
+
+import vendingmachine.model.item.domain.Item;
+import vendingmachine.model.shared.Error;
 
 /**
  * 자판기의 상품 재고를 관리하는 model class

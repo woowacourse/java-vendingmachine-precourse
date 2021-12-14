@@ -1,6 +1,9 @@
-package vendingmachine;
+package vendingmachine.model.item.domain;
 
 import java.util.regex.Pattern;
+
+import vendingmachine.model.shared.Error;
+import vendingmachine.model.shared.Validator;
 
 /**
  * 상품의 역할을 하는 model class

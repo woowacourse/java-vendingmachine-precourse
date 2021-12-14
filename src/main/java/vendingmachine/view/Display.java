@@ -1,6 +1,9 @@
-package vendingmachine;
+package vendingmachine.view;
 
 import java.util.Map;
+
+import vendingmachine.model.cash.domain.Coin;
+import vendingmachine.model.cash.service.Cashier;
 
 /**
  * 자판기의 출력창 역할을 하는 view class
