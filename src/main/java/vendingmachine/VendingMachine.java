@@ -9,11 +9,13 @@ public class VendingMachine {
 	private int leftMoney;
 	private HashMap<Coin, Integer> coins;
 	private HashMap<String, Product> products;
+	private int inputAmount;
 
 	VendingMachine(){
 		this.leftMoney = InputReceiver.getNumber();
 		_makeCoins();
 		this.products = InputReceiver.getProductInfo();
+		this.inputAmount = InputReceiver.getNumber();
 	}
 
 	private void _makeCoins(){
