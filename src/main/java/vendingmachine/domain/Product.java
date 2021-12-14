@@ -4,6 +4,7 @@ public class Product {
 	private String name;
 	private int price;
 	private int quantity;
+	private static final int OUT_OF_STOCK = 0;
 
 	public Product(String name, int price, int quantity) {
 		this.name = name;
@@ -25,6 +26,14 @@ public class Product {
 
 	public void reduceQuantity() {
 		quantity--;
+	}
+
+	public boolean checkStock() {
+		return quantity > OUT_OF_STOCK;
+	}
+
+	public boolean checkPriceWithCurrentMoney(int currentMoney) {
+		return price <= currentMoney;
 	}
 
 }

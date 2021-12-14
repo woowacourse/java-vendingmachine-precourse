@@ -46,7 +46,7 @@ public class VendingMachine {
 	}
 
 	public boolean isValidToBuyProductWithCurrentMoney() {
-		return products.getMinPriceProduct() < insertMoney.getCurrentMoney();
+		return products.getMinPriceProduct() <= insertMoney.getCurrentMoney();
 	}
 
 	public boolean isValidProductStock() {

@@ -10,7 +10,6 @@ import vendingmachine.utils.message.ErrorMessage;
 
 public class ProductValidator {
 
-	private static final int OUT_OF_STOCK = 0;
 	private static final String COMMA = ",";
 	private static final int PRICE_INDEX = 1;
 
@@ -18,8 +17,6 @@ public class ProductValidator {
 		int currentMoney = vendingMachine.getInsertMoney().getCurrentMoney();
 		try {
 			Product product = vendingMachine.getProducts().getProductByName(productName);
-			List<Product> productList = vendingMachine.getProducts().getProductList();
-			isValidToExistInProductList(productList, product);
 			isValidProductStock(product);
 			isValidToBuyProductWithCurrentMoney(product, currentMoney);
 		} catch (Exception e) {
@@ -30,23 +27,16 @@ public class ProductValidator {
 	}
 
 	public static void isValidToBuyProductWithCurrentMoney(Product product, int currentMoney) {
-		if (currentMoney < product.getPrice()) {
+		if (!product.checkPriceWithCurrentMoney(currentMoney)) {
 			throw new IllegalArgumentException(ErrorMessage.ERROR_CANNOT_BUY_PRODUCT_WITH_CURRENT_MONEY.getText());
 		}
 	}
 
 	public static void isValidProductStock(Product product) {
-		if (product.getQuantity()==OUT_OF_STOCK) {
+		if (!product.checkStock()) {
 			throw new IllegalArgumentException(ErrorMessage.ERROR_PRODUCT_OUT_OF_STOCK.getText());
 		}
 	}
-
-	public static void isValidToExistInProductList(List<Product> productList, Product product) {
-		if (!productList.contains(product)) {
-			throw new IllegalArgumentException(ErrorMessage.ERROR_PRODUCT_DOES_NOT_EXIST.getText());
-		}
-	}
-
 
 	public static boolean checkIsValidProductInfoList(List<String> productInfoList) {
 		try {
