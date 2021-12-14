@@ -27,7 +27,11 @@ public class ViewController {
 		try {
 			String input = inputView.getDepositInput();
 			MoneyValidator.isValidMoney(input);
-			return Integer.parseInt(input);
+
+			int deposit = Integer.parseInt(input);
+			printRemainingDeposit(deposit);
+
+			return deposit;
 		} catch (IllegalArgumentException exception) {
 			printError(exception);
 			return returnDepositAmount();
