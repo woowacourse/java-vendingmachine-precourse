@@ -23,4 +23,9 @@ public class CoinController {
         }
         return totalCoin;
     }
+
+    public void result() {
+        coinModel.randomCoinStore();
+        CoinView.outputAmount();
+    }
 }
