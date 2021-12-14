@@ -44,7 +44,7 @@ public class VendingMachine {
 
 	public Changes returnChanges() {
 		Changes changes = this.changes.toChangesMinCount(remainingMoney);
-		withdraw(changes.totalMoney());
+		withdraw(changes.getTotalMoney());
 		return changes;
 	}
 

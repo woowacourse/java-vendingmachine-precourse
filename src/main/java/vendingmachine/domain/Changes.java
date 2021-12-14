@@ -22,7 +22,7 @@ public class Changes {
 		return changes;
 	}
 
-	private void setChanges(Coin coin, int count) {
+	public void setChanges(Coin coin, int count) {
 		changes.replace(coin, count);
 	}
 
@@ -50,7 +50,7 @@ public class Changes {
 		return changes;
 	}
 
-	public Money totalMoney() {
+	public Money getTotalMoney() {
 		Money money = new Money(0);
 		for (Map.Entry<Coin, Integer> coinInteger : changes.entrySet()) {
 			money = money.plus(new Money(coinInteger.getKey().getAmount() * coinInteger.getValue()));
