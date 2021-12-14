@@ -9,6 +9,7 @@ public class Application {
             vendingMachine.buy(InputReceiver.getProductName(vendingMachine));
         }
 
+        VendingMachinePrinter.printChanges(vendingMachine.calculateChanges());
     }
 
 }
