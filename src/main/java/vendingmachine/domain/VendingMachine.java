@@ -37,23 +37,29 @@ public class VendingMachine {
 
 	public String generateCoins() {
 		int fisrtInsertedAmount = this.machineMoney.toInt();
-
-		boolean canExchange = this.machineMoney.toInt() >= Constant.LOWEST_COIN_AMOUNT;
-
+		boolean canExchange = isEnoughMachineMoneyThanCoinAmount(Constant.LOWEST_COIN_AMOUNT);
 		while (canExchange) {
 			int pickRangdomCoin = Util.pickRandomCoin(makeCoinKinds());
-			if (!(this.machineMoney.toInt() >= pickRangdomCoin
-				&& pickRangdomCoin != fisrtInsertedAmount
-			)) {
+			if (isEnoughExchangeDemands(fisrtInsertedAmount, pickRangdomCoin))
 				continue;
-			}
 			this.machineMoney.decreaseWith(pickRangdomCoin);
 			this.machineCoinCounter.plusCount(Coin.findByAmount(pickRangdomCoin));
-
-			canExchange = this.machineMoney.toInt() >= Constant.LOWEST_COIN_AMOUNT;
+			canExchange = isEnoughMachineMoneyThanCoinAmount(Constant.LOWEST_COIN_AMOUNT);
 		}
-
 		return this.machineCoinCounter.toString();
+	}
+
+	private boolean isEnoughExchangeDemands(int fisrtInsertedAmount, int pickRangdomCoin) {
+		return !(isEnoughMachineMoneyThanCoinAmount(pickRangdomCoin)
+			&& isNotSameInsertMoney(fisrtInsertedAmount, pickRangdomCoin));
+	}
+
+	private boolean isEnoughMachineMoneyThanCoinAmount(int pickRangdomCoin) {
+		return this.machineMoney.toInt() >= pickRangdomCoin;
+	}
+
+	private boolean isNotSameInsertMoney(int fisrtInsertedAmount, int pickRangdomCoin) {
+		return pickRangdomCoin != fisrtInsertedAmount;
 	}
 
 	private List<Integer> makeCoinKinds() {
@@ -103,7 +109,12 @@ public class VendingMachine {
 
 	public String returnCoins() {
 		CoinCounter userReturnCoinCounter = new CoinCounter();
+		exChangeProcess(userReturnCoinCounter);
+		this.machineMoney.increaseWith(this.userMoney.toInt());
+		return returnCoinToStates(userReturnCoinCounter);
+	}
 
+	private void exChangeProcess(CoinCounter userReturnCoinCounter) {
 		this.machineCoinCounter.forEach((coin, count) -> {
 			IntStream.rangeClosed(Constant.CONSTANT_ONE, count)
 				.forEach(i -> {
@@ -111,21 +122,20 @@ public class VendingMachine {
 					if (isReturnable()) {
 						this.userMoney.decreaseWith(coinAmount);
 						this.machineCoinCounter.minusCount(coin);
-
 						userReturnCoinCounter.plusCount(coin);
 					}
 				});
 		});
-
-		this.machineMoney.increaseWith(this.userMoney.toInt());
-
-		if (!userReturnCoinCounter.isAnyAvailable()) {
-			return Constant.EMPTY_STRING;
-		}
-		return userReturnCoinCounter.toReturnCoinString();
 	}
 
 	private boolean isReturnable() {
 		return this.userMoney.toInt() >= Constant.LOWEST_COIN_AMOUNT && this.machineCoinCounter.isAnyAvailable();
+	}
+
+	private String returnCoinToStates(CoinCounter userReturnCoinCounter) {
+		if (!userReturnCoinCounter.isAnyAvailable()) {
+			return Constant.EMPTY_STRING;
+		}
+		return userReturnCoinCounter.toReturnCoinString();
 	}
 }
