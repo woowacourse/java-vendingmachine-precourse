@@ -97,9 +97,6 @@ public class VendingMachine {
 		if (isLowerMinimumPrice()) {
 			return false;
 		}
-		if (!isAllProductExist()) {
-			return false;
-		}
 		return true;
 	}
 
@@ -134,17 +131,6 @@ public class VendingMachine {
 			priceList.add(price);
 		}
 		return priceList;
-	}
-
-	private boolean isAllProductExist() {
-		int totalQuantity = 0;
-
-		for (Entry<Product, Integer> product : products.entrySet()) {
-			int quantity = product.getValue();
-			totalQuantity += quantity;
-		}
-
-		return totalQuantity > PRODUCT_NOT_EXIST;
 	}
 
 	public void buy(String name) {
