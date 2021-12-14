@@ -1,19 +1,22 @@
 package vendingmachine.domain;
 
 import java.util.LinkedHashMap;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
-
-import vendingmachine.Coin;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 
 public class VendingMachine {
-
+    private int minimumPrice;
     private Map<Coin, Integer> coinHashMap;
+    private Map<String, Product> productMap;
 
     public VendingMachine(int inputMoney) {
+        minimumPrice = 0;
         coinHashMap = generateRandomCoins(inputMoney);
+        productMap = new HashMap<>();
     }
 
     private Map<Coin, Integer> generateRandomCoins(int inputMoney) {
@@ -31,6 +34,16 @@ public class VendingMachine {
             newCoinHashMap.put(coin, newCoinHashMap.getOrDefault(coin, 0) + randomQuotient);
         }
         return inputMoney;
+    }
+
+    public void saveProduct(List<Product> products) {
+        for (Product product : products) {
+            if (productMap.containsKey(product.getName())) {
+                throw new IllegalArgumentException();
+            }
+            productMap.put(product.getName(), product);
+            minimumPrice = Math.min(minimumPrice, product.getPrice());
+        }
     }
 
     @Override
