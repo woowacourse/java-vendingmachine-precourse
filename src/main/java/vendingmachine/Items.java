@@ -11,12 +11,16 @@ public class Items {
 		this.stock = Integer.parseInt(stock);
 	}
 
-	public boolean sellItem() {
-		if (stock == 0) {
-			return false;
+	public int sellItem() {
+		if (stock < 0) {
+			return -1;
 		}
 		stock--;
-		return true;
+		return stock;
+	}
+
+	public int getStock() {
+		return stock;
 	}
 
 	public int getPrice() {

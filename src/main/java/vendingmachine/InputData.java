@@ -4,8 +4,8 @@ import camp.nextstep.edu.missionutils.Console;
 
 public class InputData {
 	private static final String SET_AMOUNT_MSG = "자판기가 보유하고 있는 금액을 입력해 주세요.";
-	private static final String SET_ITEM_MSG = "상품명과 가격, 수량을 입력해 주세요.";
-	private static final String INPUT_MONEY_MSG = "투입 금액을 입력해 주세요.";
+	private static final String SET_ITEM_MSG = "\n상품명과 가격, 수량을 입력해 주세요.";
+	private static final String INPUT_MONEY_MSG = "\n투입 금액을 입력해 주세요.";
 	private static final String BUY_ITEM_MSG = "구매할 상품명을 입력해 주세요.";
 
 	public static int setAmount() {
@@ -54,6 +54,8 @@ public class InputData {
 			System.out.println(INPUT_MONEY_MSG);
 			Money = Console.readLine();
 		} while (!checkInputMoney(Money));
+
+		Output.printMoney(Integer.parseInt(Money));
 		return Integer.parseInt(Money);
 	}
 

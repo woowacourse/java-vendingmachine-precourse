@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.Arrays;
-
 public class InputException {
 	private static final String IS_INTEGER_ERROR_MSG = "[ERROR] 금액은 숫자여야 합니다.";
 	private static final String IS_POSITIVE_INTEGER_ERROR_MSG = "[ERROR] 금액은 0보다 커야 합니다.";
@@ -13,6 +11,7 @@ public class InputException {
 	private static final String ITEM_STOCK_IS_POSITIVE_ERROR_MSG = "[ERROR] 상품 수량은 0보다 커야 합니다.";
 
 	private static final String CAN_BUY = "[ERROR] 리스트에 없는 상품입니다.";
+	private static final String SOLD_OUT = "[ERROR] 해당 상품은 품절입니다. 다른 상품을 골라주세요.";
 
 	public static void checkAmount(String amount) {
 		isInteger(amount);
@@ -101,5 +100,11 @@ public class InputException {
 			throw new IllegalArgumentException(CAN_BUY);
 		}
 		return itemsIndex;
+	}
+
+	public static void soldOut(int itemStock, int allStock) {
+		if (itemStock == -1 && allStock != 0) {
+			throw new IllegalArgumentException(SOLD_OUT);
+		}
 	}
 }
