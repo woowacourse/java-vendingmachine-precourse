@@ -96,10 +96,6 @@ public class Program {
 		return userMoneyInString;
 	}
 
-	private String getProductName() {
-		return Console.readLine();
-	}
-
 	private void buyProductUntilFailure() {
 		Guide.printLeftMoney(userMoney);
 		Guide.PURCHASE_REQUEST.println();
@@ -110,6 +106,15 @@ public class Program {
 			return;
 		}
 		buyProductUntilFailure();
+	}
+
+	private String getProductName() {
+		String productName = Console.readLine().trim();
+		PurchaseProductNameValidator validator = new PurchaseProductNameValidator();
+		if (!validator.validate(productName, productTable)) {
+			return getProductName();
+		}
+		return productName;
 	}
 
 	private CoinPocket calculateChange() {

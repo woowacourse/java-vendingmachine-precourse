@@ -39,4 +39,8 @@ public class ProductTable {
 		}
 		return false;
 	}
+
+	public boolean hasProductName(String productName) {
+		return products.containsKey(productName);
+	}
 }

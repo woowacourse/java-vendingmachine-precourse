@@ -16,7 +16,9 @@ public enum Error {
 	NO_ENTRY_SEPARATOR("[ERROR] 개별 상품은 세미콜론(;)으로 구분해야 합니다."),
 	NOT_NUMBER_USER_MONEY("[ERROR] 투입 금액은 숫자여야 합니다."),
 	NOT_MULTIPLE_OF_TEN_USER_MONEY("[ERROR] 투입 금액은 10의 배수여야 합니다."),
-	NOT_EQUAL_OR_GREATER_THAN_TEN_USER_MONEY("[ERROR] 투입 금액은 10원 이상이여야 합니다.");
+	NOT_EQUAL_OR_GREATER_THAN_TEN_USER_MONEY("[ERROR] 투입 금액은 10원 이상이여야 합니다."),
+	ZERO_LENGTH_PURCHASE_PRODUCT_NAME("[ERROR] 구입할 상품을 입력해주세요."),
+	NO_MATCHED_ENTRY_PRODUCT_NAME("[ERROR] 입력한 상품이 자판기에 없습니다.");
 
 	private final String message;
 
