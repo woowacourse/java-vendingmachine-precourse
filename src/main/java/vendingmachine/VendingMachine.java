@@ -7,8 +7,10 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class VendingMachine {
 
@@ -21,7 +23,7 @@ public class VendingMachine {
         this.coinBox = new LinkedHashMap<>();
         this.speaker = new Speaker();
         this.touchpad = new Touchpad();
-        List<Coin> sortedCoins = Arrays.stream(Coin.values()).sorted().collect(Collectors.toList());
+        List<Coin> sortedCoins = makeCoinStream().sorted().collect(Collectors.toList());
         for (Coin coin : sortedCoins) {
             coinBox.put(coin, 0);
         }
@@ -38,7 +40,6 @@ public class VendingMachine {
         products = new ArrayList<>();
         speaker.requestProducts();
         List<String> rawProducts = touchpad.inputProducts();
-        ;
         collectProducts(rawProducts);
     }
 
@@ -59,16 +60,28 @@ public class VendingMachine {
     }
 
     private void generateRandomCoinBasedOnAsset(int asset) {
-        List<Integer> coins = Arrays.stream(Coin.values()).map(Coin::getCoinValue).collect(Collectors.toList());
+        List<Integer> coins = makeCoinStream().map(Coin::getAmount).collect(Collectors.toList());
         while (asset > 0) {
             int randomCoin = Randoms.pickNumberInList(coins);
             if (isAvailableCoin(asset, randomCoin)) {
                 asset -= randomCoin;
-                Coin generatedCoin = Arrays.stream(Coin.values()).filter(coin -> randomCoin == coin.getCoinValue()).findFirst()
-                    .orElseThrow(IllegalArgumentException::new);
-                coinBox.put(generatedCoin, coinBox.get(generatedCoin) + 1);
+                Coin generatedCoin = findCoin(randomCoin);
+                insertGeneratedCoinToCoinBox(generatedCoin);
             }
         }
+    }
+
+    private void insertGeneratedCoinToCoinBox(Coin generatedCoin) {
+        coinBox.put(generatedCoin, addOneCoin(generatedCoin));
+    }
+
+    private int addOneCoin(Coin generatedCoin) {
+        return coinBox.get(generatedCoin) + 1;
+    }
+
+    private Coin findCoin(int randomCoin) {
+        return makeCoinStream().filter(coin -> coin.matchAmount(randomCoin)).findFirst()
+            .orElseThrow(IllegalArgumentException::new);
     }
 
     private boolean isAvailableCoin(int asset, int randomCoin) {
@@ -129,17 +142,23 @@ public class VendingMachine {
         Set<Coin> coins = coinBox.keySet();
         for (Coin coin : coins) {
             Integer coinCount = coinBox.get(coin);
-            if (coinCount * coin.getCoinValue() > insertedMoney) {
-                coinCount = insertedMoney / coin.getCoinValue();
-            }
+            coinCount = coin.calculateMaxCoinCount(insertedMoney, coinCount);
+            insertedMoney -= coin.calculateTotalAmount(coinCount);
             speaker.announceCoinAmount(coin, coinCount);
-            insertedMoney -= coinCount * coin.getCoinValue();
         }
     }
 
     private int sellProduct(String wantedProduct) {
-        Product product = products.stream().filter(p -> p.getName().equals(wantedProduct)).findFirst().orElseThrow(IllegalArgumentException::new);
-        product.sell();
-        return product.getPrice();
+        Product soldProduct = findWantedProduct(wantedProduct).orElseThrow(IllegalArgumentException::new);
+        soldProduct.sell();
+        return soldProduct.getPrice();
+    }
+
+    private Optional<Product> findWantedProduct(String wantedProduct) {
+        return products.stream().filter(product -> product.matchWantedProduct(wantedProduct)).findFirst();
+    }
+
+    private Stream<Coin> makeCoinStream() {
+        return Arrays.stream(Coin.values());
     }
 }

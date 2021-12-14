@@ -12,7 +12,26 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int getCoinValue() {
+    public int getAmount() {
         return amount;
+    }
+
+    public boolean matchAmount(int asset) {
+        return this.amount == asset;
+    }
+
+    public Integer calculateTotalAmount(Integer coinCount) {
+        return this.amount * coinCount;
+    }
+
+    public Integer calculateMaxCoinCount(int insertedMoney, int coinCount) {
+        if (calculateTotalAmount(coinCount) > insertedMoney) {
+            coinCount = getMaxCountByInsertedMoney(insertedMoney);
+        }
+        return coinCount;
+    }
+
+    private Integer getMaxCountByInsertedMoney(int insertedMoney) {
+        return insertedMoney / this.amount;
     }
 }

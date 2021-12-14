@@ -20,11 +20,11 @@ public class Product {
         return this.quantity == 0;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public void sell() {
         this.quantity--;
+    }
+
+    public boolean matchWantedProduct(String wantedProduct) {
+        return this.name.equals(wantedProduct);
     }
 }
