@@ -39,12 +39,16 @@ public class OutputView {
 
     public static void printBalanceCoins(Map<Coin, Integer> balanceCoin) {
         System.out.println(VENDING_MACHINE_BALANCE);
-
-        for (Coin coin : balanceCoin.keySet()) {
-            System.out.println(coin.getAmount() + WON + HYPHEN + balanceCoin.get(coin) + NUMBER_OF);
-        }
-
+        balanceCoin.forEach((coin, count) -> System.out.println(coin.getAmount() + WON + HYPHEN + count + NUMBER_OF));
         System.out.println();
+    }
+
+    public static void printChangeCoins(int money, Map<Coin, Integer> changeCoin) {
+        printRemainMoney(money);
+        System.out.println(CHANGE);
+
+        changeCoin.forEach((coin, count) -> System.out.println(coin.getAmount() + WON + HYPHEN + count + NUMBER_OF));
+
     }
 
     public static void printRemainMoney(int money) {

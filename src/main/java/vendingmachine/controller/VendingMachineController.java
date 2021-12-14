@@ -34,6 +34,8 @@ public class VendingMachineController {
             sale();
         }
 
+        balance.calculateChangeCoin(money.getRemainMoney());
+        requestPrintChangeCoins();
     }
 
     private void receiveVendingMachineBalance() {
@@ -101,5 +103,9 @@ public class VendingMachineController {
         receiveUserChoice();
         int price = items.sellItem(userChoice);
         money.use(price);
+    }
+
+    private void requestPrintChangeCoins() {
+        OutputView.printChangeCoins(money.getRemainMoney(), balance.getChangeCoin());
     }
 }

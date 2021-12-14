@@ -11,10 +11,19 @@ public class Balance {
     private final int DEFAULT_VALUE = 0;
     private final int CHANGE_VALUE = 1;
     private final Map<Coin, Integer> balanceCoin;
+    private Map<Coin, Integer> changeCoin;
 
     public Balance() {
         balanceCoin = new LinkedHashMap<>();
         resetCoin();
+    }
+
+    public Map<Coin, Integer> getBalanceCoin() {
+        return balanceCoin;
+    }
+
+    public Map<Coin, Integer> getChangeCoin() {
+        return changeCoin;
     }
 
     private void resetCoin() {
@@ -56,7 +65,27 @@ public class Balance {
 
     }
 
-    public Map<Coin, Integer> getBalanceCoin() {
-        return balanceCoin;
+    private void balanceToChange(Coin coin, int count) {
+
+        if (count != DEFAULT_VALUE) {
+            balanceCoin.put(coin, balanceCoin.get(coin) - count);
+            changeCoin.put(coin, count);
+        }
+
+    }
+
+    public void calculateChangeCoin(int remainMoney) {
+        changeCoin = new LinkedHashMap<>();
+
+        for (Coin coin : Coin.values()) {
+
+            if (balanceCoin.get(coin) != DEFAULT_VALUE) {
+                int count = Math.min(remainMoney / coin.getAmount(), balanceCoin.get(coin));
+                balanceToChange(coin, count);
+                remainMoney -= coin.getAmount() * count;
+            }
+
+        }
+
     }
 }
