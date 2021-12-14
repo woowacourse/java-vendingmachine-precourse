@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.*;
 import static vendingmachine.constant.ErrorMessage.*;
 
 import java.util.List;
