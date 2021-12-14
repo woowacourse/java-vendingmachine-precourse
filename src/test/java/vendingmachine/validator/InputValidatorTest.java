@@ -23,7 +23,7 @@ class InputValidatorTest {
 	@ParameterizedTest
 	@DisplayName("세미콜론 존재 여부와 위치에 따라 예외가 발생한다. - 실패")
 	@ValueSource(strings = {"[콜라,1500,20];", "[콜라,1500,20][사이다,1000,10]", "[콜라,1500,20];;[사이다,1000,10]"})
-	void checkInputFormWhenFailure(String input) {
+	void checkInputFormFauilureWhenDuplicateOrEmptySemicolon(String input) {
 		//given
 		//when then
 		assertThatThrownBy(
@@ -45,7 +45,7 @@ class InputValidatorTest {
 	@ParameterizedTest
 	@DisplayName("금액이 100원 미만이거나 10원으로 나누어 떨어지지 않을때 예외가 발생한다. - 실패")
 	@ValueSource(strings = {"99", "1997"})
-	void checkMoneyFormWhenFailure(String input) {
+	void checkMoneyFormFailureWhenIllegalPrice(String input) {
 		//given
 		//when then
 		assertThatThrownBy(
