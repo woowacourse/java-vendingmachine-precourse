@@ -10,7 +10,7 @@ import vendingmachine.validation.enumclass.Constant;
 public class GlobalValidation {
 
 	public static void validateCostIsNaturalNumber(String willHoldMoney) {
-		validateCharIsInt(willHoldMoney, ErrorMessage.COST_IS_NOT_NUMBER_ERROR);
+		validateStringIsInt(willHoldMoney, ErrorMessage.COST_IS_NOT_NUMBER_ERROR);
 
 		if (Integer.parseInt(willHoldMoney) <= Constant.ZERO.getNumber()) {
 			throw new IllegalArgumentException(ErrorMessage.COST_IS_NOT_NUMBER_ERROR.getErrorMessage());
@@ -27,9 +27,13 @@ public class GlobalValidation {
 
 	public static void validateProductsInputFormat(String inputStr) {
 		for (String product : inputStr.split(";")) {
-			if (!product.contains("[") || !product.contains("]")) {
-				throw new IllegalArgumentException(ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR.getErrorMessage());
-			}
+			validateStringContainsSquareBracket(product, ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR);
+		}
+	}
+
+	private static void validateStringContainsSquareBracket(String string, ErrorMessage errorMessage) {
+		if (!string.contains("[") || !string.contains("]")) {
+			throw new IllegalArgumentException(errorMessage.getErrorMessage());
 		}
 	}
 
@@ -42,7 +46,7 @@ public class GlobalValidation {
 	}
 
 	public static void validateProductPrice(String price) {
-		validateCharIsInt(price, ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR);
+		validateStringIsInt(price, ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR);
 
 		if (Integer.parseInt(price) < Constant.HUNDRED.getNumber()) {
 			throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_IS_NOT_MORE_THAN_100_ERROR.getErrorMessage());
@@ -52,7 +56,7 @@ public class GlobalValidation {
 	}
 
 	public static void validateProductAmount(String amount) {
-		validateCharIsInt(amount, ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);
+		validateStringIsInt(amount, ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);
 		validateNumberIsZero(Integer.parseInt(amount), ErrorMessage.PRODUCT_AMOUNT_IS_NOT_NATURAL_NUMBER_ERROR);
 	}
 
@@ -72,11 +76,15 @@ public class GlobalValidation {
 		validateNumberIsZero(productAmount, ErrorMessage.PRODUCT_AMOUNT_IS_ZERO_ERROR);
 	}
 
-	private static void validateCharIsInt(String str, ErrorMessage errorMessage) {
+	private static void validateStringIsInt(String str, ErrorMessage errorMessage) {
 		for (char c : str.toCharArray()) {
-			if (!Character.isDigit(c)) {
-				throw new IllegalArgumentException(errorMessage.getErrorMessage());
-			}
+			validateCharIsInt(c, errorMessage);
+		}
+	}
+
+	private static void validateCharIsInt(char c, ErrorMessage errorMessage) {
+		if (!Character.isDigit(c)) {
+			throw new IllegalArgumentException(errorMessage.getErrorMessage());
 		}
 	}
 

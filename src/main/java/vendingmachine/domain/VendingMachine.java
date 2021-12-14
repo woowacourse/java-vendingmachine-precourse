@@ -35,14 +35,17 @@ public class VendingMachine {
 
 	public void makeCoinInCoinMap(int money) {
 		while (money > 0) {
-			int randomCoin = CoinUtil.generateRandomCoin();
-			if (randomCoin > money) {
-				continue;
-			}
+			money = compareRandomCoinAndMoney(money, CoinUtil.generateRandomCoin());
+		}
+	}
 
+	private int compareRandomCoinAndMoney(int money, int randomCoin) {
+		if (randomCoin <= money) {
 			addCoin(randomCoin);
 			money -= randomCoin;
 		}
+
+		return money;
 	}
 
 	public int getSumCoinAmount() {
@@ -100,12 +103,18 @@ public class VendingMachine {
 		return true;
 	}
 
-	public int compareInputCostAndCoinToDecideChange() {
+	public int compareInputCostAndCoinToGetChange() {
 		if (inputCost < getSumCoinAmount()) {
 			return inputCost;
 		}
 
 		return getSumCoinAmount();
+	}
+
+	public void canInputCostSet(int inputCost) {
+		if (this.inputCost == 0) {
+			this.inputCost = inputCost;
+		}
 	}
 
 	public Map<Integer, Integer> getCoinMap() {
@@ -118,11 +127,5 @@ public class VendingMachine {
 
 	public List<Product> getProducts() {
 		return products;
-	}
-
-	public void canInputCostSet(int inputCost) {
-		if(this.inputCost == 0) {
-			this.inputCost = inputCost;
-		}
 	}
 }

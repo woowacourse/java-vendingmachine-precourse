@@ -22,6 +22,7 @@ public class VendingMachineService {
 	public String postVendingMachineCosts(String inputStr) {
 		InputVendingMachineCostValidator.validateVendingMachineCost(inputStr);
 		result.init();
+
 		result.addMessage(Message.PRINT_COIN_IN_MACHINE.getMessage() + '\n');
 		vendingMachine.makeCoinInCoinMap(Integer.parseInt(inputStr));
 		result.addCoinCountMessage(vendingMachine.getCoinMap());
@@ -32,35 +33,32 @@ public class VendingMachineService {
 	public void postProductInfo(String inputStr) {
 		vendingMachine.initProducts();
 		InputProductsValidator.validateProducts(inputStr);
+
 		vendingMachine.addProducts(inputStr.replaceAll("\\[", "").replaceAll("\\]", "").split(";"));
 	}
 
-	public String postInputCosts(String inputStr) {
+	public void postInputCosts(String inputStr) {
 		InputCostValidator.validateInputCost(inputStr);
-		result.init();
+
 		vendingMachine.canInputCostSet(Integer.parseInt(inputStr));
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
-
-		return result.getResult();
 	}
 
 	public boolean postProductName(String inputStr) {
 		InputProductNameValidator.validateProductName(inputStr, vendingMachine.getProducts());
 		result.init();
+
 		vendingMachine.subtractInputCostAndProductAmount(inputStr);
 		ResponseMessage.printInputCost(vendingMachine.getInputCost());
 
-		if (vendingMachine.checkGetChange()) {
-			return true;
-		}
-
-		return false;
+		return vendingMachine.checkGetChange();
 	}
 
 	public String getChange() {
 		result.init();
+
 		result.addMessage(Message.PRINT_BALANCE.getMessage() + '\n');
-		result.addCoinCountMessage(ChangeUtil.getMinimumChange(vendingMachine.compareInputCostAndCoinToDecideChange(),
+		result.addCoinCountMessage(ChangeUtil.getMinimumChangeMap(vendingMachine.compareInputCostAndCoinToGetChange(),
 			vendingMachine.getCoinMap()));
 
 		return result.getResult();

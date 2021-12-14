@@ -17,30 +17,30 @@ public class VendingMachineController {
 	public void postVendingMachineCosts() {
 		ResponseMessage.of(Message.ENTER_COSTS_GOING_TO_HAS_MACHINE.getMessage());
 
-		try{
-			ResponseMessage.of('\n'+vendingMachineService.postVendingMachineCosts(Console.readLine()));
-		} catch(IllegalArgumentException e){
+		try {
+			ResponseMessage.of('\n' + vendingMachineService.postVendingMachineCosts(Console.readLine()));
+		} catch (IllegalArgumentException e) {
 			ErrorResponse.of(e.getMessage());
 			postVendingMachineCosts();
 		}
 	}
 
-	public void postProductInfo(){
+	public void postProductInfo() {
 		ResponseMessage.of(Message.ENTER_PRODUCT.getMessage());
 
-		try{
+		try {
 			vendingMachineService.postProductInfo(Console.readLine());
-		} catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			ErrorResponse.of(e.getMessage());
 			postProductInfo();
 		}
 	}
 
-	public void postInputCosts(){
-		try{
-			ResponseMessage.of('\n'+Message.ENTER_INPUT_COSTS.getMessage());
+	public void postInputCosts() {
+		try {
+			ResponseMessage.of('\n' + Message.ENTER_INPUT_COSTS.getMessage());
 			vendingMachineService.postInputCosts(Console.readLine());
-		}catch (IllegalArgumentException e){
+		} catch (IllegalArgumentException e) {
 			ErrorResponse.of(e.getMessage());
 			postInputCosts();
 		}

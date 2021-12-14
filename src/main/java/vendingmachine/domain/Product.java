@@ -35,7 +35,9 @@ public class Product implements Comparable<Product> {
 	}
 
 	public void subtractAmount() {
-		amount--;
+		if (amount > 1) {
+			amount--;
+		}
 	}
 
 	public boolean CanInputCostSubtract(int inputCost) {
