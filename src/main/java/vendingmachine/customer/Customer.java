@@ -5,34 +5,34 @@ import vendingmachine.utils.message.MoneyErrorMessage;
 
 public class Customer {
 
-    private int amount;
+    private int balance;
 
     private Customer(){}
 
     public static Customer fromInputAmount(int initialAmount) {
         Customer customer = new Customer();
-        customer.amount = initialAmount;
+        customer.balance = initialAmount;
         return customer;
     }
 
-    public int getAmount() {
-        return amount;
+    public int getBalance() {
+        return balance;
     }
 
-    public void addAmount(int amount) {
-        this.amount += amount;
+    public void addBalance(int amount) {
+        balance += amount;
     }
 
-    public void reduceAmount(int amount) {
-        if(this.amount < amount) {
-            throw new NotEnoughMoneyException(MoneyErrorMessage.NOT_ENOUGH_MONEY);
+    public void reduceBalance(int amount) {
+        if(balance < amount) {
+            throw new NotEnoughMoneyException(MoneyErrorMessage.NOT_ENOUGH_BALANCE);
         }
-        this.amount += amount;
+        balance += amount;
     }
 
     public void hasPurchaseAmount(int purchaseAmount) {
-        if(amount < purchaseAmount) {
-            throw new NotEnoughMoneyException(MoneyErrorMessage.NOT_ENOUGH_MONEY);
+        if(balance < purchaseAmount) {
+            throw new NotEnoughMoneyException(MoneyErrorMessage.NOT_ENOUGH_BALANCE);
         }
     }
 }

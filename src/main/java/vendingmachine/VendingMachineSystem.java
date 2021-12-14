@@ -46,7 +46,7 @@ public class VendingMachineSystem {
     }
 
     private List<String> getChange() {
-        Integer remainingAmount = customerController.getRemainingAmount();
+        Integer remainingAmount = customerController.getBalance();
         return coinController.getChange(remainingAmount);
     }
 }

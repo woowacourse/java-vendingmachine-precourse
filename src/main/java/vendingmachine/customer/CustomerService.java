@@ -17,18 +17,18 @@ public class CustomerService {
     }
 
     public void purchaseItem(int purchaseAmount) {
-        customer.reduceAmount(purchaseAmount);
+        customer.reduceBalance(purchaseAmount);
     }
 
     public void cancelPurchase(int purchaseAmount) {
-        customer.addAmount(purchaseAmount);
+        customer.addBalance(purchaseAmount);
     }
 
     public void hasPurchaseAmount(int purchaseAmount) {
         customer.hasPurchaseAmount(purchaseAmount);
     }
 
-    public Integer getRemainingAmount() {
-        return customer.getAmount();
+    public Integer getBalance() {
+        return customer.getBalance();
     }
 }

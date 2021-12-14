@@ -38,7 +38,7 @@ public class CustomerController {
         }
     }
 
-    public Integer getRemainingAmount() {
-        return customerService.getRemainingAmount();
+    public Integer getBalance() {
+        return customerService.getBalance();
     }
 }
