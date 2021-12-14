@@ -49,7 +49,7 @@ public class MachineController {
     public void mainVendingMachine() {
         initMachine();
         boolean result = false;
-        do{
+        do {
             System.out.println(machine.toString());
             result = playMachine();
         }while (!result);
@@ -58,13 +58,14 @@ public class MachineController {
 
     // 게임이 종료된다 -> true
     public boolean playMachine() {
-        if(checkLeftItem()){
+        if(checkLeftItem()) {
             return true;
         }
         String product;
         try {
             product = MachineView.inputItem();
             Item item = findItemByName(product);
+            checkItemIsExist(item);
             buyItem(item);
         } catch (IllegalArgumentException e) {
             System.out.println("없는 상품이거나 재고가 부족한 상품입니다. 다시 입력해주세요.");
@@ -97,7 +98,7 @@ public class MachineController {
 
     // 최소비용보다 적어서 종료해야된다면 true
     public boolean checkLeftItem() {
-        if(machine.isLack(minItemPrice())){
+        if(machine.isLack(minItemPrice())) {
             return true;
         }
         return false;
@@ -106,7 +107,7 @@ public class MachineController {
     public int minItemPrice() {
         int minPrice = 0;
         for(Item i : items) {
-            if(!i.isEmpty()){
+            if(!i.isEmpty()) {
                 minPrice = i.getPrice();
                 break;
             }
@@ -116,4 +117,5 @@ public class MachineController {
         }
         return minPrice;
     }
+
 }
