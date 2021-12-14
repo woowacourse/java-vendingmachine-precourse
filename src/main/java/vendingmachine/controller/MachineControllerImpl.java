@@ -24,15 +24,10 @@ public class MachineControllerImpl implements MachineController {
 	@Override
 	public void fillWithCoins() {
 		outputView.printMessage(OutputMessage.REQUEST_MONEY_OF_MACHINE);
-		while (true) {
-			try {
-				int moneyOfMachine = inputView.requestMoneyOfMachine();
-				machineService.fillWithCoins(moneyOfMachine);
-				break;
-			} catch (VendingMachineException ex) {
-				outputView.printErrorMessage(ex.getMessage());
-			}
-		}
+		callbackTemplate((inputView, machineService) -> {
+			int moneyOfMachine = inputView.requestMoneyOfMachine();
+			machineService.fillWithCoins(moneyOfMachine);
+		});
 		outputView.printEmptyNewLine();
 	}
 
@@ -46,30 +41,20 @@ public class MachineControllerImpl implements MachineController {
 	@Override
 	public void registerProducts() {
 		outputView.printMessage(OutputMessage.REQUEST_PRODUCTS_FOR_REGISTER);
-		while (true) {
-			try {
-				List<ProductDto> productDtos = inputView.requestProductDtos();
-				machineService.saveProducts(productDtos);
-				break;
-			} catch (VendingMachineException ex) {
-				outputView.printErrorMessage(ex.getMessage());
-			}
-		}
+		callbackTemplate((inputView, machineService) -> {
+			List<ProductDto> productDtos = inputView.requestProductDtos();
+			machineService.saveProducts(productDtos);
+		});
 		outputView.printEmptyNewLine();
 	}
 
 	@Override
 	public void depositMoney() {
 		outputView.printMessage(OutputMessage.REQUEST_MONEY_OF_USER);
-		while (true) {
-			try {
-				int moneyOfUser = inputView.requestMoneyOfUser();
-				machineService.depositMoneyOfUser(moneyOfUser);
-				break;
-			} catch (VendingMachineException ex) {
-				outputView.printErrorMessage(ex.getMessage());
-			}
-		}
+		callbackTemplate((inputView, machineService) -> {
+			int moneyOfUser = inputView.requestMoneyOfUser();
+			machineService.depositMoneyOfUser(moneyOfUser);
+		});
 		outputView.printEmptyNewLine();
 	}
 
@@ -88,15 +73,10 @@ public class MachineControllerImpl implements MachineController {
 
 	private void purchaseProduct() {
 		outputView.printMessage(OutputMessage.REQUEST_PRODUCT_NAME_FOR_PURCHASE);
-		while (true) {
-			try {
-				String productName = inputView.requestProductName();
-				machineService.purchaseProduct(productName);
-				break;
-			} catch (VendingMachineException ex) {
-				outputView.printErrorMessage(ex.getMessage());
-			}
-		}
+		callbackTemplate((inputView, machineService) -> {
+			String productName = inputView.requestProductName();
+			machineService.purchaseProduct(productName);
+		});
 		outputView.printEmptyNewLine();
 	}
 
@@ -111,6 +91,17 @@ public class MachineControllerImpl implements MachineController {
 		List<String> coinsOfUser = machineService.getCoinsOfUser();
 		outputView.printCoinsOfUser(coinsOfUser);
 		outputView.printEmptyNewLine();
+	}
+
+	private void callbackTemplate(Callback callback) {
+		while (true) {
+			try {
+				callback.run(inputView, machineService);
+				break;
+			} catch (VendingMachineException ex) {
+				outputView.printErrorMessage(ex.getMessage());
+			}
+		}
 	}
 
 }
