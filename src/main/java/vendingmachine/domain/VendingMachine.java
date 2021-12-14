@@ -5,6 +5,7 @@ import static vendingmachine.constant.Constant.*;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Optional;
 
 public class VendingMachine {
 	private final List<Item> salesItems = new ArrayList<>();
@@ -16,13 +17,16 @@ public class VendingMachine {
 
 	public void addNewItems(List<Item> items) {
 		for (Item item : items) {
-			isInItems(item);
+			isAlreadyInSalesItems(item);
 			salesItems.add(item);
 		}
 	}
 
-	private void isInItems(Item item) {
-		if (salesItems.contains(item)) {
+	private void isAlreadyInSalesItems(Item item) {
+		Optional<Item> isInItem = salesItems.stream()
+			.filter(saleItem -> saleItem.getName().equals(item.getName()))
+			.findAny();
+		if (isInItem.isPresent()) {
 			throw new IllegalArgumentException(DUPLICATED_ITEM_MESSAGE);
 		}
 	}
@@ -36,6 +40,13 @@ public class VendingMachine {
 		coinStorage.getChangeCoins(money - itemPicked.getPrice());
 		itemPicked.sell();
 		return money - itemPicked.getPrice();
+	}
+
+	public boolean isAnySalesItem() {
+		Optional<Item> salesItem = salesItems.stream()
+			.filter(Item::isNotSoldOut)
+			.findAny();
+		return salesItem.isPresent();
 	}
 
 	public LinkedHashMap<Coin, Integer> getCoinStorageBox() {

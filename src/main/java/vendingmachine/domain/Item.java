@@ -23,6 +23,10 @@ public class Item {
 		return price;
 	}
 
+	public int getStocks() {
+		return stocks;
+	}
+
 	public void sell() {
 		stocks -= 1;
 	}

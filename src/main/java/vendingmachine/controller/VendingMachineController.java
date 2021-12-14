@@ -9,10 +9,15 @@ public class VendingMachineController {
 	private VendingMachine vendingMachine;
 
 	public VendingMachineController() {
+		callNewVendingMachineWithException();
+	}
+
+	private void callNewVendingMachineWithException() {
 		try {
 			callNewVendingMachine();
 		} catch (Exception e) {
 			logError(e);
+			callNewVendingMachineWithException();
 		}
 	}
 
@@ -27,6 +32,7 @@ public class VendingMachineController {
 			addItems();
 		} catch (Exception e) {
 			logError(e);
+			addItemsWithException();
 		}
 	}
 
@@ -37,16 +43,25 @@ public class VendingMachineController {
 	}
 
 	public void buyItemsWithException() {
+		OutputView.enterInputMoney();
+		int money = InputView.readPositiveInt();
 		try {
-			buyItems();
+			buyItems(money);
 		} catch (Exception e) {
 			logError(e);
+			checkSoldOutAndBuyItemsWithException();
 		}
 	}
 
-	private void buyItems() {
-		OutputView.enterInputMoney();
-		int money = InputView.readPositiveInt();
+	private void checkSoldOutAndBuyItemsWithException() {
+		if (!vendingMachine.isAnySalesItem()) {
+			OutputView.soldOutEveryItems();
+			return;
+		}
+		buyItemsWithException();
+	}
+
+	private void buyItems(int money) {
 		while (checkCanBuyProduct(money)) {
 			OutputView.showRemainingMoney(money);
 			OutputView.enterWantProduct();
@@ -66,5 +81,6 @@ public class VendingMachineController {
 
 	private void logError(Exception error) {
 		System.out.println(error.getMessage());
+		OutputView.breakLine();
 	}
 }

@@ -46,4 +46,8 @@ public class OutputView {
 			.filter(key -> key.getValue() > 0)
 			.forEach(key -> System.out.println(key.getKey().getAmount() + RULES_TO_SHOW + key.getValue() + NUMBER));
 	}
+
+	public static void soldOutEveryItems() {
+		System.out.println(ALL_SOLD_OUT);
+	}
 }
