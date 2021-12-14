@@ -1,11 +1,11 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
-
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Test;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
@@ -102,6 +102,6 @@ class ApplicationTest extends NsTest {
 
     @Override
     protected void runMain() {
-        Application.main(new String[]{});
+        Application.main(new String[] {});
     }
 }
