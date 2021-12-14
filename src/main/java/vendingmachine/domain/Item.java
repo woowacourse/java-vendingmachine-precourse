@@ -67,7 +67,8 @@ public class Item {
 
 	private void validateAmount(final int amount) {
 		if (!isValidAmountRange(amount)) {
-			throw new IllegalArgumentException(ERROR_INVALID_DIGIT_RANGE);
+			throw new IllegalArgumentException(
+				String.format(ERROR_INVALID_DIGIT_RANGE, name, AMOUNT, AMOUNT_LOWER_BOUND));
 		}
 	}
 
