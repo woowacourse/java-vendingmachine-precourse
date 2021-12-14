@@ -11,6 +11,9 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+	private static final String CHANGE = "잔돈";
+	private static final String MACHINE_MONEY = "자판기가 보유한 동전";
+
 	InputView inputView = new InputView();
 	OutputView outputView = new OutputView();
 	Validator validator = new Validator();
@@ -21,6 +24,15 @@ public class VendingMachineController {
 		VendingMachine vendingMachine = new VendingMachine();
 		vendingMachine.generateCoin(convertedMachineMoney);
 		printCurrentCoin(vendingMachine);
+		enterAndGenerateMachineProduct(vendingMachine);
+		String insertMoney = enterInsertMoney();
+		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
+		vendingMachine.initInputMoney(convertedInsertMoney);
+		purchaseProduct(vendingMachine);
+		printRemainCoin(vendingMachine);
+	}
+
+	private void enterAndGenerateMachineProduct(VendingMachine vendingMachine) {
 		while(true) {
 			try {
 				String products = enterMachineProduct();
@@ -30,11 +42,6 @@ public class VendingMachineController {
 				System.out.println(error.getMessage());
 			}
 		}
-		String insertMoney = enterInsertMoney();
-		int convertedInsertMoney = Utils.moneyConverter(insertMoney);
-		vendingMachine.initInputMoney(convertedInsertMoney);
-		purchaseProduct(vendingMachine);
-		printRemainCoin(vendingMachine);
 	}
 
 	private void purchaseProduct(VendingMachine vendingMachine) {
@@ -52,14 +59,14 @@ public class VendingMachineController {
 	}
 
 	private void printCurrentCoin(VendingMachine vendingMachine) {
-		System.out.println("자판기가 보유한 동전");
+		System.out.println(MACHINE_MONEY);
 		outputView.printCoinChange(vendingMachine.getCoinMap());
 	}
 
 	private void printRemainCoin(VendingMachine vendingMachine) {
 		Map<Coin, Integer> remainCoin = calculateRemainCoin(vendingMachine.getInputMoney(),
 			vendingMachine.getCoinMap());
-		System.out.println("잔돈");
+		System.out.println(CHANGE);
 		outputView.printCoinChange(remainCoin);
 	}
 
@@ -67,27 +74,24 @@ public class VendingMachineController {
 		Map<Coin, Integer> returnCoinMap = new LinkedHashMap<>();
 
 		for (Coin coin : coinMap.keySet()) {
-			int count = restMoney/coin.getAmount();
-			if (coinMap.get(coin) == 0) {
+			int count = getCount(restMoney, coinMap, coin);
+
+			if (count == 0 || restMoney == 0) {
 				continue;
 			}
-
-			if (count < coinMap.get(coin)) {
-				returnCoinMap.put(coin, count);
-				restMoney -= (coin.getAmount() * count);
-				continue;
-			}
-			returnCoinMap.put(coin, coinMap.get(coin));
-			restMoney -= (coin.getAmount() * coinMap.get(coin));
-
-			if (restMoney == 0) {
-				break;
-			}
+			returnCoinMap.put(coin, count);
+			restMoney -= (coin.getAmount() * count);
 		}
-
 		return returnCoinMap;
 	}
 
+	private int getCount(int restMoney, Map<Coin, Integer> coinMap, Coin coin) {
+		int count = restMoney / coin.getAmount();
+		if (count >= coinMap.get(coin)) {
+			count = coinMap.get(coin);
+		}
+		return count;
+	}
 
 	private String enterMachineMoney() {
 		String machineMoney = inputView.enterMachineMoney();

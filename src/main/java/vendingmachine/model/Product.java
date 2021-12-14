@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 import java.util.regex.Pattern;
 
+import vendingmachine.util.Constant;
 import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
 
@@ -12,8 +13,8 @@ public class Product {
 
 	public static Product createProduct(String productInformation) throws IllegalArgumentException {
 		Product product = new Product();
-		productInformation = productInformation.replace("[", "").replace("]", "");
-		String[] productInfo = productInformation.split(",");
+		productInformation = productInformation.replace(Constant.OPEN_SQUARE_BRACKET, "").replace(Constant.CLOSING_SQUARE_BRACKET, "");
+		String[] productInfo = productInformation.split(Constant.PRODUCT_DETAIL_SEPARATOR);
 
 		Validator.validateProduct(productInfo);
 

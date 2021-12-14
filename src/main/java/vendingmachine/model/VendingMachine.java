@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.util.Constant;
+import vendingmachine.validator.Validator;
 
 public class VendingMachine {
 	private int inputMoney;
@@ -47,7 +49,7 @@ public class VendingMachine {
 	}
 
 	public void generateProduct(String products) throws IllegalArgumentException {
-		this.productList = Arrays.stream(products.split(";"))
+		this.productList = Arrays.stream(products.split(Constant.PRODUCT_SEPARATOR))
 			.map(Product::createProduct)
 			.collect(Collectors.toList());
 
@@ -57,9 +59,7 @@ public class VendingMachine {
 			.distinct()
 			.collect(Collectors.toList());
 
-		if (distinctProductList.size() != productList.size()) {
-			throw new IllegalArgumentException("[ERROR] 중복된 상품 명이 존재합니다.");
-		}
+		Validator.validateProductList(distinctProductList, productList);
 	}
 
 	public void removeProduct() {
@@ -76,7 +76,7 @@ public class VendingMachine {
 			.filter(it -> it.getName().equals(productName))
 			.findFirst()
 			.map(Product::purchaseProduct)
-			.orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품 이름입니다."));
+			.orElseThrow(() -> new IllegalArgumentException(Validator.ERROR_NOT_EXISTED_PRODUCT));
 
 		removeProduct();
 		inputMoney -= product.getPrice();

@@ -1,13 +1,17 @@
 package vendingmachine.validator;
 
+import java.util.List;
+
+import vendingmachine.model.Product;
 import vendingmachine.util.Utils;
 
 public class Validator {
-	private final static String ERROR_INPUT_MUST_BE_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
-	private final static String ERROR_MONEY_CAN_DIVIDE_INTO_10 = "[ERROR] 금액은 10원 단위여아합니다.";
-	private final static String ERROR_CANNOT_EMPTY = "[ERROR] 입력은 공백일 수 없습니다.";
-	private final static String ERROR_INPUT_INCORRECT = "[ERROR] 잘못된 상품 정보 입력입니다. 다시 입력해 주세요.";
-	private final static String ERROR_INPUT_IS_BIGGER_THAN_100 = "[ERROR] 상품 가격은 100원 이상이어야합니다.";
+	private static final  String ERROR_INPUT_MUST_BE_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
+	private static final String ERROR_MONEY_CAN_DIVIDE_INTO_10 = "[ERROR] 금액은 10원 단위여아합니다.";
+	private static final String ERROR_CANNOT_EMPTY = "[ERROR] 입력은 공백일 수 없습니다.";
+	private static final String ERROR_INPUT_INCORRECT = "[ERROR] 잘못된 상품 정보 입력입니다. 다시 입력해 주세요.";
+	private static final String ERROR_INPUT_IS_BIGGER_THAN_100 = "[ERROR] 상품 가격은 100원 이상이어야합니다.";
+	public static final String ERROR_NOT_EXISTED_PRODUCT = "[ERROR] 존재하지 않는 상품 이름입니다.";
 
 	public String validateMoney(String money) {
 		validateInputEmpty(money);
@@ -35,6 +39,12 @@ public class Validator {
 		validateOnlyContainNumber(product[2]);
 		validateInputAmountUnder100(product[1]);
 		validateInputDivideInto10(product[1]);
+	}
+
+	public static void validateProductList(List<String> distinctProductList, List<Product> productList) {
+		if (distinctProductList.size() != productList.size()) {
+			throw new IllegalArgumentException("[ERROR] 중복된 상품 명이 존재합니다.");
+		}
 	}
 
 	private static void validateOnlyContainNumber(String input) {
