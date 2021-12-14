@@ -21,6 +21,7 @@ public class VendingMachineController {
         receiveVendingMachineBalance();
         requestPrintBalanceCoins();
         receiveItemInformation();
+        receiveInsertMoney();
     }
 
     private void receiveVendingMachineBalance() {
@@ -47,6 +48,19 @@ public class VendingMachineController {
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(validator.getErrorMessage());
             receiveItemInformation();
+        }
+
+    }
+
+    private void receiveInsertMoney() {
+
+        try {
+            OutputView.requestInsertMoney();
+            String insertMoney = InputView.receiveInput();
+            validator.isValidInsertMoneyInput(insertMoney);
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(validator.getErrorMessage());
+            receiveInsertMoney();
         }
 
     }
