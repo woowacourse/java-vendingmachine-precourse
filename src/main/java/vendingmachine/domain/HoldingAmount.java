@@ -20,8 +20,10 @@ public class HoldingAmount {
     }
 
     public Changes returnChanges(InputAmount inputAmount) {
+        int amount = inputAmount.getAmount();
+        inputAmount.clearAmount();
         return new Changes(
-            fillCoins(cutoffBelowMinAmount(inputAmount.getAmount()),
+            fillCoins(cutoffBelowMinAmount(amount),
                 new HashMap<>(),
                 this::popMostExpensiveCoinBelowAmount)
         );
