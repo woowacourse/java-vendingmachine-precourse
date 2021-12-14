@@ -1,7 +1,6 @@
 package model;
 
 import java.util.Arrays;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,10 +28,8 @@ public enum Coin {
 		return COIN_10;
 	}
 
-	public static List<Coin> getValuesByDescending() {
-		return Arrays.stream(Coin.values())
-			.sorted(Comparator.comparingInt(Coin::getAmount).reversed())
-			.collect(Collectors.toList());
+	public static List<Coin> getValues() {
+		return Arrays.stream(Coin.values()).collect(Collectors.toList());
 	}
 
 	public int getAmount() {
