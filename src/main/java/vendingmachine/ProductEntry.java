@@ -20,5 +20,4 @@ public class ProductEntry {
 	public boolean isAffordable(final int money) {
 		return money >= price;
 	}
-
 }

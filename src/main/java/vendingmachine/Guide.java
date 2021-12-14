@@ -22,19 +22,19 @@ public enum Guide {
 		this.message = message;
 	}
 
+	public static void printCoinPocket(final CoinPocket pocket) {
+		Set<Map.Entry<Coin, Integer>> pocketInSet = pocket.getEntries();
+		List<String> messageBag = new ArrayList<>();
+		pocketInSet.forEach(entry -> messageBag.add(makeCoinMessage(entry)));
+		System.out.println(String.join(Constants.LINE_FEED, messageBag));
+	}
+
 	private static String makeCoinMessage(final Map.Entry<Coin, Integer> entry) {
 		List<String> wordBag = new ArrayList<>();
 		wordBag.add(entry.getKey().message);
 		wordBag.add(Constants.HYPHEN);
 		wordBag.add(entry.getValue().toString() + NUMBER);
 		return String.join(" ", wordBag);
-	}
-
-	public static void printCoinPocket(final CoinPocket pocket) {
-		Set<Map.Entry<Coin, Integer>> pocketInSet = pocket.getEntries();
-		List<String> messageBag = new ArrayList<>();
-		pocketInSet.forEach(entry -> messageBag.add(makeCoinMessage(entry)));
-		System.out.println(String.join(Constants.LINE_FEED, messageBag));
 	}
 
 	public static void printLeftMoney(final int money) {
