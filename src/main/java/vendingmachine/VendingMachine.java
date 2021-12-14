@@ -8,11 +8,12 @@ import camp.nextstep.edu.missionutils.Randoms;
 public class VendingMachine {
 	private int leftMoney;
 	private HashMap<Coin, Integer> coins;
-	private Product[] products;
+	private HashMap<String, Product> products;
 
 	VendingMachine(){
 		this.leftMoney = InputReceiver.getNumber();
 		_makeCoins();
+		this.products = InputReceiver.getProductInfo();
 	}
 
 	private void _makeCoins(){
