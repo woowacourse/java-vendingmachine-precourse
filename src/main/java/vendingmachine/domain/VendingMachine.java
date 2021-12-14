@@ -35,11 +35,11 @@ public class VendingMachine {
 			product.isBuy(insertMoney);
 	}
 
-	public Money getInsertMoney() {
-		return insertMoney;
-	}
-
 	public Changes returnChanges() {
 		return changes.toChangesMinCount(insertMoney);
+	}
+
+	public Money getInsertMoney() {
+		return insertMoney;
 	}
 }

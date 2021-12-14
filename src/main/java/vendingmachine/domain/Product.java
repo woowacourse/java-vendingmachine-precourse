@@ -23,10 +23,6 @@ public class Product implements Comparable<Product>{
 		this.amount = amount;
 	}
 
-	public Money getPrice() {
-		return price;
-	}
-
 	public boolean soldOut() {
 		return amount == MIN_AMOUNT;
 	}
@@ -37,6 +33,10 @@ public class Product implements Comparable<Product>{
 
 	public void buy() {
 		amount -= 1;
+	}
+
+	public Money getPrice() {
+		return price;
 	}
 
 	private void validateName(String name) throws IllegalArgumentException {

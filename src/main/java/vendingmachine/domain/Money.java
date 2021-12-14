@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 import vendingmachine.Coin;
 
-public class Money implements Comparable<Money>{
+public class Money implements Comparable<Money> {
 	private static final String IS_DIVIDE_BY_TEN_ERROR_MESSAGE = "돈은 10의 배수여야 한다.";
 
 	private int amount;
@@ -18,6 +18,14 @@ public class Money implements Comparable<Money>{
 		}
 	}
 
+	public Money plus(Money money) {
+		return new Money(amount + money.amount);
+	}
+
+	public Money subtract(Money money) {
+		return new Money(amount - money.amount);
+	}
+
 	public int getAmount() {
 		return amount;
 	}
@@ -25,13 +33,5 @@ public class Money implements Comparable<Money>{
 	@Override
 	public int compareTo(Money o) {
 		return amount - o.amount;
-	}
-
-	public Money plus(Money money) {
-		return new Money(amount + money.amount);
-	}
-
-	public Money subtract(Money money) {
-		return new Money(amount - money.amount);
 	}
 }
