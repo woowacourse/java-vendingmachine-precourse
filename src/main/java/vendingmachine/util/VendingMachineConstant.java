@@ -25,4 +25,6 @@ public class VendingMachineConstant {
 
     public static final int DECREASE_AMOUNT_VALUE = 1;
     public static final int SOLD_OUT_AMOUNT = 0;
+
+    public static final String REFUND_COIN_MESSAGE = "잔돈";
 }

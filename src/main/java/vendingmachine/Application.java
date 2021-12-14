@@ -11,7 +11,7 @@ public class Application {
     public static void main(String[] args) {
         int vendingMachineMoney = TypeConverter.convertStringToInt(InputView.inputVendingMachineMoney());
         Coins coins = new Coins(vendingMachineMoney);
-        OutputView.printCoinCount(coins.getCoins());
+        OutputView.printCoinCount(coins);
 
         String productInfo = InputView.inputProductInfo();
         Products products = new Products(productInfo);
@@ -21,5 +21,7 @@ public class Application {
         int userMoney = TypeConverter.convertStringToInt(InputView.inputUserMoney());
 
         machine.purchase(userMoney);
+
+        OutputView.refundCoins(machine.getCoins());
     }
 }
