@@ -1,12 +1,11 @@
 package vendingmachine.domain;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import vendingmachine.utils.Validator;
+import vendingmachine.utils.ErrorMessage;
 
 public class Merchandise {
 	public static String MERCHANDISE_INFORMATION_PARSER = ",";
@@ -24,8 +23,8 @@ public class Merchandise {
 
 	public static Merchandise constructMerchandise(String merchandiseInforamtion) {
 		String[] informations = merchandiseInforamtion.split(MERCHANDISE_INFORMATION_PARSER);
-		Validator.validateEmptyMerchandiseInformation(informations);
-		Validator.validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
+		validateEmptyMerchandiseInformation(informations);
+		validateDivideMoneyBy10Coin(Integer.parseInt(informations[1].trim()));
 		List<String> trimInformation = Arrays.stream(informations)
 			.map(information -> information.trim())
 			.collect(Collectors.toList());
@@ -68,5 +67,17 @@ public class Merchandise {
 	@Override
 	public int hashCode() {
 		return Objects.hash(name);
+	}
+
+	public static void validateEmptyMerchandiseInformation(String[] merchandiseInformation) {
+		if (merchandiseInformation.length < 3) {
+			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_INFORMATION_ERROR_MESSAGE);
+		}
+	}
+
+	public static void validateDivideMoneyBy10Coin(int merchandisePrice) {
+		if (merchandisePrice % 10 != 0) {
+			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE);
+		}
 	}
 }

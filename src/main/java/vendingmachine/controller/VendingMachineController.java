@@ -4,7 +4,6 @@ import static vendingmachine.domain.Merchandises.*;
 import static vendingmachine.domain.VendingMachine.*;
 
 import vendingmachine.domain.Merchandises;
-import vendingmachine.domain.Money;
 import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.utils.ErrorMessage;
