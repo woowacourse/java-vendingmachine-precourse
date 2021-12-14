@@ -28,7 +28,7 @@ public class CoinProcessor {
 
 	public Map<Coin, Integer> generateChangeMap(int change) {
 		Map<Coin, Integer> result = new HashMap<Coin, Integer>();
-		for(Coin coin:Coin.getCoinList()) {
+		for (Coin coin : Coin.getCoinList()) {
 			int numberOfChangeCoin = getNumberOfChangeCoin(change, coin, coinMap.get(coin));
 			result.put(coin, numberOfChangeCoin);
 			change -= numberOfChangeCoin * coin.getAmount();
@@ -38,7 +38,7 @@ public class CoinProcessor {
 
 	private int getNumberOfChangeCoin(int change, Coin coin, int quantity) {
 		int maximumChange = change / coin.getAmount();
-		if(quantity < maximumChange) {
+		if (quantity < maximumChange) {
 			return maximumChange = quantity;
 		}
 		return maximumChange;

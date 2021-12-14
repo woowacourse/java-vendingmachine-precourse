@@ -16,7 +16,8 @@ public class Application {
 		InputHandler inputHandler = new InputHandler(outputHandler);
 		CoinProcessor coinProcessor = new CoinProcessor();
 		ProductProcessor productProcessor = new ProductProcessor();
-		VendingMachine vendingMachine = new VendingMachine(inputHandler, outputHandler, coinProcessor, productProcessor);
+		VendingMachine vendingMachine = new VendingMachine(inputHandler, outputHandler, coinProcessor,
+			productProcessor);
 		vendingMachine.start();
 	}
 }

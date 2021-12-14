@@ -24,7 +24,7 @@ public class ProductProcessor {
 	}
 
 	public void sellProduct(Product product) {
-		if(product.isSoldOut()) {
+		if (product.isSoldOut()) {
 			throw new ProductSoldOutException(VendingMachineData.PRODUCT_SOLDOUT_ERROR);
 		}
 		product.sell();
@@ -35,8 +35,8 @@ public class ProductProcessor {
 	}
 
 	private boolean hasProduct() {
-		for(Product product:productList) {
-			if(!product.isSoldOut()) {
+		for (Product product : productList) {
+			if (!product.isSoldOut()) {
 				return true;
 			}
 		}
@@ -44,8 +44,8 @@ public class ProductProcessor {
 	}
 
 	private boolean isEnoughToBuy(int balance) {
-		for(Product product:productList) {
-			if(product.isPossibleToBuy(balance)) {
+		for (Product product : productList) {
+			if (product.isPossibleToBuy(balance)) {
 				return true;
 			}
 		}

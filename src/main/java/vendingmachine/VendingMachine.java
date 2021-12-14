@@ -18,7 +18,8 @@ public class VendingMachine {
 
 	private int balance;
 
-	public VendingMachine(InputHandler inputHandler, OutputHandler outputHandler, CoinProcessor coinProcessor, ProductProcessor productProcessor) {
+	public VendingMachine(InputHandler inputHandler, OutputHandler outputHandler, CoinProcessor coinProcessor,
+		ProductProcessor productProcessor) {
 		this.inputHandler = inputHandler;
 		this.outputHandler = outputHandler;
 		this.coinProcessor = coinProcessor;
@@ -37,10 +38,10 @@ public class VendingMachine {
 	}
 
 	private void sell() {
-		while(productProcessor.isPossibleToSell(balance)) {
+		while (productProcessor.isPossibleToSell(balance)) {
 			outputHandler.printBalance(balance);
 			Product product = getValidProduct();
-			if(!product.isPossibleToBuy(balance)) {
+			if (!product.isPossibleToBuy(balance)) {
 				outputHandler.printMessage(VendingMachineData.BALANCE_NOT_ENOUGH_MESSAGE);
 				continue;
 			}

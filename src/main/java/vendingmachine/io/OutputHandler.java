@@ -43,11 +43,10 @@ public class OutputHandler {
 
 	private void printCoinStatus(Map<Coin, Integer> coinMap, boolean printZero) {
 		for (Coin coin : Coin.getCoinList()) {
-			if(!printZero && coinMap.get(coin) == 0) {
+			if (!printZero && coinMap.get(coin) == 0) {
 				continue;
 			}
 			printMessage(String.format(VendingMachineData.CHANGE_STATUS_FORMAT, coin.getAmount(), coinMap.get(coin)));
 		}
 	}
-
 }
