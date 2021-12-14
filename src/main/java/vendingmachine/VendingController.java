@@ -11,7 +11,12 @@ public class VendingController {
     private static final OutputView outputView = new OutputView();
     private VendingMachine vendingMachine;
 
-    public void settingMachine() {
+    public void run() {
+        settingMachine();
+        startBuying();
+    }
+
+    private void settingMachine() {
         CoinCountMap coinCountMap = inputView.inputMoneyOfVendingMachine();
         outputView.printVeningMachineCoin(coinCountMap);
         List<Product> inputProduct = inputView.inputProduct();
@@ -19,27 +24,32 @@ public class VendingController {
         vendingMachine = new VendingMachine(coinCountMap, inputProduct, inputMoneyToVendingMachine);
     }
 
-    public void startBuying() {
-        selectToBuy();
-        outputView.printLeftoverCoinCount(vendingMachine.getLeftoverCash()); // 돈을 넣으면 잔돈을 최대한 출력하는 기능을 구현해야 한다.
+    private void startBuying() {
+        outputView.printMoneyInputToVendingMachine(vendingMachine.getInputMoney());
+        while (isSelectToBuy(vendingMachine)) {
+            selectToBuy();
+        }
+        outputView.printLeftoverCoinCount(vendingMachine.getLeftoverCash());
     }
 
     private void selectToBuy() {
-        outputView.printMoneyInputToVendingMachine(vendingMachine.getInputMoney());
-        while (true) {
-            try {
-                if (vendingMachine.getMinPriceOfProducts() > vendingMachine.getInputMoney()) {
-                    return;
-                }
-                if (vendingMachine.getProductsCount() == 0) {
-                    return;
-                }
-                vendingMachine.buyProduct(inputView.inputToSelectProduct());
-                outputView.printMoneyInputToVendingMachine(vendingMachine.getInputMoney());
-            } catch (IllegalArgumentException e) {
-                outputView.printMessage(e.getMessage());
-            }
+        try {
+            vendingMachine.buyProduct(inputView.inputToSelectProduct());
+            outputView.printMoneyInputToVendingMachine(vendingMachine.getInputMoney());
+        } catch (IllegalArgumentException e) {
+            outputView.printMessage(e.getMessage());
+            selectToBuy();
         }
+    }
+
+    private boolean isSelectToBuy(VendingMachine vendingMachine) {
+        if (vendingMachine.getMinPriceOfProducts() > vendingMachine.getInputMoney()) {
+            return false;
+        }
+        if (vendingMachine.getProductsCount() == 0) {
+            return false;
+        }
+        return true;
     }
 
 

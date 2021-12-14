@@ -3,6 +3,7 @@ package vendingmachine;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.CoinCountMap;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,36 +28,33 @@ public class InputView {
         return new CoinCountMap(inputMoney(MONEY_OF_VENDING_MACHINE_INPUT_INSTRUCTION));
     }
 
-    private int inputMoney(String message) {
-        while (true) {
-            try {
-                System.out.println(message);
-                String inputMoney = Console.readLine();
-                return checkValidMoney(inputMoney);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
-        }
-    }
-
 
     public List<Product> inputProduct() {
-        while (true) {
-            try {
-                System.out.println(PRODUCT_INPUT_INSTRUCTION);
-                String inputProducts = Console.readLine();
-                return checkValidProducts(inputProducts);
-            } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
-            }
+        try {
+            System.out.println(PRODUCT_INPUT_INSTRUCTION);
+            String inputProducts = Console.readLine();
+            return checkValidProducts(inputProducts);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputProduct();
         }
-
     }
 
     public String inputToSelectProduct() {
         System.out.println(INPUT_TO_SELECT_PRODUCT_INSTRUCTION);
         String inputProduct = Console.readLine();
         return inputProduct;
+    }
+
+    private int inputMoney(String money) {
+        try {
+            System.out.println(money);
+            String inputMoney = Console.readLine();
+            return checkValidMoney(inputMoney);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return inputMoney(money);
+        }
     }
 
 
@@ -76,10 +74,7 @@ public class InputView {
     }
 
     private boolean checkValidNumber(String input) {
-        if (input.matches("[0-9]+")) {
-            return true;
-        }
-        return false;
+        return input.matches("[0-9]+");
     }
 
     private List<Product> checkValidProducts(String inputProducts) {
