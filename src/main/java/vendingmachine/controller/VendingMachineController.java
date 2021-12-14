@@ -8,6 +8,7 @@ import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
 import vendingmachine.model.Product;
 import vendingmachine.model.Products;
+import vendingmachine.util.ErrorMessageConstants;
 import vendingmachine.util.StringUtils;
 import vendingmachine.util.validator.MoneyValidator;
 import vendingmachine.util.validator.ProductValidator;
@@ -39,13 +40,27 @@ public class VendingMachineController {
 
 	private void initProducts() {
 		String inputProducts = InputView.readProducts();
-		List<String> separatedProducts = StringUtils.splitProduct(inputProducts);
-		separatedProducts = StringUtils.removeProductBrackets(separatedProducts);
-		List<Product> productList = new ArrayList<>();
-		separatedProducts.forEach(product -> productList.add(new Product(StringUtils.parseProductDetail(product))));
-		ProductValidator.validate(productList);
-
+		List<Product> productList = parseProducts(inputProducts);
+		try {
+			ProductValidator.validate(productList);
+		} catch (IllegalArgumentException exception) {
+			OutputView.printExceptionMessage(exception.getMessage());
+			initProducts();
+		}
 		products = new Products(productList);
+	}
+
+	private List<Product> parseProducts(String inputProducts) {
+		List<Product> productList = new ArrayList<>();
+		try {
+			List<String> separatedProducts = StringUtils.splitProduct(inputProducts);
+			separatedProducts = StringUtils.removeProductBrackets(separatedProducts);
+			separatedProducts.forEach(product -> productList.add(new Product(StringUtils.parseProductDetail(product))));
+		} catch (Exception exception) {
+			OutputView.printExceptionMessage(ErrorMessageConstants.PRODUCT_INPUT_FORM_EXCEPTION_MESSAGE);
+			initProducts();
+		}
+		return productList;
 	}
 
 	private void initInsertMoney() {
