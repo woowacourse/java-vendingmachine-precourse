@@ -9,12 +9,11 @@ public class Application {
         
         // 동전 목록
         List<Integer> coins = Coin.getCoinList();
-        // 자판기의 돈 입력
+        // 자판기 객체 생성
         Vendingmachine vendingmachine = new Vendingmachine();
-        vendingmachine.inputVendMoney();
+        // 자판기 돈 입력
         Integer inputmoney = vendingmachine.getVendMoney();
-        System.out.println(inputmoney);
-        System.out.println(vendingmachine.getVendMoney());
+
 
         // 자판기의 돈을 동전으로 바꿈
         int[] randomList = Utils.generateRandomCoin(coins,inputmoney);
