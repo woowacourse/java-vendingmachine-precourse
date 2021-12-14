@@ -30,10 +30,13 @@ public class ConsolePrinter {
 
     public void printChanges(Changes changes) {
         printStream.println(CHANGE_HEADER);
-        printValidPayLoad(Arrays.stream(Coin.values())
+        String payload = Arrays.stream(Coin.values())
             .filter(coin -> changes.getCoinCount(coin) > NO_COIN)
             .map(coin -> parseCoinCount(coin, changes.getCoinCount(coin)))
-            .collect(Collectors.joining(LINE_BREAK)));
+            .collect(Collectors.joining(LINE_BREAK));
+        if (!payload.isEmpty()) {
+            printStream.println(payload);
+        }
     }
 
     public void printHoldingAmount(HoldingAmount holdingAmount) {
@@ -52,11 +55,5 @@ public class ConsolePrinter {
     private String parseCoinCount(Coin coin, int count) {
         return String.join("",
             coin.getLocalCurrency(), CHANGE_DELIMITER, String.valueOf(count), COIN_COUNT_SUFFIX);
-    }
-
-    private void printValidPayLoad(String payload) {
-        if (!payload.isEmpty()) {
-            printStream.println(payload);
-        }
     }
 }

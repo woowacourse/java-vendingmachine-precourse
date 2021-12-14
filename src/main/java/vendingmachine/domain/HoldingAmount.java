@@ -40,15 +40,15 @@ public class HoldingAmount {
     }
 
     private Map<Coin, Integer> fillCoins(int amountAboveMinCoin, Map<Coin, Integer> target,
-        Function<Integer, Coin> calculator) {
+        Function<Integer, Coin> findCoinBelowAmount) {
         if (amountAboveMinCoin == ZERO) {
             return target;
         }
         try {
-            Coin coin = calculator.apply(amountAboveMinCoin);
+            Coin coin = findCoinBelowAmount.apply(amountAboveMinCoin);
             target.putIfAbsent(coin, ZERO);
             target.computeIfPresent(coin, (k, v) -> ++v);
-            return fillCoins(amountAboveMinCoin - coin.getAmount(), target, calculator);
+            return fillCoins(amountAboveMinCoin - coin.getAmount(), target, findCoinBelowAmount);
         } catch (IllegalArgumentException ignore) {
             return target;
         }
