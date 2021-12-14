@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class ProductInputNotExistMessageException extends VendingMachineException {
 
 	public ProductInputNotExistMessageException() {
-		super("등록할 상품 정보가 없습니다.");
+		super(ErrorMessage.PRODUCT_INPUT_NOT_EXIST_MESSAGE);
 	}
 
 }

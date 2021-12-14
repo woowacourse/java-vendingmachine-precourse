@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class MoneyNotNumericMessageException extends VendingMachineException {
 
 	public MoneyNotNumericMessageException() {
-		super("금액은 숫자여야 합니다.");
+		super(ErrorMessage.MONEY_NOT_NUMERIC_MESSAGE);
 	}
 
 }

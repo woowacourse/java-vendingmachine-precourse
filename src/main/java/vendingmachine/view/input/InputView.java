@@ -3,7 +3,7 @@ package vendingmachine.view.input;
 import java.util.List;
 
 import vendingmachine.dto.ProductDto;
-import vendingmachine.view.OutputView;
+import vendingmachine.view.output.OutputView;
 import vendingmachine.view.input.converter.MoneyConverter;
 import vendingmachine.view.input.converter.ProductDtoConverter;
 import vendingmachine.view.input.validator.ProductDtoValidator;

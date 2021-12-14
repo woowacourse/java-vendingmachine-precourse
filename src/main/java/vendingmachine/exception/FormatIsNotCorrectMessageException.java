@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class FormatIsNotCorrectMessageException extends VendingMachineException {
 
 	public FormatIsNotCorrectMessageException() {
-		super("형식이 맞지 않습니다.");
+		super(ErrorMessage.FORMAT_IS_NOT_CORRECT_MESSAGE);
 	}
 
 }

@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class ProductSoldOutMessageException extends VendingMachineException {
 
 	public ProductSoldOutMessageException() {
-		super("상품이 매진 되었습니다.");
+		super(ErrorMessage.PRODUCT_SOLD_OUT_MESSAGE);
 	}
 
 }

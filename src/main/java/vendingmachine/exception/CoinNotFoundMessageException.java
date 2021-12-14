@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class CoinNotFoundMessageException extends VendingMachineException {
 
 	public CoinNotFoundMessageException() {
-		super("동전을 찾을 수 없습니다.");
+		super(ErrorMessage.COIN_NOT_FOUND_MESSAGE);
 	}
 
 }

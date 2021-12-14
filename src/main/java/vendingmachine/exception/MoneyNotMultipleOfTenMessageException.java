@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class MoneyNotMultipleOfTenMessageException extends VendingMachineException {
 
 	public MoneyNotMultipleOfTenMessageException() {
-		super("금액은 10의 배수여야 합니다.");
+		super(ErrorMessage.MONEY_NOT_MULTIPLE_OF_TEN_MESSAGE);
 	}
 
 }

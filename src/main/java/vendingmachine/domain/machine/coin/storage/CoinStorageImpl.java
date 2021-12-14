@@ -7,7 +7,7 @@ import java.util.Map;
 
 import vendingmachine.domain.machine.coin.Coin;
 import vendingmachine.domain.user.User;
-import vendingmachine.utils.CoinCountFormatter;
+import vendingmachine.domain.machine.coin.CoinCountFormatter;
 
 public class CoinStorageImpl implements CoinStorage {
 

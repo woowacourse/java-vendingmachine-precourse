@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class PriceNotMoreThanMinimumAmountMessageException extends VendingMachineException {
 
 	public PriceNotMoreThanMinimumAmountMessageException() {
-		super("금액은 100원 이상이어야 합니다.");
+		super(ErrorMessage.PRICE_NOT_MORE_THAN_MINIMUM_AMOUNT_MESSAGE);
 	}
 
 }

@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class MoneyIsNotEnoughMessageException extends VendingMachineException {
 
 	public MoneyIsNotEnoughMessageException() {
-		super("보유하신 금액이 부족합니다.");
+		super(ErrorMessage.MONEY_IS_NOT_ENOUGH_MESSAGE);
 	}
 
 }

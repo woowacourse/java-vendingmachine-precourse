@@ -1,9 +1,11 @@
 package vendingmachine.exception;
 
+import vendingmachine.view.output.message.ErrorMessage;
+
 public class ProductNotFoundMessageException extends VendingMachineException {
 
 	public ProductNotFoundMessageException() {
-		super("상품을 찾을 수 없습니다.");
+		super(ErrorMessage.PRODUCT_NOT_FOUNT_MESSAGE);
 	}
 
 }

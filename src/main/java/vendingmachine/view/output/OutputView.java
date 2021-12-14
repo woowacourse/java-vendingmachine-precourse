@@ -1,7 +1,8 @@
-package vendingmachine.view;
+package vendingmachine.view.output;
 
 import java.util.List;
-import vendingmachine.resource.ErrorMessage;
+import vendingmachine.view.output.message.ErrorMessage;
+import vendingmachine.view.output.message.OutputMessage;
 
 public class OutputView {
 
@@ -18,16 +19,16 @@ public class OutputView {
 	}
 
 	public void printCoinsOfMachine(List<String> coinStrings) {
-		printMessage("자판기가 보유한 동전");
+		printMessage(OutputMessage.INTRO_COINS_OF_MACHINE);
 		coinStrings.forEach(this::printMessage);
 	}
 
 	public void printCurrentMoneyOfUser(int currentMoneyOfUser) {
-		printMessage(String.format("투입 금액: %d원", currentMoneyOfUser));
+		printMessage(String.format(OutputMessage.MONEY_OF_USER_OUTPUT_FORMAT, currentMoneyOfUser));
 	}
 	
 	public void printCoinsOfUser(List<String> coinStrings) {
-		printMessage("잔돈");
+		printMessage(OutputMessage.INTRO_COINS_OF_USER);
 		coinStrings.forEach(this::printMessage);
 	}
 

@@ -5,7 +5,7 @@ import vendingmachine.controller.MachineControllerImpl;
 import vendingmachine.service.MachineService;
 import vendingmachine.service.MachineServiceImpl;
 import vendingmachine.view.input.InputView;
-import vendingmachine.view.OutputView;
+import vendingmachine.view.output.OutputView;
 import vendingmachine.view.reader.ConsoleReader;
 import vendingmachine.view.reader.Reader;
 

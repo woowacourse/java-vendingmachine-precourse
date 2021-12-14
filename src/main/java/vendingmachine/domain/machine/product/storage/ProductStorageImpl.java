@@ -3,8 +3,8 @@ package vendingmachine.domain.machine.product.storage;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Optional;
+
 import vendingmachine.domain.machine.product.Product;
 import vendingmachine.domain.user.Balance;
 import vendingmachine.exception.ProductNotFoundMessageException;

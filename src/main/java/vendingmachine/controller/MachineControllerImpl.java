@@ -4,9 +4,10 @@ import java.util.List;
 
 import vendingmachine.dto.ProductDto;
 import vendingmachine.exception.VendingMachineException;
+import vendingmachine.view.output.message.OutputMessage;
 import vendingmachine.service.MachineService;
 import vendingmachine.view.input.InputView;
-import vendingmachine.view.OutputView;
+import vendingmachine.view.output.OutputView;
 
 public class MachineControllerImpl implements MachineController {
 
@@ -22,7 +23,7 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void fillWithCoins() {
-		outputView.printMessage("자판기가 보유하고 있는 금액을 입력해 주세요.");
+		outputView.printMessage(OutputMessage.REQUEST_MONEY_OF_MACHINE);
 		while (true) {
 			try {
 				int moneyOfMachine = inputView.requestMoneyOfMachine();
@@ -44,7 +45,7 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void registerProducts() {
-		outputView.printMessage("상품명과 가격, 수량을 입력해 주세요.");
+		outputView.printMessage(OutputMessage.REQUEST_PRODUCTS_FOR_REGISTER);
 		while (true) {
 			try {
 				List<ProductDto> productDtos = inputView.requestProductDtos();
@@ -59,7 +60,7 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void depositMoney() {
-		outputView.printMessage("투입 금액을 입력해 주세요.");
+		outputView.printMessage(OutputMessage.REQUEST_MONEY_OF_USER);
 		while (true) {
 			try {
 				int moneyOfUser = inputView.requestMoneyOfUser();
@@ -86,7 +87,7 @@ public class MachineControllerImpl implements MachineController {
 	}
 
 	private void purchaseProduct() {
-		outputView.printMessage("구매할 상품명을 입력해 주세요.");
+		outputView.printMessage(OutputMessage.REQUEST_PRODUCT_NAME_FOR_PURCHASE);
 		while (true) {
 			try {
 				String productName = inputView.requestProductName();
