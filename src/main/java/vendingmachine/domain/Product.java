@@ -13,10 +13,6 @@ public class Product implements Comparable<Product> {
 		this.count = Count.of(count);
 	}
 
-	private int convertStringToInt(String value) {
-		return Integer.parseInt(value);
-	}
-
 	public static Product of(String name, String amount, String count) {
 		return new Product(name, amount, count);
 	}

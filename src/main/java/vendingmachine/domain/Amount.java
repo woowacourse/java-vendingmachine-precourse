@@ -4,11 +4,11 @@ import java.util.Objects;
 
 import vendingmachine.utils.Util;
 
-public class Amount implements Comparable<Amount>{
+public class Amount implements Comparable<Amount> {
 	private int amount;
 
 	public Amount(String amount) {
-	    this.amount = Util.convertStringToInt(amount);
+		this.amount = Util.convertStringToInt(amount);
 	}
 
 	@Override
@@ -27,15 +27,7 @@ public class Amount implements Comparable<Amount>{
 	}
 
 	public static Amount of(String amount) {
-	    return new Amount(amount);
-	}
-
-	public void increase() {
-		this.amount++;
-	}
-
-	public void increaseWith(int value) {
-		this.amount += value;
+		return new Amount(amount);
 	}
 
 	public int toInt() {
@@ -44,6 +36,6 @@ public class Amount implements Comparable<Amount>{
 
 	@Override
 	public int compareTo(Amount o) {
-		return Integer.compare( this.amount , o.amount);
+		return Integer.compare(this.amount, o.amount);
 	}
 }

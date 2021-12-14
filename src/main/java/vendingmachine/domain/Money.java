@@ -15,10 +15,6 @@ public class Money implements Comparable<Money> {
 		return new Money(money);
 	}
 
-	public void increase() {
-		this.money++;
-	}
-
 	public void increaseWith(int value) {
 		this.money += value;
 	}

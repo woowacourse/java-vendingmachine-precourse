@@ -30,14 +30,6 @@ public class Count implements Comparable<Count> {
 		return new Count(count);
 	}
 
-	public void increase() {
-		this.count++;
-	}
-
-	public void increaseWith(int value) {
-		this.count += value;
-	}
-
 	public int toInt() {
 		return this.count;
 	}

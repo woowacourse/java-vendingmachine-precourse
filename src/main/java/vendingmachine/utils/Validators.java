@@ -125,24 +125,11 @@ public class Validators {
 		if (!(1 <= inputValueLength)) {
 			throw new IllegalArgumentException(1 + "~" + 2147483647 + " 글자 범위 내에서 입력하세요.");
 		}
-		;
 	}
 
 	public static void checkIncludeSpace(String inputValue) {
 		if (inputValue.trim().contains(" ")) {
 			throw new IllegalArgumentException("공백이 포함될 수 없습니다.");
-		}
-	}
-
-	private static void checkValidFormatOfProductName(String inputValue) {
-		if (inputValue.chars().anyMatch(Character::isDigit)) {
-			throw new IllegalArgumentException("숫자는 허용하지 않습니다.");
-		}
-	}
-
-	private static void checkDuplicatesOfProductName(String inputValue) {
-		if (Arrays.stream(inputValue.trim().split("")).distinct().count() != inputValue.trim().length()) {
-			throw new IllegalArgumentException("중복값을 입력할 수 없습니다.");
 		}
 	}
 }

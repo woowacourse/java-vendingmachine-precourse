@@ -19,10 +19,6 @@ public class Products {
 		return new Products(list);
 	}
 
-	public boolean isContains(Product product) {
-		return this.products.contains(product);
-	}
-
 	public List<Product> toList() {
 		return this.products;
 	}
