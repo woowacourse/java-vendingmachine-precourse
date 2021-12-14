@@ -25,8 +25,8 @@ public class Product implements Comparable<Product>{
 	}
 
 	/**** action ****/
-	public void sellProduct(int count) {
-		stock -= count;
+	public void sellProduct() {
+		stock --;
 	}
 
 	@Override
