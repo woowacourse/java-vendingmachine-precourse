@@ -63,17 +63,18 @@ public static int pickNumberInList(final List<Integer> numbers){
 ### InputView
 
 - 책임
-    - 사용자로부터 초기 자판기 보유 금액을 입력받는다.
+    - 사용자로부터 초기 자판기 보유 금액을 입력 받는다.
     - 사용자로부터 n(n>=1)개의 상품 정보를 입력 받는다.
-    - 사용자로부터 구매상품명을 입력받는다.
+    - 사용자로부터 투입금액을 입력 받는다.
+    - 사용자로부터 구매상품명을 입력 받는다.
 
 ### OutputView
 
 - 책임
-    - 여분 금액을 출력한다.
+    - 랜덤으로 생성된 동전을 출력한다.
     - 잔돈을 출력한다.
 
-### OutputView
+### ErrorView
 
 - 책임
     - 에러 메시지를 출력한다.
@@ -88,22 +89,41 @@ public static int pickNumberInList(final List<Integer> numbers){
 
 ## Model
 
-### VendingMachine
+### Coins
 
-### CoinGenerator
+- [ERROR]
+    - 정수가 아닌 입력값
+    - 10원 미만의 입력값
+    - 10원으로 나누어 떨어지지 않는 입력값
 
-- 책임
-    - pickNumberInList 메서드를 이용해 case에 따른 동전 생성
+### Coin
 
-### Calculator
+- [ERROR]
+    - valueOf(765)등 존재하지 않는 값으로 조회
 
 ### Menus
 
+- [ERROR]
+    - 세미콜론(;)으로 구분되는 포맷 위반
+    - 중복 상품명
+    - 존재하지 않는 상품 조회
+
 ### Menu
 
-### Coins
+- [ERROR]
+    - 입력값에서 양옆 대괄호 누락
+    - 상품명,가격,수량 포맷과 다를 경우
+    - 정수가 아닌 상품 가격
+    - 100원 미만의 상품 가격
+    - 10원으로 나누어 떨어지지 않는 상품 가격
+    - 0보다 크거나 같은 정수가 아닌 상품 수량
+    - 재고가 없는 상품 구매
 
-### Coin
+### VendingMachine
+
+- [ERROR]
+    - 0보다 크거나 같은 정수가 아닌 투입 금액
+    - 투입 금액 초과 메뉴 선택
 
 ---
 
@@ -116,6 +136,14 @@ public static int pickNumberInList(final List<Integer> numbers){
     - 특정 값 이하의 Coin 선택
 
 ### Validator
+
+- ArithmeticValidator : 최소 금액 코인으로 나누어 떨어지는지 검증
+    - 검증 실패 -> NotDivisibleByMinPriceCoinException 발생
+- StringValidator : 반복적으로 사용되는 패턴의 문자열 검증
+
+### Formatter
+
+- 원, 개 등 단위 변환
 
 ---
 
