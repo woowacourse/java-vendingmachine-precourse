@@ -7,6 +7,7 @@ import java.util.List;
 
 public class User {
     int sumCoin = 0;
+    int userCoin = 0;
 
     public int getCoin(){
         return sumCoin;
@@ -15,6 +16,12 @@ public class User {
         this.sumCoin = coin;
     }
 
+    public int getUserCoin(){
+        return userCoin;
+    }
+    public void setUserCoin(int userCoin){
+        this.userCoin = userCoin;
+    }
     public void InputMachineCoin(){
         String machineCoinString = Console.readLine();
         try{
@@ -28,7 +35,7 @@ public class User {
         setCoin(Integer.parseInt(machineCoinString));
     }
 
-    public void InputProduct(){
+    public List<Product> InputProduct(){
         String productListString = Console.readLine();
         List<Product> productList = new ArrayList<>();
         String[] products = productListString.split(";");
@@ -48,10 +55,8 @@ public class User {
                 InputProduct();
             }
         }
-        for(Product product : productList){
-            System.out.println(product.getName() + ", " + product.getPrice() + ", " + product.getCount());
-        }
 
+        return productList;
     }
 
     private void isInteger(String machineCoinString){
@@ -111,6 +116,59 @@ public class User {
             Integer.parseInt(count);
         }catch (Exception e){
             throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+        }
+    }
+
+    public void InputAmount() {
+        String amountString = Console.readLine();
+        try{
+            isIntegerAmount(amountString);
+            userCoin = Integer.parseInt(amountString);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            InputAmount();
+        }
+    }
+
+    private void isIntegerAmount(String amount){
+        try{
+            Integer.parseInt(amount);
+        }catch (Exception e){
+            throw new IllegalArgumentException("[ERROR] 금액은 숫자여야 합니다.");
+        }
+    }
+
+    public String InputPurchase(List<Product> productList) {
+        String purchase = Console.readLine();
+        try{
+            isContainProduct(productList, purchase);
+            isSoldOut(productList, purchase);
+        }catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            InputPurchase(productList);
+        }
+        return purchase;
+    }
+
+    private void isContainProduct(List<Product> productList, String purchase){
+        boolean existProduct = false;
+        for(Product product :productList){
+            if(product.getName().equals(purchase)){
+                existProduct = true;
+                break;
+            }
+        }
+        if(!existProduct)
+            throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다.");
+    }
+
+    private void isSoldOut(List<Product> productList, String purchase){
+        for(Product product : productList){
+            if(product.getName().equals(purchase)){
+                if(product.getCount() == 0) {
+                    throw new IllegalArgumentException("[ERROR] 상품이 소진되었습니다.");
+                }
+            }
         }
     }
 }

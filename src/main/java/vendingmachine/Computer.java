@@ -19,4 +19,17 @@ public class Computer {
     public void MSGInputProduct(){
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
     }
+
+    public void MSGInputAmount(){
+        System.out.println("투입 금액을 입력해 주세요.");
+    }
+
+    public void MSGCurrentAmount(int currentAmount) {
+        System.out.println("투입 금액: " + currentAmount + "원");
+    }
+
+    public void MSGInputPurchase(){
+        System.out.println("구매할 상품명을 입력해 주세요.");
+    }
+
 }
