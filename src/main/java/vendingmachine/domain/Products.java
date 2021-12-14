@@ -49,9 +49,21 @@ public class Products {
 		String[] split = inputProducts.split(SEMICOLON);
 		checkFormat(split);
 
-		return Arrays.stream(split)
+		List<Product> productList = Arrays.stream(split)
 			.map(str -> new Product(getProductSplit(str)))
 			.collect(Collectors.toList());
+
+		isDuplicated(productList);
+
+		return productList;
+	}
+
+	private void isDuplicated(List<Product> productList) {
+		if (productList.size() != productList.stream()
+			.map(Product::getName)
+			.distinct().count()) {
+			throw new IllegalArgumentException(ERROR_PRODUCT_NAME_DUPLICATED);
+		}
 	}
 
 	private String[] getProductSplit(String str) {
