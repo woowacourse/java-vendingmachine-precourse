@@ -6,19 +6,19 @@ import java.util.Map;
 
 public class Coins {
 	private static final int NUMBER_LOWER_BOUND = 0;
-	private final Map<Integer, Integer> coins;
+	private final Map<Coin, Integer> coins;
 
-	public Coins(final Map<Integer, Integer> coins) {
+	public Coins(final Map<Coin, Integer> coins) {
 		this.coins = coins;
 	}
 
-	public Map<Integer, Integer> findAll() {
+	public Map<Coin, Integer> findAll() {
 		return Collections.unmodifiableMap(coins);
 	}
 
-	public Map<Integer, Integer> findRestCoins() {
-		Map<Integer, Integer> restCoins = new LinkedHashMap<>();
-		for (Integer coin : coins.keySet()) {
+	public Map<Coin, Integer> findRestCoins() {
+		Map<Coin, Integer> restCoins = new LinkedHashMap<>();
+		for (Coin coin : coins.keySet()) {
 			Integer number = coins.get(coin);
 			if (NUMBER_LOWER_BOUND < number) {
 				restCoins.put(coin, number);
@@ -27,8 +27,8 @@ public class Coins {
 		return restCoins;
 	}
 
-	public void update(final Map<Integer, Integer> reducedCoins) {
-		for (Integer coin : reducedCoins.keySet()) {
+	public void update(final Map<Coin, Integer> reducedCoins) {
+		for (Coin coin : reducedCoins.keySet()) {
 			coins.put(coin, coins.get(coin) - reducedCoins.get(coin));
 		}
 	}

@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import java.util.Map;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
 import vendingmachine.domain.Money;
 
@@ -34,23 +35,23 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public void printHoldingCoinStatus(final Map<Integer, Integer> coins) {
+	public void printHoldingCoinStatus(final Map<Coin, Integer> coins) {
 		printNewLine();
 		System.out.println(HOLDING_COIN_TEXT);
-		for (Map.Entry<Integer, Integer> coin : coins.entrySet()) {
-			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
+		for (Map.Entry<Coin, Integer> coin : coins.entrySet()) {
+			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey().getAmount(), coin.getValue());
 			printNewLine();
 		}
 	}
 
-	public void printChanges(final Map<Integer, Integer> changes) {
+	public void printChanges(final Map<Coin, Integer> changes) {
 		if (changes.size() <= ZERO) {
 			return;
 		}
 		printNewLine();
 		System.out.println(CHANGES);
-		for (Map.Entry<Integer, Integer> coin : changes.entrySet()) {
-			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey(), coin.getValue());
+		for (Map.Entry<Coin, Integer> coin : changes.entrySet()) {
+			System.out.printf(HOLDING_COIN_AMOUNT_TEXT, coin.getKey().getAmount(), coin.getValue());
 			printNewLine();
 		}
 	}

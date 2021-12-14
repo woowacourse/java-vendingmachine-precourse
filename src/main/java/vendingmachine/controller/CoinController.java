@@ -35,17 +35,17 @@ public class CoinController {
 		}
 	}
 
-	private Map<Integer, Integer> makeCoins(int holdingAmount) {
-		Map<Integer, Integer> coinAmount = new LinkedHashMap<>();
+	private Map<Coin, Integer> makeCoins(int holdingAmount) {
+		Map<Coin, Integer> coinAmount = new LinkedHashMap<>();
 		for (Coin coin : Coin.values()) {
 			int amount = coin.getAmount();
-			coinAmount.put(amount, holdingAmount / amount);
+			coinAmount.put(coin, holdingAmount / amount);
 			holdingAmount %= amount;
 		}
 		return coinAmount;
 	}
 
-	public Map<Integer, Integer> getRestCoins(){
+	public Map<Coin, Integer> getRestCoins(){
 		return coins.findRestCoins();
 	}
 
@@ -54,5 +54,9 @@ public class CoinController {
 			return money / coin;
 		}
 		return number;
+	}
+
+	public void update(final Map<Coin, Integer> reducedCoins) {
+		coins.update(reducedCoins);
 	}
 }
