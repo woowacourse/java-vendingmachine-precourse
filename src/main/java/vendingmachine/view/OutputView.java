@@ -42,10 +42,11 @@ public class OutputView {
 	}
 
 	public static void printCoinResult(HashMap<Coin, Integer> map) {
-
 		for (Coin coin : Coin.values()) {
+			if (map.get(coin) == 0) {
+				continue;
+			}
 			System.out.println(coin.getAmount() + "원 - " + map.get(coin) + "개");
 		}
-
 	}
 }
