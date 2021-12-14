@@ -77,10 +77,10 @@ public class VendingMachine {
 	public void sale(Name wantedProductName) {
 		//1. 일단은 일부정보(name) -> 객체를찾아야함.
 		Product product = this.products.findProductByName(wantedProductName.toString());
-
-		//2.[ db속 존재유무 & 1개이상 유무]는 이미 검증이 된 체로왔음.(반복에서 입력시마다 검증함)
-		// [보유중인 돈 >= 상품 금액] 이어야한다. -> 이것도 입력시 추가 검사..
-
+		//2.[ db속 존재유무 & 1개이상 유무 & 사용자돈은 충분한상태] 3가지가 이미 검증이 된 체로왔음.(반복에서 입력시마다 검증함)
+		// 구매로직 1) 사용자 돈을 깍고, 2) 상품 갯수 1개를 내린다.
+		this.userMoney.decreaseWith(product.toAmount());
+		this.productCounter.minusCount(product);
 	}
 
 	public boolean isProductAvailable(Product product) {

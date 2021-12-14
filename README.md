@@ -17,13 +17,13 @@
             - [x] 상품 가격은 100원부터 시작하며, 10원으로 나누어떨어지도록 예외처리하기
             - [x] 상품 갯수는 1개이상을 입력하기
     - [x] 입력받은 정보를 상품으로 추가하기 VendingMachine#insertProducts
-- [] 사용자가 투입한 금액으로 상품을 구매하기
+- [x] 사용자가 투입한 금액으로 상품을 구매하기
     - [x] 사용자 투입 금액 입력받기 InputView#getMoney
     - [x] 구매할 상품 입력 받기 InputView#getProductName
         - [x] 존재하는 상품인지 검증 하기 Validators#checkValidProduct
         - [x] 해당 상품의 갯수가 1개이상인지 검증 하기
         - [x] 보유 중인 금액이 상품 금액보다 크거나 같은지 검증 하기
-    - [ ] 상품 구매하기 VendingMachine
+    - [x] 상품 구매하기 VendingMachine#sale
 - [ ] 남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려주기 Controller
     - [ ] 특정조건(최저조건보다 금액이 낮거나, 상품이 비었거나)에서 상품구매 종료하는 반복문 구현 VendingMachine
     - [ ] 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환하기
