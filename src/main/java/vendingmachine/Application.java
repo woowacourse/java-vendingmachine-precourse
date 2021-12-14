@@ -3,10 +3,15 @@ package vendingmachine;
 public class Application {
     public static int getInitCoin() {
         while (true) {
-            String input = camp.nextstep.edu.missionutils.Console.readLine();
+            try {
+                String input = camp.nextstep.edu.missionutils.Console.readLine();
 
-            if (true) {
+                InputChecker.checkNumber(input);
+
                 return Integer.parseInt(input);
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+                continue;
             }
         }
     }
