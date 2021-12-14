@@ -32,6 +32,7 @@ public class View {
         return result;
     }
 
+
     public static int inputMoney() {
         System.out.println("투입 금액을 입력해 주세요.");
         String result = Console.readLine();

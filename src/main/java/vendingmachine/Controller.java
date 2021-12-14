@@ -60,7 +60,12 @@ public class Controller {
     }
 
     public void inputProduct() {
-        vendingMachine.createProducts(view.inputProduct());
+        while (true) {
+            if (vendingMachine.createProducts(view.inputProduct())) {
+                break;
+            }
+            System.out.println("[ERROR] 금액은 숫자여야 합니다.");
+        }
         System.out.println();
     }
 

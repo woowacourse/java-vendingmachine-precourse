@@ -24,14 +24,38 @@ public class VendingMachine {
         return spentMoney;
     }
 
-    public void createProducts(String[] products) {
+    public boolean createProducts(String[] products) {
         for (int i=0; i<products.length; i++) {
             String temp = products[i].substring(1,products[i].length()-1);
             String[] result = temp.split(",");
+            if (!verifyNumber(result[1])) {
+                productList.clear();
+                return false;
+            }
+            if (!verifyNumber(result[2])) {
+                productList.clear();
+                return false;
+            }
             Product product = new Product(result);
+
             productList.add(product);
         }
+        return true;
     }
+
+    public boolean verifyNumber(String str) {
+        if (!View.isStringDouble(str)) {
+            productList.clear();
+            return false;
+        }
+        if (Integer.parseInt(str) <= 0) {
+            productList.clear();
+            return false;
+        }
+        return true;
+    }
+
+
 
     public List<Product> getProductList() {
         return productList;
