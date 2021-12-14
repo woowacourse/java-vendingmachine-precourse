@@ -7,8 +7,6 @@ import java.util.Map;
 
 public class VendingMachine {
 
-
-
 	public int holdingMoney;
 	public int inputMoney;
 	public List<Item> holdingItemList;
