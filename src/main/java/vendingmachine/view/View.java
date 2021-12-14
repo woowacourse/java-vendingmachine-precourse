@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import java.util.Observer;
+
 import vendingmachine.model.event.Event;
 
 public abstract class View implements Observer {

@@ -1,6 +1,7 @@
 package vendingmachine.reader;
 
 import camp.nextstep.edu.missionutils.Console;
+
 import vendingmachine.reader.validator.Validator;
 
 public abstract class Reader<T> {

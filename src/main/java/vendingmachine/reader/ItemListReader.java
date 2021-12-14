@@ -1,12 +1,14 @@
 package vendingmachine.reader;
 
 import static java.util.stream.Collectors.toList;
+
 import java.util.List;
+
 import vendingmachine.model.item.Item;
 import vendingmachine.reader.validator.CompositeValidator;
+import vendingmachine.reader.validator.Validator;
 import vendingmachine.reader.validator.item.ItemLineValidator;
 import vendingmachine.reader.validator.item.ItemPriceValidator;
-import vendingmachine.reader.validator.Validator;
 
 public class ItemListReader extends Reader<List<Item>> {
 	private final ItemLineParser parser;

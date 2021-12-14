@@ -1,7 +1,9 @@
 package vendingmachine.view;
 
 import static vendingmachine.model.event.EventType.INIT_EXCHANGE_COINS;
+
 import java.util.Observable;
+
 import vendingmachine.model.coin.Coins;
 import vendingmachine.model.event.Event;
 

@@ -1,8 +1,9 @@
 package vendingmachine.reader;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
 import java.util.stream.Stream;
-import static java.util.stream.Collectors.toList;
 
 public class ItemLineParser {
 	public List<String[]> parse(String value) {

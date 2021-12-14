@@ -1,6 +1,7 @@
 package vendingmachine.model.coin;
 
 import static java.util.Comparator.comparingInt;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.IntStream;

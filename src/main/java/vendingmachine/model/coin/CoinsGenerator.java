@@ -1,7 +1,8 @@
 package vendingmachine.model.coin;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
+
+import camp.nextstep.edu.missionutils.Randoms;
 
 public class CoinsGenerator {
 	public Coins generate(int amount) {

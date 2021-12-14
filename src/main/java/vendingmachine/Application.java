@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.List;
+
 import vendingmachine.model.coin.Coins;
 import vendingmachine.model.coin.CoinsGenerator;
 import vendingmachine.model.item.Item;

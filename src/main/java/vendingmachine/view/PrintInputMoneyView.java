@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import java.util.Observable;
+
 import vendingmachine.model.event.Event;
 import vendingmachine.model.event.EventType;
 

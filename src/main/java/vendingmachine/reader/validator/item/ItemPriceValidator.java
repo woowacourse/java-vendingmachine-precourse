@@ -1,11 +1,13 @@
 package vendingmachine.reader.validator.item;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.List;
+
 import vendingmachine.reader.ItemLineParser;
+import vendingmachine.reader.validator.Validator;
 import vendingmachine.reader.validator.number.OverBoundaryValidator;
 import vendingmachine.reader.validator.number.TenTimesNumberValidator;
-import vendingmachine.reader.validator.Validator;
-import static java.util.stream.Collectors.toList;
 
 public class ItemPriceValidator implements Validator {
 	private static final int BOUNDARY_VALUE = 100;

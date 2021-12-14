@@ -1,9 +1,10 @@
 package vendingmachine.model.coin;
 
-import java.util.List;
-import java.util.stream.Stream;
 import static java.util.Comparator.comparingInt;
 import static java.util.stream.Collectors.toList;
+
+import java.util.List;
+import java.util.stream.Stream;
 
 public enum Coin {
 	COIN_500(500),

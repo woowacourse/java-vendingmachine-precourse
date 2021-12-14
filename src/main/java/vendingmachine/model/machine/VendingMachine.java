@@ -1,7 +1,9 @@
 package vendingmachine.model.machine;
 
 import static vendingmachine.model.event.EventType.*;
+
 import java.util.Observable;
+
 import vendingmachine.model.coin.Coins;
 import vendingmachine.model.event.Event;
 
