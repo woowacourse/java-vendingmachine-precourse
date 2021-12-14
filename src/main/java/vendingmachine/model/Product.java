@@ -37,4 +37,12 @@ public class Product {
 	public int subtractProductPrice(int insertMoney) {
 		return insertMoney - this.price;
 	}
+
+	public boolean isPriceOverHundred() {
+		return this.price >= 100;
+	}
+
+	public boolean isPriceDividedByTen() {
+		return (this.price % 10) == 0;
+	}
 }

@@ -10,6 +10,7 @@ import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.util.StringUtils;
 import vendingmachine.util.validator.MoneyValidator;
+import vendingmachine.util.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -42,6 +43,8 @@ public class VendingMachineController {
 		separatedProducts = StringUtils.removeProductBrackets(separatedProducts);
 		List<Product> productList = new ArrayList<>();
 		separatedProducts.forEach(product -> productList.add(new Product(StringUtils.parseProductDetail(product))));
+		ProductValidator.validate(productList);
+
 		products = new Products(productList);
 	}
 
