@@ -4,8 +4,8 @@ public class Item {
 
 	private static final int OUT_OF_STOCK = 0;
 
-	private String name;
-	private int price;
+	private final String name;
+	private final int price;
 	private int quantity;
 
 	public Item(String name, int price, int quantity) {

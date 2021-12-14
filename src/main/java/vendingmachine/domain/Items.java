@@ -13,7 +13,7 @@ public class Items {
 	private static final int PRICE = 1;
 	private static final int QUANTITY = 2;
 
-	private List<Item> list;
+	private final List<Item> list;
 
 	public Items() {
 		list = new ArrayList<>();

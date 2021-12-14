@@ -29,6 +29,19 @@ public enum Coin {
 		return getCoinByAmount(pickAmount);
 	}
 
+	private static List<Integer> getAmounts() {
+		return Stream.of(Coin.values())
+			.map(Coin::getAmount)
+			.collect(Collectors.toList());
+	}
+
+	private static Coin getCoinByAmount(int pickAmount) {
+		return Stream.of(Coin.values())
+			.filter(coin -> coin.amount == pickAmount)
+			.findFirst()
+			.orElse(null);
+	}
+
 	public boolean isEnoughAmount(int holdingAmount) {
     	return holdingAmount >= amount;
 	}
@@ -43,19 +56,6 @@ public enum Coin {
 
 	public int calculateChange(int totalAmount, int count) {
 		return totalAmount - (amount * count);
-	}
-
-	private static List<Integer> getAmounts() {
-    	return Stream.of(Coin.values())
-			.map(Coin::getAmount)
-			.collect(Collectors.toList());
-	}
-
-	private static Coin getCoinByAmount(int pickAmount) {
-    	return Stream.of(Coin.values())
-			.filter(coin -> coin.amount == pickAmount)
-			.findFirst()
-			.orElse(null);
 	}
 
 	@Override
