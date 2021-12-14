@@ -8,7 +8,7 @@ import vendingmachine.view.UserAccountView;
 
 public class PurchaseController {
 	public static void purchaseCatalogs() {
-		while (UserAccount.canBuy()) {
+		while (UserAccount.canBuyAnyCatalog()) {
 			UserAccountView.printUserAccount();
 			Catalog catalogToPurchase = getCatalogInput();
 			PurchaseService.purchase(catalogToPurchase);

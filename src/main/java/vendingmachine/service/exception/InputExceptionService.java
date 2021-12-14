@@ -20,6 +20,7 @@ public class InputExceptionService {
 	private static final String NO_SUCH_CATALOG = "존재하지 않는 상품명 입니다.";
 	private static final String NOT_ENOUGH_MONEY = "상품을 살 돈이 부족합니다.";
 	private static final String NOT_ENOUGH_CATALOG = "상품의 개수가 부족합니다.";
+	private static final String BRACED_FORMAT = "\\[(.*)]";
 
 	public static void checkZeroOrPositiveInt(int input) {
 		if (input < 0) {
@@ -42,7 +43,7 @@ public class InputExceptionService {
 	}
 
 	public static void checkBraced(String input) {
-		if (!input.startsWith("[") || !input.endsWith("]")) {
+		if (!input.matches(BRACED_FORMAT)) {
 			throw new IllegalArgumentException(CATALOG_INPUT_ERROR_MESSAGE);
 		}
 	}
