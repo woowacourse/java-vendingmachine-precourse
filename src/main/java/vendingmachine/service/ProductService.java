@@ -1,9 +1,15 @@
-package vendingmachine;
+package vendingmachine.service;
+
+import vendingmachine.domain.Product;
 
 import java.util.ArrayList;
 
-public class Products {
+public class ProductService {
     private static ArrayList<Product> productsList = new ArrayList<>();
+
+    public static ArrayList<Product> getProductsList() {
+        return productsList;
+    }
 
     public void addProducts(String[] products) {
         for (String product : products) {
@@ -24,19 +30,6 @@ public class Products {
         return result;
     }
 
-    public boolean isSingleProductName(String input) throws IllegalArgumentException {
-        int count = 0;
-        for (Product p : productsList) {
-            if (p.isSameName(input)) {
-                count += 1;
-            }
-        }
-        if (count == 1) {
-            return true;
-        }
-        throw new IllegalArgumentException();
-    }
-
     public int calculateProduct(String name) {
         for (Product p : productsList) {
             if (p.isSameName(name)) {
@@ -45,14 +38,5 @@ public class Products {
             }
         }
         return 0;
-    }
-
-    public boolean isExistProduct() {
-        for (Product p : productsList) {
-            if (p.isEmpty()) {
-                return false;
-            }
-        }
-        return true;
     }
 }

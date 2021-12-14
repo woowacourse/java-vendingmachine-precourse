@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.service;
+
+import static vendingmachine.domain.Message.*;
 
 import java.util.HashSet;
 
@@ -15,7 +17,7 @@ public class Validation {
             isDivisibleByTen(input);
             return true;
         } catch (IllegalArgumentException e) {
-            message.printInputCorrectNumber();
+            messageService.printErrorMessage(e.getMessage());
             return false;
         }
     }
@@ -113,26 +115,5 @@ public class Validation {
             System.out.println("count");
             throw new IllegalArgumentException();
         }
-    }
-
-    public boolean isValidateAmount(String input) {
-        try {
-            isNumber(input);
-            isWholeNumbers(input);
-        } catch (IllegalArgumentException e) {
-            message.printInputCorrectNumber();
-            return false;
-        }
-        return true;
-    }
-
-    public boolean isValidateProductName(String input) {
-        try {
-            products.isSingleProductName(input);
-        } catch (IllegalArgumentException e) {
-            message.printInputCorrectProductName();
-            return false;
-        }
-        return true;
     }
 }

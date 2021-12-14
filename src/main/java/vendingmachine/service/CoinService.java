@@ -1,4 +1,7 @@
-package vendingmachine;
+package vendingmachine.service;
+
+import vendingmachine.domain.Change;
+import vendingmachine.domain.Coin;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
