@@ -1,5 +1,6 @@
 package vendingmachine.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,10 +19,11 @@ public class VendingMachineAccountService {
 
 	public static void setRandomCoins() {
 		int account = vendingMachineAccount.getAccount();
-
+		List<Integer> coinUnit = new ArrayList<>(COIN_UNIT_LIST);
 		while (account > 0) {
-			int randomCoin = Randoms.pickNumberInList(COIN_UNIT_LIST);
-			if (account < randomCoin) {
+			Integer randomCoin = Randoms.pickNumberInList(coinUnit);
+			if (randomCoin > account) {
+				coinUnit.remove(randomCoin);
 				continue;
 			}
 			account -= randomCoin;
