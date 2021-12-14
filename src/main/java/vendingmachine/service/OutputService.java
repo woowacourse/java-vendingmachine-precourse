@@ -15,6 +15,7 @@ public class OutputService {
 	private static final String STICK = " - ";
 	private static final String UNIT = "개";
 	private static final String CHANGE = "잔돈";
+	private static final String INPUT_MONEY_MESSAGE = "투입 금액: ";
 
 	public void printAllCoinCount() {
 		System.out.println(MONEY_OF_VENDING_MACHINE);
@@ -36,6 +37,10 @@ public class OutputService {
 		if (change.containsKey(Coin.getByAmount(amount)) && change.get(Coin.getByAmount(amount)) > ZERO) {
 			System.out.println(amount + WON + STICK + change.get(Coin.getByAmount(amount)) + UNIT);
 		}
+	}
+
+	public void printUserMoney(int money) {
+		System.out.println((INPUT_MONEY_MESSAGE + money + WON));
 	}
 
 	public void enter() {

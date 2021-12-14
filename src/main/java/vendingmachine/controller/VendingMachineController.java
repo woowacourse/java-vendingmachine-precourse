@@ -21,6 +21,7 @@ public class VendingMachineController {
 		registerItems();
 		putMoney();
 		purchase();
+		outputService.printUserMoney(money);
 		outputService.printChange(coinService.returnChange(money));
 	}
 
@@ -42,8 +43,11 @@ public class VendingMachineController {
 
 	private void purchase() {
 		do {
+			outputService.printUserMoney(money);
+
 			Item item = inputService.readItemName(money);
 			item.subtractStockQuantity();
+
 			money = item.subtractMoneyAfterPurchase(money);
 			outputService.enter();
 		} while (itemService.haveAnyItemToBuy(money));

@@ -1,7 +1,5 @@
 package vendingmachine.service;
 
-import static vendingmachine.service.OutputService.*;
-
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
@@ -14,7 +12,6 @@ public class InputService {
 	private static final String INPUT_ITEMS_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_USER_MONEY_MESSAGE = "투입 금액을 입력해 주세요.";
 	private static final String INPUT_ITEM_NAME_MESSAGE = "구매할 상품명을 입력해 주세요.";
-	private static final String INPUT_MONEY_MESSAGE = "투입 금액: ";
 
 	public int readMoneyOfVendingMachine() {
 		while (true) {
@@ -52,7 +49,6 @@ public class InputService {
 	public Item readItemName(int money) {
 		while (true) {
 			try {
-				System.out.println(INPUT_MONEY_MESSAGE + money + WON);
 				System.out.println(INPUT_ITEM_NAME_MESSAGE);
 				return InputConverter.convertItemName(Console.readLine(), money);
 			} catch (IllegalArgumentException e) {
