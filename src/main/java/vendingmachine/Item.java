@@ -22,4 +22,9 @@ public class Item {
 	public boolean isMathcing(String buyingItem) {
 		return this.name.equals(buyingItem);
 	}
+
+	public int sell(int insertAmount) {
+		this.amount--;
+		return insertAmount - this.price;
+	}
 }

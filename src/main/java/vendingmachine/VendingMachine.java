@@ -6,6 +6,8 @@ public class VendingMachine {
 	private int insertAmount;
 	private final Items items;
 	private final Map<Coin, Integer> vendingMachineCoin;
+	private InputView inputView = new InputView();
+	private OutputView outputView = new OutputView();
 
 	public VendingMachine(int insertAmount, Items items,
 		Map<Coin, Integer> vendingMachineCoin) {
@@ -14,7 +16,14 @@ public class VendingMachine {
 		this.vendingMachineCoin = vendingMachineCoin;
 	}
 
-	public boolean isBuyableMoreItem() {
+	private void buyItem() {
+		System.out.println();
+		outputView.printInsertAmountRemaining(insertAmount);
+		Item buyingItem = inputView.getInputOfBuyingItem(items, insertAmount);
+		insertAmount = buyingItem.sell(insertAmount);
+	}
+
+	private boolean isBuyableMoreItem() {
 		return (!items.isAmountAllZeroInItems() && items.isBuyable(insertAmount));
 	}
 }
