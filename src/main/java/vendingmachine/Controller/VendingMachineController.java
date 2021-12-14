@@ -12,14 +12,11 @@ import vendingmachine.View.OutputView;
 import vendingmachine.model.Product;
 import vendingmachine.model.VendingMachine;
 import vendingmachine.utils.ExceptionMessages;
-import vendingmachine.utils.Messages;
+import vendingmachine.utils.InputOutputMessages;
 import vendingmachine.utils.Symbol;
+import vendingmachine.utils.MarkingNumber;
 
 public class VendingMachineController {
-
-    public static final int PRODUCT_INFORMATION_NAME_INDEX = 0;
-    public static final int PRODUCT_INFORMATION_PRICE_INDEX = 1;
-    public static final int PRODUCT_INFORMATION_COUNT_INDEX = 2;
 
     private final InputView inputView;
     private final OutputView outputView;
@@ -74,7 +71,7 @@ public class VendingMachineController {
 
     protected String choosePurchasingProduct(final List<Product> products, VendingMachine vendingMachine) {
         try {
-            String purchasingProductName = inputView.inputPurchasingProductName(Messages.INPUT_PURCHASING_PRODUCT_NAME.getInputMessage());
+            String purchasingProductName = inputView.inputPurchasingProductName(InputOutputMessages.INPUT_PURCHASING_PRODUCT_NAME.getInputMessage());
             vendingMachine.validatePurchasingProductNameOnMachine(products, purchasingProductName);
             vendingMachine.validatePurchasingProductSoldOut(products, purchasingProductName);
 
@@ -88,7 +85,7 @@ public class VendingMachineController {
 
     protected List<Product> displayProducts() {
         try {
-            List<String> inputProductInformation = inputView.inputProducts(Messages.INPUT_PRODUCT_INFORMATION_MESSAGE.getInputMessage());
+            List<String> inputProductInformation = inputView.inputProducts(InputOutputMessages.INPUT_PRODUCT_INFORMATION_MESSAGE.getInputMessage());
 
             return fillProducts(inputProductInformation);
         } catch (IllegalArgumentException illegalArgumentException) {
@@ -127,29 +124,20 @@ public class VendingMachineController {
     }
 
     protected Product createProduct(final List<String> productInformation) {
-        String name = productInformation.get(PRODUCT_INFORMATION_NAME_INDEX);
-        int price = Integer.parseInt(productInformation.get(PRODUCT_INFORMATION_PRICE_INDEX));
-        int count = Integer.parseInt(productInformation.get(PRODUCT_INFORMATION_COUNT_INDEX));
+        String name = productInformation.get(MarkingNumber.PRODUCT_INFORMATION_NAME_INDEX.getNumber());
+        int price = Integer.parseInt(productInformation.get(MarkingNumber.PRODUCT_INFORMATION_PRICE_INDEX.getNumber()));
+        int count = Integer.parseInt(productInformation.get(MarkingNumber.PRODUCT_INFORMATION_COUNT_INDEX.getNumber()));
 
         return new Product(name, price, count);
     }
 
     protected int fillMoney() {
         try {
-            int inputMoney = inputView.inputMoney(Messages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
-            isOverZero(inputMoney);
-
-            return inputMoney;
+            return inputView.inputMoney(InputOutputMessages.INPUT_MACHINE_HAVE_MONEY_MESSAGE.getInputMessage());
         } catch (IllegalArgumentException illegalArgumentException) {
             System.out.println(illegalArgumentException.getMessage());
 
             return fillMoney();
-        }
-    }
-
-    protected void isOverZero(final int inputMoney) {
-        if(inputMoney == 0){
-            throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_INPUT_MONEY_LESS_THAN_ZERO.getErrorMessage());
         }
     }
 

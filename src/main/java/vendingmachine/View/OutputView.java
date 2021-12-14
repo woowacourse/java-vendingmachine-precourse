@@ -2,12 +2,10 @@ package vendingmachine.View;
 
 import java.util.Map;
 
-import vendingmachine.utils.Messages;
+import vendingmachine.utils.InputOutputMessages;
 import vendingmachine.utils.Symbol;
 
 public class OutputView {
-
-    public static final String CHANGE = "잔돈";
 
     public void printPurChasingCost(int purchasingCost) {
         String purchasingCostPrintFormat = createPurchasingCostPrintFormat(purchasingCost);
@@ -16,14 +14,14 @@ public class OutputView {
 
     protected String createPurchasingCostPrintFormat(final int purchasingCost) {
         return Symbol.NEW_LINE.getSymbol()
-                + Messages.OUTPUT_PURCHASING_COST_MESSAGE.getInputMessage()
+                + InputOutputMessages.OUTPUT_PURCHASING_COST_MESSAGE.getInputMessage()
                 + purchasingCost
                 + Symbol.WON.getSymbol();
     }
 
     public void printMachineHaveCoin(final Map<Integer, Integer> machineCoins) {
         System.out.println();
-        System.out.println(Messages.MACHINE_HAVE_COINS.getInputMessage());
+        System.out.println(InputOutputMessages.OUTPUT_MACHINE_HAVE_COINS.getInputMessage());
 
         String machineHaveCoinPrintFormat = createMachineCoinPrintFormat(machineCoins);
 
@@ -49,7 +47,7 @@ public class OutputView {
 
     public void printReturnChange(final int purchasingCost, final Map<Integer, Integer> returnCoins) {
         printPurChasingCost(purchasingCost);
-        System.out.println(CHANGE);
+        System.out.println(Symbol.CHANGE.getSymbol());
 
         String returnChangePrintFormat = createReturnChangePrintFormat(returnCoins);
         System.out.println(returnChangePrintFormat);
