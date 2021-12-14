@@ -6,6 +6,7 @@ import vendingmachine.domain.coin.CoinGenerator;
 import vendingmachine.domain.product.Product;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
+import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -35,8 +36,19 @@ public class VendingMachineCalculator {
     }
 
     private void inputProductByUser(Products products) {
+        try {
+            buyAgain(products);
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            inputProductByUser(products);
+        }
+    }
+
+    private void buyAgain(Products products) {
         while (!isReturnChange(products)) {
             String productByUser = InputView.getProductByUser();
+            ProductValidator.checkProductContain(products, productByUser);
+            ProductValidator.checkProductName(productByUser);
             Product pro = products.reduce(productByUser);
             userMoney.reduce(pro.getPrice());
             OutputView.printUserMoney(userMoney);

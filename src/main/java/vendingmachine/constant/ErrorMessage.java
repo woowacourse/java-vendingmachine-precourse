@@ -9,5 +9,6 @@ public class ErrorMessage {
     public static final String IS_NOT_POSSIBLE_PRODUCT_PRICE_ERROR_MESSAGE = ERROR_SIGN + "상품은 100원 이상부터 가능합니다.";
 
     public static final String NOT_MATCHED_REGEX_ERROR_MESSAGE = ERROR_SIGN + "상품은 [상품명,가격,수량]의 형식으로 입력해주세요";
-
+    public static final String BLANK_NAME_ERROR_MESSAGE = ERROR_SIGN + "상품명이 빈칸이 될 수 없습니다";
+    public static final String NOT_CONTAINED_PRODUCTS_ERROR_MESSAGE = ERROR_SIGN + "해당 상품이 없습니다";
 }

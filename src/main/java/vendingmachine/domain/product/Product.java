@@ -15,6 +15,10 @@ public class Product {
         return this.name.equals(name);
     }
 
+    public boolean hasCount() {
+        return count > 0;
+    }
+
     public void sell() {
         count--;
     }
