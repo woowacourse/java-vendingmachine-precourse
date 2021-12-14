@@ -2,7 +2,7 @@ package vendingmachine.dto.request.iteminventory;
 
 import static org.assertj.core.util.Arrays.isNullOrEmpty;
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_DUPLICATED_ITEM_NAMES_IN;
-import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEMS_INVENTORY_INPUT;
+import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,7 +31,7 @@ public class ItemsInventoryRequest {
 
     private void checkInputEmpty(String[] input) {
         if (isNullOrEmpty(input) || checkEachStringNotEmpty(input)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEMS_INVENTORY_INPUT);
+            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_WRONG_ITEM_INVENTORY_INPUT);
         }
     }
 
