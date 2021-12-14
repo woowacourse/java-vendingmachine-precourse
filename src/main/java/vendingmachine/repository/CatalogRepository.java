@@ -22,12 +22,6 @@ public class CatalogRepository {
 		return null;
 	}
 
-	public static void reduceAmount(Catalog catalog) {
-		if (catalog != null) {
-			catalog.purchase();
-		}
-	}
-
 	public static boolean isExistCheaperThan(int account) {
 		for (Catalog catalog : catalogList) {
 			if (catalog.isCheaperThan(account)

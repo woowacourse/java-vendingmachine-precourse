@@ -11,7 +11,7 @@ public class PurchaseController {
 		while (UserAccount.canBuyAnyCatalog()) {
 			UserAccountView.printUserAccount();
 			Catalog catalogToPurchase = getCatalogInput();
-			PurchaseService.purchase(catalogToPurchase);
+			catalogToPurchase.purchase();
 		}
 		UserAccountView.printUserAccount();
 	}

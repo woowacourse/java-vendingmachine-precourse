@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import java.util.Objects;
 
+import vendingmachine.repository.UserAccount;
+
 public class Catalog {
 	private String name;
 	private int price;
@@ -11,10 +13,6 @@ public class Catalog {
 		this.name = name;
 		this.price = price;
 		this.amount = amount;
-	}
-
-	public int getPrice() {
-		return this.price;
 	}
 
 	@Override
@@ -31,6 +29,7 @@ public class Catalog {
 
 	public void purchase() {
 		this.amount--;
+		UserAccount.purchase(this.price);
 	}
 
 	public boolean isCheaperThan(int userAccount) {

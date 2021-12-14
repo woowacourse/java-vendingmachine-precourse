@@ -5,7 +5,6 @@ import static vendingmachine.service.exception.InputExceptionService.*;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Catalog;
 import vendingmachine.repository.CatalogRepository;
-import vendingmachine.repository.UserAccount;
 import vendingmachine.view.exception.ErrorMessage;
 
 public class PurchaseService {
@@ -26,10 +25,5 @@ public class PurchaseService {
 		checkExistCatalog(catalog);
 		checkCanPurchase(catalog);
 		return catalog;
-	}
-
-	public static void purchase(Catalog catalogToPurchase) {
-		UserAccount.purchase(catalogToPurchase);
-		CatalogRepository.reduceAmount(catalogToPurchase);
 	}
 }

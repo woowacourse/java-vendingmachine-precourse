@@ -14,8 +14,8 @@ public class UserAccount {
 		return account;
 	}
 
-	public static void purchase(Catalog catalog) {
-		account -= catalog.getPrice();
+	public static void purchase(int price) {
+		account -= price;
 	}
 
 	public static boolean canBuyAnyCatalog() {
