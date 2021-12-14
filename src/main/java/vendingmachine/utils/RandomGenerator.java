@@ -1,4 +1,4 @@
-package vendingmachine.domain;
+package vendingmachine.utils;
 
 import static vendingmachine.constants.Constant.*;
 
@@ -6,8 +6,9 @@ import java.util.EnumMap;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.Coin;
 
-public class Coins {
+public class RandomGenerator {
 	private final Map<Coin, Integer> vendingMachineRemainedCoins = new EnumMap<>(Coin.class);
 
 	public Map<Coin, Integer> createCoins(int possession) {

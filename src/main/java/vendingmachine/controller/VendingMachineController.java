@@ -7,14 +7,14 @@ import static vendingmachine.utils.View.showMoney;
 import java.util.Map;
 
 import vendingmachine.domain.Coin;
-import vendingmachine.domain.Coins;
+import vendingmachine.utils.RandomGenerator;
 import vendingmachine.domain.Items;
 import vendingmachine.service.ChangeService;
 import vendingmachine.service.OrderService;
 import vendingmachine.service.UserService;
 
 public class VendingMachineController {
-	private final Coins coins = new Coins();
+	private final RandomGenerator coins = new RandomGenerator();
 	private final UserService userService = new UserService();
 	private final OrderService orderService = new OrderService();
 	private final ChangeService changeService = new ChangeService();

@@ -6,12 +6,13 @@ import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import vendingmachine.constants.Message;
+import vendingmachine.utils.RandomGenerator;
 import vendingmachine.utils.View;
 
 class CoinsTest {
 	@Test
 	void generateRandomCoins() {
-		Coins coins = new Coins();
+		RandomGenerator coins = new RandomGenerator();
 		int possession = 450;
 		Map<Coin, Integer> entry = coins.createCoins(possession);
 
