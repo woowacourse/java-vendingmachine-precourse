@@ -1,16 +1,21 @@
 package vendingmachine.service;
 
-import static vendingmachine.repository.ChangeRepository.subtractChange;
-import static vendingmachine.repository.ProductRepository.*;
+import vendingmachine.repository.ChangeRepository;
+import vendingmachine.repository.ProductRepository;
+
+import static vendingmachine.repository.ProductRepository.isExist;
 import static vendingmachine.view.ExceptionMessages.*;
 
 public class BuyService {
 
-    public static void sellProduct(String name) {
-        subtractChange(substractProductQuantity(name));
+    private final ProductRepository productRepository = ProductRepository.getInstance();
+    private final ChangeRepository changeRepository = ChangeRepository.getInstance();
+    
+    public void sellProduct(String name) {
+        changeRepository.subtractChange(productRepository.substractProductQuantity(name));
     }
 
-    public static void isValidOrderName(String order, int change) {
+    public void isValidOrderName(String order, int change) {
         if (!isExist(order)) {
             throw new IllegalArgumentException(ERROR_NOT_INVALID_ORDER_NAME);
         }
@@ -22,25 +27,25 @@ public class BuyService {
         }
     }
 
-    private static boolean hasEnoughMoney(String name, int change) {
-        if (change < getProductPrice(name, change)) {
+    private boolean hasEnoughMoney(String name, int change) {
+        if (change < productRepository.getProductPrice(name, change)) {
             return false;
         }
         return true;
     }
 
-    private static boolean hasEnoughQuantity(String name) {
-        if (getProductQuantity(name) > 0) {
+    private boolean hasEnoughQuantity(String name) {
+        if (productRepository.getProductQuantity(name) > 0) {
             return true;
         }
         return false;
     }
 
-    public static boolean isAvailableKeepSell(int change) {
+    public boolean isAvailableKeepSell(int change) {
         boolean canBuy = false;
-        for (String name : getProductNameSet()) {
-            if (getProductPrice(name, change) < change
-                    && getProductQuantity(name) > 0) {
+        for (String name : productRepository.getProductNameSet()) {
+            if (productRepository.getProductPrice(name, change) < change
+                    && productRepository.getProductQuantity(name) > 0) {
                 canBuy = true;
                 return canBuy;
             }

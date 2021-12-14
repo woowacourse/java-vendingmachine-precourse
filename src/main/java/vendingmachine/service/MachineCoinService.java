@@ -9,15 +9,15 @@ import java.util.TreeMap;
 
 import static camp.nextstep.edu.missionutils.Randoms.pickNumberInList;
 import static vendingmachine.domain.Coin.*;
-import static vendingmachine.repository.MachineCoinRepository.initCoin;
 import static vendingmachine.service.Validator.*;
 import static vendingmachine.view.OutputViews.printErrorMessage;
 
 public class MachineCoinService {
 
+    private static MachineCoinRepository machineCoinRepository = MachineCoinRepository.getInstance();
     public static final int INIT_COIN_NUM = 0;
 
-    public static int getInitMachineMoney() {
+    public int getInitMachineMoney() {
         while (true) {
             String input = InputViews.inputInitMachineMoney();
             try {
@@ -37,7 +37,7 @@ public class MachineCoinService {
             remainCoin.put(c, INIT_COIN_NUM);
         }
         setRemainCoin(remainCoin, initMoney);
-        initCoin(remainCoin);
+        machineCoinRepository.initCoin(remainCoin);
     }
 
     private void setRemainCoin(Map<Coin, Integer> remainCoin, int initMoney) {
@@ -49,11 +49,11 @@ public class MachineCoinService {
         }
     }
 
-    private static int pickRandomCoin(int remainMoney) {
+    private int pickRandomCoin(int remainMoney) {
         return pickNumberInList(getAvailableCoinValueList(remainMoney));
     }
 
     public Map<Coin, Integer> getNumOfCoin() {
-        return MachineCoinRepository.getNumOfAllCoin();
+        return machineCoinRepository.getNumOfAllCoin();
     }
 }

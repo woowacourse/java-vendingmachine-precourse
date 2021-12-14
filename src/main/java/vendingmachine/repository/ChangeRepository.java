@@ -1,17 +1,25 @@
 package vendingmachine.repository;
 
 public class ChangeRepository {
+    private static ChangeRepository instance = new ChangeRepository();
     private static int change;
 
-    public static int getChange() {
+    private ChangeRepository() {
+    }
+
+    public static ChangeRepository getInstance() {
+        return instance;
+    }
+
+    public int getChange() {
         return change;
     }
 
-    public static void initChange(int change) {
+    public void initChange(int change) {
         ChangeRepository.change = change;
     }
 
-    public static void subtractChange(int price) {
+    public void subtractChange(int price) {
         change -= price;
     }
 }

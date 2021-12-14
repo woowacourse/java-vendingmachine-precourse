@@ -1,14 +1,10 @@
 package vendingmachine.controller;
 
+import vendingmachine.service.BuyService;
 import vendingmachine.service.ChangeService;
 import vendingmachine.service.MachineCoinService;
 import vendingmachine.service.ProductService;
 
-import static vendingmachine.service.BuyService.isAvailableKeepSell;
-import static vendingmachine.service.BuyService.isValidOrderName;
-import static vendingmachine.service.BuyService.sellProduct;
-import static vendingmachine.service.ChangeService.getCurrentChange;
-import static vendingmachine.service.ChangeService.getFinalChange;
 import static vendingmachine.view.InputViews.inputOrderMessage;
 import static vendingmachine.view.OutputViews.*;
 
@@ -17,11 +13,13 @@ public class VendingMachineController {
     private static ChangeService changeService;
     private static ProductService productService;
     private static MachineCoinService machineCoinService;
+    private static BuyService buyService;
 
     public void init() {
         machineCoinService = new MachineCoinService();
         productService = new ProductService();
         changeService = new ChangeService();
+        buyService = new BuyService();
 
         initMachineCoin();
         initProductList();
@@ -43,12 +41,12 @@ public class VendingMachineController {
     }
 
     public void startSale() {
-        int currentChange = ChangeService.getCurrentChange();
-        while (isAvailableKeepSell(currentChange)) {
-            sellProduct(getUserOrder(currentChange));
-            currentChange = ChangeService.getCurrentChange();
+        int currentChange = changeService.getCurrentChange();
+        while (buyService.isAvailableKeepSell(currentChange)) {
+            buyService.sellProduct(getUserOrder(currentChange));
+            currentChange = changeService.getCurrentChange();
         }
-        printFinalChange(getFinalChange(), getCurrentChange());
+        printFinalChange(changeService.getFinalChange(), changeService.getCurrentChange());
     }
 
     private String getUserOrder(int change) {
@@ -56,7 +54,7 @@ public class VendingMachineController {
             try {
                 printCurrentChange(change);
                 String order = inputOrderMessage();
-                isValidOrderName(order, change);
+                buyService.isValidOrderName(order, change);
                 return order;
             } catch (IllegalArgumentException e) {
                 printErrorMessage(e);

@@ -7,25 +7,33 @@ import java.util.Map;
 import java.util.Set;
 
 public class ProductRepository {
+    private static final ProductRepository instance = new ProductRepository();
     private static final Map<String, Product> productInfo = new HashMap<>();
 
-    public static void saveProductInfo(Map<String, Product> productMap) {
+    private ProductRepository() {
+    }
+
+    public static ProductRepository getInstance() {
+        return instance;
+    }
+
+    public void saveProductInfo(Map<String, Product> productMap) {
         productMap.keySet().forEach(k -> productInfo.put(k, productMap.get(k)));
     }
 
-    public static Set<String> getProductNameSet() {
+    public Set<String> getProductNameSet() {
         return productInfo.keySet();
     }
 
-    public static int getProductPrice(String name, int change) {
+    public int getProductPrice(String name, int change) {
         return productInfo.get(name).getPrice();
     }
 
-    public static int getProductQuantity(String name) {
+    public int getProductQuantity(String name) {
         return productInfo.get(name).getQuantity();
     }
 
-    public static int substractProductQuantity(String name) {
+    public int substractProductQuantity(String name) {
         productInfo.get(name).sellProduct();
         return productInfo.get(name).getPrice();
     }
