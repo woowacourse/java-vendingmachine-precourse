@@ -53,16 +53,7 @@ public class Coins {
 
 	@Override
 	public String toString() {
-		StringBuilder coinsStringBuilder = new StringBuilder();
-		coinMap.keySet()
-			.forEach(coin -> coinsStringBuilder.append(coin.toString())
-				.append(SymbolConstants.WHITESPACE)
-				.append(DASH)
-				.append(SymbolConstants.WHITESPACE)
-				.append(coinMap.get(coin))
-				.append(POSTFIX)
-				.append(SymbolConstants.LINE_WRAP));
-		return coinsStringBuilder.toString();
+		return coinsToString(this.coinMap);
 	}
 
 	public String coinsToString(Map<Coin, Integer> coins) {
