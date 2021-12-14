@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import static vendingmachine.constant.Message.*;
 
+import java.util.Comparator;
 import java.util.Map;
 
 import vendingmachine.coin.Coin;
@@ -39,5 +40,10 @@ public class Output {
 	public void printInsertProduct() {
 		System.out.println();
 		System.out.println(MSG_INSERT_PRODUCT);
+	}
+
+	public void printChanges(Map<Integer, Integer> changes) {
+		changes.entrySet().stream().sorted(Map.Entry.comparingByKey(Comparator.reverseOrder()))
+			.forEach(entry -> System.out.println(entry.getKey() + "원 - " + entry.getValue() + "개"));
 	}
 }

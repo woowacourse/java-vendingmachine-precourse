@@ -4,6 +4,7 @@ import static vendingmachine.constant.Constant.*;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,15 +45,17 @@ public class MachineService {
 		machine.buyProduct(product);
 	}
 
-	public void returnChanges(Machine machine) {
+	public Map<Integer, Integer> returnChanges(Machine machine) {
+		Map<Integer, Integer> changes = new HashMap<>();
 		machine.getCoins().entrySet().stream()
-			.filter(coinIntegerEntry -> coinIntegerEntry.getValue() > 0)
-			.sorted(Comparator.comparingInt(value -> -value.getKey().getAmount()))
+			.filter(entry -> entry.getValue() > 0)
+			.sorted(Comparator.comparingInt(entry -> -entry.getKey().getAmount()))
 			.forEach(entry -> {
 				int changesNum = machine.giveChanges(entry.getKey(), entry.getValue());
 				if (changesNum > 0) {
-					System.out.println(entry.getKey().getAmount() + "원 - " + changesNum + "개");
+					changes.put(entry.getKey().getAmount(), changesNum);
 				}
 			});
+		return changes;
 	}
 }

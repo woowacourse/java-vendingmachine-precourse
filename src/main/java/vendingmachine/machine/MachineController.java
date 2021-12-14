@@ -32,6 +32,6 @@ public class MachineController {
 
 	public void end(Machine machine) {
 		output.printEnd(machine);
-		machineService.returnChanges(machine);
+		output.printChanges(machineService.returnChanges(machine));
 	}
 }
