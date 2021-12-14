@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import java.util.Iterator;
 import java.util.Map;
 
 import coincase.CoinController;
@@ -58,9 +59,19 @@ public class CoreController {
 		inputMoney = remainMoney;
 	}
 
+	private int minusChange(int money, Map<Integer, Integer> change) {
+		Iterator<Integer> keys = change.keySet().iterator();
+		while (keys.hasNext()) {
+			int key = keys.next();
+			money -= (key * change.get(key));
+		}
+		return money;
+	}
+
 	private void giveChange() {
 		uiController.printRemainMoney(inputMoney);
 		Map<Integer, Integer> change = coinController.getChange(inputMoney);
+		inputMoney = minusChange(inputMoney, change);
 		uiController.printChange(change);
 	}
 
