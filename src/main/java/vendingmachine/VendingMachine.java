@@ -6,21 +6,20 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
-	private int leftMoney;
-	private HashMap<Coin, Integer> coins;
-	private HashMap<String, Product> products;
+	private HashMap<Coin, Integer> coins = new HashMap<>();
+	private HashMap<String, Product> products = new HashMap<>();
 	private int inputAmount;
 
 	VendingMachine() {
-		this.leftMoney = InputReceiver.getNumber(MoneyType.leftMoney);
-		_makeCoins();
+		int leftMoney = InputReceiver.getNumber(MoneyType.leftMoney);
+		_makeCoins(leftMoney);
 		this.products = InputReceiver.getProductInfo();
 		this.inputAmount = InputReceiver.getNumber(MoneyType.inputAmount);
 	}
 
 	public HashMap<Coin, Integer> calculateChanges() {
 		int tempBalance = this.inputAmount;
-		HashMap<Coin, Integer> changes = null;
+		HashMap<Coin, Integer> changes = new HashMap<>();
 
 		for (Coin coin : Coin.values()) {
 			int tempNumberOfCoin = tempBalance / coin.getAmount();
@@ -65,17 +64,17 @@ public class VendingMachine {
 		return this.inputAmount;
 	}
 
-	private void _makeCoins() {
+	private void _makeCoins(int leftMoney) {
 		for (Coin coin : Coin.values()) {
-			coins.put(coin, 0);
+			this.coins.put(coin, 0);
 		}
 
 		int amountOfCoins = 0;
 
-		while (this.leftMoney != amountOfCoins) {
+		while (leftMoney != amountOfCoins) {
 			Coin key = Coin.getCoin(Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10)));
-			int value = coins.get(key) + 1;
-			coins.put(key, value);
+			int value = this.coins.get(key) + 1;
+			this.coins.put(key, value);
 			amountOfCoins += key.getAmount();
 		}
 

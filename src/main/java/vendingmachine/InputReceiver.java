@@ -70,7 +70,7 @@ public class InputReceiver {
 	}
 
 	public static HashMap<String, Product> parseProductInfo(ArrayList<String> product){
-		HashMap<String, Product> products = null;
+		HashMap<String, Product> products = new HashMap<>();
 
 		for(String temp : product){
 			String[] tempArray = temp.split(",");
