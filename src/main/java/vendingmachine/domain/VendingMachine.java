@@ -18,7 +18,7 @@ public class VendingMachine {
 		if (remainingMoney.compareTo(money) < 0) {
 			return;
 		}
-		this.remainingMoney = this.remainingMoney.subtract(money);
+		remainingMoney = remainingMoney.subtract(money);
 	}
 
 	public void buy(String productName) {
@@ -27,7 +27,7 @@ public class VendingMachine {
 			return;
 		}
 		product.buy();
-		remainingMoney = remainingMoney.subtract(product.getPrice());
+		withdraw(product.getPrice());
 	}
 
 	public boolean isBuy() {
