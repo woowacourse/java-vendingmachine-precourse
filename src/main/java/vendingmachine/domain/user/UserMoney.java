@@ -1,13 +1,16 @@
 package vendingmachine.domain.user;
 
 import vendingmachine.domain.product.Products;
+import vendingmachine.validator.AmountValidator;
+
 import static vendingmachine.constant.SystemMessage.ONE_THOUSAND_WON;
 
 public class UserMoney {
     private int money;
 
-    public UserMoney(int money) {
-        this.money = money;
+    public UserMoney(String money) {
+        AmountValidator.checkVendingMachineAmount(money);
+        this.money = Integer.parseInt(money);
     }
 
     public int getMoney() {

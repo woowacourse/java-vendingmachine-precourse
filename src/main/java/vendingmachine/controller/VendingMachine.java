@@ -7,24 +7,13 @@ import vendingmachine.domain.product.ProductService;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
 import vendingmachine.domain.vendingMachine.VendingMachineAmount;
-import vendingmachine.validator.AmountValidator;
-import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
-
-import static vendingmachine.constant.SystemMessage.*;
-
-// 사용자와 상호작용하면서 소통하는 역할
-// 자판기 보유 금액 입력받기
-// 상품명 가격 수량 입력받기
-// 투입 금액 입력받기
-// 구매할 상품명 입력받기
-// 잔돈 반환하기
 
 public class VendingMachine {
     private VendingMachineAmount vendingMachineAmount;
 
-    private Products products = new Products();
+    private Products products;
     private UserMoney userMoney;
     public VendingMachine() {
     }
@@ -33,11 +22,10 @@ public class VendingMachine {
         setVendingMachineAmount();
         OutputView.printCoinCount(vendingMachineAmount.getVendingMachineCoinCombination());
         setProduct();
-
         setUserMoney();
         OutputView.printUserMoney(userMoney);
-
         inputProductByUser();
+        returnChange();
     }
 
     private void setVendingMachineAmount() {
@@ -60,9 +48,7 @@ public class VendingMachine {
 
     private void setUserMoney() {
         try {
-            String userMoney = InputView.getUserMoney();
-            AmountValidator.checkVendingMachineAmount(userMoney);
-            this.userMoney = new UserMoney(Integer.parseInt(userMoney));
+            userMoney = new UserMoney(InputView.getUserMoney());
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             setUserMoney();
@@ -76,15 +62,12 @@ public class VendingMachine {
             userMoney.reduce(pro.getPrice());
             OutputView.printUserMoney(userMoney);
         }
-        returnChange();
     }
 
     private void returnChange() {
-        if (isReturnChange()) {
-            int totalChange = userMoney.reduceMoney();
-            CoinCombination changeCoinCombination = CoinGenerator.calculatePossibleCoinCombination(totalChange);
-            changeCoinCombination.print();
-        }
+        int totalChange = userMoney.reduceMoney();
+        CoinCombination changeCoinCombination = CoinGenerator.calculatePossibleCoinCombination(totalChange);
+        changeCoinCombination.print();
     }
 
     private boolean isReturnChange() {
