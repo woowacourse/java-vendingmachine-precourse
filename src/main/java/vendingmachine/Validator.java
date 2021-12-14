@@ -4,6 +4,8 @@ import java.util.Arrays;
 
 public class Validator {
     private static final int PRODUCT_INFO_LENGTH = 3;
+    private static final int MINIMUM_PRICE = 100;
+    private static final int COMMON_MULTIPLE = 10;
 
     public static void validateMachineMoneyInput(String input) throws IllegalArgumentException {
         validateInputIsPositiveNumber(input);
@@ -17,7 +19,7 @@ public class Validator {
     }
 
     private static void validateInputIsMultipleOf10(String input) throws IllegalArgumentException {
-        if (Integer.parseInt(input) % 10 != 0) {
+        if (Integer.parseInt(input) % COMMON_MULTIPLE != 0) {
             throw new IllegalArgumentException(Constant.MACHINE_MONEY_INPUT_IS_NOT_MULTIPLE_OF_10);
         }
     }
@@ -72,7 +74,7 @@ public class Validator {
     }
 
     private static void validateProductPrice(int price) throws IllegalArgumentException {
-        if (price < 100 || price % 10 != 0) {
+        if (price < MINIMUM_PRICE || price % COMMON_MULTIPLE != 0) {
             throw new IllegalArgumentException(Constant.MACHINE_PRODUCT_INPUT_PRICE_ERROR_STRING);
         }
     }

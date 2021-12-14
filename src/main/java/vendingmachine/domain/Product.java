@@ -20,7 +20,7 @@ public class Product {
     }
 
     public void countDownQuantity() {
-        quantity -= 1;
+        quantity--;
     }
 
     public boolean isEmpty() {
