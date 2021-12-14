@@ -17,17 +17,12 @@ public class Consumer {
         balance -= price;
     }
 
-    // for test
-    public boolean hasBalance(int targetBalance) {
-        return this.balance == targetBalance;
-    }
-
     public boolean possibleToBuy(Product product) {
         return product.verifyEnough(balance);
     }
 
     public int getHowMuchBalance(int machineBalance) {
-        if(isLessThanConsumerBalance(machineBalance)) {
+        if (isLessThanConsumerBalance(machineBalance)) {
             return machineBalance;
         }
         return balance;
@@ -38,13 +33,20 @@ public class Consumer {
     }
 
     public void buy(Product product) {
-        if(! possibleToBuy(product)) {
+        if (!possibleToBuy(product)) {
             throw new IllegalArgumentException("[ERROR] 구매자의 잔액이 부족하여 해당 제품을 구매하지 못합니다.");
         }
         product.isPurchasedBy(this);
     }
 
-    public String getCurrentBalanceMessage() {
+    @Override
+    public String toString() {
         return "투입 금액: " + balance + "원";
     }
+
+    // for test
+    public boolean hasBalance(int targetBalance) {
+        return this.balance == targetBalance;
+    }
+
 }

@@ -48,7 +48,7 @@ public class OrderController {
         boolean keepShopping = true;
 
         while (keepShopping) {
-            IOProvider.printMessage(consumer.getCurrentBalanceMessage());
+            IOProvider.printMessage(consumer.toString());
 
             consumer.buy(vendingMachine.getProduct(IOProvider.readProductName()));
             keepShopping = vendingMachine.verifyConsumerCanBuyAnyProduct(consumer);
@@ -62,7 +62,7 @@ public class OrderController {
     private static void returnChange() {
         vendingMachine.makeChange(vendingMachine.returnChangeAmount(consumer));
 
-        IOProvider.printMessage(consumer.getCurrentBalanceMessage());
+        IOProvider.printMessage(consumer.toString());
 
         IOProvider.printMessage("잔돈");
 
