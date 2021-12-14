@@ -19,13 +19,13 @@ public class ConsoleInput {
     }
 
     public ProductService getProductSeller() {
-        return getValidInput(
+        return iterateUntilValid(
             () -> new ProductService(ProductParser.parse(getInputWithPrompt(PROMPT_PRODUCTS_INFO)))
         );
     }
 
     public String getProductOrder() {
-        return getValidInput(() -> {
+        return iterateUntilValid(() -> {
             String input = getInputWithPrompt(PROMPT_ORDER_PRODUCT);
             InputValidator.validateNonSpecialChar(input);
             return input;
@@ -33,15 +33,19 @@ public class ConsoleInput {
     }
 
     public InputAmount getValidInputAmount() {
-        return new InputAmount(getValidNumberWithPrompt(PROMPT_INPUT_AMOUNT));
+        return iterateUntilValid(
+            () -> new InputAmount(getValidNumberWithPrompt(PROMPT_INPUT_AMOUNT))
+        );
     }
 
     public HoldingAmount getValidHoldingAmount() {
-        return new HoldingAmount(getValidNumberWithPrompt(PROMPT_HOLDING_AMOUNT));
+        return iterateUntilValid(
+            () -> new HoldingAmount(getValidNumberWithPrompt(PROMPT_HOLDING_AMOUNT))
+        );
     }
 
     private int getValidNumberWithPrompt(String prompt) {
-        return getValidInput(() -> {
+        return iterateUntilValid(() -> {
             String input = getInputWithPrompt(prompt);
             InputValidator.validateNumeric(input);
             return Integer.parseInt(input);
@@ -54,16 +58,16 @@ public class ConsoleInput {
     }
 
     /**
-     * @param supplier 입력을 받아오는 함수
+     * @param supplier 예외상황에서 IllegalArgumentException 을 던진다.
      * @param <T>      supplier 가 제공하는 객체
-     * @return 예외가 발생하지 않을때까지 입력받기를 시도한다.
+     * @return 예외가 발생하지 않을때까지 반복한다.
      */
-    private <T> T getValidInput(Supplier<T> supplier) {
+    private <T> T iterateUntilValid(Supplier<T> supplier) {
         try {
             return supplier.get();
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return getValidInput(supplier);
+            return iterateUntilValid(supplier);
         }
     }
 }
