@@ -22,7 +22,7 @@ class ChangeSafeRepositoryTest implements Rollback {
 	@DisplayName("잔돈을 금고에 저장한다.")
 	public void testSaveChangeSafe() {
 	    // given
-		Map<Coin, Quantity> coinMap = new HashMap<>();
+		Map<Coin, Quantity> coinMap = Coin.createEmpty();
 		coinMap.put(Coin.COIN_100, new Quantity(3));
 		coinMap.put(Coin.COIN_50, new Quantity(2));
 		ChangeSafe changeSafe = new ChangeSafe(coinMap);

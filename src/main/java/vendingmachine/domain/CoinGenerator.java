@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -7,7 +8,7 @@ import java.util.NoSuchElementException;
 public class CoinGenerator {
 
 	public Map<Coin, Quantity> generate(Money money, CoinPickStrategy pickStrategy) {
-		Map<Coin, Quantity> coins = new LinkedHashMap<>();
+		Map<Coin, Quantity> coins = Coin.createEmpty();
 		addCoinRecursively(coins, money, pickStrategy);
 		return coins;
 	}

@@ -11,6 +11,6 @@ public class DepositInputView extends InputView {
 
 	@Override
 	protected String getPrompt() {
-		return "투입 금액을 입력해 주세요.";
+		return "\n투입 금액을 입력해 주세요.";
 	}
 }

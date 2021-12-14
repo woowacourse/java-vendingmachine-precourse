@@ -1,6 +1,8 @@
 package vendingmachine.service;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import vendingmachine.domain.ChangeSafe;
 import vendingmachine.domain.Coin;
@@ -28,7 +30,14 @@ public class ChangeSafeService {
 
 	public ChangeSafe giveChange(Money money) {
 		ChangeSafe changeSafe = repository.get();
-		return new ChangeSafe(coinGenerator.generate(money, new GreedyCoinPickStrategy(changeSafe)));
+		Map<Coin, Quantity> coinMap = coinGenerator.generate(money, new GreedyCoinPickStrategy(changeSafe));
+		return new ChangeSafe(ignoreZeroQuantity(coinMap));
+	}
+
+	private Map<Coin, Quantity> ignoreZeroQuantity(Map<Coin, Quantity> coinMap) {
+		return coinMap.entrySet().stream()
+			.filter(entry -> entry.getValue().isEnough())
+			.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (x, y) -> y, LinkedHashMap::new));
 	}
 
 }

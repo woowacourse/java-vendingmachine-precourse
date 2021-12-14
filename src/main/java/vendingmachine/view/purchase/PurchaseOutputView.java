@@ -6,7 +6,7 @@ import vendingmachine.view.common.CommonOutputView;
 
 public class PurchaseOutputView extends CommonOutputView {
 
-	private static final String PREFIX = "투입 금액: ";
+	private static final String PREFIX = "\n투입 금액: ";
 
 	public PurchaseOutputView(OutputClient outputClient) {
 		super(outputClient);

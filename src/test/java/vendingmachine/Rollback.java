@@ -27,7 +27,7 @@ public interface Rollback {
 
 	@BeforeEach
 	default void rollback() {
-		Map<Coin, Quantity> coinMap = new HashMap<>();
+		Map<Coin, Quantity> coinMap = Coin.createEmpty();
 		coinMap.put(Coin.COIN_100, new Quantity(4));
 		coinMap.put(Coin.COIN_50, new Quantity(1));
 		RepositoryConfig.getChangeSafeRepository(new ChangeSafe(coinMap));

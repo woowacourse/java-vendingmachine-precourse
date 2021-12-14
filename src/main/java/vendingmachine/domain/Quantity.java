@@ -27,10 +27,6 @@ public class Quantity {
 		return new Quantity(this.count - other.count);
 	}
 
-	public int getCount() {
-		return count;
-	}
-
 	@Override
 	public String toString() {
 		return count + UNIT;

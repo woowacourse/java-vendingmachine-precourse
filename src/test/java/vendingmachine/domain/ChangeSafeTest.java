@@ -14,7 +14,7 @@ class ChangeSafeTest {
 	@DisplayName("잔돈금고를 생성한다.")
 	public void testCreateChangeSafe() {
 	    // given
-		Map<Coin, Quantity> coinMap = new HashMap<>();
+		Map<Coin, Quantity> coinMap = Coin.createEmpty();
 		coinMap.put(Coin.COIN_50, new Quantity(5));
 	    // when
 		ChangeSafe changeSafe = new ChangeSafe(coinMap);

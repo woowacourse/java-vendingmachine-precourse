@@ -20,16 +20,17 @@ class CustomerTest extends ConsoleTest implements Rollback {
 		changeInput("3000\n콜라\n사이다");
 		customer.purchase();
 	    // then
-		assertEquals("투입 금액을 입력해 주세요.\n"
+		assertEquals("\n투입 금액을 입력해 주세요.\n"
+			+ "\n"
 			+ "투입 금액: 3000원\n"
 			+ "구매할 상품명을 입력해 주세요.\n"
+			+ "\n"
 			+ "투입 금액: 1500원\n"
 			+ "구매할 상품명을 입력해 주세요.\n"
+			+ "\n"
 			+ "투입 금액: 500원\n"
 			+ "잔돈\n"
-			+ "500원 - 0개\n"
 			+ "100원 - 4개\n"
-			+ "50원 - 1개\n"
-			+ "10원 - 0개\n", outputStream.toString());
+			+ "50원 - 1개\n", outputStream.toString());
 	}
 }

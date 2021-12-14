@@ -11,6 +11,6 @@ public class ChangeSafeOutputView extends OutputView {
 
 	@Override
 	protected String getIntro() {
-		return "자판기가 보유한 동전";
+		return "\n자판기가 보유한 동전";
 	}
 }

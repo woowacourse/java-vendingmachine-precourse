@@ -20,9 +20,7 @@ class ChangeBackJobTest extends ConsoleTest implements Rollback {
 		job.execute();
 	    // then
 		assertEquals("잔돈\n"
-			+ "500원 - 0개\n"
 			+ "100원 - 4개\n"
-			+ "50원 - 1개\n"
-			+ "10원 - 0개\n", outputStream.toString());
+			+ "50원 - 1개\n", outputStream.toString());
 	}
 }

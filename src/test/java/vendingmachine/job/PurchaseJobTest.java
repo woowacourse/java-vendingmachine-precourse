@@ -23,10 +23,13 @@ class PurchaseJobTest extends ConsoleTest implements Rollback {
 		// when
 		purchaseJob.execute();
 		// then
-		assertEquals("투입 금액: 3000원\n"
+		assertEquals("\n"
+			+ "투입 금액: 3000원\n"
 			+ "구매할 상품명을 입력해 주세요.\n"
+			+ "\n"
 			+ "투입 금액: 1500원\n"
 			+ "구매할 상품명을 입력해 주세요.\n"
+			+ "\n"
 			+ "투입 금액: 500원\n", outputStream.toString());
 	}
 }

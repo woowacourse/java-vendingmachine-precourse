@@ -1,7 +1,9 @@
 package vendingmachine.domain;
 
 import java.util.Arrays;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -37,6 +39,15 @@ public enum Coin {
 			}
 		}
 		throw new NoSuchElementException(String.format(ERROR_NO_COIN, amount));
+	}
+
+	public static Map<Coin, Quantity> createEmpty() {
+		return new LinkedHashMap<>(
+			Arrays.stream(values())
+				.collect(LinkedHashMap::new,
+					(map, coin) -> map.put(coin, Quantity.ZERO),
+					Map::putAll)
+		);
 	}
 
 	@Override

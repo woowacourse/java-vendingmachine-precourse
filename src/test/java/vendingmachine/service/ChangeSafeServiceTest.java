@@ -33,10 +33,7 @@ class ChangeSafeServiceTest implements Rollback {
 		// when
 		ChangeSafe changeSafe = service.giveChange(money);
 		// then
-		assertEquals("500원 - 0개\n"
-			+ "100원 - 3개\n"
-			+ "50원 - 0개\n"
-			+ "10원 - 0개", changeSafe.toString());
+		assertEquals("100원 - 3개", changeSafe.toString());
 	}
 
 	@Test
@@ -47,9 +44,7 @@ class ChangeSafeServiceTest implements Rollback {
 		// when
 		ChangeSafe changeSafe = service.giveChange(money);
 		// then
-		assertEquals("500원 - 0개\n"
-			+ "100원 - 4개\n"
-			+ "50원 - 1개\n"
-			+ "10원 - 0개", changeSafe.toString());
+		assertEquals("100원 - 4개\n"
+			+ "50원 - 1개", changeSafe.toString());
 	}
 }

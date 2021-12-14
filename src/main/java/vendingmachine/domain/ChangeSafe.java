@@ -12,21 +12,11 @@ public class ChangeSafe {
 	private Map<Coin, Quantity> coinMap;
 
 	public ChangeSafe() {
-		this.coinMap = createEmpty();
+		this.coinMap = Coin.createEmpty();
 	}
 
 	public ChangeSafe(Map<Coin, Quantity> coinMap) {
-		this();
-		this.coinMap = merge(coinMap);
-	}
-
-	private Map<Coin, Quantity> createEmpty() {
-		return new LinkedHashMap<>(
-			Arrays.stream(Coin.values())
-				.collect(LinkedHashMap::new,
-					(map, coin) -> map.put(coin, Quantity.ZERO),
-					Map::putAll)
-		);
+		this.coinMap = coinMap;
 	}
 
 	private Map<Coin, Quantity> merge(Map<Coin, Quantity> other) {
