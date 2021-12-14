@@ -7,7 +7,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public abstract class Coins {
-    protected static final int ZERO = 0;
+    protected static final Integer ZERO = 0;
+    protected static final Integer ONE = 1;
     protected static final String COIN_COUNT_UNIT = "개";
     protected static final String COIN_UNIT_AND_DASH = "원 - ";
     protected static final String TO_NEXT_LINE = "\r\n";
@@ -49,6 +50,10 @@ public abstract class Coins {
 
     protected int getRestMoney(Integer totalAmount, int coinAmount, int coinCount) {
         return totalAmount - coinAmount * coinCount;
+    }
+
+    protected int getRestMoney(Integer totalAmount, int coinAmount) {
+        return totalAmount - coinAmount;
     }
 
     protected boolean hasCoin(Coin coin) {

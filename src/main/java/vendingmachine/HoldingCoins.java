@@ -2,13 +2,16 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 import static vendingmachine.Coin.*;
 
 public class HoldingCoins extends Coins{
+
     public HoldingCoins(int amount) {
+        init();
         breakIntoCoins(amount);
     }
 
@@ -23,23 +26,39 @@ public class HoldingCoins extends Coins{
         return coins;
     }
 
+    private void init() {
+        Arrays.stream(values()).forEach(coin -> coins.put(coin, ZERO));
+    }
+
     private void breakIntoCoins(int inputAmount) {
         List<Integer> coinAmounts = Coin.getAmounts();
 
         while (isMoneyLeft(inputAmount)) {
-            int randomAmount = Randoms.pickNumberInList(coinAmounts);
-            Coin coin = Coin.create(randomAmount);
-            int coinCount = coin.changeIntoCoins(inputAmount);
+            Integer pickedAmount = pickRandomAmount(coinAmounts, inputAmount);
+            Coin coin = createCoin(pickedAmount);
 
-            coins.put(coin, coinCount);
-
-            removePickedAmount(coinAmounts, randomAmount);
-            inputAmount = getRestMoney(inputAmount, randomAmount, coinCount);
+            addCoinToMap(coin);
+            inputAmount = getRestMoney(inputAmount, pickedAmount);
         }
     }
 
-    private void removePickedAmount(List<Integer> coinAmounts, Integer randomAmount) {
-        coinAmounts.remove(randomAmount);
+    private Integer pickRandomAmount(List<Integer> coinAmounts, Integer inputAmount) {
+        Integer pickedAmount = Randoms.pickNumberInList(coinAmounts);
+
+        if (pickedAmount > inputAmount) {
+            coinAmounts.remove(pickedAmount);
+            pickedAmount = Randoms.pickNumberInList(coinAmounts);
+        }
+
+        return pickedAmount;
+    }
+
+    private void addCoinToMap(Coin coin) {
+        coins.put(coin, coins.get(coin) + ONE);
+    }
+
+    private Coin createCoin(int randomAmount) {
+        return Coin.create(randomAmount);
     }
 
     private boolean isMoneyLeft(int inputAmount) {
