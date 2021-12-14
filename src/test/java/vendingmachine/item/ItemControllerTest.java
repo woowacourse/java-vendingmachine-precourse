@@ -12,13 +12,13 @@ class ItemControllerTest {
 
     @BeforeAll
     public static void beforeAll() {
-        itemController.addItem("[콜라,1500,1];[사이다,1000,10]");
+        itemController.addItems("[콜라,1500,1];[사이다,1000,10]");
     }
 
     @Test
     public void addItemTest() {
-        assertDoesNotThrow(() -> itemController.addItem("[젤리,100,3]"));
-        assertThrows(IllegalArgumentException.class, () -> itemController.addItem("[사탕,1r4,45]"));
+        assertDoesNotThrow(() -> itemController.addItems("[젤리,100,3]"));
+        assertThrows(IllegalArgumentException.class, () -> itemController.addItems("[사탕,1r4,45]"));
     }
 
     @Test
