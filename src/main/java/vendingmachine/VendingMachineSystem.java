@@ -29,8 +29,9 @@ public class VendingMachineSystem {
 
         initializeItem();
         initializeCustomerInitialAmount();
-        //TODO: 구매 유도
-        //TODO: 잔돈 반환
+
+        startPurchase();
+        printChange();
     }
 
     private void initializeVendingMachineCount() {
@@ -64,6 +65,19 @@ public class VendingMachineSystem {
         customerController.createCustomer(initialAmount);
     }
 
+    private void startPurchase() {
+        while(true) {
+            customerController.printBalance();
+            if(!isPossiblePurchase(customerController.getBalance())){
+                break;
+            }
+            System.out.println(OutputMessage.PURCHASE_ITEM_NAME);
+            String itemName = Console.readLine();
+            purchaseItem(itemName);
+            System.out.println();
+        }
+    }
+
     private void purchaseItem(String itemName) {
         int price = itemController.getPriceByName(itemName);
         try{
@@ -81,7 +95,11 @@ public class VendingMachineSystem {
         }
     }
 
-    private boolean isPossibleAdditionalPurchase(int balance) {
+    private boolean isPossiblePurchase(int balance) {
         return !itemController.isNotStockAllItem() && !itemController.isLessThanTheLowestAmount(balance);
+    }
+
+    private void printChange() {
+        coinController.printChange(customerController.getBalance());
     }
 }
