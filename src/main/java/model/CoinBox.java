@@ -1,10 +1,7 @@
 package model;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -13,7 +10,9 @@ import utils.generator.RandomCoinPriceGenerator;
 public class CoinBox {
 	private static final int INITIAL_COIN_COUNT = 0;
 	private static final int INITIAL_TOTAL_COIN_PRICE = 0;
+	private static final int MIN_COIN_COUNT = 1;
 	private static final int ADD_COIN_COUNT = 1;
+	private static final int MINUS_COIN_COUNT = 1;
 
 	private final Map<Coin, Integer> coinBox;
 
@@ -48,27 +47,19 @@ public class CoinBox {
 		return totalCoinPriceInCoinBox + coinPrice > change;
 	}
 
-	public List<Integer> getCountOfEachCoins() {
-		List<Integer> countOfEachCoins = new ArrayList<>();
-		for (Coin coin : Coin.getValuesByDescending()) {
-			countOfEachCoins.add(coinBox.get(coin));
+	public Map<Integer, Integer> getAllOfEachCoins() {
+		Map<Integer, Integer> eachCoins = new TreeMap<>(Collections.reverseOrder());
+		for (Coin coin : Coin.getValues()) {
+			eachCoins.put(coin.getAmount(), coinBox.get(coin));
 		}
-		return countOfEachCoins;
-	}
-
-	public List<Integer> getPriceOfEachCoins() {
-		List<Integer> priceOfEachCoins = new ArrayList<>();
-		for (Coin coin : Coin.getValuesByDescending()) {
-			priceOfEachCoins.add(coin.getAmount());
-		}
-		return priceOfEachCoins;
+		return eachCoins;
 	}
 
 	public Map<Integer, Integer> getChangeCoins(int insertedMoney) {
 		Map<Integer, Integer> changeCoins = new TreeMap<>(Collections.reverseOrder());
-		for (Coin coin : Coin.getValuesByDescending()) {
+		for (Coin coin : Coin.getValues()) {
 			int coinCount = getCoinsEqualToCoinPrice(coin, insertedMoney);
-			if (coinCount > 0) {
+			if (coinCount >= MIN_COIN_COUNT) {
 				changeCoins.put(coin.getAmount(), coinCount);
 			}
 		}
@@ -76,17 +67,17 @@ public class CoinBox {
 	}
 
 	private int getCoinsEqualToCoinPrice(Coin coin, int insertedMoney) {
-		int coinCount = 0;
+		int coinCount = INITIAL_COIN_COUNT;
 		while (hasCoinInCoinBox(coin) && !isCoinPriceOverInsertedMoney(coin, insertedMoney)) {
 			insertedMoney -= coin.getAmount();
-			coinBox.put(coin, coinBox.get(coin) - 1);
-			coinCount += 1;
+			coinBox.put(coin, coinBox.get(coin) - MINUS_COIN_COUNT);
+			coinCount += ADD_COIN_COUNT;
 		}
 		return coinCount;
 	}
 
 	private boolean hasCoinInCoinBox(Coin coin) {
-		return coinBox.get(coin) >= 1;
+		return coinBox.get(coin) >= MINUS_COIN_COUNT;
 	}
 
 	private boolean isCoinPriceOverInsertedMoney(Coin coin, int insertedMoney) {
