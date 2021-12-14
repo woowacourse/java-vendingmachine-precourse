@@ -1,8 +1,8 @@
 package vendingmachine.domain;
 
-import vendingmachine.utils.ErrorMessage;
-
 public class Quantity {
+	private static final String INVALID_QUANTITY_ERROR_MESSAGE = "[ERROR] 상품 수량은 0이상 입력해야 한다.";
+
 	private int quantity;
 
 	public Quantity(int quantity) {
@@ -20,7 +20,7 @@ public class Quantity {
 
 	public static void validateQuantity(int quantity) {
 		if (quantity < 0) {
-			throw new IllegalArgumentException(ErrorMessage.INVALID_QUANTITY_ERROR_MESSAGE);
+			throw new IllegalArgumentException(INVALID_QUANTITY_ERROR_MESSAGE);
 		}
 	}
 }

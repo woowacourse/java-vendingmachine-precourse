@@ -6,35 +6,37 @@ import static vendingmachine.domain.VendingMachine.*;
 import vendingmachine.domain.Merchandises;
 import vendingmachine.domain.User;
 import vendingmachine.domain.VendingMachine;
-import vendingmachine.utils.ErrorMessage;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
+	private static final String INVALID_MONEY_TYPE_ERROR_MESSAGE = "[ERROR] 금액은 숫자를 입력해야 한다.";
+
 	private VendingMachine vendingMachine;
 	private User user;
 
 	public void play() {
-		vendingMahchineMoneyWithErrorHandling();
-		OutputView.showVendingMahcineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
+		intputVendingMahchineMoneyWithErrorHandling();
+		OutputView.showVendingMachineCoinStatus(castingCoinToInteger(vendingMachine.saveCoinStatus()));
 		inputMerchandiseInformationWithErrorHandling();
 		inputMoneyWithErrorHandling();
-		while(vendingMachine.isUserBuyMerchandise(user.getUserMoney()) && !vendingMachine.isSoldOutMerchandises()){
+		while (vendingMachine.isUserBuyMerchandise(user.getUserMoney()) && !vendingMachine.isSoldOutMerchandises()) {
 			OutputView.showInputMoneyStatus(user.getUserMoney());
 			buyMerchandiseWithErrorHandling();
 		}
-		OutputView.showChangeMoneyStatus(user.getUserMoney(), castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
+		OutputView.showChangeMoneyStatus(user.getUserMoney(),
+			castingCoinToInteger(vendingMachine.changeCoinStatus(user.getUserMoney())));
 	}
 
-	public void vendingMahchineMoneyWithErrorHandling() {
+	public void intputVendingMahchineMoneyWithErrorHandling() {
 		try {
 			vendingMachine = new VendingMachine(Integer.parseInt(InputView.inputVendingMachineMoney()));
 		} catch (NumberFormatException numberFormatException) {
-			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
-			vendingMahchineMoneyWithErrorHandling();
+			System.out.println(INVALID_MONEY_TYPE_ERROR_MESSAGE);
+			intputVendingMahchineMoneyWithErrorHandling();
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
-			vendingMahchineMoneyWithErrorHandling();
+			intputVendingMahchineMoneyWithErrorHandling();
 		}
 	}
 
@@ -42,7 +44,7 @@ public class VendingMachineController {
 		try {
 			user = new User(Integer.parseInt(InputView.inputMoney()));
 		} catch (NumberFormatException numberFormatException) {
-			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
+			System.out.println(INVALID_MONEY_TYPE_ERROR_MESSAGE);
 			inputMoneyWithErrorHandling();
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());
@@ -55,7 +57,7 @@ public class VendingMachineController {
 			vendingMachine.stockMerchandises(
 				new Merchandises(constructMerchandises(InputView.inputMerchandiseInformation())));
 		} catch (NumberFormatException numberFormatException) {
-			System.out.println(ErrorMessage.INVALID_MONEY_TYPE_ERROR_MESSAGE);
+			System.out.println(INVALID_MONEY_TYPE_ERROR_MESSAGE);
 			inputMerchandiseInformationWithErrorHandling();
 		} catch (IllegalArgumentException illegalArgumentException) {
 			System.out.println(illegalArgumentException.getMessage());

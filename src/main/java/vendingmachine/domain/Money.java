@@ -1,8 +1,9 @@
 package vendingmachine.domain;
 
-import vendingmachine.utils.ErrorMessage;
-
 public class Money {
+	private static final String INVALID_MONEY_ERROR_MESSAGE = "[ERROR] 금액은 0원 이상 입력해야 한다.";
+	private static final String MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE = "[ERROR] 입력하는 금액은 10원으로 나누어떨어져야 한다.";
+
 	private int money;
 
 	public Money(int money) {
@@ -28,13 +29,13 @@ public class Money {
 
 	public static void validateMoney(int money) {
 		if (money <= 0) {
-			throw new IllegalArgumentException(ErrorMessage.INVALID_MONEY_ERROR_MESSAGE);
+			throw new IllegalArgumentException(INVALID_MONEY_ERROR_MESSAGE);
 		}
 	}
 
 	public static void validateDivideMoneyBy10Coin(int merchandisePrice) {
 		if (merchandisePrice % 10 != 0) {
-			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE);
+			throw new IllegalArgumentException(MERCHANDISE_PRICE_NOT_DIVIDE_10_COIN_ERROR_MESSAGE);
 		}
 	}
 }

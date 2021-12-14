@@ -1,8 +1,8 @@
 package vendingmachine.domain;
 
-import vendingmachine.utils.ErrorMessage;
-
 public class Name {
+	private static final String INVALID_MERCHANDISE_EMPTY_NAME_ERROR_MESSAGE = "[ERROR] 상품명은 최소 1글자여야 한다.";
+
 	private final String name;
 
 	public Name(String name) {
@@ -16,7 +16,7 @@ public class Name {
 
 	public static void validateEmptyMerchandiseName(String merchandiseName) {
 		if (merchandiseName.isEmpty()) {
-			throw new IllegalArgumentException(ErrorMessage.INVALID_MERCHANDISE_EMPTY_NAME_ERROR_MESSAGE);
+			throw new IllegalArgumentException(INVALID_MERCHANDISE_EMPTY_NAME_ERROR_MESSAGE);
 		}
 	}
 }
