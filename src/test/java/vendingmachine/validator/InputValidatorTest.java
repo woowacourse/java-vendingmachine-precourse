@@ -34,22 +34,22 @@ class InputValidatorTest {
 	@ParameterizedTest
 	@DisplayName("금액이 100원 이상 10원으로 나누어 떨어질때는 예외가 발생하지 않는다. - 성공")
 	@ValueSource(strings = {"1500", "100"})
-	void checkMoneyForm(String input) {
+	void checkPriceForm(String input) {
 		//given
 		//when then
 		assertThatCode(
-			() -> InputValidator.checkMoneyForm(input)
+			() -> InputValidator.checkPriceForm(input)
 		).doesNotThrowAnyException();
 	}
 
 	@ParameterizedTest
 	@DisplayName("금액이 100원 미만이거나 10원으로 나누어 떨어지지 않을때 예외가 발생한다. - 실패")
-	@ValueSource(strings = {"99", "1997"})
-	void checkMoneyFormFailureWhenIllegalPrice(String input) {
+	@ValueSource(strings = {"90", "1997"})
+	void checkPriceFormFailureWhenIllegalPrice(String input) {
 		//given
 		//when then
 		assertThatThrownBy(
-			() -> InputValidator.checkMoneyForm(input)
+			() -> InputValidator.checkPriceForm(input)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
