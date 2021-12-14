@@ -13,7 +13,7 @@ public class Change {
 		return change;
 	}
 
-	public static void setChange(Coin coin, Integer amount) {
+	public static void join(Coin coin, Integer amount) {
 		change.put(coin, amount);
 	}
 }
