@@ -2,6 +2,7 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.ChangesExceptionTest;
+import vendingmachine.domain.ProductExceptionTest;
 import vendingmachine.domain.SuccessfulTest;
 
 import org.junit.jupiter.api.Test;
@@ -12,13 +13,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import static vendingmachine.domain.SuccessfulTest.*;
 import static vendingmachine.domain.ChangesExceptionTest.*;
+import static vendingmachine.domain.ProductExceptionTest.*;
+
+import java.util.ArrayList;
 
 class ApplicationTest extends NsTest {
     private static final String ERROR_MESSAGE = "[ERROR]";
 
     @Test
     void 기능_테스트() {
-        SuccessfulTest[] data = getSuccessfulTestData();
+        ArrayList<SuccessfulTest> data = getSuccessfulTestData();
         for (SuccessfulTest testCase : data) {
             if (testCase == null) {
                 continue;
@@ -38,7 +42,7 @@ class ApplicationTest extends NsTest {
 
     @Test
     void 랜덤동전_예외_테스트() {
-        ChangesExceptionTest[] data = getChangesExceptionTestData();
+        ArrayList<ChangesExceptionTest> data = getChangesExceptionTestData();
         for (ChangesExceptionTest testCase : data) {
             if (testCase == null) {
                 continue;

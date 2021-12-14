@@ -2,6 +2,8 @@ package vendingmachine.domain;
 
 import static vendingmachine.Error.*;
 
+import java.util.ArrayList;
+
 public class ChangesExceptionTest extends BasicTest {
 	public String moneyOfChanges;
 
@@ -10,23 +12,13 @@ public class ChangesExceptionTest extends BasicTest {
 		this.errorMessage = errorMessage;
 	}
 
-	public static ChangesExceptionTest[] getChangesExceptionTestData() {
-		ChangesExceptionTest[] changesExceptionTestData = new ChangesExceptionTest[MAX_TESTCASE];
+	public static ArrayList<ChangesExceptionTest> getChangesExceptionTestData() {
+		ArrayList<ChangesExceptionTest> changesExceptionTestData = new ArrayList<>(MAX_TESTCASE);
 
-		ChangesExceptionTest nowTestData = new ChangesExceptionTest(
-			"test", MONEY_OF_CHANGES_ONLY_NUMBER
-		);
-		changesExceptionTestData[0] = nowTestData;
-
-		ChangesExceptionTest nowTestData2 = new ChangesExceptionTest(
-			"-1", MONEY_OF_CHANGES_OVER_ZERO
-		);
-		changesExceptionTestData[1] = nowTestData2;
-
-		ChangesExceptionTest nowTestData3 = new ChangesExceptionTest(
-			"123", MONEY_OF_CHANGES_DIVIDED_BY_TEN
-		);
-		changesExceptionTestData[2] = nowTestData3;
+		changesExceptionTestData.add(new ChangesExceptionTest("test", MONEY_OF_CHANGES_ONLY_NUMBER));
+		changesExceptionTestData.add(new ChangesExceptionTest("1500원", MONEY_OF_CHANGES_ONLY_NUMBER));
+		changesExceptionTestData.add(new ChangesExceptionTest("-1", MONEY_OF_CHANGES_OVER_ZERO));
+		changesExceptionTestData.add(new ChangesExceptionTest("123", MONEY_OF_CHANGES_DIVIDED_BY_TEN));
 
 		return changesExceptionTestData;
 	}
