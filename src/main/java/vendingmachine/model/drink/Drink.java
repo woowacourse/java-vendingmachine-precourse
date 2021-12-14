@@ -1,5 +1,6 @@
 package vendingmachine.model.drink;
 
+import vendingmachine.model.user.UserMoney;
 import vendingmachine.util.Constant;
 
 public class Drink implements Comparable<Drink> {
@@ -18,16 +19,20 @@ public class Drink implements Comparable<Drink> {
         return this.name.equals(drinkName);
     }
 
+    public void sellDrink(UserMoney money) {
+        money.decAmount(price);
+    }
+
+    public boolean canSell(UserMoney money) {
+        return money.canBuy(price);
+    }
+
     public boolean hasQuantity() {
         return this.quantity > Constant.QUANTITY_MIN_VALUE;
     }
 
     public void decQuantity() {
         this.quantity--;
-    }
-
-    public int getPrice() {
-        return price;
     }
 
     @Override

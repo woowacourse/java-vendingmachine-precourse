@@ -1,6 +1,5 @@
 package vendingmachine.model.user;
 
-import vendingmachine.model.drink.Drink;
 import vendingmachine.util.Constant;
 
 public class UserMoney {
@@ -11,12 +10,12 @@ public class UserMoney {
         this.amount = Integer.parseInt(inputMoney);
     }
 
-    public void decAmount(Drink drink) {
-        amount -= drink.getPrice();
+    public void decAmount(int sellPrice) {
+        amount -= sellPrice;
     }
 
-    public boolean canBuy(Drink price) {
-        return this.amount >= price.getPrice();
+    public boolean canBuy(int price) {
+        return this.amount >= price;
     }
 
     public int getAmount() {

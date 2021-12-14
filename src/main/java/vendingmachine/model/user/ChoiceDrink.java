@@ -4,7 +4,7 @@ public class ChoiceDrink {
     private final String choiceDrinkName;
 
     public ChoiceDrink(String drink) {
-        this.choiceDrinkName = drink;
+        this.choiceDrinkName = drink.trim();
     }
 
     public String getName() {

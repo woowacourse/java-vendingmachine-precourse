@@ -20,7 +20,6 @@ public class Change {
         for (CoinType type : coins) {
             int amount = type.maxAmount(total);
             Coin coinType = type.getType();
-
             if (amount > Constant.EMPTY) {
                 change.add(new CoinType(coinType, amount));
                 decCoins(type, amount);
@@ -30,7 +29,7 @@ public class Change {
         return change;
     }
 
-    public void decCoins(CoinType type, int useCoin) {
+    private void decCoins(CoinType type, int useCoin) {
         type.decAmount(useCoin);
     }
 

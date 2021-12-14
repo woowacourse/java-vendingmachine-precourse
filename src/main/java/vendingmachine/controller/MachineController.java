@@ -52,7 +52,7 @@ public class MachineController {
     private UserMoney createUserMoney(Drinks drinks) {
         UserMoney userMoney = Input.userMoney();
         try {
-            drinks.isMoneyOverMinPriceDrink(userMoney);
+            drinks.moneyOverMinPriceDrink(userMoney);
         } catch (IllegalArgumentException e) {
             Output.errorMessage(e.getMessage());
             return createUserMoney(drinks);

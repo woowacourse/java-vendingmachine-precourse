@@ -17,13 +17,14 @@ public class Machine {
 
     public void buy(ChoiceDrink choiceDrink) {
         Drink buyItem = drinkInventory.findByDrinkName(choiceDrink);
-        if (!money.canBuy(buyItem)) {
+        if (!buyItem.canSell(money)) {
             throw new IllegalArgumentException(Message.USER_MONEY_OVER_ERROR);
         }
         if (!buyItem.hasQuantity()) {
             throw new IllegalArgumentException(Message.DRINK_SOLD_OUT_ERROR);
         }
-        money.decAmount(buyItem);
+
+        buyItem.sellDrink(money);
         buyItem.decQuantity();
     }
 
