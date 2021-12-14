@@ -21,7 +21,7 @@ public class InputView {
 	private static final String ZERO_HOLDING_MONEY = "0";
 	private static final int DIVIDE_VALUE = 10;
 
-	public static int holdingMoneyInput() {
+	public int holdingMoneyInput() {
 		String stringHoldingMoney = "";
 		int holdingMoney = 0;
 		do {
@@ -34,7 +34,7 @@ public class InputView {
 		return holdingMoney;
 	}
 
-	public static List<Item> holdingItemsInput() {
+	public List<Item> holdingItemsInput() {
 		List<Item> itemList;
 		String itemString = "";
 		String[] itemStringArray;
@@ -50,7 +50,7 @@ public class InputView {
 		return itemList;
 	}
 
-	public static int inputMoneyInput() {
+	public int inputMoneyInput() {
 		int inputMoney = 0;
 		String stringInputMoney = "";
 		do {
@@ -64,7 +64,7 @@ public class InputView {
 		return inputMoney;
 	}
 
-	public static String buyItemInput(List<Item> holdingItemList, int inputMoney) {
+	public String buyItemInput(List<Item> holdingItemList, int inputMoney) {
 		String buyItem = "";
 		do {
 			System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
@@ -74,14 +74,14 @@ public class InputView {
 		return buyItem;
 	}
 
-	private static void removeBracket(String[] stringItemsArray) {
+	private void removeBracket(String[] stringItemsArray) {
 		for (int i = 0; i < stringItemsArray.length; i++) {
 			stringItemsArray[i] = stringItemsArray[i].replace("[", "");
 			stringItemsArray[i] = stringItemsArray[i].replace("]", "");
 		}
 	}
 
-	private static List<Item> generateItemList(String[] stringItemsArray) {
+	private List<Item> generateItemList(String[] stringItemsArray) {
 		String[] eachValueOfProductArray;
 		List<Item> itemArrayList = new ArrayList<Item>();
 		for (int i = 0; i < stringItemsArray.length; i++) {
@@ -97,7 +97,7 @@ public class InputView {
 		return itemArrayList;
 	}
 
-	private static boolean isRightHoldingMoney(String stringHoldingMoney) {
+	private boolean isRightHoldingMoney(String stringHoldingMoney) {
 		boolean isRightHoldingMoney = true;
 		try {
 			nonNumericError(stringHoldingMoney);
@@ -110,7 +110,7 @@ public class InputView {
 		return isRightHoldingMoney;
 	}
 
-	private static boolean isRightInputMoney(String stringInputMoney) {
+	private boolean isRightInputMoney(String stringInputMoney) {
 		boolean isRightInputMoney = true;
 		try {
 			nonNumericError(stringInputMoney);
@@ -123,7 +123,7 @@ public class InputView {
 		return isRightInputMoney;
 	}
 
-	private static boolean isRightItemInput(String[] itemStringArray) {
+	private boolean isRightItemInput(String[] itemStringArray) {
 		boolean isRightItemInput = true;
 		try {
 			wrongRegexMatchError(itemStringArray);
@@ -135,7 +135,7 @@ public class InputView {
 		return isRightItemInput;
 	}
 
-	public static boolean isPurchasableItem(String buyItem, List<Item> holdingItemList, int inputMoney) {
+	public boolean isPurchasableItem(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		boolean isPurchasableItem = true;
 		try {
 			nonExistItemError(buyItem, holdingItemList);
@@ -147,7 +147,7 @@ public class InputView {
 		return isPurchasableItem;
 	}
 
-	public static void nonNumericError(String stringHoldingMoney) {
+	public void nonNumericError(String stringHoldingMoney) {
 		for (int i = 0; i < stringHoldingMoney.length(); i++) {
 			if (stringHoldingMoney.charAt(i) < CHAR_NUMERIC_MIN || CHAR_NUMERIC_MAX < stringHoldingMoney.charAt(
 					i)) {
@@ -156,19 +156,19 @@ public class InputView {
 		}
 	}
 
-	public static void zeroNumericError(String stringHoldingMoney) {
+	public void zeroNumericError(String stringHoldingMoney) {
 		if (stringHoldingMoney.equals(ZERO_HOLDING_MONEY)) {
 			throw new IllegalArgumentException(Message.ZERO_NUMERIC_ERROR);
 		}
 	}
 
-	public static void dividedByTenMoneyError(String stringMoney) {
+	public void dividedByTenMoneyError(String stringMoney) {
 		if (Integer.parseInt(stringMoney) % DIVIDE_VALUE != 0) {
 			throw new IllegalArgumentException(Message.DIVIDED_BY_TEN_HOLDING_MONEY_ERROR);
 		}
 	}
 
-	private static void duplicatedItemNameError(String[] itemStringArray) {
+	private void duplicatedItemNameError(String[] itemStringArray) {
 		Set<String> itemNames = new HashSet<String>();
 		removeBracket(itemStringArray);
 		int itemCount = itemStringArray.length;
@@ -180,7 +180,7 @@ public class InputView {
 		}
 	}
 
-	private static void wrongRegexMatchError(String[] itemStringArray) {
+	private void wrongRegexMatchError(String[] itemStringArray) {
 		for (int i = 0; i < itemStringArray.length; i++) {
 			if (!Pattern.matches(REGEX, itemStringArray[i])) {
 				throw new IllegalArgumentException(Message.WRONG_REGEX_MATCH_ERROR);
@@ -188,7 +188,7 @@ public class InputView {
 		}
 	}
 
-	public static void nonExistItemError(String buyItem, List<Item> holdingItemList) {
+	public void nonExistItemError(String buyItem, List<Item> holdingItemList) {
 		boolean isExistedItem = false;
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem)) {
@@ -200,7 +200,7 @@ public class InputView {
 		}
 	}
 
-	public static void nonEnoughMoneyError(String buyItem, List<Item> holdingItemList, int inputMoney) {
+	public void nonEnoughMoneyError(String buyItem, List<Item> holdingItemList, int inputMoney) {
 		for (int i = 0; i < holdingItemList.size(); i++) {
 			if (holdingItemList.get(i).getName().equals(buyItem) && holdingItemList.get(i).getPrice() > inputMoney) {
 				throw new IllegalArgumentException(Message.NON_ENOUGH_MONEY_ERROR);

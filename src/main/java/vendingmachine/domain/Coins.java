@@ -14,7 +14,7 @@ public class Coins {
 
 	public int holdingMoney;
 
-	private static Map<Coin, Integer> coins = new LinkedHashMap<>();
+	private Map<Coin, Integer> coins = new LinkedHashMap<>();
 
 	public Coins(int holdingMoney) {
 		this.holdingMoney = holdingMoney;
@@ -45,7 +45,7 @@ public class Coins {
 		return Coin.valueOf(amount);
 	}
 
-	public static Map<Coin, Integer> getCoins() {
+	public Map<Coin, Integer> getCoins() {
 		return coins;
 	}
 }
