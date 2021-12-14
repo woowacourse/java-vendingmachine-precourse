@@ -11,6 +11,8 @@ public class ProductBox {
 	private static final int PRODUCT_NAME_INDEX = 0;
 	private static final int PRODUCT_PRICE_INDEX = 1;
 	private static final int PRODUCT_COUNT_INDEX = 2;
+	private static final String HAS_DUPLICATE_PRODUCT_NAME_ERROR_MESSAGE = "[ERROR] 입력한 자판기 상품 중 상품명이 중복 되는 상품이 있다.";
+	private static final String NOT_HAS_PRODUCT_NAME_ERROR_MESSAGE = "[ERROR] 입력한 구매 상품명이 상품 목록에 없다.";
 
 	private final List<Product> productBox;
 
@@ -33,13 +35,13 @@ public class ProductBox {
 			.collect(Collectors.toList());
 		int distinctProductCount = (int)productNames.stream().distinct().count();
 		if (distinctProductCount != products.size()) {
-			throw new IllegalArgumentException("[ERROR] 입력한 자판기 상품 중 상품명이 중복 되는 상품이 있다.");
+			throw new IllegalArgumentException(HAS_DUPLICATE_PRODUCT_NAME_ERROR_MESSAGE);
 		}
 		return true;
 	}
 
 	private String bringProductName(String product) {
-		return Arrays.stream(product.split(COMMA)).collect(Collectors.toList()).get(0);
+		return Arrays.stream(product.split(COMMA)).collect(Collectors.toList()).get(PRODUCT_NAME_INDEX);
 	}
 
 	private Product makeProduct(String product) {
@@ -50,7 +52,7 @@ public class ProductBox {
 	}
 
 	public boolean hasProduct() {
-		return productBox.stream().filter(product -> !product.isSoldOut()).count() > 0;
+		return productBox.stream().anyMatch(product -> !product.isSoldOut());
 	}
 
 	public int getMinimumProductPrice() {
@@ -59,29 +61,29 @@ public class ProductBox {
 	}
 
 	public void sellProduct(String productName) {
-		if (hasProductToSellInProductBox(productName)) {
-			findSoldProduct(productName).reduceCount();
+		if (hasProductNameToSellInProductBox(productName)) {
+			findProductToSell(productName).reduceStock();
 			return;
 		}
 		throw new IllegalArgumentException();
 	}
 
-	private boolean hasProductToSellInProductBox(String productName) {
-		if (productBox.stream().noneMatch(product -> product.isSameName(productName))) {
-			throw new IllegalArgumentException("[ERROR] 입력한 구매 상품명이 상품 목록에 없다.");
+	private boolean hasProductNameToSellInProductBox(String productName) {
+		if (productBox.stream().noneMatch(product -> product.hasSameName(productName))) {
+			throw new IllegalArgumentException(NOT_HAS_PRODUCT_NAME_ERROR_MESSAGE);
 		}
 		return true;
 	}
 
 	public int giveSoldProductPrice(String productName) {
-		return findSoldProduct(productName).getPrice();
+		return findProductToSell(productName).getPrice();
 	}
 
-	private Product findSoldProduct(String productName) {
+	private Product findProductToSell(String productName) {
 		return productBox.stream()
-			.filter(product -> product.isSameName(productName))
+			.filter(product -> product.hasSameName(productName))
 			.collect(Collectors.toList())
-			.get(0);
+			.get(PRODUCT_NAME_INDEX);
 	}
 
 }
