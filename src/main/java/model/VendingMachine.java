@@ -1,6 +1,7 @@
 package model;
 
 import java.util.List;
+import java.util.Map;
 
 public class VendingMachine {
 	private CoinBox coinBox;
@@ -42,5 +43,9 @@ public class VendingMachine {
 	public void sellProduct(String productName) {
 		productBox.sellProduct(productName);
 		insertedMoneyBox.reduceMoney(productBox.giveSoldProductPrice(productName));
+	}
+
+	public Map<Integer, Integer> giveChangeCoins() {
+		return coinBox.getChangeCoins(insertedMoneyBox.getMoney());
 	}
 }

@@ -1,6 +1,7 @@
 package view;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.IntStream;
 
 public class OutputDisplay {
@@ -28,5 +29,11 @@ public class OutputDisplay {
 	public static void showNowInsertedMoney(int nowInsertedMoney) {
 		System.out.println();
 		System.out.println(INSERTED_MONEY + nowInsertedMoney + UNIT_OF_MONEY);
+	}
+
+	public static void showChangeAsCoins(Map<Integer, Integer> changeCoins) {
+		for (Map.Entry<Integer, Integer> coin : changeCoins.entrySet()) {
+			showCoinInformation(coin.getKey(), coin.getValue());
+		}
 	}
 }

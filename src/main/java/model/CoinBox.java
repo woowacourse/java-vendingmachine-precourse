@@ -1,9 +1,12 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 import utils.generator.RandomCoinPriceGenerator;
 
@@ -59,5 +62,34 @@ public class CoinBox {
 			priceOfEachCoins.add(coin.getAmount());
 		}
 		return priceOfEachCoins;
+	}
+
+	public Map<Integer, Integer> getChangeCoins(int insertedMoney) {
+		Map<Integer, Integer> changeCoins = new TreeMap<>(Collections.reverseOrder());
+		for (Coin coin : Coin.getValuesByDescending()) {
+			int coinCount = getCoinsEqualToCoinPrice(coin, insertedMoney);
+			if (coinCount > 0) {
+				changeCoins.put(coin.getAmount(), coinCount);
+			}
+		}
+		return changeCoins;
+	}
+
+	private int getCoinsEqualToCoinPrice(Coin coin, int insertedMoney) {
+		int coinCount = 0;
+		while (hasCoinInCoinBox(coin) && !isCoinPriceOverInsertedMoney(coin, insertedMoney)) {
+			insertedMoney -= coin.getAmount();
+			coinBox.put(coin, coinBox.get(coin) - 1);
+			coinCount += 1;
+		}
+		return coinCount;
+	}
+
+	private boolean hasCoinInCoinBox(Coin coin) {
+		return coinBox.get(coin) >= 1;
+	}
+
+	private boolean isCoinPriceOverInsertedMoney(Coin coin, int insertedMoney) {
+		return coin.getAmount() > insertedMoney;
 	}
 }
