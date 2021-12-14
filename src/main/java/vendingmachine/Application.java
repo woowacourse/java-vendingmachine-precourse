@@ -7,6 +7,7 @@ public class Application {
         controller.inputProduct();
         controller.setSpentMoney();
         controller.order();
+        controller.backChange();
     }
 
     public static void main(String[] args) {

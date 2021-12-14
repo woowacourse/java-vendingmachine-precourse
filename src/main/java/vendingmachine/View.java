@@ -14,7 +14,7 @@ public class View {
         for (int i=0; i<coins.size(); i++) {
             String result = "";
             result += coins.get(i).getAmount()+"원 - ";
-            result += coins.get(i).getNumberOfCoins()+"개";
+            result += coins.get(i).getNumberOfCoin()+"개";
             System.out.println(result);
         }
     }
@@ -36,5 +36,16 @@ public class View {
         System.out.println("투입금액: "+spentMoney+"원");
         System.out.println("구매할 상품명을 입력해 주세요.");
         return Console.readLine();
+    }
+
+    public static void printChange(int change, int[] numberOfCoins) {
+        System.out.println("투입 금액: "+change+"원");
+        System.out.println("잔돈");
+        int[] amount = {500, 100, 50, 10};
+        for (int i=0; i<amount.length; i++) {
+            if (numberOfCoins[i] > 0) {
+                System.out.println(amount[i]+"원 - "+numberOfCoins[i]+"개");
+            }
+        }
     }
 }

@@ -7,11 +7,11 @@ public enum Coin {
     COIN_10(10, 0);
 
     private final int amount;
-    private int numberOfCoins;
+    private int numberOfCoin;
 
     Coin(final int amount, int numberOfCoins) {
         this.amount = amount;
-        this.numberOfCoins = numberOfCoins;
+        this.numberOfCoin = numberOfCoins;
     }
 
     public int getAmount() {
@@ -19,10 +19,10 @@ public enum Coin {
     }
 
     public void setNumberOfCoins(int numberOfCoins) {
-        this.numberOfCoins = numberOfCoins;
+        this.numberOfCoin = numberOfCoins;
     }
 
-    public int getNumberOfCoins() {
-        return numberOfCoins;
+    public int getNumberOfCoin() {
+        return numberOfCoin;
     }
 }

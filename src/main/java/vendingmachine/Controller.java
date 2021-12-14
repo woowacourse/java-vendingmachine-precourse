@@ -76,4 +76,21 @@ public class Controller {
             System.out.println();
         }
     }
+
+    public void backChange() {
+        int change = vendingMachine.getSpentMoney();
+        int[] numberOfCoins = new int[4];
+        for (int i=0; i<4; i++) {
+            if (coins.get(i).getAmount()*coins.get(i).getNumberOfCoin()<change) {
+                numberOfCoins[i] = coins.get(i).getNumberOfCoin();
+                change -= numberOfCoins[i]*coins.get(i).getAmount();
+                continue;
+            }
+            if (coins.get(i).getNumberOfCoin()>0) {
+                numberOfCoins[i] = change/coins.get(i).getAmount();
+                change -= numberOfCoins[i]*coins.get(i).getAmount();
+            }
+        }
+        view.printChange(vendingMachine.getSpentMoney(), numberOfCoins);
+    }
 }
