@@ -14,7 +14,7 @@ public class InputView {
 	private static final String PRODUCT_INPUT_TO_REPLACE_PATTERN = "";
 	private static final String PRODUCT_NAME_INPUT_PATTERN = "^[a-zA-Z0-9가-힣]*$";
 
-	private static final String COINS_INPUT_HAS_VENDING_MACHINE = "자판기가 보유하고 있는 금액을 입력해 주세요";
+	private static final String COINS_INPUT_HAS_VENDING_MACHINE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String ERROR_NOT_NUMBER_MESSAGE = "숫자의 입력이 아닙니다.";
 	private static final String PRODUCTS_INPUT_HAS_VENDING_MACHINE = "상품명과 가격, 수량을 입력해주세요.";
 	private static final String ERROR_PRODUCT_INPUT_NOT_PATTERN = "상품 입력의 패턴이 아닙니다.";
