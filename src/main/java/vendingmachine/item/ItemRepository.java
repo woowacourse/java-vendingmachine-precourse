@@ -1,12 +1,15 @@
 package vendingmachine.item;
 
-import vendingmachine.utils.message.ItemErrorMessage;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 이 클래스는 Item 객체를 관리하는 repository 입니다.
+ * items 의 Key 값은 ItemKeyRepository 에서 할당 받습니다.
+ * Item 객체의 데이터가 변경될 수 있으니 Key 값으로 사용하지 않습니다.
+ */
 public class ItemRepository {
 
-    private final Map<String, Integer> itemKeys = new ConcurrentHashMap<>();
     private final Map<Integer, Item> items = new ConcurrentHashMap<>();
 
     private static class InnerInstanceClazz {
@@ -18,25 +21,10 @@ public class ItemRepository {
     }
 
     public void save(Item item) {
-        int itemKey = createItemKey();
-        itemKeys.put(item.getName(), itemKey);
-        items.put(itemKey, item);
+        items.put(item.getId(), item);
     }
 
-    private Integer createItemKey() {
-        return items.size();
-    }
-
-    public Item findOneByName(String name) {
-        Integer key = findItemKey(name);
-        return items.get(key);
-    }
-
-    private Integer findItemKey(String name) {
-        try {
-            return itemKeys.get(name);
-        }catch(NullPointerException e) {
-            throw new IllegalArgumentException(ItemErrorMessage.NOT_EXIST_ITEM);
-        }
+    public Item findOneById(Integer id) {
+        return items.get(id);
     }
 }

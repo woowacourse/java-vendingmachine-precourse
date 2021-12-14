@@ -6,9 +6,10 @@ import vendingmachine.utils.message.ItemErrorMessage;
 
 public class Item {
 
+    private Integer id = null;
     private String name;
-    private int price;
-    private int stockQuantity;
+    private Integer price;
+    private Integer stockQuantity;
 
     private Item(){}
 
@@ -20,11 +21,15 @@ public class Item {
         return item;
     }
 
-    public String getName() {
-        return name;
+    public Integer getId() {
+        return id;
     }
 
-    public int getPrice() {
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public Integer getPrice() {
         return price;
     }
 

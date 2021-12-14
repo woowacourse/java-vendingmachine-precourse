@@ -1,8 +1,8 @@
 package vendingmachine.item;
 
-import vendingmachine.exception.NotEnoughStockException;
 import vendingmachine.item.dto.ItemDto;
 import vendingmachine.utils.message.ItemErrorMessage;
+import java.util.List;
 
 public class ItemService {
 
@@ -10,9 +10,11 @@ public class ItemService {
     public static final int ITEM_PRICE_DIV = 10;
 
     private final ItemRepository itemRepository;
+    private final ItemKeyRepository itemKeyRepository;
 
     private ItemService() {
         itemRepository = ItemRepository.getInstance();
+        itemKeyRepository= ItemKeyRepository.getInstance();
     }
 
     private static class InnerInstanceClazz {
@@ -24,7 +26,7 @@ public class ItemService {
     }
 
     public void addItem(ItemDto itemDto) {
-        int price = itemDto.getPrice();
+        Integer price = itemDto.getPrice();
         if(price < ITEM_PRICE_MIN) {
             throw new IllegalArgumentException(ItemErrorMessage.PRICE_RANGE
                     .replaceFirst("min", String.valueOf(ITEM_PRICE_MIN)));
@@ -33,7 +35,12 @@ public class ItemService {
             throw new IllegalArgumentException(ItemErrorMessage.PRICE_DIV
                     .replaceFirst("div", String.valueOf(ITEM_PRICE_DIV)));
         }
-        itemRepository.save(Item.fromItemDto(itemDto));
+        itemKeyRepository.save(ItemKey.fromName(itemDto.getName()));
+        Integer key = getItemIdByName(itemDto.getName());
+
+        Item newItem = Item.fromItemDto(itemDto);
+        newItem.setId(key);
+        itemRepository.save(newItem);
     }
 
     public void purchaseItem(String itemName, int quantity) {
@@ -45,22 +52,31 @@ public class ItemService {
     }
 
     private void addStock(String itemName, int quantity) {
-        Item item = itemRepository.findOneByName(itemName);
+        Item item = getItemByName(itemName);
         item.addStock(quantity);
     }
 
     private void reduceStock(String itemName, int quantity) {
-        Item item = itemRepository.findOneByName(itemName);
+        Item item = getItemByName(itemName);
         item.reduceStock(quantity);
     }
 
     public void hasStockQuantity(String itemName, int quantity) {
-        Item item = itemRepository.findOneByName(itemName);
+        Item item = getItemByName(itemName);
         item.hasStockQuantity(quantity);
     }
 
-    public int getPriceByName(String itemName) {
-        Item item = itemRepository.findOneByName(itemName);
+    public Integer getPriceByName(String itemName) {
+        Item item = getItemByName(itemName);
         return item.getPrice();
+    }
+
+    private Item getItemByName(String name) {
+        Integer itemId = getItemIdByName(name);
+        return itemRepository.findOneById(itemId);
+    }
+
+    private Integer getItemIdByName(String name) {
+        return itemKeyRepository.findOneByName(name).getId();
     }
 }
