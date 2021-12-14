@@ -19,7 +19,7 @@ public class VendingMachineController {
 		coinController.setupHoldingCoins();
 		itemcontroller.setupItems();
 		moneyController.setupMoney();
-		sellItem();
+		sell();
 
 		outputView.printMoney(moneyController.getCurrentMoney());
 		Map<Coin, Integer> changes = getChanges();
@@ -28,7 +28,7 @@ public class VendingMachineController {
 
 	}
 
-	private void sellItem() {
+	private void sell() {
 		while (moneyController.getCurrentMoney() >= itemcontroller.getLeastItemCost()
 			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
