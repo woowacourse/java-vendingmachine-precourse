@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
 import static vendingmachine.constants.ErrorMessages.*;
+import static vendingmachine.constants.ProgramConstants.*;
 
 import java.util.Arrays;
 import java.util.List;
@@ -23,10 +24,10 @@ public class ItemModel {
 
 	public void createItems(String stringItemList) {
 		List<String> itemList = parseItemStringIntoItemList(stringItemList);
-		for (int i = 0; i < itemList.size() / 3; i++) {
-			String name = itemList.get(i * 3);
-			int price = Integer.parseInt(itemList.get(i * 3 + 1));
-			int stock = Integer.parseInt(itemList.get(i * 3 + 2));
+		for (int i = 0; i < itemList.size() / ITEM_ELEMENT_LENGTH; i++) {
+			String name = itemList.get(i * ITEM_ELEMENT_LENGTH);
+			int price = Integer.parseInt(itemList.get(i * ITEM_ELEMENT_LENGTH + PRICE_INDEX));
+			int stock = Integer.parseInt(itemList.get(i * ITEM_ELEMENT_LENGTH + STOCK_INDEX));
 			itemStorage.creatItem(name, price, stock);
 		}
 	}
@@ -54,9 +55,9 @@ public class ItemModel {
 	}
 
 	private List<String> parseItemStringIntoItemList(String items) {
-		return Arrays.stream(items.split(";"))
+		return Arrays.stream(items.split(ITEMS_SPLITTER	))
 				.map(item -> item.substring(1, item.length() - 1))
-				.map(itemElement -> itemElement.split(","))
+				.map(itemElement -> itemElement.split(ITEM_ELEMENT_SPLITTER))
 				.flatMap(Arrays::stream)
 				.collect(Collectors.toList());
 	}
