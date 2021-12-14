@@ -1,11 +1,11 @@
 package vendingmachine.domain;
 
+import static vendingmachine.constants.Constant.*;
+
 import java.util.EnumMap;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
-
-import static vendingmachine.constants.Constant.*;
 
 public class Coins {
 	private final Map<Coin, Integer> vendingMachineRemainedCoins = new EnumMap<>(Coin.class);
@@ -45,14 +45,11 @@ public class Coins {
 
 			vendingMachineRemainedCoins.put(coinType, coinCount);
 		}
+		
 		return generatedCoinAmount;
 	}
 
 	private int incrementCoinCount(Coin coin) {
 		return vendingMachineRemainedCoins.getOrDefault(coin, INIT_COUNT) + ADD_ONE;
-	}
-
-	public Map<Coin, Integer> getVendingMachineRemainedCoins() {
-		return vendingMachineRemainedCoins;
 	}
 }
