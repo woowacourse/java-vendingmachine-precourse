@@ -18,12 +18,23 @@ public class Item {
 		this.count = count;
 	}
 
-	public boolean equalName(String inputName) {
-		return name.equals(inputName);
-	}
-
 	public int getPrice() {
 		return price;
+	}
+
+	public void minusCount() {
+		if (!canBuy(count)) {
+			throw new IllegalArgumentException("[ERROR] 재고량이 부족합니다.");
+		}
+		this.count--;
+	}
+
+	private boolean canBuy(int count) {
+		return this.count >= 0;
+	}
+
+	public boolean equalName(String inputName) {
+		return name.equals(inputName);
 	}
 
 	@Override

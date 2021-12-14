@@ -1,10 +1,7 @@
 package vendingmachine.repository;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
-import vendingmachine.domain.Coin;
 import vendingmachine.domain.Item;
 import vendingmachine.view.InputView;
 
@@ -20,8 +17,13 @@ public class ItemRepository {
 		while (canBuy(moneyToBuy)) {
 			Item item = InputView.printBuying(moneyToBuy);
 			moneyToBuy -= item.getPrice();
+			minusItemStockAfterBuy(item);
 		}
 		return moneyToBuy;
+	}
+
+	private static void minusItemStockAfterBuy(Item item) {
+		item.minusCount();
 	}
 
 	private static boolean canBuy(int moneyToBuy) {
@@ -47,4 +49,7 @@ public class ItemRepository {
 			.get();
 	}
 
+	public static List<Item> get() {
+		return items;
+	}
 }
