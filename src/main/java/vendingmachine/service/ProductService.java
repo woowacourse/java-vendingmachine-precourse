@@ -40,13 +40,13 @@ public class ProductService {
             .orElseThrow(() -> new IllegalArgumentException(ERR_EMPTY_PRODUCTS));
     }
 
-    private void validateProductExist(String name) {
+    private void validateProductExist(String name) throws IllegalArgumentException {
         if (!products.containsKey(name)) {
             throw new IllegalArgumentException(ERR_INVALID_PRODUCT);
         }
     }
 
-    private void validateNonDuplicateName(List<Product> products) {
+    private void validateNonDuplicateName(List<Product> products) throws IllegalArgumentException {
         if (products.stream()
             .map(Product::getName)
             .distinct()
