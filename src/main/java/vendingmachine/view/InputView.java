@@ -43,7 +43,7 @@ public class InputView {
 
 	}
 
-	private static List<Item> getItems(String input) {
+	public static List<Item> getItems(String input) {
 		InputValidator.validateItems(input);
 		String[] strings = input.split(";");
 		List<Item> items = new ArrayList<>();

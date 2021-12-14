@@ -40,7 +40,7 @@ public class InputValidator {
 
 	public static void validateItem(String input) {
 		isCorrectBracket(input);
-		String regExp = "^\\[[\\w가-힣]*,\\d*,\\d*\\]$";
+		String regExp = "^\\[[\\w가-힣]*,\\d+,\\d+\\]$";
 		boolean matches = Pattern.matches(regExp, input);
 		if (!matches) {
 			throw new IllegalArgumentException(ERROR_INVALID_ITEM_FORMAT);
