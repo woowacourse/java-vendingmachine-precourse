@@ -8,7 +8,7 @@ public class InputData {
 	private static final String INPUT_MONEY_MSG = "투입 금액을 입력해 주세요.";
 	private static final String BUY_ITEM_MSG = "구매할 상품명을 입력해 주세요.";
 
-	public int setAmount() {
+	public static int setAmount() {
 		String amount;
 		do {
 			System.out.println(SET_AMOUNT_MSG);
@@ -18,7 +18,7 @@ public class InputData {
 		return Integer.parseInt(amount);
 	}
 
-	public boolean checkAmount(String amount) {
+	public static boolean checkAmount(String amount) {
 		try {
 			InputException.checkAmount(amount);
 			return true;
@@ -28,7 +28,7 @@ public class InputData {
 		}
 	}
 
-	public String[] setItem() {
+	public static String[] setItem() {
 		String[] items;
 		do {
 			System.out.println(SET_ITEM_MSG);
@@ -38,7 +38,7 @@ public class InputData {
 		return items;
 	}
 
-	public boolean checkItem(String[] items) {
+	public static boolean checkItem(String[] items) {
 		try {
 			InputException.checkItem(items);
 			return true;
@@ -48,7 +48,7 @@ public class InputData {
 		}
 	}
 
-	public int inputMoney() {
+	public static int inputMoney() {
 		String Money;
 		do {
 			System.out.println(INPUT_MONEY_MSG);
@@ -57,7 +57,7 @@ public class InputData {
 		return Integer.parseInt(Money);
 	}
 
-	public boolean checkInputMoney(String Money) {
+	public static boolean checkInputMoney(String Money) {
 		try {
 			InputException.checkInputMoney(Money);
 			return true;
@@ -67,10 +67,22 @@ public class InputData {
 		}
 	}
 
-	public String buyItem() {
-		System.out.println(BUY_ITEM_MSG);
-		String item = Console.readLine();
+	public static int buyItem(Items[] items) {
+		String item;
+		do {
+			System.out.println(BUY_ITEM_MSG);
+			item = Console.readLine();
+		} while (checkBuyItem(items, item) == -1);
+		return checkBuyItem(items, item);
+	}
 
-		return item;
+	public static int checkBuyItem(Items[] items, String item) {
+		try {
+			int itemsIndex = InputException.canBuy(items, item);
+			return itemsIndex;
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return -1;
+		}
 	}
 }

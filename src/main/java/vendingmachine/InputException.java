@@ -1,11 +1,13 @@
 package vendingmachine;
 
+import java.util.Arrays;
+
 public class InputException {
 	private static final String IS_INTEGER_ERROR_MSG = "[ERROR] 금액은 숫자여야 합니다.";
 	private static final String IS_POSITIVE_INTEGER_ERROR_MSG = "[ERROR] 금액은 0보다 커야 합니다.";
 	private static final String IS_MULTIPLICATION_OF_TEN_ERROR_MSG = "[ERROR] 금액은 10으로 나누어 떨어져야 합니다.";
 
-	private static final String ITEM_LENGTH_ERROR_MSG = "[ERROR] 상품명, 가격, 수량 3가지 값만 입력해야 합니다.";
+	private static final String ITEM_LENGTH_ERROR_MSG = "[ERROR] [상품명, 가격, 수량] 형식의 값만을 입력해야 합니다.";
 	private static final String ITEM_PRICE_ERROR_MSG = "[ERROR] 상품 가격은 100원 이상이어야 합니다.";
 	private static final String ITEM_STOCK_IS_INTEGER_ERROR_MSG = "[ERROR] 상품 수량은 숫자여야 합니다.";
 	private static final String ITEM_STOCK_IS_POSITIVE_ERROR_MSG = "[ERROR] 상품 수량은 0보다 커야 합니다.";
@@ -84,7 +86,20 @@ public class InputException {
 		}
 	}
 
-	public static void canBuy(String item) {
-		throw new IllegalArgumentException(CAN_BUY);
+	public static int canBuy(Items[] items, String item) {
+		boolean canBuy = false;
+		int itemsIndex = -1;
+
+		for (int i = 0; i < items.length; i++) {
+			if (item.equals(items[i].getName())) {
+				canBuy = true;
+				itemsIndex = i;
+			}
+		}
+
+		if (!canBuy) {
+			throw new IllegalArgumentException(CAN_BUY);
+		}
+		return itemsIndex;
 	}
 }
