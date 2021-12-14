@@ -20,7 +20,7 @@ public class ProductPrice {
     }
 
     public boolean canBuy(int inputAmount) {
-        return inputAmount > price;
+        return inputAmount >= price;
     }
 
     private void validatePricePolicy(String priceString) {
