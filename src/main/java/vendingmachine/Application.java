@@ -13,6 +13,10 @@ public class Application {
         String productInfo = InputView.inputProductInfo();
         Products products = new Products(productInfo);
 
-        InputView.inputUserMoney();
+        VendingMachine machine = new VendingMachine(coins, products);
+
+        int userMoney = TypeConverter.convertStringToInt(InputView.inputUserMoney());
+
+        machine.purchase(userMoney);
     }
 }

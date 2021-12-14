@@ -23,6 +23,14 @@ public class InputView {
         return inputMoney();
     }
 
+    public static String inputProductName(int money) {
+        System.out.println(VendingMachineConstant.INPUT_MONEY_PREFIX_MESSAGE + money + VendingMachineConstant.UNIT_OF_COIN);
+        System.out.println(VendingMachineConstant.INPUT_PRODUCT_NAME_MESSAGE);
+        String inputProductName = Console.readLine();
+        // TODO 검증 로직
+        return inputProductName;
+    }
+
     private static String inputMoney() {
         while (true) {
             String inputMoney = Console.readLine();
