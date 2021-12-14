@@ -19,6 +19,8 @@ import vendingmachine.model.shared.Validator;
 public class Cashier {
 	private static final int AMOUNT_UNIT = 10;
 	private static final int MIN_AMOUNT = 0;
+	private static final String TO_STRING_PREFIX = "투입 금액: ";
+	private static final String TO_STRING_SUFFIX = "원";
 
 	private int insertAmount;
 
@@ -27,8 +29,13 @@ public class Cashier {
 		makeCoins(holdingAmount);
 	}
 
-	public int getInsertAmount() {
-		return insertAmount;
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(TO_STRING_PREFIX);
+		stringBuilder.append(insertAmount);
+		stringBuilder.append(TO_STRING_SUFFIX);
+		return stringBuilder.toString();
 	}
 
 	public void insertMoney(int insertAmount) {

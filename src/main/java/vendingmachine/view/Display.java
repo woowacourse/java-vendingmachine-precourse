@@ -22,7 +22,6 @@ public class Display {
 	private static final String CHANGES_TITLE = "잔돈";
 
 	private static final String COIN_FORMAT = "%d원 - %d개%n";
-	private static final String INSERT_AMOUNT_FORMAT = "투입 금액: %d원%n";
 	private static final String ERROR_FORMAT = "[ERROR] %s%n";
 
 	public void askHoldingAmount() {
@@ -53,7 +52,7 @@ public class Display {
 	}
 
 	public void printInsertAmount(Cashier cashier) {
-		System.out.printf(INSERT_AMOUNT_FORMAT, cashier.getInsertAmount());
+		System.out.println(cashier.toString());
 	}
 
 	public void printChanges(Map<Coin, Integer> changes) {
