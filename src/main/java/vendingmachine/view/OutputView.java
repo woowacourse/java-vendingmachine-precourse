@@ -71,7 +71,7 @@ public class OutputView {
 
 	public void printMoney(final int money) {
 		printNewLine();
-		System.out.println(money);
+		System.out.printf("투입 금액: %d원%n", money);
 	}
 
 }
