@@ -1,5 +1,6 @@
 package vendingmachine.item;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +33,7 @@ public class ItemKeyRepository {
     }
 
     public List<ItemKey> findAll() {
-        return (List<ItemKey>) itemKeys.values();
+        return new ArrayList<>(itemKeys.values());
     }
 
     public ItemKey findOneByName(String name) {
