@@ -1,5 +1,8 @@
 package vendingmachine;
 
+import java.util.Collections;
+import java.util.Map;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -13,4 +16,16 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+    public int getAmount(){
+        return this.amount;
+    }
+
+    public static Coin getCoin(int amount){
+        for(Coin coin : Coin.values()){
+            if(coin.getAmount() == amount){
+                return coin;
+            }
+        }
+        throw new IllegalArgumentException("[ERROR]존재하지 않는 동전입니다.");
+    }
 }

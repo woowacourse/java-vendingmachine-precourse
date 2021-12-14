@@ -1,14 +1,32 @@
 package vendingmachine;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
+import camp.nextstep.edu.missionutils.Randoms;
+
 public class VendingMachine {
 	private int leftMoney;
-	private int numberOfCoin_500;
-	private int numberOfCoin_100;
-	private int numberOfCoin_50;
-	private int numberOfCoin_10;
+	private HashMap<Coin, Integer> coins;
 	private Product[] products;
 
 	VendingMachine(){
 		this.leftMoney = InputReceiver.getNumber();
+		_makeCoins();
+	}
+
+	private void _makeCoins(){
+		for(Coin coin : Coin.values()){
+			coins.put(coin, 0);
+		}
+
+		int amountOfCoins = 0;
+
+		while(this.leftMoney != amountOfCoins){
+			Coin key = Coin.getCoin(Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10)));
+			int value = coins.get(key) + 1;
+			coins.put(key, value);
+			amountOfCoins += key.getAmount();
+		}
 	}
 }
