@@ -5,17 +5,10 @@ import vendingmachine.util.VendingMachineConstant;
 import vendingmachine.validator.InputValidator;
 
 public class InputView {
+
     public static String inputVendingMachineMoney() {
         System.out.println(VendingMachineConstant.INPUT_VENDING_MACHINE_MONEY_MESSAGE);
-        while (true) {
-            String inputMoney = Console.readLine();
-            try {
-                InputValidator.validateVendingMachineMoney(inputMoney);
-                return inputMoney;
-            } catch (IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
-            }
-        }
+        return inputMoney();
     }
 
     public static String inputProductInfo() {
@@ -27,8 +20,18 @@ public class InputView {
 
     public static String inputUserMoney() {
         System.out.println(VendingMachineConstant.INPUT_USER_MONEY_MESSAGE);
-        String inputMoney = Console.readLine();
-        // TODO 검증 로직
-        return inputMoney;
+        return inputMoney();
+    }
+
+    private static String inputMoney() {
+        while (true) {
+            String inputMoney = Console.readLine();
+            try {
+                InputValidator.validateStringIsMoney(inputMoney);
+                return inputMoney;
+            } catch (IllegalArgumentException exception) {
+                System.out.println(exception.getMessage());
+            }
+        }
     }
 }

@@ -3,7 +3,7 @@ package vendingmachine.validator;
 import vendingmachine.util.VendingMachineConstant;
 
 public class InputValidator {
-    public static void validateVendingMachineMoney(String input) {
+    public static void validateStringIsMoney(String input) {
         validateStringIsNumber(input);
         int inputNumber = Integer.parseInt(input);
         validateNumberIsMoreThanZero(inputNumber);
