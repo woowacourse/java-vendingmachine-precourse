@@ -12,6 +12,7 @@ public enum Coin {
     COIN_10(10);
 
     private final int amount;
+    private int number = 0;
     private List<Integer> coinList;
 
     Coin(final int amount) {
@@ -21,6 +22,18 @@ public enum Coin {
 
     public int getAmount() {
         return amount;
+    }
+
+    public int getNumber() {
+        return this.number;
+    }
+
+    public void increaseNum() {
+        this.number++;
+    }
+
+    public void decreaseNum(int number) {
+        this.number -= number;
     }
 
     public int createCoinRandom(List<Integer> coins) {

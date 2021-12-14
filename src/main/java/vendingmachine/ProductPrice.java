@@ -1,6 +1,8 @@
 package vendingmachine;
 
 
+import validator.ExceptionMessage;
+
 // 클래스: 접근제어자, class, 이름
 public class ProductPrice {
     // 프로퍼티: 접근제어자, 자료형, 이름
@@ -22,7 +24,7 @@ public class ProductPrice {
 
     public ProductPrice(int price) {
         if (price < 0 && price % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE);
         }
         this.price = price;
     }
@@ -33,7 +35,7 @@ public class ProductPrice {
         int priceTemp = Integer.parseInt(price);
 
         if (priceTemp < 0 && priceTemp % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE);
         }
         this.price = priceTemp;
     }

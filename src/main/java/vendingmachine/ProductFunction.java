@@ -4,16 +4,15 @@ import validator.ExceptionMessage;
 import validator.ProductValidator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ProductFunction {
     private static final String INPUT_DELIMITER = ";";
 
-    private static final int PRODUCT_NAME_IDX = 0;
-    private static final int PRICE_IDX = 1;
-    private static final int AMOUNT_IDX = 2;
-
-    private static final int NO_PRODUCT_PRICE = 0;
+    private static final int PRODUCT_NAME_INDEX = 0;
+    private static final int PRICE_INDEX = 1;
+    private static final int AMOUNT_INDEX = 2;
 
     private static List<Product> productList = new ArrayList<>();
     private static String productString;
@@ -22,39 +21,36 @@ public class ProductFunction {
         return productList;
     }
 
-    public static String addProduct(String input) {
-        String[] eachProductInput = input.split(INPUT_DELIMITER);
-        for (int i = 0; i < eachProductInput.length; i++) {
-            Product product = createProduct(eachProductInput[i]);
-            isProductDuplicate(product);
-            productList.add(product);
-        }
-        return productString;
-    }
+//    public static String addProduct(String input) {
+//        String[] eachProductInput = input.split(INPUT_DELIMITER);
+//        for (int i = 0; i < eachProductInput.length; i++) {
+//            Product product = createProduct(eachProductInput[i]);
+//            isProductDuplicate(product);
+//            productList.add(product);
+//        }
+//        return productString;
+//    }
 
-    public Product getProductByName(String productName){
+    public static Product getProductByName(String productName){
         return productList.stream()
                 .filter(product -> product.getProductName().equals(productName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE));
     }
 
-    public void removeProduct(Product product){
-        productList.remove(product);
-    }
+    public static List<Product> createProduct(String eachProduct) {
+        String[] tempProductList = eachProduct.split(";");
+        List<Product> productInformationList = new ArrayList<>();
 
-    public int getMinProductPrice() {
-        return productList.stream()
-                .mapToInt(product -> product.getPrice())
-                .min()
-                .orElse(NO_PRODUCT_PRICE);
-    }
+        for (String s : tempProductList) {
+            List<String> information = Arrays.asList(s.split(","));
+            String productName = information.get(0);
+            int price = Integer.parseInt(information.get(1));
+            int count = Integer.parseInt(information.get(2));
+            productInformationList.add(new Product(productName, price, count));
+        }
 
-    public static Product createProduct(String eachProduct) {
-        String[][] productInput = ProductValidator.validateInput(eachProduct);
-        int price = Integer.parseInt(productInput[PRICE_IDX][PRICE_IDX]);
-        int amount = Integer.parseInt(productInput[AMOUNT_IDX][AMOUNT_IDX]);
-        return new Product(productInput[PRODUCT_NAME_IDX][PRODUCT_NAME_IDX], price, amount);
+        return productInformationList;
     }
 
     private static void isProductDuplicate(Product product) {
@@ -62,4 +58,6 @@ public class ProductFunction {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE);
         }
     }
+
+
 }

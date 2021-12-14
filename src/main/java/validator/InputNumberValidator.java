@@ -1,6 +1,9 @@
 package validator;
 
 public class InputNumberValidator {
+    private static final String NULL = "";
+    private static final String BLANK = " ";
+
     public static int validateVendingMachineMoney(String userInput) {
         int inputValue = isNumber(userInput);
         isPositiveNumber(inputValue);
@@ -29,7 +32,7 @@ public class InputNumberValidator {
     }
 
     public static void isBlank(String userInput) {
-        if (userInput.equals("") || userInput.equals(" ")) {
+        if (userInput.equals(NULL) || userInput.equals(BLANK)) {
             throw new IllegalArgumentException(ExceptionMessage.ERROR_PHRASE + ExceptionMessage.ERROR_INPUT_NUMBER);
         }
     }

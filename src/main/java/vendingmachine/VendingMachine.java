@@ -12,6 +12,4 @@ public class VendingMachine {
         this.fiftyCount = fiftyCount;
         this.tenCount = tenCount;
     }
-
-
 }
