@@ -2,12 +2,13 @@ package vendingmachine.view;
 
 import static vendingmachine.constant.OutputMessage.*;
 
+import vendingmachine.domain.coin.CoinCounter;
 import vendingmachine.domain.user.User;
 
 public class OutputView {
-	public static void printCoinCounter(String vendingMachineStatus) {
+	public static void printCoinCounter(CoinCounter coinCounter) {
 		System.out.println(COINS_HELD_BY_VENDING_MACHINE);
-		System.out.println(vendingMachineStatus);
+		System.out.println(coinCounter);
 	}
 
 	public static void printUserAmount(User user) {
@@ -15,8 +16,8 @@ public class OutputView {
 		System.out.println(user);
 	}
 
-	public static void printChangeCoins(String changeStatus) {
+	public static void printChangeCoins(CoinCounter coinCounter) {
 		System.out.println(CHANGE);
-		System.out.println(changeStatus);
+		System.out.println(coinCounter);
 	}
 }
