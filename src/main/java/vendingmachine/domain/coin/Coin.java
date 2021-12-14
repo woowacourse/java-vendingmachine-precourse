@@ -38,6 +38,7 @@ public enum Coin {
 
 	public static List<Coin> getAllCoin() {
 		return Arrays.stream(Coin.values())
+			.sorted((coin1, coin2) -> coin2.amount - coin1.amount)
 			.collect(Collectors.toList());
 	}
 

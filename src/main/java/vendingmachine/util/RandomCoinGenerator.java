@@ -13,8 +13,7 @@ public class RandomCoinGenerator {
 		do {
 			randomCoinAmount = pickNumberInList(allCoinAmount);
 		}
-		while (amount < randomCoinAmount)
-			;
+		while (amount < randomCoinAmount);
 		return Coin.getCoinByAmount(randomCoinAmount);
 	}
 }
