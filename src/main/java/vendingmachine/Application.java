@@ -42,9 +42,12 @@ public class Application {
     public static ArrayList<Product> generateProducts(String input) {
         ArrayList<Product> products = new ArrayList<>();
         String[] splited = input.split(";");
-        // for (String s: splited) {
-        //
-        // }
+        for (String s: splited) {
+            InputChecker.checkProduct(s);
+            String[] productInfo = s.substring(1, s.length() - 1).split(",");
+            Product p = new Product(productInfo[0], Integer.parseInt(productInfo[1]), Integer.parseInt(productInfo[2]));
+            products.add(p);
+        }
         return products;
     }
 
