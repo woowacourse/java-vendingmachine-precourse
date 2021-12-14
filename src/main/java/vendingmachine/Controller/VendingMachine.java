@@ -1,4 +1,10 @@
-package vendingmachine;
+package vendingmachine.Controller;
+
+import vendingmachine.View.Computer;
+import vendingmachine.Model.MachineCoin;
+import vendingmachine.Model.Coin;
+import vendingmachine.Model.Product;
+import vendingmachine.View.User;
 
 import java.util.LinkedHashMap;
 import java.util.List;

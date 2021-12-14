@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.Model;
 
 public class Product {
     private String name;

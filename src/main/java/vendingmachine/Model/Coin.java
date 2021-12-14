@@ -1,9 +1,6 @@
-package vendingmachine;
-
-import camp.nextstep.edu.missionutils.Randoms;
+package vendingmachine.Model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public enum Coin {

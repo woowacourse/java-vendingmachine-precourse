@@ -1,4 +1,7 @@
-package vendingmachine;
+package vendingmachine.View;
+
+import vendingmachine.Model.Coin;
+import vendingmachine.Model.MachineCoin;
 
 import java.util.Map;
 

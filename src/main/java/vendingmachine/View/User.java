@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.View;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.Model.Product;
 
 import java.util.ArrayList;
 import java.util.List;
