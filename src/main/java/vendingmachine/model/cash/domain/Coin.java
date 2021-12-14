@@ -11,24 +11,38 @@ public enum Coin {
 	COIN_50(50),
 	COIN_10(10);
 
-	private final int amount;
-	private int count = 0;
-
 	private static final List<Integer> AMOUNTS = Stream.of(Coin.values())
 		.map(Coin::getAmount)
 		.collect(Collectors.toList());
+	private static final String TO_STRING_AMOUNT_SUFFIX = "원 - ";
+	private static final String TO_STRING_COUNT_SUFFIX = "개";
+
+	private final int amount;
+	private int count = 0;
+	private int changeCount = 0;
 
 	Coin(final int amount) {
 		this.amount = amount;
 	}
 
 	// 추가 기능 구현
-	public int getAmount() {
-		return this.amount;
+	@Override
+	public String toString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(amount);
+		stringBuilder.append(TO_STRING_AMOUNT_SUFFIX);
+		stringBuilder.append(count);
+		stringBuilder.append(TO_STRING_COUNT_SUFFIX);
+		return stringBuilder.toString();
 	}
 
-	public int getCount() {
-		return this.count;
+	public String changeToString() {
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append(amount);
+		stringBuilder.append(TO_STRING_AMOUNT_SUFFIX);
+		stringBuilder.append(changeCount);
+		stringBuilder.append(TO_STRING_COUNT_SUFFIX);
+		return stringBuilder.toString();
 	}
 
 	public static List<Integer> getAmounts() {
@@ -42,23 +56,37 @@ public enum Coin {
 			.orElse(null);
 	}
 
-	public boolean isAmount(int amount) {
-		return this.amount == amount;
-	}
-
-	public boolean remainLessThen(int count) {
-		return this.count < count;
+	public boolean isChangeCount(int count) {
+		return this.changeCount == count;
 	}
 
 	public void add() {
 		this.count++;
 	}
 
-	public int divideByAmount(int dividend) {
+	public int takeChange(int changeAmount) {
+		int required = divideByAmount(changeAmount);
+		if (this.count < required) {
+			this.changeCount = this.count;
+			return take(this.count);
+		}
+		this.changeCount = required;
+		return take(required);
+	}
+
+	private int getAmount() {
+		return this.amount;
+	}
+
+	private boolean isAmount(int amount) {
+		return this.amount == amount;
+	}
+
+	private int divideByAmount(int dividend) {
 		return (dividend / this.amount);
 	}
 
-	public int take(int count) {
+	private int take(int count) {
 		this.count = this.count - count;
 		return (count * this.amount);
 	}

@@ -1,7 +1,5 @@
 package vendingmachine.view;
 
-import java.util.Map;
-
 import vendingmachine.model.cash.domain.Coin;
 import vendingmachine.model.cash.service.Cashier;
 
@@ -21,7 +19,6 @@ public class Display {
 	private static final String ALL_COIN_TITLE = "자판기가 보유한 동전";
 	private static final String CHANGES_TITLE = "잔돈";
 
-	private static final String COIN_FORMAT = "%d원 - %d개%n";
 	private static final String ERROR_FORMAT = "[ERROR] %s%n";
 
 	public void askHoldingAmount() {
@@ -40,14 +37,10 @@ public class Display {
 		System.out.println(WHAT_TO_BUY_QUESTION);
 	}
 
-	public void printCoin(Coin coin) {
-		System.out.printf(COIN_FORMAT, coin.getAmount(), coin.getCount());
-	}
-
 	public void printAllCoin() {
 		System.out.println(ALL_COIN_TITLE);
 		for (Coin coin : Coin.values()) {
-			printCoin(coin);
+			System.out.println(coin.toString());
 		}
 	}
 
@@ -55,10 +48,12 @@ public class Display {
 		System.out.println(cashier.toString());
 	}
 
-	public void printChanges(Map<Coin, Integer> changes) {
+	public void printChanges() {
 		System.out.println(CHANGES_TITLE);
-		for (Coin coin : changes.keySet()) {
-			System.out.printf(COIN_FORMAT, coin.getAmount(), changes.get(coin));
+		for (Coin coin : Coin.values()) {
+			if (!coin.isChangeCount(0)) {
+				System.out.println(coin.changeToString());
+			}
 		}
 	}
 

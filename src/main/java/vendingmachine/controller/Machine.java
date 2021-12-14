@@ -34,7 +34,7 @@ public class Machine {
 		prepareItems();
 		prepareInsertAmount();
 		sellItems();
-		display.printChanges(cashier.getChanges());
+		giveChanges();
 	}
 
 	private void prepareCoins() {
@@ -61,6 +61,11 @@ public class Machine {
 			display.printBlankLine();
 			display.printInsertAmount(cashier);
 		}
+	}
+
+	private void giveChanges() {
+		cashier.countChanges();
+		display.printChanges();
 	}
 
 	private void prepareCashier() {
