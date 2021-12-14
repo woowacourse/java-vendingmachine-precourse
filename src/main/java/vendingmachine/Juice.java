@@ -24,16 +24,16 @@ public class Juice {
         return 0;
     }
 
-    public boolean OutPutOneJuice() {
+    public int OutPutOneJuice() {
         try {
             if (numberOfCan == 0) {
                 throw new IllegalArgumentException();
             }
             numberOfCan -= 1;
-            return true;
+            return price;
         } catch (IllegalArgumentException e) {
             System.out.println("[ERROR] : 재고가 소진되었습니다.");
-            return false;
+            return 0;
         }
     }
 }

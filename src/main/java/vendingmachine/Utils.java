@@ -41,22 +41,22 @@ public class Utils {
                 break;
             }
             String juiceName = PrintUI.Ordering(money);
-            money -= OrderCheck(juiceIndex,juiceName);
+            money -= OrderCheck(money,juiceIndex,juiceName);
         }
         Coin.PrintChange(money);
     }
 
-    public static int OrderCheck(ArrayList<Juice> juiceIndex, String orderJuice) {
+    public static int OrderCheck(int money, ArrayList<Juice> juiceIndex, String orderJuice) {
         int price = 0;
         for (Juice juice : juiceIndex) {
             price = juice.EqualJuiceName(orderJuice);
-            boolean flag =  juice.OutPutOneJuice();
-            if (flag && price != 0) {
+            if (price != 0) {
+                price = ExpensivePrice(juice, money, price);
                 return price;
             }
         }
         MenuNameError();
-        return 0;
+        return price;
     }
 
     public static void MenuNameError() {
@@ -68,4 +68,16 @@ public class Utils {
         }
     }
 
+    public static int ExpensivePrice(Juice juice, int money, int price) {
+        try {
+            if (money < price) {
+                throw new IllegalArgumentException();
+            }
+            return juice.OutPutOneJuice();
+
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] : 투입 금액보다 메뉴가 더 비싸요");
+            return 0;
+        }
+    }
 }
