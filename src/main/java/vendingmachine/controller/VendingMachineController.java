@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.domain.Coins;
@@ -23,7 +24,9 @@ public class VendingMachineController {
 		sellItem(money.getMoney());
 
 		outputView.printMoney(money.getMoney());
-		outputView.printChanges(coinController.getChanges(coins, money.getMoney()));
+		Map<Integer, Integer> changes = getChanges(money.getMoney());
+		outputView.printChanges(changes);
+
 	}
 
 	private Money giveMoney() {
@@ -45,5 +48,19 @@ public class VendingMachineController {
 				outputView.printError(e.getMessage());
 			}
 		}
+	}
+
+	public Map<Integer, Integer> getChanges(int moneyAmount) {
+		Map<Integer, Integer> changes = new LinkedHashMap<>();
+		Map<Integer, Integer> restCoins = coinController.getRestCoins();
+		for (Map.Entry<Integer, Integer> coin : restCoins.entrySet()) {
+			final int number = coinController.getAvailableChangeNumber(coin.getKey(), coin.getValue(), moneyAmount);
+			final boolean isUpperThanZero = 0 < number;
+			if (isUpperThanZero) {
+				changes.put(coin.getKey(), number);
+				money.pay(coin.getKey() * number);
+			}
+		}
+		return changes;
 	}
 }

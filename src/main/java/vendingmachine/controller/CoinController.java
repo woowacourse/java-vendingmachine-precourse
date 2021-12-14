@@ -45,9 +45,14 @@ public class CoinController {
 		return coinAmount;
 	}
 
-	public Map<Integer, Integer> getChanges(final Coins coins, final int money) {
-		Map<Integer, Integer> changes = money.makeChanges(coins);
-		coins.update(changes);
-		return changes;
+	public Map<Integer, Integer> getRestCoins(){
+		return coins.findRestCoins();
+	}
+
+	public int getAvailableChangeNumber(final int coin, final int number, final int money) {
+		if (coin * number > money) { // 동전 총액 > 투입 금액인 경우 (example: 100원 * 3 (300원) > 투입금액 200원)
+			return money / coin;
+		}
+		return number;
 	}
 }
