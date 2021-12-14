@@ -1,8 +1,10 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.Map;
+
+import vendingmachine.domain.Coin;
 
 public class ChangeCalculation {
 	private static final Map<Coin, Integer> change = new LinkedHashMap<>();

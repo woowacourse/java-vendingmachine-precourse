@@ -1,6 +1,14 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import java.util.Map;
+
+import vendingmachine.utils.ChangeCalculation;
+import vendingmachine.utils.VendingMachineCoinGenerator;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.Item;
+import vendingmachine.domain.Items;
+import vendingmachine.views.InputView;
+import vendingmachine.views.OutputView;
 
 public class VendingMachine {
 	private int insertAmount;

@@ -1,4 +1,7 @@
-package vendingmachine;
+package vendingmachine.utils;
+
+import vendingmachine.domain.Item;
+import vendingmachine.domain.Items;
 
 public class BuyingItemValidation {
 	public static void validateBuyingItem(Items items, int insertAmount, String buyingItem) {

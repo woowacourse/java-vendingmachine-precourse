@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 public class MoneyValidation {
 	private static final int MIN_COIN_PRICE = 10;

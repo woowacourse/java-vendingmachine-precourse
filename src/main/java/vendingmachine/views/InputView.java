@@ -1,6 +1,12 @@
-package vendingmachine;
+package vendingmachine.views;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.utils.BuyingItemValidation;
+import vendingmachine.utils.ItemsGenerator;
+import vendingmachine.utils.ItemsValidation;
+import vendingmachine.utils.MoneyValidation;
+import vendingmachine.domain.Item;
+import vendingmachine.domain.Items;
 
 public class InputView {
 	private static final String ERROR_MESSAGE = "[ERROR] ";

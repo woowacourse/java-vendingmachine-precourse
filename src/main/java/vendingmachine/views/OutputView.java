@@ -1,6 +1,8 @@
-package vendingmachine;
+package vendingmachine.views;
 
 import java.util.Map;
+
+import vendingmachine.domain.Coin;
 
 public class OutputView {
 	private static final String PRINT_VENDING_MACHINE_COIN = "자판기가 보유한 동전";

@@ -1,8 +1,11 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import vendingmachine.domain.Item;
+import vendingmachine.domain.Items;
 
 public class ItemsGenerator {
 	private static final String ENTIRE_DELIMETER = ";";
@@ -40,7 +43,4 @@ public class ItemsGenerator {
 		ItemsValidation.validateItemPrice(price);
 		return Integer.parseInt(price);
 	}
-
-
-
 }

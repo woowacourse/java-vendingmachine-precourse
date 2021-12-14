@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.domain.Coin;
 
 public class VendingMachineCoinGenerator {
 	private static Map<Coin, Integer> vendingMachineCoinCounts = new LinkedHashMap<>();
