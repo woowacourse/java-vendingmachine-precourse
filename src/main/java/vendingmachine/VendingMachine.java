@@ -12,6 +12,10 @@ public class VendingMachine {
         this.moneyOfMachine=moneyOfMachine;
     }
 
+    public int getMoney() {
+        return moneyOfMachine;
+    }
+
     public void setSpentMoney(int spentMoney) {
         this.spentMoney=spentMoney;
     }
