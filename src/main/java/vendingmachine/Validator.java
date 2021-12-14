@@ -4,10 +4,10 @@ import static vendingmachine.ErrorMessage.AMOUNT_FORMAT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.AMOUNT_NEGATIVE_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.AMOUNT_UNIT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.CONTAINS_BLANK_ERROR_MESSAGE;
-import static vendingmachine.ErrorMessage.PRODUCT_QUANTITY_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_DUPLICATE_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_INPUT_FORMAT_ERROR_MESSAGE;
 import static vendingmachine.ErrorMessage.PRODUCT_PRICE_ERROR_MESSAGE;
+import static vendingmachine.ErrorMessage.PRODUCT_QUANTITY_ERROR_MESSAGE;
 
 import java.util.List;
 

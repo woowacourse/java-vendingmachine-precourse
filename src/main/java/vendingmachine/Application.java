@@ -15,7 +15,7 @@ public class Application {
         Map<Coin, Integer> machineCoins = converter.convertToCoins(machineMoney);
         printer.printMachineCoins(machineCoins);
 
-        printer.printProductInfosInputMessage();
+        printer.printProductInfoInputMessage();
         String productInfos = input.inputProductInfos();
         List<Product> products = converter.convertToProducts(productInfos);
 
