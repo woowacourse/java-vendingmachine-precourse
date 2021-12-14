@@ -29,6 +29,10 @@ class ChangeSafeRepositoryTest implements Rollback {
 	    // when
 		ChangeSafe save = repository.save(changeSafe);
 		// then
-		assertEquals("400원", save.sumToMoney().toString());
+		System.out.println(save.toString());
+		assertEquals("500원 - 0개\n"
+			+ "100원 - 3개\n"
+			+ "50원 - 2개\n"
+			+ "10원 - 0개", save.toString());
 	}
 }

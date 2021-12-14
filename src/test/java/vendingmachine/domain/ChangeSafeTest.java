@@ -39,24 +39,4 @@ class ChangeSafeTest {
 			+ "50원 - 0개\n"
 			+ "10원 - 0개", string);
 	}
-
-	@Test
-	@DisplayName("다른 잔돈 금고와 합칠 수 있다.")
-	public void testMergeChangeSafe() {
-	    // given
-		Map<Coin, Quantity> coinMapA = new HashMap<>();
-		coinMapA.put(Coin.COIN_50, new Quantity(5));
-		ChangeSafe changeSafeA = new ChangeSafe(coinMapA);
-
-		Map<Coin, Quantity> coinMapB = new HashMap<>();
-		coinMapB.put(Coin.COIN_10, new Quantity(5));
-		ChangeSafe changeSafeB = new ChangeSafe(coinMapB);
-	    // when
-		ChangeSafe merge = changeSafeA.merge(changeSafeB);
-		// then
-		assertEquals("500원 - 0개\n"
-			+ "100원 - 0개\n"
-			+ "50원 - 5개\n"
-			+ "10원 - 5개", merge.toString());
-	}
 }

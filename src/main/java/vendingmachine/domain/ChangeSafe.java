@@ -30,23 +30,9 @@ public class ChangeSafe {
 		);
 	}
 
-	// todo : fix this
-	public ChangeSafe merge(ChangeSafe other) {
-		return new ChangeSafe(merge(other.coinMap));
-	}
-
 	private Map<Coin, Quantity> merge(Map<Coin, Quantity> other) {
 		other.forEach((k, v) -> this.coinMap.merge(k, v, Quantity::plus));
 		return this.coinMap;
-	}
-
-	public Money sumToMoney() {
-		Money money = Money.ZERO;
-		for (Map.Entry<Coin, Quantity> entry : coinMap.entrySet()) {
-			Money multiply = entry.getKey().toMoney().multiply(entry.getValue().getCount());
-			money = money.plus(multiply);
-		}
-		return money;
 	}
 
 	public ChangeSafe giveChange(Money money) {
