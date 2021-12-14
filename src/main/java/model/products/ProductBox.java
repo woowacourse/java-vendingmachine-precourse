@@ -57,7 +57,7 @@ public class ProductBox {
 
 	public int getMinimumProductPrice() {
 		Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
-		return productBox.stream().max(comparatorByPrice).orElseThrow(NoSuchElementException::new).getPrice();
+		return productBox.stream().min(comparatorByPrice).orElseThrow(NoSuchElementException::new).getPrice();
 	}
 
 	public void sellProduct(String productName) {
