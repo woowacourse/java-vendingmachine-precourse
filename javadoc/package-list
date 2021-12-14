@@ -1,0 +1,5 @@
+vendingmachine
+vendingmachine.controller
+vendingmachine.models
+vendingmachine.utils
+vendingmachine.view
