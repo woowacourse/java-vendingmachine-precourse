@@ -10,26 +10,26 @@ import vendingmachine.model.PossessionCoin;
 
 public class OutputView {
 
-	public static void reportPossessionCoin(PossessionCoin possessionCoin) {
+	public static void reportPossessionCoin(Map<Integer, Integer> possessionCoins) {
 		System.out.println(ENTER + POSSESSION_COIN_REPORT_MESSAGE);
-		reportCoins(possessionCoin.getCoins());
+		for (Map.Entry<Integer, Integer> coin : possessionCoins.entrySet()) {
+			reportCoins(coin.getKey(), coin.getValue());
+		}
 	}
 
-	private static void reportCoins(Map<Integer, Integer> coins) {
-		for (Map.Entry<Integer, Integer> coin : coins.entrySet()) {
-			System.out.println(coin.getKey() + MONEY_UNIT + MONEY_COIN_SEPARATION + coin.getValue() + COIN_UNIT);
-		}
+	private static void reportCoins(int amount, int count) {
+		System.out.println(amount + MONEY_UNIT + MONEY_COIN_SEPARATION + count + COIN_UNIT);
 	}
 
 	public static void reportInputMoney(int money) {
 		System.out.println(ENTER + INPUT_MONEY_REPORT_MESSAGE + money + MONEY_UNIT);
 	}
 
-	public static void reportChange(Change change) {
+	public static void reportChangeCoin(Map<Integer, Integer> changeCoins) {
 		System.out.println(CHANGE_REPORT_MESSAGE);
-		for (Map.Entry<Integer, Integer> coin : change.getCoins().entrySet()) {
+		for (Map.Entry<Integer, Integer> coin : changeCoins.entrySet()) {
 			if (coin.getValue() != 0) {
-				System.out.println(coin.getKey() + MONEY_UNIT + MONEY_COIN_SEPARATION + coin.getValue() + COIN_UNIT);
+				reportCoins(coin.getKey(), coin.getValue());
 			}
 		}
 	}

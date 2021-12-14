@@ -30,7 +30,7 @@ public class VendingMachineController {
 	public void inputPossession() {
 		possessionMoney = new Money(requestPossessionMoney());
 		possessionCoin.createRandomCoins(possessionMoney);
-		reportPossessionCoin(possessionCoin);
+		reportPossessionCoin(possessionCoin.getCoins());
 	}
 
 	private void inputProducts() {
@@ -77,7 +77,7 @@ public class VendingMachineController {
 	private void returnChange() {
 		change = new Change();
 		change.createGreedyCoin(possessionCoin, inputMoney.getMoney());
-		reportChange(change);
+		reportChangeCoin(change.getCoins());
 	}
 
 }
