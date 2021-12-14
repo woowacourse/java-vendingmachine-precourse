@@ -6,6 +6,8 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
+import vendingmachine.domain.VendingMachine;
+
 public class Validators {
 	public static final String DELIMETER = ";";
 
@@ -66,7 +68,7 @@ public class Validators {
 				}
 				return 0;
 			})
-			.allMatch(amount -> amount >= 100 && amount % 10 == 0 ); // 추출물검사
+			.allMatch(amount -> amount >= 100 && amount % 10 == 0); // 추출물검사
 
 		if (!isValidAmount) {
 			throw new IllegalArgumentException("상품 가격은 100원부터 시작하며, 10원으로 나누어떨어져야 한다.");
@@ -82,7 +84,7 @@ public class Validators {
 				}
 				return 0;
 			})
-			.allMatch(count -> count >= 1 ); // 추출물검사
+			.allMatch(count -> count >= 1); // 추출물검사
 
 		if (!isValidCount) {
 			throw new IllegalArgumentException("상품 갯수는 1개이상이어야한다.");
@@ -109,5 +111,37 @@ public class Validators {
 
 		// System.out.println("상품명(추출) 중복검사까지 통과");  // TODO 로그
 
+	}
+
+	public static void checkValidProduct(String inputValue) {
+		VendingMachine vendingMachine = VendingMachine.getInstance();
+		vendingMachine.findProductByName(inputValue); // orElseThrow로서.. 못찾으면 에러남.. 찾았으면 아무것도 안일어남.
+		System.out.println("검증끝");
+	}
+
+	public static void checkValidLengthOfProductName(String inputValue) {
+		int inputValueLength = inputValue.length();
+		if (!(1 <= inputValueLength)) {
+			throw new IllegalArgumentException(1 + "~" + 2147483647 + " 글자 범위 내에서 입력하세요.");
+		}
+		;
+	}
+
+	public static void checkIncludeSpace(String inputValue) {
+		if (inputValue.trim().contains(" ")) {
+			throw new IllegalArgumentException("공백이 포함될 수 없습니다.");
+		}
+	}
+
+	private static void checkValidFormatOfProductName(String inputValue) {
+		if (inputValue.chars().anyMatch(Character::isDigit)) {
+			throw new IllegalArgumentException("숫자는 허용하지 않습니다.");
+		}
+	}
+
+	private static void checkDuplicatesOfProductName(String inputValue) {
+		if (Arrays.stream(inputValue.trim().split("")).distinct().count() != inputValue.trim().length()) {
+			throw new IllegalArgumentException("중복값을 입력할 수 없습니다.");
+		}
 	}
 }

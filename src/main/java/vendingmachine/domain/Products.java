@@ -27,6 +27,13 @@ public class Products {
 		return this.products;
 	}
 
+	public Product findProductByName(String inputValue) {
+		return this.products.stream()
+			.filter(product -> product.toName().equals(Name.of(inputValue)))
+			.findFirst()
+			.orElseThrow(() -> new IllegalArgumentException("해당 상품은 존재하지 않습니다."));
+	}
+
 	// 집계===========
 	// // 단일객체가 comparable -> compareTo 오버라이딩하여, 정렬/집계/비교의 기준이 정해졌을 때, 집계의 기준에 넣는다.
 	// public int findMax() {

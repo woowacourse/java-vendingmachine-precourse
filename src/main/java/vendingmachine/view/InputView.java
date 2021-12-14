@@ -49,4 +49,23 @@ public class InputView {
 		Validators.checkPatternOfProduct(inputValue, delimeter, "\\[([가-힣]+),([0-9]+),([0-9]+)\\]");
 	}
 
+	public static String getProductName() {
+		try {
+			String inputValue = InputView.getInput();
+			checkProductNameValidation(inputValue);
+			return inputValue.trim();
+		} catch (IllegalArgumentException e) {
+			OutputView.printError(e.getMessage());
+			return getProductName();
+		}
+	}
+
+	private static void checkProductNameValidation(String inputValue) {
+		Validators.checkNullOrEmpty(inputValue);
+		Validators.checkValidLengthOfProductName(inputValue);
+		Validators.checkIncludeSpace(inputValue);
+		//TODO 추가 검증.. 검색이니까 존재하는지부터 검사하기 with 싱글톤 객체
+		Validators.checkValidProduct(inputValue);
+	}
+
 }
