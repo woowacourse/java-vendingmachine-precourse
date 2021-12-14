@@ -6,6 +6,8 @@ import java.util.ArrayList;
 public enum Coin {
 	COIN_500(500), COIN_100(100), COIN_50(50), COIN_10(10);
 
+	final static String ERROR_NOT_COIN = "[ERROR] 존재하지않는 COIN입니다.";
+
 	private final int amount;
 
 	Coin(final int amount) {
@@ -17,7 +19,7 @@ public enum Coin {
 	}
 
 	public static List<Integer> coinList() {
-		List<Integer> list = new ArrayList<>(4);
+		List<Integer> list = new ArrayList<>();
 		for (Coin money : Coin.values()) {
 			list.add(money.amount);
 		}
@@ -30,7 +32,7 @@ public enum Coin {
 				return money;
 			}
 		}
-		throw new IllegalArgumentException("[ERROR] 존재하지않는 COIN입니다.");
+		throw new IllegalArgumentException(ERROR_NOT_COIN);
 
 	}
 

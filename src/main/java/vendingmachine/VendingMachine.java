@@ -6,6 +6,7 @@ import java.util.HashMap;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
+	final static int BIG_NUMBER= 9999999;
 	int totalCoin;
 
 	HashMap<Coin, Integer> coinMap = new HashMap<>();
@@ -42,9 +43,8 @@ public class VendingMachine {
 		}
 	}
 
-	// 음료 추가
+
 	public void beverage(String goodsInput) {
-		// Validater.isSemicolon(goodsInput);
 		String[] goodsList = goodsInput.split(";");
 
 		for (String beverageString : goodsList) {
@@ -53,19 +53,19 @@ public class VendingMachine {
 
 	}
 
-	// 음료찾아 차감하기
 	public int getBeveragePrice(String buyBeverage) {
 		for (Beverage beverage : Beverages) {
 			if (beverage.getName().equals(buyBeverage)) {
 				beverage.sellBeverage();
-				int price = beverage.getPrice();// 투입금액 차감
+				int price = beverage.getPrice();
 				return price;
 			}
 		}
-		throw new IllegalArgumentException("자판기에 없는 음료입니다.");
+		Validater.notInBeverage();
+		return totalCoin;
+
 	}
 
-	// 잔돈 반환 (최저가보다 적거나, 수량이 모두 다한 경우)
 	public boolean coinReturn(int money) {
 		int min = lowestPrice();
 		boolean isMargin = beverageMargin();
@@ -75,16 +75,14 @@ public class VendingMachine {
 		return true;
 	}
 
-	// 최저가 찾기
 	private int lowestPrice() {
-		int min = 9999999;
+		int min = BIG_NUMBER;
 		for (Beverage beverage : Beverages) {
 			min = Math.min(beverage.getPrice(), min);
 		}
 		return min;
 	}
 
-	// 수량확인하기
 	private boolean beverageMargin() {
 		for (Beverage beverage : Beverages) {
 			if (beverage.count != 0) {
@@ -95,7 +93,6 @@ public class VendingMachine {
 
 	}
 
-	// 잔돈 처리
 	HashMap<Coin, Integer> lastChange(int finalMoney) {
 		if (totalCoin <= finalMoney) {
 			return coinMap;
