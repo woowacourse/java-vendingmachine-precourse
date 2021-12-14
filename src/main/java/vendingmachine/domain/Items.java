@@ -51,14 +51,12 @@ public class Items {
 	}
 
 	private Item find(String name) {
-		try {
-			return itemRepository.stream().filter(item -> item.equals(name)).collect(Collectors.toList()).get(0);
-		} catch (IndexOutOfBoundsException e) {
-			throw new IllegalArgumentException(FIND_NO_ITEM);
-		}
+		return itemRepository.stream().filter(item -> item.equals(name)).findFirst()
+			.orElseThrow(() -> new IllegalArgumentException(FIND_NO_ITEM));
 	}
 
 	public boolean continuable(int moneyLeft) {
+		/* 남은 돈으로 살 수 있는 상품이 없거나 모든 상품 재고가 없으면 진행이 불가능 */
 		return enoughMoneyForAllItem(moneyLeft) && quantityLeft();
 	}
 
