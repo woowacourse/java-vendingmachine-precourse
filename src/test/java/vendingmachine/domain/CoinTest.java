@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
 import org.junit.jupiter.api.DisplayName;
@@ -28,7 +29,7 @@ class CoinTest {
 	    // given
 	    int amount = 11;
 		// then
-		assertThrows(IllegalArgumentException.class, () -> Coin.of(amount));
+		assertThrows(NoSuchElementException.class, () -> Coin.of(amount));
 	}
 
 	@Test

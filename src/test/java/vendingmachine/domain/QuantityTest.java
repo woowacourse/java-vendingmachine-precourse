@@ -44,7 +44,7 @@ class QuantityTest {
 	public void testPlusEquals() {
 	    // given
 		Quantity quantityA = new Quantity(2);
-		Quantity quantityB = new Quantity(3);
+		Quantity quantityB = new Quantity(2);
 	    // when
 		boolean equals = quantityA.equals(quantityB);
 		// then
