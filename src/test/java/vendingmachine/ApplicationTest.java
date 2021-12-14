@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 import vendingmachine.domain.ChangesExceptionTest;
 import vendingmachine.domain.MoneyExceptionTest;
 import vendingmachine.domain.ProductExceptionTest;
+import vendingmachine.domain.PurchaseExceptionTest;
 import vendingmachine.domain.SuccessfulTest;
 
 import org.junit.jupiter.api.Test;
@@ -16,6 +17,7 @@ import static vendingmachine.domain.SuccessfulTest.*;
 import static vendingmachine.domain.ChangesExceptionTest.*;
 import static vendingmachine.domain.ProductExceptionTest.*;
 import static vendingmachine.domain.MoneyExceptionTest.*;
+import static vendingmachine.domain.PurchaseExceptionTest.*;
 
 import java.util.ArrayList;
 
@@ -75,6 +77,20 @@ class ApplicationTest extends NsTest {
             assertSimpleTest(
                 () -> { runException(testCase.moneyOfChanges, testCase.products, testCase.money);
                         assertThat(output()).contains(ERROR_MESSAGE, testCase.errorMessage); }
+            );
+        }
+    }
+
+    @Test
+    void 구매할_상품_예외_테스트() {
+        ArrayList<PurchaseExceptionTest> data = getPurchaseExceptionTest();
+        for (PurchaseExceptionTest testCase : data) {
+            if (testCase == null) {
+                continue;
+            }
+            assertSimpleTest(
+                () -> { runException(testCase.moneyOfChanges, testCase.products, testCase.money,testCase.selectedProduct);
+                        assertThat(output()).contains(testCase.errorMessage); }
             );
         }
     }
