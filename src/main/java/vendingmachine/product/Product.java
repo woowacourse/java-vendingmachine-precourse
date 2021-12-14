@@ -23,24 +23,15 @@ public class Product {
 	}
 
 	public boolean isSameName(String name) {
-		if (this.name.equals(name)) {
-			return true;
-		}
-		return false;
+		return this.name.equals(name);
 	}
 
 	public boolean isEnoughMoney(Money money) {
-		if (money.isEnough(price)) {
-			return true;
-		}
-		return false;
+		return money.isEnough(price);
 	}
 
 	public boolean isRemainStock() {
-		if (quantity == NONE) {
-			return false;
-		}
-		return true;
+		return quantity != NONE;
 	}
 
 	public int release() {

@@ -10,17 +10,11 @@ public class Money {
 	}
 
 	public boolean isLeft() {
-		if (amount > ZERO) {
-			return true;
-		}
-		return false;
+		return amount > ZERO;
 	}
 
 	public boolean isChangeable(int coinValue) {
-		if (amount >= coinValue) {
-			return true;
-		}
-		return false;
+		return amount >= coinValue;
 	}
 
 	public void change(int coinValue) {
@@ -32,10 +26,7 @@ public class Money {
 	}
 
 	public boolean isEnough(int productValue) {
-		if (amount >= productValue) {
-			return true;
-		}
-		return false;
+		return amount >= productValue;
 	}
 
 	public String toString() {
