@@ -29,6 +29,6 @@ public class UserMoney {
 	}
 
 	public int getNumOfChange(int amount) {
-		return this.money % amount;
+		return this.money / amount;
 	}
 }

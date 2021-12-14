@@ -31,7 +31,10 @@ public enum Coin {
 	}
 
 	public int toChange(UserMoney userMoney) {
-		int coinCount = userMoney.getNumOfChange(amount);
+		int coinCount = 0;
+		if (count > 0) {
+			coinCount = Math.min(count, userMoney.getNumOfChange(amount));
+		}
 		userMoney.subtract(coinCount * amount);
 		subCount(coinCount);
 		return coinCount;
