@@ -16,18 +16,15 @@ public class Validator {
 	}
 
 	public static void validateItemName(String itemName) {
-		// 상품명이 공백만 있을 경우
 		if (itemName.trim().equals("")) {
-			throw new IllegalArgumentException("[ERROR] 상품명으로 공백을 지정할 수 없습니다.");
+			throw new IllegalArgumentException(ErrorConst.ITEM_NAME_IS_NOT_WHITESPACE);
 		}
 	}
 
 	public static void validatePrice(int price) {
-		// 100원 이상인지 체크
 		if (isUnder100(price)) {
 			throw new IllegalArgumentException(ErrorConst.ITEM_PRICE_OVER_ONE_HUNDRED);
 		}
-		// 10원으로 나누어 떨어지는지 체크
 		if (isNotDividedByTen(price)) {
 			throw new IllegalArgumentException(ErrorConst.MONEY_IS_DIVIDED_BY_TEN);
 		}
