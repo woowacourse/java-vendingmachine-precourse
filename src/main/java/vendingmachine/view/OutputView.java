@@ -2,7 +2,7 @@ package vendingmachine.view;
 
 import java.util.HashMap;
 
-import vendingmachine.Coin;
+import vendingmachine.domain.Coin;
 
 public class OutputView {
 	private final static String COIN_NUMBER_MESSAGE = "\n자판기가 보유한 동전";

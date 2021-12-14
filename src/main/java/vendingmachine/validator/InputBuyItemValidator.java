@@ -2,7 +2,7 @@ package vendingmachine.validator;
 
 import java.util.HashMap;
 
-import vendingmachine.Item;
+import vendingmachine.domain.Item;
 
 public class InputBuyItemValidator {
 	private final static String EXIST_ERROR_MESSAGE = "[ERROR] 구매하려는 상품이 존재하지 않습니다.";

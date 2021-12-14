@@ -1,7 +1,10 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import java.util.HashMap;
 
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.Item;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.validator.InputAmountValidator;
 import vendingmachine.validator.InputBuyItemValidator;
 import vendingmachine.validator.InputItemValidator;
