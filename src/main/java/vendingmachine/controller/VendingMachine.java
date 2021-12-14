@@ -11,6 +11,13 @@ import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+// 사용자와 상호작용하면서 소통하는 역할
+// 자판기 보유 금액 입력받기
+// 상품명 가격 수량 입력받기
+// 투입 금액 입력받기
+// 구매할 상품명 입력받기
+// 잔돈 반환하기
+
 public class VendingMachine {
     private Amount amount;
     private CoinCombination vendingMachinCoinCombination;
@@ -19,17 +26,37 @@ public class VendingMachine {
     private Products products = new Products();
     private UserMoney userMoney;
     public VendingMachine() {
+        vendingMachinCoinCombination = new CoinCombination();
+        changeCoinCombination = new CoinCombination();
     }
 
-    private void setAmount() {
+    public void run() {
+        setVendingMachineAmount();
+        setVendingMachinCoinCombination();
+        OutputView.printCoinCount(vendingMachinCoinCombination);
+
+        setProduct();
+        OutputView.printProducts(products);
+
+        setUserMoney();
+        OutputView.printUserMoney(userMoney);
+
+        inputProductByUser();
+    }
+
+    private void setVendingMachineAmount() {
         try {
             String vendingmachineAmount = InputView.getVendingmachineAmount();
             AmountValidator.checkVendingMachineAmount(vendingmachineAmount);
             amount = new Amount(Integer.parseInt(vendingmachineAmount));
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
-            setAmount();
+            setVendingMachineAmount();
         }
+    }
+
+    private void setVendingMachinCoinCombination() {
+        CoinGenerator.calculatePossibleCoinCombination(vendingMachinCoinCombination, amount.getAmount());
     }
 
     private void setProduct() {
@@ -59,33 +86,17 @@ public class VendingMachine {
         }
     }
 
-    public void inputUserMoney() {
-        setUserMoney();
-        OutputView.printUserMoney(userMoney);
-    }
-
-    public void inputProducts() {
-        setProduct();
-        OutputView.printProducts(products);
-    }
-
-    public void inputAmount() {
-        setAmount();
-        vendingMachinCoinCombination = new CoinCombination();
-        CoinGenerator.calculatePossibleCoinCombination(vendingMachinCoinCombination, amount.getAmount());
-        OutputView.printCoinCount(vendingMachinCoinCombination);
-    }
-
-    public void inputProductByUser() {
+    private void inputProductByUser() {
         while (!isReturnChange()) {
             String productByUser = InputView.getProductByUser();
             Product pro = products.reduce(productByUser);
             userMoney.reduce(pro.getPrice());
             OutputView.printUserMoney(userMoney);
         }
+        returnChange();
     }
 
-    public void returnChange() {
+    private void returnChange() {
         if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
             int totalChange = userMoney.reduceMoney();
             changeCoinCombination = new CoinCombination();
