@@ -22,4 +22,8 @@ public class Juice {
     public String getName() {
         return name;
     }
+
+    public int MinPrice(int minPrice) {
+        return Math.min(this.price,minPrice);
+    }
 }

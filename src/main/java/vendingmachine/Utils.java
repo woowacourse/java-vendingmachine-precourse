@@ -30,9 +30,7 @@ public class Utils {
     public static int FindMinPrice(ArrayList<Juice> juiceIndex) {
         int minPrice = 2147483647;
         for (Juice juice : juiceIndex) {
-            if (minPrice > juice.getPrice()) {
-                minPrice = juice.getPrice();
-            }
+            minPrice = juice.MinPrice(minPrice);
         }
         return minPrice;
     }
