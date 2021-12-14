@@ -40,11 +40,13 @@ public class VendingMachine {
 	}
 
 	public void calculateChangeCoins() {
-		Changes changes = new Changes();
-		this.changeCoins = changes.returnChange(holdingCoins, inputMoney);
+		changeCoins = new LinkedHashMap<>();
+		for (Coin coin : Coin.values()) {
+			int count = Math.min(holdingCoins.get(coin), inputMoney / coin.getAmount());
+			changeCoins.put(coin, count);
+			inputMoney -= coin.getAmount() * count;
+		}
 	}
-
-
 
 	public boolean isAvailableKeepBuyingAboutPrice() {
 		boolean isAvailableKeepBuyingAboutPrice = false;
