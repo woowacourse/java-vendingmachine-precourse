@@ -5,4 +5,6 @@ public interface InputDataValidator {
     void validateSingleFormatSize(String data);
 
     void validateNumber(String data);
+
+    void validateData(String data);
 }

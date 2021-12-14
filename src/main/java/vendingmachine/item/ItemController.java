@@ -14,7 +14,7 @@ public class ItemController {
 
     private ItemController() {
         itemService = ItemService.getInstance();
-        inputDataValidator = new ItemDataValidator();
+        inputDataValidator = ItemDataValidator.getInstance();
     }
     private static class InnerInstanceClazz {
         private static final ItemController instance = new ItemController();
@@ -25,16 +25,11 @@ public class ItemController {
     }
 
     public void addItem(String inputItems) {
-        try{
-            String[] items = splitItemData(inputItems);
-            for(String item : items) {
-                item = item.replace("[", "").replace("]", "");
-                inputDataValidator.validateSingleFormatSize(item);
-                inputDataValidator.validateNumber(item);
-                itemService.addItem(ItemDto.fromInputString(item));
-            }
-        }catch(IllegalArgumentException e) {
-            throw new IllegalArgumentException(e.getMessage());
+        String[] items = splitItemData(inputItems);
+        for(String item : items) {
+            item = item.replace("[", "").replace("]", "");
+            inputDataValidator.validateData(item);
+            itemService.addItem(ItemDto.fromInputString(item));
         }
     }
 

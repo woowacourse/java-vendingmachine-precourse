@@ -10,6 +10,14 @@ public class ItemDataValidator implements InputDataValidator {
     public static final String SINGLE_ITEM_SEPARATE_UNIT = ",";
     private static final String NUMBER_REGEX = "^[0-9]*$";
 
+    private static class InnerInstanceClazz {
+        private static final ItemDataValidator instance = new ItemDataValidator();
+    }
+
+    public static ItemDataValidator getInstance() {
+        return InnerInstanceClazz.instance;
+    }
+
     @Override
     public void validateSingleFormatSize(String data) {
         String[] separatedData = data.split(SINGLE_ITEM_SEPARATE_UNIT);
@@ -28,5 +36,11 @@ public class ItemDataValidator implements InputDataValidator {
         if(!Pattern.compile(NUMBER_REGEX).matcher(separatedData[2]).find()){
             throw new IllegalArgumentException(ItemErrorMessage.NUMBER_FORMAT);
         }
+    }
+
+    @Override
+    public void validateData(String data) {
+        validateSingleFormatSize(data);
+        validateNumber(data);
     }
 }

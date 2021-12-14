@@ -1,13 +1,17 @@
 package vendingmachine.customer;
 
 import vendingmachine.exception.NotEnoughMoneyException;
+import vendingmachine.utils.validator.InputDataValidator;
+import vendingmachine.utils.validator.MoneyDataValidator;
 
 public class CustomerController {
 
     private final CustomerService customerService;
+    private final InputDataValidator inputDataValidator;
 
     private CustomerController(){
         customerService = CustomerService.getInstance();
+        inputDataValidator = MoneyDataValidator.getInstance();
     }
 
     private static class InnerInstanceClazz {
@@ -18,8 +22,9 @@ public class CustomerController {
         return InnerInstanceClazz.instance;
     }
 
-    public void createCustomer(int initialAmount) {
-        customerService.createCustomer(initialAmount);
+    public void createCustomer(String initialAmount) {
+        inputDataValidator.validateData(initialAmount);
+        customerService.createCustomer(Integer.parseInt(initialAmount));
     }
 
     public void purchaseItem(int purchaseAmount) {
