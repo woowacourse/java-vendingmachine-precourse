@@ -40,14 +40,16 @@ public class ProductValidator {
     }
 
     private void validateBrackets(String[] products) {
-        if (!products[Condition.INDEX_0.getNumber()].startsWith(Input.OPEN_BRACKET.getText())) {
-            print(Error.PRODUCT_BRACKETS_ERROR_MESSAGE.getError());
-            throw new IllegalArgumentException();
-        }
+        for (String product: products) {
+            if (!product.startsWith(Input.OPEN_BRACKET.getText())) {
+                print(Error.PRODUCT_BRACKETS_ERROR_MESSAGE.getError());
+                throw new IllegalArgumentException();
+            }
 
-        if (!products[products.length - Condition.LENGTH_1.getNumber()].endsWith(Input.CLOSE_BRACKET.getText())) {
-            print(Error.PRODUCT_BRACKETS_ERROR_MESSAGE.getError());
-            throw new IllegalArgumentException();
+            if (!product.endsWith(Input.CLOSE_BRACKET.getText())) {
+                print(Error.PRODUCT_BRACKETS_ERROR_MESSAGE.getError());
+                throw new IllegalArgumentException();
+            }
         }
     }
 
