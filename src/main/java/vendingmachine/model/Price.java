@@ -10,7 +10,7 @@ public class Price {
     private final int price;
 
     public Price(final int price) {
-        validatePrice(price);
+        isFollowingPriceRule(price);
         this.price = price;
     }
 
@@ -20,17 +20,14 @@ public class Price {
 
     public int subtractPrice(int purchasingCost) {
         purchasingCost = purchasingCost - this.price;
+
         return purchasingCost;
     }
 
-    protected void validatePrice(final int price) {
-        if (!isFollowingPriceRule(price)) {
+    protected void isFollowingPriceRule(final int price) {
+        if (!(price >= BASED_PRICE) && ((price % PRICE_UNIT) == 0)) {
             throw new IllegalArgumentException(ExceptionMessages.ERROR_MESSAGE_PRODUCT_PRICE_CONDITION.getErrorMessage());
         }
-    }
-
-    protected boolean isFollowingPriceRule(final int price) {
-        return (price >= BASED_PRICE) && ((price % PRICE_UNIT) == 0);
     }
 
     public boolean isCheaper(final int cheapestProductPrice) {
