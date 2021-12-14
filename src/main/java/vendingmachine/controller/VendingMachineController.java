@@ -15,16 +15,16 @@ public class VendingMachineController {
 	private static final OutputView outputView = new OutputView();
 	private static final CoinController coinController = new CoinController(inputView, outputView);
 	private static final ItemController itemcontroller = new ItemController(inputView, outputView);
-	private Money money;
+	private static final MoneyController moneyController = new MoneyController(inputView, outputView);
 
 	public void run() {
 
 		coinController.setupHoldingCoins();
 		itemcontroller.setupItems();
-		this.money = giveMoney();
-		sellItem(money.getMoney());
+		moneyController.setupMoney();
+		sellItem();
 
-		outputView.printMoney(money.getMoney());
+		outputView.printMoney(moneyController.getCurrentMoney());
 		Map<Coin, Integer> changes = getChanges();
 		outputView.printChanges(changes);
 
@@ -40,14 +40,14 @@ public class VendingMachineController {
 		}
 	}
 
-	private void sellItem(final int moneyAmount) {
-		while (this.money.getMoney() >= itemcontroller.getLeastItemCost()
+	private void sellItem() {
+		while (moneyController.getCurrentMoney() >= itemcontroller.getLeastItemCost()
 			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
-				outputView.printMoney(this.money.getMoney());
+				outputView.printMoney(moneyController.getCurrentMoney());
 				outputView.printItemPerChaseRequest();
-				int targetItemCost = itemcontroller.update(moneyAmount);
-				this.money.pay(targetItemCost);
+				int targetItemCost = itemcontroller.update(moneyController.getCurrentMoney());
+				moneyController.update(targetItemCost);
 
 			} catch (IllegalArgumentException e) {
 				outputView.printError(e.getMessage());
@@ -59,11 +59,11 @@ public class VendingMachineController {
 		Map<Coin, Integer> changes = new LinkedHashMap<>();
 		Map<Coin, Integer> restCoins = coinController.getRestCoins();
 		for (Map.Entry<Coin, Integer> coin : restCoins.entrySet()) {
-			final int number = coinController.getAvailableChangeNumber(coin.getKey().getAmount(), coin.getValue(), money.getMoney());
+			final int number = coinController.getAvailableChangeNumber(coin.getKey().getAmount(), coin.getValue(), moneyController.getCurrentMoney());
 			final boolean isUpperThanZero = 0 < number;
 			if (isUpperThanZero) {
 				changes.put(coin.getKey(), number);
-				money.pay(coin.getKey().getAmount() * number);
+				moneyController.update(coin.getKey().getAmount() * number);
 			}
 		}
 		return changes;
