@@ -17,14 +17,9 @@ public class InputView {
 
 	public static String writeProductsInfo() {
 		OutputView.askProductInfo();
-		try {
-			String inputProductsInfo = Console.readLine();
-			ProductException.validateInputProductsInfo(inputProductsInfo);
-			return inputProductsInfo;
-		} catch (IllegalArgumentException IAE) {
-			OutputView.printError(IAE);
-			return writeProductsInfo();
-		}
+		String inputProductsInfo = Console.readLine();
+		ProductException.validateInputProductsInfo(inputProductsInfo);
+		return inputProductsInfo;
 	}
 
 	public static int writeInsertMoney() {
