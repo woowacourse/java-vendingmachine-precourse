@@ -3,7 +3,7 @@ package controller;
 import java.util.List;
 
 import camp.nextstep.edu.missionutils.Console;
-import utils.validator.ProductNameValidator;
+import utils.validator.ProductNameToBuyValidator;
 import utils.validator.ChangeValidator;
 import utils.validator.InsertedMoneyValidator;
 import utils.validator.products.ProductsValidator;
@@ -47,7 +47,7 @@ public class InputController {
 	public static String inputProductNameToBuy() {
 		while (INPUT_ERROR) {
 			try {
-				return ProductNameValidator.checkValidProductName(Console.readLine());
+				return ProductNameToBuyValidator.checkValidProductNameToBuy(Console.readLine());
 			} catch (IllegalArgumentException error) {
 				System.out.println(error.getMessage());
 			}
