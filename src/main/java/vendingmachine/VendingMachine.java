@@ -51,17 +51,14 @@ public class VendingMachine {
 		ArrayList<Integer> coins = new ArrayList<>();
 		for (Coin c: Coin.values()) {
 			int quotient = inputCoin / c.getAmount();
-			// 남은 동전 개수가 더 적다면 남은 동전 개수만큼 잔돈 반환
 			if (quotient > c.getCount()) {
 				inputCoin -= c.getAmount() * c.getCount();
 				coins.add(c.getCount());
 				continue;
 			}
-			if (quotient <= c.getCount()) {
-				inputCoin -= c.getAmount() * quotient;
-				coins.add(quotient);
-				continue;
-			}
+			inputCoin -= c.getAmount() * quotient;
+			coins.add(quotient);
+			continue;
 		}
 		return coins;
 	}
