@@ -9,4 +9,8 @@ public class Error {
     public static final String ERROR_INPUT_INFO_SPLITTER = "[ERROR] " + "[상품명, 가격, 수량]의 형태로 입력해주세요";
     public static final String ERROR_INPUT_NAME = "[ERROR] 이름을 꼭 써주세요" ;
     public static final String ERROR_INPUT_INT_BIGGER_0 = "[ERROR] 0 이상의 수를 입력해주세요";
+    public static final String ERROR_INPUT_INT_BIGGER_100 = "[ERROR] 100 이상의 수를 입력해주세요";
+    public static final String ERROR_INPUT_INT_MULTIPLE_10 = "[ERROR] 10의 배수를 입력해주세요";
+    public static final String ERROR_INPUT_IS_PRODUCT = "[ERROR] 해당 물건이 없습니다";
+    public static final String ERROR_INPUT_BUY_PRODUCT = "[ERROR] 해당 물건을 살 돈이 없습니다";
 }

@@ -4,6 +4,9 @@ import static vendingmachine.constant.Constant.*;
 import static vendingmachine.constant.Error.*;
 import static vendingmachine.exception.PriceValidator.*;
 
+import vendingmachine.machine.Machine;
+import vendingmachine.product.Product;
+
 public class ProductValidator {
     public static void validateSplitProduct(String input){
         if (input.split(PRODUCT_SPLITTER).length <=0){
@@ -37,4 +40,17 @@ public class ProductValidator {
         }
     }
 
+
+    public static void validateIsIn(Machine machine,String product){
+        if (!machine.isIn(product)){
+            throw new IllegalArgumentException(ERROR_INPUT_IS_PRODUCT);
+        }
+    }
+
+    public static void validateCanBuy(Machine machine, String productName){
+        Product product = machine.findProduct(productName);
+        if (product.getPrice() > machine.getMoney()){
+            throw new IllegalArgumentException(ERROR_INPUT_BUY_PRODUCT);
+        }
+    }
 }

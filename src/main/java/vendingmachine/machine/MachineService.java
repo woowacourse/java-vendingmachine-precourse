@@ -6,8 +6,10 @@ import vendingmachine.product.Product;
 import vendingmachine.product.ProductService;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static vendingmachine.constant.Constant.PRODUCT_SPLITTER;
 
@@ -36,4 +38,13 @@ public class MachineService {
     public void insertMoney(Machine machine, int money){
         machine.insertMoney(money);
     }
+
+    public void buyProduct(Machine machine, String productName){
+        machine.buyProduct(productName);
+    }
+
+    public void giveChanges(Machine machine){
+        machine.returnMoney();
+    }
+
 }

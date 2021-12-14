@@ -1,9 +1,9 @@
 package vendingmachine.product;
 
 public class Product {
-    private final String name;
-    private final int price;
-    private final int stock;
+    private String name;
+    private int price;
+    private int stock;
 
     public Product(String name,int price,int stock){
         this.name=name;
@@ -23,4 +23,11 @@ public class Product {
         return stock;
     }
 
+    public boolean isSame(String productName){
+        return productName.equals(name);
+    }
+
+    public void buy(){
+        stock-=1;
+    }
 }
