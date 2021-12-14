@@ -6,13 +6,13 @@ public class VendingMachine {
 
 	private final CoinCase coinCase;
 	private final List<Product> products;
-	private int remainInsertMoney;
+	private static int remainInsertMoney;
 	private static final int INITIAL_VALUE = 0;
 
 	public VendingMachine(CoinCase coinCase, List<Product> products, int insertMoney) {
 		this.coinCase = coinCase;
 		this.products = products;
-		this.remainInsertMoney = insertMoney;
+		remainInsertMoney = insertMoney;
 	}
 
 	public int getRemainInsertMoney() {
@@ -24,14 +24,12 @@ public class VendingMachine {
 	}
 
 	public void readyToSellProduct(String selectedProduct) {
-		for (Product product : products) {
-			if (product.getName().equals(selectedProduct)) {
-				sellProduct(product);
-			}
-		}
+		products.stream()
+			.filter(product -> product.getName().equals(selectedProduct))
+			.forEach(VendingMachine::sellProduct);
 	}
 
-	private void sellProduct(Product product) {
+	private static void sellProduct(Product product) {
 		if (!product.isSoldOut()) {
 			product.sellProduct();
 			useMoneyToBuy(product);
@@ -67,7 +65,7 @@ public class VendingMachine {
 			.anyMatch(product -> product.getPrice() <= remainInsertMoney);
 	}
 
-	private void useMoneyToBuy(Product product) {
+	private static void useMoneyToBuy(Product product) {
 		remainInsertMoney -= product.getPrice();
 	}
 }
