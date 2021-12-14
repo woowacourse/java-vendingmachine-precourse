@@ -25,6 +25,7 @@ public class ChangeSystem {
         this.remainingInputMoney = remainingInputMoney;
         Map<Integer, Integer> returnedChanges = new LinkedHashMap<>();
         change(returnedChanges);
+        returnedChanges = excludeZeroCoin(returnedChanges);
         return returnedChanges;
     }
 
@@ -44,5 +45,13 @@ public class ChangeSystem {
 
     private void decreaseRemainingInputMoney(final int decreasingAmount) {
         remainingInputMoney -= decreasingAmount;
+    }
+
+    private Map<Integer, Integer> excludeZeroCoin(final Map<Integer, Integer> returnedChanges) {
+        Map<Integer, Integer> zeroExcludedCoins = new LinkedHashMap<>();
+        returnedChanges.keySet().stream()
+                .filter(coin -> returnedChanges.get(coin) != 0)
+                .forEach(coin -> zeroExcludedCoins.put(coin, returnedChanges.get(coin)));
+        return zeroExcludedCoins;
     }
 }
