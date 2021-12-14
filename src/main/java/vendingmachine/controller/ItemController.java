@@ -47,28 +47,28 @@ public class ItemController {
 
 	private List<String> enterItemList() {
 		try {
-			outputView.printItemsRequest();
-			return inputView.scanItemDetailList();
+			outputView.printEnterItemListRequest();
+			return inputView.scanItemList();
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
 			return enterItemList();
 		}
 	}
 
-	private Items makeItems(final List<String> itemDetails) {
+	private Items makeItems(final List<String> itemList) {
 		List<Item> items = new ArrayList<>();
-		for (String itemDetail : itemDetails) {
-			if (!(itemDetail.startsWith(PREFIX) && itemDetail.endsWith(SUFFIX))) {
+		for (String details : itemList) {
+			if (!(details.startsWith(PREFIX) && details.endsWith(SUFFIX))) {
 				throw new IllegalArgumentException(INVALID_PREFIX_AND_SUFFIX_ERROR);
 			}
-			items.add(new Item(extractValueFromItemDetail(itemDetail)));
+			items.add(new Item(extractValueFromItemDetails(details)));
 		}
 		return new Items(items);
 	}
 
-	private List<String> extractValueFromItemDetail(final String itemDetail) {
-		String itemDetailBracketRemoved = itemDetail.substring(itemDetail.indexOf(PREFIX) + 1,
-			itemDetail.lastIndexOf(SUFFIX));
+	private List<String> extractValueFromItemDetails(final String details) {
+		String itemDetailBracketRemoved = details.substring(details.indexOf(PREFIX) + 1,
+			details.lastIndexOf(SUFFIX));
 		return Splitter.on(DELIMITER_COMMA).trimResults().omitEmptyStrings().splitToList(itemDetailBracketRemoved);
 	}
 

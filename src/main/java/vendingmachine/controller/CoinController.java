@@ -21,14 +21,14 @@ public class CoinController {
 
 	public void setupHoldingCoins() {
 		this.coins = initializeCoins();
-		outputView.printHoldingCoinStatus(coins.findAll());
+		outputView.printHoldingCoins(coins.findAll());
 	}
 
 	public Coins initializeCoins() {
 		try {
-			outputView.printHoldingCashRequest();
-			int price = inputView.scanPrice();
-			return new Coins(makeCoins(price));
+			outputView.printHoldingAmountRequest();
+			int amount = inputView.scanAmount();
+			return new Coins(makeCoins(amount));
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
 			return initializeCoins();

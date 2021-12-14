@@ -32,8 +32,8 @@ public class VendingMachineController {
 
 	private Money giveMoney() {
 		try {
-			outputView.printInsertingMoneyRequest();
-			return new Money(inputView.scanPrice());
+			outputView.printInsertMoneyRequest();
+			return new Money(inputView.scanAmount());
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
 			return giveMoney();
@@ -45,7 +45,7 @@ public class VendingMachineController {
 			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
 				outputView.printMoney(moneyController.getCurrentMoney());
-				outputView.printItemPerChaseRequest();
+				outputView.printBuyItemRequest();
 				int targetItemCost = itemcontroller.sellItem(moneyController.getCurrentMoney());
 				moneyController.reduceMoney(targetItemCost);
 

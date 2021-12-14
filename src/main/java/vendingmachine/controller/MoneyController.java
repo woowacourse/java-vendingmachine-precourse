@@ -20,8 +20,8 @@ public class MoneyController {
 
 	private Money initializeMoney() {
 		try {
-			outputView.printInsertingMoneyRequest();
-			return new Money(inputView.scanPrice());
+			outputView.printInsertMoneyRequest();
+			return new Money(inputView.scanAmount());
 		} catch (IllegalArgumentException e) {
 			outputView.printError(e.getMessage());
 			return initializeMoney();

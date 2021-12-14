@@ -27,7 +27,7 @@ public class OutputView {
 		System.out.println(error);
 	}
 
-	public void printHoldingCashRequest() {
+	public void printHoldingAmountRequest() {
 		System.out.println(HOLDING_CASH_REQUEST_TEXT);
 	}
 
@@ -35,7 +35,7 @@ public class OutputView {
 		System.out.println();
 	}
 
-	public void printHoldingCoinStatus(final Map<Coin, Integer> coins) {
+	public void printHoldingCoins(final Map<Coin, Integer> coins) {
 		printNewLine();
 		System.out.println(HOLDING_COIN_TEXT);
 		for (Map.Entry<Coin, Integer> coin : coins.entrySet()) {
@@ -56,17 +56,17 @@ public class OutputView {
 		}
 	}
 
-	public void printItemsRequest() {
+	public void printEnterItemListRequest() {
 		printNewLine();
 		System.out.println(REGISTER_ITEM_REQUEST_TEXT);
 	}
 
-	public void printInsertingMoneyRequest() {
+	public void printInsertMoneyRequest() {
 		printNewLine();
 		System.out.println(INSERTING_MONEY_REQUEST_TEXT);
 	}
 
-	public void printItemPerChaseRequest() {
+	public void printBuyItemRequest() {
 		System.out.println(PERCHASE_ITEM_REQUEST_TEXT);
 	}
 

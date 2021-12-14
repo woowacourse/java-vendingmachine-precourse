@@ -14,7 +14,7 @@ public class InputView {
 	private static final String NEGATIVE_DIGIT_ERROR = ERROR + "입력 금액은 0 이상의 숫자여야 합니다.";
 	private static final String EMPTY_ITEMS_ERROR = ERROR + "상품 목록은 비어 있을 수 없습니다.";
 
-	public int scanPrice() {
+	public int scanAmount() {
 		try {
 			int price = Integer.parseInt(Console.readLine());
 			if (price < AMOUNT_LOWER_BOUND) {
@@ -26,7 +26,7 @@ public class InputView {
 		}
 	}
 
-	public List<String> scanItemDetailList() {
+	public List<String> scanItemList() {
 		List<String> items = Splitter.on(SEMICOLON)
 			.trimResults()
 			.omitEmptyStrings()
