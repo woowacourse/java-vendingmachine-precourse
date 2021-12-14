@@ -11,19 +11,12 @@ public class Item {
         this.price = price;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getPrice() {
         return price;
     }
 
-    public boolean isMoreExpensiveThanMoneyLeft(int moneyAvailable) {
-        if (price > moneyAvailable) {
-            return true;
-        }
-        return false;
+    public boolean isRightName(String name) {
+        return this.name.equals(name);
     }
 
     @Override
@@ -31,11 +24,11 @@ public class Item {
         if (this == o) return true;
         if (!(o instanceof Item)) return false;
         Item item = (Item) o;
-        return price == item.price && name.equals(item.name);
+        return name.equals(item.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, price);
+        return Objects.hash(name);
     }
 }

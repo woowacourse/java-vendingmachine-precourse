@@ -26,7 +26,7 @@ public enum Coin {
 
     public static Optional<Coin> findByAmount(int amount) {
         return Coin.getAlCoinUnitsFromLargestToSmallest().stream()
-                .filter(coin -> coin.amount == amount)
+                .filter(coin -> coin.getAmount() == amount)
                 .findAny();
     }
 
@@ -35,10 +35,10 @@ public enum Coin {
     }
 
     public int getAmount(int numberOfCoin) {
-        return amount * numberOfCoin;
+        return getAmount() * numberOfCoin;
     }
 
     public boolean hasMoreAmount(int amountToCompare) {
-        return this.getAmount() > amountToCompare;
+        return getAmount() > amountToCompare;
     }
 }

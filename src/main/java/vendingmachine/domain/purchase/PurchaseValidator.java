@@ -39,7 +39,7 @@ public class PurchaseValidator {
     }
 
     private void validateInStock(Item item) {
-        if(!vendingMachine.isInStock(item)) {
+        if (!vendingMachine.isInStock(item)) {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_OUT_OF_STOCK);
         }
     }

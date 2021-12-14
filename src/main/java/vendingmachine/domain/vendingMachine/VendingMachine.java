@@ -17,9 +17,8 @@ public class VendingMachine {
         return this.coinBalance;
     }
 
-    public Items storeItems(Items items) {
+    public void storeItems(Items items) {
         this.items = items;
-        return this.items;
     }
 
     public boolean isAllItemsSoldOut() {

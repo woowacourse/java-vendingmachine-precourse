@@ -49,7 +49,7 @@ public class Coins {
 
     public int getAmount() {
         return Coin.getAlCoinUnitsFromLargestToSmallest().stream()
-                .mapToInt(coinUnit-> coinUnit.getAmount(this.count(coinUnit)))
+                .mapToInt(coinUnit -> coinUnit.getAmount(this.count(coinUnit)))
                 .sum();
     }
 

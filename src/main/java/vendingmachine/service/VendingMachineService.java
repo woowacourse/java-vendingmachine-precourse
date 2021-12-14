@@ -3,7 +3,6 @@ package vendingmachine.service;
 import vendingmachine.domain.coin.CoinExchangeMachine;
 import vendingmachine.domain.coin.Coins;
 import vendingmachine.domain.item.ItemFactory;
-import vendingmachine.domain.item.Items;
 import vendingmachine.domain.vendingMachine.VendingMachine;
 import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 

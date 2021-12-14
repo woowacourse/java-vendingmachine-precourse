@@ -1,9 +1,9 @@
 package vendingmachine;
 
 import vendingmachine.controller.PurchaseController;
-import vendingmachine.service.PurchaseService;
-import vendingmachine.domain.vendingMachine.VendingMachine;
 import vendingmachine.controller.VendingMachineController;
+import vendingmachine.domain.vendingMachine.VendingMachine;
+import vendingmachine.service.PurchaseService;
 import vendingmachine.service.VendingMachineService;
 
 public class Application {

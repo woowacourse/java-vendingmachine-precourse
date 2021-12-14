@@ -28,7 +28,7 @@ class ItemsInventoryRequestTest {
     }
 
     @Test
-    void 상품이_여러개일_때_입력된_문자열을_ItemInventoryList로_변환() {
+    void 상품이_여러_개일_때_입력된_문자열을_ItemInventoryList로_변환() {
         String item1Name = "사이다";
         int item1Price = 1000;
         int item1Quantity = 10;

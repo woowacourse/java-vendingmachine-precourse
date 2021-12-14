@@ -14,13 +14,9 @@ public class Items {
         items.computeIfAbsent(itemToAdd, numberOfItem -> numberOfItemsToAdd);
     }
 
-    public int countItems(Item item) {
-        return items.getOrDefault(item, 0);
-    }
-
     public Optional<Item> findByItemName(String name) {
         return items.keySet().stream()
-                .filter(item -> item.getName().equals(name)).findAny();
+                .filter(item -> item.isRightName(name)).findAny();
     }
 
     public boolean isInStock(Item item) {
@@ -43,6 +39,10 @@ public class Items {
             return false;
         }
         return true;
+    }
+
+    private int countItems(Item item) {
+        return items.getOrDefault(item, 0);
     }
 
     private List<Item> findAllInStock() {

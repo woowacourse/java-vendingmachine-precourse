@@ -19,6 +19,6 @@ class ItemFactoryTest {
         ItemFactory itemFactory = new ItemFactory();
         Items items = itemFactory.create(itemsInventoryInfo);
 
-        assertThat(items.findByItemName(itemName).get().getName()).isEqualTo(itemName);
+        assertThat(items.findByItemName(itemName).get().isRightName(itemName)).isTrue();
     }
 }

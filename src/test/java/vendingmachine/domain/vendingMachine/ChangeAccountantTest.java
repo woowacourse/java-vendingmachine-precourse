@@ -58,8 +58,8 @@ class ChangeAccountantTest {
         coins.add(Coin.COIN_500);
         int amountToChange = 1050;
 
-        changeAccountant.change(amountToChange, coins);
+        Coins change = changeAccountant.change(amountToChange, coins);
 
-        assertThat(changeAccountant.getRestAfterCalculation()).isEqualTo(amountToChange - coins.getAmount());
+        assertThat(changeAccountant.getRestAfterCalculation()).isEqualTo(amountToChange - change.getAmount());
     }
 }
