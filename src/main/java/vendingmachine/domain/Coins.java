@@ -3,36 +3,41 @@ package vendingmachine.domain;
 import static vendingmachine.domain.Coin.*;
 
 import java.util.EnumMap;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Coins {
 	private static final int ZERO = 0;
+	private static final int ONE = 1;
 	private static final int MIN_COIN = 10;
 
 	private final EnumMap<Coin, Integer> coinRepository;
 
 	public Coins(int changes) {
 		coinRepository = new EnumMap<>(Coin.class);
-		putCoins(changes);
+		createCoins(changes);
 	}
 
-	private void putCoins(int changes) {
+	private void createCoins(int changes) {
 		for (Coin coin : values()) {
-			int count = createCoin(changes, coin.getAmount());
-			changes -= coin.getAmount() * count;
-			coinRepository.put(coin, count);
+			coinRepository.put(coin, ZERO);
+		}
+		List<Integer> coinList = Coin.amountValues();
+		while (changes > ZERO) {
+			int randomCoin = getRandomCoin(coinList, changes);
+			changes -= randomCoin;
+			Coin coin = valueOf(randomCoin);
+			coinRepository.put(coin, getCoinCount(coin) + ONE);
 		}
 	}
 
-	private int createCoin(int changes, int value) {
-		if (value == MIN_COIN) {
-			return changes / value;
+	private int getRandomCoin(List<Integer> coinList, int moneyLeft) {
+		int randomCoin = Randoms.pickNumberInList(coinList);
+		if (moneyLeft >= randomCoin) {
+			return randomCoin;
 		}
-		return Randoms.pickNumberInList(
-			IntStream.rangeClosed(ZERO, changes / value).boxed().collect(Collectors.toList()));
+		return MIN_COIN;
 	}
 
 	public int getCoinCount(Coin coin) {
