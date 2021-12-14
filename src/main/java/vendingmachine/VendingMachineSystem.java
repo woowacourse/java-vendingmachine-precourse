@@ -27,8 +27,8 @@ public class VendingMachineSystem {
         initializeVendingMachineCount();
         printVendingMachineCount();
 
-        //TODO: 상품 입력
-        //TODO: 투입 금액 입력
+        initializeItem();
+        initializeCustomerInitialAmount();
         //TODO: 구매 유도
         //TODO: 잔돈 반환
     }
@@ -48,6 +48,20 @@ public class VendingMachineSystem {
     private void printVendingMachineCount() {
         coinController.printAllCoin();
         System.out.println();
+    }
+
+    private void initializeItem() {
+        System.out.println(OutputMessage.ITEM_INPUT);
+        String inputItems = Console.readLine();
+        itemController.addItem(inputItems);
+        //TODO: 예외 처리
+        System.out.println();
+    }
+
+    private void initializeCustomerInitialAmount() {
+        System.out.println(OutputMessage.CUSTOMER_BALANCE_INPUT);
+        String initialAmount = Console.readLine();
+        customerController.createCustomer(initialAmount);
     }
 
     private void purchaseItem(String itemName) {
