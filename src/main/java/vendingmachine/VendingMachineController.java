@@ -2,33 +2,55 @@ package vendingmachine;
 
 public class VendingMachineController {
     public static void run() {
-        HoldingCoins holdingCoins = new HoldingCoins(getHoldingAmount());
+        HoldingCoins holdingCoins = getHoldingCoins();
         OutputView.printHoldingCoins(holdingCoins);
 
-        String productsInfo = getProductsInfo();
-        VendingMachine vendingMachine = new VendingMachine(productsInfo, holdingCoins);
+        VendingMachine vendingMachine = getVendingMachine(holdingCoins);
         vendingMachine.insertMoney(getInputAmount());
 
         while (vendingMachine.isPurchasable()) {
             OutputView.printInputAmount(vendingMachine);
-            vendingMachine.buy(getDemandProductName());
+            purchaseProduct(vendingMachine);
         }
 
         OutputView.printInputAmount(vendingMachine);
         OutputView.printChanges(vendingMachine);
     }
 
-    private static String getDemandProductName() {
-        String productName;
-
+    private static void purchaseProduct(VendingMachine vendingMachine) {
         try {
-            productName = InputView.getDemandProductName();
+            vendingMachine.buy(InputView.getDemandProductName());
         } catch (IllegalArgumentException e) {
             OutputView.printError(e);
-            productName = getDemandProductName();
+            purchaseProduct(vendingMachine);
+        }
+    }
+
+    private static VendingMachine getVendingMachine(HoldingCoins holdingCoins) {
+        VendingMachine vendingMachine;
+
+        try {
+            String productsInfo = InputView.getProductsInfo();
+            vendingMachine = new VendingMachine(productsInfo, holdingCoins);
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            vendingMachine = getVendingMachine(holdingCoins);
         }
 
-        return productName;
+        return vendingMachine;
+    }
+
+    private static HoldingCoins getHoldingCoins() {
+        HoldingCoins holdingCoins;
+
+        try {
+            holdingCoins = new HoldingCoins(InputView.getHoldingAmount());
+        } catch (IllegalArgumentException e) {
+            OutputView.printError(e);
+            holdingCoins = getHoldingCoins();
+        }
+
+        return holdingCoins;
     }
 
     private static int getInputAmount() {
@@ -44,29 +66,4 @@ public class VendingMachineController {
         return inputAmount;
     }
 
-    private static String getProductsInfo() {
-        String productsInfo;
-
-        try {
-            productsInfo = InputView.getProductsInfo();
-        } catch (IllegalArgumentException e) {
-            OutputView.printError(e);
-            productsInfo = getProductsInfo();
-        }
-
-        return productsInfo;
-    }
-
-    private static int getHoldingAmount() {
-        int holdingAmount;
-
-        try {
-            holdingAmount = InputView.getHoldingAmount();
-        } catch (IllegalArgumentException e) {
-            OutputView.printError(e);
-            holdingAmount = getHoldingAmount();
-        }
-
-        return holdingAmount;
-    }
 }
