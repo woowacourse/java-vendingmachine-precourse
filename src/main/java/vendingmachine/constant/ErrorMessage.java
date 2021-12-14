@@ -3,7 +3,6 @@ package vendingmachine.constant;
 public class ErrorMessage {
 	public static final String NUMBER_EMPTY_MSG = "[ERROR] 금액이 입력되지 않았습니다!";
 	public static final String NUMBER_NOT_INTEGER_MSG = "[ERROR] 숫자가 아닌 값이 입력되었습니다!";
-	public static final String NUMBER_NEGATIVE_MSG = "[ERROR] 음수가 입력되었습니다!";
 	public static final String NUMBER_NOT_DIVIDE_MINIMUM_COIN_AMOUNT_MSG = "[ERROR] 가장 작은 동전보다 작은 금액이 있습니다!";
 	public static final String PRODUCT_QUANTITY_NEGATIVE_MSG = "[ERROR] 상품의 수량이 음수입니다!";
 	public static final String PRODUCT_QUANTITY_NOT_INTEGER_MSG = "[ERROR] 상품의 수량이 숫자가 아닙니다!";

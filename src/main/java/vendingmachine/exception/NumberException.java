@@ -8,7 +8,6 @@ public class NumberException {
 	public static void checkNumberException(String number) {
 		checkNumberEmpty(number);
 		checkNumberIsInteger(number);
-		checkNegativeNumber(number);
 		checkDivisionMinimumCoinAmount(number);
 
 	}
@@ -22,12 +21,6 @@ public class NumberException {
 	private static void checkNumberIsInteger(String number) {
 		if (!number.chars().allMatch(Character::isDigit)) {
 			throw new IllegalArgumentException(NUMBER_NOT_INTEGER_MSG);
-		}
-	}
-
-	private static void checkNegativeNumber(String number) {
-		if (Integer.parseInt(number) < DISCRIMINATION_NEGATIVE_NUMBER) {
-			throw new IllegalArgumentException(NUMBER_NEGATIVE_MSG);
 		}
 	}
 
