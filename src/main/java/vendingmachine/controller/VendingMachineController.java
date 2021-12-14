@@ -3,8 +3,8 @@ package vendingmachine.controller;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import vendingmachine.model.Coin;
-import vendingmachine.model.VendingMachine;
+import vendingmachine.model.domain.Coin;
+import vendingmachine.model.domain.VendingMachine;
 import vendingmachine.util.Utils;
 import vendingmachine.validator.Validator;
 import vendingmachine.view.InputView;
@@ -18,7 +18,7 @@ public class VendingMachineController {
 	OutputView outputView = new OutputView();
 	Validator validator = new Validator();
 
-	public void runMachine() {
+	public void runMachine() { //어플리케이션의 전체적인 실행 흐름 제어
 		String machineMoney = enterMachineMoney();
 		int convertedMachineMoney = Utils.moneyConverter(machineMoney);
 		VendingMachine vendingMachine = new VendingMachine();

@@ -2,7 +2,7 @@ package vendingmachine.view;
 
 import java.util.Map;
 
-import vendingmachine.model.Coin;
+import vendingmachine.model.domain.Coin;
 
 public class OutputView {
 	private static final String INSERT_MONEY = "투입 금액: %d원";

@@ -2,7 +2,7 @@ package vendingmachine.validator;
 
 import java.util.List;
 
-import vendingmachine.model.Product;
+import vendingmachine.model.domain.Product;
 import vendingmachine.util.Utils;
 
 public class Validator {

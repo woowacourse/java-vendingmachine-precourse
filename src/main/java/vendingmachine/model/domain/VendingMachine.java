@@ -1,4 +1,4 @@
-package vendingmachine.model;
+package vendingmachine.model.domain;
 
 import java.util.Arrays;
 import java.util.Comparator;
@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.model.domain.Coin;
+import vendingmachine.model.domain.Product;
 import vendingmachine.util.Constant;
 import vendingmachine.validator.Validator;
 

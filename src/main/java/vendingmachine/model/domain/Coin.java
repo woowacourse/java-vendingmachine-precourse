@@ -1,4 +1,4 @@
-package vendingmachine.model;
+package vendingmachine.model.domain;
 
 import java.util.Arrays;
 import java.util.Comparator;

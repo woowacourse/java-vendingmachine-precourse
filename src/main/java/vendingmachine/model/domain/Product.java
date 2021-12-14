@@ -1,6 +1,4 @@
-package vendingmachine.model;
-
-import java.util.regex.Pattern;
+package vendingmachine.model.domain;
 
 import vendingmachine.util.Constant;
 import vendingmachine.util.Utils;
