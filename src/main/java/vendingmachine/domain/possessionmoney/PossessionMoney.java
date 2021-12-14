@@ -6,7 +6,7 @@ public class PossessionMoney {
 
     private static final String VALID_NUMBER_FORMAT = "[ERROR] 보유 금액은 숫자여야 합니다.";
     private static final String VALID_NEGATIVE_NUMBER = "[ERROR] 보유 금액은 음수가 될 수 없습니다.";
-    private static final String VALID_DIVIDE = "[ERROR] 금액은 10으로 나누어 떨어져야 합니다.";
+    private static final String VALID_DIVIDE = "[ERROR] 보유 금액은 10으로 나누어 떨어져야 합니다.";
 
     private int possessionMoney;
 
