@@ -46,7 +46,6 @@ public class OutputView {
     public static void printChangeCoins(int money, Map<Coin, Integer> changeCoin) {
         printRemainMoney(money);
         System.out.println(CHANGE);
-
         changeCoin.forEach((coin, count) -> System.out.println(coin.getAmount() + WON + HYPHEN + count + NUMBER_OF));
 
     }
