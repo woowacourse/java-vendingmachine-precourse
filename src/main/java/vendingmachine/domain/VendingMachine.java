@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 public class VendingMachine {
 
-	private VendingMachineCoins vendingMachineCoins;
+	private final VendingMachineCoins vendingMachineCoins;
 	private Products products;
 	private Money userMoney;
 
