@@ -9,27 +9,19 @@ public class VendingMachine {
 	private ArrayList<Product> products = null;
 
 	public VendingMachine(int amount) {
-		for (Coin c: Coin.values()) {
-			int num = amount / c.getAmount();
-			if (num <= 0) {
-				continue;
-			}
-			if (c.getAmount() == 10) {
-				c.increaseCount(num);
-				break;
-			}
-			int random = getRandomCoin(0, num);
-			c.increaseCount(random);
-			amount -= c.getAmount() * random;
-		}
-	}
-
-	public int getRandomCoin(int start, int end) {
 		List<Integer> li = new ArrayList<>();
-		for (int i = start; i < end + 1; i++) {
-			li.add(start + i);
+		li.add(500);
+		li.add(100);
+		li.add(50);
+		li.add(10);
+
+		while (amount > 0) {
+			int selected = Randoms.pickNumberInList(li);
+			if (amount - selected >= 0) {
+				amount -= selected;
+				Coin.getEnumCoin(selected).increaseCount(1);
+			}
 		}
-		return Randoms.pickNumberInList(li);
 	}
 
 	public void setInitProducts(ArrayList<Product> products) {

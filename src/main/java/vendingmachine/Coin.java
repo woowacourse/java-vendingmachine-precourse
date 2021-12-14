@@ -29,4 +29,10 @@ public enum Coin {
     public void increaseCount(int times) {
         this.count += times;
     }
+
+    public static Coin getEnumCoin(int amount) {
+        return Arrays.stream(Coin.values())
+            .filter(coin -> coin.getAmount() == amount)
+            .sequential().collect(Collectors.toList()).get(0);
+    }
 }
