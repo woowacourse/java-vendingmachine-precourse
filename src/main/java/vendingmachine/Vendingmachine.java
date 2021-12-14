@@ -12,9 +12,7 @@ public class Vendingmachine {
     private List<Product> productList;
     private HashMap<Coin, Integer> coinList;
 
-    public Vendingmachine(){
-//        this.coinList = Utils.makeCoinHash();
-    }
+    public Vendingmachine(){}
 
     public Integer getVendMoney(){
         return this.vendMoney;
@@ -168,8 +166,6 @@ public class Vendingmachine {
     }
 
     public HashMap<Coin, Integer> returnGreedyMoney(){
-        List<Integer> coins = Coin.getCoinList();
-        int[] giveToUserMoney = {0,0,0,0};
         HashMap<Coin, Integer> restUserMoney = Utils.makeCoinHash();
         for(Coin coin: Coin.values()){
             while(this.userMoney< coin.getAmount()){
@@ -179,15 +175,14 @@ public class Vendingmachine {
                     this.coinList.put(coin, next);
                     int restCurrent = restUserMoney.get(coin);
                     int restNext = restCurrent + 1;
+                    restUserMoney.put(coin, restNext);
                 }
                 else{
                     break;
                 }
             }
-//            System.out.println( coin.getAmount()+"원 - "+ this.coinList.get(coin)+"개");
         }
         return restUserMoney;
-
     };
 
 }
