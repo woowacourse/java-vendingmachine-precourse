@@ -2,8 +2,9 @@ package vendingmachine.model;
 
 public class VendingMachine {
     private static final int MIN_PRODUCT_PRICE = 0;
+    private static final int FAIL_NUMBER = -1;
 
-    private Products products;
+    private final Products products;
     private Money changes;
     private int payment;
 
@@ -17,7 +18,8 @@ public class VendingMachine {
     }
 
     public boolean isExit() {
-        return products.getMinPrice() > payment || products.isAllSoldOut();
+        int minPrice = products.getMinPrice();
+        return minPrice == FAIL_NUMBER || minPrice > payment || products.isAllSoldOut();
     }
 
     public int buyProduct(String name) {

@@ -1,33 +1,32 @@
 package vendingmachine.model;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class Products {
     private static final String BUY_ERROR_SENTENCE = "[ERROR] 존재하지 않는 상품입니다.";
+    private static final int FAIL_NUMBER = -1;
 
-    private List<Product> products;
+    private final List<Product> products;
 
     public Products(List<Product> products) {
         this.products = products;
     }
 
     public int getMinPrice() {
-        int min = Integer.MAX_VALUE;
-        for (Product product : products) {
-            if (product.isNotSoldOut() && min > product.getPrice()) {
-                min = product.getPrice();
-            }
+        Product product = products.stream()
+                .filter(Product::isNotSoldOut)
+                .min(Comparator.comparing(Product::getPrice))
+                .orElse(null);
+        if (product == null) {
+            return FAIL_NUMBER;
         }
-        return min;
+        return product.getPrice();
     }
 
     public boolean isAllSoldOut() {
-        for (Product product : products) {
-            if (product.isNotSoldOut()) {
-                return false;
-            }
-        }
-        return true;
+        return products.stream()
+                .noneMatch(Product::isNotSoldOut);
     }
 
     public int buyProduct(String name, int payment) {
@@ -40,11 +39,9 @@ public class Products {
     }
 
     public Product findProduct(String name) {
-        for (Product product : products) {
-            if (product.isSameProduct(name)) {
-                return product;
-            }
-        }
-        return null;
+        return products.stream()
+                .filter(product -> product.isSameProduct(name))
+                .findFirst()
+                .orElse(null);
     }
 }
