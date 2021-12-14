@@ -16,7 +16,7 @@ import vendingmachine.validation.validator.InputProductValidator;
 
 public class VendingMachine {
 
-	private Map<Integer, Integer> coinMap;
+	private final Map<Integer, Integer> coinMap;
 	private List<Product> products;
 	private int inputCost;
 
@@ -91,11 +91,7 @@ public class VendingMachine {
 	}
 
 	public boolean checkGetChange() {
-		if (compareLowPriceAndInputCost()) {
-			return true;
-		}
-
-		return false;
+		return compareLowPriceAndInputCost();
 	}
 
 	public boolean compareLowPriceAndInputCost() {
@@ -108,11 +104,7 @@ public class VendingMachine {
 	}
 
 	public int compareInputCostAndCoinToGetChange() {
-		if (inputCost < getSumCoinAmount()) {
-			return inputCost;
-		}
-
-		return getSumCoinAmount();
+		return Math.min(inputCost,getSumCoinAmount());
 	}
 
 	public void canInputCostSet(int inputCost) {

@@ -18,7 +18,7 @@ public class VendingMachineController {
 		ResponseMessage.of(Message.ENTER_COSTS_GOING_TO_HAS_MACHINE.getMessage());
 
 		try {
-			ResponseMessage.of('\n' + vendingMachineService.postVendingMachineCosts(Console.readLine()));
+			ResponseMessage.of(Message.LINE_BREAKER.getMessage() + vendingMachineService.postVendingMachineCosts(Console.readLine()));
 		} catch (IllegalArgumentException e) {
 			ErrorResponse.of(e.getMessage());
 			postVendingMachineCosts();
@@ -38,7 +38,7 @@ public class VendingMachineController {
 
 	public void postInputCosts() {
 		try {
-			ResponseMessage.of('\n' + Message.ENTER_INPUT_COSTS.getMessage());
+			ResponseMessage.of(Message.LINE_BREAKER.getMessage() + Message.ENTER_INPUT_COSTS.getMessage());
 			vendingMachineService.postInputCosts(Console.readLine());
 		} catch (IllegalArgumentException e) {
 			ErrorResponse.of(e.getMessage());
