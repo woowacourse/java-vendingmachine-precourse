@@ -11,12 +11,6 @@ public class Product {
         this.count = count;
     }
 
-    public void print() {
-        System.out.println("name : " + name);
-        System.out.println("price : " + price);
-        System.out.println("count : " + count);
-    }
-
     public boolean hasName(String name) {
         return this.name.equals(name);
     }

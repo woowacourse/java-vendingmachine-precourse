@@ -1,6 +1,8 @@
 package vendingmachine.validator;
 
 import static vendingmachine.constant.ErrorMessage.*;
+import static vendingmachine.constant.SystemMessage.ONE_HUNDRED_WON;
+import static vendingmachine.constant.SystemMessage.TEN_WON;
 
 public class AmountValidator {
 
@@ -15,7 +17,7 @@ public class AmountValidator {
 
     public static void checkProductPrice(String price) {
         int priceInt = Integer.parseInt(price);
-        if (priceInt < 100) {
+        if (priceInt < ONE_HUNDRED_WON) {
             throw new IllegalArgumentException(IS_NOT_POSSIBLE_PRODUCT_PRICE_ERROR_MESSAGE);
         }
         if (isNotDivisibleByTen(price)) {
@@ -33,6 +35,6 @@ public class AmountValidator {
     }
 
     protected static boolean isNotDivisibleByTen(String amount) {
-        return Integer.parseInt(amount) % 10 != 0;
+        return Integer.parseInt(amount) % TEN_WON != 0;
     }
 }

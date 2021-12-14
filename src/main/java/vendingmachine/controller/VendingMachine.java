@@ -11,6 +11,8 @@ import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+import static vendingmachine.constant.SystemMessage.*;
+
 // 사용자와 상호작용하면서 소통하는 역할
 // 자판기 보유 금액 입력받기
 // 상품명 가격 수량 입력받기
@@ -36,7 +38,6 @@ public class VendingMachine {
         OutputView.printCoinCount(vendingMachinCoinCombination);
 
         setProduct();
-        OutputView.printProducts(products);
 
         setUserMoney();
         OutputView.printUserMoney(userMoney);
@@ -46,7 +47,7 @@ public class VendingMachine {
 
     private void setVendingMachineAmount() {
         try {
-            String vendingmachineAmount = InputView.getVendingmachineAmount();
+            String vendingmachineAmount = InputView.getVendingMachineAmount();
             AmountValidator.checkVendingMachineAmount(vendingmachineAmount);
             amount = new Amount(Integer.parseInt(vendingmachineAmount));
         } catch (IllegalArgumentException exception) {
@@ -62,12 +63,12 @@ public class VendingMachine {
     private void setProduct() {
         try {
             String productForm = InputView.getProducts();
-            String[] productInformations = productForm.split(";");
+            String[] productInformations = productForm.split(PRODUCT_DELIMITER);
             for (String productInformation : productInformations) {
                 ProductValidator.checkProduct(productInformation);
-                String[] product = productInformation.replaceAll("[\\[\\]]", "").split(",");
-                AmountValidator.checkProductPrice(product[1]);
-                products.add(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+                String[] product = productInformation.replaceAll(UNNECESSARY_SPECIAL_CHARACTER_REGEX, BLANK).split(NAME_PRICE_COUNT_DELIMITER);
+                AmountValidator.checkProductPrice(product[PRICE]);
+                products.add(new Product(product[NAME], Integer.parseInt(product[PRICE]), Integer.parseInt(product[COUNT])));
             }
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());

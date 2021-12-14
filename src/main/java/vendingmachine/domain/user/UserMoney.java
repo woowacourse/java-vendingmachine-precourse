@@ -1,6 +1,7 @@
 package vendingmachine.domain.user;
 
 import vendingmachine.domain.product.Products;
+import static vendingmachine.constant.SystemMessage.ONE_THOUSAND_WON;
 
 public class UserMoney {
     private int money;
@@ -22,8 +23,8 @@ public class UserMoney {
     }
 
     public int reduceMoney() {
-        while (money > 1000) {
-            money -= 1000;
+        while (money > ONE_THOUSAND_WON) {
+            money -= ONE_THOUSAND_WON;
         }
         return money;
     }

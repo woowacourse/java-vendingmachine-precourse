@@ -16,12 +16,6 @@ public class Products {
         products.add(product);
     }
 
-    public void print() {
-        for (Product product : products) {
-            product.print();
-        }
-    }
-
     public Product reduce(String name) {
         List<Product> collect = products.stream()
                 .filter(product -> product.hasName(name))
