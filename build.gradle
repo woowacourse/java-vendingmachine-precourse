@@ -5,6 +5,11 @@ plugins {
 group 'camp.nextstep.edu'
 version '1.0-SNAPSHOT'
 
+compileJava.options.encoding = 'UTF-8'
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
@@ -12,6 +17,7 @@ repositories {
 
 dependencies {
     implementation 'com.github.woowacourse-projects:mission-utils:1.0.0'
+    implementation 'org.projectlombok:lombok:1.18.20'
 }
 
 java {
