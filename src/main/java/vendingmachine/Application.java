@@ -3,8 +3,7 @@ package vendingmachine;
 import java.util.ArrayList;
 
 public class Application {
-    public static int getInitCoin() {
-        System.out.println(Constants.coinInitMsg);
+    public static int getCoin() {
         while (true) {
             try {
                 String input = camp.nextstep.edu.missionutils.Console.readLine();
@@ -52,9 +51,15 @@ public class Application {
     }
 
     public static void main(String[] args) {
-        int initCoin = getInitCoin();
+        System.out.println(Constants.coinInitMsg);
+        int initCoin = getCoin();
         VendingMachine vm = new VendingMachine(initCoin);
         printCoinStatus();
+
         ArrayList<Product> products = getInitProduct();
+
+
+        System.out.println(Constants.coinInputMsg);
+        int inputCoin = getCoin();
     }
 }

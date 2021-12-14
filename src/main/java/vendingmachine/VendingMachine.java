@@ -6,6 +6,8 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class VendingMachine {
+	private ArrayList<Product> products = null;
+
 	public VendingMachine(int amount) {
 		getRandomCoin(1, 1);
 		for (Coin c: Coin.values()) {
@@ -26,5 +28,6 @@ public class VendingMachine {
 		}
 		return Randoms.pickNumberInList(li);
 	}
+
 
 }
