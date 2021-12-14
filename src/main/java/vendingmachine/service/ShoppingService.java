@@ -1,21 +1,29 @@
 package vendingmachine.service;
 
+import static vendingmachine.constant.Constant.*;
 import static vendingmachine.constant.ErrorMessage.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 import vendingmachine.model.Money;
 import vendingmachine.model.Product;
-import vendingmachine.model.Products;
 
 public class ShoppingService {
 
-	private Products products;
+	private final List<Product> products = new ArrayList<>();
 	private Money insertMoney;
 
-	public void createProducts(String productList) {
-		products = new Products(productList);
+	public void createProducts(String requestProduct) {
+		String[] productsSplitBySemeColon = requestProduct.split(SEME_COLON);
+		for (String product : productsSplitBySemeColon) {
+			String[] productSplitByFormat = product.replace(LEFT_PARENTHESIS, BLANK)
+				.replace(RIGHT_PARENTHESIS, BLANK)
+				.split(COMMA);
+			products.add(new Product(productSplitByFormat));
+		}
 	}
 
 	public void createInsertMoney(int money) {
@@ -28,7 +36,7 @@ public class ShoppingService {
 
 	public int getMinimumPrice() {
 		Comparator<Product> comparatorByPrice = Comparator.comparingInt(Product::getPrice);
-		return products.getProducts().stream()
+		return products.stream()
 			.min(comparatorByPrice)
 			.orElseThrow(NoSuchElementException::new).getPrice();
 	}
@@ -38,7 +46,7 @@ public class ShoppingService {
 	}
 
 	public boolean isOverZeroAllProductCount() {
-		return 0 < products.getProducts().stream().mapToInt(Product::getQuantity).sum();
+		return 0 < products.stream().mapToInt(Product::getQuantity).sum();
 	}
 
 	public void purchase(String productName) {
@@ -48,7 +56,7 @@ public class ShoppingService {
 	}
 
 	private Product findByName(String productName) {
-		return products.getProducts().stream()
+		return products.stream()
 			.filter(product -> product.getName().equals(productName))
 			.findFirst()
 			.orElseThrow(() -> new IllegalArgumentException(PRODUCT_NOT_EXIST_MSG));

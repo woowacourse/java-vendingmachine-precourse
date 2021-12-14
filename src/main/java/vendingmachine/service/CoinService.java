@@ -3,20 +3,27 @@ package vendingmachine.service;
 import static camp.nextstep.edu.missionutils.Randoms.*;
 import static vendingmachine.constant.Constant.*;
 
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import vendingmachine.model.Coin;
-import vendingmachine.model.Coins;
 import vendingmachine.model.Money;
 
 public class CoinService {
 
-	Coins possessionCoins;
-	Coins changeCoins;
+	private final Map<Integer, Integer> possessionCoins = new LinkedHashMap<>();
+	private final Map<Integer, Integer> changeCoins = new LinkedHashMap<>();
 
 	public CoinService() {
-		possessionCoins = new Coins();
-		changeCoins = new Coins();
+		initCoinList(possessionCoins);
+		initCoinList(changeCoins);
+	}
+
+	public void initCoinList(Map<Integer, Integer> coins) {
+		coins.put(Coin.COIN_500.getAmount(), INITIAL_NUMBER);
+		coins.put(Coin.COIN_100.getAmount(), INITIAL_NUMBER);
+		coins.put(Coin.COIN_50.getAmount(), INITIAL_NUMBER);
+		coins.put(Coin.COIN_10.getAmount(), INITIAL_NUMBER);
 	}
 
 	public void createRandomCoins(Money money) {
@@ -24,25 +31,25 @@ public class CoinService {
 			int randomAmount = pickNumberInList(Coin.createCoinList());
 			if (money.isMoneyBiggerThanValue(randomAmount)) {
 				money.subtractMoney(randomAmount);
-				possessionCoins.getCoins().put(randomAmount, possessionCoins.getCoins().get(randomAmount) + 1);
+				possessionCoins.put(randomAmount, possessionCoins.get(randomAmount) + 1);
 			}
 		}
 	}
 
 	public Map<Integer, Integer> getPossessionCoins() {
-		return possessionCoins.getCoins();
+		return possessionCoins;
 	}
 
 	public Map<Integer, Integer> getChangeCoins() {
-		return changeCoins.getCoins();
+		return changeCoins;
 	}
 
 	public void createGreedyCoin(int money) {
 		for (int amount : Coin.createCoinList()) {
-			changeCoins.getCoins()
-				.put(amount, Math.min(changeCoins.getCoins().get(amount) + money / amount,
-					possessionCoins.getCoins().get(amount)));
-			money -= amount * changeCoins.getCoins().get(amount);
+			changeCoins
+				.put(amount, Math.min(changeCoins.get(amount) + money / amount,
+					possessionCoins.get(amount)));
+			money -= amount * changeCoins.get(amount);
 		}
 	}
 
