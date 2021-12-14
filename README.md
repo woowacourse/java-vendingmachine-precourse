@@ -1,8 +1,14 @@
 # 3주 차 미션 - 자판기
 
-## 🔨 기능 목록
+## 📚 사전 학습
+> 사전 학습한 내용들 및 참고한 자료들을 정리하였습니다.
+- [2주 차 미션 피드백을 적용해보자](https://programmer-ririhan.tistory.com/352)
+- [Java API에서 제공하는 주요 기능 살펴보기](https://programmer-ririhan.tistory.com/353)
+- [컬렉션(Collection)에 대해 알아보자](https://programmer-ririhan.tistory.com/354)
+- [제네릭(Generic)에 대해 알아보자](https://programmer-ririhan.tistory.com/355)
 
-반환되는 동전이 최소한이 되는 자판기!!
+## 🔨 기능 목록
+> 반환되는 동전이 최소한이 되는 자판기!!
 
 - `자판기가 보유하고 있는 금액을 입력해 주세요.` 메시지를 출력한다.
 - 사용자는 자판기가 보유하고 있는 금액을 입력한다.
