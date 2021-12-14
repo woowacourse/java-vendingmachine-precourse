@@ -9,13 +9,14 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 
 public class VendingMachine {
+    private final static int MAXIMUM_PRODUCT_PRICE = 100_000_001;
     private int minimumPrice;
     private Map<Coin, Integer> coinHashMap;
     private Map<String, Product> productMap;
     private Customer customer;
 
     public VendingMachine(int inputMoney) {
-        minimumPrice = 0;
+        minimumPrice = MAXIMUM_PRODUCT_PRICE;
         coinHashMap = generateRandomCoins(inputMoney);
         productMap = new HashMap<>();
     }
@@ -63,5 +64,61 @@ public class VendingMachine {
 
     public String toStringCustomerInputMoney() {
         return customer.toString();
+    }
+
+    public boolean isProductsAvailableForPurchase() {
+        return customer.getInputMoneyToVendingMachine() >= minimumPrice;
+    }
+
+    public boolean pay(String productName) {
+        Product orderProduct = productMap.get(productName);
+        try {
+            orderProduct.reduceStock();
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
+        reduceCustomerInputMoney(orderProduct.getPrice());
+        return true;
+    }
+
+    private void reduceCustomerInputMoney(int deductMoney) {
+        this.customer.deductTheMoney(deductMoney);
+    }
+
+    public String printCustomerChange() {
+        Map<Coin, Integer> resultCoinMap = returnCoinToTheCustomer();
+        StringBuilder results = new StringBuilder();
+        results.append("잔돈").append("\n");
+        for (Coin coin : resultCoinMap.keySet()) {
+            results.append(coin).append(" - ").append(resultCoinMap.get(coin)).append("\n");
+        }
+        return results.toString();
+    }
+
+    private void deductHoldingCoin(Coin coin, int quantity) {
+        coinHashMap.put(coin, coinHashMap.get(coin) - quantity);
+    }
+
+    private Map<Coin, Integer> returnCoinToTheCustomer() {
+        Map<Coin, Integer> changes = new LinkedHashMap<>();
+        for (Coin coin : Coin.values()) {
+            int returnCoinToTheCustomer = calculateCoinUsingAmount(coin);
+            if (returnCoinToTheCustomer == 0) {
+                continue;
+            }
+            deductHoldingCoin(coin, returnCoinToTheCustomer);
+            reduceCustomerInputMoney(returnCoinToTheCustomer * coin.getAmount());
+            changes.put(coin, returnCoinToTheCustomer);
+        }
+        return changes;
+    }
+
+    private int calculateCoinUsingAmount(Coin coin) {
+        int quotient = customer.getInputMoneyToVendingMachine() / coin.getAmount();
+        Integer restQuantity = coinHashMap.get(coin);
+        if (quotient > restQuantity) {
+            return restQuantity;
+        }
+        return quotient;
     }
 }

@@ -25,9 +25,13 @@ public class Product {
     }
 
     public void reduceStock() {
-        if (this.quantity - 1 < MINIMUM_QUANTITY) {
+        if (!isExistQuantity()) {
             throw new IllegalArgumentException();
         }
         this.quantity--;
+    }
+
+    private boolean isExistQuantity() {
+        return this.quantity > MINIMUM_QUANTITY;
     }
 }
