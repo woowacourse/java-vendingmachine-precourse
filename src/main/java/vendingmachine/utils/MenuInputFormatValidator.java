@@ -2,6 +2,7 @@ package vendingmachine.utils;
 
 import static vendingmachine.constants.ExceptionMessages.*;
 import static vendingmachine.constants.SystemConstants.*;
+import static vendingmachine.utils.StringFormatUtils.*;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -25,7 +26,7 @@ public class MenuInputFormatValidator {
         validateNotBlankInput(merchandiseInfo);
         validateSeparatorFormat(merchandiseInfo);
 
-        String[] infoList = merchandiseInfo.substring(1, merchandiseInfo.length() - 1).split(COMMA);
+        String[] infoList = trimBothEnds(merchandiseInfo).split(COMMA);
         validateNameLength(infoList[NAME_IDX]);
         validatePriceInput(infoList[PRICE_IDX]);
         validateMerchandiseNumberInput(infoList[NUMBER_IDX]);
@@ -45,7 +46,7 @@ public class MenuInputFormatValidator {
 
     private static void validateSeparatorFormat(String merchandiseInfo) {
         validateSurroundingBrackets(merchandiseInfo);
-        validateInternalSeparators(merchandiseInfo.substring(1, merchandiseInfo.length() - 1));
+        validateInternalSeparators(trimBothEnds(merchandiseInfo));
     }
 
     private static void validateSurroundingBrackets(String merchandiseInfo) {
