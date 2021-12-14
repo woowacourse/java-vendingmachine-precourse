@@ -5,7 +5,11 @@ import java.util.List;
 
 public class Products {
     private static final String NOT_EXISTED_PRODUCT_MESSAGE = "해당 상품은 존재하지 않습니다.";
+    private static final String NOT_START_WITH_BRACKET_MESSAGE = "상품 정보는 대괄호로 시작해야합니다.";
+    private static final String NOT_END_WITH_BRACKET_MESSAGE = "상품 정보는 대괄호로 끝나야합니다.";
     private static final String SEMI_COLON = ";";
+    private static final String START_BRACKET = "[";
+    private static final String END_BRACKET = "]";
 
     private List<Product> products = new ArrayList<>();
 
@@ -49,7 +53,26 @@ public class Products {
     }
 
     private String removeBrackets(String productInfo) {
+        validateProductInfoContainsBracket(productInfo);
+
         return productInfo.substring(1, productInfo.length() - 1);
+    }
+
+    private void validateProductInfoContainsBracket(String productInfo) {
+        if (isNotStartWithBracket(productInfo)) {
+            throw new IllegalArgumentException(NOT_START_WITH_BRACKET_MESSAGE);
+        }
+        if (isNotEndWithBracket(productInfo)) {
+            throw new IllegalArgumentException(NOT_END_WITH_BRACKET_MESSAGE);
+        }
+    }
+
+    private boolean isNotEndWithBracket(String productInfo) {
+        return !productInfo.startsWith(START_BRACKET);
+    }
+
+    private boolean isNotStartWithBracket(String productInfo) {
+        return !productInfo.endsWith(END_BRACKET);
     }
 
 }
