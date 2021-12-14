@@ -1,5 +1,8 @@
 package vendingmachine.item;
 
+import vendingmachine.exception.NotFoundException;
+import vendingmachine.utils.message.ItemErrorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -37,6 +40,10 @@ public class ItemKeyRepository {
     }
 
     public ItemKey findOneByName(String name) {
-        return itemKeys.get(name);
+        try {
+            return itemKeys.get(name);
+        }catch(NullPointerException e) {
+            throw new NotFoundException(ItemErrorMessage.NOT_EXIST_ITEM);
+        }
     }
 }

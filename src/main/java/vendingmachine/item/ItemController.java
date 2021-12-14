@@ -1,7 +1,9 @@
 package vendingmachine.item;
 
 import vendingmachine.exception.NotEnoughStockException;
+import vendingmachine.exception.NotFoundException;
 import vendingmachine.item.dto.ItemDto;
+import vendingmachine.utils.message.ItemErrorMessage;
 import vendingmachine.utils.validator.InputDataValidator;
 import vendingmachine.utils.validator.ItemDataValidator;
 
@@ -25,11 +27,15 @@ public class ItemController {
     }
 
     public void addItem(String inputItems) {
-        String[] items = splitItemData(inputItems);
-        for(String item : items) {
-            item = item.replace("[", "").replace("]", "");
-            inputDataValidator.validateData(item);
-            itemService.addItem(ItemDto.fromInputString(item));
+        try{
+            String[] items = splitItemData(inputItems);
+            for(String item : items) {
+                item = item.replace("[", "").replace("]", "");
+                inputDataValidator.validateData(item);
+                itemService.addItem(ItemDto.fromInputString(item));
+            }
+        }catch(NotFoundException | IllegalArgumentException e){
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -37,7 +43,7 @@ public class ItemController {
         try{
             return inputItems.split(ItemDataValidator.MULTIPLE_ITEM_SEPARATE_UNIT);
         }catch(PatternSyntaxException e) {
-            throw new IllegalArgumentException(e.getMessage());
+            throw new IllegalArgumentException(ItemErrorMessage.ITEM_INPUT_FORMAT);
         }
     }
 
