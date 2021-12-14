@@ -5,9 +5,9 @@ import vendingmachine.service.OrderService;
 
 public class OrderController {
 
-    OrderService orderService= new OrderService();
+	OrderService orderService = new OrderService();
 
-    public void get(Products products){
-        orderService.get(products);
-    }
+	public void get(Products products) {
+		orderService.get(products);
+	}
 }
