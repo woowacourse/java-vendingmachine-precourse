@@ -23,7 +23,7 @@ public class InputDisplay {
 		System.out.println(ASK_INPUT_INSERTED_MONEY_MESSAGE);
 	}
 
-	public static void askInputProductToBuy() {
+	public static void askInputProductNameToBuy() {
 		System.out.println(ASK_INPUT_PRODUCT_TO_BUY_MESSAGE);
 	}
 }
