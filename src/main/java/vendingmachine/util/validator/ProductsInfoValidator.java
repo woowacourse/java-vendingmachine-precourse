@@ -1,7 +1,6 @@
 package vendingmachine.util.validator;
 
 import vendingmachine.util.RegexSeparator;
-import vendingmachine.util.validator.ThrowIllegalSupplier;
 
 import java.util.HashSet;
 import java.util.Set;

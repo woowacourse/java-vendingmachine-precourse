@@ -5,6 +5,8 @@ import vendingmachine.domain.consumer.Consumer;
 import java.util.HashMap;
 import java.util.Map;
 
+import static vendingmachine.util.validator.error.Error.NOT_FOUND_PRODUCT;
+
 public class ProductStore {
     private final Map<String, Product> productStore;
 
@@ -26,7 +28,7 @@ public class ProductStore {
 
     public Product getProduct(String productName) {
         if(!hasProduct(productName)) {
-            throw new IllegalArgumentException("[ERROR] 해당 이름의 상품이 존재하지 않습니다.");
+            throw new IllegalArgumentException(NOT_FOUND_PRODUCT.getMessage());
         }
         return productStore.get(productName);
     }

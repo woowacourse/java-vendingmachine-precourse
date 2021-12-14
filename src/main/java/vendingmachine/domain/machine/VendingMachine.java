@@ -29,7 +29,7 @@ public class VendingMachine {
     }
 
     public void fillCoinsAsBalanceAmount(CoinProvider coinProvider) {
-        while(balanceForPutCoin > 0) {
+        while (balanceForPutCoin > 0) {
             reduceBalance(coinPocket.putCoinAndAddCount(balanceForPutCoin, coinProvider));
         }
     }
@@ -50,21 +50,9 @@ public class VendingMachine {
         return allProductInfo.split(BY);
     }
 
-    // for test
-    public boolean isEqualBalance(int balance) {
-        return this.balance == balance;
-    }
-
-    // for test
-    public boolean hasProduct(List<String> productNameList) {
-        return productNameList.stream()
-                .allMatch((productName) -> productStore.hasProduct(productName));
-    }
-
     public int returnChangeAmount(Consumer consumer) {
         return consumer.getHowMuchBalance(balance);
     }
-
 
     public void makeChange(int changeAmount) {
         coinPocket.makeCoinCountMin(changeAmount);
@@ -76,5 +64,16 @@ public class VendingMachine {
 
     public boolean verifyConsumerCanBuyAnyProduct(Consumer consumer) {
         return productStore.verifyEnoughConsumerBalance(consumer);
+    }
+
+    // for test
+    public boolean isEqualBalance(int balance) {
+        return this.balance == balance;
+    }
+
+    // for test
+    public boolean hasProduct(List<String> productNameList) {
+        return productNameList.stream()
+                .allMatch((productName) -> productStore.hasProduct(productName));
     }
 }

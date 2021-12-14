@@ -12,8 +12,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class VendingMachineTest {
     private final int CONSUMER_BALANCE = 3000;
     private final int MACHINE_BALANCE = 1000;
-    private final int CONSUMER_BALANCE_FROM_WOOWA = 500;
-    private final int MACHINE_BALANCE_FROM_WOOWA = 450;
     private final String ALL_PRODUCT_INFO = "[콜라,1500,20];[사이다,1000,10]";
     private final List<String> productNameList = Arrays.asList("콜라", "사이다");
     private final String COINS = "100,50";

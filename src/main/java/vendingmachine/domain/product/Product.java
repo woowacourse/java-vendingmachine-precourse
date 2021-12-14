@@ -31,7 +31,6 @@ public class Product {
         amount--;
     }
 
-
     // for test
     public boolean verifyName(String name) {
         return this.name.equals(name);

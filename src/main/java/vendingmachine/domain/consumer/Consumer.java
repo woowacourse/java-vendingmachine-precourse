@@ -2,6 +2,8 @@ package vendingmachine.domain.consumer;
 
 import vendingmachine.domain.product.Product;
 
+import static vendingmachine.util.validator.error.Error.CONSUMER_NOT_ENOUGH_BALANCE;
+
 public class Consumer {
     private int balance;
 
@@ -34,7 +36,7 @@ public class Consumer {
 
     public void buy(Product product) {
         if (!possibleToBuy(product)) {
-            throw new IllegalArgumentException("[ERROR] 구매자의 잔액이 부족하여 해당 제품을 구매하지 못합니다.");
+            throw new IllegalArgumentException(CONSUMER_NOT_ENOUGH_BALANCE.getMessage());
         }
         product.isPurchasedBy(this);
     }

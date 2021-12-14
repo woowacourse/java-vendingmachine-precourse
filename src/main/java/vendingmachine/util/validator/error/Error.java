@@ -10,7 +10,9 @@ public enum Error {
     INPUT_SEPARATOR_NOT_ACCEPT("[ERROR] 올바르지 못한 구분자가 입력되었습니다."),
     INPUT_REGEX_NOT_ACCEPT("[ERROR] 올바르지 못한 형식의 입력입니다."),
     INPUT_PRODUCT_NAME_HAS_DUPLICATED("[ERROR] 중복된 상품이 입력되었습니다."),
-    INPUT_HAS_NULL("[ERROR] 상품 입력에 null이 포함되었습니다.")
+    INPUT_HAS_NULL("[ERROR] 상품 입력에 null이 포함되었습니다."),
+    CONSUMER_NOT_ENOUGH_BALANCE("[ERROR] 구매자의 잔액이 부족하여 해당 제품을 구매하지 못합니다."),
+    NOT_FOUND_PRODUCT("[ERROR] 해당 이름의 상품이 존재하지 않습니다.")
     ;
 
     private String message;
