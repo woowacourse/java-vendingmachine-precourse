@@ -26,6 +26,14 @@ public class CoinService {
 		coins.put(Coin.COIN_10.getAmount(), INITIAL_NUMBER);
 	}
 
+	public Map<Integer, Integer> getPossessionCoins() {
+		return possessionCoins;
+	}
+
+	public Map<Integer, Integer> getChangeCoins() {
+		return changeCoins;
+	}
+
 	public void createRandomCoins(Money money) {
 		while (money.isMoneyBiggerThanValue(MINIMUM_COIN_AMOUNT)) {
 			int randomAmount = pickNumberInList(Coin.createCoinList());
@@ -36,14 +44,6 @@ public class CoinService {
 		}
 	}
 
-	public Map<Integer, Integer> getPossessionCoins() {
-		return possessionCoins;
-	}
-
-	public Map<Integer, Integer> getChangeCoins() {
-		return changeCoins;
-	}
-
 	public void createGreedyCoin(int money) {
 		for (int amount : Coin.createCoinList()) {
 			changeCoins
@@ -52,5 +52,4 @@ public class CoinService {
 			money -= amount * changeCoins.get(amount);
 		}
 	}
-
 }

@@ -29,7 +29,7 @@ public class Products {
 			.orElseThrow(NoSuchElementException::new).getPrice();
 	}
 
-	public boolean isOverZeroAllProductCount() {
+	public boolean isOverZeroAllProductQuantity() {
 		return 0 < products.stream().mapToInt(Product::getQuantity).sum();
 	}
 

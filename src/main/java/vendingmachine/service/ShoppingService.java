@@ -22,7 +22,7 @@ public class ShoppingService {
 	}
 
 	public boolean canShopping() {
-		return products.isOverZeroAllProductCount() && insertMoney.isMoneyBiggerThanValue(products.getMinimumPrice());
+		return products.isOverZeroAllProductQuantity() && insertMoney.isMoneyBiggerThanValue(products.getMinimumPrice());
 	}
 
 	public void purchase(String productName) {
@@ -41,6 +41,5 @@ public class ShoppingService {
 	public boolean canSell(String productName) {
 		Product product = products.findByName(productName);
 		return product.isOverZeroQuantity() && product.isPurchase(insertMoney.getMoney());
-
 	}
 }
