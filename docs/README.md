@@ -63,3 +63,16 @@
 > 남은 금액을 잔돈으로 반환한다.
 - [x] 자판기가 보유하고 있는 잔돈으로 최소의 개수로 반환해야 한다.
 - [x] 남은 금액이 더 클 경우 모든 잔돈을 반환한다.
+
+## 수정 사항
+### 자판기에서 구매할 수 있는 상품 중 저렴한 가격을 가져오는 로직
+> before
+- `자판기(VendingMachine)` -> `상품 목록(Products)` : 구매가 가능한 상품들 중 `가장 저렴한 가격(Money)`를 알려줘!
+- `상품 목록(Products)` -> `자판기(VendingMachine)` : `저렴한 가격(Money)`!
+
+> after
+- `자판기(VendingMachine)` -> `상품 목록(Products)` : 구매가 가능한 상품 중 저렴한 가격을 가진 `상품(Product)`를 알려줘!
+- `상품 목록(Products)` -> `가격(Money)` : 가격을 기준으로 상품을 정렬할 거니깐 상품의 가격들을 비교해줘!
+- `가격(Money)` -> `상품 목록(Products)` : 비교!
+- `상품 목록(Products)` -> `자판기(VendingMachine)` : 구매가 가능하고 저렴한 가격인 `상품(Product)`!
+- `자판기(VendingMachine)` -> `가격(Money)` : 투입 금액이랑 상품 가격이랑 비교해줘!
