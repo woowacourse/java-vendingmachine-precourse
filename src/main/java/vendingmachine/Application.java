@@ -1,13 +1,9 @@
 package vendingmachine;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import vendingmachine.io.InputHandler;
 import vendingmachine.io.OutputHandler;
 import vendingmachine.processor.CoinProcessor;
 import vendingmachine.processor.ProductProcessor;
-import vendingmachine.type.Product;
 
 public class Application {
 	public static void main(String[] args) {

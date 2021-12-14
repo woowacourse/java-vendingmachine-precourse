@@ -11,12 +11,12 @@ import vendingmachine.type.Product;
 
 public class VendingMachine {
 
-	InputHandler inputHandler;
-	OutputHandler outputHandler;
-	CoinProcessor coinProcessor;
-	ProductProcessor productProcessor;
+	private InputHandler inputHandler;
+	private OutputHandler outputHandler;
+	private CoinProcessor coinProcessor;
+	private ProductProcessor productProcessor;
 
-	int balance;
+	private int balance;
 
 	public VendingMachine(InputHandler inputHandler, OutputHandler outputHandler, CoinProcessor coinProcessor, ProductProcessor productProcessor) {
 		this.inputHandler = inputHandler;
@@ -37,7 +37,7 @@ public class VendingMachine {
 	}
 
 	private void sell() {
-		while(productProcessor.hasProduct() && productProcessor.isPossibleToBuy(balance)) {
+		while(productProcessor.isPossibleToSell(balance)) {
 			outputHandler.printBalance(balance);
 			Product product = getValidProduct();
 			if(!product.isPossibleToBuy(balance)) {

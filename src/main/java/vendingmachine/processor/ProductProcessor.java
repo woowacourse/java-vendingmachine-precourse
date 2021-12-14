@@ -30,7 +30,11 @@ public class ProductProcessor {
 		product.sell();
 	}
 
-	public boolean hasProduct() {
+	public boolean isPossibleToSell(int balance) {
+		return hasProduct() && isEnoughToBuy(balance);
+	}
+
+	private boolean hasProduct() {
 		for(Product product:productList) {
 			if(!product.isSoldOut()) {
 				return true;
@@ -39,7 +43,7 @@ public class ProductProcessor {
 		return false;
 	}
 
-	public boolean isPossibleToBuy(int balance) {
+	private boolean isEnoughToBuy(int balance) {
 		for(Product product:productList) {
 			if(product.isPossibleToBuy(balance)) {
 				return true;

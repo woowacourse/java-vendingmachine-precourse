@@ -6,14 +6,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.VendingMachine;
 import vendingmachine.data.VendingMachineData;
 import vendingmachine.io.validator.InputValidator;
 import vendingmachine.type.Product;
 
 public class InputHandler {
 
-	OutputHandler outputHandler;
+	private OutputHandler outputHandler;
 
 	private String read() {
 		return Console.readLine();

@@ -2,7 +2,6 @@ package vendingmachine.io;
 
 import java.util.Map;
 
-import vendingmachine.VendingMachine;
 import vendingmachine.data.VendingMachineData;
 import vendingmachine.type.Coin;
 

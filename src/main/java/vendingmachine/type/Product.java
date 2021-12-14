@@ -19,10 +19,6 @@ public class Product {
 		return price;
 	}
 
-	public int getQuantity() {
-		return quantity;
-	}
-
 	public boolean isSoldOut() {
 		return quantity <= 0;
 	}

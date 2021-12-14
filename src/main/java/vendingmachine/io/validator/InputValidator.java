@@ -1,10 +1,8 @@
 package vendingmachine.io.validator;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 import vendingmachine.data.VendingMachineData;
 import vendingmachine.exception.IntegerTooSmallException;
@@ -17,7 +15,6 @@ import vendingmachine.type.Product;
 public class InputValidator {
 
 	public static void validMoneyValue(String money) {
-		int tmp;
 		try {
 			if (Integer.parseInt(money) <= 0) {
 				throw new IntegerTooSmallException(VendingMachineData.INPUT_VALUE_TOO_SMALL_ERROR);
@@ -62,7 +59,7 @@ public class InputValidator {
 
 	private static void checkQuantity(Matcher matcher) {
 		int price = Integer.parseInt(matcher.group(2));
-		if(Integer.parseInt(matcher.group(3)) <= 0) {
+		if(price <= 0) {
 			throw new IntegerTooSmallException(VendingMachineData.PRODUCT_QUANTITY_TOO_SMALL);
 		}
 	}
