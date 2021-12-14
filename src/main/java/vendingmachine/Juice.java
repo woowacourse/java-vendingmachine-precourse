@@ -40,4 +40,11 @@ public class Juice {
             return 0;
         }
     }
+
+    public boolean PriceCheck() {
+        if (price < 0 || !((price/10)*10 == price)) {
+            return false;
+        }
+        return true;
+    }
 }

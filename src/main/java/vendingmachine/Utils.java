@@ -28,7 +28,7 @@ public class Utils {
                 String[] juiceInfo = juice.substring(1,juice.length() - 1).split(",");
                 juiceIndex.add(new Juice(juiceInfo[0], Integer.parseInt(juiceInfo[1]), Integer.parseInt(juiceInfo[2])));
             }
-            if (SumNumberOfJuice(juiceIndex)) {
+            if (SumNumberOfJuice(juiceIndex) && MinUnit10Won(juiceIndex)) {
                 return juiceIndex;
             }
             return PrintUI.InputJuice();
@@ -66,6 +66,20 @@ public class Utils {
         } catch (IllegalArgumentException e) {
             System.out.println("[ERROR] : 재고를 채워주세요");
             totalNumberOfJuice = 0;
+            return false;
+        }
+    }
+
+    public static boolean MinUnit10Won(ArrayList<Juice> juiceIndex) {
+        try {
+            for (Juice juice : juiceIndex) {
+                if (! juice.PriceCheck()) {
+                    throw new IllegalArgumentException();
+                }
+            }
+            return true;
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] : 금액의 최소 단위는 10원이고 금액은 양의 정수입니다.");
             return false;
         }
     }
