@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Balance;
 import vendingmachine.domain.Items;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.Validation;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -10,6 +11,7 @@ public class VendingMachineController {
     private final Validation validator;
     private final Balance balance;
     private final Items items;
+    private Money money;
 
     public VendingMachineController() {
         validator = new Validation();
@@ -38,6 +40,10 @@ public class VendingMachineController {
 
     }
 
+    private void requestPrintBalanceCoins() {
+        OutputView.printBalanceCoins(balance.getBalanceCoin());
+    }
+
     private void receiveItemInformation() {
 
         try {
@@ -58,6 +64,7 @@ public class VendingMachineController {
             OutputView.requestInsertMoney();
             String insertMoney = InputView.receiveInput();
             validator.isValidInsertMoneyInput(insertMoney);
+            money = new Money(insertMoney);
         } catch (IllegalArgumentException e) {
             OutputView.printErrorMessage(validator.getErrorMessage());
             receiveInsertMoney();
@@ -65,7 +72,4 @@ public class VendingMachineController {
 
     }
 
-    private void requestPrintBalanceCoins() {
-        OutputView.printBalanceCoins(balance.getBalanceCoin());
-    }
 }
