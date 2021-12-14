@@ -142,6 +142,21 @@ public class Validation {
 
     }
 
+    private void checkItemInformation(String itemInput) {
+        StringTokenizer items = getItemToken(itemInput);
+
+        while (items.hasMoreTokens()) {
+            String item = items.nextToken();
+
+            checkItemNameOnlySpace(item);
+            checkItemNameSpacePosition(item);
+            checkItemPriceNumber(item);
+            checkItemPriceRange(item);
+            checkItemStockForm(item);
+        }
+
+    }
+
     public void isValidBalanceInput(String balance) {
         checkEmptyInput(balance);
         checkBalanceOnlyNumber(balance);
@@ -152,5 +167,7 @@ public class Validation {
         checkEmptyInput(itemInput);
         checkItemInputForm(itemInput);
         checkItemInformationForm(itemInput);
+        checkItemInformation(itemInput);
+        checkItemNameOverlap(itemInput);
     }
 }

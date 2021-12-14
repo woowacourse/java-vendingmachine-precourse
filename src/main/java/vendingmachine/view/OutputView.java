@@ -21,6 +21,10 @@ public class OutputView {
         System.out.println(REQUEST_VENDING_MACHINE_BALANCE);
     }
 
+    public static void requestItemInformation() {
+        System.out.println(REQUEST_ITEM_INFORMATION);
+    }
+
     public static void printErrorMessage(String errorMessage) {
         System.out.println(errorMessage + LINE_BREAK);
     }
