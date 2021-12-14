@@ -23,9 +23,9 @@ public class Changer {
 				continue;
 			}
 			if (isDividedNumMoreThanHavingCoinNum(nowCoinNum, dividedNum)) {
-				doReturn(nowCoin, dividedNum);
+				doReturnChanges(nowCoin, dividedNum);
 			}
-			doReturn(nowCoin, nowCoinNum);
+			doReturnChanges(nowCoin, nowCoinNum);
 		}
 		return returningChanges;
 	}
@@ -38,7 +38,7 @@ public class Changer {
 		return dividedNum == 0;
 	}
 
-	private void doReturn(Coin nowCoin, int coinNum) {
+	private void doReturnChanges(Coin nowCoin, int coinNum) {
 		havingChanges.minusCoin(nowCoin, coinNum);
 		returningChanges.addCoin(nowCoin, coinNum);
 		remainAmount -= nowCoin.getValue(coinNum);
