@@ -7,7 +7,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -18,11 +17,13 @@ public class VendingMachine {
     List<Product> products;
     Speaker speaker;
     Touchpad touchpad;
+    Assistant assistant;
 
     public VendingMachine() {
         this.coinBox = new LinkedHashMap<>();
         this.speaker = new Speaker();
         this.touchpad = new Touchpad();
+        this.assistant = new Assistant();
         List<Coin> sortedCoins = makeCoinStream().sorted().collect(Collectors.toList());
         for (Coin coin : sortedCoins) {
             coinBox.put(coin, 0);
@@ -31,32 +32,54 @@ public class VendingMachine {
 
     public void setBaseAsset() {
         speaker.requestVendingMachineAsset();
-        int asset = touchpad.insertVendingMachineAsset();
-        generateRandomCoinBasedOnAsset(asset);
-        speaker.announceCoinStock(coinBox);
+        String rawAsset = touchpad.insertVendingMachineAsset();
+        try {
+            int asset = assistant.convertToInteger(rawAsset);
+            assistant.checkMoney(asset);
+            generateRandomCoinBasedOnAsset(asset);
+            speaker.announceCoinStock(coinBox);
+        } catch (IllegalArgumentException e) {
+            speaker.announceError(e.getMessage());
+            setBaseAsset();
+        }
     }
 
     public void setProducts() {
         products = new ArrayList<>();
         speaker.requestProducts();
-        List<String> rawProducts = touchpad.inputProducts();
-        collectProducts(rawProducts);
+        String rawProducts = touchpad.inputProducts();
+        try {
+            products = assistant.collectProducts(rawProducts);
+        } catch (IllegalArgumentException e) {
+            speaker.announceError(e.getMessage());
+            setProducts();
+        }
     }
 
     public void sellProducts() {
         speaker.announceInsertMoney();
-        int insertedMoney = touchpad.insertMoney();
+        String rawInsertedMoney = touchpad.insertMoney();
+        Integer insertedMoney = assistant.convertToInteger(rawInsertedMoney);
+        assistant.checkMoney(insertedMoney);
         while (true) {
             speaker.announceBalance(insertedMoney);
             if (!purchasePossible(insertedMoney)) {
-                speaker.announceChanges();
-                changeMoney(insertedMoney);
+                stopSale(insertedMoney);
                 break;
             }
-            speaker.requestPurchaseProduct();
-            String wantedProduct = touchpad.purchaseProduct();
-            insertedMoney -= sellProduct(wantedProduct);
+            insertedMoney -= purchaseProduct();
         }
+    }
+
+    private void stopSale(Integer insertedMoney) {
+        speaker.announceChanges();
+        changeMoney(insertedMoney);
+    }
+
+    private Integer purchaseProduct() {
+        speaker.requestPurchaseProduct();
+        String wantedProduct = touchpad.purchaseProduct();
+        return sellProduct(wantedProduct);
     }
 
     private void generateRandomCoinBasedOnAsset(int asset) {
@@ -65,7 +88,7 @@ public class VendingMachine {
             int randomCoin = Randoms.pickNumberInList(coins);
             if (isAvailableCoin(asset, randomCoin)) {
                 asset -= randomCoin;
-                Coin generatedCoin = findCoin(randomCoin);
+                Coin generatedCoin = assistant.findCoin(randomCoin);
                 insertGeneratedCoinToCoinBox(generatedCoin);
             }
         }
@@ -79,44 +102,8 @@ public class VendingMachine {
         return coinBox.get(generatedCoin) + 1;
     }
 
-    private Coin findCoin(int randomCoin) {
-        return makeCoinStream().filter(coin -> coin.matchAmount(randomCoin)).findFirst()
-            .orElseThrow(IllegalArgumentException::new);
-    }
-
     private boolean isAvailableCoin(int asset, int randomCoin) {
         return asset >= randomCoin;
-    }
-
-    private void collectProducts(List<String> rawProducts) {
-        for (int i = 0; i < rawProducts.size(); i++) {
-            String rawProduct = removeSquareBrackets(rawProducts.get(i));
-            String[] sliceProductInformation = rawProduct.split(",");
-            try {
-                String productName = sliceProductInformation[0];
-                Integer productPrice = Integer.parseInt(sliceProductInformation[1]);
-                Integer productQuantity = Integer.parseInt(sliceProductInformation[2]);
-                validatePrice(productPrice);
-                products.add(new Product(productName, productPrice, productQuantity));
-            } catch (IllegalArgumentException e) {
-                setProducts();
-            }
-        }
-    }
-
-    private String removeSquareBrackets(String rawProduct) {
-        return rawProduct.substring(1, rawProduct.length() - 1);
-    }
-
-    private void validatePrice(Integer productPrice) {
-        if (productPrice < 100) {
-            System.out.println("[ERROR] 상품 가격은 100원 이상이어야 합니다.");
-            throw new IllegalArgumentException();
-        }
-        if ((productPrice % 10) != 0) {
-            System.out.println("[ERROR] 상품 가격은 10으로 나누어 떨어져야 합니다.");
-            throw new IllegalArgumentException();
-        }
     }
 
     private boolean purchasePossible(int insertedMoney) {
@@ -149,13 +136,14 @@ public class VendingMachine {
     }
 
     private int sellProduct(String wantedProduct) {
-        Product soldProduct = findWantedProduct(wantedProduct).orElseThrow(IllegalArgumentException::new);
-        soldProduct.sell();
-        return soldProduct.getPrice();
-    }
-
-    private Optional<Product> findWantedProduct(String wantedProduct) {
-        return products.stream().filter(product -> product.matchWantedProduct(wantedProduct)).findFirst();
+        try {
+            Product soldProduct = assistant.findWantedProduct(products, wantedProduct);
+            soldProduct.sell();
+            return soldProduct.getPrice();
+        } catch (IllegalArgumentException e) {
+            speaker.announceError(e.getMessage());
+            return 0;
+        }
     }
 
     private Stream<Coin> makeCoinStream() {

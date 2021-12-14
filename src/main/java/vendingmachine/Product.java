@@ -24,7 +24,7 @@ public class Product {
         this.quantity--;
     }
 
-    public boolean matchWantedProduct(String wantedProduct) {
+    public boolean matchProductName(String wantedProduct) {
         return this.name.equals(wantedProduct);
     }
 }
