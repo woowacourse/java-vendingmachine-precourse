@@ -44,7 +44,7 @@ public class VendingMachine {
 	}
 
 	private void checkCanBuy(Item item) {
-		if (!item.isAffordablePrice(amount)) {
+		if (!item.canBuy(amount)) {
 			throw new IllegalArgumentException(ErrorConst.HAVE_NO_AFFORDABLE_MONEY);
 		}
 		if (!item.isRemain()) {
