@@ -7,6 +7,7 @@ import java.util.Set;
 import java.util.regex.Pattern;
 
 import camp.nextstep.edu.missionutils.Console;
+
 import vendingmachine.domain.Item;
 import vendingmachine.utils.Message;
 
@@ -66,7 +67,7 @@ public class InputView {
 		do {
 			System.out.println(Message.ASK_BUY_ITEMS_MESSAGE);
 			buyItem = Console.readLine();
-		} while(!isPurchasableItem(buyItem, holdingItemList, inputMoney));
+		} while (!isPurchasableItem(buyItem, holdingItemList, inputMoney));
 		System.out.println();
 		return buyItem;
 	}

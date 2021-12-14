@@ -27,7 +27,6 @@ public class Operation {
 
 		holdingItemList = inputView.holdingItemsInput();
 		inputMoney = inputView.inputMoneyInput();
-
 		VendingMachine vendingMachine = VendingMachine.getVendingMachine(inputMoney, holdingItemList);
 
 		buy(vendingMachine);

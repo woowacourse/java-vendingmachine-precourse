@@ -5,7 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-
 public class VendingMachine {
 
 	public int inputMoney;
@@ -14,14 +13,14 @@ public class VendingMachine {
 
 	private static VendingMachine vendingMachine = null;
 
-	public static VendingMachine getVendingMachine(int inputMoney, List<Item> holdingItemList){
-		if (vendingMachine == null){
+	public static VendingMachine getVendingMachine(int inputMoney, List<Item> holdingItemList) {
+		if (vendingMachine == null) {
 			vendingMachine = new VendingMachine(inputMoney, holdingItemList);
 		}
 		return vendingMachine;
 	}
 
-	public VendingMachine(int inputMoney, List<Item> holdingItemList){
+	public VendingMachine(int inputMoney, List<Item> holdingItemList) {
 		this.inputMoney = inputMoney;
 		this.holdingItemList = holdingItemList;
 	}

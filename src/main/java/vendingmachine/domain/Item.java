@@ -23,7 +23,7 @@ public class Item {
 		return stock;
 	}
 
-	public void deductStock(){
+	public void deductStock() {
 		this.stock -= 1;
 	}
 }
