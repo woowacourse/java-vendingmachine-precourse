@@ -22,6 +22,7 @@ public enum Coin {
     }
 
     public static int getRandomAmount() {
+
         return Randoms.pickNumberInList(coinValueList());
     }
 
