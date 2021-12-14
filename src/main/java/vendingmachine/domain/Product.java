@@ -17,6 +17,9 @@ public class Product {
     private static final String BLANK_NAME = "";
 
     private static final int PRODUCT_CONTANT_SIZE = 3;
+    private static final int PRODUCT_NAME_INDEX = 0;
+    private static final int PRODUCT_PRICE_INDEX = 1;
+    private static final int PRODUCT_AMOUNT_INDEX = 2;
 
     private final String name;
     private final int price;
@@ -51,7 +54,8 @@ public class Product {
 
     public static Product crearteProduct(List<String> contents) {
         checkContentSize(contents);
-        return new Product(contents.get(0), parseInt(contents.get(1)), parseInt(contents.get(2)));
+        return new Product(contents.get(PRODUCT_NAME_INDEX), parseInt(contents.get(PRODUCT_PRICE_INDEX)),
+            parseInt(contents.get(PRODUCT_AMOUNT_INDEX)));
     }
 
     private static void checkContentSize(List<String> contents) {
