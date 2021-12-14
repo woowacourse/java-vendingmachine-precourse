@@ -97,9 +97,10 @@ public class Program {
 	}
 
 	private void buyProductUntilFailure() {
-		Guide.printLeftMoney(userMoney);
-		Guide.PURCHASE_REQUEST.println();
 		String name = getProductName();
+		if (!productTable.isAffordableProduct(name, userMoney)) {
+			return;
+		}
 		productTable.buy(name);
 		userMoney = productTable.getLeftMoney(name, userMoney);
 		if (!productTable.isAnythingToBuy(userMoney)) {
@@ -109,6 +110,8 @@ public class Program {
 	}
 
 	private String getProductName() {
+		Guide.printLeftMoney(userMoney);
+		Guide.PURCHASE_REQUEST.println();
 		String productName = Console.readLine().trim();
 		PurchaseProductNameValidator validator = new PurchaseProductNameValidator();
 		if (!validator.validate(productName, productTable)) {

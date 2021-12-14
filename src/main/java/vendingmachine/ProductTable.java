@@ -18,9 +18,6 @@ public class ProductTable {
 	public int getLeftMoney(final String name, final int money) {
 		ProductEntry entry = products.get(name);
 		int productPrice = entry.getPrice();
-		if (productPrice > money) {
-			return money;
-		}
 		return money - productPrice;
 	}
 
@@ -38,6 +35,11 @@ public class ProductTable {
 			}
 		}
 		return false;
+	}
+
+	public boolean isAffordableProduct(final String name, final int money) {
+		ProductEntry entry = products.get(name);
+		return entry.isAffordable(money);
 	}
 
 	public boolean hasProductName(String productName) {
