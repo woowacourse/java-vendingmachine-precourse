@@ -34,60 +34,103 @@ public class VendingMachineUI implements VendingMachine {
 	public void start() {
 		while (true) {
 			configureVendingMachine();
-			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_MONEY) {
-				System.out.println(PROMPT_USER_INSERT_MONEY);
-				String userInput = readLine();
-				boolean isValidInput = userInput.matches(NUMBER_REGEX);
-				try {
-					if (!isValidInput) {
-						throw new InvalidUserInputException();
-					}
-				} catch (InvalidUserInputException exception) {
-
-				}
-
-				if (isValidInput) {
-					int userAmount = Integer.parseInt(userInput);
-					if (!goodsStackerInterface.isEnoughMoney()) {
-						vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
-					}
-					goodsStackerInterface.setUserInputMoney(userAmount);
-					vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
-				}
-			}
-			if (vendingMachineStatus == VendingMachineStatus.SHOW_USER_LEFT_MONEY) {
-				System.out.println(goodsStackerInterface.getLeftMoneyString());
-				vendingMachineStatus = VendingMachineStatus.INPUT_USER_GOODS;
-				if (!goodsStackerInterface.isEnoughMoney()) {
-					vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
-				}
-			}
-			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_GOODS) {
-				System.out.println(PROMPT_USER_INPUT_GOODS);
-				String userInputGoods = readLine();
-				vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
-				try {
-					if (!goodsStackerInterface.isEnoughMoney(userInputGoods)) {
-						throw new NotEnoughMoneyException();
-					}
-					if (!goodsStackerInterface.haveName(userInputGoods)) {
-						throw new NotExistGoodsNameException();
-					}
-				} catch (IllegalArgumentException exception) {
-					vendingMachineStatus = VendingMachineStatus.INPUT_USER_GOODS;
-				}
-				if (goodsStackerInterface.isEnoughMoney(userInputGoods)) {
-					if (!goodsStackerInterface.buyGoods(userInputGoods)) {
-						vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
-					}
-				}
-			}
-			if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
-				System.out.println(CHANGE_STRING);
-				System.out.println(goodsStackerInterface.getLeftChangeResult());
+			sellGoodsByUser();
+			if (isFinishVendingMachine())
 				break;
+		}
+	}
+
+	private boolean isFinishVendingMachine() {
+		if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
+			proceedShowLeftCoin();
+			return true;
+		}
+		return false;
+	}
+
+	private void sellGoodsByUser() {
+		if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_MONEY) {
+			proceedInputUserMoney();
+		}
+		if (vendingMachineStatus == VendingMachineStatus.SHOW_USER_LEFT_MONEY) {
+			proceedShowLeftMoney();
+		}
+		if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_GOODS) {
+			proceedInputUserGoods();
+		}
+	}
+
+	private void proceedShowLeftCoin() {
+		System.out.println(CHANGE_STRING);
+		System.out.println(goodsStackerInterface.getLeftChangeResult());
+	}
+
+	private void proceedInputUserGoods() {
+		System.out.println(PROMPT_USER_INPUT_GOODS);
+		String userInputGoods = readLine();
+		vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
+		try {
+			checkValidationUserGoodsInput(userInputGoods);
+		} catch (IllegalArgumentException exception) {
+			vendingMachineStatus = VendingMachineStatus.INPUT_USER_GOODS;
+		}
+		buyGoods(userInputGoods);
+	}
+
+	private void buyGoods(String userInputGoods) {
+		if (goodsStackerInterface.isEnoughMoney(userInputGoods)) {
+			if (!goodsStackerInterface.buyGoods(userInputGoods)) {
+				vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
 			}
 		}
+	}
+
+	private void checkValidationUserGoodsInput(String userInputGoods) {
+		if (!goodsStackerInterface.isEnoughMoney(userInputGoods)) {
+			throw new NotEnoughMoneyException();
+		}
+		if (!goodsStackerInterface.haveName(userInputGoods)) {
+			throw new NotExistGoodsNameException();
+		}
+	}
+
+	private void proceedShowLeftMoney() {
+		System.out.println(goodsStackerInterface.getLeftMoneyString());
+		vendingMachineStatus = VendingMachineStatus.INPUT_USER_GOODS;
+		if (!goodsStackerInterface.isEnoughMoney()) {
+			vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+		}
+	}
+
+	private void proceedInputUserMoney() {
+		System.out.println(PROMPT_USER_INSERT_MONEY);
+		String userInput = readLine();
+		boolean isValidInput = checkValidationUserInputMoney(userInput);
+
+		if (isValidInput) {
+			defineWhatLevelWeShouldGo(userInput);
+		}
+	}
+
+	private boolean checkValidationUserInputMoney(String userInput) {
+		boolean isValidInput = userInput.matches(NUMBER_REGEX);
+		try {
+			if (!isValidInput) {
+				throw new InvalidUserInputException();
+			}
+		} catch (InvalidUserInputException exception) {
+
+		}
+		return isValidInput;
+	}
+
+	private void defineWhatLevelWeShouldGo(String userInput) {
+		int userAmount = Integer.parseInt(userInput);
+		if (!goodsStackerInterface.isEnoughMoney()) {
+			vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+		}
+		goodsStackerInterface.setUserInputMoney(userAmount);
+		vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
 	}
 
 	private void configureVendingMachine() {
