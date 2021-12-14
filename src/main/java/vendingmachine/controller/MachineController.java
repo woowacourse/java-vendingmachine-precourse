@@ -20,7 +20,9 @@ public class MachineController {
 		int inputMoney = inputController.scanInputMoney();
 		vendingMachine = new VendingMachine(holdingMoney, inputMoney, itemList, coinCount);
 		buyItem();
-		OutputView.printChange(vendingMachine.calculateChange());
+		HashMap<Coin, Integer> change = vendingMachine.calculateChange();
+		OutputView.printChange(change);
+		vendingMachine.calculateCoinCount(change);
 	}
 
 	public void buyItem() {

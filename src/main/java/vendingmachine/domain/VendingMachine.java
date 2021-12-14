@@ -30,11 +30,9 @@ public class VendingMachine {
 		for (Coin coin : Coin.getCoinArray()) {
 			if (money / coin.getAmount() > 0 && money / coin.getAmount() <= coinCount.get(coin)) {
 				change.put(coin, money / coin.getAmount());
-				coinCount.put(coin, coinCount.get(coin) - money / coin.getAmount());
 				money %= coin.getAmount();
 			} else if (money / coin.getAmount() > 0 && money / coin.getAmount() > coinCount.get(coin)) {
 				change.put(coin, coinCount.get(coin));
-				coinCount.put(coin, 0);
 				money -= coin.getAmount() * coinCount.get(coin);
 			}
 		}
@@ -47,6 +45,12 @@ public class VendingMachine {
 			change.put(coin, 0);
 		}
 		return change;
+	}
+
+	public void calculateCoinCount(HashMap<Coin, Integer> change) {
+		for (Coin coin : Coin.getCoinArray()){
+			coinCount.put(coin, coinCount.get(coin) - change.get(coin));
+		}
 	}
 
 	public boolean checkEmptyItemList() {
