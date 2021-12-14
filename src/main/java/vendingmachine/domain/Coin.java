@@ -6,6 +6,8 @@ public enum Coin {
 	COIN_50(50),
 	COIN_10(10);
 
+	private static final String WON = "원";
+
 	private final int amount;
 
 	Coin(final int amount) {
@@ -19,6 +21,6 @@ public enum Coin {
 
 	@Override
 	public String toString() {
-		return amount + "원";
+		return amount + WON;
 	}
 }

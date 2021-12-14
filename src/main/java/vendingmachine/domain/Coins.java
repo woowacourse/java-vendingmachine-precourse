@@ -38,4 +38,34 @@ public class Coins {
 	public int getCoinCount(Coin coin) {
 		return coinRepository.get(coin);
 	}
+
+	public EnumMap<Coin, Integer> changeCoins(int moneyLeft) {
+		if (!returnable(moneyLeft)) {
+			return coinRepository;
+		}
+
+		EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
+		for (Coin coin : values()) {
+			int count = getCoinCount(moneyLeft, coin);
+			moneyLeft -= coin.getAmount() * count;
+			coins.put(coin, count);
+		}
+		return coins;
+	}
+
+	private int getCoinCount(int changes, Coin coin) {
+		int count = changes / coin.getAmount();
+		if (count > coinRepository.get(coin)) {
+			return coinRepository.get(coin);
+		}
+		return count;
+	}
+
+	private boolean returnable(int moneyLeft) {
+		int sum = 0;
+		for (Coin coin : values()) {
+			sum += coin.getAmount() * coinRepository.get(coin);
+		}
+		return sum >= moneyLeft;
+	}
 }

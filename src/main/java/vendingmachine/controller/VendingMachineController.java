@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
+import vendingmachine.exception.RequestChangesException;
 import vendingmachine.views.InputView;
 import vendingmachine.views.OutputView;
 
@@ -17,9 +18,12 @@ public class VendingMachineController {
 		vendingMachine.printCoins();
 		insertItems();
 		insertMoney();
-		do {
-			purchase();
-		} while (vendingMachine.continuable());
+		try {
+			operate();
+		} catch (RequestChangesException ignored) {
+		} finally {
+			vendingMachine.giveBackChanges();
+		}
 	}
 
 	private void insertChanges() {
@@ -50,6 +54,12 @@ public class VendingMachineController {
 			OutputView.printError(e.getMessage());
 			insertMoney();
 		}
+	}
+
+	private void operate() {
+		do {
+			purchase();
+		} while (vendingMachine.continuable());
 	}
 
 	private void purchase() {

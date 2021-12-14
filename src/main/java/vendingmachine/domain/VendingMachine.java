@@ -1,11 +1,16 @@
 package vendingmachine.domain;
 
+import java.util.EnumMap;
+
+import vendingmachine.exception.RequestChangesException;
 import vendingmachine.views.OutputView;
 
 public class VendingMachine {
+	private static final String CHANGES = "잔돈";
+
 	private Coins coins;
 	private Items items;
-	private Money money;
+	private Money moneyLeft;
 
 	public void insertChanges(Money changes) {
 		createCoins(changes.getAmount());
@@ -24,19 +29,31 @@ public class VendingMachine {
 	}
 
 	public void insertMoney(String moneyString) {
-		this.money = new Money(moneyString);
+		this.moneyLeft = new Money(moneyString);
 	}
 
 	public void printMoney() {
-		OutputView.printMoney(money);
+		OutputView.printMoney(moneyLeft);
 	}
 
 	public void purchase(String itemName) {
-		int spendAmount = items.purchase(itemName, money.getAmount());
-		money.spend(spendAmount);
+		if (requestedChanges(itemName)) {
+			throw new RequestChangesException();
+		}
+		int spendAmount = items.purchase(itemName, moneyLeft.getAmount());
+		moneyLeft.spend(spendAmount);
 	}
 
 	public boolean continuable() {
-		return items.continuable(money.getAmount());
+		return items.continuable(moneyLeft.getAmount());
+	}
+
+	private boolean requestedChanges(String string) {
+		return string.equals(CHANGES);
+	}
+
+	public void giveBackChanges() {
+		EnumMap<Coin, Integer> changes = coins.changeCoins(moneyLeft.getAmount());
+		OutputView.printChanges(changes);
 	}
 }
