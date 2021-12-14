@@ -28,11 +28,9 @@ public class Coins {
 
 	private List<Integer> getCoinTypes() {
 		List<Integer> coinTypes = new ArrayList<>();
-
 		for (Coin coin : Coin.values()) {
 			coinTypes.add(coin.getAmount());
 		}
-
 		return coinTypes;
 	}
 
@@ -47,17 +45,14 @@ public class Coins {
 
 	public LinkedHashMap<Integer, Integer> getCoinCount() {
 		LinkedHashMap<Integer, Integer> coinCount = new LinkedHashMap<>();
-
 		for (Coin coin : Coin.values()) {
 			coinCount.put(coin.getAmount(), coins.get(coin));
 		}
-
 		return coinCount;
 	}
 
 	public LinkedHashMap<Integer, Integer> calculateChange(int money) {
 		LinkedHashMap<Integer, Integer> changeInfo = new LinkedHashMap<>();
-
 		for (Coin coin : Coin.values()) {
 			int coinCount = getChangeCoinCount(coin, money);
 			if (coinCount > 0) {
@@ -66,7 +61,6 @@ public class Coins {
 				reduceCoin(coin, coinCount);
 			}
 		}
-
 		return changeInfo;
 	}
 

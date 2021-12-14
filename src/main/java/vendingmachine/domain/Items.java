@@ -55,13 +55,11 @@ public class Items {
 
 	public List<String> getItemList() {
 		List<String> itemList = new ArrayList<>();
-
 		for (Item item : items) {
 			if (!isSoldOut(item)) {
 				itemList.add(item.getItemName());
 			}
 		}
-
 		return itemList;
 	}
 }
