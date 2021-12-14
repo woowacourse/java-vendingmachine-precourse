@@ -100,20 +100,4 @@ public class VendingMachine {
             throw new IllegalArgumentException(Exception.NUMBER_DIVIDE_TEM_EXCEPTION_MESSAGE);
         }
     }
-
-    public void validateDuplicateName() {
-        if (!checkDuplicateName()) {
-            throw new IllegalArgumentException(Exception.PRODUCT_NAME_DUPLICATE_EXCEPTION_MESSAGE);
-        }
-    }
-
-    private boolean checkDuplicateName() {
-        return products.size() != products.stream()
-                .map(Product::getName)
-                .collect(Collectors.toList())
-                .stream()
-                .distinct()
-                .count();
-    }
-
 }

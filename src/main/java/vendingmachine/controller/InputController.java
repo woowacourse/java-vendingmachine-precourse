@@ -6,6 +6,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.utils.Exception;
 import vendingmachine.utils.NumberValidator;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -15,7 +16,7 @@ public class InputController {
     public static void makeProductsList(VendingMachine vendingMachine) {
         String inputProducts = InputView.inputProducts();
         String[] productsInfo = splitProducts(inputProducts, ";");
-        if (validateProductForm(productsInfo)) {
+        if (validateProductForm(productsInfo) && validateDuplicate(productsInfo)) {
             for (String productInfo : sliceProduct(productsInfo)) {
                 processOfAddingProduct(vendingMachine, splitProducts(productInfo, ","));
             }
@@ -28,7 +29,6 @@ public class InputController {
             int productPrice = Integer.parseInt(individualProduct[1]);
             int productQuantity = Integer.parseInt((individualProduct[2]));
             vendingMachine.addProduct(new Product(productName, productPrice, productQuantity));
-            vendingMachine.validateDuplicateName();
         }
     }
 
@@ -53,6 +53,25 @@ public class InputController {
             }
         }
         return true;
+    }
+
+    public static boolean validateDuplicate(String[] productsInfo) {
+        if (checkDuplicateName(productsInfo)) {
+            throw new IllegalArgumentException(Exception.PRODUCT_NAME_DUPLICATE_EXCEPTION_MESSAGE);
+        }
+        return true;
+    }
+
+    private static boolean checkDuplicateName(String[] productsInfo) {
+        List<String> productNames = new ArrayList<>();
+        for (String productInfo : sliceProduct(productsInfo)) {
+            productNames.add(splitProducts(productInfo, ",")[0]);
+        }
+        if (productNames.size() != productNames.stream().distinct().count()) {
+            System.out.println("중복입니다.");
+            return true;
+        }
+        return false;
     }
 
     public static boolean validateProductPrice(String price) {
