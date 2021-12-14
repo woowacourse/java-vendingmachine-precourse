@@ -1,6 +1,8 @@
 package vendingmachine.utils;
 
-import static vendingmachine.constants.Constant.INFO_SPLIT_CRITERIA;
+import static vendingmachine.constants.Constant.*;
+import static vendingmachine.constants.Message.ERROR_IS_NOT_INTEGER;
+import static vendingmachine.constants.Message.ERROR_IS_NOT_POSITIVE;
 
 public class Parser {
 	private Parser() {
@@ -11,7 +13,7 @@ public class Parser {
 		Validator.validateItemInfoFormat(itemInfo);
 		String data = removeSquareBrackets(itemInfo);
 
-		return splitLine(data, INFO_SPLIT_CRITERIA);
+		return splitLine(data, DETAIL_ITEM_INFO_SPLIT_CRITERIA);
 	}
 
 	public static String[] splitLine(String line, String criteria) {
@@ -19,10 +21,17 @@ public class Parser {
 	}
 
 	public static Integer makeInteger(String str) {
-		return Integer.parseInt(str);
+		try {
+			int number = Integer.parseInt(str);
+			Validator.validateRange(number, MIN_INPUT_VALUE, ERROR_IS_NOT_POSITIVE);
+
+			return number;
+		} catch (NumberFormatException e) {
+			throw new IllegalArgumentException(ERROR_IS_NOT_INTEGER);
+		}
 	}
 
 	private static String removeSquareBrackets(String info) {
-		return info.substring(1, info.length() - 1);
+		return info.substring(VALID_STRING_START_INDEX, info.length() - 1);
 	}
 }
