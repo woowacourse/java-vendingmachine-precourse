@@ -2,8 +2,6 @@ package vendingmachine.purchase;
 
 import static vendingmachine.StringConstants.ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE;
 
-import vendingmachine.item.Item;
-
 public class Purchase {
     private int moneyAvailable;
 
@@ -33,5 +31,9 @@ public class Purchase {
             throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE);
         }
         moneyAvailable -= price;
+    }
+
+    public boolean isAvailable(PurchaseValidator purchaseValidator) {
+        return purchaseValidator.isAvailable(this);
     }
 }

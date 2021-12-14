@@ -17,10 +17,7 @@ public class PurchaseService {
     }
 
     public boolean isPurchaseAvailable() {
-        if (!isMoreMoneyThanLowestPriceInStock() || vendingMachine.isAllItemsSoldOut()) {
-            return false;
-        }
-        return true;
+        return purchase.isAvailable(new PurchaseValidator(vendingMachine));
     }
 
     public int showAvailableMoney() {
@@ -29,14 +26,6 @@ public class PurchaseService {
 
     public Coins giveChange() {
         return vendingMachine.giveChange(purchase.end());
-    }
-
-    private boolean isMoreMoneyThanLowestPriceInStock() {
-        int minimumPrice = vendingMachine.findLowestPriceInStock();
-        if (purchase.isAffordablePrice(minimumPrice)) {
-            return true;
-        }
-        return false;
     }
 
     public void purchaseByItemName(String itemName) {
