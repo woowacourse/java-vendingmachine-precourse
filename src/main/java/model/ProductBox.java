@@ -19,9 +19,27 @@ public class ProductBox {
 	}
 
 	private List<Product> makeBox(List<String> products) {
-		return products.stream()
-			.map(this::makeProduct)
+		if (hasNoDuplicateProduct(products)) {
+			return products.stream()
+				.map(this::makeProduct)
+				.collect(Collectors.toList());
+		}
+		throw new IllegalArgumentException();
+	}
+
+	private boolean hasNoDuplicateProduct(List<String> products) {
+		List<String> productNames = products.stream()
+			.map(this::bringProductName)
 			.collect(Collectors.toList());
+		int distinctProductCount = (int)productNames.stream().distinct().count();
+		if (distinctProductCount != products.size()) {
+			throw new IllegalArgumentException("[ERROR] 입력한 자판기 상품 중 상품명이 중복 되는 상품이 있다.");
+		}
+		return true;
+	}
+
+	private String bringProductName(String product) {
+		return Arrays.stream(product.split(COMMA)).collect(Collectors.toList()).get(0);
 	}
 
 	private Product makeProduct(String product) {

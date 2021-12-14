@@ -27,7 +27,14 @@ public class MachineController {
 
 	private static void prepareProductOnMachine(VendingMachine vendingMachine) {
 		InputDisplay.askInputProducts();
-		vendingMachine.makeProductBox(InputController.inputProducts());
+		while (true) {
+			try {
+				vendingMachine.makeProductBox(InputController.inputProducts());
+				return;
+			} catch (IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
+		}
 	}
 
 	private static void putInsertedMoneyIntoMachine(VendingMachine vendingMachine) {
@@ -39,7 +46,11 @@ public class MachineController {
 		while (!vendingMachine.isAllProductSoldOut() && vendingMachine.hasEnoughMoneyToBuyProduct()) {
 			OutputDisplay.showNowInsertedMoney(vendingMachine.giveInsertedMoney());
 			InputDisplay.askInputProductToBuy();
-			vendingMachine.sellProduct(InputController.inputProductNameToBuy());
+			try {
+				vendingMachine.sellProduct(InputController.inputProductNameToBuy());
+			} catch (IllegalArgumentException error) {
+				System.out.println(error.getMessage());
+			}
 		}
 	}
 }
