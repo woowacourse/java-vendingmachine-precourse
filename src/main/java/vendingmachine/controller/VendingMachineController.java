@@ -1,6 +1,9 @@
 package vendingmachine.controller;
 
+import java.util.List;
+
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.Item;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -17,6 +20,9 @@ public class VendingMachineController {
 	}
 
 	private void processBeverage() {
-		InputView.getItems();
+		List<Item> items = InputView.getItems();
+		for (Item item : items) {
+			System.out.println("item = " + item);
+		}
 	}
 }
