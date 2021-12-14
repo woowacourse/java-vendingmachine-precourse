@@ -2,8 +2,8 @@ package vendingmachine.util;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.coin.Coin;
-import vendingmachine.util.validator.BalanceValidation;
-import vendingmachine.util.validator.ProductsValidation;
+import vendingmachine.util.validator.validation.BalanceValidation;
+import vendingmachine.util.validator.validation.ProductsValidation;
 
 import static vendingmachine.util.finalstring.Message.*;
 

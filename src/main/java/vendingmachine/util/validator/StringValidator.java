@@ -1,8 +1,8 @@
 package vendingmachine.util.validator;
 
-import static vendingmachine.util.validator.Validation.acceptThrow;
+import static vendingmachine.util.validator.Validator.acceptThrow;
 
-public class StringValidation {
+public class StringValidator {
     public static void isNotInteger(String userInput, ThrowIllegalSupplier validator) {
         for(char eachChar : userInput.toCharArray()) {
             validEachCharIsNotInteger(eachChar, validator);

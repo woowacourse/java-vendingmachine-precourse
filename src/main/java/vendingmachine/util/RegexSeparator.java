@@ -1,7 +1,7 @@
 package vendingmachine.util;
 
 import vendingmachine.domain.product.Product;
-import vendingmachine.util.validator.IntegerValidation;
+import vendingmachine.util.validator.IntegerValidator;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -43,11 +43,11 @@ public class RegexSeparator {
     }
 
     private static void verifyPrice(int price) {
-        IntegerValidation.isNotMultiplyByTen(price, () -> new IllegalArgumentException("[ERROR]"));
+        IntegerValidator.isNotMultiplyByTen(price, () -> new IllegalArgumentException("[ERROR]"));
     }
 
     private static void verifyAmount(int amount) {
-        IntegerValidation.isNegative(amount, () -> new IllegalArgumentException("[ERROR]"));
+        IntegerValidator.isNegative(amount, () -> new IllegalArgumentException("[ERROR]"));
     }
 
     private static int parseInt(String target) {

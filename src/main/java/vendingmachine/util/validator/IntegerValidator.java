@@ -1,8 +1,8 @@
 package vendingmachine.util.validator;
 
-import static vendingmachine.util.validator.Validation.acceptThrow;
+import static vendingmachine.util.validator.Validator.acceptThrow;
 
-public class IntegerValidation {
+public class IntegerValidator {
 
     public static void isNegative(int userInput, ThrowIllegalSupplier validator) {
         if (userInput < 0) {

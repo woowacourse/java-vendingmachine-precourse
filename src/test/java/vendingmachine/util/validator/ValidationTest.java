@@ -8,7 +8,7 @@ public class ValidationTest {
     @Test
     void null_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> CommonValidation.isNull(null, () -> new IllegalArgumentException("[ERROR]")))
+                .isThrownBy(() -> CommonValidator.isNull(null, () -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
 }

@@ -22,11 +22,6 @@ public class Product {
         return price <= balance;
     }
 
-    // for test
-    public boolean verifyName(String name) {
-        return this.name.equals(name);
-    }
-
     public void isPurchasedBy(Consumer consumer) {
         consumer.reduceBalance(price);
         reduceAmount();
@@ -34,5 +29,11 @@ public class Product {
 
     private void reduceAmount() {
         amount--;
+    }
+
+
+    // for test
+    public boolean verifyName(String name) {
+        return this.name.equals(name);
     }
 }

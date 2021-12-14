@@ -1,6 +1,7 @@
 package vendingmachine.util.validator;
 
 import org.junit.jupiter.api.Test;
+import vendingmachine.util.validator.validation.BalanceValidation;
 
 import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 

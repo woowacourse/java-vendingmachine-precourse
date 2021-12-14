@@ -8,7 +8,7 @@ public class IntegerValidationTest {
     @Test
     void 음수_값_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> IntegerValidation
+                .isThrownBy(() -> IntegerValidator
                         .isNegative(-1, () -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
@@ -16,7 +16,7 @@ public class IntegerValidationTest {
     @Test
     void 입력값_10의_배수_검증() {
         assertThatIllegalArgumentException()
-                .isThrownBy(() -> IntegerValidation
+                .isThrownBy(() -> IntegerValidator
                         .isNotMultiplyByTen(131, () -> new IllegalArgumentException("[ERROR]")))
                 .withMessageStartingWith("[ERROR]");
     }
