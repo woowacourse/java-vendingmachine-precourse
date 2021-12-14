@@ -165,3 +165,13 @@ public enum Coin {
 - **Git의 커밋 단위는 앞 단계에서 README.md 파일에 정리한 기능 목록 단위**로 추가한다.
    - [AngularJS Commit Message Conventions](https://gist.github.com/stephenparish/9941e89d80e2bc58a153) 참고해 commit log를 남긴다.
 - 과제 진행 및 제출 방법은 [프리코스 과제 제출 문서](https://github.com/woowacourse/woowacourse-docs/tree/master/precourse) 를 참고한다.
+
+
+## 과제 기능 목록
+- 자판기가 보유하고 있는 금액을 받는 getTotal() 구현
+- 자판기가 보유한 금액에 맞게 임의로 동전들을 받는 getCoins() 구현
+- 가지고 있는 동전들을 보여주는 printCoins() 구현
+- 상품명과 가격, 수량을 받는 getMenus() 구현
+- 투입 금액과, 최소 가격, 판매 완료 여부를 계산하는 getMoney, calcMinPrice, checkSoldOut 구현
+- 상품명에 따라 수량을 갱신하고 판매가를 가져오는 sellName() 구현
+- 잔돈을 반환하는 giveChange() 구현

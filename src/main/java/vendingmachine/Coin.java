@@ -13,4 +13,10 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+
+    public int valueOf(){
+        return this.amount;
+    }
+
+
 }
