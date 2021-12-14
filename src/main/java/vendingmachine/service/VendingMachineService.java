@@ -8,7 +8,7 @@ public class VendingMachineService {
 	private static final String INSERT_MONEY_ERROR_MESSAGE = "금액이 부족합니다.";
 
 	public static void insertMoney(VendingMachine vendingMachine, Money insertMoney) throws IllegalArgumentException {
-		vendingMachine.insertMoney(insertMoney);
+		vendingMachine.deposit(insertMoney);
 		if (!vendingMachine.isBuy()) {
 			throw new IllegalArgumentException(INSERT_MONEY_ERROR_MESSAGE);
 		}

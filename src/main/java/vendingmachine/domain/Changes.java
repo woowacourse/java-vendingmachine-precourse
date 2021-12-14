@@ -49,4 +49,12 @@ public class Changes {
 		}
 		return changes;
 	}
+
+	public Money totalMoney() {
+		Money money = new Money(0);
+		for (Map.Entry<Coin, Integer> coinInteger : changes.entrySet()) {
+			money = money.plus(new Money(coinInteger.getKey().getAmount() * coinInteger.getValue()));
+		}
+		return money;
+	}
 }

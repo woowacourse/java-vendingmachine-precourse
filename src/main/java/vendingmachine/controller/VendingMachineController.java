@@ -19,7 +19,7 @@ public class VendingMachineController {
 
 	public void run() {
 		while (vendingMachine.isBuy()) {
-			OutputView.insertMoneyUI(vendingMachine.getInsertMoney());
+			OutputView.insertMoneyUI(vendingMachine.getRemainingMoney());
 			String productName = RequestController.requestProductName();
 			VendingMachineService.buyForName(vendingMachine, productName);
 		}
@@ -36,7 +36,7 @@ public class VendingMachineController {
 	}
 
 	public void returnChanges() {
-		OutputView.insertMoneyUI(vendingMachine.getInsertMoney());
+		OutputView.insertMoneyUI(vendingMachine.getRemainingMoney());
 		OutputView.returnChangesUI(VendingMachineService.returnChanges(vendingMachine));
 	}
 
