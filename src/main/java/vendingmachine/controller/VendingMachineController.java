@@ -65,8 +65,9 @@ public class VendingMachineController {
 				OutputView.printExceptionMessage(exception.getMessage());
 			}
 		}
-		Coins change = coins.calculateChange(insertMoney);
-		OutputView.printChange(change);
+		OutputView.printInsertMoney(insertMoney);
+		EnumMap<Coin, Integer> change = coins.calculateChange(insertMoney);
+		OutputView.printChange(coins.coinsToString(change));
 	}
 
 	private void purchaseProduct() {

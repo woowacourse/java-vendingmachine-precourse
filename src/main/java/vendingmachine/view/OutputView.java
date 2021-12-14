@@ -1,5 +1,8 @@
 package vendingmachine.view;
 
+import java.util.EnumMap;
+
+import vendingmachine.model.Coin;
 import vendingmachine.model.Coins;
 
 public class OutputView {
@@ -46,8 +49,8 @@ public class OutputView {
 		System.out.println(LINE_WRAP + OUTPUT_INSERT_MONEY + COLON + WHITESPACE + insertMoney);
 	}
 
-	public static void printChange(Coins change) {
-		System.out.println(LINE_WRAP + OUTPUT_CHANGE);
-		System.out.println(change.toString());
+	public static void printChange(String coins) {
+		System.out.println(OUTPUT_CHANGE);
+		System.out.println(coins);
 	}
 }

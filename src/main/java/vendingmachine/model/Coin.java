@@ -25,4 +25,8 @@ public enum Coin {
 	public String toString() {
 		return this.amount + POSTFIX;
 	}
+
+	public boolean isReturnable(int insertMoney) {
+		return insertMoney >= this.amount;
+	}
 }

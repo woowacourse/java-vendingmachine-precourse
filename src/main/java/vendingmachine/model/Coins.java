@@ -12,10 +12,6 @@ public class Coins {
 	private static final String POSTFIX = "개";
 	private EnumMap<Coin, Integer> coinMap;
 
-	public Coins() {
-		this.coinMap = new EnumMap<>(Coin.class);
-	}
-
 	public Coins(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
 		for (Coin coin : Coin.values()) {
@@ -38,17 +34,18 @@ public class Coins {
 		return Coin.values()[coinIndex];
 	}
 
-	public Coins calculateChange(int insertMoney) {
-		Coins change = new Coins();
+	public EnumMap<Coin, Integer> calculateChange(int insertMoney) {
+		EnumMap<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
+
 		for (Coin coin : coinMap.keySet()) {
-			int coinNumber = coin.divideByCoinAmount(insertMoney);
-			if (coinNumber > 0 && coinMap.get(coin) >= coinNumber) {
-				insertMoney -= coin.multiplyByCoinNumber(coinNumber);
-				coinMap.put(coin, coinMap.get(coin) - coinNumber);
-				change.coinMap.put(coin, coinNumber);
+			if (coinMap.get(coin) > 0 && coin.isReturnable(insertMoney)) {
+				int returningCnt = Math.min(coinMap.get(coin), coin.divideByCoinAmount(insertMoney));
+				insertMoney -= coin.multiplyByCoinNumber(returningCnt);
+				coinMap.put(coin, coinMap.get(coin) - returningCnt);
+				changeMap.put(coin, returningCnt);
 			}
 		}
-		return change;
+		return changeMap;
 	}
 
 	@Override
@@ -60,6 +57,19 @@ public class Coins {
 				.append(DASH)
 				.append(WHITESPACE)
 				.append(coinMap.get(coin))
+				.append(POSTFIX)
+				.append(LINE_WRAP));
+		return coinsStringBuilder.toString();
+	}
+
+	public String coinsToString(EnumMap<Coin, Integer> coins) {
+		StringBuilder coinsStringBuilder = new StringBuilder();
+		coins.keySet()
+			.forEach(coin -> coinsStringBuilder.append(coin.toString())
+				.append(WHITESPACE)
+				.append(DASH)
+				.append(WHITESPACE)
+				.append(coins.get(coin))
 				.append(POSTFIX)
 				.append(LINE_WRAP));
 		return coinsStringBuilder.toString();
