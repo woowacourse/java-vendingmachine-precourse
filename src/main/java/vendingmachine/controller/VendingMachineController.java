@@ -14,13 +14,13 @@ public class VendingMachineController {
 
 	public void settingMachineChanges() {
 		while (true) {
-			String changes = view.inputChanges();
+			String changes = view.inputInitialCoins();
 			if (validator.isValidMoney(changes)) {
 				machine.setCoins(Integer.parseInt(changes));
 				break;
 			}
 		}
-		view.printChanges(machine.getCoinList());
+		view.printInitialCoins(machine.getCoinList());
 	}
 
 	public void settingMerchandise() {
@@ -44,7 +44,7 @@ public class VendingMachineController {
 	}
 
 	public void chooseMerchandise() {
-		view.printCurrentBalance(machine.getCurrentBalance());
+		view.printCurrentChanges(machine.getCurrentBalance());
 		while (true) {
 			String item = view.inputMerchandiseToBuy();
 			if (machineValidator.isValidSelectedItem(item)) {
@@ -58,8 +58,8 @@ public class VendingMachineController {
 		while (machine.checkAbleToBuyItem()) {
 			chooseMerchandise();
 		}
-		view.printCurrentBalance(machine.getCurrentBalance());
-		view.printBalanceCoinsCount(machine.getReturnChange());
+		view.printCurrentChanges(machine.getCurrentBalance());
+		view.printChangeCoinsCount(machine.getReturnChange());
 	}
 
 }

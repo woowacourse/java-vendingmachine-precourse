@@ -5,22 +5,25 @@ import java.util.Map;
 import camp.nextstep.edu.missionutils.Console;
 
 public class MachineView {
-	private static final String INPUT_CHANGES_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
+	private static final String INPUT_INITIAL_COINS_MESSAGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
 	private static final String INPUT_MERCHANDISE_MESSAGE = "상품명과 가격, 수량을 입력해 주세요.";
 	private static final String INPUT_PAYMENT_MESSAGE = "투입 금액을 입력해 주세요.";
 	private static final String INPUT_BUY_MESSAGE = "구매할 상품명을 입력해 주세요.";
-	private static final String BALANCE = "잔돈";
+	private static final String CHANGES_MESSAGE = "잔돈";
+	private static final String OUTPUT_COINS_MESSAGE = "자판기가 보유한 동전";
+	private static final String OUTPUT_COINS_INFO = "%d원 - %d개\n";
+	private static final String OUTPUT_BALANCE = "투입 금액: %d원\n";
 
-	public String inputChanges() {
-		System.out.println(INPUT_CHANGES_MESSAGE);
+	public String inputInitialCoins() {
+		System.out.println(INPUT_INITIAL_COINS_MESSAGE);
 		return Console.readLine();
 	}
 
-	public void printChanges(Map<Integer, Integer> changesInfo) {
+	public void printInitialCoins(Map<Integer, Integer> coins) {
 		System.out.println();
-		System.out.println("자판기가 보유한 동전");
-		for (int coin : changesInfo.keySet()) {
-			System.out.println(coin + "원 - " + changesInfo.get(coin) + "개");
+		System.out.println(OUTPUT_COINS_MESSAGE);
+		for (int coin : coins.keySet()) {
+			System.out.printf(OUTPUT_COINS_INFO, coin, coins.get(coin));
 		}
 	}
 
@@ -36,9 +39,9 @@ public class MachineView {
 		return Console.readLine();
 	}
 
-	public void printCurrentBalance(int balance) {
+	public void printCurrentChanges(int balance) {
 		System.out.println();
-		System.out.println("투입 금액: " + balance + "원");
+		System.out.printf(OUTPUT_BALANCE, balance);
 	}
 
 	public String inputMerchandiseToBuy() {
@@ -46,10 +49,10 @@ public class MachineView {
 		return Console.readLine();
 	}
 
-	public void printBalanceCoinsCount(Map<Integer, Integer> changesInfo) {
-		System.out.println(BALANCE);
+	public void printChangeCoinsCount(Map<Integer, Integer> changesInfo) {
+		System.out.println(CHANGES_MESSAGE);
 		for (int coin : changesInfo.keySet()) {
-			System.out.println(coin + "원 - " + changesInfo.get(coin) + "개");
+			System.out.printf(OUTPUT_COINS_INFO, coin, changesInfo.get(coin));
 		}
 	}
 
