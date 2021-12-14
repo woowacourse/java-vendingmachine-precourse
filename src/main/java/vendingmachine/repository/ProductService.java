@@ -45,4 +45,13 @@ public class ProductSeller {
             throw new IllegalArgumentException(ERR_INVALID_PRODUCT);
         }
     }
+
+    private void validateNonDuplicateName(List<Product> products) {
+        if (products.stream()
+            .map(Product::getName)
+            .distinct()
+            .count() != products.size()) {
+            throw new IllegalArgumentException(ERR_DUPLICATED_NAME);
+        }
+    }
 }
