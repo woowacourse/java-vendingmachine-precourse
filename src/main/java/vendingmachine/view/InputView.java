@@ -26,7 +26,6 @@ public class InputView {
 	}
 
 	public int requestMoneyOfMachine() {
-		outputView.printMessage("자판기가 보유하고 있는 금액을 입력해 주세요.");
 		return getValidMoney();
 	}
 
@@ -71,17 +70,14 @@ public class InputView {
 	}
 
 	public int requestMoneyOfUser() {
-		outputView.printMessage("투입 금액을 입력해 주세요.");
 		return getValidMoney();
 	}
 
 	public String requestProductName() {
-		outputView.printMessage("구매할 상품명을 입력해 주세요.");
 		return reader.readLine();
 	}
 
 	public List<ProductDto> requestProductDtos() {
-		outputView.printMessage("상품명과 가격, 수량을 입력해 주세요.");
 		return getValidProductDtos();
 	}
 

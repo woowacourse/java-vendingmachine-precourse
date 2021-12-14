@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import java.util.List;
 
 import vendingmachine.dto.ProductDto;
+import vendingmachine.exception.VendingMachineException;
 import vendingmachine.service.MachineService;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -21,8 +22,16 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void fillWithCoins() {
-		int moneyOfMachine = inputView.requestMoneyOfMachine();
-		machineService.fillWithCoins(moneyOfMachine);
+		outputView.printMessage("자판기가 보유하고 있는 금액을 입력해 주세요.");
+		while (true) {
+			try {
+				int moneyOfMachine = inputView.requestMoneyOfMachine();
+				machineService.fillWithCoins(moneyOfMachine);
+				break;
+			} catch (VendingMachineException ex) {
+				outputView.printErrorMessage(ex.getMessage());
+			}
+		}
 		outputView.printEmptyNewLine();
 	}
 
@@ -35,15 +44,31 @@ public class MachineControllerImpl implements MachineController {
 
 	@Override
 	public void registerProducts() {
-		List<ProductDto> productDtos = inputView.requestProductDtos();
-		machineService.saveProducts(productDtos);
+		outputView.printMessage("상품명과 가격, 수량을 입력해 주세요.");
+		while (true) {
+			try {
+				List<ProductDto> productDtos = inputView.requestProductDtos();
+				machineService.saveProducts(productDtos);
+				break;
+			} catch (VendingMachineException ex) {
+				outputView.printErrorMessage(ex.getMessage());
+			}
+		}
 		outputView.printEmptyNewLine();
 	}
 
 	@Override
 	public void depositMoney() {
-		int moneyOfUser = inputView.requestMoneyOfUser();
-		machineService.depositMoneyOfUser(moneyOfUser);
+		outputView.printMessage("투입 금액을 입력해 주세요.");
+		while (true) {
+			try {
+				int moneyOfUser = inputView.requestMoneyOfUser();
+				machineService.depositMoneyOfUser(moneyOfUser);
+				break;
+			} catch (VendingMachineException ex) {
+				outputView.printErrorMessage(ex.getMessage());
+			}
+		}
 		outputView.printEmptyNewLine();
 	}
 
@@ -61,8 +86,16 @@ public class MachineControllerImpl implements MachineController {
 	}
 
 	private void purchaseProduct() {
-		String productName = inputView.requestProductName();
-		machineService.purchaseProduct(productName);
+		outputView.printMessage("구매할 상품명을 입력해 주세요.");
+		while (true) {
+			try {
+				String productName = inputView.requestProductName();
+				machineService.purchaseProduct(productName);
+				break;
+			} catch (VendingMachineException ex) {
+				outputView.printErrorMessage(ex.getMessage());
+			}
+		}
 		outputView.printEmptyNewLine();
 	}
 
