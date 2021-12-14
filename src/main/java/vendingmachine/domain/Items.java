@@ -1,11 +1,8 @@
 package vendingmachine.domain;
 
-import static org.assertj.core.api.Assertions.*;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Items {
 	private static final String START_OR_END_WITH_BRACKET = "[ERROR] 상품 정보는 대괄호로 감싸져 있어야 합니다.";
