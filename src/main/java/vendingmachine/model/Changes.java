@@ -1,6 +1,7 @@
 package vendingmachine.model;
 
-import vendingmachine.util.constant.InputCondition;
+import camp.nextstep.edu.missionutils.Randoms;
+
 import vendingmachine.util.constant.Symbol;
 
 import java.util.ArrayList;
@@ -26,10 +27,15 @@ public class Changes {
     }
 
     public void calculateChanges(int amount) {
-        while (amount >= Coin.COIN_50.getAmount()) {
-            amount = updateChangesByRandom(amount);
+        while (amount > 0) {
+            Coin coin = pickRandomCoin();
+            if (amount - coin.getAmount() < 0) {
+                continue;
+            }
+            Change change = changes.stream().filter(c -> c.getCoin() == coin).findAny().get();
+            change.increaseNumber();
+            amount -= coin.getAmount();
         }
-        dealWithRemainAmount(amount);
     }
 
     public int getSumOfChanges() {
@@ -68,21 +74,9 @@ public class Changes {
         return changes;
     }
 
-    private int updateChangesByRandom(int amount) {
-        for (Change change : changes) {
-            Coin coin = change.getCoin();
-            if (amount < coin.getAmount()) {
-                continue;
-            }
-            int number = change.pickRandomNumber(amount);
-            change.addNumber(number);
-            amount -= coin.getAmount() * number;
-        }
-        return amount;
-    }
-
-    private void dealWithRemainAmount(int amount) {
-        Change change = changes.get(changes.size() - 1);
-        change.addNumber(amount / InputCondition.AMOUNT_UNIT);
+    private Coin pickRandomCoin() {
+        List<Integer> ranges = Coin.getCoinValues();
+        int number = Randoms.pickNumberInList(ranges);
+        return Coin.valueOf(Symbol.COIN + number);
     }
 }

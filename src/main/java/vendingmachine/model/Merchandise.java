@@ -1,8 +1,8 @@
 package vendingmachine.model;
 
 public class Merchandise {
-    private String name;
-    private int price;
+    private final String name;
+    private final int price;
     private int inventory;
 
     public Merchandise(String name, int price, int inventory) {

@@ -14,7 +14,11 @@ public class VendingMachineOutputView {
     }
 
     public void outputInputAmount(int remainAmount) {
-        System.out.println(Symbol.NEW_LINE + ViewMessage.OUTPUT_INPUT_AMOUNT.getMessage() + remainAmount);
+        StringBuilder output = new StringBuilder();
+
+        output.append(Symbol.NEW_LINE).append(ViewMessage.OUTPUT_INPUT_AMOUNT.getMessage());
+        output.append(remainAmount).append(Symbol.WON);
+        System.out.println(output);
     }
 
     public void outputReturnChanges(String changes) {

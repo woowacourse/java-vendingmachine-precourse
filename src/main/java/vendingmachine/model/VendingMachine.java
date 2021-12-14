@@ -1,8 +1,8 @@
 package vendingmachine.model;
 
 public class VendingMachine {
-    private Changes changes;
-    private DisplayMerchandise displayMerchandise;
+    private final Changes changes;
+    private final DisplayMerchandise displayMerchandise;
     private int inputAmount;
 
     public VendingMachine(Changes changes, DisplayMerchandise displayMerchandise, int inputAmount) {

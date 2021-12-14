@@ -1,10 +1,6 @@
 package vendingmachine.model;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.util.constant.Symbol;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class Change {
     private final Coin coin;
@@ -29,20 +25,6 @@ public class Change {
                 number + Symbol.COUNT;
     }
 
-    public void addNumber(int number) {
-        this.number += number;
-    }
-
-    public void subNumber(int number) {
-        this.number -= number;
-    }
-
-    public int pickRandomNumber(int amount) {
-        int maxRange = amount / coin.getAmount();
-        List<Integer> ranges = getRangeList(maxRange);
-        return Randoms.pickNumberInList(ranges);
-    }
-
     public Change getReturnChange(int amount) {
         Change newChange = new Change(coin);
         int count = amount / coin.getAmount();
@@ -55,12 +37,15 @@ public class Change {
         return newChange;
     }
 
-    private List<Integer> getRangeList(int max) {
-        List<Integer> ranges = new ArrayList<>();
+    public void increaseNumber() {
+        number++;
+    }
 
-        for (int i = 0; i <= max; i++) {
-            ranges.add(i);
-        }
-        return ranges;
+    private void addNumber(int number) {
+        this.number += number;
+    }
+
+    private void subNumber(int number) {
+        this.number -= number;
     }
 }
