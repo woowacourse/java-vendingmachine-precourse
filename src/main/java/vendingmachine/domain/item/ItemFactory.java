@@ -7,7 +7,7 @@ import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 public class ItemFactory {
     private Items items = new Items();
 
-    public Items createByInventoryList(ItemsInventoryInfo itemsInventoryInfo) {
+    public Items create(ItemsInventoryInfo itemsInventoryInfo) {
         initialize();
         itemsInventoryInfo.getInfo().forEach(this::createItem);
         return items;

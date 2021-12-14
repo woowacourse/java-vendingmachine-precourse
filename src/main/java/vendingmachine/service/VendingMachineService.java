@@ -2,10 +2,10 @@ package vendingmachine.service;
 
 import vendingmachine.domain.coin.CoinExchangeMachine;
 import vendingmachine.domain.coin.Coins;
-import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 import vendingmachine.domain.item.ItemFactory;
 import vendingmachine.domain.item.Items;
 import vendingmachine.domain.vendingMachine.VendingMachine;
+import vendingmachine.dto.servicedto.ItemsInventoryInfo;
 
 public class VendingMachineService {
     private final CoinExchangeMachine coinExchangeMachine = new CoinExchangeMachine();
@@ -20,7 +20,7 @@ public class VendingMachineService {
         return vendingMachine.depositCoinBalance(coinExchangeMachine.changeIntoCoins(coinBalance));
     }
 
-    public Items createItems(ItemsInventoryInfo inputItemInventoryInfo) {
-        return vendingMachine.storeItems(itemFactory.createByInventoryList(inputItemInventoryInfo));
+    public void createItems(ItemsInventoryInfo itemsInventoryInfo) {
+        vendingMachine.storeItems(itemFactory.create(itemsInventoryInfo));
     }
 }
