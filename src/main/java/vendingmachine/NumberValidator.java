@@ -1,7 +1,7 @@
 package vendingmachine;
 
 public abstract class NumberValidator extends Validator {
-	public void isNumber(String numberInString, Error error) throws IllegalArgumentException {
+	void isNumber(String numberInString, Error error) throws IllegalArgumentException {
 		try {
 			Integer.parseInt(numberInString);
 		} catch (NumberFormatException exception) {
@@ -9,8 +9,8 @@ public abstract class NumberValidator extends Validator {
 		}
 	}
 
-	public void isMultipleOfTen(int number, Error error) throws IllegalArgumentException {
-		if (number % Constants.TEN > 0) {
+	void isMultipleOfTen(int number, Error error) throws IllegalArgumentException {
+		if (number % Constants.TEN > Constants.ZERO) {
 			throw new IllegalArgumentException(error.getMessage());
 		}
 	}

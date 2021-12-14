@@ -10,7 +10,7 @@ public class CoinPocket {
 
 	public CoinPocket() {
 		randomCoins = new LinkedHashMap<>();
-		Arrays.asList(Coin.values()).forEach(coin -> randomCoins.put(coin, 0));
+		Arrays.asList(Coin.values()).forEach(coin -> randomCoins.put(coin, Constants.ZERO));
 	}
 
 	public Set<Map.Entry<Coin, Integer>> getEntries() {
@@ -19,7 +19,7 @@ public class CoinPocket {
 
 	public void pushSingle(final Coin coin) {
 		int previousNumber = randomCoins.get(coin);
-		randomCoins.put(coin, previousNumber + 1);
+		randomCoins.put(coin, previousNumber + Constants.ONE);
 	}
 
 	public void push(final Coin coin, final int number) {
@@ -35,7 +35,7 @@ public class CoinPocket {
 
 	public void removeCoinsOfZeroNumber() {
 		for (Coin coin : Coin.values()) {
-			randomCoins.remove(coin, 0);
+			randomCoins.remove(coin, Constants.ZERO);
 		}
 	}
 }

@@ -5,6 +5,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProductEntrySyntacticValidator extends Validator {
+	private static final int INDEX_OF_PRODUCT_NAME = 0;
 	private static final int MINIMUM_PRODUCT_NAME_LENGTH = 1;
 	private static final int BRACKET_CHAR_LENGTH = 1;
 	private static final int ELEMENT_NUMBER = 3;
@@ -32,7 +33,6 @@ public class ProductEntrySyntacticValidator extends Validator {
 		entries.forEach(entry -> {
 			String entryWithoutBlank = entry.trim();
 			checkBrackets(entryWithoutBlank);
-
 			String[] entryElements = entryWithoutBlank
 				.substring(BRACKET_CHAR_LENGTH)
 				.split(ENTRY_ELEMENT_SEPARATOR);
@@ -78,7 +78,7 @@ public class ProductEntrySyntacticValidator extends Validator {
 	}
 
 	private void checkProductNameLength(String[] elements) throws IllegalArgumentException {
-		String name = elements[Constants.INDEX_OF_NAME_IN_ENTRY].trim();
+		String name = elements[INDEX_OF_PRODUCT_NAME].trim();
 		isMoreThanThreshold(name.length(), MINIMUM_PRODUCT_NAME_LENGTH, Error.NO_PRODUCT_NAME);
 	}
 }

@@ -7,6 +7,8 @@ public class ProductEntrySemanticValidator extends NumberValidator {
 	private static final int MINIMUM_NUMBER = 1;
 	private static final int BRACKET_CHAR_LENGTH = 1;
 	private static final String ENTRY_ELEMENT_SEPARATOR = ",";
+	private static final int INDEX_OF_PRODUCT_PRICE = 1;
+	private static final int INDEX_OF_PRODUCT_NUMBER = 2;
 
 	public ProductEntrySemanticValidator() {
 	}
@@ -26,8 +28,8 @@ public class ProductEntrySemanticValidator extends NumberValidator {
 		String[] elements = entryWithoutBlank
 			.substring(BRACKET_CHAR_LENGTH, entryWithoutBlank.length() - BRACKET_CHAR_LENGTH)
 			.split(ENTRY_ELEMENT_SEPARATOR);
-		validatePrice(elements[Constants.INDEX_OF_PRODUCT_PRICE].trim());
-		validateNumber(elements[Constants.INDEX_OF_PRODUCT_NUMBER].trim());
+		validatePrice(elements[INDEX_OF_PRODUCT_PRICE].trim());
+		validateNumber(elements[INDEX_OF_PRODUCT_NUMBER].trim());
 	}
 
 	private void validatePrice(String price) {
