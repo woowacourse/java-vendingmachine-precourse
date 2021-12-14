@@ -6,7 +6,7 @@ public enum OutputData {
     MACHINES_COINS("자판기가 보유한 동전"),
     COIN_UNIT("원"),
     COIN_COUNT("개"),
-    COIN_DIVIDER(" - "),
+    COIN_DIVIDER("-"),
     ERROR("[ERROR]");
 
     private final String data;

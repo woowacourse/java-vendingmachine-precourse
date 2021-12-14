@@ -24,7 +24,7 @@ public class MachineCore {
     private void runMachine() {
         readInputMoneyFromUser();
         while (machine.isStillAvailableToBuy()) {
-            String productName =readProductToBuyFromUser();
+            String productName = readProductToBuyFromUser();
             machine.sellProduct(productName);
         }
     }

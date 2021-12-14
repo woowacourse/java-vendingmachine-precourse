@@ -13,12 +13,11 @@ public class MainView {
     }
 
     public void printCoinStatus(int coinCost, int coinCount) {
-        StringBuilder output = new StringBuilder();
-        output.append(coinCost);
-        output.append(OutputData.COIN_UNIT);
-        output.append(OutputData.COIN_DIVIDER);
-        output.append(coinCount);
-        output.append(OutputData.COIN_COUNT);
+        String output = String.valueOf(coinCost)
+            + OutputData.COIN_UNIT + " "
+            + OutputData.COIN_DIVIDER + " "
+            + coinCount
+            + OutputData.COIN_COUNT;
         System.out.println(output);
     }
 
