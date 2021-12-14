@@ -39,11 +39,13 @@ public class VendingMachineController {
 		}
 	}
 
-	private void sellItem(int money) {
+	private void sellItem(final int moneyAmount) {
 		while (this.money.getMoney() >= itemcontroller.getLeastItemCost()
 			&& !itemcontroller.checkAllOutOfOrder()) {
 			try {
-				itemcontroller.update(money);
+				int targetItemCost = itemcontroller.update(moneyAmount);
+				this.money.pay(targetItemCost);
+
 			} catch (IllegalArgumentException e) {
 				outputView.printError(e.getMessage());
 			}

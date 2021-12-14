@@ -84,7 +84,6 @@ public class ItemController {
 		outputView.printItemPerChaseRequest();
 		Item item = items.findItemByName(inputView.scanItemName(), money);
 		item.sell();
-		money.pay(item.getCost());
 	}
 
 	public boolean checkAllOutOfOrder() {
