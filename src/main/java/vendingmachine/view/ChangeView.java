@@ -19,6 +19,7 @@ public class ChangeView {
 
 		}
 
-		System.out.println(stringBuilder.toString());
+		stringBuilder.append("\n");
+		System.out.println(stringBuilder);
 	}
 }

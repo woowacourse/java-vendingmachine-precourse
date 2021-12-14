@@ -14,11 +14,11 @@ import vendingmachine.util.StringChecker;
 
 public class Stock {
 
-	private Map<Name, Product> productMap;
+	private Map<Name, Product> stock;
 
 	public Stock(String input) {
 		checkInput(input);
-		productMap = setProductMapWithoutDuplication(input);
+		stock = setStockWithoutDuplication(input);
 	}
 
 	private void checkInput(String input) {
@@ -28,19 +28,19 @@ public class Stock {
 		stringChecker.containTap(input);
 
 		SplitChecker splitChecker = new SplitChecker();
-		splitChecker.exceedMaxSplit(input, Rule.DELIMETER_PRODUCT);
-		splitChecker.hasZeroLength(input, Rule.DELIMETER_PRODUCT);
+		splitChecker.exceedMaxSplit(input, Rule.DELIMITER_PRODUCT);
+		splitChecker.hasZeroLength(input, Rule.DELIMITER_PRODUCT);
 	}
 
-	private Map<Name, Product> setProductMapWithoutDuplication(String input) {
+	private Map<Name, Product> setStockWithoutDuplication(String input) {
 		Map<Name, Product> productMap = new HashMap<>();
-		List<String> productInfoList = Arrays.asList(input.split(Rule.DELIMETER_PRODUCT));
+		List<String> productInfoList = Arrays.asList(input.split(Rule.DELIMITER_PRODUCT));
 
 		for (String productInfo : productInfoList) {
 			Product product = new Product(productInfo);
 
 			if (productMap.containsKey(product.getName())) {
-				throw new IllegalArgumentException(Message.ERROR_MESSAGE_PRODUCT_DUPLECATION);
+				throw new IllegalArgumentException(Message.ERROR_MESSAGE_PRODUCT_DUPLICATION);
 			}
 
 			productMap.put(product.getName(), product);
@@ -52,7 +52,7 @@ public class Stock {
 	public Product getProduct(Name name) {
 
 		if (hasProduct(name)) {
-			Product selectedProduct = productMap.get(name);
+			Product selectedProduct = stock.get(name);
 			return selectedProduct;
 		}
 
@@ -61,7 +61,7 @@ public class Stock {
 
 	private boolean hasProduct(Name name) {
 
-		if (productMap.get(name) == null) {
+		if (stock.get(name) == null) {
 			throw new IllegalArgumentException(Message.ERROR_MESSAGE_NON_EXISTENT_PRODUCT);
 		}
 
@@ -77,16 +77,16 @@ public class Stock {
 	private void subtractProduct(Product product) {
 		product.minusTheNumber();
 
-		if (product.theNumberisZero()) {
-			productMap.remove(product.getName());
+		if (product.theNumberIsZero()) {
+			stock.remove(product.getName());
 			return;
 		}
 
-		productMap.put(product.getName(), product);
+		stock.put(product.getName(), product);
 	}
 
 	public boolean isEmpty() {
-		return productMap.isEmpty();
+		return stock.isEmpty();
 	}
 
 	public Price getMinPrice() {
@@ -96,7 +96,7 @@ public class Stock {
 	private List<Price> getPriceList() {
 		List<Price> priceList = new ArrayList<>();
 
-		for (Map.Entry<Name, Product> productEntry : productMap.entrySet()) {
+		for (Map.Entry<Name, Product> productEntry : stock.entrySet()) {
 			priceList.add(productEntry.getValue().getPrice());
 		}
 

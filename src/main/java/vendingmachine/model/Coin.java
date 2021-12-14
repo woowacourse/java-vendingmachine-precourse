@@ -48,17 +48,15 @@ public enum Coin {
 	}
 
 	public static String getName(int amount) {
-		String name = "";
 
 		for (Coin coin : Coin.values()) {
 
 			if (coin.getAmount() == amount) {
-				name = coin.name();
-				break;
+				return coin.name();
 			}
 
 		}
 
-		return name;
+		return null;
 	}
 }

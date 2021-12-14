@@ -8,15 +8,13 @@ public class NameView {
 
 	public Name getInput() {
 		System.out.println(Message.INPUT_MESSAGE_NAME);
-		Name name;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			name = new Name(input);
+			return new Name(input);
 		} catch (IllegalArgumentException e) {
 			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}
-		return name;
 	}
 }

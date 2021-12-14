@@ -2,13 +2,13 @@ package vendingmachine.model;
 
 import vendingmachine.constant.Message;
 
-public class Vendingmachine {
+public class VendingMachine {
 
 	private HoldingSum holdingSum;
 	private Stock stock;
 	private InsertingSum insertingSum;
 
-	public Vendingmachine() {
+	public VendingMachine() {
 	}
 
 	public HoldingSum getHoldingSum() {
@@ -34,7 +34,7 @@ public class Vendingmachine {
 	public void sellProduct(Name name) {
 		checkRestInsertingSum(name);
 		Product soldProduct = stock.giveProduct(name);
-		insertingSum.subtract(soldProduct.getPrice().get());
+		insertingSum.subtract(soldProduct.getPrice());
 	}
 
 	private void checkRestInsertingSum(Name name) {

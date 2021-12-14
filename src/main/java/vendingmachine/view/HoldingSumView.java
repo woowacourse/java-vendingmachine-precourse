@@ -9,16 +9,14 @@ public class HoldingSumView {
 
 	public HoldingSum getInput() {
 		System.out.println(Message.INPUT_MESSAGE_HOlDING_SUM);
-		HoldingSum holdingSum;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			holdingSum = new HoldingSum(input);
+			return new HoldingSum(input);
 		} catch (IllegalArgumentException e) {
 			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}
-		return holdingSum;
 	}
 
 	public void print(HoldingSum holdingSum) {
@@ -30,7 +28,7 @@ public class HoldingSumView {
 			stringBuilder.append("\n" + Message.toString(coinAmount, coinCount));
 		}
 
+		stringBuilder.append("\n");
 		System.out.println(stringBuilder);
-		System.out.println();
 	}
 }

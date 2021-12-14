@@ -17,7 +17,7 @@ public class Product {
 	public Product(String input) {
 		checkInput(input);
 		String inputWithoutBracket = input.substring(1, input.length() - 1);
-		List<String> productInfo = Arrays.asList(inputWithoutBracket.split(Rule.DELIMETER_PRODUCT_INFO));
+		List<String> productInfo = Arrays.asList(inputWithoutBracket.split(Rule.DELIMITER_PRODUCT_INFO));
 		name = new Name(productInfo.get(0));
 		price = new Price(productInfo.get(1));
 		theNumber = new TheNumber(productInfo.get(2));
@@ -29,9 +29,9 @@ public class Product {
 		String inputWithoutBracket = input.substring(1, input.length() - 1);
 
 		SplitChecker splitChecker = new SplitChecker();
-		splitChecker.exceedMaxSplit(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO);
-		splitChecker.hasZeroLength(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO);
-		splitChecker.isCorrectTheNumber(inputWithoutBracket, Rule.DELIMETER_PRODUCT_INFO, Rule.NUMBER_OF_PRODUCT_INFO);
+		splitChecker.exceedMaxSplit(inputWithoutBracket, Rule.DELIMITER_PRODUCT_INFO);
+		splitChecker.hasZeroLength(inputWithoutBracket, Rule.DELIMITER_PRODUCT_INFO);
+		splitChecker.isCorrectTheNumber(inputWithoutBracket, Rule.DELIMITER_PRODUCT_INFO, Rule.NUMBER_OF_PRODUCT_INFO);
 	}
 
 	public Name getName() {
@@ -42,7 +42,7 @@ public class Product {
 		return price;
 	}
 
-	public boolean theNumberisZero() {
+	public boolean theNumberIsZero() {
 		return theNumber.isZero();
 	}
 

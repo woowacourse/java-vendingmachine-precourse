@@ -11,9 +11,6 @@ public class HoldingSum {
 
 	private Map<String, Integer> holdingSum;
 
-	public HoldingSum() {
-	}
-
 	public HoldingSum(String input) {
 		checkInput(input);
 		holdingSum = generateCoinsRandomly(input);
@@ -44,10 +41,6 @@ public class HoldingSum {
 		}
 
 		return coinMap;
-	}
-
-	public Map<String, Integer> get() {
-		return holdingSum;
 	}
 
 	public int getCoinCount(String coinName) {

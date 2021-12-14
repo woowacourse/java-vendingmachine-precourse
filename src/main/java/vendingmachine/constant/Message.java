@@ -31,7 +31,7 @@ public class Message {
 	public static final String ERROR_MESSAGE_THE_NUMBER_OF = "개를 입력해주세요.";
 	public static final String ERROR_MESSAGE_NOT_BRACKET = "개별 상품은 " + Rule.BRACKET + "로 묶어야합니다.";
 	public static final String ERROR_MESSAGE_LESS_THAN_MIN_PRICE = "가격은 최소 " + Rule.MIN_PRICE + WON + "이상이어야 합니다.";
-	public static final String ERROR_MESSAGE_PRODUCT_DUPLECATION = "상품명은 중복될 수 없습니다.";
+	public static final String ERROR_MESSAGE_PRODUCT_DUPLICATION = "상품명은 중복될 수 없습니다.";
 	public static final String ERROR_MESSAGE_NON_EXISTENT_PRODUCT = "없는 상품입니다.";
 	public static final String ERROR_MESSAGE_INSERTING_SUM_IS_LESS_PRICE = "투입 금액이 부족합니다.";
 

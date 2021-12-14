@@ -14,14 +14,14 @@ public class Change {
 
 	private Map<String, Integer> generateCoinGreedyByHoldingSum(InsertingSum insertingSum, HoldingSum holdingSum) {
 		Map<String, Integer> coinMap = new HashMap<>();
-		int accum = 0;
+		int accumulatedAmount = 0;
 
 		for (Coin coin : Coin.values()) {
 
 			while (coinMap.getOrDefault(coin.name(), 0) < holdingSum.getCoinCount(coin.name()) &&
-				accum + coin.getAmount() <= insertingSum.get()) {
+				accumulatedAmount + coin.getAmount() <= insertingSum.get()) {
 				coinMap.put(coin.name(), coinMap.getOrDefault(coin.name(), 0) + 1);
-				accum += coin.getAmount();
+				accumulatedAmount += coin.getAmount();
 			}
 
 		}

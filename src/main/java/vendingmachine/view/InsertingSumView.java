@@ -8,16 +8,14 @@ public class InsertingSumView {
 
 	public InsertingSum getInput() {
 		System.out.println(Message.INPUT_MESSAGE_INSERTING_SUM);
-		InsertingSum insertingSum;
 		try {
 			String input = Console.readLine();
 			System.out.println();
-			insertingSum = new InsertingSum(input);
+			return new InsertingSum(input);
 		} catch (IllegalArgumentException e) {
 			System.out.println(Message.ERROR + e.getMessage() + "\n");
 			return getInput();
 		}
-		return insertingSum;
 	}
 
 	public void print(InsertingSum insertingSum) {
