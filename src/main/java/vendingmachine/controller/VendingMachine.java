@@ -68,10 +68,12 @@ public class VendingMachine {
     }
 
     public void inputProductByUser() {
-        String productByUser = InputView.getProductByUser();
-        Product pro = products.reduce(productByUser);
-        userMoney.reduce(pro.getPrice());
-        OutputView.printUserMoney(userMoney);
+        while (!isReturnChange()) {
+            String productByUser = InputView.getProductByUser();
+            Product pro = products.reduce(productByUser);
+            userMoney.reduce(pro.getPrice());
+            OutputView.printUserMoney(userMoney);
+        }
     }
 
     public void returnChange() {
@@ -81,5 +83,12 @@ public class VendingMachine {
             CoinGenerator.calculatePossibleCoinCombination(changeCoinCombination, totalChange);
             changeCoinCombination.print();
         }
+    }
+
+    private boolean isReturnChange() {
+        if (!userMoney.canBuyCheapestProduct(products) || products.isSoldOut()) {
+            return true;
+        }
+        return false;
     }
 }
