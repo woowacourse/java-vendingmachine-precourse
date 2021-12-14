@@ -7,6 +7,7 @@ import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
 import vendingmachine.domain.vendingMachine.Amount;
 import vendingmachine.validator.AmountValidator;
+import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -36,6 +37,7 @@ public class VendingMachine {
             String productForm = InputView.getProducts();
             String[] productInformations = productForm.split(";");
             for (String productInformation : productInformations) {
+                ProductValidator.checkProduct(productInformation);
                 String[] product = productInformation.replaceAll("[\\[\\]]", "").split(",");
                 AmountValidator.checkProductPrice(product[1]);
                 products.add(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
@@ -47,7 +49,14 @@ public class VendingMachine {
     }
 
     private void setUserMoney() {
-        userMoney = new UserMoney(Integer.parseInt(InputView.getUserMoney()));
+        try {
+            String userMoney = InputView.getUserMoney();
+            AmountValidator.checkVendingMachineAmount(userMoney);
+            this.userMoney = new UserMoney(Integer.parseInt(userMoney));
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            setUserMoney();
+        }
     }
 
     public void inputUserMoney() {

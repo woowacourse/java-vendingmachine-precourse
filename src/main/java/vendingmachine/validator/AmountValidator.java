@@ -16,7 +16,7 @@ public class AmountValidator {
     public static void checkProductPrice(String price) {
         int priceInt = Integer.parseInt(price);
         if (priceInt < 100) {
-            throw new IllegalArgumentException(IS_NOT_POSSIBLE_PRODUCT_PRICE);
+            throw new IllegalArgumentException(IS_NOT_POSSIBLE_PRODUCT_PRICE_ERROR_MESSAGE);
         }
         if (isNotDivisibleByTen(price)) {
             throw new IllegalArgumentException(NOT_DIVISIBLE_TEN_ERROR_MESSAGE);
