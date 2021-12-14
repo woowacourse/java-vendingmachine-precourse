@@ -8,6 +8,7 @@ public class Validation {
     private final int ZERO = 0;
     private final int FIRST = 1;
     private final int DIVISOR = 10;
+    private final int MIN_PRICE = 100;
     private String errorMessage;
 
     public String getErrorMessage() {
@@ -94,6 +95,22 @@ public class Validation {
             throwException(ErrorMessage.ITEM_NAME_SPACE_POSITION);
         }
 
+    }
+
+    private void checkItemPriceNumber(String item) {
+        String price = getItemElement(Text.REGEX_ITEM_PRICE, item);
+
+        if (!price.matches(Text.REGEX_NUMBER)) {
+            throwException(ErrorMessage.ITEM_PRICE_NOT_NUMBER);
+        }
+    }
+
+    private void checkItemPriceRange(String item) {
+        int price = Integer.parseInt(getItemElement(Text.REGEX_ITEM_PRICE, item));
+
+        if (price < MIN_PRICE || price % DIVISOR != ZERO) {
+            throwException(ErrorMessage.ITEM_PRICE_RANGE);
+        }
     }
 
     public void isValidBalanceInput(String balance) {
