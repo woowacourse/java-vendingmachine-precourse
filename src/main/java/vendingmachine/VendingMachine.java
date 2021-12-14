@@ -1,7 +1,5 @@
 package vendingmachine;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class VendingMachine {
@@ -11,11 +9,12 @@ public class VendingMachine {
 	private InputView inputView = new InputView();
 	private OutputView outputView = new OutputView();
 
-	public VendingMachine(int insertAmount, Items items,
-		Map<Coin, Integer> vendingMachineCoin) {
-		this.insertAmount = insertAmount;
-		this.items = items;
-		this.vendingMachineCoin = vendingMachineCoin;
+	public VendingMachine() {
+		vendingMachineCoin = VendingMachineCoinGenerator.generateVendingMachineCoin(
+			inputView.getInputOfVendingMachineMoney());
+		outputView.printVendingMachineCoin(vendingMachineCoin);
+		items = inputView.getInputOfItems();
+		insertAmount = inputView.getInputOfInsertAmount();
 	}
 
 	public void run() {
