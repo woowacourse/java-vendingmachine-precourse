@@ -5,8 +5,6 @@ import static vendingmachine.constant.ViewMessage.*;
 
 import java.util.Map;
 
-import vendingmachine.model.Change;
-import vendingmachine.model.PossessionCoin;
 
 public class OutputView {
 

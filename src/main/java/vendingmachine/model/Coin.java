@@ -2,7 +2,6 @@ package vendingmachine.model;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 public enum Coin {
@@ -19,13 +18,6 @@ public enum Coin {
 
 	public int getAmount() {
 		return amount;
-	}
-
-	public static Coin getCoin(int amount) {
-		return Arrays.stream(Coin.values())
-			.filter(coin -> coin.amount == amount)
-			.findFirst()
-			.orElseThrow(IllegalArgumentException::new);
 	}
 
 	public static List<Integer> createCoinList() {

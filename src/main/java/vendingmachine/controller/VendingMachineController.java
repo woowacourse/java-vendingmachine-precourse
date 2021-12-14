@@ -1,27 +1,27 @@
 package vendingmachine.controller;
 
-import static camp.nextstep.edu.missionutils.Console.*;
 import static vendingmachine.constant.ErrorMessage.*;
 import static vendingmachine.exception.NumberException.*;
 import static vendingmachine.exception.ProductException.*;
 import static vendingmachine.view.InputView.*;
 import static vendingmachine.view.OutputView.*;
 
-import vendingmachine.model.Change;
 import vendingmachine.model.Money;
-import vendingmachine.model.PossessionCoin;
 import vendingmachine.model.Products;
+import vendingmachine.service.CoinService;
+import vendingmachine.service.ProductService;
 
 public class VendingMachineController {
 
-	PossessionCoin possessionCoin = new PossessionCoin();
 	Money possessionMoney;
 	Money insertMoney;
 	Products products;
-	Change change;
+	CoinService coinService = new CoinService();
+	ProductService productService;
 
 	public void run() {
 		requestInput();
+		setService();
 		doShopping();
 		returnChange();
 	}
@@ -34,8 +34,8 @@ public class VendingMachineController {
 
 	public void inputPossession() {
 		possessionMoney = new Money(inputPossessionMoney());
-		possessionCoin.createRandomCoins(possessionMoney);
-		reportPossessionCoin(possessionCoin.getCoins());
+		coinService.createRandomCoins(possessionMoney);
+		reportPossessionCoin(coinService.getPossessionCoins());
 	}
 
 	public int inputPossessionMoney() {
@@ -76,10 +76,14 @@ public class VendingMachineController {
 		}
 	}
 
+	private void setService() {
+		productService = new ProductService(products, insertMoney);
+	}
+
 	private void doShopping() {
-		int minimumPrice = products.getMinimumPrice();
+		int minimumPrice = productService.getMinimumPrice();
 		while (insertMoney.isMoneyBiggerThanValue(minimumPrice)
-			&& products.isOverZeroAllProductCount()) {
+			&& productService.isOverZeroAllProductCount()) {
 			reportInputMoney(insertMoney.getMoney());
 			purchaseProduct();
 		}
@@ -87,7 +91,7 @@ public class VendingMachineController {
 	}
 
 	private void purchaseProduct() {
-		products.purchase(inputProductName(), insertMoney);
+		productService.purchase(inputProductName());
 	}
 
 	private String inputProductName() {
@@ -104,15 +108,14 @@ public class VendingMachineController {
 	}
 
 	private void checkProductPurchase(String productName) {
-		if (!products.canSell(productName, insertMoney)) {
+		if (!productService.canSell(productName)) {
 			throw new IllegalArgumentException(PRODUCT_NOT_BUY_MSG);
 		}
 	}
 
 	private void returnChange() {
-		change = new Change();
-		change.createGreedyCoin(possessionCoin, insertMoney.getMoney());
-		reportChangeCoin(change.getCoins());
+		coinService.createGreedyCoin(insertMoney.getMoney());
+		reportChangeCoin(coinService.getChangeCoins());
 	}
 
 }
