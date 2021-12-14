@@ -37,6 +37,7 @@ public class MachineControllerImpl implements MachineController {
 	public void registerProducts() {
 		List<ProductDto> productDtos = inputView.requestProductDtos();
 		machineService.saveProducts(productDtos);
+		outputView.printEmptyNewLine();
 	}
 
 	@Override
