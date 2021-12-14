@@ -1,7 +1,9 @@
 package vendingmachine.utils.validator;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import vendingmachine.domain.Product;
@@ -12,6 +14,7 @@ public class ProductValidator {
 
 	private static final String COMMA = ",";
 	private static final int PRICE_INDEX = 1;
+	private static final int NAME_INDEX = 0;
 
 	public static boolean checkIsValidToBuyProduct(VendingMachine vendingMachine, String productName) {
 		int currentMoney = vendingMachine.getInsertMoney().getCurrentMoney();
@@ -42,7 +45,9 @@ public class ProductValidator {
 		try {
 			for (String productInfo : productInfoList) {
 				isValidProductInfoForm(productInfo);
+				isValidToDivideByTen(productInfo);
 			}
+			checkProductDuplicate(productInfoList);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return false;
@@ -55,7 +60,21 @@ public class ProductValidator {
 		if (!Pattern.matches(regex, productInfo)) {
 			throw new IllegalArgumentException(ErrorMessage.ERROR_PRODUCT_INFO_IS_NOT_VALID.getText());
 		}
+	}
+
+	public static void isValidToDivideByTen(String productInfo) {
 		String productPrice = Arrays.asList(productInfo.split(COMMA)).get(PRICE_INDEX);
 		MoneyValidator.isValidToDivideByTen(productPrice);
 	}
+
+	public static void checkProductDuplicate(List<String> productInfoList) {
+		Set<String> productNameSet = new HashSet<>();
+		for (String productInfo : productInfoList) {
+			productNameSet.add(Arrays.asList(productInfo.split(COMMA)).get(NAME_INDEX));
+		}
+		if (productInfoList.size() != productNameSet.size()) {
+			throw new IllegalArgumentException(ErrorMessage.ERROR_PRODUCT_NAME_DUPLICATED.getText());
+		}
+	}
+
 }

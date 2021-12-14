@@ -21,6 +21,10 @@ public class Products {
 	public Products() {
 	}
 
+	public List<Product> getProductList() {
+		return productList;
+	}
+
 	public int getMinPriceProduct() {
 		return productList.stream().mapToInt(Product::getPrice).min().orElse(NO_PRICE);
 	}
