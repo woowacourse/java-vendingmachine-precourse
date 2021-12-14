@@ -47,9 +47,8 @@ public class VendingMachine {
 	public void setChanges(int money) {
 		List<Integer> amountOfCoins = Coin.getAmountOfCoins();
 
-		// TODO: 로직 수정하기
 		while (money > 0) {
-			int amount = pickNumberInList(amountOfCoins);
+			int amount = pickRandomCoin(amountOfCoins);
 
 			if (money < amount) {
 				continue;
@@ -58,6 +57,10 @@ public class VendingMachine {
 			addCountOfCoin(coin);
 			money -= amount;
 		}
+	}
+
+	private int pickRandomCoin(List<Integer> amountOfCoins) {
+		return pickNumberInList(amountOfCoins);
 	}
 
 	private void addCountOfCoin(Coin coin) {
