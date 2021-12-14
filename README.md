@@ -209,3 +209,5 @@ public enum Coin {
           1. 사용자가 제품 구매를 위해 넣은 돈 중 남은 돈으로 더이상 제품 구매가 불가능 할떄
           2. 자판기에 남은 물건이 없을때
     - 자판기 내부에 있는 동전 종류를 가져오는 기능 구현 (branch: feature/vending-machine-controller)
+    - 입력받은 데이터의 유효여부를 검증하는 기능 추가(branch: feature/error-handling)
+        - 실제 데이터를 입력받는 view에서 모든 메서드가 반환하는 데이터 타입을 String으로 변경

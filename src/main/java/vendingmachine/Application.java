@@ -23,6 +23,6 @@ public class Application {
 		VendingMachineController vendingMachineController =
 			new VendingMachineController(vendingMachineOutput,
 				vendingMachineInput, coinTypeAmountGenerator);
-		vendingMachineController.turnOn();
+		// vendingMachineController.turnOn();
     }
 }

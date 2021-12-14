@@ -1,9 +1,6 @@
 package vendingmachine.view;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 
@@ -27,39 +24,21 @@ public class VendingMachineInput {
 		this.products = products;
 	}
 
-	public int inputAmountOfMoney() {
+	public String inputAmountOfMoney() {
 		System.out.println(VendingMachineMessage.INPUT_AMOUNT_MONEY_IN_MACHINE);
-		final String inputtedData = Console.readLine();
-		return Integer.parseInt(inputtedData);
+		return Console.readLine();
 	}
 
-	private ArrayList<Product> parseProductsInformation(final String productsInformation) {
-		final List<String> productsList = Arrays
-			.stream(productsInformation.split(";"))
-			.collect(Collectors.toList());
-		productsList.forEach(product -> {
-			final String[] productString = product.substring(1, product.length() - 1)
-				.split(",");
-			final String name = productString[0];
-			final Integer price = Integer.parseInt(productString[1]);
-			final Integer amount = Integer.parseInt(productString[2]);
-			products.add(new Product(name, price, amount));
-		});
-		return products;
-	}
-
-	public ArrayList<Product> inputProductsInformation() {
+	public String inputProductsInformation() {
 		System.out.print("\n");
 		System.out.println(VendingMachineMessage.INPUT_PRODUCTS_INFORMATION);
-		final String productsInformation = Console.readLine();
-		return parseProductsInformation(productsInformation);
+		return Console.readLine();
 	}
 
-	public int inputMoney() {
+	public String inputMoney() {
 		System.out.print("\n");
 		System.out.println(VendingMachineMessage.INPUT_MONEY);
-		final String inputtedMoney = Console.readLine();
-		return Integer.parseInt(inputtedMoney);
+		return Console.readLine();
 	}
 
 	public String selectProduct() {
