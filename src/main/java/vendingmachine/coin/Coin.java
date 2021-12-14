@@ -16,22 +16,22 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public static Map<Coin, Integer> createRandomCoin(int money) {
+    public static Map<Coin, Integer> createRandomCoin(int initialAmount) {
         List<Integer> coinAmountList = Coin.getCoinAmountList();
         Map<Coin, Integer> coinCount = Coin.initializeCoinCountKey();
 
-        while(money > 0) {
+        while(initialAmount > 0) {
             int coinAmount = Randoms.pickNumberInList(coinAmountList);
-            if(coinAmount <= money){
+            if(coinAmount <= initialAmount){
                 Coin coinCountKey = findCoinName(coinAmount);
                 coinCount.computeIfPresent(coinCountKey, (K, V) -> V + 1);
-                money -= coinAmount;
+                initialAmount -= coinAmount;
             }
         }
         return coinCount;
     }
 
-    private static List<Integer> getCoinAmountList() {
+    public static List<Integer> getCoinAmountList() {
         List<Integer> coinAmountList = new ArrayList<>();
         for(Coin coin : Coin.values()) {
             coinAmountList.add(coin.amount);
@@ -47,7 +47,7 @@ public enum Coin {
         return coinCount;
     }
 
-    private static Coin findCoinName(int coinAmount) {
+    public static Coin findCoinName(int coinAmount) {
         for(Coin coin : Coin.values()) {
             if(coin.amount == coinAmount) {
                 return coin;
