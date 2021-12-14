@@ -68,6 +68,7 @@ public class MachineControllerImpl implements MachineController {
 	@Override
 	public void refundMoneyOfUser() {
 		showCurrentMoneyOfUser();
+		machineService.refundChanges();
 		showCoinsOfUser();
 	}
 
