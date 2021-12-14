@@ -18,7 +18,6 @@ public class PurchaseValidator {
         if (vendingMachine.isAllItemsSoldOut()) {
             return false;
         }
-
         if (!purchase.isAffordablePrice(vendingMachine.findLowestPriceInStock())) {
             return false;
         }
@@ -28,7 +27,7 @@ public class PurchaseValidator {
     public void validateByItemName(Purchase purchase, String itemName) {
         Item item = findItem(itemName);
         validateInStock(item);
-        validateItemIsAffordable(purchase, findItem(itemName));
+        validateItemIsAffordable(purchase, item);
     }
 
     private Item findItem(String itemName) {

@@ -27,12 +27,12 @@ public class PurchaseService {
         return purchase.showAvailableMoney();
     }
 
-    public Coins giveChange() {
-        return vendingMachine.giveChange(purchase.end());
-    }
-
     public void purchaseByItemName(String itemName) {
         purchase.validate(itemName, purchaseValidator);
         purchase.pay(vendingMachine.purchase(itemName).getPrice());
+    }
+
+    public Coins change() {
+        return vendingMachine.giveChange(purchase.end());
     }
 }

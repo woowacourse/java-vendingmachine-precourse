@@ -35,12 +35,7 @@ public class Items {
     }
 
     public int findLowestPriceInStock() {
-        return items.keySet().stream()
-                .filter(item -> this.countItems(item) > 0)
-                .map(Item::getPrice)
-                .sorted()
-                .findFirst()
-                .orElse(0);
+        return findAllInStock().stream().mapToInt(Item::getPrice).min().orElse(0);
     }
 
     public boolean isEmptyItems() {

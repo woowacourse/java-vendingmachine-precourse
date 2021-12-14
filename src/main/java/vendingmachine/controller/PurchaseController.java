@@ -35,7 +35,7 @@ public class PurchaseController {
 
     private void getChanges() {
         showAvailableMoney();
-        applicationConsole.printChange(purchaseService.giveChange());
+        applicationConsole.printChange(purchaseService.change());
     }
 
     private void showAvailableMoney() {

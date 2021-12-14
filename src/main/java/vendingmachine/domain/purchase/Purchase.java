@@ -9,35 +9,32 @@ public class Purchase {
         this.moneyAvailable = moneyAvailable;
     }
 
+    public boolean isAvailable(PurchaseValidator purchaseValidator) {
+        return purchaseValidator.isAvailableStatus(this);
+    }
+
     public int showAvailableMoney() {
         return moneyAvailable;
     }
 
-    public boolean isAffordablePrice(int minimumPrice) {
-        if (moneyAvailable >= minimumPrice) {
+    public boolean isAffordablePrice(int price) {
+        if (moneyAvailable >= price) {
             return true;
         }
         return false;
+    }
+
+    public void validate(String itemName, PurchaseValidator purchaseValidator) {
+        purchaseValidator.validateByItemName(this, itemName);
+    }
+
+    public void pay(int price) {
+        moneyAvailable -= price;
     }
 
     public int end() {
         int change = moneyAvailable;
         moneyAvailable = 0;
         return change;
-    }
-
-    public void pay(int price) {
-        if (!isAffordablePrice(price)) {
-            throw new IllegalArgumentException(ERROR_MESSAGE_ABOUT_TOO_EXPENSIVE_ITEM_TO_PURCHASE);
-        }
-        moneyAvailable -= price;
-    }
-
-    public boolean isAvailable(PurchaseValidator purchaseValidator) {
-        return purchaseValidator.isAvailableStatus(this);
-    }
-
-    public void validate(String itemName, PurchaseValidator purchaseValidator) {
-        purchaseValidator.validateByItemName(this, itemName);
     }
 }

@@ -22,25 +22,12 @@ public class VendingMachine {
         return this.items;
     }
 
-    public Coins giveChange(int moneyAvailable) {
-        Coins change = changeAccountant.change(moneyAvailable, coinBalance);
-        leftMoney = changeAccountant.getRestAfterCalculation();
-        coinBalance.take(change);
-        return change;
-    }
-
-    public Item purchase(String itemName) {
-        Item item = findItemByItemName(itemName).get();
-        purchase(item);
-        return item;
+    public boolean isAllItemsSoldOut() {
+        return items.isEmptyItems();
     }
 
     public int findLowestPriceInStock() {
         return items.findLowestPriceInStock();
-    }
-
-    public boolean isAllItemsSoldOut() {
-        return items.isEmptyItems();
     }
 
     public Optional<Item> findItemByItemName(String itemName) {
@@ -49,6 +36,19 @@ public class VendingMachine {
 
     public boolean isInStock(Item item) {
         return items.isInStock(item);
+    }
+
+    public Item purchase(String itemName) {
+        Item item = findItemByItemName(itemName).get();
+        purchase(item);
+        return item;
+    }
+
+    public Coins giveChange(int moneyAvailable) {
+        Coins change = changeAccountant.change(moneyAvailable, coinBalance);
+        leftMoney = changeAccountant.getRestAfterCalculation();
+        coinBalance.take(change);
+        return change;
     }
 
     private Item purchase(Item item) {
