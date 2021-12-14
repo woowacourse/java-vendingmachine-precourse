@@ -18,10 +18,12 @@ public class VendingMachineController {
 
 	public void runMachine() {
 		VendingMachine vendingMachine = new VendingMachine();
+
 		enterAndGenerateMachineMoney(vendingMachine);
 		printCurrentCoin(vendingMachine);
 		enterAndGenerateMachineProduct(vendingMachine);
 		enterAndGenerateInsertMoney(vendingMachine);
+
 		purchaseProduct(vendingMachine);
 		printRemainCoin(vendingMachine);
 	}

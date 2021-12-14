@@ -10,7 +10,6 @@ public class Utils {
 	}
 
 	public static boolean isOnlyContainNumber(String money) {
-
 		return !Pattern.matches(NUMBER_ONLY_REGEX, money);
 	}
 }

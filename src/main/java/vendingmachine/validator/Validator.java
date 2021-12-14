@@ -19,31 +19,31 @@ public class Validator {
 	public static final String ERROR_DUPLICATE_PRODUCT_EXISTED = "[ERROR] 중복된 상품 명이 존재합니다.";
 
 	public String validateMoney(String money) {
-		validateInputEmpty(money);
-		validateOnlyContainNumber(money);
-		validateInputDivideInto10(money);
+		isInputEmpty(money);
+		isInputOnlyContainNumber(money);
+		isInputDividedInto10(money);
 
 		return money;
 	}
 
 	public String validateProduct(String validateProduct) {
-		validateInputEmpty(validateProduct);
+		isInputEmpty(validateProduct);
 
 		return validateProduct;
 	}
 
 	public String validateBuyingProduct(String validateBuyingProduct) {
-		validateInputEmpty(validateBuyingProduct);
+		isInputEmpty(validateBuyingProduct);
 
 		return validateBuyingProduct;
 	}
 
-	public static void validateProduct(String[] product) {
-		validateNumberOfInput(product);
-		validateOnlyContainNumber(product[1]);
-		validateOnlyContainNumber(product[2]);
-		validateInputAmountUnder100(product[1]);
-		validateInputDivideInto10(product[1]);
+	public static void validateProduct(List<String> product) {
+		isNumberOfInputValid(product);
+		isInputOnlyContainNumber(product.get(1));
+		isInputOnlyContainNumber(product.get(2));
+		isInputAmountUnder100(product.get(1));
+		isInputDividedInto10(product.get(1));
 	}
 
 	public static void validateProductList(List<String> distinctProductList, List<Product> productList) {
@@ -52,31 +52,31 @@ public class Validator {
 		}
 	}
 
-	private static void validateOnlyContainNumber(String input) {
+	private static void isInputOnlyContainNumber(String input) {
 		if (Utils.isOnlyContainNumber(input)) {
 			throw new IllegalArgumentException(ERROR_INPUT_MUST_BE_NUMBER);
 		}
 	}
 
-	private static void validateInputAmountUnder100(String input) {
+	private static void isInputAmountUnder100(String input) {
 		if (Utils.moneyConverter(input) < MINIMUM_AMOUNT) {
 			throw new IllegalArgumentException(ERROR_INPUT_IS_BIGGER_THAN_100);
 		}
 	}
 
-	private static void validateInputDivideInto10(String input) {
+	private static void isInputDividedInto10(String input) {
 		if (Integer.parseInt(input) % UNIT_OF_WON != 0) {
 			throw new IllegalArgumentException(ERROR_MONEY_CAN_DIVIDE_INTO_10);
 		}
 	}
 
-	private static void validateNumberOfInput(String[] input) {
-		if (input.length != NUMBER_OF_PRODUCT_INFORMATION) {
+	private static void isNumberOfInputValid(List<String> input) {
+		if (input.size() != NUMBER_OF_PRODUCT_INFORMATION) {
 			throw new IllegalArgumentException(ERROR_INPUT_INCORRECT);
 		}
 	}
 
-	private static void validateInputEmpty(String input) {
+	private static void isInputEmpty(String input) {
 		if (input.isEmpty()) {
 			throw new IllegalArgumentException(ERROR_CANNOT_EMPTY);
 		}
