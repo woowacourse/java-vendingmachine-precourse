@@ -63,12 +63,12 @@ public class ProductsController {
 	private static void addProduct(Products products, List<List<String>> productsInfoList) {
 		for (List<String> productInfo : productsInfoList) {
 			Product product = new Product(productInfo);
-			isDuplicateProduct(products, product);
+			validateProductDuplication(products, product);
 			products.add(product);
 		}
 	}
 
-	private static void isDuplicateProduct(Products products, Product product) {
+	private static void validateProductDuplication(Products products, Product product) {
 		if (products.isContains(product)) {
 			throw new IllegalArgumentException(MSG_DUPLICATION_ERROR);
 		}

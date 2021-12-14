@@ -34,17 +34,17 @@ public class VendingMachine {
 
 	private void validateBuyingProductName(String buyingProductName) {
 		Product product = products.getProductByName(buyingProductName);
-		isSmallInputMoney(product);
-		isOutOfStock(product);
+		validateInputMoney(product);
+		validateIsOutOfStock(product);
 	}
 
-	private void isSmallInputMoney(Product product) {
+	private void validateInputMoney(Product product) {
 		if (product.getSmallerPrice(inputMoney) > inputMoney) {
 			throw new IllegalArgumentException(MSG_SMALL_INPUT_MONEY_ERROR);
 		}
 	}
 
-	private void isOutOfStock(Product product) {
+	private void validateIsOutOfStock(Product product) {
 		if (!product.isInStock()) {
 			throw new IllegalArgumentException(MSG_OUT_OF_STOCK_ERROR);
 		}
