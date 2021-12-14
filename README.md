@@ -1,7 +1,15 @@
 # 미션 - 자판기
 
+## 📖Projcet Summary
+Magic 자판기를 구현한다. Magic 자판기의 specification은 다음과 같다.
+- 자판기는 관리자로부터 돈을 입력받으면 500원, 100원, 50원, 10원 짜리 동전을 랜덤 갯수만큼 생성한다.
+- 자판기는 관리자로부터 판매할 수 있는 상품에 대한 정보를 입력받는다.
+- 이제 판매를 시작할 수 있다! 자판기는 유저의 주문을 처리한다.
+- 이 자판기는 Magic자판기이기 때문에 유저가 투입한 금액이 다 떨어질 때까지 주문을 받고, 상품 가격보다 금액이 적어지게 되면 동전으로 잔돈을 반환한다. 
+- 단, 자판기가 소유한 동전이 잔돈보다 모자란 경우 반환할 수 있는 금액만 반환한다.
 
-## 기능 목록    
+
+## 🛠 기능 목록    
 - 자판기가 보유하고 있는 금액 입력 기능
   - 입력이 들어오면 동전으로 변환하는 기능
   - 500원, 100원, 50원, 10원으로 랜덤 갯수를 생성한다.
@@ -16,13 +24,44 @@
     - 상품 가격은 100이상이어야한다.
     - 상품 가격은 10으로 나누어 떨어져야 한다.
 - 투입 금액 입력 기능
+  - 투입 금액은 숫자여야한다.
+  - 입력에 예외가 생기면 계속 입력을 받는다.
+    - 투입 금액은 숫자여야함
 - 구매할 상품명 입력 기능
-  - 남은 금액이 상품의 최저 가격보다 적으면 잔돈 반환
+  - 남은 금액이 재고가 있는 상품들의 최저 가격보다 적으면 잔돈 반환
   - 모든 상품이 소진 된 경우 잔돈 반환
+  - 입력 예외처리 기능
+    - 재고가 없는 경우
+    - 재고가 있지만, 금액이 모자란 경우
 - 잔돈 반환 계산 기능
   - 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환한다.
 
-
+## 📃 클래스 목록
+- constant: 상수 모음 패키지
+  - CoinConstant: Coin에 대한 상수 모음
+  - OrderConstant: Order에 대한 상수 모음
+  - ProductConstant: Product에 대한 상수 모음 
+- controller: 컨트롤러 패키지, 요청을 처리하는 담당
+  - CoinController: 동전 생성에 관련한 처리 Service로 요청 할당 
+  - OrderController: 유저의 주문에 대한 처리 Service로 요청 할당
+  - ProductController: 제품 생성에 대한 처리 Service로 요청 할당
+  - VendingMachineController: Application으로 부터 요청이 들어오면, 각 요청에 맞는 컨트롤러로 요청을 할당해줌.
+- repository: 자판기에서 사용되는 객체 패키지
+  - Coin: Coin Enum객체
+  - Money: 유저의 투입금액 객체
+  - Product: 자판기의 각 상품 한개에 대한 객체
+  - Products: 자판기의 전체 상품 객체
+- service: 비즈니스 로직 담당 패키지
+  - CoinService: 랜덤 동전 생성 비즈니스 로직
+  - CoinValidator: CoinService에 대한 예외처리
+  - OrderService: 유저의 주문 처리 비즈니스 로직
+  - OrderValidator: OrderSerivce에 대한 예외처리
+  - ProductService: 자판기의 제품 생성 처리 비즈니스 로직
+  - ProductValidator: ProductService에 대한 예외처리
+- view: 입력과 출력 담당 view 패키지
+  - InputView: 사용자의 입력 담당 view
+  - OutputView: 결과 출력 담당 view
+- Application: 사용자의 최초 요청 처리
 
 
 ## 🔍 진행방식
