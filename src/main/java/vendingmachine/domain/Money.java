@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Objects;
 
+import vendingmachine.validation.IntegerDividableException;
 import vendingmachine.validation.PositiveIntegerValidation;
 import vendingmachine.validation.Validator;
 
@@ -13,7 +14,9 @@ public class Money {
 	private int amount;
 
 	public Money(int amount) {
-		this.amount = Validator.validate(NAME, amount, new PositiveIntegerValidation());
+		this.amount = Validator.validate(NAME, amount,
+			new PositiveIntegerValidation(),
+			new IntegerDividableException(Coin.MIN));
 	}
 
 	public Money plus(Money other) {

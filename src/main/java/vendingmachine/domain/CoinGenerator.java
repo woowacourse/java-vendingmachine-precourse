@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import java.util.Arrays;
-import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
@@ -14,17 +12,15 @@ public class CoinGenerator {
 	}
 
 	private void addCoinRecursively(Map<Coin, Quantity> coins, Money money, CoinPickStrategy pickStrategy) {
-		if (!money.isGreaterThan(Money.ZERO)) {
-			return;
+		while (money.isGreaterThan(Money.ZERO)) {
+			try {
+				Coin coin = findCoin(money, pickStrategy);
+				add(coins, coin);
+				money = decrease(money, coin);
+			} catch (NoSuchElementException exception) {
+				return;
+			}
 		}
-		try {
-			Coin coin = findCoin(money, pickStrategy);
-			createOrAdd(coins, coin);
-			money = decrease(money, coin);
-		} catch (NoSuchElementException exception) {
-			return;
-		}
-		addCoinRecursively(coins, money, pickStrategy);
 	}
 
 	private Money decrease(Money money, Coin coin) {
@@ -35,11 +31,7 @@ public class CoinGenerator {
 		return pickStrategy.pickOne(money);
 	}
 
-	private void createOrAdd(Map<Coin, Quantity> coins, Coin coin) {
-		if (!coins.containsKey(coin)) {
-			coins.put(coin, Quantity.ONE);
-			return;
-		}
+	private void add(Map<Coin, Quantity> coins, Coin coin) {
 		coins.put(coin, coins.get(coin).plus(Quantity.ONE));
 	}
 }

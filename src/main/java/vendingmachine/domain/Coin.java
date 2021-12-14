@@ -15,6 +15,7 @@ public enum Coin {
 	COIN_50(50),
 	COIN_10(10);
 
+	public static final int MIN = 10;
 	private static final String CURRENCY = "원";
 	private static final String ERROR_NO_COIN = "%d 원 동전이 없습니다.";
 	private final int amount;
