@@ -15,12 +15,9 @@ public class Product implements Comparable<Product>{
 	private int amount;
 
 	public Product(String name, Money price, int amount) throws IllegalArgumentException {
-		validateName(name);
-		validatePrice(price);
-		validateAmount(amount);
-		this.name = name;
-		this.price = price;
-		this.amount = amount;
+		this.name = validateName(name);
+		this.price = validatePrice(price);
+		this.amount = validateAmount(amount);
 	}
 
 	public boolean soldOut() {
@@ -39,22 +36,25 @@ public class Product implements Comparable<Product>{
 		return price;
 	}
 
-	private void validateName(String name) throws IllegalArgumentException {
+	private String validateName(String name) throws IllegalArgumentException {
 		if (name.isEmpty()) {
 			throw new IllegalArgumentException(NAME_ERROR_MESSAGE);
 		}
+		return name;
 	}
 
-	private void validatePrice(Money price) throws IllegalArgumentException {
+	private Money validatePrice(Money price) throws IllegalArgumentException {
 		if (price.getAmount() < MIN_PRICE) {
 			throw new IllegalArgumentException(PRICE_ERROR_MESSAGE);
 		}
+		return price;
 	}
 
-	private void validateAmount(int amount) throws IllegalArgumentException {
+	private int validateAmount(int amount) throws IllegalArgumentException {
 		if (amount < MIN_AMOUNT) {
 			throw new IllegalArgumentException(COUNT_ERROR_MESSAGE);
 		}
+		return amount;
 	}
 
 	@Override
