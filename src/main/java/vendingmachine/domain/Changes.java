@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class Changes {
 
-    private static final String ERR_INVALID_COUNT = "[ERROR] 동전의 개수는 0 이상이어야합니다.";
+    private static final String ERR_INVALID_COUNT = "동전의 개수는 0 이상이어야합니다.";
     private static final int NO_COIN = 0;
     private final Map<Coin, Integer> changes;
 

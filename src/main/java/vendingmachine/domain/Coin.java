@@ -10,7 +10,7 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
-    private static final String ERR_INVALID_COIN = "[ERROR] 존재하지 않는 동전입니다.";
+    private static final String ERR_INVALID_COIN = "존재하지 않는 동전입니다.";
     private static final String LOCAL_CURRENCY_UNIT = "원";
     private final int amount;
 

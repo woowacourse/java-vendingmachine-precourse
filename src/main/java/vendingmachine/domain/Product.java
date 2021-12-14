@@ -2,13 +2,11 @@ package vendingmachine.domain;
 
 public class Product {
 
-    private static final String ERR_HEADER = "[ERROR]";
-    private static final String ERR_INVALID_STOCK = ERR_HEADER + "재고가 비어있으면 안됩니다.";
-    private static final String ERR_INVALID_PRICE =
-        ERR_HEADER + "상품 가격은 100원 이상이고 10원으로 나누어 떨어져야합니다.";
-    private static final String ERR_INVALID_NAME = ERR_HEADER + "상품 이름이름은 글자와 숫자만 허용됩니다..";
-    private static final String ERR_INVALID_INPUT_AMOUNT = ERR_HEADER + "투입금액이 상품가격보다 적습니다.";
-    private static final String ERR_EMPTY_STOCK = ERR_HEADER + "상품의 재고가 없습니다.";
+    private static final String ERR_INVALID_STOCK = "재고가 비어있으면 안됩니다.";
+    private static final String ERR_INVALID_PRICE = "상품 가격은 100원 이상이고 10원으로 나누어 떨어져야합니다.";
+    private static final String ERR_INVALID_NAME = "상품 이름이름은 글자와 숫자만 허용됩니다..";
+    private static final String ERR_INVALID_INPUT_AMOUNT = "투입금액이 상품가격보다 적습니다.";
+    private static final String ERR_EMPTY_STOCK = "상품의 재고가 없습니다.";
     private static final int MIN_AMOUNT = 10;
     private static final int MIN_PRICE = 100;
     private static final int EMPTY_STOCK = 0;

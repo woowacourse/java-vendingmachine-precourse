@@ -8,7 +8,7 @@ import vendingmachine.domain.Coin;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
 
-public class ConsolePrinter {
+public class ResultPrinter {
 
     private static final String CHANGE_DELIMITER = " - ";
     private static final String CHANGE_HEADER = "잔돈";
@@ -20,11 +20,11 @@ public class ConsolePrinter {
 
     private final PrintStream printStream;
 
-    public ConsolePrinter(PrintStream printStream) {
+    public ResultPrinter(PrintStream printStream) {
         this.printStream = printStream;
     }
 
-    public ConsolePrinter() {
+    public ResultPrinter() {
         this.printStream = System.out;
     }
 

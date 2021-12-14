@@ -9,10 +9,9 @@ import vendingmachine.domain.Product;
 
 public class ProductService {
 
-    private static final String ERR_HEADER = "[ERROR]";
-    private static final String ERR_INVALID_PRODUCT = ERR_HEADER + "존재하지 않는 상품입니다.";
-    private static final String ERR_EMPTY_PRODUCTS = ERR_HEADER + "상품 리스트가 비어있습니다.";
-    private static final String ERR_DUPLICATED_NAME = ERR_HEADER + "중복된 이름이 있습니다.";
+    private static final String ERR_INVALID_PRODUCT = "존재하지 않는 상품입니다.";
+    private static final String ERR_EMPTY_PRODUCTS = "상품 리스트가 비어있습니다.";
+    private static final String ERR_DUPLICATED_NAME = "중복된 이름이 있습니다.";
 
     private final Map<String, Product> products;
 

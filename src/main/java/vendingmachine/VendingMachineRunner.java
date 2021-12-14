@@ -2,22 +2,23 @@ package vendingmachine;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.controller.VendingMachine;
-import vendingmachine.view.ConsolePrinter;
+import vendingmachine.view.ErrorPrinter;
+import vendingmachine.view.ResultPrinter;
 import vendingmachine.utils.ConsoleInput;
 
 public class VendingMachineRunner {
 
-    private final ConsolePrinter printer;
+    private final ResultPrinter printer;
     private final ConsoleInput input;
     private VendingMachine vendingMachine;
 
-    public VendingMachineRunner(ConsolePrinter printer, ConsoleInput input) {
+    public VendingMachineRunner(ResultPrinter printer, ConsoleInput input) {
         this.printer = printer;
         this.input = input;
     }
 
     public VendingMachineRunner() {
-        this.printer = new ConsolePrinter(System.out);
+        this.printer = new ResultPrinter(System.out);
         this.input = new ConsoleInput(Console::readLine);
     }
 
@@ -44,7 +45,7 @@ public class VendingMachineRunner {
         try {
             vendingMachine.order(input.getProductOrder());
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            ErrorPrinter.printError(e);
             order();
         }
         printer.printInputAmount(vendingMachine.getCurrentInputAmount());

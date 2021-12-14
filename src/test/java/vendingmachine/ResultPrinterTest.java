@@ -16,9 +16,9 @@ import vendingmachine.domain.Changes;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
-import vendingmachine.view.ConsolePrinter;
+import vendingmachine.view.ResultPrinter;
 
-public class ConsolePrinterTest {
+public class ResultPrinterTest {
 
     ByteArrayOutputStream capture;
     PrintStream sysout;
@@ -45,7 +45,7 @@ public class ConsolePrinterTest {
             put(Coin.COIN_500, 1);
             put(Coin.COIN_100, 3);
         }};
-        ConsolePrinter printer = new ConsolePrinter();
+        ResultPrinter printer = new ResultPrinter();
         printer.printChanges(new Changes(testCase));
         assertThat(out()).isEqualTo(
             "잔돈\n500원 - 1개\n100원 - 3개\n"
@@ -54,7 +54,7 @@ public class ConsolePrinterTest {
 
     @Test
     void emptyChangeTest() {
-        ConsolePrinter printer = new ConsolePrinter();
+        ResultPrinter printer = new ResultPrinter();
         printer.printChanges(new Changes(new HashMap<>()));
         assertThat(out()).isEqualTo(
             "잔돈\n"
@@ -66,7 +66,7 @@ public class ConsolePrinterTest {
         Map<Coin, Integer> testCase = new HashMap<Coin, Integer>() {{
             put(Coin.COIN_500, Integer.MAX_VALUE);
         }};
-        ConsolePrinter printer = new ConsolePrinter();
+        ResultPrinter printer = new ResultPrinter();
         printer.printChanges(new Changes(testCase));
         assertThat(out()).isEqualTo(
             "잔돈\n500원 - " + Integer.MAX_VALUE + "개\n"
@@ -75,7 +75,7 @@ public class ConsolePrinterTest {
 
     @Test
     void holdingAmountTest() {
-        ConsolePrinter printer = new ConsolePrinter();
+        ResultPrinter printer = new ResultPrinter();
         HoldingAmount holdingAmount = mock(HoldingAmount.class);
         when(holdingAmount.getHoldingCoinCount(any())).thenReturn(1);
         printer.printHoldingAmount(holdingAmount);
@@ -85,7 +85,7 @@ public class ConsolePrinterTest {
     @Test
     void inputAmountTest() {
         final int amount = 1000;
-        ConsolePrinter printer = new ConsolePrinter();
+        ResultPrinter printer = new ResultPrinter();
         InputAmount inputAmount = mock(InputAmount.class);
         when(inputAmount.getLocalCurrency()).thenReturn("1000원");
         printer.printInputAmount(inputAmount);

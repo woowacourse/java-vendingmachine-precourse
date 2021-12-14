@@ -5,6 +5,7 @@ import vendingmachine.domain.HoldingAmount;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.service.ProductService;
 import vendingmachine.validator.InputValidator;
+import vendingmachine.view.ErrorPrinter;
 
 public class ConsoleInput {
 
@@ -66,7 +67,7 @@ public class ConsoleInput {
         try {
             return supplier.get();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            ErrorPrinter.printError(e);
             return iterateUntilValid(supplier);
         }
     }

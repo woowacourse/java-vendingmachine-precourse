@@ -41,6 +41,15 @@ public class ProductParserTest {
         validateThrows("[콜락,100,3");
     }
 
+    @Test
+    void noBracketTest() {
+        validateThrows("abc,1000,1");
+    }
+
+    @Test
+    void invalidBracketTest() {
+        validateThrows("[abc,2000,1;[bbc,300,1]");
+    }
 
     @Test
     void invalidNameTest() {

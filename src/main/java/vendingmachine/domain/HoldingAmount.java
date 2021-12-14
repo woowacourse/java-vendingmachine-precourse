@@ -7,8 +7,7 @@ import java.util.function.Function;
 
 public class HoldingAmount {
 
-    private static final String ERR_PREFIX = "[ERROR]";
-    private static final String ERR_BELOW_MIN_AMOUNT = ERR_PREFIX + "보유 금액은 0원 이상만 허용됩니다.";
+    private static final String ERR_BELOW_MIN_AMOUNT = "보유 금액은 0원 이상만 허용됩니다.";
     private static final int MIN_AMOUNT = 10;
     private static final int ZERO = 0;
     private final Map<Coin, Integer> coins;
