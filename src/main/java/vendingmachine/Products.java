@@ -18,7 +18,7 @@ public class Products {
     }
 
     public Product takeOut(String productName) {
-        Product product = find(productName);
+        Product product = findByName(productName);
         product.validateEnoughStock();
         product.decreaseQuantity();
 
@@ -29,7 +29,7 @@ public class Products {
         return isExceedLeastPrice(inputAmount) && isAnyProductInStock();
     }
 
-    public Product find(String productName) {
+    public Product findByName(String productName) {
         return products.stream()
                 .filter(product -> product.isName(productName))
                 .findFirst()

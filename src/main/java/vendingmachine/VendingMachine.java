@@ -42,7 +42,7 @@ public class VendingMachine {
     }
 
     public boolean isRestQuantity(String productName, int productQuantity) {
-        return products.find(productName).isRestQuantity(productQuantity);
+        return products.findByName(productName).isRestQuantity(productQuantity);
     }
 
     private void validateDividedIntoSemicolon(String productsString) {
