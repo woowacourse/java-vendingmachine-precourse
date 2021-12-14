@@ -7,6 +7,7 @@ public class ValidationImplementation implements Validation {
     private static final int MINIMUM_HOLDING_MONEY = 100;
     private static final int HOLDING_MONEY_LIMITED_LENGTH = 9;
     private static final int PRODUCT_INFORMATION_DEFAULT_FORMAT_SIZE = 3;
+    private static final int ZERO_VALUE=0;
     private static final Pattern HANGLE_PATTERN = Pattern.compile("^[가-힣]*$");
     private static final Pattern DIGIT_PATTERN = Pattern.compile("^[0-9]*$");
 
@@ -64,7 +65,7 @@ public class ValidationImplementation implements Validation {
             throw new IllegalArgumentException();
         }
 
-        if (!isOnlyDigit(userInsertMoney)) {
+        if (!isOnlyDigit(userInsertMoney) || Integer.parseInt(userInsertMoney)==ZERO_VALUE) {
             throw new IllegalArgumentException();
         }
 
