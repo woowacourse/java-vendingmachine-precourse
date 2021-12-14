@@ -1,12 +1,12 @@
 package vendingmachine.domain.validation;
 
-import vendingmachine.domain.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.StringTokenizer;
+
+import vendingmachine.domain.Text;
 
 public class Validator {
     private final int ZERO = 0;

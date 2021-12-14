@@ -1,8 +1,8 @@
 package vendingmachine.view;
 
-import vendingmachine.domain.Coin;
-
 import java.util.Map;
+
+import vendingmachine.domain.Coin;
 
 public class OutputView {
     public static final String LINE_BREAK = "\n";
