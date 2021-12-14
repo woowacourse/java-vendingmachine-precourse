@@ -37,7 +37,7 @@ public class Controller {
     private void startProductBuyingProcess() {
         System.out.printf((Constant.REMAIN_MONEY) + "%n", machine.remainMoney());
         if (!machine.canBuyWith(machine.remainMoney())) {
-            System.out.println(machine.returnChange());
+            System.out.println(machine.returnChange().toStringWithoutEmptyCoin());
             return;
         }
         buyProduct();

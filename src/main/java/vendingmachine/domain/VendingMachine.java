@@ -61,8 +61,8 @@ public class VendingMachine {
         }
     }
 
-    public Change returnChange() {
-        Change change = new Change();
+    public CoinCollection returnChange() {
+        CoinCollection change = new CoinCollection();
         List<Coin> coinsInOrder = Coin.getCoinsInOrder();
 
         for (Coin coin : coinsInOrder) {
