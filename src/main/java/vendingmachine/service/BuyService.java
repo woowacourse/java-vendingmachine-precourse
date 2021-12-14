@@ -7,10 +7,9 @@ import static vendingmachine.repository.ProductRepository.isExist;
 import static vendingmachine.view.ExceptionMessages.*;
 
 public class BuyService {
-
     private final ProductRepository productRepository = ProductRepository.getInstance();
     private final ChangeRepository changeRepository = ChangeRepository.getInstance();
-    
+
     public void sellProduct(String name) {
         changeRepository.subtractChange(productRepository.substractProductQuantity(name));
     }

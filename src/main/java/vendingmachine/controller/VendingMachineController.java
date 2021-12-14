@@ -9,7 +9,6 @@ import static vendingmachine.view.InputViews.inputOrderMessage;
 import static vendingmachine.view.OutputViews.*;
 
 public class VendingMachineController {
-
     private static ChangeService changeService;
     private static ProductService productService;
     private static MachineCoinService machineCoinService;

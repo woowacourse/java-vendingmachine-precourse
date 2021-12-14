@@ -13,7 +13,6 @@ import static vendingmachine.service.Validator.*;
 import static vendingmachine.view.OutputViews.printErrorMessage;
 
 public class MachineCoinService {
-
     private static MachineCoinRepository machineCoinRepository = MachineCoinRepository.getInstance();
     public static final int INIT_COIN_NUM = 0;
 
