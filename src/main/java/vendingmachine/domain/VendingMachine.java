@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.LinkedHashMap;
+
 public class VendingMachine {
 	private Coins coins;
 	private Items items;
@@ -13,11 +15,28 @@ public class VendingMachine {
 		this.userMoneyAmount = 0;
 	}
 
-	public void updateMachineCoins(int machineMoney) {
+	public void generateMachineCoins(int machineMoney) {
 		coins.generateCoins(machineMoney);
 	}
 
-	public void updateItem(Item item) {
+	public LinkedHashMap<Integer, Integer> getCoinInfo() {
+		return coins.getCoinCount();
+	}
+
+	public void updateItemList(String item) {
+		updateItem(getItemInstance(item));
+	}
+
+	private Item getItemInstance(String item) {
+		item = item.replace(ItemConst.OPEN_BRACKET, "");
+		item = item.replace(ItemConst.CLOSE_BRACKET, "");
+		String[] itemInfo = item.split(ItemConst.DELIMITER);
+
+		return new Item(itemInfo[ItemConst.NAME_INDEX],
+			Integer.parseInt(itemInfo[ItemConst.PRICE_INDEX]), Integer.parseInt(itemInfo[ItemConst.QUANTITY_INDEX]));
+	}
+
+	private void updateItem(Item item) {
 		items.addItem(item);
 		updateMinItemPrice(item);
 	}
@@ -29,8 +48,8 @@ public class VendingMachine {
 		}
 	}
 
-	public void insertUserMoney(int userMoney) {
-		this.userMoneyAmount = userMoney;
+	public int insertUserMoney(int userMoney) {
+		return this.userMoneyAmount = userMoney;
 	}
 
 	public boolean checkQuantity(String itemName) {
