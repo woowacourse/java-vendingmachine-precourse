@@ -3,7 +3,6 @@ package vendingmachine.validator;
 import static org.assertj.core.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
@@ -40,6 +39,17 @@ class InputValidatorTest {
 		assertThatCode(
 			() -> InputValidator.checkMoneyForm(input)
 		).doesNotThrowAnyException();
+	}
+
+	@ParameterizedTest
+	@DisplayName("금액이 100원 미만이거나 10원으로 나누어 떨어지지 않을때 예외가 발생한다. - 실패")
+	@ValueSource(strings = {"99", "1997"})
+	void checkMoneyFormWhenFailure(String input) {
+		//given
+		//when then
+		assertThatThrownBy(
+			() -> InputValidator.checkMoneyForm(input)
+		).isInstanceOf(IllegalArgumentException.class);
 	}
 
 }
