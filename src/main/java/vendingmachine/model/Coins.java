@@ -8,7 +8,7 @@ import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.util.SymbolConstants;
 
 public class Coins {
-	private static final int DEFAULT_COIN_NUMBER = 0;
+	private static final int COIN_ADDER = 1;
 	private static final String DASH = "-";
 	private static final String POSTFIX = "개";
 	private EnumMap<Coin, Integer> coinMap;
@@ -16,11 +16,10 @@ public class Coins {
 	public Coins(int amount) {
 		this.coinMap = new EnumMap<>(Coin.class);
 		for (Coin coin : Coin.values()) {
-			coinMap.put(coin, DEFAULT_COIN_NUMBER);
+			coinMap.put(coin, SymbolConstants.ZERO);
 		}
-		while (amount > 0) {
+		while (amount > SymbolConstants.ZERO) {
 			Coin coin = selectRandomCoin();
-
 			if (amount >= coin.getAmount()) {
 				addCoin(coin);
 				amount -= coin.getAmount();
@@ -29,7 +28,7 @@ public class Coins {
 	}
 
 	private void addCoin(Coin coin) {
-		coinMap.put(coin, coinMap.get(coin) + 1);
+		coinMap.put(coin, coinMap.get(coin) + COIN_ADDER);
 	}
 
 	private Coin selectRandomCoin() {
@@ -40,7 +39,6 @@ public class Coins {
 
 	public EnumMap<Coin, Integer> calculateChange(int insertMoney) {
 		EnumMap<Coin, Integer> changeMap = new EnumMap<>(Coin.class);
-
 		for (Coin coin : coinMap.keySet()) {
 			if (coinMap.get(coin) > 0 && coin.isReturnable(insertMoney)) {
 				int returningCnt = Math.min(coinMap.get(coin), coin.divideByCoinAmount(insertMoney));

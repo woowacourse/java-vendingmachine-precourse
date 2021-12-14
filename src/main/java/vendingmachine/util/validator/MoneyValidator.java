@@ -1,9 +1,9 @@
 package vendingmachine.util.validator;
 
 import vendingmachine.util.ErrorMessageConstants;
+import vendingmachine.util.SymbolConstants;
 
 public class MoneyValidator {
-	private static final int POSITIVE_NUMBER_BOUNDARY = 0;
 	private static final int DIVISOR = 10;
 	private static final int REMAINDER = 0;
 
@@ -30,7 +30,7 @@ public class MoneyValidator {
 	}
 
 	private static void validateRange(int money) {
-		if (money < POSITIVE_NUMBER_BOUNDARY) {
+		if (money < SymbolConstants.ZERO) {
 			throw new IllegalArgumentException(ErrorMessageConstants.POSITIVE_NUMBER_EXCEPTION_MESSAGE);
 		}
 	}

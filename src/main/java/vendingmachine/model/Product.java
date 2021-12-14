@@ -1,6 +1,13 @@
 package vendingmachine.model;
 
+import vendingmachine.util.SymbolConstants;
+
 public class Product {
+	private static final int FIRST_INDEX = 0;
+	private static final int SECOND_INDEX = 1;
+	private static final int THIRD_INDEX = 2;
+	private static final int TEN = 10;
+	private static final int HUNDRED = 100;
 	private final String name;
 	private final int price;
 	private int quantity;
@@ -12,9 +19,9 @@ public class Product {
 	}
 
 	public Product(String[] productDetail) {
-		this.name = productDetail[0];
-		this.price = Integer.parseInt(productDetail[1]);
-		this.quantity = Integer.parseInt(productDetail[2]);
+		this.name = productDetail[FIRST_INDEX];
+		this.price = Integer.parseInt(productDetail[SECOND_INDEX]);
+		this.quantity = Integer.parseInt(productDetail[THIRD_INDEX]);
 	}
 
 	public boolean equalProductName(String name) {
@@ -23,7 +30,7 @@ public class Product {
 
 
 	public boolean exists() {
-		return this.quantity > 0;
+		return this.quantity > SymbolConstants.ZERO;
 	}
 
 	public int compareMinimumPrice(int minimumPrice) {
@@ -39,10 +46,10 @@ public class Product {
 	}
 
 	public boolean isPriceOverHundred() {
-		return this.price >= 100;
+		return this.price >= HUNDRED;
 	}
 
 	public boolean isPriceDividedByTen() {
-		return (this.price % 10) == 0;
+		return (this.price % TEN) == SymbolConstants.ZERO;
 	}
 }
