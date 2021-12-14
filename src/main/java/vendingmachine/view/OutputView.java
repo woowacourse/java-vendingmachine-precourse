@@ -1,4 +1,7 @@
-package vendingmachine;
+package vendingmachine.view;
+
+import vendingmachine.model.HoldingCoins;
+import vendingmachine.model.VendingMachine;
 
 public class OutputView {
     private static final String CHANGE = "잔돈";

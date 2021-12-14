@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.model;
+
+import vendingmachine.utils.StringUtils;
 
 import java.util.Objects;
 

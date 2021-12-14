@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import java.util.ArrayList;
 import java.util.List;

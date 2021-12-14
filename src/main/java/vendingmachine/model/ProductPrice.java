@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.model;
+
+import vendingmachine.utils.StringUtils;
 
 public class ProductPrice {
     private static final int DIVISOR = 10;

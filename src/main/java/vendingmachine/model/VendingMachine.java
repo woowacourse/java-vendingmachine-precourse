@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.model;
 
 public class VendingMachine {
     private static final int ZERO = 0;

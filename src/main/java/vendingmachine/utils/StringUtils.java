@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 public class StringUtils {
     public static boolean isNumeric(String string) {

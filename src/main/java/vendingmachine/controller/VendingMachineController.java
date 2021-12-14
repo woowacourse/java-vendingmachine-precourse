@@ -1,4 +1,9 @@
-package vendingmachine;
+package vendingmachine.controller;
+
+import vendingmachine.model.HoldingCoins;
+import vendingmachine.model.VendingMachine;
+import vendingmachine.view.InputView;
+import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     public static void run() {

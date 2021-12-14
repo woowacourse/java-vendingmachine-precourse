@@ -1,9 +1,9 @@
-package vendingmachine;
+package vendingmachine.model;
 
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static vendingmachine.Coin.*;
+import static vendingmachine.model.Coin.*;
 
 public class CoinTest {
     @Test
