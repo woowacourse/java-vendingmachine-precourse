@@ -10,7 +10,6 @@ public class MoneyValidator {
 		try {
 			isAllDigit(input);
 			isMoneyKeepMinUnit(input);
-
 			return false;
 		} catch (IllegalArgumentException illegalArgumentException) {
 			return true;

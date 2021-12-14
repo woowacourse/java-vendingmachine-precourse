@@ -31,7 +31,6 @@ public class ProductInfoValidator {
 			isPriceKeepMinValue(splitInfoArr);
 			isStockNaturalNumber(splitInfoArr);
 			isStockKeepMinValue(splitInfoArr);
-
 			return false;
 		} catch (IllegalArgumentException illegalArgumentException) {
 			return true;

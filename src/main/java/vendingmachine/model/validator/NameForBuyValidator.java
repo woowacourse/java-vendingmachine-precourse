@@ -19,7 +19,6 @@ public class NameForBuyValidator {
 			}
 			isMatchToProduct(name);
 			isStockAvailable(name);
-
 			return false;
 		} catch (IllegalArgumentException illegalArgumentException) {
 			return true;
