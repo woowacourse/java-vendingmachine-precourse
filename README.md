@@ -41,6 +41,43 @@
 - [x] 잔돈으로 반환 가능한 동전의 수량을 구하는 기능
 - [x] 잔돈을 출력하는 기능
 
+## 최종 디렉토리 구조
+```
+└─java-vendingmachine-precourse
+    │
+    └─src
+        ├─main
+        │  └─java
+        │      └─vendingmachine
+        │          │  Application.java
+        │          │
+        │          ├─controller
+        │          │      CoinController.java
+        │          │      ItemController.java
+        │          │      MoneyController.java
+        │          │      VendingMachineController.java
+        │          │
+        │          ├─domain
+        │          │      Coin.java
+        │          │      Coins.java
+        │          │      Item.java
+        │          │      Items.java
+        │          │      Money.java
+        │          │
+        │          └─view
+        │                  InputView.java
+        │                  OutputView.java
+        │
+        └─test
+            └─java
+                └─vendingmachine
+                    │  ApplicationTest.java
+                    │
+                    └─domain
+                            ItemsTest.java
+                            ItemTest.java
+```
+
 ## ✔️ Requirement
 
 - [Java 8](https://www.oracle.com/java/technologies/java8.html)
