@@ -22,4 +22,8 @@ public class Goods {
 	public int getPrice() {
 		return price;
 	}
+
+	public void buyOne() {
+		this.count --;
+	}
 }

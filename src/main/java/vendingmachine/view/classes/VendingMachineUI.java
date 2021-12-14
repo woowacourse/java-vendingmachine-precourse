@@ -4,6 +4,8 @@ import static camp.nextstep.edu.missionutils.Console.*;
 import static vendingmachine.constant.ExceptionConstant.*;
 import static vendingmachine.constant.PromptConstant.*;
 
+import java.util.HashMap;
+
 import vendingmachine.constant.VendingMachineStatus;
 import vendingmachine.controller.CoinGeneratorInterface;
 import vendingmachine.controller.GoodsStackerInterface;
@@ -58,6 +60,7 @@ public class VendingMachineUI implements VendingMachine {
 			if (vendingMachineStatus == VendingMachineStatus.INPUT_USER_GOODS) {
 				System.out.println(PROMPT_USER_INPUT_GOODS);
 				String userInputGoods = readLine();
+				vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
 				if (!goodsStackerInterface.buyGoods(userInputGoods)) {
 					vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
 				}
@@ -67,9 +70,7 @@ public class VendingMachineUI implements VendingMachine {
 				break;
 			}
 		}
-
 	}
-
 	private void configureVendingMachine() {
 		if (vendingMachineStatus == VendingMachineStatus.INPUT_MONEY_IN_VENDING_MACHINE) {
 			proceedInputVendingMachineHavingMoney();
@@ -140,7 +141,10 @@ public class VendingMachineUI implements VendingMachine {
 	private void proceedShowCoinsInVendingMachine() {
 		System.out.println(PROMPT_VENDING_MACHINE_HAVE_COINS);
 		CoinGeneratorInterface coinGeneratorInterface = new CoinGenerator();
-		printHandler.printCoinStatus(coinGeneratorInterface.getRandomCoins(moneyInVendingMachine));
+		HashMap<Integer, Integer>tmpCoinMap = coinGeneratorInterface.getRandomCoins(moneyInVendingMachine);
+		printHandler.printCoinStatus(tmpCoinMap);
+
+
 		vendingMachineStatus = VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE;
 	}
 

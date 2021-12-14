@@ -62,15 +62,20 @@ public class GoodsStacker implements GoodsStackerInterface {
 
 	@Override
 	public boolean buyGoods(String userInputGoods) {
-		int letfCount = 0;
+		int leftCount = 0;
 		for (Goods goods: vendingMachineStorage.getGoodsList()) {
-			letfCount += goods.getCount();
+			leftCount += goods.getCount();
 		}
-		if (letfCount == 0) {
+		if (leftCount == 0) {
 			return false;
 		}
 		for (Goods goods: vendingMachineStorage.getGoodsList()) {
-			letfCount += goods.getCount();
+			if (goods.getName().equals(userInputGoods)) {
+				goods.buyOne();
+				int originMoney = vendingMachineStorage.getUserInputMoney();
+				vendingMachineStorage.setUserInputMoney(originMoney - goods.getPrice());
+				return true;
+			}
 		}
 		return false;
 	}
