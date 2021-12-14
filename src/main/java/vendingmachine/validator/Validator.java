@@ -6,6 +6,9 @@ import vendingmachine.model.domain.Product;
 import vendingmachine.util.Utils;
 
 public class Validator {
+	private static final int MINIMUM_AMOUNT = 100;
+	private static final int UNIT_OF_WON = 10;
+	private static final int NUMBER_OF_PRODUCT_INFORMATION = 3;
 	private static final String ERROR_INPUT_MUST_BE_NUMBER = "[ERROR] 금액은 숫자여야 합니다.";
 	private static final String ERROR_MONEY_CAN_DIVIDE_INTO_10 = "[ERROR] 금액은 10원 단위여아합니다.";
 	private static final String ERROR_CANNOT_EMPTY = "[ERROR] 입력은 공백일 수 없습니다.";
@@ -30,7 +33,7 @@ public class Validator {
 	}
 
 	public String validateBuyingProduct(String validateBuyingProduct) {
-		validateProduct(validateBuyingProduct);
+		validateInputEmpty(validateBuyingProduct);
 
 		return validateBuyingProduct;
 	}
@@ -56,19 +59,19 @@ public class Validator {
 	}
 
 	private static void validateInputAmountUnder100(String input) {
-		if (Utils.moneyConverter(input) < 100) {
+		if (Utils.moneyConverter(input) < MINIMUM_AMOUNT) {
 			throw new IllegalArgumentException(ERROR_INPUT_IS_BIGGER_THAN_100);
 		}
 	}
 
 	private static void validateInputDivideInto10(String input) {
-		if (Integer.parseInt(input) % 10 != 0) {
+		if (Integer.parseInt(input) % UNIT_OF_WON != 0) {
 			throw new IllegalArgumentException(ERROR_MONEY_CAN_DIVIDE_INTO_10);
 		}
 	}
 
 	private static void validateNumberOfInput(String[] input) {
-		if (input.length != 3) {
+		if (input.length != NUMBER_OF_PRODUCT_INFORMATION) {
 			throw new IllegalArgumentException(ERROR_INPUT_INCORRECT);
 		}
 	}

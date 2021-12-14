@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.util.Constant;
 
 public class VendingMachine {
 	private int inputMoney;
@@ -40,7 +41,7 @@ public class VendingMachine {
 		initCoinMap();
 		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
 
-		while (ownMoney > 0) {
+		while (ownMoney > Constant.LOWER_LIMIT_OF_MONEY) {
 			int coinAmount = Randoms.pickNumberInList(coinAmountList);
 			if (coinAmount <= ownMoney) {
 				coinMap.put(Coin.parse(coinAmount), coinMap.get(Coin.parse(coinAmount)) + 1);
@@ -52,12 +53,12 @@ public class VendingMachine {
 	private void initCoinMap() {
 		List<Integer> coinAmountList = Coin.getOrderedCoinAmounts();
 		coinAmountList.forEach(coinAmount -> {
-			coinMap.put(Coin.parse(coinAmount), 0);
+			coinMap.put(Coin.parse(coinAmount), Constant.LOWER_LIMIT_OF_AMOUNT);
 		});
 	}
 
 	public boolean isInputMoneyRemain() {
-		return inputMoney >= 0;
+		return inputMoney >= Constant.LOWER_LIMIT_OF_MONEY;
 	}
 
 	public boolean isProductListNotEmpty() {

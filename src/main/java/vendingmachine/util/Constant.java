@@ -5,4 +5,6 @@ public class Constant {
 	public static final String PRODUCT_DETAIL_SEPARATOR = ",";
 	public static final String OPEN_SQUARE_BRACKET = "[";
 	public static final String CLOSING_SQUARE_BRACKET = "]";
+	public static final int LOWER_LIMIT_OF_MONEY = 0;
+	public static final int LOWER_LIMIT_OF_AMOUNT = 0;
 }
