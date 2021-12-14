@@ -89,8 +89,7 @@ public class CatalogService {
 		checkEndWithSemiColon(inputString);
 		List<String> catalogStringList = Arrays.asList(inputString.split(CATALOG_STRING_SPLITTER));
 		for (String catalogString : catalogStringList) {
-			checkEmptyString(catalogString);
-			checkBraced(catalogString);
+			checkCatalogFormat(catalogString);
 		}
 		return catalogStringList;
 	}
