@@ -19,10 +19,6 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public void setNumberOfCoin(int numberOfCoin) {
-        this.numberOfCoin = numberOfCoin;
-    }
-
     public void InputOneCoin() {
         this.numberOfCoin ++;
     }

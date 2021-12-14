@@ -3,6 +3,8 @@ package vendingmachine;
 import java.util.ArrayList;
 
 public class Utils {
+    static int totalNumberOfJuice;
+
     public static void MachineOn() {
         CheckChange();
         String[] juices = PrintUI.InputJuice();
@@ -36,14 +38,18 @@ public class Utils {
 
     public static void OrderJuice(int minPrice, ArrayList<Juice> juiceIndex) {
         int money = PrintUI.InputMoney();
-        while (true) {
-            if (money < minPrice) {
-                break;
-            }
+        SumNumberOfJuice(juiceIndex);
+        while (money >= minPrice && totalNumberOfJuice != 0) {
             String juiceName = PrintUI.Ordering(money);
             money -= OrderCheck(money,juiceIndex,juiceName);
         }
         Coin.PrintChange(money);
+    }
+
+    public static void SumNumberOfJuice(ArrayList<Juice> juiceIndex) {
+        for (Juice juice : juiceIndex) {
+            totalNumberOfJuice = juice.SumNumber(totalNumberOfJuice);
+        }
     }
 
     public static int OrderCheck(int money, ArrayList<Juice> juiceIndex, String orderJuice) {
@@ -52,6 +58,7 @@ public class Utils {
             price = juice.EqualJuiceName(orderJuice);
             if (price != 0) {
                 price = ExpensivePrice(juice, money, price);
+                OneMinusTotalNumber(price);
                 return price;
             }
         }
@@ -80,4 +87,11 @@ public class Utils {
             return 0;
         }
     }
+
+    public static void OneMinusTotalNumber(int price) {
+        if (price != 0) {
+            totalNumberOfJuice -= 1;
+        }
+    }
+
 }

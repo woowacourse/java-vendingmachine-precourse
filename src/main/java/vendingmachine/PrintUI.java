@@ -25,6 +25,7 @@ public class PrintUI {
         System.out.println();
         return Juices;
     }
+
     public static int InputMoney() {
         System.out.println("투입 금액을 입력해 주세요.");
         int money = Integer.parseInt(Console.readLine());

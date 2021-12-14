@@ -13,6 +13,10 @@ public class Juice {
         this.price = price;
     }
 
+    public int SumNumber(int total) {
+        return total + numberOfCan;
+    }
+
     public int MinPrice(int minPrice) {
         return Math.min(this.price,minPrice);
     }
