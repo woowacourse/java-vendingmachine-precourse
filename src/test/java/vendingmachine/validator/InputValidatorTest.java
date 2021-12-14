@@ -57,10 +57,10 @@ class InputValidatorTest {
 	@DisplayName("수량이 음수일때는 실패한다. - 실패")
 	void checkStockFormFailureWhenInputIsNegative() {
 		//given
-		String InputStock = "-1";
+		String inputStock = "-1";
 		//when then
 		assertThatThrownBy(
-			() -> InputValidator.checkStockForm(InputStock)
+			() -> InputValidator.checkStockForm(inputStock)
 		).isInstanceOf(IllegalArgumentException.class);
 	}
 
