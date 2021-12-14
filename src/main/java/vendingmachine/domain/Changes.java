@@ -3,19 +3,14 @@ package vendingmachine.domain;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
 public class Changes {
-	private Map<Coin, Integer> changes = new LinkedHashMap<>();
+	private final Map<Coin, Integer> changes = new LinkedHashMap<>();
 
 	public Changes() {
 		initChangesMap(this.changes);
-	}
-
-	public Changes(Map<Coin, Integer> changes) {
-		this.changes = changes;
 	}
 
 	public void makeRandomCoin(int money) {

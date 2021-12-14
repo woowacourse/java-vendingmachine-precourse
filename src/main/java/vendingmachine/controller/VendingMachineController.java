@@ -18,11 +18,9 @@ public class VendingMachineController {
 
 	private void runVendingMachine(VendingMachine vendingMachine) {
 		if (!vendingMachine.haveAffordableItem()) {
-			// 잔돈 반환 기능
 			OutputView.printReturnChanges(vendingMachine.returnChange());
 			return;
 		}
-		// 구매기능
 		buyItem(vendingMachine);
 		runVendingMachine(vendingMachine);
 	}

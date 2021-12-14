@@ -36,8 +36,4 @@ public class ItemList {
 		return items.stream().filter(item -> item.getName().equals(itemName))
 			.findFirst().orElseThrow(() -> new IllegalArgumentException(ErrorConst.HAVE_NO_THIS_ITEM));
 	}
-
-	public void buy() {
-
-	}
 }

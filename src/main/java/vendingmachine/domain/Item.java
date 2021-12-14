@@ -39,7 +39,7 @@ public class Item {
 	}
 
 	public void sell() {
-		if(isRemain())
+		if (isRemain())
 			num -= 1;
 	}
 }
