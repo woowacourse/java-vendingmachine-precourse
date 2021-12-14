@@ -13,12 +13,13 @@ public class VendingMachineController {
 	private static final OutputView outputView = new OutputView();
 	private static final CoinController coinController = new CoinController(inputView, outputView);
 	private static final ItemController itemcontroller = new ItemController(inputView, outputView);
+	private Money money;
 
 	public void run() {
 
 		coinController.setupHoldingCoins();
 		itemcontroller.setupItems();
-		Money money = giveMoney();
+		this.money = giveMoney();
 		sellItem(items, money);
 
 		outputView.printMoney(money);
