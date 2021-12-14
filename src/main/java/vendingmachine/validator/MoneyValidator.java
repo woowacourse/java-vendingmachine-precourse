@@ -4,7 +4,7 @@ import static vendingmachine.Constants.*;
 
 import vendingmachine.view.ErrorView;
 
-public class MoneyValidator extends PositiveValidator{
+public class MoneyValidator extends PositiveValidator {
 	public static boolean checkInputMoney(String string) {
 		try {
 			exceptionNotPositiveNumber(string);
@@ -23,7 +23,6 @@ public class MoneyValidator extends PositiveValidator{
 			throw new IllegalArgumentException();
 		}
 	}
-
 
 	protected static void exceptionStringSmallerThanMinimum(String string) {
 		long number = getNumberFromString(string);

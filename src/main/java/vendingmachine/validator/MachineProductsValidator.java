@@ -7,7 +7,7 @@ import java.util.List;
 import vendingmachine.service.ProductService;
 import vendingmachine.view.ErrorView;
 
-public class MachineProductsValidator extends CommonValidator{
+public class MachineProductsValidator extends CommonValidator {
 	public static boolean checkMachineProducts(String inputLine) {
 		try {
 			exceptionStringEmpty(inputLine);

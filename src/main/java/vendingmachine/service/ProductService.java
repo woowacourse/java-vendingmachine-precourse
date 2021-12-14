@@ -11,7 +11,7 @@ public class ProductService {
 	}
 
 	public static List<String> splitProductElements(String inputLine) {
-		inputLine = inputLine.substring(NON_BRACKET_INDEX, inputLine.length()- NON_BRACKET_INDEX);
+		inputLine = inputLine.substring(NONE_BRACKET_INDEX, inputLine.length() - NONE_BRACKET_INDEX);
 		return Arrays.asList(inputLine.split(STRING_COMMA));
 	}
 }

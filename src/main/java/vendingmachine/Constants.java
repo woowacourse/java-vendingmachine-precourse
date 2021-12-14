@@ -16,7 +16,7 @@ public class Constants {
 	public static final int PRODUCT_PRICE_INDEX = 1;
 	public static final int PRODUCT_COUNT_INDEX = 2;
 	public static final int PRODUCT_ELEMENT_SIZE = 3;
-	public static final int NON_BRACKET_INDEX = 1;
+	public static final int NONE_BRACKET_INDEX = 1;
 	public static final int BRACKET_INDEX = 0;
 	public static final String STRING_SPACE = " ";
 	public static final String EMPTY_STRING = "";

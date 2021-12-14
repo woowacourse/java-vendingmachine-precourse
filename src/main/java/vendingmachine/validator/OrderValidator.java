@@ -5,7 +5,7 @@ import static vendingmachine.Constants.*;
 import vendingmachine.model.ProductModel;
 import vendingmachine.view.ErrorView;
 
-public class OrderValidator extends CommonValidator{
+public class OrderValidator extends CommonValidator {
 	public static boolean checkProductName(String inputLine) {
 		try {
 			exceptionStringEmptyOrSpace(inputLine);

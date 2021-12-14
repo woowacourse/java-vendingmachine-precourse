@@ -1,7 +1,6 @@
 package vendingmachine.model;
 
 import vendingmachine.domain.MachineProducts;
-import vendingmachine.domain.Product;
 
 public class ProductModel {
 	private static MachineProducts products;

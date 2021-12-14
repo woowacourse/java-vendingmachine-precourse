@@ -4,7 +4,6 @@ import static vendingmachine.Constants.*;
 
 import java.util.Map;
 
-import vendingmachine.domain.ChangeCoins;
 import vendingmachine.domain.Coin;
 
 public class CoinView {
