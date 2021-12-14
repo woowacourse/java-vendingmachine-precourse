@@ -20,7 +20,8 @@ public class MachineController {
 	}
 
 	private void setting() {
-		Change changes = Change.generateChanges(InputView.getHavingMoney());
+		Change changes = new Change();
+		changes.generateChanges(InputView.getHavingMoney());
 		OutputView.printHavingMachineCoin(changes);
 		Beverages beverages = InputView.getItemPriceStock();
 		Money inputMoney = InputView.getUserInputMoney();

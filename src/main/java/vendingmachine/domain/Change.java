@@ -7,17 +7,21 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 public class Change {
 
-	private static Map<Coin, Integer> changes = new TreeMap<>();
+	private final Map<Coin, Integer> changes;
+
+	public Change() {
+		changes = new TreeMap<>();
+	}
 
 	public Change(Map<Coin, Integer> changes) {
-		Change.changes = changes;
+		this.changes = changes;
 	}
 
 	public Map<Coin, Integer> getChanges() {
 		return changes;
 	}
 
-	public static Change generateChanges(Money money) {
+	public void generateChanges(Money money) {
 		initChanges();
 		int tmpMoney = 0;
 		while (!money.isSame(tmpMoney)) {
@@ -29,17 +33,16 @@ public class Change {
 			Coin coin = Coin.getCoin(random);
 			changes.put(coin, changes.get(coin) + 1);
 		}
-		return new Change(changes);
 	}
 
 	private static boolean notValidChange(Money money, int tmpMoney, int random) {
 		return random == money.getTotal() || money.isSmaller(tmpMoney + random);
 	}
 
-	private static void initChanges() {
-		changes.put(Coin.COIN_500, 0);
-		changes.put(Coin.COIN_100, 0);
-		changes.put(Coin.COIN_50, 0);
-		changes.put(Coin.COIN_10, 0);
+	private void initChanges() {
+		this.changes.put(Coin.COIN_500, 0);
+		this.changes.put(Coin.COIN_100, 0);
+		this.changes.put(Coin.COIN_50, 0);
+		this.changes.put(Coin.COIN_10, 0);
 	}
 }

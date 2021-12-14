@@ -1,6 +1,7 @@
 package vendingmachine.service;
 
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import vendingmachine.domain.Beverage;
@@ -23,27 +24,28 @@ public class VendingMachine {
 	}
 
 	public Change returnChange() {
-		int money = inputMoney.getTotal();
+		int inputAmount = inputMoney.getTotal();
 		Map<Coin, Integer> changes = change.getChanges();
 		Map<Coin, Integer> calculatedChange = new TreeMap<>();
 		for (Coin coin : changes.keySet()) {
-			money = makeChangeWithMoney(money, changes, calculatedChange, coin);
-			if (money == NONE) {
+			inputAmount = makeChangeWithMoney(inputAmount, changes, calculatedChange, coin);
+			if (inputAmount == NONE) {
 				return new Change(calculatedChange);
 			}
 		}
 		return new Change(calculatedChange);
 	}
 
-	private int makeChangeWithMoney(int money, Map<Coin, Integer> changes, Map<Coin, Integer> calculatedChange,
+	private int makeChangeWithMoney(int inputAmount, Map<Coin, Integer> changes, Map<Coin, Integer> calculatedChange,
 		Coin coin) {
-		int count = money / coin.getAmount();
+		int count = inputAmount / coin.getAmount();
 		if (count > changes.get(coin)) {
 			count = changes.get(coin);
 		}
-		money -= count * coin.getAmount();
+		inputAmount -= count * coin.getAmount();
 		calculatedChange.put(coin, count);
-		return money;
+		changes.put(coin, changes.get(coin) - count);
+		return inputAmount;
 	}
 
 	public Money getMoney() {
