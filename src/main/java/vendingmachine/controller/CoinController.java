@@ -9,6 +9,11 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class CoinController {
+	private static final int ZERO = 0;
+	private static final String ERROR = "[ERROR] ";
+	private static final String ERROR_COIN_MINIMUM_AMOUNT_MISMATCH = ERROR
+		+ "최소 동전의 단위에 맞게 자판기 보유 금액을 입력해야 합니다.";
+
 	private final InputView inputView;
 	private final OutputView outputView;
 	private Coins coins;
@@ -40,6 +45,9 @@ public class CoinController {
 			int amount = coin.getAmount();
 			coinAmount.put(coin, holdingAmount / amount);
 			holdingAmount %= amount;
+		}
+		if (ZERO < holdingAmount) {
+			throw new IllegalArgumentException(ERROR_COIN_MINIMUM_AMOUNT_MISMATCH);
 		}
 		return coinAmount;
 	}
