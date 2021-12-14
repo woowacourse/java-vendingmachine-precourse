@@ -22,15 +22,16 @@ public class Changer {
 			if (isZero(dividedNum)) {
 				continue;
 			}
-			if (isDividedNumMoreThanHavingCoinNum(nowCoinNum, dividedNum)) {
+			if (isNowCoinNumMoreThanDividedNum(nowCoinNum, dividedNum)) {
 				doReturnChanges(nowCoin, dividedNum);
+				continue;
 			}
 			doReturnChanges(nowCoin, nowCoinNum);
 		}
 		return returningChanges;
 	}
 
-	private boolean isDividedNumMoreThanHavingCoinNum(int nowCoinNum, int dividedNum) {
+	private boolean isNowCoinNumMoreThanDividedNum(int nowCoinNum, int dividedNum) {
 		return dividedNum <= nowCoinNum;
 	}
 
