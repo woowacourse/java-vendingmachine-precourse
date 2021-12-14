@@ -117,9 +117,8 @@ public class VendingMachineController {
 		vendingMachineOutputView.printPurchasingInputMessage();
 		String item = Console.readLine();
 		try {
-			queryValidator.checkAllBuyItemErrorExceptions(item, userModel.getRemainingMoney(), itemModel.getNameList(),
+			queryValidator.checkAllBuyItemErrorExceptions(userModel.getRemainingMoney(),
 					itemModel.getPriceByName(item));
-
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			return;
