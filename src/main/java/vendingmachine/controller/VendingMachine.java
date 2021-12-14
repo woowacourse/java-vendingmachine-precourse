@@ -32,11 +32,17 @@ public class VendingMachine {
     }
 
     private void setProduct() {
-        String productForm = InputView.getProducts();
-        String[] productInformations = productForm.split(";");
-        for (String productInformation : productInformations) {
-            String[] product = productInformation.replaceAll("[\\[\\]]", "").split(",");
-            products.add(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+        try {
+            String productForm = InputView.getProducts();
+            String[] productInformations = productForm.split(";");
+            for (String productInformation : productInformations) {
+                String[] product = productInformation.replaceAll("[\\[\\]]", "").split(",");
+                AmountValidator.checkProductPrice(product[1]);
+                products.add(new Product(product[0], Integer.parseInt(product[1]), Integer.parseInt(product[2])));
+            }
+        } catch (IllegalArgumentException exception) {
+            System.out.println(exception.getMessage());
+            setProduct();
         }
     }
 
