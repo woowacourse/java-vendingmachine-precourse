@@ -38,7 +38,7 @@ public class ItemsTest {
 	@Test
 	public void findItemByName() {
 		Items items = new Items(Collections.singletonList(new Item(Arrays.asList("콜라", "1500", "10"))));
-		assertThatCode(() -> items.findItemByName("콜라", new Money(3000)))
+		assertThatCode(() -> items.findItemByName("콜라", 3000))
 			.doesNotThrowAnyException();
 	}
 
@@ -51,10 +51,9 @@ public class ItemsTest {
 	void findItemByNameException() {
 		Items items = new Items(
 			Arrays.asList(new Item(Arrays.asList("콜라", "1500", "10")), new Item(Arrays.asList("사이다", "1000", "0"))));
-		Money money = new Money(1000);
 		for (String name : new String[] {"콜라", "사이다", "환타"}) {
 			assertThatThrownBy(() -> {
-				items.findItemByName(name, money);
+				items.findItemByName(name, 1000);
 			}).isInstanceOf(IllegalArgumentException.class);
 		}
 	}
