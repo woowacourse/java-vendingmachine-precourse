@@ -46,7 +46,8 @@ public class VendingMachineController {
             buyService.sellProduct(getUserOrder(currentChange));
             currentChange = changeService.getCurrentChange();
         }
-        printFinalChange(changeService.getFinalChange(), changeService.getCurrentChange());
+        printCurrentChange(changeService.getCurrentChange());
+        printFinalChange(changeService.getFinalChange());
     }
 
     private String getUserOrder(int change) {

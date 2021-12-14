@@ -19,8 +19,7 @@ public class OutputViews {
         }
     }
 
-    public static void printFinalChange(Map<Coin, Integer> finalChange, int change) {
-        printCurrentChange(change);
+    public static void printFinalChange(Map<Coin, Integer> finalChange) {
         System.out.println(REMAIN_MONEY);
         for (Coin coin : finalChange.keySet()) {
             System.out.println(coin.getAmount() + WON + COIN_PRINT_SEPORATOR + finalChange.get(coin) + COIN_PRINT_UNIT);
