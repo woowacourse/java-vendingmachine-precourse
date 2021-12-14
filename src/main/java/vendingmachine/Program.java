@@ -6,8 +6,11 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Console;
 
 public class Program {
-	public static final String PRODUCT_ENTRY_DIVIDER = ";";
-	public static final String PRODUCT_ENTRY_ELEMENT_DIVIDER = ",";
+	public static final String PRODUCT_ENTRY_SEPARATOR = ";";
+	public static final String PRODUCT_ENTRY_ELEMENT_SEPARATOR = ",";
+	public static final int INDEX_OF_PRODUCT_NAME = 0;
+	public static final int INDEX_OF_PRODUCT_PRICE = 1;
+	public static final int INDEX_OF_PRODUCT_NUMBER = 2;
 
 	public final CoinPocket coinPocket;
 	public final ProductTable productTable;
@@ -52,14 +55,24 @@ public class Program {
 	}
 
 	private void setProductTable() {
+		List<String> productEntries = getProductEntries();
+		productEntries.forEach(entry -> {
+			String[] elements = entry.substring(1, entry.length() - 1).split(PRODUCT_ENTRY_ELEMENT_SEPARATOR);
+			productTable.push(elements[INDEX_OF_PRODUCT_NAME],
+				new ProductEntry(Integer.parseInt(elements[INDEX_OF_PRODUCT_PRICE]),
+					Integer.parseInt(elements[INDEX_OF_PRODUCT_NUMBER])));
+		});
+	}
+
+	private List<String> getProductEntries() {
 		Guide.ITEM_REQUEST.println();
 		String productEntriesInString = Console.readLine();
-		List<String> productEntries = Arrays.asList(productEntriesInString.split(PRODUCT_ENTRY_DIVIDER));
-		productEntries.forEach(entry -> {
-			String[] elements = entry.substring(1, entry.length() - 1).split(PRODUCT_ENTRY_ELEMENT_DIVIDER);
-			productTable.push(elements[0],
-				new ProductEntry(Integer.parseInt(elements[1]), Integer.parseInt(elements[2])));
-		});
+		ProductEntrySyntacticValidator syntacticValidator = new ProductEntrySyntacticValidator();
+		List<String> productEntries = Arrays.asList(productEntriesInString.split(PRODUCT_ENTRY_SEPARATOR));
+		if (!syntacticValidator.validate(productEntries)) {
+			return getProductEntries();
+		}
+		return productEntries;
 	}
 
 	private void setUserMoney() {
