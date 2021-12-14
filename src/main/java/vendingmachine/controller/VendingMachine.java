@@ -5,7 +5,7 @@ import vendingmachine.domain.product.Product;
 import vendingmachine.domain.coin.CoinGenerator;
 import vendingmachine.domain.product.Products;
 import vendingmachine.domain.user.UserMoney;
-import vendingmachine.domain.vendingMachine.Amount;
+import vendingmachine.domain.vendingMachine.VendingMachineAmount;
 import vendingmachine.validator.AmountValidator;
 import vendingmachine.validator.ProductValidator;
 import vendingmachine.view.InputView;
@@ -21,22 +21,16 @@ import static vendingmachine.constant.SystemMessage.*;
 // 잔돈 반환하기
 
 public class VendingMachine {
-    private Amount amount;
-    private CoinCombination vendingMachinCoinCombination;
-    private CoinCombination changeCoinCombination;
+    private VendingMachineAmount vendingMachineAmount;
 
     private Products products = new Products();
     private UserMoney userMoney;
     public VendingMachine() {
-        vendingMachinCoinCombination = new CoinCombination();
-        changeCoinCombination = new CoinCombination();
     }
 
     public void run() {
         setVendingMachineAmount();
-        setVendingMachinCoinCombination();
-        OutputView.printCoinCount(vendingMachinCoinCombination);
-
+        OutputView.printCoinCount(vendingMachineAmount.getVendingMachineCoinCombination());
         setProduct();
 
         setUserMoney();
@@ -47,17 +41,11 @@ public class VendingMachine {
 
     private void setVendingMachineAmount() {
         try {
-            String vendingmachineAmount = InputView.getVendingMachineAmount();
-            AmountValidator.checkVendingMachineAmount(vendingmachineAmount);
-            amount = new Amount(Integer.parseInt(vendingmachineAmount));
+            vendingMachineAmount = new VendingMachineAmount(InputView.getVendingMachineAmount());
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             setVendingMachineAmount();
         }
-    }
-
-    private void setVendingMachinCoinCombination() {
-        CoinGenerator.calculatePossibleCoinCombination(vendingMachinCoinCombination, amount.getAmount());
     }
 
     private void setProduct() {
@@ -100,8 +88,7 @@ public class VendingMachine {
     private void returnChange() {
         if (isReturnChange()) {
             int totalChange = userMoney.reduceMoney();
-            changeCoinCombination = new CoinCombination();
-            CoinGenerator.calculatePossibleCoinCombination(changeCoinCombination, totalChange);
+            CoinCombination changeCoinCombination = CoinGenerator.calculatePossibleCoinCombination(totalChange);
             changeCoinCombination.print();
         }
     }
