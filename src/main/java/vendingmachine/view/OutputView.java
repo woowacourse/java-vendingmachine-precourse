@@ -29,6 +29,11 @@ public class OutputView {
 		}
 	}
 
+	public static void printCurrentMoneyZero(int currentAmount) {
+		printCurrentMoney(currentAmount);
+		System.out.println(OUTPUT_NO_MONEY);
+	}
+
 	private static void sumCoinType(List<Coin> coinList, int amount) {
 		int count = 0;
 		for (Coin coin : coinList) {

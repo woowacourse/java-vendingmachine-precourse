@@ -10,6 +10,7 @@ public class MessageResource {
 	public static final String OUTPUT_CHANGES = "%d원 - %d개\n";
 	public static final String OUTPUT_VENDINGMACHINE_HAVE_COINS = "\n자판기가 보유한 동전";
 	public static final String OUTPUT_CHANGES_TEXT = "잔돈";
+	public static final String OUTPUT_NO_MONEY = "모든 금액을 소진 하셨습니다.";
 
 	public static final String ERROR_AMOUNT_IS_NOT_NUMERIC = "[ERROR] 금액은 숫자여야 합니다.";
 	public static final String ERROR_AMOUNT_IS_NOT_POSITIVE_INT = "[ERROR] 금액은 0원 보다 커야 합니다.";
