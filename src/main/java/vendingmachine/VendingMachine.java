@@ -11,5 +11,7 @@ public class VendingMachine {
         MachineCoin machineCoin = new MachineCoin();
         machineCoin.CreateRandomCoin(sumCoin);
         computer.PrintMachineCoin(machineCoin);
+        computer.MSGInputProduct();
+        user.InputProduct();
     }
 }
