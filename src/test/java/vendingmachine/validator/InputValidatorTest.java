@@ -19,4 +19,16 @@ class InputValidatorTest {
 			() -> InputValidator.checkInputForm(input)
 		).doesNotThrowAnyException();
 	}
+
+	@ParameterizedTest
+	@DisplayName("세미콜론 존재 여부와 위치에 따라 예외가 발생한다. - 실패")
+	@ValueSource(strings = {"[콜라,1500,20];", "[콜라,1500,20][사이다,1000,10]", "[콜라,1500,20];;[사이다,1000,10]"})
+	void checkInputFormWhenFailure(String input) {
+		//given
+		//when then
+		assertThatThrownBy(
+			() -> InputValidator.checkInputForm(input)
+		).isInstanceOf(IllegalArgumentException.class);
+
+	}
 }
