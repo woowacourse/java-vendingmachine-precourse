@@ -8,6 +8,7 @@ public class ProductConstant {
 	public static int STOCK_INDEX = 2;
 	public static int PRODUCT_ARGUMENT_SIZE = 3;
 
+	public static String INPUT_ERROR_MESSAGE = "[ERROR] 잘못된 입력입니다. 형식: [상품명1,가격1,수량1];[상품명2,가격2,수량2]";
 	public static String NAME_ERROR_MESSAGE = "[ERROR] 상품 이름은 한글 혹은 알파벳으로만 이루어져야 합니다.";
 	public static String PRICE_NON_NUMERIC_ERROR_MESSAGE = "[ERROR] 상품 가격은 숫자여야 합니다.";
 	public static String DIVIDE_TEN_ERROR_MESSAGE = "[ERROR] 상품 가격은 10으로 나누어 떨어져야 합니다.";

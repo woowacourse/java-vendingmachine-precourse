@@ -5,15 +5,10 @@ import vendingmachine.constants.ProductConstant;
 
 public class ProductValidator {
 
-	public void isValidInput(String[] input){
-		if (input.length != ProductConstant.PRODUCT_ARGUMENT_SIZE){
-			throw new IllegalArgumentException("[ERROR] 잘못된 입력입니다. 형식: [상품명1,가격1,수량1];[상품명2,가격2,수량2]");
-		}
-
-
-	}
-
 	public void isValid(String[] product) {
+		if (product.length != ProductConstant.PRODUCT_ARGUMENT_SIZE) {
+			throw new IllegalArgumentException(ProductConstant.INPUT_ERROR_MESSAGE);
+		}
 		isValidName(product[ProductConstant.NAME_INDEX]);
 		isValidPrice(product[ProductConstant.PRICE_INDEX]);
 		isValidStock(product[ProductConstant.STOCK_INDEX]);
