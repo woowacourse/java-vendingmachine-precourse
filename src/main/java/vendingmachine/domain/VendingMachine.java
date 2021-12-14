@@ -74,8 +74,9 @@ public class VendingMachine {
 	}
 
 	public void subtractInputCostAndProductAmount(String productName) {
-		Product rightProduct = products.stream().filter(product -> productName.equals(product.getName())).collect(
-			Collectors.toList()).get(0);
+		Product rightProduct = products.stream()
+			.filter(product -> productName.equals(product.getName()))
+			.collect(Collectors.toList()).get(0);
 
 		subtractInputCost(rightProduct);
 		rightProduct.subtractAmount();
