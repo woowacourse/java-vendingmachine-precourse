@@ -4,11 +4,11 @@ import java.util.Map;
 import java.util.SortedMap;
 
 public class Machine {
-	private final Wallet wallet = new Wallet();
+	private final CoinStorage coinStorage = new CoinStorage();
 	private final ItemStorage itemStorage = new ItemStorage();
 
 	public void addCoins(SortedMap<Coin, Integer> coins) {
-		wallet.addCoins(coins);
+		coinStorage.addCoins(coins);
 	}
 
 	public void addItems(Map<String, Item> items) {
@@ -16,21 +16,21 @@ public class Machine {
 	}
 
 	public SortedMap<Coin, Integer> getCoins() {
-		return wallet.getCoins();
+		return coinStorage.getCoins();
 	}
 
 	public void addInputCoinAmount(final int amount) {
-		wallet.addInputCoinAmount(amount);
+		coinStorage.addInputCoinAmount(amount);
 	}
 
 	public int getInputCoinAmount() {
-		return wallet.getInputCoinAmount();
+		return coinStorage.getInputCoinAmount();
 	}
 
 	public void purchase(String itemName) throws IllegalArgumentException {
 		Item item = itemStorage.get(itemName);
 		validatePurchase(item);
-		wallet.decreaseInputCoinAmount(item.getPrice());
+		coinStorage.decreaseInputCoinAmount(item.getPrice());
 	}
 
 	private void validatePurchase(Item item) {
@@ -46,8 +46,8 @@ public class Machine {
 	}
 
 	public SortedMap<Coin, Integer> returnCoins() {
-		SortedMap<Coin, Integer> returnCoins = wallet.returnCoins();
-		wallet.decreaseInputCoinAmount(wallet.getToTalAmount(returnCoins));
+		SortedMap<Coin, Integer> returnCoins = coinStorage.returnCoins();
+		coinStorage.decreaseInputCoinAmount(coinStorage.getToTalAmount(returnCoins));
 		return returnCoins;
 	}
 }

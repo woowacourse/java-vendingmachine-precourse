@@ -5,7 +5,7 @@ import java.util.TreeMap;
 
 import vendingmachine.util.supporter.MapSupporter;
 
-public class Wallet {
+public class CoinStorage {
 	private final SortedMap<Coin, Integer> coins = new TreeMap<>((c1, c2) -> c2.getAmount() - c1.getAmount());
 	private int inputCoinAmount;
 
