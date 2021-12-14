@@ -1,10 +1,13 @@
 package vendingmachine.domain.machine.coin.storage;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import vendingmachine.domain.machine.coin.Coin;
 import vendingmachine.domain.user.User;
+import vendingmachine.utils.CoinCountFormatter;
 
 public class CoinStorageImpl implements CoinStorage {
 
@@ -58,5 +61,33 @@ public class CoinStorageImpl implements CoinStorage {
 		int count = coinCounts.get(coin);
 		coinCounts.put(coin, count - 1);
 	}
+
+	@Override
+	public List<String> getAllCoinsAsString() {
+		List<String> results = new ArrayList<>();
+		for (Map.Entry<Coin, Integer> entry : coinCounts.entrySet()) {
+			Coin coin = entry.getKey();
+			Integer count = entry.getValue();
+			results.add(CoinCountFormatter.of(coin, count));
+		}
+		return results;
+	}
+
+	@Override
+	public List<String> getExistedCoinsAsString() {
+		List<String> results = new ArrayList<>();
+		for (Map.Entry<Coin, Integer> entry : coinCounts.entrySet()) {
+			Coin coin = entry.getKey();
+			if (isCoinNoMore(coin)) {
+				continue;
+			}
+			Integer count = entry.getValue();
+			results.add(CoinCountFormatter.of(coin, count));
+		}
+		return results;
+	}
+
+
+
 
 }

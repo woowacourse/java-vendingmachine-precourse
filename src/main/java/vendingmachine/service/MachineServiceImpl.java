@@ -38,4 +38,9 @@ public class MachineServiceImpl implements MachineService {
 		user.refund();
 	}
 
+	@Override
+	public List<String> getCoinsOfMachine() {
+		return machine.getCoinsByString();
+	}
+
 }

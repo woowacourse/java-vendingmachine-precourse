@@ -4,6 +4,8 @@ public interface MachineController {
 
 	void fillWithCoins();
 
+	void showCoinsOfMachine();
+
 	void registerProducts();
 
 	void depositMoney();

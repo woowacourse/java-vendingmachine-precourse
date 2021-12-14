@@ -14,4 +14,6 @@ public interface MachineService {
 
 	void refundChanges();
 
+	List<String> getCoinsOfMachine();
+
 }

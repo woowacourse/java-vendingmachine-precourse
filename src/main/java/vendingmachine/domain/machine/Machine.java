@@ -1,5 +1,7 @@
 package vendingmachine.domain.machine;
 
+import java.util.List;
+
 import vendingmachine.domain.machine.coin.Coin;
 import vendingmachine.domain.machine.coin.storage.CoinStorage;
 import vendingmachine.domain.machine.coin.storage.CoinStorageImpl;
@@ -29,6 +31,10 @@ public class Machine {
 
 	public void refund(User user) {
 		coinStorage.refund(user);
+	}
+
+	public List<String> getCoinsByString() {
+		return coinStorage.getAllCoinsAsString();
 	}
 
 }
