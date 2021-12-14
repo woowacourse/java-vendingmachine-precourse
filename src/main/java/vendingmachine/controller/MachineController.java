@@ -1,7 +1,5 @@
 package vendingmachine.controller;
 
-import static vendingmachine.Constant.*;
-
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +9,6 @@ import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.OutputView;
 
 public class MachineController {
-
 	VendingMachine vendingMachine;
 
 	public void work() {
@@ -35,5 +32,4 @@ public class MachineController {
 		}
 		OutputView.printInputMoney(vendingMachine.inputMoney);
 	}
-
 }
