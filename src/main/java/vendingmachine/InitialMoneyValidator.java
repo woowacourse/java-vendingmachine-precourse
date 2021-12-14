@@ -1,18 +1,15 @@
 package vendingmachine;
 
-public class InitialMoneyValidator extends Validator {
-	private final String initialMoney;
+public class InitialMoneyValidator {
+	public InitialMoneyValidator() {
 
-	public InitialMoneyValidator(String initialMoney) {
-		this.initialMoney = initialMoney;
 	}
 
-	@Override
-	public boolean validate() {
+	public boolean validate(String initialMoney) {
 		try {
-			isNumber(this.initialMoney);
-			int initialMoneyInNumber = Integer.parseInt(this.initialMoney);
-			isEqualOrGreaterThenTen(initialMoneyInNumber);
+			isNumber(initialMoney);
+			int initialMoneyInNumber = Integer.parseInt(initialMoney);
+			isEqualOrGreaterThanTen(initialMoneyInNumber);
 			isMultipleOfTen(initialMoneyInNumber);
 		} catch (IllegalArgumentException exception) {
 			System.out.println(exception.getMessage());
@@ -35,7 +32,7 @@ public class InitialMoneyValidator extends Validator {
 		}
 	}
 
-	private void isEqualOrGreaterThenTen(int money) throws IllegalArgumentException {
+	private void isEqualOrGreaterThanTen(int money) throws IllegalArgumentException {
 		if (money < 10) {
 			throw new IllegalArgumentException(Error.NOT_EQUAL_OR_GREATER_THAN_TEN_INITIAL_MONEY.getMessage());
 		}
