@@ -9,12 +9,16 @@ import java.util.HashMap;
 import vendingmachine.constant.VendingMachineStatus;
 import vendingmachine.controller.CoinGeneratorInterface;
 import vendingmachine.controller.GoodsStackerInterface;
+import vendingmachine.controller.LeftChangeCalculatorInterface;
 import vendingmachine.controller.classes.CoinGenerator;
 import vendingmachine.controller.classes.GoodsStacker;
+import vendingmachine.controller.classes.LeftChangeCalculator;
 import vendingmachine.exception.GoodsCountInvalidException;
 import vendingmachine.exception.GoodsPriceInvalidException;
 import vendingmachine.exception.InvalidUserInputException;
 import vendingmachine.exception.NegativeUserInputException;
+import vendingmachine.exception.NotEnoughMoneyException;
+import vendingmachine.exception.NotExistGoodsNameException;
 import vendingmachine.exception.UserGoodsInvalidFormatException;
 import vendingmachine.view.VendingMachine;
 
@@ -24,6 +28,7 @@ public class VendingMachineUI implements VendingMachine {
 	private int moneyInVendingMachine = 0;
 	private PrintHandler printHandler = new PrintHandler();
 	private GoodsStackerInterface goodsStackerInterface = new GoodsStacker();
+	private LeftChangeCalculatorInterface leftChangeCalculatorInterface = new LeftChangeCalculator();
 
 	@Override
 	public void start() {
@@ -61,8 +66,20 @@ public class VendingMachineUI implements VendingMachine {
 				System.out.println(PROMPT_USER_INPUT_GOODS);
 				String userInputGoods = readLine();
 				vendingMachineStatus = VendingMachineStatus.SHOW_USER_LEFT_MONEY;
-				if (!goodsStackerInterface.buyGoods(userInputGoods)) {
-					vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+				try {
+					if (!goodsStackerInterface.isEnoughMoney(userInputGoods)) {
+						throw new NotEnoughMoneyException();
+					}
+					if (!goodsStackerInterface.haveName(userInputGoods)) {
+						throw new NotExistGoodsNameException();
+					}
+				} catch (IllegalArgumentException exception) {
+					vendingMachineStatus = VendingMachineStatus.INPUT_USER_GOODS;
+				}
+				if (goodsStackerInterface.isEnoughMoney(userInputGoods)) {
+					if (!goodsStackerInterface.buyGoods(userInputGoods)) {
+						vendingMachineStatus = VendingMachineStatus.SHOW_LEFT_COIN;
+					}
 				}
 			}
 			if (vendingMachineStatus == VendingMachineStatus.SHOW_LEFT_COIN) {
@@ -143,8 +160,7 @@ public class VendingMachineUI implements VendingMachine {
 		CoinGeneratorInterface coinGeneratorInterface = new CoinGenerator();
 		HashMap<Integer, Integer>tmpCoinMap = coinGeneratorInterface.getRandomCoins(moneyInVendingMachine);
 		printHandler.printCoinStatus(tmpCoinMap);
-
-
+		goodsStackerInterface.setCoinMap(tmpCoinMap);
 		vendingMachineStatus = VendingMachineStatus.INPUT_GOODS_AND_PRICES_IN_VENDING_MACHINE;
 	}
 

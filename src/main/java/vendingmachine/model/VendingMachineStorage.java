@@ -1,10 +1,12 @@
 package vendingmachine.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class VendingMachineStorage {
 	private List<Goods> goodsList = new ArrayList<>();
+	private HashMap<Integer, Integer> coinMap;
 	private int userInputMoney = 0;
 	private int minAmount = 987654321;
 
@@ -35,5 +37,18 @@ public class VendingMachineStorage {
 
 	public int getMinAmount() {
 		return minAmount;
+	}
+
+	public void setCoinMap(HashMap<Integer, Integer> coinMap) {
+		this.coinMap = coinMap;
+	}
+
+	public boolean haveName(String userInputGoods) {
+		for (Goods goods: goodsList) {
+			if(goods.getName().equals(userInputGoods)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -1,5 +1,8 @@
 package vendingmachine.controller.classes;
 
-public class LeftChangeCalculator {
+import vendingmachine.controller.LeftChangeCalculatorInterface;
+
+public class LeftChangeCalculator implements LeftChangeCalculatorInterface {
+
 
 }

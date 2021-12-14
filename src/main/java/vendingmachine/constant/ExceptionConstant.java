@@ -6,4 +6,6 @@ public final class ExceptionConstant {
 	public final static String USER_GOODS_INVALID_FORMAT_EXCEPTION_MESSAGE = "[ERROR] 상품과 가격은 []로 둘러쌓여 있어야 합니다.";
 	public final static String GOODS_PRICE_INVALID_EXCEPTION_MESSAGE = "[ERROR] 상품의 금액은 숫자여야 합니다.";
 	public final static String GOODS_COUNT_INVALID_EXCEPTION_MESSAGE = "[ERROR] 상품의 수량은 숫자여야 합니다.";
+	public final static String NOT_EXIST_GOODS_NAME_EXCEPTION_MESSAGE = "[ERROR] 상품의 이름이 존재하지 않습니다.";
+	public final static String NOT_ENOUGH_MONEY_EXCEPTION_MESSAGE = "[ERROR] 해당하는 상품의 가격이 남은 투입금액보다 비싸므로 구입할 수 없습니다.";
 }

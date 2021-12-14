@@ -3,6 +3,7 @@ package vendingmachine.controller.classes;
 import static vendingmachine.constant.PromptConstant.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import vendingmachine.controller.GoodsStackerInterface;
@@ -83,6 +84,26 @@ public class GoodsStacker implements GoodsStackerInterface {
 	@Override
 	public boolean isEnoughMoney() {
 		return vendingMachineStorage.getMinAmount() <= this.vendingMachineStorage.getUserInputMoney();
+	}
+
+	@Override
+	public boolean isEnoughMoney(String userInputGoods) {
+		for (Goods goods : goodsList) {
+			if (goods.getName().equals(userInputGoods)) {
+				return goods.getPrice() <= vendingMachineStorage.getUserInputMoney();
+			}
+		}
+		return true;
+	}
+
+	@Override
+	public void setCoinMap(HashMap<Integer, Integer> coinMap) {
+		vendingMachineStorage.setCoinMap(coinMap);
+	}
+
+	@Override
+	public boolean haveName(String userInputGoods) {
+		return vendingMachineStorage.haveName(userInputGoods);
 	}
 
 	private boolean isValidInputFormat(String[] goodsAndPriceStringList) {
