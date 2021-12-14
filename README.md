@@ -141,6 +141,7 @@
     * service
         * VendingMachineService.java
     * utils
+      * ChangeUtil.java
       * CoinUtil.java
     * validation
         * enumclass
