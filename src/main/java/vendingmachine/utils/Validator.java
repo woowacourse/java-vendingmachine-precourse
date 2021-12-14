@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import javax.crypto.MacSpi;
-
 import vendingmachine.models.Item;
 
 public class Validator {
@@ -13,6 +11,8 @@ public class Validator {
 	private static final String NAME_PATTERN = "^[0-9|a-z|A-Z|ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$";
 	private static final int ELEMENT_SIZE = 3;
 	private static final int MIN_MONEY_VALUE = 10;
+	private static final int MIN_ITEM_PRICE_THRESHOLD = 100;
+	private static final int POSITIVE_THRESHOLD = 1;
 
 	private static void validateEmptyStr(String input) throws IllegalArgumentException {
 		if (input.isEmpty()) {
@@ -22,7 +22,7 @@ public class Validator {
 	}
 
 	private static void validatePositive(String input) throws IllegalArgumentException {
-		if (Integer.valueOf(input) <= 0) {
+		if (Integer.valueOf(input) < POSITIVE_THRESHOLD) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_POSITIVE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
@@ -39,6 +39,13 @@ public class Validator {
 		if (!input.matches(NAME_PATTERN)) {
 			throw new IllegalArgumentException(
 				Messages.ERROR_NOT_VALID_NAME.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
+		}
+	}
+
+	private static void validateMinimumPrice(String input) throws IllegalArgumentException {
+		if (Integer.valueOf(input) < MIN_ITEM_PRICE_THRESHOLD) {
+			throw new IllegalArgumentException(
+				Messages.ERROR_NOT_OVER_MINIMUM_PRICE.getValue() + Messages.COMMON_LINE_BREAK_MSG.getValue());
 		}
 	}
 
@@ -136,6 +143,7 @@ public class Validator {
 			validateNameInput(eachParsedItem[Indexes.NAME_INDEX.getValue()]);
 			validateDuplicateName(nameSet, eachParsedItem[Indexes.NAME_INDEX.getValue()]);
 			validatePriceInput(eachParsedItem[Indexes.PRICE_INDEX.getValue()]);
+			validateMinimumPrice(eachParsedItem[Indexes.PRICE_INDEX.getValue()]);
 			validateAmountInput(eachParsedItem[Indexes.AMOUNT_INDEX.getValue()]);
 		}
 	}

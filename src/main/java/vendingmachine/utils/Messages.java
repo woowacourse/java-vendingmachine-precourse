@@ -13,6 +13,7 @@ public enum Messages {
 	ERROR_NOT_ENOUGH_MONEY_MESSAGE("[ERROR] 금액이 부족합니다."),
 	ERROR_SOLD_OUT_MESSAGE("[ERROR] 해당 상품은 품절입니다."),
 	ERROR_NOT_DIVIDABLE_MESSAGE("[ERROR] 금액의 최소 단위는 10원 입니다."),
+	ERROR_NOT_OVER_MINIMUM_PRICE("[ERROR] 상품 금액은 100원 이상이어야 합니다."),
 	COMMON_LINE_BREAK_MSG("\n"),
 	OUTPUT_VIEW_NOTICE_COIN_INPUT_MSG("자판기가 보유하고 있는 금액을 입력해 주세요."),
 	OUTPUT_VIEW_NOTICE_ITEM_INPUT_MSG("상품명과 가격, 수량을 입력해 주세요."),
