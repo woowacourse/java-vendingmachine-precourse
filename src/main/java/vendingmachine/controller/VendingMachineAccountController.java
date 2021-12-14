@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.repository.VendingMachineAccount;
 import vendingmachine.service.VendingMachineAccountService;
+import vendingmachine.view.CoinView;
 import vendingmachine.view.VendingMachineAccountView;
 
 public class VendingMachineAccountController {
@@ -23,6 +24,6 @@ public class VendingMachineAccountController {
 
 	public static void printCoinCount() {
 		VendingMachineAccountView.printVendingMachineCoin();
-		VendingMachineAccountView.printCoinMap(VendingMachineAccount.getAllCoinCount());
+		CoinView.printCoinMap(VendingMachineAccount.getAllCoinCount());
 	}
 }

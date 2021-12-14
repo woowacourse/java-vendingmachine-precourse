@@ -25,7 +25,6 @@ public enum Coin {
 		return COIN_10;
 	}
 
-	// 추가 기능 구현
 	public int getAmount() {
 		return this.amount;
 	}
