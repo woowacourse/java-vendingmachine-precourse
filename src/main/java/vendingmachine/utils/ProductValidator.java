@@ -58,7 +58,8 @@ public class ProductValidator {
         }
         int price = StringUtil.parseStringToInt(priceInput);
         if (price < PRODUCT_PRICE_MIN_VALUE) {
-            throw new IllegalArgumentException("상품의 가격이 100원 미만인 값이 있습니다.");
+
+            throw new IllegalArgumentException(PRODUCT_PRICE_LACK_ERROR_MESSAGE);
         }
         return new Price(price);
     }

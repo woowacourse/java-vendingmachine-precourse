@@ -17,5 +17,6 @@ public abstract class ErrorMessage {
     public static String NAME_EMPTY_ERROR_MESSAGE = "이름이 제대로 입력되지 않은 상품이 있습니다.";
     public static String NOT_NUMBER_ERROR_MESSAGE = "숫자를 입력해주세요.";
     public static String LOGIC_ERROR_MESSAGE = "로직 오류";
+    public static String PRODUCT_PRICE_LACK_ERROR_MESSAGE = "상품의 가격이 100원 미만인 값이 있습니다.";
 
 }
