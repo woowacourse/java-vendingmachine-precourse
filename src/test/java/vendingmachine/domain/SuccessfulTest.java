@@ -26,6 +26,14 @@ public class SuccessfulTest extends BasicTest {
 
 		successfulTestData.add(new SuccessfulTest(input, output, coin, coins));
 
+		String[] input2 = {"450", "[콜라,1500,20];[사이다,1000,10]", "0"};
+		String[] output2 = {"자판기가 보유한 동전", "500원 - 0개", "100원 - 4개", "50원 - 1개", "10원 - 0개",
+			"투입 금액: 0원"};
+		Integer coin2 = 100;
+		Integer[] coins2 = {100, 100, 100, 50};
+
+		successfulTestData.add(new SuccessfulTest(input2, output2, coin2, coins2));
+
 		return successfulTestData;
 	}
 }
