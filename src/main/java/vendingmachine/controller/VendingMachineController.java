@@ -45,18 +45,18 @@ public class VendingMachineController {
 		do {
 			vendingMachineOutputView.printAmountInputMessage();
 			amount = Console.readLine();
-		} while (!canUseInputAsInitialAmount(amount));
+		} while (canNotUseInputAsInitialAmount(amount));
 		return amount;
 	}
 
-	public boolean canUseInputAsInitialAmount(String initialAmount) {
+	private boolean canNotUseInputAsInitialAmount(String initialAmount) {
 		try {
 			inputValidator.checkAllInitialAmountInputExceptions(initialAmount);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private void showCoinsVendingMachineHave() {
@@ -69,18 +69,18 @@ public class VendingMachineController {
 		do {
 			vendingMachineOutputView.printInitialItemsInputMessage();
 			items = Console.readLine();
-		} while (!canUseInputAsItems(items));
+		} while (canNotUseInputAsItems(items));
 		return items;
 	}
 
-	public boolean canUseInputAsItems(String items) {
+	private boolean canNotUseInputAsItems(String items) {
 		try {
 			inputValidator.checkAllInitialItemsInputExceptions(items);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private String getInputAmount() {
@@ -88,18 +88,18 @@ public class VendingMachineController {
 		do {
 			vendingMachineOutputView.printUserInputAmountInputMessage();
 			inputAmount = Console.readLine();
-		} while (!canUseInputAsAmount(inputAmount));
+		} while (canNotUseInputAsAmount(inputAmount));
 		return inputAmount;
 	}
 
-	private boolean canUseInputAsAmount(String inputAmount) {
+	private boolean canNotUseInputAsAmount(String inputAmount) {
 		try {
 			inputValidator.checkAllInputAmountInputExceptions(inputAmount);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return false;
+			return true;
 		}
-		return true;
+		return false;
 	}
 
 	private void buyItems() {
@@ -116,15 +116,21 @@ public class VendingMachineController {
 		vendingMachineOutputView.printRemainingAmount(userModel.getRemainingMoney());
 		vendingMachineOutputView.printPurchasingInputMessage();
 		String item = Console.readLine();
+		if (canNotBuyItemByItemName(item))
+			return;
+		itemModel.sellItem(item);
+		userModel.reduceMoney(itemModel.getPriceByName(item));
+	}
+
+	private boolean canNotBuyItemByItemName(String item) {
 		try {
 			queryValidator.checkAllBuyItemErrorExceptions(userModel.getRemainingMoney(),
 					itemModel.getPriceByName(item));
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-			return;
+			return false;
 		}
-		itemModel.sellItem(item);
-		userModel.reduceMoney(itemModel.getPriceByName(item));
+		return true;
 	}
 
 	private void giveChange() {
