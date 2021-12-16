@@ -1,4 +1,8 @@
-package vendingmachine;
+package vendingmachine.domain;
+
+import vendingmachine.validator.Validator;
+import vendingmachine.view.LoopInput;
+import vendingmachine.view.OutputMessage;
 
 public class Customer extends LoopInput {
     private static final String INPUT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";

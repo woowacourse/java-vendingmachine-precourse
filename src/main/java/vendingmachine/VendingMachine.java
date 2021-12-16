@@ -1,5 +1,13 @@
 package vendingmachine;
 
+import vendingmachine.domain.Change;
+import vendingmachine.domain.Customer;
+import vendingmachine.domain.Product;
+import vendingmachine.domain.ProductList;
+import vendingmachine.validator.Validator;
+import vendingmachine.view.LoopInput;
+import vendingmachine.view.OutputMessage;
+
 public class VendingMachine extends LoopInput {
     private static final String BUY_PRODUCT_MESSAGE = "구매할 상품명을 입력해 주세요.";
     private static final Change change = new Change();

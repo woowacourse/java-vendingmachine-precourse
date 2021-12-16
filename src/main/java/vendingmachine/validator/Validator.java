@@ -1,4 +1,7 @@
-package vendingmachine;
+package vendingmachine.validator;
+
+import vendingmachine.domain.ProductList;
+import vendingmachine.domain.Product;
 
 import java.util.HashMap;
 

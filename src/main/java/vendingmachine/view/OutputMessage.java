@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.view;
+
+import vendingmachine.domain.Coin;
 
 import java.util.HashMap;
 

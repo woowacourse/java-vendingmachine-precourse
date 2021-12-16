@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.view;
 
 public class InputMessage {
 
