@@ -33,4 +33,8 @@ public class Product {
     public String getName() {
         return this.name;
     }
+    // After Test
+    public String toString(){
+        return name+" : "+price+"원, "+amount+"개";
+    }
 }
