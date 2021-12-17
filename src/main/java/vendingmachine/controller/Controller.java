@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.ProductDivider;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Customer;
@@ -9,6 +8,8 @@ import vendingmachine.domain.ProductList;
 import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
+
+import camp.nextstep.edu.missionutils.Console;
 
 public class Controller {
     private static final InputValidator inputValidator = new InputValidator();
