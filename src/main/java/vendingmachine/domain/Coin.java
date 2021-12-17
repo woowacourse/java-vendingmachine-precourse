@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import vendingmachine.view.OutputMessage;
-
 import java.util.ArrayList;
 import java.util.List;
 

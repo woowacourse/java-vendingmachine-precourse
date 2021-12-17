@@ -8,6 +8,7 @@ import java.util.HashMap;
 
 public class OutputView {
     private static final String NEW_LINE = "\n";
+    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String CHANGE_IN_VENDING_MACHINE_MESSAGE = "자판기가 보유한 동전";
     private static final String PRINT_MONEY_PREFIX = "투입 금액: ";
     private static final String PRINT_MONEY_SUFFIX = "원";
@@ -38,7 +39,6 @@ public class OutputView {
     }
 
     public void printError(String error) {
-        System.out.println(error + NEW_LINE);
+        System.out.println(ERROR_PREFIX + error + NEW_LINE);
     }
-
 }

@@ -15,10 +15,6 @@ public class ProductList {
         productList.clear();
     }
 
-    public HashMap<String, Product> getProductList() {
-        return productList;
-    }
-
     public Product getProductByName(String name) {
         return productList.get(name);
     }

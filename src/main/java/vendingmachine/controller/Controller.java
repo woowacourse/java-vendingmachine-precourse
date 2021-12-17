@@ -29,7 +29,6 @@ public class Controller {
         returnChange();
     }
 
-    // 1. 보유 잔돈  입력
     public void inputChange() {
         try {
             inputView.printInputChange();
@@ -44,7 +43,6 @@ public class Controller {
         }
     }
 
-    // 2. 보유 상품 입력
     public void inputProducts() {
         try {
             inputView.printInputProducts();
@@ -57,7 +55,6 @@ public class Controller {
         }
     }
 
-    // 3. 투입 금액  입력
     public void inputMoney() {
         try {
             inputView.printInputMoney();
@@ -72,7 +69,6 @@ public class Controller {
         }
     }
 
-    // 4. 상품 구매
     public void buyProduct() {
         try {
             inputView.printInputBuyProduct();
@@ -87,7 +83,6 @@ public class Controller {
         }
     }
 
-    // 5. 잔돈 반환
     public void returnChange() {
         change.returnChange(customer);
         outputView.printChange(customer);
