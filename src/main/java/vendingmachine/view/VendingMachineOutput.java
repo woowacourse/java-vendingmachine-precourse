@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import vendingmachine.domain.Coin;
+import vendingmachine.domain.CoinMap;
 import vendingmachine.utils.CommonConstant;
 
 import java.util.Map;
@@ -10,7 +11,7 @@ public class VendingMachineOutput {
     private static final String INPUT_MONEY_INSTRUCTION = "투입 금액: ";
     private static final String CHANGES_INSTRUCTION = "잔돈";
 
-    public static void printCoinsVendingMachineHas(Map<Coin, Integer> coinMap) {
+    public static void printCoinsVendingMachineHas(CoinMap coinMap) {
         System.out.println(COINS_INSTRUCTION);
         System.out.println(coinMap);
     }

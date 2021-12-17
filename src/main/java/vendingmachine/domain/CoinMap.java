@@ -42,10 +42,6 @@ public class CoinMap {
         return quotient;
     }
 
-    public void printCoins() {
-        VendingMachineOutput.printCoinsVendingMachineHas(coinMap);
-    }
-
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

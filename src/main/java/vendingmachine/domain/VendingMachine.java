@@ -98,7 +98,7 @@ public class VendingMachine {
     }
 
     public void printCoins() {
-        coinMap.printCoins();
+        VendingMachineOutput.printCoinsVendingMachineHas(coinMap);
     }
 
     public void printRestMoney() {
