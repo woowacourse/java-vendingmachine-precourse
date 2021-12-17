@@ -7,11 +7,7 @@ import vendingmachine.view.LoopInput;
 import java.util.HashMap;
 
 public class ProductList extends LoopInput {
-    private static final String INSERT_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
-    private static final HashMap<String, Product> productMap = new HashMap<>();
     private static final HashMap<String, Product> productList = new HashMap<>();
-    private static final Validator validator = new Validator();
-    private static int minimumPrice = Integer.MAX_VALUE;
 
     // After
     public void addProductList(String productName, Product product) {
@@ -22,6 +18,12 @@ public class ProductList extends LoopInput {
     public HashMap<String, Product> getProductList() {
         return productList;
     }
+
+    /******************************************************************/
+    private static final String INSERT_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
+    private static final HashMap<String, Product> productMap = new HashMap<>();
+    private static final Validator validator = new Validator();
+    private static int minimumPrice = Integer.MAX_VALUE;
 
     public void inputMethod() {
         this.inputProductList();

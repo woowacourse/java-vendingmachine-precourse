@@ -1,10 +1,8 @@
 package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Change;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductList;
-import vendingmachine.view.ChangeOutputView;
 import vendingmachine.view.ProductInputView;
 import vendingmachine.view.ProductOutputView;
 

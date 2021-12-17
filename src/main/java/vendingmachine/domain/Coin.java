@@ -11,15 +11,17 @@ public enum Coin {
     COIN_50(50),
     COIN_10(10);
 
-    private static final String COIN_NAME_PREFIX = "COIN_";
-    private static final OutputMessage outputMessage = new OutputMessage();
     private final int amount;
 
     Coin(final int amount) {
         this.amount = amount;
     }
 
-    public static List<Integer> createCoinAmountList() {
+    public int getAmount() {
+        return this.amount;
+    }
+
+    public static List<Integer> getCoinAmountList() {
         List<Integer> list = new ArrayList<>();
         for (Coin coin : Coin.values()) {
             list.add(coin.amount);
@@ -27,8 +29,24 @@ public enum Coin {
         return list;
     }
 
-    public int getAmount() {
-        return this.amount;
+
+
+
+
+
+
+
+
+    /**********************************************************************/
+    private static final String COIN_NAME_PREFIX = "COIN_";
+    private static final OutputMessage outputMessage = new OutputMessage();
+
+    public static List<Integer> createCoinAmountList() {
+        List<Integer> list = new ArrayList<>();
+        for (Coin coin : Coin.values()) {
+            list.add(coin.amount);
+        }
+        return list;
     }
 
     public int calcChangePrice(int stock) {
