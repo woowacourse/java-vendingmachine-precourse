@@ -27,6 +27,7 @@ public class VendingMachine {
 			.filter(saleItem -> saleItem.getName().equals(item.getName()))
 			.findAny();
 		if (isInItem.isPresent()) {
+			salesItems.clear();
 			throw new IllegalArgumentException(DUPLICATED_ITEM_MESSAGE);
 		}
 	}
@@ -37,6 +38,9 @@ public class VendingMachine {
 			.filter(Item::isNotSoldOut)
 			.findAny()
 			.orElseThrow(() -> new IllegalArgumentException(NO_ITEMS_MESSAGE));
+		if (money < itemPicked.getPrice()) {
+			return money;
+		}
 		coinStorage.getChangeCoins(money - itemPicked.getPrice());
 		itemPicked.sell();
 		return money - itemPicked.getPrice();

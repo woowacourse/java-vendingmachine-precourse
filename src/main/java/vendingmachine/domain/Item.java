@@ -34,5 +34,4 @@ public class Item {
 	public boolean isNotSoldOut() {
 		return stocks != 0;
 	}
-
 }

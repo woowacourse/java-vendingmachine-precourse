@@ -7,6 +7,7 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
 
 	private VendingMachine vendingMachine;
+	private int money;
 
 	public VendingMachineController() {
 		callNewVendingMachineWithException();
@@ -15,8 +16,8 @@ public class VendingMachineController {
 	private void callNewVendingMachineWithException() {
 		try {
 			callNewVendingMachine();
-		} catch (Exception e) {
-			logError(e);
+		} catch (Exception error) {
+			logError(error);
 			callNewVendingMachineWithException();
 		}
 	}
@@ -30,8 +31,8 @@ public class VendingMachineController {
 	public void addItemsWithException() {
 		try {
 			addItems();
-		} catch (Exception e) {
-			logError(e);
+		} catch (Exception error) {
+			logError(error);
 			addItemsWithException();
 		}
 	}
@@ -42,27 +43,22 @@ public class VendingMachineController {
 		OutputView.breakLine();
 	}
 
-	public void buyItemsWithException() {
+	public void putMoney() {
 		OutputView.enterInputMoney();
-		int money = InputView.readPositiveInt();
+		money = InputView.readPositiveInt();
+	}
+
+	public void buyItemsWithException() {
 		try {
-			buyItems(money);
-		} catch (Exception e) {
-			logError(e);
-			checkSoldOutAndBuyItemsWithException();
+			buyItems();
+		} catch (Exception error) {
+			logError(error);
+			buyItemsWithException();
 		}
 	}
 
-	private void checkSoldOutAndBuyItemsWithException() {
-		if (!vendingMachine.isAnySalesItem()) {
-			OutputView.soldOutEveryItems();
-			return;
-		}
-		buyItemsWithException();
-	}
-
-	private void buyItems(int money) {
-		while (checkCanBuyProduct(money)) {
+	private void buyItems() {
+		while (canBuyItem()) {
 			OutputView.showRemainingMoney(money);
 			OutputView.enterWantProduct();
 			String product = InputView.readLineString();
@@ -71,12 +67,20 @@ public class VendingMachineController {
 		}
 	}
 
-	public void showVendingMachineCoins() {
-		OutputView.showCoinStorageState(vendingMachine.getCoinStorageBox());
+	private boolean canBuyItem() {
+		return isEnoughMoney() && isAnySalesItem();
 	}
 
-	private boolean checkCanBuyProduct(int money) {
+	private boolean isEnoughMoney() {
 		return money >= vendingMachine.getNeedMinimumMoney();
+	}
+
+	private boolean isAnySalesItem() {
+		return vendingMachine.isAnySalesItem();
+	}
+
+	public void showVendingMachineCoins() {
+		OutputView.showCoinStorageState(vendingMachine.getCoinStorageBox());
 	}
 
 	private void logError(Exception error) {
