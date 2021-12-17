@@ -5,7 +5,7 @@ import vendingmachine.domain.Product;
 
 import java.util.HashMap;
 
-public class Validator {
+public class ValidatorOld {
     private static final String ERROR_NOT_ALLOW_UNITS = "1원 단위는 허용되지 않습니다.";
     private static final String ERROR_NOT_STOCK_FOR_SALE = "상품의 재고가 없습니다.";
     private static final String ERROR_GREATER_THAN_ZERO = "0 이하의 숫자를 입력할 수 없습니다.";

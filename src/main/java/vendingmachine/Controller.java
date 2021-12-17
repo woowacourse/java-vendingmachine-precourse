@@ -5,10 +5,12 @@ import vendingmachine.domain.Change;
 import vendingmachine.domain.Customer;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.ProductList;
+import vendingmachine.validator.InputValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class Controller {
+    private static final InputValidator inputValidator = new InputValidator();
     private static final InputView inputView = new InputView();
     private static final OutputView outputView = new OutputView();
     private Change change;
@@ -28,11 +30,17 @@ public class Controller {
 
     // 1. 보유 잔돈  입력
     public void inputChange() {
-        inputView.printInputChange();
-        String inputChange = Console.readLine();
-        int intChange = Integer.parseInt(inputChange);
-        change = new Change(intChange);
-        outputView.printCoinList(change);
+        try{
+            inputView.printInputChange();
+            String inputChange = Console.readLine();
+            int intChange = inputValidator.validateOnlyInteger(inputChange);
+            inputValidator.isMultipleOfTen(intChange);
+            change = new Change(intChange);
+            outputView.printCoinList(change);
+        }catch (IllegalArgumentException exception){
+            outputView.printError(exception.getMessage());
+            inputChange();
+        }
     }
 
     // 2. 보유 상품 입력

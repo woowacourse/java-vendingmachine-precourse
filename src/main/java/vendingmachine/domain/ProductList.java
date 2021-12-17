@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
-import vendingmachine.domain.Product;
-import vendingmachine.validator.Validator;
+import vendingmachine.validator.ValidatorOld;
 import vendingmachine.view.LoopInput;
 
 import java.util.HashMap;
@@ -31,7 +30,7 @@ public class ProductList extends LoopInput {
     /******************************************************************/
     private static final String INSERT_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
     private static final HashMap<String, Product> productMap = new HashMap<>();
-    private static final Validator validator = new Validator();
+    private static final ValidatorOld VALIDATOR_OLD = new ValidatorOld();
 
 
     public void inputMethod() {
@@ -44,7 +43,7 @@ public class ProductList extends LoopInput {
 
     public Product sellProduct(String product) {
         Product sellProduct = productMap.get(product);
-        validator.validateProductStock(sellProduct);
+        VALIDATOR_OLD.validateProductStock(sellProduct);
         sellProduct.sell();
         return sellProduct;
     }
@@ -69,7 +68,7 @@ public class ProductList extends LoopInput {
     private void inputProductList() {
         String product = inputString(INSERT_PRODUCT_MESSAGE);
         initProductMap();
-        String[] productList = validator.validateSplitRegex(product);
+        String[] productList = VALIDATOR_OLD.validateSplitRegex(product);
         setNumberOfProducts(productList);
     }
 
@@ -85,7 +84,7 @@ public class ProductList extends LoopInput {
 
     private void setNumberOfProducts(String[] productInformationList) {
         for (String productInformation : productInformationList) {
-            Product product = validator.validateSplitProductInformation(productMap, productInformation);
+            Product product = VALIDATOR_OLD.validateSplitProductInformation(productMap, productInformation);
             compareMinimumPrice(product);
             productMap.put(product.getName(), product);
         }

@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import vendingmachine.validator.Validator;
+import vendingmachine.validator.ValidatorOld;
 import vendingmachine.view.LoopInput;
 import vendingmachine.view.OutputMessage;
 
@@ -38,7 +38,7 @@ public class Customer extends LoopInput {
 
     /******************************************************************/
     private static final String INPUT_MONEY_MESSAGE = "투입 금액을 입력해주세요.";
-    private static final Validator validator = new Validator();
+    private static final ValidatorOld VALIDATOR_OLD = new ValidatorOld();
     private static ProductList productList = new ProductList();
     private static OutputMessage outputMessage = new OutputMessage();
 
@@ -60,8 +60,8 @@ public class Customer extends LoopInput {
 
     private void inputCustomerMoney() {
         String money = inputString(INPUT_MONEY_MESSAGE);
-        customerMoney = validator.validateOnlyInteger(money);
-        validator.validateGreaterThanMinimumPrice(productList, customerMoney);
+        customerMoney = VALIDATOR_OLD.validateOnlyInteger(money);
+        VALIDATOR_OLD.validateGreaterThanMinimumPrice(productList, customerMoney);
         outputMessage.printInputMoney(customerMoney);
     }
 }

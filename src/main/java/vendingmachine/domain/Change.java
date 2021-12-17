@@ -6,7 +6,7 @@ import java.util.List;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.view.LoopInput;
 import vendingmachine.view.OutputMessage;
-import vendingmachine.validator.Validator;
+import vendingmachine.validator.ValidatorOld;
 
 public class Change extends LoopInput {
     private int inputChange;
@@ -50,7 +50,7 @@ public class Change extends LoopInput {
     private static final int ADD_COIN = 1;
     private static final int DEFAULT_STOCK = 0;
     private static final int ZERO = 0;
-    private static final Validator validator = new Validator();
+    private static final ValidatorOld VALIDATOR_OLD = new ValidatorOld();
     private static HashMap<Coin, Integer> coinMap = new HashMap<>();
     private static OutputMessage outputMessage = new OutputMessage();
     private static int vendingMachineChange;
@@ -98,9 +98,9 @@ public class Change extends LoopInput {
     // Before
     private void inputChange() {
         String inputChange = inputString(INPUT_MONEY_MESSAGE);
-        int change = validator.validateOnlyInteger(inputChange);
-        validator.isGreatThanZero(change);
-        validator.isMultipleOfTen(change);
+        int change = VALIDATOR_OLD.validateOnlyInteger(inputChange);
+        VALIDATOR_OLD.isGreatThanZero(change);
+        VALIDATOR_OLD.isMultipleOfTen(change);
         vendingMachineChange = change;
     }
 }

@@ -27,4 +27,8 @@ public class OutputView {
         System.out.println(NEW_LINE + PRINT_CHANGE);
     }
 
+    public void printError(String error) {
+        System.out.println(error + NEW_LINE);
+    }
+
 }
