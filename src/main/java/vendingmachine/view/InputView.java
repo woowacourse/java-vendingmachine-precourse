@@ -1,7 +1,5 @@
 package vendingmachine.view;
 
-import camp.nextstep.edu.missionutils.Console;
-
 public class InputView {
     private static final String NEW_LINE = "\n";
     private static final String INPUT_CHANGE = "자판기가 보유하고 있는 금액을 입력해 주세요.";
@@ -22,6 +20,6 @@ public class InputView {
     }
 
     public void printInputBuyProduct() {
-        System.out.println(NEW_LINE + INPUT_BUY_PRODUCT);
+        System.out.println(INPUT_BUY_PRODUCT);
     }
 }

@@ -14,7 +14,9 @@ public class ProductList extends LoopInput {
         productList.put(productName, product);
         minimumPrice = product.isLessThanMinimumPrice(minimumPrice);
     }
-
+    public void initProductMap() {
+        productList.clear();
+    }
     //After
     public HashMap<String, Product> getProductList() {
         return productList;
@@ -53,9 +55,7 @@ public class ProductList extends LoopInput {
         return product.existStock();
     }
 
-    private void initProductMap() {
-        productMap.clear();
-    }
+
 
     public boolean compareMinimumPrice(int customerMoney) {
         return customerMoney >= minimumPrice;
