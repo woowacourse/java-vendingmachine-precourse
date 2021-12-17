@@ -1,38 +1,25 @@
 package vendingmachine.domain;
-import camp.nextstep.edu.missionutils.Randoms;
+
 import vendingmachine.utils.ExceptionMessage;
 import vendingmachine.utils.Validator;
 import vendingmachine.view.VendingMachineOutput;
+import vendingmachine.utils.CommonConstant;
 
 import java.util.*;
 
 public class VendingMachine {
 
-    private final int DEFAULT_AMOUNT = 0;
     private int inputMoney;
-    private Map<Coin, Integer> coinMap;
+    private CoinMap coinMap;
     private ProductList productList;
 
     public VendingMachine(int amount) {
-        generateNumberOfCoinsRandomly(amount);
+        generateRandomNumber(amount);
     }
 
-    private void generateNumberOfCoinsRandomly(int amount) {
-        coinMap = new LinkedHashMap<>();
-
-        for (Coin coin : Coin.values()) {
-            int randomValue = Randoms.pickNumberInRange(0, amount/coin.getValue());
-            amount -= randomValue * coin.getValue();
-            coinMap.put(coin, randomValue);
-        }
-
-        if (amount > DEFAULT_AMOUNT) {
-            for (Coin coin : Coin.values()) {
-                int quotient = amount/coin.getValue();
-                amount -= quotient * coin.getValue();
-                coinMap.put(coin, coinMap.get(coin) + quotient);
-            }
-        }
+    private void generateRandomNumber(int amount) {
+        coinMap = new CoinMap();
+        coinMap.generateNumberOfCoinsRandomly(amount);
     }
 
     private Product transferRawDataToEntity(String productRawData) {
@@ -69,7 +56,7 @@ public class VendingMachine {
 
     public void reduceInputMoneyAndProductQuantityByName(String name) {
         Product[] products = productList.returnProductUsingName(name);
-        if(products.length <= DEFAULT_AMOUNT) {
+        if(products.length <= CommonConstant.DEFAULT_AMOUNT) {
             System.out.println(ExceptionMessage.NOT_AVAILABLE);
             return;
         }
@@ -91,15 +78,14 @@ public class VendingMachine {
     // 잔돈 생성
     private int calculateCoinUsingAmount(Coin coin) {
         int quotient = inputMoney / coin.getValue();
-        if (quotient > coinMap.get(coin)) return coinMap.get(coin);
-        return quotient;
+        return coinMap.calculateValueUsingQuotient(coin, quotient);
     }
 
     private Map<Coin, Integer> generateChanges() {
         Map<Coin, Integer> changes = new LinkedHashMap<>();
         for(Coin coin : Coin.values()) {
             int usingAmount = calculateCoinUsingAmount(coin);
-            if (usingAmount == DEFAULT_AMOUNT) continue;
+            if (usingAmount == CommonConstant.DEFAULT_AMOUNT) continue;
             reduceInputMoney(usingAmount * coin.getValue());
             changes.put(coin, usingAmount);
         }
@@ -112,7 +98,7 @@ public class VendingMachine {
     }
 
     public void printCoins() {
-        VendingMachineOutput.printCoinsVendingMachineHas(coinMap);
+        coinMap.printCoins();
     }
 
     public void printRestMoney() {
