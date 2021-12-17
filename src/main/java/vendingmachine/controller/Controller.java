@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.ProductDivider;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Customer;
 import vendingmachine.domain.Product;
