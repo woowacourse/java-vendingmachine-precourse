@@ -7,7 +7,7 @@ import vendingmachine.model.InsertingSum;
 public class InsertingSumView {
 
 	public InsertingSum getInput() {
-		System.out.println(Message.INPUT_MESSAGE_INSERTING_SUM);
+		System.out.println(Message.INPUT_INSERTING_SUM);
 		try {
 			String input = Console.readLine();
 			System.out.println();
@@ -19,7 +19,7 @@ public class InsertingSumView {
 	}
 
 	public void print(InsertingSum insertingSum) {
-		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_MESSAGE_INSERTING_SUM);
+		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_INSERTING_SUM);
 		stringBuilder.append(insertingSum.get());
 		stringBuilder.append(Message.WON);
 		System.out.println(stringBuilder);

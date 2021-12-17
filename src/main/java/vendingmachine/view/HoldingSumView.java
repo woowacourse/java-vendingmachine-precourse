@@ -8,7 +8,7 @@ import vendingmachine.model.HoldingSum;
 public class HoldingSumView {
 
 	public HoldingSum getInput() {
-		System.out.println(Message.INPUT_MESSAGE_HOlDING_SUM);
+		System.out.println(Message.INPUT_HOlDING_SUM);
 		try {
 			String input = Console.readLine();
 			System.out.println();
@@ -20,7 +20,7 @@ public class HoldingSumView {
 	}
 
 	public void print(HoldingSum holdingSum) {
-		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_MESSAGE_HOLDING_SUM);
+		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_HOLDING_SUM);
 
 		for (Coin coin : Coin.values()) {
 			int coinAmount = coin.getAmount();

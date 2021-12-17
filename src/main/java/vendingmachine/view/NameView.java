@@ -7,7 +7,7 @@ import vendingmachine.model.Name;
 public class NameView {
 
 	public Name getInput() {
-		System.out.println(Message.INPUT_MESSAGE_NAME);
+		System.out.println(Message.INPUT_NAME);
 		try {
 			String input = Console.readLine();
 			System.out.println();

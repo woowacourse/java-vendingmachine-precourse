@@ -41,7 +41,7 @@ public class VendingMachine {
 		Product selectedProduct = stock.getProduct(name);
 
 		if (insertingSum.isLessThan(selectedProduct.getPrice())) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_INSERTING_SUM_IS_LESS_PRICE);
+			throw new IllegalArgumentException(Message.ERROR_INSERTING_SUM_IS_LESS_PRICE);
 		}
 
 	}

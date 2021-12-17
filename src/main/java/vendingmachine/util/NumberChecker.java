@@ -15,7 +15,7 @@ public class NumberChecker {
 		for (int i = 0; i < input.length(); i++) {
 
 			if (!(input.charAt(i) >= '0' && input.charAt(i) <= '9')) {
-				throw new IllegalArgumentException(Message.ERROR_MESSAGE_POSITIVE_NUMBER);
+				throw new IllegalArgumentException(Message.ERROR_NOT_POSITIVE_NUMBER);
 			}
 
 		}
@@ -25,14 +25,14 @@ public class NumberChecker {
 		try {
 			int test = Integer.valueOf(input);
 		} catch (Exception e) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_EXCEED_INTEGER);
+			throw new IllegalArgumentException(Message.ERROR_EXCEED_INTEGER);
 		}
 	}
 
 	private void isNotZero(String input) {
 
 		if (Integer.valueOf(input) == 0) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_POSITIVE_NUMBER);
+			throw new IllegalArgumentException(Message.ERROR_NOT_POSITIVE_NUMBER);
 		}
 
 	}
@@ -40,7 +40,7 @@ public class NumberChecker {
 	public void isLessThan(String input, int min) {
 
 		if (Integer.valueOf(input) < min) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_LESS_THAN_MIN_PRICE);
+			throw new IllegalArgumentException(Message.ERROR_LESS_THAN_MIN_PRICE);
 		}
 
 	}
@@ -48,7 +48,7 @@ public class NumberChecker {
 	public void isDivisibleNumber(String input, int number) {
 
 		if (Integer.valueOf(input) % number != 0) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_DIVISIBLE_NUMBER);
+			throw new IllegalArgumentException(Message.ERROR_DIVISIBLE_NUMBER);
 		}
 
 	}

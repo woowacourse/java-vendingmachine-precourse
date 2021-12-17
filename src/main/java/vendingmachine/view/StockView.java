@@ -7,7 +7,7 @@ import vendingmachine.model.Stock;
 public class StockView {
 
 	public Stock getInput() {
-		System.out.println(Message.INPUT_MESSAGE_STOCK);
+		System.out.println(Message.INPUT_STOCK);
 		try {
 			String input = Console.readLine();
 			System.out.println();

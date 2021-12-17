@@ -40,7 +40,7 @@ public class Stock {
 			Product product = new Product(productInfo);
 
 			if (productMap.containsKey(product.getName())) {
-				throw new IllegalArgumentException(Message.ERROR_MESSAGE_PRODUCT_DUPLICATION);
+				throw new IllegalArgumentException(Message.ERROR_PRODUCT_DUPLICATION);
 			}
 
 			productMap.put(product.getName(), product);
@@ -62,7 +62,7 @@ public class Stock {
 	private boolean hasProduct(Name name) {
 
 		if (stock.get(name) == null) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_NON_EXISTENT_PRODUCT);
+			throw new IllegalArgumentException(Message.ERROR_NON_EXISTENT_PRODUCT);
 		}
 
 		return true;

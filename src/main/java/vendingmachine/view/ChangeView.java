@@ -7,7 +7,7 @@ import vendingmachine.model.Coin;
 public class ChangeView {
 
 	public void print(Change change) {
-		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_MESSAGE_CHANGE);
+		StringBuilder stringBuilder = new StringBuilder(Message.OUTPUT_CHANGE);
 
 		for (Coin coin : Coin.values()) {
 			int coinAmount = coin.getAmount();

@@ -11,7 +11,7 @@ public class SplitChecker {
 		try {
 			String[] test = input.split(DELIMETER, -1);
 		} catch (Exception e) {
-			throw new IllegalArgumentException(Message.ERROR_MESSAGE_EXCEED_INTEGER);
+			throw new IllegalArgumentException(Message.ERROR_EXCEED_INTEGER);
 		}
 	}
 
@@ -21,7 +21,7 @@ public class SplitChecker {
 		for (String productInfo : inputList) {
 
 			if (productInfo.length() == 0) {
-				throw new IllegalArgumentException(Message.ERROR_MESSAGE_LENGTH_ZERO);
+				throw new IllegalArgumentException(Message.ERROR_LENGTH_ZERO);
 			}
 
 		}
@@ -32,7 +32,7 @@ public class SplitChecker {
 		List<String> inputList = Arrays.asList(input.split(DELIMETER, -1));
 
 		if (inputList.size() != correctTheNumber) {
-			throw new IllegalArgumentException(correctTheNumber + Message.ERROR_MESSAGE_THE_NUMBER_OF);
+			throw new IllegalArgumentException(correctTheNumber + Message.ERROR_THE_NUMBER_OF);
 		}
 
 	}
