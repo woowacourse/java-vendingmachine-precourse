@@ -2,7 +2,6 @@ package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.utils.CommonConstant;
-import vendingmachine.view.VendingMachineOutput;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
