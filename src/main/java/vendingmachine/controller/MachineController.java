@@ -1,47 +1,49 @@
 package vendingmachine.controller;
 
-import vendingmachine.service.VendingMachineService;
+import vendingmachine.service.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class MachineController {
-	private final InputView inputView;
-	private final OutputView outputView;
-	private final VendingMachineService service;
+	private final InputView inputView = new InputView();
+	private final OutputView outputView = new OutputView();
+	private final VendingMachine vendingMachine;
 
-	public MachineController() {
-		this.inputView = new InputView();
-		this.outputView = new OutputView();
-		this.service = new VendingMachineService();
+	public MachineController(VendingMachine vendingMachine) {
+		this.vendingMachine = vendingMachine;
 	}
 
 	public void start() {
 		initMachineStatus();
 		createAndSaveItem();
-		buy();
+		int smallChangeResult = buyItems();
+		printSmallChange(smallChangeResult);
 	}
 
 	private void initMachineStatus() {
-		int money = inputView.enterMachineMoney();
-		service.changeMoneyToCoin(money);
-		String currentSmallChange = service.getMachineSmallChange();
+		vendingMachine.toMachineCoin(inputView.enterMachineMoney());
+		String currentSmallChange = vendingMachine.getInitialSmallChange();
 		outputView.printMachineSmallChange(currentSmallChange);
 	}
 
 	private void createAndSaveItem() {
-		String itemInfo = inputView.enterItemInfo();
-		service.saveItem(itemInfo);
+		vendingMachine.registItem(inputView.enterItemInfo());
 	}
 
-	private void buy() {
+	private int buyItems() {
 		int payMoney = Integer.parseInt(inputView.enterPayMoney());
-		while (service.canBuyAnything(payMoney)) {
+		do{
 			outputView.printPuttedMoney(payMoney);
-			String itemToBuy = inputView.enterItemToBuy();
-			payMoney = service.buyItem(payMoney, itemToBuy);
-		}
+			payMoney = vendingMachine.buyItem(payMoney, inputView.enterItemToBuy());
+		}while(vendingMachine.canBuyAnything(payMoney));
+
 		outputView.printPuttedMoney(payMoney);
-		String smallChangeResult = service.calculateSmallChange(payMoney);
-		outputView.printRemainingSmallChange(smallChangeResult);
+		return payMoney;
 	}
+
+	private void printSmallChange(int smallChange){
+		outputView.printRemainingSmallChange(vendingMachine.getResultSmallChange(smallChange));
+
+	}
+
 }

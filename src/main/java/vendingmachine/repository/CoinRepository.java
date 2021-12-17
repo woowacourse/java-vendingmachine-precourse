@@ -4,7 +4,6 @@ import static vendingmachine.util.InputCondition.*;
 
 import java.util.List;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.util.Symbol;
@@ -13,13 +12,13 @@ import vendingmachine.util.comparator.CoinComparator;
 public class CoinRepository {
 	private final TreeMap<Coin, Integer> coinMap;
 
-	public CoinRepository(List<Integer> coin) {
+	public CoinRepository() {
 		this.coinMap = new TreeMap<>();
-		initCoinKind(coin);
+		initCoinKind(Coin.getCoinList());
 	}
 
-	private void initCoinKind(List<Integer> coin) {
-		coin.stream().map(Coin::fromMoney).forEach(c -> coinMap.put(c, 0));
+	private void initCoinKind(List<Coin> coin) {
+		coin.stream().forEach(c -> coinMap.put(c, 0));
 	}
 
 	public void addCoin(Coin coin) {
@@ -41,9 +40,7 @@ public class CoinRepository {
 
 	public String subtractCoins(int payMoney) {
 		TreeMap<Coin, Integer> smallChange = new TreeMap<>(new CoinComparator());
-		List<Coin> reverseSortedList = coinMap.keySet()
-			.stream().collect(Collectors.toList());
-		for (Coin coin : reverseSortedList) {
+		for (Coin coin : Coin.getCoinList()) {
 			payMoney = subtract(coin, payMoney, smallChange);
 		}
 		return getCurrentCoin(smallChange);
