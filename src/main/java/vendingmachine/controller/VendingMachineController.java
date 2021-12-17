@@ -10,34 +10,34 @@ public class VendingMachineController {
 	private int money;
 
 	public VendingMachineController() {
-		callNewVendingMachineWithException();
-	}
-
-	private void callNewVendingMachineWithException() {
-		try {
-			callNewVendingMachine();
-		} catch (Exception error) {
-			logError(error);
-			callNewVendingMachineWithException();
-		}
+		callNewVendingMachine();
 	}
 
 	private void callNewVendingMachine() {
+		try {
+			tryToCallNewVendingMachine();
+		} catch (Exception error) {
+			logError(error);
+			callNewVendingMachine();
+		}
+	}
+
+	private void tryToCallNewVendingMachine() {
 		OutputView.setVendingMachineMoney();
 		vendingMachine = new VendingMachine(InputView.readPositiveInt());
 		OutputView.showCoins(vendingMachine.getCoinStorageBox());
 	}
 
-	public void addItemsWithException() {
+	public void addItems() {
 		try {
-			addItems();
+			tryToAddItems();
 		} catch (Exception error) {
 			logError(error);
-			addItemsWithException();
+			addItems();
 		}
 	}
 
-	private void addItems() {
+	private void tryToAddItems() {
 		OutputView.addItems();
 		vendingMachine.addNewItems(InputView.readItems());
 		OutputView.breakLine();
@@ -48,16 +48,16 @@ public class VendingMachineController {
 		money = InputView.readPositiveInt();
 	}
 
-	public void buyItemsWithException() {
+	public void buyItems() {
 		try {
-			buyItems();
+			tryToBuyItems();
 		} catch (Exception error) {
 			logError(error);
-			buyItemsWithException();
+			buyItems();
 		}
 	}
 
-	private void buyItems() {
+	private void tryToBuyItems() {
 		while (canBuyItem()) {
 			OutputView.showRemainingMoney(money);
 			OutputView.enterWantProduct();
@@ -79,7 +79,7 @@ public class VendingMachineController {
 		return vendingMachine.isAnySalesItem();
 	}
 
-	public void showVendingMachineCoins() {
+	public void getMoney() {
 		OutputView.showCoinStorageState(vendingMachine.getCoinStorageBox());
 	}
 
