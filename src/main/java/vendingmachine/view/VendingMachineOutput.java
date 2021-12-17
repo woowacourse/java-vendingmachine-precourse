@@ -1,10 +1,9 @@
 package vendingmachine.view;
 
-import vendingmachine.domain.Coin;
+import vendingmachine.domain.ChangeMap;
 import vendingmachine.domain.CoinMap;
 import vendingmachine.utils.CommonConstant;
 
-import java.util.Map;
 
 public class VendingMachineOutput {
     private static final String COINS_INSTRUCTION = "자판기가 보유한 동전";
@@ -20,11 +19,9 @@ public class VendingMachineOutput {
         System.out.println(INPUT_MONEY_INSTRUCTION + restMoney + CommonConstant.INPUT_MONEY_POSTFIX);
     }
 
-    public static void printChange(Map<Coin, Integer> changes) {
+    public static void printChange(ChangeMap changes) {
         System.out.println(CHANGES_INSTRUCTION);
-        for(Coin coin: changes.keySet()) {
-            System.out.println(coin + CommonConstant.CONNECTION_MARK + changes.get(coin)+ CommonConstant.COINS_POSTFIX);
-        }
+        System.out.println(changes);
 
     }
 
