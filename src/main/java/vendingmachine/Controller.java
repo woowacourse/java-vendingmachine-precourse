@@ -22,8 +22,7 @@ public class Controller {
         inputChange();
         inputProducts();
         inputMoney();
-        System.out.println(productList.getMinimumPrice() + ", " + customer.getCustomerMoney());
-        while (productList.getMinimumPrice() <= customer.getCustomerMoney()) {
+        while (checkAvailableSale()) {
             buyProduct();
         }
         returnChange();
@@ -51,7 +50,6 @@ public class Controller {
             String products = Console.readLine();
             productList.initProductMap();
             productDivider.divideProduct(productList, products);
-            System.out.println(productList.getProductByName("콜라"));
         } catch (IllegalArgumentException exception) {
             outputView.printError(exception.getMessage());
             inputProducts();
@@ -75,15 +73,26 @@ public class Controller {
 
     // 4. 상품 구매
     public void buyProduct() {
-        inputView.printInputBuyProduct();
-        String productName = Console.readLine();
-        Product product = productList.getProductByName(productName);
-        customer.buyProduct(product);
-        outputView.printMoney(customer.getCustomerMoney());
+        try {
+            inputView.printInputBuyProduct();
+            String productName = Console.readLine();
+            Product product = inputValidator.validateExistedProduct(productList, productName);
+            inputValidator.validateProductIsAvailable(product);
+            customer.buyProduct(product);
+            outputView.printMoney(customer.getCustomerMoney());
+        } catch (IllegalArgumentException exception) {
+            outputView.printError(exception.getMessage());
+            buyProduct();
+        }
     }
 
     // 5. 잔돈 반환
     public void returnChange() {
+        change.returnChange(customer);
         outputView.printChange(customer);
+    }
+
+    public boolean checkAvailableSale() {
+        return productList.checkAvailableState(customer.getCustomerMoney());
     }
 }

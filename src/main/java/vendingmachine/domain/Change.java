@@ -42,6 +42,14 @@ public class Change extends LoopInput {
         return coinStorage;
     }
 
+    public void returnChange(Customer customer) {
+        for (Coin coin : Coin.values()) {
+            int coinStock = coinStorage.get(coin);
+            int returnStock = coin.returnChange(customer.getCustomerMoney(), coinStock);
+            coinStorage.put(coin, coinStock - returnStock);
+            customer.addCoin(coin,returnStock);
+        }
+    }
 
 
     /*********************************************************************/
@@ -59,15 +67,6 @@ public class Change extends LoopInput {
         initialCoinMap();
     }
 
-    public void returnChange(int customerMoney) {
-        outputMessage.printChangeMessage();
-        for (Coin coin : Coin.values()) {
-            int coinStock = coinMap.get(coin);
-            int returnStock = coin.returnChange(customerMoney, coinStock);
-            coinMap.put(coin, coinStock - returnStock);
-            customerMoney -= coin.calcChangePrice(returnStock);
-        }
-    }
 
     public void createRandomChange() {
         int ownChange = vendingMachineChange;

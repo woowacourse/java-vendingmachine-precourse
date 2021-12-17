@@ -25,7 +25,7 @@ public class VendingMachine extends LoopInput {
         while (checkAvailableSellState()) {
             this.input();
         }
-        change.returnChange(customer.getCustomerMoney());
+//        change.returnChange(customer.getCustomerMoney());
     }
 
     public void inputMethod() {

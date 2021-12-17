@@ -29,6 +29,21 @@ public class ProductList extends LoopInput {
         return minimumPrice;
     }
 
+    public boolean checkAvailableState(int customerMoney) {
+        return checkProductStock() && compareMinimumPrice(customerMoney);
+    }
+    public boolean compareMinimumPrice(int customerMoney) {
+        return customerMoney >= minimumPrice;
+    }
+    private boolean checkProductStock() {
+        for (String name : productList.keySet()) {
+            Product product = productList.get(name);
+            if (product.existStock()) {
+                return true;
+            }
+        }
+        return false;
+    }
     /******************************************************************/
     private static final String INSERT_PRODUCT_MESSAGE = "상품명과 가격, 수량을 입력해주세요.";
     private static final HashMap<String, Product> productMap = new HashMap<>();
@@ -57,13 +72,8 @@ public class ProductList extends LoopInput {
 
 
 
-    public boolean compareMinimumPrice(int customerMoney) {
-        return customerMoney >= minimumPrice;
-    }
 
-    public boolean checkAvailableState(int customerMoney) {
-        return checkProductStock() && compareMinimumPrice(customerMoney);
-    }
+
 
     private void inputProductList() {
         String product = inputString(INSERT_PRODUCT_MESSAGE);
@@ -72,15 +82,7 @@ public class ProductList extends LoopInput {
         setNumberOfProducts(productList);
     }
 
-    private boolean checkProductStock() {
-        for (String name : productMap.keySet()) {
-            Product product = productMap.get(name);
-            if (product.existStock()) {
-                return true;
-            }
-        }
-        return false;
-    }
+
 
     private void setNumberOfProducts(String[] productInformationList) {
         for (String productInformation : productInformationList) {

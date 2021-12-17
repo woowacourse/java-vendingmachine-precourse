@@ -28,7 +28,12 @@ public enum Coin {
         }
         return list;
     }
-
+    public int returnChange(int customerMoney, int returnStock) {
+        if (customerMoney < this.amount * returnStock) {
+            returnStock = customerMoney / this.amount;
+        }
+        return returnStock;
+    }
 
 
 
@@ -53,13 +58,7 @@ public enum Coin {
         return this.amount * stock;
     }
 
-    public int returnChange(int customerMoney, int returnStock) {
-        if (customerMoney < this.amount * returnStock) {
-            returnStock = customerMoney / this.amount;
-        }
-        outputMessage.printReturnChange(this.amount, returnStock);
-        return returnStock;
-    }
+
 
     public static Coin getCoinByAmount(int amount) {
         return Coin.valueOf(COIN_NAME_PREFIX + amount);
