@@ -11,6 +11,7 @@ public class VendingMachine {
 
     private int inputMoney;
     private CoinMap coinMap;
+    private ChangeMap changeMap;
     private ProductList productList;
 
     public VendingMachine(int amount) {
@@ -81,20 +82,18 @@ public class VendingMachine {
         return coinMap.calculateValueUsingQuotient(coin, quotient);
     }
 
-    private Map<Coin, Integer> generateChanges() {
-        Map<Coin, Integer> changes = new LinkedHashMap<>();
+    public void generateChanges() {
+        changeMap = new ChangeMap();
         for(Coin coin : Coin.values()) {
             int usingAmount = calculateCoinUsingAmount(coin);
             if (usingAmount == CommonConstant.DEFAULT_AMOUNT) continue;
             reduceInputMoney(usingAmount * coin.getValue());
-            changes.put(coin, usingAmount);
+            changeMap.updateValue(coin, usingAmount);
         }
-        return changes;
     }
 
     public void printChanges() {
-        Map<Coin, Integer> changes = generateChanges();
-        VendingMachineOutput.printChange(changes);
+        VendingMachineOutput.printChange(changeMap);
     }
 
     public void printCoins() {

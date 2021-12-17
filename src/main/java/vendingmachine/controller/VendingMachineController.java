@@ -23,6 +23,7 @@ public class VendingMachineController {
             vendingMachine.reduceInputMoneyAndProductQuantityByName(productName);
         }
         vendingMachine.printRestMoney();
+        vendingMachine.generateChanges();
         vendingMachine.printChanges();
     }
 
