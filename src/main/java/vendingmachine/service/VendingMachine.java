@@ -1,16 +1,5 @@
 package vendingmachine.service;
 
-import java.util.Arrays;
-import java.util.List;
-
-import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.domain.Coin;
-import vendingmachine.domain.CoinGenerator;
-import vendingmachine.domain.Item;
-import vendingmachine.repository.CoinRepository;
-import vendingmachine.repository.ItemRepository;
-import vendingmachine.util.Symbol;
-
 public class VendingMachine {
 	private static final int ZERO = 0;
 
@@ -34,9 +23,8 @@ public class VendingMachine {
 		itemService.saveItem(itemInfo);
 	}
 
-
 	public boolean canBuyAnything(int remainAmount) {
-		return canBuyAnything(remainAmount);
+		return itemService.canBuyAnything(remainAmount);
 	}
 
 	public int buyItem(int payMoney, String itemName) {

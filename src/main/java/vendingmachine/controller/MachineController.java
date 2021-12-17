@@ -32,10 +32,11 @@ public class MachineController {
 
 	private int buyItems() {
 		int payMoney = Integer.parseInt(inputView.enterPayMoney());
-		do{
+		vendingMachine.canBuyAnything(payMoney);
+		while(vendingMachine.canBuyAnything(payMoney)){
 			outputView.printPuttedMoney(payMoney);
 			payMoney = vendingMachine.buyItem(payMoney, inputView.enterItemToBuy());
-		}while(vendingMachine.canBuyAnything(payMoney));
+		}
 
 		outputView.printPuttedMoney(payMoney);
 		return payMoney;
