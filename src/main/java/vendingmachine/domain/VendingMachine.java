@@ -9,14 +9,11 @@ import java.util.*;
 public class VendingMachine {
 
     private final int DEFAULT_AMOUNT = 0;
-    protected final int PRODUCT_INFORMATION_SIZE = 3;
-    private int amount;
     private int inputMoney;
     private Map<Coin, Integer> coinMap;
     private ProductList productList;
 
     public VendingMachine(int amount) {
-        this.amount = amount;
         generateNumberOfCoinsRandomly(amount);
     }
 
