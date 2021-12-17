@@ -7,18 +7,24 @@ import vendingmachine.domain.Customer;
 import java.util.HashMap;
 
 public class OutputView {
+    private static final String NEW_LINE = "\n";
+    private static final String CHANGE_IN_VENDING_MACHINE_MESSAGE = "자판기가 보유한 동전";
+    private static final String PRINT_MONEY_PREFIX = "투입 금액: ";
+    private static final String PRINT_MONEY_SUFFIX = "원";
+    private static final String PRINT_CHANGE = "잔돈";
 
     public void printCoinList(Change change) {
         HashMap<Coin, Integer> coinStorage = change.getCoinStorage();
         // 출력 기능 수행
+        System.out.println(NEW_LINE + CHANGE_IN_VENDING_MACHINE_MESSAGE);
     }
 
     public void printMoney(int money) {
-        System.out.println("투입 금액: " + money + "원");
+        System.out.println(NEW_LINE + PRINT_MONEY_PREFIX + money + PRINT_MONEY_SUFFIX);
     }
 
     public void printChange(Customer customer) {
-
+        System.out.println(NEW_LINE + PRINT_CHANGE);
     }
 
 }
