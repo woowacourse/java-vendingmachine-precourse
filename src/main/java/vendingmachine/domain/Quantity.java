@@ -5,21 +5,21 @@ public class Quantity {
 
   private int quantity;
 
-  public Quantity(int quantity){
+  public Quantity(int quantity) {
     validateQuantity(quantity);
     this.quantity = quantity;
   }
 
-  public void decreaseQuantity(){
+  public void decreaseQuantity() {
     quantity--;
   }
 
-  public boolean isQuantityZero(){
+  public boolean isQuantityZero() {
     return quantity == 0;
   }
 
-  public static void validateQuantity(int quantity){
-    if(quantity < 0){
+  public static void validateQuantity(int quantity) {
+    if (quantity < 0) {
       throw new IllegalArgumentException(INVALID_QUANTITY_ERROR_MESSAGE);
     }
   }
