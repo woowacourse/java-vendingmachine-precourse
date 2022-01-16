@@ -71,5 +71,41 @@ public class VendingMachine {
     
   }
 
+  public int returnCoin(int changeMoney, Coin coin) {
+    int coinChangeMaxCount = changeMoney / coin.getAmount();
+    int returnCoinCount = Math.min(coinChangeMaxCount, coinCounts.get(coin));
+    changeMoney -= returnCoinCount * coin.getAmount();
+    updateReturnCoinMap(returnCoinCounts, coin, returnCoinCount);
+    updateReturnCoinMap(returnCoinCounts, coin, coinCounts.get(coin) - returnCoinCount);
+    return changeMoney;
+    
+  }
+
+  public LinkedHashMap<Coin, Integer> changeCoinStatus(int lastMoney) {
+    if (lastMoney >= vendingMachineMoney.getMoney()){
+      return coinCounts;
+    }
+
+    for (Coin coin : coinCounts.keySet()) {
+      lastMoney = returnCoin(lastMoney, coin);
+      if(lastMoney == 0){
+        break;
+      }
+    }
+
+    return returnCoinCounts;
+    
+  }
+
+  public static LinkedHashMap<Integer, Integer> castingCoinToInteger(LinkedHashMap<Coin, Integer> coinStatus) {
+    LinkedHashMap<Integer, Integer> intCoinStatus = new LinkedHashMap<>();
+    for(Coin coin: coinStatus.keySet()){
+      intCoinStatus.put(coin.getAmount(), coinStatus.get(coin));
+    }
+    return intCoinStatus;
+    
+  }
   
+
+
 }
