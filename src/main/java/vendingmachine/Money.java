@@ -1,11 +1,13 @@
 package vendingmachine;
 
+import static vendingmachine.MessageUtils.MONEY_INPUT_ERROR;
+
 public class Money {
     private final int amount;
 
     public Money(String amount) {
         if (!isValidMoney(amount)) {
-            throw new IllegalArgumentException("error!");
+            throw new IllegalArgumentException(MONEY_INPUT_ERROR.msg());
         }
         this.amount = Integer.parseInt(amount);
     }
