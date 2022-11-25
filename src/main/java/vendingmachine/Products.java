@@ -52,4 +52,9 @@ public class Products {
     public int getMinPrice(List<Product> productList) {
         return productList.stream().min(Comparator.comparingInt(Product::getProductPrice)).get().getProductPrice();
     }
+
+    public boolean hasCount(List<Product> productList, String productName) {
+        return productList.stream().filter(product -> product.getProductName().equals(productName))
+                .anyMatch(product -> product.getProductCount() > 0);
+    }
 }
