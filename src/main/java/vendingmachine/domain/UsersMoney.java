@@ -28,6 +28,10 @@ public class UsersMoney {
         return amount.chars().allMatch(Character::isDigit) && Integer.parseInt(amount) > 0;
     }
 
+    public void buy(int price){
+        money -= price;
+    }
+
     public int getMoney() {
         return money;
     }

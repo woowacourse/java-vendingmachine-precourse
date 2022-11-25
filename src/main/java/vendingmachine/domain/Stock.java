@@ -35,4 +35,20 @@ public class Stock {
         }
         return parsedStocks;
     }
+
+    public String getMerchandise() {
+        return merchandise;
+    }
+
+    public boolean hasStock() {
+        return count > 0;
+    }
+
+    public Integer getPrice() {
+        return price.getAmount();
+    }
+
+    public void purchase() {
+        count--;
+    }
 }

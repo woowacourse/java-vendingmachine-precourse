@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import static vendingmachine.ui.MessageUtils.INVALID_STOCK_INFO;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -25,7 +27,26 @@ public class Stocks {
         return stocks;
     }
 
-    public void purchaseStock(String stock){
-
+    public Stock getMatchingStock(String userInput) {
+        for (Stock stock : stocks) {
+            if (stock.getMerchandise().equals(userInput)){
+                return stock;
+            }
+        }
+        throw new IllegalArgumentException(INVALID_STOCK_INFO.msg());
     }
+
+    public boolean exists(Stock stock){
+        return stock.hasStock();
+    }
+
+    public boolean canAfford(int usersMoney, Stock stock) {
+        return usersMoney >= stock.getPrice();
+    }
+
+    public void purchaseStock(Stock stock){
+        stock.purchase();
+    }
+
+
 }
