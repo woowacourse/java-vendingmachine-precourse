@@ -15,6 +15,7 @@ public class MachineController {
         outputView.printMachineCoinInfo(coins);
 
         Stocks stock = addStocks();
+
     }
 
     private RemainingCoins generateCoins() {

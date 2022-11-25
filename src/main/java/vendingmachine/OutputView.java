@@ -32,6 +32,7 @@ public class OutputView {
     }
 
     public void printMerchandiseInfoOpening(){
+        System.out.println();
         System.out.println(INPUT_MERCHANDISE_INFO.msg());
     }
 }

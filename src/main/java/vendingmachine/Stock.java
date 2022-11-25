@@ -9,7 +9,7 @@ import java.util.StringTokenizer;
 public class Stock {
     private final String merchandise;
     private final Money price;
-    private final int count;
+    private int count;
 
     public Stock(String input) {
         validateStockInput(input);
@@ -21,20 +21,18 @@ public class Stock {
     }
 
     private void validateStockInput(String input) {
-        if (!input.matches("^\\[[a-zA-Z]+,[1-9][0-9][0-9],[0-9]+\\]$")) {
+        if (!input.matches("^\\[[^0-9]+,[1-9][0-9][0-9],[0-9]+\\]$")) {
             throw new IllegalArgumentException(INVALID_STOCKS_INPUT.msg());
         }
     }
 
     private List<String> parseStockInput(String input) throws IllegalArgumentException{
         List<String> parsedStocks = new ArrayList<>();
-
         String chopped = input.substring(1, input.length() - 1);
         StringTokenizer tokenizer = new StringTokenizer(chopped, ",");
         while (tokenizer.hasMoreTokens()) {
             parsedStocks.add(tokenizer.nextToken());
         }
-
         return parsedStocks;
     }
 }
