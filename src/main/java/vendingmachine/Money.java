@@ -20,7 +20,7 @@ public class Money {
     }
 
     private boolean isNull(String amount) {
-        return amount.isBlank();
+        return amount.isEmpty();
     }
 
     private boolean isNumeric(String amount) {
