@@ -11,7 +11,8 @@ public enum MessageUtils {
 
     // 에러 관련 메세지
     INVALID_STOCKS_INPUT("올바른 형식의 상품을 입력해주세요"),
-    MONEY_INPUT_ERROR("올바른 형식의 금액을 입력해주세요.");
+    MONEY_INPUT_ERROR("올바른 형식의 금액을 입력해주세요."),
+    INVALID_STOCK_INFO("존재하는 상품인지 확인해주세요");
 
     private final String msg;
 
