@@ -13,7 +13,7 @@ public class Money {
     }
 
     private boolean isValidMoney(String amount) {
-        if (!isNull(amount) && isNumeric(amount)) {
+        if (!isNull(amount) && isNumeric(amount) && isMultipleof10(amount)) {
             return true;
         }
         return false;
@@ -27,7 +27,12 @@ public class Money {
         return amount.chars().allMatch(Character::isDigit);
     }
 
+    private boolean isMultipleof10(String amount) {
+        return Integer.parseInt(amount) > 0 && Integer.parseInt(amount) % 10 == 0;
+    }
+
     public int getAmount() {
         return amount;
     }
+
 }

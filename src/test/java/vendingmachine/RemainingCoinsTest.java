@@ -18,7 +18,7 @@ class RemainingCoinsTest {
 
     @DisplayName("잘못된 금액 입력시, 예외 발생")
     @ParameterizedTest
-    @ValueSource(strings = {"jjj", " ", ".", "0x1"})
+    @ValueSource(strings = {"jjj", " ", ".", "0x1", "111", "0"})
     void 금액입력_예외테스트(String input){
         assertThatThrownBy(() -> new Money(input) )
                 .isInstanceOf(IllegalArgumentException.class)
