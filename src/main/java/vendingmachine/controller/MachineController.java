@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.domain.Stock;
 import vendingmachine.ui.InputView;
 import vendingmachine.ui.OutputView;
 import vendingmachine.domain.RemainingCoins;
@@ -40,36 +41,38 @@ public class MachineController {
 
     private Stocks addStocks() {
         outputView.printMerchandiseInfoOpening();
-        try{
+        try {
             return new Stocks(inputView.userInput());
-        }catch (IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception.getMessage());
             return addStocks();
         }
     }
 
-    private UsersMoney insertMoney(){
+    private UsersMoney insertMoney() {
         outputView.printUserMoneyInputOpening();
-        try{
+        try {
             return new UsersMoney(inputView.userInput());
-        }catch (IllegalArgumentException exception){
+        } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception.getMessage());
             return insertMoney();
         }
     }
 
     private void purchase() {
-        do{
+        while (true) {
             outputView.printLeftovers(vendingMachine.getUsersMoney());
             outputView.printUsersStockChoiceOpening();
-            try{
-                // vendingMachine.purchase(inputView.userInput());
-            }catch (IllegalArgumentException exception){
+            try {
+                Stock existingStock = vendingMachine.checkStock(inputView.userInput());
+                if (!vendingMachine.isPurchasable(existingStock)) {
+                    break;
+                }
+                vendingMachine.purchase(existingStock);
+            } catch (IllegalArgumentException exception) {
                 outputView.printErrorMessage(exception.getMessage());
-                purchase();
             }
-
-        } while (vendingMachine.isPurchasable());
+        }
     }
 
 
