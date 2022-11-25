@@ -9,6 +9,7 @@ public class RemainingCoins {
     public RemainingCoins(String input) {
         money = new Money(input);
         remainingCoins = CoinMaker.generateCoins(money);
+        System.out.print(remainingCoins);
     }
 
     public Money getMoney() {

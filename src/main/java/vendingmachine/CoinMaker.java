@@ -19,12 +19,14 @@ public class CoinMaker {
                 .asList(COIN_500.amount(), COIN_100.amount(), COIN_50.amount(), COIN_10.amount());
         EnumMap<Coin, Integer> coinCount = initCoinMap();
 
-        int curAmount = 0;
-        while (true){
-            if (curAmount == machineMoney.getAmount()){
-                break;
-            }
+        generate(machineMoney, totalCoins, coinCount);
 
+        return coinCount;
+    }
+
+    private static void generate(Money machineMoney, List<Integer> totalCoins, EnumMap<Coin, Integer> coinCount) {
+        int curAmount = 0;
+        while (curAmount != machineMoney.getAmount()) {
             int newCoin = Randoms.pickNumberInList(totalCoins);
             if (isLessOrSame(newCoin, curAmount, machineMoney.getAmount())) {
                 curAmount += newCoin;
@@ -32,7 +34,6 @@ public class CoinMaker {
                 coinCount.put(keyCoin, coinCount.get(keyCoin) + 1);
             }
         }
-        return coinCount;
     }
 
     private static boolean isLessOrSame(int newCoin, int curAmount, int machineMoney){
@@ -43,12 +44,12 @@ public class CoinMaker {
     }
 
     private static EnumMap<Coin, Integer> initCoinMap() {
-        return new EnumMap<>(
-                Map.of(
-                        COIN_500, 0,
-                        COIN_100, 0,
-                        COIN_50, 0,
-                        COIN_10, 0)
-        );
+        EnumMap<Coin, Integer> coinMap = new EnumMap<>(Coin.class);
+        coinMap.put(COIN_500, 0);
+        coinMap.put(COIN_100, 0);
+        coinMap.put(COIN_50, 0);
+        coinMap.put(COIN_10, 0);
+
+        return coinMap;
     }
 }
