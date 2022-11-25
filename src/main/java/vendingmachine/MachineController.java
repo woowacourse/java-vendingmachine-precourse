@@ -10,7 +10,14 @@ public class MachineController {
     }
 
     private RemainingCoins generateCoins() {
-        String input = inputView.userInput();
-        return new RemainingCoins(input);
+        try {
+            return new RemainingCoins(inputView.userInput());
+        } catch (IllegalArgumentException exception) {
+            outputView.printErrorMessage(exception.getMessage());
+            generateCoins();
+        }
+        return null; // ?? 이거 우째
     }
+
+
 }
