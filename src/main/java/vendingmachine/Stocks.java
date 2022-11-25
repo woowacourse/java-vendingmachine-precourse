@@ -22,7 +22,6 @@ public class Stocks {
             stocks.add(tokenizer.nextToken());
         }
 
-        System.out.println(stocks);
         return stocks;
     }
 }
