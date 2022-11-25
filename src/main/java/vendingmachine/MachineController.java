@@ -20,9 +20,8 @@ public class MachineController {
             return new RemainingCoins(inputView.userInput());
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception.getMessage());
-            generateCoins();
+            return generateCoins();
         }
-        return null; // ?? 이거 우째
     }
 
 

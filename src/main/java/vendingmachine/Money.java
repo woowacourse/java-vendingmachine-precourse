@@ -27,4 +27,7 @@ public class Money {
         return amount.chars().allMatch(Character::isDigit);
     }
 
+    public int getAmount() {
+        return amount;
+    }
 }
