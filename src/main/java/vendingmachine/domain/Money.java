@@ -1,6 +1,6 @@
-package vendingmachine;
+package vendingmachine.domain;
 
-import static vendingmachine.MessageUtils.MONEY_INPUT_ERROR;
+import static vendingmachine.ui.MessageUtils.MONEY_INPUT_ERROR;
 
 public class Money {
     private final int amount;

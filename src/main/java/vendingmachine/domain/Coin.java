@@ -1,7 +1,4 @@
-package vendingmachine;
-
-import java.util.Optional;
-import org.assertj.core.util.Arrays;
+package vendingmachine.domain;
 
 public enum Coin {
     COIN_500(500),

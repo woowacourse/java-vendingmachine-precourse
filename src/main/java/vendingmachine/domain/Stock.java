@@ -1,6 +1,6 @@
-package vendingmachine;
+package vendingmachine.domain;
 
-import static vendingmachine.MessageUtils.INVALID_STOCKS_INPUT;
+import static vendingmachine.ui.MessageUtils.INVALID_STOCKS_INPUT;
 
 import java.util.ArrayList;
 import java.util.List;

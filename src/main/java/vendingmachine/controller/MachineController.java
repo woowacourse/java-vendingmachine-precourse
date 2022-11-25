@@ -1,4 +1,11 @@
-package vendingmachine;
+package vendingmachine.controller;
+
+import vendingmachine.ui.InputView;
+import vendingmachine.ui.OutputView;
+import vendingmachine.domain.RemainingCoins;
+import vendingmachine.domain.Stocks;
+import vendingmachine.domain.UsersMoney;
+import vendingmachine.VendingMachine;
 
 public class MachineController {
     private final InputView inputView;

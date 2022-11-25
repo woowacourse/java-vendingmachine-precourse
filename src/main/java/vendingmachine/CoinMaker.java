@@ -1,16 +1,17 @@
 package vendingmachine;
 
-import static vendingmachine.Coin.COIN_10;
-import static vendingmachine.Coin.COIN_100;
-import static vendingmachine.Coin.COIN_50;
-import static vendingmachine.Coin.COIN_500;
-import static vendingmachine.Coin.coinMapper;
+import static vendingmachine.domain.Coin.COIN_10;
+import static vendingmachine.domain.Coin.COIN_100;
+import static vendingmachine.domain.Coin.COIN_50;
+import static vendingmachine.domain.Coin.COIN_500;
+import static vendingmachine.domain.Coin.coinMapper;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
-import java.util.Map;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.Money;
 
 public class CoinMaker {
 

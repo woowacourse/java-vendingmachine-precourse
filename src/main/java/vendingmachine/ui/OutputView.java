@@ -1,12 +1,14 @@
-package vendingmachine;
+package vendingmachine.ui;
 
-import static vendingmachine.MessageUtils.INPUT_MACHINE_MONEY;
-import static vendingmachine.MessageUtils.INPUT_MERCHANDISE_INFO;
-import static vendingmachine.MessageUtils.INPUT_USERS_MONEY;
-import static vendingmachine.MessageUtils.MACHINE_COIN_INFO;
-import static vendingmachine.MessageUtils.MONEY_REMAINING;
+import static vendingmachine.ui.MessageUtils.INPUT_MACHINE_MONEY;
+import static vendingmachine.ui.MessageUtils.INPUT_MERCHANDISE_INFO;
+import static vendingmachine.ui.MessageUtils.INPUT_USERS_MONEY;
+import static vendingmachine.ui.MessageUtils.MACHINE_COIN_INFO;
+import static vendingmachine.ui.MessageUtils.MONEY_REMAINING;
 
 import java.util.EnumMap;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.RemainingCoins;
 
 public class OutputView {
     private static final String WON = "원";

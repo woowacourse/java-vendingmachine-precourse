@@ -1,6 +1,7 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 import java.util.EnumMap;
+import vendingmachine.CoinMaker;
 
 public class RemainingCoins {
     private final Money money;

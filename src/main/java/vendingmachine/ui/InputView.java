@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.ui;
 
 import camp.nextstep.edu.missionutils.Console;
 

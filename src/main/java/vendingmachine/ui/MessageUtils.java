@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.ui;
 
 public enum MessageUtils {
     // 출력 메세지

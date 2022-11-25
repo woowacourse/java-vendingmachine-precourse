@@ -1,14 +1,13 @@
 package vendingmachine;
 
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
-import static vendingmachine.MessageUtils.MONEY_INPUT_ERROR;
+import static vendingmachine.ui.MessageUtils.MONEY_INPUT_ERROR;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import vendingmachine.domain.Money;
 
 class RemainingCoinsTest {
     @BeforeEach

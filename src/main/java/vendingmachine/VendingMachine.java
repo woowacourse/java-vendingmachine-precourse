@@ -1,5 +1,9 @@
 package vendingmachine;
 
+import vendingmachine.domain.RemainingCoins;
+import vendingmachine.domain.Stocks;
+import vendingmachine.domain.UsersMoney;
+
 public class VendingMachine {
     private final RemainingCoins remainingCoins;
     private final Stocks stocks;
