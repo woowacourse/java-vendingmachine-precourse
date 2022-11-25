@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import static vendingmachine.MessageUtils.INPUT_MACHINE_MONEY;
+import static vendingmachine.MessageUtils.INPUT_MERCHANDISE_INFO;
 import static vendingmachine.MessageUtils.MACHINE_COIN_INFO;
 
 import java.util.EnumMap;
@@ -28,5 +29,9 @@ public class OutputView {
         for (Coin coin : coinMap.keySet()) {
             System.out.println(coin.amount() + WON + DELIMITER + coinMap.get(coin) + AMT);
         }
+    }
+
+    public void printMerchandiseInfoOpening(){
+        System.out.println(INPUT_MERCHANDISE_INFO.msg());
     }
 }

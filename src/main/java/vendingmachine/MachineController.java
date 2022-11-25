@@ -13,6 +13,8 @@ public class MachineController {
     public void run() {
         RemainingCoins coins = generateCoins();
         outputView.printMachineCoinInfo(coins);
+
+        Stocks stock = addStocks();
     }
 
     private RemainingCoins generateCoins() {
@@ -22,6 +24,16 @@ public class MachineController {
         } catch (IllegalArgumentException exception) {
             outputView.printErrorMessage(exception.getMessage());
             return generateCoins();
+        }
+    }
+
+    private Stocks addStocks() {
+        outputView.printMerchandiseInfoOpening();
+        try{
+            return new Stocks(inputView.userInput());
+        }catch (IllegalArgumentException exception){
+            outputView.printErrorMessage(exception.getMessage());
+            return addStocks();
         }
     }
 
