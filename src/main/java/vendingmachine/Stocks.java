@@ -24,4 +24,8 @@ public class Stocks {
 
         return stocks;
     }
+
+    public void purchaseStock(String stock){
+
+    }
 }

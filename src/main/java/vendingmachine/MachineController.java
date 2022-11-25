@@ -16,6 +16,9 @@ public class MachineController {
 
         Stocks stock = addStocks();
         UsersMoney usersMoney = insertMoney();
+        vendingMachine = new VendingMachine(coins, stock, usersMoney);
+
+        purchase();
     }
 
     private RemainingCoins generateCoins() {
@@ -46,6 +49,20 @@ public class MachineController {
             outputView.printErrorMessage(exception.getMessage());
             return insertMoney();
         }
+    }
+
+    private void purchase() {
+        do{
+            outputView.printLeftovers(vendingMachine.getUsersMoney());
+            outputView.printUsersStockChoiceOpening();
+            try{
+                // vendingMachine.purchase(inputView.userInput());
+            }catch (IllegalArgumentException exception){
+                outputView.printErrorMessage(exception.getMessage());
+                purchase();
+            }
+
+        } while (vendingMachine.isPurchasable());
     }
 
 

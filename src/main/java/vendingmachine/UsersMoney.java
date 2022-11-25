@@ -27,4 +27,8 @@ public class UsersMoney {
     private boolean isNumeric(String amount) {
         return amount.chars().allMatch(Character::isDigit) && Integer.parseInt(amount) > 0;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }
