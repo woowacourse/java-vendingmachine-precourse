@@ -14,4 +14,8 @@ public class RemainingCoins {
     public Money getMoney() {
         return money;
     }
+
+    public EnumMap<Coin, Integer> getRemainingCoins() {
+        return remainingCoins;
+    }
 }

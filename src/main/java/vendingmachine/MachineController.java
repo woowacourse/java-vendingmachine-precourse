@@ -12,6 +12,7 @@ public class MachineController {
 
     public void run() {
         RemainingCoins coins = generateCoins();
+        outputView.printMachineCoinInfo(coins);
     }
 
     private RemainingCoins generateCoins() {
