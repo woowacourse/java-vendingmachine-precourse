@@ -7,6 +7,7 @@ public enum MessageUtils {
     INPUT_MERCHANDISE_INFO("상품명과 가격, 수량을 입력해 주세요."),
 
     // 에러 관련 메세지
+    INVALID_STOCKS_INPUT("올바른 형식의 상품을 입력해주세요"),
     MONEY_INPUT_ERROR("올바른 형식의 금액을 입력해주세요.");
 
     private final String msg;
