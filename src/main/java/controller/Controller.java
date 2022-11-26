@@ -11,7 +11,7 @@ public class Controller {
     private final VendingMachineService vendingMachineService = new VendingMachineService();
 
     private void initHolindSum() {
-        HoldingSumRequestDto holdingSumRequestDto = inputView.inputHolingSum();
+        HoldingSumRequestDto holdingSumRequestDto = inputView.readHolingSum();
         vendingMachineService.changeHoldingSumToCoins(holdingSumRequestDto);
     }
 }

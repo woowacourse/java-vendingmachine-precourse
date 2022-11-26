@@ -21,7 +21,7 @@ public class Validator {
     }
 
     public static void validateProductForm(String string) {
-        if (!string.matches("^\\[[a-zA-Z0-9가-힣]+,\\d{3,}+,\\d+]$")) {
+        if (!string.matches("^\\[[a-zA-Z0-9가-힣]+,\\d{1,9}+,\\d{1,9}]$")) {
             throw new IllegalArgumentException(ErrorLog.NOT_NUMBER_INPUT.getLog());
         }
     }
