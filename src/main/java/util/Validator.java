@@ -25,4 +25,16 @@ public class Validator {
             throw new IllegalArgumentException(ErrorLog.NOT_NUMBER_INPUT.getLog());
         }
     }
+
+    public static void validateEnoughMoney(int money) {
+        if (money < 100) {
+            throw new IllegalArgumentException(ErrorLog.NOT_ENOUGH_MONEY.getLog());
+        }
+    }
+
+    public static void validateNotZero(int number) {
+        if (number == 0) {
+            throw new IllegalArgumentException(ErrorLog.ZERO_NUMBER.getLog());
+        }
+    }
 }
