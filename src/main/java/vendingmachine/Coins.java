@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 
 import dto.CoinsResponseDto;
 
@@ -12,6 +13,8 @@ public class Coins {
     }
 
     public CoinsResponseDto toCoinsResponseDto() {
-        return new CoinsResponseDto(coins);
+        HashMap<Integer, Integer> coinsToDto = new HashMap<>();
+        coins.forEach((coin, integer) -> coinsToDto.put(coin.getAmount(), integer));
+        return new CoinsResponseDto(coinsToDto);
     }
 }

@@ -6,13 +6,13 @@ import java.util.HashMap;
 import vendingmachine.Coin;
 
 public class CoinsResponseDto {
-    private final EnumMap<Coin, Integer> coins;
+    private final HashMap<Integer, Integer> coins;
 
-    public CoinsResponseDto(EnumMap<Coin, Integer> coins) {
+    public CoinsResponseDto(HashMap<Integer, Integer> coins) {
         this.coins = coins;
     }
 
-    public EnumMap<Coin, Integer> getCoins() {
+    public HashMap<Integer, Integer> getCoins() {
         return coins;
     }
 }
