@@ -2,6 +2,7 @@ package controller;
 
 import dto.HoldingSumRequestDto;
 import dto.MoneyRequestDto;
+import dto.ProductNameRequestDto;
 import dto.ProductsRequestDto;
 import service.VendingMachineService;
 import view.InputView;
@@ -12,18 +13,25 @@ public class Controller {
     private final OutputView outputView = new OutputView();
     private final VendingMachineService vendingMachineService = new VendingMachineService();
 
-    private void initHolindSum() {
+    public void control() {
+        initHoldingSum();
+        saveProductsInfo();
+        inputMoney();
+        buyProduct();
+    }
+    private void initHoldingSum() {
         while (true) {
             try {
                 HoldingSumRequestDto holdingSumRequestDto = inputView.readHolingSum();
                 outputView.printCoins(vendingMachineService.changeHoldingSumToCoins(holdingSumRequestDto));
+                return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    public void saveProductsInfo() {
+    private void saveProductsInfo() {
         while (true) {
             try {
                 ProductsRequestDto productsRequestDto = inputView.readProducts();
@@ -35,11 +43,32 @@ public class Controller {
         }
     }
 
-    public void inputMoney() {
+    private void inputMoney() {
         while (true) {
             try {
                 MoneyRequestDto moneyRequestDto = inputView.readMoney();
-                vendingMachineService.
+                vendingMachineService.saveMoney(moneyRequestDto);
+                return;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    private void buyProduct() {
+        do {
+            inputProductName();
+        } while (!vendingMachineService.isEnd());
+        outputView.printEnd(vendingMachineService.conveyCurrentMoney(), vendingMachineService.calculateChange());
+    }
+
+    private void inputProductName() {
+        while (true) {
+            try {
+                ProductNameRequestDto productNameRequestDto = inputView.readProductName(
+                    vendingMachineService.conveyCurrentMoney());
+                vendingMachineService.purchaseProduct(productNameRequestDto);
+                return;
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

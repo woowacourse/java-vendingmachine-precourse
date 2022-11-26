@@ -37,4 +37,10 @@ public class Validator {
             throw new IllegalArgumentException(ErrorLog.ZERO_NUMBER.getLog());
         }
     }
+
+    public static void validateNotSpace(String string) {
+        if (string.matches("\\S")) {
+            throw new IllegalArgumentException(ErrorLog.ONLY_SPACE.getLog());
+        }
+    }
 }
