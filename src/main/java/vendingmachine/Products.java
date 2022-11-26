@@ -22,12 +22,20 @@ public class Products {
 
     public void validateProductsPrice(List<Product> products) {
         for (Product product : products) {
-            if (product.getProductPrice() < 100) {
-                throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_MINIMUM);
-            }
-            if (product.getProductPrice() % 10 != 0) {
-                throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_UNIT);
-            }
+            validateProductsMinimum(product);
+            validateProductsUnit(product);
+        }
+    }
+
+    public void validateProductsMinimum(Product product) {
+        if (product.getProductPrice() < 100) {
+            throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_MINIMUM);
+        }
+    }
+
+    public void validateProductsUnit(Product product) {
+        if (product.getProductPrice() % 10 != 0) {
+            throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_UNIT);
         }
     }
 
@@ -43,15 +51,12 @@ public class Products {
     }
 
     public void validateProductName(String productName, List<Product> productList) {
-        for (Product product : productList) {
-            if (product.getProductName().equals(productName)) {
-                return;
-            }
+        if (productList.stream().noneMatch(product -> product.getProductName().equals(productName))) {
+            throw new IllegalArgumentException(ERROR_PRODUCT_NAME);
         }
-        throw new IllegalArgumentException(ERROR_PRODUCT_NAME);
     }
 
-    public int getMinPrice(List<Product> productList) {
+    public int getMinimumPrice(List<Product> productList) {
         return productList.stream().min(Comparator.comparingInt(Product::getProductPrice)).get().getProductPrice();
     }
 
