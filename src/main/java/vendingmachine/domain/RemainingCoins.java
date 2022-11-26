@@ -12,10 +12,6 @@ public class RemainingCoins {
         remainingCoins = CoinMaker.generateCoins(money);
     }
 
-    public Money getMoney() {
-        return money;
-    }
-
     public EnumMap<Coin, Integer> getRemainingCoins() {
         return remainingCoins;
     }
@@ -28,7 +24,7 @@ public class RemainingCoins {
             while (remainingCoins.get(coin) > 0 && usersMoney >= coin.amount()){
                 remainingCoins.put(coin, remainingCoins.get(coin) - 1);
                 usersMoney -= coin.amount();
-                change.put(coin, count++);
+                change.put(coin, ++count);
             }
         }
         return change;
