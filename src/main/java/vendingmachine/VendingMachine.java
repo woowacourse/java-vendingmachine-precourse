@@ -1,7 +1,7 @@
 package vendingmachine;
 
-import static vendingmachine.ui.MessageUtils.INVALID_STOCK_INFO;
-
+import java.util.EnumMap;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.RemainingCoins;
 import vendingmachine.domain.Stock;
 import vendingmachine.domain.Stocks;
@@ -33,5 +33,9 @@ public class VendingMachine {
     public void purchase(Stock existingStock) {
         stocks.purchaseStock(existingStock);
         usersMoney.buy(existingStock.getPrice());
+    }
+
+    public EnumMap<Coin, Integer> returnCoins() {
+        return remainingCoins.giveChange(usersMoney.getMoney());
     }
 }

@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import java.util.EnumMap;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.Stock;
 import vendingmachine.ui.InputView;
 import vendingmachine.ui.OutputView;
@@ -27,6 +29,7 @@ public class MachineController {
         vendingMachine = new VendingMachine(coins, stock, usersMoney);
 
         purchase();
+        printFinalResult();
     }
 
     private RemainingCoins generateCoins() {
@@ -73,6 +76,12 @@ public class MachineController {
                 outputView.printErrorMessage(exception.getMessage());
             }
         }
+    }
+
+    private void printFinalResult() {
+        outputView.printLeftovers(vendingMachine.getUsersMoney());
+        EnumMap<Coin, Integer> remainingCoins = vendingMachine.returnCoins();
+        outputView.printRemainingCoins(remainingCoins);
     }
 
 

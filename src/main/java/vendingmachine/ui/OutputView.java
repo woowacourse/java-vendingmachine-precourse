@@ -55,4 +55,11 @@ public class OutputView {
     public void printUsersStockChoiceOpening() {
         System.out.println(INPUT_USERS_STOCK_CHOICE.msg());
     }
+
+    public void printRemainingCoins(EnumMap<Coin, Integer> change) {
+        System.out.println(MACHINE_COIN_INFO.msg());
+        for (Coin coin : change.keySet()) {
+            System.out.println(coin.amount() + WON + DELIMITER + change.get(coin) + AMT);
+        }
+    }
 }
