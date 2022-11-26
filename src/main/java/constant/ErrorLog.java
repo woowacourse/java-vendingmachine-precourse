@@ -3,6 +3,7 @@ package constant;
 public enum ErrorLog {
     ERROR_MARK("[ERROR]"),
     SPACE(" "),
+    NOT_DIVISIBLE("10원 단위가 아닙니다."),
     NOT_NUMBER_INPUT("입력이 숫자가 아닙니다.");
 
     private final String log;
