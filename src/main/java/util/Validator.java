@@ -19,4 +19,10 @@ public class Validator {
             throw new IllegalArgumentException(ErrorLog.NOT_DIVISIBLE.getLog());
         }
     }
+
+    public static void validateProductForm(String string) {
+        if (!string.matches("^\\[[a-zA-Z0-9가-힣]+,\\d{3,}+,\\d+]$")) {
+            throw new IllegalArgumentException(ErrorLog.NOT_NUMBER_INPUT.getLog());
+        }
+    }
 }
