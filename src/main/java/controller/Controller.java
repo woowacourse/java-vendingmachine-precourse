@@ -1,6 +1,7 @@
 package controller;
 
 import dto.HoldingSumRequestDto;
+import dto.MoneyRequestDto;
 import dto.ProductsRequestDto;
 import service.VendingMachineService;
 import view.InputView;
@@ -26,7 +27,19 @@ public class Controller {
         while (true) {
             try {
                 ProductsRequestDto productsRequestDto = inputView.readProducts();
-                vendingMachineService.saveProductsInfo();
+                vendingMachineService.saveProductsInfo(productsRequestDto);
+                return;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
+
+    public void inputMoney() {
+        while (true) {
+            try {
+                MoneyRequestDto moneyRequestDto = inputView.readMoney();
+                vendingMachineService.
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }

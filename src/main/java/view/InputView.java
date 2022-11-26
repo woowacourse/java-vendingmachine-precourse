@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import camp.nextstep.edu.missionutils.Console;
 import dto.HoldingSumRequestDto;
+import dto.MoneyRequestDto;
 import dto.ProductsRequestDto;
 import util.Validator;
 
@@ -18,9 +19,18 @@ public class InputView {
     }
 
     public ProductsRequestDto readProducts() {
+        System.out.println();
         System.out.println(ViewConstant.ASKING_INPUT_PRODUCT_MESSAGE);
         List<String> products = Arrays.stream(Console.readLine().split(";")).collect(Collectors.toList());
         products.forEach(Validator::validateProductForm);
         return new ProductsRequestDto(products);
+    }
+
+    public MoneyRequestDto readMoney() {
+        System.out.println();
+        System.out.println(ViewConstant.ASKING_INPUT_MONEY);
+        String money = Console.readLine();
+        Validator.validatePositiveInteger(money);
+        return new MoneyRequestDto(Integer.parseInt(money));
     }
 }
