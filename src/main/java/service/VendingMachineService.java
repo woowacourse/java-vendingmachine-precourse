@@ -4,9 +4,11 @@ import java.util.List;
 
 import dto.CoinsResponseDto;
 import dto.HoldingSumRequestDto;
+import dto.MoneyRequestDto;
 import dto.ProductsRequestDto;
 import vendingmachine.CoinChanger;
 import vendingmachine.Coins;
+import vendingmachine.Money;
 import vendingmachine.Products;
 
 public class VendingMachineService {
@@ -20,6 +22,9 @@ public class VendingMachineService {
 
     public void saveProductsInfo(ProductsRequestDto productsRequestDto) {
         Products products = new Products(productsRequestDto.getProducts());
+    }
 
+    public void saveMoney(MoneyRequestDto moneyRequestDto) {
+        Money money = new Money(moneyRequestDto.getMoney());
     }
 }
