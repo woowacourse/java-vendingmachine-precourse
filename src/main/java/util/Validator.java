@@ -1,9 +1,5 @@
 package util;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.stream.Collectors;
-
 import constant.ErrorLog;
 import vendingmachine.Coin;
 
@@ -21,8 +17,8 @@ public class Validator {
     }
 
     public static void validateProductForm(String string) {
-        if (!string.matches("^\\[[a-zA-Z0-9가-힣]+,\\d{1,9}+,\\d{1,9}]$")) {
-            throw new IllegalArgumentException(ErrorLog.NOT_NUMBER_INPUT.getLog());
+        if (!string.matches("^\\[\\S+,\\d{1,9}+,\\d{1,9}]$")) {
+            throw new IllegalArgumentException(ErrorLog.INVALID_FORM.getLog());
         }
     }
 
@@ -35,12 +31,6 @@ public class Validator {
     public static void validateNotZero(int number) {
         if (number == 0) {
             throw new IllegalArgumentException(ErrorLog.ZERO_NUMBER.getLog());
-        }
-    }
-
-    public static void validateNotSpace(String string) {
-        if (string.matches("\\S")) {
-            throw new IllegalArgumentException(ErrorLog.ONLY_SPACE.getLog());
         }
     }
 }

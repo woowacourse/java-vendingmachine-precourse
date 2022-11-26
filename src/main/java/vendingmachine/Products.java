@@ -12,13 +12,13 @@ import constant.ErrorLog;
 import util.Validator;
 
 public class Products {
-    private HashMap<HashMap<String, Integer>, Integer> products = new HashMap<>();
+    private final HashMap<HashMap<String, Integer>, Integer> products = new HashMap<>();
 
     public Products(List<String> productsInfo) {
         List<List<String>> products = new ArrayList<>();
         productsInfo.forEach(
-            product -> products.add(Arrays.stream(product.replaceAll("[\\[,\\]]", "").split(",")).collect(
-                Collectors.toList())));
+            product -> products.add(
+                Arrays.stream(product.substring(1, product.length() - 1).split(",")).collect(Collectors.toList())));
         products.forEach(info -> {
             HashMap<String, Integer> tmp = new HashMap<>();
             int price = Integer.parseInt(info.get(1));

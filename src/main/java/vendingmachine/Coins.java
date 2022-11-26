@@ -1,7 +1,10 @@
 package vendingmachine;
 
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.HashMap;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import dto.CoinsResponseDto;
 
@@ -20,12 +23,16 @@ public class Coins {
 
     public CoinsResponseDto calculateChanges(int money) {
         EnumMap<Coin, Integer> change = new EnumMap<>(Coin.class);
-        coins.forEach((coin, number) -> {
-            int portion = money / coin.getAmount();
+        List<Coin> coins = Arrays.stream(Coin.values())
+            .sorted((coin1, coin2) -> coin2.getAmount() - coin1.getAmount())
+            .collect(Collectors.toList());
+        for (Coin coin : coins) {
+            int portion = Math.min(this.coins.get(coin), money / coin.getAmount());
             if (portion != 0) {
                 change.put(coin, portion);
             }
-        });
+            money -= coin.getAmount() * portion;
+        }
         HashMap<Integer, Integer> coinsToDto = new HashMap<>();
         change.forEach((coin, integer) -> coinsToDto.put(coin.getAmount(), integer));
         return new CoinsResponseDto(coinsToDto);
