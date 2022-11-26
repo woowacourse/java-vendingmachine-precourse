@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import static vendingmachine.Messages.*;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -21,10 +23,10 @@ public class Products {
     public void validateProductsPrice(List<Product> products) {
         for (Product product : products) {
             if (product.getProductPrice() < 100) {
-                throw new IllegalArgumentException("[ERROR] 100원 이하는 입력할 수 없습니다.");
+                throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_MINIMUM);
             }
             if (product.getProductPrice() % 10 != 0) {
-                throw new IllegalArgumentException("[ERROR] 10원 단위로 입력해야 합니다.");
+                throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_UNIT);
             }
         }
     }
@@ -46,7 +48,7 @@ public class Products {
                 return;
             }
         }
-        throw new IllegalArgumentException("[ERROR] 상품 목록에 존재하지 않습니다.");
+        throw new IllegalArgumentException(ERROR_PRODUCT_NAME);
     }
 
     public int getMinPrice(List<Product> productList) {

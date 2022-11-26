@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import static vendingmachine.Coin.initVendingMachineCoins;
+import static vendingmachine.Messages.*;
 
 import java.util.Collections;
 import java.util.List;
@@ -37,7 +38,7 @@ public class VendingMachineController {
             validateCoin(vendingMachineCoin);
             vendingMachineCoins = initVendingMachineCoins(vendingMachineCoin);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("[ERROR] " + e.getMessage());
             initVendingMachine();
         }
     }
@@ -47,7 +48,7 @@ public class VendingMachineController {
         try {
             vendingMachineCoin = inputView.inputVendingMachineCoin();
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("[ERROR] " + e.getMessage());
             inputVendingMachineCoinProcess();
         }
         return vendingMachineCoin;
@@ -56,7 +57,7 @@ public class VendingMachineController {
     //10원 단위 예외 처리
     private void validateCoin(int vendingMachineCoin) {
         if (vendingMachineCoin % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] 10원 단위로 입력해야 합니다.");
+            throw new IllegalArgumentException(ERROR_PRODUCT_PRICE_UNIT);
         }
     }
 
@@ -67,7 +68,7 @@ public class VendingMachineController {
         try {
             products.validateProductsPrice(productList);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("[ERROR] " + e.getMessage());
             inputProductsProcess();
         }
         return productList;
@@ -80,7 +81,7 @@ public class VendingMachineController {
         try {
             products.validateProductName(productName, productList);
         } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
+            System.out.println("[ERROR] " + e.getMessage());
             purchasingProcess(productList, money);
         }
         return products.calculate(productList, money, productName);
