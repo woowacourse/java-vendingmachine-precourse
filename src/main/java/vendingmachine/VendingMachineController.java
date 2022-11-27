@@ -22,18 +22,19 @@ public class VendingMachineController {
 
     public void run() {
         initVendingMachine();
-        outputView.printVendingMachineCoins(vendingMachineCoins);
+        outputView.printVendingMachineCoin();
+        outputView.printCoins(vendingMachineCoins);
         List<Product> productList = inputProductsProcess();
         int money = inputView.inputMoney();
         do {
             money = purchasingProcess(productList, money);
         } while (isContinue(productList, money));
-        outputView.printChargeCoins(getCharge(money), money);
+        outputView.printRemainingCoins(getRemainingCoins(money), money);
     }
 
     //자판기 초기화
     private void initVendingMachine() {
-        int vendingMachineCoin = inputVendingMachineCoinProcess();
+         inputVendingMachineCoinProcess();
         try {
             validateCoin(vendingMachineCoin);
             vendingMachineCoins = initVendingMachineCoins(vendingMachineCoin);
@@ -44,14 +45,13 @@ public class VendingMachineController {
     }
 
     //자판기 입력 과정
-    public int inputVendingMachineCoinProcess() {
+    public void inputVendingMachineCoinProcess() {
         try {
             vendingMachineCoin = inputView.inputVendingMachineCoin();
         } catch (IllegalArgumentException e) {
             System.out.println("[ERROR] " + e.getMessage());
             inputVendingMachineCoinProcess();
         }
-        return vendingMachineCoin;
     }
 
     //10원 단위 예외 처리
@@ -89,19 +89,19 @@ public class VendingMachineController {
 
 
     public boolean isContinue(List<Product> productList, int money) {
-        return money > products.getMinPrice(productList)
+        return money > products.getMinimumPrice(productList)
                 && products.hasCount(productList, productName);
     }
 
-    public Map<Integer, Integer> getCharge(int money) {
-        Map<Integer, Integer> chargeCoins = new TreeMap<>(Collections.reverseOrder());
+    public Map<Integer, Integer> getRemainingCoins(int money) {
+        Map<Integer, Integer> remainingCoins = new TreeMap<>(Collections.reverseOrder());
         for (Integer coin : vendingMachineCoins.keySet()) {
             while (money / coin != 0 && vendingMachineCoins.get(coin) != 0) {
                 vendingMachineCoins.put(coin, vendingMachineCoins.get(coin) - 1);
-                chargeCoins.put(coin, chargeCoins.getOrDefault(coin, 0) + 1);
+                remainingCoins.put(coin, remainingCoins.getOrDefault(coin, 0) + 1);
                 money -= coin;
             }
         }
-        return chargeCoins;
+        return remainingCoins;
     }
 }
