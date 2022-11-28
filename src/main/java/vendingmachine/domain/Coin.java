@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 import static java.util.Arrays.*;
 

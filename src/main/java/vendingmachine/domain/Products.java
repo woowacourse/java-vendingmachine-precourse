@@ -1,10 +1,12 @@
-package vendingmachine;
+package vendingmachine.domain;
 
-import static vendingmachine.Messages.*;
+import static vendingmachine.util.Messages.*;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import vendingmachine.domain.Coin;
+import vendingmachine.domain.Product;
 
 public class Products {
 
