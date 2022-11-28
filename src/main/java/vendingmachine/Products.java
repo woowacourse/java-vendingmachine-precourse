@@ -17,8 +17,8 @@ public class Products {
     public Products(List<String> productsInfo) {
         List<List<String>> products = new ArrayList<>();
         productsInfo.forEach(
-            product -> products.add(
-                Arrays.stream(product.substring(1, product.length() - 1).split(",")).collect(Collectors.toList())));
+            product -> products.add(Validator.validateProductFormSize(
+                Arrays.stream(product.substring(1, product.length() - 1).split(",")).collect(Collectors.toList()))));
         putProductInfo(products);
     }
 

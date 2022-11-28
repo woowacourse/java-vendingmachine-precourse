@@ -1,5 +1,7 @@
 package util;
 
+import java.util.List;
+
 import constant.ErrorLog;
 import vendingmachine.Coin;
 
@@ -8,6 +10,13 @@ public class Validator {
         if (!string.matches("^[0-9]{1,9}$")) {
             throw new IllegalArgumentException(ErrorLog.NOT_NUMBER_INPUT.getLog());
         }
+    }
+
+    public static List<String> validateProductFormSize(List<String> productInfo) {
+        if (productInfo.size() != 3) {
+            throw new IllegalArgumentException(ErrorLog.INVALID_FORM.getLog());
+        }
+        return productInfo;
     }
 
     public static void validateDivisibleByMinimumMonetaryUnit(int money) {
