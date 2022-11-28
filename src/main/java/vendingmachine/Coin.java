@@ -25,6 +25,7 @@ public enum Coin {
         this.count = count;
     }
 
+    //자판기 보유 동전 개수 초기화
     public static Map<Integer, Integer> initVendingMachineCoins(int vendingMachineCoin) {
         Map<Integer, Integer> vendingMachineCoins  = new TreeMap<>(Collections.reverseOrder());
         for (Coin coin : Coin.values()) {
@@ -33,6 +34,7 @@ public enum Coin {
         return getVendingMachineCoins(vendingMachineCoin, vendingMachineCoins);
     }
 
+    //자판기 보유 동전 개수 계산
     public static Map<Integer, Integer> getVendingMachineCoins(int vendingMachineCoin, Map<Integer, Integer> vendingMachineCoins) {
         while (vendingMachineCoin > 0) {
             int amount = Randoms.pickNumberInList(amountList);
@@ -42,5 +44,10 @@ public enum Coin {
             }
         }
         return vendingMachineCoins;
+    }
+
+    //사용자 금액 계산
+    public static int calculateMoney(int money, int coin) {
+        return money - coin;
     }
 }

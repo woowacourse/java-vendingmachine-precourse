@@ -76,7 +76,7 @@ public class VendingMachineController {
 
     //상품 구매 과정
     public int purchasingProcess(List<Product> productList, int money) {
-        outputView.printPurchasingProcess(money);
+        outputView.printUserMoney(money);
         productName = inputView.inputProductName();
         try {
             products.validateProductName(productName, productList);
@@ -87,20 +87,28 @@ public class VendingMachineController {
         return products.calculate(productList, money, productName);
     }
 
-
+    //종료 조건 확인
     public boolean isContinue(List<Product> productList, int money) {
         return money > products.getMinimumPrice(productList)
                 && products.hasCount(productList, productName);
     }
 
+    //잔돈 반환
     public Map<Integer, Integer> getRemainingCoins(int money) {
         Map<Integer, Integer> remainingCoins = new TreeMap<>(Collections.reverseOrder());
         for (Integer coin : vendingMachineCoins.keySet()) {
-            while (money / coin != 0 && vendingMachineCoins.get(coin) != 0) {
-                vendingMachineCoins.put(coin, vendingMachineCoins.get(coin) - 1);
-                remainingCoins.put(coin, remainingCoins.getOrDefault(coin, 0) + 1);
-                money -= coin;
-            }
+            remainingCoins = calculateRemainingCoins(money, coin);
+        }
+        return remainingCoins;
+    }
+
+    //잔돈 계산
+    public Map<Integer, Integer> calculateRemainingCoins(int money, int coin) {
+        Map<Integer, Integer> remainingCoins = new TreeMap<>(Collections.reverseOrder());
+        while (money / coin != 0 && vendingMachineCoins.get(coin) != 0) {
+            vendingMachineCoins.put(coin, vendingMachineCoins.get(coin) - 1);
+            remainingCoins.put(coin, remainingCoins.getOrDefault(coin, 0) + 1);
+            money = Coin.calculateMoney(money, coin);
         }
         return remainingCoins;
     }
