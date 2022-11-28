@@ -57,9 +57,9 @@ public class Controller {
     }
 
     private void buyProduct() {
-        do {
+        while (!vendingMachineService.isEnd()) {
             inputProductName();
-        } while (!vendingMachineService.isEnd());
+        }
         outputView.printEnd(vendingMachineService.conveyCurrentMoney(), vendingMachineService.calculateChange());
     }
 

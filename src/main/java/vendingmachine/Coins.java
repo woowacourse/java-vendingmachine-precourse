@@ -31,7 +31,7 @@ public class Coins {
             }
             money -= coin.getAmount() * portion;
         }
-       return changeToDto(change);
+        return changeToDto(change);
     }
 
     private CoinsResponseDto changeToDto(EnumMap<Coin, Integer> change) {

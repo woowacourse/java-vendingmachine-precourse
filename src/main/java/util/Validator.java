@@ -26,7 +26,7 @@ public class Validator {
     }
 
     public static void validateProductForm(String string) {
-        if (!string.matches("^\\[\\S+,\\d{1,9}+,\\d{1,9}]$")) {
+        if (!string.matches("^\\[\\S+,\\d{1,9}+,\\d{1,9}\\]$")) {
             throw new IllegalArgumentException(ErrorLog.INVALID_FORM.getLog());
         }
     }
