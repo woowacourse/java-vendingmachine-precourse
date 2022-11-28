@@ -1,9 +1,6 @@
 package dto;
 
-import java.util.EnumMap;
 import java.util.HashMap;
-
-import vendingmachine.Coin;
 
 public class CoinsResponseDto {
     private final HashMap<Integer, Integer> coins;

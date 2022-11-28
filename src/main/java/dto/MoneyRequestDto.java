@@ -1,7 +1,7 @@
 package dto;
 
 public class MoneyRequestDto {
-    private int money;
+    private final int money;
 
     public MoneyRequestDto(int money) {
         this.money = money;

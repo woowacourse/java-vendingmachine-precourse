@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 import dto.CoinsResponseDto;
 
 public class Coins {
-    private EnumMap<Coin, Integer> coins;
+    private final EnumMap<Coin, Integer> coins;
 
     public Coins(EnumMap<Coin, Integer> coins) {
         this.coins = coins;
@@ -31,7 +31,7 @@ public class Coins {
             if (portion != 0) {
                 change.put(coin, portion);
             }
-            money -= coin.getAmount() * portion;
+            money %= coin.getAmount();
         }
         HashMap<Integer, Integer> coinsToDto = new HashMap<>();
         change.forEach((coin, integer) -> coinsToDto.put(coin.getAmount(), integer));

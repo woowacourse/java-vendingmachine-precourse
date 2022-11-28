@@ -1,7 +1,5 @@
 package service;
 
-import java.util.List;
-
 import dto.CoinsResponseDto;
 import dto.HoldingSumRequestDto;
 import dto.MoneyRequestDto;
@@ -17,6 +15,7 @@ public class VendingMachineService {
     private Money money;
     private Products products;
     private Coins coins;
+
     public CoinsResponseDto changeHoldingSumToCoins(HoldingSumRequestDto holdingSumRequestDto) {
         int holdingSum = holdingSumRequestDto.getHoldingSum();
         CoinChanger coinChanger = new CoinChanger(holdingSum);

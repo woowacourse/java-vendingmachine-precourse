@@ -4,7 +4,7 @@ import dto.MoneyResponseDto;
 import util.Validator;
 
 public class Money {
-    private int money = 0;
+    private int money;
 
     public Money(int money) {
         Validator.validateDivisibleByMinimumMonetaryUnit(money);

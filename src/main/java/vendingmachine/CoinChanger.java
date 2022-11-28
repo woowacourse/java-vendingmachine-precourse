@@ -25,10 +25,7 @@ public class CoinChanger {
                 Arrays.stream(Coin.values()).mapToInt(Coin::getAmount).boxed().collect(Collectors.toList()));
             if (holdingSum >= amount) {
                 holdingSum -= amount;
-                coins.forEach(((coin, integer) -> {
-                    if (coin.getAmount() == amount)
-                        coins.put(coin, integer + 1);
-                }));
+                coins.forEach(((coin, integer) -> {if (coin.getAmount() == amount) coins.put(coin, integer + 1);}));
             }
         } while (holdingSum != 0);
 

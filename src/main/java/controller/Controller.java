@@ -19,6 +19,7 @@ public class Controller {
         inputMoney();
         buyProduct();
     }
+
     private void initHoldingSum() {
         while (true) {
             try {
