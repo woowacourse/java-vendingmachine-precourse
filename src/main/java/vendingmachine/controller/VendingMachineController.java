@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.controller;
 
 import static vendingmachine.Coin.initVendingMachineCoins;
 import static vendingmachine.Messages.*;
@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import vendingmachine.Coin;
+import vendingmachine.Product;
+import vendingmachine.Products;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
