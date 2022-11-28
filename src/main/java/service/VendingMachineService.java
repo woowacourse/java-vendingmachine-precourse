@@ -18,8 +18,7 @@ public class VendingMachineService {
 
     public CoinsResponseDto changeHoldingSumToCoins(HoldingSumRequestDto holdingSumRequestDto) {
         int holdingSum = holdingSumRequestDto.getHoldingSum();
-        CoinChanger coinChanger = new CoinChanger(holdingSum);
-        coins = new Coins(coinChanger.changeToCoin());
+        coins = new Coins(new CoinChanger(holdingSum).changeToCoin());
         return coins.toCoinsResponseDto();
     }
 
@@ -37,7 +36,7 @@ public class VendingMachineService {
 
     public void purchaseProduct(ProductNameRequestDto productNameRequestDto) {
         String productName = productNameRequestDto.getProductName();
-        money.subtract(products.purchase(productName));
+        money.subtract(products.purchase(productName, money.getMoney()));
     }
 
     public boolean isEnd() {

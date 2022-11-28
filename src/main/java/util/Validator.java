@@ -24,7 +24,7 @@ public class Validator {
 
     public static void validateEnoughMoney(int money) {
         if (money < 100) {
-            throw new IllegalArgumentException(ErrorLog.NOT_ENOUGH_MONEY.getLog());
+            throw new IllegalArgumentException(ErrorLog.TOO_LOW_PRICE.getLog());
         }
     }
 
