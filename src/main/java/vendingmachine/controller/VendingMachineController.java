@@ -17,6 +17,19 @@ public class VendingMachineController {
     private static Map<String, Product> products = new HashMap<>();
     private static int amountOfInput;
 
+    public static void run() {
+        Balance balance = new Balance(InputView.readBalance());
+        OutputView.printBalanceCoin(balance.createCoin());
+        saveProducts();
+        amountOfInput = InputView.readAmountOfInput();
+        OutputView.printAmountOfInput(amountOfInput);
+        while (canBuy()) {
+            buy();
+            OutputView.printAmountOfInput(amountOfInput);
+        }
+        OutputView.printChange(balance.calculateChangeCoin(amountOfInput));
+    }
+
     private static boolean canBuy() {
         List<Integer> leftProductsPrice = new ArrayList<Integer>();
         for (Map.Entry<String, Product> entry : products.entrySet()) {
