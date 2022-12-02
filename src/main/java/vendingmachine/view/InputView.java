@@ -39,6 +39,11 @@ public class InputView {
         return amountOfInput;
     }
 
+    public static String readBuyingProduct() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return Console.readLine();
+    }
+
     private static int validateNum() throws IllegalArgumentException {
         try {
             return Integer.parseInt(Console.readLine());
