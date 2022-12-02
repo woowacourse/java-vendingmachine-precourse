@@ -33,5 +33,17 @@ public class Balance {
         }
         return coins;
     }
-    
+    public Map<Coin, Integer> calculateChangeCoin(int change) {
+        if (change > balance) {
+            return coins;
+        }
+        for (Coin coin : Coin.values()) {
+            int numberOfBalanceCoin = coins.get(coin);
+            int neededCoins = change / coin.get();
+            inputCoins = Math.min(neededCoins, numberOfBalanceCoin);
+            changeCoins.put(coin, inputCoins);
+            change -= coin.get() * inputCoins;
+        }
+        return changeCoins;
+    }
 }
