@@ -13,5 +13,16 @@ public class OutputView {
             System.out.println(entry.getKey().get() + "원 - " + entry.getValue() + "개");
         }
     }
-    
+    public static void printAmountOfInput(int amountOfInput) {
+        System.out.println("\n투입 금액: " + amountOfInput + "원");
+    }
+
+    public static void printChange(Map<Coin, Integer> balanceCoins) {
+        System.out.println("잔돈");
+        for (Map.Entry<Coin, Integer> entry : balanceCoins.entrySet()) {
+            if (entry.getValue() != 0) {
+                System.out.println(entry.getKey().get() + "원 - " + entry.getValue() + "개");
+            }
+        }
+    }
 }
