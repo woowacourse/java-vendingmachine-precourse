@@ -16,7 +16,18 @@ public class VendingMachineController {
 
     private static Map<String, Product> products = new HashMap<>();
     private static int amountOfInput;
-    
+
+    private static void buy() {
+        try {
+            String buyingProduct = InputView.readBuyingProduct();
+            Validator.validateBuyingProduct(buyingProduct, products, amountOfInput);
+            amountOfInput -= products.get(buyingProduct).price.get();
+            products.get(buyingProduct).amount--;
+        } catch (IllegalArgumentException e) {
+            System.out.println("[ERROR] " + e.getMessage());
+            buy();
+        }
+    }
 
     public static void saveProducts() {
         try {
