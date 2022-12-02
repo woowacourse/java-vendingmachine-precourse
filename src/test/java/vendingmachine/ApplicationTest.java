@@ -1,7 +1,11 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -24,11 +28,13 @@ class ApplicationTest extends NsTest {
         );
     }
 
-    @Test
-    void 예외_테스트() {
+    @ParameterizedTest
+    @ValueSource(strings={"-1","25","s"})
+    @DisplayName("보유 금액 예외 테스트")
+    void 예외_테스트(String balance) {
         assertSimpleTest(
             () -> {
-                runException("-1");
+                runException(balance);
                 assertThat(output()).contains(ERROR_MESSAGE);
             }
         );
