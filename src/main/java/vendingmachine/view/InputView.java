@@ -6,7 +6,7 @@ public class InputView {
 
     public static int readBalance() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        int balance = 0;
+        int balance;
         try {
             balance = validateNum();
             if (balance % 10 != 0) {
@@ -17,6 +17,11 @@ public class InputView {
             balance = readBalance();
         }
         return balance;
+    }
+
+    public static String readProductInfo() {
+        System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
+        return Console.readLine();
     }
 
 
