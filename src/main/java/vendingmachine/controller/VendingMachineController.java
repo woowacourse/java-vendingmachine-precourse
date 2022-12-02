@@ -17,6 +17,20 @@ public class VendingMachineController {
     private static Map<String, Product> products = new HashMap<>();
     private static int amountOfInput;
 
+    private static boolean canBuy() {
+        List<Integer> leftProductsPrice = new ArrayList<Integer>();
+        for (Map.Entry<String, Product> entry : products.entrySet()) {
+            if (entry.getValue().amount != 0) {
+                leftProductsPrice.add(entry.getValue().price.get());
+            }
+        }
+        Collections.sort(leftProductsPrice);
+        if (leftProductsPrice.isEmpty()) {
+            return false;
+        }
+        return amountOfInput >= leftProductsPrice.get(0);
+    }
+
     private static void buy() {
         try {
             String buyingProduct = InputView.readBuyingProduct();
