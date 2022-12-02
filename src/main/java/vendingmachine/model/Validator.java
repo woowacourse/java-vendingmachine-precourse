@@ -14,5 +14,15 @@ public class Validator {
             throw new IllegalArgumentException("같은 이름의 상품은 입력할 수 없습니다.");
         }
     }
-    
+    public static void validateBuyingProduct(String buyingProduct, Map<String, Product> products, int amountOfInput) throws IllegalArgumentException {
+        if (!products.containsKey(buyingProduct)) {
+            throw new IllegalArgumentException("판매하지 않는 상품입니다.");
+        }
+        if (products.get(buyingProduct).price.get() > amountOfInput) {
+            throw new IllegalArgumentException("잔액이 부족합니다.");
+        }
+        if (products.get(buyingProduct).amount <= 0) {
+            throw new IllegalArgumentException("상품이 품절되었습니다.");
+        }
+    }
 }
