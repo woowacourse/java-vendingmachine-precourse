@@ -29,7 +29,8 @@ public class Print {
     public void showAllCoins(Change change) {
         HashMap<Integer, Integer> coinMap = change.getCoins();
         List<Integer> coinUnits = new ArrayList<>(coinMap.keySet());
-        System.out.println(RESULT.getMessage());
+
+        System.out.println(COUNTS_OF_CHANGES.getMessage());
 
         for (int unit : coinUnits) {
             int count = coinMap.get(unit);
