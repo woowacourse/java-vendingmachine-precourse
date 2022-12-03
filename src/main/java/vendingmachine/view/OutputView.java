@@ -13,6 +13,7 @@ public class OutputView {
     }
     public void askInputPricePrint(){
         printMessage("투입 금액을 입력해 주세요.");
+
     }
     public void askBuyProductPrint(int hasPrice){
         StringBuilder print = new StringBuilder("투입 금액: "+hasPrice+"원\n");
