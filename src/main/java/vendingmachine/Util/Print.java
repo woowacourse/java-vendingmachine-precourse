@@ -38,13 +38,12 @@ public class Print {
         }
     }
 
-    public void showHoldingCoins(Change change) {
-        HashMap<Integer, Integer> coinMap = change.getCoins();
-        List<Integer> coinUnits = new ArrayList<>(coinMap.keySet());
+    public void showHoldingCoins(HashMap<Integer, Integer> changes) {
+        List<Integer> coinUnits = new ArrayList<>(changes.keySet());
         System.out.println(RESULT.getMessage());
 
         for (int unit : coinUnits) {
-            int count = coinMap.get(unit);
+            int count = changes.get(unit);
             if (count > 0) {
                 System.out.printf(COUNT_OF_COIN.getMessage(), unit, count);
             }
