@@ -14,34 +14,55 @@ public class View extends Print {
     public Change getInitChanges() {
         inputChanges();
         String inputChangeCost = Console.readLine();
-        // validation
 
-        // cast To number
-        int changeMoney = Integer.parseInt(inputChangeCost);
-        // show result Of create Random
-        return cast.toChangeCoins(changeMoney);
+        int changeMoney;
+        try {
+            changeMoney = validate.inputValueToNumber(inputChangeCost);
+            return cast.toChangeCoins(changeMoney);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getInitChanges();
+        }
     }
 
     public List<Product> getInitProducts() {
         inputProductInfo();
-        String input = Console.readLine();
-        // validation
-        return cast.toProducts(input);
+        String order = Console.readLine();
+
+        try {
+            validate.productOrder(order);
+            return cast.toProducts(order);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getInitProducts();
+        }
+
     }
 
     public int getPurchaseMoney() {
         inputPurchaseMoney();
-        String input = Console.readLine();
-        // validation
-        // cast To number
-        return Integer.parseInt(input);
+        String inputMoney = Console.readLine();
+
+        try {
+            return validate.inputValueToNumber(inputMoney);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getPurchaseMoney();
+        }
     }
 
     public String getProductNameToBuy(List<Product> product) {
         inputProductToBuy();
-        String input = Console.readLine();
-        // validate
-        return input;
+        String name = Console.readLine();
+
+        try {
+            validate.productNameExist(name, product);
+            return name;
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return getProductNameToBuy(product);
+        }
+
     }
 
 }
