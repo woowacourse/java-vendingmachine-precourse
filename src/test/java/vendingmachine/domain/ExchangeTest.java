@@ -11,7 +11,7 @@ class ExchangeTest {
 
     private final String EXCEPTION_MESSAGE_PREFIX = "[ERROR]";
 
-    @DisplayName("Cash의 생성자 인자값은 10으로 나누어 떨어져야한다.")
+    @DisplayName("Exchange의 생성자 인자값은 10으로 나누어 떨어져야한다.")
     @Nested
     class checkExchangeAmount {
         @ParameterizedTest(name = "amount가 {0} 이면 예외발생.")
@@ -27,7 +27,7 @@ class ExchangeTest {
     }
 
     @Test
-    @DisplayName("Cash의 생성 금액은 getTotalPrice와 같다.")
+    @DisplayName("Exchange의 생성 금액은 getTotalPrice와 같다.")
     void cash_ConstructorParameter_Equals_GetTotalPriceMethod() {
         Exchange cash = new Exchange(2000);
         Assertions.assertEquals(2000, cash.getTotalPrice());
