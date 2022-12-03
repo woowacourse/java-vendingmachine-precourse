@@ -11,4 +11,15 @@ public class Product {
         this.amount = amount;
     }
 
+    public int buyProduct(String name){
+        if(this.name.equals(name)){
+            amount--;
+            return price;
+        }
+        return -1;
+    }
+    public boolean isExistProduct(){
+        if(amount == 0)return false;
+        return true;
+    }
 }
