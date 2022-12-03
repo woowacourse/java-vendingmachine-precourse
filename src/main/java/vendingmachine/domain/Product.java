@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.utils.ErrorMessage.*;
+import static vendingmachine.utils.MachineConst.MIN_PRODUCT_AMOUNT;
 
 public class Product {
     private final String name;
@@ -32,23 +33,23 @@ public class Product {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_NOT_DIVIDE_10.getMessage());
         }
 
-        if (isLessThen100(amount)) {
+        if (isLessThan100(amount)) {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_LESS_THAN_100.getMessage());
         }
     }
 
     private void validateTotal(int total) {
-        if (isLessThen0(total)) {
+        if (isLessThan0(total)) {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_LESS_THAN_0.getMessage());
         }
     }
 
-    private boolean isLessThen0(int number) {
+    private boolean isLessThan0(int number) {
         return number < 0;
     }
 
-    private boolean isLessThen100(int number) {
-        return number < 100;
+    private boolean isLessThan100(int number) {
+        return number < MIN_PRODUCT_AMOUNT.getValue();
     }
 
     private boolean isNotDivide10(int number) {
@@ -56,7 +57,7 @@ public class Product {
     }
 
     public void consume() {
-        if (isLessThen0(total)) {
+        if (isLessThan0(total)) {
             throw new IllegalArgumentException(NOT_EXIST_PRODUCT.getMessage());
         }
         this.total--;

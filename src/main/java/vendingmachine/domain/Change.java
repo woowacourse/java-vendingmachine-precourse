@@ -13,12 +13,10 @@ import static vendingmachine.Coin.*;
 public class Change {
 
     private final List<Integer> coins = getCoins();
-    private final Map<Coin, Integer> cash = new HashMap<>();
+    private final Map<Coin, Integer> cash;
 
     Change(int amount) {
-        for (Coin each : values()) {
-            cash.put(each, 0);
-        }
+        this.cash = getInitCash();
         validateAmount(amount);
         createCoins(amount);
     }
@@ -63,12 +61,12 @@ public class Change {
             throw new IllegalArgumentException("[ERROR]");
         }
 
-        if (isLessThen100(amount)) {
+        if (isLessThan100(amount)) {
             throw new IllegalArgumentException("[ERROR]");
         }
     }
 
-    private boolean isLessThen100(int number) {
+    private boolean isLessThan100(int number) {
         return number < 100;
     }
 
