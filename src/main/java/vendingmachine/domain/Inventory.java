@@ -11,11 +11,7 @@ public class Inventory {
     public void add(Product product) {
         this.products.add(product);
     }
-
-    public void clear() {
-        this.products.clear();
-    }
-
+    
     public Product get(String name) {
         return products.stream()
                 .filter(o -> o.getName().equals(name))
