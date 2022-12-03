@@ -11,7 +11,9 @@ import java.util.Map;
 import static vendingmachine.Coin.*;
 
 public class Change {
-
+    private static final int FROM_100 = 1;
+    private static final int FROM_50 = 2;
+    private static final int FROM_10 = 3;
     private final List<Integer> coins = getCoins();
     private final Map<Coin, Integer> cash;
 
@@ -37,12 +39,13 @@ public class Change {
             return Randoms.pickNumberInList(coins);
         }
         if (number > COIN_100.getAmount()) {
-            return Randoms.pickNumberInList(new ArrayList<>(coins.subList(1, 4)));
+            return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_100, coins.size())));
         }
         if (number > COIN_50.getAmount()) {
-            return Randoms.pickNumberInList(new ArrayList<>(coins.subList(2, 4)));
+            return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_50, coins.size())));
         }
-        return Randoms.pickNumberInList(new ArrayList<>(coins.subList(3, 4)));
+
+        return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_10, coins.size())));
     }
 
     public int getTotalPrice() {
