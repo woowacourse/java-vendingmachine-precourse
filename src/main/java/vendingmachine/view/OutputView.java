@@ -1,5 +1,9 @@
 package vendingmachine.view;
 
+import vendingmachine.enums.Coin;
+
+import java.util.List;
+
 public class OutputView {
     public void askPricePrint(){
        printMessage("자판기가 보유하고 있는 금액을 입력해 주세요.");
@@ -14,6 +18,10 @@ public class OutputView {
         StringBuilder print = new StringBuilder("투입 금액: "+hasPrice+"원\n");
         print.append("구매할 상품명을 입력해 주세요.\n");
         printMessage(print.toString());
+    }
+    public void printChange(int hasPrice, List<Coin> hasChange){
+
+
     }
     public void printMessage(String input){
         System.out.println(input);

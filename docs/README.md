@@ -7,7 +7,7 @@
 - [x] 투임 금액 묻는 print
 - [x] 구매할 상품 묻는 print
 - [ ] 마지막 잔돈 print
-- [ ] 자판기 보유 금액 input
+- [x] 자판기 보유 금액 input
 - [ ] 상품명, 가격, 수량 input
 - [ ] 투입 금액 input
 
