@@ -14,10 +14,7 @@ public class VendingMachineMoneyGenrator {
         while (true) {
             int num = Randoms.pickNumberInList(vendingMoneyList);
             if (vendingMoney <= 0) break;
-            if (vendingMoney - num < 0) {
-                num = Randoms.pickNumberInList(vendingMoneyList);
-                continue;
-            }
+            if (vendingMoney - num < 0) continue;
             vendingMoney -= num;
             Coin.getCoin(num).addCoin();
         }
