@@ -27,4 +27,10 @@ public class InputView {
         return userMoney;
     }
 
+    public String inputPurchaseGoods(){
+        System.out.println(GameMessage.INPUT_PURCHASE_GOODS);
+        String goods = Console.readLine();
+        return goods;
+    }
+
 }
