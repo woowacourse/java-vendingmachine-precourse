@@ -10,5 +10,10 @@ public class InputView {
         System.out.print("자판기가 보유하고 있는 금액을 입력하세요" + "\n");
         return Console.readLine();
     }
+
+    public int readbuyingAmount(){
+        System.out.print("투입 금액을 입력해주세요" +"\n");
+        return Integer.parseInt(Console.readLine());
+    }
 }
 
