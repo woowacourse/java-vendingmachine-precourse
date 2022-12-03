@@ -47,19 +47,11 @@ public class Change {
 
         return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_10, coins.size())));
     }
-    
+
     private void validateAmount(int amount) {
         if (isNotDivide10(amount)) {
             throw new IllegalArgumentException("[ERROR]");
         }
-
-        if (isLessThan100(amount)) {
-            throw new IllegalArgumentException("[ERROR]");
-        }
-    }
-
-    private boolean isLessThan100(int number) {
-        return number < 100;
     }
 
     private boolean isNotDivide10(int number) {
