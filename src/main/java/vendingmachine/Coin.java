@@ -1,5 +1,12 @@
 package vendingmachine;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -13,4 +20,5 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+
 }
