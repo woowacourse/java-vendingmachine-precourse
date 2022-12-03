@@ -47,18 +47,7 @@ public class Change {
 
         return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_10, coins.size())));
     }
-
-    public int getTotalPrice() {
-        int totalPrice = 0;
-        for (Map.Entry<Coin, Integer> entry : cash.entrySet()) {
-            Coin key = entry.getKey();
-            Integer count = entry.getValue();
-            totalPrice += key.getAmount() * count;
-        }
-
-        return totalPrice;
-    }
-
+    
     private void validateAmount(int amount) {
         if (isNotDivide10(amount)) {
             throw new IllegalArgumentException("[ERROR]");

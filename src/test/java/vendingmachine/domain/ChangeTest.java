@@ -3,7 +3,6 @@ package vendingmachine.domain;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -24,12 +23,5 @@ class ChangeTest {
             String message = exception.getMessage();
             Assertions.assertTrue(message.contains(EXCEPTION_MESSAGE_PREFIX));
         }
-    }
-
-    @Test
-    @DisplayName("Change의 생성 금액은 getTotalPrice와 같다.")
-    void cash_ConstructorParameter_Equals_GetTotalPriceMethod() {
-        Change cash = new Change(2000);
-        Assertions.assertEquals(2000, cash.getTotalPrice());
     }
 }

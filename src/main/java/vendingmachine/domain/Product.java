@@ -45,7 +45,7 @@ public class Product {
     }
 
     private boolean isLessThan0(int number) {
-        return number < 0;
+        return number <= 0;
     }
 
     private boolean isLessThan100(int number) {
