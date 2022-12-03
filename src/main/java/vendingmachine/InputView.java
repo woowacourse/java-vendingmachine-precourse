@@ -7,6 +7,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class InputView {
+
+    public String read(){
+        return Console.readLine();
+    }
     public String readCoins() {
         System.out.print("자판기가 보유하고 있는 금액을 입력하세요" + "\n");
         return Console.readLine();
@@ -22,11 +26,10 @@ public class InputView {
         return Integer.parseInt(Console.readLine());
     }
 
-    public List<String> readproduct_list() {
+    public List<String> readproduct_list(String input) {
         System.out.print("상품명과 가격, 수량을 입력해주세요" + "\n");
         List<String> list = new ArrayList<>();
-        String something = Console.readLine();
-        String[] buying = something.split(";");
+        String[] buying = input.split(";");
         Collections.addAll(list, buying);
         return list;
     }
