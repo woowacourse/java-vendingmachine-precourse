@@ -9,17 +9,17 @@ public class Machine {
     private final View view = new View();
 
     private final Change change;
-    private final List<Product> products;
+    private List<Product> products;
 
 
     public Machine() {
         change = view.getInitChanges();
-        products = view.getInitProducts();
-
         view.showAllCoins(change);
     }
 
     public void buyProducts() {
+        products = view.getInitProducts();
+
         int money = view.getPurchaseMoney();
 
         while (isPurchasable(money)) {
