@@ -8,12 +8,12 @@ public class Machine {
 
     private final View view = new View();
 
-    private Change change;
-    private List<Product> products;
+    private final Change change;
+    private final List<Product> products;
 
 
     public Machine() {
-        change = new Change(view.getInitChanges());
+        change = view.getInitChanges();
         products = view.getInitProducts();
 
         view.showAllCoins(change);
@@ -39,9 +39,7 @@ public class Machine {
             minimumCost = Math.min(product.getPrice(), minimumCost);
         }
 
-        if (money > minimumCost) return true;
-
-        return false;
+        return money > minimumCost;
     }
 
     private int productSold(String productName) {

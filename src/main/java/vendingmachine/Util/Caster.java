@@ -1,11 +1,52 @@
 package vendingmachine.Util;
 
+import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.Domain.Change;
 import vendingmachine.Domain.Product;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import static vendingmachine.Constant.Coin.*;
+
 public class Caster {
+
+    public Change toChangeCoins(int money) {
+        HashMap<Integer, Integer> coins = new HashMap<>();
+
+        coins.put(COIN_10.getAmount(), 0);
+        coins.put(COIN_50.getAmount(), 0);
+        coins.put(COIN_100.getAmount(), 0);
+        coins.put(COIN_500.getAmount(), 0);
+
+        return createRandomCoins(coins, money);
+    }
+
+    private Change createRandomCoins(HashMap<Integer, Integer> coins, int money) {
+        List<Integer> coinKeys = new ArrayList<>(coins.keySet());
+        int randomCost = Randoms.pickNumberInList(coinKeys);
+        int sum = getCoinsCostSum(coins);
+
+        while (sum != money) {
+            if (sum + randomCost <= money) {
+                coins.put(randomCost, coins.get(randomCost) + 1);
+                sum = getCoinsCostSum(coins);
+            }
+            randomCost = Randoms.pickNumberInList(coinKeys);
+        }
+
+        return new Change(coins);
+    }
+
+    private int getCoinsCostSum(HashMap<Integer, Integer> coins) {
+        List<Integer> coinKeys = new ArrayList<>(coins.keySet());
+        int sum = 0;
+
+        for (int key : coinKeys) sum += coins.get(key) * key;
+
+        return sum;
+    }
 
     public List<Product> toProducts(String userInput) {
         List<Product> products = new ArrayList<>();
