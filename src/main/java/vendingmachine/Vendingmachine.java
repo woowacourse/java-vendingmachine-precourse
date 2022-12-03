@@ -11,12 +11,12 @@ public class Vendingmachine {
     private List<String> products_list;
     private int Amount = 0;
     InputView inputview = new InputView();
+    OutputView outputview=new OutputView();
     List<Integer> own_coins;
 
     public Vendingmachine() {
         //own_coins= Collections.emptyList();
         // vending_products= inputview.readproduct_list(inputview.read());
-
     }
 
     public List<Products> set_vending_products(List<String> products_format) {
@@ -44,10 +44,10 @@ public class Vendingmachine {
 
     public void totalConins() {
         System.out.print("자판기가 보유한 동전" + "\n");
-        System.out.print(Coin.COIN_500.getAmount() + "원" + " - " + own_coins.get(0) + "개" + "\n");
-        System.out.print(Coin.COIN_100.getAmount() + "원" + " - " + own_coins.get(1) + "개" + "\n");
-        System.out.print(Coin.COIN_50.getAmount() + "원" + " - " + own_coins.get(2) + "개" + "\n");
-        System.out.print(Coin.COIN_10.getAmount() + "원" + " - " + own_coins.get(3) + "개" + "\n");
+
+    }
+    public void setAmount(int Amount){
+        this.Amount=Amount;
     }
 
 
