@@ -48,13 +48,15 @@ public class Change {
         StringBuilder print = new StringBuilder();
         for(int index = 0; index < coins.length; index++){
             if(coins[index]!=0){
-                if(index == 0)print.append("500원 - "+coins[index]+"개\n");
-                if(index == 1)print.append("100원 - "+coins[index]+"개\n");
-                if(index == 2)print.append("50원 - "+coins[index]+"개\n");
-                if(index == 3)print.append("10원 - "+coins[index]+"개\n");
-
+                appendPrint(print, index);
             }
         }
         return print.toString();
+    }
+    public void appendPrint(StringBuilder print, int index){
+        if(index == 0)print.append("500원 - "+coins[index]+"개\n");
+        if(index == 1)print.append("100원 - "+coins[index]+"개\n");
+        if(index == 2)print.append("50원 - "+coins[index]+"개\n");
+        if(index == 3)print.append("10원 - "+coins[index]+"개\n");
     }
 }
