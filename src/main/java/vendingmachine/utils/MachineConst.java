@@ -1,7 +1,7 @@
 package vendingmachine.utils;
 
 public enum MachineConst {
-    MIN_CASH(0),
+    MIN_CASH(10),
     MAX_CASH(100000000);
 
     private final int value;
