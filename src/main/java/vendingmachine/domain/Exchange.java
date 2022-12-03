@@ -1,14 +1,14 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.utils.Coin;
+import vendingmachine.Coin;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static vendingmachine.utils.Coin.*;
+import static vendingmachine.Coin.*;
 
 public class Exchange {
 
@@ -77,12 +77,21 @@ public class Exchange {
     }
 
     public Map<Coin, Integer> getExchange(int amount) {
-        int result = 0;
+        Map<Coin, Integer> result = new HashMap<Coin, Integer>() {{
+            for (Coin coin : Coin.values()) {
+                put(coin, 0);
+            }
+        }};
+
         for (Map.Entry<Coin, Integer> entry : cash.entrySet()) {
             Coin key = entry.getKey();
-            Integer count = entry.getValue();
-            result += key.getAmount() * count;
+            while (((amount / key.getAmount()) != 0) && (cash.get(key) > 0)) {
+                amount -= key.getAmount();
+                result.put(key, result.get(key) + 1);
+                cash.put(key, cash.get(key) - 1);
+            }
         }
-        
+
+        return result;
     }
 }
