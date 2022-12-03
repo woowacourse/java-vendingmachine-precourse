@@ -20,4 +20,11 @@ public class InputView {
         return goods;
     }
 
+    public String inputUserMoney(){
+        System.out.println(GameMessage.INPUT_USER_MONEY);
+        String userMoney = Console.readLine();
+        vendingMachineException.validMoneyInputForm(userMoney);
+        return userMoney;
+    }
+
 }
