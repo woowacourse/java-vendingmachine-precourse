@@ -22,6 +22,14 @@ public class Validation {
             throw new IllegalArgumentException(INPUT_ALLOWED_ONLY_NUMBER.toMessage());
         }
 
+        if(toNumber <= 0){
+            throw new IllegalArgumentException(NOT_ALLOWED_MINUS_NUMBER.toMessage());
+        }
+
+        if(toNumber % 10 != 0){
+            throw new IllegalArgumentException(NOT_ALLOWED_SINGLE_DIGIT.toMessage());
+        }
+
         return toNumber;
     }
 
