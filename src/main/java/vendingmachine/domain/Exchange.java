@@ -77,13 +77,15 @@ public class Exchange {
     }
 
     public Map<Coin, Integer> getExchange(int amount) {
+        Map<Coin, Integer> copyCash = new HashMap<>(cash);
+
         Map<Coin, Integer> result = new HashMap<Coin, Integer>() {{
             for (Coin coin : Coin.values()) {
                 put(coin, 0);
             }
         }};
 
-        for (Map.Entry<Coin, Integer> entry : cash.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : copyCash.entrySet()) {
             Coin key = entry.getKey();
             while (((amount / key.getAmount()) != 0) && (cash.get(key) > 0)) {
                 amount -= key.getAmount();
@@ -93,5 +95,9 @@ public class Exchange {
         }
 
         return result;
+    }
+
+    public Map<Coin, Integer> getCash() {
+        return new HashMap<>(this.cash);
     }
 }
