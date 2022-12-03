@@ -1,6 +1,7 @@
 package vendingmachine.Util;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.Domain.Change;
 import vendingmachine.Domain.Product;
 
 import java.util.List;
@@ -10,14 +11,15 @@ public class View extends Print {
     Validation validate = new Validation();
     Caster cast = new Caster();
 
-    public int getInitChanges() {
+    public Change getInitChanges() {
         inputChanges();
-        String input = Console.readLine();
+        String inputChangeCost = Console.readLine();
         // validation
-        // show result Of create Random
-        // cast To number
 
-        return 0;
+        // cast To number
+        int changeMoney = Integer.parseInt(inputChangeCost);
+        // show result Of create Random
+        return cast.toChangeCoins(changeMoney);
     }
 
     public List<Product> getInitProducts() {
