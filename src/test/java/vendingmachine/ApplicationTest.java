@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.test.NsTest;
 //import jdk.internal.util.xml.impl.Input;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -65,5 +66,17 @@ class ApplicationTest extends NsTest {
         //then
        // System.out.print(vendingmachine.set_vending_products(testFormat).get(0).getprice());
         assertThat(vendingmachine.set_vending_products(testFormat).get(0).getprice()).isEqualTo(resultFormat.get(0).getprice());
+    }
+    @Test
+    void set_coins테스트(){
+        //when
+        Vendingmachine vendingmachine=new Vendingmachine();
+
+        //given
+
+        List<Integer> testFormat=Arrays.asList(0,4,1,0);
+
+        //then
+        assertThat(vendingmachine.setCoins(450).toString()).isEqualTo(testFormat.toString());
     }
 }

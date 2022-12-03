@@ -9,7 +9,7 @@ import java.util.List;
 public class Vendingmachine {
     // public static String status = "operating";
     private List<String> products_list;
-    private int Input_Amount = 0;
+    private int Amount = 0;
     InputView inputview = new InputView();
     List<Integer> own_coins;
 
@@ -30,16 +30,16 @@ public class Vendingmachine {
         return products;
     }
 
-    public void setCoins(int Amount) {
+    public List<Integer> setCoins(int Amount) {
         int f_hund = (Amount % 1000) / 500;
         int hund_d = (Amount % 500) / 100;
         int fif_ten = (Amount % 100) / 50;
         int ten_d = (Amount % 50) / 10;
-        if (!own_coins.isEmpty()) {
-            own_coins.clear();
-        }
+       // if (!own_coins.isEmpty()) {
+         //   own_coins.clear();
+        //}
         own_coins = new ArrayList<>(Arrays.asList(f_hund, hund_d, fif_ten, ten_d));
-
+        return own_coins;
     }
 
 
