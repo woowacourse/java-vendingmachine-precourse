@@ -64,12 +64,12 @@ public class Machine {
         return storedCash < product.getAmount();
     }
 
-    public Map<Coin, Integer> getChangeResult() {
+    public Map<Coin, Integer> getReturnChange() {
         return change.getChange(storedCash);
     }
 
-    public Map<Coin, Integer> getCurrentChange() {
-        return change.getCash();
+    public Map<Coin, Integer> getStoredChange() {
+        return change.getStoredChange();
     }
 
     public boolean isExhausted() {
@@ -89,7 +89,7 @@ public class Machine {
         return storedCash < inventory.getMinAmount();
     }
 
-    public int getRemainCoin() {
+    public int getStoredCash() {
         return this.storedCash;
     }
 }

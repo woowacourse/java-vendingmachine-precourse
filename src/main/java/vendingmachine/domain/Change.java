@@ -77,15 +77,10 @@ public class Change {
     }
 
     public Map<Coin, Integer> getChange(int amount) {
-        Map<Coin, Integer> copyCash = new HashMap<>(cash);
+        Map<Coin, Integer> cash = getStoredChange();
+        Map<Coin, Integer> result = getInitCash();
 
-        Map<Coin, Integer> result = new HashMap<Coin, Integer>() {{
-            for (Coin coin : Coin.values()) {
-                put(coin, 0);
-            }
-        }};
-
-        for (Map.Entry<Coin, Integer> entry : copyCash.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : cash.entrySet()) {
             Coin key = entry.getKey();
             while (((amount / key.getAmount()) != 0) && (cash.get(key) > 0)) {
                 amount -= key.getAmount();
@@ -97,7 +92,15 @@ public class Change {
         return result;
     }
 
-    public Map<Coin, Integer> getCash() {
+    private HashMap<Coin, Integer> getInitCash() {
+        return new HashMap<Coin, Integer>() {{
+            for (Coin coin : Coin.values()) {
+                put(coin, 0);
+            }
+        }};
+    }
+
+    public Map<Coin, Integer> getStoredChange() {
         return new HashMap<>(this.cash);
     }
 }

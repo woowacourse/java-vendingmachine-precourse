@@ -68,7 +68,7 @@ class MachineTest {
         int change = 3000;
         Machine machine1 = new Machine(change);
 
-        Map<Coin, Integer> changeResult = machine.getChangeResult();
+        Map<Coin, Integer> changeResult = machine.getReturnChange();
         System.out.println(changeResult);
 
         int totalPrice = 0;
