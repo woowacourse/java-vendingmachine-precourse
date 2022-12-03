@@ -12,13 +12,13 @@ import static vendingmachine.utils.MachineConst.MIN_CASH;
 
 public class Machine {
 
-    private int investedCash = 0;
-    private final Exchange exchange;
+    private int storedCash = 0;
+    private final Change change;
     private final Inventory inventory;
 
     public Machine(int exchange) {
         validateExchange(exchange);
-        this.exchange = new Exchange(exchange);
+        this.change = new Change(exchange);
         this.inventory = new Inventory();
     }
 
@@ -36,15 +36,15 @@ public class Machine {
         inventory.add(product);
     }
 
-    public void putCash(int investedCash) {
-        this.investedCash += investedCash;
+    public void storeCash(int investedCash) {
+        this.storedCash += investedCash;
     }
 
     public void purchase(String name) {
         Product product = inventory.consume(name);
         validatePurchase(product);
 
-        this.investedCash -= product.getAmount();
+        this.storedCash -= product.getAmount();
     }
 
     private void validatePurchase(Product product) {
@@ -61,15 +61,15 @@ public class Machine {
     }
 
     private boolean isBiggerThanRemainCash(Product product) {
-        return investedCash < product.getAmount();
+        return storedCash < product.getAmount();
     }
 
     public Map<Coin, Integer> getExchangeResult() {
-        return exchange.getExchange(investedCash);
+        return change.getExchange(storedCash);
     }
 
     public Map<Coin, Integer> getCurrentExchange() {
-        return exchange.getCash();
+        return change.getCash();
     }
 
     public boolean isExhausted() {
@@ -86,10 +86,10 @@ public class Machine {
     }
 
     private boolean isShortCash() {
-        return investedCash < inventory.getMinAmount();
+        return storedCash < inventory.getMinAmount();
     }
 
     public int getRemainCoin() {
-        return this.investedCash;
+        return this.storedCash;
     }
 }

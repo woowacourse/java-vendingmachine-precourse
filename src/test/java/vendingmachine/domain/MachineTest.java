@@ -16,7 +16,7 @@ class MachineTest {
     @BeforeEach
     private void initMachine() {
         machine = new Machine(1000);
-        machine.putCash(3000);
+        machine.storeCash(3000);
         machine.storeProduct(new Product("사이다", 3000, 1));
         machine.storeProduct(new Product("콜라", 2000, 1));
         machine.storeProduct(new Product("비싼거", 5000, 1));
@@ -32,7 +32,7 @@ class MachineTest {
     @Test
     @DisplayName("상품이 모두 소진되면 isExhausted true")
     void exhaustedAllProduct() {
-        machine.putCash(10000);
+        machine.storeCash(10000);
         machine.purchase("콜라");
         machine.purchase("사이다");
         machine.purchase("비싼거");
@@ -70,7 +70,7 @@ class MachineTest {
 
         Map<Coin, Integer> exchangeResult = machine.getExchangeResult();
         System.out.println(exchangeResult);
-        
+
         int totalPrice = 0;
         for (Map.Entry<Coin, Integer> entry : exchangeResult.entrySet()) {
             Coin key = entry.getKey();

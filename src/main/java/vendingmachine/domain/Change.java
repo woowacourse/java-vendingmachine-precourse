@@ -10,12 +10,12 @@ import java.util.Map;
 
 import static vendingmachine.Coin.*;
 
-public class Exchange {
+public class Change {
 
     private final List<Integer> coins = getCoins();
     private final Map<Coin, Integer> cash = new HashMap<>();
 
-    Exchange(int amount) {
+    Change(int amount) {
         for (Coin each : values()) {
             cash.put(each, 0);
         }
