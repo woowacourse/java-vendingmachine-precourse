@@ -16,6 +16,7 @@ public class Machine {
         change = new Change(view.getInitChanges());
         products = view.getInitProducts();
 
+        view.showAllCoins(change);
     }
 
     public void buyProducts() {
@@ -28,7 +29,7 @@ public class Machine {
         }
 
         view.leftMoney(money);
-        result();
+        view.showHoldingCoins(change);
     }
 
     private boolean isPurchasable(int money) {
@@ -54,6 +55,4 @@ public class Machine {
         return -1;
     }
 
-    private void result() {
-    }
 }

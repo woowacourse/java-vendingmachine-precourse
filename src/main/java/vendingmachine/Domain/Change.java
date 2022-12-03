@@ -21,6 +21,10 @@ public class Change {
         createCoins(money);
     }
 
+    public HashMap<Integer, Integer> getCoins() {
+        return coins;
+    }
+
     private void createCoins(int money) {
         List<Integer> coinKeys = new ArrayList<>(coins.keySet());
         int randomCost = Randoms.pickNumberInList(coinKeys);
