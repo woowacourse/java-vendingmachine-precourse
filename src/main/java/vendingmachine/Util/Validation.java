@@ -50,22 +50,27 @@ public class Validation {
     }
 
     private void checkOrderInfo(String order) {
-        String separator;
+        String separator = String.valueOf(ORDER_SEPARATOR);
 
-        separator = String.valueOf(ORDER_SEPARATOR);
         if (order.contains(separator)) {
             checkOrderArray(order.split(separator));
+            return;
         }
 
-        separator = String.valueOf(ORDER_INFO_SEPARATOR);
-        if (order.split(separator).length != 3) {
-            throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
-        }
+        checkOrderInfoCount(order);
     }
 
     private void checkOrderArray(String[] orders) {
         for (String order : orders) {
             checkOrderInfo(order);
+        }
+    }
+
+    private void checkOrderInfoCount(String order) {
+        String separator = String.valueOf(ORDER_INFO_SEPARATOR);
+
+        if (order.split(separator).length != 3) {
+            throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
         }
     }
 
