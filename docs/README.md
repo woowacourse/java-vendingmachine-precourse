@@ -21,6 +21,7 @@
 
 ### Change
 - [x] 보유 금액을 받아 잔돈 무작위 생성 및 저장
+- [x] 보유 잔돈 toString
 
 ### VendingMachine Money
 - [ ] 자판기 보유 잔돈 저장
