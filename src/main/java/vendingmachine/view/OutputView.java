@@ -20,7 +20,7 @@ public class OutputView {
         printMessage("자판기가 보유한 동전");
         printMessage(change.toString());
     }
-    public void askBuyProductPrint(int hasPrice){
+    public void askBuyProductPrint(String hasPrice){
         StringBuilder print = new StringBuilder("투입 금액: "+hasPrice+"원\n");
         print.append("구매할 상품명을 입력해 주세요.\n");
         printMessage(print.toString());

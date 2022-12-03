@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.Products;
 import vendingmachine.enums.Coin;
 
 import java.util.ArrayList;
@@ -16,7 +17,7 @@ public class InputView {
 
     private Integer getAndValidateChange() {
         String inputChange = "";
-        while (!inputChange.equals("")) {
+        while (inputChange.equals("")) {
             outputView.askInputPricePrint();
             try {
                 inputChange = Console.readLine();
@@ -41,14 +42,42 @@ public class InputView {
         }
     }
 
-    public List<Product> inputProducts(){
-        String input = Console.readLine();
-        List<Product> products = new ArrayList<>();
-        String[] splitProduct = input.split(";");
-        for(String product : splitProduct){
-            String[] value = product.split(",");
-            products.add(new Product(value[0],Integer.parseInt(value[1]), Integer.parseInt(value[2])));
-        }
-        return products;
+    public Products inputProducts(){
+        return validateProducts();
     }
+    private Products validateProducts(){
+        String productsInput = "";
+        List<Product> products = new ArrayList<>();
+        int minAmount = Integer.MAX_VALUE;
+        while(productsInput.equals("")){
+            outputView.askProductPrint();
+            try{
+                productsInput = Console.readLine();
+                String[] splitProduct = productsInput.split(";");
+                for(String product : splitProduct){
+                    String[] value = product.split(",");
+                    products.add(new Product(value[0],Integer.parseInt(value[1]), Integer.parseInt(value[2])));
+                    validateProductPrice(Integer.parseInt(value[1]));
+                    minAmount = Math.min(minAmount, Integer.parseInt(value[1]));
+                }
+            }catch (IllegalArgumentException e){
+                productsInput = "";
+                products = new ArrayList<>();
+            }
+        }
+        return new Products(products, minAmount);
+    }
+
+
+    private void validateProductPrice(int price) {
+        if(!(price >100 && Coin.isDivideMinCoin(String.valueOf(price))))throw new IllegalArgumentException(
+                "[ERROR] 상품 금액이 잘못됐습니다."
+        );
+    }
+
+    public int inputAmount(){
+        return getAndValidateChange();
+    }
+
+
 }
