@@ -11,12 +11,13 @@ public class InputView {
     public String read(){
         return Console.readLine();
     }
+
     public String readCoins() {
         System.out.print("자판기가 보유하고 있는 금액을 입력하세요" + "\n");
         return Console.readLine();
     }
 
-    public String buyingproduct(){
+    public String purchaseproduct(){
         System.out.print("구매할 상품명을 입력해주세요" + "\n");
         return Console.readLine();
     }
