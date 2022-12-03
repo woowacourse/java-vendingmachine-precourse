@@ -10,18 +10,18 @@ public class Vendingmachine {
    // public static String status = "operating";
     private List<String> products_list;
 
-    
+
     InputView inputview=new InputView();
 
-    public Vendingmachine(String own_coinAmount) {
+    public Vendingmachine() {
         //own_coins= Collections.emptyList();
         // vending_products= inputview.readproduct_list(inputview.read());
     }
 
-    public List<Products> set_vending_products() {
+    public List<Products> set_vending_products(List<String> products_format) {
         List<Products> products=new ArrayList<>();
         String[] list;
-        for (String option : inputview.readproduct_list(inputview.read())) {
+        for (String option : products_format) {
             list = option.split(",");
 
             products.add(new Products(list[0], list[1], list[2]));
