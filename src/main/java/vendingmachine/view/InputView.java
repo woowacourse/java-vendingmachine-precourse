@@ -37,12 +37,12 @@ public class InputView {
             throw new IllegalArgumentException(ErrorMessage.COIN_NOT_NUMBER.getMessage());
         }
         if (isOutOfRange(Integer.parseInt(input))) {
-            throw new IllegalArgumentException(ErrorMessage.EXCHANGE_OUT_OF_RANGE.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.CHANGE_OUT_OF_RANGE.getMessage());
         }
     }
 
-    private boolean isOutOfRange(int exchange) {
-        return exchange <= MIN_CASH.getValue() || exchange >= MAX_CASH.getValue();
+    private boolean isOutOfRange(int number) {
+        return number <= MIN_CASH.getValue() || number >= MAX_CASH.getValue();
     }
 
     private boolean isNotNumber(String input) {

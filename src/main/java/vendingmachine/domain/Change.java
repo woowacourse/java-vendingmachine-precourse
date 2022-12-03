@@ -76,7 +76,7 @@ public class Change {
         return number % 10 != 0;
     }
 
-    public Map<Coin, Integer> getExchange(int amount) {
+    public Map<Coin, Integer> getChange(int amount) {
         Map<Coin, Integer> copyCash = new HashMap<>(cash);
 
         Map<Coin, Integer> result = new HashMap<Coin, Integer>() {{

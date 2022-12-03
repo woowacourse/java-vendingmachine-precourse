@@ -16,20 +16,20 @@ public class Machine {
     private final Change change;
     private final Inventory inventory;
 
-    public Machine(int exchange) {
-        validateExchange(exchange);
-        this.change = new Change(exchange);
+    public Machine(int cash) {
+        validateChange(cash);
+        this.change = new Change(cash);
         this.inventory = new Inventory();
     }
 
-    private void validateExchange(int exchange) {
-        if (isOutOfRange(exchange)) {
-            throw new IllegalArgumentException(ErrorMessage.EXCHANGE_OUT_OF_RANGE.getMessage());
+    private void validateChange(int change) {
+        if (isOutOfRange(change)) {
+            throw new IllegalArgumentException(ErrorMessage.CHANGE_OUT_OF_RANGE.getMessage());
         }
     }
 
-    private boolean isOutOfRange(int exchange) {
-        return exchange <= MIN_CASH.getValue() || exchange >= MAX_CASH.getValue();
+    private boolean isOutOfRange(int change) {
+        return change <= MIN_CASH.getValue() || change >= MAX_CASH.getValue();
     }
 
     public void storeProduct(Product product) {
@@ -64,11 +64,11 @@ public class Machine {
         return storedCash < product.getAmount();
     }
 
-    public Map<Coin, Integer> getExchangeResult() {
-        return change.getExchange(storedCash);
+    public Map<Coin, Integer> getChangeResult() {
+        return change.getChange(storedCash);
     }
 
-    public Map<Coin, Integer> getCurrentExchange() {
+    public Map<Coin, Integer> getCurrentChange() {
         return change.getCash();
     }
 

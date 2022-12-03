@@ -6,14 +6,14 @@ import vendingmachine.domain.Machine;
 import java.util.Map;
 
 import static vendingmachine.utils.Message.OUTPUT_CASH;
-import static vendingmachine.utils.Message.OUTPUT_INIT_EXCHANGE;
+import static vendingmachine.utils.Message.OUTPUT_INIT_CHANGE;
 
 public class OutputView {
 
-    public void outputMachineExchange(Machine machine) {
-        Map<Coin, Integer> currentExchange = machine.getCurrentExchange();
-        System.out.println(OUTPUT_INIT_EXCHANGE);
-        for (Map.Entry<Coin, Integer> entry : currentExchange.entrySet()) {
+    public void outputMachineChange(Machine machine) {
+        Map<Coin, Integer> currentChange = machine.getCurrentChange();
+        System.out.println(OUTPUT_INIT_CHANGE);
+        for (Map.Entry<Coin, Integer> entry : currentChange.entrySet()) {
             Coin key = entry.getKey();
             Integer count = entry.getValue();
             System.out.printf("%d원 - %d개\n", key.getAmount(), count);
@@ -24,10 +24,10 @@ public class OutputView {
         System.out.printf("%s %d원\n", OUTPUT_CASH, machine.getRemainCoin());
     }
 
-    public void outputResultExchange(Machine machine) {
-        Map<Coin, Integer> exchangeResult = machine.getExchangeResult();
+    public void outputResultChange(Machine machine) {
+        Map<Coin, Integer> changeResult = machine.getChangeResult();
 
-        for (Map.Entry<Coin, Integer> entry : exchangeResult.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : changeResult.entrySet()) {
             Coin key = entry.getKey();
             Integer count = entry.getValue();
             if (count != 0) {

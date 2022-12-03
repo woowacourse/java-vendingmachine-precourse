@@ -64,21 +64,21 @@ class MachineTest {
 
     @Test
     @DisplayName("잔돈은 현재 금액보다 적거나 같은 결과를 반환한다.")
-    void testGetExchangeMethod() {
-        int exchange = 3000;
-        Machine machine1 = new Machine(exchange);
+    void testGetChangeMethod() {
+        int change = 3000;
+        Machine machine1 = new Machine(change);
 
-        Map<Coin, Integer> exchangeResult = machine.getExchangeResult();
-        System.out.println(exchangeResult);
+        Map<Coin, Integer> changeResult = machine.getChangeResult();
+        System.out.println(changeResult);
 
         int totalPrice = 0;
-        for (Map.Entry<Coin, Integer> entry : exchangeResult.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : changeResult.entrySet()) {
             Coin key = entry.getKey();
             Integer count = entry.getValue();
             totalPrice += key.getAmount() * count;
         }
 
-        Assertions.assertTrue(totalPrice <= exchange);
+        Assertions.assertTrue(totalPrice <= change);
     }
 
 }

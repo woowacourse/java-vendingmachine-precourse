@@ -18,7 +18,7 @@ public class MachineController {
         this.outputView = new OutputView();
         int machineCoin = inputView.inputMachineCoin();
         this.machine = new Machine(machineCoin);
-        outputView.outputMachineExchange(machine);
+        outputView.outputMachineChange(machine);
     }
 
     public void play() {
@@ -34,6 +34,6 @@ public class MachineController {
         }
 
         outputView.outputRemainCoin(machine);
-        outputView.outputResultExchange(machine);
+        outputView.outputResultChange(machine);
     }
 }
