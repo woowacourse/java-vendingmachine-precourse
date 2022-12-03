@@ -5,6 +5,7 @@ import java.util.List;
 public class Products {
     private final List<Product> products;
     private final int minAmount;
+    private final static int RUN_OUT = -1;
 
     public Products(List<Product> products, int minAmount) {
         this.products = products;
@@ -15,7 +16,7 @@ public class Products {
         int buyPrice = 0;
         for(int index = 0 ; index < products.size();index++){
             int buy =  products.get(index).buyProduct(buyProduct);
-            if(buy!=-1){
+            if(buy!=RUN_OUT){
                 buyPrice = buy;
             }
         }

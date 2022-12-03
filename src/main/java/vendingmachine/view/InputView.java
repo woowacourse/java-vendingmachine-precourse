@@ -1,8 +1,10 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Change;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.Products;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.enums.Coin;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ public class InputView {
                 inputDigitValidation(inputChange);
                 changeDivideTen(inputChange);
             } catch (IllegalArgumentException e) {
+                outputView.printLastChange(e.getMessage());
                 inputChange = "";
             }
         }
@@ -42,25 +45,27 @@ public class InputView {
         }
     }
 
-    public Products inputProducts(){
+    public Products inputProducts() {
         return validateProducts();
     }
-    private Products validateProducts(){
+
+    private Products validateProducts() {
         String productsInput = "";
         List<Product> products = new ArrayList<>();
         int minAmount = Integer.MAX_VALUE;
-        while(productsInput.equals("")){
+        while (productsInput.equals("")) {
             outputView.askProductPrint();
-            try{
+            try {
                 productsInput = Console.readLine();
                 String[] splitProduct = productsInput.split(";");
-                for(String product : splitProduct){
-                    String[] value = product.split(",");
-                    products.add(new Product(value[0],Integer.parseInt(value[1]), Integer.parseInt(value[2])));
+                for (String product : splitProduct) {
+                    String[] value = product.substring(1,product.length()-1).split(",");
+                    products.add(new Product(value[0], Integer.parseInt(value[1]), Integer.parseInt(value[2])));
                     validateProductPrice(Integer.parseInt(value[1]));
                     minAmount = Math.min(minAmount, Integer.parseInt(value[1]));
                 }
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
                 productsInput = "";
                 products = new ArrayList<>();
             }
@@ -70,14 +75,26 @@ public class InputView {
 
 
     private void validateProductPrice(int price) {
-        if(!(price >100 && Coin.isDivideMinCoin(String.valueOf(price))))throw new IllegalArgumentException(
-                "[ERROR] 상품 금액이 잘못됐습니다."
-        );
+        if (price > 100 && Coin.isDivideMinCoin(String.valueOf(price)))return;
+        throw new IllegalArgumentException("[ERROR] 상품 금액이 잘못됐습니다.");
     }
 
-    public int inputAmount(){
+    public int inputAmount() {
         return getAndValidateChange();
     }
 
-
+    public String inputBuyProduct(VendingMachine vendingMachine) {
+        String buyProduct = "";
+        while (buyProduct.equals("")) {
+            try {
+                outputView.askBuyProductPrint(vendingMachine.toString());
+                buyProduct = Console.readLine();
+                vendingMachine.buy(buyProduct);
+            } catch (IllegalArgumentException e) {
+                outputView.printMessage(e.getMessage());
+                buyProduct = "";
+            }
+        }
+        return buyProduct;
+    }
 }

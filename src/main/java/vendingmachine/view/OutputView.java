@@ -25,8 +25,8 @@ public class OutputView {
         print.append("구매할 상품명을 입력해 주세요.\n");
         printMessage(print.toString());
     }
-    public void printLastChange(int hasPrice, List<Coin> hasChange){
-
+    public void printLastChange(String lastChange){
+        printMessage(lastChange);
 
     }
     public void printMessage(String input){
