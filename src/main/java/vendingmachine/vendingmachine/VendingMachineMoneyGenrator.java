@@ -1,4 +1,4 @@
-package vendingmachine.moneyGenerator;
+package vendingmachine.vendingmachine;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
@@ -18,7 +18,5 @@ public class VendingMachineMoneyGenrator {
             vendingMoney -= num;
             Coin.getCoin(num).addCoin();
         }
-
-
     }
 }
