@@ -1,7 +1,11 @@
 package vendingmachine;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
+//import jdk.internal.util.xml.impl.Input;
 import org.junit.jupiter.api.Test;
+
+import java.util.Arrays;
+import java.util.List;
 
 import static camp.nextstep.edu.missionutils.test.Assertions.assertRandomNumberInListTest;
 import static camp.nextstep.edu.missionutils.test.Assertions.assertSimpleTest;
@@ -37,5 +41,17 @@ class ApplicationTest extends NsTest {
     @Override
     protected void runMain() {
         Application.main(new String[]{});
+    }
+
+
+
+    @Test
+    void readproductTest(){
+        //when
+        InputView inputview=new InputView();
+        //given
+        List<String> exactFormat= Arrays.asList("[콜라,1500,20]", "[사이다,1000,10]");
+        //then
+        assertThat(exactFormat.toString()).isEqualTo(inputview.readproduct_list("[콜라,1500,20];[사이다,1000,10]").toString());
     }
 }
