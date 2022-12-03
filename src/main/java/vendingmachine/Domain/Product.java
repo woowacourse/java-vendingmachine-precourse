@@ -23,4 +23,9 @@ public class Product {
     public int getCount() {
         return count;
     }
+
+    public void sold () {
+        this.count--;
+    }
+
 }

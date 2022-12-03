@@ -42,13 +42,4 @@ public class View extends Print {
         return input;
     }
 
-    public List<Product> buyProduct(List<Product> product) {
-        inputProductToBuy();
-        String productName = Console.readLine();
-        // validation
-        // remove target from list
-        return null;
-    }
-
-
 }

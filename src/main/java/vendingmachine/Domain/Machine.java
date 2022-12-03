@@ -15,6 +15,7 @@ public class Machine {
     public Machine() {
         change = new Change(view.getInitChanges());
         products = view.getInitProducts();
+
     }
 
     public void buyProducts() {
@@ -22,13 +23,11 @@ public class Machine {
 
         while (isPurchasable(money)) {
             view.leftMoney(money);
-
             String productName = view.getProductNameToBuy(products);
-            products = view.buyProduct(products);
-
-            money -= getProductCost(productName);
+            money -= productSold(productName);
         }
 
+        view.leftMoney(money);
         result();
     }
 
@@ -44,16 +43,17 @@ public class Machine {
         return false;
     }
 
-    private int getProductCost(String productName) {
-        for (Product product : products) {
-            if (product.getName().equals(productName))
-                return product.getPrice();
+    private int productSold(String productName) {
+        for (Product productOfMenu : products) {
+            if (productOfMenu.getName().equals(productName)) {
+                productOfMenu.sold();
+                return productOfMenu.getPrice();
+            }
         }
 
-        return 0;
+        return -1;
     }
 
     private void result() {
-
     }
 }
