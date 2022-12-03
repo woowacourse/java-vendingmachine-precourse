@@ -36,7 +36,7 @@ public enum Coin {
 
     public static StringBuilder makeCoinList() {
         StringBuilder sb = new StringBuilder();
-        Arrays.stream(values()).forEach(coin -> sb.append(coin.getAmount()+"원 - "+ coin.getCount()+"개"+"\n"));
+        Arrays.stream(values()).forEach(coin -> sb.append(coin.getAmount()).append("원 - ").append(coin.getCount()).append("개").append("\n"));
         return sb;
     }
 

@@ -1,6 +1,5 @@
 package vendingmachine.controller;
 
-import vendingmachine.exception.VendingMachineException;
 import vendingmachine.vendingmachine.Coin;
 import vendingmachine.goods.GoodsManager;
 import vendingmachine.vendingmachine.VendingMachineManager;
