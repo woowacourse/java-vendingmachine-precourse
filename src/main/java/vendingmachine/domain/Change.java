@@ -11,18 +11,19 @@ import java.util.Map;
 
 public class Change {
     private final int amount;
-    private final Map<Coin, Integer> coins;
+    private final List<Integer> coins;
 
     public Change(int amount) {
         this.amount = amount;
         coins = makeCoins(amount);
     }
 
-    private Map<Coin, Integer> makeCoins(int amount) {
-        Map<Coin, Integer> coins = new HashMap<>();
+    private List<Integer> makeCoins(int amount) {
+        List<Integer> coins = new ArrayList<>(4);
         while (amount != 0) {
             int coin = getUnderAmountCoin(amount);
-            coins.put(Coin.getCoin(coin), coin);
+            int coinIndex = Coin.getIndex(coin);
+            coins.set(coinIndex,coins.get(coinIndex)+1);
             amount -= coin;
         }
         return coins;
@@ -34,4 +35,6 @@ public class Change {
         }
         return coin;
     }
+
+
 }
