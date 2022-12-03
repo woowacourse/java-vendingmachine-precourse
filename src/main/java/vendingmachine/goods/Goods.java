@@ -4,12 +4,8 @@ public class Goods {
     private int price;
     private int amount;
 
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
+    public Goods(String[] goodsInformation){
+        makeGoodsInfo(goodsInformation);
     }
 
     public int getAmount() {
@@ -24,9 +20,9 @@ public class Goods {
         amount--;
     }
 
-    public void makeGoodsInfo(String[] goodsInformation) {
-        setPrice(Integer.parseInt(goodsInformation[1]));
-        setAmount(Integer.parseInt(goodsInformation[2]));
+    void makeGoodsInfo(String[] goodsInformation) {
+        price = Integer.parseInt(goodsInformation[1]);
+        amount = Integer.parseInt(goodsInformation[2]);
     }
 }
 
