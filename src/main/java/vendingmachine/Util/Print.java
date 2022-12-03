@@ -20,4 +20,8 @@ public class Print {
         System.out.println(PURCHASE_PRODUCT.getMessage());
     }
 
+    public void leftMoney(int money){
+        System.out.printf(MONEY_AMOUNT_LEFT.getMessage(), money);
+    }
+
 }
