@@ -8,6 +8,7 @@ import java.util.List;
 public class View extends Print {
 
     Validation validate = new Validation();
+    Caster cast = new Caster();
 
     public int getInitChanges() {
         inputChanges();
@@ -23,8 +24,7 @@ public class View extends Print {
         inputProductInfo();
         String input = Console.readLine();
         // validation
-        // cast To List
-        return null;
+        return cast.toProducts(input);
     }
 
     public int getPurchaseMoney() {
