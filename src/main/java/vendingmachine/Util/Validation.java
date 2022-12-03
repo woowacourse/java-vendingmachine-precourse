@@ -39,8 +39,17 @@ public class Validation {
         }
 
         throw new IllegalArgumentException(NOT_EXIST_PRODUCT_NAME.toMessage());
-
     }
+
+    public void productSoldOut(String name, List<Product> product) {
+        for (Product productObject : product) {
+            if (name.equals(productObject.getName()) && productObject.getCount() > 0) return;
+        }
+
+        throw new IllegalArgumentException(SOLD_OUT_PRODUCT.toMessage());
+    }
+
+
 
     public void productOrder(String order) {
         try {

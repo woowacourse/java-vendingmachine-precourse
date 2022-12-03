@@ -6,7 +6,8 @@ public enum Error {
     NOT_ALLOWED_MINUS_NUMBER("0원 이하의 금액은 입력할 수 없습니다."),
 
     NOT_PROPER_ORDER_COMMAND("주문 형식이 잘못되었습니다. ex) [제품명,가격,갯수];[제품명,가격,갯수]"),
-    NOT_EXIST_PRODUCT_NAME("존재하지 않는 제품명입니다.");
+    NOT_EXIST_PRODUCT_NAME("존재하지 않는 제품명입니다."),
+    SOLD_OUT_PRODUCT("해당제품은 품절입니다.");
 
     private final String message;
 

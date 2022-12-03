@@ -57,6 +57,7 @@ public class View extends Print {
 
         try {
             validate.productNameExist(name, product);
+            validate.productSoldOut(name, product);
             return name;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
