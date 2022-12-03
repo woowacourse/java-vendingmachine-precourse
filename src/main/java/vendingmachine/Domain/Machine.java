@@ -12,7 +12,7 @@ public class Machine {
     private List<Product> products;
 
 
-    public void turnOn() {
+    public Machine() {
         change = new Change(view.getInitChanges());
         products = view.getInitProducts();
     }
@@ -20,14 +20,22 @@ public class Machine {
     public void buyProducts() {
         int money = view.getPurchaseMoney();
 
-        while (isPurchasable(money, change)) {
+        while (isPurchasable(money)) {
             products = view.buyProduct(products);
         }
 
         result();
     }
 
-    private boolean isPurchasable(int money, Change change) {
+    private boolean isPurchasable(int money) {
+        int minimumCost = Integer.MAX_VALUE;
+
+        for (Product product : products) {
+            minimumCost = Math.min(product.getPrice(), minimumCost);
+        }
+
+        if (money > minimumCost) return true;
+
         return false;
     }
 
