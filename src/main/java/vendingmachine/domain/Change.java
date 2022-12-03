@@ -78,19 +78,32 @@ public class Change {
     }
 
     public Map<Coin, Integer> getChange(int amount) {
-        Map<Coin, Integer> cash = getStoredChange();
+        Map<Coin, Integer> storedChange = getStoredChange();
         Map<Coin, Integer> result = getInitCash();
 
-        for (Map.Entry<Coin, Integer> entry : cash.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : storedChange.entrySet()) {
             Coin key = entry.getKey();
-            while (((amount / key.getAmount()) != 0) && (cash.get(key) > 0)) {
+            Integer count = storedChange.get(key);
+            while (isPossibleReduceAmount(amount, count, key)) {
                 amount -= key.getAmount();
                 result.put(key, result.get(key) + 1);
-                cash.put(key, cash.get(key) - 1);
+                storedChange.put(key, storedChange.get(key) - 1);
             }
         }
 
         return result;
+    }
+
+    private boolean isPossibleReduceAmount(int amount, Integer count, Coin key) {
+        return isPossibleDivide(amount, key) && isChangeRemain(count);
+    }
+
+    private boolean isChangeRemain(Integer count) {
+        return count > 0;
+    }
+
+    private boolean isPossibleDivide(int amount, Coin key) {
+        return (amount / key.getAmount()) != 0;
     }
 
     private HashMap<Coin, Integer> getInitCash() {
