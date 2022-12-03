@@ -21,7 +21,12 @@ public class Machine {
         int money = view.getPurchaseMoney();
 
         while (isPurchasable(money)) {
+            view.leftMoney(money);
+
+            String productName = view.getProductNameToBuy(products);
             products = view.buyProduct(products);
+
+            money -= getProductCost(productName);
         }
 
         result();
@@ -37,6 +42,15 @@ public class Machine {
         if (money > minimumCost) return true;
 
         return false;
+    }
+
+    private int getProductCost(String productName) {
+        for (Product product : products) {
+            if (product.getName().equals(productName))
+                return product.getPrice();
+        }
+
+        return 0;
     }
 
     private void result() {

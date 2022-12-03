@@ -6,7 +6,8 @@ public enum Message {
     INITIALIZE_PRODUCTS("상품명과 가격, 수량을 입력해 주세요."),
     PURCHASE_MONEY("투입 금액을 입력해 주세요."),
     PURCHASE_PRODUCT("구매할 상품명을 입력해 주세요."),
-    RESULT("투입 금액: %f원\n" + "잔돈\n");
+    MONEY_AMOUNT_LEFT("투입 금액: %d원\n"),
+    RESULT("투입 금액: %d원\n" + "잔돈\n");
 
     private String message;
 

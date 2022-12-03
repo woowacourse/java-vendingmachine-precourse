@@ -32,7 +32,14 @@ public class View extends Print {
         String input = Console.readLine();
         // validation
         // cast To number
-        return 0;
+        return Integer.parseInt(input);
+    }
+
+    public String getProductNameToBuy(List<Product> product) {
+        inputProductToBuy();
+        String input = Console.readLine();
+        // validate
+        return input;
     }
 
     public List<Product> buyProduct(List<Product> product) {
