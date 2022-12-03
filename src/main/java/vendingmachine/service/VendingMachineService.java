@@ -10,6 +10,7 @@ public class VendingMachineService {
     private final InputView inputView = new InputView();
     private final OutputView outputView = new OutputView();
     public void play(){
+
         int changeAmount = inputView.inputChange();
         Change change = new Change(changeAmount);
         outputView.printFirstChange(change);

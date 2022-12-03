@@ -29,6 +29,7 @@ public class VendingMachine {
     public String lastPrint(){
         StringBuilder print = new StringBuilder();
         print.append("투입금액:" +amountPrice+"원\n");
+        print.append("잔돈\n");
         print.append(change.lastChangePrint());
         return print.toString();
     }

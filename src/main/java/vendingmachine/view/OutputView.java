@@ -1,9 +1,6 @@
 package vendingmachine.view;
 
 import vendingmachine.domain.Change;
-import vendingmachine.enums.Coin;
-
-import java.util.List;
 
 public class OutputView {
     public void askPricePrint(){

@@ -31,9 +31,6 @@ public class Change {
         }
         return coin;
     }
-    public int getAmount(){
-        return amount;
-    }
 
     @Override
     public String toString() {
