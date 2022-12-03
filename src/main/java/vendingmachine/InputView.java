@@ -12,6 +12,11 @@ public class InputView {
         return Console.readLine();
     }
 
+    public String buyingproduct(){
+        System.out.print("구매할 상품명을 입력해주세요" + "\n");
+        return Console.readLine();
+    }
+
     public int readbuyingAmount() {
         System.out.print("투입 금액을 입력해주세요" + "\n");
         return Integer.parseInt(Console.readLine());
@@ -25,5 +30,8 @@ public class InputView {
         Collections.addAll(list, buying);
         return list;
     }
+
+
+
 }
 
