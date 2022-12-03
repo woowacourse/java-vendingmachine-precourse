@@ -9,8 +9,15 @@ public class InputView {
     public String inputVendingMoney(){
         System.out.println(GameMessage.INPUT_VENDINGMACHINE_MONEY);
         String vendingMoney = Console.readLine();
-        vendingMachineException.validInputMoney(vendingMoney);
+        vendingMachineException.validMoneyInputForm(vendingMoney);
         return vendingMoney;
+    }
+
+    public String inputGoodsPriceAmount(){
+        System.out.println(GameMessage.INPUT_GOODS_PRICE_AMOUNT);
+        String goods = Console.readLine();
+        vendingMachineException.validGoodsInputForm(goods);
+        return goods;
     }
 
 }
