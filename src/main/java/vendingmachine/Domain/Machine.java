@@ -29,7 +29,7 @@ public class Machine {
         }
 
         view.leftMoney(money);
-        view.showHoldingCoins(change);
+        view.showHoldingCoins(change.getChanges(money));
     }
 
     private boolean isPurchasable(int money) {
