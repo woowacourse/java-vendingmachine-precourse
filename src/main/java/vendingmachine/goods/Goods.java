@@ -1,7 +1,5 @@
 package vendingmachine.goods;
 
-import java.util.HashMap;
-
 public class Goods {
     private int price;
     private int amount;
@@ -10,19 +8,19 @@ public class Goods {
         this.amount = amount;
     }
 
-    public void setPrice(int price){
+    public void setPrice(int price) {
         this.price = price;
     }
 
-    public int getAmount(){
+    public int getAmount() {
         return amount;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 
-    public void deleteAmount(){
+    public void deleteAmount() {
         amount--;
     }
 
