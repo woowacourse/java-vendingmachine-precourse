@@ -7,7 +7,7 @@ public class Product {
     private final int amount;
     private int total;
 
-    Product(String name, int amount, int total) {
+    public Product(String name, int amount, int total) {
         validateAmount(amount);
         validateTotal(total);
         this.name = name;
@@ -59,8 +59,6 @@ public class Product {
         if (isLessThen0(total)) {
             throw new IllegalArgumentException(NOT_EXIST_PRODUCT.getMessage());
         }
-
         this.total--;
     }
-
 }
