@@ -36,5 +36,13 @@ public class Change {
         return coin;
     }
 
-
+    @Override
+    public String toString() {
+        StringBuilder print = new StringBuilder();
+        print.append("500원 - "+ coins.get(0)+"개\n");
+        print.append("100원 - "+ coins.get(1)+"개\n");
+        print.append("50원 - "+ coins.get(2)+"개\n");
+        print.append("10원 - "+ coins.get(3)+"개\n");
+        return print.toString();
+    }
 }
