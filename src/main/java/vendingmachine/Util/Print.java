@@ -1,10 +1,9 @@
 package vendingmachine.Util;
 
+import vendingmachine.Constant.Coin;
 import vendingmachine.Domain.Change;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 import static vendingmachine.Constant.Message.*;
 
@@ -27,27 +26,24 @@ public class Print {
     }
 
     public void showAllCoins(Change change) {
-        HashMap<Integer, Integer> coinMap = change.getCoins();
-        List<Integer> coinUnits = new ArrayList<>(coinMap.keySet());
-
         System.out.println(COUNTS_OF_CHANGES.getMessage());
 
-        for (int unit : coinUnits) {
+        HashMap<Coin, Integer> coinMap = change.getCoins();
+
+        for (Coin unit : coinMap.keySet()) {
             int count = coinMap.get(unit);
-            System.out.printf(COUNT_OF_COIN.getMessage(), unit, count);
+
+            System.out.printf(COUNT_OF_COIN.getMessage(), unit.getAmount(), count);
         }
     }
 
-    public void showHoldingCoins(HashMap<Integer, Integer> changes) {
-        List<Integer> coinUnits = new ArrayList<>(changes.keySet());
+    public void showHoldingCoins(HashMap<Coin, Integer> changes) {
         System.out.println(RESULT.getMessage());
 
-        for (int unit : coinUnits) {
+        for (Coin unit : changes.keySet()) {
             int count = changes.get(unit);
-            if (count > 0) {
-                System.out.printf(COUNT_OF_COIN.getMessage(), unit, count);
-            }
 
+            if (count > 0) System.out.printf(COUNT_OF_COIN.getMessage(), unit.getAmount(), count);
         }
     }
 

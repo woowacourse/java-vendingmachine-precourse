@@ -1,49 +1,73 @@
 package vendingmachine.Util;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import vendingmachine.Constant.Coin;
 import vendingmachine.Domain.Change;
 import vendingmachine.Domain.Product;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
-import static vendingmachine.Constant.Coin.*;
+import static vendingmachine.Constant.Coin.values;
 
 public class Caster {
 
     public Change toChangeCoins(int money) {
-        HashMap<Integer, Integer> coins = new HashMap<>();
+        LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
 
-        coins.put(COIN_10.getAmount(), 0);
-        coins.put(COIN_50.getAmount(), 0);
-        coins.put(COIN_100.getAmount(), 0);
-        coins.put(COIN_500.getAmount(), 0);
+        for (Coin coinUnit : values()) {
+            coins.put(coinUnit, 0);
+        }
 
         return createRandomCoins(coins, money);
     }
 
-    private Change createRandomCoins(HashMap<Integer, Integer> coins, int money) {
-        List<Integer> coinKeys = new ArrayList<>(coins.keySet());
-        int randomCost = Randoms.pickNumberInList(coinKeys);
+    private Change createRandomCoins(LinkedHashMap<Coin, Integer> coins, int money) {
+        List<Integer> coinUnits = getCoinUnits(coins);
         int sum = getCoinsCostSum(coins);
 
         while (sum != money) {
+            int randomCost = Randoms.pickNumberInList(coinUnits);
+            sum = getCoinsCostSum(coins);
+
             if (sum + randomCost <= money) {
-                coins.put(randomCost, coins.get(randomCost) + 1);
-                sum = getCoinsCostSum(coins);
+                Coin randomCoin = Coin.getCoinByAmount(randomCost);
+                coins.put(randomCoin, coins.get(randomCoin) + 1);
+                continue;
             }
-            randomCost = Randoms.pickNumberInList(coinKeys);
+            coinUnits = getCoinUnits(coins, randomCost);
         }
 
         return new Change(coins);
     }
 
-    private int getCoinsCostSum(HashMap<Integer, Integer> coins) {
-        List<Integer> coinKeys = new ArrayList<>(coins.keySet());
+    private List<Integer> getCoinUnits(LinkedHashMap<Coin, Integer> coins) {
+        List<Integer> units = new ArrayList<>();
+
+        for (Coin unit : coins.keySet()) {
+            units.add(unit.getAmount());
+        }
+
+        return units;
+    }
+
+    private List<Integer> getCoinUnits(LinkedHashMap<Coin, Integer> coins, int removeTargetUnit) {
+        List<Integer> units = new ArrayList<>();
+
+        for (Coin unit : coins.keySet()) {
+            if (unit.getAmount() != removeTargetUnit) {
+                units.add(unit.getAmount());
+            }
+        }
+
+        return units;
+    }
+
+    private int getCoinsCostSum(LinkedHashMap<Coin, Integer> coins) {
         int sum = 0;
 
-        for (int key : coinKeys) sum += coins.get(key) * key;
+        for (Coin coin : coins.keySet()) sum += coin.getAmount() * coins.get(coin);
 
         return sum;
     }
@@ -63,14 +87,11 @@ public class Caster {
     }
 
     private String getProductName(String productInfo) {
-        return productInfo
-                .split(",")[0]
-                .substring(1);
+        return productInfo.split(",")[0].substring(1);
     }
 
     private int getProductCost(String productInfo) {
-        return Integer.parseInt(productInfo
-                .split(",")[1]);
+        return Integer.parseInt(productInfo.split(",")[1]);
     }
 
     private int getProductCount(String productInfo) {
