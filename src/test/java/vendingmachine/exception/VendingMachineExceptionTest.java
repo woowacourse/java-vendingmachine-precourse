@@ -16,7 +16,7 @@ class VendingMachineExceptionTest {
         //given
         String money = "z1234";
         //then
-        assertThrows(IllegalArgumentException.class, () -> vendingMachineException.validMoneyInputForm(money)); //when
+        assertThrows(IllegalArgumentException.class, () -> vendingMachineException.allOfValidInput(money)); //when
     }
 
     @Test
@@ -28,9 +28,9 @@ class VendingMachineExceptionTest {
 
         //when
         IllegalArgumentException lowerMoneyException = assertThrows(IllegalArgumentException.class,
-                () -> vendingMachineException.validMoneyType(lowerMoney));
+                () -> vendingMachineException.allOfValidInput(lowerMoney));
         IllegalArgumentException notTenUnitException = assertThrows(IllegalArgumentException.class,
-                () -> vendingMachineException.validMoneyType(notTenUnit));
+                () -> vendingMachineException.allOfValidInput(notTenUnit));
 
         //then
         assertEquals("[ERROR] 자판기 금액은 10원부터 시작입니다.", lowerMoneyException.getMessage());

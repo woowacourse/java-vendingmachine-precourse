@@ -2,6 +2,7 @@ package vendingmachine.goods;
 
 import vendingmachine.exception.VendingMachineException;
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class GoodsManager {
@@ -18,7 +19,7 @@ public class GoodsManager {
     private void makeGoodsInformation(String goodsList) {
         String[] itemList = goodsList.split(";");
         for (String item : itemList) {
-            String[] goodsInformation = item.replace("[", "").replace("]", "").split(",");
+            String[] goodsInformation = item.replaceAll("[\\[\\]]","").split(",");
             vendingMachineException.validGoodsMoneyType(goodsInformation[1]);
 
             Goods goods = new Goods(goodsInformation);
