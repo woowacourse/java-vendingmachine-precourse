@@ -11,7 +11,6 @@ public enum ErrorMessage {
     PRODUCT_FORMAT_NOT_MATCH("입력형태가 올바르지않습니다.\n" +
             "example : [콜라,1500,20];[사이다,1000,10]");
 
-    private final String prefix = "[ERROR] ";
     private final String message;
 
     ErrorMessage(String message) {
@@ -19,6 +18,7 @@ public enum ErrorMessage {
     }
 
     public String getMessage() {
+        final String prefix = "[ERROR] ";
         return prefix + this.message;
     }
 }
