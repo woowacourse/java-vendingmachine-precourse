@@ -4,9 +4,9 @@ import camp.nextstep.edu.missionutils.Randoms;
 
 import java.util.*;
 
-public class VendingMachineManager {
+public class CoinMaker {
 
-    public void makeRandomCoin(String money) {
+    public void randomCoin(String money) {
         int vendingMoney = Integer.parseInt(money);
         List<Integer> vendingMoneyList = Arrays.asList(500, 100, 50, 10);
         while (true) {
@@ -18,7 +18,7 @@ public class VendingMachineManager {
         }
     }
 
-    public HashMap<Integer, Integer> makeRemainCoinList(int money) {
+    public HashMap<Integer, Integer> remainCoinList(int money) {
         HashMap<Integer, Integer> coinList = new LinkedHashMap<>();
 
         for (Coin c : Coin.values()) {

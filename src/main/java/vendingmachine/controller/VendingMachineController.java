@@ -2,14 +2,14 @@ package vendingmachine.controller;
 
 import vendingmachine.vendingmachine.Coin;
 import vendingmachine.goods.GoodsManager;
-import vendingmachine.vendingmachine.VendingMachineManager;
+import vendingmachine.vendingmachine.CoinMaker;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
-    VendingMachineManager vendingMachineManager = new VendingMachineManager();
+    CoinMaker coinMaker = new CoinMaker();
     GoodsManager goodsManager;
 
     public void gameStart() {
@@ -18,7 +18,7 @@ public class VendingMachineController {
     }
 
     public void makeVendingMachineCoin(String money) {
-        vendingMachineManager.makeRandomCoin(money);
+        coinMaker.randomCoin(money);
         outputView.vendingMachineCoin(Coin.makeCoinList());
         makeGoodsCataLog();
     }
@@ -53,6 +53,6 @@ public class VendingMachineController {
     }
 
     public void returnCoin(int money) {
-        outputView.returnCoinList(vendingMachineManager.makeRemainCoinList(money));
+        outputView.returnCoinList(coinMaker.remainCoinList(money));
     }
 }
