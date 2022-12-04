@@ -58,5 +58,4 @@ public enum Coin {
                 .collect(Collectors.toList());
     }
 
-    // 추가 기능 구현
 }
