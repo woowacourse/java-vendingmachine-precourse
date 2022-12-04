@@ -8,7 +8,7 @@ import java.util.List;
 
 public class InputView {
 
-    public String read(){
+    public String read() {
         return Console.readLine();
     }
 
@@ -17,7 +17,7 @@ public class InputView {
         return Console.readLine();
     }
 
-    public String purchaseproduct(){
+    public String purchaseproduct() {
         System.out.print("구매할 상품명을 입력해주세요" + "\n");
         return Console.readLine();
     }
@@ -28,13 +28,18 @@ public class InputView {
     }
 
     public List<String> readproduct_list(String input) {
-        System.out.print("상품명과 가격, 수량을 입력해주세요" + "\n");
         List<String> list = new ArrayList<>();
+        input = input.replace("[", "");
+        input = input.replace("]", "");
         String[] buying = input.split(";");
         Collections.addAll(list, buying);
         return list;
     }
 
+    public String readProductsformat() {
+        System.out.print("상품명과 가격, 수량을 입력해주세요" + "\n");
+        return read();
+    }
 
 
 }
