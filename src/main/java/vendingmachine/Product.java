@@ -10,12 +10,15 @@ public class Product {
         PRICE = price;
         COUNT = count;
     }
-    public String getname(){
+
+    public String getname() {
         return NAME;
     }
-    public int getprice(){
+
+    public int getprice() {
         return Integer.parseInt(PRICE);
     }
+
     public String getcount() {
         return COUNT;
     }
