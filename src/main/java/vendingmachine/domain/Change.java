@@ -3,8 +3,8 @@ package vendingmachine.domain;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -39,13 +39,13 @@ public class Change {
             return Randoms.pickNumberInList(coins);
         }
         if (number > COIN_100.getAmount()) {
-            return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_100, coins.size())));
+            return Randoms.pickNumberInList(Collections.unmodifiableList(coins.subList(FROM_100, coins.size())));
         }
         if (number > COIN_50.getAmount()) {
-            return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_50, coins.size())));
+            return Randoms.pickNumberInList(Collections.unmodifiableList(coins.subList(FROM_50, coins.size())));
         }
 
-        return Randoms.pickNumberInList(new ArrayList<>(coins.subList(FROM_10, coins.size())));
+        return Randoms.pickNumberInList(Collections.unmodifiableList(coins.subList(FROM_10, coins.size())));
     }
 
     private void validateAmount(int amount) {
@@ -87,8 +87,8 @@ public class Change {
         return (amount / key.getAmount()) != 0;
     }
 
-    private HashMap<Coin, Integer> getInitCash() {
-        return new HashMap<Coin, Integer>() {{
+    private LinkedHashMap<Coin, Integer> getInitCash() {
+        return new LinkedHashMap<Coin, Integer>() {{
             for (Coin coin : Coin.values()) {
                 put(coin, 0);
             }
@@ -96,6 +96,6 @@ public class Change {
     }
 
     public Map<Coin, Integer> getStoredChange() {
-        return new HashMap<>(this.cash);
+        return Map.copyOf(this.cash);
     }
 }
