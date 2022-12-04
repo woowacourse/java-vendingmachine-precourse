@@ -47,35 +47,31 @@ class ApplicationTest extends NsTest {
 
     @Test
     void readproductTest(){
-        //when
         InputView inputview=new InputView();
-        //given
+
         List<String> exactFormat= Arrays.asList("[콜라,1500,20]", "[사이다,1000,10]");
-        //then
+
         assertThat(exactFormat.toString()).isEqualTo(inputview.readproduct_list("[콜라,1500,20];[사이다,1000,10]").toString());
     }
 
     @Test
     void set_vending_products테스트(){
-        //when
+
         Vendingmachine vendingmachine=new Vendingmachine();
-        //given
         List<String> testFormat=Arrays.asList("[콜라,1500,20]", "[사이다,1000,10]");
         List<Product> resultFormat=Arrays.asList(new Product("콜라","1500","20"));
-        //then
+
        // System.out.print(vendingmachine.set_vending_products(testFormat).get(0).getprice());
         assertThat(vendingmachine.set_vending_products(testFormat).get(0).getprice()).isEqualTo(resultFormat.get(0).getprice());
     }
     @Test
     void set_coins테스트(){
-        //when
+
         Vendingmachine vendingmachine=new Vendingmachine();
 
-        //given
 
         List<Integer> testFormat=Arrays.asList(0,4,1,0);
 
-        //then
-        assertThat(vendingmachine.setCoins(450).toString()).isEqualTo(testFormat.toString());
+        assertThat(vendingmachine.set_coins(450).toString()).isEqualTo(testFormat.toString());
     }
 }
