@@ -36,7 +36,7 @@ public class Product {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_NOT_DIVIDE_10.getMessage());
         }
 
-        if (isLessThan100(amount)) {
+        if (isLessThanMinProductAmount(amount)) {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_LESS_THAN_100.getMessage());
         }
     }
@@ -52,12 +52,12 @@ public class Product {
         return number <= 0;
     }
 
-    private boolean isLessThan100(int number) {
-        return number < MIN_PRODUCT_AMOUNT.get();
-    }
-
     private boolean isNotDivide10(int number) {
         return number % 10 != 0;
+    }
+
+    private boolean isLessThanMinProductAmount(int number) {
+        return number < MIN_PRODUCT_AMOUNT.get();
     }
 
     public void consume() {
@@ -65,7 +65,7 @@ public class Product {
         if (isLessThan0(total)) {
             throw new IllegalArgumentException(NOT_EXIST_PRODUCT.getMessage());
         }
-        
+
         this.total--;
     }
 }
