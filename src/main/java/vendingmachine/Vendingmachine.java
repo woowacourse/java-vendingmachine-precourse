@@ -7,8 +7,7 @@ import java.util.List;
 public class Vendingmachine {
     public static String status = "operating";
     private List<Product> products;
-    private int Amount=0;
-    private int total_Amount;
+    private int Amount;
     private List<String> purchased_products = new ArrayList<>();
     private final InputView inputview = new InputView();
     private final OutputView outputview = new OutputView();
@@ -31,10 +30,10 @@ public class Vendingmachine {
         } while (status.equals("operating"));
 
 
-        outputview.printAmount(Amount);
+        outputview.print_amount(Amount);
        // setCoins(Amount);
         outputview.changes();
-        outputview.totalConins(own_coins);
+        outputview.total_conins(own_coins);
 
 
     }
@@ -50,7 +49,7 @@ public class Vendingmachine {
         return products;
     }
 
-    public List<Integer> setCoins(int Amount) {
+    public List<Integer> set_coins(int Amount) {
         int f_hund = (Amount % 1000) / 500;
         int hund_d = (Amount % 500) / 100;
         int fif_ten = (Amount % 100) / 50;
