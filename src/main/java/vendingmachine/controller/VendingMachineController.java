@@ -9,6 +9,7 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
     InputView inputView = new InputView();
     OutputView outputView = new OutputView();
+    VendingMachineManager vendingMachineManager = new VendingMachineManager();
     GoodsManager goodsManager;
 
     public void gameStart() {
@@ -17,7 +18,6 @@ public class VendingMachineController {
     }
 
     public void makeVendingMachineCoin(String money) {
-        VendingMachineManager vendingMachineManager = new VendingMachineManager();
         vendingMachineManager.makeRandomCoin(money);
         outputView.vendingMachineCoin(Coin.makeCoinList());
         makeGoodsList();
@@ -53,7 +53,6 @@ public class VendingMachineController {
     }
 
     public void returnCoin(int money) {
-        VendingMachineManager vendingMachineManager = new VendingMachineManager();
         outputView.returnCoinList(vendingMachineManager.makeRemainCoinList(money));
     }
 }
