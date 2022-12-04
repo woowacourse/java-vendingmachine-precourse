@@ -24,13 +24,18 @@ public enum Coin {
     public int getAmount(){
         return this.amount;
     }
-
+    public static Coin of(int amount){
+        for(Coin tempCoin : values()){
+            if(tempCoin.amount == amount){
+                return tempCoin;
+            }
+        }
+        return null;
+    }
     public static List<Integer> getCoins(){
         return Arrays.stream(Coin.values())
                 .map(Coin::getAmount)
                 .collect(Collectors.toList());
     }
-    public static int getRandomCoin(){
-        return Randoms.pickNumberInList(getCoins());
-    }
+
 }
