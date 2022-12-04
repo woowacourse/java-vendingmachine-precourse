@@ -16,7 +16,7 @@ public class Goods {
         return price;
     }
 
-    public void deleteAmount() {
+    public void reduceAmount() {
         amount--;
     }
 

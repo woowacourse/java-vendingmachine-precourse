@@ -44,7 +44,7 @@ public class GoodsManager {
     public int purchaseGoods(String purchaseGoods, int money) {
         Goods goods = goodsInfo.get(purchaseGoods);
         if (goods.getAmount() != 0)
-            goods.deleteAmount();
+            goods.reduceAmount();
         return money - goods.getPrice();
     }
 
