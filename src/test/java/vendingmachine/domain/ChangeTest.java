@@ -14,7 +14,7 @@ class ChangeTest {
     @Nested
     class checkChangeAmount {
         @ParameterizedTest(name = "amount가 {0} 이면 예외발생.")
-        @CsvSource(value = {"0", "21", "44", "1005"}, delimiter = ':')
+        @CsvSource(value = {"21", "44", "1005"}, delimiter = ':')
         void case1(int amount) {
             IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
                 Change product = new Change(amount);
