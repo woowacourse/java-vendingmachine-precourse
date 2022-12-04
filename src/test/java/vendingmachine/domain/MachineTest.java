@@ -17,9 +17,9 @@ class MachineTest {
     private void initMachine() {
         machine = new Machine(1000);
         machine.addCash(3000);
-        machine.storeProduct(new Product("사이다", 3000, 1));
-        machine.storeProduct(new Product("콜라", 2000, 1));
-        machine.storeProduct(new Product("비싼거", 5000, 1));
+        machine.addProduct(new Product("사이다", 3000, 1));
+        machine.addProduct(new Product("콜라", 2000, 1));
+        machine.addProduct(new Product("비싼거", 5000, 1));
     }
 
     @Test

@@ -34,7 +34,7 @@ public class Machine {
         return change <= MIN_CASH.get() || change >= MAX_CASH.get();
     }
 
-    public void storeProduct(Product product) {
+    public void addProduct(Product product) {
         inventory.add(product);
     }
 

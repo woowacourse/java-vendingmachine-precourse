@@ -43,6 +43,6 @@ public class MachineController {
 
     private void setProducts() {
         List<Product> products = inputView.inputProduct();
-        products.forEach(machine::storeProduct);
+        products.forEach(machine::addProduct);
     }
 }
