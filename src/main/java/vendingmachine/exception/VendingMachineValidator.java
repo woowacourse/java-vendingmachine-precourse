@@ -4,7 +4,7 @@ import vendingmachine.goods.Goods;
 
 import java.util.HashMap;
 
-public class VendingMachineException {
+public class VendingMachineValidator {
 
     public void allOfValidInput(String money){
         validMoneyInputForm(money);

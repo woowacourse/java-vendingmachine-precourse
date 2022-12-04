@@ -1,29 +1,29 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.exception.VendingMachineException;
+import vendingmachine.exception.VendingMachineValidator;
 
 public class InputView {
-    VendingMachineException vendingMachineException = new VendingMachineException();
+    VendingMachineValidator vendingMachineValidator = new VendingMachineValidator();
 
     public String inputVendingMoney(){
         System.out.println(GameMessage.INPUT_VENDINGMACHINE_MONEY);
         String vendingMoney = Console.readLine();
-        vendingMachineException.allOfValidInput(vendingMoney);
+        vendingMachineValidator.allOfValidInput(vendingMoney);
         return vendingMoney;
     }
 
     public String inputGoodsPriceAmount(){
         System.out.println(GameMessage.INPUT_GOODS_PRICE_AMOUNT);
         String goods = Console.readLine();
-        vendingMachineException.validGoodsInputForm(goods);
+        vendingMachineValidator.validGoodsInputForm(goods);
         return goods;
     }
 
     public String inputUserMoney(){
         System.out.println(GameMessage.INPUT_USER_MONEY);
         String userMoney = Console.readLine();
-        vendingMachineException.allOfValidInput(userMoney);
+        vendingMachineValidator.allOfValidInput(userMoney);
         return userMoney;
     }
 

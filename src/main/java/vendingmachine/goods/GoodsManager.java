@@ -1,12 +1,11 @@
 package vendingmachine.goods;
 
-import vendingmachine.exception.VendingMachineException;
+import vendingmachine.exception.VendingMachineValidator;
 
-import java.util.Arrays;
 import java.util.HashMap;
 
 public class GoodsManager {
-    VendingMachineException vendingMachineException = new VendingMachineException();
+    VendingMachineValidator vendingMachineValidator = new VendingMachineValidator();
     private final HashMap<String, Goods> goodsInfo = new HashMap<>();
     private int minPrice = Integer.MAX_VALUE;
 
@@ -21,8 +20,8 @@ public class GoodsManager {
 
         for (String item : itemList) {
             String[] goodsInformation = item.replaceAll("[\\[\\]]","").split(",");
-            
-            vendingMachineException.validGoodsMoneyType(goodsInformation[1]);
+
+            vendingMachineValidator.validGoodsMoneyType(goodsInformation[1]);
 
             Goods goods = new Goods(goodsInformation);
             goodsInfo.put(goodsInformation[0],goods);
@@ -35,7 +34,7 @@ public class GoodsManager {
     }
 
     public boolean validPurchase(String purchaseGoods, int money) {
-        vendingMachineException.validGoodsName(purchaseGoods,goodsInfo);
+        vendingMachineValidator.validGoodsName(purchaseGoods,goodsInfo);
         Goods goods = goodsInfo.get(purchaseGoods);
         return goods.getPrice() <= money && goods.getAmount() != 0;
     }
