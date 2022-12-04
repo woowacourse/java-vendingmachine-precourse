@@ -3,7 +3,6 @@ package vendingmachine.domain;
 import vendingmachine.Coin;
 import vendingmachine.utils.ErrorMessage;
 
-import java.util.List;
 import java.util.Map;
 
 import static vendingmachine.utils.ErrorMessage.NOT_ENOUGH_CASH;
@@ -84,12 +83,6 @@ public class Machine {
         }
 
         return false;
-    }
-
-    public void total_conins(List<Integer> own_coins) {
-        for (Coin coin : Coin.values()) {
-            System.out.println(coin.getAmount() + "원" + " - " + own_coins.get(0) + "개");
-        }
     }
 
     private boolean isShortCash() {
