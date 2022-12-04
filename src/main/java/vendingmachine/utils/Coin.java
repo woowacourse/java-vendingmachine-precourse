@@ -7,6 +7,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static vendingmachine.utils.ErrorMessage.CHANGE_WRONG_VALUE;
+
 public enum Coin {
 
     COIN_500(500),
@@ -27,7 +29,7 @@ public enum Coin {
                 return coin;
             }
         }
-        throw new IllegalArgumentException("[ERROR]");
+        throw new IllegalArgumentException(CHANGE_WRONG_VALUE.getMessage());
     }
 
     public static int getRandomAmount(int number) {
@@ -42,7 +44,7 @@ public enum Coin {
             }
         }
 
-        throw new IllegalArgumentException(ErrorMessage.CHANGE_WRONG_VALUE.getMessage());
+        throw new IllegalArgumentException(CHANGE_WRONG_VALUE.getMessage());
     }
 
     public int getAmount() {
