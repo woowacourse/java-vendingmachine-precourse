@@ -25,7 +25,7 @@ public class MachineController {
         List<Product> products = inputView.inputProduct();
         products.forEach(machine::storeProduct);
 
-        int cash = inputView.inputcash();
+        int cash = inputView.inputCash();
         machine.addCash(cash);
 
         while (!machine.isExhausted()) {

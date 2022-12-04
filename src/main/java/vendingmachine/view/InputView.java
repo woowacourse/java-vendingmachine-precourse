@@ -88,7 +88,7 @@ public class InputView {
         return new Product(group[PRODUCT_NAME.get()], Integer.parseInt(group[PRODUCT_AMOUNT.get()]), Integer.parseInt(group[PRODUCT_TOTAL.get()]));
     }
 
-    public int inputcash() {
+    public int inputCash() {
         try {
             System.out.println(INPUT_CASH);
             String input = Console.readLine();
@@ -96,7 +96,7 @@ public class InputView {
             return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputcash();
+            return inputCash();
         }
     }
 }
