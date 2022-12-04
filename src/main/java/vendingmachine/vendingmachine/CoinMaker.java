@@ -23,18 +23,18 @@ public class CoinMaker {
     public HashMap<Integer, Integer> remainCoinList(int money) {
         HashMap<Integer, Integer> coinList = new LinkedHashMap<>();
 
-        for (Coin c : Coin.values()) {
+        for (Coin coin : Coin.values()) {
             if (money <= 0) break;
-            int require = money / c.getAmount();
+            int require = money / coin.getAmount();
 
-            if (require > c.getCount()) {
-                money -= (c.getCount() * c.getAmount());
-                coinList.put(c.getAmount(), c.getCount());
+            if (require > coin.getCount()) {
+                money -= (coin.getCount() * coin.getAmount());
+                coinList.put(coin.getAmount(), coin.getCount());
                 continue;
             }
 
-            money -= (require * c.getAmount());
-            coinList.put(c.getAmount(), require);
+            money -= (require * coin.getAmount());
+            coinList.put(coin.getAmount(), require);
         }
         return coinList;
     }

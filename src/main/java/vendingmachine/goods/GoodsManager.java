@@ -6,10 +6,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 public class GoodsManager {
-
+    VendingMachineException vendingMachineException = new VendingMachineException();
     private final HashMap<String, Goods> goodsInfo = new HashMap<>();
     private int minPrice = Integer.MAX_VALUE;
-    VendingMachineException vendingMachineException = new VendingMachineException();
+
 
     public GoodsManager(String goodsList){
         makeGoodsInformation(goodsList);
@@ -18,8 +18,10 @@ public class GoodsManager {
 
     private void makeGoodsInformation(String goodsList) {
         String[] itemList = goodsList.split(";");
+
         for (String item : itemList) {
             String[] goodsInformation = item.replaceAll("[\\[\\]]","").split(",");
+            
             vendingMachineException.validGoodsMoneyType(goodsInformation[1]);
 
             Goods goods = new Goods(goodsInformation);
