@@ -37,15 +37,10 @@ public class VendingMachineController {
 
 
     private void purchaseGoods(int money) {
-        /**
-         * 잔여금액이 상품 리스트의 최소 가격보다 크면 -> 상품 입력 -> 고른 상품이 잔여금으로 살 수 없다면
-         * -> 잔돈 반환
-         */
-
-        while(true){
-            if(!goodsManager.validMinPurchase(money))break;
+        while (goodsManager.validMinPurchase(money)) {
             String goods = inputView.inputPurchaseGoods();
-            if(!goodsManager.validPurchase(goods,money))break;
+            if (!goodsManager.validPurchase(goods, money)) break;
+
             money = goodsManager.purchaseGoods(goods, money);
             outputView.remainMoney(money);
         }
@@ -53,6 +48,7 @@ public class VendingMachineController {
     }
 
     private void returnCoin(int money) {
+        if (money == 0) return;
         outputView.returnCoinList(coinMaker.remainCoinList(money));
     }
 }

@@ -34,7 +34,7 @@ public class GoodsManager {
     public boolean validPurchase(String purchaseGoods, int money) {
         vendingMachineException.validGoodsName(purchaseGoods,goodsInfo);
         Goods goods = goodsInfo.get(purchaseGoods);
-        return goods.getPrice() < money && goods.getAmount() != 0;
+        return goods.getPrice() <= money && goods.getAmount() != 0;
     }
 
     public boolean validMinPurchase(int money) {
