@@ -46,9 +46,9 @@ public class InputView {
         try {
             int convert = Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            return false;
+            return true;
         }
-        return true;
+        return false;
     }
 
     public List<Product> inputProduct() {
