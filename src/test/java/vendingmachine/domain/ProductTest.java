@@ -35,7 +35,7 @@ class ProductTest {
     @Nested
     class checkProductAmount {
         @ParameterizedTest(name = "가격이 {1} 이면 예외발생.")
-        @CsvSource(value = {"사이다:1:1", "사이다:101:1"}, delimiter = ':')
+        @CsvSource(value = {"사이다:10:1", "사이다:101:1"}, delimiter = ':')
         void case1(String name, int amount, int total) {
             IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
                 Product product = new Product(name, amount, total);
