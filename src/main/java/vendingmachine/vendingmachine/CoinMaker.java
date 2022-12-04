@@ -9,13 +9,15 @@ public class CoinMaker {
     public void randomCoin(String money) {
         int vendingMoney = Integer.parseInt(money);
         List<Integer> vendingMoneyList = Arrays.asList(500, 100, 50, 10);
-        while (true) {
+
+        while (vendingMoney != 0) {
             int num = Randoms.pickNumberInList(vendingMoneyList);
-            if (vendingMoney == 0) break;
-            if (vendingMoney - num < 0) continue; // 450 - 500이 -50이면 다른 동전으로
-            vendingMoney -= num;
-            Coin.getCoin(num).addCoin();
+            if (vendingMoney - num >= 0) {
+                vendingMoney -= num;
+                Coin.getCoin(num).addCoin();
+            }
         }
+
     }
 
     public HashMap<Integer, Integer> remainCoinList(int money) {
