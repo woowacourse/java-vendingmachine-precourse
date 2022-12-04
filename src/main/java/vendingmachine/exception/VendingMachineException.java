@@ -6,14 +6,20 @@ import java.util.HashMap;
 
 public class VendingMachineException {
 
-    public void validMoneyInputForm(String money) {
+    public void allOfValidInput(String money){
+        validMoneyInputForm(money);
+        validMoneyType(money);
+
+    }
+
+    private void validMoneyInputForm(String money) {
         final String ONLY_NUMBER = "^[0-9]*$";
 
         if (!money.matches(ONLY_NUMBER))
             throw new IllegalArgumentException("[ERROR] 금액은 숫자만 입력하세요.");
     }
 
-    public void validMoneyType(String money) {
+    private void validMoneyType(String money) {
         if (Integer.parseInt(money) < 10)
             throw new IllegalArgumentException("[ERROR] 자판기 금액은 10원부터 시작입니다.");
         if (Integer.parseInt(money) % 10 !=0)

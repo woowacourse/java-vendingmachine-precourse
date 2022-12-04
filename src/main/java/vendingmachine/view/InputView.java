@@ -9,8 +9,7 @@ public class InputView {
     public String inputVendingMoney(){
         System.out.println(GameMessage.INPUT_VENDINGMACHINE_MONEY);
         String vendingMoney = Console.readLine();
-        vendingMachineException.validMoneyInputForm(vendingMoney);
-        vendingMachineException.validMoneyType(vendingMoney);
+        vendingMachineException.allOfValidInput(vendingMoney);
         return vendingMoney;
     }
 
@@ -24,8 +23,7 @@ public class InputView {
     public String inputUserMoney(){
         System.out.println(GameMessage.INPUT_USER_MONEY);
         String userMoney = Console.readLine();
-        vendingMachineException.validMoneyInputForm(userMoney);
-        vendingMachineException.validMoneyType(userMoney);
+        vendingMachineException.allOfValidInput(userMoney);
         return userMoney;
     }
 
