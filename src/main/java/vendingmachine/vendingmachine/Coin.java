@@ -31,7 +31,7 @@ public enum Coin {
     }
 
     public static Coin getCoin(int amount) {
-        return Arrays.stream(values()).filter(a -> a.getAmount() == amount).findAny().orElse(null);
+        return Arrays.stream(values()).filter(a -> a.getAmount() == amount).findAny().orElseGet(() -> null);
     }
 
     public static StringBuilder makeCoinList() {
