@@ -7,27 +7,36 @@ import java.util.List;
 public class Vendingmachine {
     public static String status = "operating";
     private List<Product> products;
-    private int Amount;
-    private List<String> purchased_products;
+    private int Amount=0;
+    private int total_Amount;
+    private List<String> purchased_products = new ArrayList<>();
     private final InputView inputview = new InputView();
     private final OutputView outputview = new OutputView();
     List<Integer> own_coins;
 
     public Vendingmachine() {
-        own_coins = setCoins(Integer.parseInt(inputview.readCoins()));
+        Amount=Integer.parseInt(inputview.readCoins());
+        own_coins = setCoins(Amount);
+        outputview.vending_changes();
         outputview.totalConins(own_coins);
-        products = set_vending_products(inputview.readproduct_list(inputview.read()));
+        products = set_vending_products(inputview.readproduct_list(inputview.readProductsformat()));
         Amount = inputview.readbuyingAmount();
 
         //
         do {
             outputview.printAmount(Amount);
             purchased_products.add(inputview.purchaseproduct());
-        } while (status.equals("operationg"));
+            calculate();
+
+        } while (status.equals("operating"));
 
 
-        //own_coins= Collections.emptyList();
-        // vending_products= inputview.readproduct_list(inputview.read());
+        outputview.printAmount(Amount);
+       // setCoins(Amount);
+        outputview.changes();
+        outputview.totalConins(own_coins);
+
+
     }
 
     public List<Product> set_vending_products(List<String> products_format) {
@@ -54,10 +63,16 @@ public class Vendingmachine {
     }
 
     public void calculate() {
-        for (Product product : products) {
-            if (purchased_products.contains(product.getname())) {
-                Amount = Amount - product.getprice();
+        for (int i = 0; i < products.size(); i++) {
+            for (String purchased : purchased_products) {
+                if (products.get(i).getname().equals(purchased)) {
+                    if (products.get(i).getprice() < Amount) {
+                        Amount = Amount - products.get(i).getprice();
+                    }
+                }
             }
-        }
+        }status="end";
+
     }
 }
+
