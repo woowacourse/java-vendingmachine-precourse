@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public enum Coin {
+
     COIN_500(500),
     COIN_100(100),
     COIN_50(50),
@@ -17,6 +18,7 @@ public enum Coin {
     }
 
     public static Coin of(int amount) {
+        
         for (Coin coin : values()) {
             if (coin.amount == amount) {
                 return coin;
@@ -30,6 +32,7 @@ public enum Coin {
     }
 
     public static List<Integer> getCoins() {
+
         return Arrays.stream(Coin.values())
                 .map(Coin::getAmount)
                 .collect(Collectors.toList());

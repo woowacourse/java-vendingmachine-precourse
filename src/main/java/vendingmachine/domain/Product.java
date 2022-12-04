@@ -4,11 +4,13 @@ import static vendingmachine.utils.ErrorMessage.*;
 import static vendingmachine.utils.MachineConst.MIN_PRODUCT_AMOUNT;
 
 public class Product {
+
     private final String name;
     private final int amount;
     private int total;
 
     public Product(String name, int amount, int total) {
+
         validateAmount(amount);
         validateTotal(total);
         this.name = name;
@@ -29,6 +31,7 @@ public class Product {
     }
 
     private void validateAmount(int amount) {
+
         if (isNotDivide10(amount)) {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_NOT_DIVIDE_10.getMessage());
         }
@@ -39,6 +42,7 @@ public class Product {
     }
 
     private void validateTotal(int total) {
+
         if (isLessThan0(total)) {
             throw new IllegalArgumentException(PRODUCT_AMOUNT_LESS_THAN_0.getMessage());
         }
@@ -57,9 +61,11 @@ public class Product {
     }
 
     public void consume() {
+
         if (isLessThan0(total)) {
             throw new IllegalArgumentException(NOT_EXIST_PRODUCT.getMessage());
         }
+        
         this.total--;
     }
 }

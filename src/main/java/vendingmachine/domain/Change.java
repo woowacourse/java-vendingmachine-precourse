@@ -11,6 +11,7 @@ import java.util.Map;
 import static vendingmachine.Coin.*;
 
 public class Change {
+
     private static final int FROM_100 = 1;
     private static final int FROM_50 = 2;
     private static final int FROM_10 = 3;
@@ -18,12 +19,14 @@ public class Change {
     private final Map<Coin, Integer> cash;
 
     Change(int amount) {
+
         this.cash = getInitCash();
         validateAmount(amount);
         createCoins(amount);
     }
 
     private void createCoins(int amount) {
+
         int current = amount;
         while (current > 0) {
             int pickNumber = getPickNumber(current);
@@ -35,6 +38,7 @@ public class Change {
     }
 
     private int getPickNumber(int number) {
+
         if (number > COIN_500.getAmount()) {
             return Randoms.pickNumberInList(coins);
         }
@@ -49,6 +53,7 @@ public class Change {
     }
 
     private void validateAmount(int amount) {
+
         if (isNotDivide10(amount)) {
             throw new IllegalArgumentException("[ERROR]");
         }
@@ -59,6 +64,7 @@ public class Change {
     }
 
     public Map<Coin, Integer> getChange(int amount) {
+
         Map<Coin, Integer> storedChange = getStoredChange();
         Map<Coin, Integer> result = getInitCash();
 
@@ -88,6 +94,7 @@ public class Change {
     }
 
     private LinkedHashMap<Coin, Integer> getInitCash() {
+
         return new LinkedHashMap<Coin, Integer>() {{
             for (Coin coin : Coin.values()) {
                 put(coin, 0);

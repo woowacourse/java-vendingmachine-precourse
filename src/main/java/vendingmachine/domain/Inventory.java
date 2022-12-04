@@ -7,6 +7,7 @@ import static vendingmachine.utils.ErrorMessage.NOT_EXIST_PRODUCT;
 import static vendingmachine.utils.ErrorMessage.PRODUCT_CANNOT_FOUNT;
 
 public class Inventory {
+
     private final List<Product> products = new ArrayList<>();
 
     public void add(Product product) {
@@ -14,6 +15,7 @@ public class Inventory {
     }
 
     public Product get(String name) {
+
         return products.stream()
                 .filter(o -> o.getName().equals(name))
                 .findFirst()
@@ -21,12 +23,14 @@ public class Inventory {
     }
 
     public Product consume(String name) {
+
         Product product = this.get(name);
         product.consume();
         return product;
     }
 
     public int getMinAmount() {
+
         return products.stream()
                 .mapToInt(Product::getAmount)
                 .min()
@@ -34,13 +38,16 @@ public class Inventory {
     }
 
     public boolean isEmpty() {
+
         int total = products.stream()
                 .mapToInt(Product::getTotal)
                 .sum();
+
         return total == 0;
     }
 
     public boolean contains(String name) {
+
         return products.stream()
                 .anyMatch(product -> product.getName().equals(name));
     }

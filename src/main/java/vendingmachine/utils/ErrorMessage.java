@@ -1,6 +1,7 @@
 package vendingmachine.utils;
 
 public enum ErrorMessage {
+    
     PRODUCT_AMOUNT_NOT_DIVIDE_10("금액은 10으로 나누어 떨어져야합니다."),
     PRODUCT_AMOUNT_LESS_THAN_0("금액은 0 이상이여야합니다."),
     PRODUCT_AMOUNT_LESS_THAN_100("상품 금액은 100원 이상이여야합니다."),

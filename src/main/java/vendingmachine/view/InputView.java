@@ -18,6 +18,7 @@ public class InputView {
     private static final int PRODUCT_FORMAT_LENGTH = 3;
 
     public int inputMachineCoin() {
+
         try {
             System.out.println(INPUT_INIT);
             String input = Console.readLine();
@@ -30,6 +31,7 @@ public class InputView {
     }
 
     private void validateNumber(String input) {
+
         if (isNotNumber(input)) {
             throw new IllegalArgumentException(ErrorMessage.COIN_NOT_NUMBER.getMessage());
         }
@@ -43,6 +45,7 @@ public class InputView {
     }
 
     private boolean isNotNumber(String input) {
+
         try {
             int convert = Integer.parseInt(input);
         } catch (NumberFormatException e) {
@@ -77,6 +80,7 @@ public class InputView {
     }
 
     private Product parseProduct(String input) {
+
         final String REGEX_PREFIX_SUFFIX = "\\[?\\]?";
         String refined = input.replaceAll(REGEX_PREFIX_SUFFIX, "");
         String[] group = refined.split(",");
@@ -89,6 +93,7 @@ public class InputView {
     }
 
     public int inputCash() {
+
         try {
             System.out.println(INPUT_CASH);
             String input = Console.readLine();

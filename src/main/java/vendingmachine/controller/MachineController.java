@@ -14,6 +14,7 @@ public class MachineController {
     private final OutputView outputView;
 
     public MachineController() {
+
         this.inputView = new InputView();
         this.outputView = new OutputView();
         int machineCoin = inputView.inputMachineCoin();
@@ -22,11 +23,9 @@ public class MachineController {
     }
 
     public void play() {
-        List<Product> products = inputView.inputProduct();
-        products.forEach(machine::storeProduct);
 
-        int cash = inputView.inputCash();
-        machine.addCash(cash);
+        setProducts();
+        setCash();
 
         while (!machine.isExhausted()) {
             outputView.outputRemainCoin(machine);
@@ -35,5 +34,15 @@ public class MachineController {
 
         outputView.outputRemainCoin(machine);
         outputView.outputResultChange(machine);
+    }
+
+    private void setCash() {
+        int cash = inputView.inputCash();
+        machine.addCash(cash);
+    }
+
+    private void setProducts() {
+        List<Product> products = inputView.inputProduct();
+        products.forEach(machine::storeProduct);
     }
 }

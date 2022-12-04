@@ -17,12 +17,14 @@ public class Machine {
     private final Inventory inventory;
 
     public Machine(int cash) {
+
         validateChange(cash);
         this.change = new Change(cash);
         this.inventory = new Inventory();
     }
 
     private void validateChange(int change) {
+
         if (isOutOfRange(change)) {
             throw new IllegalArgumentException(ErrorMessage.CHANGE_OUT_OF_RANGE.getMessage());
         }
@@ -41,13 +43,14 @@ public class Machine {
     }
 
     public void purchase(String name) {
+
         Product product = inventory.consume(name);
         validatePurchase(product);
-
         this.storedCash -= product.getAmount();
     }
 
     private void validatePurchase(Product product) {
+
         if (isBiggerThanRemainCash(product)) {
             throw new IllegalArgumentException(NOT_ENOUGH_CASH.getMessage());
         }
