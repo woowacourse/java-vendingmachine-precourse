@@ -25,8 +25,8 @@ public class MachineController {
         List<Product> products = inputView.inputProduct();
         products.forEach(machine::storeProduct);
 
-        int cache = inputView.inputCache();
-        machine.storeCash(cache);
+        int cash = inputView.inputcash();
+        machine.addCash(cash);
 
         while (!machine.isExhausted()) {
             outputView.outputRemainCoin(machine);

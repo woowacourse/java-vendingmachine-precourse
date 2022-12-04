@@ -86,7 +86,7 @@ public class InputView {
         return new Product(group[0], Integer.parseInt(group[1]), Integer.parseInt(group[2]));
     }
 
-    public int inputCache() {
+    public int inputcash() {
         try {
             System.out.println(INPUT_CASH);
             String input = Console.readLine();
@@ -94,7 +94,7 @@ public class InputView {
             return Integer.parseInt(input);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
-            return inputCache();
+            return inputcash();
         }
     }
 }
