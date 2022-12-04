@@ -7,8 +7,6 @@ import vendingmachine.utils.ErrorMessage;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 import static vendingmachine.utils.MachineConst.*;
@@ -45,9 +43,12 @@ public class InputView {
     }
 
     private boolean isNotNumber(String input) {
-        Pattern pattern = Pattern.compile(REGEX_NOT_NUMBER);
-        Matcher matcher = pattern.matcher(input);
-        return matcher.find();
+        try {
+            int convert = Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            return false;
+        }
+        return true;
     }
 
     public List<Product> inputProduct() {
