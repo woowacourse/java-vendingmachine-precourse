@@ -3,6 +3,7 @@ package vendingmachine;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import vendingmachine.utils.Coin;
 
 class CoinTest {
 

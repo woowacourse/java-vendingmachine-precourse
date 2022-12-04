@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
-import vendingmachine.Coin;
 import vendingmachine.domain.Machine;
+import vendingmachine.utils.Coin;
 
 import java.util.Map;
 
@@ -14,7 +14,7 @@ public class OutputView {
 
         Map<Coin, Integer> currentChange = machine.getStoredChange();
         System.out.println(OUTPUT_INIT_CHANGE);
-        
+
         for (Map.Entry<Coin, Integer> entry : currentChange.entrySet()) {
             Coin key = entry.getKey();
             Integer count = entry.getValue();

@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import vendingmachine.Coin;
+import vendingmachine.utils.Coin;
 import vendingmachine.utils.ErrorMessage;
 
 import java.util.Map;

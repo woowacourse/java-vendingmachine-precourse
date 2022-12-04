@@ -1,11 +1,11 @@
 package vendingmachine.domain;
 
-import vendingmachine.Coin;
+import vendingmachine.utils.Coin;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static vendingmachine.Coin.of;
+import static vendingmachine.utils.Coin.of;
 import static vendingmachine.utils.MachineConst.MIN_CASH;
 
 public class Change {

@@ -1,7 +1,6 @@
-package vendingmachine;
+package vendingmachine.utils;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import vendingmachine.utils.ErrorMessage;
 
 import java.util.Arrays;
 import java.util.Collections;
