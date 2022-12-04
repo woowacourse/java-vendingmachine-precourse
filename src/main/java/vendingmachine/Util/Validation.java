@@ -11,7 +11,9 @@ public class Validation {
     private final char ORDER_PREFIX = '[';
     private final char ORDER_SUFFIX = ']';
     private final char ORDER_SEPARATOR = ';';
-    private final char ORDER_INFO_SEPARATOR = ',';
+    private final char PRODUCT_INFO_SEPARATOR = ',';
+    private final int PRODUCT_INFO_SIZE = 3;
+
 
     public int inputValueToNumber(String number) {
         int toNumber;
@@ -49,8 +51,6 @@ public class Validation {
         throw new IllegalArgumentException(SOLD_OUT_PRODUCT.toMessage());
     }
 
-
-
     public void productOrder(String order) {
         try {
             checkPrefixAndSuffix(order);
@@ -61,7 +61,10 @@ public class Validation {
     }
 
     private void checkPrefixAndSuffix(String order) {
-        if (order.charAt(0) != ORDER_PREFIX || order.charAt(order.length() - 1) != ORDER_SUFFIX) {
+        char prefix = order.charAt(0);
+        char suffix = order.charAt(order.length() - 1);
+
+        if (prefix != ORDER_PREFIX || suffix != ORDER_SUFFIX) {
             throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
         }
     }
@@ -84,9 +87,9 @@ public class Validation {
     }
 
     private void checkOrderInfoCount(String order) {
-        String separator = String.valueOf(ORDER_INFO_SEPARATOR);
+        String separator = String.valueOf(PRODUCT_INFO_SEPARATOR);
 
-        if (order.split(separator).length != 3) {
+        if (order.split(separator).length != PRODUCT_INFO_SIZE) {
             throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
         }
     }
