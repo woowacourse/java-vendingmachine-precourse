@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import static vendingmachine.Coin.*;
+import static vendingmachine.utils.MachineConst.MIN_CASH;
 
 public class Change {
 
@@ -23,6 +24,13 @@ public class Change {
         this.cash = getInitCash();
         validateAmount(amount);
         createCoins(amount);
+    }
+
+    private void validateAmount(int amount) {
+
+        if (isNotDivideByMinCash(amount)) {
+            throw new IllegalArgumentException("[ERROR]");
+        }
     }
 
     private void createCoins(int amount) {
@@ -52,15 +60,8 @@ public class Change {
         return Randoms.pickNumberInList(Collections.unmodifiableList(coins.subList(FROM_10, coins.size())));
     }
 
-    private void validateAmount(int amount) {
-
-        if (isNotDivide10(amount)) {
-            throw new IllegalArgumentException("[ERROR]");
-        }
-    }
-
-    private boolean isNotDivide10(int number) {
-        return number % 10 != 0;
+    private boolean isNotDivideByMinCash(int number) {
+        return number % MIN_CASH.get() != 0;
     }
 
     public Map<Coin, Integer> getChange(int amount) {
