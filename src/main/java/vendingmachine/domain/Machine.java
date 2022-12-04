@@ -30,7 +30,7 @@ public class Machine {
     }
 
     private boolean isOutOfRange(int change) {
-        return change <= MIN_CASH.getValue() || change >= MAX_CASH.getValue();
+        return change <= MIN_CASH.get() || change >= MAX_CASH.get();
     }
 
     public void storeProduct(Product product) {

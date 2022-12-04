@@ -49,7 +49,7 @@ public class Product {
     }
 
     private boolean isLessThan100(int number) {
-        return number < MIN_PRODUCT_AMOUNT.getValue();
+        return number < MIN_PRODUCT_AMOUNT.get();
     }
 
     private boolean isNotDivide10(int number) {

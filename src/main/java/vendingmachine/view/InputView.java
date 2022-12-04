@@ -11,8 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-import static vendingmachine.utils.MachineConst.MAX_CASH;
-import static vendingmachine.utils.MachineConst.MIN_CASH;
+import static vendingmachine.utils.MachineConst.*;
 import static vendingmachine.utils.Message.*;
 
 public class InputView {
@@ -42,7 +41,7 @@ public class InputView {
     }
 
     private boolean isOutOfRange(int number) {
-        return number <= MIN_CASH.getValue() || number >= MAX_CASH.getValue();
+        return number <= MIN_CASH.get() || number >= MAX_CASH.get();
     }
 
     private boolean isNotNumber(String input) {
@@ -77,13 +76,15 @@ public class InputView {
     }
 
     private Product parseProduct(String input) {
-        String substring = input.substring(1, input.length() - 2);
-        String[] group = substring.split(",");
+        final String REGEX_PREFIX_SUFFIX = "\\[?\\]?";
+        String refined = input.replaceAll(REGEX_PREFIX_SUFFIX, "");
+        String[] group = refined.split(",");
 
         if (group.length != PRODUCT_FORMAT_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.PRODUCT_FORMAT_NOT_MATCH.getMessage());
         }
-        return new Product(group[0], Integer.parseInt(group[1]), Integer.parseInt(group[2]));
+
+        return new Product(group[PRODUCT_NAME.get()], Integer.parseInt(group[PRODUCT_AMOUNT.get()]), Integer.parseInt(group[PRODUCT_TOTAL.get()]));
     }
 
     public int inputcash() {

@@ -3,7 +3,10 @@ package vendingmachine.utils;
 public enum MachineConst {
     MIN_CASH(10),
     MAX_CASH(100000000),
-    MIN_PRODUCT_AMOUNT(100);
+    MIN_PRODUCT_AMOUNT(100),
+    PRODUCT_NAME(0),
+    PRODUCT_AMOUNT(1),
+    PRODUCT_TOTAL(2);
 
     private final int value;
 
@@ -11,7 +14,7 @@ public enum MachineConst {
         this.value = value;
     }
 
-    public int getValue() {
+    public int get() {
         return this.value;
     }
 }
