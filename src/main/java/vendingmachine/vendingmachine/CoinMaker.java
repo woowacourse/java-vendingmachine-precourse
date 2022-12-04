@@ -26,11 +26,13 @@ public class CoinMaker {
         for (Coin c : Coin.values()) {
             if (money <= 0) break;
             int require = money / c.getAmount();
+
             if (require > c.getCount()) {
                 money -= (c.getCount() * c.getAmount());
                 coinList.put(c.getAmount(), c.getCount());
                 continue;
             }
+
             money -= (require * c.getAmount());
             coinList.put(c.getAmount(), require);
         }
