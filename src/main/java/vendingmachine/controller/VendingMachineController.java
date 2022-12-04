@@ -20,12 +20,12 @@ public class VendingMachineController {
     public void makeVendingMachineCoin(String money) {
         vendingMachineManager.makeRandomCoin(money);
         outputView.vendingMachineCoin(Coin.makeCoinList());
-        makeGoodsList();
+        makeGoodsCataLog();
     }
 
-    public void makeGoodsList() {
-        String goodsList = inputView.inputGoodsPriceAmount();
-        goodsManager = new GoodsManager(goodsList);
+    public void makeGoodsCataLog() {
+        String goodsCataLog = inputView.inputGoodsPriceAmount();
+        goodsManager = new GoodsManager(goodsCataLog);
         InputUserMoney();
     }
 
