@@ -15,15 +15,15 @@ public class Vendingmachine {
 
     public Vendingmachine() {
         Amount=Integer.parseInt(inputview.readCoins());
-        own_coins = setCoins(Amount);
+        own_coins = set_coins(Amount);
         outputview.vending_changes();
-        outputview.totalConins(own_coins);
+        outputview.total_conins(own_coins);
         products = set_vending_products(inputview.readproduct_list(inputview.readProductsformat()));
         Amount = inputview.readbuyingAmount();
 
         //
         do {
-            outputview.printAmount(Amount);
+            outputview.print_amount(Amount);
             purchased_products.add(inputview.purchaseproduct());
             calculate();
 
