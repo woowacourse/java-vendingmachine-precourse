@@ -48,6 +48,18 @@ class MachineTest {
         });
 
         String message = exception.getMessage();
+        System.out.println(message);
+        Assertions.assertTrue(message.contains(EXCEPTION_MESSAGE_PREFIX));
+    }
+
+    @Test
+    @DisplayName("잔돈이 0 ~ 100,000,000 사이의 숫자가 아니면 예외")
+    void wrongValueInMachineConstructor() {
+        IllegalArgumentException exception = Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            Machine testMachine = new Machine(-3);
+        });
+
+        String message = exception.getMessage();
         Assertions.assertTrue(message.contains(EXCEPTION_MESSAGE_PREFIX));
     }
 
