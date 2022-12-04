@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static vendingmachine.utils.ErrorMessage.NOT_EXIST_PRODUCT;
+import static vendingmachine.utils.ErrorMessage.PRODUCT_CANNOT_FOUNT;
 
 public class Inventory {
     private final List<Product> products = new ArrayList<>();
@@ -11,7 +12,7 @@ public class Inventory {
     public void add(Product product) {
         this.products.add(product);
     }
-    
+
     public Product get(String name) {
         return products.stream()
                 .filter(o -> o.getName().equals(name))
@@ -29,7 +30,7 @@ public class Inventory {
         return products.stream()
                 .mapToInt(Product::getAmount)
                 .min()
-                .orElseThrow(() -> new IllegalArgumentException("[ERROR]"));
+                .orElseThrow(() -> new IllegalArgumentException(PRODUCT_CANNOT_FOUNT.getMessage()));
     }
 
     public boolean isEmpty() {

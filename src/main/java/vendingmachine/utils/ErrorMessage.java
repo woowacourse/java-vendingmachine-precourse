@@ -9,7 +9,8 @@ public enum ErrorMessage {
     COIN_NOT_NUMBER("금액은 숫자여야합니다."),
     CHANGE_OUT_OF_RANGE("자판기가 가질 수 있는 금액은 0 ~ 100,000,000 입니다."),
     PRODUCT_FORMAT_NOT_MATCH("입력형태가 올바르지않습니다.\n" +
-            "example : [콜라,1500,20];[사이다,1000,10]");
+            "example : [콜라,1500,20];[사이다,1000,10]"),
+    PRODUCT_CANNOT_FOUNT("상품을 찾을 수 없습니다.");
 
     private final String message;
 
