@@ -17,26 +17,26 @@ public class VendingMachineController {
         makeVendingMachineCoin(money);
     }
 
-    public void makeVendingMachineCoin(String money) {
+    private void makeVendingMachineCoin(String money) {
         coinMaker.randomCoin(money);
         outputView.vendingMachineCoin(Coin.makeCoinList());
         makeGoodsCataLog();
     }
 
-    public void makeGoodsCataLog() {
+    private void makeGoodsCataLog() {
         String goodsCataLog = inputView.inputGoodsPriceAmount();
         goodsManager = new GoodsManager(goodsCataLog);
         InputUserMoney();
     }
 
-    public void InputUserMoney() {
+    private void InputUserMoney() {
         int money = Integer.parseInt(inputView.inputUserMoney());
         outputView.remainMoney(money);
         purchaseGoods(money);
     }
 
 
-    public void purchaseGoods(int money) {
+    private void purchaseGoods(int money) {
         /**
          * 잔여금액이 상품 리스트의 최소 가격보다 크면 -> 상품 입력 -> 고른 상품이 잔여금으로 살 수 없다면
          * -> 잔돈 반환
@@ -52,7 +52,7 @@ public class VendingMachineController {
         returnCoin(money);
     }
 
-    public void returnCoin(int money) {
+    private void returnCoin(int money) {
         outputView.returnCoinList(coinMaker.remainCoinList(money));
     }
 }
