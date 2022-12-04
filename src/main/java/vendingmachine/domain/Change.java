@@ -96,6 +96,6 @@ public class Change {
     }
 
     public Map<Coin, Integer> getStoredChange() {
-        return Map.copyOf(this.cash);
+        return new LinkedHashMap<>(this.cash);
     }
 }
