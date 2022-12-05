@@ -6,8 +6,6 @@ import vendingmachine.Domain.Product;
 import vendingmachine.Util.Validation.ProductInspector;
 import vendingmachine.Util.Validation.Validation;
 
-import java.util.List;
-
 public class View extends Print {
 
     Validation validate = new Validation();
@@ -30,7 +28,7 @@ public class View extends Print {
         }
     }
 
-    public List<Product> getInitProducts() {
+    public Product getInitProducts() {
         inputProductInfo();
         String inputOrder = Console.readLine();
 
@@ -58,7 +56,7 @@ public class View extends Print {
         }
     }
 
-    public String getProductNameToBuy(List<Product> product) {
+    public String getProductNameToBuy(Product product) {
         inputProductToBuy();
         String name = Console.readLine();
 
