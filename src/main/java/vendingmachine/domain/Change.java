@@ -2,8 +2,7 @@ package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.Coin;
-import vendingmachine.util.Error;
-import vendingmachine.util.Message;
+import vendingmachine.util.ErrorMessage;
 
 import java.util.*;
 
@@ -28,7 +27,7 @@ public class Change {
         if (change % coins.stream()
                 .mapToInt(o -> o).min()
                 .orElseThrow(IllegalArgumentException::new) != 0)
-            throw new IllegalArgumentException(Error.CHANGE_INPUT_EXCEPTION.getMessage());
+            throw new IllegalArgumentException(ErrorMessage.CHANGE_INPUT_EXCEPTION.getMessage());
     }
 
     private Map<Coin, Integer> initCoin() {
