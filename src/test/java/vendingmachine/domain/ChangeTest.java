@@ -18,5 +18,12 @@ class ChangeTest {
     public void changeFirstPrintTest() throws Exception{
         System.out.println(new Change(500).startChangePrint());
     }
-
+    @Test
+    @DisplayName("마지막 잔돈 처리 테스트")
+    public void leftChangePrintTest() throws Exception{
+        Change change = new Change(500);
+        System.out.println(change.startChangePrint());
+       change.saveLeftCoin(300);
+        System.out.println(change.leftChangePrint());
+    }
 }
