@@ -10,6 +10,10 @@ public class VendingMachine {
         this.shelf = shelf;
         this.amount = amount;
     }
-
+    // 최저 가격보다 amount 가 작을 때, 모든 상품이 소진되었을 때 끝
+    public boolean isEndSate(){
+        if(shelf.getMinPrice() > amount || shelf.allProductSoldOut())return true;
+        return false;
+    }
 
 }
