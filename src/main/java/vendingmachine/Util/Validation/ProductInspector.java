@@ -5,14 +5,13 @@ import vendingmachine.Domain.Product;
 import java.util.List;
 
 import static vendingmachine.Constant.Error.*;
-import static vendingmachine.Constant.Error.NOT_PROPER_ORDER_COMMAND;
-import static vendingmachine.Constant.ProductConstant.PRODUCT_INFO_SIZE;
-import static vendingmachine.Constant.ProductSeparator.*;
+import static vendingmachine.Constant.ProductConstant.*;
+import static vendingmachine.Constant.ProductSeparator.ORDER_SEPARATOR;
 import static vendingmachine.Constant.ProductSeparator.PRODUCT_INFO_SEPARATOR;
 
 public class ProductInspector extends Validation {
 
-    public void productOrder(String order) {
+    public void inputInitOrder(String order) {
         try {
             prefixAndSuffix(order);
 
@@ -30,7 +29,7 @@ public class ProductInspector extends Validation {
             return;
         }
 
-        checkOrderDetail(order);
+        checkOrderProducts(order);
     }
 
     private void checkOrderArray(String[] orders) {
@@ -39,18 +38,35 @@ public class ProductInspector extends Validation {
         }
     }
 
-    // TODO: 메소드 분리
-    private void checkOrderDetail(String order) {
-        String separator = PRODUCT_INFO_SEPARATOR.toString();
-        String[] orderDetails = order.split(separator);
+    private void checkOrderProducts(String order) {
+        String[] productInformation = order.split(PRODUCT_INFO_SEPARATOR.toString());
 
-        if (orderDetails.length != PRODUCT_INFO_SIZE.getValue()) {
+        if (productInformation.length != PRODUCT_INFO_SIZE.getValue()) {
             throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
         }
 
-//        String a = orderDetails[PRODUCT_NAME_INDEX.getValue()];
-//        String b = orderDetails[PRODUCT_PRICE_INDEX.getValue()];
-//        String c = orderDetails[PRODUCT_COUNT_INDEX.getValue()];
+        productName(productInformation[PRODUCT_NAME_INDEX.getValue()]);
+        productPrice(productInformation[PRODUCT_PRICE_INDEX.getValue()]);
+        productCount(productInformation[PRODUCT_COUNT_INDEX.getValue()]);
+    }
+
+    private void productName(String name) {
+        if (name.length() < 1) {
+            throw new IllegalArgumentException(PRODUCT_NAME_BLANK.toMessage());
+        }
+    }
+
+    private void productPrice(String price) {
+        int productPrice = inputNumber(price);
+        inputMoneyDivision(productPrice);
+    }
+
+    private void productCount(String count) {
+        try {
+            inputNumber(count);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(NOT_ALLOWED_ORDER_ZERO.toMessage());
+        }
     }
 
     public void productNameExist(String name, List<Product> product) {
