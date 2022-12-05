@@ -13,28 +13,32 @@ public class Shelf {
     public Shelf(List<Product> products) {
         this.products = products;
     }
-    public boolean productExist(String productName){
-        return products.stream().anyMatch(o -> o.equals(productName));
+
+    public void productExist(String productName) {
+       products.stream().filter(o -> o.getName().equals(productName))
+                .findFirst().orElseThrow(() -> new IllegalArgumentException(PRODUCT_NOT_EXIST.getMessage()));
     }
-    public int getMinPrice(){
+
+    public int getMinPrice() {
         return products.stream()
                 .mapToInt(Product::getPrice)
                 .min()
                 .orElseThrow(IllegalArgumentException::new);
     }
-    public void consumeProduct(String productName){
+
+    public void consumeProduct(String productName) {
         products.stream().filter(o -> o.equals(productName))
                 .forEach(o -> {
                     if (o.getPrice() == 0) {
                         throw new IllegalArgumentException(PRODUCT_SOLD_OUT.getMessage());
                     }
                     o.sell();
-        });
+                });
     }
 
-    public boolean allProductSoldOut(){
+    public boolean allProductSoldOut() {
         int totalCount = products.stream().mapToInt(o -> o.getCount()).sum();
-        if(totalCount == 0)return true;
+        if (totalCount == 0) return true;
         return false;
     }
 }
