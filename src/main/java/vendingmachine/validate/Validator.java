@@ -1,6 +1,9 @@
 package vendingmachine.validate;
 
+import vendingmachine.Coin;
 import vendingmachine.util.ErrorMessage;
+
+import static vendingmachine.Coin.*;
 
 public class Validator {
     private final String SEPARATE = ",";
@@ -26,5 +29,13 @@ public class Validator {
     public void productCountValidator(String input) {
         if(Integer.valueOf(input) < 0)
             throw new IllegalArgumentException(ErrorMessage.PRODUCT_COUNT_UNDER_ZERO.getMessage());
+    }
+
+    public void inputPriceValidator(String input) {
+        inputDigitalValidator(input);
+        int price = Integer.parseInt(input);
+        if(price < 100 || price % COIN_10.getAmount() !=0){
+            throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_EXCEPTION.getMessage());
+        }
     }
 }

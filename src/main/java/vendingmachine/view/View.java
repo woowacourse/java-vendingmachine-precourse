@@ -54,9 +54,23 @@ public class View {
             validate.productInputSizeValidator(product);
             String[] productValue = product.split(",");
             validate.inputDigitalValidator(productValue[1]);
-            validate.inputDigitalValidator(productValue[2]);
+            validate.inputPriceValidator(productValue[2]);
             validate.productCountValidator(productValue[2]);
             productsMaker.add(new Product(productValue[0], Integer.parseInt(productValue[1]), Integer.parseInt(productValue[2])));
         }
+    }
+    public void printAskInputPrice(){
+        System.out.println(Message.ASK_PRICE.getMessage());
+    }
+    public int inputAmount(){
+        printAskInputPrice();
+        String amount = Console.readLine();
+        try{
+            validate.inputDigitalValidator(amount);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return inputAmount();
+        }
+        return Integer.parseInt(amount);
     }
 }

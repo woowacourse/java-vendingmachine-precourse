@@ -8,7 +8,8 @@ public enum Message {
     MACHINE_SUFFIX("구매할 상품을 입력해 주세요."),
     MACHINE_CHANGE("자판기가 보유하고 있는 금액을 입력해 주세요.\n"),
     MACHINE_HAS_CHANGE("자판기가 보유한 동전\n"),
-    PRODUCT_LIST("상품명과 가격, 수량을 입력해 주세요.\n");
+    PRODUCT_LIST("상품명과 가격, 수량을 입력해 주세요.\n"),
+    ASK_PRICE("투입 금액을 입력해 주세요.\n");
 
     private final String message;
 

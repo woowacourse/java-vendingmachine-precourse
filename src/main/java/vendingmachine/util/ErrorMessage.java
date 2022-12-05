@@ -6,7 +6,8 @@ public enum ErrorMessage {
     PRODUCT_NOT_EXIST("상품이 존재하지 않습니다."),
     PRODUCT_SOLD_OUT("상품이 다 팔렸습니다."),
     INPUT_NOT_DIGIT("입력값이 숫자가 아닙니다."),
-    PRODUCT_FORMAT_EXCEPTION("상품 포맷에 맞춰 입력해 주세요.");
+    PRODUCT_FORMAT_EXCEPTION("상품 포맷에 맞춰 입력해 주세요."),
+    PRODUCT_PRICE_EXCEPTION("상품 가격은 100원보다 커야하고, 10원으로 나누어 떨어져야 합니다.");
 
     private final String message;
     private final String prefix = "[ERROR] ";
