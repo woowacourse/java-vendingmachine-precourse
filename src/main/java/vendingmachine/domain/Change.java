@@ -51,7 +51,7 @@ public class Change {
 
     public String startChangePrint() {
         StringBuilder print = new StringBuilder();
-        print.append(CHANGE_MESSAGE.getMessage());
+        print.append(MACHINE_HAS_CHANGE.getMessage());
         for (Coin tempCoin : haveCoin.keySet()) {
             print.append(tempCoin.getAmount());
             print.append(CHANGE_AMOUNT_PREFIX.getMessage());

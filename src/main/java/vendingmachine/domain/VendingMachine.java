@@ -28,6 +28,6 @@ public class VendingMachine {
         StringBuilder print = new StringBuilder();
         print.append(MACHINE_PREFIX.getMessage() + amount +"\n");
         print.append(MACHINE_SUFFIX.getMessage());
-        return null;
+        return print.toString();
     }
 }
