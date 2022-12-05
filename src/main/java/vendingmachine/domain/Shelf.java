@@ -13,4 +13,10 @@ public class Shelf {
     public boolean productExist(String productName){
         return products.stream().anyMatch(o -> o.equals(productName));
     }
+    public int getMinPrice(){
+        return products.stream()
+                .mapToInt(Product::getPrice)
+                .min()
+                .orElseThrow(IllegalArgumentException::new);
+    }
 }
