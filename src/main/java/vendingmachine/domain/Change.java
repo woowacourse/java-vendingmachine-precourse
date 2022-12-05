@@ -15,11 +15,11 @@ public class Change {
     public Change(int change) {
         // change 에 따라 랜덤 동전 뽑아서 갯수 저장하기
         haveCoin = initCoin();
-        validate(change);
+        changeValidation(change);
         coinMaker(change);
     }
 
-    private void validate(int change) {
+    private void changeValidation(int change) {
         if(change % coins.stream()
                 .mapToInt(o -> o).min()
                 .orElseThrow(IllegalArgumentException::new) != 0)
@@ -45,4 +45,7 @@ public class Change {
     }
 
     // 남은 금액보다 같거나 작게 가장 큰 동전부터 거슬러줌
+    public String startChangePrint(){
+        return null;
+    }
 }
