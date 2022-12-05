@@ -9,6 +9,7 @@ import java.util.List;
 public class Product {
 
     private final HashMap<String, HashMap<String, Integer>> product;
+    Integer cheapestPrice = null;
 
     public Product() {
         this.product = new HashMap<>();
@@ -19,6 +20,13 @@ public class Product {
             put(ProductSeparator.PRICE, price);
             put(ProductSeparator.COUNT, count);
         }});
+
+        if (cheapestPrice == null) {
+            cheapestPrice = price;
+            return;
+        }
+
+        cheapestPrice = Math.min(cheapestPrice, price);
     }
 
     public List<String> getNames() {
@@ -37,16 +45,5 @@ public class Product {
         int count = this.product.get(name).get(ProductSeparator.COUNT) - 1;
         this.product.get(name).put(ProductSeparator.COUNT, count);
     }
-
-    public int getCheapestPrice() {
-        int cheapestPrice = Integer.MAX_VALUE;
-
-        for (String name : getNames()) {
-            cheapestPrice = Math.min(getPrice(name), cheapestPrice);
-        }
-
-        return cheapestPrice;
-    }
-
 
 }
