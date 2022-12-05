@@ -27,15 +27,16 @@ public class Validator {
     }
 
     public void productCountValidator(String input) {
+        inputDigitalValidator(input);
         if(Integer.valueOf(input) < 0)
-            throw new IllegalArgumentException(ErrorMessage.PRODUCT_COUNT_UNDER_ZERO.getMessage());
+            throw new IllegalArgumentException("수량수량");
     }
 
     public void inputPriceValidator(String input) {
         inputDigitalValidator(input);
         int price = Integer.parseInt(input);
         if(price < 100 || price % COIN_10.getAmount() !=0){
-            throw new IllegalArgumentException(ErrorMessage.PRODUCT_PRICE_EXCEPTION.getMessage());
+            throw new IllegalArgumentException("가격가격");
         }
     }
 }

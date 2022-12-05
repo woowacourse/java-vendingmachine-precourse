@@ -26,14 +26,16 @@ public class Shelf {
                 .orElseThrow(IllegalArgumentException::new);
     }
 
-    public void consumeProduct(String productName) {
-        products.stream().filter(o -> o.equals(productName))
-                .forEach(o -> {
-                    if (o.getPrice() == 0) {
-                        throw new IllegalArgumentException(PRODUCT_SOLD_OUT.getMessage());
-                    }
-                    o.sell();
-                });
+    public int consumeProduct(String productName) {
+        for (Product o : products) {
+            if (o.getName().equals(productName)) {
+                if (o.getCount() == 0) {
+                    throw new IllegalArgumentException(PRODUCT_SOLD_OUT.getMessage());
+                }
+                return o.sell();
+            }
+        }
+        return 0;
     }
 
     public boolean allProductSoldOut() {

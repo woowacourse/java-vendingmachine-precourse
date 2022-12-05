@@ -32,7 +32,8 @@ public class Product {
         return count;
     }
 
-    public void sell(){
+    public int sell(){
         count --;
+        return price;
     }
 }

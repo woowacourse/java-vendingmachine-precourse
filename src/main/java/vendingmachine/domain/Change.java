@@ -85,10 +85,12 @@ public class Change {
         StringBuilder print = new StringBuilder();
         print.append(CHANGE_MESSAGE.getMessage());
         for (Coin tempCoin : leftCoins.keySet()) {
-            print.append(tempCoin.getAmount());
-            print.append(CHANGE_AMOUNT_PREFIX.getMessage());
-            print.append(leftCoins.get(tempCoin));
-            print.append(CHANGE_AMOUNT_SUFFIX.getMessage());
+            if(leftCoins.get(tempCoin) >0){
+                print.append(tempCoin.getAmount());
+                print.append(CHANGE_AMOUNT_PREFIX.getMessage());
+                print.append(leftCoins.get(tempCoin));
+                print.append(CHANGE_AMOUNT_SUFFIX.getMessage());
+            }
         }
         return print.toString();
     }

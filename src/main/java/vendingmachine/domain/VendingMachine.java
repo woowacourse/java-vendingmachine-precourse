@@ -20,13 +20,15 @@ public class VendingMachine {
         return false;
     }
     public void buyProduct(String name){
-        shelf.consumeProduct(name);
+        shelf.productExist(name);
+        amount -= shelf.consumeProduct(name);
+        change.saveLeftCoin(amount);
     }
 
     @Override
     public String toString() {
         StringBuilder print = new StringBuilder();
-        print.append(MACHINE_PREFIX.getMessage() + amount +"\n");
+        print.append(MACHINE_PREFIX.getMessage() + amount +"원\n");
         print.append(MACHINE_SUFFIX.getMessage());
         return print.toString();
     }

@@ -5,7 +5,7 @@ public enum Message {
     CHANGE_AMOUNT_PREFIX("원 - "),
     CHANGE_AMOUNT_SUFFIX("개\n"),
     MACHINE_PREFIX("투입 금액: "),
-    MACHINE_SUFFIX("구매할 상품을 입력해 주세요."),
+    MACHINE_SUFFIX("구매할 상품명을 입력해 주세요."),
     MACHINE_CHANGE("자판기가 보유하고 있는 금액을 입력해 주세요.\n"),
     MACHINE_HAS_CHANGE("자판기가 보유한 동전\n"),
     PRODUCT_LIST("상품명과 가격, 수량을 입력해 주세요.\n"),

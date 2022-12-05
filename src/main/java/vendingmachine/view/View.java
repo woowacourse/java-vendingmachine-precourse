@@ -3,6 +3,7 @@ package vendingmachine.view;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Change;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.Message;
 import vendingmachine.validate.Validator;
 
@@ -52,9 +53,8 @@ public class View {
         for (String product : products) {
             validate.productFormatValidator(product);
             validate.productInputSizeValidator(product);
-            String[] productValue = product.split(",");
-            validate.inputDigitalValidator(productValue[1]);
-            validate.inputPriceValidator(productValue[2]);
+            String[] productValue = product.replace("[","").replace("]","").split(",");
+            validate.inputPriceValidator(productValue[1]);
             validate.productCountValidator(productValue[2]);
             productsMaker.add(new Product(productValue[0], Integer.parseInt(productValue[1]), Integer.parseInt(productValue[2])));
         }
@@ -72,5 +72,19 @@ public class View {
             return inputAmount();
         }
         return Integer.parseInt(amount);
+    }
+    public String inputBuyProduct(VendingMachine vendingMachine){
+        System.out.println(vendingMachine.toString());
+        String buyProduct = Console.readLine();
+        try{
+            vendingMachine.buyProduct(buyProduct);
+        }catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+            return inputBuyProduct(vendingMachine);
+        }
+        return buyProduct;
+    }
+    public void printChange(String changeState){
+        System.out.println(changeState);
     }
 }
