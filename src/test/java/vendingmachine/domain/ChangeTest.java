@@ -13,5 +13,10 @@ class ChangeTest {
         org.assertj.core.api.Assertions.assertThatThrownBy(()-> new Change(55))
                 .isInstanceOf(IllegalArgumentException.class);
     }
+    @Test
+    @DisplayName("잔돈의 최저 단위로 나눠지지 않을 때 예외처리")
+    public void changeFirstPrintTest() throws Exception{
+        System.out.println(new Change(500).startChangePrint());
+    }
 
 }
