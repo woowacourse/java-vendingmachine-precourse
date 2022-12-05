@@ -10,6 +10,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 
 import static vendingmachine.Constant.Coin.values;
+import static vendingmachine.Constant.ProductConstant.*;
+import static vendingmachine.Constant.ProductSeparator.*;
 
 public class Caster {
 
@@ -72,32 +74,41 @@ public class Caster {
         return sum;
     }
 
-    public List<Product> toProducts(String userInput) {
-        List<Product> products = new ArrayList<>();
+    public Product toProducts(String userInput) {
+        Product product = new Product();
 
-        for (String productInfo : userInput.split(";")) {
+        userInput = getOrderString(userInput);
+
+        for (String productInfo : userInput.split(ORDER_SEPARATOR.toString())) {
             String name = getProductName(productInfo);
-            int cost = getProductCost(productInfo);
+            int price = getProductPrice(productInfo);
             int count = getProductCount(productInfo);
 
-            products.add(new Product(name, cost, count));
+            product.addProduct(name, price, count);
         }
 
-        return products;
+        return product;
     }
 
-    private String getProductName(String productInfo) {
-        return productInfo.split(",")[0].substring(1);
+    private String getOrderString(String inputOrder) {
+        return inputOrder
+                .replace(ORDER_PREFIX.toString(), "")
+                .replace(ORDER_SUFFIX.toString(), "");
     }
 
-    private int getProductCost(String productInfo) {
-        return Integer.parseInt(productInfo.split(",")[1]);
+    private String getProductName(String product) {
+        return product
+                .split(PRODUCT_INFO_SEPARATOR.toString())[PRODUCT_NAME_INDEX.getValue()];
     }
 
-    private int getProductCount(String productInfo) {
-        String count = productInfo.split(",")[2];
-        count = count.substring(0, count.length() - 1);
+    private int getProductPrice(String product) {
+        String price = product.split(PRODUCT_INFO_SEPARATOR.toString())[PRODUCT_PRICE_INDEX.getValue()];
+        return Integer.parseInt(price);
+    }
 
+    private int getProductCount(String product) {
+        String count = product
+                .split(PRODUCT_INFO_SEPARATOR.toString())[PRODUCT_COUNT_INDEX.getValue()];
         return Integer.parseInt(count);
     }
 
