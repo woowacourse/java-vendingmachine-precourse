@@ -3,12 +3,16 @@ package vendingmachine.Util;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.Domain.Change;
 import vendingmachine.Domain.Product;
+import vendingmachine.Util.Validation.ProductInspector;
+import vendingmachine.Util.Validation.Validation;
 
 import java.util.List;
 
 public class View extends Print {
 
     Validation validate = new Validation();
+    ProductInspector inspector = new ProductInspector();
+
     Caster cast = new Caster();
 
     public Change getInitChanges() {
@@ -31,7 +35,7 @@ public class View extends Print {
         String order = Console.readLine();
 
         try {
-            validate.productOrder(order);
+            inspector.productOrder(order);
             return cast.toProducts(order);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -59,8 +63,8 @@ public class View extends Print {
         String name = Console.readLine();
 
         try {
-            validate.productNameExist(name, product);
-            validate.productSoldOut(name, product);
+            inspector.productNameExist(name, product);
+            inspector.productSoldOut(name, product);
             return name;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
