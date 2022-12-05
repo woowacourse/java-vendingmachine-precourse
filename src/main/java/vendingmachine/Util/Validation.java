@@ -5,30 +5,30 @@ import vendingmachine.Domain.Product;
 import java.util.List;
 
 import static vendingmachine.Constant.Error.*;
-import static vendingmachine.Constant.ProductConstant.*;
+import static vendingmachine.Constant.ProductConstant.MINIMUM_DIVIDED_PRICE;
+import static vendingmachine.Constant.ProductConstant.PRODUCT_INFO_SIZE;
 import static vendingmachine.Constant.ProductSeparator.*;
 
 public class Validation {
 
-    public int inputValueToNumber(String number) {
+    public int inputMoneyForChanges(String number) {
         int toNumber;
 
-        // TODO: 메소드 분리
         try {
             toNumber = Integer.parseInt(number);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException(INPUT_ALLOWED_ONLY_NUMBER.toMessage());
         }
 
-        if (toNumber <= 0) {
-            throw new IllegalArgumentException(NOT_ALLOWED_MINUS_NUMBER.toMessage());
-        }
+        return toNumber;
+    }
 
-        if (toNumber % MINIMUM_DIVIDED_PRICE.getValue() != 0) {
+    public int inputMoneyDivision(int number) {
+        if (number % MINIMUM_DIVIDED_PRICE.getValue() != 0) {
             throw new IllegalArgumentException(NOT_ALLOWED_SINGLE_DIGIT.toMessage());
         }
 
-        return toNumber;
+        return number;
     }
 
     public void productNameExist(String name, List<Product> product) {

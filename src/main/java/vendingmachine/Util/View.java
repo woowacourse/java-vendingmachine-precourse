@@ -17,7 +17,8 @@ public class View extends Print {
 
         int changeMoney;
         try {
-            changeMoney = validate.inputValueToNumber(inputChangeCost);
+            changeMoney = validate.inputMoneyForChanges(inputChangeCost);
+            validate.inputMoneyDivision(changeMoney);
             return cast.toChangeCoins(changeMoney);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -44,7 +45,9 @@ public class View extends Print {
         String inputMoney = Console.readLine();
 
         try {
-            return validate.inputValueToNumber(inputMoney);
+            int purchaseMoney = validate.inputMoneyForChanges(inputMoney);
+            validate.inputMoneyDivision(purchaseMoney);
+            return purchaseMoney;
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getPurchaseMoney();
