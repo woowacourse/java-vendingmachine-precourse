@@ -1,5 +1,9 @@
 package vendingmachine.domain;
 
+import vendingmachine.util.Message;
+
+import static vendingmachine.util.Message.*;
+
 public class VendingMachine {
     private final Change change;
     private final Shelf shelf;
@@ -15,5 +19,15 @@ public class VendingMachine {
         if(shelf.getMinPrice() > amount || shelf.allProductSoldOut())return true;
         return false;
     }
+    public void buyProduct(String name){
+        shelf.consumeProduct(name);
+    }
 
+    @Override
+    public String toString() {
+        StringBuilder print = new StringBuilder();
+        print.append(MACHINE_PREFIX.getMessage() + amount +"\n");
+        print.append(MACHINE_SUFFIX.getMessage());
+        return null;
+    }
 }
