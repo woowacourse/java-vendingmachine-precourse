@@ -7,7 +7,7 @@ import static vendingmachine.Constant.ProductSeparator.ORDER_SUFFIX;
 
 public class Validation {
 
-    public int inputMoneyForChanges(String number) {
+    public int inputNumber(String number) {
         int toNumber;
 
         try {
@@ -16,7 +16,14 @@ public class Validation {
             throw new IllegalArgumentException(INPUT_ALLOWED_ONLY_NUMBER.toMessage());
         }
 
+        isNegativeNumber(toNumber);
         return toNumber;
+    }
+
+    private void isNegativeNumber(int number) {
+        if(number < 1){
+            throw new IllegalArgumentException(NOT_ALLOWED_MINUS_NUMBER.toMessage());
+        }
     }
 
     public int inputMoneyDivision(int number) {
@@ -35,7 +42,6 @@ public class Validation {
             throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
         }
     }
-
 
 
 }

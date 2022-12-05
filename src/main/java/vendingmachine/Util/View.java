@@ -21,7 +21,7 @@ public class View extends Print {
 
         int changeMoney;
         try {
-            changeMoney = validate.inputMoneyForChanges(inputChangeCost);
+            changeMoney = validate.inputNumber(inputChangeCost);
             validate.inputMoneyDivision(changeMoney);
             return cast.toChangeCoins(changeMoney);
         } catch (IllegalArgumentException e) {
@@ -32,11 +32,11 @@ public class View extends Print {
 
     public List<Product> getInitProducts() {
         inputProductInfo();
-        String order = Console.readLine();
+        String inputOrder = Console.readLine();
 
         try {
-            inspector.productOrder(order);
-            return cast.toProducts(order);
+            inspector.inputInitOrder(inputOrder);
+            return cast.toProducts(inputOrder);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
             return getInitProducts();
@@ -49,7 +49,7 @@ public class View extends Print {
         String inputMoney = Console.readLine();
 
         try {
-            int purchaseMoney = validate.inputMoneyForChanges(inputMoney);
+            int purchaseMoney = validate.inputNumber(inputMoney);
             validate.inputMoneyDivision(purchaseMoney);
             return purchaseMoney;
         } catch (IllegalArgumentException e) {
