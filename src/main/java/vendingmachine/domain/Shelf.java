@@ -31,4 +31,10 @@ public class Shelf {
                     o.sell();
         });
     }
+
+    public boolean allProductSoldOut(){
+        int totalCount = products.stream().mapToInt(o -> o.getCount()).sum();
+        if(totalCount == 0)return true;
+        return false;
+    }
 }
