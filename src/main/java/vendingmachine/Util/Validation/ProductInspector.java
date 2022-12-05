@@ -2,19 +2,15 @@ package vendingmachine.Util.Validation;
 
 import vendingmachine.Domain.Product;
 
-import java.util.List;
-
 import static vendingmachine.Constant.Error.*;
 import static vendingmachine.Constant.ProductConstant.*;
-import static vendingmachine.Constant.ProductSeparator.ORDER_SEPARATOR;
-import static vendingmachine.Constant.ProductSeparator.PRODUCT_INFO_SEPARATOR;
+import static vendingmachine.Constant.ProductSeparator.*;
 
 public class ProductInspector extends Validation {
 
     public void inputInitOrder(String order) {
         try {
             prefixAndSuffix(order);
-
             checkOrderInfo(order);
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
@@ -23,6 +19,9 @@ public class ProductInspector extends Validation {
 
     private void checkOrderInfo(String order) {
         String separator = String.valueOf(ORDER_SEPARATOR.getChar());
+
+        order = order.replace(ORDER_PREFIX.toString(), "")
+                .replace(ORDER_SUFFIX.toString(), "");
 
         if (order.contains(separator)) {
             checkOrderArray(order.split(separator));
@@ -69,20 +68,16 @@ public class ProductInspector extends Validation {
         }
     }
 
-    public void productNameExist(String name, List<Product> product) {
-        for (Product productObject : product) {
-            if (name.equals(productObject.getName())) return;
-        }
+    public void productNameExist(String name, Product product) {
+        if (product.getNames().contains(name)) return;
 
         throw new IllegalArgumentException(NOT_EXIST_PRODUCT_NAME.toMessage());
     }
 
-    public void productSoldOut(String name, List<Product> product) {
-        for (Product productObject : product) {
-            if (name.equals(productObject.getName()) && productObject.getCount() > 0) return;
+    public void productSoldOut(String name, Product product) {
+        if (product.getCount(name) < 1) {
+            throw new IllegalArgumentException(SOLD_OUT_PRODUCT.toMessage());
         }
-
-        throw new IllegalArgumentException(SOLD_OUT_PRODUCT.toMessage());
     }
 
 }
