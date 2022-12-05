@@ -8,6 +8,9 @@ public enum ProductSeparator {
 
     private final char character;
 
+    public static final String PRICE = "PRICE";
+    public static final String COUNT = "COUNT";
+
     ProductSeparator(char character) {
         this.character = character;
     }
