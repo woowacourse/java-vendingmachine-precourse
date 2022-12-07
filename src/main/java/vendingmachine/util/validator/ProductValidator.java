@@ -1,6 +1,5 @@
 package vendingmachine.util.validator;
 
-import java.util.Arrays;
 import java.util.List;
 import vendingmachine.util.Constants;
 import vendingmachine.util.ExceptionMessage;
@@ -13,20 +12,12 @@ public class ProductValidator extends Validator {
 
     @Override
     public void validate(String input) throws IllegalArgumentException {
-        List<String> productInfo = formatProductInfo(input);
+        List<String> productInfo = Util.formatProductInfo(input);
         validateInfoSize(productInfo);
         validateProductPrice(productInfo);
         validateProductQuantity(productInfo);
     }
 
-    private static List<String> formatProductInfo(String input) {
-        return splitByComma(Util.removeDelimiters(Util.removeSpace(input)));
-    }
-
-
-    private static List<String> splitByComma(String input) {
-        return Arrays.asList(Util.removeSpace(input).split(","));
-    }
 
     private void validateProductQuantity(List<String> productInfo) {
         String productQuantity = productInfo.get(Constants.PRODUCT_QUANTITY_INDEX.getValue());

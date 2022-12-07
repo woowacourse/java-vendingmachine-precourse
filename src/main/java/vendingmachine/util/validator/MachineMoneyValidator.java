@@ -13,5 +13,4 @@ public class MachineMoneyValidator extends Validator {
         validateUnit(machineMoney);
     }
 
-
 }

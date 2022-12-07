@@ -10,9 +10,11 @@ import vendingmachine.util.validator.ProductsValidator;
 
 public class InputView {
 
+
     private enum ConsoleMessage {
         INPUT_MACHINE_MONEY("자판기가 보유하고 있는 금액을 입력해 주세요."),
-        INPUT_PRODUCTS("상품명과 가격, 수량을 입력해 주세요.");
+        INPUT_PRODUCTS("상품명과 가격, 수량을 입력해 주세요."),
+        INPUT_BUDGET("투입 금액을 입력해 주세요.");
 
         private final String message;
 
@@ -36,7 +38,10 @@ public class InputView {
         return productsInfo;
     }
 
-    private static void validate(List<String> productsInfo) {
-
+    public int readBudget() {
+        System.out.println(ConsoleMessage.INPUT_BUDGET.message);
+        String input = Console.readLine();
+        return Integer.parseInt(input);
     }
+
 }

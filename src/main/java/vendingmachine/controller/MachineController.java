@@ -22,7 +22,10 @@ public class MachineController {
 
             // 자판기의 상품 설정
             Products products = Products.from(inputView.readProducts());
+            System.out.println(products.getProducts());
 
+            // 투입 금액 및 구매 상품 입력
+            int budget = inputView.readBudget();
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
         }

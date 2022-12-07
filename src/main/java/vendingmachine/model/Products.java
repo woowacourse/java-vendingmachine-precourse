@@ -21,7 +21,7 @@ public class Products {
         return new Products(products);
     }
 
-    private static List<String> splitByComma(String productInfo) {
-        return Arrays.asList(Util.removeSpace(productInfo).split(","));
+    public List<Product> getProducts() {
+        return products;
     }
 }
