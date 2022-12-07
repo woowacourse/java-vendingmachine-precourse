@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import vendingmachine.model.Budget;
 import vendingmachine.model.MachineMoney;
 import vendingmachine.model.MachineStatus;
+import vendingmachine.model.Machine;
 import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.util.ConsoleMessage;
@@ -12,7 +13,7 @@ import vendingmachine.view.OutputView;
 public class MachineController {
     private final InputView inputView;
     private final OutputView outputView;
-    private MachineStatus machineStatus;
+    private Machine machine;
 
     public MachineController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -21,20 +22,17 @@ public class MachineController {
 
     public void play() {
 
-        // 자판기가 보유하고 있는 금액 설정
         MachineMoney machineMoney = MachineMoney.from(inputView.readMachineMoney());
         outputView.printMachineMoney(machineMoney);
 
-        // 자판기의 상품 설정
         Products products = Products.from(inputView.readProducts());
 
-        // 투입 금액 및 구매 상품 입력
         Budget budget = Budget.from(inputView.readBudget());
-        machineStatus = MachineStatus.AVAILABLE;
 
-        while (machineStatus.isAvailable()) {
+        machine = Machine.by(machineMoney, products, budget);
+        outputView.printLeftMoney(budget);
 
-            outputView.printLeftMoney(budget);
+        while (machine.isAvailable()) {
             Product purchaseProduct = inputView.readPurchaseProduct(products);
 
             if (!purchaseProduct.hasStock()) {
@@ -49,19 +47,25 @@ public class MachineController {
             }
 
             if (budget.hasTooLittleBudget(products.findMinimumPrice())) {
-                machineStatus = MachineStatus.TOO_LITTLE_BUDGET;
+                updateMachineStatus(MachineStatus.TOO_LITTLE_BUDGET);
             }
             if (products.hasNoProduct()) {
-                machineStatus = MachineStatus.NO_PRODUCT;
+                updateMachineStatus(MachineStatus.NO_PRODUCT);
             }
+
+            outputView.printLeftMoney(budget);
+
 
         }
 
         // 잔돈 돌려주기
-        outputView.printLeftMoney(budget);
         outputView.printFinalLeftMoney(machineMoney.getLeftMoney(budget.getLeftMoney()));
 
 
+    }
+
+    private void updateMachineStatus(MachineStatus machineStatus) {
+        this.machine.updateMachineStatus(machineStatus);
     }
 
 }
