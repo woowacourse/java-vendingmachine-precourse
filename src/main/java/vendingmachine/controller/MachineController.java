@@ -2,6 +2,7 @@ package vendingmachine.controller;
 
 import vendingmachine.model.Budget;
 import vendingmachine.model.MachineMoney;
+import vendingmachine.model.MachineStatus;
 import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.view.InputView;
@@ -10,6 +11,7 @@ import vendingmachine.view.OutputView;
 public class MachineController {
     private final InputView inputView;
     private final OutputView outputView;
+    private MachineStatus machineStatus;
 
     public MachineController(InputView inputView, OutputView outputView) {
         this.inputView = inputView;
@@ -24,16 +26,24 @@ public class MachineController {
 
             // 자판기의 상품 설정
             Products products = Products.from(inputView.readProducts());
-            System.out.println(products.getProducts());
 
             // 투입 금액 및 구매 상품 입력
             Budget budget = Budget.from(inputView.readBudget());
+            machineStatus = MachineStatus.AVAILABLE;
 
-            Product purchaseProduct = products.findProduct(inputView.readPurchaseProduct());
-            System.out.println(purchaseProduct);
+            while (machineStatus.isAvailable()) {
+                Product purchaseProduct = products.findProduct(inputView.readPurchaseProduct());
+                if(!purchaseProduct.hasStock()){
+                    System.out.println("해당 상품의 재고가 존재하지 않습니다.");
+                }
+                if(!budget.isAffordable(purchaseProduct)){
+                    System.out.println("투입 금액이 모자랍니다.");
+                }
+            }
 
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
         }
     }
+
 }

@@ -25,6 +25,18 @@ public class Product {
         return this.productName.equals(productName);
     }
 
+    public boolean hasStock() {
+        return this.productQuantity > 0;
+    }
+
+    public int getProductPrice() {
+        return productPrice;
+    }
+
+    public boolean isAffordable(int budget) {
+        return this.productPrice <= budget;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -33,4 +45,6 @@ public class Product {
                 ", productQuantity=" + productQuantity +
                 '}';
     }
+
+
 }

@@ -12,8 +12,11 @@ public class Budget {
         return new Budget(budget);
     }
 
-    public void buyProduct(String productName, Products products) {
-        Product product = products.findProduct(productName);
-        System.out.println(product);
+    public void buy(Product product) {
+        budget -= product.getProductPrice();
+    }
+
+    public boolean isAffordable(Product purchaseProduct) {
+        return purchaseProduct.isAffordable(budget);
     }
 }

@@ -3,19 +3,12 @@ package vendingmachine.view;
 import camp.nextstep.edu.missionutils.Console;
 import java.util.Arrays;
 import java.util.List;
-import vendingmachine.model.Product;
-import vendingmachine.util.ExceptionMessage;
 import vendingmachine.util.Util;
 import vendingmachine.util.validator.BudgetValidator;
 import vendingmachine.util.validator.MachineMoneyValidator;
 import vendingmachine.util.validator.ProductsValidator;
 
 public class InputView {
-
-
-    public String readPurchaseProduct() {
-        return Console.readLine();
-    }
 
     private enum ConsoleMessage {
         INPUT_MACHINE_MONEY("자판기가 보유하고 있는 금액을 입력해 주세요."),
@@ -49,6 +42,10 @@ public class InputView {
         String input = Console.readLine();
         new BudgetValidator().validate(input);
         return Integer.parseInt(input);
+    }
+
+    public String readPurchaseProduct() {
+        return Console.readLine();
     }
 
 }
