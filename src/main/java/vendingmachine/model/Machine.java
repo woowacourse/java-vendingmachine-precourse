@@ -4,6 +4,7 @@ public class Machine {
 
     private final MachineMoney machineMoney;
     private final Products products;
+    private Product purchaseProduct;
     private final Budget budget;
     private MachineStatus machineStatus;
 
@@ -24,6 +25,27 @@ public class Machine {
 
     public void updateMachineStatus(MachineStatus machineStatus) {
         this.machineStatus = machineStatus;
+    }
+
+    public void purchaseProduct(Product product) {
+        this.purchaseProduct = product;
+    }
+
+    public boolean isOutOfStock(){
+        return !purchaseProduct.hasStock();
+    }
+
+    public boolean isOutOfBudget(){
+        return !budget.isAffordable(purchaseProduct);
+    }
+
+    public boolean isAbleToBuy(){
+        return purchaseProduct.hasStock() && budget.isAffordable(purchaseProduct);
+    }
+
+    public void purchase(){
+        budget.buy(purchaseProduct);
+        products.buy(purchaseProduct);
     }
 
 

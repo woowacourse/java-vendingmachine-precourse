@@ -33,17 +33,15 @@ public class MachineController {
         outputView.printLeftMoney(budget);
 
         while (machine.isAvailable()) {
-            Product purchaseProduct = inputView.readPurchaseProduct(products);
-
-            if (!purchaseProduct.hasStock()) {
+            machine.purchaseProduct(inputView.readPurchaseProduct(products));
+            if (machine.isOutOfStock()) {
                 System.out.println(ConsoleMessage.NO_STOCK.getMessage());
             }
-            if (!budget.isAffordable(purchaseProduct)) {
+            if (machine.isOutOfBudget()) {
                 System.out.println(ConsoleMessage.NO_BUDGET.getMessage());
             }
-            if (purchaseProduct.hasStock() && budget.isAffordable(purchaseProduct)) {
-                budget.buy(purchaseProduct);
-                products.buy(purchaseProduct);
+            if (machine.isAbleToBuy()) {
+                machine.purchase();
             }
 
             if (budget.hasTooLittleBudget(products.findMinimumPrice())) {
