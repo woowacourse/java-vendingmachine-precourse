@@ -19,8 +19,11 @@ public class MachineMoney {
 
         while (machineMoney > 0) {
             int newCoin = Randoms.pickNumberInList(coin);
-            System.out.println(newCoin);
-            machineMoney -= newCoin;
+            System.out.println("new: " + newCoin);
+            if (newCoin <= machineMoney) {
+                machineMoney -= newCoin;
+            }
+            System.out.println("total: " + machineMoney);
         }
 
         return new MachineMoney(machineMoney);
