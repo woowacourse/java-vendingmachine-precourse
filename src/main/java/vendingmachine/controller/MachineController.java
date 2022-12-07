@@ -19,46 +19,64 @@ public class MachineController {
     }
 
     public void play() {
+        MachineMoney machineMoney = setMachineMoney();
+        Products products = setProducts();
+        Budget budget = setBudget();
+        machine = Machine.by(machineMoney, products, budget);
 
+        outputView.printLeftMoney(budget);
+        purchaseProducts(products, budget);
+        outputView.printFinalLeftMoney(machineMoney.getLeftMoney(budget.getLeftMoney()));
+    }
+
+    private Budget setBudget() {
+        return Budget.from(inputView.readBudget());
+    }
+
+    private Products setProducts() {
+        return Products.from(inputView.readProducts());
+    }
+
+    private MachineMoney setMachineMoney() {
         MachineMoney machineMoney = MachineMoney.from(inputView.readMachineMoney());
         outputView.printMachineMoney(machineMoney);
+        return machineMoney;
+    }
 
-        Products products = Products.from(inputView.readProducts());
-
-        Budget budget = Budget.from(inputView.readBudget());
-
-        machine = Machine.by(machineMoney, products, budget);
-        outputView.printLeftMoney(budget);
-
+    private void purchaseProducts(Products products, Budget budget) {
         while (machine.isAvailable()) {
             machine.purchaseProduct(inputView.readPurchaseProduct(products));
-            if (machine.isOutOfStock()) {
-               outputView.printOutOfStock();
-            }
-            if (machine.isOutOfBudget()) {
-               outputView.printOutOfBudget();
-            }
-            if (machine.isAbleToBuy()) {
-                machine.purchase();
-            }
-
-            if (budget.hasTooLittleBudget(products.findMinimumPrice())) {
-                updateMachineStatus(MachineStatus.TOO_LITTLE_BUDGET);
-            }
-            if (products.hasNoProduct()) {
-                updateMachineStatus(MachineStatus.NO_PRODUCT);
-            }
-
-            outputView.printLeftMoney(budget);
-
-
+            handleUnableToBuy();
+            handleAbleToBuy();
+            handleEndMachine(products, budget);
         }
-
-        // 잔돈 돌려주기
-        outputView.printFinalLeftMoney(machineMoney.getLeftMoney(budget.getLeftMoney()));
-
-
     }
+
+    private void handleUnableToBuy() {
+        if (machine.isOutOfStock()) {
+            outputView.printOutOfStock();
+        }
+        if (machine.isOutOfBudget()) {
+            outputView.printOutOfBudget();
+        }
+    }
+
+    private void handleAbleToBuy() {
+        if (machine.isAbleToBuy()) {
+            machine.purchase();
+        }
+    }
+
+    private void handleEndMachine(Products products, Budget budget) {
+        if (budget.hasTooLittleBudget(products.findMinimumPrice())) {
+            updateMachineStatus(MachineStatus.TOO_LITTLE_BUDGET);
+        }
+        if (products.hasNoProduct()) {
+            updateMachineStatus(MachineStatus.NO_PRODUCT);
+        }
+        outputView.printLeftMoney(budget);
+    }
+
 
     private void updateMachineStatus(MachineStatus machineStatus) {
         this.machine.updateMachineStatus(machineStatus);
