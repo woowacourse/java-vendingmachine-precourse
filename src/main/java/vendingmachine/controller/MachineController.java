@@ -34,7 +34,7 @@ public class MachineController {
             while (machineStatus.isAvailable()) {
 
                 outputView.printLeftMoney(budget);
-                Product purchaseProduct = products.findProduct(inputView.readPurchaseProduct());
+                Product purchaseProduct = inputView.readPurchaseProduct(products);
 
                 if (!purchaseProduct.hasStock()) {
                     System.out.println("해당 상품의 재고가 존재하지 않습니다.");
@@ -55,7 +55,7 @@ public class MachineController {
             }
 
             // 잔돈 돌려주기
-
+            outputView.printLeftMoney(budget);
             outputView.printFinalLeftMoney(machineMoney.getLeftMoney(budget.getLeftMoney()));
 
         } catch (IllegalArgumentException exception) {

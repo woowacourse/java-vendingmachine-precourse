@@ -10,6 +10,9 @@ public class ProductsValidator extends Validator {
     public void validate(String input) throws IllegalArgumentException {
         List<String> productsInfo = Arrays.asList(input.split(";"));
         validateTotalProductsSize(productsInfo);
+        for(String productInfo: productsInfo){
+            new ProductValidator().validate(productInfo);
+        }
     }
 
     private static void validateTotalProductsSize(List<String> productsInfo) {

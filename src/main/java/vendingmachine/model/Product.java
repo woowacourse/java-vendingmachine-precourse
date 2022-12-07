@@ -17,7 +17,6 @@ public class Product {
     }
 
     public static Product from(String productInfo) {
-        new ProductValidator().validate(productInfo);
         return new Product(Util.formatProductInfo(productInfo));
     }
 
