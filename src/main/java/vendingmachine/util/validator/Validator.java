@@ -5,17 +5,8 @@ import vendingmachine.util.ExceptionMessage;
 
 public abstract class Validator {
 
-    private enum Value {
-        MIN_RANGE(3), MAX_RANGE(20), MIN_UNIT(10);;
-
-        private final int value;
-
-        Value(int value) {
-            this.value = value;
-        }
-    }
-
     private static final Pattern NUMBER_REGEX = Pattern.compile("^[0-9]*$");
+    public static final int MIN_UNIT = 10;
 
     abstract void validate(String input) throws IllegalArgumentException;
 
@@ -34,18 +25,10 @@ public abstract class Validator {
         }
     }
 
-    void validateNumberRange(String input) {
-        int number = Integer.parseInt(input);
-        if (number < Value.MIN_RANGE.value || number > Value.MIN_RANGE.value) {
-            throw new IllegalArgumentException();
-        }
-    }
-
     void validateUnit(String machineMoney) {
-        if (Integer.parseInt(machineMoney) % Value.MIN_UNIT.value != 0) {
+        if (Integer.parseInt(machineMoney) % MIN_UNIT != 0) {
             throw new IllegalArgumentException(ExceptionMessage.INVALID_UNIT.getMessage());
         }
     }
-
 
 }

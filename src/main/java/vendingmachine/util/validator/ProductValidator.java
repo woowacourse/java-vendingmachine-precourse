@@ -1,7 +1,7 @@
 package vendingmachine.util.validator;
 
 import java.util.List;
-import vendingmachine.util.Constants;
+import vendingmachine.util.Index;
 import vendingmachine.util.ExceptionMessage;
 import vendingmachine.util.Util;
 
@@ -20,13 +20,13 @@ public class ProductValidator extends Validator {
 
 
     private void validateProductQuantity(List<String> productInfo) {
-        String productQuantity = productInfo.get(Constants.PRODUCT_QUANTITY_INDEX.getValue());
+        String productQuantity = productInfo.get(Index.PRODUCT_QUANTITY_INDEX.getIndex());
         validateNumeric(productQuantity);
         validateRange(productQuantity);
     }
 
     private void validateProductPrice(List<String> productInfo) {
-        String productPrice = productInfo.get(Constants.PRODUCT_PRICE_INDEX.getValue());
+        String productPrice = productInfo.get(Index.PRODUCT_PRICE_INDEX.getIndex());
         validateNumeric(productPrice);
         validateRange(productPrice);
         validatePriceRange(productPrice);

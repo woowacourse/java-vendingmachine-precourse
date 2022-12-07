@@ -1,7 +1,6 @@
 package vendingmachine.model;
 
 import java.util.Arrays;
-import java.util.Map;
 import vendingmachine.util.ExceptionMessage;
 
 public enum Coin {
@@ -16,15 +15,14 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
     public static Coin from(int amount) {
         return Arrays.stream(Coin.values())
                 .filter(element -> element.getAmount() == amount)
                 .findAny()
                 .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_COIN_AMOUNT.getMessage()));
     }
-    // 추가 기능 구현
+
+    public int getAmount() {
+        return amount;
+    }
 }

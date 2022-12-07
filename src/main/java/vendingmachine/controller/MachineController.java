@@ -46,6 +46,7 @@ public class MachineController {
                     budget.buy(purchaseProduct);
                     products.buy(purchaseProduct);
                 }
+
                 if (budget.hasTooLittleBudget(products.findMinimumPrice())) {
                     machineStatus = MachineStatus.TOO_LITTLE_BUDGET;
                 }

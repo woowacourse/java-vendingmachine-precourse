@@ -1,9 +1,8 @@
 package vendingmachine.model;
 
 import java.util.List;
-import vendingmachine.util.Constants;
+import vendingmachine.util.Index;
 import vendingmachine.util.Util;
-import vendingmachine.util.validator.ProductValidator;
 
 public class Product {
     private final String productName;
@@ -11,9 +10,9 @@ public class Product {
     private int productQuantity;
 
     private Product(List<String> productInfo) {
-        this.productName = productInfo.get(Constants.PRODUCT_NAME_INDEX.getValue());
-        this.productPrice = Integer.parseInt(productInfo.get(Constants.PRODUCT_PRICE_INDEX.getValue()));
-        this.productQuantity = Integer.parseInt(productInfo.get(Constants.PRODUCT_QUANTITY_INDEX.getValue()));
+        this.productName = productInfo.get(Index.PRODUCT_NAME_INDEX.getIndex());
+        this.productPrice = Integer.parseInt(productInfo.get(Index.PRODUCT_PRICE_INDEX.getIndex()));
+        this.productQuantity = Integer.parseInt(productInfo.get(Index.PRODUCT_QUANTITY_INDEX.getIndex()));
     }
 
     public static Product from(String productInfo) {
@@ -43,15 +42,5 @@ public class Product {
     public boolean isAffordable(int budget) {
         return this.productPrice <= budget;
     }
-
-    @Override
-    public String toString() {
-        return "Product{" +
-                "productName='" + productName + '\'' +
-                ", productPrice=" + productPrice +
-                ", productQuantity=" + productQuantity +
-                '}';
-    }
-
 
 }
