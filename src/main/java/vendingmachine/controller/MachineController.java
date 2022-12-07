@@ -33,11 +33,14 @@ public class MachineController {
 
             while (machineStatus.isAvailable()) {
                 Product purchaseProduct = products.findProduct(inputView.readPurchaseProduct());
-                if(!purchaseProduct.hasStock()){
+                if (!purchaseProduct.hasStock()) {
                     System.out.println("해당 상품의 재고가 존재하지 않습니다.");
                 }
-                if(!budget.isAffordable(purchaseProduct)){
+                if (!budget.isAffordable(purchaseProduct)) {
                     System.out.println("투입 금액이 모자랍니다.");
+                }
+                if (purchaseProduct.hasStock() && budget.isAffordable(purchaseProduct)) {
+                    budget.buy(purchaseProduct);
                 }
             }
 
