@@ -4,17 +4,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Util {
-    private enum Regex {
-        SPACE(" "), NO_SPACE(""),
-        SQUARE_BRACKETS_START("["), SQUARE_BRACKETS_END("]"),
-        COMMA(",");
-
-        private final String regex;
-
-        Regex(String regex) {
-            this.regex = regex;
-        }
-    }
 
     public static String removeSpace(String input) {
         return input.replaceAll(Regex.SPACE.regex, Regex.NO_SPACE.regex);
@@ -31,6 +20,19 @@ public class Util {
 
     public static List<String> formatProductInfo(String input) {
         return Util.splitByComma(Util.removeDelimiters(Util.removeSpace(input)));
+    }
+
+
+    private enum Regex {
+        SPACE(" "), NO_SPACE(""),
+        SQUARE_BRACKETS_START("["), SQUARE_BRACKETS_END("]"),
+        COMMA(",");
+
+        private final String regex;
+
+        Regex(String regex) {
+            this.regex = regex;
+        }
     }
 
     private Util() {
