@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import vendingmachine.util.ExceptionMessage;
 import vendingmachine.util.Util;
+import vendingmachine.util.validator.BudgetValidator;
 import vendingmachine.util.validator.MachineMoneyValidator;
 import vendingmachine.util.validator.ProductsValidator;
 
@@ -41,6 +42,7 @@ public class InputView {
     public int readBudget() {
         System.out.println(ConsoleMessage.INPUT_BUDGET.message);
         String input = Console.readLine();
+        new BudgetValidator().validate(input);
         return Integer.parseInt(input);
     }
 
