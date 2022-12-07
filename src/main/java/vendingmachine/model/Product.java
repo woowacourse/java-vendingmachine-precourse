@@ -8,7 +8,7 @@ import vendingmachine.util.validator.ProductValidator;
 public class Product {
     private final String productName;
     private final int productPrice;
-    private final int productQuantity;
+    private int productQuantity;
 
     private Product(List<String> productInfo) {
         this.productName = productInfo.get(Constants.PRODUCT_NAME_INDEX.getValue());
@@ -26,6 +26,10 @@ public class Product {
 
     public boolean hasStock() {
         return this.productQuantity > 0;
+    }
+
+    public void buy() {
+        this.productQuantity--;
     }
 
     public int getProductPrice() {

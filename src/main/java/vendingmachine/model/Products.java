@@ -33,4 +33,8 @@ public class Products {
     public boolean hasNoProduct() {
         return products.stream().mapToInt(product -> product.getProductQuantity()).sum() == 0;
     }
+
+    public void buy(Product purchaseProduct) {
+        purchaseProduct.buy();
+    }
 }
