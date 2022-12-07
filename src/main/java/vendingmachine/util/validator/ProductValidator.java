@@ -13,11 +13,16 @@ public class ProductValidator extends Validator {
 
     @Override
     public void validate(String input) throws IllegalArgumentException {
-        List<String> productInfo = splitByComma(input);
+        List<String> productInfo = formatProductInfo(input);
         validateInfoSize(productInfo);
         validateProductPrice(productInfo);
         validateProductQuantity(productInfo);
     }
+
+    private static List<String> formatProductInfo(String input) {
+        return splitByComma(Util.removeDelimiters(Util.removeSpace(input)));
+    }
+
 
     private static List<String> splitByComma(String input) {
         return Arrays.asList(Util.removeSpace(input).split(","));
@@ -39,7 +44,7 @@ public class ProductValidator extends Validator {
 
     private static void validatePriceRange(String productPrice) {
         if (Integer.parseInt(productPrice) < MIN_PRICE) {
-            throw new IllegalArgumentException("상품 가격은 100원 이상만 가능합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.INVALID_PRODUCT_PRICE_RANGE.getMessage());
         }
     }
 

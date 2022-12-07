@@ -6,6 +6,9 @@ public class Util {
         return input.replaceAll(" ", "");
     }
 
+    public static String removeDelimiters(String input) {
+        return input.replace("[", "").replace("]", "");
+    }
     private Util() {
     }
 }
