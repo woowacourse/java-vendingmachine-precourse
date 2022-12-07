@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.util.Util;
+import vendingmachine.util.validator.MachineMoneyValidator;
 
 public class InputView {
 
@@ -17,7 +19,7 @@ public class InputView {
     public int readMachineMoney() {
         System.out.println(ConsoleMessage.INPUT_MACHINE_MONEY.message);
         String input = Console.readLine();
-        // validate
-        return Integer.parseInt(input);
+        new MachineMoneyValidator().validate(input);
+        return Integer.parseInt(Util.removeSpace(input));
     }
 }
