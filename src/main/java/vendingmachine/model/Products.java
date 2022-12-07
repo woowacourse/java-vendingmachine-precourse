@@ -1,9 +1,8 @@
 package vendingmachine.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import vendingmachine.util.Util;
+import vendingmachine.util.ExceptionMessage;
 
 public class Products {
 
@@ -19,6 +18,12 @@ public class Products {
             products.add(Product.from(productInfo));
         }
         return new Products(products);
+    }
+
+    public Product findProduct(String productName) {
+        return products.stream().filter(product -> product.isSame(productName))
+                .findAny()
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_NO_SUCH_PRODUCT.getMessage()));
     }
 
     public List<Product> getProducts() {

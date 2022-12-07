@@ -1,7 +1,5 @@
 package vendingmachine.model;
 
-import static vendingmachine.util.Constants.PRODUCT_NAME_INDEX;
-
 import java.util.List;
 import vendingmachine.util.Constants;
 import vendingmachine.util.Util;
@@ -21,6 +19,10 @@ public class Product {
     public static Product from(String productInfo) {
         new ProductValidator().validate(productInfo);
         return new Product(Util.formatProductInfo(productInfo));
+    }
+
+    public boolean isSame(String productName) {
+        return this.productName.equals(productName);
     }
 
     @Override

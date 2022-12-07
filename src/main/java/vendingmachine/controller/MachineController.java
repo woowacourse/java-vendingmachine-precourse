@@ -1,6 +1,8 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.Budget;
 import vendingmachine.model.MachineMoney;
+import vendingmachine.model.Product;
 import vendingmachine.model.Products;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -25,7 +27,11 @@ public class MachineController {
             System.out.println(products.getProducts());
 
             // 투입 금액 및 구매 상품 입력
-            int budget = inputView.readBudget();
+            Budget budget = Budget.from(inputView.readBudget());
+
+            Product purchaseProduct = products.findProduct(inputView.readPurchaseProduct());
+            System.out.println(purchaseProduct);
+
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
         }
