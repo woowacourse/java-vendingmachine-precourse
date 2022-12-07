@@ -16,7 +16,7 @@ public class MachineController {
     public void play() {
         try {
             MachineMoney machineMoney = MachineMoney.from(inputView.readMachineMoney());
-
+            outputView.printMachineMoney(machineMoney);
 
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
