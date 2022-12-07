@@ -15,6 +15,7 @@ public class MachineController {
 
     public void play() {
         try {
+            // 자판기가 보유하고 있는 금액 설정
             MachineMoney machineMoney = MachineMoney.from(inputView.readMachineMoney());
             outputView.printMachineMoney(machineMoney);
 
