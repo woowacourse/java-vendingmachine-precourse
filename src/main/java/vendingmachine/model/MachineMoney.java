@@ -38,6 +38,20 @@ public class MachineMoney {
                 .collect(Collectors.toList());
     }
 
+    public Map<Coin, Integer> getLeftMoney(int leftMoney) {
+        Map<Coin, Integer> leftMachineToCoin = new EnumMap<>(Coin.class);
+        for (Map.Entry<Coin, Integer> element : machineMoney.entrySet()) {
+            int unit = element.getKey().getAmount();
+            int amount = element.getValue();
+            while (leftMoney < unit * amount) {
+                amount--;
+            }
+            leftMoney -= unit * amount;
+            leftMachineToCoin.put(Coin.from(unit), amount);
+        }
+        return leftMachineToCoin;
+    }
+
     public Map<Coin, Integer> getMachineMoney() {
         return machineMoney;
     }

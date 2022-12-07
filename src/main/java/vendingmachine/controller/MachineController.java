@@ -56,7 +56,7 @@ public class MachineController {
 
             // 잔돈 돌려주기
 
-
+            outputView.printFinalLeftMoney(machineMoney.getLeftMoney(budget.getLeftMoney()));
 
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
