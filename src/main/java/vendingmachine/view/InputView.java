@@ -42,8 +42,7 @@ public class InputView {
             System.out.println(ConsoleMessage.INPUT_PRODUCTS.message);
             String input = Console.readLine();
             new ProductsValidator().validate(input);
-            List<String> productsInfo = Arrays.asList(input.split(";"));
-
+            List<String> productsInfo = Arrays.asList(Util.removeSpace(input).split(";"));
             return productsInfo;
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
