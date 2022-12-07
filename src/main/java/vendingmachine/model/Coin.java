@@ -1,5 +1,7 @@
 package vendingmachine.model;
 
+import java.util.Map;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -8,9 +10,13 @@ public enum Coin {
 
     private final int amount;
 
+
     Coin(final int amount) {
         this.amount = amount;
     }
 
+    public int getAmount() {
+        return amount;
+    }
     // 추가 기능 구현
 }

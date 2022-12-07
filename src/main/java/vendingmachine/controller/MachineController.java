@@ -1,5 +1,6 @@
 package vendingmachine.controller;
 
+import vendingmachine.model.MachineMoney;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -14,8 +15,9 @@ public class MachineController {
 
     public void play() {
         try {
-            int machineMoney = inputView.readMachineMoney();
-            System.out.println(machineMoney);
+            MachineMoney machineMoney = MachineMoney.from(inputView.readMachineMoney());
+
+
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);
         }
