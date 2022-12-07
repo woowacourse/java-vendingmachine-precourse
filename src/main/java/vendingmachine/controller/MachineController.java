@@ -32,7 +32,10 @@ public class MachineController {
             machineStatus = MachineStatus.AVAILABLE;
 
             while (machineStatus.isAvailable()) {
+
+                outputView.printLeftMoney(budget);
                 Product purchaseProduct = products.findProduct(inputView.readPurchaseProduct());
+
                 if (!purchaseProduct.hasStock()) {
                     System.out.println("해당 상품의 재고가 존재하지 않습니다.");
                 }
@@ -42,7 +45,18 @@ public class MachineController {
                 if (purchaseProduct.hasStock() && budget.isAffordable(purchaseProduct)) {
                     budget.buy(purchaseProduct);
                 }
+                if (budget.hasTooLittleBudget(products.findMinimumPrice())) {
+                    machineStatus = MachineStatus.TOO_LITTLE_BUDGET;
+                }
+                if (products.hasNoProduct()) {
+                    machineStatus = MachineStatus.NO_PRODUCT;
+                }
+
             }
+
+            // 잔돈 돌려주기
+
+
 
         } catch (IllegalArgumentException exception) {
             outputView.printExceptionMessage(exception);

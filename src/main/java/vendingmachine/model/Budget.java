@@ -19,4 +19,12 @@ public class Budget {
     public boolean isAffordable(Product purchaseProduct) {
         return purchaseProduct.isAffordable(budget);
     }
+
+    public boolean hasTooLittleBudget(int minimumPrice) {
+        return budget < minimumPrice;
+    }
+
+    public int getLeftMoney() {
+        return budget;
+    }
 }

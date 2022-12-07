@@ -33,6 +33,10 @@ public class Product {
         return productPrice;
     }
 
+    public int getProductQuantity() {
+        return productQuantity;
+    }
+
     public boolean isAffordable(int budget) {
         return this.productPrice <= budget;
     }

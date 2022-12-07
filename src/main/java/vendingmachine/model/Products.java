@@ -26,7 +26,11 @@ public class Products {
                 .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_NO_SUCH_PRODUCT.getMessage()));
     }
 
-    public List<Product> getProducts() {
-        return products;
+    public int findMinimumPrice() {
+        return products.stream().mapToInt(product -> product.getProductPrice()).min().getAsInt();
+    }
+
+    public boolean hasNoProduct() {
+        return products.stream().mapToInt(product -> product.getProductQuantity()).sum() == 0;
     }
 }
