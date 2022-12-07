@@ -4,9 +4,7 @@ import vendingmachine.model.Budget;
 import vendingmachine.model.MachineMoney;
 import vendingmachine.model.MachineStatus;
 import vendingmachine.model.Machine;
-import vendingmachine.model.Product;
 import vendingmachine.model.Products;
-import vendingmachine.util.ConsoleMessage;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -35,10 +33,10 @@ public class MachineController {
         while (machine.isAvailable()) {
             machine.purchaseProduct(inputView.readPurchaseProduct(products));
             if (machine.isOutOfStock()) {
-                System.out.println(ConsoleMessage.NO_STOCK.getMessage());
+               outputView.printOutOfStock();
             }
             if (machine.isOutOfBudget()) {
-                System.out.println(ConsoleMessage.NO_BUDGET.getMessage());
+               outputView.printOutOfBudget();
             }
             if (machine.isAbleToBuy()) {
                 machine.purchase();

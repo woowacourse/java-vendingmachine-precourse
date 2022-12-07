@@ -11,7 +11,10 @@ public class OutputView {
         OUTPUT_MACHINE_MONEY("자판기가 보유한 동전"),
         OUTPUT_MACHINE_MONEY_FORMAT("%d원 - %d개%n"),
         OUTPUT_LEFT_MONEY("투입 금액: %d원%n"),
-        OUTPUT_FINAL_LEFT_MONEY("잔돈");
+
+        OUTPUT_FINAL_LEFT_MONEY("잔돈"),
+        ALERT_NO_STOCK("해당 상품의 재고가 존재하지 않습니다."),
+        ALERT_NO_BUDGET("투입 금액이 모자랍니다.");;
 
         private final String message;
 
@@ -42,6 +45,14 @@ public class OutputView {
             System.out.printf(ConsoleMessage.OUTPUT_MACHINE_MONEY_FORMAT.message,
                     element.getKey().getAmount(), element.getValue());
         }
+    }
+
+    public void printOutOfStock() {
+        System.out.println(ConsoleMessage.ALERT_NO_BUDGET.message);
+    }
+
+    public void printOutOfBudget() {
+        System.out.println(ConsoleMessage.ALERT_NO_BUDGET.message);
     }
 
 }
