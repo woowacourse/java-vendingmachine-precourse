@@ -1,32 +1,40 @@
 package vendingmachine.model;
 
 import camp.nextstep.edu.missionutils.Randoms;
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class MachineMoney {
 
-    private MachineMoney(int machineMoney) {
+    private final Map<Coin, Integer> machineMoney;
+
+    private MachineMoney(Map<Coin, Integer> machineMoney) {
+        this.machineMoney = machineMoney;
     }
 
-    public static MachineMoney from(int machineMoney) {
+    public static MachineMoney from(int money) {
+        return new MachineMoney(createRandomCoins(money));
+    }
 
-        List<Integer> coin = Arrays.stream(Coin.values())
+    private static Map<Coin, Integer> createRandomCoins(int money) {
+        Map<Coin, Integer> machine = new EnumMap<>(Coin.class);
+        while (money > 0) {
+            int randomCoin = Randoms.pickNumberInList(getCoinUnits());
+            if (randomCoin <= money) {
+                money -= randomCoin;
+                machine.put(Coin.from(randomCoin), machine.getOrDefault(Coin.from(randomCoin), 0) + 1);
+            }
+        }
+        return machine;
+    }
+
+    private static List<Integer> getCoinUnits() {
+        return Arrays.stream(Coin.values())
                 .map(value -> value.getAmount())
                 .collect(Collectors.toList());
-
-        while (machineMoney > 0) {
-            int newCoin = Randoms.pickNumberInList(coin);
-            System.out.println("new: " + newCoin);
-            if (newCoin <= machineMoney) {
-                machineMoney -= newCoin;
-            }
-            System.out.println("total: " + machineMoney);
-        }
-
-        return new MachineMoney(machineMoney);
     }
 
 
