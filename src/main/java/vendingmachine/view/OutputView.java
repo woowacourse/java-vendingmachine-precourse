@@ -13,7 +13,7 @@ public class OutputView {
         OUTPUT_LEFT_MONEY("투입 금액: %d원%n"),
 
         OUTPUT_FINAL_LEFT_MONEY("잔돈"),
-        ALERT_NO_STOCK("해당 상품의 재고가 존재하지 않습니다."),
+        ALERT_OUT_OF_STOCK("해당 상품의 재고가 존재하지 않습니다."),
         ALERT_NO_BUDGET("투입 금액이 모자랍니다.");;
 
         private final String message;
@@ -21,10 +21,6 @@ public class OutputView {
         ConsoleMessage(String message) {
             this.message = message;
         }
-    }
-
-    public void printExceptionMessage(Exception exception) {
-        System.out.println(exception.getMessage());
     }
 
     public void printMachineMoney(MachineMoney machineMoney) {
@@ -48,7 +44,7 @@ public class OutputView {
     }
 
     public void printOutOfStock() {
-        System.out.println(ConsoleMessage.ALERT_NO_BUDGET.message);
+        System.out.println(ConsoleMessage.ALERT_OUT_OF_STOCK.message);
     }
 
     public void printOutOfBudget() {
