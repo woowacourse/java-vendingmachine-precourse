@@ -6,7 +6,6 @@ import vendingmachine.utils.ErrorMessage;
 import java.util.Map;
 
 import static vendingmachine.utils.ErrorMessage.NOT_ENOUGH_CASH;
-import static vendingmachine.utils.ErrorMessage.NOT_EXIST_PRODUCT;
 import static vendingmachine.utils.MachineConst.MAX_CASH;
 import static vendingmachine.utils.MachineConst.MIN_CASH;
 
@@ -43,26 +42,28 @@ public class Machine {
     }
 
     public void purchase(String name) {
+        validatePurchase(name);
         Product product = inventory.consume(name);
-        validatePurchase(product);
         this.storedCash -= product.getAmount();
     }
 
-    private void validatePurchase(Product product) {
+    private void validatePurchase(String name) {
 
-        if (isBiggerThanRemainCash(product)) {
+        if (isNotExistProduct(name)) {
             throw new IllegalArgumentException(NOT_ENOUGH_CASH.getMessage());
         }
-        if (isNotExistProduct(product)) {
-            throw new IllegalArgumentException(NOT_EXIST_PRODUCT.getMessage());
+
+        if (isBiggerThanRemainCash(name)) {
+            throw new IllegalArgumentException(NOT_ENOUGH_CASH.getMessage());
         }
     }
 
-    private boolean isNotExistProduct(Product product) {
-        return !inventory.contains(product.getName());
+    private boolean isNotExistProduct(String name) {
+        return !inventory.contains(name);
     }
 
-    private boolean isBiggerThanRemainCash(Product product) {
+    private boolean isBiggerThanRemainCash(String name) {
+        Product product = inventory.get(name);
         return storedCash < product.getAmount();
     }
 

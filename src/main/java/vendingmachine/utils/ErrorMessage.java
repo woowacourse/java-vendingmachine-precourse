@@ -12,7 +12,8 @@ public enum ErrorMessage {
     PRODUCT_FORMAT_NOT_MATCH("입력형태가 올바르지않습니다.\n" +
             "example : [콜라,1500,20];[사이다,1000,10]"),
     PRODUCT_CANNOT_FOUNT("상품을 찾을 수 없습니다."),
-    CHANGE_WRONG_VALUE("잔돈으로 반환할 수 없는 금액입니다.");
+    CHANGE_WRONG_VALUE("잔돈으로 반환할 수 없는 금액입니다."),
+    NOT_NUMBER("정수값이 들어와야합니다.");
 
     private final String message;
 
