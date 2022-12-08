@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import static vendingmachine.utils.Coin.of;
+import static vendingmachine.utils.ErrorMessage.CHANGE_WRONG_VALUE;
 import static vendingmachine.utils.MachineConst.MIN_CASH;
 
 public class Change {
@@ -34,7 +35,7 @@ public class Change {
     private void validateAmount(int amount) {
 
         if (isNotDivideByMinCash(amount)) {
-            throw new IllegalArgumentException("[ERROR]");
+            throw new IllegalArgumentException(CHANGE_WRONG_VALUE.getMessage());
         }
     }
 
