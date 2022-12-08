@@ -6,6 +6,7 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.List;
+import java.util.function.Supplier;
 
 public class MachineController {
 
@@ -17,7 +18,7 @@ public class MachineController {
 
         this.inputView = new InputView();
         this.outputView = new OutputView();
-        int machineCoin = inputView.inputMachineCoin();
+        int machineCoin = repeat(inputView::inputMachineCoin);
         this.machine = new Machine(machineCoin);
         outputView.outputMachineChange(machine);
     }
@@ -29,7 +30,11 @@ public class MachineController {
 
         while (!machine.isExhausted()) {
             outputView.outputRemainCoin(machine);
-            inputView.inputPurchase(machine);
+            repeat(() -> {
+                String input = inputView.inputPurchase();
+                machine.purchase(input);
+                return null;
+            });
         }
 
         outputView.outputRemainCoin(machine);
@@ -37,12 +42,21 @@ public class MachineController {
     }
 
     private void setCash() {
-        int cash = inputView.inputCash();
+        int cash = repeat(inputView::inputCash);
         machine.addCash(cash);
     }
 
     private void setProducts() {
-        List<Product> products = inputView.inputProduct();
+        List<Product> products = repeat(inputView::inputProduct);
         products.forEach(machine::addProduct);
+    }
+
+    private <T> T repeat(Supplier<T> inputMethod) {
+        try {
+            return inputMethod.get();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            return repeat(inputMethod);
+        }
     }
 }

@@ -1,7 +1,6 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.utils.ErrorMessage;
 
@@ -18,16 +17,10 @@ public class InputView {
     private static final int PRODUCT_FORMAT_LENGTH = 3;
 
     public int inputMachineCoin() {
-
-        try {
-            System.out.println(INPUT_INIT);
-            String input = Console.readLine();
-            validateNumber(input);
-            return Integer.parseInt(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputMachineCoin();
-        }
+        System.out.println(INPUT_INIT);
+        String input = Console.readLine();
+        validateNumber(input);
+        return Integer.parseInt(input);
     }
 
     private void validateNumber(String input) {
@@ -55,28 +48,17 @@ public class InputView {
     }
 
     public List<Product> inputProduct() {
-        try {
-            System.out.println(INPUT_PRODUCT);
-            String input = Console.readLine();
-            String[] split = input.split(";");
-            return Arrays.stream(split)
-                    .map(this::parseProduct)
-                    .collect(Collectors.toList());
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputProduct();
-        }
+        System.out.println(INPUT_PRODUCT);
+        String input = Console.readLine();
+        String[] split = input.split(";");
+        return Arrays.stream(split)
+                .map(this::parseProduct)
+                .collect(Collectors.toList());
     }
 
-    public void inputPurchase(Machine machine) {
-        try {
-            System.out.println(INPUT_PURCHASE);
-            String input = Console.readLine();
-            machine.purchase(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            inputPurchase(machine);
-        }
+    public String inputPurchase() {
+        System.out.println(INPUT_PURCHASE);
+        return Console.readLine();
     }
 
     private Product parseProduct(String input) {
@@ -93,15 +75,10 @@ public class InputView {
     }
 
     public int inputCash() {
-
-        try {
-            System.out.println(INPUT_CASH);
-            String input = Console.readLine();
-            validateNumber(input);
-            return Integer.parseInt(input);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-            return inputCash();
-        }
+        
+        System.out.println(INPUT_CASH);
+        String input = Console.readLine();
+        validateNumber(input);
+        return Integer.parseInt(input);
     }
 }

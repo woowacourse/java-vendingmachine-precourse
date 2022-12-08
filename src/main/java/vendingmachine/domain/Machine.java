@@ -43,7 +43,6 @@ public class Machine {
     }
 
     public void purchase(String name) {
-
         Product product = inventory.consume(name);
         validatePurchase(product);
         this.storedCash -= product.getAmount();
