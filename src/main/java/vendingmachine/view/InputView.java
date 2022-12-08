@@ -28,9 +28,9 @@ public class InputView {
     public int readMachineMoney() {
         try {
             System.out.println(ConsoleMessage.INPUT_MACHINE_MONEY.message);
-            String input = Console.readLine();
+            String input = Util.removeSpace(Console.readLine());
             new MachineMoneyValidator().validate(input);
-            return Integer.parseInt(Util.removeSpace(input));
+            return Integer.parseInt(input);
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());
             return readMachineMoney();
@@ -40,9 +40,9 @@ public class InputView {
     public List<String> readProducts() {
         try {
             System.out.println(ConsoleMessage.INPUT_PRODUCTS.message);
-            String input = Console.readLine();
+            String input = Util.removeSpace(Console.readLine());
             new ProductsValidator().validate(input);
-            List<String> productsInfo = Arrays.asList(Util.removeSpace(input).split(";"));
+            List<String> productsInfo = Arrays.asList(input.split(";"));
             return productsInfo;
         } catch (IllegalArgumentException exception) {
             System.out.println(exception.getMessage());

@@ -19,7 +19,7 @@ public class Util {
     }
 
     public static List<String> formatProductInfo(String input) {
-        return Util.splitByComma(Util.removeDelimiters(Util.removeSpace(input)));
+        return Util.splitByComma(Util.removeDelimiters(input));
     }
 
 

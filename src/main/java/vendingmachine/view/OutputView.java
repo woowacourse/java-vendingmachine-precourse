@@ -11,10 +11,9 @@ public class OutputView {
         OUTPUT_MACHINE_MONEY("자판기가 보유한 동전"),
         OUTPUT_MACHINE_MONEY_FORMAT("%d원 - %d개%n"),
         OUTPUT_LEFT_MONEY("투입 금액: %d원%n"),
-
         OUTPUT_FINAL_LEFT_MONEY("잔돈"),
         ALERT_OUT_OF_STOCK("해당 상품의 재고가 존재하지 않습니다."),
-        ALERT_NO_BUDGET("투입 금액이 모자랍니다.");;
+        ALERT_NO_BUDGET("투입 금액이 모자랍니다.");
 
         private final String message;
 

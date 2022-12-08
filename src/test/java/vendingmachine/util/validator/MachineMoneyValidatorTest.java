@@ -1,5 +1,6 @@
 package vendingmachine.util.validator;
 
+import static org.assertj.core.api.Assertions.assertThatIllegalArgumentException;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 
@@ -24,11 +25,11 @@ class MachineMoneyValidatorTest {
 
         @DisplayName("자연수가 아닌 입력의 경우 예외 처리한다.")
         @ParameterizedTest
-        @ValueSource(strings = {"한글", "moonja", "   문자   wi t h 공    백   ", " -1000 ", "- 2 32 2190000"})
+        @ValueSource(strings = {"한글", "moonja", " -1000 ", "-2322190000"})
         void 자연수가_아닌_입력(String input) {
-            assertThatThrownBy(() -> validator.validate(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ExceptionMessage.INVALID_NOT_NUMERIC.getMessage());
+            assertThatIllegalArgumentException()
+                    .isThrownBy(() -> validator.validate(input))
+                    .withMessageStartingWith(ExceptionMessage.INVALID_NOT_NUMERIC.getMessage());
         }
 
 
@@ -36,18 +37,19 @@ class MachineMoneyValidatorTest {
         @ParameterizedTest
         @ValueSource(strings = {"2222222222222222222222222222000", "1294013905724312349120948120000"})
         void int_범위를_벗어난_입력(String input) {
-            assertThatThrownBy(() -> validator.validate(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ExceptionMessage.INVALID_OUT_OF_INT_RANGE.getMessage());
+            assertThatIllegalArgumentException()
+                    .isThrownBy(() -> validator.validate(input))
+                    .withMessageStartingWith(ExceptionMessage.INVALID_OUT_OF_INT_RANGE.getMessage());
         }
 
         @DisplayName("10원으로 나누어 떨어지지 않는 입력의 경우 예외 처리한다.")
         @ParameterizedTest
-        @ValueSource(strings = {"123", "1", "12 32 4 000 1"})
+        @ValueSource(strings = {"123", "1", "123240001"})
         void 단위가_10원이_아닌_입력(String input) {
-            assertThatThrownBy(() -> validator.validate(input))
-                    .isInstanceOf(IllegalArgumentException.class)
-                    .hasMessage(ExceptionMessage.INVALID_UNIT.getMessage());
+            assertThatIllegalArgumentException()
+                    .isThrownBy(() -> validator.validate(input))
+                    .withMessageStartingWith(ExceptionMessage.INVALID_UNIT.getMessage());
+
         }
 
     }
@@ -55,7 +57,7 @@ class MachineMoneyValidatorTest {
     @Nested
     class validInputTest {
         @ParameterizedTest
-        @ValueSource(strings = {"222000", "22222000", " 1   0    0  0   ", "10", "1230", "0"})
+        @ValueSource(strings = {"222000", "22222000", "1000", "10", "1230", "0"})
         void 정상_입력(String input) {
             assertThatCode(() -> validator.validate(input))
                     .doesNotThrowAnyException();
