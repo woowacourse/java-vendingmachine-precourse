@@ -33,6 +33,7 @@ public class ProductInspector extends Validation {
 
     private void checkOrderArray(String[] orders) {
         for (String order : orders) {
+            prefixAndSuffix(order);
             checkOrderInfo(order);
         }
     }
