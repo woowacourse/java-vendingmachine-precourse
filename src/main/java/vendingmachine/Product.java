@@ -28,5 +28,8 @@ public class Product {
     public int askPrice() {
         return price;
     }
+    public int askStockLeft(){
+        return amount;
+    }
 
 }
