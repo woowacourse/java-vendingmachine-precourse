@@ -17,8 +17,8 @@ public class InputView {
         return askMoney(CommonValues.MINIMUM_COIN_VALUE);
     }
 
-    public int askInputPrice() {
-        outputView.enterInputPrice();
+    public int askinputMoney() {
+        outputView.enterinputMoney();
         return askMoney(CommonValues.MINIMUM_PRODUCT_VALUE);
     }
 

@@ -16,7 +16,7 @@ public class OutputView {
     public void enterProductInfo(){
         System.out.println(ENTER_PRODUCT_INFO);
     }
-    public void enterInputPrice(){
+    public void enterinputMoney(){
         System.out.println(ENTER_INPUT_PRICE);
     }
 
