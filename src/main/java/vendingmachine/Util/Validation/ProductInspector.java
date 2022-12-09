@@ -9,31 +9,23 @@ import static vendingmachine.Constant.ProductSeparator.*;
 public class ProductInspector extends Validation {
 
     public void inputInitOrder(String order) {
-        try {
-            prefixAndSuffix(order);
-            checkOrderInfo(order);
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
+        checkOrderInfo(order);
     }
 
     private void checkOrderInfo(String order) {
         String separator = String.valueOf(ORDER_SEPARATOR.getChar());
 
-        order = order.replace(ORDER_PREFIX.toString(), "")
-                .replace(ORDER_SUFFIX.toString(), "");
-
         if (order.contains(separator)) {
             checkOrderArray(order.split(separator));
             return;
         }
+        order = prefixAndSuffix(order);
 
         checkOrderProducts(order);
     }
 
     private void checkOrderArray(String[] orders) {
         for (String order : orders) {
-            prefixAndSuffix(order);
             checkOrderInfo(order);
         }
     }

@@ -21,7 +21,7 @@ public class Validation {
     }
 
     private void isNegativeNumber(int number) {
-        if(number < 1){
+        if (number < 1) {
             throw new IllegalArgumentException(NOT_ALLOWED_MINUS_NUMBER.toMessage());
         }
     }
@@ -34,13 +34,22 @@ public class Validation {
         return number;
     }
 
-    public void prefixAndSuffix(String order) {
+    public String prefixAndSuffix(String order) {
         char prefix = order.charAt(0);
         char suffix = order.charAt(order.length() - 1);
 
         if (prefix != ORDER_PREFIX.getChar() || suffix != ORDER_SUFFIX.getChar()) {
             throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
         }
+
+        order = order.replace("\\" + prefix, "")
+                .replace("\\" + suffix, "");
+
+        if (order.contains(String.valueOf(prefix)) || order.contains(String.valueOf(suffix))) {
+            throw new IllegalArgumentException(NOT_PROPER_ORDER_COMMAND.toMessage());
+        }
+
+        return order;
     }
 
 
