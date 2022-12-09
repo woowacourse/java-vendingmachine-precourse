@@ -20,7 +20,7 @@ public class OutputView {
         System.out.println(ENTER_INPUT_PRICE);
     }
 
-    public void enterProductYouWillBuy(){
+    public void enterWishList(){
         //System.out.println(REMAINING_PRICE+돈+원);
         System.out.println(ENTER_PRODUCT_YOU_WILL_BUY);
     }
