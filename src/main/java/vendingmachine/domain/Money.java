@@ -38,4 +38,8 @@ public class Money {
     public boolean isUseMoney(int money) {
         return (this.money - money) >= ZERO_MONEY;
     }
+
+    public int getMoney() {
+        return money;
+    }
 }

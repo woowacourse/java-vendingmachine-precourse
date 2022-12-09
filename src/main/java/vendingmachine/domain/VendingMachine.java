@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import vendingmachine.domain.coins.Coins;
+import vendingmachine.domain.products.Product;
 import vendingmachine.domain.products.Products;
 
 public class VendingMachine {
@@ -17,5 +18,14 @@ public class VendingMachine {
 
     public static VendingMachine of(Money money, Coins coins, Products products) {
         return new VendingMachine(money, coins, products);
+    }
+
+    public void purchaseProduct(String name, Money money){
+        Product product = products.findPurchasableProduct(name, money);
+        product.purchase(money);
+    }
+
+    public boolean isSellProduct(Money money) {
+        return (products.findMinPriceProduct().isPurchaseProduct(money) && !products.isAllQuantityZero());
     }
 }

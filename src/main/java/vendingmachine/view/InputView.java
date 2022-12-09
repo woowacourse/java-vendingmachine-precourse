@@ -16,4 +16,8 @@ public class InputView {
     public Products readProducts() {
         return ProductsConvert.convert(readLine());
     }
+
+    public String readProductName() {
+        return readLine();
+    }
 }

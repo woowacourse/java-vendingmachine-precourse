@@ -1,9 +1,10 @@
 package vendingmachine.domain.products;
 
+import vendingmachine.domain.Money;
 import vendingmachine.exception.ProductsDuplicatedNameException;
+import vendingmachine.exception.ProductsNotFind;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class Products {
 
@@ -26,5 +27,28 @@ public class Products {
         if (products.size() != products.stream().distinct().count()) {
             throw new ProductsDuplicatedNameException();
         }
+    }
+
+    public Product findPurchasableProduct(String name, Money money) {
+        return products.stream()
+                .filter(product -> product.isSameName(name))
+                .filter(product -> product.purchasableProduct(money))
+                .findAny()
+                .orElseThrow(ProductsNotFind::new);
+    }
+
+    public Product findMinPriceProduct() {
+        return products.stream()
+                .reduce(this::compareCheaperPrice)
+                .orElseThrow(ProductsNotFind::new);
+    }
+
+    private Product compareCheaperPrice(Product p1, Product p2) {
+        return p1.CheaperPriceProduct(p2);
+    }
+
+    public boolean isAllQuantityZero() {
+        return products.stream()
+                .allMatch(Product::isSoldOut);
     }
 }

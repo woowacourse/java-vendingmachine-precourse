@@ -1,6 +1,8 @@
 package vendingmachine.domain.products;
 
+import vendingmachine.domain.Money;
 import vendingmachine.exception.PriceDividingException;
+import vendingmachine.exception.PriceNotPurchaseException;
 import vendingmachine.exception.PriceRangeException;
 
 public class Price {
@@ -36,5 +38,24 @@ public class Price {
         if ((price % DIVIDING_PRICE) != DIVIDING_RESULT){
             throw new PriceDividingException(DIVIDING_PRICE);
         }
+    }
+
+    public boolean isCheaperPrice(Price price) {
+        return this.price < price.price;
+    }
+
+    public boolean validateMoney(Money money) {
+        if (money.isUseMoney(this.price)){
+            return true;
+        }
+        throw new PriceNotPurchaseException();
+    }
+
+    public boolean isPurchase(Money money) {
+        return money.isUseMoney(this.price);
+    }
+
+    public void payPrice(Money money) {
+        money.useMoney(this.price);
     }
 }
