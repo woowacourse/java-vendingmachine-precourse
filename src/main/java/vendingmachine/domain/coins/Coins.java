@@ -2,6 +2,7 @@ package vendingmachine.domain.coins;
 
 import vendingmachine.domain.Money;
 
+import java.util.Comparator;
 import java.util.EnumMap;
 import java.util.List;
 
@@ -13,6 +14,10 @@ public class Coins {
 
     public Coins() {
         this.coins = initCoins();
+    }
+
+    public Coins(EnumMap<Coin, Integer> coins) {
+        this.coins = coins;
     }
 
     public void makeRandomCoins(NumberGenerator numberGenerator, Money money) {
@@ -37,6 +42,25 @@ public class Coins {
             coins.put(coin, INITIAL_COIN_NUMBER);
         }
         return coins;
+    }
+
+    public Coins makeLargestCoins(Money money) {
+        EnumMap<Coin, Integer> changes = new EnumMap<>(Coin.class);
+        coins.entrySet().stream()
+                .sorted(Comparator.comparingInt(o -> o.getKey().getAmount()))
+                .forEach(coin -> changes.put(coin.getKey(), calculateCoin(coin.getKey(), money)));
+        return new Coins(changes);
+    }
+
+    private int calculateCoin(Coin coin, Money money) {
+        int count = money.calculateDividingMoney(coin.getAmount());
+        int coinNumber = coins.get(coin);
+        if(coinNumber <= count) {
+            money.useMoney(coinNumber * coin.getAmount());
+            return coins.get(coin);
+        }
+        money.useMoney(count * coin.getAmount());
+        return count;
     }
 
     public EnumMap<Coin, Integer> getCoins() {

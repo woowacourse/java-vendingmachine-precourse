@@ -28,4 +28,8 @@ public class VendingMachine {
     public boolean isSellProduct(Money money) {
         return (products.findMinPriceProduct().isPurchaseProduct(money) && !products.isAllQuantityZero());
     }
+
+    public Coins makeChanges(Money money) {
+        return coins.makeLargestCoins(money);
+    }
 }

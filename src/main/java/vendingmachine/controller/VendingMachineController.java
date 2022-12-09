@@ -21,6 +21,12 @@ public class VendingMachineController {
     public void runVendingMachine() {
         makeVendingMachine();
         operateVendingMachine();
+        showResult();
+    }
+
+    private void showResult() {
+        outputView.printRemainMoney(playerMoney);
+        outputView.printCoins(vendingMachine.makeChanges(playerMoney));
     }
 
     private void operateVendingMachine() {

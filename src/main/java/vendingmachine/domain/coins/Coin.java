@@ -39,9 +39,7 @@ public enum Coin {
                 .orElseThrow(CoinEmptyException::new);
     }
 
-    public Money exchangeCoinToMoney() {
-        return Money.from(amount);
-    }
+
 
     public int getAmount() {
         return amount;

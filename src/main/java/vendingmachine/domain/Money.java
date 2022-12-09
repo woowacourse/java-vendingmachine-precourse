@@ -39,6 +39,10 @@ public class Money {
         return (this.money - money) >= ZERO_MONEY;
     }
 
+    public int calculateDividingMoney(int number) {
+        return this.money / number;
+    }
+
     public int getMoney() {
         return money;
     }
