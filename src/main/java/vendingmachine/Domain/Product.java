@@ -9,7 +9,7 @@ import java.util.List;
 public class Product {
 
     private final HashMap<String, HashMap<String, Integer>> product;
-    Integer cheapestPrice = null;
+    private Integer cheapestPrice = null;
 
     public Product() {
         this.product = new HashMap<>();
@@ -39,6 +39,10 @@ public class Product {
 
     public int getCount(String name) {
         return this.product.get(name).get(ProductSeparator.COUNT);
+    }
+
+    public int getCheapestPrice() {
+        return this.cheapestPrice;
     }
 
     public void sold(String name) {
