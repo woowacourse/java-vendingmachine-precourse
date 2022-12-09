@@ -25,5 +25,11 @@ public class OutputView {
         System.out.println(ENTER_PRODUCT_YOU_WILL_BUY);
     }
 
+    public void returnChanges(){
+        System.out.println(CHANGE);
+        /*for(){
+
+        }*/
+    }
 
 }
