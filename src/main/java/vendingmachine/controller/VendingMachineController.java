@@ -24,43 +24,12 @@ public class VendingMachineController {
         showResult();
     }
 
-    private void showResult() {
-        outputView.printRemainMoney(playerMoney);
-        outputView.printCoins(vendingMachine.makeChanges(playerMoney));
-    }
-
-    private void operateVendingMachine() {
-        playerMoney = askPlayerMoney();
-        while (vendingMachine.isSellProduct(playerMoney)) {
-            buyProduct();
-        }
-    }
-
-    private void buyProduct() {
-        while (true) {
-            try {
-                vendingMachine.purchaseProduct(askBuyingProduct(), playerMoney);
-                return;
-            } catch (IllegalArgumentException exception) {
-                outputView.printExceptionMessage(exception);
-            }
-        }
-    }
-
     private String askBuyingProduct() {
         outputView.printRemainMoney(playerMoney);
         outputView.printInputProductName();
         String name = inputView.readProductName();
         outputView.printNewLine();
         return name;
-    }
-
-
-    private Money askPlayerMoney() {
-        outputView.printInputMoney();
-        Money money = reenterProcess(inputView::readMoney);
-        outputView.printNewLine();
-        return money;
     }
 
     private void makeVendingMachine() {
@@ -81,7 +50,7 @@ public class VendingMachineController {
     private Coins makeCoins(Money money) {
         Coins coins = new Coins();
         coins.makeRandomCoins(new RandomNumberGenerator(), money);
-        outputView.printCoins(coins);
+        outputView.printVendingMachineCoins(coins);
         return coins;
     }
 
@@ -90,6 +59,36 @@ public class VendingMachineController {
         Products products = reenterProcess(inputView::readProducts);
         outputView.printNewLine();
         return products;
+    }
+
+    private void operateVendingMachine() {
+        playerMoney = askPlayerMoney();
+        while (vendingMachine.isSellProduct(playerMoney)) {
+            buyProduct();
+        }
+    }
+
+    private Money askPlayerMoney() {
+        outputView.printInputMoney();
+        Money money = reenterProcess(inputView::readMoney);
+        outputView.printNewLine();
+        return money;
+    }
+
+    private void buyProduct() {
+        while (true) {
+            try {
+                vendingMachine.purchaseProduct(askBuyingProduct(), playerMoney);
+                return;
+            } catch (IllegalArgumentException exception) {
+                outputView.printExceptionMessage(exception);
+            }
+        }
+    }
+
+    private void showResult() {
+        outputView.printRemainMoney(playerMoney);
+        outputView.printChanges(vendingMachine.makeChanges(playerMoney));
     }
 
     private <T> T reenterProcess(Supplier<T> reader) {
