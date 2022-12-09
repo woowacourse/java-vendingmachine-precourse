@@ -53,13 +53,13 @@ public class Coins {
     }
 
     private int calculateCoin(Coin coin, Money money) {
-        int count = money.calculateDividingMoney(coin.getAmount());
+        int count = money.calculateDividingCoin(coin);
         int coinNumber = coins.get(coin);
-        if(coinNumber <= count) {
-            money.useMoney(coinNumber * coin.getAmount());
+        if (coinNumber <= count) {
+            money.useMoney(coin.multiCoin(coinNumber));
             return coins.get(coin);
         }
-        money.useMoney(count * coin.getAmount());
+        money.useMoney(coin.multiCoin(count));
         return count;
     }
 

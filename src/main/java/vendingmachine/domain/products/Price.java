@@ -35,7 +35,7 @@ public class Price {
     }
 
     private static void validateDividing(int price) {
-        if ((price % DIVIDING_PRICE) != DIVIDING_RESULT){
+        if ((price % DIVIDING_PRICE) != DIVIDING_RESULT) {
             throw new PriceDividingException(DIVIDING_PRICE);
         }
     }
@@ -45,7 +45,7 @@ public class Price {
     }
 
     public boolean validateMoney(Money money) {
-        if (money.isUseMoney(this.price)){
+        if (money.isUseMoney(this.price)) {
             return true;
         }
         throw new PriceNotPurchaseException();

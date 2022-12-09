@@ -18,7 +18,7 @@ public class VendingMachineTest {
         Money money = Money.from(5000);
         Products products = ProductsConvert.convert("[콜라,2000,20];[사이다,1000,10];[솔의눈,10000,10]");
         Coins coins = new Coins();
-        VendingMachine vendingMachine = VendingMachine.of(Money.from(676), coins, products);
+        VendingMachine vendingMachine = VendingMachine.of(coins, products);
         vendingMachine.purchaseProduct("콜라", money);
 
         Products compareProducts = ProductsConvert.convert("[콜라,2000,19];[사이다,1000,10];[솔의눈,10000,10]");
@@ -32,7 +32,7 @@ public class VendingMachineTest {
     void isSellProductTrue() {
         Products products = ProductsConvert.convert("[콜라,2000,20];[사이다,1000,10];[솔의눈,10000,10]");
         Coins coins = new Coins();
-        VendingMachine vendingMachine = VendingMachine.of(Money.from(676), coins, products);
+        VendingMachine vendingMachine = VendingMachine.of(coins, products);
 
         assertThat(vendingMachine.isSellProduct(Money.from(5000))).isEqualTo(true);
     }
@@ -42,7 +42,7 @@ public class VendingMachineTest {
     void isSellProductFalseByQuantity() {
         Products products = ProductsConvert.convert("[콜라,2000,0];[사이다,1000,0];[솔의눈,10000,0]");
         Coins coins = new Coins();
-        VendingMachine vendingMachine = VendingMachine.of(Money.from(676), coins, products);
+        VendingMachine vendingMachine = VendingMachine.of(coins, products);
 
         assertThat(vendingMachine.isSellProduct(Money.from(5000))).isEqualTo(false);
     }
@@ -52,7 +52,7 @@ public class VendingMachineTest {
     void isSellProductFalseByMoney() {
         Products products = ProductsConvert.convert("[콜라,2000,10];[사이다,1000,100];[솔의눈,10000,20]");
         Coins coins = new Coins();
-        VendingMachine vendingMachine = VendingMachine.of(Money.from(676), coins, products);
+        VendingMachine vendingMachine = VendingMachine.of(coins, products);
 
         assertThat(vendingMachine.isSellProduct(Money.from(500))).isEqualTo(false);
     }

@@ -14,7 +14,7 @@ public class Quantity {
         this.quantity = quantity;
     }
 
-    public static Quantity from(int quantity){
+    public static Quantity from(int quantity) {
         return new Quantity(quantity);
     }
 

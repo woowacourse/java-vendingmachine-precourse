@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import vendingmachine.domain.coins.Coin;
 import vendingmachine.exception.MoneyRangeException;
 
 public class Money {
@@ -39,8 +40,8 @@ public class Money {
         return (this.money - money) >= ZERO_MONEY;
     }
 
-    public int calculateDividingMoney(int number) {
-        return this.money / number;
+    public int calculateDividingCoin(Coin coin) {
+        return coin.exchangeCoin(this.money);
     }
 
     public int getMoney() {

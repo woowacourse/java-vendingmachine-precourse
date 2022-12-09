@@ -3,12 +3,9 @@ package vendingmachine.controller;
 import vendingmachine.domain.*;
 import vendingmachine.domain.coins.Coins;
 import vendingmachine.domain.coins.RandomNumberGenerator;
-import vendingmachine.domain.products.Product;
 import vendingmachine.domain.products.Products;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
-
-import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class VendingMachineController {
@@ -37,7 +34,7 @@ public class VendingMachineController {
         Coins coins = makeCoins(money);
         Products products = askProducts();
 
-        vendingMachine = VendingMachine.of(money, coins, products);
+        vendingMachine = VendingMachine.of(coins, products);
     }
 
     private Money askMachineMoney() {

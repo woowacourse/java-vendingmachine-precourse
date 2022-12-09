@@ -1,8 +1,6 @@
 package vendingmachine.domain.coins;
 
-import vendingmachine.domain.Money;
 import vendingmachine.exception.CoinEmptyException;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -39,7 +37,13 @@ public enum Coin {
                 .orElseThrow(CoinEmptyException::new);
     }
 
+    public int exchangeCoin(int money) {
+        return (money / amount);
+    }
 
+    public int multiCoin(int multi) {
+        return (multi * amount);
+    }
 
     public int getAmount() {
         return amount;

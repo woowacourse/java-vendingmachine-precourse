@@ -45,7 +45,8 @@ public class Product {
     public boolean isPurchaseProduct(Money money) {
         return price.isPurchase(money);
     }
-    public boolean isSoldOut(){
+
+    public boolean isSoldOut() {
         return !quantity.isRemain();
     }
 
