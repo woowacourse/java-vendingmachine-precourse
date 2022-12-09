@@ -26,7 +26,7 @@ public class InputView {
         while (true) {
             try {
                 String input = readLine();
-                validateMoney(input,dividend);
+                validateMoney(input, dividend);
                 return Integer.parseInt(input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
@@ -66,11 +66,30 @@ public class InputView {
             throw new IllegalArgumentException(ErrorMessages.ERROR_WRONG_FORMAT_PRODUCT);
         }
         List<String> productInfo = new ArrayList<>();
-        while(matcher.find()){
+        while (matcher.find()) {
             productInfo.add(matcher.group(0));
         }
         return productInfo;
     }
 
+    public String askWishList() {
+        while (true) {
+            try {
+                outputView.enterWishList();
+                String input = readLine();
+                validateWishList(input);
+                return input;
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+    }
 
+    private void validateWishList(String input) {
+        Pattern pattern = Pattern.compile(CommonValues.PURCHASE_REGEX);
+        Matcher matcher = pattern.matcher(input);
+        if (!matcher.matches()) {
+            throw new IllegalArgumentException(ErrorMessages.ERROR_WRONG_FORMAT_PRODUCT);
+        }
+    }
 }
