@@ -1,4 +1,4 @@
-package vendingmachine;
+package Constants;
 
 public enum Coin {
     COIN_500(500),
@@ -7,7 +7,6 @@ public enum Coin {
     COIN_10(10);
 
     private final int amount;
-
     Coin(final int amount) {
         this.amount = amount;
     }
