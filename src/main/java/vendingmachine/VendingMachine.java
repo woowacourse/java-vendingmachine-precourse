@@ -1,9 +1,9 @@
 package vendingmachine;
 
+import static Constants.CommonValues.FALSE;
 import static Constants.CommonValues.MINIMUM_COIN_VALUE;
 
 import Constants.Coin;
-import Constants.CommonValues.VendingMachineState;
 import UI.InputView;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
@@ -14,14 +14,11 @@ import java.util.Map;
 public class VendingMachine {
     private Map<Coin, Integer> coinBox;
     private List<Product> productShelf;
-    private int inputMoney;
-    private VendingMachineState vendingMachineState;
 
     public VendingMachine() {
         InputView inputView = new InputView();
         coinBox = fillCoins(inputView.askVendingMachineMoney());
         productShelf = fillProducts(inputView.askProductsInfo());
-        inputMoney = inputView.askinputMoney();
     }
 
     private Map<Coin, Integer> fillCoins(int vendingMachineMoney) {
@@ -54,5 +51,26 @@ public class VendingMachine {
         return productShelf;
     }
 
+    public List<Product> bringShelf() {
+        return productShelf;
+    }
 
+    public int hasSuchProduct(String wishList) {
+        for(Product product: productShelf){
+            if(product.askName().equals(wishList)){
+                return productShelf.indexOf(product);
+            }
+        }
+        return FALSE;
+    }
+    public int getPrice(String wishList) {
+        int targetIndex = hasSuchProduct(wishList);
+        Product product = productShelf.get(targetIndex);
+        return product.askPrice();
+    }
+    public void decreaseStock(String wishList) {
+        int targetIndex = hasSuchProduct(wishList);
+        Product product = productShelf.get(targetIndex);
+        product.sellProduct();
+    }
 }
