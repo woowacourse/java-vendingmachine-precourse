@@ -31,7 +31,7 @@ public class Machine {
     }
 
     private boolean isPurchasable(int money) {
-        return products.getCheapestPrice() < money;
+        return products.getCheapestPrice() <= money;
     }
 
     private int productSold(String name) {
