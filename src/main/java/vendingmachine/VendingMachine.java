@@ -78,37 +78,9 @@ public class VendingMachine {
         product.sellProduct();
     }
 
-    public Map<Coin, Integer> returnChanges(Customer customer) {
-        Map<Coin, Integer> result = new HashMap<>();
-        int remainingMoney = customer.getInputMoney();
-        if (remainingMoney > calcSumOfChanges(coinBox)) {
-            return coinBox;
-        }
-
-        for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
-            Coin coin = entry.getKey();
-            int coinSize = entry.getValue();
-            if (coinSize == 0) {
-                continue;
-            }
-            int number = remainingMoney / coin.getAmount();
-            if (number > coinSize) {
-                number = coinSize;
-            }
-            result.put(coin, number);
-            remainingMoney -= coin.getAmount() * number;
-            if (remainingMoney == 0) {
-                break;
-            }
-        }
-        return result;
-    }
-
-    private int calcSumOfChanges(Map<Coin, Integer> coinBox) {
-        int sum = 0;
-        for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
-            sum += entry.getKey().getAmount() * entry.getValue();
-        }
-        return sum;
+    public void returnChanges(Customer customer) {
+        ChangeCalculator changeCalculator = new ChangeCalculator(coinBox, customer);
+        Map<Coin, Integer> result = changeCalculator.calculateResult();
+        OutputView.showReturningChanges(result);
     }
 }
