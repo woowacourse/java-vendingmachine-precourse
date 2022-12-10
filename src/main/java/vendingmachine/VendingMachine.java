@@ -18,11 +18,11 @@ public class VendingMachine {
 
     public VendingMachine() {
         InputView inputView = new InputView();
-        coinBox = fillCoinsAndShowBox(inputView.askVendingMachineMoney());
+        coinBox = fillCoins(inputView.askVendingMachineMoney());
         productShelf = fillProducts(inputView.askProductsInfo());
     }
 
-    private Map<Coin, Integer> fillCoinsAndShowBox(int vendingMachineMoney) {
+    private Map<Coin, Integer> fillCoins(int vendingMachineMoney) {
         Map<Coin, Integer> coinBox = new HashMap<>();
         distributeMoney(vendingMachineMoney, coinBox);
         OutputView.printVendingMachineCoins(coinBox);
