@@ -1,19 +1,19 @@
 package vendingmachine;
 
+import camp.nextstep.edu.missionutils.Randoms;
+
 import static Constants.CommonValues.FALSE;
 import static Constants.CommonValues.MINIMUM_COIN_VALUE;
 
 import Constants.Coin;
-import Constants.CommonValues;
+
 import UI.InputView;
 import UI.OutputView;
-import camp.nextstep.edu.missionutils.Randoms;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class VendingMachine {
     private int vendingMachineMoney;

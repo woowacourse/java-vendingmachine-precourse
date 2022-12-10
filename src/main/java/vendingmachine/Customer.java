@@ -1,7 +1,6 @@
 package vendingmachine;
 
 import static Constants.CommonValues.FALSE;
-
 import Constants.ErrorMessages;
 import UI.InputView;
 import java.util.List;

@@ -1,12 +1,6 @@
 package UI;
 
-import static Constants.GuideMessages.CHANGE;
-import static Constants.GuideMessages.COIN_OWNED_BY_MACHINE;
-import static Constants.GuideMessages.ENTER_INPUT_PRICE;
-import static Constants.GuideMessages.ENTER_PRODUCT_INFO;
-import static Constants.GuideMessages.ENTER_PRODUCT_YOU_WILL_BUY;
-import static Constants.GuideMessages.ENTER_VENDING_MACHINE_MONEY;
-
+import static Constants.GuideMessages.*;
 import Constants.Coin;
 import java.util.Comparator;
 import java.util.Map;
