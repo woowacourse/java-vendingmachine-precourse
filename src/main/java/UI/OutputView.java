@@ -33,8 +33,8 @@ public class OutputView {
         System.out.println(ENTER_INPUT_PRICE);
     }
 
-    public static void enterWishList() {
-        //System.out.println(REMAINING_PRICE+돈+원);
+    public static void enterWishList(int intputMoney) {
+        System.out.printf("\n투입금액: %d원\n", intputMoney);
         System.out.println(ENTER_PRODUCT_YOU_WILL_BUY);
     }
 
@@ -43,6 +43,9 @@ public class OutputView {
         for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
             int amount = entry.getKey().getAmount();
             int coinSize = entry.getValue();
+            if (coinSize == 0) {
+                continue;
+            }
             System.out.printf("%d원 - %d개\n", amount, coinSize);
         }
     }

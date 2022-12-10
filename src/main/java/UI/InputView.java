@@ -2,9 +2,10 @@ package UI;
 
 import static camp.nextstep.edu.missionutils.Console.readLine;
 
-import Constants.CommonValues;
+import static Constants.CommonValues.*;
+import static Constants.GuideMessages.*;
 import Constants.ErrorMessages;
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,34 +15,35 @@ public class InputView {
 
     public static int askVendingMachineMoney() {
         OutputView.enterVendingMachineMoney();
-        return askMoney(CommonValues.MINIMUM_COIN_VALUE);
+        return askMoney(ENTER_VENDING_MACHINE_MONEY,MINIMUM_COIN_VALUE);
     }
 
     public static int askInputMoney() {
         OutputView.enterinputMoney();
-        return askMoney(CommonValues.MINIMUM_PRODUCT_VALUE);
+        return askMoney(ENTER_INPUT_PRICE,MINIMUM_PRODUCT_VALUE);
     }
 
-    private static int askMoney(int dividend) {
+    private static int askMoney(String inputMessage,int dividend) {
         while (true) {
             try {
                 String input = readLine();
                 validateMoney(input, dividend);
                 return Integer.parseInt(input);
             } catch (IllegalArgumentException e) {
-                System.out.println(e.getMessage());
+                System.out.println(e.getMessage()+"\n");
+                System.out.println(inputMessage);
             }
         }
     }
 
     private static void validateMoney(String input, int dividend) {
-        Pattern pattern = Pattern.compile(CommonValues.MONEY_REGEX);
+        Pattern pattern = Pattern.compile(MONEY_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(ErrorMessages.ERROR_WRONG_FORMAT_PRODUCT);
         }
         int value = Integer.parseInt(input);
-        if (value <= 0 || value / dividend != 0) {
+        if (value <= 0 || value % dividend != 0) {
             throw new IllegalArgumentException(ErrorMessages.ERROR_NUMBER_OUF_OF_RANGE);
         }
     }
@@ -51,31 +53,31 @@ public class InputView {
             try {
                 OutputView.enterProductInfo();
                 String input = readLine();
-                List<String> productInfo = validateProductsInfo(input);
-                return productInfo;
+                validateProductsInfo(input);
+                return getProductInfoBunch(input);
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
         }
     }
 
-    private static List<String> validateProductsInfo(String input) {
-        Pattern pattern = Pattern.compile(CommonValues.PRODUCT_TOTAL_REGEX);
+    private static void validateProductsInfo(String input) {
+        Pattern pattern = Pattern.compile(PRODUCT_TOTAL_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(ErrorMessages.ERROR_WRONG_FORMAT_PRODUCT);
         }
-        List<String> productInfo = new ArrayList<>();
-        while (matcher.find()) {
-            productInfo.add(matcher.group(0));
-        }
-        return productInfo;
     }
 
-    public static String askWishList() {
+    private static List<String> getProductInfoBunch(String input) {
+        String[] parsed = input.split(";");
+        return Arrays.asList(parsed);
+    }
+
+    public static String askWishList(int inputMoney) {
         while (true) {
             try {
-                OutputView.enterWishList();
+                OutputView.enterWishList(inputMoney);
                 String input = readLine();
                 validateWishList(input);
                 return input;
@@ -86,7 +88,7 @@ public class InputView {
     }
 
     private static void validateWishList(String input) {
-        Pattern pattern = Pattern.compile(CommonValues.PURCHASE_REGEX);
+        Pattern pattern = Pattern.compile(PURCHASE_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(ErrorMessages.ERROR_WRONG_FORMAT_PRODUCT);

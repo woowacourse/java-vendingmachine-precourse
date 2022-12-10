@@ -20,7 +20,7 @@ public class Customer {
     public void purchaseProduct(VendingMachine vendingMachine) {
         String wishList;
         while (isCustomerAffordable(vendingMachine, inputMoney)) {
-            wishList = InputView.askWishList();
+            wishList = InputView.askWishList(inputMoney);
             if (!isWishListAvailable(vendingMachine, wishList)) {
                 continue;
             }
@@ -32,7 +32,7 @@ public class Customer {
     private boolean isCustomerAffordable(VendingMachine vendingMachine, int inputMoney) {
         List<Product> productShelf = vendingMachine.getShelf();
         if (!hasSomethingToSell(productShelf)
-                && !hasMoneyToBuySomething(inputMoney, productShelf)) {
+                || !hasMoneyToBuySomething(inputMoney, productShelf)) {
             return false;
         }
         return true;
