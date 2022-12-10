@@ -5,6 +5,7 @@ import static Constants.CommonValues.MINIMUM_COIN_VALUE;
 
 import Constants.Coin;
 import UI.InputView;
+import UI.OutputView;
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,13 +18,14 @@ public class VendingMachine {
 
     public VendingMachine() {
         InputView inputView = new InputView();
-        coinBox = fillCoins(inputView.askVendingMachineMoney());
+        coinBox = fillCoinsAndShowBox(inputView.askVendingMachineMoney());
         productShelf = fillProducts(inputView.askProductsInfo());
     }
 
-    private Map<Coin, Integer> fillCoins(int vendingMachineMoney) {
+    private Map<Coin, Integer> fillCoinsAndShowBox(int vendingMachineMoney) {
         Map<Coin, Integer> coinBox = new HashMap<>();
         distributeMoney(vendingMachineMoney, coinBox);
+        OutputView.printVendingMachineCoins(coinBox);
         return coinBox;
     }
 
@@ -51,26 +53,62 @@ public class VendingMachine {
         return productShelf;
     }
 
-    public List<Product> bringShelf() {
-        return productShelf;
-    }
-
     public int hasSuchProduct(String wishList) {
-        for(Product product: productShelf){
-            if(product.askName().equals(wishList)){
+        for (Product product : productShelf) {
+            if (product.askName().equals(wishList)) {
                 return productShelf.indexOf(product);
             }
         }
         return FALSE;
     }
+
+    public List<Product> getShelf() {
+        return productShelf;
+    }
+
     public int getPrice(String wishList) {
         int targetIndex = hasSuchProduct(wishList);
         Product product = productShelf.get(targetIndex);
         return product.askPrice();
     }
+
     public void decreaseStock(String wishList) {
         int targetIndex = hasSuchProduct(wishList);
         Product product = productShelf.get(targetIndex);
         product.sellProduct();
+    }
+
+    public Map<Coin, Integer> returnChanges(Customer customer) {
+        Map<Coin, Integer> result = new HashMap<>();
+        int remainingMoney = customer.getInputMoney();
+        if (remainingMoney > calcSumOfChanges(coinBox)) {
+            return coinBox;
+        }
+
+        for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
+            Coin coin = entry.getKey();
+            int coinSize = entry.getValue();
+            if (coinSize == 0) {
+                continue;
+            }
+            int number = remainingMoney / coin.getAmount();
+            if (number > coinSize) {
+                number = coinSize;
+            }
+            result.put(coin, number);
+            remainingMoney -= coin.getAmount() * number;
+            if (remainingMoney == 0) {
+                break;
+            }
+        }
+        return result;
+    }
+
+    private int calcSumOfChanges(Map<Coin, Integer> coinBox) {
+        int sum = 0;
+        for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
+            sum += entry.getKey().getAmount() * entry.getValue();
+        }
+        return sum;
     }
 }
