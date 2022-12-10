@@ -8,7 +8,9 @@ import static Constants.GuideMessages.ENTER_PRODUCT_YOU_WILL_BUY;
 import static Constants.GuideMessages.ENTER_VENDING_MACHINE_MONEY;
 
 import Constants.Coin;
+import java.util.Comparator;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class OutputView {
     public static void enterVendingMachineMoney() {
@@ -17,12 +19,24 @@ public class OutputView {
 
     public static void printVendingMachineCoins(Map<Coin, Integer> coinBox) {
         System.out.println(COIN_OWNED_BY_MACHINE);
+        Map<Coin, Integer> sortedCoinBox = sortCoinBox(coinBox);
         for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
             int amount = entry.getKey().getAmount();
             int coinSize = entry.getValue();
             System.out.printf("%d원 - %d개\n", amount, coinSize);
         }
         System.out.println();
+    }
+
+    private static Map<Coin, Integer> sortCoinBox(Map<Coin, Integer> coinBox) {
+        Map<Coin, Integer> sortedMap = new TreeMap<>(new Comparator<Coin>() {
+            @Override
+            public int compare(Coin o1, Coin o2) {
+                int amountDifference = o2.getAmount() - o1.getAmount();
+                return amountDifference;
+            }
+        });
+        return sortedMap;
     }
 
     public static void enterProductInfo() {

@@ -4,6 +4,7 @@ import static Constants.CommonValues.FALSE;
 import static Constants.CommonValues.MINIMUM_COIN_VALUE;
 
 import Constants.Coin;
+import Constants.CommonValues;
 import UI.InputView;
 import UI.OutputView;
 import camp.nextstep.edu.missionutils.Randoms;
@@ -11,15 +12,18 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VendingMachine {
+    private int vendingMachineMoney;
     private Map<Coin, Integer> coinBox;
     private List<Product> productShelf;
 
     public VendingMachine() {
-        InputView inputView = new InputView();
-        coinBox = fillCoins(inputView.askVendingMachineMoney());
-        productShelf = fillProducts(inputView.askProductsInfo());
+        vendingMachineMoney = InputView.askVendingMachineMoney();
+        coinBox = fillCoins(vendingMachineMoney);
+        productShelf = fillProducts(InputView.askProductsInfo());
     }
 
     private Map<Coin, Integer> fillCoins(int vendingMachineMoney) {
@@ -46,6 +50,7 @@ public class VendingMachine {
     private List<Product> fillProducts(List<String> productsInfo) {
         List<Product> productShelf = new ArrayList<>();
         for (String productInfo : productsInfo) {
+            productInfo = productInfo.replaceAll("\\[|\\]", "");
             String[] info = productInfo.split(",");
             Product product = new Product(info[0], info[1], info[2]);
             productShelf.add(product);
@@ -60,6 +65,10 @@ public class VendingMachine {
             }
         }
         return FALSE;
+    }
+
+    public int getVendingMachineMoney() {
+        return vendingMachineMoney;
     }
 
     public List<Product> getShelf() {
@@ -79,7 +88,7 @@ public class VendingMachine {
     }
 
     public void returnChanges(Customer customer) {
-        ChangeCalculator changeCalculator = new ChangeCalculator(coinBox, customer);
+        ChangeCalculator changeCalculator = new ChangeCalculator(vendingMachineMoney, coinBox, customer);
         Map<Coin, Integer> result = changeCalculator.calculateResult();
         OutputView.showReturningChanges(result);
     }
