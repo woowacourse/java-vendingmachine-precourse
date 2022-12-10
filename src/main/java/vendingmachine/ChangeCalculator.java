@@ -6,10 +6,12 @@ import java.util.Map;
 
 public class ChangeCalculator {
 
+    int vendingMachineMoney;
     Map<Coin, Integer> coinBox;
     Customer customer;
 
-    public ChangeCalculator(Map<Coin, Integer> coinBox, Customer customer) {
+    public ChangeCalculator(int vendingMachineMoney, Map<Coin, Integer> coinBox, Customer customer) {
+        this.vendingMachineMoney = vendingMachineMoney;
         this.coinBox = coinBox;
         this.customer = customer;
     }
@@ -18,20 +20,12 @@ public class ChangeCalculator {
         Map<Coin, Integer> result = new HashMap<>();
 
         int remainingMoney = customer.getInputMoney();
-        if (remainingMoney >= calculateSumOfChanges()) {
+        if (remainingMoney >= vendingMachineMoney) {
             return coinBox;
         }
         calculateMinimumCoinSize(result, remainingMoney);
 
         return result;
-    }
-
-    private int calculateSumOfChanges() {
-        int sum = 0;
-        for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
-            sum += entry.getKey().getAmount() * entry.getValue();
-        }
-        return sum;
     }
 
     private void calculateMinimumCoinSize(Map<Coin, Integer> result, int remainingMoney) {
