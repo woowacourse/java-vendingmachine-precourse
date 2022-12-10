@@ -6,9 +6,7 @@ import Constants.CommonValues.CustomerState;
 import Constants.ErrorMessages;
 import UI.InputView;
 import UI.OutputView;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 public class Customer {
     InputView inputView = new InputView();
@@ -35,7 +33,7 @@ public class Customer {
     }
 
     private boolean checkCustomerState(VendingMachine vendingMachine, int inputMoney) {
-        List<Product> productShelf = vendingMachine.bringShelf();
+        List<Product> productShelf = vendingMachine.getShelf();
         if (!hasSomethingToSell(productShelf)
                 && !hasMoneyToBuySomething(inputMoney, productShelf)) {
             return false;
@@ -64,7 +62,7 @@ public class Customer {
 
     private boolean checkStock(VendingMachine vendingMachine, String wishList) {
         try {
-            if (vendingMachine.hasSuchProduct(wishList)==FALSE
+            if (vendingMachine.hasSuchProduct(wishList) == FALSE
                     || vendingMachine.getPrice(wishList) > inputMoney) {
                 throw new IllegalArgumentException(ErrorMessages.ERROR_CANNOT_BUY_THE_PRODUCT);
             }
@@ -81,5 +79,8 @@ public class Customer {
         inputMoney -= price;
     }
 
+    public int getInputMoney() {
+        return inputMoney;
+    }
 
 }
