@@ -10,8 +10,4 @@ public class CommonValues {
     public static final String PURCHASE_REGEX = "^[가-힣]+$";
     public static final int FALSE = -1;
 
-    public enum CustomerState {
-        PURCHASE_POSSIBLE, PURCHASE_IMPOSSIBLE
-    }
-
 }

@@ -2,19 +2,15 @@ package vendingmachine;
 
 import static Constants.CommonValues.FALSE;
 
-import Constants.CommonValues.CustomerState;
 import Constants.ErrorMessages;
 import UI.InputView;
 import java.util.List;
 
 public class Customer {
     private int inputMoney;
-    CustomerState customerState;
-
 
     public Customer() {
         inputMoney = InputView.askInputMoney();
-        customerState = CustomerState.PURCHASE_POSSIBLE;
     }
 
     public void purchaseProduct(VendingMachine vendingMachine) {
