@@ -5,26 +5,23 @@ import static Constants.CommonValues.FALSE;
 import Constants.CommonValues.CustomerState;
 import Constants.ErrorMessages;
 import UI.InputView;
-import UI.OutputView;
 import java.util.List;
 
 public class Customer {
-    InputView inputView = new InputView();
-    OutputView outputView = new OutputView();
     private int inputMoney;
     CustomerState customerState;
 
 
     public Customer() {
-        inputMoney = inputView.askinputMoney();
+        inputMoney = InputView.askInputMoney();
         customerState = CustomerState.PURCHASE_POSSIBLE;
     }
 
     public void purchaseProduct(VendingMachine vendingMachine) {
         String wishList;
-        while (checkCustomerState(vendingMachine, inputMoney)) {
-            wishList = inputView.askWishList();
-            if (!checkStock(vendingMachine, wishList)) {
+        while (isCustomerAffordable(vendingMachine, inputMoney)) {
+            wishList = InputView.askWishList();
+            if (!isWishListAvailable(vendingMachine, wishList)) {
                 continue;
             }
             vendingMachine.decreaseStock(wishList);
@@ -32,7 +29,7 @@ public class Customer {
         }
     }
 
-    private boolean checkCustomerState(VendingMachine vendingMachine, int inputMoney) {
+    private boolean isCustomerAffordable(VendingMachine vendingMachine, int inputMoney) {
         List<Product> productShelf = vendingMachine.getShelf();
         if (!hasSomethingToSell(productShelf)
                 && !hasMoneyToBuySomething(inputMoney, productShelf)) {
@@ -60,7 +57,7 @@ public class Customer {
     }
 
 
-    private boolean checkStock(VendingMachine vendingMachine, String wishList) {
+    private boolean isWishListAvailable(VendingMachine vendingMachine, String wishList) {
         try {
             if (vendingMachine.hasSuchProduct(wishList) == FALSE
                     || vendingMachine.getPrice(wishList) > inputMoney) {

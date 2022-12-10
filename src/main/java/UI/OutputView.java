@@ -11,7 +11,7 @@ import Constants.Coin;
 import java.util.Map;
 
 public class OutputView {
-    public void enterVendingMachineMoney() {
+    public static void enterVendingMachineMoney() {
         System.out.println(ENTER_VENDING_MACHINE_MONEY);
     }
 
@@ -25,20 +25,20 @@ public class OutputView {
         System.out.println();
     }
 
-    public void enterProductInfo() {
+    public static void enterProductInfo() {
         System.out.println(ENTER_PRODUCT_INFO);
     }
 
-    public void enterinputMoney() {
+    public static void enterinputMoney() {
         System.out.println(ENTER_INPUT_PRICE);
     }
 
-    public void enterWishList() {
+    public static void enterWishList() {
         //System.out.println(REMAINING_PRICE+돈+원);
         System.out.println(ENTER_PRODUCT_YOU_WILL_BUY);
     }
 
-    public void showReturnedChanges(Map<Coin, Integer> coinBox) {
+    public static void showReturningChanges(Map<Coin, Integer> coinBox) {
         System.out.println(CHANGE);
         for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
             int amount = entry.getKey().getAmount();

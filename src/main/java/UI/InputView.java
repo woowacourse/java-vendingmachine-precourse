@@ -12,17 +12,17 @@ import java.util.regex.Pattern;
 public class InputView {
     OutputView outputView = new OutputView();
 
-    public int askVendingMachineMoney() {
-        outputView.enterVendingMachineMoney();
+    public static int askVendingMachineMoney() {
+        OutputView.enterVendingMachineMoney();
         return askMoney(CommonValues.MINIMUM_COIN_VALUE);
     }
 
-    public int askinputMoney() {
-        outputView.enterinputMoney();
+    public static int askInputMoney() {
+        OutputView.enterinputMoney();
         return askMoney(CommonValues.MINIMUM_PRODUCT_VALUE);
     }
 
-    private int askMoney(int dividend) {
+    private static int askMoney(int dividend) {
         while (true) {
             try {
                 String input = readLine();
@@ -34,7 +34,7 @@ public class InputView {
         }
     }
 
-    private void validateMoney(String input, int dividend) {
+    private static void validateMoney(String input, int dividend) {
         Pattern pattern = Pattern.compile(CommonValues.MONEY_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
@@ -46,10 +46,10 @@ public class InputView {
         }
     }
 
-    public List<String> askProductsInfo() {
+    public static List<String> askProductsInfo() {
         while (true) {
             try {
-                outputView.enterProductInfo();
+                OutputView.enterProductInfo();
                 String input = readLine();
                 List<String> productInfo = validateProductsInfo(input);
                 return productInfo;
@@ -59,7 +59,7 @@ public class InputView {
         }
     }
 
-    private List<String> validateProductsInfo(String input) {
+    private static List<String> validateProductsInfo(String input) {
         Pattern pattern = Pattern.compile(CommonValues.PRODUCT_TOTAL_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
@@ -72,10 +72,10 @@ public class InputView {
         return productInfo;
     }
 
-    public String askWishList() {
+    public static String askWishList() {
         while (true) {
             try {
-                outputView.enterWishList();
+                OutputView.enterWishList();
                 String input = readLine();
                 validateWishList(input);
                 return input;
@@ -85,7 +85,7 @@ public class InputView {
         }
     }
 
-    private void validateWishList(String input) {
+    private static void validateWishList(String input) {
         Pattern pattern = Pattern.compile(CommonValues.PURCHASE_REGEX);
         Matcher matcher = pattern.matcher(input);
         if (!matcher.matches()) {
