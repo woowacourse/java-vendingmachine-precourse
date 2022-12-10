@@ -1,4 +1,6 @@
-package vendingmachine;
+package vendingmachine.domain;
+
+import java.util.stream.Stream;
 
 public enum Coin {
     COIN_500(500),
@@ -12,5 +14,8 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    @Override
+    public String toString() {
+        return this.amount + "원";
+    }
 }
