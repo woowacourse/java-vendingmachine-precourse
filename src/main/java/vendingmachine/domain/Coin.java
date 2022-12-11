@@ -21,8 +21,7 @@ public enum Coin {
      * @param coin
      * @return
      */
-    public static Coin valueOf(int coin) throws Throwable {
-        Supplier<? extends Throwable> IllegalArgumentException = null;
+    public static Coin valueOf(int coin) {
         return Arrays.stream(Coin.values())
                 .filter(Coin -> Coin.amount == coin)
                 .findFirst()

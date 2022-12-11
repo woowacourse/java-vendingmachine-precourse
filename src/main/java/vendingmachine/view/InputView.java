@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.Validator;
+
 public class InputView {
     private InputView() {}
 
@@ -10,8 +12,16 @@ public class InputView {
      */
 
     public static int inputMachineHoldMoney() {
-        OutputView.printMachineInputMoneyMsg();
-        return Integer.parseInt(Console.readLine());
+        try {
+            OutputView.printMachineInputMoneyMsg();
+            String inputMoney = Console.readLine();
+            Validator.validateMachineHasMoneyInput(inputMoney);
+            Validator.validateMachineHasMoneyInputType(inputMoney);
+            return Integer.parseInt(inputMoney);
+        } catch (IllegalArgumentException error) {
+            System.out.println(error.getMessage());
+        }
+        return -1;
     }
 
     /**

@@ -36,7 +36,7 @@ public class Machine {
      * 보유한 돈이 0이되면 그만한다.
      * @param moneyInput
      */
-    public void generateCoin(int moneyInput) throws Throwable {
+    public void generateCoin(int moneyInput) {
         List<Integer> coinUnit = getCoinUnit();
         while(moneyInput > 0) {
             int pickRandomNum = Randoms.pickNumberInList(coinUnit);
