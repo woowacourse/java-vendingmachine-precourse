@@ -8,6 +8,6 @@ public class GuideMessages {
     public static final String REMAINING_PRICE = "\n투입 금액: %d";
     public static final String ENTER_PRODUCT_YOU_WILL_BUY = "구매할 상품명을 입력해 주세요.";
     public static final String CHANGE = "\n잔돈";
-    public static final String CHANGE_RESULT = "%d원 - %d개";
+    public static final String COIN_MAP = "%d원 - %d개";
 
 }

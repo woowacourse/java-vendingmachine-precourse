@@ -86,6 +86,6 @@ public class VendingMachine {
     public void returnChanges(Customer customer) {
         ChangeCalculator changeCalculator = new ChangeCalculator(vendingMachineMoney, coinBox, customer);
         Map<Coin, Integer> result = changeCalculator.calculateResult();
-        OutputView.showReturningChanges(result);
+        OutputView.showReturningChanges(result, customer.getInputMoney());
     }
 }
