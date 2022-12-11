@@ -1,7 +1,10 @@
 package vendingmachine;
 
 import Constants.Coin;
+import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ChangeCalculator {
@@ -29,21 +32,29 @@ public class ChangeCalculator {
     }
 
     private void calculateMinimumCoinSize(Map<Coin, Integer> result, int remainingMoney) {
-        for (Map.Entry<Coin, Integer> entry : coinBox.entrySet()) {
-            int coinValue = entry.getKey().getAmount();
-            int coinInMachine = entry.getValue();
-            if (coinInMachine == 0) {
+        List<Coin> sortedCoins = sortCoinsByTheirAmount(coinBox);
+
+        for (Coin coin : sortedCoins) {
+            int coinValue = coin.getAmount();
+            int coinNumberInMachine = coinBox.get(coin);
+            if (coinNumberInMachine == 0) {
                 continue;
             }
             int returningCoinSize = remainingMoney / coinValue;
-            if (returningCoinSize > coinInMachine) {
-                returningCoinSize = coinInMachine;
+            if (returningCoinSize > coinNumberInMachine) {
+                returningCoinSize = coinNumberInMachine;
             }
-            result.put(entry.getKey(), returningCoinSize);
+            result.put(coin, returningCoinSize);
             remainingMoney -= coinValue * returningCoinSize;
             if (remainingMoney == 0) {
                 break;
             }
         }
+    }
+    private static List<Coin> sortCoinsByTheirAmount(Map<Coin, Integer> coinBox) {
+        List<Coin> coinAmounts = new ArrayList<>(coinBox.keySet());
+        Comparator<Coin> comp = (c1, c2) -> Integer.compare(c2.getAmount(), c1.getAmount());
+        coinAmounts.sort(comp);
+        return coinAmounts;
     }
 }
