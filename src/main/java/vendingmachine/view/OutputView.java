@@ -4,6 +4,7 @@ import vendingmachine.MessageConstant;
 import vendingmachine.domain.Coin;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +22,21 @@ public class OutputView {
 
     public static void printMachineHasCoins(HashMap<Coin, Integer> coins) {
         printMachineHasCoinMsg();
-        for (Coin coin : coins.keySet()) {
-            System.out.println(coin.toString() + " - " );
+        for (Map.Entry<Coin, Integer> entry : coins.entrySet()) {
+            System.out.println(entry.getKey() + " - " + entry.getValue() + "개");
+        }
+    }
+
+    public static void printCurrentInputMoney(int money) {
+        System.out.println("투입 금액 : " + money + "원");
+    }
+
+    public static void printChange(LinkedHashMap<Coin, Integer> coins) {
+        System.out.println("잔돈");
+        for (Map.Entry<Coin, Integer> entry : coins.entrySet()) {
+            if (entry.getValue() > 0) {
+                System.out.println(entry.toString() +"-" + entry.getValue() + "개");
+            }
         }
     }
 }

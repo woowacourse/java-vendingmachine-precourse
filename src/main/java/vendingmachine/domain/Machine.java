@@ -10,11 +10,9 @@ public class Machine {
      * 받고 나서 랜덤으로 생성한 동전의 데이터만 갖고 있다.
      * 그렇다면 코인은 List로 존재하여야 한다.
      */
-    private Product product;
     private LinkedHashMap<Coin, Integer> coins;
 
-    public Machine(Product product) {
-        this.product = product;
+    public Machine() {
         this.coins = generateCoinMap();
     }
 
@@ -31,20 +29,33 @@ public class Machine {
         return coinMap;
     }
 
-    private void generateCoin(int moneyInput) {
+    /**
+     * 자판기가 갖고 있는 돈을 인자로 받아서
+     * 코인을 하나씩 랜덤으로 생성한다.
+     * 랜덤으로 생성한 돈이 현재 보유한 돈 보다 크면 다시 시도한다.
+     * 보유한 돈이 0이되면 그만한다.
+     * @param moneyInput
+     */
+    public void generateCoin(int moneyInput) throws Throwable {
+        List<Integer> coinUnit = getCoinUnit();
+        while(moneyInput > 0) {
+            int pickRandomNum = Randoms.pickNumberInList(coinUnit);
+            Coin randomCoin = Coin.valueOf(pickRandomNum);
+            if (moneyInput - pickRandomNum < 0) {
+                continue;
+            }
+            moneyInput -= pickRandomNum;
+            coins.put(randomCoin, coins.get(randomCoin) + 1);
+        }
+    }
+
+    private static List<Integer> getCoinUnit() {
         List<Integer> coinUnit = new ArrayList<>();
         coinUnit.add(500);
         coinUnit.add(100);
         coinUnit.add(50);
         coinUnit.add(10);
-
-        while(moneyInput >= 0) {
-            int pickRandomNum = Randoms.pickNumberInList(coinUnit);
-            if (moneyInput - pickRandomNum >= 0) {
-                moneyInput -= pickRandomNum;
-                coins.put(moneyInput, coins.get(moneyInput) + 1);
-            }
-        }
+        return coinUnit;
     }
 
 }

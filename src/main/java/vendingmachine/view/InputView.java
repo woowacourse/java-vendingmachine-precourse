@@ -10,6 +10,7 @@ public class InputView {
      */
 
     public static int inputMachineHoldMoney() {
+        OutputView.printMachineInputMoneyMsg();
         return Integer.parseInt(Console.readLine());
     }
 

@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.Arrays;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 public enum Coin {
@@ -12,6 +14,19 @@ public enum Coin {
 
     Coin(final int amount) {
         this.amount = amount;
+    }
+
+    /**
+     * 이 함수가 요구하는 것은 coin이라는 숫자를 받았을때 Coin Enum을 가져오는 것
+     * @param coin
+     * @return
+     */
+    public static Coin valueOf(int coin) throws Throwable {
+        Supplier<? extends Throwable> IllegalArgumentException = null;
+        return Arrays.stream(Coin.values())
+                .filter(Coin -> Coin.amount == coin)
+                .findFirst()
+                .orElseThrow(null);
     }
 
     @Override
