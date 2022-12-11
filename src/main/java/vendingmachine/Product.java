@@ -17,7 +17,7 @@ public class Product {
         }
     }
 
-    public boolean isEmpty() {
+    private boolean isEmpty() {
         return amount == 0;
     }
 

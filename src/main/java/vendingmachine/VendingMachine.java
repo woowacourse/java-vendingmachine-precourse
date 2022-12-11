@@ -67,10 +67,6 @@ public class VendingMachine {
         return FALSE;
     }
 
-    public int getVendingMachineMoney() {
-        return vendingMachineMoney;
-    }
-
     public List<Product> getShelf() {
         return productShelf;
     }

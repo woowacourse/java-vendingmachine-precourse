@@ -37,12 +37,12 @@ public class OutputView {
         System.out.println(ENTER_PRODUCT_INFO);
     }
 
-    public static void enterinputMoney() {
+    public static void enterInputMoney() {
         System.out.println(ENTER_INPUT_PRICE);
     }
 
-    public static void enterWishList(int intputMoney) {
-        System.out.printf("\n투입금액: %d원\n", intputMoney);
+    public static void enterWishList(int inputMoney) {
+        System.out.println(String.format(REMAINING_PRICE,inputMoney));
         System.out.println(ENTER_PRODUCT_YOU_WILL_BUY);
     }
 
@@ -54,7 +54,7 @@ public class OutputView {
             if (coinSize == 0) {
                 continue;
             }
-            System.out.printf("%d원 - %d개\n", amount, coinSize);
+            System.out.println(String.format(CHANGE_RESULT, amount, coinSize));
         }
     }
 

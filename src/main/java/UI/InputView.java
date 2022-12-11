@@ -20,7 +20,7 @@ public class InputView {
     }
 
     public static int askInputMoney() {
-        OutputView.enterinputMoney();
+        OutputView.enterInputMoney();
         return askMoney(ENTER_INPUT_PRICE);
     }
 
@@ -43,7 +43,7 @@ public class InputView {
                 OutputView.enterProductInfo();
                 String input = readLine();
                 validateInput(input, PRODUCT_TOTAL_REGEX, ERROR_WRONG_PRODUCT_FORMAT);
-                return getProductInfoBunch(input);
+                return Arrays.asList(input.split(";"));
             } catch (IllegalArgumentException e) {
                 System.out.println(e.getMessage());
             }
@@ -61,11 +61,6 @@ public class InputView {
                 System.out.println(e.getMessage());
             }
         }
-    }
-
-    private static List<String> getProductInfoBunch(String input) {
-        String[] parsed = input.split(";");
-        return Arrays.asList(parsed);
     }
 
     private static void validateInput(String input, String regex, String errorMessage) {
