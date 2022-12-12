@@ -38,15 +38,21 @@ public class Machine {
      */
     public void generateCoin(int moneyInput) {
         List<Integer> coinUnit = getCoinUnit();
+        generateRandomCoin(moneyInput, coinUnit);
+    }
+
+    private void generateRandomCoin(int moneyInput, List<Integer> coinUnit) {
         while(moneyInput > 0) {
             int pickRandomNum = Randoms.pickNumberInList(coinUnit);
             Coin randomCoin = Coin.valueOf(pickRandomNum);
-            if (moneyInput - pickRandomNum < 0) {
-                continue;
-            }
+            if (isInputRemainingMoney(moneyInput, pickRandomNum)) continue;
             moneyInput -= pickRandomNum;
             coins.put(randomCoin, coins.get(randomCoin) + 1);
         }
+    }
+
+    private static boolean isInputRemainingMoney(int moneyInput, int pickRandomNum) {
+        return moneyInput - pickRandomNum < 0;
     }
 
     private static List<Integer> getCoinUnit() {

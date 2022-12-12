@@ -29,6 +29,7 @@ public class InputView {
      * @return
      */
     public static String inputProductDetail() {
+        OutputView.printProductDetailInputMsg();
         return Console.readLine();
     }
 
