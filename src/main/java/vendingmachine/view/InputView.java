@@ -2,53 +2,39 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
+import static vendingmachine.model.Validator.*;
+import static vendingmachine.util.message.InputMessage.*;
+
 public class InputView {
 
     public static int readBalance() {
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        int balance;
+        System.out.println(BALANCE.fullMessage());
         try {
-            balance = validateNum();
-            if (balance % 10 != 0) {
-                throw new IllegalArgumentException("보유 금액은 10의 배수여야 합니다.");
-            }
+            return validateBalance(Console.readLine());
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            balance = readBalance();
+            System.out.println(e.getMessage());
+            return readBalance();
         }
-        return balance;
     }
 
     public static String readProductInfo() {
-        System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
+        System.out.println(PRODUCT_INFO.fullMessage());
         return Console.readLine();
     }
 
+
     public static int readAmountOfInput() {
-        System.out.println("\n투입 금액을 입력해 주세요.");
-        int amountOfInput = 0;
+        System.out.println(AMOUNT_OF_INPUT.fullMessage());
         try {
-            amountOfInput = validateNum();
-            if (amountOfInput < 0) {
-                throw new IllegalArgumentException("투입 금액은 음수일 수 없습니다.");
-            }
+            return validateAmountOfInput(Console.readLine());
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            amountOfInput = readAmountOfInput();
+            System.out.println(e.getMessage());
+            return readAmountOfInput();
         }
-        return amountOfInput;
     }
 
     public static String readBuyingProduct() {
-        System.out.println("구매할 상품명을 입력해 주세요.");
+        System.out.println(BUYING_PRODUCT.fullMessage());
         return Console.readLine();
-    }
-
-    private static int validateNum() throws IllegalArgumentException {
-        try {
-            return Integer.parseInt(Console.readLine());
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("입력값은 숫자여야 합니다.");
-        }
     }
 }
