@@ -14,23 +14,32 @@ import java.util.List;
 import java.util.Map;
 
 public class MainController {
+    private final LinkedHashMap<Coin, Integer> coinMap = generateRandomMachineCoin();
+    private final LinkedHashMap<Coin, Integer> changeCoins = setChangeMap();
+
     public void run() {
-        Machine machine = new Machine();
-        List<Product> products = new ArrayList<>();
-        LinkedHashMap<Coin, Integer> coinMap = machine.getCoins();
-        generateMachineHasCoins(machine);
-        OutputView.printMachineHasCoins(coinMap);
+        List<Product> products = new ArrayList<>(); // 상품 객체 생성
         createProductInfo(products);
         int minProductPrice = getMinProductPrice(products);
         int userMoneyInput = InputView.inputMoney();
-        LinkedHashMap<Coin, Integer> changeCoins = setChangeMap();
         while (userMoneyInput > minProductPrice) {
             userMoneyInput = purchaseProduct(products, userMoneyInput);
         }
-        OutputView.printCurrentInputMoney(userMoneyInput);
+        printChangeResult(coinMap, userMoneyInput, changeCoins);
+    }
 
+    private static void printChangeResult(LinkedHashMap<Coin, Integer> coinMap, int userMoneyInput, LinkedHashMap<Coin, Integer> changeCoins) {
+        OutputView.printCurrentInputMoney(userMoneyInput);
         makeChange(coinMap, changeCoins, userMoneyInput);
         OutputView.printChange(changeCoins);
+    }
+
+    private static LinkedHashMap<Coin, Integer> generateRandomMachineCoin() {
+        Machine machine = new Machine(); // 자판기 생성자
+        LinkedHashMap<Coin, Integer> coinMap = machine.getCoins(); // 거스름돈 map을 만들기 위해서 셋팅
+        generateMachineHasCoins(machine); // 자판기가 가진 거스름돈을 만듬
+        OutputView.printMachineHasCoins(coinMap); // 자판기가 가진 돈으로 생성한 거스름돈을 보여줌
+        return coinMap;
     }
 
     private static void makeChange(Map<Coin, Integer> coinMap, Map<Coin, Integer> changeCoins, int userMoneyInput) {
@@ -119,7 +128,7 @@ public class MainController {
     }
 
     private static Product getProduct(List<Product> products, String purchasingProduct) {
-        Product inputProduct = products.stream() //
+        Product inputProduct = products.stream()
                 .filter(x -> x.getName().equals(purchasingProduct))
                 .findFirst()
                 .orElse(null);

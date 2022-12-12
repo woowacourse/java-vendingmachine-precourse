@@ -4,6 +4,7 @@ import vendingmachine.domain.Product;
 
 public class Validator {
 
+    private Validator () {}
     public static void validateMachineHasMoneyInput(String money) {
         if (Integer.parseInt(money) <= 0) {
             throw new IllegalArgumentException("[ERROR] 입력한 금액이 올바르지 않습니다.");
