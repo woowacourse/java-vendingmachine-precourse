@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 import vendingmachine.utils.Coin;
 
-import java.util.LinkedHashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 import static vendingmachine.utils.ErrorMessage.CHANGE_WRONG_VALUE;
@@ -44,16 +44,16 @@ public class Change {
 
     public Map<Coin, Integer> getChange(int amount) {
 
-        Map<Coin, Integer> storedChange = getStoredChange();
+        Map<Coin, Integer> storedChange = this.cash;
         Map<Coin, Integer> result = Coin.toEnumMap();
 
         for (Map.Entry<Coin, Integer> entry : storedChange.entrySet()) {
-            Coin key = entry.getKey();
-            Integer count = storedChange.get(key);
-            while (isPossibleReduceAmount(amount, count, key)) {
-                amount -= key.getAmount();
-                result.put(key, result.get(key) + 1);
-                storedChange.put(key, storedChange.get(key) - 1);
+            Coin coin = entry.getKey();
+
+            while (isPossibleReduceAmount(amount, storedChange.get(coin), coin)) {
+                amount -= coin.getAmount();
+                result.put(coin, result.get(coin) + 1);
+                storedChange.put(coin, storedChange.get(coin) - 1);
             }
         }
 
@@ -61,7 +61,7 @@ public class Change {
     }
 
     public Map<Coin, Integer> getStoredChange() {
-        return new LinkedHashMap<>(this.cash);
+        return new EnumMap<Coin, Integer>(this.cash);
     }
 
     private boolean isPossibleReduceAmount(int amount, Integer count, Coin key) {
