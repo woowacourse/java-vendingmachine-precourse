@@ -2,9 +2,7 @@ package vendingmachine.utils;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static vendingmachine.utils.ErrorMessage.CHANGE_WRONG_VALUE;
@@ -45,6 +43,13 @@ public enum Coin {
         }
 
         throw new IllegalArgumentException(CHANGE_WRONG_VALUE.getMessage());
+    }
+
+    public static Map<Coin, Integer> toEnumMap() {
+        return new EnumMap<Coin, Integer>(Coin.class) {{
+            Arrays.stream(Coin.values())
+                    .forEach(coin -> put(coin, 0));
+        }};
     }
 
     public int getAmount() {

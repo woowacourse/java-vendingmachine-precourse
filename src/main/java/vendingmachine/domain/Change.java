@@ -5,7 +5,6 @@ import vendingmachine.utils.Coin;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import static vendingmachine.utils.Coin.of;
 import static vendingmachine.utils.ErrorMessage.CHANGE_WRONG_VALUE;
 import static vendingmachine.utils.MachineConst.MIN_CASH;
 
@@ -17,19 +16,9 @@ public class Change {
     private final Map<Coin, Integer> cash;
 
     Change(int amount) {
-
-        this.cash = getInitCash();
+        this.cash = Coin.toEnumMap();
         validateAmount(amount);
         createCoins(amount);
-    }
-
-    private LinkedHashMap<Coin, Integer> getInitCash() {
-
-        return new LinkedHashMap<Coin, Integer>() {{
-            for (Coin coin : Coin.values()) {
-                put(coin, 0);
-            }
-        }};
     }
 
     private void validateAmount(int amount) {
@@ -49,14 +38,14 @@ public class Change {
         while (current > 0) {
             int pickNumber = Coin.getRandomAmount(current);
             current -= pickNumber;
-            cash.put(of(pickNumber), cash.get(of(pickNumber)) + 1);
+            cash.put(Coin.of(pickNumber), cash.get(Coin.of(pickNumber)) + 1);
         }
     }
 
     public Map<Coin, Integer> getChange(int amount) {
 
         Map<Coin, Integer> storedChange = getStoredChange();
-        Map<Coin, Integer> result = getInitCash();
+        Map<Coin, Integer> result = Coin.toEnumMap();
 
         for (Map.Entry<Coin, Integer> entry : storedChange.entrySet()) {
             Coin key = entry.getKey();
