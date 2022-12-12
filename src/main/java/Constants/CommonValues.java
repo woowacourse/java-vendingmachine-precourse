@@ -8,5 +8,8 @@ public class CommonValues {
     public static final String PRODUCT_TOTAL_REGEX = PRODUCT_HEAD_REGEX + PRODUCT_TAIL_REGEX;
     public static final String PURCHASE_REGEX = "^[가-힣]+$";
     public static final int FALSE = -1;
+    public static final String REMOVE_REGEX = "\\[|\\]";
+    public static final String COMMA = ",";
+    public static final String BLANK = "";
 
 }

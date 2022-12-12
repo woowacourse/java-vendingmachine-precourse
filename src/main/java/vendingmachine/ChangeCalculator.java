@@ -40,12 +40,12 @@ public class ChangeCalculator {
             if (coinNumberInMachine == 0) {
                 continue;
             }
-            int returningCoinSize = remainingMoney / coinValue;
-            if (returningCoinSize > coinNumberInMachine) {
-                returningCoinSize = coinNumberInMachine;
+            int returningCoinNumber = remainingMoney / coinValue;
+            if (returningCoinNumber > coinNumberInMachine) {
+                returningCoinNumber = coinNumberInMachine;
             }
-            result.put(coin, returningCoinSize);
-            remainingMoney -= coinValue * returningCoinSize;
+            result.put(coin, returningCoinNumber);
+            remainingMoney -= coinValue * returningCoinNumber;
             if (remainingMoney == 0) {
                 break;
             }

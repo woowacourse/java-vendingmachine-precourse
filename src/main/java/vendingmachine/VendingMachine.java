@@ -1,19 +1,16 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
-import static Constants.CommonValues.FALSE;
-import static Constants.CommonValues.MINIMUM_COIN_VALUE;
+import static Constants.CommonValues.*;
 
 import Constants.Coin;
-
 import UI.InputView;
 import UI.OutputView;
-
+import camp.nextstep.edu.missionutils.Randoms;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import DTO.VendingMachineDto;
 
 public class VendingMachine {
     private int vendingMachineMoney;
@@ -22,36 +19,38 @@ public class VendingMachine {
 
     public VendingMachine() {
         vendingMachineMoney = InputView.askVendingMachineMoney();
-        coinBox = fillCoins(vendingMachineMoney);
+        coinBox = fillCoinsInBox(vendingMachineMoney);
         productShelf = fillProducts(InputView.askProductsInfo());
     }
 
-    private Map<Coin, Integer> fillCoins(int vendingMachineMoney) {
+    private Map<Coin, Integer> fillCoinsInBox(int vendingMachineMoney) {
         Map<Coin, Integer> coinBox = new HashMap<>();
-        distributeMoney(vendingMachineMoney, coinBox);
-        OutputView.printVendingMachineCoins(coinBox);
+        splitMoneyIntoCoins(coinBox);
         return coinBox;
     }
 
-    private static void distributeMoney(int vendingMachineMoney, Map<Coin, Integer> coinBox) {
-        int coinSize;
+    private void splitMoneyIntoCoins(Map<Coin, Integer> coinBox) {
         for (Coin coin : Coin.values()) {
-            if (coin.getAmount() == MINIMUM_COIN_VALUE) {
-                coinSize = vendingMachineMoney / MINIMUM_COIN_VALUE;
-                coinBox.put(coin, coinSize);
-                break;
+            int coinNumber = decideCoinNumber(coin);
+            coinBox.put(coin, coinNumber);
+            vendingMachineMoney -= coin.getAmount() * coinNumber;
+            if (vendingMachineMoney == 0) {
+                return;
             }
-            coinSize = Randoms.pickNumberInRange(0, vendingMachineMoney / coin.getAmount());
-            vendingMachineMoney -= coin.getAmount() * coinSize;
-            coinBox.put(coin, coinSize);
         }
+    }
+
+    private int decideCoinNumber(Coin coin) {
+        if (coin.getAmount() == MINIMUM_COIN_VALUE) {
+            return vendingMachineMoney / MINIMUM_COIN_VALUE;
+        }
+        return Randoms.pickNumberInRange(0, vendingMachineMoney / coin.getAmount());
     }
 
     private List<Product> fillProducts(List<String> productsInfo) {
         List<Product> productShelf = new ArrayList<>();
         for (String productInfo : productsInfo) {
-            productInfo = productInfo.replaceAll("\\[|\\]", "");
-            String[] info = productInfo.split(",");
+            String[] info = productInfo.replaceAll(REMOVE_REGEX, BLANK).split(COMMA);
             Product product = new Product(info[0], info[1], info[2]);
             productShelf.add(product);
         }
