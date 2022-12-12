@@ -21,14 +21,15 @@ public class Product {
         return amount == 0;
     }
 
-    public String askName() {
+    public String askItsName() {
         return new String(name);
     }
 
-    public int askPrice() {
+    public int askItsPrice() {
         return price;
     }
-    public int askStockLeft(){
+
+    public int askStockLeft() {
         return amount;
     }
 

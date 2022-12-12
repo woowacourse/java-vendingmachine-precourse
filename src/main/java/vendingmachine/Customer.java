@@ -1,6 +1,7 @@
 package vendingmachine;
 
 import static Constants.CommonValues.FALSE;
+
 import Constants.ErrorMessages;
 import UI.InputView;
 import java.util.List;
@@ -44,7 +45,7 @@ public class Customer {
 
     private boolean hasMoneyToBuySomething(int inputMoney, List<Product> productShelf) {
         for (Product product : productShelf) {
-            if (inputMoney > product.askPrice()) {
+            if (inputMoney > product.askItsPrice()) {
                 return true;
             }
         }
