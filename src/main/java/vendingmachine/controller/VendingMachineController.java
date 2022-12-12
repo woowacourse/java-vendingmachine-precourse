@@ -7,22 +7,27 @@ import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
+
+import static vendingmachine.model.Validator.validateProduct;
 
 public class VendingMachineController {
 
-    private static Map<String, Product> products = new HashMap<>();
+    private static Balance balance;
+    private static Map<String, Product> products;
     private static int amountOfInput;
 
-    public static void run() {
-        Balance balance = new Balance(InputView.readBalance());
+    public void setVendingMachine() {
+        balance = new Balance(InputView.readBalance());
         OutputView.printBalanceCoin(balance.createCoin());
         saveProducts();
         amountOfInput = InputView.readAmountOfInput();
         OutputView.printAmountOfInput(amountOfInput);
+    }
+
+    public void runVendingMachine() {
         while (canBuy()) {
             buy();
             OutputView.printAmountOfInput(amountOfInput);
@@ -30,45 +35,45 @@ public class VendingMachineController {
         OutputView.printChange(balance.calculateChangeCoin(amountOfInput));
     }
 
-    private static boolean canBuy() {
+    private boolean canBuy() {
         List<Integer> leftProductsPrice = new ArrayList<Integer>();
         for (Map.Entry<String, Product> entry : products.entrySet()) {
-            if (entry.getValue().amount != 0) {
-                leftProductsPrice.add(entry.getValue().price.get());
+            if (entry.getValue().stockIsLeft()) {
+                leftProductsPrice.add(entry.getValue().getPrice());
             }
         }
-        Collections.sort(leftProductsPrice);
         if (leftProductsPrice.isEmpty()) {
             return false;
         }
-        return amountOfInput >= leftProductsPrice.get(0);
+        return amountOfInput >= leftProductsPrice.stream().mapToInt(Integer::intValue).min().getAsInt();
     }
 
-    private static void buy() {
-        try {
-            String buyingProduct = InputView.readBuyingProduct();
-            Validator.validateBuyingProduct(buyingProduct, products, amountOfInput);
-            amountOfInput -= products.get(buyingProduct).price.get();
-            products.get(buyingProduct).amount--;
-        } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            buy();
-        }
-    }
 
-    public static void saveProducts() {
+    public void saveProducts() throws IllegalArgumentException {
+        products = new HashMap<>();
         try {
-            String input = InputView.readProductInfo();
-            String[] str = input.split(";");
+            String[] str = InputView.readProductInfo().split(";");
             for (String s : str) {
                 String[] productInfo = s.substring(1, s.length() - 1).split(",");
-                Validator.validateProduct(productInfo, products);
+                validateProduct(productInfo, products);
                 products.put(productInfo[0], new Product(productInfo[1], productInfo[2]));
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("[ERROR] " + e.getMessage());
-            products = new HashMap<>();
+            System.out.println(e.getMessage());
             saveProducts();
+        }
+    }
+
+
+    private void buy() {
+        try {
+            String buyingProduct = InputView.readBuyingProduct();
+            Validator.validateBuyingProduct(buyingProduct, products, amountOfInput);
+            amountOfInput -= products.get(buyingProduct).getPrice();
+            products.get(buyingProduct).reduceAmount();
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+            buy();
         }
     }
 }
