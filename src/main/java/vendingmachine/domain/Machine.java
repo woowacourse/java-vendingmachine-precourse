@@ -2,14 +2,11 @@ package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
 
 public class Machine {
-    /**
-     * 자판기 클래스에서는 필요한게 보유하고 있는 금액을 받는다.
-     * 받고 나서 랜덤으로 생성한 동전의 데이터만 갖고 있다.
-     * 그렇다면 코인은 List로 존재하여야 한다.
-     */
     private LinkedHashMap<Coin, Integer> coins;
 
     public Machine() {
@@ -27,15 +24,9 @@ public class Machine {
         coinMap.put(Coin.COIN_50, 0);
         coinMap.put(Coin.COIN_10, 0);
         return coinMap;
+
     }
 
-    /**
-     * 자판기가 갖고 있는 돈을 인자로 받아서
-     * 코인을 하나씩 랜덤으로 생성한다.
-     * 랜덤으로 생성한 돈이 현재 보유한 돈 보다 크면 다시 시도한다.
-     * 보유한 돈이 0이되면 그만한다.
-     * @param moneyInput
-     */
     public void generateCoin(int moneyInput) {
         List<Integer> coinUnit = getCoinUnit();
         generateRandomCoin(moneyInput, coinUnit);

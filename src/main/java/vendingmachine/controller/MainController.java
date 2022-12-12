@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 public class MainController {
-    private final LinkedHashMap<Coin, Integer> coinMap = generateRandomMachineCoin();
-    private final LinkedHashMap<Coin, Integer> changeCoins = setChangeMap();
+    private static LinkedHashMap<Coin, Integer> coinMap = generateRandomMachineCoin();
+    private static LinkedHashMap<Coin, Integer> changeCoins = setChangeMap();
 
     public void run() {
         List<Product> products = new ArrayList<>(); // 상품 객체 생성
@@ -30,45 +30,45 @@ public class MainController {
 
     private static void printChangeResult(LinkedHashMap<Coin, Integer> coinMap, int userMoneyInput, LinkedHashMap<Coin, Integer> changeCoins) {
         OutputView.printCurrentInputMoney(userMoneyInput);
-        makeChange(coinMap, changeCoins, userMoneyInput);
+        makeChange(userMoneyInput);
         OutputView.printChange(changeCoins);
     }
 
     private static LinkedHashMap<Coin, Integer> generateRandomMachineCoin() {
-        Machine machine = new Machine(); // 자판기 생성자
-        LinkedHashMap<Coin, Integer> coinMap = machine.getCoins(); // 거스름돈 map을 만들기 위해서 셋팅
-        generateMachineHasCoins(machine); // 자판기가 가진 거스름돈을 만듬
-        OutputView.printMachineHasCoins(coinMap); // 자판기가 가진 돈으로 생성한 거스름돈을 보여줌
+        Machine machine = new Machine();
+        LinkedHashMap<Coin, Integer> coinMap = machine.getCoins();
+        generateMachineHasCoins(machine);
+        OutputView.printMachineHasCoins(coinMap);
         return coinMap;
     }
 
-    private static void makeChange(Map<Coin, Integer> coinMap, Map<Coin, Integer> changeCoins, int userMoneyInput) {
+    private static void makeChange(int userMoneyInput) {
         while (userMoneyInput != 0) {
-            if (hasCoin(coinMap, userMoneyInput, 500)) {
-                calculateChange(coinMap, 500, changeCoins);
+            if (hasCoin(userMoneyInput, 500)) {
+                calculateChange(500);
                 userMoneyInput -= 500;
                 continue;
             }
-            if (hasCoin(coinMap, userMoneyInput, 100)) {
-                calculateChange(coinMap, 100, changeCoins);
+            if (hasCoin(userMoneyInput, 100)) {
+                calculateChange(100);
                 userMoneyInput -= 100;
                 continue;
             }
-            if (hasCoin(coinMap, userMoneyInput, 50)) {
-                calculateChange(coinMap, 50, changeCoins);
+            if (hasCoin(userMoneyInput, 50)) {
+                calculateChange(50);
                 userMoneyInput -= 50;
                 continue;
             }
-            if (hasCoin(coinMap, userMoneyInput, 10)) {
-                calculateChange(coinMap, 10, changeCoins);
+            if (hasCoin(userMoneyInput, 10)) {
+                calculateChange(10);
                 userMoneyInput -= 10;
                 continue;
             }
-            if (checkRemainingCoins(coinMap)) break;
+            if (checkRemainingCoins()) break;
         }
     }
 
-    private static boolean hasCoin(Map<Coin, Integer> coinMap, int userMoneyInput, int coin) {
+    private static boolean hasCoin(int userMoneyInput, int coin) {
         return userMoneyInput >= coin && coinMap.get(Coin.valueOf(coin)) > 0;
     }
 
@@ -78,8 +78,8 @@ public class MainController {
     }
 
     private static int purchaseProduct(List<Product> products, int userMoneyInput) {
-        OutputView.printCurrentInputMoney(userMoneyInput); // 현재 잔액을 출력함
-        String purchasingProduct = InputView.inputPurchaseProduct(); // 어떤 상품을 구매할껀지 입력
+        OutputView.printCurrentInputMoney(userMoneyInput);
+        String purchasingProduct = InputView.inputPurchaseProduct();
         Product inputProduct = getProduct(products, purchasingProduct);
         int productPrice = inputProduct.getPrice();
         userMoneyInput -= productPrice;
@@ -87,18 +87,18 @@ public class MainController {
     }
 
     private static void generateMachineHasCoins(Machine machine) {
-        int machineInputMoney = InputView.inputMachineHoldMoney(); // 1. 자판기 돈 입력
+        int machineInputMoney = InputView.inputMachineHoldMoney();
         machine.generateCoin(machineInputMoney);
     }
 
 
     private static int generateChange(Map<Coin, Integer> coinMap, int userMoneyInput ,Map<Coin, Integer> changeCoins) {
-        calculateChange(coinMap, 10, changeCoins);
+        calculateChange(10);
         userMoneyInput -= 10;
         return userMoneyInput;
     }
 
-    private static boolean checkRemainingCoins(Map<Coin, Integer> coinMap) {
+    private static boolean checkRemainingCoins() {
         return coinMap.get(Coin.COIN_500) == 0 && coinMap.get(Coin.COIN_100) == 0 && coinMap.get(Coin.COIN_50) == 0 && coinMap.get(Coin.COIN_10) == 0;
     }
 
@@ -136,7 +136,7 @@ public class MainController {
         return inputProduct;
     }
 
-    private static void calculateChange(Map<Coin, Integer> coinMap, int inputCoin, Map<Coin, Integer> changeCoins) {
+    private static void calculateChange(int inputCoin) {
         Coin coin = Coin.valueOf(inputCoin);
         coinMap.put(coin, coinMap.get(coin) - 1);
         changeCoins.put(coin, changeCoins.get(coin) + 1);
