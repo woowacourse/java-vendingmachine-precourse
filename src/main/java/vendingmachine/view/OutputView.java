@@ -13,6 +13,7 @@ public class OutputView {
             System.out.println(entry.getKey().get() + "원 - " + entry.getValue() + "개");
         }
     }
+
     public static void printAmountOfInput(int amountOfInput) {
         System.out.println("\n투입 금액: " + amountOfInput + "원");
     }
