@@ -1,10 +1,5 @@
 package vendingmachine;
 
-import camp.nextstep.edu.missionutils.Randoms;
-
-import java.util.ArrayList;
-import java.util.List;
-
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -21,11 +16,13 @@ public enum Coin {
         return amount;
     }
 
-    public int pickNumberOfCoins(int balance) {
-        List<Integer> numbers = new ArrayList<>();
-        for (int i = 0; i <= (balance / amount); i++) {
-            numbers.add(i);
+    public static Coin getEqualCoin(int amount) {
+        for (Coin coin : Coin.values()) {
+            if (coin.amount == amount) {
+                return coin;
+            }
         }
-        return Randoms.pickNumberInList(numbers);
+        return null;
     }
+
 }
