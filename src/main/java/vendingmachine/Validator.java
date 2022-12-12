@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import vendingmachine.domain.Product;
+
 public class Validator {
 
     public static void validateMachineHasMoneyInput(String money) {
@@ -12,6 +14,12 @@ public class Validator {
         String regExp = "^[0-9]+$";
         if (!money.matches(regExp)) {
             throw new IllegalArgumentException("[ERROR] 숫자가 아닌 값이 포함되어 있습니다.");
+        }
+    }
+
+    public static void validateProduct(Product product) {
+        if (product == null) {
+            throw new IllegalArgumentException("[ERROR]");
         }
     }
 }

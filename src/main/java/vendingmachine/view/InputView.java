@@ -33,10 +33,12 @@ public class InputView {
     }
 
     public static int inputMoney() {
+        OutputView.printInputMoneyMsg();
         return Integer.parseInt(Console.readLine());
     }
 
     public static String inputPurchaseProduct() {
+        OutputView.printPurchaseProductInputMsg();
         return Console.readLine();
     }
 }

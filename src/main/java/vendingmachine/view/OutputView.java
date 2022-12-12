@@ -1,6 +1,6 @@
 package vendingmachine.view;
 
-import vendingmachine.MessageConstant;
+import vendingmachine.util.MessageConstant;
 import vendingmachine.domain.Coin;
 
 import java.util.HashMap;
