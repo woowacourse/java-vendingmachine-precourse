@@ -1,18 +1,27 @@
 package vendingmachine.model;
 
+import static vendingmachine.model.Validator.validateNegative;
+import static vendingmachine.model.Validator.validateNum;
+
 public class Product {
-    public Price price;
-    public int amount;
+    private final Price price;
+    private int amount;
 
     public Product(String price, String amount) throws IllegalArgumentException {
         this.price = new Price(price);
-        try {
-            this.amount = Integer.parseInt(amount);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("수량은 숫자여야 합니다.");
-        }
-        if (this.amount < 0) {
-            throw new IllegalArgumentException("수량은 음수가 아닙니다.");
-        }
+        this.amount = validateNum(amount);
+        validateNegative(this.amount);
+    }
+
+    public boolean stockIsLeft() {
+        return amount > 0;
+    }
+
+    public void reduceAmount() {
+        amount--;
+    }
+
+    public int getPrice() {
+        return price.get();
     }
 }
