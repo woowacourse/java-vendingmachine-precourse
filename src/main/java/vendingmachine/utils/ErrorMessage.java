@@ -13,7 +13,8 @@ public enum ErrorMessage {
             "example : [콜라,1500,20];[사이다,1000,10]"),
     PRODUCT_CANNOT_FOUNT("상품을 찾을 수 없습니다."),
     CHANGE_WRONG_VALUE("잔돈으로 반환할 수 없는 금액입니다."),
-    NOT_NUMBER("정수값이 들어와야합니다.");
+    NOT_NUMBER("정수값이 들어와야합니다."),
+    DUPLICATED_PRODUCT("중복된 상품명이 존재합니다.ㄴ");
 
     private final String message;
 

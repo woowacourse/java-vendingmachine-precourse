@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import vendingmachine.utils.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,19 @@ public class Inventory {
     private final List<Product> products = new ArrayList<>();
 
     public void add(Product product) {
+        validateProduct(product);
         this.products.add(product);
+    }
+
+    private void validateProduct(Product product) {
+        if (isDuplicateProduct(product)) {
+            throw new IllegalArgumentException(ErrorMessage.DUPLICATED_PRODUCT.getMessage());
+        }
+    }
+
+    private boolean isDuplicateProduct(Product other) {
+        return products.stream()
+                .anyMatch(product -> product.getName().equals(other.getName()));
     }
 
     public Product get(String name) {
