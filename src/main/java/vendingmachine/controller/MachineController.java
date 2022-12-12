@@ -20,7 +20,7 @@ public class MachineController {
         this.outputView = new OutputView();
         int machineCoin = repeat(inputView::inputMachineCoin);
         this.machine = new Machine(machineCoin);
-        outputView.outputMachineChange(machine);
+        outputView.outputMachineChange(machine.getStoredChange());
     }
 
     public void play() {

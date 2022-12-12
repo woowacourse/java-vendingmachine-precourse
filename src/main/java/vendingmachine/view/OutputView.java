@@ -10,12 +10,10 @@ import static vendingmachine.utils.Message.OUTPUT_INIT_CHANGE;
 
 public class OutputView {
 
-    public void outputMachineChange(Machine machine) {
-
-        Map<Coin, Integer> currentChange = machine.getStoredChange();
+    public void outputMachineChange(Map<Coin, Integer> change) {
         System.out.println(OUTPUT_INIT_CHANGE);
 
-        for (Map.Entry<Coin, Integer> entry : currentChange.entrySet()) {
+        for (Map.Entry<Coin, Integer> entry : change.entrySet()) {
             Coin key = entry.getKey();
             Integer count = entry.getValue();
             System.out.printf("%d원 - %d개\n", key.getAmount(), count);
