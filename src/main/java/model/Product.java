@@ -96,4 +96,13 @@ public class Product {
         }
         throw new IllegalArgumentException(ErrorMessage.NON_UNIT_ERROR_MESSAGE.getMessage());
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "name='" + name + '\'' +
+                ", price=" + price +
+                ", total=" + total +
+                '}';
+    }
 }

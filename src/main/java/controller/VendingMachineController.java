@@ -1,6 +1,8 @@
 package controller;
 
+import model.CoinGenerator;
 import model.Money;
+import model.VendingMachine;
 import view.InputView;
 import view.OutputView;
 
@@ -12,6 +14,7 @@ public class VendingMachineController {
 
     private final InputView inputView;
     private final OutputView outputView;
+    private VendingMachine vendingMachine;
 
     public VendingMachineController(){
         inputView = new InputView();
@@ -20,6 +23,11 @@ public class VendingMachineController {
 
     public void start(){
         Money money = input(Money::new, inputView::inputVendingMachineMoney);
+        CoinGenerator.generate(money.getAmount());
+        outputView.printVendingMachineCoin();
+        vendingMachine= input(VendingMachine::new, inputView::inputProduct);
+        vendingMachine.setMoney(money);
+
     }
 
     private <T,R> R input(Function<T,R> function, Supplier<T> supplier){
@@ -30,4 +38,6 @@ public class VendingMachineController {
             return input(function,supplier);
         }
     }
+
+
 }

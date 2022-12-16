@@ -8,10 +8,20 @@ public class VendingMachine {
 
     private final List<Product> products;
 
+    private Money money;
+
     private Coin coin;
 
     public VendingMachine(String productGroup) {
         products = setProducts(productGroup);
+    }
+
+    public List<Product> getProducts() {
+        return products;
+    }
+
+    public void setMoney(Money money) {
+        this.money = money;
     }
 
     public List<Product> setProducts(String productGroup){

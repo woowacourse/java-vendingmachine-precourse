@@ -7,7 +7,7 @@ import java.util.Arrays;
 public class CoinGenerator {
 
 
-    public void generate(int money){
+    public static void generate(int money){
         while(money!=0){
             int pickedCoin = pickCoin();
             if(money<pickedCoin){
@@ -19,7 +19,7 @@ public class CoinGenerator {
     }
 
 
-    public int pickCoin(){
+    public static int pickCoin(){
         return Randoms.pickNumberInList(Arrays.asList(500, 100, 50, 10));
     }
 }
