@@ -37,7 +37,7 @@ public class Money {
         return moneyNum % 10 == 0;
     }
 
-    public void validateNumber(String money) {
+    public  void validateNumber(String money) {
         if (isNumber(money)) {
             return;
         }

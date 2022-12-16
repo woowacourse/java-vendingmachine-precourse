@@ -11,7 +11,7 @@ public class Application {
         // TODO: 프로그램 구현
         VendingMachineController vendingMachineController = new VendingMachineController();
 //        vendingMachineController.start();
-        Product product = new Product();
-        System.out.println(product.isCorrectFormatComma("[,,]"));
+        String s="abcd";
+        System.out.println(s.substring(1,3));
     }
 }
