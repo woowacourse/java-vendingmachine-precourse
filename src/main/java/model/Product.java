@@ -27,6 +27,18 @@ public class Product {
         this.total = Integer.parseInt(parsedProduct.get(2));
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public int getTotal() {
+        return total;
+    }
+
+    public void decreaseAmount(){
+        total-=1;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -48,4 +48,8 @@ public class Money {
         Matcher matcher = PATTERN.matcher(money);
         return matcher.matches();
     }
+
+    public void removeMoney(int money){
+        amount -= money;
+    }
 }

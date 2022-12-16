@@ -26,10 +26,13 @@ public class VendingMachineController {
         CoinGenerator.generate(money.getAmount());
         outputView.printVendingMachineCoin();
         vendingMachine= input(VendingMachine::new, inputView::inputProduct);
-        vendingMachine.setMoney(money);
         Money inputMoney = input(Money::new, inputView::inputInsertMoney);
+        vendingMachine.setMoney(inputMoney);
+
+        process(vendingMachine::buyProduct, inputView::inputBuyProduct);
 
     }
+
 
     private <T,R> R input(Function<T,R> function, Supplier<T> supplier){
         try{
@@ -37,6 +40,15 @@ public class VendingMachineController {
         }catch (IllegalArgumentException e){
             outputView.printErrorMessage(e);
             return input(function,supplier);
+        }
+    }
+
+    private <T> void process(Consumer<T> consumer, Supplier<T> t) {
+        try {
+            consumer.accept(t.get());
+        } catch (IllegalArgumentException | IllegalStateException e) {
+            outputView.printErrorMessage(e);
+            process(consumer, t);
         }
     }
 
