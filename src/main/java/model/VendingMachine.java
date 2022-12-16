@@ -10,27 +10,41 @@ public class VendingMachine {
 
     private final List<Product> products;
 
-    private Money money;
+    private Money inputMoney;
+
+    private Money change;
 
 
     public VendingMachine(String productGroup) {
         products = setProducts(productGroup);
     }
 
-    public Money getMoney() {
-        return money;
+    public Money getInputMoney() {
+        return inputMoney;
     }
 
     public List<Product> getProducts() {
         return products;
     }
 
-    public void setMoney(Money money) {
-        this.money = money;
+    public void setInputMoney(Money inputMoney) {
+        this.inputMoney = inputMoney;
     }
 
+    public void setChange(Money change) {
+        this.change = change;
+    }
+
+    /**
+     * 잔돈 존재 여부 확인 기능
+     */
+
+
+    /**
+     * 남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려준다.
+     */
     public boolean isPossibleUsing() {
-        return money.getAmount() >= minimumPrice();
+        return inputMoney.getAmount() >= minimumPrice();
     }
 
 
@@ -47,6 +61,9 @@ public class VendingMachine {
     }
 
 
+    /**
+     * 상품 구매
+     */
     public void buyProduct(String name) {
         Product product = findProduct(name);
         if (isPossibleBuy(product)) {
@@ -63,13 +80,16 @@ public class VendingMachine {
     }
 
     public boolean isPossibleBuy(Product product) {
-        return product.getPrice() <= this.money.getAmount();
+        return product.getPrice() <= this.inputMoney.getAmount();
     }
 
     public void decreaseMoney(Product product) {
-        this.money.removeMoney(product.getPrice());
+        this.inputMoney.removeMoney(product.getPrice());
     }
 
+    /**
+     * new -> Product 처음 생성시
+     */
     public List<Product> setProducts(String productGroup) {
         List<String> parsedGroup = parseProductGroup(productGroup);
         return parsedGroup.stream().map(Product::new).collect(Collectors.toList());
