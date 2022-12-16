@@ -32,9 +32,15 @@ public class VendingMachineController {
         Money inputMoney = input(Money::new, inputView::inputInsertMoney);
         vendingMachine.setMoney(inputMoney);
 
-        outputView.printRemainingMoney(vendingMachine.getMoney().getAmount());
-        process(vendingMachine::buyProduct, inputView::inputBuyProduct);
+        buyProduct();
 
+    }
+
+    private void buyProduct() {
+        do{
+            outputView.printRemainingMoney(vendingMachine.getMoney().getAmount());
+            process(vendingMachine::buyProduct, inputView::inputBuyProduct);
+        }while (vendingMachine.isPossibleUsing() || vendingMachine.isRemaining());
     }
 
 

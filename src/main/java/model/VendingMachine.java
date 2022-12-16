@@ -12,7 +12,6 @@ public class VendingMachine {
 
     private Money money;
 
-    private Coin coin;
 
     public VendingMachine(String productGroup) {
         products = setProducts(productGroup);
@@ -30,9 +29,27 @@ public class VendingMachine {
         this.money = money;
     }
 
-    public void buyProduct(String name){
+    public boolean isPossibleUsing() {
+        return money.getAmount() >= minimumPrice();
+    }
+
+
+    public boolean isRemaining() {
+        return products.stream().mapToInt(p -> p.getPrice())
+                .allMatch(p -> p == 0);
+    }
+
+    public int minimumPrice() {
+        return products.stream()
+                .mapToInt(p -> p.getPrice())
+                .min()
+                .getAsInt();
+    }
+
+
+    public void buyProduct(String name) {
         Product product = findProduct(name);
-        if(isPossibleBuy(product)){
+        if (isPossibleBuy(product)) {
             product.decreaseAmount();
             decreaseMoney(product);
         }
@@ -44,10 +61,12 @@ public class VendingMachine {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(ErrorMessage.NON_PRESENT_PRODUCT_ERROR_MESSAGE.getMessage()));
     }
-    public boolean isPossibleBuy(Product product){
-        return product.getPrice() >= this.money.getAmount();
+
+    public boolean isPossibleBuy(Product product) {
+        return product.getPrice() <= this.money.getAmount();
     }
-    public void decreaseMoney(Product product){
+
+    public void decreaseMoney(Product product) {
         this.money.removeMoney(product.getPrice());
     }
 

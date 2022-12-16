@@ -52,4 +52,6 @@ public class Money {
     public void removeMoney(int money){
         amount -= money;
     }
+
+
 }
