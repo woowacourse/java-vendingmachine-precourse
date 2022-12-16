@@ -27,6 +27,7 @@ public class VendingMachineController {
         outputView.printVendingMachineCoin();
         vendingMachine= input(VendingMachine::new, inputView::inputProduct);
         vendingMachine.setMoney(money);
+        Money inputMoney = input(Money::new, inputView::inputInsertMoney);
 
     }
 
