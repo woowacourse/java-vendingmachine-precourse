@@ -39,6 +39,9 @@ public class VendingMachine {
      * 잔돈 존재 여부 확인 기능
      */
 
+    public boolean isChangeMore(){
+        return inputMoney.getAmount() <= change.getAmount();
+    }
 
     /**
      * 남은 금액이 상품의 최저 가격보다 적거나, 모든 상품이 소진된 경우 바로 잔돈을 돌려준다.

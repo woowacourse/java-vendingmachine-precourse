@@ -24,10 +24,13 @@ public class OutputView {
     }
 
     public void printRemainingMoney(int money){
-        System.out.println("\n"+OUTPUT_REMAINING_MONEY_MESSAGE+money);
+        System.out.println("\n"+OUTPUT_REMAINING_MONEY_MESSAGE+money+WON);
     }
 
     public void printChange(){
         System.out.println(OUTPUT_CHANGE_MESSAGE);
+        Arrays.stream(Coin.values())
+                .filter(c->c.isNonZero())
+                .forEach(coin-> System.out.println(coin.getAmount()+WON+BAR+coin.getNum()+UNIT));
     }
 }

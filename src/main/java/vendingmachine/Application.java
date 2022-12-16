@@ -15,6 +15,5 @@ public class Application {
         VendingMachineController vendingMachineController = new VendingMachineController();
         vendingMachineController.start();
 
-
     }
 }

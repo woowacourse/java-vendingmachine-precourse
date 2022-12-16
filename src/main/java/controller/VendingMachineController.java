@@ -35,6 +35,8 @@ public class VendingMachineController {
 
         buyProduct();
 
+        outputView.printChange();
+
     }
 
     private void buyProduct() {

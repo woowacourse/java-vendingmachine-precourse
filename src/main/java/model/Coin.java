@@ -20,9 +20,17 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+    public boolean isNonZero(){
+        return this.num > 0;
+    }
     public static void addCoinNum(int coin) {
         Coin foundCoin = findCoin(coin);
         foundCoin.num++;
+    }
+
+    public static void decreaseCoinCount(int coin,int count){
+        Coin foundCoin = findCoin(coin);
+        foundCoin.num-=count;
     }
 
     public static Coin findCoin(int coin) {
