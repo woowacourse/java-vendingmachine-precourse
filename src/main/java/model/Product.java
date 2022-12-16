@@ -5,6 +5,7 @@ import exception.ErrorMessage;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -25,6 +26,19 @@ public class Product {
         this.price = Integer.parseInt(parsedProduct.get(1));
         this.total = Integer.parseInt(parsedProduct.get(2));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Product)) return false;
+
+        Product product = (Product) o;
+
+        if (price != product.price) return false;
+        if (total != product.total) return false;
+        return Objects.equals(name, product.name);
+    }
+
 
     public void validatePrice(String product){
         validatePriceMinimum(product);
