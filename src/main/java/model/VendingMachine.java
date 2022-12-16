@@ -18,6 +18,10 @@ public class VendingMachine {
         products = setProducts(productGroup);
     }
 
+    public Money getMoney() {
+        return money;
+    }
+
     public List<Product> getProducts() {
         return products;
     }

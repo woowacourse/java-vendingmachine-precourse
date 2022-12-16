@@ -42,13 +42,11 @@ public class Product {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Product)) return false;
-
-        Product product = (Product) o;
-
-        if (price != product.price) return false;
-        if (total != product.total) return false;
-        return Objects.equals(name, product.name);
+//        if (!(o instanceof Product)) return false;
+//        Product product = (Product) o;
+//        if (price != product.price) return false;
+//        if (total != product.total) return false;
+        return Objects.equals(name, o);
     }
 
 

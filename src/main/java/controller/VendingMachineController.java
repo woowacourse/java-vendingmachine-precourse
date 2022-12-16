@@ -23,12 +23,16 @@ public class VendingMachineController {
 
     public void start(){
         Money money = input(Money::new, inputView::inputVendingMachineMoney);
+
         CoinGenerator.generate(money.getAmount());
         outputView.printVendingMachineCoin();
+
         vendingMachine= input(VendingMachine::new, inputView::inputProduct);
+
         Money inputMoney = input(Money::new, inputView::inputInsertMoney);
         vendingMachine.setMoney(inputMoney);
 
+        outputView.printRemainingMoney(vendingMachine.getMoney().getAmount());
         process(vendingMachine::buyProduct, inputView::inputBuyProduct);
 
     }
