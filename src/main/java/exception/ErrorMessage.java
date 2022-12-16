@@ -2,6 +2,7 @@ package exception;
 
 public enum ErrorMessage {
 
+    NON_FORMAT_ERROR_MESSAGE("[ERROR] : 형식이 맞지 않습니다."),
     NON_UNIT_ERROR_MESSAGE("[ERROR] : 10원 단위여야 합니다."),
     NON_NUMBER_ERROR_MESSAGE("[ERROR] : 숫자여야 합니다.");
 
