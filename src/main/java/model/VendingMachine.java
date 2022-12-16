@@ -38,6 +38,12 @@ public class VendingMachine {
     /**
      * 잔돈 존재 여부 확인 기능
      */
+    public List<List<Integer>> proceed(){
+        if(isChangeMore()){
+            return ChangeAlgorithm.proceed(inputMoney, change);
+        }
+        return Coin.of();
+    }
 
     public boolean isChangeMore(){
         return inputMoney.getAmount() <= change.getAmount();

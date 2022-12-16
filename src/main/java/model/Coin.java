@@ -20,17 +20,18 @@ public enum Coin {
     }
 
     // 추가 기능 구현
-    public boolean isNonZero(){
+    public boolean isNonZero() {
         return this.num > 0;
     }
+
     public static void addCoinNum(int coin) {
         Coin foundCoin = findCoin(coin);
         foundCoin.num++;
     }
 
-    public static void decreaseCoinCount(int coin,int count){
+    public static void decreaseCoinCount(int coin, int count) {
         Coin foundCoin = findCoin(coin);
-        foundCoin.num-=count;
+        foundCoin.num -= count;
     }
 
     public static Coin findCoin(int coin) {
@@ -40,9 +41,9 @@ public enum Coin {
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] : 맞는 코인을 찾을 수 없습니다."));
     }
 
-    public static List<Integer> getCoinNum() {
+    public static List<List<Integer>> of() {
         return Arrays.stream(Coin.values())
-                .map(c -> c.num)
+                .map(c -> Arrays.asList(c.amount, c.num))
                 .collect(Collectors.toList());
     }
 

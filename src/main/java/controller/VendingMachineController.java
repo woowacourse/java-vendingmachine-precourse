@@ -22,21 +22,32 @@ public class VendingMachineController {
     }
 
     public void start(){
-        Money money = input(Money::new, inputView::inputVendingMachineMoney);
+        Money change = input(Money::new, inputView::inputVendingMachineMoney);
+        generateCoin(change);
+        makeVendingMachine();
+        inputMoney(change);
+        buyProduct();
+        printResult();
 
-        CoinGenerator.generate(money.getAmount());
-        outputView.printVendingMachineCoin();
+    }
 
-        vendingMachine= input(VendingMachine::new, inputView::inputProduct);
+    private void printResult() {
+        outputView.printChange(vendingMachine.proceed());
+    }
 
+    private void inputMoney(Money money) {
         Money inputMoney = input(Money::new, inputView::inputInsertMoney);
         vendingMachine.setInputMoney(inputMoney);
         vendingMachine.setChange(money);
+    }
 
-        buyProduct();
+    private void makeVendingMachine() {
+        vendingMachine= input(VendingMachine::new, inputView::inputProduct);
+    }
 
-        outputView.printChange();
-
+    private void generateCoin(Money money) {
+        CoinGenerator.generate(money.getAmount());
+        outputView.printVendingMachineCoin();
     }
 
     private void buyProduct() {
