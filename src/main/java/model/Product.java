@@ -20,13 +20,17 @@ public class Product {
         validateFormat(product);
         List<String> parsedProduct = parsedProduct(product);
         validateNumber(parsedProduct.get(1),parsedProduct.get(2));
-
+        validatePrice(parsedProduct.get(1));
+        this.name = parsedProduct.get(0);
+        this.price = Integer.parseInt(parsedProduct.get(1));
+        this.total = Integer.parseInt(parsedProduct.get(2));
     }
 
-    public void validateProduct(String product){
-        validateFormat(product);
-
+    public void validatePrice(String product){
+        validatePriceMinimum(product);
+        validatePriceUnit(product);
     }
+
     public void validateFormat(String product){
         if(isCorrectFormat(product)){
             return;
@@ -65,6 +69,17 @@ public class Product {
         return Arrays.stream(split).collect(Collectors.toList());
     }
 
+    public void validatePriceMinimum(String price){
+        if(Integer.parseInt(price)>=100){
+            return;
+        }
+        throw new IllegalArgumentException(ErrorMessage.NON_PRICE_MINIMUM_ERROR_MESSAGE.getMessage());
+    }
 
-
+    public void validatePriceUnit(String price){
+        if(Integer.parseInt(price)%10==0){
+            return;
+        }
+        throw new IllegalArgumentException(ErrorMessage.NON_UNIT_ERROR_MESSAGE.getMessage());
+    }
 }
