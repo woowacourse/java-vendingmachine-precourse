@@ -21,22 +21,20 @@ public class Coins {
                 changes.remove(coin);
                 continue;
             }
-            changes.put(coin, 0);
-            int count = coins.get(coin);
-            changeMoney = getRemainChange(changeMoney, coin, count, changes);
-        }
+            int count = getCount(changeMoney, coin);
+            changes.put(coin, count);
+            changeMoney -= coin.getAmount() * count;
+            }
 
         return changes;
     }
 
-    private static int getRemainChange(int changeMoney, Coin coin, int count, Map<Coin, Integer> changes) {
-        for(int i = 0; i< count; i++){
-            if(coin.getAmount() > changeMoney){
-                break;
-            }
-            changeMoney -= coin.getAmount();
-            changes.put(coin, changes.get(coin) + 1);
+    private int getCount(int changeMoney, Coin coin) {
+        int count = coins.get(coin);
+        while(count * coin.getAmount() > changeMoney){
+            count--;
         }
-        return changeMoney;
+        return count;
     }
+
 }
