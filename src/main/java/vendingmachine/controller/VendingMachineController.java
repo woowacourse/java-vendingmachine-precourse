@@ -12,6 +12,7 @@ public class VendingMachineController {
     private final Input input;
     private Products products;
     private PurchaseService purchaseService;
+    private CoinService coinService;
 
     private VendingMachineController(final Input input) {
         this.input = input;
@@ -35,7 +36,7 @@ public class VendingMachineController {
         String inputString = input.readHoldMoney();
         Integer holdMoney = ExceptionHandler.convert(Convertor::convertToMoney, inputString);
         if(holdMoney == null) setHoldCoin();
-        //TODO : coinService.create
+        coinService = CoinService.from(holdMoney);
         //TODO : coinService.setCoinsByMoney
         //TODO : printHoldCoin
     }
