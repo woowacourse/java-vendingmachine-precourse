@@ -3,6 +3,7 @@ package controller;
 import utils.Parser;
 import utils.RepeatInput;
 import vendingmachine.Amount;
+import vendingmachine.CoinCounter;
 import view.InputView;
 import view.OutputView;
 
@@ -10,6 +11,7 @@ public class VendingMachineController {
 
     public void run() {
         Amount amount = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
+        OutputView.printVendingMachineCoinAmount(new CoinCounter(), amount);
     }
 
     private Amount vendingMachineMoney() {

@@ -15,4 +15,8 @@ public enum Coin {
     public int getAmount() {
         return amount;
     }
+
+    public String displayCoinName() {
+        return amount + "원";
+    }
 }
