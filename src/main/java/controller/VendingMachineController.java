@@ -1,6 +1,7 @@
 package controller;
 
 import utils.Parser;
+import utils.RepeatInput;
 import vendingmachine.Amount;
 import view.InputView;
 import view.OutputView;
@@ -8,7 +9,7 @@ import view.OutputView;
 public class VendingMachineController {
 
     public void run() {
-        vendingMachineMoney();
+        Amount amount = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
     }
 
     private Amount vendingMachineMoney() {
