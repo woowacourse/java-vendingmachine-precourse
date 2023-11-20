@@ -21,7 +21,7 @@ public class OutputView {
         for(Map.Entry<Coin, Integer> entry : counterMap.entrySet()) {
             Coin coin = entry.getKey();
             int count = entry.getValue();
-            System.out.println(coin.displayCoinName() + " : " + count + "개");
+            System.out.println(coin.displayCoinName() + " - " + count + "개");
         }
     }
 
@@ -37,7 +37,22 @@ public class OutputView {
 
     public static void printPurchaseProduct(InputAmount inputAmount) {
         System.out.println();
-        System.out.println(String.format("투입 금액: %d" , inputAmount.getMoney()));
+        System.out.println(String.format("투입 금액: %d원" , inputAmount.getMoney()));
         System.out.println("구매할 상품명을 입력해 주세요.");
+    }
+
+    public static void printRemainChanges(CoinCounter coinCounter, MachineAmount amount, int remainder) {
+        System.out.println();
+        System.out.println(String.format("투입 금액: %d원", remainder));
+        System.out.println("잔돈");
+
+        Map<Coin, Integer> counterMap = coinCounter.getRemainCounter(amount, remainder);
+        for(Map.Entry<Coin, Integer> entry : counterMap.entrySet()) {
+            Coin coin = entry.getKey();
+            int count = entry.getValue();
+            if (count != 0) {
+                System.out.println(coin.displayCoinName() + " - " + count + "개");
+            }
+        }
     }
 }

@@ -20,7 +20,7 @@ public class VendingMachineController {
 
         int remainder = RepeatInput.repeatWhenInvalid(() -> purchaseProcess(productsMap, inputAmount));
 
-        // 입력값을 다시 받지 않는 오류 수정해야 함.
+        OutputView.printRemainChanges(new CoinCounter(), vendingMoney, remainder);
 
 
     }
