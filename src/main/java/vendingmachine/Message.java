@@ -6,7 +6,8 @@ public enum Message {
             + "%s원 - %s개\n"
             + "%s원 - %s개\n"
             + "%s원 - %s개\n"
-            + "%s원 - %s개\n  ");
+            + "%s원 - %s개\n\n"),
+    REQUEST_GOODS_INPUT_MESSAGE("상품명과 가격, 수량을 입력해 주세요.\n");
 
     private final String message;
 

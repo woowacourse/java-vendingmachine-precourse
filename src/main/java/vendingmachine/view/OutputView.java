@@ -1,5 +1,6 @@
 package vendingmachine.view;
 
+import static vendingmachine.Message.REQUEST_GOODS_INPUT_MESSAGE;
 import static vendingmachine.Message.REQUEST_VENDING_MACHINE_HOLD_MONEY_MESSAGE;
 import static vendingmachine.Message.RESULT_VENDING_MACHINE_HOLD_COINS_MESSAGE;
 import static vendingmachine.domain.Coin.COIN_10;
@@ -20,6 +21,10 @@ public class OutputView {
                 COIN_100.getAmount(), dto.quantity100(),
                 COIN_50.getAmount(), dto.quantity50(),
                 COIN_10.getAmount(), dto.quantity10());
+    }
+
+    public static void printGoodsInputRequest() {
+        System.out.print(REQUEST_GOODS_INPUT_MESSAGE.getMessage());
     }
 
     public static void printErrorMessage(String message) {

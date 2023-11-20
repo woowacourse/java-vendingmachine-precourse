@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.domain.Goods;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.domain.VendingMachineDto;
 import vendingmachine.service.InputProcessingService;
@@ -12,5 +13,7 @@ public class VendingMachineController {
         VendingMachineDto vendingMachineDto = inputProcessingService.createVendingMachine(InputView::getUserInput,
                 OutputView::printVendingMachineCoinsInputRequest, OutputView::printErrorMessage).toDto();
         OutputView.printVendingMachineCoins(vendingMachineDto);
+        Goods goods = inputProcessingService.createGoods(InputView::getUserInput,
+                OutputView::printGoodsInputRequest, OutputView::printErrorMessage);
     }
 }
