@@ -14,6 +14,7 @@ public class VendingMachineController {
     private Amount vendingMachineMoney() {
         OutputView.printVendingMachineMoney();
         String amount = InputView.readVendingMachineMoney();
-        return new Amount(amount);
+        int money = Parser.convertToInt(amount);
+        return new Amount(money);
     }
 }

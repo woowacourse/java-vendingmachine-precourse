@@ -11,29 +11,16 @@ public class Amount {
     private static final int MINIMUM_MONEY = 100;
     private static final int DIVISIBLE_AMOUNT = 10;
     private static final int ZERO = 0;
-    private static final String NUMBER_REG_EXP = "^[0-9]+$";
-    private static final Pattern NUMBER = Pattern.compile(NUMBER_REG_EXP);
     private final int money;
 
-    public Amount(String moneyString) {
-        validateBlank(moneyString);
-        validateIsNumeric(moneyString);
-        this.money = Parser.convertToInt(moneyString);
+    public Amount(int money) {
         validateMinimumAmount(money);
         validateDivideByTen(money);
+        this.money = money;
     }
 
-    private void validateBlank(String input) {
-        if (input.isEmpty()){
-            throw new IllegalArgumentException(ErrorMessages.VALIDATE_BLANK.getErrorMessage());
-        }
-    }
-
-    private void validateIsNumeric(String input) {
-        Matcher matcher = NUMBER.matcher(input);
-        if (!matcher.find()) {
-            throw new IllegalArgumentException(ErrorMessages.VALIDATE_NUMERIC.getErrorMessage());
-        }
+    public int getMoney() {
+        return money;
     }
 
     private void validateMinimumAmount(int amount) {
