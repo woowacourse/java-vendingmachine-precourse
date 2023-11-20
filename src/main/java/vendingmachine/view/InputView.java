@@ -34,3 +34,4 @@ public class InputView implements Input{
         return InputValidator.validateStringint(stringInput);
     }
 }
+
