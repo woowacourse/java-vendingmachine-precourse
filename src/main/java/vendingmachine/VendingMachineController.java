@@ -1,6 +1,5 @@
 package vendingmachine;
 
-import java.util.function.Consumer;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 

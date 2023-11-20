@@ -2,11 +2,14 @@ package vendingmachine;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ProductRepositoryTest {
@@ -50,6 +53,25 @@ public class ProductRepositoryTest {
         Assertions.assertThatThrownBy(() -> {
             repository.initProductsByString(input);
         }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("상품 구매 가능 여부 확인")
+    @ParameterizedTest
+    @MethodSource("canBuySomethingProvider")
+    void canBuySomething(int leftMoney, boolean expected) {
+        ProductRepository repository = new ProductRepository();
+        repository.initProductsByString("[콜라,1500,20];[사이다,1000,10]");
+        Assertions.assertThat(repository.canBuySomething(leftMoney)).isEqualTo(expected);
+    }
+
+    static Stream<Arguments> canBuySomethingProvider() {
+        return Stream.of(
+                Arguments.of(1000, true),
+                Arguments.of(1500, true),
+                Arguments.of(2000, true),
+                Arguments.of(500, false),
+                Arguments.of(0, false)
+        );
     }
 
 //    @Test

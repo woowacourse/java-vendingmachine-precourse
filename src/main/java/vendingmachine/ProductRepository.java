@@ -42,14 +42,6 @@ public class ProductRepository {
         }
     }
 
-//    public void addProduct(Product product, int quantity) {
-//        repository.put(product, repository.getOrDefault(product, 0) + quantity);
-//    }
-//
-//    private void validate(String input) {
-//
-//    }
-
     public boolean canBuySomething(int money) {
         return getMinPrice() <= money && getLeftTotalProductCount() > 0;
     }
