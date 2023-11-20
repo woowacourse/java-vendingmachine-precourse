@@ -76,8 +76,11 @@ public class VendingMachine {
     }
 
     private void handleChange(Map<Coin, Integer> change, Coin coin) {
+        if (coinMap.get(coin) == null || coinMap.get(coin) <= 0) {
+            return;
+        }
         if (holdingMoney >= coin.getAmount()) {
-            int quantity = holdingMoney / coin.getAmount();
+            int quantity = Math.min(holdingMoney / coin.getAmount(), coinMap.get(coin));
             change.put(coin, quantity);
             holdingMoney -= coin.getAmount() * quantity;
         }

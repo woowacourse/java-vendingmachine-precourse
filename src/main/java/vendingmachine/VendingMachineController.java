@@ -8,7 +8,7 @@ public class VendingMachineController {
         VendingMachine vendingMachine = new VendingMachine();
         initVendingMachineMoney(vendingMachine);
         initProducts(vendingMachine);
-        OutputView.printCoins(vendingMachine.getCoinMap());
+        OutputView.printHoldingCoins(vendingMachine.getCoinMap());
 
         initInputMoney(vendingMachine);
         proceedPurchase(vendingMachine);
@@ -53,7 +53,6 @@ public class VendingMachineController {
             vendingMachine.purchaseProduct(product);
         }
         OutputView.printLeftMoney(vendingMachine.getHoldingMoney());
-        OutputView.printLeft();
-        OutputView.printCoins(vendingMachine.getChange());
+        OutputView.printChangeCoins(vendingMachine.getChange());
     }
 }
