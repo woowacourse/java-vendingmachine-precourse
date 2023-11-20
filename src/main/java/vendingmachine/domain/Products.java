@@ -14,7 +14,7 @@ public class Products {
 
     public static Products from(final Map<Product, Integer> input){
         List<Integer> counts = input.values().stream().collect(Collectors.toList());
-        ProductsValidator.valdate(counts);
+        ProductsValidator.validate(counts);
         return new Products(input);
     }
 }

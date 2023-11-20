@@ -15,7 +15,7 @@ class ProductsValidatorTest {
         // given
         List<Integer> given = List.of(1, 2, 3, 4, 5, 6);
         // when&then
-        assertThatNoException().isThrownBy(() -> ProductsValidator.valdate(given));
+        assertThatNoException().isThrownBy(() -> ProductsValidator.validate(given));
     }
 
     @Test
@@ -24,7 +24,7 @@ class ProductsValidatorTest {
         List<Integer> given = List.of(1, 2, 3, 4, 0, 6);
         // when&then
         final IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
-                () -> ProductsValidator.valdate(given));
+                () -> ProductsValidator.validate(given));
         assertEquals(exception.getMessage(), String.format("상품의 최소 수량은 %d개 이상입니다", 1));
 
     }
