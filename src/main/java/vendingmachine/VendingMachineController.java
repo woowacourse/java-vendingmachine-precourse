@@ -1,23 +1,23 @@
 package vendingmachine;
 
-import java.util.function.Supplier;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     public static void run() {
 
-//        ProductRepository.addProductByString(readValidInput(InputView::readProduct));
-
-
+        initProducts();
     }
 
-    private static String readValidInput(Supplier<String> inputMethod) {
+    private static void initProducts() {
         try {
-            return inputMethod.get();
+            String readProduct = InputView.readProduct();
+            ProductRepository.initProductsByString(readProduct);
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);
-            return readValidInput(inputMethod);
+            initProducts();
         }
     }
+
+
 }

@@ -3,6 +3,7 @@ package vendingmachine;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -14,6 +15,24 @@ public class ProductRepositoryTest {
         Assertions.assertThatNoException().isThrownBy(() -> {
             ProductRepository.initProductsByString(input);
         });
+    }
+
+    @DisplayName("상품 구분자 형식이 잘못된 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"[콜라,1500,20] [사이다,1000,10]", "[콜라,1500,20].[사이다,1000,10]", "[콜라,1500,20];(사이다,1000,10)"})
+    void initProductsByStringFailWithInvalidDelimiter(String input) {
+        Assertions.assertThatThrownBy(() -> {
+            ProductRepository.initProductsByString(input);
+        }).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @DisplayName("상품 입력 타입이 잘못된 경우 예외 발생")
+    @ParameterizedTest
+    @ValueSource(strings = {"[콜라,1500,a];[사이다,1000,10]", "[사이다,a,10]", "[,,10]", "[사이다,,10]", "[사이다,10]"})
+    void initProductsByStringFailWithInvalidType(String input) {
+        Assertions.assertThatThrownBy(() -> {
+            ProductRepository.initProductsByString(input);
+        }).isInstanceOf(IllegalArgumentException.class);
     }
 
 //    @Test
