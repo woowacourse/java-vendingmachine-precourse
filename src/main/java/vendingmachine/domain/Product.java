@@ -12,7 +12,7 @@ public class Product {
     }
 
     public static Product of (String name, int price){
-        ProductValidator.validate(name, price);
+        ProductValidator.validate(price);
         return new Product(name, price);
     }
 
