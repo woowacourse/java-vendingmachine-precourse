@@ -1,7 +1,5 @@
 package vendingmachine.domain;
 
-import vendingmachine.validators.ProductPriceValidator;
-
 public class Product {
     private final String name;
     private final ProductPrice price;
@@ -11,7 +9,7 @@ public class Product {
         this.price = ProductPrice.from(price);
     }
 
-    public static Product of (String name, int price){
+    public static Product of(String name, int price) {
         return new Product(name, price);
     }
 
