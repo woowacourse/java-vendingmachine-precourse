@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class CoinStore {
-    private Map<Coin, Integer> repository;
+    private final Map<Coin, Integer> repository;
 
     public CoinStore(Map<Coin, Integer> repository) {
         this.repository = repository;

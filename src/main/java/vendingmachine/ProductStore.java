@@ -45,18 +45,6 @@ public class ProductStore {
         return getMinPrice() <= money && getLeftTotalProductCount() > 0;
     }
 
-    public Product findProductByName(String name) {
-        return repository.keySet()
-                .stream()
-                .filter((product) -> product.getName().equals(name))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
-    }
-
-    public void purchaseProduct(Product product) {
-        repository.put(product, repository.get(product) - 1);
-    }
-
     private int getMinPrice() {
         return repository.keySet()
                 .stream()
@@ -70,6 +58,18 @@ public class ProductStore {
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
+    }
+
+    public Product findProductByName(String name) {
+        return repository.keySet()
+                .stream()
+                .filter((product) -> product.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+    }
+
+    public void purchaseProduct(Product product) {
+        repository.put(product, repository.get(product) - 1);
     }
 
     public int getLeftProductCount(Product product) {
