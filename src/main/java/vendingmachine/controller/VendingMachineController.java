@@ -20,14 +20,18 @@ public class VendingMachineController {
         setHoldCoin();
         setProducts();
         setInputAmount();
+        //TODO : while(isStilRemainMoney)
+        requestWanted();
+        spendAll();
     }
 
     private void setHoldCoin() {
         OutputView.printRequestMachinHoldMoney();
         String inputString = input.readHoldMoney();
         int holdMoney = Convertor.convertToMoney(inputString);
-        //coinService.setCoinsByMoney
-        //printHoldCoin
+        //TODO : coinService.create
+        //TODO : coinService.setCoinsByMoney
+        //TODO : printHoldCoin
     }
 
     private void setProducts() {
@@ -37,8 +41,19 @@ public class VendingMachineController {
     }
 
     private void setInputAmount() {
-        OutputView.printInputAmount();
+        OutputView.printRequestInputAmount();
         String inputString = input.readInputAmount();
         int inputAmount = Convertor.convertToMoney(inputString);
+        //TODO : purchaseService create
+    }
+
+    private void requestWanted() {
+        OutputView.printRequestWanted();
+        String inputString = input.readWanted();
+        //TODO : purchaseService.purchase
+    }
+
+    private void spendAll() {
+        //TODO : coinService getRemainCoins()
     }
 }
