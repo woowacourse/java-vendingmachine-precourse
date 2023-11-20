@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import vendingmachine.utils.ExceptionHandler;
+
 public class ProxyInputView implements Input {
 
     private final Input viewable;
@@ -10,21 +12,21 @@ public class ProxyInputView implements Input {
 
     @Override
     public String readHoldMoney() {
-        return null;
+        return ExceptionHandler.input(viewable::readHoldMoney, 0);
     }
 
     @Override
     public String readProducts() {
-        return null;
+        return ExceptionHandler.input(viewable::readProducts, 0);
     }
 
     @Override
     public String readInputAmount() {
-        return null;
+        return ExceptionHandler.input(viewable::readInputAmount, 0);
     }
 
     @Override
     public String readWanted() {
-        return null;
+        return ExceptionHandler.input(viewable::readWanted, 0);
     }
 }
