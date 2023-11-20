@@ -41,7 +41,7 @@ public class VendingMachineTest {
     @Test
     void purchaseProductFailWithQuantity() {
         VendingMachine vendingMachine = new VendingMachine();
-        vendingMachine.initHoldingMoney(new Money(0));
+        vendingMachine.initHoldingMoney(new Money(100));
 
         ProductStore productRepository = new ProductStore();
         productRepository.initProductsByString("[콜라,1500,1]");

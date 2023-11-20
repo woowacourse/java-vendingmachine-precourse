@@ -25,6 +25,20 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
+    void 기능_테스트_구매_불가() {
+        assertRandomNumberInListTest(
+                () -> {
+                    run("500", "[콜라,1500,20];[사이다,1000,10]", "900");
+                    assertThat(output()).contains(
+                            "자판기가 보유한 동전", "500원 - 1개", "100원 - 0개", "50원 - 0개", "10원 - 0개",
+                            "투입 금액: 900", "잔돈"
+                    );
+                },
+                500
+        );
+    }
+
+    @Test
     void 예외_테스트() {
         assertSimpleTest(
             () -> {

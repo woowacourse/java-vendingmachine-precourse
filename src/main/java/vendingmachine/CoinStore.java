@@ -26,21 +26,22 @@ public class CoinStore {
         repository.put(coin, repository.getOrDefault(coin, 0) + 1);
     }
 
-    public Map<Coin, Integer> getChange(int holdingMoney) {
+    public Map<Coin, Integer> getChange(Money holdingMoney) {
         Map<Coin, Integer> change = new EnumMap<>(Coin.class);
         Coin.getCoinOrderedList()
                 .forEach((coin) -> handleChange(change, coin, holdingMoney));
         return change;
     }
 
-    private void handleChange(Map<Coin, Integer> change, Coin coin, int holdingMoney) {
+    private void handleChange(Map<Coin, Integer> change, Coin coin, Money holdingMoney) {
         if (repository.get(coin) == null || repository.get(coin) <= 0) {
             return;
         }
-        if (holdingMoney >= coin.getAmount()) {
-            int quantity = Math.min(holdingMoney / coin.getAmount(), repository.get(coin));
+        if (holdingMoney.getAmount() >= coin.getAmount()) {
+            int quantity = Math.min(holdingMoney.getAmount() / coin.getAmount(), repository.get(coin));
             change.put(coin, quantity);
-            holdingMoney -= coin.getAmount() * quantity;
+            repository.put(coin, repository.get(coin) - quantity);
+            holdingMoney.minus(coin.getAmount() * quantity);
         }
     }
 

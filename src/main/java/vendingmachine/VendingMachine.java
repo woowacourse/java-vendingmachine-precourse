@@ -57,7 +57,7 @@ public class VendingMachine {
     }
 
     public Map<Coin, Integer> getChange() {
-        return coinStore.getChange(holdingMoney.getAmount());
+        return coinStore.getChange(holdingMoney);
     }
 }
 
