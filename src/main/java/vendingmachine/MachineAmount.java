@@ -1,19 +1,15 @@
 package vendingmachine;
 
 import utils.ErrorMessages;
-import utils.Parser;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-public class Amount {
+public class MachineAmount {
 
     private static final int MINIMUM_MONEY = 100;
     private static final int DIVISIBLE_AMOUNT = 10;
     private static final int ZERO = 0;
     private final int money;
 
-    public Amount(int money) {
+    public MachineAmount(int money) {
         validateMinimumAmount(money);
         validateDivideByTen(money);
         this.money = money;

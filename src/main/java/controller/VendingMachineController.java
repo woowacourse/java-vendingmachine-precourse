@@ -2,7 +2,7 @@ package controller;
 
 import utils.Parser;
 import utils.RepeatInput;
-import vendingmachine.Amount;
+import vendingmachine.MachineAmount;
 import vendingmachine.CoinCounter;
 import view.InputView;
 import view.OutputView;
@@ -10,17 +10,17 @@ import view.OutputView;
 public class VendingMachineController {
 
     public void run() {
-        Amount amount = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
+        MachineAmount amount = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
         OutputView.printVendingMachineCoinAmount(new CoinCounter(), amount);
 
         OutputView.printOrderDetails();
         InputView.readOrderDetails();
     }
 
-    private Amount vendingMachineMoney() {
+    private MachineAmount vendingMachineMoney() {
         OutputView.printVendingMachineMoney();
         String amount = InputView.readVendingMachineMoney();
         int money = Parser.convertToInt(amount);
-        return new Amount(money);
+        return new MachineAmount(money);
     }
 }

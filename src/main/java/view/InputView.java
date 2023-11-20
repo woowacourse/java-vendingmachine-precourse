@@ -14,6 +14,8 @@ public class InputView {
 
     public static String readOrderDetails() {
         String order = Console.readLine();
+        InputValidator.validateBlank(order);
+        InputValidator.validateIsOrderFormat(order);
         return order;
     }
 }

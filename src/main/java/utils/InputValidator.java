@@ -5,8 +5,10 @@ import java.util.regex.Pattern;
 
 public class InputValidator {
 
-    private static final String NUMBER_REG_EXP = "^[0-9]+$";
-    private static final Pattern NUMBER = Pattern.compile(NUMBER_REG_EXP);
+    private static final String NUMBER_REGEX = "^[0-9]+$";
+    private static final String ORDER_REGEX = "\\[([^;]+),(\\d+),(\\d+)\\](?:;\\[([^;]+),(\\d+),(\\d+)\\])?;";
+    private static final Pattern NUMBER = Pattern.compile(NUMBER_REGEX);
+    private static final Pattern ORDER = Pattern.compile(ORDER_REGEX);
 
     public static void validateBlank(String input) {
         if (input.isEmpty()){
@@ -18,6 +20,13 @@ public class InputValidator {
         Matcher matcher = NUMBER.matcher(input);
         if (!matcher.find()) {
             throw new IllegalArgumentException(ErrorMessages.VALIDATE_NUMERIC.getErrorMessage());
+        }
+    }
+
+    public static void validateIsOrderFormat(String input) {
+        Matcher matcher = ORDER.matcher(input);
+        if (!matcher.find()) {
+            throw new IllegalArgumentException(ErrorMessages.VALIDATE_ORDER_FORMAT.getErrorMessage());
         }
     }
 }

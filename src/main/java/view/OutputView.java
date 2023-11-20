@@ -1,6 +1,6 @@
 package view;
 
-import vendingmachine.Amount;
+import vendingmachine.MachineAmount;
 import vendingmachine.Coin;
 import vendingmachine.CoinCounter;
 
@@ -12,7 +12,7 @@ public class OutputView {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
     }
 
-    public static void printVendingMachineCoinAmount(CoinCounter coinCounter, Amount amount) {
+    public static void printVendingMachineCoinAmount(CoinCounter coinCounter, MachineAmount amount) {
         System.out.println();
         System.out.println("자판기가 보유한 동전");
         Map<Coin, Integer> counterMap = coinCounter.getCounter(amount);
