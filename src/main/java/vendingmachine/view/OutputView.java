@@ -1,5 +1,7 @@
 package vendingmachine.view;
 
+import static vendingmachine.Message.BALANCE_MESSAGE;
+import static vendingmachine.Message.REQUEST_BUYING_GOODS_INPUT_MESSAGE;
 import static vendingmachine.Message.REQUEST_GOODS_INPUT_MESSAGE;
 import static vendingmachine.Message.REQUEST_MONEY_INPUT_MESSAGE;
 import static vendingmachine.Message.REQUEST_VENDING_MACHINE_HOLD_MONEY_INPUT_MESSAGE;
@@ -34,5 +36,13 @@ public class OutputView {
 
     public static void printErrorMessage(String message) {
         System.out.println(message);
+    }
+
+    public static void printBalance(VendingMachineDto vendingMachineDto) {
+        System.out.printf(BALANCE_MESSAGE.getMessage(), vendingMachineDto.customerMoney());
+    }
+
+    public static void printBuyingGoodsNameRequest() {
+        System.out.print(REQUEST_BUYING_GOODS_INPUT_MESSAGE.getMessage());
     }
 }

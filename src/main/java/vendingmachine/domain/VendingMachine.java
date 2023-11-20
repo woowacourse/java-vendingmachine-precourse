@@ -1,6 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.ErrorMessage.ERROR_CUSTOMER_MONEY_INPUT;
+import static vendingmachine.ErrorMessage.ERROR_NOT_ENOUGH_CUSTOMER_MONEY;
 import static vendingmachine.ErrorMessage.ERROR_VENDING_MACHINE_INPUT_MONEY;
 
 import camp.nextstep.edu.missionutils.Randoms;
@@ -26,13 +27,21 @@ public class VendingMachine {
         generateCoins();
     }
 
-    public void inputCustomerMoney(String customerMoneyInput) {
+    public void changeCustomerMoney(String customerMoneyInput) {
         customerMoney = validateCustomerMoney(customerMoneyInput);
     }
 
+    public void buyGoods(int goodsPrice) {
+        if (customerMoney < goodsPrice) {
+            throw new IllegalArgumentException(ERROR_NOT_ENOUGH_CUSTOMER_MONEY.getMessage());
+        }
+        customerMoney -= goodsPrice;
+    }
+
+
     public VendingMachineDto toDto() {
         return new VendingMachineDto(coins.get(Coin.COIN_500), coins.get(Coin.COIN_100),
-                coins.get(Coin.COIN_50), coins.get(Coin.COIN_10));
+                coins.get(Coin.COIN_50), coins.get(Coin.COIN_10), customerMoney);
     }
 
     private int validateMachineMoney(String machineMoneyInput) {

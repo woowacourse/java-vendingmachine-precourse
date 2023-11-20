@@ -1,6 +1,5 @@
 package vendingmachine.service;
 
-import java.io.Console;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 import vendingmachine.domain.Goods;
@@ -39,7 +38,7 @@ public class InputProcessingService {
             try {
                 messagePrinter.run();
                 String input = inputSupplier.get();
-                vendingMachine.inputCustomerMoney(input);
+                vendingMachine.changeCustomerMoney(input);
                 return;
             } catch (IllegalArgumentException e) {
                 errorMessagePrinter.accept(e.getMessage());

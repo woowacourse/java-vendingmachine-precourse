@@ -1,4 +1,5 @@
 package vendingmachine.domain;
 
-public record VendingMachineDto(int quantity500, int quantity100, int quantity50, int quantity10) {
+public record VendingMachineDto(int quantity500, int quantity100, int quantity50, int quantity10,
+                                int customerMoney) {
 }

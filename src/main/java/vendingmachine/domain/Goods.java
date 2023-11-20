@@ -1,6 +1,8 @@
 package vendingmachine.domain;
 
+import static vendingmachine.ErrorMessage.ERROR_GOODS_NOT_EXIST;
 import static vendingmachine.ErrorMessage.ERROR_GOODS_NOT_UNIQUE;
+import static vendingmachine.ErrorMessage.ERROR_GOODS_NO_STOCK;
 import static vendingmachine.ErrorMessage.ERROR_INPUT_GOODS;
 
 import java.util.HashMap;
@@ -16,6 +18,20 @@ public class Goods {
     public Goods(String goodsInput) {
         validateGoodsInput(goodsInput);
         inputGoodsParser(goodsInput);
+    }
+
+    public GoodsInformation checkBuyingGoods(String goodsName) {
+        validateBuyingGoods(goodsName);
+        if (goods.get(goodsName).getStock() > 0) {
+            return goods.get(goodsName);
+        }
+        throw new IllegalArgumentException(ERROR_GOODS_NO_STOCK.getMessage());
+    }
+
+    private void validateBuyingGoods(String goodsName) {
+        if (!goods.containsKey(goodsName)) {
+            throw new IllegalArgumentException(ERROR_GOODS_NOT_EXIST.getMessage());
+        }
     }
 
     private void validateGoodsInput(String goodsInput) {
@@ -39,7 +55,6 @@ public class Goods {
             validateGoodsNameUnique(name);
             goods.put(name, new GoodsInformation(price, quantity));
         }
-
     }
 
 }

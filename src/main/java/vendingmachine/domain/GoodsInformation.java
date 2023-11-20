@@ -2,18 +2,21 @@ package vendingmachine.domain;
 
 public class GoodsInformation {
     private final int price;
-    private int quantity;
+    private int stock;
 
-    public GoodsInformation(int price, int quantity) {
+    public GoodsInformation(int price, int stock) {
         this.price = price;
-        this.quantity = quantity;
+        this.stock = stock;
     }
 
     public int getPrice() {
         return price;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public int getStock() {
+        return stock;
+    }
+    public void decreaseStockByOne() {
+        stock -= 1;
     }
 }
