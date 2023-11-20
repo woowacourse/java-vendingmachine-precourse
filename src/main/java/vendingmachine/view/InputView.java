@@ -32,11 +32,12 @@ public class InputView {
         try {
             Integer.parseInt(input);
         } catch (NumberFormatException error) {
-            throw new IllegalArgumentException("숫자가 아닙니다.");
+            throw new IllegalArgumentException("금액은 숫자여야 합니다.");
         }
     }
 
     public static Integer readInputMoney() {
+        System.out.println();
         System.out.println("투입할 금액을 입력해 주세요.");
         String input = Console.readLine().trim();
         validateBlank(input);

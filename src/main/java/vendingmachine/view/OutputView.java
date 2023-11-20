@@ -11,6 +11,7 @@ public class OutputView {
         System.out.println(ERROR_PREFIX + error.getMessage());
     }
     public static void printHoldingCoins(Map<Coin, Integer> coinMap) {
+        System.out.println();
         System.out.println("자판기가 보유한 동전");
         printCoins(coinMap);
     }
@@ -28,6 +29,7 @@ public class OutputView {
     }
 
     public static void printLeftMoney(int money) {
+        System.out.println();
         System.out.printf("투입 금액: %d원\n", money);
     }
 

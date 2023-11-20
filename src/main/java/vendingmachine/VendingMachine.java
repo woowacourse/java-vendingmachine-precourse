@@ -19,6 +19,7 @@ public class VendingMachine {
     }
 
     public void initMoney(int money) {
+        validateMoney(money);
         while (money >= Coin.COIN_10.getAmount()) {
             Coin pickedCoin = Coin.getRandomCoin();
             if (money < pickedCoin.getAmount()) {
