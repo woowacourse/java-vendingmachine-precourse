@@ -49,4 +49,23 @@ public class ProductRepository {
     private void validate(String input) {
 
     }
+
+    public boolean canBuySomething(int money) {
+        return getMinPrice() <= money && getLeftProductCount() > 0;
+    }
+    private int getMinPrice() {
+        return repository.keySet()
+                .stream()
+                .mapToInt(Product::getPrice)
+                .min()
+                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+    }
+
+    private int getLeftProductCount() {
+        return repository.values()
+                .stream()
+                .mapToInt(Integer::intValue)
+                .sum();
+    }
+
 }

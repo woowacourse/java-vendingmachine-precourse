@@ -43,4 +43,11 @@ public class InputView {
         validateInteger(input);
         return Integer.parseInt(input);
     }
+
+    public static String readPurchaseProduct() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        String input = Console.readLine().trim();
+        validateBlank(input);
+        return input;
+    }
 }

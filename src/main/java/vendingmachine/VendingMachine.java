@@ -1,18 +1,17 @@
 package vendingmachine;
 
 import java.util.EnumMap;
-import java.util.HashMap;
 import java.util.Map;
 
 public class VendingMachine {
     private ProductRepository repository;
     private Map<Coin, Integer> coinMap;
-    private int leftMoney;
+    private int holdingMoney;
 
     public VendingMachine() {
         repository = new ProductRepository();
         coinMap = new EnumMap<>(Coin.class);
-        leftMoney = 0;
+        holdingMoney = 0;
     }
 
     public void initProducts(ProductRepository repository) {
@@ -28,10 +27,29 @@ public class VendingMachine {
             money -= pickedCoin.getAmount();
             coinMap.put(pickedCoin, coinMap.getOrDefault(pickedCoin, 0) + 1);
         }
-        leftMoney += money;
     }
 
     public Map<Coin, Integer> getCoinMap() {
         return coinMap;
     }
+
+    public boolean canPurchaseSomething() {
+        return repository.canBuySomething(holdingMoney);
+    }
+
+    public void initInputMoney(int inputMoney) {
+        validateMoney(inputMoney);
+        holdingMoney = inputMoney;
+    }
+
+    private static void validateMoney(int money) {
+        if (money < 0) {
+            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+        }
+    }
+
+//    public void purchaseProduct(String product) {
+//        product
+//    }
 }
+

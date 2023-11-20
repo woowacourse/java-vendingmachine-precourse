@@ -6,18 +6,20 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
     public static void run() {
         VendingMachine vendingMachine = new VendingMachine();
-        initMoney(vendingMachine);
+        initVendingMachineMoney(vendingMachine);
         initProducts(vendingMachine);
         OutputView.printCoins(vendingMachine.getCoinMap());
+
+        initInputMoney(vendingMachine);
     }
 
-    private static void initMoney(VendingMachine vendingMachine) {
+    private static void initVendingMachineMoney(VendingMachine vendingMachine) {
         try {
             Integer money = InputView.readHoldingMoney();
             vendingMachine.initMoney(money);
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);
-            initMoney(vendingMachine);
+            initVendingMachineMoney(vendingMachine);
         }
     }
 
@@ -33,5 +35,21 @@ public class VendingMachineController {
         }
     }
 
+    private static void initInputMoney(VendingMachine vendingMachine) {
+        try {
+            int inputMoney = InputView.readInputMoney();
+            vendingMachine.initInputMoney(inputMoney);
+        } catch (IllegalArgumentException error) {
+            OutputView.printError(error);
+            initInputMoney(vendingMachine);
+        }
+    }
 
+    private static void proceedPurchase(VendingMachine vendingMachine, int inputMoney) {
+        while (vendingMachine.canPurchaseSomething()) {
+            OutputView.printLeftMoney(inputMoney);
+            String product = InputView.readPurchaseProduct();
+//            vendingMachine.purchaseProduct(product);
+        }
+    }
 }
