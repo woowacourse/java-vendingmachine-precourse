@@ -1,11 +1,12 @@
 package view;
 
 import camp.nextstep.edu.missionutils.Console;
+import utils.Parser;
 
 public class InputView {
 
-    public static String readVendingMachineMoney() {
+    public static int readVendingMachineMoney() {
         String amount = Console.readLine();
-        return amount;
+        return Parser.convertToInt(amount);
     }
 }
