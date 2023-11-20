@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import vendingmachine.message.ViewMessage;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -16,8 +17,8 @@ public class VendingMachineController {
 
     private static void initVendingMachineMoney(VendingMachine vendingMachine) {
         try {
-            Integer money = InputView.readHoldingMoney();
-            vendingMachine.initMoney(money);
+            Money holdingMoney = new Money(InputView.readInteger(ViewMessage.INPUT_HOLDING_MONEY));
+            vendingMachine.initMoney(holdingMoney);
             OutputView.printHoldingCoins(vendingMachine.getCoinMap());
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);
@@ -39,7 +40,7 @@ public class VendingMachineController {
 
     private static void initInputMoney(VendingMachine vendingMachine) {
         try {
-            int inputMoney = InputView.readInputMoney();
+            Money inputMoney = new Money(InputView.readInteger(ViewMessage.INPUT_PURCHASE_MONEY));
             vendingMachine.initInputMoney(inputMoney);
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);

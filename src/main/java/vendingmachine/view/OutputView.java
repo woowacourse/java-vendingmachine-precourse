@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import java.util.Map;
 import vendingmachine.Coin;
+import vendingmachine.Money;
 
 public class OutputView {
 
@@ -28,9 +29,9 @@ public class OutputView {
         System.out.println();
     }
 
-    public static void printLeftMoney(int money) {
+    public static void printLeftMoney(Money money) {
         System.out.println();
-        System.out.printf("투입 금액: %d원\n", money);
+        System.out.printf("투입 금액: %d원\n", money.getAmount());
     }
 
 

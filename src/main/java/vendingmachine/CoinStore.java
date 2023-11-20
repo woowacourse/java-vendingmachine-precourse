@@ -11,13 +11,13 @@ public class CoinStore {
         this.repository = repository;
     }
 
-    public void addCoinRandomly(int money) {
-        while (money >= Coin.COIN_10.getAmount()) {
+    public void addCoinRandomly(Money money) {
+        while (money.isMoreOrEqualThen(Coin.COIN_10.getAmount())) {
             Coin pickedCoin = Coin.getRandomCoin();
-            if (money < pickedCoin.getAmount()) {
+            if (money.isLessThen(pickedCoin.getAmount())) {
                 continue;
             }
-            money -= pickedCoin.getAmount();
+            money.minus(pickedCoin.getAmount());
             addCoin(pickedCoin);
         }
     }
