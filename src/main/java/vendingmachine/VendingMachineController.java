@@ -11,6 +11,7 @@ public class VendingMachineController {
         OutputView.printCoins(vendingMachine.getCoinMap());
 
         initInputMoney(vendingMachine);
+        proceedPurchase(vendingMachine);
     }
 
     private static void initVendingMachineMoney(VendingMachine vendingMachine) {
@@ -45,11 +46,14 @@ public class VendingMachineController {
         }
     }
 
-    private static void proceedPurchase(VendingMachine vendingMachine, int inputMoney) {
+    private static void proceedPurchase(VendingMachine vendingMachine) {
         while (vendingMachine.canPurchaseSomething()) {
-            OutputView.printLeftMoney(inputMoney);
+            OutputView.printLeftMoney(vendingMachine.getHoldingMoney());
             String product = InputView.readPurchaseProduct();
-//            vendingMachine.purchaseProduct(product);
+            vendingMachine.purchaseProduct(product);
         }
+        OutputView.printLeftMoney(vendingMachine.getHoldingMoney());
+        OutputView.printLeft();
+        OutputView.printCoins(vendingMachine.getChange());
     }
 }

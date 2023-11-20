@@ -21,4 +21,8 @@ public class OutputView {
     public static void printLeftMoney(int money) {
         System.out.printf("투입 금액: %d원\n", money);
     }
+
+    public static void printLeft() {
+        System.out.println("잔돈");
+    }
 }

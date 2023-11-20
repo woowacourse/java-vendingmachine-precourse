@@ -48,8 +48,39 @@ public class VendingMachine {
         }
     }
 
-//    public void purchaseProduct(String product) {
-//        product
-//    }
+    public void purchaseProduct(String productName) {
+        Product product = repository.findProductByName(productName);
+        validatePurchase(product);
+        repository.purchaseProduct(product);
+        holdingMoney -= product.getPrice();
+    }
+
+    private void validatePurchase(Product product) {
+        if (product.getPrice() > holdingMoney) {
+            throw new IllegalArgumentException("잔액이 부족합니다.");
+        }
+        if (repository.getLeftProductCount(product) <= 0) {
+            throw new IllegalArgumentException("재고가 부족합니다.");
+        }
+    }
+
+    public int getHoldingMoney() {
+        return holdingMoney;
+    }
+
+    public Map<Coin, Integer> getChange() {
+        Map<Coin, Integer> change = new EnumMap<>(Coin.class);
+        Coin.getCoinOrderedList()
+                .forEach((coin) -> handleChange(change, coin));
+        return change;
+    }
+
+    private void handleChange(Map<Coin, Integer> change, Coin coin) {
+        if (holdingMoney >= coin.getAmount()) {
+            int quantity = holdingMoney / coin.getAmount();
+            change.put(coin, quantity);
+            holdingMoney -= coin.getAmount() * quantity;
+        }
+    }
 }
 

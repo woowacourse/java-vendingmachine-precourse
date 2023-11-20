@@ -42,17 +42,30 @@ public class ProductRepository {
         }
     }
 
-    public void addProduct(Product product, int quantity) {
-        repository.put(product, repository.getOrDefault(product, 0) + quantity);
-    }
-
-    private void validate(String input) {
-
-    }
+//    public void addProduct(Product product, int quantity) {
+//        repository.put(product, repository.getOrDefault(product, 0) + quantity);
+//    }
+//
+//    private void validate(String input) {
+//
+//    }
 
     public boolean canBuySomething(int money) {
-        return getMinPrice() <= money && getLeftProductCount() > 0;
+        return getMinPrice() <= money && getLeftTotalProductCount() > 0;
     }
+
+    public Product findProductByName(String name) {
+        return repository.keySet()
+                .stream()
+                .filter((product) -> product.getName().equals(name))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+    }
+
+    public void purchaseProduct(Product product) {
+        repository.put(product, repository.get(product) - 1);
+    }
+
     private int getMinPrice() {
         return repository.keySet()
                 .stream()
@@ -61,11 +74,14 @@ public class ProductRepository {
                 .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
     }
 
-    private int getLeftProductCount() {
+    private int getLeftTotalProductCount() {
         return repository.values()
                 .stream()
                 .mapToInt(Integer::intValue)
                 .sum();
     }
 
+    public int getLeftProductCount(Product product) {
+        return repository.get(product);
+    }
 }
