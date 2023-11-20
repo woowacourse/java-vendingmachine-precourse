@@ -1,5 +1,6 @@
 package view;
 
+import vendingmachine.InputAmount;
 import vendingmachine.MachineAmount;
 import vendingmachine.Coin;
 import vendingmachine.CoinCounter;
@@ -32,5 +33,12 @@ public class OutputView {
     public static void printInputAmount() {
         System.out.println();
         System.out.println("투입 금액을 입력해 주세요.");
+    }
+
+    public static void printPurchaseProduct(InputAmount inputAmount) {
+        System.out.println();
+        System.out.println(String.format("투입 금액: %d" , inputAmount.getMoney()));
+        System.out.println("구매할 상품명을 입력해 주세요.");
+
     }
 }

@@ -18,6 +18,10 @@ public class VendingMachineController {
 
         InputAmount inputAmount = RepeatInput.repeatWhenInvalid(this::inputAmount);
 
+        purchaseProcess(productsMap, inputAmount);
+        // 입력값을 다시 받지 않는 오류 수정해야 함.
+
+
     }
 
     private MachineAmount vendingMachineMoney() {
@@ -39,5 +43,10 @@ public class VendingMachineController {
         String amount = InputView.readAmountInput();
         int inputAmount = Parser.convertToInt(amount);
         return new InputAmount(inputAmount);
+    }
+
+    private void purchaseProcess(Products products, InputAmount inputAmount) {
+        OutputView.printPurchaseProduct(inputAmount);
+        String purchaseName = InputView.readPurchaseName(products);
     }
 }

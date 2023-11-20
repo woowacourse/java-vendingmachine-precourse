@@ -13,4 +13,15 @@ public class Products {
     public Map<String, Product> getProductMap() {
         return productMap;
     }
+
+    public int getMininumProduct() {
+        int minimumPrice = Integer.MAX_VALUE;
+        for (Product product : productMap.values()) {
+            int price = product.getPrice();
+            if (price < minimumPrice) {
+                minimumPrice = price;
+            }
+        }
+        return minimumPrice;
+    }
 }

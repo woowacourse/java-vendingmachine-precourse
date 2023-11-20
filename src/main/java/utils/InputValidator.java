@@ -1,5 +1,9 @@
 package utils;
 
+import vendingmachine.Product;
+import vendingmachine.Products;
+
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -28,5 +32,15 @@ public class InputValidator {
         if (!matcher.find()) {
             throw new IllegalArgumentException(ErrorMessages.VALIDATE_ORDER_FORMAT.getErrorMessage());
         }
+    }
+
+    public static void validatePurchaseProductExist(Products products , String input) {
+        Map<String, Product> productMap = products.getProductMap();
+        for (String savedName : productMap.keySet()) {
+            if (savedName.equals(input)) {
+                return;
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessages.VALIDATE_EXIST_NAME.getErrorMessage());
     }
 }
