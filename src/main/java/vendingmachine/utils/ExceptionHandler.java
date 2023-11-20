@@ -1,6 +1,8 @@
 package vendingmachine.utils;
 
+import java.util.Optional;
 import java.util.function.BiFunction;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import vendingmachine.view.OutputView;
 
@@ -21,9 +23,9 @@ public class ExceptionHandler {
         }
     }
 
-    public static <T, U, R> R convert(BiFunction<T, U, R> function, T inputString, U validator) {
+    public static <T, R> R convert(Function<T, R> function, T inputString) {
         try {
-            return function.apply(inputString, validator);
+            return function.apply(inputString);
         } catch (IllegalArgumentException e) {
             printExceptionMessage(e);
             return null;

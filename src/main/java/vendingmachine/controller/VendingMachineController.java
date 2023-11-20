@@ -2,7 +2,9 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Products;
 import vendingmachine.utils.Convertor;
+import vendingmachine.utils.ExceptionHandler;
 import vendingmachine.view.Input;
+import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
@@ -28,7 +30,8 @@ public class VendingMachineController {
     private void setHoldCoin() {
         OutputView.printRequestMachinHoldMoney();
         String inputString = input.readHoldMoney();
-        int holdMoney = Convertor.convertToMoney(inputString);
+        Integer holdMoney = ExceptionHandler.convert(Convertor::convertToMoney, inputString);
+        if(holdMoney == null) setHoldCoin();
         //TODO : coinService.create
         //TODO : coinService.setCoinsByMoney
         //TODO : printHoldCoin
@@ -37,19 +40,22 @@ public class VendingMachineController {
     private void setProducts() {
         OutputView.printRequestProducts();
         String inputString = input.readProducts();
-        Products products = Convertor.convertToProducts(inputString);
+        Products products = ExceptionHandler.convert(Convertor::convertToProducts, inputString);
+        if(products == null) setProducts();
+        //TODO : purchaseService create
     }
 
     private void setInputAmount() {
         OutputView.printRequestInputAmount();
         String inputString = input.readInputAmount();
-        int inputAmount = Convertor.convertToMoney(inputString);
-        //TODO : purchaseService create
+        Integer inputAmount = ExceptionHandler.convert(Convertor::convertToMoney, inputString);
+        if(inputAmount == null) setInputAmount();
     }
 
     private void requestWanted() {
         OutputView.printRequestWanted();
         String inputString = input.readWanted();
+
         //TODO : purchaseService.purchase
     }
 

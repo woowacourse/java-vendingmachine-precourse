@@ -38,7 +38,7 @@ public class InputView implements Input{
 
     private String readString(){
         String stringInput = Console.readLine();
-        return InputValidator.validateStringint(stringInput);
+        return InputValidator.validateString(stringInput);
     }
 }
 

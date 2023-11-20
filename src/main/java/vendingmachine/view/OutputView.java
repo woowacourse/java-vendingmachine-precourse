@@ -5,17 +5,17 @@ public class OutputView {
         System.out.println(OutputViewMessage.REQUEST_MACHINE_HOLD_MONEY.getMessage());
     }
     public static void printRequestProducts(){
-        System.out.println(OutputViewMessage.REQUEST_INPUT_AMOUNT.getMessage());
+        System.out.println(OutputViewMessage.REQUEST_PRODUCTS.getMessage());
     }
     public static void printRequestInputAmount() {
         System.out.println(OutputViewMessage.REQUEST_INPUT_AMOUNT.getMessage());
     }
     public static void printRemainAmount(int inputAmount) {
-        System.out.printf(OutputViewMessage.REQUEST_INPUT_AMOUNT.getMessage(), inputAmount);
+        System.out.printf(OutputViewMessage.REMAIN_AMOUNT.getMessage(), inputAmount);
     }
 
     public static void printRequestWanted() {
-        //TODO : 기능 구현
+        System.out.println(OutputViewMessage.REQUEST_WANTED.getMessage());
     }
 
     public static void printExceptionMessage(final String error) {
