@@ -11,6 +11,7 @@ public enum Coin {
     COIN_100(100),
     COIN_50(50),
     COIN_10(10);
+
     private final int amount;
 
     Coin(final int amount) {

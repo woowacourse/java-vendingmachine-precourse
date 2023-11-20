@@ -5,8 +5,8 @@ import java.util.Map;
 import vendingmachine.message.ExceptionMessage;
 
 public class VendingMachine {
+    private final CoinStore coinStore;
     private ProductStore productStore;
-    private CoinStore coinStore;
     private Money holdingMoney;
 
     public VendingMachine() {

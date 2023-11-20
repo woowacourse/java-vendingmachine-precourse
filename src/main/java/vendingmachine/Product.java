@@ -4,8 +4,8 @@ import vendingmachine.message.ExceptionMessage;
 
 public class Product {
     public static final int MIN_PRICE = 100;
-    private String name;
-    private int price;
+    private final String name;
+    private final int price;
 
     public Product(String name, int price) {
         validate(name, price);
