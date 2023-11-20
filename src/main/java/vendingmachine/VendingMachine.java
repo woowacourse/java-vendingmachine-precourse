@@ -5,12 +5,12 @@ import java.util.Map;
 
 public class VendingMachine {
     private ProductStore productStore;
-    private Map<Coin, Integer> coinMap;
+    private CoinStore coinStore;
     private int holdingMoney;
 
     public VendingMachine() {
         productStore = new ProductStore();
-        coinMap = new EnumMap<>(Coin.class);
+        coinStore = new CoinStore(new EnumMap<>(Coin.class));
         holdingMoney = 0;
     }
 
@@ -20,18 +20,7 @@ public class VendingMachine {
 
     public void initMoney(int money) {
         validateMoney(money);
-        while (money >= Coin.COIN_10.getAmount()) {
-            Coin pickedCoin = Coin.getRandomCoin();
-            if (money < pickedCoin.getAmount()) {
-                continue;
-            }
-            money -= pickedCoin.getAmount();
-            coinMap.put(pickedCoin, coinMap.getOrDefault(pickedCoin, 0) + 1);
-        }
-    }
-
-    public Map<Coin, Integer> getCoinMap() {
-        return coinMap;
+        coinStore.addCoinRandomly(money);
     }
 
     public boolean canPurchaseSomething() {
@@ -69,22 +58,12 @@ public class VendingMachine {
         return holdingMoney;
     }
 
-    public Map<Coin, Integer> getChange() {
-        Map<Coin, Integer> change = new EnumMap<>(Coin.class);
-        Coin.getCoinOrderedList()
-                .forEach((coin) -> handleChange(change, coin));
-        return change;
+    public Map<Coin, Integer> getCoinMap() {
+        return coinStore.getRepository();
     }
 
-    private void handleChange(Map<Coin, Integer> change, Coin coin) {
-        if (coinMap.get(coin) == null || coinMap.get(coin) <= 0) {
-            return;
-        }
-        if (holdingMoney >= coin.getAmount()) {
-            int quantity = Math.min(holdingMoney / coin.getAmount(), coinMap.get(coin));
-            change.put(coin, quantity);
-            holdingMoney -= coin.getAmount() * quantity;
-        }
+    public Map<Coin, Integer> getChange() {
+        return coinStore.getChange(holdingMoney);
     }
 }
 
