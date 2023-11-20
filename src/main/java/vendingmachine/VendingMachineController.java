@@ -5,17 +5,30 @@ import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     public static void run() {
-
-        initProducts();
+        VendingMachine vendingMachine = new VendingMachine();
+        initMoney(vendingMachine);
+        initProducts(vendingMachine);
     }
 
-    private static void initProducts() {
+    private static void initMoney(VendingMachine vendingMachine) {
         try {
-            String readProduct = InputView.readProduct();
-            ProductRepository.initProductsByString(readProduct);
+            Integer money = InputView.readMoney();
+            vendingMachine.initMoney(money);
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);
-            initProducts();
+            initMoney(vendingMachine);
+        }
+    }
+
+    private static void initProducts(VendingMachine vendingMachine) {
+        try {
+            String readProduct = InputView.readProduct();
+            ProductRepository repository = new ProductRepository();
+            repository.initProductsByString(readProduct);
+            vendingMachine.initProducts(repository);
+        } catch (IllegalArgumentException error) {
+            OutputView.printError(error);
+            initProducts(vendingMachine);
         }
     }
 

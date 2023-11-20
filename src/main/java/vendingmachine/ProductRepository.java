@@ -7,13 +7,13 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ProductRepository {
-    private static final Map<Product, Integer> repository = new HashMap<>();
+    private Map<Product, Integer> repository;
 
-    private ProductRepository() {
-
+    public ProductRepository() {
+        repository = new HashMap<>();
     }
 
-    public static void initProductsByString(String input) {
+    public void initProductsByString(String input) {
         String regex = "^\\[([^,]+),([0-9]+),([0-9]+)\\]$";
 
         Pattern pattern = Pattern.compile(regex);
@@ -36,11 +36,11 @@ public class ProductRepository {
         System.out.println(repository);
     }
 
-    public static void addProduct(Product product, int quantity) {
+    public void addProduct(Product product, int quantity) {
         repository.put(product, repository.getOrDefault(product, 0) + quantity);
     }
 
-    private static void validate(String input) {
+    private void validate(String input) {
 
     }
 }
