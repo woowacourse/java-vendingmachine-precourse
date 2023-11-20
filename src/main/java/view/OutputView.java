@@ -9,6 +9,7 @@ import java.util.Map;
 
 public class OutputView {
 
+    private static final int ZERO = 0;
     public static void printVendingMachineMoney() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
     }
@@ -50,7 +51,7 @@ public class OutputView {
         for(Map.Entry<Coin, Integer> entry : counterMap.entrySet()) {
             Coin coin = entry.getKey();
             int count = entry.getValue();
-            if (count != 0) {
+            if (count != ZERO) {
                 System.out.println(coin.displayCoinName() + " - " + count + "개");
             }
         }

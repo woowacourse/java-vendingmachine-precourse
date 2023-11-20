@@ -9,6 +9,7 @@ public enum ErrorMessages {
     VALIDATE_ORDER_FORMAT("[ERROR] 올바르지 않은 입력 형식 입니다."),
     VALIDATE_NEGATIVE("[ERROR] 투입 금액은 0보다 작을 수 없습니다."),
     VALIDATE_EXIST_NAME("[ERROR] 구매할 상품이 존재하지 않습니다."),
+    VALIDATE_NEGATIVE_QUANTITY("[ERROR] 상품 수량은 0보다 작을 수 없습니다."),
     ;
 
     private final String message;

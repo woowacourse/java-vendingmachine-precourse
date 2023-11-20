@@ -15,14 +15,10 @@ public class VendingMachineController {
         OutputView.printVendingMachineCoinAmount(new CoinCounter(), vendingMoney);
 
         Products productsMap = RepeatInput.repeatWhenInvalid(this::productInformation);
-
         InputAmount inputAmount = RepeatInput.repeatWhenInvalid(this::inputAmount);
 
         int remainder = RepeatInput.repeatWhenInvalid(() -> purchaseProcess(productsMap, inputAmount));
-
         OutputView.printRemainChanges(new CoinCounter(), vendingMoney, remainder);
-
-
     }
 
     private MachineAmount vendingMachineMoney() {
@@ -51,6 +47,9 @@ public class VendingMachineController {
             OutputView.printPurchaseProduct(inputAmount);
             String purchaseName = InputView.readPurchaseName(products);
             int purchasePrice = products.findInputAmount(purchaseName);
+
+            Product purchasedProduct = products.getProductMap().get(purchaseName);
+            purchasedProduct.decreaseQuantity();
             inputAmount.subtractMoney(purchasePrice);
         }
         return inputAmount.getMoney();
