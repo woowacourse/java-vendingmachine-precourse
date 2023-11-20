@@ -5,7 +5,7 @@ public class OutputView {
         System.out.println(OutputViewMessage.REQUEST_MACHINE_HOLD_MONEY.getMessage());
     }
     public static void printRequestProducts(){
-        System.out.println(OutputViewMessage.REQUEST_MACHINE_HOLD_MONEY.getMessage());
+        System.out.println(OutputViewMessage.REQUEST_INPUT_AMOUNT.getMessage());
     }
     public static void printRequestInputAmount() {
         System.out.println(OutputViewMessage.REQUEST_INPUT_AMOUNT.getMessage());
