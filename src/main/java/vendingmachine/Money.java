@@ -1,5 +1,7 @@
 package vendingmachine;
 
+import vendingmachine.message.ExceptionMessage;
+
 public class Money {
     private int amount;
 
@@ -10,7 +12,7 @@ public class Money {
 
     private void validate(int amount) {
         if (amount < 0) {
-            throw new IllegalArgumentException("음수는 입력할 수 없습니다.");
+            throw new IllegalArgumentException(ExceptionMessage.NUMBER_FORMAT);
         }
     }
 
@@ -24,7 +26,7 @@ public class Money {
 
     public void minus(int amount) {
         if (this.amount - amount < 0) {
-            throw new IllegalArgumentException("잔액이 부족합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.LACK_MONEY);
         }
         this.amount -= amount;
     }

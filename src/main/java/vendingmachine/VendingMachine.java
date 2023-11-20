@@ -2,6 +2,7 @@ package vendingmachine;
 
 import java.util.EnumMap;
 import java.util.Map;
+import vendingmachine.message.ExceptionMessage;
 
 public class VendingMachine {
     private ProductStore productStore;
@@ -40,10 +41,10 @@ public class VendingMachine {
 
     private void validatePurchase(Product product) {
         if (holdingMoney.isLessThen(product.getPrice())) {
-            throw new IllegalArgumentException("잔액이 부족합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.LACK_MONEY);
         }
         if (productStore.getLeftProductCount(product) <= 0) {
-            throw new IllegalArgumentException("재고가 부족합니다.");
+            throw new IllegalArgumentException(ExceptionMessage.LACK_QUANTITY);
         }
     }
 

@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import vendingmachine.message.ExceptionMessage;
 
 public class ProductStore {
     private static final String PRODUCT_DELIMITER = ";";
@@ -32,12 +33,12 @@ public class ProductStore {
             repository.put(product, quantity);
             return;
         }
-        throw new IllegalArgumentException("잘못된 상품 입력입니다.");
+        throw new IllegalArgumentException(ExceptionMessage.INVALID_PRODUCT_NAME);
     }
 
     private void validateQuantity(int quantity) {
         if (quantity <= 0) {
-            throw new IllegalArgumentException("잘못된 수량입니다.");
+            throw new IllegalArgumentException(ExceptionMessage.LACK_QUANTITY);
         }
     }
 
@@ -50,7 +51,7 @@ public class ProductStore {
                 .stream()
                 .mapToInt(Product::getPrice)
                 .min()
-                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_PRODUCT_NAME));
     }
 
     private int getLeftTotalProductCount() {
@@ -65,7 +66,7 @@ public class ProductStore {
                 .stream()
                 .filter((product) -> product.getName().equals(name))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("상품이 없습니다."));
+                .orElseThrow(() -> new IllegalArgumentException(ExceptionMessage.INVALID_PRODUCT_NAME));
     }
 
     public void purchaseProduct(Product product) {

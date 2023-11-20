@@ -17,7 +17,8 @@ public class VendingMachineController {
 
     private static void initVendingMachineMoney(VendingMachine vendingMachine) {
         try {
-            Money holdingMoney = new Money(InputView.readInteger(ViewMessage.INPUT_HOLDING_MONEY));
+            int holdMoneyAmount = InputView.readInteger(ViewMessage.INPUT_HOLDING_MONEY);
+            Money holdingMoney = new Money(holdMoneyAmount);
             vendingMachine.initMoney(holdingMoney);
             OutputView.printHoldingCoins(vendingMachine.getCoinMap());
         } catch (IllegalArgumentException error) {
@@ -28,7 +29,7 @@ public class VendingMachineController {
 
     private static void initProducts(VendingMachine vendingMachine) {
         try {
-            String readProduct = InputView.readProduct();
+            String readProduct = InputView.readString(ViewMessage.INPUT_PRODUCT);
             ProductStore repository = new ProductStore();
             repository.initProductsByString(readProduct);
             vendingMachine.initProducts(repository);
@@ -40,7 +41,8 @@ public class VendingMachineController {
 
     private static void initInputMoney(VendingMachine vendingMachine) {
         try {
-            Money inputMoney = new Money(InputView.readInteger(ViewMessage.INPUT_PURCHASE_MONEY));
+            int insertedMoneyAmount = InputView.readInteger(ViewMessage.INPUT_INSERTED_MONEY);
+            Money inputMoney = new Money(insertedMoneyAmount);
             vendingMachine.initInputMoney(inputMoney);
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);
@@ -51,7 +53,7 @@ public class VendingMachineController {
     private static void proceedPurchase(VendingMachine vendingMachine) {
         while (vendingMachine.canPurchaseSomething()) {
             OutputView.printLeftMoney(vendingMachine.getHoldingMoney());
-            String product = InputView.readPurchaseProduct();
+            String product = InputView.readString(ViewMessage.INPUT_PURCHASE_PRODUCT);
             vendingMachine.purchaseProduct(product);
         }
         OutputView.printLeftMoney(vendingMachine.getHoldingMoney());
