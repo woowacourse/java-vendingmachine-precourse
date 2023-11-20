@@ -54,13 +54,13 @@ public class VendingMachineController {
         Integer inputAmount = ExceptionHandler.convert(Convertor::convertToMoney, inputString);
         if(inputAmount == null) setInputAmount();
         purchaseService = PurchaseService.of(products, inputAmount);
-        
+
     }
 
     private void requestWanted() {
         OutputView.printRequestWanted();
         String inputString = input.readWanted();
-        //TODO : purchaseService.purchase
+        purchaseService.purchase(inputString);
     }
 
     private void spendAll() {
