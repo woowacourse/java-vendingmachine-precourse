@@ -12,7 +12,7 @@ public class CoinGenerator {
     private static final int COIN100 = 2;
     private static final int COIN500 = 3;
 
-    HashMap<Coin, Integer> countCoin(int holdMoney) {
+    public HashMap<Coin, Integer> countCoin(int holdMoney) {
         HashMap<Coin, Integer> map = new HashMap<>();
         int coins[][] = generateByHoldMoney(holdMoney);
         map.put(Coin.COIN_10, coins[COIN10][0]);

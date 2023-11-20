@@ -1,14 +1,14 @@
 package vendingmachine.controller;
 
+import java.util.HashMap;
+import vendingmachine.domain.Coin;
+import vendingmachine.utils.CoinGenerator;
+
 public class CoinService {
 
-    private final int holdMoney;
+    private HashMap<Coin, Integer> coins;
 
-    public CoinService(final int holdMoney) {
-        this.holdMoney = holdMoney;
-    }
-
-    public static CoinService from(final int holdMoney) {
-        return new CoinService(holdMoney);
+    public void setCoinsByMoney(final Integer holdMoney, CoinGenerator generator) {
+        coins = generator.countCoin(holdMoney);
     }
 }
