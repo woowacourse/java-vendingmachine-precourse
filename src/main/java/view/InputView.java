@@ -11,4 +11,9 @@ public class InputView {
         InputValidator.validateIsNumeric(amount);
         return amount;
     }
+
+    public static String readOrderDetails() {
+        String order = Console.readLine();
+        return order;
+    }
 }

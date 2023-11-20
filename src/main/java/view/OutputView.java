@@ -23,4 +23,9 @@ public class OutputView {
             System.out.println(coin.displayCoinName() + " : " + count + "개");
         }
     }
+
+    public static void printOrderDetails() {
+        System.out.println();
+        System.out.println("상품명과 가격, 수량을 입력해 주세요.");
+    }
 }

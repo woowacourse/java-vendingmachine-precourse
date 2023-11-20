@@ -12,6 +12,9 @@ public class VendingMachineController {
     public void run() {
         Amount amount = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
         OutputView.printVendingMachineCoinAmount(new CoinCounter(), amount);
+
+        OutputView.printOrderDetails();
+        InputView.readOrderDetails();
     }
 
     private Amount vendingMachineMoney() {
