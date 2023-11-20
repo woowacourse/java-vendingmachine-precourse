@@ -13,7 +13,7 @@ public class VendingMachineController {
 
     private static void initMoney(VendingMachine vendingMachine) {
         try {
-            Integer money = InputView.readMoney();
+            Integer money = InputView.readHoldingMoney();
             vendingMachine.initMoney(money);
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);

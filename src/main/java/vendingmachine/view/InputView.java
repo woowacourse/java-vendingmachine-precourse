@@ -20,7 +20,7 @@ public class InputView {
         }
     }
     // TODO 비즈니스 로직 분리
-    public static Integer readMoney() {
+    public static Integer readHoldingMoney() {
         System.out.println(INPUT_MONEY);
         String input = Console.readLine().trim();
         validateBlank(input);
@@ -34,5 +34,13 @@ public class InputView {
         } catch (NumberFormatException error) {
             throw new IllegalArgumentException("숫자가 아닙니다.");
         }
+    }
+
+    public static Integer readInputMoney() {
+        System.out.println("투입할 금액을 입력해 주세요.");
+        String input = Console.readLine().trim();
+        validateBlank(input);
+        validateInteger(input);
+        return Integer.parseInt(input);
     }
 }

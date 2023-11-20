@@ -15,5 +15,6 @@ public class OutputView {
         Coin.getCoinOrderedList().forEach((coin) -> {
             System.out.println(coin.getAmount() + "원 - " + coinMap.getOrDefault(coin, 0) + "개");
         });
+        System.out.println();
     }
 }

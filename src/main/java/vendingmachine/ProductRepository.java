@@ -28,11 +28,18 @@ public class ProductRepository {
                         int quantity = Integer.parseInt(matcher.group(3));
 
                         Product product = new Product(item, price);
+                        validateQuantity(quantity);
                         repository.put(product, quantity);
                         return;
                     }
                     throw new IllegalArgumentException("잘못된 상품 입력입니다.");
                 });
+    }
+
+    private void validateQuantity(int quantity) {
+        if (quantity <= 0) {
+            throw new IllegalArgumentException("잘못된 수량입니다.");
+        }
     }
 
     public void addProduct(Product product, int quantity) {
