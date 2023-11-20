@@ -23,7 +23,6 @@ public class ProductPriceValidator {
 
     private static void isBoundary(final int price) {
         if (price < MINIMAL_PRODUCT_MONEY) {
-            System.out.println("Test");
             throw new IllegalArgumentException(BOUNDARY_EXCEPTION);
         }
     }
