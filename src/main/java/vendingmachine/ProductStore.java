@@ -11,6 +11,10 @@ public class ProductStore {
     private static final String PRODUCT_DELIMITER = ";";
     private static final String PRODUCT_REGEX = "^\\[([^,]+),([0-9]+),([0-9]+)\\]$";
     private static final Pattern PRODUCT_PATTERN = Pattern.compile(PRODUCT_REGEX);
+    private static final int NAME_INDEX = 1;
+    private static final int PRICE_INDEX = 2;
+    private static final int QUANTITY_INDEX = 3;
+
     private final Map<Product, Integer> repository;
 
     public ProductStore() {
@@ -25,9 +29,9 @@ public class ProductStore {
     private void handleProductByString(String value) {
         Matcher matcher = PRODUCT_PATTERN.matcher(value);
         if (matcher.find()) {
-            String name = matcher.group(1);
-            int price = Integer.parseInt(matcher.group(2));
-            int quantity = Integer.parseInt(matcher.group(3));
+            String name = matcher.group(NAME_INDEX);
+            int price = Integer.parseInt(matcher.group(PRICE_INDEX));
+            int quantity = Integer.parseInt(matcher.group(QUANTITY_INDEX));
             Product product = new Product(name, price);
             validateQuantity(quantity);
             repository.put(product, quantity);
