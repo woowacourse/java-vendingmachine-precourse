@@ -13,7 +13,7 @@ public class VendingMachineTest {
     void initMoneySuccess(int money) {
         Assertions.assertThatNoException().isThrownBy(() -> {
             VendingMachine vendingMachine = new VendingMachine();
-            vendingMachine.initMoney(new Money(money));
+            vendingMachine.initHoldingMoney(new Money(money));
         });
     }
 
@@ -22,7 +22,7 @@ public class VendingMachineTest {
     @ValueSource(ints = {1500, 2000, 2999})
     void purchaseProductFailWithLackMoney(int money) {
         VendingMachine vendingMachine = new VendingMachine();
-        vendingMachine.initMoney(new Money(0));
+        vendingMachine.initHoldingMoney(new Money(0));
 
         ProductStore productRepository = new ProductStore();
         productRepository.initProductsByString("[콜라,1500,1]");
@@ -41,7 +41,7 @@ public class VendingMachineTest {
     @Test
     void purchaseProductFailWithQuantity() {
         VendingMachine vendingMachine = new VendingMachine();
-        vendingMachine.initMoney(new Money(0));
+        vendingMachine.initHoldingMoney(new Money(0));
 
         ProductStore productRepository = new ProductStore();
         productRepository.initProductsByString("[콜라,1500,1]");

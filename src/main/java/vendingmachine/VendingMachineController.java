@@ -19,7 +19,7 @@ public class VendingMachineController {
         try {
             int holdMoneyAmount = InputView.readInteger(ViewMessage.INPUT_HOLDING_MONEY);
             Money holdingMoney = new Money(holdMoneyAmount);
-            vendingMachine.initMoney(holdingMoney);
+            vendingMachine.initHoldingMoney(holdingMoney);
             OutputView.printHoldingCoins(vendingMachine.getCoinMap());
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);

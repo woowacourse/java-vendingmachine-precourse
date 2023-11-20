@@ -19,7 +19,7 @@ public class VendingMachine {
         this.productStore = repository;
     }
 
-    public void initMoney(Money money) {
+    public void initHoldingMoney(Money money) {
         coinStore.addCoinRandomly(money);
     }
 
