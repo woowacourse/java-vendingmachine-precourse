@@ -32,6 +32,12 @@ public enum Coin {
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 동전입니다."));
     }
 
+    public static List<Coin> getCoinOrderedList() {
+        return Arrays.stream(Coin.values())
+                .sorted((o1, o2) -> o2.amount - o1.amount)
+                .collect(Collectors.toList());
+    }
+
     public int getAmount() {
         return amount;
     }

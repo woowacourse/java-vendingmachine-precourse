@@ -8,6 +8,7 @@ public class VendingMachineController {
         VendingMachine vendingMachine = new VendingMachine();
         initMoney(vendingMachine);
         initProducts(vendingMachine);
+        OutputView.printCoins(vendingMachine.getCoinMap());
     }
 
     private static void initMoney(VendingMachine vendingMachine) {

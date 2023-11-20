@@ -30,4 +30,8 @@ public class VendingMachine {
         }
         leftMoney += money;
     }
+
+    public Map<Coin, Integer> getCoinMap() {
+        return coinMap;
+    }
 }

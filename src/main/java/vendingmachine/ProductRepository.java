@@ -33,7 +33,6 @@ public class ProductRepository {
                     }
                     throw new IllegalArgumentException("잘못된 상품 입력입니다.");
                 });
-        System.out.println(repository);
     }
 
     public void addProduct(Product product, int quantity) {
