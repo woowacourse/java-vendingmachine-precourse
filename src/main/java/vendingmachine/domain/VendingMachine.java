@@ -6,6 +6,7 @@ import static vendingmachine.ErrorMessage.ERROR_VENDING_MACHINE_INPUT_MONEY;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -14,12 +15,12 @@ public class VendingMachine {
     private static final String customerMoneyRegex = "^\\d+$";
     private static final Pattern machineMoneyPattern = Pattern.compile(machineMoneyRegex);
     private static final Pattern customerMoneyPattern = Pattern.compile(customerMoneyRegex);
-    private HashMap<Coin, Integer> coins = new HashMap<>();
-    private int machingMoney;
+    private final LinkedHashMap<Coin, Integer> coins = new LinkedHashMap<>();
+    private final int machineMoney;
     private int customerMoney;
 
     public VendingMachine(String moneyInput) {
-        this.machingMoney = validateMachineMoney(moneyInput);
+        this.machineMoney = validateMachineMoney(moneyInput);
         coins.put(Coin.COIN_500, 0);
         coins.put(Coin.COIN_100, 0);
         coins.put(Coin.COIN_50, 0);
@@ -38,6 +39,21 @@ public class VendingMachine {
         customerMoney -= goodsPrice;
     }
 
+    public LinkedHashMap<Coin, Integer> calculateChanges() {
+        LinkedHashMap<Coin, Integer> changes = new LinkedHashMap<>();
+        changes.put(Coin.COIN_500, 0);
+        changes.put(Coin.COIN_100, 0);
+        changes.put(Coin.COIN_50, 0);
+        changes.put(Coin.COIN_10, 0);
+        for (Coin coinValue : coins.keySet()) {
+            while (customerMoney >= coinValue.getAmount() && coins.get(coinValue) >= 1) {
+                changes.put(coinValue, changes.get(coinValue) + 1);
+                customerMoney -= coinValue.getAmount();
+                coins.put(coinValue, coins.get(coinValue) - 1);
+            }
+        }
+        return changes;
+    }
 
     public VendingMachineDto toDto() {
         return new VendingMachineDto(coins.get(Coin.COIN_500), coins.get(Coin.COIN_100),
@@ -59,7 +75,7 @@ public class VendingMachine {
     }
 
     private void generateCoins() {
-        int localMoney = machingMoney;
+        int localMoney = machineMoney;
         List<Integer> random = List.of(500, 100, 50, 10);
         while (localMoney != 0) {
             int randomNumber = Randoms.pickNumberInList(random);

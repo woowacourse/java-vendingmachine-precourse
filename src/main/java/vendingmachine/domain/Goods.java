@@ -6,8 +6,10 @@ import static vendingmachine.ErrorMessage.ERROR_GOODS_NO_STOCK;
 import static vendingmachine.ErrorMessage.ERROR_INPUT_GOODS;
 
 import java.util.HashMap;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class Goods {
     private static final String goodsRegex =
@@ -26,6 +28,21 @@ public class Goods {
             return goods.get(goodsName);
         }
         throw new IllegalArgumentException(ERROR_GOODS_NO_STOCK.getMessage());
+    }
+
+    public boolean hasAnyStock() {
+        int stockSum = 0;
+        for (Entry<String, GoodsInformation> good : goods.entrySet()) {
+            stockSum += good.getValue().getStock();
+        }
+        return stockSum != 0;
+    }
+
+    public int getMinPrice() {
+        return goods.values().stream()
+                .mapToInt(GoodsInformation::getPrice)
+                .min()
+                .orElseThrow();
     }
 
     private void validateBuyingGoods(String goodsName) {

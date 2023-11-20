@@ -10,7 +10,9 @@ public enum Message {
     REQUEST_GOODS_INPUT_MESSAGE("상품명과 가격, 수량을 입력해 주세요.\n"),
     REQUEST_MONEY_INPUT_MESSAGE("\n투입 금액을 입력해 주세요.\n"),
     REQUEST_BUYING_GOODS_INPUT_MESSAGE("\n구매할 상품명을 입력해 주세요.\n"),
-    BALANCE_MESSAGE("\n투입 금액: %s원\n");
+    BALANCE_MESSAGE("\n투입 금액: %s원\n"),
+    CHANGES_MESSAGE("잔돈\n"),
+    CHANGES_AMOUNT("%s원 - %s개\n");
 
 
     private final String message;

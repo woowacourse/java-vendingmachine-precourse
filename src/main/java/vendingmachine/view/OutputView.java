@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
 import static vendingmachine.Message.BALANCE_MESSAGE;
+import static vendingmachine.Message.CHANGES_AMOUNT;
+import static vendingmachine.Message.CHANGES_MESSAGE;
 import static vendingmachine.Message.REQUEST_BUYING_GOODS_INPUT_MESSAGE;
 import static vendingmachine.Message.REQUEST_GOODS_INPUT_MESSAGE;
 import static vendingmachine.Message.REQUEST_MONEY_INPUT_MESSAGE;
@@ -11,6 +13,10 @@ import static vendingmachine.domain.Coin.COIN_100;
 import static vendingmachine.domain.Coin.COIN_50;
 import static vendingmachine.domain.Coin.COIN_500;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map.Entry;
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.VendingMachineDto;
 
 public class OutputView {
@@ -44,5 +50,12 @@ public class OutputView {
 
     public static void printBuyingGoodsNameRequest() {
         System.out.print(REQUEST_BUYING_GOODS_INPUT_MESSAGE.getMessage());
+    }
+
+    public static void printChanges(LinkedHashMap<Coin, Integer> changes) {
+        System.out.print(CHANGES_MESSAGE.getMessage());
+        for (Entry<Coin, Integer> entry : changes.entrySet()) {
+            System.out.printf(CHANGES_AMOUNT.getMessage(), entry.getKey().getAmount(), entry.getValue());
+        }
     }
 }
