@@ -4,18 +4,18 @@ import java.util.EnumMap;
 import java.util.Map;
 
 public class VendingMachine {
-    private ProductRepository repository;
+    private ProductStore productStore;
     private Map<Coin, Integer> coinMap;
     private int holdingMoney;
 
     public VendingMachine() {
-        repository = new ProductRepository();
+        productStore = new ProductStore();
         coinMap = new EnumMap<>(Coin.class);
         holdingMoney = 0;
     }
 
-    public void initProducts(ProductRepository repository) {
-        this.repository = repository;
+    public void initProducts(ProductStore repository) {
+        this.productStore = repository;
     }
 
     public void initMoney(int money) {
@@ -35,7 +35,7 @@ public class VendingMachine {
     }
 
     public boolean canPurchaseSomething() {
-        return repository.canBuySomething(holdingMoney);
+        return productStore.canBuySomething(holdingMoney);
     }
 
     public void initInputMoney(int inputMoney) {
@@ -50,9 +50,9 @@ public class VendingMachine {
     }
 
     public void purchaseProduct(String productName) {
-        Product product = repository.findProductByName(productName);
+        Product product = productStore.findProductByName(productName);
         validatePurchase(product);
-        repository.purchaseProduct(product);
+        productStore.purchaseProduct(product);
         holdingMoney -= product.getPrice();
     }
 
@@ -60,7 +60,7 @@ public class VendingMachine {
         if (product.getPrice() > holdingMoney) {
             throw new IllegalArgumentException("잔액이 부족합니다.");
         }
-        if (repository.getLeftProductCount(product) <= 0) {
+        if (productStore.getLeftProductCount(product) <= 0) {
             throw new IllegalArgumentException("재고가 부족합니다.");
         }
     }

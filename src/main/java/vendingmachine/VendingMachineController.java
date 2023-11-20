@@ -28,7 +28,7 @@ public class VendingMachineController {
     private static void initProducts(VendingMachine vendingMachine) {
         try {
             String readProduct = InputView.readProduct();
-            ProductRepository repository = new ProductRepository();
+            ProductStore repository = new ProductStore();
             repository.initProductsByString(readProduct);
             vendingMachine.initProducts(repository);
         } catch (IllegalArgumentException error) {

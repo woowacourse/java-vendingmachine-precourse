@@ -24,7 +24,7 @@ public class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         vendingMachine.initMoney(0);
 
-        ProductRepository productRepository = new ProductRepository();
+        ProductStore productRepository = new ProductStore();
         productRepository.initProductsByString("[콜라,1500,1]");
         vendingMachine.initProducts(productRepository);
 
@@ -43,7 +43,7 @@ public class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         vendingMachine.initMoney(0);
 
-        ProductRepository productRepository = new ProductRepository();
+        ProductStore productRepository = new ProductStore();
         productRepository.initProductsByString("[콜라,1500,1]");
         vendingMachine.initProducts(productRepository);
 

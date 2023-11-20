@@ -1,23 +1,20 @@
 package vendingmachine;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 
 public class ProductRepositoryTest {
-    ProductRepository repository;
+    ProductStore repository;
 
     @BeforeEach
     void setUp() {
-        repository = new ProductRepository();
+        repository = new ProductStore();
     }
 
     @ParameterizedTest
@@ -59,7 +56,7 @@ public class ProductRepositoryTest {
     @ParameterizedTest
     @MethodSource("canBuySomethingProvider")
     void canBuySomething(int leftMoney, boolean expected) {
-        ProductRepository repository = new ProductRepository();
+        ProductStore repository = new ProductStore();
         repository.initProductsByString("[콜라,1500,20];[사이다,1000,10]");
         Assertions.assertThat(repository.canBuySomething(leftMoney)).isEqualTo(expected);
     }

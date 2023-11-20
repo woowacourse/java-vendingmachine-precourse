@@ -6,34 +6,33 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class ProductRepository {
-    private Map<Product, Integer> repository;
+public class ProductStore {
+    private static final String PRODUCT_DELIMITER = ";";
+    private static final String PRODUCT_REGEX = "^\\[([^,]+),([0-9]+),([0-9]+)\\]$";
+    private static final Pattern PRODUCT_PATTERN = Pattern.compile(PRODUCT_REGEX);
+    private final Map<Product, Integer> repository;
 
-    public ProductRepository() {
+    public ProductStore() {
         repository = new HashMap<>();
     }
 
     public void initProductsByString(String input) {
-        String regex = "^\\[([^,]+),([0-9]+),([0-9]+)\\]$";
+        Arrays.stream(input.split(PRODUCT_DELIMITER))
+                .forEach(this::handleProductByString);
+    }
 
-        Pattern pattern = Pattern.compile(regex);
-
-
-        Arrays.stream(input.split(";"))
-                .forEach((value) -> {
-                    Matcher matcher = pattern.matcher(value);
-                    if (matcher.find()) {
-                        String item = matcher.group(1);
-                        int price = Integer.parseInt(matcher.group(2));
-                        int quantity = Integer.parseInt(matcher.group(3));
-
-                        Product product = new Product(item, price);
-                        validateQuantity(quantity);
-                        repository.put(product, quantity);
-                        return;
-                    }
-                    throw new IllegalArgumentException("잘못된 상품 입력입니다.");
-                });
+    private void handleProductByString(String value) {
+        Matcher matcher = PRODUCT_PATTERN.matcher(value);
+        if (matcher.find()) {
+            String name = matcher.group(1);
+            int price = Integer.parseInt(matcher.group(2));
+            int quantity = Integer.parseInt(matcher.group(3));
+            Product product = new Product(name, price);
+            validateQuantity(quantity);
+            repository.put(product, quantity);
+            return;
+        }
+        throw new IllegalArgumentException("잘못된 상품 입력입니다.");
     }
 
     private void validateQuantity(int quantity) {
