@@ -18,7 +18,8 @@ public class VendingMachineController {
 
         InputAmount inputAmount = RepeatInput.repeatWhenInvalid(this::inputAmount);
 
-        purchaseProcess(productsMap, inputAmount);
+        int remainder = RepeatInput.repeatWhenInvalid(() -> purchaseProcess(productsMap, inputAmount));
+
         // 입력값을 다시 받지 않는 오류 수정해야 함.
 
 
@@ -45,8 +46,13 @@ public class VendingMachineController {
         return new InputAmount(inputAmount);
     }
 
-    private void purchaseProcess(Products products, InputAmount inputAmount) {
-        OutputView.printPurchaseProduct(inputAmount);
-        String purchaseName = InputView.readPurchaseName(products);
+    private int purchaseProcess(Products products, InputAmount inputAmount) {
+        while(inputAmount.getMoney() >= products.getMininumProduct()) {
+            OutputView.printPurchaseProduct(inputAmount);
+            String purchaseName = InputView.readPurchaseName(products);
+            int purchasePrice = products.findInputAmount(purchaseName);
+            inputAmount.subtractMoney(purchasePrice);
+        }
+        return inputAmount.getMoney();
     }
 }

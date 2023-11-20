@@ -14,6 +14,15 @@ public class Products {
         return productMap;
     }
 
+    public int findInputAmount(String inputName) {
+        for (String name : productMap.keySet()) {
+            if (name.equals(inputName)) {
+                return productMap.get(name).getPrice();
+            }
+        }
+        return 0;
+    }
+
     public int getMininumProduct() {
         int minimumPrice = Integer.MAX_VALUE;
         for (Product product : productMap.values()) {

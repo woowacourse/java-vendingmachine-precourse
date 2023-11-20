@@ -1,5 +1,7 @@
 package utils;
 
+import vendingmachine.MachineAmount;
+
 import java.util.function.Supplier;
 
 public class RepeatInput {
