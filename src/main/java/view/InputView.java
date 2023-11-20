@@ -5,7 +5,7 @@ import utils.InputValidator;
 
 public class InputView {
 
-    public static String readVendingMachineMoney() {
+    public static String readAmountInput() {
         String amount = Console.readLine();
         InputValidator.validateBlank(amount);
         InputValidator.validateIsNumeric(amount);

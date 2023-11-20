@@ -2,9 +2,7 @@ package controller;
 
 import utils.Parser;
 import utils.RepeatInput;
-import vendingmachine.MachineAmount;
-import vendingmachine.CoinCounter;
-import vendingmachine.Product;
+import vendingmachine.*;
 import view.InputView;
 import view.OutputView;
 
@@ -13,23 +11,33 @@ import java.util.Map;
 public class VendingMachineController {
 
     public void run() {
-        MachineAmount amount = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
-        OutputView.printVendingMachineCoinAmount(new CoinCounter(), amount);
+        MachineAmount vendingMoney = RepeatInput.repeatWhenInvalid(this::vendingMachineMoney);
+        OutputView.printVendingMachineCoinAmount(new CoinCounter(), vendingMoney);
 
-        Map<String, Product> productMap = RepeatInput.repeatWhenInvalid(this::productInformation);
+        Products productsMap = RepeatInput.repeatWhenInvalid(this::productInformation);
+
+        InputAmount inputAmount = RepeatInput.repeatWhenInvalid(this::inputAmount);
+
     }
 
     private MachineAmount vendingMachineMoney() {
         OutputView.printVendingMachineMoney();
-        String amount = InputView.readVendingMachineMoney();
-        int money = Parser.convertToInt(amount);
-        return new MachineAmount(money);
+        String amount = InputView.readAmountInput();
+        int vendingMoney = Parser.convertToInt(amount);
+        return new MachineAmount(vendingMoney);
     }
 
-    private Map<String, Product> productInformation() {
+    private Products productInformation() {
         OutputView.printOrderDetails();
         String input = InputView.readOrderDetails();
         Map<String, Product> productMap = Parser.convertToProductMap(input);
-        return productMap;
+        return new Products(productMap);
+    }
+
+    private InputAmount inputAmount() {
+        OutputView.printInputAmount();
+        String amount = InputView.readAmountInput();
+        int inputAmount = Parser.convertToInt(amount);
+        return new InputAmount(inputAmount);
     }
 }

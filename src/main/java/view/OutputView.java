@@ -28,4 +28,9 @@ public class OutputView {
         System.out.println();
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
     }
+
+    public static void printInputAmount() {
+        System.out.println();
+        System.out.println("투입 금액을 입력해 주세요.");
+    }
 }
