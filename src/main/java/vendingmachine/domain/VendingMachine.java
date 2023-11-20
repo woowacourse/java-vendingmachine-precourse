@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.ErrorMessage.ERROR_VENDING_MACHINE_INPUT_MONEY_ERROR;
+import static vendingmachine.ErrorMessage.ERROR_VENDING_MACHINE_INPUT_MONEY;
 
 import camp.nextstep.edu.missionutils.Randoms;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class VendingMachine {
         if (moneyRegexPattern.matcher(moneyInput).matches()) {
             return Integer.parseInt(moneyInput);
         }
-        throw new IllegalArgumentException(ERROR_VENDING_MACHINE_INPUT_MONEY_ERROR.getMessage());
+        throw new IllegalArgumentException(ERROR_VENDING_MACHINE_INPUT_MONEY.getMessage());
     }
 
     private void generateCoins() {
