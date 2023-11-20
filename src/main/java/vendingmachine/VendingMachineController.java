@@ -1,14 +1,15 @@
 package vendingmachine;
 
+import java.util.function.Consumer;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
 public class VendingMachineController {
     public static void run() {
         VendingMachine vendingMachine = new VendingMachine();
+
         initVendingMachineMoney(vendingMachine);
         initProducts(vendingMachine);
-        OutputView.printHoldingCoins(vendingMachine.getCoinMap());
 
         initInputMoney(vendingMachine);
         proceedPurchase(vendingMachine);
@@ -18,6 +19,7 @@ public class VendingMachineController {
         try {
             Integer money = InputView.readHoldingMoney();
             vendingMachine.initMoney(money);
+            OutputView.printHoldingCoins(vendingMachine.getCoinMap());
         } catch (IllegalArgumentException error) {
             OutputView.printError(error);
             initVendingMachineMoney(vendingMachine);
