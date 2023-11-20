@@ -1,6 +1,7 @@
 package controller;
 
 import utils.Parser;
+import vendingmachine.Amount;
 import view.InputView;
 import view.OutputView;
 
@@ -10,9 +11,9 @@ public class VendingMachineController {
         vendingMachineMoney();
     }
 
-    private int vendingMachineMoney() {
+    private Amount vendingMachineMoney() {
         OutputView.printVendingMachineMoney();
         String amount = InputView.readVendingMachineMoney();
-        return Parser.convertToInt(amount);
+        return new Amount(amount);
     }
 }
