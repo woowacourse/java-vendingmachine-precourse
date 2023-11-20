@@ -31,6 +31,19 @@ public class InputProcessingService {
                 errorMessagePrinter.accept(e.getMessage());
             }
         }
+    }
 
+    public void inputCostumerMoney(VendingMachine vendingMachine, Supplier<String> inputSupplier,
+                                   Runnable messagePrinter, Consumer<String> errorMessagePrinter) {
+        while (true) {
+            try {
+                messagePrinter.run();
+                String input = inputSupplier.get();
+                vendingMachine.inputCustomerMoney(input);
+                return;
+            } catch (IllegalArgumentException e) {
+                errorMessagePrinter.accept(e.getMessage());
+            }
+        }
     }
 }

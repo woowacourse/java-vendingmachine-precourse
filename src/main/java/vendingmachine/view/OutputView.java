@@ -1,7 +1,8 @@
 package vendingmachine.view;
 
 import static vendingmachine.Message.REQUEST_GOODS_INPUT_MESSAGE;
-import static vendingmachine.Message.REQUEST_VENDING_MACHINE_HOLD_MONEY_MESSAGE;
+import static vendingmachine.Message.REQUEST_MONEY_INPUT_MESSAGE;
+import static vendingmachine.Message.REQUEST_VENDING_MACHINE_HOLD_MONEY_INPUT_MESSAGE;
 import static vendingmachine.Message.RESULT_VENDING_MACHINE_HOLD_COINS_MESSAGE;
 import static vendingmachine.domain.Coin.COIN_10;
 import static vendingmachine.domain.Coin.COIN_100;
@@ -12,7 +13,7 @@ import vendingmachine.domain.VendingMachineDto;
 
 public class OutputView {
     public static void printVendingMachineCoinsInputRequest() {
-        System.out.print(REQUEST_VENDING_MACHINE_HOLD_MONEY_MESSAGE.getMessage());
+        System.out.print(REQUEST_VENDING_MACHINE_HOLD_MONEY_INPUT_MESSAGE.getMessage());
     }
 
     public static void printVendingMachineCoins(VendingMachineDto dto) {
@@ -25,6 +26,10 @@ public class OutputView {
 
     public static void printGoodsInputRequest() {
         System.out.print(REQUEST_GOODS_INPUT_MESSAGE.getMessage());
+    }
+
+    public static void printCustomerMoneyInputRequest() {
+        System.out.print(REQUEST_MONEY_INPUT_MESSAGE.getMessage());
     }
 
     public static void printErrorMessage(String message) {

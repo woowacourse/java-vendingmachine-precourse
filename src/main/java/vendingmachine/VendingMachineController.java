@@ -10,10 +10,12 @@ import vendingmachine.view.OutputView;
 public class VendingMachineController {
     void run() {
         InputProcessingService inputProcessingService = new InputProcessingService();
-        VendingMachineDto vendingMachineDto = inputProcessingService.createVendingMachine(InputView::getUserInput,
-                OutputView::printVendingMachineCoinsInputRequest, OutputView::printErrorMessage).toDto();
-        OutputView.printVendingMachineCoins(vendingMachineDto);
+        VendingMachine vendingMachine = inputProcessingService.createVendingMachine(InputView::getUserInput,
+                OutputView::printVendingMachineCoinsInputRequest, OutputView::printErrorMessage);
+        OutputView.printVendingMachineCoins(vendingMachine.toDto());
         Goods goods = inputProcessingService.createGoods(InputView::getUserInput,
                 OutputView::printGoodsInputRequest, OutputView::printErrorMessage);
+        inputProcessingService.inputCostumerMoney(vendingMachine, InputView::getUserInput,
+                OutputView::printCustomerMoneyInputRequest, OutputView::printErrorMessage);
     }
 }
