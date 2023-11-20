@@ -21,10 +21,6 @@ public class Convertor {
     private static final String PRODUCT_MATCH_REGEX = "\\"+PRODUCT_PREFIX+"^*.*"+"\\"+PRODUCT_SUFFIX+"$";
     private static final Pattern PRODUCT_PATTERN = compile(PRODUCT_MATCH_REGEX);
 
-    private static int covertToInt(String input){
-        return Integer.parseInt(input);
-    }
-
     public static Products convertToProducts(String input){
         List<String> productSplited = Arrays.stream(input.split(PRODUCTS_DELIMITTER))
                 .filter(Convertor::matchProduct)
@@ -52,4 +48,13 @@ public class Convertor {
 
         return new AbstractMap.SimpleEntry<>(Product.of(name, price), count);
     }
+
+    public static int convertToMoney(final String inputString) {
+        return covertToInt(inputString);
+    }
+
+    private static int covertToInt(String input){
+        return Integer.parseInt(input);
+    }
+
 }

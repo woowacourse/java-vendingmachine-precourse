@@ -4,8 +4,15 @@ import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.validators.InputValidator;
 
 public class InputView implements Input{
+
+    private static final InputView inputView = new InputView();
+
+    public static Input getInstance() {
+        return new ProxyInputView(inputView);
+    }
+
     @Override
-    public String readMoney() {
+    public String readHoldMoney() {
         return readInt();
     }
 
