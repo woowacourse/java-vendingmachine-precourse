@@ -9,7 +9,7 @@ public class ProxyInputView implements Input {
     }
 
     @Override
-    public String readMoney() {
+    public String readHoldMoney() {
         return null;
     }
 

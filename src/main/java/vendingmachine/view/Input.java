@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
 public interface Input {
-    String readMoney();
+    String readHoldMoney();
     String readProducts();
     String readInputAmount();
     String readWanted();
