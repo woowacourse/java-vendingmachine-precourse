@@ -18,7 +18,8 @@ public class Coins {
         Map<Coin, Integer> changes = new EnumMap<>(Coin.class);
         for(Coin coin: Coin.values()){
             if(coin.getAmount() > changeMoney){
-                break;
+                changes.remove(coin);
+                continue;
             }
             changes.put(coin, 0);
             int count = coins.get(coin);
