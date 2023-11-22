@@ -18,15 +18,15 @@ public class VendingMachine {
         coins.put(Coin.COIN_10, 0);
     }
 
-    public void addCoins(int amount) {
-        while (amount > 0) {
+    public void addCoins(VendingMachineAmount vendingMachineAmount) {
+        while (vendingMachineAmount.isGreaterThanZero()) {
             int generatedNumber = RandomNumberGenerator.generate(Coin.getCoinAmounts());
-            if (generatedNumber > amount) {
+            if (vendingMachineAmount.isLessThan(generatedNumber)) {
                 continue;
             }
             Coin coin = Coin.from(generatedNumber);
             coins.put(coin, coins.get(coin) + 1);
-            amount -= generatedNumber;
+            vendingMachineAmount.decrease(generatedNumber);
         }
     }
 

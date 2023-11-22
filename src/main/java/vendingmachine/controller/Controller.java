@@ -28,7 +28,7 @@ public class Controller {
     }
 
     private void addCoinsToVendingMachine(VendingMachineAmount vendingMachineAmount, VendingMachine vendingMachine) {
-        vendingMachine.addCoins(vendingMachineAmount.getVendingMachineAmount());
+        vendingMachine.addCoins(vendingMachineAmount);
         OutputView.printCoinsOfVendingMachine(vendingMachine.getCoins());
     }
 
