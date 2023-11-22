@@ -26,4 +26,14 @@ public class InputView {
         String input = Console.readLine();
         return Arrays.stream(input.split(";")).collect(Collectors.toList());
     }
+
+    public static int readInputAmount() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        String input = Console.readLine();
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("[ERROR] 숫자만 입력 가능합니다.");
+        }
+    }
 }
