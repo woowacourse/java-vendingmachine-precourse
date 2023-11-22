@@ -1,9 +1,13 @@
 package vendingmachine.domain;
 
+import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_INFO;
 import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_REQUEST;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import vendingmachine.converter.Parser;
+import vendingmachine.dto.ProductInfo;
 
 /**
  * 일급컬렉션
@@ -11,11 +15,12 @@ import java.util.Map.Entry;
 public class Stock {
     private final Map<String, Product> stockInfo;
 
-    private Stock(Map<String, Product> stockInfo) {
-        this.stockInfo = stockInfo;
+    private Stock(List<ProductInfo> productInfo) {
+        validate(productInfo);
+        this.stockInfo = Parser.parseToStockMap(productInfo);
     }
 
-    public static Stock create(Map<String, Product> stockInfo) {
+    public static Stock create(List<ProductInfo> stockInfo) {
         return new Stock(stockInfo);
     }
 
@@ -38,7 +43,7 @@ public class Stock {
         Product product = getInStockProduct(productName);
         //TODO: 이름 바꾸기
         Product replace = stockInfo.replace(productName,
-                Product.create(productName, product.getPrice(), product.getRemainStock()));
+                Product.create(product.getPrice(), product.getRemainStock()));
 
         return replace.getPrice();
     }
@@ -54,5 +59,26 @@ public class Stock {
 
     private boolean isInStock(String productName, Entry<String, Product> product) {
         return product.getKey().equals(productName) && product.getValue().hasStock();
+    }
+
+    private void validate(List<ProductInfo> productInfo) {
+        boolean isNotValid = productInfo.stream()
+                .noneMatch(this::isValidStock);
+        if (isNotValid) {
+            throw new IllegalArgumentException(INVALID_PRODUCT_INFO.getMessage());
+        }
+    }
+
+    private boolean isValidStock(ProductInfo productInfo) {
+        return isPriceValid(productInfo.price()) && isQuantityValid(productInfo.quantity());
+    }
+
+    private boolean isQuantityValid(int quantity) {
+        return quantity > 0;
+    }
+
+    private boolean isPriceValid(int price) {
+        //TODO: 상수로 빼내기
+        return (price >= 100) && (price % 10 == 0);
     }
 }

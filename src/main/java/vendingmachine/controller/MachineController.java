@@ -1,9 +1,8 @@
 package vendingmachine.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-import vendingmachine.domain.Product;
-import vendingmachine.domain.Stock;
+import java.util.Arrays;
+import java.util.List;
+import vendingmachine.dto.ProductInfo;
 import vendingmachine.service.StockManager;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -22,16 +21,17 @@ public class MachineController {
 
     public void run() {
         //TODO: temp code
-        Map<String, Product> stockInfo = new HashMap<>();
-        stockInfo.put("콜라", Product.create("콜라", 1000, 5));
-        stockInfo.put("펩시", Product.create("펩시", 900, 5));
-        stockInfo.put("탐스제로", Product.create("탐스제로", 1200, 5));
-        stockManager.initInventory(10000, Stock.create(stockInfo));
+        List<ProductInfo> infos = Arrays.asList(
+                new ProductInfo("콜라", 1000, 5),
+                new ProductInfo("펩시", 900, 5),
+                new ProductInfo("탐스제로", 1200, 5)
+        );
+        stockManager.initStock(10000, infos);
 
         setVendingMachine();
-        setInventory();
+        List<ProductInfo> productInfos = setInventory();
         int inputAmount = getInputAmount();
-        purchaseProduct(inputAmount);
+        purchaseProduct(inputAmount, productInfos);
         returnChange();
     }
 
@@ -44,15 +44,12 @@ public class MachineController {
 
     }
 
-    public void setInventory() {
+    public List<ProductInfo> setInventory() {
         //TODO: 상품명, 가격, 수량 입력 메시지 출력
         outputView.printAskStockInfo();
 
         //TODO: 사용자로부터 정보 입력
-        inputView.getStockName();
-
-        //TODO: 입력한 값을 통해 재고를 관리하는 객체 생성
-
+        return inputView.getStockInfo();
     }
 
     public int getInputAmount() {
@@ -63,8 +60,8 @@ public class MachineController {
         return inputView.getInputAmount();
     }
 
-    public void purchaseProduct(int inputAmount) {
-//        stockManager.initInventory(inputAmount, );
+    public void purchaseProduct(int inputAmount, List<ProductInfo> productInfos) {
+        stockManager.initStock(inputAmount, productInfos);
 
         //TODO: StockManager를 통해 상품 구매 조건 충족 여부 확인
         while (stockManager.canPurchase()) {

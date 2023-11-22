@@ -1,15 +1,17 @@
 package vendingmachine.service;
 
+import java.util.List;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.domain.Stock;
+import vendingmachine.dto.ProductInfo;
 
 public class StockManager {
     private InputAmount inputAmount;
     private Stock stock; // 상품 정보 저장
 
-    public void initInventory(int inputAmount, Stock stock) {
+    public void initStock(int inputAmount, List<ProductInfo> productInfos) {
         this.inputAmount = InputAmount.create(inputAmount);
-        this.stock = stock;
+        this.stock = Stock.create(productInfos);
     }
 
     public boolean canPurchase() {

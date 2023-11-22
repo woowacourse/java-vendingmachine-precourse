@@ -3,18 +3,16 @@ package vendingmachine.domain;
 import java.util.Comparator;
 
 public class Product {
-    private final String name; //TODO: 필요 있을까? 중복된다
     private final int price;
     private final int quantity;
 
-    private Product(String name, int price, int quantity) {
-        this.name = name;
+    private Product(int price, int quantity) {
         this.price = price;
         this.quantity = quantity;
     }
 
-    public static Product create(String name, int price, int quantity) {
-        return new Product(name, price, quantity);
+    public static Product create(int price, int quantity) {
+        return new Product(price, quantity);
     }
 
     public static Comparator<Product> priceComparator() {

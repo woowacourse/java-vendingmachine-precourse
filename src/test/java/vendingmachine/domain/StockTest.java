@@ -4,10 +4,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_REQUEST;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
+import java.util.List;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import vendingmachine.dto.ProductInfo;
 
 class StockTest {
 
@@ -64,10 +65,11 @@ class StockTest {
 
 
     private Stock getInventory(int colaAmount, int pepsiAmount, int tamsAmount) {
-        Map<String, Product> stockInfo = new HashMap<>();
-        stockInfo.put("콜라", Product.create("콜라", 1000, colaAmount));
-        stockInfo.put("펩시", Product.create("펩시", 900, pepsiAmount));
-        stockInfo.put("탐스제로", Product.create("탐스제로", 1200, tamsAmount));
-        return Stock.create(stockInfo);
+        List<ProductInfo> infos = Arrays.asList(
+                new ProductInfo("콜라", 1000, colaAmount),
+                new ProductInfo("펩시", 900, pepsiAmount),
+                new ProductInfo("탐스제로", 1200, tamsAmount)
+        );
+        return Stock.create(infos);
     }
 }
