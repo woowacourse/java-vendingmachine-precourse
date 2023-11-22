@@ -1,7 +1,7 @@
 package vendingmachine.domain;
 
 import static vendingmachine.constants.Coin.COIN_10;
-import static vendingmachine.error.ErrorCode.INVALID_INPUT_AMOUNT;
+import static vendingmachine.exception.ErrorCode.INVALID_INPUT_MONEY;
 
 //TODO: 이름 변경 -> 투입 금액 생으로 쓰니까 어색함. 잔고의 느낌이 나는 정도로 변경하기
 public class InputAmount {
@@ -17,8 +17,8 @@ public class InputAmount {
     }
 
     private void validate(int input) {
-        if (input % COIN_10.getAmount() != 0) {
-            throw new IllegalArgumentException(INVALID_INPUT_AMOUNT.getMessage());
+        if (input % COIN_10.getValue() != 0) {
+            throw new IllegalArgumentException(INVALID_INPUT_MONEY.getMessage());
         }
     }
 

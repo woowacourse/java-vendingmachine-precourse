@@ -1,8 +1,8 @@
 package vendingmachine.validator;
 
 import static java.util.regex.Pattern.compile;
-import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_FORMAT;
-import static vendingmachine.error.ErrorCode.NOT_INTEGER;
+import static vendingmachine.exception.ErrorCode.INVALID_PRODUCT_FORMAT;
+import static vendingmachine.exception.ErrorCode.NOT_INTEGER;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

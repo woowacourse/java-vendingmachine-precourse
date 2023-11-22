@@ -1,13 +1,13 @@
 package vendingmachine.domain;
 
-import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_INFO;
-import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_REQUEST;
+import static vendingmachine.exception.ErrorCode.INVALID_PRODUCT_INFO;
+import static vendingmachine.exception.ErrorCode.INVALID_PRODUCT_REQUEST;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import vendingmachine.converter.Parser;
-import vendingmachine.dto.ProductInfo;
+import vendingmachine.dto.ProductDTO;
 
 /**
  * 일급컬렉션
@@ -15,12 +15,12 @@ import vendingmachine.dto.ProductInfo;
 public class Stock {
     private final Map<String, Product> stockInfo;
 
-    private Stock(List<ProductInfo> productInfo) {
-        validate(productInfo);
-        this.stockInfo = Parser.parseToStockMap(productInfo);
+    private Stock(List<ProductDTO> productDTO) {
+        validate(productDTO);
+        this.stockInfo = Parser.parseToStockMap(productDTO);
     }
 
-    public static Stock create(List<ProductInfo> stockInfo) {
+    public static Stock create(List<ProductDTO> stockInfo) {
         return new Stock(stockInfo);
     }
 
@@ -61,16 +61,16 @@ public class Stock {
         return product.getKey().equals(productName) && product.getValue().hasStock();
     }
 
-    private void validate(List<ProductInfo> productInfo) {
-        boolean isNotValid = productInfo.stream()
+    private void validate(List<ProductDTO> productDTO) {
+        boolean isNotValid = productDTO.stream()
                 .noneMatch(this::isValidStock);
         if (isNotValid) {
             throw new IllegalArgumentException(INVALID_PRODUCT_INFO.getMessage());
         }
     }
 
-    private boolean isValidStock(ProductInfo productInfo) {
-        return isPriceValid(productInfo.price()) && isQuantityValid(productInfo.quantity());
+    private boolean isValidStock(ProductDTO productDTO) {
+        return isPriceValid(productDTO.price()) && isQuantityValid(productDTO.quantity());
     }
 
     private boolean isQuantityValid(int quantity) {
