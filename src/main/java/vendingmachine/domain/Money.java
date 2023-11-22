@@ -7,4 +7,12 @@ public class Money {
     public Money(int amount) {
         this.amount = amount;
     }
+
+    public void reduceAmount(int itemPrice) {
+        amount -= itemPrice;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
 }

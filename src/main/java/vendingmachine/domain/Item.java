@@ -8,7 +8,8 @@ public class Item {
 
     private final String name;
     private final int price;
-    private final int quantity;
+
+    private int quantity;
 
     public Item(String name, int price, int quantity) {
         validate(price);
@@ -21,5 +22,25 @@ public class Item {
         if (price < MIN_PRICE || price % UNIT_PRICE != 0) {
             throw new IllegalArgumentException(String.format(PRICE_EXCEPTION, MIN_PRICE, UNIT_PRICE));
         }
+    }
+
+    public boolean isSameName(String name) {
+        return this.name.equals(name);
+    }
+
+    public void reduceQuantity() {
+        quantity--;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }
