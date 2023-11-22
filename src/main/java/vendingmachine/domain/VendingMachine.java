@@ -26,7 +26,7 @@ public class VendingMachine {
                 continue;
             }
             Coin coin = Coin.from(generatedNumber);
-            coins.put(coin, coins.getOrDefault(coin, 0) + 1);
+            coins.put(coin, coins.get(coin) + 1);
             amount -= generatedNumber;
         }
     }

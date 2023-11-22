@@ -2,15 +2,17 @@ package vendingmachine.view;
 
 import java.util.Map;
 
+import vendingmachine.domain.Coin;
+
 public class OutputView {
 
     private OutputView() {
     }
 
-    public static void printCoinsOfVendingMachine(Map<String, Integer> coins) {
+    public static void printCoinsOfVendingMachine(Map<Coin, Integer> coins) {
         System.out.println("자판기가 보유한 동전");
-        for (String coin : coins.keySet()) {
-            System.out.println(coin + " - " + coins.get(coin) + "개");
+        for (Coin coin : coins.keySet()) {
+            System.out.println(coin.getAmount() + "원 - " + coins.get(coin) + "개");
         }
     }
 
