@@ -1,8 +1,12 @@
 package vendingmachine.controller;
 
+import vendingmachine.view.Input;
+
 public class VendingMachineController {
 
+    private final Input input = new Input();
+
     public void run() {
-        //TODO: 기능 구현
+        int money = input.readAmount();
     }
 }
