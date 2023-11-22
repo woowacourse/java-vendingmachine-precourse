@@ -13,4 +13,8 @@ public class OutputView {
             System.out.println(coin + " - " + coins.get(coin) + "개");
         }
     }
+
+    public static void printRemainingInputAmount(int amount) {
+        System.out.println("투입 금액: " + amount + "원");
+    }
 }
