@@ -47,7 +47,7 @@ public class Controller {
     private void repeatPurchaseProduct(VendingMachine vendingMachine, InputAmount inputAmount) {
         while (canPurchase(vendingMachine, inputAmount)) {
             OutputView.printRemainingInputAmount(inputAmount.getAmount());
-            String productNameToPurchase = InputView.readProductNameToPurchase();
+            String productNameToPurchase = repeatReadForInvalid(InputView::readProductNameToPurchase);
             vendingMachine.purchase(productNameToPurchase, inputAmount);
         }
     }
