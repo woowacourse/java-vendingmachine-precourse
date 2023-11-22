@@ -2,9 +2,11 @@ package vendingmachine.controller;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import vendingmachine.domain.Coin;
 import vendingmachine.domain.InputAmount;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
@@ -34,5 +36,8 @@ public class Controller {
             String productNameToPurchase = InputView.readProductNameToPurchase();
             vendingMachine.purchase(productNameToPurchase, inputAmount);
         }
+
+        Map<Coin, Integer> changes = vendingMachine.changes(inputAmount);
+        OutputView.printChanges(changes);
     }
 }

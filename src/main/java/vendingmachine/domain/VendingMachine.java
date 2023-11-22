@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 import vendingmachine.RandomNumberGenerator;
 
@@ -53,6 +52,22 @@ public class VendingMachine {
                 .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다."));
         productForPurchase.decreaseQuantity();
         inputAmount.decrease(productForPurchase.getPrice());
+    }
+
+    public Map<Coin, Integer> changes(InputAmount inputAmount) {
+        Map<Coin, Integer> changes = new EnumMap<>(Coin.class);
+        for (Coin coin : Coin.values()) {
+            int count = coins.get(coin);
+            for (int i = 0; i < count; i++) {
+                if (inputAmount.getAmount() <= 0) {
+                    break;
+                }
+                inputAmount.decrease(coin.getAmount());
+                coins.replace(coin, coins.get(coin) - 1);
+                changes.put(coin, changes.getOrDefault(coin, 0) + 1);
+            }
+        }
+        return changes;
     }
 
     public Map<Coin, Integer> getCoins() {
