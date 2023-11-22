@@ -1,9 +1,9 @@
 package vendingmachine.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import vendingmachine.dto.ChangeDTO;
 import vendingmachine.dto.ProductDTO;
+import vendingmachine.exception.RetryHandler;
 import vendingmachine.service.CoinManager;
 import vendingmachine.service.StockManager;
 import vendingmachine.view.InputView;
@@ -14,24 +14,20 @@ public class MachineController {
     private final StockManager stockManager;
     private final InputView inputView;
     private final OutputView outputView;
+    private final RetryHandler handler;
 
 
     public MachineController(CoinManager coinManager, StockManager stockManager, InputView inputView,
-                             OutputView outputView) {
+                             OutputView outputView,
+                             RetryHandler handler) {
         this.coinManager = coinManager;
         this.stockManager = stockManager;
         this.inputView = inputView;
         this.outputView = outputView;
+        this.handler = handler;
     }
 
     public void run() {
-        //TODO: temp code
-        List<ProductDTO> infos = Arrays.asList(
-                new ProductDTO("콜라", 1500, 20),
-                new ProductDTO("사이다", 1000, 10)
-        );
-        stockManager.initStock(3000, infos);
-
         setVendingMachine();
         List<ProductDTO> productDTOS = setInventory();
         int inputAmount = getInputAmount();
@@ -44,7 +40,7 @@ public class MachineController {
         outputView.printAskMachineMoney();
 
         //TODO: 사용자로부터 보유 금액 입력
-        int machineMoney = inputView.getMachineMoney();
+        int machineMoney = handler.execute(inputView::getMachineMoney, IllegalArgumentException.class);
 
         //TODO: 입력받은 값을 통해 자판기가 보유한 동전 설정
         coinManager.initCoin(machineMoney);
@@ -58,7 +54,7 @@ public class MachineController {
         outputView.printAskStockInfo();
 
         //TODO: 사용자로부터 정보 입력
-        return inputView.getStockInfo();
+        return handler.execute(inputView::getStockInfo, IllegalArgumentException.class);
     }
 
     public int getInputAmount() {
@@ -66,7 +62,7 @@ public class MachineController {
         outputView.printAskInputAmount();
 
         //TODO: 투입 금액 입력
-        return inputView.getInputAmount();
+        return handler.execute(inputView::getInputAmount, IllegalArgumentException.class);
     }
 
     public void purchaseProduct(int inputAmount, List<ProductDTO> productDTOS) {
@@ -79,7 +75,7 @@ public class MachineController {
             outputView.printAskProductName();
 
             //TODO: 구매할 상품명 입력
-            String productName = inputView.getProductName();
+            String productName = handler.execute(inputView::getProductName, IllegalArgumentException.class);
 
             //TODO: StockManager를 통해 제품 구매
             stockManager.buyProduct(productName);
