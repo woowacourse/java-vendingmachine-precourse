@@ -2,6 +2,7 @@ package vendingmachine.model;
 
 import vendingmachine.model.coin.Coins;
 import vendingmachine.model.drink.Drinks;
+import vendingmachine.model.user.UserMoney;
 
 import java.util.List;
 
@@ -16,5 +17,9 @@ public class VendingMachine {
 
     public List<Integer> showCoinBox() {
         return moneyBox.coinsCount();
+    }
+
+    public boolean hasMoneyMoreThenMinimumPrice(UserMoney userMoney) {
+        return userMoney.getBalance() >= drinks.cheapestDrink();
     }
 }

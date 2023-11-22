@@ -10,4 +10,8 @@ public class Drink {
         this.price = price;
         this.count = count;
     }
+
+    public Integer getPrice() {
+        return price;
+    }
 }

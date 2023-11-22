@@ -6,4 +6,8 @@ public class UserMoney {
     public UserMoney(int money) {
         this.money = money;
     }
+
+    public int getBalance() {
+        return money;
+    }
 }
