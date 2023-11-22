@@ -3,9 +3,6 @@ package vendingmachine.domain;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import vendingmachine.domain.Product;
-import vendingmachine.domain.VendingMachine;
-
 class VendingMachineTest {
 
     @Test

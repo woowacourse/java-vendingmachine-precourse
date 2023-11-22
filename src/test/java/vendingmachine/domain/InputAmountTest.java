@@ -1,10 +1,7 @@
 package vendingmachine.domain;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
-
 import vendingmachine.constants.Constants;
 
 class InputAmountTest {
