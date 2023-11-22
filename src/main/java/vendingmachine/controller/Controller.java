@@ -44,14 +44,16 @@ public class Controller {
     }
 
     private void repeatPurchaseProduct(VendingMachine vendingMachine, InputAmount inputAmount) {
-        while (true) {
+        while (canPurchase(vendingMachine, inputAmount)) {
             OutputView.printRemainingInputAmount(inputAmount.getAmount());
-            if (vendingMachine.isAllPriceGreaterThan(inputAmount.getAmount()) || vendingMachine.isAllProductSoldOut()) {
-                break;
-            }
             String productNameToPurchase = InputView.readProductNameToPurchase();
             vendingMachine.purchase(productNameToPurchase, inputAmount);
         }
+    }
+
+    private boolean canPurchase(VendingMachine vendingMachine, InputAmount inputAmount) {
+        return !vendingMachine.isAllPriceGreaterThan(inputAmount.getAmount())
+                && !vendingMachine.isAllProductSoldOut();
     }
 
     private Product createProduct(String[] split) {
