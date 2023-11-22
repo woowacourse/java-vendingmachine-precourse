@@ -26,4 +26,11 @@ public class Output {
     public void printError(String message) {
         System.out.println(ERROR_PREFIX + message);
     }
+
+    public void showChanges(Map<Coin, Integer> changes) {
+        System.out.println("잔돈");
+        changes.forEach((key, value) ->
+                System.out.println(String.format(COIN_FORMAT, key.getAmount(), value))
+        );
+    }
 }

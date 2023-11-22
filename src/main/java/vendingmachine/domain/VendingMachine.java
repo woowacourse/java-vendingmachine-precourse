@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -46,5 +47,11 @@ public class VendingMachine {
                 .filter(item -> item.isSameName(itemName))
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(NOT_FOUND_ITEM_EXCEPTION));
+    }
+
+    public Map<Coin, Integer> returnChanges() {
+        Map<Coin, Integer> change = new EnumMap<>(Coin.class);
+        //TODO: 잔돈 계산 로직 구현
+        return change;
     }
 }

@@ -28,6 +28,8 @@ public class VendingMachineController {
             String itemName = input.readPurchaseItemName();
             vendingMachine.buyItem(itemName);
         }
+        output.showMoney(money);
+        output.showChanges(vendingMachine.returnChanges());
     }
 
     private Map<Coin, Integer> makeCoins() {
