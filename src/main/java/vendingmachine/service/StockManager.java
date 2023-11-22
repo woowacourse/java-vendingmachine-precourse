@@ -23,4 +23,8 @@ public class StockManager {
         int productPrice = inventory.decreaseStock(productName);
         inputAmount -= productPrice;
     }
+
+    public int getCurrentAmount() {
+        return inputAmount;
+    }
 }
