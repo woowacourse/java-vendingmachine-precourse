@@ -1,6 +1,11 @@
 package vendingmachine.domain;
 
+import vendingmachine.constants.Constants;
+
 public class VendingMachineAmount {
+
+    private static final int MIN_AMOUNT = 10;
+    private static final int AMOUNT_UNIT = 10;
 
     private int amount;
 
@@ -10,11 +15,13 @@ public class VendingMachineAmount {
     }
 
     private void validate(int amount) {
-        if (amount < 10) {
-            throw new IllegalArgumentException("[ERROR] 자판기가 보유 금액은 10원 이상이어야 합니다.");
+        if (amount < MIN_AMOUNT) {
+            throw new IllegalArgumentException(
+                    String.format("%s 자판기가 보유 금액은 %d원 이상이어야 합니다.", Constants.ERROR_PREFIX, MIN_AMOUNT));
         }
-        if (amount % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] 자판기 보유 금액은 10원 단위만 가능합니다.");
+        if (amount % AMOUNT_UNIT != 0) {
+            throw new IllegalArgumentException(
+                    String.format("%s 자판기가 보유 금액은 %d원 단위만 가능합니다.", Constants.ERROR_PREFIX, MIN_AMOUNT));
         }
     }
 
@@ -28,9 +35,5 @@ public class VendingMachineAmount {
 
     public void decrease(int amount) {
         this.amount -= amount;
-    }
-
-    public int getAmount() {
-        return amount;
     }
 }
