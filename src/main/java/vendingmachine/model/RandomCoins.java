@@ -7,7 +7,7 @@ import java.util.HashMap;
 public class RandomCoins {
     public static HashMap<Coin, Integer> makeRandomCoins(int totalMoney){
         HashMap<Coin, Integer> moneyBox = new HashMap<>();
-        while(totalMoney >= 0){
+        while(totalMoney > 0){
             int coin = Randoms.pickNumberInList(Coin.coinTypes());
             Coin coinType = Coin.getCoinType(coin);
             if (totalMoney >= coin) {

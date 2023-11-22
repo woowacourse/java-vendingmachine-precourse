@@ -4,17 +4,15 @@ import vendingmachine.model.VendingMachine;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
-import javax.xml.bind.ValidationEvent;
-
-import static vendingmachine.view.InputView.readTotalMoney;
 import static vendingmachine.view.OutputView.askMachineTotalMoney;
+import static vendingmachine.view.OutputView.printVendingMachineCoins;
 
 public class MainController {
-    VendingMachineController vendingMachineController = new VendingMachineController();
+//    VendingMachineController vendingMachineController = new VendingMachineController();
 
     public void run(){
         VendingMachine vendingMachine = askTotalMoney();
-
+        showCoins(vendingMachine);
     }
 
     private VendingMachine askTotalMoney(){
@@ -26,6 +24,10 @@ public class MainController {
                 OutputView.errorMessage(exception.getMessage());
             }
         }
+    }
+
+    private void showCoins(VendingMachine vendingMachine) {
+        printVendingMachineCoins(vendingMachine.showCoinBox());
     }
 
 
