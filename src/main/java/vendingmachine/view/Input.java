@@ -26,6 +26,11 @@ public class Input {
         return Integer.parseInt(read());
     }
 
+    public String readPurchaseItemName() {
+        System.out.println("구매할 상품명을 입력해 주세요.");
+        return read();
+    }
+
     private String read() {
         return Console.readLine();
     }

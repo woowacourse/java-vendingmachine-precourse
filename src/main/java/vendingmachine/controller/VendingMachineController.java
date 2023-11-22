@@ -25,6 +25,7 @@ public class VendingMachineController {
 
         Money money = new Money(input.readMoney());
         output.showMoney(money);
+        input.readPurchaseItemName();
     }
 
     private List<Item> makeItems(List<String[]> itemInfos) {
