@@ -21,6 +21,8 @@ public class VendingMachineController {
         output.showCoins(coins);
         List<Item> items = makeItems(input.readItemInfos());
         VendingMachine vendingMachine = new VendingMachine(coins, items);
+
+        input.readMoney();
     }
 
     private List<Item> makeItems(List<String[]> itemInfos) {

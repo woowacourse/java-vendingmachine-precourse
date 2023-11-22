@@ -21,6 +21,11 @@ public class Input {
                 .toList();
     }
 
+    public int readMoney() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        return Integer.parseInt(read());
+    }
+
     private String read() {
         return Console.readLine();
     }
