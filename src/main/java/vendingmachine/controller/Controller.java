@@ -33,7 +33,7 @@ public class Controller {
     }
 
     private void addProductsToVendingMachine(VendingMachine vendingMachine) {
-        List<String> inputProducts = InputView.readProducts();
+        List<String> inputProducts = repeatReadForInvalid(InputView::readProducts);
         for (String inputProduct : inputProducts) {
             String[] split = inputProduct.split(",");
             vendingMachine.addProduct(repeatReadForInvalid(() -> this.createProduct(split)));
