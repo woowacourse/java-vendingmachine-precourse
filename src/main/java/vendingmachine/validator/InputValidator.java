@@ -1,6 +1,7 @@
 package vendingmachine.validator;
 
 import static java.util.regex.Pattern.compile;
+import static vendingmachine.exception.ErrorCode.INVALID_INPUT_MONEY;
 import static vendingmachine.exception.ErrorCode.INVALID_PRODUCT_FORMAT;
 import static vendingmachine.exception.ErrorCode.NOT_INTEGER;
 
@@ -24,6 +25,12 @@ public class InputValidator {
         Matcher matcher = FORMAT.matcher(input);
         if (!matcher.matches()) {
             throw new IllegalArgumentException(INVALID_PRODUCT_FORMAT.getMessage());
+        }
+    }
+
+    public static void isPositive(int input) {
+        if (input <= 0) {
+            throw new IllegalArgumentException(INVALID_INPUT_MONEY.getMessage());
         }
     }
 }

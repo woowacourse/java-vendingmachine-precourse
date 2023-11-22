@@ -1,7 +1,7 @@
 package vendingmachine.service;
 
-import static vendingmachine.exception.ErrorCode.INVALID_INPUT_MONEY;
-
+import camp.nextstep.edu.missionutils.Randoms;
+import java.util.Arrays;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
@@ -17,17 +17,23 @@ public class CoinManager {
     }
 
     public void initCoin(int machineMoney) {
-        validate(machineMoney);
-        //TODO: coinStatus에 값을 할당하는 로직 필요
-        //TODO: temp code이므로 삭제  필요
-        coinStatus.put(Coin.COIN_100, 4);
-        coinStatus.put(Coin.COIN_50, 1);
+        Arrays.stream(Coin.values())
+                .forEach(val -> coinStatus.put(val, 0));
+        while (machineMoney != 0) {
+            machineMoney = generateCoins(machineMoney);
+        }
     }
 
-    private void validate(int machineMoney) {
-        if (machineMoney % 10 != 0) {
-            throw new IllegalArgumentException(INVALID_INPUT_MONEY.getMessage());
-        }
+    private int generateCoins(int machineMoney) {
+        List<Integer> available = Arrays.stream(Coin.values())
+                .map(Coin::getValue)
+                .filter(value -> machineMoney > value)
+                .toList();
+
+        int picked = Randoms.pickNumberInList(available);
+        int amount = machineMoney / picked;
+        coinStatus.replace(Coin.getCoinByValue(picked), amount);
+        return machineMoney - (picked * amount);
     }
 
     public ChangeDTO getOwnCoinStatus() {

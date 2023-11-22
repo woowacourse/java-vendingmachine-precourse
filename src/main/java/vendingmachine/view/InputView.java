@@ -10,8 +10,9 @@ public class InputView {
 
     public int getMachineMoney() {
         String input = readLine();
-        InputValidator.isInteger(input);
-        return Parser.parseToInt(input);
+        int converted = InputValidator.isInteger(input);
+        InputValidator.isPositive(converted);
+        return converted;
     }
 
     public String getProductName() {
