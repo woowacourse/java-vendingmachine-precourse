@@ -1,5 +1,9 @@
 package vendingmachine.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public enum Coin {
     COIN_500(500),
     COIN_100(100),
@@ -12,5 +16,14 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
+    public static List<Integer> coinTypes(){
+        List<Integer> types = new ArrayList<>();
+        Arrays.stream(Coin.values())
+                .forEach(coin -> types.add(coin.amount));
+        return types;
+    }
+
+    public static Coin getCoinType(int amount){
+        return Coin.valueOf("COIN_" + amount);
+    }
 }
