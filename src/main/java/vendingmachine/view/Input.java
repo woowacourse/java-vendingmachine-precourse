@@ -16,7 +16,7 @@ public class Input {
         System.out.println("\n상품명과 가격, 수량을 입력해 주세요.");
         return Arrays.stream(read().split(";"))
                 .map(itemInfo ->
-                        itemInfo.replace("[]", "")
+                        itemInfo.replaceAll("[\\[\\]]", "")
                                 .split(","))
                 .toList();
     }
