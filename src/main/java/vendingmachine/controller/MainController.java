@@ -4,6 +4,7 @@ import vendingmachine.domain.*;
 import vendingmachine.dto.ExchangeCoinsDto;
 import vendingmachine.dto.ItemDto;
 import vendingmachine.dto.OrderDetailDto;
+import vendingmachine.dto.VendingMachineCoinsDto;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -23,6 +24,7 @@ public class MainController {
 
     public void run() {
         VendingMachineCoins coins = createVendingMachineAmount();
+        outputView.printVendingMachineAmount(VendingMachineCoinsDto.from(coins));
         Items items = createItems();
         InsertedAmount insertedAmount = createInsertedAmount();
         outputView.printInputAmount(insertedAmount.provideAmount());
@@ -37,14 +39,9 @@ public class MainController {
     }
 
     private void generateExchangeCoins(VendingMachineCoins coins, InsertedAmount insertedAmount) {
-        //TODO 잔돈 반환
-        // - 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환. 반환되지 않은 금액은 자판기에 남는다.
-        // - 잔돈을 돌려줄 때 현재 보유한 최소 개수의 동전으로 잔돈을 돌려준다.
-        // - 지폐를 잔돈으로 반환하는 경우는 없다.
         long amount = insertedAmount.provideAmount();
         EnumMap<Coin, Long> exchangeCoins = coins.generateExchangeCoins(amount);
         ExchangeCoinsDto exchangeCoinsDto = ExchangeCoinsDto.from(exchangeCoins);
-//        ExchangeCoinsDto 생성
         outputView.printExchangeCoins(exchangeCoinsDto);
     }
 

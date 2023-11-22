@@ -34,4 +34,8 @@ public class VendingMachineCoins {
         }
         return exchangeCoins;
     }
+
+    public EnumMap<Coin, Long> provideCoins() {
+        return coins;
+    }
 }
