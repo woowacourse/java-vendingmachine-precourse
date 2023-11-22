@@ -21,6 +21,10 @@ public class Product {
         return Comparator.comparingInt(Product::getPrice);
     }
 
+    public int getRemainStock() {
+        return this.quantity - 1;
+    }
+
     public boolean hasStock() {
         return quantity > 0;
     }
