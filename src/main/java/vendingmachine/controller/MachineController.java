@@ -2,8 +2,8 @@ package vendingmachine.controller;
 
 import java.util.HashMap;
 import java.util.Map;
-import vendingmachine.domain.Inventory;
 import vendingmachine.domain.Product;
+import vendingmachine.domain.Stock;
 import vendingmachine.service.StockManager;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
@@ -26,7 +26,7 @@ public class MachineController {
         stockInfo.put("콜라", Product.create("콜라", 1000, 5));
         stockInfo.put("펩시", Product.create("펩시", 900, 5));
         stockInfo.put("탐스제로", Product.create("탐스제로", 1200, 5));
-        stockManager.initInventory(10000, Inventory.create(stockInfo));
+        stockManager.initInventory(10000, Stock.create(stockInfo));
 
         setVendingMachine();
         setInventory();
@@ -46,8 +46,10 @@ public class MachineController {
 
     public void setInventory() {
         //TODO: 상품명, 가격, 수량 입력 메시지 출력
+        outputView.printAskStockInfo();
 
         //TODO: 사용자로부터 정보 입력
+        inputView.getStockName();
 
         //TODO: 입력한 값을 통해 재고를 관리하는 객체 생성
 

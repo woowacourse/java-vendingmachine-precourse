@@ -8,15 +8,15 @@ import java.util.Map.Entry;
 /**
  * 일급컬렉션
  */
-public class Inventory {
+public class Stock {
     private final Map<String, Product> stockInfo;
 
-    private Inventory(Map<String, Product> stockInfo) {
+    private Stock(Map<String, Product> stockInfo) {
         this.stockInfo = stockInfo;
     }
 
-    public static Inventory create(Map<String, Product> stockInfo) {
-        return new Inventory(stockInfo);
+    public static Stock create(Map<String, Product> stockInfo) {
+        return new Stock(stockInfo);
     }
 
     public int getMinGoodsPrice() {

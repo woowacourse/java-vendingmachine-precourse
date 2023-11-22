@@ -1,27 +1,27 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.InputAmount;
-import vendingmachine.domain.Inventory;
+import vendingmachine.domain.Stock;
 
 public class StockManager {
     private InputAmount inputAmount;
-    private Inventory inventory; // 상품 정보 저장
+    private Stock stock; // 상품 정보 저장
 
-    public void initInventory(int inputAmount, Inventory inventory) {
+    public void initInventory(int inputAmount, Stock stock) {
         this.inputAmount = InputAmount.create(inputAmount);
-        this.inventory = inventory;
+        this.stock = stock;
     }
 
     public boolean canPurchase() {
-        int minGoodsPrice = inventory.getMinGoodsPrice();
-        if ((minGoodsPrice > inputAmount.getCurrentMoney()) || (inventory.isRunOutOfStock())) {
+        int minGoodsPrice = stock.getMinGoodsPrice();
+        if ((minGoodsPrice > inputAmount.getCurrentMoney()) || (stock.isRunOutOfStock())) {
             return false;
         }
         return true;
     }
 
     public void buyProduct(String productName) {
-        int productPrice = inventory.decreaseStock(productName);
+        int productPrice = stock.decreaseStock(productName);
         inputAmount.pay(productPrice);
     }
 
