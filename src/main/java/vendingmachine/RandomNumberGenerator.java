@@ -9,7 +9,7 @@ public class RandomNumberGenerator {
     private RandomNumberGenerator() {
     }
 
-    public int generate(List<Integer> numbers) {
+    public static int generate(List<Integer> numbers) {
         return Randoms.pickNumberInList(numbers);
     }
 }
