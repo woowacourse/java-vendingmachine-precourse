@@ -24,20 +24,23 @@ public class MainController {
         //TODO amount 로 동전 무작위 생성
 
         Items items = createItems();
-        long inputAmount = createInputAmount();
-        outputView.printInputAmount(inputAmount);
+        InsertedAmount insertedAmount = createInsertedAmount();
+        outputView.printInputAmount(insertedAmount.provideAmount());
         boolean canBuyMore = true;
         while (canBuyMore) {
-            OrderDetailDto orderDetailDto = createOrderDetailDto(inputAmount, items);
-            long updatedInputAmount = orderDetailDto.getUpdatedInputAmount();
-            outputView.printInputAmount(updatedInputAmount);
-            canBuyMore = canBuyMore();
+            OrderDetailDto orderDetailDto = createOrderDetailDto(insertedAmount.provideAmount(), items);
+            insertedAmount.updateAmount(orderDetailDto.getUpdatedInputAmount());
+            outputView.printInputAmount(insertedAmount.provideAmount());
+            canBuyMore = canBuyMore(items, insertedAmount);
         }
         //TODO 잔돈 반환
+        // - 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환. 반환되지 않은 금액은 자판기에 남는다.
+        // - 잔돈을 돌려줄 때 현재 보유한 최소 개수의 동전으로 잔돈을 돌려준다.
+        // - 지폐를 잔돈으로 반환하는 경우는 없다.
     }
 
-    private boolean canBuyMore() {
-        //TODO 잔돈 반환 조건 체크
+    private boolean canBuyMore(Items items, InsertedAmount amount) {
+        return amount.isEqualOrLargerThan(items.findPurchasableMinimumPrice()) && !items.hasNoQuantity();
     }
 
     private VendingMachineAmount createVendingMachineAmount() {
@@ -56,8 +59,11 @@ public class MainController {
         });
     }
 
-    private long createInputAmount() {
-        return readUserInput(inputView::readInputAmount);
+    private InsertedAmount createInsertedAmount() {
+        readUserInput(() -> {
+            long amount = inputView.readInputAmount();
+            return InsertedAmount.from(amount);
+        });
     }
 
     private OrderDetailDto createOrderDetailDto(long inputAmount, Items items) {

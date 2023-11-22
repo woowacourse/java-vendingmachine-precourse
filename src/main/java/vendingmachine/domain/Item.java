@@ -37,7 +37,7 @@ public class Item {
         return hasQuantity() && priceAmount >= price;
     }
 
-    private boolean hasQuantity() {
+    public boolean hasQuantity() {
         return quantity > 0;
     }
 
@@ -49,7 +49,7 @@ public class Item {
         return price;
     }
 
-    public long provideQuantity() {
-        return quantity;
+    public boolean hasNoQuantity() {
+        return quantity == 0;
     }
 }

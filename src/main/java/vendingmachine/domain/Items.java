@@ -3,10 +3,11 @@ package vendingmachine.domain;
 import vendingmachine.utils.ItemsValidator;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.OptionalLong;
 import java.util.stream.Collectors;
 
-import static vendingmachine.exception.ErrorMessage.CANNOT_BUY_ORDER_ITEM;
-import static vendingmachine.exception.ErrorMessage.INVALID_ORDER_ITEM_NAME;
+import static vendingmachine.exception.ErrorMessage.*;
 
 public class Items {
     private final List<Item> items;
@@ -39,4 +40,18 @@ public class Items {
                 .findFirst()
                 .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER_ITEM_NAME.getMessage()));
     }
+
+    public long findPurchasableMinimumPrice() {
+        return items.stream()
+                .filter(Item::hasQuantity)
+                .mapToLong(Item::providePrice)
+                .min()
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_ORDER_ITEM.getMessage()));
+    }
+
+    public boolean hasNoQuantity() {
+        return items.stream()
+                .allMatch(Item::hasNoQuantity);
+    }
+
 }
