@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.CoinMaker;
 import vendingmachine.domain.Item;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.Input;
 import vendingmachine.view.Output;
@@ -22,7 +23,8 @@ public class VendingMachineController {
         List<Item> items = makeItems(input.readItemInfos());
         VendingMachine vendingMachine = new VendingMachine(coins, items);
 
-        input.readMoney();
+        Money money = new Money(input.readMoney());
+        output.showMoney(money);
     }
 
     private List<Item> makeItems(List<String[]> itemInfos) {
