@@ -2,9 +2,12 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.CoinMaker;
+import vendingmachine.domain.Item;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.view.Input;
 import vendingmachine.view.Output;
 
+import java.util.List;
 import java.util.Map;
 
 public class VendingMachineController {
@@ -16,6 +19,13 @@ public class VendingMachineController {
     public void run() {
         Map<Coin, Integer> coins = coinMaker.make(input.readAmount());
         output.showCoins(coins);
-        input.readItemInfos();
+        List<Item> items = makeItems(input.readItemInfos());
+        VendingMachine vendingMachine = new VendingMachine(coins, items);
+    }
+
+    private List<Item> makeItems(List<String[]> itemInfos) {
+        return itemInfos.stream()
+                .map(Item::from)
+                .toList();
     }
 }

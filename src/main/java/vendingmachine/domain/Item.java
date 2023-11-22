@@ -18,6 +18,13 @@ public class Item {
         this.quantity = quantity;
     }
 
+    public static Item from(String[] itemInfo) {
+        String name = itemInfo[0];
+        int price = Integer.parseInt(itemInfo[1]);
+        int quantity = Integer.parseInt(itemInfo[2]);
+        return new Item(name, price, quantity);
+    }
+
     private void validate(int price) {
         if (price < MIN_PRICE || price % UNIT_PRICE != 0) {
             throw new IllegalArgumentException(String.format(PRICE_EXCEPTION, MIN_PRICE, UNIT_PRICE));
