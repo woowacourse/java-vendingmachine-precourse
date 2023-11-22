@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-
 import vendingmachine.RandomNumberGenerator;
 
 public class VendingMachine {
@@ -58,16 +57,20 @@ public class VendingMachine {
         Map<Coin, Integer> changes = new EnumMap<>(Coin.class);
         for (Coin coin : Coin.values()) {
             int count = coins.get(coin);
-            for (int i = 0; i < count; i++) {
-                if (inputAmount.getAmount() <= 0) {
-                    break;
-                }
-                inputAmount.decrease(coin.getAmount());
-                coins.replace(coin, coins.get(coin) - 1);
-                changes.put(coin, changes.getOrDefault(coin, 0) + 1);
-            }
+            repeatChangesForCount(count, inputAmount, changes, coin);
         }
         return changes;
+    }
+
+    private void repeatChangesForCount(int count, InputAmount inputAmount, Map<Coin, Integer> changes, Coin coin) {
+        for (int i = 0; i < count; i++) {
+            if (inputAmount.getAmount() <= 0) {
+                return;
+            }
+            inputAmount.decrease(coin.getAmount());
+            coins.replace(coin, coins.get(coin) - 1);
+            changes.put(coin, changes.getOrDefault(coin, 0) + 1);
+        }
     }
 
     public Map<Coin, Integer> getCoins() {
