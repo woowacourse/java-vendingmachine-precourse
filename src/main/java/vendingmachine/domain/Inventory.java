@@ -1,6 +1,6 @@
 package vendingmachine.domain;
 
-import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_NAME;
+import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_REQUEST;
 
 import java.util.Map;
 import java.util.Map.Entry;
@@ -48,7 +48,7 @@ public class Inventory {
                 .stream()
                 .filter(product -> isInStock(productName, product))
                 .findAny()
-                .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_NAME.getMessage()));
+                .orElseThrow(() -> new IllegalArgumentException(INVALID_PRODUCT_REQUEST.getMessage()));
         return stockInfo.get(productName);
     }
 

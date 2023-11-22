@@ -2,7 +2,7 @@ package vendingmachine.domain;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_NAME;
+import static vendingmachine.error.ErrorCode.INVALID_PRODUCT_REQUEST;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -59,7 +59,7 @@ class InventoryTest {
         //when&&then
         assertThatThrownBy(() -> inventory.decreaseStock("콜라"))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(INVALID_PRODUCT_NAME.getMessage());
+                .hasMessageContaining(INVALID_PRODUCT_REQUEST.getMessage());
     }
 
 

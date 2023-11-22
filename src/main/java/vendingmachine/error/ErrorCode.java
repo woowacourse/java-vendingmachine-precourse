@@ -2,7 +2,7 @@ package vendingmachine.error;
 
 public enum ErrorCode {
     PREFIX("[ERROR] "),
-    INVALID_PRODUCT_NAME("존재하지 않는 상품명입니다.");
+    INVALID_PRODUCT_REQUEST("상품 정보가 유효하지 않습니다.");
 
     private final String message;
 
