@@ -15,4 +15,9 @@ public class VendingMachine {
         return products.stream()
                 .allMatch(product -> product.isPriceGreaterThan(amount));
     }
+
+    public boolean isAllProductSoldOut() {
+        return products.stream()
+                .allMatch(Product::isSoldOut);
+    }
 }

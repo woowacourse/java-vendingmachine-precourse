@@ -19,4 +19,8 @@ public class Product {
     public boolean isPriceGreaterThan(int amount) {
         return price > amount;
     }
+
+    public boolean isSoldOut() {
+        return quantity == 0;
+    }
 }
