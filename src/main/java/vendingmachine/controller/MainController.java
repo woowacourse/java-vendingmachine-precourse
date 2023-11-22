@@ -21,9 +21,10 @@ public class MainController {
     }
 
     public void run() {
-        VendingMachineAmount amount = createVendingMachineAmount();
+        VendingMachineAmount amount = createVendingMachineAmount();  //자판기 보유금액
         //TODO amount 로 동전 무작위 생성
-        Items items = createItems();
+        Items items = createItems();  //상품
+        long inputAmount = createInputAmount();  //투입금액
     }
 
     private VendingMachineAmount createVendingMachineAmount() {
@@ -40,6 +41,10 @@ public class MainController {
                     .collect(Collectors.toList());
             return Items.from(items);
         });
+    }
+
+    private long createInputAmount() {
+        return readUserInput(inputView::readInputAmount);
     }
 
     private <T> T readUserInput(Supplier<T> supplier) {

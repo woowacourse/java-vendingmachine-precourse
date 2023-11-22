@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.dto.ItemDto;
+import vendingmachine.utils.InputAmountValidator;
 import vendingmachine.utils.ItemValidator;
 import vendingmachine.utils.VendingMachineAmountValidator;
 
@@ -13,6 +14,7 @@ import static vendingmachine.exception.ErrorMessage.INVALID_ITEMS_FORMAT;
 public class InputView {
     private static final String ASK_VENDING_MACHINE_AMOUNT = "자판기가 보유하고 있는 금액을 입력해 주세요.";
     private static final String ASK_ITEMS = "상품명과 가격, 수량을 입력해 주세요.";
+    private static final String ASK_INPUT_AMOUNT = "투입 금액을 입력해 주세요.";
     private static final String ITEM_START_SYMBOL = "[";
     private static final String ITEM_END_SYMBOL = "]";
     private static final String ITEM_DELIMITER = ";";
@@ -29,10 +31,15 @@ public class InputView {
     }
 
     public List<ItemDto> readItems() {
+        printNewLine();
         System.out.println(ASK_ITEMS);
         String input = Console.readLine();
         List<String> pairs = ItemValidator.safeSplit(input, ITEM_DELIMITER);
         return toItemDto(pairs);
+    }
+
+    private void printNewLine() {
+        System.out.println();
     }
 
     private List<ItemDto> toItemDto(List<String> pairs) {
@@ -53,6 +60,13 @@ public class InputView {
         long quantity = ItemValidator.safeParsePositiveLong(pairs.get(ITEM_QUANTITY_INDEX));
 
         return ItemDto.of(name, price, quantity);
+    }
+
+    public long readInputAmount() {
+        printNewLine();
+        System.out.println(ASK_INPUT_AMOUNT);
+        String input = Console.readLine();
+        return InputAmountValidator.safeParseLong(input);
     }
 
 }
