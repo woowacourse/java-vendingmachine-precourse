@@ -22,7 +22,7 @@ public class Input {
     }
 
     public int readMoney() {
-        System.out.println("투입 금액을 입력해 주세요.");
+        System.out.println("\n투입 금액을 입력해 주세요.");
         return Integer.parseInt(read());
     }
 
