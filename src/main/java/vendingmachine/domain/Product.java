@@ -1,6 +1,11 @@
 package vendingmachine.domain;
 
+import vendingmachine.constants.Constants;
+
 public class Product {
+
+    private static final int MIN_PRICE = 100;
+    private static final int PRICE_UNIT = 10;
 
     private String name;
     private int price;
@@ -14,11 +19,13 @@ public class Product {
     }
 
     private void validatePrice(int price) {
-        if (price < 100) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격은 100원 이상이어야 합니다.");
+        if (price < MIN_PRICE) {
+            throw new IllegalArgumentException(
+                    String.format("%s 상품 가격은 %d원 이상이어야 합니다.", Constants.ERROR_PREFIX, MIN_PRICE));
         }
-        if (price % 10 != 0) {
-            throw new IllegalArgumentException("[ERROR] 상품 가격은 10원 단위만 가능합니다.");
+        if (price % PRICE_UNIT != 0) {
+            throw new IllegalArgumentException(
+                    String.format("%s 상품 가격은 %d원 단위만 가능합니다.", Constants.ERROR_PREFIX, PRICE_UNIT));
         }
     }
 
