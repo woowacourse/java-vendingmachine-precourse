@@ -23,6 +23,7 @@ public class InputView {
     private static final int ITEM_NAME_INDEX = 0;
     private static final int ITEM_PRICE_INDEX = 1;
     private static final int ITEM_QUANTITY_INDEX = 2;
+    private static final String ASK_ORDER_ITEM = "구매할 상품명을 입력해 주세요.";
 
     public long readVendingMachineAmount() {
         System.out.println(ASK_VENDING_MACHINE_AMOUNT);
@@ -66,7 +67,11 @@ public class InputView {
         printNewLine();
         System.out.println(ASK_INPUT_AMOUNT);
         String input = Console.readLine();
-        return InputAmountValidator.safeParseLong(input);
+        return InputAmountValidator.safeParsePositiveLong(input);
     }
 
+    public String readOrderItemName() {
+        System.out.println(ASK_ORDER_ITEM);
+        return Console.readLine();
+    }
 }

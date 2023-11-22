@@ -1,9 +1,8 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.Item;
-import vendingmachine.domain.Items;
-import vendingmachine.domain.VendingMachineAmount;
+import vendingmachine.domain.*;
 import vendingmachine.dto.ItemDto;
+import vendingmachine.dto.OrderDetailDto;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -21,10 +20,24 @@ public class MainController {
     }
 
     public void run() {
-        VendingMachineAmount amount = createVendingMachineAmount();  //자판기 보유금액
+        VendingMachineAmount amount = createVendingMachineAmount();
         //TODO amount 로 동전 무작위 생성
-        Items items = createItems();  //상품
-        long inputAmount = createInputAmount();  //투입금액
+
+        Items items = createItems();
+        long inputAmount = createInputAmount();
+        outputView.printInputAmount(inputAmount);
+        boolean canBuyMore = true;
+        while (canBuyMore) {
+            OrderDetailDto orderDetailDto = createOrderDetailDto(inputAmount, items);
+            long updatedInputAmount = orderDetailDto.getUpdatedInputAmount();
+            outputView.printInputAmount(updatedInputAmount);
+            canBuyMore = canBuyMore();
+        }
+        //TODO 잔돈 반환
+    }
+
+    private boolean canBuyMore() {
+        //TODO 잔돈 반환 조건 체크
     }
 
     private VendingMachineAmount createVendingMachineAmount() {
@@ -45,6 +58,15 @@ public class MainController {
 
     private long createInputAmount() {
         return readUserInput(inputView::readInputAmount);
+    }
+
+    private OrderDetailDto createOrderDetailDto(long inputAmount, Items items) {
+        return readUserInput(() -> {
+            String itemName = inputView.readOrderItemName();
+            Item orderItem = items.buyItem(itemName, inputAmount);
+            long updatedInputAmount = inputAmount - orderItem.providePrice();
+            return OrderDetailDto.of(itemName, updatedInputAmount);
+        });
     }
 
     private <T> T readUserInput(Supplier<T> supplier) {

@@ -2,10 +2,12 @@ package vendingmachine.domain;
 
 import vendingmachine.utils.ItemValidator;
 
+import static vendingmachine.exception.ErrorMessage.CANNOT_BUY_ORDER_ITEM;
+
 public class Item {
     private final String name;
     private final long price;
-    private final long quantity;
+    private long quantity;
 
     private Item(String name, long price, long quantity) {
         this.name = name;
@@ -19,8 +21,35 @@ public class Item {
         return new Item(name, price, quantity);
     }
 
+    public void buyItem(long priceAmount) {
+        if (canBuy(priceAmount)) {
+            updateQuantity();
+            return;
+        }
+        throw new IllegalArgumentException(CANNOT_BUY_ORDER_ITEM.getMessage());
+    }
+
+    private void updateQuantity() {
+        quantity--;
+    }
+
+    public boolean canBuy(long priceAmount) {
+        return hasQuantity() && priceAmount >= price;
+    }
+
+    private boolean hasQuantity() {
+        return quantity > 0;
+    }
 
     public String provideName() {
         return name;
+    }
+
+    public long providePrice() {
+        return price;
+    }
+
+    public long provideQuantity() {
+        return quantity;
     }
 }

@@ -1,13 +1,21 @@
 package vendingmachine.utils;
 
-import static vendingmachine.exception.ErrorMessage.NOT_NUMERIC_INPUT_AMOUNT;
+import static vendingmachine.exception.ErrorMessage.*;
 
 public class InputAmountValidator {
-    public static long safeParseLong(String input) {
+    public static long safeParsePositiveLong(String input) {
         try {
-            return Long.parseLong(input);
+            long value = Long.parseLong(input);
+            validatePositive(value);
+            return value;
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(NOT_NUMERIC_INPUT_AMOUNT.getMessage());
+            throw new IllegalArgumentException(INVALID_ITEMS_FORMAT.getMessage());
+        }
+    }
+
+    private static void validatePositive(long value) {
+        if (value <= 0) {
+            throw new IllegalArgumentException(INVALID_ITEM_DETAIL.getMessage());
         }
     }
 }
