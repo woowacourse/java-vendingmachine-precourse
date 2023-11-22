@@ -20,9 +20,7 @@ public class MainController {
     }
 
     public void run() {
-        VendingMachineAmount amount = createVendingMachineAmount();
-        //TODO amount 로 동전 무작위 생성
-
+        VendingMachineCoins coins = createVendingMachineAmount();
         Items items = createItems();
         InsertedAmount insertedAmount = createInsertedAmount();
         outputView.printInputAmount(insertedAmount.provideAmount());
@@ -37,16 +35,17 @@ public class MainController {
         // - 잔돈을 반환할 수 없는 경우 잔돈으로 반환할 수 있는 금액만 반환. 반환되지 않은 금액은 자판기에 남는다.
         // - 잔돈을 돌려줄 때 현재 보유한 최소 개수의 동전으로 잔돈을 돌려준다.
         // - 지폐를 잔돈으로 반환하는 경우는 없다.
+
     }
 
     private boolean canBuyMore(Items items, InsertedAmount amount) {
         return amount.isEqualOrLargerThan(items.findPurchasableMinimumPrice()) && !items.hasNoQuantity();
     }
 
-    private VendingMachineAmount createVendingMachineAmount() {
+    private VendingMachineCoins createVendingMachineAmount() {
         return readUserInput(() -> {
             long amount = inputView.readVendingMachineAmount();
-            return VendingMachineAmount.from(amount);
+            return VendingMachineCoins.from(amount);
         });
     }
 
