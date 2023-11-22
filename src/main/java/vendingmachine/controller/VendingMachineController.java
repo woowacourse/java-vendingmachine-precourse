@@ -18,11 +18,9 @@ public class VendingMachineController {
     private final CoinMaker coinMaker = new CoinMaker();
 
     public void run() {
-        Map<Coin, Integer> coins = coinMaker.make(input.readAmount());
-        output.showCoins(coins);
-        List<Item> items = makeItems(input.readItemInfos());
-        Money money = new Money(input.readMoney());
-
+        Map<Coin, Integer> coins = makeCoins();
+        List<Item> items = makeItems();
+        Money money = makeMoney();
         VendingMachine vendingMachine = new VendingMachine(coins, items, money);
 
         while (vendingMachine.canPurchase()) {
@@ -32,9 +30,38 @@ public class VendingMachineController {
         }
     }
 
+    private Map<Coin, Integer> makeCoins() {
+        try {
+            Map<Coin, Integer> coins = coinMaker.make(input.readAmount());
+            output.showCoins(coins);
+            return coins;
+        } catch (IllegalArgumentException e) {
+            output.printError(e.getMessage());
+            return makeCoins();
+        }
+    }
+
+    private List<Item> makeItems() {
+        try {
+            return makeItems(input.readItemInfos());
+        } catch (IllegalArgumentException e) {
+            output.printError(e.getMessage());
+            return makeItems();
+        }
+    }
+
     private List<Item> makeItems(List<String[]> itemInfos) {
         return itemInfos.stream()
                 .map(Item::from)
                 .toList();
+    }
+
+    private Money makeMoney() {
+        try {
+            return new Money(input.readMoney());
+        } catch (IllegalArgumentException e) {
+            output.printError(e.getMessage());
+            return makeMoney();
+        }
     }
 }
