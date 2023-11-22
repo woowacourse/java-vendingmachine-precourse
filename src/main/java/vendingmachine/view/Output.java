@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class Output {
 
+    private static final String ERROR_PREFIX = "[ERROR] ";
     private static final String COIN_FORMAT = "%d원 - %d개";
     private static final String MONEY_FORMAT = "투입 금액: %d원";
 
@@ -20,5 +21,9 @@ public class Output {
     public void showMoney(Money money) {
         System.out.println();
         System.out.println(String.format(MONEY_FORMAT, money.getAmount()));
+    }
+
+    public void printError(String message) {
+        System.out.println(ERROR_PREFIX + message);
     }
 }
