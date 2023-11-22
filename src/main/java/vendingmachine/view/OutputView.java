@@ -3,6 +3,7 @@ package vendingmachine.view;
 import java.util.List;
 
 import static vendingmachine.view.constants.ErrorMessage.ERROR_TAG;
+import static vendingmachine.view.constants.OutputMessage.ASK_DRINKS;
 import static vendingmachine.view.constants.OutputMessage.ASK_TOTAL_MONEY_OF_VENDING_MACHINE;
 import static vendingmachine.view.constants.OutputMessage.SHOW_VENDING_MACHINE_COINS;
 import static vendingmachine.view.constants.OutputMessage.SHOW_VENDING_MACHINE_HOLD_COIN_START_TAG;
@@ -20,6 +21,10 @@ public class OutputView {
                 coinCounts.get(2),
                 coinCounts.get(3)
         ));
+    }
+
+    public static void askDrinkFromUsers() {
+        print(ASK_DRINKS);
     }
 
     private static void print(String message){

@@ -1,14 +1,17 @@
 package vendingmachine.model;
 
-import java.util.List;
+import vendingmachine.model.coin.Coins;
+import vendingmachine.model.drink.Drinks;
 
-import static vendingmachine.model.RandomCoins.makeRandomCoins;
+import java.util.List;
 
 public class VendingMachine {
     private Coins moneyBox;
+    private Drinks drinks;
 
-    public VendingMachine(int totalMoney) {
-        moneyBox = new Coins(makeRandomCoins(totalMoney));
+    public VendingMachine(Coins moneyBox, Drinks drinks) {
+        this.moneyBox = moneyBox;
+        this.drinks = drinks;
     }
 
     public List<Integer> showCoinBox() {

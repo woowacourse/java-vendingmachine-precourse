@@ -2,7 +2,8 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 
-import static vendingmachine.view.validate.InputValidator.checkNumericInput;
+import static vendingmachine.view.validate.CoinValidator.checkNumericInput;
+import static vendingmachine.view.validate.DrinkValidator.checkDrinkInput;
 
 public class InputView {
     public static String readLine(){
@@ -13,5 +14,11 @@ public class InputView {
         String totalMoney = readLine();
         checkNumericInput(totalMoney);
         return Integer.parseInt(totalMoney);
+    }
+
+    public static String readDrinks() {
+        String drinks = readLine();
+        checkDrinkInput(drinks);
+        return drinks;
     }
 }
