@@ -10,10 +10,10 @@ public class InputView {
         return Console.readLine();
     }
 
-    public static int readTotalMoney(){
-        String totalMoney = readLine();
-        checkNumericInput(totalMoney);
-        return Integer.parseInt(totalMoney);
+    public static int readMoney(){
+        String money = readLine();
+        checkNumericInput(money);
+        return Integer.parseInt(money);
     }
 
     public static String readDrinks() {
