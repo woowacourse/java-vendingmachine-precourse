@@ -1,7 +1,6 @@
 package vendingmachine.view;
 
 import java.util.Map;
-
 import vendingmachine.domain.Coin;
 
 public class OutputView {

@@ -17,11 +17,13 @@ public class VendingMachineAmount {
     private void validate(int amount) {
         if (amount < MIN_AMOUNT) {
             throw new IllegalArgumentException(
-                    String.format("%s 자판기가 보유 금액은 %d원 이상이어야 합니다.", Constants.ERROR_PREFIX, MIN_AMOUNT));
+                    String.format("%s 자판기가 보유 금액은 %d원 이상이어야 합니다.",
+                            Constants.ERROR_PREFIX.getValue(), MIN_AMOUNT));
         }
         if (amount % AMOUNT_UNIT != 0) {
             throw new IllegalArgumentException(
-                    String.format("%s 자판기가 보유 금액은 %d원 단위만 가능합니다.", Constants.ERROR_PREFIX, MIN_AMOUNT));
+                    String.format("%s 자판기가 보유 금액은 %d원 단위만 가능합니다.",
+                            Constants.ERROR_PREFIX.getValue(), MIN_AMOUNT));
         }
     }
 

@@ -21,11 +21,13 @@ public class Product {
     private void validatePrice(int price) {
         if (price < MIN_PRICE) {
             throw new IllegalArgumentException(
-                    String.format("%s 상품 가격은 %d원 이상이어야 합니다.", Constants.ERROR_PREFIX, MIN_PRICE));
+                    String.format("%s 상품 가격은 %d원 이상이어야 합니다.",
+                            Constants.ERROR_PREFIX.getValue(), MIN_PRICE));
         }
         if (price % PRICE_UNIT != 0) {
             throw new IllegalArgumentException(
-                    String.format("%s 상품 가격은 %d원 단위만 가능합니다.", Constants.ERROR_PREFIX, PRICE_UNIT));
+                    String.format("%s 상품 가격은 %d원 단위만 가능합니다.",
+                            Constants.ERROR_PREFIX.getValue(), PRICE_UNIT));
         }
     }
 
