@@ -9,10 +9,14 @@ import vendingmachine.view.OutputView;
 import static vendingmachine.model.coin.RandomCoins.makeRandomCoins;
 import static vendingmachine.view.InputView.readDrinks;
 import static vendingmachine.view.InputView.readMoney;
+import static vendingmachine.view.InputView.readPurchase;
 import static vendingmachine.view.OutputView.askDrinkFromUsers;
 import static vendingmachine.view.OutputView.askMachineTotalMoney;
+import static vendingmachine.view.OutputView.askPurchaseDrinkType;
 import static vendingmachine.view.OutputView.askUserInputMoney;
 import static vendingmachine.view.OutputView.printVendingMachineCoins;
+import static vendingmachine.view.OutputView.println;
+import static vendingmachine.view.OutputView.showBalance;
 
 public class MainController {
 //    VendingMachineController vendingMachineController = new VendingMachineController();
@@ -24,6 +28,7 @@ public class MainController {
         VendingMachine vendingMachine = new VendingMachine(coins, drinks);
         UserMoney userMoney = askInputAmount();
 
+        makePurchase(vendingMachine, userMoney);
     }
 
     private Coins askTotalMoney(){
@@ -57,6 +62,27 @@ public class MainController {
             try {
                 askUserInputMoney();
                 return new UserMoney(readMoney());
+            } catch (IllegalArgumentException exception) {
+                OutputView.errorMessage(exception.getMessage());
+            }
+        }
+    }
+
+    private void makePurchase(VendingMachine vendingMachine, UserMoney userMoney) {
+        while (vendingMachine.hasMoneyMoreThenMinimumPrice(userMoney)) {
+            showBalance(userMoney.getBalance());
+            String purchaseDrinkType = askPurchase();
+            userMoney.purchaseDrink(vendingMachine.getPrice(purchaseDrinkType));
+            println();
+        }
+        showBalance(userMoney.getBalance());
+    }
+
+    private String askPurchase() {
+        while (true) {
+            try {
+                askPurchaseDrinkType();
+                return readPurchase();
             } catch (IllegalArgumentException exception) {
                 OutputView.errorMessage(exception.getMessage());
             }

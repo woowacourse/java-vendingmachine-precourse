@@ -10,4 +10,8 @@ public class UserMoney {
     public int getBalance() {
         return money;
     }
+
+    public void purchaseDrink(int price) {
+        money -= price;
+    }
 }

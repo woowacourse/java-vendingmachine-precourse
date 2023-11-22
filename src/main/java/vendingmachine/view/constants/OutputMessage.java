@@ -8,4 +8,8 @@ public class OutputMessage {
     public static final String ASK_DRINKS = "상품명과 가격, 수량을 입력해 주세요.";
 
     public static final String ASK_USER_INPUT_MONEY = "투입 금액을 입력해 주세요.";
+
+    public static final String SHOW_BALANCE = "투입 금액: %d원";
+
+    public static final String ASK_PURCHASE_DRINK_TYPE = "구매할 상품명을 입력해 주세요.";
 }

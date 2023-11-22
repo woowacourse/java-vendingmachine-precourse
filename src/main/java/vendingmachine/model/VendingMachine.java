@@ -22,4 +22,8 @@ public class VendingMachine {
     public boolean hasMoneyMoreThenMinimumPrice(UserMoney userMoney) {
         return userMoney.getBalance() >= drinks.cheapestDrink();
     }
+
+    public int getPrice(String purchaseDrinkType) {
+        return drinks.getPriceFindByName(purchaseDrinkType);
+    }
 }

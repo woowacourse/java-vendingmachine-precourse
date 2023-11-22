@@ -4,8 +4,10 @@ import java.util.List;
 
 import static vendingmachine.view.constants.ErrorMessage.ERROR_TAG;
 import static vendingmachine.view.constants.OutputMessage.ASK_DRINKS;
+import static vendingmachine.view.constants.OutputMessage.ASK_PURCHASE_DRINK_TYPE;
 import static vendingmachine.view.constants.OutputMessage.ASK_TOTAL_MONEY_OF_VENDING_MACHINE;
 import static vendingmachine.view.constants.OutputMessage.ASK_USER_INPUT_MONEY;
+import static vendingmachine.view.constants.OutputMessage.SHOW_BALANCE;
 import static vendingmachine.view.constants.OutputMessage.SHOW_VENDING_MACHINE_COINS;
 import static vendingmachine.view.constants.OutputMessage.SHOW_VENDING_MACHINE_HOLD_COIN_START_TAG;
 
@@ -32,8 +34,20 @@ public class OutputView {
         print(ASK_USER_INPUT_MONEY);
     }
 
+    public static void showBalance(int balance) {
+        print(String.format(SHOW_BALANCE, balance));
+    }
+
+    public static void askPurchaseDrinkType() {
+        print(ASK_PURCHASE_DRINK_TYPE);
+    }
+
     private static void print(String message){
         System.out.println(message);
+    }
+
+    public static void println() {
+        System.out.println(System.lineSeparator());
     }
 
     public static void errorMessage(String errorMessage) {

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 import static vendingmachine.model.constants.Delimiter.DRINK_DETAIL_DELIMITER_COMMA;
 import static vendingmachine.model.constants.Delimiter.DRINK_TYPE_DELIMITER_SEMICOLON;
@@ -33,5 +34,14 @@ public class Drinks {
         Drink cheapestDrink = drinks.stream()
                 .min(comparatorByAge).orElseThrow(NoSuchElementException::new);
         return cheapestDrink.getPrice();
+    }
+
+    public int getPriceFindByName(String purchaseDrinkType) {
+        for (Drink drink : drinks) {
+            if (Objects.equals(drink.getName(), purchaseDrinkType)) {
+                return drink.getPrice();
+            }
+        }
+        return 0;
     }
 }

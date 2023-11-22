@@ -14,4 +14,8 @@ public class Drink {
     public Integer getPrice() {
         return price;
     }
+
+    public String getName() {
+        return title;
+    }
 }
