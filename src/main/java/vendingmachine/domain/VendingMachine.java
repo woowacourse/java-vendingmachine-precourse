@@ -3,14 +3,14 @@ package vendingmachine.domain;
 import java.util.List;
 import java.util.Map;
 
-public class vendingMachine {
+public class VendingMachine {
 
     private static final String NOT_FOUND_ITEM_EXCEPTION = "해당 상품은 존재하지 않습니다.";
 
     private final Map<Coin, Integer> coins;
     private final List<Item> items;
 
-    public vendingMachine(Map<Coin, Integer> coins, List<Item> items) {
+    public VendingMachine(Map<Coin, Integer> coins, List<Item> items) {
         this.coins = coins;
         this.items = items;
     }
