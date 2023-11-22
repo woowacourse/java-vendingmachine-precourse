@@ -3,6 +3,7 @@ package vendingmachine.controller;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -39,5 +40,14 @@ public class Controller {
 
         Map<Coin, Integer> changes = vendingMachine.changes(inputAmount);
         OutputView.printChanges(changes);
+    }
+
+    private <T> T repeatReadForInvalid(Supplier<T> reader) {
+        try {
+            return reader.get();
+        } catch (IllegalArgumentException e) {
+            OutputView.printErrorMessage(e);
+            return repeatReadForInvalid(reader);
+        }
     }
 }

@@ -26,4 +26,8 @@ public class OutputView {
             System.out.println(coin.getAmount() + "원 - " + coins.get(coin) + "개");
         }
     }
+
+    public static void printErrorMessage(IllegalArgumentException e) {
+        System.out.println(e.getMessage());
+    }
 }
