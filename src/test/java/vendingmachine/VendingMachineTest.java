@@ -18,4 +18,16 @@ class VendingMachineTest {
         Assertions.assertThat(vendingMachine.isAllPriceGreaterThan(1000)).isTrue();
     }
 
+    @Test
+    void isAllProductSoldOut_True() {
+        // given
+        Product coke = new Product("콜라", 1500, 0);
+        Product sprite = new Product("사이다", 2000, 0);
+        VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.addProduct(coke);
+        vendingMachine.addProduct(sprite);
+
+        // when, then
+        Assertions.assertThat(vendingMachine.isAllProductSoldOut()).isTrue();
+    }
 }
