@@ -7,16 +7,21 @@ import java.util.Map;
 
 public class CoinMaker {
 
-    public Map<Coin, Integer> make(int amount) {
-        EnumMap<Coin, Integer> coins = new EnumMap<>(Coin.class);
+    private final Map<Coin, Integer> coins = new EnumMap<>(Coin.class);
 
+    public CoinMaker() {
+        for (Coin coin : Coin.values()) {
+            coins.put(coin, 0);
+        }
+    }
+
+    public Map<Coin, Integer> make(int amount) {
         while (amount > 0) {
             int randomAmount = getRandomAmount(amount);
             Coin coin = Coin.from(randomAmount);
             coins.put(coin, coins.getOrDefault(coin, 0) + 1);
             amount -= randomAmount;
         }
-
         return coins;
     }
 
