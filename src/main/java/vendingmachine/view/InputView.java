@@ -24,7 +24,9 @@ public class InputView {
     public static List<String> readProducts() {
         System.out.println("상품명과 가격, 수량을 입력해 주세요.");
         String input = Console.readLine();
-        return Arrays.stream(input.split(";")).collect(Collectors.toList());
+        return Arrays.stream(input.split(";"))
+                .map(product -> product.substring(1, product.length() - 1))
+                .collect(Collectors.toList());
     }
 
     public static int readInputAmount() {
