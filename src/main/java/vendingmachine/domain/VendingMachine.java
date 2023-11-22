@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import vendingmachine.RandomNumberGenerator;
 
@@ -43,6 +44,15 @@ public class VendingMachine {
     public boolean isAllProductSoldOut() {
         return products.stream()
                 .allMatch(Product::isSoldOut);
+    }
+
+    public void purchase(String productName, InputAmount inputAmount) {
+        Product productForPurchase = products.stream()
+                .filter(product -> product.isName(productName))
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("[ERROR] 존재하지 않는 상품입니다."));
+        productForPurchase.decreaseQuantity();
+        inputAmount.decrease(productForPurchase.getPrice());
     }
 
     public Map<Coin, Integer> getCoins() {

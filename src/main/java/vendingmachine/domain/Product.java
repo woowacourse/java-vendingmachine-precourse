@@ -23,4 +23,12 @@ public class Product {
     public boolean isSoldOut() {
         return quantity == 0;
     }
+
+    public boolean isName(String name) {
+        return this.name.equals(name);
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }
