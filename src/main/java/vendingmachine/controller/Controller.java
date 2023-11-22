@@ -1,11 +1,8 @@
 package vendingmachine.controller;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.InputAmount;
@@ -25,7 +22,7 @@ public class Controller {
         List<String> inputProducts = InputView.readProducts();
         for (String inputProduct : inputProducts) {
             String[] split = inputProduct.split(",");
-            vendingMachine.addProduct(new Product(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2])));
+            vendingMachine.addProduct(repeatReadForInvalid(() -> this.createProduct(split)));
         }
 
         InputAmount inputAmount = new InputAmount(InputView.readInputAmount());
@@ -40,6 +37,10 @@ public class Controller {
 
         Map<Coin, Integer> changes = vendingMachine.changes(inputAmount);
         OutputView.printChanges(changes);
+    }
+
+    private Product createProduct(String[] split) {
+        return new Product(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]));
     }
 
     private <T> T repeatReadForInvalid(Supplier<T> reader) {
