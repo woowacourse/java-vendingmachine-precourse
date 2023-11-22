@@ -16,5 +16,6 @@ public class VendingMachineController {
     public void run() {
         Map<Coin, Integer> coins = coinMaker.make(input.readAmount());
         output.showCoins(coins);
+        input.readItemInfos();
     }
 }
