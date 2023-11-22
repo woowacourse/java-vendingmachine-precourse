@@ -21,11 +21,15 @@ public class VendingMachineController {
         Map<Coin, Integer> coins = coinMaker.make(input.readAmount());
         output.showCoins(coins);
         List<Item> items = makeItems(input.readItemInfos());
-        VendingMachine vendingMachine = new VendingMachine(coins, items);
-
         Money money = new Money(input.readMoney());
-        output.showMoney(money);
-        input.readPurchaseItemName();
+
+        VendingMachine vendingMachine = new VendingMachine(coins, items, money);
+
+        while (vendingMachine.canPurchase()) {
+            output.showMoney(money);
+            String itemName = input.readPurchaseItemName();
+            vendingMachine.buyItem(itemName);
+        }
     }
 
     private List<Item> makeItems(List<String[]> itemInfos) {

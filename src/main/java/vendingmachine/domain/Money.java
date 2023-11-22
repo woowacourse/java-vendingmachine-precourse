@@ -12,6 +12,10 @@ public class Money {
         amount -= itemPrice;
     }
 
+    public boolean isBiggerOrEqual(int minPrice) {
+        return amount >= minPrice;
+    }
+
     public int getAmount() {
         return amount;
     }

@@ -9,13 +9,33 @@ public class VendingMachine {
 
     private final Map<Coin, Integer> coins;
     private final List<Item> items;
+    private final Money money;
 
-    public VendingMachine(Map<Coin, Integer> coins, List<Item> items) {
+    public VendingMachine(Map<Coin, Integer> coins, List<Item> items, Money money) {
         this.coins = coins;
         this.items = items;
+        this.money = money;
     }
 
-    public void buyItem(Money money, String itemName) {
+    public boolean canPurchase() {
+        return hasEnoughMoney() && !allItemSoldOut();
+    }
+
+    private boolean hasEnoughMoney() {
+        int minPrice = items.stream()
+                .mapToInt(Item::getPrice)
+                .min()
+                .getAsInt();
+        return money.isBiggerOrEqual(minPrice);
+    }
+
+    private boolean allItemSoldOut() {
+        return items.stream()
+                .map(Item::getQuantity)
+                .noneMatch(quantity -> quantity > 0);
+    }
+
+    public void buyItem(String itemName) {
         Item item = findItem(itemName);
         item.reduceQuantity();
         money.reduceAmount(item.getPrice());
