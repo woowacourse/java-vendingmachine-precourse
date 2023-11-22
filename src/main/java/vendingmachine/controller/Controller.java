@@ -8,6 +8,7 @@ import vendingmachine.domain.InputAmount;
 import vendingmachine.domain.Product;
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.domain.VendingMachineAmount;
+import vendingmachine.utils.Converter;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -57,7 +58,7 @@ public class Controller {
     }
 
     private Product createProduct(String[] split) {
-        return new Product(split[0], Integer.parseInt(split[1]), Integer.parseInt(split[2]));
+        return new Product(split[0], Converter.convertToInt(split[1]), Converter.convertToInt(split[2]));
     }
 
     private VendingMachineAmount createVendingMachineAmount() {
