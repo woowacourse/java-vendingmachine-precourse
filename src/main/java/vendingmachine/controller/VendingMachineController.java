@@ -10,6 +10,7 @@ import vendingmachine.view.Output;
 
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class VendingMachineController {
 
@@ -55,7 +56,7 @@ public class VendingMachineController {
     private List<Item> makeItems(List<String[]> itemInfos) {
         return itemInfos.stream()
                 .map(Item::from)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     private Money makeMoney() {

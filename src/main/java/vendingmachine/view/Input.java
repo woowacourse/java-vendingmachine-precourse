@@ -4,6 +4,7 @@ import camp.nextstep.edu.missionutils.Console;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Input {
 
@@ -18,7 +19,7 @@ public class Input {
                 .map(itemInfo ->
                         itemInfo.replaceAll("[\\[\\]]", "")
                                 .split(","))
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public int readMoney() {

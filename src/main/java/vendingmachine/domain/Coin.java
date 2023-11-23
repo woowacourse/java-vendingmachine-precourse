@@ -2,6 +2,7 @@ package vendingmachine.domain;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public enum Coin {
 
@@ -29,7 +30,7 @@ public enum Coin {
         return Arrays.stream(values())
                 .filter(coin -> coin.amount <= amount)
                 .map(coin -> coin.amount)
-                .toList();
+                .collect(Collectors.toList());
     }
 
     public int getAmount() {
