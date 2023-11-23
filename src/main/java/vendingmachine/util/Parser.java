@@ -20,7 +20,7 @@ public class Parser {
     }
 
     //== Business Logic ==//
-    public static int parseVMCoinInput(String coninInput) {
+    public static int parseMoneyInput(String coninInput) {
         INVALID_COIN_INPUT.validate(() -> hasWhitespace(coninInput));
         INVALID_INPUT.validate(() -> isInvalidCoinPattern(coninInput));
         return ExceptionHandler.tryOnParseIntException(() -> Integer.parseInt(coninInput));

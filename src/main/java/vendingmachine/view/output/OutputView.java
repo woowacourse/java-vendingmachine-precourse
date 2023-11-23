@@ -1,22 +1,16 @@
 package vendingmachine.view.output;
 
-import vendingmachine.view.constant.OutputMessage;
+import static vendingmachine.view.constant.PrintFormat.*;
 
-sealed class OutputWriter
-        permits ErrorOutputWriter, VendingMachineOutputWriter {
+import java.util.EnumMap;
+import vendingmachine.domain.constant.Coin;
 
-    OutputWriter() {
-    }
+public final class OutputView extends OutputWriter {
 
-    public static void println(Object object) {
-        System.out.println(object);
-    }
-
-    public static void printNewLine() {
-        System.out.println();
-    }
-
-    public static void printMessageResponse(OutputMessage responseMessage) {
-        println(responseMessage.getMessage());
+    public static void printCoinMap(EnumMap<Coin, Integer> coinMap) {
+        // 동전 보유 정보 출력
+        coinMap.forEach((coin, count) -> {
+            System.out.printf(RESPONSE_CHARGE_COIN.getFormat(), coin.getAmount(), count);
+        });
     }
 }

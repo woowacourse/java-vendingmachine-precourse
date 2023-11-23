@@ -5,12 +5,13 @@ import static vendingmachine.view.constant.InputMessage.*;
 
 import java.util.EnumMap;
 import java.util.Map;
+import vendingmachine.domain.VendingMachine;
 import vendingmachine.domain.constant.Coin;
 import vendingmachine.domain.constant.Product;
 import vendingmachine.exception.ExceptionHandler;
 import vendingmachine.util.InputUtil;
 import vendingmachine.util.Parser;
-import vendingmachine.view.output.VendingMachineOutputWriter;
+import vendingmachine.view.output.OutputView;
 
 public class VendingMachineController {
     private static EnumMap<Coin, Integer> vmCoinMap;
@@ -18,20 +19,26 @@ public class VendingMachineController {
     private VendingMachineController(){
     }
 
-    public static void requestVendingMachineCoin() {
-        VendingMachineOutputWriter.println(REQUEST_VM_COIN.getMessage());
-        vmCoinMap = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMCoinFromInput);
-        VendingMachineOutputWriter.printCoinMap(vmCoinMap);
+    public static VendingMachine requestVendingMachine(){
+        requestVendingMachineCoin();
+        requestVendingMachineProducts();
+        return VendingMachine.from(vmCoinMap,productMap);
     }
 
-    public static void requestVendingMachineProducts() {
-        VendingMachineOutputWriter.println(REQUEST_VM_PRODUCT.getMessage());
+    private static void requestVendingMachineCoin() {
+        OutputView.println(REQUEST_VM_COIN.getMessage());
+        vmCoinMap = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMCoinFromInput);
+        OutputView.printCoinMap(vmCoinMap);
+    }
+
+    private static void requestVendingMachineProducts() {
+        OutputView.println(REQUEST_VM_PRODUCT.getMessage());
         productMap = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMProductFromInput);
     }
 
     private static EnumMap<Coin, Integer> createVMCoinFromInput() {
         String coin = InputUtil.readLine();
-        int coinInput =  Parser.parseVMCoinInput(coin);
+        int coinInput =  Parser.parseMoneyInput(coin);
         return vendingMachineCoinGeneration(coinInput);
     }
 
