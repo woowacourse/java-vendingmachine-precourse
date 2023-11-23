@@ -1,5 +1,9 @@
 package vendingmachine.controller;
 
+import java.util.Map;
+import java.util.Map.Entry;
+import vendingmachine.Coin;
+import vendingmachine.domain.CoinGenerator;
 import vendingmachine.utils.Parser;
 import vendingmachine.validator.InputMoneyValidator;
 import vendingmachine.view.InputView;
@@ -15,8 +19,14 @@ public class MachineController {
     }
 
     public void run(){
+        Map<Coin, Integer> coins = makeMachineCoins();
     }
 
+    private Map<Coin, Integer> makeMachineCoins(){
+        int money = inputMachineMoney();
+        CoinGenerator coinGenerator = new CoinGenerator(money);
+        return coinGenerator.getCoins();
+    }
     private int inputMachineMoney(){
         boolean flag = false;
         String money = "";
