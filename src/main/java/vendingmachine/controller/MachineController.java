@@ -20,6 +20,7 @@ public class MachineController {
 
     public void run(){
         Map<Coin, Integer> coins = makeMachineCoins();
+        outputView.printCoins(coins);
     }
 
     private Map<Coin, Integer> makeMachineCoins(){
