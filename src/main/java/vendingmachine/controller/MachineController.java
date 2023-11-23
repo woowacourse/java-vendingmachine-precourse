@@ -1,5 +1,7 @@
 package vendingmachine.controller;
 
+import vendingmachine.utils.Parser;
+import vendingmachine.validator.InputMoneyValidator;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
@@ -13,7 +15,6 @@ public class MachineController {
     }
 
     public void run(){
-        inputView.inputMachineMoney();
     }
 
     private int inputMachineMoney(){
@@ -22,10 +23,12 @@ public class MachineController {
         while(!flag){
             try{
                 money = inputView.inputMachineMoney();
+                InputMoneyValidator.validateInputMoney(money);
+                flag = true;
             }catch (IllegalArgumentException e){
                 outputView.printErrorMessage(e);
             }
         }
-        return Integer.parseInt(money);
+        return Parser.inputMoneyParser(money);
     }
 }
