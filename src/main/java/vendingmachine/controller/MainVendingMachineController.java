@@ -10,5 +10,6 @@ public class MainVendingMachineController {
     public static void start() {
         VendingMachine vendingMachine = VendingMachineController.requestVendingMachine();
         Purchaser purchaser = PurchaserController.requestPurchaseOrder();
+        OrderController.from(vendingMachine, purchaser);
     }
 }

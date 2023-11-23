@@ -13,7 +13,8 @@ public class Parser {
     private static final int POSITIVE_NUMBER_MINIMUM_RANGE = 1;
     private static final Pattern REGEX_COIN_PATTERN = Pattern.compile("^[1-9]+0$");
     private static final Pattern REGEX_PRODUCT_PATTERN = Pattern.compile("^\\[\\w+,\\d+,\\d+\\](;\\[\\w+,\\d+,\\d+\\])*$");
-    private static final Pattern RECEX_PRICE_PATTERN=Pattern.compile("^100$|^1[1-9][0-9]0$");
+    private static final Pattern REGEX_PRICE_PATTERN =Pattern.compile("^100$|^1[1-9][0-9]0$");
+    private static final Pattern REGEX_MENU_PATTERN=Pattern.compile("^.+$");
     private static Map<String, Product> productMap;
     // Default Constructor
     private Parser() {
@@ -30,6 +31,13 @@ public class Parser {
         Matcher matcher = productFormatValidation(productsInput);
         return ExceptionHandler.tryOnParseIntException(() -> parseProducts(matcher));
     }
+
+    public static String parseMenuInput(String menuInput) {
+        INVALID_ORDER.validate(() -> hasWhitespace(menuInput));
+        INVALID_ORDER.validate(() -> isInvalidMenuPattern(menuInput));
+        return menuInput;
+    }
+
 
     private static Map<String, Product> parseProducts(Matcher matcher){
         productMap = new HashMap<>();
@@ -64,7 +72,7 @@ public class Parser {
     }
 
     private static int productProductQuantityValidation(String quantityInput){
-        INVALID_PRODUCT_AMOUNT.validate(() -> hasWhitespace(quantityInput));
+        INVALID_PRODUCT_QUANTITY.validate(() -> hasWhitespace(quantityInput));
         int price = ExceptionHandler.tryOnParseIntException(() -> Integer.parseInt(quantityInput));
         INVALID_PRODUCT_NAME.validate(() -> isNotPositiveInteger(price));
         return price;
@@ -88,9 +96,12 @@ public class Parser {
     }
 
     private static boolean isInvalidPricePattern(String input) {
-        return matchWithRegex(input, RECEX_PRICE_PATTERN);
+        return matchWithRegex(input, REGEX_PRICE_PATTERN);
     }
 
+    private static boolean isInvalidMenuPattern(String input) {
+        return matchWithRegex(input, REGEX_MENU_PATTERN);
+    }
 
     // == 정규표현식 제약 조건== //
     private static boolean matchWithRegex(String input, Pattern regex) {

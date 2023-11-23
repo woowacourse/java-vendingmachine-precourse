@@ -13,11 +13,10 @@ public class PurchaserController {
     private PurchaserController(){
     }
 
-//    public static Purchaser requestPurchaseOrder(){
-//        requestUserCoin();
-//        requestUserProducts();
-//        return Purchaser.from(money);
-//    }
+    public static Purchaser requestPurchaseOrder(){
+        requestUserCoin();
+        return Purchaser.from(money);
+    }
 
     private static void requestUserCoin(){
         OutputView.println(REQUEST_INPUT_AMOUNT.getMessage());
@@ -27,8 +26,5 @@ public class PurchaserController {
     private static int createPurchaserMoneyFromInput() {
         String money = InputUtil.readLine();
         return Parser.parseMoneyInput(money);
-    }
-    private static void requestUserProducts(){
-        OutputView.println(REQUEST_BUY_PRODUCT.getMessage());
     }
 }
