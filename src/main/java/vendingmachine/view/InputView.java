@@ -1,10 +1,12 @@
 package vendingmachine.view;
 
+import static vendingmachine.view.constants.MachineMessage.INPUT_MACHINE_MONEY;
+
 import camp.nextstep.edu.missionutils.Console;
 
 public class InputView {
-    public String inputMachineMoney(){
-        System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요");
+    public String inputMachineMoney() {
+        System.out.println(INPUT_MACHINE_MONEY.getMessage());
         return Console.readLine();
     }
 }
