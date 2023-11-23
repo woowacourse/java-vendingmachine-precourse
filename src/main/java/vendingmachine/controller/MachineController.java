@@ -24,6 +24,7 @@ public class MachineController {
         Map<Coin, Integer> coins = makeMachineCoins();
         outputView.printCoins(coins);
         List<Product> products = makeMachineProduct();
+        int userAmount = makeUserAmount();
     }
 
     private Map<Coin, Integer> makeMachineCoins() {
@@ -32,8 +33,12 @@ public class MachineController {
         return coinGenerator.getCoins();
     }
 
-    private List<Product> makeMachineProduct(){
+    private List<Product> makeMachineProduct() {
         return inputMachineProduct();
+    }
+
+    private int makeUserAmount() {
+        return inputUserAmount();
     }
 
     private int inputMachineMoney() {
@@ -64,5 +69,21 @@ public class MachineController {
             }
         }
         return machineProducts;
+    }
+
+    private int inputUserAmount() {
+        boolean flag = false;
+        String money = "";
+        while (!flag) {
+            try {
+                money = inputView.inputUserAmount();
+                ;
+                InputMoneyValidator.validateInputMoney(money);
+                flag = true;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+        return Parser.inputMoneyParser(money);
     }
 }
