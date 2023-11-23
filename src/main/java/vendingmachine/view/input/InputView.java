@@ -1,4 +1,4 @@
-package vendingmachine.view;
+package vendingmachine.view.input;
 
 import vendingmachine.domain.VendingMachine;
 import vendingmachine.util.InputUtil;
