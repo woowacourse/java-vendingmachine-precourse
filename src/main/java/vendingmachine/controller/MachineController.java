@@ -1,9 +1,11 @@
 package vendingmachine.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import vendingmachine.Coin;
 import vendingmachine.domain.CoinGenerator;
+import vendingmachine.domain.Product;
 import vendingmachine.utils.Parser;
 import vendingmachine.validator.InputMoneyValidator;
 import vendingmachine.view.InputView;
@@ -18,28 +20,49 @@ public class MachineController {
         this.outputView = outputView;
     }
 
-    public void run(){
+    public void run() {
         Map<Coin, Integer> coins = makeMachineCoins();
         outputView.printCoins(coins);
+        List<Product> products = makeMachineProduct();
     }
 
-    private Map<Coin, Integer> makeMachineCoins(){
+    private Map<Coin, Integer> makeMachineCoins() {
         int money = inputMachineMoney();
         CoinGenerator coinGenerator = new CoinGenerator(money);
         return coinGenerator.getCoins();
     }
-    private int inputMachineMoney(){
+
+    private List<Product> makeMachineProduct(){
+        return inputMachineProduct();
+    }
+
+    private int inputMachineMoney() {
         boolean flag = false;
         String money = "";
-        while(!flag){
-            try{
+        while (!flag) {
+            try {
                 money = inputView.inputMachineMoney();
                 InputMoneyValidator.validateInputMoney(money);
                 flag = true;
-            }catch (IllegalArgumentException e){
+            } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);
             }
         }
         return Parser.inputMoneyParser(money);
+    }
+
+    private List<Product> inputMachineProduct() {
+        boolean flag = false;
+        List<Product> machineProducts = new ArrayList<>();
+        while (!flag) {
+            try {
+                String products = inputView.inputMachineProduct();
+                machineProducts = Parser.productsParser(products);
+                flag = true;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+        return machineProducts;
     }
 }
