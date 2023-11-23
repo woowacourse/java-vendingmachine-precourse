@@ -9,7 +9,7 @@ public class Input {
 
     public int readAmount() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
-        return Integer.parseInt(read());
+        return convertAmount(read());
     }
 
     public List<String[]> readItemInfos() {
@@ -23,12 +23,19 @@ public class Input {
 
     public int readMoney() {
         System.out.println("\n투입 금액을 입력해 주세요.");
-        return Integer.parseInt(read());
+        return convertAmount(read());
     }
 
     public String readPurchaseItemName() {
         System.out.println("구매할 상품명을 입력해 주세요.");
         return read();
+    }
+
+    private int convertAmount(String inputValue) {
+        if (inputValue.replaceAll("[0-9]", "").length() > 0) {
+            throw new IllegalArgumentException("금액은 0원 이상이어야 합니다.");
+        }
+        return Integer.parseInt(inputValue);
     }
 
     private String read() {
