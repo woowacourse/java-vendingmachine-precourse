@@ -10,6 +10,7 @@ import vendingmachine.view.Output;
 
 import java.util.List;
 import java.util.Map;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class VendingMachineController {
@@ -34,23 +35,13 @@ public class VendingMachineController {
     }
 
     private Map<Coin, Integer> makeCoins() {
-        try {
-            Map<Coin, Integer> coins = coinMaker.make(input.readAmount());
-            output.showCoins(coins);
-            return coins;
-        } catch (IllegalArgumentException e) {
-            output.printError(e.getMessage());
-            return makeCoins();
-        }
+        Map<Coin, Integer> coins = retry(() -> coinMaker.make(input.readAmount()));
+        output.showCoins(coins);
+        return coins;
     }
 
     private List<Item> makeItems() {
-        try {
-            return makeItems(input.readItemInfos());
-        } catch (IllegalArgumentException e) {
-            output.printError(e.getMessage());
-            return makeItems();
-        }
+        return retry(() -> makeItems(input.readItemInfos()));
     }
 
     private List<Item> makeItems(List<String[]> itemInfos) {
@@ -60,11 +51,16 @@ public class VendingMachineController {
     }
 
     private Money makeMoney() {
-        try {
-            return new Money(input.readMoney());
-        } catch (IllegalArgumentException e) {
-            output.printError(e.getMessage());
-            return makeMoney();
+        return retry(() -> new Money(input.readMoney()));
+    }
+
+    public <T> T retry(Supplier<T> supplier) {
+        while (true) {
+            try {
+                return supplier.get();
+            } catch (IllegalArgumentException e) {
+                output.printError(e.getMessage());
+            }
         }
     }
 }
