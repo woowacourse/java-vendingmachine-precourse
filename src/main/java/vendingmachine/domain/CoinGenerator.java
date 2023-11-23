@@ -19,8 +19,11 @@ public class CoinGenerator {
     private Map<Coin, Integer> generate(int money) {
         Map<Coin, Integer> coins = new HashMap<>();
         List<Integer> coinList = Arrays.asList(1, 2, 3, 4);
+        //List<Integer> coinList = Arrays.asList(1, 2, 3, 4, 5, 6);
+
         while (money > 0) {
-            Coin randomCoin = Coin.values()[Randoms.pickNumberInList(coinList) % 4];
+            Coin randomCoin = Coin.values()[Randoms.pickNumberInList(coinList) % 3];
+            //Coin randomCoin = Coin.values()[Randoms.pickNumberInList(coinList) % 4];
 
             if (randomCoin.getAmount() <= money) {
                 coins.put(randomCoin, coins.getOrDefault(randomCoin, 0) + 1);
