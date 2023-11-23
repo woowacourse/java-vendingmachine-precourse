@@ -51,7 +51,16 @@ public class VendingMachine {
 
     public Map<Coin, Integer> returnChanges() {
         Map<Coin, Integer> change = new EnumMap<>(Coin.class);
-        //TODO: 잔돈 계산 로직 구현
+        coins.entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() > 0)
+                .forEach(entry -> {
+                    Coin coin = entry.getKey();
+                    int coinCount = Math.min(money.getAmount() / coin.getAmount(), entry.getValue());
+                    change.put(coin, coinCount);
+                    money.reduceAmount(coinCount * coin.getAmount());
+                    coins.put(coin, coins.get(coin) - coinCount);
+                });
         return change;
     }
 }
