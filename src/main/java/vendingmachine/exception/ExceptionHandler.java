@@ -1,5 +1,5 @@
 package vendingmachine.exception;
-import static vendingmachine.exception.ErrorCode.INVALID_COIN;
+import static vendingmachine.exception.ErrorCode.INVALID_INPUT;
 
 import java.util.function.Supplier;
 import vendingmachine.view.output.ErrorOutputWriter;
@@ -22,7 +22,7 @@ public class ExceptionHandler {
         try {
             return supplier.get();
         } catch (NumberFormatException exception) {
-            throw BusinessException.of(INVALID_COIN, exception);
+            throw BusinessException.of(INVALID_INPUT, exception);
         }
     }
 }

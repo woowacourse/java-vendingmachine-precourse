@@ -4,7 +4,11 @@ import java.util.function.BooleanSupplier;
 
 public enum ErrorCode {
     INVALID_COIN_INPUT("금액은 숫자여야 합니다. 다시 입력해 주세요."),
-    INVALID_COIN("유효하지 않은 금액입니다. 다시 입력해 주세요.");
+    INVALID_INPUT("유효하지 않은 입력입니다. 다시 입력해 주세요."),
+    INVALID_PRODUCT_FORMAT("유효하지 않은 상품 형식입니다. 다시 입력해 주세요."),
+    INVALID_PRODUCT_NAME("유효하지 않은 상품명입니다. 다시 입력해 주세요."),
+    INVALID_PRODUCT_PRICE("유효하지 않은 상품 금액입니다. 다시 입력해 주세요."),
+    INVALID_PRODUCT_AMOUNT("유효하지 않은 상품 수량입니다. 다시 입력해 주세요.");
 
     public static final String ERROR_PREFIX = "[ERROR] ";
     private final String message;
