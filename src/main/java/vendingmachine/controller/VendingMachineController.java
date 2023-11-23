@@ -11,12 +11,14 @@ import vendingmachine.util.Parser;
 import vendingmachine.view.output.VendingMachineOutputWriter;
 
 public class VendingMachineController {
+    private static EnumMap<Coin, Integer> vmCoinMap;
     private VendingMachineController(){
     }
 
     public static void requestVendingMachineCoin() {
         VendingMachineOutputWriter.println(REQUEST_VM_COIN.getMessage());
-        EnumMap<Coin, Integer> vmCoinMap = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMCoinFromInput);
+        vmCoinMap = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMCoinFromInput);
+        VendingMachineOutputWriter.printCoinMap(vmCoinMap);
     }
 
     private static EnumMap<Coin, Integer> createVMCoinFromInput() {

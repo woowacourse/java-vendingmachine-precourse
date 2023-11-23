@@ -112,7 +112,7 @@
    ```
 
 - [x]  Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용- [x]
-- [ ]  보유한 동전 출력하기
+- [x]  보유한 동전 출력하기
    -  500원 - 0개 
     - 100원 - 4개 
     - 50원 - 1개 
