@@ -91,7 +91,7 @@
 
 **✔️ 자판기 보유 동전 생성**
 
-- [ ]  Coin 클래스 활용해 구현
+- [x]  Coin 클래스 활용해 구현
   amount의 접근제어가 변경 불가
 
    ```java
@@ -111,7 +111,12 @@
    }
    ```
 
-- [ ]  Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용
+- [x]  Random 값 추출은 `camp.nextstep.edu.missionutils.Randoms`의 `pickNumberInList()`를 활용- [x]
+- [ ]  보유한 동전 출력하기
+   -  500원 - 0개 
+    - 100원 - 4개 
+    - 50원 - 1개 
+    - 10원 - 0개
 
 **✔️ 자판기 내 보유 상품 입력 받기**
 

@@ -1,7 +1,10 @@
 package vendingmachine.controller;
 
+import static vendingmachine.util.CoinGenerator.vendingMachineCoinGeneration;
 import static vendingmachine.view.constant.InputMessage.REQUEST_VM_COIN;
 
+import java.util.EnumMap;
+import vendingmachine.domain.constant.Coin;
 import vendingmachine.exception.ExceptionHandler;
 import vendingmachine.util.InputUtil;
 import vendingmachine.util.Parser;
@@ -13,11 +16,13 @@ public class VendingMachineController {
 
     public static void requestVendingMachineCoin() {
         VendingMachineOutputWriter.println(REQUEST_VM_COIN.getMessage());
-        int coin = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMCoinFromInput);
+        EnumMap<Coin, Integer> vmCoinMap = ExceptionHandler.retryOnBusinessException(VendingMachineController::createVMCoinFromInput);
     }
 
-    private static int createVMCoinFromInput() {
-        String dateInput = InputUtil.readLine();
-        return Parser.parseVMCoinInput(dateInput);
+    private static EnumMap<Coin, Integer> createVMCoinFromInput() {
+        String coin = InputUtil.readLine();
+        int coinInput =  Parser.parseVMCoinInput(coin);
+        return vendingMachineCoinGeneration(coinInput);
     }
+
 }
