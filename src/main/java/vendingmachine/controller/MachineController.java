@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import vendingmachine.Coin;
 import vendingmachine.domain.CoinGenerator;
+import vendingmachine.domain.Machine;
 import vendingmachine.domain.Product;
 import vendingmachine.utils.Parser;
 import vendingmachine.validator.InputMoneyValidator;
@@ -24,7 +25,18 @@ public class MachineController {
         Map<Coin, Integer> coins = makeMachineCoins();
         outputView.printCoins(coins);
         List<Product> products = makeMachineProduct();
+        Machine machine = new Machine(coins, products);
         int userAmount = makeUserAmount();
+        buyProduct(machine, userAmount);
+    }
+
+    private void buyProduct(Machine machine, int userAmount) {
+        while (true) {
+            outputView.printUserAmount(userAmount);
+            String product = inputBuyProduct(machine);
+            int change = machine.buy(product);
+            userAmount -= change;
+        }
     }
 
     private Map<Coin, Integer> makeMachineCoins() {
@@ -85,5 +97,20 @@ public class MachineController {
             }
         }
         return Parser.inputMoneyParser(money);
+    }
+
+    private String inputBuyProduct(Machine machine) {
+        boolean flag = false;
+        String product = "";
+        while (!flag) {
+            try {
+                product = inputView.inputBuyProduct();
+                machine.isExistsProduct(product);
+                flag = true;
+            } catch (IllegalArgumentException e) {
+                outputView.printErrorMessage(e);
+            }
+        }
+        return product;
     }
 }
