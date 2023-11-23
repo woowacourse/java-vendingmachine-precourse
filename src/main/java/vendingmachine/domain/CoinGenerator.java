@@ -1,8 +1,10 @@
 package vendingmachine.domain;
 
 import camp.nextstep.edu.missionutils.Randoms;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import vendingmachine.Coin;
 
 public class CoinGenerator {
@@ -24,7 +26,10 @@ public class CoinGenerator {
             }
         }
 
-        return coins;
+        Map<Coin, Integer> sortedCoins = new TreeMap<>(Comparator.comparing(Coin::getAmount).reversed());
+        sortedCoins.putAll(coins);
+
+        return sortedCoins;
     }
 
     public Map<Coin, Integer> getCoins() {

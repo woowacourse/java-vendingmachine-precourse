@@ -2,6 +2,7 @@ package vendingmachine.view;
 
 import static vendingmachine.view.constants.MachineMessage.INPUT_MACHINE_MONEY;
 import static vendingmachine.view.constants.MachineMessage.INPUT_MACHINE_PRODUCT;
+import static vendingmachine.view.constants.MachineMessage.NEWLINE;
 import static vendingmachine.view.constants.UserMessage.INPUT_USER_AMOUNT;
 import static vendingmachine.view.constants.UserMessage.INPUT_USER_PRODUCT;
 

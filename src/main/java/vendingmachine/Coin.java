@@ -12,7 +12,6 @@ public enum Coin {
         this.amount = amount;
     }
 
-    // 추가 기능 구현
 
     public int getAmount() {
         return amount;

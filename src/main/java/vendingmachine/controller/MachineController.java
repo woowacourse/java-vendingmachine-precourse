@@ -33,6 +33,10 @@ public class MachineController {
     private void buyProduct(Machine machine, int userAmount) {
         while (true) {
             outputView.printUserAmount(userAmount);
+            if(!machine.canBuy(userAmount)) {
+                outputView.printChange(machine.calculateChange(userAmount));
+                break;
+            }
             String product = inputBuyProduct(machine);
             int change = machine.buy(product);
             userAmount -= change;
