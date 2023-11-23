@@ -1,12 +1,10 @@
 package vendingmachine.domain;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
-import java.util.stream.Collectors;
 import vendingmachine.Coin;
 
 public class Machine {
@@ -29,14 +27,41 @@ public class Machine {
         return 0;
     }
 
-    public boolean canBuy(int userAmount) {
+    public boolean canBuyWithMoney(int userAmount) {
         boolean flag = false;
         for (int i = 0; i < products.size(); i++) {
             if (userAmount >= products.get(i).getPrice()) {
                 flag = true;
+                break;
             }
         }
         return flag;
+    }
+
+    public boolean canBuyWithQuantity() {
+        boolean flag = false;
+        for(int i = 0; i < products.size(); i++){
+            if(products.get(i).getQuantity() > 0) {
+                flag = true;
+                break;
+            }
+        }
+        return flag;
+    }
+
+    public void isExistsQuantity(String productName){
+        boolean flag = false;
+        for(int i = 0; i < products.size(); i++){
+            Product product = products.get(i);
+            if(product.getName().equals(productName)) {
+                if(product.getQuantity() > 0)
+                flag = true;
+                break;
+            }
+        }
+        if(!flag){
+            throw new IllegalArgumentException("[ERROR] 주문하려는 상품이 소진되었습니다. 다른 상품을 주문해 주세요.");
+        }
     }
 
     public void isExistsProduct(String productName) {
@@ -68,4 +93,5 @@ public class Machine {
 
         return sortedCoins;
     }
+
 }

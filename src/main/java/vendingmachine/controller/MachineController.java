@@ -33,7 +33,7 @@ public class MachineController {
     private void buyProduct(Machine machine, int userAmount) {
         while (true) {
             outputView.printUserAmount(userAmount);
-            if(!machine.canBuy(userAmount)) {
+            if(!machine.canBuyWithMoney(userAmount) || !machine.canBuyWithQuantity()) {
                 outputView.printChange(machine.calculateChange(userAmount));
                 break;
             }
@@ -110,6 +110,7 @@ public class MachineController {
             try {
                 product = inputView.inputBuyProduct();
                 machine.isExistsProduct(product);
+                machine.isExistsQuantity(product);
                 flag = true;
             } catch (IllegalArgumentException e) {
                 outputView.printErrorMessage(e);

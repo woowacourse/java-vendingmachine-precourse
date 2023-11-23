@@ -20,6 +20,10 @@ public class Product {
         return price;
     }
 
+    public int getQuantity() {
+        return quantity;
+    }
+
     public void soldProduct(){
         this.quantity--;
     }
