@@ -4,7 +4,7 @@ import static vendingmachine.constants.Message.ASK_BUY_PRODUCT_NAME;
 import static vendingmachine.constants.Message.ASK_INPUT_AMOUNT;
 import static vendingmachine.constants.Message.ASK_MACHINE_OWN;
 import static vendingmachine.constants.Message.ASK_PRODUCT_INFO;
-import static vendingmachine.constants.Message.CHANGE_STATUS_HEADER;
+import static vendingmachine.constants.Message.COIN_STATUS;
 import static vendingmachine.constants.Message.EACH_COIN;
 import static vendingmachine.constants.Message.MONEY_STATUS;
 
@@ -37,11 +37,10 @@ public class OutputView {
     }
 
     public void printCoinStatus(ChangeDTO changeDTO) {
-        StringBuilder stringBuilder = new StringBuilder(String.format(CHANGE_STATUS_HEADER.getMessage()));
+        StringBuilder stringBuilder = new StringBuilder(String.format(COIN_STATUS.getMessage()));
 
-        changeDTO.changeStatus().entrySet()
+        changeDTO.getChangeStatus().entrySet()
                 .stream()
-                .filter(entry -> entry.getValue() != 0)
                 .forEach(entry -> {
                     stringBuilder.append(
                             String.format(EACH_COIN.getMessage(), entry.getKey().getValue(), entry.getValue()));

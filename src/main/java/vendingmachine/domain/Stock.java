@@ -70,7 +70,7 @@ public class Stock {
     }
 
     private boolean isValidStock(ProductDTO productDTO) {
-        return isPriceValid(productDTO.price()) && isQuantityValid(productDTO.quantity());
+        return isPriceValid(productDTO.getPrice()) && isQuantityValid(productDTO.getQuantity());
     }
 
     private boolean isQuantityValid(int quantity) {

@@ -13,8 +13,8 @@ public class Parser {
     public static Map<String, Product> parseToStockMap(List<ProductDTO> stockInfo) {
         return stockInfo.stream()
                 .collect(Collectors.toMap(
-                        ProductDTO::name,
-                        productInfo -> Product.create(productInfo.price(), productInfo.quantity())
+                        ProductDTO::getName,
+                        productInfo -> Product.create(productInfo.getPrice(), productInfo.getQuantity())
                 ));
     }
 
@@ -25,7 +25,7 @@ public class Parser {
 
         list = list.stream()
                 .map(it -> it.replaceAll("[\\[\\]]", ""))
-                .toList();
+                .collect(Collectors.toList());
         for (String it : list) {
             List<String> list1 = Arrays.asList(it.split(","));
             productDTOS.add(

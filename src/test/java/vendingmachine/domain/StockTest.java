@@ -4,7 +4,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static vendingmachine.exception.ErrorCode.INVALID_PRODUCT_REQUEST;
 
-import camp.nextstep.edu.missionutils.Randoms;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -67,8 +66,8 @@ class StockTest {
     @Test
     @DisplayName("api 테스트")
     public void test() {
-        int i = Randoms.pickNumberInList(List.of(500, 100, 50, 10));
-        System.out.println(i);
+//        int i = Randoms.pickNumberInList(List.of(500, 100, 50, 10));
+//        System.out.println(i);
     }
 
 
