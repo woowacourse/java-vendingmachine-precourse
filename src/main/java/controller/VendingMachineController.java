@@ -2,9 +2,11 @@ package controller;
 
 import domain.CoinCountGenerator;
 import domain.PossesionAmount;
+import domain.Products;
 import domain.VendingMachine;
 import dto.VendingMachineStatusDto;
 import service.PossessionAmountService;
+import service.ProductsService;
 import service.VendingMachineService;
 import view.InputView;
 import view.OutputView;
@@ -21,6 +23,7 @@ public class VendingMachineController {
     private final VendingMachineService vendingMachineService;
 
     private final OutputView outputView;
+    private final ProductsService productsService;
 
     public VendingMachineController(){
         inputView = new InputView();
@@ -29,6 +32,7 @@ public class VendingMachineController {
         CoinCountGenerator coinCountGenerator = new CoinCountGenerator();
         vendingMachineService = new VendingMachineService(vendingMachine, coinCountGenerator);
         outputView = new OutputView();
+        productsService = new ProductsService();
     }
 
     public void start(){
@@ -37,6 +41,7 @@ public class VendingMachineController {
         List<VendingMachineStatusDto> statusList = vendingMachineService.generateRandomCoins(possessionAmount.getAmount());
         outputView.printVendingMachineStatus(statusList);
         String productInfo = getProductInfo();
+        Products products = createProducts(productInfo);
     }
 
     private String getPossessionAmount(){
@@ -55,5 +60,9 @@ public class VendingMachineController {
             OutputView.printMessage(INPUT_PRODUCT_DETAIL.getValue());
             return inputView.readConsole();
         });
+    }
+
+    private Products createProducts(String productInfo){
+        return productsService.createProducts(productInfo);
     }
 }
