@@ -1,5 +1,6 @@
 package domain.wrapper;
 
+import domain.constant.AmountConstant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -8,8 +9,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
-import static util.message.ExceptionMessage.BLANK_MESSAGE;
-import static util.message.ExceptionMessage.TYPE_MESSAGE;
+import static util.message.ExceptionMessage.*;
 
 public class AmountTest {
     @ParameterizedTest
@@ -39,5 +39,23 @@ public class AmountTest {
         assertThatThrownBy(() -> Amount.create(amount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(String.format(TYPE_MESSAGE.getValue(), "보유금액"));
+    }
+
+    @ParameterizedTest
+    @DisplayName("보유금액이 10으로 나누어 떨어지지 않는 경우 예외가 발생한다.")
+    @ValueSource(strings = {"456", "123"})
+    void givenNonDivisibleBy10_thenFail(final String amount) {
+        assertThatThrownBy(() -> Amount.create(amount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(String.format(TEN_UNIT_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
+    }
+
+    @ParameterizedTest
+    @DisplayName("보유금액이 0이하인경우 예외가 발생한다.")
+    @ValueSource(strings = {"-1", "0"})
+    void givenLessZero_thenFail(final String amount) {
+        assertThatThrownBy(() -> Amount.create(amount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(String.format(RANGE_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
     }
 }

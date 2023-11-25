@@ -45,7 +45,7 @@ public class Amount {
     }
 
     private int validateRange(final int amount) {
-        if (amount < AmountConstant.ZERO.getValue()) {
+        if (amount <= AmountConstant.ZERO.getValue()) {
             throw new IllegalArgumentException(String.format(RANGE_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
         }
         return amount;
