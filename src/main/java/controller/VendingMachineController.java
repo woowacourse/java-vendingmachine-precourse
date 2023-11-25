@@ -12,6 +12,7 @@ import view.OutputView;
 import java.util.List;
 
 import static util.message.InputMessage.INPUT_POSSESSION_AMOUNT_MESSAGE;
+import static util.message.InputMessage.INPUT_PRODUCT_DETAIL;
 import static util.message.OutputMessage.VENDING_MACHINE_STATUS;
 
 public class VendingMachineController {
@@ -35,6 +36,7 @@ public class VendingMachineController {
         PossesionAmount possessionAmount = createPossessionAmount(amount);
         List<VendingMachineStatusDto> statusList = vendingMachineService.generateRandomCoins(possessionAmount.getAmount());
         outputView.printVendingMachineStatus(statusList);
+        String productInfo = getProductInfo();
     }
 
     private String getPossessionAmount(){
@@ -46,5 +48,12 @@ public class VendingMachineController {
 
     private PossesionAmount createPossessionAmount(String possessionAmount){
         return possesionAmountService.createPossessionAmount(possessionAmount);
+    }
+
+    private String getProductInfo(){
+        return inputView.getUserInput(() -> {
+            OutputView.printMessage(INPUT_PRODUCT_DETAIL.getValue());
+            return inputView.readConsole();
+        });
     }
 }

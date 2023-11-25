@@ -2,13 +2,14 @@ package domain.constant;
 
 import util.EnumUtil;
 
-public enum AmountConstant implements EnumUtil<String, Integer> {
+public enum Constant implements EnumUtil<String, Integer> {
     COIN_TEN(10),
+    COIN_HUNDRED(100),
     ZERO(0);
 
     private final int number;
 
-    AmountConstant(final int number){
+    Constant(final int number){
         this.number = number;
     }
 

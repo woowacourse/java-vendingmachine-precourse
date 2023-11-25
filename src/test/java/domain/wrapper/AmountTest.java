@@ -1,6 +1,6 @@
 package domain.wrapper;
 
-import domain.constant.AmountConstant;
+import domain.constant.Constant;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
@@ -47,7 +47,7 @@ public class AmountTest {
     void givenNonDivisibleBy10_thenFail(final String amount) {
         assertThatThrownBy(() -> Amount.create(amount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format(TEN_UNIT_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
+                .hasMessageContaining(String.format(TEN_UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
     }
 
     @ParameterizedTest
@@ -56,6 +56,6 @@ public class AmountTest {
     void givenLessZero_thenFail(final String amount) {
         assertThatThrownBy(() -> Amount.create(amount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format(RANGE_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
+                .hasMessageContaining(String.format(RANGE_MESSAGE.getValue(), Constant.ZERO.getValue()));
     }
 }

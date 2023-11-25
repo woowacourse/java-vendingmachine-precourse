@@ -24,7 +24,7 @@ public class InputView {
         try {
             return inputReader.get();
         } catch (GlobalException | IllegalArgumentException e) {
-            //OutputView.printMessage(e.getMessage());
+            OutputView.printMessage(e.getMessage());
             return getUserInput(inputReader);
         }
     }

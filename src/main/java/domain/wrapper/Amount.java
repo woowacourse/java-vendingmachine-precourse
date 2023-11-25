@@ -1,6 +1,6 @@
 package domain.wrapper;
 
-import domain.constant.AmountConstant;
+import domain.constant.Constant;
 
 import static util.message.ExceptionMessage.*;
 
@@ -38,15 +38,15 @@ public class Amount {
     }
 
     private int validateDivisibleBy10(final int amount){
-        if(amount % AmountConstant.COIN_TEN.getValue() != AmountConstant.ZERO.getValue()){
-            throw new IllegalArgumentException(String.format(TEN_UNIT_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
+        if(amount % Constant.COIN_TEN.getValue() != Constant.ZERO.getValue()){
+            throw new IllegalArgumentException(String.format(TEN_UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
         }
         return amount;
     }
 
     private int validateRange(final int amount) {
-        if (amount <= AmountConstant.ZERO.getValue()) {
-            throw new IllegalArgumentException(String.format(RANGE_MESSAGE.getValue(), AmountConstant.ZERO.getValue()));
+        if (amount <= Constant.ZERO.getValue()) {
+            throw new IllegalArgumentException(String.format(RANGE_MESSAGE.getValue(), Constant.ZERO.getValue()));
         }
         return amount;
     }
