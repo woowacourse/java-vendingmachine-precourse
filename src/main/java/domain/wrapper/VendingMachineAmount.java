@@ -4,21 +4,21 @@ import domain.constant.Constant;
 
 import static util.message.ExceptionMessage.*;
 
-public class Amount {
-    private final int amount;
+public class VendingMachineAmount {
+    private final int vendingMachineAmount;
 
-    private Amount(final String possesionAmount){
+    private VendingMachineAmount(final String possesionAmount){
         validateNameBlank(possesionAmount);
         int amount = validateType(possesionAmount);
-        this.amount = validateDivisibleBy10(validateRange(amount));
+        this.vendingMachineAmount = validateDivisibleBy10(validateRange(amount));
     }
 
-    public static Amount create(final String possesionAmount){
-        return new Amount(possesionAmount);
+    public static VendingMachineAmount create(final String possesionAmount){
+        return new VendingMachineAmount(possesionAmount);
     }
 
-    public int getAmount(){
-        return amount;
+    public int getVendingMachineAmount(){
+        return vendingMachineAmount;
     }
 
     private void validateNameBlank(final String possesionAmount) {
