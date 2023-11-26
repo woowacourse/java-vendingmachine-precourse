@@ -39,7 +39,7 @@ public class VendingMachineAmount {
 
     private int validateDivisibleBy10(final int amount){
         if(amount % Constant.COIN_TEN.getValue() != Constant.ZERO.getValue()){
-            throw new IllegalArgumentException(String.format(TEN_UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
+            throw new IllegalArgumentException(String.format(UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
         }
         return amount;
     }

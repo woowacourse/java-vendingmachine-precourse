@@ -15,7 +15,7 @@ import static util.message.ExceptionMessage.RANGE_MESSAGE;
 public class PaymentAmountTest {
     @ParameterizedTest
     @DisplayName("투입금액을 올바르게 입력한 경우 예외가 발생하지 않는다.")
-    @CsvSource("450")
+    @CsvSource("4000")
     void givenNormalPaymentAmount_thenSuccess(final String paymentAmount) {
         assertThat(PaymentAmount.create(paymentAmount))
                 .isInstanceOf(PaymentAmount.class);
@@ -49,5 +49,14 @@ public class PaymentAmountTest {
         assertThatThrownBy(() -> PaymentAmount.create(paymentAmount))
                 .isInstanceOf(IllegalArgumentException.class)
                 .hasMessageContaining(String.format(RANGE_MESSAGE.getValue(), Constant.ZERO.getValue()));
+    }
+
+    @ParameterizedTest
+    @DisplayName("투입금액이 1000으로 나누어 떨어지지 않는 경우 예외가 발생한다.")
+    @ValueSource(strings = {"4565", "1223"})
+    void givenNonDivisibleBy1000_thenFail(final String amount) {
+        assertThatThrownBy(() -> PaymentAmount.create(amount))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(String.format(UNIT_MESSAGE.getValue(), Constant.ONE_THOUSANE.getValue()));
     }
 }

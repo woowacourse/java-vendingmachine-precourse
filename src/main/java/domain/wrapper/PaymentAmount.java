@@ -11,7 +11,7 @@ public class PaymentAmount {
     private PaymentAmount(final String payment){
         validateNameBlank(payment);
         int amount = validateType(payment);
-        this.paymentAmount = validateRange(amount);
+        this.paymentAmount = validateDivisibleBy1000(validateRange(amount));
     }
 
     public static PaymentAmount create(final String payment){
@@ -41,6 +41,13 @@ public class PaymentAmount {
     private int validateRange(final int amount) {
         if (amount <= Constant.ZERO.getValue()) {
             throw new IllegalArgumentException(String.format(RANGE_MESSAGE.getValue(), Constant.ZERO.getValue()));
+        }
+        return amount;
+    }
+
+    private int validateDivisibleBy1000(final int amount){
+        if(amount % Constant.ONE_THOUSANE.getValue() != Constant.ZERO.getValue()){
+            throw new IllegalArgumentException(String.format(UNIT_MESSAGE.getValue(), Constant.ONE_THOUSANE.getValue()));
         }
         return amount;
     }

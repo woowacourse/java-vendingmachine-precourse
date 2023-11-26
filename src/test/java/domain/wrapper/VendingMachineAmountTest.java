@@ -47,7 +47,7 @@ public class VendingMachineAmountTest {
     void givenNonDivisibleBy10_thenFail(final String amount) {
         assertThatThrownBy(() -> VendingMachineAmount.create(amount))
                 .isInstanceOf(IllegalArgumentException.class)
-                .hasMessageContaining(String.format(TEN_UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
+                .hasMessageContaining(String.format(UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
     }
 
     @ParameterizedTest
