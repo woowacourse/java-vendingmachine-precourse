@@ -1,18 +1,15 @@
 package controller;
 
 import domain.*;
+import dto.PaymentStatusDto;
 import dto.VendingMachineStatusDto;
-import service.PaymentService;
-import service.PossessionAmountService;
-import service.ProductsService;
-import service.VendingMachineService;
+import service.*;
 import view.InputView;
 import view.OutputView;
 
 import java.util.List;
 
 import static util.message.InputMessage.*;
-import static util.message.OutputMessage.VENDING_MACHINE_STATUS;
 
 public class VendingMachineController {
     private final InputView inputView;
@@ -22,27 +19,46 @@ public class VendingMachineController {
     private final OutputView outputView;
     private final ProductsService productsService;
     private final PaymentService paymentService;
+    private final VendingMachine vendingMachine;
+    private final CoinCountGenerator coinCountGenerator;
+    private final SelectedProductService selectedProductService;
 
     public VendingMachineController(){
         inputView = new InputView();
         possesionAmountService = new PossessionAmountService();
-        VendingMachine vendingMachine = new VendingMachine();
-        CoinCountGenerator coinCountGenerator = new CoinCountGenerator();
+        vendingMachine = new VendingMachine();
+        coinCountGenerator = new CoinCountGenerator();
         vendingMachineService = new VendingMachineService(vendingMachine, coinCountGenerator);
         outputView = new OutputView();
         productsService = new ProductsService();
         paymentService = new PaymentService();
+        selectedProductService = new SelectedProductService();
     }
 
     public void start(){
         String amount = getPossessionAmount();
-        PossesionAmount possessionAmount = createPossessionAmount(amount);
+        PossessionAmount possessionAmount = createPossessionAmount(amount);
         List<VendingMachineStatusDto> statusList = vendingMachineService.generateRandomCoins(possessionAmount.getPossessionAmount());
         outputView.printVendingMachineStatus(statusList);
         String productInfo = getProductInfo();
         Products products = createProducts(productInfo);
         String paymentAmount = getPayment();
         Payment payment = createPayment(paymentAmount);
+        PaymentStatusDto paymentStatusDto = paymentService.createPaymentStatusDto(payment);
+        outputView.printPaymentStatus(paymentStatusDto);
+        String wantedProduct = getSelectedProduct();
+        SelectedProduct selectedProduct = createSelectedProduct(wantedProduct, products);
+    }
+
+    private SelectedProduct createSelectedProduct(String wantedProduct, final Products products){
+        return selectedProductService.createSelectedProduct(wantedProduct, products);
+    }
+
+    private String getSelectedProduct(){
+        return inputView.getUserInput(() -> {
+            OutputView.printMessage(INPUT_SELECTED_PRODUCT.getValue());
+            return inputView.readConsole();
+        });
     }
 
     private String getPossessionAmount(){
@@ -52,7 +68,7 @@ public class VendingMachineController {
         });
     }
 
-    private PossesionAmount createPossessionAmount(String possessionAmount){
+    private PossessionAmount createPossessionAmount(String possessionAmount){
         return possesionAmountService.createPossessionAmount(possessionAmount);
     }
 

@@ -23,7 +23,7 @@ public class VendingMachineService {
 
         for (Coin coin : Coin.values()) {
             CoinCountGenerator coinCountGenerator = new CoinCountGenerator();
-            int coinCount = coinCountGenerator.generateRandomCoins(coin, amount);
+            int coinCount = coinCountGenerator.generateRandomCoins(coin,amount);
             vendingMachine.addCoins(coin, coinCount);
             statusList.add(VendingMachineStatusDto.create(coin.getAmount(), coinCount));
             amount -= coin.getAmount() * coinCount;

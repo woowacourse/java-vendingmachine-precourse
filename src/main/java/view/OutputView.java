@@ -1,5 +1,6 @@
 package view;
 
+import dto.PaymentStatusDto;
 import dto.VendingMachineStatusDto;
 import util.message.OutputMessage;
 
@@ -17,5 +18,9 @@ public class OutputView {
         for (VendingMachineStatusDto statusDto : statusList) {
             System.out.println(String.format("%d" + WON.getValue() + HYPHEN.getValue() + "%d" + COUNT.getValue(), statusDto.getCoin(), statusDto.getCount()));
         }
+    }
+
+    public void printPaymentStatus(PaymentStatusDto paymentStatusDto){
+        System.out.println(PAYMENT_AMOUNT.getValue() + paymentStatusDto.getPayment() + WON.getValue());
     }
 }

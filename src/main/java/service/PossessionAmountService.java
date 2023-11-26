@@ -1,9 +1,9 @@
 package service;
 
-import domain.PossesionAmount;
+import domain.PossessionAmount;
 
 public class PossessionAmountService {
-    public PossesionAmount createPossessionAmount(final String possessionAmount){
-        return PossesionAmount.create(possessionAmount);
+    public PossessionAmount createPossessionAmount(final String possessionAmount){
+        return PossessionAmount.create(possessionAmount);
     }
 }

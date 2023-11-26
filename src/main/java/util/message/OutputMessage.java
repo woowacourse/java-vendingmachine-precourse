@@ -7,7 +7,8 @@ public enum OutputMessage implements EnumUtil<String, String> {
     WON("원"),
     COUNT("개"),
     HYPHEN(" - "),
-    VENDING_MACHINE_STATUS("자판기가 보유한 동전\n");
+    VENDING_MACHINE_STATUS("\n자판기가 보유한 동전\n"),
+    PAYMENT_AMOUNT("\n투입 금액 : ");
 
 
     private final String message;

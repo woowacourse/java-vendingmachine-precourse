@@ -1,6 +1,5 @@
 package service;
 
-import domain.PossesionAmount;
 import domain.Products;
 
 public class ProductsService {

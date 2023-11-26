@@ -52,7 +52,7 @@ public class VendingMachineAmountTest {
 
     @ParameterizedTest
     @DisplayName("보유금액이 0이하인경우 예외가 발생한다.")
-    @ValueSource(strings = {"-1", "0"})
+    @ValueSource(strings = {"-1", "-3"})
     void givenLessZero_thenFail(final String amount) {
         assertThatThrownBy(() -> VendingMachineAmount.create(amount))
                 .isInstanceOf(IllegalArgumentException.class)

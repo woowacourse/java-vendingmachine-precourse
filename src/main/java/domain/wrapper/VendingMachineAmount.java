@@ -45,7 +45,7 @@ public class VendingMachineAmount {
     }
 
     private int validateRange(final int amount) {
-        if (amount <= Constant.ZERO.getValue()) {
+        if (amount < Constant.ZERO.getValue()) {
             throw new IllegalArgumentException(String.format(RANGE_MESSAGE.getValue(), Constant.ZERO.getValue()));
         }
         return amount;

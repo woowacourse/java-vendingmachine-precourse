@@ -70,4 +70,8 @@ public class Products {
         return Objects.hash(products);
     }
 
+    public boolean containsProductName(String productName) {
+        return products.stream().anyMatch(product -> product.getName().equals(productName));
+    }
+
 }
