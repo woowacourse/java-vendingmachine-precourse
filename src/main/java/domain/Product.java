@@ -13,6 +13,7 @@ public class Product {
     private final Name name;
     private final Price price;
     private final Quantity quantity;
+    private static final int SOLD_OUT_QUANTITY = 0;
 
     private Product(final String productDetail){
         validateBlank(productDetail);
@@ -24,6 +25,12 @@ public class Product {
 
     public static Product create(final String productDetail){
         return new Product(productDetail);
+    }
+
+    private Product(Name name, Price price, Quantity quantity){
+        this.name = name;
+        this.price = price;
+        this.quantity = quantity;
     }
 
     private String[] splitProduct(final String productDetail){
@@ -62,4 +69,15 @@ public class Product {
     public int getQuantity() {
         return quantity.getQuantity();
     }
+
+    public boolean isSoldOut() {
+        return quantity.getQuantity() <= SOLD_OUT_QUANTITY;
+    }
+
+    public Product decreaseQuantity() {
+        Quantity subtractedQuantity = quantity.subtract();
+        return new Product(name, price, subtractedQuantity);
+    }
+
 }
+

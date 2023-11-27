@@ -14,8 +14,16 @@ public class PaymentAmount {
         this.paymentAmount = validateDivisibleBy1000(validateRange(amount));
     }
 
+    private PaymentAmount(final int paymentAmount){
+        this.paymentAmount = paymentAmount;
+    }
+
     public static PaymentAmount create(final String payment){
         return new PaymentAmount(payment);
+    }
+
+    public static PaymentAmount create(final int paymentAmount){
+        return new PaymentAmount(paymentAmount);
     }
 
     public int getPaymentAmount(){

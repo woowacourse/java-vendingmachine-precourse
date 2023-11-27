@@ -1,14 +1,18 @@
 package domain.wrapper;
 
 import domain.constant.Constant;
+import util.exception.NotEnoughBalanceException;
+import util.exception.SoldOutException;
+import util.message.ExceptionMessage;
 
 import java.util.Objects;
 
 import static util.message.ExceptionMessage.*;
-import static util.message.ExceptionMessage.TEN_UNIT_MESSAGE;
 
 public class Quantity {
-    private final int quantity;
+
+    private static final int SUBTRACT_QUANTITY = 1;
+    private int quantity;
 
     private Quantity(final String quantityInfo){
         validateBlank(quantityInfo);
@@ -17,8 +21,16 @@ public class Quantity {
         this.quantity = amount;
     }
 
+    private Quantity(int quantity) {
+        this.quantity = quantity;
+    }
+
     public static Quantity create(final String quantityInfo){
         return new Quantity(quantityInfo);
+    }
+
+    public void add(int amount) {
+        this.quantity += amount;
     }
 
     private void validateBlank(final String productDetail){
@@ -59,5 +71,16 @@ public class Quantity {
 
     public int getQuantity() {
         return quantity;
+    }
+
+    public Quantity subtract() {
+        validateAbleToSubtractItemQuantity(quantity);
+        return new Quantity(quantity - SUBTRACT_QUANTITY);
+    }
+
+    private void validateAbleToSubtractItemQuantity(int quantity){
+        if (quantity <= 0) {
+            throw new SoldOutException();
+        }
     }
 }

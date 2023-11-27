@@ -10,7 +10,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThatThrownBy;
 import static util.message.ExceptionMessage.*;
-import static util.message.ExceptionMessage.TEN_UNIT_MESSAGE;
 
 public class ProductQuantityTest {
     @ParameterizedTest

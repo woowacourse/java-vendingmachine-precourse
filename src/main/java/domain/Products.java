@@ -6,8 +6,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static domain.constant.ProductsConstant.*;
-import static util.message.ExceptionMessage.BLANK_MESSAGE;
-import static util.message.ExceptionMessage.DUPLICATE_MESSAGE;
+import static util.message.ExceptionMessage.*;
 
 public class Products {
     private final List<Product> products;
@@ -17,6 +16,10 @@ public class Products {
         this.products = create(productsInfo);
         validateDuplicateProducts();
         validateDuplicateProductName();
+    }
+
+    public List<Product> getProducts() {
+        return products;
     }
 
     private void validateBlank(final String productsInfo){
@@ -70,8 +73,16 @@ public class Products {
         return Objects.hash(products);
     }
 
-    public boolean containsProductName(String productName) {
-        return products.stream().anyMatch(product -> product.getName().equals(productName));
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append("입력한 상품 정보").append('\n');
+        for(Product product : products){
+            sb.append(product.getName() + " " + product.getPrice() + " " + product.getQuantity()).append('\n');
+        }
+        return sb.toString();
     }
 
+
 }
+

@@ -1,6 +1,7 @@
 package domain;
 
 import domain.wrapper.PaymentAmount;
+import domain.wrapper.Price;
 import domain.wrapper.VendingMachineAmount;
 
 public class Payment {
@@ -9,14 +10,23 @@ public class Payment {
         this.payment = PaymentAmount.create(payment);
     }
 
+    private Payment(int payment){
+        this.payment = PaymentAmount.create(payment);
+    }
+
     public static Payment create(final String payment){
         return new Payment(payment);
     }
 
-    //쉽게 말해, getter를 통해 얻은 상태값으로 하려고 했던 '행동'을
-    // 그 상태값을 가진 객체가 하도록 '행동'의 주체를 옮기는 것이다.
-
     public int getPayment(){
         return payment.getPaymentAmount();
+    }
+
+    public boolean canBuy(Product product) {
+        return payment.getPaymentAmount() >= product.getPrice();
+    }
+
+    public Payment subtract(int price) {
+        return new Payment(payment.getPaymentAmount() - price);
     }
 }

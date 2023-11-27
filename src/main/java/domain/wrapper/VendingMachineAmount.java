@@ -10,7 +10,9 @@ public class VendingMachineAmount {
     private VendingMachineAmount(final String possesionAmount){
         validateNameBlank(possesionAmount);
         int amount = validateType(possesionAmount);
-        this.vendingMachineAmount = validateDivisibleBy10(validateRange(amount));
+        validateRange(amount);
+        validateDivisibleBy10(amount);
+        this.vendingMachineAmount = amount;
     }
 
     public static VendingMachineAmount create(final String possesionAmount){
@@ -37,17 +39,15 @@ public class VendingMachineAmount {
         return count;
     }
 
-    private int validateDivisibleBy10(final int amount){
+    private void validateDivisibleBy10(final int amount){
         if(amount % Constant.COIN_TEN.getValue() != Constant.ZERO.getValue()){
             throw new IllegalArgumentException(String.format(UNIT_MESSAGE.getValue(), Constant.COIN_TEN.getValue()));
         }
-        return amount;
     }
 
-    private int validateRange(final int amount) {
+    private void validateRange(final int amount) {
         if (amount < Constant.ZERO.getValue()) {
             throw new IllegalArgumentException(String.format(RANGE_MESSAGE.getValue(), Constant.ZERO.getValue()));
         }
-        return amount;
     }
 }

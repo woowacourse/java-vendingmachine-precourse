@@ -12,12 +12,4 @@ public class VendingMachineStatusDto {
     public static VendingMachineStatusDto create(final int coin, final int count) {
         return new VendingMachineStatusDto(coin, count);
     }
-
-    public int getCount(){
-        return count;
-    }
-
-    public int getCoin(){
-        return coin;
-    }
 }
