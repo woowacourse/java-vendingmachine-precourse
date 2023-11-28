@@ -22,32 +22,34 @@ public class ProductsController {
         userPaymentService = new UserPaymentService();
     }
 
-    public void initProductInfo(InputView inputView, OutputView outputView){
-        String productInfo = getProductInfo(inputView);
-        products = createProducts(productInfo);
+    public void generateProductInfo(){
+        String productInfo = getProductInfo();
+        try{
+            products = createProducts(productInfo);
+        } catch (IllegalArgumentException e){
+            OutputView.printMessage(e.getMessage());
+            generateProductInfo();
+        }
     }
 
-    private String getProductInfo(InputView inputView){
-        return inputView.getUserInput(() -> {
-            OutputView.printMessage(INPUT_PRODUCT_DETAIL.getValue());
-            return inputView.readConsole();
-        });
+    private String getProductInfo(){
+        return InputView.readConsole();
     }
 
     private Products createProducts(String productInfo){
         return productsService.createProducts(productInfo);
     }
 
-    public void buyProduct(InputView inputView){
-        String wantedProduct = getSelectedProduct(inputView);
+    public void buyProduct(){
+        String wantedProduct = getSelectedProduct();
         ProductNameDto productNameDto = createSelectedProduct(wantedProduct);
         try{
             productsService.buyProduct(productNameDto);
             Payment payment = userPaymentService.getUserPayment();
             OutputView.printCurrentUserBalance(payment.getPayment());
         } catch(IllegalArgumentException e){
-            OutputView.printError(e.getMessage());
-            buyProduct(inputView);
+            OutputView.printMessage(e.getMessage());
+            buyProduct();
         }
     }
 
@@ -55,11 +57,9 @@ public class ProductsController {
         return ProductNameDto.create(wantedProduct);
     }
 
-    private String getSelectedProduct(InputView inputView){
-        return inputView.getUserInput(() -> {
-            OutputView.printMessage(INPUT_SELECTED_PRODUCT.getValue());
-            return inputView.readConsole();
-        });
+    private String getSelectedProduct(){
+        OutputView.printMessage(INPUT_SELECTED_PRODUCT.getValue());
+        return InputView.readConsole();
     }
 
     public boolean checkAvailableToPurchase() {

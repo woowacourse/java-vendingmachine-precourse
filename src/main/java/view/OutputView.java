@@ -22,16 +22,12 @@ public class OutputView {
         System.out.println(String.format(COIN_OUTPUT_FORMAT.getValue(), type, coinQuantity));
     }
 
-    public void printPaymentStatus(PaymentStatusDto paymentStatusDto){
+    public static void printPaymentStatus(PaymentStatusDto paymentStatusDto){
         System.out.println(String.format(PAYMENT_AMOUNT.getValue(), paymentStatusDto.getPayment()));
     }
 
     public static void printCurrentUserBalance(int userBalance) {
         System.out.println(String.format(PAYMENT_AMOUNT.getValue(), userBalance));
-    }
-
-    public static void printError(String message) {
-        System.out.println(ERROR_MESSAGE_PREFIX + message);
     }
 
     public static void printChange(CoinsDto coinsDto) {

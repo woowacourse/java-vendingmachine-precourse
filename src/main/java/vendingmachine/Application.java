@@ -3,32 +3,28 @@ package vendingmachine;
 import controller.ProductsController;
 import controller.UserPaymentController;
 import controller.VendingMachineController;
-import view.InputView;
-import view.OutputView;
 
 public class Application {
     private static final VendingMachineController vendingMachineController = new VendingMachineController();
     private static final ProductsController productsController = new ProductsController();
     private static final UserPaymentController userPaymentController = new UserPaymentController();
-    private static final InputView inputView = new InputView();
-    private static final OutputView outputView = new OutputView();
 
     public static void main(String[] args) {
-        init(inputView, outputView);
-        purchaseProduct(inputView);
+        init();
+        purchaseProduct();
         printChange();
     }
 
-    private static void init(InputView inputView, OutputView outputView){
-        vendingMachineController.generateCoins(inputView, outputView);
+    private static void init(){
+        vendingMachineController.generateCoins();
         vendingMachineController.printGeneratedCoins();
-        productsController.initProductInfo(inputView, outputView);
-        userPaymentController.generateUserBalance(inputView,outputView);
+        productsController.generateProductInfo();
+        userPaymentController.generateUserBalance();
     }
 
-    private static void purchaseProduct(InputView inputView){
+    private static void purchaseProduct(){
         while (productsController.checkAvailableToPurchase()) {
-            productsController.buyProduct(inputView);
+            productsController.buyProduct();
         }
     }
 

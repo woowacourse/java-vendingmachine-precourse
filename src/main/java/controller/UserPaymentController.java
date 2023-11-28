@@ -15,28 +15,21 @@ public class UserPaymentController {
         userPaymentService = new UserPaymentService();
     }
 
-    public void generateUserBalance(InputView inputView, OutputView outputView) {
-
+    public void generateUserBalance() {
+        String paymentAmount = getPayment();
         try {
-            initUserPayment(inputView, outputView);
+            Payment payment = createPayment(paymentAmount);
+            PaymentStatusDto paymentStatusDto = userPaymentService.createPaymentStatusDto(payment);
+            OutputView.printPaymentStatus(paymentStatusDto);
         } catch (IllegalArgumentException e) {
-            OutputView.printError(e.getMessage());
-            generateUserBalance(inputView, outputView);
+            OutputView.printMessage(e.getMessage());
+            generateUserBalance();
         }
     }
 
-    public void initUserPayment(InputView inputView, OutputView outputView){
-        String paymentAmount = getPayment(inputView);
-        Payment payment = createPayment(paymentAmount);
-        PaymentStatusDto paymentStatusDto = userPaymentService.createPaymentStatusDto(payment);
-        outputView.printPaymentStatus(paymentStatusDto);
-    }
-
-    private String getPayment(InputView inputView){
-        return inputView.getUserInput(() -> {
-            OutputView.printMessage(INPUT_PAYMENT.getValue());
-            return inputView.readConsole();
-        });
+    private String getPayment(){
+        OutputView.printMessage(INPUT_PAYMENT.getValue());
+        return InputView.readConsole();
     }
 
     private Payment createPayment(String paymentAmount){

@@ -20,14 +20,15 @@ public class VendingMachineController {
         vendingMachineService = new VendingMachineService();
     }
 
-    public void generateCoins(InputView inputView, OutputView outputView) {
-        PossessionAmount possessionAmount = initPossessionAmount(inputView, outputView);
+    public void generateCoins() {
+        String amount = getPossessionAmount();
 
         try {
+            PossessionAmount possessionAmount = createPossessionAmount(amount);
             initCoins(possessionAmount);
         } catch (IllegalArgumentException e) {
-            OutputView.printError(e.getMessage());
-            generateCoins(inputView, outputView);
+            OutputView.printMessage(e.getMessage());
+            generateCoins();
         }
     }
 
@@ -35,18 +36,9 @@ public class VendingMachineController {
         vendingMachineService.generateRandomCoins(possessionAmount.getPossessionAmount());
     }
 
-    public PossessionAmount initPossessionAmount(InputView inputView, OutputView outputView){
-        String amount = getPossessionAmount(inputView);
-        return createPossessionAmount(amount);
-    }
-
-
-
-    private String getPossessionAmount(InputView inputView){
-        return inputView.getUserInput(() -> {
-            OutputView.printMessage(INPUT_POSSESSION_AMOUNT_MESSAGE.getValue());
-            return inputView.readConsole();
-        });
+    private String getPossessionAmount(){
+        OutputView.printMessage(INPUT_POSSESSION_AMOUNT_MESSAGE.getValue());
+        return InputView.readConsole();
     }
 
     private PossessionAmount createPossessionAmount(String possessionAmount){
