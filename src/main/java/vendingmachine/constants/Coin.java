@@ -17,20 +17,13 @@ public enum Coin {
         this.amount = amount;
     }
 
-    public static EnumMap<Coin, Integer> getCoins(int money) {
-        List<Coin> sorted = getSortedCoins();
-        EnumMap<Coin, Integer> ret = new EnumMap<>(Coin.class);
-        for (Coin c : sorted) {
-            ret.put(c, money / c.amount);
-            money %= c.amount;
-        }
-        return ret;
-    }
-
-    private static List<Coin> getSortedCoins() {
+    public static List<Coin> getSortedCoins() {
         return Arrays.stream(values())
                 .sorted((l, r) -> r.amount - l.amount)
                 .collect(Collectors.toList());
     }
 
+    public int getPrice() {
+        return amount;
+    }
 }
