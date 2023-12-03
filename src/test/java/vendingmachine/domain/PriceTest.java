@@ -52,6 +52,7 @@ class PriceTest {
         }
     }
 
+    @Nested
     class getPrice {
         @DisplayName("주어진 금액을 반환한다.")
         @Test
