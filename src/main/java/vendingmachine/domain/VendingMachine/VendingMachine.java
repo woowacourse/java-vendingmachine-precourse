@@ -13,4 +13,7 @@ public class VendingMachine {
         items = new ArrayList<>();
     }
 
+    public String getCoinsMessage() {
+        return wallet.getMessage();
+    }
 }
