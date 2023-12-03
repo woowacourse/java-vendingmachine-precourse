@@ -5,6 +5,7 @@ import vendingmachine.domain.VendingMachine.Count;
 import vendingmachine.domain.VendingMachine.Item;
 import vendingmachine.domain.VendingMachine.ItemName;
 import vendingmachine.domain.VendingMachine.Price;
+import vendingmachine.util.Validator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -61,20 +62,12 @@ public class ItemService {
     }
 
     private static Item getItem(String itemName, String price, String count) {
-        validateNumber(price);
-        validateNumber(count);
+        Validator.validateNumber(price);
+        Validator.validateNumber(count);
         return new Item(
                 new ItemName(itemName),
                 new Price(Integer.parseInt(price)),
                 new Count(Integer.parseInt(count))
         );
-    }
-
-    private static void validateNumber(String price) {
-        try {
-            Integer.parseInt(price);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("[ERROR] 입력이 숫자가 아닙니다!");
-        }
     }
 }
