@@ -10,7 +10,7 @@ public class OutputView {
     }
 
     public static void printMoney(Money money) {
-        System.out.printf("투입 금액 : %d원%n", money.getMoney());
+        System.out.printf("투입 금액: %d원%n", money.getMoney());
     }
 
     public static void printRest(Money money) {
