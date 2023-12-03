@@ -1,16 +1,18 @@
 package vendingmachine.domain.VendingMachine;
 
+import vendingmachine.domain.Items;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class VendingMachine {
 
-    private final List<Item> items;
+    private final Items items;
     private final Wallet wallet;
 
-    public VendingMachine(Wallet wallet) {
+    public VendingMachine(Wallet wallet, Items items) {
         this.wallet = wallet;
-        items = new ArrayList<>();
+        this.items = items;
     }
 
     public String getCoinsMessage() {

@@ -12,4 +12,7 @@ public class Item {
         this.count = count;
     }
 
+    public String getName() {
+        return itemName.getName();
+    }
 }
