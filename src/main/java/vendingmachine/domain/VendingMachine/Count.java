@@ -17,7 +17,7 @@ public class Count {
     }
 
     private void validateZero(int count) {
-        if(isZero()) {
+        if (isZero()) {
             throw new IllegalArgumentException("[ERROR] 이미 개수가 0입니다!");
         }
     }

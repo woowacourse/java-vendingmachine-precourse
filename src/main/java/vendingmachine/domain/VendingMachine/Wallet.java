@@ -1,8 +1,5 @@
 package vendingmachine.domain.VendingMachine;
 
-import vendingmachine.constants.Coin;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 

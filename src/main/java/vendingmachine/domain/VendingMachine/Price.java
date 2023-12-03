@@ -1,7 +1,5 @@
 package vendingmachine.domain.VendingMachine;
 
-import java.util.IllformedLocaleException;
-
 public class Price {
     private final int price;
 
@@ -22,7 +20,7 @@ public class Price {
     }
 
     private void validateDivisibleByTen(int price) {
-        if(price % 10 != 0) {
+        if (price % 10 != 0) {
             throw new IllegalArgumentException("[ERROR] 10원으로 나누어지지 않습니다!");
         }
     }

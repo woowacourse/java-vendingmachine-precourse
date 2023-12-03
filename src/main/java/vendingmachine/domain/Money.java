@@ -27,8 +27,8 @@ public class Money {
     public String getRestMessage() {
         StringBuilder stringBuilder = new StringBuilder();
         int money = this.money;
-        for(Coin c : Coin.getSortedCoins()) {
-            if(c.getPrice() <= money) {
+        for (Coin c : Coin.getSortedCoins()) {
+            if (c.getPrice() <= money) {
                 stringBuilder.append(new CoinCount(c, money / c.getPrice()).getMessage());
             }
             money %= c.getPrice();

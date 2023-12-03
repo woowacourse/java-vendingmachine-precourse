@@ -1,9 +1,8 @@
-package vendingmachine.service.VendingMachine;
+package vendingmachine.service;
 
 import vendingmachine.domain.Items;
 import vendingmachine.domain.VendingMachine.VendingMachine;
 import vendingmachine.domain.VendingMachine.Wallet;
-import vendingmachine.service.ItemService;
 import vendingmachine.util.Validator;
 
 public class VendingMachineService {

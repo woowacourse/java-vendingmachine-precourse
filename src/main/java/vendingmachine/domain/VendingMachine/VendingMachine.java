@@ -3,9 +3,6 @@ package vendingmachine.domain.VendingMachine;
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class VendingMachine {
 
     private final Items items;
@@ -30,7 +27,7 @@ public class VendingMachine {
 
     public Money buy(ItemName itemName, Money money) {
         Item item = items.find(itemName);
-        if(item.isEmpty() || !item.isAvailable(money.getMoney())) {
+        if (item.isEmpty() || !item.isAvailable(money.getMoney())) {
             throw new IllegalArgumentException("[ERROR] 구매할 수 없습니다.");
         }
         item.reduce();

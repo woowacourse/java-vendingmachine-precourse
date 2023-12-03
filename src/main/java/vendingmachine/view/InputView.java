@@ -2,11 +2,9 @@ package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.VendingMachine.Item;
 import vendingmachine.domain.VendingMachine.ItemName;
 import vendingmachine.domain.VendingMachine.VendingMachine;
-import vendingmachine.service.VendingMachine.VendingMachineService;
-import vendingmachine.util.Validator;
+import vendingmachine.service.VendingMachineService;
 
 public class InputView {
     public static VendingMachine getVendingMachine() {
