@@ -17,4 +17,8 @@ public class OutputView {
         System.out.println("잔돈");
         System.out.println(money.getRestMessage());
     }
+
+    public static void printException(Exception exception) {
+        System.out.println(exception.getMessage());
+    }
 }
