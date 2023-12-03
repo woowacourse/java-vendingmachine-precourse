@@ -2,9 +2,9 @@ package vendingmachine.controller;
 
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.VendingMachine.ItemName;
-import vendingmachine.domain.VendingMachine.VendingMachine;
-import vendingmachine.domain.VendingMachine.Wallet;
+import vendingmachine.domain.ItemName;
+import vendingmachine.domain.VendingMachine;
+import vendingmachine.domain.Wallet;
 import vendingmachine.util.ExceptionHandler;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;

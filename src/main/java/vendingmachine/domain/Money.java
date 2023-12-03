@@ -1,7 +1,6 @@
 package vendingmachine.domain;
 
 import vendingmachine.constants.Coin;
-import vendingmachine.domain.VendingMachine.CoinCount;
 import vendingmachine.util.Validator;
 
 public class Money {

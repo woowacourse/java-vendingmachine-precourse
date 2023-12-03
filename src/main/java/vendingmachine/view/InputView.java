@@ -3,9 +3,8 @@ package vendingmachine.view;
 import camp.nextstep.edu.missionutils.Console;
 import vendingmachine.domain.Items;
 import vendingmachine.domain.Money;
-import vendingmachine.domain.VendingMachine.ItemName;
-import vendingmachine.domain.VendingMachine.VendingMachine;
-import vendingmachine.domain.VendingMachine.Wallet;
+import vendingmachine.domain.ItemName;
+import vendingmachine.domain.Wallet;
 import vendingmachine.service.ItemService;
 import vendingmachine.service.VendingMachineService;
 

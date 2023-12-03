@@ -1,10 +1,10 @@
 package vendingmachine.service;
 
 import vendingmachine.domain.Items;
-import vendingmachine.domain.VendingMachine.Count;
-import vendingmachine.domain.VendingMachine.Item;
-import vendingmachine.domain.VendingMachine.ItemName;
-import vendingmachine.domain.VendingMachine.Price;
+import vendingmachine.domain.Count;
+import vendingmachine.domain.Item;
+import vendingmachine.domain.ItemName;
+import vendingmachine.domain.Price;
 import vendingmachine.util.Validator;
 
 import java.util.Arrays;

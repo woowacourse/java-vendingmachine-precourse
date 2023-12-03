@@ -1,7 +1,4 @@
-package vendingmachine.domain.VendingMachine;
-
-import vendingmachine.domain.Items;
-import vendingmachine.domain.Money;
+package vendingmachine.domain;
 
 public class VendingMachine {
 

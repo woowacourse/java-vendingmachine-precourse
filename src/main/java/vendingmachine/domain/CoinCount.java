@@ -1,4 +1,4 @@
-package vendingmachine.domain.VendingMachine;
+package vendingmachine.domain;
 
 import vendingmachine.constants.Coin;
 

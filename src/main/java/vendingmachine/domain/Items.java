@@ -1,8 +1,5 @@
 package vendingmachine.domain;
 
-import vendingmachine.domain.VendingMachine.Item;
-import vendingmachine.domain.VendingMachine.ItemName;
-
 import java.util.List;
 
 public class Items {

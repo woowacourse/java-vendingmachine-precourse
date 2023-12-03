@@ -1,6 +1,6 @@
 package vendingmachine.service;
 
-import vendingmachine.domain.VendingMachine.Wallet;
+import vendingmachine.domain.Wallet;
 import vendingmachine.util.Validator;
 
 public class VendingMachineService {

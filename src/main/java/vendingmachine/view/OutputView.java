@@ -1,7 +1,7 @@
 package vendingmachine.view;
 
 import vendingmachine.domain.Money;
-import vendingmachine.domain.VendingMachine.VendingMachine;
+import vendingmachine.domain.VendingMachine;
 
 public class OutputView {
     public static void printVendingMachineCoins(VendingMachine vendingMachine) {
