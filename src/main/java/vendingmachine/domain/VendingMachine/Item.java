@@ -1,7 +1,5 @@
 package vendingmachine.domain.VendingMachine;
 
-import vendingmachine.constants.ItemName;
-
 public class Item {
 
     private final ItemName itemName;
