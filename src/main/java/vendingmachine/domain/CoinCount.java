@@ -26,4 +26,8 @@ public class CoinCount {
     public String getMessage() {
         return String.format("%d원 - %d개", coin.getPrice(), count);
     }
+
+    public boolean isZero() {
+        return count == 0;
+    }
 }

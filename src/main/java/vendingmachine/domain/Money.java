@@ -3,6 +3,9 @@ package vendingmachine.domain;
 import vendingmachine.constants.Coin;
 import vendingmachine.util.Validator;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class Money {
     private int money;
 
@@ -24,14 +27,9 @@ public class Money {
     }
 
     public String getRestMessage() {
-        StringBuilder stringBuilder = new StringBuilder();
-        int money = this.money;
-        for (Coin c : Coin.getSortedCoins()) {
-            if (c.getPrice() <= money) {
-                stringBuilder.append(new CoinCount(c, money / c.getPrice()).getMessage());
-            }
-            money %= c.getPrice();
-        }
-        return stringBuilder.toString();
+        return CoinCount.build(money).stream()
+                .filter(coinCount -> !coinCount.isZero())
+                .map(CoinCount::getMessage)
+                .collect(Collectors.joining("\n"));
     }
 }
