@@ -31,6 +31,7 @@ public class ItemService {
     private static Item getItem(String string) {
         validateItemStringFormat(string);
         validateItemDelimiter(string);
+        string = removeBracket(string);
         String[] splited = string.split(ITEM_DELIMITER);
         return getItem(splited[0].trim(), splited[1].trim(), splited[2].trim());
     }
@@ -45,6 +46,10 @@ public class ItemService {
         if (countItemDelimiterCount(string) != ITEM_DELIMITER_COUNT) {
             throw new IllegalArgumentException("[ERROR] 입력 포맷이 올바르지 않습니다.");
         }
+    }
+
+    private static String removeBracket(String string) {
+        return string.substring(1, string.length() - 1);
     }
 
     private static boolean isWrappedInSquareBracket(String string) {
