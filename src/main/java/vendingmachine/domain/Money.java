@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 public class Money {
     private int money;
 
-    public Money(int money) {
+    private Money(int money) {
         this.money = money;
     }
 
