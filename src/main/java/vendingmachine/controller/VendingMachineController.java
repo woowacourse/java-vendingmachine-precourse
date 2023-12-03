@@ -34,9 +34,13 @@ public class VendingMachineController {
                 break;
             }
             ItemName itemName = InputView.getItemToBuy();
-            money = vendingMachine.buy(itemName, money);
+            repeat(() -> vendingMachine.buy(itemName, money));
         }
         return money;
+    }
+
+    private static void repeat(Runnable runnable) {
+        ExceptionHandler.repeat(runnable, OutputView::printException);
     }
 
     private static boolean isNotAvailable(VendingMachine vendingMachine, Money money) {

@@ -13,4 +13,15 @@ public class ExceptionHandler {
             }
         }
     }
+
+    public static void repeat(Runnable runnable, Consumer<Exception> consumer) {
+        while (true) {
+            try {
+                runnable.run();
+                break;
+            } catch (IllegalArgumentException e) {
+                consumer.accept(e);
+            }
+        }
+    }
 }

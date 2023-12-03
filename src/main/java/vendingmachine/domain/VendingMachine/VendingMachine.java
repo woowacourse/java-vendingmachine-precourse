@@ -25,12 +25,12 @@ public class VendingMachine {
         return items.containsAvailableItem(money);
     }
 
-    public Money buy(ItemName itemName, Money money) {
+    public void buy(ItemName itemName, Money money) {
         Item item = items.find(itemName);
         if (item.isEmpty() || !item.isAvailable(money.getMoney())) {
             throw new IllegalArgumentException("[ERROR] 구매할 수 없습니다.");
         }
         item.reduce();
-        return money.reduce(item.getPrice());
+        money.reduce(item.getPrice());
     }
 }

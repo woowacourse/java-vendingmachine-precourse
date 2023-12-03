@@ -5,7 +5,7 @@ import vendingmachine.domain.VendingMachine.CoinCount;
 import vendingmachine.util.Validator;
 
 public class Money {
-    private final int money;
+    private int money;
 
     public Money(int money) {
         this.money = money;
@@ -20,8 +20,8 @@ public class Money {
         return money;
     }
 
-    public Money reduce(int reduce) {
-        return new Money(money - reduce);
+    public void reduce(int reduce) {
+        money -= reduce;
     }
 
     public String getRestMessage() {
