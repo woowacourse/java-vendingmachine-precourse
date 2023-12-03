@@ -1,5 +1,7 @@
 package vendingmachine.domain;
 
+import java.util.List;
+
 public class VendingMachine {
 
     private final Items items;
@@ -29,5 +31,9 @@ public class VendingMachine {
         }
         item.reduce();
         money.reduce(item.getPrice());
+    }
+
+    public List<CoinCount> getRests(Money money) {
+        return wallet.getRests(money);
     }
 }

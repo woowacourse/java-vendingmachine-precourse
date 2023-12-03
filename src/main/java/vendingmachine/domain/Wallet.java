@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,4 +24,17 @@ public class Wallet {
                 .collect(Collectors.joining("\n"));
     }
 
+    public List<CoinCount> getRests(Money money) {
+        List<CoinCount> ret = new ArrayList<>();
+        int amount = money.getMoney();
+        for(CoinCount c : coins) {
+            int cnt = Math.min(c.getCount(), amount / c.getCoin().getPrice());
+            if(cnt == 0) {
+                continue;
+            }
+            ret.add(new CoinCount(c.getCoin(), cnt));
+            amount -= cnt * c.getCoin().getPrice();
+        }
+        return ret;
+    }
 }

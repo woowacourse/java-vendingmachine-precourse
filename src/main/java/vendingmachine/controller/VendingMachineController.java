@@ -1,14 +1,11 @@
 package vendingmachine.controller;
 
-import vendingmachine.domain.Items;
-import vendingmachine.domain.Money;
-import vendingmachine.domain.ItemName;
-import vendingmachine.domain.VendingMachine;
-import vendingmachine.domain.Wallet;
+import vendingmachine.domain.*;
 import vendingmachine.util.ExceptionHandler;
 import vendingmachine.view.InputView;
 import vendingmachine.view.OutputView;
 
+import java.util.List;
 import java.util.function.Supplier;
 
 public class VendingMachineController {
@@ -18,7 +15,8 @@ public class VendingMachineController {
         OutputView.printVendingMachineCoins(vendingMachine);
         Money money = repeat(InputView::getMoney);
         money = buyItems(money, vendingMachine);
-        OutputView.printRest(money);
+        List<CoinCount> coinCounts = vendingMachine.getRests(money);
+        OutputView.printRest(coinCounts);
     }
 
     private static VendingMachine getVendingMachine() {

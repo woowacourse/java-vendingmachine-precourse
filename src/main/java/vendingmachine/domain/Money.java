@@ -33,11 +33,4 @@ public class Money {
         validateMoney(money - reduce);
         money -= reduce;
     }
-
-    public String getRestMessage() {
-        return CoinCount.build(money).stream()
-                .filter(coinCount -> !coinCount.isZero())
-                .map(CoinCount::getMessage)
-                .collect(Collectors.joining("\n"));
-    }
 }

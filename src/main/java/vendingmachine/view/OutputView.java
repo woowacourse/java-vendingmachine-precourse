@@ -1,7 +1,11 @@
 package vendingmachine.view;
 
+import vendingmachine.domain.CoinCount;
 import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class OutputView {
     public static void printVendingMachineCoins(VendingMachine vendingMachine) {
@@ -13,9 +17,11 @@ public class OutputView {
         System.out.printf("투입 금액: %d원%n", money.getMoney());
     }
 
-    public static void printRest(Money money) {
+    public static void printRest(List<CoinCount> coinCounts) {
         System.out.println("잔돈");
-        System.out.println(money.getRestMessage());
+        System.out.println(coinCounts.stream()
+                .map(CoinCount::getMessage)
+                .collect(Collectors.joining("\n")));
     }
 
     public static void printException(Exception exception) {

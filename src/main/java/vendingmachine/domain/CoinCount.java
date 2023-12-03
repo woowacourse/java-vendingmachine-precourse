@@ -30,4 +30,12 @@ public class CoinCount {
     public boolean isZero() {
         return count == 0;
     }
+
+    public Coin getCoin() {
+        return coin;
+    }
+
+    public int getCount() {
+        return count;
+    }
 }

@@ -53,21 +53,4 @@ class MoneyTest {
             assertEquals(money.getMoney(), 90);
         }
     }
-
-    @Nested
-    class getRestMessage {
-        @DisplayName("잔돈을 잘 구하는지 확인한다.")
-        @Test
-        void testGetRestMessage() {
-            Money money = Money.of("110");
-            assertThat(money.getRestMessage())
-                    .contains(
-                            "100원 - 1개",
-                            "10원 - 1개"
-                    ).doesNotContain(
-                            "500원 - 0개",
-                            "50원 - 0개"
-                    );
-        }
-    }
 }
