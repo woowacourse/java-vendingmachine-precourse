@@ -12,6 +12,11 @@ public class VendingMachineController {
         VendingMachine vendingMachine = InputView.getVendingMachine();
         OutputView.printVendingMachineCoins(vendingMachine);
         Money money = InputView.getMoney();
+        money = buyItems(money, vendingMachine);
+        OutputView.printRest(money);
+    }
+
+    private static Money buyItems(Money money, VendingMachine vendingMachine) {
         while (true) {
             OutputView.printMoney(money);
             if (isNotAvailable(vendingMachine, money)) {
@@ -20,6 +25,7 @@ public class VendingMachineController {
             ItemName itemName = InputView.getItemToBuy();
             money = vendingMachine.buy(itemName, money);
         }
+        return money;
     }
 
     private static boolean isNotAvailable(VendingMachine vendingMachine, Money money) {
