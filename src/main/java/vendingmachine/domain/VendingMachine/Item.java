@@ -15,4 +15,24 @@ public class Item {
     public String getName() {
         return itemName.getName();
     }
+
+    public boolean isEmpty() {
+        return count.isZero();
+    }
+
+    public boolean isAvailable(int money) {
+        return price.isAvailable(money);
+    }
+
+    public boolean is(ItemName itemName) {
+        return this.itemName.getName().equals(itemName.getName());
+    }
+
+    public void reduce() {
+        count.reduce();
+    }
+
+    public int getPrice() {
+        return price.getPrice();
+    }
 }

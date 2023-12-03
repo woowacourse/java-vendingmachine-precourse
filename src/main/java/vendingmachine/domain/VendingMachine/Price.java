@@ -26,4 +26,12 @@ public class Price {
             throw new IllegalArgumentException("[ERROR] 10원으로 나누어지지 않습니다!");
         }
     }
+
+    public boolean isAvailable(int money) {
+        return price <= money;
+    }
+
+    public int getPrice() {
+        return price;
+    }
 }

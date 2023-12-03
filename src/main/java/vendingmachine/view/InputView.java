@@ -1,6 +1,8 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.VendingMachine.Item;
+import vendingmachine.domain.VendingMachine.ItemName;
 import vendingmachine.domain.VendingMachine.VendingMachine;
 import vendingmachine.service.VendingMachine.VendingMachineService;
 import vendingmachine.util.Validator;
@@ -19,5 +21,10 @@ public class InputView {
         String string = Console.readLine();
         Validator.validateNumber(string);
         return Integer.parseInt(string);
+    }
+
+    public static ItemName getItemToBuy() {
+        System.out.println("구매할 상품을 입력해 주세요.");
+        return new ItemName(Console.readLine());
     }
 }
