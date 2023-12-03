@@ -19,27 +19,4 @@ public class Wallet {
                 .collect(Collectors.joining("\n"));
     }
 
-    private static class CoinCount {
-        private final Coin coin;
-        private int count;
-
-        CoinCount(Coin coin, int count) {
-            this.coin = coin;
-            this.count = count;
-        }
-
-        public static List<CoinCount> build(int money) {
-            List<CoinCount> ret = new ArrayList<>();
-            for (Coin c : Coin.getSortedCoins()) {
-                ret.add(new CoinCount(c, money / c.getPrice()));
-                money %= c.getPrice();
-            }
-            return ret;
-        }
-
-        public String getMessage() {
-            return String.format("%d원 - %d개", coin.getPrice(), count);
-        }
-    }
-
 }
