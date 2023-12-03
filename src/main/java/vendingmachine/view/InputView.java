@@ -1,13 +1,11 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import vendingmachine.domain.Items;
 import vendingmachine.domain.VendingMachine.VendingMachine;
-import vendingmachine.service.ItemService;
 import vendingmachine.service.VendingMachine.VendingMachineService;
+import vendingmachine.util.Validator;
 
 public class InputView {
-
     public static VendingMachine getVendingMachine() {
         System.out.println("자판기가 보유하고 있는 금액을 입력해 주세요.");
         String walletString = Console.readLine();
@@ -16,4 +14,10 @@ public class InputView {
         return VendingMachineService.getVendingMachine(walletString, itemsString);
     }
 
+    public static int getMoney() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        String string = Console.readLine();
+        Validator.validateNumber(string);
+        return Integer.parseInt(string);
+    }
 }
