@@ -1,5 +1,6 @@
 package vendingmachine.view;
 
+import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine.VendingMachine;
 
 public class OutputView {
@@ -8,7 +9,7 @@ public class OutputView {
         System.out.println(vendingMachine.getCoinsMessage());
     }
 
-    public static void printMoney(int money) {
-        System.out.printf("투입 금액 : %d원%n", money);
+    public static void printMoney(Money money) {
+        System.out.printf("투입 금액 : %d원%n", money.getMoney());
     }
 }

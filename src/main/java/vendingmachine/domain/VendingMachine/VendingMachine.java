@@ -1,6 +1,7 @@
 package vendingmachine.domain.VendingMachine;
 
 import vendingmachine.domain.Items;
+import vendingmachine.domain.Money;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +28,12 @@ public class VendingMachine {
         return items.containsAvailableItem(money);
     }
 
-    public int buy(ItemName itemName, int money) {
+    public Money buy(ItemName itemName, Money money) {
         Item item = items.find(itemName);
-        if(item.isEmpty() || !item.isAvailable(money)) {
+        if(item.isEmpty() || !item.isAvailable(money.getMoney())) {
             throw new IllegalArgumentException("[ERROR] 구매할 수 없습니다.");
         }
         item.reduce();
-        return money - item.getPrice();
+        return money.reduce(item.getPrice());
     }
 }

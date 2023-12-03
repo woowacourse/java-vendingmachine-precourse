@@ -1,6 +1,7 @@
 package vendingmachine.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import vendingmachine.domain.Money;
 import vendingmachine.domain.VendingMachine.Item;
 import vendingmachine.domain.VendingMachine.ItemName;
 import vendingmachine.domain.VendingMachine.VendingMachine;
@@ -16,11 +17,9 @@ public class InputView {
         return VendingMachineService.getVendingMachine(walletString, itemsString);
     }
 
-    public static int getMoney() {
+    public static Money getMoney() {
         System.out.println("투입 금액을 입력해 주세요.");
-        String string = Console.readLine();
-        Validator.validateNumber(string);
-        return Integer.parseInt(string);
+        return Money.of(Console.readLine());
     }
 
     public static ItemName getItemToBuy() {
