@@ -10,7 +10,14 @@ public class Money {
     private int money;
 
     private Money(int money) {
+        validateMoney(money);
         this.money = money;
+    }
+
+    private void validateMoney(int money) {
+        if(money < 0) {
+            throw new IllegalArgumentException("[ERROR] 금액이 0 미만이 될 수 없습니다!");
+        }
     }
 
     public static Money of(String string) {
@@ -23,6 +30,7 @@ public class Money {
     }
 
     public void reduce(int reduce) {
+        validateMoney(money - reduce);
         money -= reduce;
     }
 
