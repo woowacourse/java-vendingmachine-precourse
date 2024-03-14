@@ -1,4 +1,4 @@
-package vendingmachine;
+package vendingmachine.domain;
 
 public enum Coin {
     COIN_500(500),
@@ -13,4 +13,7 @@ public enum Coin {
     }
 
     // 추가 기능 구현
+    public int getAmount() {
+        return this.amount;
+    }
 }

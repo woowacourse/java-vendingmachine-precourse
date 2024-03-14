@@ -33,4 +33,19 @@ class VendingMachineTest {
         assertThrows(IllegalArgumentException.class, vendingMachine::inputInitialMoney);
     }
 
+    @Test
+    void 동전_무작위생성() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        int initialMoneyInputValue = 450;
+        System.setIn(new ByteArrayInputStream(Integer.toString(initialMoneyInputValue).getBytes()));
+        vendingMachine.inputInitialMoney();
+        // when
+        vendingMachine.generateInitialCoins();
+        //then
+        int sumOfCoins = vendingMachine.getCoins().getSumOfCoins();
+        int currentMoney = vendingMachine.getCurrentMoney();
+        assertThat(sumOfCoins).isEqualTo(currentMoney);
+    }
+
 }
