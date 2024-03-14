@@ -9,7 +9,7 @@ public class Coins {
         this.coins = coins;
     }
 
-    public Map getCoins() {
+    public Map<Coin, Integer> getCoins() {
         return this.coins;
     }
 

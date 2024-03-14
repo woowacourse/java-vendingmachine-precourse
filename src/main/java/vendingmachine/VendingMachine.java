@@ -2,16 +2,20 @@ package vendingmachine;
 
 import vendingmachine.domain.Coin;
 import vendingmachine.domain.Coins;
+import vendingmachine.domain.Product;
+import vendingmachine.domain.Products;
 import vendingmachine.view.InputView;
 import camp.nextstep.edu.missionutils.Randoms;
 import vendingmachine.view.OutputView;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 public class VendingMachine {
     private int currentMoney;
     private Coins coins;
+    private Products products;
 
     public VendingMachine() {
     }
@@ -42,11 +46,19 @@ public class VendingMachine {
         OutputView.printCoins(coins);
     }
 
+    public void inputProducts() {
+        this.products = InputView.inputInitialProducts();
+    }
+
     public int getCurrentMoney() {
         return this.currentMoney;
     }
 
     public Coins getCoins() {
         return this.coins;
+    }
+
+    public Set<Product> getProducts() {
+        return this.products.getProducts();
     }
 }
