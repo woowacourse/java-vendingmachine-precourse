@@ -129,7 +129,7 @@ class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         System.setIn(new ByteArrayInputStream("[콜라,1500,0]".getBytes()));
         vendingMachine.inputProducts();
-        System.setIn(new ByteArrayInputStream("500".getBytes()));
+        System.setIn(new ByteArrayInputStream("10000".getBytes()));
         vendingMachine.inputUsersMoney();
         String inputString = "콜라";
         System.setIn(new ByteArrayInputStream(inputString.getBytes()));
