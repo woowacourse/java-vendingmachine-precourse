@@ -13,7 +13,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 class VendingMachineTest {
-
     @Test
     void 사용자로부터_정상적인_보유_금액_입력받기 () {
         // given
@@ -79,4 +78,62 @@ class VendingMachineTest {
         assertThat(vendingMachine.getCurrentUsersMoney()).isEqualTo(Integer.parseInt(inputString));
     }
 
+    @Test
+    void 사용자가_입력한_구매할_상품_가격에_맞춰_잔여투입금액_값_업데이트_정상입력() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,20]".getBytes()));
+        vendingMachine.inputProducts();
+        System.setIn(new ByteArrayInputStream("10000".getBytes()));
+        vendingMachine.inputUsersMoney();
+        String inputString = "콜라";
+        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        int correctResult = 8500;
+        // when
+        vendingMachine.buyProduct();
+        // then
+        assertThat(vendingMachine.getCurrentUsersMoney()).isEqualTo(correctResult);
+    }
+
+    @Test
+    void 사용자가_입력한_구매할_상품_가격에_맞춰_잔여투입금액_값_업데이트_존재하지않는상품() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,20]".getBytes()));
+        vendingMachine.inputProducts();
+        System.setIn(new ByteArrayInputStream("10000".getBytes()));
+        vendingMachine.inputUsersMoney();
+        String inputString = "닥터페퍼";
+        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        // when, then
+        assertThrows(IllegalArgumentException.class, vendingMachine::buyProduct);
+    }
+
+    @Test
+    void 사용자가_입력한_구매할_상품_가격에_맞춰_잔여투입금액_값_업데이트_너무비싼상품() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,20]".getBytes()));
+        vendingMachine.inputProducts();
+        System.setIn(new ByteArrayInputStream("500".getBytes()));
+        vendingMachine.inputUsersMoney();
+        String inputString = "콜라";
+        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        // when, then
+        assertThrows(IllegalArgumentException.class, vendingMachine::buyProduct);
+    }
+
+    @Test
+    void 사용자가_입력한_구매할_상품_가격에_맞춰_잔여투입금액_값_업데이트_소진된상품() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,0]".getBytes()));
+        vendingMachine.inputProducts();
+        System.setIn(new ByteArrayInputStream("500".getBytes()));
+        vendingMachine.inputUsersMoney();
+        String inputString = "콜라";
+        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        // when, then
+        assertThrows(IllegalArgumentException.class, vendingMachine::buyProduct);
+    }
 }

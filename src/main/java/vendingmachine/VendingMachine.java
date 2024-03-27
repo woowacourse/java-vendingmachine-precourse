@@ -58,6 +58,14 @@ public class VendingMachine {
         OutputView.printCurrentUsersMoney(currentUsersMoney);
     }
 
+    public void buyProduct() {
+        String selectedProductName = InputView.inputProductNameToBuy();
+        int cost = products.getCostByProductName(selectedProductName);
+        validateCostSmallerThanBudget(cost);
+        this.currentUsersMoney -= cost;
+        this.products = products.buyOne(selectedProductName);
+    }
+
     public int getCurrentChange() {
         return this.currentChange;
     }
@@ -72,5 +80,10 @@ public class VendingMachine {
 
     public int getCurrentUsersMoney() {
         return this.currentUsersMoney;
+    }
+
+    private void validateCostSmallerThanBudget(int cost) {
+        if(cost <= currentUsersMoney) return;
+        throw new IllegalArgumentException("[ERROR] 구매할 상품의 가격은 남은 투입 금액을 초과할 수 없다.");
     }
 }

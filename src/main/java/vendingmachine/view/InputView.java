@@ -35,6 +35,11 @@ public class InputView {
         return Integer.parseInt(inputString);
     }
 
+    public static String inputProductNameToBuy() {
+        System.out.println("구매할 상품명을 입력해주세요.");
+        return Console.readLine();
+    }
+
     public static void validateNatural(String input) {
         try {
             Integer.parseInt(input);
