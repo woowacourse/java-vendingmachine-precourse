@@ -67,4 +67,16 @@ class VendingMachineTest {
         assertThat(generatedProducts.size()).isEqualTo(2);  // 여기 질문!
     }
 
+    @Test
+    void 사용자로부터_투입_금액_입력받기() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        String inputString = "3000";
+        System.setIn(new ByteArrayInputStream(inputString.getBytes()));
+        // when
+        vendingMachine.inputUsersMoney();
+        // then
+        assertThat(vendingMachine.getCurrentUsersMoney()).isEqualTo(Integer.parseInt(inputString));
+    }
+
 }

@@ -14,10 +14,13 @@ import java.util.Set;
 
 public class VendingMachine {
     private int currentChange;
+    private int currentUsersMoney;
     private Coins coins;
     private Products products;
 
     public VendingMachine() {
+        currentChange = 0;
+        currentUsersMoney = 0;
     }
 
     public void inputInitialMoney() {
@@ -50,6 +53,10 @@ public class VendingMachine {
         this.products = InputView.inputInitialProducts();
     }
 
+    public void inputUsersMoney() {
+        this.currentUsersMoney = InputView.inputUsersMoney();
+    }
+
     public int getCurrentChange() {
         return this.currentChange;
     }
@@ -60,5 +67,9 @@ public class VendingMachine {
 
     public Set<Product> getProducts() {
         return this.products.getProducts();
+    }
+
+    public int getCurrentUsersMoney() {
+        return this.currentUsersMoney;
     }
 }

@@ -6,7 +6,6 @@ import vendingmachine.domain.Products;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.regex.Pattern;
 
 public class InputView {
     private InputView() {
@@ -26,6 +25,14 @@ public class InputView {
         validateProductInput(inputString);
         Set<Product> generatedProducts = parseProductInput(inputString);
         return new Products(generatedProducts);
+    }
+
+    public static int inputUsersMoney() {
+        System.out.println("투입 금액을 입력해 주세요.");
+        String inputString = Console.readLine();
+        validateNatural(inputString);
+        validateTensMultiple(inputString);
+        return Integer.parseInt(inputString);
     }
 
     public static void validateNatural(String input) {
