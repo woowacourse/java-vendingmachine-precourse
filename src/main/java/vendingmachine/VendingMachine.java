@@ -55,6 +55,7 @@ public class VendingMachine {
 
     public void inputUsersMoney() {
         this.currentUsersMoney = InputView.inputUsersMoney();
+        OutputView.printCurrentUsersMoney(currentUsersMoney);
     }
 
     public int getCurrentChange() {

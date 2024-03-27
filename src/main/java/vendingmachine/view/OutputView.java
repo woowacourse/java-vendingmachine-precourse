@@ -15,4 +15,8 @@ public class OutputView {
         map.forEach((k, v) -> System.out.println(k.getAmount() + "원 - " + v + "개"));
         System.out.println();
     }
+
+    public static void printCurrentUsersMoney(int currentUsersMoney) {
+        System.out.println("투입 금액: " + currentUsersMoney + "원");
+    }
 }
