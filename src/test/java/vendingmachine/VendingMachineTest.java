@@ -23,7 +23,7 @@ class VendingMachineTest {
         // when
         vendingMachine.inputInitialMoney();
         // then
-        assertThat(vendingMachine.getCurrentMoney()).isEqualTo(inputMoney);
+        assertThat(vendingMachine.getCurrentChange()).isEqualTo(inputMoney);
     }
 
     @ParameterizedTest
@@ -47,7 +47,7 @@ class VendingMachineTest {
         vendingMachine.generateInitialCoins();
         //then
         int sumOfCoins = vendingMachine.getCoins().getSumOfCoins();
-        int currentMoney = vendingMachine.getCurrentMoney();
+        int currentMoney = vendingMachine.getCurrentChange();
         assertThat(sumOfCoins).isEqualTo(currentMoney);
     }
 

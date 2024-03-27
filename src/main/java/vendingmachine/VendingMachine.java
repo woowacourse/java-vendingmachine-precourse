@@ -13,7 +13,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class VendingMachine {
-    private int currentMoney;
+    private int currentChange;
     private Coins coins;
     private Products products;
 
@@ -21,11 +21,11 @@ public class VendingMachine {
     }
 
     public void inputInitialMoney() {
-        this.currentMoney = InputView.inputInitialMoney();
+        this.currentChange = InputView.inputInitialMoney();
     }
 
     public void generateInitialCoins() {
-        int remainingMoney = currentMoney;
+        int remainingMoney = currentChange;
 
         int fiveHundredCount = Randoms.pickNumberInRange(0, remainingMoney/500);
         remainingMoney -= 500*fiveHundredCount;
@@ -50,8 +50,8 @@ public class VendingMachine {
         this.products = InputView.inputInitialProducts();
     }
 
-    public int getCurrentMoney() {
-        return this.currentMoney;
+    public int getCurrentChange() {
+        return this.currentChange;
     }
 
     public Coins getCoins() {
