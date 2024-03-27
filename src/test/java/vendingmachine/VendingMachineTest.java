@@ -3,6 +3,7 @@ package vendingmachine;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import vendingmachine.domain.Coins;
 import vendingmachine.domain.Product;
 
 import java.io.ByteArrayInputStream;
@@ -135,5 +136,55 @@ class VendingMachineTest {
         System.setIn(new ByteArrayInputStream(inputString.getBytes()));
         // when, then
         assertThrows(IllegalArgumentException.class, vendingMachine::buyProduct);
+    }
+
+    @Test
+    void 잔돈을_반환해야_하는_상황인지_판단_테스트_true_모두소진() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,0];[사이다,1000,0]".getBytes()));
+        vendingMachine.inputProducts();
+        // when, then
+        assertThat(vendingMachine.mustGiveChange()).isTrue();
+    }
+
+    @Test
+    void 잔돈을_반환해야_하는_상황인지_판단_테스트_true_남은투입금액부족() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,20];[사이다,1000,20]".getBytes()));
+        vendingMachine.inputProducts();
+        System.setIn(new ByteArrayInputStream("500".getBytes()));
+        vendingMachine.inputUsersMoney();
+        // when, then
+        assertThat(vendingMachine.mustGiveChange()).isTrue();
+    }
+
+    @Test
+    void 잔돈을_반환해야_하는_상황인지_판단_테스트_false() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("[콜라,1500,10];[사이다,1000,0]".getBytes()));
+        vendingMachine.inputProducts();
+        System.setIn(new ByteArrayInputStream("2000".getBytes()));
+        vendingMachine.inputUsersMoney();
+        // when, then
+        assertThat(vendingMachine.mustGiveChange()).isFalse();
+    }
+
+    @Test
+    void 잔돈반환_사용하지_않은_동전이_잘_남는지_테스트() {
+        // given
+        VendingMachine vendingMachine = new VendingMachine();
+        System.setIn(new ByteArrayInputStream("2000".getBytes()));
+        vendingMachine.inputInitialMoney();
+        System.setIn(new ByteArrayInputStream("1000".getBytes()));
+        vendingMachine.inputUsersMoney();
+        // when
+        Coins change = vendingMachine.giveChange();
+        // then
+        int sumOfGivenChange = change.getSumOfCoins();
+        int sumOfRemainingChange = vendingMachine.getCoins().getSumOfCoins();
+        assertThat(sumOfGivenChange+sumOfRemainingChange).isEqualTo(2000);
     }
 }

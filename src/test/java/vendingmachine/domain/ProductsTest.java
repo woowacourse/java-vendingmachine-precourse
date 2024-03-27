@@ -59,4 +59,52 @@ class ProductsTest {
         // when, then
         assertThrows(IllegalArgumentException.class, () -> products.getCostByProductName("닥터페퍼"));
     }
+
+    @Test
+    void 모든_상품이_소진되었는지_판단_true() {
+        // given
+        Set<Product> productSet = new HashSet<>();
+        productSet.add(new Product("콜라", 1500, 0));
+        productSet.add(new Product("사이다", 2000, 0));
+        Products products = new Products(productSet);
+        // when, then
+        assertThat(products.isSoldOut()).isTrue();
+    }
+
+    @Test
+    void 모든_상품이_소진되었는지_판단_false_일부소진() {
+        // given
+        Set<Product> productSet = new HashSet<>();
+        productSet.add(new Product("콜라", 1500, 20));
+        productSet.add(new Product("사이다", 2000, 0));
+        Products products = new Products(productSet);
+        // when, then
+        assertThat(products.isSoldOut()).isFalse();
+    }
+
+    @Test
+    void 모든_상품이_소진되었는지_판단_false_소진상품없음() {
+        // given
+        Set<Product> productSet = new HashSet<>();
+        productSet.add(new Product("콜라", 1500, 20));
+        productSet.add(new Product("사이다", 2000, 20));
+        Products products = new Products(productSet);
+        // when, then
+        assertThat(products.isSoldOut());
+    }
+
+    @Test
+    void 상품의_최저_가격_리턴_테스트() {
+        // given
+        Set<Product> productSet = new HashSet<>();
+        Product cheapProduct = new Product("콜라", 1500, 20);
+        Product expensiveProduct = new Product("사이다", 2000, 20);
+        productSet.add(cheapProduct);
+        productSet.add(expensiveProduct);
+        Products products = new Products(productSet);
+        // when
+        int smallestCost = products.getSmallestCost();
+        // then
+        assertThat(smallestCost).isEqualTo(cheapProduct.getCost());
+    }
 }

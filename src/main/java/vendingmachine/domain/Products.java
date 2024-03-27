@@ -1,5 +1,6 @@
 package vendingmachine.domain;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class Products {
@@ -14,8 +15,8 @@ public class Products {
     }
 
     public Products buyOne(String productName) {
-        Set<Product> newProducts = products;
-        for(Product originalProduct : newProducts){
+        Set<Product> newProducts = new HashSet<>(products);
+        for(Product originalProduct : products){
             if(originalProduct.getName().equals(productName)) {
                 Product newProduct = originalProduct.buyOne();
                 newProducts.remove(originalProduct);
@@ -41,5 +42,21 @@ public class Products {
             if(product.getName().equals(productName)) return product.getCost();
         }
         throw new IllegalArgumentException("[ERROR] 존재하지 않는 상품이다.");
+    }
+
+    public int getSmallestCost() {
+        int min = Integer.MAX_VALUE;
+        for(Product product : this.products) {
+            int cost = product.getCost();
+            if(cost<min) min = cost;
+        }
+        return min;
+    }
+
+    public boolean isSoldOut() {
+        for(Product product : this.products) {
+            if(product.getCount() > 0) return false;
+        }
+        return true;
     }
 }
