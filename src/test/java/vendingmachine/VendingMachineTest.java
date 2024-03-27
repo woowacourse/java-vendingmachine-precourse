@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import org.assertj.core.api.SoftAssertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -57,14 +58,20 @@ class VendingMachineTest {
         VendingMachine vendingMachine = new VendingMachine();
         String inputString = "[콜라,1500,20];[사이다,1000,10]";
         Set<Product> correctProducts = new HashSet<Product>();
-        correctProducts.add(new Product("콜라", 1500, 20));
-        correctProducts.add(new Product("사이다", 1000, 10));
+        Product product1 = new Product("콜라", 1500, 20);
+        Product product2 = new Product("사이다", 1000, 10);
+        correctProducts.add(product1);
+        correctProducts.add(product2);
         System.setIn(new ByteArrayInputStream(inputString.getBytes()));
         // when
         vendingMachine.inputProducts();
         Set<Product> generatedProducts = vendingMachine.getProducts();
         // then
-        assertThat(generatedProducts.size()).isEqualTo(2);  // 여기 질문!
+        SoftAssertions softly = new SoftAssertions();
+        softly.assertThat(generatedProducts.size()).isEqualTo(2);
+        softly.assertThat(generatedProducts.contains(product1));
+        softly.assertThat(generatedProducts.contains(product2));
+        softly.assertAll();
     }
 
     @Test
